@@ -24,21 +24,20 @@ namespace Apizr.Authenticating
 
     public class AuthenticationHandler<TSettingsService> : AuthenticationHandlerBase
     {
-        private readonly TSettingsService _settingsService;
+        private readonly Func<TSettingsService> _settingsServiceFactory;
         private readonly Expression<Func<TSettingsService, string>> _settingsTokenProperty;
         private readonly Func<HttpRequestMessage, Task<string>> _refreshToken;
 
-        public AuthenticationHandler(TSettingsService settingsService, Expression<Func<TSettingsService, string>> settingsTokenProperty, Func<HttpRequestMessage, Task<string>> refreshToken)
+        public AuthenticationHandler(Func<TSettingsService> settingsServiceFactory,
+            Expression<Func<TSettingsService, string>> settingsTokenProperty,
+            Func<HttpRequestMessage, Task<string>> refreshToken)
         {
-            if(settingsService == null)
-                throw new ArgumentNullException(nameof(settingsService));
-
-            _settingsService = settingsService;
+            _settingsServiceFactory = settingsServiceFactory ?? throw new ArgumentNullException(nameof(settingsServiceFactory));
             _settingsTokenProperty = settingsTokenProperty ?? throw new ArgumentNullException(nameof(settingsTokenProperty));
             _refreshToken = refreshToken ?? throw new ArgumentNullException(nameof(refreshToken));
         }
 
-        protected override string GetToken() => _settingsTokenProperty.Compile()(_settingsService);
+        protected override string GetToken() => _settingsTokenProperty.Compile()(_settingsServiceFactory.Invoke());
 
         protected override void SetToken(string token)
         {
@@ -46,7 +45,7 @@ namespace Apizr.Authenticating
             {
                 if (propertyBody.Member is PropertyInfo propertyInfo)
                 {
-                    propertyInfo.SetValue(_settingsService, token, null);
+                    propertyInfo.SetValue(_settingsServiceFactory.Invoke(), token, null);
                 }
             }
         }
@@ -56,26 +55,22 @@ namespace Apizr.Authenticating
 
     public class AuthenticationHandler<TSettingsService, TTokenService> : AuthenticationHandlerBase
     {
-        private readonly TSettingsService _settingsService;
+        private readonly Func<TSettingsService> _settingsServiceFactory;
         private readonly Expression<Func<TSettingsService, string>> _settingsTokenProperty;
-        private readonly TTokenService _tokenService;
+        private readonly Func<TTokenService> _tokenServiceFactory;
         private readonly Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> _refreshTokenMethod;
 
-        public AuthenticationHandler(TSettingsService settingsService, Expression<Func<TSettingsService, string>> settingsTokenProperty, TTokenService tokenService, Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
+        public AuthenticationHandler(Func<TSettingsService> settingsServiceFactory,
+            Expression<Func<TSettingsService, string>> settingsTokenProperty, Func<TTokenService> tokenServiceFactory,
+            Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
         {
-            if (settingsService == null)
-                throw new ArgumentNullException(nameof(settingsService));
-
-            if (tokenService == null)
-                throw new ArgumentNullException(nameof(tokenService));
-
-            _settingsService = settingsService;
+            _settingsServiceFactory = settingsServiceFactory ?? throw new ArgumentNullException(nameof(settingsServiceFactory));
             _settingsTokenProperty = settingsTokenProperty ?? throw new ArgumentNullException(nameof(settingsTokenProperty));
-            _tokenService = tokenService;
+            _tokenServiceFactory = tokenServiceFactory ?? throw new ArgumentNullException(nameof(tokenServiceFactory));
             _refreshTokenMethod = refreshTokenMethod ?? throw new ArgumentNullException(nameof(refreshTokenMethod));
         }
 
-        protected override string GetToken() => _settingsTokenProperty.Compile()(_settingsService);
+        protected override string GetToken() => _settingsTokenProperty.Compile()(_settingsServiceFactory.Invoke());
 
         protected override void SetToken(string token)
         {
@@ -83,11 +78,11 @@ namespace Apizr.Authenticating
             {
                 if (propertyBody.Member is PropertyInfo propertyInfo)
                 {
-                    propertyInfo.SetValue(_settingsService, token, null);
+                    propertyInfo.SetValue(_settingsServiceFactory.Invoke(), token, null);
                 }
             }
         }
 
-        protected override Task<string> RefreshTokenAsync(HttpRequestMessage request) => _refreshTokenMethod.Compile()(_tokenService, request);
+        protected override Task<string> RefreshTokenAsync(HttpRequestMessage request) => _refreshTokenMethod.Compile()(_tokenServiceFactory.Invoke(), request);
     }
 }

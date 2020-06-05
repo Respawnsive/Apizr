@@ -5,14 +5,14 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Shiny.WebApi.Authenticating
+namespace Apizr.Authenticating
 {
     public abstract class AuthenticationHandlerBase : DelegatingHandler, IAuthenticationHandler
     {
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            HttpRequestMessage? clonedRequest = null;
-            string? token = null;
+            HttpRequestMessage clonedRequest = null;
+            string token = null;
 
             // See if the request has an authorize header
             var auth = request.Headers.Authorization;
@@ -61,11 +61,11 @@ namespace Shiny.WebApi.Authenticating
             return response;
         }
 
-        protected abstract string? GetToken();
+        protected abstract string GetToken();
 
-        protected abstract void SetToken(string? token);
+        protected abstract void SetToken(string token);
 
-        protected abstract Task<string?> RefreshTokenAsync(HttpRequestMessage request);
+        protected abstract Task<string> RefreshTokenAsync(HttpRequestMessage request);
 
         /// <summary>
         /// Clone a HttpRequestMessage

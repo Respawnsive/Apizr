@@ -1,4 +1,4 @@
-﻿namespace Shiny.WebApi.Authenticating
+﻿namespace Apizr.Authenticating
 {
     public interface IAuthenticationHandler
     {

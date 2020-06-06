@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using HttpTracer;
@@ -14,6 +15,6 @@ namespace Apizr
         HttpMessageParts HttpTracerVerbosity { get; }
         string[] PolicyRegistryKeys { get; }
         Func<RefitSettings> RefitSettingsFactory { get; }
-        Func<DelegatingHandler> AuthenticationHandlerFactory { get; }
+        IList<Func<DelegatingHandler>> DelegatingHandlersFactories { get; }
     }
 }

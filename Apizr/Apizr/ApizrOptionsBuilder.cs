@@ -22,15 +22,16 @@ namespace Apizr
 
         public IApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<TAuthenticationHandler> authenticationHandler) where TAuthenticationHandler : AuthenticationHandlerBase
         {
-            Options.AuthenticationHandlerFactory = authenticationHandler;
+            Options.DelegatingHandlersFactories.Add(authenticationHandler);
 
             return this;
         }
 
         public IApizrOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshToken)
         {
-            Options.AuthenticationHandlerFactory = () =>
-                new AuthenticationHandler(refreshToken);
+            var authenticationHandler = new Func<DelegatingHandler>(() =>
+                new AuthenticationHandler(refreshToken));
+            Options.DelegatingHandlersFactories.Add(authenticationHandler);
 
             return this;
         }
@@ -39,8 +40,9 @@ namespace Apizr
             Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> tokenProperty,
             Func<HttpRequestMessage, Task<string>> refreshToken)
         {
-            Options.AuthenticationHandlerFactory = () =>
-                new AuthenticationHandler<TSettingsService>(settingsServiceFactory, tokenProperty, refreshToken);
+            var authenticationHandler = new Func<DelegatingHandler>(() =>
+                new AuthenticationHandler<TSettingsService>(settingsServiceFactory, tokenProperty, refreshToken));
+            Options.DelegatingHandlersFactories.Add(authenticationHandler);
 
             return this;
         }
@@ -50,10 +52,11 @@ namespace Apizr
             Func<TTokenService> tokenServiceFactory,
             Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
         {
-            Options.AuthenticationHandlerFactory = () =>
+            var authenticationHandler = new Func<DelegatingHandler>(() =>
                 new AuthenticationHandler<TSettingsService, TTokenService>(
                     settingsServiceFactory, tokenProperty,
-                    tokenServiceFactory, refreshTokenMethod);
+                    tokenServiceFactory, refreshTokenMethod));
+            Options.DelegatingHandlersFactories.Add(authenticationHandler);
 
             return this;
         }

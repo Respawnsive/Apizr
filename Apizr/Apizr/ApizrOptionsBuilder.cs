@@ -3,6 +3,9 @@ using System.Linq.Expressions;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Authenticating;
+using Apizr.Caching;
+using Apizr.Connecting;
+using Polly.Registry;
 using Refit;
 
 namespace Apizr
@@ -16,6 +19,27 @@ namespace Apizr
         public IApizrOptionsBuilder WithRefitSettings(Func<RefitSettings> refitSettingsFactory)
         {
             Options.RefitSettingsFactory = refitSettingsFactory;
+
+            return this;
+        }
+
+        public IApizrOptionsBuilder WithPolicyRegistry(Func<IPolicyRegistry<string>> policyRegistryFactory)
+        {
+            Options.PolicyRegistryFactory = policyRegistryFactory;
+
+            return this;
+        }
+
+        public IApizrOptionsBuilder WithConnectivityProvider(Func<IConnectivityProvider> connectivityProviderFactory)
+        {
+            Options.ConnectivityProviderFactory = connectivityProviderFactory;
+
+            return this;
+        }
+
+        public IApizrOptionsBuilder WithCacheProvider(Func<ICacheProvider> cacheProviderFactory)
+        {
+            Options.CacheProviderFactory = cacheProviderFactory;
 
             return this;
         }

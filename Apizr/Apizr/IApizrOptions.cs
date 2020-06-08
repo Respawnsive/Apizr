@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using Apizr.Caching;
+using Apizr.Connecting;
 using HttpTracer;
+using Polly.Registry;
 using Refit;
 
 namespace Apizr
@@ -14,7 +17,10 @@ namespace Apizr
         DecompressionMethods DecompressionMethods { get; }
         HttpMessageParts HttpTracerVerbosity { get; }
         string[] PolicyRegistryKeys { get; }
+        Func<IPolicyRegistry<string>> PolicyRegistryFactory { get; }
         Func<RefitSettings> RefitSettingsFactory { get; }
+        Func<IConnectivityProvider> ConnectivityProviderFactory { get; }
+        Func<ICacheProvider> CacheProviderFactory { get; }
         IList<Func<DelegatingHandler>> DelegatingHandlersFactories { get; }
     }
 }

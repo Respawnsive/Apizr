@@ -45,7 +45,7 @@ namespace Apizr.Sample.Console
 
             if (configChoice == 1)
             {
-                _reqResService = Apizr.For<IReqResService>(() => registry);
+                _reqResService = Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(() => registry));
                 System.Console.WriteLine("");
                 System.Console.WriteLine("Initialization succeed :)");
 

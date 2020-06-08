@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
-using System.Text;
 using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Lazying;
@@ -20,64 +19,14 @@ namespace Apizr
     public static class Apizr
     {
         public static ApizrManager<TWebApi> For<TWebApi>(
-            Func<IPolicyRegistry<string>> policyRegistryFactory = null,
             Action<IApizrOptionsBuilder> optionsBuilder = null) =>
             For<TWebApi, ApizrManager<TWebApi>>(
-                () => new VoidConnectivityProvider(), () => new VoidCacheProvider(),
                 (lazyWebApis, connectivityProvider, cacheProvider, policyRegistry) =>
-                    new ApizrManager<TWebApi>(lazyWebApis, connectivityProvider, cacheProvider, policyRegistry),
-                policyRegistryFactory, optionsBuilder);
-
-        public static ApizrManager<TWebApi> For<TWebApi>(
-            Func<IConnectivityProvider> connectivityProviderFactory, 
-            Func<IPolicyRegistry<string>> policyRegistryFactory = null,
-            Action<IApizrOptionsBuilder> optionsBuilder = null) =>
-            For<TWebApi, ApizrManager<TWebApi>>(
-                connectivityProviderFactory, () => new VoidCacheProvider(),
-                (lazyWebApis, connectivityProvider, cacheProvider, policyRegistry) =>
-                    new ApizrManager<TWebApi>(lazyWebApis, connectivityProvider, cacheProvider, policyRegistry),
-                policyRegistryFactory, optionsBuilder);
-
-        public static ApizrManager<TWebApi> For<TWebApi>(
-            Func<IConnectivityProvider> connectivityProviderFactory,
-            Func<ICacheProvider> cacheProviderFactory,
-            Func<IPolicyRegistry<string>> policyRegistryFactory = null,
-            Action<IApizrOptionsBuilder> optionsBuilder = null) =>
-            For<TWebApi, ApizrManager<TWebApi>>(
-                connectivityProviderFactory, cacheProviderFactory,
-                (lazyWebApis, connectivityProvider, cacheProvider, policyRegistry) =>
-                    new ApizrManager<TWebApi>(lazyWebApis, connectivityProvider, cacheProvider, policyRegistry),
-                policyRegistryFactory, optionsBuilder);
+                    new ApizrManager<TWebApi>(lazyWebApis, connectivityProvider, cacheProvider, policyRegistry), optionsBuilder);
 
         public static TApizrManager For<TWebApi, TApizrManager>(
             Func<IEnumerable<ILazyDependency<TWebApi>>, IConnectivityProvider, ICacheProvider, IPolicyRegistry<string>,
                 TApizrManager> apizrManagerFactory,
-            Func<IPolicyRegistry<string>> policyRegistryFactory = null,
-            Action<IApizrOptionsBuilder> optionsBuilder = null)
-            where TApizrManager : IApizrManager<TWebApi> =>
-            For<TWebApi, TApizrManager>(
-                () => new VoidConnectivityProvider(), () => new VoidCacheProvider(),
-                apizrManagerFactory,
-                policyRegistryFactory, optionsBuilder);
-
-        public static TApizrManager For<TWebApi, TApizrManager>(
-            Func<IConnectivityProvider> connectivityProviderFactory,
-            Func<IEnumerable<ILazyDependency<TWebApi>>, IConnectivityProvider, ICacheProvider, IPolicyRegistry<string>,
-                TApizrManager> apizrManagerFactory,
-            Func<IPolicyRegistry<string>> policyRegistryFactory = null,
-            Action<IApizrOptionsBuilder> optionsBuilder = null)
-            where TApizrManager : IApizrManager<TWebApi> =>
-            For<TWebApi, TApizrManager>(
-                connectivityProviderFactory, () => new VoidCacheProvider(),
-                apizrManagerFactory,
-                policyRegistryFactory, optionsBuilder);
-
-        public static TApizrManager For<TWebApi, TApizrManager>(
-            Func<IConnectivityProvider> connectivityProviderFactory, 
-            Func<ICacheProvider> cacheProviderFactory,
-            Func<IEnumerable<ILazyDependency<TWebApi>>, IConnectivityProvider, ICacheProvider, IPolicyRegistry<string>,
-                TApizrManager> apizrManagerFactory,
-            Func<IPolicyRegistry<string>> policyRegistryFactory = null,
             Action<IApizrOptionsBuilder> optionsBuilder = null)
         where TApizrManager : IApizrManager<TWebApi>
         {
@@ -95,7 +44,7 @@ namespace Apizr
 
                     if (apizrOptions.PolicyRegistryKeys != null && apizrOptions.PolicyRegistryKeys.Any())
                     {
-                        var registry = policyRegistryFactory.Invoke();
+                        var registry = apizrOptions.PolicyRegistryFactory.Invoke();
                         foreach (var policyRegistryKey in apizrOptions.PolicyRegistryKeys)
                         {
                             var policy = registry.Get<IAsyncPolicy<HttpResponseMessage>>(policyRegistryKey);
@@ -117,7 +66,7 @@ namespace Apizr
                 lazyWebApis.Add(lazyWebApi);
             }
 
-            var apizrManager = apizrManagerFactory(lazyWebApis, connectivityProviderFactory.Invoke(), cacheProviderFactory.Invoke(), policyRegistryFactory?.Invoke() ?? new PolicyRegistry());
+            var apizrManager = apizrManagerFactory(lazyWebApis, apizrOptions.ConnectivityProviderFactory.Invoke(), apizrOptions.CacheProviderFactory.Invoke(), apizrOptions.PolicyRegistryFactory.Invoke());
 
             return apizrManager;
         }

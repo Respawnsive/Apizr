@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Apizr.Sample.Api;
+using Apizr.Sample.Mobile.Services.Settings;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Extensions.Http;
@@ -36,7 +37,10 @@ namespace Apizr.Sample.Mobile
 
             services.UseRepositoryCache();
 
+            services.AddSingleton<IAppSettings, AppSettings>();
+
             services.UseApizr<IReqResService>();
+            services.UseApizr<IHttpBinService>(optionsBuilder => optionsBuilder.WithAuthenticationHandler<IAppSettings>(settings => settings.Token, OnRefreshToken));
         }
 
         private static Task<string?> OnRefreshToken(HttpRequestMessage request)

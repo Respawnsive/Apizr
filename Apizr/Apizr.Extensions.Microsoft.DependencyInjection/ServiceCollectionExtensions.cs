@@ -4,8 +4,8 @@ using System.Net.Http;
 using System.Reflection;
 using Apizr.Caching;
 using Apizr.Connecting;
-using Apizr.Lazying;
 using Apizr.Policing;
+using Apizr.Prioritizing;
 using Apizr.Tracing;
 using Fusillade;
 using HttpTracer;
@@ -52,10 +52,10 @@ namespace Apizr
 
                         return primaryMessageHandler;
                     })
-                    .AddTypedClient(typeof(ILazyDependency<>).MakeGenericType(apizrOptions.WebApiType),
+                    .AddTypedClient(typeof(ILazyPrioritizedWebApi<>).MakeGenericType(apizrOptions.WebApiType),
                         (client, serviceProvider) =>
-                            typeof(LazyDependency<>).MakeGenericType(apizrOptions.WebApiType)
-                                .GetConstructor(new[] { typeof(Func<object>) })
+                            Prioritize.TypeFor(apizrOptions.WebApiType, priority)
+                                .GetConstructor(new[] {typeof(Func<object>)})
                                 ?.Invoke(new object[]
                                 {
                                     new Func<object>(() => RestService.For(apizrOptions.WebApiType, client,

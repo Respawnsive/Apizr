@@ -5,8 +5,8 @@ using System.Net.Http;
 using System.Reflection;
 using Apizr.Caching;
 using Apizr.Connecting;
-using Apizr.Lazying;
 using Apizr.Policing;
+using Apizr.Prioritizing;
 using Apizr.Tracing;
 using Fusillade;
 using HttpTracer;
@@ -25,13 +25,13 @@ namespace Apizr
                     new ApizrManager<TWebApi>(lazyWebApis, connectivityProvider, cacheProvider, policyRegistry), optionsBuilder);
 
         public static TApizrManager For<TWebApi, TApizrManager>(
-            Func<IEnumerable<ILazyDependency<TWebApi>>, IConnectivityProvider, ICacheProvider, IReadOnlyPolicyRegistry<string>,
+            Func<IEnumerable<ILazyPrioritizedWebApi<TWebApi>>, IConnectivityProvider, ICacheProvider, IReadOnlyPolicyRegistry<string>,
                 TApizrManager> apizrManagerFactory,
             Action<IApizrOptionsBuilder> optionsBuilder = null)
         where TApizrManager : IApizrManager<TWebApi>
         {
             var apizrOptions = CreateApizrOptions<TWebApi>(optionsBuilder);
-            var lazyWebApis = new List<ILazyDependency<TWebApi>>();
+            var lazyWebApis = new List<ILazyPrioritizedWebApi<TWebApi>>();
             foreach (var priority in ((Priority[]) Enum.GetValues(typeof(Priority))).Where(x => x != Priority.Explicit))
             {
                 var httpHandlerFactory = new Func<HttpMessageHandler>(() =>
@@ -62,7 +62,7 @@ namespace Apizr
                 });
                 
                 var webApiFactory = new Func<object>(() => RestService.For<TWebApi>(new HttpClient(httpHandlerFactory.Invoke()) { BaseAddress = apizrOptions.BaseAddress}, apizrOptions.RefitSettingsFactory.Invoke()));
-                var lazyWebApi = new LazyDependency<TWebApi>(webApiFactory);
+                var lazyWebApi = Prioritize.For<TWebApi>(priority, webApiFactory);
                 lazyWebApis.Add(lazyWebApi);
             }
 

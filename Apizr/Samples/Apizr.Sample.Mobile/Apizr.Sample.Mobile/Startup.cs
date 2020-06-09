@@ -34,7 +34,7 @@ namespace Apizr.Sample.Mobile
             };
             services.AddPolicyRegistry(registry);
 
-            services.UseMemoryCache();
+            services.UseRepositoryCache();
 
             services.UseApizr<IReqResService>();
         }

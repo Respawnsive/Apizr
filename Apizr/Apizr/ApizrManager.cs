@@ -10,8 +10,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Connecting;
-using Apizr.Lazying;
 using Apizr.Policing;
+using Apizr.Prioritizing;
 using Fusillade;
 using Polly;
 using Polly.Registry;
@@ -23,12 +23,12 @@ namespace Apizr
         readonly Dictionary<MethodCacheDetails, MethodCacheAttributes> _cacheableMethodsSet = new Dictionary<MethodCacheDetails, MethodCacheAttributes>();
         readonly ConcurrentDictionary<string, object> _inflightFetchRequests = new ConcurrentDictionary<string, object>();
 
-        readonly IEnumerable<ILazyDependency<TWebApi>> _webApis;
+        readonly IEnumerable<ILazyPrioritizedWebApi<TWebApi>> _webApis;
         readonly IConnectivityProvider _connectivityProvider;
         readonly ICacheProvider _cacheProvider;
         readonly IReadOnlyPolicyRegistry<string> _policyRegistry;
 
-        public ApizrManager(IEnumerable<ILazyDependency<TWebApi>> webApis, IConnectivityProvider connectivityProvider, ICacheProvider cacheProvider, IReadOnlyPolicyRegistry<string> policyRegistry)
+        public ApizrManager(IEnumerable<ILazyPrioritizedWebApi<TWebApi>> webApis, IConnectivityProvider connectivityProvider, ICacheProvider cacheProvider, IReadOnlyPolicyRegistry<string> policyRegistry)
         {
             _webApis = webApis;
             _connectivityProvider = connectivityProvider;
@@ -36,22 +36,7 @@ namespace Apizr
             _policyRegistry = policyRegistry;
         }
 
-        TWebApi GetWebApi(Priority priority)
-        {
-            switch (priority)
-            {
-                case Priority.Speculative:
-                    return _webApis.ElementAt(0).Value;
-                case Priority.Background:
-                    return _webApis.ElementAt(1).Value;
-                case Priority.UserInitiated:
-                    return _webApis.ElementAt(2).Value;
-                case Priority.Explicit:
-                    throw new NotImplementedException();
-                default:
-                    return _webApis.ElementAt(2).Value;
-            }
-        }
+        TWebApi GetWebApi(Priority priority) => _webApis.First(x => x.Priority == priority).Value;
 
         public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod, Priority priority = Priority.UserInitiated)
         {

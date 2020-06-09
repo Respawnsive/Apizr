@@ -26,9 +26,9 @@ namespace Apizr
         readonly IEnumerable<ILazyDependency<TWebApi>> _webApis;
         readonly IConnectivityProvider _connectivityProvider;
         readonly ICacheProvider _cacheProvider;
-        readonly IPolicyRegistry<string> _policyRegistry;
+        readonly IReadOnlyPolicyRegistry<string> _policyRegistry;
 
-        public ApizrManager(IEnumerable<ILazyDependency<TWebApi>> webApis, IConnectivityProvider connectivityProvider, ICacheProvider cacheProvider, IPolicyRegistry<string> policyRegistry)
+        public ApizrManager(IEnumerable<ILazyDependency<TWebApi>> webApis, IConnectivityProvider connectivityProvider, ICacheProvider cacheProvider, IReadOnlyPolicyRegistry<string> policyRegistry)
         {
             _webApis = webApis;
             _connectivityProvider = connectivityProvider;

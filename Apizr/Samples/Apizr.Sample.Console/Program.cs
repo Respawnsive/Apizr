@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Sample.Api;
 using Apizr.Sample.Api.Models;
+using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
@@ -45,27 +48,43 @@ namespace Apizr.Sample.Console
 
             if (configChoice == 1)
             {
-                _reqResService = Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(() => registry));
+                _reqResService = Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(registry));
+
                 System.Console.WriteLine("");
                 System.Console.WriteLine("Initialization succeed :)");
+            }
+            else
+            {
+                var services = new ServiceCollection();
 
-                try
+                services.AddSingleton<IReadOnlyPolicyRegistry<string>>(registry);
+                services.AddApizr<IReqResService>();
+
+                var container = services.BuildServiceProvider(true);
+                var scope = container.CreateScope();
+
+                _reqResService = scope.ServiceProvider.GetRequiredService<IApizrManager<IReqResService>>();
+
+                System.Console.WriteLine("");
+                System.Console.WriteLine("Initialization succeed :)");
+            }
+
+            try
+            {
+                System.Console.WriteLine("");
+                var userList = await _reqResService.ExecuteAsync(api => api.GetUsersAsync());
+                if (userList.Data != null)
                 {
-                    System.Console.WriteLine("");
-                    var userList = await _reqResService.ExecuteAsync(api => api.GetUsersAsync());
-                    if (userList.Data != null)
+                    foreach (var user in userList.Data)
                     {
-                        foreach (var user in userList.Data)
-                        {
-                            System.Console.WriteLine($"User {user.Id}: {user.FirstName} {user.LastName}");
-                        }
+                        System.Console.WriteLine($"User {user.Id}: {user.FirstName} {user.LastName}");
                     }
                 }
-                catch (ApizrException e)
-                {
-                    System.Console.WriteLine("");
-                    System.Console.WriteLine(e.Message);
-                }
+            }
+            catch (ApizrException e)
+            {
+                System.Console.WriteLine("");
+                System.Console.WriteLine(e.Message);
             }
         }
     }

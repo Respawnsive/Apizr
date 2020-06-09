@@ -25,7 +25,7 @@ namespace Apizr
                     new ApizrManager<TWebApi>(lazyWebApis, connectivityProvider, cacheProvider, policyRegistry), optionsBuilder);
 
         public static TApizrManager For<TWebApi, TApizrManager>(
-            Func<IEnumerable<ILazyDependency<TWebApi>>, IConnectivityProvider, ICacheProvider, IPolicyRegistry<string>,
+            Func<IEnumerable<ILazyDependency<TWebApi>>, IConnectivityProvider, ICacheProvider, IReadOnlyPolicyRegistry<string>,
                 TApizrManager> apizrManagerFactory,
             Action<IApizrOptionsBuilder> optionsBuilder = null)
         where TApizrManager : IApizrManager<TWebApi>

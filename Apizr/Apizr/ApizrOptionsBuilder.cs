@@ -16,6 +16,9 @@ namespace Apizr
         {
         }
 
+        public IApizrOptionsBuilder WithRefitSettings(RefitSettings refitSettings)
+            => WithRefitSettings(() => refitSettings);
+
         public IApizrOptionsBuilder WithRefitSettings(Func<RefitSettings> refitSettingsFactory)
         {
             Options.RefitSettingsFactory = refitSettingsFactory;
@@ -23,12 +26,18 @@ namespace Apizr
             return this;
         }
 
-        public IApizrOptionsBuilder WithPolicyRegistry(Func<IPolicyRegistry<string>> policyRegistryFactory)
+        public IApizrOptionsBuilder WithPolicyRegistry(IReadOnlyPolicyRegistry<string> policyRegistry)
+            => WithPolicyRegistry(() => policyRegistry);
+
+        public IApizrOptionsBuilder WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<string>> policyRegistryFactory)
         {
             Options.PolicyRegistryFactory = policyRegistryFactory;
 
             return this;
         }
+
+        public IApizrOptionsBuilder WithConnectivityProvider(IConnectivityProvider connectivityProvider)
+            => WithConnectivityProvider(() => connectivityProvider);
 
         public IApizrOptionsBuilder WithConnectivityProvider(Func<IConnectivityProvider> connectivityProviderFactory)
         {
@@ -37,12 +46,19 @@ namespace Apizr
             return this;
         }
 
+        public IApizrOptionsBuilder WithCacheProvider(ICacheProvider cacheProvider)
+            => WithCacheProvider(() => cacheProvider);
+
         public IApizrOptionsBuilder WithCacheProvider(Func<ICacheProvider> cacheProviderFactory)
         {
             Options.CacheProviderFactory = cacheProviderFactory;
 
             return this;
         }
+
+        public IApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(
+            TAuthenticationHandler authenticationHandler) where TAuthenticationHandler : AuthenticationHandlerBase
+            => WithAuthenticationHandler(() => authenticationHandler);
 
         public IApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<TAuthenticationHandler> authenticationHandler) where TAuthenticationHandler : AuthenticationHandlerBase
         {
@@ -60,6 +76,11 @@ namespace Apizr
             return this;
         }
 
+        public IApizrOptionsBuilder WithAuthenticationHandler<TSettingsService>(TSettingsService settingsService,
+            Expression<Func<TSettingsService, string>> tokenProperty,
+            Func<HttpRequestMessage, Task<string>> refreshToken)
+            => WithAuthenticationHandler(() => settingsService, tokenProperty, refreshToken);
+
         public IApizrOptionsBuilder WithAuthenticationHandler<TSettingsService>(
             Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> tokenProperty,
             Func<HttpRequestMessage, Task<string>> refreshToken)
@@ -70,6 +91,12 @@ namespace Apizr
 
             return this;
         }
+
+        public IApizrOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(
+            TSettingsService settingsService,
+            Expression<Func<TSettingsService, string>> tokenProperty, TTokenService tokenService,
+            Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
+            => WithAuthenticationHandler(() => settingsService, tokenProperty, () => tokenService, refreshTokenMethod);
 
         public IApizrOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(
             Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> tokenProperty,

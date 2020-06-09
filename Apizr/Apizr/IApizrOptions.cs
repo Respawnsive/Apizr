@@ -17,7 +17,7 @@ namespace Apizr
         DecompressionMethods DecompressionMethods { get; }
         HttpMessageParts HttpTracerVerbosity { get; }
         string[] PolicyRegistryKeys { get; }
-        Func<IPolicyRegistry<string>> PolicyRegistryFactory { get; }
+        Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; }
         Func<RefitSettings> RefitSettingsFactory { get; }
         Func<IConnectivityProvider> ConnectivityProviderFactory { get; }
         Func<ICacheProvider> CacheProviderFactory { get; }

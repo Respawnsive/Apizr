@@ -13,13 +13,17 @@ namespace Apizr
 {
     public class ApizrOptions : IApizrOptions
     {
-        public ApizrOptions(Type webApiType, Uri baseAddress, DecompressionMethods? decompressionMethods, HttpMessageParts? httpTracerVerbosity, string[] assemblyPolicyRegistryKeys, string[] webApiPolicyRegistryKeys)
+        public ApizrOptions(Type webApiType, Uri baseAddress, DecompressionMethods? decompressionMethods,
+            HttpMessageParts? httpTracerVerbosity, string[] assemblyPolicyRegistryKeys,
+            string[] webApiPolicyRegistryKeys)
         {
             WebApiType = webApiType;
             BaseAddress = baseAddress;
             DecompressionMethods = decompressionMethods ?? DecompressionMethods.None;
             HttpTracerVerbosity = httpTracerVerbosity ?? HttpMessageParts.None;
-            PolicyRegistryKeys = assemblyPolicyRegistryKeys?.Union(webApiPolicyRegistryKeys ?? Array.Empty<string>()).ToArray() ?? webApiPolicyRegistryKeys ?? Array.Empty<string>();
+            PolicyRegistryKeys =
+                assemblyPolicyRegistryKeys?.Union(webApiPolicyRegistryKeys ?? Array.Empty<string>()).ToArray() ??
+                webApiPolicyRegistryKeys ?? Array.Empty<string>();
             PolicyRegistryFactory = () => new PolicyRegistry();
             RefitSettingsFactory = () => new RefitSettings();
             ConnectivityProviderFactory = () => new VoidConnectivityProvider();
@@ -32,8 +36,8 @@ namespace Apizr
         public DecompressionMethods DecompressionMethods { get; }
         public HttpMessageParts HttpTracerVerbosity { get; }
         public string[] PolicyRegistryKeys { get; }
-        public Func<IPolicyRegistry<string>> PolicyRegistryFactory { get; set;  }
-        public Func<RefitSettings> RefitSettingsFactory { get; internal set; }
+        public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set;  }
+        public Func<RefitSettings> RefitSettingsFactory { get; set; }
         public Func<IConnectivityProvider> ConnectivityProviderFactory { get; set; }
         public Func<ICacheProvider> CacheProviderFactory { get; set; }
         public IList<Func<DelegatingHandler>> DelegatingHandlersFactories { get; }

@@ -57,7 +57,7 @@ namespace Apizr.Sample.Console
             {
                 var services = new ServiceCollection();
 
-                services.AddSingleton<IReadOnlyPolicyRegistry<string>>(registry);
+                services.AddPolicyRegistry(registry);
                 services.AddApizr<IReqResService>();
 
                 var container = services.BuildServiceProvider(true);

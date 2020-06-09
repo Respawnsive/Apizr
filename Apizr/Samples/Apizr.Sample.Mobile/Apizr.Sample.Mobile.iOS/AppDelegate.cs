@@ -1,6 +1,7 @@
-﻿using Foundation;
-using Prism;
-using Prism.Ioc;
+﻿using System;
+using Acr.UserDialogs;
+using Foundation;
+using Shiny;
 using UIKit;
 
 
@@ -21,18 +22,18 @@ namespace Apizr.Sample.Mobile.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            this.ShinyFinishedLaunching(new Startup());
+
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App(new iOSInitializer()));
+            LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
         }
-    }
 
-    public class iOSInitializer : IPlatformInitializer
-    {
-        public void RegisterTypes(IContainerRegistry containerRegistry)
-        {
-            // Register any platform specific implementations
-        }
+        public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
+            => this.ShinyPerformFetch(completionHandler);
+
+        public override void HandleEventsForBackgroundUrl(UIApplication application, string sessionIdentifier, Action completionHandler)
+            => this.ShinyHandleEventsForBackgroundUrl(sessionIdentifier, completionHandler);
     }
 }

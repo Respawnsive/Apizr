@@ -2,10 +2,32 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Apizr.Sample.Mobile.Views.MainPage"
+             xmlns:viewModels="clr-namespace:Apizr.Sample.Mobile.ViewModels;assembly=Apizr.Sample.Mobile"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:models="clr-namespace:Apizr.Sample.Api.Models;assembly=Apizr.Sample.Api"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:DataType="viewModels:MainPageViewModel"
              Title="{Binding Title}">
 
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <Label Text="Welcome to Xamarin Forms and Prism!" />
-    </StackLayout>
+    <Grid>
+        <CollectionView ItemsSource="{Binding Users}"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand">
+            <CollectionView.EmptyView>
+                <Label Text="No Records Found" />
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:User">
+                    <StackLayout>
+                        <Label Text="{Binding FirstName}" />
+                        <Label Text="{Binding LastName}" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!--<Button VerticalOptions="End" HorizontalOptions="FillAndExpand" Text="Auth" Command="{Binding AuthCommand}"/>-->
+    </Grid>
 
 </ContentPage>

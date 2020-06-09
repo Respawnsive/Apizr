@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
-        <ProductVersion>8.0.30703</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CF4713C8-F8FE-4ADA-8337-94FEF9523931}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -14,7 +14,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -93,7 +93,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
   </PropertyGroup>
-    <ItemGroup>
+  <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
@@ -195,11 +195,38 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.617" />
-    <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.5.2" />
-    <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
+    <PackageReference Include="Acr.UserDialogs">
+      <Version>7.1.0.442</Version>
+    </PackageReference>
+    <PackageReference Include="Prism.DryIoc.Extensions">
+      <Version>7.2.0.1054</Version>
+    </PackageReference>
+    <PackageReference Include="Shiny.Core">
+      <Version>1.2.0.1686</Version>
+    </PackageReference>
+    <PackageReference Include="Shiny.Prism">
+      <Version>7.2.0.1054</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.847" />
+    <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.5.3.2" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Apizr.Extensions.Microsoft.DependencyInjection\Apizr.Extensions.Microsoft.DependencyInjection.csproj">
+      <Project>{f224219d-10fc-4f16-b573-40d4348de8dd}</Project>
+      <Name>Apizr.Extensions.Microsoft.DependencyInjection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Apizr.Integrations.Shiny\Apizr.Integrations.Shiny.csproj">
+      <Project>{09fee70e-6ca4-4f94-93fd-4a34a66e1b00}</Project>
+      <Name>Apizr.Integrations.Shiny</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Apizr\Apizr.csproj">
+      <Project>{b83591e8-0237-4a06-a3c1-4e24fe2c08c3}</Project>
+      <Name>Apizr</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Apizr.Sample.Api\Apizr.Sample.Api.csproj">
+      <Project>{a1b6bad5-efb9-44cf-9d98-7b42b57f12bc}</Project>
+      <Name>Apizr.Sample.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Apizr.Sample.Mobile\Apizr.Sample.Mobile.csproj">
       <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
       <Name>Apizr.Sample.Mobile</Name>

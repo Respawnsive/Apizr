@@ -157,7 +157,7 @@ namespace Apizr
 
         #region Caching
 
-        private bool IsMethodCacheable<TApi, TResult>(Expression<Func<CancellationToken, TApi, Task<TResult>>> restExpression)
+        private bool IsMethodCacheable<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> restExpression)
         {
             var methodToCacheDetails = GetMethodToCacheData(restExpression);
 
@@ -208,9 +208,9 @@ namespace Apizr
             return true;
         }
 
-        private MethodCacheDetails GetMethodToCacheData<TApi, TResult>(Expression<Func<CancellationToken, TApi, Task<TResult>>> restExpression)
+        private MethodCacheDetails GetMethodToCacheData<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> restExpression)
         {
-            var webApiType = typeof(TApi);
+            var webApiType = typeof(TWebApi);
             var methodCallExpression = GetMethodCallExpression(restExpression);
             return new MethodCacheDetails(webApiType, methodCallExpression.Method);
         }
@@ -261,11 +261,11 @@ namespace Apizr
                 throw new NotImplementedException();
         }
 
-        private string GetCacheKey<TApi, TResult>(Expression<Func<CancellationToken, TApi, Task<TResult>>> restExpression)
+        private string GetCacheKey<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> restExpression)
         {
             var methodCallExpression = GetMethodCallExpression(restExpression);
 
-            var cacheKeyPrefix = $"{typeof(TApi)}.{methodCallExpression.Method.Name}";
+            var cacheKeyPrefix = $"{typeof(TWebApi)}.{methodCallExpression.Method.Name}";
             if (!methodCallExpression.Arguments.Any())
                 return $"{cacheKeyPrefix}()";
 
@@ -326,7 +326,7 @@ namespace Apizr
             return $"{cacheKeyPrefix}({primaryKeyName}:{primaryKeyValue})";
         }
 
-        private MethodCacheAttributes GetCacheAttribute<TApi, TResult>(Expression<Func<CancellationToken, TApi, Task<TResult>>> expression)
+        private MethodCacheAttributes GetCacheAttribute<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> expression)
         {
             lock (this)
             {
@@ -335,8 +335,8 @@ namespace Apizr
             }
         }
 
-        private MethodCallExpression GetMethodCallExpression<TApi, TResult>(
-            Expression<Func<CancellationToken, TApi, Task<TResult>>> expression)
+        private MethodCallExpression GetMethodCallExpression<TResult>(
+            Expression<Func<CancellationToken, TWebApi, Task<TResult>>> expression)
         {
             switch (expression.Body)
             {

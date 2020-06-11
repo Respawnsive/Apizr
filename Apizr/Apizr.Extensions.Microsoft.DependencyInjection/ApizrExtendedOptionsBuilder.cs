@@ -104,7 +104,7 @@ namespace Apizr
                 throw new ArgumentException(
                     $"Your cache provider class must inherit from {nameof(ICacheProvider)} interface or derived");
 
-            Options.ConnectivityProviderType = cacheProviderType;
+            Options.CacheProviderType = cacheProviderType;
 
             return this;
         }

@@ -15,7 +15,6 @@ namespace Apizr.Sample.Console
     class Program
     {
         private static IApizrManager<IReqResService> _reqResService;
-        private static IApizrManager<IHttpBinService> _httpBinService;
 
         static async Task Main(string[] args)
         {
@@ -58,7 +57,7 @@ namespace Apizr.Sample.Console
                 var services = new ServiceCollection();
 
                 services.AddPolicyRegistry(registry);
-                services.AddApizr<IReqResService>();
+                services.AddApizr<IReqResService>(optionsBuilder => optionsBuilder.WithCacheProvider<AkavacheCacheProvider>());
 
                 var container = services.BuildServiceProvider(true);
                 var scope = container.CreateScope();
@@ -72,12 +71,30 @@ namespace Apizr.Sample.Console
             try
             {
                 System.Console.WriteLine("");
-                var userList = await _reqResService.ExecuteAsync(api => api.GetUsersAsync());
+                var cancellationToken = CancellationToken.None;
+                var userList = await _reqResService.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), cancellationToken);
                 if (userList.Data != null)
                 {
+                    System.Console.WriteLine("Choose one of available users:");
                     foreach (var user in userList.Data)
                     {
-                        System.Console.WriteLine($"User {user.Id}: {user.FirstName} {user.LastName}");
+                        System.Console.WriteLine($"{user.Id} - {user.FirstName} {user.LastName}");
+                    }
+
+                    var readUserChoice = System.Console.ReadLine();
+                    var userChoice = Convert.ToInt32(readUserChoice);
+                    var userDetails = await _reqResService.ExecuteAsync((ct, api) => api.GetUserAsync(userChoice, ct),
+                        cancellationToken);
+                    if (userDetails != null)
+                    {
+                        System.Console.WriteLine("");
+                        System.Console.WriteLine($"{nameof(userDetails.User.Id)}: {userDetails.User.Id}");
+                        System.Console.WriteLine($"{nameof(userDetails.User.FirstName)}: {userDetails.User.FirstName}");
+                        System.Console.WriteLine($"{nameof(userDetails.User.LastName)}: {userDetails.User.LastName}");
+                        System.Console.WriteLine($"{nameof(userDetails.User.Avatar)}: {userDetails.User.Avatar}");
+                        System.Console.WriteLine($"{nameof(userDetails.Ad.Company)}: {userDetails.Ad.Company}");
+                        System.Console.WriteLine($"{nameof(userDetails.Ad.Url)}: {userDetails.Ad.Url}");
+                        System.Console.WriteLine($"{nameof(userDetails.Ad.Text)}: {userDetails.Ad.Text}");
                     }
                 }
             }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Reactive.Linq;
+using System.Reactive.Threading.Tasks;
+using System.Threading;
 using System.Threading.Tasks;
 using Akavache;
 using Apizr.Caching;
@@ -13,36 +15,32 @@ namespace Apizr
             Registrations.Start($"{nameof(Apizr)}{nameof(AkavacheCacheProvider)}");
         }
 
-        public async Task Set(string key, object value, TimeSpan? lifeSpan = null)
+        public Task Set(string key, object value, TimeSpan? lifeSpan = null,
+            CancellationToken cancellationToken = default)
         {
-            if (lifeSpan.HasValue)
-                await BlobCache.LocalMachine.InsertObject(key, value, lifeSpan.Value);
-            else
-                await BlobCache.LocalMachine.InsertObject(key, value);
+            return lifeSpan.HasValue
+                ? BlobCache.LocalMachine.InsertObject(key, value, lifeSpan.Value).ToTask(cancellationToken)
+                : BlobCache.LocalMachine.InsertObject(key, value).ToTask(cancellationToken);
         }
 
-        public async Task<T> Get<T>(string key)
+        public Task<T> Get<T>(string key, CancellationToken cancellationToken = default)
         {
-            return await BlobCache.LocalMachine.GetObject<T>(key).Catch(Observable.Return(default(T)));
+            return BlobCache.LocalMachine.GetObject<T>(key)
+                .Catch(Observable.Return(default(T)))
+                .ToTask(cancellationToken);
         }
 
-        public async Task<bool> Remove(string key)
+        public Task<bool> Remove(string key, CancellationToken cancellationToken = default)
         {
-            try
-            {
-                await BlobCache.LocalMachine.Invalidate(key);
-                return true;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Apizr: clearing cache throwed an exception with message: {e.Message}");
-                return false;
-            }
+            return BlobCache.LocalMachine.Invalidate(key)
+                .SelectMany(_ => Observable.Return(true))
+                .Catch(Observable.Return(false))
+                .ToTask(cancellationToken);
         }
 
-        public async Task Clear()
+        public Task Clear(CancellationToken cancellationToken = default)
         {
-            await BlobCache.LocalMachine.InvalidateAll();
+            return BlobCache.LocalMachine.InvalidateAll().ToTask(cancellationToken);
         }
     }
 }

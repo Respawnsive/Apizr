@@ -36,7 +36,12 @@ namespace Apizr
 
         TWebApi GetWebApi(Priority priority) => _webApis.First(x => x.Priority == priority || x.Priority == Priority.UserInitiated).Value;
 
-        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod, Priority priority = Priority.UserInitiated)
+        public Task<TResult> ExecuteAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod,
+            Priority priority = Priority.UserInitiated)
+            => ExecuteAsync((ct, api) => executeApiMethod.Compile()(api), CancellationToken.None, priority);
+
+        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken,
+            Priority priority = Priority.UserInitiated)
         {
             string cacheKey = null;
             TResult result = default;
@@ -44,11 +49,11 @@ namespace Apizr
 
             if (IsMethodCacheable(executeApiMethod))
             {
-                if(_cacheProvider is VoidCacheProvider)
+                if (_cacheProvider is VoidCacheProvider)
                     Console.WriteLine("Apizr: You ask for cache but doesn't provide any cache provider");
 
                 cacheKey = GetCacheKey(executeApiMethod);
-                result = await _cacheProvider.Get<TResult>(cacheKey); 
+                result = await _cacheProvider.Get<TResult>(cacheKey, cancellationToken);
                 cacheAttributes = GetCacheAttribute(executeApiMethod);
             }
 
@@ -56,18 +61,17 @@ namespace Apizr
             {
                 try
                 {
-                    if(!_connectivityProvider.IsConnected())
+                    if (!_connectivityProvider.IsConnected())
                         throw new IOException();
 
                     if (_connectivityProvider is VoidConnectivityProvider)
                         Console.WriteLine("Apizr: Connectivity is not checked as you didn't provide any connectivity provider");
 
                     var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression);
-                    var executeApiMethodTask = executeApiMethod.Compile()(GetWebApi(priority));
 
                     result = policy != null
-                        ? await policy.ExecuteAsync(async () => await executeApiMethodTask)
-                        : await executeApiMethodTask;
+                        ? await policy.ExecuteAsync(ct => executeApiMethod.Compile()(ct, GetWebApi(priority)), cancellationToken)
+                        : await executeApiMethod.Compile()(cancellationToken, GetWebApi(priority));
                 }
                 catch (Exception e)
                 {
@@ -75,28 +79,32 @@ namespace Apizr
                 }
 
                 if (result != null && _cacheProvider != null && !string.IsNullOrWhiteSpace(cacheKey) && cacheAttributes != null)
-                    await _cacheProvider.Set(cacheKey, result, cacheAttributes.CacheAttribute.LifeSpan);
+                    await _cacheProvider.Set(cacheKey, result, cacheAttributes.CacheAttribute.LifeSpan, cancellationToken);
             }
 
             return result;
         }
 
-        public Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod, Priority priority = Priority.UserInitiated)
+        public Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod,
+            Priority priority = Priority.UserInitiated)
+            => ExecuteAsync((ct, api) => executeApiMethod.Compile()(api), CancellationToken.None, priority);
+
+        public Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod, CancellationToken cancellationToken,
+            Priority priority = Priority.UserInitiated)
         {
             try
             {
                 if (!_connectivityProvider.IsConnected())
                     throw new IOException();
 
-                if(_connectivityProvider is VoidConnectivityProvider)
+                if (_connectivityProvider is VoidConnectivityProvider)
                     Console.WriteLine("Apizr: Connectivity is not checked as you didn't provide any connectivity provider");
 
                 var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression);
-                var executeApiMethodTask = executeApiMethod.Compile()(GetWebApi(priority));
 
                 return policy != null
-                        ? policy.ExecuteAsync(async () => await executeApiMethodTask)
-                        : executeApiMethodTask;
+                    ? policy.ExecuteAsync(ct => executeApiMethod.Compile()(ct, GetWebApi(priority)), cancellationToken)
+                    : executeApiMethod.Compile()(cancellationToken, GetWebApi(priority));
             }
             catch (Exception e)
             {
@@ -104,21 +112,38 @@ namespace Apizr
             }
         }
 
-        public async Task<bool> ClearCacheAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod = null)
+        public async Task<bool> ClearCacheAsync(CancellationToken cancellationToken = default)
         {
             if (_cacheProvider is VoidCacheProvider)
                 Console.WriteLine("Apizr: You ask for cache but doesn't provide any cache provider");
 
             try
             {
-                if (executeApiMethod == null)
-                {
-                    await _cacheProvider.Clear();
-                }
-                else if (IsMethodCacheable(executeApiMethod))
+                await _cacheProvider.Clear(cancellationToken);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Apizr: clearing cache throwed an exception with message: {e.Message}");
+                return false;
+            }
+        }
+
+        public Task<bool> ClearCacheAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod)
+            => ClearCacheAsync((ct, api) => executeApiMethod.Compile()(api), CancellationToken.None);
+
+        public async Task<bool> ClearCacheAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken)
+        {
+            if (_cacheProvider is VoidCacheProvider)
+                Console.WriteLine("Apizr: You ask for cache but doesn't provide any cache provider");
+
+            try
+            {
+                if (IsMethodCacheable(executeApiMethod))
                 {
                     var cacheKey = GetCacheKey(executeApiMethod);
-                    return await _cacheProvider.Remove(cacheKey);
+                    return await _cacheProvider.Remove(cacheKey, cancellationToken);
                 }
 
                 return true;
@@ -132,7 +157,7 @@ namespace Apizr
 
         #region Caching
 
-        bool IsMethodCacheable<TApi, TResult>(Expression<Func<TApi, Task<TResult>>> restExpression)
+        private bool IsMethodCacheable<TApi, TResult>(Expression<Func<CancellationToken, TApi, Task<TResult>>> restExpression)
         {
             var methodToCacheDetails = GetMethodToCacheData(restExpression);
 
@@ -183,15 +208,14 @@ namespace Apizr
             return true;
         }
 
-        MethodCacheDetails GetMethodToCacheData<TApi, TResult>(Expression<Func<TApi, Task<TResult>>> restExpression)
+        private MethodCacheDetails GetMethodToCacheData<TApi, TResult>(Expression<Func<CancellationToken, TApi, Task<TResult>>> restExpression)
         {
-            var apiInterfaceType = typeof(TApi);
-            var methodBody = (MethodCallExpression)restExpression.Body;
-            var methodInfo = methodBody.Method;
-            return new MethodCacheDetails(apiInterfaceType, methodInfo);
+            var webApiType = typeof(TApi);
+            var methodCallExpression = GetMethodCallExpression(restExpression);
+            return new MethodCacheDetails(webApiType, methodCallExpression.Method);
         }
 
-        static IEnumerable<ExtractedConstant> ExtractConstants(Expression expression)
+        private static IEnumerable<ExtractedConstant> ExtractConstants(Expression expression)
         {
             if (expression == null)
                 yield break;
@@ -226,23 +250,29 @@ namespace Apizr
                 foreach (var constants in ExtractConstants(invocationExpression.Expression))
                     yield return constants;
             }
-
+            else if (expression is ParameterExpression parameterExpression)
+            {
+                if(parameterExpression.Type == typeof(CancellationToken))
+                    yield return new ExtractedConstant { Name = parameterExpression.Type.Name, Value = CancellationToken.None };
+                else
+                    yield return new ExtractedConstant { Name = parameterExpression.Type.Name };
+            }
             else
                 throw new NotImplementedException();
         }
 
-        string GetCacheKey<TApi, TResult>(Expression<Func<TApi, Task<TResult>>> fromExpression)
+        private string GetCacheKey<TApi, TResult>(Expression<Func<CancellationToken, TApi, Task<TResult>>> restExpression)
         {
-            var methodCallExpression = (MethodCallExpression)fromExpression.Body;
+            var methodCallExpression = GetMethodCallExpression(restExpression);
 
             var cacheKeyPrefix = $"{typeof(TApi)}.{methodCallExpression.Method.Name}";
             if (!methodCallExpression.Arguments.Any())
                 return $"{cacheKeyPrefix}()";
 
-            var cacheAttributes = GetCacheAttribute(fromExpression);
+            var cacheAttributes = GetCacheAttribute(restExpression);
 
             var extractedArguments = methodCallExpression.Arguments
-                .SelectMany(x => ExtractConstants(x))
+                .SelectMany(ExtractConstants)
                 .Where(x => x != null)
                 .Where(x => x.Value is CancellationToken == false)
                 .ToList();
@@ -256,11 +286,11 @@ namespace Apizr
             var extractedArgumentValue = extractedArgument.Value;
 
 
-            var isArgumentValuePrimitve = extractedArgumentValue.GetType().GetTypeInfo().IsPrimitive ||
+            var isArgumentValuePrimitive = extractedArgumentValue.GetType().GetTypeInfo().IsPrimitive ||
                                           extractedArgumentValue is decimal ||
                                           extractedArgumentValue is string;
 
-            if (isArgumentValuePrimitve)
+            if (isArgumentValuePrimitive)
             {
                 primaryKeyValue = extractedArgument.Value;
             }
@@ -296,7 +326,7 @@ namespace Apizr
             return $"{cacheKeyPrefix}({primaryKeyName}:{primaryKeyValue})";
         }
 
-        MethodCacheAttributes GetCacheAttribute<TApi, TResult>(Expression<Func<TApi, Task<TResult>>> expression)
+        private MethodCacheAttributes GetCacheAttribute<TApi, TResult>(Expression<Func<CancellationToken, TApi, Task<TResult>>> expression)
         {
             lock (this)
             {
@@ -305,7 +335,24 @@ namespace Apizr
             }
         }
 
-        class ExtractedConstant
+        private MethodCallExpression GetMethodCallExpression<TApi, TResult>(
+            Expression<Func<CancellationToken, TApi, Task<TResult>>> expression)
+        {
+            switch (expression.Body)
+            {
+                case InvocationExpression methodInvocationBody:
+                {
+                    var methodCallExpression = (MethodCallExpression)methodInvocationBody.Expression;
+                    return methodCallExpression;
+                }
+                case MethodCallExpression methodCallExpression:
+                    return methodCallExpression;
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
+        private class ExtractedConstant
         {
             public object Value { get; set; }
 
@@ -316,7 +363,7 @@ namespace Apizr
 
         #region Policing
 
-        IAsyncPolicy GetMethodPolicy(MethodCallExpression methodCallExpression)
+        private IAsyncPolicy GetMethodPolicy(MethodCallExpression methodCallExpression)
         {
             if (methodCallExpression == null)
                 return null;

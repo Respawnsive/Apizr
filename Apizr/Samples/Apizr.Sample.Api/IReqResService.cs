@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Policing;
 using Apizr.Sample.Api.Models;
@@ -12,6 +13,9 @@ namespace Apizr.Sample.Api
     public interface IReqResService
     {
         [Get("/api/users")]
-        Task<UserList> GetUsersAsync();
+        Task<UserList> GetUsersAsync(CancellationToken cancellationToken);
+
+        [Get("/api/users/{userId}")]
+        Task<UserDetails> GetUserAsync([CacheKey] int userId, CancellationToken cancellationToken);
     }
 }

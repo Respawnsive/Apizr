@@ -34,7 +34,7 @@ namespace Apizr
             _policyRegistry = policyRegistry;
         }
 
-        TWebApi GetWebApi(Priority priority) => _webApis.First(x => x.Priority == priority).Value;
+        TWebApi GetWebApi(Priority priority) => _webApis.First(x => x.Priority == priority || x.Priority == Priority.UserInitiated).Value;
 
         public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod, Priority priority = Priority.UserInitiated)
         {

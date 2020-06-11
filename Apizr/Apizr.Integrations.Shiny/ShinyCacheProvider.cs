@@ -14,7 +14,7 @@ namespace Apizr
             _shinyCache = shinyCache;
         }
 
-        public Task Set(string key, object obj, TimeSpan? timeSpan = null) => _shinyCache.Set(key, obj, timeSpan);
+        public Task Set(string key, object value, TimeSpan? lifeSpan = null) => _shinyCache.Set(key, value, lifeSpan);
 
         public Task<T> Get<T>(string key) => _shinyCache.Get<T>(key);
 

@@ -6,7 +6,7 @@ namespace Apizr.Caching
     public class CacheAttribute : Attribute
     {
         public TimeSpan? LifeSpan { get; }
-        public CacheMode Mode { get; } = CacheMode.GetOrFetch;
+        public CacheMode Mode { get; } = CacheMode.GetAndFetch;
         public bool ShouldInvalidateOnError { get; }
 
         public CacheAttribute()

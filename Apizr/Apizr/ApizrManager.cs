@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,9 +19,7 @@ namespace Apizr
 {
     public class ApizrManager<TWebApi> : IApizrManager<TWebApi>
     {
-        readonly Dictionary<MethodCacheDetails, MethodCacheAttributes> _cacheableMethodsSet = new Dictionary<MethodCacheDetails, MethodCacheAttributes>();
-        readonly ConcurrentDictionary<string, object> _inflightFetchRequests = new ConcurrentDictionary<string, object>();
-
+        readonly Dictionary<MethodCacheDetails, MethodCacheAttributes> _cacheableMethodsSet;
         readonly IEnumerable<ILazyPrioritizedWebApi<TWebApi>> _webApis;
         readonly IConnectivityProvider _connectivityProvider;
         readonly ICacheProvider _cacheProvider;
@@ -30,6 +27,7 @@ namespace Apizr
 
         public ApizrManager(IEnumerable<ILazyPrioritizedWebApi<TWebApi>> webApis, IConnectivityProvider connectivityProvider, ICacheProvider cacheProvider, IReadOnlyPolicyRegistry<string> policyRegistry)
         {
+            _cacheableMethodsSet = new Dictionary<MethodCacheDetails, MethodCacheAttributes>();
             _webApis = webApis;
             _connectivityProvider = connectivityProvider;
             _cacheProvider = cacheProvider;
@@ -103,6 +101,32 @@ namespace Apizr
             catch (Exception e)
             {
                 throw new ApizrException(e, Unit.Default);
+            }
+        }
+
+        public async Task<bool> ClearCacheAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod = null)
+        {
+            if (_cacheProvider is VoidCacheProvider)
+                Console.WriteLine("Apizr: You ask for cache but doesn't provide any cache provider");
+
+            try
+            {
+                if (executeApiMethod == null)
+                {
+                    await _cacheProvider.Clear();
+                }
+                else if (IsMethodCacheable(executeApiMethod))
+                {
+                    var cacheKey = GetCacheKey(executeApiMethod);
+                    return await _cacheProvider.Remove(cacheKey);
+                }
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Apizr: clearing cache throwed an exception with message: {e.Message}");
+                return false;
             }
         }
 

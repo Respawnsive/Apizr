@@ -8,7 +8,7 @@ using Refit;
 [assembly:Policy("TransientHttpError")]
 namespace Apizr.Sample.Api
 {
-    [WebApi("https://reqres.in/"), Cache(CacheMode.GetAndFetch), Trace]
+    [WebApi("https://reqres.in/"), Cache, Trace]
     public interface IReqResService
     {
         [Get("/api/users")]

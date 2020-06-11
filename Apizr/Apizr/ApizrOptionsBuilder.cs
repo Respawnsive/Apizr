@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Connecting;
+using Apizr.Logging;
 using Polly.Registry;
 using Refit;
 
@@ -52,6 +53,16 @@ namespace Apizr
         public IApizrOptionsBuilder WithCacheProvider(Func<ICacheProvider> cacheProviderFactory)
         {
             Options.CacheProviderFactory = cacheProviderFactory;
+
+            return this;
+        }
+
+        public IApizrOptionsBuilder WithLogHandler(ILogHandler logHandler)
+            => WithLogHandler(() => logHandler);
+
+        public IApizrOptionsBuilder WithLogHandler(Func<ILogHandler> logHandlerFactory)
+        {
+            Options.LogHandlerFactory = logHandlerFactory;
 
             return this;
         }

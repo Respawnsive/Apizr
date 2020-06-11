@@ -2,6 +2,7 @@
 using System.Linq;
 using Apizr.Caching;
 using Apizr.Connecting;
+using Apizr.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -31,6 +32,10 @@ namespace Apizr
             var isVoidCacheProviderRegistered = services.Any(x => x.ImplementationType == typeof(VoidCacheProvider));
             if (isVoidCacheProviderRegistered)
                 services.Replace(new ServiceDescriptor(typeof(ICacheProvider), typeof(ShinyCacheProvider), ServiceLifetime.Singleton));
+
+            var isDefaultLogHandlerRegistered = services.Any(x => x.ImplementationType == typeof(DefaultLogHandler));
+            if (isDefaultLogHandlerRegistered)
+                services.Replace(new ServiceDescriptor(typeof(ILogHandler), typeof(ShinyLogHandler), ServiceLifetime.Singleton));
 
             return true;
         }

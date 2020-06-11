@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Connecting;
+using Apizr.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Polly.Registry;
 using Refit;
@@ -28,5 +29,7 @@ namespace Apizr
         IApizrExtendedOptionsBuilder WithConnectivityHandler(Type connectivityHandlerType);
         IApizrExtendedOptionsBuilder WithCacheProvider<TCacheProvider>() where TCacheProvider : class, ICacheProvider;
         IApizrExtendedOptionsBuilder WithCacheProvider(Type cacheProviderType);
+        IApizrExtendedOptionsBuilder WithLogHandler<TLogHandler>() where TLogHandler : class, ILogHandler;
+        IApizrExtendedOptionsBuilder WithLogHandler(Type logHandlerType);
     }
 }

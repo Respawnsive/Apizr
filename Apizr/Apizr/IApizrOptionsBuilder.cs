@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Connecting;
+using Apizr.Logging;
 using Polly.Registry;
 
 namespace Apizr
@@ -32,5 +33,7 @@ namespace Apizr
         IApizrOptionsBuilder WithConnectivityHandler(Func<IConnectivityHandler> connectivityHandlerFactory);
         IApizrOptionsBuilder WithCacheProvider(ICacheProvider cacheProvider);
         IApizrOptionsBuilder WithCacheProvider(Func<ICacheProvider> cacheProviderFactory);
+        IApizrOptionsBuilder WithLogHandler(ILogHandler logHandler);
+        IApizrOptionsBuilder WithLogHandler(Func<ILogHandler> logHandlerFactory);
     }
 }

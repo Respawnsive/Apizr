@@ -5,9 +5,9 @@ using System.Net.Http;
 using System.Reflection;
 using Apizr.Caching;
 using Apizr.Connecting;
+using Apizr.Logging;
 using Apizr.Policing;
 using Apizr.Prioritizing;
-using Apizr.Tracing;
 using Fusillade;
 using HttpTracer;
 using Polly;
@@ -21,11 +21,11 @@ namespace Apizr
         public static ApizrManager<TWebApi> For<TWebApi>(
             Action<IApizrOptionsBuilder> optionsBuilder = null) =>
             For<TWebApi, ApizrManager<TWebApi>>(
-                (lazyWebApis, connectivityHandler, cacheProvider, policyRegistry) =>
-                    new ApizrManager<TWebApi>(lazyWebApis, connectivityHandler, cacheProvider, policyRegistry), optionsBuilder);
+                (lazyWebApis, connectivityHandler, cacheProvider, logHandler, policyRegistry) =>
+                    new ApizrManager<TWebApi>(lazyWebApis, connectivityHandler, cacheProvider, logHandler, policyRegistry), optionsBuilder);
 
         public static TApizrManager For<TWebApi, TApizrManager>(
-            Func<IEnumerable<ILazyPrioritizedWebApi<TWebApi>>, IConnectivityHandler, ICacheProvider, IReadOnlyPolicyRegistry<string>,
+            Func<IEnumerable<ILazyPrioritizedWebApi<TWebApi>>, IConnectivityHandler, ICacheProvider, ILogHandler, IReadOnlyPolicyRegistry<string>,
                 TApizrManager> apizrManagerFactory,
             Action<IApizrOptionsBuilder> optionsBuilder = null)
         where TApizrManager : IApizrManager<TWebApi>
@@ -39,7 +39,7 @@ namespace Apizr
                     var handlerBuilder = new HttpHandlerBuilder(new HttpClientHandler
                     {
                         AutomaticDecompression = apizrOptions.DecompressionMethods
-                    });
+                    }, new HttpTracerLogger(apizrOptions.LogHandlerFactory.Invoke()));
                     handlerBuilder.HttpTracerHandler.Verbosity = apizrOptions.HttpTracerVerbosity;
 
                     if (apizrOptions.PolicyRegistryKeys != null && apizrOptions.PolicyRegistryKeys.Any())
@@ -66,7 +66,7 @@ namespace Apizr
                 lazyWebApis.Add(lazyWebApi);
             }
 
-            var apizrManager = apizrManagerFactory(lazyWebApis, apizrOptions.ConnectivityHandlerFactory.Invoke(), apizrOptions.CacheProviderFactory.Invoke(), apizrOptions.PolicyRegistryFactory.Invoke());
+            var apizrManager = apizrManagerFactory(lazyWebApis, apizrOptions.ConnectivityHandlerFactory.Invoke(), apizrOptions.CacheProviderFactory.Invoke(), apizrOptions.LogHandlerFactory.Invoke(), apizrOptions.PolicyRegistryFactory.Invoke());
 
             return apizrManager;
         }

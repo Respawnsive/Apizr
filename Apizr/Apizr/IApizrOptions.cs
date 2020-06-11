@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using Apizr.Caching;
 using Apizr.Connecting;
+using Apizr.Logging;
 using HttpTracer;
 using Polly.Registry;
 using Refit;
@@ -21,6 +22,7 @@ namespace Apizr
         Func<RefitSettings> RefitSettingsFactory { get; }
         Func<IConnectivityHandler> ConnectivityHandlerFactory { get; }
         Func<ICacheProvider> CacheProviderFactory { get; }
+        Func<ILogHandler> LogHandlerFactory { get; }
         IList<Func<DelegatingHandler>> DelegatingHandlersFactories { get; }
     }
 }

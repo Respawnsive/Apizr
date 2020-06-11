@@ -4,9 +4,9 @@ using System.Net.Http;
 using System.Reflection;
 using Apizr.Caching;
 using Apizr.Connecting;
+using Apizr.Logging;
 using Apizr.Policing;
 using Apizr.Prioritizing;
-using Apizr.Tracing;
 using Fusillade;
 using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,7 +41,7 @@ namespace Apizr
                         var handlerBuilder = new HttpHandlerBuilder(new HttpClientHandler
                         {
                             AutomaticDecompression = apizrOptions.DecompressionMethods
-                        });
+                        }, new HttpTracerLogger(serviceProvider.GetRequiredService<ILogHandler>()));
                         handlerBuilder.HttpTracerHandler.Verbosity = apizrOptions.HttpTracerVerbosity;
 
                         foreach (var handlerExtendedFactory in apizrOptions.DelegatingHandlersExtendedFactories)
@@ -80,6 +80,8 @@ namespace Apizr
             services.AddSingleton(typeof(IConnectivityHandler), apizrOptions.ConnectivityHandlerType);
 
             services.AddSingleton(typeof(ICacheProvider), apizrOptions.CacheProviderType);
+
+            services.AddSingleton(typeof(ILogHandler), apizrOptions.LogHandlerType);
 
             services.AddSingleton(typeof(IApizrManager<>).MakeGenericType(apizrOptions.WebApiType), typeof(ApizrManager<>).MakeGenericType(apizrOptions.WebApiType));
 

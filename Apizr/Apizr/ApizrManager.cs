@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Connecting;
+using Apizr.Logging;
 using Apizr.Policing;
 using Apizr.Prioritizing;
 using Fusillade;
@@ -23,14 +24,16 @@ namespace Apizr
         readonly IEnumerable<ILazyPrioritizedWebApi<TWebApi>> _webApis;
         readonly IConnectivityHandler _connectivityHandler;
         readonly ICacheProvider _cacheProvider;
+        private readonly ILogHandler _logHandler;
         readonly IReadOnlyPolicyRegistry<string> _policyRegistry;
 
-        public ApizrManager(IEnumerable<ILazyPrioritizedWebApi<TWebApi>> webApis, IConnectivityHandler connectivityHandler, ICacheProvider cacheProvider, IReadOnlyPolicyRegistry<string> policyRegistry)
+        public ApizrManager(IEnumerable<ILazyPrioritizedWebApi<TWebApi>> webApis, IConnectivityHandler connectivityHandler, ICacheProvider cacheProvider, ILogHandler logHandler, IReadOnlyPolicyRegistry<string> policyRegistry)
         {
             _cacheableMethodsSet = new Dictionary<MethodCacheDetails, MethodCacheAttributes>();
             _webApis = webApis;
             _connectivityHandler = connectivityHandler;
             _cacheProvider = cacheProvider;
+            _logHandler = logHandler;
             _policyRegistry = policyRegistry;
         }
 

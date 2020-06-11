@@ -1,9 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Caching;
+using Apizr.Logging;
 using Apizr.Policing;
 using Apizr.Sample.Api.Models;
-using Apizr.Tracing;
 using Refit;
 
 [assembly:Policy("TransientHttpError")]

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Connecting;
+using Apizr.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Polly.Registry;
 using Refit;
@@ -105,6 +106,20 @@ namespace Apizr
                     $"Your cache provider class must inherit from {nameof(ICacheProvider)} interface or derived");
 
             Options.CacheProviderType = cacheProviderType;
+
+            return this;
+        }
+
+        public IApizrExtendedOptionsBuilder WithLogHandler<TLogHandler>() where TLogHandler : class, ILogHandler
+            => WithLogHandler(typeof(TLogHandler));
+
+        public IApizrExtendedOptionsBuilder WithLogHandler(Type logHandlerType)
+        {
+            if (!typeof(ILogHandler).IsAssignableFrom(logHandlerType))
+                throw new ArgumentException(
+                    $"Your log handler class must inherit from {nameof(ILogHandler)} interface or derived");
+
+            Options.LogHandlerType = logHandlerType;
 
             return this;
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Caching;
-using Apizr.Tracing;
+using Apizr.Logging;
 using Refit;
 
 namespace Apizr.Sample.Api

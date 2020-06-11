@@ -1,7 +1,7 @@
 ﻿using System;
 using HttpTracer;
 
-namespace Apizr.Tracing
+namespace Apizr.Logging
 {
     [AttributeUsage(AttributeTargets.Interface)]
     public class TraceAttribute : Attribute

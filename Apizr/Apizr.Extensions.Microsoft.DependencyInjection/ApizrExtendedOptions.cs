@@ -18,13 +18,13 @@ namespace Apizr
             httpTracerVerbosity, assemblyPolicyRegistryKeys, webApiPolicyRegistryKeys)
         {
             ApizrManagerType = apizrManagerType;
-            ConnectivityProviderType = typeof(VoidConnectivityProvider);
+            ConnectivityHandlerType = typeof(VoidConnectivityHandler);
             CacheProviderType = typeof(VoidCacheProvider);
             DelegatingHandlersExtendedFactories = new List<Func<IServiceProvider, DelegatingHandler>>();
         }
 
         public Type ApizrManagerType { get; }
-        public Type ConnectivityProviderType { get; set; }
+        public Type ConnectivityHandlerType { get; set; }
         public Type CacheProviderType { get; set; }
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
         public IList<Func<IServiceProvider, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }

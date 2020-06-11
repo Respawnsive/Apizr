@@ -19,7 +19,7 @@ namespace Apizr
         string[] PolicyRegistryKeys { get; }
         Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; }
         Func<RefitSettings> RefitSettingsFactory { get; }
-        Func<IConnectivityProvider> ConnectivityProviderFactory { get; }
+        Func<IConnectivityHandler> ConnectivityHandlerFactory { get; }
         Func<ICacheProvider> CacheProviderFactory { get; }
         IList<Func<DelegatingHandler>> DelegatingHandlersFactories { get; }
     }

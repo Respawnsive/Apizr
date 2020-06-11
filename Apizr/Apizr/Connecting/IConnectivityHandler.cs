@@ -1,6 +1,6 @@
 ﻿namespace Apizr.Connecting
 {
-    public interface IConnectivityProvider
+    public interface IConnectivityHandler
     {
         bool IsConnected();
     }

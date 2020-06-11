@@ -28,8 +28,8 @@ namespace Apizr
         IApizrOptionsBuilder WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<string>> policyRegistryFactory);
         IApizrOptionsBuilder WithRefitSettings(RefitSettings refitSettings);
         IApizrOptionsBuilder WithRefitSettings(Func<RefitSettings> refitSettingsFactory);
-        IApizrOptionsBuilder WithConnectivityProvider(IConnectivityProvider connectivityProvider);
-        IApizrOptionsBuilder WithConnectivityProvider(Func<IConnectivityProvider> connectivityProviderFactory);
+        IApizrOptionsBuilder WithConnectivityHandler(IConnectivityHandler connectivityHandler);
+        IApizrOptionsBuilder WithConnectivityHandler(Func<IConnectivityHandler> connectivityHandlerFactory);
         IApizrOptionsBuilder WithCacheProvider(ICacheProvider cacheProvider);
         IApizrOptionsBuilder WithCacheProvider(Func<ICacheProvider> cacheProviderFactory);
     }

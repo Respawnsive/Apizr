@@ -24,8 +24,8 @@ namespace Apizr
         IApizrExtendedOptionsBuilder WithAuthenticationHandler<TSettingsService>(Expression<Func<TSettingsService, string>> tokenProperty, Func<HttpRequestMessage, Task<string>> refreshTokenFactory);
         IApizrExtendedOptionsBuilder WithPolicyRegistry(Func<IPolicyRegistry<string>> policyRegistryFactory);
         IApizrExtendedOptionsBuilder WithRefitSettings(Func<RefitSettings> refitSettingsFactory);
-        IApizrExtendedOptionsBuilder WithConnectivityProvider<TConnectivityProvider>() where TConnectivityProvider : class, IConnectivityProvider;
-        IApizrExtendedOptionsBuilder WithConnectivityProvider(Type connectivityProviderType);
+        IApizrExtendedOptionsBuilder WithConnectivityHandler<TConnectivityHandler>() where TConnectivityHandler : class, IConnectivityHandler;
+        IApizrExtendedOptionsBuilder WithConnectivityHandler(Type connectivityHandlerType);
         IApizrExtendedOptionsBuilder WithCacheProvider<TCacheProvider>() where TCacheProvider : class, ICacheProvider;
         IApizrExtendedOptionsBuilder WithCacheProvider(Type cacheProviderType);
     }

@@ -77,7 +77,7 @@ namespace Apizr
                     builder.AddPolicyHandlerFromRegistry(policyRegistryKey);
             }
 
-            services.AddSingleton(typeof(IConnectivityProvider), apizrOptions.ConnectivityProviderType);
+            services.AddSingleton(typeof(IConnectivityHandler), apizrOptions.ConnectivityHandlerType);
 
             services.AddSingleton(typeof(ICacheProvider), apizrOptions.CacheProviderType);
 

@@ -36,12 +36,12 @@ namespace Apizr
             return this;
         }
 
-        public IApizrOptionsBuilder WithConnectivityProvider(IConnectivityProvider connectivityProvider)
-            => WithConnectivityProvider(() => connectivityProvider);
+        public IApizrOptionsBuilder WithConnectivityHandler(IConnectivityHandler connectivityHandler)
+            => WithConnectivityHandler(() => connectivityHandler);
 
-        public IApizrOptionsBuilder WithConnectivityProvider(Func<IConnectivityProvider> connectivityProviderFactory)
+        public IApizrOptionsBuilder WithConnectivityHandler(Func<IConnectivityHandler> connectivityHandlerFactory)
         {
-            Options.ConnectivityProviderFactory = connectivityProviderFactory;
+            Options.ConnectivityHandlerFactory = connectivityHandlerFactory;
 
             return this;
         }

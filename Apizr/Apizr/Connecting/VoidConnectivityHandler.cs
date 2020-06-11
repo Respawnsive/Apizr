@@ -1,6 +1,6 @@
 ﻿namespace Apizr.Connecting
 {
-    public class VoidConnectivityProvider : IConnectivityProvider
+    public class VoidConnectivityHandler : IConnectivityHandler
     {
         public bool IsConnected() => true;
     }

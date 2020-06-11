@@ -3,11 +3,11 @@ using Shiny.Net;
 
 namespace Apizr
 {
-    public class ShinyConnectivityProvider : IConnectivityProvider
+    public class ShinyConnectivityHandler : IConnectivityHandler
     {
         private readonly IConnectivity _shinyConnectivity;
 
-        public ShinyConnectivityProvider(IConnectivity shinyConnectivity)
+        public ShinyConnectivityHandler(IConnectivity shinyConnectivity)
         {
             _shinyConnectivity = shinyConnectivity;
         }

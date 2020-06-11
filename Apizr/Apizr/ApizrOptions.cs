@@ -26,7 +26,7 @@ namespace Apizr
                 webApiPolicyRegistryKeys ?? Array.Empty<string>();
             PolicyRegistryFactory = () => new PolicyRegistry();
             RefitSettingsFactory = () => new RefitSettings();
-            ConnectivityProviderFactory = () => new VoidConnectivityProvider();
+            ConnectivityHandlerFactory = () => new VoidConnectivityHandler();
             CacheProviderFactory = () => new VoidCacheProvider();
             DelegatingHandlersFactories = new List<Func<DelegatingHandler>>();
         }
@@ -38,7 +38,7 @@ namespace Apizr
         public string[] PolicyRegistryKeys { get; }
         public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set;  }
         public Func<RefitSettings> RefitSettingsFactory { get; set; }
-        public Func<IConnectivityProvider> ConnectivityProviderFactory { get; set; }
+        public Func<IConnectivityHandler> ConnectivityHandlerFactory { get; set; }
         public Func<ICacheProvider> CacheProviderFactory { get; set; }
         public IList<Func<DelegatingHandler>> DelegatingHandlersFactories { get; }
     }

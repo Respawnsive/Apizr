@@ -8,7 +8,7 @@ namespace Apizr
     public interface IApizrExtendedOptions : IApizrOptions
     {
         Type ApizrManagerType { get; }
-        Type ConnectivityProviderType { get; }
+        Type ConnectivityHandlerType { get; }
         Type CacheProviderType { get; }
         Action<IHttpClientBuilder> HttpClientBuilder { get; }
         IList<Func<IServiceProvider, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }

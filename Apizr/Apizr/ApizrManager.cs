@@ -21,15 +21,15 @@ namespace Apizr
     {
         readonly Dictionary<MethodCacheDetails, MethodCacheAttributes> _cacheableMethodsSet;
         readonly IEnumerable<ILazyPrioritizedWebApi<TWebApi>> _webApis;
-        readonly IConnectivityProvider _connectivityProvider;
+        readonly IConnectivityHandler _connectivityHandler;
         readonly ICacheProvider _cacheProvider;
         readonly IReadOnlyPolicyRegistry<string> _policyRegistry;
 
-        public ApizrManager(IEnumerable<ILazyPrioritizedWebApi<TWebApi>> webApis, IConnectivityProvider connectivityProvider, ICacheProvider cacheProvider, IReadOnlyPolicyRegistry<string> policyRegistry)
+        public ApizrManager(IEnumerable<ILazyPrioritizedWebApi<TWebApi>> webApis, IConnectivityHandler connectivityHandler, ICacheProvider cacheProvider, IReadOnlyPolicyRegistry<string> policyRegistry)
         {
             _cacheableMethodsSet = new Dictionary<MethodCacheDetails, MethodCacheAttributes>();
             _webApis = webApis;
-            _connectivityProvider = connectivityProvider;
+            _connectivityHandler = connectivityHandler;
             _cacheProvider = cacheProvider;
             _policyRegistry = policyRegistry;
         }
@@ -61,10 +61,10 @@ namespace Apizr
             {
                 try
                 {
-                    if (!_connectivityProvider.IsConnected())
+                    if (!_connectivityHandler.IsConnected())
                         throw new IOException();
 
-                    if (_connectivityProvider is VoidConnectivityProvider)
+                    if (_connectivityHandler is VoidConnectivityHandler)
                         Console.WriteLine("Apizr: Connectivity is not checked as you didn't provide any connectivity provider");
 
                     var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression);
@@ -94,10 +94,10 @@ namespace Apizr
         {
             try
             {
-                if (!_connectivityProvider.IsConnected())
+                if (!_connectivityHandler.IsConnected())
                     throw new IOException();
 
-                if (_connectivityProvider is VoidConnectivityProvider)
+                if (_connectivityHandler is VoidConnectivityHandler)
                     Console.WriteLine("Apizr: Connectivity is not checked as you didn't provide any connectivity provider");
 
                 var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression);

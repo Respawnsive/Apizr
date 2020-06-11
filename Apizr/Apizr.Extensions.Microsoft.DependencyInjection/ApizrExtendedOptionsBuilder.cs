@@ -79,17 +79,17 @@ namespace Apizr
             return this;
         }
 
-        public IApizrExtendedOptionsBuilder WithConnectivityProvider<TConnectivityProvider>()
-            where TConnectivityProvider : class, IConnectivityProvider
-            => WithConnectivityProvider(typeof(TConnectivityProvider));
+        public IApizrExtendedOptionsBuilder WithConnectivityHandler<TConnectivityHandler>()
+            where TConnectivityHandler : class, IConnectivityHandler
+            => WithConnectivityHandler(typeof(TConnectivityHandler));
 
-        public IApizrExtendedOptionsBuilder WithConnectivityProvider(Type connectivityProviderType)
+        public IApizrExtendedOptionsBuilder WithConnectivityHandler(Type connectivityHandlerType)
         {
-            if (!typeof(IConnectivityProvider).IsAssignableFrom(connectivityProviderType))
+            if (!typeof(IConnectivityHandler).IsAssignableFrom(connectivityHandlerType))
                 throw new ArgumentException(
-                    $"Your connectivity provider class must inherit from {nameof(IConnectivityProvider)} interface or derived");
+                    $"Your connectivity handler class must inherit from {nameof(IConnectivityHandler)} interface or derived");
 
-            Options.ConnectivityProviderType = connectivityProviderType;
+            Options.ConnectivityHandlerType = connectivityHandlerType;
 
             return this;
         }

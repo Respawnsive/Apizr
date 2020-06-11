@@ -24,9 +24,9 @@ namespace Apizr
         {
             services.AddApizr(webApiType, apizrManagerType, optionsBuilder);
 
-            var isVoidConnectivityProviderRegistered = services.Any(x => x.ImplementationType == typeof(VoidConnectivityProvider));
-            if(isVoidConnectivityProviderRegistered)
-                services.Replace(new ServiceDescriptor(typeof(IConnectivityProvider), typeof(ShinyConnectivityProvider), ServiceLifetime.Singleton));
+            var isVoidConnectivityHandlerRegistered = services.Any(x => x.ImplementationType == typeof(VoidConnectivityHandler));
+            if(isVoidConnectivityHandlerRegistered)
+                services.Replace(new ServiceDescriptor(typeof(IConnectivityHandler), typeof(ShinyConnectivityHandler), ServiceLifetime.Singleton));
 
             var isVoidCacheProviderRegistered = services.Any(x => x.ImplementationType == typeof(VoidCacheProvider));
             if (isVoidCacheProviderRegistered)

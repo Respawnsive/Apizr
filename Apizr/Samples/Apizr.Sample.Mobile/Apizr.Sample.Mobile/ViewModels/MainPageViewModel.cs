@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Acr.UserDialogs;
@@ -45,7 +46,7 @@ namespace Apizr.Sample.Mobile.ViewModels
             IList<User>? users;
             try
             {
-                var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+                var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
                 users = userList.Data;
             }
             catch (ApizrException<UserList> e)

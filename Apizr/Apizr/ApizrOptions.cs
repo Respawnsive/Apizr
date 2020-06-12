@@ -30,7 +30,7 @@ namespace Apizr
             ConnectivityHandlerFactory = () => new VoidConnectivityHandler();
             CacheProviderFactory = () => new VoidCacheProvider();
             LogHandlerFactory = () => new DefaultLogHandler();
-            DelegatingHandlersFactories = new List<Func<DelegatingHandler>>();
+            DelegatingHandlersFactories = new List<Func<ILogHandler, DelegatingHandler>>();
         }
 
         public Type WebApiType { get; }
@@ -43,6 +43,6 @@ namespace Apizr
         public Func<IConnectivityHandler> ConnectivityHandlerFactory { get; set; }
         public Func<ICacheProvider> CacheProviderFactory { get; set; }
         public Func<ILogHandler> LogHandlerFactory { get; set; }
-        public IList<Func<DelegatingHandler>> DelegatingHandlersFactories { get; }
+        public IList<Func<ILogHandler, DelegatingHandler>> DelegatingHandlersFactories { get; }
     }
 }

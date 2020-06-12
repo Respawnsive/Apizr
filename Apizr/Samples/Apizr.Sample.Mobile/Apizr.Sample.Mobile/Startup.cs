@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Apizr.Policing;
 using Apizr.Sample.Api;
 using Apizr.Sample.Mobile.Services.Settings;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,7 @@ using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
 using Shiny;
+using Shiny.Logging;
 using Shiny.Prism;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
@@ -22,6 +24,9 @@ namespace Apizr.Sample.Mobile
         {
             services.AddSingleton<IAppInfo, AppInfoImplementation>();
 
+            Log.UseConsole();
+            Log.UseDebug();
+
             var registry = new PolicyRegistry
             {
                 {
@@ -30,7 +35,7 @@ namespace Apizr.Sample.Mobile
                         TimeSpan.FromSeconds(1),
                         TimeSpan.FromSeconds(5),
                         TimeSpan.FromSeconds(10)
-                    })
+                    }, LoggedPolicies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
                 }
             };
             services.AddPolicyRegistry(registry);

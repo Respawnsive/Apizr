@@ -31,16 +31,16 @@ namespace Apizr
 
         public IApizrExtendedOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
         {
-            var authenticationHandler = new Func<IServiceProvider, DelegatingHandler>(_ =>
-                new AuthenticationHandler(refreshTokenFactory));
+            var authenticationHandler = new Func<IServiceProvider, DelegatingHandler>(serviceProvider =>
+                new AuthenticationHandler(serviceProvider.GetRequiredService<ILogHandler>(), refreshTokenFactory));
             Options.DelegatingHandlersExtendedFactories.Add(authenticationHandler);
 
             return this;
         }
 
-        public IApizrExtendedOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase
+        public IApizrExtendedOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<ILogHandler, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase
         {
-            var authenticationHandlerExtendedFactory = new Func<IServiceProvider, TAuthenticationHandler>(_ => authenticationHandlerFactory.Invoke());
+            var authenticationHandlerExtendedFactory = new Func<IServiceProvider, TAuthenticationHandler>(serviceProvider => authenticationHandlerFactory.Invoke(serviceProvider.GetRequiredService<ILogHandler>()));
             Options.DelegatingHandlersExtendedFactories.Add(authenticationHandlerExtendedFactory);
 
             return this;
@@ -49,19 +49,21 @@ namespace Apizr
         public IApizrExtendedOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(Expression<Func<TSettingsService, string>> tokenProperty,
             Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
         {
-            Options.DelegatingHandlersExtendedFactories.Add(provider =>
+            Options.DelegatingHandlersExtendedFactories.Add(serviceProvider =>
                 new AuthenticationHandler<TSettingsService, TTokenService>(
-                    provider.GetRequiredService<TSettingsService>, tokenProperty,
-                    provider.GetRequiredService<TTokenService>, refreshTokenMethod));
+                    serviceProvider.GetRequiredService<ILogHandler>(),
+                    serviceProvider.GetRequiredService<TSettingsService>, tokenProperty,
+                    serviceProvider.GetRequiredService<TTokenService>, refreshTokenMethod));
 
             return this;
         }
 
         public IApizrExtendedOptionsBuilder WithAuthenticationHandler<TSettingsService>(Expression<Func<TSettingsService, string>> tokenProperty, Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
         {
-            Options.DelegatingHandlersExtendedFactories.Add(provider =>
+            Options.DelegatingHandlersExtendedFactories.Add(serviceProvider =>
                 new AuthenticationHandler<TSettingsService>(
-                    provider.GetRequiredService<TSettingsService>, tokenProperty, refreshTokenFactory));
+                    serviceProvider.GetRequiredService<ILogHandler>(),
+                    serviceProvider.GetRequiredService<TSettingsService>, tokenProperty, refreshTokenFactory));
 
             return this;
         }

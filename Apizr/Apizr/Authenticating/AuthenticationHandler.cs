@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
+using Apizr.Logging;
 
 namespace Apizr.Authenticating
 {
@@ -10,7 +11,7 @@ namespace Apizr.Authenticating
     {
         private readonly Func<HttpRequestMessage, Task<string>> _refreshToken;
 
-        public AuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshToken)
+        public AuthenticationHandler(ILogHandler logHandler, Func<HttpRequestMessage, Task<string>> refreshToken) : base(logHandler)
         {
             _refreshToken = refreshToken ?? throw new ArgumentNullException(nameof(refreshToken));
         }
@@ -28,9 +29,9 @@ namespace Apizr.Authenticating
         private readonly Expression<Func<TSettingsService, string>> _settingsTokenProperty;
         private readonly Func<HttpRequestMessage, Task<string>> _refreshToken;
 
-        public AuthenticationHandler(Func<TSettingsService> settingsServiceFactory,
+        public AuthenticationHandler(ILogHandler logHandler, Func<TSettingsService> settingsServiceFactory,
             Expression<Func<TSettingsService, string>> settingsTokenProperty,
-            Func<HttpRequestMessage, Task<string>> refreshToken)
+            Func<HttpRequestMessage, Task<string>> refreshToken) : base(logHandler)
         {
             _settingsServiceFactory = settingsServiceFactory ?? throw new ArgumentNullException(nameof(settingsServiceFactory));
             _settingsTokenProperty = settingsTokenProperty ?? throw new ArgumentNullException(nameof(settingsTokenProperty));
@@ -60,9 +61,9 @@ namespace Apizr.Authenticating
         private readonly Func<TTokenService> _tokenServiceFactory;
         private readonly Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> _refreshTokenMethod;
 
-        public AuthenticationHandler(Func<TSettingsService> settingsServiceFactory,
+        public AuthenticationHandler(ILogHandler logHandler, Func<TSettingsService> settingsServiceFactory,
             Expression<Func<TSettingsService, string>> settingsTokenProperty, Func<TTokenService> tokenServiceFactory,
-            Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
+            Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod) : base(logHandler)
         {
             _settingsServiceFactory = settingsServiceFactory ?? throw new ArgumentNullException(nameof(settingsServiceFactory));
             _settingsTokenProperty = settingsTokenProperty ?? throw new ArgumentNullException(nameof(settingsTokenProperty));

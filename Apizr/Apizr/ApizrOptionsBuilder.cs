@@ -69,9 +69,9 @@ namespace Apizr
 
         public IApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(
             TAuthenticationHandler authenticationHandler) where TAuthenticationHandler : AuthenticationHandlerBase
-            => WithAuthenticationHandler(() => authenticationHandler);
+            => WithAuthenticationHandler(logHandler => authenticationHandler);
 
-        public IApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<TAuthenticationHandler> authenticationHandler) where TAuthenticationHandler : AuthenticationHandlerBase
+        public IApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<ILogHandler, TAuthenticationHandler> authenticationHandler) where TAuthenticationHandler : AuthenticationHandlerBase
         {
             Options.DelegatingHandlersFactories.Add(authenticationHandler);
 
@@ -80,8 +80,8 @@ namespace Apizr
 
         public IApizrOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshToken)
         {
-            var authenticationHandler = new Func<DelegatingHandler>(() =>
-                new AuthenticationHandler(refreshToken));
+            var authenticationHandler = new Func<ILogHandler, DelegatingHandler>(logHandler =>
+                new AuthenticationHandler(logHandler, refreshToken));
             Options.DelegatingHandlersFactories.Add(authenticationHandler);
 
             return this;
@@ -96,8 +96,8 @@ namespace Apizr
             Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> tokenProperty,
             Func<HttpRequestMessage, Task<string>> refreshToken)
         {
-            var authenticationHandler = new Func<DelegatingHandler>(() =>
-                new AuthenticationHandler<TSettingsService>(settingsServiceFactory, tokenProperty, refreshToken));
+            var authenticationHandler = new Func<ILogHandler, DelegatingHandler>(logHandler =>
+                new AuthenticationHandler<TSettingsService>(logHandler, settingsServiceFactory, tokenProperty, refreshToken));
             Options.DelegatingHandlersFactories.Add(authenticationHandler);
 
             return this;
@@ -114,8 +114,8 @@ namespace Apizr
             Func<TTokenService> tokenServiceFactory,
             Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
         {
-            var authenticationHandler = new Func<DelegatingHandler>(() =>
-                new AuthenticationHandler<TSettingsService, TTokenService>(
+            var authenticationHandler = new Func<ILogHandler, DelegatingHandler>(logHandler =>
+                new AuthenticationHandler<TSettingsService, TTokenService>(logHandler,
                     settingsServiceFactory, tokenProperty,
                     tokenServiceFactory, refreshTokenMethod));
             Options.DelegatingHandlersFactories.Add(authenticationHandler);

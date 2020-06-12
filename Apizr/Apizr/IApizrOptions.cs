@@ -23,6 +23,6 @@ namespace Apizr
         Func<IConnectivityHandler> ConnectivityHandlerFactory { get; }
         Func<ICacheProvider> CacheProviderFactory { get; }
         Func<ILogHandler> LogHandlerFactory { get; }
-        IList<Func<DelegatingHandler>> DelegatingHandlersFactories { get; }
+        IList<Func<ILogHandler, DelegatingHandler>> DelegatingHandlersFactories { get; }
     }
 }

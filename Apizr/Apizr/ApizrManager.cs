@@ -52,11 +52,17 @@ namespace Apizr
 
             if (IsMethodCacheable(executeApiMethod))
             {
+                _logHandler.Write("Apizr: Called method is cacheable");
                 if (_cacheProvider is VoidCacheProvider)
-                    Console.WriteLine("Apizr: You ask for cache but doesn't provide any cache provider");
+                    _logHandler.Write($"Apizr: You ask for cache but doesn't provide any cache provider. {nameof(VoidCacheProvider)} will fake it.");
 
                 cacheKey = GetCacheKey(executeApiMethod);
+                _logHandler.Write($"Apizr: Used cache key is {cacheKey}");
+
                 result = await _cacheProvider.Get<TResult>(cacheKey, cancellationToken);
+                if(!Equals(result, default(TResult)))
+                    _logHandler.Write("Apizr: Some cached data found for this cache key");
+
                 cacheAttributes = GetCacheAttribute(executeApiMethod);
             }
 
@@ -64,13 +70,20 @@ namespace Apizr
             {
                 try
                 {
-                    if (!_connectivityHandler.IsConnected())
-                        throw new IOException();
-
                     if (_connectivityHandler is VoidConnectivityHandler)
-                        Console.WriteLine("Apizr: Connectivity is not checked as you didn't provide any connectivity provider");
+                        _logHandler.Write("Apizr: Connectivity is not checked as you didn't provide any connectivity provider");
+                    else if (!_connectivityHandler.IsConnected())
+                    {
+                        _logHandler.Write($"Apizr: Connectivity check failed, throw {nameof(IOException)}");
+                        throw new IOException("Connectivity check failed");
+                    }
+                    else
+                        _logHandler.Write("Apizr: Connectivity check succeed");
 
                     var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression);
+                    _logHandler.Write(policy != null
+                        ? $"Apizr: Executing {priority} request with some policies"
+                        : $"Apizr: Executing {priority} request without any policies");
 
                     result = policy != null
                         ? await policy.ExecuteAsync(ct => executeApiMethod.Compile()(ct, GetWebApi(priority)), cancellationToken)
@@ -78,13 +91,23 @@ namespace Apizr
                 }
                 catch (Exception e)
                 {
+                    _logHandler.Write($"Apizr: Request throwed an exception with message {e.Message}");
+                    _logHandler.Write(!Equals(result, default(TResult))
+                        ? $"Apizr: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
+                        : $"Apizr: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
+
                     throw new ApizrException<TResult>(e, result);
                 }
 
-                if (result != null && _cacheProvider != null && !string.IsNullOrWhiteSpace(cacheKey) && cacheAttributes != null)
+                if (result != null && _cacheProvider != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                    cacheAttributes != null)
+                {
+                    _logHandler.Write("Apizr: Caching result");
                     await _cacheProvider.Set(cacheKey, result, cacheAttributes.CacheAttribute.LifeSpan, cancellationToken);
+                }
             }
 
+            _logHandler.Write("Apizr: Returning result");
             return result;
         }
 
@@ -97,13 +120,20 @@ namespace Apizr
         {
             try
             {
-                if (!_connectivityHandler.IsConnected())
-                    throw new IOException();
-
                 if (_connectivityHandler is VoidConnectivityHandler)
-                    Console.WriteLine("Apizr: Connectivity is not checked as you didn't provide any connectivity provider");
+                    _logHandler.Write("Apizr: Connectivity is not checked as you didn't provide any connectivity provider");
+                else if (!_connectivityHandler.IsConnected())
+                {
+                    _logHandler.Write($"Apizr: Connectivity check failed, throw {nameof(IOException)}");
+                    throw new IOException("Connectivity check failed");
+                }
+                else
+                    _logHandler.Write("Apizr: Connectivity check succeed");
 
                 var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression);
+                _logHandler.Write(policy != null
+                    ? $"Apizr: Executing {priority} request with some policies"
+                    : $"Apizr: Executing {priority} request without any policies");
 
                 return policy != null
                     ? policy.ExecuteAsync(ct => executeApiMethod.Compile()(ct, GetWebApi(priority)), cancellationToken)
@@ -111,6 +141,9 @@ namespace Apizr
             }
             catch (Exception e)
             {
+                _logHandler.Write($"Apizr: Request throwed an exception with message {e.Message}");
+                _logHandler.Write($"Apizr: Throwing an {nameof(ApizrException)} with InnerException");
+
                 throw new ApizrException(e, Unit.Default);
             }
         }
@@ -118,17 +151,18 @@ namespace Apizr
         public async Task<bool> ClearCacheAsync(CancellationToken cancellationToken = default)
         {
             if (_cacheProvider is VoidCacheProvider)
-                Console.WriteLine("Apizr: You ask for cache but doesn't provide any cache provider");
+                _logHandler.Write($"Apizr: You ask for cache but doesn't provide any cache provider. {nameof(VoidCacheProvider)} will fake it.");
 
             try
             {
                 await _cacheProvider.Clear(cancellationToken);
+                _logHandler.Write("Apizr: Cache cleared");
 
                 return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Apizr: clearing cache throwed an exception with message: {e.Message}");
+                _logHandler.Write($"Apizr: Clearing all cache throwed an exception with message: {e.Message}");
                 return false;
             }
         }
@@ -139,21 +173,31 @@ namespace Apizr
         public async Task<bool> ClearCacheAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken)
         {
             if (_cacheProvider is VoidCacheProvider)
-                Console.WriteLine("Apizr: You ask for cache but doesn't provide any cache provider");
+                _logHandler.Write($"Apizr: You ask for cache but doesn't provide any cache provider. {nameof(VoidCacheProvider)} will fake it.");
 
             try
             {
                 if (IsMethodCacheable(executeApiMethod))
                 {
+                    _logHandler.Write("Apizr: Called method is cacheable");
+
                     var cacheKey = GetCacheKey(executeApiMethod);
-                    return await _cacheProvider.Remove(cacheKey, cancellationToken);
+                    _logHandler.Write($"Apizr: Clearing cache for key {cacheKey}");
+
+                    var success = await _cacheProvider.Remove(cacheKey, cancellationToken);
+                    _logHandler.Write(success
+                        ? $"Apizr: Clearing cache for key {cacheKey} succeed"
+                        : $"Apizr: Clearing cache for key {cacheKey} failed");
+
+                    return success;
                 }
 
+                _logHandler.Write("Apizr: Called method isn't cacheable");
                 return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Apizr: clearing cache throwed an exception with message: {e.Message}");
+                _logHandler.Write($"Apizr: Clearing keyed cache throwed an exception with message: {e.Message}");
                 return false;
             }
         }

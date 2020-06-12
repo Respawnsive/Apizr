@@ -10,7 +10,10 @@ using Apizr.Prioritizing;
 using Fusillade;
 using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
+using Polly;
+using Polly.Registry;
 using Refit;
+using HttpRequestMessageExtensions = Apizr.Policing.HttpRequestMessageExtensions;
 
 namespace Apizr
 {
@@ -38,11 +41,59 @@ namespace Apizr
                 var builder = services.AddHttpClient(ForType(apizrOptions.WebApiType, priority))
                     .ConfigurePrimaryHttpMessageHandler(serviceProvider =>
                     {
+                        var logHandler = serviceProvider.GetRequiredService<ILogHandler>();
                         var handlerBuilder = new HttpHandlerBuilder(new HttpClientHandler
                         {
                             AutomaticDecompression = apizrOptions.DecompressionMethods
-                        }, new HttpTracerLogger(serviceProvider.GetRequiredService<ILogHandler>()));
+                        }, new HttpTracerLogWrapper(logHandler));
                         handlerBuilder.HttpTracerHandler.Verbosity = apizrOptions.HttpTracerVerbosity;
+
+                        if (apizrOptions.PolicyRegistryKeys != null && apizrOptions.PolicyRegistryKeys.Any())
+                        {
+                            IPolicyRegistry<string> policyRegistry = null;
+                            try
+                            {
+                                policyRegistry = serviceProvider.GetRequiredService<IPolicyRegistry<string>>();
+                            }
+                            catch (Exception)
+                            {
+                                logHandler.Write(
+                                    $"Apizr - Global policies: You get some global policies but didn't register a {nameof(PolicyRegistry)} instance. Global policies will be ignored");
+                            }
+
+                            if (policyRegistry != null)
+                            {
+                                foreach (var policyRegistryKey in apizrOptions.PolicyRegistryKeys)
+                                {
+                                    if (policyRegistry.TryGet<IsPolicy>(policyRegistryKey, out var registeredPolicy))
+                                    {
+                                        logHandler.Write($"Apizr - Global policies: Found a policy with key {policyRegistryKey}");
+                                        if (registeredPolicy is IAsyncPolicy<HttpResponseMessage> registeredPolicyForHttpResponseMessage)
+                                        {
+                                            var policySelector =
+                                                new Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>>(
+                                                    request =>
+                                                    {
+                                                        var pollyContext = new Context().WithLogHandler(logHandler);
+                                                        HttpRequestMessageExtensions.SetPolicyExecutionContext(request, pollyContext);
+                                                        return registeredPolicyForHttpResponseMessage;
+                                                    });
+                                            handlerBuilder.AddHandler(new PolicyHttpMessageHandler(policySelector));
+
+                                            logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} will be applied");
+                                        }
+                                        else
+                                        {
+                                            logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} is not of {typeof(IAsyncPolicy<HttpResponseMessage>)} type and will be ignored");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        logHandler.Write($"Apizr - Global policies: No policy found for key {policyRegistryKey}");
+                                    }
+                                } 
+                            }
+                        }
 
                         foreach (var handlerExtendedFactory in apizrOptions.DelegatingHandlersExtendedFactories)
                             handlerBuilder.AddHandler(handlerExtendedFactory.Invoke(serviceProvider));
@@ -72,9 +123,6 @@ namespace Apizr
                     if (x.BaseAddress == null)
                         throw new ArgumentNullException(nameof(x.BaseAddress), $"You must provide a valid web api uri with the {nameof(WebApiAttribute)} or the options builder");
                 });
-
-                foreach (var policyRegistryKey in apizrOptions.PolicyRegistryKeys)
-                    builder.AddPolicyHandlerFromRegistry(policyRegistryKey);
             }
 
             services.AddSingleton(typeof(IConnectivityHandler), apizrOptions.ConnectivityHandlerType);

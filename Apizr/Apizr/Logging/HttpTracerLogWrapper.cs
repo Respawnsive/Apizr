@@ -2,11 +2,11 @@
 
 namespace Apizr.Logging
 {
-    public class HttpTracerLogger : ILogger
+    public class HttpTracerLogWrapper : ILogger
     {
         private readonly ILogHandler _logHandler;
 
-        public HttpTracerLogger(ILogHandler logHandler)
+        public HttpTracerLogWrapper(ILogHandler logHandler)
         {
             _logHandler = logHandler;
         }

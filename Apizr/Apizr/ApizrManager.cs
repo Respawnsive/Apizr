@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.Http;
 using System.Reactive;
 using System.Reflection;
 using System.Threading;
@@ -46,22 +47,26 @@ namespace Apizr
         public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken,
             Priority priority = Priority.UserInitiated)
         {
+            var methodCallExpression = GetMethodCallExpression(executeApiMethod);
+            var methodName = $"{typeof(TWebApi).Name}.{methodCallExpression.Method.Name}";
+            _logHandler.Write($"Apizr - {methodName}: Calling method");
+
             string cacheKey = null;
             TResult result = default;
             MethodCacheAttributes cacheAttributes = null;
 
             if (IsMethodCacheable(executeApiMethod))
             {
-                _logHandler.Write("Apizr: Called method is cacheable");
+                _logHandler.Write($"Apizr - {methodName}: Called method is cacheable");
                 if (_cacheProvider is VoidCacheProvider)
-                    _logHandler.Write($"Apizr: You ask for cache but doesn't provide any cache provider. {nameof(VoidCacheProvider)} will fake it.");
+                    _logHandler.Write($"Apizr - {methodName}: You ask for cache but doesn't provide any cache provider. {nameof(VoidCacheProvider)} will fake it.");
 
                 cacheKey = GetCacheKey(executeApiMethod);
-                _logHandler.Write($"Apizr: Used cache key is {cacheKey}");
+                _logHandler.Write($"Apizr - {methodName}: Used cache key is {cacheKey}");
 
                 result = await _cacheProvider.Get<TResult>(cacheKey, cancellationToken);
                 if(!Equals(result, default(TResult)))
-                    _logHandler.Write("Apizr: Some cached data found for this cache key");
+                    _logHandler.Write($"Apizr - {methodName}: Some cached data found for this cache key");
 
                 cacheAttributes = GetCacheAttribute(executeApiMethod);
             }
@@ -71,30 +76,37 @@ namespace Apizr
                 try
                 {
                     if (_connectivityHandler is VoidConnectivityHandler)
-                        _logHandler.Write("Apizr: Connectivity is not checked as you didn't provide any connectivity provider");
+                        _logHandler.Write($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity provider");
                     else if (!_connectivityHandler.IsConnected())
                     {
-                        _logHandler.Write($"Apizr: Connectivity check failed, throw {nameof(IOException)}");
+                        _logHandler.Write($"Apizr - {methodName}: Connectivity check failed, throw {nameof(IOException)}");
                         throw new IOException("Connectivity check failed");
                     }
                     else
-                        _logHandler.Write("Apizr: Connectivity check succeed");
+                        _logHandler.Write($"Apizr - {methodName}: Connectivity check succeed");
 
-                    var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression);
-                    _logHandler.Write(policy != null
-                        ? $"Apizr: Executing {priority} request with some policies"
-                        : $"Apizr: Executing {priority} request without any policies");
+                    var policy = GetMethodPolicy<TResult>(executeApiMethod.Body as MethodCallExpression);
+                    if (policy != null)
+                    {
 
-                    result = policy != null
-                        ? await policy.ExecuteAsync(ct => executeApiMethod.Compile()(ct, GetWebApi(priority)), cancellationToken)
-                        : await executeApiMethod.Compile()(cancellationToken, GetWebApi(priority));
+                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
+
+                        var pollyContext = new Context().WithLogHandler(_logHandler);
+                        result = await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, GetWebApi(priority)), pollyContext, cancellationToken);
+                    }
+                    else
+                    {
+                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
+
+                        result = await executeApiMethod.Compile()(cancellationToken, GetWebApi(priority));
+                    }
                 }
                 catch (Exception e)
                 {
-                    _logHandler.Write($"Apizr: Request throwed an exception with message {e.Message}");
+                    _logHandler.Write($"Apizr - {methodName}: Request throwed an exception with message {e.Message}");
                     _logHandler.Write(!Equals(result, default(TResult))
-                        ? $"Apizr: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
-                        : $"Apizr: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
+                        ? $"Apizr - {methodName}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
+                        : $"Apizr - {methodName}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
 
                     throw new ApizrException<TResult>(e, result);
                 }
@@ -102,12 +114,12 @@ namespace Apizr
                 if (result != null && _cacheProvider != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttributes != null)
                 {
-                    _logHandler.Write("Apizr: Caching result");
+                    _logHandler.Write($"Apizr - {methodName}: Caching result");
                     await _cacheProvider.Set(cacheKey, result, cacheAttributes.CacheAttribute.LifeSpan, cancellationToken);
                 }
             }
 
-            _logHandler.Write("Apizr: Returning result");
+            _logHandler.Write($"Apizr - {methodName}: Returning result");
             return result;
         }
 
@@ -118,31 +130,41 @@ namespace Apizr
         public Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod, CancellationToken cancellationToken,
             Priority priority = Priority.UserInitiated)
         {
+            var methodCallExpression = GetMethodCallExpression(executeApiMethod);
+            var methodName = $"{typeof(TWebApi)}.{methodCallExpression.Method.Name}";
+            _logHandler.Write($"Apizr: Calling method {methodName}");
+
             try
             {
                 if (_connectivityHandler is VoidConnectivityHandler)
-                    _logHandler.Write("Apizr: Connectivity is not checked as you didn't provide any connectivity provider");
+                    _logHandler.Write($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity provider");
                 else if (!_connectivityHandler.IsConnected())
                 {
-                    _logHandler.Write($"Apizr: Connectivity check failed, throw {nameof(IOException)}");
+                    _logHandler.Write($"Apizr - {methodName}: Connectivity check failed, throw {nameof(IOException)}");
                     throw new IOException("Connectivity check failed");
                 }
                 else
-                    _logHandler.Write("Apizr: Connectivity check succeed");
+                    _logHandler.Write($"Apizr - {methodName}: Connectivity check succeed");
 
                 var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression);
-                _logHandler.Write(policy != null
-                    ? $"Apizr: Executing {priority} request with some policies"
-                    : $"Apizr: Executing {priority} request without any policies");
+                if (policy != null)
+                {
+                    _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
 
-                return policy != null
-                    ? policy.ExecuteAsync(ct => executeApiMethod.Compile()(ct, GetWebApi(priority)), cancellationToken)
-                    : executeApiMethod.Compile()(cancellationToken, GetWebApi(priority));
+                    var pollyContext = new Context().WithLogHandler(_logHandler);
+                    return policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, GetWebApi(priority)), pollyContext, cancellationToken);
+                }
+                else
+                {
+                    _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
+
+                    return executeApiMethod.Compile()(cancellationToken, GetWebApi(priority));
+                }
             }
             catch (Exception e)
             {
-                _logHandler.Write($"Apizr: Request throwed an exception with message {e.Message}");
-                _logHandler.Write($"Apizr: Throwing an {nameof(ApizrException)} with InnerException");
+                _logHandler.Write($"Apizr - {methodName}: Request throwed an exception with message {e.Message}");
+                _logHandler.Write($"Apizr - {methodName}: Throwing an {nameof(ApizrException)} with InnerException");
 
                 throw new ApizrException(e, Unit.Default);
             }
@@ -172,32 +194,36 @@ namespace Apizr
 
         public async Task<bool> ClearCacheAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken)
         {
+            var methodCallExpression = GetMethodCallExpression(executeApiMethod);
+            var methodName = $"{typeof(TWebApi)}.{methodCallExpression.Method.Name}";
+            _logHandler.Write($"Apizr: Calling cache clear for method {methodName}");
+
             if (_cacheProvider is VoidCacheProvider)
-                _logHandler.Write($"Apizr: You ask for cache but doesn't provide any cache provider. {nameof(VoidCacheProvider)} will fake it.");
+                _logHandler.Write($"Apizr - {methodName}: You ask for cache but doesn't provide any cache provider. {nameof(VoidCacheProvider)} will fake it.");
 
             try
             {
                 if (IsMethodCacheable(executeApiMethod))
                 {
-                    _logHandler.Write("Apizr: Called method is cacheable");
+                    _logHandler.Write($"Apizr - {methodName}: Method is cacheable");
 
                     var cacheKey = GetCacheKey(executeApiMethod);
-                    _logHandler.Write($"Apizr: Clearing cache for key {cacheKey}");
+                    _logHandler.Write($"Apizr - {methodName}: Clearing cache for key {cacheKey}");
 
                     var success = await _cacheProvider.Remove(cacheKey, cancellationToken);
                     _logHandler.Write(success
-                        ? $"Apizr: Clearing cache for key {cacheKey} succeed"
-                        : $"Apizr: Clearing cache for key {cacheKey} failed");
+                        ? $"Apizr - {methodName}: Clearing cache for key {cacheKey} succeed"
+                        : $"Apizr - {methodName}: Clearing cache for key {cacheKey} failed");
 
                     return success;
                 }
 
-                _logHandler.Write("Apizr: Called method isn't cacheable");
+                _logHandler.Write($"Apizr - {methodName}: Method isn't cacheable");
                 return true;
             }
             catch (Exception e)
             {
-                _logHandler.Write($"Apizr: Clearing keyed cache throwed an exception with message: {e.Message}");
+                _logHandler.Write($"Apizr - {methodName}: Clearing keyed cache throwed an exception with message: {e.Message}");
                 return false;
             }
         }
@@ -399,6 +425,23 @@ namespace Apizr
             }
         }
 
+        private MethodCallExpression GetMethodCallExpression(
+            Expression<Func<CancellationToken, TWebApi, Task>> expression)
+        {
+            switch (expression.Body)
+            {
+                case InvocationExpression methodInvocationBody:
+                {
+                    var methodCallExpression = (MethodCallExpression)methodInvocationBody.Expression;
+                    return methodCallExpression;
+                }
+                case MethodCallExpression methodCallExpression:
+                    return methodCallExpression;
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
         private class ExtractedConstant
         {
             public object Value { get; set; }
@@ -409,6 +452,49 @@ namespace Apizr
         #endregion
 
         #region Policing
+
+        private IAsyncPolicy<TResult> GetMethodPolicy<TResult>(MethodCallExpression methodCallExpression)
+        {
+            if (methodCallExpression == null)
+                return null;
+
+            if (_policyRegistry == null)
+                return null;
+
+            var policyAttribute = methodCallExpression.Method.GetCustomAttribute<PolicyAttribute>();
+            if (policyAttribute == null)
+                return null;
+
+            var methodName = $"{typeof(TWebApi)}.{methodCallExpression.Method.Name}";
+
+            IAsyncPolicy<TResult> policy = null;
+            foreach (var registryKey in policyAttribute.RegistryKeys)
+            {
+                if (_policyRegistry.TryGet<IsPolicy>(registryKey, out var registeredPolicy))
+                {
+                    _logHandler.Write($"Apizr - {methodName}: Found a policy with key {registryKey}");
+                    if (registeredPolicy is IAsyncPolicy<TResult> registeredPolicyWithResult)
+                    {
+                        if (policy == null)
+                            policy = registeredPolicyWithResult;
+                        else
+                            policy.WrapAsync(registeredPolicyWithResult);
+
+                        _logHandler.Write($"Apizr - {methodName}: Policy with key {registryKey} will be applied");
+                    }
+                    else
+                    {
+                        _logHandler.Write($"Apizr - {methodName}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy<TResult>)} type and will be ignored");
+                    }
+                }
+                else
+                {
+                    _logHandler.Write($"Apizr - {methodName}: No policy found for key {registryKey}");
+                }
+            }
+
+            return policy;
+        }
 
         private IAsyncPolicy GetMethodPolicy(MethodCallExpression methodCallExpression)
         {
@@ -422,20 +508,36 @@ namespace Apizr
             if (policyAttribute == null)
                 return null;
 
+            var methodName = $"{typeof(TWebApi)}.{methodCallExpression.Method.Name}";
+
             IAsyncPolicy policy = null;
             foreach (var registryKey in policyAttribute.RegistryKeys)
             {
-                if (_policyRegistry.TryGet<IAsyncPolicy>(registryKey, out var registeredPolicy))
+                if (_policyRegistry.TryGet<IsPolicy>(registryKey, out var registeredPolicy))
                 {
-                    if (policy == null)
-                        policy = registeredPolicy;
+                    _logHandler.Write($"Apizr - {methodName}: Found a policy with key {registryKey}");
+                    if (registeredPolicy is IAsyncPolicy registeredPolicyWithoutResult)
+                    {
+                        if (policy == null)
+                            policy = registeredPolicyWithoutResult;
+                        else
+                            policy.WrapAsync(registeredPolicyWithoutResult);
+
+                        _logHandler.Write($"Apizr - {methodName}: Policy with key {registryKey} will be applied");
+                    }
                     else
-                        policy.WrapAsync(registeredPolicy);
+                    {
+                        _logHandler.Write($"Apizr - {methodName}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy)} type and will be ignored");
+                    }
+                }
+                else
+                {
+                    _logHandler.Write($"Apizr - {methodName}: No policy found for key {registryKey}");
                 }
             }
 
             return policy;
-        } 
+        }
 
         #endregion
     }

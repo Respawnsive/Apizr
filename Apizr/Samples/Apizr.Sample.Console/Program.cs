@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Policing;
 using Apizr.Sample.Api;
 using Apizr.Sample.Api.Models;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,7 +43,7 @@ namespace Apizr.Sample.Console
                         TimeSpan.FromSeconds(1),
                         TimeSpan.FromSeconds(5),
                         TimeSpan.FromSeconds(10)
-                    })
+                    }, LoggedPolicies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
                 }
             };
 

@@ -114,21 +114,23 @@ namespace Apizr.Policing
                 throw new ArgumentNullException(nameof(request));
             }
 
-            // Guarantee the existence of a context for every policy execution, but only create a new one if needed. This
-            // allows later handlers to flow state if desired.
             var cleanUpContext = false;
-            var context = request.GetPolicyExecutionContext();
-            if (context == null)
-            {
-                context = new Context();
-                request.SetPolicyExecutionContext(context);
-                cleanUpContext = true;
-            }
-
             HttpResponseMessage response;
             try
             {
                 var policy = _policy ?? SelectPolicy(request);
+
+                // Guarantee the existence of a context for every policy execution, but only create a new one if needed. This
+                // allows later handlers to flow state if desired.
+                // We do it right after policy selection so one could set the context during selection
+                var context = request.GetPolicyExecutionContext();
+                if (context == null)
+                {
+                    context = new Context();
+                    request.SetPolicyExecutionContext(context);
+                    cleanUpContext = true;
+                }
+
                 response = await policy.ExecuteAsync((c, ct) => SendCoreAsync(request, c, ct), context, cancellationToken).ConfigureAwait(false);
             }
             finally

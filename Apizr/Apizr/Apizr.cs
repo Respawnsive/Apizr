@@ -32,24 +32,49 @@ namespace Apizr
         {
             var apizrOptions = CreateApizrOptions<TWebApi>(optionsBuilder);
             var lazyWebApis = new List<ILazyPrioritizedWebApi<TWebApi>>();
-            foreach (var priority in ((Priority[]) Enum.GetValues(typeof(Priority))).Where(x => x != Priority.Explicit))
+            foreach (var priority in ((Priority[])Enum.GetValues(typeof(Priority))).Where(x => x != Priority.Explicit))
             {
                 var httpHandlerFactory = new Func<HttpMessageHandler>(() =>
                 {
+                    var logHandler = apizrOptions.LogHandlerFactory.Invoke();
                     var handlerBuilder = new HttpHandlerBuilder(new HttpClientHandler
                     {
                         AutomaticDecompression = apizrOptions.DecompressionMethods
-                    }, new HttpTracerLogger(apizrOptions.LogHandlerFactory.Invoke()));
+                    }, new HttpTracerLogWrapper(logHandler));
                     handlerBuilder.HttpTracerHandler.Verbosity = apizrOptions.HttpTracerVerbosity;
 
                     if (apizrOptions.PolicyRegistryKeys != null && apizrOptions.PolicyRegistryKeys.Any())
                     {
-                        var registry = apizrOptions.PolicyRegistryFactory.Invoke();
+                        var policyRegistry = apizrOptions.PolicyRegistryFactory.Invoke();
                         foreach (var policyRegistryKey in apizrOptions.PolicyRegistryKeys)
                         {
-                            var policy = registry.Get<IAsyncPolicy<HttpResponseMessage>>(policyRegistryKey);
-                            handlerBuilder.AddHandler(new PolicyHttpMessageHandler(policy));
-                        } 
+                            if (policyRegistry.TryGet<IsPolicy>(policyRegistryKey, out var registeredPolicy))
+                            {
+                                logHandler.Write($"Apizr - Global policies: Found a policy with key {policyRegistryKey}");
+                                if (registeredPolicy is IAsyncPolicy<HttpResponseMessage> registeredPolicyForHttpResponseMessage)
+                                {
+                                    var policySelector =
+                                        new Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>>(
+                                            request =>
+                                            {
+                                                var pollyContext = new Context().WithLogHandler(logHandler);
+                                                request.SetPolicyExecutionContext(pollyContext);
+                                                return registeredPolicyForHttpResponseMessage;
+                                            });
+                                    handlerBuilder.AddHandler(new PolicyHttpMessageHandler(policySelector));
+
+                                    logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} will be applied");
+                                }
+                                else
+                                {
+                                    logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} is not of {typeof(IAsyncPolicy<HttpResponseMessage>)} type and will be ignored");
+                                }
+                            }
+                            else
+                            {
+                                logHandler.Write($"Apizr - Global policies: No policy found for key {policyRegistryKey}");
+                            }
+                        }
                     }
 
                     foreach (var delegatingHandlersFactory in apizrOptions.DelegatingHandlersFactories)
@@ -60,8 +85,8 @@ namespace Apizr
 
                     return primaryMessageHandler;
                 });
-                
-                var webApiFactory = new Func<object>(() => RestService.For<TWebApi>(new HttpClient(httpHandlerFactory.Invoke()) { BaseAddress = apizrOptions.BaseAddress}, apizrOptions.RefitSettingsFactory.Invoke()));
+
+                var webApiFactory = new Func<object>(() => RestService.For<TWebApi>(new HttpClient(httpHandlerFactory.Invoke()) { BaseAddress = apizrOptions.BaseAddress }, apizrOptions.RefitSettingsFactory.Invoke()));
                 var lazyWebApi = Prioritize.For<TWebApi>(priority, webApiFactory);
                 lazyWebApis.Add(lazyWebApi);
             }

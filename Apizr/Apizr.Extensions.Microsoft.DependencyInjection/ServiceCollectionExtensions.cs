@@ -58,7 +58,7 @@ namespace Apizr
                             catch (Exception)
                             {
                                 logHandler.Write(
-                                    $"Apizr - Global policies: You get some global policies but didn't register a {nameof(PolicyRegistry)} instance. Global policies will be ignored");
+                                    $"Apizr - Global policies: You get some global policies but didn't register a {nameof(PolicyRegistry)} instance. Global policies will be ignored for  for {webApiType.Name} {priority} instance");
                             }
 
                             if (policyRegistry != null)
@@ -67,7 +67,7 @@ namespace Apizr
                                 {
                                     if (policyRegistry.TryGet<IsPolicy>(policyRegistryKey, out var registeredPolicy))
                                     {
-                                        logHandler.Write($"Apizr - Global policies: Found a policy with key {policyRegistryKey}");
+                                        logHandler.Write($"Apizr - Global policies: Found a policy with key {policyRegistryKey} for {webApiType.Name} {priority} instance");
                                         if (registeredPolicy is IAsyncPolicy<HttpResponseMessage> registeredPolicyForHttpResponseMessage)
                                         {
                                             var policySelector =
@@ -80,16 +80,16 @@ namespace Apizr
                                                     });
                                             handlerBuilder.AddHandler(new PolicyHttpMessageHandler(policySelector));
 
-                                            logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} will be applied");
+                                            logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} will be applied to {webApiType.Name} {priority} instance");
                                         }
                                         else
                                         {
-                                            logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} is not of {typeof(IAsyncPolicy<HttpResponseMessage>)} type and will be ignored");
+                                            logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} is not of {typeof(IAsyncPolicy<HttpResponseMessage>)} type and will be ignored for {webApiType.Name} {priority} instance");
                                         }
                                     }
                                     else
                                     {
-                                        logHandler.Write($"Apizr - Global policies: No policy found for key {policyRegistryKey}");
+                                        logHandler.Write($"Apizr - Global policies: No policy found for key {policyRegistryKey} and will be ignored for  for {webApiType.Name} {priority} instance");
                                     }
                                 } 
                             }

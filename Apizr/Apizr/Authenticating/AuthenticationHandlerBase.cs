@@ -83,11 +83,11 @@ namespace Apizr.Authenticating
             return response;
         }
 
-        protected abstract string GetToken();
+        public abstract string GetToken();
 
-        protected abstract void SetToken(string token);
+        public abstract void SetToken(string token);
 
-        protected abstract Task<string> RefreshTokenAsync(HttpRequestMessage request);
+        public abstract Task<string> RefreshTokenAsync(HttpRequestMessage request);
 
         /// <summary>
         /// Clone a HttpRequestMessage

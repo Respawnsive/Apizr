@@ -2,7 +2,7 @@
 
 namespace Apizr.Caching
 {
-    public class MethodCacheAttributes
+    internal class MethodCacheAttributes
     {
         public MethodCacheAttributes(CacheAttribute cacheAttribute, CacheKeyAttribute primaryKeyAttribute, string paramName,
             Type paramType, int paramOrder)

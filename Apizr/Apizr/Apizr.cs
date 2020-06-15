@@ -18,12 +18,26 @@ namespace Apizr
 {
     public static class Apizr
     {
+        /// <summary>
+        /// Create a <see cref="ApizrManager{TWebApi}"/> instance
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api interface to manage</typeparam>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <returns></returns>
         public static ApizrManager<TWebApi> For<TWebApi>(
             Action<IApizrOptionsBuilder> optionsBuilder = null) =>
             For<TWebApi, ApizrManager<TWebApi>>(
                 (lazyWebApis, connectivityHandler, cacheProvider, logHandler, policyRegistry) =>
                     new ApizrManager<TWebApi>(lazyWebApis, connectivityHandler, cacheProvider, logHandler, policyRegistry), optionsBuilder);
 
+        /// <summary>
+        /// Create a <see cref="TApizrManager"/> instance for a managed <see cref="TWebApi"/>
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api interface to manage</typeparam>
+        /// <typeparam name="TApizrManager">A custom <see cref="IApizrManager{TWebApi}"/> implementation</typeparam>
+        /// <param name="apizrManagerFactory">The custom manager implementation instance factory</param>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <returns></returns>
         public static TApizrManager For<TWebApi, TApizrManager>(
             Func<IEnumerable<ILazyPrioritizedWebApi<TWebApi>>, IConnectivityHandler, ICacheProvider, ILogHandler, IReadOnlyPolicyRegistry<string>,
                 TApizrManager> apizrManagerFactory,

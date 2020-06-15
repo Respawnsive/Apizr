@@ -2,9 +2,15 @@
 
 namespace Apizr.Caching
 {
+    /// <summary>
+    /// Tells Apizr the key to cache value at
+    /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
     public class CacheKeyAttribute : Attribute
     {
+        /// <summary>
+        /// The decorated parameter will be used as cache key (should be primitive otherwise ToString() method will be used, unless providing a property name)
+        /// </summary>
         public CacheKeyAttribute()
         {
 

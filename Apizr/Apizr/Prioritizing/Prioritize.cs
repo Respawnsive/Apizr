@@ -3,6 +3,9 @@ using Fusillade;
 
 namespace Apizr.Prioritizing
 {
+    /// <summary>
+    /// Prioritization helper
+    /// </summary>
     public class Prioritize
     {
         public static ILazyPrioritizedWebApi<T> For<T>(Priority priority, Func<T> valueFactory)

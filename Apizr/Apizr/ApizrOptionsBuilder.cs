@@ -11,61 +11,16 @@ using Refit;
 
 namespace Apizr
 {
-    public class ApizrOptionsBuilder : ApizrOptionsBuilderBase<ApizrOptions>, IApizrOptionsBuilder
+    public class ApizrOptionsBuilder : IApizrOptionsBuilder
     {
-        internal ApizrOptionsBuilder(ApizrOptions apizrOptions) : base(apizrOptions)
+        protected readonly ApizrOptions Options;
+
+        internal ApizrOptionsBuilder(ApizrOptions apizrOptions)
         {
+            Options = apizrOptions;
         }
 
-        public IApizrOptionsBuilder WithRefitSettings(RefitSettings refitSettings)
-            => WithRefitSettings(() => refitSettings);
-
-        public IApizrOptionsBuilder WithRefitSettings(Func<RefitSettings> refitSettingsFactory)
-        {
-            Options.RefitSettingsFactory = refitSettingsFactory;
-
-            return this;
-        }
-
-        public IApizrOptionsBuilder WithPolicyRegistry(IReadOnlyPolicyRegistry<string> policyRegistry)
-            => WithPolicyRegistry(() => policyRegistry);
-
-        public IApizrOptionsBuilder WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<string>> policyRegistryFactory)
-        {
-            Options.PolicyRegistryFactory = policyRegistryFactory;
-
-            return this;
-        }
-
-        public IApizrOptionsBuilder WithConnectivityHandler(IConnectivityHandler connectivityHandler)
-            => WithConnectivityHandler(() => connectivityHandler);
-
-        public IApizrOptionsBuilder WithConnectivityHandler(Func<IConnectivityHandler> connectivityHandlerFactory)
-        {
-            Options.ConnectivityHandlerFactory = connectivityHandlerFactory;
-
-            return this;
-        }
-
-        public IApizrOptionsBuilder WithCacheHandler(ICacheHandler cacheHandler)
-            => WithCacheHandler(() => cacheHandler);
-
-        public IApizrOptionsBuilder WithCacheHandler(Func<ICacheHandler> cacheHandlerFactory)
-        {
-            Options.CacheHandlerFactory = cacheHandlerFactory;
-
-            return this;
-        }
-
-        public IApizrOptionsBuilder WithLogHandler(ILogHandler logHandler)
-            => WithLogHandler(() => logHandler);
-
-        public IApizrOptionsBuilder WithLogHandler(Func<ILogHandler> logHandlerFactory)
-        {
-            Options.LogHandlerFactory = logHandlerFactory;
-
-            return this;
-        }
+        public IApizrOptions ApizrOptions => Options;
 
         public IApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(
             TAuthenticationHandler authenticationHandler) where TAuthenticationHandler : AuthenticationHandlerBase
@@ -119,6 +74,56 @@ namespace Apizr
                     settingsServiceFactory, tokenProperty,
                     tokenServiceFactory, refreshTokenMethod));
             Options.DelegatingHandlersFactories.Add(authenticationHandler);
+
+            return this;
+        }
+
+        public IApizrOptionsBuilder WithRefitSettings(RefitSettings refitSettings)
+            => WithRefitSettings(() => refitSettings);
+
+        public IApizrOptionsBuilder WithRefitSettings(Func<RefitSettings> refitSettingsFactory)
+        {
+            Options.RefitSettingsFactory = refitSettingsFactory;
+
+            return this;
+        }
+
+        public IApizrOptionsBuilder WithPolicyRegistry(IReadOnlyPolicyRegistry<string> policyRegistry)
+            => WithPolicyRegistry(() => policyRegistry);
+
+        public IApizrOptionsBuilder WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<string>> policyRegistryFactory)
+        {
+            Options.PolicyRegistryFactory = policyRegistryFactory;
+
+            return this;
+        }
+
+        public IApizrOptionsBuilder WithConnectivityHandler(IConnectivityHandler connectivityHandler)
+            => WithConnectivityHandler(() => connectivityHandler);
+
+        public IApizrOptionsBuilder WithConnectivityHandler(Func<IConnectivityHandler> connectivityHandlerFactory)
+        {
+            Options.ConnectivityHandlerFactory = connectivityHandlerFactory;
+
+            return this;
+        }
+
+        public IApizrOptionsBuilder WithCacheHandler(ICacheHandler cacheHandler)
+            => WithCacheHandler(() => cacheHandler);
+
+        public IApizrOptionsBuilder WithCacheHandler(Func<ICacheHandler> cacheHandlerFactory)
+        {
+            Options.CacheHandlerFactory = cacheHandlerFactory;
+
+            return this;
+        }
+
+        public IApizrOptionsBuilder WithLogHandler(ILogHandler logHandler)
+            => WithLogHandler(() => logHandler);
+
+        public IApizrOptionsBuilder WithLogHandler(Func<ILogHandler> logHandlerFactory)
+        {
+            Options.LogHandlerFactory = logHandlerFactory;
 
             return this;
         }

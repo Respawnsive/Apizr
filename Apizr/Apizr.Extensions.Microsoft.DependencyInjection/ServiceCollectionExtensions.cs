@@ -19,15 +19,38 @@ namespace Apizr
 {
     public static class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// Register <see cref="IApizrManager{TWebApi}"/>
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api interface to manage</typeparam>
+        /// <param name="services">The service collection</param>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <returns></returns>
         public static IServiceCollection AddApizr<TWebApi>(this IServiceCollection services,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
             AddApizr(services, typeof(TWebApi), typeof(ApizrManager<TWebApi>),
                 optionsBuilder);
+
+        /// <summary>
+        /// Register <see cref="IApizrManager{webApiType}"/>
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="webApiType">The web api interface type to manage</param>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <returns></returns>
         public static IServiceCollection AddApizr(this IServiceCollection services, Type webApiType,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
             AddApizr(services, webApiType, typeof(ApizrManager<>).MakeGenericType(webApiType),
                 optionsBuilder);
 
+        /// <summary>
+        /// Register a custom <see cref="IApizrManager{webApiType}"/>
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="webApiType">The web api interface type to manage</param>
+        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{webApiType}"/> implementation type</param>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <returns></returns>
         public static IServiceCollection AddApizr(
             this IServiceCollection services, Type webApiType, Type apizrManagerType, Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
         {
@@ -50,10 +73,10 @@ namespace Apizr
 
                         if (apizrOptions.PolicyRegistryKeys != null && apizrOptions.PolicyRegistryKeys.Any())
                         {
-                            IPolicyRegistry<string> policyRegistry = null;
+                            IReadOnlyPolicyRegistry<string> policyRegistry = null;
                             try
                             {
-                                policyRegistry = serviceProvider.GetRequiredService<IPolicyRegistry<string>>();
+                                policyRegistry = serviceProvider.GetRequiredService<IReadOnlyPolicyRegistry<string>>();
                             }
                             catch (Exception)
                             {
@@ -110,7 +133,7 @@ namespace Apizr
                                 ?.Invoke(new object[]
                                 {
                                     new Func<object>(() => RestService.For(apizrOptions.WebApiType, client,
-                                        apizrOptions.RefitSettingsFactory()))
+                                        apizrOptions.RefitSettingsFactory(serviceProvider)))
                                 }));
 
                 if (apizrOptions.BaseAddress != null)

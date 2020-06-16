@@ -14,20 +14,13 @@ namespace Apizr
     /// <summary>
     /// The options builder
     /// </summary>
-    /// <typeparam name="TApizrOptions">Options built with options builder</typeparam>
-    public interface IApizrOptionsBuilder<out TApizrOptions> where TApizrOptions : class, IApizrOptions
+    public interface IApizrOptionsBuilder
     {
         /// <summary>
         /// Apizr options
         /// </summary>
         IApizrOptions ApizrOptions { get; }
-    }
 
-    /// <summary>
-    /// The options builder
-    /// </summary>
-    public interface IApizrOptionsBuilder : IApizrOptionsBuilder<ApizrOptions>
-    {
         /// <summary>
         /// Provide a method to refresh the authorization token when needed
         /// </summary>

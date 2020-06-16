@@ -14,13 +14,16 @@ using Refit;
 
 namespace Apizr
 {
-    public class ApizrExtendedOptionsBuilder : ApizrOptionsBuilderBase<ApizrExtendedOptions>, IApizrExtendedOptionsBuilder
+    public class ApizrExtendedOptionsBuilder : IApizrExtendedOptionsBuilder
     {
-        public ApizrExtendedOptionsBuilder(ApizrExtendedOptions apizrOptions) : base(apizrOptions)
+        protected readonly ApizrExtendedOptions Options;
+
+        public ApizrExtendedOptionsBuilder(ApizrExtendedOptions apizrOptions)
         {
+            Options = apizrOptions;
         }
 
-        public new IApizrExtendedOptions ApizrOptions => Options;
+        public IApizrExtendedOptions ApizrOptions => Options;
 
         public IApizrExtendedOptionsBuilder ConfigureHttpClientBuilder(Action<IHttpClientBuilder> httpClientBuilder)
         {
@@ -38,10 +41,10 @@ namespace Apizr
             return this;
         }
 
-        public IApizrExtendedOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<ILogHandler, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase
+        public IApizrExtendedOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(
+            Func<IServiceProvider, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase
         {
-            var authenticationHandlerExtendedFactory = new Func<IServiceProvider, TAuthenticationHandler>(serviceProvider => authenticationHandlerFactory.Invoke(serviceProvider.GetRequiredService<ILogHandler>()));
-            Options.DelegatingHandlersExtendedFactories.Add(authenticationHandlerExtendedFactory);
+            Options.DelegatingHandlersExtendedFactories.Add(authenticationHandlerFactory);
 
             return this;
         }
@@ -68,14 +71,11 @@ namespace Apizr
             return this;
         }
 
-        public IApizrExtendedOptionsBuilder WithPolicyRegistry(Func<IPolicyRegistry<string>> policyRegistryFactory)
-        {
-            Options.PolicyRegistryFactory = policyRegistryFactory;
+        public IApizrExtendedOptionsBuilder WithRefitSettings(RefitSettings refitSettings)
+            => WithRefitSettings(_ => refitSettings);
 
-            return this;
-        }
-
-        public IApizrExtendedOptionsBuilder WithRefitSettings(Func<RefitSettings> refitSettingsFactory)
+        public IApizrExtendedOptionsBuilder WithRefitSettings(
+            Func<IServiceProvider, RefitSettings> refitSettingsFactory)
         {
             Options.RefitSettingsFactory = refitSettingsFactory;
 

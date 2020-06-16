@@ -7,10 +7,12 @@ using Apizr.Connecting;
 using Apizr.Logging;
 using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
+using Polly.Registry;
+using Refit;
 
 namespace Apizr
 {
-    public class ApizrExtendedOptions : ApizrOptions, IApizrExtendedOptions
+    public class ApizrExtendedOptions : ApizrOptionsBase, IApizrExtendedOptions
     {
         public ApizrExtendedOptions(Type webApiType, Type apizrManagerType, Uri baseAddress,
             DecompressionMethods? decompressionMethods,
@@ -19,6 +21,7 @@ namespace Apizr
             httpTracerVerbosity, assemblyPolicyRegistryKeys, webApiPolicyRegistryKeys)
         {
             ApizrManagerType = apizrManagerType;
+            RefitSettingsFactory = _ => new RefitSettings();
             ConnectivityHandlerType = typeof(VoidConnectivityHandler);
             CacheHandlerType = typeof(VoidCacheHandler);
             LogHandlerType = typeof(DefaultLogHandler);
@@ -29,6 +32,7 @@ namespace Apizr
         public Type ConnectivityHandlerType { get; set; }
         public Type CacheHandlerType { get; set; }
         public Type LogHandlerType { get; set; }
+        public Func<IServiceProvider, RefitSettings> RefitSettingsFactory { get; set; }
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
         public IList<Func<IServiceProvider, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
     }

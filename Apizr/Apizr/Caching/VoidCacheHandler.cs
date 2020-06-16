@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Apizr.Caching
 {
-    public class VoidCacheProvider : ICacheProvider
+    public class VoidCacheHandler : ICacheHandler
     {
         public Task<T> Get<T>(string key, CancellationToken cancellationToken = default) => Task.FromResult(default(T));
         public Task Set(string key, object obj, TimeSpan? timeSpan = null, CancellationToken cancellationToken = default) => Task.CompletedTask;

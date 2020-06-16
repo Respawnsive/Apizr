@@ -8,11 +8,11 @@ using Apizr.Caching;
 
 namespace Apizr
 {
-    public class AkavacheCacheProvider : ICacheProvider
+    public class AkavacheCacheHandler : ICacheHandler
     {
-        public AkavacheCacheProvider()
+        public AkavacheCacheHandler()
         {
-            Registrations.Start($"{nameof(Apizr)}{nameof(AkavacheCacheProvider)}");
+            Registrations.Start($"{nameof(Apizr)}{nameof(AkavacheCacheHandler)}");
         }
 
         public Task Set(string key, object value, TimeSpan? lifeSpan = null,

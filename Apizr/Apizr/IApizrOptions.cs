@@ -57,9 +57,9 @@ namespace Apizr
         Func<IConnectivityHandler> ConnectivityHandlerFactory { get; }
 
         /// <summary>
-        /// Cache provider factory
+        /// Cache handler factory
         /// </summary>
-        Func<ICacheProvider> CacheProviderFactory { get; }
+        Func<ICacheHandler> CacheHandlerFactory { get; }
 
         /// <summary>
         /// Log handler factory

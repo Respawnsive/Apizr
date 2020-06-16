@@ -29,9 +29,9 @@ namespace Apizr
             if(isVoidConnectivityHandlerRegistered)
                 services.Replace(new ServiceDescriptor(typeof(IConnectivityHandler), typeof(ShinyConnectivityHandler), ServiceLifetime.Singleton));
 
-            var isVoidCacheProviderRegistered = services.Any(x => x.ImplementationType == typeof(VoidCacheProvider));
-            if (isVoidCacheProviderRegistered)
-                services.Replace(new ServiceDescriptor(typeof(ICacheProvider), typeof(ShinyCacheProvider), ServiceLifetime.Singleton));
+            var isVoidCacheHandlerRegistered = services.Any(x => x.ImplementationType == typeof(VoidCacheHandler));
+            if (isVoidCacheHandlerRegistered)
+                services.Replace(new ServiceDescriptor(typeof(ICacheHandler), typeof(ShinyCacheHandler), ServiceLifetime.Singleton));
 
             var isDefaultLogHandlerRegistered = services.Any(x => x.ImplementationType == typeof(DefaultLogHandler));
             if (isDefaultLogHandlerRegistered)

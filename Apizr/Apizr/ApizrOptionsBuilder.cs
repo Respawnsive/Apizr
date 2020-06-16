@@ -47,12 +47,12 @@ namespace Apizr
             return this;
         }
 
-        public IApizrOptionsBuilder WithCacheProvider(ICacheProvider cacheProvider)
-            => WithCacheProvider(() => cacheProvider);
+        public IApizrOptionsBuilder WithCacheHandler(ICacheHandler cacheHandler)
+            => WithCacheHandler(() => cacheHandler);
 
-        public IApizrOptionsBuilder WithCacheProvider(Func<ICacheProvider> cacheProviderFactory)
+        public IApizrOptionsBuilder WithCacheHandler(Func<ICacheHandler> cacheHandlerFactory)
         {
-            Options.CacheProviderFactory = cacheProviderFactory;
+            Options.CacheHandlerFactory = cacheHandlerFactory;
 
             return this;
         }

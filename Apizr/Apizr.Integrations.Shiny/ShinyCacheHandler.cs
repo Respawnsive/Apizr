@@ -6,11 +6,11 @@ using Shiny.Caching;
 
 namespace Apizr
 {
-    public class ShinyCacheProvider : ICacheProvider
+    public class ShinyCacheHandler : ICacheHandler
     {
         private readonly ICache _shinyCache;
 
-        public ShinyCacheProvider(ICache shinyCache)
+        public ShinyCacheHandler(ICache shinyCache)
         {
             _shinyCache = shinyCache;
         }

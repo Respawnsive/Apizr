@@ -138,18 +138,18 @@ namespace Apizr
         IApizrOptionsBuilder WithConnectivityHandler(Func<IConnectivityHandler> connectivityHandlerFactory);
 
         /// <summary>
-        /// Provide a cache provider to cache data
+        /// Provide a cache handler to cache data
         /// </summary>
-        /// <param name="cacheProvider">An <see cref="ICacheProvider"/> mapping implementation instance</param>
+        /// <param name="cacheHandler">An <see cref="ICacheHandler"/> mapping implementation instance</param>
         /// <returns></returns>
-        IApizrOptionsBuilder WithCacheProvider(ICacheProvider cacheProvider);
+        IApizrOptionsBuilder WithCacheHandler(ICacheHandler cacheHandler);
 
         /// <summary>
-        /// Provide a cache provider to cache data
+        /// Provide a cache handler to cache data
         /// </summary>
-        /// <param name="cacheProviderFactory">An <see cref="ICacheProvider"/> mapping implementation instance factory</param>
+        /// <param name="cacheHandlerFactory">An <see cref="ICacheHandler"/> mapping implementation instance factory</param>
         /// <returns></returns>
-        IApizrOptionsBuilder WithCacheProvider(Func<ICacheProvider> cacheProviderFactory);
+        IApizrOptionsBuilder WithCacheHandler(Func<ICacheHandler> cacheHandlerFactory);
 
         /// <summary>
         /// Provide a logging handler to log it all

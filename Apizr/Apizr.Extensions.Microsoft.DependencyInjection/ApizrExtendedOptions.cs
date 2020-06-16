@@ -20,14 +20,14 @@ namespace Apizr
         {
             ApizrManagerType = apizrManagerType;
             ConnectivityHandlerType = typeof(VoidConnectivityHandler);
-            CacheProviderType = typeof(VoidCacheProvider);
+            CacheHandlerType = typeof(VoidCacheHandler);
             LogHandlerType = typeof(DefaultLogHandler);
             DelegatingHandlersExtendedFactories = new List<Func<IServiceProvider, DelegatingHandler>>();
         }
 
         public Type ApizrManagerType { get; }
         public Type ConnectivityHandlerType { get; set; }
-        public Type CacheProviderType { get; set; }
+        public Type CacheHandlerType { get; set; }
         public Type LogHandlerType { get; set; }
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
         public IList<Func<IServiceProvider, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }

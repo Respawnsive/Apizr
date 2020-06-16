@@ -9,7 +9,7 @@ namespace Apizr
     {
         Type ApizrManagerType { get; }
         Type ConnectivityHandlerType { get; }
-        Type CacheProviderType { get; }
+        Type CacheHandlerType { get; }
         Type LogHandlerType { get; }
         Action<IHttpClientBuilder> HttpClientBuilder { get; }
         IList<Func<IServiceProvider, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }

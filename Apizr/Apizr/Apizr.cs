@@ -27,8 +27,8 @@ namespace Apizr
         public static ApizrManager<TWebApi> For<TWebApi>(
             Action<IApizrOptionsBuilder> optionsBuilder = null) =>
             For<TWebApi, ApizrManager<TWebApi>>(
-                (lazyWebApis, connectivityHandler, cacheProvider, logHandler, policyRegistry) =>
-                    new ApizrManager<TWebApi>(lazyWebApis, connectivityHandler, cacheProvider, logHandler, policyRegistry), optionsBuilder);
+                (lazyWebApis, connectivityHandler, cacheHandler, logHandler, policyRegistry) =>
+                    new ApizrManager<TWebApi>(lazyWebApis, connectivityHandler, cacheHandler, logHandler, policyRegistry), optionsBuilder);
 
         /// <summary>
         /// Create a <see cref="TApizrManager"/> instance for a managed <see cref="TWebApi"/>
@@ -39,7 +39,7 @@ namespace Apizr
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
         public static TApizrManager For<TWebApi, TApizrManager>(
-            Func<IEnumerable<ILazyPrioritizedWebApi<TWebApi>>, IConnectivityHandler, ICacheProvider, ILogHandler, IReadOnlyPolicyRegistry<string>,
+            Func<IEnumerable<ILazyPrioritizedWebApi<TWebApi>>, IConnectivityHandler, ICacheHandler, ILogHandler, IReadOnlyPolicyRegistry<string>,
                 TApizrManager> apizrManagerFactory,
             Action<IApizrOptionsBuilder> optionsBuilder = null)
         where TApizrManager : IApizrManager<TWebApi>
@@ -105,7 +105,7 @@ namespace Apizr
                 lazyWebApis.Add(lazyWebApi);
             }
 
-            var apizrManager = apizrManagerFactory(lazyWebApis, apizrOptions.ConnectivityHandlerFactory.Invoke(), apizrOptions.CacheProviderFactory.Invoke(), apizrOptions.LogHandlerFactory.Invoke(), apizrOptions.PolicyRegistryFactory.Invoke());
+            var apizrManager = apizrManagerFactory(lazyWebApis, apizrOptions.ConnectivityHandlerFactory.Invoke(), apizrOptions.CacheHandlerFactory.Invoke(), apizrOptions.LogHandlerFactory.Invoke(), apizrOptions.PolicyRegistryFactory.Invoke());
 
             return apizrManager;
         }

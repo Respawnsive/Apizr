@@ -28,7 +28,7 @@ namespace Apizr
             PolicyRegistryFactory = () => new PolicyRegistry();
             RefitSettingsFactory = () => new RefitSettings();
             ConnectivityHandlerFactory = () => new VoidConnectivityHandler();
-            CacheProviderFactory = () => new VoidCacheProvider();
+            CacheHandlerFactory = () => new VoidCacheHandler();
             LogHandlerFactory = () => new DefaultLogHandler();
             DelegatingHandlersFactories = new List<Func<ILogHandler, DelegatingHandler>>();
         }
@@ -41,7 +41,7 @@ namespace Apizr
         public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set;  }
         public Func<RefitSettings> RefitSettingsFactory { get; set; }
         public Func<IConnectivityHandler> ConnectivityHandlerFactory { get; set; }
-        public Func<ICacheProvider> CacheProviderFactory { get; set; }
+        public Func<ICacheHandler> CacheHandlerFactory { get; set; }
         public Func<ILogHandler> LogHandlerFactory { get; set; }
         public IList<Func<ILogHandler, DelegatingHandler>> DelegatingHandlersFactories { get; }
     }

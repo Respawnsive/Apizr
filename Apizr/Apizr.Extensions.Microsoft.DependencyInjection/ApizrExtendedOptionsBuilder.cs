@@ -97,17 +97,17 @@ namespace Apizr
             return this;
         }
 
-        public IApizrExtendedOptionsBuilder WithCacheProvider<TCacheProvider>()
-            where TCacheProvider : class, ICacheProvider
-            => WithCacheProvider(typeof(TCacheProvider));
+        public IApizrExtendedOptionsBuilder WithCacheHandler<TCacheHandler>()
+            where TCacheHandler : class, ICacheHandler
+            => WithCacheHandler(typeof(TCacheHandler));
 
-        public IApizrExtendedOptionsBuilder WithCacheProvider(Type cacheProviderType)
+        public IApizrExtendedOptionsBuilder WithCacheHandler(Type cacheHandlerType)
         {
-            if (!typeof(ICacheProvider).IsAssignableFrom(cacheProviderType))
+            if (!typeof(ICacheHandler).IsAssignableFrom(cacheHandlerType))
                 throw new ArgumentException(
-                    $"Your cache provider class must inherit from {nameof(ICacheProvider)} interface or derived");
+                    $"Your cache handler class must inherit from {nameof(ICacheHandler)} interface or derived");
 
-            Options.CacheProviderType = cacheProviderType;
+            Options.CacheHandlerType = cacheHandlerType;
 
             return this;
         }

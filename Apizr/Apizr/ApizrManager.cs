@@ -21,19 +21,19 @@ namespace Apizr
 {
     public class ApizrManager<TWebApi> : IApizrManager<TWebApi>
     {
-        readonly Dictionary<MethodCacheDetails, MethodCacheAttributes> _cacheableMethodsSet;
-        readonly IEnumerable<ILazyPrioritizedWebApi<TWebApi>> _webApis;
-        readonly IConnectivityHandler _connectivityHandler;
-        readonly ICacheProvider _cacheProvider;
+        private readonly Dictionary<MethodCacheDetails, MethodCacheAttributes> _cacheableMethodsSet;
+        private readonly IEnumerable<ILazyPrioritizedWebApi<TWebApi>> _webApis;
+        private readonly IConnectivityHandler _connectivityHandler;
+        private readonly ICacheHandler _cacheHandler;
         private readonly ILogHandler _logHandler;
-        readonly IReadOnlyPolicyRegistry<string> _policyRegistry;
+        private readonly IReadOnlyPolicyRegistry<string> _policyRegistry;
 
-        public ApizrManager(IEnumerable<ILazyPrioritizedWebApi<TWebApi>> webApis, IConnectivityHandler connectivityHandler, ICacheProvider cacheProvider, ILogHandler logHandler, IReadOnlyPolicyRegistry<string> policyRegistry)
+        public ApizrManager(IEnumerable<ILazyPrioritizedWebApi<TWebApi>> webApis, IConnectivityHandler connectivityHandler, ICacheHandler cacheHandler, ILogHandler logHandler, IReadOnlyPolicyRegistry<string> policyRegistry)
         {
             _cacheableMethodsSet = new Dictionary<MethodCacheDetails, MethodCacheAttributes>();
             _webApis = webApis;
             _connectivityHandler = connectivityHandler;
-            _cacheProvider = cacheProvider;
+            _cacheHandler = cacheHandler;
             _logHandler = logHandler;
             _policyRegistry = policyRegistry;
         }
@@ -58,13 +58,13 @@ namespace Apizr
             if (IsMethodCacheable(executeApiMethod))
             {
                 _logHandler.Write($"Apizr - {methodName}: Called method is cacheable");
-                if (_cacheProvider is VoidCacheProvider)
-                    _logHandler.Write($"Apizr - {methodName}: You ask for cache but doesn't provide any cache provider. {nameof(VoidCacheProvider)} will fake it.");
+                if (_cacheHandler is VoidCacheHandler)
+                    _logHandler.Write($"Apizr - {methodName}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
 
                 cacheKey = GetCacheKey(executeApiMethod);
                 _logHandler.Write($"Apizr - {methodName}: Used cache key is {cacheKey}");
 
-                result = await _cacheProvider.Get<TResult>(cacheKey, cancellationToken);
+                result = await _cacheHandler.Get<TResult>(cacheKey, cancellationToken);
                 if(!Equals(result, default(TResult)))
                     _logHandler.Write($"Apizr - {methodName}: Some cached data found for this cache key");
 
@@ -76,7 +76,7 @@ namespace Apizr
                 try
                 {
                     if (_connectivityHandler is VoidConnectivityHandler)
-                        _logHandler.Write($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity provider");
+                        _logHandler.Write($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity handler");
                     else if (!_connectivityHandler.IsConnected())
                     {
                         _logHandler.Write($"Apizr - {methodName}: Connectivity check failed, throw {nameof(IOException)}");
@@ -111,11 +111,11 @@ namespace Apizr
                     throw new ApizrException<TResult>(e, result);
                 }
 
-                if (result != null && _cacheProvider != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttributes != null)
                 {
                     _logHandler.Write($"Apizr - {methodName}: Caching result");
-                    await _cacheProvider.Set(cacheKey, result, cacheAttributes.CacheAttribute.LifeSpan, cancellationToken);
+                    await _cacheHandler.Set(cacheKey, result, cacheAttributes.CacheAttribute.LifeSpan, cancellationToken);
                 }
             }
 
@@ -137,7 +137,7 @@ namespace Apizr
             try
             {
                 if (_connectivityHandler is VoidConnectivityHandler)
-                    _logHandler.Write($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity provider");
+                    _logHandler.Write($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity handler");
                 else if (!_connectivityHandler.IsConnected())
                 {
                     _logHandler.Write($"Apizr - {methodName}: Connectivity check failed, throw {nameof(IOException)}");
@@ -172,12 +172,12 @@ namespace Apizr
 
         public async Task<bool> ClearCacheAsync(CancellationToken cancellationToken = default)
         {
-            if (_cacheProvider is VoidCacheProvider)
-                _logHandler.Write($"Apizr: You ask for cache but doesn't provide any cache provider. {nameof(VoidCacheProvider)} will fake it.");
+            if (_cacheHandler is VoidCacheHandler)
+                _logHandler.Write($"Apizr: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
 
             try
             {
-                await _cacheProvider.Clear(cancellationToken);
+                await _cacheHandler.Clear(cancellationToken);
                 _logHandler.Write("Apizr: Cache cleared");
 
                 return true;
@@ -198,8 +198,8 @@ namespace Apizr
             var methodName = $"{typeof(TWebApi)}.{methodCallExpression.Method.Name}";
             _logHandler.Write($"Apizr: Calling cache clear for method {methodName}");
 
-            if (_cacheProvider is VoidCacheProvider)
-                _logHandler.Write($"Apizr - {methodName}: You ask for cache but doesn't provide any cache provider. {nameof(VoidCacheProvider)} will fake it.");
+            if (_cacheHandler is VoidCacheHandler)
+                _logHandler.Write($"Apizr - {methodName}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
 
             try
             {
@@ -210,7 +210,7 @@ namespace Apizr
                     var cacheKey = GetCacheKey(executeApiMethod);
                     _logHandler.Write($"Apizr - {methodName}: Clearing cache for key {cacheKey}");
 
-                    var success = await _cacheProvider.Remove(cacheKey, cancellationToken);
+                    var success = await _cacheHandler.Remove(cacheKey, cancellationToken);
                     _logHandler.Write(success
                         ? $"Apizr - {methodName}: Clearing cache for key {cacheKey} succeed"
                         : $"Apizr - {methodName}: Clearing cache for key {cacheKey} failed");

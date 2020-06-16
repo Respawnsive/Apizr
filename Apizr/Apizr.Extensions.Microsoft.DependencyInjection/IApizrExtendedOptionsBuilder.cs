@@ -27,8 +27,8 @@ namespace Apizr
         IApizrExtendedOptionsBuilder WithRefitSettings(Func<RefitSettings> refitSettingsFactory);
         IApizrExtendedOptionsBuilder WithConnectivityHandler<TConnectivityHandler>() where TConnectivityHandler : class, IConnectivityHandler;
         IApizrExtendedOptionsBuilder WithConnectivityHandler(Type connectivityHandlerType);
-        IApizrExtendedOptionsBuilder WithCacheProvider<TCacheProvider>() where TCacheProvider : class, ICacheProvider;
-        IApizrExtendedOptionsBuilder WithCacheProvider(Type cacheProviderType);
+        IApizrExtendedOptionsBuilder WithCacheHandler<TCacheHandler>() where TCacheHandler : class, ICacheHandler;
+        IApizrExtendedOptionsBuilder WithCacheHandler(Type cacheHandlerType);
         IApizrExtendedOptionsBuilder WithLogHandler<TLogHandler>() where TLogHandler : class, ILogHandler;
         IApizrExtendedOptionsBuilder WithLogHandler(Type logHandlerType);
     }

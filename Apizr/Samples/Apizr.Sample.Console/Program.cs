@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Policing;
 using Apizr.Sample.Api;
-using Apizr.Sample.Api.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Extensions.Http;
@@ -59,7 +55,7 @@ namespace Apizr.Sample.Console
                 var services = new ServiceCollection();
 
                 services.AddPolicyRegistry(registry);
-                services.AddApizr<IReqResService>(optionsBuilder => optionsBuilder.WithCacheProvider<AkavacheCacheProvider>());
+                services.AddApizr<IReqResService>(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>());
 
                 var container = services.BuildServiceProvider(true);
                 var scope = container.CreateScope();

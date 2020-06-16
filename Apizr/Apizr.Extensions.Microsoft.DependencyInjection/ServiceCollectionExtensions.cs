@@ -127,7 +127,7 @@ namespace Apizr
 
             services.AddSingleton(typeof(IConnectivityHandler), apizrOptions.ConnectivityHandlerType);
 
-            services.AddSingleton(typeof(ICacheProvider), apizrOptions.CacheProviderType);
+            services.AddSingleton(typeof(ICacheHandler), apizrOptions.CacheHandlerType);
 
             services.AddSingleton(typeof(ILogHandler), apizrOptions.LogHandlerType);
 

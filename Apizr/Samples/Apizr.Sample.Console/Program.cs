@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Integrations.MonkeyCache;
 using Apizr.Policing;
 using Apizr.Sample.Api;
+using Apizr.Sample.Api.Models;
 using Microsoft.Extensions.DependencyInjection;
+using MonkeyCache.FileStore;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
@@ -45,7 +48,13 @@ namespace Apizr.Sample.Console
 
             if (configChoice == 1)
             {
-                _reqResService = Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(registry));
+                _reqResService = Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(registry)
+                    .WithCacheHandler(
+                        () =>
+                        {
+                            Barrel.ApplicationId = nameof(Program);
+                            return new MonkeyCacheHandler(Barrel.Current);
+                        }));
 
                 System.Console.WriteLine("");
                 System.Console.WriteLine("Initialization succeed :)");
@@ -66,40 +75,67 @@ namespace Apizr.Sample.Console
                 System.Console.WriteLine("Initialization succeed :)");
             }
 
+            UserList userList;
             try
             {
                 System.Console.WriteLine("");
-                var cancellationToken = CancellationToken.None;
-                var userList = await _reqResService.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), cancellationToken);
-                if (userList.Data != null)
-                {
-                    System.Console.WriteLine("Choose one of available users:");
-                    foreach (var user in userList.Data)
-                    {
-                        System.Console.WriteLine($"{user.Id} - {user.FirstName} {user.LastName}");
-                    }
-
-                    var readUserChoice = System.Console.ReadLine();
-                    var userChoice = Convert.ToInt32(readUserChoice);
-                    var userDetails = await _reqResService.ExecuteAsync((ct, api) => api.GetUserAsync(userChoice, ct),
-                        cancellationToken);
-                    if (userDetails != null)
-                    {
-                        System.Console.WriteLine("");
-                        System.Console.WriteLine($"{nameof(userDetails.User.Id)}: {userDetails.User.Id}");
-                        System.Console.WriteLine($"{nameof(userDetails.User.FirstName)}: {userDetails.User.FirstName}");
-                        System.Console.WriteLine($"{nameof(userDetails.User.LastName)}: {userDetails.User.LastName}");
-                        System.Console.WriteLine($"{nameof(userDetails.User.Avatar)}: {userDetails.User.Avatar}");
-                        System.Console.WriteLine($"{nameof(userDetails.Ad.Company)}: {userDetails.Ad.Company}");
-                        System.Console.WriteLine($"{nameof(userDetails.Ad.Url)}: {userDetails.Ad.Url}");
-                        System.Console.WriteLine($"{nameof(userDetails.Ad.Text)}: {userDetails.Ad.Text}");
-                    }
-                }
+                userList = await _reqResService.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
             }
-            catch (ApizrException e)
+            catch (ApizrException<UserList> e)
             {
                 System.Console.WriteLine("");
                 System.Console.WriteLine(e.Message);
+
+                if (e.CachedResult == null)
+                    return;
+
+                System.Console.WriteLine("");
+                System.Console.WriteLine($"Loading {nameof(UserList)} from cache...");
+                userList = e.CachedResult;
+            }
+
+            if (userList?.Data != null)
+            {
+                System.Console.WriteLine("");
+                System.Console.WriteLine("Choose one of available users:");
+                foreach (var user in userList.Data)
+                {
+                    System.Console.WriteLine($"{user.Id} - {user.FirstName} {user.LastName}");
+                }
+
+                var readUserChoice = System.Console.ReadLine();
+                var userChoice = Convert.ToInt32(readUserChoice);
+
+                UserDetails userDetails;
+                try
+                {
+                    userDetails = await _reqResService.ExecuteAsync((ct, api) => api.GetUserAsync(userChoice, ct),
+                                CancellationToken.None);
+                }
+                catch (ApizrException<UserDetails> e)
+                {
+                    System.Console.WriteLine("");
+                    System.Console.WriteLine(e.Message);
+
+                    if (e.CachedResult == null)
+                        return;
+
+                    System.Console.WriteLine("");
+                    System.Console.WriteLine($"Loading {nameof(UserDetails)} from cache...");
+                    userDetails = e.CachedResult;
+                }
+
+                if (userDetails != null)
+                {
+                    System.Console.WriteLine("");
+                    System.Console.WriteLine($"{nameof(userDetails.User.Id)}: {userDetails.User.Id}");
+                    System.Console.WriteLine($"{nameof(userDetails.User.FirstName)}: {userDetails.User.FirstName}");
+                    System.Console.WriteLine($"{nameof(userDetails.User.LastName)}: {userDetails.User.LastName}");
+                    System.Console.WriteLine($"{nameof(userDetails.User.Avatar)}: {userDetails.User.Avatar}");
+                    System.Console.WriteLine($"{nameof(userDetails.Ad.Company)}: {userDetails.Ad.Company}");
+                    System.Console.WriteLine($"{nameof(userDetails.Ad.Url)}: {userDetails.Ad.Url}");
+                    System.Console.WriteLine($"{nameof(userDetails.Ad.Text)}: {userDetails.Ad.Text}");
+                }
             }
         }
     }

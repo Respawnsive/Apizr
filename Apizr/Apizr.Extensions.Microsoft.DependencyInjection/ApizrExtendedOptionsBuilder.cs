@@ -71,6 +71,16 @@ namespace Apizr
             return this;
         }
 
+        public IApizrExtendedOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler)
+            => AddDelegatingHandler(_ => delegatingHandler);
+
+        public IApizrExtendedOptionsBuilder AddDelegatingHandler(Func<IServiceProvider, DelegatingHandler> delegatingHandlerFactory)
+        {
+            Options.DelegatingHandlersExtendedFactories.Add(delegatingHandlerFactory);
+
+            return this;
+        }
+
         public IApizrExtendedOptionsBuilder WithRefitSettings(RefitSettings refitSettings)
             => WithRefitSettings(_ => refitSettings);
 

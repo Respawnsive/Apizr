@@ -58,6 +58,16 @@ namespace Apizr
             return this;
         }
 
+        public IApizrOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler)
+            => AddDelegatingHandler(_ => delegatingHandler);
+
+        public IApizrOptionsBuilder AddDelegatingHandler(Func<ILogHandler, DelegatingHandler> delegatingHandlerFactory)
+        {
+            Options.DelegatingHandlersFactories.Add(delegatingHandlerFactory);
+
+            return this;
+        }
+
         public IApizrOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(
             TSettingsService settingsService,
             Expression<Func<TSettingsService, string>> tokenProperty, TTokenService tokenService,

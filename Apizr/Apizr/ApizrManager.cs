@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Largely inspired by Refit.Insane.PowerPack, but with more features
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;

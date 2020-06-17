@@ -63,6 +63,20 @@ namespace Apizr
         IApizrExtendedOptionsBuilder WithAuthenticationHandler<TSettingsService>(Expression<Func<TSettingsService, string>> tokenProperty, Func<HttpRequestMessage, Task<string>> refreshTokenFactory);
 
         /// <summary>
+        /// Add a custom delegating handler
+        /// </summary>
+        /// <param name="delegatingHandler">A delegating handler</param>
+        /// <returns></returns>
+        IApizrExtendedOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler);
+
+        /// <summary>
+        /// Add a custom delegating handler
+        /// </summary>
+        /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
+        /// <returns></returns>
+        IApizrExtendedOptionsBuilder AddDelegatingHandler(Func<IServiceProvider, DelegatingHandler> delegatingHandlerFactory);
+
+        /// <summary>
         /// Provide some Refit specific settings
         /// </summary>
         /// <param name="refitSettings">A <see cref="RefitSettings"/> instance</param>

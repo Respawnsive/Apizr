@@ -1,6 +1,7 @@
 ﻿using Apizr.Authenticating;
 using Refit;
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -87,6 +88,20 @@ namespace Apizr
         /// <param name="refreshTokenFactory">The method factory called to refresh the token</param>
         /// <returns></returns>
         IApizrOptionsBuilder WithAuthenticationHandler<TSettingsService>(Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> tokenProperty, Func<HttpRequestMessage, Task<string>> refreshTokenFactory);
+
+        /// <summary>
+        /// Add a custom delegating handler
+        /// </summary>
+        /// <param name="delegatingHandler">A delegating handler</param>
+        /// <returns></returns>
+        IApizrOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler);
+
+        /// <summary>
+        /// Add a custom delegating handler
+        /// </summary>
+        /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
+        /// <returns></returns>
+        IApizrOptionsBuilder AddDelegatingHandler(Func<ILogHandler, DelegatingHandler> delegatingHandlerFactory);
 
         /// <summary>
         /// Provide a policy registry

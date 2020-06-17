@@ -59,7 +59,7 @@ namespace Apizr
                     $"Your Apizr manager class must inherit from IApizrManager generic interface or derived");
 
             var apizrOptions = CreateApizrExtendedOptions(webApiType, apizrManagerType, optionsBuilder);
-            foreach (var priority in ((Priority[])Enum.GetValues(typeof(Priority))).Where(x => x != Priority.Explicit))
+            foreach (var priority in ((Priority[])Enum.GetValues(typeof(Priority))).Where(x => x != Priority.Explicit).OrderByDescending(priority => priority))
             {
                 var builder = services.AddHttpClient(ForType(apizrOptions.WebApiType, priority))
                     .ConfigurePrimaryHttpMessageHandler(serviceProvider =>
@@ -118,8 +118,8 @@ namespace Apizr
                             }
                         }
 
-                        foreach (var handlerExtendedFactory in apizrOptions.DelegatingHandlersExtendedFactories)
-                            handlerBuilder.AddHandler(handlerExtendedFactory.Invoke(serviceProvider));
+                        foreach (var delegatingHandlerExtendedFactory in apizrOptions.DelegatingHandlersExtendedFactories)
+                            handlerBuilder.AddHandler(delegatingHandlerExtendedFactory.Invoke(serviceProvider));
 
                         var innerHandler = handlerBuilder.Build();
                         var primaryMessageHandler = new RateLimitedHttpMessageHandler(innerHandler, priority);

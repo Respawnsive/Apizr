@@ -3,6 +3,8 @@ Refit based web api client management, but resilient (retry, connectivity, cache
 
 ## Libraries
 
+[Change Log - June 22, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
+
 |Project|NuGet|
 |-------|-----|
 |Apizr|[![NuGet](https://img.shields.io/nuget/v/Apizr.svg)](https://www.nuget.org/packages/Apizr/)|

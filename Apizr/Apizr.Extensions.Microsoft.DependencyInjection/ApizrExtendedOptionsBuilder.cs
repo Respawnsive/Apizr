@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,21 @@ namespace Apizr
         }
 
         public IApizrExtendedOptions ApizrOptions => Options;
+
+        public IApizrExtendedOptionsBuilder WithBaseAddress(string baseAddress)
+        {
+            if (Uri.TryCreate(baseAddress, UriKind.RelativeOrAbsolute, out var baseUri))
+                Options.BaseAddress = baseUri;
+
+            return this;
+        }
+
+        public IApizrExtendedOptionsBuilder WithDecompressionMethods(DecompressionMethods decompressionMethods)
+        {
+            Options.DecompressionMethods = decompressionMethods;
+
+            return this;
+        }
 
         public IApizrExtendedOptionsBuilder ConfigureHttpClientBuilder(Action<IHttpClientBuilder> httpClientBuilder)
         {

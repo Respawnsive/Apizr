@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Authenticating;
@@ -21,6 +22,21 @@ namespace Apizr
         }
 
         public IApizrOptions ApizrOptions => Options;
+
+        public IApizrOptionsBuilder WithBaseAddress(string baseAddress)
+        {
+            if (Uri.TryCreate(baseAddress, UriKind.RelativeOrAbsolute, out var baseUri))
+                Options.BaseAddress = baseUri;
+
+            return this;
+        }
+
+        public IApizrOptionsBuilder WithDecompressionMethods(DecompressionMethods decompressionMethods)
+        {
+            Options.DecompressionMethods = decompressionMethods;
+
+            return this;
+        }
 
         public IApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(
             TAuthenticationHandler authenticationHandler) where TAuthenticationHandler : AuthenticationHandlerBase

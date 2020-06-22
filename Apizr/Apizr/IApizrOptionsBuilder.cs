@@ -3,6 +3,7 @@ using Refit;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Caching;
@@ -15,20 +16,8 @@ namespace Apizr
     /// <summary>
     /// The options builder
     /// </summary>
-    public interface IApizrOptionsBuilder
+    public interface IApizrOptionsBuilder : IApizrOptionsBuilderBase<IApizrOptions, IApizrOptionsBuilder>
     {
-        /// <summary>
-        /// Apizr options
-        /// </summary>
-        IApizrOptions ApizrOptions { get; }
-
-        /// <summary>
-        /// Provide a method to refresh the authorization token when needed
-        /// </summary>
-        /// <param name="refreshTokenFactory">Refresh token method called when expired or empty</param>
-        /// <returns></returns>
-        IApizrOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshTokenFactory);
-
         /// <summary>
         /// Provide your own <see cref="AuthenticationHandlerBase"/> implementation
         /// </summary>
@@ -92,13 +81,6 @@ namespace Apizr
         /// <summary>
         /// Add a custom delegating handler
         /// </summary>
-        /// <param name="delegatingHandler">A delegating handler</param>
-        /// <returns></returns>
-        IApizrOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler);
-
-        /// <summary>
-        /// Add a custom delegating handler
-        /// </summary>
         /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
         /// <returns></returns>
         IApizrOptionsBuilder AddDelegatingHandler(Func<ILogHandler, DelegatingHandler> delegatingHandlerFactory);
@@ -116,13 +98,6 @@ namespace Apizr
         /// <param name="policyRegistryFactory">A policy registry instance factory</param>
         /// <returns></returns>
         IApizrOptionsBuilder WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<string>> policyRegistryFactory);
-
-        /// <summary>
-        /// Provide some Refit specific settings
-        /// </summary>
-        /// <param name="refitSettings">A <see cref="RefitSettings"/> instance</param>
-        /// <returns></returns>
-        IApizrOptionsBuilder WithRefitSettings(RefitSettings refitSettings);
 
         /// <summary>
         /// Provide some Refit specific settings

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,26 +15,14 @@ using Refit;
 
 namespace Apizr
 {
-    public interface IApizrExtendedOptionsBuilder
+    public interface IApizrExtendedOptionsBuilder : IApizrOptionsBuilderBase<IApizrExtendedOptions, IApizrExtendedOptionsBuilder>
     {
-        /// <summary>
-        /// Apizr options
-        /// </summary>
-        IApizrExtendedOptions ApizrOptions { get; }
-
         /// <summary>
         /// Adjust some HttpClient settings
         /// </summary>
         /// <param name="httpClientBuilder">The HttpClient builder</param>
         /// <returns></returns>
         IApizrExtendedOptionsBuilder ConfigureHttpClientBuilder(Action<IHttpClientBuilder> httpClientBuilder);
-
-        /// <summary>
-        /// Provide a method to refresh the authorization token when needed
-        /// </summary>
-        /// <param name="refreshTokenFactory">Refresh token method called when expired or empty</param>
-        /// <returns></returns>
-        IApizrExtendedOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshTokenFactory);
 
         /// <summary>
         /// Provide your own <see cref="AuthenticationHandlerBase"/> implementation
@@ -65,23 +54,9 @@ namespace Apizr
         /// <summary>
         /// Add a custom delegating handler
         /// </summary>
-        /// <param name="delegatingHandler">A delegating handler</param>
-        /// <returns></returns>
-        IApizrExtendedOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler);
-
-        /// <summary>
-        /// Add a custom delegating handler
-        /// </summary>
         /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
         /// <returns></returns>
         IApizrExtendedOptionsBuilder AddDelegatingHandler(Func<IServiceProvider, DelegatingHandler> delegatingHandlerFactory);
-
-        /// <summary>
-        /// Provide some Refit specific settings
-        /// </summary>
-        /// <param name="refitSettings">A <see cref="RefitSettings"/> instance</param>
-        /// <returns></returns>
-        IApizrExtendedOptionsBuilder WithRefitSettings(RefitSettings refitSettings);
 
         /// <summary>
         /// Provide some Refit specific settings

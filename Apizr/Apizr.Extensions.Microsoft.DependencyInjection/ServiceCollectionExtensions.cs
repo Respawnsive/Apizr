@@ -7,6 +7,7 @@ using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Policing;
 using Apizr.Prioritizing;
+using Apizr.Requesting;
 using Fusillade;
 using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,6 +42,33 @@ namespace Apizr
         public static IServiceCollection AddApizr(this IServiceCollection services, Type webApiType,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
             AddApizr(services, webApiType, typeof(ApizrManager<>).MakeGenericType(webApiType),
+                optionsBuilder);
+
+        /// <summary>
+        /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type, with key of type <see cref="TKey"/>
+        /// </summary>
+        /// <typeparam name="T">The object type to manage with crud api calls</typeparam>
+        /// <typeparam name="TKey">The object key type</typeparam>
+        /// <param name="services">The service collection</param>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <returns></returns>
+        public static IServiceCollection AddApizr<T, TKey>(this IServiceCollection services,
+            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) where T : class =>
+            AddApizr(services, typeof(ICrudApi<T, TKey>), typeof(ApizrManager<ICrudApi<T, TKey>>),
+                optionsBuilder);
+
+        /// <summary>
+        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type, with key of type <see cref="TKey"/>
+        /// </summary>
+        /// <typeparam name="T">The object type to manage with crud api calls</typeparam>
+        /// <typeparam name="TKey">The object key type</typeparam>
+        /// <param name="services">The service collection</param>
+        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <returns></returns>
+        public static IServiceCollection AddApizr<T, TKey>(this IServiceCollection services, Type apizrManagerType,
+            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) where T : class =>
+            AddApizr(services, typeof(ICrudApi<T, TKey>), apizrManagerType,
                 optionsBuilder);
 
         /// <summary>

@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Integrations.MonkeyCache;
 using Apizr.Policing;
+using Apizr.Requesting;
 using Apizr.Sample.Api;
 using Apizr.Sample.Api.Models;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +17,7 @@ namespace Apizr.Sample.Console
     class Program
     {
         private static IApizrManager<IReqResService> _reqResService;
-        private static IApizrManager<IReallyExcitingCrudApi<UserDetails, int>> _genericUserDetailsManager;
+        private static IApizrManager<ICrudApi<UserDetails, int>> _genericUserDetailsManager;
 
         static async Task Main(string[] args)
         {
@@ -55,7 +56,7 @@ namespace Apizr.Sample.Console
                     .WithCacheHandler(
                         () => new MonkeyCacheHandler(Barrel.Current)));
 
-                _genericUserDetailsManager = Apizr.For<IReallyExcitingCrudApi<UserDetails, int>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users")
+                _genericUserDetailsManager = Apizr.CrudFor<UserDetails, int>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users")
                     .WithPolicyRegistry(registry)
                     .WithCacheHandler(
                         () => new MonkeyCacheHandler(Barrel.Current)));
@@ -71,15 +72,15 @@ namespace Apizr.Sample.Console
 
                 services.AddApizr<IReqResService>(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>());
 
-                services.AddApizr<IReallyExcitingCrudApi<UserDetails, int>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users")
-                    .WithCacheHandler<AkavacheCacheHandler>());
+                services.AddApizr<UserDetails, int>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users")
+                    .WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation());
 
                 var container = services.BuildServiceProvider(true);
                 var scope = container.CreateScope();
 
                 _reqResService = scope.ServiceProvider.GetRequiredService<IApizrManager<IReqResService>>();
                 _genericUserDetailsManager =
-                    scope.ServiceProvider.GetRequiredService<IApizrManager<IReallyExcitingCrudApi<UserDetails, int>>>();
+                    scope.ServiceProvider.GetRequiredService<IApizrManager<ICrudApi<UserDetails, int>>>();
 
                 System.Console.WriteLine("");
                 System.Console.WriteLine("Initialization succeed :)");
@@ -119,7 +120,7 @@ namespace Apizr.Sample.Console
                 UserDetails userDetails;
                 try
                 {
-                    userDetails = await _genericUserDetailsManager.ExecuteAsync((ct, api) => api.ReadOne(userChoice, ct), CancellationToken.None);
+                    userDetails = await _genericUserDetailsManager.ExecuteAsync((ct, api) => api.Read(userChoice, ct), CancellationToken.None);
 
                     //userDetails = await _reqResService.ExecuteAsync((ct, api) => api.GetUserAsync(userChoice, ct), CancellationToken.None);
                 }

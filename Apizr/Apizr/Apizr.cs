@@ -8,6 +8,7 @@ using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Policing;
 using Apizr.Prioritizing;
+using Apizr.Requesting;
 using Fusillade;
 using HttpTracer;
 using Polly;
@@ -28,7 +29,40 @@ namespace Apizr
             Action<IApizrOptionsBuilder> optionsBuilder = null) =>
             For<TWebApi, ApizrManager<TWebApi>>(
                 (lazyWebApis, connectivityHandler, cacheHandler, logHandler, policyRegistry) =>
-                    new ApizrManager<TWebApi>(lazyWebApis, connectivityHandler, cacheHandler, logHandler, policyRegistry), optionsBuilder);
+                    new ApizrManager<TWebApi>(lazyWebApis, connectivityHandler, cacheHandler, logHandler,
+                        policyRegistry), optionsBuilder);
+
+        /// <summary>
+        /// Create a <see cref="ApizrManager{ICrudApi}"/> instance for <see cref="T"/> object type, with key of type <see cref="TKey"/>
+        /// </summary>
+        /// <typeparam name="T">The object type to manage with crud api calls</typeparam>
+        /// <typeparam name="TKey">The object key type</typeparam>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <returns></returns>
+        public static ApizrManager<ICrudApi<T, TKey>> CrudFor<T, TKey>(
+            Action<IApizrOptionsBuilder> optionsBuilder = null) where T : class =>
+            For<ICrudApi<T, TKey>, ApizrManager<ICrudApi<T, TKey>>>(
+                (lazyWebApis, connectivityHandler, cacheHandler, logHandler, policyRegistry) =>
+                    new ApizrManager<ICrudApi<T, TKey>>(lazyWebApis, connectivityHandler, cacheHandler, logHandler,
+                        policyRegistry), optionsBuilder);
+
+        /// <summary>
+        /// Create a <see cref="TApizrManager"/> instance for a managed crud api for <see cref="T"/> object with key <see cref="TKey"/>
+        /// </summary>
+        /// <typeparam name="T">The object type to manage with crud api calls</typeparam>
+        /// <typeparam name="TKey">The object key type</typeparam>
+        /// <typeparam name="TApizrManager">A custom <see cref="IApizrManager{ICrudApi}"/> implementation</typeparam>
+        /// <param name="apizrManagerFactory">The custom manager implementation instance factory</param>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <returns></returns>
+        public static TApizrManager CrudFor<T, TKey, TApizrManager>(
+            Func<IEnumerable<ILazyPrioritizedWebApi<ICrudApi<T, TKey>>>, IConnectivityHandler, ICacheHandler,
+                ILogHandler, IReadOnlyPolicyRegistry<string>,
+                TApizrManager> apizrManagerFactory,
+            Action<IApizrOptionsBuilder> optionsBuilder = null)
+            where T : class
+            where TApizrManager : IApizrManager<ICrudApi<T, TKey>> =>
+            For(apizrManagerFactory, optionsBuilder);
 
         /// <summary>
         /// Create a <see cref="TApizrManager"/> instance for a managed <see cref="TWebApi"/>

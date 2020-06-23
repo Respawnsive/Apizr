@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using HttpTracer;
 using Refit;
 
 namespace Apizr
@@ -28,6 +29,13 @@ namespace Apizr
         /// <param name="decompressionMethods">Decompression methods</param>
         /// <returns></returns>
         TApizrOptionsBuilder WithDecompressionMethods(DecompressionMethods decompressionMethods);
+
+        /// <summary>
+        /// Define http tracer verbosity (could be defined with TraceAttribute)
+        /// </summary>
+        /// <param name="httpTracerVerbosity">Http tracer verbosity</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithHttpTracing(HttpMessageParts httpTracerVerbosity);
 
         /// <summary>
         /// Provide a method to refresh the authorization token when needed

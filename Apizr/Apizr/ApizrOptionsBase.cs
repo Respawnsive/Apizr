@@ -23,7 +23,7 @@ namespace Apizr
         public Type WebApiType { get; }
         public Uri BaseAddress { get; set; }
         public DecompressionMethods DecompressionMethods { get; set; }
-        public HttpMessageParts HttpTracerVerbosity { get; }
+        public HttpMessageParts HttpTracerVerbosity { get; set; }
         public string[] PolicyRegistryKeys { get; }
     }
 }

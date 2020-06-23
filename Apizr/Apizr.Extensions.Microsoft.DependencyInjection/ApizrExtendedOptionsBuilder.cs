@@ -9,6 +9,7 @@ using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Logging;
+using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
 using Polly.Registry;
 using Refit;
@@ -37,6 +38,13 @@ namespace Apizr
         public IApizrExtendedOptionsBuilder WithDecompressionMethods(DecompressionMethods decompressionMethods)
         {
             Options.DecompressionMethods = decompressionMethods;
+
+            return this;
+        }
+
+        public IApizrExtendedOptionsBuilder WithHttpTracing(HttpMessageParts httpTracerVerbosity)
+        {
+            Options.HttpTracerVerbosity = httpTracerVerbosity;
 
             return this;
         }

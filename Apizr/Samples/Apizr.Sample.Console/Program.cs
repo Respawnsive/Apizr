@@ -72,8 +72,8 @@ namespace Apizr.Sample.Console
 
                 services.AddApizr<IReqResService>(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>());
 
-                services.AddApizr<UserDetails, int>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users")
-                    .WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation());
+                //services.AddCrudApizr<UserDetails, int>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>());
+                services.AddCrudApizr(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>(), typeof(UserDetails));
 
                 var container = services.BuildServiceProvider(true);
                 var scope = container.CreateScope();

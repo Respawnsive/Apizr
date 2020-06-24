@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Apizr.Requesting;
 using Newtonsoft.Json;
 
 namespace Apizr.Sample.Api.Models
 {
+    [Crud("https://reqres.in/api/users", typeof(int))]
     public class UserDetails
     {
         [JsonProperty("data")]

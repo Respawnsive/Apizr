@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Apizr.Policing;
 using Apizr.Sample.Api;
+using Apizr.Sample.Api.Models;
 using Apizr.Sample.Mobile.Services.Settings;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
@@ -45,6 +46,7 @@ namespace Apizr.Sample.Mobile
             services.AddSingleton<IAppSettings, AppSettings>();
 
             services.UseApizr<IReqResService>();
+            services.UseCrudApizr(assemblyMarkerTypes: typeof(UserDetails));
             services.UseApizr<IHttpBinService>(optionsBuilder => optionsBuilder.WithAuthenticationHandler<IAppSettings>(settings => settings.Token, OnRefreshToken));
         }
 

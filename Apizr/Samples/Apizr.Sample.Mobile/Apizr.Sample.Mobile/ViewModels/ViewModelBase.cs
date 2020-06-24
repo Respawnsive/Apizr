@@ -1,6 +1,7 @@
 ﻿using Prism.Navigation;
 using System;
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Prism.AppModel;
 using ReactiveUI;
@@ -17,31 +18,40 @@ namespace Apizr.Sample.Mobile.ViewModels
         IDestructible,
         IConfirmNavigationAsync
     {
-        public ViewModelBase(INavigationService navigationService)
+        protected ViewModelBase(INavigationService navigationService)
         {
             NavigationService = navigationService;
+
+            // Set IsBusy to true while BusyCounter > 0
+            this.WhenAnyValue(x => x.BusyCounter)
+                .Select(busyCounter => busyCounter > 0)
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .ToPropertyEx(this, vm => vm.IsBusy)
+                .DisposeWith(DestroyWith);
         }
 
         #region Properties
 
         protected INavigationService NavigationService { get; }
 
-        private int _busyCounter;
-        protected int BusyCounter
-        {
-            get => _busyCounter;
-            set
-            {
-                _busyCounter = Math.Max(value, 0);
-                IsBusy = _busyCounter > 0;
-            }
-        }
+        [Reactive] public int BusyCounter { get; protected set; }
 
-        [Reactive]
-        public bool IsBusy { get; private set; }
+        public bool IsBusy { [ObservableAsProperty] get; }
 
         [Reactive]
         public string Title { get; protected set; }
+
+        #endregion
+
+        #region Methods
+
+        protected virtual void ToggleIsBusy(bool isExecuting)
+        {
+            if (isExecuting)
+                BusyCounter++;
+            else
+                BusyCounter--;
+        }
 
         #endregion
 

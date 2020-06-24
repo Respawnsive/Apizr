@@ -10,22 +10,32 @@
              Title="{Binding Title}">
 
     <Grid>
-        <CollectionView ItemsSource="{Binding Users}"
-                        VerticalOptions="FillAndExpand"
-                        HorizontalOptions="FillAndExpand">
-            <CollectionView.EmptyView>
-                <Label Text="No Records Found" />
-            </CollectionView.EmptyView>
+        <StackLayout HorizontalOptions="CenterAndExpand"
+                     VerticalOptions="CenterAndExpand">
+            <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                         Command="{Binding GetUsersCommand}">
+                <CollectionView x:Name="UserCollectionView"
+                                ItemsSource="{Binding Users}"
+                                VerticalOptions="FillAndExpand"
+                                HorizontalOptions="FillAndExpand"
+                                SelectionMode="Single"
+                                SelectionChangedCommand="{Binding GetUserDetailsCommand}" 
+                                SelectionChangedCommandParameter="{Binding Source={x:Reference UserCollectionView}, Path=SelectedItem}">
+                    <CollectionView.EmptyView>
+                        <Label Text="No Records Found" />
+                    </CollectionView.EmptyView>
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:User">
-                    <StackLayout>
-                        <Label Text="{Binding FirstName}" />
-                        <Label Text="{Binding LastName}" />
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:User">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding FirstName}" />
+                                <Label Text="{Binding LastName}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
 
         <Button VerticalOptions="End" HorizontalOptions="FillAndExpand" Text="Auth" Command="{Binding AuthCommand}"/>
     </Grid>

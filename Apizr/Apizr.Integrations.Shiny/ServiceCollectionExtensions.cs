@@ -118,37 +118,9 @@ namespace Apizr
         /// <returns></returns>
         public static bool UseCrudApizr(this IServiceCollection services, Type apizrManagerType, Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies)
         {
-            if (!assemblies.Any())
-                throw new ArgumentException(
-                    "No assemblies found to scan. Supply at least one assembly to scan for Crud attribute.");
+            services.AddCrudApizr(apizrManagerType, optionsBuilder, assemblies);
 
-            var assembliesToScan = assemblies.Distinct();
-
-            var cruds = new Dictionary<Type, Type>();
-
-            foreach (var assemblyToScan in assembliesToScan)
-            {
-                foreach (var type in assemblyToScan.GetTypes())
-                {
-                    if (type.GetCustomAttributes(typeof(CrudAttribute), true).Length > 0)
-                    {
-                        foreach (var property in type.GetProperties())
-                        {
-                            if (property.GetCustomAttributes(typeof(CrudKeyAttribute), false).Length > 0)
-                            {
-                                cruds.Add(type, property.PropertyType);
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-
-            foreach (var crud in cruds)
-            {
-                UseApizr(services, typeof(ICrudApi<,>).MakeGenericType(crud.Key, crud.Value), apizrManagerType,
-                    optionsBuilder);
-            }
+            CheckHandlers(services);
 
             return true;
         }
@@ -210,6 +182,15 @@ namespace Apizr
         {
             services.AddApizr(webApiType, apizrManagerType, optionsBuilder);
 
+            CheckHandlers(services);
+
+            return true;
+        } 
+
+        #endregion
+
+        private static void CheckHandlers(IServiceCollection services)
+        {
             var isVoidConnectivityHandlerRegistered = services.Any(x => x.ImplementationType == typeof(VoidConnectivityHandler));
             if (isVoidConnectivityHandlerRegistered)
                 services.Replace(new ServiceDescriptor(typeof(IConnectivityHandler), typeof(ShinyConnectivityHandler), ServiceLifetime.Singleton));
@@ -221,10 +202,6 @@ namespace Apizr
             var isDefaultLogHandlerRegistered = services.Any(x => x.ImplementationType == typeof(DefaultLogHandler));
             if (isDefaultLogHandlerRegistered)
                 services.Replace(new ServiceDescriptor(typeof(ILogHandler), typeof(ShinyLogHandler), ServiceLifetime.Singleton));
-
-            return true;
-        } 
-
-        #endregion
+        }
     }
 }

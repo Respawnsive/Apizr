@@ -3,7 +3,7 @@ Refit based web api client management, but resilient (retry, connectivity, cache
 
 ## Libraries
 
-[Change Log - June 22, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
+[Change Log - June 26, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
 
 |Project|NuGet|
 |-------|-----|
@@ -12,6 +12,7 @@ Refit based web api client management, but resilient (retry, connectivity, cache
 |Apizr.Integrations.Akavache|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Akavache.svg)](https://www.nuget.org/packages/Apizr.Integrations.Akavache/)|
 |Apizr.Integrations.MonkeyCache|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.MonkeyCache.svg)](https://www.nuget.org/packages/Apizr.Integrations.MonkeyCache/)|
 |Apizr.Integrations.Shiny|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Shiny.svg)](https://www.nuget.org/packages/Apizr.Integrations.Shiny/)|
+|Apizr.Integrations.MediatR|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.MediatR.svg)](https://www.nuget.org/packages/Apizr.Integrations.MediatR/)|
 
 Install the NuGet package of your choice:
 
@@ -20,6 +21,7 @@ Install the NuGet package of your choice:
    - Apizr.Integrations.Akavache package brings an ICacheHandler method mapping implementation for [Akavache](https://github.com/reactiveui/Akavache)
    - Apizr.Integrations.MonkeyCache package brings an ICacheHandler method mapping implementation for [MonkeyCache](https://github.com/jamesmontemagno/monkey-cache)
    - Apizr.Integrations.Shiny package brings ICacheHandler, ILogHandler and IConnectivityHandler method mapping implementations for [Shiny](https://github.com/shinyorg/shiny), extending your IServiceCollection with a UseApizr registration method
+   - Apizr.Integrations.MediatR package enables Crud request auto handling with CQRS mediation [MediatR](https://github.com/jbogard/MediatR)
 
 Definitly, Apizr make use of well known nuget packages to make the magic appear:
 
@@ -95,7 +97,7 @@ var registry = new PolicyRegistry
 };
 
 // Apizr registration
-myContainer.SomeInstanceRegistrationMethod<IApizrManager<IReqResService>>(Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(registry)
+myContainer.SomeInstanceRegistrationMethod(Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(registry)
                     .WithCacheHandler(new AkavacheCacheHandler())));
 ```
 
@@ -121,10 +123,10 @@ public override void ConfigureServices(IServiceCollection services)
     services.AddPolicyRegistry(registry);
 
     // Apizr registration
-    services.AddApizr<IReqResService>(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>());
+    services.AddApizrFor<IReqResService>(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>());
     
     // Or if you use Shiny
-    //services.UseApizr<IReqResService>();
+    //services.UseApizrFor<IReqResService>();
 }
 ```
 
@@ -132,7 +134,7 @@ public override void ConfigureServices(IServiceCollection services)
 
 Sending web request from your app - e.g. using Apizr in a Xamarin.Forms mobile app.
 
-Inject IApizrManager< YourWebApiInterface > where you need it - e.g. into your ViewModel constructor
+Inject ```IApizrManager<YourWebApiInterface>``` where you need it - e.g. into your ViewModel constructor
 ```csharp
 public class YourViewModel
 {
@@ -170,14 +172,186 @@ public class YourViewModel
 I catch execution into an ApizrException as it will contain the original inner exception, but also the previously cached result if some.
 If you provided an IConnectivityHandler implementation and there's no network connectivity before sending request, Apizr will throw with an IO inner exception without sending the request.
 
+## CRUD
+
+When playing with RESTful CRUD api, you've got a couple of options:
+- Define a web api interface like we just did before with each crud method (each entity into one interface or one interface for each entity)
+- Use the built-in ICrudApi
+
+As the first option is described already, here we'll talk about the ICrudApi option
+
+### Defining
+
+As we'll use the built-in yet defined ICrudApi, there's no more definition to do.
+
+Here is what it looks like then:
+```csharp
+[Policy("TransientHttpError"), Cache]
+public interface ICrudApi<T, in TKey, TReadAllResult> where T : class
+{
+    [Post("")]
+    Task<T> Create([Body] T payload, CancellationToken cancellationToken = default);
+
+    [Get("")]
+    Task<TReadAllResult> ReadAll(CancellationToken cancellationToken = default);
+
+    [Get("/{key}")]
+    Task<T> Read([CacheKey] TKey key, CancellationToken cancellationToken = default);
+
+    [Put("/{key}")]
+    Task Update(TKey key, [Body] T payload, CancellationToken cancellationToken = default);
+
+    [Delete("/{key}")]
+    Task Delete(TKey key, CancellationToken cancellationToken = default);
+}
+```
+
+We can see that it comes with some attribute decorations, like Cache or Policy. 
+If you don't want it for your crud scenario, just don't provide any CacheHandler and/or TransientHttpError policy, it will be ignored.
+
+About generic types, T and TKey meanings are abvious, and TReadAllResult is there to handle cases where ReadAll doesn't return an ```IEnumerable<T>```, but a paged result with some statistics.
+
+But again, nothing to do around here.
+
+### Registering
+
+#### Static approach
+
+Somewhere where you can add services to your container, add the following:
+```csharp
+// Apizr registration
+myContainer.SomeInstanceRegistrationMethod(Apizr.CrudFor<T, TKey, TReadAllResult>(optionsBuilder => optionsBuilder.WithBaseAddress("your specific T entity crud base uri")));
+```
+
+T must be a class.
+
+TKey must be primitive. If you don't provide it here, it will be defined as ```int```.
+
+TReadAllResult must be any class implementing ```IPagedResult<>```.
+If you don't use paged result, just don't provide any TReadAllResult here and it will be defined as ```IEnumerable<T>```.
+
+You have to provide the specific entity crud base uri with the options builder.
+
+There are 5 CrudFor flavors, depending on what you want to do and provide.
+One of it is the simple ```Apizr.CrudFor<T>()```, wich as you can expect, define TKey as ```int``` and TReadAllResult as ```IEnumerable<T>```.
+
+#### Extensions approach
+
+Ok, for this one, two options again:
+- Manually: register calling AddApizrCrudFor<T, TKey, TReadAllResult> service collection extension method or overloads for each entity you want to manage
+- Automatically: decorate your entities with CrudEntityAttribute and let Apizr auto register it all for you
+
+##### Manually
+
+In your Startup class, add the following:
+```csharp
+public override void ConfigureServices(IServiceCollection services)
+{
+    // Apizr registration
+    services.AddApizrCrudFor<T, TKey, TReadAllResult>(optionsBuilder => optionsBuilder.WithBaseAddress("your specific T entity crud base uri"));
+    
+    // Or if you use Shiny
+    //services.UseApizrCrudFor<T, TKey, TReadAllResult>(optionsBuilder => optionsBuilder.WithBaseAddress("your specific T entity crud base uri"));
+}
+```
+
+Again, T must be a class.
+
+TKey must be primitive. If you don't provide it here, it will be defined as ```int```.
+
+TReadAllResult must be any class implementing ```IPagedResult<>```.
+If you don't use paged result, just don't provide any TReadAllResult here and it will be defined as ```IEnumerable<T>```.
+
+You have to provide the specific entity crud base uri with the options builder.
+
+There are 10 AddApizrCrudFor/UseApizrCrudFor flavors for crud manual registration, depending on what you want to do and provide.
+One of it is the simple ```services.AddApizrCrudFor<T>()``` or ```services.UseApizrCrudFor<T>()```, wich as you can expect, define TKey as ```int``` and TReadAllResult as ```IEnumerable<T>```.
+
+##### Automatically
+
+You need to have access to your entity model classes for this option.
+
+Decorate your crud entities like so:
+```csharp
+[CrudEntity("https://myapi.com/api/myentity", typeof(int), typeof(PagedResult<>))]
+public class MyEntity
+{
+    [JsonProperty("id")]
+    public int Id { get; set; }
+
+    ...
+}
+```
+
+Thanks to this attribute:
+- We provide the specific entity crud base uri
+- We can set TKey type to any primitive type (default to int)
+- We can set TReadAllResult to any class type implementing ```IPagedResult<>``` (default to ```IEnumerable<T>```)
+
+Then, register in your Startup class like so:
+```csharp
+public override void ConfigureServices(IServiceCollection services)
+{
+    // Apizr registration
+    services.AddApizrCrudFor(typeof(MyEntity));
+    
+    // Or if you use Shiny
+    //services.UseApizrCrudFor(typeof(MyEntity));
+}
+```
+
+There are 4 AddApizrCrudFor/UseApizrCrudFor flavors for crud automatic registration, depending on what you want to do and provide.
+This is the simplest.
+
+### Using
+
+Sending web request from your app - e.g. using Apizr in a Xamarin.Forms mobile app.
+
+Inject ```IApizrManager<ICrudApi<T, TKey, TReadAllResult>>``` where you need it - e.g. into your ViewModel constructor
+```csharp
+public class YourViewModel
+{
+    private readonly IApizrManager<ICrudApi<User, int, PagedResult<User>>> _userCrudManager;
+	
+    public YouViewModel(IApizrManager<ICrudApi<User, int, PagedResult<User>>> userCrudManager)
+    {
+		_userCrudManager = userCrudManager;
+    }
+    
+    public ObservableCollection<User>? Users { get; set; }
+
+    private async Task GetUsersAsync()
+    {
+        IList<User>? users;
+        try
+        {
+            var pagedUsers = await _userCrudManager.ExecuteAsync((ct, api) => api.ReadAll(ct), CancellationToken.None);
+            users = pagedUsers.Data?.ToList();
+        }
+        catch (ApizrException<PagedResult<User>> e)
+        {
+            var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
+            UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+
+            users = e.CachedResult?.Data;
+        }
+
+        if(users != null)
+            Users = new ObservableCollection<User>(users);
+    }
+}
+```
+
+I catch execution into an ApizrException as it will contain the original inner exception, but also the previously cached result if some.
+If you provided an IConnectivityHandler implementation and there's no network connectivity before sending request, Apizr will throw with an IO inner exception without sending the request.
+
 ## Configuring
 
 There're some advanced scenarios where you want to adjust some settings and behaviors.
 This is where the options builder comes in.
-Each registration approach comes with its optionsBuilder:
+Each registration approach comes with its optionsBuilder optional parameter:
 ```csharp
-something.WhateverRegistrationApproach<WhateverWebApi>(optionsBuilder =>
-                optionsBuilder.SomeOptionsHere(someParametersThere));
+optionsBuilder => optionsBuilder.SomeOptionsHere(someParametersThere)
 ```
 
 ### Service handlers
@@ -234,3 +408,70 @@ LoggedPolicies.OnLoggedRetry could also execute your own specific action if need
 
 With extensions registration, you can adjust some more HttpClient settings thanks to ConfigureHttpClientBuilder builder method.
 This one could interfere with all Apizr http client auto configuration, so please use it with caution.
+
+### Mediation
+
+In extensions registration approach and with the dedicated integration nuget package referenced, the options builder let you enable Crud mediation by calling:
+```csharp
+optionsBuilder => optionsBuilder.WithCrudMediation()
+```
+
+When activated, you don't have to inject/resolve anything else than an ```IMediator``` instance, in order to play with Crud.
+
+Then, you'll be able to send queries and commands from anywhere, among:
+- ```ReadQuery<T, TKey>```: get the T entity with TKey
+- ```ReadAllQuery<T>```: get all T entities
+- ```CreateCommand<T>```: create a T entity
+- ```UpdateCommand<TKey, T>```: update the T entity with TKey
+- ```DeleteCommand<TKey>```: delete the T entity with TKey
+
+Apizr will intercept it and handle it to send the result back to you, thanks to MediatR.
+
+From there, our ViewModel can look like:
+```csharp
+public class YourViewModel
+{
+    private readonly IMediator _mediator;
+	
+    public YouViewModel(IMediator mediator)
+    {
+		_mediator = mediator;
+    }
+    
+    public ObservableCollection<User>? Users { get; set; }
+
+    private async Task GetUsersAsync()
+    {
+        IList<User>? users;
+        try
+        {
+            var pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>(), CancellationToken.None);
+            users = pagedUsers.Data?.ToList();
+        }
+        catch (ApizrException<PagedResult<User>> e)
+        {
+            var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
+            UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+
+            users = e.CachedResult?.Data;
+        }
+
+        if(users != null)
+            Users = new ObservableCollection<User>(users);
+    }
+}
+```
+
+It could become very useful and so much more readable when you have to manage crud for several entities in the same place.
+It means only one ```IMediator``` instance for all entities crud api calls, instead of each so long named ```IApizrManager<ICrudApi<T, TKey, TReadAllResult>>``` for each entity.
+
+Note that the ```WithCrudMediation``` activation method let you optionally provide your own requests and request handlers types as parameters if needed.
+
+If you provide some:
+- Your requests must inherit from any query or command listed above.
+- Your requests handlers must inherit from any of these self-describing handlers:
+  - ```ReadQueryHandler<T, TKey, TReadAllResult>```
+  - ```ReadAllQueryHandler<T, TKey, TReadAllResult>```
+  - ```CreateCommandHandler<T, TKey, TReadAllResult>```
+  - ```UpdateCommandHandler<T, TKey, TReadAllResult>```
+  - ```DeleteCommandHandler<T, TKey, TReadAllResult>```

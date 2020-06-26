@@ -46,9 +46,9 @@ namespace Apizr.Sample.Mobile
 
             services.AddSingleton<IAppSettings, AppSettings>();
 
-            services.UseApizr<IReqResService>();
-            services.UseCrudApizr(optionsBuilder => optionsBuilder.WithCrudMediation(), typeof(User));
-            services.UseApizr<IHttpBinService>(optionsBuilder => optionsBuilder.WithAuthenticationHandler<IAppSettings>(settings => settings.Token, OnRefreshToken));
+            services.UseApizrFor<IReqResService>();
+            services.UseApizrCrudFor(optionsBuilder => optionsBuilder.WithCrudMediation(), typeof(User));
+            services.UseApizrFor<IHttpBinService>(optionsBuilder => optionsBuilder.WithAuthenticationHandler<IAppSettings>(settings => settings.Token, OnRefreshToken));
 
             services.AddMediatR(typeof(Startup));
         }

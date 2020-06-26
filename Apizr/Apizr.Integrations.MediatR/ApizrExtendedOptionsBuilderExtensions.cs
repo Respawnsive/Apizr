@@ -10,12 +10,23 @@ namespace Apizr
 {
     public static class ApizrExtendedOptionsBuilderExtensions
     {
+        /// <summary>
+        /// Let Apizr handle crud requests execution with mediation
+        /// </summary>
+        /// <param name="optionsBuilder"></param>
+        /// <returns></returns>
         public static IApizrExtendedOptionsBuilder WithCrudMediation(this IApizrExtendedOptionsBuilder optionsBuilder)
         {
             return WithCrudMediation(optionsBuilder, typeof(ReadQueryHandler<,,>), typeof(ReadAllQueryHandler<,,>),
                 typeof(CreateCommandHandler<,,>), typeof(UpdateCommandHandler<,,>), typeof(DeleteCommandHandler<,,>));
         }
 
+        /// <summary>
+        /// Let Apizr handle crud requests execution with mediation, but with your own requests handlers
+        /// </summary>
+        /// <param name="optionsBuilder"></param>
+        /// <param name="crudHandlerTypes">Requests handlers types</param>
+        /// <returns></returns>
         public static IApizrExtendedOptionsBuilder WithCrudMediation(this IApizrExtendedOptionsBuilder optionsBuilder, params Type[] crudHandlerTypes)
         {
             // Checking types validity
@@ -94,6 +105,12 @@ namespace Apizr
             return optionsBuilder;
         }
 
+        /// <summary>
+        /// Let Apizr handle crud requests execution with mediation, but with your own requests and requests handlers
+        /// </summary>
+        /// <param name="optionsBuilder"></param>
+        /// <param name="crudRequestAndHandlerTypes">Requests and requests handlers types</param>
+        /// <returns></returns>
         public static IApizrExtendedOptionsBuilder WithCrudMediation(this IApizrExtendedOptionsBuilder optionsBuilder, params (Type, Type)[] crudRequestAndHandlerTypes)
         {
             // Checking types validity

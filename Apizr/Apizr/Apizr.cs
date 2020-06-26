@@ -28,7 +28,7 @@ namespace Apizr
         /// <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static ApizrManager<ICrudApi<T, int, IEnumerable<T>>> CrudFor<T>(
+        public static IApizrManager<ICrudApi<T, int, IEnumerable<T>>> CrudFor<T>(
             Action<IApizrOptionsBuilder> optionsBuilder = null) where T : class =>
             For<ICrudApi<T, int, IEnumerable<T>>, ApizrManager<ICrudApi<T, int, IEnumerable<T>>>>(
                 (lazyWebApis, connectivityHandler, cacheHandler, logHandler, policyRegistry) =>
@@ -43,7 +43,7 @@ namespace Apizr
         /// <typeparam name="TKey">The object key type (primitive)</typeparam>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static ApizrManager<ICrudApi<T, TKey, IEnumerable<T>>> CrudFor<T, TKey>(
+        public static IApizrManager<ICrudApi<T, TKey, IEnumerable<T>>> CrudFor<T, TKey>(
             Action<IApizrOptionsBuilder> optionsBuilder = null) where T : class =>
             For<ICrudApi<T, TKey, IEnumerable<T>>, ApizrManager<ICrudApi<T, TKey, IEnumerable<T>>>>(
                 (lazyWebApis, connectivityHandler, cacheHandler, logHandler, policyRegistry) =>
@@ -79,7 +79,7 @@ namespace Apizr
         /// (should inherit from <see cref="IEnumerable{T}"/> or <see cref="IPagedResult{T}"/>)</typeparam>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static ApizrManager<ICrudApi<T, TKey, TReadAllResult>> CrudFor<T, TKey, TReadAllResult>(
+        public static IApizrManager<ICrudApi<T, TKey, TReadAllResult>> CrudFor<T, TKey, TReadAllResult>(
             Action<IApizrOptionsBuilder> optionsBuilder = null)
             where T : class
             where TReadAllResult : IPagedResult<T> =>
@@ -121,7 +121,7 @@ namespace Apizr
         /// <typeparam name="TWebApi">The web api interface to manage</typeparam>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static ApizrManager<TWebApi> For<TWebApi>(
+        public static IApizrManager<TWebApi> For<TWebApi>(
             Action<IApizrOptionsBuilder> optionsBuilder = null) =>
             For<TWebApi, ApizrManager<TWebApi>>(
                 (lazyWebApis, connectivityHandler, cacheHandler, logHandler, policyRegistry) =>

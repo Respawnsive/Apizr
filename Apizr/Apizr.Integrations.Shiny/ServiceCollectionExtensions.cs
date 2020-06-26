@@ -23,9 +23,9 @@ namespace Apizr
         /// <param name="services">The service collection</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static bool UseCrudApizr<T>(this IServiceCollection services,
+        public static bool UseApizrCrudFor<T>(this IServiceCollection services,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) where T : class =>
-            UseCrudApizr(services, typeof(T), typeof(int), typeof(IEnumerable<>), typeof(ApizrManager<>), optionsBuilder);
+            UseApizrCrudFor(services, typeof(T), typeof(int), typeof(IEnumerable<>), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
         /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type, 
@@ -36,9 +36,9 @@ namespace Apizr
         /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static bool UseCrudApizr<T>(this IServiceCollection services, Type apizrManagerType,
+        public static bool UseApizrCrudFor<T>(this IServiceCollection services, Type apizrManagerType,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) where T : class =>
-            UseCrudApizr(services, typeof(T), typeof(int), typeof(IEnumerable<>), apizrManagerType, optionsBuilder);
+            UseApizrCrudFor(services, typeof(T), typeof(int), typeof(IEnumerable<>), apizrManagerType, optionsBuilder);
 
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type (class), 
@@ -49,9 +49,9 @@ namespace Apizr
         /// <param name="services">The service collection</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static bool UseCrudApizr<T, TKey>(this IServiceCollection services,
+        public static bool UseApizrCrudFor<T, TKey>(this IServiceCollection services,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) where T : class =>
-            UseCrudApizr(services, typeof(T), typeof(TKey), typeof(IEnumerable<>), typeof(ApizrManager<>), optionsBuilder);
+            UseApizrCrudFor(services, typeof(T), typeof(TKey), typeof(IEnumerable<>), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
         /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type (class), 
@@ -63,9 +63,9 @@ namespace Apizr
         /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static bool UseCrudApizr<T, TKey>(this IServiceCollection services, Type apizrManagerType,
+        public static bool UseApizrCrudFor<T, TKey>(this IServiceCollection services, Type apizrManagerType,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) where T : class =>
-            UseCrudApizr(services, typeof(T), typeof(TKey), typeof(IEnumerable<>), apizrManagerType, optionsBuilder);
+            UseApizrCrudFor(services, typeof(T), typeof(TKey), typeof(IEnumerable<>), apizrManagerType, optionsBuilder);
 
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type (class), 
@@ -79,11 +79,11 @@ namespace Apizr
         /// <param name="services">The service collection</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static bool UseCrudApizr<T, TKey, TReadAllResult>(this IServiceCollection services,
+        public static bool UseApizrCrudFor<T, TKey, TReadAllResult>(this IServiceCollection services,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
             where T : class
             where TReadAllResult : IPagedResult<T> =>
-            UseCrudApizr(services, typeof(T), typeof(TKey), typeof(TReadAllResult), typeof(ApizrManager<>), optionsBuilder);
+            UseApizrCrudFor(services, typeof(T), typeof(TKey), typeof(TReadAllResult), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
         /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type, 
@@ -98,11 +98,11 @@ namespace Apizr
         /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static bool UseCrudApizr<T, TKey, TReadAllResult>(this IServiceCollection services, Type apizrManagerType,
+        public static bool UseApizrCrudFor<T, TKey, TReadAllResult>(this IServiceCollection services, Type apizrManagerType,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
             where T : class
             where TReadAllResult : IPagedResult<T> =>
-            UseCrudApizr(services, typeof(T), typeof(TKey), typeof(TReadAllResult), apizrManagerType, optionsBuilder);
+            UseApizrCrudFor(services, typeof(T), typeof(TKey), typeof(TReadAllResult), apizrManagerType, optionsBuilder);
 
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="crudedType"/> object type (class), 
@@ -112,9 +112,9 @@ namespace Apizr
         /// <param name="crudedType">The object type to manage with crud api calls (class)</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static bool UseCrudApizr(this IServiceCollection services, Type crudedType,
+        public static bool UseApizrCrudFor(this IServiceCollection services, Type crudedType,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
-            UseCrudApizr(services, crudedType, typeof(int), typeof(IEnumerable<>), typeof(ApizrManager<>), optionsBuilder);
+            UseApizrCrudFor(services, crudedType, typeof(int), typeof(IEnumerable<>), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="crudedType"/> object type (class), 
@@ -125,10 +125,10 @@ namespace Apizr
         /// <param name="crudedKeyType">The object key type (primitive)</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static bool UseCrudApizr(this IServiceCollection services, Type crudedType,
+        public static bool UseApizrCrudFor(this IServiceCollection services, Type crudedType,
             Type crudedKeyType,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
-            UseCrudApizr(services, crudedType, crudedKeyType, typeof(IEnumerable<>), typeof(ApizrManager<>), optionsBuilder);
+            UseApizrCrudFor(services, crudedType, crudedKeyType, typeof(IEnumerable<>), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="crudedType"/> object type (class), 
@@ -142,10 +142,10 @@ namespace Apizr
         /// (should inherit from <see cref="IEnumerable{T}"/> or <see cref="IPagedResult{T}"/>)</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static bool UseCrudApizr(this IServiceCollection services, Type crudedType,
+        public static bool UseApizrCrudFor(this IServiceCollection services, Type crudedType,
             Type crudedKeyType, Type crudedReadAllResultType,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
-            UseCrudApizr(services, crudedType, crudedType, crudedReadAllResultType, typeof(ApizrManager<>), optionsBuilder);
+            UseApizrCrudFor(services, crudedType, crudedType, crudedReadAllResultType, typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
         /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <see cref="crudedType"/> object type, with key of type <see cref="crudedKeyType"/>
@@ -157,11 +157,11 @@ namespace Apizr
         /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static bool UseCrudApizr(this IServiceCollection services, Type crudedType,
+        public static bool UseApizrCrudFor(this IServiceCollection services, Type crudedType,
             Type crudedKeyType, Type crudedReadAllResultType, Type apizrManagerType,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
         {
-            services.AddCrudApizr(crudedType, crudedKeyType, crudedReadAllResultType, apizrManagerType, optionsBuilder);
+            services.AddApizrCrudFor(crudedType, crudedKeyType, crudedReadAllResultType, apizrManagerType, optionsBuilder);
 
             CheckHandlers(services);
 
@@ -175,9 +175,9 @@ namespace Apizr
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
-        public static bool UseCrudApizr(this IServiceCollection services,
+        public static bool UseApizrCrudFor(this IServiceCollection services,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes) =>
-            UseCrudApizr(services, typeof(ApizrManager<>), optionsBuilder,
+            UseApizrCrudFor(services, typeof(ApizrManager<>), optionsBuilder,
                 assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
 
         /// <summary>
@@ -187,9 +187,9 @@ namespace Apizr
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <param name="assemblies">Any assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
-        public static bool UseCrudApizr(this IServiceCollection services,
+        public static bool UseApizrCrudFor(this IServiceCollection services,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies) =>
-            UseCrudApizr(services, typeof(ApizrManager<>), optionsBuilder,
+            UseApizrCrudFor(services, typeof(ApizrManager<>), optionsBuilder,
                 assemblies);
 
         /// <summary>
@@ -200,9 +200,9 @@ namespace Apizr
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
-        public static bool UseCrudApizr(this IServiceCollection services, Type apizrManagerType,
+        public static bool UseApizrCrudFor(this IServiceCollection services, Type apizrManagerType,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes) =>
-            UseCrudApizr(services, apizrManagerType, optionsBuilder,
+            UseApizrCrudFor(services, apizrManagerType, optionsBuilder,
                 assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
 
         /// <summary>
@@ -213,9 +213,9 @@ namespace Apizr
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <param name="assemblies">Any assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
-        public static bool UseCrudApizr(this IServiceCollection services, Type apizrManagerType, Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies)
+        public static bool UseApizrCrudFor(this IServiceCollection services, Type apizrManagerType, Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies)
         {
-            services.AddCrudApizr(apizrManagerType, optionsBuilder, assemblies);
+            services.AddApizrCrudFor(apizrManagerType, optionsBuilder, assemblies);
 
             CheckHandlers(services);
 
@@ -233,9 +233,9 @@ namespace Apizr
         /// <param name="services">The service collection</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static bool UseApizr<TWebApi>(this IServiceCollection services,
+        public static bool UseApizrFor<TWebApi>(this IServiceCollection services,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
-            UseApizr(services, typeof(TWebApi), typeof(ApizrManager<TWebApi>),
+            UseApizrFor(services, typeof(TWebApi), typeof(ApizrManager<TWebApi>),
                 optionsBuilder);
 
         /// <summary>
@@ -246,10 +246,10 @@ namespace Apizr
         /// <param name="services">The service collection</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static bool UseApizr<TWebApi, TApizrManager>(this IServiceCollection services,
+        public static bool UseApizrFor<TWebApi, TApizrManager>(this IServiceCollection services,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
             where TApizrManager : IApizrManager<TWebApi> =>
-            UseApizr(services, typeof(TWebApi), typeof(TApizrManager),
+            UseApizrFor(services, typeof(TWebApi), typeof(TApizrManager),
                 optionsBuilder);
 
         /// <summary>
@@ -259,9 +259,9 @@ namespace Apizr
         /// <param name="webApiType">The web api interface type to manage</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static bool UseApizr(this IServiceCollection services, Type webApiType,
+        public static bool UseApizrFor(this IServiceCollection services, Type webApiType,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
-            UseApizr(services, webApiType, typeof(ApizrManager<>).MakeGenericType(webApiType),
+            UseApizrFor(services, webApiType, typeof(ApizrManager<>).MakeGenericType(webApiType),
                 optionsBuilder);
 
         /// <summary>
@@ -272,10 +272,10 @@ namespace Apizr
         /// <param name="apizrManagerType">A custom <see cref="IApizrManager{webApiType}"/> implementation type</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static bool UseApizr(
+        public static bool UseApizrFor(
             this IServiceCollection services, Type webApiType, Type apizrManagerType, Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
         {
-            services.AddApizr(webApiType, apizrManagerType, optionsBuilder);
+            services.AddApizrFor(webApiType, apizrManagerType, optionsBuilder);
 
             CheckHandlers(services);
 

@@ -78,20 +78,20 @@ namespace Apizr.Sample.Console
 
                 services.AddPolicyRegistry(registry);
 
-                services.AddApizr<IReqResService>(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>());
+                services.AddApizrFor<IReqResService>(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>());
 
                 if (configChoice == 2)
                 {
                     // Manual registration
-                    //services.AddCrudApizr<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>());
-                    
+                    //services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>());
+
                     // Auto assembly detection and registration
-                    services.AddCrudApizr(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>(), typeof(User));
+                    services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>(), typeof(User));
                 }
                 else
                 {
                     // Auto assembly detection, registration and handling with mediation
-                    services.AddCrudApizr(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation(), typeof(User));
+                    services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation(), typeof(User));
                     services.AddMediatR(typeof(Program));
                 }
                 

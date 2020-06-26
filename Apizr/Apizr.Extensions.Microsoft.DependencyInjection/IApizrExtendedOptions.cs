@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Reflection;
+using Apizr.Requesting;
 using Microsoft.Extensions.DependencyInjection;
 using Polly.Registry;
 using Refit;
@@ -43,5 +45,15 @@ namespace Apizr
         /// Delegating handlers factories
         /// </summary>
         IList<Func<IServiceProvider, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
+
+        /// <summary>
+        /// Entities auto registered with <see cref="IApizrManager{ICrudApi}"/>
+        /// </summary>
+        IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }
+
+        /// <summary>
+        /// Post registration actions
+        /// </summary>
+        IList<Action<IServiceCollection>> PostRegistrationActions { get; }
     }
 }

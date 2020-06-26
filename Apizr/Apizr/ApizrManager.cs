@@ -29,6 +29,7 @@ namespace Apizr
         private readonly ICacheHandler _cacheHandler;
         private readonly ILogHandler _logHandler;
         private readonly IReadOnlyPolicyRegistry<string> _policyRegistry;
+        private readonly string _webApiFriendlyName;
 
         public ApizrManager(IEnumerable<ILazyPrioritizedWebApi<TWebApi>> webApis, IConnectivityHandler connectivityHandler, ICacheHandler cacheHandler, ILogHandler logHandler, IReadOnlyPolicyRegistry<string> policyRegistry)
         {
@@ -38,6 +39,7 @@ namespace Apizr
             _cacheHandler = cacheHandler;
             _logHandler = logHandler;
             _policyRegistry = policyRegistry;
+            _webApiFriendlyName = typeof(TWebApi).GetFriendlyName();
         }
 
         TWebApi GetWebApi(Priority priority) => _webApis.First(x => x.Priority == priority || x.Priority == Priority.UserInitiated).Value;
@@ -50,7 +52,7 @@ namespace Apizr
             Priority priority = Priority.UserInitiated)
         {
             var methodCallExpression = GetMethodCallExpression(executeApiMethod);
-            var methodName = $"{typeof(TWebApi).Name}.{methodCallExpression.Method.Name}";
+            var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
             _logHandler.Write($"Apizr - {methodName}: Calling method");
 
             string cacheKey = null;
@@ -133,7 +135,7 @@ namespace Apizr
             Priority priority = Priority.UserInitiated)
         {
             var methodCallExpression = GetMethodCallExpression(executeApiMethod);
-            var methodName = $"{typeof(TWebApi)}.{methodCallExpression.Method.Name}";
+            var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
             _logHandler.Write($"Apizr: Calling method {methodName}");
 
             try
@@ -197,7 +199,7 @@ namespace Apizr
         public async Task<bool> ClearCacheAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken)
         {
             var methodCallExpression = GetMethodCallExpression(executeApiMethod);
-            var methodName = $"{typeof(TWebApi)}.{methodCallExpression.Method.Name}";
+            var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
             _logHandler.Write($"Apizr: Calling cache clear for method {methodName}");
 
             if (_cacheHandler is VoidCacheHandler)
@@ -340,7 +342,7 @@ namespace Apizr
         {
             var methodCallExpression = GetMethodCallExpression(restExpression);
 
-            var cacheKeyPrefix = $"{typeof(TWebApi)}.{methodCallExpression.Method.Name}";
+            var cacheKeyPrefix = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
             if (!methodCallExpression.Arguments.Any())
                 return $"{cacheKeyPrefix}()";
 
@@ -467,7 +469,7 @@ namespace Apizr
             if (policyAttribute == null)
                 return null;
 
-            var methodName = $"{typeof(TWebApi)}.{methodCallExpression.Method.Name}";
+            var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
 
             IAsyncPolicy<TResult> policy = null;
             foreach (var registryKey in policyAttribute.RegistryKeys)
@@ -510,7 +512,7 @@ namespace Apizr
             if (policyAttribute == null)
                 return null;
 
-            var methodName = $"{typeof(TWebApi)}.{methodCallExpression.Method.Name}";
+            var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
 
             IAsyncPolicy policy = null;
             foreach (var registryKey in policyAttribute.RegistryKeys)

@@ -1,11 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Integrations.MonkeyCache;
+using Apizr.Mediation.Cruding;
+using Apizr.Mediation.Cruding.Handling;
 using Apizr.Policing;
 using Apizr.Requesting;
 using Apizr.Sample.Api;
 using Apizr.Sample.Api.Models;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using MonkeyCache.FileStore;
 using Polly;
@@ -17,7 +22,8 @@ namespace Apizr.Sample.Console
     class Program
     {
         private static IApizrManager<IReqResService> _reqResService;
-        private static IApizrManager<ICrudApi<UserDetails, int>> _genericUserDetailsManager;
+        private static IApizrManager<ICrudApi<User, int, PagedResult<User>>> _genericUserManager;
+        private static IMediator _mediator;
 
         static async Task Main(string[] args)
         {
@@ -28,8 +34,9 @@ namespace Apizr.Sample.Console
             System.Console.WriteLine("########################################################################");
             System.Console.WriteLine("");
             System.Console.WriteLine("Choose one of available configurations:");
-            System.Console.WriteLine("1 - Static instance");
-            System.Console.WriteLine("2 - Microsoft extensions");
+            System.Console.WriteLine("1 - Static instance with MonkeyCache");
+            System.Console.WriteLine("2 - Microsoft extensions with Akavache");
+            System.Console.WriteLine("3 - Microsoft extensions with Akavache and crud auto mediation");
             System.Console.WriteLine("Your choice : ");
             var readConfigChoice = System.Console.ReadLine();
             var configChoice = Convert.ToInt32(readConfigChoice);
@@ -56,10 +63,11 @@ namespace Apizr.Sample.Console
                     .WithCacheHandler(
                         () => new MonkeyCacheHandler(Barrel.Current)));
 
-                _genericUserDetailsManager = Apizr.CrudFor<UserDetails, int>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users")
+                _genericUserManager = Apizr.CrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users")
                     .WithPolicyRegistry(registry)
                     .WithCacheHandler(
                         () => new MonkeyCacheHandler(Barrel.Current)));
+
 
                 System.Console.WriteLine("");
                 System.Console.WriteLine("Initialization succeed :)");
@@ -72,27 +80,49 @@ namespace Apizr.Sample.Console
 
                 services.AddApizr<IReqResService>(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>());
 
-                //services.AddCrudApizr<UserDetails, int>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>());
-                services.AddCrudApizr(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>(), typeof(UserDetails));
+                if (configChoice == 2)
+                {
+                    // Manual registration
+                    //services.AddCrudApizr<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>());
+                    
+                    // Auto assembly detection and registration
+                    services.AddCrudApizr(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>(), typeof(User));
+                }
+                else
+                {
+                    // Auto assembly detection, registration and handling with mediation
+                    services.AddCrudApizr(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation(), typeof(User));
+                    services.AddMediatR(typeof(Program));
+                }
+                
 
                 var container = services.BuildServiceProvider(true);
                 var scope = container.CreateScope();
 
                 _reqResService = scope.ServiceProvider.GetRequiredService<IApizrManager<IReqResService>>();
-                _genericUserDetailsManager =
-                    scope.ServiceProvider.GetRequiredService<IApizrManager<ICrudApi<UserDetails, int>>>();
+
+                if(configChoice == 2)
+                    _genericUserManager = scope.ServiceProvider.GetRequiredService<IApizrManager<ICrudApi<User, int, PagedResult<User>>>>();
+                else
+                    _mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
 
                 System.Console.WriteLine("");
                 System.Console.WriteLine("Initialization succeed :)");
             }
 
-            UserList userList;
+            IEnumerable<User> users;
             try
             {
                 System.Console.WriteLine("");
-                userList = await _reqResService.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
+                //var userList = await _reqResService.ExecuteAsync((ct, api) => api.GetUsersAsync(ct),
+                //    CancellationToken.None);
+                //users = userList?.Data;
+                var pagedUsers = configChoice <= 2
+                    ? await _genericUserManager.ExecuteAsync((ct, api) => api.ReadAll(ct), CancellationToken.None)
+                    : await _mediator.Send(new ReadAllQuery<PagedResult<User>>());
+                users = pagedUsers?.Data;
             }
-            catch (ApizrException<UserList> e)
+            catch (ApizrException<PagedResult<User>> e)
             {
                 System.Console.WriteLine("");
                 System.Console.WriteLine(e.Message);
@@ -102,14 +132,14 @@ namespace Apizr.Sample.Console
 
                 System.Console.WriteLine("");
                 System.Console.WriteLine($"Loading {nameof(UserList)} from cache...");
-                userList = e.CachedResult;
+                users = e.CachedResult?.Data;
             }
 
-            if (userList?.Data != null)
+            if (users != null)
             {
                 System.Console.WriteLine("");
                 System.Console.WriteLine("Choose one of available users:");
-                foreach (var user in userList.Data)
+                foreach (var user in users)
                 {
                     System.Console.WriteLine($"{user.Id} - {user.FirstName} {user.LastName}");
                 }
@@ -120,9 +150,11 @@ namespace Apizr.Sample.Console
                 UserDetails userDetails;
                 try
                 {
-                    userDetails = await _genericUserDetailsManager.ExecuteAsync((ct, api) => api.Read(userChoice, ct), CancellationToken.None);
+                    userDetails = configChoice <= 2
+                        ? await _reqResService.ExecuteAsync((ct, api) => api.GetUserAsync(userChoice, ct),
+                            CancellationToken.None)
+                        : await _mediator.Send(new ReadQuery<UserDetails, int>(userChoice), CancellationToken.None);
 
-                    //userDetails = await _reqResService.ExecuteAsync((ct, api) => api.GetUserAsync(userChoice, ct), CancellationToken.None);
                 }
                 catch (ApizrException<UserDetails> e)
                 {

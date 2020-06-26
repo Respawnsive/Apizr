@@ -7,6 +7,7 @@ using Apizr.Policing;
 using Apizr.Sample.Api;
 using Apizr.Sample.Api.Models;
 using Apizr.Sample.Mobile.Services.Settings;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Extensions.Http;
@@ -46,8 +47,10 @@ namespace Apizr.Sample.Mobile
             services.AddSingleton<IAppSettings, AppSettings>();
 
             services.UseApizr<IReqResService>();
-            services.UseCrudApizr(assemblyMarkerTypes: typeof(UserDetails));
+            services.UseCrudApizr(optionsBuilder => optionsBuilder.WithCrudMediation(), typeof(User));
             services.UseApizr<IHttpBinService>(optionsBuilder => optionsBuilder.WithAuthenticationHandler<IAppSettings>(settings => settings.Token, OnRefreshToken));
+
+            services.AddMediatR(typeof(Startup));
         }
 
         private static Task<string?> OnRefreshToken(HttpRequestMessage request)

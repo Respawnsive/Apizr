@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Apizr.Sample.Api.Models
 {
-    [Crud("https://reqres.in/api/users", typeof(int))]
+    [CrudEntity("https://reqres.in/api/users")]
     public class UserDetails
     {
         [JsonProperty("data")]

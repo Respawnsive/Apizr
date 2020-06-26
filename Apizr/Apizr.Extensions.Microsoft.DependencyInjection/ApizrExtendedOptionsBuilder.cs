@@ -9,6 +9,7 @@ using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Logging;
+using Apizr.Requesting;
 using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
 using Polly.Registry;

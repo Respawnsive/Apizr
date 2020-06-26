@@ -8,13 +8,13 @@ using Refit;
 namespace Apizr.Requesting
 {
     [Policy("TransientHttpError"), Cache]
-    public interface ICrudApi<T, in TKey> where T : class
+    public interface ICrudApi<T, in TKey, TReadAllResult> where T : class
     {
         [Post("")]
         Task<T> Create([Body] T payload, CancellationToken cancellationToken = default);
 
         [Get("")]
-        Task<IEnumerable<T>> ReadAll(CancellationToken cancellationToken = default);
+        Task<TReadAllResult> ReadAll(CancellationToken cancellationToken = default);
 
         [Get("/{key}")]
         Task<T> Read([CacheKey] TKey key, CancellationToken cancellationToken = default);

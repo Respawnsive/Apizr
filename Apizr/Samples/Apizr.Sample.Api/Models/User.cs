@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Apizr.Requesting;
+using Newtonsoft.Json;
 
 namespace Apizr.Sample.Api.Models
 {
+    [CrudEntity("https://reqres.in/api/users", typeof(int), typeof(PagedResult<>))]
     public class User
     {
         [JsonProperty("id")]

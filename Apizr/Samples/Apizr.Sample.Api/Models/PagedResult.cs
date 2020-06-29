@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Apizr.Sample.Api.Models
 {
-    public class PagedResult<T> : IPagedResult<T> where T : class
+    public class PagedResult<T> where T : class
     {
         [JsonProperty("page")]
         public int Page { get; set; }

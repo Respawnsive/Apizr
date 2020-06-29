@@ -209,7 +209,7 @@ public interface ICrudApi<T, in TKey, TReadAllResult> where T : class
 We can see that it comes with some attribute decorations, like Cache or Policy. 
 If you don't want it for your crud scenario, just don't provide any CacheHandler and/or TransientHttpError policy, it will be ignored.
 
-About generic types, T and TKey meanings are abvious, and TReadAllResult is there to handle cases where ReadAll doesn't return an ```IEnumerable<T>```, but a paged result with some statistics.
+About generic types, T and TKey meanings are abvious, and TReadAllResult is there to handle cases where ReadAll doesn't return an ```IEnumerable<T>``` or derived, but a paged result with some statistics.
 
 But again, nothing to do around here.
 
@@ -227,7 +227,7 @@ T must be a class.
 
 TKey must be primitive. If you don't provide it here, it will be defined as ```int```.
 
-TReadAllResult must be any class implementing ```IPagedResult<>```.
+TReadAllResult must inherit from ```IEnumerable<>``` or be of class type.
 If you don't use paged result, just don't provide any TReadAllResult here and it will be defined as ```IEnumerable<T>```.
 
 You have to provide the specific entity crud base uri with the options builder.
@@ -259,7 +259,7 @@ Again, T must be a class.
 
 TKey must be primitive. If you don't provide it here, it will be defined as ```int```.
 
-TReadAllResult must be any class implementing ```IPagedResult<>```.
+TReadAllResult must inherit from ```IEnumerable<>``` or be of class type.
 If you don't use paged result, just don't provide any TReadAllResult here and it will be defined as ```IEnumerable<T>```.
 
 You have to provide the specific entity crud base uri with the options builder.
@@ -286,7 +286,7 @@ public class MyEntity
 Thanks to this attribute:
 - We provide the specific entity crud base uri
 - We can set TKey type to any primitive type (default to int)
-- We can set TReadAllResult to any class type implementing ```IPagedResult<>``` (default to ```IEnumerable<T>```)
+- We can set TReadAllResult to any class or must inherit from ```IEnumerable<>``` (default to ```IEnumerable<T>```)
 
 Then, register in your Startup class like so:
 ```csharp

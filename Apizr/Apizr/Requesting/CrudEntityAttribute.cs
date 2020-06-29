@@ -32,14 +32,14 @@ namespace Apizr.Requesting
         /// </summary>
         /// <param name="baseUri">This specific entity's base crud uri</param>
         /// <param name="keyType">This specific entity's crud key type</param>
-        /// <param name="readAllResultType">The "ReadAll" query result type (you have to provide an <see cref="IPagedResult{T}"/> or <see cref="IEnumerable{T}"/> implementation type)</param>
+        /// <param name="readAllResultType">The "ReadAll" query result type (class or <see cref="IEnumerable{T}"/>)</param>
         public CrudEntityAttribute(string baseUri, Type keyType, Type readAllResultType)
         {
             if (!keyType.GetTypeInfo().IsPrimitive)
                 throw new ArgumentException($"{keyType.Name} is not primitive", nameof(keyType));
 
-            if (!typeof(IEnumerable<>).IsAssignableFromGenericType(readAllResultType) && !typeof(IPagedResult<>).IsAssignableFromGenericType(readAllResultType))
-                throw new ArgumentException($"{readAllResultType.Name} must inherit from {typeof(IEnumerable<>)} or {typeof(IPagedResult<>)}", nameof(readAllResultType));
+            if (!typeof(IEnumerable<>).IsAssignableFromGenericType(readAllResultType) && !readAllResultType.IsClass)
+                throw new ArgumentException($"{readAllResultType.Name} must inherit from {typeof(IEnumerable<>)} or be of class type");
 
             BaseUri = baseUri;
             KeyType = keyType;

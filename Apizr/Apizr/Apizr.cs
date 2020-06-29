@@ -76,13 +76,12 @@ namespace Apizr
         /// <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
         /// <typeparam name="TKey">The object key type (primitive)</typeparam>
         /// <typeparam name="TReadAllResult">"ReadAll" query result type
-        /// (should inherit from <see cref="IEnumerable{T}"/> or <see cref="IPagedResult{T}"/>)</typeparam>
+        /// (should inherit from <see cref="IEnumerable{T}"/> or be of class type)</typeparam>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
         public static IApizrManager<ICrudApi<T, TKey, TReadAllResult>> CrudFor<T, TKey, TReadAllResult>(
             Action<IApizrOptionsBuilder> optionsBuilder = null)
-            where T : class
-            where TReadAllResult : IPagedResult<T> =>
+            where T : class =>
             For<ICrudApi<T, TKey, TReadAllResult>, ApizrManager<ICrudApi<T, TKey, TReadAllResult>>>(
                 (lazyWebApis, connectivityHandler, cacheHandler, logHandler, policyRegistry) =>
                     new ApizrManager<ICrudApi<T, TKey, TReadAllResult>>(lazyWebApis, connectivityHandler,
@@ -97,7 +96,7 @@ namespace Apizr
         /// <typeparam name="TKey">The object key type (primitive)</typeparam>
         /// <typeparam name="TApizrManager">A custom <see cref="IApizrManager{ICrudApi}"/> implementation</typeparam>
         /// <typeparam name="TReadAllResult">"ReadAll" query result type
-        /// (should inherit from <see cref="IEnumerable{T}"/> or <see cref="IPagedResult{T}"/>)</typeparam>
+        /// (should inherit from <see cref="IEnumerable{T}"/> or be of class type)</typeparam>
         /// <param name="apizrManagerFactory">The custom manager implementation instance factory</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
@@ -107,7 +106,6 @@ namespace Apizr
                 TApizrManager> apizrManagerFactory,
             Action<IApizrOptionsBuilder> optionsBuilder = null)
             where T : class
-            where TReadAllResult : IPagedResult<T>
             where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult>> =>
             For(apizrManagerFactory, optionsBuilder);
 

@@ -70,38 +70,36 @@ namespace Apizr
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type (class), 
         /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="TReadAllResult"/>
-        /// (inheriting from <see cref="IEnumerable{T}"/> or <see cref="IPagedResult{T}"/>)
+        /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
         /// </summary>
         /// <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
         /// <typeparam name="TKey">The object key type (primitive)</typeparam>
         /// <typeparam name="TReadAllResult">"ReadAll" query result type
-        /// (should inherit from <see cref="IEnumerable{T}"/> or <see cref="IPagedResult{T}"/>)</typeparam>
+        /// (should inherit from <see cref="IEnumerable{T}"/> or be of class type)</typeparam>
         /// <param name="services">The service collection</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
         public static bool UseApizrCrudFor<T, TKey, TReadAllResult>(this IServiceCollection services,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
-            where T : class
-            where TReadAllResult : IPagedResult<T> =>
+            where T : class =>
             UseApizrCrudFor(services, typeof(T), typeof(TKey), typeof(TReadAllResult), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
         /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type, 
         /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="TReadAllResult"/>
-        /// (inheriting from <see cref="IEnumerable{T}"/> or <see cref="IPagedResult{T}"/>)
+        /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
         /// </summary>
         /// <typeparam name="T">The object type to manage with crud api calls</typeparam>
         /// <typeparam name="TKey">The object key type (primitive)</typeparam>
         /// <typeparam name="TReadAllResult">"ReadAll" query result type
-        /// (should inherit from <see cref="IEnumerable{T}"/> or <see cref="IPagedResult{T}"/>)</typeparam>
+        /// (should inherit from <see cref="IEnumerable{T}"/> or be of class type)</typeparam>
         /// <param name="services">The service collection</param>
         /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
         public static bool UseApizrCrudFor<T, TKey, TReadAllResult>(this IServiceCollection services, Type apizrManagerType,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
-            where T : class
-            where TReadAllResult : IPagedResult<T> =>
+            where T : class =>
             UseApizrCrudFor(services, typeof(T), typeof(TKey), typeof(TReadAllResult), apizrManagerType, optionsBuilder);
 
         /// <summary>
@@ -133,13 +131,13 @@ namespace Apizr
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="crudedType"/> object type (class), 
         /// with key of type <see cref="crudedKeyType"/> (primitive) and "ReadAll" query result of type <see cref="crudedReadAllResultType"/>
-        /// (inheriting from <see cref="IEnumerable{T}"/> or <see cref="IPagedResult{T}"/>)
+        /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
         /// </summary>
         /// <param name="services">The service collection</param>
         /// <param name="crudedType">The object type to manage with crud api calls (class)</param>
         /// <param name="crudedKeyType">The object key type (primitive)</param>
         /// <param name="crudedReadAllResultType">"ReadAll" query result type
-        /// (should inherit from <see cref="IEnumerable{T}"/> or <see cref="IPagedResult{T}"/>)</param>
+        /// (should inherit from <see cref="IEnumerable{T}"/> or be of class type)</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
         public static bool UseApizrCrudFor(this IServiceCollection services, Type crudedType,

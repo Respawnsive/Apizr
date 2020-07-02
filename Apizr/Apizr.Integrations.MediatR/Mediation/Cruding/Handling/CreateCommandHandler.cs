@@ -1,22 +1,22 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Apizr.Mediation.Commanding;
+using Apizr.Mediation.Cruding.Handling.Base;
 using Apizr.Requesting;
 
 namespace Apizr.Mediation.Cruding.Handling
 {
-    public class CreateCommandHandler<T, TKey, TReadAllResult> : ICommandHandler<CreateCommand<T>, T> where T : class
+    public class CreateCommandHandler<T, TKey, TReadAllResult, TReadAllParams> : 
+        CreateCommandHandlerBase<T, TKey, TReadAllResult, TReadAllParams, CreateCommand<T>, T> 
+        where T : class
     {
-        private readonly IApizrManager<ICrudApi<T, TKey, TReadAllResult>> _crudApiManager;
-
-        public CreateCommandHandler(IApizrManager<ICrudApi<T, TKey, TReadAllResult>> crudApiManager)
+        public CreateCommandHandler(IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> crudApiManager) : base(
+            crudApiManager)
         {
-            _crudApiManager = crudApiManager;
         }
 
-        public virtual Task<T> Handle(CreateCommand<T> request, CancellationToken cancellationToken)
+        public override Task<T> Handle(CreateCommand<T> request, CancellationToken cancellationToken)
         {
-            return _crudApiManager.ExecuteAsync((ct, api) => api.Create(request.Payload, ct), cancellationToken);
+            return CrudApiManager.ExecuteAsync((ct, api) => api.Create(request.Payload, ct), cancellationToken);
         }
     }
 }

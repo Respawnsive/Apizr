@@ -12,18 +12,31 @@ namespace Apizr.Requesting
     {
         /// <summary>
         /// Define this specific entity's base crud uri with key of type <see cref="int"/> and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
+        /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
         /// <param name="baseUri">This specific entity's base crud uri</param>
-        public CrudEntityAttribute(string baseUri) : this(baseUri, typeof(int), typeof(IEnumerable<>))
+        public CrudEntityAttribute(string baseUri) : this(baseUri, typeof(int), typeof(IEnumerable<>), typeof(IDictionary<string, object>))
         {
         }
 
         /// <summary>
         /// Define this specific entity's base crud uri and key type with "ReadAll" query result of type <see cref="IEnumerable{T}"/>
+        /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
         /// <param name="baseUri">This specific entity's base crud uri</param>
         /// <param name="keyType">This specific entity's crud key type</param>
-        public CrudEntityAttribute(string baseUri, Type keyType) : this(baseUri, keyType, typeof(IEnumerable<>))
+        public CrudEntityAttribute(string baseUri, Type keyType) : this(baseUri, keyType, typeof(IEnumerable<>), typeof(IDictionary<string, object>))
+        {
+        }
+
+        /// <summary>
+        /// Define this specific entity's base crud uri, key type and "ReadAll" query result type
+        /// and ReadAll query parameters of type IDictionary{string,object}
+        /// </summary>
+        /// <param name="baseUri">This specific entity's base crud uri</param>
+        /// <param name="keyType">This specific entity's crud key type</param>
+        /// <param name="readAllResultType">The "ReadAll" query result type (class or <see cref="IEnumerable{T}"/>)</param>
+        public CrudEntityAttribute(string baseUri, Type keyType, Type readAllResultType) : this(baseUri, keyType, readAllResultType, typeof(IDictionary<string, object>))
         {
         }
 
@@ -33,7 +46,8 @@ namespace Apizr.Requesting
         /// <param name="baseUri">This specific entity's base crud uri</param>
         /// <param name="keyType">This specific entity's crud key type</param>
         /// <param name="readAllResultType">The "ReadAll" query result type (class or <see cref="IEnumerable{T}"/>)</param>
-        public CrudEntityAttribute(string baseUri, Type keyType, Type readAllResultType)
+        /// <param name="readAllParamsType">ReadAll query parameters type (class or IDictionary{string,object})</param>
+        public CrudEntityAttribute(string baseUri, Type keyType, Type readAllResultType, Type readAllParamsType)
         {
             if (!keyType.GetTypeInfo().IsPrimitive)
                 throw new ArgumentException($"{keyType.Name} is not primitive", nameof(keyType));
@@ -41,9 +55,15 @@ namespace Apizr.Requesting
             if (!typeof(IEnumerable<>).IsAssignableFromGenericType(readAllResultType) && !readAllResultType.IsClass)
                 throw new ArgumentException($"{readAllResultType.Name} must inherit from {typeof(IEnumerable<>)} or be of class type");
 
+            if (!typeof(IDictionary<string, object>).IsAssignableFrom(readAllParamsType) &&
+                !readAllParamsType.IsClass)
+                throw new ArgumentException(
+                    $"{readAllParamsType.Name} must inherit from {typeof(IDictionary<string, object>)} or be of class type", nameof(readAllParamsType));
+
             BaseUri = baseUri;
             KeyType = keyType;
             ReadAllResultType = readAllResultType;
+            ReadAllParamsType = readAllParamsType;
         }
 
         /// <summary>
@@ -60,5 +80,10 @@ namespace Apizr.Requesting
         /// "ReadAll" query result type
         /// </summary>
         public Type ReadAllResultType { get; set; }
+
+        /// <summary>
+        /// "ReadAll" query parameters type
+        /// </summary>
+        public Type ReadAllParamsType { get; set; }
     }
 }

@@ -1,14 +1,27 @@
 ﻿using Apizr.Mediation.Commanding;
+using Apizr.Mediation.Cruding.Base;
+using MediatR;
 
 namespace Apizr.Mediation.Cruding
 {
-    public class DeleteCommand<TKey> : ICommand
+    public class DeleteCommand<T, TKey, TResponse> : DeleteCommandBase<T, TKey, TResponse>
     {
-        public DeleteCommand(TKey key)
+        public DeleteCommand(TKey key) : base(key)
         {
-            Key = key;
         }
+    }
 
-        public TKey Key { get; }
+    public class DeleteCommand<T, TKey> : DeleteCommandBase<T, TKey>
+    {
+        public DeleteCommand(TKey key) : base(key)
+        {
+        }
+    }
+
+    public class DeleteCommand<T> : DeleteCommandBase<T>
+    {
+        public DeleteCommand(int key) : base(key)
+        {
+        }
     }
 }

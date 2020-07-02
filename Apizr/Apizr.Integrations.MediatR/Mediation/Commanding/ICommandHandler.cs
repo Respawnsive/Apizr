@@ -7,8 +7,7 @@ namespace Apizr.Mediation.Commanding
     {
 
     }
-    public interface ICommandHandler<in TCommand> :
-        IRequestHandler<TCommand> where TCommand : IRequest
+    public interface ICommandHandler<in TCommand> : ICommandHandler<TCommand, Unit> where TCommand : IRequest<Unit>
     {
 
     }

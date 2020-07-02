@@ -7,6 +7,11 @@ namespace Apizr
     /// </summary>
     public class ApizrException : Exception
     {
+        public ApizrException(Exception innerException) : this(innerException, default)
+        {
+            
+        }
+
         public ApizrException(Exception innerException, object cachedResult) : base(innerException.Message, innerException)
         {
             CachedResult = cachedResult;
@@ -20,6 +25,11 @@ namespace Apizr
     /// </summary>
     public class ApizrException<TResult> : ApizrException
     {
+        public ApizrException(Exception innerException) : this(innerException, default)
+        {
+
+        }
+
         public ApizrException(Exception innerException, TResult cachedResult) : base(innerException, cachedResult)
         {
             CachedResult = cachedResult;

@@ -2,12 +2,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Reactive;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Caching;
@@ -16,6 +19,8 @@ using Apizr.Logging;
 using Apizr.Policing;
 using Apizr.Prioritizing;
 using Fusillade;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Polly;
 using Polly.Registry;
 
@@ -298,7 +303,26 @@ namespace Apizr
                 yield break;
 
             if (expression is ConstantExpression constantsExpression)
-                yield return new ExtractedConstant { Name = constantsExpression.Type.Name, Value = constantsExpression.Value };
+            {
+                var requestString = JsonConvert.SerializeObject(constantsExpression.Value);
+                if (requestString.Contains("Parameters"))
+                {
+                    var requestRoot = JsonConvert.DeserializeObject<JObject>(requestString);
+                    if (requestRoot.HasValues && 
+                        requestRoot.First.HasValues && 
+                        requestRoot.First.First.HasValues)
+                    {
+                        var parameters = requestRoot.First.First.SelectToken("Parameters")?.ToObject<IDictionary<string, object>>();
+                        if (parameters != null)
+                        {
+                            var value = string.Join("&", parameters.Where(kvp => kvp.Value != null).Select(kvp => $"{kvp.Key}={kvp.Value}"));
+                            yield return new ExtractedConstant { Name = constantsExpression.Type.Name, Value = value }; 
+                        }
+                    }
+                }
+                else
+                    yield return new ExtractedConstant { Name = constantsExpression.Type.Name, Value = constantsExpression.Value };
+            }
 
 
             else if (expression is LambdaExpression lambdaExpression)
@@ -334,6 +358,56 @@ namespace Apizr
                 else
                     yield return new ExtractedConstant { Name = parameterExpression.Type.Name };
             }
+            else if (expression is ListInitExpression listInitExpression)
+            {
+                if (typeof(IDictionary<string, object>).IsAssignableFrom(listInitExpression.Type))
+                {
+                    var stringBuilder = new StringBuilder();
+                    var suffix = string.Empty;
+                    foreach (var initializer in listInitExpression.Initializers)
+                    {
+                        foreach (var initializerArgument in initializer.Arguments)
+                        {
+                            if (initializerArgument is ConstantExpression constantExpression)
+                            {
+                                stringBuilder.Append(suffix);
+                                stringBuilder.Append(constantExpression.Value);
+                                suffix = "=";
+                            }
+                        }
+                        suffix = "&";
+                    }
+
+                    yield return new ExtractedConstant { Name = listInitExpression.Type.Name, Value = stringBuilder.ToString() };
+                }
+                else
+                    yield return new ExtractedConstant { Name = listInitExpression.Type.Name };
+            }
+            else if (expression is MemberInitExpression memberInitExpression)
+            {
+                var parameters = memberInitExpression.Bindings.Select(b =>
+                    b.ToString().Replace("\"", string.Empty).Replace(" ", string.Empty)).ToList();
+                if (parameters.Any())
+                {
+                    var value = string.Join("&", parameters);
+                    yield return new ExtractedConstant { Name = memberInitExpression.Type.Name, Value = value };
+                }
+                else
+                    foreach(var constants in ExtractConstants(memberInitExpression.NewExpression))
+                        yield return constants;
+            }
+            else if (expression is NewExpression newExpression)
+            {
+                var parameters = new Dictionary<string, object>();
+                var constructorParameters = newExpression.Constructor.GetParameters();
+                for (var i = 0; i < constructorParameters.Length; i++)
+                {
+                    if(newExpression.Arguments[i] is ConstantExpression constantExpression)
+                        parameters.Add(constructorParameters[i].Name, constantExpression.Value);
+                }
+                var value = string.Join("&", parameters.Where(kvp => kvp.Value != null).Select(kvp => $"{kvp.Key}={kvp.Value}"));
+                yield return new ExtractedConstant { Name = newExpression.Type.Name, Value = value };
+            }
             else
                 throw new NotImplementedException();
         }
@@ -362,6 +436,8 @@ namespace Apizr
             var extractedArgument = extractedArguments[cacheAttributes.ParameterOrder];
             var extractedArgumentValue = extractedArgument.Value;
 
+            if (extractedArgumentValue == null)
+                return $"{cacheKeyPrefix}()";
 
             var isArgumentValuePrimitive = extractedArgumentValue.GetType().GetTypeInfo().IsPrimitive ||
                                           extractedArgumentValue is decimal ||
@@ -400,7 +476,9 @@ namespace Apizr
             if (primaryKeyValue == null)
                 throw new InvalidOperationException($"{nameof(CacheKeyAttribute)} primary key found for: " + cacheKeyPrefix);
 
-            return $"{cacheKeyPrefix}({primaryKeyName}:{primaryKeyValue})";
+            return string.IsNullOrWhiteSpace(primaryKeyValue.ToString())
+                ? $"{cacheKeyPrefix}()"
+                : $"{cacheKeyPrefix}({primaryKeyName}:{primaryKeyValue})";
         }
 
         private MethodCacheAttributes GetCacheAttribute<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> expression)

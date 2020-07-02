@@ -1,8 +1,8 @@
-﻿using Apizr.Mediation.Commanding;
+﻿using Apizr.Mediation.Cruding.Base;
 
 namespace Apizr.Mediation.Cruding
 {
-    public class CreateCommand<TPayload> : CommandBase<TPayload, TPayload>
+    public class CreateCommand<TPayload> : CreateCommandBase<TPayload, TPayload>
     {
         public CreateCommand(TPayload payload) : base(payload)
         {

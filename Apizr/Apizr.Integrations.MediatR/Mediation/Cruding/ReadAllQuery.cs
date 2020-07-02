@@ -1,16 +1,20 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using Apizr.Mediation.Querying;
+using Apizr.Mediation.Cruding.Base;
 
 namespace Apizr.Mediation.Cruding
 {
-    public class ReadAllQuery<TResponse> : IQuery<TResponse>
+    public class ReadAllQuery<TReadAllParams, TReadAllResult> : ReadAllQueryBase<TReadAllParams, TReadAllResult>
     {
-        public ReadAllQuery(params KeyValuePair<string, object>[] parameters)
+        public ReadAllQuery(TReadAllParams parameters = default) : base(parameters)
         {
-            Parameters = parameters?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? new Dictionary<string, object>();
+            
         }
+    }
 
-        public IDictionary<string, object> Parameters { get; }
+    public class ReadAllQuery<TReadAllResult> : ReadAllQueryBase<TReadAllResult>
+    {
+        public ReadAllQuery(IDictionary<string, object> parameters = default) : base(parameters)
+        {
+        }
     }
 }

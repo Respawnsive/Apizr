@@ -24,54 +24,38 @@ namespace Apizr
         /// <summary>
         /// Create a <see cref="ApizrManager{ICrudApi}"/> instance for <see cref="T"/> object type (class), 
         /// with key of type <see cref="int"/> and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
+        /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
         /// <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static IApizrManager<ICrudApi<T, int, IEnumerable<T>>> CrudFor<T>(
+        public static IApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>> CrudFor<T>(
             Action<IApizrOptionsBuilder> optionsBuilder = null) where T : class =>
-            For<ICrudApi<T, int, IEnumerable<T>>, ApizrManager<ICrudApi<T, int, IEnumerable<T>>>>(
+            For<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>, ApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>>(
                 (lazyWebApis, connectivityHandler, cacheHandler, logHandler, policyRegistry) =>
-                    new ApizrManager<ICrudApi<T, int, IEnumerable<T>>>(lazyWebApis, connectivityHandler, cacheHandler, logHandler,
+                    new ApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>(lazyWebApis, connectivityHandler, cacheHandler, logHandler,
                         policyRegistry), optionsBuilder);
 
         /// <summary>
         /// Create a <see cref="ApizrManager{ICrudApi}"/> instance for <see cref="T"/> object type (class), 
         /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
+        /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
         /// <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
         /// <typeparam name="TKey">The object key type (primitive)</typeparam>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static IApizrManager<ICrudApi<T, TKey, IEnumerable<T>>> CrudFor<T, TKey>(
+        public static IApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>> CrudFor<T, TKey>(
             Action<IApizrOptionsBuilder> optionsBuilder = null) where T : class =>
-            For<ICrudApi<T, TKey, IEnumerable<T>>, ApizrManager<ICrudApi<T, TKey, IEnumerable<T>>>>(
+            For<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>, ApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>>>(
                 (lazyWebApis, connectivityHandler, cacheHandler, logHandler, policyRegistry) =>
-                    new ApizrManager<ICrudApi<T, TKey, IEnumerable<T>>>(lazyWebApis, connectivityHandler, cacheHandler, logHandler,
+                    new ApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>>(lazyWebApis, connectivityHandler, cacheHandler, logHandler,
                         policyRegistry), optionsBuilder);
-
-        /// <summary>
-        /// Create a <see cref="TApizrManager"/> instance for a managed crud api for <see cref="T"/> object (class), 
-        /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
-        /// </summary>
-        /// <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
-        /// <typeparam name="TKey">The object key type (primitive)</typeparam>
-        /// <typeparam name="TApizrManager">A custom <see cref="IApizrManager{ICrudApi}"/> implementation</typeparam>
-        /// <param name="apizrManagerFactory">The custom manager implementation instance factory</param>
-        /// <param name="optionsBuilder">The builder defining some options</param>
-        /// <returns></returns>
-        public static TApizrManager CrudFor<T, TKey, TApizrManager>(
-            Func<IEnumerable<ILazyPrioritizedWebApi<ICrudApi<T, TKey, IEnumerable<T>>>>, IConnectivityHandler, ICacheHandler,
-                ILogHandler, IReadOnlyPolicyRegistry<string>,
-                TApizrManager> apizrManagerFactory,
-            Action<IApizrOptionsBuilder> optionsBuilder = null)
-            where T : class
-            where TApizrManager : IApizrManager<ICrudApi<T, TKey, IEnumerable<T>>> =>
-            For(apizrManagerFactory, optionsBuilder);
 
         /// <summary>
         /// Create a <see cref="ApizrManager{ICrudApi}"/> instance for <see cref="T"/> object type (class), 
         /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="TReadAllResult"/>
+        /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
         /// <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
         /// <typeparam name="TKey">The object key type (primitive)</typeparam>
@@ -79,34 +63,58 @@ namespace Apizr
         /// (should inherit from <see cref="IEnumerable{T}"/> or be of class type)</typeparam>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static IApizrManager<ICrudApi<T, TKey, TReadAllResult>> CrudFor<T, TKey, TReadAllResult>(
+        public static IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>> CrudFor<T, TKey, TReadAllResult>(
             Action<IApizrOptionsBuilder> optionsBuilder = null)
             where T : class =>
-            For<ICrudApi<T, TKey, TReadAllResult>, ApizrManager<ICrudApi<T, TKey, TReadAllResult>>>(
+            For<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>, ApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>>>(
                 (lazyWebApis, connectivityHandler, cacheHandler, logHandler, policyRegistry) =>
-                    new ApizrManager<ICrudApi<T, TKey, TReadAllResult>>(lazyWebApis, connectivityHandler,
+                    new ApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>>(lazyWebApis, connectivityHandler,
+                        cacheHandler, logHandler,
+                        policyRegistry), optionsBuilder);
+
+        /// <summary>
+        /// Create a <see cref="ApizrManager{ICrudApi}"/> instance for <see cref="T"/> object type (class), 
+        /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="TReadAllResult"/>
+        /// and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
+        /// </summary>
+        /// <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
+        /// <typeparam name="TKey">The object key type (primitive)</typeparam>
+        /// <typeparam name="TReadAllResult">"ReadAll" query result type
+        /// (should inherit from <see cref="IEnumerable{T}"/> or be of class type)</typeparam>
+        /// <typeparam name="TReadAllParams">ReadAll query parameters</typeparam>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <returns></returns>
+        public static IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> CrudFor<T, TKey, TReadAllResult, TReadAllParams>(
+            Action<IApizrOptionsBuilder> optionsBuilder = null)
+            where T : class where TReadAllParams : class =>
+            For<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>, ApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>>(
+                (lazyWebApis, connectivityHandler, cacheHandler, logHandler, policyRegistry) =>
+                    new ApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>(lazyWebApis, connectivityHandler,
                         cacheHandler, logHandler,
                         policyRegistry), optionsBuilder);
 
         /// <summary>
         /// Create a <see cref="TApizrManager"/> instance for a managed crud api for <see cref="T"/> object (class), 
         /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="TReadAllResult"/>
+        /// and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
         /// </summary>
         /// <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
         /// <typeparam name="TKey">The object key type (primitive)</typeparam>
         /// <typeparam name="TApizrManager">A custom <see cref="IApizrManager{ICrudApi}"/> implementation</typeparam>
         /// <typeparam name="TReadAllResult">"ReadAll" query result type
         /// (should inherit from <see cref="IEnumerable{T}"/> or be of class type)</typeparam>
+        /// <typeparam name="TReadAllParams">ReadAll query parameters</typeparam>
         /// <param name="apizrManagerFactory">The custom manager implementation instance factory</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static TApizrManager CrudFor<T, TKey, TReadAllResult, TApizrManager>(
-            Func<IEnumerable<ILazyPrioritizedWebApi<ICrudApi<T, TKey, TReadAllResult>>>, IConnectivityHandler, ICacheHandler,
+        public static TApizrManager CrudFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(
+            Func<IEnumerable<ILazyPrioritizedWebApi<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>>, IConnectivityHandler, ICacheHandler,
                 ILogHandler, IReadOnlyPolicyRegistry<string>,
                 TApizrManager> apizrManagerFactory,
             Action<IApizrOptionsBuilder> optionsBuilder = null)
             where T : class
-            where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult>> =>
+            where TReadAllParams : class
+            where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> =>
             For(apizrManagerFactory, optionsBuilder);
 
         #endregion

@@ -5,15 +5,14 @@ namespace Apizr.Mediation.Commanding
     public interface ICommand<out TPayload, out TResponse> :
         IRequest<TResponse>
     {
-        TPayload Payload { get; }
     }
 
     public interface ICommand<out TPayload> :
-        IRequest
+        IRequest<Unit>
     {
     }
 
-    public interface ICommand : IRequest
+    public interface ICommand : IRequest<Unit>
     {
     }
 }

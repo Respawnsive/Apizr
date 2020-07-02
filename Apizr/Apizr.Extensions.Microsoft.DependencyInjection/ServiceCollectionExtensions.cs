@@ -26,6 +26,7 @@ namespace Apizr
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type (class),
         /// with key of type <see cref="int"/> and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
+        /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
         /// <typeparam name="T">The object type to manage with crud api calls</typeparam>
         /// <param name="services">The service collection</param>
@@ -33,24 +34,12 @@ namespace Apizr
         /// <returns></returns>
         public static IServiceCollection AddApizrCrudFor<T>(this IServiceCollection services,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) where T : class =>
-            AddApizrCrudFor(services, typeof(T), typeof(int), typeof(IEnumerable<>), typeof(ApizrManager<>), optionsBuilder);
-
-        /// <summary>
-        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type, 
-        /// with key of type <see cref="int"/> and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
-        /// </summary>
-        /// <typeparam name="T">The object type to manage with crud api calls</typeparam>
-        /// <param name="services">The service collection</param>
-        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
-        /// <param name="optionsBuilder">The builder defining some options</param>
-        /// <returns></returns>
-        public static IServiceCollection AddApizrCrudFor<T>(this IServiceCollection services, Type apizrManagerType,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) where T : class =>
-            AddApizrCrudFor(services, typeof(T), typeof(int), typeof(IEnumerable<>), apizrManagerType, optionsBuilder);
+            AddApizrCrudFor(services, typeof(T), typeof(int), typeof(IEnumerable<>), typeof(IDictionary<string, object>), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type (class), 
         /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
+        /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
         /// <typeparam name="T">The object type to manage with crud api calls</typeparam>
         /// <typeparam name="TKey">The object key type (primitive)</typeparam>
@@ -59,26 +48,13 @@ namespace Apizr
         /// <returns></returns>
         public static IServiceCollection AddApizrCrudFor<T, TKey>(this IServiceCollection services,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) where T : class =>
-            AddApizrCrudFor(services, typeof(T), typeof(TKey), typeof(IEnumerable<>), typeof(ApizrManager<>), optionsBuilder);
-
-        /// <summary>
-        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type (class), 
-        /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
-        /// </summary>
-        /// <typeparam name="T">The object type to manage with crud api calls</typeparam>
-        /// <typeparam name="TKey">The object key type (primitive)</typeparam>
-        /// <param name="services">The service collection</param>
-        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
-        /// <param name="optionsBuilder">The builder defining some options</param>
-        /// <returns></returns>
-        public static IServiceCollection AddApizrCrudFor<T, TKey>(this IServiceCollection services, Type apizrManagerType,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) where T : class =>
-            AddApizrCrudFor(services, typeof(T), typeof(TKey), typeof(IEnumerable<>), apizrManagerType, optionsBuilder);
+            AddApizrCrudFor(services, typeof(T), typeof(TKey), typeof(IEnumerable<>), typeof(IDictionary<string, object>), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type (class), 
         /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="TReadAllResult"/>
         /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
+        /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
         /// <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
         /// <typeparam name="TKey">The object key type (primitive)</typeparam>
@@ -90,29 +66,52 @@ namespace Apizr
         public static IServiceCollection AddApizrCrudFor<T, TKey, TReadAllResult>(this IServiceCollection services,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) 
             where T : class =>
-            AddApizrCrudFor(services, typeof(T), typeof(TKey), typeof(TReadAllResult), typeof(ApizrManager<>), optionsBuilder);
+            AddApizrCrudFor(services, typeof(T), typeof(TKey), typeof(TReadAllResult), typeof(IDictionary<string, object>), typeof(ApizrManager<>), optionsBuilder);
+
+        /// <summary>
+        /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type (class), 
+        /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="TReadAllResult"/>
+        /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
+        /// and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
+        /// </summary>
+        /// <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
+        /// <typeparam name="TKey">The object key type (primitive)</typeparam>
+        /// <typeparam name="TReadAllResult">"ReadAll" query result type
+        /// (should inherit from <see cref="IEnumerable{T}"/> or be of class type)</typeparam>
+        /// <typeparam name="TReadAllParams">ReadAll query parameters</typeparam>
+        /// <param name="services">The service collection</param>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <returns></returns>
+        public static IServiceCollection AddApizrCrudFor<T, TKey, TReadAllResult, TReadAllParams>(this IServiceCollection services,
+            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
+            where T : class =>
+            AddApizrCrudFor(services, typeof(T), typeof(TKey), typeof(TReadAllResult), typeof(TReadAllParams), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
         /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type, 
         /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="TReadAllResult"/>
         /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
+        /// and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
         /// </summary>
         /// <typeparam name="T">The object type to manage with crud api calls</typeparam>
         /// <typeparam name="TKey">The object key type (primitive)</typeparam>
         /// <typeparam name="TReadAllResult">"ReadAll" query result type
         /// (should inherit from <see cref="IEnumerable{T}"/> or be of class type)</typeparam>
+        /// <typeparam name="TReadAllParams">ReadAll query parameters</typeparam>
+        /// <typeparam name="TApizrManager">A custom <see cref="IApizrManager{ICrudApi}"/> implementation</typeparam>
         /// <param name="services">The service collection</param>
-        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static IServiceCollection AddApizrCrudFor<T, TKey, TReadAllResult>(this IServiceCollection services, Type apizrManagerType,
+        public static IServiceCollection AddApizrCrudFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(this IServiceCollection services,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) 
-            where T : class =>
-            AddApizrCrudFor(services, typeof(T), typeof(TKey), typeof(TReadAllResult), apizrManagerType, optionsBuilder);
+            where T : class
+            where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> =>
+            AddApizrCrudFor(services, typeof(T), typeof(TKey), typeof(TReadAllResult), typeof(TReadAllParams), typeof(TApizrManager), optionsBuilder);
 
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="crudedType"/> object type (class), 
         /// with key of type <see cref="int"/> and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
+        /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
         /// <param name="services">The service collection</param>
         /// <param name="crudedType">The object type to manage with crud api calls (class)</param>
@@ -120,7 +119,7 @@ namespace Apizr
         /// <returns></returns>
         public static IServiceCollection AddApizrCrudFor(this IServiceCollection services, Type crudedType,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
-            AddApizrCrudFor(services, crudedType, typeof(int), typeof(IEnumerable<>), typeof(ApizrManager<>), optionsBuilder);
+            AddApizrCrudFor(services, crudedType, typeof(int), typeof(IEnumerable<>), typeof(IDictionary<string, object>), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="crudedType"/> object type (class), 
@@ -134,12 +133,13 @@ namespace Apizr
         public static IServiceCollection AddApizrCrudFor(this IServiceCollection services, Type crudedType,
             Type crudedKeyType,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
-            AddApizrCrudFor(services, crudedType, crudedKeyType, typeof(IEnumerable<>), typeof(ApizrManager<>), optionsBuilder);
+            AddApizrCrudFor(services, crudedType, crudedKeyType, typeof(IEnumerable<>), typeof(IDictionary<string, object>), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="crudedType"/> object type (class), 
         /// with key of type <see cref="crudedKeyType"/> (primitive) and "ReadAll" query result of type <see cref="crudedReadAllResultType"/>
         /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
+        /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
         /// <param name="services">The service collection</param>
         /// <param name="crudedType">The object type to manage with crud api calls (class)</param>
@@ -151,20 +151,44 @@ namespace Apizr
         public static IServiceCollection AddApizrCrudFor(this IServiceCollection services, Type crudedType,
             Type crudedKeyType, Type crudedReadAllResultType,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
-            AddApizrCrudFor(services, crudedType, crudedType, crudedReadAllResultType, typeof(ApizrManager<>), optionsBuilder);
+            AddApizrCrudFor(services, crudedType, crudedType, crudedReadAllResultType, typeof(IDictionary<string, object>), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
-        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <see cref="crudedType"/> object type, with key of type <see cref="crudedKeyType"/>
+        /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="crudedType"/> object type (class), 
+        /// with key of type <see cref="crudedKeyType"/> (primitive) and "ReadAll" query result of type <see cref="crudedReadAllResultType"/>
+        /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
+        /// and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="crudedType">The object type to manage with crud api calls (class)</param>
+        /// <param name="crudedKeyType">The object key type (primitive)</param>
+        /// <param name="crudedReadAllResultType">"ReadAll" query result type
+        /// (should inherit from <see cref="IEnumerable{T}"/> or be of class type)</param>
+        /// <param name="crudedReadAllParamsType">ReadAll query parameters type</param>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <returns></returns>
+        public static IServiceCollection AddApizrCrudFor(this IServiceCollection services, Type crudedType,
+            Type crudedKeyType, Type crudedReadAllResultType, Type crudedReadAllParamsType,
+            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
+            AddApizrCrudFor(services, crudedType, crudedType, crudedReadAllResultType, crudedReadAllParamsType, typeof(ApizrManager<>), optionsBuilder);
+
+        /// <summary>
+        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <see cref="crudedType"/> object type (class), 
+        /// with key of type <see cref="crudedKeyType"/> (primitive) and "ReadAll" query result of type <see cref="crudedReadAllResultType"/>
+        /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
+        /// and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
         /// </summary>
         /// <param name="services">The service collection</param>
         /// <param name="crudedType">The object type to manage with crud api calls</param>
         /// <param name="crudedKeyType">The object key type</param>
-        /// <param name="crudedReadAllResultType"></param>
+        /// <param name="crudedReadAllResultType">"ReadAll" query result type
+        /// (should inherit from <see cref="IEnumerable{T}"/> or be of class type)</param>
+        /// <param name="crudedReadAllParamsType">ReadAll query parameters type</param>
         /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
         public static IServiceCollection AddApizrCrudFor(this IServiceCollection services, Type crudedType,
-            Type crudedKeyType, Type crudedReadAllResultType, Type apizrManagerType,
+            Type crudedKeyType, Type crudedReadAllResultType, Type crudedReadAllParamsType, Type apizrManagerType,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
         {
             if (!crudedType.GetTypeInfo().IsClass)
@@ -178,15 +202,20 @@ namespace Apizr
                 throw new ArgumentException(
                     $"{crudedReadAllResultType.Name} must inherit from {typeof(IEnumerable<>)} or be of class type", nameof(crudedReadAllResultType));
 
+            if (!typeof(IDictionary<string, object>).IsAssignableFrom(crudedReadAllParamsType) &&
+                !crudedReadAllParamsType.IsClass)
+                throw new ArgumentException(
+                    $"{crudedReadAllParamsType.Name} must inherit from {typeof(IDictionary<string, object>)} or be of class type", nameof(crudedReadAllParamsType));
+
             if (!typeof(IApizrManager<>).IsAssignableFromGenericType(apizrManagerType))
                 throw new ArgumentException(
                     $"{apizrManagerType} must inherit from {typeof(IApizrManager<>)}", nameof(apizrManagerType));
 
             return AddApizrFor(services,
-                typeof(ICrudApi<,,>).MakeGenericType(crudedType, crudedKeyType,
-                    crudedReadAllResultType.MakeGenericTypeIfNeeded(crudedType)),
-                apizrManagerType.MakeGenericTypeIfNeeded(typeof(ICrudApi<,,>).MakeGenericType(crudedType, crudedKeyType,
-                    crudedReadAllResultType.MakeGenericTypeIfNeeded(crudedType))),
+                typeof(ICrudApi<,,,>).MakeGenericType(crudedType, crudedKeyType,
+                    crudedReadAllResultType.MakeGenericTypeIfNeeded(crudedType), crudedReadAllParamsType),
+                apizrManagerType.MakeGenericTypeIfNeeded(typeof(ICrudApi<,,,>).MakeGenericType(crudedType, crudedKeyType,
+                    crudedReadAllResultType.MakeGenericTypeIfNeeded(crudedType), crudedReadAllParamsType)),
                 optionsBuilder);
         }
 
@@ -270,10 +299,10 @@ namespace Apizr
                     optionsBuilder += builder => builder.WithBaseAddress(crud.Value.BaseUri);
 
                 AddApizrFor(services,
-                    typeof(ICrudApi<,,>).MakeGenericType(crud.Key, crud.Value.KeyType,
-                        crud.Value.ReadAllResultType.MakeGenericTypeIfNeeded(crud.Key)),
-                    apizrManagerType.MakeGenericType(typeof(ICrudApi<,,>).MakeGenericType(crud.Key, crud.Value.KeyType,
-                        crud.Value.ReadAllResultType.MakeGenericTypeIfNeeded(crud.Key))),
+                    typeof(ICrudApi<,,,>).MakeGenericType(crud.Key, crud.Value.KeyType,
+                        crud.Value.ReadAllResultType.MakeGenericTypeIfNeeded(crud.Key), crud.Value.ReadAllParamsType),
+                    apizrManagerType.MakeGenericType(typeof(ICrudApi<,,,>).MakeGenericType(crud.Key, crud.Value.KeyType,
+                        crud.Value.ReadAllResultType.MakeGenericTypeIfNeeded(crud.Key), crud.Value.ReadAllParamsType)),
                     optionsBuilder);
             }
 

@@ -3,7 +3,7 @@ Refit based web api client management, but resilient (retry, connectivity, cache
 
 ## Libraries
 
-[Change Log - June 26, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
+[Change Log - July 03, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
 
 |Project|NuGet|
 |-------|-----|
@@ -13,6 +13,7 @@ Refit based web api client management, but resilient (retry, connectivity, cache
 |Apizr.Integrations.MonkeyCache|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.MonkeyCache.svg)](https://www.nuget.org/packages/Apizr.Integrations.MonkeyCache/)|
 |Apizr.Integrations.Shiny|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Shiny.svg)](https://www.nuget.org/packages/Apizr.Integrations.Shiny/)|
 |Apizr.Integrations.MediatR|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.MediatR.svg)](https://www.nuget.org/packages/Apizr.Integrations.MediatR/)|
+|Apizr.Integrations.Optional|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Optional.svg)](https://www.nuget.org/packages/Apizr.Integrations.Optional/)|
 
 Install the NuGet package of your choice:
 
@@ -22,6 +23,7 @@ Install the NuGet package of your choice:
    - Apizr.Integrations.MonkeyCache package brings an ICacheHandler method mapping implementation for [MonkeyCache](https://github.com/jamesmontemagno/monkey-cache)
    - Apizr.Integrations.Shiny package brings ICacheHandler, ILogHandler and IConnectivityHandler method mapping implementations for [Shiny](https://github.com/shinyorg/shiny), extending your IServiceCollection with a UseApizr registration method
    - Apizr.Integrations.MediatR package enables Crud request auto handling with CQRS mediation [MediatR](https://github.com/jbogard/MediatR)
+   - Apizr.Integrations.Optional package enables Crud request auto handling with CQRS mediation and Optional result [Optional.Async](https://github.com/dnikolovv/optional-async)
 
 Definitly, Apizr make use of well known nuget packages to make the magic appear:
 
@@ -187,10 +189,13 @@ As we'll use the built-in yet defined ICrudApi, there's no more definition to do
 Here is what it looks like then:
 ```csharp
 [Policy("TransientHttpError"), Cache]
-public interface ICrudApi<T, in TKey, TReadAllResult> where T : class
+public interface ICrudApi<T, in TKey, TReadAllResult, in TReadAllParams> where T : class
 {
     [Post("")]
     Task<T> Create([Body] T payload, CancellationToken cancellationToken = default);
+
+    [Get("")]
+    Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, CancellationToken cancellationToken = default);
 
     [Get("")]
     Task<TReadAllResult> ReadAll(CancellationToken cancellationToken = default);
@@ -209,7 +214,10 @@ public interface ICrudApi<T, in TKey, TReadAllResult> where T : class
 We can see that it comes with some attribute decorations, like Cache or Policy. 
 If you don't want it for your crud scenario, just don't provide any CacheHandler and/or TransientHttpError policy, it will be ignored.
 
-About generic types, T and TKey meanings are abvious, and TReadAllResult is there to handle cases where ReadAll doesn't return an ```IEnumerable<T>``` or derived, but a paged result with some statistics.
+About generic types:
+- T and TKey meanings are abvious
+- TReadAllResult is there to handle cases where ReadAll doesn't return an ```IEnumerable<T>``` or derived, but a paged result with some statistics
+- TReadAllParams is there to handle cases where you don't want to provide an ```IDictionary<string, object>``` for a ReadAll reaquest, but a custom class
 
 But again, nothing to do around here.
 
@@ -220,25 +228,28 @@ But again, nothing to do around here.
 Somewhere where you can add services to your container, add the following:
 ```csharp
 // Apizr registration
-myContainer.SomeInstanceRegistrationMethod(Apizr.CrudFor<T, TKey, TReadAllResult>(optionsBuilder => optionsBuilder.WithBaseAddress("your specific T entity crud base uri")));
+myContainer.SomeInstanceRegistrationMethod(Apizr.CrudFor<T, TKey, TReadAllResult, TReadAllParams>(optionsBuilder => optionsBuilder.WithBaseAddress("your specific T entity crud base uri")));
 ```
 
 T must be a class.
 
 TKey must be primitive. If you don't provide it here, it will be defined as ```int```.
 
-TReadAllResult must inherit from ```IEnumerable<>``` or be of class type.
+TReadAllResult must inherit from ```IEnumerable<>``` or be a class.
 If you don't use paged result, just don't provide any TReadAllResult here and it will be defined as ```IEnumerable<T>```.
+
+TReadAllParams must be a class.
+If you don't use a custom class holding your query parameters, just don't provide any TReadAllParams here and it will be defined as ```IDictionary<string, object>```.
 
 You have to provide the specific entity crud base uri with the options builder.
 
 There are 5 CrudFor flavors, depending on what you want to do and provide.
-One of it is the simple ```Apizr.CrudFor<T>()```, wich as you can expect, define TKey as ```int``` and TReadAllResult as ```IEnumerable<T>```.
+One of it is the simple ```Apizr.CrudFor<T>()```, wich as you can expect, define TKey as ```int```, TReadAllResult as ```IEnumerable<T>``` and TReadAllParams as ```IDictionary<string, object>```.
 
 #### Extensions approach
 
 Ok, for this one, two options again:
-- Manually: register calling AddApizrCrudFor<T, TKey, TReadAllResult> service collection extension method or overloads for each entity you want to manage
+- Manually: register calling AddApizrCrudFor<T, TKey, TReadAllResult, TReadAllParams> service collection extension method or overloads for each entity you want to manage
 - Automatically: decorate your entities with CrudEntityAttribute and let Apizr auto register it all for you
 
 ##### Manually
@@ -248,10 +259,10 @@ In your Startup class, add the following:
 public override void ConfigureServices(IServiceCollection services)
 {
     // Apizr registration
-    services.AddApizrCrudFor<T, TKey, TReadAllResult>(optionsBuilder => optionsBuilder.WithBaseAddress("your specific T entity crud base uri"));
+    services.AddApizrCrudFor<T, TKey, TReadAllResult, TReadAllParams>(optionsBuilder => optionsBuilder.WithBaseAddress("your specific T entity crud base uri"));
     
     // Or if you use Shiny
-    //services.UseApizrCrudFor<T, TKey, TReadAllResult>(optionsBuilder => optionsBuilder.WithBaseAddress("your specific T entity crud base uri"));
+    //services.UseApizrCrudFor<T, TKey, TReadAllResult, TReadAllParams>(optionsBuilder => optionsBuilder.WithBaseAddress("your specific T entity crud base uri"));
 }
 ```
 
@@ -259,21 +270,24 @@ Again, T must be a class.
 
 TKey must be primitive. If you don't provide it here, it will be defined as ```int```.
 
-TReadAllResult must inherit from ```IEnumerable<>``` or be of class type.
+TReadAllResult must inherit from ```IEnumerable<>``` or be a class.
 If you don't use paged result, just don't provide any TReadAllResult here and it will be defined as ```IEnumerable<T>```.
+
+TReadAllParams must be a class.
+If you don't use a custom class holding your query parameters, just don't provide any TReadAllParams here and it will be defined as ```IDictionary<string, object>```.
 
 You have to provide the specific entity crud base uri with the options builder.
 
 There are 10 AddApizrCrudFor/UseApizrCrudFor flavors for crud manual registration, depending on what you want to do and provide.
-One of it is the simple ```services.AddApizrCrudFor<T>()``` or ```services.UseApizrCrudFor<T>()```, wich as you can expect, define TKey as ```int``` and TReadAllResult as ```IEnumerable<T>```.
+One of it is the simple ```services.AddApizrCrudFor<T>()``` or ```services.UseApizrCrudFor<T>()```, wich as you can expect, define TKey as ```int```, TReadAllResult as ```IEnumerable<T>``` and TReadAllParams as ```IDictionary<string, object>```.
 
 ##### Automatically
 
 You need to have access to your entity model classes for this option.
 
-Decorate your crud entities like so:
+Decorate your crud entities like so (but with your own settings):
 ```csharp
-[CrudEntity("https://myapi.com/api/myentity", typeof(int), typeof(PagedResult<>))]
+[CrudEntity("https://myapi.com/api/myentity", typeof(int), typeof(PagedResult<>), typeof(ReadAllUsersParams))]
 public class MyEntity
 {
     [JsonProperty("id")]
@@ -284,9 +298,10 @@ public class MyEntity
 ```
 
 Thanks to this attribute:
-- We provide the specific entity crud base uri
-- We can set TKey type to any primitive type (default to int)
-- We can set TReadAllResult to any class or must inherit from ```IEnumerable<>``` (default to ```IEnumerable<T>```)
+- (Mandatory) We have to provide the specific entity crud base uri
+- (Optional) We can set TKey type to any primitive type (default to int)
+- (Optional) We can set TReadAllResult to any class or must inherit from ```IEnumerable<>``` (default to ```IEnumerable<T>```)
+- (Optional) We can set TReadAllParams to any class (default to ```IDictionary<string, object>```)
 
 Then, register in your Startup class like so:
 ```csharp
@@ -307,13 +322,13 @@ This is the simplest.
 
 Sending web request from your app - e.g. using Apizr in a Xamarin.Forms mobile app.
 
-Inject ```IApizrManager<ICrudApi<T, TKey, TReadAllResult>>``` where you need it - e.g. into your ViewModel constructor
+Inject ```IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>``` where you need it - e.g. into your ViewModel constructor
 ```csharp
 public class YourViewModel
 {
-    private readonly IApizrManager<ICrudApi<User, int, PagedResult<User>>> _userCrudManager;
+    private readonly IApizrManager<ICrudApi<User, int, PagedResult<User>, ReadAllUsersParams>> _userCrudManager;
 	
-    public YouViewModel(IApizrManager<ICrudApi<User, int, PagedResult<User>>> userCrudManager)
+    public YouViewModel(IApizrManager<ICrudApi<User, int, PagedResult<User>, ReadAllUsersParams>> userCrudManager)
     {
 		_userCrudManager = userCrudManager;
     }
@@ -416,14 +431,23 @@ In extensions registration approach and with the dedicated integration nuget pac
 optionsBuilder => optionsBuilder.WithCrudMediation()
 ```
 
+Don't forget to register MediatR itself as usual:
+```csharp
+services.AddMediatR(typeof(Startup));
+```
+
 When activated, you don't have to inject/resolve anything else than an ```IMediator``` instance, in order to play with Crud.
 
 Then, you'll be able to send queries and commands from anywhere, among:
+- ```ReadQuery<T>```: get the T entity with int
 - ```ReadQuery<T, TKey>```: get the T entity with TKey
-- ```ReadAllQuery<T>```: get all T entities
+- ```ReadAllQuery<TReadAllResult>```: get TReadAllResult with IDictionary<string, object> optional query parameters
+- ```ReadAllQuery<TReadAllParams, TReadAllResult>```: get TReadAllResult with TReadAllParams optional query parameters
 - ```CreateCommand<T>```: create a T entity
+- ```UpdateCommand<T>```: update the T entity with int
 - ```UpdateCommand<TKey, T>```: update the T entity with TKey
-- ```DeleteCommand<TKey>```: delete the T entity with TKey
+- ```DeleteCommand<T>```: delete the T entity with int
+- ```DeleteCommand<T, TKey>```: delete the T entity with TKey
 
 Apizr will intercept it and handle it to send the result back to you, thanks to MediatR.
 
@@ -463,15 +487,67 @@ public class YourViewModel
 ```
 
 It could become very useful and so much more readable when you have to manage crud for several entities in the same place.
-It means only one ```IMediator``` instance for all entities crud api calls, instead of each so long named ```IApizrManager<ICrudApi<T, TKey, TReadAllResult>>``` for each entity.
+It means only one ```IMediator``` instance for all entity crud api calls, instead of each so long named ```IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>``` for each entity.
 
-Note that the ```WithCrudMediation``` activation method let you optionally provide your own requests and request handlers types as parameters if needed.
+### Optional
 
-If you provide some:
-- Your requests must inherit from any query or command listed above.
-- Your requests handlers must inherit from any of these self-describing handlers:
-  - ```ReadQueryHandler<T, TKey, TReadAllResult>```
-  - ```ReadAllQueryHandler<T, TKey, TReadAllResult>```
-  - ```CreateCommandHandler<T, TKey, TReadAllResult>```
-  - ```UpdateCommandHandler<T, TKey, TReadAllResult>```
-  - ```DeleteCommandHandler<T, TKey, TReadAllResult>```
+In extensions registration approach and with the dedicated integration nuget package referenced, the options builder let you enable Crud mediation with Optional result by calling:
+```csharp
+optionsBuilder => optionsBuilder.WithCrudOptionalMediation()
+```
+
+Again, don't forget to register MediatR itself as usual:
+```csharp
+services.AddMediatR(typeof(Startup));
+```
+
+When activated, you don't have to inject/resolve anything else than an ```IMediator``` instance, in order to play with Crud and get some Optional result.
+
+Then, you'll be able to send queries and commands from anywhere, among:
+- ```ReadOptionalQuery<T>```: get the T entity with int and returns ```Option<T, ApizrException<T>>```
+- ```ReadOptionalQuery<T, TKey>```: get the T entity with TKey and returns ```Option<T, ApizrException<T>>```
+- ```ReadAllOptionalQuery<TReadAllResult>```: get TReadAllResult with IDictionary<string, object> optional query parameters and returns ```Option<TReadAllResult, ApizrException<TReadAllResult>>```
+- ```ReadAllOptionalQuery<TReadAllParams, TReadAllResult>```: get TReadAllResult with TReadAllParams optional query parameters and returns ```Option<TReadAllResult, ApizrException<TReadAllResult>>```
+- ```CreateOptionalCommand<T>```: create a T entity and returns ```Option<Unit, ApizrException>```
+- ```UpdateOptionalCommand<T>```: update the T entity with int and returns ```Option<Unit, ApizrException>```
+- ```UpdateOptionalCommand<TKey, T>```: update the T entity with TKey and returns ```Option<Unit, ApizrException>```
+- ```DeleteOptionalCommand<T>```: delete the T entity with int and returns ```Option<Unit, ApizrException>```
+- ```DeleteOptionalCommand<T, TKey>```: delete the T entity with TKey and returns ```Option<Unit, ApizrException>```
+
+Apizr will intercept it and handle it to send the result back to you, thanks to MediatR and Optional.
+
+From there, our ViewModel can look like:
+```csharp
+public class YourViewModel
+{
+    private readonly IMediator _mediator;
+	
+    public YouViewModel(IMediator mediator)
+    {
+		_mediator = mediator;
+    }
+    
+    public ObservableCollection<User>? Users { get; set; }
+
+    private async Task GetUsersAsync()
+    {
+        var result = await _mediator.Send(new ReadAllOptionalQuery<PagedResult<User>>(), CancellationToken.None);
+        result.Match(pagedUsers =>
+        {
+            if (pagedUsers.Data != null && pagedUsers.Data.Any())
+                Users = new ObservableCollection<User>(pagedUsers.Data);
+        }, e =>
+        {
+            var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
+            UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+
+            if (e.CachedResult?.Data != null && e.CachedResult.Data.Any())
+                Users = new ObservableCollection<User>(e.CachedResult.Data);
+        });
+    }
+}
+```
+
+Same advantages than classic mediation but with exception handling.
+Both "classic" and "optional" mediation are compatibles with each other.
+It means that if you call both methods during registration, both request collection will be available, so you can decide wich one suits to you when you need it.

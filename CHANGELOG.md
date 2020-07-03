@@ -20,6 +20,10 @@
 
 - [New] Brand new integration with MediatR, to let Apizr handle crud requests execution with mediation
 
+### Apizr.Integrations.Optional
+
+- [New] Brand new integration with Optional, to let Apizr handle crud requests execution with mediation and optional result
+
 1.1.0
 ---
 

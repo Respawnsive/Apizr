@@ -12,6 +12,7 @@ using Apizr.Requesting;
 using Fusillade;
 using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Polly;
 using Polly.Registry;
 using Refit;
@@ -457,13 +458,13 @@ namespace Apizr
                 });
             }
 
-            services.AddSingleton(typeof(IConnectivityHandler), apizrOptions.ConnectivityHandlerType);
+            services.AddOrReplaceSingleton(typeof(IConnectivityHandler), apizrOptions.ConnectivityHandlerType);
 
-            services.AddSingleton(typeof(ICacheHandler), apizrOptions.CacheHandlerType);
+            services.AddOrReplaceSingleton(typeof(ICacheHandler), apizrOptions.CacheHandlerType);
 
-            services.AddSingleton(typeof(ILogHandler), apizrOptions.LogHandlerType);
+            services.AddOrReplaceSingleton(typeof(ILogHandler), apizrOptions.LogHandlerType);
 
-            services.AddSingleton(typeof(IApizrManager<>).MakeGenericType(apizrOptions.WebApiType), typeof(ApizrManager<>).MakeGenericType(apizrOptions.WebApiType));
+            services.TryAddSingleton(typeof(IApizrManager<>).MakeGenericType(apizrOptions.WebApiType), typeof(ApizrManager<>).MakeGenericType(apizrOptions.WebApiType));
 
             foreach (var postRegistrationAction in apizrOptions.PostRegistrationActions)
             {
@@ -517,6 +518,24 @@ namespace Apizr
             }
 
             return typeName;
+        }
+
+        private static IServiceCollection AddOrReplaceSingleton(this IServiceCollection services, Type serviceType, Type implementationType)
+        {
+            var serviceDescriptors = services.Where(sd => sd.ServiceType == serviceType).ToList();
+            if (serviceDescriptors.Any())
+            {
+                if(serviceDescriptors.Count > 1)
+                    throw new Exception("Can't replace more than one registration");
+
+                var serviceDescriptor = serviceDescriptors.First();
+                if(serviceDescriptor.ImplementationType != implementationType)
+                    services.Replace(new ServiceDescriptor(serviceType, implementationType, ServiceLifetime.Singleton));
+            }
+            else
+                services.AddSingleton(serviceType, implementationType);
+
+            return services;
         }
     }
 }

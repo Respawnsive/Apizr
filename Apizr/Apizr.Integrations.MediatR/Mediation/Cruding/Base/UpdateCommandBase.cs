@@ -16,14 +16,21 @@ namespace Apizr.Mediation.Cruding.Base
         public TPayload Payload { get; }
     }
 
-    public abstract class UpdateCommandBase<TKey, TPayload> : UpdateCommandBase<TKey, TPayload, Unit>
+    //public abstract class UpdateCommandBase<TKey, TPayload> : UpdateCommandBase<TKey, TPayload, Unit>
+    //{
+    //    protected UpdateCommandBase(TKey key, TPayload payload) : base(key, payload)
+    //    {
+    //    }
+    //}
+
+    public abstract class UpdateCommandBase<TPayload, TResponse> : UpdateCommandBase<int, TPayload, TResponse>
     {
-        protected UpdateCommandBase(TKey key, TPayload payload) : base(key, payload)
+        protected UpdateCommandBase(int key, TPayload payload) : base(key, payload)
         {
         }
     }
 
-    public abstract class UpdateCommandBase<TPayload> : UpdateCommandBase<int, TPayload>
+    public abstract class UpdateCommandBase<TPayload> : UpdateCommandBase<TPayload, Unit>
     {
         protected UpdateCommandBase(int key, TPayload payload) : base(key, payload)
         {

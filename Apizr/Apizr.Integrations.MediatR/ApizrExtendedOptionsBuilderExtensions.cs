@@ -346,7 +346,7 @@ namespace Apizr
 
             // Read
             var readCombination = validRequestAndHandlerTypes.FirstOrDefault(kvp =>
-                typeof(ReadQueryBase<,>).IsAssignableFromGenericType(kvp.Key));
+                typeof(ReadQueryBase<,>).IsAssignableFromGenericType(kvp.Key) && !typeof(ReadQueryBase<>).IsAssignableFromGenericType(kvp.Key));
             services.TryAddTransient(
                 typeof(IRequestHandler<,>).MakeGenericType(
                     (readCombination.Key ?? typeof(ReadQuery<,>)).MakeGenericType(crudedEntityType,
@@ -374,7 +374,7 @@ namespace Apizr
 
             // ReadAll
             var readAllCombination = validRequestAndHandlerTypes.FirstOrDefault(kvp =>
-            typeof(ReadAllQueryBase<,>).IsAssignableFromGenericType(kvp.Key));
+            typeof(ReadAllQueryBase<,>).IsAssignableFromGenericType(kvp.Key) && !typeof(ReadAllQueryBase<>).IsAssignableFromGenericType(kvp.Key));
             services.TryAddTransient(
                 typeof(IRequestHandler<,>).MakeGenericType(
                     (readAllCombination.Key ?? typeof(ReadAllQuery<,>)).MakeGenericType(
@@ -402,7 +402,7 @@ namespace Apizr
             if (crudEntityAttribute.KeyType == typeof(int))
             {
                 var simplifiedUpdateCombination = validRequestAndHandlerTypes.FirstOrDefault(kvp =>
-                                typeof(UpdateCommandBase<>).IsAssignableFromGenericType(kvp.Key));
+                                typeof(UpdateCommandBase<,>).IsAssignableFromGenericType(kvp.Key));
                 services.TryAddTransient(
                     typeof(IRequestHandler<,>).MakeGenericType(
                         (simplifiedUpdateCombination.Key ?? typeof(UpdateCommand<>)).MakeGenericType(
@@ -416,7 +416,7 @@ namespace Apizr
 
             // Update
             var updateCombination = validRequestAndHandlerTypes.FirstOrDefault(kvp =>
-                typeof(UpdateCommandBase<,>).IsAssignableFromGenericType(kvp.Key));
+                typeof(UpdateCommandBase<,,>).IsAssignableFromGenericType(kvp.Key) && !typeof(UpdateCommandBase<,>).IsAssignableFromGenericType(kvp.Key));
             services.TryAddTransient(
                 typeof(IRequestHandler<,>).MakeGenericType(
                     (updateCombination.Key ?? typeof(UpdateCommand<,>)).MakeGenericType(
@@ -431,12 +431,12 @@ namespace Apizr
             if (crudEntityAttribute.KeyType == typeof(int))
             {
                 var simplifiedDeleteCombination = validRequestAndHandlerTypes.FirstOrDefault(kvp =>
-                                typeof(DeleteCommandBase<>).IsAssignableFromGenericType(kvp.Key));
+                                typeof(DeleteCommandBase<,>).IsAssignableFromGenericType(kvp.Key));
                 services.TryAddTransient(
                     typeof(IRequestHandler<,>).MakeGenericType(
                         (simplifiedDeleteCombination.Key ?? typeof(DeleteCommand<>)).MakeGenericType(crudedEntityType),
                         requestResponseTypes.First(kvp => kvp.Key == typeof(DeleteCommandBase<,,>)).Value),
-                    (simplifiedDeleteCombination.Key ??
+                    (simplifiedDeleteCombination.Value ??
                      typeof(DeleteCommandHandler<,,>)).MakeGenericType(crudedEntityType,
                         crudEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(crudedEntityType),
                         crudEntityAttribute.ReadAllParamsType));
@@ -444,7 +444,7 @@ namespace Apizr
 
             // Delete
             var deleteCombination = validRequestAndHandlerTypes.FirstOrDefault(kvp =>
-                typeof(DeleteCommandBase<,>).IsAssignableFromGenericType(kvp.Key));
+                typeof(DeleteCommandBase<,,>).IsAssignableFromGenericType(kvp.Key) && !typeof(DeleteCommandBase<,>).IsAssignableFromGenericType(kvp.Key));
             services.TryAddTransient(
                 typeof(IRequestHandler<,>).MakeGenericType(
                     (deleteCombination.Key ?? typeof(DeleteCommand<,>))

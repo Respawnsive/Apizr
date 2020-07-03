@@ -11,7 +11,7 @@ namespace Apizr.Optional.Cruding
         }
     }
 
-    public class DeleteOptionalCommand<T> : DeleteCommandBase<T, int, Option<Unit, ApizrException>>
+    public class DeleteOptionalCommand<T> : DeleteCommandBase<T, Option<Unit, ApizrException>>
     {
         public DeleteOptionalCommand(int key) : base(key)
         {

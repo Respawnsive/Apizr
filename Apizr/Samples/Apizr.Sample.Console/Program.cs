@@ -98,50 +98,10 @@ namespace Apizr.Sample.Console
                         // Auto assembly detection, registration and handling with mediation
                         services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
                     else
-                        // Auto assembly detection, registration and handling with optional mediation
-                        services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithCrudOptionalMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
+                        // Auto assembly detection, registration and handling with both mediation and optional mediation
+                        services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithCrudOptionalMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
 
                     services.AddMediatR(typeof(Program));
-
-                    //// Read
-                    //services
-                    //    .AddTransient<IRequestHandler<ReadQuery<User>, User>,
-                    //        ReadQueryHandler<User, IEnumerable<User>, IDictionary<string, object>>>();
-                    //services
-                    //    .AddTransient<IRequestHandler<ReadOptionalQuery<User>, Option<User, ApizrException<User>>>,
-                    //        ReadOptionalQueryHandler<User, IEnumerable<User>, IDictionary<string, object>>>();
-
-                    //// ReadAll
-                    //services
-                    //    .AddTransient<IRequestHandler<ReadAllQuery<IEnumerable<User>>, IEnumerable<User>>,
-                    //        ReadAllQueryHandler<User, int, IEnumerable<User>>>();
-                    //services
-                    //    .AddTransient<IRequestHandler<ReadAllOptionalQuery<IEnumerable<User>>, Option<IEnumerable<User>, ApizrException<IEnumerable<User>>>>,
-                    //        ReadAllOptionalQueryHandler<User, int, IEnumerable<User>>>();
-
-                    //// Create
-                    //services
-                    //    .AddTransient<IRequestHandler<CreateCommand<User>, User>,
-                    //        CreateCommandHandler<User, int, IEnumerable<User>, IDictionary<string, object>>>();
-                    //services
-                    //    .AddTransient<IRequestHandler<CreateOptionalCommand<User>, Option<User, ApizrException>>,
-                    //        CreateOptionalCommandHandler<User, int, IEnumerable<User>, IDictionary<string, object>>>();
-
-                    //// Update
-                    //services
-                    //    .AddTransient<IRequestHandler<UpdateCommand<User>, Unit>,
-                    //        UpdateCommandHandler<User, int, IEnumerable<User>, IDictionary<string, object>>>();
-                    //services
-                    //    .AddTransient<IRequestHandler<UpdateOptionalCommand<User>, Option<Unit, ApizrException>>,
-                    //        UpdateOptionalCommandHandler<User, int, IEnumerable<User>, IDictionary<string, object>>>();
-
-                    //// Delete
-                    //services
-                    //    .AddTransient<IRequestHandler<DeleteCommand<User>, Unit>,
-                    //        DeleteCommandHandler<User, IEnumerable<User>, IDictionary<string, object>>>();
-                    //services
-                    //    .AddTransient<IRequestHandler<DeleteOptionalCommand<User>, Option<Unit, ApizrException>>,
-                    //        DeleteOptionalCommandHandler<User, IEnumerable<User>, IDictionary<string, object>>>();
                 }
 
                 // This is just to let you know what's registered from/for Apizr and ready to use

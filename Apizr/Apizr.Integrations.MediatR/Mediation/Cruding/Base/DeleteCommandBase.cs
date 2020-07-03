@@ -13,14 +13,14 @@ namespace Apizr.Mediation.Cruding.Base
         public TKey Key { get; }
     }
 
-    public abstract class DeleteCommandBase<T, TKey> : DeleteCommandBase<T, TKey, Unit>
+    public abstract class DeleteCommandBase<T, TResponse> : DeleteCommandBase<T, int, TResponse>
     {
-        protected DeleteCommandBase(TKey key) : base(key)
+        protected DeleteCommandBase(int key) : base(key)
         {
         }
     }
 
-    public abstract class DeleteCommandBase<T> : DeleteCommandBase<T, int, Unit>
+    public abstract class DeleteCommandBase<T> : DeleteCommandBase<T, Unit>
     {
         protected DeleteCommandBase(int key) : base(key)
         {

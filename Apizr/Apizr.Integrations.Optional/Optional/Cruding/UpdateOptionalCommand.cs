@@ -12,7 +12,7 @@ namespace Apizr.Optional.Cruding
         }
     }
 
-    public class UpdateOptionalCommand<TPayload> : UpdateOptionalCommand<int, TPayload>
+    public class UpdateOptionalCommand<TPayload> : UpdateCommandBase<TPayload, Option<Unit, ApizrException>>
     {
         public UpdateOptionalCommand(int key, TPayload payload) : base(key, payload)
         {

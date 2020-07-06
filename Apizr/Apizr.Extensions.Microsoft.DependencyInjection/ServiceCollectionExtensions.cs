@@ -195,6 +195,15 @@ namespace Apizr
             if (!crudedType.GetTypeInfo().IsClass)
                 throw new ArgumentException($"{crudedType.Name} is not a class", nameof(crudedType));
 
+            Type modelEntityType = null;
+            if (typeof(MappedEntity<,>).IsAssignableFromGenericType(crudedType))
+            {
+                var entityTypes = crudedType.GetGenericArguments();
+
+                modelEntityType = entityTypes[0];
+                crudedType = entityTypes[1];
+            }
+
             if (!crudedKeyType.GetTypeInfo().IsPrimitive)
                 throw new ArgumentException($"{crudedKeyType.Name} is not primitive", nameof(crudedKeyType));
 
@@ -212,11 +221,19 @@ namespace Apizr
                 throw new ArgumentException(
                     $"{apizrManagerType} must inherit from {typeof(IApizrManager<>)}", nameof(apizrManagerType));
 
+            var crudAttribute = new CrudEntityAttribute(null, crudedKeyType, crudedReadAllResultType, crudedReadAllParamsType, modelEntityType);
+            if (optionsBuilder == null)
+                optionsBuilder = builder => builder.ApizrOptions.CrudEntities.Add(crudedType, crudAttribute);
+            else
+                optionsBuilder += builder => builder.ApizrOptions.CrudEntities.Add(crudedType, crudAttribute);
+
+            var readAllResultType = crudedReadAllResultType.MakeGenericTypeIfNeeded(crudedType);
+
             return AddApizrFor(services,
                 typeof(ICrudApi<,,,>).MakeGenericType(crudedType, crudedKeyType,
-                    crudedReadAllResultType.MakeGenericTypeIfNeeded(crudedType), crudedReadAllParamsType),
+                    readAllResultType, crudedReadAllParamsType),
                 apizrManagerType.MakeGenericTypeIfNeeded(typeof(ICrudApi<,,,>).MakeGenericType(crudedType, crudedKeyType,
-                    crudedReadAllResultType.MakeGenericTypeIfNeeded(crudedType), crudedReadAllParamsType)),
+                    readAllResultType, crudedReadAllParamsType)),
                 optionsBuilder);
         }
 
@@ -299,11 +316,13 @@ namespace Apizr
                 else
                     optionsBuilder += builder => builder.WithBaseAddress(crud.Value.BaseUri);
 
+                var readAllResultType = crud.Value.ReadAllResultType.MakeGenericTypeIfNeeded(crud.Key);
+
                 AddApizrFor(services,
                     typeof(ICrudApi<,,,>).MakeGenericType(crud.Key, crud.Value.KeyType,
-                        crud.Value.ReadAllResultType.MakeGenericTypeIfNeeded(crud.Key), crud.Value.ReadAllParamsType),
+                        readAllResultType, crud.Value.ReadAllParamsType),
                     apizrManagerType.MakeGenericType(typeof(ICrudApi<,,,>).MakeGenericType(crud.Key, crud.Value.KeyType,
-                        crud.Value.ReadAllResultType.MakeGenericTypeIfNeeded(crud.Key), crud.Value.ReadAllParamsType)),
+                        readAllResultType, crud.Value.ReadAllParamsType)),
                     optionsBuilder);
             }
 

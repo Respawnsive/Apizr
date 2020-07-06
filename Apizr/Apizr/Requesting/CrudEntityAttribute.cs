@@ -15,7 +15,7 @@ namespace Apizr.Requesting
         /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
         /// <param name="baseUri">This specific entity's base crud uri</param>
-        public CrudEntityAttribute(string baseUri) : this(baseUri, typeof(int), typeof(IEnumerable<>), typeof(IDictionary<string, object>))
+        public CrudEntityAttribute(string baseUri) : this(baseUri, typeof(int), typeof(IEnumerable<>), typeof(IDictionary<string, object>), null)
         {
         }
 
@@ -25,7 +25,7 @@ namespace Apizr.Requesting
         /// </summary>
         /// <param name="baseUri">This specific entity's base crud uri</param>
         /// <param name="keyType">This specific entity's crud key type</param>
-        public CrudEntityAttribute(string baseUri, Type keyType) : this(baseUri, keyType, typeof(IEnumerable<>), typeof(IDictionary<string, object>))
+        public CrudEntityAttribute(string baseUri, Type keyType) : this(baseUri, keyType, typeof(IEnumerable<>), typeof(IDictionary<string, object>), null)
         {
         }
 
@@ -36,7 +36,7 @@ namespace Apizr.Requesting
         /// <param name="baseUri">This specific entity's base crud uri</param>
         /// <param name="keyType">This specific entity's crud key type</param>
         /// <param name="readAllResultType">The "ReadAll" query result type (class or <see cref="IEnumerable{T}"/>)</param>
-        public CrudEntityAttribute(string baseUri, Type keyType, Type readAllResultType) : this(baseUri, keyType, readAllResultType, typeof(IDictionary<string, object>))
+        public CrudEntityAttribute(string baseUri, Type keyType, Type readAllResultType) : this(baseUri, keyType, readAllResultType, typeof(IDictionary<string, object>), null)
         {
         }
 
@@ -47,7 +47,21 @@ namespace Apizr.Requesting
         /// <param name="keyType">This specific entity's crud key type</param>
         /// <param name="readAllResultType">The "ReadAll" query result type (class or <see cref="IEnumerable{T}"/>)</param>
         /// <param name="readAllParamsType">ReadAll query parameters type (class or IDictionary{string,object})</param>
-        public CrudEntityAttribute(string baseUri, Type keyType, Type readAllResultType, Type readAllParamsType)
+        public CrudEntityAttribute(string baseUri, Type keyType, Type readAllResultType, Type readAllParamsType) : this(
+            baseUri, keyType, readAllResultType, readAllParamsType, null)
+        {
+
+        }
+
+        /// <summary>
+        /// Define this specific entity's base crud uri, key type and "ReadAll" query result type
+        /// </summary>
+        /// <param name="baseUri">This specific entity's base crud uri</param>
+        /// <param name="keyType">This specific entity's crud key type</param>
+        /// <param name="readAllResultType">The "ReadAll" query result type (class or <see cref="IEnumerable{T}"/>)</param>
+        /// <param name="readAllParamsType">ReadAll query parameters type (class or IDictionary{string,object})</param>
+        /// <param name="modelEntityType">[AutoMapper integration required] Model entity type mapped with this Api entity type (default: null = decorated api entity type)</param>
+        public CrudEntityAttribute(string baseUri, Type keyType, Type readAllResultType, Type readAllParamsType, Type modelEntityType)
         {
             if (!keyType.GetTypeInfo().IsPrimitive)
                 throw new ArgumentException($"{keyType.Name} is not primitive", nameof(keyType));
@@ -64,6 +78,7 @@ namespace Apizr.Requesting
             KeyType = keyType;
             ReadAllResultType = readAllResultType;
             ReadAllParamsType = readAllParamsType;
+            ModelEntityType = modelEntityType;
         }
 
         /// <summary>
@@ -85,5 +100,10 @@ namespace Apizr.Requesting
         /// "ReadAll" query parameters type
         /// </summary>
         public Type ReadAllParamsType { get; set; }
+
+        /// <summary>
+        /// Model entity type mapped with this Api entity type
+        /// </summary>
+        public Type ModelEntityType { get; set; }
     }
 }

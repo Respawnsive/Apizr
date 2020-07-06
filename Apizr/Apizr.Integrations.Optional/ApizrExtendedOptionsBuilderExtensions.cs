@@ -339,10 +339,12 @@ namespace Apizr
                     if (!validRequestAndHandlerTypes.Any(kvp => typeof(DeleteOptionalCommand<,>).IsAssignableFromGenericType(kvp.Key)))
                         crudedEntityValidRequestAndHandlerTypes.Add(typeof(DeleteOptionalCommand<,>), typeof(DeleteOptionalCommandHandler<,,,>));
 
+                    var readAllResultType = crudEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(crudedEntityType);
+
                     var requestResponseTypes = new Dictionary<Type, Type>
                     {
                         { typeof(ReadQueryBase<,>), typeof(Option<,>).MakeGenericType(crudedEntityType, typeof(ApizrException<>).MakeGenericType(crudedEntityType)) },
-                        { typeof(ReadAllQueryBase<,>), typeof(Option<,>).MakeGenericType(crudEntityAttribute.ReadAllResultType.MakeGenericType(crudedEntityType), typeof(ApizrException<>).MakeGenericType(crudEntityAttribute.ReadAllResultType.MakeGenericType(crudedEntityType))) },
+                        { typeof(ReadAllQueryBase<,>), typeof(Option<,>).MakeGenericType(readAllResultType, typeof(ApizrException<>).MakeGenericType(readAllResultType)) },
                         { typeof(CreateCommandBase<,>), typeof(Option<,>).MakeGenericType(crudedEntityType, typeof(ApizrException)) },
                         { typeof(UpdateCommandBase<,,>), typeof(Option<Unit,ApizrException>) },
                         { typeof(DeleteCommandBase<,,>), typeof(Option<Unit,ApizrException>) }

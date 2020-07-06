@@ -309,11 +309,12 @@ namespace Apizr
                 {
                     var crudedEntityType = crudEntity.Key;
                     var crudEntityAttribute = crudEntity.Value;
+                    var readAllResultType = crudEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(crudedEntityType);
 
                     var requestResponseTypes = new Dictionary<Type, Type>
                     {
                         { typeof(ReadQueryBase<,>), crudedEntityType },
-                        { typeof(ReadAllQueryBase<,>), crudEntityAttribute.ReadAllResultType.MakeGenericType(crudedEntityType) },
+                        { typeof(ReadAllQueryBase<,>), readAllResultType },
                         { typeof(CreateCommandBase<,>), crudedEntityType },
                         { typeof(UpdateCommandBase<,,>), typeof(Unit) },
                         { typeof(DeleteCommandBase<,,>), typeof(Unit) }
@@ -329,6 +330,8 @@ namespace Apizr
         public static IApizrExtendedOptionsBuilder WithCrudMediation(this IApizrExtendedOptionsBuilder optionsBuilder,
             IServiceCollection services, Type crudedEntityType, CrudEntityAttribute crudEntityAttribute,  IDictionary<Type, Type> validRequestAndHandlerTypes, IDictionary<Type, Type> requestResponseTypes)
         {
+            var readAllResultType = crudEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(crudedEntityType);
+
             // Read but simplified default version if concerned
             if (crudEntityAttribute.KeyType == typeof(int))
             {
@@ -340,7 +343,7 @@ namespace Apizr
                         requestResponseTypes.First(kvp => kvp.Key == typeof(ReadQueryBase<,>)).Value),
                     (simplifiedReadCombination.Value ?? typeof(ReadQueryHandler<,,>)).MakeGenericType(
                         crudedEntityType,
-                        crudEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(crudedEntityType),
+                        readAllResultType,
                         crudEntityAttribute.ReadAllParamsType));
             }
 
@@ -354,7 +357,7 @@ namespace Apizr
                     requestResponseTypes.First(kvp => kvp.Key == typeof(ReadQueryBase<,>)).Value),
                 (readCombination.Value ?? typeof(ReadQueryHandler<,,,>)).MakeGenericType(crudedEntityType,
                     crudEntityAttribute.KeyType,
-                    crudEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(crudedEntityType),
+                    readAllResultType,
                     crudEntityAttribute.ReadAllParamsType));
 
             // ReadAll but simplified default version if concerned
@@ -365,11 +368,11 @@ namespace Apizr
                 services.TryAddTransient(
                     typeof(IRequestHandler<,>).MakeGenericType(
                         (simplifiedReadAllCombination.Key ?? typeof(ReadAllQuery<>)).MakeGenericType(
-                            crudEntityAttribute.ReadAllResultType.MakeGenericType(crudedEntityType)),
+                            readAllResultType),
                         requestResponseTypes.First(kvp => kvp.Key == typeof(ReadAllQueryBase<,>)).Value),
                     (simplifiedReadAllCombination.Value ??
                      typeof(ReadAllQueryHandler<,,>)).MakeGenericType(crudedEntityType, crudEntityAttribute.KeyType,
-                        crudEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(crudedEntityType)));
+                        readAllResultType));
             }
 
             // ReadAll
@@ -379,11 +382,11 @@ namespace Apizr
                 typeof(IRequestHandler<,>).MakeGenericType(
                     (readAllCombination.Key ?? typeof(ReadAllQuery<,>)).MakeGenericType(
                         crudEntityAttribute.ReadAllParamsType,
-                        crudEntityAttribute.ReadAllResultType.MakeGenericType(crudedEntityType)),
+                        readAllResultType),
                     requestResponseTypes.First(kvp => kvp.Key == typeof(ReadAllQueryBase<,>)).Value),
                 (readAllCombination.Value ??
                  typeof(ReadAllQueryHandler<,,,>)).MakeGenericType(crudedEntityType, crudEntityAttribute.KeyType,
-                    crudEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(crudedEntityType),
+                    readAllResultType,
                     crudEntityAttribute.ReadAllParamsType));
 
             // Create
@@ -395,7 +398,7 @@ namespace Apizr
                     requestResponseTypes.First(kvp => kvp.Key == typeof(CreateCommandBase<,>)).Value),
                 (createCombination.Value ??
                  typeof(CreateCommandHandler<,,,>)).MakeGenericType(crudedEntityType, crudEntityAttribute.KeyType,
-                    crudEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(crudedEntityType),
+                    readAllResultType,
                     crudEntityAttribute.ReadAllParamsType));
 
             // Update but simplified default version if concerned
@@ -410,7 +413,7 @@ namespace Apizr
                         requestResponseTypes.First(kvp => kvp.Key == typeof(UpdateCommandBase<,,>)).Value),
                     (simplifiedUpdateCombination.Value ??
                      typeof(UpdateCommandHandler<,,>)).MakeGenericType(crudedEntityType,
-                        crudEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(crudedEntityType),
+                        readAllResultType,
                         crudEntityAttribute.ReadAllParamsType));
             }
 
@@ -424,7 +427,7 @@ namespace Apizr
                     requestResponseTypes.First(kvp => kvp.Key == typeof(UpdateCommandBase<,,>)).Value),
                 (updateCombination.Value ??
                  typeof(UpdateCommandHandler<,,,>)).MakeGenericType(crudedEntityType, crudEntityAttribute.KeyType,
-                    crudEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(crudedEntityType),
+                    readAllResultType,
                     crudEntityAttribute.ReadAllParamsType));
 
             // Delete but simplified default version if concerned
@@ -438,7 +441,7 @@ namespace Apizr
                         requestResponseTypes.First(kvp => kvp.Key == typeof(DeleteCommandBase<,,>)).Value),
                     (simplifiedDeleteCombination.Value ??
                      typeof(DeleteCommandHandler<,,>)).MakeGenericType(crudedEntityType,
-                        crudEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(crudedEntityType),
+                        readAllResultType,
                         crudEntityAttribute.ReadAllParamsType));
             }
 
@@ -452,7 +455,7 @@ namespace Apizr
                     requestResponseTypes.First(kvp => kvp.Key == typeof(DeleteCommandBase<,,>)).Value),
                 (deleteCombination.Value ??
                  typeof(DeleteCommandHandler<,,,>)).MakeGenericType(crudedEntityType, crudEntityAttribute.KeyType,
-                    crudEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(crudedEntityType),
+                    readAllResultType,
                     crudEntityAttribute.ReadAllParamsType));
 
             return optionsBuilder;

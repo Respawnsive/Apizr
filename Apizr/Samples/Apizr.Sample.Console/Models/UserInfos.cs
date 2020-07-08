@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Apizr.Mapping;
+using Apizr.Sample.Api.Models;
 
 namespace Apizr.Sample.Console.Models
 {
+    [MappedCrudEntity("https://reqres.in/api/users", typeof(UserDetails))]
     public class UserInfos
     {
         public int Id { get; set; }

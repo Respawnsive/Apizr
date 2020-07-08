@@ -283,7 +283,7 @@ namespace Apizr
                 {
                     var apiEntityAttribute = crudEntity.Value;
                     var apiEntityType = crudEntity.Key;
-                    var modelEntityType = apiEntityAttribute.ModelEntityType;
+                    var modelEntityType = apiEntityAttribute.MappedEntityType;
                     var modelEntityReadAllResultType = apiEntityAttribute.ReadAllResultType.IsGenericTypeDefinition
                         ? apiEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(modelEntityType)
                         : apiEntityAttribute.ReadAllResultType.GetGenericTypeDefinition()
@@ -308,7 +308,7 @@ namespace Apizr
         public static IApizrExtendedOptionsBuilder WithCrudMediation(this IApizrExtendedOptionsBuilder optionsBuilder,
             IServiceCollection services, Type apiEntityType, CrudEntityAttribute apiEntityAttribute,  IDictionary<Type, Type> validRequestAndHandlerTypes, IDictionary<Type, Type> requestResponseTypes)
         {
-            var modelEntityType = apiEntityAttribute.ModelEntityType;
+            var modelEntityType = apiEntityAttribute.MappedEntityType;
             var apiEntityKeyType = apiEntityAttribute.KeyType;
             var apiEntityReadAllResultType = apiEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(apiEntityType);
             var modelEntityReadAllResultType = apiEntityAttribute.ReadAllResultType.IsGenericTypeDefinition

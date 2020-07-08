@@ -293,28 +293,36 @@ namespace Apizr
                 throw new ArgumentException(
                     $"No assemblies found to scan. Supply at least one assembly to scan for {nameof(CrudEntityAttribute)}.", nameof(assemblies));
 
-            var assembliesToScan = assemblies.Distinct();
+            var assembliesToScan = assemblies.Distinct().ToList();
 
             var cruds = new Dictionary<Type, CrudEntityAttribute>();
 
-            foreach (var assemblyToScan in assembliesToScan)
+            var modelEntityTypes = assembliesToScan
+                .SelectMany(assembly => assembly.GetTypes().Where(t =>
+                    t.IsClass && !t.IsAbstract && t.GetCustomAttribute<MappedCrudEntityAttribute>() != null))
+                .ToDictionary(t => t.GetCustomAttribute<MappedCrudEntityAttribute>().MappedEntityType,
+                    t => t.GetCustomAttribute<MappedCrudEntityAttribute>().ToCrudEntityAttribute(t));
+
+            var apiEntityTypes = assembliesToScan
+                .SelectMany(assembly => assembly.GetTypes().Where(t =>
+                    t.IsClass && !t.IsAbstract && t.GetCustomAttribute<CrudEntityAttribute>() != null &&
+                    !modelEntityTypes.ContainsKey(t)))
+                .ToDictionary(t => t, t => t.GetCustomAttribute<CrudEntityAttribute>());
+
+            var crudEntityDefinitions = modelEntityTypes.Concat(apiEntityTypes).ToLookup(x => x.Key, x => x.Value)
+                .ToDictionary(x => x.Key, x => x.FirstOrDefault(y => y.MappedEntityType != null) ?? x.First());
+            
+            foreach (var crudEntityDefinition in crudEntityDefinitions)
             {
-                foreach (var type in assemblyToScan.GetTypes())
-                {
-                    var crudAttribute = type.GetCustomAttribute<CrudEntityAttribute>();
-                    if (crudAttribute != null)
-                    {
-                        if (crudAttribute.ModelEntityType == null)
-                            crudAttribute.ModelEntityType = type;
+                if (crudEntityDefinition.Value.MappedEntityType == null)
+                    crudEntityDefinition.Value.MappedEntityType = crudEntityDefinition.Key;
 
-                        cruds.Add(type, crudAttribute);
+                cruds.Add(crudEntityDefinition.Key, crudEntityDefinition.Value);
 
-                        if (optionsBuilder == null)
-                            optionsBuilder = builder => builder.ApizrOptions.CrudEntities.Add(type, crudAttribute);
-                        else
-                            optionsBuilder += builder => builder.ApizrOptions.CrudEntities.Add(type, crudAttribute);
-                    }
-                }
+                if (optionsBuilder == null)
+                    optionsBuilder = builder => builder.ApizrOptions.CrudEntities.Add(crudEntityDefinition.Key, crudEntityDefinition.Value);
+                else
+                    optionsBuilder += builder => builder.ApizrOptions.CrudEntities.Add(crudEntityDefinition.Key, crudEntityDefinition.Value);
             }
 
             foreach (var crud in cruds)

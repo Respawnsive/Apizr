@@ -284,7 +284,7 @@ namespace Apizr
                 {
                     var apiEntityAttribute = crudEntity.Value;
                     var apiEntityType = crudEntity.Key;
-                    var modelEntityType = apiEntityAttribute.ModelEntityType;
+                    var modelEntityType = apiEntityAttribute.MappedEntityType;
                     var modelEntityReadAllResultType = apiEntityAttribute.ReadAllResultType.IsGenericTypeDefinition
                         ? apiEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(modelEntityType)
                         : apiEntityAttribute.ReadAllResultType.GetGenericTypeDefinition()

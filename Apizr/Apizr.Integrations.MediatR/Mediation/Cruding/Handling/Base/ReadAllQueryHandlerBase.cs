@@ -1,32 +1,33 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Mapping;
 using Apizr.Mediation.Cruding.Base;
 using Apizr.Mediation.Querying;
 using Apizr.Requesting;
 
 namespace Apizr.Mediation.Cruding.Handling.Base
 {
-    public abstract class ReadAllQueryHandlerBase<T, TKey, TReadAllResult, TReadAllParams, TQuery, TQueryResult> :
-        CrudRequestHandlerBase<T, TKey, TReadAllResult, TReadAllParams>,
-        IQueryHandler<TQuery, TQueryResult> where T : class
+    public abstract class ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, TQuery, TQueryResult> :
+        CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams>,
+        IQueryHandler<TQuery, TQueryResult>
+        where TApiEntity : class
         where TQuery : ReadAllQueryBase<TReadAllParams, TQueryResult>
     {
-        protected ReadAllQueryHandlerBase(
-            IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
+        protected ReadAllQueryHandlerBase(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
         {
         }
 
         public abstract Task<TQueryResult> Handle(TQuery request, CancellationToken cancellationToken);
     }
 
-    public abstract class ReadAllQueryHandlerBase<T, TKey, TReadAllResult, TQuery, TQueryResult> :
-        CrudRequestHandlerBase<T, TKey, TReadAllResult, IDictionary<string, object>>,
-        IQueryHandler<TQuery, TQueryResult> where T : class where TQuery : ReadAllQueryBase<TQueryResult>
+    public abstract class ReadAllQueryHandlerBase< TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TQuery, TQueryResult> :
+        CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, IDictionary<string, object>>,
+        IQueryHandler<TQuery, TQueryResult>
+        where TApiEntity : class 
+        where TQuery : ReadAllQueryBase<TQueryResult>
     {
-        protected ReadAllQueryHandlerBase(
-            IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>> crudApiManager) : base(
-            crudApiManager)
+        protected ReadAllQueryHandlerBase(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, IDictionary<string, object>>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
         {
         }
 

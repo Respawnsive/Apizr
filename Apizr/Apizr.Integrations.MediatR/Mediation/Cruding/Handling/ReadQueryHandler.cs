@@ -1,35 +1,40 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Mapping;
 using Apizr.Mediation.Cruding.Handling.Base;
 using Apizr.Requesting;
 
 namespace Apizr.Mediation.Cruding.Handling
 {
-    public class ReadQueryHandler<T, TKey, TReadAllResult, TReadAllParams> : 
-        ReadQueryHandlerBase<T, TKey, TReadAllResult, TReadAllParams, ReadQuery<T, TKey>, T> 
-        where T : class
+    public class ReadQueryHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> : 
+        ReadQueryHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, ReadQuery<TModelEntity, TApiEntityKey>, TModelEntity>
+        where TModelEntity : class
+        where TApiEntity : class
     {
-        public ReadQueryHandler(IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
+        public ReadQueryHandler(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
         {
         }
 
-        public override Task<T> Handle(ReadQuery<T, TKey> request, CancellationToken cancellationToken)
+        public override Task<TModelEntity> Handle(ReadQuery<TModelEntity, TApiEntityKey> request, CancellationToken cancellationToken)
         {
-            return CrudApiManager.ExecuteAsync((ct, api) => api.Read(request.Key, ct), cancellationToken);
+            return CrudApiManager.ExecuteAsync((ct, api) => api.Read(request.Key, ct), cancellationToken).ContinueWith(
+                task => Map<TApiEntity, TModelEntity>(task.Result), cancellationToken);
         }
     }
 
-    public class ReadQueryHandler<T, TReadAllResult, TReadAllParams> : 
-        ReadQueryHandlerBase<T, TReadAllResult, TReadAllParams, ReadQuery<T>, T> 
-        where T : class
+    public class ReadQueryHandler<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams> : 
+        ReadQueryHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, ReadQuery<TModelEntity>, TModelEntity>
+        where TModelEntity : class
+        where TApiEntity : class
     {
-        public ReadQueryHandler(IApizrManager<ICrudApi<T, int, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
+        public ReadQueryHandler(IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
         {
         }
 
-        public override Task<T> Handle(ReadQuery<T> request, CancellationToken cancellationToken)
+        public override Task<TModelEntity> Handle(ReadQuery<TModelEntity> request, CancellationToken cancellationToken)
         {
-            return CrudApiManager.ExecuteAsync((ct, api) => api.Read(request.Key, ct), cancellationToken);
+            return CrudApiManager.ExecuteAsync((ct, api) => api.Read(request.Key, ct), cancellationToken).ContinueWith(
+                task => Map<TApiEntity, TModelEntity>(task.Result), cancellationToken);
         }
     }
 }

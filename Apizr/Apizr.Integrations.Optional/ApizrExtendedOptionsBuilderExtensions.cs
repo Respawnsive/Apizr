@@ -41,37 +41,37 @@ namespace Apizr
                 {
                     if (crudHandlerType.IsOpenGeneric())
                     {
-                        if (typeof(ReadQueryHandlerBase<,,,,>).IsAssignableFromGenericType(crudHandlerType))
+                        if (typeof(ReadQueryHandlerBase<,,,,,>).IsAssignableFromGenericType(crudHandlerType))
                             validCrudHandlerTypes.Add(typeof(ReadOptionalQuery<>), crudHandlerType);
-                        else if (typeof(ReadQueryHandlerBase<,,,,,>).IsAssignableFromGenericType(crudHandlerType))
+                        else if (typeof(ReadQueryHandlerBase<,,,,,,>).IsAssignableFromGenericType(crudHandlerType))
                             validCrudHandlerTypes.Add(typeof(ReadOptionalQuery<,>), crudHandlerType);
-                        else if (typeof(ReadAllQueryHandlerBase<,,,,>).IsAssignableFromGenericType(crudHandlerType))
-                            validCrudHandlerTypes.Add(typeof(ReadAllOptionalQuery<>), crudHandlerType);
                         else if (typeof(ReadAllQueryHandlerBase<,,,,,>).IsAssignableFromGenericType(crudHandlerType))
+                            validCrudHandlerTypes.Add(typeof(ReadAllOptionalQuery<>), crudHandlerType);
+                        else if (typeof(ReadAllQueryHandlerBase<,,,,,,>).IsAssignableFromGenericType(crudHandlerType))
                             validCrudHandlerTypes.Add(typeof(ReadAllOptionalQuery<,>), crudHandlerType);
-                        else if (typeof(CreateCommandHandlerBase<,,,,,>).IsAssignableFromGenericType(crudHandlerType))
+                        else if (typeof(CreateCommandHandlerBase<,,,,,,>).IsAssignableFromGenericType(crudHandlerType))
                             validCrudHandlerTypes.Add(typeof(CreateOptionalCommand<>), crudHandlerType);
-                        else if (typeof(UpdateCommandHandlerBase<,,,>).IsAssignableFromGenericType(crudHandlerType))
+                        else if (typeof(UpdateCommandHandlerBase<,,,,>).IsAssignableFromGenericType(crudHandlerType))
                             validCrudHandlerTypes.Add(typeof(UpdateOptionalCommand<>), crudHandlerType);
-                        else if (typeof(UpdateCommandHandlerBase<,,,,,>).IsAssignableFromGenericType(crudHandlerType))
+                        else if (typeof(UpdateCommandHandlerBase<,,,,,,>).IsAssignableFromGenericType(crudHandlerType))
                             validCrudHandlerTypes.Add(typeof(UpdateOptionalCommand<,>), crudHandlerType);
-                        else if (typeof(DeleteCommandHandlerBase<,,,,>).IsAssignableFromGenericType(crudHandlerType))
-                            validCrudHandlerTypes.Add(typeof(DeleteOptionalCommand<>), crudHandlerType);
                         else if (typeof(DeleteCommandHandlerBase<,,,,,>).IsAssignableFromGenericType(crudHandlerType))
+                            validCrudHandlerTypes.Add(typeof(DeleteOptionalCommand<>), crudHandlerType);
+                        else if (typeof(DeleteCommandHandlerBase<,,,,,,>).IsAssignableFromGenericType(crudHandlerType))
                             validCrudHandlerTypes.Add(typeof(DeleteOptionalCommand<,>), crudHandlerType);
                         else
                             throw new ArgumentException(
-                                $"{crudHandlerType.Name} must inherit from " +
-                                $"{typeof(ReadQueryHandlerBase<,,,,>).Name}, {typeof(ReadQueryHandlerBase<,,,,,>)}, " +
-                                $"{typeof(ReadAllQueryHandlerBase<,,,,>).Name}, {typeof(ReadAllQueryHandlerBase<,,,,,>)}, " +
-                                $"{typeof(CreateCommandHandlerBase<,,,,,>).Name}, " +
-                                $"{typeof(UpdateCommandHandlerBase<,,,>).Name}, {typeof(UpdateCommandHandlerBase<,,,,,>)},  " +
-                                $"{typeof(DeleteCommandHandlerBase<,,,,>).Name} or {typeof(DeleteCommandHandlerBase<,,,,,>)}",
-                                nameof(crudHandlerType.Name));
+                                $"{crudHandlerType.GetFriendlyName()} must inherit from " +
+                                $"{typeof(ReadQueryHandlerBase<,,,,,>).GetFriendlyName()}, {typeof(ReadQueryHandlerBase<,,,,,,>).GetFriendlyName()}, " +
+                                $"{typeof(ReadAllQueryHandlerBase<,,,,,>).GetFriendlyName()}, {typeof(ReadAllQueryHandlerBase<,,,,,,>).GetFriendlyName()}, " +
+                                $"{typeof(CreateCommandHandlerBase<,,,,,,>).GetFriendlyName()}, " +
+                                $"{typeof(UpdateCommandHandlerBase<,,,,>).GetFriendlyName()}, {typeof(UpdateCommandHandlerBase<,,,,,,>).GetFriendlyName()},  " +
+                                $"{typeof(DeleteCommandHandlerBase<,,,,,>).GetFriendlyName()} or {typeof(DeleteCommandHandlerBase<,,,,,,>).GetFriendlyName()}",
+                                nameof(crudHandlerType));
                     }
                     else
                         throw new ArgumentException(
-                            $"{crudHandlerType.Name} must be open generic",
+                            $"{crudHandlerType.GetFriendlyName()} must be open generic",
                             nameof(crudHandlerTypes));
                 }
             }
@@ -104,7 +104,7 @@ namespace Apizr
                         {
                             if (requestAndHandlerTypeCombination.Item2.IsOpenGeneric())
                             {
-                                if (typeof(ReadOptionalQueryHandler<,,>).IsAssignableFromGenericType(
+                                if (typeof(ReadOptionalQueryHandler<,,,>).IsAssignableFromGenericType(
                                    requestAndHandlerTypeCombination.Item2))
                                 {
                                     validRequestAndHandlerTypes.Add(requestAndHandlerTypeCombination.Item1,
@@ -112,19 +112,17 @@ namespace Apizr
                                 }
                                 else
                                     throw new ArgumentException(
-                                        $"{requestAndHandlerTypeCombination.Item2.Name} must inherit from {typeof(ReadOptionalQueryHandler<,,>).Name}",
-                                        nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                        $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must inherit from {typeof(ReadOptionalQueryHandler<,,,>).GetFriendlyName()}");
                             }
                             else
                                 throw new ArgumentException(
-                                    $"{requestAndHandlerTypeCombination.Item2.Name} must be open generic",
-                                    nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                    $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must be open generic");
                         }
                         else if (typeof(ReadOptionalQuery<,>).IsAssignableFromGenericType(requestAndHandlerTypeCombination.Item1))
                         {
                             if (requestAndHandlerTypeCombination.Item2.IsOpenGeneric())
                             {
-                                if (typeof(ReadOptionalQueryHandler<,,,>).IsAssignableFromGenericType(
+                                if (typeof(ReadOptionalQueryHandler<,,,,>).IsAssignableFromGenericType(
                                     requestAndHandlerTypeCombination.Item2))
                                 {
                                     validRequestAndHandlerTypes.Add(requestAndHandlerTypeCombination.Item1,
@@ -132,19 +130,17 @@ namespace Apizr
                                 }
                                 else
                                     throw new ArgumentException(
-                                        $"{requestAndHandlerTypeCombination.Item2.Name} must inherit from {typeof(ReadOptionalQueryHandler<,,,>).Name}",
-                                        nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                        $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must inherit from {typeof(ReadOptionalQueryHandler<,,,,>).GetFriendlyName()}");
                             }
                             else
                                 throw new ArgumentException(
-                                    $"{requestAndHandlerTypeCombination.Item2.Name} must be open generic",
-                                    nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                    $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must be open generic");
                         }
                         else if (typeof(ReadAllOptionalQuery<>).IsAssignableFromGenericType(requestAndHandlerTypeCombination.Item1))
                         {
                             if (requestAndHandlerTypeCombination.Item2.IsOpenGeneric())
                             {
-                                if (typeof(ReadAllOptionalQueryHandler<,,>).IsAssignableFromGenericType(
+                                if (typeof(ReadAllOptionalQueryHandler<,,,>).IsAssignableFromGenericType(
                                        requestAndHandlerTypeCombination.Item2))
                                 {
                                     validRequestAndHandlerTypes.Add(requestAndHandlerTypeCombination.Item1,
@@ -152,19 +148,17 @@ namespace Apizr
                                 }
                                 else
                                     throw new ArgumentException(
-                                        $"{requestAndHandlerTypeCombination.Item2.Name} must inherit from {typeof(ReadAllOptionalQueryHandler<,,>).Name}",
-                                        nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                        $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must inherit from {typeof(ReadAllOptionalQueryHandler<,,,>).GetFriendlyName()}");
                             }
                             else
                                 throw new ArgumentException(
-                                    $"{requestAndHandlerTypeCombination.Item2.Name} must be open generic",
-                                    nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                    $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must be open generic");
                         }
                         else if (typeof(ReadAllOptionalQuery<,>).IsAssignableFromGenericType(requestAndHandlerTypeCombination.Item1))
                         {
                             if (requestAndHandlerTypeCombination.Item2.IsOpenGeneric())
                             {
-                                if (typeof(ReadAllOptionalQueryHandler<,,,>).IsAssignableFromGenericType(
+                                if (typeof(ReadAllOptionalQueryHandler<,,,,>).IsAssignableFromGenericType(
                                     requestAndHandlerTypeCombination.Item2))
                                 {
                                     validRequestAndHandlerTypes.Add(requestAndHandlerTypeCombination.Item1,
@@ -172,19 +166,17 @@ namespace Apizr
                                 }
                                 else
                                     throw new ArgumentException(
-                                        $"{requestAndHandlerTypeCombination.Item2.Name} must inherit from {typeof(ReadAllOptionalQueryHandler<,,>).Name}",
-                                        nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                        $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must inherit from {typeof(ReadAllOptionalQueryHandler<,,,,>).GetFriendlyName()}");
                             }
                             else
                                 throw new ArgumentException(
-                                    $"{requestAndHandlerTypeCombination.Item2.Name} must be open generic",
-                                    nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                    $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must be open generic");
                         }
                         else if (typeof(CreateOptionalCommand<>).IsAssignableFromGenericType(requestAndHandlerTypeCombination.Item1))
                         {
                             if (requestAndHandlerTypeCombination.Item2.IsOpenGeneric())
                             {
-                                if (typeof(CreateOptionalCommandHandler<,,,>).IsAssignableFromGenericType(
+                                if (typeof(CreateOptionalCommandHandler<,,,,>).IsAssignableFromGenericType(
                                        requestAndHandlerTypeCombination.Item2))
                                 {
                                     validRequestAndHandlerTypes.Add(requestAndHandlerTypeCombination.Item1,
@@ -192,19 +184,17 @@ namespace Apizr
                                 }
                                 else
                                     throw new ArgumentException(
-                                        $"{requestAndHandlerTypeCombination.Item2.Name} must inherit from {typeof(CreateOptionalCommandHandler<,,,>).Name}",
-                                        nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                        $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must inherit from {typeof(CreateOptionalCommandHandler<,,,,>).GetFriendlyName()}");
                             }
                             else
                                 throw new ArgumentException(
-                                    $"{requestAndHandlerTypeCombination.Item2.Name} must be open generic",
-                                    nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                    $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must be open generic");
                         }
                         else if (typeof(UpdateOptionalCommand<>).IsAssignableFromGenericType(requestAndHandlerTypeCombination.Item1))
                         {
                             if (requestAndHandlerTypeCombination.Item2.IsOpenGeneric())
                             {
-                                if (typeof(UpdateOptionalCommandHandler<,,>).IsAssignableFromGenericType(
+                                if (typeof(UpdateOptionalCommandHandler<,,,>).IsAssignableFromGenericType(
                                     requestAndHandlerTypeCombination.Item2))
                                 {
                                     validRequestAndHandlerTypes.Add(requestAndHandlerTypeCombination.Item1,
@@ -212,19 +202,17 @@ namespace Apizr
                                 }
                                 else
                                     throw new ArgumentException(
-                                        $"{requestAndHandlerTypeCombination.Item2.Name} must inherit from {typeof(UpdateOptionalCommandHandler<,,>).Name}",
-                                        nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                        $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must inherit from {typeof(UpdateOptionalCommandHandler<,,,>).GetFriendlyName()}");
                             }
                             else
                                 throw new ArgumentException(
-                                    $"{requestAndHandlerTypeCombination.Item2.Name} must be open generic",
-                                    nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                    $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must be open generic");
                         }
                         else if (typeof(UpdateOptionalCommand<,>).IsAssignableFromGenericType(requestAndHandlerTypeCombination.Item1))
                         {
                             if (requestAndHandlerTypeCombination.Item2.IsOpenGeneric())
                             {
-                                if (typeof(UpdateOptionalCommandHandler<,,,>).IsAssignableFromGenericType(
+                                if (typeof(UpdateOptionalCommandHandler<,,,,>).IsAssignableFromGenericType(
                                        requestAndHandlerTypeCombination.Item2))
                                 {
                                     validRequestAndHandlerTypes.Add(requestAndHandlerTypeCombination.Item1,
@@ -232,19 +220,17 @@ namespace Apizr
                                 }
                                 else
                                     throw new ArgumentException(
-                                        $"{requestAndHandlerTypeCombination.Item2.Name} must inherit from {typeof(UpdateOptionalCommandHandler<,,,>).Name}",
-                                        nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                        $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must inherit from {typeof(UpdateOptionalCommandHandler<,,,,>).GetFriendlyName()}");
                             }
                             else
                                 throw new ArgumentException(
-                                    $"{requestAndHandlerTypeCombination.Item2.Name} must be open generic",
-                                    nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                    $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must be open generic");
                         }
                         else if (typeof(DeleteOptionalCommand<>).IsAssignableFromGenericType(requestAndHandlerTypeCombination.Item1))
                         {
                             if (requestAndHandlerTypeCombination.Item2.IsOpenGeneric())
                             {
-                                if (typeof(DeleteOptionalCommandHandler<,,>).IsAssignableFromGenericType(
+                                if (typeof(DeleteOptionalCommandHandler<,,,>).IsAssignableFromGenericType(
                                        requestAndHandlerTypeCombination.Item2))
                                 {
                                     validRequestAndHandlerTypes.Add(requestAndHandlerTypeCombination.Item1,
@@ -252,19 +238,17 @@ namespace Apizr
                                 }
                                 else
                                     throw new ArgumentException(
-                                        $"{requestAndHandlerTypeCombination.Item2.Name} must inherit from {typeof(DeleteOptionalCommandHandler<,,>).Name}",
-                                        nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                        $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must inherit from {typeof(DeleteOptionalCommandHandler<,,,>).GetFriendlyName()}");
                             }
                             else
                                 throw new ArgumentException(
-                                    $"{requestAndHandlerTypeCombination.Item2.Name} must be open generic",
-                                    nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                    $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must be open generic");
                         }
                         else if (typeof(DeleteOptionalCommand<,>).IsAssignableFromGenericType(requestAndHandlerTypeCombination.Item1))
                         {
                             if (requestAndHandlerTypeCombination.Item2.IsOpenGeneric())
                             {
-                                if (typeof(DeleteOptionalCommandHandler<,,,>).IsAssignableFromGenericType(
+                                if (typeof(DeleteOptionalCommandHandler<,,,,>).IsAssignableFromGenericType(
                                     requestAndHandlerTypeCombination.Item2))
                                 {
                                     validRequestAndHandlerTypes.Add(requestAndHandlerTypeCombination.Item1,
@@ -272,28 +256,24 @@ namespace Apizr
                                 }
                                 else
                                     throw new ArgumentException(
-                                        $"{requestAndHandlerTypeCombination.Item2.Name} must inherit from {typeof(DeleteOptionalCommandHandler<,,,>).Name}",
-                                        nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                        $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must inherit from {typeof(DeleteOptionalCommandHandler<,,,,>).GetFriendlyName()}");
                             }
                             else
                                 throw new ArgumentException(
-                                    $"{requestAndHandlerTypeCombination.Item2.Name} must be open generic",
-                                    nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                    $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must be open generic");
                         }
                         else
                             throw new ArgumentException(
-                                $"{requestAndHandlerTypeCombination.Item1.Name} must inherit from " +
-                                $"{typeof(ReadOptionalQuery<>).Name}, {typeof(ReadOptionalQuery<,>)}, " +
-                                $"{typeof(ReadAllOptionalQuery<>).Name}, {typeof(ReadAllOptionalQuery<,>)}, " +
-                                $"{typeof(CreateOptionalCommand<>).Name}, " +
-                                $"{typeof(UpdateOptionalCommand<>).Name}, {typeof(UpdateOptionalCommand<,>)},  " +
-                                $"{typeof(DeleteOptionalCommand<>).Name} or {typeof(DeleteOptionalCommand<,>)}",
-                                nameof(requestAndHandlerTypeCombination.Item1.Name));
+                                $"{requestAndHandlerTypeCombination.Item1.GetFriendlyName()} must inherit from " +
+                                $"{typeof(ReadOptionalQuery<>).GetFriendlyName()}, {typeof(ReadOptionalQuery<,>).GetFriendlyName()}, " +
+                                $"{typeof(ReadAllOptionalQuery<>).GetFriendlyName()}, {typeof(ReadAllOptionalQuery<,>).GetFriendlyName()}, " +
+                                $"{typeof(CreateOptionalCommand<>).GetFriendlyName()}, " +
+                                $"{typeof(UpdateOptionalCommand<>).GetFriendlyName()}, {typeof(UpdateOptionalCommand<,>).GetFriendlyName()},  " +
+                                $"{typeof(DeleteOptionalCommand<>).GetFriendlyName()} or {typeof(DeleteOptionalCommand<,>).GetFriendlyName()}");
                     }
                     else
                         throw new ArgumentException(
-                            $"{requestAndHandlerTypeCombination.Item1.Name} must be open generic",
-                            nameof(requestAndHandlerTypeCombination.Item1.Name));
+                            $"{requestAndHandlerTypeCombination.Item1.GetFriendlyName()} must be open generic");
                 }
             }
 
@@ -302,56 +282,59 @@ namespace Apizr
             {
                 foreach (var crudEntity in optionsBuilder.ApizrOptions.CrudEntities)
                 {
-                    var crudedEntityType = crudEntity.Key;
-                    var crudEntityAttribute = crudEntity.Value;
+                    var apiEntityAttribute = crudEntity.Value;
+                    var apiEntityType = crudEntity.Key;
+                    var modelEntityType = apiEntityAttribute.ModelEntityType;
+                    var modelEntityReadAllResultType = apiEntityAttribute.ReadAllResultType.IsGenericTypeDefinition
+                        ? apiEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(modelEntityType)
+                        : apiEntityAttribute.ReadAllResultType.GetGenericTypeDefinition()
+                            .MakeGenericTypeIfNeeded(modelEntityType);
 
                     // Completing missing handlers
                     var crudedEntityValidRequestAndHandlerTypes = new Dictionary<Type, Type>(validRequestAndHandlerTypes);
 
-                    if (crudEntityAttribute.KeyType == typeof(int) &&
+                    if (apiEntityAttribute.KeyType == typeof(int) &&
                         !validRequestAndHandlerTypes.Any(kvp => typeof(ReadOptionalQuery<>).IsAssignableFromGenericType(kvp.Key)))
-                        crudedEntityValidRequestAndHandlerTypes.Add(typeof(ReadOptionalQuery<>), typeof(ReadOptionalQueryHandler<,,>));
+                        crudedEntityValidRequestAndHandlerTypes.Add(typeof(ReadOptionalQuery<>), typeof(ReadOptionalQueryHandler<,,,>));
 
                     if (!validRequestAndHandlerTypes.Any(kvp => typeof(ReadOptionalQuery<,>).IsAssignableFromGenericType(kvp.Key)))
-                        crudedEntityValidRequestAndHandlerTypes.Add(typeof(ReadOptionalQuery<,>), typeof(ReadOptionalQueryHandler<,,,>));
+                        crudedEntityValidRequestAndHandlerTypes.Add(typeof(ReadOptionalQuery<,>), typeof(ReadOptionalQueryHandler<,,,,>));
 
-                    if (crudEntityAttribute.ReadAllParamsType == typeof(IDictionary<string, object>) &&
+                    if (apiEntityAttribute.ReadAllParamsType == typeof(IDictionary<string, object>) &&
                         !validRequestAndHandlerTypes.Any(kvp => typeof(ReadAllOptionalQuery<>).IsAssignableFromGenericType(kvp.Key)))
-                        crudedEntityValidRequestAndHandlerTypes.Add(typeof(ReadAllOptionalQuery<>), typeof(ReadAllOptionalQueryHandler<,,>));
+                        crudedEntityValidRequestAndHandlerTypes.Add(typeof(ReadAllOptionalQuery<>), typeof(ReadAllOptionalQueryHandler<,,,>));
 
                     if (!validRequestAndHandlerTypes.Any(kvp => typeof(ReadAllOptionalQuery<,>).IsAssignableFromGenericType(kvp.Key)))
-                        crudedEntityValidRequestAndHandlerTypes.Add(typeof(ReadAllOptionalQuery<,>), typeof(ReadAllOptionalQueryHandler<,,,>));
+                        crudedEntityValidRequestAndHandlerTypes.Add(typeof(ReadAllOptionalQuery<,>), typeof(ReadAllOptionalQueryHandler<,,,,>));
 
                     if (!validRequestAndHandlerTypes.Any(kvp => typeof(CreateOptionalCommand<>).IsAssignableFromGenericType(kvp.Key)))
-                        crudedEntityValidRequestAndHandlerTypes.Add(typeof(CreateOptionalCommand<>), typeof(CreateOptionalCommandHandler<,,,>));
+                        crudedEntityValidRequestAndHandlerTypes.Add(typeof(CreateOptionalCommand<>), typeof(CreateOptionalCommandHandler<,,,,>));
 
-                    if (crudEntityAttribute.KeyType == typeof(int) &&
+                    if (apiEntityAttribute.KeyType == typeof(int) &&
                         !validRequestAndHandlerTypes.Any(kvp => typeof(UpdateOptionalCommand<>).IsAssignableFromGenericType(kvp.Key)))
-                        crudedEntityValidRequestAndHandlerTypes.Add(typeof(UpdateOptionalCommand<>), typeof(UpdateOptionalCommandHandler<,,>));
+                        crudedEntityValidRequestAndHandlerTypes.Add(typeof(UpdateOptionalCommand<>), typeof(UpdateOptionalCommandHandler<,,,>));
 
                     if (!validRequestAndHandlerTypes.Any(kvp => typeof(UpdateOptionalCommand<,>).IsAssignableFromGenericType(kvp.Key)))
-                        crudedEntityValidRequestAndHandlerTypes.Add(typeof(UpdateOptionalCommand<,>), typeof(UpdateOptionalCommandHandler<,,,>));
+                        crudedEntityValidRequestAndHandlerTypes.Add(typeof(UpdateOptionalCommand<,>), typeof(UpdateOptionalCommandHandler<,,,,>));
 
-                    if (crudEntityAttribute.KeyType == typeof(int) &&
+                    if (apiEntityAttribute.KeyType == typeof(int) &&
                         !validRequestAndHandlerTypes.Any(kvp => typeof(DeleteOptionalCommand<>).IsAssignableFromGenericType(kvp.Key)))
-                        crudedEntityValidRequestAndHandlerTypes.Add(typeof(DeleteOptionalCommand<>), typeof(DeleteOptionalCommandHandler<,,>));
+                        crudedEntityValidRequestAndHandlerTypes.Add(typeof(DeleteOptionalCommand<>), typeof(DeleteOptionalCommandHandler<,,,>));
 
                     if (!validRequestAndHandlerTypes.Any(kvp => typeof(DeleteOptionalCommand<,>).IsAssignableFromGenericType(kvp.Key)))
-                        crudedEntityValidRequestAndHandlerTypes.Add(typeof(DeleteOptionalCommand<,>), typeof(DeleteOptionalCommandHandler<,,,>));
-
-                    var readAllResultType = crudEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(crudedEntityType);
-
+                        crudedEntityValidRequestAndHandlerTypes.Add(typeof(DeleteOptionalCommand<,>), typeof(DeleteOptionalCommandHandler<,,,,>));
+                    
                     var requestResponseTypes = new Dictionary<Type, Type>
                     {
-                        { typeof(ReadQueryBase<,>), typeof(Option<,>).MakeGenericType(crudedEntityType, typeof(ApizrException<>).MakeGenericType(crudedEntityType)) },
-                        { typeof(ReadAllQueryBase<,>), typeof(Option<,>).MakeGenericType(readAllResultType, typeof(ApizrException<>).MakeGenericType(readAllResultType)) },
-                        { typeof(CreateCommandBase<,>), typeof(Option<,>).MakeGenericType(crudedEntityType, typeof(ApizrException)) },
+                        { typeof(ReadQueryBase<,>), typeof(Option<,>).MakeGenericType(modelEntityType, typeof(ApizrException<>).MakeGenericType(modelEntityType)) },
+                        { typeof(ReadAllQueryBase<,>), typeof(Option<,>).MakeGenericType(modelEntityReadAllResultType, typeof(ApizrException<>).MakeGenericType(modelEntityReadAllResultType)) },
+                        { typeof(CreateCommandBase<,>), typeof(Option<,>).MakeGenericType(modelEntityType, typeof(ApizrException)) },
                         { typeof(UpdateCommandBase<,,>), typeof(Option<Unit,ApizrException>) },
                         { typeof(DeleteCommandBase<,,>), typeof(Option<Unit,ApizrException>) }
                     };
 
                     // Registering
-                    optionsBuilder.WithCrudMediation(services, crudedEntityType, crudEntityAttribute, crudedEntityValidRequestAndHandlerTypes, requestResponseTypes);
+                    optionsBuilder.WithCrudMediation(services, apiEntityType, apiEntityAttribute, crudedEntityValidRequestAndHandlerTypes, requestResponseTypes);
                 }
             });
             

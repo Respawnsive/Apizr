@@ -1,55 +1,65 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Mapping;
 using Apizr.Mediation.Cruding.Handling.Base;
 using Apizr.Requesting;
 using MediatR;
 using Optional;
+using Optional.Async.Extensions;
 
 namespace Apizr.Optional.Cruding.Handling
 {
-    public class UpdateOptionalCommandHandler<T, TKey, TReadAllResult, TReadAllParams> : 
-        UpdateCommandHandlerBase<T, TKey, TReadAllResult, TReadAllParams, UpdateOptionalCommand<TKey, T>, Option<Unit, ApizrException>>
-        where T : class
+    public class UpdateOptionalCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> : 
+        UpdateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, UpdateOptionalCommand<TApiEntityKey, TModelEntity>, Option<Unit, ApizrException>>
+        where TModelEntity : class
+        where TApiEntity : class
     {
-        public UpdateOptionalCommandHandler(IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
+        public UpdateOptionalCommandHandler(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
         {
         }
 
-        public override async Task<Option<Unit, ApizrException>> Handle(UpdateOptionalCommand<TKey, T> request, CancellationToken cancellationToken)
+        public override Task<Option<Unit, ApizrException>> Handle(UpdateOptionalCommand<TApiEntityKey, TModelEntity> request, CancellationToken cancellationToken)
         {
             try
             {
-                await CrudApiManager.ExecuteAsync((ct, api) => api.Update(request.Key, request.Payload, ct), cancellationToken).ConfigureAwait(false);
-
-                return Unit.Value.Some<Unit, ApizrException>();
+                return request
+                        .SomeNotNull(new ApizrException(new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
+                        .MapAsync(_ =>
+                            CrudApiManager
+                                .ExecuteAsync((ct, api) => api.Update(request.Key, Map<TModelEntity, TApiEntity>(request.Payload), ct), cancellationToken)
+                                .ContinueWith(task => Unit.Value, cancellationToken));
             }
             catch (ApizrException e)
             {
-                return Option.None<Unit, ApizrException>(e);
+                return Task.FromResult(Option.None<Unit, ApizrException>(e));
             }
         }
     }
 
-    public class UpdateOptionalCommandHandler<T, TReadAllResult, TReadAllParams> : 
-        UpdateCommandHandlerBase<T, TReadAllResult, TReadAllParams, UpdateOptionalCommand<T>, Option<Unit, ApizrException>>
-        where T : class
+    public class UpdateOptionalCommandHandler<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams> : 
+        UpdateCommandHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, UpdateOptionalCommand<TModelEntity>, Option<Unit, ApizrException>>
+        where TModelEntity : class
+        where TApiEntity : class
     {
-        public UpdateOptionalCommandHandler(IApizrManager<ICrudApi<T, int, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
+        public UpdateOptionalCommandHandler(IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
         {
         }
 
-        public override async Task<Option<Unit, ApizrException>> Handle(UpdateOptionalCommand<T> request, CancellationToken cancellationToken)
+        public override Task<Option<Unit, ApizrException>> Handle(UpdateOptionalCommand<TModelEntity> request, CancellationToken cancellationToken)
         {
-
             try
             {
-                await CrudApiManager.ExecuteAsync((ct, api) => api.Update(request.Key, request.Payload, ct), cancellationToken).ConfigureAwait(false);
-
-                return Unit.Value.Some<Unit, ApizrException>();
+                return request
+                        .SomeNotNull(new ApizrException(new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
+                        .MapAsync(_ =>
+                            CrudApiManager
+                                .ExecuteAsync((ct, api) => api.Update(request.Key, Map<TModelEntity, TApiEntity>(request.Payload), ct), cancellationToken)
+                                .ContinueWith(task => Unit.Value, cancellationToken));
             }
             catch (ApizrException e)
             {
-                return Option.None<Unit, ApizrException>(e);
+                return Task.FromResult(Option.None<Unit, ApizrException>(e));
             }
         }
     }

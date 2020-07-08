@@ -9,6 +9,7 @@ using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Logging;
+using Apizr.Mapping;
 using Apizr.Requesting;
 using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
@@ -157,6 +158,21 @@ namespace Apizr
                     $"Your log handler class must inherit from {nameof(ILogHandler)} interface or derived");
 
             Options.LogHandlerType = logHandlerType;
+
+            return this;
+        }
+
+        public IApizrExtendedOptionsBuilder WithMappingHandler<TMappingHandler>()
+            where TMappingHandler : class, IMappingHandler
+            => WithMappingHandler(typeof(TMappingHandler));
+
+        public IApizrExtendedOptionsBuilder WithMappingHandler(Type mappingHandlerType)
+        {
+            if (!typeof(IMappingHandler).IsAssignableFrom(mappingHandlerType))
+                throw new ArgumentException(
+                    $"Your mapping handler class must inherit from {nameof(IMappingHandler)} interface or derived");
+
+            Options.MappingHandlerType = mappingHandlerType;
 
             return this;
         }

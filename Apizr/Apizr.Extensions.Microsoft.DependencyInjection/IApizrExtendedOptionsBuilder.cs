@@ -10,6 +10,7 @@ using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Logging;
+using Apizr.Mapping;
 using Apizr.Requesting;
 using Microsoft.Extensions.DependencyInjection;
 using Polly.Registry;
@@ -108,5 +109,19 @@ namespace Apizr
         /// <param name="logHandlerType">Type of your <see cref="ILogHandler"/> mapping implementation</param>
         /// <returns></returns>
         IApizrExtendedOptionsBuilder WithLogHandler(Type logHandlerType);
+
+        /// <summary>
+        /// Provide a mapping handler to auto map entities during mediation
+        /// </summary>
+        /// <typeparam name="TMappingHandler">Your <see cref="IMappingHandler"/> mapping implementation</typeparam>
+        /// <returns></returns>
+        IApizrExtendedOptionsBuilder WithMappingHandler<TMappingHandler>() where TMappingHandler : class, IMappingHandler;
+
+        /// <summary>
+        /// Provide a mapping handler to auto map entities during mediation
+        /// </summary>
+        /// <param name="mappingHandlerType">Type of your <see cref="IMappingHandler"/> mapping implementation</param>
+        /// <returns></returns>
+        IApizrExtendedOptionsBuilder WithMappingHandler(Type mappingHandlerType);
     }
 }

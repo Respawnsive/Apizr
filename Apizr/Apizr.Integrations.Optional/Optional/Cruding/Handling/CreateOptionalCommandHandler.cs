@@ -1,31 +1,38 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Mapping;
 using Apizr.Mediation.Cruding.Handling.Base;
 using Apizr.Requesting;
+using MediatR;
 using Optional;
 using Optional.Async.Extensions;
 
 namespace Apizr.Optional.Cruding.Handling
 {
-    public class CreateOptionalCommandHandler<T, TKey, TReadAllResult, TReadAllParams> : 
-        CreateCommandHandlerBase<T, TKey, TReadAllResult, TReadAllParams, CreateOptionalCommand<T>, Option<T, ApizrException>> 
-        where T : class
+    public class CreateOptionalCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> : 
+        CreateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, CreateOptionalCommand<TModelEntity>, Option<TModelEntity, ApizrException>>
+        where TModelEntity : class
+        where TApiEntity : class
     {
-        public CreateOptionalCommandHandler(IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
+        public CreateOptionalCommandHandler(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
         {
         }
 
-        public override Task<Option<T, ApizrException>> Handle(CreateOptionalCommand<T> request, CancellationToken cancellationToken)
+        public override Task<Option<TModelEntity, ApizrException>> Handle(CreateOptionalCommand<TModelEntity> request, CancellationToken cancellationToken)
         {
             try
             {
-                return CrudApiManager.ExecuteAsync((ct, api) => api.Create(request.Payload, ct), cancellationToken)
-                    .SomeNotNullAsync(new ApizrException(new NullReferenceException("Create method returned null")));
+                return request
+                        .SomeNotNull(new ApizrException(new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
+                        .MapAsync(_ =>
+                            CrudApiManager
+                                .ExecuteAsync((ct, api) => api.Create(Map<TModelEntity, TApiEntity>(request.Payload), ct), cancellationToken))
+                        .MapAsync(apiResult => Task.FromResult(Map<TApiEntity, TModelEntity>(apiResult)));
             }
             catch (ApizrException e)
             {
-                return Task.FromResult(Option.None<T, ApizrException>(e));
+                return Task.FromResult(Option.None<TModelEntity, ApizrException>(e));
             }
         }
     }

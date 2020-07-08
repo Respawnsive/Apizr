@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Integrations.MonkeyCache;
+using Apizr.Mapping;
 using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Cruding.Handling;
 using Apizr.Optional.Cruding;
@@ -12,6 +13,8 @@ using Apizr.Policing;
 using Apizr.Requesting;
 using Apizr.Sample.Api;
 using Apizr.Sample.Api.Models;
+using Apizr.Sample.Console.Models;
+using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using MonkeyCache.FileStore;
@@ -41,6 +44,7 @@ namespace Apizr.Sample.Console
             System.Console.WriteLine("2 - Microsoft extensions with cache (Akavache)");
             System.Console.WriteLine("3 - Microsoft extensions with cache and crud mediation (Akavache + MediatR)");
             System.Console.WriteLine("4 - Microsoft extensions with cache and crud optional mediation (Akavache + MediatR + Optional)");
+            System.Console.WriteLine("5 - Microsoft extensions with cache and crud optional mapped mediation (Akavache + MediatR + Optional + AutoMapper)");
             System.Console.WriteLine("Your choice : ");
             var readConfigChoice = System.Console.ReadLine();
             var configChoice = Convert.ToInt32(readConfigChoice);
@@ -97,12 +101,28 @@ namespace Apizr.Sample.Console
                     if(configChoice == 3)
                     {
                         // Auto assembly detection, registration and handling with mediation
-                        services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All));
-                        //services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
+                        //services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All));
+                        services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
                     }
                     else
-                        // Auto assembly detection, registration and handling with both mediation and optional mediation
-                        services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithCrudOptionalMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
+                    {
+                        if(configChoice == 4)
+                        {
+                            // Auto assembly detection, registration and handling with both mediation and optional mediation
+                            services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithCrudOptionalMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
+                        }
+                        else
+                        {
+                            // Manual registration
+                            services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithCrudOptionalMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All));
+                            services.AddApizrCrudFor<MappedEntity<UserInfos, UserDetails>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithCrudOptionalMediation().WithMappingHandler<AutoMapperMappingHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All));
+
+                            // Auto assembly detection, registration and handling with mediation, optional mediation and mapping
+                            //services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithCrudOptionalMediation().WithMappingHandler<AutoMapperMappingHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
+
+                            services.AddAutoMapper(typeof(Program));
+                        }
+                    }
 
                     services.AddMediatR(typeof(Program));
                 }
@@ -180,14 +200,45 @@ namespace Apizr.Sample.Console
                 var readUserChoice = System.Console.ReadLine();
                 var userChoice = Convert.ToInt32(readUserChoice);
 
-                UserDetails userDetails;
+                UserInfos userInfos;
                 try
                 {
-                    userDetails = configChoice <= 2
-                        ? await _reqResService.ExecuteAsync((ct, api) => api.GetUserAsync(userChoice, ct),
-                            CancellationToken.None)
-                        : await _mediator.Send(new ReadQuery<UserDetails, int>(userChoice), CancellationToken.None);
+                    if (configChoice <= 4)
+                    {
+                        var userDetails = configChoice <= 2
+                            ? await _reqResService.ExecuteAsync((ct, api) => api.GetUserAsync(userChoice, ct),
+                                CancellationToken.None)
+                            : await _mediator.Send(new ReadQuery<UserDetails>(userChoice), CancellationToken.None);
 
+                        userInfos = new UserInfos
+                        {
+                            Id = userDetails.User.Id,
+                            FirstName = userDetails.User.FirstName,
+                            LastName = userDetails.User.LastName,
+                            Avatar = userDetails.User.Avatar,
+                            Email = userDetails.User.Email,
+                            Company = userDetails.Ad.Company,
+                            Url = userDetails.Ad.Url,
+                            Text = userDetails.Ad.Text
+                        };
+                    }
+                    else
+                    {
+                        // Auto mapped entity
+                        userInfos = await _mediator.Send(new ReadQuery<UserInfos>(userChoice), CancellationToken.None);
+                    }
+                }
+                catch (ApizrException<UserInfos> e)
+                {
+                    System.Console.WriteLine("");
+                    System.Console.WriteLine(e.Message);
+
+                    if (e.CachedResult == null)
+                        return;
+
+                    System.Console.WriteLine("");
+                    System.Console.WriteLine($"Loading {nameof(UserDetails)} from cache...");
+                    userInfos = e.CachedResult;
                 }
                 catch (ApizrException<UserDetails> e)
                 {
@@ -199,19 +250,30 @@ namespace Apizr.Sample.Console
 
                     System.Console.WriteLine("");
                     System.Console.WriteLine($"Loading {nameof(UserDetails)} from cache...");
-                    userDetails = e.CachedResult;
+                    var userDetails = e.CachedResult;
+                    userInfos = new UserInfos
+                    {
+                        Id = userDetails.User.Id,
+                        FirstName = userDetails.User.FirstName,
+                        LastName = userDetails.User.LastName,
+                        Avatar = userDetails.User.Avatar,
+                        Email = userDetails.User.Email,
+                        Company = userDetails.Ad.Company,
+                        Url = userDetails.Ad.Url,
+                        Text = userDetails.Ad.Text
+                    };
                 }
 
-                if (userDetails != null)
+                if (userInfos != null)
                 {
                     System.Console.WriteLine("");
-                    System.Console.WriteLine($"{nameof(userDetails.User.Id)}: {userDetails.User.Id}");
-                    System.Console.WriteLine($"{nameof(userDetails.User.FirstName)}: {userDetails.User.FirstName}");
-                    System.Console.WriteLine($"{nameof(userDetails.User.LastName)}: {userDetails.User.LastName}");
-                    System.Console.WriteLine($"{nameof(userDetails.User.Avatar)}: {userDetails.User.Avatar}");
-                    System.Console.WriteLine($"{nameof(userDetails.Ad.Company)}: {userDetails.Ad.Company}");
-                    System.Console.WriteLine($"{nameof(userDetails.Ad.Url)}: {userDetails.Ad.Url}");
-                    System.Console.WriteLine($"{nameof(userDetails.Ad.Text)}: {userDetails.Ad.Text}");
+                    System.Console.WriteLine($"{nameof(userInfos.Id)}: {userInfos.Id}");
+                    System.Console.WriteLine($"{nameof(userInfos.FirstName)}: {userInfos.FirstName}");
+                    System.Console.WriteLine($"{nameof(userInfos.LastName)}: {userInfos.LastName}");
+                    System.Console.WriteLine($"{nameof(userInfos.Avatar)}: {userInfos.Avatar}");
+                    System.Console.WriteLine($"{nameof(userInfos.Company)}: {userInfos.Company}");
+                    System.Console.WriteLine($"{nameof(userInfos.Url)}: {userInfos.Url}");
+                    System.Console.WriteLine($"{nameof(userInfos.Text)}: {userInfos.Text}");
                 }
             }
         }

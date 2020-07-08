@@ -14,12 +14,6 @@ namespace Apizr
 {
     public static class ApizrExtendedOptionsBuilderExtensions
     {
-        private static readonly IDictionary<Type, Type> RequestResponseTypes = new Dictionary<Type, Type>
-        {
-            { typeof(ReadQueryBase<,>), default }
-        };
-
-
         /// <summary>
         /// Let Apizr handle crud requests execution with mediation
         /// </summary>
@@ -46,37 +40,37 @@ namespace Apizr
                 {
                     if (crudHandlerType.IsOpenGeneric())
                     {
-                        if (typeof(ReadQueryHandlerBase<,,,,>).IsAssignableFromGenericType(crudHandlerType))
+                        if (typeof(ReadQueryHandlerBase<,,,,,>).IsAssignableFromGenericType(crudHandlerType))
                             validCrudHandlerTypes.Add(typeof(ReadQuery<>), crudHandlerType);
-                        else if (typeof(ReadQueryHandlerBase<,,,,,>).IsAssignableFromGenericType(crudHandlerType))
+                        else if (typeof(ReadQueryHandlerBase<,,,,,,>).IsAssignableFromGenericType(crudHandlerType))
                             validCrudHandlerTypes.Add(typeof(ReadQuery<,>), crudHandlerType);
-                        else if (typeof(ReadAllQueryHandlerBase<,,,,>).IsAssignableFromGenericType(crudHandlerType))
-                            validCrudHandlerTypes.Add(typeof(ReadAllQuery<>), crudHandlerType);
                         else if (typeof(ReadAllQueryHandlerBase<,,,,,>).IsAssignableFromGenericType(crudHandlerType))
+                            validCrudHandlerTypes.Add(typeof(ReadAllQuery<>), crudHandlerType);
+                        else if (typeof(ReadAllQueryHandlerBase<,,,,,,>).IsAssignableFromGenericType(crudHandlerType))
                             validCrudHandlerTypes.Add(typeof(ReadAllQuery<,>), crudHandlerType);
-                        else if (typeof(CreateCommandHandlerBase<,,,,,>).IsAssignableFromGenericType(crudHandlerType))
+                        else if (typeof(CreateCommandHandlerBase<,,,,,,>).IsAssignableFromGenericType(crudHandlerType))
                             validCrudHandlerTypes.Add(typeof(CreateCommand<>), crudHandlerType);
-                        else if (typeof(UpdateCommandHandlerBase<,,,>).IsAssignableFromGenericType(crudHandlerType))
+                        else if (typeof(UpdateCommandHandlerBase<,,,,>).IsAssignableFromGenericType(crudHandlerType))
                             validCrudHandlerTypes.Add(typeof(UpdateCommand<>), crudHandlerType);
-                        else if (typeof(UpdateCommandHandlerBase<,,,,,>).IsAssignableFromGenericType(crudHandlerType))
+                        else if (typeof(UpdateCommandHandlerBase<,,,,,,>).IsAssignableFromGenericType(crudHandlerType))
                             validCrudHandlerTypes.Add(typeof(UpdateCommand<,>), crudHandlerType);
-                        else if (typeof(DeleteCommandHandlerBase<,,,,>).IsAssignableFromGenericType(crudHandlerType))
-                            validCrudHandlerTypes.Add(typeof(DeleteCommand<>), crudHandlerType);
                         else if (typeof(DeleteCommandHandlerBase<,,,,,>).IsAssignableFromGenericType(crudHandlerType))
+                            validCrudHandlerTypes.Add(typeof(DeleteCommand<>), crudHandlerType);
+                        else if (typeof(DeleteCommandHandlerBase<,,,,,,>).IsAssignableFromGenericType(crudHandlerType))
                             validCrudHandlerTypes.Add(typeof(DeleteCommand<,>), crudHandlerType);
                         else
                             throw new ArgumentException(
-                                $"{crudHandlerType.Name} must inherit from " +
-                                $"{typeof(ReadQueryHandlerBase<,,,,>).Name}, {typeof(ReadQueryHandlerBase<,,,,,>)}, " +
-                                $"{typeof(ReadAllQueryHandlerBase<,,,,>).Name}, {typeof(ReadAllQueryHandlerBase<,,,,,>)}, " +
-                                $"{typeof(CreateCommandHandlerBase<,,,,,>).Name}, " +
-                                $"{typeof(UpdateCommandHandlerBase<,,,>).Name}, {typeof(UpdateCommandHandlerBase<,,,,,>)},  " +
-                                $"{typeof(DeleteCommandHandlerBase<,,,,>).Name} or {typeof(DeleteCommandHandlerBase<,,,,,>)}",
-                                nameof(crudHandlerType.Name));
+                                $"{crudHandlerType.GetFriendlyName()} must inherit from " +
+                                $"{typeof(ReadQueryHandlerBase<,,,,,>).GetFriendlyName()}, {typeof(ReadQueryHandlerBase<,,,,,,>)}, " +
+                                $"{typeof(ReadAllQueryHandlerBase<,,,,,>).GetFriendlyName()}, {typeof(ReadAllQueryHandlerBase<,,,,,,>)}, " +
+                                $"{typeof(CreateCommandHandlerBase<,,,,,,>).GetFriendlyName()}, " +
+                                $"{typeof(UpdateCommandHandlerBase<,,,,>).GetFriendlyName()}, {typeof(UpdateCommandHandlerBase<,,,,,,>)},  " +
+                                $"{typeof(DeleteCommandHandlerBase<,,,,,>).GetFriendlyName()} or {typeof(DeleteCommandHandlerBase<,,,,,,>)}",
+                                nameof(crudHandlerType));
                     }
                     else
                         throw new ArgumentException(
-                            $"{crudHandlerType.Name} must be open generic",
+                            $"{crudHandlerType.GetFriendlyName()} must be open generic",
                             nameof(crudHandlerTypes));
                 } 
             }
@@ -109,26 +103,6 @@ namespace Apizr
                         {
                             if (requestAndHandlerTypeCombination.Item2.IsOpenGeneric())
                             {
-                                if (typeof(ReadQueryHandlerBase<,,,,>).IsAssignableFromGenericType(
-                                    requestAndHandlerTypeCombination.Item2))
-                                {
-                                    validRequestAndHandlerTypes.Add(requestAndHandlerTypeCombination.Item1,
-                                        requestAndHandlerTypeCombination.Item2);
-                                }
-                                else
-                                    throw new ArgumentException(
-                                        $"{requestAndHandlerTypeCombination.Item2.Name} must inherit from {typeof(ReadQueryHandlerBase<,,,,>).Name} to handle {typeof(ReadQueryBase<>).Name}",
-                                        nameof(requestAndHandlerTypeCombination.Item2.Name));
-                            }
-                            else
-                                throw new ArgumentException(
-                                    $"{requestAndHandlerTypeCombination.Item2.Name} must be open generic",
-                                    nameof(requestAndHandlerTypeCombination.Item2.Name));
-                        }
-                        else if (typeof(ReadQueryBase<,>).IsAssignableFromGenericType(requestAndHandlerTypeCombination.Item1))
-                        {
-                            if (requestAndHandlerTypeCombination.Item2.IsOpenGeneric())
-                            {
                                 if (typeof(ReadQueryHandlerBase<,,,,,>).IsAssignableFromGenericType(
                                     requestAndHandlerTypeCombination.Item2))
                                 {
@@ -137,19 +111,35 @@ namespace Apizr
                                 }
                                 else
                                     throw new ArgumentException(
-                                        $"{requestAndHandlerTypeCombination.Item2.Name} must inherit from {typeof(ReadQueryHandlerBase<,,,,,>).Name} to handle {typeof(ReadQueryBase<,>).Name}",
-                                        nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                        $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must inherit from {typeof(ReadQueryHandlerBase<,,,,,>).GetFriendlyName()} to handle {typeof(ReadQueryBase<>).GetFriendlyName()}");
                             }
                             else
                                 throw new ArgumentException(
-                                    $"{requestAndHandlerTypeCombination.Item2.Name} must be open generic",
-                                    nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                    $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must be open generic");
+                        }
+                        else if (typeof(ReadQueryBase<,>).IsAssignableFromGenericType(requestAndHandlerTypeCombination.Item1))
+                        {
+                            if (requestAndHandlerTypeCombination.Item2.IsOpenGeneric())
+                            {
+                                if (typeof(ReadQueryHandlerBase<,,,,,,>).IsAssignableFromGenericType(
+                                    requestAndHandlerTypeCombination.Item2))
+                                {
+                                    validRequestAndHandlerTypes.Add(requestAndHandlerTypeCombination.Item1,
+                                        requestAndHandlerTypeCombination.Item2);
+                                }
+                                else
+                                    throw new ArgumentException(
+                                        $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must inherit from {typeof(ReadQueryHandlerBase<,,,,,,>).GetFriendlyName()} to handle {typeof(ReadQueryBase<,>).GetFriendlyName()}");
+                            }
+                            else
+                                throw new ArgumentException(
+                                    $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must be open generic");
                         }
                         else if (typeof(ReadAllQueryBase<>).IsAssignableFromGenericType(requestAndHandlerTypeCombination.Item1))
                         {
                             if (requestAndHandlerTypeCombination.Item2.IsOpenGeneric())
                             {
-                                if (typeof(ReadAllQueryHandlerBase<,,,,>).IsAssignableFromGenericType(
+                                if (typeof(ReadAllQueryHandlerBase<,,,,,>).IsAssignableFromGenericType(
                                        requestAndHandlerTypeCombination.Item2))
                                 {
                                     validRequestAndHandlerTypes.Add(requestAndHandlerTypeCombination.Item1,
@@ -157,19 +147,17 @@ namespace Apizr
                                 }
                                 else
                                     throw new ArgumentException(
-                                        $"{requestAndHandlerTypeCombination.Item2.Name} must inherit from {typeof(ReadAllQueryHandlerBase<,,,,>).Name} to handle {typeof(ReadAllQueryBase<>).Name}",
-                                        nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                        $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must inherit from {typeof(ReadAllQueryHandlerBase<,,,,,>).GetFriendlyName()} to handle {typeof(ReadAllQueryBase<>).GetFriendlyName()}");
                             }
                             else
                                 throw new ArgumentException(
-                                    $"{requestAndHandlerTypeCombination.Item2.Name} must be open generic",
-                                    nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                    $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must be open generic");
                         }
                         else if (typeof(ReadAllQueryBase<,>).IsAssignableFromGenericType(requestAndHandlerTypeCombination.Item1))
                         {
                             if (requestAndHandlerTypeCombination.Item2.IsOpenGeneric())
                             {
-                                if (typeof(ReadAllQueryHandlerBase<,,,,,>).IsAssignableFromGenericType(
+                                if (typeof(ReadAllQueryHandlerBase<,,,,,,>).IsAssignableFromGenericType(
                                     requestAndHandlerTypeCombination.Item2))
                                 {
                                     validRequestAndHandlerTypes.Add(requestAndHandlerTypeCombination.Item1,
@@ -177,19 +165,17 @@ namespace Apizr
                                 }
                                 else
                                     throw new ArgumentException(
-                                        $"{requestAndHandlerTypeCombination.Item2.Name} must inherit from {typeof(ReadAllQueryHandlerBase<,,,,,>).Name} to handle {typeof(ReadAllQueryBase<,>).Name}",
-                                        nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                        $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must inherit from {typeof(ReadAllQueryHandlerBase<,,,,,,>).GetFriendlyName()} to handle {typeof(ReadAllQueryBase<,>).GetFriendlyName()}");
                             }
                             else
                                 throw new ArgumentException(
-                                    $"{requestAndHandlerTypeCombination.Item2.Name} must be open generic",
-                                    nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                    $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must be open generic");
                         }
                         else if (typeof(CreateCommandBase<,>).IsAssignableFromGenericType(requestAndHandlerTypeCombination.Item1))
                         {
                             if (requestAndHandlerTypeCombination.Item2.IsOpenGeneric())
                             {
-                                if (typeof(CreateCommandHandlerBase<,,,,,>).IsAssignableFromGenericType(
+                                if (typeof(CreateCommandHandlerBase<,,,,,,>).IsAssignableFromGenericType(
                                        requestAndHandlerTypeCombination.Item2))
                                 {
                                     validRequestAndHandlerTypes.Add(requestAndHandlerTypeCombination.Item1,
@@ -197,19 +183,17 @@ namespace Apizr
                                 }
                                 else
                                     throw new ArgumentException(
-                                        $"{requestAndHandlerTypeCombination.Item2.Name} must inherit from {typeof(CreateCommandHandlerBase<,,,,,>).Name} to handle {typeof(CreateCommandBase<,>).Name}",
-                                        nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                        $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must inherit from {typeof(CreateCommandHandlerBase<,,,,,,>).GetFriendlyName()} to handle {typeof(CreateCommandBase<,>).GetFriendlyName()}");
                             }
                             else
                                 throw new ArgumentException(
-                                    $"{requestAndHandlerTypeCombination.Item2.Name} must be open generic",
-                                    nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                    $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must be open generic");
                         }
                         else if (typeof(UpdateCommandBase<>).IsAssignableFromGenericType(requestAndHandlerTypeCombination.Item1))
                         {
                             if (requestAndHandlerTypeCombination.Item2.IsOpenGeneric())
                             {
-                                if (typeof(UpdateCommandHandlerBase<,,,>).IsAssignableFromGenericType(
+                                if (typeof(UpdateCommandHandlerBase<,,,,>).IsAssignableFromGenericType(
                                     requestAndHandlerTypeCombination.Item2))
                                 {
                                     validRequestAndHandlerTypes.Add(requestAndHandlerTypeCombination.Item1,
@@ -217,19 +201,17 @@ namespace Apizr
                                 }
                                 else
                                     throw new ArgumentException(
-                                        $"{requestAndHandlerTypeCombination.Item2.Name} must inherit from {typeof(UpdateCommandHandlerBase<,,,>).Name}",
-                                        nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                        $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must inherit from {typeof(UpdateCommandHandlerBase<,,,,>).GetFriendlyName()}");
                             }
                             else
                                 throw new ArgumentException(
-                                    $"{requestAndHandlerTypeCombination.Item2.Name} must be open generic",
-                                    nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                    $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must be open generic");
                         }
                         else if (typeof(UpdateCommandBase<,>).IsAssignableFromGenericType(requestAndHandlerTypeCombination.Item1))
                         {
                             if (requestAndHandlerTypeCombination.Item2.IsOpenGeneric())
                             {
-                                if (typeof(UpdateCommandHandlerBase<,,,,,>).IsAssignableFromGenericType(
+                                if (typeof(UpdateCommandHandlerBase<,,,,,,>).IsAssignableFromGenericType(
                                     requestAndHandlerTypeCombination.Item2))
                                 {
                                     validRequestAndHandlerTypes.Add(requestAndHandlerTypeCombination.Item1,
@@ -237,19 +219,17 @@ namespace Apizr
                                 }
                                 else
                                     throw new ArgumentException(
-                                        $"{requestAndHandlerTypeCombination.Item2.Name} must inherit from {typeof(UpdateCommandHandlerBase<,,,,,>).Name}",
-                                        nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                        $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must inherit from {typeof(UpdateCommandHandlerBase<,,,,,,>).GetFriendlyName()}");
                             }
                             else
                                 throw new ArgumentException(
-                                    $"{requestAndHandlerTypeCombination.Item2.Name} must be open generic",
-                                    nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                    $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must be open generic");
                         }
                         else if (typeof(DeleteCommandBase<>).IsAssignableFromGenericType(requestAndHandlerTypeCombination.Item1))
                         {
                             if (requestAndHandlerTypeCombination.Item2.IsOpenGeneric())
                             {
-                                if (typeof(DeleteCommandHandlerBase<,,,,>).IsAssignableFromGenericType(
+                                if (typeof(DeleteCommandHandlerBase<,,,,,>).IsAssignableFromGenericType(
                                     requestAndHandlerTypeCombination.Item2))
                                 {
                                     validRequestAndHandlerTypes.Add(requestAndHandlerTypeCombination.Item1,
@@ -257,19 +237,17 @@ namespace Apizr
                                 }
                                 else
                                     throw new ArgumentException(
-                                        $"{requestAndHandlerTypeCombination.Item2.Name} must inherit from {typeof(DeleteCommandHandlerBase<,,,,>).Name}",
-                                        nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                        $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must inherit from {typeof(DeleteCommandHandlerBase<,,,,,>).GetFriendlyName()}");
                             }
                             else
                                 throw new ArgumentException(
-                                    $"{requestAndHandlerTypeCombination.Item2.Name} must be open generic",
-                                    nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                    $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must be open generic");
                         }
                         else if (typeof(DeleteCommandBase<,>).IsAssignableFromGenericType(requestAndHandlerTypeCombination.Item1))
                         {
                             if (requestAndHandlerTypeCombination.Item2.IsOpenGeneric())
                             { 
-                                if(typeof(DeleteCommandHandlerBase<,,,,,>).IsAssignableFromGenericType(
+                                if(typeof(DeleteCommandHandlerBase<,,,,,,>).IsAssignableFromGenericType(
                                        requestAndHandlerTypeCombination.Item2))
                                 {
                                     validRequestAndHandlerTypes.Add(requestAndHandlerTypeCombination.Item1,
@@ -277,28 +255,24 @@ namespace Apizr
                                 }
                                 else
                                     throw new ArgumentException(
-                                        $"{requestAndHandlerTypeCombination.Item2.Name} must inherit from {typeof(DeleteCommandHandlerBase<,,,,,>).Name}",
-                                        nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                        $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must inherit from {typeof(DeleteCommandHandlerBase<,,,,,,>).GetFriendlyName()}");
                             }
                             else
                                 throw new ArgumentException(
-                                    $"{requestAndHandlerTypeCombination.Item2.Name} must be open generic",
-                                    nameof(requestAndHandlerTypeCombination.Item2.Name));
+                                    $"{requestAndHandlerTypeCombination.Item2.GetFriendlyName()} must be open generic");
                         }
                         else
                             throw new ArgumentException(
-                                $"{requestAndHandlerTypeCombination.Item1.Name} must inherit from " +
-                                $"{typeof(ReadQueryBase<>).Name}, {typeof(ReadQueryBase<,>)}, " +
-                                $"{typeof(ReadAllQueryBase<>).Name}, {typeof(ReadAllQueryBase<,>)}, " +
-                                $"{typeof(CreateCommandBase<,>).Name}, " +
-                                $"{typeof(UpdateCommandBase<,>).Name}, {typeof(UpdateCommandBase<,,>)},  " +
-                                $"{typeof(DeleteCommandBase<>).Name} or {typeof(DeleteCommandBase<,>)}",
-                                nameof(requestAndHandlerTypeCombination.Item1.Name));
+                                $"{requestAndHandlerTypeCombination.Item1.GetFriendlyName()} must inherit from " +
+                                $"{typeof(ReadQueryBase<>).GetFriendlyName()}, {typeof(ReadQueryBase<,>).GetFriendlyName()}, " +
+                                $"{typeof(ReadAllQueryBase<>).GetFriendlyName()}, {typeof(ReadAllQueryBase<,>).GetFriendlyName()}, " +
+                                $"{typeof(CreateCommandBase<,>).GetFriendlyName()}, " +
+                                $"{typeof(UpdateCommandBase<,>).GetFriendlyName()}, {typeof(UpdateCommandBase<,,>).GetFriendlyName()},  " +
+                                $"{typeof(DeleteCommandBase<>).GetFriendlyName()} or {typeof(DeleteCommandBase<,>).GetFriendlyName()}");
                     }
                     else
                         throw new ArgumentException(
-                            $"{requestAndHandlerTypeCombination.Item1.Name} must be open generic",
-                            nameof(requestAndHandlerTypeCombination.Item1.Name));
+                            $"{requestAndHandlerTypeCombination.Item1.GetFriendlyName()} must be open generic");
                 }
             }
 
@@ -307,20 +281,24 @@ namespace Apizr
             {
                 foreach (var crudEntity in optionsBuilder.ApizrOptions.CrudEntities)
                 {
-                    var crudedEntityType = crudEntity.Key;
-                    var crudEntityAttribute = crudEntity.Value;
-                    var readAllResultType = crudEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(crudedEntityType);
+                    var apiEntityAttribute = crudEntity.Value;
+                    var apiEntityType = crudEntity.Key;
+                    var modelEntityType = apiEntityAttribute.ModelEntityType;
+                    var modelEntityReadAllResultType = apiEntityAttribute.ReadAllResultType.IsGenericTypeDefinition
+                        ? apiEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(modelEntityType)
+                        : apiEntityAttribute.ReadAllResultType.GetGenericTypeDefinition()
+                            .MakeGenericTypeIfNeeded(modelEntityType);
 
                     var requestResponseTypes = new Dictionary<Type, Type>
                     {
-                        { typeof(ReadQueryBase<,>), crudedEntityType },
-                        { typeof(ReadAllQueryBase<,>), readAllResultType },
-                        { typeof(CreateCommandBase<,>), crudedEntityType },
+                        { typeof(ReadQueryBase<,>), modelEntityType },
+                        { typeof(ReadAllQueryBase<,>), modelEntityReadAllResultType },
+                        { typeof(CreateCommandBase<,>), modelEntityType },
                         { typeof(UpdateCommandBase<,,>), typeof(Unit) },
                         { typeof(DeleteCommandBase<,,>), typeof(Unit) }
                     };
 
-                    WithCrudMediation(optionsBuilder, services, crudedEntityType, crudEntityAttribute, validRequestAndHandlerTypes, requestResponseTypes);
+                    WithCrudMediation(optionsBuilder, services, apiEntityType, apiEntityAttribute, validRequestAndHandlerTypes, requestResponseTypes);
                 }
             });
 
@@ -328,135 +306,258 @@ namespace Apizr
         }
 
         public static IApizrExtendedOptionsBuilder WithCrudMediation(this IApizrExtendedOptionsBuilder optionsBuilder,
-            IServiceCollection services, Type crudedEntityType, CrudEntityAttribute crudEntityAttribute,  IDictionary<Type, Type> validRequestAndHandlerTypes, IDictionary<Type, Type> requestResponseTypes)
+            IServiceCollection services, Type apiEntityType, CrudEntityAttribute apiEntityAttribute,  IDictionary<Type, Type> validRequestAndHandlerTypes, IDictionary<Type, Type> requestResponseTypes)
         {
-            var readAllResultType = crudEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(crudedEntityType);
+            var modelEntityType = apiEntityAttribute.ModelEntityType;
+            var apiEntityKeyType = apiEntityAttribute.KeyType;
+            var apiEntityReadAllResultType = apiEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(apiEntityType);
+            var modelEntityReadAllResultType = apiEntityAttribute.ReadAllResultType.IsGenericTypeDefinition
+                ? apiEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(modelEntityType)
+                : apiEntityAttribute.ReadAllResultType.GetGenericTypeDefinition()
+                    .MakeGenericTypeIfNeeded(modelEntityType);
+            var apiEntityReadAllParamsType = apiEntityAttribute.ReadAllParamsType;
 
-            // Read but simplified default version if concerned
-            if (crudEntityAttribute.KeyType == typeof(int))
+            #region ShortRead
+
+            // Read but short default version if concerned
+            if (apiEntityKeyType == typeof(int))
             {
-                var simplifiedReadCombination = validRequestAndHandlerTypes.FirstOrDefault(kvp =>
+                var shortReadCombination = validRequestAndHandlerTypes.FirstOrDefault(kvp =>
                     typeof(ReadQueryBase<>).IsAssignableFromGenericType(kvp.Key));
-                services.TryAddTransient(
-                    typeof(IRequestHandler<,>).MakeGenericType(
-                        (simplifiedReadCombination.Key ?? typeof(ReadQuery<>)).MakeGenericType(crudedEntityType),
-                        requestResponseTypes.First(kvp => kvp.Key == typeof(ReadQueryBase<,>)).Value),
-                    (simplifiedReadCombination.Value ?? typeof(ReadQueryHandler<,,>)).MakeGenericType(
-                        crudedEntityType,
-                        readAllResultType,
-                        crudEntityAttribute.ReadAllParamsType));
+
+                // ServiceType
+                var shortGenericReadQueryType = shortReadCombination.Key ?? typeof(ReadQuery<>);
+                var shortReadQueryType = shortGenericReadQueryType.MakeGenericType(modelEntityType);
+                var shortReadQueryResponseType = requestResponseTypes.First(kvp => kvp.Key == typeof(ReadQueryBase<,>)).Value;
+                var shortReadQueryHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortReadQueryType, shortReadQueryResponseType);
+
+                // ImplementationType
+                var shortGenericReadQueryHandlerType = shortReadCombination.Value ?? typeof(ReadQueryHandler<,,,>);
+                var shortReadQueryHandlerImplementationType = shortGenericReadQueryHandlerType.MakeGenericType(
+                    modelEntityType,
+                    apiEntityType,
+                    apiEntityReadAllResultType,
+                    apiEntityReadAllParamsType);
+
+                // Registration
+                services.TryAddTransient(shortReadQueryHandlerServiceType, shortReadQueryHandlerImplementationType);
             }
+
+            #endregion
+
+            #region Read
 
             // Read
             var readCombination = validRequestAndHandlerTypes.FirstOrDefault(kvp =>
                 typeof(ReadQueryBase<,>).IsAssignableFromGenericType(kvp.Key) && !typeof(ReadQueryBase<>).IsAssignableFromGenericType(kvp.Key));
-            services.TryAddTransient(
-                typeof(IRequestHandler<,>).MakeGenericType(
-                    (readCombination.Key ?? typeof(ReadQuery<,>)).MakeGenericType(crudedEntityType,
-                        crudEntityAttribute.KeyType),
-                    requestResponseTypes.First(kvp => kvp.Key == typeof(ReadQueryBase<,>)).Value),
-                (readCombination.Value ?? typeof(ReadQueryHandler<,,,>)).MakeGenericType(crudedEntityType,
-                    crudEntityAttribute.KeyType,
-                    readAllResultType,
-                    crudEntityAttribute.ReadAllParamsType));
 
-            // ReadAll but simplified default version if concerned
-            if (crudEntityAttribute.ReadAllParamsType == typeof(IDictionary<string, object>))
+            // ServiceType
+            var genericReadQueryType = readCombination.Key ?? typeof(ReadQuery<,>);
+            var readQueryType = genericReadQueryType.MakeGenericType(modelEntityType, apiEntityKeyType);
+            var readQueryResponseType = requestResponseTypes.First(kvp => kvp.Key == typeof(ReadQueryBase<,>)).Value;
+            var readQueryHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(readQueryType, readQueryResponseType);
+
+            // ImplementationType
+            var genericReadQueryHandlerType = readCombination.Value ?? typeof(ReadQueryHandler<,,,,>);
+            var readQueryHandlerImplementationType = genericReadQueryHandlerType.MakeGenericType(
+                modelEntityType,
+                apiEntityType,
+                apiEntityKeyType,
+                apiEntityReadAllResultType,
+                apiEntityReadAllParamsType);
+
+            // Registration
+            services.TryAddTransient(readQueryHandlerServiceType, readQueryHandlerImplementationType);
+
+            #endregion
+
+            #region ShortReadAll
+
+            // ReadAll but short default version if concerned
+            if (apiEntityReadAllParamsType == typeof(IDictionary<string, object>))
             {
-                var simplifiedReadAllCombination = validRequestAndHandlerTypes.FirstOrDefault(kvp =>
+                var shortReadAllCombination = validRequestAndHandlerTypes.FirstOrDefault(kvp =>
                     typeof(ReadAllQueryBase<>).IsAssignableFromGenericType(kvp.Key));
-                services.TryAddTransient(
-                    typeof(IRequestHandler<,>).MakeGenericType(
-                        (simplifiedReadAllCombination.Key ?? typeof(ReadAllQuery<>)).MakeGenericType(
-                            readAllResultType),
-                        requestResponseTypes.First(kvp => kvp.Key == typeof(ReadAllQueryBase<,>)).Value),
-                    (simplifiedReadAllCombination.Value ??
-                     typeof(ReadAllQueryHandler<,,>)).MakeGenericType(crudedEntityType, crudEntityAttribute.KeyType,
-                        readAllResultType));
+
+                // ServiceType
+                var shortGenericReadAllQueryType = shortReadAllCombination.Key ?? typeof(ReadAllQuery<>);
+                var shortReadAllQueryType = shortGenericReadAllQueryType.MakeGenericType(modelEntityReadAllResultType);
+                var shortReadAllQueryResponseType = requestResponseTypes.First(kvp => kvp.Key == typeof(ReadAllQueryBase<,>)).Value;
+                var shortReadAllQueryHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortReadAllQueryType, shortReadAllQueryResponseType);
+
+                // ImplementationType
+                var shortGenericReadAllQueryHandlerType = shortReadAllCombination.Value ?? typeof(ReadAllQueryHandler<,,,>);
+                var shortReadAllQueryHandlerImplementationType = shortGenericReadAllQueryHandlerType.MakeGenericType(
+                    apiEntityType,
+                    apiEntityKeyType,
+                    modelEntityReadAllResultType,
+                    apiEntityReadAllResultType);
+
+                // Registration
+                services.TryAddTransient(shortReadAllQueryHandlerServiceType, shortReadAllQueryHandlerImplementationType);
             }
+
+            #endregion
+
+            #region ReadAll
 
             // ReadAll
             var readAllCombination = validRequestAndHandlerTypes.FirstOrDefault(kvp =>
-            typeof(ReadAllQueryBase<,>).IsAssignableFromGenericType(kvp.Key) && !typeof(ReadAllQueryBase<>).IsAssignableFromGenericType(kvp.Key));
-            services.TryAddTransient(
-                typeof(IRequestHandler<,>).MakeGenericType(
-                    (readAllCombination.Key ?? typeof(ReadAllQuery<,>)).MakeGenericType(
-                        crudEntityAttribute.ReadAllParamsType,
-                        readAllResultType),
-                    requestResponseTypes.First(kvp => kvp.Key == typeof(ReadAllQueryBase<,>)).Value),
-                (readAllCombination.Value ??
-                 typeof(ReadAllQueryHandler<,,,>)).MakeGenericType(crudedEntityType, crudEntityAttribute.KeyType,
-                    readAllResultType,
-                    crudEntityAttribute.ReadAllParamsType));
+                typeof(ReadAllQueryBase<,>).IsAssignableFromGenericType(kvp.Key) && !typeof(ReadAllQueryBase<>).IsAssignableFromGenericType(kvp.Key));
+
+            // ServiceType
+            var genericReadAllQueryType = readAllCombination.Key ?? typeof(ReadAllQuery<,>);
+            var readAllQueryType = genericReadAllQueryType.MakeGenericType(apiEntityReadAllParamsType, modelEntityReadAllResultType);
+            var readAllQueryResponseType = requestResponseTypes.First(kvp => kvp.Key == typeof(ReadAllQueryBase<,>)).Value;
+            var readAllQueryHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(readAllQueryType, readAllQueryResponseType);
+
+            // ImplementationType
+            var genericReadAllQueryHandlerType = readAllCombination.Value ??typeof(ReadAllQueryHandler<,,,,>);
+            var readAllQueryHandlerImplementationType = genericReadAllQueryHandlerType.MakeGenericType(
+                apiEntityType,
+                apiEntityKeyType,
+                modelEntityReadAllResultType,
+                apiEntityReadAllResultType,
+                apiEntityReadAllParamsType);
+
+            // Registration
+            services.TryAddTransient(readAllQueryHandlerServiceType, readAllQueryHandlerImplementationType);
+
+            #endregion
+
+            #region Create
 
             // Create
             var createCombination = validRequestAndHandlerTypes.FirstOrDefault(kvp =>
                 typeof(CreateCommandBase<,>).IsAssignableFromGenericType(kvp.Key));
-            services.TryAddTransient(
-                typeof(IRequestHandler<,>).MakeGenericType(
-                    (createCombination.Key ?? typeof(CreateCommand<>)).MakeGenericType(crudedEntityType),
-                    requestResponseTypes.First(kvp => kvp.Key == typeof(CreateCommandBase<,>)).Value),
-                (createCombination.Value ??
-                 typeof(CreateCommandHandler<,,,>)).MakeGenericType(crudedEntityType, crudEntityAttribute.KeyType,
-                    readAllResultType,
-                    crudEntityAttribute.ReadAllParamsType));
 
-            // Update but simplified default version if concerned
-            if (crudEntityAttribute.KeyType == typeof(int))
+            // ServiceType
+            var genericCreateCommandType = createCombination.Key ?? typeof(CreateCommand<>);
+            var createCommandType = genericCreateCommandType.MakeGenericType(modelEntityType);
+            var createCommandResponseType = requestResponseTypes.First(kvp => kvp.Key == typeof(CreateCommandBase<,>)).Value;
+            var createCommandHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(createCommandType, createCommandResponseType);
+
+            // ImplementationType
+            var genericCreateCommandHandlerType = createCombination.Value ?? typeof(CreateCommandHandler<,,,,>);
+            var createCommandHandlerImplementationType = genericCreateCommandHandlerType.MakeGenericType(
+                modelEntityType,
+                apiEntityType,
+                apiEntityKeyType,
+                apiEntityReadAllResultType,
+                apiEntityReadAllParamsType);
+
+            // Registration
+            services.TryAddTransient(createCommandHandlerServiceType, createCommandHandlerImplementationType);
+
+            #endregion
+
+            #region ShortUpdate
+
+            // Update but short default version if concerned
+            if (apiEntityKeyType == typeof(int))
             {
-                var simplifiedUpdateCombination = validRequestAndHandlerTypes.FirstOrDefault(kvp =>
-                                typeof(UpdateCommandBase<,>).IsAssignableFromGenericType(kvp.Key));
-                services.TryAddTransient(
-                    typeof(IRequestHandler<,>).MakeGenericType(
-                        (simplifiedUpdateCombination.Key ?? typeof(UpdateCommand<>)).MakeGenericType(
-                            crudedEntityType),
-                        requestResponseTypes.First(kvp => kvp.Key == typeof(UpdateCommandBase<,,>)).Value),
-                    (simplifiedUpdateCombination.Value ??
-                     typeof(UpdateCommandHandler<,,>)).MakeGenericType(crudedEntityType,
-                        readAllResultType,
-                        crudEntityAttribute.ReadAllParamsType));
+                var shortUpdateCombination = validRequestAndHandlerTypes.FirstOrDefault(kvp =>
+                    typeof(UpdateCommandBase<,>).IsAssignableFromGenericType(kvp.Key));
+
+                // ServiceType
+                var shortGenericUpdateCommandType = shortUpdateCombination.Key ?? typeof(UpdateCommand<>);
+                var shortUpdateCommandType = shortGenericUpdateCommandType.MakeGenericType(modelEntityType);
+                var shortUpdateCommandResponseType = requestResponseTypes.First(kvp => kvp.Key == typeof(UpdateCommandBase<,,>)).Value;
+                var shortUpdateCommandHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortUpdateCommandType, shortUpdateCommandResponseType);
+
+                // ImplementationType
+                var shortGenericUpdateCommandHandlerType = shortUpdateCombination.Value ?? typeof(UpdateCommandHandler<,,,>);
+                var shortUpdateCommandHandlerImplementationType = shortGenericUpdateCommandHandlerType.MakeGenericType(
+                    modelEntityType,
+                    apiEntityType,
+                    apiEntityReadAllResultType,
+                    apiEntityReadAllParamsType);
+
+                // Registration
+                services.TryAddTransient(shortUpdateCommandHandlerServiceType, shortUpdateCommandHandlerImplementationType);
             }
+
+            #endregion
+
+            #region Update
 
             // Update
             var updateCombination = validRequestAndHandlerTypes.FirstOrDefault(kvp =>
                 typeof(UpdateCommandBase<,,>).IsAssignableFromGenericType(kvp.Key) && !typeof(UpdateCommandBase<,>).IsAssignableFromGenericType(kvp.Key));
-            services.TryAddTransient(
-                typeof(IRequestHandler<,>).MakeGenericType(
-                    (updateCombination.Key ?? typeof(UpdateCommand<,>)).MakeGenericType(
-                        crudEntityAttribute.KeyType, crudedEntityType),
-                    requestResponseTypes.First(kvp => kvp.Key == typeof(UpdateCommandBase<,,>)).Value),
-                (updateCombination.Value ??
-                 typeof(UpdateCommandHandler<,,,>)).MakeGenericType(crudedEntityType, crudEntityAttribute.KeyType,
-                    readAllResultType,
-                    crudEntityAttribute.ReadAllParamsType));
 
-            // Delete but simplified default version if concerned
-            if (crudEntityAttribute.KeyType == typeof(int))
+            // ServiceType
+            var genericUpdateCommandType = updateCombination.Key ?? typeof(UpdateCommand<,>);
+            var updateCommandType = genericUpdateCommandType.MakeGenericType(apiEntityKeyType, modelEntityType);
+            var updateCommandResponseType = requestResponseTypes.First(kvp => kvp.Key == typeof(UpdateCommandBase<,,>)).Value;
+            var updateCommandHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(updateCommandType, updateCommandResponseType);
+
+            // ImplementationType
+            var genericUpdateCommandHandlerType = updateCombination.Value ?? typeof(UpdateCommandHandler<,,,,>);
+            var updateCommandHandlerImplementationType = genericUpdateCommandHandlerType.MakeGenericType(
+                modelEntityType,
+                apiEntityType,
+                apiEntityKeyType,
+                apiEntityReadAllResultType,
+                apiEntityReadAllParamsType);
+
+            // Registration
+            services.TryAddTransient(updateCommandHandlerServiceType, updateCommandHandlerImplementationType);
+
+            #endregion
+
+            #region ShortDelete
+
+            // Delete but short default version if concerned
+            if (apiEntityKeyType == typeof(int))
             {
-                var simplifiedDeleteCombination = validRequestAndHandlerTypes.FirstOrDefault(kvp =>
-                                typeof(DeleteCommandBase<,>).IsAssignableFromGenericType(kvp.Key));
-                services.TryAddTransient(
-                    typeof(IRequestHandler<,>).MakeGenericType(
-                        (simplifiedDeleteCombination.Key ?? typeof(DeleteCommand<>)).MakeGenericType(crudedEntityType),
-                        requestResponseTypes.First(kvp => kvp.Key == typeof(DeleteCommandBase<,,>)).Value),
-                    (simplifiedDeleteCombination.Value ??
-                     typeof(DeleteCommandHandler<,,>)).MakeGenericType(crudedEntityType,
-                        readAllResultType,
-                        crudEntityAttribute.ReadAllParamsType));
+                var shortDeleteCombination = validRequestAndHandlerTypes.FirstOrDefault(kvp =>
+                    typeof(DeleteCommandBase<,>).IsAssignableFromGenericType(kvp.Key));
+
+                // ServiceType
+                var shortGenericDeleteCommandType = shortDeleteCombination.Key ?? typeof(DeleteCommand<>);
+                var shortDeleteCommandType = shortGenericDeleteCommandType.MakeGenericType(modelEntityType);
+                var shortDeleteCommandResponseType = requestResponseTypes.First(kvp => kvp.Key == typeof(DeleteCommandBase<,,>)).Value;
+                var shortDeleteCommandHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortDeleteCommandType, shortDeleteCommandResponseType);
+
+                // ImplementationType
+                var shortGenericDeleteCommandHandlerType = shortDeleteCombination.Value ?? typeof(DeleteCommandHandler<,,,>);
+                var shortDeleteCommandHandlerImplementationType = shortGenericDeleteCommandHandlerType.MakeGenericType(
+                    modelEntityType,
+                    apiEntityType,
+                    apiEntityReadAllResultType,
+                    apiEntityReadAllParamsType);
+
+                // Registration
+                services.TryAddTransient(shortDeleteCommandHandlerServiceType, shortDeleteCommandHandlerImplementationType);
             }
+
+            #endregion
+
+            #region Delete
 
             // Delete
             var deleteCombination = validRequestAndHandlerTypes.FirstOrDefault(kvp =>
                 typeof(DeleteCommandBase<,,>).IsAssignableFromGenericType(kvp.Key) && !typeof(DeleteCommandBase<,>).IsAssignableFromGenericType(kvp.Key));
-            services.TryAddTransient(
-                typeof(IRequestHandler<,>).MakeGenericType(
-                    (deleteCombination.Key ?? typeof(DeleteCommand<,>))
-                    .MakeGenericType(crudedEntityType, crudEntityAttribute.KeyType),
-                    requestResponseTypes.First(kvp => kvp.Key == typeof(DeleteCommandBase<,,>)).Value),
-                (deleteCombination.Value ??
-                 typeof(DeleteCommandHandler<,,,>)).MakeGenericType(crudedEntityType, crudEntityAttribute.KeyType,
-                    readAllResultType,
-                    crudEntityAttribute.ReadAllParamsType));
+
+            // ServiceType
+            var genericDeleteCommandType = deleteCombination.Key ?? typeof(DeleteCommand<,>);
+            var deleteCommandType = genericDeleteCommandType.MakeGenericType(modelEntityType, apiEntityKeyType);
+            var deleteCommandResponseType = requestResponseTypes.First(kvp => kvp.Key == typeof(DeleteCommandBase<,,>)).Value;
+            var deleteCommandHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(deleteCommandType, deleteCommandResponseType);
+
+            // ImplementationType
+            var genericDeleteCommandHandlerType = deleteCombination.Value ?? typeof(DeleteCommandHandler<,,,,>);
+            var deleteCommandHandlerImplementationType = genericDeleteCommandHandlerType.MakeGenericType(
+                modelEntityType,
+                apiEntityType, 
+                apiEntityKeyType,
+                apiEntityReadAllResultType,
+                apiEntityReadAllParamsType);
+
+            // Registration
+            services.TryAddTransient(deleteCommandHandlerServiceType, deleteCommandHandlerImplementationType);
+
+            #endregion
 
             return optionsBuilder;
         }

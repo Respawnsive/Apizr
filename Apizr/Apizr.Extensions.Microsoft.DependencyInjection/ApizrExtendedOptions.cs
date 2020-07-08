@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Reflection;
 using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Logging;
+using Apizr.Mapping;
 using Apizr.Requesting;
 using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
-using Polly.Registry;
 using Refit;
 
 namespace Apizr
@@ -27,6 +26,7 @@ namespace Apizr
             ConnectivityHandlerType = typeof(VoidConnectivityHandler);
             CacheHandlerType = typeof(VoidCacheHandler);
             LogHandlerType = typeof(DefaultLogHandler);
+            MappingHandlerType = typeof(VoidMappingHandler);
             DelegatingHandlersExtendedFactories = new List<Func<IServiceProvider, DelegatingHandler>>();
             CrudEntities = new Dictionary<Type, CrudEntityAttribute>();
             PostRegistrationActions = new List<Action<IServiceCollection>>();
@@ -36,6 +36,7 @@ namespace Apizr
         public Type ConnectivityHandlerType { get; set; }
         public Type CacheHandlerType { get; set; }
         public Type LogHandlerType { get; set; }
+        public Type MappingHandlerType { get; set; }
         public Func<IServiceProvider, RefitSettings> RefitSettingsFactory { get; set; }
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
         public IList<Func<IServiceProvider, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }

@@ -6,6 +6,7 @@ using System.Reflection;
 using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Logging;
+using Apizr.Mapping;
 using Apizr.Policing;
 using Apizr.Prioritizing;
 using Apizr.Requesting;
@@ -203,19 +204,23 @@ namespace Apizr
                 modelEntityType = entityTypes[0];
                 crudedType = entityTypes[1];
             }
+            else
+            {
+                modelEntityType = crudedType;
+            }
 
             if (!crudedKeyType.GetTypeInfo().IsPrimitive)
                 throw new ArgumentException($"{crudedKeyType.Name} is not primitive", nameof(crudedKeyType));
 
-            if (!typeof(IEnumerable<>).IsAssignableFromGenericType(crudedReadAllResultType) &&
-                !crudedReadAllResultType.IsClass)
+            if ((!typeof(IEnumerable<>).IsAssignableFromGenericType(crudedReadAllResultType) &&
+                !crudedReadAllResultType.IsClass) || !crudedReadAllResultType.IsGenericType)
                 throw new ArgumentException(
-                    $"{crudedReadAllResultType.Name} must inherit from {typeof(IEnumerable<>)} or be of class type", nameof(crudedReadAllResultType));
+                    $"{crudedReadAllResultType.Name} must inherit from {typeof(IEnumerable<>)} or be a generic class", nameof(crudedReadAllResultType));
 
             if (!typeof(IDictionary<string, object>).IsAssignableFrom(crudedReadAllParamsType) &&
                 !crudedReadAllParamsType.IsClass)
                 throw new ArgumentException(
-                    $"{crudedReadAllParamsType.Name} must inherit from {typeof(IDictionary<string, object>)} or be of class type", nameof(crudedReadAllParamsType));
+                    $"{crudedReadAllParamsType.Name} must inherit from {typeof(IDictionary<string, object>)} or be a class", nameof(crudedReadAllParamsType));
 
             if (!typeof(IApizrManager<>).IsAssignableFromGenericType(apizrManagerType))
                 throw new ArgumentException(
@@ -299,6 +304,9 @@ namespace Apizr
                     var crudAttribute = type.GetCustomAttribute<CrudEntityAttribute>();
                     if (crudAttribute != null)
                     {
+                        if (crudAttribute.ModelEntityType == null)
+                            crudAttribute.ModelEntityType = type;
+
                         cruds.Add(type, crudAttribute);
 
                         if (optionsBuilder == null)
@@ -482,6 +490,8 @@ namespace Apizr
             services.AddOrReplaceSingleton(typeof(ICacheHandler), apizrOptions.CacheHandlerType);
 
             services.AddOrReplaceSingleton(typeof(ILogHandler), apizrOptions.LogHandlerType);
+
+            services.AddOrReplaceSingleton(typeof(IMappingHandler), apizrOptions.MappingHandlerType);
 
             services.TryAddSingleton(typeof(IApizrManager<>).MakeGenericType(apizrOptions.WebApiType), typeof(ApizrManager<>).MakeGenericType(apizrOptions.WebApiType));
 

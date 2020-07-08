@@ -32,6 +32,11 @@ namespace Apizr
         Type LogHandlerType { get; }
 
         /// <summary>
+        /// Type of the mapping handler
+        /// </summary>
+        Type MappingHandlerType { get; }
+
+        /// <summary>
         /// Refit settings factory
         /// </summary>
         Func<IServiceProvider, RefitSettings> RefitSettingsFactory { get; }

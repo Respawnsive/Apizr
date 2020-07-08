@@ -343,6 +343,11 @@ namespace Apizr
             }
             else if (expression is MemberExpression memberExpression)
             {
+                if (memberExpression.Member.Name == "Key")
+                {
+                    var value = Expression.Lambda(memberExpression).Compile().DynamicInvoke();
+                    yield return new ExtractedConstant { Name = memberExpression.Type.Name, Value = value };
+                }
                 foreach (var constants in ExtractConstants(memberExpression.Expression))
                     yield return constants;
             }

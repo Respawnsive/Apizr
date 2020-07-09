@@ -432,6 +432,8 @@ LoggedPolicies.OnLoggedRetry could also execute your own specific action if need
 With extensions registration, you can adjust some more HttpClient settings thanks to ConfigureHttpClientBuilder builder method.
 This one could interfere with all Apizr http client auto configuration, so please use it with caution.
 
+## Getting more
+
 ### Mediation
 
 In extensions registration approach and with the dedicated integration nuget package referenced, the options builder let you enable Crud mediation by calling:

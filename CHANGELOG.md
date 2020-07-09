@@ -1,3 +1,29 @@
+1.3.0
+---
+
+### Apizr
+
+- [New] We can now define mapped model entity type from the ```CrudEntityAttribute``` above api entities for automatic crud registration
+
+### Apizr.Extensions.Microsoft.DependencyInjection
+
+- [New] We can now provide an IMappingHandler implementation to the options builder for auto mapping
+- [New] We can now decorate model entities with ```MappedCrudEntityAttribute``` to define mapped crud settings for automatic crud registration
+- [New] We can now associate api and model entities with ```MappedEntity<TModelEntity, TApiEntity>``` during manual crud registration
+
+### Apizr.Integrations.MediatR
+
+- [Fix] Cacheable ReadQuery now use the key value when defining cache key
+- [Fix] Auto handling now works as expected with manual crud registration
+
+### Apizr.Integrations.Optional
+
+- [Fix] Cacheable ReadOptionalQuery now use the key value when defining cache key
+
+### Apizr.Integrations.AutoMapper
+
+- [New] Brand new integration with AutoMapper, to let Apizr handle crud entity mapping during mediation handling
+
 1.2.0
 ---
 

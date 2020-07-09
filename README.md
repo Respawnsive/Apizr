@@ -3,7 +3,7 @@ Refit based web api client management, but resilient (retry, connectivity, cache
 
 ## Libraries
 
-[Change Log - July 03, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
+[Change Log - July 09, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
 
 |Project|NuGet|
 |-------|-----|
@@ -14,16 +14,18 @@ Refit based web api client management, but resilient (retry, connectivity, cache
 |Apizr.Integrations.Shiny|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Shiny.svg)](https://www.nuget.org/packages/Apizr.Integrations.Shiny/)|
 |Apizr.Integrations.MediatR|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.MediatR.svg)](https://www.nuget.org/packages/Apizr.Integrations.MediatR/)|
 |Apizr.Integrations.Optional|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Optional.svg)](https://www.nuget.org/packages/Apizr.Integrations.Optional/)|
+|Apizr.Integrations.AutoMapper|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.AutoMapper.svg)](https://www.nuget.org/packages/Apizr.Integrations.AutoMapper/)|
 
 Install the NuGet package of your choice:
 
-   - Apizr package comes with the static instantiation approach (wich you can register in your DI container then)
-   - Apizr.Extensions.Microsoft.DependencyInjection package extends your IServiceCollection with an AddApizr registration method (ASP.Net Core, etc)
-   - Apizr.Integrations.Akavache package brings an ICacheHandler method mapping implementation for [Akavache](https://github.com/reactiveui/Akavache)
-   - Apizr.Integrations.MonkeyCache package brings an ICacheHandler method mapping implementation for [MonkeyCache](https://github.com/jamesmontemagno/monkey-cache)
-   - Apizr.Integrations.Shiny package brings ICacheHandler, ILogHandler and IConnectivityHandler method mapping implementations for [Shiny](https://github.com/shinyorg/shiny), extending your IServiceCollection with a UseApizr registration method
-   - Apizr.Integrations.MediatR package enables Crud request auto handling with CQRS mediation [MediatR](https://github.com/jbogard/MediatR)
-   - Apizr.Integrations.Optional package enables Crud request auto handling with CQRS mediation and Optional result [Optional.Async](https://github.com/dnikolovv/optional-async)
+   - **Apizr** package comes with the For and CrudFor static instantiation approach (wich you can register in your DI container then)
+   - **Apizr.Extensions.Microsoft.DependencyInjection** package extends your IServiceCollection with AddApizrFor and AddApizrCrudFor registration methods (ASP.Net Core, etc)
+   - **Apizr.Integrations.Akavache** package brings an ICacheHandler method mapping implementation for [Akavache](https://github.com/reactiveui/Akavache)
+   - **Apizr.Integrations.MonkeyCache** package brings an ICacheHandler method mapping implementation for [MonkeyCache](https://github.com/jamesmontemagno/monkey-cache)
+   - **Apizr.Integrations.Shiny** package brings ICacheHandler, ILogHandler and IConnectivityHandler method mapping implementations for [Shiny](https://github.com/shinyorg/shiny), extending your IServiceCollection with a UseApizr registration method
+   - **Apizr.Integrations.MediatR** package enables Crud request auto handling with CQRS mediation using [MediatR](https://github.com/jbogard/MediatR)
+   - **Apizr.Integrations.Optional** package enables Optional result for Crud request (requires MediatR integration) using [Optional.Async](https://github.com/dnikolovv/optional-async)
+   - **Apizr.Integrations.AutoMapper** package enables auto mapping for Crud request and result (requires MediatR integration and could work with Optional integration) using [AutoMapper](https://github.com/AutoMapper/AutoMapper)
 
 Definitly, Apizr make use of well known nuget packages to make the magic appear:
 
@@ -35,14 +37,16 @@ Definitly, Apizr make use of well known nuget packages to make the magic appear:
 |[HttpTracer](https://github.com/BSiLabs/HttpTracer)|Trace Http(s) request/response traffic to log it|
 
 It also comes with some handling interfaces to let you provide your own services for:
-- Caching with ICacheHandler, wich comes with its default VoidCacheHandler (no cache), but also with:
+- **Caching** with ICacheHandler, wich comes with its default VoidCacheHandler (no cache), but also with:
   - AkavacheCacheHandler: [Akavache](https://github.com/reactiveui/Akavache) method mapping interface (Integration package referenced above)
   - MonkeyCacheHandler: [MonkeyCache](https://github.com/jamesmontemagno/monkey-cache) method mapping interface (Integration package referenced above)
   - ShinyCacheHandler: [Shiny](https://github.com/shinyorg/shiny) chaching method mapping interface (Integration package referenced above)
-- Logging with ILogHandler, wich comes with its default DefaultLogHandler (Console and Debug), but also with:
+- **Logging** with ILogHandler, wich comes with its default DefaultLogHandler (Console and Debug), but also with:
   - ShinyLogHandler: [Shiny](https://github.com/shinyorg/shiny) logging method mapping interface (Integration package referenced above)
-- Connectivity with IConnectivityHandler, wich comes with its default VoidConnectivityHandler (no connectivity check), but also with:
+- **Connectivity** with IConnectivityHandler, wich comes with its default VoidConnectivityHandler (no connectivity check), but also with:
   - ShinyConnectivityHandler: [Shiny](https://github.com/shinyorg/shiny) connectivity method mapping interface (Integration package referenced above)
+- **Mapping** with IMappingHandler, wich comes with its default VoidMappingHandler (no mapping conversion), but also with:
+  - AutoMapperMappingHandler: [AutoMapper](https://github.com/AutoMapper/AutoMapper) mapping method mapping interface (Integration package referenced above)
 
 ## Getting started
 
@@ -371,7 +375,11 @@ optionsBuilder => optionsBuilder.SomeOptionsHere(someParametersThere)
 
 ### Service handlers
 
-The options builder let you provide your own method mapping implementations for ICacheHandler (thanks to WithCacheHandler), ILogHandler (thanks to WithLogHandler) and IConnectivityHandler (thanks to WithConnectivityHandler).
+The options builder let you provide your own method mapping implementations for:
+- ICacheHandler (thanks to WithCacheHandler)
+- ILogHandler (thanks to WithLogHandler)
+- IConnectivityHandler (thanks to WithConnectivityHandler)
+- IMappingHandler (thanks to WithMappingHandler).
 
 ### Authentication DelegatingHandler
 
@@ -496,7 +504,7 @@ In extensions registration approach and with the dedicated integration nuget pac
 optionsBuilder => optionsBuilder.WithCrudOptionalMediation()
 ```
 
-Again, don't forget to register MediatR itself as usual:
+Again, don't forget to register MediatR itself as usual :
 ```csharp
 services.AddMediatR(typeof(Startup));
 ```
@@ -551,3 +559,62 @@ public class YourViewModel
 Same advantages than classic mediation but with exception handling.
 Both "classic" and "optional" mediation are compatibles with each other.
 It means that if you call both methods during registration, both request collection will be available, so you can decide wich one suits to you when you need it.
+
+### AutoMapper
+
+You can define your own model entities and then, your AutoMapper mapping profiles between api entities and model entities.
+
+Then, you have to tell Apizr wich entities must use the mapping feature.
+
+#### Manually
+
+```csharp
+services.AddApizrCrudFor<MappedEntity<TModelEntity, TApiEntity>>(optionsBuilder =>
+    optionsBuilder.WithBaseAddress("https://myapi.com/api/myentity")
+        .WithCrudMediation()
+        .WithMappingHandler<AutoMapperMappingHandler>());
+```
+
+Manual registration makes use of MappedEntity<TModelEntity, TApiEntity> just in place of our usual T.
+You'll have to enable one or both mediation feature to handle requests (classic and/or optional) and provide a mapping handler.
+You'll have to repeat this registration for each crud mapping.
+
+Don't forget to register AutoMapper itself as usual :
+```csharp
+services.AddAutoMapper(typeof(Startup));
+```
+
+#### Automatically
+
+Why not let Apizr do it for you?
+To do so, you have do decorate one of those two entities (api vs model) with corresponding attribute:
+- ```CrudEntityAttribute``` above the api entity, with ```modelEntityType``` parameter set to the mapped model entity type
+- ```MappedCrudEntityAttribute``` above the model entity, with ```apiEntityType``` parameter set to the mapped api entity type
+
+If you get access to both entities, it doesn't matter wich one you decorate, just do it for one of it (if you decorate both, it will take the first found).
+If you don't get any access to the api entities, just decorate your model one with the ```MappedCrudEntityAttribute```
+
+From here, let's write:
+```csharp
+services.AddApizrCrudFor(optionsBuilder => optionsBuilder
+        .WithCrudMediation()
+        .WithMappingHandler<AutoMapperMappingHandler>(), 
+        typeof(AnyTApiEntity), typeof(AnyTModelEntity));
+```
+
+In this example, I provided both api entity and model entity assemblies to the attribute scanner, but actually you just have to provide the one containing your attribute decorated entities (api or model, depending of your scenario/access rights).
+
+Don't forget to register AutoMapper itself as usual :
+```csharp
+services.AddAutoMapper(typeof(Startup));
+```
+
+#### Using
+
+Nothing different here but direct using of your model entities when sending mediation requests, like:
+```csharp
+var createdModelEntity = await _mediator.Send(new CreateCommand<TModelEntity>(myModelEntity), CancellationToken.None);
+```
+
+Apizr will map myModelEntity to TApiEntity, send it to the server, map the result to TModelEntity and send it back to you.
+And yes, it works also with Optional.

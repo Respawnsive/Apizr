@@ -20,7 +20,7 @@ namespace Apizr.Mediation.Cruding.Handling
         public override Task<TModelEntity> Handle(CreateCommand<TModelEntity> request, CancellationToken cancellationToken)
         {
             return CrudApiManager
-                .ExecuteAsync((ct, api) => api.Create(Map<TModelEntity, TApiEntity>(request.Payload), ct), cancellationToken)
+                .ExecuteAsync((ct, api) => api.Create(Map<TModelEntity, TApiEntity>(request.Payload), ct), cancellationToken, request.Priority)
                 .ContinueWith(task => Map<TApiEntity, TModelEntity>(task.Result), cancellationToken);
         }
     }

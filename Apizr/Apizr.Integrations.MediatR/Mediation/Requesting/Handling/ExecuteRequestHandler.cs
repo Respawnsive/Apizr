@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 
@@ -18,7 +15,7 @@ namespace Apizr.Mediation.Requesting.Handling
 
         public Task<TResult> Handle(ExecuteRequest<TWebApi, TResult> request, CancellationToken cancellationToken)
         {
-            return _webApiManager.ExecuteAsync(request.ExecuteApiMethod, request.CancellationToken, request.Priority);
+            return _webApiManager.ExecuteAsync(request.ExecuteApiMethod, cancellationToken, request.Priority);
         }
     }
 
@@ -33,7 +30,7 @@ namespace Apizr.Mediation.Requesting.Handling
 
         public Task<Unit> Handle(ExecuteRequest<TWebApi> request, CancellationToken cancellationToken)
         {
-            return _webApiManager.ExecuteAsync(request.ExecuteApiMethod, request.CancellationToken, request.Priority)
+            return _webApiManager.ExecuteAsync(request.ExecuteApiMethod, cancellationToken, request.Priority)
                 .ContinueWith(t => Unit.Value, cancellationToken);
         }
     }

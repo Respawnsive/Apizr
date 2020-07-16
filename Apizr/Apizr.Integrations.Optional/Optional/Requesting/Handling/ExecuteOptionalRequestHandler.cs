@@ -24,8 +24,8 @@ namespace Apizr.Optional.Requesting.Handling
                     .SomeNotNull(new ApizrException(new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                     .MapAsync(_ =>
                         _webApiManager
-                            .ExecuteAsync(request.ExecuteApiMethod, request.CancellationToken, request.Priority)
-                            .ContinueWith(task => Unit.Value, request.CancellationToken));
+                            .ExecuteAsync(request.ExecuteApiMethod, cancellationToken, request.Priority)
+                            .ContinueWith(task => Unit.Value, cancellationToken));
             }
             catch (ApizrException e)
             {
@@ -51,7 +51,7 @@ namespace Apizr.Optional.Requesting.Handling
                     .SomeNotNull(new ApizrException<TResult>(new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                     .MapAsync(_ =>
                         _webApiManager
-                            .ExecuteAsync(request.ExecuteApiMethod, request.CancellationToken, request.Priority));
+                            .ExecuteAsync(request.ExecuteApiMethod, cancellationToken, request.Priority));
             }
             catch (ApizrException<TResult> e)
             {

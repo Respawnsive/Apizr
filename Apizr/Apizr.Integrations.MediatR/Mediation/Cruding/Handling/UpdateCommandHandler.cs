@@ -19,7 +19,7 @@ namespace Apizr.Mediation.Cruding.Handling
         public override Task<Unit> Handle(UpdateCommand<TApiEntityKey, TModelEntity> request, CancellationToken cancellationToken)
         {
             return CrudApiManager
-                .ExecuteAsync((ct, api) => api.Update(request.Key, Map<TModelEntity, TApiEntity>(request.Payload), ct), cancellationToken)
+                .ExecuteAsync((ct, api) => api.Update(request.Key, Map<TModelEntity, TApiEntity>(request.Payload), ct), cancellationToken, request.Priority)
                 .ContinueWith(t => Unit.Value, cancellationToken);
         }
     }
@@ -36,7 +36,7 @@ namespace Apizr.Mediation.Cruding.Handling
         public override Task<Unit> Handle(UpdateCommand<TModelEntity> request, CancellationToken cancellationToken)
         {
             return CrudApiManager
-                .ExecuteAsync((ct, api) => api.Update(request.Key, Map<TModelEntity, TApiEntity>(request.Payload), ct), cancellationToken)
+                .ExecuteAsync((ct, api) => api.Update(request.Key, Map<TModelEntity, TApiEntity>(request.Payload), ct), cancellationToken, request.Priority)
                 .ContinueWith(t => Unit.Value, cancellationToken);
         }
     }

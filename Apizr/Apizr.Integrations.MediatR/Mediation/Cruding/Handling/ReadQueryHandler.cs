@@ -17,7 +17,7 @@ namespace Apizr.Mediation.Cruding.Handling
 
         public override Task<TModelEntity> Handle(ReadQuery<TModelEntity, TApiEntityKey> request, CancellationToken cancellationToken)
         {
-            return CrudApiManager.ExecuteAsync((ct, api) => api.Read(request.Key, ct), cancellationToken).ContinueWith(
+            return CrudApiManager.ExecuteAsync((ct, api) => api.Read(request.Key, ct), cancellationToken, request.Priority).ContinueWith(
                 task => Map<TApiEntity, TModelEntity>(task.Result), cancellationToken);
         }
     }
@@ -33,7 +33,7 @@ namespace Apizr.Mediation.Cruding.Handling
 
         public override Task<TModelEntity> Handle(ReadQuery<TModelEntity> request, CancellationToken cancellationToken)
         {
-            return CrudApiManager.ExecuteAsync((ct, api) => api.Read(request.Key, ct), cancellationToken).ContinueWith(
+            return CrudApiManager.ExecuteAsync((ct, api) => api.Read(request.Key, ct), cancellationToken, request.Priority).ContinueWith(
                 task => Map<TApiEntity, TModelEntity>(task.Result), cancellationToken);
         }
     }

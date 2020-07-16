@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using Apizr.Mediation.Cruding.Base;
+using Fusillade;
 
 namespace Apizr.Mediation.Cruding
 {
     public class ReadAllQuery<TReadAllParams, TReadAllResult> : ReadAllQueryBase<TReadAllParams, TReadAllResult>
     {
-        public ReadAllQuery(TReadAllParams parameters = default) : base(parameters)
+        public ReadAllQuery(TReadAllParams parameters = default, Priority priority = Priority.UserInitiated) : base(parameters, priority)
         {
             
         }
@@ -13,7 +14,7 @@ namespace Apizr.Mediation.Cruding
 
     public class ReadAllQuery<TReadAllResult> : ReadAllQueryBase<TReadAllResult>
     {
-        public ReadAllQuery(IDictionary<string, object> parameters = default) : base(parameters)
+        public ReadAllQuery(IDictionary<string, object> parameters = default, Priority priority = Priority.UserInitiated) : base(parameters, priority)
         {
         }
     }

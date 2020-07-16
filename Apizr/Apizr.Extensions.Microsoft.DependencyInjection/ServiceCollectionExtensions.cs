@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using Apizr.Caching;
@@ -388,6 +389,73 @@ namespace Apizr
                 optionsBuilder);
 
         /// <summary>
+        /// Register a <see cref="IApizrManager{webApiType}"/> for each <see cref="WebApiAttribute"/> decorated interfaces
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="WebApiAttribute"/></param>
+        /// <returns></returns>
+        public static IServiceCollection AddApizrFor(this IServiceCollection services,
+            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes) =>
+            AddApizrFor(services, typeof(ApizrManager<>), optionsBuilder,
+                assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
+
+        /// <summary>
+        /// Register a <see cref="IApizrManager{webApiType}"/> for each <see cref="WebApiAttribute"/> decorated interfaces
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <param name="assemblies">Any assembly to scan for <see cref="WebApiAttribute"/></param>
+        /// <returns></returns>
+        public static IServiceCollection AddApizrFor(this IServiceCollection services,
+            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies) =>
+            AddApizrFor(services, typeof(ApizrManager<>), optionsBuilder,
+                assemblies);
+
+        /// <summary>
+        /// Register a custom <see cref="IApizrManager{webApiType}"/> for each <see cref="WebApiAttribute"/> decorated interfaces
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{webApiType}"/> implementation type</param>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="WebApiAttribute"/></param>
+        /// <returns></returns>
+        public static IServiceCollection AddApizrFor(this IServiceCollection services, Type apizrManagerType,
+            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes) =>
+            AddApizrFor(services, apizrManagerType, optionsBuilder,
+                assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
+
+        /// <summary>
+        /// Register a custom <see cref="IApizrManager{webApiType}"/> for each <see cref="WebApiAttribute"/> decorated interfaces
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{webApiType}"/> implementation type</param>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <param name="assemblies">Any assembly to scan for <see cref="WebApiAttribute"/></param>
+        /// <returns></returns>
+        public static IServiceCollection AddApizrFor(this IServiceCollection services, Type apizrManagerType, Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies)
+        {
+            if (!assemblies.Any())
+                throw new ArgumentException(
+                    $"No assemblies found to scan. Supply at least one assembly to scan for {nameof(WebApiAttribute)}.", nameof(assemblies));
+
+            var assembliesToScan = assemblies.Distinct().ToList();
+
+            var webApiTypes = assembliesToScan
+                .SelectMany(assembly => assembly.GetTypes().Where(t =>
+                    !t.IsClass && t.GetCustomAttribute<WebApiAttribute>()?.IsAutoRegistrable == true))
+                .ToList();
+
+            foreach (var webApiType in webApiTypes)
+            {
+                AddApizrFor(services, webApiType, apizrManagerType.MakeGenericType(webApiType), optionsBuilder);
+            }
+
+            return services;
+        }
+
+
+        /// <summary>
         /// Register a custom <see cref="IApizrManager{webApiType}"/>
         /// </summary>
         /// <param name="services">The service collection</param>
@@ -525,7 +593,7 @@ namespace Apizr
             var webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
 
             var builder = new ApizrExtendedOptionsBuilder(new ApizrExtendedOptions(webApiType, apizrManagerType, baseAddress,
-                webApiAttribute?.DecompressionMethods, traceAttribute?.Verbosity, assemblyPolicyAttribute?.RegistryKeys,
+                webApiAttribute?.DecompressionMethods ?? DecompressionMethods.None, traceAttribute?.Verbosity, assemblyPolicyAttribute?.RegistryKeys,
                 webApiPolicyAttribute?.RegistryKeys));
 
             optionsBuilder?.Invoke(builder);

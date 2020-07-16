@@ -16,7 +16,7 @@ namespace Apizr
     public class ApizrExtendedOptions : ApizrOptionsBase, IApizrExtendedOptions
     {
         public ApizrExtendedOptions(Type webApiType, Type apizrManagerType, Uri baseAddress,
-            DecompressionMethods? decompressionMethods,
+            DecompressionMethods decompressionMethods,
             HttpMessageParts? httpTracerVerbosity, string[] assemblyPolicyRegistryKeys,
             string[] webApiPolicyRegistryKeys) : base(webApiType, baseAddress, decompressionMethods,
             httpTracerVerbosity, assemblyPolicyRegistryKeys, webApiPolicyRegistryKeys)

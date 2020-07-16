@@ -7,13 +7,13 @@ namespace Apizr
 {
     public abstract class ApizrOptionsBase : IApizrOptionsBase
     {
-        protected ApizrOptionsBase(Type webApiType, Uri baseAddress, DecompressionMethods? decompressionMethods,
+        protected ApizrOptionsBase(Type webApiType, Uri baseAddress, DecompressionMethods decompressionMethods,
             HttpMessageParts? httpTracerVerbosity, string[] assemblyPolicyRegistryKeys,
             string[] webApiPolicyRegistryKeys)
         {
             WebApiType = webApiType;
             BaseAddress = baseAddress;
-            DecompressionMethods = decompressionMethods ?? DecompressionMethods.None;
+            DecompressionMethods = decompressionMethods;
             HttpTracerVerbosity = httpTracerVerbosity ?? HttpMessageParts.None;
             PolicyRegistryKeys =
                 assemblyPolicyRegistryKeys?.Union(webApiPolicyRegistryKeys ?? Array.Empty<string>()).ToArray() ??

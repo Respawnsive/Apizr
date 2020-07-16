@@ -13,7 +13,7 @@ namespace Apizr
 {
     public class ApizrOptions : ApizrOptionsBase, IApizrOptions
     {
-        public ApizrOptions(Type webApiType, Uri baseAddress, DecompressionMethods? decompressionMethods,
+        public ApizrOptions(Type webApiType, Uri baseAddress, DecompressionMethods decompressionMethods,
             HttpMessageParts? httpTracerVerbosity, string[] assemblyPolicyRegistryKeys,
             string[] webApiPolicyRegistryKeys) : base(webApiType, baseAddress, decompressionMethods, httpTracerVerbosity, assemblyPolicyRegistryKeys, webApiPolicyRegistryKeys)
         {

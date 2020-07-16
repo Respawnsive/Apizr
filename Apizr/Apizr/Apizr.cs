@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using Apizr.Caching;
@@ -230,7 +231,7 @@ namespace Apizr
             var webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
 
             var builder = new ApizrOptionsBuilder(new ApizrOptions(webApiType, baseAddress,
-                webApiAttribute?.DecompressionMethods, traceAttribute?.Verbosity, assemblyPolicyAttribute?.RegistryKeys,
+                webApiAttribute?.DecompressionMethods ?? DecompressionMethods.None, traceAttribute?.Verbosity, assemblyPolicyAttribute?.RegistryKeys,
                 webApiPolicyAttribute?.RegistryKeys));
 
             optionsBuilder?.Invoke(builder);

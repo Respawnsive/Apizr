@@ -7,6 +7,9 @@ using Apizr.Integrations.MonkeyCache;
 using Apizr.Mapping;
 using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Cruding.Handling;
+using Apizr.Mediation.Extending;
+using Apizr.Mediation.Requesting;
+using Apizr.Mediation.Requesting.Handling;
 using Apizr.Optional.Cruding;
 using Apizr.Optional.Cruding.Handling;
 using Apizr.Policing;
@@ -86,7 +89,11 @@ namespace Apizr.Sample.Console
 
                 services.AddPolicyRegistry(registry);
 
-                services.AddApizrFor<IReqResService>(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All));
+                // Manual registration
+                //services.AddApizrFor<IReqResService>(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All));
+
+                // Auto assembly detection and registration
+                services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
 
                 if (configChoice == 2)
                 {
@@ -124,6 +131,8 @@ namespace Apizr.Sample.Console
                         }
                     }
 
+                    services.AddTransient(typeof(IRequestHandler<ExecuteRequest<IReqResService, UserList>, UserList>), typeof(ExecuteRequestHandler<IReqResService, UserList>));
+
                     services.AddMediatR(typeof(Program));
                 }
 
@@ -155,8 +164,7 @@ namespace Apizr.Sample.Console
             try
             {
                 System.Console.WriteLine("");
-                //var userList = await _reqResService.ExecuteAsync((ct, api) => api.GetUsersAsync(ct),
-                //    CancellationToken.None);
+                //var userList = await _reqResService.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
                 //users = userList?.Data;
                 PagedResult<User> pagedUsers = null;
                 if (configChoice <= 2)
@@ -165,6 +173,7 @@ namespace Apizr.Sample.Console
                 }
                 else if (configChoice == 3)
                 {
+                    var userList = await _mediator.Send(new ExecuteRequest<IReqResService, UserList>((ct, api) => api.GetUsersAsync(ct), CancellationToken.None));
                     pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>());
                 }
                 else

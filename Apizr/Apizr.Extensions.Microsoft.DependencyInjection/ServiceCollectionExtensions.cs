@@ -441,19 +441,23 @@ namespace Apizr
 
             var assembliesToScan = assemblies.Distinct().ToList();
 
-            var webApiTypes = assembliesToScan
+            var webApiDefinitions = assembliesToScan
                 .SelectMany(assembly => assembly.GetTypes().Where(t =>
                     !t.IsClass && t.GetCustomAttribute<WebApiAttribute>()?.IsAutoRegistrable == true))
-                .ToList();
+                .ToDictionary(t => t, t => t.GetCustomAttribute<WebApiAttribute>());
 
-            foreach (var webApiType in webApiTypes)
+            foreach (var webApiDefinition in webApiDefinitions)
             {
-                AddApizrFor(services, webApiType, apizrManagerType.MakeGenericType(webApiType), optionsBuilder);
+                if (optionsBuilder == null)
+                    optionsBuilder = builder => builder.ApizrOptions.WebApis.Add(webApiDefinition.Key, webApiDefinition.Value);
+                else
+                    optionsBuilder += builder => builder.ApizrOptions.WebApis.Add(webApiDefinition.Key, webApiDefinition.Value);
+
+                AddApizrFor(services, webApiDefinition.Key, apizrManagerType.MakeGenericType(webApiDefinition.Key), optionsBuilder);
             }
 
             return services;
         }
-
 
         /// <summary>
         /// Register a custom <see cref="IApizrManager{webApiType}"/>

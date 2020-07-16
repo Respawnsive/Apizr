@@ -1,19 +1,78 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Cruding.Base;
 using Apizr.Mediation.Cruding.Handling;
 using Apizr.Mediation.Cruding.Handling.Base;
+using Apizr.Mediation.Requesting;
+using Apizr.Mediation.Requesting.Handling;
 using Apizr.Requesting;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Refit;
 
 namespace Apizr
 {
     public static class ApizrExtendedOptionsBuilderExtensions
     {
+        public static IApizrExtendedOptionsBuilder WithMediation(this IApizrExtendedOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.ApizrOptions.PostRegistrationActions.Add(services =>
+            {
+                foreach (var webApi in optionsBuilder.ApizrOptions.WebApis)
+                {
+                    foreach (var methodInfo in webApi.Key.GetMethods())
+                    {
+                        var returnType = methodInfo.ReturnType;
+                        if (returnType.IsGenericType &&
+                            (methodInfo.ReturnType.GetGenericTypeDefinition() != typeof(Task<>)
+                             || methodInfo.ReturnType.GetGenericTypeDefinition() != typeof(IObservable<>)))
+                        {
+                            var returnResultType = returnType.GetGenericArguments()[0];
+                            if (returnResultType.IsGenericType &&
+                                (returnResultType.GetGenericTypeDefinition() == typeof(ApiResponse<>)
+                                 || returnResultType.GetGenericTypeDefinition() == typeof(IApiResponse<>)))
+                            {
+                                returnResultType = returnResultType.GetGenericArguments()[0];
+                            }
+                            else if (returnResultType == typeof(IApiResponse))
+                            {
+                                returnResultType = typeof(HttpContent);
+                            }
+
+                            var genericExecuteRequestType = typeof(ExecuteRequest<,>);
+                            var executeRequestType = genericExecuteRequestType.MakeGenericType(optionsBuilder.ApizrOptions.WebApiType, returnResultType);
+                            var genericRequestHandlerServiceType = typeof(IRequestHandler<,>);
+                            var executeRequestHandlerServiceType = genericRequestHandlerServiceType.MakeGenericType(executeRequestType, returnResultType);
+
+                            var genericExecuteRequestHandlerType = typeof(ExecuteRequestHandler<,>);
+                            var executeRequestHandlerImplementationType = genericExecuteRequestHandlerType.MakeGenericType(optionsBuilder.ApizrOptions.WebApiType, returnResultType);
+
+                            services.TryAddTransient(executeRequestHandlerServiceType, executeRequestHandlerImplementationType);
+                        }
+                        else if (returnType == typeof(Task))
+                        {
+                            var genericExecuteRequestType = typeof(ExecuteRequest<>);
+                            var executeRequestType = genericExecuteRequestType.MakeGenericType(optionsBuilder.ApizrOptions.WebApiType);
+                            var genericRequestHandlerServiceType = typeof(IRequestHandler<,>);
+                            var executeRequestHandlerServiceType = genericRequestHandlerServiceType.MakeGenericType(executeRequestType, typeof(Unit));
+
+                            var genericExecuteRequestHandlerType = typeof(ExecuteRequestHandler<>);
+                            var executeRequestHandlerImplementationType = genericExecuteRequestHandlerType.MakeGenericType(optionsBuilder.ApizrOptions.WebApiType);
+
+                            services.TryAddTransient(executeRequestHandlerServiceType, executeRequestHandlerImplementationType);
+                        }
+                    }
+                }
+            });
+
+            return optionsBuilder;
+        }
+
         /// <summary>
         /// Let Apizr handle crud requests execution with mediation
         /// </summary>

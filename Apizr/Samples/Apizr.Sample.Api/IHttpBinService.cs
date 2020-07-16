@@ -8,7 +8,7 @@ using Refit;
 
 namespace Apizr.Sample.Api
 {
-    [WebApi("https://httpbin.org/"), Trace]
+    [WebApi("https://httpbin.org/", isAutoRegistrable: false), Trace]
     public interface IHttpBinService
     {
         [Get("/bearer")]

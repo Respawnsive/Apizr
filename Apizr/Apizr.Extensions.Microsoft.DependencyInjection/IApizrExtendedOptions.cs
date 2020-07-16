@@ -57,6 +57,11 @@ namespace Apizr
         IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }
 
         /// <summary>
+        /// Web apis auto registered with <see cref="IApizrManager{TWebApi}"/>
+        /// </summary>
+        IDictionary<Type, WebApiAttribute> WebApis { get; }
+
+        /// <summary>
         /// Post registration actions
         /// </summary>
         IList<Action<IServiceCollection>> PostRegistrationActions { get; }

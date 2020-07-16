@@ -29,6 +29,7 @@ namespace Apizr
             MappingHandlerType = typeof(VoidMappingHandler);
             DelegatingHandlersExtendedFactories = new List<Func<IServiceProvider, DelegatingHandler>>();
             CrudEntities = new Dictionary<Type, CrudEntityAttribute>();
+            WebApis = new Dictionary<Type, WebApiAttribute>();
             PostRegistrationActions = new List<Action<IServiceCollection>>();
         }
 
@@ -41,6 +42,7 @@ namespace Apizr
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
         public IList<Func<IServiceProvider, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
         public IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }
+        public IDictionary<Type, WebApiAttribute> WebApis { get; }
         public IList<Action<IServiceCollection>> PostRegistrationActions { get; }
     }
 }

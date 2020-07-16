@@ -93,7 +93,7 @@ namespace Apizr.Sample.Console
                 //services.AddApizrFor<IReqResService>(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All));
 
                 // Auto assembly detection and registration
-                services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
+                services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
 
                 if (configChoice == 2)
                 {
@@ -131,7 +131,7 @@ namespace Apizr.Sample.Console
                         }
                     }
 
-                    services.AddTransient(typeof(IRequestHandler<ExecuteRequest<IReqResService, UserList>, UserList>), typeof(ExecuteRequestHandler<IReqResService, UserList>));
+                    //services.AddTransient(typeof(IRequestHandler<ExecuteRequest<IReqResService, UserList>, UserList>), typeof(ExecuteRequestHandler<IReqResService, UserList>));
 
                     services.AddMediatR(typeof(Program));
                 }

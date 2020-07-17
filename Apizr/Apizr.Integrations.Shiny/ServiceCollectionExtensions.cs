@@ -70,6 +70,7 @@ namespace Apizr
         /// <typeparam name="TKey">The object key type (primitive)</typeparam>
         /// <typeparam name="TReadAllResult">"ReadAll" query result type
         /// (should inherit from <see cref="IEnumerable{T}"/> or be of class type)</typeparam>
+        /// <typeparam name="TReadAllParams">ReadAll query parameters</typeparam>
         /// <param name="services">The service collection</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
@@ -77,6 +78,27 @@ namespace Apizr
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
             where T : class =>
             UseApizrCrudFor(services, typeof(T), typeof(TKey), typeof(TReadAllResult), typeof(TReadAllParams), typeof(ApizrManager<>), optionsBuilder);
+
+        /// <summary>
+        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type, 
+        /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="TReadAllResult"/>
+        /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
+        /// and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
+        /// </summary>
+        /// <typeparam name="T">The object type to manage with crud api calls</typeparam>
+        /// <typeparam name="TKey">The object key type (primitive)</typeparam>
+        /// <typeparam name="TReadAllResult">"ReadAll" query result type
+        /// (should inherit from <see cref="IEnumerable{T}"/> or be of class type)</typeparam>
+        /// <typeparam name="TReadAllParams">ReadAll query parameters</typeparam>
+        /// <typeparam name="TApizrManager">A custom <see cref="IApizrManager{ICrudApi}"/> implementation</typeparam>
+        /// <param name="services">The service collection</param>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <returns></returns>
+        public static bool UseApizrCrudFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(this IServiceCollection services,
+            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
+            where T : class
+            where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> =>
+            UseApizrCrudFor(services, typeof(T), typeof(TKey), typeof(TReadAllResult), typeof(TReadAllParams), typeof(TApizrManager), optionsBuilder);
 
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="crudedType"/> object type (class), 
@@ -264,6 +286,60 @@ namespace Apizr
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
             UseApizrFor(services, webApiType, typeof(ApizrManager<>).MakeGenericType(webApiType),
                 optionsBuilder);
+
+        /// <summary>
+        /// Register a <see cref="IApizrManager{webApiType}"/> for each <see cref="WebApiAttribute"/> decorated interfaces
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="WebApiAttribute"/></param>
+        /// <returns></returns>
+        public static bool UseApizrFor(this IServiceCollection services,
+            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes) =>
+            UseApizrFor(services, typeof(ApizrManager<>), optionsBuilder,
+                assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
+
+        /// <summary>
+        /// Register a <see cref="IApizrManager{webApiType}"/> for each <see cref="WebApiAttribute"/> decorated interfaces
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <param name="assemblies">Any assembly to scan for <see cref="WebApiAttribute"/></param>
+        /// <returns></returns>
+        public static bool UseApizrFor(this IServiceCollection services,
+            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies) =>
+            UseApizrFor(services, typeof(ApizrManager<>), optionsBuilder,
+                assemblies);
+
+        /// <summary>
+        /// Register a custom <see cref="IApizrManager{webApiType}"/> for each <see cref="WebApiAttribute"/> decorated interfaces
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{webApiType}"/> implementation type</param>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="WebApiAttribute"/></param>
+        /// <returns></returns>
+        public static bool UseApizrFor(this IServiceCollection services, Type apizrManagerType,
+            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes) =>
+            UseApizrFor(services, apizrManagerType, optionsBuilder,
+                assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
+
+        /// <summary>
+        /// Register a custom <see cref="IApizrManager{webApiType}"/> for each <see cref="WebApiAttribute"/> decorated interfaces
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{webApiType}"/> implementation type</param>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <param name="assemblies">Any assembly to scan for <see cref="WebApiAttribute"/></param>
+        /// <returns></returns>
+        public static bool UseApizrFor(this IServiceCollection services, Type apizrManagerType, Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies)
+        {
+            services.AddApizrFor(apizrManagerType, optionsBuilder, assemblies);
+
+            CheckHandlers(services);
+
+            return true;
+        }
 
         /// <summary>
         /// Register a custom <see cref="IApizrManager{webApiType}"/>

@@ -2,38 +2,49 @@
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Mapping;
+using Apizr.Optional.Requesting.Base;
 using Fusillade;
-using MediatR;
-using Optional;
 
 namespace Apizr.Optional.Requesting
 {
-    public class ExecuteOptionalRequest<TWebApi> : IRequest<Option<Unit, ApizrException>>
+    public class ExecuteOptionalRequest<TWebApi, TModelResponse, TApiResponse> :
+        ExecuteOptionalRequestBase<TWebApi, TModelResponse, TApiResponse>
     {
-        public ExecuteOptionalRequest(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod, Priority priority = Priority.UserInitiated)
+        public ExecuteOptionalRequest(Expression<Func<TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod,
+            Priority priority = Priority.UserInitiated) : base(executeApiMethod, priority)
         {
-            ExecuteApiMethod = executeApiMethod;
-            Priority = priority;
         }
 
-        public Expression<Func<CancellationToken, TWebApi, Task>> ExecuteApiMethod { get; }
-        public Priority Priority { get; }
+        public ExecuteOptionalRequest(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod,
+            Priority priority = Priority.UserInitiated) : base(executeApiMethod, priority)
+        {
+        }
     }
 
-    public class ExecuteOptionalRequest<TWebApi, TResult> : IRequest<Option<TResult, ApizrException<TResult>>>
+    public class ExecuteOptionalRequest<TWebApi, TApiResponse> : ExecuteOptionalRequestBase<TWebApi, TApiResponse>
     {
-        public ExecuteOptionalRequest(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod,
-            Priority priority = Priority.UserInitiated) : this((token, api) => executeApiMethod.Compile()(api), priority)
+        public ExecuteOptionalRequest(Expression<Func<TWebApi, Task<TApiResponse>>> executeApiMethod,
+            Priority priority = Priority.UserInitiated) : base(executeApiMethod, priority)
         {
         }
 
-        public ExecuteOptionalRequest(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, Priority priority = Priority.UserInitiated)
+        public ExecuteOptionalRequest(Expression<Func<CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod,
+            Priority priority = Priority.UserInitiated) : base(executeApiMethod, priority)
         {
-            ExecuteApiMethod = executeApiMethod;
-            Priority = priority;
+        }
+    }
+
+    public class ExecuteOptionalRequest<TWebApi> : ExecuteOptionalRequestBase<TWebApi>
+    {
+        public ExecuteOptionalRequest(Expression<Func<TWebApi, Task>> executeApiMethod,
+            Priority priority = Priority.UserInitiated) : base(executeApiMethod, priority)
+        {
         }
 
-        public Expression<Func<CancellationToken, TWebApi, Task<TResult>>> ExecuteApiMethod { get; }
-        public Priority Priority { get; }
+        public ExecuteOptionalRequest(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod,
+            Priority priority = Priority.UserInitiated) : base(executeApiMethod, priority)
+        {
+        }
     }
 }

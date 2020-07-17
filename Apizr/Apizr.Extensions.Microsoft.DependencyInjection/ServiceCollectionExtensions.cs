@@ -441,6 +441,19 @@ namespace Apizr
 
             var assembliesToScan = assemblies.Distinct().ToList();
 
+            var objectMappingDefinitions = assembliesToScan
+                .SelectMany(assembly => assembly.GetTypes().Where(t =>
+                    t.IsClass && t.GetCustomAttribute<MappedWithAttribute>() != null))
+                .ToDictionary(t => t, t => t.GetCustomAttribute<MappedWithAttribute>());
+
+            foreach (var objectMappingDefinition in objectMappingDefinitions)
+            {
+                if (optionsBuilder == null)
+                    optionsBuilder = builder => builder.ApizrOptions.ObjectMappings.Add(objectMappingDefinition.Key, objectMappingDefinition.Value);
+                else
+                    optionsBuilder += builder => builder.ApizrOptions.ObjectMappings.Add(objectMappingDefinition.Key, objectMappingDefinition.Value);
+            }
+
             var webApiDefinitions = assembliesToScan
                 .SelectMany(assembly => assembly.GetTypes().Where(t =>
                     !t.IsClass && t.GetCustomAttribute<WebApiAttribute>()?.IsAutoRegistrable == true))

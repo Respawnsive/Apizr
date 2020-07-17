@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Reflection;
+using Apizr.Mapping;
 using Apizr.Requesting;
 using Microsoft.Extensions.DependencyInjection;
 using Polly.Registry;
@@ -60,6 +61,11 @@ namespace Apizr
         /// Web apis auto registered with <see cref="IApizrManager{TWebApi}"/>
         /// </summary>
         IDictionary<Type, WebApiAttribute> WebApis { get; }
+
+        /// <summary>
+        /// Mappings between api request object and model object used for classic auto registration
+        /// </summary>
+        IDictionary<Type, MappedWithAttribute> ObjectMappings { get; }
 
         /// <summary>
         /// Post registration actions

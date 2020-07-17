@@ -1,36 +1,51 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Mapping;
+using Apizr.Mediation.Requesting.Handling.Base;
 using MediatR;
 
 namespace Apizr.Mediation.Requesting.Handling
 {
-    public class ExecuteRequestHandler<TWebApi, TResult> : IRequestHandler<ExecuteRequest<TWebApi, TResult>, TResult>
+    public class ExecuteRequestHandler<TWebApi, TModelResponse, TApiResponse> : ExecuteRequestHandlerBase<TWebApi,
+        TModelResponse, TApiResponse, ExecuteRequest<TWebApi, TModelResponse, TApiResponse>, TModelResponse>
     {
-        private readonly IApizrManager<TWebApi> _webApiManager;
-
-        public ExecuteRequestHandler(IApizrManager<TWebApi> webApiManager)
+        public ExecuteRequestHandler(IMappingHandler mappingHandler, IApizrManager<TWebApi> webApiManager) : base(
+            mappingHandler, webApiManager)
         {
-            _webApiManager = webApiManager;
         }
 
-        public Task<TResult> Handle(ExecuteRequest<TWebApi, TResult> request, CancellationToken cancellationToken)
+        public override Task<TModelResponse> Handle(ExecuteRequest<TWebApi, TModelResponse, TApiResponse> request,
+            CancellationToken cancellationToken)
         {
-            return _webApiManager.ExecuteAsync(request.ExecuteApiMethod, cancellationToken, request.Priority);
+            return WebApiManager.ExecuteAsync((ct, api) => request.ExecuteApiMethod.Compile()(ct, api, MappingHandler),
+                    cancellationToken, request.Priority)
+                .ContinueWith(task => Map<TApiResponse, TModelResponse>(task.Result), cancellationToken);
         }
     }
 
-    public class ExecuteRequestHandler<TWebApi> : IRequestHandler<ExecuteRequest<TWebApi>, Unit>
+    public class ExecuteRequestHandler<TWebApi, TApiResponse> : ExecuteRequestHandlerBase<TWebApi, TApiResponse,
+        ExecuteRequest<TWebApi, TApiResponse>, TApiResponse>
     {
-        private readonly IApizrManager<TWebApi> _webApiManager;
-
-        public ExecuteRequestHandler(IApizrManager<TWebApi> webApiManager)
+        public ExecuteRequestHandler(IApizrManager<TWebApi> webApiManager) : base(webApiManager)
         {
-            _webApiManager = webApiManager;
         }
 
-        public Task<Unit> Handle(ExecuteRequest<TWebApi> request, CancellationToken cancellationToken)
+        public override Task<TApiResponse> Handle(ExecuteRequest<TWebApi, TApiResponse> request,
+            CancellationToken cancellationToken)
         {
-            return _webApiManager.ExecuteAsync(request.ExecuteApiMethod, cancellationToken, request.Priority)
+            return WebApiManager.ExecuteAsync(request.ExecuteApiMethod, cancellationToken, request.Priority);
+        }
+    }
+
+    public class ExecuteRequestHandler<TWebApi> : ExecuteRequestHandlerBase<TWebApi, ExecuteRequest<TWebApi>, Unit>
+    {
+        public ExecuteRequestHandler(IApizrManager<TWebApi> webApiManager) : base(webApiManager)
+        {
+        }
+
+        public override Task<Unit> Handle(ExecuteRequest<TWebApi> request, CancellationToken cancellationToken)
+        {
+            return WebApiManager.ExecuteAsync(request.ExecuteApiMethod, cancellationToken, request.Priority)
                 .ContinueWith(t => Unit.Value, cancellationToken);
         }
     }

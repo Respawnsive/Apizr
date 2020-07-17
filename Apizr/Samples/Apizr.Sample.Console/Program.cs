@@ -7,6 +7,7 @@ using Apizr.Integrations.MonkeyCache;
 using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Requesting;
 using Apizr.Optional.Cruding;
+using Apizr.Optional.Requesting;
 using Apizr.Policing;
 using Apizr.Requesting;
 using Apizr.Sample.Api;
@@ -130,7 +131,7 @@ namespace Apizr.Sample.Console
                             //services.AddApizrCrudFor<MappedEntity<UserInfos, UserDetails>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithCrudOptionalMediation().WithMappingHandler<AutoMapperMappingHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All));
                             
                             // Classic auto assembly detection and registration and handling with both mediation and optional mediation
-                            services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
+                            services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithMappingHandler<AutoMapperMappingHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User), typeof(Program));
 
                             // Auto assembly detection, registration and handling with mediation, optional mediation and mapping
                             services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithMappingHandler<AutoMapperMappingHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User), typeof(Program));
@@ -179,12 +180,12 @@ namespace Apizr.Sample.Console
                 }
                 else if (configChoice == 3)
                 {
-                    //var userList = await _mediator.Send(new ExecuteRequest<IReqResService, UserList>((ct, api) => api.GetUsersAsync(ct), CancellationToken.None));
+                    //var userList = await _mediator.Send(new ExecuteRequest<IReqResService, UserList>((ct, api) => api.GetUsersAsync(ct)), CancellationToken.None);
                     pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>(), CancellationToken.None);
                 }
                 else
                 {
-                    //var optionalUserList = await _mediator.Send(new ExecuteOptionalRequest<IReqResService, UserList>((ct, api) => api.GetUsersAsync(ct), CancellationToken.None));
+                    //var optionalUserList = await _mediator.Send(new ExecuteOptionalRequest<IReqResService, UserList>((ct, api) => api.GetUsersAsync(ct)), CancellationToken.None);
                     var optionalPagedUsers = await _mediator.Send(new ReadAllOptionalQuery<PagedResult<User>>(), CancellationToken.None);
                     optionalPagedUsers.Match(some => pagedUsers = some, none => throw none); 
                     //I know this is senseless as optional is here to prevent us from throwing, but for this sample...
@@ -240,7 +241,16 @@ namespace Apizr.Sample.Console
                     }
                     else
                     {
-                        // Auto mapped entity
+                        // Classic auto mapped request and result
+                        //var minUser = new MinUser {Name = "John"};
+                        //var createdMinUser = await _mediator.Send(
+                        //    new ExecuteRequest<IReqResService, MinUser, User>((ct, api, mapper) =>
+                        //        api.CreateUser(mapper.Map<MinUser, User>(minUser), ct)), CancellationToken.None);
+
+                        // Classic Auto mapped result only
+                        //userInfos = await _mediator.Send(new ExecuteRequest<IReqResService, UserInfos, UserDetails>((ct, api) => api.GetUserAsync(userChoice, ct)), CancellationToken.None);
+                        
+                        // Auto mapped crud
                         userInfos = await _mediator.Send(new ReadQuery<UserInfos>(userChoice), CancellationToken.None);
                     }
                 }

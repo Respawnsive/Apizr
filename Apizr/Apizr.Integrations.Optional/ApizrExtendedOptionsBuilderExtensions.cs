@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
+using Apizr.Mapping;
 using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Cruding.Base;
 using Apizr.Mediation.Cruding.Handling;
@@ -261,29 +263,51 @@ namespace Apizr
                             (methodInfo.ReturnType.GetGenericTypeDefinition() != typeof(Task<>)
                              || methodInfo.ReturnType.GetGenericTypeDefinition() != typeof(IObservable<>)))
                         {
-                            var returnResultType = returnType.GetGenericArguments()[0];
-                            if (returnResultType.IsGenericType &&
-                                (returnResultType.GetGenericTypeDefinition() == typeof(ApiResponse<>)
-                                 || returnResultType.GetGenericTypeDefinition() == typeof(IApiResponse<>)))
+                            var apiResponseType = returnType.GetGenericArguments()[0];
+                            if (apiResponseType.IsGenericType &&
+                                (apiResponseType.GetGenericTypeDefinition() == typeof(ApiResponse<>)
+                                 || apiResponseType.GetGenericTypeDefinition() == typeof(IApiResponse<>)))
                             {
-                                returnResultType = returnResultType.GetGenericArguments()[0];
+                                apiResponseType = apiResponseType.GetGenericArguments()[0];
                             }
-                            else if (returnResultType == typeof(IApiResponse))
+                            else if (apiResponseType == typeof(IApiResponse))
                             {
-                                returnResultType = typeof(HttpContent);
+                                apiResponseType = typeof(HttpContent);
                             }
 
                             // ServiceType
-                            var executeRequestType = typeof(ExecuteOptionalRequest<,>).MakeGenericType(optionsBuilder.ApizrOptions.WebApiType, returnResultType);
-                            var executeRequestExceptionType = typeof(ApizrException<>).MakeGenericType(returnResultType);
-                            var executeRequestResponseType = typeof(Option<,>).MakeGenericType(returnResultType, executeRequestExceptionType);
+                            var executeRequestType = typeof(ExecuteOptionalRequest<,>).MakeGenericType(optionsBuilder.ApizrOptions.WebApiType, apiResponseType);
+                            var executeRequestExceptionType = typeof(ApizrException<>).MakeGenericType(apiResponseType);
+                            var executeRequestResponseType = typeof(Option<,>).MakeGenericType(apiResponseType, executeRequestExceptionType);
                             var executeRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeRequestType, executeRequestResponseType);
 
                             // ImplementationType
-                            var executeRequestHandlerImplementationType = typeof(ExecuteOptionalRequestHandler<,>).MakeGenericType(optionsBuilder.ApizrOptions.WebApiType, returnResultType);
+                            var executeRequestHandlerImplementationType = typeof(ExecuteOptionalRequestHandler<,>).MakeGenericType(optionsBuilder.ApizrOptions.WebApiType, apiResponseType);
 
                             // Registration
                             services.TryAddTransient(executeRequestHandlerServiceType, executeRequestHandlerImplementationType);
+
+                            // Mapped object
+                            var modelResponseType =
+                                methodInfo.GetCustomAttribute<MappedWithAttribute>()?.MappedWithType ??
+                                optionsBuilder.ApizrOptions.ObjectMappings
+                                    .FirstOrDefault(kvp => kvp.Key == apiResponseType).Value?.MappedWithType ??
+                                optionsBuilder.ApizrOptions.ObjectMappings
+                                    .FirstOrDefault(kvp => kvp.Value?.MappedWithType == apiResponseType).Key;
+                            if (modelResponseType != null)
+                            {
+                                // ServiceType
+                                var executeMappedRequestType = typeof(ExecuteOptionalRequest<,,>).MakeGenericType(optionsBuilder.ApizrOptions.WebApiType, modelResponseType, apiResponseType);
+                                var executeMappedRequestExceptionType = typeof(ApizrException<>).MakeGenericType(modelResponseType);
+                                var executeMappedRequestResponseType = typeof(Option<,>).MakeGenericType(modelResponseType, executeMappedRequestExceptionType);
+                                var executeMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeMappedRequestType, executeMappedRequestResponseType);
+
+                                // ImplementationType
+                                var executeMappedRequestHandlerImplementationType = typeof(ExecuteOptionalRequestHandler<,,>).MakeGenericType(optionsBuilder.ApizrOptions.WebApiType, modelResponseType, apiResponseType);
+
+                                // Registration
+                                services.TryAddTransient(executeMappedRequestHandlerServiceType, executeMappedRequestHandlerImplementationType);
+                            }
                         }
                         else if (returnType == typeof(Task))
                         {

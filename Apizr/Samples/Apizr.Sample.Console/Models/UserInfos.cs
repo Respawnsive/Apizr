@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Apizr.Mapping;
 using Apizr.Sample.Api.Models;
 
 namespace Apizr.Sample.Console.Models
 {
-    [MappedCrudEntity("https://reqres.in/api/users", typeof(UserDetails))]
+    [MappedCrudEntity("https://reqres.in/api/users", typeof(UserDetails))] // this one is for crud auto registration with mapping example
+    [MappedWith(typeof(UserDetails))] // this one is for classic auto registration with mapping example
     public class UserInfos
     {
         public int Id { get; set; }

@@ -30,6 +30,7 @@ namespace Apizr
             DelegatingHandlersExtendedFactories = new List<Func<IServiceProvider, DelegatingHandler>>();
             CrudEntities = new Dictionary<Type, CrudEntityAttribute>();
             WebApis = new Dictionary<Type, WebApiAttribute>();
+            ObjectMappings = new Dictionary<Type, MappedWithAttribute>();
             PostRegistrationActions = new List<Action<IServiceCollection>>();
         }
 
@@ -43,6 +44,7 @@ namespace Apizr
         public IList<Func<IServiceProvider, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
         public IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }
         public IDictionary<Type, WebApiAttribute> WebApis { get; }
+        public IDictionary<Type, MappedWithAttribute> ObjectMappings { get; }
         public IList<Action<IServiceCollection>> PostRegistrationActions { get; }
     }
 }

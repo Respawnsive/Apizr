@@ -3,15 +3,13 @@ using Fusillade;
 
 namespace Apizr.Mediation.Cruding.Base
 {
-    public abstract class CreateCommandBase<TPayload, TResponse> : ICommand<TPayload, TResponse>
+    public abstract class CreateCommandBase<TPayload, TResponse> : CommandBase<TPayload, TResponse>
     {
-        protected CreateCommandBase(TPayload payload, Priority priority = Priority.UserInitiated)
+        protected CreateCommandBase(TPayload payload, Priority priority = Priority.UserInitiated) : base(priority)
         {
             Payload = payload;
-            Priority = priority;
         }
 
         public TPayload Payload { get; }
-        public Priority Priority { get; }
     }
 }

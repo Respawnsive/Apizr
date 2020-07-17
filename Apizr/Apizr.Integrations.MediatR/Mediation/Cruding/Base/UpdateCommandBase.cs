@@ -4,26 +4,17 @@ using MediatR;
 
 namespace Apizr.Mediation.Cruding.Base
 {
-    public abstract class UpdateCommandBase<TKey, TPayload, TResponse> : ICommand<TPayload, TResponse>
+    public abstract class UpdateCommandBase<TKey, TPayload, TResponse> : CommandBase<TPayload, TResponse>
     {
-        protected UpdateCommandBase(TKey key, TPayload payload, Priority priority = Priority.UserInitiated)
+        protected UpdateCommandBase(TKey key, TPayload payload, Priority priority = Priority.UserInitiated) : base(priority)
         {
             Key = key;
             Payload = payload;
-            Priority = priority;
         }
 
         public TKey Key { get; }
         public TPayload Payload { get; }
-        public Priority Priority { get; }
     }
-
-    //public abstract class UpdateCommandBase<TKey, TPayload> : UpdateCommandBase<TKey, TPayload, Unit>
-    //{
-    //    protected UpdateCommandBase(TKey key, TPayload payload) : base(key, payload)
-    //    {
-    //    }
-    //}
 
     public abstract class UpdateCommandBase<TPayload, TResponse> : UpdateCommandBase<int, TPayload, TResponse>
     {

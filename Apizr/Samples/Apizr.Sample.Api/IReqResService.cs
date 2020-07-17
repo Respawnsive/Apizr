@@ -19,6 +19,6 @@ namespace Apizr.Sample.Api
         Task<UserDetails> GetUserAsync([CacheKey] int userId, CancellationToken cancellationToken);
 
         [Post("/api/users")]
-        Task CreateUser(User user, CancellationToken cancellationToken);
+        Task<User> CreateUser(User user, CancellationToken cancellationToken);
     }
 }

@@ -3,7 +3,7 @@ Refit based web api client management, but resilient (retry, connectivity, cache
 
 ## Libraries
 
-[Change Log - July 09, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
+[Change Log - July 17, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
 
 |Project|NuGet|
 |-------|-----|
@@ -73,6 +73,9 @@ namespace Apizr.Sample.Api
 
         [Get("/api/users/{userId}")]
         Task<UserDetails> GetUserAsync([CacheKey] int userId, CancellationToken cancellationToken);
+
+        [Post("/api/users")]
+        Task<User> CreateUser(User user, CancellationToken cancellationToken);
     }
 }
 ```
@@ -111,7 +114,13 @@ I provided a policy registry and a cache handler here as I asked for it with cac
 
 #### Extensions approach
 
-In your Startup class, add the following:
+For this one, two options :
+- Manually: register calling ```AddApizrFor<TWebApi>``` service collection extension method or overloads for each service you want to manage
+- Automatically: decorate your services with WebApiAttribute and let Apizr auto register it all for you
+
+##### Manually
+
+Here is an example:
 ```csharp
 public override void ConfigureServices(IServiceCollection services)
 {
@@ -135,6 +144,43 @@ public override void ConfigureServices(IServiceCollection services)
     //services.UseApizrFor<IReqResService>();
 }
 ```
+
+##### Automatically
+
+Decorate your api services like we did before (but with your own settings):
+```csharp
+[assembly:Policy("TransientHttpError")]
+namespace Apizr.Sample.Api
+{
+    [WebApi("https://reqres.in/"), Cache, Trace]
+    public interface IReqResService
+    {
+        [Get("/api/users")]
+        Task<UserList> GetUsersAsync(CancellationToken cancellationToken);
+
+        [Get("/api/users/{userId}")]
+        Task<UserDetails> GetUserAsync([CacheKey] int userId, CancellationToken cancellationToken);
+
+        [Post("/api/users")]
+        Task<User> CreateUser(User user, CancellationToken cancellationToken);
+    }
+}
+```
+
+Then, register in your Startup class like so:
+```csharp
+public override void ConfigureServices(IServiceCollection services)
+{
+    // Apizr registration
+    services.AddApizrFor(typeof(AnyClassFromServicesAssembly));
+    
+    // Or if you use Shiny
+    //services.UseApizrFor(typeof(AnyClassFromServicesAssembly));
+}
+```
+
+There are 4 AddApizrFor/UseApizrFor flavors for classic automatic registration, depending on what you want to do and provide.
+This one is the simplest.
 
 ### Using
 
@@ -432,13 +478,13 @@ LoggedPolicies.OnLoggedRetry could also execute your own specific action if need
 With extensions registration, you can adjust some more HttpClient settings thanks to ConfigureHttpClientBuilder builder method.
 This one could interfere with all Apizr http client auto configuration, so please use it with caution.
 
-## Getting more
+## Advanced
 
 ### Mediation
 
-In extensions registration approach and with the dedicated integration nuget package referenced, the options builder let you enable Crud mediation by calling:
+In extensions registration approach and with the dedicated integration nuget package referenced, the options builder let you enable mediation by calling:
 ```csharp
-optionsBuilder => optionsBuilder.WithCrudMediation()
+optionsBuilder => optionsBuilder.WithMediation()
 ```
 
 Don't forget to register MediatR itself as usual:
@@ -446,9 +492,14 @@ Don't forget to register MediatR itself as usual:
 services.AddMediatR(typeof(Startup));
 ```
 
-When activated, you don't have to inject/resolve anything else than an ```IMediator``` instance, in order to play with Crud.
+When activated, you don't have to inject/resolve anything else than an ```IMediator``` instance, in order to play with your api services (both classic and crud).
 
-Then, you'll be able to send queries and commands from anywhere, among:
+Then, when playing with classic api interfaces, you'll be able to send requests, among:
+- ```ExecuteRequest<TWebApi>```: execute any method from ```TWebApi``` defined by an expression parameter
+- ```ExecuteRequest<TWebApi, TApiResponse>```: execute any method from ```TWebApi``` with a ```TApiResponse``` result and defined by an expression parameter
+
+
+Also, when playing with crud, you'll be able to send queries and commands from anywhere, among:
 - ```ReadQuery<T>```: get the T entity with int
 - ```ReadQuery<T, TKey>```: get the T entity with TKey
 - ```ReadAllQuery<TReadAllResult>```: get TReadAllResult with IDictionary<string, object> optional query parameters
@@ -459,7 +510,8 @@ Then, you'll be able to send queries and commands from anywhere, among:
 - ```DeleteCommand<T>```: delete the T entity with int
 - ```DeleteCommand<T, TKey>```: delete the T entity with TKey
 
-Apizr will intercept it and handle it to send the result back to you, thanks to MediatR.
+
+In both cases, Apizr will intercept it and handle it to send the result back to you, thanks to MediatR.
 
 From there, our ViewModel can look like:
 ```csharp
@@ -479,6 +531,11 @@ public class YourViewModel
         IList<User>? users;
         try
         {
+            // The classic api interface way
+            //var userList = await _mediator.Send(new ExecuteRequest<IReqResService, UserList>((ct, api) => api.GetUsersAsync(ct)), CancellationToken.None);
+            //users = userList.Data;
+            
+            // The crud api interface way
             var pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>(), CancellationToken.None);
             users = pagedUsers.Data?.ToList();
         }
@@ -496,14 +553,11 @@ public class YourViewModel
 }
 ```
 
-It could become very useful and so much more readable when you have to manage crud for several entities in the same place.
-It means only one ```IMediator``` instance for all entity crud api calls, instead of each so long named ```IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>``` for each entity.
-
 ### Optional
 
-In extensions registration approach and with the dedicated integration nuget package referenced, the options builder let you enable Crud mediation with Optional result by calling:
+In extensions registration approach and with the dedicated integration nuget package referenced, the options builder let you enable mediation with Optional result by calling:
 ```csharp
-optionsBuilder => optionsBuilder.WithCrudOptionalMediation()
+optionsBuilder => optionsBuilder.WithOptionalMediation()
 ```
 
 Again, don't forget to register MediatR itself as usual :
@@ -511,9 +565,13 @@ Again, don't forget to register MediatR itself as usual :
 services.AddMediatR(typeof(Startup));
 ```
 
-When activated, you don't have to inject/resolve anything else than an ```IMediator``` instance, in order to play with Crud and get some Optional result.
+When activated, you don't have to inject/resolve anything else than an ```IMediator``` instance, in order to play with your apis and get some Optional result.
 
-Then, you'll be able to send queries and commands from anywhere, among:
+Then, when playing with classic api interfaces, you'll be able to send requests, among:
+- ```ExecuteOptionalRequest<TWebApi>```: execute any method from ```TWebApi``` defined by an expression parameter wich returns with a ```Option<Unit, ApizrException>``` result
+- ```ExecuteOptionalRequest<TWebApi, TApiResponse>```: execute any method from ```TWebApi``` defined by an expression parameter wich returns with a ```Option<TApiResponse, ApizrException<TApiResponse>>``` result
+
+Also, you'll be able to send queries and commands from anywhere, among:
 - ```ReadOptionalQuery<T>```: get the T entity with int and returns ```Option<T, ApizrException<T>>```
 - ```ReadOptionalQuery<T, TKey>```: get the T entity with TKey and returns ```Option<T, ApizrException<T>>```
 - ```ReadAllOptionalQuery<TReadAllResult>```: get TReadAllResult with IDictionary<string, object> optional query parameters and returns ```Option<TReadAllResult, ApizrException<TReadAllResult>>```
@@ -541,8 +599,24 @@ public class YourViewModel
 
     private async Task GetUsersAsync()
     {
-        var result = await _mediator.Send(new ReadAllOptionalQuery<PagedResult<User>>(), CancellationToken.None);
-        result.Match(pagedUsers =>
+        // The classic api interface way with Optional
+        //var optionalUserList = await _mediator.Send(new ExecuteOptionalRequest<IReqResService, UserList>((ct, api) => api.GetUsersAsync(ct)), CancellationToken.None);
+        //optionalPagedResult.Match(userList =>
+        //{
+        //    if (userList.Data != null && userList.Data.Any())
+        //        Users = new ObservableCollection<User>(userList.Data);
+        //}, e =>
+        //{
+        //    var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
+        //    UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+
+        //    if (e.CachedResult?.Data != null && e.CachedResult.Data.Any())
+        //        Users = new ObservableCollection<User>(e.CachedResult.Data);
+        //});
+            
+        // The crud api interface way with Optional
+        var optionalPagedResult = await _mediator.Send(new ReadAllOptionalQuery<PagedResult<User>>(), CancellationToken.None);
+        optionalPagedResult.Match(pagedUsers =>
         {
             if (pagedUsers.Data != null && pagedUsers.Data.Any())
                 Users = new ObservableCollection<User>(pagedUsers.Data);
@@ -568,7 +642,9 @@ You can define your own model entities and then, your AutoMapper mapping profile
 
 Then, you have to tell Apizr wich entities must use the mapping feature.
 
-#### Manually
+#### AutoMapper with Crud apis
+
+##### Manually
 
 ```csharp
 services.AddApizrCrudFor<MappedEntity<TModelEntity, TApiEntity>>(optionsBuilder =>
@@ -586,7 +662,7 @@ Don't forget to register AutoMapper itself as usual :
 services.AddAutoMapper(typeof(Startup));
 ```
 
-#### Automatically
+##### Automatically
 
 Why not let Apizr do it for you?
 To do so, you have do decorate one of those two entities (api vs model) with corresponding attribute:
@@ -611,7 +687,7 @@ Don't forget to register AutoMapper itself as usual :
 services.AddAutoMapper(typeof(Startup));
 ```
 
-#### Using
+##### Using
 
 Nothing different here but direct using of your model entities when sending mediation requests, like:
 ```csharp
@@ -620,3 +696,45 @@ var createdModelEntity = await _mediator.Send(new CreateCommand<TModelEntity>(my
 
 Apizr will map myModelEntity to TApiEntity, send it to the server, map the result to TModelEntity and send it back to you.
 And yes, it works also with Optional.
+
+#### AutoMapper with classic apis
+
+You have do decorate one among the api method, the model entity or the api entity with ```MappedWithAttribute```, with ```mappedWithType``` set to the other mapped entity.
+
+From here, let's write:
+```csharp
+services.AddApizrFor(optionsBuilder => optionsBuilder
+        .WithMediation()
+        .WithMappingHandler<AutoMapperMappingHandler>(), 
+        typeof(AnyTApiEntity), typeof(AnyTModelEntity), typeof(AnyTWebApi));
+```
+Actually, the number of ```typeof``` depends on where your attribute decorations are defined.
+
+Don't forget to register AutoMapper itself as usual :
+```csharp
+services.AddAutoMapper(typeof(Startup));
+```
+
+#### Using
+
+Nothing different here but direct using of your model entities when sending mediation requests, like:
+```csharp
+// Classic auto mapped result only
+var userInfos = await _mediator.Send(new ExecuteRequest<IReqResService, UserInfos, UserDetails>((ct, api) => 
+    api.GetUserAsync(userChoice, ct)), CancellationToken.None);
+```
+
+Apizr will send the request to the server, map the api result from ```UserDetails``` to ```UserInfos``` and send it back to you.
+
+You can also map the request before being sent, like so:
+```csharp
+// Classic auto mapped request and result
+var minUser = new MinUser {Name = "John"};
+var createdMinUser = await _mediator.Send(
+    new ExecuteRequest<IReqResService, MinUser, User>((ct, api, mapper) =>
+        api.CreateUser(mapper.Map<MinUser, User>(minUser), ct)), CancellationToken.None);
+```
+
+```minUser``` will be mapped from ```MinUser``` to ```User``` just before being sent, then Apizr will map the api result back from ```User``` to ```MinUser``` and send it back to you.
+
+And yes, all the mapping feature works also with Optional.

@@ -1,3 +1,30 @@
+1.4.0
+---
+
+### Apizr.Extensions.Microsoft.DependencyInjection
+
+- [New] We can now auto register both crud and classic api interfaces
+
+### Apizr.Integrations.MediatR
+
+- [New] We can now use mediation with both crud and classic api interfaces
+- [New] We can now use execution priority with both crud and classic api mediation
+- [BreakingChange] ```WithCrudMediation``` renamed to ```WithMediation```
+
+### Apizr.Integrations.Optional
+
+- [New] We can now use optional mediation with both crud and classic api interfaces
+- [New] We can now use execution priority with both crud and classic api optional mediation
+- [BreakingChange] ```WithCrudOptionalMediation``` renamed to ```WithOptionalMediation```
+
+### Apizr.Integrations.Shiny
+
+- [New] Shiny integration now offers all the same registration extensions methods
+
+### Apizr.Integrations.AutoMapper
+
+- [New] We can now use auto mapping with both crud and classic api mediation and optional mediation 
+
 1.3.0
 ---
 

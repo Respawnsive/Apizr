@@ -151,7 +151,7 @@ namespace Apizr
         {
             var apizrOptions = CreateApizrOptions<TWebApi>(optionsBuilder);
             var lazyWebApis = new List<ILazyPrioritizedWebApi<TWebApi>>();
-            foreach (var priority in ((Priority[])Enum.GetValues(typeof(Priority))).Where(x => x != Priority.Explicit).OrderByDescending(priority => priority))
+            foreach (var priority in ((Priority[])Enum.GetValues(typeof(Priority))).Where(x => x != Priority.Explicit).OrderBy(priority => priority))
             {
                 var httpHandlerFactory = new Func<HttpMessageHandler>(() =>
                 {

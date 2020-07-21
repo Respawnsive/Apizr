@@ -23,9 +23,9 @@ Install the NuGet package of your choice:
    - **Apizr.Integrations.Akavache** package brings an ICacheHandler method mapping implementation for [Akavache](https://github.com/reactiveui/Akavache)
    - **Apizr.Integrations.MonkeyCache** package brings an ICacheHandler method mapping implementation for [MonkeyCache](https://github.com/jamesmontemagno/monkey-cache)
    - **Apizr.Integrations.Shiny** package brings ICacheHandler, ILogHandler and IConnectivityHandler method mapping implementations for [Shiny](https://github.com/shinyorg/shiny), extending your IServiceCollection with a UseApizr registration method
-   - **Apizr.Integrations.MediatR** package enables Crud request auto handling with CQRS mediation using [MediatR](https://github.com/jbogard/MediatR)
-   - **Apizr.Integrations.Optional** package enables Optional result for Crud request (requires MediatR integration) using [Optional.Async](https://github.com/dnikolovv/optional-async)
-   - **Apizr.Integrations.AutoMapper** package enables auto mapping for Crud request and result (requires MediatR integration and could work with Optional integration) using [AutoMapper](https://github.com/AutoMapper/AutoMapper)
+   - **Apizr.Integrations.MediatR** package enables request auto handling with mediation using [MediatR](https://github.com/jbogard/MediatR)
+   - **Apizr.Integrations.Optional** package enables Optional result from mediation requests (requires MediatR integration) using [Optional.Async](https://github.com/dnikolovv/optional-async)
+   - **Apizr.Integrations.AutoMapper** package enables auto mapping for mediation requests (requires MediatR integration and could work with Optional integration) using [AutoMapper](https://github.com/AutoMapper/AutoMapper)
 
 Definitly, Apizr make use of well known nuget packages to make the magic appear:
 

@@ -1,3 +1,10 @@
+1.4.1
+---
+
+### Apizr.Integrations.MediatR
+
+- [Fix] No more ```WithCrudMediation``` method available but only ```WithMediation```
+
 1.4.0
 ---
 

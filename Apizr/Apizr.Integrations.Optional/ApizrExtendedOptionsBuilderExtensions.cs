@@ -26,10 +26,9 @@ namespace Apizr
     public static class ApizrExtendedOptionsBuilderExtensions
     {
         /// <summary>
-        /// Let Apizr handle crud requests execution with mediation and optional result, but with your own requests and requests handlers
+        /// Let Apizr handle requests execution with some mediation and optional result
         /// </summary>
         /// <param name="optionsBuilder"></param>
-        /// <param name="crudRequestAndHandlerTypes">Requests and requests handlers types</param>
         /// <returns></returns>
         public static IApizrExtendedOptionsBuilder WithOptionalMediation(this IApizrExtendedOptionsBuilder optionsBuilder)
         {

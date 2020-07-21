@@ -1,8 +1,13 @@
 1.4.1
 ---
 
+### Apizr.Extensions.Microsoft.DependencyInjection
+
+- [Fix] Now Apizr works with DryIoc and Unity containers, returning a single UserInitiated instance, while waiting for external issues beeing fixed
+
 ### Apizr.Integrations.MediatR
 
+- [Workaround] Doc updated to work with MediatR alongside DryIoc or Unity container, while waiting for external issues beeing fixed
 - [Fix] No more ```WithCrudMediation``` method available but only ```WithMediation```
 
 1.4.0

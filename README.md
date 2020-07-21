@@ -3,15 +3,15 @@ Refit based web api client management, but resilient (retry, connectivity, cache
 
 ## Libraries
 
-[Change Log - July 17, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
+[Change Log - July 21, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
 
 |Project|NuGet|
 |-------|-----|
 |Apizr|[![NuGet](https://img.shields.io/nuget/v/Apizr.svg)](https://www.nuget.org/packages/Apizr/)|
 |Apizr.Extensions.Microsoft.DependencyInjection|[![NuGet](https://img.shields.io/nuget/v/Apizr.Extensions.Microsoft.DependencyInjection.svg)](https://www.nuget.org/packages/Apizr.Extensions.Microsoft.DependencyInjection/)|
+|Apizr.Integrations.Shiny|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Shiny.svg)](https://www.nuget.org/packages/Apizr.Integrations.Shiny/)|
 |Apizr.Integrations.Akavache|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Akavache.svg)](https://www.nuget.org/packages/Apizr.Integrations.Akavache/)|
 |Apizr.Integrations.MonkeyCache|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.MonkeyCache.svg)](https://www.nuget.org/packages/Apizr.Integrations.MonkeyCache/)|
-|Apizr.Integrations.Shiny|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Shiny.svg)](https://www.nuget.org/packages/Apizr.Integrations.Shiny/)|
 |Apizr.Integrations.MediatR|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.MediatR.svg)](https://www.nuget.org/packages/Apizr.Integrations.MediatR/)|
 |Apizr.Integrations.Optional|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Optional.svg)](https://www.nuget.org/packages/Apizr.Integrations.Optional/)|
 |Apizr.Integrations.AutoMapper|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.AutoMapper.svg)](https://www.nuget.org/packages/Apizr.Integrations.AutoMapper/)|
@@ -20,14 +20,14 @@ Install the NuGet package of your choice:
 
    - **Apizr** package comes with the For and CrudFor static instantiation approach (wich you can register in your DI container then)
    - **Apizr.Extensions.Microsoft.DependencyInjection** package extends your IServiceCollection with AddApizrFor and AddApizrCrudFor registration methods (ASP.Net Core, etc)
+   - **Apizr.Integrations.Shiny** package brings ICacheHandler, ILogHandler and IConnectivityHandler method mapping implementations for [Shiny](https://github.com/shinyorg/shiny), extending your IServiceCollection with a UseApizr and UseApizrCrudFor registration methods
    - **Apizr.Integrations.Akavache** package brings an ICacheHandler method mapping implementation for [Akavache](https://github.com/reactiveui/Akavache)
    - **Apizr.Integrations.MonkeyCache** package brings an ICacheHandler method mapping implementation for [MonkeyCache](https://github.com/jamesmontemagno/monkey-cache)
-   - **Apizr.Integrations.Shiny** package brings ICacheHandler, ILogHandler and IConnectivityHandler method mapping implementations for [Shiny](https://github.com/shinyorg/shiny), extending your IServiceCollection with a UseApizr registration method
    - **Apizr.Integrations.MediatR** package enables request auto handling with mediation using [MediatR](https://github.com/jbogard/MediatR)
    - **Apizr.Integrations.Optional** package enables Optional result from mediation requests (requires MediatR integration) using [Optional.Async](https://github.com/dnikolovv/optional-async)
    - **Apizr.Integrations.AutoMapper** package enables auto mapping for mediation requests (requires MediatR integration and could work with Optional integration) using [AutoMapper](https://github.com/AutoMapper/AutoMapper)
 
-Definitly, Apizr make use of well known nuget packages to make the magic appear:
+Definitly, Apizr core package make use of well known nuget packages to make the magic appear:
 
 |Package|Features|
 |-------|--------|
@@ -54,6 +54,24 @@ Clearly inspired by [Refit.Insane.PowerPack](https://github.com/thefex/Refit.Ins
 
 Examples here are based on a Xamarin.Forms app working with Shiny. 
 You'll find a sample Xamarin.Forms app browsing code, implementing Apizr with Shiny, Prism and MS DI all together.
+
+> **NOTE - Xamarin/Shiny/Prism/Container**: 
+> 
+> Apizr registers a collection of implementation types (say ```ImplementationTypeA```, ```ImplementationTypeB```, etc) from a unique service type (say ```IServiceType```).
+> 
+> Then it resolves it all as ```IEnumerable<IServiceType>``` but with some limitations for now:
+> - Prism.DryIoc.Extensions and Prism.Unity.Extensions: it will resolve only the last registered implementation, but should be fully supported soon ([DryIoc issue](https://github.com/dansiegel/Prism.Container.Extensions/issues/124) and [Unity issue](https://github.com/dansiegel/Prism.Container.Extensions/issues/125)).
+> - Prism.Microsoft.DependencyInjection.Extensions: it will work as expected, but will stuck on a NavigationService issue ([issue](https://github.com/dansiegel/Prism.Container.Extensions/issues/113))
+> 
+> There's also an issue about it on the [Shiny side](https://github.com/shinyorg/shiny/issues/369) for information.
+> 
+> While waiting for fixes: 
+> - If you don't need the fusillade priority feature, you can definitly use Apizr with DryIoc or Unity and play with the UserInitiated returned default instance (starting from 1.4.1 Apizr version).
+> - If you do need the fusillade priority feature with everything else, I personally use the working Prism.Microsoft.DependencyInjection.Extensions, but as a project reference and with the NavigationService fix suggested in the PR. 
+> 
+> The included XF sample now use DryIoc to illustrate it.
+> 
+> I'll remove this note when fixed
 
 You'll find another sample app but .Net Core console this time, implementing Apizr without anything else (static) and also with MS DI (extensions).
 
@@ -492,6 +510,39 @@ Don't forget to register MediatR itself as usual:
 services.AddMediatR(typeof(Startup));
 ```
 
+> **NOTE - Xamarin/Shiny/Prism/Container**:
+> 
+> MediatR makes use of ```IEnumerable<T>``` service registration/resolution, wich doens't work as expected for now with Prism.DryIoc.Extensions and Prism.Unity.Extensions (see first note about it).
+> 
+> To make it work properly with DryIoc and Unity (no problem with MS DI), you'll have to register a custom MediatR ServiceFactory before calling AddMediatR like so:
+>```csharp
+>services.AddSingleton<ServiceFactory>(serviceProvider => serviceType =>
+>{
+>    var enumerableType = serviceType
+>        .GetInterfaces()
+>        .Concat(new[] { serviceType })
+>        .FirstOrDefault(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IEnumerable<>));
+>
+>    var typeToResolve = enumerableType != null ? enumerableType.GenericTypeArguments[0] : serviceType;
+>
+>    object? result = null;
+>    try
+>    {
+>        result = enumerableType != null
+>            ? serviceProvider.GetServices(typeToResolve)
+>            : serviceProvider.GetService(typeToResolve);
+>    }
+>    catch (Exception)
+>    {
+>        // ignored
+>    }
+>
+>    return result ?? Array.CreateInstance(typeToResolve, 0);
+>});
+>
+>services.AddMediatR(typeof(Startup));
+>```
+
 When activated, you don't have to inject/resolve anything else than an ```IMediator``` instance, in order to play with your api services (both classic and crud).
 
 Then, when playing with classic api interfaces, you'll be able to send requests, among:
@@ -564,6 +615,10 @@ Again, don't forget to register MediatR itself as usual :
 ```csharp
 services.AddMediatR(typeof(Startup));
 ```
+
+> **NOTE - Xamarin/Shiny/Prism/Container**: 
+> 
+>Same as previous note
 
 When activated, you don't have to inject/resolve anything else than an ```IMediator``` instance, in order to play with your apis and get some Optional result.
 
@@ -649,7 +704,7 @@ Then, you have to tell Apizr wich entities must use the mapping feature.
 ```csharp
 services.AddApizrCrudFor<MappedEntity<TModelEntity, TApiEntity>>(optionsBuilder =>
     optionsBuilder.WithBaseAddress("https://myapi.com/api/myentity")
-        .WithCrudMediation()
+        .WithMediation()
         .WithMappingHandler<AutoMapperMappingHandler>());
 ```
 
@@ -661,6 +716,10 @@ Don't forget to register AutoMapper itself as usual :
 ```csharp
 services.AddAutoMapper(typeof(Startup));
 ```
+
+> **NOTE - Xamarin/Shiny/Prism/Container**: 
+> 
+>Same as previous note
 
 ##### Automatically
 
@@ -675,7 +734,7 @@ If you don't get any access to the api entities, just decorate your model one wi
 From here, let's write:
 ```csharp
 services.AddApizrCrudFor(optionsBuilder => optionsBuilder
-        .WithCrudMediation()
+        .WithMediation()
         .WithMappingHandler<AutoMapperMappingHandler>(), 
         typeof(AnyTApiEntity), typeof(AnyTModelEntity));
 ```
@@ -686,6 +745,10 @@ Don't forget to register AutoMapper itself as usual :
 ```csharp
 services.AddAutoMapper(typeof(Startup));
 ```
+
+> **NOTE - Xamarin/Shiny/Prism/Container**: 
+> 
+>Same as previous note
 
 ##### Using
 

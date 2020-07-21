@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -16,21 +17,23 @@ using MediatR;
 using Prism.Commands;
 using Prism.Navigation;
 using ReactiveUI.Fody.Helpers;
+using Shiny;
 using Color = System.Drawing.Color;
 
 namespace Apizr.Sample.Mobile.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
-        private readonly IApizrManager<IHttpBinService> _httpBinManager;
         private readonly IApizrManager<IReqResService> _reqResManager;
+        private readonly IApizrManager<IHttpBinService> _httpBinManager;
         private readonly IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> _userCrudManager;
         private readonly IApizrManager<ICrudApi<UserDetails, int, IEnumerable<UserDetails>, IDictionary<string, object>>> _userDetailsCrudManager;
         private readonly IMediator _mediator;
 
-        public MainPageViewModel(INavigationService navigationService,
-            IApizrManager<IHttpBinService> httpBinManager, IApizrManager<IReqResService> reqResManager,
-            IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> userCrudManager, 
+        public MainPageViewModel(INavigationService navigationService, 
+                IApizrManager<IHttpBinService> httpBinManager,
+                IApizrManager<IReqResService> reqResManager,
+            IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> userCrudManager,
             IApizrManager<ICrudApi<UserDetails, int, IEnumerable<UserDetails>, IDictionary<string, object>>> userDetailsCrudManager,
             IMediator mediator)
             : base(navigationService)
@@ -40,8 +43,7 @@ namespace Apizr.Sample.Mobile.ViewModels
             _userCrudManager = userCrudManager;
             _userDetailsCrudManager = userDetailsCrudManager;
             _mediator = mediator;
-            GetUsersCommand = ExecutionAwareCommand.FromTask(GetUsersAsync)
-                .OnIsExecutingChanged(isExecuting => IsRefreshing = isExecuting);
+            GetUsersCommand = ExecutionAwareCommand.FromTask(GetUsersAsync);
             //GetUserDetailsCommand = ExecutionAwareCommand.FromTask<User>(GetUserDetails);
             GetUserDetailsCommand = new DelegateCommand<User>(async user => await GetUserDetails(user));
             AuthCommand = ExecutionAwareCommand.FromTask(AuthAsync);
@@ -76,28 +78,63 @@ namespace Apizr.Sample.Mobile.ViewModels
             if (IsRefreshing)
                 return;
 
-            // This is a manually defined web api call into IReqResService (classic actually)
-            //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
-            //users = userList.Data;
+            IsRefreshing = true;
 
-            // This is the Crud way, with or without Crud attribute auto registration, but without mediation
-            //var pagedUsers = await _userCrudManager.ExecuteAsync((ct, api) => api.ReadAll(ct), CancellationToken.None);
-            //users = pagedUsers.Data?.ToList();
+            //IList<User>? users = null;
+            //try
+            //{
+            //    // This is a manually defined web api call into IReqResService (classic actually)
+            //    //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
+            //    //users = userList?.Data;
 
-            // The same as before but with auto mediation handling and with optional result
-            var result = await _mediator.Send(new ReadAllOptionalQuery<PagedResult<User>>(), CancellationToken.None);
-            result.Match(pagedUsers =>
+            //    // This is the Crud way, with or without Crud attribute auto registration, but without mediation
+            //    var pagedUsers = await _userCrudManager.ExecuteAsync((ct, api) => api.ReadAll(ct), CancellationToken.None);
+            //    users = pagedUsers?.Data?.ToList();
+            //}
+            //catch (ApizrException<UserList> e)
+            //{
+            //    var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
+            //    UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+
+            //    users = e.CachedResult?.Data;
+            //}
+            //catch (ApizrException<PagedResult<User>> e)
+            //{
+            //    var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
+            //    UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+
+            //    users = e.CachedResult?.Data?.ToList();
+            //}
+            //finally
+            //{
+            //    if (users != null && users.Any())
+            //        Users = new ObservableCollection<User>(users);
+
+            //    IsRefreshing = false;
+            //}
+
+            try
             {
-                if (pagedUsers.Data != null && pagedUsers.Data.Any())
-                    Users = new ObservableCollection<User>(pagedUsers.Data);
-            }, e =>
-            {
-                var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
-                UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+                // The same as before but with auto mediation handling and with optional result
+                var result = await _mediator.Send(new ReadAllOptionalQuery<PagedResult<User>>(), CancellationToken.None);
+                result.Match(pagedUsers =>
+                {
+                    if (pagedUsers.Data != null && pagedUsers.Data.Any())
+                        Users = new ObservableCollection<User>(pagedUsers.Data);
+                }, e =>
+                {
+                    var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
+                    UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
 
-                if (e.CachedResult?.Data != null && e.CachedResult.Data.Any())
-                    Users = new ObservableCollection<User>(e.CachedResult.Data);
-            });
+                    if (e.CachedResult?.Data != null && e.CachedResult.Data.Any())
+                        Users = new ObservableCollection<User>(e.CachedResult.Data);
+                });
+            }
+            catch (Exception e)
+            {
+            }
+
+            IsRefreshing = false;
         }
 
         /// <summary>
@@ -114,9 +151,11 @@ namespace Apizr.Sample.Mobile.ViewModels
             {
                 // This is a manually defined web api call into IReqResService (classic actually)
                 //var userDetails = await _reqResManager.ExecuteAsync((ct, api) => api.GetUserAsync(user.Id, ct), CancellationToken.None);
+                //fetchedUser = userDetails?.User;
 
                 // This is the Crud way, with or without Crud attribute auto registration, but without mediation
                 //var userDetails = await _userDetailsCrudManager.ExecuteAsync((ct, api) => api.Read(user.Id, ct), CancellationToken.None);
+                //fetchedUser = userDetails?.User;
 
                 // The same as before but with auto mediation handling and without optional result this time
                 var userDetails = await _mediator.Send(new ReadQuery<UserDetails>(user.Id), CancellationToken.None);

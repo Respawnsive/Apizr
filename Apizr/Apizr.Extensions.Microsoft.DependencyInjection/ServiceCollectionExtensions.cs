@@ -489,7 +489,7 @@ namespace Apizr
 
             var webApiFriendlyName = webApiType.GetFriendlyName();
             var apizrOptions = CreateApizrExtendedOptions(webApiType, apizrManagerType, optionsBuilder);
-            foreach (var priority in ((Priority[])Enum.GetValues(typeof(Priority))).Where(x => x != Priority.Explicit).OrderByDescending(priority => priority))
+            foreach (var priority in ((Priority[])Enum.GetValues(typeof(Priority))).Where(x => x != Priority.Explicit).OrderBy(priority => priority))
             {
                 var builder = services.AddHttpClient(ForType(apizrOptions.WebApiType, priority))
                     .ConfigurePrimaryHttpMessageHandler(serviceProvider =>
@@ -558,24 +558,23 @@ namespace Apizr
                     })
                     .AddTypedClient(typeof(ILazyPrioritizedWebApi<>).MakeGenericType(apizrOptions.WebApiType),
                         (client, serviceProvider) =>
-                            Prioritize.TypeFor(apizrOptions.WebApiType, priority)
-                                .GetConstructor(new[] { typeof(Func<object>) })
+                        {
+                            if (client.BaseAddress == null)
+                                if(apizrOptions.BaseAddress != null)
+                                    client.BaseAddress = apizrOptions.BaseAddress;
+                                else
+                                    throw new ArgumentNullException(nameof(client.BaseAddress), $"You must provide a valid web api uri with the {nameof(WebApiAttribute)} or the options builder");
+
+                            return Prioritize.TypeFor(apizrOptions.WebApiType, priority)
+                                .GetConstructor(new[] {typeof(Func<object>)})
                                 ?.Invoke(new object[]
                                 {
                                     new Func<object>(() => RestService.For(apizrOptions.WebApiType, client,
                                         apizrOptions.RefitSettingsFactory(serviceProvider)))
-                                }));
-
-                if (apizrOptions.BaseAddress != null)
-                    builder.ConfigureHttpClient(x => x.BaseAddress = apizrOptions.BaseAddress);
+                                });
+                        });
 
                 apizrOptions.HttpClientBuilder?.Invoke(builder);
-
-                builder.ConfigureHttpClient(x =>
-                {
-                    if (x.BaseAddress == null)
-                        throw new ArgumentNullException(nameof(x.BaseAddress), $"You must provide a valid web api uri with the {nameof(WebApiAttribute)} or the options builder");
-                });
             }
 
             services.AddOrReplaceSingleton(typeof(IConnectivityHandler), apizrOptions.ConnectivityHandlerType);

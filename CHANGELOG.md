@@ -1,3 +1,10 @@
+1.4.2
+---
+
+### Apizr.Integrations.MediatR
+
+- [Fix] Now nuget package as library both reference MediatR.Extensions.Microsoft.DependencyInjection nuget package for assembly version compatibility
+
 1.4.1
 ---
 

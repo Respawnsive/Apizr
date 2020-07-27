@@ -454,20 +454,13 @@ namespace Apizr
                     optionsBuilder += builder => builder.ApizrOptions.ObjectMappings.Add(objectMappingDefinition.Key, objectMappingDefinition.Value);
             }
 
-            var webApiDefinitions = assembliesToScan
+            var webApiTypes = assembliesToScan
                 .SelectMany(assembly => assembly.GetTypes().Where(t =>
                     !t.IsClass && t.GetCustomAttribute<WebApiAttribute>()?.IsAutoRegistrable == true))
-                .ToDictionary(t => t, t => t.GetCustomAttribute<WebApiAttribute>());
+                .ToList();
 
-            foreach (var webApiDefinition in webApiDefinitions)
-            {
-                if (optionsBuilder == null)
-                    optionsBuilder = builder => builder.ApizrOptions.WebApis.Add(webApiDefinition.Key, webApiDefinition.Value);
-                else
-                    optionsBuilder += builder => builder.ApizrOptions.WebApis.Add(webApiDefinition.Key, webApiDefinition.Value);
-
-                AddApizrFor(services, webApiDefinition.Key, apizrManagerType.MakeGenericType(webApiDefinition.Key), optionsBuilder);
-            }
+            foreach (var webApiType in webApiTypes)
+                AddApizrFor(services, webApiType, apizrManagerType.MakeGenericType(webApiType), optionsBuilder);
 
             return services;
         }
@@ -599,8 +592,16 @@ namespace Apizr
 
         private static IApizrExtendedOptions CreateApizrExtendedOptions(Type webApiType, Type apizrManagerType, Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
         {
+            Uri baseAddress = null;
             var webApiAttribute = webApiType.GetTypeInfo().GetCustomAttribute<WebApiAttribute>(true);
-            Uri.TryCreate(webApiAttribute?.BaseUri, UriKind.RelativeOrAbsolute, out var baseAddress);
+            if (webApiAttribute != null)
+            {
+                Uri.TryCreate(webApiAttribute.BaseUri, UriKind.RelativeOrAbsolute, out baseAddress);
+                if (optionsBuilder == null)
+                    optionsBuilder = sourceBuilder => sourceBuilder.ApizrOptions.WebApis.Add(webApiType, webApiAttribute);
+                else
+                    optionsBuilder += sourceBuilder => sourceBuilder.ApizrOptions.WebApis.Add(webApiType, webApiAttribute);
+            }
 
             var traceAttribute = webApiType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true);
 

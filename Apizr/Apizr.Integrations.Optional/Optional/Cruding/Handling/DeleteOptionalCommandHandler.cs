@@ -19,20 +19,22 @@ namespace Apizr.Optional.Cruding.Handling
         {
         }
 
-        public override Task<Option<Unit, ApizrException>> Handle(DeleteOptionalCommand<TModelEntity, TApiEntityKey> request, CancellationToken cancellationToken)
+        public override async Task<Option<Unit, ApizrException>> Handle(DeleteOptionalCommand<TModelEntity, TApiEntityKey> request, CancellationToken cancellationToken)
         {
             try
             {
-                return request
-                        .SomeNotNull(new ApizrException(new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                        .MapAsync(_ =>
-                            CrudApiManager
-                                .ExecuteAsync((ct, api) => api.Delete(request.Key, ct), cancellationToken, request.Priority)
-                                .ContinueWith(task => Unit.Value, cancellationToken));
+                return await request
+                    .SomeNotNull(new ApizrException(
+                        new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
+                    .MapAsync(_ =>
+                        CrudApiManager
+                            .ExecuteAsync((ct, api) => api.Delete(request.Key, ct), cancellationToken, request.Priority)
+                            .ContinueWith(task => Unit.Value, cancellationToken))
+                    .ConfigureAwait(false);
             }
             catch (ApizrException e)
             {
-                return Task.FromResult(Option.None<Unit, ApizrException>(e));
+                return Option.None<Unit, ApizrException>(e);
             }
         }
     }
@@ -46,20 +48,22 @@ namespace Apizr.Optional.Cruding.Handling
         {
         }
 
-        public override Task<Option<Unit, ApizrException>> Handle(DeleteOptionalCommand<TModelEntity> request, CancellationToken cancellationToken)
+        public override async Task<Option<Unit, ApizrException>> Handle(DeleteOptionalCommand<TModelEntity> request, CancellationToken cancellationToken)
         {
             try
             {
-                return request
-                        .SomeNotNull(new ApizrException(new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                        .MapAsync(_ =>
-                            CrudApiManager
-                                .ExecuteAsync((ct, api) => api.Delete(request.Key, ct), cancellationToken, request.Priority)
-                                .ContinueWith(task => Unit.Value, cancellationToken));
+                return await request
+                    .SomeNotNull(new ApizrException(
+                        new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
+                    .MapAsync(_ =>
+                        CrudApiManager
+                            .ExecuteAsync((ct, api) => api.Delete(request.Key, ct), cancellationToken, request.Priority)
+                            .ContinueWith(task => Unit.Value, cancellationToken))
+                    .ConfigureAwait(false);
             }
             catch (ApizrException e)
             {
-                return Task.FromResult(Option.None<Unit, ApizrException>(e));
+                return Option.None<Unit, ApizrException>(e);
             }
         }
     }

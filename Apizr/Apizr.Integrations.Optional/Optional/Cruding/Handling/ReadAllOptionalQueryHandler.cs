@@ -18,22 +18,24 @@ namespace Apizr.Optional.Cruding.Handling
         {
         }
 
-        public override Task<Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>> Handle(ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult> request, CancellationToken cancellationToken)
+        public override async Task<Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>> Handle(ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult> request, CancellationToken cancellationToken)
         {
             try
             {
-                return request.SomeNotNull(new ApizrException<TModelEntityReadAllResult>(
+                return await request.SomeNotNull(new ApizrException<TModelEntityReadAllResult>(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                     .MapAsync(_ =>
-                        CrudApiManager.ExecuteAsync((ct, api) => api.ReadAll(request.Parameters, ct), cancellationToken, request.Priority))
-                    .MapAsync(apiResult => Task.FromResult(Map<TApiEntityReadAllResult, TModelEntityReadAllResult>(apiResult)));
+                        CrudApiManager.ExecuteAsync((ct, api) => api.ReadAll(request.Parameters, ct), cancellationToken,
+                            request.Priority))
+                    .MapAsync(apiResult =>
+                        Task.FromResult(Map<TApiEntityReadAllResult, TModelEntityReadAllResult>(apiResult)))
+                    .ConfigureAwait(false);
             }
             catch (ApizrException<TApiEntityReadAllResult> e)
             {
-                return Task.FromResult(
-                    Option.None<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>(
-                        new ApizrException<TModelEntityReadAllResult>(e.InnerException,
-                            Map<TApiEntityReadAllResult, TModelEntityReadAllResult>(e.CachedResult))));
+                return Option.None<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>(
+                    new ApizrException<TModelEntityReadAllResult>(e.InnerException,
+                        Map<TApiEntityReadAllResult, TModelEntityReadAllResult>(e.CachedResult)));
             }
         }
     }
@@ -46,22 +48,24 @@ namespace Apizr.Optional.Cruding.Handling
         {
         }
 
-        public override Task<Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>> Handle(ReadAllOptionalQuery<TModelEntityReadAllResult> request, CancellationToken cancellationToken)
+        public override async Task<Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>> Handle(ReadAllOptionalQuery<TModelEntityReadAllResult> request, CancellationToken cancellationToken)
         {
             try
             {
-                return request.SomeNotNull(new ApizrException<TModelEntityReadAllResult>(
+                return await request.SomeNotNull(new ApizrException<TModelEntityReadAllResult>(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                     .MapAsync(_ =>
-                        CrudApiManager.ExecuteAsync((ct, api) => api.ReadAll(request.Parameters, ct), cancellationToken, request.Priority))
-                    .MapAsync(apiResult => Task.FromResult(Map<TApiEntityReadAllResult, TModelEntityReadAllResult>(apiResult)));
+                        CrudApiManager.ExecuteAsync((ct, api) => api.ReadAll(request.Parameters, ct), cancellationToken,
+                            request.Priority))
+                    .MapAsync(apiResult =>
+                        Task.FromResult(Map<TApiEntityReadAllResult, TModelEntityReadAllResult>(apiResult)))
+                    .ConfigureAwait(false);
             }
             catch (ApizrException<TApiEntityReadAllResult> e)
             {
-                return Task.FromResult(
-                    Option.None<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>(
-                        new ApizrException<TModelEntityReadAllResult>(e.InnerException,
-                            Map<TApiEntityReadAllResult, TModelEntityReadAllResult>(e.CachedResult))));
+                return Option.None<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>(
+                    new ApizrException<TModelEntityReadAllResult>(e.InnerException,
+                        Map<TApiEntityReadAllResult, TModelEntityReadAllResult>(e.CachedResult)));
             }
         }
     }

@@ -113,26 +113,20 @@ namespace Apizr.Sample.Mobile.ViewModels
             //    IsRefreshing = false;
             //}
 
-            try
+            // The same as before but with auto mediation handling and with optional result
+            var result = await _mediator.Send(new ReadAllOptionalQuery<PagedResult<User>>(), CancellationToken.None);
+            result.Match(pagedUsers =>
             {
-                // The same as before but with auto mediation handling and with optional result
-                var result = await _mediator.Send(new ReadAllOptionalQuery<PagedResult<User>>(), CancellationToken.None);
-                result.Match(pagedUsers =>
-                {
-                    if (pagedUsers.Data != null && pagedUsers.Data.Any())
-                        Users = new ObservableCollection<User>(pagedUsers.Data);
-                }, e =>
-                {
-                    var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
-                    UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+                if (pagedUsers.Data != null && pagedUsers.Data.Any())
+                    Users = new ObservableCollection<User>(pagedUsers.Data);
+            }, e =>
+            {
+                var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
+                UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
 
-                    if (e.CachedResult?.Data != null && e.CachedResult.Data.Any())
-                        Users = new ObservableCollection<User>(e.CachedResult.Data);
-                });
-            }
-            catch (Exception e)
-            {
-            }
+                if (e.CachedResult?.Data != null && e.CachedResult.Data.Any())
+                    Users = new ObservableCollection<User>(e.CachedResult.Data);
+            });
 
             IsRefreshing = false;
         }
@@ -146,29 +140,44 @@ namespace Apizr.Sample.Mobile.ViewModels
         /// <returns></returns>
         private async Task GetUserDetails(User user)
         {
-            User? fetchedUser;
-            try
+
+            User? fetchedUser = null;
+
+            //try
+            //{
+            //    // This is a manually defined web api call into IReqResService (classic actually)
+            //    //var userDetails = await _reqResManager.ExecuteAsync((ct, api) => api.GetUserAsync(user.Id, ct), CancellationToken.None);
+            //    //fetchedUser = userDetails?.User;
+
+            //    // This is the Crud way, with or without Crud attribute auto registration, but without mediation
+            //    //var userDetails = await _userDetailsCrudManager.ExecuteAsync((ct, api) => api.Read(user.Id, ct), CancellationToken.None);
+            //    //fetchedUser = userDetails?.User;
+
+            //    // The same as before but with auto mediation handling and without optional result this time
+            //    var userDetails = await _mediator.Send(new ReadQuery<UserDetails>(user.Id), CancellationToken.None);
+            //    fetchedUser = userDetails?.User;
+            //}
+            //catch (ApizrException<UserDetails> e)
+            //{
+            //    var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
+            //    UserDialogs.Instance.Toast(new ToastConfig(message)
+            //        {BackgroundColor = Color.Red, MessageTextColor = Color.White});
+
+            //    fetchedUser = e.CachedResult?.User;
+            //}
+
+            // The same as before but with auto mediation handling and with optional result
+            var result = await _mediator.Send(new ReadOptionalQuery<UserDetails>(user.Id), CancellationToken.None);
+            result.Match(userDetails =>
             {
-                // This is a manually defined web api call into IReqResService (classic actually)
-                //var userDetails = await _reqResManager.ExecuteAsync((ct, api) => api.GetUserAsync(user.Id, ct), CancellationToken.None);
-                //fetchedUser = userDetails?.User;
-
-                // This is the Crud way, with or without Crud attribute auto registration, but without mediation
-                //var userDetails = await _userDetailsCrudManager.ExecuteAsync((ct, api) => api.Read(user.Id, ct), CancellationToken.None);
-                //fetchedUser = userDetails?.User;
-
-                // The same as before but with auto mediation handling and without optional result this time
-                var userDetails = await _mediator.Send(new ReadQuery<UserDetails>(user.Id), CancellationToken.None);
                 fetchedUser = userDetails?.User;
-            }
-            catch (ApizrException<UserDetails> e)
+            }, e =>
             {
                 var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
-                UserDialogs.Instance.Toast(new ToastConfig(message)
-                    {BackgroundColor = Color.Red, MessageTextColor = Color.White});
+                UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
 
                 fetchedUser = e.CachedResult?.User;
-            }
+            });
 
             if (fetchedUser != null)
                 UserDialogs.Instance.Alert(

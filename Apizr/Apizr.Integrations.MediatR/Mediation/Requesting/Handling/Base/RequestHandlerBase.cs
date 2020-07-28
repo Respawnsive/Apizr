@@ -28,9 +28,6 @@ namespace Apizr.Mediation.Requesting.Handling.Base
                 throw new ApizrException(e);
             }
 
-            if (destination == null)
-                throw new ApizrException(new InvalidOperationException($"Unable to convert {typeof(TSource).Name} to {typeof(TDestination).Name} without providing an {typeof(IMappingHandler).Name} interface mapping implementation"));
-
             return destination;
         }
     }

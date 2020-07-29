@@ -17,11 +17,13 @@ namespace Apizr.Mediation.Cruding.Handling
         {
         }
 
-        public override Task<TModelEntity> Handle(CreateCommand<TModelEntity> request, CancellationToken cancellationToken)
+        public override async Task<TModelEntity> Handle(CreateCommand<TModelEntity> request, CancellationToken cancellationToken)
         {
-            return CrudApiManager
+            var result = await CrudApiManager
                 .ExecuteAsync((ct, api) => api.Create(Map<TModelEntity, TApiEntity>(request.Payload), ct), cancellationToken, request.Priority)
-                .ContinueWith(task => Map<TApiEntity, TModelEntity>(task.Result), cancellationToken);
+                .ConfigureAwait(false);
+
+            return Map<TApiEntity, TModelEntity>(result);
         }
     }
 }

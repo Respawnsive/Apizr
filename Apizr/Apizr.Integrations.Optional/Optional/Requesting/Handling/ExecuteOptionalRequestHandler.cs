@@ -18,25 +18,26 @@ namespace Apizr.Optional.Requesting.Handling
         {
         }
 
-        public override Task<Option<TModelResponse, ApizrException<TModelResponse>>> Handle(
+        public override async Task<Option<TModelResponse, ApizrException<TModelResponse>>> Handle(
             ExecuteOptionalRequest<TWebApi, TModelResponse, TApiResponse> request, CancellationToken cancellationToken)
         {
             try
             {
-                return request
+                return await request
                     .SomeNotNull(new ApizrException<TModelResponse>(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                     .MapAsync(_ => WebApiManager.ExecuteAsync(
                         (ct, api) => request.ExecuteApiMethod.Compile()(ct, api, MappingHandler), cancellationToken,
                         request.Priority))
-                    .MapAsync(result => Task.FromResult(Map<TApiResponse, TModelResponse>(result)));
+                    .MapAsync(result => Task.FromResult(Map<TApiResponse, TModelResponse>(result)))
+                    .ConfigureAwait(false);
                 ;
             }
             catch (ApizrException<TApiResponse> e)
             {
-                return Task.FromResult(Option.None<TModelResponse, ApizrException<TModelResponse>>(
+                return Option.None<TModelResponse, ApizrException<TModelResponse>>(
                     new ApizrException<TModelResponse>(e.InnerException,
-                        Map<TApiResponse, TModelResponse>(e.CachedResult))));
+                        Map<TApiResponse, TModelResponse>(e.CachedResult)));
             }
         }
     }
@@ -48,20 +49,21 @@ namespace Apizr.Optional.Requesting.Handling
         {
         }
 
-        public override Task<Option<TApiResponse, ApizrException<TApiResponse>>> Handle(
+        public override async Task<Option<TApiResponse, ApizrException<TApiResponse>>> Handle(
             ExecuteOptionalRequest<TWebApi, TApiResponse> request, CancellationToken cancellationToken)
         {
             try
             {
-                return request
+                return await request
                     .SomeNotNull(new ApizrException<TApiResponse>(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                     .MapAsync(_ =>
-                        WebApiManager.ExecuteAsync(request.ExecuteApiMethod, cancellationToken, request.Priority));
+                        WebApiManager.ExecuteAsync(request.ExecuteApiMethod, cancellationToken, request.Priority))
+                    .ConfigureAwait(false);
             }
             catch (ApizrException<TApiResponse> e)
             {
-                return Task.FromResult(Option.None<TApiResponse, ApizrException<TApiResponse>>(e));
+                return Option.None<TApiResponse, ApizrException<TApiResponse>>(e);
             }
         }
     }
@@ -72,22 +74,25 @@ namespace Apizr.Optional.Requesting.Handling
         {
         }
 
-        public override Task<Option<Unit, ApizrException>> Handle(ExecuteOptionalRequest<TWebApi> request,
+        public override async Task<Option<Unit, ApizrException>> Handle(ExecuteOptionalRequest<TWebApi> request,
             CancellationToken cancellationToken)
         {
             try
             {
-                return request
+                return await request
                     .SomeNotNull(new ApizrException(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                    .MapAsync(_ =>
-                        WebApiManager
-                            .ExecuteAsync(request.ExecuteApiMethod, cancellationToken, request.Priority)
-                            .ContinueWith(task => Unit.Value, cancellationToken));
+                    .MapAsync(async _ =>
+                    {
+                        await WebApiManager.ExecuteAsync(request.ExecuteApiMethod, cancellationToken,
+                            request.Priority);
+
+                        return Unit.Value;
+                    }).ConfigureAwait(false);
             }
             catch (ApizrException e)
             {
-                return Task.FromResult(Option.None<Unit, ApizrException>(e));
+                return Option.None<Unit, ApizrException>(e);
             }
         }
     }

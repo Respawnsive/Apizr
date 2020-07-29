@@ -15,10 +15,13 @@ namespace Apizr.Mediation.Cruding.Handling
         {
         }
 
-        public override Task<TModelEntityReadAllResult> Handle(ReadAllQuery<TReadAllParams, TModelEntityReadAllResult> request, CancellationToken cancellationToken)
+        public override async Task<TModelEntityReadAllResult> Handle(ReadAllQuery<TReadAllParams, TModelEntityReadAllResult> request, CancellationToken cancellationToken)
         {
-            return CrudApiManager.ExecuteAsync((ct, api) => api.ReadAll(request.Parameters, ct), cancellationToken, request.Priority)
-                .ContinueWith(task => Map<TApiEntityReadAllResult, TModelEntityReadAllResult>(task.Result), cancellationToken);
+            var result = await CrudApiManager
+                .ExecuteAsync((ct, api) => api.ReadAll(request.Parameters, ct), cancellationToken, request.Priority)
+                .ConfigureAwait(false);
+
+            return Map<TApiEntityReadAllResult, TModelEntityReadAllResult>(result);
         }
     }
 
@@ -31,10 +34,13 @@ namespace Apizr.Mediation.Cruding.Handling
         {
         }
 
-        public override Task<TModelEntityReadAllResult> Handle(ReadAllQuery<TModelEntityReadAllResult> request, CancellationToken cancellationToken)
+        public override async Task<TModelEntityReadAllResult> Handle(ReadAllQuery<TModelEntityReadAllResult> request, CancellationToken cancellationToken)
         {
-            return CrudApiManager.ExecuteAsync((ct, api) => api.ReadAll(request.Parameters, ct), cancellationToken, request.Priority)
-                .ContinueWith(task => Map<TApiEntityReadAllResult, TModelEntityReadAllResult>(task.Result), cancellationToken);
+            var result = await CrudApiManager
+                .ExecuteAsync((ct, api) => api.ReadAll(request.Parameters, ct), cancellationToken, request.Priority)
+                .ConfigureAwait(false);
+
+            return Map<TApiEntityReadAllResult, TModelEntityReadAllResult>(result);
         }
     }
 }

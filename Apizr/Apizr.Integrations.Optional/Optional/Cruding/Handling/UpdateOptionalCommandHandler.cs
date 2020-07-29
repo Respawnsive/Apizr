@@ -26,13 +26,16 @@ namespace Apizr.Optional.Cruding.Handling
                 return await request
                     .SomeNotNull(new ApizrException(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                    .MapAsync(_ =>
-                        CrudApiManager
+                    .MapAsync(async _ =>
+                    {
+                        await CrudApiManager
                             .ExecuteAsync(
                                 (ct, api) =>
                                     api.Update(request.Key, Map<TModelEntity, TApiEntity>(request.Payload), ct),
-                                cancellationToken, request.Priority)
-                            .ContinueWith(task => Unit.Value, cancellationToken))
+                                cancellationToken, request.Priority);
+
+                        return Unit.Value;
+                    })
                     .ConfigureAwait(false);
             }
             catch (ApizrException e)
@@ -58,13 +61,16 @@ namespace Apizr.Optional.Cruding.Handling
                 return await request
                     .SomeNotNull(new ApizrException(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                    .MapAsync(_ =>
-                        CrudApiManager
+                    .MapAsync(async _ =>
+                    {
+                        await CrudApiManager
                             .ExecuteAsync(
                                 (ct, api) =>
                                     api.Update(request.Key, Map<TModelEntity, TApiEntity>(request.Payload), ct),
-                                cancellationToken, request.Priority)
-                            .ContinueWith(task => Unit.Value, cancellationToken))
+                                cancellationToken, request.Priority);
+
+                        return Unit.Value;
+                    })
                     .ConfigureAwait(false);
             }
             catch (ApizrException e)

@@ -14,12 +14,15 @@ namespace Apizr.Mediation.Requesting.Handling
         {
         }
 
-        public override Task<TModelResponse> Handle(ExecuteRequest<TWebApi, TModelResponse, TApiResponse> request,
+        public override async Task<TModelResponse> Handle(ExecuteRequest<TWebApi, TModelResponse, TApiResponse> request,
             CancellationToken cancellationToken)
         {
-            return WebApiManager.ExecuteAsync((ct, api) => request.ExecuteApiMethod.Compile()(ct, api, MappingHandler),
+            var result = await WebApiManager.ExecuteAsync(
+                    (ct, api) => request.ExecuteApiMethod.Compile()(ct, api, MappingHandler),
                     cancellationToken, request.Priority)
-                .ContinueWith(task => Map<TApiResponse, TModelResponse>(task.Result), cancellationToken);
+                .ConfigureAwait(false);
+
+            return Map<TApiResponse, TModelResponse>(result);
         }
     }
 
@@ -30,10 +33,11 @@ namespace Apizr.Mediation.Requesting.Handling
         {
         }
 
-        public override Task<TApiResponse> Handle(ExecuteRequest<TWebApi, TApiResponse> request,
+        public override async Task<TApiResponse> Handle(ExecuteRequest<TWebApi, TApiResponse> request,
             CancellationToken cancellationToken)
         {
-            return WebApiManager.ExecuteAsync(request.ExecuteApiMethod, cancellationToken, request.Priority);
+            return await WebApiManager.ExecuteAsync(request.ExecuteApiMethod, cancellationToken, request.Priority)
+                .ConfigureAwait(false);
         }
     }
 
@@ -43,10 +47,12 @@ namespace Apizr.Mediation.Requesting.Handling
         {
         }
 
-        public override Task<Unit> Handle(ExecuteRequest<TWebApi> request, CancellationToken cancellationToken)
+        public override async Task<Unit> Handle(ExecuteRequest<TWebApi> request, CancellationToken cancellationToken)
         {
-            return WebApiManager.ExecuteAsync(request.ExecuteApiMethod, cancellationToken, request.Priority)
-                .ContinueWith(t => Unit.Value, cancellationToken);
+            await WebApiManager.ExecuteAsync(request.ExecuteApiMethod, cancellationToken, request.Priority)
+                .ConfigureAwait(false);
+
+            return Unit.Value;
         }
     }
 }

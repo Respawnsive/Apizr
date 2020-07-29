@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System;
+using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Mapping;
 using Apizr.Mediation.Requesting.Handling.Base;
@@ -17,10 +19,32 @@ namespace Apizr.Mediation.Requesting.Handling
         public override async Task<TModelResponse> Handle(ExecuteRequest<TWebApi, TModelResponse, TApiResponse> request,
             CancellationToken cancellationToken)
         {
-            var result = await WebApiManager.ExecuteAsync(
-                    (ct, api) => request.ExecuteApiMethod.Compile()(ct, api, MappingHandler),
-                    cancellationToken, request.Priority)
-                .ConfigureAwait(false);
+            TApiResponse result;
+            switch (request.ExecuteApiMethod)
+            {
+                case Expression<Func<TWebApi, Task<TApiResponse>>> executeApiMethod:
+                    result = await WebApiManager.ExecuteAsync(executeApiMethod, request.Priority)
+                        .ConfigureAwait(false);
+                    break;
+
+                case Expression<Func<CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod:
+                    result = await WebApiManager.ExecuteAsync(executeApiMethod, cancellationToken, request.Priority)
+                        .ConfigureAwait(false);
+                    break;
+
+                case Expression<Func<TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod:
+                    result = await WebApiManager.ExecuteAsync(executeApiMethod, request.Priority)
+                        .ConfigureAwait(false);
+                    break;
+
+                case Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod:
+                    result = await WebApiManager.ExecuteAsync(executeApiMethod, cancellationToken, request.Priority)
+                        .ConfigureAwait(false);
+                    break;
+
+                default:
+                    throw new ApizrException<TApiResponse>(new NotImplementedException());
+            }
 
             return Map<TApiResponse, TModelResponse>(result);
         }
@@ -36,8 +60,19 @@ namespace Apizr.Mediation.Requesting.Handling
         public override async Task<TApiResponse> Handle(ExecuteRequest<TWebApi, TApiResponse> request,
             CancellationToken cancellationToken)
         {
-            return await WebApiManager.ExecuteAsync(request.ExecuteApiMethod, cancellationToken, request.Priority)
-                .ConfigureAwait(false);
+            switch (request.ExecuteApiMethod)
+            {
+                case Expression<Func<CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod:
+                    return await WebApiManager.ExecuteAsync(executeApiMethod, cancellationToken, request.Priority)
+                        .ConfigureAwait(false);
+
+                case Expression<Func<TWebApi, Task<TApiResponse>>> executeApiMethod:
+                    return await WebApiManager.ExecuteAsync(executeApiMethod, request.Priority)
+                        .ConfigureAwait(false);
+
+                default:
+                    throw new ApizrException<TApiResponse>(new NotImplementedException());
+            }
         }
     }
 
@@ -49,8 +84,21 @@ namespace Apizr.Mediation.Requesting.Handling
 
         public override async Task<Unit> Handle(ExecuteRequest<TWebApi> request, CancellationToken cancellationToken)
         {
-            await WebApiManager.ExecuteAsync(request.ExecuteApiMethod, cancellationToken, request.Priority)
-                .ConfigureAwait(false);
+            switch (request.ExecuteApiMethod)
+            {
+                case Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod:
+                    await WebApiManager.ExecuteAsync(executeApiMethod, cancellationToken, request.Priority)
+                        .ConfigureAwait(false);
+                    break;
+
+                case Expression<Func<TWebApi, Task>> executeApiMethod:
+                    await WebApiManager.ExecuteAsync(executeApiMethod, request.Priority)
+                        .ConfigureAwait(false);
+                    break;
+
+                default:
+                    throw new ApizrException(new NotImplementedException());
+            }
 
             return Unit.Value;
         }

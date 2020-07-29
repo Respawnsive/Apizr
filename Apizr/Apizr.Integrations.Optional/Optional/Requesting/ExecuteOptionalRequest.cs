@@ -11,6 +11,16 @@ namespace Apizr.Optional.Requesting
     public class ExecuteOptionalRequest<TWebApi, TModelResponse, TApiResponse> :
         ExecuteOptionalRequestBase<TWebApi, TModelResponse, TApiResponse>
     {
+        public ExecuteOptionalRequest(Expression<Func<TWebApi, Task<TApiResponse>>> executeApiMethod,
+            Priority priority = Priority.UserInitiated) : base(executeApiMethod, priority)
+        {
+        }
+
+        public ExecuteOptionalRequest(Expression<Func<CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod,
+            Priority priority = Priority.UserInitiated) : base(executeApiMethod, priority)
+        {
+        }
+
         public ExecuteOptionalRequest(Expression<Func<TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod,
             Priority priority = Priority.UserInitiated) : base(executeApiMethod, priority)
         {

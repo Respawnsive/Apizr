@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Apizr.Integrations.MonkeyCache;
 using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Requesting;
+using Apizr.Mediation.Requesting.Sending;
 using Apizr.Optional.Cruding;
 using Apizr.Optional.Requesting;
 using Apizr.Policing;
@@ -28,6 +29,7 @@ namespace Apizr.Sample.Console
         private static IApizrManager<IReqResService> _reqResService;
         private static IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> _genericUserManager;
         private static IMediator _mediator;
+        private static IMediator<IReqResService> _reqResMediator;
 
         static async Task Main(string[] args)
         {
@@ -140,6 +142,9 @@ namespace Apizr.Sample.Console
                         }
                     }
 
+                    // todo: register it on Apizr side
+                    services.AddTransient<IMediator<IReqResService>, Mediator<IReqResService>>();
+
                     services.AddMediatR(typeof(Program));
                 }
 
@@ -157,6 +162,7 @@ namespace Apizr.Sample.Console
                 var scope = container.CreateScope();
 
                 _reqResService = scope.ServiceProvider.GetRequiredService<IApizrManager<IReqResService>>();
+                _reqResMediator = scope.ServiceProvider.GetRequiredService<IMediator<IReqResService>>();
 
                 if(configChoice == 2)
                     _genericUserManager = scope.ServiceProvider.GetRequiredService<IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>>>();
@@ -180,12 +186,14 @@ namespace Apizr.Sample.Console
                 }
                 else if (configChoice == 3)
                 {
-                    //var userList = await _mediator.Send(new ExecuteRequest<IReqResService, UserList>((ct, api) => api.GetUsersAsync(ct)), CancellationToken.None);
+                    //var userList = await _mediator.Send(new ExecuteRequest<IReqResService, UserList>(api => api.GetUsersAsync()));
+                    //var userList = await _reqResMediator.SendFor(api => api.GetUsersAsync());
                     pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>(), CancellationToken.None);
                 }
                 else
                 {
                     //var optionalUserList = await _mediator.Send(new ExecuteOptionalRequest<IReqResService, UserList>((ct, api) => api.GetUsersAsync(ct)), CancellationToken.None);
+                    //var optionalUserList = await _reqResMediator.SendFor((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
                     var optionalPagedUsers = await _mediator.Send(new ReadAllOptionalQuery<PagedResult<User>>(), CancellationToken.None);
                     optionalPagedUsers.Match(some => pagedUsers = some, none => throw none); 
                     //I know this is senseless as optional is here to prevent us from throwing, but for this sample...

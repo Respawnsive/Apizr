@@ -13,6 +13,9 @@ namespace Apizr.Sample.Api
     public interface IReqResService
     {
         [Get("/api/users")]
+        Task<UserList> GetUsersAsync();
+
+        [Get("/api/users")]
         Task<UserList> GetUsersAsync(CancellationToken cancellationToken);
 
         [Get("/api/users/{userId}")]

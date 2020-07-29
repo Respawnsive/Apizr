@@ -5,6 +5,7 @@ using System.Net.Http;
 using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Logging;
+using Apizr.Mapping;
 using HttpTracer;
 using Polly.Registry;
 using Refit;
@@ -22,6 +23,7 @@ namespace Apizr
             ConnectivityHandlerFactory = () => new VoidConnectivityHandler();
             CacheHandlerFactory = () => new VoidCacheHandler();
             LogHandlerFactory = () => new DefaultLogHandler();
+            MappingHandlerFactory = () => new VoidMappingHandler();
             DelegatingHandlersFactories = new List<Func<ILogHandler, DelegatingHandler>>();
         }
 
@@ -30,6 +32,7 @@ namespace Apizr
         public Func<IConnectivityHandler> ConnectivityHandlerFactory { get; set; }
         public Func<ICacheHandler> CacheHandlerFactory { get; set; }
         public Func<ILogHandler> LogHandlerFactory { get; set; }
+        public Func<IMappingHandler> MappingHandlerFactory { get; set; }
         public IList<Func<ILogHandler, DelegatingHandler>> DelegatingHandlersFactories { get; }
     }
 }

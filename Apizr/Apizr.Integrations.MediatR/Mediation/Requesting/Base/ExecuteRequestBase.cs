@@ -4,11 +4,21 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Mapping;
 using Fusillade;
-using MediatR;
 
 namespace Apizr.Mediation.Requesting.Base
 {
-    public abstract class ExecuteRequestBase<TWebApi, TModelResponse, TApiResponse, TRequestResponse> : RequestBase<TRequestResponse>
+    public abstract class ExecuteRequestBase<TRequestResponse> : RequestBase<TRequestResponse>
+    {
+        protected ExecuteRequestBase(Expression executeApiMethod,
+        Priority priority = Priority.UserInitiated) : base(priority)
+        {
+            ExecuteApiMethod = executeApiMethod;
+        }
+
+        public Expression ExecuteApiMethod { get; }
+    }
+
+    public abstract class ExecuteRequestBase<TWebApi, TModelResponse, TApiResponse, TRequestResponse> : ExecuteRequestBase<TRequestResponse>
     {
         protected ExecuteRequestBase(Expression<Func<TWebApi, Task<TApiResponse>>> executeApiMethod,
             Priority priority = Priority.UserInitiated) : base(executeApiMethod, priority)
@@ -31,7 +41,7 @@ namespace Apizr.Mediation.Requesting.Base
         }
     }
 
-    public abstract class ExecuteRequestBase<TWebApi, TApiResponse, TRequestResponse> : RequestBase<TRequestResponse>
+    public abstract class ExecuteRequestBase<TWebApi, TApiResponse, TRequestResponse> : ExecuteRequestBase<TRequestResponse>
     {
         protected ExecuteRequestBase(Expression<Func<TWebApi, Task<TApiResponse>>> executeApiMethod,
             Priority priority = Priority.UserInitiated) : base(executeApiMethod, priority)
@@ -44,7 +54,7 @@ namespace Apizr.Mediation.Requesting.Base
         }
     }
 
-    public abstract class ExecuteRequestBase<TWebApi, TRequestResponse> : RequestBase<TRequestResponse>
+    public abstract class ExecuteRequestBase<TWebApi, TRequestResponse> : ExecuteRequestBase<TRequestResponse>
     {
         protected ExecuteRequestBase(Expression<Func<TWebApi, Task>> executeApiMethod,
             Priority priority = Priority.UserInitiated) : base(executeApiMethod, priority)

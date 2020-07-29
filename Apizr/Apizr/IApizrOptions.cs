@@ -4,6 +4,7 @@ using System.Net.Http;
 using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Logging;
+using Apizr.Mapping;
 using Polly.Registry;
 using Refit;
 
@@ -38,6 +39,11 @@ namespace Apizr
         /// Log handler factory
         /// </summary>
         Func<ILogHandler> LogHandlerFactory { get; }
+
+        /// <summary>
+        /// Mapping handler factory
+        /// </summary>
+        Func<IMappingHandler> MappingHandlerFactory { get; }
 
         /// <summary>
         /// Delegating handlers factories

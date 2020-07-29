@@ -7,6 +7,7 @@ using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Logging;
+using Apizr.Mapping;
 using HttpTracer;
 using Polly.Registry;
 using Refit;
@@ -158,6 +159,16 @@ namespace Apizr
         public IApizrOptionsBuilder WithLogHandler(Func<ILogHandler> logHandlerFactory)
         {
             Options.LogHandlerFactory = logHandlerFactory;
+
+            return this;
+        }
+
+        public IApizrOptionsBuilder WithMappingHandler(IMappingHandler mappingHandler)
+            => WithMappingHandler(() => mappingHandler);
+
+        public IApizrOptionsBuilder WithMappingHandler(Func<IMappingHandler> mappingHandlerFactory)
+        {
+            Options.MappingHandlerFactory = mappingHandlerFactory;
 
             return this;
         }

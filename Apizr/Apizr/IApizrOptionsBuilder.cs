@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Logging;
+using Apizr.Mapping;
 using Polly.Registry;
 
 namespace Apizr
@@ -147,5 +148,19 @@ namespace Apizr
         /// <param name="logHandlerFactory">An <see cref="ILogHandler"/> mapping implementation instance factory</param>
         /// <returns></returns>
         IApizrOptionsBuilder WithLogHandler(Func<ILogHandler> logHandlerFactory);
+
+        /// <summary>
+        /// Provide a mapping handler to map entities
+        /// </summary>
+        /// <param name="mappingHandler">An <see cref="IMappingHandler"/> mapping implementation instance</param>
+        /// <returns></returns>
+        IApizrOptionsBuilder WithMappingHandler(IMappingHandler mappingHandler);
+
+        /// <summary>
+        /// Provide a mapping handler to map entities
+        /// </summary>
+        /// <param name="mappingHandlerFactory">An <see cref="IMappingHandler"/> mapping implementation instance factory</param>
+        /// <returns></returns>
+        IApizrOptionsBuilder WithMappingHandler(Func<IMappingHandler> mappingHandlerFactory);
     }
 }

@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Mapping;
 using Fusillade;
 
 namespace Apizr
@@ -15,11 +16,54 @@ namespace Apizr
         /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task
         /// </summary>
+        /// <param name="executeApiMethod">The <see cref="TWebApi"/>'s task to execute</param>
+        /// <param name="priority">The execution <see cref="Priority"/> for this <see cref="TWebApi"/>'s task</param>
+        /// <returns></returns>
+        Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod, Priority priority = Priority.UserInitiated);
+
+        /// <summary>
+        /// Execute a managed <see cref="TWebApi"/>'s task
+        /// </summary>
+        /// <param name="executeApiMethod">The <see cref="TWebApi"/>'s task to execute</param>
+        /// <param name="priority">The execution <see cref="Priority"/> for this <see cref="TWebApi"/>'s task</param>
+        /// <returns></returns>
+        Task ExecuteAsync(Expression<Func<TWebApi, IMappingHandler, Task>> executeApiMethod, Priority priority = Priority.UserInitiated);
+
+        /// <summary>
+        /// Execute a managed <see cref="TWebApi"/>'s task
+        /// </summary>
+        /// <param name="executeApiMethod">The <see cref="TWebApi"/>'s task to execute</param>
+        /// <param name="cancellationToken">A cancellation token</param>
+        /// <param name="priority">The execution <see cref="Priority"/> for this <see cref="TWebApi"/>'s task</param>
+        /// <returns></returns>
+        Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod, CancellationToken cancellationToken, Priority priority = Priority.UserInitiated);
+
+        /// <summary>
+        /// Execute a managed <see cref="TWebApi"/>'s task
+        /// </summary>
+        /// <param name="executeApiMethod">The <see cref="TWebApi"/>'s task to execute</param>
+        /// <param name="cancellationToken">A cancellation token</param>
+        /// <param name="priority">The execution <see cref="Priority"/> for this <see cref="TWebApi"/>'s task</param>
+        /// <returns></returns>
+        Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task>> executeApiMethod, CancellationToken cancellationToken, Priority priority = Priority.UserInitiated);
+
+        /// <summary>
+        /// Execute a managed <see cref="TWebApi"/>'s task
+        /// </summary>
         /// <typeparam name="TResult">The <see cref="TWebApi"/>'s task result</typeparam>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/>'s task to execute</param>
         /// <param name="priority">The execution <see cref="Priority"/> for this <see cref="TWebApi"/>'s task</param>
         /// <returns></returns>
         Task<TResult> ExecuteAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod, Priority priority = Priority.UserInitiated);
+
+        /// <summary>
+        /// Execute a managed <see cref="TWebApi"/>'s task
+        /// </summary>
+        /// <typeparam name="TResult">The <see cref="TWebApi"/>'s task result</typeparam>
+        /// <param name="executeApiMethod">The <see cref="TWebApi"/>'s task to execute with mapping</param>
+        /// <param name="priority">The execution <see cref="Priority"/> for this <see cref="TWebApi"/>'s task</param>
+        /// <returns></returns>
+        Task<TResult> ExecuteAsync<TResult>(Expression<Func<TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod, Priority priority = Priority.UserInitiated);
 
         /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task
@@ -34,19 +78,12 @@ namespace Apizr
         /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task
         /// </summary>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/>'s task to execute</param>
-        /// <param name="priority">The execution <see cref="Priority"/> for this <see cref="TWebApi"/>'s task</param>
-        /// <returns></returns>
-        Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod, Priority priority = Priority.UserInitiated);
-
-        /// <summary>
-        /// Execute a managed <see cref="TWebApi"/>'s task
-        /// </summary>
+        /// <typeparam name="TResult">The <see cref="TWebApi"/>'s task result</typeparam>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/>'s task to execute</param>
         /// <param name="cancellationToken">A cancellation token</param>
         /// <param name="priority">The execution <see cref="Priority"/> for this <see cref="TWebApi"/>'s task</param>
         /// <returns></returns>
-        Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod, CancellationToken cancellationToken, Priority priority = Priority.UserInitiated);
+        Task<TResult> ExecuteAsync<TResult>(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken, Priority priority = Priority.UserInitiated);
 
         /// <summary>
         /// Clear all cache

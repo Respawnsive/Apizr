@@ -15,6 +15,7 @@ using Apizr.Optional.Cruding;
 using Apizr.Optional.Cruding.Handling;
 using Apizr.Optional.Requesting;
 using Apizr.Optional.Requesting.Handling;
+using Apizr.Optional.Requesting.Sending;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -322,6 +323,8 @@ namespace Apizr
                             services.TryAddTransient(executeRequestHandlerServiceType, executeRequestHandlerImplementationType);
                         }
                     }
+
+                    services.AddTransient(typeof(IOptionalMediator<>).MakeGenericType(webApi.Key), typeof(OptionalMediator<>).MakeGenericType(webApi.Key));
                 }
 
                 #endregion

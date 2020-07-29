@@ -136,7 +136,7 @@ namespace Apizr
             Priority priority = Priority.UserInitiated)
             => ExecuteAsync((ct, api) => executeApiMethod.Compile()(api), CancellationToken.None, priority);
 
-        public Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod, CancellationToken cancellationToken,
+        public async Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod, CancellationToken cancellationToken,
             Priority priority = Priority.UserInitiated)
         {
             var methodCallExpression = GetMethodCallExpression(executeApiMethod);
@@ -161,13 +161,13 @@ namespace Apizr
                     _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
 
                     var pollyContext = new Context().WithLogHandler(_logHandler);
-                    return policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, GetWebApi(priority)), pollyContext, cancellationToken);
+                    await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, GetWebApi(priority)), pollyContext, cancellationToken);
                 }
                 else
                 {
                     _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
 
-                    return executeApiMethod.Compile()(cancellationToken, GetWebApi(priority));
+                    await executeApiMethod.Compile()(cancellationToken, GetWebApi(priority));
                 }
             }
             catch (Exception e)

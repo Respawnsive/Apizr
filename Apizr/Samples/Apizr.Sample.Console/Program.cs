@@ -30,13 +30,13 @@ namespace Apizr.Sample.Console
     class Program
     {
         /*
-         * Next are all the way to play with Apizr
+         * Next are all the ways to play with Apizr
          */
 
         // With an api interface
         private static IApizrManager<IReqResService> _reqResManager;
 
-        // With an auto-defined cruding interface based on an entity class
+        // With an auto-defined cruding api interface based on an entity class
         private static IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> _userManager;
 
         // With MediatR

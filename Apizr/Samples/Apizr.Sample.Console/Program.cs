@@ -10,6 +10,7 @@ using Apizr.Mediation.Requesting;
 using Apizr.Mediation.Requesting.Sending;
 using Apizr.Optional.Cruding;
 using Apizr.Optional.Cruding.Sending;
+using Apizr.Optional.Extending;
 using Apizr.Optional.Requesting;
 using Apizr.Optional.Requesting.Sending;
 using Apizr.Policing;
@@ -207,7 +208,7 @@ namespace Apizr.Sample.Console
                 System.Console.WriteLine("Initialization succeed :)");
             }
 
-            IEnumerable<User> users;
+            IEnumerable<User> users = null;
             try
             {
                 System.Console.WriteLine("");
@@ -216,7 +217,7 @@ namespace Apizr.Sample.Console
                 PagedResult<User> pagedUsers = null;
                 if (configChoice <= 2)
                 {
-                    pagedUsers = await _userManager.ExecuteAsync((ct, api) => api.ReadAll(ct), CancellationToken.None); 
+                    pagedUsers = await _userManager.ExecuteAsync((ct, api) => api.ReadAll(ct), CancellationToken.None);
                 }
                 else if (configChoice == 3)
                 {
@@ -229,15 +230,16 @@ namespace Apizr.Sample.Console
                 {
                     //var optionalUserList = await _mediator.Send(new ExecuteOptionalRequest<IReqResService, UserList>((ct, api) => api.GetUsersAsync(ct)), CancellationToken.None);
                     //var optionalUserList = await _reqResMediator.SendFor((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
-                    var optionalUserList = await _reqResOptionalMediator.SendFor(api => api.GetUsersAsync());
+                    var success = await _reqResOptionalMediator.SendFor(api => api.GetUsersAsync()).OnResultAsync(result => { users = result?.Data; });
                     //var optionalPagedUsers = await _mediator.Send(new ReadAllOptionalQuery<PagedResult<User>>(), CancellationToken.None);
                     var optionalPagedUsers = await _userOptionalMediator.SendReadAllOptionalQuery();
-                    optionalPagedUsers.Match(some => pagedUsers = some, none => throw none); 
+                    optionalPagedUsers.Match(some => pagedUsers = some, none => throw none);
 
                     // I know this is senseless as optional is here to prevent us from throwing,
                     // but for this example we just throw to catch and extract cached data...
                     // Not a real life scenario :)
                 }
+
                 users = pagedUsers?.Data;
             }
             catch (ApizrException<PagedResult<User>> e)
@@ -251,6 +253,10 @@ namespace Apizr.Sample.Console
                 System.Console.WriteLine("");
                 System.Console.WriteLine($"Loading {nameof(UserList)} from cache...");
                 users = e.CachedResult?.Data;
+            }
+            catch (Exception e)
+            {
+
             }
 
             if (users != null)

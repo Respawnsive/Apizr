@@ -10,6 +10,8 @@ using System.Windows.Input;
 using Acr.UserDialogs;
 using Apizr.Mediation.Cruding;
 using Apizr.Optional.Cruding;
+using Apizr.Optional.Cruding.Sending;
+using Apizr.Optional.Extending;
 using Apizr.Requesting;
 using Apizr.Sample.Api;
 using Apizr.Sample.Api.Models;
@@ -29,13 +31,14 @@ namespace Apizr.Sample.Mobile.ViewModels
         private readonly IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> _userCrudManager;
         private readonly IApizrManager<ICrudApi<UserDetails, int, IEnumerable<UserDetails>, IDictionary<string, object>>> _userDetailsCrudManager;
         private readonly IMediator _mediator;
+        private readonly ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> _userOptionalMediator;
 
         public MainPageViewModel(INavigationService navigationService, 
                 IApizrManager<IHttpBinService> httpBinManager,
                 IApizrManager<IReqResService> reqResManager,
             IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> userCrudManager,
             IApizrManager<ICrudApi<UserDetails, int, IEnumerable<UserDetails>, IDictionary<string, object>>> userDetailsCrudManager,
-            IMediator mediator)
+            IMediator mediator, ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> userOptionalMediator)
             : base(navigationService)
         {
             _httpBinManager = httpBinManager;
@@ -43,6 +46,7 @@ namespace Apizr.Sample.Mobile.ViewModels
             _userCrudManager = userCrudManager;
             _userDetailsCrudManager = userDetailsCrudManager;
             _mediator = mediator;
+            _userOptionalMediator = userOptionalMediator;
             GetUsersCommand = ExecutionAwareCommand.FromTask(GetUsersAsync);
             //GetUserDetailsCommand = ExecutionAwareCommand.FromTask<User>(GetUserDetails);
             GetUserDetailsCommand = new DelegateCommand<User>(async user => await GetUserDetails(user));
@@ -68,7 +72,7 @@ namespace Apizr.Sample.Mobile.ViewModels
         #region Methods
 
         /// <summary>
-        /// Managing crud entities comes with 3 web api call flavors
+        /// Managing crud entities comes with many web api call flavors
         /// Choosing one of it depends of your registration settings
         /// and how you like to play with api calls
         /// </summary>
@@ -88,7 +92,11 @@ namespace Apizr.Sample.Mobile.ViewModels
             //    //users = userList?.Data;
 
             //    // This is the Crud way, with or without Crud attribute auto registration, but without mediation
-            //    var pagedUsers = await _userCrudManager.ExecuteAsync((ct, api) => api.ReadAll(ct), CancellationToken.None);
+            //    //var pagedUsers = await _userCrudManager.ExecuteAsync((ct, api) => api.ReadAll(ct), CancellationToken.None);
+            //    //users = pagedUsers?.Data?.ToList();
+            //
+            //    // The same as before but with auto mediation handling
+            //    var pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>(), CancellationToken.None);
             //    users = pagedUsers?.Data?.ToList();
             //}
             //catch (ApizrException<UserList> e)
@@ -113,22 +121,31 @@ namespace Apizr.Sample.Mobile.ViewModels
             //    IsRefreshing = false;
             //}
 
-            // The same as before but with auto mediation handling and with optional result
-            var result = await _mediator.Send(new ReadAllOptionalQuery<PagedResult<User>>(), CancellationToken.None);
-            result.Match(pagedUsers =>
-            {
-                if (pagedUsers.Data != null && pagedUsers.Data.Any())
-                    Users = new ObservableCollection<User>(pagedUsers.Data);
-            }, e =>
-            {
-                var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
-                UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+            // The same as before but with optional result
+            //var result = await _mediator.Send(new ReadAllOptionalQuery<PagedResult<User>>(), CancellationToken.None);
+            //result.Match(pagedUsers =>
+            //{
+            //    if (pagedUsers.Data != null && pagedUsers.Data.Any())
+            //        Users = new ObservableCollection<User>(pagedUsers.Data);
+            //}, e =>
+            //{
+            //    var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
+            //    UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
 
-                if (e.CachedResult?.Data != null && e.CachedResult.Data.Any())
-                    Users = new ObservableCollection<User>(e.CachedResult.Data);
+            //    if (e.CachedResult?.Data != null && e.CachedResult.Data.Any())
+            //        Users = new ObservableCollection<User>(e.CachedResult.Data);
+            //});
+
+            // The same as before but with fluent result handling (fetched or cached, doesn't matter) and global exception handling (AsyncErrorHandler)
+            await _userOptionalMediator.SendReadAllOptionalQuery().OnResultAsync(pagedUsers =>
+            {
+                if (!pagedUsers.Data.IsEmpty())
+                    Users = new ObservableCollection<User>(pagedUsers.Data);
+
+                IsRefreshing = false;
             });
 
-            IsRefreshing = false;
+            //IsRefreshing = false;
         }
 
         /// <summary>

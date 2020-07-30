@@ -9,6 +9,7 @@ using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Cruding.Base;
 using Apizr.Mediation.Cruding.Handling;
 using Apizr.Mediation.Cruding.Handling.Base;
+using Apizr.Mediation.Cruding.Sending;
 using Apizr.Mediation.Requesting;
 using Apizr.Mediation.Requesting.Handling;
 using Apizr.Mediation.Requesting.Sending;
@@ -233,6 +234,22 @@ namespace Apizr
                     services.TryAddTransient(deleteCommandHandlerServiceType, deleteCommandHandlerImplementationType);
 
                     #endregion
+
+                    #region Typed
+
+                    // Typed crud mediator
+                    var typedCrudMediatorServiceType = typeof(ICrudMediator<,,,>).MakeGenericType(apiEntityType,
+                        apiEntityKeyType, 
+                        apiEntityReadAllResultType, 
+                        apiEntityReadAllParamsType);
+                    var typedCrudMediatorImplementationType = typeof(CrudMediator<,,,>).MakeGenericType(apiEntityType,
+                        apiEntityKeyType,
+                        apiEntityReadAllResultType,
+                        apiEntityReadAllParamsType);
+
+                    services.TryAddTransient(typedCrudMediatorServiceType, typedCrudMediatorImplementationType);
+
+                    #endregion
                 }
 
                 #endregion
@@ -306,7 +323,15 @@ namespace Apizr
                         }
                     }
 
-                    services.AddTransient(typeof(IMediator<>).MakeGenericType(webApi.Key), typeof(Mediator<>).MakeGenericType(webApi.Key));
+                    #region Typed
+
+                    // Typed mediator
+                    var typedMediatorServiceType = typeof(IMediator<>).MakeGenericType(webApi.Key);
+                    var typedMediatorImplementationType = typeof(Mediator<>).MakeGenericType(webApi.Key);
+
+                    services.TryAddTransient(typedMediatorServiceType, typedMediatorImplementationType); 
+
+                    #endregion
                 } 
 
                 #endregion

@@ -5,9 +5,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Integrations.MonkeyCache;
 using Apizr.Mediation.Cruding;
+using Apizr.Mediation.Cruding.Sending;
 using Apizr.Mediation.Requesting;
 using Apizr.Mediation.Requesting.Sending;
 using Apizr.Optional.Cruding;
+using Apizr.Optional.Cruding.Sending;
 using Apizr.Optional.Requesting;
 using Apizr.Optional.Requesting.Sending;
 using Apizr.Policing;
@@ -27,11 +29,35 @@ namespace Apizr.Sample.Console
 {
     class Program
     {
-        private static IApizrManager<IReqResService> _reqResService;
-        private static IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> _genericUserManager;
+        /*
+         * Next are all the way to play with Apizr
+         */
+
+        // With an api interface
+        private static IApizrManager<IReqResService> _reqResManager;
+
+        // With an auto-defined cruding interface based on an entity class
+        private static IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> _userManager;
+
+        // With MediatR
         private static IMediator _mediator;
+
+        // With a mediator dedicated to an api interface (getting things shorter)
         private static IMediator<IReqResService> _reqResMediator;
+
+        // With an optional mediator dedicated to an api interface (getting things shorter)
         private static IOptionalMediator<IReqResService> _reqResOptionalMediator;
+
+        // With a crud mediator dedicated to an entity (getting things shorter)
+        private static ICrudMediator<User, int, PagedResult<User>, IDictionary<string, object>> _userMediator;
+
+        // With a crud optional mediator dedicated to an entity (getting things shorter)
+        private static ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> _userOptionalMediator;
+
+
+        /*
+         * Using examples
+         */
 
         static async Task Main(string[] args)
         {
@@ -69,11 +95,11 @@ namespace Apizr.Sample.Console
             {
                 Barrel.ApplicationId = nameof(Program);
 
-                _reqResService = Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(registry)
+                _reqResManager = Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(registry)
                     .WithCacheHandler(
                         () => new MonkeyCacheHandler(Barrel.Current)));
 
-                _genericUserManager = Apizr.CrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users")
+                _userManager = Apizr.CrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users")
                     .WithPolicyRegistry(registry)
                     .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
                     .WithHttpTracing(HttpTracer.HttpMessageParts.All));
@@ -142,13 +168,7 @@ namespace Apizr.Sample.Console
 
                             services.AddAutoMapper(typeof(Program));
                         }
-
-                        // todo: register it on Apizr side
-                        //services.AddTransient<IOptionalMediator<IReqResService>, OptionalMediator<IReqResService>>();
                     }
-
-                    // todo: register it on Apizr side
-                    //services.AddTransient<IMediator<IReqResService>, Mediator<IReqResService>>();
 
                     services.AddMediatR(typeof(Program));
                 }
@@ -166,17 +186,21 @@ namespace Apizr.Sample.Console
                 var container = services.BuildServiceProvider(true);
                 var scope = container.CreateScope();
 
-                _reqResService = scope.ServiceProvider.GetRequiredService<IApizrManager<IReqResService>>();
+                _reqResManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IReqResService>>();
 
                 if(configChoice == 2)
-                    _genericUserManager = scope.ServiceProvider.GetRequiredService<IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>>>();
+                    _userManager = scope.ServiceProvider.GetRequiredService<IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>>>();
                 else
                 {
                     _mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
                     _reqResMediator = scope.ServiceProvider.GetRequiredService<IMediator<IReqResService>>();
+                    _userMediator = scope.ServiceProvider.GetRequiredService<ICrudMediator<User, int, PagedResult<User>, IDictionary<string, object>>>();
 
-                    if(configChoice >= 4)
+                    if (configChoice >= 4)
+                    {
                         _reqResOptionalMediator = scope.ServiceProvider.GetRequiredService<IOptionalMediator<IReqResService>>();
+                        _userOptionalMediator = scope.ServiceProvider.GetRequiredService<ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>>>();
+                    }
                 }
 
                 System.Console.WriteLine("");
@@ -192,22 +216,27 @@ namespace Apizr.Sample.Console
                 PagedResult<User> pagedUsers = null;
                 if (configChoice <= 2)
                 {
-                    pagedUsers = await _genericUserManager.ExecuteAsync((ct, api) => api.ReadAll(ct), CancellationToken.None); 
+                    pagedUsers = await _userManager.ExecuteAsync((ct, api) => api.ReadAll(ct), CancellationToken.None); 
                 }
                 else if (configChoice == 3)
                 {
                     //var userList = await _mediator.Send(new ExecuteRequest<IReqResService, UserList>(api => api.GetUsersAsync()));
                     var userList = await _reqResMediator.SendFor(api => api.GetUsersAsync());
-                    pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>(), CancellationToken.None);
+                    //pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>(), CancellationToken.None);
+                    pagedUsers = await _userMediator.SendReadAllQuery();
                 }
                 else
                 {
                     //var optionalUserList = await _mediator.Send(new ExecuteOptionalRequest<IReqResService, UserList>((ct, api) => api.GetUsersAsync(ct)), CancellationToken.None);
                     //var optionalUserList = await _reqResMediator.SendFor((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
                     var optionalUserList = await _reqResOptionalMediator.SendFor(api => api.GetUsersAsync());
-                    var optionalPagedUsers = await _mediator.Send(new ReadAllOptionalQuery<PagedResult<User>>(), CancellationToken.None);
+                    //var optionalPagedUsers = await _mediator.Send(new ReadAllOptionalQuery<PagedResult<User>>(), CancellationToken.None);
+                    var optionalPagedUsers = await _userOptionalMediator.SendReadAllOptionalQuery();
                     optionalPagedUsers.Match(some => pagedUsers = some, none => throw none); 
-                    //I know this is senseless as optional is here to prevent us from throwing, but for this sample...
+
+                    // I know this is senseless as optional is here to prevent us from throwing,
+                    // but for this example we just throw to catch and extract cached data...
+                    // Not a real life scenario :)
                 }
                 users = pagedUsers?.Data;
             }
@@ -242,7 +271,7 @@ namespace Apizr.Sample.Console
                     if (configChoice <= 4)
                     {
                         var userDetails = configChoice <= 2
-                            ? await _reqResService.ExecuteAsync((ct, api) => api.GetUserAsync(userChoice, ct),
+                            ? await _reqResManager.ExecuteAsync((ct, api) => api.GetUserAsync(userChoice, ct),
                                 CancellationToken.None)
                             : await _mediator.Send(new ReadQuery<UserDetails>(userChoice), CancellationToken.None);
 
@@ -269,8 +298,19 @@ namespace Apizr.Sample.Console
                         // Classic Auto mapped result only
                         //userInfos = await _mediator.Send(new ExecuteRequest<IReqResService, UserInfos, UserDetails>((ct, api) => api.GetUserAsync(userChoice, ct)), CancellationToken.None);
 
+                        // Classic dedicated mediator with auto mapped result
+                        userInfos = await _reqResMediator.SendFor<UserInfos, UserDetails>((ct, api) => api.GetUserAsync(userChoice, ct), CancellationToken.None);
+
                         // Auto mapped crud
-                        userInfos = await _mediator.Send(new ReadQuery<UserInfos>(userChoice), CancellationToken.None);
+                        //userInfos = await _mediator.Send(new ReadQuery<UserInfos>(userChoice), CancellationToken.None);
+
+                        // Crud dedicated mediator with auto mapped optional result
+                        var optionalUserInfos = await _userOptionalMediator.SendReadOptionalQuery<UserInfos>(userChoice);
+                        optionalUserInfos.Match(some => userInfos = some, none => throw none);
+
+                        // I know this is senseless as optional is here to prevent us from throwing,
+                        // but for this example we just throw to catch and extract cached data...
+                        // Not a real life scenario :)
                     }
                 }
                 catch (ApizrException<UserInfos> e)

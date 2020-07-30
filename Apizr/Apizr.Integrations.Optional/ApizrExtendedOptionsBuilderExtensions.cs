@@ -9,10 +9,12 @@ using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Cruding.Base;
 using Apizr.Mediation.Cruding.Handling;
 using Apizr.Mediation.Cruding.Handling.Base;
+using Apizr.Mediation.Cruding.Sending;
 using Apizr.Mediation.Requesting;
 using Apizr.Mediation.Requesting.Handling;
 using Apizr.Optional.Cruding;
 using Apizr.Optional.Cruding.Handling;
+using Apizr.Optional.Cruding.Sending;
 using Apizr.Optional.Requesting;
 using Apizr.Optional.Requesting.Handling;
 using Apizr.Optional.Requesting.Sending;
@@ -247,6 +249,22 @@ namespace Apizr
                     services.TryAddTransient(deleteCommandHandlerServiceType, deleteCommandHandlerImplementationType);
 
                     #endregion
+
+                    #region Typed
+
+                    // Typed crud optional mediator
+                    var typedCrudOptionalMediatorServiceType = typeof(ICrudOptionalMediator<,,,>).MakeGenericType(apiEntityType,
+                        apiEntityKeyType,
+                        apiEntityReadAllResultType,
+                        apiEntityReadAllParamsType);
+                    var typedCrudOptionalMediatorImplementationType = typeof(CrudOptionalMediator<,,,>).MakeGenericType(apiEntityType,
+                        apiEntityKeyType,
+                        apiEntityReadAllResultType,
+                        apiEntityReadAllParamsType);
+
+                    services.TryAddTransient(typedCrudOptionalMediatorServiceType, typedCrudOptionalMediatorImplementationType);
+
+                    #endregion
                 }
 
                 #endregion
@@ -324,7 +342,15 @@ namespace Apizr
                         }
                     }
 
-                    services.AddTransient(typeof(IOptionalMediator<>).MakeGenericType(webApi.Key), typeof(OptionalMediator<>).MakeGenericType(webApi.Key));
+                    #region Typed
+
+                    // Typed optional mediator
+                    var typedOptionalMediatorServiceType = typeof(IOptionalMediator<>).MakeGenericType(webApi.Key);
+                    var typedOptionalMediatorImplementationType = typeof(OptionalMediator<>).MakeGenericType(webApi.Key);
+
+                    services.TryAddTransient(typedOptionalMediatorServiceType, typedOptionalMediatorImplementationType); 
+
+                    #endregion
                 }
 
                 #endregion

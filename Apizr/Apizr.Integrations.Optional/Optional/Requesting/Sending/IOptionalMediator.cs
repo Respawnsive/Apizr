@@ -11,9 +11,11 @@ using Optional;
 
 namespace Apizr.Optional.Requesting.Sending
 {
+    /// <summary>
+    /// <see cref="IMediator"/> but dedicated to <see cref="TWebApi"/> with optional result, getting all shorter
+    /// </summary>
     public interface IOptionalMediator<TWebApi>
     {
-
         Task<Option<Unit, ApizrException>> SendFor(Expression<Func<TWebApi, Task>> executeApiMethod,
             Priority priority = Priority.UserInitiated);
 

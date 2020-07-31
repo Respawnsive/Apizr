@@ -1,3 +1,25 @@
+1.5
+---
+
+### Apizr
+
+- [Fix] Now the manager waits for task with no result to handle exceptions properly
+
+### Apizr.Integrations.MediatR
+
+- [New] Introducing typed mediator and typed crud mediator for shorter request
+- [Fix] Now MediatR handlers are registered correctly when asked from a manual registration context
+- [Fix] Mapping null object now works correctly
+- [Fix] Now MediatR handlers wait for its handling task to handle exceptions properly
+
+### Apizr.Integrations.Optional
+
+- [New] Introducing typed optional mediator and typed crud optional mediator for shorter request
+- [New] Introducing OnResultAsync optional extension method to make all the thing shorter than ever
+- [Fix] Now Optional handlers are registered correctly when asked from a manual registration context
+- [Fix] Optional request handlers now handle exceptions as expected
+- [Fix] Now Optional handlers wait for its handling task to handle exceptions properly
+
 1.4.2
 ---
 

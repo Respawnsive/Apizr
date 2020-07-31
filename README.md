@@ -3,7 +3,7 @@ Refit based web api client management, but resilient (retry, connectivity, cache
 
 ## Libraries
 
-[Change Log - July 24, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
+[Change Log - July 31, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
 
 |Project|NuGet|
 |-------|-----|
@@ -544,13 +544,22 @@ services.AddMediatR(typeof(Startup));
 >```
 
 When activated, you don't have to inject/resolve anything else than an ```IMediator``` instance, in order to play with your api services (both classic and crud).
+Everything you need to do then, is sending your request calling:
+```csharp
+var result = await _mediator.Send(YOUR_REQUEST_HERE);
+```
 
-Then, when playing with classic api interfaces, you'll be able to send requests, among:
+Where YOUR_REQUEST_HERE could be, with classic api interfaces:
 - ```ExecuteRequest<TWebApi>```: execute any method from ```TWebApi``` defined by an expression parameter
 - ```ExecuteRequest<TWebApi, TApiResponse>```: execute any method from ```TWebApi``` with a ```TApiResponse``` result and defined by an expression parameter
+- ```ExecuteRequest<TWebApi, TModelResponse, TApiResponse>```: execute any method from ```TWebApi``` with a ```TApiResponse``` mapped to a ```TModelResponse``` result and defined by an expression parameter
 
+> **NOTE - Mapping**:
+> When I say "mapped", I talk about the mapping integration feature
+>
+> Please refer to AutoMapper section for more info
 
-Also, when playing with crud, you'll be able to send queries and commands from anywhere, among:
+Or with crud api interfaces:
 - ```ReadQuery<T>```: get the T entity with int
 - ```ReadQuery<T, TKey>```: get the T entity with TKey
 - ```ReadAllQuery<TReadAllResult>```: get TReadAllResult with IDictionary<string, object> optional query parameters
@@ -561,33 +570,69 @@ Also, when playing with crud, you'll be able to send queries and commands from a
 - ```DeleteCommand<T>```: delete the T entity with int
 - ```DeleteCommand<T, TKey>```: delete the T entity with TKey
 
+There's also a typed mediator available for each api interface (classic or crud), to help you write things shorter.
 
-In both cases, Apizr will intercept it and handle it to send the result back to you, thanks to MediatR.
+With classic api interfaces, resolving ```IMediator<TWebApi>``` give you access to:
+- ```SendFor(YOUR_API_METHOD_EXPRESSION)```: send an ```ExecuteRequest<TWebApi>``` for you
+- ```SendFor<TApiResponse>(YOUR_API_METHOD_EXPRESSION)```: send an ```ExecuteRequest<TWebApi, TApiResponse>``` for you
+- ```SendFor<TModelResponse, TApiResponse>(YOUR_API_METHOD_EXPRESSION)```: send an ```ExecuteRequest<TWebApi, TModelResponse, TApiResponse>``` for you
 
-From there, our ViewModel can look like:
+With crud api interfaces, resolving ```ICrudMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>``` give you access to:
+- ```SendReadQuery(TApiEntityKey key)```: send a ```ReadQuery<TApiEntity, TApiEntityKey>``` for you
+- ```SendReadQuery<TModelEntity>(TApiEntityKey key)```: send a ```ReadQuery<TModelEntity, TApiEntityKey>``` for you, with ```TModelEntity``` mapped with ```TApiEntity```
+- ```SendReadAllQuery()```: send a ```ReadAllQuery<TReadAllResult>``` for you
+- ```SendReadAllQuery<TModelEntityReadAllResult>()```: send a ```ReadAllQuery<TModelEntityReadAllResult>``` for you, with ```TModelEntityReadAllResult``` mapped with ```TReadAllResult```
+- ```SendCreateCommand(TApiEntity payload)```: send a ```CreateCommand<TApiEntity>``` for you
+- ```SendCreateCommand<TModelEntity>(TModelEntity payload)```: send a ```CreateCommand<TModelEntity>``` for you, with ```TModelEntity``` mapped with ```TApiEntity```
+- ```SendUpdateCommand(TApiEntityKey key, TApiEntity payload)```: send an ```UpdateCommand<TApiEntityKey, TApiEntity>``` for you
+- ```SendUpdateCommand<TModelEntity>(TApiEntityKey key, TModelEntity payload)```: send an ```UpdateCommand<TApiEntityKey, TModelEntity>``` for you, with ```TModelEntity``` mapped with ```TApiEntity```
+- ```SendDeleteCommand(TApiEntityKey key)```: send a ```DeleteCommand<TApiEntity, TApiEntityKey>``` for you
+
+Most of all requests get some overloads to provide some more parameters.
+
+Apizr will intercept your request and handle it to send the result back to you, thanks to MediatR.
+
+From there, our ViewModel can look like (only one interface necessary in real world):
 ```csharp
 public class YourViewModel
 {
     private readonly IMediator _mediator;
+    private readonly IMediator<IReqResService> _reqResMediator;
+    private readonly ICrudMediator<User, int, PagedResult<User>, IDictionary<string, object>> _userMediator;
 	
-    public YouViewModel(IMediator mediator)
+    public YouViewModel(IMediator mediator, 
+        IMediator<IReqResService> reqResMediator,
+        ICrudMediator<User, int, PagedResult<User>, IDictionary<string, object>> userMediator)
     {
 		_mediator = mediator;
+       _reqResMediator = reqResMediator;
+       _userMediator = userMediator;
     }
     
     public ObservableCollection<User>? Users { get; set; }
 
+    // This won't compile obviously
+    // It's an example presenting all ways to play with MediatR
+    // You should choose one of these ways
     private async Task GetUsersAsync()
     {
         IList<User>? users;
         try
         {
             // The classic api interface way
-            //var userList = await _mediator.Send(new ExecuteRequest<IReqResService, UserList>((ct, api) => api.GetUsersAsync(ct)), CancellationToken.None);
-            //users = userList.Data;
+            var userList = await _mediator.Send(new ExecuteRequest<IReqResService, UserList>((ct, api) => api.GetUsersAsync(ct)), CancellationToken.None);
+            users = userList.Data;
+
+            // The classic api interface way with typed mediator
+            var userList = await _reqResMediator.SendFor(api => api.GetUsersAsync());
+            users = userList.Data;
             
             // The crud api interface way
             var pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>(), CancellationToken.None);
+            users = pagedUsers.Data?.ToList();
+            
+            // The crud api interface way with typed mediator
+            var pagedUsers = await _userMediator.SendReadAllQuery();
             users = pagedUsers.Data?.ToList();
         }
         catch (ApizrException<PagedResult<User>> e)
@@ -620,13 +665,23 @@ services.AddMediatR(typeof(Startup));
 > 
 >Same as previous note
 
-When activated, you don't have to inject/resolve anything else than an ```IMediator``` instance, in order to play with your apis and get some Optional result.
+When activated, you don't have to inject/resolve anything else than an ```IMediator``` instance, in order to play with your api services (both classic and crud).
+Everything you need to do then, is sending your request calling:
+```csharp
+var result = await _mediator.Send(YOUR_REQUEST_HERE);
+```
 
-Then, when playing with classic api interfaces, you'll be able to send requests, among:
-- ```ExecuteOptionalRequest<TWebApi>```: execute any method from ```TWebApi``` defined by an expression parameter wich returns with a ```Option<Unit, ApizrException>``` result
-- ```ExecuteOptionalRequest<TWebApi, TApiResponse>```: execute any method from ```TWebApi``` defined by an expression parameter wich returns with a ```Option<TApiResponse, ApizrException<TApiResponse>>``` result
+Where YOUR_REQUEST_HERE could be, with classic api interfaces:
+- ```ExecuteOptionalRequest<TWebApi>```: execute any method from ```TWebApi``` defined by an expression parameter wich returns ```Option<Unit, ApizrException>```
+- ```ExecuteOptionalRequest<TWebApi, TApiResponse>```: execute any method from ```TWebApi``` defined by an expression parameter wich returns ```Option<TApiResponse, ApizrException<TApiResponse>>```
+- ```ExecuteOptionalRequest<TWebApi, TModelResponse, TApiResponse>```: execute any method from ```TWebApi``` defined by an expression parameter wich returns ```Option<TModelResponse, ApizrException<TModelResponse>>``` where ```TModelResponse``` mapped from ```TApiResponse```
 
-Also, you'll be able to send queries and commands from anywhere, among:
+> **NOTE - Mapping**:
+> When I say "mapped", I talk about the mapping integration feature
+>
+> Please refer to AutoMapper section for more info
+
+Or with crud api interfaces:
 - ```ReadOptionalQuery<T>```: get the T entity with int and returns ```Option<T, ApizrException<T>>```
 - ```ReadOptionalQuery<T, TKey>```: get the T entity with TKey and returns ```Option<T, ApizrException<T>>```
 - ```ReadAllOptionalQuery<TReadAllResult>```: get TReadAllResult with IDictionary<string, object> optional query parameters and returns ```Option<TReadAllResult, ApizrException<TReadAllResult>>```
@@ -637,40 +692,77 @@ Also, you'll be able to send queries and commands from anywhere, among:
 - ```DeleteOptionalCommand<T>```: delete the T entity with int and returns ```Option<Unit, ApizrException>```
 - ```DeleteOptionalCommand<T, TKey>```: delete the T entity with TKey and returns ```Option<Unit, ApizrException>```
 
+There's also a typed optional mediator available for each api interface (classic or crud), to help you write things shorter.
+
+With classic api interfaces, resolving ```IOptionalMediator<TWebApi>``` give you access to:
+- ```SendFor(YOUR_API_METHOD_EXPRESSION)```: send an ```ExecuteOptionalRequest<TWebApi>``` for you
+- ```SendFor<TApiResponse>(YOUR_API_METHOD_EXPRESSION)```: send an ```ExecuteOptionalRequest<TWebApi, TApiResponse>``` for you
+- ```SendFor<TModelResponse, TApiResponse>(YOUR_API_METHOD_EXPRESSION)```: send an ```ExecuteOptionalRequest<TWebApi, TModelResponse, TApiResponse>``` for you
+
+With crud api interfaces, resolving ```ICrudOptionalMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>``` give you access to:
+- ```SendReadOptionalQuery(TApiEntityKey key)```: send a ```ReadOptionalQuery<TApiEntity, TApiEntityKey>``` for you
+- ```SendReadOptionalQuery<TModelEntity>(TApiEntityKey key)```: send a ```ReadOptionalQuery<TModelEntity, TApiEntityKey>``` for you, with ```TModelEntity``` mapped with ```TApiEntity```
+- ```SendReadAllOptionalQuery()```: send a ```ReadAllOptionalQuery<TReadAllResult>``` for you
+- ```SendReadAllOptionalQuery<TModelEntityReadAllResult>()```: send a ```ReadAllOptionalQuery<TModelEntityReadAllResult>``` for you, with ```TModelEntityReadAllResult``` mapped with ```TReadAllResult```
+- ```SendCreateOptionalCommand(TApiEntity payload)```: send a ```CreateOptionalCommand<TApiEntity>``` for you
+- ```SendCreateOptionalCommand<TModelEntity>(TModelEntity payload)```: send a ```CreateOptionalCommand<TModelEntity>``` for you, with ```TModelEntity``` mapped with ```TApiEntity```
+- ```SendUpdateOptionalCommand(TApiEntityKey key, TApiEntity payload)```: send an ```UpdateOptionalCommand<TApiEntityKey, TApiEntity>``` for you
+- ```SendUpdateOptionalCommand<TModelEntity>(TApiEntityKey key, TModelEntity payload)```: send an ```UpdateOptionalCommand<TApiEntityKey, TModelEntity>``` for you, with ```TModelEntity``` mapped with ```TApiEntity```
+- ```SendDeleteOptionalCommand(TApiEntityKey key)```: send a ```DeleteOptionalCommand<TApiEntity, TApiEntityKey>``` for you
+
 Apizr will intercept it and handle it to send the result back to you, thanks to MediatR and Optional.
 
-From there, our ViewModel can look like:
+From there, our ViewModel can look like (only one interface necessary in real world):
 ```csharp
 public class YourViewModel
 {
     private readonly IMediator _mediator;
+    private readonly IOptionalMediator<IReqResService> _reqResOptionalMediator;
+    private readonly ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> _userOptionalMediator;
 	
-    public YouViewModel(IMediator mediator)
+    public YouViewModel(IMediator mediator, 
+        IOptionalMediator<IReqResService> reqResOptionalMediator,
+        ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> userOptionalMediator)
     {
 		_mediator = mediator;
+       _reqResOptionalMediator = reqResOptionalMediator;
+       _userOptionalMediator = userOptionalMediator;
     }
     
     public ObservableCollection<User>? Users { get; set; }
 
+    // This won't compile obviously
+    // It's an example presenting all ways to play with Optional
+    // You should choose one of these ways
     private async Task GetUsersAsync()
     {
-        // The classic api interface way with Optional
-        //var optionalUserList = await _mediator.Send(new ExecuteOptionalRequest<IReqResService, UserList>((ct, api) => api.GetUsersAsync(ct)), CancellationToken.None);
-        //optionalPagedResult.Match(userList =>
-        //{
-        //    if (userList.Data != null && userList.Data.Any())
-        //        Users = new ObservableCollection<User>(userList.Data);
-        //}, e =>
-        //{
-        //    var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
-        //    UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+        // The classic api interface way with mediator and optional request
+        var optionalUserList = await _mediator.Send(new ExecuteOptionalRequest<IReqResService, UserList>((ct, api) => api.GetUsersAsync(ct)), CancellationToken.None);
+        
+        // The classic api interface way with typed optional mediator (the same but shorter)
+        var optionalUserList = await _reqResOptionalMediator.SendFor(api => api.GetUsersAsync());
 
-        //    if (e.CachedResult?.Data != null && e.CachedResult.Data.Any())
-        //        Users = new ObservableCollection<User>(e.CachedResult.Data);
-        //});
+        // Handling the optional result for both previous ways
+        optionalPagedResult.Match(userList =>
+        {
+            if (userList.Data != null && userList.Data.Any())
+                Users = new ObservableCollection<User>(userList.Data);
+        }, e =>
+        {
+            var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
+            UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+
+            if (e.CachedResult?.Data != null && e.CachedResult.Data.Any())
+                Users = new ObservableCollection<User>(e.CachedResult.Data);
+        });
             
-        // The crud api interface way with Optional
+        // The crud api interface way with mediator and optional request
         var optionalPagedResult = await _mediator.Send(new ReadAllOptionalQuery<PagedResult<User>>(), CancellationToken.None);
+        
+        // The crud api interface way with typed crud optional mediator
+        var optionalPagedResult = await _userOptionalMediator.SendReadAllOptionalQuery();
+        
+        // Handling the optional result for both previous ways
         optionalPagedResult.Match(pagedUsers =>
         {
             if (pagedUsers.Data != null && pagedUsers.Data.Any())
@@ -690,6 +782,84 @@ public class YourViewModel
 Same advantages than classic mediation but with exception handling.
 Both "classic" and "optional" mediation are compatibles with each other.
 It means that if you call both methods during registration, both request collection will be available, so you can decide wich one suits to you when you need it.
+
+#### OnResultAsync
+
+Optional and MediatR are pretty cool.
+
+But even if we use the typed optional mediator or typed crud optional mediator to get things shorter, we still have to deal with the result boilerplate:
+```csharp
+// The classic api interface way with typed optional mediator (the same but shorter)
+var optionalUserList = await _reqResOptionalMediator.SendFor(api => api.GetUsersAsync());
+
+// Handling the optional result for both previous ways
+optionalPagedResult.Match(userList =>
+{
+    if (userList.Data != null && userList.Data.Any())
+        Users = new ObservableCollection<User>(userList.Data);
+}, e =>
+{
+    var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
+    UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+
+    if (e.CachedResult?.Data != null && e.CachedResult.Data.Any())
+        Users = new ObservableCollection<User>(e.CachedResult.Data);
+});
+```
+
+Let's cut down the optional result handling thing, to get something as short as we can.
+
+```OnResultAsync``` is an extension method to handle optional result fluently.
+It ask you to provide one of these parameters:
+- ```Action<TResult> onResult```: this action will be invoked just before throwing any exception that might have occurred during request execution
+- ```Func<TResult, ApizrException<TResult>, bool> onResult```: this function will be invoked with the returned result and potential occurred exception
+- ```Func<TResult, ApizrException<TResult>, Task<bool>> onResult```: this function will be invoked async with the returned result and potential occurred exception
+
+All give you a result returned from fetch if succeed, or cache if failed.
+The main goal here is to set any binded property with the returned result (fetched or cached), no matter of exceptions.
+Then the Action will let the exception throw, where the Func will let you decide to throw manually or return a success boolean flag.
+
+Here is what our final request looks like with Action (auto throwing after invocation on excpetion):
+```csharp
+await _reqResOptionalMediator.SendFor(api => api.GetUsersAsync()).OnResultAsync(userList => { users = userList?.Data; });
+```
+
+Or with Func and throw:
+```csharp
+await _reqResOptionalMediator.SendFor(api => api.GetUsersAsync()).OnResultAsync((userList, exception) => 
+{ 
+    users = userList?.Data; 
+    
+    if(exception != null)
+        throw exception;
+
+    return true;
+});
+```
+
+Or with Func and success flag:
+```csharp
+var success = await _reqResOptionalMediator.SendFor(api => api.GetUsersAsync()).OnResultAsync((userList, exception) => 
+{ 
+    users = userList?.Data; 
+    
+    return exception != null;
+});
+```
+
+We could combine the first two with [AsyncErrorHandler](https://github.com/Fody/AsyncErrorHandler), to catch them all globally and show any information dialog to the user, like:
+```csharp
+public static class AsyncErrorHandler
+{
+    public static void HandleException(Exception exception)
+    {
+        var message = exception  is IOException || exception.InnerException is IOException ? "No network" : (exception.Message ?? "Error");
+        UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+
+        Log.Write(exception);
+    }
+}
+```
 
 ### AutoMapper
 

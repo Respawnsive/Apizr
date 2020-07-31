@@ -230,7 +230,7 @@ namespace Apizr.Sample.Console
                 {
                     //var optionalUserList = await _mediator.Send(new ExecuteOptionalRequest<IReqResService, UserList>((ct, api) => api.GetUsersAsync(ct)), CancellationToken.None);
                     //var optionalUserList = await _reqResMediator.SendFor((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
-                    var success = await _reqResOptionalMediator.SendFor(api => api.GetUsersAsync()).OnResultAsync(result => { users = result?.Data; });
+                    await _reqResOptionalMediator.SendFor(api => api.GetUsersAsync()).OnResultAsync(result => { users = result?.Data; });
                     //var optionalPagedUsers = await _mediator.Send(new ReadAllOptionalQuery<PagedResult<User>>(), CancellationToken.None);
                     var optionalPagedUsers = await _userOptionalMediator.SendReadAllOptionalQuery();
                     optionalPagedUsers.Match(some => pagedUsers = some, none => throw none);

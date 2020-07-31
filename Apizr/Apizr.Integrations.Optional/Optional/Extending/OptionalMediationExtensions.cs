@@ -7,10 +7,17 @@ namespace Apizr.Optional.Extending
 {
     public static class OptionalMediationExtensions
     {
-        public static Task<bool> OnResultAsync<TResult>(
+        /// <summary>
+        /// The action will be invoked just before throwing any exception that might have occurred during request execution
+        /// </summary>
+        /// <typeparam name="TResult">The returned result (from fetch if succeed or cache if failed)</typeparam>
+        /// <param name="option"></param>
+        /// <param name="onResult">The action to invoke</param>
+        /// <returns></returns>
+        public static Task OnResultAsync<TResult>(
             this Task<Option<TResult, ApizrException<TResult>>> option, Action<TResult> onResult)
         {
-            var onResultFactory = new Func<TResult, Exception, Task<bool>>((result, exception) =>
+            var onResultFactory = new Func<TResult, ApizrException<TResult>, Task<bool>>((result, exception) =>
             {
                 onResult.Invoke(result);
 
@@ -21,32 +28,39 @@ namespace Apizr.Optional.Extending
                 none => OnNoneAsync(none, onResultFactory, true));
         }
 
+        /// <summary>
+        /// The function will be invoked with the returned result and potential occurred exception.
+        /// You might decide to throw from the function itself, or to return the success boolean.
+        /// </summary>
+        /// <typeparam name="TResult">The returned result (from fetch if succeed or cache if failed)</typeparam>
+        /// <param name="option"></param>
+        /// <param name="onResult">The function to invoke</param>
+        /// <returns></returns>
         public static Task<bool> OnResultAsync<TResult>(
-            this Task<Option<TResult, ApizrException<TResult>>> option, Func<TResult, bool> onResult)
-            => OnResultAsync(option, (result, exception) => Task.FromResult(onResult.Invoke(result)));
-
-        public static Task<bool> OnResultAsync<TResult>(
-            this Task<Option<TResult, ApizrException<TResult>>> option, Func<TResult, Task<bool>> onResult)
-            => OnResultAsync(option, (result, exception) => onResult.Invoke(result));
-
-        public static Task<bool> OnResultAsync<TResult>(
-            this Task<Option<TResult, ApizrException<TResult>>> option, Func<TResult, Exception, bool> onResult)
+            this Task<Option<TResult, ApizrException<TResult>>> option, Func<TResult, ApizrException<TResult>, bool> onResult)
             => OnResultAsync(option, (result, exception) => Task.FromResult(onResult.Invoke(result, exception)));
 
+        /// <summary>
+        /// The function will be invoked with the returned result and potential occurred exception.
+        /// Checking exception, you might decide to throw it from the function itself, or to return the success boolean.
+        /// </summary>
+        /// <typeparam name="TResult">The returned result (from fetch if succeed or cache if failed)</typeparam>
+        /// <param name="option"></param>
+        /// <param name="onResult">The function to invoke</param>
         public static Task<bool> OnResultAsync<TResult>(
-            this Task<Option<TResult, ApizrException<TResult>>> option, Func<TResult, Exception, Task<bool>> onResult)
+            this Task<Option<TResult, ApizrException<TResult>>> option, Func<TResult, ApizrException<TResult>, Task<bool>> onResult)
         {
             return option.MatchAsync(some => OnSomeAsync(some, onResult),
                 none => OnNoneAsync(none, onResult, false));
         }
 
-        private static Task<bool> OnSomeAsync<TResult>(TResult result, Func<TResult, Exception, Task<bool>> onResult)
+        private static Task<bool> OnSomeAsync<TResult>(TResult result, Func<TResult, ApizrException<TResult>, Task<bool>> onResult)
         {
             return onResult.Invoke(result, null);
         }
 
         private static Task<bool> OnNoneAsync<TResult>(ApizrException<TResult> exception,
-            Func<TResult, Exception, Task<bool>> onResult, bool throwsOnException)
+            Func<TResult, ApizrException<TResult>, Task<bool>> onResult, bool throwsOnException)
         {
             try
             {

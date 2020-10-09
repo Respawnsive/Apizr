@@ -9,6 +9,7 @@ using Apizr.Requesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
+[assembly: Apizr.Preserve]
 namespace Apizr
 {
     public static class ServiceCollectionExtensions

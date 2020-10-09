@@ -15,6 +15,20 @@ namespace Apizr
     public interface IApizrExtendedOptionsBuilder : IApizrOptionsBuilderBase<IApizrExtendedOptions, IApizrExtendedOptionsBuilder>
     {
         /// <summary>
+        /// Provide a custom HttpClientHandler
+        /// </summary>
+        /// <param name="httpClientHandler">An <see cref="HttpClientHandler"/> instance</param>
+        /// <returns></returns>
+        IApizrExtendedOptionsBuilder WithHttpClientHandler(HttpClientHandler httpClientHandler);
+
+        /// <summary>
+        /// Provide a custom HttpClientHandler
+        /// </summary>
+        /// <param name="httpClientHandlerFactory">An <see cref="HttpClientHandler"/> instance factory</param>
+        /// <returns></returns>
+        IApizrExtendedOptionsBuilder WithHttpClientHandler(Func<IServiceProvider, HttpClientHandler> httpClientHandlerFactory);
+
+        /// <summary>
         /// Adjust some HttpClient settings
         /// </summary>
         /// <param name="httpClientBuilder">The HttpClient builder</param>

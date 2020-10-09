@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using Apizr.Caching;
@@ -17,6 +16,7 @@ using Polly;
 using Polly.Registry;
 using Refit;
 
+[assembly: Apizr.Preserve]
 namespace Apizr
 {
     public static class Apizr
@@ -166,11 +166,9 @@ namespace Apizr
             {
                 var httpHandlerFactory = new Func<HttpMessageHandler>(() =>
                 {
+                    var httpClientHandler = apizrOptions.HttpClientHandlerFactory.Invoke();
                     var logHandler = apizrOptions.LogHandlerFactory.Invoke();
-                    var handlerBuilder = new HttpHandlerBuilder(new HttpClientHandler
-                    {
-                        AutomaticDecompression = apizrOptions.DecompressionMethods
-                    }, new HttpTracerLogWrapper(logHandler));
+                    var handlerBuilder = new HttpHandlerBuilder(httpClientHandler, new HttpTracerLogWrapper(logHandler));
                     handlerBuilder.HttpTracerHandler.Verbosity = apizrOptions.HttpTracerVerbosity;
 
                     if (apizrOptions.PolicyRegistryKeys != null && apizrOptions.PolicyRegistryKeys.Any())
@@ -241,8 +239,7 @@ namespace Apizr
 
             var webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
 
-            var builder = new ApizrOptionsBuilder(new ApizrOptions(webApiType, baseAddress,
-                webApiAttribute?.DecompressionMethods ?? DecompressionMethods.None, traceAttribute?.Verbosity, assemblyPolicyAttribute?.RegistryKeys,
+            var builder = new ApizrOptionsBuilder(new ApizrOptions(webApiType, baseAddress, traceAttribute?.Verbosity, assemblyPolicyAttribute?.RegistryKeys,
                 webApiPolicyAttribute?.RegistryKeys));
 
             optionsBuilder?.Invoke(builder);

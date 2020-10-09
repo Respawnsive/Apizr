@@ -3,7 +3,7 @@ Refit based web api client management, but resilient (retry, connectivity, cache
 
 ## Libraries
 
-[Change Log - July 31, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
+[Change Log - Oct 09, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
 
 |Project|NuGet|
 |-------|-----|

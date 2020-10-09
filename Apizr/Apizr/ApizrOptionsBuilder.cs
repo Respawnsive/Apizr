@@ -33,16 +33,19 @@ namespace Apizr
             return this;
         }
 
-        public IApizrOptionsBuilder WithDecompressionMethods(DecompressionMethods decompressionMethods)
+        public IApizrOptionsBuilder WithHttpTracing(HttpMessageParts httpTracerVerbosity)
         {
-            Options.DecompressionMethods = decompressionMethods;
+            Options.HttpTracerVerbosity = httpTracerVerbosity;
 
             return this;
         }
 
-        public IApizrOptionsBuilder WithHttpTracing(HttpMessageParts httpTracerVerbosity)
+        public IApizrOptionsBuilder WithHttpClientHandler(HttpClientHandler httpClientHandler)
+            => WithHttpClientHandler(() => httpClientHandler);
+
+        public IApizrOptionsBuilder WithHttpClientHandler(Func<HttpClientHandler> httpClientHandlerFactory)
         {
-            Options.HttpTracerVerbosity = httpTracerVerbosity;
+            Options.HttpClientHandlerFactory = httpClientHandlerFactory;
 
             return this;
         }

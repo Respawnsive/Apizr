@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Integrations.MonkeyCache;
@@ -55,6 +57,9 @@ namespace Apizr.Sample.Console
         // With a crud optional mediator dedicated to an entity (getting things shorter)
         private static ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> _userOptionalMediator;
 
+        // Playing with cookies
+        public static CookieContainer CookieContainer = new CookieContainer();
+
 
         /*
          * Using examples
@@ -96,11 +101,11 @@ namespace Apizr.Sample.Console
             {
                 Barrel.ApplicationId = nameof(Program);
 
-                _reqResManager = Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(registry)
+                _reqResManager = Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithHttpClientHandler(new HttpClientHandler{AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithPolicyRegistry(registry)
                     .WithCacheHandler(
                         () => new MonkeyCacheHandler(Barrel.Current)));
 
-                _userManager = Apizr.CrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users")
+                _userManager = Apizr.CrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer })
                     .WithPolicyRegistry(registry)
                     .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
                     .WithHttpTracing(HttpTracer.HttpMessageParts.All));
@@ -118,7 +123,7 @@ namespace Apizr.Sample.Console
                 if (configChoice <= 2)
                 {
                     // Manual registration
-                    services.AddApizrFor<IReqResService>(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All));
+                    services.AddApizrFor<IReqResService>(optionsBuilder => optionsBuilder.WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All));
 
                     // Auto assembly detection and registration
                     //services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
@@ -129,7 +134,7 @@ namespace Apizr.Sample.Console
                         //services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>());
 
                         // Auto assembly detection and registration
-                        services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
+                        services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
                     }
                 }
                 else

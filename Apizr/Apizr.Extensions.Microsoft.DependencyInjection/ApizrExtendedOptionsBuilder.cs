@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
-using Apizr.Requesting;
 using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
-using Polly.Registry;
 using Refit;
 
 namespace Apizr
@@ -37,16 +32,19 @@ namespace Apizr
             return this;
         }
 
-        public IApizrExtendedOptionsBuilder WithDecompressionMethods(DecompressionMethods decompressionMethods)
+        public IApizrExtendedOptionsBuilder WithHttpTracing(HttpMessageParts httpTracerVerbosity)
         {
-            Options.DecompressionMethods = decompressionMethods;
+            Options.HttpTracerVerbosity = httpTracerVerbosity;
 
             return this;
         }
 
-        public IApizrExtendedOptionsBuilder WithHttpTracing(HttpMessageParts httpTracerVerbosity)
+        public IApizrExtendedOptionsBuilder WithHttpClientHandler(HttpClientHandler httpClientHandler)
+            => WithHttpClientHandler(_ => httpClientHandler);
+
+        public IApizrExtendedOptionsBuilder WithHttpClientHandler(Func<IServiceProvider, HttpClientHandler> httpClientHandlerFactory)
         {
-            Options.HttpTracerVerbosity = httpTracerVerbosity;
+            Options.HttpClientHandlerFactory = httpClientHandlerFactory;
 
             return this;
         }

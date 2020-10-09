@@ -16,6 +16,11 @@ namespace Apizr
     public interface IApizrOptions : IApizrOptionsBase
     {
         /// <summary>
+        /// HttpClientHandler factory
+        /// </summary>
+        Func<HttpClientHandler> HttpClientHandlerFactory { get; }
+
+        /// <summary>
         /// Policy registry factory
         /// </summary>
         Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; }

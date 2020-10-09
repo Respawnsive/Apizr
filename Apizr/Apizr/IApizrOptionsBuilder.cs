@@ -20,6 +20,20 @@ namespace Apizr
     public interface IApizrOptionsBuilder : IApizrOptionsBuilderBase<IApizrOptions, IApizrOptionsBuilder>
     {
         /// <summary>
+        /// Provide a custom HttpClientHandler
+        /// </summary>
+        /// <param name="httpClientHandler">An <see cref="HttpClientHandler"/> instance</param>
+        /// <returns></returns>
+        IApizrOptionsBuilder WithHttpClientHandler(HttpClientHandler httpClientHandler);
+
+        /// <summary>
+        /// Provide a custom HttpClientHandler
+        /// </summary>
+        /// <param name="httpClientHandlerFactory">An <see cref="HttpClientHandler"/> instance factory</param>
+        /// <returns></returns>
+        IApizrOptionsBuilder WithHttpClientHandler(Func<HttpClientHandler> httpClientHandlerFactory);
+
+        /// <summary>
         /// Provide your own <see cref="AuthenticationHandlerBase"/> implementation
         /// </summary>
         /// <typeparam name="TAuthenticationHandler">Your <see cref="AuthenticationHandlerBase"/> implementation</typeparam>

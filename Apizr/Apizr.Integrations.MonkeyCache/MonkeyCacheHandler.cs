@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Apizr.Caching;
 using MonkeyCache;
 
+[assembly: Apizr.Preserve]
 namespace Apizr.Integrations.MonkeyCache
 {
     public class MonkeyCacheHandler : ICacheHandler

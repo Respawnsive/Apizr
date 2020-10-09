@@ -1,3 +1,16 @@
+1.6
+---
+
+- [Fix] Preserve attribute added
+
+### Apizr
+
+- [New] Now we can provide a custom HttpClientHandler instance
+
+### Apizr.Extensions.Microsoft.DependencyInjection
+
+- [New] Now we can provide a custom HttpClientHandler instance
+
 1.5
 ---
 

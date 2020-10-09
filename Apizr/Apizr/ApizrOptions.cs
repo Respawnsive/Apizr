@@ -14,10 +14,12 @@ namespace Apizr
 {
     public class ApizrOptions : ApizrOptionsBase, IApizrOptions
     {
-        public ApizrOptions(Type webApiType, Uri baseAddress, DecompressionMethods decompressionMethods,
+        public ApizrOptions(Type webApiType, Uri baseAddress,
             HttpMessageParts? httpTracerVerbosity, string[] assemblyPolicyRegistryKeys,
-            string[] webApiPolicyRegistryKeys) : base(webApiType, baseAddress, decompressionMethods, httpTracerVerbosity, assemblyPolicyRegistryKeys, webApiPolicyRegistryKeys)
+            string[] webApiPolicyRegistryKeys) : base(webApiType, baseAddress, httpTracerVerbosity,
+            assemblyPolicyRegistryKeys, webApiPolicyRegistryKeys)
         {
+            HttpClientHandlerFactory = () => new HttpClientHandler();
             PolicyRegistryFactory = () => new PolicyRegistry();
             RefitSettingsFactory = () => new RefitSettings();
             ConnectivityHandlerFactory = () => new VoidConnectivityHandler();
@@ -27,6 +29,7 @@ namespace Apizr
             DelegatingHandlersFactories = new List<Func<ILogHandler, DelegatingHandler>>();
         }
 
+        public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
         public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set;  }
         public Func<RefitSettings> RefitSettingsFactory { get; set; }
         public Func<IConnectivityHandler> ConnectivityHandlerFactory { get; set; }

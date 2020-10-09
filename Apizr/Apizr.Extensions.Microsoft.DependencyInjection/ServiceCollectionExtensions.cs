@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using Apizr.Caching;
@@ -20,6 +19,7 @@ using Polly.Registry;
 using Refit;
 using HttpRequestMessageExtensions = Apizr.Policing.HttpRequestMessageExtensions;
 
+[assembly: Apizr.Preserve]
 namespace Apizr
 {
     public static class ServiceCollectionExtensions
@@ -487,11 +487,9 @@ namespace Apizr
                 var builder = services.AddHttpClient(ForType(apizrOptions.WebApiType, priority))
                     .ConfigurePrimaryHttpMessageHandler(serviceProvider =>
                     {
+                        var httpClientHandler = apizrOptions.HttpClientHandlerFactory.Invoke(serviceProvider);
                         var logHandler = serviceProvider.GetRequiredService<ILogHandler>();
-                        var handlerBuilder = new HttpHandlerBuilder(new HttpClientHandler
-                        {
-                            AutomaticDecompression = apizrOptions.DecompressionMethods
-                        }, new HttpTracerLogWrapper(logHandler));
+                        var handlerBuilder = new HttpHandlerBuilder(httpClientHandler, new HttpTracerLogWrapper(logHandler));
                         handlerBuilder.HttpTracerHandler.Verbosity = apizrOptions.HttpTracerVerbosity;
 
                         if (apizrOptions.PolicyRegistryKeys != null && apizrOptions.PolicyRegistryKeys.Any())
@@ -609,8 +607,7 @@ namespace Apizr
 
             var webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
 
-            var builder = new ApizrExtendedOptionsBuilder(new ApizrExtendedOptions(webApiType, apizrManagerType, baseAddress,
-                webApiAttribute?.DecompressionMethods ?? DecompressionMethods.None, traceAttribute?.Verbosity, assemblyPolicyAttribute?.RegistryKeys,
+            var builder = new ApizrExtendedOptionsBuilder(new ApizrExtendedOptions(webApiType, apizrManagerType, baseAddress, traceAttribute?.Verbosity, assemblyPolicyAttribute?.RegistryKeys,
                 webApiPolicyAttribute?.RegistryKeys));
 
             optionsBuilder?.Invoke(builder);

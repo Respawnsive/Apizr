@@ -24,6 +24,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Optional;
 using Refit;
 
+[assembly: Apizr.Preserve]
 namespace Apizr
 {
     public static class ApizrExtendedOptionsBuilderExtensions

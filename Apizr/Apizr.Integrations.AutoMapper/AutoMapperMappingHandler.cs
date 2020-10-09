@@ -2,6 +2,7 @@
 using Apizr.Mapping;
 using AutoMapper;
 
+[assembly: Apizr.Preserve]
 namespace Apizr
 {
     public class AutoMapperMappingHandler : IMappingHandler

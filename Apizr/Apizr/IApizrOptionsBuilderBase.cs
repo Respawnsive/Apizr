@@ -24,13 +24,6 @@ namespace Apizr
         TApizrOptionsBuilder WithBaseAddress(string baseAddress);
 
         /// <summary>
-        /// Define decompression methods (could be defined with WebApiAttribute)
-        /// </summary>
-        /// <param name="decompressionMethods">Decompression methods</param>
-        /// <returns></returns>
-        TApizrOptionsBuilder WithDecompressionMethods(DecompressionMethods decompressionMethods);
-
-        /// <summary>
         /// Define http tracer verbosity (could be defined with TraceAttribute)
         /// </summary>
         /// <param name="httpTracerVerbosity">Http tracer verbosity</param>

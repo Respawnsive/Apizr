@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Net.Http;
 using HttpTracer;
 
 namespace Apizr
@@ -18,11 +19,6 @@ namespace Apizr
         /// Web api base address
         /// </summary>
         Uri BaseAddress { get; }
-
-        /// <summary>
-        /// HttpClient decompression methods
-        /// </summary>
-        DecompressionMethods DecompressionMethods { get; }
 
         /// <summary>
         /// Request tracing verbosity

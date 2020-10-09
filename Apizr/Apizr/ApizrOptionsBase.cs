@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using HttpTracer;
 
 namespace Apizr
 {
     public abstract class ApizrOptionsBase : IApizrOptionsBase
     {
-        protected ApizrOptionsBase(Type webApiType, Uri baseAddress, DecompressionMethods decompressionMethods,
+        protected ApizrOptionsBase(Type webApiType, Uri baseAddress,
             HttpMessageParts? httpTracerVerbosity, string[] assemblyPolicyRegistryKeys,
             string[] webApiPolicyRegistryKeys)
         {
             WebApiType = webApiType;
             BaseAddress = baseAddress;
-            DecompressionMethods = decompressionMethods;
             HttpTracerVerbosity = httpTracerVerbosity ?? HttpMessageParts.None;
             PolicyRegistryKeys =
                 assemblyPolicyRegistryKeys?.Union(webApiPolicyRegistryKeys ?? Array.Empty<string>()).ToArray() ??
@@ -22,7 +22,6 @@ namespace Apizr
 
         public Type WebApiType { get; }
         public Uri BaseAddress { get; set; }
-        public DecompressionMethods DecompressionMethods { get; set; }
         public HttpMessageParts HttpTracerVerbosity { get; set; }
         public string[] PolicyRegistryKeys { get; }
     }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Akavache;
 using Apizr.Caching;
 
+[assembly: Apizr.Preserve]
 namespace Apizr
 {
     public class AkavacheCacheHandler : ICacheHandler

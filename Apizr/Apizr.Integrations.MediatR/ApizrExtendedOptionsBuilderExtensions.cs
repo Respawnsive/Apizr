@@ -19,6 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Refit;
 
+[assembly: Apizr.Preserve]
 namespace Apizr
 {
     public static class ApizrExtendedOptionsBuilderExtensions

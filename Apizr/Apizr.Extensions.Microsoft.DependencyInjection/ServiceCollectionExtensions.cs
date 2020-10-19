@@ -482,7 +482,11 @@ namespace Apizr
 
             var webApiFriendlyName = webApiType.GetFriendlyName();
             var apizrOptions = CreateApizrExtendedOptions(webApiType, apizrManagerType, optionsBuilder);
-            foreach (var priority in ((Priority[])Enum.GetValues(typeof(Priority))).Where(x => x != Priority.Explicit).OrderBy(priority => priority))
+            var priorities = apizrOptions.IsPriorityManagementEnabled
+                ? ((Priority[])Enum.GetValues(typeof(Priority))).Where(x => x != Priority.Explicit).OrderBy(priority => priority)
+                : ((Priority[])Enum.GetValues(typeof(Priority))).Where(x => x == Priority.UserInitiated);
+
+            foreach (var priority in priorities)
             {
                 var builder = services.AddHttpClient(ForType(apizrOptions.WebApiType, priority))
                     .ConfigurePrimaryHttpMessageHandler(serviceProvider =>
@@ -543,7 +547,9 @@ namespace Apizr
                             handlerBuilder.AddHandler(delegatingHandlerExtendedFactory.Invoke(serviceProvider));
 
                         var innerHandler = handlerBuilder.Build();
-                        var primaryMessageHandler = new RateLimitedHttpMessageHandler(innerHandler, priority);
+                        var primaryMessageHandler = apizrOptions.IsPriorityManagementEnabled
+                            ? new RateLimitedHttpMessageHandler(innerHandler, priority)
+                            : innerHandler;
 
                         return primaryMessageHandler;
                     })
@@ -607,7 +613,7 @@ namespace Apizr
 
             var webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
 
-            var builder = new ApizrExtendedOptionsBuilder(new ApizrExtendedOptions(webApiType, apizrManagerType, baseAddress, traceAttribute?.Verbosity, assemblyPolicyAttribute?.RegistryKeys,
+            var builder = new ApizrExtendedOptionsBuilder(new ApizrExtendedOptions(webApiType, apizrManagerType, baseAddress, traceAttribute?.Verbosity, webApiAttribute?.IsPriorityManagementEnabled, assemblyPolicyAttribute?.RegistryKeys,
                 webApiPolicyAttribute?.RegistryKeys));
 
             optionsBuilder?.Invoke(builder);

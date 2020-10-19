@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Net;
-using System.Net.Http;
 using HttpTracer;
 
 namespace Apizr
@@ -24,6 +22,11 @@ namespace Apizr
         /// Request tracing verbosity
         /// </summary>
         HttpMessageParts HttpTracerVerbosity { get; }
+
+        /// <summary>
+        /// Fusillade priority management activation
+        /// </summary>
+        bool IsPriorityManagementEnabled { get; }
 
         /// <summary>
         /// Policy keys from the registry

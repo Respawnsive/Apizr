@@ -40,6 +40,13 @@ namespace Apizr
             return this;
         }
 
+        public IApizrOptionsBuilder WithPriorityManagement(bool isPriorityManagementEnabled)
+        {
+            Options.IsPriorityManagementEnabled = isPriorityManagementEnabled;
+
+            return this;
+        }
+
         public IApizrOptionsBuilder WithHttpClientHandler(HttpClientHandler httpClientHandler)
             => WithHttpClientHandler(() => httpClientHandler);
 

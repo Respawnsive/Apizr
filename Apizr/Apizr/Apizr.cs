@@ -162,7 +162,11 @@ namespace Apizr
         {
             var apizrOptions = CreateApizrOptions<TWebApi>(optionsBuilder);
             var lazyWebApis = new List<ILazyPrioritizedWebApi<TWebApi>>();
-            foreach (var priority in ((Priority[])Enum.GetValues(typeof(Priority))).Where(x => x != Priority.Explicit).OrderBy(priority => priority))
+            var priorities = apizrOptions.IsPriorityManagementEnabled
+                ? ((Priority[]) Enum.GetValues(typeof(Priority))).Where(x => x != Priority.Explicit).OrderBy(priority => priority)
+                : ((Priority[]) Enum.GetValues(typeof(Priority))).Where(x => x == Priority.UserInitiated);
+
+            foreach (var priority in priorities)
             {
                 var httpHandlerFactory = new Func<HttpMessageHandler>(() =>
                 {
@@ -209,7 +213,9 @@ namespace Apizr
                         handlerBuilder.AddHandler(delegatingHandlersFactory.Invoke(logHandler));
 
                     var innerHandler = handlerBuilder.Build();
-                    var primaryMessageHandler = new RateLimitedHttpMessageHandler(innerHandler, priority);
+                    var primaryMessageHandler = apizrOptions.IsPriorityManagementEnabled
+                        ? new RateLimitedHttpMessageHandler(innerHandler, priority)
+                        : innerHandler;
 
                     return primaryMessageHandler;
                 });
@@ -239,7 +245,8 @@ namespace Apizr
 
             var webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
 
-            var builder = new ApizrOptionsBuilder(new ApizrOptions(webApiType, baseAddress, traceAttribute?.Verbosity, assemblyPolicyAttribute?.RegistryKeys,
+            var builder = new ApizrOptionsBuilder(new ApizrOptions(webApiType, baseAddress, traceAttribute?.Verbosity,
+                webApiAttribute?.IsPriorityManagementEnabled, assemblyPolicyAttribute?.RegistryKeys,
                 webApiPolicyAttribute?.RegistryKeys));
 
             optionsBuilder?.Invoke(builder);

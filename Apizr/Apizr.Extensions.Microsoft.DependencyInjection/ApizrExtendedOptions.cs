@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Net.Http;
 using Apizr.Caching;
 using Apizr.Connecting;
@@ -16,9 +15,10 @@ namespace Apizr
     public class ApizrExtendedOptions : ApizrOptionsBase, IApizrExtendedOptions
     {
         public ApizrExtendedOptions(Type webApiType, Type apizrManagerType, Uri baseAddress,
-            HttpMessageParts? httpTracerVerbosity, string[] assemblyPolicyRegistryKeys,
+            HttpMessageParts? httpTracerVerbosity, bool? isPriorityManagementEnabled,
+            string[] assemblyPolicyRegistryKeys,
             string[] webApiPolicyRegistryKeys) : base(webApiType, baseAddress,
-            httpTracerVerbosity, assemblyPolicyRegistryKeys, webApiPolicyRegistryKeys)
+            httpTracerVerbosity, isPriorityManagementEnabled, assemblyPolicyRegistryKeys, webApiPolicyRegistryKeys)
         {
             ApizrManagerType = apizrManagerType;
             HttpClientHandlerFactory = _ => new HttpClientHandler();

@@ -3,7 +3,7 @@ Refit based web api client management, but resilient (retry, connectivity, cache
 
 ## Libraries
 
-[Change Log - Oct 09, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
+[Change Log - Oct 19, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
 
 |Project|NuGet|
 |-------|-----|
@@ -72,6 +72,9 @@ You'll find a sample Xamarin.Forms app browsing code, implementing Apizr with Sh
 > The included XF sample now use DryIoc to illustrate it.
 > 
 > I'll remove this note when fixed
+> 
+> **UPDATE: Fixed with Prism.Container.Extensions v8+ packages**
+> (Let note there until public nuget release)
 
 You'll find another sample app but .Net Core console this time, implementing Apizr without anything else (static) and also with MS DI (extensions).
 
@@ -542,6 +545,9 @@ services.AddMediatR(typeof(Startup));
 >
 >services.AddMediatR(typeof(Startup));
 >```
+> 
+> **UPDATE: Fixed with Prism.Container.Extensions v8+ packages**
+> (Let note there until public nuget release)
 
 When activated, you don't have to inject/resolve anything else than an ```IMediator``` instance, in order to play with your api services (both classic and crud).
 Everything you need to do then, is sending your request calling:

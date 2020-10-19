@@ -1,3 +1,16 @@
+1.7
+---
+
+### Apizr
+
+- [New] Now we can toggle Fusillade priority management activation
+- [New] Now we can provide a base uri factory (e.g. depending on config)
+
+### Apizr.Extensions.Microsoft.DependencyInjection
+
+- [New] Now we can toggle Fusillade priority management activation
+- [New] Now we can provide a base uri factory (e.g. depending on DI resovled settings)
+
 1.6
 ---
 

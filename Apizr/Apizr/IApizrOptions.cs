@@ -16,6 +16,11 @@ namespace Apizr
     public interface IApizrOptions : IApizrOptionsBase
     {
         /// <summary>
+        /// Base address factory
+        /// </summary>
+        Func<Uri> BaseAddressFactory { get; }
+
+        /// <summary>
         /// HttpClientHandler factory
         /// </summary>
         Func<HttpClientHandler> HttpClientHandlerFactory { get; }

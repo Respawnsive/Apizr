@@ -24,6 +24,13 @@ namespace Apizr
         TApizrOptionsBuilder WithBaseAddress(string baseAddress);
 
         /// <summary>
+        /// Define your web api base address (could be defined with WebApiAttribute)
+        /// </summary>
+        /// <param name="baseAddress">Your web api base address</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithBaseAddress(Uri baseAddress);
+
+        /// <summary>
         /// Define http tracer verbosity (could be defined with TraceAttribute)
         /// </summary>
         /// <param name="httpTracerVerbosity">Http tracer verbosity</param>

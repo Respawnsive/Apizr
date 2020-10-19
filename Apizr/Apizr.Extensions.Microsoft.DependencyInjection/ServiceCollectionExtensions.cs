@@ -557,10 +557,11 @@ namespace Apizr
                         (client, serviceProvider) =>
                         {
                             if (client.BaseAddress == null)
-                                if(apizrOptions.BaseAddress != null)
-                                    client.BaseAddress = apizrOptions.BaseAddress;
-                                else
+                            {
+                                client.BaseAddress = apizrOptions.BaseAddressFactory.Invoke(serviceProvider);
+                                if(client.BaseAddress == null)
                                     throw new ArgumentNullException(nameof(client.BaseAddress), $"You must provide a valid web api uri with the {nameof(WebApiAttribute)} or the options builder");
+                            }
 
                             return Prioritize.TypeFor(apizrOptions.WebApiType, priority)
                                 .GetConstructor(new[] {typeof(Func<object>)})

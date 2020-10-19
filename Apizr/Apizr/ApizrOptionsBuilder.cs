@@ -28,7 +28,31 @@ namespace Apizr
         public IApizrOptionsBuilder WithBaseAddress(string baseAddress)
         {
             if (Uri.TryCreate(baseAddress, UriKind.RelativeOrAbsolute, out var baseUri))
-                Options.BaseAddress = baseUri;
+                Options.BaseAddressFactory = () => baseUri;
+
+            return this;
+        }
+
+        public IApizrOptionsBuilder WithBaseAddress(Uri baseAddress)
+        {
+            Options.BaseAddressFactory = () => baseAddress;
+
+            return this;
+        }
+
+        public IApizrOptionsBuilder WithBaseAddress(Func<string> baseAddressFactory)
+        {
+            Options.BaseAddressFactory = () =>
+                Uri.TryCreate(baseAddressFactory.Invoke(), UriKind.RelativeOrAbsolute, out var baseUri)
+                    ? baseUri
+                    : null;
+
+            return this;
+        }
+
+        public IApizrOptionsBuilder WithBaseAddress(Func<Uri> baseAddressFactory)
+        {
+            Options.BaseAddressFactory = baseAddressFactory;
 
             return this;
         }

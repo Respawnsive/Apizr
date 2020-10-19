@@ -20,6 +20,20 @@ namespace Apizr
     public interface IApizrOptionsBuilder : IApizrOptionsBuilderBase<IApizrOptions, IApizrOptionsBuilder>
     {
         /// <summary>
+        /// Define your web api base address (could be defined with WebApiAttribute)
+        /// </summary>
+        /// <param name="baseAddressFactory">Your web api base address factory</param>
+        /// <returns></returns>
+        IApizrOptionsBuilder WithBaseAddress(Func<string> baseAddressFactory);
+
+        /// <summary>
+        /// Define your web api base address (could be defined with WebApiAttribute)
+        /// </summary>
+        /// <param name="baseAddressFactory">Your web api base address factory</param>
+        /// <returns></returns>
+        IApizrOptionsBuilder WithBaseAddress(Func<Uri> baseAddressFactory);
+
+        /// <summary>
         /// Provide a custom HttpClientHandler
         /// </summary>
         /// <param name="httpClientHandler">An <see cref="HttpClientHandler"/> instance</param>

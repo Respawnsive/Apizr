@@ -17,10 +17,11 @@ namespace Apizr
         public ApizrExtendedOptions(Type webApiType, Type apizrManagerType, Uri baseAddress,
             HttpMessageParts? httpTracerVerbosity, bool? isPriorityManagementEnabled,
             string[] assemblyPolicyRegistryKeys,
-            string[] webApiPolicyRegistryKeys) : base(webApiType, baseAddress,
+            string[] webApiPolicyRegistryKeys) : base(webApiType,
             httpTracerVerbosity, isPriorityManagementEnabled, assemblyPolicyRegistryKeys, webApiPolicyRegistryKeys)
         {
             ApizrManagerType = apizrManagerType;
+            BaseAddressFactory = _ => baseAddress;
             HttpClientHandlerFactory = _ => new HttpClientHandler();
             RefitSettingsFactory = _ => new RefitSettings();
             ConnectivityHandlerType = typeof(VoidConnectivityHandler);
@@ -39,6 +40,7 @@ namespace Apizr
         public Type CacheHandlerType { get; set; }
         public Type LogHandlerType { get; set; }
         public Type MappingHandlerType { get; set; }
+        public Func<IServiceProvider, Uri> BaseAddressFactory { get; set; }
         public Func<IServiceProvider, HttpClientHandler> HttpClientHandlerFactory { get; set; }
         public Func<IServiceProvider, RefitSettings> RefitSettingsFactory { get; set; }
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }

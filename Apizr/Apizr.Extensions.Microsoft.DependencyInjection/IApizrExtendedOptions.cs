@@ -38,6 +38,11 @@ namespace Apizr
         Type MappingHandlerType { get; }
 
         /// <summary>
+        /// Base address factory
+        /// </summary>
+        Func<IServiceProvider, Uri> BaseAddressFactory { get; }
+
+        /// <summary>
         /// HttpClientHandler factory
         /// </summary>
         Func<IServiceProvider, HttpClientHandler> HttpClientHandlerFactory { get; }

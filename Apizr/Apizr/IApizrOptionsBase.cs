@@ -14,11 +14,6 @@ namespace Apizr
         Type WebApiType { get; }
 
         /// <summary>
-        /// Web api base address
-        /// </summary>
-        Uri BaseAddress { get; }
-
-        /// <summary>
         /// Request tracing verbosity
         /// </summary>
         HttpMessageParts HttpTracerVerbosity { get; }

@@ -220,7 +220,7 @@ namespace Apizr
                     return primaryMessageHandler;
                 });
 
-                var webApiFactory = new Func<object>(() => RestService.For<TWebApi>(new HttpClient(httpHandlerFactory.Invoke()) { BaseAddress = apizrOptions.BaseAddress }, apizrOptions.RefitSettingsFactory.Invoke()));
+                var webApiFactory = new Func<object>(() => RestService.For<TWebApi>(new HttpClient(httpHandlerFactory.Invoke()) { BaseAddress = apizrOptions.BaseAddressFactory.Invoke() }, apizrOptions.RefitSettingsFactory.Invoke()));
                 var lazyWebApi = Prioritize.For<TWebApi>(priority, webApiFactory);
                 lazyWebApis.Add(lazyWebApi);
             }

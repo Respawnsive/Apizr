@@ -16,10 +16,11 @@ namespace Apizr
         public ApizrOptions(Type webApiType, Uri baseAddress,
             HttpMessageParts? httpTracerVerbosity, bool? isPriorityManagementEnabled,
             string[] assemblyPolicyRegistryKeys,
-            string[] webApiPolicyRegistryKeys) : base(webApiType, baseAddress, httpTracerVerbosity,
+            string[] webApiPolicyRegistryKeys) : base(webApiType, httpTracerVerbosity,
             isPriorityManagementEnabled,
             assemblyPolicyRegistryKeys, webApiPolicyRegistryKeys)
         {
+            BaseAddressFactory = () => baseAddress;
             HttpClientHandlerFactory = () => new HttpClientHandler();
             PolicyRegistryFactory = () => new PolicyRegistry();
             RefitSettingsFactory = () => new RefitSettings();
@@ -30,6 +31,7 @@ namespace Apizr
             DelegatingHandlersFactories = new List<Func<ILogHandler, DelegatingHandler>>();
         }
 
+        public Func<Uri> BaseAddressFactory { get; set; }
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
         public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set;  }
         public Func<RefitSettings> RefitSettingsFactory { get; set; }

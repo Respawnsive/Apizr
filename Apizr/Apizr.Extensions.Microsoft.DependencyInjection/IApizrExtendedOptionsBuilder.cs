@@ -15,6 +15,20 @@ namespace Apizr
     public interface IApizrExtendedOptionsBuilder : IApizrOptionsBuilderBase<IApizrExtendedOptions, IApizrExtendedOptionsBuilder>
     {
         /// <summary>
+        /// Define your web api base address (could be defined with WebApiAttribute)
+        /// </summary>
+        /// <param name="baseAddressFactory">Your web api base address factory</param>
+        /// <returns></returns>
+        IApizrExtendedOptionsBuilder WithBaseAddress(Func<IServiceProvider, string> baseAddressFactory);
+
+        /// <summary>
+        /// Define your web api base address (could be defined with WebApiAttribute)
+        /// </summary>
+        /// <param name="baseAddressFactory">Your web api base address factory</param>
+        /// <returns></returns>
+        IApizrExtendedOptionsBuilder WithBaseAddress(Func<IServiceProvider, Uri> baseAddressFactory);
+
+        /// <summary>
         /// Provide a custom HttpClientHandler
         /// </summary>
         /// <param name="httpClientHandler">An <see cref="HttpClientHandler"/> instance</param>

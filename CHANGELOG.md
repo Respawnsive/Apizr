@@ -1,3 +1,10 @@
+1.8.1
+---
+
+### Apizr
+
+- [Fix] Parsing life span representation as TimeSpan from CacheAttribute
+
 1.8
 ---
 

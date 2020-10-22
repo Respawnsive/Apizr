@@ -43,10 +43,10 @@ namespace Apizr.Caching
         /// <summary>
         /// Cache with default GetAndFetch mode, no invalidation on error but with a specific lifetime
         /// </summary>
-        /// <param name="lifeSpan">This specific caching life time</param>
-        public CacheAttribute(TimeSpan lifeSpan)
+        /// <param name="lifeSpanRepresentation">TimeSpan representation to parse</param>
+        public CacheAttribute(string lifeSpanRepresentation)
         {
-            LifeSpan = lifeSpan;
+            LifeSpan = TimeSpan.Parse(lifeSpanRepresentation);
         }
 
         /// <summary>
@@ -62,11 +62,11 @@ namespace Apizr.Caching
         /// Cache with a specific cache and mode specific lifetime, but no invalidation on error
         /// </summary>
         /// <param name="mode">GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</param>
-        /// <param name="lifeSpan">This specific caching life time</param>
-        public CacheAttribute(CacheMode mode, TimeSpan lifeSpan)
+        /// <param name="lifeSpanRepresentation">TimeSpan representation to parse</param>
+        public CacheAttribute(CacheMode mode, string lifeSpanRepresentation)
         {
             Mode = mode;
-            LifeSpan = lifeSpan;
+            LifeSpan = TimeSpan.Parse(lifeSpanRepresentation);
         }
 
         /// <summary>
@@ -95,12 +95,12 @@ namespace Apizr.Caching
         /// Cache with a specific cache mode, a specific lifetime and invalidation on error
         /// </summary>
         /// <param name="mode">GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</param>
-        /// <param name="lifeSpan">This specific caching lifetime</param>
+        /// <param name="lifeSpanRepresentation">This specific caching lifetime</param>
         /// <param name="shouldInvalidateOnError">Should invalidate on error</param>
-        public CacheAttribute(CacheMode mode, TimeSpan lifeSpan, bool shouldInvalidateOnError)
+        public CacheAttribute(CacheMode mode, string lifeSpanRepresentation, bool shouldInvalidateOnError)
         {
             Mode = mode;
-            LifeSpan = lifeSpan;
+            LifeSpan = TimeSpan.Parse(lifeSpanRepresentation);
             ShouldInvalidateOnError = shouldInvalidateOnError;
         }
     }

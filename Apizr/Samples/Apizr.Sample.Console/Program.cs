@@ -217,7 +217,7 @@ namespace Apizr.Sample.Console
             try
             {
                 System.Console.WriteLine("");
-                //var userList = await _reqResService.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
+                //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
                 //users = userList?.Data;
                 PagedResult<User> pagedUsers = null;
                 if (configChoice <= 2)
@@ -227,7 +227,7 @@ namespace Apizr.Sample.Console
                 else if (configChoice == 3)
                 {
                     //var userList = await _mediator.Send(new ExecuteRequest<IReqResService, UserList>(api => api.GetUsersAsync()));
-                    var userList = await _reqResMediator.SendFor(api => api.GetUsersAsync());
+                    //var userList = await _reqResMediator.SendFor(api => api.GetUsersAsync());
                     //pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>(), CancellationToken.None);
                     pagedUsers = await _userMediator.SendReadAllQuery();
                 }

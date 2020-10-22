@@ -3,7 +3,7 @@ Refit based web api client management, but resilient (retry, connectivity, cache
 
 ## Libraries
 
-[Change Log - Oct 19, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
+[Change Log - Oct 22, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
 
 |Project|NuGet|
 |-------|-----|
@@ -789,7 +789,7 @@ Same advantages than classic mediation but with exception handling.
 Both "classic" and "optional" mediation are compatibles with each other.
 It means that if you call both methods during registration, both request collection will be available, so you can decide wich one suits to you when you need it.
 
-#### OnResultAsync
+#### Optional helper extentions
 
 Optional and MediatR are pretty cool.
 
@@ -815,8 +815,11 @@ optionalPagedResult.Match(userList =>
 
 Let's cut down the optional result handling thing, to get something as short as we can.
 
-```OnResultAsync``` is an extension method to handle optional result fluently.
-It ask you to provide one of these parameters:
+```OnResultAsync``` and ```CatchAsync``` are extension methods to handle optional result fluently.
+
+##### OnResultAsync
+
+```OnResultAsync``` ask you to provide one of these parameters:
 - ```Action<TResult> onResult```: this action will be invoked just before throwing any exception that might have occurred during request execution
 - ```Func<TResult, ApizrException<TResult>, bool> onResult```: this function will be invoked with the returned result and potential occurred exception
 - ```Func<TResult, ApizrException<TResult>, Task<bool>> onResult```: this function will be invoked async with the returned result and potential occurred exception
@@ -866,6 +869,29 @@ public static class AsyncErrorHandler
     }
 }
 ```
+
+##### CatchAsync
+
+```CatchAsync``` let you provide these parameters:
+- ```Action<Exception> onException```: this action will be invoked just before returning the result from cache if fetch failed. Useful to inform the user of the api call failure and that data comes from cache.
+- ```letThrowOnExceptionWithEmptyCache```: True to let it throw the inner exception in case of empty cache, False to handle it with ```onException``` action and return empty cache result (default: False)
+
+This one is to return result from fetch or cache, no matter of execption handled on the other side by an action callback to inform the user
+```csharp
+var users = await _reqResOptionalMediator.SendFor(api => api.GetUsersAsync()).CatchAsync(AsyncErrorHandler.HandleException, true);
+```
+
+Here we ask the api to get users and if it fails:
+- There's some cached data?
+  - AsyncErrorHandler will handle the exception to inform the user call just failed
+  - Apizr will return the previous result from cache
+- There's no cached data yet!
+  - ```letThrowOnExceptionWithEmptyCache``` is True? (wich is the case here)
+    - Apizr will throw the inner exception that will be catched further by AsyncErrorHander (this is its normal Fody usage)
+  - ```letThrowOnExceptionWithEmptyCache``` is False! (default)
+    - Apizr will return the empty cache data (null) wich has to be handled further
+
+Safe and shorter than ever!
 
 ### AutoMapper
 

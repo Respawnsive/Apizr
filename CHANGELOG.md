@@ -1,3 +1,10 @@
+1.8
+---
+
+### Apizr.Integrations.Optional
+
+- [New] Introducing CatchAsync optional extension method to return result from fetch or cache, no matter of execption handled on the other side by an action callback to inform the user
+
 1.7
 ---
 

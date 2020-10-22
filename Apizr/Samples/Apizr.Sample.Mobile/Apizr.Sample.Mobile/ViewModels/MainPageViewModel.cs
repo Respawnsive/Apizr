@@ -137,13 +137,19 @@ namespace Apizr.Sample.Mobile.ViewModels
             //});
 
             // The same as before but with fluent result handling (fetched or cached, doesn't matter) and global exception handling (AsyncErrorHandler)
-            await _userOptionalMediator.SendReadAllOptionalQuery().OnResultAsync(pagedUsers =>
-            {
-                if (!pagedUsers.Data.IsEmpty())
-                    Users = new ObservableCollection<User>(pagedUsers.Data);
+            //await _userOptionalMediator.SendReadAllOptionalQuery().OnResultAsync(pagedUsers =>
+            //{
+            //    if (!pagedUsers.Data.IsEmpty())
+            //        Users = new ObservableCollection<User>(pagedUsers.Data);
 
-                IsRefreshing = false;
-            });
+            //    IsRefreshing = false;
+            //});
+
+            var pagedUsers = await _userOptionalMediator.SendReadAllOptionalQuery().CatchAsync(AsyncErrorHandler.HandleException);
+            if (!pagedUsers.Data.IsEmpty())
+                Users = new ObservableCollection<User>(pagedUsers.Data);
+
+            IsRefreshing = false;
 
             //IsRefreshing = false;
         }

@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Apizr.Mediation.Cruding.Base
 {
-    public abstract class DeleteCommandBase<T, TKey, TResponse> : CommandBase<TKey, TResponse>
+    public abstract class DeleteCommandBase<T, TKey, TResponse> : MediationCommandBase<TKey, TResponse>
     {
         protected DeleteCommandBase(TKey key, Priority priority = Priority.UserInitiated) : base(priority)
         {

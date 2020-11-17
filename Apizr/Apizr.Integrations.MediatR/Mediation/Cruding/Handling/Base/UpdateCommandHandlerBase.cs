@@ -10,7 +10,7 @@ namespace Apizr.Mediation.Cruding.Handling.Base
 {
     public abstract class UpdateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult> :
         CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>,
-        ICommandHandler<TCommand, TCommandResult>
+        IMediationCommandHandler<TCommand, TCommandResult>
         where TModelEntity : class
         where TApiEntity : class 
         where TCommand : UpdateCommandBase<TApiEntityKey, TModelEntity, TCommandResult>
@@ -24,7 +24,7 @@ namespace Apizr.Mediation.Cruding.Handling.Base
 
     public abstract class UpdateCommandHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, TCommand> : 
         CrudRequestHandlerBase<TApiEntity, int, TReadAllResult, TReadAllParams>,
-        ICommandHandler<TCommand, Unit>
+        IMediationCommandHandler<TCommand, Unit>
         where TModelEntity : class
         where TApiEntity : class 
         where TCommand : UpdateCommandBase<int, TModelEntity, Unit>
@@ -38,7 +38,7 @@ namespace Apizr.Mediation.Cruding.Handling.Base
 
     public abstract class UpdateCommandHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, TCommand, TCommandResult> : 
         CrudRequestHandlerBase<TApiEntity, int, TReadAllResult, TReadAllParams>,
-        ICommandHandler<TCommand, TCommandResult>
+        IMediationCommandHandler<TCommand, TCommandResult>
         where TModelEntity : class
         where TApiEntity : class 
         where TCommand : UpdateCommandBase<int, TModelEntity, TCommandResult>

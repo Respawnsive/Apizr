@@ -9,7 +9,7 @@ namespace Apizr.Mediation.Cruding.Handling.Base
 {
     public abstract class DeleteCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult> :
         CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>,
-        ICommandHandler<TCommand, TCommandResult>
+        IMediationCommandHandler<TCommand, TCommandResult>
         where TModelEntity : class
         where TApiEntity : class 
         where TCommand : DeleteCommandBase<TModelEntity, TApiEntityKey, TCommandResult>
@@ -23,7 +23,7 @@ namespace Apizr.Mediation.Cruding.Handling.Base
 
     public abstract class DeleteCommandHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, TCommand, TCommandResult> :
         CrudRequestHandlerBase<TApiEntity, int, TReadAllResult, TReadAllParams>,
-        ICommandHandler<TCommand, TCommandResult>
+        IMediationCommandHandler<TCommand, TCommandResult>
         where TModelEntity : class
         where TApiEntity : class
         where TCommand : DeleteCommandBase<TModelEntity, int, TCommandResult>

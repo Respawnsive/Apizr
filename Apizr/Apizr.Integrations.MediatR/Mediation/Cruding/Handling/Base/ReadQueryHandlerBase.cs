@@ -9,7 +9,7 @@ namespace Apizr.Mediation.Cruding.Handling.Base
 {
     public abstract class ReadQueryHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TQuery, TQueryResult> :
         CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>,
-        IQueryHandler<TQuery, TQueryResult>
+        IMediationQueryHandler<TQuery, TQueryResult>
         where TModelEntity : class 
         where TApiEntity : class 
         where TQuery : ReadQueryBase<TQueryResult, TApiEntityKey>
@@ -22,7 +22,7 @@ namespace Apizr.Mediation.Cruding.Handling.Base
     }
 
     public abstract class ReadQueryHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, TQuery, TQueryResult> : CrudRequestHandlerBase<TApiEntity, int, TReadAllResult, TReadAllParams>,
-        IQueryHandler<TQuery, TQueryResult> where TApiEntity : class where TQuery : ReadQueryBase<TQueryResult>
+        IMediationQueryHandler<TQuery, TQueryResult> where TApiEntity : class where TQuery : ReadQueryBase<TQueryResult>
     {
         protected ReadQueryHandlerBase(IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
         {

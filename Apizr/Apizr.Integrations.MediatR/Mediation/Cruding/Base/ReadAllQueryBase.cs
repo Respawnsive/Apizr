@@ -4,7 +4,7 @@ using Fusillade;
 
 namespace Apizr.Mediation.Cruding.Base
 {
-    public abstract class ReadAllQueryBase<TReadAllParams, TReadAllResult> : QueryBase<TReadAllResult>
+    public abstract class ReadAllQueryBase<TReadAllParams, TReadAllResult> : MediationQueryBase<TReadAllResult>
     {
         protected ReadAllQueryBase(TReadAllParams parameters, Priority priority = Priority.UserInitiated) : base(priority)
         {

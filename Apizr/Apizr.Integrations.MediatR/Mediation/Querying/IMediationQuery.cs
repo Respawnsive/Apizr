@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Apizr.Mediation.Querying
 {
-    public interface IQuery<out TResponse> : 
+    public interface IMediationQuery<out TResponse> : 
         IRequest<TResponse>
     {
     }

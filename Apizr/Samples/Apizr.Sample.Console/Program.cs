@@ -124,21 +124,21 @@ namespace Apizr.Sample.Console
 
                 if (configChoice <= 2)
                 {
-                    services.AddRefitClient<IReqResService>();
-                    //// Manual registration
-                    //services.AddApizrFor<IReqResService>(optionsBuilder => optionsBuilder.WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All));
+                    //services.AddRefitClient<IReqResService>();
+                    // Manual registration
+                    services.AddApizrFor<IReqResService>(optionsBuilder => optionsBuilder.WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All));
 
                     //// Auto assembly detection and registration
                     ////services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
 
-                    //if (configChoice == 2)
-                    //{
-                    //    // Manual registration
-                    //    //services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>());
+                    if (configChoice == 2)
+                    {
+                        // Manual registration
+                        //services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>());
 
-                    //    // Auto assembly detection and registration
-                    //    services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
-                    //}
+                        // Auto assembly detection and registration
+                        services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
+                    }
                 }
                 else
                 {
@@ -304,9 +304,9 @@ namespace Apizr.Sample.Console
                             LastName = userDetails.User.LastName,
                             Avatar = userDetails.User.Avatar,
                             Email = userDetails.User.Email,
-                            Company = userDetails.Ad.Company,
-                            Url = userDetails.Ad.Url,
-                            Text = userDetails.Ad.Text
+                            Company = userDetails.Ad?.Company,
+                            Url = userDetails.Ad?.Url,
+                            Text = userDetails.Ad?.Text
                         };
                     }
                     else

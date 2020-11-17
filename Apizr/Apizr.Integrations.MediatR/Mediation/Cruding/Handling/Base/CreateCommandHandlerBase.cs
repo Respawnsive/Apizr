@@ -10,7 +10,7 @@ namespace Apizr.Mediation.Cruding.Handling.Base
     public abstract class CreateCommandHandlerBase<TModelEntity, TApiEntity, TTApiEntityKey, TReadAllResult,
         TReadAllParams, TCommand, TCommandResult> :
         CrudRequestHandlerBase<TApiEntity, TTApiEntityKey, TReadAllResult, TReadAllParams>,
-        ICommandHandler<TCommand, TCommandResult> 
+        IMediationCommandHandler<TCommand, TCommandResult> 
         where TModelEntity : class
         where TApiEntity : class
         where TCommand : CreateCommandBase<TModelEntity, TCommandResult>

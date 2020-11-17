@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Apizr.Mediation.Cruding.Base
 {
-    public abstract class UpdateCommandBase<TKey, TPayload, TResponse> : CommandBase<TPayload, TResponse>
+    public abstract class UpdateCommandBase<TKey, TPayload, TResponse> : MediationCommandBase<TPayload, TResponse>
     {
         protected UpdateCommandBase(TKey key, TPayload payload, Priority priority = Priority.UserInitiated) : base(priority)
         {

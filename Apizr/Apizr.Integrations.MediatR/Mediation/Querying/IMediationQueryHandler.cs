@@ -3,9 +3,9 @@ using MediatR;
 
 namespace Apizr.Mediation.Querying
 {
-    public interface IQueryHandler<in TQuery, TResponse> :
+    public interface IMediationQueryHandler<in TQuery, TResponse> :
         IRequestHandler<TQuery, TResponse>
-        where TQuery : IQuery<TResponse>
+        where TQuery : IMediationQuery<TResponse>
     {
     }
 }

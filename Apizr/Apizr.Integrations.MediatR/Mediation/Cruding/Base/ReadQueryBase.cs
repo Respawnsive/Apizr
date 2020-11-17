@@ -3,7 +3,7 @@ using Fusillade;
 
 namespace Apizr.Mediation.Cruding.Base
 {
-    public abstract class ReadQueryBase<TResponse, TKey> : QueryBase<TResponse>
+    public abstract class ReadQueryBase<TResponse, TKey> : MediationQueryBase<TResponse>
     {
         protected ReadQueryBase(TKey key, Priority priority = Priority.UserInitiated) : base(priority)
         {

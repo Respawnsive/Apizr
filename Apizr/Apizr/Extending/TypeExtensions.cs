@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace Apizr
+namespace Apizr.Extending
 {
     public static class TypeExtensions
     {

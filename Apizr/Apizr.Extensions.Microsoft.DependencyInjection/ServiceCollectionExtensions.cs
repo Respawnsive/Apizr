@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Reflection;
 using Apizr.Caching;
 using Apizr.Connecting;
+using Apizr.Extending;
 using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Policing;

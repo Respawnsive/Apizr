@@ -15,6 +15,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Connecting;
+using Apizr.Extending;
 using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Policing;
@@ -843,9 +844,24 @@ namespace Apizr
             if (primaryKeyValue == null)
                 throw new InvalidOperationException($"{nameof(CacheKeyAttribute)} primary key found for: " + cacheKeyPrefix);
 
-            return string.IsNullOrWhiteSpace(primaryKeyValue.ToString())
-                ? $"{cacheKeyPrefix}()"
-                : $"{cacheKeyPrefix}({primaryKeyName}:{primaryKeyValue})";
+            // Simple param value OR complex type with overriden ToString
+            var value = primaryKeyValue.ToString();
+            if (!string.IsNullOrWhiteSpace(value) && value != primaryKeyValue.GetType().ToString())
+                return value.Contains(":")
+                    ? $"{cacheKeyPrefix}({value})"
+                    : $"{cacheKeyPrefix}({primaryKeyName}:{value})";
+            
+            // Dictionary param key values
+            if (primaryKeyValue is IDictionary<string, string> dictionary)
+                return $"{cacheKeyPrefix}({dictionary.ToString(":", ", ")})";
+
+            // Complex type param values without override
+            var parameters = primaryKeyValue.ToString(":", ", ");
+            if (!string.IsNullOrWhiteSpace(parameters))
+                return $"{cacheKeyPrefix}({parameters})";
+
+            // Default caching without param
+            return $"{cacheKeyPrefix}()";
         }
 
         private MethodCacheAttributes GetCacheAttribute<TResult>(Expression expression)

@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Logging;
@@ -23,5 +24,11 @@ namespace Apizr.Sample.Api
 
         [Post("/api/users")]
         Task<User> CreateUser(User user, CancellationToken cancellationToken);
+
+        [Get("/api/users")]
+        Task<UserList> GetUsersAsync([CacheKey] IDictionary<string, string> userIds, CancellationToken cancellationToken);
+
+        [Get("/api/users")]
+        Task<UserList> GetUsersAsync([CacheKey] ReadAllUsersParams parameters, CancellationToken cancellationToken);
     }
 }

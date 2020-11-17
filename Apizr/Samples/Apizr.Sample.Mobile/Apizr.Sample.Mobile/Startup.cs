@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Apizr.Extending;
 using Apizr.Policing;
 using Apizr.Sample.Api;
 using Apizr.Sample.Api.Models;

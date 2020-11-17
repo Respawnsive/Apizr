@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Extending;
 using Apizr.Integrations.MonkeyCache;
 using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Cruding.Sending;
@@ -27,6 +28,7 @@ using MonkeyCache.FileStore;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
+using Refit;
 
 namespace Apizr.Sample.Console
 {
@@ -122,20 +124,21 @@ namespace Apizr.Sample.Console
 
                 if (configChoice <= 2)
                 {
-                    // Manual registration
-                    services.AddApizrFor<IReqResService>(optionsBuilder => optionsBuilder.WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All));
+                    services.AddRefitClient<IReqResService>();
+                    //// Manual registration
+                    //services.AddApizrFor<IReqResService>(optionsBuilder => optionsBuilder.WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All));
 
-                    // Auto assembly detection and registration
-                    //services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
+                    //// Auto assembly detection and registration
+                    ////services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
 
-                    if (configChoice == 2)
-                    {
-                        // Manual registration
-                        //services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>());
+                    //if (configChoice == 2)
+                    //{
+                    //    // Manual registration
+                    //    //services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>());
 
-                        // Auto assembly detection and registration
-                        services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
-                    }
+                    //    // Auto assembly detection and registration
+                    //    services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
+                    //}
                 }
                 else
                 {
@@ -181,11 +184,11 @@ namespace Apizr.Sample.Console
 
                 // This is just to let you know what's registered from/for Apizr and ready to use
                 foreach (var service in services.Where(d =>
-                    (d.ServiceType != null && d.ServiceType.Assembly.FullName.Contains($"{nameof(Apizr)}")) ||
-                    (d.ImplementationType != null && d.ImplementationType.Assembly.FullName.Contains($"{nameof(Apizr)}"))))
+                    (d.ServiceType != null) ||
+                    (d.ImplementationType != null)))
                 {
                     System.Console.WriteLine(
-                        $"Registered service: {service.ServiceType?.GetFriendlyName()} - {service.ImplementationType?.GetFriendlyName()}");
+                        $"Registered {service.Lifetime} service: {service.ServiceType?.GetFriendlyName()} - {service.ImplementationType?.GetFriendlyName()}");
                 }
 
 
@@ -217,7 +220,8 @@ namespace Apizr.Sample.Console
             try
             {
                 System.Console.WriteLine("");
-                //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
+                //var test = new ReadAllUsersParams("value1", 2);
+                //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(test, ct), CancellationToken.None);
                 //users = userList?.Data;
                 PagedResult<User> pagedUsers = null;
                 if (configChoice <= 2)

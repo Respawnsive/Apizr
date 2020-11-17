@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Extending;
 using Apizr.Mapping;
 using Apizr.Optional.Requesting.Handling.Base;
 using MediatR;

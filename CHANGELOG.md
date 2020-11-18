@@ -1,3 +1,15 @@
+1.9
+---
+
+### Apizr
+
+- [New] Handling complex type as CacheKey
+- [New] Now we can set Apizr log level within TraceAttribute to manage execution tracing verbosity
+
+### Apizr.Integrations.MediatR
+
+- [Change] Mediation's ICommand interface renamed to IMediationCommand, avoiding conflict with System.Windows.Input.ICommand
+
 1.8.1
 ---
 

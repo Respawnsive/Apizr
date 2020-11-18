@@ -3,7 +3,7 @@ Refit based web api client management, but resilient (retry, connectivity, cache
 
 ## Libraries
 
-[Change Log - Oct 22, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
+[Change Log - Nov 19, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
 
 |Project|NuGet|
 |-------|-----|
@@ -48,7 +48,48 @@ It also comes with some handling interfaces to let you provide your own services
 - **Mapping** with IMappingHandler, wich comes with its default VoidMappingHandler (no mapping conversion), but also with:
   - AutoMapperMappingHandler: [AutoMapper](https://github.com/AutoMapper/AutoMapper) mapping method mapping interface (Integration package referenced above)
 
-## Getting started
+## How to:
+   - [Intro](#intro)
+   - [Classic APIs](#classic)
+     - [Defining](#classic-defining)
+     - [Registering](#classic-registering)
+       - [Static approach](#classic-static-approach)
+       - [Extensions approach](#classic-extensions-approach)
+         - [Manually](#classic-manually)
+         - [Automatically](#classic-automatically)
+     - [Using](#classic-using)
+   - [CRUD APIs](#crud)
+     - [Defining](#crud-defining)
+     - [Registering](#crud-registering)
+       - [Static approach](#crud-static-approach)
+       - [Extensions approach](#crud-extensions-approach)
+         - [Manually](#crud-manually)
+         - [Automatically](#crud-automatically)
+     - [Using](#crud-using)
+   - [Advanced configurations](#advanced-configurations)
+     - [Service handlers](#configuration-service-handlers)
+     - [Authentication DelegatingHandler](#configuration-authentication-delegatinghandler)
+     - [Custom DelegatingHandler](#configuration-custom-delegatinghandler)
+     - [Refit settings](#configuration-refit-settings)
+     - [Policy registry](#configuration-policy-registry)
+     - [HttpClient](#configuration-httpclient)
+   - [External integrations](#external-integrations)
+     - [Mediation](#mediation)
+     - [Optional](#optional)
+       - [Optional helper extentions](#optional-helper-extentions)
+         - [OnResultAsync](#optional-onresultasync)
+         - [CatchAsync](#optional-catchasync)
+     - [AutoMapper](#automapper)
+       - [AutoMapper with Crud apis](#automapper-with-crud-apis)
+         - [Manually](#automapper-crud-manually)
+         - [Automatically](#automapper-crud-automatically)
+         - [Using](#automapper-crud-using)
+       - [AutoMapper with classic apis](#automapper-with-classic-apis)
+         - [Using](#automapper-classic-using)
+
+<h2 id="intro">
+Intro
+</h2>
 
 Clearly inspired by [Refit.Insane.PowerPack](https://github.com/thefex/Refit.Insane.PowerPack) but extended with a lot more features, the goal of Apizr is to get all ready to use for web api requesting, with the more resiliency we can, but without the boilerplate.
 
@@ -80,7 +121,14 @@ You'll find another sample app but .Net Core console this time, implementing Api
 
 So please, take a look at the samples :)
 
-### Defining:
+<h2 id="classic">
+Classic APIs:
+</h2>
+
+<h3 id="classic-defining">
+Defining:
+</h3>
+
 We could define our web api service just like:
 ```csharp
 [assembly:Policy("TransientHttpError")]
@@ -105,11 +153,15 @@ And that's all.
 
 Every attributes here will inform Apizr on how to manage each web api request. No more boilerplate.
 
-### Registering
+<h3 id="classic-registering">
+Registering:
+</h3>
 
 As it's not mandatory to register anything in a container for DI purpose (you can use a static instance directly), I'll describe here how to use it with DI.
 
-#### Static approach
+<h4 id="classic-static-approach">
+Static approach:
+</h4>
 
 Somewhere where you can add services to your container, add the following:
 ```csharp
@@ -133,13 +185,17 @@ myContainer.SomeInstanceRegistrationMethod(Apizr.For<IReqResService>(optionsBuil
 
 I provided a policy registry and a cache handler here as I asked for it with cache and policy attributes in my web api example.
 
-#### Extensions approach
+<h4 id="classic-extensions-approach">
+Extensions approach:
+</h4>
 
 For this one, two options :
 - Manually: register calling ```AddApizrFor<TWebApi>``` service collection extension method or overloads for each service you want to manage
 - Automatically: decorate your services with WebApiAttribute and let Apizr auto register it all for you
 
-##### Manually
+<h5 id="classic-manually">
+Manually:
+</h5>
 
 Here is an example:
 ```csharp
@@ -166,7 +222,9 @@ public override void ConfigureServices(IServiceCollection services)
 }
 ```
 
-##### Automatically
+<h5 id="classic-automatically">
+Automatically:
+</h5>
 
 Decorate your api services like we did before (but with your own settings):
 ```csharp
@@ -203,7 +261,9 @@ public override void ConfigureServices(IServiceCollection services)
 There are 4 AddApizrFor/UseApizrFor flavors for classic automatic registration, depending on what you want to do and provide.
 This one is the simplest.
 
-### Using
+<h3 id="classic-using">
+Using:
+</h3>
 
 Sending web request from your app - e.g. using Apizr in a Xamarin.Forms mobile app.
 
@@ -245,7 +305,9 @@ public class YourViewModel
 I catch execution into an ApizrException as it will contain the original inner exception, but also the previously cached result if some.
 If you provided an IConnectivityHandler implementation and there's no network connectivity before sending request, Apizr will throw with an IO inner exception without sending the request.
 
-## CRUD
+<h2 id="crud">
+CRUD APIs:
+</h2>
 
 When playing with RESTful CRUD api, you've got a couple of options:
 - Define a web api interface like we just did before with each crud method (each entity into one interface or one interface for each entity)
@@ -253,7 +315,9 @@ When playing with RESTful CRUD api, you've got a couple of options:
 
 As the first option is described already, here we'll talk about the ICrudApi option
 
-### Defining
+<h3 id="crud-defining">
+Defining:
+</h3>
 
 As we'll use the built-in yet defined ICrudApi, there's no more definition to do.
 
@@ -292,9 +356,13 @@ About generic types:
 
 But again, nothing to do around here.
 
-### Registering
+<h3 id="crud-registering">
+Registering:
+</h3>
 
-#### Static approach
+<h4 id="crud-static-approach">
+Static approach:
+</h4>
 
 Somewhere where you can add services to your container, add the following:
 ```csharp
@@ -317,13 +385,17 @@ You have to provide the specific entity crud base uri with the options builder.
 There are 5 CrudFor flavors, depending on what you want to do and provide.
 One of it is the simple ```Apizr.CrudFor<T>()```, wich as you can expect, define TKey as ```int```, TReadAllResult as ```IEnumerable<T>``` and TReadAllParams as ```IDictionary<string, object>```.
 
-#### Extensions approach
+<h4 id="crud-extensions-approach">
+Extensions approach:
+</h4>
 
 Ok, for this one, two options again:
 - Manually: register calling AddApizrCrudFor<T, TKey, TReadAllResult, TReadAllParams> service collection extension method or overloads for each entity you want to manage
 - Automatically: decorate your entities with CrudEntityAttribute and let Apizr auto register it all for you
 
-##### Manually
+<h5 id="crud-manually">
+Manually:
+</h5>
 
 In your Startup class, add the following:
 ```csharp
@@ -352,7 +424,9 @@ You have to provide the specific entity crud base uri with the options builder.
 There are 10 AddApizrCrudFor/UseApizrCrudFor flavors for crud manual registration, depending on what you want to do and provide.
 One of it is the simple ```services.AddApizrCrudFor<T>()``` or ```services.UseApizrCrudFor<T>()```, wich as you can expect, define TKey as ```int```, TReadAllResult as ```IEnumerable<T>``` and TReadAllParams as ```IDictionary<string, object>```.
 
-##### Automatically
+<h5 id="crud-automatically">
+Automatically:
+</h5>
 
 You need to have access to your entity model classes for this option.
 
@@ -389,7 +463,9 @@ public override void ConfigureServices(IServiceCollection services)
 There are 4 AddApizrCrudFor/UseApizrCrudFor flavors for crud automatic registration, depending on what you want to do and provide.
 This is the simplest.
 
-### Using
+<h3 id="crud-using">
+Using:
+</h3>
 
 Sending web request from your app - e.g. using Apizr in a Xamarin.Forms mobile app.
 
@@ -431,7 +507,9 @@ public class YourViewModel
 I catch execution into an ApizrException as it will contain the original inner exception, but also the previously cached result if some.
 If you provided an IConnectivityHandler implementation and there's no network connectivity before sending request, Apizr will throw with an IO inner exception without sending the request.
 
-## Configuring
+<h2 id="advanced-configurations">
+Advanced configurations:
+</h2>
 
 There're some advanced scenarios where you want to adjust some settings and behaviors.
 This is where the options builder comes in.
@@ -440,7 +518,9 @@ Each registration approach comes with its optionsBuilder optional parameter:
 optionsBuilder => optionsBuilder.SomeOptionsHere(someParametersThere)
 ```
 
-### Service handlers
+<h3 id="configuration-service-handlers">
+Service handlers:
+</h3>
 
 The options builder let you provide your own method mapping implementations for:
 - ICacheHandler (thanks to WithCacheHandler)
@@ -448,15 +528,21 @@ The options builder let you provide your own method mapping implementations for:
 - IConnectivityHandler (thanks to WithConnectivityHandler)
 - IMappingHandler (thanks to WithMappingHandler).
 
-### Authentication DelegatingHandler
+<h3 id="configuration-authentication-delegatinghandler">
+Authentication DelegatingHandler:
+</h3>
 
 For autorized request calls, you can provide some properties and/or methods (thanks to WithAuthenticationHandler) to help Apizr to authenticate user when needed.
 
-### Custom DelegatingHandler
+<h3 id="configuration-custom-delegatinghandler">
+Custom DelegatingHandler:
+</h3>
 
 The options builder let you add any custom delegating handler thanks to AddDelegatingHandler method
 
-### RefitSettings
+<h3 id="configuration-refit-settings">
+Refit settings:
+</h3>
 
 You can adjust some specific Refit settings providing an instance of RefitSettings (thanks to WithRefitSettings).
 Note that for this one, only constructor parameters will be used (IContentSerializer, IUrlParameterFormatter and IFormUrlEncodedParameterFormatter).
@@ -465,7 +551,9 @@ Please don't use AuthorizationHeaderValueGetter, AuthorizationHeaderValueWithPar
 
 Prefer using WithAuthenticationHandler builder method to manage request authorization and AddDelegatingHandler builder method to add some other custom delegating handlers.
 
-### PolicyRegistry
+<h3 id="configuration-policy-registry">
+Policy registry:
+</h3>
 
 If you plan to use the PoliciesAttribute, Apizr needs to know where to find your policy registry:
 
@@ -494,14 +582,20 @@ var registry = new PolicyRegistry
 
 LoggedPolicies.OnLoggedRetry could also execute your own specific action if needed.
 
-### HttpClient
+<h3 id="configuration-httpclient">
+HttpClient:
+</h3>
 
 With extensions registration, you can adjust some more HttpClient settings thanks to ConfigureHttpClientBuilder builder method.
 This one could interfere with all Apizr http client auto configuration, so please use it with caution.
 
-## Advanced
+<h2 id="external-integrations">
+External integrations:
+</h2>
 
-### Mediation
+<h3 id="mediation">
+Mediation:
+</h3>
 
 In extensions registration approach and with the dedicated integration nuget package referenced, the options builder let you enable mediation by calling:
 ```csharp
@@ -655,7 +749,9 @@ public class YourViewModel
 }
 ```
 
-### Optional
+<h3 id="optional">
+Optional:
+</h3>
 
 In extensions registration approach and with the dedicated integration nuget package referenced, the options builder let you enable mediation with Optional result by calling:
 ```csharp
@@ -789,7 +885,9 @@ Same advantages than classic mediation but with exception handling.
 Both "classic" and "optional" mediation are compatibles with each other.
 It means that if you call both methods during registration, both request collection will be available, so you can decide wich one suits to you when you need it.
 
-#### Optional helper extentions
+<h4 id="optional-helper-extentions">
+Optional helper extentions:
+</h4>
 
 Optional and MediatR are pretty cool.
 
@@ -817,7 +915,9 @@ Let's cut down the optional result handling thing, to get something as short as 
 
 ```OnResultAsync``` and ```CatchAsync``` are extension methods to handle optional result fluently.
 
-##### OnResultAsync
+<h5 id="optional-onresultasync">
+OnResultAsync:
+</h5>
 
 ```OnResultAsync``` ask you to provide one of these parameters:
 - ```Action<TResult> onResult```: this action will be invoked just before throwing any exception that might have occurred during request execution
@@ -870,7 +970,9 @@ public static class AsyncErrorHandler
 }
 ```
 
-##### CatchAsync
+<h5 id="optional-catchasync">
+CatchAsync:
+</h5>
 
 ```CatchAsync``` let you provide these parameters:
 - ```Action<Exception> onException```: this action will be invoked just before returning the result from cache if fetch failed. Useful to inform the user of the api call failure and that data comes from cache.
@@ -893,15 +995,21 @@ Here we ask the api to get users and if it fails:
 
 Safe and shorter than ever!
 
-### AutoMapper
+<h3 id="automapper">
+AutoMapper:
+</h3>
 
 You can define your own model entities and then, your AutoMapper mapping profiles between api entities and model entities.
 
 Then, you have to tell Apizr wich entities must use the mapping feature.
 
-#### AutoMapper with Crud apis
+<h4 id="automapper-with-crud-apis">
+AutoMapper with Crud apis:
+</h4>
 
-##### Manually
+<h5 id="automapper-crud-manually">
+Manually:
+</h5>
 
 ```csharp
 services.AddApizrCrudFor<MappedEntity<TModelEntity, TApiEntity>>(optionsBuilder =>
@@ -923,7 +1031,9 @@ services.AddAutoMapper(typeof(Startup));
 > 
 >Same as previous note
 
-##### Automatically
+<h5 id="automapper-crud-automatically">
+Automatically:
+</h5>
 
 Why not let Apizr do it for you?
 To do so, you have do decorate one of those two entities (api vs model) with corresponding attribute:
@@ -952,7 +1062,9 @@ services.AddAutoMapper(typeof(Startup));
 > 
 >Same as previous note
 
-##### Using
+<h5 id="automapper-crud-using">
+Using:
+</h5>
 
 Nothing different here but direct using of your model entities when sending mediation requests, like:
 ```csharp
@@ -962,7 +1074,9 @@ var createdModelEntity = await _mediator.Send(new CreateCommand<TModelEntity>(my
 Apizr will map myModelEntity to TApiEntity, send it to the server, map the result to TModelEntity and send it back to you.
 And yes, it works also with Optional.
 
-#### AutoMapper with classic apis
+<h4 id="automapper-with-classic-apis">
+AutoMapper with classic apis:
+</h4>
 
 You have do decorate one among the api method, the model entity or the api entity with ```MappedWithAttribute```, with ```mappedWithType``` set to the other mapped entity.
 
@@ -980,7 +1094,9 @@ Don't forget to register AutoMapper itself as usual :
 services.AddAutoMapper(typeof(Startup));
 ```
 
-#### Using
+<h5 id="automapper-classic-using">
+Using:
+</h5>
 
 Nothing different here but direct using of your model entities when sending mediation requests, like:
 ```csharp

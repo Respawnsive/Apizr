@@ -15,10 +15,13 @@ namespace Apizr
     public class ApizrExtendedOptions : ApizrOptionsBase, IApizrExtendedOptions
     {
         public ApizrExtendedOptions(Type webApiType, Type apizrManagerType, Uri baseAddress,
-            HttpMessageParts? httpTracerVerbosity, bool? isPriorityManagementEnabled,
+            HttpMessageParts? httpTracerVerbosity,
+            ApizrLogLevel? apizrVerbosity,
+            bool? isPriorityManagementEnabled,
             string[] assemblyPolicyRegistryKeys,
             string[] webApiPolicyRegistryKeys) : base(webApiType,
-            httpTracerVerbosity, isPriorityManagementEnabled, assemblyPolicyRegistryKeys, webApiPolicyRegistryKeys)
+            httpTracerVerbosity, apizrVerbosity, isPriorityManagementEnabled, assemblyPolicyRegistryKeys,
+            webApiPolicyRegistryKeys)
         {
             ApizrManagerType = apizrManagerType;
             BaseAddressFactory = _ => baseAddress;

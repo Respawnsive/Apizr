@@ -506,7 +506,8 @@ namespace Apizr
                             }
                             catch (Exception)
                             {
-                                logHandler.Write(
+                                if (apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
+                                    logHandler.Write(
                                     $"Apizr - Global policies: You get some global policies but didn't register a {nameof(PolicyRegistry)} instance. Global policies will be ignored for  for {webApiFriendlyName} {priority} instance");
                             }
 
@@ -516,7 +517,8 @@ namespace Apizr
                                 {
                                     if (policyRegistry.TryGet<IsPolicy>(policyRegistryKey, out var registeredPolicy))
                                     {
-                                        logHandler.Write($"Apizr - Global policies: Found a policy with key {policyRegistryKey} for {webApiFriendlyName} {priority} instance");
+                                        if (apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
+                                            logHandler.Write($"Apizr - Global policies: Found a policy with key {policyRegistryKey} for {webApiFriendlyName} {priority} instance");
                                         if (registeredPolicy is IAsyncPolicy<HttpResponseMessage> registeredPolicyForHttpResponseMessage)
                                         {
                                             var policySelector =
@@ -528,15 +530,16 @@ namespace Apizr
                                                         return registeredPolicyForHttpResponseMessage;
                                                     });
                                             handlerBuilder.AddHandler(new PolicyHttpMessageHandler(policySelector));
-
-                                            logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} will be applied to {webApiFriendlyName} {priority} instance");
+                                            
+                                            if (apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
+                                                logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} will be applied to {webApiFriendlyName} {priority} instance");
                                         }
-                                        else
+                                        else if(apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
                                         {
                                             logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} is not of {typeof(IAsyncPolicy<HttpResponseMessage>)} type and will be ignored for {webApiType.GetFriendlyName()} {priority} instance");
                                         }
                                     }
-                                    else
+                                    else if (apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
                                     {
                                         logHandler.Write($"Apizr - Global policies: No policy found for key {policyRegistryKey} and will be ignored for  for {webApiFriendlyName} {priority} instance");
                                     }
@@ -615,7 +618,7 @@ namespace Apizr
 
             var webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
 
-            var builder = new ApizrExtendedOptionsBuilder(new ApizrExtendedOptions(webApiType, apizrManagerType, baseAddress, traceAttribute?.Verbosity, webApiAttribute?.IsPriorityManagementEnabled, assemblyPolicyAttribute?.RegistryKeys,
+            var builder = new ApizrExtendedOptionsBuilder(new ApizrExtendedOptions(webApiType, apizrManagerType, baseAddress, traceAttribute?.TrafficVerbosity, traceAttribute?.ApizrVerbosity, webApiAttribute?.IsPriorityManagementEnabled, assemblyPolicyAttribute?.RegistryKeys,
                 webApiPolicyAttribute?.RegistryKeys));
 
             optionsBuilder?.Invoke(builder);

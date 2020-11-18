@@ -14,9 +14,11 @@ namespace Apizr
     public class ApizrOptions : ApizrOptionsBase, IApizrOptions
     {
         public ApizrOptions(Type webApiType, Uri baseAddress,
-            HttpMessageParts? httpTracerVerbosity, bool? isPriorityManagementEnabled,
+            HttpMessageParts? httpTracerVerbosity,
+            ApizrLogLevel? apizrVerbosity,
+            bool? isPriorityManagementEnabled,
             string[] assemblyPolicyRegistryKeys,
-            string[] webApiPolicyRegistryKeys) : base(webApiType, httpTracerVerbosity,
+            string[] webApiPolicyRegistryKeys) : base(webApiType, httpTracerVerbosity, apizrVerbosity,
             isPriorityManagementEnabled,
             assemblyPolicyRegistryKeys, webApiPolicyRegistryKeys)
         {

@@ -38,6 +38,7 @@ namespace Apizr
         private readonly IMappingHandler _mappingHandler;
         private readonly IReadOnlyPolicyRegistry<string> _policyRegistry;
         private readonly string _webApiFriendlyName;
+        private readonly ApizrLogLevel _apizrLogLevel;
 
         public ApizrManager(IEnumerable<ILazyPrioritizedWebApi<TWebApi>> webApis, IConnectivityHandler connectivityHandler, ICacheHandler cacheHandler, ILogHandler logHandler, IMappingHandler mappingHandler, IReadOnlyPolicyRegistry<string> policyRegistry)
         {
@@ -49,6 +50,7 @@ namespace Apizr
             _policyRegistry = policyRegistry;
             _mappingHandler = mappingHandler;
             _webApiFriendlyName = typeof(TWebApi).GetFriendlyName();
+            _apizrLogLevel = typeof(TWebApi).GetTypeInfo().GetCustomAttribute<TraceAttribute>(true)?.ApizrVerbosity ?? ApizrLogLevel.None;
         }
 
         TWebApi GetWebApi(Priority priority) => _webApis.First(x => x.Priority == priority || x.Priority == Priority.UserInitiated).Value;
@@ -58,39 +60,45 @@ namespace Apizr
         {
             var methodCallExpression = GetMethodCallExpression<Unit>(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
-            _logHandler.Write($"Apizr: Calling method {methodName}");
+            if(_apizrLogLevel >= ApizrLogLevel.Low)
+                _logHandler.Write($"Apizr - {methodName}: Calling method");
 
             try
             {
-                if (_connectivityHandler is VoidConnectivityHandler)
+                if (_connectivityHandler is VoidConnectivityHandler && _apizrLogLevel == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity handler");
-                else if (!_connectivityHandler.IsConnected())
+                else if (!_connectivityHandler.IsConnected() && _apizrLogLevel >= ApizrLogLevel.Low)
                 {
                     _logHandler.Write($"Apizr - {methodName}: Connectivity check failed, throw {nameof(IOException)}");
                     throw new IOException("Connectivity check failed");
                 }
-                else
+                else if (_apizrLogLevel == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Connectivity check succeed");
 
                 var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression);
                 if (policy != null)
                 {
-                    _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
+                    if (_apizrLogLevel == ApizrLogLevel.High)
+                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
 
                     var pollyContext = new Context().WithLogHandler(_logHandler);
                     await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(GetWebApi(priority)), pollyContext);
                 }
                 else
                 {
-                    _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
+                    if (_apizrLogLevel == ApizrLogLevel.High)
+                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
 
                     await executeApiMethod.Compile()(GetWebApi(priority));
                 }
             }
             catch (Exception e)
             {
-                _logHandler.Write($"Apizr - {methodName}: Request throwed an exception with message {e.Message}");
-                _logHandler.Write($"Apizr - {methodName}: Throwing an {nameof(ApizrException)} with InnerException");
+                if (_apizrLogLevel >= ApizrLogLevel.Low)
+                {
+                    _logHandler.Write($"Apizr - {methodName}: Request throwed an exception with message {e.Message}");
+                    _logHandler.Write($"Apizr - {methodName}: Throwing an {nameof(ApizrException)} with InnerException");
+                }
 
                 throw new ApizrException(e, Unit.Default);
             }
@@ -100,39 +108,45 @@ namespace Apizr
         {
             var methodCallExpression = GetMethodCallExpression<Unit>(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
-            _logHandler.Write($"Apizr: Calling method {methodName}");
+            if (_apizrLogLevel >= ApizrLogLevel.Low)
+                _logHandler.Write($"Apizr - {methodName}: Calling method");
 
             try
             {
-                if (_connectivityHandler is VoidConnectivityHandler)
+                if (_connectivityHandler is VoidConnectivityHandler && _apizrLogLevel == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity handler");
-                else if (!_connectivityHandler.IsConnected())
+                else if (!_connectivityHandler.IsConnected() && _apizrLogLevel >= ApizrLogLevel.Low)
                 {
                     _logHandler.Write($"Apizr - {methodName}: Connectivity check failed, throw {nameof(IOException)}");
                     throw new IOException("Connectivity check failed");
                 }
-                else
+                else if (_apizrLogLevel == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Connectivity check succeed");
 
                 var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression);
                 if (policy != null)
                 {
-                    _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
+                    if (_apizrLogLevel == ApizrLogLevel.High)
+                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
 
                     var pollyContext = new Context().WithLogHandler(_logHandler);
                     await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(GetWebApi(priority), _mappingHandler), pollyContext);
                 }
                 else
                 {
-                    _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
+                    if (_apizrLogLevel == ApizrLogLevel.High)
+                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
 
                     await executeApiMethod.Compile()(GetWebApi(priority), _mappingHandler);
                 }
             }
             catch (Exception e)
             {
-                _logHandler.Write($"Apizr - {methodName}: Request throwed an exception with message {e.Message}");
-                _logHandler.Write($"Apizr - {methodName}: Throwing an {nameof(ApizrException)} with InnerException");
+                if (_apizrLogLevel >= ApizrLogLevel.Low)
+                {
+                    _logHandler.Write($"Apizr - {methodName}: Request throwed an exception with message {e.Message}");
+                    _logHandler.Write($"Apizr - {methodName}: Throwing an {nameof(ApizrException)} with InnerException");
+                }
 
                 throw new ApizrException(e, Unit.Default);
             }
@@ -143,39 +157,45 @@ namespace Apizr
         {
             var methodCallExpression = GetMethodCallExpression<Unit>(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
-            _logHandler.Write($"Apizr: Calling method {methodName}");
+            if (_apizrLogLevel >= ApizrLogLevel.Low)
+                _logHandler.Write($"Apizr - {methodName}: Calling method");
 
             try
             {
-                if (_connectivityHandler is VoidConnectivityHandler)
+                if (_connectivityHandler is VoidConnectivityHandler && _apizrLogLevel == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity handler");
-                else if (!_connectivityHandler.IsConnected())
+                else if (!_connectivityHandler.IsConnected() && _apizrLogLevel >= ApizrLogLevel.Low)
                 {
                     _logHandler.Write($"Apizr - {methodName}: Connectivity check failed, throw {nameof(IOException)}");
                     throw new IOException("Connectivity check failed");
                 }
-                else
+                else if (_apizrLogLevel == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Connectivity check succeed");
 
                 var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression);
                 if (policy != null)
                 {
-                    _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
+                    if (_apizrLogLevel == ApizrLogLevel.High)
+                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
 
                     var pollyContext = new Context().WithLogHandler(_logHandler);
                     await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, GetWebApi(priority)), pollyContext, cancellationToken);
                 }
                 else
                 {
-                    _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
+                    if (_apizrLogLevel == ApizrLogLevel.High)
+                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
 
                     await executeApiMethod.Compile()(cancellationToken, GetWebApi(priority));
                 }
             }
             catch (Exception e)
             {
-                _logHandler.Write($"Apizr - {methodName}: Request throwed an exception with message {e.Message}");
-                _logHandler.Write($"Apizr - {methodName}: Throwing an {nameof(ApizrException)} with InnerException");
+                if (_apizrLogLevel >= ApizrLogLevel.Low)
+                {
+                    _logHandler.Write($"Apizr - {methodName}: Request throwed an exception with message {e.Message}");
+                    _logHandler.Write($"Apizr - {methodName}: Throwing an {nameof(ApizrException)} with InnerException");
+                }
 
                 throw new ApizrException(e, Unit.Default);
             }
@@ -186,39 +206,45 @@ namespace Apizr
         {
             var methodCallExpression = GetMethodCallExpression<Unit>(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
-            _logHandler.Write($"Apizr: Calling method {methodName}");
+            if (_apizrLogLevel >= ApizrLogLevel.Low)
+                _logHandler.Write($"Apizr - {methodName}: Calling method");
 
             try
             {
-                if (_connectivityHandler is VoidConnectivityHandler)
+                if (_connectivityHandler is VoidConnectivityHandler && _apizrLogLevel == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity handler");
-                else if (!_connectivityHandler.IsConnected())
+                else if (!_connectivityHandler.IsConnected() && _apizrLogLevel >= ApizrLogLevel.Low)
                 {
                     _logHandler.Write($"Apizr - {methodName}: Connectivity check failed, throw {nameof(IOException)}");
                     throw new IOException("Connectivity check failed");
                 }
-                else
+                else if (_apizrLogLevel == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Connectivity check succeed");
 
                 var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression);
                 if (policy != null)
                 {
-                    _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
+                    if (_apizrLogLevel == ApizrLogLevel.High)
+                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
 
                     var pollyContext = new Context().WithLogHandler(_logHandler);
                     await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, GetWebApi(priority), _mappingHandler), pollyContext, cancellationToken);
                 }
                 else
                 {
-                    _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
+                    if (_apizrLogLevel == ApizrLogLevel.High)
+                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
 
                     await executeApiMethod.Compile()(cancellationToken, GetWebApi(priority), _mappingHandler);
                 }
             }
             catch (Exception e)
             {
-                _logHandler.Write($"Apizr - {methodName}: Request throwed an exception with message {e.Message}");
-                _logHandler.Write($"Apizr - {methodName}: Throwing an {nameof(ApizrException)} with InnerException");
+                if (_apizrLogLevel >= ApizrLogLevel.Low)
+                {
+                    _logHandler.Write($"Apizr - {methodName}: Request throwed an exception with message {e.Message}");
+                    _logHandler.Write($"Apizr - {methodName}: Throwing an {nameof(ApizrException)} with InnerException");
+                }
 
                 throw new ApizrException(e, Unit.Default);
             }
@@ -229,7 +255,8 @@ namespace Apizr
         {
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
-            _logHandler.Write($"Apizr - {methodName}: Calling method");
+            if (_apizrLogLevel >= ApizrLogLevel.Low)
+                _logHandler.Write($"Apizr - {methodName}: Calling method");
 
             string cacheKey = null;
             TResult result = default;
@@ -237,15 +264,17 @@ namespace Apizr
 
             if (IsMethodCacheable<TResult>(executeApiMethod))
             {
-                _logHandler.Write($"Apizr - {methodName}: Called method is cacheable");
-                if (_cacheHandler is VoidCacheHandler)
+                if (_apizrLogLevel == ApizrLogLevel.High)
+                    _logHandler.Write($"Apizr - {methodName}: Called method is cacheable");
+                if (_cacheHandler is VoidCacheHandler && _apizrLogLevel >= ApizrLogLevel.Low)
                     _logHandler.Write($"Apizr - {methodName}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
 
                 cacheKey = GetCacheKey<TResult>(executeApiMethod);
-                _logHandler.Write($"Apizr - {methodName}: Used cache key is {cacheKey}");
+                if (_apizrLogLevel == ApizrLogLevel.High)
+                    _logHandler.Write($"Apizr - {methodName}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.Get<TResult>(cacheKey);
-                if (!Equals(result, default(TResult)))
+                if (!Equals(result, default(TResult)) && _apizrLogLevel == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Some cached data found for this cache key");
 
                 cacheAttributes = GetCacheAttribute<TResult>(executeApiMethod);
@@ -255,38 +284,42 @@ namespace Apizr
             {
                 try
                 {
-                    if (_connectivityHandler is VoidConnectivityHandler)
+                    if (_connectivityHandler is VoidConnectivityHandler && _apizrLogLevel == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity handler");
-                    else if (!_connectivityHandler.IsConnected())
+                    else if (!_connectivityHandler.IsConnected() && _apizrLogLevel >= ApizrLogLevel.Low)
                     {
                         _logHandler.Write($"Apizr - {methodName}: Connectivity check failed, throw {nameof(IOException)}");
                         throw new IOException("Connectivity check failed");
                     }
-                    else
+                    else if (_apizrLogLevel == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Connectivity check succeed");
 
                     var policy = GetMethodPolicy<TResult>(executeApiMethod.Body as MethodCallExpression);
                     if (policy != null)
                     {
-
-                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
+                        if (_apizrLogLevel == ApizrLogLevel.High)
+                            _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
 
                         var pollyContext = new Context().WithLogHandler(_logHandler);
                         result = await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(GetWebApi(priority)), pollyContext);
                     }
                     else
                     {
-                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
+                        if (_apizrLogLevel == ApizrLogLevel.High)
+                            _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
 
                         result = await executeApiMethod.Compile()(GetWebApi(priority));
                     }
                 }
                 catch (Exception e)
                 {
-                    _logHandler.Write($"Apizr - {methodName}: Request throwed an exception with message {e.Message}");
-                    _logHandler.Write(!Equals(result, default(TResult))
-                        ? $"Apizr - {methodName}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
-                        : $"Apizr - {methodName}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
+                    if (_apizrLogLevel >= ApizrLogLevel.Low)
+                    {
+                        _logHandler.Write($"Apizr - {methodName}: Request throwed an exception with message {e.Message}");
+                        _logHandler.Write(!Equals(result, default(TResult))
+                            ? $"Apizr - {methodName}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
+                            : $"Apizr - {methodName}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
+                    }
 
                     throw new ApizrException<TResult>(e, result);
                 }
@@ -294,12 +327,16 @@ namespace Apizr
                 if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttributes != null)
                 {
-                    _logHandler.Write($"Apizr - {methodName}: Caching result");
+                    if (_apizrLogLevel == ApizrLogLevel.High)
+                        _logHandler.Write($"Apizr - {methodName}: Caching result");
+
                     await _cacheHandler.Set(cacheKey, result, cacheAttributes.CacheAttribute.LifeSpan);
                 }
             }
 
-            _logHandler.Write($"Apizr - {methodName}: Returning result");
+            if (_apizrLogLevel >= ApizrLogLevel.Low)
+                _logHandler.Write($"Apizr - {methodName}: Returning result");
+
             return result;
         }
 
@@ -307,7 +344,8 @@ namespace Apizr
         {
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
-            _logHandler.Write($"Apizr - {methodName}: Calling method");
+            if (_apizrLogLevel >= ApizrLogLevel.Low)
+                _logHandler.Write($"Apizr - {methodName}: Calling method");
 
             string cacheKey = null;
             TResult result = default;
@@ -315,15 +353,17 @@ namespace Apizr
 
             if (IsMethodCacheable<TResult>(executeApiMethod))
             {
-                _logHandler.Write($"Apizr - {methodName}: Called method is cacheable");
-                if (_cacheHandler is VoidCacheHandler)
+                if (_apizrLogLevel == ApizrLogLevel.High)
+                    _logHandler.Write($"Apizr - {methodName}: Called method is cacheable");
+                if (_cacheHandler is VoidCacheHandler && _apizrLogLevel >= ApizrLogLevel.Low)
                     _logHandler.Write($"Apizr - {methodName}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
 
                 cacheKey = GetCacheKey<TResult>(executeApiMethod);
-                _logHandler.Write($"Apizr - {methodName}: Used cache key is {cacheKey}");
+                if (_apizrLogLevel == ApizrLogLevel.High)
+                    _logHandler.Write($"Apizr - {methodName}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.Get<TResult>(cacheKey);
-                if (!Equals(result, default(TResult)))
+                if (!Equals(result, default(TResult)) && _apizrLogLevel == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Some cached data found for this cache key");
 
                 cacheAttributes = GetCacheAttribute<TResult>(executeApiMethod);
@@ -333,38 +373,42 @@ namespace Apizr
             {
                 try
                 {
-                    if (_connectivityHandler is VoidConnectivityHandler)
+                    if (_connectivityHandler is VoidConnectivityHandler && _apizrLogLevel == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity handler");
-                    else if (!_connectivityHandler.IsConnected())
+                    else if (!_connectivityHandler.IsConnected() && _apizrLogLevel >= ApizrLogLevel.Low)
                     {
                         _logHandler.Write($"Apizr - {methodName}: Connectivity check failed, throw {nameof(IOException)}");
                         throw new IOException("Connectivity check failed");
                     }
-                    else
+                    else if (_apizrLogLevel == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Connectivity check succeed");
 
                     var policy = GetMethodPolicy<TResult>(executeApiMethod.Body as MethodCallExpression);
                     if (policy != null)
                     {
-
-                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
+                        if (_apizrLogLevel == ApizrLogLevel.High)
+                            _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
 
                         var pollyContext = new Context().WithLogHandler(_logHandler);
                         result = await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(GetWebApi(priority), _mappingHandler), pollyContext);
                     }
                     else
                     {
-                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
+                        if (_apizrLogLevel == ApizrLogLevel.High)
+                            _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
 
                         result = await executeApiMethod.Compile()(GetWebApi(priority), _mappingHandler);
                     }
                 }
                 catch (Exception e)
                 {
-                    _logHandler.Write($"Apizr - {methodName}: Request throwed an exception with message {e.Message}");
-                    _logHandler.Write(!Equals(result, default(TResult))
-                        ? $"Apizr - {methodName}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
-                        : $"Apizr - {methodName}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
+                    if (_apizrLogLevel >= ApizrLogLevel.Low)
+                    {
+                        _logHandler.Write($"Apizr - {methodName}: Request throwed an exception with message {e.Message}");
+                        _logHandler.Write(!Equals(result, default(TResult))
+                            ? $"Apizr - {methodName}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
+                            : $"Apizr - {methodName}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
+                    }
 
                     throw new ApizrException<TResult>(e, result);
                 }
@@ -372,12 +416,16 @@ namespace Apizr
                 if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttributes != null)
                 {
-                    _logHandler.Write($"Apizr - {methodName}: Caching result");
+                    if (_apizrLogLevel == ApizrLogLevel.High)
+                        _logHandler.Write($"Apizr - {methodName}: Caching result");
+
                     await _cacheHandler.Set(cacheKey, result, cacheAttributes.CacheAttribute.LifeSpan);
                 }
             }
 
-            _logHandler.Write($"Apizr - {methodName}: Returning result");
+            if (_apizrLogLevel >= ApizrLogLevel.Low)
+                _logHandler.Write($"Apizr - {methodName}: Returning result");
+
             return result;
         }
 
@@ -386,7 +434,8 @@ namespace Apizr
         {
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
-            _logHandler.Write($"Apizr - {methodName}: Calling method");
+            if (_apizrLogLevel >= ApizrLogLevel.Low)
+                _logHandler.Write($"Apizr - {methodName}: Calling method");
 
             string cacheKey = null;
             TResult result = default;
@@ -394,15 +443,17 @@ namespace Apizr
 
             if (IsMethodCacheable<TResult>(executeApiMethod))
             {
-                _logHandler.Write($"Apizr - {methodName}: Called method is cacheable");
-                if (_cacheHandler is VoidCacheHandler)
+                if (_apizrLogLevel == ApizrLogLevel.High)
+                    _logHandler.Write($"Apizr - {methodName}: Called method is cacheable");
+                if (_cacheHandler is VoidCacheHandler && _apizrLogLevel >= ApizrLogLevel.Low)
                     _logHandler.Write($"Apizr - {methodName}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
 
                 cacheKey = GetCacheKey<TResult>(executeApiMethod);
-                _logHandler.Write($"Apizr - {methodName}: Used cache key is {cacheKey}");
+                if (_apizrLogLevel == ApizrLogLevel.High)
+                    _logHandler.Write($"Apizr - {methodName}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.Get<TResult>(cacheKey, cancellationToken);
-                if (!Equals(result, default(TResult)))
+                if (!Equals(result, default(TResult)) && _apizrLogLevel == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Some cached data found for this cache key");
 
                 cacheAttributes = GetCacheAttribute<TResult>(executeApiMethod);
@@ -412,38 +463,42 @@ namespace Apizr
             {
                 try
                 {
-                    if (_connectivityHandler is VoidConnectivityHandler)
+                    if (_connectivityHandler is VoidConnectivityHandler && _apizrLogLevel == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity handler");
-                    else if (!_connectivityHandler.IsConnected())
+                    else if (!_connectivityHandler.IsConnected() && _apizrLogLevel >= ApizrLogLevel.Low)
                     {
                         _logHandler.Write($"Apizr - {methodName}: Connectivity check failed, throw {nameof(IOException)}");
                         throw new IOException("Connectivity check failed");
                     }
-                    else
+                    else if (_apizrLogLevel == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Connectivity check succeed");
 
                     var policy = GetMethodPolicy<TResult>(executeApiMethod.Body as MethodCallExpression);
                     if (policy != null)
                     {
-
-                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
+                        if (_apizrLogLevel == ApizrLogLevel.High)
+                            _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
 
                         var pollyContext = new Context().WithLogHandler(_logHandler);
                         result = await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, GetWebApi(priority)), pollyContext, cancellationToken);
                     }
                     else
                     {
-                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
+                        if (_apizrLogLevel == ApizrLogLevel.High)
+                            _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
 
                         result = await executeApiMethod.Compile()(cancellationToken, GetWebApi(priority));
                     }
                 }
                 catch (Exception e)
                 {
-                    _logHandler.Write($"Apizr - {methodName}: Request throwed an exception with message {e.Message}");
-                    _logHandler.Write(!Equals(result, default(TResult))
-                        ? $"Apizr - {methodName}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
-                        : $"Apizr - {methodName}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
+                    if (_apizrLogLevel >= ApizrLogLevel.Low)
+                    {
+                        _logHandler.Write($"Apizr - {methodName}: Request throwed an exception with message {e.Message}");
+                        _logHandler.Write(!Equals(result, default(TResult))
+                            ? $"Apizr - {methodName}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
+                            : $"Apizr - {methodName}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
+                    }
 
                     throw new ApizrException<TResult>(e, result);
                 }
@@ -451,12 +506,16 @@ namespace Apizr
                 if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttributes != null)
                 {
-                    _logHandler.Write($"Apizr - {methodName}: Caching result");
+                    if (_apizrLogLevel == ApizrLogLevel.High)
+                        _logHandler.Write($"Apizr - {methodName}: Caching result");
+
                     await _cacheHandler.Set(cacheKey, result, cacheAttributes.CacheAttribute.LifeSpan, cancellationToken);
                 }
             }
 
-            _logHandler.Write($"Apizr - {methodName}: Returning result");
+            if (_apizrLogLevel >= ApizrLogLevel.Low)
+                _logHandler.Write($"Apizr - {methodName}: Returning result");
+
             return result;
         }
 
@@ -465,7 +524,8 @@ namespace Apizr
         {
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
-            _logHandler.Write($"Apizr - {methodName}: Calling method");
+            if (_apizrLogLevel >= ApizrLogLevel.Low)
+                _logHandler.Write($"Apizr - {methodName}: Calling method");
 
             string cacheKey = null;
             TResult result = default;
@@ -473,15 +533,17 @@ namespace Apizr
 
             if (IsMethodCacheable<TResult>(executeApiMethod))
             {
-                _logHandler.Write($"Apizr - {methodName}: Called method is cacheable");
-                if (_cacheHandler is VoidCacheHandler)
+                if (_apizrLogLevel == ApizrLogLevel.High)
+                    _logHandler.Write($"Apizr - {methodName}: Called method is cacheable");
+                if (_cacheHandler is VoidCacheHandler && _apizrLogLevel >= ApizrLogLevel.Low)
                     _logHandler.Write($"Apizr - {methodName}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
 
                 cacheKey = GetCacheKey<TResult>(executeApiMethod);
-                _logHandler.Write($"Apizr - {methodName}: Used cache key is {cacheKey}");
+                if (_apizrLogLevel == ApizrLogLevel.High)
+                    _logHandler.Write($"Apizr - {methodName}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.Get<TResult>(cacheKey, cancellationToken);
-                if (!Equals(result, default(TResult)))
+                if (!Equals(result, default(TResult)) && _apizrLogLevel == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Some cached data found for this cache key");
 
                 cacheAttributes = GetCacheAttribute<TResult>(executeApiMethod);
@@ -491,38 +553,42 @@ namespace Apizr
             {
                 try
                 {
-                    if (_connectivityHandler is VoidConnectivityHandler)
+                    if (_connectivityHandler is VoidConnectivityHandler && _apizrLogLevel == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity handler");
-                    else if (!_connectivityHandler.IsConnected())
+                    else if (!_connectivityHandler.IsConnected() && _apizrLogLevel >= ApizrLogLevel.Low)
                     {
                         _logHandler.Write($"Apizr - {methodName}: Connectivity check failed, throw {nameof(IOException)}");
                         throw new IOException("Connectivity check failed");
                     }
-                    else
+                    else if (_apizrLogLevel == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Connectivity check succeed");
 
                     var policy = GetMethodPolicy<TResult>(executeApiMethod.Body as MethodCallExpression);
                     if (policy != null)
                     {
-
-                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
+                        if (_apizrLogLevel == ApizrLogLevel.High)
+                            _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
 
                         var pollyContext = new Context().WithLogHandler(_logHandler);
                         result = await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, GetWebApi(priority), _mappingHandler), pollyContext, cancellationToken);
                     }
                     else
                     {
-                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
+                        if (_apizrLogLevel == ApizrLogLevel.High)
+                            _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
 
                         result = await executeApiMethod.Compile()(cancellationToken, GetWebApi(priority), _mappingHandler);
                     }
                 }
                 catch (Exception e)
                 {
-                    _logHandler.Write($"Apizr - {methodName}: Request throwed an exception with message {e.Message}");
-                    _logHandler.Write(!Equals(result, default(TResult))
-                        ? $"Apizr - {methodName}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
-                        : $"Apizr - {methodName}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
+                    if (_apizrLogLevel >= ApizrLogLevel.Low)
+                    {
+                        _logHandler.Write($"Apizr - {methodName}: Request throwed an exception with message {e.Message}");
+                        _logHandler.Write(!Equals(result, default(TResult))
+                            ? $"Apizr - {methodName}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
+                            : $"Apizr - {methodName}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
+                    }
 
                     throw new ApizrException<TResult>(e, result);
                 }
@@ -530,12 +596,16 @@ namespace Apizr
                 if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttributes != null)
                 {
-                    _logHandler.Write($"Apizr - {methodName}: Caching result");
+                    if (_apizrLogLevel == ApizrLogLevel.High)
+                        _logHandler.Write($"Apizr - {methodName}: Caching result");
+
                     await _cacheHandler.Set(cacheKey, result, cacheAttributes.CacheAttribute.LifeSpan, cancellationToken);
                 }
             }
 
-            _logHandler.Write($"Apizr - {methodName}: Returning result");
+            if (_apizrLogLevel >= ApizrLogLevel.Low)
+                _logHandler.Write($"Apizr - {methodName}: Returning result");
+
             return result;
         }
 
@@ -936,7 +1006,8 @@ namespace Apizr
             {
                 if (_policyRegistry.TryGet<IsPolicy>(registryKey, out var registeredPolicy))
                 {
-                    _logHandler.Write($"Apizr - {methodName}: Found a policy with key {registryKey}");
+                    if (_apizrLogLevel == ApizrLogLevel.High)
+                        _logHandler.Write($"Apizr - {methodName}: Found a policy with key {registryKey}");
                     if (registeredPolicy is IAsyncPolicy<TResult> registeredPolicyWithResult)
                     {
                         if (policy == null)
@@ -944,14 +1015,15 @@ namespace Apizr
                         else
                             policy.WrapAsync(registeredPolicyWithResult);
 
-                        _logHandler.Write($"Apizr - {methodName}: Policy with key {registryKey} will be applied");
+                        if (_apizrLogLevel == ApizrLogLevel.High)
+                            _logHandler.Write($"Apizr - {methodName}: Policy with key {registryKey} will be applied");
                     }
-                    else
+                    else if (_apizrLogLevel >= ApizrLogLevel.Low)
                     {
                         _logHandler.Write($"Apizr - {methodName}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy<TResult>)} type and will be ignored");
                     }
                 }
-                else
+                else if (_apizrLogLevel >= ApizrLogLevel.Low)
                 {
                     _logHandler.Write($"Apizr - {methodName}: No policy found for key {registryKey}");
                 }
@@ -979,7 +1051,8 @@ namespace Apizr
             {
                 if (_policyRegistry.TryGet<IsPolicy>(registryKey, out var registeredPolicy))
                 {
-                    _logHandler.Write($"Apizr - {methodName}: Found a policy with key {registryKey}");
+                    if (_apizrLogLevel == ApizrLogLevel.High)
+                        _logHandler.Write($"Apizr - {methodName}: Found a policy with key {registryKey}");
                     if (registeredPolicy is IAsyncPolicy registeredPolicyWithoutResult)
                     {
                         if (policy == null)
@@ -987,14 +1060,15 @@ namespace Apizr
                         else
                             policy.WrapAsync(registeredPolicyWithoutResult);
 
-                        _logHandler.Write($"Apizr - {methodName}: Policy with key {registryKey} will be applied");
+                        if (_apizrLogLevel == ApizrLogLevel.High)
+                            _logHandler.Write($"Apizr - {methodName}: Policy with key {registryKey} will be applied");
                     }
-                    else
+                    else if (_apizrLogLevel >= ApizrLogLevel.Low)
                     {
                         _logHandler.Write($"Apizr - {methodName}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy)} type and will be ignored");
                     }
                 }
-                else
+                else if (_apizrLogLevel >= ApizrLogLevel.Low)
                 {
                     _logHandler.Write($"Apizr - {methodName}: No policy found for key {registryKey}");
                 }

@@ -10,17 +10,24 @@ namespace Apizr.Logging
     public class TraceAttribute : Attribute
     {
         /// <summary>
-        /// Trace traffic with verbosity
+        /// Trace http traffic and Apizr executions with verbosity
         /// </summary>
-        /// <param name="verbosity">Tracing verbosity (default: all)</param>
-        public TraceAttribute(HttpMessageParts verbosity = HttpMessageParts.All)
+        /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: all)</param>
+        /// <param name="apizrVerbosity">Apizr executions tracing verbosity (default: high)</param>
+        public TraceAttribute(HttpMessageParts trafficVerbosity = HttpMessageParts.All, ApizrLogLevel apizrVerbosity = ApizrLogLevel.High)
         {
-            Verbosity = verbosity;
+            TrafficVerbosity = trafficVerbosity;
+            ApizrVerbosity = apizrVerbosity;
         }
 
         /// <summary>
-        /// Traffic tracing verbosity
+        /// Http traffic tracing verbosity
         /// </summary>
-        public HttpMessageParts Verbosity { get; }
+        public HttpMessageParts TrafficVerbosity { get; }
+
+        /// <summary>
+        /// Apizr executions tracing verbosity
+        /// </summary>
+        public ApizrLogLevel ApizrVerbosity { get; }
     }
 }

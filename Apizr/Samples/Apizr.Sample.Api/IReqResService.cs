@@ -5,12 +5,13 @@ using Apizr.Caching;
 using Apizr.Logging;
 using Apizr.Policing;
 using Apizr.Sample.Api.Models;
+using HttpTracer;
 using Refit;
 
 [assembly:Policy("TransientHttpError")]
 namespace Apizr.Sample.Api
 {
-    [WebApi("https://reqres.in/", false), Cache(CacheMode.GetAndFetch, "00:05:00"), Trace]
+    [WebApi("https://reqres.in/", false), Cache(CacheMode.GetAndFetch, "00:05:00"), Trace(HttpMessageParts.None, ApizrLogLevel.Low)]
     public interface IReqResService
     {
         [Get("/api/users")]

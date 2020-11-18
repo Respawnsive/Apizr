@@ -182,7 +182,8 @@ namespace Apizr
                         {
                             if (policyRegistry.TryGet<IsPolicy>(policyRegistryKey, out var registeredPolicy))
                             {
-                                logHandler.Write($"Apizr - Global policies: Found a policy with key {policyRegistryKey}");
+                                if (apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
+                                    logHandler.Write($"Apizr - Global policies: Found a policy with key {policyRegistryKey}");
                                 if (registeredPolicy is IAsyncPolicy<HttpResponseMessage> registeredPolicyForHttpResponseMessage)
                                 {
                                     var policySelector =
@@ -195,14 +196,15 @@ namespace Apizr
                                             });
                                     handlerBuilder.AddHandler(new PolicyHttpMessageHandler(policySelector));
 
-                                    logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} will be applied");
+                                    if (apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
+                                        logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} will be applied");
                                 }
-                                else
+                                else if (apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
                                 {
                                     logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} is not of {typeof(IAsyncPolicy<HttpResponseMessage>)} type and will be ignored");
                                 }
                             }
-                            else
+                            else if (apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
                             {
                                 logHandler.Write($"Apizr - Global policies: No policy found for key {policyRegistryKey}");
                             }
@@ -245,7 +247,7 @@ namespace Apizr
 
             var webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
 
-            var builder = new ApizrOptionsBuilder(new ApizrOptions(webApiType, baseAddress, traceAttribute?.Verbosity,
+            var builder = new ApizrOptionsBuilder(new ApizrOptions(webApiType, baseAddress, traceAttribute?.TrafficVerbosity, traceAttribute?.ApizrVerbosity,
                 webApiAttribute?.IsPriorityManagementEnabled, assemblyPolicyAttribute?.RegistryKeys,
                 webApiPolicyAttribute?.RegistryKeys));
 

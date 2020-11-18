@@ -1,4 +1,5 @@
 ﻿using System;
+using Apizr.Logging;
 using HttpTracer;
 
 namespace Apizr
@@ -17,6 +18,11 @@ namespace Apizr
         /// Request tracing verbosity
         /// </summary>
         HttpMessageParts HttpTracerVerbosity { get; }
+
+        /// <summary>
+        /// Apizr executions tracing verbosity
+        /// </summary>
+        ApizrLogLevel ApizrVerbosity { get; }
 
         /// <summary>
         /// Fusillade priority management activation

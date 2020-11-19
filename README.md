@@ -86,6 +86,7 @@ It also comes with some handling interfaces to let you provide your own services
          - [Using](#automapper-crud-using)
        - [AutoMapper with classic apis](#automapper-with-classic-apis)
          - [Using](#automapper-classic-using)
+   - [Pitfalls](#pitfalls)
 
 <h2 id="intro">
 Intro
@@ -1119,3 +1120,23 @@ var createdMinUser = await _mediator.Send(
 ```minUser``` will be mapped from ```MinUser``` to ```User``` just before being sent, then Apizr will map the api result back from ```User``` to ```MinUser``` and send it back to you.
 
 And yes, all the mapping feature works also with Optional.
+
+<h2 id="pitfalls">
+Pitfalls:
+</h2>
+
+Like [Refit.Insane.PowerPack](https://github.com/thefex/Refit.Insane.PowerPack) does, Apizr depends on ```Expression<>``` to wrap refit API interfaces and analyse method calls with the same pitfall: 
+**allways pass method agruments as local variables**
+
+Instead of:
+```csharp
+var result = await _myManager.ExecuteAsync(api => api.UpdateObjectAsync(MyObject.IdProperty, new MyObjectDetails{ Details = details }));
+```
+
+Use:
+```csharp
+var myObjectId = MyObject.IdProperty;
+var myObjectDetails = new MyObjectDetails{ Details = details };
+
+var result = await _myManager.ExecuteAsync(api => api.UpdateObjectAsync(myObjectId, myObjectDetails));
+```

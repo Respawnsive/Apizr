@@ -99,24 +99,7 @@ You'll find a sample Xamarin.Forms app browsing code, implementing Apizr with Sh
 
 > **NOTE - Xamarin/Shiny/Prism/Container**: 
 > 
-> Apizr registers a collection of implementation types (say ```ImplementationTypeA```, ```ImplementationTypeB```, etc) from a unique service type (say ```IServiceType```).
-> 
-> Then it resolves it all as ```IEnumerable<IServiceType>``` but with some limitations for now:
-> - Prism.DryIoc.Extensions and Prism.Unity.Extensions: it will resolve only the last registered implementation, but should be fully supported soon ([DryIoc issue](https://github.com/dansiegel/Prism.Container.Extensions/issues/124) and [Unity issue](https://github.com/dansiegel/Prism.Container.Extensions/issues/125)).
-> - Prism.Microsoft.DependencyInjection.Extensions: it will work as expected, but will stuck on a NavigationService issue ([issue](https://github.com/dansiegel/Prism.Container.Extensions/issues/113))
-> 
-> There's also an issue about it on the [Shiny side](https://github.com/shinyorg/shiny/issues/369) for information.
-> 
-> While waiting for fixes: 
-> - If you don't need the fusillade priority feature, you can definitly use Apizr with DryIoc or Unity and play with the UserInitiated returned default instance (starting from 1.4.1 Apizr version).
-> - If you do need the fusillade priority feature with everything else, I personally use the working Prism.Microsoft.DependencyInjection.Extensions, but as a project reference and with the NavigationService fix suggested in the PR. 
-> 
-> The included XF sample now use DryIoc to illustrate it.
-> 
-> I'll remove this note when fixed
-> 
-> **UPDATE: Fixed with Prism.Container.Extensions v8+ packages**
-> (Let note there until public nuget release)
+>Please use any Prism extended container of your choice starting v8.0.48 to handle multiple instance registration/resolution
 
 You'll find another sample app but .Net Core console this time, implementing Apizr without anything else (static) and also with MS DI (extensions).
 
@@ -608,42 +591,6 @@ Don't forget to register MediatR itself as usual:
 services.AddMediatR(typeof(Startup));
 ```
 
-> **NOTE - Xamarin/Shiny/Prism/Container**:
-> 
-> MediatR makes use of ```IEnumerable<T>``` service registration/resolution, wich doens't work as expected for now with Prism.DryIoc.Extensions and Prism.Unity.Extensions (see first note about it).
-> 
-> To make it work properly with DryIoc and Unity (no problem with MS DI), you'll have to register a custom MediatR ServiceFactory before calling AddMediatR like so:
->```csharp
->services.AddSingleton<ServiceFactory>(serviceProvider => serviceType =>
->{
->    var enumerableType = serviceType
->        .GetInterfaces()
->        .Concat(new[] { serviceType })
->        .FirstOrDefault(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IEnumerable<>));
->
->    var typeToResolve = enumerableType != null ? enumerableType.GenericTypeArguments[0] : serviceType;
->
->    object? result = null;
->    try
->    {
->        result = enumerableType != null
->            ? serviceProvider.GetServices(typeToResolve)
->            : serviceProvider.GetService(typeToResolve);
->    }
->    catch (Exception)
->    {
->        // ignored
->    }
->
->    return result ?? Array.CreateInstance(typeToResolve, 0);
->});
->
->services.AddMediatR(typeof(Startup));
->```
-> 
-> **UPDATE: Fixed with Prism.Container.Extensions v8+ packages**
-> (Let note there until public nuget release)
-
 When activated, you don't have to inject/resolve anything else than an ```IMediator``` instance, in order to play with your api services (both classic and crud).
 Everything you need to do then, is sending your request calling:
 ```csharp
@@ -763,10 +710,6 @@ Again, don't forget to register MediatR itself as usual :
 ```csharp
 services.AddMediatR(typeof(Startup));
 ```
-
-> **NOTE - Xamarin/Shiny/Prism/Container**: 
-> 
->Same as previous note
 
 When activated, you don't have to inject/resolve anything else than an ```IMediator``` instance, in order to play with your api services (both classic and crud).
 Everything you need to do then, is sending your request calling:
@@ -1028,10 +971,6 @@ Don't forget to register AutoMapper itself as usual :
 services.AddAutoMapper(typeof(Startup));
 ```
 
-> **NOTE - Xamarin/Shiny/Prism/Container**: 
-> 
->Same as previous note
-
 <h5 id="automapper-crud-automatically">
 Automatically:
 </h5>
@@ -1058,10 +997,6 @@ Don't forget to register AutoMapper itself as usual :
 ```csharp
 services.AddAutoMapper(typeof(Startup));
 ```
-
-> **NOTE - Xamarin/Shiny/Prism/Container**: 
-> 
->Same as previous note
 
 <h5 id="automapper-crud-using">
 Using:

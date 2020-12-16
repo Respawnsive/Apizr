@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Apizr.Extending;
+using Apizr.Logging;
 using Apizr.Policing;
 using Apizr.Sample.Api;
 using Apizr.Sample.Api.Models;
@@ -49,7 +50,7 @@ namespace Apizr.Sample.Mobile
             services.AddSingleton<IAppSettings, AppSettings>();
 
             services.UseApizrFor<IReqResService>();
-            services.UseApizrCrudFor(optionsBuilder => optionsBuilder.WithMediation().WithOptionalMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
+            services.UseApizrCrudFor(optionsBuilder => optionsBuilder.WithMediation().WithOptionalMediation().WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High), typeof(User));
             services.UseApizrFor<IHttpBinService>(optionsBuilder => optionsBuilder.WithAuthenticationHandler<IAppSettings>(settings => settings.Token, OnRefreshToken));
 
             services.AddSingleton<ServiceFactory>(serviceProvider => serviceType =>

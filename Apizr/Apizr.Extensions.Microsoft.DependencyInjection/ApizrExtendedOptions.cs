@@ -20,11 +20,13 @@ namespace Apizr
             bool? isPriorityManagementEnabled,
             string[] assemblyPolicyRegistryKeys,
             string[] webApiPolicyRegistryKeys) : base(webApiType,
-            httpTracerVerbosity, apizrVerbosity, isPriorityManagementEnabled, assemblyPolicyRegistryKeys,
+            isPriorityManagementEnabled, assemblyPolicyRegistryKeys,
             webApiPolicyRegistryKeys)
         {
             ApizrManagerType = apizrManagerType;
             BaseAddressFactory = _ => baseAddress;
+            HttpTracerVerbosityFactory = _ => httpTracerVerbosity ?? HttpMessageParts.None;
+            ApizrVerbosityFactory = _ => apizrVerbosity ?? ApizrLogLevel.None;
             HttpClientHandlerFactory = _ => new HttpClientHandler();
             RefitSettingsFactory = _ => new RefitSettings();
             ConnectivityHandlerType = typeof(VoidConnectivityHandler);
@@ -44,6 +46,8 @@ namespace Apizr
         public Type LogHandlerType { get; set; }
         public Type MappingHandlerType { get; set; }
         public Func<IServiceProvider, Uri> BaseAddressFactory { get; set; }
+        public Func<IServiceProvider, HttpMessageParts> HttpTracerVerbosityFactory { get; set; }
+        public Func<IServiceProvider, ApizrLogLevel> ApizrVerbosityFactory { get; set; }
         public Func<IServiceProvider, HttpClientHandler> HttpClientHandlerFactory { get; set; }
         public Func<IServiceProvider, RefitSettings> RefitSettingsFactory { get; set; }
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }

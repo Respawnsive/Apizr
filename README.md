@@ -18,7 +18,7 @@ Refit based web api client management, but resilient (retry, connectivity, cache
 
 Install the NuGet package of your choice:
 
-   - **Apizr** package comes with the For and CrudFor static instantiation approach (wich you can register in your DI container then)
+   - **Apizr** package comes with the For and CrudFor static instantiation approach (witch you can register in your DI container then)
    - **Apizr.Extensions.Microsoft.DependencyInjection** package extends your IServiceCollection with AddApizrFor and AddApizrCrudFor registration methods (ASP.Net Core, etc)
    - **Apizr.Integrations.Shiny** package brings ICacheHandler, ILogHandler and IConnectivityHandler method mapping implementations for [Shiny](https://github.com/shinyorg/shiny), extending your IServiceCollection with a UseApizr and UseApizrCrudFor registration methods
    - **Apizr.Integrations.Akavache** package brings an ICacheHandler method mapping implementation for [Akavache](https://github.com/reactiveui/Akavache)
@@ -27,7 +27,7 @@ Install the NuGet package of your choice:
    - **Apizr.Integrations.Optional** package enables Optional result from mediation requests (requires MediatR integration) using [Optional.Async](https://github.com/dnikolovv/optional-async)
    - **Apizr.Integrations.AutoMapper** package enables auto mapping for mediation requests (requires MediatR integration and could work with Optional integration) using [AutoMapper](https://github.com/AutoMapper/AutoMapper)
 
-Definitly, Apizr core package make use of well known nuget packages to make the magic appear:
+Apizr core package make use of well known nuget packages to make the magic appear:
 
 |Package|Features|
 |-------|--------|
@@ -37,15 +37,15 @@ Definitly, Apizr core package make use of well known nuget packages to make the 
 |[HttpTracer](https://github.com/BSiLabs/HttpTracer)|Trace Http(s) request/response traffic to log it|
 
 It also comes with some handling interfaces to let you provide your own services for:
-- **Caching** with ICacheHandler, wich comes with its default VoidCacheHandler (no cache), but also with:
+- **Caching** with ICacheHandler, witch comes with its default VoidCacheHandler (no cache), but also with:
   - AkavacheCacheHandler: [Akavache](https://github.com/reactiveui/Akavache) method mapping interface (Integration package referenced above)
   - MonkeyCacheHandler: [MonkeyCache](https://github.com/jamesmontemagno/monkey-cache) method mapping interface (Integration package referenced above)
   - ShinyCacheHandler: [Shiny](https://github.com/shinyorg/shiny) chaching method mapping interface (Integration package referenced above)
-- **Logging** with ILogHandler, wich comes with its default DefaultLogHandler (Console and Debug), but also with:
+- **Logging** with ILogHandler, witch comes with its default DefaultLogHandler (Console and Debug), but also with:
   - ShinyLogHandler: [Shiny](https://github.com/shinyorg/shiny) logging method mapping interface (Integration package referenced above)
-- **Connectivity** with IConnectivityHandler, wich comes with its default VoidConnectivityHandler (no connectivity check), but also with:
+- **Connectivity** with IConnectivityHandler, witch comes with its default VoidConnectivityHandler (no connectivity check), but also with:
   - ShinyConnectivityHandler: [Shiny](https://github.com/shinyorg/shiny) connectivity method mapping interface (Integration package referenced above)
-- **Mapping** with IMappingHandler, wich comes with its default VoidMappingHandler (no mapping conversion), but also with:
+- **Mapping** with IMappingHandler, witch comes with its default VoidMappingHandler (no mapping conversion), but also with:
   - AutoMapperMappingHandler: [AutoMapper](https://github.com/AutoMapper/AutoMapper) mapping method mapping interface (Integration package referenced above)
 
 ## How to:
@@ -334,9 +334,9 @@ We can see that it comes with some attribute decorations, like Cache or Policy.
 If you don't want it for your crud scenario, just don't provide any CacheHandler and/or TransientHttpError policy, it will be ignored.
 
 About generic types:
-- T and TKey meanings are abvious
-- TReadAllResult is there to handle cases where ReadAll doesn't return an ```IEnumerable<T>``` or derived, but a paged result with some statistics
-- TReadAllParams is there to handle cases where you don't want to provide an ```IDictionary<string, object>``` for a ReadAll reaquest, but a custom class
+- T and TKey (optional - default: ```int```) meanings are obvious
+- TReadAllResult (optional - default: ```IEnumerable<T>```) is there to handle cases where ReadAll doesn't return an ```IEnumerable<T>``` or derived, but a paged result with some statistics
+- TReadAllParams (optional - default: ```IDictionary<string, object>```) is there to handle cases where you don't want to provide an ```IDictionary<string, object>``` for a ReadAll reaquest, but a custom class
 
 But again, nothing to do around here.
 
@@ -367,7 +367,7 @@ If you don't use a custom class holding your query parameters, just don't provid
 You have to provide the specific entity crud base uri with the options builder.
 
 There are 5 CrudFor flavors, depending on what you want to do and provide.
-One of it is the simple ```Apizr.CrudFor<T>()```, wich as you can expect, define TKey as ```int```, TReadAllResult as ```IEnumerable<T>``` and TReadAllParams as ```IDictionary<string, object>```.
+One of it is the simple ```Apizr.CrudFor<T>()```, witch as you can expect, define TKey as ```int```, TReadAllResult as ```IEnumerable<T>``` and TReadAllParams as ```IDictionary<string, object>```.
 
 <h4 id="crud-extensions-approach">
 Extensions approach:
@@ -406,7 +406,7 @@ If you don't use a custom class holding your query parameters, just don't provid
 You have to provide the specific entity crud base uri with the options builder.
 
 There are 10 AddApizrCrudFor/UseApizrCrudFor flavors for crud manual registration, depending on what you want to do and provide.
-One of it is the simple ```services.AddApizrCrudFor<T>()``` or ```services.UseApizrCrudFor<T>()```, wich as you can expect, define TKey as ```int```, TReadAllResult as ```IEnumerable<T>``` and TReadAllParams as ```IDictionary<string, object>```.
+One of it is the simple ```services.AddApizrCrudFor<T>()``` or ```services.UseApizrCrudFor<T>()```, witch as you can expect, define TKey as ```int```, TReadAllResult as ```IEnumerable<T>``` and TReadAllParams as ```IDictionary<string, object>```.
 
 <h5 id="crud-automatically">
 Automatically:
@@ -546,7 +546,7 @@ If you plan to use the PoliciesAttribute, Apizr needs to know where to find your
 - With extensions registration, you have to register it thanks to AddPolicyRegistry service collection extension method.
 
 In any case, you may want to log what's going on during policies excecution.
-To do so, there's an OnRetry helper action wich provide your ILogHandler method mapping implementation to Polly.
+To do so, there's an OnRetry helper action witch provide your ILogHandler method mapping implementation to Polly.
 
 Here's how to use it:
 ```csharp
@@ -718,9 +718,9 @@ var result = await _mediator.Send(YOUR_REQUEST_HERE);
 ```
 
 Where YOUR_REQUEST_HERE could be, with classic api interfaces:
-- ```ExecuteOptionalRequest<TWebApi>```: execute any method from ```TWebApi``` defined by an expression parameter wich returns ```Option<Unit, ApizrException>```
-- ```ExecuteOptionalRequest<TWebApi, TApiResponse>```: execute any method from ```TWebApi``` defined by an expression parameter wich returns ```Option<TApiResponse, ApizrException<TApiResponse>>```
-- ```ExecuteOptionalRequest<TWebApi, TModelResponse, TApiResponse>```: execute any method from ```TWebApi``` defined by an expression parameter wich returns ```Option<TModelResponse, ApizrException<TModelResponse>>``` where ```TModelResponse``` mapped from ```TApiResponse```
+- ```ExecuteOptionalRequest<TWebApi>```: execute any method from ```TWebApi``` defined by an expression parameter witch returns ```Option<Unit, ApizrException>```
+- ```ExecuteOptionalRequest<TWebApi, TApiResponse>```: execute any method from ```TWebApi``` defined by an expression parameter witch returns ```Option<TApiResponse, ApizrException<TApiResponse>>```
+- ```ExecuteOptionalRequest<TWebApi, TModelResponse, TApiResponse>```: execute any method from ```TWebApi``` defined by an expression parameter witch returns ```Option<TModelResponse, ApizrException<TModelResponse>>``` where ```TModelResponse``` mapped from ```TApiResponse```
 
 > **NOTE - Mapping**:
 > When I say "mapped", I talk about the mapping integration feature
@@ -827,7 +827,7 @@ public class YourViewModel
 
 Same advantages than classic mediation but with exception handling.
 Both "classic" and "optional" mediation are compatibles with each other.
-It means that if you call both methods during registration, both request collection will be available, so you can decide wich one suits to you when you need it.
+It means that if you call both methods during registration, both request collection will be available, so you can decide witch one suits to you when you need it.
 
 <h4 id="optional-helper-extentions">
 Optional helper extentions:
@@ -932,10 +932,10 @@ Here we ask the api to get users and if it fails:
   - AsyncErrorHandler will handle the exception to inform the user call just failed
   - Apizr will return the previous result from cache
 - There's no cached data yet!
-  - ```letThrowOnExceptionWithEmptyCache``` is True? (wich is the case here)
+  - ```letThrowOnExceptionWithEmptyCache``` is True? (witch is the case here)
     - Apizr will throw the inner exception that will be catched further by AsyncErrorHander (this is its normal Fody usage)
   - ```letThrowOnExceptionWithEmptyCache``` is False! (default)
-    - Apizr will return the empty cache data (null) wich has to be handled further
+    - Apizr will return the empty cache data (null) witch has to be handled further
 
 Safe and shorter than ever!
 
@@ -945,7 +945,7 @@ AutoMapper:
 
 You can define your own model entities and then, your AutoMapper mapping profiles between api entities and model entities.
 
-Then, you have to tell Apizr wich entities must use the mapping feature.
+Then, you have to tell Apizr witch entities must use the mapping feature.
 
 <h4 id="automapper-with-crud-apis">
 AutoMapper with Crud apis:
@@ -980,7 +980,7 @@ To do so, you have do decorate one of those two entities (api vs model) with cor
 - ```CrudEntityAttribute``` above the api entity, with ```modelEntityType``` parameter set to the mapped model entity type
 - ```MappedCrudEntityAttribute``` above the model entity, with ```apiEntityType``` parameter set to the mapped api entity type
 
-If you get access to both entities, it doesn't matter wich one you decorate, just do it for one of it (if you decorate both, it will take the first found).
+If you get access to both entities, it doesn't matter witch one you decorate, just do it for one of it (if you decorate both, it will take the first found).
 If you don't get any access to the api entities, just decorate your model one with the ```MappedCrudEntityAttribute```
 
 From here, let's write:

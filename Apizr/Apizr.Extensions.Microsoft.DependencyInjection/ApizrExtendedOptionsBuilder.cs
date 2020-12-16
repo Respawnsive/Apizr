@@ -56,9 +56,14 @@ namespace Apizr
             return this;
         }
 
-        public IApizrExtendedOptionsBuilder WithHttpTracing(HttpMessageParts httpTracerVerbosity)
+        public IApizrExtendedOptionsBuilder WithLoggingVerbosity(HttpMessageParts trafficVerbosity,
+            ApizrLogLevel apizrVerbosity)
+            => WithLoggingVerbosity(_ => trafficVerbosity, _ => apizrVerbosity);
+
+        public IApizrExtendedOptionsBuilder WithLoggingVerbosity(Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory, Func<IServiceProvider, ApizrLogLevel> apizrVerbosityFactory)
         {
-            Options.HttpTracerVerbosity = httpTracerVerbosity;
+            Options.HttpTracerVerbosityFactory = trafficVerbosityFactory;
+            Options.ApizrVerbosityFactory = apizrVerbosityFactory;
 
             return this;
         }

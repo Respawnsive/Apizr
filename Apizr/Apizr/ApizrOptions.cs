@@ -18,11 +18,13 @@ namespace Apizr
             ApizrLogLevel? apizrVerbosity,
             bool? isPriorityManagementEnabled,
             string[] assemblyPolicyRegistryKeys,
-            string[] webApiPolicyRegistryKeys) : base(webApiType, httpTracerVerbosity, apizrVerbosity,
+            string[] webApiPolicyRegistryKeys) : base(webApiType,
             isPriorityManagementEnabled,
             assemblyPolicyRegistryKeys, webApiPolicyRegistryKeys)
         {
             BaseAddressFactory = () => baseAddress;
+            HttpTracerVerbosityFactory = () => httpTracerVerbosity ?? HttpMessageParts.None;
+            ApizrVerbosityFactory = () => apizrVerbosity ?? ApizrLogLevel.None;
             HttpClientHandlerFactory = () => new HttpClientHandler();
             PolicyRegistryFactory = () => new PolicyRegistry();
             RefitSettingsFactory = () => new RefitSettings();
@@ -34,6 +36,8 @@ namespace Apizr
         }
 
         public Func<Uri> BaseAddressFactory { get; set; }
+        public Func<HttpMessageParts> HttpTracerVerbosityFactory { get; set; }
+        public Func<ApizrLogLevel> ApizrVerbosityFactory { get; set; }
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
         public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set;  }
         public Func<RefitSettings> RefitSettingsFactory { get; set; }

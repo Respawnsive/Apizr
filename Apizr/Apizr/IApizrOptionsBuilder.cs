@@ -10,6 +10,7 @@ using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
+using HttpTracer;
 using Polly.Registry;
 
 namespace Apizr
@@ -32,6 +33,14 @@ namespace Apizr
         /// <param name="baseAddressFactory">Your web api base address factory</param>
         /// <returns></returns>
         IApizrOptionsBuilder WithBaseAddress(Func<Uri> baseAddressFactory);
+
+        /// <summary>
+        /// Define http traces and Apizr logs verbosity (could be defined with TraceAttribute)
+        /// </summary>
+        /// <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
+        /// <param name="apizrVerbosityFactory">Apizr execution steps verbosity factory</param>
+        /// <returns></returns>
+        IApizrOptionsBuilder WithLoggingVerbosity(Func<HttpMessageParts> trafficVerbosityFactory, Func<ApizrLogLevel> apizrVerbosityFactory);
 
         /// <summary>
         /// Provide a custom HttpClientHandler

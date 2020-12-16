@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Reflection;
+using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Requesting;
+using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
 using Polly.Registry;
 using Refit;
@@ -41,6 +43,16 @@ namespace Apizr
         /// Base address factory
         /// </summary>
         Func<IServiceProvider, Uri> BaseAddressFactory { get; }
+
+        /// <summary>
+        /// Request tracing verbosity factory
+        /// </summary>
+        Func<IServiceProvider, HttpMessageParts> HttpTracerVerbosityFactory { get; }
+
+        /// <summary>
+        /// Apizr executions tracing verbosity factory
+        /// </summary>
+        Func<IServiceProvider, ApizrLogLevel> ApizrVerbosityFactory { get; }
 
         /// <summary>
         /// HttpClientHandler factory

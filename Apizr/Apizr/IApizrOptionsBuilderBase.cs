@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Apizr.Logging;
 using HttpTracer;
 using Refit;
 
@@ -31,11 +32,12 @@ namespace Apizr
         TApizrOptionsBuilder WithBaseAddress(Uri baseAddress);
 
         /// <summary>
-        /// Define http tracer verbosity (could be defined with TraceAttribute)
+        /// Define http traces and Apizr logs verbosity (could be defined with TraceAttribute)
         /// </summary>
-        /// <param name="httpTracerVerbosity">Http tracer verbosity</param>
+        /// <param name="trafficVerbosity">Http traffic tracing verbosity</param>
+        /// <param name="apizrVerbosity">Apizr execution steps verbosity</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithHttpTracing(HttpMessageParts httpTracerVerbosity);
+        TApizrOptionsBuilder WithLoggingVerbosity(HttpMessageParts trafficVerbosity, ApizrLogLevel apizrVerbosity);
 
         /// <summary>
         /// Enable Fusillade priority management (could be defined with WebApiAttribute)

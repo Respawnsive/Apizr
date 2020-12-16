@@ -5,6 +5,7 @@ using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
+using HttpTracer;
 using Polly.Registry;
 using Refit;
 
@@ -19,6 +20,16 @@ namespace Apizr
         /// Base address factory
         /// </summary>
         Func<Uri> BaseAddressFactory { get; }
+
+        /// <summary>
+        /// Request tracing verbosity factory
+        /// </summary>
+        Func<HttpMessageParts> HttpTracerVerbosityFactory { get; }
+
+        /// <summary>
+        /// Apizr executions tracing verbosity factory
+        /// </summary>
+        Func<ApizrLogLevel> ApizrVerbosityFactory { get; }
 
         /// <summary>
         /// HttpClientHandler factory

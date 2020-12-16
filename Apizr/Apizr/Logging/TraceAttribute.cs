@@ -13,7 +13,7 @@ namespace Apizr.Logging
         /// Trace http traffic and Apizr executions with verbosity
         /// </summary>
         /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: all)</param>
-        /// <param name="apizrVerbosity">Apizr executions tracing verbosity (default: high)</param>
+        /// <param name="apizrVerbosity">Apizr execution steps verbosity (default: high)</param>
         public TraceAttribute(HttpMessageParts trafficVerbosity = HttpMessageParts.All, ApizrLogLevel apizrVerbosity = ApizrLogLevel.High)
         {
             TrafficVerbosity = trafficVerbosity;

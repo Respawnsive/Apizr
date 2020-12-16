@@ -173,7 +173,9 @@ namespace Apizr
                     var httpClientHandler = apizrOptions.HttpClientHandlerFactory.Invoke();
                     var logHandler = apizrOptions.LogHandlerFactory.Invoke();
                     var handlerBuilder = new HttpHandlerBuilder(httpClientHandler, new HttpTracerLogWrapper(logHandler));
-                    handlerBuilder.HttpTracerHandler.Verbosity = apizrOptions.HttpTracerVerbosity;
+                    var httpTracerVerbosity = apizrOptions.HttpTracerVerbosityFactory.Invoke();
+                    var apizrVerbosity = apizrOptions.ApizrVerbosityFactory.Invoke();
+                    handlerBuilder.HttpTracerHandler.Verbosity = httpTracerVerbosity;
 
                     if (apizrOptions.PolicyRegistryKeys != null && apizrOptions.PolicyRegistryKeys.Any())
                     {
@@ -182,7 +184,7 @@ namespace Apizr
                         {
                             if (policyRegistry.TryGet<IsPolicy>(policyRegistryKey, out var registeredPolicy))
                             {
-                                if (apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
+                                if (apizrVerbosity == ApizrLogLevel.High)
                                     logHandler.Write($"Apizr - Global policies: Found a policy with key {policyRegistryKey}");
                                 if (registeredPolicy is IAsyncPolicy<HttpResponseMessage> registeredPolicyForHttpResponseMessage)
                                 {
@@ -196,15 +198,15 @@ namespace Apizr
                                             });
                                     handlerBuilder.AddHandler(new PolicyHttpMessageHandler(policySelector));
 
-                                    if (apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
+                                    if (apizrVerbosity == ApizrLogLevel.High)
                                         logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} will be applied");
                                 }
-                                else if (apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
+                                else if (apizrVerbosity >= ApizrLogLevel.Low)
                                 {
                                     logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} is not of {typeof(IAsyncPolicy<HttpResponseMessage>)} type and will be ignored");
                                 }
                             }
-                            else if (apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
+                            else if (apizrVerbosity >= ApizrLogLevel.Low)
                             {
                                 logHandler.Write($"Apizr - Global policies: No policy found for key {policyRegistryKey}");
                             }

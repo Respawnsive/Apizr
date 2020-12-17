@@ -13,6 +13,7 @@ namespace Apizr
 {
     public class ApizrOptions : ApizrOptionsBase, IApizrOptions
     {
+
         public ApizrOptions(Type webApiType, Uri baseAddress,
             HttpMessageParts? httpTracerVerbosity,
             ApizrLogLevel? apizrVerbosity,
@@ -35,9 +36,31 @@ namespace Apizr
             DelegatingHandlersFactories = new List<Func<ILogHandler, DelegatingHandler>>();
         }
 
-        public Func<Uri> BaseAddressFactory { get; set; }
-        public Func<HttpMessageParts> HttpTracerVerbosityFactory { get; set; }
-        public Func<ApizrLogLevel> ApizrVerbosityFactory { get; set; }
+        private Func<Uri> _baseAddressFactory;
+        public Func<Uri> BaseAddressFactory
+        {
+            get => _baseAddressFactory;
+            set => _baseAddressFactory = () => BaseAddress = value.Invoke();
+        }
+
+        private Func<HttpMessageParts> _httpTracerVerbosityFactory;
+        public Func<HttpMessageParts> HttpTracerVerbosityFactory
+        {
+            get => _httpTracerVerbosityFactory;
+            set => _httpTracerVerbosityFactory = () => HttpTracerVerbosity = value.Invoke();
+        }
+
+        private Func<ApizrLogLevel> _apizrVerbosityFactory;
+        public Func<ApizrLogLevel> ApizrVerbosityFactory
+        {
+            get => _apizrVerbosityFactory;
+            set => _apizrVerbosityFactory = () =>
+            {
+                ApizrVerbosity = value.Invoke();
+                return ApizrVerbosity;
+            };
+        }
+
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
         public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set;  }
         public Func<RefitSettings> RefitSettingsFactory { get; set; }

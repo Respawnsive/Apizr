@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Reflection;
 using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Requesting;
 using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
-using Polly.Registry;
 using Refit;
 
 namespace Apizr

@@ -106,7 +106,8 @@ namespace Apizr.Sample.Console
 
                 _reqResManager = Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithHttpClientHandler(new HttpClientHandler{AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithPolicyRegistry(registry)
                     .WithCacheHandler(
-                        () => new MonkeyCacheHandler(Barrel.Current)));
+                        () => new MonkeyCacheHandler(Barrel.Current))
+                    .WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High));
 
                 _userManager = Apizr.CrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer })
                     .WithPolicyRegistry(registry)

@@ -45,9 +45,28 @@ namespace Apizr
         public Type CacheHandlerType { get; set; }
         public Type LogHandlerType { get; set; }
         public Type MappingHandlerType { get; set; }
-        public Func<IServiceProvider, Uri> BaseAddressFactory { get; set; }
-        public Func<IServiceProvider, HttpMessageParts> HttpTracerVerbosityFactory { get; set; }
-        public Func<IServiceProvider, ApizrLogLevel> ApizrVerbosityFactory { get; set; }
+
+        private Func<IServiceProvider, Uri> _baseAddressFactory;
+        public Func<IServiceProvider, Uri> BaseAddressFactory
+        {
+            get => _baseAddressFactory;
+            set => _baseAddressFactory = serviceProvider => BaseAddress = value.Invoke(serviceProvider);
+        }
+
+        private Func<IServiceProvider, HttpMessageParts> _httpTracerVerbosityFactory;
+        public Func<IServiceProvider, HttpMessageParts> HttpTracerVerbosityFactory
+        {
+            get => _httpTracerVerbosityFactory;
+            set => _httpTracerVerbosityFactory = serviceProvider => HttpTracerVerbosity = value.Invoke(serviceProvider);
+        }
+
+        private Func<IServiceProvider, ApizrLogLevel> _apizrVerbosityFactory;
+        public Func<IServiceProvider, ApizrLogLevel> ApizrVerbosityFactory
+        {
+            get => _apizrVerbosityFactory;
+            set => _apizrVerbosityFactory = serviceProvider => ApizrVerbosity = value.Invoke(serviceProvider);
+        }
+
         public Func<IServiceProvider, HttpClientHandler> HttpClientHandlerFactory { get; set; }
         public Func<IServiceProvider, RefitSettings> RefitSettingsFactory { get; set; }
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }

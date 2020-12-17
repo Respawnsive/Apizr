@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Linq;
+using Apizr.Logging;
+using HttpTracer;
 
 namespace Apizr
 {
     public abstract class ApizrOptionsBase : IApizrOptionsBase
     {
+        private ApizrLogLevel _apizrVerbosity;
+
         protected ApizrOptionsBase(Type webApiType,
             bool? isPriorityManagementEnabled,
             string[] assemblyPolicyRegistryKeys,
@@ -18,6 +22,15 @@ namespace Apizr
         }
 
         public Type WebApiType { get; }
+        public Uri BaseAddress { get; protected set; }
+        public HttpMessageParts HttpTracerVerbosity { get; protected set; }
+
+        public ApizrLogLevel ApizrVerbosity
+        {
+            get => _apizrVerbosity;
+            protected set => _apizrVerbosity = value;
+        }
+
         public bool IsPriorityManagementEnabled { get; set; }
         public string[] PolicyRegistryKeys { get; }
     }

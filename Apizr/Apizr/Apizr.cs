@@ -35,10 +35,10 @@ namespace Apizr
             Action<IApizrOptionsBuilder> optionsBuilder = null) where T : class =>
             For<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>,
                 ApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>>(
-                (lazyWebApis, connectivityHandler, cacheHandler, logHandler, mappingHandler, policyRegistry) =>
+                (lazyWebApis, connectivityHandler, cacheHandler, logHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>(lazyWebApis,
                         connectivityHandler, cacheHandler, logHandler, mappingHandler,
-                        policyRegistry), optionsBuilder);
+                        policyRegistry, apizrOptions), optionsBuilder);
 
         /// <summary>
         /// Create a <see cref="ApizrManager{ICrudApi}"/> instance for <see cref="T"/> object type (class), 
@@ -53,10 +53,10 @@ namespace Apizr
             Action<IApizrOptionsBuilder> optionsBuilder = null) where T : class =>
             For<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>,
                 ApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>>>(
-                (lazyWebApis, connectivityHandler, cacheHandler, logHandler, mappingHandler, policyRegistry) =>
+                (lazyWebApis, connectivityHandler, cacheHandler, logHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>>(lazyWebApis,
                         connectivityHandler, cacheHandler, logHandler, mappingHandler,
-                        policyRegistry), optionsBuilder);
+                        policyRegistry, apizrOptions), optionsBuilder);
 
         /// <summary>
         /// Create a <see cref="ApizrManager{ICrudApi}"/> instance for <see cref="T"/> object type (class), 
@@ -75,11 +75,11 @@ namespace Apizr
             where T : class =>
             For<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>,
                 ApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>>>(
-                (lazyWebApis, connectivityHandler, cacheHandler, logHandler, mappingHandler, policyRegistry) =>
+                (lazyWebApis, connectivityHandler, cacheHandler, logHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>>(lazyWebApis,
                         connectivityHandler,
                         cacheHandler, logHandler, mappingHandler,
-                        policyRegistry), optionsBuilder);
+                        policyRegistry, apizrOptions), optionsBuilder);
 
         /// <summary>
         /// Create a <see cref="ApizrManager{ICrudApi}"/> instance for <see cref="T"/> object type (class), 
@@ -99,11 +99,11 @@ namespace Apizr
             where T : class where TReadAllParams : class =>
             For<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>,
                 ApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>>(
-                (lazyWebApis, connectivityHandler, cacheHandler, logHandler, mappingHandler, policyRegistry) =>
+                (lazyWebApis, connectivityHandler, cacheHandler, logHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>(lazyWebApis,
                         connectivityHandler,
                         cacheHandler, logHandler, mappingHandler,
-                        policyRegistry), optionsBuilder);
+                        policyRegistry, apizrOptions), optionsBuilder);
 
         /// <summary>
         /// Create a <see cref="TApizrManager"/> instance for a managed crud api for <see cref="T"/> object (class), 
@@ -121,7 +121,7 @@ namespace Apizr
         /// <returns></returns>
         public static TApizrManager CrudFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(
             Func<IEnumerable<ILazyPrioritizedWebApi<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>>, IConnectivityHandler, ICacheHandler,
-                ILogHandler, IMappingHandler, IReadOnlyPolicyRegistry<string>,
+                ILogHandler, IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptionsBase,
                 TApizrManager> apizrManagerFactory,
             Action<IApizrOptionsBuilder> optionsBuilder = null)
             where T : class
@@ -142,9 +142,9 @@ namespace Apizr
         public static IApizrManager<TWebApi> For<TWebApi>(
             Action<IApizrOptionsBuilder> optionsBuilder = null) =>
             For<TWebApi, ApizrManager<TWebApi>>(
-                (lazyWebApis, connectivityHandler, cacheHandler, logHandler, mappingHandler, policyRegistry) =>
+                (lazyWebApis, connectivityHandler, cacheHandler, logHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<TWebApi>(lazyWebApis, connectivityHandler, cacheHandler, logHandler, mappingHandler,
-                        policyRegistry), optionsBuilder);
+                        policyRegistry, apizrOptions), optionsBuilder);
 
         /// <summary>
         /// Create a <see cref="TApizrManager"/> instance for a managed <see cref="TWebApi"/>
@@ -155,7 +155,7 @@ namespace Apizr
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
         public static TApizrManager For<TWebApi, TApizrManager>(
-            Func<IEnumerable<ILazyPrioritizedWebApi<TWebApi>>, IConnectivityHandler, ICacheHandler, ILogHandler, IMappingHandler, IReadOnlyPolicyRegistry<string>,
+            Func<IEnumerable<ILazyPrioritizedWebApi<TWebApi>>, IConnectivityHandler, ICacheHandler, ILogHandler, IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptionsBase,
                 TApizrManager> apizrManagerFactory,
             Action<IApizrOptionsBuilder> optionsBuilder = null)
         where TApizrManager : IApizrManager<TWebApi>
@@ -229,7 +229,7 @@ namespace Apizr
                 lazyWebApis.Add(lazyWebApi);
             }
 
-            var apizrManager = apizrManagerFactory(lazyWebApis, apizrOptions.ConnectivityHandlerFactory.Invoke(), apizrOptions.CacheHandlerFactory.Invoke(), apizrOptions.LogHandlerFactory.Invoke(), apizrOptions.MappingHandlerFactory.Invoke(), apizrOptions.PolicyRegistryFactory.Invoke());
+            var apizrManager = apizrManagerFactory(lazyWebApis, apizrOptions.ConnectivityHandlerFactory.Invoke(), apizrOptions.CacheHandlerFactory.Invoke(), apizrOptions.LogHandlerFactory.Invoke(), apizrOptions.MappingHandlerFactory.Invoke(), apizrOptions.PolicyRegistryFactory.Invoke(), apizrOptions);
 
             return apizrManager;
         } 

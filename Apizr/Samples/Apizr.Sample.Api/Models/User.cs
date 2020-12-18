@@ -6,8 +6,8 @@ using Newtonsoft.Json;
 namespace Apizr.Sample.Api.Models
 {
     [CrudEntity("https://reqres.in/api/users", typeof(int), typeof(PagedResult<>))]
-    [CacheReadAll(CacheMode.GetOrFetch)]
-    [CacheRead(CacheMode.GetAndFetch)]
+    [CacheReadAll(CacheMode.GetAndFetch)]
+    [CacheRead(CacheMode.GetOrFetch)]
     public class User
     {
         [JsonProperty("id")]

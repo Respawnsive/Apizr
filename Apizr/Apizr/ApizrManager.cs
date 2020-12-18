@@ -718,9 +718,12 @@ namespace Apizr
                 else // Classic api caching
                 {
                     cacheAttribute =
-                        methodToCacheDetails.ApiInterfaceType.GetTypeInfo().GetCustomAttribute<CacheAttribute>() ??
-                        methodToCacheData.MethodInfo.GetCustomAttribute<CacheAttribute>();
+                        methodToCacheData.MethodInfo.GetCustomAttribute<CacheAttribute>() ?? // Specific method caching
+                        methodToCacheDetails.ApiInterfaceType.GetTypeInfo().GetCustomAttribute<CacheAttribute>(); // Global api interface caching
                 }
+
+                if (cacheAttribute == null) // Global assembly caching
+                    cacheAttribute = methodToCacheDetails.ApiInterfaceType.Assembly.GetCustomAttribute<CacheAttribute>();
 
                 if (cacheAttribute == null)
                     return false;

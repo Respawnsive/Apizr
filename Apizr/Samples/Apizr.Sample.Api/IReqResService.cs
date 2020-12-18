@@ -9,9 +9,10 @@ using HttpTracer;
 using Refit;
 
 [assembly:Policy("TransientHttpError")]
+[assembly:Cache(CacheMode.GetOrFetch, "00:10:00")]
 namespace Apizr.Sample.Api
 {
-    [WebApi("https://reqres.in/", false), Cache(CacheMode.GetAndFetch, "00:05:00"), Trace(HttpMessageParts.None, ApizrLogLevel.Low)]
+    [WebApi("https://reqres.in/", false), Trace(HttpMessageParts.None, ApizrLogLevel.Low)]
     public interface IReqResService
     {
         [Get("/api/users")]

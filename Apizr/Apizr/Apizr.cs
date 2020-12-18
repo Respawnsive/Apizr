@@ -244,21 +244,24 @@ namespace Apizr
             var webApiAttribute = webApiType.GetTypeInfo().GetCustomAttribute<WebApiAttribute>(true);
             Uri.TryCreate(webApiAttribute?.BaseUri, UriKind.RelativeOrAbsolute, out var baseAddress);
 
-            var traceAttribute = webApiType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true) ??
-                                 webApiType.Assembly.GetCustomAttribute<TraceAttribute>();
-
-            var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
-
+            TraceAttribute traceAttribute;
             PolicyAttribute webApiPolicyAttribute;
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
             {
                 var modelType = webApiType.GetGenericArguments().First();
+                traceAttribute = modelType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true);
                 webApiPolicyAttribute = modelType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
             else
             {
+                traceAttribute = webApiType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true);
                 webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
+
+            if(traceAttribute == null)
+                traceAttribute = webApiType.Assembly.GetCustomAttribute<TraceAttribute>();
+
+            var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 
             var builder = new ApizrOptionsBuilder(new ApizrOptions(webApiType, baseAddress, traceAttribute?.TrafficVerbosity, traceAttribute?.ApizrVerbosity,
                 webApiAttribute?.IsPriorityManagementEnabled, assemblyPolicyAttribute?.RegistryKeys,

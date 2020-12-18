@@ -6,7 +6,7 @@ namespace Apizr.Logging
     /// <summary>
     /// Tells Apizr to trace request/response HTTP(s) traffic for the decorated web api interface
     /// </summary>
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Interface)]
+    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Interface | AttributeTargets.Class)]
     public class TraceAttribute : Attribute
     {
         /// <summary>

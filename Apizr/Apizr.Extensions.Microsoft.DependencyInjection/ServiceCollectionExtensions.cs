@@ -616,21 +616,24 @@ namespace Apizr
                     optionsBuilder += sourceBuilder => sourceBuilder.ApizrOptions.WebApis.Add(webApiType, webApiAttribute);
             }
 
-            var traceAttribute = webApiType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true) ??
-                                 webApiType.Assembly.GetCustomAttribute<TraceAttribute>();
-
-            var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
-
+            TraceAttribute traceAttribute;
             PolicyAttribute webApiPolicyAttribute;
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
             {
                 var modelType = webApiType.GetGenericArguments().First();
+                traceAttribute = modelType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true);
                 webApiPolicyAttribute = modelType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
             else
             {
+                traceAttribute = webApiType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true);
                 webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
+
+            if (traceAttribute == null)
+                traceAttribute = webApiType.Assembly.GetCustomAttribute<TraceAttribute>();
+
+            var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 
             var builder = new ApizrExtendedOptionsBuilder(new ApizrExtendedOptions(webApiType, apizrManagerType, baseAddress, traceAttribute?.TrafficVerbosity, traceAttribute?.ApizrVerbosity, webApiAttribute?.IsPriorityManagementEnabled, assemblyPolicyAttribute?.RegistryKeys,
                 webApiPolicyAttribute?.RegistryKeys));

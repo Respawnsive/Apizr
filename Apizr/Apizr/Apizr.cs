@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Reflection;
 using Apizr.Caching;
 using Apizr.Connecting;
+using Apizr.Extending;
 using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Policing;
@@ -247,7 +248,16 @@ namespace Apizr
 
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 
-            var webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
+            PolicyAttribute webApiPolicyAttribute;
+            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
+            {
+                var modelType = webApiType.GetGenericArguments().First();
+                webApiPolicyAttribute = modelType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
+            }
+            else
+            {
+                webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
+            }
 
             var builder = new ApizrOptionsBuilder(new ApizrOptions(webApiType, baseAddress, traceAttribute?.TrafficVerbosity, traceAttribute?.ApizrVerbosity,
                 webApiAttribute?.IsPriorityManagementEnabled, assemblyPolicyAttribute?.RegistryKeys,

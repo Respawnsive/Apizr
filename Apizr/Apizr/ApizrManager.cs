@@ -1034,11 +1034,40 @@ namespace Apizr
             if (_policyRegistry == null)
                 return null;
 
-            var policyAttribute = methodCallExpression.Method.GetCustomAttribute<PolicyAttribute>();
+            PolicyAttributeBase policyAttribute = null;
+
+            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(_apizrOptions.WebApiType)) // Crud api caching
+            {
+                var modelType = _apizrOptions.WebApiType.GetGenericArguments().First();
+                var methodName = methodCallExpression.Method.Name;
+                switch (methodName) // Specific method policies
+                {
+                    case "Create":
+                        policyAttribute = modelType.GetTypeInfo().GetCustomAttribute<CreatePolicyAttribute>();
+                        break;
+                    case "ReadAll":
+                        policyAttribute = modelType.GetTypeInfo().GetCustomAttribute<ReadAllPolicyAttribute>();
+                        break;
+                    case "Read":
+                        policyAttribute = modelType.GetTypeInfo().GetCustomAttribute<ReadPolicyAttribute>();
+                        break;
+                    case "Update":
+                        policyAttribute = modelType.GetTypeInfo().GetCustomAttribute<UpdatePolicyAttribute>();
+                        break;
+                    case "Delete":
+                        policyAttribute = modelType.GetTypeInfo().GetCustomAttribute<DeletePolicyAttribute>();
+                        break;
+                }
+            }
+            else // Global model policies
+            {
+                policyAttribute = methodCallExpression.Method.GetCustomAttribute<PolicyAttribute>();
+            }
+
             if (policyAttribute == null)
                 return null;
 
-            var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
+            var fullMethodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
 
             IAsyncPolicy<TResult> policy = null;
             foreach (var registryKey in policyAttribute.RegistryKeys)
@@ -1046,7 +1075,7 @@ namespace Apizr
                 if (_policyRegistry.TryGet<IsPolicy>(registryKey, out var registeredPolicy))
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                        _logHandler.Write($"Apizr - {methodName}: Found a policy with key {registryKey}");
+                        _logHandler.Write($"Apizr - {fullMethodName}: Found a policy with key {registryKey}");
                     if (registeredPolicy is IAsyncPolicy<TResult> registeredPolicyWithResult)
                     {
                         if (policy == null)
@@ -1055,16 +1084,16 @@ namespace Apizr
                             policy.WrapAsync(registeredPolicyWithResult);
 
                         if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                            _logHandler.Write($"Apizr - {methodName}: Policy with key {registryKey} will be applied");
+                            _logHandler.Write($"Apizr - {fullMethodName}: Policy with key {registryKey} will be applied");
                     }
                     else if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
                     {
-                        _logHandler.Write($"Apizr - {methodName}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy<TResult>)} type and will be ignored");
+                        _logHandler.Write($"Apizr - {fullMethodName}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy<TResult>)} type and will be ignored");
                     }
                 }
                 else if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
                 {
-                    _logHandler.Write($"Apizr - {methodName}: No policy found for key {registryKey}");
+                    _logHandler.Write($"Apizr - {fullMethodName}: No policy found for key {registryKey}");
                 }
             }
 
@@ -1079,11 +1108,37 @@ namespace Apizr
             if (_policyRegistry == null)
                 return null;
 
-            var policyAttribute = methodCallExpression.Method.GetCustomAttribute<PolicyAttribute>();
-            if (policyAttribute == null)
-                return null;
+            PolicyAttributeBase policyAttribute = null;
 
-            var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
+            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(_apizrOptions.WebApiType)) // Crud api caching
+            {
+                var modelType = _apizrOptions.WebApiType.GetGenericArguments().First();
+                var methodName = methodCallExpression.Method.Name;
+                switch (methodName) // Specific method policies
+                {
+                    case "Create":
+                        policyAttribute = modelType.GetTypeInfo().GetCustomAttribute<CreatePolicyAttribute>();
+                        break;
+                    case "ReadAll":
+                        policyAttribute = modelType.GetTypeInfo().GetCustomAttribute<ReadAllPolicyAttribute>();
+                        break;
+                    case "Read":
+                        policyAttribute = modelType.GetTypeInfo().GetCustomAttribute<ReadPolicyAttribute>();
+                        break;
+                    case "Update":
+                        policyAttribute = modelType.GetTypeInfo().GetCustomAttribute<UpdatePolicyAttribute>();
+                        break;
+                    case "Delete":
+                        policyAttribute = modelType.GetTypeInfo().GetCustomAttribute<DeletePolicyAttribute>();
+                        break;
+                }
+            }
+            else // Global model policies
+            {
+                policyAttribute = methodCallExpression.Method.GetCustomAttribute<PolicyAttribute>();
+            }
+
+            var fullMethodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
 
             IAsyncPolicy policy = null;
             foreach (var registryKey in policyAttribute.RegistryKeys)
@@ -1091,7 +1146,7 @@ namespace Apizr
                 if (_policyRegistry.TryGet<IsPolicy>(registryKey, out var registeredPolicy))
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                        _logHandler.Write($"Apizr - {methodName}: Found a policy with key {registryKey}");
+                        _logHandler.Write($"Apizr - {fullMethodName}: Found a policy with key {registryKey}");
                     if (registeredPolicy is IAsyncPolicy registeredPolicyWithoutResult)
                     {
                         if (policy == null)
@@ -1100,16 +1155,16 @@ namespace Apizr
                             policy.WrapAsync(registeredPolicyWithoutResult);
 
                         if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                            _logHandler.Write($"Apizr - {methodName}: Policy with key {registryKey} will be applied");
+                            _logHandler.Write($"Apizr - {fullMethodName}: Policy with key {registryKey} will be applied");
                     }
                     else if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
                     {
-                        _logHandler.Write($"Apizr - {methodName}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy)} type and will be ignored");
+                        _logHandler.Write($"Apizr - {fullMethodName}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy)} type and will be ignored");
                     }
                 }
                 else if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
                 {
-                    _logHandler.Write($"Apizr - {methodName}: No policy found for key {registryKey}");
+                    _logHandler.Write($"Apizr - {fullMethodName}: No policy found for key {registryKey}");
                 }
             }
 

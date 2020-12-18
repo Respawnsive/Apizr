@@ -620,7 +620,16 @@ namespace Apizr
 
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 
-            var webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
+            PolicyAttribute webApiPolicyAttribute;
+            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
+            {
+                var modelType = webApiType.GetGenericArguments().First();
+                webApiPolicyAttribute = modelType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
+            }
+            else
+            {
+                webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
+            }
 
             var builder = new ApizrExtendedOptionsBuilder(new ApizrExtendedOptions(webApiType, apizrManagerType, baseAddress, traceAttribute?.TrafficVerbosity, traceAttribute?.ApizrVerbosity, webApiAttribute?.IsPriorityManagementEnabled, assemblyPolicyAttribute?.RegistryKeys,
                 webApiPolicyAttribute?.RegistryKeys));

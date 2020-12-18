@@ -9,7 +9,7 @@ using Refit;
 
 namespace Apizr.Sample.Api
 {
-    [Cache, Trace]
+    [Cache, LogAll]
     public interface IReallyExcitingCrudApi<T, in TKey> where T : class
     {
         [Post("")]

@@ -4,17 +4,17 @@ using HttpTracer;
 namespace Apizr.Logging
 {
     /// <summary>
-    /// Tells Apizr to trace request/response HTTP(s) traffic for the decorated web api interface
+    /// Tells Apizr to trace request/response HTTP(s) traffic and log execution steps for the decorated web api interface
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Interface | AttributeTargets.Class)]
-    public class TraceAttribute : Attribute
+    public class LogAllAttribute : Attribute
     {
         /// <summary>
-        /// Trace http traffic and Apizr executions with verbosity
+        /// Trace http traffic and log Apizr execution steps with verbosity
         /// </summary>
         /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: all)</param>
-        /// <param name="apizrVerbosity">Apizr execution steps verbosity (default: high)</param>
-        public TraceAttribute(HttpMessageParts trafficVerbosity = HttpMessageParts.All, ApizrLogLevel apizrVerbosity = ApizrLogLevel.High)
+        /// <param name="apizrVerbosity">Apizr execution steps logging verbosity (default: high)</param>
+        public LogAllAttribute(HttpMessageParts trafficVerbosity = HttpMessageParts.All, ApizrLogLevel apizrVerbosity = ApizrLogLevel.High)
         {
             TrafficVerbosity = trafficVerbosity;
             ApizrVerbosity = apizrVerbosity;

@@ -244,26 +244,26 @@ namespace Apizr
             var webApiAttribute = webApiType.GetTypeInfo().GetCustomAttribute<WebApiAttribute>(true);
             Uri.TryCreate(webApiAttribute?.BaseUri, UriKind.RelativeOrAbsolute, out var baseAddress);
 
-            TraceAttribute traceAttribute;
+            LogAllAttribute logAllAttribute;
             PolicyAttribute webApiPolicyAttribute;
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
             {
                 var modelType = webApiType.GetGenericArguments().First();
-                traceAttribute = modelType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true);
+                logAllAttribute = modelType.GetTypeInfo().GetCustomAttribute<LogAllAttribute>(true);
                 webApiPolicyAttribute = modelType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
             else
             {
-                traceAttribute = webApiType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true);
+                logAllAttribute = webApiType.GetTypeInfo().GetCustomAttribute<LogAllAttribute>(true);
                 webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
 
-            if(traceAttribute == null)
-                traceAttribute = webApiType.Assembly.GetCustomAttribute<TraceAttribute>();
+            if(logAllAttribute == null)
+                logAllAttribute = webApiType.Assembly.GetCustomAttribute<LogAllAttribute>();
 
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 
-            var builder = new ApizrOptionsBuilder(new ApizrOptions(webApiType, baseAddress, traceAttribute?.TrafficVerbosity, traceAttribute?.ApizrVerbosity,
+            var builder = new ApizrOptionsBuilder(new ApizrOptions(webApiType, baseAddress, logAllAttribute?.TrafficVerbosity, logAllAttribute?.ApizrVerbosity,
                 webApiAttribute?.IsPriorityManagementEnabled, assemblyPolicyAttribute?.RegistryKeys,
                 webApiPolicyAttribute?.RegistryKeys));
 

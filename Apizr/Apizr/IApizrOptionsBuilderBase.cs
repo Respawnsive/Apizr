@@ -32,7 +32,7 @@ namespace Apizr
         TApizrOptionsBuilder WithBaseAddress(Uri baseAddress);
 
         /// <summary>
-        /// Define http traces and Apizr logs verbosity (could be defined with TraceAttribute)
+        /// Define http traces and Apizr logs verbosity (could be defined with LogAllAttribute)
         /// </summary>
         /// <param name="trafficVerbosity">Http traffic tracing verbosity</param>
         /// <param name="apizrVerbosity">Apizr execution steps verbosity</param>

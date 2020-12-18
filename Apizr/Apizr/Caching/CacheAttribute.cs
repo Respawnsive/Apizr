@@ -6,7 +6,7 @@ namespace Apizr.Caching
     /// Tells Apizr to cache all methods returning result when decorating an interface or a specific one when decorating a method
     /// You have to provide an <see cref="ICacheHandler"/> mapping implementation to Apizr to use this feature
     /// </summary>
-    [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Method)]
+    [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Method)]
     public class CacheAttribute : CacheAttributeBase
     {
         public CacheAttribute()

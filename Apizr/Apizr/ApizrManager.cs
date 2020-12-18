@@ -702,7 +702,7 @@ namespace Apizr
                 {
                     var modelType = methodToCacheDetails.ApiInterfaceType.GetGenericArguments().First();
                     var methodName = methodToCacheData.MethodInfo.Name;
-                    switch (methodName)
+                    switch (methodName) // Specific method caching
                     {
                         case "ReadAll":
                             cacheAttribute = modelType.GetTypeInfo().GetCustomAttribute<CacheReadAllAttribute>(true);
@@ -711,6 +711,9 @@ namespace Apizr
                             cacheAttribute = modelType.GetTypeInfo().GetCustomAttribute<CacheReadAttribute>(true);
                             break;
                     }
+
+                    if(cacheAttribute == null) // Global model caching
+                        cacheAttribute = modelType.GetTypeInfo().GetCustomAttribute<CacheAttribute>(true);
                 }
                 else // Classic api caching
                 {

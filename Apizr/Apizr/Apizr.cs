@@ -244,7 +244,8 @@ namespace Apizr
             var webApiAttribute = webApiType.GetTypeInfo().GetCustomAttribute<WebApiAttribute>(true);
             Uri.TryCreate(webApiAttribute?.BaseUri, UriKind.RelativeOrAbsolute, out var baseAddress);
 
-            var traceAttribute = webApiType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true);
+            var traceAttribute = webApiType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true) ??
+                                 webApiType.Assembly.GetCustomAttribute<TraceAttribute>();
 
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 

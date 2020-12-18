@@ -616,7 +616,8 @@ namespace Apizr
                     optionsBuilder += sourceBuilder => sourceBuilder.ApizrOptions.WebApis.Add(webApiType, webApiAttribute);
             }
 
-            var traceAttribute = webApiType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true);
+            var traceAttribute = webApiType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true) ??
+                                 webApiType.Assembly.GetCustomAttribute<TraceAttribute>();
 
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 

@@ -1,9 +1,11 @@
 # Apizr
-Refit based web api client management, but resilient (retry, connectivity, cache, auth, log, priority, etc...)
+Refit based web api client, but resilient (retry, connectivity, cache, auth, log, priority, etc...)
+
+You'll find a [blog post series here](https://www.respawnsive.com/category/blog-en/apizr/) about Apizr.
 
 ## Libraries
 
-[Change Log - Nov 19, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
+[Change Log - Dec 18, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
 
 |Project|NuGet|
 |-------|-----|
@@ -118,7 +120,7 @@ We could define our web api service just like:
 [assembly:Policy("TransientHttpError")]
 namespace Apizr.Sample.Api
 {
-    [WebApi("https://reqres.in/"), Cache, Trace]
+    [WebApi("https://reqres.in/"), Cache, LogAll]
     public interface IReqResService
     {
         [Get("/api/users")]
@@ -215,7 +217,7 @@ Decorate your api services like we did before (but with your own settings):
 [assembly:Policy("TransientHttpError")]
 namespace Apizr.Sample.Api
 {
-    [WebApi("https://reqres.in/"), Cache, Trace]
+    [WebApi("https://reqres.in/"), Cache, LogAll]
     public interface IReqResService
     {
         [Get("/api/users")]

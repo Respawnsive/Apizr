@@ -1,3 +1,18 @@
+2.0
+---
+
+### Apizr
+
+- [New] Now **initialization options are typed to be dedicated** to each api interface manager. It means you can now get a specific configuration for each Apizr manager instance, like for caching, logging, and so on...
+- [New] Now **caching could be defined at method level** for CRUD api to. It means you can define specific cache settings for each Read and ReadAll request for each your CRUD model class
+- [New] Now **caching could be defined at class level** for CRUD api like you does for classic interface one. It means you can define specific cache settings for both Read and ReadAll requests for each your CRUD model class
+- [New] Now **caching could be defined at assembly level** for global cache settings. It means you can define global cache settings for all your apis in one place, and then define specific settings at sub-levels to override this behavior when needed
+- [New] Now **policy keys could be defined at method level** for CRUD api to. It means you can define specific policy keys for each request of each CRUD model class
+- [New] Now **policy keys could be defined at class level** for CRUD api like you does for classic interface one. It means you can define specific policy keys for all requests of each CRUD model class
+- [New] Now **logging could be defined at class level** for CRUD api like you does for classic interface one. It means you can define specific logging settings for all requests of each CRUD model class
+- [New] Now **logging could be defined at assembly level** for global logging settings. It means you can define global logging settings for all your apis in one place, and then define specific settings at sub-levels to override this behavior when needed
+- [BreakingChange] **TraceAttribute renamed to LogAllAttribute** to suits its tracing and logging both features activation
+
 1.9
 ---
 

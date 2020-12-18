@@ -20,6 +20,7 @@ using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Policing;
 using Apizr.Prioritizing;
+using Apizr.Requesting;
 using Fusillade;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -695,9 +696,28 @@ namespace Apizr
                 if (_cacheableMethodsSet.ContainsKey(methodToCacheData))
                     return true;
 
-                var cacheAttribute =
-                    methodToCacheDetails.ApiInterfaceType.GetTypeInfo().GetCustomAttribute<CacheAttribute>() ??
-                    methodToCacheData.MethodInfo.GetCustomAttribute<CacheAttribute>();
+                CacheAttributeBase cacheAttribute = null;
+
+                if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodToCacheDetails.ApiInterfaceType)) // Crud api caching
+                {
+                    var modelType = methodToCacheDetails.ApiInterfaceType.GetGenericArguments().First();
+                    var methodName = methodToCacheData.MethodInfo.Name;
+                    switch (methodName)
+                    {
+                        case "ReadAll":
+                            cacheAttribute = modelType.GetTypeInfo().GetCustomAttribute<CacheReadAllAttribute>(true);
+                            break;
+                        case "Read":
+                            cacheAttribute = modelType.GetTypeInfo().GetCustomAttribute<CacheReadAttribute>(true);
+                            break;
+                    }
+                }
+                else // Classic api caching
+                {
+                    cacheAttribute =
+                        methodToCacheDetails.ApiInterfaceType.GetTypeInfo().GetCustomAttribute<CacheAttribute>() ??
+                        methodToCacheData.MethodInfo.GetCustomAttribute<CacheAttribute>();
+                }
 
                 if (cacheAttribute == null)
                     return false;

@@ -7,7 +7,6 @@ using Refit;
 
 namespace Apizr.Requesting
 {
-    [Policy("TransientHttpError"), Cache]
     public interface ICrudApi<T, in TKey, TReadAllResult, in TReadAllParams> where T : class
     {
         [Post("")]

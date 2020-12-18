@@ -4,7 +4,7 @@ namespace Apizr.Caching
 {
     internal class MethodCacheAttributes
     {
-        public MethodCacheAttributes(CacheAttribute cacheAttribute, CacheKeyAttribute primaryKeyAttribute, string paramName,
+        public MethodCacheAttributes(CacheAttributeBase cacheAttribute, CacheKeyAttribute primaryKeyAttribute, string paramName,
             Type paramType, int paramOrder)
         {
             CacheAttribute = cacheAttribute;
@@ -16,7 +16,7 @@ namespace Apizr.Caching
 
         public int ParameterOrder { get; }
 
-        public CacheAttribute CacheAttribute { get; }
+        public CacheAttributeBase CacheAttribute { get; }
 
         public CacheKeyAttribute CachePrimaryKeyAttribute { get; }
 

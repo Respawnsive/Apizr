@@ -28,13 +28,4 @@ namespace Apizr.Requesting
         [Delete("/{key}")]
         Task Delete(TKey key, CancellationToken cancellationToken = default);
     }
-
-    //public interface ICrudApi<T, in TKey, TReadAllResult> : ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>> where T : class
-    //{ }
-
-    //public interface ICrudApi<T, in TKey> : ICrudApi<T, TKey, IEnumerable<T>> where T : class
-    //{ }
-
-    //public interface ICrudApi<T> : ICrudApi<T, int> where T : class
-    //{ }
 }

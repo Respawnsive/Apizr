@@ -38,9 +38,9 @@ namespace Apizr
         private readonly IMappingHandler _mappingHandler;
         private readonly IReadOnlyPolicyRegistry<string> _policyRegistry;
         private readonly string _webApiFriendlyName;
-        private readonly IApizrOptionsBase _apizrOptions;
+        private readonly IApizrOptions<TWebApi> _apizrOptions;
 
-        public ApizrManager(IEnumerable<ILazyPrioritizedWebApi<TWebApi>> webApis, IConnectivityHandler connectivityHandler, ICacheHandler cacheHandler, ILogHandler logHandler, IMappingHandler mappingHandler, IReadOnlyPolicyRegistry<string> policyRegistry, IApizrOptionsBase apizrOptions)
+        public ApizrManager(IEnumerable<ILazyPrioritizedWebApi<TWebApi>> webApis, IConnectivityHandler connectivityHandler, ICacheHandler cacheHandler, ILogHandler logHandler, IMappingHandler mappingHandler, IReadOnlyPolicyRegistry<string> policyRegistry, IApizrOptions<TWebApi> apizrOptions)
         {
             _cacheableMethodsSet = new Dictionary<MethodCacheDetails, MethodCacheAttributes>();
             _webApis = webApis;

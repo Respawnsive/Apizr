@@ -589,7 +589,7 @@ namespace Apizr
 
             services.AddOrReplaceSingleton(typeof(IMappingHandler), apizrOptions.MappingHandlerType);
 
-            services.TryAddSingleton<IApizrOptionsBase>(apizrOptions);
+            services.TryAddSingleton(typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), _ => Activator.CreateInstance(typeof(ApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions));
 
             services.TryAddSingleton(typeof(IApizrManager<>).MakeGenericType(apizrOptions.WebApiType), typeof(ApizrManager<>).MakeGenericType(apizrOptions.WebApiType));
 

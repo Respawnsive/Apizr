@@ -54,11 +54,7 @@ namespace Apizr
         public Func<ApizrLogLevel> ApizrVerbosityFactory
         {
             get => _apizrVerbosityFactory;
-            set => _apizrVerbosityFactory = () =>
-            {
-                ApizrVerbosity = value.Invoke();
-                return ApizrVerbosity;
-            };
+            set => _apizrVerbosityFactory = () => ApizrVerbosity = value.Invoke();
         }
 
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
@@ -69,5 +65,22 @@ namespace Apizr
         public Func<ILogHandler> LogHandlerFactory { get; set; }
         public Func<IMappingHandler> MappingHandlerFactory { get; set; }
         public IList<Func<ILogHandler, DelegatingHandler>> DelegatingHandlersFactories { get; }
+    }
+
+    public class ApizrOptions<TWebApi> : IApizrOptions<TWebApi>
+    {
+        private readonly IApizrOptionsBase _apizrOptions;
+
+        public ApizrOptions(IApizrOptionsBase apizrOptions)
+        {
+            _apizrOptions = apizrOptions;
+        }
+
+        public Type WebApiType => _apizrOptions.WebApiType;
+        public Uri BaseAddress => _apizrOptions.BaseAddress;
+        public HttpMessageParts HttpTracerVerbosity => _apizrOptions.HttpTracerVerbosity;
+        public ApizrLogLevel ApizrVerbosity => _apizrOptions.ApizrVerbosity;
+        public bool IsPriorityManagementEnabled => _apizrOptions.IsPriorityManagementEnabled;
+        public string[] PolicyRegistryKeys => _apizrOptions.PolicyRegistryKeys;
     }
 }

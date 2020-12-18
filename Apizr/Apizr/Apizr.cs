@@ -155,7 +155,7 @@ namespace Apizr
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
         public static TApizrManager For<TWebApi, TApizrManager>(
-            Func<IEnumerable<ILazyPrioritizedWebApi<TWebApi>>, IConnectivityHandler, ICacheHandler, ILogHandler, IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptionsBase,
+            Func<IEnumerable<ILazyPrioritizedWebApi<TWebApi>>, IConnectivityHandler, ICacheHandler, ILogHandler, IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptions<TWebApi>,
                 TApizrManager> apizrManagerFactory,
             Action<IApizrOptionsBuilder> optionsBuilder = null)
         where TApizrManager : IApizrManager<TWebApi>
@@ -229,7 +229,7 @@ namespace Apizr
                 lazyWebApis.Add(lazyWebApi);
             }
 
-            var apizrManager = apizrManagerFactory(lazyWebApis, apizrOptions.ConnectivityHandlerFactory.Invoke(), apizrOptions.CacheHandlerFactory.Invoke(), apizrOptions.LogHandlerFactory.Invoke(), apizrOptions.MappingHandlerFactory.Invoke(), apizrOptions.PolicyRegistryFactory.Invoke(), apizrOptions);
+            var apizrManager = apizrManagerFactory(lazyWebApis, apizrOptions.ConnectivityHandlerFactory.Invoke(), apizrOptions.CacheHandlerFactory.Invoke(), apizrOptions.LogHandlerFactory.Invoke(), apizrOptions.MappingHandlerFactory.Invoke(), apizrOptions.PolicyRegistryFactory.Invoke(), new ApizrOptions<TWebApi>(apizrOptions));
 
             return apizrManager;
         } 

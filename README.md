@@ -309,7 +309,6 @@ As we'll use the built-in yet defined ICrudApi, there's no more definition to do
 
 Here is what it looks like then:
 ```csharp
-[Policy("TransientHttpError"), CacheIt]
 public interface ICrudApi<T, in TKey, TReadAllResult, in TReadAllParams> where T : class
 {
     [Post("")]
@@ -332,8 +331,8 @@ public interface ICrudApi<T, in TKey, TReadAllResult, in TReadAllParams> where T
 }
 ```
 
-We can see that it comes with some attribute decorations, like CacheIt or Policy. 
-If you don't want it for your crud scenario, just don't provide any CacheHandler and/or TransientHttpError policy, it will be ignored.
+We can see that it comes with some CacheKey attribute decorations, but it won't cache anything until you ask Apizr to. 
+Caching, Logging, Policing... everything is activable fluently with the options builder.
 
 About generic types:
 - T and TKey (optional - default: ```int```) meanings are obvious

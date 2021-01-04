@@ -13,6 +13,7 @@
 - [New] Now **logging could be defined at assembly level** for global logging settings. It means you can define global logging settings for all your apis in one place, and then define specific settings at sub-levels to override this behavior when needed
 - [BreakingChange] **TraceAttribute renamed to LogItAttribute** to suits its tracing and logging both features activation
 - [BreakingChange] **CacheAttribute renamed to CacheItAttribute** to keep things consistent
+- [BreakingChange] **No more cache and policy attribute decorating CRUD api** by default. You can activate it fluently with the options builder.
 
 1.9
 ---

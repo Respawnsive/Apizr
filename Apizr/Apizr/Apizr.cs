@@ -244,22 +244,22 @@ namespace Apizr
             var webApiAttribute = webApiType.GetTypeInfo().GetCustomAttribute<WebApiAttribute>(true);
             Uri.TryCreate(webApiAttribute?.BaseUri, UriKind.RelativeOrAbsolute, out var baseAddress);
 
-            LogAllAttribute logAllAttribute;
+            LogItAttribute logAllAttribute;
             PolicyAttribute webApiPolicyAttribute;
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
             {
                 var modelType = webApiType.GetGenericArguments().First();
-                logAllAttribute = modelType.GetTypeInfo().GetCustomAttribute<LogAllAttribute>(true);
+                logAllAttribute = modelType.GetTypeInfo().GetCustomAttribute<LogItAttribute>(true);
                 webApiPolicyAttribute = modelType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
             else
             {
-                logAllAttribute = webApiType.GetTypeInfo().GetCustomAttribute<LogAllAttribute>(true);
+                logAllAttribute = webApiType.GetTypeInfo().GetCustomAttribute<LogItAttribute>(true);
                 webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
 
             if(logAllAttribute == null)
-                logAllAttribute = webApiType.Assembly.GetCustomAttribute<LogAllAttribute>();
+                logAllAttribute = webApiType.Assembly.GetCustomAttribute<LogItAttribute>();
 
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 

@@ -7,14 +7,14 @@ namespace Apizr.Logging
     /// Tells Apizr to trace request/response HTTP(s) traffic and log execution steps for the decorated web api interface
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Interface | AttributeTargets.Class)]
-    public class LogAllAttribute : Attribute
+    public class LogItAttribute : Attribute
     {
         /// <summary>
         /// Trace http traffic and log Apizr execution steps with verbosity
         /// </summary>
         /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: all)</param>
         /// <param name="apizrVerbosity">Apizr execution steps logging verbosity (default: high)</param>
-        public LogAllAttribute(HttpMessageParts trafficVerbosity = HttpMessageParts.All, ApizrLogLevel apizrVerbosity = ApizrLogLevel.High)
+        public LogItAttribute(HttpMessageParts trafficVerbosity = HttpMessageParts.All, ApizrLogLevel apizrVerbosity = ApizrLogLevel.High)
         {
             TrafficVerbosity = trafficVerbosity;
             ApizrVerbosity = apizrVerbosity;

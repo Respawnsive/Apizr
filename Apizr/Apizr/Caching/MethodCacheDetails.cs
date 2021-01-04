@@ -15,7 +15,7 @@ namespace Apizr.Caching
 
         public MethodInfo MethodInfo { get; }
 
-        public CacheAttribute CacheAttribute { get; internal set; }
+        public CacheItAttribute CacheAttribute { get; internal set; }
 
         public override int GetHashCode() => ApiInterfaceType.GetHashCode() * 23 * MethodInfo.GetHashCode() * 23 * 29;
 

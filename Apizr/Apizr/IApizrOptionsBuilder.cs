@@ -35,7 +35,7 @@ namespace Apizr
         IApizrOptionsBuilder WithBaseAddress(Func<Uri> baseAddressFactory);
 
         /// <summary>
-        /// Define http traces and Apizr logs verbosity (could be defined with LogAllAttribute)
+        /// Define http traces and Apizr logs verbosity (could be defined with LogItAttribute)
         /// </summary>
         /// <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
         /// <param name="apizrVerbosityFactory">Apizr execution steps verbosity factory</param>

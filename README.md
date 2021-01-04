@@ -5,7 +5,7 @@ You'll find a [blog post series here](https://www.respawnsive.com/category/blog-
 
 ## Libraries
 
-[Change Log - Dec 18, 2020](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
+[Change Log - Jan 04, 2021](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
 
 |Project|NuGet|
 |-------|-----|
@@ -120,7 +120,7 @@ We could define our web api service just like:
 [assembly:Policy("TransientHttpError")]
 namespace Apizr.Sample.Api
 {
-    [WebApi("https://reqres.in/"), Cache, LogAll]
+    [WebApi("https://reqres.in/"), CacheIt, LogIt]
     public interface IReqResService
     {
         [Get("/api/users")]
@@ -217,7 +217,7 @@ Decorate your api services like we did before (but with your own settings):
 [assembly:Policy("TransientHttpError")]
 namespace Apizr.Sample.Api
 {
-    [WebApi("https://reqres.in/"), Cache, LogAll]
+    [WebApi("https://reqres.in/"), CacheIt, LogIt]
     public interface IReqResService
     {
         [Get("/api/users")]
@@ -309,7 +309,7 @@ As we'll use the built-in yet defined ICrudApi, there's no more definition to do
 
 Here is what it looks like then:
 ```csharp
-[Policy("TransientHttpError"), Cache]
+[Policy("TransientHttpError"), CacheIt]
 public interface ICrudApi<T, in TKey, TReadAllResult, in TReadAllParams> where T : class
 {
     [Post("")]
@@ -332,7 +332,7 @@ public interface ICrudApi<T, in TKey, TReadAllResult, in TReadAllParams> where T
 }
 ```
 
-We can see that it comes with some attribute decorations, like Cache or Policy. 
+We can see that it comes with some attribute decorations, like CacheIt or Policy. 
 If you don't want it for your crud scenario, just don't provide any CacheHandler and/or TransientHttpError policy, it will be ignored.
 
 About generic types:

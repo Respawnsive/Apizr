@@ -8,7 +8,10 @@ using Refit;
 
 namespace Apizr
 {
-    public interface IApizrOptionsBuilderBase<out TApizrOptions, out TApizrOptionsBuilder> 
+    public interface IApizrOptionsBuilderBase
+    {}
+
+    public interface IApizrOptionsBuilderBase<out TApizrOptions, out TApizrOptionsBuilder> : IApizrOptionsBuilderBase 
         where TApizrOptions : IApizrOptionsBase 
         where TApizrOptionsBuilder : IApizrOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>
     {

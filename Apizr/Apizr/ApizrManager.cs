@@ -1,16 +1,15 @@
 ﻿// Largely inspired by Refit.Insane.PowerPack, but with more features
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Net.Http;
 using System.Reactive;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Caching;
@@ -22,8 +21,6 @@ using Apizr.Policing;
 using Apizr.Prioritizing;
 using Apizr.Requesting;
 using Fusillade;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Polly;
 using Polly.Registry;
 
@@ -779,23 +776,29 @@ namespace Apizr
 
             if (expression is ConstantExpression constantsExpression)
             {
-                var requestString = JsonConvert.SerializeObject(constantsExpression.Value);
-                if (requestString.Contains("Parameters"))
-                {
-                    var requestRoot = JsonConvert.DeserializeObject<JObject>(requestString);
-                    if (requestRoot.HasValues && 
-                        requestRoot.First.HasValues && 
-                        requestRoot.First.First.HasValues)
-                    {
-                        var parameters = requestRoot.First.First.SelectToken("Parameters")?.ToObject<IDictionary<string, object>>();
-                        if (parameters != null)
-                        {
-                            var value = string.Join("&", parameters.Where(kvp => kvp.Value != null).Select(kvp => $"{kvp.Key}={kvp.Value}"));
-                            yield return new ExtractedConstant { Name = constantsExpression.Type.Name, Value = value }; 
-                        }
-                    }
-                }
-                else
+                //var options = new JsonSerializerOptions { IncludeFields = true };
+                //var requestString = JsonSerializer.Serialize(constantsExpression.Value, options);
+                //if (requestString.Contains("Parameters"))
+                //{
+                //    using (var doc = JsonDocument.Parse(requestString))
+                //    {
+                //        var first = doc.RootElement.EnumerateArray().FirstOrDefault().EnumerateArray().FirstOrDefault();
+                //        var parameters = first.GetProperty("Parameters").EnumerateArray().ToDictionary(kvp => kvp.)
+                //    }
+                //    //var requestRoot = JsonSerializer.Deserialize<JObject>(requestString);
+                //    //if (requestRoot.HasValues && 
+                //    //    requestRoot.First.HasValues && 
+                //    //    requestRoot.First.First.HasValues)
+                //    //{
+                //    //    var parameters = requestRoot.First.First.SelectToken("Parameters")?.ToObject<IDictionary<string, object>>();
+                //    //    if (parameters != null)
+                //    //    {
+                //    //        var value = string.Join("&", parameters.Where(kvp => kvp.Value != null).Select(kvp => $"{kvp.Key}={kvp.Value}"));
+                //    //        yield return new ExtractedConstant { Name = constantsExpression.Type.Name, Value = value }; 
+                //    //    }
+                //    //}
+                //}
+                //else
                     yield return new ExtractedConstant { Name = constantsExpression.Type.Name, Value = constantsExpression.Value };
             }
 
@@ -964,8 +967,8 @@ namespace Apizr
                     : $"{cacheKeyPrefix}({primaryKeyName}:{value})";
             
             // Dictionary param key values
-            if (primaryKeyValue is IDictionary<string, string> dictionary)
-                return $"{cacheKeyPrefix}({dictionary.ToString(":", ", ")})";
+            if (primaryKeyValue is IDictionary objectDictionary)
+                return $"{cacheKeyPrefix}({objectDictionary.ToString(":", ", ")})";
 
             // Complex type param values without override
             var parameters = primaryKeyValue.ToString(":", ", ");

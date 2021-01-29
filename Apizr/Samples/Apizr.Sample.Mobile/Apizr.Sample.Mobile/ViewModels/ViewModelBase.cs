@@ -10,7 +10,6 @@ using ReactiveUI.Fody.Helpers;
 namespace Apizr.Sample.Mobile.ViewModels
 {
     public class ViewModelBase : ReactiveObject,
-        IAutoInitialize,
         IInitialize,
         IInitializeAsync,
         INavigatedAware,

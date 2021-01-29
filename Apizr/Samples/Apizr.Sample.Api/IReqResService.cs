@@ -9,15 +9,15 @@ using HttpTracer;
 using Refit;
 
 [assembly:Policy("TransientHttpError")]
-[assembly:CacheIt(CacheMode.GetOrFetch, "00:10:00")]
+[assembly:CacheIt(CacheMode.GetAndFetch, "00:10:00")]
 [assembly:LogIt(HttpMessageParts.All, ApizrLogLevel.High)]
 namespace Apizr.Sample.Api
 {
-    [WebApi("https://reqres.in/", false), LogIt(HttpMessageParts.None, ApizrLogLevel.Low)]
+    [WebApi("https://reqres.in/", false)]
     public interface IReqResService
     {
         [Get("/api/users")]
-        Task<UserList> GetUsersAsync();
+        Task<UserList> GetUsersAsync([Property("SomeKey")] string someValue);
 
         [Get("/api/users")]
         Task<UserList> GetUsersAsync(CancellationToken cancellationToken);

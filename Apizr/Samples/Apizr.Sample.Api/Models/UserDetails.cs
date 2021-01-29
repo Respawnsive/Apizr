@@ -1,15 +1,15 @@
-﻿using Apizr.Requesting;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
+using Apizr.Requesting;
 
 namespace Apizr.Sample.Api.Models
 {
     [CrudEntity("https://reqres.in/api/users")]
     public class UserDetails
     {
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public User User { get; set; }
 
-        [JsonProperty("ad")]
+        [JsonPropertyName("ad")]
         public UserAd Ad { get; set; }
     }
 }

@@ -1,9 +1,8 @@
-﻿using Apizr.Caching;
+﻿using System.Text.Json.Serialization;
+using Apizr.Caching;
 using Apizr.Logging;
-using Apizr.Policing;
 using Apizr.Requesting;
 using HttpTracer;
-using Newtonsoft.Json;
 
 namespace Apizr.Sample.Api.Models
 {
@@ -13,19 +12,19 @@ namespace Apizr.Sample.Api.Models
     [LogIt(HttpMessageParts.None, ApizrLogLevel.None)]
     public class User
     {
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [JsonProperty("first_name")]
+        [JsonPropertyName("first_name")]
         public string FirstName { get; set; }
 
-        [JsonProperty("last_name")]
+        [JsonPropertyName("last_name")]
         public string LastName { get; set; }
 
-        [JsonProperty("avatar")]
+        [JsonPropertyName("avatar")]
         public string Avatar { get; set; }
 
-        [JsonProperty("email")]
+        [JsonPropertyName("email")]
         public string Email { get; set; }
     }
 }

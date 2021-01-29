@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Extending;
+using Apizr.Integrations.Fusillade;
 using Apizr.Integrations.MonkeyCache;
 using Apizr.Logging;
 using Apizr.Mediation.Cruding;
@@ -106,6 +107,7 @@ namespace Apizr.Sample.Console
 
                 _reqResManager = Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithHttpClientHandler(new HttpClientHandler{AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithPolicyRegistry(registry)
                     .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
+                    .WithPriorityManagement()
                     .WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High));
 
                 _userManager = Apizr.CrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer })
@@ -221,12 +223,14 @@ namespace Apizr.Sample.Console
             try
             {
                 System.Console.WriteLine("");
-                //var test = new ReadAllUsersParams("value1", 2);
-                //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(test, ct), CancellationToken.None);
-                //users = userList?.Data;
                 PagedResult<User> pagedUsers = null;
                 if (configChoice <= 2)
                 {
+                    //var test = new ReadAllUsersParams("value1", 2);
+                    //var test = new Dictionary<string, object>{{ "value1", 2 } };
+                    //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(test, ct), CancellationToken.None);
+                    //users = userList?.Data;
+
                     pagedUsers = await _userManager.ExecuteAsync((ct, api) => api.ReadAll(ct), CancellationToken.None);
                 }
                 else if (configChoice == 3)

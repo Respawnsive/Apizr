@@ -1,24 +1,23 @@
 ﻿using System.Collections.Generic;
-using Apizr.Requesting;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Apizr.Sample.Api.Models
 {
     public class PagedResult<T> where T : class
     {
-        [JsonProperty("page")]
+        [JsonPropertyName("page")]
         public int Page { get; set; }
 
-        [JsonProperty("per_page")]
+        [JsonPropertyName("per_page")]
         public int PerPage { get; set; }
 
-        [JsonProperty("total")]
+        [JsonPropertyName("total")]
         public int Total { get; set; }
 
-        [JsonProperty("total_pages")]
+        [JsonPropertyName("total_pages")]
         public int TotalPages { get; set; }
 
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public IEnumerable<T> Data { get; set; }
     }
 }

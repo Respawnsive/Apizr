@@ -552,10 +552,7 @@ namespace Apizr
                         foreach (var delegatingHandlerExtendedFactory in apizrOptions.DelegatingHandlersExtendedFactories)
                             handlerBuilder.AddHandler(delegatingHandlerExtendedFactory.Invoke(serviceProvider));
 
-                        var innerHandler = handlerBuilder.Build();
-                        var primaryMessageHandler = apizrOptions.IsPriorityManagementEnabled
-                            ? new RateLimitedHttpMessageHandler(innerHandler, priority)
-                            : innerHandler;
+                        var primaryMessageHandler = handlerBuilder.GetPrimaryHttpMessageHandler(logHandler);
 
                         return primaryMessageHandler;
                     })

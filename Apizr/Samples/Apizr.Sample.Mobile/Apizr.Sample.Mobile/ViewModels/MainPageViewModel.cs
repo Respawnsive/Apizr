@@ -15,6 +15,7 @@ using Apizr.Optional.Extending;
 using Apizr.Requesting;
 using Apizr.Sample.Api;
 using Apizr.Sample.Api.Models;
+using Fusillade;
 using MediatR;
 using Prism.Commands;
 using Prism.Navigation;
@@ -34,19 +35,10 @@ namespace Apizr.Sample.Mobile.ViewModels
         private readonly ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> _userOptionalMediator;
 
         public MainPageViewModel(INavigationService navigationService, 
-                IApizrManager<IHttpBinService> httpBinManager,
-                IApizrManager<IReqResService> reqResManager,
-            IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> userCrudManager,
-            IApizrManager<ICrudApi<UserDetails, int, IEnumerable<UserDetails>, IDictionary<string, object>>> userDetailsCrudManager,
-            IMediator mediator, ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> userOptionalMediator)
+                IApizrManager<IReqResService> reqResManager)
             : base(navigationService)
         {
-            _httpBinManager = httpBinManager;
             _reqResManager = reqResManager;
-            _userCrudManager = userCrudManager;
-            _userDetailsCrudManager = userDetailsCrudManager;
-            _mediator = mediator;
-            _userOptionalMediator = userOptionalMediator;
             GetUsersCommand = ExecutionAwareCommand.FromTask(GetUsersAsync);
             //GetUserDetailsCommand = ExecutionAwareCommand.FromTask<User>(GetUserDetails);
             GetUserDetailsCommand = new DelegateCommand<User>(async user => await GetUserDetails(user));
@@ -84,42 +76,47 @@ namespace Apizr.Sample.Mobile.ViewModels
 
             IsRefreshing = true;
 
-            //IList<User>? users = null;
-            //try
-            //{
-            //    // This is a manually defined web api call into IReqResService (classic actually)
-            //    //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
-            //    //users = userList?.Data;
+            IList<User>? users = null;
+            try
+            {
+                // This is a manually defined web api call into IReqResService (classic actually)
+                var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(), Priority.Speculative);
+                users = userList?.Data;
 
-            //    // This is the Crud way, with or without Crud attribute auto registration, but without mediation
-            //    //var pagedUsers = await _userCrudManager.ExecuteAsync((ct, api) => api.ReadAll(ct), CancellationToken.None);
-            //    //users = pagedUsers?.Data?.ToList();
-            //
-            //    // The same as before but with auto mediation handling
-            //    var pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>(), CancellationToken.None);
-            //    users = pagedUsers?.Data?.ToList();
-            //}
-            //catch (ApizrException<UserList> e)
-            //{
-            //    var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
-            //    UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
 
-            //    users = e.CachedResult?.Data;
-            //}
-            //catch (ApizrException<PagedResult<User>> e)
-            //{
-            //    var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
-            //    UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+                var userList2 = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(), Priority.UserInitiated);
 
-            //    users = e.CachedResult?.Data?.ToList();
-            //}
-            //finally
-            //{
-            //    if (users != null && users.Any())
-            //        Users = new ObservableCollection<User>(users);
+                var userList3 = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(), Priority.Background);
 
-            //    IsRefreshing = false;
-            //}
+                // This is the Crud way, with or without Crud attribute auto registration, but without mediation
+                //var pagedUsers = await _userCrudManager.ExecuteAsync((ct, api) => api.ReadAll(ct), CancellationToken.None);
+                //users = pagedUsers?.Data?.ToList();
+
+                // The same as before but with auto mediation handling
+                //var pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>(), CancellationToken.None);
+                //users = pagedUsers?.Data?.ToList();
+            }
+            catch (ApizrException<UserList> e)
+            {
+                var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
+                UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+
+                users = e.CachedResult?.Data;
+            }
+            catch (ApizrException<PagedResult<User>> e)
+            {
+                var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
+                UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+
+                users = e.CachedResult?.Data?.ToList();
+            }
+            finally
+            {
+                if (users != null && users.Any())
+                    Users = new ObservableCollection<User>(users);
+
+                IsRefreshing = false;
+            }
 
             // The same as before but with optional result
             //var result = await _mediator.Send(new ReadAllOptionalQuery<PagedResult<User>>(), CancellationToken.None);
@@ -145,9 +142,9 @@ namespace Apizr.Sample.Mobile.ViewModels
             //    IsRefreshing = false;
             //});
 
-            var pagedUsers = await _userOptionalMediator.SendReadAllOptionalQuery().CatchAsync(AsyncErrorHandler.HandleException);
-            if (!pagedUsers.Data.IsEmpty())
-                Users = new ObservableCollection<User>(pagedUsers.Data);
+            //var pagedUsers = await _userOptionalMediator.SendReadAllOptionalQuery().CatchAsync(AsyncErrorHandler.HandleException);
+            //if (!pagedUsers.Data.IsEmpty())
+            //    Users = new ObservableCollection<User>(pagedUsers.Data);
 
             IsRefreshing = false;
 

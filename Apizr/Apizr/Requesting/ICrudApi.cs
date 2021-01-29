@@ -13,13 +13,22 @@ namespace Apizr.Requesting
         Task<T> Create([Body] T payload, CancellationToken cancellationToken = default);
 
         [Get("")]
+        Task<TReadAllResult> ReadAll(CancellationToken cancellationToken = default);
+
+        [Get("")]
         Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, CancellationToken cancellationToken = default);
 
         [Get("")]
-        Task<TReadAllResult> ReadAll(CancellationToken cancellationToken = default);
+        Task<TReadAllResult> ReadAll([Property("Priority")] int priority, CancellationToken cancellationToken = default);
+
+        [Get("")]
+        Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [Property("Priority")] int priority, CancellationToken cancellationToken = default);
 
         [Get("/{key}")]
         Task<T> Read([CacheKey] TKey key, CancellationToken cancellationToken = default);
+
+        [Get("/{key}")]
+        Task<T> Read([CacheKey] TKey key, [Property("Priority")] int priority, CancellationToken cancellationToken = default);
 
         [Put("/{key}")]
         Task Update(TKey key, [Body] T payload, CancellationToken cancellationToken = default);

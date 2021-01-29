@@ -24,6 +24,7 @@ using Apizr.Sample.Api;
 using Apizr.Sample.Api.Models;
 using Apizr.Sample.Console.Models;
 using AutoMapper;
+using Fusillade;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using MonkeyCache.FileStore;
@@ -228,10 +229,10 @@ namespace Apizr.Sample.Console
                 {
                     //var test = new ReadAllUsersParams("value1", 2);
                     //var test = new Dictionary<string, object>{{ "value1", 2 } };
-                    //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(test, ct), CancellationToken.None);
+                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.Background));
                     //users = userList?.Data;
 
-                    pagedUsers = await _userManager.ExecuteAsync((ct, api) => api.ReadAll(ct), CancellationToken.None);
+                    pagedUsers = await _userManager.ExecuteAsync((ct, api) => api.ReadAll((int)Priority.Background, ct), CancellationToken.None);
                 }
                 else if (configChoice == 3)
                 {

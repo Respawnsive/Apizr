@@ -23,6 +23,7 @@ using Apizr.Requesting;
 using Fusillade;
 using Polly;
 using Polly.Registry;
+using Refit;
 
 namespace Apizr
 {
@@ -726,7 +727,8 @@ namespace Apizr
                     return false;
 
                 var methodParameters = methodToCacheData.MethodInfo.GetParameters()
-                    .Where(x => !typeof(CancellationToken).GetTypeInfo().IsAssignableFrom(x.ParameterType.GetTypeInfo()))
+                    .Where(x => !typeof(CancellationToken).GetTypeInfo().IsAssignableFrom(x.ParameterType.GetTypeInfo()) && 
+                                x.CustomAttributes.All(y => y.AttributeType != typeof(PropertyAttribute)))
                     .ToList();
                 var cachePrimaryKey =
                     methodParameters
@@ -905,10 +907,12 @@ namespace Apizr
 
             var cacheAttributes = GetCacheAttribute<TResult>(restExpression);
 
+            var parametersInfos = methodCallExpression.Method.GetParameters().Where(p =>
+                p.CustomAttributes.Any(a => a.AttributeType == typeof(PropertyAttribute))).ToList();
+
             var extractedArguments = methodCallExpression.Arguments
                 .SelectMany(ExtractConstants)
-                .Where(x => x != null)
-                .Where(x => x.Value is CancellationToken == false)
+                .Where(x => x != null && x.Value is CancellationToken == false && parametersInfos.All(p => !string.Equals(p.Name, x.Name, StringComparison.InvariantCultureIgnoreCase)))
                 .ToList();
 
             if (!extractedArguments.Any())
@@ -957,7 +961,7 @@ namespace Apizr
             }
 
             if (primaryKeyValue == null)
-                throw new InvalidOperationException($"{nameof(CacheKeyAttribute)} primary key found for: " + cacheKeyPrefix);
+                throw new InvalidOperationException($"No {nameof(CacheKeyAttribute)} primary key found for: " + cacheKeyPrefix);
 
             // Simple param value OR complex type with overriden ToString
             var value = primaryKeyValue.ToString();

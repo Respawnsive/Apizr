@@ -53,7 +53,11 @@ namespace Apizr.Integrations.Fusillade
 
             var priority = (int) Priority.UserInitiated;
             if (request.Properties.TryGetValue("Priority", out var priorityObject))
-                priority = (int) priorityObject;
+            {
+                var priorityValue = (int) priorityObject;
+                if (priorityValue >= 0)
+                    priority = priorityValue;
+            }
 
             var key = RateLimitedHttpMessageHandler.UniqueKeyForRequest(request);
             var realToken = new CancellationTokenSource();

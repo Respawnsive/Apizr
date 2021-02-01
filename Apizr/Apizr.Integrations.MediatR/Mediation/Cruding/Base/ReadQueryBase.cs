@@ -1,11 +1,15 @@
 ﻿using Apizr.Mediation.Querying;
-using Fusillade;
 
 namespace Apizr.Mediation.Cruding.Base
 {
     public abstract class ReadQueryBase<TResponse, TKey> : MediationQueryBase<TResponse>
     {
-        protected ReadQueryBase(TKey key, Priority priority = Priority.UserInitiated) : base(priority)
+        protected ReadQueryBase(TKey key)
+        {
+            Key = key;
+        }
+
+        protected ReadQueryBase(TKey key, int priority) : base(priority)
         {
             Key = key;
         }
@@ -15,7 +19,11 @@ namespace Apizr.Mediation.Cruding.Base
 
     public abstract class ReadQueryBase<TResponse> : ReadQueryBase<TResponse, int>
     {
-        protected ReadQueryBase(int key, Priority priority = Priority.UserInitiated) : base(key, priority)
+        protected ReadQueryBase(int key) : base(key)
+        {
+        }
+
+        protected ReadQueryBase(int key, int priority) : base(key, priority)
         {
         }
     }

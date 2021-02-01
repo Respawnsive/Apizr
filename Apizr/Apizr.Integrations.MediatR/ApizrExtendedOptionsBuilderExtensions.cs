@@ -7,16 +7,12 @@ using System.Threading.Tasks;
 using Apizr.Extending;
 using Apizr.Mapping;
 using Apizr.Mediation.Cruding;
-using Apizr.Mediation.Cruding.Base;
 using Apizr.Mediation.Cruding.Handling;
-using Apizr.Mediation.Cruding.Handling.Base;
 using Apizr.Mediation.Cruding.Sending;
 using Apizr.Mediation.Requesting;
 using Apizr.Mediation.Requesting.Handling;
 using Apizr.Mediation.Requesting.Sending;
-using Apizr.Requesting;
 using MediatR;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Refit;
 

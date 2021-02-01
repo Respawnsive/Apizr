@@ -1,11 +1,10 @@
 ﻿using Apizr.Mediation.Commanding;
-using Fusillade;
 
 namespace Apizr.Mediation.Cruding.Base
 {
     public abstract class CreateCommandBase<TPayload, TResponse> : MediationCommandBase<TPayload, TResponse>
     {
-        protected CreateCommandBase(TPayload payload, Priority priority = Priority.UserInitiated) : base(priority)
+        protected CreateCommandBase(TPayload payload)
         {
             Payload = payload;
         }

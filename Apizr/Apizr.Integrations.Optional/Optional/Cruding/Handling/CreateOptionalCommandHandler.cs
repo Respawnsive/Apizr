@@ -5,7 +5,6 @@ using Apizr.Extending;
 using Apizr.Mapping;
 using Apizr.Mediation.Cruding.Handling.Base;
 using Apizr.Requesting;
-using MediatR;
 using Optional;
 using Optional.Async.Extensions;
 
@@ -30,7 +29,7 @@ namespace Apizr.Optional.Cruding.Handling
                     .MapAsync(_ =>
                         CrudApiManager
                             .ExecuteAsync((ct, api) => api.Create(Map<TModelEntity, TApiEntity>(request.Payload), ct),
-                                cancellationToken, request.Priority))
+                                cancellationToken))
                     .MapAsync(apiResult => Task.FromResult(Map<TApiEntity, TModelEntity>(apiResult)))
                     .ConfigureAwait(false);
             }

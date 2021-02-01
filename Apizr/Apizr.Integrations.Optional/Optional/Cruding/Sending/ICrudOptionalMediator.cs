@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Mediation.Cruding;
-using Fusillade;
 using MediatR;
 using Optional;
 
@@ -19,11 +17,9 @@ namespace Apizr.Optional.Cruding.Sending
         /// </summary>
         /// <param name="payload">The entity to create</param>
         /// <param name="cancellationToken">The cancellation token</param>
-        /// <param name="priority">The execution priority</param>
         /// <returns></returns>
         Task<Option<TApiEntity, ApizrException>> SendCreateOptionalCommand(TApiEntity payload,
-            CancellationToken cancellationToken = default,
-            Priority priority = Priority.UserInitiated);
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Send a mapped <see cref="CreateCommand{TModelEntity}"/> to Apizr with MediatR returning a mapped optional result
@@ -31,44 +27,66 @@ namespace Apizr.Optional.Cruding.Sending
         /// <typeparam name="TModelEntity"></typeparam>
         /// <param name="payload">The entity to create</param>
         /// <param name="cancellationToken">The cancellation token</param>
-        /// <param name="priority">The execution priority</param>
         /// <returns></returns>
         Task<Option<TModelEntity, ApizrException>> SendCreateOptionalCommand<TModelEntity>(TModelEntity payload,
-            CancellationToken cancellationToken = default,
-            Priority priority = Priority.UserInitiated);
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr with MediatR returning an optional result
         /// </summary>
         /// <param name="cancellationToken">The cancellation token</param>
-        /// <param name="priority">The execution priority</param>
         /// <returns></returns>
-        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery(
-            CancellationToken cancellationToken = default,
-            Priority priority = Priority.UserInitiated);
+        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr with MediatR with priority returning an optional result
+        /// </summary>
+        /// <param name="priority">The execution priority</param>
+        /// <param name="cancellationToken">The cancellation token</param>
+        /// <returns></returns>
+        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery(int priority,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr with MediatR returning mapped optional result
         /// </summary>
         /// <typeparam name="TModelEntityReadAllResult">The mapped result</typeparam>
         /// <param name="cancellationToken">The cancellation token</param>
-        /// <param name="priority">The execution priority</param>
         /// <returns></returns>
         Task<Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>>
-            SendReadAllOptionalQuery<TModelEntityReadAllResult>(CancellationToken cancellationToken = default,
-                Priority priority = Priority.UserInitiated);
+            SendReadAllOptionalQuery<TModelEntityReadAllResult>(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr with MediatR with priority returning mapped optional result
+        /// </summary>
+        /// <typeparam name="TModelEntityReadAllResult">The mapped result</typeparam>
+        /// <param name="priority">The execution priority</param>
+        /// <param name="cancellationToken">The cancellation token</param>
+        /// <returns></returns>
+        Task<Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>>
+            SendReadAllOptionalQuery<TModelEntityReadAllResult>(int priority, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr with MediatR returning an optional result
         /// </summary>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="cancellationToken">The cancellation token</param>
-        /// <param name="priority">The execution priority</param>
         /// <returns></returns>
         Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery(
             TReadAllParams readAllParams,
-            CancellationToken cancellationToken = default,
-            Priority priority = Priority.UserInitiated);
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr with MediatR with priority returning an optional result
+        /// </summary>
+        /// <param name="readAllParams">The read all filters</param>
+        /// <param name="priority">The execution priority</param>
+        /// <param name="cancellationToken">The cancellation token</param>
+        /// <returns></returns>
+        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery(
+            TReadAllParams readAllParams,
+            int priority,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr with MediatR returning a mapped optional result
@@ -76,23 +94,43 @@ namespace Apizr.Optional.Cruding.Sending
         /// <typeparam name="TModelEntityReadAllResult"></typeparam>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="cancellationToken">The cancellation token</param>
-        /// <param name="priority">The execution priority</param>
         /// <returns></returns>
         Task<Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>>
             SendReadAllOptionalQuery<TModelEntityReadAllResult>(TReadAllParams readAllParams,
-                CancellationToken cancellationToken = default,
-                Priority priority = Priority.UserInitiated);
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr with MediatR with priority returning a mapped optional result
+        /// </summary>
+        /// <typeparam name="TModelEntityReadAllResult"></typeparam>
+        /// <param name="readAllParams">The read all filters</param>
+        /// <param name="priority">The execution priority</param>
+        /// <param name="cancellationToken">The cancellation token</param>
+        /// <returns></returns>
+        Task<Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>>
+            SendReadAllOptionalQuery<TModelEntityReadAllResult>(TReadAllParams readAllParams,
+                int priority,
+                CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr with MediatR returning an optional result
         /// </summary>
         /// <param name="key">The entity key</param>
         /// <param name="cancellationToken">The cancellation token</param>
-        /// <param name="priority">The execution priority</param>
         /// <returns></returns>
         Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery(TApiEntityKey key,
-            CancellationToken cancellationToken = default,
-            Priority priority = Priority.UserInitiated);
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr with MediatR with priority returning an optional result
+        /// </summary>
+        /// <param name="key">The entity key</param>
+        /// <param name="priority">The execution priority</param>
+        /// <param name="cancellationToken">The cancellation token</param>
+        /// <returns></returns>
+        Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery(TApiEntityKey key,
+            int priority,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr with MediatR returning a mapped optional result
@@ -100,11 +138,21 @@ namespace Apizr.Optional.Cruding.Sending
         /// <typeparam name="TModelEntity"></typeparam>
         /// <param name="key">The entity key</param>
         /// <param name="cancellationToken">The cancellation token</param>
-        /// <param name="priority">The execution priority</param>
         /// <returns></returns>
         Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity>(TApiEntityKey key,
-            CancellationToken cancellationToken = default,
-            Priority priority = Priority.UserInitiated);
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr with MediatR with priority returning a mapped optional result
+        /// </summary>
+        /// <typeparam name="TModelEntity"></typeparam>
+        /// <param name="key">The entity key</param>
+        /// <param name="priority">The execution priority</param>
+        /// <param name="cancellationToken">The cancellation token</param>
+        /// <returns></returns>
+        Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity>(TApiEntityKey key,
+            int priority,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Send a <see cref="UpdateCommand{TApiEntityKey, TApiEntity}"/> to Apizr with MediatR returning an optional result
@@ -112,11 +160,9 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="key">The entity key</param>
         /// <param name="payload">The entity to update</param>
         /// <param name="cancellationToken">The cancellation token</param>
-        /// <param name="priority">The execution priority</param>
         /// <returns></returns>
         Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand(TApiEntityKey key, TApiEntity payload,
-            CancellationToken cancellationToken = default,
-            Priority priority = Priority.UserInitiated);
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Send a mapped <see cref="UpdateCommand{TApiEntityKey, TModelEntity}"/> to Apizr with MediatR returning an optional result
@@ -125,21 +171,17 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="key">The entity key</param>
         /// <param name="payload">The entity to update</param>
         /// <param name="cancellationToken">The cancellation token</param>
-        /// <param name="priority">The execution priority</param>
         /// <returns></returns>
         Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TModelEntity>(TApiEntityKey key,
-            TModelEntity payload, CancellationToken cancellationToken = default,
-            Priority priority = Priority.UserInitiated);
+            TModelEntity payload, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Send a <see cref="DeleteCommand{TApiEntity, TApiEntityKey}"/> to Apizr with MediatR returning an optional result
         /// </summary>
         /// <param name="key">The entity key</param>
         /// <param name="cancellationToken">The cancellation token</param>
-        /// <param name="priority">The execution priority</param>
         /// <returns></returns>
         Task<Option<Unit, ApizrException>> SendDeleteOptionalCommand(TApiEntityKey key,
-            CancellationToken cancellationToken = default,
-            Priority priority = Priority.UserInitiated);
+            CancellationToken cancellationToken = default);
     }
 }

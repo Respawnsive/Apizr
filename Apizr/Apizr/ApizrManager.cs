@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reactive;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
@@ -18,9 +17,7 @@ using Apizr.Extending;
 using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Policing;
-using Apizr.Prioritizing;
 using Apizr.Requesting;
-using Fusillade;
 using Polly;
 using Polly.Registry;
 using Refit;
@@ -30,7 +27,7 @@ namespace Apizr
     public class ApizrManager<TWebApi> : IApizrManager<TWebApi>
     {
         private readonly Dictionary<MethodCacheDetails, MethodCacheAttributes> _cacheableMethodsSet;
-        private readonly IEnumerable<ILazyPrioritizedWebApi<TWebApi>> _webApis;
+        private readonly ILazyWebApi<TWebApi> _lazyWebApi;
         private readonly IConnectivityHandler _connectivityHandler;
         private readonly ICacheHandler _cacheHandler;
         private readonly ILogHandler _logHandler;
@@ -39,10 +36,10 @@ namespace Apizr
         private readonly string _webApiFriendlyName;
         private readonly IApizrOptions<TWebApi> _apizrOptions;
 
-        public ApizrManager(IEnumerable<ILazyPrioritizedWebApi<TWebApi>> webApis, IConnectivityHandler connectivityHandler, ICacheHandler cacheHandler, ILogHandler logHandler, IMappingHandler mappingHandler, IReadOnlyPolicyRegistry<string> policyRegistry, IApizrOptions<TWebApi> apizrOptions)
+        public ApizrManager(ILazyWebApi<TWebApi> lazyWebApi, IConnectivityHandler connectivityHandler, ICacheHandler cacheHandler, ILogHandler logHandler, IMappingHandler mappingHandler, IReadOnlyPolicyRegistry<string> policyRegistry, IApizrOptions<TWebApi> apizrOptions)
         {
             _cacheableMethodsSet = new Dictionary<MethodCacheDetails, MethodCacheAttributes>();
-            _webApis = webApis;
+            _lazyWebApi = lazyWebApi;
             _connectivityHandler = connectivityHandler;
             _cacheHandler = cacheHandler;
             _logHandler = logHandler;
@@ -52,13 +49,10 @@ namespace Apizr
             _apizrOptions = apizrOptions;
         }
 
-        TWebApi GetWebApi(Priority priority) => _webApis.First(x => x.Priority == priority || x.Priority == Priority.UserInitiated).Value;
-        
-        public async Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod,
-            Priority priority = Priority.UserInitiated)
+        public async Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod)
         {
-            var webApi = GetWebApi(priority);
-            var methodCallExpression = GetMethodCallExpression<Unit>(executeApiMethod);
+            var webApi = _lazyWebApi.Value;
+            var methodCallExpression = GetMethodCallExpression(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
             if(_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
                 _logHandler.Write($"Apizr - {methodName}: Calling method");
@@ -79,7 +73,7 @@ namespace Apizr
                 if (policy != null)
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
+                        _logHandler.Write($"Apizr - {methodName}: Executing request with some policies");
 
                     var pollyContext = new Context().WithLogHandler(_logHandler);
                     await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(webApi), pollyContext);
@@ -87,7 +81,7 @@ namespace Apizr
                 else
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
+                        _logHandler.Write($"Apizr - {methodName}: Executing request without specific policies");
 
                     await executeApiMethod.Compile()(webApi);
                 }
@@ -100,14 +94,14 @@ namespace Apizr
                     _logHandler.Write($"Apizr - {methodName}: Throwing an {nameof(ApizrException)} with InnerException");
                 }
 
-                throw new ApizrException(e, Unit.Default);
+                throw new ApizrException(e);
             }
         }
 
-        public async Task ExecuteAsync(Expression<Func<TWebApi, IMappingHandler, Task>> executeApiMethod, Priority priority = Priority.UserInitiated)
+        public async Task ExecuteAsync(Expression<Func<TWebApi, IMappingHandler, Task>> executeApiMethod)
         {
-            var webApi = GetWebApi(priority);
-            var methodCallExpression = GetMethodCallExpression<Unit>(executeApiMethod);
+            var webApi = _lazyWebApi.Value;
+            var methodCallExpression = GetMethodCallExpression(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
             if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
                 _logHandler.Write($"Apizr - {methodName}: Calling method");
@@ -128,7 +122,7 @@ namespace Apizr
                 if (policy != null)
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
+                        _logHandler.Write($"Apizr - {methodName}: Executing request with some policies");
 
                     var pollyContext = new Context().WithLogHandler(_logHandler);
                     await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(webApi, _mappingHandler), pollyContext);
@@ -136,7 +130,7 @@ namespace Apizr
                 else
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
+                        _logHandler.Write($"Apizr - {methodName}: Executing request without specific policies");
 
                     await executeApiMethod.Compile()(webApi, _mappingHandler);
                 }
@@ -149,15 +143,14 @@ namespace Apizr
                     _logHandler.Write($"Apizr - {methodName}: Throwing an {nameof(ApizrException)} with InnerException");
                 }
 
-                throw new ApizrException(e, Unit.Default);
+                throw new ApizrException(e);
             }
         }
 
-        public async Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod, CancellationToken cancellationToken,
-            Priority priority = Priority.UserInitiated)
+        public async Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod, CancellationToken cancellationToken)
         {
-            var webApi = GetWebApi(priority);
-            var methodCallExpression = GetMethodCallExpression<Unit>(executeApiMethod);
+            var webApi = _lazyWebApi.Value;
+            var methodCallExpression = GetMethodCallExpression(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
             if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
                 _logHandler.Write($"Apizr - {methodName}: Calling method");
@@ -178,7 +171,7 @@ namespace Apizr
                 if (policy != null)
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
+                        _logHandler.Write($"Apizr - {methodName}: Executing request with some policies");
 
                     var pollyContext = new Context().WithLogHandler(_logHandler);
                     await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, webApi), pollyContext, cancellationToken);
@@ -186,7 +179,7 @@ namespace Apizr
                 else
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
+                        _logHandler.Write($"Apizr - {methodName}: Executing request without specific policies");
 
                     await executeApiMethod.Compile()(cancellationToken, webApi);
                 }
@@ -199,15 +192,14 @@ namespace Apizr
                     _logHandler.Write($"Apizr - {methodName}: Throwing an {nameof(ApizrException)} with InnerException");
                 }
 
-                throw new ApizrException(e, Unit.Default);
+                throw new ApizrException(e);
             }
         }
 
-        public async Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task>> executeApiMethod, CancellationToken cancellationToken,
-            Priority priority = Priority.UserInitiated)
+        public async Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task>> executeApiMethod, CancellationToken cancellationToken)
         {
-            var webApi = GetWebApi(priority);
-            var methodCallExpression = GetMethodCallExpression<Unit>(executeApiMethod);
+            var webApi = _lazyWebApi.Value;
+            var methodCallExpression = GetMethodCallExpression(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
             if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
                 _logHandler.Write($"Apizr - {methodName}: Calling method");
@@ -228,7 +220,7 @@ namespace Apizr
                 if (policy != null)
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
+                        _logHandler.Write($"Apizr - {methodName}: Executing request with some policies");
 
                     var pollyContext = new Context().WithLogHandler(_logHandler);
                     await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, webApi, _mappingHandler), pollyContext, cancellationToken);
@@ -236,7 +228,7 @@ namespace Apizr
                 else
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                        _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
+                        _logHandler.Write($"Apizr - {methodName}: Executing request without specific policies");
 
                     await executeApiMethod.Compile()(cancellationToken, webApi, _mappingHandler);
                 }
@@ -249,14 +241,13 @@ namespace Apizr
                     _logHandler.Write($"Apizr - {methodName}: Throwing an {nameof(ApizrException)} with InnerException");
                 }
 
-                throw new ApizrException(e, Unit.Default);
+                throw new ApizrException(e);
             }
         }
 
-        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod,
-            Priority priority = Priority.UserInitiated)
+        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod)
         {
-            var webApi = GetWebApi(priority);
+            var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
             if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
@@ -302,7 +293,7 @@ namespace Apizr
                     if (policy != null)
                     {
                         if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                            _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
+                            _logHandler.Write($"Apizr - {methodName}: Executing request with some policies");
 
                         var pollyContext = new Context().WithLogHandler(_logHandler);
                         result = await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(webApi), pollyContext);
@@ -310,7 +301,7 @@ namespace Apizr
                     else
                     {
                         if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                            _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
+                            _logHandler.Write($"Apizr - {methodName}: Executing request without specific policies");
 
                         result = await executeApiMethod.Compile()(webApi);
                     }
@@ -344,9 +335,9 @@ namespace Apizr
             return result;
         }
 
-        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod, Priority priority = Priority.UserInitiated)
+        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod)
         {
-            var webApi = GetWebApi(priority);
+            var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
             if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
@@ -392,7 +383,7 @@ namespace Apizr
                     if (policy != null)
                     {
                         if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                            _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
+                            _logHandler.Write($"Apizr - {methodName}: Executing request with some policies");
 
                         var pollyContext = new Context().WithLogHandler(_logHandler);
                         result = await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(webApi, _mappingHandler), pollyContext);
@@ -400,7 +391,7 @@ namespace Apizr
                     else
                     {
                         if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                            _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
+                            _logHandler.Write($"Apizr - {methodName}: Executing request without specific policies");
 
                         result = await executeApiMethod.Compile()(webApi, _mappingHandler);
                     }
@@ -434,10 +425,9 @@ namespace Apizr
             return result;
         }
 
-        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken,
-            Priority priority = Priority.UserInitiated)
+        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken)
         {
-            var webApi = GetWebApi(priority);
+            var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
             if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
@@ -483,7 +473,7 @@ namespace Apizr
                     if (policy != null)
                     {
                         if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                            _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
+                            _logHandler.Write($"Apizr - {methodName}: Executing request with some policies");
 
                         var pollyContext = new Context().WithLogHandler(_logHandler);
                         result = await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, webApi), pollyContext, cancellationToken);
@@ -491,7 +481,7 @@ namespace Apizr
                     else
                     {
                         if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                            _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
+                            _logHandler.Write($"Apizr - {methodName}: Executing request without specific policies");
 
                         result = await executeApiMethod.Compile()(cancellationToken, webApi);
                     }
@@ -525,10 +515,9 @@ namespace Apizr
             return result;
         }
 
-        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken,
-            Priority priority = Priority.UserInitiated)
+        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken)
         {
-            var webApi = GetWebApi(priority);
+            var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
             if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
@@ -574,7 +563,7 @@ namespace Apizr
                     if (policy != null)
                     {
                         if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                            _logHandler.Write($"Apizr - {methodName}: Executing {priority} request with some policies");
+                            _logHandler.Write($"Apizr - {methodName}: Executing request with some policies");
 
                         var pollyContext = new Context().WithLogHandler(_logHandler);
                         result = await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, webApi, _mappingHandler), pollyContext, cancellationToken);
@@ -582,7 +571,7 @@ namespace Apizr
                     else
                     {
                         if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                            _logHandler.Write($"Apizr - {methodName}: Executing {priority} request without specific policies");
+                            _logHandler.Write($"Apizr - {methodName}: Executing request without specific policies");
 
                         result = await executeApiMethod.Compile()(cancellationToken, webApi, _mappingHandler);
                     }
@@ -785,7 +774,7 @@ namespace Apizr
                 //    using (var doc = JsonDocument.Parse(requestString))
                 //    {
                 //        var first = doc.RootElement.EnumerateArray().FirstOrDefault().EnumerateArray().FirstOrDefault();
-                //        var parameters = first.GetProperty("Parameters").EnumerateArray().ToDictionary(kvp => kvp.)
+                //        //var parameters = first.GetProperty("Parameters").EnumerateArray().ToDictionary(kvp => kvp.)
                 //    }
                 //    //var requestRoot = JsonSerializer.Deserialize<JObject>(requestString);
                 //    //if (requestRoot.HasValues && 
@@ -906,13 +895,15 @@ namespace Apizr
                 return $"{cacheKeyPrefix}()";
 
             var cacheAttributes = GetCacheAttribute<TResult>(restExpression);
+            if (string.IsNullOrWhiteSpace(cacheAttributes.ParameterName))
+                return $"{cacheKeyPrefix}()";
 
             var parametersInfos = methodCallExpression.Method.GetParameters().Where(p =>
                 p.CustomAttributes.Any(a => a.AttributeType == typeof(PropertyAttribute))).ToList();
 
             var extractedArguments = methodCallExpression.Arguments
                 .SelectMany(ExtractConstants)
-                .Where(x => x != null && x.Value is CancellationToken == false && parametersInfos.All(p => !string.Equals(p.Name, x.Name, StringComparison.InvariantCultureIgnoreCase)))
+                .Where(x => x != null && x.Value is CancellationToken == false && parametersInfos.All(p => !string.Equals(p.Name, x.Name, StringComparison.CurrentCultureIgnoreCase)))
                 .ToList();
 
             if (!extractedArguments.Any())
@@ -992,19 +983,36 @@ namespace Apizr
             }
         }
 
-        private MethodCallExpression GetMethodCallExpression<TResult>(
+        private MethodCallExpression GetMethodCallExpression(
             Expression expression)
         {
             switch (expression)
             {
                 case Expression<Func<TWebApi, Task>> executeApiMethod:
-                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
+                    return GetMethodCallExpression(executeApiMethod.Body);
                 case Expression<Func<TWebApi, IMappingHandler, Task>> executeApiMethod:
-                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
+                    return GetMethodCallExpression(executeApiMethod.Body);
                 case Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod:
-                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
+                    return GetMethodCallExpression(executeApiMethod.Body);
                 case Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task>> executeApiMethod:
-                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
+                    return GetMethodCallExpression(executeApiMethod.Body);
+                case InvocationExpression methodInvocationBody:
+                    {
+                        var methodCallExpression = (MethodCallExpression)methodInvocationBody.Expression;
+                        return methodCallExpression;
+                    }
+                case MethodCallExpression methodCallExpression:
+                    return methodCallExpression;
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
+        private MethodCallExpression GetMethodCallExpression<TResult>(
+            Expression expression)
+        {
+            switch (expression)
+            {
                 case Expression<Func<TWebApi, Task<TResult>>> executeApiMethod:
                     return GetMethodCallExpression<TResult>(executeApiMethod.Body);
                 case Expression<Func<TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod:

@@ -33,7 +33,7 @@ namespace Apizr.Optional.Cruding.Handling
                             .ExecuteAsync(
                                 (ct, api) =>
                                     api.Update(request.Key, Map<TModelEntity, TApiEntity>(request.Payload), ct),
-                                cancellationToken, request.Priority);
+                                cancellationToken);
 
                         return Unit.Value;
                     })
@@ -68,7 +68,7 @@ namespace Apizr.Optional.Cruding.Handling
                             .ExecuteAsync(
                                 (ct, api) =>
                                     api.Update(request.Key, Map<TModelEntity, TApiEntity>(request.Payload), ct),
-                                cancellationToken, request.Priority);
+                                cancellationToken);
 
                         return Unit.Value;
                     })

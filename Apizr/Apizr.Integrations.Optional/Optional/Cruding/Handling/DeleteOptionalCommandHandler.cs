@@ -30,8 +30,7 @@ namespace Apizr.Optional.Cruding.Handling
                     .MapAsync(async _ =>
                     {
                         await CrudApiManager
-                            .ExecuteAsync((ct, api) => api.Delete(request.Key, ct), cancellationToken,
-                                request.Priority);
+                            .ExecuteAsync((ct, api) => api.Delete(request.Key, ct), cancellationToken);
 
                         return Unit.Value;
                     })
@@ -63,8 +62,7 @@ namespace Apizr.Optional.Cruding.Handling
                     .MapAsync(async _ =>
                     {
                         await CrudApiManager
-                            .ExecuteAsync((ct, api) => api.Delete(request.Key, ct), cancellationToken,
-                                request.Priority);
+                            .ExecuteAsync((ct, api) => api.Delete(request.Key, ct), cancellationToken);
 
                         return Unit.Value;
                     })

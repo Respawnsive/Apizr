@@ -17,10 +17,9 @@ namespace Apizr
         public ApizrExtendedOptions(Type webApiType, Type apizrManagerType, Uri baseAddress,
             HttpMessageParts? httpTracerVerbosity,
             ApizrLogLevel? apizrVerbosity,
-            bool? isPriorityManagementEnabled,
             string[] assemblyPolicyRegistryKeys,
-            string[] webApiPolicyRegistryKeys) : base(webApiType,
-            isPriorityManagementEnabled, assemblyPolicyRegistryKeys,
+            string[] webApiPolicyRegistryKeys) : base(webApiType, 
+            assemblyPolicyRegistryKeys,
             webApiPolicyRegistryKeys)
         {
             ApizrManagerType = apizrManagerType;

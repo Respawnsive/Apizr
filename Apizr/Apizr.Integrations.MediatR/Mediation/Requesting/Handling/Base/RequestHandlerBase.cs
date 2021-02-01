@@ -1,6 +1,5 @@
 ﻿using System;
 using Apizr.Mapping;
-using Apizr.Requesting;
 
 namespace Apizr.Mediation.Requesting.Handling.Base
 {

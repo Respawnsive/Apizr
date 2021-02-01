@@ -14,25 +14,25 @@ using Refit;
 [assembly:LogIt(HttpMessageParts.All, ApizrLogLevel.High)]
 namespace Apizr.Sample.Api
 {
-    [WebApi("https://reqres.in/", false)]
+    [WebApi("https://reqres.in/api")]
     public interface IReqResService
     {
-        [Get("/api/users")]
-        Task<UserList> GetUsersAsync([Property("Priority")] int priority = (int)Priority.UserInitiated);
+        [Get("/users")]
+        Task<UserList> GetUsersAsync([CacheKey] string search, [Property("Priority")] int priority);
 
-        [Get("/api/users")]
+        [Get("/users")]
         Task<UserList> GetUsersAsync(CancellationToken cancellationToken);
 
-        [Get("/api/users/{userId}")]
+        [Get("/users/{userId}")]
         Task<UserDetails> GetUserAsync([CacheKey] int userId, CancellationToken cancellationToken);
 
-        [Post("/api/users")]
+        [Post("/users")]
         Task<User> CreateUser(User user, CancellationToken cancellationToken);
 
-        [Get("/api/users")]
+        [Get("/users")]
         Task<UserList> GetUsersAsync([CacheKey] IDictionary<string, string> userIds, CancellationToken cancellationToken);
 
-        [Get("/api/users")]
+        [Get("/users")]
         Task<UserList> GetUsersAsync([CacheKey] ReadAllUsersParams parameters, CancellationToken cancellationToken);
     }
 }

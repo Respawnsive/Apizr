@@ -43,13 +43,6 @@ namespace Apizr
         TApizrOptionsBuilder WithLoggingVerbosity(HttpMessageParts trafficVerbosity, ApizrLogLevel apizrVerbosity);
 
         /// <summary>
-        /// Enable Fusillade priority management (could be defined with WebApiAttribute)
-        /// </summary>
-        /// <param name="isPriorityManagementEnabled">Enable Fusillade priority management</param>
-        /// <returns></returns>
-        TApizrOptionsBuilder WithPriorityManagement(bool isPriorityManagementEnabled);
-
-        /// <summary>
         /// Provide a method to refresh the authorization token when needed
         /// </summary>
         /// <param name="refreshTokenFactory">Refresh token method called when expired or empty</param>

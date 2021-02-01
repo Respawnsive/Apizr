@@ -23,22 +23,22 @@ namespace Apizr.Mediation.Requesting.Handling
             switch (request.ExecuteApiMethod)
             {
                 case Expression<Func<TWebApi, Task<TApiResponse>>> executeApiMethod:
-                    result = await WebApiManager.ExecuteAsync(executeApiMethod, request.Priority)
+                    result = await WebApiManager.ExecuteAsync(executeApiMethod)
                         .ConfigureAwait(false);
                     break;
 
                 case Expression<Func<CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod:
-                    result = await WebApiManager.ExecuteAsync(executeApiMethod, cancellationToken, request.Priority)
+                    result = await WebApiManager.ExecuteAsync(executeApiMethod, cancellationToken)
                         .ConfigureAwait(false);
                     break;
 
                 case Expression<Func<TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod:
-                    result = await WebApiManager.ExecuteAsync(executeApiMethod, request.Priority)
+                    result = await WebApiManager.ExecuteAsync(executeApiMethod)
                         .ConfigureAwait(false);
                     break;
 
                 case Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod:
-                    result = await WebApiManager.ExecuteAsync(executeApiMethod, cancellationToken, request.Priority)
+                    result = await WebApiManager.ExecuteAsync(executeApiMethod, cancellationToken)
                         .ConfigureAwait(false);
                     break;
 
@@ -63,11 +63,11 @@ namespace Apizr.Mediation.Requesting.Handling
             switch (request.ExecuteApiMethod)
             {
                 case Expression<Func<CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod:
-                    return await WebApiManager.ExecuteAsync(executeApiMethod, cancellationToken, request.Priority)
+                    return await WebApiManager.ExecuteAsync(executeApiMethod, cancellationToken)
                         .ConfigureAwait(false);
 
                 case Expression<Func<TWebApi, Task<TApiResponse>>> executeApiMethod:
-                    return await WebApiManager.ExecuteAsync(executeApiMethod, request.Priority)
+                    return await WebApiManager.ExecuteAsync(executeApiMethod)
                         .ConfigureAwait(false);
 
                 default:
@@ -87,12 +87,12 @@ namespace Apizr.Mediation.Requesting.Handling
             switch (request.ExecuteApiMethod)
             {
                 case Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod:
-                    await WebApiManager.ExecuteAsync(executeApiMethod, cancellationToken, request.Priority)
+                    await WebApiManager.ExecuteAsync(executeApiMethod, cancellationToken)
                         .ConfigureAwait(false);
                     break;
 
                 case Expression<Func<TWebApi, Task>> executeApiMethod:
-                    await WebApiManager.ExecuteAsync(executeApiMethod, request.Priority)
+                    await WebApiManager.ExecuteAsync(executeApiMethod)
                         .ConfigureAwait(false);
                     break;
 

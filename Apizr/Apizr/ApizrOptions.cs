@@ -17,10 +17,8 @@ namespace Apizr
         public ApizrOptions(Type webApiType, Uri baseAddress,
             HttpMessageParts? httpTracerVerbosity,
             ApizrLogLevel? apizrVerbosity,
-            bool? isPriorityManagementEnabled,
             string[] assemblyPolicyRegistryKeys,
             string[] webApiPolicyRegistryKeys) : base(webApiType,
-            isPriorityManagementEnabled,
             assemblyPolicyRegistryKeys, webApiPolicyRegistryKeys)
         {
             BaseAddressFactory = () => baseAddress;
@@ -80,7 +78,6 @@ namespace Apizr
         public Uri BaseAddress => _apizrOptions.BaseAddress;
         public HttpMessageParts HttpTracerVerbosity => _apizrOptions.HttpTracerVerbosity;
         public ApizrLogLevel ApizrVerbosity => _apizrOptions.ApizrVerbosity;
-        public bool IsPriorityManagementEnabled => _apizrOptions.IsPriorityManagementEnabled;
         public string[] PolicyRegistryKeys => _apizrOptions.PolicyRegistryKeys;
     }
 }

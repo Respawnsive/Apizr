@@ -9,9 +9,7 @@ using Apizr.Extending;
 using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Policing;
-using Apizr.Prioritizing;
 using Apizr.Requesting;
-using Fusillade;
 using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -483,100 +481,94 @@ namespace Apizr
 
             var webApiFriendlyName = webApiType.GetFriendlyName();
             var apizrOptions = CreateApizrExtendedOptions(webApiType, apizrManagerType, optionsBuilder);
-            var priorities = apizrOptions.IsPriorityManagementEnabled
-                ? ((Priority[])Enum.GetValues(typeof(Priority))).Where(x => x != Priority.Explicit).OrderBy(priority => priority)
-                : ((Priority[])Enum.GetValues(typeof(Priority))).Where(x => x == Priority.UserInitiated);
+            
+            var builder = services.AddHttpClient(ForType(apizrOptions.WebApiType))
+                .ConfigurePrimaryHttpMessageHandler(serviceProvider =>
+                {
+                    var httpClientHandler = apizrOptions.HttpClientHandlerFactory.Invoke(serviceProvider);
+                    var logHandler = serviceProvider.GetRequiredService<ILogHandler>();
+                    var handlerBuilder = new HttpHandlerBuilder(httpClientHandler, new HttpTracerLogWrapper(logHandler));
+                    var httpTracerVerbosity = apizrOptions.HttpTracerVerbosityFactory.Invoke(serviceProvider);
+                    handlerBuilder.HttpTracerHandler.Verbosity = httpTracerVerbosity;
+                    var apizrVerbosity = apizrOptions.ApizrVerbosityFactory.Invoke(serviceProvider);
 
-            foreach (var priority in priorities)
-            {
-                var builder = services.AddHttpClient(ForType(apizrOptions.WebApiType, priority))
-                    .ConfigurePrimaryHttpMessageHandler(serviceProvider =>
+                    if (apizrOptions.PolicyRegistryKeys != null && apizrOptions.PolicyRegistryKeys.Any())
                     {
-                        var httpClientHandler = apizrOptions.HttpClientHandlerFactory.Invoke(serviceProvider);
-                        var logHandler = serviceProvider.GetRequiredService<ILogHandler>();
-                        var handlerBuilder = new HttpHandlerBuilder(httpClientHandler, new HttpTracerLogWrapper(logHandler));
-                        var httpTracerVerbosity = apizrOptions.HttpTracerVerbosityFactory.Invoke(serviceProvider);
-                        handlerBuilder.HttpTracerHandler.Verbosity = httpTracerVerbosity;
-                        var apizrVerbosity = apizrOptions.ApizrVerbosityFactory.Invoke(serviceProvider);
-
-                        if (apizrOptions.PolicyRegistryKeys != null && apizrOptions.PolicyRegistryKeys.Any())
+                        IReadOnlyPolicyRegistry<string> policyRegistry = null;
+                        try
                         {
-                            IReadOnlyPolicyRegistry<string> policyRegistry = null;
-                            try
-                            {
-                                policyRegistry = serviceProvider.GetRequiredService<IReadOnlyPolicyRegistry<string>>();
-                            }
-                            catch (Exception)
-                            {
-                                if (apizrVerbosity >= ApizrLogLevel.Low)
-                                    logHandler.Write(
-                                    $"Apizr - Global policies: You get some global policies but didn't register a {nameof(PolicyRegistry)} instance. Global policies will be ignored for  for {webApiFriendlyName} {priority} instance");
-                            }
+                            policyRegistry = serviceProvider.GetRequiredService<IReadOnlyPolicyRegistry<string>>();
+                        }
+                        catch (Exception)
+                        {
+                            if (apizrVerbosity >= ApizrLogLevel.Low)
+                                logHandler.Write(
+                                $"Apizr - Global policies: You get some global policies but didn't register a {nameof(PolicyRegistry)} instance. Global policies will be ignored for  for {webApiFriendlyName} instance");
+                        }
 
-                            if (policyRegistry != null)
+                        if (policyRegistry != null)
+                        {
+                            foreach (var policyRegistryKey in apizrOptions.PolicyRegistryKeys)
                             {
-                                foreach (var policyRegistryKey in apizrOptions.PolicyRegistryKeys)
+                                if (policyRegistry.TryGet<IsPolicy>(policyRegistryKey, out var registeredPolicy))
                                 {
-                                    if (policyRegistry.TryGet<IsPolicy>(policyRegistryKey, out var registeredPolicy))
+                                    if (apizrVerbosity == ApizrLogLevel.High)
+                                        logHandler.Write($"Apizr - Global policies: Found a policy with key {policyRegistryKey} for {webApiFriendlyName} instance");
+                                    if (registeredPolicy is IAsyncPolicy<HttpResponseMessage> registeredPolicyForHttpResponseMessage)
                                     {
+                                        var policySelector =
+                                            new Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>>(
+                                                request =>
+                                                {
+                                                    var pollyContext = new Context().WithLogHandler(logHandler);
+                                                    HttpRequestMessageExtensions.SetPolicyExecutionContext(request, pollyContext);
+                                                    return registeredPolicyForHttpResponseMessage;
+                                                });
+                                        handlerBuilder.AddHandler(new PolicyHttpMessageHandler(policySelector));
+                                        
                                         if (apizrVerbosity == ApizrLogLevel.High)
-                                            logHandler.Write($"Apizr - Global policies: Found a policy with key {policyRegistryKey} for {webApiFriendlyName} {priority} instance");
-                                        if (registeredPolicy is IAsyncPolicy<HttpResponseMessage> registeredPolicyForHttpResponseMessage)
-                                        {
-                                            var policySelector =
-                                                new Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>>(
-                                                    request =>
-                                                    {
-                                                        var pollyContext = new Context().WithLogHandler(logHandler);
-                                                        HttpRequestMessageExtensions.SetPolicyExecutionContext(request, pollyContext);
-                                                        return registeredPolicyForHttpResponseMessage;
-                                                    });
-                                            handlerBuilder.AddHandler(new PolicyHttpMessageHandler(policySelector));
-                                            
-                                            if (apizrVerbosity == ApizrLogLevel.High)
-                                                logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} will be applied to {webApiFriendlyName} {priority} instance");
-                                        }
-                                        else if(apizrVerbosity >= ApizrLogLevel.Low)
-                                        {
-                                            logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} is not of {typeof(IAsyncPolicy<HttpResponseMessage>)} type and will be ignored for {webApiType.GetFriendlyName()} {priority} instance");
-                                        }
+                                            logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} will be applied to {webApiFriendlyName} instance");
                                     }
-                                    else if (apizrVerbosity >= ApizrLogLevel.Low)
+                                    else if(apizrVerbosity >= ApizrLogLevel.Low)
                                     {
-                                        logHandler.Write($"Apizr - Global policies: No policy found for key {policyRegistryKey} and will be ignored for  for {webApiFriendlyName} {priority} instance");
+                                        logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} is not of {typeof(IAsyncPolicy<HttpResponseMessage>)} type and will be ignored for {webApiType.GetFriendlyName()} instance");
                                     }
+                                }
+                                else if (apizrVerbosity >= ApizrLogLevel.Low)
+                                {
+                                    logHandler.Write($"Apizr - Global policies: No policy found for key {policyRegistryKey} and will be ignored for  for {webApiFriendlyName} instance");
                                 }
                             }
                         }
+                    }
 
-                        foreach (var delegatingHandlerExtendedFactory in apizrOptions.DelegatingHandlersExtendedFactories)
-                            handlerBuilder.AddHandler(delegatingHandlerExtendedFactory.Invoke(serviceProvider));
+                    foreach (var delegatingHandlerExtendedFactory in apizrOptions.DelegatingHandlersExtendedFactories)
+                        handlerBuilder.AddHandler(delegatingHandlerExtendedFactory.Invoke(serviceProvider));
 
-                        var primaryMessageHandler = handlerBuilder.GetPrimaryHttpMessageHandler(logHandler);
+                    var primaryMessageHandler = handlerBuilder.GetPrimaryHttpMessageHandler(logHandler);
 
-                        return primaryMessageHandler;
-                    })
-                    .AddTypedClient(typeof(ILazyPrioritizedWebApi<>).MakeGenericType(apizrOptions.WebApiType),
-                        (client, serviceProvider) =>
+                    return primaryMessageHandler;
+                })
+                .AddTypedClient(typeof(ILazyWebApi<>).MakeGenericType(apizrOptions.WebApiType),
+                    (client, serviceProvider) =>
+                    {
+                        if (client.BaseAddress == null)
                         {
-                            if (client.BaseAddress == null)
+                            client.BaseAddress = apizrOptions.BaseAddressFactory.Invoke(serviceProvider);
+                            if(client.BaseAddress == null)
+                                throw new ArgumentNullException(nameof(client.BaseAddress), $"You must provide a valid web api uri with the {nameof(WebApiAttribute)} or the options builder");
+                        }
+
+                        return typeof(LazyWebApi<>).MakeGenericType(apizrOptions.WebApiType)
+                            .GetConstructor(new[] {typeof(Func<object>)})
+                            ?.Invoke(new object[]
                             {
-                                client.BaseAddress = apizrOptions.BaseAddressFactory.Invoke(serviceProvider);
-                                if(client.BaseAddress == null)
-                                    throw new ArgumentNullException(nameof(client.BaseAddress), $"You must provide a valid web api uri with the {nameof(WebApiAttribute)} or the options builder");
-                            }
+                                new Func<object>(() => RestService.For(apizrOptions.WebApiType, client,
+                                    apizrOptions.RefitSettingsFactory(serviceProvider)))
+                            });
+                    });
 
-                            return Prioritize.TypeFor(apizrOptions.WebApiType, priority)
-                                .GetConstructor(new[] {typeof(Func<object>)})
-                                ?.Invoke(new object[]
-                                {
-                                    new Func<object>(() => RestService.For(apizrOptions.WebApiType, client,
-                                        apizrOptions.RefitSettingsFactory(serviceProvider)))
-                                });
-                        });
-
-                apizrOptions.HttpClientBuilder?.Invoke(builder);
-            }
+            apizrOptions.HttpClientBuilder?.Invoke(builder);
 
             services.AddOrReplaceSingleton(typeof(IConnectivityHandler), apizrOptions.ConnectivityHandlerType);
 
@@ -632,7 +624,9 @@ namespace Apizr
 
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 
-            var builder = new ApizrExtendedOptionsBuilder(new ApizrExtendedOptions(webApiType, apizrManagerType, baseAddress, logAllAttribute?.TrafficVerbosity, logAllAttribute?.ApizrVerbosity, webApiAttribute?.IsPriorityManagementEnabled, assemblyPolicyAttribute?.RegistryKeys,
+            var builder = new ApizrExtendedOptionsBuilder(new ApizrExtendedOptions(webApiType, apizrManagerType,
+                baseAddress, logAllAttribute?.TrafficVerbosity, logAllAttribute?.ApizrVerbosity,
+                assemblyPolicyAttribute?.RegistryKeys,
                 webApiPolicyAttribute?.RegistryKeys));
 
             optionsBuilder?.Invoke(builder);
@@ -640,18 +634,18 @@ namespace Apizr
             return builder.ApizrOptions;
         }
 
-        private static string ForType(Type refitInterfaceType, Priority priority)
+        private static string ForType(Type refitInterfaceType)
         {
             string typeName;
 
             if (refitInterfaceType.IsNested)
             {
-                var className = "AutoGenerated" + priority + refitInterfaceType.DeclaringType.Name + refitInterfaceType.Name;
+                var className = "AutoGenerated" + refitInterfaceType.DeclaringType.Name + refitInterfaceType.Name;
                 typeName = refitInterfaceType.AssemblyQualifiedName.Replace(refitInterfaceType.DeclaringType.FullName + "+" + refitInterfaceType.Name, refitInterfaceType.Namespace + "." + className);
             }
             else
             {
-                var className = "AutoGenerated" + priority + refitInterfaceType.Name;
+                var className = "AutoGenerated" + refitInterfaceType.Name;
 
                 if (refitInterfaceType.Namespace == null)
                 {

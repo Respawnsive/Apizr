@@ -1,5 +1,4 @@
-﻿using Apizr.Requesting;
-using MediatR;
+﻿using MediatR;
 
 namespace Apizr.Mediation.Querying
 {

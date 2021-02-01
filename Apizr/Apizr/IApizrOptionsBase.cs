@@ -35,11 +35,6 @@ namespace Apizr
         ApizrLogLevel ApizrVerbosity { get; }
 
         /// <summary>
-        /// Fusillade priority management activation
-        /// </summary>
-        bool IsPriorityManagementEnabled { get; }
-
-        /// <summary>
         /// Policy keys from the registry
         /// </summary>
         string[] PolicyRegistryKeys { get; }

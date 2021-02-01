@@ -18,7 +18,7 @@ namespace Apizr.Sample.Api
     public interface IReqResService
     {
         [Get("/users")]
-        Task<UserList> GetUsersAsync([CacheKey] string search, [Property("Priority")] int priority);
+        Task<UserList> GetUsersAsync([CacheKey] string search, [Priority] int priority);
 
         [Get("/users")]
         Task<UserList> GetUsersAsync(CancellationToken cancellationToken);

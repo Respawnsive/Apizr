@@ -106,12 +106,12 @@ namespace Apizr.Sample.Console
             {
                 Barrel.ApplicationId = nameof(Program);
 
-                _reqResManager = Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithHttpClientHandler(new HttpClientHandler{AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithPolicyRegistry(registry)
+                _reqResManager = Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(registry)
                     .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
                     .WithPriorityManagement()
                     .WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High));
 
-                _userManager = Apizr.CrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer })
+                _userManager = Apizr.CrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users")
                     .WithPolicyRegistry(registry)
                     .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
                     .WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High));
@@ -229,7 +229,7 @@ namespace Apizr.Sample.Console
                 {
                     //var test = new ReadAllUsersParams("value1", 2);
                     //var test = new Dictionary<string, object>{{ "value1", 2 } };
-                    var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync("test", (int)Priority.Background));
+                    var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.Background));
                     users = userList?.Data;
 
                     //pagedUsers = await _userManager.ExecuteAsync((ct, api) => api.ReadAll((int)Priority.Background, ct), CancellationToken.None);

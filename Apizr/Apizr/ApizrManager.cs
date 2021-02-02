@@ -719,6 +719,7 @@ namespace Apizr
                     .Where(x => !typeof(CancellationToken).GetTypeInfo().IsAssignableFrom(x.ParameterType.GetTypeInfo()) && 
                                 x.CustomAttributes.All(y => y.AttributeType != typeof(PropertyAttribute)))
                     .ToList();
+
                 var cachePrimaryKey =
                     methodParameters
                         .Select((x, index) => new

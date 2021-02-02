@@ -2,10 +2,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Caching;
+using Apizr.Integrations.Fusillade;
 using Apizr.Logging;
 using Apizr.Policing;
 using Apizr.Sample.Api.Models;
-using Fusillade;
 using HttpTracer;
 using Refit;
 
@@ -18,7 +18,7 @@ namespace Apizr.Sample.Api
     public interface IReqResService
     {
         [Get("/users")]
-        Task<UserList> GetUsersAsync([CacheKey] string search, [Priority] int priority);
+        Task<UserList> GetUsersAsync([Priority] int priority);
 
         [Get("/users")]
         Task<UserList> GetUsersAsync(CancellationToken cancellationToken);

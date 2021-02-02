@@ -229,10 +229,10 @@ namespace Apizr.Sample.Console
                 {
                     //var test = new ReadAllUsersParams("value1", 2);
                     //var test = new Dictionary<string, object>{{ "value1", 2 } };
-                    var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.Background));
-                    users = userList?.Data;
+                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.Background));
+                    //users = userList?.Data;
 
-                    //pagedUsers = await _userManager.ExecuteAsync((ct, api) => api.ReadAll((int)Priority.Background, ct), CancellationToken.None);
+                    pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll());
                 }
                 else if (configChoice == 3)
                 {

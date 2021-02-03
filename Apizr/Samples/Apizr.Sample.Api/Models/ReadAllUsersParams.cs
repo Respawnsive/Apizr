@@ -21,9 +21,9 @@ namespace Apizr.Sample.Api.Models
         [AliasAs("p2")]
         public int? Param2 { get; set; }
 
-        public override string ToString()
-        {
-            return $"{nameof(Param1)}: {Param1}";
-        }
+        //public override string ToString()
+        //{
+        //    return $"{nameof(Param1)}: {Param1}";
+        //}
     }
 }

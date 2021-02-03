@@ -108,7 +108,7 @@ namespace Apizr.Sample.Console
 
                 _reqResManager = Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(registry)
                     .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
-                    .WithPriorityManagement()
+                    //.WithPriorityManagement()
                     .WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High));
 
                 _userManager = Apizr.CrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users")
@@ -228,11 +228,24 @@ namespace Apizr.Sample.Console
                 if (configChoice <= 2)
                 {
                     //var test = new ReadAllUsersParams("value1", 2);
-                    //var test = new Dictionary<string, object>{{ "value1", 2 } };
-                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.Background));
+                    var parameters1 = new Dictionary<string, string>{{ "param1", "1" } };
+                    var parameters2 = new ReadAllUsersParams("param1", 1);
+
+                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
+                    //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
+                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(true));
+                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(parameters1));
+                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(parameters2));
+                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(true, parameters1));
+                    //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(true, parameters1, ct), CancellationToken.None);
+                    //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(parameters1, ct), CancellationToken.None);
+                    //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(parameters2, ct), CancellationToken.None);
                     //users = userList?.Data;
 
-                    pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll());
+                    //pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll());
+                    //pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll((int)Priority.UserInitiated));
+                    pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll(parameters1));
                 }
                 else if (configChoice == 3)
                 {
@@ -262,7 +275,7 @@ namespace Apizr.Sample.Console
                     // Not a real life scenario :)
                 }
 
-                //users = pagedUsers?.Data;
+                users = pagedUsers?.Data;
             }
             catch (ApizrException<PagedResult<User>> e)
             {
@@ -298,8 +311,9 @@ namespace Apizr.Sample.Console
                 {
                     if (configChoice <= 4)
                     {
+                        var parameters = new Dictionary<string, string>{{ "param1", "1" } };
                         var userDetails = configChoice <= 2
-                            ? await _reqResManager.ExecuteAsync((ct, api) => api.GetUserAsync(userChoice, ct),
+                            ? await _reqResManager.ExecuteAsync((ct, api) => api.GetUserAsync(userChoice, parameters, (int)Priority.UserInitiated, ct),
                                 CancellationToken.None)
                             : await _mediator.Send(new ReadQuery<UserDetails>(userChoice), CancellationToken.None);
 
@@ -327,10 +341,10 @@ namespace Apizr.Sample.Console
                         //userInfos = await _mediator.Send(new ExecuteRequest<IReqResService, UserInfos, UserDetails>((ct, api) => api.GetUserAsync(userChoice, ct)), CancellationToken.None);
 
                         // Classic dedicated mediator with auto mapped result
-                        userInfos = await _reqResMediator.SendFor<UserInfos, UserDetails>((ct, api) => api.GetUserAsync(userChoice, ct), CancellationToken.None);
+                        //userInfos = await _reqResMediator.SendFor<UserInfos, UserDetails>((ct, api) => api.GetUserAsync(userChoice, ct), CancellationToken.None);
 
                         // Auto mapped crud
-                        //userInfos = await _mediator.Send(new ReadQuery<UserInfos>(userChoice), CancellationToken.None);
+                        userInfos = await _mediator.Send(new ReadQuery<UserInfos>(userChoice), CancellationToken.None);
 
                         // Crud dedicated mediator with auto mapped optional result
                         var optionalUserInfos = await _userOptionalMediator.SendReadOptionalQuery<UserInfos>(userChoice);

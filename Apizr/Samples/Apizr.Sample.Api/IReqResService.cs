@@ -18,21 +18,39 @@ namespace Apizr.Sample.Api
     public interface IReqResService
     {
         [Get("/users")]
+        Task<UserList> GetUsersAsync();
+
+        [Get("/users")]
         Task<UserList> GetUsersAsync([Priority] int priority);
 
         [Get("/users")]
         Task<UserList> GetUsersAsync(CancellationToken cancellationToken);
 
+        [Get("/users")]
+        Task<UserList> GetUsersAsync(bool isTest);
+
+        [Get("/users")]
+        Task<UserList> GetUsersAsync(IDictionary<string, object> parameters);
+
+        [Get("/users")]
+        Task<UserList> GetUsersAsync(ReadAllUsersParams parameters);
+
+        [Get("/users")]
+        Task<UserList> GetUsersAsync(bool isTest, IDictionary<string, object> parameters);
+
+        [Get("/users")]
+        Task<UserList> GetUsersAsync([CacheKey] bool isTest, IDictionary<string, object> parameters, CancellationToken cancellationToken);
+
+        [Get("/users")]
+        Task<UserList> GetUsersAsync(IDictionary<string, object> userIds, CancellationToken cancellationToken);
+
+        [Get("/users")]
+        Task<UserList> GetUsersAsync(ReadAllUsersParams parameters, CancellationToken cancellationToken);
+
         [Get("/users/{userId}")]
-        Task<UserDetails> GetUserAsync([CacheKey] int userId, CancellationToken cancellationToken);
+        Task<UserDetails> GetUserAsync(int userId, IDictionary<string, object> parameters, [Priority] int priority, CancellationToken cancellationToken);
 
         [Post("/users")]
         Task<User> CreateUser(User user, CancellationToken cancellationToken);
-
-        [Get("/users")]
-        Task<UserList> GetUsersAsync([CacheKey] IDictionary<string, string> userIds, CancellationToken cancellationToken);
-
-        [Get("/users")]
-        Task<UserList> GetUsersAsync([CacheKey] ReadAllUsersParams parameters, CancellationToken cancellationToken);
     }
 }

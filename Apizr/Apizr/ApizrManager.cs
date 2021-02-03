@@ -253,29 +253,23 @@ namespace Apizr
             if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
                 _logHandler.Write($"Apizr - {methodName}: Calling method");
 
-            string cacheKey = null;
             TResult result = default;
-            MethodCacheAttributes cacheAttributes = null;
 
-            if (IsMethodCacheable<TResult>(executeApiMethod))
+            if (IsMethodCacheable<TResult>(executeApiMethod, out var cacheAttribute, out var cacheKey))
             {
                 if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Called method is cacheable");
                 if (_cacheHandler is VoidCacheHandler && _apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
                     _logHandler.Write($"Apizr - {methodName}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
-
-                cacheKey = GetCacheKey<TResult>(executeApiMethod);
                 if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.Get<TResult>(cacheKey);
                 if (!Equals(result, default(TResult)) && _apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Some cached data found for this cache key");
-
-                cacheAttributes = GetCacheAttribute<TResult>(executeApiMethod);
             }
 
-            if (result == null || cacheAttributes?.CacheAttribute.Mode == CacheMode.GetAndFetch)
+            if (result == null || cacheAttribute?.Mode == CacheMode.GetAndFetch)
             {
                 try
                 {
@@ -320,12 +314,12 @@ namespace Apizr
                 }
 
                 if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
-                    cacheAttributes != null)
+                    cacheAttribute != null)
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Caching result");
 
-                    await _cacheHandler.Set(cacheKey, result, cacheAttributes.CacheAttribute.LifeSpan);
+                    await _cacheHandler.Set(cacheKey, result, cacheAttribute.LifeSpan);
                 }
             }
 
@@ -343,29 +337,23 @@ namespace Apizr
             if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
                 _logHandler.Write($"Apizr - {methodName}: Calling method");
 
-            string cacheKey = null;
             TResult result = default;
-            MethodCacheAttributes cacheAttributes = null;
 
-            if (IsMethodCacheable<TResult>(executeApiMethod))
+            if (IsMethodCacheable<TResult>(executeApiMethod, out var cacheAttribute, out var cacheKey))
             {
                 if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Called method is cacheable");
                 if (_cacheHandler is VoidCacheHandler && _apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
                     _logHandler.Write($"Apizr - {methodName}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
-
-                cacheKey = GetCacheKey<TResult>(executeApiMethod);
                 if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.Get<TResult>(cacheKey);
                 if (!Equals(result, default(TResult)) && _apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Some cached data found for this cache key");
-
-                cacheAttributes = GetCacheAttribute<TResult>(executeApiMethod);
             }
 
-            if (result == null || cacheAttributes?.CacheAttribute.Mode == CacheMode.GetAndFetch)
+            if (result == null || cacheAttribute?.Mode == CacheMode.GetAndFetch)
             {
                 try
                 {
@@ -410,12 +398,12 @@ namespace Apizr
                 }
 
                 if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
-                    cacheAttributes != null)
+                    cacheAttribute != null)
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Caching result");
 
-                    await _cacheHandler.Set(cacheKey, result, cacheAttributes.CacheAttribute.LifeSpan);
+                    await _cacheHandler.Set(cacheKey, result, cacheAttribute.LifeSpan);
                 }
             }
 
@@ -433,29 +421,23 @@ namespace Apizr
             if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
                 _logHandler.Write($"Apizr - {methodName}: Calling method");
 
-            string cacheKey = null;
             TResult result = default;
-            MethodCacheAttributes cacheAttributes = null;
 
-            if (IsMethodCacheable<TResult>(executeApiMethod))
+            if (IsMethodCacheable<TResult>(executeApiMethod, out var cacheAttribute, out var cacheKey))
             {
                 if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Called method is cacheable");
                 if (_cacheHandler is VoidCacheHandler && _apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
                     _logHandler.Write($"Apizr - {methodName}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
-
-                cacheKey = GetCacheKey<TResult>(executeApiMethod);
                 if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.Get<TResult>(cacheKey, cancellationToken);
                 if (!Equals(result, default(TResult)) && _apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Some cached data found for this cache key");
-
-                cacheAttributes = GetCacheAttribute<TResult>(executeApiMethod);
             }
 
-            if (result == null || cacheAttributes?.CacheAttribute.Mode == CacheMode.GetAndFetch)
+            if (result == null || cacheAttribute?.Mode == CacheMode.GetAndFetch)
             {
                 try
                 {
@@ -500,12 +482,12 @@ namespace Apizr
                 }
 
                 if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
-                    cacheAttributes != null)
+                    cacheAttribute != null)
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Caching result");
 
-                    await _cacheHandler.Set(cacheKey, result, cacheAttributes.CacheAttribute.LifeSpan, cancellationToken);
+                    await _cacheHandler.Set(cacheKey, result, cacheAttribute.LifeSpan, cancellationToken);
                 }
             }
 
@@ -523,29 +505,23 @@ namespace Apizr
             if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
                 _logHandler.Write($"Apizr - {methodName}: Calling method");
 
-            string cacheKey = null;
             TResult result = default;
-            MethodCacheAttributes cacheAttributes = null;
 
-            if (IsMethodCacheable<TResult>(executeApiMethod))
+            if (IsMethodCacheable<TResult>(executeApiMethod, out var cacheAttribute, out var cacheKey))
             {
                 if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Called method is cacheable");
                 if (_cacheHandler is VoidCacheHandler && _apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
                     _logHandler.Write($"Apizr - {methodName}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
-
-                cacheKey = GetCacheKey<TResult>(executeApiMethod);
                 if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.Get<TResult>(cacheKey, cancellationToken);
                 if (!Equals(result, default(TResult)) && _apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                     _logHandler.Write($"Apizr - {methodName}: Some cached data found for this cache key");
-
-                cacheAttributes = GetCacheAttribute<TResult>(executeApiMethod);
             }
 
-            if (result == null || cacheAttributes?.CacheAttribute.Mode == CacheMode.GetAndFetch)
+            if (result == null || cacheAttribute?.Mode == CacheMode.GetAndFetch)
             {
                 try
                 {
@@ -590,12 +566,12 @@ namespace Apizr
                 }
 
                 if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
-                    cacheAttributes != null)
+                    cacheAttribute != null)
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Caching result");
 
-                    await _cacheHandler.Set(cacheKey, result, cacheAttributes.CacheAttribute.LifeSpan, cancellationToken);
+                    await _cacheHandler.Set(cacheKey, result, cacheAttribute.LifeSpan, cancellationToken);
                 }
             }
 
@@ -641,12 +617,10 @@ namespace Apizr
 
             try
             {
-                if (IsMethodCacheable<TResult>(executeApiMethod))
+                if (IsMethodCacheable<TResult>(executeApiMethod, out var cacheAttribute, out var cacheKey))
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Method is cacheable");
-
-                    var cacheKey = GetCacheKey<TResult>(executeApiMethod);
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Clearing cache for key {cacheKey}");
 
@@ -673,17 +647,15 @@ namespace Apizr
 
         #region Caching
 
-        private bool IsMethodCacheable<TResult>(Expression restExpression)
+        private bool IsMethodCacheable<TResult>(Expression restExpression, out CacheAttributeBase cacheAttribute, out string cacheKey)
         {
             var methodToCacheDetails = GetMethodToCacheData<TResult>(restExpression);
 
             lock (this)
             {
                 var methodToCacheData = methodToCacheDetails;
-                if (_cacheableMethodsSet.ContainsKey(methodToCacheData))
-                    return true;
-
-                CacheAttributeBase cacheAttribute = null;
+                cacheAttribute = null;
+                cacheKey = null;
 
                 if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodToCacheDetails.ApiInterfaceType)) // Crud api caching
                 {
@@ -712,46 +684,132 @@ namespace Apizr
                 if (cacheAttribute == null) // Global assembly caching
                     cacheAttribute = methodToCacheDetails.ApiInterfaceType.Assembly.GetCustomAttribute<CacheItAttribute>();
 
+                // Are we asked to cache this method?
                 if (cacheAttribute == null)
+                {
+                    // No we're not!
                     return false;
+                }
 
-                var methodParameters = methodToCacheData.MethodInfo.GetParameters()
-                    .Where(x => !typeof(CancellationToken).GetTypeInfo().IsAssignableFrom(x.ParameterType.GetTypeInfo()) && 
-                                x.CustomAttributes.All(y => y.AttributeType != typeof(PropertyAttribute)))
+                // Method is cacheable so prepare cache key
+                var methodCallExpression = GetMethodCallExpression<TResult>(restExpression);
+                cacheKey = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}(";
+
+                // Get all method parameters
+                var methodParameters = methodToCacheData.MethodInfo.GetParameters().ToList();
+
+                // Is there any parameters expect potential CancellationToken and Refit properties ?
+                if (!methodParameters.Any(x => !typeof(CancellationToken).GetTypeInfo().IsAssignableFrom(x.ParameterType.GetTypeInfo()) &&
+                                               x.CustomAttributes.All(y => !typeof(PropertyAttribute).GetTypeInfo().IsAssignableFrom(y.AttributeType.GetTypeInfo()))))
+                {
+                    // No there isn't!
+                    cacheKey += ")";
+                    return true;
+                }
+
+                // There's one or more parameters!
+                // Get arguments values
+                var extractedArguments = methodCallExpression.Arguments
+                    .SelectMany(ExtractConstants)
                     .ToList();
 
-                var cachePrimaryKey =
-                    methodParameters
-                        .Select((x, index) => new
+                // Get a potential specific cache key
+                var specificCacheKey = methodParameters
+                    .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(CacheKeyAttribute)))
+                    .Select((x, index) => new
+                    {
+                        Index = index,
+                        ParameterInfo = x
+                    }).FirstOrDefault();
+
+                var parameters = new List<string>();
+                for (var i = 0; i <= extractedArguments.Count-1; i++)
+                {
+                    // If there's a specific cache key, ignore all other arguments
+                    if (specificCacheKey != null)
+                    {
+                        if (i < specificCacheKey.Index)
+                            continue;
+                        if (i > specificCacheKey.Index)
+                            break;
+                    }
+
+                    // Ignore CancellationToken and Refit Property parameters
+                    var parameterInfo = methodParameters[i];
+                    if(typeof(CancellationToken).GetTypeInfo().IsAssignableFrom(parameterInfo.ParameterType.GetTypeInfo()) 
+                       || parameterInfo.CustomAttributes.Any(x => typeof(PropertyAttribute).GetTypeInfo().IsAssignableFrom(x.AttributeType.GetTypeInfo())))
+                        continue;
+
+                    var parameterName = parameterInfo.Name;
+                    var extractedArgument = extractedArguments[i];
+                    var extractedArgumentValue = extractedArgument.Value;
+                    object parameterValue = null;
+                    var isArgumentValuePrimitive = extractedArgumentValue.GetType().GetTypeInfo().IsPrimitive ||
+                                                   extractedArgumentValue is decimal ||
+                                                   extractedArgumentValue is string;
+
+                    // If it's a primitive, just set the value
+                    if (isArgumentValuePrimitive)
+                    {
+                        parameterValue = extractedArgument.Value;
+                    }
+                    else
+                    {
+                        // Is there a specific cache key with a target field?
+                        var cacheKeyAttribute = specificCacheKey?.ParameterInfo.GetCustomAttribute<CacheKeyAttribute>(true);
+                        if (!string.IsNullOrWhiteSpace(cacheKeyAttribute?.PropertyName))
                         {
-                            Index = index,
-                            ParameterInfo = x
-                        })
-                        .Where(x => x.ParameterInfo.CustomAttributes.Any(y => y.AttributeType == typeof(CacheKeyAttribute)))
-                        .Select(x => new
+                            // There's a specific cache key with a target field!
+                            var cacheKeyField = extractedArgument
+                                .Value
+                                .GetType()
+                                .GetRuntimeFields()
+                                .FirstOrDefault(x => x.Name.Equals(cacheKeyAttribute.PropertyName));
+
+                            // If we can find it, we set its value to the cache key
+                            if (cacheKeyField != null)
+                                parameterValue = cacheKeyField.GetValue(extractedArgument.Value);
+                        }
+                        else
                         {
-                            ParameterName = x.ParameterInfo.Name,
-                            x.ParameterInfo.ParameterType,
-                            CacheAttribute = x.ParameterInfo.GetCustomAttribute<CacheKeyAttribute>(),
-                            ParameterOrder = x.Index
-                        }).FirstOrDefault();
+                            // It's not a primitive and it's not a specific cache key or there isn't any target field specified
+                            parameterValue = extractedArgumentValue.GetType().GetRuntimeFields().First().GetValue(extractedArgumentValue);
+                        }
+                    }
 
-                if (cachePrimaryKey == null && methodParameters.Any())
-                    return false;
+                    // Set argument value if cache key is still null (shouldn't happen)
+                    if (parameterValue == null)
+                        parameterValue = extractedArgument.Value;
 
-                //if (cachePrimaryKey == null && methodParameters.Any())
-                //    throw new InvalidOperationException($"{methodToCacheData.MethodInfo.Name} method has {nameof(CacheItAttribute)}, " +
-                //                                        $"it has method parameters but none of that contain {nameof(CacheKeyAttribute)}");
+                    // Add formatted name and value pair to our cache key
+                    var parameter = GetParameterKeyValues(parameterName, parameterValue);
+                    parameters.Add(parameter);
+                }
 
-
-                _cacheableMethodsSet.Add(
-                    methodToCacheData,
-                    new MethodCacheAttributes(cacheAttribute, cachePrimaryKey?.CacheAttribute, cachePrimaryKey?.ParameterName, cachePrimaryKey?.ParameterType,
-                        cachePrimaryKey?.ParameterOrder ?? 0)
-                );
+                cacheKey += $"{string.Join(", ", parameters)})";
+                return true;
             }
+        }
 
-            return true;
+        private string GetParameterKeyValues(string parameterName, object parameterValue)
+        {
+            // Simple param value OR complex type with overriden ToString
+            var value = parameterValue.ToString();
+            if (!string.IsNullOrWhiteSpace(value) && value != parameterValue.GetType().ToString())
+                return value.Contains(":")
+                    ? $"{parameterName}:{{{value}}}"
+                    : $"{parameterName}:{value}";
+
+            // Dictionary param key values
+            if (parameterValue is IDictionary objectDictionary)
+                return $"{parameterName}:[{objectDictionary.ToString(":", ", ")}]";
+
+            // Complex type param values without override
+            var parameters = parameterValue.ToString(":", ", ");
+            if (!string.IsNullOrWhiteSpace(parameters))
+                return $"{parameterName}:{{{parameters}}}";
+
+            return null;
         }
 
         private MethodCacheDetails GetMethodToCacheData<TResult>(Expression restExpression)
@@ -835,7 +893,7 @@ namespace Apizr
             }
             else if (expression is ListInitExpression listInitExpression)
             {
-                if (typeof(IDictionary<string, object>).IsAssignableFrom(listInitExpression.Type))
+                if (typeof(IDictionary).IsAssignableFrom(listInitExpression.Type))
                 {
                     var stringBuilder = new StringBuilder();
                     var suffix = string.Empty;

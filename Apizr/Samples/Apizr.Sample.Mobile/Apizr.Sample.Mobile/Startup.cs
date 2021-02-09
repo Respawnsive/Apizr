@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Apizr.Extending;
+using Apizr.Integrations.Fusillade;
 using Apizr.Logging;
 using Apizr.Policing;
 using Apizr.Sample.Api;
@@ -50,34 +51,10 @@ namespace Apizr.Sample.Mobile
             services.AddSingleton<IAppSettings, AppSettings>();
 
             services.UseApizrFor<IReqResService>();
-            //services.UseApizrCrudFor(optionsBuilder => optionsBuilder.WithMediation().WithOptionalMediation().WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High), typeof(User));
-            //services.UseApizrFor<IHttpBinService>(optionsBuilder => optionsBuilder.WithAuthenticationHandler<IAppSettings>(settings => settings.Token, OnRefreshToken));
+            services.UseApizrCrudFor(optionsBuilder => optionsBuilder.WithPriorityManagement().WithMediation().WithOptionalMediation().WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High), typeof(User));
+            services.UseApizrFor<IHttpBinService>(optionsBuilder => optionsBuilder.WithAuthenticationHandler<IAppSettings>(settings => settings.Token, OnRefreshToken));
 
-            //services.AddSingleton<ServiceFactory>(serviceProvider => serviceType =>
-            //{
-            //    var enumerableType = serviceType
-            //        .GetInterfaces()
-            //        .Concat(new[] { serviceType })
-            //        .FirstOrDefault(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IEnumerable<>));
-
-            //    var typeToResolve = enumerableType != null ? enumerableType.GenericTypeArguments[0] : serviceType;
-
-            //    object? result = null;
-            //    try
-            //    {
-            //        result = enumerableType != null
-            //            ? serviceProvider.GetServices(typeToResolve)
-            //            : serviceProvider.GetService(typeToResolve);
-            //    }
-            //    catch (Exception)
-            //    {
-            //        // ignored
-            //    }
-
-            //    return result ?? Array.CreateInstance(typeToResolve, 0);
-            //});
-
-            //services.AddMediatR(typeof(Startup));
+            services.AddMediatR(typeof(Startup));
 
             // This is just to let you know what's registered from/for Apizr and ready to use
             foreach (var service in services.Where(d =>

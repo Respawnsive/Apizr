@@ -80,17 +80,16 @@ namespace Apizr.Sample.Mobile.ViewModels
             try
             {
                 // This is a manually defined web api call into IReqResService (classic actually)
-                var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(), Priority.Speculative);
-                users = userList?.Data;
+                //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.Speculative));
+                //users = userList?.Data;
 
+                //var userList2 = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
 
-                var userList2 = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(), Priority.UserInitiated);
-
-                var userList3 = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(), Priority.Background);
+                //var userList3 = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.Background));
 
                 // This is the Crud way, with or without Crud attribute auto registration, but without mediation
-                //var pagedUsers = await _userCrudManager.ExecuteAsync((ct, api) => api.ReadAll(ct), CancellationToken.None);
-                //users = pagedUsers?.Data?.ToList();
+                var pagedUsers = await _userCrudManager.ExecuteAsync((ct, api) => api.ReadAll((int)Priority.UserInitiated, ct), CancellationToken.None);
+                users = pagedUsers?.Data?.ToList();
 
                 // The same as before but with auto mediation handling
                 //var pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>(), CancellationToken.None);

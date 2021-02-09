@@ -108,7 +108,7 @@ namespace Apizr.Sample.Console
 
                 _reqResManager = Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(registry)
                     .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
-                    //.WithPriorityManagement()
+                    .WithPriorityManagement()
                     .WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High));
 
                 _userManager = Apizr.CrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users")
@@ -126,23 +126,20 @@ namespace Apizr.Sample.Console
 
                 services.AddPolicyRegistry(registry);
 
-                if (configChoice <= 2)
+                if (configChoice == 2)
                 {
                     //services.AddRefitClient<IReqResService>();
                     // Manual registration
-                    services.AddApizrFor<IReqResService>(optionsBuilder => optionsBuilder.WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithCacheHandler<AkavacheCacheHandler>().WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High));
+                    services.AddApizrFor<IReqResService>(optionsBuilder => optionsBuilder.WithPriorityManagement().WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithCacheHandler<AkavacheCacheHandler>().WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High));
 
                     //// Auto assembly detection and registration
                     ////services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
 
-                    if (configChoice == 2)
-                    {
-                        // Manual registration
-                        //services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>());
+                    // Manual registration
+                    //services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>());
 
-                        // Auto assembly detection and registration
-                        services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithCacheHandler<AkavacheCacheHandler>().WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High), typeof(User));
-                    }
+                    // Auto assembly detection and registration
+                    services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithCacheHandler<AkavacheCacheHandler>().WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High), typeof(User));
                 }
                 else
                 {
@@ -228,11 +225,11 @@ namespace Apizr.Sample.Console
                 if (configChoice <= 2)
                 {
                     //var test = new ReadAllUsersParams("value1", 2);
-                    var parameters1 = new Dictionary<string, string>{{ "param1", "1" } };
+                    var parameters1 = new Dictionary<string, object>{{ "param1", 1 } };
                     var parameters2 = new ReadAllUsersParams("param1", 1);
 
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
-                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
+                    var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(true));
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(parameters1));
@@ -311,7 +308,7 @@ namespace Apizr.Sample.Console
                 {
                     if (configChoice <= 4)
                     {
-                        var parameters = new Dictionary<string, string>{{ "param1", "1" } };
+                        var parameters = new Dictionary<string, object>{{ "param1", "1" } };
                         var userDetails = configChoice <= 2
                             ? await _reqResManager.ExecuteAsync((ct, api) => api.GetUserAsync(userChoice, parameters, (int)Priority.UserInitiated, ct),
                                 CancellationToken.None)

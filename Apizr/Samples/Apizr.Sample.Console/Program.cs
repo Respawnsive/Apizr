@@ -27,7 +27,11 @@ using AutoMapper;
 using Fusillade;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using MonkeyCache.FileStore;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
@@ -109,6 +113,15 @@ namespace Apizr.Sample.Console
                 _reqResManager = Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(registry)
                     .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
                     .WithPriorityManagement()
+                    //.WithRefitSettings(new RefitSettings(new NewtonsoftJsonContentSerializer(new JsonSerializerSettings
+                    //{
+                    //    Error = delegate (object sender, ErrorEventArgs args)
+                    //    {
+                    //        System.Console.WriteLine(args.ErrorContext.Error);
+                    //        args.ErrorContext.Handled = true;
+                    //    },
+                    //    Converters = { new IsoDateTimeConverter() }
+                    //})))
                     .WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High));
 
                 _userManager = Apizr.CrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users")
@@ -238,11 +251,11 @@ namespace Apizr.Sample.Console
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(true, parameters1, ct), CancellationToken.None);
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(parameters1, ct), CancellationToken.None);
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(parameters2, ct), CancellationToken.None);
-                    //users = userList?.Data;
+                    users = userList?.Data;
 
                     //pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll());
                     //pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll((int)Priority.UserInitiated));
-                    pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll(parameters1));
+                    //pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll(parameters1));
                 }
                 else if (configChoice == 3)
                 {
@@ -272,7 +285,7 @@ namespace Apizr.Sample.Console
                     // Not a real life scenario :)
                 }
 
-                users = pagedUsers?.Data;
+                //users = pagedUsers?.Data;
             }
             catch (ApizrException<PagedResult<User>> e)
             {

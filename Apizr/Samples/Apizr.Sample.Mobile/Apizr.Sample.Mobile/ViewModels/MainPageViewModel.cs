@@ -35,10 +35,15 @@ namespace Apizr.Sample.Mobile.ViewModels
         private readonly ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> _userOptionalMediator;
 
         public MainPageViewModel(INavigationService navigationService, 
-                IApizrManager<IReqResService> reqResManager)
+                IApizrManager<IReqResService> reqResManager, IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> userCrudManager, IApizrManager<IHttpBinService> httpBinManager, IApizrManager<ICrudApi<UserDetails, int, IEnumerable<UserDetails>, IDictionary<string, object>>> userDetailsCrudManager, IMediator mediator, ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> userOptionalMediator)
             : base(navigationService)
         {
             _reqResManager = reqResManager;
+            _userCrudManager = userCrudManager;
+            _httpBinManager = httpBinManager;
+            _userDetailsCrudManager = userDetailsCrudManager;
+            _mediator = mediator;
+            _userOptionalMediator = userOptionalMediator;
             GetUsersCommand = ExecutionAwareCommand.FromTask(GetUsersAsync);
             //GetUserDetailsCommand = ExecutionAwareCommand.FromTask<User>(GetUserDetails);
             GetUserDetailsCommand = new DelegateCommand<User>(async user => await GetUserDetails(user));

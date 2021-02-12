@@ -1,3 +1,16 @@
+3.0
+---
+
+### Apizr
+
+- [BreakingChange] **Fusillade has been moved to an integration package**. If you used to play with it, just install it from its brand new dedicated integration package and follow the new Readme instructions
+- [BreakingChange] Now **based on Refit v6+ witch now relies on System.Text.Json** instead of Newtonsoft.Json. If you'd like to continue to use Newtonsoft.Json, add the Refit.Newtonsoft.Json NuGet package and follow the new Readme instructions
+- [Fix] **Cache key generator has been reshaped** to support all scenarios, including path parameters
+
+### Apizr.Integrations.Fusillade
+
+- [New] Brand new integration package to use Apizr with Fusillade, only if you need it (no more core references and NuGet dependencies)
+
 2.0
 ---
 

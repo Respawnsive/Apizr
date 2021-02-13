@@ -5,13 +5,14 @@ You'll find a [blog post series here](https://www.respawnsive.com/category/blog-
 
 ## Libraries
 
-[Change Log - Jan 04, 2021](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
+[Change Log - Feb 13, 2021](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
 
 |Project|NuGet|
 |-------|-----|
 |Apizr|[![NuGet](https://img.shields.io/nuget/v/Apizr.svg)](https://www.nuget.org/packages/Apizr/)|
 |Apizr.Extensions.Microsoft.DependencyInjection|[![NuGet](https://img.shields.io/nuget/v/Apizr.Extensions.Microsoft.DependencyInjection.svg)](https://www.nuget.org/packages/Apizr.Extensions.Microsoft.DependencyInjection/)|
 |Apizr.Integrations.Shiny|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Shiny.svg)](https://www.nuget.org/packages/Apizr.Integrations.Shiny/)|
+|Apizr.Integrations.Fusillade|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Fusillade.svg)](https://www.nuget.org/packages/Apizr.Integrations.Fusillade/)|
 |Apizr.Integrations.Akavache|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Akavache.svg)](https://www.nuget.org/packages/Apizr.Integrations.Akavache/)|
 |Apizr.Integrations.MonkeyCache|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.MonkeyCache.svg)](https://www.nuget.org/packages/Apizr.Integrations.MonkeyCache/)|
 |Apizr.Integrations.MediatR|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.MediatR.svg)](https://www.nuget.org/packages/Apizr.Integrations.MediatR/)|
@@ -23,6 +24,7 @@ Install the NuGet package of your choice:
    - **Apizr** package comes with the For and CrudFor static instantiation approach (witch you can register in your DI container then)
    - **Apizr.Extensions.Microsoft.DependencyInjection** package extends your IServiceCollection with AddApizrFor and AddApizrCrudFor registration methods (ASP.Net Core, etc)
    - **Apizr.Integrations.Shiny** package brings ICacheHandler, ILogHandler and IConnectivityHandler method mapping implementations for [Shiny](https://github.com/shinyorg/shiny), extending your IServiceCollection with a UseApizr and UseApizrCrudFor registration methods
+   - **Apizr.Integrations.Fusillade** package enables request priority management using [Fusillade](https://github.com/reactiveui/Fusillade)
    - **Apizr.Integrations.Akavache** package brings an ICacheHandler method mapping implementation for [Akavache](https://github.com/reactiveui/Akavache)
    - **Apizr.Integrations.MonkeyCache** package brings an ICacheHandler method mapping implementation for [MonkeyCache](https://github.com/jamesmontemagno/monkey-cache)
    - **Apizr.Integrations.MediatR** package enables request auto handling with mediation using [MediatR](https://github.com/jbogard/MediatR)
@@ -35,7 +37,6 @@ Apizr core package make use of well known nuget packages to make the magic appea
 |-------|--------|
 |[Refit](https://github.com/reactiveui/refit)|Auto-implement web api interface and deal with HttpClient|
 |[Polly](https://github.com/App-vNext/Polly)|Apply some policies like Retry, CircuitBreaker, etc...|
-|[Fusillade](https://github.com/reactiveui/Fusillade)|Play with request priority|
 |[HttpTracer](https://github.com/BSiLabs/HttpTracer)|Trace Http(s) request/response traffic to log it|
 
 It also comes with some handling interfaces to let you provide your own services for:
@@ -76,8 +77,12 @@ It also comes with some handling interfaces to let you provide your own services
      - [Policy registry](#configuration-policy-registry)
      - [HttpClient](#configuration-httpclient)
    - [External integrations](#external-integrations)
-     - [Mediation](#mediation)
-     - [Optional](#optional)
+     - [Shiny](#shiny)
+     - [MonkeyCache](#monkeycache)
+     - [Akavache](#akavache)
+     - [Fusillade](#fusillade)
+     - [MediatR](#mediation)
+     - [OptionalAsync](#optional)
        - [Optional helper extentions](#optional-helper-extentions)
          - [OnResultAsync](#optional-onresultasync)
          - [CatchAsync](#optional-catchasync)
@@ -96,13 +101,11 @@ Intro
 
 Clearly inspired by [Refit.Insane.PowerPack](https://github.com/thefex/Refit.Insane.PowerPack) but extended with a lot more features, the goal of Apizr is to get all ready to use for web api requesting, with the more resiliency we can, but without the boilerplate.
 
+Apizr v3+ relies on Refit v6+ witch makes System.Text.Json the default JSON serializer instead of Newtonsoft.Json. 
+If you'd like to continue to use Newtonsoft.Json, add the Refit.Newtonsoft.Json NuGet package and set your ContentSerializer to NewtonsoftJsonContentSerializer on your RefitSettings instance. You can do it by calling the ```WithRefitSettings(...)``` options builder method.
+
 Examples here are based on a Xamarin.Forms app working with Shiny. 
 You'll find a sample Xamarin.Forms app browsing code, implementing Apizr with Shiny, Prism and MS DI all together.
-
-> **NOTE - Xamarin/Shiny/Prism/Container**: 
-> 
->Please use any Prism extended container of your choice starting v8.0.48 to handle multiple instance registration/resolution
-
 You'll find another sample app but .Net Core console this time, implementing Apizr without anything else (static) and also with MS DI (extensions).
 
 So please, take a look at the samples :)
@@ -312,27 +315,63 @@ Here is what it looks like then:
 public interface ICrudApi<T, in TKey, TReadAllResult, in TReadAllParams> where T : class
 {
     [Post("")]
-    Task<T> Create([Body] T payload, CancellationToken cancellationToken = default);
+    Task<T> Create([Body] T payload);
+
+    [Post("")]
+    Task<T> Create([Body] T payload, CancellationToken cancellationToken);
 
     [Get("")]
-    Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, CancellationToken cancellationToken = default);
+    Task<TReadAllResult> ReadAll();
 
     [Get("")]
-    Task<TReadAllResult> ReadAll(CancellationToken cancellationToken = default);
+    Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams);
+
+    [Get("")]
+    Task<TReadAllResult> ReadAll([Property("Priority")] int priority);
+
+    [Get("")]
+    Task<TReadAllResult> ReadAll(CancellationToken cancellationToken);
+
+    [Get("")]
+    Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [Property("Priority")] int priority);
+
+    [Get("")]
+    Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, CancellationToken cancellationToken);
+
+    [Get("")]
+    Task<TReadAllResult> ReadAll([Property("Priority")] int priority, CancellationToken cancellationToken);
+
+    [Get("")]
+    Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [Property("Priority")] int priority, CancellationToken cancellationToken);
 
     [Get("/{key}")]
-    Task<T> Read([CacheKey] TKey key, CancellationToken cancellationToken = default);
+    Task<T> Read([CacheKey] TKey key);
+
+    [Get("/{key}")]
+    Task<T> Read([CacheKey] TKey key, [Property("Priority")] int priority);
+
+    [Get("/{key}")]
+    Task<T> Read([CacheKey] TKey key, CancellationToken cancellationToken);
+
+    [Get("/{key}")]
+    Task<T> Read([CacheKey] TKey key, [Property("Priority")] int priority, CancellationToken cancellationToken);
 
     [Put("/{key}")]
-    Task Update(TKey key, [Body] T payload, CancellationToken cancellationToken = default);
+    Task Update(TKey key, [Body] T payload);
+
+    [Put("/{key}")]
+    Task Update(TKey key, [Body] T payload, CancellationToken cancellationToken);
 
     [Delete("/{key}")]
-    Task Delete(TKey key, CancellationToken cancellationToken = default);
+    Task Delete(TKey key);
+
+    [Delete("/{key}")]
+    Task Delete(TKey key, CancellationToken cancellationToken);
 }
 ```
 
-We can see that it comes with some CacheKey attribute decorations, but it won't cache anything until you ask Apizr to. 
-Caching, Logging, Policing... everything is activable fluently with the options builder.
+We can see that it comes with some CacheKey and Priority attribute decorations, but it won't do anything until you ask Apizr to. 
+Caching, Logging, Policing, Prioritizing... everything is activable fluently with the options builder.
 
 About generic types:
 - T and TKey (optional - default: ```int```) meanings are obvious
@@ -420,7 +459,7 @@ Decorate your crud entities like so (but with your own settings):
 [CrudEntity("https://myapi.com/api/myentity", typeof(int), typeof(PagedResult<>), typeof(ReadAllUsersParams))]
 public class MyEntity
 {
-    [JsonProperty("id")]
+    [JsonPropertyName("id")]
     public int Id { get; set; }
 
     ...
@@ -577,6 +616,43 @@ This one could interfere with all Apizr http client auto configuration, so pleas
 <h2 id="external-integrations">
 External integrations:
 </h2>
+
+<h3 id="shiny">
+Shiny:
+</h3>
+
+
+
+<h3 id="monkeycache">
+MonkeyCache:
+</h3>
+
+
+
+<h3 id="akavache">
+Akavache:
+</h3>
+
+
+
+<h3 id="fusillade">
+Fusillade:
+</h3>
+
+Starting Apizr v3, Fusillade has been moved from core project to its dedicated integration package.
+If you plan to use it, you now have to install this package.
+
+Once installed, you should be able to activate it fluently with the provided extension:
+```csharp
+optionsBuilder => optionsBuilder.WithPriorityManagement()
+```
+
+From there, everything will be user initiated. When you need to specify another priority, what you need to do is just adding the priority parameter into your api interface method definition:
+
+```csharp
+[Get("/api/users")]
+Task<UserList> GetUsersAsync([Priority] int priority, CancellationToken cancellationToken);
+```
 
 <h3 id="mediation">
 Mediation:

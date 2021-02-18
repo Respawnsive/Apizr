@@ -207,7 +207,7 @@ namespace Apizr
                 }
 
                 foreach (var delegatingHandlersFactory in apizrOptions.DelegatingHandlersFactories)
-                    handlerBuilder.AddHandler(delegatingHandlersFactory.Invoke(logHandler));
+                    handlerBuilder.AddHandler(delegatingHandlersFactory.Invoke(logHandler, apizrOptions));
 
                 var primaryMessageHandler = handlerBuilder.GetPrimaryHttpMessageHandler(logHandler);
 

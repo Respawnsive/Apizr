@@ -10,7 +10,7 @@ using HttpTracer;
 using Refit;
 
 [assembly:Policy("TransientHttpError")]
-[assembly:CacheIt(CacheMode.GetAndFetch, "00:10:00")]
+//[assembly:CacheIt(CacheMode.GetAndFetch, "00:10:00")]
 [assembly:LogIt(HttpMessageParts.All, ApizrLogLevel.High)]
 namespace Apizr.Sample.Api
 {

@@ -70,7 +70,7 @@ namespace Apizr
         /// <summary>
         /// Delegating handlers factories
         /// </summary>
-        IList<Func<IServiceProvider, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
+        IList<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
 
         /// <summary>
         /// Entities auto registered with <see cref="IApizrManager{ICrudApi}"/>

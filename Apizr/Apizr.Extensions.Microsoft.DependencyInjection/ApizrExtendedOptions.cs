@@ -32,7 +32,7 @@ namespace Apizr
             CacheHandlerType = typeof(VoidCacheHandler);
             LogHandlerType = typeof(DefaultLogHandler);
             MappingHandlerType = typeof(VoidMappingHandler);
-            DelegatingHandlersExtendedFactories = new List<Func<IServiceProvider, DelegatingHandler>>();
+            DelegatingHandlersExtendedFactories = new List<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>>();
             CrudEntities = new Dictionary<Type, CrudEntityAttribute>();
             WebApis = new Dictionary<Type, WebApiAttribute>();
             ObjectMappings = new Dictionary<Type, MappedWithAttribute>();
@@ -69,7 +69,7 @@ namespace Apizr
         public Func<IServiceProvider, HttpClientHandler> HttpClientHandlerFactory { get; set; }
         public Func<IServiceProvider, RefitSettings> RefitSettingsFactory { get; set; }
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
-        public IList<Func<IServiceProvider, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
+        public IList<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
         public IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }
         public IDictionary<Type, WebApiAttribute> WebApis { get; }
         public IDictionary<Type, MappedWithAttribute> ObjectMappings { get; }

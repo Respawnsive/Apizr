@@ -69,7 +69,7 @@ namespace Apizr
         /// <summary>
         /// Delegating handlers factories
         /// </summary>
-        IList<Func<ILogHandler, DelegatingHandler>> DelegatingHandlersFactories { get; }
+        IList<Func<ILogHandler, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
     }
 
     public interface IApizrOptions<TWebApi> : IApizrOptionsBase

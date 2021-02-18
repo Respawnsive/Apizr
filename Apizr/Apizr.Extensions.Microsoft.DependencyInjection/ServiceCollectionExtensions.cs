@@ -543,7 +543,7 @@ namespace Apizr
                     }
 
                     foreach (var delegatingHandlerExtendedFactory in apizrOptions.DelegatingHandlersExtendedFactories)
-                        handlerBuilder.AddHandler(delegatingHandlerExtendedFactory.Invoke(serviceProvider));
+                        handlerBuilder.AddHandler(delegatingHandlerExtendedFactory.Invoke(serviceProvider, apizrOptions));
 
                     var primaryMessageHandler = handlerBuilder.GetPrimaryHttpMessageHandler(logHandler);
 

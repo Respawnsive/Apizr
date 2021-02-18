@@ -31,7 +31,7 @@ namespace Apizr
             CacheHandlerFactory = () => new VoidCacheHandler();
             LogHandlerFactory = () => new DefaultLogHandler();
             MappingHandlerFactory = () => new VoidMappingHandler();
-            DelegatingHandlersFactories = new List<Func<ILogHandler, DelegatingHandler>>();
+            DelegatingHandlersFactories = new List<Func<ILogHandler, IApizrOptionsBase, DelegatingHandler>>();
         }
 
         private Func<Uri> _baseAddressFactory;
@@ -62,7 +62,7 @@ namespace Apizr
         public Func<ICacheHandler> CacheHandlerFactory { get; set; }
         public Func<ILogHandler> LogHandlerFactory { get; set; }
         public Func<IMappingHandler> MappingHandlerFactory { get; set; }
-        public IList<Func<ILogHandler, DelegatingHandler>> DelegatingHandlersFactories { get; }
+        public IList<Func<ILogHandler, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
     }
 
     public class ApizrOptions<TWebApi> : IApizrOptions<TWebApi>

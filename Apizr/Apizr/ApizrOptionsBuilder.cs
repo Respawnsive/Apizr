@@ -79,11 +79,7 @@ namespace Apizr
             return this;
         }
 
-        public IApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(
-            TAuthenticationHandler authenticationHandler) where TAuthenticationHandler : AuthenticationHandlerBase
-            => WithAuthenticationHandler(logHandler => authenticationHandler);
-
-        public IApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<ILogHandler, TAuthenticationHandler> authenticationHandler) where TAuthenticationHandler : AuthenticationHandlerBase
+        public IApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<ILogHandler, IApizrOptionsBase, TAuthenticationHandler> authenticationHandler) where TAuthenticationHandler : AuthenticationHandlerBase
         {
             Options.DelegatingHandlersFactories.Add(authenticationHandler);
 
@@ -92,8 +88,8 @@ namespace Apizr
 
         public IApizrOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshToken)
         {
-            var authenticationHandler = new Func<ILogHandler, DelegatingHandler>(logHandler =>
-                new AuthenticationHandler(logHandler, refreshToken));
+            var authenticationHandler = new Func<ILogHandler, IApizrOptionsBase, DelegatingHandler>((logHandler, options) =>
+                new AuthenticationHandler(logHandler, options, refreshToken));
             Options.DelegatingHandlersFactories.Add(authenticationHandler);
 
             return this;
@@ -108,19 +104,9 @@ namespace Apizr
             Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> tokenProperty,
             Func<HttpRequestMessage, Task<string>> refreshToken)
         {
-            var authenticationHandler = new Func<ILogHandler, DelegatingHandler>(logHandler =>
-                new AuthenticationHandler<TSettingsService>(logHandler, settingsServiceFactory, tokenProperty, refreshToken));
+            var authenticationHandler = new Func<ILogHandler, IApizrOptionsBase, DelegatingHandler>((logHandler, options) =>
+                new AuthenticationHandler<TSettingsService>(logHandler, options, settingsServiceFactory, tokenProperty, refreshToken));
             Options.DelegatingHandlersFactories.Add(authenticationHandler);
-
-            return this;
-        }
-
-        public IApizrOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler)
-            => AddDelegatingHandler(_ => delegatingHandler);
-
-        public IApizrOptionsBuilder AddDelegatingHandler(Func<ILogHandler, DelegatingHandler> delegatingHandlerFactory)
-        {
-            Options.DelegatingHandlersFactories.Add(delegatingHandlerFactory);
 
             return this;
         }
@@ -136,11 +122,25 @@ namespace Apizr
             Func<TTokenService> tokenServiceFactory,
             Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
         {
-            var authenticationHandler = new Func<ILogHandler, DelegatingHandler>(logHandler =>
+            var authenticationHandler = new Func<ILogHandler, IApizrOptionsBase, DelegatingHandler>((logHandler, options) =>
                 new AuthenticationHandler<TSettingsService, TTokenService>(logHandler,
+                    options,
                     settingsServiceFactory, tokenProperty,
                     tokenServiceFactory, refreshTokenMethod));
             Options.DelegatingHandlersFactories.Add(authenticationHandler);
+
+            return this;
+        }
+
+        public IApizrOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler)
+            => AddDelegatingHandler(_ => delegatingHandler);
+
+        public IApizrOptionsBuilder AddDelegatingHandler(Func<ILogHandler, DelegatingHandler> delegatingHandlerFactory)
+            => AddDelegatingHandler((logHandler, _) => delegatingHandlerFactory(logHandler));
+
+        public IApizrOptionsBuilder AddDelegatingHandler(Func<ILogHandler, IApizrOptionsBase, DelegatingHandler> delegatingHandlerFactory)
+        {
+            Options.DelegatingHandlersFactories.Add(delegatingHandlerFactory);
 
             return this;
         }

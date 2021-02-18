@@ -57,20 +57,12 @@ namespace Apizr
         IApizrOptionsBuilder WithHttpClientHandler(Func<HttpClientHandler> httpClientHandlerFactory);
 
         /// <summary>
-        /// Provide your own <see cref="AuthenticationHandlerBase"/> implementation
-        /// </summary>
-        /// <typeparam name="TAuthenticationHandler">Your <see cref="AuthenticationHandlerBase"/> implementation</typeparam>
-        /// <param name="authenticationHandler">A <see cref="TAuthenticationHandler"/> instance</param>
-        /// <returns></returns>
-        IApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(TAuthenticationHandler authenticationHandler) where TAuthenticationHandler : AuthenticationHandlerBase;
-
-        /// <summary>
         /// Provide your own <see cref="AuthenticationHandlerBase"/> implementation factory
         /// </summary>
         /// <typeparam name="TAuthenticationHandler">Your <see cref="AuthenticationHandlerBase"/> implementation</typeparam>
         /// <param name="authenticationHandlerFactory">A <see cref="TAuthenticationHandler"/> instance factory</param>
         /// <returns></returns>
-        IApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<ILogHandler, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase;
+        IApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<ILogHandler, IApizrOptionsBase, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase;
 
         /// <summary>
         /// Provide your own settings management and token management services
@@ -122,6 +114,13 @@ namespace Apizr
         /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
         /// <returns></returns>
         IApizrOptionsBuilder AddDelegatingHandler(Func<ILogHandler, DelegatingHandler> delegatingHandlerFactory);
+
+        /// <summary>
+        /// Add a custom delegating handler
+        /// </summary>
+        /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
+        /// <returns></returns>
+        IApizrOptionsBuilder AddDelegatingHandler(Func<ILogHandler, IApizrOptionsBase, DelegatingHandler> delegatingHandlerFactory);
 
         /// <summary>
         /// Provide a policy registry

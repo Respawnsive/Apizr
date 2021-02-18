@@ -64,7 +64,7 @@ namespace Apizr
         /// <typeparam name="TAuthenticationHandler">Your <see cref="AuthenticationHandlerBase"/> implementation</typeparam>
         /// <param name="authenticationHandlerFactory">A <see cref="TAuthenticationHandler"/> instance factory</param>
         /// <returns></returns>
-        IApizrExtendedOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<IServiceProvider, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase;
+        IApizrExtendedOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<IServiceProvider, IApizrOptionsBase, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase;
 
         /// <summary>
         /// Provide your own settings management and token management services
@@ -91,6 +91,13 @@ namespace Apizr
         /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
         /// <returns></returns>
         IApizrExtendedOptionsBuilder AddDelegatingHandler(Func<IServiceProvider, DelegatingHandler> delegatingHandlerFactory);
+
+        /// <summary>
+        /// Add a custom delegating handler
+        /// </summary>
+        /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
+        /// <returns></returns>
+        IApizrExtendedOptionsBuilder AddDelegatingHandler(Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler> delegatingHandlerFactory);
 
         /// <summary>
         /// Provide some Refit specific settings

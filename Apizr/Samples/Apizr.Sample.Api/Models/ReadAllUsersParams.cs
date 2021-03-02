@@ -6,7 +6,12 @@ namespace Apizr.Sample.Api.Models
     {
         public ReadAllUsersParams()
         {
-            
+
+        }
+
+        public ReadAllUsersParams(string param1)
+        {
+            Param1 = param1;
         }
 
         public ReadAllUsersParams(string param1, int param2)

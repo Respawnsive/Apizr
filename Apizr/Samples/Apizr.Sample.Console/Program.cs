@@ -240,15 +240,19 @@ namespace Apizr.Sample.Console
                     //var test = new ReadAllUsersParams("value1", 2);
                     var parameters1 = new Dictionary<string, object>{{ "param1", 1 } };
                     var parameters2 = new ReadAllUsersParams("param1", 1);
+                    var priority = (int) Priority.UserInitiated;
+                    var cancellationToken = CancellationToken.None;
 
-                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
-                    var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
+                    var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(true));
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(parameters1));
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(parameters2));
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(true, parameters1));
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(true, parameters1, ct), CancellationToken.None);
+                    //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(true, parameters1, parameters2, priority, ct), cancellationToken);
+                    //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(true, new Dictionary<string, object> { { "param1", 1 }, { "param2", 2 } }, new ReadAllUsersParams{Param2 = 4}, (int)Priority.UserInitiated, ct), cancellationToken);
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(parameters1, ct), CancellationToken.None);
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(parameters2, ct), CancellationToken.None);
                     users = userList?.Data;
@@ -323,7 +327,7 @@ namespace Apizr.Sample.Console
                     {
                         var parameters = new Dictionary<string, object>{{ "param1", "1" } };
                         var userDetails = configChoice <= 2
-                            ? await _reqResManager.ExecuteAsync((ct, api) => api.GetUserAsync(userChoice, parameters, (int)Priority.UserInitiated, ct),
+                            ? await _reqResManager.ExecuteAsync((ct, api) => api.GetUserAsync(userChoice, (int)Priority.UserInitiated, ct),
                                 CancellationToken.None)
                             : await _mediator.Send(new ReadQuery<UserDetails>(userChoice), CancellationToken.None);
 

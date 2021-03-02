@@ -14,6 +14,7 @@ namespace Apizr.Sample.Api
     {
         [Get("/bearer")]
         [Headers("Authorization: Bearer")]
+        [CacheIt(CacheMode.None)]
         Task<HttpResponseMessage> AuthBearerAsync();
     }
 }

@@ -269,7 +269,7 @@ namespace Apizr
                     _logHandler.Write($"Apizr - {methodName}: Some cached data found for this cache key");
             }
 
-            if (result == null || cacheAttribute?.Mode == CacheMode.GetAndFetch)
+            if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
                 try
                 {
@@ -314,7 +314,7 @@ namespace Apizr
                 }
 
                 if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
-                    cacheAttribute != null)
+                    cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Caching result");
@@ -353,7 +353,7 @@ namespace Apizr
                     _logHandler.Write($"Apizr - {methodName}: Some cached data found for this cache key");
             }
 
-            if (result == null || cacheAttribute?.Mode == CacheMode.GetAndFetch)
+            if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
                 try
                 {
@@ -398,7 +398,7 @@ namespace Apizr
                 }
 
                 if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
-                    cacheAttribute != null)
+                    cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Caching result");
@@ -437,7 +437,7 @@ namespace Apizr
                     _logHandler.Write($"Apizr - {methodName}: Some cached data found for this cache key");
             }
 
-            if (result == null || cacheAttribute?.Mode == CacheMode.GetAndFetch)
+            if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
                 try
                 {
@@ -482,7 +482,7 @@ namespace Apizr
                 }
 
                 if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
-                    cacheAttribute != null)
+                    cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Caching result");
@@ -521,7 +521,7 @@ namespace Apizr
                     _logHandler.Write($"Apizr - {methodName}: Some cached data found for this cache key");
             }
 
-            if (result == null || cacheAttribute?.Mode == CacheMode.GetAndFetch)
+            if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
                 try
                 {
@@ -566,7 +566,7 @@ namespace Apizr
                 }
 
                 if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
-                    cacheAttribute != null)
+                    cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Caching result");
@@ -685,7 +685,7 @@ namespace Apizr
                     cacheAttribute = methodToCacheDetails.ApiInterfaceType.Assembly.GetCustomAttribute<CacheItAttribute>();
 
                 // Are we asked to cache this method?
-                if (cacheAttribute == null)
+                if (cacheAttribute == null || cacheAttribute.Mode == CacheMode.None)
                 {
                     // No we're not!
                     return false;
@@ -698,7 +698,7 @@ namespace Apizr
                 // Get all method parameters
                 var methodParameters = methodToCacheData.MethodInfo.GetParameters().ToList();
 
-                // Is there any parameters expect potential CancellationToken and Refit properties ?
+                // Is there any parameters except potential CancellationToken and Refit properties ?
                 if (!methodParameters.Any(x => !typeof(CancellationToken).GetTypeInfo().IsAssignableFrom(x.ParameterType.GetTypeInfo()) &&
                                                x.CustomAttributes.All(y => !typeof(PropertyAttribute).GetTypeInfo().IsAssignableFrom(y.AttributeType.GetTypeInfo()))))
                 {
@@ -770,14 +770,9 @@ namespace Apizr
                             if (cacheKeyField != null)
                                 parameterValue = cacheKeyField.GetValue(extractedArgument.Value);
                         }
-                        else
-                        {
-                            // It's not a primitive and it's not a specific cache key or there isn't any target field specified
-                            parameterValue = extractedArgumentValue.GetType().GetRuntimeFields().First().GetValue(extractedArgumentValue);
-                        }
                     }
 
-                    // Set argument value if cache key is still null (shouldn't happen)
+                    // Set argument value if cache key is still null
                     if (parameterValue == null)
                         parameterValue = extractedArgument.Value;
 
@@ -796,7 +791,7 @@ namespace Apizr
             // Simple param value OR complex type with overriden ToString
             var value = parameterValue.ToString();
             if (!string.IsNullOrWhiteSpace(value) && value != parameterValue.GetType().ToString())
-                return value.Contains(":")
+                return value.Contains(":") && !value.Contains("[")
                     ? $"{parameterName}:{{{value}}}"
                     : $"{parameterName}:{value}";
 
@@ -825,33 +820,7 @@ namespace Apizr
                 yield break;
 
             if (expression is ConstantExpression constantsExpression)
-            {
-                //var options = new JsonSerializerOptions { IncludeFields = true };
-                //var requestString = JsonSerializer.Serialize(constantsExpression.Value, options);
-                //if (requestString.Contains("Parameters"))
-                //{
-                //    using (var doc = JsonDocument.Parse(requestString))
-                //    {
-                //        var first = doc.RootElement.EnumerateArray().FirstOrDefault().EnumerateArray().FirstOrDefault();
-                //        //var parameters = first.GetProperty("Parameters").EnumerateArray().ToDictionary(kvp => kvp.)
-                //    }
-                //    //var requestRoot = JsonSerializer.Deserialize<JObject>(requestString);
-                //    //if (requestRoot.HasValues && 
-                //    //    requestRoot.First.HasValues && 
-                //    //    requestRoot.First.First.HasValues)
-                //    //{
-                //    //    var parameters = requestRoot.First.First.SelectToken("Parameters")?.ToObject<IDictionary<string, object>>();
-                //    //    if (parameters != null)
-                //    //    {
-                //    //        var value = string.Join("&", parameters.Where(kvp => kvp.Value != null).Select(kvp => $"{kvp.Key}={kvp.Value}"));
-                //    //        yield return new ExtractedConstant { Name = constantsExpression.Type.Name, Value = value }; 
-                //    //    }
-                //    //}
-                //}
-                //else
-                    yield return new ExtractedConstant { Name = constantsExpression.Type.Name, Value = constantsExpression.Value };
-            }
-
+                yield return new ExtractedConstant {Name = constantsExpression.Type.Name, Value = constantsExpression.Value};
 
             else if (expression is LambdaExpression lambdaExpression)
                 foreach (var constant in ExtractConstants(lambdaExpression.Body))
@@ -871,13 +840,21 @@ namespace Apizr
             }
             else if (expression is MemberExpression memberExpression)
             {
-                if (memberExpression.Member.Name == "Key")
+                foreach (var constants in ExtractConstants(memberExpression.Expression))
                 {
-                    var value = Expression.Lambda(memberExpression).Compile().DynamicInvoke();
+                    object value = null;
+                    switch (memberExpression.Member)
+                    {
+                        case FieldInfo fieldInfo:
+                            value = fieldInfo.GetValue(constants.Value);
+                            break;
+                        case PropertyInfo propertyInfo:
+                            value = propertyInfo.GetValue(constants.Value);
+                            break;
+                    }
+
                     yield return new ExtractedConstant { Name = memberExpression.Type.Name, Value = value };
                 }
-                foreach (var constants in ExtractConstants(memberExpression.Expression))
-                    yield return constants;
             }
             else if (expression is InvocationExpression invocationExpression)
             {
@@ -895,38 +872,68 @@ namespace Apizr
             {
                 if (typeof(IDictionary).IsAssignableFrom(listInitExpression.Type))
                 {
-                    var stringBuilder = new StringBuilder();
-                    var suffix = string.Empty;
+                    var parameters = new Dictionary<string, object>();
                     foreach (var initializer in listInitExpression.Initializers)
                     {
+                        string key = null;
+                        object value = null;
                         foreach (var initializerArgument in initializer.Arguments)
                         {
-                            if (initializerArgument is ConstantExpression constantExpression)
+                            foreach (var constant in ExtractConstants(initializerArgument))
                             {
-                                stringBuilder.Append(suffix);
-                                stringBuilder.Append(constantExpression.Value);
-                                suffix = "=";
+                                if (string.IsNullOrWhiteSpace(key))
+                                    key = constant.Value.ToString();
+                                else
+                                    value = constant.Value;
                             }
                         }
-                        suffix = "&";
+
+                        if (!string.IsNullOrWhiteSpace(key) && value != null)
+                            parameters.Add(key, value);
                     }
 
-                    yield return new ExtractedConstant { Name = listInitExpression.Type.Name, Value = stringBuilder.ToString() };
+                    yield return new ExtractedConstant { Name = listInitExpression.Type.Name, Value = $"[{parameters.ToString(":", ", ")}]" };
                 }
                 else
                     yield return new ExtractedConstant { Name = listInitExpression.Type.Name };
             }
             else if (expression is MemberInitExpression memberInitExpression)
             {
-                var parameters = memberInitExpression.Bindings.Select(b =>
-                    b.ToString().Replace("\"", string.Empty).Replace(" ", string.Empty)).ToList();
-                if (parameters.Any())
+                
+                if (memberInitExpression.Bindings.Any())
                 {
-                    var value = string.Join("&", parameters);
-                    yield return new ExtractedConstant { Name = memberInitExpression.Type.Name, Value = value };
+                    var parameters = new Dictionary<string, object>();
+                    foreach (var memberBinding in memberInitExpression.Bindings)
+                    {
+                        if (memberBinding is MemberAssignment assignment)
+                            foreach (var constant in ExtractConstants(assignment.Expression))
+                                parameters.Add(memberBinding.Member.Name, constant.Value);
+                        else if (memberBinding is MemberListBinding listBinding)
+                        {
+                            foreach (var initializer in listBinding.Initializers)
+                            {
+                                string key = null;
+                                object value = null;
+                                foreach (var initializerArgument in initializer.Arguments)
+                                {
+                                    foreach (var constant in ExtractConstants(initializerArgument))
+                                    {
+                                        if (string.IsNullOrWhiteSpace(key))
+                                            key = constant.Value.ToString();
+                                        else
+                                            value = constant.Value;
+                                    }
+                                }
+
+                                if (!string.IsNullOrWhiteSpace(key) && value != null)
+                                    parameters.Add(key, value);
+                            }
+                        }
+                    }
+                    yield return new ExtractedConstant { Name = memberInitExpression.Type.Name, Value = parameters.ToString(":", ", ") };
                 }
                 else
-                    foreach(var constants in ExtractConstants(memberInitExpression.NewExpression))
+                    foreach (var constants in ExtractConstants(memberInitExpression.NewExpression))
                         yield return constants;
             }
             else if (expression is NewExpression newExpression)
@@ -938,8 +945,7 @@ namespace Apizr
                     if(newExpression.Arguments[i] is ConstantExpression constantExpression)
                         parameters.Add(constructorParameters[i].Name, constantExpression.Value);
                 }
-                var value = string.Join("&", parameters.Where(kvp => kvp.Value != null).Select(kvp => $"{kvp.Key}={kvp.Value}"));
-                yield return new ExtractedConstant { Name = newExpression.Type.Name, Value = value };
+                yield return new ExtractedConstant { Name = newExpression.Type.Name, Value = parameters.ToString(":", ", ") };
             }
             else
                 throw new NotImplementedException();

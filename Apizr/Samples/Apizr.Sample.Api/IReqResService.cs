@@ -10,14 +10,14 @@ using HttpTracer;
 using Refit;
 
 [assembly:Policy("TransientHttpError")]
-//[assembly:CacheIt(CacheMode.GetAndFetch, "00:10:00")]
+[assembly:CacheIt(CacheMode.GetAndFetch, "00:10:00")]
 [assembly:LogIt(HttpMessageParts.All, ApizrLogLevel.High)]
 namespace Apizr.Sample.Api
 {
     [WebApi("https://reqres.in/api")]
     public interface IReqResService
     {
-        [Get("/users")]
+        [Get("/users"), CacheIt(CacheMode.None)]
         Task<UserList> GetUsersAsync();
 
         [Get("/users")]
@@ -46,6 +46,18 @@ namespace Apizr.Sample.Api
 
         [Get("/users")]
         Task<UserList> GetUsersAsync(ReadAllUsersParams parameters, CancellationToken cancellationToken);
+
+        [Get("/users")]
+        Task<UserList> GetUsersAsync(IDictionary<string, object> userIds, ReadAllUsersParams parameters, CancellationToken cancellationToken);
+
+        [Get("/users")]
+        Task<UserList> GetUsersAsync(bool isTest, IDictionary<string, object> userIds, ReadAllUsersParams parameters, CancellationToken cancellationToken);
+
+        [Get("/users")]
+        Task<UserList> GetUsersAsync(bool isTest, IDictionary<string, object> userIds, ReadAllUsersParams parameters, [Priority] int priority, CancellationToken cancellationToken);
+
+        [Get("/users/{userId}")]
+        Task<UserDetails> GetUserAsync(int userId, [Priority] int priority, CancellationToken cancellationToken);
 
         [Get("/users/{userId}")]
         Task<UserDetails> GetUserAsync(int userId, IDictionary<string, object> parameters, [Priority] int priority, CancellationToken cancellationToken);

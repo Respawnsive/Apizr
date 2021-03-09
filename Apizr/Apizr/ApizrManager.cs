@@ -743,6 +743,9 @@ namespace Apizr
                     var parameterName = parameterInfo.Name;
                     var extractedArgument = extractedArguments[i];
                     var extractedArgumentValue = extractedArgument.Value;
+                    if(extractedArgumentValue == null)
+                        continue;
+
                     object parameterValue = null;
                     var isArgumentValuePrimitive = extractedArgumentValue.GetType().GetTypeInfo().IsPrimitive ||
                                                    extractedArgumentValue is decimal ||

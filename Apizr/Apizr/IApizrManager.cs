@@ -13,6 +13,11 @@ namespace Apizr
     public interface IApizrManager<TWebApi>
     {
         /// <summary>
+        /// Original Refit Api without any Apizr management. You should use ExecuteAsync instead to get all the Apizr goodness :)
+        /// </summary>
+        TWebApi Api { get; }
+
+        /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task
         /// </summary>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/>'s task to execute</param>

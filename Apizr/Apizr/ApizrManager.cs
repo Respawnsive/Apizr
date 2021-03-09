@@ -49,9 +49,10 @@ namespace Apizr
             _apizrOptions = apizrOptions;
         }
 
+        public TWebApi Api => _lazyWebApi.Value;
+
         public async Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod)
         {
-            var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
             if(_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
@@ -76,14 +77,14 @@ namespace Apizr
                         _logHandler.Write($"Apizr - {methodName}: Executing request with some policies");
 
                     var pollyContext = new Context().WithLogHandler(_logHandler);
-                    await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(webApi), pollyContext);
+                    await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(Api), pollyContext);
                 }
                 else
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Executing request without specific policies");
 
-                    await executeApiMethod.Compile()(webApi);
+                    await executeApiMethod.Compile()(Api);
                 }
             }
             catch (Exception e)
@@ -100,7 +101,6 @@ namespace Apizr
 
         public async Task ExecuteAsync(Expression<Func<TWebApi, IMappingHandler, Task>> executeApiMethod)
         {
-            var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
             if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
@@ -125,14 +125,14 @@ namespace Apizr
                         _logHandler.Write($"Apizr - {methodName}: Executing request with some policies");
 
                     var pollyContext = new Context().WithLogHandler(_logHandler);
-                    await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(webApi, _mappingHandler), pollyContext);
+                    await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(Api, _mappingHandler), pollyContext);
                 }
                 else
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Executing request without specific policies");
 
-                    await executeApiMethod.Compile()(webApi, _mappingHandler);
+                    await executeApiMethod.Compile()(Api, _mappingHandler);
                 }
             }
             catch (Exception e)
@@ -149,7 +149,6 @@ namespace Apizr
 
         public async Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod, CancellationToken cancellationToken)
         {
-            var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
             if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
@@ -174,14 +173,14 @@ namespace Apizr
                         _logHandler.Write($"Apizr - {methodName}: Executing request with some policies");
 
                     var pollyContext = new Context().WithLogHandler(_logHandler);
-                    await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, webApi), pollyContext, cancellationToken);
+                    await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, Api), pollyContext, cancellationToken);
                 }
                 else
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Executing request without specific policies");
 
-                    await executeApiMethod.Compile()(cancellationToken, webApi);
+                    await executeApiMethod.Compile()(cancellationToken, Api);
                 }
             }
             catch (Exception e)
@@ -198,7 +197,6 @@ namespace Apizr
 
         public async Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task>> executeApiMethod, CancellationToken cancellationToken)
         {
-            var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
             if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
@@ -223,14 +221,14 @@ namespace Apizr
                         _logHandler.Write($"Apizr - {methodName}: Executing request with some policies");
 
                     var pollyContext = new Context().WithLogHandler(_logHandler);
-                    await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, webApi, _mappingHandler), pollyContext, cancellationToken);
+                    await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, Api, _mappingHandler), pollyContext, cancellationToken);
                 }
                 else
                 {
                     if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                         _logHandler.Write($"Apizr - {methodName}: Executing request without specific policies");
 
-                    await executeApiMethod.Compile()(cancellationToken, webApi, _mappingHandler);
+                    await executeApiMethod.Compile()(cancellationToken, Api, _mappingHandler);
                 }
             }
             catch (Exception e)
@@ -247,7 +245,6 @@ namespace Apizr
 
         public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod)
         {
-            var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
             if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
@@ -290,14 +287,14 @@ namespace Apizr
                             _logHandler.Write($"Apizr - {methodName}: Executing request with some policies");
 
                         var pollyContext = new Context().WithLogHandler(_logHandler);
-                        result = await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(webApi), pollyContext);
+                        result = await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(Api), pollyContext);
                     }
                     else
                     {
                         if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                             _logHandler.Write($"Apizr - {methodName}: Executing request without specific policies");
 
-                        result = await executeApiMethod.Compile()(webApi);
+                        result = await executeApiMethod.Compile()(Api);
                     }
                 }
                 catch (Exception e)
@@ -331,7 +328,6 @@ namespace Apizr
 
         public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod)
         {
-            var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
             if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
@@ -374,14 +370,14 @@ namespace Apizr
                             _logHandler.Write($"Apizr - {methodName}: Executing request with some policies");
 
                         var pollyContext = new Context().WithLogHandler(_logHandler);
-                        result = await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(webApi, _mappingHandler), pollyContext);
+                        result = await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(Api, _mappingHandler), pollyContext);
                     }
                     else
                     {
                         if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                             _logHandler.Write($"Apizr - {methodName}: Executing request without specific policies");
 
-                        result = await executeApiMethod.Compile()(webApi, _mappingHandler);
+                        result = await executeApiMethod.Compile()(Api, _mappingHandler);
                     }
                 }
                 catch (Exception e)
@@ -415,7 +411,6 @@ namespace Apizr
 
         public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken)
         {
-            var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
             if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
@@ -458,14 +453,14 @@ namespace Apizr
                             _logHandler.Write($"Apizr - {methodName}: Executing request with some policies");
 
                         var pollyContext = new Context().WithLogHandler(_logHandler);
-                        result = await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, webApi), pollyContext, cancellationToken);
+                        result = await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, Api), pollyContext, cancellationToken);
                     }
                     else
                     {
                         if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                             _logHandler.Write($"Apizr - {methodName}: Executing request without specific policies");
 
-                        result = await executeApiMethod.Compile()(cancellationToken, webApi);
+                        result = await executeApiMethod.Compile()(cancellationToken, Api);
                     }
                 }
                 catch (Exception e)
@@ -499,7 +494,6 @@ namespace Apizr
 
         public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken)
         {
-            var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
             var methodName = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
             if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
@@ -542,14 +536,14 @@ namespace Apizr
                             _logHandler.Write($"Apizr - {methodName}: Executing request with some policies");
 
                         var pollyContext = new Context().WithLogHandler(_logHandler);
-                        result = await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, webApi, _mappingHandler), pollyContext, cancellationToken);
+                        result = await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, Api, _mappingHandler), pollyContext, cancellationToken);
                     }
                     else
                     {
                         if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
                             _logHandler.Write($"Apizr - {methodName}: Executing request without specific policies");
 
-                        result = await executeApiMethod.Compile()(cancellationToken, webApi, _mappingHandler);
+                        result = await executeApiMethod.Compile()(cancellationToken, Api, _mappingHandler);
                     }
                 }
                 catch (Exception e)

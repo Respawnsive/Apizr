@@ -8,6 +8,7 @@
 - [New] Now **based on Refit v6+ witch now relies on System.Text.Json** instead of Newtonsoft.Json. If you'd like to continue to use Newtonsoft.Json, add the Refit.Newtonsoft.Json NuGet package and follow the new Readme instructions
 - [New] Now **AuthenticationHandler is log level sensitive** so we could tell it to keep quiet while using it heavily
 - [New] Now **caching could be disabled with CacheIt attribute** thanks to CacheMode.None parameter to compose with assembly, interface and method level cache rules all together (e.g. you could now enable Cache globaly at assembly level but turn it off for a specific method like the login one)
+- [New] Now you can **initialize parameters directly from the managed method**. No more pitfalls
 - [Improvement] **Cache key generator has been deeply reshaped** to support all scenarios, including path parameters
 - [Improvement] **Nuget references have been updated** to latest versions
 - [BreakingChange] **Fusillade has been moved to an integration package**. If you used to play with it, just install it from its brand new dedicated integration package and follow the new Readme instructions

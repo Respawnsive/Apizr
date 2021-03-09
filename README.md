@@ -5,7 +5,7 @@ You'll find a [blog post series here](https://www.respawnsive.com/category/blog-
 
 ## Libraries
 
-[Change Log - Feb 13, 2021](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
+[Change Log - Mar 09, 2021](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
 
 |Project|NuGet|
 |-------|-----|
@@ -621,19 +621,37 @@ External integrations:
 Shiny:
 </h3>
 
-
+If you're a Shiny user, with the right extension package installed, just register Apizr calling ```UseApizr``` instead of ```AddApizr```. 
+Then, everything will be in place, ready to use, relying on Shiny features (Logging, Caching, Connectivity).
 
 <h3 id="monkeycache">
 MonkeyCache:
 </h3>
 
+If you're a MonkeyCache user, with the right extension package installed:
 
+Set the Barrel's ApplicationId:
+```csharp
+Barrel.ApplicationId = "YOUR_APPLICATION_ID";
+```
+
+Then tell Apizr you want to use MonkeyCache as caching layer:
+
+```csharp
+optionsBuilder => optionsBuilder.WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
+```
 
 <h3 id="akavache">
 Akavache:
 </h3>
 
+If you're an Akavache user, with the right extension package installed:
 
+Just tell Apizr you want to use Akavahe as caching layer:
+
+```csharp
+optionsBuilder => optionsBuilder.WithCacheHandler(() => new AkavacheCacheHandler())
+```
 
 <h3 id="fusillade">
 Fusillade:
@@ -1132,23 +1150,3 @@ var createdMinUser = await _mediator.Send(
 ```minUser``` will be mapped from ```MinUser``` to ```User``` just before being sent, then Apizr will map the api result back from ```User``` to ```MinUser``` and send it back to you.
 
 And yes, all the mapping feature works also with Optional.
-
-<h2 id="pitfalls">
-Pitfalls:
-</h2>
-
-Like [Refit.Insane.PowerPack](https://github.com/thefex/Refit.Insane.PowerPack) does, Apizr depends on ```Expression<>``` to wrap refit API interfaces and analyse method calls with the same pitfall: 
-**allways pass method agruments as local variables**
-
-Instead of:
-```csharp
-var result = await _myManager.ExecuteAsync(api => api.UpdateObjectAsync(MyObject.IdProperty, new MyObjectDetails{ Details = details }));
-```
-
-Use:
-```csharp
-var myObjectId = MyObject.IdProperty;
-var myObjectDetails = new MyObjectDetails{ Details = details };
-
-var result = await _myManager.ExecuteAsync(api => api.UpdateObjectAsync(myObjectId, myObjectDetails));
-```

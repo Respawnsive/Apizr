@@ -96,7 +96,6 @@ It also comes with some handling interfaces to let you provide your own services
          - [Using](#automapper-crud-using)
        - [AutoMapper with classic apis](#automapper-with-classic-apis)
          - [Using](#automapper-classic-using)
-   - [Pitfalls](#pitfalls)
 
 <h2 id="intro">
 Intro

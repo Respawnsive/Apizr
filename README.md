@@ -5,7 +5,10 @@ You'll find a [blog post series here](https://www.respawnsive.com/category/blog-
 
 ## Libraries
 
-[Change Log - Mar 09, 2021](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
+Apizr v3+ introduced some breaking changes as it relies on Refit v6+ which actually introduced breaking changes and the fact that Fusillade has been moved form core package to a dedecated one.
+Please take a look at the changelog and this updated readme.
+
+[Change Log - Mar 12, 2021](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
 
 |Project|NuGet|
 |-------|-----|

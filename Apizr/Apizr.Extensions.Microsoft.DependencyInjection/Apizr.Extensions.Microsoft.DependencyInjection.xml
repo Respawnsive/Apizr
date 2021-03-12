@@ -1,0 +1,490 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Apizr.Extensions.Microsoft.DependencyInjection</name>
+    </assembly>
+    <members>
+        <member name="P:Apizr.IApizrExtendedOptions.ApizrManagerType">
+            <summary>
+            Type of the manager
+            </summary>
+        </member>
+        <member name="P:Apizr.IApizrExtendedOptions.ConnectivityHandlerType">
+            <summary>
+            Type of the connectivity handler
+            </summary>
+        </member>
+        <member name="P:Apizr.IApizrExtendedOptions.CacheHandlerType">
+            <summary>
+            Type of the cache handler
+            </summary>
+        </member>
+        <member name="P:Apizr.IApizrExtendedOptions.LogHandlerType">
+            <summary>
+            Type of the logging handler
+            </summary>
+        </member>
+        <member name="P:Apizr.IApizrExtendedOptions.MappingHandlerType">
+            <summary>
+            Type of the mapping handler
+            </summary>
+        </member>
+        <member name="P:Apizr.IApizrExtendedOptions.BaseAddressFactory">
+            <summary>
+            Base address factory
+            </summary>
+        </member>
+        <member name="P:Apizr.IApizrExtendedOptions.HttpTracerVerbosityFactory">
+            <summary>
+            Request tracing verbosity factory
+            </summary>
+        </member>
+        <member name="P:Apizr.IApizrExtendedOptions.ApizrVerbosityFactory">
+            <summary>
+            Apizr executions tracing verbosity factory
+            </summary>
+        </member>
+        <member name="P:Apizr.IApizrExtendedOptions.HttpClientHandlerFactory">
+            <summary>
+            HttpClientHandler factory
+            </summary>
+        </member>
+        <member name="P:Apizr.IApizrExtendedOptions.RefitSettingsFactory">
+            <summary>
+            Refit settings factory
+            </summary>
+        </member>
+        <member name="P:Apizr.IApizrExtendedOptions.HttpClientBuilder">
+            <summary>
+            HttpClient builder
+            </summary>
+        </member>
+        <member name="P:Apizr.IApizrExtendedOptions.DelegatingHandlersExtendedFactories">
+            <summary>
+            Delegating handlers factories
+            </summary>
+        </member>
+        <member name="P:Apizr.IApizrExtendedOptions.CrudEntities">
+            <summary>
+            Entities auto registered with <see cref="T:Apizr.IApizrManager`1"/>
+            </summary>
+        </member>
+        <member name="P:Apizr.IApizrExtendedOptions.WebApis">
+            <summary>
+            Web apis auto registered with <see cref="T:Apizr.IApizrManager`1"/>
+            </summary>
+        </member>
+        <member name="P:Apizr.IApizrExtendedOptions.ObjectMappings">
+            <summary>
+            Mappings between api request object and model object used for classic auto registration
+            </summary>
+        </member>
+        <member name="P:Apizr.IApizrExtendedOptions.PostRegistrationActions">
+            <summary>
+            Post registration actions
+            </summary>
+        </member>
+        <member name="M:Apizr.IApizrExtendedOptionsBuilder.WithBaseAddress(System.Func{System.IServiceProvider,System.String})">
+            <summary>
+            Define your web api base address (could be defined with WebApiAttribute)
+            </summary>
+            <param name="baseAddressFactory">Your web api base address factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrExtendedOptionsBuilder.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})">
+            <summary>
+            Define your web api base address (could be defined with WebApiAttribute)
+            </summary>
+            <param name="baseAddressFactory">Your web api base address factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrExtendedOptionsBuilder.WithLoggingVerbosity(System.Func{System.IServiceProvider,HttpTracer.HttpMessageParts},System.Func{System.IServiceProvider,Apizr.Logging.ApizrLogLevel})">
+            <summary>
+            Define http traces and Apizr logs verbosity (could be defined with TraceAttribute)
+            </summary>
+            <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
+            <param name="apizrVerbosityFactory">Apizr execution steps verbosity factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrExtendedOptionsBuilder.WithHttpClientHandler(System.Net.Http.HttpClientHandler)">
+            <summary>
+            Provide a custom HttpClientHandler
+            </summary>
+            <param name="httpClientHandler">An <see cref="T:System.Net.Http.HttpClientHandler"/> instance</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrExtendedOptionsBuilder.WithHttpClientHandler(System.Func{System.IServiceProvider,System.Net.Http.HttpClientHandler})">
+            <summary>
+            Provide a custom HttpClientHandler
+            </summary>
+            <param name="httpClientHandlerFactory">An <see cref="T:System.Net.Http.HttpClientHandler"/> instance factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrExtendedOptionsBuilder.ConfigureHttpClientBuilder(System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder})">
+            <summary>
+            Adjust some HttpClient settings
+            </summary>
+            <param name="httpClientBuilder">The HttpClient builder</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrExtendedOptionsBuilder.WithAuthenticationHandler``1(System.Func{System.IServiceProvider,Apizr.IApizrOptionsBase,``0})">
+            <summary>
+            Provide your own <see cref="T:Apizr.Authenticating.AuthenticationHandlerBase"/> implementation
+            </summary>
+            <typeparam name="TAuthenticationHandler">Your <see cref="T:Apizr.Authenticating.AuthenticationHandlerBase"/> implementation</typeparam>
+            <param name="authenticationHandlerFactory">A <see cref="!:TAuthenticationHandler"/> instance factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrExtendedOptionsBuilder.WithAuthenticationHandler``2(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+            <summary>
+            Provide your own settings management and token management services
+            </summary>
+            <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
+            <typeparam name="TTokenService">Your token management service (refreshing token)</typeparam>
+            <param name="tokenProperty">The token property used for saving</param>
+            <param name="refreshTokenMethod">The method called to refresh the token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrExtendedOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <summary>
+            Provide your own settings management service and a method to refresh the token
+            </summary>
+            <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
+            <param name="tokenProperty">The token property used for saving</param>
+            <param name="refreshTokenFactory">The method factory called to refresh the token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrExtendedOptionsBuilder.AddDelegatingHandler(System.Func{System.IServiceProvider,System.Net.Http.DelegatingHandler})">
+            <summary>
+            Add a custom delegating handler
+            </summary>
+            <param name="delegatingHandlerFactory">A delegating handler factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrExtendedOptionsBuilder.AddDelegatingHandler(System.Func{System.IServiceProvider,Apizr.IApizrOptionsBase,System.Net.Http.DelegatingHandler})">
+            <summary>
+            Add a custom delegating handler
+            </summary>
+            <param name="delegatingHandlerFactory">A delegating handler factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrExtendedOptionsBuilder.WithRefitSettings(System.Func{System.IServiceProvider,Refit.RefitSettings})">
+            <summary>
+            Provide some Refit specific settings
+            </summary>
+            <param name="refitSettingsFactory">A <see cref="T:Refit.RefitSettings"/> instance factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrExtendedOptionsBuilder.WithConnectivityHandler``1">
+            <summary>
+            Provide a connectivity handler to check connectivity before sending a request
+            </summary>
+            <typeparam name="TConnectivityHandler">Your <see cref="T:Apizr.Connecting.IConnectivityHandler"/> mapping implementation</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrExtendedOptionsBuilder.WithConnectivityHandler(System.Type)">
+            <summary>
+            Provide a connectivity handler to check connectivity before sending a request
+            </summary>
+            <param name="connectivityHandlerType">Type of your <see cref="T:Apizr.Connecting.IConnectivityHandler"/> mapping implementation</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrExtendedOptionsBuilder.WithCacheHandler``1">
+            <summary>
+            Provide a cache handler to cache data
+            </summary>
+            <typeparam name="TCacheHandler">Your <see cref="T:Apizr.Caching.ICacheHandler"/> mapping implementation</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrExtendedOptionsBuilder.WithCacheHandler(System.Type)">
+            <summary>
+            Provide a cache handler to cache data
+            </summary>
+            <param name="cacheHandlerType">Type of your <see cref="T:Apizr.Caching.ICacheHandler"/> mapping implementation</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrExtendedOptionsBuilder.WithLogHandler``1">
+            <summary>
+            Provide a logging handler to log it all
+            </summary>
+            <typeparam name="TLogHandler">Your <see cref="T:Apizr.Logging.ILogHandler"/> mapping implementation</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrExtendedOptionsBuilder.WithLogHandler(System.Type)">
+            <summary>
+            Provide a logging handler to log it all
+            </summary>
+            <param name="logHandlerType">Type of your <see cref="T:Apizr.Logging.ILogHandler"/> mapping implementation</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrExtendedOptionsBuilder.WithMappingHandler``1">
+            <summary>
+            Provide a mapping handler to auto map entities during mediation
+            </summary>
+            <typeparam name="TMappingHandler">Your <see cref="T:Apizr.Mapping.IMappingHandler"/> mapping implementation</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrExtendedOptionsBuilder.WithMappingHandler(System.Type)">
+            <summary>
+            Provide a mapping handler to auto map entities during mediation
+            </summary>
+            <param name="mappingHandlerType">Type of your <see cref="T:Apizr.Mapping.IMappingHandler"/> mapping implementation</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudFor``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.IApizrExtendedOptionsBuilder})">
+            <summary>
+            Register <see cref="T:Apizr.IApizrManager`1"/> for <see cref="!:T"/> object type (class),
+            with key of type <see cref="T:System.Int32"/> and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            and ReadAll query parameters of type IDictionary{string,object}
+            </summary>
+            <typeparam name="T">The object type to manage with crud api calls</typeparam>
+            <param name="services">The service collection</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudFor``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.IApizrExtendedOptionsBuilder})">
+            <summary>
+            Register <see cref="T:Apizr.IApizrManager`1"/> for <see cref="!:T"/> object type (class), 
+            with key of type <see cref="!:TKey"/> (primitive) and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            and ReadAll query parameters of type IDictionary{string,object}
+            </summary>
+            <typeparam name="T">The object type to manage with crud api calls</typeparam>
+            <typeparam name="TKey">The object key type (primitive)</typeparam>
+            <param name="services">The service collection</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudFor``3(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.IApizrExtendedOptionsBuilder})">
+            <summary>
+            Register <see cref="T:Apizr.IApizrManager`1"/> for <see cref="!:T"/> object type (class), 
+            with key of type <see cref="!:TKey"/> (primitive) and "ReadAll" query result of type <see cref="!:TReadAllResult"/>
+            (inheriting from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)
+            and ReadAll query parameters of type IDictionary{string,object}
+            </summary>
+            <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
+            <typeparam name="TKey">The object key type (primitive)</typeparam>
+            <typeparam name="TReadAllResult">"ReadAll" query result type
+            (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
+            <param name="services">The service collection</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudFor``4(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.IApizrExtendedOptionsBuilder})">
+            <summary>
+            Register <see cref="T:Apizr.IApizrManager`1"/> for <see cref="!:T"/> object type (class), 
+            with key of type <see cref="!:TKey"/> (primitive) and "ReadAll" query result of type <see cref="!:TReadAllResult"/>
+            (inheriting from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)
+            and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
+            </summary>
+            <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
+            <typeparam name="TKey">The object key type (primitive)</typeparam>
+            <typeparam name="TReadAllResult">"ReadAll" query result type
+            (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
+            <typeparam name="TReadAllParams">ReadAll query parameters</typeparam>
+            <param name="services">The service collection</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudFor``5(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.IApizrExtendedOptionsBuilder})">
+            <summary>
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for <see cref="!:T"/> object type, 
+            with key of type <see cref="!:TKey"/> (primitive) and "ReadAll" query result of type <see cref="!:TReadAllResult"/>
+            (inheriting from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)
+            and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
+            </summary>
+            <typeparam name="T">The object type to manage with crud api calls</typeparam>
+            <typeparam name="TKey">The object key type (primitive)</typeparam>
+            <typeparam name="TReadAllResult">"ReadAll" query result type
+            (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
+            <typeparam name="TReadAllParams">ReadAll query parameters</typeparam>
+            <typeparam name="TApizrManager">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation</typeparam>
+            <param name="services">The service collection</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.IApizrExtendedOptionsBuilder})">
+            <summary>
+            Register <see cref="T:Apizr.IApizrManager`1"/> for <see cref="!:crudedType"/> object type (class), 
+            with key of type <see cref="T:System.Int32"/> and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            and ReadAll query parameters of type IDictionary{string,object}
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="crudedType">The object type to manage with crud api calls (class)</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Action{Apizr.IApizrExtendedOptionsBuilder})">
+            <summary>
+            Register <see cref="T:Apizr.IApizrManager`1"/> for <see cref="!:crudedType"/> object type (class), 
+            with key of type <see cref="!:crudedKeyType"/> (primitive) and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="crudedType">The object type to manage with crud api calls (class)</param>
+            <param name="crudedKeyType">The object key type (primitive)</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Type,System.Action{Apizr.IApizrExtendedOptionsBuilder})">
+            <summary>
+            Register <see cref="T:Apizr.IApizrManager`1"/> for <see cref="!:crudedType"/> object type (class), 
+            with key of type <see cref="!:crudedKeyType"/> (primitive) and "ReadAll" query result of type <see cref="!:crudedReadAllResultType"/>
+            (inheriting from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)
+            and ReadAll query parameters of type IDictionary{string,object}
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="crudedType">The object type to manage with crud api calls (class)</param>
+            <param name="crudedKeyType">The object key type (primitive)</param>
+            <param name="crudedReadAllResultType">"ReadAll" query result type
+            (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Type,System.Type,System.Action{Apizr.IApizrExtendedOptionsBuilder})">
+            <summary>
+            Register <see cref="T:Apizr.IApizrManager`1"/> for <see cref="!:crudedType"/> object type (class), 
+            with key of type <see cref="!:crudedKeyType"/> (primitive) and "ReadAll" query result of type <see cref="!:crudedReadAllResultType"/>
+            (inheriting from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)
+            and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="crudedType">The object type to manage with crud api calls (class)</param>
+            <param name="crudedKeyType">The object key type (primitive)</param>
+            <param name="crudedReadAllResultType">"ReadAll" query result type
+            (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</param>
+            <param name="crudedReadAllParamsType">ReadAll query parameters type</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Type,System.Type,System.Type,System.Action{Apizr.IApizrExtendedOptionsBuilder})">
+            <summary>
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for <see cref="!:crudedType"/> object type (class), 
+            with key of type <see cref="!:crudedKeyType"/> (primitive) and "ReadAll" query result of type <see cref="!:crudedReadAllResultType"/>
+            (inheriting from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)
+            and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="crudedType">The object type to manage with crud api calls</param>
+            <param name="crudedKeyType">The object key type</param>
+            <param name="crudedReadAllResultType">"ReadAll" query result type
+            (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</param>
+            <param name="crudedReadAllParamsType">ReadAll query parameters type</param>
+            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.IApizrExtendedOptionsBuilder},System.Type[])">
+            <summary>
+            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.CrudEntityAttribute"/> decorated classes
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.CrudEntityAttribute"/></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.IApizrExtendedOptionsBuilder},System.Reflection.Assembly[])">
+            <summary>
+            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.CrudEntityAttribute"/> decorated classes
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.CrudEntityAttribute"/></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.IApizrExtendedOptionsBuilder},System.Type[])">
+            <summary>
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.CrudEntityAttribute"/> decorated classes
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.CrudEntityAttribute"/></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.IApizrExtendedOptionsBuilder},System.Reflection.Assembly[])">
+            <summary>
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.CrudEntityAttribute"/> decorated classes
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.CrudEntityAttribute"/></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrFor``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.IApizrExtendedOptionsBuilder})">
+            <summary>
+            Register <see cref="T:Apizr.IApizrManager`1"/>
+            </summary>
+            <typeparam name="TWebApi">The web api interface to manage</typeparam>
+            <param name="services">The service collection</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrFor``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.IApizrExtendedOptionsBuilder})">
+            <summary>
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/>
+            </summary>
+            <typeparam name="TWebApi">The web api interface to manage</typeparam>
+            <typeparam name="TApizrManager">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation</typeparam>
+            <param name="services">The service collection</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.IApizrExtendedOptionsBuilder})">
+            <summary>
+            Register <see cref="T:Apizr.IApizrManager`1"/>
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="webApiType">The web api interface type to manage</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.IApizrExtendedOptionsBuilder},System.Type[])">
+            <summary>
+            Register a <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.WebApiAttribute"/> decorated interfaces
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.WebApiAttribute"/></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.IApizrExtendedOptionsBuilder},System.Reflection.Assembly[])">
+            <summary>
+            Register a <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.WebApiAttribute"/> decorated interfaces
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.WebApiAttribute"/></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.IApizrExtendedOptionsBuilder},System.Type[])">
+            <summary>
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.WebApiAttribute"/> decorated interfaces
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.WebApiAttribute"/></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.IApizrExtendedOptionsBuilder},System.Reflection.Assembly[])">
+            <summary>
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.WebApiAttribute"/> decorated interfaces
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.WebApiAttribute"/></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Action{Apizr.IApizrExtendedOptionsBuilder})">
+            <summary>
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/>
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="webApiType">The web api interface type to manage</param>
+            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Connecting;
+using Apizr.Logging;
 using Apizr.Mapping;
 using HttpTracer;
 using Microsoft.Extensions.Logging;
@@ -56,12 +57,14 @@ namespace Apizr
             return this;
         }
 
-        public IApizrOptionsBuilder WithTrafficVerbosity(HttpMessageParts trafficVerbosity)
-            => WithTrafficVerbosity(() => trafficVerbosity);
+        public IApizrOptionsBuilder WithHttpTracing(HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel trafficLogLevel = LogLevel.Trace)
+            => WithHttpTracing(() => trafficVerbosity, () => trafficLogLevel);
 
-        public IApizrOptionsBuilder WithTrafficVerbosity(Func<HttpMessageParts> trafficVerbosityFactory)
+        public IApizrOptionsBuilder WithHttpTracing(Func<HttpMessageParts> trafficVerbosityFactory,
+            Func<LogLevel> trafficLogLevelFactory)
         {
             Options.TrafficVerbosityFactory = trafficVerbosityFactory;
+            Options.TrafficLogLevelFactory = trafficLogLevelFactory;
 
             return this;
         }
@@ -182,10 +185,13 @@ namespace Apizr
             return this;
         }
 
-        public IApizrOptionsBuilder WithLogger(ILogger logger)
-            => WithLogger(() => logger);
+        public IApizrOptionsBuilder WithLogging(string categoryName, LogLevel logLevel)
+            => WithLogging(() => new DefaultLogger(categoryName, logLevel));
 
-        public IApizrOptionsBuilder WithLogger(Func<ILogger> loggerFactory)
+        public IApizrOptionsBuilder WithLogging(ILogger logger)
+            => WithLogging(() => logger);
+
+        public IApizrOptionsBuilder WithLogging(Func<ILogger> loggerFactory)
         {
             Options.LoggerFactory = loggerFactory;
 

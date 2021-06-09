@@ -27,6 +27,11 @@ namespace Apizr
         Func<HttpMessageParts> TrafficVerbosityFactory { get; }
 
         /// <summary>
+        /// Http traffic tracing log level factory
+        /// </summary>
+        Func<LogLevel> TrafficLogLevelFactory { get; }
+
+        /// <summary>
         /// HttpClientHandler factory
         /// </summary>
         Func<HttpClientHandler> HttpClientHandlerFactory { get; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using HttpTracer;
+using Microsoft.Extensions.Logging;
 
 namespace Apizr
 {
@@ -22,6 +23,11 @@ namespace Apizr
         /// Http traffic tracing verbosity
         /// </summary>
         HttpMessageParts TrafficVerbosity { get; }
+
+        /// <summary>
+        /// Http traffic tracing log level
+        /// </summary>
+        LogLevel TrafficLogLevel { get; }
 
         /// <summary>
         /// Policy keys from the registry

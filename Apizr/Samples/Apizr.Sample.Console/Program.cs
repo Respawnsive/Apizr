@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Apizr.Extending;
 using Apizr.Integrations.Fusillade;
 using Apizr.Integrations.MonkeyCache;
-using Apizr.Logging;
 using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Cruding.Sending;
 using Apizr.Mediation.Requesting;
@@ -122,12 +121,12 @@ namespace Apizr.Sample.Console
                     //    },
                     //    Converters = { new IsoDateTimeConverter() }
                     //})))
-                    .WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High));
+                    .WithHttpTracing(HttpTracer.HttpMessageParts.All).WithLogging("ReqRes", LogLevel.Trace));
 
                 _userManager = Apizr.CrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users")
                     .WithPolicyRegistry(registry)
                     .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
-                    .WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High));
+                    .WithHttpTracing(HttpTracer.HttpMessageParts.All).WithLogging("User", LogLevel.Trace));
 
 
                 System.Console.WriteLine("");
@@ -143,7 +142,7 @@ namespace Apizr.Sample.Console
                 {
                     //services.AddRefitClient<IReqResService>();
                     // Manual registration
-                    services.AddApizrFor<IReqResService>(optionsBuilder => optionsBuilder.WithPriorityManagement().WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithCacheHandler<AkavacheCacheHandler>().WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High));
+                    services.AddApizrFor<IReqResService>(optionsBuilder => optionsBuilder.WithPriorityManagement().WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All));
 
                     //// Auto assembly detection and registration
                     ////services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
@@ -152,30 +151,30 @@ namespace Apizr.Sample.Console
                     //services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>());
 
                     // Auto assembly detection and registration
-                    services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithCacheHandler<AkavacheCacheHandler>().WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High), typeof(User));
+                    services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
                 }
                 else
                 {
                     if (configChoice == 3)
                     {
                         // Classic auto assembly detection and registration and handling with mediation
-                        services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High), typeof(User));
+                        services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
 
                         // Crud manual registration and handling with mediation
                         //services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All));
 
                         // Crud auto assembly detection, registration and handling with mediation
-                        services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High), typeof(User));
+                        services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
                     }
                     else
                     {
                         if(configChoice == 4)
                         {
                             // Classic auto assembly detection and registration and handling with both mediation and optional mediation
-                            services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High), typeof(User));
+                            services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
 
                             // Auto assembly detection, registration and handling with both mediation and optional mediation
-                            services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High), typeof(User));
+                            services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
                         }
                         else
                         {
@@ -184,10 +183,10 @@ namespace Apizr.Sample.Console
                             //services.AddApizrCrudFor<MappedEntity<UserInfos, UserDetails>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithCrudOptionalMediation().WithMappingHandler<AutoMapperMappingHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All));
                             
                             // Classic auto assembly detection and registration and handling with both mediation and optional mediation
-                            services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithMappingHandler<AutoMapperMappingHandler>().WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High), typeof(User), typeof(Program));
+                            services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithMappingHandler<AutoMapperMappingHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User), typeof(Program));
 
                             // Auto assembly detection, registration and handling with mediation, optional mediation and mapping
-                            services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithMappingHandler<AutoMapperMappingHandler>().WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High), typeof(User), typeof(Program));
+                            services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithMappingHandler<AutoMapperMappingHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User), typeof(Program));
 
                             services.AddAutoMapper(typeof(Program));
                         }
@@ -243,7 +242,7 @@ namespace Apizr.Sample.Console
                 {
                     //var test = new ReadAllUsersParams("value1", 2);
 
-                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+                    var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(true));
@@ -252,7 +251,7 @@ namespace Apizr.Sample.Console
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(true, parameters1));
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(true, parameters1, ct), CancellationToken.None);
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(true, parameters1, parameters2, priority, ct), cancellationToken);
-                    var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(true, new Dictionary<string, object> { { "param1", 1 }, { "param2", 2 } }, new ReadAllUsersParams{Param2 = 4}, (int)Priority.UserInitiated, ct), cancellationToken);
+                    //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(true, new Dictionary<string, object> { { "param1", 1 }, { "param2", 2 } }, new ReadAllUsersParams{Param2 = 4}, (int)Priority.UserInitiated, ct), cancellationToken);
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(parameters1, ct), CancellationToken.None);
                     users = userList?.Data;
 

@@ -4,12 +4,12 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Caching;
-using Apizr.Logging;
+using Apizr.Tracing;
 using Refit;
 
 namespace Apizr.Sample.Api
 {
-    [CacheIt, LogIt]
+    [Cache, Trace]
     public interface IReallyExcitingCrudApi<T, in TKey> where T : class
     {
         [Post("")]

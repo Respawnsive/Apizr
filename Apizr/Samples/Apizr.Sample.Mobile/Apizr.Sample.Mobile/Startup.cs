@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Apizr.Extending;
 using Apizr.Integrations.Fusillade;
-using Apizr.Logging;
 using Apizr.Policing;
 using Apizr.Sample.Api;
 using Apizr.Sample.Api.Models;

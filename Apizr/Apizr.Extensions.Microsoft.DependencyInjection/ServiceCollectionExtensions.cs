@@ -6,10 +6,10 @@ using System.Reflection;
 using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Extending;
-using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Policing;
 using Apizr.Requesting;
+using Apizr.Tracing;
 using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -596,22 +596,22 @@ namespace Apizr
                     optionsBuilder += sourceBuilder => sourceBuilder.ApizrOptions.WebApis.Add(webApiType, webApiAttribute);
             }
 
-            LogItAttribute logAllAttribute;
+            TraceAttribute logAllAttribute;
             PolicyAttribute webApiPolicyAttribute;
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
             {
                 var modelType = webApiType.GetGenericArguments().First();
-                logAllAttribute = modelType.GetTypeInfo().GetCustomAttribute<LogItAttribute>(true);
+                logAllAttribute = modelType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true);
                 webApiPolicyAttribute = modelType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
             else
             {
-                logAllAttribute = webApiType.GetTypeInfo().GetCustomAttribute<LogItAttribute>(true);
+                logAllAttribute = webApiType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true);
                 webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
 
             if (logAllAttribute == null)
-                logAllAttribute = webApiType.Assembly.GetCustomAttribute<LogItAttribute>();
+                logAllAttribute = webApiType.Assembly.GetCustomAttribute<TraceAttribute>();
 
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 

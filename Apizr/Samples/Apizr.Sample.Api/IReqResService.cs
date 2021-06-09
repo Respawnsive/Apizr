@@ -3,21 +3,21 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Integrations.Fusillade;
-using Apizr.Logging;
 using Apizr.Policing;
 using Apizr.Sample.Api.Models;
+using Apizr.Tracing;
 using HttpTracer;
 using Refit;
 
 [assembly:Policy("TransientHttpError")]
-[assembly:CacheIt(CacheMode.GetAndFetch, "00:10:00")]
-[assembly:LogIt(HttpMessageParts.All, ApizrLogLevel.High)]
+[assembly:Cache(CacheMode.GetAndFetch, "00:10:00")]
+[assembly:Trace]
 namespace Apizr.Sample.Api
 {
     [WebApi("https://reqres.in/api")]
     public interface IReqResService
     {
-        [Get("/users"), CacheIt(CacheMode.None)]
+        [Get("/users"), Cache(CacheMode.None)]
         Task<UserList> GetUsersAsync();
 
         [Get("/users")]

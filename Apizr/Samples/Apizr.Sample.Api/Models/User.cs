@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using Apizr.Caching;
-using Apizr.Logging;
 using Apizr.Requesting;
+using Apizr.Tracing;
 using HttpTracer;
 
 namespace Apizr.Sample.Api.Models
@@ -9,7 +9,7 @@ namespace Apizr.Sample.Api.Models
     [CrudEntity("https://reqres.in/api/users", typeof(int), typeof(PagedResult<>))]
     [CacheReadAll(CacheMode.GetAndFetch)]
     [CacheRead(CacheMode.GetOrFetch)]
-    [LogIt(HttpMessageParts.None, ApizrLogLevel.None)]
+    [Trace(HttpMessageParts.None)]
     public class User
     {
         [JsonPropertyName("id")]

@@ -16,13 +16,15 @@ namespace Apizr
     {
 
         public ApizrOptions(Type webApiType, Uri baseAddress,
-            HttpMessageParts? httpTracerVerbosity,
+            HttpMessageParts? trafficVerbosity,
+            LogLevel? trafficLogLevel,
             string[] assemblyPolicyRegistryKeys,
             string[] webApiPolicyRegistryKeys) : base(webApiType,
             assemblyPolicyRegistryKeys, webApiPolicyRegistryKeys)
         {
             BaseAddressFactory = () => baseAddress;
-            TrafficVerbosityFactory = () => httpTracerVerbosity ?? HttpMessageParts.None;
+            TrafficVerbosityFactory = () => trafficVerbosity ?? HttpMessageParts.None;
+            TrafficLogLevelFactory = () => trafficLogLevel ?? LogLevel.Trace;
             HttpClientHandlerFactory = () => new HttpClientHandler();
             PolicyRegistryFactory = () => new PolicyRegistry();
             RefitSettingsFactory = () => new RefitSettings();
@@ -40,11 +42,18 @@ namespace Apizr
             set => _baseAddressFactory = () => BaseAddress = value.Invoke();
         }
 
-        private Func<HttpMessageParts> _httpTracerVerbosityFactory;
+        private Func<HttpMessageParts> _trafficVerbosityFactory;
         public Func<HttpMessageParts> TrafficVerbosityFactory
         {
-            get => _httpTracerVerbosityFactory;
-            set => _httpTracerVerbosityFactory = () => TrafficVerbosity = value.Invoke();
+            get => _trafficVerbosityFactory;
+            set => _trafficVerbosityFactory = () => TrafficVerbosity = value.Invoke();
+        }
+        
+        private Func<LogLevel> _trafficLogLevelFactory;
+        public Func<LogLevel> TrafficLogLevelFactory
+        {
+            get => _trafficLogLevelFactory;
+            set => _trafficLogLevelFactory = () => TrafficLogLevel = value.Invoke();
         }
 
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }

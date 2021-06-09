@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Connecting;
-using Apizr.Logging;
 using Apizr.Mapping;
 using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,7 +34,7 @@ namespace Apizr
         /// </summary>
         /// <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
         /// <returns></returns>
-        IApizrExtendedOptionsBuilder WithTrafficVerbosity(Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory);
+        IApizrExtendedOptionsBuilder WithHttpTracing(Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory);
 
         /// <summary>
         /// Provide a custom HttpClientHandler

@@ -496,7 +496,7 @@
         </member>
         <member name="M:Apizr.IApizrOptionsBuilder.WithLoggingVerbosity(System.Func{HttpTracer.HttpMessageParts},System.Func{Apizr.Logging.ApizrLogLevel})">
             <summary>
-            Define http traces and Apizr logs verbosity (could be defined with LogItAttribute)
+            Define http traces and Apizr logs verbosity (could be defined with TraceAttribute)
             </summary>
             <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
             <param name="apizrVerbosityFactory">Apizr execution steps verbosity factory</param>
@@ -680,7 +680,7 @@
         </member>
         <member name="M:Apizr.IApizrOptionsBuilderBase`2.WithLoggingVerbosity(HttpTracer.HttpMessageParts,Apizr.Logging.ApizrLogLevel)">
             <summary>
-            Define http traces and Apizr logs verbosity (could be defined with LogItAttribute)
+            Define http traces and Apizr logs verbosity (could be defined with TraceAttribute)
             </summary>
             <param name="trafficVerbosity">Http traffic tracing verbosity</param>
             <param name="apizrVerbosity">Apizr execution steps verbosity</param>
@@ -732,24 +732,24 @@
             <param name="description">Some optional description</param>
             <param name="parameters">Some optional parameters</param>
         </member>
-        <member name="T:Apizr.Logging.LogItAttribute">
+        <member name="T:Apizr.Logging.TraceAttribute">
             <summary>
             Tells Apizr to trace request/response HTTP(s) traffic and log execution steps for the decorated web api interface
             </summary>
         </member>
-        <member name="M:Apizr.Logging.LogItAttribute.#ctor(HttpTracer.HttpMessageParts,Apizr.Logging.ApizrLogLevel)">
+        <member name="M:Apizr.Logging.TraceAttribute.#ctor(HttpTracer.HttpMessageParts,Apizr.Logging.ApizrLogLevel)">
             <summary>
             Trace http traffic and log Apizr execution steps with verbosity
             </summary>
             <param name="trafficVerbosity">Http traffic tracing verbosity (default: all)</param>
             <param name="apizrVerbosity">Apizr execution steps logging verbosity (default: high)</param>
         </member>
-        <member name="P:Apizr.Logging.LogItAttribute.TrafficVerbosity">
+        <member name="P:Apizr.Logging.TraceAttribute.TrafficVerbosity">
             <summary>
             Http traffic tracing verbosity
             </summary>
         </member>
-        <member name="P:Apizr.Logging.LogItAttribute.ApizrVerbosity">
+        <member name="P:Apizr.Logging.TraceAttribute.ApizrVerbosity">
             <summary>
             Apizr executions tracing verbosity
             </summary>

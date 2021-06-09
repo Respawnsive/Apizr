@@ -603,17 +603,17 @@ namespace Apizr
                     }
 
                     if(cacheAttribute == null) // Global model caching
-                        cacheAttribute = modelType.GetTypeInfo().GetCustomAttribute<CacheItAttribute>(true);
+                        cacheAttribute = modelType.GetTypeInfo().GetCustomAttribute<CacheAttribute>(true);
                 }
                 else // Classic api caching
                 {
                     cacheAttribute =
-                        methodToCacheData.MethodInfo.GetCustomAttribute<CacheItAttribute>() ?? // Specific method caching
-                        methodToCacheDetails.ApiInterfaceType.GetTypeInfo().GetCustomAttribute<CacheItAttribute>(); // Global api interface caching
+                        methodToCacheData.MethodInfo.GetCustomAttribute<CacheAttribute>() ?? // Specific method caching
+                        methodToCacheDetails.ApiInterfaceType.GetTypeInfo().GetCustomAttribute<CacheAttribute>(); // Global api interface caching
                 }
 
                 if (cacheAttribute == null) // Global assembly caching
-                    cacheAttribute = methodToCacheDetails.ApiInterfaceType.Assembly.GetCustomAttribute<CacheItAttribute>();
+                    cacheAttribute = methodToCacheDetails.ApiInterfaceType.Assembly.GetCustomAttribute<CacheAttribute>();
 
                 // Are we asked to cache this method?
                 if (cacheAttribute == null || cacheAttribute.Mode == CacheMode.None)

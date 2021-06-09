@@ -33,11 +33,12 @@ namespace Apizr
         IApizrOptionsBuilder WithBaseAddress(Func<Uri> baseAddressFactory);
 
         /// <summary>
-        /// Define http traffic tracing verbosity (could be defined with LogItAttribute)
+        /// Define http traffic tracing verbosity (could be defined with TraceAttribute)
         /// </summary>
         /// <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
+        /// <param name="trafficLogLevelFactory">Http traffic tracing log level factory</param>
         /// <returns></returns>
-        IApizrOptionsBuilder WithTrafficVerbosity(Func<HttpMessageParts> trafficVerbosityFactory);
+        IApizrOptionsBuilder WithHttpTracing(Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel> trafficLogLevelFactory);
 
         /// <summary>
         /// Provide a custom HttpClientHandler
@@ -169,18 +170,26 @@ namespace Apizr
         IApizrOptionsBuilder WithCacheHandler(Func<ICacheHandler> cacheHandlerFactory);
 
         /// <summary>
-        /// Provide a logger to log it all
+        /// Provide the default Console logger
         /// </summary>
-        /// <param name="logger">An <see cref="ILogger"/> mapping implementation instance</param>
+        /// <param name="categoryName"></param>
+        /// <param name="logLevel"></param>
         /// <returns></returns>
-        IApizrOptionsBuilder WithLogger(ILogger logger);
+        IApizrOptionsBuilder WithLogging(string categoryName, LogLevel logLevel);
 
         /// <summary>
-        /// Provide a logger to log it all
+        /// Provide a logger
         /// </summary>
-        /// <param name="loggerFactory">An <see cref="ILogger"/> mapping implementation instance factory</param>
+        /// <param name="logger">An <see cref="ILogger"/> implementation instance</param>
         /// <returns></returns>
-        IApizrOptionsBuilder WithLogger(Func<ILogger> loggerFactory);
+        IApizrOptionsBuilder WithLogging(ILogger logger);
+
+        /// <summary>
+        /// Provide a logger
+        /// </summary>
+        /// <param name="loggerFactory">An <see cref="ILogger"/> implementation instance factory</param>
+        /// <returns></returns>
+        IApizrOptionsBuilder WithLogging(Func<ILogger> loggerFactory);
 
         /// <summary>
         /// Provide a mapping handler to map entities

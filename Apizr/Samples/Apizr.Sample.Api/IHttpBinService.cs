@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Caching;
-using Apizr.Logging;
+using Apizr.Tracing;
 using HttpTracer;
 using Refit;
 
 namespace Apizr.Sample.Api
 {
-    [WebApi("https://httpbin.org/", false), LogIt(HttpMessageParts.None, ApizrLogLevel.Low)]
+    [WebApi("https://httpbin.org/", false), Trace(HttpMessageParts.None)]
     public interface IHttpBinService
     {
         [Get("/bearer")]
         [Headers("Authorization: Bearer")]
-        [CacheIt(CacheMode.None)]
+        [Cache(CacheMode.None)]
         Task<HttpResponseMessage> AuthBearerAsync();
     }
 }

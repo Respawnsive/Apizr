@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Apizr.Logging;
 using HttpTracer;
 
 namespace Apizr
@@ -19,8 +18,7 @@ namespace Apizr
 
         public Type WebApiType { get; }
         public Uri BaseAddress { get; protected set; }
-        public HttpMessageParts HttpTracerVerbosity { get; protected set; }
-        public ApizrLogLevel ApizrVerbosity { get; protected set; }
+        public HttpMessageParts TrafficVerbosity { get; protected set; }
         public string[] PolicyRegistryKeys { get; }
     }
 }

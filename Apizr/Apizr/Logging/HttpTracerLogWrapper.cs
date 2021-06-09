@@ -1,19 +1,16 @@
-﻿using HttpTracer.Logger;
+﻿using Microsoft.Extensions.Logging;
 
 namespace Apizr.Logging
 {
-    public class HttpTracerLogWrapper : ILogger
+    public class HttpTracerLogWrapper : HttpTracer.Logger.ILogger
     {
-        private readonly ILogHandler _logHandler;
+        private readonly ILogger _logger;
 
-        public HttpTracerLogWrapper(ILogHandler logHandler)
+        public HttpTracerLogWrapper(ILogger logger)
         {
-            _logHandler = logHandler;
+            _logger = logger;
         }
 
-        public void Log(string message)
-        {
-            _logHandler.Write(message);
-        }
+        public void Log(string message) => _logger.LogTrace(message);
     }
 }

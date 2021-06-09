@@ -5,8 +5,8 @@ using System.Net.Http;
 using System.Reactive.Threading.Tasks;
 using System.Threading;
 using System.Threading.Tasks;
-using Apizr.Logging;
 using Fusillade;
+using Microsoft.Extensions.Logging;
 using Punchclock;
 
 namespace Apizr.Integrations.Fusillade
@@ -15,12 +15,12 @@ namespace Apizr.Integrations.Fusillade
     {
         private readonly OperationQueue _opQueue;
         private readonly Dictionary<string, InflightRequest> _inflightResponses = new Dictionary<string, InflightRequest>();
-        private readonly ILogHandler _logHandler;
+        private readonly ILogger _logger;
         private long? _maxBytesToRead;
 
-        public PriorityHttpMessageHandler(HttpMessageHandler innerHandler, ILogHandler logHandler, long? maxBytesToRead = null, OperationQueue opQueue = null) : base(innerHandler)
+        public PriorityHttpMessageHandler(HttpMessageHandler innerHandler, ILogger logger, long? maxBytesToRead = null, OperationQueue opQueue = null) : base(innerHandler)
         {
-            _logHandler = logHandler;
+            _logger = logger;
             _maxBytesToRead = maxBytesToRead;
             _opQueue = opQueue;
         }

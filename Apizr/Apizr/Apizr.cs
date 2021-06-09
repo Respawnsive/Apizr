@@ -11,6 +11,7 @@ using Apizr.Mapping;
 using Apizr.Policing;
 using Apizr.Requesting;
 using HttpTracer;
+using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Registry;
 using Refit;
@@ -34,9 +35,9 @@ namespace Apizr
             Action<IApizrOptionsBuilder> optionsBuilder = null) where T : class =>
             For<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>,
                 ApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>>(
-                (lazyWebApi, connectivityHandler, cacheHandler, logHandler, mappingHandler, policyRegistry, apizrOptions) =>
+                (lazyWebApi, connectivityHandler, cacheHandler, logger, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>(lazyWebApi,
-                        connectivityHandler, cacheHandler, logHandler, mappingHandler,
+                        connectivityHandler, cacheHandler, logger, mappingHandler,
                         policyRegistry, apizrOptions), optionsBuilder);
 
         /// <summary>
@@ -52,9 +53,9 @@ namespace Apizr
             Action<IApizrOptionsBuilder> optionsBuilder = null) where T : class =>
             For<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>,
                 ApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>>>(
-                (lazyWebApi, connectivityHandler, cacheHandler, logHandler, mappingHandler, policyRegistry, apizrOptions) =>
+                (lazyWebApi, connectivityHandler, cacheHandler, logger, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>>(lazyWebApi,
-                        connectivityHandler, cacheHandler, logHandler, mappingHandler,
+                        connectivityHandler, cacheHandler, logger, mappingHandler,
                         policyRegistry, apizrOptions), optionsBuilder);
 
         /// <summary>
@@ -74,10 +75,10 @@ namespace Apizr
             where T : class =>
             For<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>,
                 ApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>>>(
-                (lazyWebApi, connectivityHandler, cacheHandler, logHandler, mappingHandler, policyRegistry, apizrOptions) =>
+                (lazyWebApi, connectivityHandler, cacheHandler, logger, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>>(lazyWebApi,
                         connectivityHandler,
-                        cacheHandler, logHandler, mappingHandler,
+                        cacheHandler, logger, mappingHandler,
                         policyRegistry, apizrOptions), optionsBuilder);
 
         /// <summary>
@@ -98,10 +99,10 @@ namespace Apizr
             where T : class where TReadAllParams : class =>
             For<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>,
                 ApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>>(
-                (lazyWebApi, connectivityHandler, cacheHandler, logHandler, mappingHandler, policyRegistry, apizrOptions) =>
+                (lazyWebApi, connectivityHandler, cacheHandler, logger, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>(lazyWebApi,
                         connectivityHandler,
-                        cacheHandler, logHandler, mappingHandler,
+                        cacheHandler, logger, mappingHandler,
                         policyRegistry, apizrOptions), optionsBuilder);
 
         /// <summary>
@@ -120,7 +121,7 @@ namespace Apizr
         /// <returns></returns>
         public static TApizrManager CrudFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(
             Func<ILazyWebApi<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler,
-                ILogHandler, IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptionsBase,
+                ILogger, IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptionsBase,
                 TApizrManager> apizrManagerFactory,
             Action<IApizrOptionsBuilder> optionsBuilder = null)
             where T : class
@@ -141,8 +142,8 @@ namespace Apizr
         public static IApizrManager<TWebApi> For<TWebApi>(
             Action<IApizrOptionsBuilder> optionsBuilder = null) =>
             For<TWebApi, ApizrManager<TWebApi>>(
-                (lazyWebApi, connectivityHandler, cacheHandler, logHandler, mappingHandler, policyRegistry, apizrOptions) =>
-                    new ApizrManager<TWebApi>(lazyWebApi, connectivityHandler, cacheHandler, logHandler, mappingHandler,
+                (lazyWebApi, connectivityHandler, cacheHandler, logger, mappingHandler, policyRegistry, apizrOptions) =>
+                    new ApizrManager<TWebApi>(lazyWebApi, connectivityHandler, cacheHandler, logger, mappingHandler,
                         policyRegistry, apizrOptions), optionsBuilder);
 
         /// <summary>
@@ -154,8 +155,7 @@ namespace Apizr
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
         public static TApizrManager For<TWebApi, TApizrManager>(
-            Func<ILazyWebApi<TWebApi>, IConnectivityHandler, ICacheHandler, ILogHandler, IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptions<TWebApi>,
-                TApizrManager> apizrManagerFactory,
+            Func<ILazyWebApi<TWebApi>, IConnectivityHandler, ICacheHandler, ILogger, IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptions<TWebApi>, TApizrManager> apizrManagerFactory,
             Action<IApizrOptionsBuilder> optionsBuilder = null)
         where TApizrManager : IApizrManager<TWebApi>
         {
@@ -164,10 +164,9 @@ namespace Apizr
             var httpHandlerFactory = new Func<HttpMessageHandler>(() =>
             {
                 var httpClientHandler = apizrOptions.HttpClientHandlerFactory.Invoke();
-                var logHandler = apizrOptions.LogHandlerFactory.Invoke();
-                var handlerBuilder = new HttpHandlerBuilder(httpClientHandler, new HttpTracerLogWrapper(logHandler));
-                var httpTracerVerbosity = apizrOptions.HttpTracerVerbosityFactory.Invoke();
-                var apizrVerbosity = apizrOptions.ApizrVerbosityFactory.Invoke();
+                var logger = apizrOptions.LoggerFactory.Invoke();
+                var handlerBuilder = new HttpHandlerBuilder(httpClientHandler, new HttpTracerLogWrapper(logger));
+                var httpTracerVerbosity = apizrOptions.TrafficVerbosityFactory.Invoke();
                 handlerBuilder.HttpTracerHandler.Verbosity = httpTracerVerbosity;
 
                 if (apizrOptions.PolicyRegistryKeys != null && apizrOptions.PolicyRegistryKeys.Any())
@@ -177,46 +176,44 @@ namespace Apizr
                     {
                         if (policyRegistry.TryGet<IsPolicy>(policyRegistryKey, out var registeredPolicy))
                         {
-                            if (apizrVerbosity == ApizrLogLevel.High)
-                                logHandler.Write($"Apizr - Global policies: Found a policy with key {policyRegistryKey}");
+                            logger.LogTrace($"Apizr - Global policies: Found a policy with key {policyRegistryKey}");
                             if (registeredPolicy is IAsyncPolicy<HttpResponseMessage> registeredPolicyForHttpResponseMessage)
                             {
                                 var policySelector =
                                     new Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>>(
                                         request =>
                                         {
-                                            var pollyContext = new Context().WithLogHandler(logHandler);
+                                            var pollyContext = new Context().WithLogger(logger);
                                             request.SetPolicyExecutionContext(pollyContext);
                                             return registeredPolicyForHttpResponseMessage;
                                         });
                                 handlerBuilder.AddHandler(new PolicyHttpMessageHandler(policySelector));
 
-                                if (apizrVerbosity == ApizrLogLevel.High)
-                                    logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} will be applied");
+                                logger.LogTrace($"Apizr - Global policies: Policy with key {policyRegistryKey} will be applied");
                             }
-                            else if (apizrVerbosity >= ApizrLogLevel.Low)
+                            else
                             {
-                                logHandler.Write($"Apizr - Global policies: Policy with key {policyRegistryKey} is not of {typeof(IAsyncPolicy<HttpResponseMessage>)} type and will be ignored");
+                                logger.LogTrace($"Apizr - Global policies: Policy with key {policyRegistryKey} is not of {typeof(IAsyncPolicy<HttpResponseMessage>)} type and will be ignored");
                             }
                         }
-                        else if (apizrVerbosity >= ApizrLogLevel.Low)
+                        else
                         {
-                            logHandler.Write($"Apizr - Global policies: No policy found for key {policyRegistryKey}");
+                            logger.LogTrace($"Apizr - Global policies: No policy found for key {policyRegistryKey}");
                         }
                     }
                 }
 
                 foreach (var delegatingHandlersFactory in apizrOptions.DelegatingHandlersFactories)
-                    handlerBuilder.AddHandler(delegatingHandlersFactory.Invoke(logHandler, apizrOptions));
+                    handlerBuilder.AddHandler(delegatingHandlersFactory.Invoke(logger, apizrOptions));
 
-                var primaryMessageHandler = handlerBuilder.GetPrimaryHttpMessageHandler(logHandler);
+                var primaryMessageHandler = handlerBuilder.GetPrimaryHttpMessageHandler(logger);
 
                 return primaryMessageHandler;
             });
 
             var webApiFactory = new Func<object>(() => RestService.For<TWebApi>(new HttpClient(httpHandlerFactory.Invoke(), false) { BaseAddress = apizrOptions.BaseAddressFactory.Invoke() }, apizrOptions.RefitSettingsFactory.Invoke()));
             var lazyWebApi = new LazyWebApi<TWebApi>(webApiFactory);
-            var apizrManager = apizrManagerFactory(lazyWebApi, apizrOptions.ConnectivityHandlerFactory.Invoke(), apizrOptions.CacheHandlerFactory.Invoke(), apizrOptions.LogHandlerFactory.Invoke(), apizrOptions.MappingHandlerFactory.Invoke(), apizrOptions.PolicyRegistryFactory.Invoke(), new ApizrOptions<TWebApi>(apizrOptions));
+            var apizrManager = apizrManagerFactory(lazyWebApi, apizrOptions.ConnectivityHandlerFactory.Invoke(), apizrOptions.CacheHandlerFactory.Invoke(), apizrOptions.LoggerFactory.Invoke(), apizrOptions.MappingHandlerFactory.Invoke(), apizrOptions.PolicyRegistryFactory.Invoke(), new ApizrOptions<TWebApi>(apizrOptions));
 
             return apizrManager;
         } 
@@ -230,26 +227,26 @@ namespace Apizr
             var webApiAttribute = webApiType.GetTypeInfo().GetCustomAttribute<WebApiAttribute>(true);
             Uri.TryCreate(webApiAttribute?.BaseUri, UriKind.RelativeOrAbsolute, out var baseAddress);
 
-            LogItAttribute logAllAttribute;
+            LogItAttribute logItAttribute;
             PolicyAttribute webApiPolicyAttribute;
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
             {
                 var modelType = webApiType.GetGenericArguments().First();
-                logAllAttribute = modelType.GetTypeInfo().GetCustomAttribute<LogItAttribute>(true);
+                logItAttribute = modelType.GetTypeInfo().GetCustomAttribute<LogItAttribute>(true);
                 webApiPolicyAttribute = modelType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
             else
             {
-                logAllAttribute = webApiType.GetTypeInfo().GetCustomAttribute<LogItAttribute>(true);
+                logItAttribute = webApiType.GetTypeInfo().GetCustomAttribute<LogItAttribute>(true);
                 webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
 
-            if(logAllAttribute == null)
-                logAllAttribute = webApiType.Assembly.GetCustomAttribute<LogItAttribute>();
+            if(logItAttribute == null)
+                logItAttribute = webApiType.Assembly.GetCustomAttribute<LogItAttribute>();
 
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 
-            var builder = new ApizrOptionsBuilder(new ApizrOptions(webApiType, baseAddress, logAllAttribute?.TrafficVerbosity, logAllAttribute?.ApizrVerbosity,
+            var builder = new ApizrOptionsBuilder(new ApizrOptions(webApiType, baseAddress, logItAttribute?.TrafficVerbosity,
                 assemblyPolicyAttribute?.RegistryKeys, webApiPolicyAttribute?.RegistryKeys));
 
             optionsBuilder?.Invoke(builder);

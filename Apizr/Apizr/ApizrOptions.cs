@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Net.Http;
 using Apizr.Caching;
 using Apizr.Connecting;
-using Apizr.Logging;
 using Apizr.Mapping;
 using HttpTracer;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Polly.Registry;
 using Refit;
 
@@ -16,22 +17,20 @@ namespace Apizr
 
         public ApizrOptions(Type webApiType, Uri baseAddress,
             HttpMessageParts? httpTracerVerbosity,
-            ApizrLogLevel? apizrVerbosity,
             string[] assemblyPolicyRegistryKeys,
             string[] webApiPolicyRegistryKeys) : base(webApiType,
             assemblyPolicyRegistryKeys, webApiPolicyRegistryKeys)
         {
             BaseAddressFactory = () => baseAddress;
-            HttpTracerVerbosityFactory = () => httpTracerVerbosity ?? HttpMessageParts.None;
-            ApizrVerbosityFactory = () => apizrVerbosity ?? ApizrLogLevel.None;
+            TrafficVerbosityFactory = () => httpTracerVerbosity ?? HttpMessageParts.None;
             HttpClientHandlerFactory = () => new HttpClientHandler();
             PolicyRegistryFactory = () => new PolicyRegistry();
             RefitSettingsFactory = () => new RefitSettings();
             ConnectivityHandlerFactory = () => new VoidConnectivityHandler();
             CacheHandlerFactory = () => new VoidCacheHandler();
-            LogHandlerFactory = () => new DefaultLogHandler();
+            LoggerFactory = () => NullLogger.Instance;
             MappingHandlerFactory = () => new VoidMappingHandler();
-            DelegatingHandlersFactories = new List<Func<ILogHandler, IApizrOptionsBase, DelegatingHandler>>();
+            DelegatingHandlersFactories = new List<Func<ILogger, IApizrOptionsBase, DelegatingHandler>>();
         }
 
         private Func<Uri> _baseAddressFactory;
@@ -42,17 +41,10 @@ namespace Apizr
         }
 
         private Func<HttpMessageParts> _httpTracerVerbosityFactory;
-        public Func<HttpMessageParts> HttpTracerVerbosityFactory
+        public Func<HttpMessageParts> TrafficVerbosityFactory
         {
             get => _httpTracerVerbosityFactory;
-            set => _httpTracerVerbosityFactory = () => HttpTracerVerbosity = value.Invoke();
-        }
-
-        private Func<ApizrLogLevel> _apizrVerbosityFactory;
-        public Func<ApizrLogLevel> ApizrVerbosityFactory
-        {
-            get => _apizrVerbosityFactory;
-            set => _apizrVerbosityFactory = () => ApizrVerbosity = value.Invoke();
+            set => _httpTracerVerbosityFactory = () => TrafficVerbosity = value.Invoke();
         }
 
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
@@ -60,9 +52,9 @@ namespace Apizr
         public Func<RefitSettings> RefitSettingsFactory { get; set; }
         public Func<IConnectivityHandler> ConnectivityHandlerFactory { get; set; }
         public Func<ICacheHandler> CacheHandlerFactory { get; set; }
-        public Func<ILogHandler> LogHandlerFactory { get; set; }
+        public Func<ILogger> LoggerFactory { get; set; }
         public Func<IMappingHandler> MappingHandlerFactory { get; set; }
-        public IList<Func<ILogHandler, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
+        public IList<Func<ILogger, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
     }
 
     public class ApizrOptions<TWebApi> : IApizrOptions<TWebApi>
@@ -76,8 +68,7 @@ namespace Apizr
 
         public Type WebApiType => _apizrOptions.WebApiType;
         public Uri BaseAddress => _apizrOptions.BaseAddress;
-        public HttpMessageParts HttpTracerVerbosity => _apizrOptions.HttpTracerVerbosity;
-        public ApizrLogLevel ApizrVerbosity => _apizrOptions.ApizrVerbosity;
+        public HttpMessageParts TrafficVerbosity => _apizrOptions.TrafficVerbosity;
         public string[] PolicyRegistryKeys => _apizrOptions.PolicyRegistryKeys;
     }
 }

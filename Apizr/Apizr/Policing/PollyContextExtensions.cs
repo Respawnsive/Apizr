@@ -1,4 +1,4 @@
-﻿using Apizr.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Polly;
 
 namespace Apizr.Policing
@@ -9,32 +9,32 @@ namespace Apizr.Policing
     public static class PollyContextExtensions
     {
         /// <summary>
-        /// Passing your <see cref="ILogHandler"/> mapping implementation to Polly context
+        /// Passing your <see cref="ILogger"/> mapping implementation to Polly context
         /// </summary>
         /// <param name="context">Polly context</param>
-        /// <param name="logHandler">Your <see cref="ILogHandler"/> mapping implementation</param>
+        /// <param name="logger">Your <see cref="ILogger"/> mapping implementation</param>
         /// <returns></returns>
-        public static Context WithLogHandler(this Context context, ILogHandler logHandler)
+        public static Context WithLogger(this Context context, ILogger logger)
         {
-            context[nameof(ILogHandler)] = logHandler;
+            context[nameof(ILogger)] = logger;
             return context;
         }
 
         /// <summary>
-        /// Trying to get your <see cref="ILogHandler"/> mapping implementation from Polly context
+        /// Trying to get your <see cref="ILogger"/> mapping implementation from Polly context
         /// </summary>
         /// <param name="context">Polly context</param>
-        /// <param name="logHandler">Your <see cref="ILogHandler"/> mapping implementation</param>
+        /// <param name="logger">Your <see cref="ILogger"/> mapping implementation</param>
         /// <returns></returns>
-        public static bool TryGetLogHandler(this Context context, out ILogHandler logHandler)
+        public static bool TryGetLogger(this Context context, out ILogger logger)
         {
-            if (context.TryGetValue(nameof(ILogHandler), out var logHandlerObject) && logHandlerObject is ILogHandler theLogHandler)
+            if (context.TryGetValue(nameof(ILogger), out var loggerObject) && loggerObject is ILogger theLogger)
             {
-                logHandler = theLogHandler;
+                logger = theLogger;
                 return true;
             }
 
-            logHandler = null;
+            logger = null;
             return false;
         }
     }

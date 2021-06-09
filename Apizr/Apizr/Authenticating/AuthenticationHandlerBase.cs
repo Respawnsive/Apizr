@@ -5,19 +5,19 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Extending;
-using Apizr.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Apizr.Authenticating
 {
     public abstract class AuthenticationHandlerBase : DelegatingHandler, IAuthenticationHandler
     {
-        private readonly ILogHandler _logHandler;
+        private readonly ILogger _logger;
         private readonly IApizrOptionsBase _apizrOptions;
         private readonly string _handlerFriendlyName;
 
-        protected AuthenticationHandlerBase(ILogHandler logHandler, IApizrOptionsBase apizrOptions)
+        protected AuthenticationHandlerBase(ILogger logger, IApizrOptionsBase apizrOptions)
         {
-            _logHandler = logHandler;
+            _logger = logger;
             _apizrOptions = apizrOptions;
             _handlerFriendlyName = GetType().GetFriendlyName();
         }
@@ -32,54 +32,45 @@ namespace Apizr.Authenticating
             if (auth != null)
             {
                 // Authorization required! Get the token from saved settings if available
-                if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                    _logHandler.Write($"Apizr - {_handlerFriendlyName}: Authorization required with scheme {auth.Scheme}");
+                _logger.LogTrace($"Apizr - {_handlerFriendlyName}: Authorization required with scheme {auth.Scheme}");
                 token = GetToken();
                 if (!string.IsNullOrWhiteSpace(token))
                 {
                     // We have one, then clone the request in case we need to re-issue it with a refreshed token
-                    if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                        _logHandler.Write($"Apizr - {_handlerFriendlyName}: Saved token will be used");
+                    _logger.LogTrace($"Apizr - {_handlerFriendlyName}: Saved token will be used");
                     clonedRequest = await this.CloneHttpRequestMessageAsync(request);
                 }
                 else
                 {
                     // Refresh the token
-                    if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                        _logHandler.Write($"Apizr - {_handlerFriendlyName}: No token saved yet. Refreshing token...");
+                    _logger.LogTrace($"Apizr - {_handlerFriendlyName}: No token saved yet. Refreshing token...");
                     token = await this.RefreshTokenAsync(request).ConfigureAwait(false);
                 }
 
                 // Set the authentication header
                 request.Headers.Authorization = new AuthenticationHeaderValue(auth.Scheme, token);
-                if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                    _logHandler.Write($"Apizr - {_handlerFriendlyName}: Authorization header has been set");
+                _logger.LogTrace($"Apizr - {_handlerFriendlyName}: Authorization header has been set");
             }
 
             // Send the request
-            if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                _logHandler.Write($"Apizr - {_handlerFriendlyName}: Sending request with authorization header...");
+            _logger.LogTrace($"Apizr - {_handlerFriendlyName}: Sending request with authorization header...");
             var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
             // Check if we get an Unauthorized response with token from settings
             if (response.StatusCode == HttpStatusCode.Unauthorized && auth != null && clonedRequest != null)
             {
-                if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                    _logHandler.Write($"Apizr - {_handlerFriendlyName}: Unauthorized !");
+                _logger.LogTrace($"Apizr - {_handlerFriendlyName}: Unauthorized !");
 
                 // Refresh the token
-                if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                    _logHandler.Write($"Apizr - {_handlerFriendlyName}: Refreshing token...");
+                _logger.LogTrace($"Apizr - {_handlerFriendlyName}: Refreshing token...");
                 token = await this.RefreshTokenAsync(request).ConfigureAwait(false);
 
                 // Set the authentication header with refreshed token 
                 clonedRequest.Headers.Authorization = new AuthenticationHeaderValue(auth.Scheme, token);
-                if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                    _logHandler.Write($"Apizr - {_handlerFriendlyName}: Authorization header has been set with refreshed token");
+                _logger.LogTrace($"Apizr - {_handlerFriendlyName}: Authorization header has been set with refreshed token");
 
                 // Send the request
-                if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
-                    _logHandler.Write($"Apizr - {_handlerFriendlyName}: Sending request again but with refreshed authorization header...");
+                _logger.LogInformation($"Apizr - {_handlerFriendlyName}: Sending request again but with refreshed authorization header...");
                 response = await base.SendAsync(clonedRequest, cancellationToken).ConfigureAwait(false);
             }
 
@@ -87,14 +78,12 @@ namespace Apizr.Authenticating
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
                 token = null;
-                if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
-                    _logHandler.Write($"Apizr - {_handlerFriendlyName}: Unauthorized ! Token has been cleared");
+                _logger.LogTrace($"Apizr - {_handlerFriendlyName}: Unauthorized ! Token has been cleared");
             }
 
             // Save the refreshed token if succeed or clear it if not
             this.SetToken(token);
-            if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                _logHandler.Write($"Apizr - {_handlerFriendlyName}: Token saved");
+            _logger.LogTrace($"Apizr - {_handlerFriendlyName}: Token saved");
 
             return response;
         }

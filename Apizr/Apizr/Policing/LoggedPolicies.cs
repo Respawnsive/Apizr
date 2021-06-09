@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using Microsoft.Extensions.Logging;
 using Polly;
 
 namespace Apizr.Policing
@@ -30,16 +31,15 @@ namespace Apizr.Policing
         /// <param name="onRetry"></param>
         public static void OnLoggedRetry(DelegateResult<HttpResponseMessage> result, TimeSpan timeSpan, int retryCount, Context context, Action<DelegateResult<HttpResponseMessage>, TimeSpan, int, Context> onRetry)
         {
-            if (context.TryGetLogHandler(out var logger))
+            if (context.TryGetLogger(out var logger))
             {
                 if (result.Exception != null)
                 {
-                    logger.Write($"An exception occurred on retry {retryCount} for {context.PolicyKey}",
-                        result.Exception.ToString());
+                    logger.LogError($"An exception occurred on retry {retryCount} for {context.PolicyKey}: {result.Exception}");
                 }
                 else
                 {
-                    logger.Write(
+                    logger.LogError(
                         $"A non success code {(int) result.Result.StatusCode} was received on retry {retryCount} for {context.PolicyKey}");
                 }
             }

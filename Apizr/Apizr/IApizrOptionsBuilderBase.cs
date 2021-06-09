@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Apizr.Logging;
 using HttpTracer;
 using Refit;
 
@@ -38,9 +36,8 @@ namespace Apizr
         /// Define http traces and Apizr logs verbosity (could be defined with LogItAttribute)
         /// </summary>
         /// <param name="trafficVerbosity">Http traffic tracing verbosity</param>
-        /// <param name="apizrVerbosity">Apizr execution steps verbosity</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithLoggingVerbosity(HttpMessageParts trafficVerbosity, ApizrLogLevel apizrVerbosity);
+        TApizrOptionsBuilder WithTrafficVerbosity(HttpMessageParts trafficVerbosity);
 
         /// <summary>
         /// Provide a method to refresh the authorization token when needed

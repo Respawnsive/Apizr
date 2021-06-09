@@ -52,7 +52,7 @@
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Apizr.CrudFor``5(System.Func{Apizr.ILazyWebApi{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Logging.ILogHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.IApizrOptionsBase,``4},System.Action{Apizr.IApizrOptionsBuilder})">
+        <member name="M:Apizr.Apizr.CrudFor``5(System.Func{Apizr.ILazyWebApi{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Logging.ILogger,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.IApizrOptionsBase,``4},System.Action{Apizr.IApizrOptionsBuilder})">
             <summary>
             Create a <see cref="!:TApizrManager"/> instance for a managed crud api for <see cref="!:T"/> object (class), 
             with key of type <see cref="!:TKey"/> (primitive) and "ReadAll" query result of type <see cref="!:TReadAllResult"/>
@@ -76,7 +76,7 @@
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Apizr.For``2(System.Func{Apizr.ILazyWebApi{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Logging.ILogHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.IApizrOptions{``0},``1},System.Action{Apizr.IApizrOptionsBuilder})">
+        <member name="M:Apizr.Apizr.For``2(System.Func{Apizr.ILazyWebApi{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Logging.ILogger,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.IApizrOptions{``0},``1},System.Action{Apizr.IApizrOptionsBuilder})">
             <summary>
             Create a <see cref="!:TApizrManager"/> instance for a managed <see cref="!:TWebApi"/>
             </summary>
@@ -430,7 +430,7 @@
             Cache handler factory
             </summary>
         </member>
-        <member name="P:Apizr.IApizrOptions.LogHandlerFactory">
+        <member name="P:Apizr.IApizrOptions.LoggerFactory">
             <summary>
             Log handler factory
             </summary>
@@ -516,7 +516,7 @@
             <param name="httpClientHandlerFactory">An <see cref="T:System.Net.Http.HttpClientHandler"/> instance factory</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithAuthenticationHandler``1(System.Func{Apizr.Logging.ILogHandler,Apizr.IApizrOptionsBase,``0})">
+        <member name="M:Apizr.IApizrOptionsBuilder.WithAuthenticationHandler``1(System.Func{Apizr.Logging.ILogger,Apizr.IApizrOptionsBase,``0})">
             <summary>
             Provide your own <see cref="T:Apizr.Authenticating.AuthenticationHandlerBase"/> implementation factory
             </summary>
@@ -568,14 +568,14 @@
             <param name="refreshTokenFactory">The method factory called to refresh the token</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.AddDelegatingHandler(System.Func{Apizr.Logging.ILogHandler,System.Net.Http.DelegatingHandler})">
+        <member name="M:Apizr.IApizrOptionsBuilder.AddDelegatingHandler(System.Func{Apizr.Logging.ILogger,System.Net.Http.DelegatingHandler})">
             <summary>
             Add a custom delegating handler
             </summary>
             <param name="delegatingHandlerFactory">A delegating handler factory</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.AddDelegatingHandler(System.Func{Apizr.Logging.ILogHandler,Apizr.IApizrOptionsBase,System.Net.Http.DelegatingHandler})">
+        <member name="M:Apizr.IApizrOptionsBuilder.AddDelegatingHandler(System.Func{Apizr.Logging.ILogger,Apizr.IApizrOptionsBase,System.Net.Http.DelegatingHandler})">
             <summary>
             Add a custom delegating handler
             </summary>
@@ -631,18 +631,18 @@
             <param name="cacheHandlerFactory">An <see cref="T:Apizr.Caching.ICacheHandler"/> mapping implementation instance factory</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithLogHandler(Apizr.Logging.ILogHandler)">
+        <member name="M:Apizr.IApizrOptionsBuilder.WithLogger(Apizr.Logging.ILogger)">
             <summary>
             Provide a logging handler to log it all
             </summary>
-            <param name="logHandler">An <see cref="T:Apizr.Logging.ILogHandler"/> mapping implementation instance</param>
+            <param name="logger">An <see cref="T:Apizr.Logging.ILogger"/> mapping implementation instance</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithLogHandler(System.Func{Apizr.Logging.ILogHandler})">
+        <member name="M:Apizr.IApizrOptionsBuilder.WithLogger(System.Func{Apizr.Logging.ILogger})">
             <summary>
             Provide a logging handler to log it all
             </summary>
-            <param name="logHandlerFactory">An <see cref="T:Apizr.Logging.ILogHandler"/> mapping implementation instance factory</param>
+            <param name="loggerFactory">An <see cref="T:Apizr.Logging.ILogger"/> mapping implementation instance factory</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.IApizrOptionsBuilder.WithMappingHandler(Apizr.Mapping.IMappingHandler)">
@@ -718,13 +718,13 @@
             The lazy prioritized instance of your web api
             </summary>
         </member>
-        <member name="T:Apizr.Logging.ILogHandler">
+        <member name="T:Apizr.Logging.ILogger">
             <summary>
             The logging handler method mapping interface
             Implement it to provide some logging features to Apizr
             </summary>
         </member>
-        <member name="M:Apizr.Logging.ILogHandler.Write(System.String,System.String,System.ValueTuple{System.String,System.String}[])">
+        <member name="M:Apizr.Logging.ILogger.Write(System.String,System.String,System.ValueTuple{System.String,System.String}[])">
             <summary>
             Map Apizr log writing to your logging handler
             </summary>
@@ -1007,20 +1007,20 @@
             Polly logging extensions
             </summary>
         </member>
-        <member name="M:Apizr.Policing.PollyContextExtensions.WithLogHandler(Polly.Context,Apizr.Logging.ILogHandler)">
+        <member name="M:Apizr.Policing.PollyContextExtensions.WithLogger(Polly.Context,Apizr.Logging.ILogger)">
             <summary>
-            Passing your <see cref="T:Apizr.Logging.ILogHandler"/> mapping implementation to Polly context
+            Passing your <see cref="T:Apizr.Logging.ILogger"/> mapping implementation to Polly context
             </summary>
             <param name="context">Polly context</param>
-            <param name="logHandler">Your <see cref="T:Apizr.Logging.ILogHandler"/> mapping implementation</param>
+            <param name="logger">Your <see cref="T:Apizr.Logging.ILogger"/> mapping implementation</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Policing.PollyContextExtensions.TryGetLogHandler(Polly.Context,Apizr.Logging.ILogHandler@)">
+        <member name="M:Apizr.Policing.PollyContextExtensions.TryGetLogger(Polly.Context,Apizr.Logging.ILogger@)">
             <summary>
-            Trying to get your <see cref="T:Apizr.Logging.ILogHandler"/> mapping implementation from Polly context
+            Trying to get your <see cref="T:Apizr.Logging.ILogger"/> mapping implementation from Polly context
             </summary>
             <param name="context">Polly context</param>
-            <param name="logHandler">Your <see cref="T:Apizr.Logging.ILogHandler"/> mapping implementation</param>
+            <param name="logger">Your <see cref="T:Apizr.Logging.ILogger"/> mapping implementation</param>
             <returns></returns>
         </member>
         <member name="T:Apizr.Requesting.CrudEntityAttribute">

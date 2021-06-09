@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Requesting;
 using HttpTracer;
@@ -28,11 +27,6 @@ namespace Apizr
         Type CacheHandlerType { get; }
 
         /// <summary>
-        /// Type of the logging handler
-        /// </summary>
-        Type LogHandlerType { get; }
-
-        /// <summary>
         /// Type of the mapping handler
         /// </summary>
         Type MappingHandlerType { get; }
@@ -43,14 +37,9 @@ namespace Apizr
         Func<IServiceProvider, Uri> BaseAddressFactory { get; }
 
         /// <summary>
-        /// Request tracing verbosity factory
+        /// Http traffic tracing verbosity factory
         /// </summary>
-        Func<IServiceProvider, HttpMessageParts> HttpTracerVerbosityFactory { get; }
-
-        /// <summary>
-        /// Apizr executions tracing verbosity factory
-        /// </summary>
-        Func<IServiceProvider, ApizrLogLevel> ApizrVerbosityFactory { get; }
+        Func<IServiceProvider, HttpMessageParts> TrafficVerbosityFactory { get; }
 
         /// <summary>
         /// HttpClientHandler factory

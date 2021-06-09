@@ -9,6 +9,7 @@ using Apizr.Logging;
 using Apizr.Mapping;
 using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Refit;
 
 namespace Apizr
@@ -56,14 +57,12 @@ namespace Apizr
             return this;
         }
 
-        public IApizrExtendedOptionsBuilder WithLoggingVerbosity(HttpMessageParts trafficVerbosity,
-            ApizrLogLevel apizrVerbosity)
-            => WithLoggingVerbosity(_ => trafficVerbosity, _ => apizrVerbosity);
+        public IApizrExtendedOptionsBuilder WithTrafficVerbosity(HttpMessageParts trafficVerbosity)
+            => WithTrafficVerbosity(_ => trafficVerbosity);
 
-        public IApizrExtendedOptionsBuilder WithLoggingVerbosity(Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory, Func<IServiceProvider, ApizrLogLevel> apizrVerbosityFactory)
+        public IApizrExtendedOptionsBuilder WithTrafficVerbosity(Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory)
         {
-            Options.HttpTracerVerbosityFactory = trafficVerbosityFactory;
-            Options.ApizrVerbosityFactory = apizrVerbosityFactory;
+            Options.TrafficVerbosityFactory = trafficVerbosityFactory;
 
             return this;
         }
@@ -88,7 +87,7 @@ namespace Apizr
         public IApizrExtendedOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
         {
             var authenticationHandler = new Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>((serviceProvider, options) =>
-                new AuthenticationHandler(serviceProvider.GetRequiredService<ILogHandler>(), options, refreshTokenFactory));
+                new AuthenticationHandler(serviceProvider.GetRequiredService<ILogger>(), options, refreshTokenFactory));
             Options.DelegatingHandlersExtendedFactories.Add(authenticationHandler);
 
             return this;
@@ -107,7 +106,7 @@ namespace Apizr
         {
             Options.DelegatingHandlersExtendedFactories.Add((serviceProvider, options) =>
                 new AuthenticationHandler<TSettingsService, TTokenService>(
-                    serviceProvider.GetRequiredService<ILogHandler>(),
+                    serviceProvider.GetRequiredService<ILogger>(),
                     options,
                     serviceProvider.GetRequiredService<TSettingsService>, tokenProperty,
                     serviceProvider.GetRequiredService<TTokenService>, refreshTokenMethod));
@@ -119,7 +118,7 @@ namespace Apizr
         {
             Options.DelegatingHandlersExtendedFactories.Add((serviceProvider, options) =>
                 new AuthenticationHandler<TSettingsService>(
-                    serviceProvider.GetRequiredService<ILogHandler>(),
+                    serviceProvider.GetRequiredService<ILogger>(),
                     options,
                     serviceProvider.GetRequiredService<TSettingsService>, tokenProperty, refreshTokenFactory));
 
@@ -177,20 +176,6 @@ namespace Apizr
                     $"Your cache handler class must inherit from {nameof(ICacheHandler)} interface or derived");
 
             Options.CacheHandlerType = cacheHandlerType;
-
-            return this;
-        }
-
-        public IApizrExtendedOptionsBuilder WithLogHandler<TLogHandler>() where TLogHandler : class, ILogHandler
-            => WithLogHandler(typeof(TLogHandler));
-
-        public IApizrExtendedOptionsBuilder WithLogHandler(Type logHandlerType)
-        {
-            if (!typeof(ILogHandler).IsAssignableFrom(logHandlerType))
-                throw new ArgumentException(
-                    $"Your log handler class must inherit from {nameof(ILogHandler)} interface or derived");
-
-            Options.LogHandlerType = logHandlerType;
 
             return this;
         }

@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
-using Apizr.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Apizr.Authenticating
 {
@@ -11,7 +11,7 @@ namespace Apizr.Authenticating
     {
         private readonly Func<HttpRequestMessage, Task<string>> _refreshToken;
 
-        public AuthenticationHandler(ILogHandler logHandler, IApizrOptionsBase apizrOptions, Func<HttpRequestMessage, Task<string>> refreshToken) : base(logHandler, apizrOptions)
+        public AuthenticationHandler(ILogger logger, IApizrOptionsBase apizrOptions, Func<HttpRequestMessage, Task<string>> refreshToken) : base(logger, apizrOptions)
         {
             _refreshToken = refreshToken ?? throw new ArgumentNullException(nameof(refreshToken));
         }
@@ -29,9 +29,9 @@ namespace Apizr.Authenticating
         private readonly Expression<Func<TSettingsService, string>> _settingsTokenProperty;
         private readonly Func<HttpRequestMessage, Task<string>> _refreshToken;
 
-        public AuthenticationHandler(ILogHandler logHandler, IApizrOptionsBase apizrOptions, Func<TSettingsService> settingsServiceFactory,
+        public AuthenticationHandler(ILogger logger, IApizrOptionsBase apizrOptions, Func<TSettingsService> settingsServiceFactory,
             Expression<Func<TSettingsService, string>> settingsTokenProperty,
-            Func<HttpRequestMessage, Task<string>> refreshToken) : base(logHandler, apizrOptions)
+            Func<HttpRequestMessage, Task<string>> refreshToken) : base(logger, apizrOptions)
         {
             _settingsServiceFactory = settingsServiceFactory ?? throw new ArgumentNullException(nameof(settingsServiceFactory));
             _settingsTokenProperty = settingsTokenProperty ?? throw new ArgumentNullException(nameof(settingsTokenProperty));
@@ -61,9 +61,9 @@ namespace Apizr.Authenticating
         private readonly Func<TTokenService> _tokenServiceFactory;
         private readonly Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> _refreshTokenMethod;
 
-        public AuthenticationHandler(ILogHandler logHandler, IApizrOptionsBase apizrOptions, Func<TSettingsService> settingsServiceFactory,
+        public AuthenticationHandler(ILogger logger, IApizrOptionsBase apizrOptions, Func<TSettingsService> settingsServiceFactory,
             Expression<Func<TSettingsService, string>> settingsTokenProperty, Func<TTokenService> tokenServiceFactory,
-            Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod) : base(logHandler, apizrOptions)
+            Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod) : base(logger, apizrOptions)
         {
             _settingsServiceFactory = settingsServiceFactory ?? throw new ArgumentNullException(nameof(settingsServiceFactory));
             _settingsTokenProperty = settingsTokenProperty ?? throw new ArgumentNullException(nameof(settingsTokenProperty));

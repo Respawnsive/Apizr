@@ -1,16 +1,14 @@
 ﻿using Apizr.Authenticating;
 using Refit;
 using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Connecting;
-using Apizr.Logging;
 using Apizr.Mapping;
 using HttpTracer;
+using Microsoft.Extensions.Logging;
 using Polly.Registry;
 
 namespace Apizr
@@ -35,12 +33,11 @@ namespace Apizr
         IApizrOptionsBuilder WithBaseAddress(Func<Uri> baseAddressFactory);
 
         /// <summary>
-        /// Define http traces and Apizr logs verbosity (could be defined with LogItAttribute)
+        /// Define http traffic tracing verbosity (could be defined with LogItAttribute)
         /// </summary>
         /// <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
-        /// <param name="apizrVerbosityFactory">Apizr execution steps verbosity factory</param>
         /// <returns></returns>
-        IApizrOptionsBuilder WithLoggingVerbosity(Func<HttpMessageParts> trafficVerbosityFactory, Func<ApizrLogLevel> apizrVerbosityFactory);
+        IApizrOptionsBuilder WithTrafficVerbosity(Func<HttpMessageParts> trafficVerbosityFactory);
 
         /// <summary>
         /// Provide a custom HttpClientHandler
@@ -62,7 +59,7 @@ namespace Apizr
         /// <typeparam name="TAuthenticationHandler">Your <see cref="AuthenticationHandlerBase"/> implementation</typeparam>
         /// <param name="authenticationHandlerFactory">A <see cref="TAuthenticationHandler"/> instance factory</param>
         /// <returns></returns>
-        IApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<ILogHandler, IApizrOptionsBase, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase;
+        IApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<ILogger, IApizrOptionsBase, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase;
 
         /// <summary>
         /// Provide your own settings management and token management services
@@ -113,14 +110,14 @@ namespace Apizr
         /// </summary>
         /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
         /// <returns></returns>
-        IApizrOptionsBuilder AddDelegatingHandler(Func<ILogHandler, DelegatingHandler> delegatingHandlerFactory);
+        IApizrOptionsBuilder AddDelegatingHandler(Func<ILogger, DelegatingHandler> delegatingHandlerFactory);
 
         /// <summary>
         /// Add a custom delegating handler
         /// </summary>
         /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
         /// <returns></returns>
-        IApizrOptionsBuilder AddDelegatingHandler(Func<ILogHandler, IApizrOptionsBase, DelegatingHandler> delegatingHandlerFactory);
+        IApizrOptionsBuilder AddDelegatingHandler(Func<ILogger, IApizrOptionsBase, DelegatingHandler> delegatingHandlerFactory);
 
         /// <summary>
         /// Provide a policy registry
@@ -172,18 +169,18 @@ namespace Apizr
         IApizrOptionsBuilder WithCacheHandler(Func<ICacheHandler> cacheHandlerFactory);
 
         /// <summary>
-        /// Provide a logging handler to log it all
+        /// Provide a logger to log it all
         /// </summary>
-        /// <param name="logHandler">An <see cref="ILogHandler"/> mapping implementation instance</param>
+        /// <param name="logger">An <see cref="ILogger"/> mapping implementation instance</param>
         /// <returns></returns>
-        IApizrOptionsBuilder WithLogHandler(ILogHandler logHandler);
+        IApizrOptionsBuilder WithLogger(ILogger logger);
 
         /// <summary>
-        /// Provide a logging handler to log it all
+        /// Provide a logger to log it all
         /// </summary>
-        /// <param name="logHandlerFactory">An <see cref="ILogHandler"/> mapping implementation instance factory</param>
+        /// <param name="loggerFactory">An <see cref="ILogger"/> mapping implementation instance factory</param>
         /// <returns></returns>
-        IApizrOptionsBuilder WithLogHandler(Func<ILogHandler> logHandlerFactory);
+        IApizrOptionsBuilder WithLogger(Func<ILogger> loggerFactory);
 
         /// <summary>
         /// Provide a mapping handler to map entities

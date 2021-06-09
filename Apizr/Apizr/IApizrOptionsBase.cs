@@ -1,11 +1,5 @@
 ﻿using System;
-using Apizr.Caching;
-using Apizr.Connecting;
-using Apizr.Logging;
-using Apizr.Mapping;
 using HttpTracer;
-using Polly.Registry;
-using Refit;
 
 namespace Apizr
 {
@@ -25,14 +19,9 @@ namespace Apizr
         Uri BaseAddress { get; }
 
         /// <summary>
-        /// Request tracing verbosity
+        /// Http traffic tracing verbosity
         /// </summary>
-        HttpMessageParts HttpTracerVerbosity { get; }
-
-        /// <summary>
-        /// Apizr executions tracing verbosity
-        /// </summary>
-        ApizrLogLevel ApizrVerbosity { get; }
+        HttpMessageParts TrafficVerbosity { get; }
 
         /// <summary>
         /// Policy keys from the registry

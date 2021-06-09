@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using Apizr.Caching;
 using Apizr.Connecting;
-using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Requesting;
 using HttpTracer;
@@ -16,7 +15,6 @@ namespace Apizr
     {
         public ApizrExtendedOptions(Type webApiType, Type apizrManagerType, Uri baseAddress,
             HttpMessageParts? httpTracerVerbosity,
-            ApizrLogLevel? apizrVerbosity,
             string[] assemblyPolicyRegistryKeys,
             string[] webApiPolicyRegistryKeys) : base(webApiType, 
             assemblyPolicyRegistryKeys,
@@ -24,13 +22,11 @@ namespace Apizr
         {
             ApizrManagerType = apizrManagerType;
             BaseAddressFactory = _ => baseAddress;
-            HttpTracerVerbosityFactory = _ => httpTracerVerbosity ?? HttpMessageParts.None;
-            ApizrVerbosityFactory = _ => apizrVerbosity ?? ApizrLogLevel.None;
+            TrafficVerbosityFactory = _ => httpTracerVerbosity ?? HttpMessageParts.None;
             HttpClientHandlerFactory = _ => new HttpClientHandler();
             RefitSettingsFactory = _ => new RefitSettings();
             ConnectivityHandlerType = typeof(VoidConnectivityHandler);
             CacheHandlerType = typeof(VoidCacheHandler);
-            LogHandlerType = typeof(DefaultLogHandler);
             MappingHandlerType = typeof(VoidMappingHandler);
             DelegatingHandlersExtendedFactories = new List<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>>();
             CrudEntities = new Dictionary<Type, CrudEntityAttribute>();
@@ -42,7 +38,6 @@ namespace Apizr
         public Type ApizrManagerType { get; }
         public Type ConnectivityHandlerType { get; set; }
         public Type CacheHandlerType { get; set; }
-        public Type LogHandlerType { get; set; }
         public Type MappingHandlerType { get; set; }
 
         private Func<IServiceProvider, Uri> _baseAddressFactory;
@@ -52,18 +47,11 @@ namespace Apizr
             set => _baseAddressFactory = serviceProvider => BaseAddress = value.Invoke(serviceProvider);
         }
 
-        private Func<IServiceProvider, HttpMessageParts> _httpTracerVerbosityFactory;
-        public Func<IServiceProvider, HttpMessageParts> HttpTracerVerbosityFactory
+        private Func<IServiceProvider, HttpMessageParts> _trafficVerbosityFactory;
+        public Func<IServiceProvider, HttpMessageParts> TrafficVerbosityFactory
         {
-            get => _httpTracerVerbosityFactory;
-            set => _httpTracerVerbosityFactory = serviceProvider => HttpTracerVerbosity = value.Invoke(serviceProvider);
-        }
-
-        private Func<IServiceProvider, ApizrLogLevel> _apizrVerbosityFactory;
-        public Func<IServiceProvider, ApizrLogLevel> ApizrVerbosityFactory
-        {
-            get => _apizrVerbosityFactory;
-            set => _apizrVerbosityFactory = serviceProvider => ApizrVerbosity = value.Invoke(serviceProvider);
+            get => _trafficVerbosityFactory;
+            set => _trafficVerbosityFactory = serviceProvider => TrafficVerbosity = value.Invoke(serviceProvider);
         }
 
         public Func<IServiceProvider, HttpClientHandler> HttpClientHandlerFactory { get; set; }

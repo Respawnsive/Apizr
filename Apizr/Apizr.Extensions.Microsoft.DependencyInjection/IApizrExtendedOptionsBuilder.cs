@@ -9,6 +9,7 @@ using Apizr.Logging;
 using Apizr.Mapping;
 using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Refit;
 
 namespace Apizr
@@ -30,12 +31,11 @@ namespace Apizr
         IApizrExtendedOptionsBuilder WithBaseAddress(Func<IServiceProvider, Uri> baseAddressFactory);
 
         /// <summary>
-        /// Define http traces and Apizr logs verbosity (could be defined with TraceAttribute)
+        /// Define http traffic tracing verbosity (could be defined with TraceAttribute)
         /// </summary>
         /// <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
-        /// <param name="apizrVerbosityFactory">Apizr execution steps verbosity factory</param>
         /// <returns></returns>
-        IApizrExtendedOptionsBuilder WithLoggingVerbosity(Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory, Func<IServiceProvider, ApizrLogLevel> apizrVerbosityFactory);
+        IApizrExtendedOptionsBuilder WithTrafficVerbosity(Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory);
 
         /// <summary>
         /// Provide a custom HttpClientHandler
@@ -133,20 +133,6 @@ namespace Apizr
         /// <param name="cacheHandlerType">Type of your <see cref="ICacheHandler"/> mapping implementation</param>
         /// <returns></returns>
         IApizrExtendedOptionsBuilder WithCacheHandler(Type cacheHandlerType);
-
-        /// <summary>
-        /// Provide a logging handler to log it all
-        /// </summary>
-        /// <typeparam name="TLogHandler">Your <see cref="ILogHandler"/> mapping implementation</typeparam>
-        /// <returns></returns>
-        IApizrExtendedOptionsBuilder WithLogHandler<TLogHandler>() where TLogHandler : class, ILogHandler;
-
-        /// <summary>
-        /// Provide a logging handler to log it all
-        /// </summary>
-        /// <param name="logHandlerType">Type of your <see cref="ILogHandler"/> mapping implementation</param>
-        /// <returns></returns>
-        IApizrExtendedOptionsBuilder WithLogHandler(Type logHandlerType);
 
         /// <summary>
         /// Provide a mapping handler to auto map entities during mediation

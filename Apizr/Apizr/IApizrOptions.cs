@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using Apizr.Caching;
 using Apizr.Connecting;
-using Apizr.Logging;
 using Apizr.Mapping;
 using HttpTracer;
+using Microsoft.Extensions.Logging;
 using Polly.Registry;
 using Refit;
 
@@ -22,14 +22,9 @@ namespace Apizr
         Func<Uri> BaseAddressFactory { get; }
 
         /// <summary>
-        /// Request tracing verbosity factory
+        /// Http traffic tracing verbosity factory
         /// </summary>
-        Func<HttpMessageParts> HttpTracerVerbosityFactory { get; }
-
-        /// <summary>
-        /// Apizr executions tracing verbosity factory
-        /// </summary>
-        Func<ApizrLogLevel> ApizrVerbosityFactory { get; }
+        Func<HttpMessageParts> TrafficVerbosityFactory { get; }
 
         /// <summary>
         /// HttpClientHandler factory
@@ -59,7 +54,7 @@ namespace Apizr
         /// <summary>
         /// Log handler factory
         /// </summary>
-        Func<ILogHandler> LogHandlerFactory { get; }
+        Func<ILogger> LoggerFactory { get; }
 
         /// <summary>
         /// Mapping handler factory
@@ -69,7 +64,7 @@ namespace Apizr
         /// <summary>
         /// Delegating handlers factories
         /// </summary>
-        IList<Func<ILogHandler, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
+        IList<Func<ILogger, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
     }
 
     public interface IApizrOptions<TWebApi> : IApizrOptionsBase

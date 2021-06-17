@@ -5,6 +5,7 @@ using Apizr.Mapping;
 using Apizr.Requesting;
 using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Refit;
 
 namespace Apizr
@@ -40,6 +41,11 @@ namespace Apizr
         /// Http traffic tracing verbosity factory
         /// </summary>
         Func<IServiceProvider, HttpMessageParts> TrafficVerbosityFactory { get; }
+
+        /// <summary>
+        /// Http traffic tracing log level factory
+        /// </summary>
+        Func<IServiceProvider, LogLevel> TrafficLogLevelFactory { get; }
 
         /// <summary>
         /// HttpClientHandler factory

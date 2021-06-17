@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Apizr.Extending;
 using Apizr.Integrations.Fusillade;
 using Apizr.Integrations.MonkeyCache;
+using Apizr.Logging;
 using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Cruding.Sending;
 using Apizr.Mediation.Requesting;
@@ -27,6 +28,7 @@ using Fusillade;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using MonkeyCache.FileStore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -136,6 +138,7 @@ namespace Apizr.Sample.Console
             {
                 var services = new ServiceCollection();
 
+                services.AddTransient<ILogger>(_ => new DefaultLogger("Apizr", LogLevel.Information));
                 services.AddPolicyRegistry(registry);
 
                 if (configChoice == 2)

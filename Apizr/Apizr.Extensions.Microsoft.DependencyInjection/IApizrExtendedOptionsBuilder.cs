@@ -30,11 +30,12 @@ namespace Apizr
         IApizrExtendedOptionsBuilder WithBaseAddress(Func<IServiceProvider, Uri> baseAddressFactory);
 
         /// <summary>
-        /// Define http traffic tracing verbosity (could be defined with TraceAttribute)
+        /// Define http traffic tracing verbosity and log level (could be defined with TraceAttribute)
         /// </summary>
         /// <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
+        /// <param name="trafficLogLevelFactory">Http traffic tracing log level factory</param>
         /// <returns></returns>
-        IApizrExtendedOptionsBuilder WithHttpTracing(Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory);
+        IApizrExtendedOptionsBuilder WithHttpTracing(Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory, Func<IServiceProvider, LogLevel> trafficLogLevelFactory);
 
         /// <summary>
         /// Provide a custom HttpClientHandler

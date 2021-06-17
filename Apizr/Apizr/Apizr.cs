@@ -166,7 +166,7 @@ namespace Apizr
                 var httpClientHandler = apizrOptions.HttpClientHandlerFactory.Invoke();
                 var logger = apizrOptions.LoggerFactory.Invoke();
 
-                var handlerBuilder = new HttpHandlerBuilder(httpClientHandler, new HttpTracerLogWrapper(logger));
+                var handlerBuilder = new HttpHandlerBuilder(httpClientHandler, new HttpTracerLogWrapper(logger, apizrOptions));
                 var httpTracerVerbosity = apizrOptions.TrafficVerbosityFactory.Invoke();
                 handlerBuilder.HttpTracerHandler.Verbosity = httpTracerVerbosity;
 

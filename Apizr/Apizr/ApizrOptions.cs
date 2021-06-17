@@ -78,6 +78,7 @@ namespace Apizr
         public Type WebApiType => _apizrOptions.WebApiType;
         public Uri BaseAddress => _apizrOptions.BaseAddress;
         public HttpMessageParts TrafficVerbosity => _apizrOptions.TrafficVerbosity;
+        public LogLevel TrafficLogLevel => _apizrOptions.TrafficLogLevel;
         public string[] PolicyRegistryKeys => _apizrOptions.PolicyRegistryKeys;
     }
 }

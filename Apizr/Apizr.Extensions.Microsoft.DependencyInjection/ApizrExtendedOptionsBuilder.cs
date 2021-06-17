@@ -56,12 +56,15 @@ namespace Apizr
             return this;
         }
 
-        public IApizrExtendedOptionsBuilder WithHttpTracing(HttpMessageParts trafficVerbosity, LogLevel logLevel = TODO)
-            => WithHttpTracing(_ => trafficVerbosity);
+        public IApizrExtendedOptionsBuilder WithHttpTracing(HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel trafficLogLevel = LogLevel.Trace)
+            => WithHttpTracing(_ => trafficVerbosity, _ => trafficLogLevel);
 
-        public IApizrExtendedOptionsBuilder WithHttpTracing(Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory)
+        public IApizrExtendedOptionsBuilder WithHttpTracing(
+            Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory,
+            Func<IServiceProvider, LogLevel> trafficLogLevelFactory)
         {
             Options.TrafficVerbosityFactory = trafficVerbosityFactory;
+            Options.TrafficLogLevelFactory = trafficLogLevelFactory;
 
             return this;
         }

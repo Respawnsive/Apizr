@@ -7,6 +7,7 @@ using Apizr.Mapping;
 using Apizr.Requesting;
 using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Refit;
 
 namespace Apizr
@@ -15,6 +16,7 @@ namespace Apizr
     {
         public ApizrExtendedOptions(Type webApiType, Type apizrManagerType, Uri baseAddress,
             HttpMessageParts? httpTracerVerbosity,
+            LogLevel? trafficLogLevel,
             string[] assemblyPolicyRegistryKeys,
             string[] webApiPolicyRegistryKeys) : base(webApiType, 
             assemblyPolicyRegistryKeys,
@@ -23,6 +25,7 @@ namespace Apizr
             ApizrManagerType = apizrManagerType;
             BaseAddressFactory = _ => baseAddress;
             TrafficVerbosityFactory = _ => httpTracerVerbosity ?? HttpMessageParts.None;
+            TrafficLogLevelFactory = _ => trafficLogLevel ?? LogLevel.Trace;
             HttpClientHandlerFactory = _ => new HttpClientHandler();
             RefitSettingsFactory = _ => new RefitSettings();
             ConnectivityHandlerType = typeof(VoidConnectivityHandler);
@@ -52,6 +55,13 @@ namespace Apizr
         {
             get => _trafficVerbosityFactory;
             set => _trafficVerbosityFactory = serviceProvider => TrafficVerbosity = value.Invoke(serviceProvider);
+        }
+
+        private Func<IServiceProvider, LogLevel> _trafficLogLevelFactory;
+        public Func<IServiceProvider, LogLevel> TrafficLogLevelFactory
+        {
+            get => _trafficLogLevelFactory;
+            set => _trafficLogLevelFactory = serviceProvider => TrafficLogLevel = value.Invoke(serviceProvider);
         }
 
         public Func<IServiceProvider, HttpClientHandler> HttpClientHandlerFactory { get; set; }

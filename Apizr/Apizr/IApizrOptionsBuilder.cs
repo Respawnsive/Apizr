@@ -33,7 +33,7 @@ namespace Apizr
         IApizrOptionsBuilder WithBaseAddress(Func<Uri> baseAddressFactory);
 
         /// <summary>
-        /// Define http traffic tracing verbosity (could be defined with TraceAttribute)
+        /// Define http traffic tracing verbosity and log level (could be defined with TraceAttribute)
         /// </summary>
         /// <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
         /// <param name="trafficLogLevelFactory">Http traffic tracing log level factory</param>

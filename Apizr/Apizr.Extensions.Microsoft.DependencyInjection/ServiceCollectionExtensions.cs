@@ -488,7 +488,7 @@ namespace Apizr
                 {
                     var httpClientHandler = apizrOptions.HttpClientHandlerFactory.Invoke(serviceProvider);
                     var logger = serviceProvider.GetRequiredService<ILogger>();
-                    var handlerBuilder = new HttpHandlerBuilder(httpClientHandler, new HttpTracerLogWrapper(logger));
+                    var handlerBuilder = new HttpHandlerBuilder(httpClientHandler, new HttpTracerLogWrapper(logger, apizrOptions));
                     var httpTracerVerbosity = apizrOptions.TrafficVerbosityFactory.Invoke(serviceProvider);
                     handlerBuilder.HttpTracerHandler.Verbosity = httpTracerVerbosity;
 
@@ -596,27 +596,27 @@ namespace Apizr
                     optionsBuilder += sourceBuilder => sourceBuilder.ApizrOptions.WebApis.Add(webApiType, webApiAttribute);
             }
 
-            TraceAttribute logAllAttribute;
+            TraceAttribute traceAttribute;
             PolicyAttribute webApiPolicyAttribute;
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
             {
                 var modelType = webApiType.GetGenericArguments().First();
-                logAllAttribute = modelType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true);
+                traceAttribute = modelType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true);
                 webApiPolicyAttribute = modelType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
             else
             {
-                logAllAttribute = webApiType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true);
+                traceAttribute = webApiType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true);
                 webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
 
-            if (logAllAttribute == null)
-                logAllAttribute = webApiType.Assembly.GetCustomAttribute<TraceAttribute>();
+            if (traceAttribute == null)
+                traceAttribute = webApiType.Assembly.GetCustomAttribute<TraceAttribute>();
 
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 
             var builder = new ApizrExtendedOptionsBuilder(new ApizrExtendedOptions(webApiType, apizrManagerType,
-                baseAddress, logAllAttribute?.TrafficVerbosity,
+                baseAddress, traceAttribute?.TrafficVerbosity, traceAttribute?.TrafficLogLevel,
                 assemblyPolicyAttribute?.RegistryKeys,
                 webApiPolicyAttribute?.RegistryKeys));
 

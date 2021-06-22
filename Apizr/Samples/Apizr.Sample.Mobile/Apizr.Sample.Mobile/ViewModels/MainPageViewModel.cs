@@ -19,6 +19,7 @@ using Fusillade;
 using MediatR;
 using Prism.Commands;
 using Prism.Navigation;
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny;
 using Color = System.Drawing.Color;
@@ -44,10 +45,10 @@ namespace Apizr.Sample.Mobile.ViewModels
             _userDetailsCrudManager = userDetailsCrudManager;
             _mediator = mediator;
             _userOptionalMediator = userOptionalMediator;
-            GetUsersCommand = ExecutionAwareCommand.FromTask(GetUsersAsync);
+            GetUsersCommand = ReactiveCommand.CreateFromTask(GetUsersAsync);
             //GetUserDetailsCommand = ExecutionAwareCommand.FromTask<User>(GetUserDetails);
             GetUserDetailsCommand = new DelegateCommand<User>(async user => await GetUserDetails(user));
-            AuthCommand = ExecutionAwareCommand.FromTask(AuthAsync);
+            AuthCommand = ReactiveCommand.CreateFromTask(AuthAsync);
 
             Title = "Main Page";
         }

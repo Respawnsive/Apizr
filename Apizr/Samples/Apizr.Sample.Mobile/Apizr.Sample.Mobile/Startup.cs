@@ -1,36 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Apizr.Extending;
-using Apizr.Integrations.Fusillade;
 using Apizr.Policing;
 using Apizr.Sample.Api;
 using Apizr.Sample.Api.Models;
+using Apizr.Sample.Mobile.Infrastructure;
 using Apizr.Sample.Mobile.Services.Settings;
+using Apizr.Sample.Mobile.Views;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
+using Prism.Ioc;
+using Prism.Navigation;
 using Shiny;
-using Shiny.Logging;
-using Shiny.Prism;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
+using Xamarin.Forms;
 
 namespace Apizr.Sample.Mobile
 {
-    public class Startup : PrismStartup
+    public class Startup : FrameworkStartup
     {
-        protected override void ConfigureServices(IServiceCollection services)
+        protected override void Configure(ILoggingBuilder builder, IServiceCollection services)
         {
-            services.AddSingleton<IAppInfo, AppInfoImplementation>();
+            builder.AddConsole(opts =>
+                opts.LogToStandardErrorThreshold = LogLevel.Trace
+            );
 
-            Log.UseConsole();
-            Log.UseDebug();
+            services.AddSingleton<IAppInfo, AppInfoImplementation>();
 
             var registry = new PolicyRegistry
             {
@@ -45,30 +47,37 @@ namespace Apizr.Sample.Mobile
             };
             services.AddPolicyRegistry(registry);
 
-            services.UseRepositoryCache();
-
             services.AddSingleton<IAppSettings, AppSettings>();
 
-            services.UseApizrFor<IReqResService>();
-            services.UseApizrCrudFor(optionsBuilder => optionsBuilder.WithPriorityManagement().WithMediation().WithOptionalMediation().WithLoggingVerbosity(HttpTracer.HttpMessageParts.All, ApizrLogLevel.High), typeof(User));
-            services.UseApizrFor<IHttpBinService>(optionsBuilder => optionsBuilder.WithAuthenticationHandler<IAppSettings>(settings => settings.Token, OnRefreshToken));
+            services.UseApizrFor<IReqResService>(options => options.WithCacheHandler<AkavacheCacheHandler>());
+            services.UseApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithHttpTracing(), typeof(User));
+            services.UseApizrFor<IHttpBinService>(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithAuthenticationHandler<IAppSettings>(settings => settings.Token, OnRefreshToken));
 
             services.AddMediatR(typeof(Startup));
 
             // This is just to let you know what's registered from/for Apizr and ready to use
             foreach (var service in services.Where(d =>
-                (d.ServiceType != null && d.ServiceType.Assembly.FullName.Contains($"{nameof(Apizr)}")) ||
-                (d.ImplementationType != null && d.ImplementationType.Assembly.FullName.Contains($"{nameof(Apizr)}"))))
-            //foreach (var service in services)
+                    (d.ServiceType != null && d.ServiceType.Assembly.FullName.Contains($"{nameof(Apizr)}")) ||
+                    (d.ImplementationType != null && d.ImplementationType.Assembly.FullName.Contains($"{nameof(Apizr)}"))))
+                //foreach (var service in services)
             {
                 System.Console.WriteLine(
                     $"Registered service: {service.ServiceType?.GetFriendlyName()} - {service.ImplementationType?.GetFriendlyName()}");
             }
         }
 
-        private static Task<string?> OnRefreshToken(HttpRequestMessage request)
+        private static Task<string> OnRefreshToken(HttpRequestMessage request) => Task.FromResult("tokenValue");
+
+        public override void ConfigureApp(IContainerRegistry containerRegistry)
         {
-            return Task.FromResult("tokenValue");
+#if DEBUG
+            Xamarin.Forms.Internals.Log.Listeners.Add(new TraceLogListener());
+#endif
+            containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<MainPage>();
         }
+
+        public override Task RunApp(INavigationService navigator)
+            => navigator.Navigate("NavigationPage/MainPage");
     }
 }

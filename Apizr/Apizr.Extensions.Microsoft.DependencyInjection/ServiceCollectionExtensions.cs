@@ -563,7 +563,10 @@ namespace Apizr
 
             apizrOptions.HttpClientBuilder?.Invoke(builder);
 
-            services.AddOrReplaceSingleton(typeof(IConnectivityHandler), apizrOptions.ConnectivityHandlerType);
+            if (apizrOptions.ConnectivityHandlerFactory != null)
+                services.AddOrReplaceSingleton(typeof(IConnectivityHandler), apizrOptions.ConnectivityHandlerFactory);
+            else
+                services.TryAddSingleton(typeof(IConnectivityHandler), apizrOptions.ConnectivityHandlerType);
 
             services.AddOrReplaceSingleton(typeof(ICacheHandler), apizrOptions.CacheHandlerType);
 
@@ -663,6 +666,24 @@ namespace Apizr
             }
             else
                 services.AddSingleton(serviceType, implementationType);
+
+            return services;
+        }
+
+        private static IServiceCollection AddOrReplaceSingleton(this IServiceCollection services, Type serviceType, Func<IServiceProvider, object> factory)
+        {
+            var serviceDescriptors = services.Where(sd => sd.ServiceType == serviceType).ToList();
+            if (serviceDescriptors.Any())
+            {
+                if (serviceDescriptors.Count > 1)
+                    throw new Exception("Can't replace more than one registration");
+
+                var serviceDescriptor = serviceDescriptors.First();
+                if (serviceDescriptor.ImplementationFactory?.Method.ReturnType != factory.Method.ReturnType)
+                    services.Replace(new ServiceDescriptor(serviceType, factory, ServiceLifetime.Singleton));
+            }
+            else
+                services.AddSingleton(serviceType, factory);
 
             return services;
         }

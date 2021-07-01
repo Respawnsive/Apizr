@@ -57,9 +57,7 @@ namespace Apizr
 
             try
             {
-                if (_connectivityHandler is VoidConnectivityHandler)
-                    _logger.LogTrace($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity handler");
-                else if (!_connectivityHandler.IsConnected())
+                if (!_connectivityHandler.IsConnected())
                 {
                     _logger.LogInformation($"Apizr - {methodName}: Connectivity check failed, throw {nameof(IOException)}");
                     throw new IOException("Connectivity check failed");
@@ -99,9 +97,7 @@ namespace Apizr
 
             try
             {
-                if (_connectivityHandler is VoidConnectivityHandler)
-                    _logger.LogTrace($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity handler");
-                else if (!_connectivityHandler.IsConnected())
+                if (!_connectivityHandler.IsConnected())
                 {
                     _logger.LogInformation($"Apizr - {methodName}: Connectivity check failed, throw {nameof(IOException)}");
                     throw new IOException("Connectivity check failed");
@@ -141,9 +137,7 @@ namespace Apizr
 
             try
             {
-                if (_connectivityHandler is VoidConnectivityHandler)
-                    _logger.LogTrace($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity handler");
-                else if (!_connectivityHandler.IsConnected())
+                if (!_connectivityHandler.IsConnected())
                 {
                     _logger.LogInformation($"Apizr - {methodName}: Connectivity check failed, throw {nameof(IOException)}");
                     throw new IOException("Connectivity check failed");
@@ -183,9 +177,7 @@ namespace Apizr
 
             try
             {
-                if (_connectivityHandler is VoidConnectivityHandler)
-                    _logger.LogTrace($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity handler");
-                else if (!_connectivityHandler.IsConnected())
+                if (!_connectivityHandler.IsConnected())
                 {
                     _logger.LogInformation($"Apizr - {methodName}: Connectivity check failed, throw {nameof(IOException)}");
                     throw new IOException("Connectivity check failed");
@@ -243,9 +235,7 @@ namespace Apizr
             {
                 try
                 {
-                    if (_connectivityHandler is VoidConnectivityHandler)
-                        _logger.LogTrace($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity handler");
-                    else if (!_connectivityHandler.IsConnected())
+                    if (!_connectivityHandler.IsConnected())
                     {
                         _logger.LogInformation($"Apizr - {methodName}: Connectivity check failed, throw {nameof(IOException)}");
                         throw new IOException("Connectivity check failed");
@@ -318,9 +308,7 @@ namespace Apizr
             {
                 try
                 {
-                    if (_connectivityHandler is VoidConnectivityHandler)
-                        _logger.LogTrace($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity handler");
-                    else if (!_connectivityHandler.IsConnected())
+                    if (!_connectivityHandler.IsConnected())
                     {
                         _logger.LogInformation($"Apizr - {methodName}: Connectivity check failed, throw {nameof(IOException)}");
                         throw new IOException("Connectivity check failed");
@@ -393,9 +381,7 @@ namespace Apizr
             {
                 try
                 {
-                    if (_connectivityHandler is VoidConnectivityHandler)
-                        _logger.LogTrace($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity handler");
-                    else if (!_connectivityHandler.IsConnected())
+                    if (!_connectivityHandler.IsConnected())
                     {
                         _logger.LogInformation($"Apizr - {methodName}: Connectivity check failed, throw {nameof(IOException)}");
                         throw new IOException("Connectivity check failed");
@@ -468,9 +454,7 @@ namespace Apizr
             {
                 try
                 {
-                    if (_connectivityHandler is VoidConnectivityHandler)
-                        _logger.LogTrace($"Apizr - {methodName}: Connectivity is not checked as you didn't provide any connectivity handler");
-                    else if (!_connectivityHandler.IsConnected())
+                    if (!_connectivityHandler.IsConnected())
                     {
                         _logger.LogInformation($"Apizr - {methodName}: Connectivity check failed, throw {nameof(IOException)}");
                         throw new IOException("Connectivity check failed");

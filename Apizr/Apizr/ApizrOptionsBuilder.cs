@@ -165,6 +165,9 @@ namespace Apizr
             return this;
         }
 
+        public IApizrOptionsBuilder WithConnectivityHandler(Func<bool> connectivityCheckingFunction)
+            => WithConnectivityHandler(() => new DefaultConnectivityHandler(connectivityCheckingFunction));
+
         public IApizrOptionsBuilder WithConnectivityHandler(IConnectivityHandler connectivityHandler)
             => WithConnectivityHandler(() => connectivityHandler);
 

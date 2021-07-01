@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using Apizr.Connecting;
 using Apizr.Mapping;
 using Apizr.Requesting;
 using HttpTracer;
@@ -56,6 +57,11 @@ namespace Apizr
         /// Refit settings factory
         /// </summary>
         Func<IServiceProvider, RefitSettings> RefitSettingsFactory { get; }
+
+        /// <summary>
+        /// Connectivity handler factory
+        /// </summary>
+        Func<IServiceProvider, IConnectivityHandler> ConnectivityHandlerFactory { get; }
 
         /// <summary>
         /// HttpClient builder

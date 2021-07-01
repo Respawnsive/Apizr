@@ -28,7 +28,7 @@ namespace Apizr
             TrafficLogLevelFactory = _ => trafficLogLevel ?? LogLevel.Trace;
             HttpClientHandlerFactory = _ => new HttpClientHandler();
             RefitSettingsFactory = _ => new RefitSettings();
-            ConnectivityHandlerType = typeof(VoidConnectivityHandler);
+            ConnectivityHandlerType = typeof(DefaultConnectivityHandler);
             CacheHandlerType = typeof(VoidCacheHandler);
             MappingHandlerType = typeof(VoidMappingHandler);
             DelegatingHandlersExtendedFactories = new List<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>>();
@@ -66,6 +66,7 @@ namespace Apizr
 
         public Func<IServiceProvider, HttpClientHandler> HttpClientHandlerFactory { get; set; }
         public Func<IServiceProvider, RefitSettings> RefitSettingsFactory { get; set; }
+        public Func<IServiceProvider, IConnectivityHandler> ConnectivityHandlerFactory { get; set; }
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
         public IList<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
         public IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }

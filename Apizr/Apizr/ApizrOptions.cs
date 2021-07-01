@@ -28,7 +28,7 @@ namespace Apizr
             HttpClientHandlerFactory = () => new HttpClientHandler();
             PolicyRegistryFactory = () => new PolicyRegistry();
             RefitSettingsFactory = () => new RefitSettings();
-            ConnectivityHandlerFactory = () => new VoidConnectivityHandler();
+            ConnectivityHandlerFactory = () => new DefaultConnectivityHandler();
             CacheHandlerFactory = () => new VoidCacheHandler();
             LoggerFactory = () => NullLogger.Instance;
             MappingHandlerFactory = () => new VoidMappingHandler();

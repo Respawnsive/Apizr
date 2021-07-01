@@ -62,5 +62,12 @@ namespace Apizr
         /// <returns></returns>
         TApizrOptionsBuilder WithRefitSettings(RefitSettings refitSettings);
 
+        /// <summary>
+        /// Provide a function to invoke while checking connectivity
+        /// </summary>
+        /// <param name="connectivityCheckingFunction">A function to invoke while checking connectivity</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithConnectivityHandler(Func<bool> connectivityCheckingFunction);
+
     }
 }

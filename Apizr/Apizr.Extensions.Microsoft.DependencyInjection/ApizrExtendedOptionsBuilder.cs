@@ -152,6 +152,20 @@ namespace Apizr
             return this;
         }
 
+        public IApizrExtendedOptionsBuilder WithConnectivityHandler<TConnectivityHandler>(Expression<Func<TConnectivityHandler, bool>> factory)
+        {
+            Options.ConnectivityHandlerFactory = serviceProvider => new DefaultConnectivityHandler(() => factory.Compile()(serviceProvider.GetRequiredService<TConnectivityHandler>()));
+
+            return this;
+        }
+
+        public IApizrExtendedOptionsBuilder WithConnectivityHandler(Func<bool> connectivityCheckingFunction)
+        {
+            Options.ConnectivityHandlerFactory = _ => new DefaultConnectivityHandler(connectivityCheckingFunction);
+
+            return this;
+        }
+
         public IApizrExtendedOptionsBuilder WithConnectivityHandler<TConnectivityHandler>()
             where TConnectivityHandler : class, IConnectivityHandler
             => WithConnectivityHandler(typeof(TConnectivityHandler));

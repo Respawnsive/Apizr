@@ -17,6 +17,7 @@ using Apizr.Sample.Api;
 using Apizr.Sample.Api.Models;
 using Fusillade;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Prism.Commands;
 using Prism.Navigation;
 using ReactiveUI;
@@ -26,7 +27,7 @@ using Color = System.Drawing.Color;
 
 namespace Apizr.Sample.Mobile.ViewModels
 {
-    public class MainPageViewModel : ViewModelBase
+    public class MainPageViewModel : ViewModel
     {
         private readonly IApizrManager<IReqResService> _reqResManager;
         private readonly IApizrManager<IHttpBinService> _httpBinManager;
@@ -35,19 +36,16 @@ namespace Apizr.Sample.Mobile.ViewModels
         private readonly IMediator _mediator;
         private readonly ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> _userOptionalMediator;
 
-        public MainPageViewModel(INavigationService navigationService, 
-                IApizrManager<IReqResService> reqResManager, IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> userCrudManager, IApizrManager<IHttpBinService> httpBinManager, IApizrManager<ICrudApi<UserDetails, int, IEnumerable<UserDetails>, IDictionary<string, object>>> userDetailsCrudManager, IMediator mediator, ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> userOptionalMediator)
-            : base(navigationService)
+        public MainPageViewModel(ILogger logger)//IApizrManager<IReqResService> reqResManager)//, IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> userCrudManager, IApizrManager<IHttpBinService> httpBinManager, IApizrManager<ICrudApi<UserDetails, int, IEnumerable<UserDetails>, IDictionary<string, object>>> userDetailsCrudManager, IMediator mediator, ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> userOptionalMediator)
         {
-            _reqResManager = reqResManager;
-            _userCrudManager = userCrudManager;
-            _httpBinManager = httpBinManager;
-            _userDetailsCrudManager = userDetailsCrudManager;
-            _mediator = mediator;
-            _userOptionalMediator = userOptionalMediator;
+            //_reqResManager = reqResManager;
+            //_userCrudManager = userCrudManager;
+            //_httpBinManager = httpBinManager;
+            //_userDetailsCrudManager = userDetailsCrudManager;
+            //_mediator = mediator;
+            //_userOptionalMediator = userOptionalMediator;
             GetUsersCommand = ReactiveCommand.CreateFromTask(GetUsersAsync);
-            //GetUserDetailsCommand = ExecutionAwareCommand.FromTask<User>(GetUserDetails);
-            GetUserDetailsCommand = new DelegateCommand<User>(async user => await GetUserDetails(user));
+            GetUserDetailsCommand = ReactiveCommand.CreateFromTask<User>(GetUserDetailsAsync);
             AuthCommand = ReactiveCommand.CreateFromTask(AuthAsync);
 
             Title = "Main Page";
@@ -163,7 +161,7 @@ namespace Apizr.Sample.Mobile.ViewModels
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        private async Task GetUserDetails(User user)
+        private async Task GetUserDetailsAsync(User user)
         {
 
             User? fetchedUser = null;
@@ -237,7 +235,7 @@ namespace Apizr.Sample.Mobile.ViewModels
         {
             base.OnAppearing();
 
-            GetUsersCommand.Execute(null);
+            //GetUsersCommand.Execute(null);
         }
 
         #endregion

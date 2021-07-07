@@ -27,6 +27,7 @@ using AutoMapper;
 using Fusillade;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using MonkeyCache.FileStore;
@@ -136,80 +137,123 @@ namespace Apizr.Sample.Console
             }
             else
             {
-                var services = new ServiceCollection();
-
-                services.AddTransient<ILogger>(_ => new DefaultLogger("Apizr", LogLevel.Information));
-                services.AddPolicyRegistry(registry);
-
-                if (configChoice == 2)
-                {
-                    //services.AddRefitClient<IReqResService>();
-                    // Manual registration
-                    services.AddApizrFor<IReqResService>(optionsBuilder => optionsBuilder.WithPriorityManagement().WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All));
-
-                    //// Auto assembly detection and registration
-                    ////services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
-
-                    // Manual registration
-                    //services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>());
-
-                    // Auto assembly detection and registration
-                    services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithHttpClientHandler(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All, CookieContainer = CookieContainer }).WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
-                }
-                else
-                {
-                    if (configChoice == 3)
+                var host = Host.CreateDefaultBuilder()
+                    .ConfigureLogging(logging =>
                     {
-                        // Classic auto assembly detection and registration and handling with mediation
-                        services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
-
-                        // Crud manual registration and handling with mediation
-                        //services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All));
-
-                        // Crud auto assembly detection, registration and handling with mediation
-                        services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
-                    }
-                    else
+                        logging.AddConsole();
+                        logging.SetMinimumLevel(LogLevel.Trace);
+                    })
+                    .ConfigureServices(services =>
                     {
-                        if(configChoice == 4)
+                        services.AddPolicyRegistry(registry);
+
+                        if (configChoice == 2)
                         {
-                            // Classic auto assembly detection and registration and handling with both mediation and optional mediation
-                            services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
+                            //services.AddRefitClient<IReqResService>();
+                            // Manual registration
+                            services.AddApizrFor<IReqResService>(optionsBuilder =>
+                                optionsBuilder.WithPriorityManagement()
+                                    .WithHttpClientHandler(new HttpClientHandler
+                                    {
+                                        AutomaticDecompression = DecompressionMethods.All,
+                                        CookieContainer = CookieContainer
+                                    }).WithCacheHandler<AkavacheCacheHandler>()
+                                    .WithHttpTracing(HttpTracer.HttpMessageParts.All));
 
-                            // Auto assembly detection, registration and handling with both mediation and optional mediation
-                            services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
+                            //// Auto assembly detection and registration
+                            ////services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
+
+                            // Manual registration
+                            //services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>());
+
+                            // Auto assembly detection and registration
+                            services.AddApizrCrudFor(
+                                optionsBuilder => optionsBuilder
+                                    .WithHttpClientHandler(new HttpClientHandler
+                                    {
+                                        AutomaticDecompression = DecompressionMethods.All,
+                                        CookieContainer = CookieContainer
+                                    }).WithCacheHandler<AkavacheCacheHandler>()
+                                    .WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
                         }
                         else
                         {
-                            // Manual registration
-                            //services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithCrudOptionalMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All));
-                            //services.AddApizrCrudFor<MappedEntity<UserInfos, UserDetails>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithCrudOptionalMediation().WithMappingHandler<AutoMapperMappingHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All));
-                            
-                            // Classic auto assembly detection and registration and handling with both mediation and optional mediation
-                            services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithMappingHandler<AutoMapperMappingHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User), typeof(Program));
+                            if (configChoice == 3)
+                            {
+                                // Classic auto assembly detection and registration and handling with mediation
+                                services.AddApizrFor(
+                                    optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>()
+                                        .WithMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All),
+                                    typeof(User));
 
-                            // Auto assembly detection, registration and handling with mediation, optional mediation and mapping
-                            services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithMappingHandler<AutoMapperMappingHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User), typeof(Program));
+                                // Crud manual registration and handling with mediation
+                                //services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All));
 
-                            services.AddAutoMapper(typeof(Program));
+                                // Crud auto assembly detection, registration and handling with mediation
+                                services.AddApizrCrudFor(
+                                    optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>()
+                                        .WithMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All),
+                                    typeof(User));
+                            }
+                            else
+                            {
+                                if (configChoice == 4)
+                                {
+                                    // Classic auto assembly detection and registration and handling with both mediation and optional mediation
+                                    services.AddApizrFor(
+                                        optionsBuilder =>
+                                            optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation()
+                                                .WithOptionalMediation()
+                                                .WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
+
+                                    // Auto assembly detection, registration and handling with both mediation and optional mediation
+                                    services.AddApizrCrudFor(
+                                        optionsBuilder =>
+                                            optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation()
+                                                .WithOptionalMediation()
+                                                .WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
+                                }
+                                else
+                                {
+                                    // Manual registration
+                                    //services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithCrudOptionalMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All));
+                                    //services.AddApizrCrudFor<MappedEntity<UserInfos, UserDetails>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithCrudOptionalMediation().WithMappingHandler<AutoMapperMappingHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All));
+
+                                    // Classic auto assembly detection and registration and handling with both mediation and optional mediation
+                                    services.AddApizrFor(
+                                        optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>()
+                                            .WithMediation().WithOptionalMediation()
+                                            .WithMappingHandler<AutoMapperMappingHandler>()
+                                            .WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User),
+                                        typeof(Program));
+
+                                    // Auto assembly detection, registration and handling with mediation, optional mediation and mapping
+                                    services.AddApizrCrudFor(
+                                        optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>()
+                                            .WithMediation().WithOptionalMediation()
+                                            .WithMappingHandler<AutoMapperMappingHandler>()
+                                            .WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User),
+                                        typeof(Program));
+
+                                    services.AddAutoMapper(typeof(Program));
+
+                                    // This is just to let you know what's registered from/for Apizr and ready to use
+                                    foreach (var service in services.Where(d =>
+                                        (d.ServiceType != null) ||
+                                        (d.ImplementationType != null)))
+                                    {
+                                        System.Console.WriteLine(
+                                            $"Registered {service.Lifetime} service: {service.ServiceType?.GetFriendlyName()} - {service.ImplementationType?.GetFriendlyName()}");
+                                    }
+                                }
+                            }
+
+                            services.AddMediatR(typeof(Program));
                         }
-                    }
+                    }).Build();
 
-                    services.AddMediatR(typeof(Program));
-                }
-
-                // This is just to let you know what's registered from/for Apizr and ready to use
-                foreach (var service in services.Where(d =>
-                    (d.ServiceType != null) ||
-                    (d.ImplementationType != null)))
-                {
-                    System.Console.WriteLine(
-                        $"Registered {service.Lifetime} service: {service.ServiceType?.GetFriendlyName()} - {service.ImplementationType?.GetFriendlyName()}");
-                }
-
-
-                var container = services.BuildServiceProvider(true);
-                var scope = container.CreateScope();
+                
+                var scope = host.Services.CreateScope();
 
                 _reqResManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IReqResService>>();
 
@@ -245,7 +289,7 @@ namespace Apizr.Sample.Console
                 {
                     //var test = new ReadAllUsersParams("value1", 2);
 
-                    var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(true));
@@ -256,9 +300,9 @@ namespace Apizr.Sample.Console
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(true, parameters1, parameters2, priority, ct), cancellationToken);
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(true, new Dictionary<string, object> { { "param1", 1 }, { "param2", 2 } }, new ReadAllUsersParams{Param2 = 4}, (int)Priority.UserInitiated, ct), cancellationToken);
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(parameters1, ct), CancellationToken.None);
-                    users = userList?.Data;
+                    //users = userList?.Data;
 
-                    //pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll());
+                    pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll());
                     //pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll((int)Priority.UserInitiated));
                     //pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll(parameters1));
                 }

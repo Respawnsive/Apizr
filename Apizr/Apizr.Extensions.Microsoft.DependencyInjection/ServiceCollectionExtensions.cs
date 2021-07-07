@@ -487,7 +487,7 @@ namespace Apizr
                 .ConfigurePrimaryHttpMessageHandler(serviceProvider =>
                 {
                     var httpClientHandler = apizrOptions.HttpClientHandlerFactory.Invoke(serviceProvider);
-                    var logger = serviceProvider.GetRequiredService<ILogger>();
+                    var logger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName);
                     var handlerBuilder = new HttpHandlerBuilder(httpClientHandler, new HttpTracerLogWrapper(logger, apizrOptions));
                     var httpTracerVerbosity = apizrOptions.TrafficVerbosityFactory.Invoke(serviceProvider);
                     handlerBuilder.HttpTracerHandler.Verbosity = httpTracerVerbosity;
@@ -572,7 +572,8 @@ namespace Apizr
 
             services.AddOrReplaceSingleton(typeof(IMappingHandler), apizrOptions.MappingHandlerType);
 
-            services.TryAddSingleton(typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), _ => Activator.CreateInstance(typeof(ApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions));
+            services.TryAddSingleton(typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), serviceProvider => Activator.CreateInstance(typeof(ApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions, serviceProvider.GetRequiredService(typeof(ILogger<>).MakeGenericType(webApiType))));
+            //services.TryAddSingleton(typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), serviceProvider => Activator.CreateInstance(typeof(ApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions, serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName)));
 
             services.TryAddSingleton(typeof(IApizrManager<>).MakeGenericType(apizrOptions.WebApiType), typeof(ApizrManager<>).MakeGenericType(apizrOptions.WebApiType));
 

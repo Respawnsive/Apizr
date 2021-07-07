@@ -8,6 +8,7 @@ using Apizr.Sample.Api;
 using Apizr.Sample.Api.Models;
 using Apizr.Sample.Mobile.Infrastructure;
 using Apizr.Sample.Mobile.Services.Settings;
+using Apizr.Sample.Mobile.ViewModels;
 using Apizr.Sample.Mobile.Views;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -49,9 +50,9 @@ namespace Apizr.Sample.Mobile
 
             services.AddSingleton<IAppSettings, AppSettings>();
 
-            services.UseApizrFor<IReqResService>(options => options.WithCacheHandler<AkavacheCacheHandler>());
-            services.UseApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithHttpTracing(), typeof(User));
-            services.UseApizrFor<IHttpBinService>(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithAuthenticationHandler<IAppSettings>(settings => settings.Token, OnRefreshToken));
+            services.AddApizrFor<IReqResService>(options => options.WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing());
+            services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithHttpTracing(), typeof(User));
+            services.AddApizrFor<IHttpBinService>(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing().WithAuthenticationHandler<IAppSettings>(settings => settings.Token, OnRefreshToken));
 
             services.AddMediatR(typeof(Startup));
 
@@ -59,7 +60,7 @@ namespace Apizr.Sample.Mobile
             foreach (var service in services.Where(d =>
                     (d.ServiceType != null && d.ServiceType.Assembly.FullName.Contains($"{nameof(Apizr)}")) ||
                     (d.ImplementationType != null && d.ImplementationType.Assembly.FullName.Contains($"{nameof(Apizr)}"))))
-                //foreach (var service in services)
+            //foreach (var service in services)
             {
                 System.Console.WriteLine(
                     $"Registered service: {service.ServiceType?.GetFriendlyName()} - {service.ImplementationType?.GetFriendlyName()}");
@@ -74,7 +75,7 @@ namespace Apizr.Sample.Mobile
             Xamarin.Forms.Internals.Log.Listeners.Add(new TraceLogListener());
 #endif
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage>();
+            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
         }
 
         public override Task RunApp(INavigationService navigator)

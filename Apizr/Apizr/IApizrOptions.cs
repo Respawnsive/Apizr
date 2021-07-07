@@ -32,6 +32,11 @@ namespace Apizr
         Func<LogLevel> TrafficLogLevelFactory { get; }
 
         /// <summary>
+        /// Logger factory
+        /// </summary>
+        Func<ILogger> LoggerFactory { get; set; }
+
+        /// <summary>
         /// HttpClientHandler factory
         /// </summary>
         Func<HttpClientHandler> HttpClientHandlerFactory { get; }
@@ -57,11 +62,6 @@ namespace Apizr
         Func<ICacheHandler> CacheHandlerFactory { get; }
 
         /// <summary>
-        /// Log handler factory
-        /// </summary>
-        Func<ILogger> LoggerFactory { get; }
-
-        /// <summary>
         /// Mapping handler factory
         /// </summary>
         Func<IMappingHandler> MappingHandlerFactory { get; }
@@ -74,6 +74,6 @@ namespace Apizr
 
     public interface IApizrOptions<TWebApi> : IApizrOptionsBase
     {
-
+        ILogger<TWebApi> Logger { get; }
     }
 }

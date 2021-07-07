@@ -1,4 +1,5 @@
 ﻿using System;
+using Apizr.Extending;
 using Microsoft.Extensions.Logging;
 
 namespace Apizr.Logging
@@ -8,14 +9,14 @@ namespace Apizr.Logging
     /// </summary>
     public class DefaultLogger : ILogger
     {
-        readonly string _categoryName;
-        readonly LogLevel _configLogLevel;
+        protected readonly string CategoryName;
+        protected readonly LogLevel ConfigLogLevel;
 
 
         public DefaultLogger(string categoryName, LogLevel logLevel)
         {
-            _categoryName = categoryName;
-            _configLogLevel = logLevel;
+            CategoryName = categoryName;
+            ConfigLogLevel = logLevel;
         }
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
@@ -24,12 +25,12 @@ namespace Apizr.Logging
                 return;
 
             // TODO: I need scopes
-            var message = $"[{logLevel} - {_categoryName}] {formatter(state, exception)}";
+            var message = $"[{logLevel} - {CategoryName}] {formatter(state, exception)}";
 
             Console.WriteLine(message);
         }
 
-        public bool IsEnabled(LogLevel logLevel) => logLevel >= _configLogLevel;
+        public bool IsEnabled(LogLevel logLevel) => logLevel >= ConfigLogLevel;
 
         public IDisposable BeginScope<TState>(TState state) => NullScope.Instance;
     }

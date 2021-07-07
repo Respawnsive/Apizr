@@ -25,12 +25,12 @@ namespace Apizr
             BaseAddressFactory = () => baseAddress;
             TrafficVerbosityFactory = () => trafficVerbosity ?? HttpMessageParts.None;
             TrafficLogLevelFactory = () => trafficLogLevel ?? LogLevel.Trace;
+            LoggerFactory = () => NullLogger.Instance;
             HttpClientHandlerFactory = () => new HttpClientHandler();
             PolicyRegistryFactory = () => new PolicyRegistry();
             RefitSettingsFactory = () => new RefitSettings();
             ConnectivityHandlerFactory = () => new DefaultConnectivityHandler();
             CacheHandlerFactory = () => new VoidCacheHandler();
-            LoggerFactory = () => NullLogger.Instance;
             MappingHandlerFactory = () => new VoidMappingHandler();
             DelegatingHandlersFactories = new List<Func<ILogger, IApizrOptionsBase, DelegatingHandler>>();
         }
@@ -56,12 +56,12 @@ namespace Apizr
             set => _trafficLogLevelFactory = () => TrafficLogLevel = value.Invoke();
         }
 
+        public Func<ILogger> LoggerFactory { get; set; }
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
         public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set;  }
         public Func<RefitSettings> RefitSettingsFactory { get; set; }
         public Func<IConnectivityHandler> ConnectivityHandlerFactory { get; set; }
         public Func<ICacheHandler> CacheHandlerFactory { get; set; }
-        public Func<ILogger> LoggerFactory { get; set; }
         public Func<IMappingHandler> MappingHandlerFactory { get; set; }
         public IList<Func<ILogger, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
     }
@@ -69,16 +69,19 @@ namespace Apizr
     public class ApizrOptions<TWebApi> : IApizrOptions<TWebApi>
     {
         private readonly IApizrOptionsBase _apizrOptions;
+        private readonly ILogger<TWebApi> _logger;
 
-        public ApizrOptions(IApizrOptionsBase apizrOptions)
+        public ApizrOptions(IApizrOptionsBase apizrOptions, ILogger<TWebApi> logger)
         {
             _apizrOptions = apizrOptions;
+            _logger = logger;
         }
 
         public Type WebApiType => _apizrOptions.WebApiType;
         public Uri BaseAddress => _apizrOptions.BaseAddress;
         public HttpMessageParts TrafficVerbosity => _apizrOptions.TrafficVerbosity;
         public LogLevel TrafficLogLevel => _apizrOptions.TrafficLogLevel;
+        public ILogger<TWebApi> Logger => _logger;
         public string[] PolicyRegistryKeys => _apizrOptions.PolicyRegistryKeys;
     }
 }

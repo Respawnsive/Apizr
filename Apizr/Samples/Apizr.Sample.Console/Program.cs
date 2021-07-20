@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Apizr.Extending;
 using Apizr.Integrations.Fusillade;
 using Apizr.Integrations.MonkeyCache;
-using Apizr.Logging;
 using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Cruding.Sending;
 using Apizr.Mediation.Requesting;
@@ -31,6 +30,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Logging.Console;
+using Microsoft.Extensions.Logging.Debug;
 using Microsoft.Extensions.Options;
 using MonkeyCache.FileStore;
 using Newtonsoft.Json;
@@ -114,6 +114,13 @@ namespace Apizr.Sample.Console
             {
                 Barrel.ApplicationId = nameof(Program);
 
+                var lazyLoggerFactory = new Lazy<ILoggerFactory>(() => LoggerFactory.Create(logging =>
+                {
+                    logging.AddConsole();
+                    logging.AddDebug();
+                    //logging.SetMinimumLevel(LogLevel.Trace);
+                }));
+
                 _reqResManager = Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(registry)
                     .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
                     .WithPriorityManagement()
@@ -126,20 +133,12 @@ namespace Apizr.Sample.Console
                     //    },
                     //    Converters = { new IsoDateTimeConverter() }
                     //})))
-                    .WithHttpTracing(HttpTracer.HttpMessageParts.All).WithLogging(LoggerFactory.Create(logging =>
-                    {
-                        logging.AddConsole();
-                        logging.SetMinimumLevel(LogLevel.Trace);
-                    })));
+                    .WithHttpTracing(HttpTracer.HttpMessageParts.All, LogLevel.Information).WithLogging(() => lazyLoggerFactory.Value));
 
                 _userManager = Apizr.CrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users")
                     .WithPolicyRegistry(registry)
                     .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
-                    .WithHttpTracing(HttpTracer.HttpMessageParts.All).WithLogging(LoggerFactory.Create(logging =>
-                    {
-                        logging.AddConsole();
-                        logging.SetMinimumLevel(LogLevel.Trace);
-                    })));
+                    .WithHttpTracing(HttpTracer.HttpMessageParts.All).WithLogging(() => lazyLoggerFactory.Value));
 
 
                 System.Console.WriteLine("");
@@ -299,7 +298,7 @@ namespace Apizr.Sample.Console
                 {
                     //var test = new ReadAllUsersParams("value1", 2);
 
-                    var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(true));
@@ -310,9 +309,9 @@ namespace Apizr.Sample.Console
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(true, parameters1, parameters2, priority, ct), cancellationToken);
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(true, new Dictionary<string, object> { { "param1", 1 }, { "param2", 2 } }, new ReadAllUsersParams{Param2 = 4}, (int)Priority.UserInitiated, ct), cancellationToken);
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(parameters1, ct), CancellationToken.None);
-                    users = userList?.Data;
+                    //users = userList?.Data;
 
-                    //pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll());
+                    pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll());
                     //pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll((int)Priority.UserInitiated));
                     //pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll(parameters1));
                 }

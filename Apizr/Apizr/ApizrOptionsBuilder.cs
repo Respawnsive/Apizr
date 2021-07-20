@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Connecting;
-using Apizr.Logging;
 using Apizr.Mapping;
 using HttpTracer;
 using Microsoft.Extensions.Logging;

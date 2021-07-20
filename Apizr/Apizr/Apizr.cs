@@ -6,7 +6,6 @@ using System.Reflection;
 using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Extending;
-using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Policing;
 using Apizr.Requesting;
@@ -167,6 +166,7 @@ namespace Apizr
                 var httpClientHandler = apizrOptions.HttpClientHandlerFactory.Invoke();
                 var logger = apizrOptions.LoggerFactory.Invoke().CreateLogger(apizrOptions.WebApiType.GetFriendlyName());
 
+                apizrOptions.TrafficLogLevelFactory.Invoke();
                 var handlerBuilder = new HttpHandlerBuilder(httpClientHandler, new HttpTracerLogWrapper(logger, apizrOptions));
                 var httpTracerVerbosity = apizrOptions.TrafficVerbosityFactory.Invoke();
                 handlerBuilder.HttpTracerHandler.Verbosity = httpTracerVerbosity;

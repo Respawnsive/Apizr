@@ -21,7 +21,6 @@ namespace Apizr
         public Uri BaseAddress { get; protected set; }
         public HttpMessageParts TrafficVerbosity { get; protected set; }
         public LogLevel TrafficLogLevel { get; protected set; }
-        public ILogger Logger { get; protected set; }
         public string[] PolicyRegistryKeys { get; }
     }
 }

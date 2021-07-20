@@ -170,26 +170,18 @@ namespace Apizr
         IApizrOptionsBuilder WithCacheHandler(Func<ICacheHandler> cacheHandlerFactory);
 
         /// <summary>
-        /// Provide the default Console logger
+        /// Configure your logging layer
         /// </summary>
-        /// <param name="categoryName"></param>
-        /// <param name="logLevel"></param>
+        /// <param name="loggerFactory">The logger factory</param>
         /// <returns></returns>
-        IApizrOptionsBuilder WithLogging(string categoryName, LogLevel logLevel);
+        IApizrOptionsBuilder WithLogging(ILoggerFactory loggerFactory);
 
         /// <summary>
-        /// Provide a logger
+        /// Configure your logging layer
         /// </summary>
-        /// <param name="logger">An <see cref="ILogger"/> implementation instance</param>
+        /// <param name="loggerFactory">The logger factory</param>
         /// <returns></returns>
-        IApizrOptionsBuilder WithLogging(ILogger logger);
-
-        /// <summary>
-        /// Provide a logger
-        /// </summary>
-        /// <param name="loggerFactory">An <see cref="ILogger"/> implementation instance factory</param>
-        /// <returns></returns>
-        IApizrOptionsBuilder WithLogging(Func<ILogger> loggerFactory);
+        IApizrOptionsBuilder WithLogging(Func<ILoggerFactory> loggerFactory);
 
         /// <summary>
         /// Provide a mapping handler to map entities

@@ -188,13 +188,10 @@ namespace Apizr
             return this;
         }
 
-        public IApizrOptionsBuilder WithLogging(string categoryName, LogLevel logLevel)
-            => WithLogging(() => new DefaultLogger(categoryName, logLevel));
+        public IApizrOptionsBuilder WithLogging(ILoggerFactory loggerFactory)
+            => WithLogging(() => loggerFactory);
 
-        public IApizrOptionsBuilder WithLogging(ILogger logger)
-            => WithLogging(() => logger);
-
-        public IApizrOptionsBuilder WithLogging(Func<ILogger> loggerFactory)
+        public IApizrOptionsBuilder WithLogging(Func<ILoggerFactory> loggerFactory)
         {
             Options.LoggerFactory = loggerFactory;
 

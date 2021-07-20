@@ -25,7 +25,7 @@ namespace Apizr
             BaseAddressFactory = () => baseAddress;
             TrafficVerbosityFactory = () => trafficVerbosity ?? HttpMessageParts.None;
             TrafficLogLevelFactory = () => trafficLogLevel ?? LogLevel.Trace;
-            LoggerFactory = () => NullLogger.Instance;
+            LoggerFactory = () => NullLoggerFactory.Instance;
             HttpClientHandlerFactory = () => new HttpClientHandler();
             PolicyRegistryFactory = () => new PolicyRegistry();
             RefitSettingsFactory = () => new RefitSettings();
@@ -56,7 +56,7 @@ namespace Apizr
             set => _trafficLogLevelFactory = () => TrafficLogLevel = value.Invoke();
         }
 
-        public Func<ILogger> LoggerFactory { get; set; }
+        public Func<ILoggerFactory> LoggerFactory { get; set; }
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
         public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set;  }
         public Func<RefitSettings> RefitSettingsFactory { get; set; }
@@ -69,9 +69,9 @@ namespace Apizr
     public class ApizrOptions<TWebApi> : IApizrOptions<TWebApi>
     {
         private readonly IApizrOptionsBase _apizrOptions;
-        private readonly ILogger<TWebApi> _logger;
+        private readonly ILogger _logger;
 
-        public ApizrOptions(IApizrOptionsBase apizrOptions, ILogger<TWebApi> logger)
+        public ApizrOptions(IApizrOptionsBase apizrOptions, ILogger logger)
         {
             _apizrOptions = apizrOptions;
             _logger = logger;
@@ -81,7 +81,7 @@ namespace Apizr
         public Uri BaseAddress => _apizrOptions.BaseAddress;
         public HttpMessageParts TrafficVerbosity => _apizrOptions.TrafficVerbosity;
         public LogLevel TrafficLogLevel => _apizrOptions.TrafficLogLevel;
-        public ILogger<TWebApi> Logger => _logger;
+        public ILogger Logger => _logger;
         public string[] PolicyRegistryKeys => _apizrOptions.PolicyRegistryKeys;
     }
 }

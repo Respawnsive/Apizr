@@ -502,7 +502,7 @@ namespace Apizr
                         catch (Exception)
                         {
                             logger.LogInformation(
-                                $"Apizr - Global policies: You get some global policies but didn't register a {nameof(PolicyRegistry)} instance. Global policies will be ignored for  for {webApiFriendlyName} instance");
+                                $"Global policies: You get some global policies but didn't register a {nameof(PolicyRegistry)} instance. Global policies will be ignored for  for {webApiFriendlyName} instance");
                         }
 
                         if (policyRegistry != null)
@@ -511,7 +511,7 @@ namespace Apizr
                             {
                                 if (policyRegistry.TryGet<IsPolicy>(policyRegistryKey, out var registeredPolicy))
                                 {
-                                    logger.LogTrace($"Apizr - Global policies: Found a policy with key {policyRegistryKey} for {webApiFriendlyName} instance");
+                                    logger.LogTrace($"Global policies: Found a policy with key {policyRegistryKey} for {webApiFriendlyName} instance");
                                     if (registeredPolicy is IAsyncPolicy<HttpResponseMessage> registeredPolicyForHttpResponseMessage)
                                     {
                                         var policySelector =
@@ -524,13 +524,13 @@ namespace Apizr
                                                 });
                                         handlerBuilder.AddHandler(new PolicyHttpMessageHandler(policySelector));
                                         
-                                        logger.LogTrace($"Apizr - Global policies: Policy with key {policyRegistryKey} will be applied to {webApiFriendlyName} instance");
+                                        logger.LogTrace($"Global policies: Policy with key {policyRegistryKey} will be applied to {webApiFriendlyName} instance");
                                     }
                                     else 
-                                        logger.LogInformation($"Apizr - Global policies: Policy with key {policyRegistryKey} is not of {typeof(IAsyncPolicy<HttpResponseMessage>)} type and will be ignored for {webApiType.GetFriendlyName()} instance");
+                                        logger.LogInformation($"Global policies: Policy with key {policyRegistryKey} is not of {typeof(IAsyncPolicy<HttpResponseMessage>)} type and will be ignored for {webApiType.GetFriendlyName()} instance");
                                 }
                                 else 
-                                    logger.LogInformation($"Apizr - Global policies: No policy found for key {policyRegistryKey} and will be ignored for  for {webApiFriendlyName} instance");
+                                    logger.LogInformation($"Global policies: No policy found for key {policyRegistryKey} and will be ignored for  for {webApiFriendlyName} instance");
                             }
                         }
                     }
@@ -571,9 +571,8 @@ namespace Apizr
             services.AddOrReplaceSingleton(typeof(ICacheHandler), apizrOptions.CacheHandlerType);
 
             services.AddOrReplaceSingleton(typeof(IMappingHandler), apizrOptions.MappingHandlerType);
-
-            services.TryAddSingleton(typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), serviceProvider => Activator.CreateInstance(typeof(ApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions, serviceProvider.GetRequiredService(typeof(ILogger<>).MakeGenericType(webApiType))));
-            //services.TryAddSingleton(typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), serviceProvider => Activator.CreateInstance(typeof(ApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions, serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName)));
+            
+            services.TryAddSingleton(typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), serviceProvider => Activator.CreateInstance(typeof(ApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions, serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName)));
 
             services.TryAddSingleton(typeof(IApizrManager<>).MakeGenericType(apizrOptions.WebApiType), typeof(ApizrManager<>).MakeGenericType(apizrOptions.WebApiType));
 

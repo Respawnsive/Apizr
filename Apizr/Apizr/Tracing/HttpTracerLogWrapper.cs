@@ -21,7 +21,7 @@ namespace Apizr.Tracing
             if (!_hasBeenCheckedOnce)
             {
                 if(_logger is NullLogger)
-                    Console.WriteLine("Apizr - You asked to trace http traffic but did not provide any logger. Please provide one by calling WithLogging fluent registration option method or configuring it with ILoggingBuilder.");
+                    Console.WriteLine("You asked to trace http traffic but did not provide any logger. Please provide one by calling WithLogging fluent registration option method or configuring it with ILoggingBuilder.");
 
                 _hasBeenCheckedOnce = true;
             }

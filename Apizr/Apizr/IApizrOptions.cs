@@ -34,7 +34,7 @@ namespace Apizr
         /// <summary>
         /// Logger factory
         /// </summary>
-        Func<ILogger> LoggerFactory { get; set; }
+        Func<ILoggerFactory> LoggerFactory { get; set; }
 
         /// <summary>
         /// HttpClientHandler factory
@@ -74,6 +74,6 @@ namespace Apizr
 
     public interface IApizrOptions<TWebApi> : IApizrOptionsBase
     {
-        ILogger<TWebApi> Logger { get; }
+        ILogger Logger { get; }
     }
 }

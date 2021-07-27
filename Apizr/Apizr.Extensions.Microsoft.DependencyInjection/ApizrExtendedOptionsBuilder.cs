@@ -55,19 +55,6 @@ namespace Apizr
 
             return this;
         }
-
-        public IApizrExtendedOptionsBuilder WithHttpTracing(HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel trafficLogLevel = LogLevel.Trace)
-            => WithHttpTracing(_ => trafficVerbosity, _ => trafficLogLevel);
-
-        public IApizrExtendedOptionsBuilder WithHttpTracing(
-            Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory,
-            Func<IServiceProvider, LogLevel> trafficLogLevelFactory)
-        {
-            Options.TrafficVerbosityFactory = trafficVerbosityFactory;
-            Options.TrafficLogLevelFactory = trafficLogLevelFactory;
-
-            return this;
-        }
         
         public IApizrExtendedOptionsBuilder WithHttpClientHandler(HttpClientHandler httpClientHandler)
             => WithHttpClientHandler(_ => httpClientHandler);
@@ -129,6 +116,20 @@ namespace Apizr
 
         public IApizrExtendedOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler)
             => AddDelegatingHandler(_ => delegatingHandler);
+
+        public IApizrExtendedOptionsBuilder WithLogging(HttpMessageParts trafficVerbosity = HttpMessageParts.All,
+            LogLevel trafficLogLevel = LogLevel.Information)
+            => WithLogging(_ => trafficVerbosity, _ => trafficLogLevel);
+
+        public IApizrExtendedOptionsBuilder WithLogging(
+            Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory,
+            Func<IServiceProvider, LogLevel> trafficLogLevelFactory)
+        {
+            Options.TrafficVerbosityFactory = trafficVerbosityFactory;
+            Options.TrafficLogLevelFactory = trafficLogLevelFactory;
+
+            return this;
+        }
 
         public IApizrExtendedOptionsBuilder AddDelegatingHandler(
             Func<IServiceProvider, DelegatingHandler> delegatingHandlerFactory)

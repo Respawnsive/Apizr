@@ -24,6 +24,7 @@ using Apizr.Sample.Api.Models;
 using Apizr.Sample.Console.Models;
 using AutoMapper;
 using Fusillade;
+using HttpTracer;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -124,21 +125,12 @@ namespace Apizr.Sample.Console
                 _reqResManager = Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(registry)
                     .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
                     .WithPriorityManagement()
-                    //.WithRefitSettings(new RefitSettings(new NewtonsoftJsonContentSerializer(new JsonSerializerSettings
-                    //{
-                    //    Error = delegate (object sender, ErrorEventArgs args)
-                    //    {
-                    //        System.Console.WriteLine(args.ErrorContext.Error);
-                    //        args.ErrorContext.Handled = true;
-                    //    },
-                    //    Converters = { new IsoDateTimeConverter() }
-                    //})))
-                    .WithHttpTracing(HttpTracer.HttpMessageParts.All, LogLevel.Information).WithLogging(() => lazyLoggerFactory.Value));
+                    .WithLogging(() => lazyLoggerFactory.Value));
 
                 _userManager = Apizr.CrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users")
                     .WithPolicyRegistry(registry)
                     .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
-                    .WithHttpTracing(HttpTracer.HttpMessageParts.All).WithLogging(() => lazyLoggerFactory.Value));
+                    .WithLogging());
 
 
                 System.Console.WriteLine("");
@@ -167,7 +159,7 @@ namespace Apizr.Sample.Console
                                         AutomaticDecompression = DecompressionMethods.All,
                                         CookieContainer = CookieContainer
                                     }).WithCacheHandler<AkavacheCacheHandler>()
-                                    .WithHttpTracing(HttpTracer.HttpMessageParts.All));
+                                    .WithLogging(HttpTracer.HttpMessageParts.All));
 
                             //// Auto assembly detection and registration
                             ////services.AddApizrFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
@@ -183,7 +175,7 @@ namespace Apizr.Sample.Console
                                         AutomaticDecompression = DecompressionMethods.All,
                                         CookieContainer = CookieContainer
                                     }).WithCacheHandler<AkavacheCacheHandler>()
-                                    .WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
+                                    .WithLogging(HttpTracer.HttpMessageParts.All), typeof(User));
                         }
                         else
                         {
@@ -192,7 +184,7 @@ namespace Apizr.Sample.Console
                                 // Classic auto assembly detection and registration and handling with mediation
                                 services.AddApizrFor(
                                     optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>()
-                                        .WithMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All),
+                                        .WithMediation().WithLogging(HttpTracer.HttpMessageParts.All),
                                     typeof(User));
 
                                 // Crud manual registration and handling with mediation
@@ -201,7 +193,7 @@ namespace Apizr.Sample.Console
                                 // Crud auto assembly detection, registration and handling with mediation
                                 services.AddApizrCrudFor(
                                     optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>()
-                                        .WithMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All),
+                                        .WithMediation().WithLogging(HttpTracer.HttpMessageParts.All),
                                     typeof(User));
                             }
                             else
@@ -213,14 +205,14 @@ namespace Apizr.Sample.Console
                                         optionsBuilder =>
                                             optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation()
                                                 .WithOptionalMediation()
-                                                .WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
+                                                .WithLogging(HttpTracer.HttpMessageParts.All), typeof(User));
 
                                     // Auto assembly detection, registration and handling with both mediation and optional mediation
                                     services.AddApizrCrudFor(
                                         optionsBuilder =>
                                             optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation()
                                                 .WithOptionalMediation()
-                                                .WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User));
+                                                .WithLogging(HttpTracer.HttpMessageParts.All), typeof(User));
                                 }
                                 else
                                 {
@@ -233,7 +225,7 @@ namespace Apizr.Sample.Console
                                         optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>()
                                             .WithMediation().WithOptionalMediation()
                                             .WithMappingHandler<AutoMapperMappingHandler>()
-                                            .WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User),
+                                            .WithLogging(HttpTracer.HttpMessageParts.All), typeof(User),
                                         typeof(Program));
 
                                     // Auto assembly detection, registration and handling with mediation, optional mediation and mapping
@@ -241,7 +233,7 @@ namespace Apizr.Sample.Console
                                         optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>()
                                             .WithMediation().WithOptionalMediation()
                                             .WithMappingHandler<AutoMapperMappingHandler>()
-                                            .WithHttpTracing(HttpTracer.HttpMessageParts.All), typeof(User),
+                                            .WithLogging(HttpTracer.HttpMessageParts.All), typeof(User),
                                         typeof(Program));
 
                                     services.AddAutoMapper(typeof(Program));

@@ -34,14 +34,6 @@ namespace Apizr
         TApizrOptionsBuilder WithBaseAddress(Uri baseAddress);
 
         /// <summary>
-        /// Define http traffic tracing verbosity (could be defined with TraceAttribute)
-        /// </summary>
-        /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: All)</param>
-        /// <param name="trafficLogLevel">Log level to apply while writing http traces (default: Trace)</param>
-        /// <returns></returns>
-        TApizrOptionsBuilder WithHttpTracing(HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel trafficLogLevel = LogLevel.Trace);
-
-        /// <summary>
         /// Provide a method to refresh the authorization token when needed
         /// </summary>
         /// <param name="refreshTokenFactory">Refresh token method called when expired or empty</param>
@@ -54,6 +46,14 @@ namespace Apizr
         /// <param name="delegatingHandler">A delegating handler</param>
         /// <returns></returns>
         TApizrOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler);
+
+        /// <summary>
+        /// Configure your logging layer
+        /// </summary>
+        /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: All)</param>
+        /// <param name="trafficLogLevel">Log level to apply while writing http traces (default: Information)</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithLogging(HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel trafficLogLevel = LogLevel.Information);
 
         /// <summary>
         /// Provide some Refit specific settings

@@ -6,10 +6,10 @@ using System.Reflection;
 using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Extending;
+using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Policing;
 using Apizr.Requesting;
-using Apizr.Tracing;
 using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -488,6 +488,7 @@ namespace Apizr
                 {
                     var httpClientHandler = apizrOptions.HttpClientHandlerFactory.Invoke(serviceProvider);
                     var logger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName);
+                    apizrOptions.TrafficLogLevelFactory.Invoke(serviceProvider);
                     var handlerBuilder = new HttpHandlerBuilder(httpClientHandler, new HttpTracerLogWrapper(logger, apizrOptions));
                     var httpTracerVerbosity = apizrOptions.TrafficVerbosityFactory.Invoke(serviceProvider);
                     handlerBuilder.HttpTracerHandler.Verbosity = httpTracerVerbosity;
@@ -599,27 +600,27 @@ namespace Apizr
                     optionsBuilder += sourceBuilder => sourceBuilder.ApizrOptions.WebApis.Add(webApiType, webApiAttribute);
             }
 
-            TraceAttribute traceAttribute;
+            LogAttribute logAttribute;
             PolicyAttribute webApiPolicyAttribute;
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
             {
                 var modelType = webApiType.GetGenericArguments().First();
-                traceAttribute = modelType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true);
+                logAttribute = modelType.GetTypeInfo().GetCustomAttribute<LogAttribute>(true);
                 webApiPolicyAttribute = modelType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
             else
             {
-                traceAttribute = webApiType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true);
+                logAttribute = webApiType.GetTypeInfo().GetCustomAttribute<LogAttribute>(true);
                 webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
 
-            if (traceAttribute == null)
-                traceAttribute = webApiType.Assembly.GetCustomAttribute<TraceAttribute>();
+            if (logAttribute == null)
+                logAttribute = webApiType.Assembly.GetCustomAttribute<LogAttribute>();
 
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 
             var builder = new ApizrExtendedOptionsBuilder(new ApizrExtendedOptions(webApiType, apizrManagerType,
-                baseAddress, traceAttribute?.TrafficVerbosity, traceAttribute?.TrafficLogLevel,
+                baseAddress, logAttribute?.TrafficVerbosity, logAttribute?.TrafficLogLevel,
                 assemblyPolicyAttribute?.RegistryKeys,
                 webApiPolicyAttribute?.RegistryKeys));
 

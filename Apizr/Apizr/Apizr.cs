@@ -6,10 +6,10 @@ using System.Reflection;
 using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Extending;
+using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Policing;
 using Apizr.Requesting;
-using Apizr.Tracing;
 using HttpTracer;
 using Microsoft.Extensions.Logging;
 using Polly;
@@ -229,27 +229,27 @@ namespace Apizr
             var webApiAttribute = webApiType.GetTypeInfo().GetCustomAttribute<WebApiAttribute>(true);
             Uri.TryCreate(webApiAttribute?.BaseUri, UriKind.RelativeOrAbsolute, out var baseAddress);
 
-            TraceAttribute traceAttribute;
+            LogAttribute logAttribute;
             PolicyAttribute webApiPolicyAttribute;
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
             {
                 var modelType = webApiType.GetGenericArguments().First();
-                traceAttribute = modelType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true);
+                logAttribute = modelType.GetTypeInfo().GetCustomAttribute<LogAttribute>(true);
                 webApiPolicyAttribute = modelType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
             else
             {
-                traceAttribute = webApiType.GetTypeInfo().GetCustomAttribute<TraceAttribute>(true);
+                logAttribute = webApiType.GetTypeInfo().GetCustomAttribute<LogAttribute>(true);
                 webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
 
-            if(traceAttribute == null)
-                traceAttribute = webApiType.Assembly.GetCustomAttribute<TraceAttribute>();
+            if(logAttribute == null)
+                logAttribute = webApiType.Assembly.GetCustomAttribute<LogAttribute>();
 
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 
             var builder = new ApizrOptionsBuilder(new ApizrOptions(webApiType, baseAddress,
-                traceAttribute?.TrafficVerbosity, traceAttribute?.TrafficLogLevel,
+                logAttribute?.TrafficVerbosity, logAttribute?.TrafficLogLevel,
                 assemblyPolicyAttribute?.RegistryKeys, webApiPolicyAttribute?.RegistryKeys));
 
             optionsBuilder?.Invoke(builder);

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Net.Http;
 using Apizr.Caching;
 using Apizr.Connecting;
+using Apizr.Logging;
 using Apizr.Mapping;
 using HttpTracer;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 using Polly.Registry;
 using Refit;
 
@@ -24,8 +24,8 @@ namespace Apizr
         {
             BaseAddressFactory = () => baseAddress;
             TrafficVerbosityFactory = () => trafficVerbosity ?? HttpMessageParts.None;
-            TrafficLogLevelFactory = () => trafficLogLevel ?? LogLevel.Trace;
-            LoggerFactory = () => NullLoggerFactory.Instance;
+            TrafficLogLevelFactory = () => trafficLogLevel ?? LogLevel.Information;
+            LoggerFactory = () => new DebugLoggerFactory(LogLevel.Information);
             HttpClientHandlerFactory = () => new HttpClientHandler();
             PolicyRegistryFactory = () => new PolicyRegistry();
             RefitSettingsFactory = () => new RefitSettings();

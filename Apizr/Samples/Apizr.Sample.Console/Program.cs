@@ -127,10 +127,11 @@ namespace Apizr.Sample.Console
                     .WithPriorityManagement()
                     .WithLogging(() => lazyLoggerFactory.Value));
 
-                _userManager = Apizr.CrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users")
+                _userManager = Apizr.CrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder
+                    .WithBaseAddress("https://reqres.in/api/users")
                     .WithPolicyRegistry(registry)
-                    .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
-                    .WithLogging());
+                    .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current)));
+                    //.WithLogging());
 
 
                 System.Console.WriteLine("");
@@ -142,7 +143,8 @@ namespace Apizr.Sample.Console
                     .ConfigureLogging(logging =>
                     {
                         logging.AddConsole();
-                        logging.SetMinimumLevel(LogLevel.Trace);
+                        logging.AddConsole();
+                        //logging.SetMinimumLevel(LogLevel.Trace);
                     })
                     .ConfigureServices(services =>
                     {
@@ -290,7 +292,7 @@ namespace Apizr.Sample.Console
                 {
                     //var test = new ReadAllUsersParams("value1", 2);
 
-                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+                    var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(true));
@@ -301,9 +303,9 @@ namespace Apizr.Sample.Console
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(true, parameters1, parameters2, priority, ct), cancellationToken);
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(true, new Dictionary<string, object> { { "param1", 1 }, { "param2", 2 } }, new ReadAllUsersParams{Param2 = 4}, (int)Priority.UserInitiated, ct), cancellationToken);
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(parameters1, ct), CancellationToken.None);
-                    //users = userList?.Data;
+                    users = userList?.Data;
 
-                    pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll());
+                    //pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll());
                     //pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll((int)Priority.UserInitiated));
                     //pagedUsers = await _userManager.ExecuteAsync(api => api.ReadAll(parameters1));
                 }

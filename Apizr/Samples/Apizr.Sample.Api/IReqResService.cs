@@ -17,7 +17,7 @@ namespace Apizr.Sample.Api
     [WebApi("https://reqres.in/api")]
     public interface IReqResService
     {
-        [Get("/users"), Cache(CacheMode.None)]
+        [Get("/users")]
         Task<UserList> GetUsersAsync();
 
         [Get("/users")]

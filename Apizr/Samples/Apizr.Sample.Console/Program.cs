@@ -144,11 +144,12 @@ namespace Apizr.Sample.Console
                     {
                         logging.AddConsole();
                         logging.AddConsole();
-                        //logging.SetMinimumLevel(LogLevel.Trace);
+                        logging.SetMinimumLevel(LogLevel.Trace);
                     })
                     .ConfigureServices(services =>
                     {
                         services.AddPolicyRegistry(registry);
+                        services.AddMemoryCache();
 
                         if (configChoice == 2)
                         {
@@ -160,7 +161,7 @@ namespace Apizr.Sample.Console
                                     {
                                         AutomaticDecompression = DecompressionMethods.All,
                                         CookieContainer = CookieContainer
-                                    }).WithCacheHandler<AkavacheCacheHandler>()
+                                    }).WithInMemoryCacheHandler()//.WithCacheHandler<AkavacheCacheHandler>()
                                     .WithLogging(HttpTracer.HttpMessageParts.All));
 
                             //// Auto assembly detection and registration
@@ -176,7 +177,7 @@ namespace Apizr.Sample.Console
                                     {
                                         AutomaticDecompression = DecompressionMethods.All,
                                         CookieContainer = CookieContainer
-                                    }).WithCacheHandler<AkavacheCacheHandler>()
+                                    }).WithInMemoryCacheHandler()//.WithCacheHandler<AkavacheCacheHandler>()
                                     .WithLogging(HttpTracer.HttpMessageParts.All), typeof(User));
                         }
                         else

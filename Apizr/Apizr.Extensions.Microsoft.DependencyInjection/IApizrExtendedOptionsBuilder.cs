@@ -134,18 +134,6 @@ namespace Apizr
         IApizrExtendedOptionsBuilder WithCacheHandler(Type cacheHandlerType);
 
         /// <summary>
-        /// Use any registered IDistributedCache implementation
-        /// </summary>
-        /// <returns></returns>
-        IApizrExtendedOptionsBuilder WithDistributedCacheHandler();
-
-        /// <summary>
-        /// Use any registered IMemoryCache implementation
-        /// </summary>
-        /// <returns></returns>
-        IApizrExtendedOptionsBuilder WithMemoryCacheHandler();
-
-        /// <summary>
         /// Define http traffic tracing verbosity and log level (could be defined with TraceAttribute)
         /// </summary>
         /// <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>

@@ -2,6 +2,7 @@
 using System.Linq;
 using HttpTracer;
 using Microsoft.Extensions.Logging;
+using Refit;
 
 namespace Apizr
 {
@@ -22,5 +23,6 @@ namespace Apizr
         public HttpMessageParts TrafficVerbosity { get; protected set; }
         public LogLevel TrafficLogLevel { get; protected set; }
         public string[] PolicyRegistryKeys { get; }
+        public IHttpContentSerializer ContentSerializer { get; protected set; }
     }
 }

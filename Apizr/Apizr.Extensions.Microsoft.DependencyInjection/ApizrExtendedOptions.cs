@@ -65,7 +65,19 @@ namespace Apizr
         }
 
         public Func<IServiceProvider, HttpClientHandler> HttpClientHandlerFactory { get; set; }
-        public Func<IServiceProvider, RefitSettings> RefitSettingsFactory { get; set; }
+
+        private Func<IServiceProvider, RefitSettings> _refitSettingsFactory;
+        public Func<IServiceProvider, RefitSettings> RefitSettingsFactory
+        {
+            get => _refitSettingsFactory;
+            set => _refitSettingsFactory = serviceProvider =>
+            {
+                var refitSettings = value.Invoke(serviceProvider);
+                ContentSerializer = refitSettings.ContentSerializer;
+                return refitSettings;
+            };
+        }
+
         public Func<IServiceProvider, IConnectivityHandler> ConnectivityHandlerFactory { get; set; }
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
         public IList<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }

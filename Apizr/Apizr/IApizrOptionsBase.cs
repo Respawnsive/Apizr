@@ -1,6 +1,7 @@
 ﻿using System;
 using HttpTracer;
 using Microsoft.Extensions.Logging;
+using Refit;
 
 namespace Apizr
 {
@@ -33,5 +34,10 @@ namespace Apizr
         /// Policy keys from the registry
         /// </summary>
         string[] PolicyRegistryKeys { get; }
+
+        /// <summary>
+        /// HttpContent serializer
+        /// </summary>
+        IHttpContentSerializer ContentSerializer { get; }
     }
 }

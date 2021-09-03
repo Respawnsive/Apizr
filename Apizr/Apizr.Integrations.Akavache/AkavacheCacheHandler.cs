@@ -16,7 +16,7 @@ namespace Apizr
             Registrations.Start($"{nameof(Apizr)}{nameof(AkavacheCacheHandler)}");
         }
 
-        public Task Set(string key, object value, TimeSpan? lifeSpan = null,
+        public Task SetAsync(string key, object value, TimeSpan? lifeSpan = null,
             CancellationToken cancellationToken = default)
         {
             return lifeSpan.HasValue
@@ -24,14 +24,14 @@ namespace Apizr
                 : BlobCache.LocalMachine.InsertObject(key, value).ToTask(cancellationToken);
         }
 
-        public Task<T> Get<T>(string key, CancellationToken cancellationToken = default)
+        public Task<T> GetAsync<T>(string key, CancellationToken cancellationToken = default)
         {
             return BlobCache.LocalMachine.GetObject<T>(key)
                 .Catch(Observable.Return(default(T)))
                 .ToTask(cancellationToken);
         }
 
-        public Task<bool> Remove(string key, CancellationToken cancellationToken = default)
+        public Task<bool> RemoveAsync(string key, CancellationToken cancellationToken = default)
         {
             return BlobCache.LocalMachine.Invalidate(key)
                 .SelectMany(_ => Observable.Return(true))
@@ -39,9 +39,12 @@ namespace Apizr
                 .ToTask(cancellationToken);
         }
 
-        public Task Clear(CancellationToken cancellationToken = default)
+        public Task ClearAsync(CancellationToken cancellationToken = default)
         {
-            return BlobCache.LocalMachine.InvalidateAll().ToTask(cancellationToken);
+            return BlobCache.LocalMachine.InvalidateAll()
+                .SelectMany(_ => Observable.Return(true))
+                .Catch(Observable.Return(false))
+                .ToTask(cancellationToken);
         }
     }
 }

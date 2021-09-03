@@ -18,7 +18,7 @@ namespace Apizr.Caching
         /// <param name="lifeSpan">The optional life span</param>
         /// <param name="cancellationToken">An optional cancellation token</param>
         /// <returns></returns>
-        Task Set(string key, object value, TimeSpan? lifeSpan = null, CancellationToken cancellationToken = default);
+        Task SetAsync(string key, object value, TimeSpan? lifeSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Map Apizr cache getting method to your cache handler method
@@ -27,7 +27,7 @@ namespace Apizr.Caching
         /// <param name="key">The key to get from</param>
         /// <param name="cancellationToken">An optional cancellation token</param>
         /// <returns></returns>
-        Task<T> Get<T>(string key, CancellationToken cancellationToken = default);
+        Task<T> GetAsync<T>(string key, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Map Apizr cache removing method to your cache handler method
@@ -35,13 +35,13 @@ namespace Apizr.Caching
         /// <param name="key">The key to remove from</param>
         /// <param name="cancellationToken">An optional cancellation token</param>
         /// <returns></returns>
-        Task<bool> Remove(string key, CancellationToken cancellationToken = default);
+        Task<bool> RemoveAsync(string key, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Map Apizr cache clearing method to your cache handler method
         /// </summary>
         /// <param name="cancellationToken">An optional cancellation token</param>
         /// <returns></returns>
-        Task Clear(CancellationToken cancellationToken = default);
+        Task ClearAsync(CancellationToken cancellationToken = default);
     }
 }

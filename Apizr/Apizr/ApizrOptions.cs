@@ -59,7 +59,19 @@ namespace Apizr
         public Func<ILoggerFactory> LoggerFactory { get; set; }
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
         public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set;  }
-        public Func<RefitSettings> RefitSettingsFactory { get; set; }
+
+        private Func<RefitSettings> _refitSettingsFactory;
+        public Func<RefitSettings> RefitSettingsFactory
+        {
+            get => _refitSettingsFactory;
+            set => _refitSettingsFactory = () =>
+            {
+                var refitSettings = value.Invoke();
+                ContentSerializer = refitSettings.ContentSerializer;
+                return refitSettings;
+            };
+        }
+
         public Func<IConnectivityHandler> ConnectivityHandlerFactory { get; set; }
         public Func<ICacheHandler> CacheHandlerFactory { get; set; }
         public Func<IMappingHandler> MappingHandlerFactory { get; set; }
@@ -83,5 +95,6 @@ namespace Apizr
         public LogLevel TrafficLogLevel => _apizrOptions.TrafficLogLevel;
         public ILogger Logger => _logger;
         public string[] PolicyRegistryKeys => _apizrOptions.PolicyRegistryKeys;
+        public IHttpContentSerializer ContentSerializer => _apizrOptions.ContentSerializer;
     }
 }

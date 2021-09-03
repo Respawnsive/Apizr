@@ -219,7 +219,7 @@ namespace Apizr
                 
                 _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Used cache key is {cacheKey}");
 
-                result = await _cacheHandler.Get<TResult>(cacheKey);
+                result = await _cacheHandler.GetAsync<TResult>(cacheKey);
                 if (!Equals(result, default(TResult)))
                     _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Some cached data found for this cache key");
             }
@@ -266,7 +266,7 @@ namespace Apizr
                 {
                     _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Caching result");
 
-                    await _cacheHandler.Set(cacheKey, result, cacheAttribute.LifeSpan);
+                    await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan);
                 }
             }
 
@@ -291,7 +291,7 @@ namespace Apizr
                 
                 _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Used cache key is {cacheKey}");
 
-                result = await _cacheHandler.Get<TResult>(cacheKey);
+                result = await _cacheHandler.GetAsync<TResult>(cacheKey);
                 if (!Equals(result, default(TResult)))
                     _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Some cached data found for this cache key");
             }
@@ -338,7 +338,7 @@ namespace Apizr
                 {
                     _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Caching result");
 
-                    await _cacheHandler.Set(cacheKey, result, cacheAttribute.LifeSpan);
+                    await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan);
                 }
             }
 
@@ -363,7 +363,7 @@ namespace Apizr
                 
                 _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Used cache key is {cacheKey}");
 
-                result = await _cacheHandler.Get<TResult>(cacheKey, cancellationToken);
+                result = await _cacheHandler.GetAsync<TResult>(cacheKey, cancellationToken);
                 if (!Equals(result, default(TResult)))
                     _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Some cached data found for this cache key");
             }
@@ -410,7 +410,7 @@ namespace Apizr
                 {
                     _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Caching result");
 
-                    await _cacheHandler.Set(cacheKey, result, cacheAttribute.LifeSpan, cancellationToken);
+                    await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan, cancellationToken);
                 }
             }
 
@@ -435,7 +435,7 @@ namespace Apizr
                 
                 _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Used cache key is {cacheKey}");
 
-                result = await _cacheHandler.Get<TResult>(cacheKey, cancellationToken);
+                result = await _cacheHandler.GetAsync<TResult>(cacheKey, cancellationToken);
                 if (!Equals(result, default(TResult)))
                     _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Some cached data found for this cache key");
             }
@@ -482,7 +482,7 @@ namespace Apizr
                 {
                     _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Caching result");
 
-                    await _cacheHandler.Set(cacheKey, result, cacheAttribute.LifeSpan, cancellationToken);
+                    await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan, cancellationToken);
                 }
             }
 
@@ -498,7 +498,7 @@ namespace Apizr
 
             try
             {
-                await _cacheHandler.Clear(cancellationToken);
+                await _cacheHandler.ClearAsync(cancellationToken);
                 _apizrOptions.Logger.LogInformation("Apizr: Cache cleared");
 
                 return true;
@@ -529,7 +529,7 @@ namespace Apizr
                     _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Method is cacheable");
                     _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Clearing cache for key {cacheKey}");
 
-                    var success = await _cacheHandler.Remove(cacheKey, cancellationToken);
+                    var success = await _cacheHandler.RemoveAsync(cacheKey, cancellationToken);
                     _apizrOptions.Logger.LogInformation(success
                         ? $"{methodCallExpression.Method.Name}: Clearing cache for key {cacheKey} succeed"
                         : $"{methodCallExpression.Method.Name}: Clearing cache for key {cacheKey} failed");

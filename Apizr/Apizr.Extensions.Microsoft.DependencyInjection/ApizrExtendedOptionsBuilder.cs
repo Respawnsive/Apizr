@@ -197,19 +197,6 @@ namespace Apizr
             return this;
         }
 
-        public IApizrExtendedOptionsBuilder WithDistributedCacheHandler()
-        {
-
-
-            return this;
-        }
-
-        public IApizrExtendedOptionsBuilder WithMemoryCacheHandler()
-        {
-
-            return this;
-        }
-
         public IApizrExtendedOptionsBuilder WithMappingHandler<TMappingHandler>()
             where TMappingHandler : class, IMappingHandler
             => WithMappingHandler(typeof(TMappingHandler));

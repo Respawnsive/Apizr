@@ -2,40 +2,39 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Caching;
-using MonkeyCache;
+using Microsoft.Extensions.Caching.Memory;
 
-[assembly: Apizr.Preserve]
-namespace Apizr.Integrations.MonkeyCache
+namespace Apizr
 {
-    public class MonkeyCacheHandler : ICacheHandler
+    public class InMemoryCacheHandler : ICacheHandler
     {
-        private readonly IBarrel _barrel;
-        private readonly TimeSpan _maxLifeSpan;
+        private readonly IMemoryCache _memoryCache;
 
-        public MonkeyCacheHandler(IBarrel barrel)
+        public InMemoryCacheHandler(IMemoryCache memoryCache)
         {
-            _barrel = barrel;
-            _maxLifeSpan = DateTime.MaxValue - DateTime.Now;
+            _memoryCache = memoryCache;
         }
 
         public Task SetAsync(string key, object value, TimeSpan? lifeSpan = null, CancellationToken cancellationToken = default)
         {
-            _barrel.Add(key, value, lifeSpan ?? _maxLifeSpan);
-
+            var options = new MemoryCacheEntryOptions { AbsoluteExpirationRelativeToNow = lifeSpan };
+            _memoryCache.Set(key, value, options);
             return Task.CompletedTask;
         }
 
         public Task<T> GetAsync<T>(string key, CancellationToken cancellationToken = default)
         {
-            return Task.FromResult(_barrel.Get<T>(key));
+            if (!_memoryCache.TryGetValue<T>(key, out var result))
+                result = default;
+
+            return Task.FromResult(result);
         }
 
         public Task<bool> RemoveAsync(string key, CancellationToken cancellationToken = default)
         {
             try
             {
-                _barrel.Empty(key);
-
+                _memoryCache.Remove(key);
                 return Task.FromResult(true);
             }
             catch (Exception)
@@ -46,16 +45,7 @@ namespace Apizr.Integrations.MonkeyCache
 
         public Task ClearAsync(CancellationToken cancellationToken = default)
         {
-            try
-            {
-                _barrel.EmptyAll();
-
-                return Task.FromResult(true);
-            }
-            catch (Exception)
-            {
-                return Task.FromResult(false);
-            }
+            throw new NotImplementedException();
         }
     }
 }

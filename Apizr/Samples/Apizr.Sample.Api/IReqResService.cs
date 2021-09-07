@@ -7,14 +7,15 @@ using Apizr.Logging;
 using Apizr.Policing;
 using Apizr.Sample.Api.Models;
 using HttpTracer;
+using Microsoft.Extensions.Logging;
 using Refit;
 
 [assembly:Policy("TransientHttpError")]
 [assembly:Cache(CacheMode.GetAndFetch, "00:10:00")]
-[assembly:Log]
+//[assembly:Log]
 namespace Apizr.Sample.Api
 {
-    [WebApi("https://reqres.in/api")]
+    [WebApi("https://reqres.in/api"), Log(HttpMessageParts.None, LogLevel.None)]
     public interface IReqResService
     {
         [Get("/users")]

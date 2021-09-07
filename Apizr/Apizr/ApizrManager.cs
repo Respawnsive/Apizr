@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Extending;
+using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Policing;
 using Apizr.Requesting;
@@ -49,38 +50,39 @@ namespace Apizr
 
         public async Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod)
         {
+            var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression(executeApiMethod);
-            _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Calling method");
+            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Calling method");
 
             try
             {
                 if (!_connectivityHandler.IsConnected())
                 {
-                    _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
                     throw new IOException("Connectivity check failed");
                 }
                 else
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Connectivity check succeed");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
 
                 var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression);
                 if (policy != null)
                 {
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Executing request with some policies");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
 
                     var pollyContext = new Context().WithLogger(_apizrOptions.Logger);
-                    await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(Api), pollyContext);
+                    await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(webApi), pollyContext);
                 }
                 else
                 {
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Executing request without specific policies");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
 
-                    await executeApiMethod.Compile()(Api);
+                    await executeApiMethod.Compile()(webApi);
                 }
             }
             catch (Exception e)
             {
-                _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
-                _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException)} with InnerException");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException)} with InnerException");
 
                 throw new ApizrException(e);
             }
@@ -88,38 +90,39 @@ namespace Apizr
 
         public async Task ExecuteAsync(Expression<Func<TWebApi, IMappingHandler, Task>> executeApiMethod)
         {
+            var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression(executeApiMethod);
-            _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Calling method");
+            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Calling method");
 
             try
             {
                 if (!_connectivityHandler.IsConnected())
                 {
-                    _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
                     throw new IOException("Connectivity check failed");
                 }
                 else
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Connectivity check succeed");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
 
                 var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression);
                 if (policy != null)
                 {
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Executing request with some policies");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
 
                     var pollyContext = new Context().WithLogger(_apizrOptions.Logger);
-                    await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(Api, _mappingHandler), pollyContext);
+                    await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(webApi, _mappingHandler), pollyContext);
                 }
                 else
                 {
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Executing request without specific policies");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
 
-                    await executeApiMethod.Compile()(Api, _mappingHandler);
+                    await executeApiMethod.Compile()(webApi, _mappingHandler);
                 }
             }
             catch (Exception e)
             {
-                _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
-                _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException)} with InnerException");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException)} with InnerException");
 
                 throw new ApizrException(e);
             }
@@ -127,38 +130,39 @@ namespace Apizr
 
         public async Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod, CancellationToken cancellationToken)
         {
+            var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression(executeApiMethod);
-            _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Calling method");
+            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Calling method");
 
             try
             {
                 if (!_connectivityHandler.IsConnected())
                 {
-                    _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
                     throw new IOException("Connectivity check failed");
                 }
                 else
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Connectivity check succeed");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
 
                 var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression);
                 if (policy != null)
                 {
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Executing request with some policies");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
 
                     var pollyContext = new Context().WithLogger(_apizrOptions.Logger);
-                    await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, Api), pollyContext, cancellationToken);
+                    await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, webApi), pollyContext, cancellationToken);
                 }
                 else
                 {
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Executing request without specific policies");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
 
-                    await executeApiMethod.Compile()(cancellationToken, Api);
+                    await executeApiMethod.Compile()(cancellationToken, webApi);
                 }
             }
             catch (Exception e)
             {
-                _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
-                _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException)} with InnerException");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException)} with InnerException");
 
                 throw new ApizrException(e);
             }
@@ -166,38 +170,39 @@ namespace Apizr
 
         public async Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task>> executeApiMethod, CancellationToken cancellationToken)
         {
+            var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression(executeApiMethod);
-            _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Calling method");
+            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Calling method");
 
             try
             {
                 if (!_connectivityHandler.IsConnected())
                 {
-                    _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
                     throw new IOException("Connectivity check failed");
                 }
                 else
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Connectivity check succeed");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
 
                 var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression);
                 if (policy != null)
                 {
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Executing request with some policies");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
 
                     var pollyContext = new Context().WithLogger(_apizrOptions.Logger);
-                    await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, Api, _mappingHandler), pollyContext, cancellationToken);
+                    await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, webApi, _mappingHandler), pollyContext, cancellationToken);
                 }
                 else
                 {
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Executing request without specific policies");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
 
-                    await executeApiMethod.Compile()(cancellationToken, Api, _mappingHandler);
+                    await executeApiMethod.Compile()(cancellationToken, webApi, _mappingHandler);
                 }
             }
             catch (Exception e)
             {
-                _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
-                _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException)} with InnerException");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException)} with InnerException");
 
                 throw new ApizrException(e);
             }
@@ -205,23 +210,24 @@ namespace Apizr
 
         public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod)
         {
+            var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
-            _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Calling method");
+            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Calling method");
 
             TResult result = default;
 
             if (IsMethodCacheable<TResult>(executeApiMethod, out var cacheAttribute, out var cacheKey))
             {
-                _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Called method is cacheable");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Called method is cacheable");
 
                 if (_cacheHandler is VoidCacheHandler)
-                    _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
                 
-                _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Used cache key is {cacheKey}");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TResult>(cacheKey);
                 if (!Equals(result, default(TResult)))
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Some cached data found for this cache key");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Some cached data found for this cache key");
             }
 
             if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
@@ -230,31 +236,31 @@ namespace Apizr
                 {
                     if (!_connectivityHandler.IsConnected())
                     {
-                        _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
                         throw new IOException("Connectivity check failed");
                     }
                     else
-                        _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Connectivity check succeed");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
 
                     var policy = GetMethodPolicy<TResult>(executeApiMethod.Body as MethodCallExpression);
                     if (policy != null)
                     {
-                        _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Executing request with some policies");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
 
                         var pollyContext = new Context().WithLogger(_apizrOptions.Logger);
-                        result = await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(Api), pollyContext);
+                        result = await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(webApi), pollyContext);
                     }
                     else
                     {
-                        _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Executing request without specific policies");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
 
-                        result = await executeApiMethod.Compile()(Api);
+                        result = await executeApiMethod.Compile()(webApi);
                     }
                 }
                 catch (Exception e)
                 {
-                    _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
-                    _apizrOptions.Logger.LogInformation(!Equals(result, default(TResult))
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, !Equals(result, default(TResult))
                         ? $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
                         : $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
 
@@ -264,36 +270,37 @@ namespace Apizr
                 if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Caching result");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Caching result");
 
                     await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan);
                 }
             }
 
-            _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Returning result");
+            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Returning result");
 
             return result;
         }
 
         public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod)
         {
+            var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
-            _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Calling method");
+            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Calling method");
 
             TResult result = default;
 
             if (IsMethodCacheable<TResult>(executeApiMethod, out var cacheAttribute, out var cacheKey))
             {
-                _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Called method is cacheable");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Called method is cacheable");
 
                 if (_cacheHandler is VoidCacheHandler)
-                    _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
                 
-                _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Used cache key is {cacheKey}");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TResult>(cacheKey);
                 if (!Equals(result, default(TResult)))
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Some cached data found for this cache key");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Some cached data found for this cache key");
             }
 
             if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
@@ -302,31 +309,31 @@ namespace Apizr
                 {
                     if (!_connectivityHandler.IsConnected())
                     {
-                        _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
                         throw new IOException("Connectivity check failed");
                     }
                     else
-                        _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Connectivity check succeed");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
 
                     var policy = GetMethodPolicy<TResult>(executeApiMethod.Body as MethodCallExpression);
                     if (policy != null)
                     {
-                        _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Executing request with some policies");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
 
                         var pollyContext = new Context().WithLogger(_apizrOptions.Logger);
-                        result = await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(Api, _mappingHandler), pollyContext);
+                        result = await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(webApi, _mappingHandler), pollyContext);
                     }
                     else
                     {
-                        _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Executing request without specific policies");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
 
-                        result = await executeApiMethod.Compile()(Api, _mappingHandler);
+                        result = await executeApiMethod.Compile()(webApi, _mappingHandler);
                     }
                 }
                 catch (Exception e)
                 {
-                    _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
-                    _apizrOptions.Logger.LogInformation(!Equals(result, default(TResult))
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, !Equals(result, default(TResult))
                         ? $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
                         : $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
 
@@ -336,36 +343,37 @@ namespace Apizr
                 if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Caching result");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Caching result");
 
                     await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan);
                 }
             }
 
-            _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Returning result");
+            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Returning result");
 
             return result;
         }
 
         public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken)
         {
+            var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
-            _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Calling method");
+            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Calling method");
 
             TResult result = default;
 
             if (IsMethodCacheable<TResult>(executeApiMethod, out var cacheAttribute, out var cacheKey))
             {
-                _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Called method is cacheable");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Called method is cacheable");
 
                 if (_cacheHandler is VoidCacheHandler)
-                    _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
                 
-                _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Used cache key is {cacheKey}");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TResult>(cacheKey, cancellationToken);
                 if (!Equals(result, default(TResult)))
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Some cached data found for this cache key");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Some cached data found for this cache key");
             }
 
             if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
@@ -374,31 +382,31 @@ namespace Apizr
                 {
                     if (!_connectivityHandler.IsConnected())
                     {
-                        _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
                         throw new IOException("Connectivity check failed");
                     }
                     else
-                        _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Connectivity check succeed");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
 
                     var policy = GetMethodPolicy<TResult>(executeApiMethod.Body as MethodCallExpression);
                     if (policy != null)
                     {
-                        _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Executing request with some policies");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
 
                         var pollyContext = new Context().WithLogger(_apizrOptions.Logger);
-                        result = await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, Api), pollyContext, cancellationToken);
+                        result = await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, webApi), pollyContext, cancellationToken);
                     }
                     else
                     {
-                        _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Executing request without specific policies");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
 
-                        result = await executeApiMethod.Compile()(cancellationToken, Api);
+                        result = await executeApiMethod.Compile()(cancellationToken, webApi);
                     }
                 }
                 catch (Exception e)
                 {
-                    _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
-                    _apizrOptions.Logger.LogInformation(!Equals(result, default(TResult))
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, !Equals(result, default(TResult))
                         ? $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
                         : $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
 
@@ -408,36 +416,37 @@ namespace Apizr
                 if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Caching result");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Caching result");
 
                     await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan, cancellationToken);
                 }
             }
 
-            _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Returning result");
+            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Returning result");
 
             return result;
         }
 
         public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken)
         {
+            var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
-            _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Calling method");
+            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Calling method");
 
             TResult result = default;
 
             if (IsMethodCacheable<TResult>(executeApiMethod, out var cacheAttribute, out var cacheKey))
             {
-                _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Called method is cacheable");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Called method is cacheable");
 
                 if (_cacheHandler is VoidCacheHandler)
-                    _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
                 
-                _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Used cache key is {cacheKey}");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TResult>(cacheKey, cancellationToken);
                 if (!Equals(result, default(TResult)))
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Some cached data found for this cache key");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Some cached data found for this cache key");
             }
 
             if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
@@ -446,31 +455,31 @@ namespace Apizr
                 {
                     if (!_connectivityHandler.IsConnected())
                     {
-                        _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
                         throw new IOException("Connectivity check failed");
                     }
                     else 
-                        _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Connectivity check succeed");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
 
                     var policy = GetMethodPolicy<TResult>(executeApiMethod.Body as MethodCallExpression);
                     if (policy != null)
                     {
-                        _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Executing request with some policies");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
 
                         var pollyContext = new Context().WithLogger(_apizrOptions.Logger);
-                        result = await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, Api, _mappingHandler), pollyContext, cancellationToken);
+                        result = await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, webApi, _mappingHandler), pollyContext, cancellationToken);
                     }
                     else
                     {
-                        _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Executing request without specific policies");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
 
-                        result = await executeApiMethod.Compile()(cancellationToken, Api, _mappingHandler);
+                        result = await executeApiMethod.Compile()(cancellationToken, webApi, _mappingHandler);
                     }
                 }
                 catch (Exception e)
                 {
-                    _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
-                    _apizrOptions.Logger.LogInformation(!Equals(result, default(TResult))
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, !Equals(result, default(TResult))
                         ? $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
                         : $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
 
@@ -480,13 +489,13 @@ namespace Apizr
                 if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Caching result");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Caching result");
 
                     await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan, cancellationToken);
                 }
             }
 
-            _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Returning result");
+            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Returning result");
 
             return result;
         }
@@ -494,18 +503,18 @@ namespace Apizr
         public async Task<bool> ClearCacheAsync(CancellationToken cancellationToken = default)
         {
             if (_cacheHandler is VoidCacheHandler)
-                _apizrOptions.Logger.LogInformation($"Apizr: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"Apizr: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
 
             try
             {
                 await _cacheHandler.ClearAsync(cancellationToken);
-                _apizrOptions.Logger.LogInformation("Apizr: Cache cleared");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, "Apizr: Cache cleared");
 
                 return true;
             }
             catch (Exception e)
             {
-                _apizrOptions.Logger.LogInformation($"Apizr: Clearing all cache throwed an exception with message: {e.Message}");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"Apizr: Clearing all cache throwed an exception with message: {e.Message}");
 
                 return false;
             }
@@ -517,37 +526,48 @@ namespace Apizr
         public async Task<bool> ClearCacheAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken)
         {
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
-            _apizrOptions.Logger.LogInformation($"Apizr: Calling cache clear for method {methodCallExpression.Method.Name}");
+            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"Apizr: Calling cache clear for method {methodCallExpression.Method.Name}");
 
             if (_cacheHandler is VoidCacheHandler)
-                _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
 
             try
             {
                 if (IsMethodCacheable<TResult>(executeApiMethod, out var cacheAttribute, out var cacheKey))
                 {
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Method is cacheable");
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Clearing cache for key {cacheKey}");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Method is cacheable");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Clearing cache for key {cacheKey}");
 
                     var success = await _cacheHandler.RemoveAsync(cacheKey, cancellationToken);
-                    _apizrOptions.Logger.LogInformation(success
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, success
                         ? $"{methodCallExpression.Method.Name}: Clearing cache for key {cacheKey} succeed"
                         : $"{methodCallExpression.Method.Name}: Clearing cache for key {cacheKey} failed");
 
                     return success;
                 }
 
-                _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Method isn't cacheable");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Method isn't cacheable");
 
                 return true;
             }
             catch (Exception e)
             {
-                _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Clearing keyed cache throwed an exception with message: {e.Message}");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Clearing keyed cache throwed an exception with message: {e.Message}");
 
                 return false;
             }
         }
+
+        #region Logging
+
+        private bool IsMethodLoggable<TResult>(Expression restExpression, out LogAttribute logAttribute)
+        {
+            var webApiType = typeof(TWebApi);
+            var methodCallExpression = GetMethodCallExpression<TResult>(restExpression);
+
+        }
+
+        #endregion
 
         #region Caching
 
@@ -1061,7 +1081,7 @@ namespace Apizr
             {
                 if (_policyRegistry.TryGet<IsPolicy>(registryKey, out var registeredPolicy))
                 {
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Found a policy with key {registryKey}");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Found a policy with key {registryKey}");
 
                     if (registeredPolicy is IAsyncPolicy<TResult> registeredPolicyWithResult)
                     {
@@ -1070,13 +1090,13 @@ namespace Apizr
                         else
                             policy.WrapAsync(registeredPolicyWithResult);
 
-                        _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Policy with key {registryKey} will be applied");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Policy with key {registryKey} will be applied");
                     }
                     else 
-                        _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy<TResult>)} type and will be ignored");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy<TResult>)} type and will be ignored");
                 }
                 else 
-                    _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: No policy found for key {registryKey}");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: No policy found for key {registryKey}");
             }
 
             return policy;
@@ -1124,7 +1144,7 @@ namespace Apizr
             {
                 if (_policyRegistry.TryGet<IsPolicy>(registryKey, out var registeredPolicy))
                 {
-                    _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Found a policy with key {registryKey}");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Found a policy with key {registryKey}");
 
                     if (registeredPolicy is IAsyncPolicy registeredPolicyWithoutResult)
                     {
@@ -1133,13 +1153,13 @@ namespace Apizr
                         else
                             policy.WrapAsync(registeredPolicyWithoutResult);
 
-                        _apizrOptions.Logger.LogTrace($"{methodCallExpression.Method.Name}: Policy with key {registryKey} will be applied");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Policy with key {registryKey} will be applied");
                     }
                     else 
-                        _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy)} type and will be ignored");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy)} type and will be ignored");
                 }
                 else 
-                    _apizrOptions.Logger.LogInformation($"{methodCallExpression.Method.Name}: No policy found for key {registryKey}");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: No policy found for key {registryKey}");
             }
 
             return policy;

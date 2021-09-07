@@ -17,14 +17,14 @@ namespace Apizr
 
         public ApizrOptions(Type webApiType, Uri baseAddress,
             HttpMessageParts? trafficVerbosity,
-            LogLevel? trafficLogLevel,
+            LogLevel? logLevel,
             string[] assemblyPolicyRegistryKeys,
             string[] webApiPolicyRegistryKeys) : base(webApiType,
             assemblyPolicyRegistryKeys, webApiPolicyRegistryKeys)
         {
             BaseAddressFactory = () => baseAddress;
             TrafficVerbosityFactory = () => trafficVerbosity ?? HttpMessageParts.None;
-            TrafficLogLevelFactory = () => trafficLogLevel ?? LogLevel.Information;
+            LogLevelFactory = () => logLevel ?? LogLevel.None;
             LoggerFactory = () => new DebugLoggerFactory(LogLevel.Information);
             HttpClientHandlerFactory = () => new HttpClientHandler();
             PolicyRegistryFactory = () => new PolicyRegistry();
@@ -49,11 +49,11 @@ namespace Apizr
             set => _trafficVerbosityFactory = () => TrafficVerbosity = value.Invoke();
         }
         
-        private Func<LogLevel> _trafficLogLevelFactory;
-        public Func<LogLevel> TrafficLogLevelFactory
+        private Func<LogLevel> _logLevelFactory;
+        public Func<LogLevel> LogLevelFactory
         {
-            get => _trafficLogLevelFactory;
-            set => _trafficLogLevelFactory = () => TrafficLogLevel = value.Invoke();
+            get => _logLevelFactory;
+            set => _logLevelFactory = () => LogLevel = value.Invoke();
         }
 
         public Func<ILoggerFactory> LoggerFactory { get; set; }
@@ -92,7 +92,7 @@ namespace Apizr
         public Type WebApiType => _apizrOptions.WebApiType;
         public Uri BaseAddress => _apizrOptions.BaseAddress;
         public HttpMessageParts TrafficVerbosity => _apizrOptions.TrafficVerbosity;
-        public LogLevel TrafficLogLevel => _apizrOptions.TrafficLogLevel;
+        public LogLevel LogLevel => _apizrOptions.LogLevel;
         public ILogger Logger => _logger;
         public string[] PolicyRegistryKeys => _apizrOptions.PolicyRegistryKeys;
         public IHttpContentSerializer ContentSerializer => _apizrOptions.ContentSerializer;

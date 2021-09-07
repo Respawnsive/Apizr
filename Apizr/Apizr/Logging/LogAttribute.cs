@@ -14,11 +14,11 @@ namespace Apizr.Logging
         /// Trace http traffic and log Apizr execution steps with verbosity
         /// </summary>
         /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: all)</param>
-        /// <param name="trafficLogLevel">Log level to apply while writing http traces (default: Trace)</param>
-        public LogAttribute(HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel trafficLogLevel = LogLevel.Information)
+        /// <param name="logLevel">Log level to apply while writing (default: Trace)</param>
+        public LogAttribute(HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel logLevel = LogLevel.Information)
         {
             TrafficVerbosity = trafficVerbosity;
-            TrafficLogLevel = trafficLogLevel;
+            LogLevel = logLevel;
         }
 
         /// <summary>
@@ -26,6 +26,6 @@ namespace Apizr.Logging
         /// </summary>
         public HttpMessageParts TrafficVerbosity { get; }
 
-        public LogLevel TrafficLogLevel { get; }
+        public LogLevel LogLevel { get; }
     }
 }

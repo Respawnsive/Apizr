@@ -26,9 +26,9 @@ namespace Apizr
         HttpMessageParts TrafficVerbosity { get; }
 
         /// <summary>
-        /// Http traffic tracing log level
+        /// Log level while writing
         /// </summary>
-        LogLevel TrafficLogLevel { get; }
+        LogLevel LogLevel { get; }
 
         /// <summary>
         /// Policy keys from the registry

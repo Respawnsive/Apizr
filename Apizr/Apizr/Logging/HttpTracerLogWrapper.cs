@@ -13,6 +13,6 @@ namespace Apizr.Logging
             _apizrOptions = apizrOptions;
         }
 
-        public void Log(string message) => _logger.Log(_apizrOptions.TrafficLogLevel, message);
+        public void Log(string message) => _logger.Log(_apizrOptions.LogLevel, message);
     }
 }

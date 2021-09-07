@@ -488,7 +488,7 @@ namespace Apizr
                 {
                     var httpClientHandler = apizrOptions.HttpClientHandlerFactory.Invoke(serviceProvider);
                     var logger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName);
-                    apizrOptions.TrafficLogLevelFactory.Invoke(serviceProvider);
+                    apizrOptions.LogLevelFactory.Invoke(serviceProvider);
                     var handlerBuilder = new HttpHandlerBuilder(httpClientHandler, new HttpTracerLogWrapper(logger, apizrOptions));
                     var httpTracerVerbosity = apizrOptions.TrafficVerbosityFactory.Invoke(serviceProvider);
                     handlerBuilder.HttpTracerHandler.Verbosity = httpTracerVerbosity;
@@ -622,7 +622,7 @@ namespace Apizr
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 
             var builder = new ApizrExtendedOptionsBuilder(new ApizrExtendedOptions(webApiType, apizrManagerType,
-                baseAddress, logAttribute?.TrafficVerbosity, logAttribute?.TrafficLogLevel,
+                baseAddress, logAttribute?.TrafficVerbosity, logAttribute?.LogLevel,
                 assemblyPolicyAttribute?.RegistryKeys,
                 webApiPolicyAttribute?.RegistryKeys));
 

@@ -137,9 +137,9 @@ namespace Apizr
         /// Define http traffic tracing verbosity and log level (could be defined with TraceAttribute)
         /// </summary>
         /// <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
-        /// <param name="trafficLogLevelFactory">Http traffic tracing log level factory</param>
+        /// <param name="logLevelFactory">Log level factory</param>
         /// <returns></returns>
-        IApizrExtendedOptionsBuilder WithLogging(Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory, Func<IServiceProvider, LogLevel> trafficLogLevelFactory);
+        IApizrExtendedOptionsBuilder WithLogging(Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory, Func<IServiceProvider, LogLevel> logLevelFactory);
 
         /// <summary>
         /// Provide a mapping handler to auto map entities during mediation

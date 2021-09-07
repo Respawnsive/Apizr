@@ -44,9 +44,9 @@ namespace Apizr
         Func<IServiceProvider, HttpMessageParts> TrafficVerbosityFactory { get; }
 
         /// <summary>
-        /// Http traffic tracing log level factory
+        /// Log level factory
         /// </summary>
-        Func<IServiceProvider, LogLevel> TrafficLogLevelFactory { get; }
+        Func<IServiceProvider, LogLevel> LogLevelFactory { get; }
 
         /// <summary>
         /// HttpClientHandler factory

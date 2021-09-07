@@ -12,7 +12,7 @@ namespace Apizr
 
         public InMemoryCacheHandler(IMemoryCache memoryCache)
         {
-            _memoryCache = memoryCache;
+            _memoryCache = memoryCache ?? throw new ArgumentNullException(nameof(memoryCache), $"You must register an implementation of {nameof(IMemoryCache)} before trying to use it");
         }
 
         public Task SetAsync(string key, object value, TimeSpan? lifeSpan = null, CancellationToken cancellationToken = default)

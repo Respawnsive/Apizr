@@ -118,15 +118,15 @@ namespace Apizr
             => AddDelegatingHandler(_ => delegatingHandler);
 
         public IApizrExtendedOptionsBuilder WithLogging(HttpMessageParts trafficVerbosity = HttpMessageParts.All,
-            LogLevel trafficLogLevel = LogLevel.Information)
-            => WithLogging(_ => trafficVerbosity, _ => trafficLogLevel);
+            LogLevel logLevel = LogLevel.Information)
+            => WithLogging(_ => trafficVerbosity, _ => logLevel);
 
         public IApizrExtendedOptionsBuilder WithLogging(
             Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory,
-            Func<IServiceProvider, LogLevel> trafficLogLevelFactory)
+            Func<IServiceProvider, LogLevel> logLevelFactory)
         {
             Options.TrafficVerbosityFactory = trafficVerbosityFactory;
-            Options.TrafficLogLevelFactory = trafficLogLevelFactory;
+            Options.LogLevelFactory = logLevelFactory;
 
             return this;
         }

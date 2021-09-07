@@ -177,26 +177,26 @@ namespace Apizr
         }
 
         public IApizrOptionsBuilder WithLogging(HttpMessageParts trafficVerbosity = HttpMessageParts.All,
-            LogLevel trafficLogLevel = LogLevel.Information)
-            => WithLogging(() => new DebugLoggerFactory(trafficLogLevel), () => trafficVerbosity, () => trafficLogLevel);
+            LogLevel logLevel = LogLevel.Information)
+            => WithLogging(() => new DebugLoggerFactory(logLevel), () => trafficVerbosity, () => logLevel);
 
-        public IApizrOptionsBuilder WithLogging(Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel> trafficLogLevelFactory)
-            => WithLogging(() => new DebugLoggerFactory(trafficLogLevelFactory.Invoke()), trafficVerbosityFactory, trafficLogLevelFactory);
+        public IApizrOptionsBuilder WithLogging(Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel> logLevelFactory)
+            => WithLogging(() => new DebugLoggerFactory(logLevelFactory.Invoke()), trafficVerbosityFactory, logLevelFactory);
 
         public IApizrOptionsBuilder WithLogging(ILoggerFactory loggerFactory,
-            HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel trafficLogLevel = LogLevel.Trace)
-            => WithLogging(() => loggerFactory, () => trafficVerbosity, () => trafficLogLevel);
+            HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel logLevel = LogLevel.Information)
+            => WithLogging(() => loggerFactory, () => trafficVerbosity, () => logLevel);
 
         public IApizrOptionsBuilder WithLogging(Func<ILoggerFactory> loggerFactory,
             HttpMessageParts trafficVerbosity = HttpMessageParts.All,
-            LogLevel trafficLogLevel = LogLevel.Information)
-            => WithLogging(loggerFactory, () => trafficVerbosity, () => trafficLogLevel);
+            LogLevel logLevel = LogLevel.Information)
+            => WithLogging(loggerFactory, () => trafficVerbosity, () => logLevel);
 
-        public IApizrOptionsBuilder WithLogging(Func<ILoggerFactory> loggerFactory, Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel> trafficLogLevelFactory)
+        public IApizrOptionsBuilder WithLogging(Func<ILoggerFactory> loggerFactory, Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel> logLevelFactory)
         {
             Options.LoggerFactory = loggerFactory;
             Options.TrafficVerbosityFactory = trafficVerbosityFactory;
-            Options.TrafficLogLevelFactory = trafficLogLevelFactory;
+            Options.LogLevelFactory = logLevelFactory;
 
             return this;
         }

@@ -16,7 +16,7 @@ namespace Apizr
     {
         public ApizrExtendedOptions(Type webApiType, Type apizrManagerType, Uri baseAddress,
             HttpMessageParts? httpTracerVerbosity,
-            LogLevel? trafficLogLevel,
+            LogLevel? logLevel,
             string[] assemblyPolicyRegistryKeys,
             string[] webApiPolicyRegistryKeys) : base(webApiType, 
             assemblyPolicyRegistryKeys,
@@ -25,7 +25,7 @@ namespace Apizr
             ApizrManagerType = apizrManagerType;
             BaseAddressFactory = _ => baseAddress;
             TrafficVerbosityFactory = _ => httpTracerVerbosity ?? HttpMessageParts.None;
-            TrafficLogLevelFactory = _ => trafficLogLevel ?? LogLevel.Trace;
+            LogLevelFactory = _ => logLevel ?? LogLevel.None;
             HttpClientHandlerFactory = _ => new HttpClientHandler();
             RefitSettingsFactory = _ => new RefitSettings();
             ConnectivityHandlerType = typeof(DefaultConnectivityHandler);
@@ -57,11 +57,11 @@ namespace Apizr
             set => _trafficVerbosityFactory = serviceProvider => TrafficVerbosity = value.Invoke(serviceProvider);
         }
 
-        private Func<IServiceProvider, LogLevel> _trafficLogLevelFactory;
-        public Func<IServiceProvider, LogLevel> TrafficLogLevelFactory
+        private Func<IServiceProvider, LogLevel> _logLevelFactory;
+        public Func<IServiceProvider, LogLevel> LogLevelFactory
         {
-            get => _trafficLogLevelFactory;
-            set => _trafficLogLevelFactory = serviceProvider => TrafficLogLevel = value.Invoke(serviceProvider);
+            get => _logLevelFactory;
+            set => _logLevelFactory = serviceProvider => LogLevel = value.Invoke(serviceProvider);
         }
 
         public Func<IServiceProvider, HttpClientHandler> HttpClientHandlerFactory { get; set; }

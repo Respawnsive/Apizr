@@ -51,9 +51,9 @@ namespace Apizr
         /// Configure your logging layer
         /// </summary>
         /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: All)</param>
-        /// <param name="trafficLogLevel">Log level to apply while writing http traces (default: Information)</param>
+        /// <param name="logLevel">Log level to apply while writing (default: Information)</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithLogging(HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel trafficLogLevel = LogLevel.Information);
+        TApizrOptionsBuilder WithLogging(HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel logLevel = LogLevel.Information);
 
         /// <summary>
         /// Provide some Refit specific settings

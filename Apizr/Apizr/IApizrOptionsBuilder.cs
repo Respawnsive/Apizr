@@ -165,36 +165,36 @@ namespace Apizr
         /// Define http traffic tracing verbosity and log level (could be defined with TraceAttribute)
         /// </summary>
         /// <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
-        /// <param name="trafficLogLevelFactory">Http traffic tracing log level factory</param>
+        /// <param name="logLevelFactory">Log level factory</param>
         /// <returns></returns>
-        IApizrOptionsBuilder WithLogging(Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel> trafficLogLevelFactory);
+        IApizrOptionsBuilder WithLogging(Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel> logLevelFactory);
 
         /// <summary>
         /// Configure your logging layer
         /// </summary>
         /// <param name="loggerFactory">The logger factory</param>
         /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: All)</param>
-        /// <param name="trafficLogLevel">Log level to apply while writing http traces (default: Information)</param>
+        /// <param name="logLevel">Log level to apply while writing (default: Information)</param>
         /// <returns></returns>
-        IApizrOptionsBuilder WithLogging(ILoggerFactory loggerFactory, HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel trafficLogLevel = LogLevel.Information);
+        IApizrOptionsBuilder WithLogging(ILoggerFactory loggerFactory, HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel logLevel = LogLevel.Information);
 
         /// <summary>
         /// Configure your logging layer
         /// </summary>
         /// <param name="loggerFactory">The logger factory</param>
         /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: All)</param>
-        /// <param name="trafficLogLevel">Log level to apply while writing http traces (default: Information)</param>
+        /// <param name="logLevel">Log level to apply while writing (default: Information)</param>
         /// <returns></returns>
-        IApizrOptionsBuilder WithLogging(Func<ILoggerFactory> loggerFactory, HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel trafficLogLevel = LogLevel.Information);
+        IApizrOptionsBuilder WithLogging(Func<ILoggerFactory> loggerFactory, HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel logLevel = LogLevel.Information);
 
         /// <summary>
         /// Define http traffic tracing verbosity and log level (could be defined with TraceAttribute)
         /// </summary>
         /// <param name="loggerFactory">The logger factory</param>
         /// <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
-        /// <param name="trafficLogLevelFactory">Http traffic tracing log level factory</param>
+        /// <param name="logLevelFactory">Log level factory</param>
         /// <returns></returns>
-        IApizrOptionsBuilder WithLogging(Func<ILoggerFactory> loggerFactory, Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel> trafficLogLevelFactory);
+        IApizrOptionsBuilder WithLogging(Func<ILoggerFactory> loggerFactory, Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel> logLevelFactory);
 
         /// <summary>
         /// Provide a mapping handler to map entities

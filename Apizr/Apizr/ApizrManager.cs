@@ -10,9 +10,11 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Caching;
+using Apizr.Caching.Attributes;
 using Apizr.Connecting;
 using Apizr.Extending;
 using Apizr.Logging;
+using Apizr.Logging.Attributes;
 using Apizr.Mapping;
 using Apizr.Policing;
 using Apizr.Requesting;
@@ -25,7 +27,6 @@ namespace Apizr
 {
     public class ApizrManager<TWebApi> : IApizrManager<TWebApi>
     {
-        private readonly Dictionary<MethodCacheDetails, MethodCacheAttributes> _cacheableMethodsSet;
         private readonly ILazyWebApi<TWebApi> _lazyWebApi;
         private readonly IConnectivityHandler _connectivityHandler;
         private readonly ICacheHandler _cacheHandler;
@@ -34,9 +35,11 @@ namespace Apizr
         private readonly string _webApiFriendlyName;
         private readonly IApizrOptions<TWebApi> _apizrOptions;
 
+        private readonly Dictionary<MethodDetails, (CacheAttributeBase cacheAttribute, string cacheKey)> _cachingMethodsSet;
+        private readonly Dictionary<MethodDetails, LogLevel> _loggingMethodsSet;
+
         public ApizrManager(ILazyWebApi<TWebApi> lazyWebApi, IConnectivityHandler connectivityHandler, ICacheHandler cacheHandler, IMappingHandler mappingHandler, IReadOnlyPolicyRegistry<string> policyRegistry, IApizrOptions<TWebApi> apizrOptions)
         {
-            _cacheableMethodsSet = new Dictionary<MethodCacheDetails, MethodCacheAttributes>();
             _lazyWebApi = lazyWebApi;
             _connectivityHandler = connectivityHandler;
             _cacheHandler = cacheHandler;
@@ -44,7 +47,12 @@ namespace Apizr
             _mappingHandler = mappingHandler;
             _webApiFriendlyName = typeof(TWebApi).GetFriendlyName();
             _apizrOptions = apizrOptions;
+
+            _cachingMethodsSet = new Dictionary<MethodDetails, (CacheAttributeBase cacheAttribute, string cacheKey)>();
+            _loggingMethodsSet = new Dictionary<MethodDetails, LogLevel>();
         }
+
+        #region Implementation
 
         public TWebApi Api => _lazyWebApi.Value;
 
@@ -52,37 +60,38 @@ namespace Apizr
         {
             var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression(executeApiMethod);
-            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Calling method");
+            var logLevel = GetMethodLogLevel(executeApiMethod);
+            _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Calling method");
 
             try
             {
                 if (!_connectivityHandler.IsConnected())
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
                     throw new IOException("Connectivity check failed");
                 }
                 else
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
 
-                var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression);
+                var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression, logLevel);
                 if (policy != null)
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
 
                     var pollyContext = new Context().WithLogger(_apizrOptions.Logger);
                     await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(webApi), pollyContext);
                 }
                 else
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
 
                     await executeApiMethod.Compile()(webApi);
                 }
             }
             catch (Exception e)
             {
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException)} with InnerException");
+                _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
+                _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException)} with InnerException");
 
                 throw new ApizrException(e);
             }
@@ -92,37 +101,38 @@ namespace Apizr
         {
             var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression(executeApiMethod);
-            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Calling method");
+            var logLevel = GetMethodLogLevel(executeApiMethod);
+            _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Calling method");
 
             try
             {
                 if (!_connectivityHandler.IsConnected())
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
                     throw new IOException("Connectivity check failed");
                 }
                 else
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
 
-                var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression);
+                var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression, logLevel);
                 if (policy != null)
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
 
                     var pollyContext = new Context().WithLogger(_apizrOptions.Logger);
                     await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(webApi, _mappingHandler), pollyContext);
                 }
                 else
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
 
                     await executeApiMethod.Compile()(webApi, _mappingHandler);
                 }
             }
             catch (Exception e)
             {
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException)} with InnerException");
+                _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
+                _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException)} with InnerException");
 
                 throw new ApizrException(e);
             }
@@ -132,37 +142,38 @@ namespace Apizr
         {
             var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression(executeApiMethod);
-            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Calling method");
+            var logLevel = GetMethodLogLevel(executeApiMethod);
+            _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Calling method");
 
             try
             {
                 if (!_connectivityHandler.IsConnected())
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
                     throw new IOException("Connectivity check failed");
                 }
                 else
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
 
-                var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression);
+                var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression, logLevel);
                 if (policy != null)
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
 
                     var pollyContext = new Context().WithLogger(_apizrOptions.Logger);
                     await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, webApi), pollyContext, cancellationToken);
                 }
                 else
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
 
                     await executeApiMethod.Compile()(cancellationToken, webApi);
                 }
             }
             catch (Exception e)
             {
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException)} with InnerException");
+                _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
+                _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException)} with InnerException");
 
                 throw new ApizrException(e);
             }
@@ -172,37 +183,38 @@ namespace Apizr
         {
             var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression(executeApiMethod);
-            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Calling method");
+            var logLevel = GetMethodLogLevel(executeApiMethod);
+            _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Calling method");
 
             try
             {
                 if (!_connectivityHandler.IsConnected())
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
                     throw new IOException("Connectivity check failed");
                 }
                 else
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
 
-                var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression);
+                var policy = GetMethodPolicy(executeApiMethod.Body as MethodCallExpression, logLevel);
                 if (policy != null)
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
 
                     var pollyContext = new Context().WithLogger(_apizrOptions.Logger);
                     await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, webApi, _mappingHandler), pollyContext, cancellationToken);
                 }
                 else
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
 
                     await executeApiMethod.Compile()(cancellationToken, webApi, _mappingHandler);
                 }
             }
             catch (Exception e)
             {
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException)} with InnerException");
+                _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
+                _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException)} with InnerException");
 
                 throw new ApizrException(e);
             }
@@ -212,22 +224,23 @@ namespace Apizr
         {
             var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
-            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Calling method");
+            var logLevel = GetMethodLogLevel<TResult>(executeApiMethod);
+            _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Calling method");
 
             TResult result = default;
 
             if (IsMethodCacheable<TResult>(executeApiMethod, out var cacheAttribute, out var cacheKey))
             {
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Called method is cacheable");
+                _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Called method is cacheable");
 
                 if (_cacheHandler is VoidCacheHandler)
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
-                
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Used cache key is {cacheKey}");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
+
+                _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TResult>(cacheKey);
                 if (!Equals(result, default(TResult)))
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Some cached data found for this cache key");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Some cached data found for this cache key");
             }
 
             if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
@@ -236,31 +249,31 @@ namespace Apizr
                 {
                     if (!_connectivityHandler.IsConnected())
                     {
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
+                        _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
                         throw new IOException("Connectivity check failed");
                     }
                     else
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
+                        _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
 
-                    var policy = GetMethodPolicy<TResult>(executeApiMethod.Body as MethodCallExpression);
+                    var policy = GetMethodPolicy<TResult>(executeApiMethod.Body as MethodCallExpression, logLevel);
                     if (policy != null)
                     {
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
+                        _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
 
                         var pollyContext = new Context().WithLogger(_apizrOptions.Logger);
                         result = await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(webApi), pollyContext);
                     }
                     else
                     {
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
+                        _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
 
                         result = await executeApiMethod.Compile()(webApi);
                     }
                 }
                 catch (Exception e)
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, !Equals(result, default(TResult))
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
+                    _apizrOptions.Logger.Log(logLevel, !Equals(result, default(TResult))
                         ? $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
                         : $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
 
@@ -270,13 +283,13 @@ namespace Apizr
                 if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Caching result");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Caching result");
 
                     await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan);
                 }
             }
 
-            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Returning result");
+            _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Returning result");
 
             return result;
         }
@@ -285,22 +298,23 @@ namespace Apizr
         {
             var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
-            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Calling method");
+            var logLevel = GetMethodLogLevel<TResult>(executeApiMethod);
+            _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Calling method");
 
             TResult result = default;
 
             if (IsMethodCacheable<TResult>(executeApiMethod, out var cacheAttribute, out var cacheKey))
             {
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Called method is cacheable");
+                _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Called method is cacheable");
 
                 if (_cacheHandler is VoidCacheHandler)
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
-                
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Used cache key is {cacheKey}");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
+
+                _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TResult>(cacheKey);
                 if (!Equals(result, default(TResult)))
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Some cached data found for this cache key");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Some cached data found for this cache key");
             }
 
             if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
@@ -309,31 +323,31 @@ namespace Apizr
                 {
                     if (!_connectivityHandler.IsConnected())
                     {
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
+                        _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
                         throw new IOException("Connectivity check failed");
                     }
                     else
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
+                        _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
 
-                    var policy = GetMethodPolicy<TResult>(executeApiMethod.Body as MethodCallExpression);
+                    var policy = GetMethodPolicy<TResult>(executeApiMethod.Body as MethodCallExpression, logLevel);
                     if (policy != null)
                     {
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
+                        _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
 
                         var pollyContext = new Context().WithLogger(_apizrOptions.Logger);
                         result = await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(webApi, _mappingHandler), pollyContext);
                     }
                     else
                     {
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
+                        _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
 
                         result = await executeApiMethod.Compile()(webApi, _mappingHandler);
                     }
                 }
                 catch (Exception e)
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, !Equals(result, default(TResult))
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
+                    _apizrOptions.Logger.Log(logLevel, !Equals(result, default(TResult))
                         ? $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
                         : $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
 
@@ -343,13 +357,13 @@ namespace Apizr
                 if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Caching result");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Caching result");
 
                     await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan);
                 }
             }
 
-            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Returning result");
+            _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Returning result");
 
             return result;
         }
@@ -358,22 +372,23 @@ namespace Apizr
         {
             var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
-            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Calling method");
+            var logLevel = GetMethodLogLevel<TResult>(executeApiMethod);
+            _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Calling method");
 
             TResult result = default;
 
             if (IsMethodCacheable<TResult>(executeApiMethod, out var cacheAttribute, out var cacheKey))
             {
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Called method is cacheable");
+                _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Called method is cacheable");
 
                 if (_cacheHandler is VoidCacheHandler)
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
-                
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Used cache key is {cacheKey}");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
+
+                _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TResult>(cacheKey, cancellationToken);
                 if (!Equals(result, default(TResult)))
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Some cached data found for this cache key");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Some cached data found for this cache key");
             }
 
             if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
@@ -382,31 +397,31 @@ namespace Apizr
                 {
                     if (!_connectivityHandler.IsConnected())
                     {
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
+                        _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
                         throw new IOException("Connectivity check failed");
                     }
                     else
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
+                        _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
 
-                    var policy = GetMethodPolicy<TResult>(executeApiMethod.Body as MethodCallExpression);
+                    var policy = GetMethodPolicy<TResult>(executeApiMethod.Body as MethodCallExpression, logLevel);
                     if (policy != null)
                     {
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
+                        _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
 
                         var pollyContext = new Context().WithLogger(_apizrOptions.Logger);
                         result = await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, webApi), pollyContext, cancellationToken);
                     }
                     else
                     {
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
+                        _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
 
                         result = await executeApiMethod.Compile()(cancellationToken, webApi);
                     }
                 }
                 catch (Exception e)
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, !Equals(result, default(TResult))
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
+                    _apizrOptions.Logger.Log(logLevel, !Equals(result, default(TResult))
                         ? $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
                         : $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
 
@@ -416,13 +431,13 @@ namespace Apizr
                 if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Caching result");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Caching result");
 
                     await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan, cancellationToken);
                 }
             }
 
-            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Returning result");
+            _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Returning result");
 
             return result;
         }
@@ -431,22 +446,23 @@ namespace Apizr
         {
             var webApi = _lazyWebApi.Value;
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
-            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Calling method");
+            var logLevel = GetMethodLogLevel<TResult>(executeApiMethod);
+            _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Calling method");
 
             TResult result = default;
 
             if (IsMethodCacheable<TResult>(executeApiMethod, out var cacheAttribute, out var cacheKey))
             {
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Called method is cacheable");
+                _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Called method is cacheable");
 
                 if (_cacheHandler is VoidCacheHandler)
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
-                
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Used cache key is {cacheKey}");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
+
+                _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TResult>(cacheKey, cancellationToken);
                 if (!Equals(result, default(TResult)))
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Some cached data found for this cache key");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Some cached data found for this cache key");
             }
 
             if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
@@ -455,31 +471,31 @@ namespace Apizr
                 {
                     if (!_connectivityHandler.IsConnected())
                     {
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
+                        _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Connectivity check failed, throw {nameof(IOException)}");
                         throw new IOException("Connectivity check failed");
                     }
-                    else 
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
+                    else
+                        _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Connectivity check succeed");
 
-                    var policy = GetMethodPolicy<TResult>(executeApiMethod.Body as MethodCallExpression);
+                    var policy = GetMethodPolicy<TResult>(executeApiMethod.Body as MethodCallExpression, logLevel);
                     if (policy != null)
                     {
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
+                        _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Executing request with some policies");
 
                         var pollyContext = new Context().WithLogger(_apizrOptions.Logger);
                         result = await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, webApi, _mappingHandler), pollyContext, cancellationToken);
                     }
                     else
                     {
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
+                        _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Executing request without specific policies");
 
                         result = await executeApiMethod.Compile()(cancellationToken, webApi, _mappingHandler);
                     }
                 }
                 catch (Exception e)
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, !Equals(result, default(TResult))
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Request throwed an exception with message {e.Message}");
+                    _apizrOptions.Logger.Log(logLevel, !Equals(result, default(TResult))
                         ? $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
                         : $"{methodCallExpression.Method.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
 
@@ -489,13 +505,13 @@ namespace Apizr
                 if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Caching result");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Caching result");
 
                     await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan, cancellationToken);
                 }
             }
 
-            _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Returning result");
+            _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Returning result");
 
             return result;
         }
@@ -556,15 +572,77 @@ namespace Apizr
 
                 return false;
             }
-        }
+        } 
+
+        #endregion
 
         #region Logging
 
-        private bool IsMethodLoggable<TResult>(Expression restExpression, out LogAttribute logAttribute)
+        private LogLevel GetMethodLogLevel<TResult>(Expression restExpression)
         {
-            var webApiType = typeof(TWebApi);
-            var methodCallExpression = GetMethodCallExpression<TResult>(restExpression);
+            var methodDetails = GetMethodDetails<TResult>(restExpression);
 
+            // Are we asked to log this method?
+            return GetMethodLogLevel(methodDetails);
+        }
+
+        private LogLevel GetMethodLogLevel(Expression restExpression)
+        {
+            var methodDetails = GetMethodDetails(restExpression);
+
+            // Are we asked to log this method?
+            return GetMethodLogLevel(methodDetails);
+        }
+
+        private LogLevel GetMethodLogLevel(MethodDetails methodDetails)
+        {
+            if (_loggingMethodsSet.TryGetValue(methodDetails, out var savedLogLevel))
+                return savedLogLevel;
+
+            LogLevel? logLevel = null;
+
+            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.ApiInterfaceType)) // Crud api logging
+            {
+                var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
+                var methodName = methodDetails.MethodInfo.Name;
+                switch (methodName) // Specific method logging
+                {
+                    case "ReadAll":
+                        logLevel = modelType.GetTypeInfo().GetCustomAttribute<LogReadAllAttribute>(true)?.LogLevel;
+                        break;
+                    case "Read":
+                        logLevel = modelType.GetTypeInfo().GetCustomAttribute<LogReadAttribute>(true)?.LogLevel;
+                        break;
+                    case "Create":
+                        logLevel = modelType.GetTypeInfo().GetCustomAttribute<LogCreateAttribute>(true)?.LogLevel;
+                        break;
+                    case "Update":
+                        logLevel = modelType.GetTypeInfo().GetCustomAttribute<LogUpdateAttribute>(true)?.LogLevel;
+                        break;
+                    case "Delete":
+                        logLevel = modelType.GetTypeInfo().GetCustomAttribute<LogDeleteAttribute>(true)?.LogLevel;
+                        break;
+                }
+
+                if (logLevel == null) // Global model logging
+                    logLevel = modelType.GetTypeInfo().GetCustomAttribute<LogAttribute>(true)?.LogLevel;
+            }
+            else // Classic api logging
+            {
+                logLevel =
+                    methodDetails.MethodInfo.GetCustomAttribute<LogAttribute>()?.LogLevel ?? // Specific method logging
+                    methodDetails.ApiInterfaceType.GetTypeInfo().GetCustomAttribute<LogAttribute>()?.LogLevel; // Global api interface logging (by attribute decoration)
+
+                if (logLevel == null && _apizrOptions.LogLevel != LogLevel.None) // Global api interface logging (by fluent configuration)
+                    logLevel = _apizrOptions.LogLevel;
+            }
+
+            if (logLevel == null) // Global assembly caching
+                logLevel = methodDetails.ApiInterfaceType.Assembly.GetCustomAttribute<LogAttribute>()?.LogLevel ?? LogLevel.None;
+
+            // Are we asked to log this method?
+            _loggingMethodsSet.Add(methodDetails, logLevel.Value);
+            return logLevel.Value;
         }
 
         #endregion
@@ -573,11 +651,22 @@ namespace Apizr
 
         private bool IsMethodCacheable<TResult>(Expression restExpression, out CacheAttributeBase cacheAttribute, out string cacheKey)
         {
-            var methodToCacheDetails = GetMethodToCacheData<TResult>(restExpression);
+            var methodToCacheDetails = GetMethodDetails<TResult>(restExpression);
 
             lock (this)
             {
                 var methodToCacheData = methodToCacheDetails;
+
+                // Did we ask for it already ?
+                if (_cachingMethodsSet.TryGetValue(methodToCacheData, out var methodCacheDetails))
+                {
+                    // Yes we did so get saved specific details
+                    cacheAttribute = methodCacheDetails.cacheAttribute;
+                    cacheKey = methodCacheDetails.cacheKey;
+                    
+                    return cacheAttribute != null && !string.IsNullOrWhiteSpace(cacheKey);
+                }
+
                 cacheAttribute = null;
                 cacheKey = null;
 
@@ -611,7 +700,8 @@ namespace Apizr
                 // Are we asked to cache this method?
                 if (cacheAttribute == null || cacheAttribute.Mode == CacheMode.None)
                 {
-                    // No we're not!
+                    // No we're not! Save details for next calls and return False
+                    _cachingMethodsSet.Add(methodToCacheData, (cacheAttribute, cacheKey));
                     return false;
                 }
 
@@ -627,7 +717,10 @@ namespace Apizr
                                                x.CustomAttributes.All(y => !typeof(PropertyAttribute).GetTypeInfo().IsAssignableFrom(y.AttributeType.GetTypeInfo()))))
                 {
                     // No there isn't!
-                    cacheKey += ")";
+                    cacheKey += ")"; 
+
+                    // Save details for next calls and return False
+                    _cachingMethodsSet.Add(methodToCacheData, (cacheAttribute, cacheKey));
                     return true;
                 }
 
@@ -709,6 +802,9 @@ namespace Apizr
                 }
 
                 cacheKey += $"{string.Join(", ", parameters)})";
+
+                // Save details for next calls and return False
+                _cachingMethodsSet.Add(methodToCacheData, (cacheAttribute, cacheKey));
                 return true;
             }
         }
@@ -734,309 +830,11 @@ namespace Apizr
             return null;
         }
 
-        private MethodCacheDetails GetMethodToCacheData<TResult>(Expression restExpression)
-        {
-            var webApiType = typeof(TWebApi);
-            var methodCallExpression = GetMethodCallExpression<TResult>(restExpression);
-            return new MethodCacheDetails(webApiType, methodCallExpression.Method);
-        }
-
-        private static IEnumerable<ExtractedConstant> ExtractConstants(Expression expression)
-        {
-            if (expression == null)
-                yield break;
-
-            if (expression is ConstantExpression constantsExpression)
-                yield return new ExtractedConstant {Name = constantsExpression.Type.Name, Value = constantsExpression.Value};
-
-            else if (expression is LambdaExpression lambdaExpression)
-                foreach (var constant in ExtractConstants(lambdaExpression.Body))
-                    yield return constant;
-
-            else if (expression is UnaryExpression unaryExpression)
-                foreach (var constant in ExtractConstants(unaryExpression.Operand))
-                    yield return constant;
-
-            else if (expression is MethodCallExpression methodCallExpression)
-            {
-                foreach (var arg in methodCallExpression.Arguments)
-                    foreach (var constant in ExtractConstants(arg))
-                        yield return constant;
-                foreach (var constant in ExtractConstants(methodCallExpression.Object))
-                    yield return constant;
-            }
-            else if (expression is MemberExpression memberExpression)
-            {
-                foreach (var constants in ExtractConstants(memberExpression.Expression))
-                {
-                    object value = null;
-                    switch (memberExpression.Member)
-                    {
-                        case FieldInfo fieldInfo:
-                            value = fieldInfo.GetValue(constants.Value);
-                            break;
-                        case PropertyInfo propertyInfo:
-                            value = propertyInfo.GetValue(constants.Value);
-                            break;
-                    }
-
-                    yield return new ExtractedConstant { Name = memberExpression.Type.Name, Value = value };
-                }
-            }
-            else if (expression is InvocationExpression invocationExpression)
-            {
-                foreach (var constants in ExtractConstants(invocationExpression.Expression))
-                    yield return constants;
-            }
-            else if (expression is ParameterExpression parameterExpression)
-            {
-                if(parameterExpression.Type == typeof(CancellationToken))
-                    yield return new ExtractedConstant { Name = parameterExpression.Type.Name, Value = CancellationToken.None };
-                else
-                    yield return new ExtractedConstant { Name = parameterExpression.Type.Name };
-            }
-            else if (expression is ListInitExpression listInitExpression)
-            {
-                if (typeof(IDictionary).IsAssignableFrom(listInitExpression.Type))
-                {
-                    var parameters = new Dictionary<string, object>();
-                    foreach (var initializer in listInitExpression.Initializers)
-                    {
-                        string key = null;
-                        object value = null;
-                        foreach (var initializerArgument in initializer.Arguments)
-                        {
-                            foreach (var constant in ExtractConstants(initializerArgument))
-                            {
-                                if (string.IsNullOrWhiteSpace(key))
-                                    key = constant.Value.ToString();
-                                else
-                                    value = constant.Value;
-                            }
-                        }
-
-                        if (!string.IsNullOrWhiteSpace(key) && value != null)
-                            parameters.Add(key, value);
-                    }
-
-                    yield return new ExtractedConstant { Name = listInitExpression.Type.Name, Value = $"[{parameters.ToString(":", ", ")}]" };
-                }
-                else
-                    yield return new ExtractedConstant { Name = listInitExpression.Type.Name };
-            }
-            else if (expression is MemberInitExpression memberInitExpression)
-            {
-                
-                if (memberInitExpression.Bindings.Any())
-                {
-                    var parameters = new Dictionary<string, object>();
-                    foreach (var memberBinding in memberInitExpression.Bindings)
-                    {
-                        if (memberBinding is MemberAssignment assignment)
-                            foreach (var constant in ExtractConstants(assignment.Expression))
-                                parameters.Add(memberBinding.Member.Name, constant.Value);
-                        else if (memberBinding is MemberListBinding listBinding)
-                        {
-                            foreach (var initializer in listBinding.Initializers)
-                            {
-                                string key = null;
-                                object value = null;
-                                foreach (var initializerArgument in initializer.Arguments)
-                                {
-                                    foreach (var constant in ExtractConstants(initializerArgument))
-                                    {
-                                        if (string.IsNullOrWhiteSpace(key))
-                                            key = constant.Value.ToString();
-                                        else
-                                            value = constant.Value;
-                                    }
-                                }
-
-                                if (!string.IsNullOrWhiteSpace(key) && value != null)
-                                    parameters.Add(key, value);
-                            }
-                        }
-                    }
-                    yield return new ExtractedConstant { Name = memberInitExpression.Type.Name, Value = parameters.ToString(":", ", ") };
-                }
-                else
-                    foreach (var constants in ExtractConstants(memberInitExpression.NewExpression))
-                        yield return constants;
-            }
-            else if (expression is NewExpression newExpression)
-            {
-                var parameters = new Dictionary<string, object>();
-                var constructorParameters = newExpression.Constructor.GetParameters();
-                for (var i = 0; i < constructorParameters.Length; i++)
-                {
-                    if(newExpression.Arguments[i] is ConstantExpression constantExpression)
-                        parameters.Add(constructorParameters[i].Name, constantExpression.Value);
-                }
-                yield return new ExtractedConstant { Name = newExpression.Type.Name, Value = parameters.ToString(":", ", ") };
-            }
-            else
-                throw new NotImplementedException();
-        }
-
-        private string GetCacheKey<TResult>(Expression restExpression)
-        {
-            var methodCallExpression = GetMethodCallExpression<TResult>(restExpression);
-
-            var cacheKeyPrefix = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}";
-            if (!methodCallExpression.Arguments.Any())
-                return $"{cacheKeyPrefix}()";
-
-            var cacheAttributes = GetCacheAttribute<TResult>(restExpression);
-            if (string.IsNullOrWhiteSpace(cacheAttributes.ParameterName))
-                return $"{cacheKeyPrefix}()";
-
-            var parametersInfos = methodCallExpression.Method.GetParameters().Where(p =>
-                p.CustomAttributes.Any(a => a.AttributeType == typeof(PropertyAttribute))).ToList();
-
-            var extractedArguments = methodCallExpression.Arguments
-                .SelectMany(ExtractConstants)
-                .Where(x => x != null && x.Value is CancellationToken == false && parametersInfos.All(p => !string.Equals(p.Name, x.Name, StringComparison.CurrentCultureIgnoreCase)))
-                .ToList();
-
-            if (!extractedArguments.Any())
-                return $"{cacheKeyPrefix}()";
-
-            var primaryKeyName = cacheAttributes.ParameterName;
-            object primaryKeyValue;
-            var extractedArgument = extractedArguments[cacheAttributes.ParameterOrder];
-            var extractedArgumentValue = extractedArgument.Value;
-
-            if (extractedArgumentValue == null)
-                return $"{cacheKeyPrefix}()";
-
-            var isArgumentValuePrimitive = extractedArgumentValue.GetType().GetTypeInfo().IsPrimitive ||
-                                          extractedArgumentValue is decimal ||
-                                          extractedArgumentValue is string;
-
-            if (isArgumentValuePrimitive)
-            {
-                primaryKeyValue = extractedArgument.Value;
-            }
-            else
-            {
-                var primaryKeyValueField = extractedArgumentValue.GetType().GetRuntimeFields().Select((x, i) => new
-                {
-                    Index = i,
-                    Field = x
-                }).First(x => x.Index == cacheAttributes.ParameterOrder);
-
-                primaryKeyValue = primaryKeyValueField.Field.GetValue(extractedArgumentValue);
-            }
-
-            foreach (var argument in extractedArguments)
-            {
-                var primaryKeyCacheField = argument
-                    .Value
-                    .GetType()
-                    .GetRuntimeFields()
-                    .FirstOrDefault(x => x.Name.Equals(cacheAttributes.ParameterName));
-
-                if (primaryKeyCacheField != null)
-                {
-                    primaryKeyValue = primaryKeyCacheField.GetValue(argument.Value);
-                    break;
-                }
-            }
-
-            if (primaryKeyValue == null)
-                throw new InvalidOperationException($"No {nameof(CacheKeyAttribute)} primary key found for: " + cacheKeyPrefix);
-
-            // Simple param value OR complex type with overriden ToString
-            var value = primaryKeyValue.ToString();
-            if (!string.IsNullOrWhiteSpace(value) && value != primaryKeyValue.GetType().ToString())
-                return value.Contains(":")
-                    ? $"{cacheKeyPrefix}({value})"
-                    : $"{cacheKeyPrefix}({primaryKeyName}:{value})";
-            
-            // Dictionary param key values
-            if (primaryKeyValue is IDictionary objectDictionary)
-                return $"{cacheKeyPrefix}({objectDictionary.ToString(":", ", ")})";
-
-            // Complex type param values without override
-            var parameters = primaryKeyValue.ToString(":", ", ");
-            if (!string.IsNullOrWhiteSpace(parameters))
-                return $"{cacheKeyPrefix}({parameters})";
-
-            // Default caching without param
-            return $"{cacheKeyPrefix}()";
-        }
-
-        private MethodCacheAttributes GetCacheAttribute<TResult>(Expression expression)
-        {
-            lock (this)
-            {
-                var methodToCacheData = GetMethodToCacheData<TResult>(expression);
-                return _cacheableMethodsSet[methodToCacheData];
-            }
-        }
-
-        private MethodCallExpression GetMethodCallExpression(
-            Expression expression)
-        {
-            switch (expression)
-            {
-                case Expression<Func<TWebApi, Task>> executeApiMethod:
-                    return GetMethodCallExpression(executeApiMethod.Body);
-                case Expression<Func<TWebApi, IMappingHandler, Task>> executeApiMethod:
-                    return GetMethodCallExpression(executeApiMethod.Body);
-                case Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod:
-                    return GetMethodCallExpression(executeApiMethod.Body);
-                case Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task>> executeApiMethod:
-                    return GetMethodCallExpression(executeApiMethod.Body);
-                case InvocationExpression methodInvocationBody:
-                    {
-                        var methodCallExpression = (MethodCallExpression)methodInvocationBody.Expression;
-                        return methodCallExpression;
-                    }
-                case MethodCallExpression methodCallExpression:
-                    return methodCallExpression;
-                default:
-                    throw new NotImplementedException();
-            }
-        }
-
-        private MethodCallExpression GetMethodCallExpression<TResult>(
-            Expression expression)
-        {
-            switch (expression)
-            {
-                case Expression<Func<TWebApi, Task<TResult>>> executeApiMethod:
-                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
-                case Expression<Func<TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod:
-                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
-                case Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod:
-                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
-                case Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod:
-                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
-                case InvocationExpression methodInvocationBody:
-                {
-                    var methodCallExpression = (MethodCallExpression)methodInvocationBody.Expression;
-                    return methodCallExpression;
-                }
-                case MethodCallExpression methodCallExpression:
-                    return methodCallExpression;
-                default:
-                    throw new NotImplementedException();
-            }
-        }
-
-        private class ExtractedConstant
-        {
-            public object Value { get; set; }
-
-            public string Name { get; set; }
-        }
-
         #endregion
 
         #region Policing
 
-        private IAsyncPolicy<TResult> GetMethodPolicy<TResult>(MethodCallExpression methodCallExpression)
+        private IAsyncPolicy<TResult> GetMethodPolicy<TResult>(MethodCallExpression methodCallExpression, LogLevel logLevel)
         {
             if (methodCallExpression == null)
                 return null;
@@ -1081,7 +879,7 @@ namespace Apizr
             {
                 if (_policyRegistry.TryGet<IsPolicy>(registryKey, out var registeredPolicy))
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Found a policy with key {registryKey}");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Found a policy with key {registryKey}");
 
                     if (registeredPolicy is IAsyncPolicy<TResult> registeredPolicyWithResult)
                     {
@@ -1090,19 +888,19 @@ namespace Apizr
                         else
                             policy.WrapAsync(registeredPolicyWithResult);
 
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Policy with key {registryKey} will be applied");
+                        _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Policy with key {registryKey} will be applied");
                     }
                     else 
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy<TResult>)} type and will be ignored");
+                        _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy<TResult>)} type and will be ignored");
                 }
                 else 
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: No policy found for key {registryKey}");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: No policy found for key {registryKey}");
             }
 
             return policy;
         }
 
-        private IAsyncPolicy GetMethodPolicy(MethodCallExpression methodCallExpression)
+        private IAsyncPolicy GetMethodPolicy(MethodCallExpression methodCallExpression, LogLevel logLevel)
         {
             if (methodCallExpression == null)
                 return null;
@@ -1144,7 +942,7 @@ namespace Apizr
             {
                 if (_policyRegistry.TryGet<IsPolicy>(registryKey, out var registeredPolicy))
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Found a policy with key {registryKey}");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Found a policy with key {registryKey}");
 
                     if (registeredPolicy is IAsyncPolicy registeredPolicyWithoutResult)
                     {
@@ -1153,17 +951,251 @@ namespace Apizr
                         else
                             policy.WrapAsync(registeredPolicyWithoutResult);
 
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Policy with key {registryKey} will be applied");
+                        _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Policy with key {registryKey} will be applied");
                     }
                     else 
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy)} type and will be ignored");
+                        _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy)} type and will be ignored");
                 }
                 else 
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"{methodCallExpression.Method.Name}: No policy found for key {registryKey}");
+                    _apizrOptions.Logger.Log(logLevel, $"{methodCallExpression.Method.Name}: No policy found for key {registryKey}");
             }
 
             return policy;
         }
+
+        #endregion
+        
+        #region Details
+
+        private MethodDetails GetMethodDetails(Expression restExpression)
+        {
+            var webApiType = typeof(TWebApi);
+            var methodCallExpression = GetMethodCallExpression(restExpression);
+            return new MethodDetails(webApiType, methodCallExpression.Method);
+        }
+
+        private MethodDetails GetMethodDetails<TResult>(Expression restExpression)
+        {
+            var webApiType = typeof(TWebApi);
+            var methodCallExpression = GetMethodCallExpression<TResult>(restExpression);
+            return new MethodDetails(webApiType, methodCallExpression.Method);
+        }
+
+        private static IEnumerable<ExtractedConstant> ExtractConstants(Expression expression)
+        {
+            if (expression == null)
+                yield break;
+
+            if (expression is ConstantExpression constantsExpression)
+                yield return new ExtractedConstant { Name = constantsExpression.Type.Name, Value = constantsExpression.Value };
+
+            else if (expression is LambdaExpression lambdaExpression)
+                foreach (var constant in ExtractConstants(lambdaExpression.Body))
+                    yield return constant;
+
+            else if (expression is UnaryExpression unaryExpression)
+                foreach (var constant in ExtractConstants(unaryExpression.Operand))
+                    yield return constant;
+
+            else if (expression is MethodCallExpression methodCallExpression)
+            {
+                foreach (var arg in methodCallExpression.Arguments)
+                    foreach (var constant in ExtractConstants(arg))
+                        yield return constant;
+                foreach (var constant in ExtractConstants(methodCallExpression.Object))
+                    yield return constant;
+            }
+            else if (expression is MemberExpression memberExpression)
+            {
+                foreach (var constants in ExtractConstants(memberExpression.Expression))
+                {
+                    object value = null;
+                    switch (memberExpression.Member)
+                    {
+                        case FieldInfo fieldInfo:
+                            value = fieldInfo.GetValue(constants.Value);
+                            break;
+                        case PropertyInfo propertyInfo:
+                            value = propertyInfo.GetValue(constants.Value);
+                            break;
+                    }
+
+                    yield return new ExtractedConstant { Name = memberExpression.Type.Name, Value = value };
+                }
+            }
+            else if (expression is InvocationExpression invocationExpression)
+            {
+                foreach (var constants in ExtractConstants(invocationExpression.Expression))
+                    yield return constants;
+            }
+            else if (expression is ParameterExpression parameterExpression)
+            {
+                if (parameterExpression.Type == typeof(CancellationToken))
+                    yield return new ExtractedConstant { Name = parameterExpression.Type.Name, Value = CancellationToken.None };
+                else
+                    yield return new ExtractedConstant { Name = parameterExpression.Type.Name };
+            }
+            else if (expression is ListInitExpression listInitExpression)
+            {
+                if (typeof(IDictionary).IsAssignableFrom(listInitExpression.Type))
+                {
+                    var parameters = new Dictionary<string, object>();
+                    foreach (var initializer in listInitExpression.Initializers)
+                    {
+                        string key = null;
+                        object value = null;
+                        foreach (var initializerArgument in initializer.Arguments)
+                        {
+                            foreach (var constant in ExtractConstants(initializerArgument))
+                            {
+                                if (string.IsNullOrWhiteSpace(key))
+                                    key = constant.Value.ToString();
+                                else
+                                    value = constant.Value;
+                            }
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(key) && value != null)
+                            parameters.Add(key, value);
+                    }
+
+                    yield return new ExtractedConstant { Name = listInitExpression.Type.Name, Value = $"[{parameters.ToString(":", ", ")}]" };
+                }
+                else
+                    yield return new ExtractedConstant { Name = listInitExpression.Type.Name };
+            }
+            else if (expression is MemberInitExpression memberInitExpression)
+            {
+
+                if (memberInitExpression.Bindings.Any())
+                {
+                    var parameters = new Dictionary<string, object>();
+                    foreach (var memberBinding in memberInitExpression.Bindings)
+                    {
+                        if (memberBinding is MemberAssignment assignment)
+                            foreach (var constant in ExtractConstants(assignment.Expression))
+                                parameters.Add(memberBinding.Member.Name, constant.Value);
+                        else if (memberBinding is MemberListBinding listBinding)
+                        {
+                            foreach (var initializer in listBinding.Initializers)
+                            {
+                                string key = null;
+                                object value = null;
+                                foreach (var initializerArgument in initializer.Arguments)
+                                {
+                                    foreach (var constant in ExtractConstants(initializerArgument))
+                                    {
+                                        if (string.IsNullOrWhiteSpace(key))
+                                            key = constant.Value.ToString();
+                                        else
+                                            value = constant.Value;
+                                    }
+                                }
+
+                                if (!string.IsNullOrWhiteSpace(key) && value != null)
+                                    parameters.Add(key, value);
+                            }
+                        }
+                    }
+                    yield return new ExtractedConstant { Name = memberInitExpression.Type.Name, Value = parameters.ToString(":", ", ") };
+                }
+                else
+                    foreach (var constants in ExtractConstants(memberInitExpression.NewExpression))
+                        yield return constants;
+            }
+            else if (expression is NewExpression newExpression)
+            {
+                var parameters = new Dictionary<string, object>();
+                var constructorParameters = newExpression.Constructor.GetParameters();
+                for (var i = 0; i < constructorParameters.Length; i++)
+                {
+                    if (newExpression.Arguments[i] is ConstantExpression constantExpression)
+                        parameters.Add(constructorParameters[i].Name, constantExpression.Value);
+                }
+                yield return new ExtractedConstant { Name = newExpression.Type.Name, Value = parameters.ToString(":", ", ") };
+            }
+            else
+                throw new NotImplementedException();
+        }
+
+        private MethodCallExpression GetMethodCallExpression(
+            Expression expression)
+        {
+            switch (expression)
+            {
+                case Expression<Func<TWebApi, Task>> executeApiMethod:
+                    return GetMethodCallExpression(executeApiMethod.Body);
+                case Expression<Func<TWebApi, IMappingHandler, Task>> executeApiMethod:
+                    return GetMethodCallExpression(executeApiMethod.Body);
+                case Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod:
+                    return GetMethodCallExpression(executeApiMethod.Body);
+                case Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task>> executeApiMethod:
+                    return GetMethodCallExpression(executeApiMethod.Body);
+                case InvocationExpression methodInvocationBody:
+                    {
+                        var methodCallExpression = (MethodCallExpression)methodInvocationBody.Expression;
+                        return methodCallExpression;
+                    }
+                case MethodCallExpression methodCallExpression:
+                    return methodCallExpression;
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
+        private MethodCallExpression GetMethodCallExpression<TResult>(
+            Expression expression)
+        {
+            switch (expression)
+            {
+                case Expression<Func<TWebApi, Task<TResult>>> executeApiMethod:
+                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
+                case Expression<Func<TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod:
+                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
+                case Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod:
+                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
+                case Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod:
+                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
+                case InvocationExpression methodInvocationBody:
+                    {
+                        var methodCallExpression = (MethodCallExpression)methodInvocationBody.Expression;
+                        return methodCallExpression;
+                    }
+                case MethodCallExpression methodCallExpression:
+                    return methodCallExpression;
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
+        private class ExtractedConstant
+        {
+            public object Value { get; set; }
+
+            public string Name { get; set; }
+        }
+
+        class MethodDetails
+        {
+            public MethodDetails(Type apiInterfaceType, MethodInfo methodInfo)
+            {
+                ApiInterfaceType = apiInterfaceType;
+                MethodInfo = methodInfo;
+            }
+
+            public Type ApiInterfaceType { get; }
+
+            public MethodInfo MethodInfo { get; }
+
+            public override int GetHashCode() => ApiInterfaceType.GetHashCode() * 23 * MethodInfo.GetHashCode() * 23 * 29;
+
+            public override bool Equals(object obj)
+            {
+                return obj is MethodDetails methodCacheDetails &&
+                       methodCacheDetails.ApiInterfaceType == ApiInterfaceType &&
+                       methodCacheDetails.MethodInfo.Equals(MethodInfo);
+            }
+        } 
 
         #endregion
     }

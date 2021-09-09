@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Apizr.Caching
+namespace Apizr.Caching.Attributes
 {
     /// <summary>
     /// Tells Apizr to cache all methods returning result when decorating an interface or a specific one when decorating a method

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Apizr.Caching
+namespace Apizr.Caching.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class CacheReadAttribute : CacheAttributeBase

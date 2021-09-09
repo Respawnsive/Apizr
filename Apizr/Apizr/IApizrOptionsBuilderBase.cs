@@ -48,7 +48,7 @@ namespace Apizr
         TApizrOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler);
 
         /// <summary>
-        /// Configure your logging layer
+        /// Configure logging level for the api
         /// </summary>
         /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: All)</param>
         /// <param name="logLevel">Log level to apply while writing (default: Information)</param>

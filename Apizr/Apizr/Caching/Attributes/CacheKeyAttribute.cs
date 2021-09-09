@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Apizr.Caching
+namespace Apizr.Caching.Attributes
 {
     /// <summary>
     /// Tells Apizr the key to cache value at

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Apizr.Caching
+namespace Apizr.Caching.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class CacheReadAllAttribute : CacheAttributeBase

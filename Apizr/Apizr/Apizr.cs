@@ -7,6 +7,7 @@ using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Extending;
 using Apizr.Logging;
+using Apizr.Logging.Attributes;
 using Apizr.Mapping;
 using Apizr.Policing;
 using Apizr.Requesting;

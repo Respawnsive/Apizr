@@ -178,25 +178,22 @@ namespace Apizr
 
         public IApizrOptionsBuilder WithLogging(HttpMessageParts trafficVerbosity = HttpMessageParts.All,
             LogLevel logLevel = LogLevel.Information)
-            => WithLogging(() => new DebugLoggerFactory(logLevel), () => trafficVerbosity, () => logLevel);
+            => WithLogging(() => trafficVerbosity, () => logLevel);
 
         public IApizrOptionsBuilder WithLogging(Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel> logLevelFactory)
-            => WithLogging(() => new DebugLoggerFactory(logLevelFactory.Invoke()), trafficVerbosityFactory, logLevelFactory);
-
-        public IApizrOptionsBuilder WithLogging(ILoggerFactory loggerFactory,
-            HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel logLevel = LogLevel.Information)
-            => WithLogging(() => loggerFactory, () => trafficVerbosity, () => logLevel);
-
-        public IApizrOptionsBuilder WithLogging(Func<ILoggerFactory> loggerFactory,
-            HttpMessageParts trafficVerbosity = HttpMessageParts.All,
-            LogLevel logLevel = LogLevel.Information)
-            => WithLogging(loggerFactory, () => trafficVerbosity, () => logLevel);
-
-        public IApizrOptionsBuilder WithLogging(Func<ILoggerFactory> loggerFactory, Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel> logLevelFactory)
         {
-            Options.LoggerFactory = loggerFactory;
             Options.TrafficVerbosityFactory = trafficVerbosityFactory;
             Options.LogLevelFactory = logLevelFactory;
+
+            return this;
+        }
+
+        public IApizrOptionsBuilder WithLoggerFactory(ILoggerFactory loggerFactory)
+            => WithLoggerFactory(() => loggerFactory);
+
+        public IApizrOptionsBuilder WithLoggerFactory(Func<ILoggerFactory> loggerFactory)
+        {
+            Options.LoggerFactory = loggerFactory;
 
             return this;
         }

@@ -125,7 +125,7 @@ namespace Apizr.Sample.Console
                 _reqResManager = Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(registry)
                     .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
                     .WithPriorityManagement()
-                    .WithLogging(() => lazyLoggerFactory.Value));
+                    .WithLoggerFactory(() => lazyLoggerFactory.Value));
 
                 _userManager = Apizr.CrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder
                     .WithBaseAddress("https://reqres.in/api/users")

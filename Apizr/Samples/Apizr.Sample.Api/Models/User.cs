@@ -1,6 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 using Apizr.Caching;
+using Apizr.Caching.Attributes;
 using Apizr.Logging;
+using Apizr.Logging.Attributes;
 using Apizr.Requesting;
 using HttpTracer;
 

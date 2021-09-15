@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using Apizr.Caching;
 using Apizr.Connecting;
+using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Requesting;
-using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Refit;
@@ -15,6 +15,7 @@ namespace Apizr
     public class ApizrExtendedOptions : ApizrOptionsBase, IApizrExtendedOptions
     {
         public ApizrExtendedOptions(Type webApiType, Type apizrManagerType, Uri baseAddress,
+            HttpTracerMode? httpTracerMode,
             HttpMessageParts? httpTracerVerbosity,
             LogLevel? logLevel,
             string[] assemblyPolicyRegistryKeys,
@@ -24,6 +25,7 @@ namespace Apizr
         {
             ApizrManagerType = apizrManagerType;
             BaseAddressFactory = _ => baseAddress;
+            HttpTracerModeFactory = _ => httpTracerMode ?? HttpTracerMode.Everything;
             TrafficVerbosityFactory = _ => httpTracerVerbosity ?? HttpMessageParts.None;
             LogLevelFactory = _ => logLevel ?? LogLevel.None;
             HttpClientHandlerFactory = _ => new HttpClientHandler();
@@ -48,6 +50,13 @@ namespace Apizr
         {
             get => _baseAddressFactory;
             set => _baseAddressFactory = serviceProvider => BaseAddress = value.Invoke(serviceProvider);
+        }
+
+        private Func<IServiceProvider, HttpTracerMode> _httpTracerModeFactory;
+        public Func<IServiceProvider, HttpTracerMode> HttpTracerModeFactory
+        {
+            get => _httpTracerModeFactory;
+            set => _httpTracerModeFactory = serviceProvider => HttpTracerMode = value.Invoke(serviceProvider);
         }
 
         private Func<IServiceProvider, HttpMessageParts> _trafficVerbosityFactory;

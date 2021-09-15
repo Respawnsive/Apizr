@@ -11,7 +11,6 @@ using Apizr.Logging.Attributes;
 using Apizr.Mapping;
 using Apizr.Policing;
 using Apizr.Requesting;
-using HttpTracer;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Registry;
@@ -166,11 +165,11 @@ namespace Apizr
             {
                 var httpClientHandler = apizrOptions.HttpClientHandlerFactory.Invoke();
                 var logger = apizrOptions.LoggerFactory.Invoke().CreateLogger(apizrOptions.WebApiType.GetFriendlyName());
-
                 apizrOptions.LogLevelFactory.Invoke();
-                var handlerBuilder = new HttpHandlerBuilder(httpClientHandler, new HttpTracerLogWrapper(logger, apizrOptions));
-                var httpTracerVerbosity = apizrOptions.TrafficVerbosityFactory.Invoke();
-                handlerBuilder.HttpTracerHandler.Verbosity = httpTracerVerbosity;
+                apizrOptions.TrafficVerbosityFactory.Invoke();
+                apizrOptions.HttpTracerModeFactory.Invoke();
+
+                var handlerBuilder = new ExtendedHttpHandlerBuilder(httpClientHandler, logger, apizrOptions);
 
                 if (apizrOptions.PolicyRegistryKeys != null && apizrOptions.PolicyRegistryKeys.Any())
                 {
@@ -179,29 +178,29 @@ namespace Apizr
                     {
                         if (policyRegistry.TryGet<IsPolicy>(policyRegistryKey, out var registeredPolicy))
                         {
-                            logger.LogTrace($"Global policies: Found a policy with key {policyRegistryKey}");
+                            logger.Log(apizrOptions.LogLevel, $"Global policies: Found a policy with key {policyRegistryKey}");
                             if (registeredPolicy is IAsyncPolicy<HttpResponseMessage> registeredPolicyForHttpResponseMessage)
                             {
                                 var policySelector =
                                     new Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>>(
                                         request =>
                                         {
-                                            var pollyContext = new Context().WithLogger(logger);
+                                            var pollyContext = new Context().WithLogger(logger, apizrOptions.LogLevel, apizrOptions.TrafficVerbosity, apizrOptions.HttpTracerMode);
                                             request.SetPolicyExecutionContext(pollyContext);
                                             return registeredPolicyForHttpResponseMessage;
                                         });
                                 handlerBuilder.AddHandler(new PolicyHttpMessageHandler(policySelector));
 
-                                logger.LogTrace($"Global policies: Policy with key {policyRegistryKey} will be applied");
+                                logger.Log(apizrOptions.LogLevel, $"Global policies: Policy with key {policyRegistryKey} will be applied");
                             }
                             else
                             {
-                                logger.LogTrace($"Global policies: Policy with key {policyRegistryKey} is not of {typeof(IAsyncPolicy<HttpResponseMessage>)} type and will be ignored");
+                                logger.Log(apizrOptions.LogLevel, $"Global policies: Policy with key {policyRegistryKey} is not of {typeof(IAsyncPolicy<HttpResponseMessage>)} type and will be ignored");
                             }
                         }
                         else
                         {
-                            logger.LogTrace($"Global policies: No policy found for key {policyRegistryKey}");
+                            logger.Log(apizrOptions.LogLevel, $"Global policies: No policy found for key {policyRegistryKey}");
                         }
                     }
                 }
@@ -250,6 +249,7 @@ namespace Apizr
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 
             var builder = new ApizrOptionsBuilder(new ApizrOptions(webApiType, baseAddress,
+                logAttribute?.HttpTracerMode,
                 logAttribute?.TrafficVerbosity, logAttribute?.LogLevel,
                 assemblyPolicyAttribute?.RegistryKeys, webApiPolicyAttribute?.RegistryKeys));
 

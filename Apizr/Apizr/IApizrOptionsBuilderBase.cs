@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using HttpTracer;
+using Apizr.Logging;
 using Microsoft.Extensions.Logging;
 using Refit;
 
@@ -50,10 +50,11 @@ namespace Apizr
         /// <summary>
         /// Configure logging level for the api
         /// </summary>
+        /// <param name="httpTracerMode"></param>
         /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: All)</param>
         /// <param name="logLevel">Log level to apply while writing (default: Information)</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithLogging(HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel logLevel = LogLevel.Information);
+        TApizrOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything, HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel logLevel = LogLevel.Information);
 
         /// <summary>
         /// Provide some Refit specific settings

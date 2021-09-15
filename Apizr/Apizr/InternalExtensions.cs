@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
-using HttpTracer;
+using Apizr.Logging;
 using Microsoft.Extensions.Logging;
 
 [assembly: InternalsVisibleTo("Apizr.Extensions.Microsoft.DependencyInjection"), 
@@ -16,7 +16,7 @@ namespace Apizr
             _primaryHandlerFactory = primaryHandlerFactory;
         }
 
-        internal static HttpMessageHandler GetPrimaryHttpMessageHandler(this HttpHandlerBuilder httpHandlerBuilder,
+        internal static HttpMessageHandler GetPrimaryHttpMessageHandler(this ExtendedHttpHandlerBuilder httpHandlerBuilder,
             ILogger logger)
         {
             var innerHandler = httpHandlerBuilder.Build();

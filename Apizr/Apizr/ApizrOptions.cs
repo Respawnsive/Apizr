@@ -5,7 +5,6 @@ using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
-using HttpTracer;
 using Microsoft.Extensions.Logging;
 using Polly.Registry;
 using Refit;
@@ -16,6 +15,7 @@ namespace Apizr
     {
 
         public ApizrOptions(Type webApiType, Uri baseAddress,
+            HttpTracerMode? httpTracerMode,
             HttpMessageParts? trafficVerbosity,
             LogLevel? logLevel,
             string[] assemblyPolicyRegistryKeys,
@@ -23,6 +23,7 @@ namespace Apizr
             assemblyPolicyRegistryKeys, webApiPolicyRegistryKeys)
         {
             BaseAddressFactory = () => baseAddress;
+            HttpTracerModeFactory = () => httpTracerMode ?? HttpTracerMode.Everything;
             TrafficVerbosityFactory = () => trafficVerbosity ?? HttpMessageParts.None;
             LogLevelFactory = () => logLevel ?? LogLevel.None;
             LoggerFactory = () => new DebugLoggerFactory(LogLevel.Information);
@@ -40,6 +41,13 @@ namespace Apizr
         {
             get => _baseAddressFactory;
             set => _baseAddressFactory = () => BaseAddress = value.Invoke();
+        }
+
+        private Func<HttpTracerMode> _httpTracerModeFactory;
+        public Func<HttpTracerMode> HttpTracerModeFactory
+        {
+            get => _httpTracerModeFactory;
+            set => _httpTracerModeFactory = () => HttpTracerMode = value.Invoke();
         }
 
         private Func<HttpMessageParts> _trafficVerbosityFactory;
@@ -91,6 +99,7 @@ namespace Apizr
 
         public Type WebApiType => _apizrOptions.WebApiType;
         public Uri BaseAddress => _apizrOptions.BaseAddress;
+        public HttpTracerMode HttpTracerMode => _apizrOptions.HttpTracerMode;
         public HttpMessageParts TrafficVerbosity => _apizrOptions.TrafficVerbosity;
         public LogLevel LogLevel => _apizrOptions.LogLevel;
         public ILogger Logger => _logger;

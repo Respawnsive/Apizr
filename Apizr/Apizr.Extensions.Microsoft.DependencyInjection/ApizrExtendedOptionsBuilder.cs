@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Connecting;
+using Apizr.Logging;
 using Apizr.Mapping;
-using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Refit;
@@ -117,14 +117,16 @@ namespace Apizr
         public IApizrExtendedOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler)
             => AddDelegatingHandler(_ => delegatingHandler);
 
-        public IApizrExtendedOptionsBuilder WithLogging(HttpMessageParts trafficVerbosity = HttpMessageParts.All,
+        public IApizrExtendedOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
+            HttpMessageParts trafficVerbosity = HttpMessageParts.All,
             LogLevel logLevel = LogLevel.Information)
-            => WithLogging(_ => trafficVerbosity, _ => logLevel);
+            => WithLogging(_ => httpTracerMode, _ => trafficVerbosity, _ => logLevel);
 
-        public IApizrExtendedOptionsBuilder WithLogging(
+        public IApizrExtendedOptionsBuilder WithLogging(Func<IServiceProvider, HttpTracerMode> httpTracerModeFactory,
             Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory,
             Func<IServiceProvider, LogLevel> logLevelFactory)
         {
+            Options.HttpTracerModeFactory = httpTracerModeFactory;
             Options.TrafficVerbosityFactory = trafficVerbosityFactory;
             Options.LogLevelFactory = logLevelFactory;
 

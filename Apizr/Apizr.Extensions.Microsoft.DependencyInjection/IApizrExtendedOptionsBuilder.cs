@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Connecting;
+using Apizr.Logging;
 using Apizr.Mapping;
-using HttpTracer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Refit;
@@ -136,10 +136,11 @@ namespace Apizr
         /// <summary>
         /// Define http traffic tracing verbosity and log level (could be defined with TraceAttribute)
         /// </summary>
+        /// <param name="httpTracerModeFactory">Http traffic tracing mode factory</param>
         /// <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
         /// <param name="logLevelFactory">Log level factory</param>
         /// <returns></returns>
-        IApizrExtendedOptionsBuilder WithLogging(Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory, Func<IServiceProvider, LogLevel> logLevelFactory);
+        IApizrExtendedOptionsBuilder WithLogging(Func<IServiceProvider, HttpTracerMode> httpTracerModeFactory, Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory, Func<IServiceProvider, LogLevel> logLevelFactory);
 
         /// <summary>
         /// Provide a mapping handler to auto map entities during mediation

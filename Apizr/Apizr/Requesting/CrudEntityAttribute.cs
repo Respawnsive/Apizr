@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Apizr.Caching;
 using Apizr.Extending;
 
 namespace Apizr.Requesting

@@ -1,5 +1,4 @@
 ﻿using System;
-using HttpTracer;
 using Microsoft.Extensions.Logging;
 
 namespace Apizr.Logging.Attributes
@@ -29,10 +28,30 @@ namespace Apizr.Logging.Attributes
         /// <summary>
         /// Trace All http traffic and log Apizr execution steps at specified log level
         /// </summary>
+        /// <param name="httpTracerMode">Http traffic tracing mode (default: Everything)</param>
+        protected LogAttributeBase(HttpTracerMode httpTracerMode)
+        {
+            HttpTracerMode = httpTracerMode;
+        }
+
+        /// <summary>
+        /// Trace All http traffic and log Apizr execution steps at specified log level
+        /// </summary>
         /// <param name="logLevel">Log level to apply while writing (default: Trace)</param>
         protected LogAttributeBase(LogLevel logLevel)
         {
             LogLevel = logLevel;
+        }
+
+        /// <summary>
+        /// Trace All http traffic and log Apizr execution steps at specified log level
+        /// </summary>
+        /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: all)</param>
+        /// <param name="httpTracerMode">Http traffic tracing mode (default: Everything)</param>
+        protected LogAttributeBase(HttpMessageParts trafficVerbosity, HttpTracerMode httpTracerMode)
+        {
+            TrafficVerbosity = trafficVerbosity;
+            HttpTracerMode = httpTracerMode;
         }
 
         /// <summary>
@@ -45,6 +64,35 @@ namespace Apizr.Logging.Attributes
             TrafficVerbosity = trafficVerbosity;
             LogLevel = logLevel;
         }
+
+        /// <summary>
+        /// Trace All http traffic and log Apizr execution steps at specified log level
+        /// </summary>
+        /// <param name="httpTracerMode">Http traffic tracing mode (default: Everything)</param>
+        /// <param name="logLevel">Log level to apply while writing (default: Trace)</param>
+        protected LogAttributeBase(HttpTracerMode httpTracerMode, LogLevel logLevel)
+        {
+            HttpTracerMode = httpTracerMode;
+            LogLevel = logLevel;
+        }
+
+        /// <summary>
+        /// Trace All http traffic and log Apizr execution steps at specified log level
+        /// </summary>
+        /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: all)</param>
+        /// <param name="httpTracerMode">Http traffic tracing mode (default: Everything)</param>
+        /// <param name="logLevel">Log level to apply while writing (default: Trace)</param>
+        protected LogAttributeBase(HttpMessageParts trafficVerbosity, HttpTracerMode httpTracerMode, LogLevel logLevel)
+        {
+            TrafficVerbosity = trafficVerbosity;
+            HttpTracerMode = httpTracerMode;
+            LogLevel = logLevel;
+        }
+
+        /// <summary>
+        /// Http traffic tracing mode (default: Everything)
+        /// </summary>
+        public HttpTracerMode HttpTracerMode { get; set; } = HttpTracerMode.Everything;
 
         /// <summary>
         /// Http traffic tracing verbosity (default: all)

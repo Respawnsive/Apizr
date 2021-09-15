@@ -6,8 +6,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Connecting;
+using Apizr.Logging;
 using Apizr.Mapping;
-using HttpTracer;
 using Microsoft.Extensions.Logging;
 using Polly.Registry;
 
@@ -164,10 +164,11 @@ namespace Apizr
         /// <summary>
         /// Configure logging level for the api
         /// </summary>
+        /// <param name="httpTracerModeFactory">Http traffic tracing mode</param>
         /// <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
         /// <param name="logLevelFactory">Log level factory</param>
         /// <returns></returns>
-        IApizrOptionsBuilder WithLogging(Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel> logLevelFactory);
+        IApizrOptionsBuilder WithLogging(Func<HttpTracerMode> httpTracerModeFactory, Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel> logLevelFactory);
 
         /// <summary>
         /// Provide a logger factory

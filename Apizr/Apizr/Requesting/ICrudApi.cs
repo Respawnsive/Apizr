@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Apizr.Caching;
 using Apizr.Caching.Attributes;
 using Refit;
 

@@ -8,7 +8,6 @@ using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Policing;
 using Apizr.Sample.Api.Models;
-using HttpTracer;
 using Microsoft.Extensions.Logging;
 using Refit;
 
@@ -17,7 +16,7 @@ using Refit;
 //[assembly:Log]
 namespace Apizr.Sample.Api
 {
-    [WebApi("https://reqres.in/api"), Log(HttpMessageParts.None, LogLevel.None)]
+    [WebApi("https://reqres.in/api")]//, Log(HttpMessageParts.None, LogLevel.None)]
     public interface IReqResService
     {
         [Get("/users")]

@@ -4,7 +4,6 @@ using Apizr.Caching.Attributes;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Requesting;
-using HttpTracer;
 
 namespace Apizr.Sample.Api.Models
 {

@@ -1,5 +1,5 @@
 ﻿using System;
-using HttpTracer;
+using Apizr.Logging;
 using Microsoft.Extensions.Logging;
 using Refit;
 
@@ -19,6 +19,11 @@ namespace Apizr
         /// Base address
         /// </summary>
         Uri BaseAddress { get; }
+
+        /// <summary>
+        /// Http traffic tracing mode
+        /// </summary>
+        HttpTracerMode HttpTracerMode { get; }
 
         /// <summary>
         /// Http traffic tracing verbosity

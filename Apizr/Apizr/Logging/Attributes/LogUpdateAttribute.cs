@@ -1,5 +1,4 @@
 ﻿using System;
-using HttpTracer;
 using Microsoft.Extensions.Logging;
 
 namespace Apizr.Logging.Attributes
@@ -18,11 +17,27 @@ namespace Apizr.Logging.Attributes
         {
         }
 
+        public LogUpdateAttribute(HttpTracerMode httpTracerMode) : base(httpTracerMode)
+        {
+        }
+
         public LogUpdateAttribute(LogLevel logLevel) : base(logLevel)
         {
         }
 
+        public LogUpdateAttribute(HttpMessageParts trafficVerbosity, HttpTracerMode httpTracerMode) : base(trafficVerbosity, httpTracerMode)
+        {
+        }
+
         public LogUpdateAttribute(HttpMessageParts trafficVerbosity, LogLevel logLevel) : base(trafficVerbosity, logLevel)
+        {
+        }
+
+        public LogUpdateAttribute(HttpTracerMode httpTracerMode, LogLevel logLevel) : base(httpTracerMode, logLevel)
+        {
+        }
+
+        public LogUpdateAttribute(HttpMessageParts trafficVerbosity, HttpTracerMode httpTracerMode, LogLevel logLevel) : base(trafficVerbosity, httpTracerMode, logLevel)
         {
         }
     }

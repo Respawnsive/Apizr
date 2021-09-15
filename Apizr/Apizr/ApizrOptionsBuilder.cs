@@ -7,7 +7,6 @@ using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
-using HttpTracer;
 using Microsoft.Extensions.Logging;
 using Polly.Registry;
 using Refit;
@@ -176,12 +175,15 @@ namespace Apizr
             return this;
         }
 
-        public IApizrOptionsBuilder WithLogging(HttpMessageParts trafficVerbosity = HttpMessageParts.All,
+        public IApizrOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
+            HttpMessageParts trafficVerbosity = HttpMessageParts.All,
             LogLevel logLevel = LogLevel.Information)
-            => WithLogging(() => trafficVerbosity, () => logLevel);
+            => WithLogging(() => httpTracerMode, () => trafficVerbosity, () => logLevel);
 
-        public IApizrOptionsBuilder WithLogging(Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel> logLevelFactory)
+        public IApizrOptionsBuilder WithLogging(Func<HttpTracerMode> httpTracerModeFactory,
+            Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel> logLevelFactory)
         {
+            Options.HttpTracerModeFactory = httpTracerModeFactory;
             Options.TrafficVerbosityFactory = trafficVerbosityFactory;
             Options.LogLevelFactory = logLevelFactory;
 

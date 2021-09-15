@@ -6,7 +6,6 @@ using Apizr.Caching;
 using Apizr.Caching.Attributes;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
-using HttpTracer;
 using Refit;
 
 namespace Apizr.Sample.Api

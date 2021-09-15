@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using Apizr.Caching;
 using Apizr.Connecting;
+using Apizr.Logging;
 using Apizr.Mapping;
-using HttpTracer;
 using Microsoft.Extensions.Logging;
 using Polly.Registry;
 using Refit;
@@ -20,6 +20,11 @@ namespace Apizr
         /// Base address factory
         /// </summary>
         Func<Uri> BaseAddressFactory { get; }
+
+        /// <summary>
+        /// Http traffic tracing mode factory
+        /// </summary>
+        Func<HttpTracerMode> HttpTracerModeFactory { get; }
 
         /// <summary>
         /// Http traffic tracing verbosity factory

@@ -157,12 +157,15 @@ namespace Apizr.Sample.Console
                             //services.AddRefitClient<IReqResService>();
                             // Manual registration
                             services.AddApizrFor<IReqResService>(optionsBuilder =>
-                                optionsBuilder.WithPriorityManagement()
+                                optionsBuilder
+                                    .WithPriorityManagement()
                                     .WithHttpClientHandler(new HttpClientHandler
                                     {
                                         AutomaticDecompression = DecompressionMethods.All,
                                         CookieContainer = CookieContainer
-                                    }).WithInMemoryCacheHandler()//.WithCacheHandler<AkavacheCacheHandler>()
+                                    })
+                                    .WithInMemoryCacheHandler()
+                                    //.WithCacheHandler<AkavacheCacheHandler>()
                                     .WithLogging());
 
                             //// Auto assembly detection and registration

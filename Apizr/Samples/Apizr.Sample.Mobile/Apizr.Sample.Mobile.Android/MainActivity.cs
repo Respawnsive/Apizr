@@ -2,8 +2,8 @@
 using Android.Content.PM;
 
 [assembly: Shiny.ShinyApplication(
-    ShinyStartupTypeName = "global::Apizr.Sample.Mobile.Startup",
-    XamarinFormsAppTypeName = "global::Apizr.Sample.Mobile.App"
+    ShinyStartupTypeName = "Apizr.Sample.Mobile.Startup",
+    XamarinFormsAppTypeName = "Apizr.Sample.Mobile.App"
 )]
 namespace Apizr.Sample.Mobile.Droid
 {

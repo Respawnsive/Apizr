@@ -8,7 +8,7 @@ namespace Apizr.Connecting
 
         public DefaultConnectivityHandler()
         {
-            
+            _connectivityChecker = null;
         }
 
         public DefaultConnectivityHandler(Func<bool> connectivityChecker)

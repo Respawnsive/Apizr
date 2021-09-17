@@ -36,9 +36,9 @@ namespace Apizr.Sample.Mobile.ViewModels
         private readonly IMediator _mediator;
         private readonly ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> _userOptionalMediator;
 
-        public MainPageViewModel(ILogger logger)//IApizrManager<IReqResService> reqResManager)//, IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> userCrudManager, IApizrManager<IHttpBinService> httpBinManager, IApizrManager<ICrudApi<UserDetails, int, IEnumerable<UserDetails>, IDictionary<string, object>>> userDetailsCrudManager, IMediator mediator, ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> userOptionalMediator)
+        public MainPageViewModel(IApizrManager<IReqResService> reqResManager)//, IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> userCrudManager, IApizrManager<IHttpBinService> httpBinManager, IApizrManager<ICrudApi<UserDetails, int, IEnumerable<UserDetails>, IDictionary<string, object>>> userDetailsCrudManager, IMediator mediator, ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> userOptionalMediator)
         {
-            //_reqResManager = reqResManager;
+            _reqResManager = reqResManager;
             //_userCrudManager = userCrudManager;
             //_httpBinManager = httpBinManager;
             //_userDetailsCrudManager = userDetailsCrudManager;
@@ -84,16 +84,16 @@ namespace Apizr.Sample.Mobile.ViewModels
             try
             {
                 // This is a manually defined web api call into IReqResService (classic actually)
-                //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.Speculative));
-                //users = userList?.Data;
+                var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+                users = userList?.Data;
 
                 //var userList2 = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
 
                 //var userList3 = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.Background));
 
                 // This is the Crud way, with or without Crud attribute auto registration, but without mediation
-                var pagedUsers = await _userCrudManager.ExecuteAsync((ct, api) => api.ReadAll((int)Priority.UserInitiated, ct), CancellationToken.None);
-                users = pagedUsers?.Data?.ToList();
+                //var pagedUsers = await _userCrudManager.ExecuteAsync((ct, api) => api.ReadAll((int)Priority.UserInitiated, ct), CancellationToken.None);
+                //users = pagedUsers?.Data?.ToList();
 
                 // The same as before but with auto mediation handling
                 //var pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>(), CancellationToken.None);
@@ -235,7 +235,7 @@ namespace Apizr.Sample.Mobile.ViewModels
         {
             base.OnAppearing();
 
-            //GetUsersCommand.Execute(null);
+            GetUsersCommand.Execute(null);
         }
 
         #endregion

@@ -10,12 +10,15 @@ using Apizr.Sample.Mobile.Infrastructure;
 using Apizr.Sample.Mobile.Services.Settings;
 using Apizr.Sample.Mobile.ViewModels;
 using Apizr.Sample.Mobile.Views;
+using DryIoc;
+using DryIoc.Microsoft.DependencyInjection;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
+using Prism.DryIoc;
 using Prism.Ioc;
 using Prism.Navigation;
 using Shiny;
@@ -27,6 +30,15 @@ namespace Apizr.Sample.Mobile
 {
     public class Startup : FrameworkStartup
     {
+        public override void ConfigureApp(Application app, IContainerRegistry containerRegistry)
+        {
+#if DEBUG
+            Xamarin.Forms.Internals.Log.Listeners.Add(new TraceLogListener());
+#endif
+            containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+        }
+
         protected override void Configure(ILoggingBuilder builder, IServiceCollection services)
         {
             builder.AddConsole(opts =>
@@ -51,10 +63,10 @@ namespace Apizr.Sample.Mobile
             services.AddSingleton<IAppSettings, AppSettings>();
 
             services.AddApizrFor<IReqResService>(options => options.WithCacheHandler<AkavacheCacheHandler>().WithLogging());
-            services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithLogging(), typeof(User));
-            services.AddApizrFor<IHttpBinService>(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithLogging().WithAuthenticationHandler<IAppSettings>(settings => settings.Token, OnRefreshToken));
+            //services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithLogging(), typeof(User));
+            //services.AddApizrFor<IHttpBinService>(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithLogging().WithAuthenticationHandler<IAppSettings>(settings => settings.Token, OnRefreshToken));
 
-            services.AddMediatR(typeof(Startup));
+            //services.AddMediatR(typeof(Startup));
 
             // This is just to let you know what's registered from/for Apizr and ready to use
             foreach (var service in services.Where(d =>
@@ -68,17 +80,17 @@ namespace Apizr.Sample.Mobile
         }
 
         private static Task<string> OnRefreshToken(HttpRequestMessage request) => Task.FromResult("tokenValue");
-
-        public override void ConfigureApp(IContainerRegistry containerRegistry)
-        {
-#if DEBUG
-            Xamarin.Forms.Internals.Log.Listeners.Add(new TraceLogListener());
-#endif
-            containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
-        }
-
+        
         public override Task RunApp(INavigationService navigator)
             => navigator.Navigate("NavigationPage/MainPage");
+
+        public override IServiceProvider CreateServiceProvider(IServiceCollection services)
+        {
+            ContainerLocator.SetContainerExtension(() => new DryIocContainerExtension());
+            var container = ContainerLocator.Container.GetContainer();
+            container.Use<IServiceScopeFactory>(r => new DryIocServiceScopeFactory(r));
+            container.Populate(services);
+            return container.GetServiceProvider();
+        }
     }
 }

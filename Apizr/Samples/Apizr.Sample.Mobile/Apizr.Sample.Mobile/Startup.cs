@@ -22,6 +22,7 @@ using Prism.DryIoc;
 using Prism.Ioc;
 using Prism.Navigation;
 using Shiny;
+using Xamarin.Essentials;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
@@ -61,8 +62,9 @@ namespace Apizr.Sample.Mobile
             services.AddPolicyRegistry(registry);
 
             services.AddSingleton<IAppSettings, AppSettings>();
+            services.AddTransient<IConnectivity, ConnectivityImplementation>();
 
-            services.AddApizrFor<IReqResService>(options => options.WithCacheHandler<AkavacheCacheHandler>().WithLogging());
+            services.AddApizrFor<IReqResService>(options => options.WithCacheHandler<AkavacheCacheHandler>().WithLogging().WithConnectivityHandler<IConnectivity>(connectivity => connectivity.NetworkAccess == NetworkAccess.Internet));
             //services.AddApizrCrudFor(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation().WithOptionalMediation().WithLogging(), typeof(User));
             //services.AddApizrFor<IHttpBinService>(optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithLogging().WithAuthenticationHandler<IAppSettings>(settings => settings.Token, OnRefreshToken));
 

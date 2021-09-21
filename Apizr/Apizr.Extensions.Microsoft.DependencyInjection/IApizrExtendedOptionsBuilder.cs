@@ -103,7 +103,7 @@ namespace Apizr
         /// </summary>
         /// <typeparam name="TConnectivityHandler">Your <see cref="IConnectivityHandler"/> mapping implementation</typeparam>
         /// <returns></returns>
-        IApizrExtendedOptionsBuilder WithConnectivityHandler<TConnectivityHandler>(Expression<Func<TConnectivityHandler, bool>> tokenProperty);
+        IApizrExtendedOptionsBuilder WithConnectivityHandler<TConnectivityHandler>(Expression<Func<TConnectivityHandler, bool>> connectivityProperty);
 
         /// <summary>
         /// Provide a connectivity handler to check connectivity before sending a request

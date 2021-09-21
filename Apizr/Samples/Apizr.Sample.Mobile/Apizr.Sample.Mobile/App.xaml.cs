@@ -11,11 +11,5 @@ namespace Apizr.Sample.Mobile
             InitializeComponent();
             base.Initialize();
         }
-
-        protected override void OnInitialized()
-        {
-            var test = Container.Resolve(typeof(IApizrManager<IReqResService>));
-            base.OnInitialized();
-        }
     }
 }

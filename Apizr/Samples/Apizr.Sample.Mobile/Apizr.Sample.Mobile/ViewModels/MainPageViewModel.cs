@@ -23,6 +23,7 @@ using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny;
+using Xamarin.Forms;
 using Color = System.Drawing.Color;
 
 namespace Apizr.Sample.Mobile.ViewModels
@@ -53,7 +54,7 @@ namespace Apizr.Sample.Mobile.ViewModels
 
         #region Properties
 
-        [Reactive] public ObservableCollection<User> Users { get; set; } = new ObservableCollection<User>();
+        [Reactive] public ObservableCollection<User> Users { get; set; }
 
         [Reactive] public bool IsRefreshing { get; set; }
 
@@ -117,7 +118,7 @@ namespace Apizr.Sample.Mobile.ViewModels
             {
                 if (users != null && users.Any())
                     Users = new ObservableCollection<User>(users);
-
+                
                 IsRefreshing = false;
             }
 
@@ -148,9 +149,7 @@ namespace Apizr.Sample.Mobile.ViewModels
             //var pagedUsers = await _userOptionalMediator.SendReadAllOptionalQuery().CatchAsync(AsyncErrorHandler.HandleException);
             //if (!pagedUsers.Data.IsEmpty())
             //    Users = new ObservableCollection<User>(pagedUsers.Data);
-
-            IsRefreshing = false;
-
+            
             //IsRefreshing = false;
         }
 

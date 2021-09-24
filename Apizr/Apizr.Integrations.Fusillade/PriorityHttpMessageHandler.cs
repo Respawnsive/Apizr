@@ -9,7 +9,7 @@ using Fusillade;
 using Microsoft.Extensions.Logging;
 using Punchclock;
 
-namespace Apizr.Integrations.Fusillade
+namespace Apizr
 {
     public class PriorityHttpMessageHandler : LimitingHttpMessageHandler
     {

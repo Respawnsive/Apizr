@@ -569,9 +569,13 @@ namespace Apizr
             else
                 services.TryAddSingleton(typeof(IConnectivityHandler), apizrOptions.ConnectivityHandlerType);
 
-            services.AddOrReplaceSingleton(typeof(ICacheHandler), apizrOptions.CacheHandlerType);
+            var cacheHandlerFactory = apizrOptions.GetCacheHanderFactory();
+            if (cacheHandlerFactory != null)
+                services.AddOrReplaceSingleton(typeof(ICacheHandler), _ => cacheHandlerFactory.Invoke());
+            else
+                services.TryAddSingleton(typeof(ICacheHandler), apizrOptions.CacheHandlerType);
 
-            services.AddOrReplaceSingleton(typeof(IMappingHandler), apizrOptions.MappingHandlerType);
+            services.TryAddSingleton(typeof(IMappingHandler), apizrOptions.MappingHandlerType);
             
             services.TryAddSingleton(typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), serviceProvider => Activator.CreateInstance(typeof(ApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions, serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName)));
 

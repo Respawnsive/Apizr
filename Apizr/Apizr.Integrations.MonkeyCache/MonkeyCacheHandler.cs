@@ -5,22 +5,21 @@ using Apizr.Caching;
 using MonkeyCache;
 
 [assembly: Apizr.Preserve]
-namespace Apizr.Integrations.MonkeyCache
+namespace Apizr
 {
     public class MonkeyCacheHandler : ICacheHandler
     {
         private readonly IBarrel _barrel;
-        private readonly TimeSpan _maxLifeSpan;
 
         public MonkeyCacheHandler(IBarrel barrel)
         {
             _barrel = barrel;
-            _maxLifeSpan = DateTime.MaxValue - DateTime.Now;
         }
 
         public Task SetAsync(string key, object value, TimeSpan? lifeSpan = null, CancellationToken cancellationToken = default)
         {
-            _barrel.Add(key, value, lifeSpan ?? _maxLifeSpan);
+            var maxLifeSpan = DateTime.MaxValue - DateTime.Now;
+            _barrel.Add(key, value, lifeSpan ?? maxLifeSpan);
 
             return Task.CompletedTask;
         }

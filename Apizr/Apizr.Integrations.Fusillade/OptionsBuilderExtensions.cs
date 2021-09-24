@@ -1,6 +1,6 @@
-﻿namespace Apizr.Integrations.Fusillade
+﻿namespace Apizr
 {
-    public static class OptionsBuilderExtensions
+    public static partial class OptionsBuilderExtensions
     {
         public static T WithPriorityManagement<T>(this T builder) where T : IApizrOptionsBuilderBase
         {

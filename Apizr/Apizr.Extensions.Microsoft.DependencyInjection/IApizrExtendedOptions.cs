@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using Apizr.Caching;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
@@ -67,6 +68,11 @@ namespace Apizr
         /// Connectivity handler factory
         /// </summary>
         Func<IServiceProvider, IConnectivityHandler> ConnectivityHandlerFactory { get; }
+
+        /// <summary>
+        /// Cache handler factory
+        /// </summary>
+        Func<IServiceProvider, ICacheHandler> CacheHandlerFactory { get; }
 
         /// <summary>
         /// HttpClient builder

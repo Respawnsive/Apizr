@@ -88,6 +88,7 @@ namespace Apizr
         }
 
         public Func<IServiceProvider, IConnectivityHandler> ConnectivityHandlerFactory { get; set; }
+        public Func<IServiceProvider, ICacheHandler> CacheHandlerFactory { get; set; }
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
         public IList<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
         public IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }

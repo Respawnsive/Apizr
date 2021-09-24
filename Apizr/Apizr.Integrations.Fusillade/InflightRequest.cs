@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Reactive.Subjects;
 using System.Threading;
 
-namespace Apizr.Integrations.Fusillade
+namespace Apizr
 {
     internal class InflightRequest
     {

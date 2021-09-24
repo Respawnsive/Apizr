@@ -6,8 +6,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Extending;
-using Apizr.Integrations.Fusillade;
-using Apizr.Integrations.MonkeyCache;
 using Apizr.Logging;
 using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Cruding.Sending;
@@ -164,8 +162,8 @@ namespace Apizr.Sample.Console
                                         AutomaticDecompression = DecompressionMethods.All,
                                         CookieContainer = CookieContainer
                                     })
-                                    .WithInMemoryCacheHandler()
-                                    //.WithCacheHandler<AkavacheCacheHandler>()
+                                    //.WithInMemoryCacheHandler()
+                                    .WithCacheHandler<AkavacheCacheHandler>()
                                     .WithLogging());
 
                             //// Auto assembly detection and registration
@@ -181,7 +179,7 @@ namespace Apizr.Sample.Console
                                     {
                                         AutomaticDecompression = DecompressionMethods.All,
                                         CookieContainer = CookieContainer
-                                    }).WithInMemoryCacheHandler()//.WithCacheHandler<AkavacheCacheHandler>()
+                                    })//.WithInMemoryCacheHandler()//.WithCacheHandler<AkavacheCacheHandler>()
                                     .WithLogging(), typeof(User));
                         }
                         else
@@ -345,7 +343,7 @@ namespace Apizr.Sample.Console
 
                 users ??= pagedUsers?.Data;
             }
-            catch (ApizrException<PagedResult<User>> e)
+            catch (ApizrException<UserList> e)
             {
                 System.Console.WriteLine("");
                 System.Console.WriteLine(e.Message);
@@ -355,6 +353,18 @@ namespace Apizr.Sample.Console
 
                 System.Console.WriteLine("");
                 System.Console.WriteLine($"Loading {nameof(UserList)} from cache...");
+                users = e.CachedResult?.Data;
+            }
+            catch (ApizrException<PagedResult<User>> e)
+            {
+                System.Console.WriteLine("");
+                System.Console.WriteLine(e.Message);
+
+                if (e.CachedResult == null)
+                    return;
+
+                System.Console.WriteLine("");
+                System.Console.WriteLine($"Loading {nameof(PagedResult<User>)} from cache...");
                 users = e.CachedResult?.Data;
             }
             catch (Exception e)

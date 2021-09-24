@@ -1,4 +1,5 @@
-﻿namespace Apizr
+﻿[assembly: Apizr.Preserve]
+namespace Apizr
 {
     public static class OptionsBuilderExtensions
     {

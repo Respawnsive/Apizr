@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Caching.Attributes;
-using Apizr.Integrations.Fusillade;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Policing;

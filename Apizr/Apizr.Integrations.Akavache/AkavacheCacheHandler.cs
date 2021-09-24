@@ -11,29 +11,47 @@ namespace Apizr
 {
     public class AkavacheCacheHandler : ICacheHandler
     {
-        public AkavacheCacheHandler()
+        private readonly IBlobCache _blobCache;
+        private static readonly IBlobCache DefaultBlobCache = BlobCache.LocalMachine;
+        private static readonly string DefaultApplicationName = $"{nameof(Apizr)}{nameof(AkavacheCacheHandler)}";
+
+        public AkavacheCacheHandler() : this(DefaultBlobCache, DefaultApplicationName)
         {
-            Registrations.Start($"{nameof(Apizr)}{nameof(AkavacheCacheHandler)}");
+        }
+
+        public AkavacheCacheHandler(IBlobCache blobCache) : this(blobCache, DefaultApplicationName)
+        {
+        }
+
+        public AkavacheCacheHandler(string applicationName) : this(DefaultBlobCache, applicationName)
+        {
+            
+        }
+
+        public AkavacheCacheHandler(IBlobCache blobCache, string applicationName)
+        {
+            _blobCache = blobCache;
+            Registrations.Start(applicationName);
         }
 
         public Task SetAsync(string key, object value, TimeSpan? lifeSpan = null,
             CancellationToken cancellationToken = default)
         {
             return lifeSpan.HasValue
-                ? BlobCache.LocalMachine.InsertObject(key, value, lifeSpan.Value).ToTask(cancellationToken)
-                : BlobCache.LocalMachine.InsertObject(key, value).ToTask(cancellationToken);
+                ? _blobCache.InsertObject(key, value, lifeSpan.Value).ToTask(cancellationToken)
+                : _blobCache.InsertObject(key, value).ToTask(cancellationToken);
         }
 
         public Task<T> GetAsync<T>(string key, CancellationToken cancellationToken = default)
         {
-            return BlobCache.LocalMachine.GetObject<T>(key)
+            return _blobCache.GetObject<T>(key)
                 .Catch(Observable.Return(default(T)))
                 .ToTask(cancellationToken);
         }
 
         public Task<bool> RemoveAsync(string key, CancellationToken cancellationToken = default)
         {
-            return BlobCache.LocalMachine.Invalidate(key)
+            return _blobCache.Invalidate(key)
                 .SelectMany(_ => Observable.Return(true))
                 .Catch(Observable.Return(false))
                 .ToTask(cancellationToken);
@@ -41,7 +59,7 @@ namespace Apizr
 
         public Task ClearAsync(CancellationToken cancellationToken = default)
         {
-            return BlobCache.LocalMachine.InvalidateAll()
+            return _blobCache.InvalidateAll()
                 .SelectMany(_ => Observable.Return(true))
                 .Catch(Observable.Return(false))
                 .ToTask(cancellationToken);

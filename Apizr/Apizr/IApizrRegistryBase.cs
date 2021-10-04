@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Apizr
 {
-    public interface IApizrExtendedCollectionBuilder : IApizrCollectionBuilderBase
+    public interface IApizrRegistryBase
     {
     }
 }

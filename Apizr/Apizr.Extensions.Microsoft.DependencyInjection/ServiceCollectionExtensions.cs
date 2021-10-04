@@ -25,7 +25,13 @@ namespace Apizr
     public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddApizr(this IServiceCollection services,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
+            Action<IApizrExtendedConfigurationBuilder> configBuilder,
+            Action<IApizrExtendedRegistryBuilder> collectionBuilder)
+        {
+
+
+            return services;
+        }
 
         #region Crud
 

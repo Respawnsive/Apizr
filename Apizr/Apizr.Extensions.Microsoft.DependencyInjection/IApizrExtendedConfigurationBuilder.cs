@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Apizr
 {
-    public interface IApizrExtendedConfigurationBuilder : IApizrConfigurationBuilderBase
+    public interface IApizrExtendedConfigurationBuilder : IApizrConfigurationBuilderBase<IApizrExtendedConfiguration, IApizrExtendedConfigurationBuilder>
     {
     }
 }

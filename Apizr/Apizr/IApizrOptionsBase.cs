@@ -6,14 +6,14 @@ using Refit;
 namespace Apizr
 {
     /// <summary>
-    /// Options
+    /// Specific options
     /// </summary>
     public interface IApizrOptionsBase
     {
         /// <summary>
         /// Web api interface type
         /// </summary>
-        Type WebApiType { get; }
+        Type WebApiType { get; } 
 
         /// <summary>
         /// Base address

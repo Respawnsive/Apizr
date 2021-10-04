@@ -14,7 +14,7 @@ namespace Apizr
     public class ApizrOptions : ApizrOptionsBase, IApizrOptions
     {
 
-        public ApizrOptions(Type webApiType, Uri baseAddress,
+        public ApizrOptions(IApizrConfiguration config, Type webApiType, Uri baseAddress,
             HttpTracerMode? httpTracerMode,
             HttpMessageParts? trafficVerbosity,
             LogLevel? logLevel,
@@ -31,7 +31,7 @@ namespace Apizr
             PolicyRegistryFactory = () => new PolicyRegistry();
             RefitSettingsFactory = () => new RefitSettings();
             ConnectivityHandlerFactory = () => new DefaultConnectivityHandler();
-            CacheHandlerFactory = () => new VoidCacheHandler();
+            CacheHandlerFactory = config.CacheHandlerFactory;
             MappingHandlerFactory = () => new VoidMappingHandler();
             DelegatingHandlersFactories = new List<Func<ILogger, IApizrOptionsBase, DelegatingHandler>>();
         }

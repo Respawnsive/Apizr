@@ -7,7 +7,8 @@ using Microsoft.Extensions.Logging;
 
 [assembly: InternalsVisibleTo("Apizr.Extensions.Microsoft.DependencyInjection"), 
            InternalsVisibleTo("Apizr.Integrations.Fusillade"),
-           InternalsVisibleTo("Apizr.Integrations.Akavache")]
+           InternalsVisibleTo("Apizr.Integrations.Akavache"),
+           InternalsVisibleTo("Apizr.Integrations.MonkeyCache")]
 namespace Apizr
 {
     internal static class InternalExtensions
@@ -28,9 +29,9 @@ namespace Apizr
         private static Func<ICacheHandler> _cacheHandlerFactory;
 
         internal static void SetCacheHandlerFactory(this IApizrOptionsBuilderBase builder,
-            Func<ICacheHandler> cacheHanderFactory)
+            Func<ICacheHandler> cacheHandlerFactory)
         {
-            _cacheHandlerFactory = cacheHanderFactory;
+            _cacheHandlerFactory = cacheHandlerFactory;
         }
 
         internal static Func<ICacheHandler> GetCacheHanderFactory(this IApizrOptionsBase builder) =>

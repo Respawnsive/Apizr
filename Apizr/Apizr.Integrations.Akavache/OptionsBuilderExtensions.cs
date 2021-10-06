@@ -1,27 +1,64 @@
-﻿using Akavache;
+﻿using System;
+using Akavache;
 
 namespace Apizr
 {
-    public static partial class OptionsBuilderExtensions
+    public static class OptionsBuilderExtensions
     {
-        public static TBuilder WithCacheHandler<TBuilder, THandler>(this TBuilder builder, IBlobCache blobCache)
-            where TBuilder : IApizrOptionsBuilderBase where THandler : AkavacheCacheHandler
+        /// <summary>
+        /// Set Akavache as CacheHandler with LocalMachine blob cache and ApizrAkavacheCacheHandler name
+        /// </summary>
+        /// <typeparam name="TBuilder"></typeparam>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public static TBuilder WithAkavacheCacheHandler<TBuilder>(this TBuilder builder)
+            where TBuilder : IApizrOptionsBuilderBase
         {
-            builder.SetCacheHandlerFactory(() => new AkavacheCacheHandler(blobCache));
+            builder.SetCacheHandlerFactory(() => new AkavacheCacheHandler());
 
             return builder;
         }
 
-        public static TBuilder WithCacheHandler<TBuilder, THandler>(this TBuilder builder, string applicationName) where TBuilder : IApizrOptionsBuilderBase where THandler : AkavacheCacheHandler
+        /// <summary>
+        /// Set Akavache as CacheHandler with your blob cache and ApizrAkavacheCacheHandler name
+        /// </summary>
+        /// <typeparam name="TBuilder"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="blobCacheFactory">The blob cache factory of your choice</param>
+        /// <returns></returns>
+        public static TBuilder WithAkavacheCacheHandler<TBuilder>(this TBuilder builder, Func<IBlobCache> blobCacheFactory)
+            where TBuilder : IApizrOptionsBuilderBase
+        {
+            builder.SetCacheHandlerFactory(() => new AkavacheCacheHandler(blobCacheFactory));
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Set Akavache as CacheHandler with LocalMachine blob cache and your provided name
+        /// </summary>
+        /// <typeparam name="TBuilder"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="applicationName">The application name used by Akavache</param>
+        /// <returns></returns>
+        public static TBuilder WithAkavacheCacheHandler<TBuilder>(this TBuilder builder, string applicationName) where TBuilder : IApizrOptionsBuilderBase
         {
             builder.SetCacheHandlerFactory(() => new AkavacheCacheHandler(applicationName));
 
             return builder;
         }
 
-        public static TBuilder WithCacheHandler<TBuilder, THandler>(this TBuilder builder, IBlobCache blobCache, string applicationName) where TBuilder : IApizrOptionsBuilderBase where THandler : AkavacheCacheHandler
+        /// <summary>
+        /// Set Akavache as CacheHandler with your blob cache and your provided name
+        /// </summary>
+        /// <typeparam name="TBuilder"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="blobCacheFactory">The blob cache factory of your choice</param>
+        /// <param name="applicationName">The application name used by Akavache</param>
+        /// <returns></returns>
+        public static TBuilder WithAkavacheCacheHandler<TBuilder>(this TBuilder builder, Func<IBlobCache> blobCacheFactory, string applicationName) where TBuilder : IApizrOptionsBuilderBase
         {
-            builder.SetCacheHandlerFactory(() => new AkavacheCacheHandler(blobCache, applicationName));
+            builder.SetCacheHandlerFactory(() => new AkavacheCacheHandler(blobCacheFactory, applicationName));
 
             return builder;
         }

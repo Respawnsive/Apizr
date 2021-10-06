@@ -1,6 +1,6 @@
 ﻿namespace Apizr
 {
-    public static partial class OptionsBuilderExtensions
+    public static class OptionsBuilderExtensions
     {
         public static T WithPriorityManagement<T>(this T builder) where T : IApizrOptionsBuilderBase
         {

@@ -19,7 +19,7 @@ namespace Apizr
             HttpMessageParts? trafficVerbosity,
             LogLevel? logLevel,
             string[] assemblyPolicyRegistryKeys,
-            string[] webApiPolicyRegistryKeys) : base(webApiType,
+            string[] webApiPolicyRegistryKeys) : base(config, webApiType,
             assemblyPolicyRegistryKeys, webApiPolicyRegistryKeys)
         {
             BaseAddressFactory = () => baseAddress;

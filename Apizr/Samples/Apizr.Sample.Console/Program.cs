@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Akavache;
 using Apizr.Extending;
 using Apizr.Logging;
 using Apizr.Mediation.Cruding;
@@ -163,7 +164,8 @@ namespace Apizr.Sample.Console
                                         CookieContainer = CookieContainer
                                     })
                                     //.WithInMemoryCacheHandler()
-                                    .WithCacheHandler<AkavacheCacheHandler>()
+                                    //.WithCacheHandler<AkavacheCacheHandler>()
+                                    .WithAkavacheCacheHandler()
                                     .WithLogging());
 
                             //// Auto assembly detection and registration

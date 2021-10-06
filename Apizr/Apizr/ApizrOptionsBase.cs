@@ -8,7 +8,7 @@ namespace Apizr
 {
     public abstract class ApizrOptionsBase : IApizrOptionsBase
     {
-        protected ApizrOptionsBase(Type webApiType,
+        protected ApizrOptionsBase(IApizrConfigurationBase config, Type webApiType,
             string[] assemblyPolicyRegistryKeys,
             string[] webApiPolicyRegistryKeys)
         {

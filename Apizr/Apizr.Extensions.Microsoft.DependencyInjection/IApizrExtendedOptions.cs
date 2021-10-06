@@ -70,11 +70,6 @@ namespace Apizr
         Func<IServiceProvider, IConnectivityHandler> ConnectivityHandlerFactory { get; }
 
         /// <summary>
-        /// Cache handler factory
-        /// </summary>
-        Func<IServiceProvider, ICacheHandler> CacheHandlerFactory { get; }
-
-        /// <summary>
         /// HttpClient builder
         /// </summary>
         Action<IHttpClientBuilder> HttpClientBuilder { get; }

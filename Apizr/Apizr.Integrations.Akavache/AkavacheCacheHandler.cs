@@ -12,26 +12,40 @@ namespace Apizr
     public class AkavacheCacheHandler : ICacheHandler
     {
         private readonly IBlobCache _blobCache;
-        private static readonly IBlobCache DefaultBlobCache = BlobCache.LocalMachine;
-        private static readonly string DefaultApplicationName = $"{nameof(Apizr)}{nameof(AkavacheCacheHandler)}";
 
-        public AkavacheCacheHandler() : this(DefaultBlobCache, DefaultApplicationName)
+        /// <summary>
+        /// Set Akavache as CacheHandler with LocalMachine blob cache and ApizrAkavacheCacheHandler name
+        /// </summary>
+        public AkavacheCacheHandler() : this(null, null)
         {
         }
 
-        public AkavacheCacheHandler(IBlobCache blobCache) : this(blobCache, DefaultApplicationName)
+        /// <summary>
+        /// Set Akavache as CacheHandler with your blob cache and ApizrAkavacheCacheHandler name
+        /// </summary>
+        /// <param name="blobCacheFactory">The blob cache factory of your choice</param>
+        public AkavacheCacheHandler(Func<IBlobCache> blobCacheFactory) : this(blobCacheFactory, null)
         {
         }
 
-        public AkavacheCacheHandler(string applicationName) : this(DefaultBlobCache, applicationName)
+        /// <summary>
+        /// Set Akavache as CacheHandler with LocalMachine blob cache and your provided name
+        /// </summary>
+        /// <param name="applicationName">The application name used by Akavache</param>
+        public AkavacheCacheHandler(string applicationName) : this(null, applicationName)
         {
             
         }
 
-        public AkavacheCacheHandler(IBlobCache blobCache, string applicationName)
+        /// <summary>
+        /// Set Akavache as CacheHandler with your blob cache and your provided name
+        /// </summary>
+        /// <param name="blobCacheFactory">The blob cache factory of your choice</param>
+        /// <param name="applicationName">The application name used by Akavache</param>
+        public AkavacheCacheHandler(Func<IBlobCache> blobCacheFactory, string applicationName)
         {
-            _blobCache = blobCache;
-            Registrations.Start(applicationName);
+            Registrations.Start(applicationName ?? $"{nameof(Apizr)}{nameof(AkavacheCacheHandler)}");
+            _blobCache = blobCacheFactory?.Invoke() ?? BlobCache.LocalMachine;
         }
 
         public Task SetAsync(string key, object value, TimeSpan? lifeSpan = null,

@@ -14,12 +14,12 @@ namespace Apizr
 {
     public class ApizrExtendedOptions : ApizrOptionsBase, IApizrExtendedOptions
     {
-        public ApizrExtendedOptions(Type webApiType, Type apizrManagerType, Uri baseAddress,
+        public ApizrExtendedOptions(IApizrExtendedConfiguration config, Type webApiType, Type apizrManagerType, Uri baseAddress,
             HttpTracerMode? httpTracerMode,
             HttpMessageParts? httpTracerVerbosity,
             LogLevel? logLevel,
             string[] assemblyPolicyRegistryKeys,
-            string[] webApiPolicyRegistryKeys) : base(webApiType, 
+            string[] webApiPolicyRegistryKeys) : base(config, webApiType, 
             assemblyPolicyRegistryKeys,
             webApiPolicyRegistryKeys)
         {

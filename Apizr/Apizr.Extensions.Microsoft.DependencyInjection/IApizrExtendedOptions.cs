@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using Apizr.Caching;
+using Apizr.Configuring;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;

@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
+using Apizr.Configuring;
 using Microsoft.Extensions.Logging;
 
 namespace Apizr.Authenticating

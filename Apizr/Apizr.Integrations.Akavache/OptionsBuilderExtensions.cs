@@ -1,5 +1,6 @@
 ﻿using System;
 using Akavache;
+using Apizr.Configuring;
 
 namespace Apizr
 {

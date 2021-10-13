@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using Apizr.Caching;
+using Apizr.Configuring;
+using Apizr.Configuring.Common;
 
 namespace Apizr
 {
-    public interface IApizrExtendedConfiguration : IApizrConfigurationBase
+    public interface IApizrExtendedConfiguration : IApizrCommonOptionsBase
     {
 
         /// <summary>

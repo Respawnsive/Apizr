@@ -1,0 +1,27 @@
+﻿using System;
+using System.Linq;
+using Apizr.Configuring.Common;
+using Apizr.Configuring.Proper;
+using Apizr.Configuring.Shared;
+using Apizr.Logging;
+using Microsoft.Extensions.Logging;
+using Refit;
+
+namespace Apizr.Configuring
+{
+    public abstract class ApizrOptionsBase : ApizrSharedOptionsBase, IApizrOptionsBase
+    {
+        protected ApizrOptionsBase(IApizrCommonOptionsBase commonOptions, IApizrProperOptionsBase properOptions)
+        {
+            WebApiType = properOptions.WebApiType;
+            BaseAddress = properOptions.BaseAddress;
+            HttpTracerMode = properOptions.HttpTracerMode;
+            PolicyRegistryKeys = properOptions.PolicyRegistryKeys;
+        }
+
+        public Type WebApiType { get; }
+        public Uri BaseAddress { get; protected set; }
+        public string[] PolicyRegistryKeys { get; }
+        public IHttpContentSerializer ContentSerializer { get; protected set; }
+    }
+}

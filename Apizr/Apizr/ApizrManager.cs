@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Caching.Attributes;
+using Apizr.Configuring;
 using Apizr.Connecting;
 using Apizr.Extending;
 using Apizr.Logging;

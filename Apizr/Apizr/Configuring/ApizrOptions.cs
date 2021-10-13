@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using Apizr.Caching;
+using Apizr.Configuring.Common;
+using Apizr.Configuring.Proper;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
@@ -9,31 +11,24 @@ using Microsoft.Extensions.Logging;
 using Polly.Registry;
 using Refit;
 
-namespace Apizr
+namespace Apizr.Configuring
 {
     public class ApizrOptions : ApizrOptionsBase, IApizrOptions
     {
-
-        public ApizrOptions(IApizrConfiguration config, Type webApiType, Uri baseAddress,
-            HttpTracerMode? httpTracerMode,
-            HttpMessageParts? trafficVerbosity,
-            LogLevel? logLevel,
-            string[] assemblyPolicyRegistryKeys,
-            string[] webApiPolicyRegistryKeys) : base(config, webApiType,
-            assemblyPolicyRegistryKeys, webApiPolicyRegistryKeys)
+        public ApizrOptions(IApizrCommonOptions commonOptions, IApizrProperOptions properOptions) : base(commonOptions, properOptions)
         {
-            BaseAddressFactory = () => baseAddress;
-            HttpTracerModeFactory = () => httpTracerMode ?? HttpTracerMode.Everything;
-            TrafficVerbosityFactory = () => trafficVerbosity ?? HttpMessageParts.None;
-            LogLevelFactory = () => logLevel ?? LogLevel.None;
-            LoggerFactory = () => new DebugLoggerFactory(LogLevel.Information);
-            HttpClientHandlerFactory = () => new HttpClientHandler();
-            PolicyRegistryFactory = () => new PolicyRegistry();
-            RefitSettingsFactory = () => new RefitSettings();
-            ConnectivityHandlerFactory = () => new DefaultConnectivityHandler();
-            CacheHandlerFactory = config.CacheHandlerFactory;
-            MappingHandlerFactory = () => new VoidMappingHandler();
-            DelegatingHandlersFactories = new List<Func<ILogger, IApizrOptionsBase, DelegatingHandler>>();
+            BaseAddressFactory = properOptions.BaseAddressFactory;
+            HttpTracerModeFactory = properOptions.HttpTracerModeFactory;
+            TrafficVerbosityFactory = properOptions.TrafficVerbosityFactory;
+            LogLevelFactory = properOptions.LogLevelFactory;
+            LoggerFactory = commonOptions.LoggerFactory;
+            HttpClientHandlerFactory = properOptions.HttpClientHandlerFactory;
+            PolicyRegistryFactory = properOptions.PolicyRegistryFactory;
+            RefitSettingsFactory = commonOptions.RefitSettingsFactory;
+            ConnectivityHandlerFactory = commonOptions.ConnectivityHandlerFactory;
+            CacheHandlerFactory = commonOptions.CacheHandlerFactory;
+            MappingHandlerFactory = commonOptions.MappingHandlerFactory;
+            DelegatingHandlersFactories = properOptions.DelegatingHandlersFactories;
         }
 
         private Func<Uri> _baseAddressFactory;

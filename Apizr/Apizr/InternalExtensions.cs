@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using Apizr.Caching;
+using Apizr.Configuring;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;
 

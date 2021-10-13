@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Linq;
-using Apizr.Logging;
-using Microsoft.Extensions.Logging;
-using Refit;
+using Apizr.Configuring.Shared;
 
-namespace Apizr
+namespace Apizr.Configuring.Proper
 {
-    public abstract class ApizrOptionsBase : IApizrOptionsBase
+    public abstract class ApizrProperOptionsBase : ApizrSharedOptionsBase, IApizrProperOptionsBase
     {
-        protected ApizrOptionsBase(IApizrConfigurationBase config, Type webApiType,
+        protected ApizrProperOptionsBase(IApizrSharedOptionsBase sharedOptions, 
+            Type webApiType,
             string[] assemblyPolicyRegistryKeys,
             string[] webApiPolicyRegistryKeys)
         {
+            HttpTracerMode = sharedOptions.HttpTracerMode;
+            TrafficVerbosity = sharedOptions.TrafficVerbosity;
+            LogLevel = sharedOptions.LogLevel;
             WebApiType = webApiType;
             PolicyRegistryKeys =
                 assemblyPolicyRegistryKeys?.Union(webApiPolicyRegistryKeys ?? Array.Empty<string>()).ToArray() ??
@@ -20,10 +22,6 @@ namespace Apizr
 
         public Type WebApiType { get; }
         public Uri BaseAddress { get; protected set; }
-        public HttpTracerMode HttpTracerMode { get; protected set; }
-        public HttpMessageParts TrafficVerbosity { get; protected set; }
-        public LogLevel LogLevel { get; protected set; }
         public string[] PolicyRegistryKeys { get; }
-        public IHttpContentSerializer ContentSerializer { get; protected set; }
     }
 }

@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 using Polly.Registry;
 using Refit;
 
-namespace Apizr
+namespace Apizr.Configuring
 {
     public class ApizrOptionsBuilder : IApizrOptionsBuilder
     {

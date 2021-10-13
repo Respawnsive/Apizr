@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using Apizr.Configuring;
 using Microsoft.Extensions.Logging;
 
 namespace Apizr.Logging

@@ -29,7 +29,7 @@ namespace Apizr
 {
     public class ApizrManager<TWebApi> : IApizrManager<TWebApi>
     {
-        private readonly ILazyWebApi<TWebApi> _lazyWebApi;
+        private readonly ILazyFactory<TWebApi> _lazyWebApi;
         private readonly IConnectivityHandler _connectivityHandler;
         private readonly ICacheHandler _cacheHandler;
         private readonly IMappingHandler _mappingHandler;
@@ -41,7 +41,7 @@ namespace Apizr
         private readonly Dictionary<MethodDetails, LogAttributeBase> _loggingMethodsSet;
         private readonly Dictionary<MethodDetails, IsPolicy> _policingMethodsSet;
 
-        public ApizrManager(ILazyWebApi<TWebApi> lazyWebApi, IConnectivityHandler connectivityHandler, ICacheHandler cacheHandler, IMappingHandler mappingHandler, IReadOnlyPolicyRegistry<string> policyRegistry, IApizrOptions<TWebApi> apizrOptions)
+        public ApizrManager(ILazyFactory<TWebApi> lazyWebApi, IConnectivityHandler connectivityHandler, ICacheHandler cacheHandler, IMappingHandler mappingHandler, IReadOnlyPolicyRegistry<string> policyRegistry, IApizrOptions<TWebApi> apizrOptions)
         {
             _lazyWebApi = lazyWebApi;
             _connectivityHandler = connectivityHandler;

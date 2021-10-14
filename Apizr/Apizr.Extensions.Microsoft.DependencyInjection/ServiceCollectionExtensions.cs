@@ -562,7 +562,7 @@ namespace Apizr
 
                     return primaryMessageHandler;
                 })
-                .AddTypedClient(typeof(ILazyWebApi<>).MakeGenericType(apizrOptions.WebApiType),
+                .AddTypedClient(typeof(ILazyFactory<>).MakeGenericType(apizrOptions.WebApiType),
                     (client, serviceProvider) =>
                     {
                         if (client.BaseAddress == null)
@@ -572,7 +572,7 @@ namespace Apizr
                                 throw new ArgumentNullException(nameof(client.BaseAddress), $"You must provide a valid web api uri with the {nameof(WebApiAttribute)} or the options builder");
                         }
 
-                        return typeof(LazyWebApi<>).MakeGenericType(apizrOptions.WebApiType)
+                        return typeof(LazyFactory<>).MakeGenericType(apizrOptions.WebApiType)
                             .GetConstructor(new[] { typeof(Func<object>) })
                             ?.Invoke(new object[]
                             {

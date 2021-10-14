@@ -12,13 +12,11 @@ namespace Apizr.Configuring.Common
 {
     public class ApizrCommonOptions : ApizrCommonOptionsBase, IApizrCommonOptions
     {
-        public ApizrCommonOptions(HttpTracerMode? httpTracerMode,
-            HttpMessageParts? trafficVerbosity,
-            LogLevel? logLevel)
+        public ApizrCommonOptions()
         {
-            HttpTracerModeFactory = () => httpTracerMode ?? HttpTracerMode.Everything;
-            TrafficVerbosityFactory = () => trafficVerbosity ?? HttpMessageParts.None;
-            LogLevelFactory = () => logLevel ?? LogLevel.None;
+            HttpTracerModeFactory = () => HttpTracerMode.Everything;
+            TrafficVerbosityFactory = () => HttpMessageParts.None;
+            LogLevelFactory = () => LogLevel.None;
             LoggerFactory = () => new DebugLoggerFactory(LogLevel.Information);
             HttpClientHandlerFactory = () => new HttpClientHandler();
             RefitSettingsFactory = () => new RefitSettings();

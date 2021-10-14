@@ -6,11 +6,14 @@ using Apizr.Mapping;
 
 namespace Apizr
 {
+    public interface IApizrManager
+    {}
+
     /// <summary>
     /// The manager encapsulating <see cref="TWebApi"/>'s task
     /// </summary>
     /// <typeparam name="TWebApi">The web api interface to manage</typeparam>
-    public interface IApizrManager<TWebApi>
+    public interface IApizrManager<TWebApi> : IApizrManager
     {
         /// <summary>
         /// Original Refit Api without any Apizr management. You should use ExecuteAsync instead to get all the Apizr goodness :)

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using Apizr.Configuring.Shared;
-using Apizr.Logging;
-using Microsoft.Extensions.Logging;
+﻿using Apizr.Configuring.Shared;
 using Refit;
 
 namespace Apizr.Configuring.Common

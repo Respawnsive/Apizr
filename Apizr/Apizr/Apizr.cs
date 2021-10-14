@@ -6,6 +6,7 @@ using System.Reflection;
 using Apizr.Caching;
 using Apizr.Configuring;
 using Apizr.Configuring.Common;
+using Apizr.Configuring.Proper;
 using Apizr.Configuring.Registry;
 using Apizr.Connecting;
 using Apizr.Extending;
@@ -29,29 +30,16 @@ namespace Apizr
         public static IApizrRegistry Create(Action<IApizrRegistryBuilder> registryBuilder)
             => Create(null, registryBuilder);
 
-        public static IApizrRegistry Create(Action<IApizrCommonOptionsBuilder> configBuilder, Action<IApizrRegistryBuilder> registryBuilder)
+        public static IApizrRegistry Create(Action<IApizrCommonOptionsBuilder> commonOptionsBuilder, Action<IApizrRegistryBuilder> registryBuilder)
         {
             if (registryBuilder == null)
                 throw new ArgumentNullException(nameof(registryBuilder));
 
-            var apizrConfiguration = CreateApizrCommonOptions(configBuilder);
+            var commonOptions = CreateApizrCommonOptions(commonOptionsBuilder);
 
-            var apizrRegistry = CreateApizrRegistry(apizrConfiguration, registryBuilder);
+            var apizrRegistry = CreateApizrRegistry(commonOptions, registryBuilder);
 
             return apizrRegistry;
-        }
-
-        // todo: Go registry builder!!
-
-        public static IApizrRegistry AddFor<TWebApi, TApizrManager>(this IApizrRegistry registry,
-            Func<ILazyWebApi<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler,
-                IReadOnlyPolicyRegistry<string>, IApizrOptions<TWebApi>, TApizrManager> apizrManagerFactory,
-            Action<IApizrOptionsBuilder> optionsBuilder = null)
-            where TApizrManager : IApizrManager<TWebApi>
-        {
-            var apizrManager = For(apizrManagerFactory, registry.ApizrCommonOptions, optionsBuilder);
-
-            return registry;
         }
 
         #endregion
@@ -138,7 +126,7 @@ namespace Apizr
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
         public static TApizrManager CrudFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(
-            Func<ILazyWebApi<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler,
+            Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler,
                 IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptionsBase,
                 TApizrManager> apizrManagerFactory,
             Action<IApizrOptionsBuilder> optionsBuilder = null)
@@ -173,20 +161,30 @@ namespace Apizr
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
         public static TApizrManager For<TWebApi, TApizrManager>(
-            Func<ILazyWebApi<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler,
+            Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler,
                 IReadOnlyPolicyRegistry<string>, IApizrOptions<TWebApi>, TApizrManager> apizrManagerFactory,
             Action<IApizrOptionsBuilder> optionsBuilder = null)
             where TApizrManager : IApizrManager<TWebApi> =>
             For(apizrManagerFactory, CreateApizrCommonOptions(), optionsBuilder);
 
-        
+        private static TApizrManager For<TWebApi, TApizrManager>(
+            Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler,
+                IReadOnlyPolicyRegistry<string>, IApizrOptions<TWebApi>, TApizrManager> apizrManagerFactory,
+            IApizrCommonOptions commonOptions,
+            Action<IApizrOptionsBuilder> optionsBuilder = null)
+            where TApizrManager : IApizrManager<TWebApi>
+            => For(apizrManagerFactory, commonOptions, CreateApizrProperOptions<TWebApi>(commonOptions),
+                optionsBuilder);
+
+
         internal static TApizrManager For<TWebApi, TApizrManager>(
-            Func<ILazyWebApi<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptions<TWebApi>, TApizrManager> apizrManagerFactory,
-            IApizrCommonOptions apizrConfiguration,
+            Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptions<TWebApi>, TApizrManager> apizrManagerFactory,
+            IApizrCommonOptions commonOptions,
+            IApizrProperOptions properOptions,
             Action<IApizrOptionsBuilder> optionsBuilder = null)
         where TApizrManager : IApizrManager<TWebApi>
         {
-            var apizrOptions = CreateApizrOptions<TWebApi>(apizrConfiguration, optionsBuilder);
+            var apizrOptions = CreateApizrOptions(commonOptions, properOptions, optionsBuilder);
 
             var httpHandlerFactory = new Func<HttpMessageHandler>(() =>
             {
@@ -241,7 +239,7 @@ namespace Apizr
             });
 
             var webApiFactory = new Func<object>(() => RestService.For<TWebApi>(new HttpClient(httpHandlerFactory.Invoke(), false) { BaseAddress = apizrOptions.BaseAddressFactory.Invoke() }, apizrOptions.RefitSettingsFactory.Invoke()));
-            var lazyWebApi = new LazyWebApi<TWebApi>(webApiFactory);
+            var lazyWebApi = new LazyFactory<TWebApi>(webApiFactory);
             var apizrManager = apizrManagerFactory(lazyWebApi, apizrOptions.ConnectivityHandlerFactory.Invoke(),
                 apizrOptions.GetCacheHanderFactory()?.Invoke() ?? apizrOptions.CacheHandlerFactory.Invoke(),
                 apizrOptions.MappingHandlerFactory.Invoke(), apizrOptions.PolicyRegistryFactory.Invoke(),
@@ -253,6 +251,8 @@ namespace Apizr
 
         #endregion
 
+        #region Builder
+
         private static IApizrCommonOptions CreateApizrCommonOptions(
             Action<IApizrCommonOptionsBuilder> commonOptionsBuilder = null)
         {
@@ -263,23 +263,12 @@ namespace Apizr
             return builder.ApizrOptions;
         }
 
-        private static IApizrRegistry CreateApizrRegistry(IApizrCommonOptions config, Action<IApizrRegistryBuilder> registryBuilder)
+        internal static IApizrProperOptions CreateApizrProperOptions<TWebApi>(IApizrCommonOptions commonOptions,
+            Action<IApizrProperOptionsBuilder> properOptionsBuilder = null)
         {
-            if (config == null)
-                throw new ArgumentNullException(nameof(config));
+            if (commonOptions == null)
+                throw new ArgumentNullException(nameof(commonOptions));
 
-            if (registryBuilder == null)
-                throw new ArgumentNullException(nameof(registryBuilder));
-
-            var builder = new ApizrRegistryBuilder(new ApizrRegistry(config));
-
-            registryBuilder.Invoke(builder);
-
-            return builder.ApizrRegistry;
-        }
-
-        private static IApizrOptions CreateApizrOptions<TWebApi>(IApizrCommonOptions config, Action<IApizrOptionsBuilder> optionsBuilder = null)
-        {
             var webApiType = typeof(TWebApi);
 
             var webApiAttribute = webApiType.GetTypeInfo().GetCustomAttribute<WebApiAttribute>(true);
@@ -299,38 +288,45 @@ namespace Apizr
                 webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
 
-            if(logAttribute == null)
+            if (logAttribute == null)
                 logAttribute = webApiType.Assembly.GetCustomAttribute<LogAttribute>();
 
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 
-            var builder = new ApizrOptionsBuilder(new ApizrOptions(config, webApiType, baseAddress,
+            var builder = new ApizrProperOptionsBuilder(new ApizrProperOptions(commonOptions, webApiType, baseAddress,
                 logAttribute?.HttpTracerMode,
                 logAttribute?.TrafficVerbosity, logAttribute?.LogLevel,
                 assemblyPolicyAttribute?.RegistryKeys, webApiPolicyAttribute?.RegistryKeys));
 
-            optionsBuilder?.Invoke(builder);
+            properOptionsBuilder?.Invoke(builder);
 
             return builder.ApizrOptions;
         }
 
-        private static LogAttribute GetLogAttribute(Type webApiType)
+        private static IApizrRegistry CreateApizrRegistry(IApizrCommonOptions commonOptions, Action<IApizrRegistryBuilder> registryBuilder)
         {
-            LogAttribute logAttribute;
-            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
-            {
-                var modelType = webApiType.GetGenericArguments().First();
-                logAttribute = modelType.GetTypeInfo().GetCustomAttribute<LogAttribute>(true);
-            }
-            else
-            {
-                logAttribute = webApiType.GetTypeInfo().GetCustomAttribute<LogAttribute>(true);
-            }
+            if (commonOptions == null)
+                throw new ArgumentNullException(nameof(commonOptions));
 
-            if (logAttribute == null)
-                logAttribute = webApiType.Assembly.GetCustomAttribute<LogAttribute>();
+            if (registryBuilder == null)
+                throw new ArgumentNullException(nameof(registryBuilder));
 
-            return logAttribute;
+            var builder = new ApizrRegistryBuilder(commonOptions);
+
+            registryBuilder.Invoke(builder);
+
+            return builder.ApizrRegistry;
         }
+
+        private static IApizrOptions CreateApizrOptions(IApizrCommonOptions commonOptions, IApizrProperOptions properOptions, Action<IApizrOptionsBuilder> optionsBuilder = null)
+        {
+            var builder = new ApizrOptionsBuilder(new ApizrOptions(commonOptions, properOptions));
+
+            optionsBuilder?.Invoke(builder);
+
+            return builder.ApizrOptions;
+        } 
+
+        #endregion
     }
 }

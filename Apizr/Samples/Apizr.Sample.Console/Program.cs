@@ -98,7 +98,7 @@ namespace Apizr.Sample.Console
 
             System.Console.WriteLine("");
             System.Console.WriteLine("Initializing...");
-            var registry = new PolicyRegistry
+            var policyRegistry = new PolicyRegistry
             {
                 {
                     "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
@@ -121,17 +121,34 @@ namespace Apizr.Sample.Console
                     //logging.SetMinimumLevel(LogLevel.Trace);
                 }));
 
-                _reqResManager = Apizr.For<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(registry)
-                    .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
-                    .WithPriorityManagement()
-                    .WithLoggerFactory(() => lazyLoggerFactory.Value)
-                    .WithLogging());
+                var apizrRegistry = Apizr.Create(
+                        options => options
+                            .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
+                            .WithLoggerFactory(() => lazyLoggerFactory.Value),
 
-                _userManager = Apizr.CrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder
-                    .WithBaseAddress("https://reqres.in/api/users")
-                    .WithPolicyRegistry(registry)
-                    .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current)));
-                    //.WithLogging());
+                        registry => registry
+                            .AddFor<IReqResService>(options => options
+                                .WithPolicyRegistry(policyRegistry)
+                                .WithLogging())
+                            .AddCrudFor<User, int, PagedResult<User>>(options => options
+                                .WithBaseAddress("https://reqres.in/api/users")
+                                .WithPolicyRegistry(policyRegistry)));
+
+                _reqResManager = apizrRegistry.GetFor<IReqResService>();
+
+                _userManager = apizrRegistry.GetFor<User, int, PagedResult<User>>();
+
+                //_reqResManager = Apizr.CreateFor<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(policyRegistry)
+                //    .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
+                //    .WithPriorityManagement()
+                //    .WithLoggerFactory(() => lazyLoggerFactory.Value)
+                //    .WithLogging());
+
+                //_userManager = Apizr.CreateCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder
+                //    .WithBaseAddress("https://reqres.in/api/users")
+                //    .WithPolicyRegistry(policyRegistry)
+                //    .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current)));
+                ////.WithLogging());
 
 
                 System.Console.WriteLine("");
@@ -148,7 +165,7 @@ namespace Apizr.Sample.Console
                     })
                     .ConfigureServices(services =>
                     {
-                        services.AddPolicyRegistry(registry);
+                        services.AddPolicyRegistry(policyRegistry);
                         services.AddMemoryCache();
 
                         if (configChoice == 2)

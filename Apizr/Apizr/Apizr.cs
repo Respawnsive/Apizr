@@ -55,9 +55,9 @@ namespace Apizr
         /// <typeparam name="TKey">The object key type (primitive)</typeparam>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static IApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>> CrudFor<T, TKey>(
+        public static IApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>> CreateCrudFor<T, TKey>(
             Action<IApizrOptionsBuilder> optionsBuilder = null) where T : class =>
-            For<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>,
+            CreateFor<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>,
                 ApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>>>(
                 (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>>(lazyWebApi,
@@ -75,11 +75,11 @@ namespace Apizr
         /// (should inherit from <see cref="IEnumerable{T}"/> or be of class type)</typeparam>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>> CrudFor<T, TKey,
+        public static IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>> CreateCrudFor<T, TKey,
             TReadAllResult>(
             Action<IApizrOptionsBuilder> optionsBuilder = null)
             where T : class =>
-            For<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>,
+            CreateFor<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>,
                 ApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>>>(
                 (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>>(lazyWebApi,
@@ -99,11 +99,11 @@ namespace Apizr
         /// <typeparam name="TReadAllParams">ReadAll query parameters</typeparam>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> CrudFor<T, TKey, TReadAllResult,
+        public static IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> CreateCrudFor<T, TKey, TReadAllResult,
             TReadAllParams>(
             Action<IApizrOptionsBuilder> optionsBuilder = null)
             where T : class where TReadAllParams : class =>
-            For<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>,
+            CreateFor<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>,
                 ApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>>(
                 (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>(lazyWebApi,
@@ -125,7 +125,7 @@ namespace Apizr
         /// <param name="apizrManagerFactory">The custom manager implementation instance factory</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static TApizrManager CrudFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(
+        public static TApizrManager CreateCrudFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(
             Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler,
                 IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptionsBase,
                 TApizrManager> apizrManagerFactory,
@@ -133,7 +133,7 @@ namespace Apizr
             where T : class
             where TReadAllParams : class
             where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> =>
-            For(apizrManagerFactory, CreateApizrCommonOptions(), optionsBuilder);
+            CreateFor(apizrManagerFactory, CreateApizrCommonOptions(), optionsBuilder);
 
         #endregion
 
@@ -145,9 +145,9 @@ namespace Apizr
         /// <typeparam name="TWebApi">The web api interface to manage</typeparam>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static IApizrManager<TWebApi> For<TWebApi>(
+        public static IApizrManager<TWebApi> CreateFor<TWebApi>(
             Action<IApizrOptionsBuilder> optionsBuilder = null) =>
-            For<TWebApi, ApizrManager<TWebApi>>(
+            CreateFor<TWebApi, ApizrManager<TWebApi>>(
                 (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<TWebApi>(lazyWebApi, connectivityHandler, cacheHandler, mappingHandler,
                         policyRegistry, apizrOptions), CreateApizrCommonOptions(), optionsBuilder);
@@ -160,24 +160,24 @@ namespace Apizr
         /// <param name="apizrManagerFactory">The custom manager implementation instance factory</param>
         /// <param name="optionsBuilder">The builder defining some options</param>
         /// <returns></returns>
-        public static TApizrManager For<TWebApi, TApizrManager>(
+        public static TApizrManager CreateFor<TWebApi, TApizrManager>(
             Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler,
                 IReadOnlyPolicyRegistry<string>, IApizrOptions<TWebApi>, TApizrManager> apizrManagerFactory,
             Action<IApizrOptionsBuilder> optionsBuilder = null)
             where TApizrManager : IApizrManager<TWebApi> =>
-            For(apizrManagerFactory, CreateApizrCommonOptions(), optionsBuilder);
+            CreateFor(apizrManagerFactory, CreateApizrCommonOptions(), optionsBuilder);
 
-        private static TApizrManager For<TWebApi, TApizrManager>(
+        private static TApizrManager CreateFor<TWebApi, TApizrManager>(
             Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler,
                 IReadOnlyPolicyRegistry<string>, IApizrOptions<TWebApi>, TApizrManager> apizrManagerFactory,
             IApizrCommonOptions commonOptions,
             Action<IApizrOptionsBuilder> optionsBuilder = null)
             where TApizrManager : IApizrManager<TWebApi>
-            => For(apizrManagerFactory, commonOptions, CreateApizrProperOptions<TWebApi>(commonOptions),
+            => CreateFor(apizrManagerFactory, commonOptions, CreateApizrProperOptions<TWebApi>(commonOptions),
                 optionsBuilder);
 
 
-        internal static TApizrManager For<TWebApi, TApizrManager>(
+        internal static TApizrManager CreateFor<TWebApi, TApizrManager>(
             Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptions<TWebApi>, TApizrManager> apizrManagerFactory,
             IApizrCommonOptions commonOptions,
             IApizrProperOptions properOptions,

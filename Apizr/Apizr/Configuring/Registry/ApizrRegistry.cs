@@ -16,15 +16,10 @@ namespace Apizr.Configuring.Registry
         }
 
         public void AddOrUpdateFor<TWebApi>(Func<IApizrManager<TWebApi>> managerFactory)
-            => AddOrUpdateFor<TWebApi, IApizrManager<TWebApi>>(managerFactory);
-
-        public void AddOrUpdateFor<TWebApi, TApizrManager>(Func<TApizrManager> managerFactory) where TApizrManager : IApizrManager<TWebApi>
         {
             var registry = ThrowIfNotConcurrentImplementation();
 
-            var valueFactory = new Func<IApizrManager>(() => managerFactory.Invoke());
-
-            registry.AddOrUpdate(typeof(TWebApi), k => valueFactory, (k, e) => valueFactory);
+            registry.AddOrUpdate(typeof(TWebApi), k => managerFactory, (k, e) => managerFactory);
         }
 
         public void Populate(Action<Type, Func<object>> populateAction)

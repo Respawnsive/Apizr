@@ -1,4 +1,10 @@
-﻿using Apizr.Configuring.Common;
+﻿using Apizr.Caching;
+using Apizr.Configuring.Common;
+using Apizr.Configuring.Proper;
+using Apizr.Connecting;
+using Apizr.Mapping;
+using Polly.Registry;
+using System;
 
 namespace Apizr.Configuring.Registry
 {

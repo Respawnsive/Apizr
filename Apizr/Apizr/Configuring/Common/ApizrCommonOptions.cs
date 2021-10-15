@@ -6,6 +6,7 @@ using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
 using Microsoft.Extensions.Logging;
+using Polly.Registry;
 using Refit;
 
 namespace Apizr.Configuring.Common
@@ -18,6 +19,7 @@ namespace Apizr.Configuring.Common
             TrafficVerbosityFactory = () => HttpMessageParts.None;
             LogLevelFactory = () => LogLevel.None;
             LoggerFactory = () => new DebugLoggerFactory(LogLevel.Information);
+            PolicyRegistryFactory = () => new PolicyRegistry();
             HttpClientHandlerFactory = () => new HttpClientHandler();
             RefitSettingsFactory = () => new RefitSettings();
             ConnectivityHandlerFactory = () => new DefaultConnectivityHandler();
@@ -27,6 +29,7 @@ namespace Apizr.Configuring.Common
         }
 
         public Func<ILoggerFactory> LoggerFactory { get; set; }
+        public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set; }
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
 
         private Func<RefitSettings> _refitSettingsFactory;

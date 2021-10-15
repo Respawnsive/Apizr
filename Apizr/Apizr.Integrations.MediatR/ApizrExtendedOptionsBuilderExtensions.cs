@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using Apizr.Extending;
+using Apizr.Extending.Configuring;
 using Apizr.Mapping;
 using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Cruding.Handling;

@@ -4,6 +4,7 @@ using Apizr.Configuring.Shared;
 using Apizr.Connecting;
 using Apizr.Mapping;
 using Microsoft.Extensions.Logging;
+using Polly.Registry;
 using Refit;
 
 namespace Apizr.Configuring.Common
@@ -13,6 +14,12 @@ namespace Apizr.Configuring.Common
         where TApizrCommonOptions : IApizrCommonOptionsBase
         where TApizrCommonOptionsBuilder : IApizrCommonOptionsBuilderBase<TApizrCommonOptions, TApizrCommonOptionsBuilder>
     {
+        /// <summary>
+        /// Provide a policy registry
+        /// </summary>
+        /// <param name="policyRegistryFactory">A policy registry instance factory</param>
+        /// <returns></returns>
+        TApizrCommonOptionsBuilder WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<string>> policyRegistryFactory);
 
         /// <summary>
         /// Provide some Refit specific settings

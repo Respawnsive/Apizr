@@ -27,12 +27,5 @@ namespace Apizr.Configuring.Proper
         /// <param name="baseAddress">Your web api base address</param>
         /// <returns></returns>
         TApizrProperOptionsBuilder WithBaseAddress(Uri baseAddress);
-
-        /// <summary>
-        /// Provide a policy registry
-        /// </summary>
-        /// <param name="policyRegistry">A policy registry instance</param>
-        /// <returns></returns>
-        TApizrProperOptionsBuilder WithPolicyRegistry(IReadOnlyPolicyRegistry<string> policyRegistry);
     }
 }

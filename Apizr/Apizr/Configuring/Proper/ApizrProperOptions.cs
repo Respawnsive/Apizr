@@ -20,7 +20,6 @@ namespace Apizr.Configuring.Proper
             webApiPolicyRegistryKeys)
         {
             BaseAddressFactory = () => baseAddress;
-            PolicyRegistryFactory = () => new PolicyRegistry();
             HttpTracerModeFactory = () => httpTracerMode ?? sharedOptions.HttpTracerModeFactory.Invoke();
             TrafficVerbosityFactory = () => trafficVerbosity ?? sharedOptions.TrafficVerbosityFactory.Invoke();
             LogLevelFactory = () => logLevel ?? sharedOptions.LogLevelFactory.Invoke();
@@ -34,8 +33,6 @@ namespace Apizr.Configuring.Proper
             get => _baseAddressFactory;
             set => _baseAddressFactory = () => BaseAddress = value.Invoke();
         }
-
-        public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set; }
 
         private Func<HttpTracerMode> _httpTracerModeFactory;
         public Func<HttpTracerMode> HttpTracerModeFactory

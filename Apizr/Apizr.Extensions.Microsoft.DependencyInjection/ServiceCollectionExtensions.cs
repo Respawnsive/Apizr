@@ -7,6 +7,8 @@ using Apizr.Caching;
 using Apizr.Configuring;
 using Apizr.Connecting;
 using Apizr.Extending;
+using Apizr.Extending.Configuring;
+using Apizr.Extending.Configuring.Common;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Mapping;
@@ -493,7 +495,7 @@ namespace Apizr
         
         internal static IServiceCollection AddApizrFor(
             this IServiceCollection services, Type webApiType, Type apizrManagerType,
-            IApizrExtendedConfiguration apizrConfiguration, Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
+            IApizrExtendedCommonOptions apizrConfiguration, Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
         {
             if (!typeof(IApizrManager<>).MakeGenericType(webApiType).IsAssignableFrom(apizrManagerType))
                 throw new ArgumentException(
@@ -612,17 +614,17 @@ namespace Apizr
 
         #endregion
 
-        private static IApizrExtendedConfiguration CreateApizrExtendedConfiguration(
-            Action<IApizrExtendedConfigurationBuilder> configBuilder = null)
+        private static IApizrExtendedCommonOptions CreateApizrExtendedConfiguration(
+            Action<IApizrExtendedCommonOptionsBuilder<,>> configBuilder = null)
         {
-            var builder = new ApizrExtendedConfigurationBuilder(new ApizrExtendedConfiguration());
+            var builder = new ApizrExtendedCommonOptionsBuilder(new ApizrExtendedCommonOptions());
 
             configBuilder?.Invoke(builder);
 
             return builder.ApizrConfiguration;
         }
 
-        private static IApizrExtendedOptions CreateApizrExtendedOptions(Type webApiType, Type apizrManagerType, IApizrExtendedConfiguration config, Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
+        private static IApizrExtendedOptions CreateApizrExtendedOptions(Type webApiType, Type apizrManagerType, IApizrExtendedCommonOptions config, Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
         {
             Uri baseAddress = null;
             var webApiAttribute = webApiType.GetTypeInfo().GetCustomAttribute<WebApiAttribute>(true);

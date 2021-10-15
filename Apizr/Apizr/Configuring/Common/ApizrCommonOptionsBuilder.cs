@@ -8,6 +8,7 @@ using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
 using Microsoft.Extensions.Logging;
+using Polly.Registry;
 using Refit;
 
 namespace Apizr.Configuring.Common
@@ -89,6 +90,16 @@ namespace Apizr.Configuring.Common
         public IApizrCommonOptionsBuilder AddDelegatingHandler(Func<ILogger, IApizrOptionsBase, DelegatingHandler> delegatingHandlerFactory)
         {
             Options.DelegatingHandlersFactories.Add(delegatingHandlerFactory);
+
+            return this;
+        }
+
+        public IApizrCommonOptionsBuilder WithPolicyRegistry(IReadOnlyPolicyRegistry<string> policyRegistry)
+            => WithPolicyRegistry(() => policyRegistry);
+
+        public IApizrCommonOptionsBuilder WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<string>> policyRegistryFactory)
+        {
+            Options.PolicyRegistryFactory = policyRegistryFactory;
 
             return this;
         }

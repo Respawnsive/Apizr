@@ -1,6 +1,5 @@
 ﻿using System;
 using Apizr.Configuring.Shared;
-using Polly.Registry;
 
 namespace Apizr.Configuring.Proper
 {
@@ -22,13 +21,6 @@ namespace Apizr.Configuring.Proper
         /// <param name="baseAddressFactory">Your web api base address factory</param>
         /// <returns></returns>
         TApizrProperOptionsBuilder WithBaseAddress(Func<Uri> baseAddressFactory);
-
-        /// <summary>
-        /// Provide a policy registry
-        /// </summary>
-        /// <param name="policyRegistryFactory">A policy registry instance factory</param>
-        /// <returns></returns>
-        TApizrProperOptionsBuilder WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<string>> policyRegistryFactory);
     }
 
     public interface IApizrProperOptionsBuilder : IApizrProperOptionsBuilder<IApizrProperOptions, IApizrProperOptionsBuilder>

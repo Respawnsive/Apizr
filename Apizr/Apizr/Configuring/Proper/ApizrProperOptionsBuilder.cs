@@ -123,16 +123,6 @@ namespace Apizr.Configuring.Proper
             return this;
         }
 
-        public IApizrProperOptionsBuilder WithPolicyRegistry(IReadOnlyPolicyRegistry<string> policyRegistry)
-            => WithPolicyRegistry(() => policyRegistry);
-
-        public IApizrProperOptionsBuilder WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<string>> policyRegistryFactory)
-        {
-            Options.PolicyRegistryFactory = policyRegistryFactory;
-
-            return this;
-        }
-
         public IApizrProperOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
             HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel logLevel = LogLevel.Information)
             => WithLogging(() => httpTracerMode, () => trafficVerbosity, () => logLevel);

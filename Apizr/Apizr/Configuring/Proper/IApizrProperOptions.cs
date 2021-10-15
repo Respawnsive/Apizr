@@ -12,10 +12,5 @@ namespace Apizr.Configuring.Proper
         /// Base address factory
         /// </summary>
         Func<Uri> BaseAddressFactory { get; }
-
-        /// <summary>
-        /// Policy registry factory
-        /// </summary>
-        Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; }
     }
 }

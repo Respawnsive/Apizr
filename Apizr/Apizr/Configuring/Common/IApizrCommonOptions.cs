@@ -6,6 +6,7 @@ using Apizr.Configuring.Shared;
 using Apizr.Connecting;
 using Apizr.Mapping;
 using Microsoft.Extensions.Logging;
+using Polly.Registry;
 using Refit;
 
 namespace Apizr.Configuring.Common
@@ -16,6 +17,11 @@ namespace Apizr.Configuring.Common
         /// Logger factory
         /// </summary>
         Func<ILoggerFactory> LoggerFactory { get; set; }
+
+        /// <summary>
+        /// Policy registry factory
+        /// </summary>
+        Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; }
 
         /// <summary>
         /// Refit settings factory

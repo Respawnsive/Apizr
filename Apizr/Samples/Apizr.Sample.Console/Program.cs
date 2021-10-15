@@ -122,17 +122,16 @@ namespace Apizr.Sample.Console
                 }));
 
                 var apizrRegistry = Apizr.Create(
-                        options => options
+                        config => config
+                            .WithPolicyRegistry(policyRegistry)
                             .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
                             .WithLoggerFactory(() => lazyLoggerFactory.Value),
 
                         registry => registry
                             .AddFor<IReqResService>(options => options
-                                .WithPolicyRegistry(policyRegistry)
                                 .WithLogging())
                             .AddCrudFor<User, int, PagedResult<User>>(options => options
-                                .WithBaseAddress("https://reqres.in/api/users")
-                                .WithPolicyRegistry(policyRegistry)));
+                                .WithBaseAddress("https://reqres.in/api/users")));
 
                 _reqResManager = apizrRegistry.GetFor<IReqResService>();
 

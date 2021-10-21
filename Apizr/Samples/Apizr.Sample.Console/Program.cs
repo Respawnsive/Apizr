@@ -172,23 +172,21 @@ namespace Apizr.Sample.Console
                             services.AddApizr(
                                 registry => registry
                                     .AddFor<IReqResService>(options => options
-                                        //.WithPriorityManagement()
                                         .WithHttpClientHandler(new HttpClientHandler
                                         {
                                             AutomaticDecompression = DecompressionMethods.All,
                                             CookieContainer = CookieContainer
                                         }))
                                     .AddCrudFor(optionsBuilder => optionsBuilder
-                                        //.WithInMemoryCacheHandler()
-                                        //.WithCacheHandler<AkavacheCacheHandler>()
                                         .WithLogging(), typeof(User)),
 
                                 config => config
+                                    //.WithPriorityManagement()
+                                    //.WithInMemoryCacheHandler()
+                                    //.WithCacheHandler<AkavacheCacheHandler>()
+                                    .WithAkavacheCacheHandler()
                                     .WithLogging());
 
-                            //.WithInMemoryCacheHandler()
-                            //.WithCacheHandler<AkavacheCacheHandler>()
-                            //.WithAkavacheCacheHandler());
 
                             /*
                             //services.AddRefitClient<IReqResService>();

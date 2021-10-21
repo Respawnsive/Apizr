@@ -636,7 +636,7 @@ namespace Apizr
 
             foreach (var postRegistrationAction in apizrOptions.PostRegistrationActions)
             {
-                postRegistrationAction.Invoke(services);
+                postRegistrationAction.Invoke(properOptions.WebApiType, services);
             }
 
             return managerForApiType;

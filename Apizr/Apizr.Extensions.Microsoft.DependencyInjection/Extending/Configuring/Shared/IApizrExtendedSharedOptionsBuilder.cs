@@ -11,7 +11,8 @@ using Microsoft.Extensions.Logging;
 
 namespace Apizr.Extending.Configuring.Shared
 {
-    public interface IApizrExtendedSharedOptionsBuilder<out TApizrExtendedSharedOptions, out TApizrExtendedSharedOptionsBuilder> : IApizrSharedOptionsBuilderBase<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>
+    public interface IApizrExtendedSharedOptionsBuilder<out TApizrExtendedSharedOptions, out TApizrExtendedSharedOptionsBuilder> : IApizrExtendedSharedOptionsBuilderBase, 
+        IApizrSharedOptionsBuilderBase<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>
         where TApizrExtendedSharedOptions : IApizrSharedOptionsBase
         where TApizrExtendedSharedOptionsBuilder : IApizrSharedOptionsBuilderBase<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>
     {

@@ -94,6 +94,6 @@ namespace Apizr.Extending.Configuring
         public IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }
         public IDictionary<Type, WebApiAttribute> WebApis { get; }
         public IDictionary<Type, MappedWithAttribute> ObjectMappings { get; }
-        public IList<Action<IServiceCollection>> PostRegistrationActions { get; }
+        public IList<Action<Type, IServiceCollection>> PostRegistrationActions { get; }
     }
 }

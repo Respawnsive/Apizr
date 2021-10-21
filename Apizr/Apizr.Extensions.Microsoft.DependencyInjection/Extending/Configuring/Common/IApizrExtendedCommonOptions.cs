@@ -66,6 +66,6 @@ namespace Apizr.Extending.Configuring.Common
         /// <summary>
         /// Post registration actions
         /// </summary>
-        IList<Action<IServiceCollection>> PostRegistrationActions { get; }
+        IList<Action<Type, IServiceCollection>> PostRegistrationActions { get; }
     }
 }

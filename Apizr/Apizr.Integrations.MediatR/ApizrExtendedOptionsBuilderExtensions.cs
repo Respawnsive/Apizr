@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using Apizr.Extending;
-using Apizr.Extending.Configuring;
+using Apizr.Extending.Configuring.Common;
 using Apizr.Mapping;
 using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Cruding.Handling;
@@ -27,9 +27,9 @@ namespace Apizr
         /// </summary>
         /// <param name="optionsBuilder"></param>
         /// <returns></returns>
-        public static IApizrExtendedOptionsBuilder WithMediation(this IApizrExtendedOptionsBuilder optionsBuilder)
+        public static IApizrExtendedCommonOptionsBuilder WithMediation(this IApizrExtendedCommonOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.ApizrOptions.PostRegistrationActions.Add(services =>
+            optionsBuilder.ApizrOptions.PostRegistrationActions.Add((webApiType, services) =>
             {
                 #region Crud
 
@@ -278,11 +278,11 @@ namespace Apizr
                             }
 
                             // ServiceType
-                            var executeRequestType = typeof(ExecuteRequest<,>).MakeGenericType(optionsBuilder.ApizrOptions.WebApiType, apiResponseType);
+                            var executeRequestType = typeof(ExecuteRequest<,>).MakeGenericType(webApiType, apiResponseType);
                             var executeRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeRequestType, apiResponseType);
 
                             // ImplementationType
-                            var executeRequestHandlerImplementationType = typeof(ExecuteRequestHandler<,>).MakeGenericType(optionsBuilder.ApizrOptions.WebApiType, apiResponseType);
+                            var executeRequestHandlerImplementationType = typeof(ExecuteRequestHandler<,>).MakeGenericType(webApiType, apiResponseType);
 
                             // Registration
                             services.TryAddTransient(executeRequestHandlerServiceType, executeRequestHandlerImplementationType);
@@ -297,11 +297,11 @@ namespace Apizr
                             if (modelResponseType != null)
                             {
                                 // ServiceType
-                                var executeMappedRequestType = typeof(ExecuteRequest<,,>).MakeGenericType(optionsBuilder.ApizrOptions.WebApiType, modelResponseType, apiResponseType);
+                                var executeMappedRequestType = typeof(ExecuteRequest<,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType);
                                 var executeMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeMappedRequestType, modelResponseType);
 
                                 // ImplementationType
-                                var executeMappedRequestHandlerImplementationType = typeof(ExecuteRequestHandler<,,>).MakeGenericType(optionsBuilder.ApizrOptions.WebApiType, modelResponseType, apiResponseType);
+                                var executeMappedRequestHandlerImplementationType = typeof(ExecuteRequestHandler<,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType);
 
                                 // Registration
                                 services.TryAddTransient(executeMappedRequestHandlerServiceType, executeMappedRequestHandlerImplementationType);
@@ -310,12 +310,12 @@ namespace Apizr
                         else if (returnType == typeof(Task))
                         {
                             // ServiceType
-                            var executeRequestType = typeof(ExecuteRequest<>).MakeGenericType(optionsBuilder.ApizrOptions.WebApiType);
+                            var executeRequestType = typeof(ExecuteRequest<>).MakeGenericType(webApiType);
                             var executeRequestResponseType = typeof(Unit);
                             var executeRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeRequestType, executeRequestResponseType);
 
                             // ImplementationType
-                            var executeRequestHandlerImplementationType = typeof(ExecuteRequestHandler<>).MakeGenericType(optionsBuilder.ApizrOptions.WebApiType);
+                            var executeRequestHandlerImplementationType = typeof(ExecuteRequestHandler<>).MakeGenericType(webApiType);
 
                             // Registration
                             services.TryAddTransient(executeRequestHandlerServiceType, executeRequestHandlerImplementationType);

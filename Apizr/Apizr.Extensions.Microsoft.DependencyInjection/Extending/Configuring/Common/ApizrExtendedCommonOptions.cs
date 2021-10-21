@@ -30,7 +30,7 @@ namespace Apizr.Extending.Configuring.Common
             CrudEntities = new Dictionary<Type, CrudEntityAttribute>();
             WebApis = new Dictionary<Type, WebApiAttribute>();
             ObjectMappings = new Dictionary<Type, MappedWithAttribute>();
-            PostRegistrationActions = new List<Action<IServiceCollection>>();
+            PostRegistrationActions = new List<Action<Type, IServiceCollection>>();
         }
         public Type ConnectivityHandlerType { get; set; }
         public Type CacheHandlerType { get; set; }
@@ -79,6 +79,6 @@ namespace Apizr.Extending.Configuring.Common
         public IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }
         public IDictionary<Type, WebApiAttribute> WebApis { get; }
         public IDictionary<Type, MappedWithAttribute> ObjectMappings { get; }
-        public IList<Action<IServiceCollection>> PostRegistrationActions { get; }
+        public IList<Action<Type, IServiceCollection>> PostRegistrationActions { get; }
     }
 }

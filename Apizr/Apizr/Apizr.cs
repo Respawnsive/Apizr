@@ -27,10 +27,13 @@ namespace Apizr
     {
         #region Registry
 
-        public static IApizrRegistry Create(Action<IApizrRegistryBuilder> registryBuilder)
-            => Create(null, registryBuilder);
-
-        public static IApizrRegistry Create(Action<IApizrCommonOptionsBuilder> commonOptionsBuilder, Action<IApizrRegistryBuilder> registryBuilder)
+        /// <summary>
+        /// Create a registry with all managers built with both common and proper options
+        /// </summary>
+        /// <param name="registryBuilder">The registry builder with access to proper options</param>
+        /// <param name="commonOptionsBuilder">The common options shared by all managers</param>
+        /// <returns></returns>
+        public static IApizrRegistry Create(Action<IApizrRegistryBuilder> registryBuilder, Action<IApizrCommonOptionsBuilder> commonOptionsBuilder = null)
         {
             if (registryBuilder == null)
                 throw new ArgumentNullException(nameof(registryBuilder));
@@ -45,6 +48,24 @@ namespace Apizr
         #endregion
 
         #region Crud
+
+
+        /// <summary>
+        /// Create a <see cref="ApizrManager{ICrudApi}"/> instance for <see cref="T"/> object type (class), 
+        /// with key of type <see cref="int"/> and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
+        /// and ReadAll query parameters of type IDictionary{string,object}
+        /// </summary>
+        /// <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
+        /// <param name="optionsBuilder">The builder defining some options</param>
+        /// <returns></returns>
+        public static IApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>> CreateCrudFor<T>(
+            Action<IApizrOptionsBuilder> optionsBuilder = null) where T : class =>
+            CreateFor<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>,
+                ApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>>(
+                (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>
+                    new ApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>(lazyWebApi,
+                        connectivityHandler, cacheHandler, mappingHandler,
+                        policyRegistry, apizrOptions), CreateApizrCommonOptions(), optionsBuilder);
 
         /// <summary>
         /// Create a <see cref="ApizrManager{ICrudApi}"/> instance for <see cref="T"/> object type (class), 

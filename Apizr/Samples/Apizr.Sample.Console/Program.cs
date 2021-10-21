@@ -122,16 +122,16 @@ namespace Apizr.Sample.Console
                 }));
 
                 var apizrRegistry = Apizr.Create(
-                        config => config
-                            .WithPolicyRegistry(policyRegistry)
-                            .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
-                            .WithLoggerFactory(() => lazyLoggerFactory.Value),
+                    registry => registry
+                        .AddFor<IReqResService>(options => options
+                            .WithLogging())
+                        .AddCrudFor<User, int, PagedResult<User>>(options => options
+                            .WithBaseAddress("https://reqres.in/api/users")),
 
-                        registry => registry
-                            .AddFor<IReqResService>(options => options
-                                .WithLogging())
-                            .AddCrudFor<User, int, PagedResult<User>>(options => options
-                                .WithBaseAddress("https://reqres.in/api/users")));
+                    config => config
+                        .WithPolicyRegistry(policyRegistry)
+                        .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
+                        .WithLoggerFactory(() => lazyLoggerFactory.Value));
 
                 _reqResManager = apizrRegistry.GetFor<IReqResService>();
 
@@ -169,6 +169,28 @@ namespace Apizr.Sample.Console
 
                         if (configChoice == 2)
                         {
+                            services.AddApizr(
+                                registry => registry
+                                    .AddFor<IReqResService>(options => options
+                                        //.WithPriorityManagement()
+                                        .WithHttpClientHandler(new HttpClientHandler
+                                        {
+                                            AutomaticDecompression = DecompressionMethods.All,
+                                            CookieContainer = CookieContainer
+                                        }))
+                                    .AddCrudFor(optionsBuilder => optionsBuilder
+                                        //.WithInMemoryCacheHandler()
+                                        //.WithCacheHandler<AkavacheCacheHandler>()
+                                        .WithLogging(), typeof(User)),
+
+                                config => config
+                                    .WithLogging());
+
+                            //.WithInMemoryCacheHandler()
+                            //.WithCacheHandler<AkavacheCacheHandler>()
+                            //.WithAkavacheCacheHandler());
+
+                            /*
                             //services.AddRefitClient<IReqResService>();
                             // Manual registration
                             services.AddApizrFor<IReqResService>(optionsBuilder =>
@@ -199,6 +221,7 @@ namespace Apizr.Sample.Console
                                         CookieContainer = CookieContainer
                                     })//.WithInMemoryCacheHandler()//.WithCacheHandler<AkavacheCacheHandler>()
                                     .WithLogging(), typeof(User));
+                            */
                         }
                         else
                         {

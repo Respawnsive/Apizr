@@ -23,7 +23,7 @@ namespace Apizr.Configuring
             LogLevelFactory = properOptions.LogLevelFactory;
             LoggerFactory = commonOptions.LoggerFactory;
             HttpClientHandlerFactory = properOptions.HttpClientHandlerFactory;
-            PolicyRegistryFactory = properOptions.PolicyRegistryFactory;
+            PolicyRegistryFactory = commonOptions.PolicyRegistryFactory;
             RefitSettingsFactory = commonOptions.RefitSettingsFactory;
             ConnectivityHandlerFactory = commonOptions.ConnectivityHandlerFactory;
             CacheHandlerFactory = commonOptions.CacheHandlerFactory;

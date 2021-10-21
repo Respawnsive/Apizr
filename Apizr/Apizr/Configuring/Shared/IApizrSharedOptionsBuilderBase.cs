@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;
-using Refit;
 
 namespace Apizr.Configuring.Shared
 {
@@ -21,6 +18,13 @@ namespace Apizr.Configuring.Shared
         /// Apizr common options
         /// </summary>
         TApizrSharedOptions ApizrOptions { get; }
+
+        /// <summary>
+        /// Provide a custom HttpClientHandler
+        /// </summary>
+        /// <param name="httpClientHandler">An <see cref="HttpClientHandler"/> instance</param>
+        /// <returns></returns>
+        TApizrSharedOptionsBuilder WithHttpClientHandler(HttpClientHandler httpClientHandler);
 
         /// <summary>
         /// Provide a method to refresh the authorization token when needed

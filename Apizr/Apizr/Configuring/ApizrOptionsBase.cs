@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Linq;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Proper;
 using Apizr.Configuring.Shared;
-using Apizr.Logging;
-using Microsoft.Extensions.Logging;
 using Refit;
 
 namespace Apizr.Configuring

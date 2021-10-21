@@ -4,7 +4,6 @@ using Apizr.Configuring.Shared;
 using Apizr.Connecting;
 using Apizr.Mapping;
 using Microsoft.Extensions.Logging;
-using Polly.Registry;
 using Refit;
 
 namespace Apizr.Configuring.Common
@@ -18,13 +17,6 @@ namespace Apizr.Configuring.Common
     where TApizrCommonOptions : IApizrCommonOptionsBase
     where TApizrCommonOptionsBuilder : IApizrCommonOptionsBuilderBase<TApizrCommonOptions, TApizrCommonOptionsBuilder>
     {
-        /// <summary>
-        /// Provide a policy registry
-        /// </summary>
-        /// <param name="policyRegistry">A policy registry instance</param>
-        /// <returns></returns>
-        TApizrCommonOptionsBuilder WithPolicyRegistry(IReadOnlyPolicyRegistry<string> policyRegistry);
-
         /// <summary>
         /// Provide some Refit specific settings
         /// </summary>
@@ -52,13 +44,6 @@ namespace Apizr.Configuring.Common
         /// <param name="cacheHandler">An <see cref="ICacheHandler"/> mapping implementation instance</param>
         /// <returns></returns>
         TApizrCommonOptionsBuilder WithCacheHandler(ICacheHandler cacheHandler);
-
-        /// <summary>
-        /// Provide a logger factory
-        /// </summary>
-        /// <param name="loggerFactory">The logger factory</param>
-        /// <returns></returns>
-        TApizrCommonOptionsBuilder WithLoggerFactory(ILoggerFactory loggerFactory);
 
         /// <summary>
         /// Provide a mapping handler to map entities

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Net.Http;
-using Apizr.Caching;
 using Apizr.Configuring.Shared;
-using Polly.Registry;
 
 namespace Apizr.Configuring.Proper
 {

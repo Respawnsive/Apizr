@@ -17,6 +17,13 @@ namespace Apizr.Configuring.Common
         /// <summary>
         /// Provide a policy registry
         /// </summary>
+        /// <param name="policyRegistry">A policy registry instance</param>
+        /// <returns></returns>
+        TApizrCommonOptionsBuilder WithPolicyRegistry(IReadOnlyPolicyRegistry<string> policyRegistry);
+
+        /// <summary>
+        /// Provide a policy registry
+        /// </summary>
         /// <param name="policyRegistryFactory">A policy registry instance factory</param>
         /// <returns></returns>
         TApizrCommonOptionsBuilder WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<string>> policyRegistryFactory);
@@ -41,6 +48,13 @@ namespace Apizr.Configuring.Common
         /// <param name="cacheHandlerFactory">An <see cref="ICacheHandler"/> mapping implementation instance factory</param>
         /// <returns></returns>
         TApizrCommonOptionsBuilder WithCacheHandler(Func<ICacheHandler> cacheHandlerFactory);
+
+        /// <summary>
+        /// Provide a logger factory
+        /// </summary>
+        /// <param name="loggerFactory">The logger factory</param>
+        /// <returns></returns>
+        TApizrCommonOptionsBuilder WithLoggerFactory(ILoggerFactory loggerFactory);
 
         /// <summary>
         /// Provide a logger factory

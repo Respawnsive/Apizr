@@ -14,14 +14,6 @@ namespace Apizr.Configuring.Shared
         where TApizrSharedOptions : IApizrSharedOptionsBase
         where TApizrSharedOptionsBuilder : IApizrSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>
     {
-
-        /// <summary>
-        /// Provide a custom HttpClientHandler
-        /// </summary>
-        /// <param name="httpClientHandler">An <see cref="HttpClientHandler"/> instance</param>
-        /// <returns></returns>
-        TApizrSharedOptionsBuilder WithHttpClientHandler(HttpClientHandler httpClientHandler);
-
         /// <summary>
         /// Provide a custom HttpClientHandler
         /// </summary>

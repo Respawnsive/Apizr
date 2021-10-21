@@ -24,6 +24,14 @@ namespace Apizr.Configuring.Registry
 
         #region Crud
 
+        public IApizrRegistryBuilder AddCrudFor<T>(Action<IApizrProperOptionsBuilder> optionsBuilder = null) where T : class =>
+            AddFor<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>,
+                ApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>>(
+                (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>
+                    new ApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>(lazyWebApi,
+                        connectivityHandler, cacheHandler, mappingHandler,
+                        policyRegistry, apizrOptions), optionsBuilder);
+
         public IApizrRegistryBuilder AddCrudFor<T, TKey>(
             Action<IApizrProperOptionsBuilder> properOptionsBuilder = null) where T : class =>
             AddFor<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>,
@@ -48,7 +56,7 @@ namespace Apizr.Configuring.Registry
         public IApizrRegistryBuilder AddCrudFor<T, TKey, TReadAllResult,
             TReadAllParams>(
             Action<IApizrProperOptionsBuilder> properOptionsBuilder = null)
-            where T : class where TReadAllParams : class =>
+            where T : class =>
             AddFor<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>,
                 ApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>>(
                 (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>

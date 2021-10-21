@@ -9,6 +9,8 @@ using Apizr.Connecting;
 using Apizr.Extending;
 using Apizr.Extending.Configuring;
 using Apizr.Extending.Configuring.Common;
+using Apizr.Extending.Configuring.Proper;
+using Apizr.Extending.Configuring.Registry;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Mapping;
@@ -29,14 +31,28 @@ namespace Apizr
     {
         #region Registry
 
-        //public static IServiceCollection AddApizr(this IServiceCollection services,
-        //    Action<IApizrExtendedConfigurationBuilder> configBuilder,
-        //    Action<IApizrExtendedRegistryBuilder> collectionBuilder)
-        //{
+        /// <summary>
+        /// Create a registry with all managers built with both common and proper options
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="registryBuilder">The registry builder with access to proper options</param>
+        /// <param name="optionsBuilder">The common options shared by all managers</param>
+        /// <returns></returns>
+        public static IServiceCollection AddApizr(this IServiceCollection services,
+            Action<IApizrExtendedRegistryBuilder> registryBuilder,
+            Action<IApizrExtendedCommonOptionsBuilder> optionsBuilder = null)
+        {
+            if (registryBuilder == null)
+                throw new ArgumentNullException(nameof(registryBuilder));
 
+            var commonOptions = CreateApizrExtendedCommonOptions(optionsBuilder);
 
-        //    return services;
-        //} 
+            var apizrRegistry = (ApizrExtendedRegistry)CreateApizrExtendedRegistry(services, commonOptions, registryBuilder);
+
+            services.AddSingleton(serviceProvider => apizrRegistry.GetInstance(serviceProvider));
+
+            return services;
+        }
 
         #endregion
 
@@ -253,7 +269,7 @@ namespace Apizr
                     readAllResultType, crudedReadAllParamsType),
                 apizrManagerType.MakeGenericTypeIfNeeded(typeof(ICrudApi<,,,>).MakeGenericType(crudedType, crudedKeyType,
                     readAllResultType, crudedReadAllParamsType)),
-                CreateApizrExtendedConfiguration(), optionsBuilder);
+                CreateApizrExtendedCommonOptions(), optionsBuilder);
         }
 
         /// <summary>
@@ -354,7 +370,7 @@ namespace Apizr
                         readAllResultType, crud.Value.ReadAllParamsType),
                     apizrManagerType.MakeGenericType(typeof(ICrudApi<,,,>).MakeGenericType(crud.Key, crud.Value.KeyType,
                         readAllResultType, crud.Value.ReadAllParamsType)),
-                    CreateApizrExtendedConfiguration(), optionsBuilder);
+                    CreateApizrExtendedCommonOptions(), optionsBuilder);
             }
 
             return services;
@@ -374,7 +390,7 @@ namespace Apizr
         public static IServiceCollection AddApizrFor<TWebApi>(this IServiceCollection services,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
             AddApizrFor(services, typeof(TWebApi), typeof(ApizrManager<TWebApi>),
-                CreateApizrExtendedConfiguration(), optionsBuilder);
+                CreateApizrExtendedCommonOptions(), optionsBuilder);
 
         /// <summary>
         /// Register a custom <see cref="IApizrManager{TWebApi}"/>
@@ -388,7 +404,7 @@ namespace Apizr
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
             where TApizrManager : IApizrManager<TWebApi> =>
             AddApizrFor(services, typeof(TWebApi), typeof(TApizrManager),
-                CreateApizrExtendedConfiguration(), optionsBuilder);
+                CreateApizrExtendedCommonOptions(), optionsBuilder);
 
         /// <summary>
         /// Register <see cref="IApizrManager{webApiType}"/>
@@ -400,7 +416,7 @@ namespace Apizr
         public static IServiceCollection AddApizrFor(this IServiceCollection services, Type webApiType,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
             AddApizrFor(services, webApiType, typeof(ApizrManager<>).MakeGenericType(webApiType),
-                CreateApizrExtendedConfiguration(), optionsBuilder);
+                CreateApizrExtendedCommonOptions(), optionsBuilder);
 
         /// <summary>
         /// Register a <see cref="IApizrManager{webApiType}"/> for each <see cref="WebApiAttribute"/> decorated interfaces
@@ -475,7 +491,7 @@ namespace Apizr
                 .ToList();
 
             foreach (var webApiType in webApiTypes)
-                AddApizrFor(services, webApiType, apizrManagerType.MakeGenericType(webApiType), CreateApizrExtendedConfiguration(), optionsBuilder);
+                AddApizrFor(services, webApiType, apizrManagerType.MakeGenericType(webApiType), CreateApizrExtendedCommonOptions(), optionsBuilder);
 
             return services;
         }
@@ -491,18 +507,31 @@ namespace Apizr
         public static IServiceCollection AddApizrFor(
             this IServiceCollection services, Type webApiType, Type apizrManagerType,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
-            => AddApizrFor(services, webApiType, apizrManagerType, CreateApizrExtendedConfiguration(), optionsBuilder);
-        
-        internal static IServiceCollection AddApizrFor(
+            => AddApizrFor(services, webApiType, apizrManagerType, CreateApizrExtendedCommonOptions(), optionsBuilder);
+
+        private static IServiceCollection AddApizrFor(
             this IServiceCollection services, Type webApiType, Type apizrManagerType,
-            IApizrExtendedCommonOptions apizrConfiguration, Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
+            IApizrExtendedCommonOptions commonOptions,
+            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
         {
-            if (!typeof(IApizrManager<>).MakeGenericType(webApiType).IsAssignableFrom(apizrManagerType))
+            AddApizrFor(services, commonOptions,
+                CreateApizrExtendedProperOptions(commonOptions, webApiType, apizrManagerType), optionsBuilder);
+
+            return services;
+        }
+
+        internal static Type AddApizrFor(
+            this IServiceCollection services,
+            IApizrExtendedCommonOptions commonOptions,
+            IApizrExtendedProperOptions properOptions, 
+            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
+        {
+            if (!typeof(IApizrManager<>).MakeGenericType(properOptions.WebApiType).IsAssignableFrom(properOptions.ApizrManagerType))
                 throw new ArgumentException(
                     $"Your Apizr manager class must inherit from IApizrManager generic interface or derived");
             
-            var webApiFriendlyName = webApiType.GetFriendlyName();
-            var apizrOptions = CreateApizrExtendedOptions(webApiType, apizrManagerType, apizrConfiguration, optionsBuilder);
+            var webApiFriendlyName = properOptions.WebApiType.GetFriendlyName();
+            var apizrOptions = CreateApizrExtendedOptions(commonOptions, properOptions, optionsBuilder);
 
             var builder = services.AddHttpClient(ForType(apizrOptions.WebApiType))
                 .ConfigurePrimaryHttpMessageHandler(serviceProvider =>
@@ -549,7 +578,7 @@ namespace Apizr
                                         logger.Log(apizrOptions.LogLevel, $"Global policies: Policy with key {policyRegistryKey} will be applied to {webApiFriendlyName} instance");
                                     }
                                     else
-                                        logger.Log(apizrOptions.LogLevel, $"Global policies: Policy with key {policyRegistryKey} is not of {typeof(IAsyncPolicy<HttpResponseMessage>)} type and will be ignored for {webApiType.GetFriendlyName()} instance");
+                                        logger.Log(apizrOptions.LogLevel, $"Global policies: Policy with key {policyRegistryKey} is not of {typeof(IAsyncPolicy<HttpResponseMessage>)} type and will be ignored for {properOptions.WebApiType.GetFriendlyName()} instance");
                                 }
                                 else
                                     logger.Log(apizrOptions.LogLevel, $"Global policies: No policy found for key {policyRegistryKey} and will be ignored for  for {webApiFriendlyName} instance");
@@ -602,39 +631,47 @@ namespace Apizr
 
             services.TryAddSingleton(serviceProvider => ((IApizrOptionsBase)serviceProvider.GetRequiredService(typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType))).ContentSerializer);
 
-            services.TryAddSingleton(typeof(IApizrManager<>).MakeGenericType(apizrOptions.WebApiType), typeof(ApizrManager<>).MakeGenericType(apizrOptions.WebApiType));
+            var managerForApiType = apizrOptions.ApizrManagerType.MakeGenericType(apizrOptions.WebApiType);
+            services.TryAddSingleton(typeof(IApizrManager<>).MakeGenericType(apizrOptions.WebApiType), managerForApiType);
 
             foreach (var postRegistrationAction in apizrOptions.PostRegistrationActions)
             {
                 postRegistrationAction.Invoke(services);
             }
 
-            return services;
+            return managerForApiType;
         }
 
         #endregion
 
-        private static IApizrExtendedCommonOptions CreateApizrExtendedConfiguration(
-            Action<IApizrExtendedCommonOptionsBuilder<,>> configBuilder = null)
+        #region Builder
+
+        private static IApizrExtendedCommonOptions CreateApizrExtendedCommonOptions(
+            Action<IApizrExtendedCommonOptionsBuilder> commonOptionsBuilder = null)
         {
             var builder = new ApizrExtendedCommonOptionsBuilder(new ApizrExtendedCommonOptions());
 
-            configBuilder?.Invoke(builder);
+            commonOptionsBuilder?.Invoke(builder);
 
-            return builder.ApizrConfiguration;
+            return builder.ApizrOptions;
         }
 
-        private static IApizrExtendedOptions CreateApizrExtendedOptions(Type webApiType, Type apizrManagerType, IApizrExtendedCommonOptions config, Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
+        internal static IApizrExtendedProperOptions CreateApizrExtendedProperOptions(IApizrExtendedCommonOptions commonOptions, Type webApiType, Type apizrManagerType,
+            Action<IApizrExtendedProperOptionsBuilder> properOptionsBuilder = null)
         {
+            if (commonOptions == null)
+                throw new ArgumentNullException(nameof(commonOptions));
+
             Uri baseAddress = null;
             var webApiAttribute = webApiType.GetTypeInfo().GetCustomAttribute<WebApiAttribute>(true);
             if (webApiAttribute != null)
             {
                 Uri.TryCreate(webApiAttribute.BaseUri, UriKind.RelativeOrAbsolute, out baseAddress);
-                if (optionsBuilder == null)
-                    optionsBuilder = sourceBuilder => sourceBuilder.ApizrOptions.WebApis.Add(webApiType, webApiAttribute);
-                else
-                    optionsBuilder += sourceBuilder => sourceBuilder.ApizrOptions.WebApis.Add(webApiType, webApiAttribute);
+                commonOptions.WebApis.Add(webApiType, webApiAttribute);
+                //if (properOptionsBuilder == null)
+                //    properOptionsBuilder = sourceBuilder => sourceBuilder.ApizrOptions.WebApis.Add(webApiType, webApiAttribute);
+                //else
+                //    properOptionsBuilder += sourceBuilder => sourceBuilder.ApizrOptions.WebApis.Add(webApiType, webApiAttribute);
             }
 
             LogAttribute logAttribute;
@@ -656,15 +693,42 @@ namespace Apizr
 
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 
-            var builder = new ApizrExtendedOptionsBuilder(new ApizrExtendedOptions(config, webApiType, apizrManagerType,
-                baseAddress, logAttribute?.HttpTracerMode, logAttribute?.TrafficVerbosity, logAttribute?.LogLevel,
-                assemblyPolicyAttribute?.RegistryKeys,
-                webApiPolicyAttribute?.RegistryKeys));
+            var builder = new ApizrExtendedProperOptionsBuilder(new ApizrExtendedProperOptions(commonOptions, webApiType, apizrManagerType, baseAddress,
+                logAttribute?.HttpTracerMode,
+                logAttribute?.TrafficVerbosity, logAttribute?.LogLevel,
+                assemblyPolicyAttribute?.RegistryKeys, webApiPolicyAttribute?.RegistryKeys));
+
+            properOptionsBuilder?.Invoke(builder);
+
+            return builder.ApizrOptions;
+        }
+
+        private static IApizrExtendedRegistry CreateApizrExtendedRegistry(IServiceCollection services, IApizrExtendedCommonOptions commonOptions, Action<IApizrExtendedRegistryBuilder> registryBuilder)
+        {
+            if (commonOptions == null)
+                throw new ArgumentNullException(nameof(commonOptions));
+
+            if (registryBuilder == null)
+                throw new ArgumentNullException(nameof(registryBuilder));
+
+            var builder = new ApizrExtendedRegistryBuilder(services, commonOptions);
+
+            registryBuilder.Invoke(builder);
+
+            return builder.ApizrRegistry;
+        }
+
+        private static IApizrExtendedOptions CreateApizrExtendedOptions(IApizrExtendedCommonOptions commonOptions,
+            IApizrExtendedProperOptions properOptions, Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
+        {
+            var builder = new ApizrExtendedOptionsBuilder(new ApizrExtendedOptions(commonOptions, properOptions));
 
             optionsBuilder?.Invoke(builder);
 
             return builder.ApizrOptions;
-        }
+        } 
+
+        #endregion
 
         private static string ForType(Type refitInterfaceType)
         {

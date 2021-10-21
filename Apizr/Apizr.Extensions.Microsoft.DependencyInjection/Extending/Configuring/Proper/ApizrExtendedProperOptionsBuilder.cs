@@ -1,0 +1,141 @@
+﻿using System;
+using System.Linq.Expressions;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Apizr.Authenticating;
+using Apizr.Configuring;
+using Apizr.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+
+namespace Apizr.Extending.Configuring.Proper
+{
+    public class ApizrExtendedProperOptionsBuilder : IApizrExtendedProperOptionsBuilder
+    {
+        protected readonly ApizrExtendedProperOptions Options;
+
+        internal ApizrExtendedProperOptionsBuilder(ApizrExtendedProperOptions properOptions)
+        {
+            Options = properOptions;
+        }
+
+        public IApizrExtendedProperOptions ApizrOptions => Options;
+
+        public IApizrExtendedProperOptionsBuilder WithBaseAddress(string baseAddress)
+        {
+            if (Uri.TryCreate(baseAddress, UriKind.RelativeOrAbsolute, out var baseUri))
+                Options.BaseAddressFactory = _ => baseUri;
+
+            return this;
+        }
+
+        public IApizrExtendedProperOptionsBuilder WithBaseAddress(Uri baseAddress)
+        {
+            Options.BaseAddressFactory = _ => baseAddress;
+
+            return this;
+        }
+
+        public IApizrExtendedProperOptionsBuilder WithBaseAddress(Func<IServiceProvider, string> baseAddressFactory)
+        {
+            Options.BaseAddressFactory = serviceProvider =>
+                Uri.TryCreate(baseAddressFactory.Invoke(serviceProvider), UriKind.RelativeOrAbsolute, out var baseUri)
+                    ? baseUri
+                    : null;
+
+            return this;
+        }
+
+        public IApizrExtendedProperOptionsBuilder WithBaseAddress(Func<IServiceProvider, Uri> baseAddressFactory)
+        {
+            Options.BaseAddressFactory = baseAddressFactory;
+
+            return this;
+        }
+
+        public IApizrExtendedProperOptionsBuilder WithHttpClientHandler(HttpClientHandler httpClientHandler)
+            => WithHttpClientHandler(_ => httpClientHandler);
+
+        public IApizrExtendedProperOptionsBuilder WithHttpClientHandler(Func<IServiceProvider, HttpClientHandler> httpClientHandlerFactory)
+        {
+            Options.HttpClientHandlerFactory = httpClientHandlerFactory;
+
+            return this;
+        }
+
+        public IApizrExtendedProperOptionsBuilder ConfigureHttpClientBuilder(Action<IHttpClientBuilder> httpClientBuilder)
+        {
+            Options.HttpClientBuilder = httpClientBuilder;
+
+            return this;
+        }
+
+        public IApizrExtendedProperOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
+        {
+            var authenticationHandler = new Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>((serviceProvider, options) =>
+                new AuthenticationHandler(serviceProvider.GetRequiredService<ILogger>(), options, refreshTokenFactory));
+            Options.DelegatingHandlersExtendedFactories.Add(authenticationHandler);
+
+            return this;
+        }
+
+        public IApizrExtendedProperOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<IServiceProvider, IApizrOptionsBase, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase
+        {
+            Options.DelegatingHandlersExtendedFactories.Add(authenticationHandlerFactory);
+
+            return this;
+        }
+
+        public IApizrExtendedProperOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(Expression<Func<TSettingsService, string>> tokenProperty,
+            Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
+        {
+            Options.DelegatingHandlersExtendedFactories.Add((serviceProvider, options) =>
+                new AuthenticationHandler<TSettingsService, TTokenService>(
+                    serviceProvider.GetRequiredService<ILogger>(),
+                    options,
+                    serviceProvider.GetRequiredService<TSettingsService>, tokenProperty,
+                    serviceProvider.GetRequiredService<TTokenService>, refreshTokenMethod));
+
+            return this;
+        }
+
+        public IApizrExtendedProperOptionsBuilder WithAuthenticationHandler<TSettingsService>(Expression<Func<TSettingsService, string>> tokenProperty,
+            Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
+        {
+            Options.DelegatingHandlersExtendedFactories.Add((serviceProvider, options) =>
+                new AuthenticationHandler<TSettingsService>(
+                    serviceProvider.GetRequiredService<ILogger>(),
+                    options,
+                    serviceProvider.GetRequiredService<TSettingsService>, tokenProperty, refreshTokenFactory));
+
+            return this;
+        }
+
+        public IApizrExtendedProperOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler)
+            => AddDelegatingHandler(_ => delegatingHandler);
+
+        public IApizrExtendedProperOptionsBuilder AddDelegatingHandler(Func<IServiceProvider, DelegatingHandler> delegatingHandlerFactory)
+            => AddDelegatingHandler((serviceProvider, _) => delegatingHandlerFactory(serviceProvider));
+
+        public IApizrExtendedProperOptionsBuilder AddDelegatingHandler(Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler> delegatingHandlerFactory)
+        {
+            Options.DelegatingHandlersExtendedFactories.Add(delegatingHandlerFactory);
+
+            return this;
+        }
+
+        public IApizrExtendedProperOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
+            HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel logLevel = LogLevel.Information)
+            => WithLogging(_ => httpTracerMode, _ => trafficVerbosity, _ => logLevel);
+
+        public IApizrExtendedProperOptionsBuilder WithLogging(Func<IServiceProvider, HttpTracerMode> httpTracerModeFactory, Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory,
+            Func<IServiceProvider, LogLevel> logLevelFactory)
+        {
+            Options.HttpTracerModeFactory = httpTracerModeFactory;
+            Options.TrafficVerbosityFactory = trafficVerbosityFactory;
+            Options.LogLevelFactory = logLevelFactory;
+
+            return this;
+        }
+    }
+}

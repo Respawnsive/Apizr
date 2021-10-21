@@ -19,21 +19,24 @@ namespace Apizr.Extending.Configuring
     {
         public ApizrExtendedOptions(IApizrExtendedCommonOptions commonOptions, IApizrExtendedProperOptions properOptions) : base(commonOptions, properOptions)
         {
-            ApizrManagerType = apizrManagerType;
-            BaseAddressFactory = _ => baseAddress;
-            HttpTracerModeFactory = _ => httpTracerMode ?? HttpTracerMode.Everything;
-            TrafficVerbosityFactory = _ => httpTracerVerbosity ?? HttpMessageParts.None;
-            LogLevelFactory = _ => logLevel ?? LogLevel.None;
-            HttpClientHandlerFactory = _ => new HttpClientHandler();
-            RefitSettingsFactory = _ => new RefitSettings();
-            ConnectivityHandlerType = typeof(DefaultConnectivityHandler);
-            CacheHandlerType = typeof(VoidCacheHandler);
-            MappingHandlerType = typeof(VoidMappingHandler);
-            DelegatingHandlersExtendedFactories = new List<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>>();
-            CrudEntities = new Dictionary<Type, CrudEntityAttribute>();
-            WebApis = new Dictionary<Type, WebApiAttribute>();
-            ObjectMappings = new Dictionary<Type, MappedWithAttribute>();
-            PostRegistrationActions = new List<Action<IServiceCollection>>();
+            ApizrManagerType = properOptions.ApizrManagerType;
+            BaseAddressFactory = properOptions.BaseAddressFactory;
+            HttpTracerModeFactory = properOptions.HttpTracerModeFactory;
+            TrafficVerbosityFactory = properOptions.TrafficVerbosityFactory;
+            LogLevelFactory = properOptions.LogLevelFactory;
+            HttpClientHandlerFactory = properOptions.HttpClientHandlerFactory;
+            RefitSettingsFactory = commonOptions.RefitSettingsFactory;
+            ConnectivityHandlerType = commonOptions.ConnectivityHandlerType;
+            ConnectivityHandlerFactory = commonOptions.ConnectivityHandlerFactory;
+            CacheHandlerType = commonOptions.CacheHandlerType;
+            CacheHandlerFactory = commonOptions.CacheHandlerFactory;
+            MappingHandlerType = commonOptions.MappingHandlerType;
+            MappingHandlerFactory = commonOptions.MappingHandlerFactory;
+            DelegatingHandlersExtendedFactories = properOptions.DelegatingHandlersExtendedFactories;
+            CrudEntities = commonOptions.CrudEntities;
+            WebApis = commonOptions.WebApis;
+            ObjectMappings = commonOptions.ObjectMappings;
+            PostRegistrationActions = commonOptions.PostRegistrationActions;
         }
 
         public Type ApizrManagerType { get; }
@@ -85,6 +88,7 @@ namespace Apizr.Extending.Configuring
 
         public Func<IServiceProvider, IConnectivityHandler> ConnectivityHandlerFactory { get; set; }
         public Func<IServiceProvider, ICacheHandler> CacheHandlerFactory { get; set; }
+        public Func<IServiceProvider, IMappingHandler> MappingHandlerFactory { get; set; }
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
         public IList<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
         public IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }

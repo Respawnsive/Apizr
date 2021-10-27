@@ -129,6 +129,7 @@ namespace Apizr.Sample.Console
                             .WithBaseAddress("https://reqres.in/api/users")),
 
                     config => config
+                        .WithPriorityManagement()
                         .WithPolicyRegistry(policyRegistry)
                         .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
                         .WithLoggerFactory(() => lazyLoggerFactory.Value));
@@ -227,8 +228,10 @@ namespace Apizr.Sample.Console
                             {
                                 // Classic auto assembly detection and registration and handling with mediation
                                 services.AddApizrFor(
-                                    optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>()
-                                        .WithMediation().WithLogging(),
+                                    optionsBuilder => optionsBuilder
+                                        .WithCacheHandler<AkavacheCacheHandler>()
+                                        //.WithMediation()
+                                        .WithLogging(),
                                     typeof(User));
 
                                 // Crud manual registration and handling with mediation
@@ -236,8 +239,10 @@ namespace Apizr.Sample.Console
 
                                 // Crud auto assembly detection, registration and handling with mediation
                                 services.AddApizrCrudFor(
-                                    optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>()
-                                        .WithMediation().WithLogging(),
+                                    optionsBuilder => optionsBuilder
+                                        .WithCacheHandler<AkavacheCacheHandler>()
+                                        .WithMediation()
+                                        .WithLogging(),
                                     typeof(User));
                             }
                             else
@@ -267,7 +272,8 @@ namespace Apizr.Sample.Console
                                     // Classic auto assembly detection and registration and handling with both mediation and optional mediation
                                     services.AddApizrFor(
                                         optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>()
-                                            .WithMediation().WithOptionalMediation()
+                                            .WithMediation()
+                                            .WithOptionalMediation()
                                             .WithMappingHandler<AutoMapperMappingHandler>()
                                             .WithLogging(), typeof(User),
                                         typeof(Program));
@@ -275,7 +281,8 @@ namespace Apizr.Sample.Console
                                     // Auto assembly detection, registration and handling with mediation, optional mediation and mapping
                                     services.AddApizrCrudFor(
                                         optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>()
-                                            .WithMediation().WithOptionalMediation()
+                                            .WithMediation()
+                                            .WithOptionalMediation()
                                             .WithMappingHandler<AutoMapperMappingHandler>()
                                             .WithLogging(), typeof(User),
                                         typeof(Program));
@@ -334,8 +341,8 @@ namespace Apizr.Sample.Console
                 {
                     //var test = new ReadAllUsersParams("value1", 2);
 
-                    var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
-                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
+                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+                    var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(true));
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(parameters1));

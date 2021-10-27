@@ -3,7 +3,6 @@ using Apizr.Caching;
 using Apizr.Configuring.Shared;
 using Apizr.Connecting;
 using Apizr.Mapping;
-using Microsoft.Extensions.Logging;
 using Refit;
 
 namespace Apizr.Configuring.Common

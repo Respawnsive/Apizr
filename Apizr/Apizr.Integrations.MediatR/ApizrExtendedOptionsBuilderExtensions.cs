@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using Apizr.Extending;
+using Apizr.Extending.Configuring;
 using Apizr.Extending.Configuring.Common;
 using Apizr.Mapping;
 using Apizr.Mediation.Cruding;
@@ -29,12 +30,31 @@ namespace Apizr
         /// <returns></returns>
         public static IApizrExtendedCommonOptionsBuilder WithMediation(this IApizrExtendedCommonOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.ApizrOptions.PostRegistrationActions.Add((webApiType, services) =>
+            WithMediation(optionsBuilder.ApizrOptions);
+
+            return optionsBuilder;
+        }
+
+        /// <summary>
+        /// Let Apizr handle requests execution with some mediation
+        /// </summary>
+        /// <param name="optionsBuilder"></param>
+        /// <returns></returns>
+        public static IApizrExtendedOptionsBuilder WithMediation(this IApizrExtendedOptionsBuilder optionsBuilder)
+        {
+            WithMediation(optionsBuilder.ApizrOptions);
+
+            return optionsBuilder;
+        }
+
+        private static void WithMediation(IApizrExtendedCommonOptions apizrOptions)
+        {
+            apizrOptions.PostRegistrationActions.Add((webApiType, services) =>
             {
                 #region Crud
 
                 // Crud entities auto registration
-                foreach (var crudEntity in optionsBuilder.ApizrOptions.CrudEntities)
+                foreach (var crudEntity in apizrOptions.CrudEntities)
                 {
                     var apiEntityAttribute = crudEntity.Value;
                     var apiEntityType = crudEntity.Key;
@@ -238,8 +258,8 @@ namespace Apizr
 
                     // Typed crud mediator
                     var typedCrudMediatorServiceType = typeof(ICrudMediator<,,,>).MakeGenericType(apiEntityType,
-                        apiEntityKeyType, 
-                        apiEntityReadAllResultType, 
+                        apiEntityKeyType,
+                        apiEntityReadAllResultType,
                         apiEntityReadAllParamsType);
                     var typedCrudMediatorImplementationType = typeof(CrudMediator<,,,>).MakeGenericType(apiEntityType,
                         apiEntityKeyType,
@@ -256,7 +276,7 @@ namespace Apizr
                 #region Classic
 
                 // Classic interfaces auto registration
-                foreach (var webApi in optionsBuilder.ApizrOptions.WebApis)
+                foreach (var webApi in apizrOptions.WebApis)
                 {
                     foreach (var methodInfo in webApi.Key.GetMethods())
                     {
@@ -290,9 +310,9 @@ namespace Apizr
                             // Mapped object
                             var modelResponseType =
                                 methodInfo.GetCustomAttribute<MappedWithAttribute>()?.MappedWithType ??
-                                optionsBuilder.ApizrOptions.ObjectMappings
+                                apizrOptions.ObjectMappings
                                     .FirstOrDefault(kvp => kvp.Key == apiResponseType).Value?.MappedWithType ??
-                                optionsBuilder.ApizrOptions.ObjectMappings
+                                apizrOptions.ObjectMappings
                                     .FirstOrDefault(kvp => kvp.Value?.MappedWithType == apiResponseType).Key;
                             if (modelResponseType != null)
                             {
@@ -328,15 +348,13 @@ namespace Apizr
                     var typedMediatorServiceType = typeof(IMediator<>).MakeGenericType(webApi.Key);
                     var typedMediatorImplementationType = typeof(Mediator<>).MakeGenericType(webApi.Key);
 
-                    services.TryAddTransient(typedMediatorServiceType, typedMediatorImplementationType); 
+                    services.TryAddTransient(typedMediatorServiceType, typedMediatorImplementationType);
 
                     #endregion
-                } 
+                }
 
                 #endregion
             });
-
-            return optionsBuilder;
         }
     }
 }

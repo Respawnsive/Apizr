@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Apizr.Extending;
 using Apizr.Extending.Configuring;
+using Apizr.Extending.Configuring.Common;
 using Apizr.Mapping;
 using Apizr.Optional.Cruding;
 using Apizr.Optional.Cruding.Handling;
@@ -28,14 +29,34 @@ namespace Apizr
         /// </summary>
         /// <param name="optionsBuilder"></param>
         /// <returns></returns>
-        public static IApizrExtendedOptionsBuilder WithOptionalMediation(this IApizrExtendedOptionsBuilder optionsBuilder)
+        public static IApizrExtendedCommonOptionsBuilder WithOptionalMediation(this IApizrExtendedCommonOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.ApizrOptions.PostRegistrationActions.Add(services =>
+            WithMediation(optionsBuilder.ApizrOptions);
+
+            return optionsBuilder;
+        }
+
+        /// <summary>
+        /// Let Apizr handle requests execution with some mediation and optional result
+        /// </summary>
+        /// <param name="optionsBuilder"></param>
+        /// <returns></returns>
+        public static IApizrExtendedOptionsBuilder WithOptionalMediation(
+            this IApizrExtendedOptionsBuilder optionsBuilder)
+        {
+            WithMediation(optionsBuilder.ApizrOptions);
+
+            return optionsBuilder;
+        }
+
+        private static void WithMediation(IApizrExtendedCommonOptions apizrOptions)
+        {
+            apizrOptions.PostRegistrationActions.Add((webApiType, services) =>
             {
                 #region Crud
 
                 // Crud entities auto registration
-                foreach (var crudEntity in optionsBuilder.ApizrOptions.CrudEntities)
+                foreach (var crudEntity in apizrOptions.CrudEntities)
                 {
                     var apiEntityAttribute = crudEntity.Value;
                     var apiEntityType = crudEntity.Key;
@@ -267,7 +288,7 @@ namespace Apizr
                 #region Classic
 
                 // Classic interfaces auto registration
-                foreach (var webApi in optionsBuilder.ApizrOptions.WebApis)
+                foreach (var webApi in apizrOptions.WebApis)
                 {
                     foreach (var methodInfo in webApi.Key.GetMethods())
                     {
@@ -289,13 +310,13 @@ namespace Apizr
                             }
 
                             // ServiceType
-                            var executeRequestType = typeof(ExecuteOptionalRequest<,>).MakeGenericType(optionsBuilder.ApizrOptions.WebApiType, apiResponseType);
+                            var executeRequestType = typeof(ExecuteOptionalRequest<,>).MakeGenericType(webApiType, apiResponseType);
                             var executeRequestExceptionType = typeof(ApizrException<>).MakeGenericType(apiResponseType);
                             var executeRequestResponseType = typeof(Option<,>).MakeGenericType(apiResponseType, executeRequestExceptionType);
                             var executeRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeRequestType, executeRequestResponseType);
 
                             // ImplementationType
-                            var executeRequestHandlerImplementationType = typeof(ExecuteOptionalRequestHandler<,>).MakeGenericType(optionsBuilder.ApizrOptions.WebApiType, apiResponseType);
+                            var executeRequestHandlerImplementationType = typeof(ExecuteOptionalRequestHandler<,>).MakeGenericType(webApiType, apiResponseType);
 
                             // Registration
                             services.TryAddTransient(executeRequestHandlerServiceType, executeRequestHandlerImplementationType);
@@ -303,20 +324,20 @@ namespace Apizr
                             // Mapped object
                             var modelResponseType =
                                 methodInfo.GetCustomAttribute<MappedWithAttribute>()?.MappedWithType ??
-                                optionsBuilder.ApizrOptions.ObjectMappings
+                                apizrOptions.ObjectMappings
                                     .FirstOrDefault(kvp => kvp.Key == apiResponseType).Value?.MappedWithType ??
-                                optionsBuilder.ApizrOptions.ObjectMappings
+                                apizrOptions.ObjectMappings
                                     .FirstOrDefault(kvp => kvp.Value?.MappedWithType == apiResponseType).Key;
                             if (modelResponseType != null)
                             {
                                 // ServiceType
-                                var executeMappedRequestType = typeof(ExecuteOptionalRequest<,,>).MakeGenericType(optionsBuilder.ApizrOptions.WebApiType, modelResponseType, apiResponseType);
+                                var executeMappedRequestType = typeof(ExecuteOptionalRequest<,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType);
                                 var executeMappedRequestExceptionType = typeof(ApizrException<>).MakeGenericType(modelResponseType);
                                 var executeMappedRequestResponseType = typeof(Option<,>).MakeGenericType(modelResponseType, executeMappedRequestExceptionType);
                                 var executeMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeMappedRequestType, executeMappedRequestResponseType);
 
                                 // ImplementationType
-                                var executeMappedRequestHandlerImplementationType = typeof(ExecuteOptionalRequestHandler<,,>).MakeGenericType(optionsBuilder.ApizrOptions.WebApiType, modelResponseType, apiResponseType);
+                                var executeMappedRequestHandlerImplementationType = typeof(ExecuteOptionalRequestHandler<,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType);
 
                                 // Registration
                                 services.TryAddTransient(executeMappedRequestHandlerServiceType, executeMappedRequestHandlerImplementationType);
@@ -325,12 +346,12 @@ namespace Apizr
                         else if (returnType == typeof(Task))
                         {
                             // ServiceType
-                            var executeRequestType = typeof(ExecuteOptionalRequest<>).MakeGenericType(optionsBuilder.ApizrOptions.WebApiType);
+                            var executeRequestType = typeof(ExecuteOptionalRequest<>).MakeGenericType(webApiType);
                             var executeRequestResponseType = typeof(Option<Unit, ApizrException>);
                             var executeRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeRequestType, executeRequestResponseType);
 
                             // ImplementationType
-                            var executeRequestHandlerImplementationType = typeof(ExecuteOptionalRequestHandler<>).MakeGenericType(optionsBuilder.ApizrOptions.WebApiType);
+                            var executeRequestHandlerImplementationType = typeof(ExecuteOptionalRequestHandler<>).MakeGenericType(webApiType);
 
                             // Registration
                             services.TryAddTransient(executeRequestHandlerServiceType, executeRequestHandlerImplementationType);
@@ -343,15 +364,13 @@ namespace Apizr
                     var typedOptionalMediatorServiceType = typeof(IOptionalMediator<>).MakeGenericType(webApi.Key);
                     var typedOptionalMediatorImplementationType = typeof(OptionalMediator<>).MakeGenericType(webApi.Key);
 
-                    services.TryAddTransient(typedOptionalMediatorServiceType, typedOptionalMediatorImplementationType); 
+                    services.TryAddTransient(typedOptionalMediatorServiceType, typedOptionalMediatorImplementationType);
 
                     #endregion
                 }
 
                 #endregion
             });
-            
-            return optionsBuilder;
         }
     }
 }

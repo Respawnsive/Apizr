@@ -2,7 +2,6 @@
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using Apizr.Caching;
-using Apizr.Configuring;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
@@ -16,6 +15,8 @@ namespace Apizr
 {
     internal static class InternalExtensions
     {
+        #region PrimaryHttpMessageHandler
+
         private static Func<DelegatingHandler, ILogger, HttpMessageHandler> _primaryHandlerFactory;
         internal static void SetPrimaryHttpMessageHandler(this IApizrSharedOptionsBuilderBase builder, Func<DelegatingHandler, ILogger, HttpMessageHandler> primaryHandlerFactory)
         {
@@ -29,6 +30,10 @@ namespace Apizr
             return _primaryHandlerFactory?.Invoke(innerHandler, logger) ?? innerHandler;
         }
 
+        #endregion
+
+        #region CacheHandler
+
         private static Func<ICacheHandler> _cacheHandlerFactory;
 
         internal static void SetCacheHandlerFactory(this IApizrCommonOptionsBuilderBase builder,
@@ -38,6 +43,8 @@ namespace Apizr
         }
 
         internal static Func<ICacheHandler> GetCacheHanderFactory(this IApizrCommonOptionsBase builder) =>
-            _cacheHandlerFactory;
+            _cacheHandlerFactory; 
+
+        #endregion
     }
 }

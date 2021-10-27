@@ -9,7 +9,8 @@ using Refit;
 
 namespace Apizr.Extending.Configuring.Common
 {
-    public interface IApizrExtendedCommonOptionsBuilder<out TApizrExtendedCommonOptions, out TApizrExtendedCommonOptionsBuilder> : IApizrCommonOptionsBuilderBase<TApizrExtendedCommonOptions, TApizrExtendedCommonOptionsBuilder>,
+    public interface IApizrExtendedCommonOptionsBuilder<out TApizrExtendedCommonOptions, out TApizrExtendedCommonOptionsBuilder> : IApizrExtendedCommonOptionsBuilderBase, 
+        IApizrCommonOptionsBuilderBase<TApizrExtendedCommonOptions, TApizrExtendedCommonOptionsBuilder>,
         IApizrExtendedSharedOptionsBuilder<TApizrExtendedCommonOptions, TApizrExtendedCommonOptionsBuilder>
         where TApizrExtendedCommonOptions : IApizrCommonOptionsBase
         where TApizrExtendedCommonOptionsBuilder : IApizrCommonOptionsBuilderBase<TApizrExtendedCommonOptions, TApizrExtendedCommonOptionsBuilder>

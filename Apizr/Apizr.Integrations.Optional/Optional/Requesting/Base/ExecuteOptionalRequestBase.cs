@@ -6,6 +6,7 @@ using Apizr.Mapping;
 using Apizr.Mediation.Requesting.Base;
 using MediatR;
 using Optional;
+using Polly;
 
 namespace Apizr.Optional.Requesting.Base
 {
@@ -24,7 +25,23 @@ namespace Apizr.Optional.Requesting.Base
         {
         }
 
+        protected ExecuteOptionalRequestBase(Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        {
+        }
+
         protected ExecuteOptionalRequestBase(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod) : base(executeApiMethod)
+        {
+        }
+
+        protected ExecuteOptionalRequestBase(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        {
+        }
+
+        protected ExecuteOptionalRequestBase(Expression<Func<Context, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        {
+        }
+
+        protected ExecuteOptionalRequestBase(Expression<Func<Context, CancellationToken, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod, Context context) : base(executeApiMethod, context)
         {
         }
     }
@@ -39,6 +56,14 @@ namespace Apizr.Optional.Requesting.Base
         protected ExecuteOptionalRequestBase(Expression<Func<CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod) : base(executeApiMethod)
         {
         }
+
+        protected ExecuteOptionalRequestBase(Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        {
+        }
+
+        protected ExecuteOptionalRequestBase(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        {
+        }
     }
 
     public abstract class ExecuteOptionalRequestBase<TWebApi> : ExecuteRequestBase<TWebApi, Option<Unit, ApizrException>>
@@ -48,6 +73,14 @@ namespace Apizr.Optional.Requesting.Base
         }
 
         protected ExecuteOptionalRequestBase(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod) : base(executeApiMethod)
+        {
+        }
+
+        protected ExecuteOptionalRequestBase(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        {
+        }
+
+        protected ExecuteOptionalRequestBase(Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod, Context context) : base(executeApiMethod, context)
         {
         }
     }

@@ -3,12 +3,18 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Mapping;
+using Polly;
 
 namespace Apizr.Mediation.Requesting.Base
 {
     public abstract class ExecuteRequestBase<TRequestResponse> : RequestBase<TRequestResponse>
     {
         protected ExecuteRequestBase(Expression executeApiMethod)
+        {
+            ExecuteApiMethod = executeApiMethod;
+        }
+
+        protected ExecuteRequestBase(Expression executeApiMethod, Context context) : base(context)
         {
             ExecuteApiMethod = executeApiMethod;
         }
@@ -30,7 +36,23 @@ namespace Apizr.Mediation.Requesting.Base
         {
         }
 
+        protected ExecuteRequestBase(Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        {
+        }
+
         protected ExecuteRequestBase(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod) : base(executeApiMethod)
+        {
+        }
+
+        protected ExecuteRequestBase(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        {
+        }
+
+        protected ExecuteRequestBase(Expression<Func<Context, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        {
+        }
+
+        protected ExecuteRequestBase(Expression<Func<Context, CancellationToken, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod, Context context) : base(executeApiMethod, context)
         {
         }
     }
@@ -44,6 +66,14 @@ namespace Apizr.Mediation.Requesting.Base
         protected ExecuteRequestBase(Expression<Func<CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod) : base(executeApiMethod)
         {
         }
+
+        protected ExecuteRequestBase(Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        {
+        }
+
+        protected ExecuteRequestBase(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        {
+        }
     }
 
     public abstract class ExecuteRequestBase<TWebApi, TRequestResponse> : ExecuteRequestBase<TRequestResponse>
@@ -53,6 +83,14 @@ namespace Apizr.Mediation.Requesting.Base
         }
 
         protected ExecuteRequestBase(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod) : base(executeApiMethod)
+        {
+        }
+
+        protected ExecuteRequestBase(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        {
+        }
+
+        protected ExecuteRequestBase(Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod, Context context) : base(executeApiMethod, context)
         {
         }
     }

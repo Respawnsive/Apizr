@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Apizr.Mediation.Cruding.Base;
 using Optional;
+using Polly;
 
 namespace Apizr.Optional.Cruding
 {
@@ -21,7 +22,22 @@ namespace Apizr.Optional.Cruding
 
         }
 
+        public ReadAllOptionalQuery(Context context) : base(default, context)
+        {
+
+        }
+
         public ReadAllOptionalQuery(TReadAllParams parameters, int priority) : base(parameters, priority)
+        {
+
+        }
+
+        public ReadAllOptionalQuery(TReadAllParams parameters, Context context) : base(parameters, context)
+        {
+
+        }
+
+        public ReadAllOptionalQuery(TReadAllParams parameters, int priority, Context context) : base(parameters, priority, context)
         {
 
         }
@@ -44,7 +60,22 @@ namespace Apizr.Optional.Cruding
 
         }
 
+        public ReadAllOptionalQuery(Context context) : base(default, context)
+        {
+
+        }
+
         public ReadAllOptionalQuery(IDictionary<string, object> parameters, int priority) : base(parameters, priority)
+        {
+
+        }
+
+        public ReadAllOptionalQuery(IDictionary<string, object> parameters, Context context) : base(parameters, context)
+        {
+
+        }
+
+        public ReadAllOptionalQuery(IDictionary<string, object> parameters, int priority, Context context) : base(parameters, priority, context)
         {
 
         }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Apizr.Mediation.Cruding.Base;
+using Polly;
 
 namespace Apizr.Mediation.Cruding
 {
@@ -20,9 +21,29 @@ namespace Apizr.Mediation.Cruding
 
         }
 
+        public ReadAllQuery(Context context) : base(default, context)
+        {
+
+        }
+
         public ReadAllQuery(TReadAllParams parameters, int priority) : base(parameters, priority)
         {
-            
+
+        }
+
+        public ReadAllQuery(TReadAllParams parameters, Context context) : base(parameters, context)
+        {
+
+        }
+
+        public ReadAllQuery(int priority, Context context) : base(default, priority, context)
+        {
+
+        }
+
+        public ReadAllQuery(TReadAllParams parameters, int priority, Context context) : base(parameters, priority, context)
+        {
+
         }
     }
 
@@ -41,7 +62,23 @@ namespace Apizr.Mediation.Cruding
         {
         }
 
+        public ReadAllQuery(Context context) : base(default, context)
+        {
+        }
+
         public ReadAllQuery(IDictionary<string, object> parameters, int priority) : base(parameters, priority)
+        {
+        }
+
+        public ReadAllQuery(IDictionary<string, object> parameters, Context context) : base(parameters, context)
+        {
+        }
+
+        public ReadAllQuery(int priority, Context context) : base(default, priority, context)
+        {
+        }
+
+        public ReadAllQuery(IDictionary<string, object> parameters, int priority, Context context) : base(parameters, priority, context)
         {
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Apizr.Mediation.Querying;
+using Polly;
 
 namespace Apizr.Mediation.Cruding.Base
 {
@@ -14,6 +15,16 @@ namespace Apizr.Mediation.Cruding.Base
             Key = key;
         }
 
+        protected ReadQueryBase(TKey key, Context context) : base(context)
+        {
+            Key = key;
+        }
+
+        protected ReadQueryBase(TKey key, int priority, Context context) : base(priority, context)
+        {
+            Key = key;
+        }
+
         public TKey Key { get; }
     }
 
@@ -24,6 +35,14 @@ namespace Apizr.Mediation.Cruding.Base
         }
 
         protected ReadQueryBase(int key, int priority) : base(key, priority)
+        {
+        }
+
+        protected ReadQueryBase(int key, Context context) : base(key, context)
+        {
+        }
+
+        protected ReadQueryBase(int key, int priority, Context context) : base(key, priority, context)
         {
         }
     }

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Polly;
 
 namespace Apizr.Mediation.Requesting.Base
 {
@@ -9,7 +10,17 @@ namespace Apizr.Mediation.Requesting.Base
             
         }
 
-        protected PrioritizedRequestBase(int priority)
+        protected PrioritizedRequestBase(int priority) : base()
+        {
+            Priority = priority;
+        }
+
+        protected PrioritizedRequestBase(Context context) : this(-1, context)
+        {
+
+        }
+
+        protected PrioritizedRequestBase(int priority, Context context) : base(context)
         {
             Priority = priority;
         }

@@ -1,11 +1,18 @@
 ﻿using Apizr.Mediation.Commanding;
 using MediatR;
+using Polly;
 
 namespace Apizr.Mediation.Cruding.Base
 {
     public abstract class UpdateCommandBase<TKey, TPayload, TResponse> : MediationCommandBase<TPayload, TResponse>
     {
         protected UpdateCommandBase(TKey key, TPayload payload)
+        {
+            Key = key;
+            Payload = payload;
+        }
+
+        protected UpdateCommandBase(TKey key, TPayload payload, Context context) : base(context)
         {
             Key = key;
             Payload = payload;
@@ -20,11 +27,19 @@ namespace Apizr.Mediation.Cruding.Base
         protected UpdateCommandBase(int key, TPayload payload) : base(key, payload)
         {
         }
+
+        protected UpdateCommandBase(int key, TPayload payload, Context context) : base(key, payload, context)
+        {
+        }
     }
 
     public abstract class UpdateCommandBase<TPayload> : UpdateCommandBase<TPayload, Unit>
     {
         protected UpdateCommandBase(int key, TPayload payload) : base(key, payload)
+        {
+        }
+
+        protected UpdateCommandBase(int key, TPayload payload, Context context) : base(key, payload, context)
         {
         }
     }

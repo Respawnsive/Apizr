@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Apizr.Mapping;
 using Apizr.Mediation.Requesting.Handling.Base;
 using MediatR;
+using Polly;
 
 namespace Apizr.Mediation.Requesting.Handling
 {
@@ -37,7 +38,27 @@ namespace Apizr.Mediation.Requesting.Handling
                         .ConfigureAwait(false);
                     break;
 
+                case Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod:
+                    result = await WebApiManager.ExecuteAsync(executeApiMethod)
+                        .ConfigureAwait(false);
+                    break;
+
                 case Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod:
+                    result = await WebApiManager.ExecuteAsync(executeApiMethod, cancellationToken)
+                        .ConfigureAwait(false);
+                    break;
+
+                case Expression<Func<Context, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod:
+                    result = await WebApiManager.ExecuteAsync(executeApiMethod, cancellationToken)
+                        .ConfigureAwait(false);
+                    break;
+
+                case Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod:
+                    result = await WebApiManager.ExecuteAsync(executeApiMethod, cancellationToken)
+                        .ConfigureAwait(false);
+                    break;
+
+                case Expression<Func<Context, CancellationToken, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod:
                     result = await WebApiManager.ExecuteAsync(executeApiMethod, cancellationToken)
                         .ConfigureAwait(false);
                     break;

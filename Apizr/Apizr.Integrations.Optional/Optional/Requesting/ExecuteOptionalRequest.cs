@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Mapping;
 using Apizr.Optional.Requesting.Base;
+using Polly;
 
 namespace Apizr.Optional.Requesting
 {
@@ -22,7 +23,23 @@ namespace Apizr.Optional.Requesting
         {
         }
 
+        public ExecuteOptionalRequest(Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        {
+        }
+
         public ExecuteOptionalRequest(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod) : base(executeApiMethod)
+        {
+        }
+
+        public ExecuteOptionalRequest(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        {
+        }
+
+        public ExecuteOptionalRequest(Expression<Func<Context, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        {
+        }
+
+        public ExecuteOptionalRequest(Expression<Func<Context, CancellationToken, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod, Context context) : base(executeApiMethod, context)
         {
         }
     }
@@ -36,6 +53,14 @@ namespace Apizr.Optional.Requesting
         public ExecuteOptionalRequest(Expression<Func<CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod) : base(executeApiMethod)
         {
         }
+
+        public ExecuteOptionalRequest(Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        {
+        }
+
+        public ExecuteOptionalRequest(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        {
+        }
     }
 
     public class ExecuteOptionalRequest<TWebApi> : ExecuteOptionalRequestBase<TWebApi>
@@ -45,6 +70,14 @@ namespace Apizr.Optional.Requesting
         }
 
         public ExecuteOptionalRequest(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod) : base(executeApiMethod)
+        {
+        }
+
+        public ExecuteOptionalRequest(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        {
+        }
+
+        public ExecuteOptionalRequest(Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod, Context context) : base(executeApiMethod, context)
         {
         }
     }

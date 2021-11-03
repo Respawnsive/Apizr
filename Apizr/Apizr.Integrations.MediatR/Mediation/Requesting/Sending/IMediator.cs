@@ -29,7 +29,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
         /// <param name="context">The Polly context</param>
         /// <returns></returns>
-        Task SendFor(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context);
+        Task SendFor(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context = null);
 
         /// <summary>
         /// Send a cancellable api call command to Apizr with MediatR
@@ -47,7 +47,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="context">The Polly context</param>
         /// <param name="token">The cancellation token</param>
         /// <returns></returns>
-        Task SendFor(Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod, Context context,
+        Task SendFor(Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod, Context context = null,
             CancellationToken token = default);
 
         #endregion
@@ -69,7 +69,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
         /// <param name="context">The Polly context</param>
         /// <returns></returns>
-        Task<TApiResponse> SendFor<TApiResponse>(Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context);
+        Task<TApiResponse> SendFor<TApiResponse>(Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context = null);
 
         /// <summary>
         /// Send a cancellable api call query to Apizr with MediatR
@@ -91,7 +91,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="token">The cancellation token</param>
         /// <returns></returns>
         Task<TApiResponse> SendFor<TApiResponse>(
-            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context,
+            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context = null,
             CancellationToken token = default);
 
         #endregion
@@ -117,7 +117,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="context">The Polly context</param>
         /// <returns></returns>
         Task<TModelResponse> SendFor<TModelResponse, TApiResponse>(
-            Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context);
+            Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context = null);
 
         /// <summary>
         /// Send a cancellable api call query to Apizr with MediatR returning a mapped result
@@ -151,7 +151,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="token">The cancellation token</param>
         /// <returns></returns>
         Task<TModelResponse> SendFor<TModelResponse, TApiResponse>(
-            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context,
+            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context = null,
             CancellationToken token = default);
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="context">The Polly context</param>
         /// <returns></returns>
         Task<TModelResponse> SendFor<TModelResponse, TApiResponse>(
-            Expression<Func<Context, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod, Context context);
+            Expression<Func<Context, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod, Context context = null);
 
         /// <summary>
         /// Send a cancellable mapped api call query to Apizr with MediatR returning a mapped result
@@ -187,7 +187,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="token">The cancellation token</param>
         /// <returns></returns>
         Task<TModelResponse> SendFor<TModelResponse, TApiResponse>(
-            Expression<Func<Context, CancellationToken, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod, Context context,
+            Expression<Func<Context, CancellationToken, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod, Context context = null,
             CancellationToken token = default); 
 
         #endregion

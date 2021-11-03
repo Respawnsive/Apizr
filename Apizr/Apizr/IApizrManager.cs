@@ -43,7 +43,7 @@ namespace Apizr
         /// <param name="executeApiMethod">The <see cref="TWebApi"/>'s task to execute</param>
         /// <param name="cancellationToken">A cancellation token</param>
         /// <returns></returns>
-        Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod, CancellationToken cancellationToken);
+        Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task
@@ -51,7 +51,7 @@ namespace Apizr
         /// <param name="executeApiMethod">The <see cref="TWebApi"/>'s task to execute</param>
         /// <param name="context">The Polly Context to pass through it all</param>
         /// <returns></returns>
-        Task ExecuteAsync(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context);
+        Task ExecuteAsync(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context = null);
 
         /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task
@@ -59,7 +59,7 @@ namespace Apizr
         /// <param name="executeApiMethod">The <see cref="TWebApi"/>'s task to execute</param>
         /// <param name="cancellationToken">A cancellation token</param>
         /// <returns></returns>
-        Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task>> executeApiMethod, CancellationToken cancellationToken);
+        Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task>> executeApiMethod, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task
@@ -67,7 +67,7 @@ namespace Apizr
         /// <param name="executeApiMethod">The <see cref="TWebApi"/>'s task to execute</param>
         /// <param name="context">The Polly Context to pass through it all</param>
         /// <returns></returns>
-        Task ExecuteAsync(Expression<Func<Context, TWebApi, IMappingHandler, Task>> executeApiMethod, Context context);
+        Task ExecuteAsync(Expression<Func<Context, TWebApi, IMappingHandler, Task>> executeApiMethod, Context context = null);
 
         /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task
@@ -76,8 +76,8 @@ namespace Apizr
         /// <param name="context">The Polly Context to pass through it all</param>
         /// <param name="cancellationToken">A cancellation token</param>
         /// <returns></returns>
-        Task ExecuteAsync(Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod, Context context,
-            CancellationToken cancellationToken);
+        Task ExecuteAsync(Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod, Context context = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task
@@ -87,7 +87,7 @@ namespace Apizr
         /// <param name="cancellationToken">A cancellation token</param>
         /// <returns></returns>
         Task ExecuteAsync(Expression<Func<Context, CancellationToken, TWebApi, IMappingHandler, Task>> executeApiMethod,
-            Context context, CancellationToken cancellationToken);
+            Context context = null, CancellationToken cancellationToken = default);
 
         #endregion
 
@@ -116,7 +116,7 @@ namespace Apizr
         /// <param name="executeApiMethod">The <see cref="TWebApi"/>'s task to execute</param>
         /// <param name="cancellationToken">A cancellation token</param>
         /// <returns></returns>
-        Task<TResult> ExecuteAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken);
+        Task<TResult> ExecuteAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task
@@ -126,7 +126,7 @@ namespace Apizr
         /// <param name="context">The Polly Context to pass through it all</param>
         /// <returns></returns>
         Task<TResult> ExecuteAsync<TResult>(Expression<Func<Context, TWebApi, Task<TResult>>> executeApiMethod,
-            Context context);
+            Context context = null);
 
         /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task
@@ -135,7 +135,7 @@ namespace Apizr
         /// <param name="executeApiMethod">The <see cref="TWebApi"/>'s task to execute</param>
         /// <param name="cancellationToken">A cancellation token</param>
         /// <returns></returns>
-        Task<TResult> ExecuteAsync<TResult>(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken);
+        Task<TResult> ExecuteAsync<TResult>(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task
@@ -145,7 +145,7 @@ namespace Apizr
         /// <param name="context">The Polly Context to pass through it all</param>
         /// <returns></returns>
         Task<TResult> ExecuteAsync<TResult>(
-            Expression<Func<Context, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod, Context context);
+            Expression<Func<Context, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod, Context context = null);
 
         /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task
@@ -156,8 +156,8 @@ namespace Apizr
         /// <param name="cancellationToken">A cancellation token</param>
         /// <returns></returns>
         Task<TResult> ExecuteAsync<TResult>(
-            Expression<Func<Context, CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, Context context,
-            CancellationToken cancellationToken);
+            Expression<Func<Context, CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, Context context = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task
@@ -169,7 +169,7 @@ namespace Apizr
         /// <returns></returns>
         Task<TResult> ExecuteAsync<TResult>(
             Expression<Func<Context, CancellationToken, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod,
-            Context context, CancellationToken cancellationToken);
+            Context context = null, CancellationToken cancellationToken = default);
 
         #endregion
 
@@ -197,7 +197,7 @@ namespace Apizr
         /// <param name="executeApiMethod">The specific <see cref="TWebApi"/>'s task to clear cache for</param>
         /// <param name="cancellationToken">A cancellation token</param>
         /// <returns></returns>
-        Task<bool> ClearCacheAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken); 
+        Task<bool> ClearCacheAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken = default); 
 
         #endregion
     }

@@ -22,7 +22,7 @@ namespace Apizr.Mediation.Requesting.Sending
         public Task SendFor(Expression<Func<TWebApi, Task>> executeApiMethod) =>
             _mediator.Send(new ExecuteRequest<TWebApi>(executeApiMethod));
 
-        public Task SendFor(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context) =>
+        public Task SendFor(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context = null) =>
             _mediator.Send(new ExecuteRequest<TWebApi>(executeApiMethod, context));
 
         public Task SendFor(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod,
@@ -30,7 +30,7 @@ namespace Apizr.Mediation.Requesting.Sending
             _mediator.Send(new ExecuteRequest<TWebApi>(executeApiMethod), token);
 
         public Task SendFor(Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod,
-            Context context, CancellationToken token = default) =>
+            Context context = null, CancellationToken token = default) =>
             _mediator.Send(new ExecuteRequest<TWebApi>(executeApiMethod, context), token);
 
         #endregion
@@ -42,7 +42,7 @@ namespace Apizr.Mediation.Requesting.Sending
             _mediator.Send(new ExecuteRequest<TWebApi, TApiResponse>(executeApiMethod));
 
         public Task<TApiResponse> SendFor<TApiResponse>(
-            Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context) =>
+            Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context = null) =>
             _mediator.Send(new ExecuteRequest<TWebApi, TApiResponse>(executeApiMethod, context));
 
         public Task<TApiResponse> SendFor<TApiResponse>(
@@ -51,7 +51,7 @@ namespace Apizr.Mediation.Requesting.Sending
             _mediator.Send(new ExecuteRequest<TWebApi, TApiResponse>(executeApiMethod), token);
 
         public Task<TApiResponse> SendFor<TApiResponse>(
-            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context,
+            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context = null,
             CancellationToken token = default) =>
             _mediator.Send(new ExecuteRequest<TWebApi, TApiResponse>(executeApiMethod, context), token);
 
@@ -64,7 +64,7 @@ namespace Apizr.Mediation.Requesting.Sending
             _mediator.Send(new ExecuteRequest<TWebApi, TModelResponse, TApiResponse>(executeApiMethod));
 
         public Task<TModelResponse> SendFor<TModelResponse, TApiResponse>(
-            Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context) =>
+            Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context = null) =>
             _mediator.Send(new ExecuteRequest<TWebApi, TModelResponse, TApiResponse>(executeApiMethod, context));
 
         public Task<TModelResponse> SendFor<TModelResponse, TApiResponse>(
@@ -73,7 +73,7 @@ namespace Apizr.Mediation.Requesting.Sending
             _mediator.Send(new ExecuteRequest<TWebApi, TModelResponse, TApiResponse>(executeApiMethod), token);
 
         public Task<TModelResponse> SendFor<TModelResponse, TApiResponse>(
-            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context,
+            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context = null,
             CancellationToken token = default) =>
             _mediator.Send(new ExecuteRequest<TWebApi, TModelResponse, TApiResponse>(executeApiMethod, context), token);
 
@@ -83,7 +83,7 @@ namespace Apizr.Mediation.Requesting.Sending
 
         public Task<TModelResponse> SendFor<TModelResponse, TApiResponse>(
             Expression<Func<Context, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod,
-            Context context) =>
+            Context context = null) =>
             _mediator.Send(new ExecuteRequest<TWebApi, TModelResponse, TApiResponse>(executeApiMethod, context));
 
         public Task<TModelResponse> SendFor<TModelResponse, TApiResponse>(
@@ -93,7 +93,7 @@ namespace Apizr.Mediation.Requesting.Sending
 
         public Task<TModelResponse> SendFor<TModelResponse, TApiResponse>(
             Expression<Func<Context, CancellationToken, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod,
-            Context context,
+            Context context = null,
             CancellationToken token = default) =>
             _mediator.Send(new ExecuteRequest<TWebApi, TModelResponse, TApiResponse>(executeApiMethod, context), token);
 

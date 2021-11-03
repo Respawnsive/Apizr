@@ -29,7 +29,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
         /// <param name="context">The Polly context</param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendFor(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context);
+        Task<Option<Unit, ApizrException>> SendFor(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context = null);
 
         /// <summary>
         /// Send a cancellable api call command to Apizr with MediatR returning an optional result
@@ -47,7 +47,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="context">The Polly context</param>
         /// <param name="token">The cancellation token</param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendFor(Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod, Context context,
+        Task<Option<Unit, ApizrException>> SendFor(Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod, Context context = null,
             CancellationToken token = default);
 
         #endregion
@@ -71,7 +71,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="context">The Polly context</param>
         /// <returns></returns>
         Task<Option<TApiResponse, ApizrException<TApiResponse>>> SendFor<TApiResponse>(
-            Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context);
+            Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context = null);
 
         /// <summary>
         /// Send a cancellable api call query to Apizr with MediatR returning an optional result
@@ -93,7 +93,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="token">The cancellation token</param>
         /// <returns></returns>
         Task<Option<TApiResponse, ApizrException<TApiResponse>>> SendFor<TApiResponse>(
-            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context,
+            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context = null,
             CancellationToken token = default);
 
         #endregion
@@ -119,7 +119,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="context">The Polly context</param>
         /// <returns></returns>
         Task<Option<TModelResponse, ApizrException<TModelResponse>>> SendFor<TModelResponse, TApiResponse>(
-            Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context);
+            Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context = null);
 
         /// <summary>
         /// Send a cancellable api call query to Apizr with MediatR returning a mapped optional result
@@ -153,7 +153,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="token">The cancellation token</param>
         /// <returns></returns>
         Task<Option<TModelResponse, ApizrException<TModelResponse>>> SendFor<TModelResponse, TApiResponse>(
-            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context,
+            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context = null,
             CancellationToken token = default);
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="context">The Polly context</param>
         /// <returns></returns>
         Task<Option<TModelResponse, ApizrException<TModelResponse>>> SendFor<TModelResponse, TApiResponse>(
-            Expression<Func<Context, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod, Context context);
+            Expression<Func<Context, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod, Context context = null);
 
         /// <summary>
         /// Send a cancellable mapped api call query to Apizr with MediatR returning a mapped optional result
@@ -189,7 +189,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="token">The cancellation token</param>
         /// <returns></returns>
         Task<Option<TModelResponse, ApizrException<TModelResponse>>> SendFor<TModelResponse, TApiResponse>(
-            Expression<Func<Context, CancellationToken, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod, Context context,
+            Expression<Func<Context, CancellationToken, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod, Context context = null,
             CancellationToken token = default); 
 
         #endregion

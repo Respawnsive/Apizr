@@ -128,7 +128,7 @@ namespace Apizr
             }
         }
 
-        public async Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod, CancellationToken cancellationToken)
+        public async Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod, CancellationToken cancellationToken = default)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
@@ -161,7 +161,7 @@ namespace Apizr
             }
         }
 
-        public async Task ExecuteAsync(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context)
+        public async Task ExecuteAsync(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
@@ -194,7 +194,7 @@ namespace Apizr
             }
         }
 
-        public async Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task>> executeApiMethod, CancellationToken cancellationToken)
+        public async Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task>> executeApiMethod, CancellationToken cancellationToken = default)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
@@ -227,7 +227,7 @@ namespace Apizr
             }
         }
 
-        public async Task ExecuteAsync(Expression<Func<Context, TWebApi, IMappingHandler, Task>> executeApiMethod, Context context)
+        public async Task ExecuteAsync(Expression<Func<Context, TWebApi, IMappingHandler, Task>> executeApiMethod, Context context = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
@@ -260,7 +260,7 @@ namespace Apizr
             }
         }
 
-        public async Task ExecuteAsync(Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod, Context context, CancellationToken cancellationToken)
+        public async Task ExecuteAsync(Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod, Context context = null, CancellationToken cancellationToken = default)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
@@ -293,7 +293,7 @@ namespace Apizr
             }
         }
 
-        public async Task ExecuteAsync(Expression<Func<Context, CancellationToken, TWebApi, IMappingHandler, Task>> executeApiMethod, Context context, CancellationToken cancellationToken)
+        public async Task ExecuteAsync(Expression<Func<Context, CancellationToken, TWebApi, IMappingHandler, Task>> executeApiMethod, Context context = null, CancellationToken cancellationToken = default)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
@@ -462,7 +462,7 @@ namespace Apizr
             return result;
         }
 
-        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken)
+        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken = default)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TResult>(executeApiMethod);
@@ -528,7 +528,7 @@ namespace Apizr
             return result;
         }
 
-        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<Context, TWebApi, Task<TResult>>> executeApiMethod, Context context)
+        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<Context, TWebApi, Task<TResult>>> executeApiMethod, Context context = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TResult>(executeApiMethod);
@@ -594,7 +594,7 @@ namespace Apizr
             return result;
         }
 
-        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken)
+        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken = default)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TResult>(executeApiMethod);
@@ -660,7 +660,7 @@ namespace Apizr
             return result;
         }
 
-        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<Context, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod, Context context)
+        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<Context, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod, Context context = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TResult>(executeApiMethod);
@@ -726,7 +726,7 @@ namespace Apizr
             return result;
         }
 
-        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<Context, CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, Context context, CancellationToken cancellationToken)
+        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<Context, CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, Context context = null, CancellationToken cancellationToken = default)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TResult>(executeApiMethod);
@@ -792,7 +792,7 @@ namespace Apizr
             return result;
         }
 
-        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<Context, CancellationToken, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod, Context context, CancellationToken cancellationToken)
+        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<Context, CancellationToken, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod, Context context = null, CancellationToken cancellationToken = default)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TResult>(executeApiMethod);
@@ -885,7 +885,7 @@ namespace Apizr
         public Task<bool> ClearCacheAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod)
             => ClearCacheAsync((ct, api) => executeApiMethod.Compile()(api), CancellationToken.None);
 
-        public async Task<bool> ClearCacheAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken)
+        public async Task<bool> ClearCacheAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken = default)
         {
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
             _apizrOptions.Logger.Log(_apizrOptions.LogLevel, $"Apizr: Calling cache clear for method {methodCallExpression.Method.Name}");

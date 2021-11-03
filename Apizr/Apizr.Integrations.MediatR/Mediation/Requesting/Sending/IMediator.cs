@@ -132,6 +132,16 @@ namespace Apizr.Mediation.Requesting.Sending
             CancellationToken token = default);
 
         /// <summary>
+        /// Send a mapped api call query to Apizr with MediatR returning a mapped result
+        /// </summary>
+        /// <typeparam name="TModelResponse">The mapped model response</typeparam>
+        /// <typeparam name="TApiResponse">The api response</typeparam>
+        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <returns></returns>
+        Task<TModelResponse> SendFor<TModelResponse, TApiResponse>(
+            Expression<Func<TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod);
+
+        /// <summary>
         /// Send a cancellable api call query to Apizr with MediatR returning a mapped result
         /// </summary>
         /// <typeparam name="TModelResponse">The mapped model response</typeparam>
@@ -143,16 +153,6 @@ namespace Apizr.Mediation.Requesting.Sending
         Task<TModelResponse> SendFor<TModelResponse, TApiResponse>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context,
             CancellationToken token = default);
-
-        /// <summary>
-        /// Send a mapped api call query to Apizr with MediatR returning a mapped result
-        /// </summary>
-        /// <typeparam name="TModelResponse">The mapped model response</typeparam>
-        /// <typeparam name="TApiResponse">The api response</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
-        /// <returns></returns>
-        Task<TModelResponse> SendFor<TModelResponse, TApiResponse>(
-            Expression<Func<TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod);
 
         /// <summary>
         /// Send a mapped api call query to Apizr with MediatR returning a mapped result

@@ -25,7 +25,7 @@ namespace Apizr.Optional.Cruding.Handling
             {
                 return await request.SomeNotNull(new ApizrException<TModelEntity>(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                    .MapAsync(_ => CrudApiManager.ExecuteAsync((ct, api) => api.Read(request.Key, request.Priority, ct),
+                    .MapAsync(_ => CrudApiManager.ExecuteAsync((ctx, ct, api) => api.Read(request.Key, request.Priority, ctx, ct), request.Context,
                         cancellationToken))
                     .MapAsync(result => Task.FromResult(Map<TApiEntity, TModelEntity>(result)))
                     .ConfigureAwait(false);
@@ -52,7 +52,7 @@ namespace Apizr.Optional.Cruding.Handling
             {
                 return await request.SomeNotNull(new ApizrException<TModelEntity>(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                    .MapAsync(_ => CrudApiManager.ExecuteAsync((ct, api) => api.Read(request.Key, request.Priority, ct),
+                    .MapAsync(_ => CrudApiManager.ExecuteAsync((ctx, ct, api) => api.Read(request.Key, request.Priority, ctx, ct), request.Context,
                         cancellationToken))
                     .MapAsync(result => Task.FromResult(Map<TApiEntity, TModelEntity>(result)))
                     .ConfigureAwait(false);

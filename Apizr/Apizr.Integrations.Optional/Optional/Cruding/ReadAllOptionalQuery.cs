@@ -37,6 +37,11 @@ namespace Apizr.Optional.Cruding
 
         }
 
+        public ReadAllOptionalQuery(int priority, Context context) : base(default, priority, context)
+        {
+
+        }
+
         public ReadAllOptionalQuery(TReadAllParams parameters, int priority, Context context) : base(parameters, priority, context)
         {
 
@@ -71,6 +76,11 @@ namespace Apizr.Optional.Cruding
         }
 
         public ReadAllOptionalQuery(IDictionary<string, object> parameters, Context context) : base(parameters, context)
+        {
+
+        }
+
+        public ReadAllOptionalQuery(int priority, Context context) : base(default, priority, context)
         {
 
         }

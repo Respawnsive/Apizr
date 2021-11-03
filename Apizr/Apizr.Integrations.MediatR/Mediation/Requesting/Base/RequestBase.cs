@@ -5,7 +5,7 @@ namespace Apizr.Mediation.Requesting.Base
 {
     public abstract class RequestBase<TRequestResponse> : IRequest<TRequestResponse>
     {
-        protected RequestBase() : this(new Context())
+        protected RequestBase() : this(null)
         {
             
         }

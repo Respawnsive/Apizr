@@ -34,7 +34,7 @@ namespace Apizr.Requesting
         Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams);
 
         [Get("")]
-        Task<TReadAllResult> ReadAll([Property("Priority")] int priority);
+        Task<TReadAllResult> ReadAll([Property(Constants.PriorityKey)] int priority);
 
         [Get("")]
         Task<TReadAllResult> ReadAll([Context] Context context);
@@ -43,7 +43,7 @@ namespace Apizr.Requesting
         Task<TReadAllResult> ReadAll(CancellationToken cancellationToken);
 
         [Get("")]
-        Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [Property("Priority")] int priority);
+        Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [Property(Constants.PriorityKey)] int priority);
 
         [Get("")]
         Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [Context] Context context);
@@ -52,25 +52,25 @@ namespace Apizr.Requesting
         Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, CancellationToken cancellationToken);
 
         [Get("")]
-        Task<TReadAllResult> ReadAll([Property("Priority")] int priority, [Context] Context context);
+        Task<TReadAllResult> ReadAll([Property(Constants.PriorityKey)] int priority, [Context] Context context);
 
         [Get("")]
-        Task<TReadAllResult> ReadAll([Property("Priority")] int priority, CancellationToken cancellationToken);
+        Task<TReadAllResult> ReadAll([Property(Constants.PriorityKey)] int priority, CancellationToken cancellationToken);
 
         [Get("")]
         Task<TReadAllResult> ReadAll([Context] Context context, CancellationToken cancellationToken);
 
         [Get("")]
-        Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [Property("Priority")] int priority, [Context] Context context);
+        Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [Property(Constants.PriorityKey)] int priority, [Context] Context context);
 
         [Get("")]
-        Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [Property("Priority")] int priority, CancellationToken cancellationToken);
+        Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [Property(Constants.PriorityKey)] int priority, CancellationToken cancellationToken);
 
         [Get("")]
         Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [Context] Context context, CancellationToken cancellationToken);
 
         [Get("")]
-        Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [Property("Priority")] int priority, [Context] Context context, CancellationToken cancellationToken);
+        Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [Property(Constants.PriorityKey)] int priority, [Context] Context context, CancellationToken cancellationToken);
 
         #endregion
 
@@ -80,7 +80,7 @@ namespace Apizr.Requesting
         Task<T> Read([CacheKey] TKey key);
 
         [Get("/{key}")]
-        Task<T> Read([CacheKey] TKey key, [Property("Priority")] int priority);
+        Task<T> Read([CacheKey] TKey key, [Property(Constants.PriorityKey)] int priority);
 
         [Get("/{key}")]
         Task<T> Read([CacheKey] TKey key, [Context] Context context);
@@ -89,13 +89,13 @@ namespace Apizr.Requesting
         Task<T> Read([CacheKey] TKey key, CancellationToken cancellationToken);
 
         [Get("/{key}")]
-        Task<T> Read([CacheKey] TKey key, [Property("Priority")] int priority, [Context] Context context);
+        Task<T> Read([CacheKey] TKey key, [Property(Constants.PriorityKey)] int priority, [Context] Context context);
 
         [Get("/{key}")]
-        Task<T> Read([CacheKey] TKey key, [Property("Priority")] int priority, CancellationToken cancellationToken);
+        Task<T> Read([CacheKey] TKey key, [Property(Constants.PriorityKey)] int priority, CancellationToken cancellationToken);
 
         [Get("/{key}")]
-        Task<T> Read([CacheKey] TKey key, [Property("Priority")] int priority, [Context] Context context, CancellationToken cancellationToken);
+        Task<T> Read([CacheKey] TKey key, [Property(Constants.PriorityKey)] int priority, [Context] Context context, CancellationToken cancellationToken);
 
         #endregion
 

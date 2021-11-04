@@ -4,7 +4,8 @@ namespace Apizr
 {
     public class PriorityAttribute : PropertyAttribute
     {
-        public PriorityAttribute() : base("Priority")
+
+        public PriorityAttribute() : base(Constants.PriorityKey)
         {
             
         }

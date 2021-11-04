@@ -8,6 +8,7 @@ using Apizr.Logging.Attributes;
 using Apizr.Policing;
 using Apizr.Sample.Api.Models;
 using Microsoft.Extensions.Logging;
+using Polly;
 using Refit;
 
 [assembly:Policy("TransientHttpError")]
@@ -22,7 +23,7 @@ namespace Apizr.Sample.Api
         Task<UserList> GetUsersAsync();
 
         [Get("/users"), Log(HttpMessageParts.RequestBody, HttpTracerMode.ErrorsAndExceptionsOnly, LogLevel.Critical)]
-        Task<UserList> GetUsersAsync([Priority] int priority);
+        Task<UserList> GetUsersAsync([Priority] int priority, [Context] Context context);
 
         [Get("/users")]
         Task<UserList> GetUsersAsync(CancellationToken cancellationToken);

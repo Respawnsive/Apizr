@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring;
-using Apizr.Extending;
+using Apizr.Policing;
 using Microsoft.Extensions.Logging;
 
 namespace Apizr.Authenticating
@@ -14,13 +14,11 @@ namespace Apizr.Authenticating
     {
         private readonly ILogger _logger;
         private readonly IApizrOptionsBase _apizrOptions;
-        private readonly string _handlerFriendlyName;
 
         protected AuthenticationHandlerBase(ILogger logger, IApizrOptionsBase apizrOptions)
         {
             _logger = logger;
             _apizrOptions = apizrOptions;
-            _handlerFriendlyName = GetType().GetFriendlyName();
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
@@ -28,50 +26,57 @@ namespace Apizr.Authenticating
             HttpRequestMessage clonedRequest = null;
             string token = null;
 
+            var context = request.GetPolicyExecutionContext();
+            if (!context.TryGetLogger(out var logger, out var logLevel, out _, out _))
+            {
+                logger = _logger;
+                logLevel = _apizrOptions.LogLevel;
+            }
+
             // See if the request has an authorize header
             var auth = request.Headers.Authorization;
             if (auth != null)
             {
                 // Authorization required! Get the token from saved settings if available
-                _logger.LogTrace($"{_handlerFriendlyName}: Authorization required with scheme {auth.Scheme}");
+                logger.Log(logLevel, $"{context.OperationKey}: Authorization required with scheme {auth.Scheme}");
                 token = GetToken();
                 if (!string.IsNullOrWhiteSpace(token))
                 {
                     // We have one, then clone the request in case we need to re-issue it with a refreshed token
-                    _logger.LogTrace($"{_handlerFriendlyName}: Saved token will be used");
+                    logger.Log(logLevel, $"{context.OperationKey}: Saved token will be used");
                     clonedRequest = await this.CloneHttpRequestMessageAsync(request);
                 }
                 else
                 {
                     // Refresh the token
-                    _logger.LogTrace($"{_handlerFriendlyName}: No token saved yet. Refreshing token...");
+                    logger.Log(logLevel, $"{context.OperationKey}: No token saved yet. Refreshing token...");
                     token = await this.RefreshTokenAsync(request).ConfigureAwait(false);
                 }
 
                 // Set the authentication header
                 request.Headers.Authorization = new AuthenticationHeaderValue(auth.Scheme, token);
-                _logger.LogTrace($"{_handlerFriendlyName}: Authorization header has been set");
+                logger.Log(logLevel, $"{context.OperationKey}: Authorization header has been set");
             }
 
             // Send the request
-            _logger.LogTrace($"{_handlerFriendlyName}: Sending request with authorization header...");
+            logger.Log(logLevel, $"{context.OperationKey}: Sending request with authorization header...");
             var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
             // Check if we get an Unauthorized response with token from settings
             if (response.StatusCode == HttpStatusCode.Unauthorized && auth != null && clonedRequest != null)
             {
-                _logger.LogTrace($"{_handlerFriendlyName}: Unauthorized !");
+                logger.Log(logLevel, $"{context.OperationKey}: Unauthorized !");
 
                 // Refresh the token
-                _logger.LogTrace($"{_handlerFriendlyName}: Refreshing token...");
+                logger.Log(logLevel, $"{context.OperationKey}: Refreshing token...");
                 token = await this.RefreshTokenAsync(request).ConfigureAwait(false);
 
                 // Set the authentication header with refreshed token 
                 clonedRequest.Headers.Authorization = new AuthenticationHeaderValue(auth.Scheme, token);
-                _logger.LogTrace($"{_handlerFriendlyName}: Authorization header has been set with refreshed token");
+                logger.Log(logLevel, $"{context.OperationKey}: Authorization header has been set with refreshed token");
 
                 // Send the request
-                _logger.LogInformation($"{_handlerFriendlyName}: Sending request again but with refreshed authorization header...");
+                logger.Log(logLevel, $"{context.OperationKey}: Sending request again but with refreshed authorization header...");
                 response = await base.SendAsync(clonedRequest, cancellationToken).ConfigureAwait(false);
             }
 
@@ -79,12 +84,12 @@ namespace Apizr.Authenticating
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
                 token = null;
-                _logger.LogTrace($"{_handlerFriendlyName}: Unauthorized ! Token has been cleared");
+                logger.Log(logLevel, $"{context.OperationKey}: Unauthorized ! Token has been cleared");
             }
 
             // Save the refreshed token if succeed or clear it if not
             this.SetToken(token);
-            _logger.LogTrace($"{_handlerFriendlyName}: Token saved");
+            logger.Log(logLevel, $"{context.OperationKey}: Token saved");
 
             return response;
         }

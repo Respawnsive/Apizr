@@ -13,8 +13,6 @@ namespace Apizr.Policing
     /// </summary>
     public static class HttpRequestMessageExtensions
     {
-        internal static readonly string PolicyExecutionContextKey = "PolicyExecutionContext";
-
         /// <summary>
         /// Gets the <see cref="Context"/> associated with the provided <see cref="HttpRequestMessage"/>.
         /// </summary>
@@ -32,7 +30,7 @@ namespace Apizr.Policing
                 throw new ArgumentNullException(nameof(request));
             }
 
-            request.Properties.TryGetValue(PolicyExecutionContextKey, out var context);
+            request.Properties.TryGetValue(Constants.PollyExecutionContextKey, out var context);
             return context as Context;
         }
 
@@ -53,7 +51,7 @@ namespace Apizr.Policing
                 throw new ArgumentNullException(nameof(request));
             }
 
-            request.Properties[PolicyExecutionContextKey] = context;
+            request.Properties[Constants.PollyExecutionContextKey] = context;
         }
     }
 }

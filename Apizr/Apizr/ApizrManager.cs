@@ -83,7 +83,7 @@ namespace Apizr
                 if (!(policy is INoOpPolicy))
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
 
-                var pollyContext = new Context().WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
+                var pollyContext = new Context(methodDetails.MethodInfo.Name).WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
                 await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(webApi), pollyContext);
             }
             catch (Exception e)
@@ -116,7 +116,7 @@ namespace Apizr
                 if (!(policy is INoOpPolicy))
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
 
-                var pollyContext = new Context().WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
+                var pollyContext = new Context(methodDetails.MethodInfo.Name).WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
                 await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(webApi, _mappingHandler), pollyContext);
             }
             catch (Exception e)
@@ -149,7 +149,7 @@ namespace Apizr
                 if (!(policy is INoOpPolicy))
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
 
-                var pollyContext = new Context().WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
+                var pollyContext = new Context(methodDetails.MethodInfo.Name).WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
                 await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, webApi), pollyContext, cancellationToken);
             }
             catch (Exception e)
@@ -182,7 +182,8 @@ namespace Apizr
                 if (!(policy is INoOpPolicy))
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
 
-                var pollyContext = (context ?? new Context()).WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
+                var pollyContext = new Context(methodDetails.MethodInfo.Name, context ?? new Context());
+                pollyContext.WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
                 await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(ctx, webApi), pollyContext);
             }
             catch (Exception e)
@@ -215,7 +216,7 @@ namespace Apizr
                 if (!(policy is INoOpPolicy))
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
 
-                var pollyContext = new Context().WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
+                var pollyContext = new Context(methodDetails.MethodInfo.Name).WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
                 await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, webApi, _mappingHandler), pollyContext, cancellationToken);
             }
             catch (Exception e)
@@ -248,7 +249,8 @@ namespace Apizr
                 if (!(policy is INoOpPolicy))
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
 
-                var pollyContext = (context ?? new Context()).WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
+                var pollyContext = new Context(methodDetails.MethodInfo.Name, context ?? new Context());
+                pollyContext.WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
                 await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(ctx, webApi, _mappingHandler), pollyContext);
             }
             catch (Exception e)
@@ -281,7 +283,8 @@ namespace Apizr
                 if (!(policy is INoOpPolicy))
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
 
-                var pollyContext = (context ?? new Context()).WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
+                var pollyContext = new Context(methodDetails.MethodInfo.Name, context ?? new Context());
+                pollyContext.WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
                 await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ctx, ct, webApi), pollyContext, cancellationToken);
             }
             catch (Exception e)
@@ -314,7 +317,8 @@ namespace Apizr
                 if (!(policy is INoOpPolicy))
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
 
-                var pollyContext = (context ?? new Context()).WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
+                var pollyContext = new Context(methodDetails.MethodInfo.Name, context ?? new Context());
+                pollyContext.WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
                 await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ctx, ct, webApi, _mappingHandler), pollyContext, cancellationToken);
             }
             catch (Exception e)
@@ -369,7 +373,7 @@ namespace Apizr
                     if (!(policy is INoOpPolicy))
                         _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
 
-                    var pollyContext = new Context().WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
+                    var pollyContext = new Context(methodDetails.MethodInfo.Name).WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
                     result = await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(webApi), pollyContext);
                 }
                 catch (Exception e)
@@ -435,7 +439,7 @@ namespace Apizr
                     if (!(policy is INoOpPolicy))
                         _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
 
-                    var pollyContext = new Context().WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
+                    var pollyContext = new Context(methodDetails.MethodInfo.Name).WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
                     result = await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(webApi, _mappingHandler), pollyContext);
                 }
                 catch (Exception e)
@@ -501,7 +505,7 @@ namespace Apizr
                     if (!(policy is INoOpPolicy))
                         _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
 
-                    var pollyContext = new Context().WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
+                    var pollyContext = new Context(methodDetails.MethodInfo.Name).WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
                     result = await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, webApi), pollyContext, cancellationToken);
                 }
                 catch (Exception e)
@@ -567,7 +571,8 @@ namespace Apizr
                     if (!(policy is INoOpPolicy))
                         _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
 
-                    var pollyContext = (context ?? new Context()).WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
+                    var pollyContext = new Context(methodDetails.MethodInfo.Name, context ?? new Context());
+                    pollyContext.WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
                     result = await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(ctx, webApi), pollyContext);
                 }
                 catch (Exception e)
@@ -633,7 +638,7 @@ namespace Apizr
                     if (!(policy is INoOpPolicy))
                         _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
 
-                    var pollyContext = new Context().WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
+                    var pollyContext = new Context(methodDetails.MethodInfo.Name).WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
                     result = await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ct, webApi, _mappingHandler), pollyContext, cancellationToken);
                 }
                 catch (Exception e)
@@ -699,7 +704,8 @@ namespace Apizr
                     if (!(policy is INoOpPolicy))
                         _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
 
-                    var pollyContext = (context ?? new Context()).WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
+                    var pollyContext = new Context(methodDetails.MethodInfo.Name, context ?? new Context());
+                    pollyContext.WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
                     result = await policy.ExecuteAsync(ctx => executeApiMethod.Compile()(ctx, webApi, _mappingHandler), pollyContext);
                 }
                 catch (Exception e)
@@ -765,7 +771,8 @@ namespace Apizr
                     if (!(policy is INoOpPolicy))
                         _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
 
-                    var pollyContext = (context ?? new Context()).WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
+                    var pollyContext = new Context(methodDetails.MethodInfo.Name, context ?? new Context());
+                    pollyContext.WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
                     result = await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ctx, ct, webApi), pollyContext, cancellationToken);
                 }
                 catch (Exception e)
@@ -831,7 +838,8 @@ namespace Apizr
                     if (!(policy is INoOpPolicy))
                         _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
 
-                    var pollyContext = (context ?? new Context()).WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
+                    var pollyContext = new Context(methodDetails.MethodInfo.Name, context ?? new Context());
+                    pollyContext.WithLogger(_apizrOptions.Logger, logAttribute.LogLevel, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
                     result = await policy.ExecuteAsync((ctx, ct) => executeApiMethod.Compile()(ctx, ct, webApi, _mappingHandler), pollyContext, cancellationToken);
                 }
                 catch (Exception e)
@@ -1435,11 +1443,19 @@ namespace Apizr
             {
                 case Expression<Func<TWebApi, Task>> executeApiMethod:
                     return GetMethodCallExpression(executeApiMethod.Body);
+                case Expression<Func<Context, TWebApi, Task>> executeApiMethod:
+                    return GetMethodCallExpression(executeApiMethod.Body);
                 case Expression<Func<TWebApi, IMappingHandler, Task>> executeApiMethod:
                     return GetMethodCallExpression(executeApiMethod.Body);
                 case Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod:
                     return GetMethodCallExpression(executeApiMethod.Body);
+                case Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod:
+                    return GetMethodCallExpression(executeApiMethod.Body);
+                case Expression<Func<Context, TWebApi, IMappingHandler, Task>> executeApiMethod:
+                    return GetMethodCallExpression(executeApiMethod.Body);
                 case Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task>> executeApiMethod:
+                    return GetMethodCallExpression(executeApiMethod.Body);
+                case Expression<Func<Context, CancellationToken, TWebApi, IMappingHandler, Task>> executeApiMethod:
                     return GetMethodCallExpression(executeApiMethod.Body);
                 case InvocationExpression methodInvocationBody:
                     {
@@ -1460,11 +1476,19 @@ namespace Apizr
             {
                 case Expression<Func<TWebApi, Task<TResult>>> executeApiMethod:
                     return GetMethodCallExpression<TResult>(executeApiMethod.Body);
+                case Expression<Func<Context, TWebApi, Task<TResult>>> executeApiMethod:
+                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
                 case Expression<Func<TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod:
                     return GetMethodCallExpression<TResult>(executeApiMethod.Body);
                 case Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod:
                     return GetMethodCallExpression<TResult>(executeApiMethod.Body);
+                case Expression<Func<Context, CancellationToken, TWebApi, Task<TResult>>> executeApiMethod:
+                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
+                case Expression<Func<Context, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod:
+                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
                 case Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod:
+                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
+                case Expression<Func<Context, CancellationToken, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod:
                     return GetMethodCallExpression<TResult>(executeApiMethod.Body);
                 case InvocationExpression methodInvocationBody:
                     {

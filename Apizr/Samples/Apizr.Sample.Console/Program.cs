@@ -123,10 +123,8 @@ namespace Apizr.Sample.Console
 
                 var apizrRegistry = Apizr.Create(
                     registry => registry
-                        .AddFor<IReqResService>(options => options
-                            .WithLogging())
-                        .AddCrudFor<User, int, PagedResult<User>>(options => options
-                            .WithBaseAddress("https://reqres.in/api/users")),
+                        .AddFor<IReqResService>(options => options.WithLogging())
+                        .AddCrudFor<User, int, PagedResult<User>>(options => options.WithBaseAddress("https://reqres.in/api/users")),
 
                     config => config
                         .WithPriorityManagement()
@@ -342,7 +340,7 @@ namespace Apizr.Sample.Console
                     //var test = new ReadAllUsersParams("value1", 2);
 
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
-                    var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
+                    var userList = await _reqResManager.ExecuteAsync((ctx, api) => api.GetUsersAsync((int)Priority.UserInitiated, ctx), new Context{{"key1", "value1"}});
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(true));
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(parameters1));

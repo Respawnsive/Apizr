@@ -60,44 +60,43 @@ namespace Apizr.Logging
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var context = request.GetPolicyExecutionContext();
-            if (!context.TryGetValue(nameof(ILogger), out var loggerObject) || !(loggerObject is ILogger logger))
+            if (!context.TryGetLogger(out var logger, out var logLevel, out var verbosity, out var tracerMode))
+            {
                 logger = _logger;
-            if (!context.TryGetValue(nameof(LogLevel), out var logLevelObject) || !(logLevelObject is LogLevel logLevel))
                 logLevel = _apizrOptions.LogLevel;
-            if (!context.TryGetValue(nameof(HttpMessageParts), out var httpMessagePartsObject) || !(httpMessagePartsObject is HttpMessageParts httpMessageParts))
-                httpMessageParts = _apizrOptions.TrafficVerbosity;
-            if (!context.TryGetValue(nameof(HttpTracerMode), out var httpTracerModeObject) || !(httpTracerModeObject is HttpTracerMode httpTracerMode))
-                httpTracerMode = _apizrOptions.HttpTracerMode;
+                verbosity = _apizrOptions.TrafficVerbosity;
+                tracerMode = _apizrOptions.HttpTracerMode;
+            }
 
             try
             {
-                if(httpTracerMode == HttpTracerMode.Everything)
-                    await LogHttpRequest(request, logger, logLevel, httpMessageParts).ConfigureAwait(false);
+                if(tracerMode == HttpTracerMode.Everything)
+                    await LogHttpRequest(request, logger, logLevel, verbosity).ConfigureAwait(false);
 
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();
                 var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
                 stopwatch.Stop();
 
-                if (httpTracerMode >= HttpTracerMode.ErrorsAndExceptionsOnly)
+                if (tracerMode >= HttpTracerMode.ErrorsAndExceptionsOnly)
                 {
                     if (!response.IsSuccessStatusCode)
                     {
-                        if (httpTracerMode == HttpTracerMode.ErrorsAndExceptionsOnly)
-                            await LogHttpRequest(request, logger, logLevel, httpMessageParts).ConfigureAwait(false);
+                        if (tracerMode == HttpTracerMode.ErrorsAndExceptionsOnly)
+                            await LogHttpRequest(request, logger, logLevel, verbosity).ConfigureAwait(false);
 
-                        await LogHttpErrorRequest(request, logger, logLevel, httpMessageParts);
+                        await LogHttpErrorRequest(request, logger, logLevel, verbosity);
                     }
 
-                    await LogHttpResponse(response, stopwatch.Elapsed, logger, logLevel, httpMessageParts).ConfigureAwait(false);  
+                    await LogHttpResponse(response, stopwatch.Elapsed, logger, logLevel, verbosity).ConfigureAwait(false);  
                 }
 
                 return response;
             }
             catch (Exception ex)
             {
-                if (httpTracerMode == HttpTracerMode.ExceptionsOnly)
-                    await LogHttpRequest(request, logger, logLevel, httpMessageParts).ConfigureAwait(false);
+                if (tracerMode == HttpTracerMode.ExceptionsOnly)
+                    await LogHttpRequest(request, logger, logLevel, verbosity).ConfigureAwait(false);
 
                 LogHttpException(request, ex, logger, logLevel);
                 throw;

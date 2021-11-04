@@ -5,6 +5,8 @@ using System.Net.Http;
 using System.Reactive.Threading.Tasks;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring;
+using Apizr.Policing;
 using Fusillade;
 using Microsoft.Extensions.Logging;
 using Punchclock;
@@ -16,11 +18,13 @@ namespace Apizr
         private readonly OperationQueue _opQueue;
         private readonly Dictionary<string, InflightRequest> _inflightResponses = new Dictionary<string, InflightRequest>();
         private readonly ILogger _logger;
+        private readonly IApizrOptionsBase _apizrOptions;
         private long? _maxBytesToRead;
 
-        public PriorityHttpMessageHandler(HttpMessageHandler innerHandler, ILogger logger, long? maxBytesToRead = null, OperationQueue opQueue = null) : base(innerHandler)
+        public PriorityHttpMessageHandler(HttpMessageHandler innerHandler, ILogger logger, IApizrOptionsBase apizrOptions, long? maxBytesToRead = null, OperationQueue opQueue = null) : base(innerHandler)
         {
             _logger = logger;
+            _apizrOptions = apizrOptions;
             _maxBytesToRead = maxBytesToRead;
             _opQueue = opQueue;
         }
@@ -51,14 +55,24 @@ namespace Apizr
                 return tcs.Task;
             }
 
+            var context = request.GetPolicyExecutionContext();
+            if (!context.TryGetLogger(out var logger, out var logLevel, out _, out _))
+            {
+                logger = _logger;
+                logLevel = _apizrOptions.LogLevel;
+            }
+
             var priority = (int) Priority.UserInitiated;
-            if (request.Properties.TryGetValue("Priority", out var priorityObject))
+            if (request.Properties.TryGetValue(Constants.PriorityKey, out var priorityObject))
             {
                 var priorityValue = (int) priorityObject;
                 if (priorityValue >= 0)
                     priority = priorityValue;
             }
 
+            var priorityName = Enum.IsDefined(typeof(Priority), priority)
+                ? $"a {Enum.GetName(typeof(Priority), priority)} priority"
+                : $"a custom priority of {priority}";
             var key = RateLimitedHttpMessageHandler.UniqueKeyForRequest(request);
             var realToken = new CancellationTokenSource();
             var ret = new InflightRequest(() =>
@@ -79,6 +93,8 @@ namespace Apizr
                     val.AddRef();
                     cancellationToken.Register(val.Cancel);
 
+                    logger.Log(logLevel, $"{context.OperationKey}: Same request has been sent yet. Waiting for it.");
+
                     return val.Response.ToTask(cancellationToken);
                 }
 
@@ -96,6 +112,8 @@ namespace Apizr
                 {
                     try
                     {
+                        logger.Log(logLevel, $"{context.OperationKey}: Sending request with {priorityName}.");
+
                         var resp = await base.SendAsync(request, realToken.Token).ConfigureAwait(false);
 
                         if (_maxBytesToRead != null && resp.Content?.Headers.ContentLength != null)

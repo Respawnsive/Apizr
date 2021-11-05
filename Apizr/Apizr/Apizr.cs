@@ -253,7 +253,7 @@ namespace Apizr
                 foreach (var delegatingHandlersFactory in apizrOptions.DelegatingHandlersFactories)
                     handlerBuilder.AddHandler(delegatingHandlersFactory.Invoke(logger, apizrOptions));
 
-                var primaryMessageHandler = handlerBuilder.GetPrimaryHttpMessageHandler(logger);
+                var primaryMessageHandler = handlerBuilder.GetPrimaryHttpMessageHandler(logger, apizrOptions);
 
                 return primaryMessageHandler;
             });

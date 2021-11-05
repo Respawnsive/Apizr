@@ -7,7 +7,7 @@ using Refit;
 
 namespace Apizr.Configuring.Common
 {
-    public interface IApizrCommonOptionsBuilderBase
+    public interface IApizrCommonOptionsBuilderBase : IApizrSharedOptionsBuilderBase
     {
     }
 

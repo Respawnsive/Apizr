@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Apizr
+﻿namespace Apizr
 {
     public class Constants
     {
+        public const string InterfaceTypeKey = "Refit.InterfaceType";
         public const string PollyExecutionContextKey = "PollyExecutionContext";
         public const string PriorityKey = "Priority";
     }

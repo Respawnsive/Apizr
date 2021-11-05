@@ -229,7 +229,7 @@ namespace Apizr
                             var policySelector = new Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>>(
                                     request =>
                                     {
-                                        var context = request.GetPolicyExecutionContext();
+                                        var context = request.GetOrBuildPolicyExecutionContext();
                                         if (!context.TryGetLogger(out var contextLogger, out var logLevel, out var verbosity, out var tracerMode))
                                         {
                                             contextLogger = logger;

@@ -55,11 +55,16 @@ namespace Apizr
                 return tcs.Task;
             }
 
-            var context = request.GetPolicyExecutionContext();
-            if (!context.TryGetLogger(out var logger, out var logLevel, out _, out _))
+            var context = request.GetOrBuildPolicyExecutionContext();
+            if (!context.TryGetLogger(out var logger, out var logLevel, out var verbosity, out var tracerMode))
             {
                 logger = _logger;
                 logLevel = _apizrOptions.LogLevel;
+                verbosity = _apizrOptions.TrafficVerbosity;
+                tracerMode = _apizrOptions.HttpTracerMode;
+
+                context.WithLogger(logger, logLevel, verbosity, tracerMode);
+                request.SetPolicyExecutionContext(context);
             }
 
             var priority = (int) Priority.UserInitiated;

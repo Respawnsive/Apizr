@@ -22,6 +22,9 @@ namespace Apizr.Sample.Api
         [Get("/users")]
         Task<UserList> GetUsersAsync();
 
+        [Get("/users")]
+        Task<UserList> GetUsersAsync([Priority] int priority);
+
         [Get("/users"), Log(HttpMessageParts.RequestBody, HttpTracerMode.ErrorsAndExceptionsOnly, LogLevel.Critical)]
         Task<UserList> GetUsersAsync([Priority] int priority, [Context] Context context);
 

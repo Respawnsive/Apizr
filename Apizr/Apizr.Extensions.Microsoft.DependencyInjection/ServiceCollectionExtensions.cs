@@ -568,7 +568,7 @@ namespace Apizr
                                             new Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>>(
                                                 request =>
                                                 {
-                                                    var context = HttpRequestMessageExtensions.GetPolicyExecutionContext(request);
+                                                    var context = request.GetOrBuildPolicyExecutionContext();
                                                     if (!context.TryGetLogger(out var contextLogger, out var logLevel, out var verbosity, out var tracerMode))
                                                     {
                                                         contextLogger = logger;
@@ -635,16 +635,15 @@ namespace Apizr
             services.TryAddSingleton(typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), serviceProvider => Activator.CreateInstance(typeof(ApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions, serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName)));
 
             services.TryAddSingleton(serviceProvider => ((IApizrOptionsBase)serviceProvider.GetRequiredService(typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType))).ContentSerializer);
-
-            var managerForApiType = apizrOptions.ApizrManagerType.MakeGenericType(apizrOptions.WebApiType);
-            services.TryAddSingleton(typeof(IApizrManager<>).MakeGenericType(apizrOptions.WebApiType), managerForApiType);
+            
+            services.TryAddSingleton(typeof(IApizrManager<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions.ApizrManagerType);
 
             foreach (var postRegistrationAction in apizrOptions.PostRegistrationActions)
             {
                 postRegistrationAction.Invoke(properOptions.WebApiType, services);
             }
 
-            return managerForApiType;
+            return apizrOptions.ApizrManagerType;
         }
 
         #endregion

@@ -59,7 +59,7 @@ namespace Apizr.Logging
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            var context = request.GetPolicyExecutionContext();
+            var context = request.GetOrBuildPolicyExecutionContext();
             if (!context.TryGetLogger(out var logger, out var logLevel, out var verbosity, out var tracerMode))
             {
                 logger = _logger;

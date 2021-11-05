@@ -180,7 +180,7 @@ namespace Apizr.Sample.Console
                                         .WithLogging(), typeof(User)),
 
                                 config => config
-                                    //.WithPriorityManagement()
+                                    .WithPriorityManagement()
                                     //.WithInMemoryCacheHandler()
                                     //.WithCacheHandler<AkavacheCacheHandler>()
                                     .WithAkavacheCacheHandler()
@@ -339,8 +339,8 @@ namespace Apizr.Sample.Console
                 {
                     //var test = new ReadAllUsersParams("value1", 2);
 
-                    var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
-                    //var userList = await _reqResManager.ExecuteAsync((ctx, api) => api.GetUsersAsync((int)Priority.UserInitiated, ctx), new Context{{"key1", "value1"}});
+                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
+                    var userList = await _reqResManager.ExecuteAsync((ctx, api) => api.GetUsersAsync((int)Priority.UserInitiated, ctx), new Context{{"key1", "value1"}});
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(true));
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(parameters1));

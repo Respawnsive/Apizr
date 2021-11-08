@@ -8,11 +8,11 @@ using Polly;
 
 namespace Apizr.Mediation.Requesting.Sending
 {
-    public class Mediator<TWebApi> : IMediator<TWebApi>
+    public class ApizrMediator<TWebApi> : IApizrMediator<TWebApi>
     {
-        private readonly IMediator _mediator;
+        private readonly IApizrMediator _mediator;
 
-        public Mediator(IMediator mediator)
+        public ApizrMediator(IApizrMediator mediator)
         {
             _mediator = mediator;
         }

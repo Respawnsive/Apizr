@@ -5,11 +5,11 @@ using Polly;
 
 namespace Apizr.Mediation.Cruding.Sending
 {
-    public class CrudMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> : ICrudMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> where TApiEntity : class
+    public class ApizrCrudMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> : IApizrCrudMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> where TApiEntity : class
     {
         private readonly IMediator _mediator;
 
-        public CrudMediator(IMediator mediator)
+        public ApizrCrudMediator(IMediator mediator)
         {
             _mediator = mediator;
         }

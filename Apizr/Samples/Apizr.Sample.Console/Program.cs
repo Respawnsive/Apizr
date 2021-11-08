@@ -59,16 +59,16 @@ namespace Apizr.Sample.Console
         private static IMediator _mediator;
 
         // With a mediator dedicated to an api interface (getting things shorter)
-        private static IMediator<IReqResService> _reqResMediator;
+        private static IApizrMediator<IReqResService> _reqResMediator;
 
         // With an optional mediator dedicated to an api interface (getting things shorter)
-        private static IOptionalMediator<IReqResService> _reqResOptionalMediator;
+        private static IApizrOptionalMediator<IReqResService> _reqResOptionalMediator;
 
         // With a crud mediator dedicated to an entity (getting things shorter)
-        private static ICrudMediator<User, int, PagedResult<User>, IDictionary<string, object>> _userMediator;
+        private static IApizrCrudMediator<User, int, PagedResult<User>, IDictionary<string, object>> _userMediator;
 
         // With a crud optional mediator dedicated to an entity (getting things shorter)
-        private static ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> _userOptionalMediator;
+        private static IApizrCrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> _userOptionalMediator;
 
         // Playing with cookies
         public static CookieContainer CookieContainer = new CookieContainer();
@@ -312,13 +312,13 @@ namespace Apizr.Sample.Console
                 else
                 {
                     _mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
-                    _reqResMediator = scope.ServiceProvider.GetRequiredService<IMediator<IReqResService>>();
-                    _userMediator = scope.ServiceProvider.GetRequiredService<ICrudMediator<User, int, PagedResult<User>, IDictionary<string, object>>>();
+                    _reqResMediator = scope.ServiceProvider.GetRequiredService<IApizrMediator<IReqResService>>();
+                    _userMediator = scope.ServiceProvider.GetRequiredService<IApizrCrudMediator<User, int, PagedResult<User>, IDictionary<string, object>>>();
 
                     if (configChoice >= 4)
                     {
-                        _reqResOptionalMediator = scope.ServiceProvider.GetRequiredService<IOptionalMediator<IReqResService>>();
-                        _userOptionalMediator = scope.ServiceProvider.GetRequiredService<ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>>>();
+                        _reqResOptionalMediator = scope.ServiceProvider.GetRequiredService<IApizrOptionalMediator<IReqResService>>();
+                        _userOptionalMediator = scope.ServiceProvider.GetRequiredService<IApizrCrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>>>();
                     }
                 }
 

@@ -269,11 +269,11 @@ namespace Apizr
                     #region Typed
 
                     // Typed crud optional mediator
-                    var typedCrudOptionalMediatorServiceType = typeof(ICrudOptionalMediator<,,,>).MakeGenericType(apiEntityType,
+                    var typedCrudOptionalMediatorServiceType = typeof(IApizrCrudOptionalMediator<,,,>).MakeGenericType(apiEntityType,
                         apiEntityKeyType,
                         apiEntityReadAllResultType,
                         apiEntityReadAllParamsType);
-                    var typedCrudOptionalMediatorImplementationType = typeof(CrudOptionalMediator<,,,>).MakeGenericType(apiEntityType,
+                    var typedCrudOptionalMediatorImplementationType = typeof(ApizrCrudOptionalMediator<,,,>).MakeGenericType(apiEntityType,
                         apiEntityKeyType,
                         apiEntityReadAllResultType,
                         apiEntityReadAllParamsType);
@@ -361,8 +361,8 @@ namespace Apizr
                     #region Typed
 
                     // Typed optional mediator
-                    var typedOptionalMediatorServiceType = typeof(IOptionalMediator<>).MakeGenericType(webApi.Key);
-                    var typedOptionalMediatorImplementationType = typeof(OptionalMediator<>).MakeGenericType(webApi.Key);
+                    var typedOptionalMediatorServiceType = typeof(IApizrOptionalMediator<>).MakeGenericType(webApi.Key);
+                    var typedOptionalMediatorImplementationType = typeof(ApizrOptionalMediator<>).MakeGenericType(webApi.Key);
 
                     services.TryAddTransient(typedOptionalMediatorServiceType, typedOptionalMediatorImplementationType);
 

@@ -9,9 +9,9 @@ namespace Apizr.Mediation.Configuring.Registry
     {
         private IServiceProvider _serviceProvider;
 
-        private ConcurrentDictionary<Type, Func<IMediator>> ThrowIfNotConcurrentImplementation()
+        private ConcurrentDictionary<Type, Func<IApizrMediator>> ThrowIfNotConcurrentImplementation()
         {
-            if (ConcurrentRegistry is ConcurrentDictionary<Type, Func<IMediator>> concurrentRegistry)
+            if (ConcurrentRegistry is ConcurrentDictionary<Type, Func<IApizrMediator>> concurrentRegistry)
             {
                 return concurrentRegistry;
             }
@@ -29,7 +29,7 @@ namespace Apizr.Mediation.Configuring.Registry
         public void AddOrUpdateFor(Type webApiType, Type mediatorType)
         {
             var registry = ThrowIfNotConcurrentImplementation();
-            Func<IMediator> mediatorFactory = () => _serviceProvider.GetRequiredService(mediatorType) as IMediator;
+            Func<IApizrMediator> mediatorFactory = () => _serviceProvider.GetRequiredService(mediatorType) as IApizrMediator;
             registry.AddOrUpdate(webApiType, k => mediatorFactory, (k, e) => mediatorFactory);
         }
     }

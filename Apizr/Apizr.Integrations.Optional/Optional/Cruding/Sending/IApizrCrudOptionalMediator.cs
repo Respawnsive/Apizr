@@ -1,16 +1,22 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Mediation.Cruding;
+using Apizr.Mediation.Cruding.Sending;
 using MediatR;
 using Optional;
 using Polly;
 
 namespace Apizr.Optional.Cruding.Sending
 {
+    public interface IApizrCrudOptionalMediator : IApizrCrudMediator
+    {
+
+    }
+
     /// <summary>
     /// <see cref="IMediator"/> but dedicated to <see cref="TApiEntity"/> cruding with optional result, getting all shorter
     /// </summary>
-    public interface ICrudOptionalMediator<TApiEntity, in TApiEntityKey, TReadAllResult, in TReadAllParams>
+    public interface IApizrCrudOptionalMediator<TApiEntity, in TApiEntityKey, TReadAllResult, in TReadAllParams> : IApizrCrudOptionalMediator
         where TApiEntity : class
     {
         #region Create

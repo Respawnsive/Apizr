@@ -10,52 +10,52 @@ namespace Apizr.Mediation.Configuring.Registry
 {
     public abstract class ApizrMediationRegistryBase : IApizrMediationRegistryBase
     {
-        protected readonly IDictionary<Type, Func<IMediator>> ConcurrentRegistry = new ConcurrentDictionary<Type, Func<IMediator>>();
+        protected readonly IDictionary<Type, Func<IApizrMediator>> ConcurrentRegistry = new ConcurrentDictionary<Type, Func<IApizrMediator>>();
 
         protected ApizrMediationRegistryBase()
         {
 
         }
 
-        public IEnumerator<KeyValuePair<Type, Func<IMediator>>> GetEnumerator() => ConcurrentRegistry.GetEnumerator();
+        public IEnumerator<KeyValuePair<Type, Func<IApizrMediator>>> GetEnumerator() => ConcurrentRegistry.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public ICrudMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> GetFor<T, TKey>() where T : class
+        public IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> GetFor<T, TKey>() where T : class
             => GetFor<T, TKey, IEnumerable<T>, IDictionary<string, object>>();
 
-        public ICrudMediator<T, TKey, TReadAllResult, IDictionary<string, object>> GetFor<T, TKey, TReadAllResult>() where T : class
+        public IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<string, object>> GetFor<T, TKey, TReadAllResult>() where T : class
             => GetFor<T, TKey, TReadAllResult, IDictionary<string, object>>();
 
-        public ICrudMediator<T, TKey, TReadAllResult, TReadAllParams> GetFor<T, TKey, TReadAllResult, TReadAllParams>()
+        public IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams> GetFor<T, TKey, TReadAllResult, TReadAllParams>()
             where T : class =>
-            (ICrudMediator<T, TKey, TReadAllResult, TReadAllParams>)ConcurrentRegistry[
-                typeof(ICrudMediator<T, TKey, TReadAllResult, TReadAllParams>)].Invoke();
+            (IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)ConcurrentRegistry[
+                typeof(IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)].Invoke();
 
-        public IMediator<TWebApi> GetFor<TWebApi>()
-            => (IMediator<TWebApi>)ConcurrentRegistry[typeof(TWebApi)].Invoke();
+        public IApizrMediator<TWebApi> GetFor<TWebApi>()
+            => (IApizrMediator<TWebApi>)ConcurrentRegistry[typeof(TWebApi)].Invoke();
 
-        public bool TryGetFor<T, TKey>(out ICrudMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> mediator) where T : class
+        public bool TryGetFor<T, TKey>(out IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> mediator) where T : class
             => TryGetFor<T, TKey, IEnumerable<T>, IDictionary<string, object>>(out mediator);
 
         public bool TryGetFor<T, TKey, TReadAllResult>(
-            out ICrudMediator<T, TKey, TReadAllResult, IDictionary<string, object>> mediator) where T : class
+            out IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<string, object>> mediator) where T : class
             => TryGetFor<T, TKey, TReadAllResult, IDictionary<string, object>>(out mediator);
 
         public bool TryGetFor<T, TKey, TReadAllResult, TReadAllParams>(
-            out ICrudMediator<T, TKey, TReadAllResult, TReadAllParams> mediator) where T : class
+            out IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams> mediator) where T : class
         {
-            if (!ConcurrentRegistry.TryGetValue(typeof(ICrudMediator<T, TKey, TReadAllResult, TReadAllParams>), out var mediatorFactory))
+            if (!ConcurrentRegistry.TryGetValue(typeof(IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>), out var mediatorFactory))
             {
                 mediator = default;
                 return false;
             }
 
-            mediator = (ICrudMediator<T, TKey, TReadAllResult, TReadAllParams>)mediatorFactory.Invoke();
+            mediator = (IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)mediatorFactory.Invoke();
             return true;
         }
 
-        public bool TryGetFor<TWebApi>(out IMediator<TWebApi> mediator)
+        public bool TryGetFor<TWebApi>(out IApizrMediator<TWebApi> mediator)
         {
             if (!ConcurrentRegistry.TryGetValue(typeof(TWebApi), out var mediatorFactory))
             {
@@ -63,7 +63,7 @@ namespace Apizr.Mediation.Configuring.Registry
                 return false;
             }
 
-            mediator = (IMediator<TWebApi>)mediatorFactory.Invoke();
+            mediator = (IApizrMediator<TWebApi>)mediatorFactory.Invoke();
             return true;
         }
 
@@ -76,7 +76,7 @@ namespace Apizr.Mediation.Configuring.Registry
             => ContainsFor<T, TKey, TReadAllResult, IDictionary<string, object>>();
 
         public bool ContainsFor<T, TKey, TReadAllResult, TReadAllParams>() where T : class
-            => ConcurrentRegistry.ContainsKey(typeof(ICrudMediator<T, TKey, TReadAllResult, TReadAllParams>));
+            => ConcurrentRegistry.ContainsKey(typeof(IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>));
 
         public bool ContainsFor<TWebApi>()
             => ConcurrentRegistry.ContainsKey(typeof(TWebApi));

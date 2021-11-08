@@ -9,11 +9,11 @@ using Polly;
 
 namespace Apizr.Optional.Requesting.Sending
 {
-    public class OptionalMediator<TWebApi> : IOptionalMediator<TWebApi>
+    public class ApizrOptionalMediator<TWebApi> : IApizrOptionalMediator<TWebApi>
     {
         private readonly IMediator _mediator;
 
-        public OptionalMediator(IMediator mediator)
+        public ApizrOptionalMediator(IMediator mediator)
         {
             _mediator = mediator;
         }

@@ -18,7 +18,6 @@ using Apizr.Mediation.Requesting.Sending;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Refit;
-using IMediator = Apizr.Mediation.Requesting.Sending.IMediator;
 
 [assembly: Apizr.Preserve]
 namespace Apizr
@@ -259,11 +258,11 @@ namespace Apizr
                     #region Typed
 
                     // Typed crud mediator
-                    var typedCrudMediatorServiceType = typeof(ICrudMediator<,,,>).MakeGenericType(apiEntityType,
+                    var typedCrudMediatorServiceType = typeof(IApizrCrudMediator<,,,>).MakeGenericType(apiEntityType,
                         apiEntityKeyType,
                         apiEntityReadAllResultType,
                         apiEntityReadAllParamsType);
-                    var typedCrudMediatorImplementationType = typeof(CrudMediator<,,,>).MakeGenericType(apiEntityType,
+                    var typedCrudMediatorImplementationType = typeof(ApizrCrudMediator<,,,>).MakeGenericType(apiEntityType,
                         apiEntityKeyType,
                         apiEntityReadAllResultType,
                         apiEntityReadAllParamsType);
@@ -271,12 +270,12 @@ namespace Apizr
                     services.TryAddTransient(typedCrudMediatorServiceType, typedCrudMediatorImplementationType);
 
                     // Get or create and register a mediation registry
-                    if (!apizrOptions.PostRegistries.TryGetValue(typeof(IMediator), out var mediationRegistryObject) ||
+                    if (!apizrOptions.PostRegistries.TryGetValue(typeof(IApizrMediator), out var mediationRegistryObject) ||
                         !(mediationRegistryObject is IApizrMediationConcurrentRegistry mediationRegistry))
                     {
                         var apizrMediationRegistry = new ApizrMediationRegistry();
                         mediationRegistry = apizrMediationRegistry;
-                        apizrOptions.PostRegistries.Add(typeof(IMediator), mediationRegistry);
+                        apizrOptions.PostRegistries.Add(typeof(IApizrMediator), mediationRegistry);
                         services.TryAddSingleton(serviceProvider => apizrMediationRegistry.GetInstance(serviceProvider));
                     }
 
@@ -360,18 +359,18 @@ namespace Apizr
                     #region Typed
 
                     // Typed mediator
-                    var typedMediatorServiceType = typeof(IMediator<>).MakeGenericType(webApi.Key);
-                    var typedMediatorImplementationType = typeof(Mediator<>).MakeGenericType(webApi.Key);
+                    var typedMediatorServiceType = typeof(IApizrMediator<>).MakeGenericType(webApi.Key);
+                    var typedMediatorImplementationType = typeof(ApizrMediator<>).MakeGenericType(webApi.Key);
 
                     services.TryAddTransient(typedMediatorServiceType, typedMediatorImplementationType);
 
                     // Get or create and register a mediation registry
-                    if (!apizrOptions.PostRegistries.TryGetValue(typeof(IMediator), out var mediationRegistryObject) ||
+                    if (!apizrOptions.PostRegistries.TryGetValue(typeof(IApizrMediator), out var mediationRegistryObject) ||
                         !(mediationRegistryObject is IApizrMediationConcurrentRegistry mediationRegistry))
                     {
                         var apizrMediationRegistry = new ApizrMediationRegistry();
                         mediationRegistry = apizrMediationRegistry;
-                        apizrOptions.PostRegistries.Add(typeof(IMediator), mediationRegistry);
+                        apizrOptions.PostRegistries.Add(typeof(IApizrMediator), mediationRegistry);
                         services.TryAddSingleton(serviceProvider => apizrMediationRegistry.GetInstance(serviceProvider));
                     }
 

@@ -6,12 +6,12 @@ using Polly;
 
 namespace Apizr.Optional.Cruding.Sending
 {
-    public class CrudOptionalMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> : ICrudOptionalMediator<
+    public class ApizrCrudOptionalMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> : IApizrCrudOptionalMediator<
             TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> where TApiEntity : class
     {
         private readonly IMediator _mediator;
 
-        public CrudOptionalMediator(IMediator mediator)
+        public ApizrCrudOptionalMediator(IMediator mediator)
         {
             _mediator = mediator;
         }

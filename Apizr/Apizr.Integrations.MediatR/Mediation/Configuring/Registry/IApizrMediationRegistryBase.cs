@@ -6,25 +6,25 @@ using Apizr.Requesting;
 
 namespace Apizr.Mediation.Configuring.Registry
 {
-    public interface IApizrMediationRegistryBase : IEnumerable<KeyValuePair<Type, Func<IMediator>>>
+    public interface IApizrMediationRegistryBase : IEnumerable<KeyValuePair<Type, Func<IApizrMediator>>>
     {
-        ICrudMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> GetFor<T, TKey>() where T : class;
+        IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> GetFor<T, TKey>() where T : class;
 
-        ICrudMediator<T, TKey, TReadAllResult, IDictionary<string, object>> GetFor<T, TKey,
+        IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<string, object>> GetFor<T, TKey,
             TReadAllResult>() where T : class;
 
-        ICrudMediator<T, TKey, TReadAllResult, TReadAllParams> GetFor<T, TKey, TReadAllResult,
+        IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams> GetFor<T, TKey, TReadAllResult,
             TReadAllParams>() where T : class;
 
-        IMediator<TWebApi> GetFor<TWebApi>();
+        IApizrMediator<TWebApi> GetFor<TWebApi>();
 
-        bool TryGetFor<T, TKey>(out ICrudMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> mediator) where T : class;
+        bool TryGetFor<T, TKey>(out IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> mediator) where T : class;
 
-        bool TryGetFor<T, TKey, TReadAllResult>(out ICrudMediator<T, TKey, TReadAllResult, IDictionary<string, object>> mediator) where T : class;
+        bool TryGetFor<T, TKey, TReadAllResult>(out IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<string, object>> mediator) where T : class;
 
-        bool TryGetFor<T, TKey, TReadAllResult, TReadAllParams>(out ICrudMediator<T, TKey, TReadAllResult, TReadAllParams> mediator) where T : class;
+        bool TryGetFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams> mediator) where T : class;
 
-        bool TryGetFor<TWebApi>(out IMediator<TWebApi> mediator);
+        bool TryGetFor<TWebApi>(out IApizrMediator<TWebApi> mediator);
 
         int Count { get; }
 

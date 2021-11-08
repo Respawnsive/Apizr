@@ -8,11 +8,16 @@ using Polly;
 
 namespace Apizr.Mediation.Requesting.Sending
 {
+    public interface IMediator
+    {
+
+    }
+
     /// <summary>
     /// <see cref="IMediator"/> but dedicated to <see cref="TWebApi"/>, getting all shorter
     /// </summary>
     /// <typeparam name="TWebApi">The api interface to play with mediation</typeparam>
-    public interface IMediator<TWebApi>
+    public interface IMediator<TWebApi> : IMediator
     {
         #region SendFor
 

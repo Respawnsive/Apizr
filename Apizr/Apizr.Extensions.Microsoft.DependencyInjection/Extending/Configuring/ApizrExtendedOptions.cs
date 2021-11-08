@@ -36,6 +36,7 @@ namespace Apizr.Extending.Configuring
             CrudEntities = commonOptions.CrudEntities;
             WebApis = commonOptions.WebApis;
             ObjectMappings = commonOptions.ObjectMappings;
+            PostRegistries = commonOptions.PostRegistries;
             PostRegistrationActions = commonOptions.PostRegistrationActions;
         }
 
@@ -94,6 +95,7 @@ namespace Apizr.Extending.Configuring
         public IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }
         public IDictionary<Type, WebApiAttribute> WebApis { get; }
         public IDictionary<Type, MappedWithAttribute> ObjectMappings { get; }
+        public IDictionary<Type, object> PostRegistries { get; }
         public IList<Action<Type, IServiceCollection>> PostRegistrationActions { get; }
     }
 }

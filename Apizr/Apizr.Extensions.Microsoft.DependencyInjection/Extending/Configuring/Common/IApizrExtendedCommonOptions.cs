@@ -64,6 +64,11 @@ namespace Apizr.Extending.Configuring.Common
         IDictionary<Type, MappedWithAttribute> ObjectMappings { get; }
 
         /// <summary>
+        /// Other registries plugged during post registration actions
+        /// </summary>
+        IDictionary<Type, object> PostRegistries { get; }
+
+        /// <summary>
         /// Post registration actions
         /// </summary>
         IList<Action<Type, IServiceCollection>> PostRegistrationActions { get; }

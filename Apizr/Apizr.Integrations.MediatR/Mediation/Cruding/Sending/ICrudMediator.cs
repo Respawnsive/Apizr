@@ -1,14 +1,19 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using MediatR;
+using Apizr.Mediation.Requesting.Sending;
 using Polly;
 
 namespace Apizr.Mediation.Cruding.Sending
 {
+    public interface ICrudMediator : IMediator
+    {
+
+    }
+
     /// <summary>
     /// <see cref="IMediator"/> but dedicated to <see cref="TApiEntity"/> cruding, getting all shorter
     /// </summary>
-    public interface ICrudMediator<TApiEntity, in TApiEntityKey, TReadAllResult, in TReadAllParams>
+    public interface ICrudMediator<TApiEntity, in TApiEntityKey, TReadAllResult, in TReadAllParams> : ICrudMediator
         where TApiEntity : class
     {
         #region Create

@@ -16,7 +16,7 @@ namespace Apizr.Extending.Configuring.Registry
                 return concurrentRegistry;
             }
 
-            throw new InvalidOperationException($"This {nameof(ApizrRegistryBase)} is not configured for concurrent operations.");
+            throw new InvalidOperationException($"This {nameof(ApizrExtendedRegistry)} is not configured for concurrent operations.");
         }
 
         internal IApizrExtendedRegistry GetInstance(IServiceProvider serviceProvider)

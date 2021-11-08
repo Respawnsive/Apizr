@@ -6,7 +6,7 @@ using Apizr.Requesting;
 
 namespace Apizr.Configuring.Registry
 {
-    public abstract class ApizrRegistryBase : IApizrRegistryBase
+    public abstract class ApizrRegistryBase : IApizrEnumerableRegistry
     {
         protected readonly IDictionary<Type, Func<IApizrManager>> ConcurrentRegistry = new ConcurrentDictionary<Type, Func<IApizrManager>>();
 

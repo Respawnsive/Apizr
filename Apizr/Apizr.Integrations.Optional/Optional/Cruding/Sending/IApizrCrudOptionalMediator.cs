@@ -2,13 +2,14 @@
 using System.Threading.Tasks;
 using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Cruding.Sending;
+using Apizr.Optional.Requesting.Sending;
 using MediatR;
 using Optional;
 using Polly;
 
 namespace Apizr.Optional.Cruding.Sending
 {
-    public interface IApizrCrudOptionalMediator : IApizrCrudMediator
+    public interface IApizrCrudOptionalMediator : IApizrCrudMediator, IApizrOptionalMediator
     {
 
     }

@@ -9,7 +9,7 @@ using Apizr.Requesting;
 namespace Apizr.Configuring.Registry
 {
     public interface IApizrRegistryBuilder<out TApizrRegistry, out TApizrRegistryBuilder, out TApizrProperOptionsBuilder> : IApizrRegistryBuilderBase<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder>
-        where TApizrRegistry : IApizrRegistryBase
+        where TApizrRegistry : IApizrEnumerableRegistry
         where TApizrRegistryBuilder : IApizrRegistryBuilderBase<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder>
         where TApizrProperOptionsBuilder : IApizrProperOptionsBuilderBase
     {

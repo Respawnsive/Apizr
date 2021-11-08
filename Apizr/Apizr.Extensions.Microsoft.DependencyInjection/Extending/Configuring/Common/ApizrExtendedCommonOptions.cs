@@ -5,6 +5,7 @@ using Apizr.Caching;
 using Apizr.Configuring;
 using Apizr.Configuring.Common;
 using Apizr.Connecting;
+using Apizr.Extending.Configuring.Registry;
 using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Requesting;
@@ -30,7 +31,7 @@ namespace Apizr.Extending.Configuring.Common
             CrudEntities = new Dictionary<Type, CrudEntityAttribute>();
             WebApis = new Dictionary<Type, WebApiAttribute>();
             ObjectMappings = new Dictionary<Type, MappedWithAttribute>();
-            PostRegistries = new Dictionary<Type, object>();
+            PostRegistries = new Dictionary<Type, IApizrExtendedConcurrentRegistryBase>();
             PostRegistrationActions = new List<Action<Type, IServiceCollection>>();
         }
         public Type ConnectivityHandlerType { get; set; }
@@ -80,7 +81,7 @@ namespace Apizr.Extending.Configuring.Common
         public IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }
         public IDictionary<Type, WebApiAttribute> WebApis { get; }
         public IDictionary<Type, MappedWithAttribute> ObjectMappings { get; }
-        public IDictionary<Type, object> PostRegistries { get; }
+        public IDictionary<Type, IApizrExtendedConcurrentRegistryBase> PostRegistries { get; }
         public IList<Action<Type, IServiceCollection>> PostRegistrationActions { get; }
     }
 }

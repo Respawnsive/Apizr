@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using Apizr.Caching;
 using Apizr.Configuring.Common;
+using Apizr.Configuring.Registry;
 using Apizr.Connecting;
+using Apizr.Extending.Configuring.Registry;
 using Apizr.Extending.Configuring.Shared;
 using Apizr.Mapping;
 using Apizr.Requesting;
@@ -66,7 +68,7 @@ namespace Apizr.Extending.Configuring.Common
         /// <summary>
         /// Other registries plugged during post registration actions
         /// </summary>
-        IDictionary<Type, object> PostRegistries { get; }
+        IDictionary<Type, IApizrExtendedConcurrentRegistryBase> PostRegistries { get; }
 
         /// <summary>
         /// Post registration actions

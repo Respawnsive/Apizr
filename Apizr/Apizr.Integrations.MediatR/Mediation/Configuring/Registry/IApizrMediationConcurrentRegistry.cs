@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Apizr.Extending.Configuring.Registry;
 
 namespace Apizr.Mediation.Configuring.Registry
 {
-    public interface IApizrMediationConcurrentRegistry : IApizrMediationRegistry
+    public interface IApizrMediationConcurrentRegistry : IApizrMediationRegistry, IApizrExtendedConcurrentRegistryBase
     {
-        void AddOrUpdateFor(Type webApiType, Type mediatorType);
     }
 }

@@ -8,6 +8,9 @@ using Apizr.Extending;
 using Apizr.Extending.Configuring;
 using Apizr.Extending.Configuring.Common;
 using Apizr.Mapping;
+using Apizr.Mediation.Configuring.Registry;
+using Apizr.Mediation.Requesting.Sending;
+using Apizr.Optional.Configuring.Registry;
 using Apizr.Optional.Cruding;
 using Apizr.Optional.Cruding.Handling;
 using Apizr.Optional.Cruding.Sending;
@@ -280,6 +283,18 @@ namespace Apizr
 
                     services.TryAddTransient(typedCrudOptionalMediatorServiceType, typedCrudOptionalMediatorImplementationType);
 
+                    // Get or create and register an optional mediation registry
+                    if (!apizrOptions.PostRegistries.TryGetValue(typeof(IApizrOptionalMediationConcurrentRegistry), out var registry))
+                    {
+                        var optionalMediationRegistry = new ApizrOptionalMediationRegistry();
+                        registry = optionalMediationRegistry;
+                        apizrOptions.PostRegistries.Add(typeof(IApizrOptionalMediationConcurrentRegistry), registry);
+                        services.TryAddSingleton(serviceProvider => optionalMediationRegistry.GetInstance(serviceProvider));
+                    }
+
+                    // Add or update the optional mediator service into the registry
+                    registry.AddOrUpdateFor(typedCrudOptionalMediatorServiceType, typedCrudOptionalMediatorImplementationType);
+
                     #endregion
                 }
 
@@ -365,6 +380,18 @@ namespace Apizr
                     var typedOptionalMediatorImplementationType = typeof(ApizrOptionalMediator<>).MakeGenericType(webApi.Key);
 
                     services.TryAddTransient(typedOptionalMediatorServiceType, typedOptionalMediatorImplementationType);
+
+                    // Get or create and register an optional mediation registry
+                    if (!apizrOptions.PostRegistries.TryGetValue(typeof(IApizrOptionalMediationConcurrentRegistry), out var registry))
+                    {
+                        var optionalMediationRegistry = new ApizrOptionalMediationRegistry();
+                        registry = optionalMediationRegistry;
+                        apizrOptions.PostRegistries.Add(typeof(IApizrOptionalMediationConcurrentRegistry), registry);
+                        services.TryAddSingleton(serviceProvider => optionalMediationRegistry.GetInstance(serviceProvider));
+                    }
+
+                    // Add or update the optional mediator service into the registry
+                    registry.AddOrUpdateFor(typedOptionalMediatorServiceType, typedOptionalMediatorImplementationType);
 
                     #endregion
                 }

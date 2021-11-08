@@ -2,7 +2,7 @@
 
 namespace Apizr.Extending.Configuring.Registry
 {
-    public interface IApizrExtendedRegistry : IApizrRegistryBase
+    public interface IApizrExtendedRegistry : IApizrEnumerableRegistry
     {
     }
 }

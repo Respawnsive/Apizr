@@ -8,7 +8,7 @@ using Apizr.Requesting;
 
 namespace Apizr.Mediation.Configuring.Registry
 {
-    public abstract class ApizrMediationRegistryBase : IApizrMediationRegistryBase
+    public abstract class ApizrMediationRegistryBase : IApizrMediationEnumerableRegistry
     {
         protected readonly IDictionary<Type, Func<IApizrMediator>> ConcurrentRegistry = new ConcurrentDictionary<Type, Func<IApizrMediator>>();
 

@@ -4,7 +4,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Apizr.Mediation.Cruding.Sending;
 using Apizr.Mediation.Requesting.Sending;
-using Apizr.Requesting;
 
 namespace Apizr.Mediation.Configuring.Registry
 {

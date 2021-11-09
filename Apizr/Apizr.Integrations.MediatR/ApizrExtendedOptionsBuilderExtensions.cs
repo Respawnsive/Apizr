@@ -279,7 +279,7 @@ namespace Apizr
                     }
 
                     // Add or update the mediator service into the registry
-                    registry.AddOrUpdateFor(typedCrudMediatorServiceType, typedCrudMediatorImplementationType);
+                    registry.AddOrUpdateFor(typedCrudMediatorServiceType, typedCrudMediatorServiceType);
 
                     #endregion
                 }
@@ -373,7 +373,7 @@ namespace Apizr
                     }
 
                     // Add or update the mediator service into the registry
-                    registry.AddOrUpdateFor(typedMediatorServiceType, typedMediatorImplementationType);
+                    registry.AddOrUpdateFor(typedMediatorServiceType, typedMediatorServiceType);
 
                     #endregion
                 }

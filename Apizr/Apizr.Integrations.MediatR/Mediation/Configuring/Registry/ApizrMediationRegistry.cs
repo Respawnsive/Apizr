@@ -26,10 +26,10 @@ namespace Apizr.Mediation.Configuring.Registry
             return this;
         }
 
-        public void AddOrUpdateFor(Type webApiType, Type mediatorType)
+        public void AddOrUpdateFor(Type webApiType, Type serviceType)
         {
             var registry = ThrowIfNotConcurrentImplementation();
-            Func<IApizrMediator> mediatorFactory = () => _serviceProvider.GetRequiredService(mediatorType) as IApizrMediator;
+            Func<IApizrMediator> mediatorFactory = () => _serviceProvider.GetRequiredService(serviceType) as IApizrMediator;
             registry.AddOrUpdate(webApiType, k => mediatorFactory, (k, e) => mediatorFactory);
         }
     }

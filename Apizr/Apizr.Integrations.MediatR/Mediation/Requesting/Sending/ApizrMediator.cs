@@ -10,9 +10,9 @@ namespace Apizr.Mediation.Requesting.Sending
 {
     public class ApizrMediator<TWebApi> : IApizrMediator<TWebApi>
     {
-        private readonly IApizrMediator _mediator;
+        private readonly IMediator _mediator;
 
-        public ApizrMediator(IApizrMediator mediator)
+        public ApizrMediator(IMediator mediator)
         {
             _mediator = mediator;
         }

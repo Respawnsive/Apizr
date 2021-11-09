@@ -26,10 +26,10 @@ namespace Apizr.Extending.Configuring.Registry
             return this;
         }
 
-        public void AddOrUpdateFor(Type webApiType, Type managerType)
+        public void AddOrUpdateFor(Type webApiType, Type serviceType)
         {
             var registry = ThrowIfNotConcurrentImplementation();
-            Func<IApizrManager> managerFactory = () => _serviceProvider.GetRequiredService(managerType) as IApizrManager;
+            Func<IApizrManager> managerFactory = () => _serviceProvider.GetRequiredService(serviceType) as IApizrManager;
             registry.AddOrUpdate(webApiType, k => managerFactory, (k, e) => managerFactory);
         }
     }

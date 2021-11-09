@@ -8,8 +8,6 @@ using Apizr.Extending;
 using Apizr.Extending.Configuring;
 using Apizr.Extending.Configuring.Common;
 using Apizr.Mapping;
-using Apizr.Mediation.Configuring.Registry;
-using Apizr.Mediation.Requesting.Sending;
 using Apizr.Optional.Configuring.Registry;
 using Apizr.Optional.Cruding;
 using Apizr.Optional.Cruding.Handling;
@@ -293,7 +291,7 @@ namespace Apizr
                     }
 
                     // Add or update the optional mediator service into the registry
-                    registry.AddOrUpdateFor(typedCrudOptionalMediatorServiceType, typedCrudOptionalMediatorImplementationType);
+                    registry.AddOrUpdateFor(typedCrudOptionalMediatorServiceType, typedCrudOptionalMediatorServiceType);
 
                     #endregion
                 }
@@ -391,7 +389,7 @@ namespace Apizr
                     }
 
                     // Add or update the optional mediator service into the registry
-                    registry.AddOrUpdateFor(typedOptionalMediatorServiceType, typedOptionalMediatorImplementationType);
+                    registry.AddOrUpdateFor(typedOptionalMediatorServiceType, typedOptionalMediatorServiceType);
 
                     #endregion
                 }

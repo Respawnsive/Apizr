@@ -121,6 +121,18 @@ namespace Apizr.Sample.Console
                     //logging.SetMinimumLevel(LogLevel.Trace);
                 }));
 
+                //_reqResManager = Apizr.CreateFor<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(policyRegistry)
+                //    .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
+                //    .WithPriorityManagement()
+                //    .WithLoggerFactory(() => lazyLoggerFactory.Value)
+                //    .WithLogging());
+
+                //_userManager = Apizr.CreateCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder
+                //    .WithBaseAddress("https://reqres.in/api/users")
+                //    .WithPolicyRegistry(policyRegistry)
+                //    .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current)));
+                ////.WithLogging());
+
                 var apizrRegistry = Apizr.Create(
                     registry => registry
                         .AddFor<IReqResService>(options => options.WithLogging())
@@ -135,18 +147,6 @@ namespace Apizr.Sample.Console
                 _reqResManager = apizrRegistry.GetFor<IReqResService>();
 
                 _userManager = apizrRegistry.GetFor<User, int, PagedResult<User>>();
-
-                //_reqResManager = Apizr.CreateFor<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(policyRegistry)
-                //    .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
-                //    .WithPriorityManagement()
-                //    .WithLoggerFactory(() => lazyLoggerFactory.Value)
-                //    .WithLogging());
-
-                //_userManager = Apizr.CreateCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder
-                //    .WithBaseAddress("https://reqres.in/api/users")
-                //    .WithPolicyRegistry(policyRegistry)
-                //    .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current)));
-                ////.WithLogging());
 
 
                 System.Console.WriteLine("");

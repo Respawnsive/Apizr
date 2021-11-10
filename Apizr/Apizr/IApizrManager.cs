@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring;
 using Apizr.Mapping;
 using Polly;
 
@@ -20,6 +21,11 @@ namespace Apizr
         /// Original Refit Api without any Apizr management. You should use ExecuteAsync instead to get all the Apizr goodness :)
         /// </summary>
         TWebApi Api { get; }
+
+        /// <summary>
+        /// Basic Apizr options
+        /// </summary>
+        IApizrOptionsBase Options { get; }
 
         #region ExecuteAsync
 

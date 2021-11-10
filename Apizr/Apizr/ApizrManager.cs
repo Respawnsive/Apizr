@@ -60,6 +60,8 @@ namespace Apizr
 
         public TWebApi Api => _lazyWebApi.Value;
 
+        public IApizrOptionsBase Options => _apizrOptions;
+
         #region ExecuteAsync
 
         public async Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod)

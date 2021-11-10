@@ -1,7 +1,5 @@
 ﻿using System;
 using Apizr.Configuring.Shared;
-using Apizr.Logging;
-using Microsoft.Extensions.Logging;
 
 namespace Apizr.Configuring.Proper
 {

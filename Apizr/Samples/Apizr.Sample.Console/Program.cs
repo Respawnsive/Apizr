@@ -228,7 +228,7 @@ namespace Apizr.Sample.Console
                                 services.AddApizrFor(
                                     optionsBuilder => optionsBuilder
                                         .WithCacheHandler<AkavacheCacheHandler>()
-                                        //.WithMediation()
+                                        .WithMediation()
                                         .WithLogging(),
                                     typeof(User));
 
@@ -286,19 +286,19 @@ namespace Apizr.Sample.Console
                                         typeof(Program));
 
                                     services.AddAutoMapper(typeof(Program));
-
-                                    // This is just to let you know what's registered from/for Apizr and ready to use
-                                    foreach (var service in services.Where(d =>
-                                        (d.ServiceType != null) ||
-                                        (d.ImplementationType != null)))
-                                    {
-                                        System.Console.WriteLine(
-                                            $"Registered {service.Lifetime} service: {service.ServiceType?.GetFriendlyName()} - {service.ImplementationType?.GetFriendlyName()}");
-                                    }
                                 }
                             }
 
                             services.AddMediatR(typeof(Program));
+                        }
+
+                        // This is just to let you know what's registered from/for Apizr and ready to use
+                        foreach (var service in services.Where(d =>
+                            (d.ServiceType != null) ||
+                            (d.ImplementationType != null)))
+                        {
+                            System.Console.WriteLine(
+                                $"Registered {service.Lifetime} service: {service.ServiceType?.GetFriendlyName()} - {service.ImplementationType?.GetFriendlyName()}");
                         }
                     }).Build();
 

@@ -635,15 +635,16 @@ namespace Apizr
             services.TryAddSingleton(typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), serviceProvider => Activator.CreateInstance(typeof(ApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions, serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName)));
 
             services.TryAddSingleton(serviceProvider => ((IApizrOptionsBase)serviceProvider.GetRequiredService(typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType))).ContentSerializer);
-            
-            services.TryAddSingleton(typeof(IApizrManager<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions.ApizrManagerType);
+
+            var serviceType = typeof(IApizrManager<>).MakeGenericType(apizrOptions.WebApiType);
+            services.TryAddSingleton(serviceType, apizrOptions.ApizrManagerType);
 
             foreach (var postRegistrationAction in apizrOptions.PostRegistrationActions)
             {
                 postRegistrationAction.Invoke(properOptions.WebApiType, services);
             }
 
-            return apizrOptions.ApizrManagerType;
+            return serviceType;
         }
 
         #endregion

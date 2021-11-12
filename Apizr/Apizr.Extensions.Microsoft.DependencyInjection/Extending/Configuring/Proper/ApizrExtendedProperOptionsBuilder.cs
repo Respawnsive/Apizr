@@ -73,7 +73,7 @@ namespace Apizr.Extending.Configuring.Proper
         public IApizrExtendedProperOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
         {
             var authenticationHandler = new Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>((serviceProvider, options) =>
-                new AuthenticationHandler(serviceProvider.GetRequiredService<ILogger>(), options, refreshTokenFactory));
+                new AuthenticationHandler(serviceProvider.GetService<ILogger>(), options, refreshTokenFactory));
             Options.DelegatingHandlersExtendedFactories.Add(authenticationHandler);
 
             return this;
@@ -91,7 +91,7 @@ namespace Apizr.Extending.Configuring.Proper
         {
             Options.DelegatingHandlersExtendedFactories.Add((serviceProvider, options) =>
                 new AuthenticationHandler<TSettingsService, TTokenService>(
-                    serviceProvider.GetRequiredService<ILogger>(),
+                    serviceProvider.GetService<ILogger>(),
                     options,
                     serviceProvider.GetRequiredService<TSettingsService>, tokenProperty,
                     serviceProvider.GetRequiredService<TTokenService>, refreshTokenMethod));
@@ -104,7 +104,7 @@ namespace Apizr.Extending.Configuring.Proper
         {
             Options.DelegatingHandlersExtendedFactories.Add((serviceProvider, options) =>
                 new AuthenticationHandler<TSettingsService>(
-                    serviceProvider.GetRequiredService<ILogger>(),
+                    serviceProvider.GetService<ILogger>(),
                     options,
                     serviceProvider.GetRequiredService<TSettingsService>, tokenProperty, refreshTokenFactory));
 

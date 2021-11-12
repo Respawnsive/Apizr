@@ -256,9 +256,9 @@ namespace Apizr.Extending.Configuring.Registry
             Action<IApizrExtendedProperOptionsBuilder> properOptionsBuilder = null)
         {
             var properOptions = ServiceCollectionExtensions.CreateApizrExtendedProperOptions(CommonOptions, webApiType, apizrManagerType, properOptionsBuilder);
-            var managerForApiType = Services.AddApizrFor(CommonOptions, properOptions);
+            var serviceType = Services.AddApizrFor(CommonOptions, properOptions);
 
-            Registry.AddOrUpdateFor(webApiType, managerForApiType);
+            Registry.AddOrUpdateFor(webApiType, serviceType);
 
             return this;
         }

@@ -17,12 +17,12 @@ using Xunit;
 
 namespace Apizr.Tests
 {
-    public class ApizrTests
+    public class ApizrRegistryTests
     {
         private readonly ILoggerFactory _loggerFactory;
         private readonly IReadOnlyPolicyRegistry<string> _policyRegistry;
 
-        public ApizrTests()
+        public ApizrRegistryTests()
         {
             _loggerFactory = new NullLoggerFactory();
             _policyRegistry = new PolicyRegistry
@@ -76,7 +76,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public void Calling_WithBaseAddress_Should_Set_BaseAddress()
+        public void IReqResService_GetUsersAsync_WithBaseAddress_ShouldSucceed()
         {
             var uri = new Uri("http://api.com");
 

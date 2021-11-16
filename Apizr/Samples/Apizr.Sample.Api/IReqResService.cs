@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Caching;
@@ -21,6 +22,9 @@ namespace Apizr.Sample.Api
     {
         [Get("/users")]
         Task<UserList> GetUsersAsync();
+
+        [Get("/users")]
+        Task<UserList> GetUsersAsync([Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
 
         [Get("/users")]
         Task<UserList> GetUsersAsync([Priority] int priority);

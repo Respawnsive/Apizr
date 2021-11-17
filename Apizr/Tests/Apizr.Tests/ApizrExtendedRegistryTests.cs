@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Net;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Logging;
 using Apizr.Policing;
-using Apizr.Sample.Api;
-using Apizr.Sample.Api.Models;
 using Apizr.Tests.Helpers;
+using Apizr.Tests.Models;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -19,6 +15,9 @@ using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
 using Xunit;
+using IHttpBinService = Apizr.Tests.Apis.IHttpBinService;
+using IReqResService = Apizr.Tests.Apis.IReqResService;
+using UserList = Apizr.Tests.Models.UserList;
 
 namespace Apizr.Tests
 {
@@ -268,5 +267,55 @@ namespace Apizr.Tests
             // attempts should be equal to total retry count
             attempts.Should().Be(sleepDurations.Length);
         }
+
+        [Fact]
+        public async Task Calling_WithConnectivityHandler_Should_Check_Connectivity()
+        {
+            var isConnected = false;
+
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddApizr(
+                registry => registry
+                    .AddFor<IReqResService>(),
+                config => config
+                    .WithConnectivityHandler(() => isConnected));
+
+            var serviceProvider = services.BuildServiceProvider();
+            var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
+
+            // Defining a request
+            Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+
+            // Calling it should throw as isConnected is at false
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<IOException>();
+
+            // Setting isConnected to true
+            isConnected = true;
+
+            // Then request should succeed
+            await act.Should().NotThrowAsync();
+        }
+
+        //[Fact]
+        //public async Task Calling_WithMappingHandler_Should_Map_Data()
+        //{
+        //    var services = new ServiceCollection();
+        //    services.AddPolicyRegistry(_policyRegistry);
+        //    services.AddApizr(
+        //        registry => registry
+        //            .AddFor<IReqResService>(),
+        //        config => config
+        //            .WithAutoMapperMappingHandler());
+
+        //    var serviceProvider = services.BuildServiceProvider();
+        //    var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
+
+        //    var minUser = new MinUser { Name = "John" };
+
+        //    // This one should succeed
+        //    var result = await reqResManager.ExecuteAsync<MinUser, User>(api => api.GetUsersAsync());
+        //}
     }
 }

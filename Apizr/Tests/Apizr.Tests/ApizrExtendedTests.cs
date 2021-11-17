@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using Apizr.Policing;
-using Apizr.Sample.Api;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
 using Xunit;
-using HttpRequestMessageExtensions = Apizr.Policing.HttpRequestMessageExtensions;
+using IHttpBinService = Apizr.Tests.Apis.IHttpBinService;
+using IReqResService = Apizr.Tests.Apis.IReqResService;
 
 namespace Apizr.Tests
 {

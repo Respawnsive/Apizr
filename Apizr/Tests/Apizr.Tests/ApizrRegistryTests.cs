@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Apizr.Policing;
-using Apizr.Sample.Api;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -14,6 +10,7 @@ using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
 using Xunit;
+using IReqResService = Apizr.Tests.Apis.IReqResService;
 
 namespace Apizr.Tests
 {

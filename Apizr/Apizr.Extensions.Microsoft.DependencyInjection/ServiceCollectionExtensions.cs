@@ -630,7 +630,11 @@ namespace Apizr
             else
                 services.TryAddSingleton(typeof(ICacheHandler), apizrOptions.CacheHandlerType);
 
-            services.TryAddSingleton(typeof(IMappingHandler), apizrOptions.MappingHandlerType);
+            var mappingHandlerFactory = apizrOptions.GetMappingHanderFactory();
+            if (mappingHandlerFactory != null)
+                services.AddOrReplaceSingleton(typeof(IMappingHandler), serviceProvider => mappingHandlerFactory.Invoke(serviceProvider));
+            else 
+                services.TryAddSingleton(typeof(IMappingHandler), apizrOptions.MappingHandlerType);
 
             services.TryAddSingleton(typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), serviceProvider => Activator.CreateInstance(typeof(ApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions, serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName)));
 

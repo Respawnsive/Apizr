@@ -14,7 +14,7 @@ using Refit;
 
 [assembly:Policy("TransientHttpError")]
 [assembly:Cache(CacheMode.GetAndFetch, "00:10:00")]
-//[assembly:Log]
+[assembly:Log]
 namespace Apizr.Sample.Api
 {
     [WebApi("https://reqres.in/api")]//, Log(HttpMessageParts.None, LogLevel.None)]

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Logging;
@@ -298,24 +300,29 @@ namespace Apizr.Tests
             await act.Should().NotThrowAsync();
         }
 
-        //[Fact]
-        //public async Task Calling_WithMappingHandler_Should_Map_Data()
-        //{
-        //    var services = new ServiceCollection();
-        //    services.AddPolicyRegistry(_policyRegistry);
-        //    services.AddApizr(
-        //        registry => registry
-        //            .AddFor<IReqResService>(),
-        //        config => config
-        //            .WithAutoMapperMappingHandler());
+        [Fact]
+        public async Task Calling_WithMappingHandler_Should_Map_Data()
+        {
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddApizr(
+                registry => registry
+                    .AddFor<IReqResService>(),
+                config => config
+                    .WithAutoMapperMappingHandler());
 
-        //    var serviceProvider = services.BuildServiceProvider();
-        //    var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
+            var serviceProvider = services.BuildServiceProvider();
+            var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
 
-        //    var minUser = new MinUser { Name = "John" };
+            var minUser = new MinUser { Name = "John" };
 
-        //    // This one should succeed
-        //    var result = await reqResManager.ExecuteAsync<MinUser, User>(api => api.GetUsersAsync());
-        //}
+            // This one should succeed
+            var result = await reqResManager.ExecuteAsync<MinUser, User>((api, mapper) => api.CreateUser(mapper.Map<MinUser, User>(minUser), CancellationToken.None));
+
+            result.Should().NotBeNull();
+            result.Name.Should().Be(minUser.Name);
+            result.Id.Should().BeGreaterThanOrEqualTo(1);
+        }
     }
 }

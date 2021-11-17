@@ -179,6 +179,28 @@ namespace Apizr
 
         #endregion
 
+        #region ExecuteAsync<TModelResponse, TApiResponse>
+
+        /// <summary>
+        /// Execute a managed <see cref="TWebApi"/>'s task returning a mapped result
+        /// </summary>
+        /// <typeparam name="TModelResult">The mapped model result</typeparam>
+        /// <typeparam name="TApiResult">The api result</typeparam>
+        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <returns></returns>
+        Task<TModelResult> ExecuteAsync<TModelResult, TApiResult>(Expression<Func<TWebApi, Task<TApiResult>>> executeApiMethod);
+
+        /// <summary>
+        /// Execute a managed <see cref="TWebApi"/>'s task returning a mapped result
+        /// </summary>
+        /// <typeparam name="TModelResult">The mapped model result</typeparam>
+        /// <typeparam name="TApiResult">The api result</typeparam>
+        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute with mapping</param>
+        /// <returns></returns>
+        Task<TModelResult> ExecuteAsync<TModelResult, TApiResult>(Expression<Func<TWebApi, IMappingHandler, Task<TApiResult>>> executeApiMethod);
+
+        #endregion
+
         #region ClearCacheAsync
 
         /// <summary>

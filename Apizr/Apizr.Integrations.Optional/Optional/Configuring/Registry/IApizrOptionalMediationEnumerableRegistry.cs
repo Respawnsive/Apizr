@@ -6,7 +6,7 @@ using Apizr.Optional.Requesting.Sending;
 
 namespace Apizr.Optional.Configuring.Registry
 {
-    public interface IApizrOptionalMediationEnumerableRegistry : IEnumerable<KeyValuePair<Type, Func<IApizrOptionalMediator>>>, IApizrEnumerableRegistryBase
+    public interface IApizrOptionalMediationEnumerableRegistry : IEnumerable<KeyValuePair<Type, Func<IApizrOptionalMediatorBase>>>, IApizrEnumerableRegistryBase
     {
         IApizrCrudOptionalMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> GetFor<T, TKey>() where T : class;
 

@@ -46,7 +46,7 @@ namespace Apizr.Optional.Requesting.Base
         }
     }
 
-    public abstract class ExecuteOptionalRequestBase<TWebApi, TApiResponse> : ExecuteRequestBase<TWebApi, TApiResponse,
+    public abstract class ExecuteOptionalRequestBase<TWebApi, TApiResponse> : ExecuteResultRequestBase<TWebApi, TApiResponse,
         Option<TApiResponse, ApizrException<TApiResponse>>>
     {
         protected ExecuteOptionalRequestBase(Expression<Func<TWebApi, Task<TApiResponse>>> executeApiMethod) : base(executeApiMethod)

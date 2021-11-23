@@ -8,6 +8,138 @@ using Polly;
 
 namespace Apizr.Mediation.Requesting.Sending
 {
+    public class ApizrMediator : IApizrMediator
+    {
+        public Task SendFor<TWebApi>(Expression<Func<TWebApi, Task>> executeApiMethod)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SendFor<TWebApi>(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SendFor<TWebApi>(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod, CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SendFor<TWebApi>(Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod, Context context = null, CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SendFor<TWebApi, TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SendFor<TWebApi, TModelData, TApiData>(Expression<Func<CancellationToken, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData,
+            CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SendFor<TWebApi, TModelData, TApiData>(Expression<Func<Context, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Context context = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SendFor<TWebApi, TModelData, TApiData>(Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Context context = null,
+            CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TApiData> SendFor<TWebApi, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TApiData> SendFor<TWebApi, TApiData>(Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TApiData> SendFor<TWebApi, TApiData>(Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TApiData> SendFor<TWebApi, TApiData>(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null, CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null,
+            CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<Context, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Context context = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
+            CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Context context = null,
+            CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TModelResultData> SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            TModelRequestData modelRequestData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TModelResultData> SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            TModelRequestData modelRequestData, CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TModelResultData> SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<Context, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            TModelRequestData modelRequestData, Context context = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TModelResultData> SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<Context, CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            TModelRequestData modelRequestData, Context context = null, CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class ApizrMediator<TWebApi> : IApizrMediator<TWebApi>
     {
         private readonly IMediator _mediator;
@@ -17,86 +149,133 @@ namespace Apizr.Mediation.Requesting.Sending
             _mediator = mediator;
         }
 
-        #region SendFor
+        public Task SendFor(Expression<Func<TWebApi, Task>> executeApiMethod)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Task SendFor(Expression<Func<TWebApi, Task>> executeApiMethod) =>
-            _mediator.Send(new ExecuteRequest<TWebApi>(executeApiMethod));
+        public Task SendFor(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context = null)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Task SendFor(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context = null) =>
-            _mediator.Send(new ExecuteRequest<TWebApi>(executeApiMethod, context));
+        public Task SendFor(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod, CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Task SendFor(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod,
-            CancellationToken token = default) =>
-            _mediator.Send(new ExecuteRequest<TWebApi>(executeApiMethod), token);
+        public Task SendFor(Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod, Context context = null, CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Task SendFor(Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod,
-            Context context = null, CancellationToken token = default) =>
-            _mediator.Send(new ExecuteRequest<TWebApi>(executeApiMethod, context), token);
+        public Task SendFor<TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData)
+        {
+            throw new NotImplementedException();
+        }
 
-        #endregion
+        public Task SendFor<TModelData, TApiData>(Expression<Func<CancellationToken, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData,
+            CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
 
-        #region SendFor<TApiResponse>
+        public Task SendFor<TModelData, TApiData>(Expression<Func<Context, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Context context = null)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Task<TApiResponse>
-            SendFor<TApiResponse>(Expression<Func<TWebApi, Task<TApiResponse>>> executeApiMethod) =>
-            _mediator.Send(new ExecuteRequest<TWebApi, TApiResponse>(executeApiMethod));
+        public Task SendFor<TModelData, TApiData>(Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Context context = null,
+            CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Task<TApiResponse> SendFor<TApiResponse>(
-            Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context = null) =>
-            _mediator.Send(new ExecuteRequest<TWebApi, TApiResponse>(executeApiMethod, context));
+        public Task<TApiData> SendFor<TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Task<TApiResponse> SendFor<TApiResponse>(
-            Expression<Func<CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod,
-            CancellationToken token = default) =>
-            _mediator.Send(new ExecuteRequest<TWebApi, TApiResponse>(executeApiMethod), token);
+        public Task<TApiData> SendFor<TApiData>(Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Task<TApiResponse> SendFor<TApiResponse>(
-            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context = null,
-            CancellationToken token = default) =>
-            _mediator.Send(new ExecuteRequest<TWebApi, TApiResponse>(executeApiMethod, context), token);
+        public Task<TApiData> SendFor<TApiData>(Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
 
-        #endregion
+        public Task<TApiData> SendFor<TApiData>(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null, CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
 
-        #region SendFor<TModelResponse, TApiResponse>
+        public Task<TModelData> SendFor<TModelData, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Task<TModelResponse>
-            SendFor<TModelResponse, TApiResponse>(Expression<Func<TWebApi, Task<TApiResponse>>> executeApiMethod) =>
-            _mediator.Send(new ExecuteRequest<TWebApi, TModelResponse, TApiResponse>(executeApiMethod));
+        public Task<TModelData> SendFor<TModelData, TApiData>(Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Task<TModelResponse> SendFor<TModelResponse, TApiResponse>(
-            Expression<Func<Context, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context = null) =>
-            _mediator.Send(new ExecuteRequest<TWebApi, TModelResponse, TApiResponse>(executeApiMethod, context));
+        public Task<TModelData> SendFor<TModelData, TApiData>(Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Task<TModelResponse> SendFor<TModelResponse, TApiResponse>(
-            Expression<Func<CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod,
-            CancellationToken token = default) =>
-            _mediator.Send(new ExecuteRequest<TWebApi, TModelResponse, TApiResponse>(executeApiMethod), token);
+        public Task<TModelData> SendFor<TModelData, TApiData>(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null,
+            CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Task<TModelResponse> SendFor<TModelResponse, TApiResponse>(
-            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod, Context context = null,
-            CancellationToken token = default) =>
-            _mediator.Send(new ExecuteRequest<TWebApi, TModelResponse, TApiResponse>(executeApiMethod, context), token);
+        public Task<TModelData> SendFor<TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Task<TModelResponse> SendFor<TModelResponse, TApiResponse>(
-            Expression<Func<TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod) =>
-            _mediator.Send(new ExecuteRequest<TWebApi, TModelResponse, TApiResponse>(executeApiMethod));
+        public Task<TModelData> SendFor<TModelData, TApiData>(Expression<Func<Context, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Context context = null)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Task<TModelResponse> SendFor<TModelResponse, TApiResponse>(
-            Expression<Func<Context, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod,
-            Context context = null) =>
-            _mediator.Send(new ExecuteRequest<TWebApi, TModelResponse, TApiResponse>(executeApiMethod, context));
+        public Task<TModelData> SendFor<TModelData, TApiData>(Expression<Func<CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
+            CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Task<TModelResponse> SendFor<TModelResponse, TApiResponse>(
-            Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod,
-            CancellationToken token = default) =>
-            _mediator.Send(new ExecuteRequest<TWebApi, TModelResponse, TApiResponse>(executeApiMethod), token);
+        public Task<TModelData> SendFor<TModelData, TApiData>(Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Context context = null,
+            CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Task<TModelResponse> SendFor<TModelResponse, TApiResponse>(
-            Expression<Func<Context, CancellationToken, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod,
-            Context context = null,
-            CancellationToken token = default) =>
-            _mediator.Send(new ExecuteRequest<TWebApi, TModelResponse, TApiResponse>(executeApiMethod, context), token);
+        public Task<TModelResultData> SendFor<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            TModelRequestData modelRequestData)
+        {
+            throw new NotImplementedException();
+        }
 
-        #endregion
+        public Task<TModelResultData> SendFor<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            TModelRequestData modelRequestData, CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TModelResultData> SendFor<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<Context, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            TModelRequestData modelRequestData, Context context = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TModelResultData> SendFor<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<Context, CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            TModelRequestData modelRequestData, Context context = null, CancellationToken token = default)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

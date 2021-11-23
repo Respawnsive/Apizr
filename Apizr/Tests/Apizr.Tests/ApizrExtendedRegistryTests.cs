@@ -318,7 +318,7 @@ namespace Apizr.Tests
             var minUser = new MinUser { Name = "John" };
 
             // This one should succeed
-            var result = await reqResManager.ExecuteAsync<MinUser, User>((api, mapper) => api.CreateUser(mapper.Map<MinUser, User>(minUser), CancellationToken.None));
+            var result = await reqResManager.ExecuteAsync<MinUser, User>((api, user) => api.CreateUser(user, CancellationToken.None), minUser);
 
             result.Should().NotBeNull();
             result.Name.Should().Be(minUser.Name);

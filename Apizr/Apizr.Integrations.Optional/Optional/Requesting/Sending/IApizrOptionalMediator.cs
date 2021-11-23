@@ -10,7 +10,12 @@ using Polly;
 
 namespace Apizr.Optional.Requesting.Sending
 {
-    public interface IApizrOptionalMediator : IApizrMediator
+    public interface IApizrOptionalMediatorBase : IApizrMediatorBase
+    {
+
+    }
+
+    public interface IApizrOptionalMediator : IApizrOptionalMediatorBase
     {
 
     }
@@ -18,7 +23,7 @@ namespace Apizr.Optional.Requesting.Sending
     /// <summary>
     /// <see cref="IMediator"/> but dedicated to <see cref="TWebApi"/> with optional result, getting all shorter
     /// </summary>
-    public interface IApizrOptionalMediator<TWebApi> : IApizrOptionalMediator
+    public interface IApizrOptionalMediator<TWebApi> : IApizrOptionalMediatorBase
     {
         #region SendFor
 

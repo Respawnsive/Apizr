@@ -5,13 +5,13 @@ using Polly;
 
 namespace Apizr.Mediation.Cruding.Sending
 {
-    public interface IApizrCrudMediator : IApizrMediator
+    public interface IApizrCrudMediator : IApizrMediatorBase
     {
 
     }
 
     /// <summary>
-    /// <see cref="IApizrMediator"/> but dedicated to <see cref="TApiEntity"/> cruding, getting all shorter
+    /// Apizr mediator dedicated to <see cref="TApiEntity"/> cruding, getting all shorter
     /// </summary>
     public interface IApizrCrudMediator<TApiEntity, in TApiEntityKey, TReadAllResult, in TReadAllParams> : IApizrCrudMediator
         where TApiEntity : class

@@ -456,7 +456,7 @@ namespace Apizr.Sample.Console
                         // Classic auto mapped request and result
                         var minUser = new MinUser { Name = "John" };
                         var createdMinUser = await _mediator.Send(
-                            new ExecuteRequest<IReqResService, MinUser, User>((ct, api, mapper) =>
+                            new ExecuteUnitRequest<IReqResService, MinUser, User>((ct, api, mapper) =>
                                 api.CreateUser(mapper.Map<MinUser, User>(minUser), ct)), CancellationToken.None);
 
                         // Classic Auto mapped result only

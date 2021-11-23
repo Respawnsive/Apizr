@@ -9,14 +9,14 @@ namespace Apizr.Optional.Configuring.Registry
 {
     public abstract class ApizrOptionalMediationRegistryBase : IApizrOptionalMediationEnumerableRegistry
     {
-        protected readonly IDictionary<Type, Func<IApizrOptionalMediator>> ConcurrentRegistry = new ConcurrentDictionary<Type, Func<IApizrOptionalMediator>>();
+        protected readonly IDictionary<Type, Func<IApizrOptionalMediatorBase>> ConcurrentRegistry = new ConcurrentDictionary<Type, Func<IApizrOptionalMediatorBase>>();
 
         protected ApizrOptionalMediationRegistryBase()
         {
 
         }
 
-        public IEnumerator<KeyValuePair<Type, Func<IApizrOptionalMediator>>> GetEnumerator() => ConcurrentRegistry.GetEnumerator();
+        public IEnumerator<KeyValuePair<Type, Func<IApizrOptionalMediatorBase>>> GetEnumerator() => ConcurrentRegistry.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 

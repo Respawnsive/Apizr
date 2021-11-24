@@ -7,18 +7,23 @@ using MediatR;
 
 namespace Apizr.Mediation.Cruding.Handling
 {
-    public class DeleteCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> : 
-        DeleteCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, DeleteCommand<TModelEntity, TApiEntityKey>, Unit>
+    public class DeleteCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> :
+        DeleteCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams,
+            DeleteCommand<TModelEntity, TApiEntityKey>, Unit>
         where TModelEntity : class
         where TApiEntity : class
     {
-        public DeleteCommandHandler(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
+        public DeleteCommandHandler(
+            IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager,
+            IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
         {
         }
 
-        public override async Task<Unit> Handle(DeleteCommand<TModelEntity, TApiEntityKey> request, CancellationToken cancellationToken)
+        public override async Task<Unit> Handle(DeleteCommand<TModelEntity, TApiEntityKey> request,
+            CancellationToken cancellationToken)
         {
-            await CrudApiManager.ExecuteAsync((ctx, ct, api) => api.Delete(request.Key, ctx, ct), request.Context, cancellationToken)
+            await CrudApiManager.ExecuteAsync((ctx, ct, api) => api.Delete(request.Key, ctx, ct), request.Context,
+                    cancellationToken)
                 .ConfigureAwait(false);
 
             return Unit.Value;

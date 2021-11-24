@@ -15,7 +15,7 @@ namespace Apizr.Mediation.Cruding.Handling.Base
         where TApiEntity : class 
         where TCommand : UpdateCommandBase<TApiEntityKey, TModelEntity, TCommandResult>
     {
-        protected UpdateCommandHandlerBase(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
+        protected UpdateCommandHandlerBase(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {
         }
 
@@ -29,7 +29,7 @@ namespace Apizr.Mediation.Cruding.Handling.Base
         where TApiEntity : class 
         where TCommand : UpdateCommandBase<int, TModelEntity, Unit>
     {
-        protected UpdateCommandHandlerBase(IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
+        protected UpdateCommandHandlerBase(IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {
         }
 
@@ -43,7 +43,7 @@ namespace Apizr.Mediation.Cruding.Handling.Base
         where TApiEntity : class 
         where TCommand : UpdateCommandBase<int, TModelEntity, TCommandResult>
     {
-        protected UpdateCommandHandlerBase(IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
+        protected UpdateCommandHandlerBase(IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {
         }
 

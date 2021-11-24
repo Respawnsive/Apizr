@@ -6,8 +6,9 @@ using Apizr.Requesting;
 
 namespace Apizr.Mediation.Cruding.Handling
 {
-    public class CreateCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> : 
-        CreateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, CreateCommand<TModelEntity>, TModelEntity>
+    public class CreateCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> :
+        CreateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams,
+            CreateCommand<TModelEntity>, TModelEntity>
         where TModelEntity : class
         where TApiEntity : class
     {
@@ -17,13 +18,13 @@ namespace Apizr.Mediation.Cruding.Handling
         {
         }
 
-        public override async Task<TModelEntity> Handle(CreateCommand<TModelEntity> request, CancellationToken cancellationToken)
+        public override async Task<TModelEntity> Handle(CreateCommand<TModelEntity> request,
+            CancellationToken cancellationToken)
         {
-            var result = await CrudApiManager
-                .ExecuteAsync((ctx, ct, api) => api.Create(Map<TModelEntity, TApiEntity>(request.Payload), ctx, ct), request.Context, cancellationToken)
+            return await CrudApiManager
+                .ExecuteAsync<TModelEntity, TApiEntity>((ctx, ct, api, apiEntity) => api.Create(apiEntity, ctx, ct),
+                    request.RequestData, request.Context, cancellationToken)
                 .ConfigureAwait(false);
-
-            return Map<TApiEntity, TModelEntity>(result);
         }
     }
 }

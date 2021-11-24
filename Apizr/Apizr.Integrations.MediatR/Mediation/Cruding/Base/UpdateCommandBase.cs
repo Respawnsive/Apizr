@@ -4,42 +4,42 @@ using Polly;
 
 namespace Apizr.Mediation.Cruding.Base
 {
-    public abstract class UpdateCommandBase<TKey, TPayload, TResponse> : MediationCommandBase<TPayload, TResponse>
+    public abstract class UpdateCommandBase<TKey, TRequestData, TResultData> : MediationCommandBase<TRequestData, TResultData>
     {
-        protected UpdateCommandBase(TKey key, TPayload payload)
+        protected UpdateCommandBase(TKey key, TRequestData requestData)
         {
             Key = key;
-            Payload = payload;
+            RequestData = requestData;
         }
 
-        protected UpdateCommandBase(TKey key, TPayload payload, Context context) : base(context)
+        protected UpdateCommandBase(TKey key, TRequestData requestData, Context context) : base(context)
         {
             Key = key;
-            Payload = payload;
+            RequestData = requestData;
         }
 
         public TKey Key { get; }
-        public TPayload Payload { get; }
+        public TRequestData RequestData { get; }
     }
 
-    public abstract class UpdateCommandBase<TPayload, TResponse> : UpdateCommandBase<int, TPayload, TResponse>
+    public abstract class UpdateCommandBase<TRequestData, TResultData> : UpdateCommandBase<int, TRequestData, TResultData>
     {
-        protected UpdateCommandBase(int key, TPayload payload) : base(key, payload)
+        protected UpdateCommandBase(int key, TRequestData requestData) : base(key, requestData)
         {
         }
 
-        protected UpdateCommandBase(int key, TPayload payload, Context context) : base(key, payload, context)
+        protected UpdateCommandBase(int key, TRequestData requestData, Context context) : base(key, requestData, context)
         {
         }
     }
 
-    public abstract class UpdateCommandBase<TPayload> : UpdateCommandBase<TPayload, Unit>
+    public abstract class UpdateCommandBase<TRequestData> : UpdateCommandBase<TRequestData, Unit>
     {
-        protected UpdateCommandBase(int key, TPayload payload) : base(key, payload)
+        protected UpdateCommandBase(int key, TRequestData requestData) : base(key, requestData)
         {
         }
 
-        protected UpdateCommandBase(int key, TPayload payload, Context context) : base(key, payload, context)
+        protected UpdateCommandBase(int key, TRequestData requestData, Context context) : base(key, requestData, context)
         {
         }
     }

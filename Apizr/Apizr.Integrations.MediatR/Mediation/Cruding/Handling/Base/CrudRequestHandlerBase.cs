@@ -11,8 +11,7 @@ namespace Apizr.Mediation.Cruding.Handling.Base
         protected readonly IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> CrudApiManager;
 
         protected CrudRequestHandlerBase(
-            IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager,
-            IMappingHandler mappingHandler) : base(mappingHandler)
+            IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager) : base()
         {
             CrudApiManager = crudApiManager;
         }

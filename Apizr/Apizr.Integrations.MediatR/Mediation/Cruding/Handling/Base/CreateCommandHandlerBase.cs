@@ -17,7 +17,7 @@ namespace Apizr.Mediation.Cruding.Handling.Base
     {
         protected CreateCommandHandlerBase(
             IApizrManager<ICrudApi<TApiEntity, TTApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager,
-            IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
+            IMappingHandler mappingHandler) : base(crudApiManager)
         {
         }
 

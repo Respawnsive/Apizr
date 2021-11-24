@@ -13,7 +13,8 @@ namespace Apizr.Mediation.Cruding.Handling
         where TApiEntity : class
     {
         public UpdateCommandHandler(
-            IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
+            IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager) : base(
+            crudApiManager)
         {
         }
 
@@ -36,7 +37,8 @@ namespace Apizr.Mediation.Cruding.Handling
         where TApiEntity : class
     {
         public UpdateCommandHandler(
-            IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
+            IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager) : base(
+            crudApiManager)
         {
         }
 

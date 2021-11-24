@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Apizr.Mapping;
 using Apizr.Mediation.Cruding.Handling.Base;
 using Apizr.Requesting;
 
@@ -14,8 +13,8 @@ namespace Apizr.Mediation.Cruding.Handling
         where TApiEntity : class
     {
         public ReadAllQueryHandler(
-            IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams>> crudApiManager,
-            IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
+            IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams>> crudApiManager)
+            : base(crudApiManager)
         {
         }
 
@@ -38,7 +37,7 @@ namespace Apizr.Mediation.Cruding.Handling
 
         public ReadAllQueryHandler(
             IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, IDictionary<string, object>>>
-                crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
+                crudApiManager) : base(crudApiManager)
         {
         }
 

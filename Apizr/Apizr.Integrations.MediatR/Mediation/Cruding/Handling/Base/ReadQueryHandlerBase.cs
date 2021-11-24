@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Apizr.Mapping;
 using Apizr.Mediation.Cruding.Base;
 using Apizr.Mediation.Querying;
 using Apizr.Requesting;
@@ -14,7 +13,7 @@ namespace Apizr.Mediation.Cruding.Handling.Base
         where TApiEntity : class 
         where TQuery : ReadQueryBase<TQueryResult, TApiEntityKey>
     {
-        protected ReadQueryHandlerBase(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
+        protected ReadQueryHandlerBase(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {
         }
 
@@ -24,7 +23,7 @@ namespace Apizr.Mediation.Cruding.Handling.Base
     public abstract class ReadQueryHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, TQuery, TQueryResult> : CrudRequestHandlerBase<TApiEntity, int, TReadAllResult, TReadAllParams>,
         IMediationQueryHandler<TQuery, TQueryResult> where TApiEntity : class where TQuery : ReadQueryBase<TQueryResult>
     {
-        protected ReadQueryHandlerBase(IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
+        protected ReadQueryHandlerBase(IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {
         }
 

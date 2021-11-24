@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Apizr.Mapping;
 using Apizr.Mediation.Commanding;
 using Apizr.Mediation.Cruding.Base;
 using Apizr.Requesting;

@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Apizr.Mapping;
 using Apizr.Mediation.Commanding;
 using Apizr.Mediation.Cruding.Base;
 using Apizr.Requesting;
@@ -14,7 +13,7 @@ namespace Apizr.Mediation.Cruding.Handling.Base
         where TApiEntity : class 
         where TCommand : DeleteCommandBase<TModelEntity, TApiEntityKey, TCommandResult>
     {
-        protected DeleteCommandHandlerBase(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
+        protected DeleteCommandHandlerBase(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {
         }
 
@@ -28,7 +27,7 @@ namespace Apizr.Mediation.Cruding.Handling.Base
         where TApiEntity : class
         where TCommand : DeleteCommandBase<TModelEntity, int, TCommandResult>
     {
-        protected DeleteCommandHandlerBase(IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
+        protected DeleteCommandHandlerBase(IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {
         }
 

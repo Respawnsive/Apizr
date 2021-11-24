@@ -8,11 +8,6 @@ using Polly;
 
 namespace Apizr.Mediation.Requesting.Sending
 {
-    public interface IApizrMediatorBase
-    {
-
-    }
-
     /// <summary>
     /// Apizr mediator to send request using MediatR by calling expression
     /// </summary>
@@ -20,7 +15,7 @@ namespace Apizr.Mediation.Requesting.Sending
     {
         #region Unit
 
-        #region SendFor
+        #region SendFor<TWebApi>
 
         /// <summary>
         /// Send an api call to Apizr using MediatR
@@ -63,7 +58,7 @@ namespace Apizr.Mediation.Requesting.Sending
 
         #endregion
 
-        #region SendFor<TModelData, TApiData>
+        #region SendFor<TWebApi, TModelData, TApiData>
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with mapped request
@@ -126,7 +121,7 @@ namespace Apizr.Mediation.Requesting.Sending
 
         #region Result
 
-        #region SendFor<TApiData>
+        #region SendFor<TWebApi, TApiData>
 
         /// <summary>
         /// Send an api call to Apizr using MediatR
@@ -176,7 +171,7 @@ namespace Apizr.Mediation.Requesting.Sending
 
         #endregion
 
-        #region SendFor<TModelData, TApiData>
+        #region SendFor<TWebApi, TModelData, TApiData>
 
         /// <summary>
         /// Send an api call to Apizr using MediatR returning a mapped result
@@ -288,7 +283,7 @@ namespace Apizr.Mediation.Requesting.Sending
 
         #endregion
 
-        #region SendFor<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>
+        #region SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request and returning a mapped result

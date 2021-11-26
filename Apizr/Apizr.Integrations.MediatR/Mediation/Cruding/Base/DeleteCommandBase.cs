@@ -4,7 +4,7 @@ using Polly;
 
 namespace Apizr.Mediation.Cruding.Base
 {
-    public abstract class DeleteCommandBase<T, TKey, TResponse> : MediationCommandBase<TKey, TResponse>
+    public abstract class DeleteCommandBase<T, TKey, TResultData> : MediationCommandBase<TKey, TResultData>
     {
         protected DeleteCommandBase(TKey key) : base()
         {
@@ -19,7 +19,7 @@ namespace Apizr.Mediation.Cruding.Base
         public TKey Key { get; }
     }
 
-    public abstract class DeleteCommandBase<T, TResponse> : DeleteCommandBase<T, int, TResponse>
+    public abstract class DeleteCommandBase<T, TResultData> : DeleteCommandBase<T, int, TResultData>
     {
         protected DeleteCommandBase(int key) : base(key)
         {

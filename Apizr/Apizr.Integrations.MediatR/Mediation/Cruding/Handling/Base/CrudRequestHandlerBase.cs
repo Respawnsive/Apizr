@@ -1,5 +1,4 @@
-﻿using Apizr.Mapping;
-using Apizr.Mediation.Requesting.Handling.Base;
+﻿using Apizr.Mediation.Requesting.Handling.Base;
 using Apizr.Requesting;
 
 namespace Apizr.Mediation.Cruding.Handling.Base

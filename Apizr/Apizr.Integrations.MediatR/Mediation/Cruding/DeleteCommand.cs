@@ -4,17 +4,6 @@ using Polly;
 
 namespace Apizr.Mediation.Cruding
 {
-    public class DeleteCommand<T, TKey, TResponse> : DeleteCommandBase<T, TKey, TResponse>
-    {
-        public DeleteCommand(TKey key) : base(key)
-        {
-        }
-
-        public DeleteCommand(TKey key, Context context) : base(key, context)
-        {
-        }
-    }
-
     public class DeleteCommand<T, TKey> : DeleteCommandBase<T, TKey, Unit>
     {
         public DeleteCommand(TKey key) : base(key)

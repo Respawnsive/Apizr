@@ -1,9 +1,8 @@
-﻿using MediatR;
-using Polly;
+﻿using Polly;
 
 namespace Apizr.Mediation.Requesting.Base
 {
-    public abstract class PrioritizedRequestBase<TRequestResponse> : RequestBase<TRequestResponse>
+    public abstract class PrioritizedRequestBase<TResultData> : RequestBase<TResultData>
     {
         protected PrioritizedRequestBase() : this(-1)
         {

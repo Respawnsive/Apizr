@@ -7,6 +7,13 @@ using Refit;
 
 namespace Apizr.Requesting
 {
+    /// <summary>
+    /// The crud api interface
+    /// </summary>
+    /// <typeparam name="T">The entity type</typeparam>
+    /// <typeparam name="TKey">The entity's crud key type</typeparam>
+    /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
+    /// <typeparam name="TReadAllParams">ReadAll query parameters type</typeparam>
     public interface ICrudApi<T, in TKey, TReadAllResult, in TReadAllParams> where T : class
     {
         #region Create

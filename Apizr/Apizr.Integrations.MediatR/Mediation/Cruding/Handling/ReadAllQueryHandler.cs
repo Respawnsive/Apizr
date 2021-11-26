@@ -6,46 +6,46 @@ using Apizr.Requesting;
 
 namespace Apizr.Mediation.Cruding.Handling
 {
-    public class ReadAllQueryHandler<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult,
+    public class ReadAllQueryHandler<TApiEntity, TApiEntityKey, TModelReadAllResult, TApiReadAllResult,
         TReadAllParams> :
-        ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult,
-            TReadAllParams, ReadAllQuery<TReadAllParams, TModelEntityReadAllResult>, TModelEntityReadAllResult>
+        ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelReadAllResult, TApiReadAllResult,
+            TReadAllParams, ReadAllQuery<TReadAllParams, TModelReadAllResult>, TModelReadAllResult>
         where TApiEntity : class
     {
         public ReadAllQueryHandler(
-            IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams>> crudApiManager)
+            IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TApiReadAllResult, TReadAllParams>> crudApiManager)
             : base(crudApiManager)
         {
         }
 
-        public override async Task<TModelEntityReadAllResult> Handle(
-            ReadAllQuery<TReadAllParams, TModelEntityReadAllResult> request, CancellationToken cancellationToken)
+        public override async Task<TModelReadAllResult> Handle(
+            ReadAllQuery<TReadAllParams, TModelReadAllResult> request, CancellationToken cancellationToken)
         {
             return await CrudApiManager
-                .ExecuteAsync<TModelEntityReadAllResult, TApiEntityReadAllResult>(
+                .ExecuteAsync<TModelReadAllResult, TApiReadAllResult>(
                     (ctx, ct, api) => api.ReadAll(request.Parameters, request.Priority, ctx, ct), request.Context,
                     cancellationToken)
                 .ConfigureAwait(false);
         }
     }
 
-    public class ReadAllQueryHandler<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult> :
-        ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult,
-            ReadAllQuery<TModelEntityReadAllResult>, TModelEntityReadAllResult>
+    public class ReadAllQueryHandler<TApiEntity, TApiEntityKey, TModelReadAllResult, TApiReadAllResult> :
+        ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelReadAllResult, TApiReadAllResult,
+            ReadAllQuery<TModelReadAllResult>, TModelReadAllResult>
         where TApiEntity : class
     {
 
         public ReadAllQueryHandler(
-            IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, IDictionary<string, object>>>
+            IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TApiReadAllResult, IDictionary<string, object>>>
                 crudApiManager) : base(crudApiManager)
         {
         }
 
-        public override async Task<TModelEntityReadAllResult> Handle(ReadAllQuery<TModelEntityReadAllResult> request,
+        public override async Task<TModelReadAllResult> Handle(ReadAllQuery<TModelReadAllResult> request,
             CancellationToken cancellationToken)
         {
             return await CrudApiManager
-                .ExecuteAsync<TModelEntityReadAllResult, TApiEntityReadAllResult>(
+                .ExecuteAsync<TModelReadAllResult, TApiReadAllResult>(
                     (ctx, ct, api) => api.ReadAll(request.Parameters, request.Priority, ctx, ct), request.Context,
                     cancellationToken)
                 .ConfigureAwait(false);

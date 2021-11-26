@@ -3,7 +3,7 @@ using Polly;
 
 namespace Apizr.Mediation.Querying
 {
-    public abstract class MediationQueryBase<TResponse> : PrioritizedRequestBase<TResponse>, IMediationQuery<TResponse>
+    public abstract class MediationQueryBase<TResultData> : PrioritizedRequestBase<TResultData>, IMediationQuery<TResultData>
     {
         protected MediationQueryBase() : base()
         {

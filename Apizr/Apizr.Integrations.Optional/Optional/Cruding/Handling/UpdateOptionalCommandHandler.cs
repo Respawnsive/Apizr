@@ -32,7 +32,7 @@ namespace Apizr.Optional.Cruding.Handling
                         await CrudApiManager
                             .ExecuteAsync(
                                 (ctx, ct, api) =>
-                                    api.Update(request.Key, Map<TModelEntity, TApiEntity>(request.Payload), ctx, ct), request.Context,
+                                    api.Update(request.Key, Map<TModelEntity, TApiEntity>(request.RequestData), ctx, ct), request.Context,
                                 cancellationToken);
 
                         return Unit.Value;
@@ -67,7 +67,7 @@ namespace Apizr.Optional.Cruding.Handling
                         await CrudApiManager
                             .ExecuteAsync(
                                 (ctx, ct, api) =>
-                                    api.Update(request.Key, Map<TModelEntity, TApiEntity>(request.Payload), ctx, ct), request.Context,
+                                    api.Update(request.Key, Map<TModelEntity, TApiEntity>(request.RequestData), ctx, ct), request.Context,
                                 cancellationToken);
 
                         return Unit.Value;

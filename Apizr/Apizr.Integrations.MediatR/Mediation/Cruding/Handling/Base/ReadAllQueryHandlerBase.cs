@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Apizr.Mapping;
 using Apizr.Mediation.Cruding.Base;
 using Apizr.Mediation.Querying;
 using Apizr.Requesting;

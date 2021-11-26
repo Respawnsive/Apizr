@@ -4,7 +4,7 @@ using Polly;
 
 namespace Apizr.Mediation.Commanding
 {
-    public abstract class MediationCommandBase<TPayload, TResponse> : RequestBase<TResponse>, IMediationCommand<TPayload, TResponse>
+    public abstract class MediationCommandBase<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData> : RequestBase<TModelResultData>, IMediationCommand<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>
     {
         protected MediationCommandBase() : base()
         {
@@ -17,7 +17,20 @@ namespace Apizr.Mediation.Commanding
         }
     }
 
-    public abstract class MediationCommandBase<TPayload> : RequestBase<Unit>, IMediationCommand<TPayload>
+    public abstract class MediationCommandBase<TRequestData, TResultData> : RequestBase<TResultData>, IMediationCommand<TRequestData, TResultData>
+    {
+        protected MediationCommandBase() : base()
+        {
+
+        }
+
+        protected MediationCommandBase(Context context) : base(context)
+        {
+
+        }
+    }
+
+    public abstract class MediationCommandBase<TRequestData> : RequestBase<Unit>, IMediationCommand<TRequestData>
     {
         protected MediationCommandBase() : base()
         {

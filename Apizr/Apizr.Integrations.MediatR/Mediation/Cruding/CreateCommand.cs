@@ -3,13 +3,13 @@ using Polly;
 
 namespace Apizr.Mediation.Cruding
 {
-    public class CreateCommand<TPayload> : CreateCommandBase<TPayload, TPayload>
+    public class CreateCommand<TModelData> : CreateCommandBase<TModelData, TModelData>
     {
-        public CreateCommand(TPayload payload) : base(payload)
+        public CreateCommand(TModelData modelData) : base(modelData)
         {
         }
 
-        public CreateCommand(TPayload payload, Context context) : base(payload, context)
+        public CreateCommand(TModelData modelData, Context context) : base(modelData, context)
         {
         }
     }

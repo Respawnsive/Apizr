@@ -54,6 +54,9 @@ namespace Apizr
             {
                 #region Crud
 
+                // Register crud mediator
+                services.TryAddSingleton<IApizrCrudMediator, ApizrCrudMediator>();
+
                 // Crud entities auto registration
                 foreach (var crudEntity in apizrOptions.CrudEntities)
                 {
@@ -267,6 +270,7 @@ namespace Apizr
                         apiEntityReadAllResultType,
                         apiEntityReadAllParamsType);
 
+                    // Register typed crud mediator
                     services.TryAddTransient(typedCrudMediatorServiceType, typedCrudMediatorImplementationType);
 
                     // Get or create and register a mediation registry
@@ -287,6 +291,9 @@ namespace Apizr
                 #endregion
 
                 #region Classic
+
+                // Register mediator
+                services.TryAddSingleton<IApizrMediator, ApizrMediator>();
 
                 // Classic interfaces auto registration
                 foreach (var webApi in apizrOptions.WebApis)
@@ -311,11 +318,11 @@ namespace Apizr
                             }
 
                             // ServiceType
-                            var executeRequestType = typeof(ExecuteRequest<,>).MakeGenericType(webApiType, apiResponseType);
+                            var executeRequestType = typeof(ExecuteResultRequest<,>).MakeGenericType(webApiType, apiResponseType);
                             var executeRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeRequestType, apiResponseType);
 
                             // ImplementationType
-                            var executeRequestHandlerImplementationType = typeof(ExecuteRequestHandler<,>).MakeGenericType(webApiType, apiResponseType);
+                            var executeRequestHandlerImplementationType = typeof(ExecuteResultRequestHandler<,>).MakeGenericType(webApiType, apiResponseType);
 
                             // Registration
                             services.TryAddTransient(executeRequestHandlerServiceType, executeRequestHandlerImplementationType);
@@ -334,7 +341,7 @@ namespace Apizr
                                 var executeMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeMappedRequestType, modelResponseType);
 
                                 // ImplementationType
-                                var executeMappedRequestHandlerImplementationType = typeof(ExecuteRequestHandler<,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType);
+                                var executeMappedRequestHandlerImplementationType = typeof(ExecuteResultRequestHandler<,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType);
 
                                 // Registration
                                 services.TryAddTransient(executeMappedRequestHandlerServiceType, executeMappedRequestHandlerImplementationType);
@@ -343,12 +350,12 @@ namespace Apizr
                         else if (returnType == typeof(Task))
                         {
                             // ServiceType
-                            var executeRequestType = typeof(ExecuteRequest<>).MakeGenericType(webApiType);
+                            var executeRequestType = typeof(ExecuteUnitRequest<>).MakeGenericType(webApiType);
                             var executeRequestResponseType = typeof(Unit);
                             var executeRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeRequestType, executeRequestResponseType);
 
                             // ImplementationType
-                            var executeRequestHandlerImplementationType = typeof(ExecuteRequestHandler<>).MakeGenericType(webApiType);
+                            var executeRequestHandlerImplementationType = typeof(ExecuteUnitRequestHandler<>).MakeGenericType(webApiType);
 
                             // Registration
                             services.TryAddTransient(executeRequestHandlerServiceType, executeRequestHandlerImplementationType);
@@ -361,6 +368,7 @@ namespace Apizr
                     var typedMediatorServiceType = typeof(IApizrMediator<>).MakeGenericType(webApi.Key);
                     var typedMediatorImplementationType = typeof(ApizrMediator<>).MakeGenericType(webApi.Key);
 
+                    // Register typed mediator
                     services.TryAddTransient(typedMediatorServiceType, typedMediatorImplementationType);
 
                     // Get or create and register a mediation registry

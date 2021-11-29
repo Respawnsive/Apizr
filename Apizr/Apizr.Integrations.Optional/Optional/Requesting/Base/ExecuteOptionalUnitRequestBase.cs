@@ -9,7 +9,7 @@ using Polly;
 
 namespace Apizr.Optional.Requesting.Base
 {
-    public abstract class ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData> : ExecuteRequestBase<Option<Unit, ApizrException>, TModelData>
+    public abstract class ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData> : ExecuteUnitRequestBase<TWebApi, TModelData, TApiData, Option<Unit, ApizrException>>
     {
         protected ExecuteOptionalUnitRequestBase(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData) : base(executeApiMethod, modelData)
         {
@@ -28,7 +28,7 @@ namespace Apizr.Optional.Requesting.Base
         }
     }
 
-    public abstract class ExecuteOptionalUnitRequestBase<TWebApi> : ExecuteRequestBase<Option<Unit, ApizrException>>
+    public abstract class ExecuteOptionalUnitRequestBase<TWebApi> : ExecuteUnitRequestBase<TWebApi, Option<Unit, ApizrException>>
     {
         protected ExecuteOptionalUnitRequestBase(Expression<Func<TWebApi, Task>> executeApiMethod) : base(executeApiMethod)
         {

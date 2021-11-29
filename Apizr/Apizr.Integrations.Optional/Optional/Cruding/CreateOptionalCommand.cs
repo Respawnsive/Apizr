@@ -4,13 +4,13 @@ using Polly;
 
 namespace Apizr.Optional.Cruding
 {
-    public class CreateOptionalCommand<TPayload> : CreateCommandBase<TPayload, Option<TPayload, ApizrException>>
+    public class CreateOptionalCommand<TModelData> : CreateCommandBase<TModelData, Option<TModelData, ApizrException>>
     {
-        public CreateOptionalCommand(TPayload payload) : base(payload)
+        public CreateOptionalCommand(TModelData modelData) : base(modelData)
         {
         }
 
-        public CreateOptionalCommand(TPayload payload, Context context) : base(payload, context)
+        public CreateOptionalCommand(TModelData modelData, Context context) : base(modelData, context)
         {
         }
     }

@@ -4,7 +4,7 @@ using Polly;
 
 namespace Apizr.Optional.Cruding
 {
-    public class ReadOptionalQuery<TResponse, TKey> : ReadQueryBase<Option<TResponse, ApizrException<TResponse>>, TKey>
+    public class ReadOptionalQuery<TResultData, TKey> : ReadQueryBase<Option<TResultData, ApizrException<TResultData>>, TKey>
     {
         public ReadOptionalQuery(TKey key) : base(key)
         {
@@ -23,7 +23,7 @@ namespace Apizr.Optional.Cruding
         }
     }
 
-    public class ReadOptionalQuery<TResponse> : ReadQueryBase<Option<TResponse, ApizrException<TResponse>>>
+    public class ReadOptionalQuery<TResultData> : ReadQueryBase<Option<TResultData, ApizrException<TResultData>>>
     {
         public ReadOptionalQuery(int key) : base(key)
         {

@@ -3,7 +3,7 @@ using Polly;
 
 namespace Apizr.Mediation.Cruding
 {
-    public class ReadQuery<TResponse, TKey> : ReadQueryBase<TResponse, TKey>
+    public class ReadQuery<TResultData, TKey> : ReadQueryBase<TResultData, TKey>
     {
         public ReadQuery(TKey key) : base(key)
         {
@@ -22,7 +22,7 @@ namespace Apizr.Mediation.Cruding
         }
     }
 
-    public class ReadQuery<TResponse> : ReadQueryBase<TResponse>
+    public class ReadQuery<TResultData> : ReadQueryBase<TResultData>
     {
         public ReadQuery(int key) : base(key)
         {

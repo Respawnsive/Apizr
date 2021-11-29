@@ -344,7 +344,7 @@ namespace Apizr
                             if (modelResponseType != null)
                             {
                                 // ServiceType
-                                var executeMappedRequestType = typeof(ExecuteOptionalRequest<,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType);
+                                var executeMappedRequestType = typeof(ExecuteOptionalResultRequest<,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType);
                                 var executeMappedRequestExceptionType = typeof(ApizrException<>).MakeGenericType(modelResponseType);
                                 var executeMappedRequestResponseType = typeof(Option<,>).MakeGenericType(modelResponseType, executeMappedRequestExceptionType);
                                 var executeMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeMappedRequestType, executeMappedRequestResponseType);
@@ -359,7 +359,7 @@ namespace Apizr
                         else if (returnType == typeof(Task))
                         {
                             // ServiceType
-                            var executeRequestType = typeof(ExecuteOptionalRequest<>).MakeGenericType(webApiType);
+                            var executeRequestType = typeof(ExecuteOptionalUnitRequest<>).MakeGenericType(webApiType);
                             var executeRequestResponseType = typeof(Option<Unit, ApizrException>);
                             var executeRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeRequestType, executeRequestResponseType);
 

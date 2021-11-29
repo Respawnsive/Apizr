@@ -4,24 +4,24 @@ using Polly;
 
 namespace Apizr.Mediation.Cruding
 {
-    public class UpdateCommand<TKey, TPayload> : UpdateCommandBase<TKey, TPayload, Unit>
+    public class UpdateCommand<TKey, TRequestData> : UpdateCommandBase<TKey, TRequestData, Unit>
     {
-        public UpdateCommand(TKey key, TPayload payload) : base(key, payload)
+        public UpdateCommand(TKey key, TRequestData requestData) : base(key, requestData)
         {
         }
 
-        public UpdateCommand(TKey key, TPayload payload, Context context) : base(key, payload, context)
+        public UpdateCommand(TKey key, TRequestData requestData, Context context) : base(key, requestData, context)
         {
         }
     }
 
-    public class UpdateCommand<TPayload> : UpdateCommandBase<TPayload>
+    public class UpdateCommand<TRequestData> : UpdateCommandBase<TRequestData>
     {
-        public UpdateCommand(int key, TPayload payload) : base(key, payload)
+        public UpdateCommand(int key, TRequestData requestData) : base(key, requestData)
         {
         }
 
-        public UpdateCommand(int key, TPayload payload, Context context) : base(key, payload, context)
+        public UpdateCommand(int key, TRequestData requestData, Context context) : base(key, requestData, context)
         {
         }
     }

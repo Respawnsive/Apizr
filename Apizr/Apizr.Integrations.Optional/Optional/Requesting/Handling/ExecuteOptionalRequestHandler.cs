@@ -14,7 +14,7 @@ namespace Apizr.Optional.Requesting.Handling
 {
     public class ExecuteOptionalRequestHandler<TWebApi, TModelResponse, TApiResponse> :
         ExecuteOptionalRequestHandlerBase<TWebApi, TModelResponse, TApiResponse,
-            ExecuteOptionalRequest<TWebApi, TModelResponse, TApiResponse>>
+            ExecuteOptionalResultRequest<TWebApi, TModelResponse, TApiResponse>>
     {
         public ExecuteOptionalRequestHandler(IMappingHandler mappingHandler, IApizrManager<TWebApi> webApiManager) :
             base(mappingHandler, webApiManager)
@@ -22,7 +22,7 @@ namespace Apizr.Optional.Requesting.Handling
         }
 
         public override async Task<Option<TModelResponse, ApizrException<TModelResponse>>> Handle(
-            ExecuteOptionalRequest<TWebApi, TModelResponse, TApiResponse> request, CancellationToken cancellationToken)
+            ExecuteOptionalResultRequest<TWebApi, TModelResponse, TApiResponse> request, CancellationToken cancellationToken)
         {
             try
             {
@@ -162,13 +162,13 @@ namespace Apizr.Optional.Requesting.Handling
         }
     }
 
-    public class ExecuteOptionalRequestHandler<TWebApi> : ExecuteOptionalRequestHandlerBase<TWebApi, ExecuteOptionalRequest<TWebApi>>
+    public class ExecuteOptionalRequestHandler<TWebApi> : ExecuteOptionalRequestHandlerBase<TWebApi, ExecuteOptionalUnitRequest<TWebApi>>
     {
         public ExecuteOptionalRequestHandler(IApizrManager<TWebApi> webApiManager) : base(webApiManager)
         {
         }
 
-        public override async Task<Option<Unit, ApizrException>> Handle(ExecuteOptionalRequest<TWebApi> request,
+        public override async Task<Option<Unit, ApizrException>> Handle(ExecuteOptionalUnitRequest<TWebApi> request,
             CancellationToken cancellationToken)
         {
             try

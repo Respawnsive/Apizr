@@ -16,7 +16,7 @@ namespace Apizr.Optional.Cruding.Handling
         where TModelEntity : class
         where TApiEntity : class
     {
-        public DeleteOptionalCommandHandler(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
+        public DeleteOptionalCommandHandler(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {
         }
 
@@ -48,7 +48,7 @@ namespace Apizr.Optional.Cruding.Handling
         where TModelEntity : class
         where TApiEntity : class
     {
-        public DeleteOptionalCommandHandler(IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
+        public DeleteOptionalCommandHandler(IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {
         }
 

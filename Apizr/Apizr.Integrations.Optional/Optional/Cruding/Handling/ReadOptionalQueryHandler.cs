@@ -2,7 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Extending;
-using Apizr.Mapping;
 using Apizr.Mediation.Cruding.Handling.Base;
 using Apizr.Requesting;
 using Optional;
@@ -15,7 +14,7 @@ namespace Apizr.Optional.Cruding.Handling
         where TModelEntity : class
         where TApiEntity : class
     {
-        public ReadOptionalQueryHandler(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
+        public ReadOptionalQueryHandler(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {
         }
 
@@ -25,15 +24,13 @@ namespace Apizr.Optional.Cruding.Handling
             {
                 return await request.SomeNotNull(new ApizrException<TModelEntity>(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                    .MapAsync(_ => CrudApiManager.ExecuteAsync((ctx, ct, api) => api.Read(request.Key, request.Priority, ctx, ct), request.Context,
+                    .MapAsync(_ => CrudApiManager.ExecuteAsync<TModelEntity, TApiEntity>((ctx, ct, api) => api.Read(request.Key, request.Priority, ctx, ct), request.Context,
                         cancellationToken))
-                    .MapAsync(result => Task.FromResult(Map<TApiEntity, TModelEntity>(result)))
                     .ConfigureAwait(false);
             }
-            catch (ApizrException<TApiEntity> e)
+            catch (ApizrException<TModelEntity> e)
             {
-                return Option.None<TModelEntity, ApizrException<TModelEntity>>(
-                    new ApizrException<TModelEntity>(e.InnerException, Map<TApiEntity, TModelEntity>(e.CachedResult)));
+                return Option.None<TModelEntity, ApizrException<TModelEntity>>(e);
             }
         }
     }
@@ -42,7 +39,7 @@ namespace Apizr.Optional.Cruding.Handling
         ReadQueryHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, ReadOptionalQuery<TModelEntity>, Option<TModelEntity, ApizrException<TModelEntity>>> 
         where TApiEntity : class
     {
-        public ReadOptionalQueryHandler(IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
+        public ReadOptionalQueryHandler(IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {
         }
 
@@ -52,15 +49,13 @@ namespace Apizr.Optional.Cruding.Handling
             {
                 return await request.SomeNotNull(new ApizrException<TModelEntity>(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                    .MapAsync(_ => CrudApiManager.ExecuteAsync((ctx, ct, api) => api.Read(request.Key, request.Priority, ctx, ct), request.Context,
+                    .MapAsync(_ => CrudApiManager.ExecuteAsync<TModelEntity, TApiEntity>((ctx, ct, api) => api.Read(request.Key, request.Priority, ctx, ct), request.Context,
                         cancellationToken))
-                    .MapAsync(result => Task.FromResult(Map<TApiEntity, TModelEntity>(result)))
                     .ConfigureAwait(false);
             }
-            catch (ApizrException<TApiEntity> e)
+            catch (ApizrException<TModelEntity> e)
             {
-                return Option.None<TModelEntity, ApizrException<TModelEntity>>(
-                    new ApizrException<TModelEntity>(e.InnerException, Map<TApiEntity, TModelEntity>(e.CachedResult)));
+                return Option.None<TModelEntity, ApizrException<TModelEntity>>(e);
             }
         }
     }

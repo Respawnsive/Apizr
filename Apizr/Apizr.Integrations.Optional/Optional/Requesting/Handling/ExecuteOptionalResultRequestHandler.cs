@@ -3,9 +3,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Extending;
-using Apizr.Mapping;
 using Apizr.Optional.Requesting.Handling.Base;
-using MediatR;
 using Optional;
 using Optional.Async.Extensions;
 using Polly;
@@ -178,14 +176,14 @@ namespace Apizr.Optional.Requesting.Handling
     }
 
     public class ExecuteOptionalResultRequestHandler<TWebApi, TApiData> : ExecuteOptionalResultRequestHandlerBase<TWebApi,
-        TApiData, ExecuteOptionalRequest<TWebApi, TApiData>>
+        TApiData, ExecuteOptionalResultRequest<TWebApi, TApiData>>
     {
         public ExecuteOptionalResultRequestHandler(IApizrManager<TWebApi> webApiManager) : base(webApiManager)
         {
         }
 
         public override async Task<Option<TApiData, ApizrException<TApiData>>> Handle(
-            ExecuteOptionalRequest<TWebApi, TApiData> request, CancellationToken cancellationToken)
+            ExecuteOptionalResultRequest<TWebApi, TApiData> request, CancellationToken cancellationToken)
         {
             try
             {

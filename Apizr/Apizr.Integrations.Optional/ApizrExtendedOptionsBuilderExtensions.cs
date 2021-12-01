@@ -323,7 +323,7 @@ namespace Apizr
                             }
 
                             // ServiceType
-                            var executeRequestType = typeof(ExecuteOptionalRequest<,>).MakeGenericType(webApiType, apiResponseType);
+                            var executeRequestType = typeof(ExecuteOptionalResultRequest<,>).MakeGenericType(webApiType, apiResponseType);
                             var executeRequestExceptionType = typeof(ApizrException<>).MakeGenericType(apiResponseType);
                             var executeRequestResponseType = typeof(Option<,>).MakeGenericType(apiResponseType, executeRequestExceptionType);
                             var executeRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeRequestType, executeRequestResponseType);

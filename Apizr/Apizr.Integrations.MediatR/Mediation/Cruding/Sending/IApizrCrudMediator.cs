@@ -177,79 +177,79 @@ namespace Apizr.Mediation.Cruding.Sending
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR returning mapped result
         /// </summary>
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
-        /// <typeparam name="TReadAllResult">The api result type to map from</typeparam>
+        /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>();
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>();
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR returning mapped result
         /// </summary>
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
-        /// <typeparam name="TReadAllResult">The api result type to map from</typeparam>
+        /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <param name="context">The Polly context</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(Context context);
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(Context context);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR returning mapped result
         /// </summary>
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
-        /// <typeparam name="TReadAllResult">The api result type to map from</typeparam>
+        /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(CancellationToken cancellationToken);
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(CancellationToken cancellationToken);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR with priority returning mapped result
         /// </summary>
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
-        /// <typeparam name="TReadAllResult">The api result type to map from</typeparam>
+        /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <param name="priority">The execution priority</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(int priority);
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(int priority);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR with priority returning mapped result
         /// </summary>
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
-        /// <typeparam name="TReadAllResult">The api result type to map from</typeparam>
+        /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <param name="priority">The execution priority</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(int priority,
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(int priority,
             CancellationToken cancellationToken);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR with priority returning mapped result
         /// </summary>
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
-        /// <typeparam name="TReadAllResult">The api result type to map from</typeparam>
+        /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(int priority, Context context);
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(int priority, Context context);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR with priority returning mapped result
         /// </summary>
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
-        /// <typeparam name="TReadAllResult">The api result type to map from</typeparam>
+        /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(Context context,
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(Context context,
             CancellationToken cancellationToken);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR with priority returning mapped result
         /// </summary>
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
-        /// <typeparam name="TReadAllResult">The api result type to map from</typeparam>
+        /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(int priority, Context context,
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(int priority, Context context,
             CancellationToken cancellationToken);
 
         #endregion
@@ -350,77 +350,77 @@ namespace Apizr.Mediation.Cruding.Sending
 
         #endregion
 
-        #region SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams)
+        #region SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams)
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR returning a mapped result
         /// </summary>
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
-        /// <typeparam name="TReadAllResult">The api result type to map from</typeparam>
+        /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
         /// <param name="readAllParams">The read all filters</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams readAllParams);
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR returning a mapped result
         /// </summary>
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
-        /// <typeparam name="TReadAllResult">The api result type to map from</typeparam>
+        /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="context">The Polly context</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Context context);
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Context context);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR returning a mapped result
         /// </summary>
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
-        /// <typeparam name="TReadAllResult">The api result type to map from</typeparam>
+        /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
             CancellationToken cancellationToken);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR with priority returning a mapped result
         /// </summary>
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
-        /// <typeparam name="TReadAllResult">The api result type to map from</typeparam>
+        /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="priority">The execution priority</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
             int priority);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR with priority returning a mapped result
         /// </summary>
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
-        /// <typeparam name="TReadAllResult">The api result type to map from</typeparam>
+        /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
             int priority, Context context);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR with priority returning a mapped result
         /// </summary>
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
-        /// <typeparam name="TReadAllResult">The api result type to map from</typeparam>
+        /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="priority">The execution priority</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
             int priority,
             CancellationToken cancellationToken);
 
@@ -428,27 +428,27 @@ namespace Apizr.Mediation.Cruding.Sending
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR returning a mapped result
         /// </summary>
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
-        /// <typeparam name="TReadAllResult">The api result type to map from</typeparam>
+        /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Context context,
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Context context,
             CancellationToken cancellationToken);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR with priority returning a mapped result
         /// </summary>
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
-        /// <typeparam name="TReadAllResult">The api result type to map from</typeparam>
+        /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
             int priority, Context context,
             CancellationToken cancellationToken);
 

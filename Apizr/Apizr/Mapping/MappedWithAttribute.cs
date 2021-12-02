@@ -5,7 +5,7 @@ namespace Apizr.Mapping
     /// <summary>
     /// Tells Apizr to map api request object with model object
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Parameter)]
     public class MappedWithAttribute : Attribute
     {
         /// <summary>

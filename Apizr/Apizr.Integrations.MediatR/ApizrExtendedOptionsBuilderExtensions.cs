@@ -337,7 +337,7 @@ namespace Apizr
                             if (modelResponseType != null)
                             {
                                 // ServiceType
-                                var executeMappedRequestType = typeof(ExecuteUnitRequest<,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType);
+                                var executeMappedRequestType = typeof(ExecuteResultRequest<,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType);
                                 var executeMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeMappedRequestType, modelResponseType);
 
                                 // ImplementationType

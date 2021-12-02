@@ -56,6 +56,9 @@ namespace Apizr
             {
                 #region Crud
 
+                // Register crud optional mediator
+                services.TryAddSingleton<IApizrCrudOptionalMediator, ApizrCrudOptionalMediator>();
+
                 // Crud entities auto registration
                 foreach (var crudEntity in apizrOptions.CrudEntities)
                 {
@@ -279,6 +282,7 @@ namespace Apizr
                         apiEntityReadAllResultType,
                         apiEntityReadAllParamsType);
 
+                    // Register typed crud optional mediator
                     services.TryAddTransient(typedCrudOptionalMediatorServiceType, typedCrudOptionalMediatorImplementationType);
 
                     // Get or create and register an optional mediation registry
@@ -299,6 +303,9 @@ namespace Apizr
                 #endregion
 
                 #region Classic
+
+                // Register optional mediator
+                services.TryAddSingleton<IApizrOptionalMediator, ApizrOptionalMediator>();
 
                 // Classic interfaces auto registration
                 foreach (var webApi in apizrOptions.WebApis)
@@ -329,7 +336,7 @@ namespace Apizr
                             var executeRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeRequestType, executeRequestResponseType);
 
                             // ImplementationType
-                            var executeRequestHandlerImplementationType = typeof(ExecuteOptionalRequestHandler<,>).MakeGenericType(webApiType, apiResponseType);
+                            var executeRequestHandlerImplementationType = typeof(ExecuteOptionalResultRequestHandler<,>).MakeGenericType(webApiType, apiResponseType);
 
                             // Registration
                             services.TryAddTransient(executeRequestHandlerServiceType, executeRequestHandlerImplementationType);
@@ -350,7 +357,7 @@ namespace Apizr
                                 var executeMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeMappedRequestType, executeMappedRequestResponseType);
 
                                 // ImplementationType
-                                var executeMappedRequestHandlerImplementationType = typeof(ExecuteOptionalRequestHandler<,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType);
+                                var executeMappedRequestHandlerImplementationType = typeof(ExecuteOptionalResultRequestHandler<,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType);
 
                                 // Registration
                                 services.TryAddTransient(executeMappedRequestHandlerServiceType, executeMappedRequestHandlerImplementationType);
@@ -364,7 +371,7 @@ namespace Apizr
                             var executeRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeRequestType, executeRequestResponseType);
 
                             // ImplementationType
-                            var executeRequestHandlerImplementationType = typeof(ExecuteOptionalRequestHandler<>).MakeGenericType(webApiType);
+                            var executeRequestHandlerImplementationType = typeof(ExecuteOptionalUnitRequestHandler<>).MakeGenericType(webApiType);
 
                             // Registration
                             services.TryAddTransient(executeRequestHandlerServiceType, executeRequestHandlerImplementationType);
@@ -377,6 +384,7 @@ namespace Apizr
                     var typedOptionalMediatorServiceType = typeof(IApizrOptionalMediator<>).MakeGenericType(webApi.Key);
                     var typedOptionalMediatorImplementationType = typeof(ApizrOptionalMediator<>).MakeGenericType(webApi.Key);
 
+                    // Register typed optional mediator
                     services.TryAddTransient(typedOptionalMediatorServiceType, typedOptionalMediatorImplementationType);
 
                     // Get or create and register an optional mediation registry

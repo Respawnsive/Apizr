@@ -346,7 +346,6 @@ namespace Apizr
                                     .FirstOrDefault(kvp => kvp.Value?.MappedWithType == apiResponseType).Key;
                             if (modelResponseType != null)
                             {
-
                                 // Mapped object
                                 var mappedParameterInfo = methodInfo.GetParameters().FirstOrDefault(p =>
                                     p.ParameterType.IsClass && !p.ParameterType.IsAbstract &&

@@ -313,14 +313,20 @@ namespace Apizr
                     foreach (var methodInfo in webApi.Key.GetMethods())
                     {
                         var returnType = methodInfo.ReturnType;
+
+                        #region Result
+
                         if (returnType.IsGenericType &&
-                            (methodInfo.ReturnType.GetGenericTypeDefinition() != typeof(Task<>)
-                             || methodInfo.ReturnType.GetGenericTypeDefinition() != typeof(IObservable<>)))
+                                            (methodInfo.ReturnType.GetGenericTypeDefinition() != typeof(Task<>)
+                                             || methodInfo.ReturnType.GetGenericTypeDefinition() != typeof(IObservable<>)))
                         {
                             var apiResponseType = returnType.GetGenericArguments()[0];
+                            
+                            #region Unmapped
+
                             if (apiResponseType.IsGenericType &&
-                                (apiResponseType.GetGenericTypeDefinition() == typeof(ApiResponse<>)
-                                 || apiResponseType.GetGenericTypeDefinition() == typeof(IApiResponse<>)))
+                                                    (apiResponseType.GetGenericTypeDefinition() == typeof(ApiResponse<>)
+                                                     || apiResponseType.GetGenericTypeDefinition() == typeof(IApiResponse<>)))
                             {
                                 apiResponseType = apiResponseType.GetGenericArguments()[0];
                             }
@@ -341,6 +347,10 @@ namespace Apizr
                             // Registration
                             services.TryAddTransient(executeRequestHandlerServiceType, executeRequestHandlerImplementationType);
 
+                            #endregion
+
+                            #region Mapped
+
                             // Mapped object
                             var modelResponseType =
                                 methodInfo.GetCustomAttribute<MappedWithAttribute>()?.MappedWithType ??
@@ -350,21 +360,55 @@ namespace Apizr
                                     .FirstOrDefault(kvp => kvp.Value?.MappedWithType == apiResponseType).Key;
                             if (modelResponseType != null)
                             {
-                                // ServiceType
-                                var executeMappedRequestType = typeof(ExecuteOptionalResultRequest<,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType);
-                                var executeMappedRequestExceptionType = typeof(ApizrException<>).MakeGenericType(modelResponseType);
-                                var executeMappedRequestResponseType = typeof(Option<,>).MakeGenericType(modelResponseType, executeMappedRequestExceptionType);
-                                var executeMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeMappedRequestType, executeMappedRequestResponseType);
+                                // Mapped object
+                                var mappedParameterInfo = methodInfo.GetParameters().FirstOrDefault(p =>
+                                    p.ParameterType.IsClass && !p.ParameterType.IsAbstract &&
+                                    p.ParameterType.GetCustomAttribute<MappedWithAttribute>() != null);
+                                if (mappedParameterInfo == null) // ExecuteOptionalResultRequest<TWebApi, TModelData, TApiData>
+                                {
+                                    // ServiceType
+                                    var executeMappedRequestType = typeof(ExecuteOptionalResultRequest<,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType);
+                                    var executeMappedRequestExceptionType = typeof(ApizrException<>).MakeGenericType(modelResponseType);
+                                    var executeMappedRequestResponseType = typeof(Option<,>).MakeGenericType(modelResponseType, executeMappedRequestExceptionType);
+                                    var executeMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeMappedRequestType, executeMappedRequestResponseType);
 
-                                // ImplementationType
-                                var executeMappedRequestHandlerImplementationType = typeof(ExecuteOptionalResultRequestHandler<,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType);
+                                    // ImplementationType
+                                    var executeMappedRequestHandlerImplementationType = typeof(ExecuteOptionalResultRequestHandler<,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType);
 
-                                // Registration
-                                services.TryAddTransient(executeMappedRequestHandlerServiceType, executeMappedRequestHandlerImplementationType);
-                            }
+                                    // Registration
+                                    services.TryAddTransient(executeMappedRequestHandlerServiceType, executeMappedRequestHandlerImplementationType);
+                                }
+                                else // ExecuteOptionalResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>
+                                {
+                                    // Mapped request
+                                    var modelRequestType = mappedParameterInfo.ParameterType.GetCustomAttribute<MappedWithAttribute>().MappedWithType;
+                                    var apiRequestType = mappedParameterInfo.ParameterType;
+
+                                    // ServiceType
+                                    var executeMappedRequestType = typeof(ExecuteOptionalResultRequest<,,,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType, apiRequestType, modelRequestType);
+                                    var executeMappedRequestExceptionType = typeof(ApizrException<>).MakeGenericType(modelResponseType);
+                                    var executeMappedRequestResponseType = typeof(Option<,>).MakeGenericType(modelResponseType, executeMappedRequestExceptionType);
+                                    var executeMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeMappedRequestType, executeMappedRequestResponseType);
+
+                                    // ImplementationType
+                                    var executeMappedRequestHandlerImplementationType = typeof(ExecuteOptionalResultRequestHandler<,,,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType, apiRequestType, modelRequestType);
+
+                                    // Registration
+                                    services.TryAddTransient(executeMappedRequestHandlerServiceType, executeMappedRequestHandlerImplementationType);
+                                }
+                            } 
+
+                            #endregion
                         }
+
+                        #endregion
+
+                        #region Unit
+
                         else if (returnType == typeof(Task))
                         {
+                            #region Unmapped
+
                             // ServiceType
                             var executeRequestType = typeof(ExecuteOptionalUnitRequest<>).MakeGenericType(webApiType);
                             var executeRequestResponseType = typeof(Option<Unit, ApizrException>);
@@ -375,7 +419,36 @@ namespace Apizr
 
                             // Registration
                             services.TryAddTransient(executeRequestHandlerServiceType, executeRequestHandlerImplementationType);
+
+                            #endregion
+                            
+                            #region Mapped
+
+                            // Mapped object
+                            var mappedParameterInfo = methodInfo.GetParameters().FirstOrDefault(p =>
+                                p.ParameterType.IsClass && !p.ParameterType.IsAbstract &&
+                                p.ParameterType.GetCustomAttribute<MappedWithAttribute>() != null);
+                            if (mappedParameterInfo != null)
+                            {
+                                var modelEntityType = mappedParameterInfo.ParameterType.GetCustomAttribute<MappedWithAttribute>().MappedWithType;
+                                var apiEntityType = mappedParameterInfo.ParameterType;
+
+                                // ServiceType
+                                var executeMappedRequestType = typeof(ExecuteOptionalUnitRequest<,,>).MakeGenericType(webApiType, modelEntityType, apiEntityType);
+                                var executeMappedRequestResponseType = typeof(Option<Unit, ApizrException>);
+                                var executeMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeMappedRequestType, executeMappedRequestResponseType);
+
+                                // ImplementationType
+                                var executeMappedRequestHandlerImplementationType = typeof(ExecuteOptionalUnitRequestHandler<,,>).MakeGenericType(webApiType, modelEntityType, apiEntityType);
+
+                                // Registration
+                                services.TryAddTransient(executeMappedRequestHandlerServiceType, executeMappedRequestHandlerImplementationType);
+                            }
+
+                            #endregion
                         }
+
+                        #endregion
                     }
 
                     #region Typed

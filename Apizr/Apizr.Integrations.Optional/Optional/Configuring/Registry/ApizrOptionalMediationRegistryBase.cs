@@ -20,13 +20,16 @@ namespace Apizr.Optional.Configuring.Registry
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public IApizrCrudOptionalMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> GetFor<T, TKey>() where T : class
-            => GetFor<T, TKey, IEnumerable<T>, IDictionary<string, object>>();
+        public IApizrCrudOptionalMediator<T, int, IEnumerable<T>, IDictionary<string, object>> GetCrudFor<T>() where T : class
+            => GetCrudFor<T, int, IEnumerable<T>, IDictionary<string, object>>();
 
-        public IApizrCrudOptionalMediator<T, TKey, TReadAllResult, IDictionary<string, object>> GetFor<T, TKey, TReadAllResult>() where T : class
-            => GetFor<T, TKey, TReadAllResult, IDictionary<string, object>>();
+        public IApizrCrudOptionalMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> GetCrudFor<T, TKey>() where T : class
+            => GetCrudFor<T, TKey, IEnumerable<T>, IDictionary<string, object>>();
 
-        public IApizrCrudOptionalMediator<T, TKey, TReadAllResult, TReadAllParams> GetFor<T, TKey, TReadAllResult, TReadAllParams>()
+        public IApizrCrudOptionalMediator<T, TKey, TReadAllResult, IDictionary<string, object>> GetCrudFor<T, TKey, TReadAllResult>() where T : class
+            => GetCrudFor<T, TKey, TReadAllResult, IDictionary<string, object>>();
+
+        public IApizrCrudOptionalMediator<T, TKey, TReadAllResult, TReadAllParams> GetCrudFor<T, TKey, TReadAllResult, TReadAllParams>()
             where T : class =>
             (IApizrCrudOptionalMediator<T, TKey, TReadAllResult, TReadAllParams>)ConcurrentRegistry[
                 typeof(IApizrCrudOptionalMediator<T, TKey, TReadAllResult, TReadAllParams>)].Invoke();
@@ -34,15 +37,18 @@ namespace Apizr.Optional.Configuring.Registry
         public IApizrOptionalMediator<TWebApi> GetFor<TWebApi>()
             => (IApizrOptionalMediator<TWebApi>)ConcurrentRegistry[typeof(TWebApi)].Invoke();
 
-        public bool TryGetFor<T, TKey>(
+        public bool TryGetCrudFor<T>(out IApizrCrudOptionalMediator<T, int, IEnumerable<T>, IDictionary<string, object>> mediator) where T : class
+            => TryGetCrudFor<T, int, IEnumerable<T>, IDictionary<string, object>>(out mediator);
+
+        public bool TryGetCrudFor<T, TKey>(
             out IApizrCrudOptionalMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> mediator) where T : class
-            => TryGetFor<T, TKey, IEnumerable<T>, IDictionary<string, object>>(out mediator);
+            => TryGetCrudFor<T, TKey, IEnumerable<T>, IDictionary<string, object>>(out mediator);
 
-        public bool TryGetFor<T, TKey, TReadAllResult>(
+        public bool TryGetCrudFor<T, TKey, TReadAllResult>(
             out IApizrCrudOptionalMediator<T, TKey, TReadAllResult, IDictionary<string, object>> mediator) where T : class
-            => TryGetFor<T, TKey, TReadAllResult, IDictionary<string, object>>(out mediator);
+            => TryGetCrudFor<T, TKey, TReadAllResult, IDictionary<string, object>>(out mediator);
 
-        public bool TryGetFor<T, TKey, TReadAllResult, TReadAllParams>(
+        public bool TryGetCrudFor<T, TKey, TReadAllResult, TReadAllParams>(
             out IApizrCrudOptionalMediator<T, TKey, TReadAllResult, TReadAllParams> mediator) where T : class
         {
             if (!ConcurrentRegistry.TryGetValue(typeof(IApizrCrudOptionalMediator<T, TKey, TReadAllResult, TReadAllParams>), out var mediatorFactory))
@@ -69,13 +75,16 @@ namespace Apizr.Optional.Configuring.Registry
 
         public int Count => ConcurrentRegistry.Count;
 
-        public bool ContainsFor<T, TKey>() where T : class
-            => ContainsFor<T, TKey, IEnumerable<T>, IDictionary<string, object>>();
+        public bool ContainsCrudFor<T>() where T : class
+            => ContainsCrudFor<T, int, IEnumerable<T>, IDictionary<string, object>>();
 
-        public bool ContainsFor<T, TKey, TReadAllResult>() where T : class
-            => ContainsFor<T, TKey, TReadAllResult, IDictionary<string, object>>();
+        public bool ContainsCrudFor<T, TKey>() where T : class
+            => ContainsCrudFor<T, TKey, IEnumerable<T>, IDictionary<string, object>>();
 
-        public bool ContainsFor<T, TKey, TReadAllResult, TReadAllParams>() where T : class
+        public bool ContainsCrudFor<T, TKey, TReadAllResult>() where T : class
+            => ContainsCrudFor<T, TKey, TReadAllResult, IDictionary<string, object>>();
+
+        public bool ContainsCrudFor<T, TKey, TReadAllResult, TReadAllParams>() where T : class
             => ConcurrentRegistry.ContainsKey(typeof(IApizrCrudOptionalMediator<T, TKey, TReadAllResult, TReadAllParams>));
 
         public bool ContainsFor<TWebApi>()

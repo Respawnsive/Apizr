@@ -146,7 +146,7 @@ namespace Apizr.Sample.Console
 
                 _reqResManager = apizrRegistry.GetFor<IReqResService>();
 
-                _userManager = apizrRegistry.GetFor<User, int, PagedResult<User>>();
+                _userManager = apizrRegistry.GetCrudFor<User, int, PagedResult<User>>();
 
 
                 System.Console.WriteLine("");

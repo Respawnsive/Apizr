@@ -19,29 +19,35 @@ namespace Apizr.Configuring.Registry
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public IApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>> GetFor<T, TKey>()
+        public IApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>> GetCrudFor<T>() where T : class
+            => GetFor<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>();
+
+        public IApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>> GetCrudFor<T, TKey>()
             where T : class
             => GetFor<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>>();
 
-        public IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>> GetFor<T, TKey, TReadAllResult>() 
+        public IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>> GetCrudFor<T, TKey, TReadAllResult>() 
             where T : class
             => GetFor<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>>();
 
-        public IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> GetFor<T, TKey, TReadAllResult, TReadAllParams>() 
+        public IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> GetCrudFor<T, TKey, TReadAllResult, TReadAllParams>() 
             where T : class
             => GetFor<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>();
 
         public IApizrManager<TWebApi> GetFor<TWebApi>()
             => (IApizrManager<TWebApi>)ConcurrentRegistry[typeof(TWebApi)].Invoke();
 
-        public bool TryGetFor<T, TKey>(out IApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>> manager) 
+        public bool TryGetCrudFor<T>(out IApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>> manager) where T : class
+            => TryGetFor<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>(out manager);
+
+        public bool TryGetCrudFor<T, TKey>(out IApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>> manager) 
             where T : class
             => TryGetFor<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>>(out manager);
 
-        public bool TryGetFor<T, TKey, TReadAllResult>(out IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>> manager) where T : class
+        public bool TryGetCrudFor<T, TKey, TReadAllResult>(out IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>> manager) where T : class
             => TryGetFor<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>>(out manager);
 
-        public bool TryGetFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> manager) where T : class
+        public bool TryGetCrudFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> manager) where T : class
             => TryGetFor<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>(out manager);
 
         public bool TryGetFor<TWebApi>(out IApizrManager<TWebApi> manager)
@@ -58,13 +64,16 @@ namespace Apizr.Configuring.Registry
 
         public int Count => ConcurrentRegistry.Count;
 
-        public bool ContainsFor<T, TKey>() where T : class
+        public bool ContainsCrudFor<T>() where T : class
+            => ContainsFor<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>();
+
+        public bool ContainsCrudFor<T, TKey>() where T : class
             => ContainsFor<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>>();
 
-        public bool ContainsFor<T, TKey, TReadAllResult>() where T : class
+        public bool ContainsCrudFor<T, TKey, TReadAllResult>() where T : class
             => ContainsFor<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>>();
 
-        public bool ContainsFor<T, TKey, TReadAllResult, TReadAllParams>() where T : class
+        public bool ContainsCrudFor<T, TKey, TReadAllResult, TReadAllParams>() where T : class
             => ContainsFor<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>();
 
         public bool ContainsFor<TWebApi>()

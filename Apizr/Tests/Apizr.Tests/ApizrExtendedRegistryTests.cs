@@ -106,13 +106,9 @@ namespace Apizr.Tests
 
             var serviceProvider = services.BuildServiceProvider();
             var registry = serviceProvider.GetService<IApizrExtendedRegistry>();
-            var reqResManager = serviceProvider.GetService<IApizrManager<IReqResService>>();
-            var httpBinManager = serviceProvider.GetService<IApizrManager<IHttpBinService>>();
             var userManager = serviceProvider.GetService<IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>>>();
 
             registry.Should().NotBeNull();
-            reqResManager.Should().NotBeNull();
-            httpBinManager.Should().NotBeNull();
             userManager.Should().NotBeNull();
         }
 

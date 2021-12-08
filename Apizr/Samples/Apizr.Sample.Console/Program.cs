@@ -184,7 +184,8 @@ namespace Apizr.Sample.Console
                                     //.WithInMemoryCacheHandler()
                                     //.WithCacheHandler<AkavacheCacheHandler>()
                                     .WithAkavacheCacheHandler()
-                                    .WithLogging());
+                                    .WithLogging()
+                                    .WithAutoMapperMappingHandler());
 
 
                             /*
@@ -281,7 +282,7 @@ namespace Apizr.Sample.Console
                                         optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>()
                                             .WithMediation()
                                             .WithOptionalMediation()
-                                            .WithMappingHandler<AutoMapperMappingHandler>()
+                                            .WithAutoMapperMappingHandler()
                                             .WithLogging(), typeof(User),
                                         typeof(Program));
 
@@ -456,8 +457,8 @@ namespace Apizr.Sample.Console
                         // Classic auto mapped request and result
                         var minUser = new MinUser { Name = "John" };
                         var createdMinUser = await _mediator.Send(
-                            new ExecuteUnitRequest<IReqResService, MinUser, User>((ct, api, mapper) =>
-                                api.CreateUser(mapper.Map<MinUser, User>(minUser), ct)), CancellationToken.None);
+                            new ExecuteUnitRequest<IReqResService, MinUser, User>((ct, api, mappedUser) =>
+                                api.CreateUser(mappedUser, ct), minUser), CancellationToken.None);
 
                         // Classic Auto mapped result only
                         //userInfos = await _mediator.Send(new ExecuteRequest<IReqResService, UserInfos, UserDetails>((ct, api) => api.GetUserAsync(userChoice, ct)), CancellationToken.None);

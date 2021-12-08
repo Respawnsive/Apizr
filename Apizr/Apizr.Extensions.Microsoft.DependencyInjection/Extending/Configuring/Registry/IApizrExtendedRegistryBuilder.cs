@@ -110,10 +110,25 @@ namespace Apizr.Extending.Configuring.Registry
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
         /// </summary>
+        /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="CrudEntityAttribute"/></param>
+        /// <returns></returns>
+        TApizrExtendedRegistryBuilder AddCrudFor(params Type[] assemblyMarkerTypes);
+
+        /// <summary>
+        /// Register <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
+        /// </summary>
+        /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
+        /// <param name="assemblies">Any assembly to scan for <see cref="CrudEntityAttribute"/></param>
+        /// <returns></returns>
+        TApizrExtendedRegistryBuilder AddCrudFor(params Assembly[] assemblies);
+
+        /// <summary>
+        /// Register <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
+        /// </summary>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudFor(Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null,
+        TApizrExtendedRegistryBuilder AddCrudFor(Action<TApizrExtendedProperOptionsBuilder> optionsBuilder,
             params Type[] assemblyMarkerTypes);
 
         /// <summary>
@@ -122,8 +137,24 @@ namespace Apizr.Extending.Configuring.Registry
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <param name="assemblies">Any assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudFor(Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null,
+        TApizrExtendedRegistryBuilder AddCrudFor(Action<TApizrExtendedProperOptionsBuilder> optionsBuilder,
             params Assembly[] assemblies);
+
+        /// <summary>
+        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
+        /// </summary>
+        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
+        /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="CrudEntityAttribute"/></param>
+        /// <returns></returns>
+        TApizrExtendedRegistryBuilder AddCrudFor(Type apizrManagerType, params Type[] assemblyMarkerTypes);
+
+        /// <summary>
+        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
+        /// </summary>
+        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
+        /// <param name="assemblies">Any assembly to scan for <see cref="CrudEntityAttribute"/></param>
+        /// <returns></returns>
+        TApizrExtendedRegistryBuilder AddCrudFor(Type apizrManagerType, params Assembly[] assemblies);
 
         /// <summary>
         /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
@@ -133,7 +164,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
         TApizrExtendedRegistryBuilder AddCrudFor(Type apizrManagerType,
-            Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes);
+            Action<TApizrExtendedProperOptionsBuilder> optionsBuilder, params Type[] assemblyMarkerTypes);
 
         /// <summary>
         /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
@@ -143,7 +174,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// <param name="assemblies">Any assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
         TApizrExtendedRegistryBuilder AddCrudFor(Type apizrManagerType,
-            Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies);
+            Action<TApizrExtendedProperOptionsBuilder> optionsBuilder, params Assembly[] assemblies);
 
         #endregion
 

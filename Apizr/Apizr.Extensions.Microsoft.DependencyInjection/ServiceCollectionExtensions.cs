@@ -226,6 +226,15 @@ namespace Apizr
             if (!crudedType.GetTypeInfo().IsClass)
                 throw new ArgumentException($"{crudedType.Name} is not a class", nameof(crudedType));
 
+            var crudAttribute = crudedType.GetCustomAttribute<CrudEntityAttribute>();
+            if (crudAttribute != null)
+            {
+                if (optionsBuilder == null)
+                    optionsBuilder = builder => builder.WithBaseAddress(crudAttribute.BaseUri);
+                else
+                    optionsBuilder += builder => builder.WithBaseAddress(crudAttribute.BaseUri);
+            }
+
             Type modelEntityType = null;
             if (typeof(MappedEntity<,>).IsAssignableFromGenericType(crudedType))
             {
@@ -256,7 +265,7 @@ namespace Apizr
                 throw new ArgumentException(
                     $"{apizrManagerType} must inherit from {typeof(IApizrManager<>)}", nameof(apizrManagerType));
 
-            var crudAttribute = new CrudEntityAttribute(null, crudedKeyType, crudedReadAllResultType, crudedReadAllParamsType, modelEntityType);
+            crudAttribute = new CrudEntityAttribute(crudAttribute?.BaseUri, crudedKeyType, crudedReadAllResultType, crudedReadAllParamsType, modelEntityType);
             if (optionsBuilder == null)
                 optionsBuilder = builder => builder.ApizrOptions.CrudEntities.Add(crudedType, crudAttribute);
             else
@@ -271,6 +280,26 @@ namespace Apizr
                     readAllResultType, crudedReadAllParamsType)),
                 CreateApizrExtendedCommonOptions(), optionsBuilder);
         }
+
+        /// <summary>
+        /// Register <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="CrudEntityAttribute"/></param>
+        /// <returns></returns>
+        public static IServiceCollection AddApizrCrudFor(this IServiceCollection services, params Type[] assemblyMarkerTypes) =>
+            AddApizrCrudFor(services, typeof(ApizrManager<>), null,
+                assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
+
+        /// <summary>
+        /// Register <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="assemblies">Any assembly to scan for <see cref="CrudEntityAttribute"/></param>
+        /// <returns></returns>
+        public static IServiceCollection AddApizrCrudFor(this IServiceCollection services, params Assembly[] assemblies) =>
+            AddApizrCrudFor(services, typeof(ApizrManager<>), null,
+                assemblies);
 
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
@@ -294,6 +323,28 @@ namespace Apizr
         public static IServiceCollection AddApizrCrudFor(this IServiceCollection services,
             Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies) =>
             AddApizrCrudFor(services, typeof(ApizrManager<>), optionsBuilder,
+                assemblies);
+
+        /// <summary>
+        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
+        /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="CrudEntityAttribute"/></param>
+        /// <returns></returns>
+        public static IServiceCollection AddApizrCrudFor(this IServiceCollection services, Type apizrManagerType, params Type[] assemblyMarkerTypes) =>
+            AddApizrCrudFor(services, apizrManagerType, null,
+                assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
+
+        /// <summary>
+        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
+        /// <param name="assemblies">Any assembly to scan for <see cref="CrudEntityAttribute"/></param>
+        /// <returns></returns>
+        public static IServiceCollection AddApizrCrudFor(this IServiceCollection services, Type apizrManagerType, params Assembly[] assemblies) =>
+            AddApizrCrudFor(services, apizrManagerType, null,
                 assemblies);
 
         /// <summary>
@@ -677,10 +728,6 @@ namespace Apizr
             {
                 Uri.TryCreate(webApiAttribute.BaseUri, UriKind.RelativeOrAbsolute, out baseAddress);
                 commonOptions.WebApis.Add(webApiType, webApiAttribute);
-                //if (properOptionsBuilder == null)
-                //    properOptionsBuilder = sourceBuilder => sourceBuilder.ApizrOptions.WebApis.Add(webApiType, webApiAttribute);
-                //else
-                //    properOptionsBuilder += sourceBuilder => sourceBuilder.ApizrOptions.WebApis.Add(webApiType, webApiAttribute);
             }
 
             LogAttribute logAttribute;

@@ -81,7 +81,16 @@ namespace Apizr.Extending.Configuring.Registry
             if (!crudedType.GetTypeInfo().IsClass)
                 throw new ArgumentException($"{crudedType.Name} is not a class", nameof(crudedType));
 
-            Type modelEntityType = null;
+            var crudAttribute = crudedType.GetCustomAttribute<CrudEntityAttribute>();
+            if (crudAttribute != null)
+            {
+                if (optionsBuilder == null)
+                    optionsBuilder = builder => builder.WithBaseAddress(crudAttribute.BaseUri);
+                else
+                    optionsBuilder += builder => builder.WithBaseAddress(crudAttribute.BaseUri);
+            }
+
+            Type modelEntityType;
             if (typeof(MappedEntity<,>).IsAssignableFromGenericType(crudedType))
             {
                 var entityTypes = crudedType.GetGenericArguments();
@@ -98,20 +107,24 @@ namespace Apizr.Extending.Configuring.Registry
                 throw new ArgumentException($"{crudedKeyType.Name} is not primitive", nameof(crudedKeyType));
 
             if ((!typeof(IEnumerable<>).IsAssignableFromGenericType(crudedReadAllResultType) &&
-                !crudedReadAllResultType.IsClass) || !crudedReadAllResultType.IsGenericType)
+                 !crudedReadAllResultType.IsClass) || !crudedReadAllResultType.IsGenericType)
                 throw new ArgumentException(
-                    $"{crudedReadAllResultType.Name} must inherit from {typeof(IEnumerable<>)} or be a generic class", nameof(crudedReadAllResultType));
+                    $"{crudedReadAllResultType.Name} must inherit from {typeof(IEnumerable<>)} or be a generic class",
+                    nameof(crudedReadAllResultType));
 
             if (!typeof(IDictionary<string, object>).IsAssignableFrom(crudedReadAllParamsType) &&
                 !crudedReadAllParamsType.IsClass)
                 throw new ArgumentException(
-                    $"{crudedReadAllParamsType.Name} must inherit from {typeof(IDictionary<string, object>)} or be a class", nameof(crudedReadAllParamsType));
+                    $"{crudedReadAllParamsType.Name} must inherit from {typeof(IDictionary<string, object>)} or be a class",
+                    nameof(crudedReadAllParamsType));
 
             if (!typeof(IApizrManager<>).IsAssignableFromGenericType(apizrManagerType))
                 throw new ArgumentException(
                     $"{apizrManagerType} must inherit from {typeof(IApizrManager<>)}", nameof(apizrManagerType));
 
-            var crudAttribute = new CrudEntityAttribute(null, crudedKeyType, crudedReadAllResultType, crudedReadAllParamsType, modelEntityType);
+            crudAttribute = new CrudEntityAttribute(crudAttribute?.BaseUri, crudedKeyType, crudedReadAllResultType,
+                crudedReadAllParamsType, modelEntityType);
+
             CommonOptions.CrudEntities.Add(crudedType, crudAttribute);
 
             var readAllResultType = crudedReadAllResultType.MakeGenericTypeIfNeeded(crudedType);
@@ -122,6 +135,14 @@ namespace Apizr.Extending.Configuring.Registry
                     readAllResultType, crudedReadAllParamsType)), optionsBuilder);
         }
 
+        public IApizrExtendedRegistryBuilder AddCrudFor(params Type[] assemblyMarkerTypes) =>
+            AddCrudFor(typeof(ApizrManager<>), null,
+                assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
+
+        public IApizrExtendedRegistryBuilder AddCrudFor(params Assembly[] assemblies) =>
+            AddCrudFor(typeof(ApizrManager<>), null,
+                assemblies);
+
         public IApizrExtendedRegistryBuilder AddCrudFor(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes) =>
             AddCrudFor(typeof(ApizrManager<>), optionsBuilder,
                 assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
@@ -130,13 +151,23 @@ namespace Apizr.Extending.Configuring.Registry
             AddCrudFor(typeof(ApizrManager<>), optionsBuilder,
                 assemblies);
 
-        public IApizrExtendedRegistryBuilder AddCrudFor(Type apizrManagerType, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null,
+        public IApizrExtendedRegistryBuilder AddCrudFor(Type apizrManagerType,
+            params Type[] assemblyMarkerTypes) =>
+            AddCrudFor(apizrManagerType, null,
+                assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
+
+        public IApizrExtendedRegistryBuilder AddCrudFor(Type apizrManagerType,
+            params Assembly[] assemblies) =>
+            AddCrudFor(apizrManagerType, null,
+                assemblies);
+
+        public IApizrExtendedRegistryBuilder AddCrudFor(Type apizrManagerType, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder,
             params Type[] assemblyMarkerTypes) =>
             AddCrudFor(apizrManagerType, optionsBuilder,
                 assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
 
         public IApizrExtendedRegistryBuilder AddCrudFor(Type apizrManagerType,
-            Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null,
+            Action<IApizrExtendedProperOptionsBuilder> optionsBuilder,
             params Assembly[] assemblies)
         {
             if (!assemblies.Any())

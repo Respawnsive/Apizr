@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Reflection;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Logging;
 using Apizr.Policing;
+using Apizr.Requesting;
 using Apizr.Tests.Helpers;
 using Apizr.Tests.Models;
 using FluentAssertions;
@@ -16,6 +20,7 @@ using MonkeyCache.FileStore;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
+using Refit;
 using Xunit;
 using IHttpBinService = Apizr.Tests.Apis.IHttpBinService;
 using IReqResService = Apizr.Tests.Apis.IReqResService;
@@ -26,6 +31,8 @@ namespace Apizr.Tests
     public class ApizrExtendedRegistryTests
     {
         private readonly IPolicyRegistry<string> _policyRegistry;
+        private readonly RefitSettings _refitSettings;
+        private readonly Assembly _assembly;
 
         public ApizrExtendedRegistryTests()
         {
@@ -40,7 +47,15 @@ namespace Apizr.Tests
                     }, LoggedPolicies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
                 }
             };
-            
+
+            var opts = new JsonSerializerOptions
+            {
+                NumberHandling = JsonNumberHandling.AllowReadingFromString
+            };
+            _refitSettings = new RefitSettings(new SystemTextJsonContentSerializer(opts));
+
+            _assembly = Assembly.GetExecutingAssembly();
+
             Barrel.ApplicationId = nameof(ApizrExtendedRegistryTests);
         }
 
@@ -50,11 +65,13 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
             services.AddApizr(registry => registry
                 .AddFor<IReqResService>()
-                .AddFor<IHttpBinService>());
+                .AddFor<IHttpBinService>()
+                .AddCrudFor<User, int, PagedResult<User>, IDictionary<string, object>>());
 
             services.Should().Contain(x => x.ServiceType == typeof(IApizrExtendedRegistry));
             services.Should().Contain(x => x.ServiceType == typeof(IApizrManager<IReqResService>));
             services.Should().Contain(x => x.ServiceType == typeof(IApizrManager<IHttpBinService>));
+            services.Should().Contain(x => x.ServiceType == typeof(IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>>));
         }
 
         [Fact]
@@ -64,16 +81,39 @@ namespace Apizr.Tests
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
                 .AddFor<IReqResService>()
-                .AddFor<IHttpBinService>());
+                .AddFor<IHttpBinService>()
+                .AddCrudFor<User, int, PagedResult<User>, IDictionary<string, object>>());
 
             var serviceProvider = services.BuildServiceProvider();
             var registry = serviceProvider.GetService<IApizrExtendedRegistry>();
             var reqResManager = serviceProvider.GetService<IApizrManager<IReqResService>>();
             var httpBinManager = serviceProvider.GetService<IApizrManager<IHttpBinService>>();
+            var userManager = serviceProvider.GetService<IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>>>();
 
             registry.Should().NotBeNull();
             reqResManager.Should().NotBeNull();
             httpBinManager.Should().NotBeNull();
+            userManager.Should().NotBeNull();
+        }
+
+        [Fact]
+        public void ServiceProvider_Should_Resolve_Registry_And_Scanned_Managers()
+        {
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddApizr(registry => registry
+                .AddCrudFor(_assembly));
+
+            var serviceProvider = services.BuildServiceProvider();
+            var registry = serviceProvider.GetService<IApizrExtendedRegistry>();
+            var reqResManager = serviceProvider.GetService<IApizrManager<IReqResService>>();
+            var httpBinManager = serviceProvider.GetService<IApizrManager<IHttpBinService>>();
+            var userManager = serviceProvider.GetService<IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>>>();
+
+            registry.Should().NotBeNull();
+            reqResManager.Should().NotBeNull();
+            httpBinManager.Should().NotBeNull();
+            userManager.Should().NotBeNull();
         }
 
         [Fact]
@@ -301,16 +341,43 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Calling_WithMappingHandler_Should_Map_Data()
+        public async Task Calling_WithAutoMapperMappingHandler_Should_Map_Data()
         {
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(_assembly);
             services.AddApizr(
                 registry => registry
                     .AddFor<IReqResService>(),
                 config => config
+                    .WithRefitSettings(_refitSettings)
                     .WithAutoMapperMappingHandler());
+
+            var serviceProvider = services.BuildServiceProvider();
+            var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
+
+            var minUser = new MinUser { Name = "John" };
+
+            // This one should succeed
+            var result = await reqResManager.ExecuteAsync<MinUser, User>((api, user) => api.CreateUser(user, CancellationToken.None), minUser);
+
+            result.Should().NotBeNull();
+            result.Name.Should().Be(minUser.Name);
+            result.Id.Should().BeGreaterThanOrEqualTo(1);
+        }
+
+        [Fact]
+        public async Task Calling_WithMappingHandler_Should_Map_Data()
+        {
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddAutoMapper(_assembly);
+            services.AddApizr(
+                registry => registry
+                    .AddFor<IReqResService>(),
+                config => config
+                    .WithRefitSettings(_refitSettings)
+                    .WithMappingHandler<AutoMapperMappingHandler>());
 
             var serviceProvider = services.BuildServiceProvider();
             var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();

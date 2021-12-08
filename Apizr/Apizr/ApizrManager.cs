@@ -2161,8 +2161,15 @@ namespace Apizr
             {
                 if (typeof(TSource) == typeof(TDestination))
                     destination = (TDestination)Convert.ChangeType(source, typeof(TDestination));
-                else if (_mappingHandler.GetType() != typeof(VoidMappingHandler))
+                else
+                {
+                    if (_mappingHandler.GetType() == typeof(VoidMappingHandler))
+                        throw new NotImplementedException(
+                            $"You asked to map data but did not provide any data mapping handler. Please use ");
+                        
                     destination = _mappingHandler.Map<TSource, TDestination>(source);
+
+                }
             }
             catch (Exception e)
             {
@@ -2332,22 +2339,8 @@ namespace Apizr
         {
             switch (expression)
             {
-                case Expression<Func<TWebApi, Task>> executeApiMethod:
-                    return GetMethodCallExpression(executeApiMethod.Body);
-                case Expression<Func<Context, TWebApi, Task>> executeApiMethod:
-                    return GetMethodCallExpression(executeApiMethod.Body);
-                case Expression<Func<TWebApi, IMappingHandler, Task>> executeApiMethod:
-                    return GetMethodCallExpression(executeApiMethod.Body);
-                case Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod:
-                    return GetMethodCallExpression(executeApiMethod.Body);
-                case Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod:
-                    return GetMethodCallExpression(executeApiMethod.Body);
-                case Expression<Func<Context, TWebApi, IMappingHandler, Task>> executeApiMethod:
-                    return GetMethodCallExpression(executeApiMethod.Body);
-                case Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task>> executeApiMethod:
-                    return GetMethodCallExpression(executeApiMethod.Body);
-                case Expression<Func<Context, CancellationToken, TWebApi, IMappingHandler, Task>> executeApiMethod:
-                    return GetMethodCallExpression(executeApiMethod.Body);
+                case LambdaExpression lambdaExpression:
+                    return GetMethodCallExpression(lambdaExpression.Body);
                 case InvocationExpression methodInvocationBody:
                     {
                         var methodCallExpression = (MethodCallExpression)methodInvocationBody.Expression;
@@ -2365,22 +2358,8 @@ namespace Apizr
         {
             switch (expression)
             {
-                case Expression<Func<TWebApi, Task<TResult>>> executeApiMethod:
-                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
-                case Expression<Func<Context, TWebApi, Task<TResult>>> executeApiMethod:
-                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
-                case Expression<Func<TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod:
-                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
-                case Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod:
-                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
-                case Expression<Func<Context, CancellationToken, TWebApi, Task<TResult>>> executeApiMethod:
-                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
-                case Expression<Func<Context, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod:
-                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
-                case Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod:
-                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
-                case Expression<Func<Context, CancellationToken, TWebApi, IMappingHandler, Task<TResult>>> executeApiMethod:
-                    return GetMethodCallExpression<TResult>(executeApiMethod.Body);
+                case LambdaExpression lambdaExpression:
+                    return GetMethodCallExpression<TResult>(lambdaExpression.Body);
                 case InvocationExpression methodInvocationBody:
                     {
                         var methodCallExpression = (MethodCallExpression)methodInvocationBody.Expression;

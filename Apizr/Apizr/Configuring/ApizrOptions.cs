@@ -67,12 +67,7 @@ namespace Apizr.Configuring
         public Func<RefitSettings> RefitSettingsFactory
         {
             get => _refitSettingsFactory;
-            set => _refitSettingsFactory = () =>
-            {
-                var refitSettings = value.Invoke();
-                ContentSerializer = refitSettings.ContentSerializer;
-                return refitSettings;
-            };
+            set => _refitSettingsFactory = () => RefitSettings = value.Invoke();
         }
 
         public Func<IConnectivityHandler> ConnectivityHandlerFactory { get; set; }
@@ -99,6 +94,6 @@ namespace Apizr.Configuring
         public LogLevel LogLevel => _apizrOptions.LogLevel;
         public ILogger Logger => _logger;
         public string[] PolicyRegistryKeys => _apizrOptions.PolicyRegistryKeys;
-        public IHttpContentSerializer ContentSerializer => _apizrOptions.ContentSerializer;
+        public RefitSettings RefitSettings => _apizrOptions.RefitSettings;
     }
 }

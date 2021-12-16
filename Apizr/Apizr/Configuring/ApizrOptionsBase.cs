@@ -19,6 +19,6 @@ namespace Apizr.Configuring
         public Type WebApiType { get; }
         public Uri BaseAddress { get; protected set; }
         public string[] PolicyRegistryKeys { get; }
-        public IHttpContentSerializer ContentSerializer { get; protected set; }
+        public RefitSettings RefitSettings { get; protected set; }
     }
 }

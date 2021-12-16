@@ -9,8 +9,8 @@ namespace Apizr.Configuring.Common
     public interface IApizrCommonOptionsBase : IApizrSharedOptionsBase
     {
         /// <summary>
-        /// HttpContent serializer
+        /// Refit settings
         /// </summary>
-        IHttpContentSerializer ContentSerializer { get; }
+        RefitSettings RefitSettings { get; }
     }
 }

@@ -583,18 +583,17 @@ namespace Apizr
             
             var webApiFriendlyName = properOptions.WebApiType.GetFriendlyName();
             var apizrOptions = CreateApizrExtendedOptions(commonOptions, properOptions, optionsBuilder);
+            var apizrOptionsRegistrationType = typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType);
 
             var builder = services.AddHttpClient(ForType(apizrOptions.WebApiType))
                 .ConfigurePrimaryHttpMessageHandler(serviceProvider =>
                 {
-                    var httpClientHandler = apizrOptions.HttpClientHandlerFactory.Invoke(serviceProvider);
+                    var options = (IApizrExtendedOptions)serviceProvider.GetRequiredService(apizrOptionsRegistrationType);
+                    var httpClientHandler = options.HttpClientHandlerFactory.Invoke(serviceProvider);
                     var logger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName);
-                    apizrOptions.LogLevelFactory.Invoke(serviceProvider);
-                    apizrOptions.TrafficVerbosityFactory.Invoke(serviceProvider);
-                    apizrOptions.HttpTracerModeFactory.Invoke(serviceProvider);
-                    var handlerBuilder = new ExtendedHttpHandlerBuilder(httpClientHandler, logger, apizrOptions);
+                    var handlerBuilder = new ExtendedHttpHandlerBuilder(httpClientHandler, logger, options);
 
-                    if (apizrOptions.PolicyRegistryKeys != null && apizrOptions.PolicyRegistryKeys.Any())
+                    if (options.PolicyRegistryKeys != null && options.PolicyRegistryKeys.Any())
                     {
                         IReadOnlyPolicyRegistry<string> policyRegistry = null;
                         try
@@ -603,13 +602,13 @@ namespace Apizr
                         }
                         catch (Exception)
                         {
-                            logger.Log(apizrOptions.LogLevel,
+                            logger.Log(options.LogLevel,
                                 $"Global policies: You get some global policies but didn't register a {nameof(PolicyRegistry)} instance. Global policies will be ignored for  for {webApiFriendlyName} instance");
                         }
 
                         if (policyRegistry != null)
                         {
-                            foreach (var policyRegistryKey in apizrOptions.PolicyRegistryKeys)
+                            foreach (var policyRegistryKey in options.PolicyRegistryKeys)
                             {
                                 if (policyRegistry.TryGet<IsPolicy>(policyRegistryKey, out var registeredPolicy))
                                 {
@@ -623,9 +622,9 @@ namespace Apizr
                                                     if (!context.TryGetLogger(out var contextLogger, out var logLevel, out var verbosity, out var tracerMode))
                                                     {
                                                         contextLogger = logger;
-                                                        logLevel = apizrOptions.LogLevel;
-                                                        verbosity = apizrOptions.TrafficVerbosity;
-                                                        tracerMode = apizrOptions.HttpTracerMode;
+                                                        logLevel = options.LogLevel;
+                                                        verbosity = options.TrafficVerbosity;
+                                                        tracerMode = options.HttpTracerMode;
 
                                                         context.WithLogger(contextLogger, logLevel, verbosity, tracerMode);
                                                         HttpRequestMessageExtensions.SetPolicyExecutionContext(request, context);
@@ -642,29 +641,31 @@ namespace Apizr
                         }
                     }
 
-                    foreach (var delegatingHandlerExtendedFactory in apizrOptions.DelegatingHandlersExtendedFactories)
-                        handlerBuilder.AddHandler(delegatingHandlerExtendedFactory.Invoke(serviceProvider, apizrOptions));
+                    foreach (var delegatingHandlerExtendedFactory in options.DelegatingHandlersExtendedFactories)
+                        handlerBuilder.AddHandler(delegatingHandlerExtendedFactory.Invoke(serviceProvider, options));
 
-                    var primaryMessageHandler = handlerBuilder.GetPrimaryHttpMessageHandler(logger, apizrOptions);
+                    var primaryMessageHandler = handlerBuilder.GetPrimaryHttpMessageHandler(logger, options);
 
                     return primaryMessageHandler;
                 })
                 .AddTypedClient(typeof(ILazyFactory<>).MakeGenericType(apizrOptions.WebApiType),
                     (client, serviceProvider) =>
                     {
+                        var options = (IApizrExtendedOptions)serviceProvider.GetRequiredService(apizrOptionsRegistrationType);
+
                         if (client.BaseAddress == null)
                         {
-                            client.BaseAddress = apizrOptions.BaseAddressFactory.Invoke(serviceProvider);
+                            client.BaseAddress = options.BaseAddress;
                             if (client.BaseAddress == null)
                                 throw new ArgumentNullException(nameof(client.BaseAddress), $"You must provide a valid web api uri with the {nameof(WebApiAttribute)} or the options builder");
                         }
 
-                        return typeof(LazyFactory<>).MakeGenericType(apizrOptions.WebApiType)
+                        return typeof(LazyFactory<>).MakeGenericType(options.WebApiType)
                             .GetConstructor(new[] { typeof(Func<object>) })
                             ?.Invoke(new object[]
                             {
-                                new Func<object>(() => RestService.For(apizrOptions.WebApiType, client,
-                                    apizrOptions.RefitSettingsFactory(serviceProvider)))
+                                new Func<object>(() => RestService.For(options.WebApiType, client,
+                                    options.RefitSettings))
                             });
                     });
 
@@ -687,9 +688,20 @@ namespace Apizr
             else 
                 services.TryAddSingleton(typeof(IMappingHandler), apizrOptions.MappingHandlerType);
 
-            services.TryAddSingleton(typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), serviceProvider => Activator.CreateInstance(typeof(ApizrOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions, serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName)));
+            services.TryAddSingleton(apizrOptionsRegistrationType, serviceProvider =>
+            {
+                apizrOptions.BaseAddressFactory.Invoke(serviceProvider);
+                apizrOptions.LogLevelFactory.Invoke(serviceProvider);
+                apizrOptions.TrafficVerbosityFactory.Invoke(serviceProvider);
+                apizrOptions.HttpTracerModeFactory.Invoke(serviceProvider);
+                apizrOptions.RefitSettingsFactory(serviceProvider);
 
-            services.TryAddSingleton(serviceProvider => ((IApizrOptionsBase)serviceProvider.GetRequiredService(typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType))).ContentSerializer);
+                return Activator.CreateInstance(typeof(ApizrOptions<>).MakeGenericType(apizrOptions.WebApiType),
+                        apizrOptions,
+                        serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName));
+            });
+
+            services.TryAddSingleton(serviceProvider => ((IApizrOptionsBase)serviceProvider.GetRequiredService(typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType))).RefitSettings.ContentSerializer);
 
             var serviceType = typeof(IApizrManager<>).MakeGenericType(apizrOptions.WebApiType);
             services.TryAddSingleton(serviceType, apizrOptions.ApizrManagerType);

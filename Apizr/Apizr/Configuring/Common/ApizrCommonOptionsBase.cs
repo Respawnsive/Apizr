@@ -8,7 +8,7 @@ namespace Apizr.Configuring.Common
         protected ApizrCommonOptionsBase()
         {
         }
-
-        public IHttpContentSerializer ContentSerializer { get; protected set; }
+        
+        public RefitSettings RefitSettings { get; protected set; }
     }
 }

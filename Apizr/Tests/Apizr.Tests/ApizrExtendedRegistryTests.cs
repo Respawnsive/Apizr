@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Logging;
 using Apizr.Policing;
@@ -334,6 +335,24 @@ namespace Apizr.Tests
 
             // Then request should succeed
             await act.Should().NotThrowAsync();
+        }
+
+        [Fact]
+        public void Calling_WithRefitSettings_Should_Set_Settings()
+        {
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddAutoMapper(_assembly);
+            services.AddApizr(
+                registry => registry
+                    .AddFor<IReqResService>(),
+                config => config
+                    .WithRefitSettings(_refitSettings));
+
+            var serviceProvider = services.BuildServiceProvider();
+            var apizrOptions = serviceProvider.GetRequiredService<IApizrOptions<IReqResService>>();
+            
+            apizrOptions.RefitSettings.Should().Be(_refitSettings);
         }
 
         [Fact]

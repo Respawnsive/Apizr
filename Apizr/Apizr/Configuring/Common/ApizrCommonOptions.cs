@@ -36,12 +36,7 @@ namespace Apizr.Configuring.Common
         public Func<RefitSettings> RefitSettingsFactory
         {
             get => _refitSettingsFactory;
-            set => _refitSettingsFactory = () =>
-            {
-                var refitSettings = value.Invoke();
-                ContentSerializer = refitSettings.ContentSerializer;
-                return refitSettings;
-            };
+            set => _refitSettingsFactory = () => RefitSettings = value.Invoke();
         }
 
         public Func<IConnectivityHandler> ConnectivityHandlerFactory { get; set; }

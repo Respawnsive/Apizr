@@ -65,12 +65,7 @@ namespace Apizr.Extending.Configuring.Common
         public Func<IServiceProvider, RefitSettings> RefitSettingsFactory
         {
             get => _refitSettingsFactory;
-            set => _refitSettingsFactory = serviceProvider =>
-            {
-                var refitSettings = value.Invoke(serviceProvider);
-                ContentSerializer = refitSettings.ContentSerializer;
-                return refitSettings;
-            };
+            set => _refitSettingsFactory = serviceProvider => RefitSettings = value.Invoke(serviceProvider);
         }
 
         public Func<IServiceProvider, IConnectivityHandler> ConnectivityHandlerFactory { get; set; }

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Apizr.Configuring;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Logging;
+using Apizr.Mediation.Requesting.Sending;
 using Apizr.Policing;
 using Apizr.Requesting;
 using Apizr.Tests.Helpers;
@@ -234,7 +235,42 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Calling_WithCacheHandler_Should_Cache_Result()
+        public async Task Calling_WithAkavacheCacheHandler_Should_Cache_Result()
+        {
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+
+            services.AddApizr(
+                registry => registry
+                    .AddFor<IReqResService>(),
+                config => config
+                    .WithAkavacheCacheHandler()
+                    .AddDelegatingHandler(new FailingRequestHandler()));
+
+            var serviceProvider = services.BuildServiceProvider();
+            var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
+
+            // Defining a throwing request
+            Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.BadRequest));
+
+            // Calling it at first execution should throw as expected without any cached result
+            var ex = await act.Should().ThrowAsync<ApizrException<UserList>>();
+            ex.And.CachedResult.Should().BeNull();
+
+            // This one should succeed
+            var result = await reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+
+            // and cache result in-memory
+            result.Should().NotBeNull();
+            result.Data.Should().NotBeNullOrEmpty();
+
+            // This one should fail but with cached result
+            var ex2 = await act.Should().ThrowAsync<ApizrException<UserList>>();
+            ex2.And.CachedResult.Should().NotBeNull();
+        }
+
+        [Fact]
+        public async Task Calling_WithInMemoryCacheHandler_Should_Cache_Result()
         {
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
@@ -408,6 +444,24 @@ namespace Apizr.Tests
             result.Should().NotBeNull();
             result.Name.Should().Be(minUser.Name);
             result.Id.Should().BeGreaterThanOrEqualTo(1);
+        }
+
+        // todo: implémenter les tests de mediation et d'optional
+        [Fact]
+        public async Task Calling_WithMediation_Should_Handle_Requests()
+        {
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+
+            services.AddApizr(
+                registry => registry
+                    .AddFor<IReqResService>(),
+                config => config
+                    .WithMediation());
+
+            var serviceProvider = services.BuildServiceProvider();
+            var reqResMediator = serviceProvider.GetRequiredService<IApizrMediator<IReqResService>>();
+
         }
     }
 }

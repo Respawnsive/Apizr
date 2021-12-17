@@ -210,13 +210,12 @@ namespace Apizr
 
             var httpHandlerFactory = new Func<HttpMessageHandler>(() =>
             {
-                var httpClientHandler = apizrOptions.HttpClientHandlerFactory.Invoke();
-                var logger = apizrOptions.LoggerFactory.Invoke().CreateLogger(apizrOptions.WebApiType.GetFriendlyName());
                 apizrOptions.LogLevelFactory.Invoke();
                 apizrOptions.TrafficVerbosityFactory.Invoke();
                 apizrOptions.HttpTracerModeFactory.Invoke();
+                apizrOptions.LoggerFactory.Invoke(apizrOptions.LoggerFactoryFactory.Invoke(), apizrOptions.WebApiType.GetFriendlyName());
 
-                var handlerBuilder = new ExtendedHttpHandlerBuilder(httpClientHandler, logger, apizrOptions);
+                var handlerBuilder = new ExtendedHttpHandlerBuilder(apizrOptions.HttpClientHandlerFactory.Invoke(), apizrOptions);
 
                 if (apizrOptions.PolicyRegistryKeys != null && apizrOptions.PolicyRegistryKeys.Any())
                 {
@@ -232,7 +231,7 @@ namespace Apizr
                                         var context = request.GetOrBuildPolicyExecutionContext();
                                         if (!context.TryGetLogger(out var contextLogger, out var logLevel, out var verbosity, out var tracerMode))
                                         {
-                                            contextLogger = logger;
+                                            contextLogger = apizrOptions.Logger;
                                             logLevel = apizrOptions.LogLevel;
                                             verbosity = apizrOptions.TrafficVerbosity;
                                             tracerMode = apizrOptions.HttpTracerMode;
@@ -251,9 +250,9 @@ namespace Apizr
                 }
 
                 foreach (var delegatingHandlersFactory in apizrOptions.DelegatingHandlersFactories)
-                    handlerBuilder.AddHandler(delegatingHandlersFactory.Invoke(logger, apizrOptions));
+                    handlerBuilder.AddHandler(delegatingHandlersFactory.Invoke(apizrOptions.Logger, apizrOptions));
 
-                var primaryMessageHandler = handlerBuilder.GetPrimaryHttpMessageHandler(logger, apizrOptions);
+                var primaryMessageHandler = handlerBuilder.GetPrimaryHttpMessageHandler(apizrOptions.Logger, apizrOptions);
 
                 return primaryMessageHandler;
             });
@@ -263,8 +262,7 @@ namespace Apizr
             var apizrManager = apizrManagerFactory(lazyWebApi, apizrOptions.ConnectivityHandlerFactory.Invoke(),
                 apizrOptions.GetCacheHanderFactory()?.Invoke() ?? apizrOptions.CacheHandlerFactory.Invoke(),
                 apizrOptions.MappingHandlerFactory.Invoke(), apizrOptions.PolicyRegistryFactory.Invoke(),
-                new ApizrOptions<TWebApi>(apizrOptions,
-                    apizrOptions.LoggerFactory.Invoke().CreateLogger(apizrOptions.WebApiType.GetFriendlyName())));
+                new ApizrOptions<TWebApi>(apizrOptions));
 
             return apizrManager;
         }

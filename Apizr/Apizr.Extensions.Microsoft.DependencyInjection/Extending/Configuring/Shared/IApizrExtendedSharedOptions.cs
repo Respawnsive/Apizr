@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using Apizr.Configuring;
-using Apizr.Configuring.Shared;
 using Apizr.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Apizr.Extending.Configuring.Shared
 {
-    public interface IApizrExtendedSharedOptions : IApizrSharedOptionsBase
+    public interface IApizrExtendedSharedOptions : IApizrExtendedSharedOptionsBase
     {
         /// <summary>
         /// Http traffic tracing mode factory
@@ -35,10 +32,5 @@ namespace Apizr.Extending.Configuring.Shared
         /// HttpClient builder
         /// </summary>
         Action<IHttpClientBuilder> HttpClientBuilder { get; }
-
-        /// <summary>
-        /// Delegating handlers factories
-        /// </summary>
-        IList<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
     }
 }

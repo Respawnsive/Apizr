@@ -4,7 +4,12 @@ using Apizr.Extending.Configuring.Proper;
 
 namespace Apizr.Extending.Configuring
 {
-    public interface IApizrExtendedOptions : IApizrOptionsBase, IApizrExtendedCommonOptions, IApizrExtendedProperOptions
+    public interface IApizrExtendedOptions : IApizrExtendedOptionsBase, IApizrExtendedCommonOptions, IApizrExtendedProperOptions
     {
+    }
+
+    public interface IApizrExtendedOptions<TWebApi> : IApizrOptions<TWebApi>, IApizrExtendedOptionsBase
+    {
+
     }
 }

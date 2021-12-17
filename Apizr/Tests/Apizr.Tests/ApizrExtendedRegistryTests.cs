@@ -120,16 +120,19 @@ namespace Apizr.Tests
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
                 .AddFor<IReqResService>()
-                .AddFor<IHttpBinService>());
+                .AddFor<IHttpBinService>()
+                .AddCrudFor<User, int, PagedResult<User>, IDictionary<string, object>>());
 
             var serviceProvider = services.BuildServiceProvider();
             var registry = serviceProvider.GetRequiredService<IApizrExtendedRegistry>();
             
             registry.TryGetFor<IReqResService>(out var reqResManager).Should().BeTrue();
             registry.TryGetFor<IHttpBinService>(out var httpBinManager).Should().BeTrue();
+            registry.TryGetCrudFor<User, int, PagedResult<User>, IDictionary<string, object>>(out var userManager);
 
             reqResManager.Should().NotBeNull();
             httpBinManager.Should().NotBeNull();
+            userManager.Should().NotBeNull();
         }
 
         [Fact]

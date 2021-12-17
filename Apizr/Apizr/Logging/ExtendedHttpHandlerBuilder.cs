@@ -25,7 +25,7 @@ namespace Apizr.Logging
         /// </summary>
         /// <param name="logger">Logger.</param>
         /// <param name="apizrOptions"></param>
-        public ExtendedHttpHandlerBuilder(ILogger logger, IApizrOptionsBase apizrOptions) : this(new ExtendedHttpTracerHandler(null, logger, apizrOptions)) { }
+        public ExtendedHttpHandlerBuilder(IApizrOptionsBase apizrOptions) : this(new ExtendedHttpTracerHandler(null, apizrOptions)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:ExtendedHttpTracerHandler"/> class.
@@ -33,7 +33,7 @@ namespace Apizr.Logging
         /// <param name="innerHandler">HttpClientHandler.</param>
         /// <param name="logger">Logger.</param>
         /// <param name="apizrOptions"></param>
-        public ExtendedHttpHandlerBuilder(HttpClientHandler innerHandler, ILogger logger, IApizrOptionsBase apizrOptions) : this(new ExtendedHttpTracerHandler(innerHandler, logger, apizrOptions)) { }
+        public ExtendedHttpHandlerBuilder(HttpClientHandler innerHandler, IApizrOptionsBase apizrOptions) : this(new ExtendedHttpTracerHandler(innerHandler, apizrOptions)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:ExtendedHttpTracerHandler"/> class.

@@ -4,7 +4,6 @@ using System.Net.Http;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;
-using Polly.Registry;
 
 namespace Apizr.Configuring.Proper
 {
@@ -23,6 +22,7 @@ namespace Apizr.Configuring.Proper
             HttpTracerModeFactory = () => httpTracerMode ?? sharedOptions.HttpTracerModeFactory.Invoke();
             TrafficVerbosityFactory = () => trafficVerbosity ?? sharedOptions.TrafficVerbosityFactory.Invoke();
             LogLevelFactory = () => logLevel ?? sharedOptions.LogLevelFactory.Invoke();
+            LoggerFactory = (loggerFactory, webApiFriendlyName) => Logger = loggerFactory.CreateLogger(webApiFriendlyName);
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
             DelegatingHandlersFactories = sharedOptions.DelegatingHandlersFactories;
         }
@@ -54,6 +54,8 @@ namespace Apizr.Configuring.Proper
             get => _logLevelFactory;
             set => _logLevelFactory = () => LogLevel = value.Invoke();
         }
+        
+        public Func<ILoggerFactory, string, ILogger> LoggerFactory { get; }
 
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
 

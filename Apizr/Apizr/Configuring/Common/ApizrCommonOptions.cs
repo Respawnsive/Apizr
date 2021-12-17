@@ -18,7 +18,7 @@ namespace Apizr.Configuring.Common
             HttpTracerModeFactory = () => HttpTracerMode.Everything;
             TrafficVerbosityFactory = () => HttpMessageParts.None;
             LogLevelFactory = () => LogLevel.None;
-            LoggerFactory = () => new DebugLoggerFactory(LogLevel.Information);
+            LoggerFactoryFactory = () => new DebugLoggerFactory(LogLevel.Information);
             PolicyRegistryFactory = () => new PolicyRegistry();
             HttpClientHandlerFactory = () => new HttpClientHandler();
             RefitSettingsFactory = () => new RefitSettings();
@@ -28,7 +28,7 @@ namespace Apizr.Configuring.Common
             DelegatingHandlersFactories = new List<Func<ILogger, IApizrOptionsBase, DelegatingHandler>>();
         }
 
-        public Func<ILoggerFactory> LoggerFactory { get; set; }
+        public Func<ILoggerFactory> LoggerFactoryFactory { get; set; }
         public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set; }
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
 

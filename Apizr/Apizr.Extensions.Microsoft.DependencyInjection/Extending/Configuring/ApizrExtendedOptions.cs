@@ -16,7 +16,7 @@ using Refit;
 
 namespace Apizr.Extending.Configuring
 {
-    public class ApizrExtendedOptions : ApizrOptionsBase, IApizrExtendedOptions
+    public class ApizrExtendedOptions : ApizrExtendedOptionsBase, IApizrExtendedOptions
     {
         public ApizrExtendedOptions(IApizrExtendedCommonOptions commonOptions, IApizrExtendedProperOptions properOptions) : base(commonOptions, properOptions)
         {
@@ -25,6 +25,7 @@ namespace Apizr.Extending.Configuring
             HttpTracerModeFactory = properOptions.HttpTracerModeFactory;
             TrafficVerbosityFactory = properOptions.TrafficVerbosityFactory;
             LogLevelFactory = properOptions.LogLevelFactory;
+            LoggerFactory = properOptions.LoggerFactory;
             HttpClientHandlerFactory = properOptions.HttpClientHandlerFactory;
             RefitSettingsFactory = commonOptions.RefitSettingsFactory;
             ConnectivityHandlerType = commonOptions.ConnectivityHandlerType;
@@ -52,7 +53,7 @@ namespace Apizr.Extending.Configuring
             get => _baseAddressFactory;
             set => _baseAddressFactory = serviceProvider => BaseAddress = value.Invoke(serviceProvider);
         }
-
+        
         private Func<IServiceProvider, HttpTracerMode> _httpTracerModeFactory;
         public Func<IServiceProvider, HttpTracerMode> HttpTracerModeFactory
         {
@@ -74,7 +75,20 @@ namespace Apizr.Extending.Configuring
             set => _logLevelFactory = serviceProvider => LogLevel = value.Invoke(serviceProvider);
         }
 
-        public Func<IServiceProvider, HttpClientHandler> HttpClientHandlerFactory { get; set; }
+        private Func<IServiceProvider, string, ILogger> _loggerFactory;
+        public Func<IServiceProvider, string, ILogger> LoggerFactory
+        {
+            get => _loggerFactory;
+            protected set => _loggerFactory = (serviceProvider, webApiFriendlyName) => Logger = value.Invoke(serviceProvider, webApiFriendlyName);
+        }
+
+        private Func<IServiceProvider, HttpClientHandler> _httpClientHandlerFactory;
+        public Func<IServiceProvider, HttpClientHandler> HttpClientHandlerFactory
+        {
+            get => _httpClientHandlerFactory;
+            set => _httpClientHandlerFactory = serviceProvider => HttpClientHandler = value.Invoke(serviceProvider);
+        }
+
 
         private Func<IServiceProvider, RefitSettings> _refitSettingsFactory;
         public Func<IServiceProvider, RefitSettings> RefitSettingsFactory
@@ -93,5 +107,19 @@ namespace Apizr.Extending.Configuring
         public IDictionary<Type, MappedWithAttribute> ObjectMappings { get; }
         public IDictionary<Type, IApizrExtendedConcurrentRegistryBase> PostRegistries { get; }
         public IList<Action<Type, IServiceCollection>> PostRegistrationActions { get; }
+    }
+
+    public class ApizrExtendedOptions<TWebApi> : ApizrOptions<TWebApi>, IApizrExtendedOptionsBase
+    {
+        private readonly IApizrExtendedOptionsBase _apizrExtendedOptions;
+        public ApizrExtendedOptions(IApizrExtendedOptionsBase apizrOptions) : base(apizrOptions)
+        {
+            _apizrExtendedOptions = apizrOptions;
+        }
+
+        public HttpClientHandler HttpClientHandler => _apizrExtendedOptions.HttpClientHandler;
+
+        public IList<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>>
+            DelegatingHandlersExtendedFactories => _apizrExtendedOptions.DelegatingHandlersExtendedFactories;
     }
 }

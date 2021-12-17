@@ -195,7 +195,7 @@ namespace Apizr.Configuring
 
         public IApizrOptionsBuilder WithLoggerFactory(Func<ILoggerFactory> loggerFactory)
         {
-            Options.LoggerFactory = loggerFactory;
+            Options.LoggerFactoryFactory = loggerFactory;
 
             return this;
         }

@@ -21,7 +21,8 @@ namespace Apizr.Configuring
             HttpTracerModeFactory = properOptions.HttpTracerModeFactory;
             TrafficVerbosityFactory = properOptions.TrafficVerbosityFactory;
             LogLevelFactory = properOptions.LogLevelFactory;
-            LoggerFactory = commonOptions.LoggerFactory;
+            LoggerFactoryFactory = commonOptions.LoggerFactoryFactory;
+            LoggerFactory = (loggerFactory, webApiFriendlyName) => Logger = properOptions.LoggerFactory.Invoke(loggerFactory, webApiFriendlyName);
             HttpClientHandlerFactory = properOptions.HttpClientHandlerFactory;
             PolicyRegistryFactory = commonOptions.PolicyRegistryFactory;
             RefitSettingsFactory = commonOptions.RefitSettingsFactory;
@@ -59,8 +60,12 @@ namespace Apizr.Configuring
             set => _logLevelFactory = () => LogLevel = value.Invoke();
         }
 
-        public Func<ILoggerFactory> LoggerFactory { get; set; }
+        public Func<ILoggerFactory> LoggerFactoryFactory { get; set; }
+
+        public Func<ILoggerFactory, string, ILogger> LoggerFactory { get; }
+
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
+
         public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set;  }
 
         private Func<RefitSettings> _refitSettingsFactory;
@@ -78,22 +83,20 @@ namespace Apizr.Configuring
 
     public class ApizrOptions<TWebApi> : IApizrOptions<TWebApi>
     {
-        private readonly IApizrOptionsBase _apizrOptions;
-        private readonly ILogger _logger;
+        protected readonly IApizrOptionsBase Options;
 
-        public ApizrOptions(IApizrOptionsBase apizrOptions, ILogger logger)
+        public ApizrOptions(IApizrOptionsBase apizrOptions)
         {
-            _apizrOptions = apizrOptions;
-            _logger = logger;
+            Options = apizrOptions;
         }
 
-        public Type WebApiType => _apizrOptions.WebApiType;
-        public Uri BaseAddress => _apizrOptions.BaseAddress;
-        public HttpTracerMode HttpTracerMode => _apizrOptions.HttpTracerMode;
-        public HttpMessageParts TrafficVerbosity => _apizrOptions.TrafficVerbosity;
-        public LogLevel LogLevel => _apizrOptions.LogLevel;
-        public ILogger Logger => _logger;
-        public string[] PolicyRegistryKeys => _apizrOptions.PolicyRegistryKeys;
-        public RefitSettings RefitSettings => _apizrOptions.RefitSettings;
+        public Type WebApiType => Options.WebApiType;
+        public Uri BaseAddress => Options.BaseAddress;
+        public HttpTracerMode HttpTracerMode => Options.HttpTracerMode;
+        public HttpMessageParts TrafficVerbosity => Options.TrafficVerbosity;
+        public LogLevel LogLevel => Options.LogLevel;
+        public ILogger Logger => Options.Logger;
+        public string[] PolicyRegistryKeys => Options.PolicyRegistryKeys;
+        public RefitSettings RefitSettings => Options.RefitSettings;
     }
 }

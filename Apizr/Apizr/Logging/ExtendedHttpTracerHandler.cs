@@ -16,7 +16,6 @@ namespace Apizr.Logging
 {
     public class ExtendedHttpTracerHandler : DelegatingHandler
     {
-        private readonly ILogger _logger;
         private readonly IApizrOptionsBase _apizrOptions;
         
         /// <summary>
@@ -41,19 +40,18 @@ namespace Apizr.Logging
         /// <summary> Constructs the <see cref="ExtendedHttpTracerHandler"/> with a custom <see cref="ILogger"/> and a custom <see cref="HttpMessageHandler"/></summary>
         /// <param name="logger">Microsoft extended logger</param>
         /// <param name="apizrOptions">Apizr options</param>
-        public ExtendedHttpTracerHandler(ILogger logger, IApizrOptionsBase apizrOptions) : this(null, logger, apizrOptions) { }
+        public ExtendedHttpTracerHandler(IApizrOptionsBase apizrOptions) : this(null, apizrOptions) { }
 
         /// <summary> Constructs the <see cref="ExtendedHttpTracerHandler"/> with a custom <see cref="ILogger"/> and a custom <see cref="HttpMessageHandler"/></summary>
         /// <param name="handler">User defined <see cref="HttpMessageHandler"/></param>
         /// <param name="logger">Microsoft extended logger</param>
         /// <param name="apizrOptions">Apizr options</param>
-        public ExtendedHttpTracerHandler(HttpMessageHandler handler, ILogger logger, IApizrOptionsBase apizrOptions)
+        public ExtendedHttpTracerHandler(HttpMessageHandler handler, IApizrOptionsBase apizrOptions)
         {
             InnerHandler = handler ?? new HttpClientHandler
             {
                 AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
             };
-            _logger = logger;
             _apizrOptions = apizrOptions;
         }
 
@@ -62,7 +60,7 @@ namespace Apizr.Logging
             var context = request.GetOrBuildPolicyExecutionContext();
             if (!context.TryGetLogger(out var logger, out var logLevel, out var verbosity, out var tracerMode))
             {
-                logger = _logger;
+                logger = _apizrOptions.Logger;
                 logLevel = _apizrOptions.LogLevel;
                 verbosity = _apizrOptions.TrafficVerbosity;
                 tracerMode = _apizrOptions.HttpTracerMode;

@@ -14,9 +14,9 @@ namespace Apizr.Configuring.Common
     public interface IApizrCommonOptions : IApizrCommonOptionsBase, IApizrSharedOptions
     {
         /// <summary>
-        /// Logger factory
+        /// The LoggerFactory factory (I know, I know...)
         /// </summary>
-        Func<ILoggerFactory> LoggerFactory { get; set; }
+        Func<ILoggerFactory> LoggerFactoryFactory { get; set; }
 
         /// <summary>
         /// Policy registry factory

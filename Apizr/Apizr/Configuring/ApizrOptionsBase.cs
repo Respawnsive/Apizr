@@ -2,6 +2,7 @@
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Proper;
 using Apizr.Configuring.Shared;
+using Microsoft.Extensions.Logging;
 using Refit;
 
 namespace Apizr.Configuring
@@ -19,6 +20,7 @@ namespace Apizr.Configuring
         public Type WebApiType { get; }
         public Uri BaseAddress { get; protected set; }
         public string[] PolicyRegistryKeys { get; }
+        public ILogger Logger { get; protected set; }
         public RefitSettings RefitSettings { get; protected set; }
     }
 }

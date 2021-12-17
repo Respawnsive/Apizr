@@ -1,10 +1,10 @@
 ﻿using System;
-using Apizr.Configuring.Proper;
 using Apizr.Extending.Configuring.Shared;
+using Microsoft.Extensions.Logging;
 
 namespace Apizr.Extending.Configuring.Proper
 {
-    public interface IApizrExtendedProperOptions : IApizrProperOptionsBase, IApizrExtendedSharedOptions
+    public interface IApizrExtendedProperOptions : IApizrExtendedProperOptionsBase, IApizrExtendedSharedOptions
     {
         /// <summary>
         /// Type of the manager
@@ -15,5 +15,10 @@ namespace Apizr.Extending.Configuring.Proper
         /// Base address factory
         /// </summary>
         Func<IServiceProvider, Uri> BaseAddressFactory { get; }
+
+        /// <summary>
+        /// The Logger factory
+        /// </summary>
+        Func<IServiceProvider, string, ILogger> LoggerFactory { get; }
     }
 }

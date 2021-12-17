@@ -588,10 +588,8 @@ namespace Apizr
             var builder = services.AddHttpClient(ForType(apizrOptions.WebApiType))
                 .ConfigurePrimaryHttpMessageHandler(serviceProvider =>
                 {
-                    var options = (IApizrExtendedOptions)serviceProvider.GetRequiredService(apizrOptionsRegistrationType);
-                    var httpClientHandler = options.HttpClientHandlerFactory.Invoke(serviceProvider);
-                    var logger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName);
-                    var handlerBuilder = new ExtendedHttpHandlerBuilder(httpClientHandler, logger, options);
+                    var options = (IApizrExtendedOptionsBase)serviceProvider.GetRequiredService(apizrOptionsRegistrationType);
+                    var handlerBuilder = new ExtendedHttpHandlerBuilder(options.HttpClientHandler, options);
 
                     if (options.PolicyRegistryKeys != null && options.PolicyRegistryKeys.Any())
                     {
@@ -602,7 +600,7 @@ namespace Apizr
                         }
                         catch (Exception)
                         {
-                            logger.Log(options.LogLevel,
+                            options.Logger.Log(options.LogLevel,
                                 $"Global policies: You get some global policies but didn't register a {nameof(PolicyRegistry)} instance. Global policies will be ignored for  for {webApiFriendlyName} instance");
                         }
 
@@ -621,7 +619,7 @@ namespace Apizr
                                                     var context = request.GetOrBuildPolicyExecutionContext();
                                                     if (!context.TryGetLogger(out var contextLogger, out var logLevel, out var verbosity, out var tracerMode))
                                                     {
-                                                        contextLogger = logger;
+                                                        contextLogger = options.Logger;
                                                         logLevel = options.LogLevel;
                                                         verbosity = options.TrafficVerbosity;
                                                         tracerMode = options.HttpTracerMode;
@@ -644,14 +642,14 @@ namespace Apizr
                     foreach (var delegatingHandlerExtendedFactory in options.DelegatingHandlersExtendedFactories)
                         handlerBuilder.AddHandler(delegatingHandlerExtendedFactory.Invoke(serviceProvider, options));
 
-                    var primaryMessageHandler = handlerBuilder.GetPrimaryHttpMessageHandler(logger, options);
+                    var primaryMessageHandler = handlerBuilder.GetPrimaryHttpMessageHandler(options.Logger, options);
 
                     return primaryMessageHandler;
                 })
                 .AddTypedClient(typeof(ILazyFactory<>).MakeGenericType(apizrOptions.WebApiType),
                     (client, serviceProvider) =>
                     {
-                        var options = (IApizrExtendedOptions)serviceProvider.GetRequiredService(apizrOptionsRegistrationType);
+                        var options = (IApizrExtendedOptionsBase)serviceProvider.GetRequiredService(apizrOptionsRegistrationType);
 
                         if (client.BaseAddress == null)
                         {
@@ -694,14 +692,14 @@ namespace Apizr
                 apizrOptions.LogLevelFactory.Invoke(serviceProvider);
                 apizrOptions.TrafficVerbosityFactory.Invoke(serviceProvider);
                 apizrOptions.HttpTracerModeFactory.Invoke(serviceProvider);
-                apizrOptions.RefitSettingsFactory(serviceProvider);
+                apizrOptions.RefitSettingsFactory.Invoke(serviceProvider);
+                apizrOptions.HttpClientHandlerFactory.Invoke(serviceProvider);
+                apizrOptions.LoggerFactory.Invoke(serviceProvider, webApiFriendlyName);
 
-                return Activator.CreateInstance(typeof(ApizrOptions<>).MakeGenericType(apizrOptions.WebApiType),
-                        apizrOptions,
-                        serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName));
+                return Activator.CreateInstance(typeof(ApizrExtendedOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions);
             });
 
-            services.TryAddSingleton(serviceProvider => ((IApizrOptionsBase)serviceProvider.GetRequiredService(typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType))).RefitSettings.ContentSerializer);
+            services.TryAddSingleton(serviceProvider => ((IApizrOptionsBase)serviceProvider.GetRequiredService(apizrOptionsRegistrationType)).RefitSettings.ContentSerializer);
 
             var serviceType = typeof(IApizrManager<>).MakeGenericType(apizrOptions.WebApiType);
             services.TryAddSingleton(serviceType, apizrOptions.ApizrManagerType);

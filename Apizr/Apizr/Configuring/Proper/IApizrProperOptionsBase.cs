@@ -1,5 +1,6 @@
 ﻿using System;
 using Apizr.Configuring.Shared;
+using Microsoft.Extensions.Logging;
 
 namespace Apizr.Configuring.Proper
 {
@@ -22,5 +23,10 @@ namespace Apizr.Configuring.Proper
         /// Policy keys from the registry
         /// </summary>
         string[] PolicyRegistryKeys { get; }
+
+        /// <summary>
+        /// The logger instance
+        /// </summary>
+        ILogger Logger { get; }
     }
 }

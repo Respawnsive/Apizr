@@ -29,6 +29,7 @@ namespace Apizr.Extending.Configuring.Proper
             TrafficVerbosityFactory = serviceProvider => trafficVerbosity ?? sharedOptions.TrafficVerbosityFactory.Invoke(serviceProvider);
             LogLevelFactory = serviceProvider => logLevel ?? sharedOptions.LogLevelFactory.Invoke(serviceProvider);
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
+            LoggerFactory = (serviceProvider, webApiFriendlyName) => serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName);
             DelegatingHandlersExtendedFactories = sharedOptions.DelegatingHandlersExtendedFactories;
         }
 
@@ -60,6 +61,13 @@ namespace Apizr.Extending.Configuring.Proper
         {
             get => _logLevelFactory;
             set => _logLevelFactory = serviceProvider => LogLevel = value.Invoke(serviceProvider);
+        }
+
+        private Func<IServiceProvider, string, ILogger> _loggerFactory;
+        public Func<IServiceProvider, string, ILogger> LoggerFactory
+        {
+            get => _loggerFactory;
+            protected set => _loggerFactory = (serviceProvider, webApiFriendlyName) => Logger = value.Invoke(serviceProvider, webApiFriendlyName);
         }
 
         public Func<IServiceProvider, HttpClientHandler> HttpClientHandlerFactory { get; set; }

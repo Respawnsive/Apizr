@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Apizr.Configuring.Shared;
+using Microsoft.Extensions.Logging;
 
 namespace Apizr.Configuring.Proper
 {
@@ -23,5 +24,6 @@ namespace Apizr.Configuring.Proper
         public Type WebApiType { get; }
         public Uri BaseAddress { get; protected set; }
         public string[] PolicyRegistryKeys { get; }
+        public ILogger Logger { get; protected set; }
     }
 }

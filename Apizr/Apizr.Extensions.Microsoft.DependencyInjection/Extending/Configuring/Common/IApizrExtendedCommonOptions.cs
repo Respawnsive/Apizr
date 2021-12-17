@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Apizr.Caching;
-using Apizr.Configuring.Common;
-using Apizr.Configuring.Registry;
 using Apizr.Connecting;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Extending.Configuring.Shared;
@@ -13,7 +11,7 @@ using Refit;
 
 namespace Apizr.Extending.Configuring.Common
 {
-    public interface IApizrExtendedCommonOptions : IApizrCommonOptionsBase, IApizrExtendedSharedOptions
+    public interface IApizrExtendedCommonOptions : IApizrExtendedCommonOptionsBase, IApizrExtendedSharedOptions
     {
         /// <summary>
         /// Type of the connectivity handler

@@ -1,6 +1,4 @@
-﻿using Apizr.Configuring.Shared;
-
-namespace Apizr.Extending.Configuring.Shared
+﻿namespace Apizr.Configuring.Shared
 {
     public interface IApizrExtendedSharedOptionsBuilderBase : IApizrSharedOptionsBuilderBase
     {

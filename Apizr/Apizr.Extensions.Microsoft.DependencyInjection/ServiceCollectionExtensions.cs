@@ -680,9 +680,9 @@ namespace Apizr
             else
                 services.TryAddSingleton(typeof(ICacheHandler), apizrOptions.CacheHandlerType);
 
-            var mappingHandlerFactory = apizrOptions.GetMappingHanderFactory();
-            if (mappingHandlerFactory != null)
-                services.AddOrReplaceSingleton(typeof(IMappingHandler), serviceProvider => mappingHandlerFactory.Invoke(serviceProvider));
+            var mappingHandlerType = apizrOptions.GetMappingHanderType();
+            if (mappingHandlerType != null)
+                services.AddOrReplaceSingleton(typeof(IMappingHandler), mappingHandlerType);
             else 
                 services.TryAddSingleton(typeof(IMappingHandler), apizrOptions.MappingHandlerType);
 

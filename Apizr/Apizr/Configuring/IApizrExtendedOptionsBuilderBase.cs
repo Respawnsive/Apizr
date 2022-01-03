@@ -1,7 +1,7 @@
-﻿using Apizr.Extending.Configuring.Common;
-using Apizr.Extending.Configuring.Proper;
+﻿using Apizr.Configuring.Common;
+using Apizr.Configuring.Proper;
 
-namespace Apizr.Extending.Configuring
+namespace Apizr.Configuring
 {
     public interface IApizrExtendedOptionsBuilderBase : IApizrExtendedCommonOptionsBuilderBase, IApizrExtendedProperOptionsBuilderBase
     {

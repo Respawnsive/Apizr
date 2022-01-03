@@ -1,7 +1,5 @@
-﻿using System;
-using Apizr.Configuring.Common;
+﻿using Apizr.Configuring.Common;
 using AutoMapper;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Apizr
 {
@@ -12,11 +10,27 @@ namespace Apizr
         /// </summary>
         /// <typeparam name="TBuilder"></typeparam>
         /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
+        public static TBuilder WithAutoMapperMappingHandler<TBuilder>(this TBuilder builder, IConfigurationProvider configuration)
+            where TBuilder : IApizrCommonOptionsBuilder
+        {
+            builder.SetMappingHandlerFactory(() => new AutoMapperMappingHandler(configuration.CreateMapper()));
+
+            return builder;
+        }
+
+
+        /// <summary>
+        /// Set AutoMapper as MappingHandler
+        /// </summary>
+        /// <typeparam name="TBuilder"></typeparam>
+        /// <param name="builder"></param>
         /// <returns></returns>
         public static TBuilder WithAutoMapperMappingHandler<TBuilder>(this TBuilder builder)
-            where TBuilder : IApizrCommonOptionsBuilderBase
+            where TBuilder : IApizrExtendedCommonOptionsBuilderBase
         {
-            builder.SetMappingHandlerFactory(serviceProvider => new AutoMapperMappingHandler(serviceProvider.GetRequiredService<IMapper>()));
+            builder.SetMappingHandlerType<AutoMapperMappingHandler>();
 
             return builder;
         }

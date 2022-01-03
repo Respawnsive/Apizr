@@ -11,11 +11,14 @@ using Apizr.Configuring;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Logging;
 using Apizr.Mediation.Requesting.Sending;
+using Apizr.Optional.Extending;
+using Apizr.Optional.Requesting.Sending;
 using Apizr.Policing;
 using Apizr.Requesting;
 using Apizr.Tests.Helpers;
 using Apizr.Tests.Models;
 using FluentAssertions;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MonkeyCache.FileStore;
@@ -446,12 +449,12 @@ namespace Apizr.Tests
             result.Id.Should().BeGreaterThanOrEqualTo(1);
         }
 
-        // todo: implémenter les tests de mediation et d'optional
         [Fact]
         public async Task Calling_WithMediation_Should_Handle_Requests()
         {
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
+            services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddApizr(
                 registry => registry
@@ -462,6 +465,41 @@ namespace Apizr.Tests
             var serviceProvider = services.BuildServiceProvider();
             var reqResMediator = serviceProvider.GetRequiredService<IApizrMediator<IReqResService>>();
 
+            reqResMediator.Should().NotBeNull();
+            var result = await reqResMediator.SendFor(api => api.GetUsersAsync());
+            result.Should().NotBeNull();
+            result.Data.Should().NotBeNull();
+            result.Data.Count.Should().BeGreaterOrEqualTo(1);
+        }
+
+        [Fact]
+        public async Task Calling_WithOptionalMediation_Should_Handle_Requests_With_Optional_Result()
+        {
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddApizr(
+                registry => registry
+                    .AddFor<IReqResService>(),
+                config => config
+                    .WithOptionalMediation());
+
+            var serviceProvider = services.BuildServiceProvider();
+            var reqResMediator = serviceProvider.GetRequiredService<IApizrOptionalMediator<IReqResService>>();
+
+            reqResMediator.Should().NotBeNull();
+            var result = await reqResMediator.SendFor(api => api.GetUsersAsync());
+            result.Should().NotBeNull();
+            result.Match(userList =>
+                {
+                    userList.Should().NotBeNull();
+                    userList.Data.Should().NotBeNull();
+                    userList.Data.Count.Should().BeGreaterOrEqualTo(1);
+                },
+                e => { 
+                    // ignore error
+                });
         }
     }
 }

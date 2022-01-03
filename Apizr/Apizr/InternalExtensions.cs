@@ -6,12 +6,14 @@ using Apizr.Configuring;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
+using Apizr.Mapping;
 using Microsoft.Extensions.Logging;
 
 [assembly: InternalsVisibleTo("Apizr.Extensions.Microsoft.DependencyInjection"), 
            InternalsVisibleTo("Apizr.Integrations.Fusillade"),
            InternalsVisibleTo("Apizr.Integrations.Akavache"),
-           InternalsVisibleTo("Apizr.Integrations.MonkeyCache")]
+           InternalsVisibleTo("Apizr.Integrations.MonkeyCache"),
+           InternalsVisibleTo("Apizr.Integrations.AutoMapper")]
 namespace Apizr
 {
     internal static class InternalExtensions
@@ -47,7 +49,40 @@ namespace Apizr
         }
 
         internal static Func<ICacheHandler> GetCacheHanderFactory(this IApizrCommonOptionsBase builder) =>
-            _cacheHandlerFactory; 
+            _cacheHandlerFactory;
+
+        #endregion
+
+        #region MappingHandler
+
+        #region Factory
+
+        private static Func<IMappingHandler> _mappingHandlerFactory;
+
+        internal static void SetMappingHandlerFactory(this IApizrCommonOptionsBuilderBase builder,
+            Func<IMappingHandler> mappingHandlerFactory)
+        {
+            _mappingHandlerFactory = mappingHandlerFactory;
+        }
+
+        internal static Func<IMappingHandler> GetMappingHanderFactory(this IApizrCommonOptionsBase builder) =>
+            _mappingHandlerFactory;
+
+        #endregion
+        
+        #region Type
+
+        private static Type _mappingHandlerType;
+
+        internal static void SetMappingHandlerType<TMappingHandler>(this IApizrCommonOptionsBuilderBase builder) where TMappingHandler : IMappingHandler
+        {
+            _mappingHandlerType = typeof(TMappingHandler);
+        }
+
+        internal static Type GetMappingHanderType(this IApizrCommonOptionsBase builder) =>
+            _mappingHandlerType; 
+
+        #endregion
 
         #endregion
     }

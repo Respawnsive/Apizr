@@ -210,9 +210,6 @@ namespace Apizr
 
             var httpHandlerFactory = new Func<HttpMessageHandler>(() =>
             {
-                apizrOptions.LogLevelFactory.Invoke();
-                apizrOptions.TrafficVerbosityFactory.Invoke();
-                apizrOptions.HttpTracerModeFactory.Invoke();
                 apizrOptions.LoggerFactory.Invoke(apizrOptions.LoggerFactoryFactory.Invoke(), apizrOptions.WebApiType.GetFriendlyName());
 
                 var handlerBuilder = new ExtendedHttpHandlerBuilder(apizrOptions.HttpClientHandlerFactory.Invoke(), apizrOptions);
@@ -257,12 +254,12 @@ namespace Apizr
                 return primaryMessageHandler;
             });
 
-            var webApiFactory = new Func<object>(() => RestService.For<TWebApi>(new HttpClient(httpHandlerFactory.Invoke(), false) { BaseAddress = apizrOptions.BaseAddressFactory.Invoke() }, apizrOptions.RefitSettingsFactory.Invoke()));
+            var webApiFactory = new Func<object>(() => RestService.For<TWebApi>(new HttpClient(httpHandlerFactory.Invoke(), false) { BaseAddress = apizrOptions.BaseAddress }, apizrOptions.RefitSettings));
             var lazyWebApi = new LazyFactory<TWebApi>(webApiFactory);
             var apizrManager = apizrManagerFactory(lazyWebApi, apizrOptions.ConnectivityHandlerFactory.Invoke(),
                 apizrOptions.GetCacheHanderFactory()?.Invoke() ?? apizrOptions.CacheHandlerFactory.Invoke(),
-                apizrOptions.MappingHandlerFactory.Invoke(), apizrOptions.PolicyRegistryFactory.Invoke(),
-                new ApizrOptions<TWebApi>(apizrOptions));
+                apizrOptions.GetMappingHanderFactory()?.Invoke() ?? apizrOptions.MappingHandlerFactory.Invoke(), 
+                apizrOptions.PolicyRegistryFactory.Invoke(), new ApizrOptions<TWebApi>(apizrOptions));
 
             return apizrManager;
         }
@@ -277,6 +274,11 @@ namespace Apizr
             var builder = new ApizrCommonOptionsBuilder(new ApizrCommonOptions());
 
             commonOptionsBuilder?.Invoke(builder);
+
+            builder.ApizrOptions.LogLevelFactory.Invoke();
+            builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
+            builder.ApizrOptions.HttpTracerModeFactory.Invoke();
+            builder.ApizrOptions.RefitSettingsFactory.Invoke();
 
             return builder.ApizrOptions;
         }
@@ -318,6 +320,11 @@ namespace Apizr
 
             properOptionsBuilder?.Invoke(builder);
 
+            builder.ApizrOptions.BaseAddressFactory.Invoke();
+            builder.ApizrOptions.LogLevelFactory.Invoke();
+            builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
+            builder.ApizrOptions.HttpTracerModeFactory.Invoke();
+
             return builder.ApizrOptions;
         }
 
@@ -341,6 +348,12 @@ namespace Apizr
             var builder = new ApizrOptionsBuilder(new ApizrOptions(commonOptions, properOptions));
 
             optionsBuilder?.Invoke(builder);
+
+            builder.ApizrOptions.BaseAddressFactory.Invoke();
+            builder.ApizrOptions.LogLevelFactory.Invoke();
+            builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
+            builder.ApizrOptions.HttpTracerModeFactory.Invoke();
+            builder.ApizrOptions.RefitSettingsFactory.Invoke();
 
             return builder.ApizrOptions;
         } 

@@ -38,7 +38,8 @@ namespace Apizr.Policing
         /// <returns></returns>
         public static bool TryGetLogger(this Context context, out ILogger logger, out LogLevel logLevel, out HttpMessageParts verbosity, out HttpTracerMode tracerMode)
         {
-            if (context.TryGetValue(nameof(ILogger), out var loggerObject) && loggerObject is ILogger loggerValue &&
+            if (context != null && 
+                context.TryGetValue(nameof(ILogger), out var loggerObject) && loggerObject is ILogger loggerValue &&
                 context.TryGetValue(nameof(LogLevel), out var logLevelObject) && logLevelObject is LogLevel logLevelValue &&
                 context.TryGetValue(nameof(HttpMessageParts), out var verbosityObject) && verbosityObject is HttpMessageParts verbosityValue &&
                 context.TryGetValue(nameof(HttpTracerMode), out var tracerModeObject) && tracerModeObject is HttpTracerMode tracerModeValue)

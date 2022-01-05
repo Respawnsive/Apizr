@@ -73,6 +73,28 @@ namespace Apizr.Tests
         }
 
         [Fact]
+        public void ApizrRegistry_Should_Populate_Managers()
+        {
+            var apizrRegistry = Apizr.Create(registry => registry
+                .AddFor<IReqResService>()
+                .AddFor<IHttpBinService>()
+                .AddCrudFor<User, int, PagedResult<User>, IDictionary<string, object>>());
+
+            var count = 0;
+            apizrRegistry.Populate((type, factory) =>
+            {
+                type.Should().NotBeNull();
+                factory.Should().NotBeNull();
+                var manager = factory.Invoke();
+                manager.Should().NotBeNull();
+                manager.GetType().Should().BeAssignableTo(type);
+                count++;
+            });
+
+            count.Should().Be(apizrRegistry.Count);
+        }
+
+        [Fact]
         public void Calling_WithBaseAddress_Should_Set_BaseAddress()
         {
             var uri = new Uri("http://api.com");

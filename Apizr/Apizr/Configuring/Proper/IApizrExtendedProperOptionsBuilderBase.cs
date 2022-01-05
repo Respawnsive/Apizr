@@ -1,6 +1,6 @@
 ﻿namespace Apizr.Configuring.Proper
 {
-    public interface IApizrExtendedProperOptionsBuilderBase : IApizrProperOptionsBuilderBase
+    public interface IApizrExtendedProperOptionsBuilderBase : IApizrGlobalProperOptionsBuilderBase
     {
     }
 }

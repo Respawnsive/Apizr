@@ -11,7 +11,7 @@ namespace Apizr.Configuring.Registry
     public interface IApizrRegistryBuilderBase<out TApizrRegistry, out TApizrRegistryBuilder, out TApizrProperOptionsBuilder> : IApizrRegistryBuilderBase
         where TApizrRegistry : IApizrEnumerableRegistry
         where TApizrRegistryBuilder : IApizrRegistryBuilderBase<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder>
-        where TApizrProperOptionsBuilder : IApizrProperOptionsBuilderBase
+        where TApizrProperOptionsBuilder : IApizrGlobalProperOptionsBuilderBase
     {
         /// <summary>
         /// Apizr registry

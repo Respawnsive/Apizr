@@ -15,12 +15,6 @@ namespace Apizr
         public static TBuilder WithAutoMapperMappingHandler<TBuilder>(this TBuilder builder, IConfigurationProvider configuration)
             where TBuilder : IApizrCommonOptionsBuilderBase
         {
-            if (builder is IApizrExtendedCommonOptionsBuilderBase extendedBuilder)
-            {
-                extendedBuilder.WithAutoMapperMappingHandler();
-                return builder;
-            }
-
             builder.SetMappingHandlerFactory(() => new AutoMapperMappingHandler(configuration.CreateMapper()));
 
             return builder;

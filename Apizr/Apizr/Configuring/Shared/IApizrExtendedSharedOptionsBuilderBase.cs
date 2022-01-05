@@ -1,6 +1,6 @@
 ﻿namespace Apizr.Configuring.Shared
 {
-    public interface IApizrExtendedSharedOptionsBuilderBase : IApizrSharedOptionsBuilderBase
+    public interface IApizrExtendedSharedOptionsBuilderBase : IApizrGlobalSharedOptionsBuilderBase
     {
     }
 }

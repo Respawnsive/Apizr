@@ -24,7 +24,7 @@ namespace Apizr
 
         internal static void SetPrimaryHttpMessageHandler<T>(this T builder,
             Func<DelegatingHandler, ILogger, IApizrOptionsBase, HttpMessageHandler> primaryHandlerFactory)
-            where T : IApizrSharedOptionsBuilderBase
+            where T : IApizrGlobalSharedOptionsBuilderBase
         {
             _primaryHandlerFactory = primaryHandlerFactory;
         }
@@ -42,7 +42,7 @@ namespace Apizr
 
         private static Func<ICacheHandler> _cacheHandlerFactory;
 
-        internal static void SetCacheHandlerFactory(this IApizrCommonOptionsBuilderBase builder,
+        internal static void SetCacheHandlerFactory(this IApizrGlobalCommonOptionsBuilderBase builder,
             Func<ICacheHandler> cacheHandlerFactory)
         {
             _cacheHandlerFactory = cacheHandlerFactory;
@@ -55,7 +55,7 @@ namespace Apizr
 
         #region MappingHandler
 
-        #region Factory
+        #region Static
 
         private static Func<IMappingHandler> _mappingHandlerFactory;
 
@@ -70,11 +70,11 @@ namespace Apizr
 
         #endregion
         
-        #region Type
+        #region Extended
 
         private static Type _mappingHandlerType;
 
-        internal static void SetMappingHandlerType<TMappingHandler>(this IApizrCommonOptionsBuilderBase builder) where TMappingHandler : IMappingHandler
+        internal static void SetMappingHandlerType<TMappingHandler>(this IApizrExtendedCommonOptionsBuilderBase builder) where TMappingHandler : IMappingHandler
         {
             _mappingHandlerType = typeof(TMappingHandler);
         }

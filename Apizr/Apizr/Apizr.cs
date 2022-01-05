@@ -210,8 +210,6 @@ namespace Apizr
 
             var httpHandlerFactory = new Func<HttpMessageHandler>(() =>
             {
-                apizrOptions.LoggerFactory.Invoke(apizrOptions.LoggerFactoryFactory.Invoke(), apizrOptions.WebApiType.GetFriendlyName());
-
                 var handlerBuilder = new ExtendedHttpHandlerBuilder(apizrOptions.HttpClientHandlerFactory.Invoke(), apizrOptions);
 
                 if (apizrOptions.PolicyRegistryKeys != null && apizrOptions.PolicyRegistryKeys.Any())
@@ -354,6 +352,7 @@ namespace Apizr
             builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();
             builder.ApizrOptions.RefitSettingsFactory.Invoke();
+            builder.ApizrOptions.LoggerFactory.Invoke(builder.ApizrOptions.LoggerFactoryFactory.Invoke(), builder.ApizrOptions.WebApiType.GetFriendlyName());
 
             return builder.ApizrOptions;
         } 

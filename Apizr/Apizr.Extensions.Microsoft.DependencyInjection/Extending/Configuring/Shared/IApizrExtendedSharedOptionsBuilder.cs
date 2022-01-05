@@ -12,9 +12,9 @@ using Microsoft.Extensions.Logging;
 namespace Apizr.Extending.Configuring.Shared
 {
     public interface IApizrExtendedSharedOptionsBuilder<out TApizrExtendedSharedOptions, out TApizrExtendedSharedOptionsBuilder> : IApizrExtendedSharedOptionsBuilderBase, 
-        IApizrSharedOptionsBuilderBase<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>
+        IApizrGlobalSharedOptionsBuilderBase<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>
         where TApizrExtendedSharedOptions : IApizrSharedOptionsBase
-        where TApizrExtendedSharedOptionsBuilder : IApizrSharedOptionsBuilderBase<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>
+        where TApizrExtendedSharedOptionsBuilder : IApizrGlobalSharedOptionsBuilderBase<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>
     {
         /// <summary>
         /// Define http traffic tracing verbosity and log level (could be defined with TraceAttribute)

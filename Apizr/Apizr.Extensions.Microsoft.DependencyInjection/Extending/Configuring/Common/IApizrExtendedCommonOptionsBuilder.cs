@@ -9,11 +9,11 @@ using Refit;
 
 namespace Apizr.Extending.Configuring.Common
 {
-    public interface IApizrExtendedCommonOptionsBuilder<out TApizrExtendedCommonOptions, out TApizrExtendedCommonOptionsBuilder> : IApizrExtendedCommonOptionsBuilderBase, 
-        IApizrCommonOptionsBuilderBase<TApizrExtendedCommonOptions, TApizrExtendedCommonOptionsBuilder>,
+    public interface IApizrExtendedCommonOptionsBuilder<out TApizrExtendedCommonOptions, out TApizrExtendedCommonOptionsBuilder> : IApizrExtendedCommonOptionsBuilderBase,
+        IApizrGlobalCommonOptionsBuilderBase<TApizrExtendedCommonOptions, TApizrExtendedCommonOptionsBuilder>,
         IApizrExtendedSharedOptionsBuilder<TApizrExtendedCommonOptions, TApizrExtendedCommonOptionsBuilder>
         where TApizrExtendedCommonOptions : IApizrCommonOptionsBase
-        where TApizrExtendedCommonOptionsBuilder : IApizrCommonOptionsBuilderBase<TApizrExtendedCommonOptions, TApizrExtendedCommonOptionsBuilder>
+        where TApizrExtendedCommonOptionsBuilder : IApizrGlobalCommonOptionsBuilderBase<TApizrExtendedCommonOptions, TApizrExtendedCommonOptionsBuilder>
     {
 
         /// <summary>

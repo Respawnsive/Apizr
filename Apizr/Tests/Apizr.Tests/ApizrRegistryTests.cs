@@ -165,6 +165,9 @@ namespace Apizr.Tests
 
             var reqResManager = apizrRegistry.GetFor<IReqResService>();
 
+            // Clearing cache
+            await reqResManager.ClearCacheAsync();
+
             // Defining a throwing request
             Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.BadRequest));
 

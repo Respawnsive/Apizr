@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Logging;
@@ -10,7 +8,8 @@ using Microsoft.Extensions.Logging;
 
 namespace Apizr.Configuring.Shared
 {
-    public interface IApizrSharedOptionsBuilder<out TApizrSharedOptions, out TApizrSharedOptionsBuilder> : IApizrSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>
+    public interface IApizrSharedOptionsBuilder<out TApizrSharedOptions, out TApizrSharedOptionsBuilder> : 
+        IApizrSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>
         where TApizrSharedOptions : IApizrSharedOptionsBase
         where TApizrSharedOptionsBuilder : IApizrSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>
     {

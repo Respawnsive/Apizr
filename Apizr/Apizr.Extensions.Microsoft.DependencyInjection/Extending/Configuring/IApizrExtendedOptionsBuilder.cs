@@ -4,12 +4,12 @@ using Apizr.Extending.Configuring.Proper;
 
 namespace Apizr.Extending.Configuring
 {
-    public interface IApizrExtendedOptionsBuilder<out TApizrExtendedOptions, out TApizrExtendedOptionsBuilder> : IApizrExtendedOptionsBuilderBase,
-        IApizrOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>,
+    public interface IApizrExtendedOptionsBuilder<out TApizrExtendedOptions, out TApizrExtendedOptionsBuilder> : 
+        IApizrExtendedOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>,
         IApizrExtendedCommonOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>,
         IApizrExtendedProperOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>
-        where TApizrExtendedOptions : IApizrOptionsBase
-        where TApizrExtendedOptionsBuilder : IApizrOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>
+        where TApizrExtendedOptions : IApizrExtendedOptionsBase
+        where TApizrExtendedOptionsBuilder : IApizrExtendedOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>
     {
     }
 

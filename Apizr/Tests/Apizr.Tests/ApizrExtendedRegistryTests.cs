@@ -253,6 +253,9 @@ namespace Apizr.Tests
             var serviceProvider = services.BuildServiceProvider();
             var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
 
+            // Clear cache
+            await reqResManager.ClearCacheAsync();
+
             // Defining a throwing request
             Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.BadRequest));
 

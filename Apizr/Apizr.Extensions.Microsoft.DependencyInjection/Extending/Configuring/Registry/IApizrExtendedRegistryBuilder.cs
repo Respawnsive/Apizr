@@ -8,10 +8,11 @@ using Apizr.Requesting;
 
 namespace Apizr.Extending.Configuring.Registry
 {
-    public interface IApizrExtendedRegistryBuilder<out TApizrExtendedRegistry, out TApizrExtendedRegistryBuilder, out TApizrExtendedProperOptionsBuilder> : IApizrRegistryBuilderBase<TApizrExtendedRegistry, TApizrExtendedRegistryBuilder, TApizrExtendedProperOptionsBuilder>
+    public interface IApizrExtendedRegistryBuilder<out TApizrExtendedRegistry, out TApizrExtendedRegistryBuilder, out TApizrExtendedProperOptionsBuilder> : 
+        IApizrRegistryBuilderBase<TApizrExtendedRegistry, TApizrExtendedRegistryBuilder, TApizrExtendedProperOptionsBuilder>
         where TApizrExtendedRegistry : IApizrEnumerableRegistry
         where TApizrExtendedRegistryBuilder : IApizrRegistryBuilderBase<TApizrExtendedRegistry, TApizrExtendedRegistryBuilder, TApizrExtendedProperOptionsBuilder>
-        where TApizrExtendedProperOptionsBuilder : IApizrProperOptionsBuilderBase
+        where TApizrExtendedProperOptionsBuilder : IApizrGlobalProperOptionsBuilderBase
     {
         #region Crud
 

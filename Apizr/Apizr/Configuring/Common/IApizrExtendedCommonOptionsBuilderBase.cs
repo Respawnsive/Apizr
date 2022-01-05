@@ -1,6 +1,6 @@
 ﻿namespace Apizr.Configuring.Common
 {
-    public interface IApizrExtendedCommonOptionsBuilderBase : IApizrCommonOptionsBuilderBase
+    public interface IApizrExtendedCommonOptionsBuilderBase : IApizrGlobalCommonOptionsBuilderBase
     {
     }
 }

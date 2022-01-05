@@ -5,10 +5,10 @@ using Apizr.Extending.Configuring.Shared;
 namespace Apizr.Extending.Configuring.Proper
 {
     public interface IApizrExtendedProperOptionsBuilder<out TApizrExtendedProperOptions, out TApizrExtendedProperOptionsBuilder> : IApizrExtendedProperOptionsBuilderBase,
-        IApizrProperOptionsBuilderBase<TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder>,
+        IApizrGlobalProperOptionsBuilderBase<TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder>,
         IApizrExtendedSharedOptionsBuilder<TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder>
         where TApizrExtendedProperOptions : IApizrProperOptionsBase
-        where TApizrExtendedProperOptionsBuilder : IApizrProperOptionsBuilderBase<TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder>
+        where TApizrExtendedProperOptionsBuilder : IApizrGlobalProperOptionsBuilderBase<TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder>
     {
         /// <summary>
         /// Define your web api base address (could be defined with WebApiAttribute)

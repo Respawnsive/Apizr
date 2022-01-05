@@ -6,7 +6,8 @@ namespace Apizr.Configuring
     /// <summary>
     /// The options builder
     /// </summary>
-    public interface IApizrOptionsBuilder<out TApizrOptions, out TApizrOptionsBuilder> : IApizrOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>,
+    public interface IApizrOptionsBuilder<out TApizrOptions, out TApizrOptionsBuilder> : 
+        IApizrOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>,
         IApizrCommonOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>,
         IApizrProperOptionsBuilder<TApizrOptions, TApizrOptionsBuilder> 
         where TApizrOptions : IApizrOptionsBase

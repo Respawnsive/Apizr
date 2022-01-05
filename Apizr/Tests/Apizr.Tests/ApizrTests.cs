@@ -1,7 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using System.Net.Http;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Logging;
 using Apizr.Policing;
+using Apizr.Tests.Apis;
+using Apizr.Tests.Helpers;
+using Apizr.Tests.Models;
+using Apizr.Tests.Models.Mappings;
+using AutoMapper;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -9,6 +21,7 @@ using MonkeyCache.FileStore;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
+using Refit;
 using Xunit;
 using IReqResService = Apizr.Tests.Apis.IReqResService;
 
@@ -16,60 +29,29 @@ namespace Apizr.Tests
 {
     public class ApizrTests
     {
-        private readonly ILoggerFactory _loggerFactory;
-        private readonly IReadOnlyPolicyRegistry<string> _policyRegistry;
+        private readonly RefitSettings _refitSettings;
 
         public ApizrTests()
         {
-            _loggerFactory = new NullLoggerFactory();
-            _policyRegistry = new PolicyRegistry
+            var opts = new JsonSerializerOptions
             {
-                {
-                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
-                    {
-                        TimeSpan.FromSeconds(1),
-                        TimeSpan.FromSeconds(5),
-                        TimeSpan.FromSeconds(10)
-                    }, LoggedPolicies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
-                }
+                NumberHandling = JsonNumberHandling.AllowReadingFromString
             };
+            _refitSettings = new RefitSettings(new SystemTextJsonContentSerializer(opts));
 
-            Barrel.ApplicationId = nameof(ApizrTests);
+            Barrel.ApplicationId = nameof(ApizrExtendedRegistryTests);
         }
 
         [Fact]
-        public async Task IReqResService_GetUsersAsync_ShouldSucceed()
+        public void Apizr_Should_Create_Manager()
         {
-            var fixture = Apizr.CreateFor<IReqResService>();
-            var result = await fixture.ExecuteAsync(api => api.GetUsersAsync());
+            var reqResManager = Apizr.CreateFor<IReqResService>();
+            var httpBinManager = Apizr.CreateFor<IHttpBinService>();
+            var userManager = Apizr.CreateCrudFor<User, int, PagedResult<User>, IDictionary<string, object>>();
 
-            result.Should().NotBeNull();
-            result.Data.Should().NotBeNullOrEmpty();
-        }
-
-        [Fact]
-        public async Task IReqResService_GetUsersAsync_WithLogger_ShouldSucceed()
-        {
-            var fixture = Apizr.CreateFor<IReqResService>(options => options
-                .WithLoggerFactory(_loggerFactory)
-                .WithLogging());
-
-            var result = await fixture.ExecuteAsync(api => api.GetUsersAsync());
-
-            result.Should().NotBeNull();
-            result.Data.Should().NotBeNullOrEmpty();
-        }
-
-        [Fact]
-        public async Task IReqResService_GetUsersAsync_WithPolicy_ShouldSucceed()
-        {
-            var fixture = Apizr.CreateFor<IReqResService>(options => options
-                .WithPolicyRegistry(_policyRegistry));
-
-            var result = await fixture.ExecuteAsync(api => api.GetUsersAsync());
-
-            result.Should().NotBeNull();
-            result.Data.Should().NotBeNullOrEmpty();
+            reqResManager.Should().NotBeNull();
+            httpBinManager.Should().NotBeNull();
+            userManager.Should().NotBeNull();
         }
 
         [Fact]
@@ -77,33 +59,188 @@ namespace Apizr.Tests
         {
             var uri = new Uri("http://api.com");
 
-            var fixture = Apizr.CreateFor<IReqResService>(options => options
-                .WithBaseAddress(uri));
+            var reqResManager = Apizr.CreateFor<IReqResService>(options => options.WithBaseAddress(uri));
 
-            fixture.Options.BaseAddress.Should().Be(uri);
+            reqResManager.Options.BaseAddress.Should().Be(uri);
         }
 
         [Fact]
-        public async Task IReqResService_GetUsersAsync_WithDummyBaseAddress_ShouldThrow()
+        public async Task Calling_WithAuthenticationHandler_ProperOption_Should_Authenticate_Request()
         {
-            var fixture = Apizr.CreateFor<IReqResService>(options => options
-                .WithBaseAddress("http://api.com"));
+            string token = null;
 
-            Func<Task> act = () => fixture.ExecuteAsync(api => api.GetUsersAsync());
+            var httpBinManager = Apizr.CreateFor<IHttpBinService>(options =>
+                        options.WithAuthenticationHandler(_ => Task.FromResult(token = "token")));
 
-            await act.Should().ThrowAsync<ApizrException>();
+            var result = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
+
+            result.IsSuccessStatusCode.Should().BeTrue();
+            token.Should().Be("token");
         }
 
         [Fact]
-        public async Task IReqResService_GetUsersAsync_WithHttpClientHandler_ShouldSucceed()
+        public void Calling_WithLogging_Should_Set_LoggingSettings()
         {
-            var fixture = Apizr.CreateFor<IReqResService>(options => options
-                .WithHttpClientHandler(new HttpClientHandler()));
+            var reqResManager = Apizr.CreateFor<IReqResService>(options => options
+                    .WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.RequestCookies, LogLevel.Warning));
 
-            var result = await fixture.ExecuteAsync(api => api.GetUsersAsync());
+            reqResManager.Options.HttpTracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
+            reqResManager.Options.TrafficVerbosity.Should().Be(HttpMessageParts.RequestCookies);
+            reqResManager.Options.LogLevel.Should().Be(LogLevel.Warning);
+        }
 
+        [Fact]
+        public async Task Calling_WithAuthenticationHandler_CommonOption_Should_Authenticate_Request()
+        {
+            string token = null;
+
+            var httpBinManager = Apizr.CreateFor<IHttpBinService>(options => options
+                    .WithAuthenticationHandler(_ => Task.FromResult(token = "token")));
+
+            var result = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
+
+            result.IsSuccessStatusCode.Should().BeTrue();
+            token.Should().Be("token");
+        }
+
+        [Fact]
+        public async Task Calling_WithAkavacheCacheHandler_Should_Cache_Result()
+        {
+            var reqResManager = Apizr.CreateFor<IReqResService>(options => options
+                    .WithAkavacheCacheHandler()
+                    .AddDelegatingHandler(new FailingRequestHandler()));
+
+            // Defining a throwing request
+            Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.BadRequest));
+
+            // Calling it at first execution should throw as expected without any cached result
+            var ex = await act.Should().ThrowAsync<ApizrException<UserList>>();
+            ex.And.CachedResult.Should().BeNull();
+
+            // This one should succeed
+            var result = await reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+
+            // and cache result in-memory
             result.Should().NotBeNull();
             result.Data.Should().NotBeNullOrEmpty();
+
+            // This one should fail but with cached result
+            var ex2 = await act.Should().ThrowAsync<ApizrException<UserList>>();
+            ex2.And.CachedResult.Should().NotBeNull();
+        }
+
+        [Fact]
+        public async Task RequestTimeout_Should_Be_Handled_By_Polly()
+        {
+            var attempts = 0;
+            var sleepDurations = new[]
+            {
+                TimeSpan.FromSeconds(1),
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10)
+            };
+            var policyRegistry = new PolicyRegistry
+            {
+                {
+                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(
+                        sleepDurations,
+                        (_, _, retry, _) => attempts = retry).WithPolicyKey("TransientHttpError")
+                }
+            };
+
+            var reqResManager = Apizr.CreateFor<IReqResService>(options => options
+                    .WithPolicyRegistry(policyRegistry)
+                    .AddDelegatingHandler(new FailingRequestHandler()));
+
+            // Defining a transient throwing request
+            Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.RequestTimeout));
+
+            // Calling it should throw but handled by Polly
+            await act.Should().ThrowAsync<ApizrException>();
+
+            // attempts should be equal to total retry count
+            attempts.Should().Be(sleepDurations.Length);
+        }
+
+        [Fact]
+        public async Task Calling_WithConnectivityHandler_Should_Check_Connectivity()
+        {
+            var isConnected = false;
+
+            var reqResManager = Apizr.CreateFor<IReqResService>(options => options
+                    .WithConnectivityHandler(() => isConnected));
+
+            // Defining a request
+            Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+
+            // Calling it should throw as isConnected is at false
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<IOException>();
+
+            // Setting isConnected to true
+            isConnected = true;
+
+            // Then request should succeed
+            await act.Should().NotThrowAsync();
+        }
+
+        [Fact]
+        public void Calling_WithRefitSettings_Should_Set_Settings()
+        {
+            var reqResManager = Apizr.CreateFor<IReqResService>(options => options
+                    .WithRefitSettings(_refitSettings));
+
+            reqResManager.Options.RefitSettings.Should().Be(_refitSettings);
+        }
+
+        [Fact]
+        public async Task Calling_WithAutoMapperMappingHandler_Should_Map_Data()
+        {
+            var mapperConfig = new MapperConfiguration(config =>
+            {
+                config.AddProfile<UserDetailsUserInfosProfile>();
+                config.AddProfile<UserMinUserProfile>();
+            });
+
+            var reqResManager = Apizr.CreateFor<IReqResService>(options => options
+                    .WithRefitSettings(_refitSettings)
+                    .WithAutoMapperMappingHandler(mapperConfig));
+
+            var minUser = new MinUser { Name = "John" };
+
+            // This one should succeed
+            var result =
+                await reqResManager.ExecuteAsync<MinUser, User>(
+                    (api, user) => api.CreateUser(user, CancellationToken.None), minUser);
+
+            result.Should().NotBeNull();
+            result.Name.Should().Be(minUser.Name);
+            result.Id.Should().BeGreaterThanOrEqualTo(1);
+        }
+
+        [Fact]
+        public async Task Calling_WithMappingHandler_Should_Map_Data()
+        {
+            var mapperConfig = new MapperConfiguration(config =>
+            {
+                config.AddProfile<UserDetailsUserInfosProfile>();
+                config.AddProfile<UserMinUserProfile>();
+            });
+
+            var reqResManager = Apizr.CreateFor<IReqResService>(options => options
+                    .WithRefitSettings(_refitSettings)
+                    .WithMappingHandler(new AutoMapperMappingHandler(mapperConfig.CreateMapper())));
+
+            var minUser = new MinUser { Name = "John" };
+
+            // This one should succeed
+            var result =
+                await reqResManager.ExecuteAsync<MinUser, User>(
+                    (api, user) => api.CreateUser(user, CancellationToken.None), minUser);
+
+            result.Should().NotBeNull();
+            result.Name.Should().Be(minUser.Name);
+            result.Id.Should().BeGreaterThanOrEqualTo(1);
         }
     }
 }

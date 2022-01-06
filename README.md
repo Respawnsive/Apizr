@@ -3,6 +3,12 @@ Refit based web api client, but resilient (retry, connectivity, cache, auth, log
 
 You'll find a [blog post series here](https://www.respawnsive.com/category/blog-en/apizr/) about Apizr.
 
+#### V-Next
+
+This readme is all about v3 with related source code hosted by the master branch.
+We're about to release v4 during this 2022 Q1 with a lot of improvements and new features, plus some fixes.
+Feel free to keep an eye on source code hosted by the dev branch about this expected v4 release (Readme still about v3).
+
 ## Libraries
 
 Apizr v3+ introduced some breaking changes as it relies on Refit v6+ which actually introduced breaking changes and the fact that Fusillade has been moved from core package to a dedicated one.

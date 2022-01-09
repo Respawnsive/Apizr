@@ -1,4 +1,55 @@
-3.0
+4.0 (v-next)
+---
+
+### Apizr
+
+- [New] [Logging] Now fully relies on **MS Logging extensions**
+- [New] [Logging] Static fluent configuration now offers a **WithLoggerFactory option** to provide a custom logger factory
+- [BreakingChange] [Logging] TraceAttribute has been **renamed back to LogAttribute**
+- [New] [Logging] Now we can set logging settings within **LogAttribute at method level**
+- [New] [Logging] Now we can set **http tracing mode within LogAttribute** to ajust log writting conditions (ExceptionsOnly, ErrorsAndExceptionsOnly or Everything)
+- [New] [Logging] **No more HttpTracer NuGet package dependency** as source code has been integrated and largely adjusted to Apizr needs
+- [New] [Configuring] Both static and extended fluent configuration now offers a **Registry to set common options once for all** registered apis, while keeping proper options applied to selected apis
+- [New] [Configuring] Static fluent configuration could return the **registry that expose a Populate method** to register each generated Apizr manager in a container
+- [New] [Configuring] Generated **registry exposes GetFor, TryGetFor, GetCrudFor and TryGetCrudFor methods** so that it could be used everywhere to get managers, instead of direct access
+- [New] [Policing] Now we can **provide a custom PollyContext** if defined into the called api interface method, it will carry all logging settings for DelegatingHandler use.
+- [New] [Mapping] Now we can enjoy **data mapping with both static and extended configurations**
+- [Improvement] [Mapping] Now we can let Apizr **auto map data** right before sending request and/or after recieving response **by providing types on ExecuteAsync call**
+
+### Apizr.Extensions.Microsoft.DependencyInjection
+
+- [New] We can now **auto register crud managers for all scanned classes** decorated by crud attributes
+
+
+### Apizr.Extensions.Microsoft.Caching
+
+- [New] Brand new integration project to set **MS Caching extensions** as caching handler
+
+### Apizr.Integrations.Akavache
+
+- [Improvement] Now we can **ajust Akavache settings** while configuring
+- [New] Now we can register Akavache directly with the brand new **WithAkavacheCacheHandler option**
+
+### Apizr.Integrations.MediatR
+
+- [New] Now we can let Apizr **auto map data** right before sending request and/or after recieving response **by providing types on Apizr mediators Send call**
+- [New] Brand **new IApizrMediator & IApizrCrudMediator interfaces** to get things shorter than IMediator
+- 
+### Apizr.Integrations.Optional
+
+- [New] Now we can let Apizr **auto map data** right before sending request and/or after recieving response **by providing types on Apizr optional mediators Send call**
+- [New] Brand **new IApizrOptionalMediator & IApizrCrudOptionalMediator interfaces** to get things shorter than IMediator 
+
+### Apizr.Integrations.AutoMapper
+
+- [New] Now we can register AutoMapper directly with the brand new **WithAutoMapperMappingHandler option**
+- [Improvement] **No more extended package dependency** to enjoy data mapping with both static and extended configurations
+
+### ~~Apizr.Integrations.Shiny~~
+
+- [BreakingChange] This integration **project has been dropped out** as Shiny no longer provide built-in caching and logging feature anymore. Apizr now either relies on MS Caching extensions, Akavache or MonkeyCache for caching feature and MS Logging extensions for logging feature. You'll have to provide a connectivity handler if you want Apizr to check it.
+
+3.0 (current)
 ---
 
 ### Apizr

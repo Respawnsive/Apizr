@@ -6,8 +6,8 @@ You'll find a [blog post series here](https://www.respawnsive.com/category/blog-
 #### V-Next
 
 This readme is all about v3 with related source code hosted by the master branch.
-We're about to release v4 during this 2022 Q1 with a lot of improvements and new features, plus some fixes.
-Feel free to keep an eye on source code hosted by the dev branch about this expected v4 release (Readme still about v3).
+We're about to release v4 during 2022 Q1 with a lot of improvements and new features, plus some fixes.
+Feel free to keep an eye on source code hosted by the dev branch, especially the test project and the samples, to get an idea about this expected v4 release (Readme still about v3 but ChangeLog up to date with v4).
 
 ## Libraries
 

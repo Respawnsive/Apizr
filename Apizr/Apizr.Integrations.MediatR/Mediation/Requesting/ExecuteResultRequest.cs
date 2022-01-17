@@ -11,26 +11,26 @@ namespace Apizr.Mediation.Requesting
         ExecuteResultRequestBase<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>
     {
         public ExecuteResultRequest(Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData) : base(executeApiMethod, modelRequestData)
+            TModelRequestData modelRequestData, bool clearCache = false) : base(executeApiMethod, modelRequestData, clearCache)
         {
         }
 
         public ExecuteResultRequest(
             Expression<Func<CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData) : base(executeApiMethod, modelRequestData)
+            TModelRequestData modelRequestData, bool clearCache = false) : base(executeApiMethod, modelRequestData, clearCache)
         {
         }
 
         public ExecuteResultRequest(
             Expression<Func<Context, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, Context context) : base(executeApiMethod, modelRequestData, context)
+            TModelRequestData modelRequestData, Context context, bool clearCache = false) : base(executeApiMethod, modelRequestData, context, clearCache)
         {
         }
 
         public ExecuteResultRequest(
             Expression<Func<Context, CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>>
-                executeApiMethod, TModelRequestData modelRequestData, Context context) : base(executeApiMethod,
-            modelRequestData, context)
+                executeApiMethod, TModelRequestData modelRequestData, Context context, bool clearCache = false) : base(executeApiMethod,
+            modelRequestData, context, clearCache)
         {
         }
     }
@@ -38,54 +38,54 @@ namespace Apizr.Mediation.Requesting
     public class ExecuteResultRequest<TWebApi, TModelData, TApiData> :
             ExecuteResultRequestBase<TWebApi, TModelData, TApiData>
     {
-        public ExecuteResultRequest(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod) : base(executeApiMethod)
+        public ExecuteResultRequest(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false) : base(executeApiMethod, clearCache)
         {
         }
 
-        public ExecuteResultRequest(Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        public ExecuteResultRequest(Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context, bool clearCache = false) : base(executeApiMethod, context, clearCache)
         {
         }
 
-        public ExecuteResultRequest(Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod) : base(executeApiMethod)
+        public ExecuteResultRequest(Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false) : base(executeApiMethod, clearCache)
         {
         }
 
-        public ExecuteResultRequest(Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData) : base(executeApiMethod, modelData)
+        public ExecuteResultRequest(Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, bool clearCache = false) : base(executeApiMethod, modelData, clearCache)
         {
         }
 
-        public ExecuteResultRequest(Expression<Func<CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData) : base(executeApiMethod, modelData)
+        public ExecuteResultRequest(Expression<Func<CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, bool clearCache = false) : base(executeApiMethod, modelData, clearCache)
         {
         }
 
-        public ExecuteResultRequest(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        public ExecuteResultRequest(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, Context context, bool clearCache = false) : base(executeApiMethod, context, clearCache)
         {
         }
 
-        public ExecuteResultRequest(Expression<Func<Context, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Context context) : base(executeApiMethod, modelData, context)
+        public ExecuteResultRequest(Expression<Func<Context, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Context context, bool clearCache = false) : base(executeApiMethod, modelData, context, clearCache)
         {
         }
 
-        public ExecuteResultRequest(Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Context context) : base(executeApiMethod, modelData, context)
+        public ExecuteResultRequest(Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Context context, bool clearCache = false) : base(executeApiMethod, modelData, context, clearCache)
         {
         }
     }
 
     public class ExecuteResultRequest<TWebApi, TApiData> : ExecuteResultRequestBase<TWebApi, TApiData>
     {
-        public ExecuteResultRequest(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod) : base(executeApiMethod)
+        public ExecuteResultRequest(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false) : base(executeApiMethod, clearCache)
         {
         }
 
-        public ExecuteResultRequest(Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod) : base(executeApiMethod)
+        public ExecuteResultRequest(Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false) : base(executeApiMethod, clearCache)
         {
         }
 
-        public ExecuteResultRequest(Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        public ExecuteResultRequest(Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context, bool clearCache = false) : base(executeApiMethod, context, clearCache)
         {
         }
 
-        public ExecuteResultRequest(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        public ExecuteResultRequest(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, Context context, bool clearCache = false) : base(executeApiMethod, context, clearCache)
         {
         }
     }

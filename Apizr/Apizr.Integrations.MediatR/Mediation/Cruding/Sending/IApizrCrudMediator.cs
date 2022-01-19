@@ -106,58 +106,34 @@ namespace Apizr.Mediation.Cruding.Sending
         /// </summary>
         /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
         /// <returns></returns>
-        Task<TReadAllResult> SendReadAllQuery<TReadAllResult>();
+        Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR
         /// </summary>
         /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(Context context);
+        Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR
         /// </summary>
         /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(CancellationToken cancellationToken);
+        Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
         /// </summary>
         /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
         /// <param name="priority">The execution priority</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(int priority);
-
-        /// <summary>
-        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
-        /// </summary>
-        /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
-        /// <param name="priority">The execution priority</param>
-        /// <param name="context">The Polly context</param>
-        /// <returns></returns>
-        Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(int priority, Context context);
-
-        /// <summary>
-        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
-        /// </summary>
-        /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
-        /// <param name="priority">The execution priority</param>
-        /// <param name="cancellationToken">The cancellation token</param>
-        /// <returns></returns>
-        Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(int priority, CancellationToken cancellationToken);
-
-        /// <summary>
-        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
-        /// </summary>
-        /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
-        /// <param name="context">The Polly context</param>
-        /// <param name="cancellationToken">The cancellation token</param>
-        /// <returns></returns>
-        Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(Context context, CancellationToken cancellationToken);
+        Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(int priority, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
@@ -165,9 +141,40 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
-        /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(int priority, Context context, CancellationToken cancellationToken);
+        Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(int priority, Context context, bool clearCache = false);
+
+        /// <summary>
+        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
+        /// </summary>
+        /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
+        /// <param name="priority">The execution priority</param>
+        /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
+        /// <returns></returns>
+        Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(int priority, CancellationToken cancellationToken, bool clearCache = false);
+
+        /// <summary>
+        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
+        /// </summary>
+        /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
+        /// <param name="context">The Polly context</param>
+        /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
+        /// <returns></returns>
+        Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(Context context, CancellationToken cancellationToken, bool clearCache = false);
+
+        /// <summary>
+        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
+        /// </summary>
+        /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
+        /// <param name="priority">The execution priority</param>
+        /// <param name="context">The Polly context</param>
+        /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
+        /// <returns></returns>
+        Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(int priority, Context context, CancellationToken cancellationToken, bool clearCache = false);
 
         #endregion
 
@@ -176,10 +183,11 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR returning mapped result
         /// </summary>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
         /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>();
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR returning mapped result
@@ -187,8 +195,9 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
         /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(Context context);
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR returning mapped result
@@ -196,8 +205,9 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
         /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(CancellationToken cancellationToken);
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR with priority returning mapped result
@@ -205,8 +215,9 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
         /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <param name="priority">The execution priority</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(int priority);
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(int priority, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR with priority returning mapped result
@@ -215,9 +226,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <param name="priority">The execution priority</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(int priority,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR with priority returning mapped result
@@ -226,8 +238,9 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(int priority, Context context);
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(int priority, Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR with priority returning mapped result
@@ -236,9 +249,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR with priority returning mapped result
@@ -248,9 +262,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(int priority, Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         #endregion
 
@@ -262,8 +277,9 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TReadAllResult">The api result type</typeparam>
         /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
         /// <param name="readAllParams">The read all filters</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams);
+        Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR
@@ -272,8 +288,9 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Context context);
+        Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR
@@ -282,9 +299,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
@@ -293,9 +311,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="priority">The execution priority</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
-            int priority);
+            int priority, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
@@ -305,9 +324,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
-            int priority, Context context);
+            int priority, Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
@@ -317,10 +337,11 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="priority">The execution priority</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
             int priority,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR
@@ -330,9 +351,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
@@ -343,10 +365,11 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
             int priority, Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         #endregion
 
@@ -359,8 +382,9 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
         /// <param name="readAllParams">The read all filters</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams);
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR returning a mapped result
@@ -370,8 +394,9 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Context context);
+        Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR returning a mapped result
@@ -381,9 +406,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR with priority returning a mapped result
@@ -393,9 +419,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="priority">The execution priority</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
-            int priority);
+            int priority, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR with priority returning a mapped result
@@ -406,9 +433,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
-            int priority, Context context);
+            int priority, Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR with priority returning a mapped result
@@ -419,10 +447,11 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="priority">The execution priority</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
             int priority,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR returning a mapped result
@@ -433,9 +462,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelReadAllResult}"/> to Apizr using MediatR with priority returning a mapped result
@@ -447,10 +477,11 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
             int priority, Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         #endregion
 
@@ -466,8 +497,9 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TApiEntity">The api entity type</typeparam>
         /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
         /// <param name="key">The entity key</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key);
+        Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR
@@ -476,8 +508,9 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
         /// <param name="key">The entity key</param>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context);
+        Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR
@@ -486,9 +519,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
         /// <param name="key">The entity key</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR with priority
@@ -497,9 +531,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
         /// <param name="key">The entity key</param>
         /// <param name="priority">The execution priority</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            int priority);
+            int priority, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR
@@ -509,9 +544,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="key">The entity key</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR with priority
@@ -521,9 +557,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="key">The entity key</param>
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            int priority, Context context);
+            int priority, Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR with priority
@@ -533,10 +570,11 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="key">The entity key</param>
         /// <param name="priority">The execution priority</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key,
             int priority,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR with priority
@@ -547,10 +585,11 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key,
             int priority, Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         #endregion
 
@@ -563,8 +602,9 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TApiEntity">The api entity type to map to</typeparam>
         /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
         /// <param name="key">The entity key</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key);
+        Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR returning a mapped result
@@ -574,8 +614,9 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
         /// <param name="key">The entity key</param>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context);
+        Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR returning a mapped result
@@ -585,9 +626,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
         /// <param name="key">The entity key</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR with priority returning a mapped result
@@ -597,9 +639,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
         /// <param name="key">The entity key</param>
         /// <param name="priority">The execution priority</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            int priority);
+            int priority, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR returning a mapped result
@@ -610,9 +653,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="key">The entity key</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR with priority returning a mapped result
@@ -623,9 +667,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="key">The entity key</param>
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            int priority, Context context);
+            int priority, Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR with priority returning a mapped result
@@ -636,10 +681,11 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="key">The entity key</param>
         /// <param name="priority">The execution priority</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
             int priority,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR with priority returning a mapped result
@@ -651,10 +697,11 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
             int priority, Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         #endregion
 
@@ -916,62 +963,70 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR
         /// </summary>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TReadAllResult> SendReadAllQuery();
+        Task<TReadAllResult> SendReadAllQuery(bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR
         /// </summary>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TReadAllResult> SendReadAllQuery(Context context);
+        Task<TReadAllResult> SendReadAllQuery(Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR
         /// </summary>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TReadAllResult> SendReadAllQuery(CancellationToken cancellationToken);
+        Task<TReadAllResult> SendReadAllQuery(CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
         /// </summary>
         /// <param name="priority">The execution priority</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TReadAllResult> SendReadAllQuery(int priority);
-
-        /// <summary>
-        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
-        /// </summary>
-        /// <param name="priority">The execution priority</param>
-        /// <param name="context">The Polly context</param>
-        /// <returns></returns>
-        Task<TReadAllResult> SendReadAllQuery(int priority, Context context);
-
-        /// <summary>
-        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
-        /// </summary>
-        /// <param name="priority">The execution priority</param>
-        /// <param name="cancellationToken">The cancellation token</param>
-        /// <returns></returns>
-        Task<TReadAllResult> SendReadAllQuery(int priority, CancellationToken cancellationToken);
-
-        /// <summary>
-        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
-        /// </summary>
-        /// <param name="context">The Polly context</param>
-        /// <param name="cancellationToken">The cancellation token</param>
-        /// <returns></returns>
-        Task<TReadAllResult> SendReadAllQuery(Context context, CancellationToken cancellationToken);
+        Task<TReadAllResult> SendReadAllQuery(int priority, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
         /// </summary>
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
-        /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TReadAllResult> SendReadAllQuery(int priority, Context context, CancellationToken cancellationToken);
+        Task<TReadAllResult> SendReadAllQuery(int priority, Context context, bool clearCache = false);
+
+        /// <summary>
+        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
+        /// </summary>
+        /// <param name="priority">The execution priority</param>
+        /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
+        /// <returns></returns>
+        Task<TReadAllResult> SendReadAllQuery(int priority, CancellationToken cancellationToken, bool clearCache = false);
+
+        /// <summary>
+        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
+        /// </summary>
+        /// <param name="context">The Polly context</param>
+        /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
+        /// <returns></returns>
+        Task<TReadAllResult> SendReadAllQuery(Context context, CancellationToken cancellationToken, bool clearCache = false);
+
+        /// <summary>
+        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
+        /// </summary>
+        /// <param name="priority">The execution priority</param>
+        /// <param name="context">The Polly context</param>
+        /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
+        /// <returns></returns>
+        Task<TReadAllResult> SendReadAllQuery(int priority, Context context, CancellationToken cancellationToken, bool clearCache = false);
 
         #endregion
 
@@ -980,33 +1035,37 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR returning mapped result
         /// </summary>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <typeparam name="TModelEntityReadAllResult">The mapped result</typeparam>
         /// <returns></returns>
-        Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>();
+        Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR returning mapped result
         /// </summary>
         /// <typeparam name="TModelEntityReadAllResult">The mapped result</typeparam>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(Context context);
+        Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR returning mapped result
         /// </summary>
         /// <typeparam name="TModelEntityReadAllResult">The mapped result</typeparam>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(CancellationToken cancellationToken);
+        Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR with priority returning mapped result
         /// </summary>
         /// <typeparam name="TModelEntityReadAllResult">The mapped result</typeparam>
         /// <param name="priority">The execution priority</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(int priority);
+        Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(int priority, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR with priority returning mapped result
@@ -1014,9 +1073,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TModelEntityReadAllResult">The mapped result</typeparam>
         /// <param name="priority">The execution priority</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(int priority,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR with priority returning mapped result
@@ -1024,8 +1084,9 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TModelEntityReadAllResult">The mapped result</typeparam>
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(int priority, Context context);
+        Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(int priority, Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR with priority returning mapped result
@@ -1033,9 +1094,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TModelEntityReadAllResult">The mapped result</typeparam>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR with priority returning mapped result
@@ -1044,9 +1106,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(int priority, Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         #endregion
 
@@ -1056,34 +1119,38 @@ namespace Apizr.Mediation.Cruding.Sending
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR
         /// </summary>
         /// <param name="readAllParams">The read all filters</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams);
+        Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR
         /// </summary>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams, Context context);
+        Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams, Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR
         /// </summary>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
         /// </summary>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="priority">The execution priority</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams,
-            int priority);
+            int priority, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
@@ -1091,9 +1158,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams,
-            int priority, Context context);
+            int priority, Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
@@ -1101,10 +1169,11 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="priority">The execution priority</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams,
             int priority,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR
@@ -1112,9 +1181,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams, Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority
@@ -1123,10 +1193,11 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams,
             int priority, Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         #endregion
 
@@ -1137,8 +1208,9 @@ namespace Apizr.Mediation.Cruding.Sending
         /// </summary>
         /// <typeparam name="TModelEntityReadAllResult"></typeparam>
         /// <param name="readAllParams">The read all filters</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(TReadAllParams readAllParams);
+        Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(TReadAllParams readAllParams, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR returning a mapped result
@@ -1146,8 +1218,9 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TModelEntityReadAllResult"></typeparam>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(TReadAllParams readAllParams, Context context);
+        Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(TReadAllParams readAllParams, Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR returning a mapped result
@@ -1155,9 +1228,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TModelEntityReadAllResult"></typeparam>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(TReadAllParams readAllParams,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR with priority returning a mapped result
@@ -1165,9 +1239,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TModelEntityReadAllResult"></typeparam>
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="priority">The execution priority</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(TReadAllParams readAllParams,
-            int priority);
+            int priority, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR with priority returning a mapped result
@@ -1176,9 +1251,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(TReadAllParams readAllParams,
-            int priority, Context context);
+            int priority, Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR with priority returning a mapped result
@@ -1187,10 +1263,11 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="priority">The execution priority</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(TReadAllParams readAllParams,
             int priority,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR returning a mapped result
@@ -1199,9 +1276,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(TReadAllParams readAllParams, Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR with priority returning a mapped result
@@ -1211,10 +1289,11 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntityReadAllResult> SendReadAllQuery<TModelEntityReadAllResult>(TReadAllParams readAllParams,
             int priority, Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         #endregion
 
@@ -1228,34 +1307,38 @@ namespace Apizr.Mediation.Cruding.Sending
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR
         /// </summary>
         /// <param name="key">The entity key</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TApiEntity> SendReadQuery(TApiEntityKey key);
+        Task<TApiEntity> SendReadQuery(TApiEntityKey key, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR
         /// </summary>
         /// <param name="key">The entity key</param>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TApiEntity> SendReadQuery(TApiEntityKey key, Context context);
+        Task<TApiEntity> SendReadQuery(TApiEntityKey key, Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR
         /// </summary>
         /// <param name="key">The entity key</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TApiEntity> SendReadQuery(TApiEntityKey key,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR with priority
         /// </summary>
         /// <param name="key">The entity key</param>
         /// <param name="priority">The execution priority</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TApiEntity> SendReadQuery(TApiEntityKey key,
-            int priority);
+            int priority, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR
@@ -1263,9 +1346,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="key">The entity key</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TApiEntity> SendReadQuery(TApiEntityKey key, Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR with priority
@@ -1273,9 +1357,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="key">The entity key</param>
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TApiEntity> SendReadQuery(TApiEntityKey key,
-            int priority, Context context);
+            int priority, Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR with priority
@@ -1283,10 +1368,11 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="key">The entity key</param>
         /// <param name="priority">The execution priority</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TApiEntity> SendReadQuery(TApiEntityKey key,
             int priority,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR with priority
@@ -1295,10 +1381,11 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TApiEntity> SendReadQuery(TApiEntityKey key,
             int priority, Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         #endregion
 
@@ -1309,8 +1396,9 @@ namespace Apizr.Mediation.Cruding.Sending
         /// </summary>
         /// <typeparam name="TModelEntity"></typeparam>
         /// <param name="key">The entity key</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key);
+        Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR returning a mapped result
@@ -1318,8 +1406,9 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TModelEntity"></typeparam>
         /// <param name="key">The entity key</param>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
-        Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key, Context context);
+        Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key, Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR returning a mapped result
@@ -1327,9 +1416,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TModelEntity"></typeparam>
         /// <param name="key">The entity key</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR with priority returning a mapped result
@@ -1337,9 +1427,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <typeparam name="TModelEntity"></typeparam>
         /// <param name="key">The entity key</param>
         /// <param name="priority">The execution priority</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key,
-            int priority);
+            int priority, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR returning a mapped result
@@ -1348,9 +1439,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="key">The entity key</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key, Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR with priority returning a mapped result
@@ -1359,9 +1451,10 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="key">The entity key</param>
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key,
-            int priority, Context context);
+            int priority, Context context, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR with priority returning a mapped result
@@ -1370,10 +1463,11 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="key">The entity key</param>
         /// <param name="priority">The execution priority</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key,
             int priority,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR with priority returning a mapped result
@@ -1383,10 +1477,11 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="priority">The execution priority</param>
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing</param>
         /// <returns></returns>
         Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key,
             int priority, Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false);
 
         #endregion
 

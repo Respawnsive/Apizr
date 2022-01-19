@@ -5,24 +5,26 @@ namespace Apizr.Mediation.Querying
 {
     public abstract class MediationQueryBase<TResultData> : PrioritizedRequestBase<TResultData>, IMediationQuery<TResultData>
     {
-        protected MediationQueryBase() : base()
+        protected MediationQueryBase(bool clearCache) : base()
         {
-            
+            ClearCache = clearCache;
         }
 
-        protected MediationQueryBase(int priority) : base(priority)
+        protected MediationQueryBase(int priority, bool clearCache) : base(priority)
         {
-
+            ClearCache = clearCache;
         }
 
-        protected MediationQueryBase(Context context) : base(context)
+        protected MediationQueryBase(Context context, bool clearCache) : base(context)
         {
-
+            ClearCache = clearCache;
         }
 
-        protected MediationQueryBase(int priority, Context context) : base(priority, context)
+        protected MediationQueryBase(int priority, Context context, bool clearCache) : base(priority, context)
         {
-
+            ClearCache = clearCache;
         }
+
+        public bool ClearCache { get; }
     }
 }

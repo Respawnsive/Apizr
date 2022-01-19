@@ -5,38 +5,38 @@ namespace Apizr.Mediation.Cruding
 {
     public class ReadQuery<TResultData, TKey> : ReadQueryBase<TResultData, TKey>
     {
-        public ReadQuery(TKey key) : base(key)
+        public ReadQuery(TKey key, bool clearCache = false) : base(key, clearCache)
         {
         }
 
-        public ReadQuery(TKey key, int priority) : base(key, priority)
+        public ReadQuery(TKey key, int priority, bool clearCache = false) : base(key, priority, clearCache)
         {
         }
 
-        public ReadQuery(TKey key, Context context) : base(key, context)
+        public ReadQuery(TKey key, Context context, bool clearCache = false) : base(key, context, clearCache)
         {
         }
 
-        public ReadQuery(TKey key, int priority, Context context) : base(key, priority, context)
+        public ReadQuery(TKey key, int priority, Context context, bool clearCache = false) : base(key, priority, context, clearCache)
         {
         }
     }
 
     public class ReadQuery<TResultData> : ReadQueryBase<TResultData>
     {
-        public ReadQuery(int key) : base(key)
+        public ReadQuery(int key, bool clearCache = false) : base(key, clearCache)
         {
         }
 
-        public ReadQuery(int key, int priority) : base(key, priority)
+        public ReadQuery(int key, int priority, bool clearCache = false) : base(key, priority, clearCache)
         {
         }
 
-        public ReadQuery(int key, Context context) : base(key, context)
+        public ReadQuery(int key, Context context, bool clearCache = false) : base(key, context, clearCache)
         {
         }
 
-        public ReadQuery(int key, int priority, Context context) : base(key, priority, context)
+        public ReadQuery(int key, int priority, Context context, bool clearCache = false) : base(key, priority, context, clearCache)
         {
         }
     }

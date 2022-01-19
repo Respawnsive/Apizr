@@ -6,42 +6,42 @@ namespace Apizr.Mediation.Cruding
 {
     public class ReadAllQuery<TReadAllParams, TReadAllResult> : ReadAllQueryBase<TReadAllParams, TReadAllResult>
     {
-        public ReadAllQuery() : base(default)
+        public ReadAllQuery(bool clearCache = false) : base(default, clearCache)
         {
             
         }
 
-        public ReadAllQuery(TReadAllParams parameters) : base(parameters)
+        public ReadAllQuery(TReadAllParams parameters, bool clearCache = false) : base(parameters, clearCache)
         {
 
         }
 
-        public ReadAllQuery(int priority) : base(default, priority)
+        public ReadAllQuery(int priority, bool clearCache = false) : base(default, priority, clearCache)
         {
 
         }
 
-        public ReadAllQuery(Context context) : base(default, context)
+        public ReadAllQuery(Context context, bool clearCache = false) : base(default, context, clearCache)
         {
 
         }
 
-        public ReadAllQuery(TReadAllParams parameters, int priority) : base(parameters, priority)
+        public ReadAllQuery(TReadAllParams parameters, int priority, bool clearCache = false) : base(parameters, priority, clearCache)
         {
 
         }
 
-        public ReadAllQuery(TReadAllParams parameters, Context context) : base(parameters, context)
+        public ReadAllQuery(TReadAllParams parameters, Context context, bool clearCache = false) : base(parameters, context, clearCache)
         {
 
         }
 
-        public ReadAllQuery(int priority, Context context) : base(default, priority, context)
+        public ReadAllQuery(int priority, Context context, bool clearCache = false) : base(default, priority, context, clearCache)
         {
 
         }
 
-        public ReadAllQuery(TReadAllParams parameters, int priority, Context context) : base(parameters, priority, context)
+        public ReadAllQuery(TReadAllParams parameters, int priority, Context context, bool clearCache = false) : base(parameters, priority, context, clearCache)
         {
 
         }
@@ -49,36 +49,36 @@ namespace Apizr.Mediation.Cruding
 
     public class ReadAllQuery<TReadAllResult> : ReadAllQueryBase<TReadAllResult>
     {
-        public ReadAllQuery() : base(default)
+        public ReadAllQuery(bool clearCache = false) : base(default, clearCache)
         {
             
         }
 
-        public ReadAllQuery(IDictionary<string, object> parameters) : base(parameters)
+        public ReadAllQuery(IDictionary<string, object> parameters, bool clearCache = false) : base(parameters, clearCache)
         {
         }
 
-        public ReadAllQuery(int priority) : base(default, priority)
+        public ReadAllQuery(int priority, bool clearCache = false) : base(default, priority, clearCache)
         {
         }
 
-        public ReadAllQuery(Context context) : base(default, context)
+        public ReadAllQuery(Context context, bool clearCache = false) : base(default, context, clearCache)
         {
         }
 
-        public ReadAllQuery(IDictionary<string, object> parameters, int priority) : base(parameters, priority)
+        public ReadAllQuery(IDictionary<string, object> parameters, int priority, bool clearCache = false) : base(parameters, priority, clearCache)
         {
         }
 
-        public ReadAllQuery(IDictionary<string, object> parameters, Context context) : base(parameters, context)
+        public ReadAllQuery(IDictionary<string, object> parameters, Context context, bool clearCache = false) : base(parameters, context, clearCache)
         {
         }
 
-        public ReadAllQuery(int priority, Context context) : base(default, priority, context)
+        public ReadAllQuery(int priority, Context context, bool clearCache = false) : base(default, priority, context, clearCache)
         {
         }
 
-        public ReadAllQuery(IDictionary<string, object> parameters, int priority, Context context) : base(parameters, priority, context)
+        public ReadAllQuery(IDictionary<string, object> parameters, int priority, Context context, bool clearCache = false) : base(parameters, priority, context, clearCache)
         {
         }
     }

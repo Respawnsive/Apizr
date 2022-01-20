@@ -15,6 +15,7 @@
 - [New] [Policing] Now we can **provide a custom PollyContext** if defined into the called api interface method, it will carry all logging settings for DelegatingHandler use.
 - [New] [Mapping] Now we can enjoy **data mapping with both static and extended configurations**
 - [Improvement] [Mapping] Now we can let Apizr **auto map data** right before sending request and/or after recieving response **by providing types on ExecuteAsync call**
+- [New] [Caching] Now we can ask for **clearing request cache before executing**
 
 ### Apizr.Extensions.Microsoft.DependencyInjection
 
@@ -34,11 +35,13 @@
 
 - [New] Now we can let Apizr **auto map data** right before sending request and/or after recieving response **by providing types on Apizr mediators Send call**
 - [New] Brand **new IApizrMediator & IApizrCrudMediator interfaces** to get things shorter than IMediator
-- 
+- [New] Now we can ask for **clearing request cache before executing**
+
 ### Apizr.Integrations.Optional
 
 - [New] Now we can let Apizr **auto map data** right before sending request and/or after recieving response **by providing types on Apizr optional mediators Send call**
 - [New] Brand **new IApizrOptionalMediator & IApizrCrudOptionalMediator interfaces** to get things shorter than IMediator 
+- [New] Now we can ask for **clearing request cache before executing**
 
 ### Apizr.Integrations.AutoMapper
 

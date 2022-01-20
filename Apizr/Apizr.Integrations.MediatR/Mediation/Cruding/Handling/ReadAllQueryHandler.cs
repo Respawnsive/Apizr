@@ -23,7 +23,7 @@ namespace Apizr.Mediation.Cruding.Handling
         {
             return await CrudApiManager
                 .ExecuteAsync<TModelReadAllResult, TApiReadAllResult>(
-                    (ctx, ct, api) => api.ReadAll(request.Parameters, request.Priority, ctx, ct), request.Context,
+                    (ctx, ct, api) => api.ReadAll(request.Parameters, request.Priority, ctx, ct), request.Context, request.ClearCache,
                     cancellationToken)
                 .ConfigureAwait(false);
         }
@@ -46,7 +46,7 @@ namespace Apizr.Mediation.Cruding.Handling
         {
             return await CrudApiManager
                 .ExecuteAsync<TModelReadAllResult, TApiReadAllResult>(
-                    (ctx, ct, api) => api.ReadAll(request.Parameters, request.Priority, ctx, ct), request.Context,
+                    (ctx, ct, api) => api.ReadAll(request.Parameters, request.Priority, ctx, ct), request.Context, request.ClearCache,
                     cancellationToken)
                 .ConfigureAwait(false);
         }

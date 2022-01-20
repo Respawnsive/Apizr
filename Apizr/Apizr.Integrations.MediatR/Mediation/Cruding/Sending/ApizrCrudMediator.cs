@@ -58,142 +58,158 @@ namespace Apizr.Mediation.Cruding.Sending
 
         #region SendReadAllQuery
 
-        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult>() => _mediator.Send(new ReadAllQuery<TReadAllResult>());
+        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(bool clearCache = false) => _mediator.Send(new ReadAllQuery<TReadAllResult>(clearCache));
 
-        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(Context context) =>
-            _mediator.Send(new ReadAllQuery<TReadAllResult>(context));
+        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(Context context, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TReadAllResult>(context, clearCache));
 
-        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadAllQuery<TReadAllResult>(), cancellationToken);
+        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(CancellationToken cancellationToken,
+            bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TReadAllResult>(clearCache), cancellationToken);
 
-        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(int priority) =>
-            _mediator.Send(new ReadAllQuery<TReadAllResult>(priority));
+        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(int priority, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TReadAllResult>(priority, clearCache));
 
-        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(int priority, Context context) =>
-            _mediator.Send(new ReadAllQuery<TReadAllResult>(priority, context));
+        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(int priority, Context context,
+            bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TReadAllResult>(priority, context, clearCache));
 
         public Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(int priority,
-            CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadAllQuery<TReadAllResult>(priority), cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TReadAllResult>(priority, clearCache), cancellationToken);
 
-        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(Context context, CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadAllQuery<TReadAllResult>(context), cancellationToken);
+        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(Context context,
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TReadAllResult>(context, clearCache), cancellationToken);
 
-        public Task<TReadAllResult>
-            SendReadAllQuery<TReadAllResult>(int priority, Context context, CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadAllQuery<TReadAllResult>(priority, context), cancellationToken);
+        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(int priority, Context context,
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TReadAllResult>(priority, context, clearCache), cancellationToken);
 
         #endregion
 
         #region SendReadAllQuery<TModelReadAllResult>
 
-        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>() =>
-            _mediator.Send(new ReadAllQuery<TModelReadAllResult>());
-
-        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(Context context) =>
-            _mediator.Send(new ReadAllQuery<TModelReadAllResult>(context));
-
-        public Task<TModelReadAllResult>
-            SendReadAllQuery<TModelReadAllResult, TReadAllResult>(CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadAllQuery<TModelReadAllResult>(), cancellationToken);
-
-        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(int priority) =>
-            _mediator.Send(new ReadAllQuery<TModelReadAllResult>(priority));
-
-        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(int priority,
-            CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadAllQuery<TModelReadAllResult>(priority), cancellationToken);
-
-        public Task<TModelReadAllResult>
-            SendReadAllQuery<TModelReadAllResult, TReadAllResult>(int priority, Context context) =>
-            _mediator.Send(new ReadAllQuery<TModelReadAllResult>(priority, context));
+        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TModelReadAllResult>(clearCache));
 
         public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(Context context,
-            CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadAllQuery<TModelReadAllResult>(context), cancellationToken);
+            bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TModelReadAllResult>(context, clearCache));
+
+        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TModelReadAllResult>(clearCache), cancellationToken);
 
         public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(int priority,
-            Context context, CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadAllQuery<TModelReadAllResult>(priority, context), cancellationToken);
+            bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TModelReadAllResult>(priority, clearCache));
+
+        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(int priority,
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TModelReadAllResult>(priority, clearCache), cancellationToken);
+
+        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(int priority,
+            Context context, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TModelReadAllResult>(priority, context, clearCache));
+
+        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(Context context,
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TModelReadAllResult>(context, clearCache), cancellationToken);
+
+        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(int priority,
+            Context context, CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TModelReadAllResult>(priority, context, clearCache), cancellationToken);
 
         #endregion
 
         #region SendReadAllQuery(TReadAllParams)
 
-        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams) =>
-            _mediator.Send(new ReadAllQuery<TReadAllParams, TReadAllResult>(readAllParams));
-
-        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Context context) =>
-            _mediator.Send(new ReadAllQuery<TReadAllParams, TReadAllResult>(readAllParams, context));
+        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
+            bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TReadAllParams, TReadAllResult>(readAllParams, clearCache));
 
         public Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
-            CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadAllQuery<TReadAllParams, TReadAllResult>(readAllParams), cancellationToken);
+            Context context, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TReadAllParams, TReadAllResult>(readAllParams, context, clearCache));
 
         public Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
-            int priority) =>
-            _mediator.Send(new ReadAllQuery<TReadAllParams, TReadAllResult>(readAllParams, priority));
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TReadAllParams, TReadAllResult>(readAllParams, clearCache), cancellationToken);
 
-        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, int priority, Context context) =>
-            _mediator.Send(new ReadAllQuery<TReadAllParams, TReadAllResult>(readAllParams, priority, context));
+        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
+            int priority, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TReadAllParams, TReadAllResult>(readAllParams, priority, clearCache));
+
+        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
+            int priority, Context context, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TReadAllParams, TReadAllResult>(readAllParams, priority, context, clearCache));
 
         public Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
             int priority,
-            CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadAllQuery<TReadAllParams, TReadAllResult>(readAllParams, priority),
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TReadAllParams, TReadAllResult>(readAllParams, priority, clearCache),
                 cancellationToken);
 
-        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Context context,
-            CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadAllQuery<TReadAllParams, TReadAllResult>(readAllParams, context), cancellationToken);
+        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
+            Context context,
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TReadAllParams, TReadAllResult>(readAllParams, context, clearCache), cancellationToken);
 
-        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, int priority, Context context,
-            CancellationToken cancellationToken) => _mediator.Send(
-            new ReadAllQuery<TReadAllParams, TReadAllResult>(readAllParams, priority, context), cancellationToken);
+        public Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
+            int priority, Context context,
+            CancellationToken cancellationToken, bool clearCache = false) => _mediator.Send(
+            new ReadAllQuery<TReadAllParams, TReadAllResult>(readAllParams, priority, context, clearCache), cancellationToken);
 
         #endregion
 
         #region SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams)
 
-        public Task<TModelReadAllResult>
-            SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams readAllParams) =>
-            _mediator.Send(new ReadAllQuery<TReadAllParams, TModelReadAllResult>(readAllParams));
+        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(
+            TReadAllParams readAllParams, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TReadAllParams, TModelReadAllResult>(readAllParams, clearCache));
 
         public Task<TModelReadAllResult>
-            SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Context context) =>
-            _mediator.Send(new ReadAllQuery<TReadAllParams, TModelReadAllResult>(readAllParams, context));
+            SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Context context, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TReadAllParams, TModelReadAllResult>(readAllParams, context, clearCache));
 
-        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
-            CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadAllQuery<TReadAllParams, TModelReadAllResult>(readAllParams),
+        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(
+            TReadAllParams readAllParams,
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TReadAllParams, TModelReadAllResult>(readAllParams, clearCache),
                 cancellationToken);
 
-        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
-            int priority) =>
-            _mediator.Send(new ReadAllQuery<TReadAllParams, TModelReadAllResult>(readAllParams, priority));
+        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(
+            TReadAllParams readAllParams,
+            int priority, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TReadAllParams, TModelReadAllResult>(readAllParams, priority, clearCache));
 
-        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
-            int priority, Context context) =>
+        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(
+            TReadAllParams readAllParams,
+            int priority, Context context, bool clearCache = false) =>
             _mediator.Send(
-                new ReadAllQuery<TReadAllParams, TModelReadAllResult>(readAllParams, priority, context));
+                new ReadAllQuery<TReadAllParams, TModelReadAllResult>(readAllParams, priority, context, clearCache));
 
-        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
+        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(
+            TReadAllParams readAllParams,
             int priority,
-            CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadAllQuery<TReadAllParams, TModelReadAllResult>(readAllParams, priority),
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TReadAllParams, TModelReadAllResult>(readAllParams, priority, clearCache),
                 cancellationToken);
 
-        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
+        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(
+            TReadAllParams readAllParams,
             Context context,
-            CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadAllQuery<TReadAllParams, TModelReadAllResult>(readAllParams, context),
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadAllQuery<TReadAllParams, TModelReadAllResult>(readAllParams, context, clearCache),
                 cancellationToken);
 
-        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
+        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(
+            TReadAllParams readAllParams,
             int priority, Context context,
-            CancellationToken cancellationToken) =>
+            CancellationToken cancellationToken, bool clearCache = false) =>
             _mediator.Send(
-                new ReadAllQuery<TReadAllParams, TModelReadAllResult>(readAllParams, priority, context),
+                new ReadAllQuery<TReadAllParams, TModelReadAllResult>(readAllParams, priority, context, clearCache),
                 cancellationToken);
 
         #endregion
@@ -204,69 +220,75 @@ namespace Apizr.Mediation.Cruding.Sending
 
         #region SendReadQuery
 
-        public Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key) =>
-            _mediator.Send(new ReadQuery<TApiEntity, TApiEntityKey>(key));
+        public Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, bool clearCache = false) =>
+            _mediator.Send(new ReadQuery<TApiEntity, TApiEntityKey>(key, clearCache));
 
-        public Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context) =>
-            _mediator.Send(new ReadQuery<TApiEntity, TApiEntityKey>(key, context));
-
-        public Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadQuery<TApiEntity, TApiEntityKey>(key), cancellationToken);
+        public Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context, bool clearCache = false) =>
+            _mediator.Send(new ReadQuery<TApiEntity, TApiEntityKey>(key, context, clearCache));
 
         public Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            int priority) =>
-            _mediator.Send(new ReadQuery<TApiEntity, TApiEntityKey>(key, priority));
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadQuery<TApiEntity, TApiEntityKey>(key, clearCache), cancellationToken);
 
-        public Task<TApiEntity>
-            SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context, CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadQuery<TApiEntity, TApiEntityKey>(key, context), cancellationToken);
+        public Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key,
+            int priority, bool clearCache = false) =>
+            _mediator.Send(new ReadQuery<TApiEntity, TApiEntityKey>(key, priority, clearCache));
 
-        public Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, int priority, Context context) =>
-            _mediator.Send(new ReadQuery<TApiEntity, TApiEntityKey>(key, priority, context));
+        public Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context,
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadQuery<TApiEntity, TApiEntityKey>(key, context, clearCache), cancellationToken);
+
+        public Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, int priority,
+            Context context, bool clearCache = false) =>
+            _mediator.Send(new ReadQuery<TApiEntity, TApiEntityKey>(key, priority, context, clearCache));
 
         public Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key,
             int priority,
-            CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadQuery<TApiEntity, TApiEntityKey>(key, priority), cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadQuery<TApiEntity, TApiEntityKey>(key, priority, clearCache), cancellationToken);
 
-        public Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, int priority, Context context,
-            CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadQuery<TApiEntity, TApiEntityKey>(key, priority, context), cancellationToken);
+        public Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, int priority,
+            Context context,
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadQuery<TApiEntity, TApiEntityKey>(key, priority, context, clearCache), cancellationToken);
 
         #endregion
 
         #region SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>
 
-        public Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key) =>
-            _mediator.Send(new ReadQuery<TModelEntity, TApiEntityKey>(key));
+        public Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
+            bool clearCache = false) =>
+            _mediator.Send(new ReadQuery<TModelEntity, TApiEntityKey>(key, clearCache));
 
-        public Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context) =>
-            _mediator.Send(new ReadQuery<TModelEntity, TApiEntityKey>(key, context));
+        public Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context, bool clearCache = false) =>
+            _mediator.Send(new ReadQuery<TModelEntity, TApiEntityKey>(key, context, clearCache));
 
         public Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadQuery<TModelEntity, TApiEntityKey>(key), cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadQuery<TModelEntity, TApiEntityKey>(key, clearCache), cancellationToken);
 
         public Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            int priority) =>
-            _mediator.Send(new ReadQuery<TModelEntity, TApiEntityKey>(key, priority));
+            int priority, bool clearCache = false) =>
+            _mediator.Send(new ReadQuery<TModelEntity, TApiEntityKey>(key, priority, clearCache));
 
-        public Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context,
-            CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadQuery<TModelEntity, TApiEntityKey>(key, context), cancellationToken);
+        public Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
+            Context context,
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadQuery<TModelEntity, TApiEntityKey>(key, context, clearCache), cancellationToken);
 
-        public Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, int priority, Context context) =>
-            _mediator.Send(new ReadQuery<TModelEntity, TApiEntityKey>(key, priority, context));
+        public Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
+            int priority, Context context, bool clearCache = false) =>
+            _mediator.Send(new ReadQuery<TModelEntity, TApiEntityKey>(key, priority, context, clearCache));
 
         public Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
             int priority,
-            CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadQuery<TModelEntity, TApiEntityKey>(key, priority), cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadQuery<TModelEntity, TApiEntityKey>(key, priority, clearCache), cancellationToken);
 
-        public Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, int priority, Context context,
-            CancellationToken cancellationToken) =>
-            _mediator.Send(new ReadQuery<TModelEntity, TApiEntityKey>(key, priority, context), cancellationToken);
+        public Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
+            int priority, Context context,
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _mediator.Send(new ReadQuery<TModelEntity, TApiEntityKey>(key, priority, context, clearCache), cancellationToken);
 
         #endregion
 
@@ -387,141 +409,144 @@ namespace Apizr.Mediation.Cruding.Sending
 
         #region SendReadAllQuery
 
-        public Task<TReadAllResult> SendReadAllQuery() => _apizrMediator.SendReadAllQuery<TReadAllResult>();
+        public Task<TReadAllResult> SendReadAllQuery(bool clearCache = false) => _apizrMediator.SendReadAllQuery<TReadAllResult>(clearCache);
 
-        public Task<TReadAllResult> SendReadAllQuery(Context context) =>
-            _apizrMediator.SendReadAllQuery<TReadAllResult>(context);
+        public Task<TReadAllResult> SendReadAllQuery(Context context, bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TReadAllResult>(context, clearCache);
 
-        public Task<TReadAllResult> SendReadAllQuery(CancellationToken cancellationToken) =>
-            _apizrMediator.SendReadAllQuery<TReadAllResult>(cancellationToken);
+        public Task<TReadAllResult> SendReadAllQuery(CancellationToken cancellationToken, bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TReadAllResult>(cancellationToken, clearCache);
 
-        public Task<TReadAllResult> SendReadAllQuery(int priority) =>
-            _apizrMediator.SendReadAllQuery<TReadAllResult>(priority);
+        public Task<TReadAllResult> SendReadAllQuery(int priority, bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TReadAllResult>(priority, clearCache);
 
-        public Task<TReadAllResult> SendReadAllQuery(int priority, Context context) =>
-            _apizrMediator.SendReadAllQuery<TReadAllResult>(priority, context);
+        public Task<TReadAllResult> SendReadAllQuery(int priority, Context context, bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TReadAllResult>(priority, context, clearCache);
 
         public Task<TReadAllResult> SendReadAllQuery(int priority,
-            CancellationToken cancellationToken) =>
-            _apizrMediator.SendReadAllQuery<TReadAllResult>(priority, cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TReadAllResult>(priority, cancellationToken, clearCache);
 
-        public Task<TReadAllResult> SendReadAllQuery(Context context, CancellationToken cancellationToken) =>
-            _apizrMediator.SendReadAllQuery<TReadAllResult>(context, cancellationToken);
+        public Task<TReadAllResult> SendReadAllQuery(Context context, CancellationToken cancellationToken,
+            bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TReadAllResult>(context, cancellationToken, clearCache);
 
-        public Task<TReadAllResult>
-            SendReadAllQuery(int priority, Context context, CancellationToken cancellationToken) =>
-            _apizrMediator.SendReadAllQuery<TReadAllResult>(priority, context, cancellationToken);
+        public Task<TReadAllResult> SendReadAllQuery(int priority, Context context, CancellationToken cancellationToken,
+            bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TReadAllResult>(priority, context, cancellationToken, clearCache);
 
         #endregion
 
         #region SendReadAllQuery<TModelReadAllResult>
 
-        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>() =>
-            _apizrMediator.SendReadAllQuery<TModelReadAllResult>();
+        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TModelReadAllResult>(clearCache);
 
-        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(Context context) =>
-            _apizrMediator.SendReadAllQuery<TModelReadAllResult>(context);
+        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(Context context, bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TModelReadAllResult>(context, clearCache);
 
         public Task<TModelReadAllResult>
-            SendReadAllQuery<TModelReadAllResult>(CancellationToken cancellationToken) =>
-            _apizrMediator.SendReadAllQuery<TModelReadAllResult>(cancellationToken);
+            SendReadAllQuery<TModelReadAllResult>(CancellationToken cancellationToken, bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TModelReadAllResult>(cancellationToken, clearCache);
 
-        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(int priority) =>
-            _apizrMediator.SendReadAllQuery<TModelReadAllResult>(priority);
+        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(int priority, bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TModelReadAllResult>(priority, clearCache);
 
         public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(int priority,
-            CancellationToken cancellationToken) =>
-            _apizrMediator.SendReadAllQuery<TModelReadAllResult>(priority, cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TModelReadAllResult>(priority, cancellationToken, clearCache);
 
-        public Task<TModelReadAllResult>
-            SendReadAllQuery<TModelReadAllResult>(int priority, Context context) =>
-            _apizrMediator.SendReadAllQuery<TModelReadAllResult>(priority, context);
+        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(int priority, Context context,
+            bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TModelReadAllResult>(priority, context, clearCache);
 
         public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(Context context,
-            CancellationToken cancellationToken) =>
-            _apizrMediator.SendReadAllQuery<TModelReadAllResult>(context, cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TModelReadAllResult>(context, cancellationToken, clearCache);
 
         public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(int priority,
-            Context context, CancellationToken cancellationToken) =>
-            _apizrMediator.SendReadAllQuery<TModelReadAllResult>(priority, context, cancellationToken);
+            Context context, CancellationToken cancellationToken, bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TModelReadAllResult>(priority, context, cancellationToken, clearCache);
 
         #endregion
 
         #region SendReadAllQuery(TReadAllParams)
 
-        public Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams) =>
-            _apizrMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(readAllParams);
+        public Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams, bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(readAllParams, clearCache);
 
-        public Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams, Context context) =>
-            _apizrMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(readAllParams, context);
-
-        public Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams,
-            CancellationToken cancellationToken) =>
-            _apizrMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(readAllParams, cancellationToken);
+        public Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams, Context context,
+            bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(readAllParams, context, clearCache);
 
         public Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams,
-            int priority) =>
-            _apizrMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(readAllParams, priority);
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(readAllParams, cancellationToken, clearCache);
 
-        public Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams, int priority, Context context) =>
-            _apizrMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(readAllParams, priority, context);
+        public Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams,
+            int priority, bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(readAllParams, priority, clearCache);
+
+        public Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams, int priority, Context context,
+            bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(readAllParams, priority, context, clearCache);
 
         public Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams,
             int priority,
-            CancellationToken cancellationToken) =>
+            CancellationToken cancellationToken, bool clearCache = false) =>
             _apizrMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(readAllParams, priority,
-                cancellationToken);
+                cancellationToken, clearCache);
 
         public Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams, Context context,
-            CancellationToken cancellationToken) =>
-            _apizrMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(readAllParams, context, cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(readAllParams, context, cancellationToken, clearCache);
 
         public Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams, int priority, Context context,
-            CancellationToken cancellationToken) => 
-            _apizrMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(readAllParams, priority, context, cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false) => 
+            _apizrMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(readAllParams, priority, context, cancellationToken, clearCache);
 
         #endregion
 
         #region SendReadAllQuery<TModelReadAllResult>(TReadAllParams)
 
-        public Task<TModelReadAllResult>
-            SendReadAllQuery<TModelReadAllResult>(TReadAllParams readAllParams) =>
-            _apizrMediator.SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(readAllParams);
-
-        public Task<TModelReadAllResult>
-            SendReadAllQuery<TModelReadAllResult>(TReadAllParams readAllParams, Context context) =>
-            _apizrMediator.SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(readAllParams, context);
+        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(TReadAllParams readAllParams,
+            bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(readAllParams, clearCache);
 
         public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(TReadAllParams readAllParams,
-            CancellationToken cancellationToken) =>
+            Context context, bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(readAllParams, context, clearCache);
+
+        public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(TReadAllParams readAllParams,
+            CancellationToken cancellationToken, bool clearCache = false) =>
             _apizrMediator.SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(readAllParams,
-                cancellationToken);
+                cancellationToken, clearCache);
 
         public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(TReadAllParams readAllParams,
-            int priority) =>
-            _apizrMediator.SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(readAllParams, priority);
+            int priority, bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(readAllParams, priority, clearCache);
 
         public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(TReadAllParams readAllParams,
-            int priority, Context context) =>
-            _apizrMediator.SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(readAllParams, priority, context);
+            int priority, Context context, bool clearCache = false) =>
+            _apizrMediator.SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(readAllParams, priority, context, clearCache);
 
         public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(TReadAllParams readAllParams,
             int priority,
-            CancellationToken cancellationToken) =>
+            CancellationToken cancellationToken, bool clearCache = false) =>
             _apizrMediator.SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(readAllParams, priority,
-                cancellationToken);
+                cancellationToken, clearCache);
 
         public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(TReadAllParams readAllParams,
             Context context,
-            CancellationToken cancellationToken) =>
+            CancellationToken cancellationToken, bool clearCache = false) =>
             _apizrMediator.SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(readAllParams, context,
-                cancellationToken);
+                cancellationToken, clearCache);
 
         public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(TReadAllParams readAllParams,
             int priority, Context context,
-            CancellationToken cancellationToken) =>
+            CancellationToken cancellationToken, bool clearCache = false) =>
             _apizrMediator.SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(readAllParams, priority, context,
-                cancellationToken);
+                cancellationToken, clearCache);
 
         #endregion
 
@@ -531,69 +556,71 @@ namespace Apizr.Mediation.Cruding.Sending
 
         #region SendReadQuery
 
-        public Task<TApiEntity> SendReadQuery(TApiEntityKey key) =>
-            _apizrMediator.SendReadQuery<TApiEntity, TApiEntityKey>(key);
+        public Task<TApiEntity> SendReadQuery(TApiEntityKey key, bool clearCache = false) =>
+            _apizrMediator.SendReadQuery<TApiEntity, TApiEntityKey>(key, clearCache);
 
-        public Task<TApiEntity> SendReadQuery(TApiEntityKey key, Context context) =>
-            _apizrMediator.SendReadQuery<TApiEntity, TApiEntityKey>(key, context);
-
-        public Task<TApiEntity> SendReadQuery(TApiEntityKey key,
-            CancellationToken cancellationToken) =>
-            _apizrMediator.SendReadQuery<TApiEntity, TApiEntityKey>(key, cancellationToken);
+        public Task<TApiEntity> SendReadQuery(TApiEntityKey key, Context context, bool clearCache = false) =>
+            _apizrMediator.SendReadQuery<TApiEntity, TApiEntityKey>(key, context, clearCache);
 
         public Task<TApiEntity> SendReadQuery(TApiEntityKey key,
-            int priority) =>
-            _apizrMediator.SendReadQuery<TApiEntity, TApiEntityKey>(key, priority);
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _apizrMediator.SendReadQuery<TApiEntity, TApiEntityKey>(key, cancellationToken, clearCache);
 
-        public Task<TApiEntity>
-            SendReadQuery(TApiEntityKey key, Context context, CancellationToken cancellationToken) =>
-            _apizrMediator.SendReadQuery<TApiEntity, TApiEntityKey>(key, context, cancellationToken);
+        public Task<TApiEntity> SendReadQuery(TApiEntityKey key,
+            int priority, bool clearCache = false) =>
+            _apizrMediator.SendReadQuery<TApiEntity, TApiEntityKey>(key, priority, clearCache);
 
-        public Task<TApiEntity> SendReadQuery(TApiEntityKey key, int priority, Context context) =>
-            _apizrMediator.SendReadQuery<TApiEntity, TApiEntityKey>(key, priority, context);
+        public Task<TApiEntity> SendReadQuery(TApiEntityKey key, Context context, CancellationToken cancellationToken,
+            bool clearCache = false) =>
+            _apizrMediator.SendReadQuery<TApiEntity, TApiEntityKey>(key, context, cancellationToken, clearCache);
+
+        public Task<TApiEntity> SendReadQuery(TApiEntityKey key, int priority, Context context, bool clearCache = false) =>
+            _apizrMediator.SendReadQuery<TApiEntity, TApiEntityKey>(key, priority, context, clearCache);
 
         public Task<TApiEntity> SendReadQuery(TApiEntityKey key,
             int priority,
-            CancellationToken cancellationToken) =>
-            _apizrMediator.SendReadQuery<TApiEntity, TApiEntityKey>(key, priority, cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _apizrMediator.SendReadQuery<TApiEntity, TApiEntityKey>(key, priority, cancellationToken, clearCache);
 
         public Task<TApiEntity> SendReadQuery(TApiEntityKey key, int priority, Context context,
-            CancellationToken cancellationToken) =>
-            _apizrMediator.SendReadQuery<TApiEntity, TApiEntityKey>(key, priority, context, cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _apizrMediator.SendReadQuery<TApiEntity, TApiEntityKey>(key, priority, context, cancellationToken, clearCache);
 
         #endregion
 
         #region SendReadQuery<TModelEntity>
 
-        public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key) =>
-            _apizrMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(key);
-
-        public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key, Context context) =>
-            _apizrMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, context);
-
-        public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key,
-            CancellationToken cancellationToken) =>
-            _apizrMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, cancellationToken);
-
-        public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key,
-            int priority) =>
-            _apizrMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, priority);
+        public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key, bool clearCache = false) =>
+            _apizrMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, clearCache);
 
         public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key, Context context,
-            CancellationToken cancellationToken) =>
-            _apizrMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, context, cancellationToken);
+            bool clearCache = false) =>
+            _apizrMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, context, clearCache);
 
-        public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key, int priority, Context context) =>
-            _apizrMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, priority, context);
+        public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key,
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _apizrMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, cancellationToken, clearCache);
+
+        public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key,
+            int priority, bool clearCache = false) =>
+            _apizrMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, priority, clearCache);
+
+        public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key, Context context,
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _apizrMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, context, cancellationToken, clearCache);
+
+        public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key, int priority, Context context,
+            bool clearCache = false) =>
+            _apizrMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, priority, context, clearCache);
 
         public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key,
             int priority,
-            CancellationToken cancellationToken) =>
-            _apizrMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, priority, cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _apizrMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, priority, cancellationToken, clearCache);
 
         public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key, int priority, Context context,
-            CancellationToken cancellationToken) =>
-            _apizrMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, priority, context, cancellationToken);
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            _apizrMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, priority, context, cancellationToken, clearCache);
 
         #endregion
 

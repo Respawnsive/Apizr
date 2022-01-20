@@ -22,7 +22,7 @@ namespace Apizr.Mediation.Cruding.Handling
         {
             return await CrudApiManager
                 .ExecuteAsync<TModelEntity, TApiEntity>((ctx, ct, api, apiEntity) => api.Create(apiEntity, ctx, ct),
-                    request.RequestData, request.Context, cancellationToken)
+                    request.RequestData, request.Context, true, cancellationToken)
                 .ConfigureAwait(false);
         }
     }

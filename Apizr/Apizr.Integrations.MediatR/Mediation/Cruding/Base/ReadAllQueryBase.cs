@@ -6,22 +6,22 @@ namespace Apizr.Mediation.Cruding.Base
 {
     public abstract class ReadAllQueryBase<TReadAllParams, TReadAllResult> : MediationQueryBase<TReadAllResult>
     {
-        protected ReadAllQueryBase(TReadAllParams parameters)
+        protected ReadAllQueryBase(TReadAllParams parameters, bool clearCache) : base(clearCache)
         {
             Parameters = parameters;
         }
 
-        protected ReadAllQueryBase(TReadAllParams parameters, int priority) : base(priority)
+        protected ReadAllQueryBase(TReadAllParams parameters, int priority, bool clearCache) : base(priority, clearCache)
         {
             Parameters = parameters;
         }
 
-        protected ReadAllQueryBase(TReadAllParams parameters, Context context) : base(context)
+        protected ReadAllQueryBase(TReadAllParams parameters, Context context, bool clearCache) : base(context, clearCache)
         {
             Parameters = parameters;
         }
 
-        protected ReadAllQueryBase(TReadAllParams parameters, int priority, Context context) : base(priority, context)
+        protected ReadAllQueryBase(TReadAllParams parameters, int priority, Context context, bool clearCache) : base(priority, context, clearCache)
         {
             Parameters = parameters;
         }
@@ -31,19 +31,19 @@ namespace Apizr.Mediation.Cruding.Base
 
     public abstract class ReadAllQueryBase<TReadAllResult> : ReadAllQueryBase<IDictionary<string, object>, TReadAllResult>
     {
-        protected ReadAllQueryBase(IDictionary<string, object> parameters) : base(parameters)
+        protected ReadAllQueryBase(IDictionary<string, object> parameters, bool clearCache) : base(parameters, clearCache)
         {
         }
 
-        protected ReadAllQueryBase(IDictionary<string, object> parameters, int priority) : base(parameters, priority)
+        protected ReadAllQueryBase(IDictionary<string, object> parameters, int priority, bool clearCache) : base(parameters, priority, clearCache)
         {
         }
 
-        protected ReadAllQueryBase(IDictionary<string, object> parameters, Context context) : base(parameters, context)
+        protected ReadAllQueryBase(IDictionary<string, object> parameters, Context context, bool clearCache) : base(parameters, context, clearCache)
         {
         }
 
-        protected ReadAllQueryBase(IDictionary<string, object> parameters, int priority, Context context) : base(parameters, priority, context)
+        protected ReadAllQueryBase(IDictionary<string, object> parameters, int priority, Context context, bool clearCache) : base(parameters, priority, context, clearCache)
         {
         }
     }

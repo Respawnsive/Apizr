@@ -417,7 +417,8 @@ namespace Apizr
 
         #region Task<T>
 
-        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod)
+        public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod,
+            bool clearCache = false)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TResult>(executeApiMethod);
@@ -437,14 +438,26 @@ namespace Apizr
 
                 _apizrOptions.Logger.Log(logAttribute.LogLevel,
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
-
+                
                 result = await _cacheHandler.GetAsync<TResult>(cacheKey);
-                if (!Equals(result, default(TResult)))
-                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
-                        $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                if (!Equals(result, default))
+                {
+                    if (clearCache)
+                    {
+                        await _cacheHandler.RemoveAsync(cacheKey);
+                        result = default;
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Cached data cleared for this cache key");
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                                    $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key"); 
+                    }
+                } 
             }
 
-            if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
+            if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
                 try
                 {
@@ -494,7 +507,7 @@ namespace Apizr
 
         public async Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
             TModelRequestData>(Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData)
+            TModelRequestData modelRequestData, bool clearCache = false)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiResultData>(executeApiMethod);
@@ -517,12 +530,24 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TApiResultData>(cacheKey);
-                if (!Equals(result, default(TApiResultData)))
-                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
-                        $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                if (!Equals(result, default))
+                {
+                    if (clearCache)
+                    {
+                        await _cacheHandler.RemoveAsync(cacheKey);
+                        result = default;
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Cached data cleared for this cache key");
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                    }
+                }
             }
 
-            if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
+            if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
                 try
                 {
@@ -577,7 +602,8 @@ namespace Apizr
         }
 
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData)
+            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
+            bool clearCache = false)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
@@ -600,12 +626,24 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TApiData>(cacheKey);
-                if (!Equals(result, default(TApiData)))
-                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
-                        $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                if (!Equals(result, default))
+                {
+                    if (clearCache)
+                    {
+                        await _cacheHandler.RemoveAsync(cacheKey);
+                        result = default;
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Cached data cleared for this cache key");
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                    }
+                }
             }
 
-            if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
+            if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
                 try
                 {
@@ -660,7 +698,7 @@ namespace Apizr
         }
 
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod)
+            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
@@ -683,12 +721,24 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TApiData>(cacheKey);
-                if (!Equals(result, default(TApiData)))
-                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
-                        $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                if (!Equals(result, default))
+                {
+                    if (clearCache)
+                    {
+                        await _cacheHandler.RemoveAsync(cacheKey);
+                        result = default;
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Cached data cleared for this cache key");
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                    }
+                }
             }
 
-            if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
+            if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
                 try
                 {
@@ -739,6 +789,7 @@ namespace Apizr
 
         public async Task<TResult> ExecuteAsync<TResult>(
             Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod,
+            bool clearCache = false,
             CancellationToken cancellationToken = default)
         {
             var webApi = _lazyWebApi.Value;
@@ -761,12 +812,24 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TResult>(cacheKey, cancellationToken);
-                if (!Equals(result, default(TResult)))
-                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
-                        $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                if (!Equals(result, default))
+                {
+                    if (clearCache)
+                    {
+                        await _cacheHandler.RemoveAsync(cacheKey, cancellationToken);
+                        result = default;
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Cached data cleared for this cache key");
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                    }
+                }
             }
 
-            if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
+            if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
                 try
                 {
@@ -816,7 +879,8 @@ namespace Apizr
         }
 
         public async Task<TResult> ExecuteAsync<TResult>(
-            Expression<Func<Context, TWebApi, Task<TResult>>> executeApiMethod, Context context = null)
+            Expression<Func<Context, TWebApi, Task<TResult>>> executeApiMethod, Context context = null,
+            bool clearCache = false)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TResult>(executeApiMethod);
@@ -838,12 +902,24 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TResult>(cacheKey);
-                if (!Equals(result, default(TResult)))
-                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
-                        $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                if (!Equals(result, default))
+                {
+                    if (clearCache)
+                    {
+                        await _cacheHandler.RemoveAsync(cacheKey);
+                        result = default;
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Cached data cleared for this cache key");
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                    }
+                }
             }
 
-            if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
+            if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
                 try
                 {
@@ -895,7 +971,7 @@ namespace Apizr
         public async Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
             TModelRequestData>(
             Expression<Func<CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, CancellationToken cancellationToken = default)
+            TModelRequestData modelRequestData, bool clearCache = false, CancellationToken cancellationToken = default)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiResultData>(executeApiMethod);
@@ -918,12 +994,24 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TApiResultData>(cacheKey, cancellationToken);
-                if (!Equals(result, default(TApiResultData)))
-                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
-                        $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                if (!Equals(result, default))
+                {
+                    if (clearCache)
+                    {
+                        await _cacheHandler.RemoveAsync(cacheKey, cancellationToken);
+                        result = default;
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Cached data cleared for this cache key");
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                    }
+                }
             }
 
-            if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
+            if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
                 try
                 {
@@ -981,6 +1069,7 @@ namespace Apizr
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData,
+            bool clearCache = false,
             CancellationToken cancellationToken = default)
         {
             var webApi = _lazyWebApi.Value;
@@ -1004,12 +1093,24 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TApiData>(cacheKey, cancellationToken);
-                if (!Equals(result, default(TApiData)))
-                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
-                        $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                if (!Equals(result, default))
+                {
+                    if (clearCache)
+                    {
+                        await _cacheHandler.RemoveAsync(cacheKey, cancellationToken);
+                        result = default;
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Cached data cleared for this cache key");
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                    }
+                }
             }
 
-            if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
+            if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
                 try
                 {
@@ -1066,6 +1167,7 @@ namespace Apizr
 
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
+            bool clearCache = false,
             CancellationToken cancellationToken = default)
         {
             var webApi = _lazyWebApi.Value;
@@ -1089,12 +1191,24 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TApiData>(cacheKey, cancellationToken);
-                if (!Equals(result, default(TApiData)))
-                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
-                        $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                if (!Equals(result, default))
+                {
+                    if (clearCache)
+                    {
+                        await _cacheHandler.RemoveAsync(cacheKey, cancellationToken);
+                        result = default;
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Cached data cleared for this cache key");
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                    }
+                }
             }
 
-            if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
+            if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
                 try
                 {
@@ -1148,7 +1262,7 @@ namespace Apizr
         public async Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
             TModelRequestData>(
             Expression<Func<Context, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, Context context = null)
+            TModelRequestData modelRequestData, Context context = null, bool clearCache = false)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiResultData>(executeApiMethod);
@@ -1171,12 +1285,24 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TApiResultData>(cacheKey);
-                if (!Equals(result, default(TApiResultData)))
-                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
-                        $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                if (!Equals(result, default))
+                {
+                    if (clearCache)
+                    {
+                        await _cacheHandler.RemoveAsync(cacheKey);
+                        result = default;
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Cached data cleared for this cache key");
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                    }
+                }
             }
 
-            if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
+            if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
                 try
                 {
@@ -1233,7 +1359,7 @@ namespace Apizr
 
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<Context, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
-            Context context = null)
+            Context context = null, bool clearCache = false)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
@@ -1256,12 +1382,24 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TApiData>(cacheKey);
-                if (!Equals(result, default(TApiData)))
-                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
-                        $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                if (!Equals(result, default))
+                {
+                    if (clearCache)
+                    {
+                        await _cacheHandler.RemoveAsync(cacheKey);
+                        result = default;
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Cached data cleared for this cache key");
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                    }
+                }
             }
 
-            if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
+            if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
                 try
                 {
@@ -1317,7 +1455,8 @@ namespace Apizr
         }
 
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null)
+            Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null,
+            bool clearCache = false)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
@@ -1340,12 +1479,24 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TApiData>(cacheKey);
-                if (!Equals(result, default(TApiData)))
-                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
-                        $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                if (!Equals(result, default))
+                {
+                    if (clearCache)
+                    {
+                        await _cacheHandler.RemoveAsync(cacheKey);
+                        result = default;
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Cached data cleared for this cache key");
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                    }
+                }
             }
 
-            if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
+            if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
                 try
                 {
@@ -1398,7 +1549,7 @@ namespace Apizr
 
         public async Task<TResult> ExecuteAsync<TResult>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TResult>>> executeApiMethod,
-            Context context = null, CancellationToken cancellationToken = default)
+            Context context = null, bool clearCache = false, CancellationToken cancellationToken = default)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TResult>(executeApiMethod);
@@ -1420,12 +1571,24 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TResult>(cacheKey, cancellationToken);
-                if (!Equals(result, default(TResult)))
-                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
-                        $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                if (!Equals(result, default))
+                {
+                    if (clearCache)
+                    {
+                        await _cacheHandler.RemoveAsync(cacheKey, cancellationToken);
+                        result = default;
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Cached data cleared for this cache key");
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                    }
+                }
             }
 
-            if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
+            if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
                 try
                 {
@@ -1479,7 +1642,8 @@ namespace Apizr
             TModelRequestData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>>
                 executeApiMethod,
-            TModelRequestData modelRequestData, Context context = null, CancellationToken cancellationToken = default)
+            TModelRequestData modelRequestData, Context context = null, bool clearCache = false,
+            CancellationToken cancellationToken = default)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiResultData>(executeApiMethod);
@@ -1502,12 +1666,24 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TApiResultData>(cacheKey, cancellationToken);
-                if (!Equals(result, default(TApiResultData)))
-                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
-                        $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                if (!Equals(result, default))
+                {
+                    if (clearCache)
+                    {
+                        await _cacheHandler.RemoveAsync(cacheKey, cancellationToken);
+                        result = default;
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Cached data cleared for this cache key");
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                    }
+                }
             }
 
-            if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
+            if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
                 try
                 {
@@ -1566,6 +1742,7 @@ namespace Apizr
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData, Context context = null,
+            bool clearCache = false,
             CancellationToken cancellationToken = default)
         {
             var webApi = _lazyWebApi.Value;
@@ -1589,12 +1766,24 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TApiData>(cacheKey, cancellationToken);
-                if (!Equals(result, default(TApiData)))
-                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
-                        $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                if (!Equals(result, default))
+                {
+                    if (clearCache)
+                    {
+                        await _cacheHandler.RemoveAsync(cacheKey, cancellationToken);
+                        result = default;
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Cached data cleared for this cache key");
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                    }
+                }
             }
 
-            if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
+            if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
                 try
                 {
@@ -1653,6 +1842,7 @@ namespace Apizr
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
             Context context = null,
+            bool clearCache = false,
             CancellationToken cancellationToken = default)
         {
             var webApi = _lazyWebApi.Value;
@@ -1676,12 +1866,24 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
 
                 result = await _cacheHandler.GetAsync<TApiData>(cacheKey, cancellationToken);
-                if (!Equals(result, default(TApiData)))
-                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
-                        $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                if (!Equals(result, default))
+                {
+                    if (clearCache)
+                    {
+                        await _cacheHandler.RemoveAsync(cacheKey, cancellationToken);
+                        result = default;
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Cached data cleared for this cache key");
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                            $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                    }
+                }
             }
 
-            if (result == null || cacheAttribute?.Mode != CacheMode.GetOrFetch)
+            if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
                 try
                 {

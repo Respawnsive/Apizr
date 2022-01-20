@@ -70,70 +70,79 @@ namespace Apizr.Mediation.Requesting.Sending
 
         #region SendFor<TWebApi, TApiData>
 
-        public Task<TApiData> SendFor<TWebApi, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod)
-            => _mediator.Send(new ExecuteResultRequest<TWebApi, TApiData>(executeApiMethod));
+        public Task<TApiData> SendFor<TWebApi, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
+            bool clearCache = false)
+            => _mediator.Send(new ExecuteResultRequest<TWebApi, TApiData>(executeApiMethod, clearCache));
 
         public Task<TApiData> SendFor<TWebApi, TApiData>(
-            Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null)
-            => _mediator.Send(new ExecuteResultRequest<TWebApi, TApiData>(executeApiMethod, context));
+            Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null,
+            bool clearCache = false)
+            => _mediator.Send(new ExecuteResultRequest<TWebApi, TApiData>(executeApiMethod, context, clearCache));
 
         public Task<TApiData> SendFor<TWebApi, TApiData>(
             Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
+            bool clearCache = false,
             CancellationToken token = default)
-            => _mediator.Send(new ExecuteResultRequest<TWebApi, TApiData>(executeApiMethod), token);
+            => _mediator.Send(new ExecuteResultRequest<TWebApi, TApiData>(executeApiMethod, clearCache), token);
 
         public Task<TApiData> SendFor<TWebApi, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
-            Context context = null, CancellationToken token = default)
-            => _mediator.Send(new ExecuteResultRequest<TWebApi, TApiData>(executeApiMethod, context), token);
+            Context context = null, bool clearCache = false, CancellationToken token = default)
+            => _mediator.Send(new ExecuteResultRequest<TWebApi, TApiData>(executeApiMethod, context, clearCache), token);
 
         #endregion
 
         #region SendFor<TWebApi, TModelData, TApiData>
 
         public Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(
-            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod)
-            => _mediator.Send(new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod));
+            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false)
+            => _mediator.Send(new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, clearCache));
 
         public Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(
-            Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null)
-            => _mediator.Send(new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, context));
+            Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null,
+            bool clearCache = false)
+            => _mediator.Send(new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, context, clearCache));
 
         public Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
+            bool clearCache = false,
             CancellationToken token = default)
-            => _mediator.Send(new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod), token);
+            => _mediator.Send(new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, clearCache), token);
 
         public Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
             Context context = null,
+            bool clearCache = false,
             CancellationToken token = default)
-            => _mediator.Send(new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, context),
+            => _mediator.Send(new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, context, clearCache),
                 token);
 
         public Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(
-            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData)
-            => _mediator.Send(new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData));
+            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
+            bool clearCache = false)
+            => _mediator.Send(new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, clearCache));
 
         public Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<Context, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
-            Context context = null)
+            Context context = null, bool clearCache = false)
             => _mediator.Send(
-                new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, context));
+                new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, context, clearCache));
 
         public Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData,
+            bool clearCache = false,
             CancellationToken token = default)
-            => _mediator.Send(new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData),
+            => _mediator.Send(new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, clearCache),
                 token);
 
         public Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData, Context context = null,
+            bool clearCache = false,
             CancellationToken token = default)
             => _mediator.Send(
-                new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, context), token);
+                new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, context, clearCache), token);
 
         #endregion
 
@@ -141,35 +150,36 @@ namespace Apizr.Mediation.Requesting.Sending
 
         public Task<TModelResultData> SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData,
             TModelRequestData>(Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData)
+            TModelRequestData modelRequestData, bool clearCache = false)
             => _mediator.Send(
                 new ExecuteResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                    executeApiMethod, modelRequestData));
+                    executeApiMethod, modelRequestData, clearCache));
 
         public Task<TModelResultData> SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData,
             TModelRequestData>(
             Expression<Func<CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, CancellationToken token = default)
+            TModelRequestData modelRequestData, bool clearCache = false, CancellationToken token = default)
             => _mediator.Send(
                 new ExecuteResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                    executeApiMethod, modelRequestData), token);
+                    executeApiMethod, modelRequestData, clearCache), token);
 
         public Task<TModelResultData> SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData,
             TModelRequestData>(
             Expression<Func<Context, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, Context context = null)
+            TModelRequestData modelRequestData, Context context = null, bool clearCache = false)
             => _mediator.Send(
                 new ExecuteResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                    executeApiMethod, modelRequestData, context));
+                    executeApiMethod, modelRequestData, context, clearCache));
 
         public Task<TModelResultData> SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData,
             TModelRequestData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>>
                 executeApiMethod,
-            TModelRequestData modelRequestData, Context context = null, CancellationToken token = default)
+            TModelRequestData modelRequestData, Context context = null, bool clearCache = false,
+            CancellationToken token = default)
             => _mediator.Send(
                 new ExecuteResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                    executeApiMethod, modelRequestData, context), token);  
+                    executeApiMethod, modelRequestData, context, clearCache), token);  
 
         #endregion
 
@@ -234,66 +244,74 @@ namespace Apizr.Mediation.Requesting.Sending
 
         #region SendFor<TApiData>
 
-        public Task<TApiData> SendFor<TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod)
-            => _apizrMediator.SendFor<TWebApi, TApiData>(executeApiMethod);
+        public Task<TApiData> SendFor<TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
+            bool clearCache = false)
+            => _apizrMediator.SendFor<TWebApi, TApiData>(executeApiMethod, clearCache);
 
         public Task<TApiData> SendFor<TApiData>(Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod,
-            Context context = null)
-            => _apizrMediator.SendFor<TWebApi, TApiData>(executeApiMethod, context);
+            Context context = null, bool clearCache = false)
+            => _apizrMediator.SendFor<TWebApi, TApiData>(executeApiMethod, context, clearCache);
 
         public Task<TApiData> SendFor<TApiData>(
             Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
+            bool clearCache = false,
             CancellationToken token = default)
-            => _apizrMediator.SendFor<TWebApi, TApiData>(executeApiMethod, token);
+            => _apizrMediator.SendFor<TWebApi, TApiData>(executeApiMethod, clearCache, token);
 
         public Task<TApiData> SendFor<TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
-            Context context = null, CancellationToken token = default)
-            => _apizrMediator.SendFor<TWebApi, TApiData>(executeApiMethod, context, token);
+            Context context = null, bool clearCache = false, CancellationToken token = default)
+            => _apizrMediator.SendFor<TWebApi, TApiData>(executeApiMethod, context, clearCache, token);
 
         #endregion
 
         #region SendFor<TModelData, TApiData>
 
         public Task<TModelData> SendFor<TModelData, TApiData>(
-            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod)
-            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod);
+            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false)
+            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, clearCache);
 
         public Task<TModelData> SendFor<TModelData, TApiData>(
-            Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null)
-            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, context);
+            Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null,
+            bool clearCache = false)
+            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, context, clearCache);
 
         public Task<TModelData> SendFor<TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
+            bool clearCache = false,
             CancellationToken token = default)
-            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, token);
+            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, clearCache, token);
 
         public Task<TModelData> SendFor<TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
             Context context = null,
+            bool clearCache = false,
             CancellationToken token = default)
-            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, context, token);
+            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, context, clearCache, token);
 
         public Task<TModelData> SendFor<TModelData, TApiData>(
-            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData)
-            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, modelData);
+            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
+            bool clearCache = false)
+            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, clearCache);
 
         public Task<TModelData> SendFor<TModelData, TApiData>(
             Expression<Func<Context, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
-            Context context = null)
-            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, context);
+            Context context = null, bool clearCache = false)
+            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, context, clearCache);
 
         public Task<TModelData> SendFor<TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData,
+            bool clearCache = false,
             CancellationToken token = default)
-            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, token);
+            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, clearCache, token);
 
         public Task<TModelData> SendFor<TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData, Context context = null,
+            bool clearCache = false,
             CancellationToken token = default)
-            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, context, token);
+            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, context, clearCache, token);
 
         #endregion
 
@@ -301,28 +319,29 @@ namespace Apizr.Mediation.Requesting.Sending
 
         public Task<TModelResultData> SendFor<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData)
+            TModelRequestData modelRequestData, bool clearCache = false)
             => _apizrMediator.SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                executeApiMethod, modelRequestData);
+                executeApiMethod, modelRequestData, clearCache);
 
         public Task<TModelResultData> SendFor<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, CancellationToken token = default)
+            TModelRequestData modelRequestData, bool clearCache = false, CancellationToken token = default)
             => _apizrMediator.SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                executeApiMethod, modelRequestData, token);
+                executeApiMethod, modelRequestData, clearCache, token);
 
         public Task<TModelResultData> SendFor<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<Context, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, Context context = null)
+            TModelRequestData modelRequestData, Context context = null, bool clearCache = false)
             => _apizrMediator.SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                executeApiMethod, modelRequestData, context);
+                executeApiMethod, modelRequestData, context, clearCache);
 
         public Task<TModelResultData> SendFor<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>>
                 executeApiMethod,
-            TModelRequestData modelRequestData, Context context = null, CancellationToken token = default)
+            TModelRequestData modelRequestData, Context context = null, bool clearCache = false,
+            CancellationToken token = default)
             => _apizrMediator.SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                executeApiMethod, modelRequestData, context, token);  
+                executeApiMethod, modelRequestData, context, clearCache, token);  
 
         #endregion
 

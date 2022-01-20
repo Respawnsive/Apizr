@@ -293,10 +293,10 @@ namespace Apizr.Tests
             var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
 
             // Defining a throwing request
-            Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.BadRequest));
+            Func<bool, Task> act = clearCache => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.BadRequest), clearCache);
 
             // Calling it at first execution should throw as expected without any cached result
-            var ex = await act.Should().ThrowAsync<ApizrException<UserList>>();
+            var ex = await act.Invoking(x => x.Invoke(false)).Should().ThrowAsync<ApizrException<UserList>>();
             ex.And.CachedResult.Should().BeNull();
 
             // This one should succeed
@@ -307,8 +307,12 @@ namespace Apizr.Tests
             result.Data.Should().NotBeNullOrEmpty();
 
             // This one should fail but with cached result
-            var ex2 = await act.Should().ThrowAsync<ApizrException<UserList>>();
-            ex2.And.CachedResult.Should().NotBeNull();
+            ex = await act.Invoking(x => x.Invoke(false)).Should().ThrowAsync<ApizrException<UserList>>();
+            ex.And.CachedResult.Should().NotBeNull();
+
+            // This one should fail but without any cached result as we asked for clearing it
+            ex = await act.Invoking(x => x.Invoke(true)).Should().ThrowAsync<ApizrException<UserList>>();
+            ex.And.CachedResult.Should().BeNull();
         }
 
         [Fact]

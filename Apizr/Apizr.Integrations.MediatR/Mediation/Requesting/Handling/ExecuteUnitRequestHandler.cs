@@ -21,22 +21,22 @@ namespace Apizr.Mediation.Requesting.Handling
             switch (request.ExecuteApiMethod)
             {
                 case Expression<Func<TWebApi, TApiData, Task>> executeApiMethod:
-                    await WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData)
+                    await WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, request.OnException)
                         .ConfigureAwait(false);
                     break;
 
                 case Expression<Func<CancellationToken, TWebApi, TApiData, Task>> executeApiMethod:
-                    await WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, cancellationToken)
+                    await WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, cancellationToken, request.OnException)
                         .ConfigureAwait(false);
                     break;
 
                 case Expression<Func<Context, TWebApi, TApiData, Task>> executeApiMethod:
-                    await WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, request.Context)
+                    await WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, request.Context, request.OnException)
                         .ConfigureAwait(false);
                     break;
 
                 case Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task>> executeApiMethod:
-                    await WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, request.Context, cancellationToken)
+                    await WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, request.Context, cancellationToken, request.OnException)
                         .ConfigureAwait(false);
                     break;
 
@@ -59,22 +59,22 @@ namespace Apizr.Mediation.Requesting.Handling
             switch (request.ExecuteApiMethod)
             {
                 case Expression<Func<TWebApi, Task>> executeApiMethod:
-                    await WebApiManager.ExecuteAsync(executeApiMethod)
+                    await WebApiManager.ExecuteAsync(executeApiMethod, request.OnException)
                         .ConfigureAwait(false);
                     break;
 
                 case Expression<Func<Context, TWebApi, Task>> executeApiMethod:
-                    await WebApiManager.ExecuteAsync(executeApiMethod, request.Context)
+                    await WebApiManager.ExecuteAsync(executeApiMethod, request.Context, request.OnException)
                         .ConfigureAwait(false);
                     break;
 
                 case Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod:
-                    await WebApiManager.ExecuteAsync(executeApiMethod, cancellationToken)
+                    await WebApiManager.ExecuteAsync(executeApiMethod, cancellationToken, request.OnException)
                         .ConfigureAwait(false);
                     break;
 
                 case Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod:
-                    await WebApiManager.ExecuteAsync(executeApiMethod, request.Context, cancellationToken)
+                    await WebApiManager.ExecuteAsync(executeApiMethod, request.Context, cancellationToken, request.OnException)
                         .ConfigureAwait(false);
                     break;
 

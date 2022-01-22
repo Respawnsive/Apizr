@@ -16,6 +16,7 @@
 - [New] [Mapping] Now we can enjoy **data mapping with both static and extended configurations**
 - [Improvement] [Mapping] Now we can let Apizr **auto map data** right before sending request and/or after recieving response **by providing types on ExecuteAsync call**
 - [New] [Caching] Now we can ask for **clearing request cache before executing**
+- [New] [Exceptions] Brand new **onException Action parameter to handle it globally** (e.g. user dialog/toast) and let potential cached data return to caller as expected (e.g. refreshing UI)
 
 ### Apizr.Extensions.Microsoft.DependencyInjection
 
@@ -36,6 +37,7 @@
 - [New] Now we can let Apizr **auto map data** right before sending request and/or after recieving response **by providing types on Apizr mediators Send call**
 - [New] Brand **new IApizrMediator & IApizrCrudMediator interfaces** to get things shorter than IMediator
 - [New] Now we can ask for **clearing request cache before executing**
+- [New] Brand new **onException Action parameter to handle it globally** (e.g. user dialog/toast) and let potential cached data return to caller as expected (e.g. refreshing UI)
 
 ### Apizr.Integrations.Optional
 

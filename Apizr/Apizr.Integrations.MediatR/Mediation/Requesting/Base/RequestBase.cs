@@ -14,6 +14,7 @@ namespace Apizr.Mediation.Requesting.Base
         protected RequestBase(Context context, Action<Exception> onException = null)
         {
             Context = context;
+            OnException = onException;
         }
 
         public Context Context { get; }

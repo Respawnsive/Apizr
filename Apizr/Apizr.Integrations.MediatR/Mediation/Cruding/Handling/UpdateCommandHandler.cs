@@ -24,7 +24,7 @@ namespace Apizr.Mediation.Cruding.Handling
             await CrudApiManager
                 .ExecuteAsync<TModelEntity, TApiEntity>(
                     (ctx, ct, api, apiEntity) => api.Update(request.Key, apiEntity, ctx, ct), request.RequestData,
-                    request.Context, cancellationToken)
+                    request.Context, cancellationToken, request.OnException)
                 .ConfigureAwait(false);
 
             return Unit.Value;
@@ -48,7 +48,7 @@ namespace Apizr.Mediation.Cruding.Handling
             await CrudApiManager
                 .ExecuteAsync<TModelEntity, TApiEntity>(
                     (ctx, ct, api, apiEntity) => api.Update(request.Key, apiEntity, ctx, ct), request.RequestData,
-                    request.Context, cancellationToken)
+                    request.Context, cancellationToken, request.OnException)
                 .ConfigureAwait(false);
 
             return Unit.Value;

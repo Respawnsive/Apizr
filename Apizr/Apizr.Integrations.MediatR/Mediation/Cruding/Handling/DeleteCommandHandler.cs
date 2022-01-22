@@ -22,7 +22,7 @@ namespace Apizr.Mediation.Cruding.Handling
             CancellationToken cancellationToken)
         {
             await CrudApiManager.ExecuteAsync((ctx, ct, api) => api.Delete(request.Key, ctx, ct), request.Context,
-                    cancellationToken)
+                    cancellationToken, request.OnException)
                 .ConfigureAwait(false);
 
             return Unit.Value;
@@ -45,7 +45,7 @@ namespace Apizr.Mediation.Cruding.Handling
             CancellationToken cancellationToken)
         {
             await CrudApiManager.ExecuteAsync((ctx, ct, api) => api.Delete(request.Key, ctx, ct), request.Context,
-                    cancellationToken)
+                    cancellationToken, request.OnException)
                 .ConfigureAwait(false);
 
             return Unit.Value;

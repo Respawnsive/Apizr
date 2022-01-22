@@ -293,10 +293,10 @@ namespace Apizr.Tests
             var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
 
             // Defining a throwing request
-            Func<bool, Task> act = clearCache => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.BadRequest), clearCache);
+            Func<bool, Action<Exception>, Task<UserList>> act = (clearCache, onException) => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.BadRequest), clearCache, onException);
 
             // Calling it at first execution should throw as expected without any cached result
-            var ex = await act.Invoking(x => x.Invoke(false)).Should().ThrowAsync<ApizrException<UserList>>();
+            var ex = await act.Invoking(x => x.Invoke(false, null)).Should().ThrowAsync<ApizrException<UserList>>();
             ex.And.CachedResult.Should().BeNull();
 
             // This one should succeed
@@ -307,11 +307,21 @@ namespace Apizr.Tests
             result.Data.Should().NotBeNullOrEmpty();
 
             // This one should fail but with cached result
-            ex = await act.Invoking(x => x.Invoke(false)).Should().ThrowAsync<ApizrException<UserList>>();
+            ex = await act.Invoking(x => x.Invoke(false, null)).Should().ThrowAsync<ApizrException<UserList>>();
             ex.And.CachedResult.Should().NotBeNull();
 
+            // this one should return cached result and handle exception
+            result = await act.Invoke(false, e =>
+            {
+                // The handled exception with cached result on this side
+                e.Should().BeOfType<ApizrException<UserList>>().Which.CachedResult.Should().NotBeNull();
+            });
+
+            // The returned result on the other side
+            result.Should().NotBeNull();
+
             // This one should fail but without any cached result as we asked for clearing it
-            ex = await act.Invoking(x => x.Invoke(true)).Should().ThrowAsync<ApizrException<UserList>>();
+            ex = await act.Invoking(x => x.Invoke(true, null)).Should().ThrowAsync<ApizrException<UserList>>();
             ex.And.CachedResult.Should().BeNull();
         }
 

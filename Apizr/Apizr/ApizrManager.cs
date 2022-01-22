@@ -859,8 +859,7 @@ namespace Apizr
 
         public async Task<TResult> ExecuteAsync<TResult>(
             Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod,
-            bool clearCache = false,
-            CancellationToken cancellationToken = default, Action<Exception> onException = null)
+            CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TResult>(executeApiMethod);
@@ -1055,7 +1054,7 @@ namespace Apizr
         public async Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
             TModelRequestData>(
             Expression<Func<CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, bool clearCache = false, CancellationToken cancellationToken = default,
+            TModelRequestData modelRequestData, CancellationToken cancellationToken = default, bool clearCache = false,
             Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
@@ -1161,8 +1160,7 @@ namespace Apizr
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData,
-            bool clearCache = false,
-            CancellationToken cancellationToken = default, Action<Exception> onException = null)
+            CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
@@ -1266,8 +1264,7 @@ namespace Apizr
 
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
-            bool clearCache = false,
-            CancellationToken cancellationToken = default, Action<Exception> onException = null)
+            CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
@@ -1677,7 +1674,7 @@ namespace Apizr
 
         public async Task<TResult> ExecuteAsync<TResult>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TResult>>> executeApiMethod,
-            Context context = null, bool clearCache = false, CancellationToken cancellationToken = default,
+            Context context = null, CancellationToken cancellationToken = default, bool clearCache = false,
             Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
@@ -1778,8 +1775,8 @@ namespace Apizr
             TModelRequestData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>>
                 executeApiMethod,
-            TModelRequestData modelRequestData, Context context = null, bool clearCache = false,
-            CancellationToken cancellationToken = default, Action<Exception> onException = null)
+            TModelRequestData modelRequestData, Context context = null,
+            CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiResultData>(executeApiMethod);
@@ -1885,8 +1882,7 @@ namespace Apizr
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData, Context context = null,
-            bool clearCache = false,
-            CancellationToken cancellationToken = default, Action<Exception> onException = null)
+            CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
@@ -1992,8 +1988,7 @@ namespace Apizr
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
             Context context = null,
-            bool clearCache = false,
-            CancellationToken cancellationToken = default, Action<Exception> onException = null)
+            CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);

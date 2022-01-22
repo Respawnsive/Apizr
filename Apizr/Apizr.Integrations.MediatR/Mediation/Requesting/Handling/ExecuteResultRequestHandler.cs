@@ -31,7 +31,7 @@ namespace Apizr.Mediation.Requesting.Handling
                     executeApiMethod:
                     return WebApiManager
                         .ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                            executeApiMethod, request.ModelRequestData, request.ClearCache, cancellationToken, request.OnException);
+                            executeApiMethod, request.ModelRequestData, cancellationToken, request.ClearCache, request.OnException);
 
                 case Expression<Func<Context, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod:
                     return WebApiManager
@@ -42,7 +42,7 @@ namespace Apizr.Mediation.Requesting.Handling
                     executeApiMethod:
                     return WebApiManager
                         .ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                            executeApiMethod, request.ModelRequestData, request.Context, request.ClearCache, cancellationToken, request.OnException);
+                            executeApiMethod, request.ModelRequestData, request.Context, cancellationToken, request.ClearCache, request.OnException);
 
                 default:
                     throw new ApizrException<TModelResultData>(new NotImplementedException());
@@ -78,7 +78,7 @@ namespace Apizr.Mediation.Requesting.Handling
                 case Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod:
                     return WebApiManager
                         .ExecuteAsync<TModelData, TApiData>(
-                            executeApiMethod, request.ClearCache, cancellationToken, request.OnException);
+                            executeApiMethod, cancellationToken, request.ClearCache, request.OnException);
 
                 case Expression<Func<TWebApi, TApiData, Task<TApiData>>>
                     executeApiMethod:
@@ -89,13 +89,13 @@ namespace Apizr.Mediation.Requesting.Handling
                 case Expression<Func<CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod:
                     return WebApiManager
                         .ExecuteAsync<TModelData, TApiData>(
-                            executeApiMethod, request.ModelRequestData, request.ClearCache, cancellationToken, request.OnException);
+                            executeApiMethod, request.ModelRequestData, cancellationToken, request.ClearCache, request.OnException);
 
                 case Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>>
                     executeApiMethod:
                     return WebApiManager
                         .ExecuteAsync<TModelData, TApiData>(
-                            executeApiMethod, request.Context, request.ClearCache, cancellationToken);
+                            executeApiMethod, request.Context, cancellationToken, request.ClearCache, request.OnException);
 
                 case Expression<Func<Context, TWebApi, TApiData, Task<TApiData>>> executeApiMethod:
                     return WebApiManager
@@ -106,7 +106,7 @@ namespace Apizr.Mediation.Requesting.Handling
                     executeApiMethod:
                     return WebApiManager
                         .ExecuteAsync<TModelData, TApiData>(
-                            executeApiMethod, request.ModelRequestData, request.Context, request.ClearCache, cancellationToken, request.OnException);
+                            executeApiMethod, request.ModelRequestData, request.Context, cancellationToken, request.ClearCache, request.OnException);
 
                 default:
                     throw new ApizrException<TModelData>(new NotImplementedException());
@@ -141,7 +141,7 @@ namespace Apizr.Mediation.Requesting.Handling
                 case Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod:
                     return WebApiManager
                         .ExecuteAsync(
-                            executeApiMethod, request.ClearCache, cancellationToken, request.OnException);
+                            executeApiMethod, cancellationToken, request.ClearCache, request.OnException);
 
                 case Expression<Func<TWebApi, TApiData, Task<TApiData>>>
                     executeApiMethod:

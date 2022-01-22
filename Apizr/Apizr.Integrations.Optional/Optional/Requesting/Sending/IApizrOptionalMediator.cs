@@ -151,12 +151,12 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TWebApi">The web api type</typeparam>
         /// <typeparam name="TApiData">The api response</typeparam>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
         Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TWebApi, TApiData>(
-            Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false,
-            CancellationToken token = default);
+            Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
+            CancellationToken token = default, bool clearCache = false);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a Polly Context and a cancellation token and returning an optional result
@@ -165,13 +165,13 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TApiData">The api response</typeparam>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
         /// <param name="context">The Polly context</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
         Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TWebApi, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
-            Context context = null, bool clearCache = false,
-            CancellationToken token = default);
+            Context context = null,
+            CancellationToken token = default, bool clearCache = false);
 
         #endregion
 
@@ -209,12 +209,12 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TModelData">The mapped model type to map to</typeparam>
         /// <typeparam name="TApiData">The api result type to map from</typeparam>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
         Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
-            Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false,
-            CancellationToken token = default);
+            Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
+            CancellationToken token = default, bool clearCache = false);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a Polly Context and a cancellation token and returning an optional mapped result
@@ -224,13 +224,13 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TApiData">The api result type to map from</typeparam>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
         /// <param name="context">The Polly context</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
         Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
-            Context context = null, bool clearCache = false,
-            CancellationToken token = default);
+            Context context = null,
+            CancellationToken token = default, bool clearCache = false);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request and returning an optional mapped result
@@ -268,13 +268,13 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TApiData">The api result type to map request to and result from</typeparam>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">A cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
         Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
-            TModelData modelData, bool clearCache = false,
-            CancellationToken token = default);
+            TModelData modelData,
+            CancellationToken token = default, bool clearCache = false);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request, a Polly Context and a cancellation token and returning an optional mapped result
@@ -285,13 +285,13 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
         /// <param name="context">The Polly Context to pass through it all</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">A cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
         Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
-            TModelData modelData, Context context = null, bool clearCache = false,
-            CancellationToken token = default);
+            TModelData modelData, Context context = null,
+            CancellationToken token = default, bool clearCache = false);
 
         #endregion
 
@@ -323,13 +323,13 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TModelRequestData">The model request type to map from</typeparam>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
         /// <param name="modelRequestData">The model request data</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
         Task<Option<TModelResultData, ApizrException<TModelResultData>>> SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, bool clearCache = false,
-            CancellationToken token = default);
+            TModelRequestData modelRequestData,
+            CancellationToken token = default, bool clearCache = false);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request and a Polly Context and returning an optional mapped result
@@ -359,13 +359,13 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
         /// <param name="modelRequestData">The model request data</param>
         /// <param name="context">The Polly context</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
         Task<Option<TModelResultData, ApizrException<TModelResultData>>> SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>>
-                executeApiMethod, TModelRequestData modelRequestData, Context context = null, bool clearCache = false,
-            CancellationToken token = default);
+                executeApiMethod, TModelRequestData modelRequestData, Context context = null,
+            CancellationToken token = default, bool clearCache = false);
 
         #endregion
 
@@ -504,12 +504,12 @@ namespace Apizr.Optional.Requesting.Sending
         /// </summary>
         /// <typeparam name="TApiData">The api response</typeparam>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
         Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TApiData>(
-            Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false,
-            CancellationToken token = default);
+            Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
+            CancellationToken token = default, bool clearCache = false);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a Polly Context and a cancellation token and returning an optional result
@@ -517,13 +517,13 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TApiData">The api response</typeparam>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
         /// <param name="context">The Polly context</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
         Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
-            Context context = null, bool clearCache = false,
-            CancellationToken token = default);
+            Context context = null,
+            CancellationToken token = default, bool clearCache = false);
 
         #endregion
 
@@ -557,12 +557,12 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TModelData">The mapped model type to map to</typeparam>
         /// <typeparam name="TApiData">The api result type to map from</typeparam>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
         Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TModelData, TApiData>(
-            Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false,
-            CancellationToken token = default);
+            Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
+            CancellationToken token = default, bool clearCache = false);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a Polly Context and a cancellation token and returning an optional mapped result
@@ -571,13 +571,13 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TApiData">The api result type to map from</typeparam>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
         /// <param name="context">The Polly context</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
         Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
-            Context context = null, bool clearCache = false,
-            CancellationToken token = default);
+            Context context = null,
+            CancellationToken token = default, bool clearCache = false);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request and returning an optional mapped result
@@ -611,13 +611,13 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TApiData">The api result type to map request to and result from</typeparam>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">A cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
         Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
-            TModelData modelData, bool clearCache = false,
-            CancellationToken token = default);
+            TModelData modelData,
+            CancellationToken token = default, bool clearCache = false);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request, a Polly Context and a cancellation token and returning an optional mapped result
@@ -627,13 +627,13 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
         /// <param name="context">The Polly Context to pass through it all</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">A cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
         Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
-            TModelData modelData, Context context = null, bool clearCache = false,
-            CancellationToken token = default);
+            TModelData modelData, Context context = null,
+            CancellationToken token = default, bool clearCache = false);
 
         #endregion
 
@@ -663,13 +663,13 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TModelRequestData">The model request type to map from</typeparam>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
         /// <param name="modelRequestData">The model request data</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
         Task<Option<TModelResultData, ApizrException<TModelResultData>>> SendFor<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, bool clearCache = false,
-            CancellationToken token = default);
+            TModelRequestData modelRequestData,
+            CancellationToken token = default, bool clearCache = false);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request and a Polly Context and returning an optional mapped result
@@ -697,13 +697,13 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
         /// <param name="modelRequestData">The model request data</param>
         /// <param name="context">The Polly context</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
         Task<Option<TModelResultData, ApizrException<TModelResultData>>> SendFor<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>>
-                executeApiMethod, TModelRequestData modelRequestData, Context context = null, bool clearCache = false,
-            CancellationToken token = default);
+                executeApiMethod, TModelRequestData modelRequestData, Context context = null, 
+            CancellationToken token = default, bool clearCache = false);
 
         #endregion
 

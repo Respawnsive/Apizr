@@ -184,13 +184,13 @@ namespace Apizr
         /// </summary>
         /// <typeparam name="TApiData">The <see cref="TWebApi"/>'s task result</typeparam>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/>'s task to execute</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="cancellationToken">A cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
         /// <returns></returns>
         Task<TApiData> ExecuteAsync<TApiData>(
-            Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false,
-            CancellationToken cancellationToken = default, Action<Exception> onException = null);
+            Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
+            CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null);
 
         /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task
@@ -213,13 +213,13 @@ namespace Apizr
         /// <typeparam name="TModelRequestData">The model request data type</typeparam>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
         /// <param name="modelRequestData">The model request data to map</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="cancellationToken">A cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
         /// <returns></returns>
         Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, bool clearCache = false, CancellationToken cancellationToken = default, Action<Exception> onException = null);
+            TModelRequestData modelRequestData, CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null);
 
         /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task returning a mapped result
@@ -228,13 +228,13 @@ namespace Apizr
         /// <typeparam name="TApiData">The api data type</typeparam>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="cancellationToken">A cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
         /// <returns></returns>
         Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
-            TModelData modelData, bool clearCache = false, CancellationToken cancellationToken = default, Action<Exception> onException = null);
+            TModelData modelData, CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null);
 
         /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task returning a mapped result
@@ -242,13 +242,13 @@ namespace Apizr
         /// <typeparam name="TModelData">The model data type</typeparam>
         /// <typeparam name="TApiData">The api data type</typeparam>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="cancellationToken">A cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
         /// <returns></returns>
         Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false,
-            CancellationToken cancellationToken = default, Action<Exception> onException = null);
+            Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
+            CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null);
 
         /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task returning a mapped result
@@ -301,13 +301,13 @@ namespace Apizr
         /// <typeparam name="TApiData">The <see cref="TWebApi"/>'s task result</typeparam>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/>'s task to execute</param>
         /// <param name="context">The Polly Context to pass through it all</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="cancellationToken">A cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
         /// <returns></returns>
         Task<TApiData> ExecuteAsync<TApiData>(
-            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null, bool clearCache = false,
-            CancellationToken cancellationToken = default, Action<Exception> onException = null);
+            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null,
+            CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null);
 
         /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task returning a mapped result
@@ -319,14 +319,14 @@ namespace Apizr
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
         /// <param name="modelRequestData">The model request data to map</param>
         /// <param name="context">The Polly Context to pass through it all</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="cancellationToken">A cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
         /// <returns></returns>
         Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>>
                 executeApiMethod, TModelRequestData modelRequestData,
-            Context context = null, bool clearCache = false, CancellationToken cancellationToken = default, Action<Exception> onException = null);
+            Context context = null, CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null);
 
         /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task returning a mapped result
@@ -336,14 +336,14 @@ namespace Apizr
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
         /// <param name="context">The Polly Context to pass through it all</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="cancellationToken">A cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
         /// <returns></returns>
         Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData,
-            Context context = null, bool clearCache = false, CancellationToken cancellationToken = default, Action<Exception> onException = null);
+            Context context = null, CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null);
 
         /// <summary>
         /// Execute a managed <see cref="TWebApi"/>'s task returning a mapped result
@@ -352,13 +352,13 @@ namespace Apizr
         /// <typeparam name="TApiData">The api data type</typeparam>
         /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
         /// <param name="context">The Polly Context to pass through it all</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="cancellationToken">A cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
         /// <returns></returns>
         Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
-            Context context = null, bool clearCache = false, CancellationToken cancellationToken = default, Action<Exception> onException = null);
+            Context context = null, CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null);
 
         #endregion 
 

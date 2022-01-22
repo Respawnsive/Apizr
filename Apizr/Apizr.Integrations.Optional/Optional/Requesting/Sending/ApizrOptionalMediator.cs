@@ -71,13 +71,12 @@ namespace Apizr.Optional.Requesting.Sending
 
         public Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TWebApi, TApiData>(
             Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
-            bool clearCache = false,
-            CancellationToken token = default) =>
+            CancellationToken token = default, bool clearCache = false) =>
             _mediator.Send(new ExecuteOptionalResultRequest<TWebApi, TApiData>(executeApiMethod, clearCache), token);
 
         public Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TWebApi, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
-            Context context = null, bool clearCache = false, CancellationToken token = default) =>
+            Context context = null, CancellationToken token = default, bool clearCache = false) =>
             _mediator.Send(new ExecuteOptionalResultRequest<TWebApi, TApiData>(executeApiMethod, context, clearCache), token);
 
         #endregion
@@ -95,16 +94,14 @@ namespace Apizr.Optional.Requesting.Sending
 
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
-            bool clearCache = false,
-            CancellationToken token = default) =>
+            CancellationToken token = default, bool clearCache = false) =>
             _mediator.Send(new ExecuteOptionalResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, clearCache),
                 token);
 
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
             Context context = null,
-            bool clearCache = false,
-            CancellationToken token = default) =>
+            CancellationToken token = default, bool clearCache = false) =>
             _mediator.Send(new ExecuteOptionalResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, context, clearCache),
                 token);
 
@@ -123,8 +120,7 @@ namespace Apizr.Optional.Requesting.Sending
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData,
-            bool clearCache = false,
-            CancellationToken token = default) =>
+            CancellationToken token = default, bool clearCache = false) =>
             _mediator.Send(
                 new ExecuteOptionalResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, clearCache),
                 token);
@@ -132,8 +128,7 @@ namespace Apizr.Optional.Requesting.Sending
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData, Context context = null,
-            bool clearCache = false,
-            CancellationToken token = default) =>
+            CancellationToken token = default, bool clearCache = false) =>
             _mediator.Send(
                 new ExecuteOptionalResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, context, clearCache),
                 token);
@@ -153,7 +148,7 @@ namespace Apizr.Optional.Requesting.Sending
         public Task<Option<TModelResultData, ApizrException<TModelResultData>>> SendFor<TWebApi, TModelResultData,
             TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, bool clearCache = false, CancellationToken token = default) =>
+            TModelRequestData modelRequestData, CancellationToken token = default, bool clearCache = false) =>
             _mediator.Send(
                 new ExecuteOptionalResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData,
                     TModelRequestData>(executeApiMethod, modelRequestData, clearCache),
@@ -171,8 +166,8 @@ namespace Apizr.Optional.Requesting.Sending
             TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>>
                 executeApiMethod,
-            TModelRequestData modelRequestData, Context context = null, bool clearCache = false,
-            CancellationToken token = default) =>
+            TModelRequestData modelRequestData, Context context = null,
+            CancellationToken token = default, bool clearCache = false) =>
             _mediator.Send(
                 new ExecuteOptionalResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData,
                     TModelRequestData>(executeApiMethod, modelRequestData, context, clearCache),
@@ -252,14 +247,13 @@ namespace Apizr.Optional.Requesting.Sending
 
         public Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TApiData>(
             Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
-            bool clearCache = false,
-            CancellationToken token = default)
-            => _apizrMediator.SendFor<TWebApi, TApiData>(executeApiMethod, clearCache, token);
+            CancellationToken token = default, bool clearCache = false)
+            => _apizrMediator.SendFor<TWebApi, TApiData>(executeApiMethod, token, clearCache);
 
         public Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
-            Context context = null, bool clearCache = false, CancellationToken token = default)
-            => _apizrMediator.SendFor<TWebApi, TApiData>(executeApiMethod, context, clearCache, token);
+            Context context = null, CancellationToken token = default, bool clearCache = false)
+            => _apizrMediator.SendFor<TWebApi, TApiData>(executeApiMethod, context, token, clearCache);
 
         #endregion
 
@@ -275,16 +269,14 @@ namespace Apizr.Optional.Requesting.Sending
 
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
-            bool clearCache = false,
-            CancellationToken token = default)
-            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, clearCache, token);
+            CancellationToken token = default, bool clearCache = false)
+            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, token, clearCache);
 
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
             Context context = null,
-            bool clearCache = false,
-            CancellationToken token = default)
-            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, context, clearCache, token);
+            CancellationToken token = default, bool clearCache = false)
+            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, context, token, clearCache);
 
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TModelData, TApiData>(
             Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, bool clearCache = false)
@@ -298,16 +290,14 @@ namespace Apizr.Optional.Requesting.Sending
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData,
-            bool clearCache = false,
-            CancellationToken token = default)
-            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, clearCache, token);
+            CancellationToken token = default, bool clearCache = false)
+            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, token, clearCache);
 
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData, Context context = null,
-            bool clearCache = false,
-            CancellationToken token = default)
-            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, context, clearCache, token);
+            CancellationToken token = default, bool clearCache = false)
+            => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, context, token, clearCache);
 
         #endregion
 
@@ -323,9 +313,9 @@ namespace Apizr.Optional.Requesting.Sending
         public Task<Option<TModelResultData, ApizrException<TModelResultData>>> SendFor<TModelResultData,
             TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, bool clearCache = false, CancellationToken token = default)
+            TModelRequestData modelRequestData, CancellationToken token = default, bool clearCache = false)
             => _apizrMediator.SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                executeApiMethod, modelRequestData, clearCache, token);
+                executeApiMethod, modelRequestData, token, clearCache);
 
         public Task<Option<TModelResultData, ApizrException<TModelResultData>>> SendFor<TModelResultData,
             TApiResultData, TApiRequestData, TModelRequestData>(
@@ -338,10 +328,10 @@ namespace Apizr.Optional.Requesting.Sending
             TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>>
                 executeApiMethod,
-            TModelRequestData modelRequestData, Context context = null, bool clearCache = false,
-            CancellationToken token = default)
+            TModelRequestData modelRequestData, Context context = null,
+            CancellationToken token = default, bool clearCache = false)
             => _apizrMediator.SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                executeApiMethod, modelRequestData, context, clearCache, token);
+                executeApiMethod, modelRequestData, context, token, clearCache);
 
         #endregion
 

@@ -1,39 +1,43 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 using Polly;
 
 namespace Apizr.Mediation.Requesting.Base
 {
     public abstract class RequestBase<TFormattedModelResultData> : IRequest<TFormattedModelResultData>
     {
-        protected RequestBase() : this(null)
+        protected RequestBase(Action<Exception> onException = null) : this(null, onException)
         {
 
         }
 
-        protected RequestBase(Context context)
+        protected RequestBase(Context context, Action<Exception> onException = null)
         {
             Context = context;
+            OnException = onException;
         }
 
         public Context Context { get; }
+
+        public Action<Exception> OnException { get; }
     }
 
     public abstract class RequestBase<TFormattedModelResultData, TModelRequestData> : RequestBase<TFormattedModelResultData>
     {
-        protected RequestBase() : this(default, null)
+        protected RequestBase(Action<Exception> onException = null) : this(default, null, onException)
         {
 
         }
-        protected RequestBase(TModelRequestData modelRequestData) : this(modelRequestData, null)
+        protected RequestBase(TModelRequestData modelRequestData, Action<Exception> onException = null) : this(modelRequestData, null, onException)
         {
 
         }
 
-        protected RequestBase(Context context) : this(default, context)
+        protected RequestBase(Context context, Action<Exception> onException = null) : this(default, context, onException)
         {
         }
 
-        protected RequestBase(TModelRequestData modelRequestData, Context context) : base(context)
+        protected RequestBase(TModelRequestData modelRequestData, Context context, Action<Exception> onException = null) : base(context, onException)
         {
             ModelRequestData = modelRequestData;
         }

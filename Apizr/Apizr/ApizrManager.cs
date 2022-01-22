@@ -66,7 +66,8 @@ namespace Apizr
 
         #region Task
 
-        public async Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod)
+        public async Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod,
+            Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
@@ -101,12 +102,17 @@ namespace Apizr
                 _apizrOptions.Logger.Log(logAttribute.LogLevel,
                     $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException)} with InnerException");
 
-                throw new ApizrException(e);
+                if (onException == null)
+                    throw new ApizrException(e);
+
+                _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                    $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                onException(e);
             }
         }
 
         public async Task ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
-            TModelData modelData)
+            TModelData modelData, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
@@ -145,12 +151,17 @@ namespace Apizr
                 _apizrOptions.Logger.Log(logAttribute.LogLevel,
                     $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException)} with InnerException");
 
-                throw new ApizrException(e);
+                if (onException == null)
+                    throw new ApizrException(e);
+
+                _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                    $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                onException(e);
             }
         }
 
         public async Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
@@ -186,12 +197,17 @@ namespace Apizr
                 _apizrOptions.Logger.Log(logAttribute.LogLevel,
                     $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException)} with InnerException");
 
-                throw new ApizrException(e);
+                if (onException == null)
+                    throw new ApizrException(e);
+
+                _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                    $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                onException(e);
             }
         }
 
         public async Task ExecuteAsync(Expression<Func<Context, TWebApi, Task>> executeApiMethod,
-            Context context = null)
+            Context context = null, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
@@ -227,13 +243,18 @@ namespace Apizr
                 _apizrOptions.Logger.Log(logAttribute.LogLevel,
                     $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException)} with InnerException");
 
-                throw new ApizrException(e);
+                if (onException == null)
+                    throw new ApizrException(e);
+
+                _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                    $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                onException(e);
             }
         }
 
         public async Task ExecuteAsync<TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
@@ -273,13 +294,18 @@ namespace Apizr
                 _apizrOptions.Logger.Log(logAttribute.LogLevel,
                     $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException)} with InnerException");
 
-                throw new ApizrException(e);
+                if (onException == null)
+                    throw new ApizrException(e);
+
+                _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                    $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                onException(e);
             }
         }
 
         public async Task ExecuteAsync<TModelData, TApiData>(
             Expression<Func<Context, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData,
-            Context context = null)
+            Context context = null, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
@@ -319,12 +345,17 @@ namespace Apizr
                 _apizrOptions.Logger.Log(logAttribute.LogLevel,
                     $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException)} with InnerException");
 
-                throw new ApizrException(e);
+                if (onException == null)
+                    throw new ApizrException(e);
+
+                _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                    $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                onException(e);
             }
         }
 
         public async Task ExecuteAsync(Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod,
-            Context context = null, CancellationToken cancellationToken = default)
+            Context context = null, CancellationToken cancellationToken = default, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
@@ -361,14 +392,19 @@ namespace Apizr
                 _apizrOptions.Logger.Log(logAttribute.LogLevel,
                     $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException)} with InnerException");
 
-                throw new ApizrException(e);
+                if (onException == null)
+                    throw new ApizrException(e);
+
+                _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                    $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                onException(e);
             }
         }
 
         public async Task ExecuteAsync<TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task>> executeApiMethod,
             TModelData modelData, Context context = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
@@ -409,7 +445,12 @@ namespace Apizr
                 _apizrOptions.Logger.Log(logAttribute.LogLevel,
                     $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException)} with InnerException");
 
-                throw new ApizrException(e);
+                if (onException == null)
+                    throw new ApizrException(e);
+
+                _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                    $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                onException(e);
             }
         }
 
@@ -418,7 +459,7 @@ namespace Apizr
         #region Task<T>
 
         public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod,
-            bool clearCache = false)
+            bool clearCache = false, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TResult>(executeApiMethod);
@@ -459,6 +500,7 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
+                Exception ex = null;
                 try
                 {
                     if (!_connectivityHandler.IsConnected())
@@ -488,10 +530,16 @@ namespace Apizr
                         ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
                         : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
 
-                    throw new ApizrException<TResult>(e, result);
+                    ex = new ApizrException<TResult>(e, result);
+                    if (onException == null)
+                        throw ex;
+
+                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                        $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                    onException(ex);
                 }
 
-                if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Caching result");
@@ -507,7 +555,7 @@ namespace Apizr
 
         public async Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
             TModelRequestData>(Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, bool clearCache = false)
+            TModelRequestData modelRequestData, bool clearCache = false, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiResultData>(executeApiMethod);
@@ -549,6 +597,7 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
+                Exception ex = null;
                 try
                 {
                     if (!_connectivityHandler.IsConnected())
@@ -583,10 +632,16 @@ namespace Apizr
                         ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelResultData>)} with InnerException and cached result"
                         : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelResultData>)} with InnerException and but no cached result");
 
-                    throw new ApizrException<TModelResultData>(e, Map<TApiResultData, TModelResultData>(result));
+                    ex = new ApizrException<TModelResultData>(e, Map<TApiResultData, TModelResultData>(result));
+                    if (onException == null)
+                        throw ex;
+
+                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                        $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                    onException(ex);
                 }
 
-                if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Caching result");
@@ -603,7 +658,7 @@ namespace Apizr
 
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
-            bool clearCache = false)
+            bool clearCache = false, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
@@ -645,6 +700,7 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
+                Exception ex = null;
                 try
                 {
                     if (!_connectivityHandler.IsConnected())
@@ -679,10 +735,16 @@ namespace Apizr
                         ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and cached result"
                         : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and but no cached result");
 
-                    throw new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
+                    ex = new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
+                    if (onException == null)
+                        throw ex;
+
+                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                        $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                    onException(ex);
                 }
 
-                if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Caching result");
@@ -698,7 +760,8 @@ namespace Apizr
         }
 
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false)
+            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false,
+            Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
@@ -740,6 +803,7 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
+                Exception ex = null;
                 try
                 {
                     if (!_connectivityHandler.IsConnected())
@@ -769,10 +833,16 @@ namespace Apizr
                         ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and cached result"
                         : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and but no cached result");
 
-                    throw new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
+                    ex = new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
+                    if (onException == null)
+                        throw ex;
+
+                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                        $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                    onException(ex);
                 }
 
-                if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Caching result");
@@ -790,7 +860,7 @@ namespace Apizr
         public async Task<TResult> ExecuteAsync<TResult>(
             Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod,
             bool clearCache = false,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TResult>(executeApiMethod);
@@ -831,6 +901,7 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
+                Exception ex = null;
                 try
                 {
                     if (!_connectivityHandler.IsConnected())
@@ -861,10 +932,16 @@ namespace Apizr
                         ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
                         : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
 
-                    throw new ApizrException<TResult>(e, result);
+                    ex = new ApizrException<TResult>(e, result);
+                    if (onException == null)
+                        throw ex;
+
+                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                        $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                    onException(ex);
                 }
 
-                if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Caching result");
@@ -880,7 +957,7 @@ namespace Apizr
 
         public async Task<TResult> ExecuteAsync<TResult>(
             Expression<Func<Context, TWebApi, Task<TResult>>> executeApiMethod, Context context = null,
-            bool clearCache = false)
+            bool clearCache = false, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TResult>(executeApiMethod);
@@ -921,6 +998,7 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
+                Exception ex = null;
                 try
                 {
                     if (!_connectivityHandler.IsConnected())
@@ -951,10 +1029,16 @@ namespace Apizr
                         ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
                         : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
 
-                    throw new ApizrException<TResult>(e, result);
+                    ex = new ApizrException<TResult>(e, result);
+                    if (onException == null)
+                        throw ex;
+
+                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                        $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                    onException(ex);
                 }
 
-                if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Caching result");
@@ -971,7 +1055,8 @@ namespace Apizr
         public async Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
             TModelRequestData>(
             Expression<Func<CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, bool clearCache = false, CancellationToken cancellationToken = default)
+            TModelRequestData modelRequestData, bool clearCache = false, CancellationToken cancellationToken = default,
+            Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiResultData>(executeApiMethod);
@@ -1013,6 +1098,7 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
+                Exception ex = null;
                 try
                 {
                     if (!_connectivityHandler.IsConnected())
@@ -1048,10 +1134,16 @@ namespace Apizr
                         ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelResultData>)} with InnerException and cached result"
                         : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelResultData>)} with InnerException and but no cached result");
 
-                    throw new ApizrException<TModelResultData>(e, Map<TApiResultData, TModelResultData>(result));
+                    ex = new ApizrException<TModelResultData>(e, Map<TApiResultData, TModelResultData>(result));
+                    if (onException == null)
+                        throw ex;
+
+                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                        $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                    onException(ex);
                 }
 
-                if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Caching result");
@@ -1070,7 +1162,7 @@ namespace Apizr
             Expression<Func<CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData,
             bool clearCache = false,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
@@ -1112,6 +1204,7 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
+                Exception ex = null;
                 try
                 {
                     if (!_connectivityHandler.IsConnected())
@@ -1147,10 +1240,16 @@ namespace Apizr
                         ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and cached result"
                         : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and but no cached result");
 
-                    throw new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
+                    ex = new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
+                    if (onException == null)
+                        throw ex;
+
+                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                        $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                    onException(ex);
                 }
 
-                if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Caching result");
@@ -1168,7 +1267,7 @@ namespace Apizr
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
             bool clearCache = false,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
@@ -1210,6 +1309,7 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
+                Exception ex = null;
                 try
                 {
                     if (!_connectivityHandler.IsConnected())
@@ -1241,10 +1341,16 @@ namespace Apizr
                         ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and cached result"
                         : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and but no cached result");
 
-                    throw new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
+                    ex = new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
+                    if (onException == null)
+                        throw ex;
+
+                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                        $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                    onException(ex);
                 }
 
-                if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Caching result");
@@ -1262,7 +1368,8 @@ namespace Apizr
         public async Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
             TModelRequestData>(
             Expression<Func<Context, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, Context context = null, bool clearCache = false)
+            TModelRequestData modelRequestData, Context context = null, bool clearCache = false,
+            Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiResultData>(executeApiMethod);
@@ -1304,6 +1411,7 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
+                Exception ex = null;
                 try
                 {
                     if (!_connectivityHandler.IsConnected())
@@ -1339,10 +1447,16 @@ namespace Apizr
                         ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelResultData>)} with InnerException and cached result"
                         : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelResultData>)} with InnerException and but no cached result");
 
-                    throw new ApizrException<TModelResultData>(e, Map<TApiResultData, TModelResultData>(result));
+                    ex = new ApizrException<TModelResultData>(e, Map<TApiResultData, TModelResultData>(result));
+                    if (onException == null)
+                        throw ex;
+
+                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                        $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                    onException(ex);
                 }
 
-                if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Caching result");
@@ -1359,7 +1473,7 @@ namespace Apizr
 
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<Context, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
-            Context context = null, bool clearCache = false)
+            Context context = null, bool clearCache = false, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
@@ -1401,6 +1515,7 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
+                Exception ex = null;
                 try
                 {
                     if (!_connectivityHandler.IsConnected())
@@ -1436,10 +1551,16 @@ namespace Apizr
                         ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and cached result"
                         : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and but no cached result");
 
-                    throw new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
+                    ex = new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
+                    if (onException == null)
+                        throw ex;
+
+                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                        $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                    onException(ex);
                 }
 
-                if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Caching result");
@@ -1456,7 +1577,7 @@ namespace Apizr
 
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null,
-            bool clearCache = false)
+            bool clearCache = false, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
@@ -1498,6 +1619,7 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
+                Exception ex = null;
                 try
                 {
                     if (!_connectivityHandler.IsConnected())
@@ -1529,10 +1651,16 @@ namespace Apizr
                         ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and cached result"
                         : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and but no cached result");
 
-                    throw new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
+                    ex = new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
+                    if (onException == null)
+                        throw ex;
+
+                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                        $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                    onException(ex);
                 }
 
-                if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Caching result");
@@ -1549,7 +1677,8 @@ namespace Apizr
 
         public async Task<TResult> ExecuteAsync<TResult>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TResult>>> executeApiMethod,
-            Context context = null, bool clearCache = false, CancellationToken cancellationToken = default)
+            Context context = null, bool clearCache = false, CancellationToken cancellationToken = default,
+            Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TResult>(executeApiMethod);
@@ -1590,6 +1719,7 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
+                Exception ex = null;
                 try
                 {
                     if (!_connectivityHandler.IsConnected())
@@ -1621,10 +1751,16 @@ namespace Apizr
                         ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and cached result"
                         : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TResult>)} with InnerException and but no cached result");
 
-                    throw new ApizrException<TResult>(e, result);
+                    ex = new ApizrException<TResult>(e, result);
+                    if (onException == null)
+                        throw ex;
+
+                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                        $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                    onException(ex);
                 }
 
-                if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Caching result");
@@ -1643,7 +1779,7 @@ namespace Apizr
             Expression<Func<Context, CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>>
                 executeApiMethod,
             TModelRequestData modelRequestData, Context context = null, bool clearCache = false,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiResultData>(executeApiMethod);
@@ -1685,6 +1821,7 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
+                Exception ex = null;
                 try
                 {
                     if (!_connectivityHandler.IsConnected())
@@ -1721,10 +1858,16 @@ namespace Apizr
                         ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelResultData>)} with InnerException and cached result"
                         : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelResultData>)} with InnerException and but no cached result");
 
-                    throw new ApizrException<TModelResultData>(e, Map<TApiResultData, TModelResultData>(result));
+                    ex = new ApizrException<TModelResultData>(e, Map<TApiResultData, TModelResultData>(result));
+                    if (onException == null)
+                        throw ex;
+
+                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                        $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                    onException(ex);
                 }
 
-                if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Caching result");
@@ -1743,7 +1886,7 @@ namespace Apizr
             Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData, Context context = null,
             bool clearCache = false,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
@@ -1785,6 +1928,7 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
+                Exception ex = null;
                 try
                 {
                     if (!_connectivityHandler.IsConnected())
@@ -1821,10 +1965,16 @@ namespace Apizr
                         ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and cached result"
                         : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and but no cached result");
 
-                    throw new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
+                    ex = new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
+                    if (onException == null)
+                        throw ex;
+
+                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                        $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                    onException(ex);
                 }
 
-                if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Caching result");
@@ -1843,7 +1993,7 @@ namespace Apizr
             Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
             Context context = null,
             bool clearCache = false,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default, Action<Exception> onException = null)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
@@ -1885,6 +2035,7 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
+                Exception ex = null;
                 try
                 {
                     if (!_connectivityHandler.IsConnected())
@@ -1917,10 +2068,16 @@ namespace Apizr
                         ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and cached result"
                         : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and but no cached result");
 
-                    throw new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
+                    ex = new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
+                    if (onException == null)
+                        throw ex;
+
+                    _apizrOptions.Logger.Log(logAttribute.LogLevel,
+                        $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
+                    onException(ex);
                 }
 
-                if (result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
                     _apizrOptions.Logger.Log(logAttribute.LogLevel, $"{methodDetails.MethodInfo.Name}: Caching result");

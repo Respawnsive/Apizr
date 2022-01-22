@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 using MediatR;
 using Polly;
 
@@ -6,12 +7,12 @@ namespace Apizr.Mediation.Requesting.Base
 {
     public abstract class ExecuteRequestBase<TFormattedModelResultData> : RequestBase<TFormattedModelResultData>
     {
-        protected ExecuteRequestBase(Expression executeApiMethod)
+        protected ExecuteRequestBase(Expression executeApiMethod, Action<Exception> onException = null) : base(onException)
         {
             ExecuteApiMethod = executeApiMethod;
         }
 
-        protected ExecuteRequestBase(Expression executeApiMethod, Context context) : base(context)
+        protected ExecuteRequestBase(Expression executeApiMethod, Context context, Action<Exception> onException = null) : base(context, onException)
         {
             ExecuteApiMethod = executeApiMethod;
         }
@@ -21,20 +22,20 @@ namespace Apizr.Mediation.Requesting.Base
 
     public abstract class ExecuteRequestBase<TFormattedModelResultData, TModelRequestData> : ExecuteRequestBase<TFormattedModelResultData>
     {
-        protected ExecuteRequestBase(Expression executeApiMethod) : base(executeApiMethod)
+        protected ExecuteRequestBase(Expression executeApiMethod, Action<Exception> onException = null) : base(executeApiMethod, onException)
         {
         }
 
-        protected ExecuteRequestBase(Expression executeApiMethod, TModelRequestData modelRequestData) : base(executeApiMethod)
+        protected ExecuteRequestBase(Expression executeApiMethod, TModelRequestData modelRequestData, Action<Exception> onException = null) : base(executeApiMethod, onException)
         {
             ModelRequestData = modelRequestData;
         }
 
-        protected ExecuteRequestBase(Expression executeApiMethod, Context context) : base(executeApiMethod, context)
+        protected ExecuteRequestBase(Expression executeApiMethod, Context context, Action<Exception> onException = null) : base(executeApiMethod, context, onException)
         {
         }
 
-        protected ExecuteRequestBase(Expression executeApiMethod, TModelRequestData modelRequestData, Context context) : base(executeApiMethod, context)
+        protected ExecuteRequestBase(Expression executeApiMethod, TModelRequestData modelRequestData, Context context, Action<Exception> onException = null) : base(executeApiMethod, context, onException)
         {
             ModelRequestData = modelRequestData;
         }
@@ -44,11 +45,11 @@ namespace Apizr.Mediation.Requesting.Base
 
     public abstract class ExecuteRequestBase : ExecuteRequestBase<Unit>
     {
-        protected ExecuteRequestBase(Expression executeApiMethod) : base(executeApiMethod)
+        protected ExecuteRequestBase(Expression executeApiMethod, Action<Exception> onException = null) : base(executeApiMethod, onException)
         {
         }
 
-        protected ExecuteRequestBase(Expression executeApiMethod, Context context) : base(executeApiMethod, context)
+        protected ExecuteRequestBase(Expression executeApiMethod, Context context, Action<Exception> onException = null) : base(executeApiMethod, context, onException)
         {
         }
     }

@@ -21,7 +21,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// Send an api call to Apizr using MediatR and returning an optional result
         /// </summary>
         /// <typeparam name="TWebApi">The web api type</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <returns></returns>
         Task<Option<Unit, ApizrException>> SendFor<TWebApi>(Expression<Func<TWebApi, Task>> executeApiMethod);
 
@@ -29,7 +29,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// Send an api call to Apizr using MediatR with a Polly Context and returning an optional result
         /// </summary>
         /// <typeparam name="TWebApi">The web api type</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="context">The Polly context</param>
         /// <returns></returns>
         Task<Option<Unit, ApizrException>> SendFor<TWebApi>(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context = null);
@@ -38,7 +38,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// Send an api call to Apizr using MediatR with a cancellation token and returning an optional result
         /// </summary>
         /// <typeparam name="TWebApi">The web api type</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="token">The cancellation token</param>
         /// <returns></returns>
         Task<Option<Unit, ApizrException>> SendFor<TWebApi>(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod,
@@ -48,7 +48,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// Send an api call to Apizr using MediatR with a Polly Context and a cancellation token and returning an optional result
         /// </summary>
         /// <typeparam name="TWebApi">The web api type</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="context">The Polly context</param>
         /// <param name="token">The cancellation token</param>
         /// <returns></returns>
@@ -66,7 +66,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TWebApi">The web api type</typeparam>
         /// <typeparam name="TModelData">The model request type to map from</typeparam>
         /// <typeparam name="TApiData">The api request type to map to</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
         /// <returns></returns>
         Task<Option<Unit, ApizrException>> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
@@ -78,7 +78,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TWebApi">The web api type</typeparam>
         /// <typeparam name="TModelData">The model request type to map from</typeparam>
         /// <typeparam name="TApiData">The api request type to map to</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
         /// <param name="token">A cancellation token</param>
         /// <returns></returns>
@@ -92,7 +92,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TWebApi">The web api type</typeparam>
         /// <typeparam name="TModelData">The model request type to map from</typeparam>
         /// <typeparam name="TApiData">The api request type to map to</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
         /// <param name="context">The Polly Context to pass through it all</param>
         /// <returns></returns>
@@ -105,7 +105,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TWebApi">The web api type</typeparam>
         /// <typeparam name="TModelData">The model request type to map from</typeparam>
         /// <typeparam name="TApiData">The api request type to map to</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
         /// <param name="context">The Polly Context to pass through it all</param>
         /// <param name="token">A cancellation token</param>
@@ -128,7 +128,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// </summary>
         /// <typeparam name="TWebApi">The web api type</typeparam>
         /// <typeparam name="TApiData">The api result type</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
         Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TWebApi, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false);
@@ -138,7 +138,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// </summary>
         /// <typeparam name="TWebApi">The web api type</typeparam>
         /// <typeparam name="TApiData">The api response</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
@@ -150,7 +150,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// </summary>
         /// <typeparam name="TWebApi">The web api type</typeparam>
         /// <typeparam name="TApiData">The api response</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
         /// <returns></returns>
@@ -163,7 +163,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// </summary>
         /// <typeparam name="TWebApi">The web api type</typeparam>
         /// <typeparam name="TApiData">The api response</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
@@ -183,7 +183,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TWebApi">The web api type</typeparam>
         /// <typeparam name="TModelData">The mapped model type to map to</typeparam>
         /// <typeparam name="TApiData">The api result type to map from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
         Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
@@ -195,7 +195,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TWebApi">The web api type</typeparam>
         /// <typeparam name="TModelData">The mapped model type to map to</typeparam>
         /// <typeparam name="TApiData">The api result type to map from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
@@ -208,7 +208,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TWebApi">The web api type</typeparam>
         /// <typeparam name="TModelData">The mapped model type to map to</typeparam>
         /// <typeparam name="TApiData">The api result type to map from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
         /// <returns></returns>
@@ -222,7 +222,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TWebApi">The web api type</typeparam>
         /// <typeparam name="TModelData">The mapped model type to map to</typeparam>
         /// <typeparam name="TApiData">The api result type to map from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
@@ -238,7 +238,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TWebApi">The web api type</typeparam>
         /// <typeparam name="TModelData">The mapped model type to map request from and result to</typeparam>
         /// <typeparam name="TApiData">The api result type to map request to and result from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
@@ -251,7 +251,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TWebApi">The web api type</typeparam>
         /// <typeparam name="TModelData">The mapped model type to map request from and result to</typeparam>
         /// <typeparam name="TApiData">The api result type to map request to and result from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
         /// <param name="context">The Polly Context to pass through it all</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
@@ -266,7 +266,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TWebApi">The web api type</typeparam>
         /// <typeparam name="TModelData">The mapped model type to map request from and result to</typeparam>
         /// <typeparam name="TApiData">The api result type to map request to and result from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">A cancellation token</param>
@@ -282,7 +282,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TWebApi">The web api type</typeparam>
         /// <typeparam name="TModelData">The mapped model type to map request from and result to</typeparam>
         /// <typeparam name="TApiData">The api result type to map request to and result from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
         /// <param name="context">The Polly Context to pass through it all</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
@@ -305,7 +305,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TApiRequestData">The api result type to map from</typeparam>
         /// <typeparam name="TApiResultData">The api request type to map to</typeparam>
         /// <typeparam name="TModelRequestData">The model request type to map from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelRequestData">The model request data</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
@@ -321,7 +321,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TApiRequestData">The api result type to map from</typeparam>
         /// <typeparam name="TApiResultData">The api request type to map to</typeparam>
         /// <typeparam name="TModelRequestData">The model request type to map from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelRequestData">The model request data</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
@@ -339,7 +339,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TApiRequestData">The api result type to map from</typeparam>
         /// <typeparam name="TApiResultData">The api request type to map to</typeparam>
         /// <typeparam name="TModelRequestData">The model request type to map from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelRequestData">The model request data</param>
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
@@ -356,7 +356,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TApiRequestData">The api result type to map from</typeparam>
         /// <typeparam name="TApiResultData">The api request type to map to</typeparam>
         /// <typeparam name="TModelRequestData">The model request type to map from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelRequestData">The model request data</param>
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
@@ -373,7 +373,7 @@ namespace Apizr.Optional.Requesting.Sending
     }
 
     /// <summary>
-    /// <see cref="IApizrOptionalMediator"/> but dedicated to <see cref="TWebApi"/> with optional result, getting all shorter
+    /// <see cref="IApizrOptionalMediator"/> but dedicated to <typeparamref name="TWebApi"/> with optional result, getting all shorter
     /// </summary>
     public interface IApizrOptionalMediator<TWebApi> : IApizrOptionalMediatorBase
     {
@@ -384,14 +384,14 @@ namespace Apizr.Optional.Requesting.Sending
         /// <summary>
         /// Send an api call to Apizr using MediatR and returning an optional result
         /// </summary>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <returns></returns>
         Task<Option<Unit, ApizrException>> SendFor(Expression<Func<TWebApi, Task>> executeApiMethod);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a Polly Context and returning an optional result
         /// </summary>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="context">The Polly context</param>
         /// <returns></returns>
         Task<Option<Unit, ApizrException>> SendFor(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context = null);
@@ -399,7 +399,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <summary>
         /// Send an api call to Apizr using MediatR with a cancellation token and returning an optional result
         /// </summary>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="token">The cancellation token</param>
         /// <returns></returns>
         Task<Option<Unit, ApizrException>> SendFor(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod,
@@ -408,7 +408,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <summary>
         /// Send an api call to Apizr using MediatR with a Polly Context and a cancellation token and returning an optional result
         /// </summary>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="context">The Polly context</param>
         /// <param name="token">The cancellation token</param>
         /// <returns></returns>
@@ -425,7 +425,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// </summary>
         /// <typeparam name="TModelData">The model request type to map from</typeparam>
         /// <typeparam name="TApiData">The api request type to map to</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
         /// <returns></returns>
         Task<Option<Unit, ApizrException>> SendFor<TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
@@ -436,7 +436,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// </summary>
         /// <typeparam name="TModelData">The model request type to map from</typeparam>
         /// <typeparam name="TApiData">The api request type to map to</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
         /// <param name="token">A cancellation token</param>
         /// <returns></returns>
@@ -449,7 +449,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// </summary>
         /// <typeparam name="TModelData">The model request type to map from</typeparam>
         /// <typeparam name="TApiData">The api request type to map to</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
         /// <param name="context">The Polly Context to pass through it all</param>
         /// <returns></returns>
@@ -461,7 +461,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// </summary>
         /// <typeparam name="TModelData">The model request type to map from</typeparam>
         /// <typeparam name="TApiData">The api request type to map to</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
         /// <param name="context">The Polly Context to pass through it all</param>
         /// <param name="token">A cancellation token</param>
@@ -483,7 +483,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// Send an api call to Apizr using MediatR and returning an optional result
         /// </summary>
         /// <typeparam name="TApiData">The api result type</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
         Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false);
@@ -492,7 +492,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// Send an api call to Apizr using MediatR with a Polly Context and returning an optional result
         /// </summary>
         /// <typeparam name="TApiData">The api response</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
@@ -503,7 +503,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// Send an api call to Apizr using MediatR with a cancellation token and returning an optional result
         /// </summary>
         /// <typeparam name="TApiData">The api response</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
         /// <returns></returns>
@@ -515,7 +515,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// Send an api call to Apizr using MediatR with a Polly Context and a cancellation token and returning an optional result
         /// </summary>
         /// <typeparam name="TApiData">The api response</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
@@ -534,7 +534,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// </summary>
         /// <typeparam name="TModelData">The mapped model type to map to</typeparam>
         /// <typeparam name="TApiData">The api result type to map from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
         Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TModelData, TApiData>(
@@ -545,7 +545,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// </summary>
         /// <typeparam name="TModelData">The mapped model type to map to</typeparam>
         /// <typeparam name="TApiData">The api result type to map from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="context">The Polly context</param>
         /// <returns></returns>
         Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TModelData, TApiData>(
@@ -556,7 +556,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// </summary>
         /// <typeparam name="TModelData">The mapped model type to map to</typeparam>
         /// <typeparam name="TApiData">The api result type to map from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
         /// <returns></returns>
@@ -569,7 +569,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// </summary>
         /// <typeparam name="TModelData">The mapped model type to map to</typeparam>
         /// <typeparam name="TApiData">The api result type to map from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
@@ -584,7 +584,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// </summary>
         /// <typeparam name="TModelData">The mapped model type to map request from and result to</typeparam>
         /// <typeparam name="TApiData">The api result type to map request to and result from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
         /// <returns></returns>
         Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TModelData, TApiData>(
@@ -595,7 +595,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// </summary>
         /// <typeparam name="TModelData">The mapped model type to map request from and result to</typeparam>
         /// <typeparam name="TApiData">The api result type to map request to and result from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
         /// <param name="context">The Polly Context to pass through it all</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
@@ -609,7 +609,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// </summary>
         /// <typeparam name="TModelData">The mapped model type to map request from and result to</typeparam>
         /// <typeparam name="TApiData">The api result type to map request to and result from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">A cancellation token</param>
@@ -624,7 +624,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// </summary>
         /// <typeparam name="TModelData">The mapped model type to map request from and result to</typeparam>
         /// <typeparam name="TApiData">The api result type to map request to and result from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
         /// <param name="context">The Polly Context to pass through it all</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
@@ -646,7 +646,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TApiRequestData">The api result type to map from</typeparam>
         /// <typeparam name="TApiResultData">The api request type to map to</typeparam>
         /// <typeparam name="TModelRequestData">The model request type to map from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelRequestData">The model request data</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
@@ -661,7 +661,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TApiRequestData">The api result type to map from</typeparam>
         /// <typeparam name="TApiResultData">The api request type to map to</typeparam>
         /// <typeparam name="TModelRequestData">The model request type to map from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelRequestData">The model request data</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="token">The cancellation token</param>
@@ -678,7 +678,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TApiRequestData">The api result type to map from</typeparam>
         /// <typeparam name="TApiResultData">The api request type to map to</typeparam>
         /// <typeparam name="TModelRequestData">The model request type to map from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelRequestData">The model request data</param>
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
@@ -694,7 +694,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TApiRequestData">The api result type to map from</typeparam>
         /// <typeparam name="TApiResultData">The api request type to map to</typeparam>
         /// <typeparam name="TModelRequestData">The model request type to map from</typeparam>
-        /// <param name="executeApiMethod">The <see cref="TWebApi"/> call to execute</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelRequestData">The model request data</param>
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>

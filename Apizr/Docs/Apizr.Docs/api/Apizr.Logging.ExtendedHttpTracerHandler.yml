@@ -1,0 +1,1356 @@
+### YamlMime:ManagedReference
+items:
+- uid: Apizr.Logging.ExtendedHttpTracerHandler
+  commentId: T:Apizr.Logging.ExtendedHttpTracerHandler
+  id: ExtendedHttpTracerHandler
+  parent: Apizr.Logging
+  children:
+  - Apizr.Logging.ExtendedHttpTracerHandler.#ctor(Apizr.Configuring.IApizrOptionsBase)
+  - Apizr.Logging.ExtendedHttpTracerHandler.#ctor(System.Net.Http.HttpMessageHandler,Apizr.Configuring.IApizrOptionsBase)
+  - Apizr.Logging.ExtendedHttpTracerHandler.DefaultDurationFormat
+  - Apizr.Logging.ExtendedHttpTracerHandler.GetRequestBody(System.Net.Http.HttpRequestMessage)
+  - Apizr.Logging.ExtendedHttpTracerHandler.GetResponseBody(System.Net.Http.HttpResponseMessage)
+  - Apizr.Logging.ExtendedHttpTracerHandler.LogHttpException(System.Net.Http.HttpRequestMessage,System.Exception,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel)
+  - Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest(System.Net.Http.HttpRequestMessage,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,Apizr.Logging.HttpMessageParts)
+  - Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse(System.Net.Http.HttpResponseMessage,System.TimeSpan,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,Apizr.Logging.HttpMessageParts)
+  - Apizr.Logging.ExtendedHttpTracerHandler.LogMessageIndicatorPrefix
+  - Apizr.Logging.ExtendedHttpTracerHandler.LogMessageIndicatorSuffix
+  - Apizr.Logging.ExtendedHttpTracerHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  langs:
+  - csharp
+  - vb
+  name: ExtendedHttpTracerHandler
+  nameWithType: ExtendedHttpTracerHandler
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler
+  type: Class
+  source:
+    remote:
+      path: Apizr/Apizr/Logging/ExtendedHttpTracerHandler.cs
+      branch: lab
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: ExtendedHttpTracerHandler
+    path: ../../Apizr/Logging/ExtendedHttpTracerHandler.cs
+    startLine: 16
+  assemblies:
+  - Apizr
+  namespace: Apizr.Logging
+  syntax:
+    content: 'public class ExtendedHttpTracerHandler : DelegatingHandler, IDisposable'
+    content.vb: >-
+      Public Class ExtendedHttpTracerHandler
+          Inherits DelegatingHandler
+          Implements IDisposable
+  inheritance:
+  - System.Object
+  - System.Net.Http.HttpMessageHandler
+  - System.Net.Http.DelegatingHandler
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
+  - System.Net.Http.DelegatingHandler.InnerHandler
+  - System.Net.Http.HttpMessageHandler.Dispose
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.DefaultDurationFormat
+  commentId: P:Apizr.Logging.ExtendedHttpTracerHandler.DefaultDurationFormat
+  id: DefaultDurationFormat
+  parent: Apizr.Logging.ExtendedHttpTracerHandler
+  langs:
+  - csharp
+  - vb
+  name: DefaultDurationFormat
+  nameWithType: ExtendedHttpTracerHandler.DefaultDurationFormat
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.DefaultDurationFormat
+  type: Property
+  source:
+    remote:
+      path: Apizr/Apizr/Logging/ExtendedHttpTracerHandler.cs
+      branch: lab
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: DefaultDurationFormat
+    path: ../../Apizr/Logging/ExtendedHttpTracerHandler.cs
+    startLine: 31
+  assemblies:
+  - Apizr
+  namespace: Apizr.Logging
+  summary: "\nDuration string format. Defaults to &quot;Duration: {0:ss\\\\:fffffff}&quot;\n"
+  remarks: "\n<p>\nReceives a <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TimeSpan</code> at the [0] index.\n</p>\n<p>\nSee <a href=\"https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-timespan-format-strings\">https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-timespan-format-strings</a> for more details on TimeSpan formatting.\n</p>\n"
+  example: []
+  syntax:
+    content: public static string DefaultDurationFormat { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Shared Property DefaultDurationFormat As String
+  overload: Apizr.Logging.ExtendedHttpTracerHandler.DefaultDurationFormat*
+  modifiers.csharp:
+  - public
+  - static
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.LogMessageIndicatorPrefix
+  commentId: F:Apizr.Logging.ExtendedHttpTracerHandler.LogMessageIndicatorPrefix
+  id: LogMessageIndicatorPrefix
+  parent: Apizr.Logging.ExtendedHttpTracerHandler
+  langs:
+  - csharp
+  - vb
+  name: LogMessageIndicatorPrefix
+  nameWithType: ExtendedHttpTracerHandler.LogMessageIndicatorPrefix
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.LogMessageIndicatorPrefix
+  type: Field
+  source:
+    remote:
+      path: Apizr/Apizr/Logging/ExtendedHttpTracerHandler.cs
+      branch: lab
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: LogMessageIndicatorPrefix
+    path: ../../Apizr/Logging/ExtendedHttpTracerHandler.cs
+    startLine: 36
+  assemblies:
+  - Apizr
+  namespace: Apizr.Logging
+  syntax:
+    content: public static string LogMessageIndicatorPrefix
+    return:
+      type: System.String
+    content.vb: Public Shared LogMessageIndicatorPrefix As String
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.LogMessageIndicatorSuffix
+  commentId: F:Apizr.Logging.ExtendedHttpTracerHandler.LogMessageIndicatorSuffix
+  id: LogMessageIndicatorSuffix
+  parent: Apizr.Logging.ExtendedHttpTracerHandler
+  langs:
+  - csharp
+  - vb
+  name: LogMessageIndicatorSuffix
+  nameWithType: ExtendedHttpTracerHandler.LogMessageIndicatorSuffix
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.LogMessageIndicatorSuffix
+  type: Field
+  source:
+    remote:
+      path: Apizr/Apizr/Logging/ExtendedHttpTracerHandler.cs
+      branch: lab
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: LogMessageIndicatorSuffix
+    path: ../../Apizr/Logging/ExtendedHttpTracerHandler.cs
+    startLine: 37
+  assemblies:
+  - Apizr
+  namespace: Apizr.Logging
+  syntax:
+    content: public static string LogMessageIndicatorSuffix
+    return:
+      type: System.String
+    content.vb: Public Shared LogMessageIndicatorSuffix As String
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.#ctor(Apizr.Configuring.IApizrOptionsBase)
+  commentId: M:Apizr.Logging.ExtendedHttpTracerHandler.#ctor(Apizr.Configuring.IApizrOptionsBase)
+  id: '#ctor(Apizr.Configuring.IApizrOptionsBase)'
+  parent: Apizr.Logging.ExtendedHttpTracerHandler
+  langs:
+  - csharp
+  - vb
+  name: ExtendedHttpTracerHandler(IApizrOptionsBase)
+  nameWithType: ExtendedHttpTracerHandler.ExtendedHttpTracerHandler(IApizrOptionsBase)
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.ExtendedHttpTracerHandler(Apizr.Configuring.IApizrOptionsBase)
+  type: Constructor
+  source:
+    remote:
+      path: Apizr/Apizr/Logging/ExtendedHttpTracerHandler.cs
+      branch: lab
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: .ctor
+    path: ../../Apizr/Logging/ExtendedHttpTracerHandler.cs
+    startLine: 42
+  assemblies:
+  - Apizr
+  namespace: Apizr.Logging
+  summary: Constructs the <xref href="Apizr.Logging.ExtendedHttpTracerHandler" data-throw-if-not-resolved="false"></xref> with a custom <xref href="Microsoft.Extensions.Logging.ILogger" data-throw-if-not-resolved="false"></xref> and a custom <xref href="System.Net.Http.HttpMessageHandler" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: public ExtendedHttpTracerHandler(IApizrOptionsBase apizrOptions)
+    parameters:
+    - id: apizrOptions
+      type: Apizr.Configuring.IApizrOptionsBase
+      description: Apizr options
+    content.vb: Public Sub New(apizrOptions As IApizrOptionsBase)
+  overload: Apizr.Logging.ExtendedHttpTracerHandler.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.#ctor(System.Net.Http.HttpMessageHandler,Apizr.Configuring.IApizrOptionsBase)
+  commentId: M:Apizr.Logging.ExtendedHttpTracerHandler.#ctor(System.Net.Http.HttpMessageHandler,Apizr.Configuring.IApizrOptionsBase)
+  id: '#ctor(System.Net.Http.HttpMessageHandler,Apizr.Configuring.IApizrOptionsBase)'
+  parent: Apizr.Logging.ExtendedHttpTracerHandler
+  langs:
+  - csharp
+  - vb
+  name: ExtendedHttpTracerHandler(HttpMessageHandler, IApizrOptionsBase)
+  nameWithType: ExtendedHttpTracerHandler.ExtendedHttpTracerHandler(HttpMessageHandler, IApizrOptionsBase)
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.ExtendedHttpTracerHandler(System.Net.Http.HttpMessageHandler, Apizr.Configuring.IApizrOptionsBase)
+  type: Constructor
+  source:
+    remote:
+      path: Apizr/Apizr/Logging/ExtendedHttpTracerHandler.cs
+      branch: lab
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: .ctor
+    path: ../../Apizr/Logging/ExtendedHttpTracerHandler.cs
+    startLine: 48
+  assemblies:
+  - Apizr
+  namespace: Apizr.Logging
+  summary: Constructs the <xref href="Apizr.Logging.ExtendedHttpTracerHandler" data-throw-if-not-resolved="false"></xref> with a custom <xref href="Microsoft.Extensions.Logging.ILogger" data-throw-if-not-resolved="false"></xref> and a custom <xref href="System.Net.Http.HttpMessageHandler" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: public ExtendedHttpTracerHandler(HttpMessageHandler handler, IApizrOptionsBase apizrOptions)
+    parameters:
+    - id: handler
+      type: System.Net.Http.HttpMessageHandler
+      description: User defined <xref href="System.Net.Http.HttpMessageHandler" data-throw-if-not-resolved="false"></xref>
+    - id: apizrOptions
+      type: Apizr.Configuring.IApizrOptionsBase
+      description: Apizr options
+    content.vb: Public Sub New(handler As HttpMessageHandler, apizrOptions As IApizrOptionsBase)
+  overload: Apizr.Logging.ExtendedHttpTracerHandler.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  commentId: M:Apizr.Logging.ExtendedHttpTracerHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  id: SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  parent: Apizr.Logging.ExtendedHttpTracerHandler
+  langs:
+  - csharp
+  - vb
+  name: SendAsync(HttpRequestMessage, CancellationToken)
+  nameWithType: ExtendedHttpTracerHandler.SendAsync(HttpRequestMessage, CancellationToken)
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.SendAsync(System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Apizr/Logging/ExtendedHttpTracerHandler.cs
+      branch: lab
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: SendAsync
+    path: ../../Apizr/Logging/ExtendedHttpTracerHandler.cs
+    startLine: 57
+  assemblies:
+  - Apizr
+  namespace: Apizr.Logging
+  syntax:
+    content: protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    parameters:
+    - id: request
+      type: System.Net.Http.HttpRequestMessage
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+    return:
+      type: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
+    content.vb: Protected Overrides Function SendAsync(request As HttpRequestMessage, cancellationToken As CancellationToken) As Task(Of HttpResponseMessage)
+  overridden: System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  overload: Apizr.Logging.ExtendedHttpTracerHandler.SendAsync*
+  modifiers.csharp:
+  - protected
+  - override
+  - async
+  modifiers.vb:
+  - Protected
+  - Overrides
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest(System.Net.Http.HttpRequestMessage,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,Apizr.Logging.HttpMessageParts)
+  commentId: M:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest(System.Net.Http.HttpRequestMessage,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,Apizr.Logging.HttpMessageParts)
+  id: LogHttpRequest(System.Net.Http.HttpRequestMessage,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,Apizr.Logging.HttpMessageParts)
+  parent: Apizr.Logging.ExtendedHttpTracerHandler
+  langs:
+  - csharp
+  - vb
+  name: LogHttpRequest(HttpRequestMessage, ILogger, LogLevel, HttpMessageParts)
+  nameWithType: ExtendedHttpTracerHandler.LogHttpRequest(HttpRequestMessage, ILogger, LogLevel, HttpMessageParts)
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest(System.Net.Http.HttpRequestMessage, Microsoft.Extensions.Logging.ILogger, Microsoft.Extensions.Logging.LogLevel, Apizr.Logging.HttpMessageParts)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Apizr/Logging/ExtendedHttpTracerHandler.cs
+      branch: lab
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: LogHttpRequest
+    path: ../../Apizr/Logging/ExtendedHttpTracerHandler.cs
+    startLine: 120
+  assemblies:
+  - Apizr
+  namespace: Apizr.Logging
+  syntax:
+    content: protected virtual async Task LogHttpRequest(HttpRequestMessage request, ILogger logger, LogLevel logLevel, HttpMessageParts verbosity)
+    parameters:
+    - id: request
+      type: System.Net.Http.HttpRequestMessage
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+    - id: logLevel
+      type: Microsoft.Extensions.Logging.LogLevel
+    - id: verbosity
+      type: Apizr.Logging.HttpMessageParts
+    return:
+      type: System.Threading.Tasks.Task
+    content.vb: Protected Overridable Function LogHttpRequest(request As HttpRequestMessage, logger As ILogger, logLevel As LogLevel, verbosity As HttpMessageParts) As Task
+  overload: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest*
+  modifiers.csharp:
+  - protected
+  - virtual
+  - async
+  modifiers.vb:
+  - Protected
+  - Overridable
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse(System.Net.Http.HttpResponseMessage,System.TimeSpan,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,Apizr.Logging.HttpMessageParts)
+  commentId: M:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse(System.Net.Http.HttpResponseMessage,System.TimeSpan,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,Apizr.Logging.HttpMessageParts)
+  id: LogHttpResponse(System.Net.Http.HttpResponseMessage,System.TimeSpan,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,Apizr.Logging.HttpMessageParts)
+  parent: Apizr.Logging.ExtendedHttpTracerHandler
+  langs:
+  - csharp
+  - vb
+  name: LogHttpResponse(HttpResponseMessage, TimeSpan, ILogger, LogLevel, HttpMessageParts)
+  nameWithType: ExtendedHttpTracerHandler.LogHttpResponse(HttpResponseMessage, TimeSpan, ILogger, LogLevel, HttpMessageParts)
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse(System.Net.Http.HttpResponseMessage, System.TimeSpan, Microsoft.Extensions.Logging.ILogger, Microsoft.Extensions.Logging.LogLevel, Apizr.Logging.HttpMessageParts)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Apizr/Logging/ExtendedHttpTracerHandler.cs
+      branch: lab
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: LogHttpResponse
+    path: ../../Apizr/Logging/ExtendedHttpTracerHandler.cs
+    startLine: 149
+  assemblies:
+  - Apizr
+  namespace: Apizr.Logging
+  syntax:
+    content: protected virtual async Task LogHttpResponse(HttpResponseMessage response, TimeSpan duration, ILogger logger, LogLevel logLevel, HttpMessageParts verbosity)
+    parameters:
+    - id: response
+      type: System.Net.Http.HttpResponseMessage
+    - id: duration
+      type: System.TimeSpan
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+    - id: logLevel
+      type: Microsoft.Extensions.Logging.LogLevel
+    - id: verbosity
+      type: Apizr.Logging.HttpMessageParts
+    return:
+      type: System.Threading.Tasks.Task
+    content.vb: Protected Overridable Function LogHttpResponse(response As HttpResponseMessage, duration As TimeSpan, logger As ILogger, logLevel As LogLevel, verbosity As HttpMessageParts) As Task
+  overload: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse*
+  modifiers.csharp:
+  - protected
+  - virtual
+  - async
+  modifiers.vb:
+  - Protected
+  - Overridable
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpException(System.Net.Http.HttpRequestMessage,System.Exception,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel)
+  commentId: M:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpException(System.Net.Http.HttpRequestMessage,System.Exception,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel)
+  id: LogHttpException(System.Net.Http.HttpRequestMessage,System.Exception,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel)
+  parent: Apizr.Logging.ExtendedHttpTracerHandler
+  langs:
+  - csharp
+  - vb
+  name: LogHttpException(HttpRequestMessage, Exception, ILogger, LogLevel)
+  nameWithType: ExtendedHttpTracerHandler.LogHttpException(HttpRequestMessage, Exception, ILogger, LogLevel)
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpException(System.Net.Http.HttpRequestMessage, System.Exception, Microsoft.Extensions.Logging.ILogger, Microsoft.Extensions.Logging.LogLevel)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Apizr/Logging/ExtendedHttpTracerHandler.cs
+      branch: lab
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: LogHttpException
+    path: ../../Apizr/Logging/ExtendedHttpTracerHandler.cs
+    startLine: 201
+  assemblies:
+  - Apizr
+  namespace: Apizr.Logging
+  syntax:
+    content: protected void LogHttpException(HttpRequestMessage request, Exception ex, ILogger logger, LogLevel logLevel)
+    parameters:
+    - id: request
+      type: System.Net.Http.HttpRequestMessage
+    - id: ex
+      type: System.Exception
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+    - id: logLevel
+      type: Microsoft.Extensions.Logging.LogLevel
+    content.vb: Protected Sub LogHttpException(request As HttpRequestMessage, ex As Exception, logger As ILogger, logLevel As LogLevel)
+  overload: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpException*
+  modifiers.csharp:
+  - protected
+  modifiers.vb:
+  - Protected
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.GetRequestBody(System.Net.Http.HttpRequestMessage)
+  commentId: M:Apizr.Logging.ExtendedHttpTracerHandler.GetRequestBody(System.Net.Http.HttpRequestMessage)
+  id: GetRequestBody(System.Net.Http.HttpRequestMessage)
+  parent: Apizr.Logging.ExtendedHttpTracerHandler
+  langs:
+  - csharp
+  - vb
+  name: GetRequestBody(HttpRequestMessage)
+  nameWithType: ExtendedHttpTracerHandler.GetRequestBody(HttpRequestMessage)
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.GetRequestBody(System.Net.Http.HttpRequestMessage)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Apizr/Logging/ExtendedHttpTracerHandler.cs
+      branch: lab
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: GetRequestBody
+    path: ../../Apizr/Logging/ExtendedHttpTracerHandler.cs
+    startLine: 232
+  assemblies:
+  - Apizr
+  namespace: Apizr.Logging
+  syntax:
+    content: protected Task<string> GetRequestBody(HttpRequestMessage request)
+    parameters:
+    - id: request
+      type: System.Net.Http.HttpRequestMessage
+    return:
+      type: System.Threading.Tasks.Task{System.String}
+    content.vb: Protected Function GetRequestBody(request As HttpRequestMessage) As Task(Of String)
+  overload: Apizr.Logging.ExtendedHttpTracerHandler.GetRequestBody*
+  modifiers.csharp:
+  - protected
+  modifiers.vb:
+  - Protected
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.GetResponseBody(System.Net.Http.HttpResponseMessage)
+  commentId: M:Apizr.Logging.ExtendedHttpTracerHandler.GetResponseBody(System.Net.Http.HttpResponseMessage)
+  id: GetResponseBody(System.Net.Http.HttpResponseMessage)
+  parent: Apizr.Logging.ExtendedHttpTracerHandler
+  langs:
+  - csharp
+  - vb
+  name: GetResponseBody(HttpResponseMessage)
+  nameWithType: ExtendedHttpTracerHandler.GetResponseBody(HttpResponseMessage)
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.GetResponseBody(System.Net.Http.HttpResponseMessage)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Apizr/Logging/ExtendedHttpTracerHandler.cs
+      branch: lab
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: GetResponseBody
+    path: ../../Apizr/Logging/ExtendedHttpTracerHandler.cs
+    startLine: 234
+  assemblies:
+  - Apizr
+  namespace: Apizr.Logging
+  syntax:
+    content: protected Task<string> GetResponseBody(HttpResponseMessage response)
+    parameters:
+    - id: response
+      type: System.Net.Http.HttpResponseMessage
+    return:
+      type: System.Threading.Tasks.Task{System.String}
+    content.vb: Protected Function GetResponseBody(response As HttpResponseMessage) As Task(Of String)
+  overload: Apizr.Logging.ExtendedHttpTracerHandler.GetResponseBody*
+  modifiers.csharp:
+  - protected
+  modifiers.vb:
+  - Protected
+references:
+- uid: Apizr.Logging
+  commentId: N:Apizr.Logging
+  name: Apizr.Logging
+  nameWithType: Apizr.Logging
+  fullName: Apizr.Logging
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Net.Http.HttpMessageHandler
+  commentId: T:System.Net.Http.HttpMessageHandler
+  parent: System.Net.Http
+  isExternal: true
+  name: HttpMessageHandler
+  nameWithType: HttpMessageHandler
+  fullName: System.Net.Http.HttpMessageHandler
+- uid: System.Net.Http.DelegatingHandler
+  commentId: T:System.Net.Http.DelegatingHandler
+  parent: System.Net.Http
+  isExternal: true
+  name: DelegatingHandler
+  nameWithType: DelegatingHandler
+  fullName: System.Net.Http.DelegatingHandler
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
+  commentId: M:System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
+  parent: System.Net.Http.DelegatingHandler
+  isExternal: true
+  name: Dispose(Boolean)
+  nameWithType: DelegatingHandler.Dispose(Boolean)
+  fullName: System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
+  spec.csharp:
+  - uid: System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
+    name: Dispose
+    nameWithType: DelegatingHandler.Dispose
+    fullName: System.Net.Http.DelegatingHandler.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
+    name: Dispose
+    nameWithType: DelegatingHandler.Dispose
+    fullName: System.Net.Http.DelegatingHandler.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Net.Http.DelegatingHandler.InnerHandler
+  commentId: P:System.Net.Http.DelegatingHandler.InnerHandler
+  parent: System.Net.Http.DelegatingHandler
+  isExternal: true
+  name: InnerHandler
+  nameWithType: DelegatingHandler.InnerHandler
+  fullName: System.Net.Http.DelegatingHandler.InnerHandler
+- uid: System.Net.Http.HttpMessageHandler.Dispose
+  commentId: M:System.Net.Http.HttpMessageHandler.Dispose
+  parent: System.Net.Http.HttpMessageHandler
+  isExternal: true
+  name: Dispose()
+  nameWithType: HttpMessageHandler.Dispose()
+  fullName: System.Net.Http.HttpMessageHandler.Dispose()
+  spec.csharp:
+  - uid: System.Net.Http.HttpMessageHandler.Dispose
+    name: Dispose
+    nameWithType: HttpMessageHandler.Dispose
+    fullName: System.Net.Http.HttpMessageHandler.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Net.Http.HttpMessageHandler.Dispose
+    name: Dispose
+    nameWithType: HttpMessageHandler.Dispose
+    fullName: System.Net.Http.HttpMessageHandler.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
+  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
+  parent: Apizr.Extending.ObjectExtensions
+  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
+  name: ToString(String, String)
+  nameWithType: ObjectExtensions.ToString(String, String)
+  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
+  spec.csharp:
+  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
+    name: ToString
+    nameWithType: ObjectExtensions.ToString
+    fullName: Apizr.Extending.ObjectExtensions.ToString
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
+    name: ToString
+    nameWithType: ObjectExtensions.ToString
+    fullName: Apizr.Extending.ObjectExtensions.ToString
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Net.Http
+  commentId: N:System.Net.Http
+  isExternal: true
+  name: System.Net.Http
+  nameWithType: System.Net.Http
+  fullName: System.Net.Http
+- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
+  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
+  isExternal: true
+  name: ToString(Object, String, String)
+  nameWithType: ObjectExtensions.ToString(Object, String, String)
+  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
+  spec.csharp:
+  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
+    name: ToString
+    nameWithType: ObjectExtensions.ToString
+    fullName: Apizr.Extending.ObjectExtensions.ToString
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
+    name: ToString
+    nameWithType: ObjectExtensions.ToString
+    fullName: Apizr.Extending.ObjectExtensions.ToString
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Extending.ObjectExtensions
+  commentId: T:Apizr.Extending.ObjectExtensions
+  parent: Apizr.Extending
+  name: ObjectExtensions
+  nameWithType: ObjectExtensions
+  fullName: Apizr.Extending.ObjectExtensions
+- uid: Apizr.Extending
+  commentId: N:Apizr.Extending
+  name: Apizr.Extending
+  nameWithType: Apizr.Extending
+  fullName: Apizr.Extending
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.DefaultDurationFormat*
+  commentId: Overload:Apizr.Logging.ExtendedHttpTracerHandler.DefaultDurationFormat
+  name: DefaultDurationFormat
+  nameWithType: ExtendedHttpTracerHandler.DefaultDurationFormat
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.DefaultDurationFormat
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Apizr.Logging.ExtendedHttpTracerHandler
+  commentId: T:Apizr.Logging.ExtendedHttpTracerHandler
+  parent: Apizr.Logging
+  name: ExtendedHttpTracerHandler
+  nameWithType: ExtendedHttpTracerHandler
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler
+- uid: Microsoft.Extensions.Logging.ILogger
+  commentId: T:Microsoft.Extensions.Logging.ILogger
+  parent: Microsoft.Extensions.Logging
+  isExternal: true
+  name: ILogger
+  nameWithType: ILogger
+  fullName: Microsoft.Extensions.Logging.ILogger
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.#ctor*
+  commentId: Overload:Apizr.Logging.ExtendedHttpTracerHandler.#ctor
+  name: ExtendedHttpTracerHandler
+  nameWithType: ExtendedHttpTracerHandler.ExtendedHttpTracerHandler
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.ExtendedHttpTracerHandler
+- uid: Apizr.Configuring.IApizrOptionsBase
+  commentId: T:Apizr.Configuring.IApizrOptionsBase
+  parent: Apizr.Configuring
+  name: IApizrOptionsBase
+  nameWithType: IApizrOptionsBase
+  fullName: Apizr.Configuring.IApizrOptionsBase
+- uid: Microsoft.Extensions.Logging
+  commentId: N:Microsoft.Extensions.Logging
+  isExternal: true
+  name: Microsoft.Extensions.Logging
+  nameWithType: Microsoft.Extensions.Logging
+  fullName: Microsoft.Extensions.Logging
+- uid: Apizr.Configuring
+  commentId: N:Apizr.Configuring
+  name: Apizr.Configuring
+  nameWithType: Apizr.Configuring
+  fullName: Apizr.Configuring
+- uid: System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  commentId: M:System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  parent: System.Net.Http.DelegatingHandler
+  isExternal: true
+  name: SendAsync(HttpRequestMessage, CancellationToken)
+  nameWithType: DelegatingHandler.SendAsync(HttpRequestMessage, CancellationToken)
+  fullName: System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken)
+  spec.csharp:
+  - uid: System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+    name: SendAsync
+    nameWithType: DelegatingHandler.SendAsync
+    fullName: System.Net.Http.DelegatingHandler.SendAsync
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Net.Http.HttpRequestMessage
+    name: HttpRequestMessage
+    nameWithType: HttpRequestMessage
+    fullName: System.Net.Http.HttpRequestMessage
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    nameWithType: CancellationToken
+    fullName: System.Threading.CancellationToken
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+    name: SendAsync
+    nameWithType: DelegatingHandler.SendAsync
+    fullName: System.Net.Http.DelegatingHandler.SendAsync
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Net.Http.HttpRequestMessage
+    name: HttpRequestMessage
+    nameWithType: HttpRequestMessage
+    fullName: System.Net.Http.HttpRequestMessage
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    nameWithType: CancellationToken
+    fullName: System.Threading.CancellationToken
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.SendAsync*
+  commentId: Overload:Apizr.Logging.ExtendedHttpTracerHandler.SendAsync
+  name: SendAsync
+  nameWithType: ExtendedHttpTracerHandler.SendAsync
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.SendAsync
+- uid: System.Net.Http.HttpRequestMessage
+  commentId: T:System.Net.Http.HttpRequestMessage
+  parent: System.Net.Http
+  isExternal: true
+  name: HttpRequestMessage
+  nameWithType: HttpRequestMessage
+  fullName: System.Net.Http.HttpRequestMessage
+- uid: System.Threading.CancellationToken
+  commentId: T:System.Threading.CancellationToken
+  parent: System.Threading
+  isExternal: true
+  name: CancellationToken
+  nameWithType: CancellationToken
+  fullName: System.Threading.CancellationToken
+- uid: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
+  commentId: T:System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  name: Task<HttpResponseMessage>
+  nameWithType: Task<HttpResponseMessage>
+  fullName: System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>
+  nameWithType.vb: Task(Of HttpResponseMessage)
+  fullName.vb: System.Threading.Tasks.Task(Of System.Net.Http.HttpResponseMessage)
+  name.vb: Task(Of HttpResponseMessage)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Threading
+  commentId: N:System.Threading
+  isExternal: true
+  name: System.Threading
+  nameWithType: System.Threading
+  fullName: System.Threading
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest*
+  commentId: Overload:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest
+  name: LogHttpRequest
+  nameWithType: ExtendedHttpTracerHandler.LogHttpRequest
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest
+- uid: Microsoft.Extensions.Logging.LogLevel
+  commentId: T:Microsoft.Extensions.Logging.LogLevel
+  parent: Microsoft.Extensions.Logging
+  isExternal: true
+  name: LogLevel
+  nameWithType: LogLevel
+  fullName: Microsoft.Extensions.Logging.LogLevel
+- uid: Apizr.Logging.HttpMessageParts
+  commentId: T:Apizr.Logging.HttpMessageParts
+  parent: Apizr.Logging
+  name: HttpMessageParts
+  nameWithType: HttpMessageParts
+  fullName: Apizr.Logging.HttpMessageParts
+- uid: System.Threading.Tasks.Task
+  commentId: T:System.Threading.Tasks.Task
+  parent: System.Threading.Tasks
+  isExternal: true
+  name: Task
+  nameWithType: Task
+  fullName: System.Threading.Tasks.Task
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse*
+  commentId: Overload:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse
+  name: LogHttpResponse
+  nameWithType: ExtendedHttpTracerHandler.LogHttpResponse
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse
+- uid: System.Net.Http.HttpResponseMessage
+  commentId: T:System.Net.Http.HttpResponseMessage
+  parent: System.Net.Http
+  isExternal: true
+  name: HttpResponseMessage
+  nameWithType: HttpResponseMessage
+  fullName: System.Net.Http.HttpResponseMessage
+- uid: System.TimeSpan
+  commentId: T:System.TimeSpan
+  parent: System
+  isExternal: true
+  name: TimeSpan
+  nameWithType: TimeSpan
+  fullName: System.TimeSpan
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpException*
+  commentId: Overload:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpException
+  name: LogHttpException
+  nameWithType: ExtendedHttpTracerHandler.LogHttpException
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpException
+- uid: System.Exception
+  commentId: T:System.Exception
+  parent: System
+  isExternal: true
+  name: Exception
+  nameWithType: Exception
+  fullName: System.Exception
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.GetRequestBody*
+  commentId: Overload:Apizr.Logging.ExtendedHttpTracerHandler.GetRequestBody
+  name: GetRequestBody
+  nameWithType: ExtendedHttpTracerHandler.GetRequestBody
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.GetRequestBody
+- uid: System.Threading.Tasks.Task{System.String}
+  commentId: T:System.Threading.Tasks.Task{System.String}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  name: Task<String>
+  nameWithType: Task<String>
+  fullName: System.Threading.Tasks.Task<System.String>
+  nameWithType.vb: Task(Of String)
+  fullName.vb: System.Threading.Tasks.Task(Of System.String)
+  name.vb: Task(Of String)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.GetResponseBody*
+  commentId: Overload:Apizr.Logging.ExtendedHttpTracerHandler.GetResponseBody
+  name: GetResponseBody
+  nameWithType: ExtendedHttpTracerHandler.GetResponseBody
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.GetResponseBody

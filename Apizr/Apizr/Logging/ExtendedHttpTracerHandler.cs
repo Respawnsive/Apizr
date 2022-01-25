@@ -23,7 +23,7 @@ namespace Apizr.Logging
         /// </summary>
         /// <remarks>
         /// <para>
-        /// Receives a <see cref="TimeSpan"/> at the [0] index.
+        /// Receives a <typeparamref name="TimeSpan"/> at the [0] index.
         /// </para>
         /// <para>
         /// See <a href="https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-timespan-format-strings">https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-timespan-format-strings</a> for more details on TimeSpan formatting.

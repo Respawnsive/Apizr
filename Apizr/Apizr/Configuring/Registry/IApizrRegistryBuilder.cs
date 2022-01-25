@@ -16,8 +16,8 @@ namespace Apizr.Configuring.Registry
         #region Crud
         
         /// <summary>
-        /// Create a <see cref="TApizrManager"/> instance for a managed crud api for <see cref="T"/> object (class), 
-        /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="TReadAllResult"/>
+        /// Create a <typeparamref name="TApizrManager"/> instance for a managed crud api for <typeparamref name="T"/> object (class), 
+        /// with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
         /// and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
         /// </summary>
         /// <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
@@ -43,7 +43,7 @@ namespace Apizr.Configuring.Registry
         #region General
         
         /// <summary>
-        /// Create a <see cref="TApizrManager"/> instance for a managed <see cref="TWebApi"/>
+        /// Create a <typeparamref name="TApizrManager"/> instance for a managed <typeparamref name="TWebApi"/>
         /// </summary>
         /// <typeparam name="TWebApi">The web api interface to manage</typeparam>
         /// <typeparam name="TApizrManager">A custom <see cref="IApizrManager{TWebApi}"/> implementation</typeparam>

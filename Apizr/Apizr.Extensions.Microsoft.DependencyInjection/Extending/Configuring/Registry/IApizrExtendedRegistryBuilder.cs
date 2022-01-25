@@ -17,8 +17,8 @@ namespace Apizr.Extending.Configuring.Registry
         #region Crud
 
         /// <summary>
-        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type, 
-        /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="TReadAllResult"/>
+        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <typeparamref name="T"/> object type, 
+        /// with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
         /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
         /// and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
         /// </summary>

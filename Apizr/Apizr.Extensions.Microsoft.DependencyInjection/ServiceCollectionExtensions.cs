@@ -59,7 +59,7 @@ namespace Apizr
         #region Crud
 
         /// <summary>
-        /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type (class),
+        /// Register <see cref="IApizrManager{ICrudApi}"/> for <typeparamref name="T"/> object type (class),
         /// with key of type <see cref="int"/> and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
         /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
@@ -71,8 +71,8 @@ namespace Apizr
             AddApizrCrudFor(services, typeof(T), typeof(int), typeof(IEnumerable<>), typeof(IDictionary<string, object>), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
-        /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type (class), 
-        /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
+        /// Register <see cref="IApizrManager{ICrudApi}"/> for <typeparamref name="T"/> object type (class), 
+        /// with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
         /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
         /// <typeparam name="T">The object type to manage with crud api calls</typeparam>
@@ -85,8 +85,8 @@ namespace Apizr
             AddApizrCrudFor(services, typeof(T), typeof(TKey), typeof(IEnumerable<>), typeof(IDictionary<string, object>), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
-        /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type (class), 
-        /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="TReadAllResult"/>
+        /// Register <see cref="IApizrManager{ICrudApi}"/> for <typeparamref name="T"/> object type (class), 
+        /// with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
         /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
         /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
@@ -103,8 +103,8 @@ namespace Apizr
             AddApizrCrudFor(services, typeof(T), typeof(TKey), typeof(TReadAllResult), typeof(IDictionary<string, object>), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
-        /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type (class), 
-        /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="TReadAllResult"/>
+        /// Register <see cref="IApizrManager{ICrudApi}"/> for <typeparamref name="T"/> object type (class), 
+        /// with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
         /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
         /// and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
         /// </summary>
@@ -122,8 +122,8 @@ namespace Apizr
             AddApizrCrudFor(services, typeof(T), typeof(TKey), typeof(TReadAllResult), typeof(TReadAllParams), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
-        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type, 
-        /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="TReadAllResult"/>
+        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <typeparamref name="T"/> object type, 
+        /// with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
         /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
         /// and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
         /// </summary>

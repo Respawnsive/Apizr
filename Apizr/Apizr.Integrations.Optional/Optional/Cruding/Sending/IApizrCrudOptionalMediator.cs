@@ -900,7 +900,7 @@ namespace Apizr.Optional.Cruding.Sending
     }
 
     /// <summary>
-    /// <see cref="IApizrCrudOptionalMediator"/> but dedicated to <see cref="TApiEntity"/> cruding with optional result, getting all shorter
+    /// <see cref="IApizrCrudOptionalMediator"/> but dedicated to <typeparamref name="TApiEntity"/> cruding with optional result, getting all shorter
     /// </summary>
     public interface IApizrCrudOptionalMediator<TApiEntity, in TApiEntityKey, TReadAllResult, in TReadAllParams> : IApizrCrudOptionalMediatorBase
         where TApiEntity : class

@@ -74,7 +74,7 @@ namespace Apizr.Optional.Extending
         }
 
         /// <summary>
-        /// Return <see cref="TResult"/> (from fetch or cache), no matter of exception (handled by <see cref="onException"/>).
+        /// Return <typeparamref name="TResult"/> (from fetch or cache), no matter of exception (handled by <see cref="onException"/>).
         /// Could throw if you ask to with <see cref="letThrowOnExceptionWithEmptyCache"/> in case of exception with empty cache (<see cref="onException"/> won't be called),
         /// otherwise return the empty cache (have to be managed) after calling <see cref="onException"/> action.
         /// </summary>

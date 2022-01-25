@@ -24,7 +24,7 @@ namespace Apizr.Configuring.Shared
         /// Provide your own <see cref="AuthenticationHandlerBase"/> implementation factory
         /// </summary>
         /// <typeparam name="TAuthenticationHandler">Your <see cref="AuthenticationHandlerBase"/> implementation</typeparam>
-        /// <param name="authenticationHandlerFactory">A <see cref="TAuthenticationHandler"/> instance factory</param>
+        /// <param name="authenticationHandlerFactory">A <typeparamref name="TAuthenticationHandler"/> instance factory</param>
         /// <returns></returns>
         TApizrSharedOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<ILogger, IApizrOptionsBase, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase;
 
@@ -33,9 +33,9 @@ namespace Apizr.Configuring.Shared
         /// </summary>
         /// <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
         /// <typeparam name="TTokenService">Your token management service (refreshing token)</typeparam>
-        /// <param name="settingsService">A <see cref="TSettingsService"/> instance</param>
+        /// <param name="settingsService">A <typeparamref name="TSettingsService"/> instance</param>
         /// <param name="tokenProperty">The token property used for saving</param>
-        /// <param name="tokenService">A <see cref="TTokenService"/> instance</param>
+        /// <param name="tokenService">A <typeparamref name="TTokenService"/> instance</param>
         /// <param name="refreshTokenMethod">The method called to refresh the token</param>
         /// <returns></returns>
         TApizrSharedOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(TSettingsService settingsService, Expression<Func<TSettingsService, string>> tokenProperty, TTokenService tokenService, Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod);
@@ -45,9 +45,9 @@ namespace Apizr.Configuring.Shared
         /// </summary>
         /// <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
         /// <typeparam name="TTokenService">Your token management service (refreshing token)</typeparam>
-        /// <param name="settingsServiceFactory">A <see cref="TSettingsService"/> instance factory</param>
+        /// <param name="settingsServiceFactory">A <typeparamref name="TSettingsService"/> instance factory</param>
         /// <param name="tokenProperty">The token property used for saving</param>
-        /// <param name="tokenServiceFactory">A <see cref="TTokenService"/> instance factory</param>
+        /// <param name="tokenServiceFactory">A <typeparamref name="TTokenService"/> instance factory</param>
         /// <param name="refreshTokenMethod">The method called to refresh the token</param>
         /// <returns></returns>
         TApizrSharedOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> tokenProperty, Func<TTokenService> tokenServiceFactory, Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod);
@@ -56,7 +56,7 @@ namespace Apizr.Configuring.Shared
         /// Provide your own settings management service and a method to refresh the token
         /// </summary>
         /// <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
-        /// <param name="settingsService">A <see cref="TSettingsService"/> instance</param>
+        /// <param name="settingsService">A <typeparamref name="TSettingsService"/> instance</param>
         /// <param name="tokenProperty">The token property used for saving</param>
         /// <param name="refreshTokenFactory">The method factory called to refresh the token</param>
         /// <returns></returns>
@@ -66,7 +66,7 @@ namespace Apizr.Configuring.Shared
         /// Provide your own settings management service and a method to refresh the token
         /// </summary>
         /// <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
-        /// <param name="settingsServiceFactory">A <see cref="TSettingsService"/> instance factory</param>
+        /// <param name="settingsServiceFactory">A <typeparamref name="TSettingsService"/> instance factory</param>
         /// <param name="tokenProperty">The token property used for saving</param>
         /// <param name="refreshTokenFactory">The method factory called to refresh the token</param>
         /// <returns></returns>

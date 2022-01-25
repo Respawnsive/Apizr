@@ -148,7 +148,7 @@ namespace Apizr.Policing
         /// <param name="request">The <see cref="HttpRequestMessage"/>.</param>
         /// <param name="context">The <see cref="Context"/>.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/>.</param>
-        /// <returns>Returns a <see cref="Task{HttpResponseMessage}"/> that will yield a response when completed.</returns>
+        /// <returns>Returns a <typeparamref name="Task{HttpResponseMessage}"/> that will yield a response when completed.</returns>
         protected virtual Task<HttpResponseMessage> SendCoreAsync(HttpRequestMessage request, Context context, CancellationToken cancellationToken)
         {
             if (request == null)

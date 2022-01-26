@@ -5,19 +5,19 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title> </title>
+    <title>Apizr | Resilient request manager </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content=" ">
+    <meta name="title" content="Apizr | Resilient request manager ">
     <meta name="generator" content="docfx 2.59.0.0">
     
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="resources/favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
     <link rel="stylesheet" href="styles/docfx.css">
     <link rel="stylesheet" href="styles/main.css">
     <meta property="docfx:navrel" content="toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
-    
+    <meta property="docfx:rel" content="">
     
   </head>
   <body data-spy="scroll" data-target="#affix" data-offset="120">
@@ -35,7 +35,7 @@
               </button>
               
               <a class="navbar-brand" href="index.html">
-                <img id="logo" class="svg" src="logo.svg" alt="">
+                <img id="logo" class="svg" src="resources/logo.png" alt="">
               </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar">
@@ -56,12 +56,134 @@
           </div>
         </div>
       </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
       <div role="main" class="container body-content hide-when-search">
         <div class="article row grid">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
+<h1 id="apizr">Apizr</h1>
 
-<p><strong><em>Apizr is pretty awesome</em></strong></p>
+<p>Refit based web api client, but resilient (retry, connectivity, cache, auth, log, priority, etc...)</p>
+<p>You&#39;ll find a <a href="https://www.respawnsive.com/category/blog-en/apizr/">blog post series here</a> about Apizr.</p>
+<h4 id="v-next">V-Next</h4>
+<p>This readme is all about v3 with related source code hosted by the master branch.
+We&#39;re about to release v4 during 2022 Q1 with a lot of improvements and new features, plus some fixes.
+Feel free to keep an eye on source code hosted by the dev branch, especially the test project and the samples, to get an idea about this expected v4 release (Readme still about v3 but ChangeLog up to date with v4).</p>
+<h2 id="libraries">Libraries</h2>
+<p>Apizr v3+ introduced some breaking changes as it relies on Refit v6+ which actually introduced breaking changes and the fact that Fusillade has been moved from core package to a dedicated one.
+Please take a look at the changelog and this updated readme.</p>
+<p><a href="changelog.html">Change Log - Mar 12, 2021</a></p>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>NuGet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apizr</td>
+<td><a href="https://www.nuget.org/packages/Apizr/"><img src="https://img.shields.io/nuget/v/Apizr.svg" alt="NuGet"></a></td>
+</tr>
+<tr>
+<td>Apizr.Extensions.Microsoft.DependencyInjection</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Extensions.Microsoft.DependencyInjection/"><img src="https://img.shields.io/nuget/v/Apizr.Extensions.Microsoft.DependencyInjection.svg" alt="NuGet"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.Shiny</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.Shiny/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.Shiny.svg" alt="NuGet"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.Fusillade</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.Fusillade/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.Fusillade.svg" alt="NuGet"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.Akavache</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.Akavache/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.Akavache.svg" alt="NuGet"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.MonkeyCache</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.MonkeyCache/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.MonkeyCache.svg" alt="NuGet"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.MediatR</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.MediatR/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.MediatR.svg" alt="NuGet"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.Optional</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.Optional/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.Optional.svg" alt="NuGet"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.AutoMapper</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.AutoMapper/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.AutoMapper.svg" alt="NuGet"></a></td>
+</tr>
+</tbody>
+</table>
+<p>Install the NuGet package of your choice:</p>
+<ul>
+<li><strong>Apizr</strong> package comes with the For and CrudFor static instantiation approach (which you can register in your DI container then)</li>
+<li><strong>Apizr.Extensions.Microsoft.DependencyInjection</strong> package extends your IServiceCollection with AddApizrFor and AddApizrCrudFor registration methods (ASP.Net Core, etc)</li>
+<li><strong>Apizr.Integrations.Shiny</strong> package brings ICacheHandler, ILogHandler and IConnectivityHandler method mapping implementations for <a href="https://github.com/shinyorg/shiny">Shiny</a>, extending your IServiceCollection with a UseApizr and UseApizrCrudFor registration methods</li>
+<li><strong>Apizr.Integrations.Fusillade</strong> package enables request priority management using <a href="https://github.com/reactiveui/Fusillade">Fusillade</a></li>
+<li><strong>Apizr.Integrations.Akavache</strong> package brings an ICacheHandler method mapping implementation for <a href="https://github.com/reactiveui/Akavache">Akavache</a></li>
+<li><strong>Apizr.Integrations.MonkeyCache</strong> package brings an ICacheHandler method mapping implementation for <a href="https://github.com/jamesmontemagno/monkey-cache">MonkeyCache</a></li>
+<li><strong>Apizr.Integrations.MediatR</strong> package enables request auto handling with mediation using <a href="https://github.com/jbogard/MediatR">MediatR</a></li>
+<li><strong>Apizr.Integrations.Optional</strong> package enables Optional result from mediation requests (requires MediatR integration) using <a href="https://github.com/dnikolovv/optional-async">Optional.Async</a></li>
+<li><strong>Apizr.Integrations.AutoMapper</strong> package enables auto mapping for mediation requests (requires MediatR integration and could work with Optional integration) using <a href="https://github.com/AutoMapper/AutoMapper">AutoMapper</a></li>
+</ul>
+<p>Apizr core package make use of well known nuget packages to make the magic appear:</p>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/reactiveui/refit">Refit</a></td>
+<td>Auto-implement web api interface and deal with HttpClient</td>
+</tr>
+<tr>
+<td><a href="https://github.com/App-vNext/Polly">Polly</a></td>
+<td>Apply some policies like Retry, CircuitBreaker, etc...</td>
+</tr>
+<tr>
+<td><a href="https://github.com/BSiLabs/HttpTracer">HttpTracer</a></td>
+<td>Trace Http(s) request/response traffic to log it</td>
+</tr>
+</tbody>
+</table>
+<p>It also comes with some handling interfaces to let you provide your own services for:</p>
+<ul>
+<li><strong>Caching</strong> with ICacheHandler, which comes with its default VoidCacheHandler (no cache), but also with:<ul>
+<li>AkavacheCacheHandler: <a href="https://github.com/reactiveui/Akavache">Akavache</a> method mapping interface (Integration package referenced above)</li>
+<li>MonkeyCacheHandler: <a href="https://github.com/jamesmontemagno/monkey-cache">MonkeyCache</a> method mapping interface (Integration package referenced above)</li>
+<li>ShinyCacheHandler: <a href="https://github.com/shinyorg/shiny">Shiny</a> chaching method mapping interface (Integration package referenced above)</li>
+</ul>
+</li>
+<li><strong>Logging</strong> with ILogHandler, which comes with its default DefaultLogHandler (Console and Debug), but also with:<ul>
+<li>ShinyLogHandler: <a href="https://github.com/shinyorg/shiny">Shiny</a> logging method mapping interface (Integration package referenced above)</li>
+</ul>
+</li>
+<li><strong>Connectivity</strong> with IConnectivityHandler, which comes with its default VoidConnectivityHandler (no connectivity check), but also with:<ul>
+<li>ShinyConnectivityHandler: <a href="https://github.com/shinyorg/shiny">Shiny</a> connectivity method mapping interface (Integration package referenced above)</li>
+</ul>
+</li>
+<li><strong>Mapping</strong> with IMappingHandler, which comes with its default VoidMappingHandler (no mapping conversion), but also with:<ul>
+<li>AutoMapperMappingHandler: <a href="https://github.com/AutoMapper/AutoMapper">AutoMapper</a> mapping method mapping interface (Integration package referenced above)</li>
+</ul>
+</li>
+</ul>
 </article>
           </div>
           
@@ -90,8 +212,8 @@
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
+            Project initiated by Respawnsive
             
-            <span>Generated by <strong>DocFX</strong></span>
           </div>
         </div>
       </footer>

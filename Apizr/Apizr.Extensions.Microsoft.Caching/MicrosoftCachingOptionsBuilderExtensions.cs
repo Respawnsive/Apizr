@@ -3,7 +3,7 @@
 [assembly: Apizr.Preserve]
 namespace Apizr
 {
-    public static class OptionsBuilderExtensions
+    public static class MicrosoftCachingOptionsBuilderExtensions
     {
         /// <summary>
         /// Use any registered IDistributedCache implementation

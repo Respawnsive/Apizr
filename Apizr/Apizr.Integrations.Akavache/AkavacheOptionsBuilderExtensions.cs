@@ -4,7 +4,7 @@ using Apizr.Configuring.Common;
 
 namespace Apizr
 {
-    public static class OptionsBuilderExtensions
+    public static class AkavacheOptionsBuilderExtensions
     {
         /// <summary>
         /// Set Akavache as CacheHandler with LocalMachine blob cache and ApizrAkavacheCacheHandler name

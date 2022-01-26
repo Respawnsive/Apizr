@@ -231,7 +231,7 @@ items:
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Extending
-  summary: "\nReturn <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TResult</code> (from fetch or cache), no matter of exception (handled by <see cref=\"!:onException\"></see>).\nCould throw if you ask to with <see cref=\"!:letThrowOnExceptionWithEmptyCache\"></see> in case of exception with empty cache (<see cref=\"!:onException\"></see> won&apos;t be called),\notherwise return the empty cache (have to be managed) after calling <see cref=\"!:onException\"></see> action.\n"
+  summary: "\nReturn <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TResult</code> (from fetch or cache), no matter of exception (handled by <code data-dev-comment-type=\"paramref\" class=\"paramref\">onException</code>).\nCould throw if you ask to with <code data-dev-comment-type=\"paramref\" class=\"paramref\">letThrowOnExceptionWithEmptyCache</code> in case of exception with empty cache (<code data-dev-comment-type=\"paramref\" class=\"paramref\">onException</code> won&apos;t be called),\notherwise return the empty cache (have to be managed) after calling <code data-dev-comment-type=\"paramref\" class=\"paramref\">onException</code> action.\n"
   example: []
   syntax:
     content: public static Task<TResult> CatchAsync<TResult>(this Task<Option<TResult, ApizrException<TResult>>> option, Action<Exception> onException, bool letThrowOnExceptionWithEmptyCache = false)
@@ -244,7 +244,7 @@ items:
       description: Action to call to handle exception (like informing the user) before returning result from cache
     - id: letThrowOnExceptionWithEmptyCache
       type: System.Boolean
-      description: True to let it throw the inner exception in case of empty cache, False to handle it with <see cref="!:onException"></see> action and return empty cache result
+      description: True to let it throw the inner exception in case of empty cache, False to handle it with <code data-dev-comment-type="paramref" class="paramref">onException</code> action and return empty cache result
     typeParameters:
     - id: TResult
       description: The returned result (from fetch if succeed or cache if failed)

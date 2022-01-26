@@ -74,14 +74,14 @@ namespace Apizr.Optional.Extending
         }
 
         /// <summary>
-        /// Return <typeparamref name="TResult"/> (from fetch or cache), no matter of exception (handled by <see cref="onException"/>).
-        /// Could throw if you ask to with <see cref="letThrowOnExceptionWithEmptyCache"/> in case of exception with empty cache (<see cref="onException"/> won't be called),
-        /// otherwise return the empty cache (have to be managed) after calling <see cref="onException"/> action.
+        /// Return <typeparamref name="TResult"/> (from fetch or cache), no matter of exception (handled by <paramref name="onException"/>).
+        /// Could throw if you ask to with <paramref name="letThrowOnExceptionWithEmptyCache"/> in case of exception with empty cache (<paramref name="onException"/> won't be called),
+        /// otherwise return the empty cache (have to be managed) after calling <paramref name="onException"/> action.
         /// </summary>
         /// <typeparam name="TResult">The returned result (from fetch if succeed or cache if failed)</typeparam>
         /// <param name="option"></param>
         /// <param name="onException">Action to call to handle exception (like informing the user) before returning result from cache</param>
-        /// <param name="letThrowOnExceptionWithEmptyCache">True to let it throw the inner exception in case of empty cache, False to handle it with <see cref="onException"/> action and return empty cache result</param>
+        /// <param name="letThrowOnExceptionWithEmptyCache">True to let it throw the inner exception in case of empty cache, False to handle it with <paramref name="onException"/> action and return empty cache result</param>
         /// <returns></returns>
         public static Task<TResult> CatchAsync<TResult>(
             this Task<Option<TResult, ApizrException<TResult>>> option, Action<Exception> onException, bool letThrowOnExceptionWithEmptyCache = false)

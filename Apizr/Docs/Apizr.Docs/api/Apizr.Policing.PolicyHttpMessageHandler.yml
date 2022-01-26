@@ -23,12 +23,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: PolicyHttpMessageHandler
     path: ../../Apizr/Policing/PolicyHttpMessageHandler.cs
-    startLine: 73
+    startLine: 15
   assemblies:
   - Apizr
   namespace: Apizr.Policing
   summary: "\nA <xref href=\"System.Net.Http.DelegatingHandler\" data-throw-if-not-resolved=\"false\"></xref> implementation that executes request processing surrounded by a <xref href=\"Polly.Policy\" data-throw-if-not-resolved=\"false\"></xref>.\n"
-  remarks: "\n<p>\nThis message handler implementation supports the use of policies provided by the Polly library for \ntransient-fault-handling and resiliency.\n</p>\n<p>\nThe documentation provided here is focused guidance for using Polly together with the <see cref=\"!:IHttpClientFactory\"></see>. \nSee the Polly project and its documentation (https://github.com/app-vnext/Polly) for authoritative information on Polly.\n</p>\n<p>\nThe extension methods on <see cref=\"!:PollyHttpClientBuilderExtensions\"></see> are designed as a convenient and correct\nway to create a <xref href=\"Apizr.Policing.PolicyHttpMessageHandler\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>\nThe <see cref=\"!:PollyHttpClientBuilderExtensions.AddPolicyHandler(IHttpClientBuilder, IAsyncPolicy&lt;HttpResponseMessage>)\"></see>\nmethod supports the creation of a <xref href=\"Apizr.Policing.PolicyHttpMessageHandler\" data-throw-if-not-resolved=\"false\"></xref> for any kind of policy. This includes\nnon-reactive policies, such as Timeout or Cache, which don&apos;t require the underlying request to fail first.\n</p>\n<p>\n<xref href=\"Apizr.Policing.PolicyHttpMessageHandler\" data-throw-if-not-resolved=\"false\"></xref> and the <see cref=\"!:PollyHttpClientBuilderExtensions\"></see> convenience methods\nonly accept the generic <xref href=\"Polly.IAsyncPolicy%601\" data-throw-if-not-resolved=\"false\"></xref>. Generic policy instances can be created\nby using the generic methods on <xref href=\"Polly.Policy\" data-throw-if-not-resolved=\"false\"></xref> such as <xref href=\"Polly.Policy.TimeoutAsync%60%601(System.Int32)\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>\nTo adapt an existing non-generic <xref href=\"Polly.IAsyncPolicy\" data-throw-if-not-resolved=\"false\"></xref>, use code like the following:\n<example>\nConverting a non-generic <pre><code>IAsyncPolicy policy</code></pre> to <xref href=\"Polly.IAsyncPolicy%601\" data-throw-if-not-resolved=\"false\"></xref>.\n<pre><code>policy.AsAsyncPolicy&lt;HttpResponseMessage>()</code></pre>\n</example>\n</p>\n<p>\nThe <see cref=\"!:PollyHttpClientBuilderExtensions.AddTransientHttpErrorPolicy(IHttpClientBuilder, Func&lt;PolicyBuilder&lt;HttpResponseMessage>, IAsyncPolicy&lt;HttpResponseMessage>>)\"></see>\nmethod is an opinionated convenience method that supports the application of a policy for requests that fail due\nto a connection failure or server error (5XX HTTP status code). This kind of method supports only reactive policies\nsuch as Retry, Circuit-Breaker or Fallback. This method is only provided for convenience; we recommend creating\nyour own policies as needed if this does not meet your requirements.\n</p>\n<p>\nTake care when using policies such as Retry or Timeout together as HttpClient provides its own timeout via \n<xref href=\"System.Net.Http.HttpClient.Timeout\" data-throw-if-not-resolved=\"false\"></xref>.  When combining Retry and Timeout, <xref href=\"System.Net.Http.HttpClient.Timeout\" data-throw-if-not-resolved=\"false\"></xref> will act as a\ntimeout across all tries; a Polly Timeout policy can be configured after a Retry policy in the configuration sequence,\nto provide a timeout-per-try.\n</p>\n<p>\nAll policies provided by Polly are designed to be efficient when used in a long-lived way. Certain policies such as the \nBulkhead and Circuit-Breaker maintain state and should be scoped across calls you wish to share the Bulkhead or Circuit-Breaker state. \nTake care to ensure the correct lifetimes when using policies and message handlers together in custom scenarios. The extension\nmethods provided by <see cref=\"!:PollyHttpClientBuilderExtensions\"></see> are designed to assign a long lifetime to policies\nand ensure that they can be used when the handler rotation feature is active.\n</p>\n<p>\nThe <xref href=\"Apizr.Policing.PolicyHttpMessageHandler\" data-throw-if-not-resolved=\"false\"></xref> will attach a context to the <xref href=\"System.Net.Http.HttpRequestMessage\" data-throw-if-not-resolved=\"false\"></xref> prior\nto executing a <xref href=\"Polly.Policy\" data-throw-if-not-resolved=\"false\"></xref>, if one does not already exist. The <xref href=\"Polly.Context\" data-throw-if-not-resolved=\"false\"></xref> will be provided\nto the policy for use inside the <xref href=\"Polly.Policy\" data-throw-if-not-resolved=\"false\"></xref> and in other message handlers.\n</p>\n"
   example: []
   syntax:
     content: 'public class PolicyHttpMessageHandler : DelegatingHandler, IDisposable'
@@ -79,7 +78,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Apizr/Policing/PolicyHttpMessageHandler.cs
-    startLine: 82
+    startLine: 24
   assemblies:
   - Apizr
   namespace: Apizr.Policing
@@ -118,7 +117,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Apizr/Policing/PolicyHttpMessageHandler.cs
-    startLine: 96
+    startLine: 38
   assemblies:
   - Apizr
   namespace: Apizr.Policing
@@ -157,11 +156,10 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendAsync
     path: ../../Apizr/Policing/PolicyHttpMessageHandler.cs
-    startLine: 107
+    startLine: 48
   assemblies:
   - Apizr
   namespace: Apizr.Policing
-  example: []
   syntax:
     content: protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     parameters:
@@ -199,7 +197,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendCoreAsync
     path: ../../Apizr/Policing/PolicyHttpMessageHandler.cs
-    startLine: 151
+    startLine: 92
   assemblies:
   - Apizr
   namespace: Apizr.Policing
@@ -219,7 +217,7 @@ items:
       description: The <xref href="System.Threading.CancellationToken" data-throw-if-not-resolved="false"></xref>.
     return:
       type: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
-      description: Returns a <code data-dev-comment-type="typeparamref" class="typeparamref">Task{HttpResponseMessage}{HttpResponseMessage}</code> that will yield a response when completed.
+      description: Returns a <xref href="System.Threading.Tasks.Task%601" data-throw-if-not-resolved="false"></xref> that will yield a response when completed.
     content.vb: Protected Overridable Function SendCoreAsync(request As HttpRequestMessage, context As Context, cancellationToken As CancellationToken) As Task(Of HttpResponseMessage)
   overload: Apizr.Policing.PolicyHttpMessageHandler.SendCoreAsync*
   modifiers.csharp:
@@ -239,73 +237,6 @@ references:
 - uid: Polly.Policy
   commentId: T:Polly.Policy
   isExternal: true
-- uid: Apizr.Policing.PolicyHttpMessageHandler
-  commentId: T:Apizr.Policing.PolicyHttpMessageHandler
-  name: PolicyHttpMessageHandler
-  nameWithType: PolicyHttpMessageHandler
-  fullName: Apizr.Policing.PolicyHttpMessageHandler
-- uid: Polly.IAsyncPolicy`1
-  commentId: T:Polly.IAsyncPolicy`1
-  isExternal: true
-  name: IAsyncPolicy<TResult>
-  nameWithType: IAsyncPolicy<TResult>
-  fullName: Polly.IAsyncPolicy<TResult>
-  nameWithType.vb: IAsyncPolicy(Of TResult)
-  fullName.vb: Polly.IAsyncPolicy(Of TResult)
-  name.vb: IAsyncPolicy(Of TResult)
-  spec.csharp:
-  - uid: Polly.IAsyncPolicy`1
-    name: IAsyncPolicy
-    nameWithType: IAsyncPolicy
-    fullName: Polly.IAsyncPolicy
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Polly.IAsyncPolicy`1
-    name: IAsyncPolicy
-    nameWithType: IAsyncPolicy
-    fullName: Polly.IAsyncPolicy
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Polly.Policy.TimeoutAsync``1(System.Int32)
-  commentId: M:Polly.Policy.TimeoutAsync``1(System.Int32)
-  isExternal: true
-- uid: Polly.IAsyncPolicy
-  commentId: T:Polly.IAsyncPolicy
-  isExternal: true
-- uid: System.Net.Http.HttpClient.Timeout
-  commentId: P:System.Net.Http.HttpClient.Timeout
-  isExternal: true
-- uid: System.Net.Http.HttpRequestMessage
-  commentId: T:System.Net.Http.HttpRequestMessage
-  parent: System.Net.Http
-  isExternal: true
-  name: HttpRequestMessage
-  nameWithType: HttpRequestMessage
-  fullName: System.Net.Http.HttpRequestMessage
-- uid: Polly.Context
-  commentId: T:Polly.Context
-  parent: Polly
-  isExternal: true
-  name: Context
-  nameWithType: Context
-  fullName: Polly.Context
 - uid: Apizr.Policing
   commentId: N:Apizr.Policing
   name: Apizr.Policing
@@ -751,12 +682,6 @@ references:
   name: System.Net.Http
   nameWithType: System.Net.Http
   fullName: System.Net.Http
-- uid: Polly
-  commentId: N:Polly
-  isExternal: true
-  name: Polly
-  nameWithType: Polly
-  fullName: Polly
 - uid: System
   commentId: N:System
   isExternal: true
@@ -844,6 +769,11 @@ references:
   name: Apizr.Extending
   nameWithType: Apizr.Extending
   fullName: Apizr.Extending
+- uid: Apizr.Policing.PolicyHttpMessageHandler
+  commentId: T:Apizr.Policing.PolicyHttpMessageHandler
+  name: PolicyHttpMessageHandler
+  nameWithType: PolicyHttpMessageHandler
+  fullName: Apizr.Policing.PolicyHttpMessageHandler
 - uid: Apizr.Policing.PolicyHttpMessageHandler.#ctor*
   commentId: Overload:Apizr.Policing.PolicyHttpMessageHandler.#ctor
   name: PolicyHttpMessageHandler
@@ -893,6 +823,58 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Polly.IAsyncPolicy`1
+  commentId: T:Polly.IAsyncPolicy`1
+  isExternal: true
+  name: IAsyncPolicy<TResult>
+  nameWithType: IAsyncPolicy<TResult>
+  fullName: Polly.IAsyncPolicy<TResult>
+  nameWithType.vb: IAsyncPolicy(Of TResult)
+  fullName.vb: Polly.IAsyncPolicy(Of TResult)
+  name.vb: IAsyncPolicy(Of TResult)
+  spec.csharp:
+  - uid: Polly.IAsyncPolicy`1
+    name: IAsyncPolicy
+    nameWithType: IAsyncPolicy
+    fullName: Polly.IAsyncPolicy
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Polly.IAsyncPolicy`1
+    name: IAsyncPolicy
+    nameWithType: IAsyncPolicy
+    fullName: Polly.IAsyncPolicy
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Polly
+  commentId: N:Polly
+  isExternal: true
+  name: Polly
+  nameWithType: Polly
+  fullName: Polly
+- uid: System.Net.Http.HttpRequestMessage
+  commentId: T:System.Net.Http.HttpRequestMessage
+  parent: System.Net.Http
+  isExternal: true
+  name: HttpRequestMessage
+  nameWithType: HttpRequestMessage
+  fullName: System.Net.Http.HttpRequestMessage
 - uid: System.Func{System.Net.Http.HttpRequestMessage,Polly.IAsyncPolicy{System.Net.Http.HttpResponseMessage}}
   commentId: T:System.Func{System.Net.Http.HttpRequestMessage,Polly.IAsyncPolicy{System.Net.Http.HttpResponseMessage}}
   parent: System
@@ -1190,6 +1172,13 @@ references:
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
+- uid: Polly.Context
+  commentId: T:Polly.Context
+  parent: Polly
+  isExternal: true
+  name: Context
+  nameWithType: Context
+  fullName: Polly.Context
 - uid: Apizr.Policing.PolicyHttpMessageHandler.SendCoreAsync*
   commentId: Overload:Apizr.Policing.PolicyHttpMessageHandler.SendCoreAsync
   name: SendCoreAsync

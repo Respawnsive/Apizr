@@ -1,0 +1,1174 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Apizr </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Apizr ">
+    <meta name="generator" content="docfx 2.59.0.0">
+    
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="apizr">Apizr</h1>
+
+<p>Refit based web api client, but resilient (retry, connectivity, cache, auth, log, priority, etc...)</p>
+<p>You&#39;ll find a <a href="https://www.respawnsive.com/category/blog-en/apizr/">blog post series here</a> about Apizr.</p>
+<h4 id="v-next">V-Next</h4>
+<p>This readme is all about v3 with related source code hosted by the master branch.
+We&#39;re about to release v4 during 2022 Q1 with a lot of improvements and new features, plus some fixes.
+Feel free to keep an eye on source code hosted by the dev branch, especially the test project and the samples, to get an idea about this expected v4 release (Readme still about v3 but ChangeLog up to date with v4).</p>
+<h2 id="libraries">Libraries</h2>
+<p>Apizr v3+ introduced some breaking changes as it relies on Refit v6+ which actually introduced breaking changes and the fact that Fusillade has been moved from core package to a dedicated one.
+Please take a look at the changelog and this updated readme.</p>
+<p><a href="https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md">Change Log - Mar 12, 2021</a></p>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>NuGet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apizr</td>
+<td><a href="https://www.nuget.org/packages/Apizr/"><img src="https://img.shields.io/nuget/v/Apizr.svg" alt="NuGet"></a></td>
+</tr>
+<tr>
+<td>Apizr.Extensions.Microsoft.DependencyInjection</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Extensions.Microsoft.DependencyInjection/"><img src="https://img.shields.io/nuget/v/Apizr.Extensions.Microsoft.DependencyInjection.svg" alt="NuGet"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.Shiny</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.Shiny/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.Shiny.svg" alt="NuGet"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.Fusillade</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.Fusillade/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.Fusillade.svg" alt="NuGet"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.Akavache</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.Akavache/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.Akavache.svg" alt="NuGet"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.MonkeyCache</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.MonkeyCache/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.MonkeyCache.svg" alt="NuGet"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.MediatR</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.MediatR/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.MediatR.svg" alt="NuGet"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.Optional</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.Optional/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.Optional.svg" alt="NuGet"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.AutoMapper</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.AutoMapper/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.AutoMapper.svg" alt="NuGet"></a></td>
+</tr>
+</tbody>
+</table>
+<p>Install the NuGet package of your choice:</p>
+<ul>
+<li><strong>Apizr</strong> package comes with the For and CrudFor static instantiation approach (which you can register in your DI container then)</li>
+<li><strong>Apizr.Extensions.Microsoft.DependencyInjection</strong> package extends your IServiceCollection with AddApizrFor and AddApizrCrudFor registration methods (ASP.Net Core, etc)</li>
+<li><strong>Apizr.Integrations.Shiny</strong> package brings ICacheHandler, ILogHandler and IConnectivityHandler method mapping implementations for <a href="https://github.com/shinyorg/shiny">Shiny</a>, extending your IServiceCollection with a UseApizr and UseApizrCrudFor registration methods</li>
+<li><strong>Apizr.Integrations.Fusillade</strong> package enables request priority management using <a href="https://github.com/reactiveui/Fusillade">Fusillade</a></li>
+<li><strong>Apizr.Integrations.Akavache</strong> package brings an ICacheHandler method mapping implementation for <a href="https://github.com/reactiveui/Akavache">Akavache</a></li>
+<li><strong>Apizr.Integrations.MonkeyCache</strong> package brings an ICacheHandler method mapping implementation for <a href="https://github.com/jamesmontemagno/monkey-cache">MonkeyCache</a></li>
+<li><strong>Apizr.Integrations.MediatR</strong> package enables request auto handling with mediation using <a href="https://github.com/jbogard/MediatR">MediatR</a></li>
+<li><strong>Apizr.Integrations.Optional</strong> package enables Optional result from mediation requests (requires MediatR integration) using <a href="https://github.com/dnikolovv/optional-async">Optional.Async</a></li>
+<li><strong>Apizr.Integrations.AutoMapper</strong> package enables auto mapping for mediation requests (requires MediatR integration and could work with Optional integration) using <a href="https://github.com/AutoMapper/AutoMapper">AutoMapper</a></li>
+</ul>
+<p>Apizr core package make use of well known nuget packages to make the magic appear:</p>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/reactiveui/refit">Refit</a></td>
+<td>Auto-implement web api interface and deal with HttpClient</td>
+</tr>
+<tr>
+<td><a href="https://github.com/App-vNext/Polly">Polly</a></td>
+<td>Apply some policies like Retry, CircuitBreaker, etc...</td>
+</tr>
+<tr>
+<td><a href="https://github.com/BSiLabs/HttpTracer">HttpTracer</a></td>
+<td>Trace Http(s) request/response traffic to log it</td>
+</tr>
+</tbody>
+</table>
+<p>It also comes with some handling interfaces to let you provide your own services for:</p>
+<ul>
+<li><strong>Caching</strong> with ICacheHandler, which comes with its default VoidCacheHandler (no cache), but also with:<ul>
+<li>AkavacheCacheHandler: <a href="https://github.com/reactiveui/Akavache">Akavache</a> method mapping interface (Integration package referenced above)</li>
+<li>MonkeyCacheHandler: <a href="https://github.com/jamesmontemagno/monkey-cache">MonkeyCache</a> method mapping interface (Integration package referenced above)</li>
+<li>ShinyCacheHandler: <a href="https://github.com/shinyorg/shiny">Shiny</a> chaching method mapping interface (Integration package referenced above)</li>
+</ul>
+</li>
+<li><strong>Logging</strong> with ILogHandler, which comes with its default DefaultLogHandler (Console and Debug), but also with:<ul>
+<li>ShinyLogHandler: <a href="https://github.com/shinyorg/shiny">Shiny</a> logging method mapping interface (Integration package referenced above)</li>
+</ul>
+</li>
+<li><strong>Connectivity</strong> with IConnectivityHandler, which comes with its default VoidConnectivityHandler (no connectivity check), but also with:<ul>
+<li>ShinyConnectivityHandler: <a href="https://github.com/shinyorg/shiny">Shiny</a> connectivity method mapping interface (Integration package referenced above)</li>
+</ul>
+</li>
+<li><strong>Mapping</strong> with IMappingHandler, which comes with its default VoidMappingHandler (no mapping conversion), but also with:<ul>
+<li>AutoMapperMappingHandler: <a href="https://github.com/AutoMapper/AutoMapper">AutoMapper</a> mapping method mapping interface (Integration package referenced above)</li>
+</ul>
+</li>
+</ul>
+<h2 id="how-to">How to:</h2>
+<ul>
+<li><a href="#intro">Intro</a></li>
+<li><a href="#classic">Classic APIs</a><ul>
+<li><a href="#classic-defining">Defining</a></li>
+<li><a href="#classic-registering">Registering</a><ul>
+<li><a href="#classic-static-approach">Static approach</a></li>
+<li><a href="#classic-extensions-approach">Extensions approach</a><ul>
+<li><a href="#classic-manually">Manually</a></li>
+<li><a href="#classic-automatically">Automatically</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#classic-using">Using</a></li>
+</ul>
+</li>
+<li><a href="#crud">CRUD APIs</a><ul>
+<li><a href="#crud-defining">Defining</a></li>
+<li><a href="#crud-registering">Registering</a><ul>
+<li><a href="#crud-static-approach">Static approach</a></li>
+<li><a href="#crud-extensions-approach">Extensions approach</a><ul>
+<li><a href="#crud-manually">Manually</a></li>
+<li><a href="#crud-automatically">Automatically</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#crud-using">Using</a></li>
+</ul>
+</li>
+<li><a href="#advanced-configurations">Advanced configurations</a><ul>
+<li><a href="#configuration-service-handlers">Service handlers</a></li>
+<li><a href="#configuration-authentication-delegatinghandler">Authentication DelegatingHandler</a></li>
+<li><a href="#configuration-custom-delegatinghandler">Custom DelegatingHandler</a></li>
+<li><a href="#configuration-refit-settings">Refit settings</a></li>
+<li><a href="#configuration-policy-registry">Policy registry</a></li>
+<li><a href="#configuration-httpclient">HttpClient</a></li>
+</ul>
+</li>
+<li><a href="#external-integrations">External integrations</a><ul>
+<li><a href="#shiny">Shiny</a></li>
+<li><a href="#monkeycache">MonkeyCache</a></li>
+<li><a href="#akavache">Akavache</a></li>
+<li><a href="#fusillade">Fusillade</a></li>
+<li><a href="#mediation">MediatR</a></li>
+<li><a href="#optional">OptionalAsync</a><ul>
+<li><a href="#optional-helper-extentions">Optional helper extentions</a><ul>
+<li><a href="#optional-onresultasync">OnResultAsync</a></li>
+<li><a href="#optional-catchasync">CatchAsync</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#automapper">AutoMapper</a><ul>
+<li><a href="#automapper-with-crud-apis">AutoMapper with Crud apis</a><ul>
+<li><a href="#automapper-crud-manually">Manually</a></li>
+<li><a href="#automapper-crud-automatically">Automatically</a></li>
+<li><a href="#automapper-crud-using">Using</a></li>
+</ul>
+</li>
+<li><a href="#automapper-with-classic-apis">AutoMapper with classic apis</a><ul>
+<li><a href="#automapper-classic-using">Using</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="intro">
+Intro
+</h2>
+
+<p>Clearly inspired by <a href="https://github.com/thefex/Refit.Insane.PowerPack">Refit.Insane.PowerPack</a> but extended with a lot more features, the goal of Apizr is to get all ready to use for web api requesting, with the more resiliency we can, but without the boilerplate.</p>
+<p>Apizr v3+ relies on Refit v6+ witch makes System.Text.Json the default JSON serializer instead of Newtonsoft.Json. 
+If you&#39;d like to continue to use Newtonsoft.Json, add the Refit.Newtonsoft.Json NuGet package and set your ContentSerializer to NewtonsoftJsonContentSerializer on your RefitSettings instance. You can do it by calling the <code>WithRefitSettings(...)</code> options builder method.</p>
+<p>Examples here are based on a Xamarin.Forms app working with Shiny. 
+You&#39;ll find a sample Xamarin.Forms app browsing code, implementing Apizr with Shiny, Prism and MS DI all together.
+You&#39;ll find another sample app but .Net Core console this time, implementing Apizr without anything else (static) and also with MS DI (extensions).</p>
+<p>So please, take a look at the samples :)</p>
+<h2 id="classic">
+Classic APIs:
+</h2>
+
+<h3 id="classic-defining">
+Defining:
+</h3>
+
+<p>We could define our web api service just like:</p>
+<pre><code class="lang-csharp">[assembly:Policy(&quot;TransientHttpError&quot;)]
+namespace Apizr.Sample.Api
+{
+    [WebApi(&quot;https://reqres.in/&quot;), CacheIt, LogIt]
+    public interface IReqResService
+    {
+        [Get(&quot;/api/users&quot;)]
+        Task&lt;UserList&gt; GetUsersAsync(CancellationToken cancellationToken);
+
+        [Get(&quot;/api/users/{userId}&quot;)]
+        Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId, CancellationToken cancellationToken);
+
+        [Post(&quot;/api/users&quot;)]
+        Task&lt;User&gt; CreateUser(User user, CancellationToken cancellationToken);
+    }
+}
+</code></pre><p>And that&#39;s all.</p>
+<p>Every attributes here will inform Apizr on how to manage each web api request. No more boilerplate.</p>
+<h3 id="classic-registering">
+Registering:
+</h3>
+
+<p>As it&#39;s not mandatory to register anything in a container for DI purpose (you can use a static instance directly), I&#39;ll describe here how to use it with DI.</p>
+<h4 id="classic-static-approach">
+Static approach:
+</h4>
+
+<p>Somewhere where you can add services to your container, add the following:</p>
+<pre><code class="lang-csharp">// Some policies
+var registry = new PolicyRegistry
+{
+    {
+        &quot;TransientHttpError&quot;, HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+        {
+            TimeSpan.FromSeconds(1),
+            TimeSpan.FromSeconds(5),
+            TimeSpan.FromSeconds(10)
+        })
+    }
+};
+
+// Apizr registration
+myContainer.SomeInstanceRegistrationMethod(Apizr.For&lt;IReqResService&gt;(optionsBuilder =&gt; optionsBuilder.WithPolicyRegistry(registry)
+                    .WithCacheHandler(new AkavacheCacheHandler())));
+</code></pre><p>I provided a policy registry and a cache handler here as I asked for it with cache and policy attributes in my web api example.</p>
+<h4 id="classic-extensions-approach">
+Extensions approach:
+</h4>
+
+<p>For this one, two options :</p>
+<ul>
+<li>Manually: register calling <code>AddApizrFor&lt;TWebApi&gt;</code> service collection extension method or overloads for each service you want to manage</li>
+<li>Automatically: decorate your services with WebApiAttribute and let Apizr auto register it all for you</li>
+</ul>
+<h5 id="classic-manually">
+Manually:
+</h5>
+
+<p>Here is an example:</p>
+<pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
+{
+    var registry = new PolicyRegistry
+    {
+        {
+            &quot;TransientHttpError&quot;, HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(1),
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10)
+            })
+        }
+    };
+    services.AddPolicyRegistry(registry);
+
+    // Apizr registration
+    services.AddApizrFor&lt;IReqResService&gt;(optionsBuilder =&gt; optionsBuilder.WithCacheHandler&lt;AkavacheCacheHandler&gt;());
+
+    // Or if you use Shiny
+    //services.UseApizrFor&lt;IReqResService&gt;();
+}
+</code></pre><h5 id="classic-automatically">
+Automatically:
+</h5>
+
+<p>Decorate your api services like we did before (but with your own settings):</p>
+<pre><code class="lang-csharp">[assembly:Policy(&quot;TransientHttpError&quot;)]
+namespace Apizr.Sample.Api
+{
+    [WebApi(&quot;https://reqres.in/&quot;), CacheIt, LogIt]
+    public interface IReqResService
+    {
+        [Get(&quot;/api/users&quot;)]
+        Task&lt;UserList&gt; GetUsersAsync(CancellationToken cancellationToken);
+
+        [Get(&quot;/api/users/{userId}&quot;)]
+        Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId, CancellationToken cancellationToken);
+
+        [Post(&quot;/api/users&quot;)]
+        Task&lt;User&gt; CreateUser(User user, CancellationToken cancellationToken);
+    }
+}
+</code></pre><p>Then, register in your Startup class like so:</p>
+<pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
+{
+    // Apizr registration
+    services.AddApizrFor(typeof(AnyClassFromServicesAssembly));
+
+    // Or if you use Shiny
+    //services.UseApizrFor(typeof(AnyClassFromServicesAssembly));
+}
+</code></pre><p>There are 4 AddApizrFor/UseApizrFor flavors for classic automatic registration, depending on what you want to do and provide.
+This one is the simplest.</p>
+<h3 id="classic-using">
+Using:
+</h3>
+
+<p>Sending web request from your app - e.g. using Apizr in a Xamarin.Forms mobile app.</p>
+<p>Inject <code>IApizrManager&lt;YourWebApiInterface&gt;</code> where you need it - e.g. into your ViewModel constructor</p>
+<pre><code class="lang-csharp">public class YourViewModel
+{
+    private readonly IApizrManager&lt;IReqResService&gt; _reqResManager;
+
+    public YouViewModel(IApizrManager&lt;IReqResService&gt; reqResManager)
+    {
+        _reqResManager = reqResManager;
+    }
+
+    public ObservableCollection&lt;User&gt;? Users { get; set; }
+
+    private async Task GetUsersAsync()
+    {
+        IList&lt;User&gt;? users;
+        try
+        {
+            var userList = await _reqResManager.ExecuteAsync((ct, api) =&gt; api.GetUsersAsync(ct), CancellationToken.None);
+            users = userList.Data;
+        }
+        catch (ApizrException&lt;UserList&gt; e)
+        {
+            var message = e.InnerException is IOException ? &quot;No network&quot; : (e.Message ?? &quot;Error&quot;);
+            UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+
+            users = e.CachedResult?.Data;
+        }
+
+        if(users != null)
+            Users = new ObservableCollection&lt;User&gt;(users);
+    }
+}
+</code></pre><p>I catch execution into an ApizrException as it will contain the original inner exception, but also the previously cached result if some.
+If you provided an IConnectivityHandler implementation and there&#39;s no network connectivity before sending request, Apizr will throw with an IO inner exception without sending the request.</p>
+<h2 id="crud">
+CRUD APIs:
+</h2>
+
+<p>When playing with RESTful CRUD api, you&#39;ve got a couple of options:</p>
+<ul>
+<li>Define a web api interface like we just did before with each crud method (each entity into one interface or one interface for each entity)</li>
+<li>Use the built-in ICrudApi</li>
+</ul>
+<p>As the first option is described already, here we&#39;ll talk about the ICrudApi option</p>
+<h3 id="crud-defining">
+Defining:
+</h3>
+
+<p>As we&#39;ll use the built-in yet defined ICrudApi, there&#39;s no more definition to do.</p>
+<p>Here is what it looks like then:</p>
+<pre><code class="lang-csharp">public interface ICrudApi&lt;T, in TKey, TReadAllResult, in TReadAllParams&gt; where T : class
+{
+    [Post(&quot;&quot;)]
+    Task&lt;T&gt; Create([Body] T payload);
+
+    [Post(&quot;&quot;)]
+    Task&lt;T&gt; Create([Body] T payload, CancellationToken cancellationToken);
+
+    [Get(&quot;&quot;)]
+    Task&lt;TReadAllResult&gt; ReadAll();
+
+    [Get(&quot;&quot;)]
+    Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams);
+
+    [Get(&quot;&quot;)]
+    Task&lt;TReadAllResult&gt; ReadAll([Property(&quot;Priority&quot;)] int priority);
+
+    [Get(&quot;&quot;)]
+    Task&lt;TReadAllResult&gt; ReadAll(CancellationToken cancellationToken);
+
+    [Get(&quot;&quot;)]
+    Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams, [Property(&quot;Priority&quot;)] int priority);
+
+    [Get(&quot;&quot;)]
+    Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams, CancellationToken cancellationToken);
+
+    [Get(&quot;&quot;)]
+    Task&lt;TReadAllResult&gt; ReadAll([Property(&quot;Priority&quot;)] int priority, CancellationToken cancellationToken);
+
+    [Get(&quot;&quot;)]
+    Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams, [Property(&quot;Priority&quot;)] int priority, CancellationToken cancellationToken);
+
+    [Get(&quot;/{key}&quot;)]
+    Task&lt;T&gt; Read([CacheKey] TKey key);
+
+    [Get(&quot;/{key}&quot;)]
+    Task&lt;T&gt; Read([CacheKey] TKey key, [Property(&quot;Priority&quot;)] int priority);
+
+    [Get(&quot;/{key}&quot;)]
+    Task&lt;T&gt; Read([CacheKey] TKey key, CancellationToken cancellationToken);
+
+    [Get(&quot;/{key}&quot;)]
+    Task&lt;T&gt; Read([CacheKey] TKey key, [Property(&quot;Priority&quot;)] int priority, CancellationToken cancellationToken);
+
+    [Put(&quot;/{key}&quot;)]
+    Task Update(TKey key, [Body] T payload);
+
+    [Put(&quot;/{key}&quot;)]
+    Task Update(TKey key, [Body] T payload, CancellationToken cancellationToken);
+
+    [Delete(&quot;/{key}&quot;)]
+    Task Delete(TKey key);
+
+    [Delete(&quot;/{key}&quot;)]
+    Task Delete(TKey key, CancellationToken cancellationToken);
+}
+</code></pre><p>We can see that it comes with some CacheKey and Priority attribute decorations, but it won&#39;t do anything until you ask Apizr to. 
+Caching, Logging, Policing, Prioritizing... everything is activable fluently with the options builder.</p>
+<p>About generic types:</p>
+<ul>
+<li>T and TKey (optional - default: <code>int</code>) meanings are obvious</li>
+<li>TReadAllResult (optional - default: <code>IEnumerable&lt;T&gt;</code>) is there to handle cases where ReadAll doesn&#39;t return an <code>IEnumerable&lt;T&gt;</code> or derived, but a paged result with some statistics</li>
+<li>TReadAllParams (optional - default: <code>IDictionary&lt;string, object&gt;</code>) is there to handle cases where you don&#39;t want to provide an <code>IDictionary&lt;string, object&gt;</code> for a ReadAll reaquest, but a custom class</li>
+</ul>
+<p>But again, nothing to do around here.</p>
+<h3 id="crud-registering">
+Registering:
+</h3>
+
+<h4 id="crud-static-approach">
+Static approach:
+</h4>
+
+<p>Somewhere where you can add services to your container, add the following:</p>
+<pre><code class="lang-csharp">// Apizr registration
+myContainer.SomeInstanceRegistrationMethod(Apizr.CrudFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(optionsBuilder =&gt; optionsBuilder.WithBaseAddress(&quot;your specific T entity crud base uri&quot;)));
+</code></pre><p>T must be a class.</p>
+<p>TKey must be primitive. If you don&#39;t provide it here, it will be defined as <code>int</code>.</p>
+<p>TReadAllResult must inherit from <code>IEnumerable&lt;&gt;</code> or be a class.
+If you don&#39;t use paged result, just don&#39;t provide any TReadAllResult here and it will be defined as <code>IEnumerable&lt;T&gt;</code>.</p>
+<p>TReadAllParams must be a class.
+If you don&#39;t use a custom class holding your query parameters, just don&#39;t provide any TReadAllParams here and it will be defined as <code>IDictionary&lt;string, object&gt;</code>.</p>
+<p>You have to provide the specific entity crud base uri with the options builder.</p>
+<p>There are 5 CrudFor flavors, depending on what you want to do and provide.
+One of it is the simple <code>Apizr.CrudFor&lt;T&gt;()</code>, which as you can expect, define TKey as <code>int</code>, TReadAllResult as <code>IEnumerable&lt;T&gt;</code> and TReadAllParams as <code>IDictionary&lt;string, object&gt;</code>.</p>
+<h4 id="crud-extensions-approach">
+Extensions approach:
+</h4>
+
+<p>Ok, for this one, two options again:</p>
+<ul>
+<li>Manually: register calling AddApizrCrudFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt; service collection extension method or overloads for each entity you want to manage</li>
+<li>Automatically: decorate your entities with CrudEntityAttribute and let Apizr auto register it all for you</li>
+</ul>
+<h5 id="crud-manually">
+Manually:
+</h5>
+
+<p>In your Startup class, add the following:</p>
+<pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
+{
+    // Apizr registration
+    services.AddApizrCrudFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(optionsBuilder =&gt; optionsBuilder.WithBaseAddress(&quot;your specific T entity crud base uri&quot;));
+
+    // Or if you use Shiny
+    //services.UseApizrCrudFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(optionsBuilder =&gt; optionsBuilder.WithBaseAddress(&quot;your specific T entity crud base uri&quot;));
+}
+</code></pre><p>Again, T must be a class.</p>
+<p>TKey must be primitive. If you don&#39;t provide it here, it will be defined as <code>int</code>.</p>
+<p>TReadAllResult must inherit from <code>IEnumerable&lt;&gt;</code> or be a class.
+If you don&#39;t use paged result, just don&#39;t provide any TReadAllResult here and it will be defined as <code>IEnumerable&lt;T&gt;</code>.</p>
+<p>TReadAllParams must be a class.
+If you don&#39;t use a custom class holding your query parameters, just don&#39;t provide any TReadAllParams here and it will be defined as <code>IDictionary&lt;string, object&gt;</code>.</p>
+<p>You have to provide the specific entity crud base uri with the options builder.</p>
+<p>There are 10 AddApizrCrudFor/UseApizrCrudFor flavors for crud manual registration, depending on what you want to do and provide.
+One of it is the simple <code>services.AddApizrCrudFor&lt;T&gt;()</code> or <code>services.UseApizrCrudFor&lt;T&gt;()</code>, which as you can expect, define TKey as <code>int</code>, TReadAllResult as <code>IEnumerable&lt;T&gt;</code> and TReadAllParams as <code>IDictionary&lt;string, object&gt;</code>.</p>
+<h5 id="crud-automatically">
+Automatically:
+</h5>
+
+<p>You need to have access to your entity model classes for this option.</p>
+<p>Decorate your crud entities like so (but with your own settings):</p>
+<pre><code class="lang-csharp">[CrudEntity(&quot;https://myapi.com/api/myentity&quot;, typeof(int), typeof(PagedResult&lt;&gt;), typeof(ReadAllUsersParams))]
+public class MyEntity
+{
+    [JsonPropertyName(&quot;id&quot;)]
+    public int Id { get; set; }
+
+    ...
+}
+</code></pre><p>Thanks to this attribute:</p>
+<ul>
+<li>(Mandatory) We have to provide the specific entity crud base uri</li>
+<li>(Optional) We can set TKey type to any primitive type (default to int)</li>
+<li>(Optional) We can set TReadAllResult to any class or must inherit from <code>IEnumerable&lt;&gt;</code> (default to <code>IEnumerable&lt;T&gt;</code>)</li>
+<li>(Optional) We can set TReadAllParams to any class (default to <code>IDictionary&lt;string, object&gt;</code>)</li>
+</ul>
+<p>Then, register in your Startup class like so:</p>
+<pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
+{
+    // Apizr registration
+    services.AddApizrCrudFor(typeof(MyEntity));
+
+    // Or if you use Shiny
+    //services.UseApizrCrudFor(typeof(MyEntity));
+}
+</code></pre><p>There are 4 AddApizrCrudFor/UseApizrCrudFor flavors for crud automatic registration, depending on what you want to do and provide.
+This is the simplest.</p>
+<h3 id="crud-using">
+Using:
+</h3>
+
+<p>Sending web request from your app - e.g. using Apizr in a Xamarin.Forms mobile app.</p>
+<p>Inject <code>IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;</code> where you need it - e.g. into your ViewModel constructor</p>
+<pre><code class="lang-csharp">public class YourViewModel
+{
+    private readonly IApizrManager&lt;ICrudApi&lt;User, int, PagedResult&lt;User&gt;, ReadAllUsersParams&gt;&gt; _userCrudManager;
+
+    public YouViewModel(IApizrManager&lt;ICrudApi&lt;User, int, PagedResult&lt;User&gt;, ReadAllUsersParams&gt;&gt; userCrudManager)
+    {
+        _userCrudManager = userCrudManager;
+    }
+
+    public ObservableCollection&lt;User&gt;? Users { get; set; }
+
+    private async Task GetUsersAsync()
+    {
+        IList&lt;User&gt;? users;
+        try
+        {
+            var pagedUsers = await _userCrudManager.ExecuteAsync((ct, api) =&gt; api.ReadAll(ct), CancellationToken.None);
+            users = pagedUsers.Data?.ToList();
+        }
+        catch (ApizrException&lt;PagedResult&lt;User&gt;&gt; e)
+        {
+            var message = e.InnerException is IOException ? &quot;No network&quot; : (e.Message ?? &quot;Error&quot;);
+            UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+
+            users = e.CachedResult?.Data;
+        }
+
+        if(users != null)
+            Users = new ObservableCollection&lt;User&gt;(users);
+    }
+}
+</code></pre><p>I catch execution into an ApizrException as it will contain the original inner exception, but also the previously cached result if some.
+If you provided an IConnectivityHandler implementation and there&#39;s no network connectivity before sending request, Apizr will throw with an IO inner exception without sending the request.</p>
+<h2 id="advanced-configurations">
+Advanced configurations:
+</h2>
+
+<p>There&#39;re some advanced scenarios where you want to adjust some settings and behaviors.
+This is where the options builder comes in.
+Each registration approach comes with its optionsBuilder optional parameter:</p>
+<pre><code class="lang-csharp">optionsBuilder =&gt; optionsBuilder.SomeOptionsHere(someParametersThere)
+</code></pre><h3 id="configuration-service-handlers">
+Service handlers:
+</h3>
+
+<p>The options builder let you provide your own method mapping implementations for:</p>
+<ul>
+<li>ICacheHandler (thanks to WithCacheHandler)</li>
+<li>ILogHandler (thanks to WithLogHandler)</li>
+<li>IConnectivityHandler (thanks to WithConnectivityHandler)</li>
+<li>IMappingHandler (thanks to WithMappingHandler).</li>
+</ul>
+<h3 id="configuration-authentication-delegatinghandler">
+Authentication DelegatingHandler:
+</h3>
+
+<p>For autorized request calls, you can provide some properties and/or methods (thanks to WithAuthenticationHandler) to help Apizr to authenticate user when needed.</p>
+<h3 id="configuration-custom-delegatinghandler">
+Custom DelegatingHandler:
+</h3>
+
+<p>The options builder let you add any custom delegating handler thanks to AddDelegatingHandler method</p>
+<h3 id="configuration-refit-settings">
+Refit settings:
+</h3>
+
+<p>You can adjust some specific Refit settings providing an instance of RefitSettings (thanks to WithRefitSettings).
+Note that for this one, only constructor parameters will be used (IContentSerializer, IUrlParameterFormatter and IFormUrlEncodedParameterFormatter).</p>
+<p>Please don&#39;t use AuthorizationHeaderValueGetter, AuthorizationHeaderValueWithParamGetter and HttpMessageHandlerFactory, as they&#39;ll be ignored.</p>
+<p>Prefer using WithAuthenticationHandler builder method to manage request authorization and AddDelegatingHandler builder method to add some other custom delegating handlers.</p>
+<h3 id="configuration-policy-registry">
+Policy registry:
+</h3>
+
+<p>If you plan to use the PoliciesAttribute, Apizr needs to know where to find your policy registry:</p>
+<ul>
+<li><p>With static instantiation, you have to provide it thanks to WithPolicyRegistry builder method.</p>
+</li>
+<li><p>With extensions registration, you have to register it thanks to AddPolicyRegistry service collection extension method.</p>
+</li>
+</ul>
+<p>In any case, you may want to log what&#39;s going on during policies excecution.
+To do so, there&#39;s an OnRetry helper action which provide your ILogHandler method mapping implementation to Polly.</p>
+<p>Here&#39;s how to use it:</p>
+<pre><code class="lang-csharp">// Some policies
+var registry = new PolicyRegistry
+{
+    {
+        &quot;TransientHttpError&quot;, HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+        {
+            TimeSpan.FromSeconds(1),
+            TimeSpan.FromSeconds(5),
+            TimeSpan.FromSeconds(10)
+        }, LoggedPolicies.OnLoggedRetry).WithPolicyKey(&quot;TransientHttpError&quot;)
+    }
+};
+</code></pre><p>LoggedPolicies.OnLoggedRetry could also execute your own specific action if needed.</p>
+<h3 id="configuration-httpclient">
+HttpClient:
+</h3>
+
+<p>With extensions registration, you can adjust some more HttpClient settings thanks to ConfigureHttpClientBuilder builder method.
+This one could interfere with all Apizr http client auto configuration, so please use it with caution.</p>
+<h2 id="external-integrations">
+External integrations:
+</h2>
+
+<h3 id="shiny">
+Shiny:
+</h3>
+
+<p>If you&#39;re a Shiny user, with the right extension package installed, just register Apizr calling <code>UseApizr</code> instead of <code>AddApizr</code>. 
+Then, everything will be in place, ready to use, relying on Shiny features (Logging, Caching, Connectivity).</p>
+<h3 id="monkeycache">
+MonkeyCache:
+</h3>
+
+<p>If you&#39;re a MonkeyCache user, with the right extension package installed:</p>
+<p>Set the Barrel&#39;s ApplicationId:</p>
+<pre><code class="lang-csharp">Barrel.ApplicationId = &quot;YOUR_APPLICATION_ID&quot;;
+</code></pre><p>Then tell Apizr you want to use MonkeyCache as caching layer:</p>
+<pre><code class="lang-csharp">optionsBuilder =&gt; optionsBuilder.WithCacheHandler(() =&gt; new MonkeyCacheHandler(Barrel.Current))
+</code></pre><h3 id="akavache">
+Akavache:
+</h3>
+
+<p>If you&#39;re an Akavache user, with the right extension package installed:</p>
+<p>Just tell Apizr you want to use Akavahe as caching layer:</p>
+<pre><code class="lang-csharp">optionsBuilder =&gt; optionsBuilder.WithCacheHandler(() =&gt; new AkavacheCacheHandler())
+</code></pre><h3 id="fusillade">
+Fusillade:
+</h3>
+
+<p>Starting Apizr v3, Fusillade has been moved from core project to its dedicated integration package.
+If you plan to use it, you now have to install this package.</p>
+<p>Once installed, you should be able to activate it fluently with the provided extension:</p>
+<pre><code class="lang-csharp">optionsBuilder =&gt; optionsBuilder.WithPriorityManagement()
+</code></pre><p>From there, everything will be user initiated. When you need to specify another priority, what you need to do is just adding the priority parameter into your api interface method definition:</p>
+<pre><code class="lang-csharp">[Get(&quot;/api/users&quot;)]
+Task&lt;UserList&gt; GetUsersAsync([Priority] int priority, CancellationToken cancellationToken);
+</code></pre><h3 id="mediation">
+Mediation:
+</h3>
+
+<p>In extensions registration approach and with the dedicated integration nuget package referenced, the options builder let you enable mediation by calling:</p>
+<pre><code class="lang-csharp">optionsBuilder =&gt; optionsBuilder.WithMediation()
+</code></pre><p>Don&#39;t forget to register MediatR itself as usual:</p>
+<pre><code class="lang-csharp">services.AddMediatR(typeof(Startup));
+</code></pre><p>When activated, you don&#39;t have to inject/resolve anything else than an <code>IMediator</code> instance, in order to play with your api services (both classic and crud).
+Everything you need to do then, is sending your request calling:</p>
+<pre><code class="lang-csharp">var result = await _mediator.Send(YOUR_REQUEST_HERE);
+</code></pre><p>Where YOUR_REQUEST_HERE could be, with classic api interfaces:</p>
+<ul>
+<li><code>ExecuteRequest&lt;TWebApi&gt;</code>: execute any method from <code>TWebApi</code> defined by an expression parameter</li>
+<li><code>ExecuteRequest&lt;TWebApi, TApiResponse&gt;</code>: execute any method from <code>TWebApi</code> with a <code>TApiResponse</code> result and defined by an expression parameter</li>
+<li><code>ExecuteRequest&lt;TWebApi, TModelResponse, TApiResponse&gt;</code>: execute any method from <code>TWebApi</code> with a <code>TApiResponse</code> mapped to a <code>TModelResponse</code> result and defined by an expression parameter</li>
+</ul>
+<blockquote><p><strong>NOTE - Mapping</strong>:
+When I say &quot;mapped&quot;, I talk about the mapping integration feature</p>
+<p>Please refer to AutoMapper section for more info</p>
+</blockquote>
+<p>Or with crud api interfaces:</p>
+<ul>
+<li><code>ReadQuery&lt;T&gt;</code>: get the T entity with int</li>
+<li><code>ReadQuery&lt;T, TKey&gt;</code>: get the T entity with TKey</li>
+<li><code>ReadAllQuery&lt;TReadAllResult&gt;</code>: get TReadAllResult with IDictionary&lt;string, object&gt; optional query parameters</li>
+<li><code>ReadAllQuery&lt;TReadAllParams, TReadAllResult&gt;</code>: get TReadAllResult with TReadAllParams optional query parameters</li>
+<li><code>CreateCommand&lt;T&gt;</code>: create a T entity</li>
+<li><code>UpdateCommand&lt;T&gt;</code>: update the T entity with int</li>
+<li><code>UpdateCommand&lt;TKey, T&gt;</code>: update the T entity with TKey</li>
+<li><code>DeleteCommand&lt;T&gt;</code>: delete the T entity with int</li>
+<li><code>DeleteCommand&lt;T, TKey&gt;</code>: delete the T entity with TKey</li>
+</ul>
+<p>There&#39;s also a typed mediator available for each api interface (classic or crud), to help you write things shorter.</p>
+<p>With classic api interfaces, resolving <code>IMediator&lt;TWebApi&gt;</code> give you access to:</p>
+<ul>
+<li><code>SendFor(YOUR_API_METHOD_EXPRESSION)</code>: send an <code>ExecuteRequest&lt;TWebApi&gt;</code> for you</li>
+<li><code>SendFor&lt;TApiResponse&gt;(YOUR_API_METHOD_EXPRESSION)</code>: send an <code>ExecuteRequest&lt;TWebApi, TApiResponse&gt;</code> for you</li>
+<li><code>SendFor&lt;TModelResponse, TApiResponse&gt;(YOUR_API_METHOD_EXPRESSION)</code>: send an <code>ExecuteRequest&lt;TWebApi, TModelResponse, TApiResponse&gt;</code> for you</li>
+</ul>
+<p>With crud api interfaces, resolving <code>ICrudMediator&lt;TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams&gt;</code> give you access to:</p>
+<ul>
+<li><code>SendReadQuery(TApiEntityKey key)</code>: send a <code>ReadQuery&lt;TApiEntity, TApiEntityKey&gt;</code> for you</li>
+<li><code>SendReadQuery&lt;TModelEntity&gt;(TApiEntityKey key)</code>: send a <code>ReadQuery&lt;TModelEntity, TApiEntityKey&gt;</code> for you, with <code>TModelEntity</code> mapped with <code>TApiEntity</code></li>
+<li><code>SendReadAllQuery()</code>: send a <code>ReadAllQuery&lt;TReadAllResult&gt;</code> for you</li>
+<li><code>SendReadAllQuery&lt;TModelEntityReadAllResult&gt;()</code>: send a <code>ReadAllQuery&lt;TModelEntityReadAllResult&gt;</code> for you, with <code>TModelEntityReadAllResult</code> mapped with <code>TReadAllResult</code></li>
+<li><code>SendCreateCommand(TApiEntity payload)</code>: send a <code>CreateCommand&lt;TApiEntity&gt;</code> for you</li>
+<li><code>SendCreateCommand&lt;TModelEntity&gt;(TModelEntity payload)</code>: send a <code>CreateCommand&lt;TModelEntity&gt;</code> for you, with <code>TModelEntity</code> mapped with <code>TApiEntity</code></li>
+<li><code>SendUpdateCommand(TApiEntityKey key, TApiEntity payload)</code>: send an <code>UpdateCommand&lt;TApiEntityKey, TApiEntity&gt;</code> for you</li>
+<li><code>SendUpdateCommand&lt;TModelEntity&gt;(TApiEntityKey key, TModelEntity payload)</code>: send an <code>UpdateCommand&lt;TApiEntityKey, TModelEntity&gt;</code> for you, with <code>TModelEntity</code> mapped with <code>TApiEntity</code></li>
+<li><code>SendDeleteCommand(TApiEntityKey key)</code>: send a <code>DeleteCommand&lt;TApiEntity, TApiEntityKey&gt;</code> for you</li>
+</ul>
+<p>Most of all requests get some overloads to provide some more parameters.</p>
+<p>Apizr will intercept your request and handle it to send the result back to you, thanks to MediatR.</p>
+<p>From there, our ViewModel can look like (only one interface necessary in real world):</p>
+<pre><code class="lang-csharp">public class YourViewModel
+{
+    private readonly IMediator _mediator;
+    private readonly IMediator&lt;IReqResService&gt; _reqResMediator;
+    private readonly ICrudMediator&lt;User, int, PagedResult&lt;User&gt;, IDictionary&lt;string, object&gt;&gt; _userMediator;
+
+    public YouViewModel(IMediator mediator, 
+        IMediator&lt;IReqResService&gt; reqResMediator,
+        ICrudMediator&lt;User, int, PagedResult&lt;User&gt;, IDictionary&lt;string, object&gt;&gt; userMediator)
+    {
+        _mediator = mediator;
+       _reqResMediator = reqResMediator;
+       _userMediator = userMediator;
+    }
+
+    public ObservableCollection&lt;User&gt;? Users { get; set; }
+
+    // This won&#39;t compile obviously
+    // It&#39;s an example presenting all ways to play with MediatR
+    // You should choose one of these ways
+    private async Task GetUsersAsync()
+    {
+        IList&lt;User&gt;? users;
+        try
+        {
+            // The classic api interface way
+            var userList = await _mediator.Send(new ExecuteRequest&lt;IReqResService, UserList&gt;((ct, api) =&gt; api.GetUsersAsync(ct)), CancellationToken.None);
+            users = userList.Data;
+
+            // The classic api interface way with typed mediator
+            var userList = await _reqResMediator.SendFor(api =&gt; api.GetUsersAsync());
+            users = userList.Data;
+
+            // The crud api interface way
+            var pagedUsers = await _mediator.Send(new ReadAllQuery&lt;PagedResult&lt;User&gt;&gt;(), CancellationToken.None);
+            users = pagedUsers.Data?.ToList();
+
+            // The crud api interface way with typed mediator
+            var pagedUsers = await _userMediator.SendReadAllQuery();
+            users = pagedUsers.Data?.ToList();
+        }
+        catch (ApizrException&lt;PagedResult&lt;User&gt;&gt; e)
+        {
+            var message = e.InnerException is IOException ? &quot;No network&quot; : (e.Message ?? &quot;Error&quot;);
+            UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+
+            users = e.CachedResult?.Data;
+        }
+
+        if(users != null)
+            Users = new ObservableCollection&lt;User&gt;(users);
+    }
+}
+</code></pre><h3 id="optional">
+Optional:
+</h3>
+
+<p>In extensions registration approach and with the dedicated integration nuget package referenced, the options builder let you enable mediation with Optional result by calling:</p>
+<pre><code class="lang-csharp">optionsBuilder =&gt; optionsBuilder.WithOptionalMediation()
+</code></pre><p>Again, don&#39;t forget to register MediatR itself as usual :</p>
+<pre><code class="lang-csharp">services.AddMediatR(typeof(Startup));
+</code></pre><p>When activated, you don&#39;t have to inject/resolve anything else than an <code>IMediator</code> instance, in order to play with your api services (both classic and crud).
+Everything you need to do then, is sending your request calling:</p>
+<pre><code class="lang-csharp">var result = await _mediator.Send(YOUR_REQUEST_HERE);
+</code></pre><p>Where YOUR_REQUEST_HERE could be, with classic api interfaces:</p>
+<ul>
+<li><code>ExecuteOptionalRequest&lt;TWebApi&gt;</code>: execute any method from <code>TWebApi</code> defined by an expression parameter which returns <code>Option&lt;Unit, ApizrException&gt;</code></li>
+<li><code>ExecuteOptionalRequest&lt;TWebApi, TApiResponse&gt;</code>: execute any method from <code>TWebApi</code> defined by an expression parameter which returns <code>Option&lt;TApiResponse, ApizrException&lt;TApiResponse&gt;&gt;</code></li>
+<li><code>ExecuteOptionalRequest&lt;TWebApi, TModelResponse, TApiResponse&gt;</code>: execute any method from <code>TWebApi</code> defined by an expression parameter which returns <code>Option&lt;TModelResponse, ApizrException&lt;TModelResponse&gt;&gt;</code> where <code>TModelResponse</code> mapped from <code>TApiResponse</code></li>
+</ul>
+<blockquote><p><strong>NOTE - Mapping</strong>:
+When I say &quot;mapped&quot;, I talk about the mapping integration feature</p>
+<p>Please refer to AutoMapper section for more info</p>
+</blockquote>
+<p>Or with crud api interfaces:</p>
+<ul>
+<li><code>ReadOptionalQuery&lt;T&gt;</code>: get the T entity with int and returns <code>Option&lt;T, ApizrException&lt;T&gt;&gt;</code></li>
+<li><code>ReadOptionalQuery&lt;T, TKey&gt;</code>: get the T entity with TKey and returns <code>Option&lt;T, ApizrException&lt;T&gt;&gt;</code></li>
+<li><code>ReadAllOptionalQuery&lt;TReadAllResult&gt;</code>: get TReadAllResult with IDictionary&lt;string, object&gt; optional query parameters and returns <code>Option&lt;TReadAllResult, ApizrException&lt;TReadAllResult&gt;&gt;</code></li>
+<li><code>ReadAllOptionalQuery&lt;TReadAllParams, TReadAllResult&gt;</code>: get TReadAllResult with TReadAllParams optional query parameters and returns <code>Option&lt;TReadAllResult, ApizrException&lt;TReadAllResult&gt;&gt;</code></li>
+<li><code>CreateOptionalCommand&lt;T&gt;</code>: create a T entity and returns <code>Option&lt;Unit, ApizrException&gt;</code></li>
+<li><code>UpdateOptionalCommand&lt;T&gt;</code>: update the T entity with int and returns <code>Option&lt;Unit, ApizrException&gt;</code></li>
+<li><code>UpdateOptionalCommand&lt;TKey, T&gt;</code>: update the T entity with TKey and returns <code>Option&lt;Unit, ApizrException&gt;</code></li>
+<li><code>DeleteOptionalCommand&lt;T&gt;</code>: delete the T entity with int and returns <code>Option&lt;Unit, ApizrException&gt;</code></li>
+<li><code>DeleteOptionalCommand&lt;T, TKey&gt;</code>: delete the T entity with TKey and returns <code>Option&lt;Unit, ApizrException&gt;</code></li>
+</ul>
+<p>There&#39;s also a typed optional mediator available for each api interface (classic or crud), to help you write things shorter.</p>
+<p>With classic api interfaces, resolving <code>IOptionalMediator&lt;TWebApi&gt;</code> give you access to:</p>
+<ul>
+<li><code>SendFor(YOUR_API_METHOD_EXPRESSION)</code>: send an <code>ExecuteOptionalRequest&lt;TWebApi&gt;</code> for you</li>
+<li><code>SendFor&lt;TApiResponse&gt;(YOUR_API_METHOD_EXPRESSION)</code>: send an <code>ExecuteOptionalRequest&lt;TWebApi, TApiResponse&gt;</code> for you</li>
+<li><code>SendFor&lt;TModelResponse, TApiResponse&gt;(YOUR_API_METHOD_EXPRESSION)</code>: send an <code>ExecuteOptionalRequest&lt;TWebApi, TModelResponse, TApiResponse&gt;</code> for you</li>
+</ul>
+<p>With crud api interfaces, resolving <code>ICrudOptionalMediator&lt;TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams&gt;</code> give you access to:</p>
+<ul>
+<li><code>SendReadOptionalQuery(TApiEntityKey key)</code>: send a <code>ReadOptionalQuery&lt;TApiEntity, TApiEntityKey&gt;</code> for you</li>
+<li><code>SendReadOptionalQuery&lt;TModelEntity&gt;(TApiEntityKey key)</code>: send a <code>ReadOptionalQuery&lt;TModelEntity, TApiEntityKey&gt;</code> for you, with <code>TModelEntity</code> mapped with <code>TApiEntity</code></li>
+<li><code>SendReadAllOptionalQuery()</code>: send a <code>ReadAllOptionalQuery&lt;TReadAllResult&gt;</code> for you</li>
+<li><code>SendReadAllOptionalQuery&lt;TModelEntityReadAllResult&gt;()</code>: send a <code>ReadAllOptionalQuery&lt;TModelEntityReadAllResult&gt;</code> for you, with <code>TModelEntityReadAllResult</code> mapped with <code>TReadAllResult</code></li>
+<li><code>SendCreateOptionalCommand(TApiEntity payload)</code>: send a <code>CreateOptionalCommand&lt;TApiEntity&gt;</code> for you</li>
+<li><code>SendCreateOptionalCommand&lt;TModelEntity&gt;(TModelEntity payload)</code>: send a <code>CreateOptionalCommand&lt;TModelEntity&gt;</code> for you, with <code>TModelEntity</code> mapped with <code>TApiEntity</code></li>
+<li><code>SendUpdateOptionalCommand(TApiEntityKey key, TApiEntity payload)</code>: send an <code>UpdateOptionalCommand&lt;TApiEntityKey, TApiEntity&gt;</code> for you</li>
+<li><code>SendUpdateOptionalCommand&lt;TModelEntity&gt;(TApiEntityKey key, TModelEntity payload)</code>: send an <code>UpdateOptionalCommand&lt;TApiEntityKey, TModelEntity&gt;</code> for you, with <code>TModelEntity</code> mapped with <code>TApiEntity</code></li>
+<li><code>SendDeleteOptionalCommand(TApiEntityKey key)</code>: send a <code>DeleteOptionalCommand&lt;TApiEntity, TApiEntityKey&gt;</code> for you</li>
+</ul>
+<p>Apizr will intercept it and handle it to send the result back to you, thanks to MediatR and Optional.</p>
+<p>From there, our ViewModel can look like (only one interface necessary in real world):</p>
+<pre><code class="lang-csharp">public class YourViewModel
+{
+    private readonly IMediator _mediator;
+    private readonly IOptionalMediator&lt;IReqResService&gt; _reqResOptionalMediator;
+    private readonly ICrudOptionalMediator&lt;User, int, PagedResult&lt;User&gt;, IDictionary&lt;string, object&gt;&gt; _userOptionalMediator;
+
+    public YouViewModel(IMediator mediator, 
+        IOptionalMediator&lt;IReqResService&gt; reqResOptionalMediator,
+        ICrudOptionalMediator&lt;User, int, PagedResult&lt;User&gt;, IDictionary&lt;string, object&gt;&gt; userOptionalMediator)
+    {
+        _mediator = mediator;
+       _reqResOptionalMediator = reqResOptionalMediator;
+       _userOptionalMediator = userOptionalMediator;
+    }
+
+    public ObservableCollection&lt;User&gt;? Users { get; set; }
+
+    // This won&#39;t compile obviously
+    // It&#39;s an example presenting all ways to play with Optional
+    // You should choose one of these ways
+    private async Task GetUsersAsync()
+    {
+        // The classic api interface way with mediator and optional request
+        var optionalUserList = await _mediator.Send(new ExecuteOptionalRequest&lt;IReqResService, UserList&gt;((ct, api) =&gt; api.GetUsersAsync(ct)), CancellationToken.None);
+
+        // The classic api interface way with typed optional mediator (the same but shorter)
+        var optionalUserList = await _reqResOptionalMediator.SendFor(api =&gt; api.GetUsersAsync());
+
+        // Handling the optional result for both previous ways
+        optionalPagedResult.Match(userList =&gt;
+        {
+            if (userList.Data != null &amp;&amp; userList.Data.Any())
+                Users = new ObservableCollection&lt;User&gt;(userList.Data);
+        }, e =&gt;
+        {
+            var message = e.InnerException is IOException ? &quot;No network&quot; : (e.Message ?? &quot;Error&quot;);
+            UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+
+            if (e.CachedResult?.Data != null &amp;&amp; e.CachedResult.Data.Any())
+                Users = new ObservableCollection&lt;User&gt;(e.CachedResult.Data);
+        });
+
+        // The crud api interface way with mediator and optional request
+        var optionalPagedResult = await _mediator.Send(new ReadAllOptionalQuery&lt;PagedResult&lt;User&gt;&gt;(), CancellationToken.None);
+
+        // The crud api interface way with typed crud optional mediator
+        var optionalPagedResult = await _userOptionalMediator.SendReadAllOptionalQuery();
+
+        // Handling the optional result for both previous ways
+        optionalPagedResult.Match(pagedUsers =&gt;
+        {
+            if (pagedUsers.Data != null &amp;&amp; pagedUsers.Data.Any())
+                Users = new ObservableCollection&lt;User&gt;(pagedUsers.Data);
+        }, e =&gt;
+        {
+            var message = e.InnerException is IOException ? &quot;No network&quot; : (e.Message ?? &quot;Error&quot;);
+            UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+
+            if (e.CachedResult?.Data != null &amp;&amp; e.CachedResult.Data.Any())
+                Users = new ObservableCollection&lt;User&gt;(e.CachedResult.Data);
+        });
+    }
+}
+</code></pre><p>Same advantages than classic mediation but with exception handling.
+Both &quot;classic&quot; and &quot;optional&quot; mediation are compatibles with each other.
+It means that if you call both methods during registration, both request collection will be available, so you can decide which one suits to you when you need it.</p>
+<h4 id="optional-helper-extentions">
+Optional helper extentions:
+</h4>
+
+<p>Optional and MediatR are pretty cool.</p>
+<p>But even if we use the typed optional mediator or typed crud optional mediator to get things shorter, we still have to deal with the result boilerplate:</p>
+<pre><code class="lang-csharp">// The classic api interface way with typed optional mediator (the same but shorter)
+var optionalUserList = await _reqResOptionalMediator.SendFor(api =&gt; api.GetUsersAsync());
+
+// Handling the optional result for both previous ways
+optionalPagedResult.Match(userList =&gt;
+{
+    if (userList.Data != null &amp;&amp; userList.Data.Any())
+        Users = new ObservableCollection&lt;User&gt;(userList.Data);
+}, e =&gt;
+{
+    var message = e.InnerException is IOException ? &quot;No network&quot; : (e.Message ?? &quot;Error&quot;);
+    UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+
+    if (e.CachedResult?.Data != null &amp;&amp; e.CachedResult.Data.Any())
+        Users = new ObservableCollection&lt;User&gt;(e.CachedResult.Data);
+});
+</code></pre><p>Let&#39;s cut down the optional result handling thing, to get something as short as we can.</p>
+<p><code>OnResultAsync</code> and <code>CatchAsync</code> are extension methods to handle optional result fluently.</p>
+<h5 id="optional-onresultasync">
+OnResultAsync:
+</h5>
+
+<p><code>OnResultAsync</code> ask you to provide one of these parameters:</p>
+<ul>
+<li><code>Action&lt;TResult&gt; onResult</code>: this action will be invoked just before throwing any exception that might have occurred during request execution</li>
+<li><code>Func&lt;TResult, ApizrException&lt;TResult&gt;, bool&gt; onResult</code>: this function will be invoked with the returned result and potential occurred exception</li>
+<li><code>Func&lt;TResult, ApizrException&lt;TResult&gt;, Task&lt;bool&gt;&gt; onResult</code>: this function will be invoked async with the returned result and potential occurred exception</li>
+</ul>
+<p>All give you a result returned from fetch if succeed, or cache if failed.
+The main goal here is to set any binded property with the returned result (fetched or cached), no matter of exceptions.
+Then the Action will let the exception throw, where the Func will let you decide to throw manually or return a success boolean flag.</p>
+<p>Here is what our final request looks like with Action (auto throwing after invocation on excpetion):</p>
+<pre><code class="lang-csharp">await _reqResOptionalMediator.SendFor(api =&gt; api.GetUsersAsync()).OnResultAsync(userList =&gt; { users = userList?.Data; });
+</code></pre><p>Or with Func and throw:</p>
+<pre><code class="lang-csharp">await _reqResOptionalMediator.SendFor(api =&gt; api.GetUsersAsync()).OnResultAsync((userList, exception) =&gt; 
+{ 
+    users = userList?.Data; 
+
+    if(exception != null)
+        throw exception;
+
+    return true;
+});
+</code></pre><p>Or with Func and success flag:</p>
+<pre><code class="lang-csharp">var success = await _reqResOptionalMediator.SendFor(api =&gt; api.GetUsersAsync()).OnResultAsync((userList, exception) =&gt; 
+{ 
+    users = userList?.Data; 
+
+    return exception != null;
+});
+</code></pre><p>We could combine the first two with <a href="https://github.com/Fody/AsyncErrorHandler">AsyncErrorHandler</a>, to catch them all globally and show any information dialog to the user, like:</p>
+<pre><code class="lang-csharp">public static class AsyncErrorHandler
+{
+    public static void HandleException(Exception exception)
+    {
+        var message = exception  is IOException || exception.InnerException is IOException ? &quot;No network&quot; : (exception.Message ?? &quot;Error&quot;);
+        UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+
+        Log.Write(exception);
+    }
+}
+</code></pre><h5 id="optional-catchasync">
+CatchAsync:
+</h5>
+
+<p><code>CatchAsync</code> let you provide these parameters:</p>
+<ul>
+<li><code>Action&lt;Exception&gt; onException</code>: this action will be invoked just before returning the result from cache if fetch failed. Useful to inform the user of the api call failure and that data comes from cache.</li>
+<li><code>letThrowOnExceptionWithEmptyCache</code>: True to let it throw the inner exception in case of empty cache, False to handle it with <code>onException</code> action and return empty cache result (default: False)</li>
+</ul>
+<p>This one is to return result from fetch or cache, no matter of execption handled on the other side by an action callback to inform the user</p>
+<pre><code class="lang-csharp">var users = await _reqResOptionalMediator.SendFor(api =&gt; api.GetUsersAsync()).CatchAsync(AsyncErrorHandler.HandleException, true);
+</code></pre><p>Here we ask the api to get users and if it fails:</p>
+<ul>
+<li>There&#39;s some cached data?<ul>
+<li>AsyncErrorHandler will handle the exception to inform the user call just failed</li>
+<li>Apizr will return the previous result from cache</li>
+</ul>
+</li>
+<li>There&#39;s no cached data yet!<ul>
+<li><code>letThrowOnExceptionWithEmptyCache</code> is True? (which is the case here)<ul>
+<li>Apizr will throw the inner exception that will be catched further by AsyncErrorHander (this is its normal Fody usage)</li>
+</ul>
+</li>
+<li><code>letThrowOnExceptionWithEmptyCache</code> is False! (default)<ul>
+<li>Apizr will return the empty cache data (null) which has to be handled further</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Safe and shorter than ever!</p>
+<h3 id="automapper">
+AutoMapper:
+</h3>
+
+<p>You can define your own model entities and then, your AutoMapper mapping profiles between api entities and model entities.</p>
+<p>Then, you have to tell Apizr which entities must use the mapping feature.</p>
+<h4 id="automapper-with-crud-apis">
+AutoMapper with Crud apis:
+</h4>
+
+<h5 id="automapper-crud-manually">
+Manually:
+</h5>
+
+<pre><code class="lang-csharp">services.AddApizrCrudFor&lt;MappedEntity&lt;TModelEntity, TApiEntity&gt;&gt;(optionsBuilder =&gt;
+    optionsBuilder.WithBaseAddress(&quot;https://myapi.com/api/myentity&quot;)
+        .WithMediation()
+        .WithMappingHandler&lt;AutoMapperMappingHandler&gt;());
+</code></pre><p>Manual registration makes use of MappedEntity&lt;TModelEntity, TApiEntity&gt; just in place of our usual T.
+You&#39;ll have to enable one or both mediation feature to handle requests (classic and/or optional) and provide a mapping handler.
+You&#39;ll have to repeat this registration for each crud mapping.</p>
+<p>Don&#39;t forget to register AutoMapper itself as usual :</p>
+<pre><code class="lang-csharp">services.AddAutoMapper(typeof(Startup));
+</code></pre><h5 id="automapper-crud-automatically">
+Automatically:
+</h5>
+
+<p>Why not let Apizr do it for you?
+To do so, you have do decorate one of those two entities (api vs model) with corresponding attribute:</p>
+<ul>
+<li><code>CrudEntityAttribute</code> above the api entity, with <code>modelEntityType</code> parameter set to the mapped model entity type</li>
+<li><code>MappedCrudEntityAttribute</code> above the model entity, with <code>apiEntityType</code> parameter set to the mapped api entity type</li>
+</ul>
+<p>If you get access to both entities, it doesn&#39;t matter which one you decorate, just do it for one of it (if you decorate both, it will take the first found).
+If you don&#39;t get any access to the api entities, just decorate your model one with the <code>MappedCrudEntityAttribute</code></p>
+<p>From here, let&#39;s write:</p>
+<pre><code class="lang-csharp">services.AddApizrCrudFor(optionsBuilder =&gt; optionsBuilder
+        .WithMediation()
+        .WithMappingHandler&lt;AutoMapperMappingHandler&gt;(), 
+        typeof(AnyTApiEntity), typeof(AnyTModelEntity));
+</code></pre><p>In this example, I provided both api entity and model entity assemblies to the attribute scanner, but actually you just have to provide the one containing your attribute decorated entities (api or model, depending of your scenario/access rights).</p>
+<p>Don&#39;t forget to register AutoMapper itself as usual :</p>
+<pre><code class="lang-csharp">services.AddAutoMapper(typeof(Startup));
+</code></pre><h5 id="automapper-crud-using">
+Using:
+</h5>
+
+<p>Nothing different here but direct using of your model entities when sending mediation requests, like:</p>
+<pre><code class="lang-csharp">var createdModelEntity = await _mediator.Send(new CreateCommand&lt;TModelEntity&gt;(myModelEntity), CancellationToken.None);
+</code></pre><p>Apizr will map myModelEntity to TApiEntity, send it to the server, map the result to TModelEntity and send it back to you.
+And yes, it works also with Optional.</p>
+<h4 id="automapper-with-classic-apis">
+AutoMapper with classic apis:
+</h4>
+
+<p>You have do decorate one among the api method, the model entity or the api entity with <code>MappedWithAttribute</code>, with <code>mappedWithType</code> set to the other mapped entity.</p>
+<p>From here, let&#39;s write:</p>
+<pre><code class="lang-csharp">services.AddApizrFor(optionsBuilder =&gt; optionsBuilder
+        .WithMediation()
+        .WithMappingHandler&lt;AutoMapperMappingHandler&gt;(), 
+        typeof(AnyTApiEntity), typeof(AnyTModelEntity), typeof(AnyTWebApi));
+</code></pre><p>Actually, the number of <code>typeof</code> depends on where your attribute decorations are defined.</p>
+<p>Don&#39;t forget to register AutoMapper itself as usual :</p>
+<pre><code class="lang-csharp">services.AddAutoMapper(typeof(Startup));
+</code></pre><h5 id="automapper-classic-using">
+Using:
+</h5>
+
+<p>Nothing different here but direct using of your model entities when sending mediation requests, like:</p>
+<pre><code class="lang-csharp">// Classic auto mapped result only
+var userInfos = await _mediator.Send(new ExecuteRequest&lt;IReqResService, UserInfos, UserDetails&gt;((ct, api) =&gt; 
+    api.GetUserAsync(userChoice, ct)), CancellationToken.None);
+</code></pre><p>Apizr will send the request to the server, map the api result from <code>UserDetails</code> to <code>UserInfos</code> and send it back to you.</p>
+<p>You can also map the request before being sent, like so:</p>
+<pre><code class="lang-csharp">// Classic auto mapped request and result
+var minUser = new MinUser {Name = &quot;John&quot;};
+var createdMinUser = await _mediator.Send(
+    new ExecuteRequest&lt;IReqResService, MinUser, User&gt;((ct, api, mapper) =&gt;
+        api.CreateUser(mapper.Map&lt;MinUser, User&gt;(minUser), ct)), CancellationToken.None);
+</code></pre><p><code>minUser</code> will be mapped from <code>MinUser</code> to <code>User</code> just before being sent, then Apizr will map the api result back from <code>User</code> to <code>MinUser</code> and send it back to you.</p>
+<p>And yes, all the mapping feature works also with Optional.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/lab/Apizr/Docs/Apizr.Docs/README.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

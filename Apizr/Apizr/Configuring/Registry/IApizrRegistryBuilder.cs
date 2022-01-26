@@ -4,6 +4,7 @@ using Apizr.Connecting;
 using Apizr.Mapping;
 using Polly.Registry;
 using System;
+using System.Collections.Generic;
 using Apizr.Requesting;
 
 namespace Apizr.Configuring.Registry

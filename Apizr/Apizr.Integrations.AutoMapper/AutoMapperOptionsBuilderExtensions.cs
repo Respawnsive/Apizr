@@ -3,7 +3,7 @@ using AutoMapper;
 
 namespace Apizr
 {
-    public static class OptionsBuilderExtensions
+    public static class AutoMapperOptionsBuilderExtensions
     {
         /// <summary>
         /// Set AutoMapper as MappingHandler

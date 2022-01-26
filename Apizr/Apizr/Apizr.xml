@@ -4,20 +4,28 @@
         <name>Apizr</name>
     </assembly>
     <members>
-        <member name="M:Apizr.Apizr.CrudFor``1(System.Action{Apizr.IApizrOptionsBuilder})">
+        <member name="M:Apizr.Apizr.Create(System.Action{Apizr.Configuring.Registry.IApizrRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})">
             <summary>
-            Create a <typeparamref name="T:Apizr.ApizrManager`1"/> instance for <see cref="!:T"/> object type (class), 
-            with key of type <typeparamref name="T:System.Int32"/> and "ReadAll" query result of type <typeparamref name="T:System.Collections.Generic.IEnumerable`1"/>
+            Create a registry with all managers built with both common and proper options
+            </summary>
+            <param name="registryBuilder">The registry builder with access to proper options</param>
+            <param name="commonOptionsBuilder">The common options shared by all managers</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Apizr.CreateCrudFor``1(System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
+            <summary>
+            Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
+            with key of type <see cref="T:System.Int32"/> and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
             and ReadAll query parameters of type IDictionary{string,object}
             </summary>
             <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Apizr.CrudFor``2(System.Action{Apizr.IApizrOptionsBuilder})">
+        <member name="M:Apizr.Apizr.CreateCrudFor``2(System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
             <summary>
-            Create a <typeparamref name="T:Apizr.ApizrManager`1"/> instance for <see cref="!:T"/> object type (class), 
-            with key of type <see cref="!:TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="T:System.Collections.Generic.IEnumerable`1"/>
+            Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
+            with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
             and ReadAll query parameters of type IDictionary{string,object}
             </summary>
             <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
@@ -25,63 +33,63 @@
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Apizr.CrudFor``3(System.Action{Apizr.IApizrOptionsBuilder})">
+        <member name="M:Apizr.Apizr.CreateCrudFor``3(System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
             <summary>
-            Create a <typeparamref name="T:Apizr.ApizrManager`1"/> instance for <see cref="!:T"/> object type (class), 
-            with key of type <see cref="!:TKey"/> (primitive) and "ReadAll" query result of type <see cref="!:TReadAllResult"/>
+            Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
+            with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
             and ReadAll query parameters of type IDictionary{string,object}
             </summary>
             <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
             <typeparam name="TKey">The object key type (primitive)</typeparam>
             <typeparam name="TReadAllResult">"ReadAll" query result type
-            (should inherit from <typeparamref name="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
+            (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Apizr.CrudFor``4(System.Action{Apizr.IApizrOptionsBuilder})">
+        <member name="M:Apizr.Apizr.CreateCrudFor``4(System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
             <summary>
-            Create a <typeparamref name="T:Apizr.ApizrManager`1"/> instance for <see cref="!:T"/> object type (class), 
-            with key of type <see cref="!:TKey"/> (primitive) and "ReadAll" query result of type <see cref="!:TReadAllResult"/>
+            Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
+            with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
             and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
             </summary>
             <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
             <typeparam name="TKey">The object key type (primitive)</typeparam>
             <typeparam name="TReadAllResult">"ReadAll" query result type
-            (should inherit from <typeparamref name="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
+            (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
             <typeparam name="TReadAllParams">ReadAll query parameters</typeparam>
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Apizr.CrudFor``5(System.Func{Apizr.ILazyWebApi{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Logging.ILogger,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.IApizrOptionsBase,``4},System.Action{Apizr.IApizrOptionsBuilder})">
+        <member name="M:Apizr.Apizr.CreateCrudFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptionsBase,``4},System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
             <summary>
-            Create a <see cref="!:TApizrManager"/> instance for a managed crud api for <see cref="!:T"/> object (class), 
-            with key of type <see cref="!:TKey"/> (primitive) and "ReadAll" query result of type <see cref="!:TReadAllResult"/>
+            Create a <typeparamref name="TApizrManager"/> instance for a managed crud api for <typeparamref name="T"/> object (class), 
+            with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
             and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
             </summary>
             <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
             <typeparam name="TKey">The object key type (primitive)</typeparam>
-            <typeparam name="TApizrManager">A custom <typeparamref name="T:Apizr.IApizrManager`1"/> implementation</typeparam>
+            <typeparam name="TApizrManager">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation</typeparam>
             <typeparam name="TReadAllResult">"ReadAll" query result type
-            (should inherit from <typeparamref name="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
+            (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
             <typeparam name="TReadAllParams">ReadAll query parameters</typeparam>
             <param name="apizrManagerFactory">The custom manager implementation instance factory</param>
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Apizr.For``1(System.Action{Apizr.IApizrOptionsBuilder})">
+        <member name="M:Apizr.Apizr.CreateFor``1(System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
             <summary>
-            Create a <typeparamref name="T:Apizr.ApizrManager`1"/> instance
+            Create a <see cref="T:Apizr.ApizrManager`1"/> instance
             </summary>
             <typeparam name="TWebApi">The web api interface to manage</typeparam>
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Apizr.For``2(System.Func{Apizr.ILazyWebApi{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Logging.ILogger,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.IApizrOptions{``0},``1},System.Action{Apizr.IApizrOptionsBuilder})">
+        <member name="M:Apizr.Apizr.CreateFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptions{``0},``1},System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
             <summary>
-            Create a <see cref="!:TApizrManager"/> instance for a managed <see cref="!:TWebApi"/>
+            Create a <typeparamref name="TApizrManager"/> instance for a managed <typeparamref name="TWebApi"/>
             </summary>
             <typeparam name="TWebApi">The web api interface to manage</typeparam>
-            <typeparam name="TApizrManager">A custom <typeparamref name="T:Apizr.IApizrManager`1"/> implementation</typeparam>
+            <typeparam name="TApizrManager">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation</typeparam>
             <param name="apizrManagerFactory">The custom manager implementation instance factory</param>
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
@@ -93,7 +101,7 @@
         </member>
         <member name="T:Apizr.ApizrException`1">
             <summary>
-            An exception with optional cached <see cref="!:TResult"/>
+            An exception with optional cached <typeparamref name="TResult"/>
             </summary>
         </member>
         <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.CloneHttpRequestMessageAsync(System.Net.Http.HttpRequestMessage)">
@@ -123,72 +131,78 @@
             <param name="request">The request to authenticate</param>
             <returns></returns>
         </member>
-        <member name="T:Apizr.Caching.CacheAttributeBase">
+        <member name="T:Apizr.Caching.Attributes.CacheAttribute">
             <summary>
             Tells Apizr to cache all methods returning result when decorating an interface or a specific one when decorating a method
-            You have to provide an <typeparamref name="T:Apizr.Caching.ICacheHandler"/> mapping implementation to Apizr to use this feature
+            You have to provide an <see cref="T:Apizr.Caching.ICacheHandler"/> mapping implementation to Apizr to use this feature
             </summary>
         </member>
-        <member name="P:Apizr.Caching.CacheAttributeBase.LifeSpan">
+        <member name="T:Apizr.Caching.Attributes.CacheAttributeBase">
+            <summary>
+            Tells Apizr to cache all methods returning result when decorating an interface or a specific one when decorating a method
+            You have to provide an <see cref="T:Apizr.Caching.ICacheHandler"/> mapping implementation to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="P:Apizr.Caching.Attributes.CacheAttributeBase.LifeSpan">
             <summary>
             This specific caching life time
             </summary>
         </member>
-        <member name="P:Apizr.Caching.CacheAttributeBase.Mode">
+        <member name="P:Apizr.Caching.Attributes.CacheAttributeBase.Mode">
             <summary>
             Tells Apizr to return a value if we get a cached result for it (GetOrFetch) or to try fetching fresh data every time (GetAndFetch)
             </summary>
         </member>
-        <member name="P:Apizr.Caching.CacheAttributeBase.ShouldInvalidateOnError">
+        <member name="P:Apizr.Caching.Attributes.CacheAttributeBase.ShouldInvalidateOnError">
             <summary>
             Tells Apizr to remove the cache on error
             </summary>
         </member>
-        <member name="M:Apizr.Caching.CacheAttributeBase.#ctor">
+        <member name="M:Apizr.Caching.Attributes.CacheAttributeBase.#ctor">
             <summary>
             Cache with no specific lifetime, default GetAndFetch mode and no invalidation on error
             </summary>
         </member>
-        <member name="M:Apizr.Caching.CacheAttributeBase.#ctor(Apizr.Caching.CacheMode)">
+        <member name="M:Apizr.Caching.Attributes.CacheAttributeBase.#ctor(Apizr.Caching.CacheMode)">
             <summary>
             Cache with no specific lifetime, no invalidation on error but a specific cache mode
             </summary>
             <param name="mode">GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</param>
         </member>
-        <member name="M:Apizr.Caching.CacheAttributeBase.#ctor(System.String)">
+        <member name="M:Apizr.Caching.Attributes.CacheAttributeBase.#ctor(System.String)">
             <summary>
             Cache with default GetAndFetch mode, no invalidation on error but with a specific lifetime
             </summary>
             <param name="lifeSpanRepresentation">TimeSpan representation to parse</param>
         </member>
-        <member name="M:Apizr.Caching.CacheAttributeBase.#ctor(System.Boolean)">
+        <member name="M:Apizr.Caching.Attributes.CacheAttributeBase.#ctor(System.Boolean)">
             <summary>
             Cache with no specific lifetime, default GetAndFetch mode but with or without invalidation on error
             </summary>
             <param name="shouldInvalidateOnError">Should invalidate on error</param>
         </member>
-        <member name="M:Apizr.Caching.CacheAttributeBase.#ctor(Apizr.Caching.CacheMode,System.String)">
+        <member name="M:Apizr.Caching.Attributes.CacheAttributeBase.#ctor(Apizr.Caching.CacheMode,System.String)">
             <summary>
             Cache with a specific cache and mode specific lifetime, but no invalidation on error
             </summary>
             <param name="mode">GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</param>
             <param name="lifeSpanRepresentation">TimeSpan representation to parse</param>
         </member>
-        <member name="M:Apizr.Caching.CacheAttributeBase.#ctor(Apizr.Caching.CacheMode,System.Boolean)">
+        <member name="M:Apizr.Caching.Attributes.CacheAttributeBase.#ctor(Apizr.Caching.CacheMode,System.Boolean)">
             <summary>
             Cache with a specific cache and invalidation on error, but no specific lifetime
             </summary>
             <param name="mode">GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</param>
             <param name="shouldInvalidateOnError">Should invalidate on error</param>
         </member>
-        <member name="M:Apizr.Caching.CacheAttributeBase.#ctor(System.TimeSpan,System.Boolean)">
+        <member name="M:Apizr.Caching.Attributes.CacheAttributeBase.#ctor(System.TimeSpan,System.Boolean)">
             <summary>
             Cache with a specific lifetime and invalidation on error, but default GetAndFetch mode
             </summary>
             <param name="lifeSpan">This specific caching lifetime</param>
             <param name="shouldInvalidateOnError">Should invalidate on error</param>
         </member>
-        <member name="M:Apizr.Caching.CacheAttributeBase.#ctor(Apizr.Caching.CacheMode,System.String,System.Boolean)">
+        <member name="M:Apizr.Caching.Attributes.CacheAttributeBase.#ctor(Apizr.Caching.CacheMode,System.String,System.Boolean)">
             <summary>
             Cache with a specific cache mode, a specific lifetime and invalidation on error
             </summary>
@@ -196,23 +210,17 @@
             <param name="lifeSpanRepresentation">This specific caching lifetime</param>
             <param name="shouldInvalidateOnError">Should invalidate on error</param>
         </member>
-        <member name="T:Apizr.Caching.CacheItAttribute">
-            <summary>
-            Tells Apizr to cache all methods returning result when decorating an interface or a specific one when decorating a method
-            You have to provide an <typeparamref name="T:Apizr.Caching.ICacheHandler"/> mapping implementation to Apizr to use this feature
-            </summary>
-        </member>
-        <member name="T:Apizr.Caching.CacheKeyAttribute">
+        <member name="T:Apizr.Caching.Attributes.CacheKeyAttribute">
             <summary>
             Tells Apizr the key to cache value at
             </summary>
         </member>
-        <member name="M:Apizr.Caching.CacheKeyAttribute.#ctor">
+        <member name="M:Apizr.Caching.Attributes.CacheKeyAttribute.#ctor">
             <summary>
             The decorated parameter will be used as cache key (should be primitive otherwise ToString() method will be used, unless providing a property name)
             </summary>
         </member>
-        <member name="M:Apizr.Caching.CacheKeyAttribute.#ctor(System.String)">
+        <member name="M:Apizr.Caching.Attributes.CacheKeyAttribute.#ctor(System.String)">
             <summary>
             If you use non primitive type (like your ModelClass object) as Cache Primary key you should provide 
             property name of primitive primary Id, otherwise ToString() method will be used.
@@ -240,7 +248,7 @@
             Implement it to provide some caching features to Apizr
             </summary>
         </member>
-        <member name="M:Apizr.Caching.ICacheHandler.Set(System.String,System.Object,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
+        <member name="M:Apizr.Caching.ICacheHandler.SetAsync(System.String,System.Object,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
             <summary>
             Map Apizr cache saving method to your cache handler method
             </summary>
@@ -250,7 +258,7 @@
             <param name="cancellationToken">An optional cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Caching.ICacheHandler.Get``1(System.String,System.Threading.CancellationToken)">
+        <member name="M:Apizr.Caching.ICacheHandler.GetAsync``1(System.String,System.Threading.CancellationToken)">
             <summary>
             Map Apizr cache getting method to your cache handler method
             </summary>
@@ -259,7 +267,7 @@
             <param name="cancellationToken">An optional cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Caching.ICacheHandler.Remove(System.String,System.Threading.CancellationToken)">
+        <member name="M:Apizr.Caching.ICacheHandler.RemoveAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Map Apizr cache removing method to your cache handler method
             </summary>
@@ -267,11 +275,594 @@
             <param name="cancellationToken">An optional cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Caching.ICacheHandler.Clear(System.Threading.CancellationToken)">
+        <member name="M:Apizr.Caching.ICacheHandler.ClearAsync(System.Threading.CancellationToken)">
             <summary>
             Map Apizr cache clearing method to your cache handler method
             </summary>
             <param name="cancellationToken">An optional cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="P:Apizr.Configuring.Common.IApizrCommonOptions.LoggerFactoryFactory">
+            <summary>
+            The LoggerFactory factory (I know, I know...)
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory">
+            <summary>
+            Policy registry factory
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Common.IApizrCommonOptions.RefitSettingsFactory">
+            <summary>
+            Refit settings factory
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Common.IApizrCommonOptions.ConnectivityHandlerFactory">
+            <summary>
+            Connectivity handler factory
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Common.IApizrCommonOptions.CacheHandlerFactory">
+            <summary>
+            Cache handler factory
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Common.IApizrCommonOptions.MappingHandlerFactory">
+            <summary>
+            Mapping handler factory
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Common.IApizrCommonOptionsBase">
+            <summary>
+            Common options
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Common.IApizrCommonOptionsBase.RefitSettings">
+            <summary>
+            Refit settings
+            </summary>
+        </member>
+        <member name="M:Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry{System.String})">
+            <summary>
+            Provide a policy registry
+            </summary>
+            <param name="policyRegistry">A policy registry instance</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithPolicyRegistry(System.Func{Polly.Registry.IReadOnlyPolicyRegistry{System.String}})">
+            <summary>
+            Provide a policy registry
+            </summary>
+            <param name="policyRegistryFactory">A policy registry instance factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithRefitSettings(System.Func{Refit.RefitSettings})">
+            <summary>
+            Provide some Refit specific settings
+            </summary>
+            <param name="refitSettingsFactory">A <see cref="T:Refit.RefitSettings"/> instance factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithConnectivityHandler(System.Func{Apizr.Connecting.IConnectivityHandler})">
+            <summary>
+            Provide a connectivity handler
+            </summary>
+            <param name="connectivityHandlerFactory">An <see cref="T:Apizr.Connecting.IConnectivityHandler"/> mapping implementation instance factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithCacheHandler(System.Func{Apizr.Caching.ICacheHandler})">
+            <summary>
+            Provide a cache handler to cache data
+            </summary>
+            <param name="cacheHandlerFactory">An <see cref="T:Apizr.Caching.ICacheHandler"/> mapping implementation instance factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithLoggerFactory(Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Provide a logger factory
+            </summary>
+            <param name="loggerFactory">The logger factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithLoggerFactory(System.Func{Microsoft.Extensions.Logging.ILoggerFactory})">
+            <summary>
+            Provide a logger factory
+            </summary>
+            <param name="loggerFactory">The logger factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithMappingHandler(System.Func{Apizr.Mapping.IMappingHandler})">
+            <summary>
+            Provide a mapping handler to map entities
+            </summary>
+            <param name="mappingHandlerFactory">An <see cref="T:Apizr.Mapping.IMappingHandler"/> mapping implementation instance factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Common.IApizrGlobalCommonOptionsBuilderBase`2.WithRefitSettings(Refit.RefitSettings)">
+            <summary>
+            Provide some Refit specific settings
+            </summary>
+            <param name="refitSettings">A <see cref="T:Refit.RefitSettings"/> instance</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Common.IApizrGlobalCommonOptionsBuilderBase`2.WithConnectivityHandler(Apizr.Connecting.IConnectivityHandler)">
+            <summary>
+            Provide a connectivity handler to check connectivity before sending a request
+            </summary>
+            <param name="connectivityHandler">An <see cref="T:Apizr.Connecting.IConnectivityHandler"/> mapping implementation instance</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Common.IApizrGlobalCommonOptionsBuilderBase`2.WithConnectivityHandler(System.Func{System.Boolean})">
+            <summary>
+            Provide a function to invoke while checking connectivity
+            </summary>
+            <param name="connectivityCheckingFunction">A function to invoke while checking connectivity</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Common.IApizrGlobalCommonOptionsBuilderBase`2.WithCacheHandler(Apizr.Caching.ICacheHandler)">
+            <summary>
+            Provide a cache handler to cache data
+            </summary>
+            <param name="cacheHandler">An <see cref="T:Apizr.Caching.ICacheHandler"/> mapping implementation instance</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Common.IApizrGlobalCommonOptionsBuilderBase`2.WithMappingHandler(Apizr.Mapping.IMappingHandler)">
+            <summary>
+            Provide a mapping handler to map entities
+            </summary>
+            <param name="mappingHandler">An <see cref="T:Apizr.Mapping.IMappingHandler"/> mapping implementation instance</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Configuring.IApizrOptions`1">
+            <summary>
+            Options dedicated to <typeparamref name="TWebApi"/>
+            </summary>
+            <typeparam name="TWebApi"></typeparam>
+        </member>
+        <member name="T:Apizr.Configuring.IApizrOptionsBase">
+            <summary>
+            Specific options
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.IApizrOptionsBuilder`2">
+            <summary>
+            The options builder
+            </summary>
+        </member>
+        <member name="M:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithBaseAddress(System.String)">
+            <summary>
+            Define your web api base address (could be defined with WebApiAttribute)
+            </summary>
+            <param name="baseAddress">Your web api base address</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithBaseAddress(System.Uri)">
+            <summary>
+            Define your web api base address (could be defined with WebApiAttribute)
+            </summary>
+            <param name="baseAddress">Your web api base address</param>
+            <returns></returns>
+        </member>
+        <member name="P:Apizr.Configuring.Proper.IApizrProperOptions.BaseAddressFactory">
+            <summary>
+            Base address factory
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Proper.IApizrProperOptions.LoggerFactory">
+            <summary>
+            The Logger factory
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Proper.IApizrProperOptionsBase">
+            <summary>
+            Common options
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType">
+            <summary>
+            Web api interface type
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Proper.IApizrProperOptionsBase.BaseAddress">
+            <summary>
+            Base address
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys">
+            <summary>
+            Policy keys from the registry
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger">
+            <summary>
+            The logger instance
+            </summary>
+        </member>
+        <member name="M:Apizr.Configuring.Proper.IApizrProperOptionsBuilder`2.WithBaseAddress(System.Func{System.String})">
+            <summary>
+            Define your web api base address (could be defined with WebApiAttribute)
+            </summary>
+            <param name="baseAddressFactory">Your web api base address factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Proper.IApizrProperOptionsBuilder`2.WithBaseAddress(System.Func{System.Uri})">
+            <summary>
+            Define your web api base address (could be defined with WebApiAttribute)
+            </summary>
+            <param name="baseAddressFactory">Your web api base address factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``1">
+            <summary>
+            Get a Crud manager instance for an entity type
+            </summary>
+            <typeparam name="T">The managed entity type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``2">
+            <summary>
+            Get a Crud manager instance for an entity type with a specific key type
+            </summary>
+            <typeparam name="T">The managed entity type</typeparam>
+            <typeparam name="TKey">The entity's key type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``3">
+            <summary>
+            Get a Crud manager instance for an entity type with a specific key type and ReadAll result type
+            </summary>
+            <typeparam name="T">The managed entity type</typeparam>
+            <typeparam name="TKey">The entity's key type</typeparam>
+            <typeparam name="TReadAllResult">The ReadAll request result type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``4">
+            <summary>
+            Get a Crud manager instance for an entity type with a specific key type, ReadAll result type and ReadAll params type
+            </summary>
+            <typeparam name="T">The managed entity type</typeparam>
+            <typeparam name="TKey">The entity's key type</typeparam>
+            <typeparam name="TReadAllResult">The ReadAll request result type</typeparam>
+            <typeparam name="TReadAllParams">The ReadAll request params type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetFor``1">
+            <summary>
+            Get an api manager instance
+            </summary>
+            <typeparam name="TWebApi">The managed api type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``1(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)">
+            <summary>
+            Try to get a Crud manager instance for an entity type
+            </summary>
+            <typeparam name="T">The managed entity type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``2(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)">
+            <summary>
+            Try to get a Crud manager instance for an entity type with a specific key type
+            </summary>
+            <typeparam name="T">The managed entity type</typeparam>
+            <typeparam name="TKey">The entity's key type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``3(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}}@)">
+            <summary>
+            Try to get a Crud manager instance for an entity type with a specific key type and ReadAll result type
+            </summary>
+            <typeparam name="T">The managed entity type</typeparam>
+            <typeparam name="TKey">The entity's key type</typeparam>
+            <typeparam name="TReadAllResult">The ReadAll request result type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``4(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}}@)">
+            <summary>
+            Try to get a Crud manager instance for an entity type with a specific key type, ReadAll result type and ReadAll params type
+            </summary>
+            <typeparam name="T">The managed entity type</typeparam>
+            <typeparam name="TKey">The entity's key type</typeparam>
+            <typeparam name="TReadAllResult">The ReadAll request result type</typeparam>
+            <typeparam name="TReadAllParams">The ReadAll request params type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetFor``1(Apizr.IApizrManager{``0}@)">
+            <summary>
+            Try to get an api manager instance
+            </summary>
+            <typeparam name="TWebApi">The managed api type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="P:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.Count">
+            <summary>
+            Managers count
+            </summary>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``1">
+            <summary>
+            Check if registry contains a manager for <typeparamref name="T"/> entity type
+            </summary>
+            <typeparam name="T">The entity type to manage</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``2">
+            <summary>
+            Check if registry contains a manager for <typeparamref name="T"/> entity type with <typeparamref name="TKey"/> key type
+            </summary>
+            <typeparam name="T">The entity type to manage</typeparam>
+            <typeparam name="TKey">The entity key type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``3">
+            <summary>
+            Check if registry contains a manager for <typeparamref name="T"/> entity type with <typeparamref name="TKey"/> key type and <typeparamref name="TReadAllResult"/> ReadAll result type
+            </summary>
+            <typeparam name="T">The entity type to manage</typeparam>
+            <typeparam name="TKey">The entity key type</typeparam>
+            <typeparam name="TReadAllResult">The ReadAll result type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``4">
+            <summary>
+            Check if registry contains a manager for <typeparamref name="T"/> entity type with <typeparamref name="TKey"/> key type,
+            <typeparamref name="TReadAllResult"/> ReadAll result type and <typeparamref name="TReadAllParams"/> ReadAll params type
+            </summary>
+            <typeparam name="T">The entity type to manage</typeparam>
+            <typeparam name="TKey">The entity key type</typeparam>
+            <typeparam name="TReadAllResult">The ReadAll result type</typeparam>
+            <typeparam name="TReadAllParams">The ReadAll params type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsFor``1">
+            <summary>
+            Check if registry contains a manager for <typeparamref name="TWebApi"/> api type
+            </summary>
+            <typeparam name="TWebApi">The api type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilder`3.AddCrudFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptionsBase,``4},System.Action{`2})">
+            <summary>
+            Create a <typeparamref name="TApizrManager"/> instance for a managed crud api for <typeparamref name="T"/> object (class), 
+            with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
+            and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
+            </summary>
+            <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
+            <typeparam name="TKey">The object key type (primitive)</typeparam>
+            <typeparam name="TApizrManager">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation</typeparam>
+            <typeparam name="TReadAllResult">"ReadAll" query result type
+            (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
+            <typeparam name="TReadAllParams">ReadAll query parameters</typeparam>
+            <param name="apizrManagerFactory">The custom manager implementation instance factory</param>
+            <param name="properOptionsBuilder">The builder defining some api proper options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilder`3.AddFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptions{``0},``1},System.Action{`2})">
+            <summary>
+            Create a <typeparamref name="TApizrManager"/> instance for a managed <typeparamref name="TWebApi"/>
+            </summary>
+            <typeparam name="TWebApi">The web api interface to manage</typeparam>
+            <typeparam name="TApizrManager">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation</typeparam>
+            <param name="apizrManagerFactory">The custom manager implementation instance factory</param>
+            <param name="properOptionsBuilder">The builder defining some api proper options</param>
+            <returns></returns>
+        </member>
+        <member name="P:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.ApizrRegistry">
+            <summary>
+            Apizr registry
+            </summary>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.AddCrudFor``1(System.Action{`2})">
+            <summary>
+            Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
+            with key of type <see cref="T:System.Int32"/> and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            and ReadAll query parameters of type IDictionary{string,object}
+            </summary>
+            <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
+            <param name="optionsBuilder">The builder defining some api proper options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.AddCrudFor``2(System.Action{`2})">
+            <summary>
+            Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
+            with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            and ReadAll query parameters of type IDictionary{string,object}
+            </summary>
+            <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
+            <typeparam name="TKey">The object key type (primitive)</typeparam>
+            <param name="optionsBuilder">The builder defining some api proper options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.AddCrudFor``3(System.Action{`2})">
+            <summary>
+            Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
+            with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
+            and ReadAll query parameters of type IDictionary{string,object}
+            </summary>
+            <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
+            <typeparam name="TKey">The object key type (primitive)</typeparam>
+            <typeparam name="TReadAllResult">"ReadAll" query result type
+            (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
+            <param name="optionsBuilder">The builder defining some api proper options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.AddCrudFor``4(System.Action{`2})">
+            <summary>
+            Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
+            with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
+            and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
+            </summary>
+            <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
+            <typeparam name="TKey">The object key type (primitive)</typeparam>
+            <typeparam name="TReadAllResult">"ReadAll" query result type
+            (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
+            <typeparam name="TReadAllParams">ReadAll query parameters</typeparam>
+            <param name="optionsBuilder">The builder defining some api proper options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.AddFor``1(System.Action{`2})">
+            <summary>
+            Create a <see cref="T:Apizr.ApizrManager`1"/> instance
+            </summary>
+            <typeparam name="TWebApi">The web api interface to manage</typeparam>
+            <param name="optionsBuilder">The builder defining some api proper options</param>
+            <returns></returns>
+        </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.ApizrOptions">
+            <summary>
+            Apizr common options
+            </summary>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHttpClientHandler(System.Net.Http.HttpClientHandler)">
+            <summary>
+            Provide a custom HttpClientHandler
+            </summary>
+            <param name="httpClientHandler">An <see cref="T:System.Net.Http.HttpClientHandler"/> instance</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <summary>
+            Provide a method to refresh the authorization token when needed
+            </summary>
+            <param name="refreshTokenFactory">Refresh token method called when expired or empty</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.AddDelegatingHandler(System.Net.Http.DelegatingHandler)">
+            <summary>
+            Add a custom delegating handler
+            </summary>
+            <param name="delegatingHandler">A delegating handler</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+            Configure logging level for the api
+            </summary>
+            <param name="httpTracerMode"></param>
+            <param name="trafficVerbosity">Http traffic tracing verbosity (default: All)</param>
+            <param name="logLevel">Log level to apply while writing (default: Information)</param>
+            <returns></returns>
+        </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrSharedOptions.HttpTracerModeFactory">
+            <summary>
+            Http traffic tracing mode factory
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrSharedOptions.TrafficVerbosityFactory">
+            <summary>
+            Http traffic tracing verbosity factory
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrSharedOptions.LogLevelFactory">
+            <summary>
+            Log level factory
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrSharedOptions.HttpClientHandlerFactory">
+            <summary>
+            HttpClientHandler factory
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrSharedOptions.DelegatingHandlersFactories">
+            <summary>
+            Delegating handlers factories
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode">
+            <summary>
+            Http traffic tracing mode
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.TrafficVerbosity">
+            <summary>
+            Http traffic tracing verbosity
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevel">
+            <summary>
+            Log level while writing
+            </summary>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithHttpClientHandler(System.Func{System.Net.Http.HttpClientHandler})">
+            <summary>
+            Provide a custom HttpClientHandler
+            </summary>
+            <param name="httpClientHandlerFactory">An <see cref="T:System.Net.Http.HttpClientHandler"/> instance factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,``0})">
+            <summary>
+            Provide your own <see cref="T:Apizr.Authenticating.AuthenticationHandlerBase"/> implementation factory
+            </summary>
+            <typeparam name="TAuthenticationHandler">Your <see cref="T:Apizr.Authenticating.AuthenticationHandlerBase"/> implementation</typeparam>
+            <param name="authenticationHandlerFactory">A <typeparamref name="TAuthenticationHandler"/> instance factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+            <summary>
+            Provide your own settings management and token management services
+            </summary>
+            <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
+            <typeparam name="TTokenService">Your token management service (refreshing token)</typeparam>
+            <param name="settingsService">A <typeparamref name="TSettingsService"/> instance</param>
+            <param name="tokenProperty">The token property used for saving</param>
+            <param name="tokenService">A <typeparamref name="TTokenService"/> instance</param>
+            <param name="refreshTokenMethod">The method called to refresh the token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+            <summary>
+            Provide your own settings management and token management services
+            </summary>
+            <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
+            <typeparam name="TTokenService">Your token management service (refreshing token)</typeparam>
+            <param name="settingsServiceFactory">A <typeparamref name="TSettingsService"/> instance factory</param>
+            <param name="tokenProperty">The token property used for saving</param>
+            <param name="tokenServiceFactory">A <typeparamref name="TTokenService"/> instance factory</param>
+            <param name="refreshTokenMethod">The method called to refresh the token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <summary>
+            Provide your own settings management service and a method to refresh the token
+            </summary>
+            <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
+            <param name="settingsService">A <typeparamref name="TSettingsService"/> instance</param>
+            <param name="tokenProperty">The token property used for saving</param>
+            <param name="refreshTokenFactory">The method factory called to refresh the token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <summary>
+            Provide your own settings management service and a method to refresh the token
+            </summary>
+            <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
+            <param name="settingsServiceFactory">A <typeparamref name="TSettingsService"/> instance factory</param>
+            <param name="tokenProperty">The token property used for saving</param>
+            <param name="refreshTokenFactory">The method factory called to refresh the token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler})">
+            <summary>
+            Add a custom delegating handler
+            </summary>
+            <param name="delegatingHandlerFactory">A delegating handler factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,System.Net.Http.DelegatingHandler})">
+            <summary>
+            Add a custom delegating handler
+            </summary>
+            <param name="delegatingHandlerFactory">A delegating handler factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel})">
+            <summary>
+            Configure logging level for the api
+            </summary>
+            <param name="httpTracerModeFactory">Http traffic tracing mode</param>
+            <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
+            <param name="logLevelFactory">Log level factory</param>
             <returns></returns>
         </member>
         <member name="T:Apizr.Connecting.IConnectivityHandler">
@@ -288,7 +879,7 @@
         </member>
         <member name="T:Apizr.IApizrManager`1">
             <summary>
-            The manager encapsulating <see cref="!:TWebApi"/>'s task
+            The manager encapsulating <typeparamref name="TWebApi"/>'s task
             </summary>
             <typeparam name="TWebApi">The web api interface to manage</typeparam>
         </member>
@@ -297,68 +888,297 @@
             Original Refit Api without any Apizr management. You should use ExecuteAsync instead to get all the Apizr goodness :)
             </summary>
         </member>
-        <member name="M:Apizr.IApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}})">
+        <member name="P:Apizr.IApizrManager`1.Options">
             <summary>
-            Execute a managed <see cref="!:TWebApi"/>'s task
+            Basic Apizr options
             </summary>
-            <param name="executeApiMethod">The <see cref="!:TWebApi"/>'s task to execute</param>
+        </member>
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}},System.Action{System.Exception})">
+            <summary>
+            Execute a managed <typeparamref name="TWebApi"/>'s task
+            </summary>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+            <param name="onException">Handle exception (default: null = throwing)</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.IApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{`0,Apizr.Mapping.IMappingHandler,System.Threading.Tasks.Task}})">
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task}},``0,System.Action{System.Exception})">
             <summary>
-            Execute a managed <see cref="!:TWebApi"/>'s task
+            Execute a managed <typeparamref name="TWebApi"/>'s task
             </summary>
-            <param name="executeApiMethod">The <see cref="!:TWebApi"/>'s task to execute</param>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+            <param name="modelData">The model data to map</param>
+            <param name="onException">Handle exception (default: null = throwing)</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.IApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},System.Threading.CancellationToken)">
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},System.Threading.CancellationToken,System.Action{System.Exception})">
             <summary>
-            Execute a managed <see cref="!:TWebApi"/>'s task
+            Execute a managed <typeparamref name="TWebApi"/>'s task
             </summary>
-            <param name="executeApiMethod">The <see cref="!:TWebApi"/>'s task to execute</param>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
             <param name="cancellationToken">A cancellation token</param>
+            <param name="onException">Handle exception (default: null = throwing)</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.IApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,Apizr.Mapping.IMappingHandler,System.Threading.Tasks.Task}},System.Threading.CancellationToken)">
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task}},Polly.Context,System.Action{System.Exception})">
             <summary>
-            Execute a managed <see cref="!:TWebApi"/>'s task
+            Execute a managed <typeparamref name="TWebApi"/>'s task
             </summary>
-            <param name="executeApiMethod">The <see cref="!:TWebApi"/>'s task to execute</param>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+            <param name="context">The Polly Context to pass through it all</param>
+            <param name="onException">Handle exception (default: null = throwing)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task}},``0,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <summary>
+            Execute a managed <typeparamref name="TWebApi"/>'s task
+            </summary>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+            <param name="modelData">The model data to map</param>
             <param name="cancellationToken">A cancellation token</param>
+            <param name="onException">Handle exception (default: null = throwing)</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}})">
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,``1,System.Threading.Tasks.Task}},``0,Polly.Context,System.Action{System.Exception})">
             <summary>
-            Execute a managed <see cref="!:TWebApi"/>'s task
+            Execute a managed <typeparamref name="TWebApi"/>'s task
             </summary>
-            <typeparam name="TResult">The <see cref="!:TWebApi"/>'s task result</typeparam>
-            <param name="executeApiMethod">The <see cref="!:TWebApi"/>'s task to execute</param>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+            <param name="modelData">The model data to map</param>
+            <param name="context">The Polly Context to pass through it all</param>
+            <param name="onException">Handle exception (default: null = throwing)</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{`0,Apizr.Mapping.IMappingHandler,System.Threading.Tasks.Task{``0}}})">
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},Polly.Context,System.Threading.CancellationToken,System.Action{System.Exception})">
             <summary>
-            Execute a managed <see cref="!:TWebApi"/>'s task
+            Execute a managed <typeparamref name="TWebApi"/>'s task
             </summary>
-            <typeparam name="TResult">The <see cref="!:TWebApi"/>'s task result</typeparam>
-            <param name="executeApiMethod">The <see cref="!:TWebApi"/>'s task to execute with mapping</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``0}}},System.Threading.CancellationToken)">
-            <summary>
-            Execute a managed <see cref="!:TWebApi"/>'s task
-            </summary>
-            <typeparam name="TResult">The <see cref="!:TWebApi"/>'s task result</typeparam>
-            <param name="executeApiMethod">The <see cref="!:TWebApi"/>'s task to execute</param>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+            <param name="context">The Polly Context to pass through it all</param>
             <param name="cancellationToken">A cancellation token</param>
+            <param name="onException">Handle exception (default: null = throwing)</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,Apizr.Mapping.IMappingHandler,System.Threading.Tasks.Task{``0}}},System.Threading.CancellationToken)">
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task}},``0,Polly.Context,System.Threading.CancellationToken,System.Action{System.Exception})">
             <summary>
-            Execute a managed <see cref="!:TWebApi"/>'s task
+            Execute a managed <typeparamref name="TWebApi"/>'s task
             </summary>
-            <typeparam name="TResult">The <see cref="!:TWebApi"/>'s task result</typeparam>
-            <param name="executeApiMethod">The <see cref="!:TWebApi"/>'s task to execute</param>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+            <param name="modelData">The model data to map</param>
+            <param name="context">The Polly Context to pass through it all</param>
             <param name="cancellationToken">A cancellation token</param>
+            <param name="onException">Handle exception (default: null = throwing)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}},System.Boolean,System.Action{System.Exception})">
+            <summary>
+            Execute a managed <typeparamref name="TWebApi"/>'s task
+            </summary>
+            <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+            <param name="clearCache">Clear request cache before executing (default: false)</param>
+            <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+            </summary>
+            <typeparam name="TModelResultData">The mapped model result type</typeparam>
+            <typeparam name="TApiResultData">The api result type</typeparam>
+            <typeparam name="TApiRequestData">The mapped api request data type</typeparam>
+            <typeparam name="TModelRequestData">The model request data type</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+            <param name="modelRequestData">The model request data to map</param>
+            <param name="clearCache">Clear request cache before executing (default: false)</param>
+            <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+            </summary>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+            <param name="modelData">The model data to map</param>
+            <param name="clearCache">Clear request cache before executing (default: false)</param>
+            <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``1}}},System.Boolean,System.Action{System.Exception})">
+            <summary>
+            Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+            </summary>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+            <param name="clearCache">Clear request cache before executing (default: false)</param>
+            <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``0}}},System.Boolean,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <summary>
+            Execute a managed <typeparamref name="TWebApi"/>'s task
+            </summary>
+            <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+            <param name="clearCache">Clear request cache before executing (default: false)</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{``0}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            Execute a managed <typeparamref name="TWebApi"/>'s task
+            </summary>
+            <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+            <param name="context">The Polly Context to pass through it all</param>
+            <param name="clearCache">Clear request cache before executing (default: false)</param>
+            <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Boolean,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <summary>
+            Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+            </summary>
+            <typeparam name="TModelResultData">The mapped model result type</typeparam>
+            <typeparam name="TApiResultData">The api result type</typeparam>
+            <typeparam name="TApiRequestData">The mapped api request data type</typeparam>
+            <typeparam name="TModelRequestData">The model request data type</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+            <param name="modelRequestData">The model request data to map</param>
+            <param name="clearCache">Clear request cache before executing (default: false)</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Boolean,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <summary>
+            Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+            </summary>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+            <param name="modelData">The model data to map</param>
+            <param name="clearCache">Clear request cache before executing (default: false)</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``1}}},System.Boolean,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <summary>
+            Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+            </summary>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+            <param name="clearCache">Clear request cache before executing (default: false)</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,``2,System.Threading.Tasks.Task{``1}}},``3,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+            </summary>
+            <typeparam name="TModelResultData">The mapped model result type</typeparam>
+            <typeparam name="TApiResultData">The api result type</typeparam>
+            <typeparam name="TApiRequestData">The mapped api request data type</typeparam>
+            <typeparam name="TModelRequestData">The model request data type</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+            <param name="modelRequestData">The model request data to map</param>
+            <param name="context">The Polly Context to pass through it all</param>
+            <param name="clearCache">Clear request cache before executing (default: false)</param>
+            <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,``1,System.Threading.Tasks.Task{``1}}},``0,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+            </summary>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+            <param name="modelData">The model data to map</param>
+            <param name="context">The Polly Context to pass through it all</param>
+            <param name="clearCache">Clear request cache before executing (default: false)</param>
+            <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{``1}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+            </summary>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+            <param name="context">The Polly Context to pass through it all</param>
+            <param name="clearCache">Clear request cache before executing (default: false)</param>
+            <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``0}}},Polly.Context,System.Boolean,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <summary>
+            Execute a managed <typeparamref name="TWebApi"/>'s task
+            </summary>
+            <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+            <param name="context">The Polly Context to pass through it all</param>
+            <param name="clearCache">Clear request cache before executing (default: false)</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,``2,System.Threading.Tasks.Task{``1}}},``3,Polly.Context,System.Boolean,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <summary>
+            Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+            </summary>
+            <typeparam name="TModelResultData">The mapped model result type</typeparam>
+            <typeparam name="TApiResultData">The api result type</typeparam>
+            <typeparam name="TApiRequestData">The mapped api request data type</typeparam>
+            <typeparam name="TModelRequestData">The model request data type</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+            <param name="modelRequestData">The model request data to map</param>
+            <param name="context">The Polly Context to pass through it all</param>
+            <param name="clearCache">Clear request cache before executing (default: false)</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task{``1}}},``0,Polly.Context,System.Boolean,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <summary>
+            Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+            </summary>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+            <param name="modelData">The model data to map</param>
+            <param name="context">The Polly Context to pass through it all</param>
+            <param name="clearCache">Clear request cache before executing (default: false)</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``1}}},Polly.Context,System.Boolean,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <summary>
+            Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+            </summary>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+            <param name="context">The Polly Context to pass through it all</param>
+            <param name="clearCache">Clear request cache before executing (default: false)</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.IApizrManager`1.ClearCacheAsync(System.Threading.CancellationToken)">
@@ -372,387 +1192,194 @@
             <summary>
             Clear the cache of a specific request
             </summary>
-            <typeparam name="TResult">The <see cref="!:TWebApi"/>'s task result</typeparam>
-            <param name="executeApiMethod">The specific <see cref="!:TWebApi"/>'s task to clear cache for</param>
+            <typeparam name="TResult">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+            <param name="executeApiMethod">The specific <typeparamref name="TWebApi"/>'s task to clear cache for</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.IApizrManager`1.ClearCacheAsync``1(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``0}}},System.Threading.CancellationToken)">
             <summary>
             Clear the cache of a specific request
             </summary>
-            <typeparam name="TResult">The <see cref="!:TWebApi"/>'s task result</typeparam>
-            <param name="executeApiMethod">The specific <see cref="!:TWebApi"/>'s task to clear cache for</param>
+            <typeparam name="TResult">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+            <param name="executeApiMethod">The specific <typeparamref name="TWebApi"/>'s task to clear cache for</param>
             <param name="cancellationToken">A cancellation token</param>
             <returns></returns>
         </member>
-        <member name="T:Apizr.IApizrOptions">
+        <member name="T:Apizr.ILazyFactory`1">
             <summary>
-            Options
+            A lazy instance
+            </summary>
+            <typeparam name="TInstance">Type of your instance</typeparam>
+        </member>
+        <member name="P:Apizr.ILazyFactory`1.Value">
+            <summary>
+            The lazy instance
             </summary>
         </member>
-        <member name="P:Apizr.IApizrOptions.BaseAddressFactory">
+        <member name="T:Apizr.Logging.Attributes.LogAttribute">
             <summary>
-            Base address factory
+            Tells Apizr to trace and log HTTP(s) traffic
             </summary>
         </member>
-        <member name="P:Apizr.IApizrOptions.HttpTracerVerbosityFactory">
+        <member name="T:Apizr.Logging.Attributes.LogAttributeBase">
             <summary>
-            Request tracing verbosity factory
+            Tells Apizr to trace and log HTTP(s) traffic
             </summary>
         </member>
-        <member name="P:Apizr.IApizrOptions.ApizrVerbosityFactory">
+        <member name="M:Apizr.Logging.Attributes.LogAttributeBase.#ctor">
             <summary>
-            Apizr executions tracing verbosity factory
+            Trace All http traffic and log Apizr execution steps at Information log level
             </summary>
         </member>
-        <member name="P:Apizr.IApizrOptions.HttpClientHandlerFactory">
+        <member name="M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts)">
             <summary>
-            HttpClientHandler factory
-            </summary>
-        </member>
-        <member name="P:Apizr.IApizrOptions.PolicyRegistryFactory">
-            <summary>
-            Policy registry factory
-            </summary>
-        </member>
-        <member name="P:Apizr.IApizrOptions.RefitSettingsFactory">
-            <summary>
-            Refit settings factory
-            </summary>
-        </member>
-        <member name="P:Apizr.IApizrOptions.ConnectivityHandlerFactory">
-            <summary>
-            Connectivity handler factory
-            </summary>
-        </member>
-        <member name="P:Apizr.IApizrOptions.CacheHandlerFactory">
-            <summary>
-            Cache handler factory
-            </summary>
-        </member>
-        <member name="P:Apizr.IApizrOptions.LoggerFactory">
-            <summary>
-            Log handler factory
-            </summary>
-        </member>
-        <member name="P:Apizr.IApizrOptions.MappingHandlerFactory">
-            <summary>
-            Mapping handler factory
-            </summary>
-        </member>
-        <member name="P:Apizr.IApizrOptions.DelegatingHandlersFactories">
-            <summary>
-            Delegating handlers factories
-            </summary>
-        </member>
-        <member name="T:Apizr.IApizrOptionsBase">
-            <summary>
-            Options
-            </summary>
-        </member>
-        <member name="P:Apizr.IApizrOptionsBase.WebApiType">
-            <summary>
-            Web api interface type
-            </summary>
-        </member>
-        <member name="P:Apizr.IApizrOptionsBase.BaseAddress">
-            <summary>
-            Base address
-            </summary>
-        </member>
-        <member name="P:Apizr.IApizrOptionsBase.HttpTracerVerbosity">
-            <summary>
-            Request tracing verbosity
-            </summary>
-        </member>
-        <member name="P:Apizr.IApizrOptionsBase.ApizrVerbosity">
-            <summary>
-            Apizr executions tracing verbosity
-            </summary>
-        </member>
-        <member name="P:Apizr.IApizrOptionsBase.PolicyRegistryKeys">
-            <summary>
-            Policy keys from the registry
-            </summary>
-        </member>
-        <member name="T:Apizr.IApizrOptionsBuilder">
-            <summary>
-            The options builder
-            </summary>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithBaseAddress(System.Func{System.String})">
-            <summary>
-            Define your web api base address (could be defined with WebApiAttribute)
-            </summary>
-            <param name="baseAddressFactory">Your web api base address factory</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithBaseAddress(System.Func{System.Uri})">
-            <summary>
-            Define your web api base address (could be defined with WebApiAttribute)
-            </summary>
-            <param name="baseAddressFactory">Your web api base address factory</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithLoggingVerbosity(System.Func{HttpTracer.HttpMessageParts},System.Func{Apizr.Logging.ApizrLogLevel})">
-            <summary>
-            Define http traces and Apizr logs verbosity (could be defined with TraceAttribute)
-            </summary>
-            <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
-            <param name="apizrVerbosityFactory">Apizr execution steps verbosity factory</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithHttpClientHandler(System.Net.Http.HttpClientHandler)">
-            <summary>
-            Provide a custom HttpClientHandler
-            </summary>
-            <param name="httpClientHandler">An <typeparamref name="T:System.Net.Http.HttpClientHandler"/> instance</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithHttpClientHandler(System.Func{System.Net.Http.HttpClientHandler})">
-            <summary>
-            Provide a custom HttpClientHandler
-            </summary>
-            <param name="httpClientHandlerFactory">An <typeparamref name="T:System.Net.Http.HttpClientHandler"/> instance factory</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithAuthenticationHandler``1(System.Func{Apizr.Logging.ILogger,Apizr.IApizrOptionsBase,``0})">
-            <summary>
-            Provide your own <typeparamref name="T:Apizr.Authenticating.AuthenticationHandlerBase"/> implementation factory
-            </summary>
-            <typeparam name="TAuthenticationHandler">Your <typeparamref name="T:Apizr.Authenticating.AuthenticationHandlerBase"/> implementation</typeparam>
-            <param name="authenticationHandlerFactory">A <see cref="!:TAuthenticationHandler"/> instance factory</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
-            <summary>
-            Provide your own settings management and token management services
-            </summary>
-            <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
-            <typeparam name="TTokenService">Your token management service (refreshing token)</typeparam>
-            <param name="settingsService">A <see cref="!:TSettingsService"/> instance</param>
-            <param name="tokenProperty">The token property used for saving</param>
-            <param name="tokenService">A <see cref="!:TTokenService"/> instance</param>
-            <param name="refreshTokenMethod">The method called to refresh the token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
-            <summary>
-            Provide your own settings management and token management services
-            </summary>
-            <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
-            <typeparam name="TTokenService">Your token management service (refreshing token)</typeparam>
-            <param name="settingsServiceFactory">A <see cref="!:TSettingsService"/> instance factory</param>
-            <param name="tokenProperty">The token property used for saving</param>
-            <param name="tokenServiceFactory">A <see cref="!:TTokenService"/> instance factory</param>
-            <param name="refreshTokenMethod">The method called to refresh the token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
-            <summary>
-            Provide your own settings management service and a method to refresh the token
-            </summary>
-            <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
-            <param name="settingsService">A <see cref="!:TSettingsService"/> instance</param>
-            <param name="tokenProperty">The token property used for saving</param>
-            <param name="refreshTokenFactory">The method factory called to refresh the token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
-            <summary>
-            Provide your own settings management service and a method to refresh the token
-            </summary>
-            <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
-            <param name="settingsServiceFactory">A <see cref="!:TSettingsService"/> instance factory</param>
-            <param name="tokenProperty">The token property used for saving</param>
-            <param name="refreshTokenFactory">The method factory called to refresh the token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.AddDelegatingHandler(System.Func{Apizr.Logging.ILogger,System.Net.Http.DelegatingHandler})">
-            <summary>
-            Add a custom delegating handler
-            </summary>
-            <param name="delegatingHandlerFactory">A delegating handler factory</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.AddDelegatingHandler(System.Func{Apizr.Logging.ILogger,Apizr.IApizrOptionsBase,System.Net.Http.DelegatingHandler})">
-            <summary>
-            Add a custom delegating handler
-            </summary>
-            <param name="delegatingHandlerFactory">A delegating handler factory</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry{System.String})">
-            <summary>
-            Provide a policy registry
-            </summary>
-            <param name="policyRegistry">A policy registry instance</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithPolicyRegistry(System.Func{Polly.Registry.IReadOnlyPolicyRegistry{System.String}})">
-            <summary>
-            Provide a policy registry
-            </summary>
-            <param name="policyRegistryFactory">A policy registry instance factory</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithRefitSettings(System.Func{Refit.RefitSettings})">
-            <summary>
-            Provide some Refit specific settings
-            </summary>
-            <param name="refitSettingsFactory">A <typeparamref name="T:Refit.RefitSettings"/> instance factory</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithConnectivityHandler(Apizr.Connecting.IConnectivityHandler)">
-            <summary>
-            Provide a connectivity handler to check connectivity before sending a request
-            </summary>
-            <param name="connectivityHandler">An <typeparamref name="T:Apizr.Connecting.IConnectivityHandler"/> mapping implementation instance</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithConnectivityHandler(System.Func{Apizr.Connecting.IConnectivityHandler})">
-            <summary>
-            Provide a connectivity handler
-            </summary>
-            <param name="connectivityHandlerFactory">An <typeparamref name="T:Apizr.Connecting.IConnectivityHandler"/> mapping implementation instance factory</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithCacheHandler(Apizr.Caching.ICacheHandler)">
-            <summary>
-            Provide a cache handler to cache data
-            </summary>
-            <param name="cacheHandler">An <typeparamref name="T:Apizr.Caching.ICacheHandler"/> mapping implementation instance</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithCacheHandler(System.Func{Apizr.Caching.ICacheHandler})">
-            <summary>
-            Provide a cache handler to cache data
-            </summary>
-            <param name="cacheHandlerFactory">An <typeparamref name="T:Apizr.Caching.ICacheHandler"/> mapping implementation instance factory</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithLogger(Apizr.Logging.ILogger)">
-            <summary>
-            Provide a logging handler to log it all
-            </summary>
-            <param name="logger">An <typeparamref name="T:Apizr.Logging.ILogger"/> mapping implementation instance</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithLogger(System.Func{Apizr.Logging.ILogger})">
-            <summary>
-            Provide a logging handler to log it all
-            </summary>
-            <param name="loggerFactory">An <typeparamref name="T:Apizr.Logging.ILogger"/> mapping implementation instance factory</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithMappingHandler(Apizr.Mapping.IMappingHandler)">
-            <summary>
-            Provide a mapping handler to map entities
-            </summary>
-            <param name="mappingHandler">An <typeparamref name="T:Apizr.Mapping.IMappingHandler"/> mapping implementation instance</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilder.WithMappingHandler(System.Func{Apizr.Mapping.IMappingHandler})">
-            <summary>
-            Provide a mapping handler to map entities
-            </summary>
-            <param name="mappingHandlerFactory">An <typeparamref name="T:Apizr.Mapping.IMappingHandler"/> mapping implementation instance factory</param>
-            <returns></returns>
-        </member>
-        <member name="P:Apizr.IApizrOptionsBuilderBase`2.ApizrOptions">
-            <summary>
-            Apizr options
-            </summary>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilderBase`2.WithBaseAddress(System.String)">
-            <summary>
-            Define your web api base address (could be defined with WebApiAttribute)
-            </summary>
-            <param name="baseAddress">Your web api base address</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilderBase`2.WithBaseAddress(System.Uri)">
-            <summary>
-            Define your web api base address (could be defined with WebApiAttribute)
-            </summary>
-            <param name="baseAddress">Your web api base address</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilderBase`2.WithLoggingVerbosity(HttpTracer.HttpMessageParts,Apizr.Logging.ApizrLogLevel)">
-            <summary>
-            Define http traces and Apizr logs verbosity (could be defined with TraceAttribute)
-            </summary>
-            <param name="trafficVerbosity">Http traffic tracing verbosity</param>
-            <param name="apizrVerbosity">Apizr execution steps verbosity</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
-            <summary>
-            Provide a method to refresh the authorization token when needed
-            </summary>
-            <param name="refreshTokenFactory">Refresh token method called when expired or empty</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilderBase`2.AddDelegatingHandler(System.Net.Http.DelegatingHandler)">
-            <summary>
-            Add a custom delegating handler
-            </summary>
-            <param name="delegatingHandler">A delegating handler</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrOptionsBuilderBase`2.WithRefitSettings(Refit.RefitSettings)">
-            <summary>
-            Provide some Refit specific settings
-            </summary>
-            <param name="refitSettings">A <typeparamref name="T:Refit.RefitSettings"/> instance</param>
-            <returns></returns>
-        </member>
-        <member name="T:Apizr.ILazyWebApi`1">
-            <summary>
-            A lazy and prioritized instance of your web api
-            </summary>
-            <typeparam name="TWebApi">Type of your web api</typeparam>
-        </member>
-        <member name="P:Apizr.ILazyWebApi`1.Value">
-            <summary>
-            The lazy prioritized instance of your web api
-            </summary>
-        </member>
-        <member name="T:Apizr.Logging.ILogger">
-            <summary>
-            The logging handler method mapping interface
-            Implement it to provide some logging features to Apizr
-            </summary>
-        </member>
-        <member name="M:Apizr.Logging.ILogger.Write(System.String,System.String,System.ValueTuple{System.String,System.String}[])">
-            <summary>
-            Map Apizr log writing to your logging handler
-            </summary>
-            <param name="message">The message to log</param>
-            <param name="description">Some optional description</param>
-            <param name="parameters">Some optional parameters</param>
-        </member>
-        <member name="T:Apizr.Logging.TraceAttribute">
-            <summary>
-            Tells Apizr to trace request/response HTTP(s) traffic and log execution steps for the decorated web api interface
-            </summary>
-        </member>
-        <member name="M:Apizr.Logging.TraceAttribute.#ctor(HttpTracer.HttpMessageParts,Apizr.Logging.ApizrLogLevel)">
-            <summary>
-            Trace http traffic and log Apizr execution steps with verbosity
+            Trace http traffic at specified verbosity and log Apizr execution steps at Information log level
             </summary>
             <param name="trafficVerbosity">Http traffic tracing verbosity (default: all)</param>
-            <param name="apizrVerbosity">Apizr execution steps logging verbosity (default: high)</param>
         </member>
-        <member name="P:Apizr.Logging.TraceAttribute.TrafficVerbosity">
+        <member name="M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpTracerMode)">
             <summary>
-            Http traffic tracing verbosity
+            Trace All http traffic and log Apizr execution steps at specified log level
+            </summary>
+            <param name="httpTracerMode">Http traffic tracing mode (default: Everything)</param>
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+            Trace All http traffic and log Apizr execution steps at specified log level
+            </summary>
+            <param name="logLevel">Log level to apply while writing (default: Trace)</param>
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)">
+            <summary>
+            Trace All http traffic and log Apizr execution steps at specified log level
+            </summary>
+            <param name="trafficVerbosity">Http traffic tracing verbosity (default: all)</param>
+            <param name="httpTracerMode">Http traffic tracing mode (default: Everything)</param>
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+            Trace All http traffic and log Apizr execution steps at specified log level
+            </summary>
+            <param name="trafficVerbosity">Http traffic tracing verbosity (default: all)</param>
+            <param name="logLevel">Log level to apply while writing (default: Trace)</param>
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+            Trace All http traffic and log Apizr execution steps at specified log level
+            </summary>
+            <param name="httpTracerMode">Http traffic tracing mode (default: Everything)</param>
+            <param name="logLevel">Log level to apply while writing (default: Trace)</param>
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+            Trace All http traffic and log Apizr execution steps at specified log level
+            </summary>
+            <param name="trafficVerbosity">Http traffic tracing verbosity (default: all)</param>
+            <param name="httpTracerMode">Http traffic tracing mode (default: Everything)</param>
+            <param name="logLevel">Log level to apply while writing (default: Trace)</param>
+        </member>
+        <member name="P:Apizr.Logging.Attributes.LogAttributeBase.HttpTracerMode">
+            <summary>
+            Http traffic tracing mode (default: Everything)
             </summary>
         </member>
-        <member name="P:Apizr.Logging.TraceAttribute.ApizrVerbosity">
+        <member name="P:Apizr.Logging.Attributes.LogAttributeBase.TrafficVerbosity">
             <summary>
-            Apizr executions tracing verbosity
+            Http traffic tracing verbosity (default: all)
             </summary>
+        </member>
+        <member name="P:Apizr.Logging.Attributes.LogAttributeBase.LogLevel">
+            <summary>
+            Log level to apply while writing (default: Information)
+            </summary>
+        </member>
+        <member name="T:Apizr.Logging.Attributes.LogCreateAttribute">
+            <summary>
+            Tells Apizr to trace and log HTTP(s) traffic
+            </summary>
+        </member>
+        <member name="T:Apizr.Logging.Attributes.LogDeleteAttribute">
+            <summary>
+            Tells Apizr to trace and log HTTP(s) traffic
+            </summary>
+        </member>
+        <member name="T:Apizr.Logging.Attributes.LogReadAllAttribute">
+            <summary>
+            Tells Apizr to trace and log HTTP(s) traffic
+            </summary>
+        </member>
+        <member name="T:Apizr.Logging.Attributes.LogReadAttribute">
+            <summary>
+            Tells Apizr to trace and log HTTP(s) traffic
+            </summary>
+        </member>
+        <member name="T:Apizr.Logging.Attributes.LogUpdateAttribute">
+            <summary>
+            Tells Apizr to trace and log HTTP(s) traffic
+            </summary>
+        </member>
+        <member name="P:Apizr.Logging.ExtendedHttpHandlerBuilder.HttpTracerHandler">
+            <summary>
+            Underlying instance of the <typeparamref name="T:HttpTracer.HttpHandlerBuilder:HttpTracer.HttpHandlerBuilder"/> class.
+            </summary>
+        </member>
+        <member name="M:Apizr.Logging.ExtendedHttpHandlerBuilder.#ctor(Apizr.Configuring.IApizrOptionsBase)">
+            <summary>
+            Initializes a new instance of the <typeparamref name="T:ExtendedHttpTracerHandler:ExtendedHttpTracerHandler"/> class.
+            </summary>
+            <param name="logger">Logger.</param>
+            <param name="apizrOptions"></param>
+        </member>
+        <member name="M:Apizr.Logging.ExtendedHttpHandlerBuilder.#ctor(System.Net.Http.HttpClientHandler,Apizr.Configuring.IApizrOptionsBase)">
+            <summary>
+            Initializes a new instance of the <typeparamref name="T:ExtendedHttpTracerHandler:ExtendedHttpTracerHandler"/> class.
+            </summary>
+            <param name="innerHandler">HttpClientHandler.</param>
+            <param name="logger">Logger.</param>
+            <param name="apizrOptions"></param>
+        </member>
+        <member name="M:Apizr.Logging.ExtendedHttpHandlerBuilder.#ctor(Apizr.Logging.ExtendedHttpTracerHandler)">
+            <summary>
+            Initializes a new instance of the <typeparamref name="T:ExtendedHttpTracerHandler:ExtendedHttpTracerHandler"/> class.
+            </summary>
+            <param name="tracerHandler">Tracer handler.</param>
+        </member>
+        <member name="M:Apizr.Logging.ExtendedHttpHandlerBuilder.AddHandler(System.Net.Http.DelegatingHandler)">
+            <summary>
+            Adds a <see cref="T:System.Net.Http.HttpMessageHandler"/> to the chain of handlers.
+            </summary>
+            <param name="handler"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Logging.ExtendedHttpHandlerBuilder.Build">
+            <summary>
+            Adds <see cref="T:System.Net.Http.DelegatingHandler"/> as the last link of the chain.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Apizr.Logging.ExtendedHttpTracerHandler.DefaultDurationFormat">
+            <summary>
+            Duration string format. Defaults to "Duration: {0:ss\\:fffffff}"
+            </summary>
+            <remarks>
+            <para>
+            Receives a <typeparamref name="TimeSpan"/> at the [0] index.
+            </para>
+            <para>
+            See <a href="https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-timespan-format-strings">https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-timespan-format-strings</a> for more details on TimeSpan formatting.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Apizr.Logging.ExtendedHttpTracerHandler.#ctor(Apizr.Configuring.IApizrOptionsBase)">
+            <summary> Constructs the <see cref="T:Apizr.Logging.ExtendedHttpTracerHandler"/> with a custom <see cref="T:Microsoft.Extensions.Logging.ILogger"/> and a custom <see cref="T:System.Net.Http.HttpMessageHandler"/></summary>
+            <param name="logger">Microsoft extended logger</param>
+            <param name="apizrOptions">Apizr options</param>
+        </member>
+        <member name="M:Apizr.Logging.ExtendedHttpTracerHandler.#ctor(System.Net.Http.HttpMessageHandler,Apizr.Configuring.IApizrOptionsBase)">
+            <summary> Constructs the <see cref="T:Apizr.Logging.ExtendedHttpTracerHandler"/> with a custom <see cref="T:Microsoft.Extensions.Logging.ILogger"/> and a custom <see cref="T:System.Net.Http.HttpMessageHandler"/></summary>
+            <param name="handler">User defined <see cref="T:System.Net.Http.HttpMessageHandler"/></param>
+            <param name="logger">Microsoft extended logger</param>
+            <param name="apizrOptions">Apizr options</param>
         </member>
         <member name="M:Apizr.Mapping.IMappingHandler.Map``1(System.Object)">
             <summary>
@@ -784,7 +1411,7 @@
         </member>
         <member name="M:Apizr.Mapping.IMappingHandler.Map(System.Object,System.Type,System.Type)">
             <summary>
-            Execute a mapping from the source object to a new destination object with explicit <typeparamref name="T:System.Type"/> objects
+            Execute a mapping from the source object to a new destination object with explicit <see cref="T:System.Type"/> objects
             </summary>
             <param name="source">Source object to map from</param>
             <param name="sourceType">Source type to use</param>
@@ -793,7 +1420,7 @@
         </member>
         <member name="M:Apizr.Mapping.IMappingHandler.Map(System.Object,System.Object,System.Type,System.Type)">
             <summary>
-            Execute a mapping from the source object to existing destination object with explicit <typeparamref name="T:System.Type"/> objects
+            Execute a mapping from the source object to existing destination object with explicit <see cref="T:System.Type"/> objects
             </summary>
             <param name="source">Source object to map from</param>
             <param name="destination">Destination object to map into</param>
@@ -803,7 +1430,7 @@
         </member>
         <member name="T:Apizr.Mapping.MappedCrudEntityAttribute">
             <summary>
-            Tells Apizr to auto register an <typeparamref name="T:Apizr.IApizrManager`1"/> for the referenced api entity
+            Tells Apizr to auto register an <see cref="T:Apizr.IApizrManager`1"/> for the referenced api entity
             and mapped to this decorated model entity (works only with IServiceCollection extensions registration)
             </summary>
         </member>
@@ -847,31 +1474,43 @@
         </member>
         <member name="T:Apizr.Policing.HttpRequestMessageExtensions">
             <summary>
-            Extension methods for <typeparamref name="T:System.Net.Http.HttpRequestMessage"/> Polly integration.
+            Extension methods for <see cref="T:System.Net.Http.HttpRequestMessage"/> Polly integration.
             </summary>
+        </member>
+        <member name="M:Apizr.Policing.HttpRequestMessageExtensions.GetOrBuildPolicyExecutionContext(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Gets the <see cref="T:Polly.Context"/> associated with the provided <see cref="T:System.Net.Http.HttpRequestMessage"/>.
+            </summary>
+            <param name="request">The <see cref="T:System.Net.Http.HttpRequestMessage"/>.</param>
+            <returns>The <see cref="T:Polly.Context"/> if set, otherwise <c>null</c>.</returns>
+            <remarks>
+            The <see cref="T:Apizr.Policing.PolicyHttpMessageHandler"/> will attach a context to the <see cref="T:System.Net.Http.HttpResponseMessage"/> prior
+            to executing a <see cref="T:Polly.Policy"/>, if one does not already exist. The <see cref="T:Polly.Context"/> will be provided
+            to the policy for use inside the <see cref="T:Polly.Policy"/> and in other message handlers.
+            </remarks>
         </member>
         <member name="M:Apizr.Policing.HttpRequestMessageExtensions.GetPolicyExecutionContext(System.Net.Http.HttpRequestMessage)">
             <summary>
-            Gets the <typeparamref name="T:Polly.Context"/> associated with the provided <typeparamref name="T:System.Net.Http.HttpRequestMessage"/>.
+            Gets the <see cref="T:Polly.Context"/> associated with the provided <see cref="T:System.Net.Http.HttpRequestMessage"/>.
             </summary>
-            <param name="request">The <typeparamref name="T:System.Net.Http.HttpRequestMessage"/>.</param>
-            <returns>The <typeparamref name="T:Polly.Context"/> if set, otherwise <c>null</c>.</returns>
+            <param name="request">The <see cref="T:System.Net.Http.HttpRequestMessage"/>.</param>
+            <returns>The <see cref="T:Polly.Context"/> if set, otherwise <c>null</c>.</returns>
             <remarks>
-            The <typeparamref name="T:Apizr.Policing.PolicyHttpMessageHandler"/> will attach a context to the <typeparamref name="T:System.Net.Http.HttpResponseMessage"/> prior
-            to executing a <typeparamref name="T:Polly.Policy"/>, if one does not already exist. The <typeparamref name="T:Polly.Context"/> will be provided
-            to the policy for use inside the <typeparamref name="T:Polly.Policy"/> and in other message handlers.
+            The <see cref="T:Apizr.Policing.PolicyHttpMessageHandler"/> will attach a context to the <see cref="T:System.Net.Http.HttpResponseMessage"/> prior
+            to executing a <see cref="T:Polly.Policy"/>, if one does not already exist. The <see cref="T:Polly.Context"/> will be provided
+            to the policy for use inside the <see cref="T:Polly.Policy"/> and in other message handlers.
             </remarks>
         </member>
         <member name="M:Apizr.Policing.HttpRequestMessageExtensions.SetPolicyExecutionContext(System.Net.Http.HttpRequestMessage,Polly.Context)">
             <summary>
-            Sets the <typeparamref name="T:Polly.Context"/> associated with the provided <typeparamref name="T:System.Net.Http.HttpRequestMessage"/>.
+            Sets the <see cref="T:Polly.Context"/> associated with the provided <see cref="T:System.Net.Http.HttpRequestMessage"/>.
             </summary>
-            <param name="request">The <typeparamref name="T:System.Net.Http.HttpRequestMessage"/>.</param>
-            <param name="context">The <typeparamref name="T:Polly.Context"/>, may be <c>null</c>.</param>
+            <param name="request">The <see cref="T:System.Net.Http.HttpRequestMessage"/>.</param>
+            <param name="context">The <see cref="T:Polly.Context"/>, may be <c>null</c>.</param>
             <remarks>
-            The <typeparamref name="T:Apizr.Policing.PolicyHttpMessageHandler"/> will attach a context to the <typeparamref name="T:System.Net.Http.HttpResponseMessage"/> prior
-            to executing a <typeparamref name="T:Polly.Policy"/>, if one does not already exist. The <typeparamref name="T:Polly.Context"/> will be provided
-            to the policy for use inside the <typeparamref name="T:Polly.Policy"/> and in other message handlers.
+            The <see cref="T:Apizr.Policing.PolicyHttpMessageHandler"/> will attach a context to the <see cref="T:System.Net.Http.HttpResponseMessage"/> prior
+            to executing a <see cref="T:Polly.Policy"/>, if one does not already exist. The <see cref="T:Polly.Context"/> will be provided
+            to the policy for use inside the <see cref="T:Polly.Policy"/> and in other message handlers.
             </remarks>
         </member>
         <member name="T:Apizr.Policing.LoggedPolicies">
@@ -917,115 +1556,60 @@
         </member>
         <member name="T:Apizr.Policing.PolicyHttpMessageHandler">
             <summary>
-            A <typeparamref name="T:System.Net.Http.DelegatingHandler"/> implementation that executes request processing surrounded by a <typeparamref name="T:Polly.Policy"/>.
+            A <see cref="T:System.Net.Http.DelegatingHandler"/> implementation that executes request processing surrounded by a <see cref="T:Polly.Policy"/>.
             </summary>
-            <remarks>
-            <para>
-            This message handler implementation supports the use of policies provided by the Polly library for 
-            transient-fault-handling and resiliency.
-            </para>
-            <para>
-            The documentation provided here is focused guidance for using Polly together with the <see cref="!:IHttpClientFactory"/>. 
-            See the Polly project and its documentation (https://github.com/app-vnext/Polly) for authoritative information on Polly.
-            </para>
-            <para>
-            The extension methods on <see cref="!:PollyHttpClientBuilderExtensions"/> are designed as a convenient and correct
-            way to create a <typeparamref name="T:Apizr.Policing.PolicyHttpMessageHandler"/>.
-            </para>
-            <para>
-            The <see cref="!:PollyHttpClientBuilderExtensions.AddPolicyHandler(IHttpClientBuilder, IAsyncPolicy&lt;HttpResponseMessage&gt;)"/>
-            method supports the creation of a <typeparamref name="T:Apizr.Policing.PolicyHttpMessageHandler"/> for any kind of policy. This includes
-            non-reactive policies, such as Timeout or Cache, which don't require the underlying request to fail first.
-            </para>
-            <para>
-            <typeparamref name="T:Apizr.Policing.PolicyHttpMessageHandler"/> and the <see cref="!:PollyHttpClientBuilderExtensions"/> convenience methods
-            only accept the generic <typeparamref name="T:Polly.IAsyncPolicy`1"/>. Generic policy instances can be created
-            by using the generic methods on <typeparamref name="T:Polly.Policy"/> such as <see cref="M:Polly.Policy.TimeoutAsync``1(System.Int32)"/>.
-            </para>
-            <para>
-            To adapt an existing non-generic <typeparamref name="T:Polly.IAsyncPolicy"/>, use code like the following:
-            <example>
-            Converting a non-generic <code>IAsyncPolicy policy</code> to <typeparamref name="T:Polly.IAsyncPolicy`1"/>.
-            <code>
-            policy.AsAsyncPolicy&lt;HttpResponseMessage&gt;()
-            </code>
-            </example>
-            </para>
-            <para>
-            The <see cref="!:PollyHttpClientBuilderExtensions.AddTransientHttpErrorPolicy(IHttpClientBuilder, Func&lt;PolicyBuilder&lt;HttpResponseMessage&gt;, IAsyncPolicy&lt;HttpResponseMessage&gt;&gt;)"/>
-            method is an opinionated convenience method that supports the application of a policy for requests that fail due
-            to a connection failure or server error (5XX HTTP status code). This kind of method supports only reactive policies
-            such as Retry, Circuit-Breaker or Fallback. This method is only provided for convenience; we recommend creating
-            your own policies as needed if this does not meet your requirements.
-            </para>
-            <para>
-            Take care when using policies such as Retry or Timeout together as HttpClient provides its own timeout via 
-            <see cref="P:System.Net.Http.HttpClient.Timeout"/>.  When combining Retry and Timeout, <see cref="P:System.Net.Http.HttpClient.Timeout"/> will act as a
-            timeout across all tries; a Polly Timeout policy can be configured after a Retry policy in the configuration sequence,
-            to provide a timeout-per-try.
-            </para>
-            <para>
-            All policies provided by Polly are designed to be efficient when used in a long-lived way. Certain policies such as the 
-            Bulkhead and Circuit-Breaker maintain state and should be scoped across calls you wish to share the Bulkhead or Circuit-Breaker state. 
-            Take care to ensure the correct lifetimes when using policies and message handlers together in custom scenarios. The extension
-            methods provided by <see cref="!:PollyHttpClientBuilderExtensions"/> are designed to assign a long lifetime to policies
-            and ensure that they can be used when the handler rotation feature is active.
-            </para>
-            <para>
-            The <typeparamref name="T:Apizr.Policing.PolicyHttpMessageHandler"/> will attach a context to the <typeparamref name="T:System.Net.Http.HttpRequestMessage"/> prior
-            to executing a <typeparamref name="T:Polly.Policy"/>, if one does not already exist. The <typeparamref name="T:Polly.Context"/> will be provided
-            to the policy for use inside the <typeparamref name="T:Polly.Policy"/> and in other message handlers.
-            </para>
-            </remarks>
         </member>
         <member name="M:Apizr.Policing.PolicyHttpMessageHandler.#ctor(Polly.IAsyncPolicy{System.Net.Http.HttpResponseMessage})">
             <summary>
-            Creates a new <typeparamref name="T:Apizr.Policing.PolicyHttpMessageHandler"/>.
+            Creates a new <see cref="T:Apizr.Policing.PolicyHttpMessageHandler"/>.
             </summary>
             <param name="policy">The policy.</param>
         </member>
         <member name="M:Apizr.Policing.PolicyHttpMessageHandler.#ctor(System.Func{System.Net.Http.HttpRequestMessage,Polly.IAsyncPolicy{System.Net.Http.HttpResponseMessage}})">
             <summary>
-            Creates a new <typeparamref name="T:Apizr.Policing.PolicyHttpMessageHandler"/>.
+            Creates a new <see cref="T:Apizr.Policing.PolicyHttpMessageHandler"/>.
             </summary>
-            <param name="policySelector">A function which can select the desired policy for a given <typeparamref name="T:System.Net.Http.HttpRequestMessage"/>.</param>
-        </member>
-        <member name="M:Apizr.Policing.PolicyHttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
-            <inheritdoc />
+            <param name="policySelector">A function which can select the desired policy for a given <see cref="T:System.Net.Http.HttpRequestMessage"/>.</param>
         </member>
         <member name="M:Apizr.Policing.PolicyHttpMessageHandler.SendCoreAsync(System.Net.Http.HttpRequestMessage,Polly.Context,System.Threading.CancellationToken)">
             <summary>
-            Called inside the execution of the <typeparamref name="T:Polly.Policy"/> to perform request processing.
+            Called inside the execution of the <see cref="T:Polly.Policy"/> to perform request processing.
             </summary>
-            <param name="request">The <typeparamref name="T:System.Net.Http.HttpRequestMessage"/>.</param>
-            <param name="context">The <typeparamref name="T:Polly.Context"/>.</param>
-            <param name="cancellationToken">The <typeparamref name="T:System.Threading.CancellationToken"/>.</param>
-            <returns>Returns a <typeparamref name="T:System.Threading.Tasks.Task`1"/> that will yield a response when completed.</returns>
+            <param name="request">The <see cref="T:System.Net.Http.HttpRequestMessage"/>.</param>
+            <param name="context">The <see cref="T:Polly.Context"/>.</param>
+            <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken"/>.</param>
+            <returns>Returns a <see cref="T:System.Threading.Tasks.Task`1"/> that will yield a response when completed.</returns>
         </member>
         <member name="T:Apizr.Policing.PollyContextExtensions">
             <summary>
             Polly logging extensions
             </summary>
         </member>
-        <member name="M:Apizr.Policing.PollyContextExtensions.WithLogger(Polly.Context,Apizr.Logging.ILogger)">
+        <member name="M:Apizr.Policing.PollyContextExtensions.WithLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)">
             <summary>
-            Passing your <typeparamref name="T:Apizr.Logging.ILogger"/> mapping implementation to Polly context
+            Passing your <see cref="T:Microsoft.Extensions.Logging.ILogger"/> mapping implementation to Polly context
             </summary>
             <param name="context">Polly context</param>
-            <param name="logger">Your <typeparamref name="T:Apizr.Logging.ILogger"/> mapping implementation</param>
+            <param name="logger">Your <see cref="T:Microsoft.Extensions.Logging.ILogger"/> mapping implementation</param>
+            <param name="logLevel"></param>
+            <param name="verbosity"></param>
+            <param name="tracerMode"></param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Policing.PollyContextExtensions.TryGetLogger(Polly.Context,Apizr.Logging.ILogger@)">
+        <member name="M:Apizr.Policing.PollyContextExtensions.TryGetLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger@,Microsoft.Extensions.Logging.LogLevel@,Apizr.Logging.HttpMessageParts@,Apizr.Logging.HttpTracerMode@)">
             <summary>
-            Trying to get your <typeparamref name="T:Apizr.Logging.ILogger"/> mapping implementation from Polly context
+            Trying to get your <see cref="T:Microsoft.Extensions.Logging.ILogger"/> mapping implementation from Polly context
             </summary>
             <param name="context">Polly context</param>
-            <param name="logger">Your <typeparamref name="T:Apizr.Logging.ILogger"/> mapping implementation</param>
+            <param name="logger">Your <see cref="T:Microsoft.Extensions.Logging.ILogger"/> mapping implementation</param>
+            <param name="logLevel"></param>
+            <param name="verbosity"></param>
+            <param name="tracerMode"></param>
             <returns></returns>
         </member>
         <member name="T:Apizr.Requesting.CrudEntityAttribute">
             <summary>
-            Tells Apizr to auto register an <typeparamref name="T:Apizr.IApizrManager`1"/> for this decorated entity (works only with IServiceCollection extensions registration)
+            Tells Apizr to auto register an <see cref="T:Apizr.IApizrManager`1"/> for this decorated entity (works only with IServiceCollection extensions registration)
             </summary>
         </member>
         <member name="M:Apizr.Requesting.CrudEntityAttribute.#ctor(System.String,System.Type,System.Type,System.Type,System.Type)">
@@ -1062,6 +1646,15 @@
             <summary>
             Model entity type mapped with this Api entity type
             </summary>
+        </member>
+        <member name="T:Apizr.Requesting.ICrudApi`4">
+            <summary>
+            The crud api interface
+            </summary>
+            <typeparam name="T">The entity type</typeparam>
+            <typeparam name="TKey">The entity's crud key type</typeparam>
+            <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
+            <typeparam name="TReadAllParams">ReadAll query parameters type</typeparam>
         </member>
         <member name="T:Apizr.WebApiAttribute">
             <summary>
@@ -1117,7 +1710,13 @@
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Create(`0)">
             <inheritdoc />
         </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Create(`0,Polly.Context)">
+            <inheritdoc />
+        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Create(`0,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Create(`0,Polly.Context,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll">
@@ -1129,19 +1728,40 @@
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll(System.Int32)">
             <inheritdoc />
         </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll(Polly.Context)">
+            <inheritdoc />
+        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll(`3,System.Int32)">
             <inheritdoc />
         </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll(`3,Polly.Context)">
+            <inheritdoc />
+        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll(`3,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll(System.Int32,Polly.Context)">
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll(System.Int32,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll(Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll(`3,System.Int32,Polly.Context)">
+            <inheritdoc />
+        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll(`3,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll(`3,Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll(`3,System.Int32,Polly.Context,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Read(`1)">
@@ -1150,28 +1770,55 @@
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Read(`1,System.Int32)">
             <inheritdoc />
         </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Read(`1,Polly.Context)">
+            <inheritdoc />
+        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Read(`1,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Read(`1,System.Int32,Polly.Context)">
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Read(`1,System.Int32,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Read(`1,System.Int32,Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Update(`1,`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Update(`1,`0,Polly.Context)">
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Update(`1,`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Update(`1,`0,Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Delete(`1)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Delete(`1,Polly.Context)">
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Delete(`1,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Delete(`1,Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Create(`0)">
             <inheritdoc />
         </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Create(`0,Polly.Context)">
+            <inheritdoc />
+        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Create(`0,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Create(`0,Polly.Context,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll">
@@ -1183,19 +1830,40 @@
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll(System.Int32)">
             <inheritdoc />
         </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll(Polly.Context)">
+            <inheritdoc />
+        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll(`3,System.Int32)">
             <inheritdoc />
         </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll(`3,Polly.Context)">
+            <inheritdoc />
+        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll(`3,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll(System.Int32,Polly.Context)">
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll(System.Int32,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll(Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll(`3,System.Int32,Polly.Context)">
+            <inheritdoc />
+        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll(`3,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll(`3,Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll(`3,System.Int32,Polly.Context,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Read(`1)">
@@ -1204,22 +1872,43 @@
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Read(`1,System.Int32)">
             <inheritdoc />
         </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Read(`1,Polly.Context)">
+            <inheritdoc />
+        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Read(`1,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Read(`1,System.Int32,Polly.Context)">
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Read(`1,System.Int32,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Read(`1,System.Int32,Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Update(`1,`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Update(`1,`0,Polly.Context)">
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Update(`1,`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Update(`1,`0,Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Delete(`1)">
             <inheritdoc />
         </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Delete(`1,Polly.Context)">
+            <inheritdoc />
+        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Delete(`1,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Delete(`1,Polly.Context,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
     </members>

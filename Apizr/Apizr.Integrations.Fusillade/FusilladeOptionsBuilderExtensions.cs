@@ -2,7 +2,7 @@
 
 namespace Apizr
 {
-    public static class OptionsBuilderExtensions
+    public static class FusilladeOptionsBuilderExtensions
     {
         public static T WithPriorityManagement<T>(this T builder) 
             where T : IApizrGlobalCommonOptionsBuilderBase

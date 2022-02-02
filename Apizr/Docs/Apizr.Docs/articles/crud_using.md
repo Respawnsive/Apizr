@@ -1,4 +1,4 @@
-﻿## Using the manager:
+﻿## Using the manager
 
 Here is an example of how to send a web request from an app - e.g. using Apizr in a Xamarin.Forms mobile app.
 

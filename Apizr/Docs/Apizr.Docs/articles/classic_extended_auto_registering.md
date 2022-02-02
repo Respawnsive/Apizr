@@ -1,9 +1,10 @@
-﻿## Automatically registering decorated interfaces by extensions:
+﻿## Registering decorated interfaces automatically, the extended way
 
 Here is an example:
 ```csharp
 public override void ConfigureServices(IServiceCollection services)
 {
+    // Some policies
     var registry = new PolicyRegistry
     {
         {
@@ -18,12 +19,14 @@ public override void ConfigureServices(IServiceCollection services)
     services.AddPolicyRegistry(registry);
 
     // Apizr registration
-    services.AddApizrFor(options => options.WithAkavacheCacheHandler(), typeof(AnyClassFromServicesAssembly));
+    services.AddApizrFor(options => options.WithAkavacheCacheHandler(), ASSEMBLIES_CONTAINING_INTERFACES);
 }
 ```
 
-We provided a policy registry and a cache handler here as we asked for it with cache and policy attributes while designing the api interface.
+Apizr will scan assemblies to auto register managers for decorated api interfaces.
 
-### Next steps
+We registered a policy registry and provided a cache handler here as we asked for it with cache and policy attributes while designing the api interface.
+
+## Next steps
 
 - [Using the manager](classic_using.md)

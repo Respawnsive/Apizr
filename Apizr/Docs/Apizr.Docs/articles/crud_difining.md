@@ -1,4 +1,4 @@
-﻿## Defining an interface for a CRUD Api:
+﻿## Defining an interface for a CRUD Api
 
 As we'll use the built-in yet defined ICrudApi, there's no more definition to do.
 
@@ -140,7 +140,7 @@ About generic types:
 
 But again, nothing to do around here.
 
-### Next steps
+## Next steps
 
 - [Register the managed instance, the static way](crud_static_registering.md)
 

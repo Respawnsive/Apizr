@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Automatically registering decorated interfaces by extensions: | Apizr </title>
+    <title>Registering decorated interfaces automatically, the extended way | Apizr </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Automatically registering decorated interfaces by extensions: | Apizr ">
+    <meta name="title" content="Registering decorated interfaces automatically, the extended way | Apizr ">
     <meta name="generator" content="docfx 2.59.0.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
@@ -77,11 +77,12 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="automatically-registering-decorated-interfaces-by-extensions">Automatically registering decorated interfaces by extensions:</h2>
+<h2 id="registering-decorated-interfaces-automatically-the-extended-way">Registering decorated interfaces automatically, the extended way</h2>
 
 <p>Here is an example:</p>
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {
+    // Some policies
     var registry = new PolicyRegistry
     {
         {
@@ -96,10 +97,11 @@
     services.AddPolicyRegistry(registry);
 
     // Apizr registration
-    services.AddApizrFor(options =&gt; options.WithAkavacheCacheHandler(), typeof(AnyClassFromServicesAssembly));
+    services.AddApizrFor(options =&gt; options.WithAkavacheCacheHandler(), ASSEMBLIES_CONTAINING_INTERFACES);
 }
-</code></pre><p>We provided a policy registry and a cache handler here as we asked for it with cache and policy attributes while designing the api interface.</p>
-<h3 id="next-steps">Next steps</h3>
+</code></pre><p>Apizr will scan assemblies to auto register managers for decorated api interfaces.</p>
+<p>We registered a policy registry and provided a cache handler here as we asked for it with cache and policy attributes while designing the api interface.</p>
+<h2 id="next-steps">Next steps</h2>
 <ul>
 <li><a href="classic_using.html">Using the manager</a></li>
 </ul>

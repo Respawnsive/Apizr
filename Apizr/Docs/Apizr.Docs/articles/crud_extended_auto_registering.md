@@ -1,4 +1,4 @@
-﻿## Automatically registering managers for decorated CRUD entities by extensions:
+﻿## Automatically registering managers for decorated CRUD entities by extensions
 
 You need to have access to your entity model classes for this option.
 
@@ -25,12 +25,12 @@ Then, here is a registration example:
 public override void ConfigureServices(IServiceCollection services)
 {
     // Apizr registration
-    services.AddApizrCrudFor(ASSEMBLIES_CONTAINING_ENTITIES);
+    services.AddApizrCrudFor(options => options.WithAkavacheCacheHandler(), ASSEMBLIES_CONTAINING_ENTITIES);
 }
 ```
 
 Apizr will scan assemblies to auto register managers for decorated entities.
 
-### Next steps
+## Next steps
 
 - [Using the manager](crud_using.md)

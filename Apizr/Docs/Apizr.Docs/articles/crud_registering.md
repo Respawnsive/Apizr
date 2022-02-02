@@ -1,8 +1,8 @@
-﻿## Registering our api interface:
+﻿## Registering our api interface
 
 As it's not mandatory to register anything in a container for DI purpose (you can use a static instance directly), we'll describe here how to use it with DI.
 
-### Next steps
+## Next steps
 
 - [Register the managed CRUD api interface, the manual extended way](crud_extended_manual_registering.md)
 

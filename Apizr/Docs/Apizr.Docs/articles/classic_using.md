@@ -1,4 +1,4 @@
-﻿## Using the manager:
+﻿## Using the manager
 
 Here is an example of how to send a web request from an app - e.g. using Apizr in a Xamarin.Forms mobile app.
 
@@ -9,8 +9,13 @@ public class YourViewModel
     private readonly IApizrManager<IReqResService> _reqResManager;
 	
     public YouViewModel(IApizrManager<IReqResService> reqResManager)
+    // Or registry injection
+    //public YouViewModel(IApizrRegistry apizrRegistry)
     {
-		_reqResManager = reqResManager;
+        _reqResManager = reqResManager;
+
+        // Or registry injection
+        //_reqResManager = apizrRegistry.GetFor<IReqResService>();
     }
     
     public ObservableCollection<User>? Users { get; set; }

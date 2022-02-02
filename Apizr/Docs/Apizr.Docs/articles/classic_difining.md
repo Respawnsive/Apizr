@@ -1,4 +1,4 @@
-﻿## Defining an interface for a classic Api:
+﻿## Defining an interface for a classic Api
 
 We could define our web api service just like:
 ```csharp
@@ -24,7 +24,7 @@ And that's all.
 
 Every attributes here will inform Apizr on how to manage each web api request. No more boilerplate.
 
-### Next steps
+## Next steps
 
 - [Register the managed instance, the static way](classic_static_registering.md)
 

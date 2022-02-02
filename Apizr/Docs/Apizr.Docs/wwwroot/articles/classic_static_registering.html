@@ -5,13 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>
-Static instance registration:
- | Apizr </title>
+    <title>Registering a managed instance, the static way : | Apizr </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="
-Static instance registration:
- | Apizr ">
+    <meta name="title" content="Registering a managed instance, the static way : | Apizr ">
     <meta name="generator" content="docfx 2.59.0.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
@@ -81,12 +77,9 @@ Static instance registration:
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="classic-static-approach">
-Static instance registration:
-</h2>
+<h2 id="registering-a-managed-instance-the-static-way-">Registering a managed instance, the static way :</h2>
 
-
-<p>Somewhere where you can add services to your container, add the following:</p>
+<p>Here is an example of how to register a managed instance of an api interface:</p>
 <pre><code class="lang-csharp">// Some policies
 var registry = new PolicyRegistry
 {
@@ -101,12 +94,17 @@ var registry = new PolicyRegistry
 };
 
 // Apizr registration
-myContainer.SomeInstanceRegistrationMethod(
-Apizr.CreateFor&lt;IReqResService&gt;(options =&gt; options
-    .WithPolicyRegistry(registry)
-    .WithAkavacheCacheHandler())
+myContainer.RegistrationMethodFactory(() =&gt; 
+    Apizr.For&lt;IReqResService&gt;(options =&gt; options
+        .WithPolicyRegistry(registry)
+        .WithAkavacheCacheHandler())
 );
-</code></pre><p>I provided a policy registry and a cache handler here as I asked for it with cache and policy attributes in my web api example.</p>
+</code></pre><p>We provided a policy registry and a cache handler here as we asked for it with cache and policy attributes while designing the api interface.
+Also, you could use the manager directly instead of registering it.</p>
+<h3 id="next-steps">Next steps</h3>
+<ul>
+<li><a href="classic_using.html">Using the manager</a></li>
+</ul>
 </article>
           </div>
           
@@ -114,9 +112,6 @@ Apizr.CreateFor&lt;IReqResService&gt;(options =&gt; options
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
-                  <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/lab/Apizr/Docs/Apizr.Docs/articles/classic_static_registering.md/#L1" class="contribution-link">Improve this Doc</a>
-                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">

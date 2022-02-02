@@ -1,15 +1,29 @@
-﻿<h2 id="classic-automatically">
-Automatically registering decorated interfaces by extensions:
-</h2>
+﻿## Automatically registering decorated interfaces by extensions:
 
-Register in your Startup class like so:
+Here is an example:
 ```csharp
 public override void ConfigureServices(IServiceCollection services)
 {
+    var registry = new PolicyRegistry
+    {
+        {
+            "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(1),
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10)
+            })
+        }
+    };
+    services.AddPolicyRegistry(registry);
+
     // Apizr registration
     services.AddApizrFor(options => options.WithAkavacheCacheHandler(), typeof(AnyClassFromServicesAssembly));
 }
 ```
 
-There are many AddApizrFor flavors for classic automatic registration, depending on what you want to do and provide.
-This one is the simplest.
+We provided a policy registry and a cache handler here as we asked for it with cache and policy attributes while designing the api interface.
+
+### Next steps
+
+- [Using the manager](classic_using.md)

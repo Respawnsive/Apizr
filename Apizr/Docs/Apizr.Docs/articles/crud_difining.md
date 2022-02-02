@@ -1,10 +1,8 @@
-﻿<h2 id="crud-defining">
-Defining interface for CRUD Api:
-</h2>
+﻿## Defining an interface for a CRUD Api:
 
 As we'll use the built-in yet defined ICrudApi, there's no more definition to do.
 
-Here is what it looks like then:
+Here is what the provided interface looks like then:
 ```csharp
 public interface ICrudApi<T, in TKey, TReadAllResult, in TReadAllParams> where T : class
 {
@@ -132,7 +130,7 @@ public interface ICrudApi<T, in TKey, TReadAllResult, in TReadAllParams> where T
 }
 ```
 
-We can see that it comes with some CacheKey, Context and Priority attribute decorations, but it won't do anything until you ask Apizr to. 
+We can see that it comes with many parameter combinations, but it won't do anything until you ask Apizr to. 
 Caching, Logging, Policing, Prioritizing... everything is activable fluently with the options builder.
 
 About generic types:
@@ -141,3 +139,15 @@ About generic types:
 - TReadAllParams (optional - default: ```IDictionary<string, object>```) is there to handle cases where you don't want to provide an ```IDictionary<string, object>``` for a ReadAll reaquest, but a custom class
 
 But again, nothing to do around here.
+
+### Next steps
+
+- [Register the managed instance, the static way](crud_static_registering.md)
+
+OR
+
+- [Register the managed definition, the manual extended way](crud_extended_manual_registering.md)
+
+OR
+
+- [Register any definition with management, the automatic extended way](crud_extended_auto_registering.md)

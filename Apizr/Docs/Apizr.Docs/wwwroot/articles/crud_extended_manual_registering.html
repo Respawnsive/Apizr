@@ -5,13 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>
-Manually registering by extensions:
- | Apizr </title>
+    <title>Manually registering the managed CRUD api interface by extensions: | Apizr </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="
-Manually registering by extensions:
- | Apizr ">
+    <meta name="title" content="Manually registering the managed CRUD api interface by extensions: | Apizr ">
     <meta name="generator" content="docfx 2.59.0.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
@@ -81,18 +77,14 @@ Manually registering by extensions:
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="crud-manually">
-Manually registering by extensions:
-</h2>
+<h2 id="manually-registering-the-managed-crud-api-interface-by-extensions">Manually registering the managed CRUD api interface by extensions:</h2>
 
-
-<p>In your Startup class, add the following:</p>
+<p>Here is an example:</p>
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {
     // Apizr registration
-    services.AddApizrCrudFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(optionsBuilder =&gt; optionsBuilder
-        .WithBaseAddress(&quot;your specific T entity crud base uri&quot;)
-        .WithAkavacheCacheHandler());
+    services.AddApizrCrudFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(options =&gt; options
+        .WithBaseAddress(&quot;your specific T entity crud base uri&quot;));
 }
 </code></pre><p>Again, T must be a class.</p>
 <p>TKey must be primitive. If you don&#39;t provide it here, it will be defined as <code>int</code>.</p>
@@ -100,9 +92,11 @@ Manually registering by extensions:
 If you don&#39;t use paged result, just don&#39;t provide any TReadAllResult here and it will be defined as <code>IEnumerable&lt;T&gt;</code>.</p>
 <p>TReadAllParams must be a class.
 If you don&#39;t use a custom class holding your query parameters, just don&#39;t provide any TReadAllParams here and it will be defined as <code>IDictionary&lt;string, object&gt;</code>.</p>
-<p>You have to provide the specific entity crud base uri with the options builder.</p>
-<p>There are many AddApizrCrudFor flavors for crud manual registration, depending on what you want to do and provide.
-One of it is the simple <code>services.AddApizrCrudFor&lt;T&gt;()</code>, which as you can expect, define TKey as <code>int</code>, TReadAllResult as <code>IEnumerable&lt;T&gt;</code> and TReadAllParams as <code>IDictionary&lt;string, object&gt;</code>.</p>
+<p>You have to provide the specific entity crud base uri with the options builder (if you don&#39;t plan to use entity crud attribute).</p>
+<h3 id="next-steps">Next steps</h3>
+<ul>
+<li><a href="crud_using.html">Using the manager</a></li>
+</ul>
 </article>
           </div>
           
@@ -110,9 +104,6 @@ One of it is the simple <code>services.AddApizrCrudFor&lt;T&gt;()</code>, which 
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
-                  <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/lab/Apizr/Docs/Apizr.Docs/articles/crud_extended_manual_registering.md/#L1" class="contribution-link">Improve this Doc</a>
-                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">

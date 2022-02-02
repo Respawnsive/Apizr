@@ -1,6 +1,4 @@
-﻿<h2 id="intro">
-Intro
-</h2>
+﻿## Intro
 
 Clearly inspired by [Refit.Insane.PowerPack](https://github.com/thefex/Refit.Insane.PowerPack) but extended with a lot more features, the goal of Apizr is to get all ready to use for web api requesting, with the more resiliency we can, but without the boilerplate.
 

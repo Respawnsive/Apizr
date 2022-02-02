@@ -5,13 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>
-Defining interface for CRUD Api:
- | Apizr </title>
+    <title>Defining an interface for a CRUD Api: | Apizr </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="
-Defining interface for CRUD Api:
- | Apizr ">
+    <meta name="title" content="Defining an interface for a CRUD Api: | Apizr ">
     <meta name="generator" content="docfx 2.59.0.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
@@ -81,13 +77,10 @@ Defining interface for CRUD Api:
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="crud-defining">
-Defining interface for CRUD Api:
-</h2>
-
+<h2 id="defining-an-interface-for-a-crud-api">Defining an interface for a CRUD Api:</h2>
 
 <p>As we&#39;ll use the built-in yet defined ICrudApi, there&#39;s no more definition to do.</p>
-<p>Here is what it looks like then:</p>
+<p>Here is what the provided interface looks like then:</p>
 <pre><code class="lang-csharp">public interface ICrudApi&lt;T, in TKey, TReadAllResult, in TReadAllParams&gt; where T : class
 {
     #region Create
@@ -212,7 +205,7 @@ Defining interface for CRUD Api:
 
     #endregion
 }
-</code></pre><p>We can see that it comes with some CacheKey, Context and Priority attribute decorations, but it won&#39;t do anything until you ask Apizr to. 
+</code></pre><p>We can see that it comes with many parameter combinations, but it won&#39;t do anything until you ask Apizr to. 
 Caching, Logging, Policing, Prioritizing... everything is activable fluently with the options builder.</p>
 <p>About generic types:</p>
 <ul>
@@ -221,6 +214,18 @@ Caching, Logging, Policing, Prioritizing... everything is activable fluently wit
 <li>TReadAllParams (optional - default: <code>IDictionary&lt;string, object&gt;</code>) is there to handle cases where you don&#39;t want to provide an <code>IDictionary&lt;string, object&gt;</code> for a ReadAll reaquest, but a custom class</li>
 </ul>
 <p>But again, nothing to do around here.</p>
+<h3 id="next-steps">Next steps</h3>
+<ul>
+<li><a href="crud_static_registering.html">Register the managed instance, the static way</a></li>
+</ul>
+<p>OR</p>
+<ul>
+<li><a href="crud_extended_manual_registering.html">Register the managed definition, the manual extended way</a></li>
+</ul>
+<p>OR</p>
+<ul>
+<li><a href="crud_extended_auto_registering.html">Register any definition with management, the automatic extended way</a></li>
+</ul>
 </article>
           </div>
           
@@ -228,9 +233,6 @@ Caching, Logging, Policing, Prioritizing... everything is activable fluently wit
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
-                  <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/lab/Apizr/Docs/Apizr.Docs/articles/crud_difining.md/#L1" class="contribution-link">Improve this Doc</a>
-                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">

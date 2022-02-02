@@ -1,6 +1,4 @@
-﻿<h2 id="crud-using">
-Using the manager:
-</h2>
+﻿## Using the manager:
 
 Here is an example of how to send a web request from an app - e.g. using Apizr in a Xamarin.Forms mobile app.
 
@@ -22,7 +20,7 @@ public class YourViewModel
         IList<User>? users;
         try
         {
-            var pagedUsers = await _userCrudManager.ExecuteAsync((ct, api) => api.ReadAll(ct), CancellationToken.None);
+            var pagedUsers = await _userCrudManager.ExecuteAsync(api => api.ReadAll());
             users = pagedUsers.Data?.ToList();
         }
         catch (ApizrException<PagedResult<User>> e)

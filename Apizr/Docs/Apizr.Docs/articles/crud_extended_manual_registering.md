@@ -1,15 +1,12 @@
-﻿<h2 id="crud-manually">
-Manually registering by extensions:
-</h2>
+﻿## Manually registering the managed CRUD api interface by extensions:
 
-In your Startup class, add the following:
+Here is an example:
 ```csharp
 public override void ConfigureServices(IServiceCollection services)
 {
     // Apizr registration
-    services.AddApizrCrudFor<T, TKey, TReadAllResult, TReadAllParams>(optionsBuilder => optionsBuilder
-        .WithBaseAddress("your specific T entity crud base uri")
-        .WithAkavacheCacheHandler());
+    services.AddApizrCrudFor<T, TKey, TReadAllResult, TReadAllParams>(options => options
+        .WithBaseAddress("your specific T entity crud base uri"));
 }
 ```
 
@@ -23,7 +20,8 @@ If you don't use paged result, just don't provide any TReadAllResult here and it
 TReadAllParams must be a class.
 If you don't use a custom class holding your query parameters, just don't provide any TReadAllParams here and it will be defined as ```IDictionary<string, object>```.
 
-You have to provide the specific entity crud base uri with the options builder.
+You have to provide the specific entity crud base uri with the options builder (if you don't plan to use entity crud attribute).
 
-There are many AddApizrCrudFor flavors for crud manual registration, depending on what you want to do and provide.
-One of it is the simple ```services.AddApizrCrudFor<T>()```, which as you can expect, define TKey as ```int```, TReadAllResult as ```IEnumerable<T>``` and TReadAllParams as ```IDictionary<string, object>```.
+### Next steps
+
+- [Using the manager](crud_using.md)

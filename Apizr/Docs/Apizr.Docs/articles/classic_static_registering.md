@@ -1,8 +1,6 @@
-﻿<h2 id="classic-static-approach">
-Static instance registration:
-</h2>
+﻿## Registering a managed instance, the static way :
 
-Somewhere where you can add services to your container, add the following:
+Here is an example of how to register a managed instance of an api interface:
 ```csharp
 // Some policies
 var registry = new PolicyRegistry
@@ -18,11 +16,16 @@ var registry = new PolicyRegistry
 };
 
 // Apizr registration
-myContainer.SomeInstanceRegistrationMethod(
-Apizr.CreateFor<IReqResService>(options => options
-    .WithPolicyRegistry(registry)
-    .WithAkavacheCacheHandler())
+myContainer.RegistrationMethodFactory(() => 
+    Apizr.For<IReqResService>(options => options
+        .WithPolicyRegistry(registry)
+        .WithAkavacheCacheHandler())
 );
 ```
 
-I provided a policy registry and a cache handler here as I asked for it with cache and policy attributes in my web api example.
+We provided a policy registry and a cache handler here as we asked for it with cache and policy attributes while designing the api interface.
+Also, you could use the manager directly instead of registering it.
+
+### Next steps
+
+- [Using the manager](classic_using.md)

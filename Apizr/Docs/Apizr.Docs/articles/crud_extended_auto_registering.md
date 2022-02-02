@@ -1,6 +1,4 @@
-﻿<h2 id="crud-automatically">
-Automatically:
-</h2>
+﻿## Automatically registering managers for decorated CRUD entities by extensions:
 
 You need to have access to your entity model classes for this option.
 
@@ -17,19 +15,22 @@ public class MyEntity
 ```
 
 Thanks to this attribute:
-- (Mandatory) We have to provide the specific entity crud base uri
+- (Mandatory) We have to provide the specific entity crud base uri (no more fluent declaration)
 - (Optional) We can set TKey type to any primitive type (default to int)
 - (Optional) We can set TReadAllResult to any class or must inherit from ```IEnumerable<>``` (default to ```IEnumerable<T>```)
 - (Optional) We can set TReadAllParams to any class (default to ```IDictionary<string, object>```)
 
-Then, register in your Startup class like so:
+Then, here is a registration example:
 ```csharp
 public override void ConfigureServices(IServiceCollection services)
 {
     // Apizr registration
-    services.AddApizrCrudFor(typeof(MyEntity));
+    services.AddApizrCrudFor(ASSEMBLIES_CONTAINING_ENTITIES);
 }
 ```
 
-There are many AddApizrCrudFor flavors for crud automatic registration, depending on what you want to do and provide.
-This is the simplest.
+Apizr will scan assemblies to auto register managers for decorated entities.
+
+### Next steps
+
+- [Using the manager](crud_using.md)

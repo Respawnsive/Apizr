@@ -1,6 +1,4 @@
-﻿<h2 id="classic-using">
-Using the manager:
-</h2>
+﻿## Using the manager:
 
 Here is an example of how to send a web request from an app - e.g. using Apizr in a Xamarin.Forms mobile app.
 
@@ -22,7 +20,7 @@ public class YourViewModel
         IList<User>? users;
         try
         {
-            var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
+            var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
             users = userList.Data;
         }
         catch (ApizrException<UserList> e)

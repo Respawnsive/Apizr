@@ -5,13 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>
-Automatically registering decorated interfaces by extensions:
- | Apizr </title>
+    <title>Automatically registering decorated interfaces by extensions: | Apizr </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="
-Automatically registering decorated interfaces by extensions:
- | Apizr ">
+    <meta name="title" content="Automatically registering decorated interfaces by extensions: | Apizr ">
     <meta name="generator" content="docfx 2.59.0.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
@@ -81,19 +77,32 @@ Automatically registering decorated interfaces by extensions:
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="classic-automatically">
-Automatically registering decorated interfaces by extensions:
-</h2>
+<h2 id="automatically-registering-decorated-interfaces-by-extensions">Automatically registering decorated interfaces by extensions:</h2>
 
-
-<p>Register in your Startup class like so:</p>
+<p>Here is an example:</p>
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {
+    var registry = new PolicyRegistry
+    {
+        {
+            &quot;TransientHttpError&quot;, HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(1),
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10)
+            })
+        }
+    };
+    services.AddPolicyRegistry(registry);
+
     // Apizr registration
     services.AddApizrFor(options =&gt; options.WithAkavacheCacheHandler(), typeof(AnyClassFromServicesAssembly));
 }
-</code></pre><p>There are many AddApizrFor flavors for classic automatic registration, depending on what you want to do and provide.
-This one is the simplest.</p>
+</code></pre><p>We provided a policy registry and a cache handler here as we asked for it with cache and policy attributes while designing the api interface.</p>
+<h3 id="next-steps">Next steps</h3>
+<ul>
+<li><a href="classic_using.html">Using the manager</a></li>
+</ul>
 </article>
           </div>
           
@@ -101,9 +110,6 @@ This one is the simplest.</p>
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
-                  <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/lab/Apizr/Docs/Apizr.Docs/articles/classic_extended_auto_registering.md/#L1" class="contribution-link">Improve this Doc</a>
-                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">

@@ -1,6 +1,4 @@
-﻿<h2 id="classic-manually">
-Manually registering by extensions:
-</h2>
+﻿## Manually registering the managed api interface by extensions:
 
 Here is an example:
 ```csharp
@@ -23,3 +21,9 @@ public override void ConfigureServices(IServiceCollection services)
     services.AddApizrFor<IReqResService>(options => options.WithAkavacheCacheHandler());
 }
 ```
+
+We provided a policy registry and a cache handler here as we asked for it with cache and policy attributes while designing the api interface.
+
+### Next steps
+
+- [Using the manager](classic_using.md)

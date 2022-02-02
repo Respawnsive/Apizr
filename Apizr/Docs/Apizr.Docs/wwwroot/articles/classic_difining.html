@@ -5,13 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>
-Defining interface for a classic Api:
- | Apizr </title>
+    <title>Defining an interface for a classic Api: | Apizr </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="
-Defining interface for a classic Api:
- | Apizr ">
+    <meta name="title" content="Defining an interface for a classic Api: | Apizr ">
     <meta name="generator" content="docfx 2.59.0.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
@@ -81,10 +77,7 @@ Defining interface for a classic Api:
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="classic-defining">
-Defining interface for a classic Api:
-</h2>
-
+<h2 id="defining-an-interface-for-a-classic-api">Defining an interface for a classic Api:</h2>
 
 <p>We could define our web api service just like:</p>
 <pre><code class="lang-csharp">[assembly:Policy(&quot;TransientHttpError&quot;)]
@@ -94,17 +87,29 @@ namespace Apizr.Sample.Api
     public interface IReqResService
     {
         [Get(&quot;/api/users&quot;)]
-        Task&lt;UserList&gt; GetUsersAsync(CancellationToken cancellationToken);
+        Task&lt;UserList&gt; GetUsersAsync();
 
         [Get(&quot;/api/users/{userId}&quot;)]
-        Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId, CancellationToken cancellationToken);
+        Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId);
 
         [Post(&quot;/api/users&quot;)]
-        Task&lt;User&gt; CreateUser(User user, CancellationToken cancellationToken);
+        Task&lt;User&gt; CreateUser(User user);
     }
 }
 </code></pre><p>And that&#39;s all.</p>
 <p>Every attributes here will inform Apizr on how to manage each web api request. No more boilerplate.</p>
+<h3 id="next-steps">Next steps</h3>
+<ul>
+<li><a href="classic_static_registering.html">Register the managed instance, the static way</a></li>
+</ul>
+<p>OR</p>
+<ul>
+<li><a href="classic_extended_manual_registering.html">Register the managed definition, the manual extended way</a></li>
+</ul>
+<p>OR</p>
+<ul>
+<li><a href="classic_extended_auto_registering.html">Register any definition with management, the automatic extended way</a></li>
+</ul>
 </article>
           </div>
           
@@ -112,9 +117,6 @@ namespace Apizr.Sample.Api
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
-                  <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/lab/Apizr/Docs/Apizr.Docs/articles/classic_difining.md/#L1" class="contribution-link">Improve this Doc</a>
-                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">

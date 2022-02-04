@@ -1,11 +1,10 @@
 ﻿# Apizr
-Refit based web api client, but resilient (retry, connectivity, cache, auth, log, priority, etc...)
 
-You'll find a [blog post series here](https://www.respawnsive.com/category/blog-en/apizr/) about Apizr.
+Refit based web api client, but resilient (retry, connectivity, cache, auth, log, priority, etc...)
 
 ## Libraries
 
-[Change Log - Mar 12, 2021](changelog.md)
+[Change Log - Mar 12, 2021 (with v4 changes)](changelog.md)
 
 |Project|NuGet|
 |-------|-----|

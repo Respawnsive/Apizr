@@ -5,8 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.FileProviders;
 
 namespace Apizr.Docs
 {
@@ -26,18 +28,13 @@ namespace Apizr.Docs
                 app.UseDeveloperExceptionPage();
             }
 
+            var path = Path.GetFullPath(Path.Combine(env.ContentRootPath, @"..\..\..\docs"));
             app.UseDefaultFiles()
-                .UseStaticFiles();
-
-            //app.UseRouting();
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapGet("/", async context =>
-            //    {
-            //        await context.Response.WriteAsync("Hello World!");
-            //    });
-            //});
+                .UseStaticFiles(new StaticFileOptions
+                {
+                    FileProvider = new PhysicalFileProvider(path),
+                    RequestPath = new PathString("")
+                });
         }
     }
 }

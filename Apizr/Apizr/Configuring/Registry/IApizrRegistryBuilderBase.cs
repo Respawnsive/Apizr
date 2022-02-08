@@ -21,7 +21,7 @@ namespace Apizr.Configuring.Registry
         #region Crud
 
         /// <summary>
-        /// Create a <see cref="ApizrManager{ICrudApi}"/> instance for <see cref="T"/> object type (class), 
+        /// Create a <see cref="ApizrManager{ICrudApi}"/> instance for <typeparamref name="T"/> object type (class), 
         /// with key of type <see cref="int"/> and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
         /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
@@ -33,8 +33,8 @@ namespace Apizr.Configuring.Registry
             where T : class;
 
         /// <summary>
-        /// Create a <see cref="ApizrManager{ICrudApi}"/> instance for <see cref="T"/> object type (class), 
-        /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
+        /// Create a <see cref="ApizrManager{ICrudApi}"/> instance for <typeparamref name="T"/> object type (class), 
+        /// with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
         /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
         /// <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
@@ -46,8 +46,8 @@ namespace Apizr.Configuring.Registry
             where T : class;
 
         /// <summary>
-        /// Create a <see cref="ApizrManager{ICrudApi}"/> instance for <see cref="T"/> object type (class), 
-        /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="TReadAllResult"/>
+        /// Create a <see cref="ApizrManager{ICrudApi}"/> instance for <typeparamref name="T"/> object type (class), 
+        /// with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
         /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
         /// <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
@@ -62,8 +62,8 @@ namespace Apizr.Configuring.Registry
             where T : class;
 
         /// <summary>
-        /// Create a <see cref="ApizrManager{ICrudApi}"/> instance for <see cref="T"/> object type (class), 
-        /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="TReadAllResult"/>
+        /// Create a <see cref="ApizrManager{ICrudApi}"/> instance for <typeparamref name="T"/> object type (class), 
+        /// with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
         /// and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
         /// </summary>
         /// <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>

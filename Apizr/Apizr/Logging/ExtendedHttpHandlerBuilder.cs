@@ -16,19 +16,19 @@ namespace Apizr.Logging
         private readonly ExtendedHttpTracerHandler _rootHandler;
 
         /// <summary>
-        /// Underlying instance of the <see cref="T:HttpTracer.HttpHandlerBuilder"/> class.
+        /// Underlying instance of the <typeparamref name="T:HttpTracer.HttpHandlerBuilder"/> class.
         /// </summary>
         public ExtendedHttpTracerHandler HttpTracerHandler => _rootHandler;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:ExtendedHttpTracerHandler"/> class.
+        /// Initializes a new instance of the <typeparamref name="T:ExtendedHttpTracerHandler"/> class.
         /// </summary>
         /// <param name="logger">Logger.</param>
         /// <param name="apizrOptions"></param>
         public ExtendedHttpHandlerBuilder(IApizrOptionsBase apizrOptions) : this(new ExtendedHttpTracerHandler(null, apizrOptions)) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:ExtendedHttpTracerHandler"/> class.
+        /// Initializes a new instance of the <typeparamref name="T:ExtendedHttpTracerHandler"/> class.
         /// </summary>
         /// <param name="innerHandler">HttpClientHandler.</param>
         /// <param name="logger">Logger.</param>
@@ -36,7 +36,7 @@ namespace Apizr.Logging
         public ExtendedHttpHandlerBuilder(HttpClientHandler innerHandler, IApizrOptionsBase apizrOptions) : this(new ExtendedHttpTracerHandler(innerHandler, apizrOptions)) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:ExtendedHttpTracerHandler"/> class.
+        /// Initializes a new instance of the <typeparamref name="T:ExtendedHttpTracerHandler"/> class.
         /// </summary>
         /// <param name="tracerHandler">Tracer handler.</param>
         public ExtendedHttpHandlerBuilder(ExtendedHttpTracerHandler tracerHandler)

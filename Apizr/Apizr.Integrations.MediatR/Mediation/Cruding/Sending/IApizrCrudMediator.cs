@@ -940,7 +940,7 @@ namespace Apizr.Mediation.Cruding.Sending
     }
 
     /// <summary>
-    /// Apizr mediator dedicated to <see cref="TApiEntity"/> cruding, getting all shorter
+    /// Apizr mediator dedicated to <typeparamref name="TApiEntity"/> cruding, getting all shorter
     /// </summary>
     public interface IApizrCrudMediator<TApiEntity, in TApiEntityKey, TReadAllResult, in TReadAllParams> : IApizrCrudMediatorBase
         where TApiEntity : class

@@ -1,0 +1,1087 @@
+### YamlMime:ManagedReference
+items:
+- uid: Apizr.PriorityHttpMessageHandler
+  commentId: T:Apizr.PriorityHttpMessageHandler
+  id: PriorityHttpMessageHandler
+  parent: Apizr
+  children:
+  - Apizr.PriorityHttpMessageHandler.#ctor(System.Net.Http.HttpMessageHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,System.Nullable{System.Int64},Punchclock.OperationQueue)
+  - Apizr.PriorityHttpMessageHandler.ResetLimit(System.Nullable{System.Int64})
+  - Apizr.PriorityHttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  langs:
+  - csharp
+  - vb
+  name: PriorityHttpMessageHandler
+  nameWithType: PriorityHttpMessageHandler
+  fullName: Apizr.PriorityHttpMessageHandler
+  type: Class
+  source:
+    id: PriorityHttpMessageHandler
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Fusillade\PriorityHttpMessageHandler.cs
+    startLine: 15
+  assemblies:
+  - Apizr.Integrations.Fusillade
+  namespace: Apizr
+  syntax:
+    content: 'public class PriorityHttpMessageHandler : LimitingHttpMessageHandler, IDisposable'
+    content.vb: >-
+      Public Class PriorityHttpMessageHandler
+          Inherits LimitingHttpMessageHandler
+          Implements IDisposable
+  inheritance:
+  - System.Object
+  - System.Net.Http.HttpMessageHandler
+  - System.Net.Http.DelegatingHandler
+  - Fusillade.LimitingHttpMessageHandler
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
+  - System.Net.Http.DelegatingHandler.InnerHandler
+  - System.Net.Http.HttpMessageHandler.Dispose
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Apizr.PriorityHttpMessageHandler.#ctor(System.Net.Http.HttpMessageHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,System.Nullable{System.Int64},Punchclock.OperationQueue)
+  commentId: M:Apizr.PriorityHttpMessageHandler.#ctor(System.Net.Http.HttpMessageHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,System.Nullable{System.Int64},Punchclock.OperationQueue)
+  id: '#ctor(System.Net.Http.HttpMessageHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,System.Nullable{System.Int64},Punchclock.OperationQueue)'
+  parent: Apizr.PriorityHttpMessageHandler
+  langs:
+  - csharp
+  - vb
+  name: PriorityHttpMessageHandler(HttpMessageHandler, ILogger, IApizrOptionsBase, Nullable<Int64>, OperationQueue)
+  nameWithType: PriorityHttpMessageHandler.PriorityHttpMessageHandler(HttpMessageHandler, ILogger, IApizrOptionsBase, Nullable<Int64>, OperationQueue)
+  fullName: Apizr.PriorityHttpMessageHandler.PriorityHttpMessageHandler(System.Net.Http.HttpMessageHandler, Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.IApizrOptionsBase, System.Nullable<System.Int64>, Punchclock.OperationQueue)
+  type: Constructor
+  source:
+    id: .ctor
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Fusillade\PriorityHttpMessageHandler.cs
+    startLine: 23
+  assemblies:
+  - Apizr.Integrations.Fusillade
+  namespace: Apizr
+  syntax:
+    content: public PriorityHttpMessageHandler(HttpMessageHandler innerHandler, ILogger logger, IApizrOptionsBase apizrOptions, long? maxBytesToRead = null, OperationQueue opQueue = null)
+    parameters:
+    - id: innerHandler
+      type: System.Net.Http.HttpMessageHandler
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+    - id: apizrOptions
+      type: Apizr.Configuring.IApizrOptionsBase
+    - id: maxBytesToRead
+      type: System.Nullable{System.Int64}
+    - id: opQueue
+      type: Punchclock.OperationQueue
+    content.vb: Public Sub New(innerHandler As HttpMessageHandler, logger As ILogger, apizrOptions As IApizrOptionsBase, maxBytesToRead As Long? = Nothing, opQueue As OperationQueue = Nothing)
+  overload: Apizr.PriorityHttpMessageHandler.#ctor*
+  nameWithType.vb: PriorityHttpMessageHandler.PriorityHttpMessageHandler(HttpMessageHandler, ILogger, IApizrOptionsBase, Nullable(Of Int64), OperationQueue)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Apizr.PriorityHttpMessageHandler.PriorityHttpMessageHandler(System.Net.Http.HttpMessageHandler, Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.IApizrOptionsBase, System.Nullable(Of System.Int64), Punchclock.OperationQueue)
+  name.vb: PriorityHttpMessageHandler(HttpMessageHandler, ILogger, IApizrOptionsBase, Nullable(Of Int64), OperationQueue)
+- uid: Apizr.PriorityHttpMessageHandler.ResetLimit(System.Nullable{System.Int64})
+  commentId: M:Apizr.PriorityHttpMessageHandler.ResetLimit(System.Nullable{System.Int64})
+  id: ResetLimit(System.Nullable{System.Int64})
+  parent: Apizr.PriorityHttpMessageHandler
+  langs:
+  - csharp
+  - vb
+  name: ResetLimit(Nullable<Int64>)
+  nameWithType: PriorityHttpMessageHandler.ResetLimit(Nullable<Int64>)
+  fullName: Apizr.PriorityHttpMessageHandler.ResetLimit(System.Nullable<System.Int64>)
+  type: Method
+  source:
+    id: ResetLimit
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Fusillade\PriorityHttpMessageHandler.cs
+    startLine: 31
+  assemblies:
+  - Apizr.Integrations.Fusillade
+  namespace: Apizr
+  syntax:
+    content: public override void ResetLimit(long? maxBytesToRead = null)
+    parameters:
+    - id: maxBytesToRead
+      type: System.Nullable{System.Int64}
+    content.vb: Public Overrides Sub ResetLimit(maxBytesToRead As Long? = Nothing)
+  overridden: Fusillade.LimitingHttpMessageHandler.ResetLimit(System.Nullable{System.Int64})
+  overload: Apizr.PriorityHttpMessageHandler.ResetLimit*
+  nameWithType.vb: PriorityHttpMessageHandler.ResetLimit(Nullable(Of Int64))
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+  fullName.vb: Apizr.PriorityHttpMessageHandler.ResetLimit(System.Nullable(Of System.Int64))
+  name.vb: ResetLimit(Nullable(Of Int64))
+- uid: Apizr.PriorityHttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  commentId: M:Apizr.PriorityHttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  id: SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  parent: Apizr.PriorityHttpMessageHandler
+  langs:
+  - csharp
+  - vb
+  name: SendAsync(HttpRequestMessage, CancellationToken)
+  nameWithType: PriorityHttpMessageHandler.SendAsync(HttpRequestMessage, CancellationToken)
+  fullName: Apizr.PriorityHttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken)
+  type: Method
+  source:
+    id: SendAsync
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Fusillade\PriorityHttpMessageHandler.cs
+    startLine: 36
+  assemblies:
+  - Apizr.Integrations.Fusillade
+  namespace: Apizr
+  syntax:
+    content: protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    parameters:
+    - id: request
+      type: System.Net.Http.HttpRequestMessage
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+    return:
+      type: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
+    content.vb: Protected Overrides Function SendAsync(request As HttpRequestMessage, cancellationToken As CancellationToken) As Task(Of HttpResponseMessage)
+  overridden: System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  overload: Apizr.PriorityHttpMessageHandler.SendAsync*
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+references:
+- uid: Apizr
+  commentId: N:Apizr
+  name: Apizr
+  nameWithType: Apizr
+  fullName: Apizr
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Net.Http.HttpMessageHandler
+  commentId: T:System.Net.Http.HttpMessageHandler
+  parent: System.Net.Http
+  isExternal: true
+  name: HttpMessageHandler
+  nameWithType: HttpMessageHandler
+  fullName: System.Net.Http.HttpMessageHandler
+- uid: System.Net.Http.DelegatingHandler
+  commentId: T:System.Net.Http.DelegatingHandler
+  parent: System.Net.Http
+  isExternal: true
+  name: DelegatingHandler
+  nameWithType: DelegatingHandler
+  fullName: System.Net.Http.DelegatingHandler
+- uid: Fusillade.LimitingHttpMessageHandler
+  commentId: T:Fusillade.LimitingHttpMessageHandler
+  parent: Fusillade
+  isExternal: true
+  name: LimitingHttpMessageHandler
+  nameWithType: LimitingHttpMessageHandler
+  fullName: Fusillade.LimitingHttpMessageHandler
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
+  commentId: M:System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
+  parent: System.Net.Http.DelegatingHandler
+  isExternal: true
+  name: Dispose(Boolean)
+  nameWithType: DelegatingHandler.Dispose(Boolean)
+  fullName: System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
+  spec.csharp:
+  - uid: System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
+    name: Dispose
+    nameWithType: DelegatingHandler.Dispose
+    fullName: System.Net.Http.DelegatingHandler.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
+    name: Dispose
+    nameWithType: DelegatingHandler.Dispose
+    fullName: System.Net.Http.DelegatingHandler.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Net.Http.DelegatingHandler.InnerHandler
+  commentId: P:System.Net.Http.DelegatingHandler.InnerHandler
+  parent: System.Net.Http.DelegatingHandler
+  isExternal: true
+  name: InnerHandler
+  nameWithType: DelegatingHandler.InnerHandler
+  fullName: System.Net.Http.DelegatingHandler.InnerHandler
+- uid: System.Net.Http.HttpMessageHandler.Dispose
+  commentId: M:System.Net.Http.HttpMessageHandler.Dispose
+  parent: System.Net.Http.HttpMessageHandler
+  isExternal: true
+  name: Dispose()
+  nameWithType: HttpMessageHandler.Dispose()
+  fullName: System.Net.Http.HttpMessageHandler.Dispose()
+  spec.csharp:
+  - uid: System.Net.Http.HttpMessageHandler.Dispose
+    name: Dispose
+    nameWithType: HttpMessageHandler.Dispose
+    fullName: System.Net.Http.HttpMessageHandler.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Net.Http.HttpMessageHandler.Dispose
+    name: Dispose
+    nameWithType: HttpMessageHandler.Dispose
+    fullName: System.Net.Http.HttpMessageHandler.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
+  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
+  parent: Apizr.Extending.ObjectExtensions
+  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
+  name: ToString(String, String)
+  nameWithType: ObjectExtensions.ToString(String, String)
+  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
+  spec.csharp:
+  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
+    name: ToString
+    nameWithType: ObjectExtensions.ToString
+    fullName: Apizr.Extending.ObjectExtensions.ToString
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
+    name: ToString
+    nameWithType: ObjectExtensions.ToString
+    fullName: Apizr.Extending.ObjectExtensions.ToString
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Net.Http
+  commentId: N:System.Net.Http
+  isExternal: true
+  name: System.Net.Http
+  nameWithType: System.Net.Http
+  fullName: System.Net.Http
+- uid: Fusillade
+  commentId: N:Fusillade
+  isExternal: true
+  name: Fusillade
+  nameWithType: Fusillade
+  fullName: Fusillade
+- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
+  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
+  isExternal: true
+  name: ToString(Object, String, String)
+  nameWithType: ObjectExtensions.ToString(Object, String, String)
+  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
+  spec.csharp:
+  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
+    name: ToString
+    nameWithType: ObjectExtensions.ToString
+    fullName: Apizr.Extending.ObjectExtensions.ToString
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
+    name: ToString
+    nameWithType: ObjectExtensions.ToString
+    fullName: Apizr.Extending.ObjectExtensions.ToString
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Extending.ObjectExtensions
+  commentId: T:Apizr.Extending.ObjectExtensions
+  parent: Apizr.Extending
+  name: ObjectExtensions
+  nameWithType: ObjectExtensions
+  fullName: Apizr.Extending.ObjectExtensions
+- uid: Apizr.Extending
+  commentId: N:Apizr.Extending
+  name: Apizr.Extending
+  nameWithType: Apizr.Extending
+  fullName: Apizr.Extending
+- uid: Apizr.PriorityHttpMessageHandler.#ctor*
+  commentId: Overload:Apizr.PriorityHttpMessageHandler.#ctor
+  name: PriorityHttpMessageHandler
+  nameWithType: PriorityHttpMessageHandler.PriorityHttpMessageHandler
+  fullName: Apizr.PriorityHttpMessageHandler.PriorityHttpMessageHandler
+- uid: Microsoft.Extensions.Logging.ILogger
+  commentId: T:Microsoft.Extensions.Logging.ILogger
+  parent: Microsoft.Extensions.Logging
+  isExternal: true
+  name: ILogger
+  nameWithType: ILogger
+  fullName: Microsoft.Extensions.Logging.ILogger
+- uid: Apizr.Configuring.IApizrOptionsBase
+  commentId: T:Apizr.Configuring.IApizrOptionsBase
+  parent: Apizr.Configuring
+  name: IApizrOptionsBase
+  nameWithType: IApizrOptionsBase
+  fullName: Apizr.Configuring.IApizrOptionsBase
+- uid: System.Nullable{System.Int64}
+  commentId: T:System.Nullable{System.Int64}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<Int64>
+  nameWithType: Nullable<Int64>
+  fullName: System.Nullable<System.Int64>
+  nameWithType.vb: Nullable(Of Int64)
+  fullName.vb: System.Nullable(Of System.Int64)
+  name.vb: Nullable(Of Int64)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Int64
+    name: Int64
+    nameWithType: Int64
+    fullName: System.Int64
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Int64
+    name: Int64
+    nameWithType: Int64
+    fullName: System.Int64
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Punchclock.OperationQueue
+  commentId: T:Punchclock.OperationQueue
+  parent: Punchclock
+  isExternal: true
+  name: OperationQueue
+  nameWithType: OperationQueue
+  fullName: Punchclock.OperationQueue
+- uid: Microsoft.Extensions.Logging
+  commentId: N:Microsoft.Extensions.Logging
+  isExternal: true
+  name: Microsoft.Extensions.Logging
+  nameWithType: Microsoft.Extensions.Logging
+  fullName: Microsoft.Extensions.Logging
+- uid: Apizr.Configuring
+  commentId: N:Apizr.Configuring
+  name: Apizr.Configuring
+  nameWithType: Apizr.Configuring
+  fullName: Apizr.Configuring
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Punchclock
+  commentId: N:Punchclock
+  isExternal: true
+  name: Punchclock
+  nameWithType: Punchclock
+  fullName: Punchclock
+- uid: Fusillade.LimitingHttpMessageHandler.ResetLimit(System.Nullable{System.Int64})
+  commentId: M:Fusillade.LimitingHttpMessageHandler.ResetLimit(System.Nullable{System.Int64})
+  parent: Fusillade.LimitingHttpMessageHandler
+  isExternal: true
+  name: ResetLimit(Nullable<Int64>)
+  nameWithType: LimitingHttpMessageHandler.ResetLimit(Nullable<Int64>)
+  fullName: Fusillade.LimitingHttpMessageHandler.ResetLimit(System.Nullable<System.Int64>)
+  nameWithType.vb: LimitingHttpMessageHandler.ResetLimit(Nullable(Of Int64))
+  fullName.vb: Fusillade.LimitingHttpMessageHandler.ResetLimit(System.Nullable(Of System.Int64))
+  name.vb: ResetLimit(Nullable(Of Int64))
+  spec.csharp:
+  - uid: Fusillade.LimitingHttpMessageHandler.ResetLimit(System.Nullable{System.Int64})
+    name: ResetLimit
+    nameWithType: LimitingHttpMessageHandler.ResetLimit
+    fullName: Fusillade.LimitingHttpMessageHandler.ResetLimit
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Int64
+    name: Int64
+    nameWithType: Int64
+    fullName: System.Int64
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Fusillade.LimitingHttpMessageHandler.ResetLimit(System.Nullable{System.Int64})
+    name: ResetLimit
+    nameWithType: LimitingHttpMessageHandler.ResetLimit
+    fullName: Fusillade.LimitingHttpMessageHandler.ResetLimit
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Int64
+    name: Int64
+    nameWithType: Int64
+    fullName: System.Int64
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.PriorityHttpMessageHandler.ResetLimit*
+  commentId: Overload:Apizr.PriorityHttpMessageHandler.ResetLimit
+  name: ResetLimit
+  nameWithType: PriorityHttpMessageHandler.ResetLimit
+  fullName: Apizr.PriorityHttpMessageHandler.ResetLimit
+- uid: System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  commentId: M:System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  parent: System.Net.Http.DelegatingHandler
+  isExternal: true
+  name: SendAsync(HttpRequestMessage, CancellationToken)
+  nameWithType: DelegatingHandler.SendAsync(HttpRequestMessage, CancellationToken)
+  fullName: System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken)
+  spec.csharp:
+  - uid: System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+    name: SendAsync
+    nameWithType: DelegatingHandler.SendAsync
+    fullName: System.Net.Http.DelegatingHandler.SendAsync
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Net.Http.HttpRequestMessage
+    name: HttpRequestMessage
+    nameWithType: HttpRequestMessage
+    fullName: System.Net.Http.HttpRequestMessage
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    nameWithType: CancellationToken
+    fullName: System.Threading.CancellationToken
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+    name: SendAsync
+    nameWithType: DelegatingHandler.SendAsync
+    fullName: System.Net.Http.DelegatingHandler.SendAsync
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Net.Http.HttpRequestMessage
+    name: HttpRequestMessage
+    nameWithType: HttpRequestMessage
+    fullName: System.Net.Http.HttpRequestMessage
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    nameWithType: CancellationToken
+    fullName: System.Threading.CancellationToken
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.PriorityHttpMessageHandler.SendAsync*
+  commentId: Overload:Apizr.PriorityHttpMessageHandler.SendAsync
+  name: SendAsync
+  nameWithType: PriorityHttpMessageHandler.SendAsync
+  fullName: Apizr.PriorityHttpMessageHandler.SendAsync
+- uid: System.Net.Http.HttpRequestMessage
+  commentId: T:System.Net.Http.HttpRequestMessage
+  parent: System.Net.Http
+  isExternal: true
+  name: HttpRequestMessage
+  nameWithType: HttpRequestMessage
+  fullName: System.Net.Http.HttpRequestMessage
+- uid: System.Threading.CancellationToken
+  commentId: T:System.Threading.CancellationToken
+  parent: System.Threading
+  isExternal: true
+  name: CancellationToken
+  nameWithType: CancellationToken
+  fullName: System.Threading.CancellationToken
+- uid: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
+  commentId: T:System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  name: Task<HttpResponseMessage>
+  nameWithType: Task<HttpResponseMessage>
+  fullName: System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>
+  nameWithType.vb: Task(Of HttpResponseMessage)
+  fullName.vb: System.Threading.Tasks.Task(Of System.Net.Http.HttpResponseMessage)
+  name.vb: Task(Of HttpResponseMessage)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Threading
+  commentId: N:System.Threading
+  isExternal: true
+  name: System.Threading
+  nameWithType: System.Threading
+  fullName: System.Threading
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks

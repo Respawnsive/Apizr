@@ -8,7 +8,7 @@ namespace Apizr.Configuring
     }
 
     /// <summary>
-    /// Options dedicated to <see cref="TWebApi"/>
+    /// Options dedicated to <typeparamref name="TWebApi"/>
     /// </summary>
     /// <typeparam name="TWebApi"></typeparam>
     public interface IApizrOptions<TWebApi> : IApizrOptionsBase

@@ -135,7 +135,7 @@ namespace Apizr.Sample.Console
 
                 var apizrRegistry = Apizr.Create(
                     registry => registry
-                        .AddFor<IReqResService>(options => options.WithLogging())
+                        .AddFor<IReqResService>(options => options.WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.ResponseAll, LogLevel.Error))
                         .AddCrudFor<User, int, PagedResult<User>>(options => options.WithBaseAddress("https://reqres.in/api/users")),
 
                     config => config

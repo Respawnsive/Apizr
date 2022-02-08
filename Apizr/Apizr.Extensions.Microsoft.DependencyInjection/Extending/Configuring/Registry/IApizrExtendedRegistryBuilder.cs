@@ -17,8 +17,8 @@ namespace Apizr.Extending.Configuring.Registry
         #region Crud
 
         /// <summary>
-        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <see cref="T"/> object type, 
-        /// with key of type <see cref="TKey"/> (primitive) and "ReadAll" query result of type <see cref="TReadAllResult"/>
+        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <typeparamref name="T"/> object type, 
+        /// with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
         /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
         /// and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
         /// </summary>
@@ -36,7 +36,7 @@ namespace Apizr.Extending.Configuring.Registry
             where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>;
 
         /// <summary>
-        /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="crudedType"/> object type (class), 
+        /// Register <see cref="IApizrManager{ICrudApi}"/> for <paramref name="crudedType"/> object type (class), 
         /// with key of type <see cref="int"/> and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
         /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
@@ -47,8 +47,8 @@ namespace Apizr.Extending.Configuring.Registry
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
-        /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="crudedType"/> object type (class), 
-        /// with key of type <see cref="crudedKeyType"/> (primitive) and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
+        /// Register <see cref="IApizrManager{ICrudApi}"/> for <paramref name="crudedType"/> object type (class), 
+        /// with key of type <paramref name="crudedKeyType"/> (primitive) and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
         /// </summary>
         /// <param name="crudedType">The object type to manage with crud api calls (class)</param>
         /// <param name="crudedKeyType">The object key type (primitive)</param>
@@ -58,8 +58,8 @@ namespace Apizr.Extending.Configuring.Registry
             Type crudedKeyType, Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
-        /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="crudedType"/> object type (class), 
-        /// with key of type <see cref="crudedKeyType"/> (primitive) and "ReadAll" query result of type <see cref="crudedReadAllResultType"/>
+        /// Register <see cref="IApizrManager{ICrudApi}"/> for <paramref name="crudedType"/> object type (class), 
+        /// with key of type <paramref name="crudedKeyType"/> (primitive) and "ReadAll" query result of type <paramref name="crudedReadAllResultType"/>
         /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
         /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
@@ -74,8 +74,8 @@ namespace Apizr.Extending.Configuring.Registry
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
-        /// Register <see cref="IApizrManager{ICrudApi}"/> for <see cref="crudedType"/> object type (class), 
-        /// with key of type <see cref="crudedKeyType"/> (primitive) and "ReadAll" query result of type <see cref="crudedReadAllResultType"/>
+        /// Register <see cref="IApizrManager{ICrudApi}"/> for <paramref name="crudedType"/> object type (class), 
+        /// with key of type <paramref name="crudedKeyType"/> (primitive) and "ReadAll" query result of type <paramref name="crudedReadAllResultType"/>
         /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
         /// and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
         /// </summary>
@@ -91,8 +91,8 @@ namespace Apizr.Extending.Configuring.Registry
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
-        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <see cref="crudedType"/> object type (class), 
-        /// with key of type <see cref="crudedKeyType"/> (primitive) and "ReadAll" query result of type <see cref="crudedReadAllResultType"/>
+        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <paramref name="crudedType"/> object type (class), 
+        /// with key of type <paramref name="crudedKeyType"/> (primitive) and "ReadAll" query result of type <paramref name="crudedReadAllResultType"/>
         /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
         /// and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
         /// </summary>
@@ -118,7 +118,6 @@ namespace Apizr.Extending.Configuring.Registry
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
         /// </summary>
-        /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <param name="assemblies">Any assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
         TApizrExtendedRegistryBuilder AddCrudFor(params Assembly[] assemblies);

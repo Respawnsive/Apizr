@@ -21,7 +21,7 @@ namespace Apizr
     }
 
     /// <summary>
-    /// An exception with optional cached <see cref="TResult"/>
+    /// An exception with optional cached <typeparamref name="TResult"/>
     /// </summary>
     public class ApizrException<TResult> : ApizrException
     {

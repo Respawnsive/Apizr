@@ -101,7 +101,6 @@ namespace Apizr.Extending.Configuring
         public Func<IServiceProvider, ICacheHandler> CacheHandlerFactory { get; set; }
         public Func<IServiceProvider, IMappingHandler> MappingHandlerFactory { get; set; }
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
-        public IList<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
         public IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }
         public IDictionary<Type, WebApiAttribute> WebApis { get; }
         public IDictionary<Type, MappedWithAttribute> ObjectMappings { get; }

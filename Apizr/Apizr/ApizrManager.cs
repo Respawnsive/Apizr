@@ -2510,7 +2510,7 @@ namespace Apizr
 
         private TDestination Map<TSource, TDestination>(TSource source)
         {
-            TDestination destination = default;
+            TDestination destination;
             try
             {
                 if (typeof(TSource) == typeof(TDestination))
@@ -2603,7 +2603,7 @@ namespace Apizr
                 if (parameterExpression.Type == typeof(CancellationToken))
                     yield return new ExtractedConstant { Value = CancellationToken.None };
                 else
-                    yield return new ExtractedConstant { };
+                    yield return new ExtractedConstant();
             }
             else if (expression is ListInitExpression listInitExpression)
             {

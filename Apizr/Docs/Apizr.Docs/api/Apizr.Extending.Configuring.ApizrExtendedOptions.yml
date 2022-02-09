@@ -13,7 +13,6 @@ items:
   - Apizr.Extending.Configuring.ApizrExtendedOptions.ConnectivityHandlerFactory
   - Apizr.Extending.Configuring.ApizrExtendedOptions.ConnectivityHandlerType
   - Apizr.Extending.Configuring.ApizrExtendedOptions.CrudEntities
-  - Apizr.Extending.Configuring.ApizrExtendedOptions.DelegatingHandlersExtendedFactories
   - Apizr.Extending.Configuring.ApizrExtendedOptions.HttpClientBuilder
   - Apizr.Extending.Configuring.ApizrExtendedOptions.HttpClientHandlerFactory
   - Apizr.Extending.Configuring.ApizrExtendedOptions.HttpTracerModeFactory
@@ -67,6 +66,7 @@ items:
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase
   inheritedMembers:
   - Apizr.Extending.Configuring.ApizrExtendedOptionsBase.HttpClientHandler
+  - Apizr.Extending.Configuring.ApizrExtendedOptionsBase.DelegatingHandlersExtendedFactories
   - Apizr.Configuring.ApizrOptionsBase.WebApiType
   - Apizr.Configuring.ApizrOptionsBase.BaseAddress
   - Apizr.Configuring.ApizrOptionsBase.PolicyRegistryKeys
@@ -618,39 +618,6 @@ items:
   - set
   modifiers.vb:
   - Public
-- uid: Apizr.Extending.Configuring.ApizrExtendedOptions.DelegatingHandlersExtendedFactories
-  commentId: P:Apizr.Extending.Configuring.ApizrExtendedOptions.DelegatingHandlersExtendedFactories
-  id: DelegatingHandlersExtendedFactories
-  parent: Apizr.Extending.Configuring.ApizrExtendedOptions
-  langs:
-  - csharp
-  - vb
-  name: DelegatingHandlersExtendedFactories
-  nameWithType: ApizrExtendedOptions.DelegatingHandlersExtendedFactories
-  fullName: Apizr.Extending.Configuring.ApizrExtendedOptions.DelegatingHandlersExtendedFactories
-  type: Property
-  source:
-    id: DelegatingHandlersExtendedFactories
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 103
-  assemblies:
-  - Apizr.Extensions.Microsoft.DependencyInjection
-  namespace: Apizr.Extending.Configuring
-  syntax:
-    content: public IList<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
-    parameters: []
-    return:
-      type: System.Collections.Generic.IList{System.Func{System.IServiceProvider,Apizr.Configuring.IApizrOptionsBase,System.Net.Http.DelegatingHandler}}
-    content.vb: Public ReadOnly Property DelegatingHandlersExtendedFactories As IList(Of Func(Of IServiceProvider, IApizrOptionsBase, DelegatingHandler))
-  overload: Apizr.Extending.Configuring.ApizrExtendedOptions.DelegatingHandlersExtendedFactories*
-  implements:
-  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
 - uid: Apizr.Extending.Configuring.ApizrExtendedOptions.CrudEntities
   commentId: P:Apizr.Extending.Configuring.ApizrExtendedOptions.CrudEntities
   id: CrudEntities
@@ -665,7 +632,7 @@ items:
   source:
     id: CrudEntities
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 104
+    startLine: 103
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -698,7 +665,7 @@ items:
   source:
     id: WebApis
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 105
+    startLine: 104
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -731,7 +698,7 @@ items:
   source:
     id: ObjectMappings
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 106
+    startLine: 105
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -764,7 +731,7 @@ items:
   source:
     id: PostRegistries
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 107
+    startLine: 106
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -797,7 +764,7 @@ items:
   source:
     id: PostRegistrationActions
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 108
+    startLine: 107
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -925,6 +892,12 @@ references:
   name: HttpClientHandler
   nameWithType: ApizrExtendedOptionsBase.HttpClientHandler
   fullName: Apizr.Extending.Configuring.ApizrExtendedOptionsBase.HttpClientHandler
+- uid: Apizr.Extending.Configuring.ApizrExtendedOptionsBase.DelegatingHandlersExtendedFactories
+  commentId: P:Apizr.Extending.Configuring.ApizrExtendedOptionsBase.DelegatingHandlersExtendedFactories
+  parent: Apizr.Extending.Configuring.ApizrExtendedOptionsBase
+  name: DelegatingHandlersExtendedFactories
+  nameWithType: ApizrExtendedOptionsBase.DelegatingHandlersExtendedFactories
+  fullName: Apizr.Extending.Configuring.ApizrExtendedOptionsBase.DelegatingHandlersExtendedFactories
 - uid: Apizr.Configuring.ApizrOptionsBase.WebApiType
   commentId: P:Apizr.Configuring.ApizrOptionsBase.WebApiType
   parent: Apizr.Configuring.ApizrOptionsBase
@@ -2409,158 +2382,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Extending.Configuring.ApizrExtendedOptions.DelegatingHandlersExtendedFactories*
-  commentId: Overload:Apizr.Extending.Configuring.ApizrExtendedOptions.DelegatingHandlersExtendedFactories
-  name: DelegatingHandlersExtendedFactories
-  nameWithType: ApizrExtendedOptions.DelegatingHandlersExtendedFactories
-  fullName: Apizr.Extending.Configuring.ApizrExtendedOptions.DelegatingHandlersExtendedFactories
-- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
-  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
-  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase
-  name: DelegatingHandlersExtendedFactories
-  nameWithType: IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
-  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
-- uid: System.Collections.Generic.IList{System.Func{System.IServiceProvider,Apizr.Configuring.IApizrOptionsBase,System.Net.Http.DelegatingHandler}}
-  commentId: T:System.Collections.Generic.IList{System.Func{System.IServiceProvider,Apizr.Configuring.IApizrOptionsBase,System.Net.Http.DelegatingHandler}}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.IList`1
-  name: IList<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>>
-  nameWithType: IList<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>>
-  fullName: System.Collections.Generic.IList<System.Func<System.IServiceProvider, Apizr.Configuring.IApizrOptionsBase, System.Net.Http.DelegatingHandler>>
-  nameWithType.vb: IList(Of Func(Of IServiceProvider, IApizrOptionsBase, DelegatingHandler))
-  fullName.vb: System.Collections.Generic.IList(Of System.Func(Of System.IServiceProvider, Apizr.Configuring.IApizrOptionsBase, System.Net.Http.DelegatingHandler))
-  name.vb: IList(Of Func(Of IServiceProvider, IApizrOptionsBase, DelegatingHandler))
-  spec.csharp:
-  - uid: System.Collections.Generic.IList`1
-    name: IList
-    nameWithType: IList
-    fullName: System.Collections.Generic.IList
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.Func`3
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.IServiceProvider
-    name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.IApizrOptionsBase
-    name: IApizrOptionsBase
-    nameWithType: IApizrOptionsBase
-    fullName: Apizr.Configuring.IApizrOptionsBase
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Net.Http.DelegatingHandler
-    name: DelegatingHandler
-    nameWithType: DelegatingHandler
-    fullName: System.Net.Http.DelegatingHandler
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Collections.Generic.IList`1
-    name: IList
-    nameWithType: IList
-    fullName: System.Collections.Generic.IList
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.Func`3
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.IServiceProvider
-    name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.IApizrOptionsBase
-    name: IApizrOptionsBase
-    nameWithType: IApizrOptionsBase
-    fullName: Apizr.Configuring.IApizrOptionsBase
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Net.Http.DelegatingHandler
-    name: DelegatingHandler
-    nameWithType: DelegatingHandler
-    fullName: System.Net.Http.DelegatingHandler
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Collections.Generic.IList`1
-  commentId: T:System.Collections.Generic.IList`1
-  isExternal: true
-  name: IList<T>
-  nameWithType: IList<T>
-  fullName: System.Collections.Generic.IList<T>
-  nameWithType.vb: IList(Of T)
-  fullName.vb: System.Collections.Generic.IList(Of T)
-  name.vb: IList(Of T)
-  spec.csharp:
-  - uid: System.Collections.Generic.IList`1
-    name: IList
-    nameWithType: IList
-    fullName: System.Collections.Generic.IList
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Collections.Generic.IList`1
-    name: IList
-    nameWithType: IList
-    fullName: System.Collections.Generic.IList
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Collections.Generic
-  commentId: N:System.Collections.Generic
-  isExternal: true
-  name: System.Collections.Generic
-  nameWithType: System.Collections.Generic
-  fullName: System.Collections.Generic
 - uid: Apizr.Extending.Configuring.ApizrExtendedOptions.CrudEntities*
   commentId: Overload:Apizr.Extending.Configuring.ApizrExtendedOptions.CrudEntities
   name: CrudEntities
@@ -2681,6 +2502,12 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
 - uid: Apizr.Extending.Configuring.ApizrExtendedOptions.WebApis*
   commentId: Overload:Apizr.Extending.Configuring.ApizrExtendedOptions.WebApis
   name: WebApis
@@ -2978,6 +2805,45 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IList`1
+  commentId: T:System.Collections.Generic.IList`1
+  isExternal: true
+  name: IList<T>
+  nameWithType: IList<T>
+  fullName: System.Collections.Generic.IList<T>
+  nameWithType.vb: IList(Of T)
+  fullName.vb: System.Collections.Generic.IList(Of T)
+  name.vb: IList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
   - name: )
     nameWithType: )
     fullName: )

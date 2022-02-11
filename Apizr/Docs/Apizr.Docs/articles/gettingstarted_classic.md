@@ -3,7 +3,7 @@
 We could define our web api service just like:
 ```csharp
 [assembly:Policy("TransientHttpError")]
-namespace Apizr.Sample.Api
+namespace Apizr.Sample
 {
     [WebApi("https://reqres.in/"), Cache, Log]
     public interface IReqResService

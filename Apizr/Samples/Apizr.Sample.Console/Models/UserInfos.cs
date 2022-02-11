@@ -1,6 +1,6 @@
 ﻿using System;
 using Apizr.Mapping;
-using Apizr.Sample.Api.Models;
+using Apizr.Sample.Models;
 
 namespace Apizr.Sample.Console.Models
 {

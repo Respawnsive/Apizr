@@ -1,50 +1,43 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Apizr.Sample.MAUI.MainPage"
-             BackgroundColor="{DynamicResource SecondaryColor}">
+             xmlns:models="clr-namespace:Apizr.Sample.Models;assembly=Apizr.Sample"
+             xmlns:viewModels="clr-namespace:Apizr.Sample.MAUI.ViewModels;assembly=Apizr.Sample.MAUI"
+             x:Class="Apizr.Sample.MAUI.Views.MainPage"
+             BackgroundColor="{DynamicResource SecondaryColor}"
+             Title="MAUI Apizr Sample"
+             x:DataType="viewModels:MainPageViewModel">
 
-    <ScrollView>
-        <Grid RowSpacing="25" RowDefinitions="Auto,Auto,Auto,Auto,*"
-              Padding="{OnPlatform iOS='30,60,30,30', Default='30'}">
+    <Grid>
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+            <RefreshView Command="{Binding GetUsersCommand}" IsRefreshing="{Binding IsRefreshing}" RefreshColor="Blue">
+                <CollectionView
+                    x:Name="UserCollectionView"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding Users}"
+                    SelectionChangedCommand="{Binding GetUserDetailsCommand}"
+                    SelectionChangedCommandParameter="{Binding Source={x:Reference UserCollectionView}, Path=SelectedItem}"
+                    SelectionMode="Single"
+                    VerticalOptions="FillAndExpand">
+                    <CollectionView.EmptyView>
+                        <Label Text="No Records Found" />
+                    </CollectionView.EmptyView>
 
-            <Label 
-                Text="Hello, World!"
-                Grid.Row="0"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:User">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding FirstName}" />
+                                <Label Text="{Binding LastName}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
 
-            <Label 
-                Text="Welcome to .NET Multi-platform App UI"
-                Grid.Row="1"
-                SemanticProperties.HeadingLevel="Level1"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Label 
-                Text="Current count: 0"
-                Grid.Row="2"
-                FontSize="18"
-                FontAttributes="Bold"
-                x:Name="CounterLabel"
-                HorizontalOptions="Center" />
-
-            <Button 
-                Text="Click me"
-                FontAttributes="Bold"
-                Grid.Row="3"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
-            <Image Grid.Row="4"
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                WidthRequest="250"
-                HeightRequest="310"
-                HorizontalOptions="Center" />
-
-        </Grid>
-    </ScrollView>
+        <Button
+            Command="{Binding AuthCommand}"
+            HorizontalOptions="FillAndExpand"
+            Text="Auth"
+            VerticalOptions="End" />
+    </Grid>
 </ContentPage>

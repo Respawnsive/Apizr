@@ -1,5 +1,9 @@
 ﻿using Apizr.Policing;
+using Apizr.Sample.MAUI.Services;
+using Apizr.Sample.MAUI.Views;
+using Apizr.Sample.MAUI.ViewModels;
 using Apizr.Sample.Models;
+using CommunityToolkit.Maui;
 using MediatR;
 using Polly;
 using Polly.Extensions.Http;
@@ -14,6 +18,7 @@ namespace Apizr.Sample.MAUI
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSansRegular.ttf", "OpenSansRegular");
@@ -21,6 +26,12 @@ namespace Apizr.Sample.MAUI
 
             var services = builder.Services;
 
+            // Mvvm
+            services.AddSingleton<MainPage>();
+            services.AddSingleton<MainPageViewModel>(); 
+            services.AddSingleton<INavigationService, NavigationService>();
+
+            // Apizr
             var registry = new PolicyRegistry
             {
                 {

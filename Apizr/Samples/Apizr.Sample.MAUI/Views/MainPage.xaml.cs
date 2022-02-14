@@ -1,20 +1,13 @@
-﻿namespace Apizr.Sample.MAUI
+﻿using Apizr.Sample.MAUI.ViewModels;
+
+namespace Apizr.Sample.MAUI.Views
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
-        public MainPage()
+        public MainPage(MainPageViewModel viewModel)
         {
+            BindingContext = viewModel;
             InitializeComponent();
-        }
-
-        private void OnCounterClicked(object sender, EventArgs e)
-        {
-            count++;
-            CounterLabel.Text = $"Current count: {count}";
-
-            SemanticScreenReader.Announce(CounterLabel.Text);
         }
     }
 }

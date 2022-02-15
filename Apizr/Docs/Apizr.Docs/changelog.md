@@ -5,7 +5,7 @@
 
 - [New] [Logging] Now fully relies on **MS Logging extensions**
 - [New] [Logging] Static fluent configuration now offers a **WithLoggerFactory option** to provide a custom logger factory
-- [BreakingChange] [Logging] TraceAttribute has been **renamed back to LogAttribute**
+- [Breaking] [Logging] TraceAttribute has been **renamed back to LogAttribute**
 - [New] [Logging] Now we can set logging settings within **LogAttribute at method level**
 - [New] [Logging] Now we can set **http tracing mode within LogAttribute** to ajust log writting conditions (ExceptionsOnly, ErrorsAndExceptionsOnly or Everything)
 - [New] [Logging] **No more HttpTracer NuGet package dependency** as source code has been integrated and largely adjusted to Apizr needs
@@ -34,6 +34,7 @@
 
 ### Apizr.Integrations.MediatR
 
+- [Breaking] Now **Apizr.Integrations.MediatR targets .Net Standard 2.1** as MediatR v10+ does
 - [New] Now we can let Apizr **auto map data** right before sending request and/or after recieving response **by providing types on Apizr mediators Send call**
 - [New] Brand **new IApizrMediator & IApizrCrudMediator interfaces** to get things shorter than IMediator
 - [New] Now we can ask for **clearing request cache before executing**
@@ -41,18 +42,20 @@
 
 ### Apizr.Integrations.Optional
 
+- [Breaking] Now **Apizr.Integrations.Optional targets .Net Standard 2.1** as Apizr.Integrations.MediatR v4+ does
 - [New] Now we can let Apizr **auto map data** right before sending request and/or after recieving response **by providing types on Apizr optional mediators Send call**
 - [New] Brand **new IApizrOptionalMediator & IApizrCrudOptionalMediator interfaces** to get things shorter than IMediator 
 - [New] Now we can ask for **clearing request cache before executing**
 
 ### Apizr.Integrations.AutoMapper
 
+- [Breaking] Now **Apizr.Integrations.AutoMapper targets .Net Standard 2.1** as AutoMapper v11+ does
 - [New] Now we can register AutoMapper directly with the brand new **WithAutoMapperMappingHandler option**
 - [Improvement] **No more extended package dependency** to enjoy data mapping with both static and extended configurations
 
-### ~~Apizr.Integrations.Shiny~~
-
-- [BreakingChange] This integration **project has been dropped out** as Shiny no longer provide built-in caching and logging feature anymore. Apizr now either relies on MS Caching extensions, Akavache or MonkeyCache for caching feature and MS Logging extensions for logging feature. You'll have to provide a connectivity handler if you want Apizr to check it.
+>[!WARNING]**Apizr.Integrations.Shiny has been discontinued**
+>
+>This integration project has been dropped out as Shiny no longer provide built-in caching and logging feature anymore. Apizr now either relies on MS Caching extensions, Akavache or MonkeyCache for caching feature and MS Logging extensions for logging feature. You'll have to provide a connectivity handler if you want Apizr to check it.
 
 3.0 (current)
 ---

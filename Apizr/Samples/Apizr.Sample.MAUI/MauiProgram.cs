@@ -27,8 +27,8 @@ namespace Apizr.Sample.MAUI
             var services = builder.Services;
 
             // Mvvm
-            services.AddSingleton<MainPage>();
-            services.AddSingleton<MainPageViewModel>(); 
+            services.AddTransient<MainPage>();
+            services.AddTransient<MainPageViewModel>(); 
             services.AddSingleton<INavigationService, NavigationService>();
 
             // Apizr

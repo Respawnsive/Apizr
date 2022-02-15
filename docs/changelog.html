@@ -76,7 +76,7 @@
 <ul>
 <li>[New] [Logging] Now fully relies on <strong>MS Logging extensions</strong></li>
 <li>[New] [Logging] Static fluent configuration now offers a <strong>WithLoggerFactory option</strong> to provide a custom logger factory</li>
-<li>[BreakingChange] [Logging] TraceAttribute has been <strong>renamed back to LogAttribute</strong></li>
+<li>[Breaking] [Logging] TraceAttribute has been <strong>renamed back to LogAttribute</strong></li>
 <li>[New] [Logging] Now we can set logging settings within <strong>LogAttribute at method level</strong></li>
 <li>[New] [Logging] Now we can set <strong>http tracing mode within LogAttribute</strong> to ajust log writting conditions (ExceptionsOnly, ErrorsAndExceptionsOnly or Everything)</li>
 <li>[New] [Logging] <strong>No more HttpTracer NuGet package dependency</strong> as source code has been integrated and largely adjusted to Apizr needs</li>
@@ -104,6 +104,7 @@
 </ul>
 <h3 id="apizrintegrationsmediatr">Apizr.Integrations.MediatR</h3>
 <ul>
+<li>[Breaking] Now <strong>Apizr.Integrations.MediatR targets .Net Standard 2.1</strong> as MediatR v10+ does</li>
 <li>[New] Now we can let Apizr <strong>auto map data</strong> right before sending request and/or after recieving response <strong>by providing types on Apizr mediators Send call</strong></li>
 <li>[New] Brand <strong>new IApizrMediator &amp; IApizrCrudMediator interfaces</strong> to get things shorter than IMediator</li>
 <li>[New] Now we can ask for <strong>clearing request cache before executing</strong></li>
@@ -111,19 +112,20 @@
 </ul>
 <h3 id="apizrintegrationsoptional">Apizr.Integrations.Optional</h3>
 <ul>
+<li>[Breaking] Now <strong>Apizr.Integrations.Optional targets .Net Standard 2.1</strong> as Apizr.Integrations.MediatR v4+ does</li>
 <li>[New] Now we can let Apizr <strong>auto map data</strong> right before sending request and/or after recieving response <strong>by providing types on Apizr optional mediators Send call</strong></li>
 <li>[New] Brand <strong>new IApizrOptionalMediator &amp; IApizrCrudOptionalMediator interfaces</strong> to get things shorter than IMediator </li>
 <li>[New] Now we can ask for <strong>clearing request cache before executing</strong></li>
 </ul>
 <h3 id="apizrintegrationsautomapper">Apizr.Integrations.AutoMapper</h3>
 <ul>
+<li>[Breaking] Now <strong>Apizr.Integrations.AutoMapper targets .Net Standard 2.1</strong> as AutoMapper v11+ does</li>
 <li>[New] Now we can register AutoMapper directly with the brand new <strong>WithAutoMapperMappingHandler option</strong></li>
 <li>[Improvement] <strong>No more extended package dependency</strong> to enjoy data mapping with both static and extended configurations</li>
 </ul>
-<h3 id="apizrintegrationsshiny"><del>Apizr.Integrations.Shiny</del></h3>
-<ul>
-<li>[BreakingChange] This integration <strong>project has been dropped out</strong> as Shiny no longer provide built-in caching and logging feature anymore. Apizr now either relies on MS Caching extensions, Akavache or MonkeyCache for caching feature and MS Logging extensions for logging feature. You&#39;ll have to provide a connectivity handler if you want Apizr to check it.</li>
-</ul>
+<div class="WARNING"><h5>Warning</h5><p><strong>Apizr.Integrations.Shiny has been discontinued</strong></p>
+<p>This integration project has been dropped out as Shiny no longer provide built-in caching and logging feature anymore. Apizr now either relies on MS Caching extensions, Akavache or MonkeyCache for caching feature and MS Logging extensions for logging feature. You&#39;ll have to provide a connectivity handler if you want Apizr to check it.</p>
+</div>
 <h2 id="30-current">3.0 (current)</h2>
 <h3 id="apizr-1">Apizr</h3>
 <ul>
@@ -252,7 +254,7 @@
 <li>[New] We can now use execution priority with both crud and classic api optional mediation</li>
 <li>[BreakingChange] <code>WithCrudOptionalMediation</code> renamed to <code>WithOptionalMediation</code></li>
 </ul>
-<h3 id="apizrintegrationsshiny-1">Apizr.Integrations.Shiny</h3>
+<h3 id="apizrintegrationsshiny">Apizr.Integrations.Shiny</h3>
 <ul>
 <li>[New] Shiny integration now offers all the same registration extensions methods</li>
 </ul>
@@ -295,7 +297,7 @@
 <li>[BreakingChange] Apizr instantiation/registration methods names standardized to services.AddApizrFor and services.AddApizrCrudFor</li>
 <li>[New] Enabling ICrudApi auto registration feature with CrudEntityAttribute and assembly scanning</li>
 </ul>
-<h3 id="apizrintegrationsshiny-2">Apizr.Integrations.Shiny</h3>
+<h3 id="apizrintegrationsshiny-1">Apizr.Integrations.Shiny</h3>
 <ul>
 <li>[BreakingChange] Apizr instantiation/registration methods names standardized to services.UseApizrFor and services.UseApizrCrudFor</li>
 <li>[New] Enabling ICrudApi auto registration feature with CrudEntityAttribute and assembly scanning</li>
@@ -317,7 +319,7 @@
 <ul>
 <li>[New] Same as Apizr</li>
 </ul>
-<h3 id="apizrintegrationsshiny-3">Apizr.Integrations.Shiny</h3>
+<h3 id="apizrintegrationsshiny-2">Apizr.Integrations.Shiny</h3>
 <ul>
 <li>[New] Same as Apizr</li>
 </ul>

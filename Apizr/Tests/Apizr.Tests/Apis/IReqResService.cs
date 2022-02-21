@@ -17,7 +17,7 @@ using Refit;
 //[assembly:Log]
 namespace Apizr.Tests.Apis
 {
-    [WebApi("https://reqres.in/api")]//, Log(HttpMessageParts.None, LogLevel.None)]
+    [WebApi("https://reqres.in/api"), Log(HttpMessageParts.None, LogLevel.None)]
     public interface IReqResService
     {
         [Get("/users")]

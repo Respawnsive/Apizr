@@ -1,4 +1,8 @@
-﻿## Configuring base address, the attribute way
+﻿## Configuring base address
+
+You can configure base address either by attribute decoration or by fluent configuration.
+
+### [Attribute](#tab/tabid-attribute)
 
 Configuring the base address with attribute allows you to use assembly scanning auto registration feature.
 
@@ -36,7 +40,8 @@ Optional parameters:
 - ```readAllParamsType```: ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))
 - ```modelEntityType```: Model entity type mapped with this api entity type (default: null = decorated api entity type)
 
-## Configuring base address, the fluent way
+
+### [Fluent](#tab/tabid-fluent)
 
 Configuring the base address fluently allows you to set it dynamically (e.g. based on settings)
 
@@ -52,3 +57,5 @@ It could help you to resolve the setting at runtime:
 ```csharp
 options => options.WithBaseAddress(serviceProvider => serviceProvider.GetRequiredService<IYourSettingsService>().YourBaseAddress))
 ```
+
+***

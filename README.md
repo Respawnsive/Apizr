@@ -1,32 +1,35 @@
 # Apizr
 Refit based web api client, but resilient (retry, connectivity, cache, auth, log, priority, etc...)
 
-You'll find a [blog post series here](https://www.respawnsive.com/category/blog-en/apizr/) about Apizr.
+You'll find the V4+ (work in progress) [documentation here](https://respawnsive.github.io/Apizr/).
 
-#### V-Next
+There's also a V3- (outdated soon) [blog post series here](https://www.respawnsive.com/category/blog-en/apizr/).
 
-This readme is all about v3 with related source code hosted by the master branch.
+This readme is all about v3
+
+V3 source code is currently hosted by the `master` branch.
 We're about to release v4 during 2022 Q1 with a lot of improvements and new features, plus some fixes.
-Feel free to keep an eye on source code hosted by the dev branch, especially the test project and the samples, to get an idea about this expected v4 release (Readme still about v3 but ChangeLog up to date with v4).
+Feel free to keep an eye on source code hosted by the `dev` branch, especially the test project and the samples, to get an idea about this expected v4 release (Readme still about v3 but ChangeLog up to date with v4).
 
 ## Libraries
 
-Apizr v3+ introduced some breaking changes as it relies on Refit v6+ which actually introduced breaking changes and the fact that Fusillade has been moved from core package to a dedicated one.
-Please take a look at the changelog and this updated readme.
+[Change Log - Mar 12, 2021 (with v4 changes)](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
 
-[Change Log - Mar 12, 2021](https://github.com/Respawnsive/Apizr/blob/master/CHANGELOG.md)
+|Project|Current|V-Next|
+|-------|-----|-----|
+|Apizr|[![NuGet](https://img.shields.io/nuget/v/Apizr.svg)](https://www.nuget.org/packages/Apizr/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.svg)](https://www.nuget.org/packages/Apizr/)|
+|Apizr.Extensions.Microsoft.DependencyInjection|[![NuGet](https://img.shields.io/nuget/v/Apizr.Extensions.Microsoft.DependencyInjection.svg)](https://www.nuget.org/packages/Apizr.Extensions.Microsoft.DependencyInjection/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Extensions.Microsoft.DependencyInjection.svg)](https://www.nuget.org/packages/Apizr.Extensions.Microsoft.DependencyInjection/)|
+|Apizr.Extensions.Microsoft.Caching|unavailable|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Extensions.Microsoft.Caching.svg)](https://www.nuget.org/packages/Apizr.Extensions.Microsoft.Caching/)|
+|Apizr.Integrations.Akavache|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Akavache.svg)](https://www.nuget.org/packages/Apizr.Integrations.Akavache/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.Akavache.svg)](https://www.nuget.org/packages/Apizr.Integrations.Akavache/)|
+|Apizr.Integrations.MonkeyCache|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.MonkeyCache.svg)](https://www.nuget.org/packages/Apizr.Integrations.MonkeyCache/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.MonkeyCache.svg)](https://www.nuget.org/packages/Apizr.Integrations.MonkeyCache/)|
+|Apizr.Integrations.Fusillade|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Fusillade.svg)](https://www.nuget.org/packages/Apizr.Integrations.Fusillade/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.Fusillade.svg)](https://www.nuget.org/packages/Apizr.Integrations.Fusillade/)|
+|Apizr.Integrations.MediatR|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.MediatR.svg)](https://www.nuget.org/packages/Apizr.Integrations.MediatR/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.MediatR.svg)](https://www.nuget.org/packages/Apizr.Integrations.MediatR/)|
+|Apizr.Integrations.Optional|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Optional.svg)](https://www.nuget.org/packages/Apizr.Integrations.Optional/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.Optional.svg)](https://www.nuget.org/packages/Apizr.Integrations.Optional/)|
+|Apizr.Integrations.AutoMapper|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.AutoMapper.svg)](https://www.nuget.org/packages/Apizr.Integrations.AutoMapper/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.AutoMapper.svg)](https://www.nuget.org/packages/Apizr.Integrations.AutoMapper/)|
+|Apizr.Integrations.Shiny|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Shiny.svg)](https://www.nuget.org/packages/Apizr.Integrations.Shiny/)|discontinued|
 
-|Project|NuGet|
-|-------|-----|
-|Apizr|[![NuGet](https://img.shields.io/nuget/v/Apizr.svg)](https://www.nuget.org/packages/Apizr/)|
-|Apizr.Extensions.Microsoft.DependencyInjection|[![NuGet](https://img.shields.io/nuget/v/Apizr.Extensions.Microsoft.DependencyInjection.svg)](https://www.nuget.org/packages/Apizr.Extensions.Microsoft.DependencyInjection/)|
-|Apizr.Integrations.Shiny|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Shiny.svg)](https://www.nuget.org/packages/Apizr.Integrations.Shiny/)|
-|Apizr.Integrations.Fusillade|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Fusillade.svg)](https://www.nuget.org/packages/Apizr.Integrations.Fusillade/)|
-|Apizr.Integrations.Akavache|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Akavache.svg)](https://www.nuget.org/packages/Apizr.Integrations.Akavache/)|
-|Apizr.Integrations.MonkeyCache|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.MonkeyCache.svg)](https://www.nuget.org/packages/Apizr.Integrations.MonkeyCache/)|
-|Apizr.Integrations.MediatR|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.MediatR.svg)](https://www.nuget.org/packages/Apizr.Integrations.MediatR/)|
-|Apizr.Integrations.Optional|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Optional.svg)](https://www.nuget.org/packages/Apizr.Integrations.Optional/)|
-|Apizr.Integrations.AutoMapper|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.AutoMapper.svg)](https://www.nuget.org/packages/Apizr.Integrations.AutoMapper/)|
+
+## V3 Readme
 
 Install the NuGet package of your choice:
 

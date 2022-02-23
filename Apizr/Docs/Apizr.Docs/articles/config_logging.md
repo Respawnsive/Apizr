@@ -1,8 +1,5 @@
 ﻿## Configuring logging
 
-Apizr v4+ relies on Microsoft.Extensions.Logging, which relies on any compatible logger of your choice. 
-Apizr comes with a quite simple built-in Debug logger by default, but you'd better provide your own obviously.
-
 You can adjust logging configuration with:
 - `trafficVerbosity` (default: `All`) Http traffic tracing verbosity (see HttpTracer), with:
   - `None`

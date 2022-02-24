@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Configuring DelegatingHandlers | Apizr </title>
+    <title>Configuring HttpClientBuilder | Apizr </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Configuring DelegatingHandlers | Apizr ">
+    <meta name="title" content="Configuring HttpClientBuilder | Apizr ">
     <meta name="generator" content="docfx 2.59.0.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
@@ -77,38 +77,12 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="configuring-delegatinghandlers">Configuring DelegatingHandlers</h2>
+<h2 id="configuring-httpclientbuilder">Configuring HttpClientBuilder</h2>
 
-<p>You can add DelegatingHandlers thanks to this option:</p>
-<div class="tabGroup" id="tabgroup_883qP+JZ4N">
-<ul role="tablist">
-<li role="presentation">
-<a href="#tabpanel_883qP+JZ4N_tabid-static" role="tab" aria-controls="tabpanel_883qP+JZ4N_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_883qP+JZ4N_tabid-extended" role="tab" aria-controls="tabpanel_883qP+JZ4N_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
-</li>
-</ul>
-<section id="tabpanel_883qP+JZ4N_tabid-static" role="tabpanel" data-tab="tabid-static">
-<pre><code class="lang-csharp">// direct configuration
-options =&gt; options.AddDelegatingHandler(YourDelegatingHandler)
-
-// OR factory configuration with the logger instance
-options =&gt; options.AddDelegatingHandler(logger =&gt; YourDelegatingHandler)
-
-// OR factory configuration with the logger and options instances
-options =&gt; options.AddDelegatingHandler((logger, options) =&gt; YourDelegatingHandler)
-</code></pre></section>
-<section id="tabpanel_883qP+JZ4N_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
-<pre><code class="lang-csharp">// direct configuration
-options =&gt; options.AddDelegatingHandler(YourDelegatingHandler)
-
-// OR factory configuration with the service provider instance
-options =&gt; options.AddDelegatingHandler(serviceProvider =&gt; YourDelegatingHandler)
-
-// OR factory configuration with the service provider and options instances
-options =&gt; options.AddDelegatingHandler((serviceProvider, options) =&gt; YourDelegatingHandler)
-</code></pre></section>
+<p>With the extended approach only, you can configure HttpClientBuilder thanks to this option:</p>
+<pre><code class="lang-csharp">options =&gt; options.ConfigureHttpClientBuilder(httpClientBuilder =&gt; httpClientBuilder.WhateverOption())
+</code></pre><div class="WARNING"><h5>Warning</h5><p><strong>HttpClientBuilder</strong></p>
+<p>Apizr makes use of HttpClientBuilder so keep in mind that you may override some of its features depending of what you&#39;re trying to do with HttpClientBuilder. Use with caution.</p>
 </div>
 </article>
           </div>

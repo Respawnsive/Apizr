@@ -1,4 +1,4 @@
-﻿## Configuring DelegatingHandler(s)
+﻿## Configuring DelegatingHandlers
 
 You can add DelegatingHandlers thanks to this option:
 

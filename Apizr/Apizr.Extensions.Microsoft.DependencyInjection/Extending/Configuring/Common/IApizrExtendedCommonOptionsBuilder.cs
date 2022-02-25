@@ -33,7 +33,7 @@ namespace Apizr.Extending.Configuring.Common
         /// <summary>
         /// Provide a connectivity handler to check connectivity before sending a request
         /// </summary>
-        /// <typeparam name="TConnectivityHandler">Your <see cref="IConnectivityHandler"/> mapping implementation</typeparam>
+        /// <typeparam name="TConnectivityHandler">Your connectivity checking service</typeparam>
         /// <returns></returns>
         TApizrExtendedCommonOptionsBuilder WithConnectivityHandler<TConnectivityHandler>(Expression<Func<TConnectivityHandler, bool>> connectivityProperty);
 

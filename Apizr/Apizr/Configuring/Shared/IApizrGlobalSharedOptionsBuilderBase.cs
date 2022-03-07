@@ -45,8 +45,9 @@ namespace Apizr.Configuring.Shared
         /// </summary>
         /// <param name="httpTracerMode"></param>
         /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: All)</param>
-        /// <param name="logLevel">Log level to apply while writing (default: Information)</param>
+        /// <param name="logLevels">Log levels to apply while writing (default: Information)</param>
         /// <returns></returns>
-        TApizrSharedOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything, HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel logLevel = LogLevel.Information);
+        TApizrSharedOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
+            HttpMessageParts trafficVerbosity = HttpMessageParts.All, params LogLevel[] logLevels);
     }
 }

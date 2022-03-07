@@ -21,7 +21,7 @@ namespace Apizr.Logging.Attributes
         {
         }
 
-        public LogAttribute(LogLevel logLevel) : base(logLevel)
+        public LogAttribute(params LogLevel[] logLevels) : base(logLevels)
         {
         }
 
@@ -29,15 +29,15 @@ namespace Apizr.Logging.Attributes
         {
         }
 
-        public LogAttribute(HttpMessageParts trafficVerbosity, LogLevel logLevel) : base(trafficVerbosity, logLevel)
+        public LogAttribute(HttpMessageParts trafficVerbosity, params LogLevel[] logLevels) : base(trafficVerbosity, logLevels)
         {
         }
 
-        public LogAttribute(HttpTracerMode httpTracerMode, LogLevel logLevel) : base(httpTracerMode, logLevel)
+        public LogAttribute(HttpTracerMode httpTracerMode, params LogLevel[] logLevels) : base(httpTracerMode, logLevels)
         {
         }
 
-        public LogAttribute(HttpMessageParts trafficVerbosity, HttpTracerMode httpTracerMode, LogLevel logLevel) : base(trafficVerbosity, httpTracerMode, logLevel)
+        public LogAttribute(HttpMessageParts trafficVerbosity, HttpTracerMode httpTracerMode, params LogLevel[] logLevels) : base(trafficVerbosity, httpTracerMode, logLevels)
         {
         }
     }

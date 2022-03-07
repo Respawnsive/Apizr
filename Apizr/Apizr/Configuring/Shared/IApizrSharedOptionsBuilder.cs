@@ -91,8 +91,9 @@ namespace Apizr.Configuring.Shared
         /// </summary>
         /// <param name="httpTracerModeFactory">Http traffic tracing mode</param>
         /// <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
-        /// <param name="logLevelFactory">Log level factory</param>
+        /// <param name="logLevelsFactory"></param>
         /// <returns></returns>
-        TApizrSharedOptionsBuilder WithLogging(Func<HttpTracerMode> httpTracerModeFactory, Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel> logLevelFactory);
+        TApizrSharedOptionsBuilder WithLogging(Func<HttpTracerMode> httpTracerModeFactory,
+            Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel[]> logLevelsFactory);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using Apizr.Configuring;
 using Apizr.Configuring.Proper;
@@ -14,11 +15,11 @@ namespace Apizr.Extending.Configuring.Proper
     {
         public ApizrExtendedProperOptions(IApizrExtendedSharedOptions sharedOptions,
             Type webApiType, Type apizrManagerType, Uri baseAddress,
+            string[] assemblyPolicyRegistryKeys, 
+            string[] webApiPolicyRegistryKeys,
             HttpTracerMode? httpTracerMode,
             HttpMessageParts? trafficVerbosity,
-            LogLevel? logLevel,
-            string[] assemblyPolicyRegistryKeys, 
-            string[] webApiPolicyRegistryKeys) : base(sharedOptions, 
+            params LogLevel[] logLevels) : base(sharedOptions, 
             webApiType, 
             assemblyPolicyRegistryKeys, 
             webApiPolicyRegistryKeys)
@@ -27,7 +28,7 @@ namespace Apizr.Extending.Configuring.Proper
             BaseAddressFactory = _ => baseAddress;
             HttpTracerModeFactory = serviceProvider => httpTracerMode ?? sharedOptions.HttpTracerModeFactory.Invoke(serviceProvider);
             TrafficVerbosityFactory = serviceProvider => trafficVerbosity ?? sharedOptions.TrafficVerbosityFactory.Invoke(serviceProvider);
-            LogLevelFactory = serviceProvider => logLevel ?? sharedOptions.LogLevelFactory.Invoke(serviceProvider);
+            LogLevelsFactory = serviceProvider => logLevels?.Any() == true ? logLevels : sharedOptions.LogLevelsFactory.Invoke(serviceProvider);
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
             LoggerFactory = (serviceProvider, webApiFriendlyName) => serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName);
             DelegatingHandlersExtendedFactories = sharedOptions.DelegatingHandlersExtendedFactories;
@@ -56,11 +57,11 @@ namespace Apizr.Extending.Configuring.Proper
             set => _trafficVerbosityFactory = serviceProvider => TrafficVerbosity = value.Invoke(serviceProvider);
         }
 
-        private Func<IServiceProvider, LogLevel> _logLevelFactory;
-        public Func<IServiceProvider, LogLevel> LogLevelFactory
+        private Func<IServiceProvider, LogLevel[]> _logLevelsFactory;
+        public Func<IServiceProvider, LogLevel[]> LogLevelsFactory
         {
-            get => _logLevelFactory;
-            set => _logLevelFactory = serviceProvider => LogLevel = value.Invoke(serviceProvider);
+            get => _logLevelsFactory;
+            set => _logLevelsFactory = serviceProvider => LogLevels = value.Invoke(serviceProvider);
         }
 
         private Func<IServiceProvider, string, ILogger> _loggerFactory;

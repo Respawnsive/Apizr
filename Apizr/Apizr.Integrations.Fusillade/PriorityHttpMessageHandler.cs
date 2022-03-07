@@ -6,6 +6,7 @@ using System.Reactive.Threading.Tasks;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring;
+using Apizr.Extending;
 using Apizr.Policing;
 using Fusillade;
 using Microsoft.Extensions.Logging;
@@ -56,14 +57,14 @@ namespace Apizr
             }
 
             var context = request.GetOrBuildPolicyExecutionContext();
-            if (!context.TryGetLogger(out var logger, out var logLevel, out var verbosity, out var tracerMode))
+            if (!context.TryGetLogger(out var logger, out var logLevels, out var verbosity, out var tracerMode))
             {
                 logger = _logger;
-                logLevel = _apizrOptions.LogLevel;
+                logLevels = _apizrOptions.LogLevels;
                 verbosity = _apizrOptions.TrafficVerbosity;
                 tracerMode = _apizrOptions.HttpTracerMode;
 
-                context.WithLogger(logger, logLevel, verbosity, tracerMode);
+                context.WithLogger(logger, logLevels, verbosity, tracerMode);
                 request.SetPolicyExecutionContext(context);
             }
 
@@ -98,7 +99,7 @@ namespace Apizr
                     val.AddRef();
                     cancellationToken.Register(val.Cancel);
 
-                    logger.Log(logLevel, $"{context.OperationKey}: Same request has been sent yet. Waiting for it.");
+                    logger.Log(logLevels.Low(), $"{context.OperationKey}: Same request has been sent yet. Waiting for it.");
 
                     return val.Response.ToTask(cancellationToken);
                 }
@@ -117,7 +118,7 @@ namespace Apizr
                 {
                     try
                     {
-                        logger.Log(logLevel, $"{context.OperationKey}: Sending request with {priorityName}.");
+                        logger.Log(logLevels.Low(), $"{context.OperationKey}: Sending request with {priorityName}.");
 
                         var resp = await base.SendAsync(request, realToken.Token).ConfigureAwait(false);
 

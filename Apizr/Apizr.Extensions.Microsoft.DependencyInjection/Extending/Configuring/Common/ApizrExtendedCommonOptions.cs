@@ -20,8 +20,8 @@ namespace Apizr.Extending.Configuring.Common
         public ApizrExtendedCommonOptions()
         {
             HttpTracerModeFactory = _ => HttpTracerMode.Everything;
-            TrafficVerbosityFactory = _ => HttpMessageParts.None;
-            LogLevelFactory = _ => LogLevel.None;
+            TrafficVerbosityFactory = _ => HttpMessageParts.All;
+            LogLevelsFactory = _ => new []{ Constants.LowLogLevel, Constants.MediumLogLevel, Constants.HighLogLevel };
             HttpClientHandlerFactory = _ => new HttpClientHandler();
             RefitSettingsFactory = _ => new RefitSettings();
             ConnectivityHandlerType = typeof(DefaultConnectivityHandler);
@@ -52,11 +52,11 @@ namespace Apizr.Extending.Configuring.Common
             set => _trafficVerbosityFactory = serviceProvider => TrafficVerbosity = value.Invoke(serviceProvider);
         }
 
-        private Func<IServiceProvider, LogLevel> _logLevelFactory;
-        public Func<IServiceProvider, LogLevel> LogLevelFactory
+        private Func<IServiceProvider, LogLevel[]> _logLevelsFactory;
+        public Func<IServiceProvider, LogLevel[]> LogLevelsFactory
         {
-            get => _logLevelFactory;
-            set => _logLevelFactory = serviceProvider => LogLevel = value.Invoke(serviceProvider);
+            get => _logLevelsFactory;
+            set => _logLevelsFactory = serviceProvider => LogLevels = value.Invoke(serviceProvider);
         }
 
         public Func<IServiceProvider, HttpClientHandler> HttpClientHandlerFactory { get; set; }

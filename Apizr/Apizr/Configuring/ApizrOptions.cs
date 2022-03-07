@@ -20,7 +20,7 @@ namespace Apizr.Configuring
             BaseAddressFactory = properOptions.BaseAddressFactory;
             HttpTracerModeFactory = properOptions.HttpTracerModeFactory;
             TrafficVerbosityFactory = properOptions.TrafficVerbosityFactory;
-            LogLevelFactory = properOptions.LogLevelFactory;
+            LogLevelsFactory = properOptions.LogLevelsFactory;
             LoggerFactoryFactory = commonOptions.LoggerFactoryFactory;
             LoggerFactory = (loggerFactory, webApiFriendlyName) => Logger = properOptions.LoggerFactory.Invoke(loggerFactory, webApiFriendlyName);
             HttpClientHandlerFactory = properOptions.HttpClientHandlerFactory;
@@ -53,11 +53,11 @@ namespace Apizr.Configuring
             set => _trafficVerbosityFactory = () => TrafficVerbosity = value.Invoke();
         }
         
-        private Func<LogLevel> _logLevelFactory;
-        public Func<LogLevel> LogLevelFactory
+        private Func<LogLevel[]> _logLevelsFactory;
+        public Func<LogLevel[]> LogLevelsFactory
         {
-            get => _logLevelFactory;
-            set => _logLevelFactory = () => LogLevel = value.Invoke();
+            get => _logLevelsFactory;
+            set => _logLevelsFactory = () => LogLevels = value.Invoke();
         }
 
         public Func<ILoggerFactory> LoggerFactoryFactory { get; set; }
@@ -94,7 +94,7 @@ namespace Apizr.Configuring
         public Uri BaseAddress => Options.BaseAddress;
         public HttpTracerMode HttpTracerMode => Options.HttpTracerMode;
         public HttpMessageParts TrafficVerbosity => Options.TrafficVerbosity;
-        public LogLevel LogLevel => Options.LogLevel;
+        public LogLevel[] LogLevels => Options.LogLevels;
         public ILogger Logger => Options.Logger;
         public string[] PolicyRegistryKeys => Options.PolicyRegistryKeys;
         public RefitSettings RefitSettings => Options.RefitSettings;

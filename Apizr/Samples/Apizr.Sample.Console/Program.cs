@@ -117,7 +117,7 @@ namespace Apizr.Sample.Console
                 {
                     logging.AddConsole();
                     logging.AddDebug();
-                    //logging.SetMinimumLevel(LogLevel.Trace);
+                    logging.SetMinimumLevel(LogLevel.Trace);
                 }));
 
                 //_reqResManager = Apizr.CreateFor<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(policyRegistry)
@@ -134,10 +134,10 @@ namespace Apizr.Sample.Console
 
                 var apizrRegistry = Apizr.Create(
                     registry => registry
-                        .AddFor<IReqResService>(options => options.WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.ResponseAll, LogLevel.Error))
+                        .AddFor<IReqResService>()//options => options.WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.ResponseAll, LogLevel.Trace, LogLevel.Information, LogLevel.Critical))
                         .AddCrudFor<User, int, PagedResult<User>>(options => options.WithBaseAddress("https://reqres.in/api/users")),
 
-                    config => config
+                    config => config//.WithConnectivityHandler(() => false)
                         .WithPriorityManagement()
                         .WithPolicyRegistry(policyRegistry)
                         .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
@@ -285,12 +285,13 @@ namespace Apizr.Sample.Console
                                             .WithLogging(), typeof(User),
                                         typeof(Program));
 
-                                    services.AddAutoMapper(typeof(Program));
                                 }
                             }
 
                             services.AddMediatR(typeof(Program));
                         }
+                        
+                        services.AddAutoMapper(typeof(Program));
 
                         // This is just to let you know what's registered from/for Apizr and ready to use
                         foreach (var service in services.Where(d =>
@@ -339,8 +340,8 @@ namespace Apizr.Sample.Console
                 {
                     //var test = new ReadAllUsersParams("value1", 2);
 
-                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
-                    var userList = await _reqResManager.ExecuteAsync((ctx, api) => api.GetUsersAsync((int)Priority.UserInitiated, ctx), new Context{{"key1", "value1"}});
+                    var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
+                    //var userList = await _reqResManager.ExecuteAsync((ctx, api) => api.GetUsersAsync((int)Priority.UserInitiated, ctx), new Context{{"key1", "value1"}});
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(true));
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(parameters1));

@@ -17,7 +17,7 @@ using Refit;
 //[assembly:Log]
 namespace Apizr.Tests.Apis
 {
-    [WebApi("https://reqres.in/api"), Log(HttpMessageParts.None, LogLevel.None)]
+    [WebApi("https://reqres.in/api"), Log(HttpMessageParts.None, TODO)]
     public interface IReqResService
     {
         [Get("/users")]
@@ -29,7 +29,7 @@ namespace Apizr.Tests.Apis
         [Get("/users")]
         Task<UserList> GetUsersAsync([Priority] int priority);
 
-        [Get("/users"), Log(HttpMessageParts.RequestBody, HttpTracerMode.ErrorsAndExceptionsOnly, LogLevel.Critical)]
+        [Get("/users"), Log(HttpMessageParts.RequestBody, HttpTracerMode.ErrorsAndExceptionsOnly, TODO)]
         Task<UserList> GetUsersAsync([Priority] int priority, [Context] Context context);
 
         [Get("/users")]

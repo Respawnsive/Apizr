@@ -138,14 +138,15 @@ namespace Apizr.Configuring.Common
         }
 
         public IApizrCommonOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
-            HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel logLevel = LogLevel.Information)
-            => WithLogging(() => httpTracerMode, () => trafficVerbosity, () => logLevel);
+            HttpMessageParts trafficVerbosity = HttpMessageParts.All, params LogLevel[] logLevels)
+            => WithLogging(() => httpTracerMode, () => trafficVerbosity, () => logLevels);
 
-        public IApizrCommonOptionsBuilder WithLogging(Func<HttpTracerMode> httpTracerModeFactory, Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel> logLevelFactory)
+        public IApizrCommonOptionsBuilder WithLogging(Func<HttpTracerMode> httpTracerModeFactory,
+            Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel[]> logLevelsFactory)
         {
             Options.HttpTracerModeFactory = httpTracerModeFactory;
             Options.TrafficVerbosityFactory = trafficVerbosityFactory;
-            Options.LogLevelFactory = logLevelFactory;
+            Options.LogLevelsFactory = logLevelsFactory;
 
             return this;
         }

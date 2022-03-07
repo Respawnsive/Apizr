@@ -99,16 +99,17 @@ namespace Apizr.Extending.Configuring.Common
 
         public IApizrExtendedCommonOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
             HttpMessageParts trafficVerbosity = HttpMessageParts.All,
-            LogLevel logLevel = LogLevel.Information)
-            => WithLogging(_ => httpTracerMode, _ => trafficVerbosity, _ => logLevel);
+            params LogLevel[] logLevels)
+            => WithLogging(_ => httpTracerMode, _ => trafficVerbosity, _ => logLevels);
 
-        public IApizrExtendedCommonOptionsBuilder WithLogging(Func<IServiceProvider, HttpTracerMode> httpTracerModeFactory,
+        public IApizrExtendedCommonOptionsBuilder WithLogging(
+            Func<IServiceProvider, HttpTracerMode> httpTracerModeFactory,
             Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory,
-            Func<IServiceProvider, LogLevel> logLevelFactory)
+            Func<IServiceProvider, LogLevel[]> logLevelsFactory)
         {
             Options.HttpTracerModeFactory = httpTracerModeFactory;
             Options.TrafficVerbosityFactory = trafficVerbosityFactory;
-            Options.LogLevelFactory = logLevelFactory;
+            Options.LogLevelsFactory = logLevelsFactory;
 
             return this;
         }

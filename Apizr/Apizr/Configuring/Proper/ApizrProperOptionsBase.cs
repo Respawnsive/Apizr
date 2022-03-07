@@ -14,7 +14,7 @@ namespace Apizr.Configuring.Proper
         {
             HttpTracerMode = sharedOptions.HttpTracerMode;
             TrafficVerbosity = sharedOptions.TrafficVerbosity;
-            LogLevel = sharedOptions.LogLevel;
+            LogLevels = sharedOptions.LogLevels;
             WebApiType = webApiType;
             PolicyRegistryKeys =
                 assemblyPolicyRegistryKeys?.Union(webApiPolicyRegistryKeys ?? Array.Empty<string>()).ToArray() ??

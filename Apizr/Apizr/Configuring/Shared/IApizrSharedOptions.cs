@@ -19,9 +19,9 @@ namespace Apizr.Configuring.Shared
         Func<HttpMessageParts> TrafficVerbosityFactory { get; }
 
         /// <summary>
-        /// Log level factory
+        /// Log levels factory
         /// </summary>
-        Func<LogLevel> LogLevelFactory { get; }
+        Func<LogLevel[]> LogLevelsFactory { get; }
 
         /// <summary>
         /// HttpClientHandler factory

@@ -600,7 +600,7 @@ namespace Apizr
                         }
                         catch (Exception)
                         {
-                            options.Logger.Log(options.LogLevel,
+                            options.Logger.Log(options.LogLevels.Low(),
                                 $"Global policies: You get some global policies but didn't register a {nameof(PolicyRegistry)} instance. Global policies will be ignored for  for {webApiFriendlyName} instance");
                         }
 
@@ -617,18 +617,18 @@ namespace Apizr
                                                 request =>
                                                 {
                                                     var context = request.GetOrBuildPolicyExecutionContext();
-                                                    if (!context.TryGetLogger(out var contextLogger, out var logLevel, out var verbosity, out var tracerMode))
+                                                    if (!context.TryGetLogger(out var contextLogger, out var logLevels, out var verbosity, out var tracerMode))
                                                     {
                                                         contextLogger = options.Logger;
-                                                        logLevel = options.LogLevel;
+                                                        logLevels = options.LogLevels;
                                                         verbosity = options.TrafficVerbosity;
                                                         tracerMode = options.HttpTracerMode;
 
-                                                        context.WithLogger(contextLogger, logLevel, verbosity, tracerMode);
+                                                        context.WithLogger(contextLogger, logLevels, verbosity, tracerMode);
                                                         HttpRequestMessageExtensions.SetPolicyExecutionContext(request, context);
                                                     }
 
-                                                    contextLogger.Log(logLevel, $"{context.OperationKey}: Policy with key {policyRegistryKey} will be applied");
+                                                    contextLogger.Log(logLevels.Low(), $"{context.OperationKey}: Policy with key {policyRegistryKey} will be applied");
 
                                                     return registeredPolicyForHttpResponseMessage;
                                                 });
@@ -689,7 +689,7 @@ namespace Apizr
             services.TryAddSingleton(apizrOptionsRegistrationType, serviceProvider =>
             {
                 apizrOptions.BaseAddressFactory.Invoke(serviceProvider);
-                apizrOptions.LogLevelFactory.Invoke(serviceProvider);
+                apizrOptions.LogLevelsFactory.Invoke(serviceProvider);
                 apizrOptions.TrafficVerbosityFactory.Invoke(serviceProvider);
                 apizrOptions.HttpTracerModeFactory.Invoke(serviceProvider);
                 apizrOptions.RefitSettingsFactory.Invoke(serviceProvider);
@@ -760,9 +760,9 @@ namespace Apizr
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 
             var builder = new ApizrExtendedProperOptionsBuilder(new ApizrExtendedProperOptions(commonOptions, webApiType, apizrManagerType, baseAddress,
+                assemblyPolicyAttribute?.RegistryKeys, webApiPolicyAttribute?.RegistryKeys,
                 logAttribute?.HttpTracerMode,
-                logAttribute?.TrafficVerbosity, logAttribute?.LogLevel,
-                assemblyPolicyAttribute?.RegistryKeys, webApiPolicyAttribute?.RegistryKeys));
+                logAttribute?.TrafficVerbosity, logAttribute?.LogLevels));
 
             properOptionsBuilder?.Invoke(builder);
 

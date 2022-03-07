@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring;
+using Apizr.Extending;
 using Apizr.Policing;
 using Microsoft.Extensions.Logging;
 
@@ -58,10 +59,10 @@ namespace Apizr.Logging
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var context = request.GetOrBuildPolicyExecutionContext();
-            if (!context.TryGetLogger(out var logger, out var logLevel, out var verbosity, out var tracerMode))
+            if (!context.TryGetLogger(out var logger, out var logLevels, out var verbosity, out var tracerMode))
             {
                 logger = _apizrOptions.Logger;
-                logLevel = _apizrOptions.LogLevel;
+                logLevels = _apizrOptions.LogLevels;
                 verbosity = _apizrOptions.TrafficVerbosity;
                 tracerMode = _apizrOptions.HttpTracerMode;
             }
@@ -69,7 +70,7 @@ namespace Apizr.Logging
             try
             {
                 if(tracerMode == HttpTracerMode.Everything)
-                    await LogHttpRequest(request, logger, logLevel, verbosity).ConfigureAwait(false);
+                    await LogHttpRequest(request, logger, logLevels, verbosity).ConfigureAwait(false);
 
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();
@@ -81,12 +82,12 @@ namespace Apizr.Logging
                     if (!response.IsSuccessStatusCode)
                     {
                         if (tracerMode == HttpTracerMode.ErrorsAndExceptionsOnly)
-                            await LogHttpRequest(request, logger, logLevel, verbosity).ConfigureAwait(false);
+                            await LogHttpRequest(request, logger, logLevels, verbosity).ConfigureAwait(false);
 
-                        await LogHttpErrorRequest(request, logger, logLevel, verbosity);
+                        await LogHttpErrorRequest(request, logger, logLevels, verbosity);
                     }
 
-                    await LogHttpResponse(response, stopwatch.Elapsed, logger, logLevel, verbosity).ConfigureAwait(false);  
+                    await LogHttpResponse(response, stopwatch.Elapsed, logger, logLevels, verbosity).ConfigureAwait(false);  
                 }
 
                 return response;
@@ -94,14 +95,14 @@ namespace Apizr.Logging
             catch (Exception ex)
             {
                 if (tracerMode == HttpTracerMode.ExceptionsOnly)
-                    await LogHttpRequest(request, logger, logLevel, verbosity).ConfigureAwait(false);
+                    await LogHttpRequest(request, logger, logLevels, verbosity).ConfigureAwait(false);
 
-                LogHttpException(request, ex, logger, logLevel);
+                LogHttpException(request, ex, logger, logLevels);
                 throw;
             }
         }
 
-        private async Task LogHttpErrorRequest(HttpRequestMessage request, ILogger logger, LogLevel logLevel, HttpMessageParts verbosity)
+        private async Task LogHttpErrorRequest(HttpRequestMessage request, ILogger logger, LogLevel[] logLevels, HttpMessageParts verbosity)
         {
             var sb = new StringBuilder();
             var httpErrorRequestPrefix =
@@ -115,10 +116,10 @@ namespace Apizr.Logging
             sb.AppendLine(httpErrorRequestBody);
 
             if (sb.Length > 0)
-                logger.Log(logLevel, sb.ToString());
+                logger.Log(logLevels.High(), sb.ToString());
         }
 
-        protected virtual async Task LogHttpRequest(HttpRequestMessage request, ILogger logger, LogLevel logLevel, HttpMessageParts verbosity)
+        protected virtual async Task LogHttpRequest(HttpRequestMessage request, ILogger logger, LogLevel[] logLevels, HttpMessageParts verbosity)
         {
             var sb = new StringBuilder();
             if (verbosity.HasFlag(HttpMessageParts.RequestHeaders) || verbosity.HasFlag(HttpMessageParts.RequestBody))
@@ -144,10 +145,10 @@ namespace Apizr.Logging
             }
 
             if (sb.Length > 0)
-                logger.Log(logLevel, sb.ToString());
+                logger.Log(logLevels.Low(), sb.ToString());
         }
 
-        protected virtual async Task LogHttpResponse(HttpResponseMessage response, TimeSpan duration, ILogger logger, LogLevel logLevel, HttpMessageParts verbosity)
+        protected virtual async Task LogHttpResponse(HttpResponseMessage response, TimeSpan duration, ILogger logger, LogLevel[] logLevels, HttpMessageParts verbosity)
         {
             var sb = new StringBuilder();
             if (verbosity.HasFlag(HttpMessageParts.ResponseHeaders) || verbosity.HasFlag(HttpMessageParts.ResponseBody))
@@ -181,7 +182,7 @@ namespace Apizr.Logging
             }
 
             if (sb.Length > 0)
-                logger.Log(logLevel, sb.ToString());
+                logger.Log(logLevels.Low(), sb.ToString());
         }
 
         private string GetResponseLogHeading(HttpResponseMessage response)
@@ -199,12 +200,12 @@ namespace Apizr.Logging
             return responseResult;
         }
 
-        protected void LogHttpException(HttpRequestMessage request, Exception ex, ILogger logger, LogLevel logLevel)
+        protected void LogHttpException(HttpRequestMessage request, Exception ex, ILogger logger, LogLevel[] logLevels)
         {
             var httpExceptionString = $@"{LogMessageIndicatorPrefix} HTTP EXCEPTION: [{request.Method}]{LogMessageIndicatorSuffix}
 {request.Method} {request.RequestUri}
 {ex}";
-            logger.Log(logLevel, httpExceptionString);
+            logger.Log(logLevels.High(), httpExceptionString);
         }
 
         private string GetRequestHeaders(HttpRequestMessage request, HttpMessageParts verbosity)

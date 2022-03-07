@@ -125,15 +125,17 @@ namespace Apizr.Extending.Configuring.Proper
         }
 
         public IApizrExtendedProperOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
-            HttpMessageParts trafficVerbosity = HttpMessageParts.All, LogLevel logLevel = LogLevel.Information)
-            => WithLogging(_ => httpTracerMode, _ => trafficVerbosity, _ => logLevel);
+            HttpMessageParts trafficVerbosity = HttpMessageParts.All, params LogLevel[] logLevels)
+            => WithLogging(_ => httpTracerMode, _ => trafficVerbosity, _ => logLevels);
 
-        public IApizrExtendedProperOptionsBuilder WithLogging(Func<IServiceProvider, HttpTracerMode> httpTracerModeFactory, Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory,
-            Func<IServiceProvider, LogLevel> logLevelFactory)
+        public IApizrExtendedProperOptionsBuilder WithLogging(
+            Func<IServiceProvider, HttpTracerMode> httpTracerModeFactory,
+            Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory,
+            Func<IServiceProvider, LogLevel[]> logLevelsFactory)
         {
             Options.HttpTracerModeFactory = httpTracerModeFactory;
             Options.TrafficVerbosityFactory = trafficVerbosityFactory;
-            Options.LogLevelFactory = logLevelFactory;
+            Options.LogLevelsFactory = logLevelsFactory;
 
             return this;
         }

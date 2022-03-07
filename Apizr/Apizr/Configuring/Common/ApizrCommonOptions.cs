@@ -16,9 +16,9 @@ namespace Apizr.Configuring.Common
         public ApizrCommonOptions()
         {
             HttpTracerModeFactory = () => HttpTracerMode.Everything;
-            TrafficVerbosityFactory = () => HttpMessageParts.None;
-            LogLevelFactory = () => LogLevel.None;
-            LoggerFactoryFactory = () => new DebugLoggerFactory(LogLevel.Information);
+            TrafficVerbosityFactory = () => HttpMessageParts.All;
+            LogLevelsFactory = () => new []{Constants.LowLogLevel, Constants.MediumLogLevel, Constants.HighLogLevel};
+            LoggerFactoryFactory = () => new DebugLoggerFactory(LogLevel.Trace);
             PolicyRegistryFactory = () => new PolicyRegistry();
             HttpClientHandlerFactory = () => new HttpClientHandler();
             RefitSettingsFactory = () => new RefitSettings();
@@ -58,11 +58,11 @@ namespace Apizr.Configuring.Common
             set => _trafficVerbosityFactory = () => TrafficVerbosity = value.Invoke();
         }
 
-        private Func<LogLevel> _logLevelFactory;
-        public Func<LogLevel> LogLevelFactory
+        private Func<LogLevel[]> _logLevelsFactory;
+        public Func<LogLevel[]> LogLevelsFactory
         {
-            get => _logLevelFactory;
-            set => _logLevelFactory = () => LogLevel = value.Invoke();
+            get => _logLevelsFactory;
+            set => _logLevelsFactory = () => LogLevels = value.Invoke();
         }
     }
 }

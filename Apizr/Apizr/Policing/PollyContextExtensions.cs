@@ -14,14 +14,14 @@ namespace Apizr.Policing
         /// </summary>
         /// <param name="context">Polly context</param>
         /// <param name="logger">Your <see cref="ILogger"/> mapping implementation</param>
-        /// <param name="logLevel"></param>
+        /// <param name="logLevels"></param>
         /// <param name="verbosity"></param>
         /// <param name="tracerMode"></param>
         /// <returns></returns>
-        public static Context WithLogger(this Context context, ILogger logger, LogLevel logLevel, HttpMessageParts verbosity, HttpTracerMode tracerMode)
+        public static Context WithLogger(this Context context, ILogger logger, LogLevel[] logLevels, HttpMessageParts verbosity, HttpTracerMode tracerMode)
         {
             context[nameof(ILogger)] = logger;
-            context[nameof(LogLevel)] = logLevel;
+            context[nameof(LogLevel)] = logLevels;
             context[nameof(HttpMessageParts)] = verbosity;
             context[nameof(HttpTracerMode)] = tracerMode;
             return context;
@@ -32,27 +32,27 @@ namespace Apizr.Policing
         /// </summary>
         /// <param name="context">Polly context</param>
         /// <param name="logger">Your <see cref="ILogger"/> mapping implementation</param>
-        /// <param name="logLevel"></param>
+        /// <param name="logLevels"></param>
         /// <param name="verbosity"></param>
         /// <param name="tracerMode"></param>
         /// <returns></returns>
-        public static bool TryGetLogger(this Context context, out ILogger logger, out LogLevel logLevel, out HttpMessageParts verbosity, out HttpTracerMode tracerMode)
+        public static bool TryGetLogger(this Context context, out ILogger logger, out LogLevel[] logLevels, out HttpMessageParts verbosity, out HttpTracerMode tracerMode)
         {
             if (context != null && 
                 context.TryGetValue(nameof(ILogger), out var loggerObject) && loggerObject is ILogger loggerValue &&
-                context.TryGetValue(nameof(LogLevel), out var logLevelObject) && logLevelObject is LogLevel logLevelValue &&
+                context.TryGetValue(nameof(LogLevel), out var logLevelsObject) && logLevelsObject is LogLevel[] logLevelsValue &&
                 context.TryGetValue(nameof(HttpMessageParts), out var verbosityObject) && verbosityObject is HttpMessageParts verbosityValue &&
                 context.TryGetValue(nameof(HttpTracerMode), out var tracerModeObject) && tracerModeObject is HttpTracerMode tracerModeValue)
             {
                 logger = loggerValue;
-                logLevel = logLevelValue;
+                logLevels = logLevelsValue;
                 verbosity = verbosityValue;
                 tracerMode = tracerModeValue;
                 return true;
             }
 
             logger = null;
-            logLevel = LogLevel.None;
+            logLevels = new[] {LogLevel.None};
             verbosity = HttpMessageParts.None;
             tracerMode = HttpTracerMode.ExceptionsOnly;
             return false;

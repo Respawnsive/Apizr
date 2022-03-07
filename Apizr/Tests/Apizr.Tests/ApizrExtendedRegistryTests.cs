@@ -181,15 +181,14 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
-                .AddFor<IReqResService>(options => options
-                    .WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.RequestCookies, LogLevel.Warning)));
+                .AddFor<IReqResService>(options => options.WithLogging((HttpTracerMode) HttpTracerMode.ExceptionsOnly, (HttpMessageParts) HttpMessageParts.RequestCookies, (LogLevel[]) LogLevel.Warning)));
 
             var serviceProvider = services.BuildServiceProvider();
             var fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
 
             fixture.Options.HttpTracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
             fixture.Options.TrafficVerbosity.Should().Be(HttpMessageParts.RequestCookies);
-            fixture.Options.LogLevel.Should().Be(LogLevel.Warning);
+            fixture.Options.LogLevels.Should().Be(LogLevel.Warning);
         }
 
         [Fact]

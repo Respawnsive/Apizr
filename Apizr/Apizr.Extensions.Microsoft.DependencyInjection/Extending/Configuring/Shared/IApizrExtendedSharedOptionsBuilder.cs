@@ -21,9 +21,9 @@ namespace Apizr.Extending.Configuring.Shared
         /// </summary>
         /// <param name="httpTracerModeFactory">Http traffic tracing mode factory</param>
         /// <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
-        /// <param name="logLevelFactory">Log level factory</param>
+        /// <param name="logLevelsFactory">Log levels factory</param>
         /// <returns></returns>
-        TApizrExtendedSharedOptionsBuilder WithLogging(Func<IServiceProvider, HttpTracerMode> httpTracerModeFactory, Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory, Func<IServiceProvider, LogLevel> logLevelFactory);
+        TApizrExtendedSharedOptionsBuilder WithLogging(Func<IServiceProvider, HttpTracerMode> httpTracerModeFactory, Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory, Func<IServiceProvider, LogLevel[]> logLevelsFactory);
 
         /// <summary>
         /// Provide a custom HttpClientHandler

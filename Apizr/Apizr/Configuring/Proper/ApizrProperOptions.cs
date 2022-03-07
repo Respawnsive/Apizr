@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
@@ -11,17 +12,17 @@ namespace Apizr.Configuring.Proper
     {
         public ApizrProperOptions(IApizrSharedOptions sharedOptions,
             Type webApiType, Uri baseAddress,
+            string[] assemblyPolicyRegistryKeys,
+            string[] webApiPolicyRegistryKeys,
             HttpTracerMode? httpTracerMode,
             HttpMessageParts? trafficVerbosity,
-            LogLevel? logLevel,
-            string[] assemblyPolicyRegistryKeys,
-            string[] webApiPolicyRegistryKeys) : base(sharedOptions, webApiType, assemblyPolicyRegistryKeys,
+            params LogLevel[] logLevels) : base(sharedOptions, webApiType, assemblyPolicyRegistryKeys,
             webApiPolicyRegistryKeys)
         {
             BaseAddressFactory = () => baseAddress;
             HttpTracerModeFactory = () => httpTracerMode ?? sharedOptions.HttpTracerModeFactory.Invoke();
             TrafficVerbosityFactory = () => trafficVerbosity ?? sharedOptions.TrafficVerbosityFactory.Invoke();
-            LogLevelFactory = () => logLevel ?? sharedOptions.LogLevelFactory.Invoke();
+            LogLevelsFactory = () => logLevels?.Any() == true ? logLevels : sharedOptions.LogLevelsFactory.Invoke();
             LoggerFactory = (loggerFactory, webApiFriendlyName) => Logger = loggerFactory.CreateLogger(webApiFriendlyName);
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
             DelegatingHandlersFactories = sharedOptions.DelegatingHandlersFactories;
@@ -48,11 +49,11 @@ namespace Apizr.Configuring.Proper
             set => _trafficVerbosityFactory = () => TrafficVerbosity = value.Invoke();
         }
 
-        private Func<LogLevel> _logLevelFactory;
-        public Func<LogLevel> LogLevelFactory
+        private Func<LogLevel[]> _logLevelsFactory;
+        public Func<LogLevel[]> LogLevelsFactory
         {
-            get => _logLevelFactory;
-            set => _logLevelFactory = () => LogLevel = value.Invoke();
+            get => _logLevelsFactory;
+            set => _logLevelsFactory = () => LogLevels = value.Invoke();
         }
         
         public Func<ILoggerFactory, string, ILogger> LoggerFactory { get; }

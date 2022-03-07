@@ -9,7 +9,7 @@ namespace Apizr.Logging.Attributes
     public abstract class LogAttributeBase : Attribute
     {
         /// <summary>
-        /// Trace All http traffic and log Apizr execution steps at Information log level
+        /// Trace All http traffic and log Apizr execution steps at default log levels ([Low] Trace, [Medium] Information and [High] Critical)
         /// </summary>
         protected LogAttributeBase()
         {
@@ -17,7 +17,7 @@ namespace Apizr.Logging.Attributes
         }
 
         /// <summary>
-        /// Trace http traffic at specified verbosity and log Apizr execution steps at Information log level
+        /// Trace http traffic at specified verbosity and log Apizr execution steps at default log levels ([Low] Trace, [Medium] Information and [High] Critical)
         /// </summary>
         /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: all)</param>
         protected LogAttributeBase(HttpMessageParts trafficVerbosity)
@@ -26,7 +26,7 @@ namespace Apizr.Logging.Attributes
         }
 
         /// <summary>
-        /// Trace All http traffic and log Apizr execution steps at specified log level
+        /// Trace All http traffic and log Apizr execution steps at default log levels ([Low] Trace, [Medium] Information and [High] Critical)
         /// </summary>
         /// <param name="httpTracerMode">Http traffic tracing mode (default: Everything)</param>
         protected LogAttributeBase(HttpTracerMode httpTracerMode)
@@ -35,16 +35,16 @@ namespace Apizr.Logging.Attributes
         }
 
         /// <summary>
-        /// Trace All http traffic and log Apizr execution steps at specified log level
+        /// Trace All http traffic and log Apizr execution steps at specified log levels
         /// </summary>
-        /// <param name="logLevel">Log level to apply while writing (default: Trace)</param>
-        protected LogAttributeBase(LogLevel logLevel)
+        /// <param name="logLevels">Log levels to apply while writing (default: [Low] Trace, [Medium] Information and [High] Critical)</param>
+        protected LogAttributeBase(params LogLevel[] logLevels)
         {
-            LogLevel = logLevel;
+            LogLevels = logLevels;
         }
 
         /// <summary>
-        /// Trace All http traffic and log Apizr execution steps at specified log level
+        /// Trace http traffic and log Apizr execution steps at default log levels ([Low] Trace, [Medium] Information and [High] Critical)
         /// </summary>
         /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: all)</param>
         /// <param name="httpTracerMode">Http traffic tracing mode (default: Everything)</param>
@@ -55,38 +55,38 @@ namespace Apizr.Logging.Attributes
         }
 
         /// <summary>
-        /// Trace All http traffic and log Apizr execution steps at specified log level
+        /// Trace All http traffic and log Apizr execution steps at specified log levels
         /// </summary>
         /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: all)</param>
-        /// <param name="logLevel">Log level to apply while writing (default: Trace)</param>
-        protected LogAttributeBase(HttpMessageParts trafficVerbosity, LogLevel logLevel)
+        /// <param name="logLevels">Log levels to apply while writing (default: [Low] Trace, [Medium] Information and [High] Critical)</param>
+        protected LogAttributeBase(HttpMessageParts trafficVerbosity, params LogLevel[] logLevels)
         {
             TrafficVerbosity = trafficVerbosity;
-            LogLevel = logLevel;
+            LogLevels = logLevels;
         }
 
         /// <summary>
-        /// Trace All http traffic and log Apizr execution steps at specified log level
+        /// Trace All http traffic and log Apizr execution steps at specified log levels
         /// </summary>
         /// <param name="httpTracerMode">Http traffic tracing mode (default: Everything)</param>
-        /// <param name="logLevel">Log level to apply while writing (default: Trace)</param>
-        protected LogAttributeBase(HttpTracerMode httpTracerMode, LogLevel logLevel)
+        /// <param name="logLevels">Log levels to apply while writing (default: [Low] Trace, [Medium] Information and [High] Critical)</param>
+        protected LogAttributeBase(HttpTracerMode httpTracerMode, params LogLevel[] logLevels)
         {
             HttpTracerMode = httpTracerMode;
-            LogLevel = logLevel;
+            LogLevels = logLevels;
         }
 
         /// <summary>
-        /// Trace All http traffic and log Apizr execution steps at specified log level
+        /// Trace All http traffic and log Apizr execution steps at specified log levels
         /// </summary>
         /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: all)</param>
         /// <param name="httpTracerMode">Http traffic tracing mode (default: Everything)</param>
-        /// <param name="logLevel">Log level to apply while writing (default: Trace)</param>
-        protected LogAttributeBase(HttpMessageParts trafficVerbosity, HttpTracerMode httpTracerMode, LogLevel logLevel)
+        /// <param name="logLevels">Log levels to apply while writing (default: [Low] Trace, [Medium] Information and [High] Critical)</param>
+        protected LogAttributeBase(HttpMessageParts trafficVerbosity, HttpTracerMode httpTracerMode, params LogLevel[] logLevels)
         {
             TrafficVerbosity = trafficVerbosity;
             HttpTracerMode = httpTracerMode;
-            LogLevel = logLevel;
+            LogLevels = logLevels;
         }
 
         /// <summary>
@@ -95,13 +95,13 @@ namespace Apizr.Logging.Attributes
         public HttpTracerMode HttpTracerMode { get; set; } = HttpTracerMode.Everything;
 
         /// <summary>
-        /// Http traffic tracing verbosity (default: all)
+        /// Http traffic tracing verbosity (default: All)
         /// </summary>
         public HttpMessageParts TrafficVerbosity { get; } = HttpMessageParts.All;
 
         /// <summary>
-        /// Log level to apply while writing (default: Information)
+        /// Log levels to apply while writing (default: [Low] Trace, [Medium] Information and [High] Critical)
         /// </summary>
-        public LogLevel LogLevel { get; } = LogLevel.Information;
+        public LogLevel[] LogLevels { get; } = { Constants.LowLogLevel, Constants.MediumLogLevel, Constants.HighLogLevel };
     }
 }

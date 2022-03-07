@@ -16,8 +16,8 @@ namespace Apizr.Configuring.Shared
         HttpMessageParts TrafficVerbosity { get; }
 
         /// <summary>
-        /// Log level while writing
+        /// Log levels while writing
         /// </summary>
-        LogLevel LogLevel { get; }
+        LogLevel[] LogLevels { get; }
     }
 }

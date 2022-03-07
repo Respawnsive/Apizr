@@ -224,18 +224,18 @@ namespace Apizr
                                     request =>
                                     {
                                         var context = request.GetOrBuildPolicyExecutionContext();
-                                        if (!context.TryGetLogger(out var contextLogger, out var logLevel, out var verbosity, out var tracerMode))
+                                        if (!context.TryGetLogger(out var contextLogger, out var logLevels, out var verbosity, out var tracerMode))
                                         {
                                             contextLogger = apizrOptions.Logger;
-                                            logLevel = apizrOptions.LogLevel;
+                                            logLevels = apizrOptions.LogLevels;
                                             verbosity = apizrOptions.TrafficVerbosity;
                                             tracerMode = apizrOptions.HttpTracerMode;
 
-                                            context.WithLogger(contextLogger, logLevel, verbosity, tracerMode);
+                                            context.WithLogger(contextLogger, logLevels, verbosity, tracerMode);
                                             request.SetPolicyExecutionContext(context);
                                         }
 
-                                        contextLogger.Log(logLevel, $"{context.OperationKey}: Policy with key {policyRegistryKey} will be applied");
+                                        contextLogger.Log(logLevels.Low(), $"{context.OperationKey}: Policy with key {policyRegistryKey} will be applied");
 
                                         return registeredPolicyForHttpResponseMessage;
                                     });
@@ -273,7 +273,7 @@ namespace Apizr
 
             commonOptionsBuilder?.Invoke(builder);
 
-            builder.ApizrOptions.LogLevelFactory.Invoke();
+            builder.ApizrOptions.LogLevelsFactory.Invoke();
             builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();
             builder.ApizrOptions.RefitSettingsFactory.Invoke();
@@ -312,14 +312,14 @@ namespace Apizr
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 
             var builder = new ApizrProperOptionsBuilder(new ApizrProperOptions(commonOptions, webApiType, baseAddress,
+                assemblyPolicyAttribute?.RegistryKeys, webApiPolicyAttribute?.RegistryKeys,
                 logAttribute?.HttpTracerMode,
-                logAttribute?.TrafficVerbosity, logAttribute?.LogLevel,
-                assemblyPolicyAttribute?.RegistryKeys, webApiPolicyAttribute?.RegistryKeys));
+                logAttribute?.TrafficVerbosity, logAttribute?.LogLevels));
 
             properOptionsBuilder?.Invoke(builder);
 
             builder.ApizrOptions.BaseAddressFactory.Invoke();
-            builder.ApizrOptions.LogLevelFactory.Invoke();
+            builder.ApizrOptions.LogLevelsFactory.Invoke();
             builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();
 
@@ -348,7 +348,7 @@ namespace Apizr
             optionsBuilder?.Invoke(builder);
 
             builder.ApizrOptions.BaseAddressFactory.Invoke();
-            builder.ApizrOptions.LogLevelFactory.Invoke();
+            builder.ApizrOptions.LogLevelsFactory.Invoke();
             builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();
             builder.ApizrOptions.RefitSettingsFactory.Invoke();

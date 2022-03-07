@@ -24,7 +24,7 @@ namespace Apizr.Extending.Configuring
             BaseAddressFactory = properOptions.BaseAddressFactory;
             HttpTracerModeFactory = properOptions.HttpTracerModeFactory;
             TrafficVerbosityFactory = properOptions.TrafficVerbosityFactory;
-            LogLevelFactory = properOptions.LogLevelFactory;
+            LogLevelsFactory = properOptions.LogLevelsFactory;
             LoggerFactory = properOptions.LoggerFactory;
             HttpClientHandlerFactory = properOptions.HttpClientHandlerFactory;
             RefitSettingsFactory = commonOptions.RefitSettingsFactory;
@@ -68,11 +68,11 @@ namespace Apizr.Extending.Configuring
             set => _trafficVerbosityFactory = serviceProvider => TrafficVerbosity = value.Invoke(serviceProvider);
         }
 
-        private Func<IServiceProvider, LogLevel> _logLevelFactory;
-        public Func<IServiceProvider, LogLevel> LogLevelFactory
+        private Func<IServiceProvider, LogLevel[]> _logLevelsFactory;
+        public Func<IServiceProvider, LogLevel[]> LogLevelsFactory
         {
-            get => _logLevelFactory;
-            set => _logLevelFactory = serviceProvider => LogLevel = value.Invoke(serviceProvider);
+            get => _logLevelsFactory;
+            set => _logLevelsFactory = serviceProvider => LogLevels = value.Invoke(serviceProvider);
         }
 
         private Func<IServiceProvider, string, ILogger> _loggerFactory;

@@ -8,13 +8,13 @@ items:
   - Apizr.Logging.Attributes.LogAttributeBase.#ctor
   - Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts)
   - Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)
-  - Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)
-  - Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)
+  - Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])
+  - Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
   - Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpTracerMode)
-  - Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)
-  - Apizr.Logging.Attributes.LogAttributeBase.#ctor(Microsoft.Extensions.Logging.LogLevel)
+  - Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])
+  - Apizr.Logging.Attributes.LogAttributeBase.#ctor(Microsoft.Extensions.Logging.LogLevel[])
   - Apizr.Logging.Attributes.LogAttributeBase.HttpTracerMode
-  - Apizr.Logging.Attributes.LogAttributeBase.LogLevel
+  - Apizr.Logging.Attributes.LogAttributeBase.LogLevels
   - Apizr.Logging.Attributes.LogAttributeBase.TrafficVerbosity
   langs:
   - csharp
@@ -36,7 +36,6 @@ items:
     content: 'public abstract class LogAttributeBase : Attribute'
     content.vb: >-
       Public MustInherit Class LogAttributeBase
-
           Inherits Attribute
   inheritance:
   - System.Object
@@ -119,7 +118,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Logging.Attributes
-  summary: "\nTrace All http traffic and log Apizr execution steps at Information log level\n"
+  summary: "\nTrace All http traffic and log Apizr execution steps at default log levels ([Low] Trace, [Medium] Information and [High] Critical)\n"
   example: []
   syntax:
     content: protected LogAttributeBase()
@@ -147,7 +146,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Logging.Attributes
-  summary: "\nTrace http traffic at specified verbosity and log Apizr execution steps at Information log level\n"
+  summary: "\nTrace http traffic at specified verbosity and log Apizr execution steps at default log levels ([Low] Trace, [Medium] Information and [High] Critical)\n"
   example: []
   syntax:
     content: protected LogAttributeBase(HttpMessageParts trafficVerbosity)
@@ -179,7 +178,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Logging.Attributes
-  summary: "\nTrace All http traffic and log Apizr execution steps at specified log level\n"
+  summary: "\nTrace All http traffic and log Apizr execution steps at default log levels ([Low] Trace, [Medium] Information and [High] Critical)\n"
   example: []
   syntax:
     content: protected LogAttributeBase(HttpTracerMode httpTracerMode)
@@ -193,16 +192,16 @@ items:
   - protected
   modifiers.vb:
   - Protected
-- uid: Apizr.Logging.Attributes.LogAttributeBase.#ctor(Microsoft.Extensions.Logging.LogLevel)
-  commentId: M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Microsoft.Extensions.Logging.LogLevel)
-  id: '#ctor(Microsoft.Extensions.Logging.LogLevel)'
+- uid: Apizr.Logging.Attributes.LogAttributeBase.#ctor(Microsoft.Extensions.Logging.LogLevel[])
+  commentId: M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Microsoft.Extensions.Logging.LogLevel[])
+  id: '#ctor(Microsoft.Extensions.Logging.LogLevel[])'
   parent: Apizr.Logging.Attributes.LogAttributeBase
   langs:
   - csharp
   - vb
-  name: LogAttributeBase(LogLevel)
-  nameWithType: LogAttributeBase.LogAttributeBase(LogLevel)
-  fullName: Apizr.Logging.Attributes.LogAttributeBase.LogAttributeBase(Microsoft.Extensions.Logging.LogLevel)
+  name: LogAttributeBase(LogLevel[])
+  nameWithType: LogAttributeBase.LogAttributeBase(LogLevel[])
+  fullName: Apizr.Logging.Attributes.LogAttributeBase.LogAttributeBase(Microsoft.Extensions.Logging.LogLevel[])
   type: Constructor
   source:
     id: .ctor
@@ -211,20 +210,23 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Logging.Attributes
-  summary: "\nTrace All http traffic and log Apizr execution steps at specified log level\n"
+  summary: "\nTrace All http traffic and log Apizr execution steps at specified log levels\n"
   example: []
   syntax:
-    content: protected LogAttributeBase(LogLevel logLevel)
+    content: protected LogAttributeBase(params LogLevel[] logLevels)
     parameters:
-    - id: logLevel
-      type: Microsoft.Extensions.Logging.LogLevel
-      description: 'Log level to apply while writing (default: Trace)'
-    content.vb: Protected Sub New(logLevel As LogLevel)
+    - id: logLevels
+      type: Microsoft.Extensions.Logging.LogLevel[]
+      description: 'Log levels to apply while writing (default: [Low] Trace, [Medium] Information and [High] Critical)'
+    content.vb: Protected Sub New(ParamArray logLevels As LogLevel())
   overload: Apizr.Logging.Attributes.LogAttributeBase.#ctor*
+  nameWithType.vb: LogAttributeBase.LogAttributeBase(LogLevel())
   modifiers.csharp:
   - protected
   modifiers.vb:
   - Protected
+  fullName.vb: Apizr.Logging.Attributes.LogAttributeBase.LogAttributeBase(Microsoft.Extensions.Logging.LogLevel())
+  name.vb: LogAttributeBase(LogLevel())
 - uid: Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)
   commentId: M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)
   id: '#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)'
@@ -243,7 +245,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Logging.Attributes
-  summary: "\nTrace All http traffic and log Apizr execution steps at specified log level\n"
+  summary: "\nTrace http traffic and log Apizr execution steps at default log levels ([Low] Trace, [Medium] Information and [High] Critical)\n"
   example: []
   syntax:
     content: protected LogAttributeBase(HttpMessageParts trafficVerbosity, HttpTracerMode httpTracerMode)
@@ -260,16 +262,16 @@ items:
   - protected
   modifiers.vb:
   - Protected
-- uid: Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)
-  commentId: M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)
-  id: '#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)'
+- uid: Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
+  commentId: M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
+  id: '#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])'
   parent: Apizr.Logging.Attributes.LogAttributeBase
   langs:
   - csharp
   - vb
-  name: LogAttributeBase(HttpMessageParts, LogLevel)
-  nameWithType: LogAttributeBase.LogAttributeBase(HttpMessageParts, LogLevel)
-  fullName: Apizr.Logging.Attributes.LogAttributeBase.LogAttributeBase(Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel)
+  name: LogAttributeBase(HttpMessageParts, LogLevel[])
+  nameWithType: LogAttributeBase.LogAttributeBase(HttpMessageParts, LogLevel[])
+  fullName: Apizr.Logging.Attributes.LogAttributeBase.LogAttributeBase(Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel[])
   type: Constructor
   source:
     id: .ctor
@@ -278,33 +280,36 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Logging.Attributes
-  summary: "\nTrace All http traffic and log Apizr execution steps at specified log level\n"
+  summary: "\nTrace All http traffic and log Apizr execution steps at specified log levels\n"
   example: []
   syntax:
-    content: protected LogAttributeBase(HttpMessageParts trafficVerbosity, LogLevel logLevel)
+    content: protected LogAttributeBase(HttpMessageParts trafficVerbosity, params LogLevel[] logLevels)
     parameters:
     - id: trafficVerbosity
       type: Apizr.Logging.HttpMessageParts
       description: 'Http traffic tracing verbosity (default: all)'
-    - id: logLevel
-      type: Microsoft.Extensions.Logging.LogLevel
-      description: 'Log level to apply while writing (default: Trace)'
-    content.vb: Protected Sub New(trafficVerbosity As HttpMessageParts, logLevel As LogLevel)
+    - id: logLevels
+      type: Microsoft.Extensions.Logging.LogLevel[]
+      description: 'Log levels to apply while writing (default: [Low] Trace, [Medium] Information and [High] Critical)'
+    content.vb: Protected Sub New(trafficVerbosity As HttpMessageParts, ParamArray logLevels As LogLevel())
   overload: Apizr.Logging.Attributes.LogAttributeBase.#ctor*
+  nameWithType.vb: LogAttributeBase.LogAttributeBase(HttpMessageParts, LogLevel())
   modifiers.csharp:
   - protected
   modifiers.vb:
   - Protected
-- uid: Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)
-  commentId: M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)
-  id: '#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)'
+  fullName.vb: Apizr.Logging.Attributes.LogAttributeBase.LogAttributeBase(Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel())
+  name.vb: LogAttributeBase(HttpMessageParts, LogLevel())
+- uid: Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])
+  commentId: M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])
+  id: '#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])'
   parent: Apizr.Logging.Attributes.LogAttributeBase
   langs:
   - csharp
   - vb
-  name: LogAttributeBase(HttpTracerMode, LogLevel)
-  nameWithType: LogAttributeBase.LogAttributeBase(HttpTracerMode, LogLevel)
-  fullName: Apizr.Logging.Attributes.LogAttributeBase.LogAttributeBase(Apizr.Logging.HttpTracerMode, Microsoft.Extensions.Logging.LogLevel)
+  name: LogAttributeBase(HttpTracerMode, LogLevel[])
+  nameWithType: LogAttributeBase.LogAttributeBase(HttpTracerMode, LogLevel[])
+  fullName: Apizr.Logging.Attributes.LogAttributeBase.LogAttributeBase(Apizr.Logging.HttpTracerMode, Microsoft.Extensions.Logging.LogLevel[])
   type: Constructor
   source:
     id: .ctor
@@ -313,33 +318,36 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Logging.Attributes
-  summary: "\nTrace All http traffic and log Apizr execution steps at specified log level\n"
+  summary: "\nTrace All http traffic and log Apizr execution steps at specified log levels\n"
   example: []
   syntax:
-    content: protected LogAttributeBase(HttpTracerMode httpTracerMode, LogLevel logLevel)
+    content: protected LogAttributeBase(HttpTracerMode httpTracerMode, params LogLevel[] logLevels)
     parameters:
     - id: httpTracerMode
       type: Apizr.Logging.HttpTracerMode
       description: 'Http traffic tracing mode (default: Everything)'
-    - id: logLevel
-      type: Microsoft.Extensions.Logging.LogLevel
-      description: 'Log level to apply while writing (default: Trace)'
-    content.vb: Protected Sub New(httpTracerMode As HttpTracerMode, logLevel As LogLevel)
+    - id: logLevels
+      type: Microsoft.Extensions.Logging.LogLevel[]
+      description: 'Log levels to apply while writing (default: [Low] Trace, [Medium] Information and [High] Critical)'
+    content.vb: Protected Sub New(httpTracerMode As HttpTracerMode, ParamArray logLevels As LogLevel())
   overload: Apizr.Logging.Attributes.LogAttributeBase.#ctor*
+  nameWithType.vb: LogAttributeBase.LogAttributeBase(HttpTracerMode, LogLevel())
   modifiers.csharp:
   - protected
   modifiers.vb:
   - Protected
-- uid: Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)
-  commentId: M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)
-  id: '#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)'
+  fullName.vb: Apizr.Logging.Attributes.LogAttributeBase.LogAttributeBase(Apizr.Logging.HttpTracerMode, Microsoft.Extensions.Logging.LogLevel())
+  name.vb: LogAttributeBase(HttpTracerMode, LogLevel())
+- uid: Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])
+  commentId: M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])
+  id: '#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])'
   parent: Apizr.Logging.Attributes.LogAttributeBase
   langs:
   - csharp
   - vb
-  name: LogAttributeBase(HttpMessageParts, HttpTracerMode, LogLevel)
-  nameWithType: LogAttributeBase.LogAttributeBase(HttpMessageParts, HttpTracerMode, LogLevel)
-  fullName: Apizr.Logging.Attributes.LogAttributeBase.LogAttributeBase(Apizr.Logging.HttpMessageParts, Apizr.Logging.HttpTracerMode, Microsoft.Extensions.Logging.LogLevel)
+  name: LogAttributeBase(HttpMessageParts, HttpTracerMode, LogLevel[])
+  nameWithType: LogAttributeBase.LogAttributeBase(HttpMessageParts, HttpTracerMode, LogLevel[])
+  fullName: Apizr.Logging.Attributes.LogAttributeBase.LogAttributeBase(Apizr.Logging.HttpMessageParts, Apizr.Logging.HttpTracerMode, Microsoft.Extensions.Logging.LogLevel[])
   type: Constructor
   source:
     id: .ctor
@@ -348,10 +356,10 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Logging.Attributes
-  summary: "\nTrace All http traffic and log Apizr execution steps at specified log level\n"
+  summary: "\nTrace All http traffic and log Apizr execution steps at specified log levels\n"
   example: []
   syntax:
-    content: protected LogAttributeBase(HttpMessageParts trafficVerbosity, HttpTracerMode httpTracerMode, LogLevel logLevel)
+    content: protected LogAttributeBase(HttpMessageParts trafficVerbosity, HttpTracerMode httpTracerMode, params LogLevel[] logLevels)
     parameters:
     - id: trafficVerbosity
       type: Apizr.Logging.HttpMessageParts
@@ -359,15 +367,18 @@ items:
     - id: httpTracerMode
       type: Apizr.Logging.HttpTracerMode
       description: 'Http traffic tracing mode (default: Everything)'
-    - id: logLevel
-      type: Microsoft.Extensions.Logging.LogLevel
-      description: 'Log level to apply while writing (default: Trace)'
-    content.vb: Protected Sub New(trafficVerbosity As HttpMessageParts, httpTracerMode As HttpTracerMode, logLevel As LogLevel)
+    - id: logLevels
+      type: Microsoft.Extensions.Logging.LogLevel[]
+      description: 'Log levels to apply while writing (default: [Low] Trace, [Medium] Information and [High] Critical)'
+    content.vb: Protected Sub New(trafficVerbosity As HttpMessageParts, httpTracerMode As HttpTracerMode, ParamArray logLevels As LogLevel())
   overload: Apizr.Logging.Attributes.LogAttributeBase.#ctor*
+  nameWithType.vb: LogAttributeBase.LogAttributeBase(HttpMessageParts, HttpTracerMode, LogLevel())
   modifiers.csharp:
   - protected
   modifiers.vb:
   - Protected
+  fullName.vb: Apizr.Logging.Attributes.LogAttributeBase.LogAttributeBase(Apizr.Logging.HttpMessageParts, Apizr.Logging.HttpTracerMode, Microsoft.Extensions.Logging.LogLevel())
+  name.vb: LogAttributeBase(HttpMessageParts, HttpTracerMode, LogLevel())
 - uid: Apizr.Logging.Attributes.LogAttributeBase.HttpTracerMode
   commentId: P:Apizr.Logging.Attributes.LogAttributeBase.HttpTracerMode
   id: HttpTracerMode
@@ -419,7 +430,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Logging.Attributes
-  summary: "\nHttp traffic tracing verbosity (default: all)\n"
+  summary: "\nHttp traffic tracing verbosity (default: All)\n"
   example: []
   syntax:
     content: public HttpMessageParts TrafficVerbosity { get; }
@@ -434,33 +445,33 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: Apizr.Logging.Attributes.LogAttributeBase.LogLevel
-  commentId: P:Apizr.Logging.Attributes.LogAttributeBase.LogLevel
-  id: LogLevel
+- uid: Apizr.Logging.Attributes.LogAttributeBase.LogLevels
+  commentId: P:Apizr.Logging.Attributes.LogAttributeBase.LogLevels
+  id: LogLevels
   parent: Apizr.Logging.Attributes.LogAttributeBase
   langs:
   - csharp
   - vb
-  name: LogLevel
-  nameWithType: LogAttributeBase.LogLevel
-  fullName: Apizr.Logging.Attributes.LogAttributeBase.LogLevel
+  name: LogLevels
+  nameWithType: LogAttributeBase.LogLevels
+  fullName: Apizr.Logging.Attributes.LogAttributeBase.LogLevels
   type: Property
   source:
-    id: LogLevel
+    id: LogLevels
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\Attributes\LogAttributeBase.cs
     startLine: 104
   assemblies:
   - Apizr
   namespace: Apizr.Logging.Attributes
-  summary: "\nLog level to apply while writing (default: Information)\n"
+  summary: "\nLog levels to apply while writing (default: [Low] Trace, [Medium] Information and [High] Critical)\n"
   example: []
   syntax:
-    content: public LogLevel LogLevel { get; }
+    content: public LogLevel[] LogLevels { get; }
     parameters: []
     return:
-      type: Microsoft.Extensions.Logging.LogLevel
-    content.vb: Public ReadOnly Property LogLevel As LogLevel
-  overload: Apizr.Logging.Attributes.LogAttributeBase.LogLevel*
+      type: Microsoft.Extensions.Logging.LogLevel[]
+    content.vb: Public ReadOnly Property LogLevels As LogLevel()
+  overload: Apizr.Logging.Attributes.LogAttributeBase.LogLevels*
   modifiers.csharp:
   - public
   - get
@@ -2961,19 +2972,32 @@ references:
   name: HttpTracerMode
   nameWithType: HttpTracerMode
   fullName: Apizr.Logging.HttpTracerMode
-- uid: Microsoft.Extensions.Logging.LogLevel
-  commentId: T:Microsoft.Extensions.Logging.LogLevel
-  parent: Microsoft.Extensions.Logging
+- uid: Microsoft.Extensions.Logging.LogLevel[]
   isExternal: true
-  name: LogLevel
-  nameWithType: LogLevel
-  fullName: Microsoft.Extensions.Logging.LogLevel
-- uid: Microsoft.Extensions.Logging
-  commentId: N:Microsoft.Extensions.Logging
-  isExternal: true
-  name: Microsoft.Extensions.Logging
-  nameWithType: Microsoft.Extensions.Logging
-  fullName: Microsoft.Extensions.Logging
+  name: LogLevel[]
+  nameWithType: LogLevel[]
+  fullName: Microsoft.Extensions.Logging.LogLevel[]
+  nameWithType.vb: LogLevel()
+  fullName.vb: Microsoft.Extensions.Logging.LogLevel()
+  name.vb: LogLevel()
+  spec.csharp:
+  - uid: Microsoft.Extensions.Logging.LogLevel
+    name: LogLevel
+    nameWithType: LogLevel
+    fullName: Microsoft.Extensions.Logging.LogLevel
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: Microsoft.Extensions.Logging.LogLevel
+    name: LogLevel
+    nameWithType: LogLevel
+    fullName: Microsoft.Extensions.Logging.LogLevel
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
 - uid: Apizr.Logging.Attributes.LogAttributeBase.HttpTracerMode*
   commentId: Overload:Apizr.Logging.Attributes.LogAttributeBase.HttpTracerMode
   name: HttpTracerMode
@@ -2984,8 +3008,8 @@ references:
   name: TrafficVerbosity
   nameWithType: LogAttributeBase.TrafficVerbosity
   fullName: Apizr.Logging.Attributes.LogAttributeBase.TrafficVerbosity
-- uid: Apizr.Logging.Attributes.LogAttributeBase.LogLevel*
-  commentId: Overload:Apizr.Logging.Attributes.LogAttributeBase.LogLevel
-  name: LogLevel
-  nameWithType: LogAttributeBase.LogLevel
-  fullName: Apizr.Logging.Attributes.LogAttributeBase.LogLevel
+- uid: Apizr.Logging.Attributes.LogAttributeBase.LogLevels*
+  commentId: Overload:Apizr.Logging.Attributes.LogAttributeBase.LogLevels
+  name: LogLevels
+  nameWithType: LogAttributeBase.LogLevels
+  fullName: Apizr.Logging.Attributes.LogAttributeBase.LogLevels

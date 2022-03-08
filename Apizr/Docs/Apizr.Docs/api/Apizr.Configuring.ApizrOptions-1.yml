@@ -9,7 +9,7 @@ items:
   - Apizr.Configuring.ApizrOptions`1.BaseAddress
   - Apizr.Configuring.ApizrOptions`1.HttpTracerMode
   - Apizr.Configuring.ApizrOptions`1.Logger
-  - Apizr.Configuring.ApizrOptions`1.LogLevel
+  - Apizr.Configuring.ApizrOptions`1.LogLevels
   - Apizr.Configuring.ApizrOptions`1.Options
   - Apizr.Configuring.ApizrOptions`1.PolicyRegistryKeys
   - Apizr.Configuring.ApizrOptions`1.RefitSettings
@@ -35,7 +35,6 @@ items:
     - id: TWebApi
     content.vb: >-
       Public Class ApizrOptions(Of TWebApi)
-
           Implements IApizrOptions(Of TWebApi), IApizrOptionsBase, IApizrCommonOptionsBase, IApizrProperOptionsBase, IApizrSharedOptionsBase
   inheritance:
   - System.Object
@@ -268,41 +267,41 @@ items:
   - Public
   - ReadOnly
   fullName.vb: Apizr.Configuring.ApizrOptions(Of TWebApi).TrafficVerbosity
-- uid: Apizr.Configuring.ApizrOptions`1.LogLevel
-  commentId: P:Apizr.Configuring.ApizrOptions`1.LogLevel
-  id: LogLevel
+- uid: Apizr.Configuring.ApizrOptions`1.LogLevels
+  commentId: P:Apizr.Configuring.ApizrOptions`1.LogLevels
+  id: LogLevels
   parent: Apizr.Configuring.ApizrOptions`1
   langs:
   - csharp
   - vb
-  name: LogLevel
-  nameWithType: ApizrOptions<TWebApi>.LogLevel
-  fullName: Apizr.Configuring.ApizrOptions<TWebApi>.LogLevel
+  name: LogLevels
+  nameWithType: ApizrOptions<TWebApi>.LogLevels
+  fullName: Apizr.Configuring.ApizrOptions<TWebApi>.LogLevels
   type: Property
   source:
-    id: LogLevel
+    id: LogLevels
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptions.cs
     startLine: 96
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
   syntax:
-    content: public LogLevel LogLevel { get; }
+    content: public LogLevel[] LogLevels { get; }
     parameters: []
     return:
-      type: Microsoft.Extensions.Logging.LogLevel
-    content.vb: Public ReadOnly Property LogLevel As LogLevel
-  overload: Apizr.Configuring.ApizrOptions`1.LogLevel*
+      type: Microsoft.Extensions.Logging.LogLevel[]
+    content.vb: Public ReadOnly Property LogLevels As LogLevel()
+  overload: Apizr.Configuring.ApizrOptions`1.LogLevels*
   implements:
-  - Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevel
-  nameWithType.vb: ApizrOptions(Of TWebApi).LogLevel
+  - Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
+  nameWithType.vb: ApizrOptions(Of TWebApi).LogLevels
   modifiers.csharp:
   - public
   - get
   modifiers.vb:
   - Public
   - ReadOnly
-  fullName.vb: Apizr.Configuring.ApizrOptions(Of TWebApi).LogLevel
+  fullName.vb: Apizr.Configuring.ApizrOptions(Of TWebApi).LogLevels
 - uid: Apizr.Configuring.ApizrOptions`1.Logger
   commentId: P:Apizr.Configuring.ApizrOptions`1.Logger
   id: Logger
@@ -1045,32 +1044,45 @@ references:
   name: HttpMessageParts
   nameWithType: HttpMessageParts
   fullName: Apizr.Logging.HttpMessageParts
-- uid: Apizr.Configuring.ApizrOptions`1.LogLevel*
-  commentId: Overload:Apizr.Configuring.ApizrOptions`1.LogLevel
-  name: LogLevel
-  nameWithType: ApizrOptions<TWebApi>.LogLevel
-  fullName: Apizr.Configuring.ApizrOptions<TWebApi>.LogLevel
-  nameWithType.vb: ApizrOptions(Of TWebApi).LogLevel
-  fullName.vb: Apizr.Configuring.ApizrOptions(Of TWebApi).LogLevel
-- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevel
-  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevel
+- uid: Apizr.Configuring.ApizrOptions`1.LogLevels*
+  commentId: Overload:Apizr.Configuring.ApizrOptions`1.LogLevels
+  name: LogLevels
+  nameWithType: ApizrOptions<TWebApi>.LogLevels
+  fullName: Apizr.Configuring.ApizrOptions<TWebApi>.LogLevels
+  nameWithType.vb: ApizrOptions(Of TWebApi).LogLevels
+  fullName.vb: Apizr.Configuring.ApizrOptions(Of TWebApi).LogLevels
+- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
   parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
-  name: LogLevel
-  nameWithType: IApizrSharedOptionsBase.LogLevel
-  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevel
-- uid: Microsoft.Extensions.Logging.LogLevel
-  commentId: T:Microsoft.Extensions.Logging.LogLevel
-  parent: Microsoft.Extensions.Logging
+  name: LogLevels
+  nameWithType: IApizrSharedOptionsBase.LogLevels
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
+- uid: Microsoft.Extensions.Logging.LogLevel[]
   isExternal: true
-  name: LogLevel
-  nameWithType: LogLevel
-  fullName: Microsoft.Extensions.Logging.LogLevel
-- uid: Microsoft.Extensions.Logging
-  commentId: N:Microsoft.Extensions.Logging
-  isExternal: true
-  name: Microsoft.Extensions.Logging
-  nameWithType: Microsoft.Extensions.Logging
-  fullName: Microsoft.Extensions.Logging
+  name: LogLevel[]
+  nameWithType: LogLevel[]
+  fullName: Microsoft.Extensions.Logging.LogLevel[]
+  nameWithType.vb: LogLevel()
+  fullName.vb: Microsoft.Extensions.Logging.LogLevel()
+  name.vb: LogLevel()
+  spec.csharp:
+  - uid: Microsoft.Extensions.Logging.LogLevel
+    name: LogLevel
+    nameWithType: LogLevel
+    fullName: Microsoft.Extensions.Logging.LogLevel
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: Microsoft.Extensions.Logging.LogLevel
+    name: LogLevel
+    nameWithType: LogLevel
+    fullName: Microsoft.Extensions.Logging.LogLevel
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
 - uid: Apizr.Configuring.ApizrOptions`1.Logger*
   commentId: Overload:Apizr.Configuring.ApizrOptions`1.Logger
   name: Logger
@@ -1091,6 +1103,12 @@ references:
   name: ILogger
   nameWithType: ILogger
   fullName: Microsoft.Extensions.Logging.ILogger
+- uid: Microsoft.Extensions.Logging
+  commentId: N:Microsoft.Extensions.Logging
+  isExternal: true
+  name: Microsoft.Extensions.Logging
+  nameWithType: Microsoft.Extensions.Logging
+  fullName: Microsoft.Extensions.Logging
 - uid: Apizr.Configuring.ApizrOptions`1.PolicyRegistryKeys*
   commentId: Overload:Apizr.Configuring.ApizrOptions`1.PolicyRegistryKeys
   name: PolicyRegistryKeys

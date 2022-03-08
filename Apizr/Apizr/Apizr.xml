@@ -734,13 +734,13 @@
             <param name="delegatingHandler">A delegating handler</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)">
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
             <summary>
             Configure logging level for the api
             </summary>
             <param name="httpTracerMode"></param>
             <param name="trafficVerbosity">Http traffic tracing verbosity (default: All)</param>
-            <param name="logLevel">Log level to apply while writing (default: Information)</param>
+            <param name="logLevels">Log levels to apply while writing (default: Information)</param>
             <returns></returns>
         </member>
         <member name="P:Apizr.Configuring.Shared.IApizrSharedOptions.HttpTracerModeFactory">
@@ -753,9 +753,9 @@
             Http traffic tracing verbosity factory
             </summary>
         </member>
-        <member name="P:Apizr.Configuring.Shared.IApizrSharedOptions.LogLevelFactory">
+        <member name="P:Apizr.Configuring.Shared.IApizrSharedOptions.LogLevelsFactory">
             <summary>
-            Log level factory
+            Log levels factory
             </summary>
         </member>
         <member name="P:Apizr.Configuring.Shared.IApizrSharedOptions.HttpClientHandlerFactory">
@@ -778,9 +778,9 @@
             Http traffic tracing verbosity
             </summary>
         </member>
-        <member name="P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevel">
+        <member name="P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels">
             <summary>
-            Log level while writing
+            Log levels while writing
             </summary>
         </member>
         <member name="M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithHttpClientHandler(System.Func{System.Net.Http.HttpClientHandler})">
@@ -856,13 +856,13 @@
             <param name="delegatingHandlerFactory">A delegating handler factory</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel})">
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})">
             <summary>
             Configure logging level for the api
             </summary>
             <param name="httpTracerModeFactory">Http traffic tracing mode</param>
             <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
-            <param name="logLevelFactory">Log level factory</param>
+            <param name="logLevelsFactory"></param>
             <returns></returns>
         </member>
         <member name="T:Apizr.Connecting.IConnectivityHandler">
@@ -1228,55 +1228,55 @@
         </member>
         <member name="M:Apizr.Logging.Attributes.LogAttributeBase.#ctor">
             <summary>
-            Trace All http traffic and log Apizr execution steps at Information log level
+            Trace All http traffic and log Apizr execution steps at default log levels ([Low] Trace, [Medium] Information and [High] Critical)
             </summary>
         </member>
         <member name="M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts)">
             <summary>
-            Trace http traffic at specified verbosity and log Apizr execution steps at Information log level
+            Trace http traffic at specified verbosity and log Apizr execution steps at default log levels ([Low] Trace, [Medium] Information and [High] Critical)
             </summary>
             <param name="trafficVerbosity">Http traffic tracing verbosity (default: all)</param>
         </member>
         <member name="M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpTracerMode)">
             <summary>
-            Trace All http traffic and log Apizr execution steps at specified log level
+            Trace All http traffic and log Apizr execution steps at default log levels ([Low] Trace, [Medium] Information and [High] Critical)
             </summary>
             <param name="httpTracerMode">Http traffic tracing mode (default: Everything)</param>
         </member>
-        <member name="M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Microsoft.Extensions.Logging.LogLevel)">
+        <member name="M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Microsoft.Extensions.Logging.LogLevel[])">
             <summary>
-            Trace All http traffic and log Apizr execution steps at specified log level
+            Trace All http traffic and log Apizr execution steps at specified log levels
             </summary>
-            <param name="logLevel">Log level to apply while writing (default: Trace)</param>
+            <param name="logLevels">Log levels to apply while writing (default: [Low] Trace, [Medium] Information and [High] Critical)</param>
         </member>
         <member name="M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)">
             <summary>
-            Trace All http traffic and log Apizr execution steps at specified log level
+            Trace http traffic and log Apizr execution steps at default log levels ([Low] Trace, [Medium] Information and [High] Critical)
             </summary>
             <param name="trafficVerbosity">Http traffic tracing verbosity (default: all)</param>
             <param name="httpTracerMode">Http traffic tracing mode (default: Everything)</param>
         </member>
-        <member name="M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)">
+        <member name="M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
             <summary>
-            Trace All http traffic and log Apizr execution steps at specified log level
+            Trace All http traffic and log Apizr execution steps at specified log levels
             </summary>
             <param name="trafficVerbosity">Http traffic tracing verbosity (default: all)</param>
-            <param name="logLevel">Log level to apply while writing (default: Trace)</param>
+            <param name="logLevels">Log levels to apply while writing (default: [Low] Trace, [Medium] Information and [High] Critical)</param>
         </member>
-        <member name="M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)">
+        <member name="M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])">
             <summary>
-            Trace All http traffic and log Apizr execution steps at specified log level
+            Trace All http traffic and log Apizr execution steps at specified log levels
             </summary>
             <param name="httpTracerMode">Http traffic tracing mode (default: Everything)</param>
-            <param name="logLevel">Log level to apply while writing (default: Trace)</param>
+            <param name="logLevels">Log levels to apply while writing (default: [Low] Trace, [Medium] Information and [High] Critical)</param>
         </member>
-        <member name="M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)">
+        <member name="M:Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])">
             <summary>
-            Trace All http traffic and log Apizr execution steps at specified log level
+            Trace All http traffic and log Apizr execution steps at specified log levels
             </summary>
             <param name="trafficVerbosity">Http traffic tracing verbosity (default: all)</param>
             <param name="httpTracerMode">Http traffic tracing mode (default: Everything)</param>
-            <param name="logLevel">Log level to apply while writing (default: Trace)</param>
+            <param name="logLevels">Log levels to apply while writing (default: [Low] Trace, [Medium] Information and [High] Critical)</param>
         </member>
         <member name="P:Apizr.Logging.Attributes.LogAttributeBase.HttpTracerMode">
             <summary>
@@ -1285,12 +1285,12 @@
         </member>
         <member name="P:Apizr.Logging.Attributes.LogAttributeBase.TrafficVerbosity">
             <summary>
-            Http traffic tracing verbosity (default: all)
+            Http traffic tracing verbosity (default: All)
             </summary>
         </member>
-        <member name="P:Apizr.Logging.Attributes.LogAttributeBase.LogLevel">
+        <member name="P:Apizr.Logging.Attributes.LogAttributeBase.LogLevels">
             <summary>
-            Log level to apply while writing (default: Information)
+            Log levels to apply while writing (default: [Low] Trace, [Medium] Information and [High] Critical)
             </summary>
         </member>
         <member name="T:Apizr.Logging.Attributes.LogCreateAttribute">
@@ -1585,24 +1585,24 @@
             Polly logging extensions
             </summary>
         </member>
-        <member name="M:Apizr.Policing.PollyContextExtensions.WithLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)">
+        <member name="M:Apizr.Policing.PollyContextExtensions.WithLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)">
             <summary>
             Passing your <see cref="T:Microsoft.Extensions.Logging.ILogger"/> mapping implementation to Polly context
             </summary>
             <param name="context">Polly context</param>
             <param name="logger">Your <see cref="T:Microsoft.Extensions.Logging.ILogger"/> mapping implementation</param>
-            <param name="logLevel"></param>
+            <param name="logLevels"></param>
             <param name="verbosity"></param>
             <param name="tracerMode"></param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Policing.PollyContextExtensions.TryGetLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger@,Microsoft.Extensions.Logging.LogLevel@,Apizr.Logging.HttpMessageParts@,Apizr.Logging.HttpTracerMode@)">
+        <member name="M:Apizr.Policing.PollyContextExtensions.TryGetLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger@,Microsoft.Extensions.Logging.LogLevel[]@,Apizr.Logging.HttpMessageParts@,Apizr.Logging.HttpTracerMode@)">
             <summary>
             Trying to get your <see cref="T:Microsoft.Extensions.Logging.ILogger"/> mapping implementation from Polly context
             </summary>
             <param name="context">Polly context</param>
             <param name="logger">Your <see cref="T:Microsoft.Extensions.Logging.ILogger"/> mapping implementation</param>
-            <param name="logLevel"></param>
+            <param name="logLevels"></param>
             <param name="verbosity"></param>
             <param name="tracerMode"></param>
             <returns></returns>

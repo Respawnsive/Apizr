@@ -239,7 +239,7 @@
   
   <a id="Apizr_Logging_Attributes_LogAttributeBase__ctor_" data-uid="Apizr.Logging.Attributes.LogAttributeBase.#ctor*"></a>
   <h4 id="Apizr_Logging_Attributes_LogAttributeBase__ctor" data-uid="Apizr.Logging.Attributes.LogAttributeBase.#ctor">LogAttributeBase()</h4>
-  <div class="markdown level1 summary"><p>Trace All http traffic and log Apizr execution steps at Information log level</p>
+  <div class="markdown level1 summary"><p>Trace All http traffic and log Apizr execution steps at default log levels ([Low] Trace, [Medium] Information and [High] Critical)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -250,7 +250,7 @@
   
   <a id="Apizr_Logging_Attributes_LogAttributeBase__ctor_" data-uid="Apizr.Logging.Attributes.LogAttributeBase.#ctor*"></a>
   <h4 id="Apizr_Logging_Attributes_LogAttributeBase__ctor_Apizr_Logging_HttpMessageParts_" data-uid="Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts)">LogAttributeBase(HttpMessageParts)</h4>
-  <div class="markdown level1 summary"><p>Trace http traffic at specified verbosity and log Apizr execution steps at Information log level</p>
+  <div class="markdown level1 summary"><p>Trace http traffic at specified verbosity and log Apizr execution steps at default log levels ([Low] Trace, [Medium] Information and [High] Critical)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -279,7 +279,7 @@
   
   <a id="Apizr_Logging_Attributes_LogAttributeBase__ctor_" data-uid="Apizr.Logging.Attributes.LogAttributeBase.#ctor*"></a>
   <h4 id="Apizr_Logging_Attributes_LogAttributeBase__ctor_Apizr_Logging_HttpMessageParts_Apizr_Logging_HttpTracerMode_" data-uid="Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)">LogAttributeBase(HttpMessageParts, HttpTracerMode)</h4>
-  <div class="markdown level1 summary"><p>Trace All http traffic and log Apizr execution steps at specified log level</p>
+  <div class="markdown level1 summary"><p>Trace http traffic and log Apizr execution steps at default log levels ([Low] Trace, [Medium] Information and [High] Critical)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -313,13 +313,13 @@
   
   
   <a id="Apizr_Logging_Attributes_LogAttributeBase__ctor_" data-uid="Apizr.Logging.Attributes.LogAttributeBase.#ctor*"></a>
-  <h4 id="Apizr_Logging_Attributes_LogAttributeBase__ctor_Apizr_Logging_HttpMessageParts_Apizr_Logging_HttpTracerMode_Microsoft_Extensions_Logging_LogLevel_" data-uid="Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)">LogAttributeBase(HttpMessageParts, HttpTracerMode, LogLevel)</h4>
-  <div class="markdown level1 summary"><p>Trace All http traffic and log Apizr execution steps at specified log level</p>
+  <h4 id="Apizr_Logging_Attributes_LogAttributeBase__ctor_Apizr_Logging_HttpMessageParts_Apizr_Logging_HttpTracerMode_Microsoft_Extensions_Logging_LogLevel___" data-uid="Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])">LogAttributeBase(HttpMessageParts, HttpTracerMode, LogLevel[])</h4>
+  <div class="markdown level1 summary"><p>Trace All http traffic and log Apizr execution steps at specified log levels</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected LogAttributeBase(HttpMessageParts trafficVerbosity, HttpTracerMode httpTracerMode, LogLevel logLevel)</code></pre>
+    <pre><code class="lang-csharp hljs">protected LogAttributeBase(HttpMessageParts trafficVerbosity, HttpTracerMode httpTracerMode, params LogLevel[] logLevels)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -344,9 +344,9 @@
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Microsoft.Extensions.Logging.LogLevel</span></td>
-        <td><span class="parametername">logLevel</span></td>
-        <td><p>Log level to apply while writing (default: Trace)</p>
+        <td><span class="xref">Microsoft.Extensions.Logging.LogLevel</span>[]</td>
+        <td><span class="parametername">logLevels</span></td>
+        <td><p>Log levels to apply while writing (default: [Low] Trace, [Medium] Information and [High] Critical)</p>
 </td>
       </tr>
     </tbody>
@@ -354,13 +354,13 @@
   
   
   <a id="Apizr_Logging_Attributes_LogAttributeBase__ctor_" data-uid="Apizr.Logging.Attributes.LogAttributeBase.#ctor*"></a>
-  <h4 id="Apizr_Logging_Attributes_LogAttributeBase__ctor_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel_" data-uid="Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)">LogAttributeBase(HttpMessageParts, LogLevel)</h4>
-  <div class="markdown level1 summary"><p>Trace All http traffic and log Apizr execution steps at specified log level</p>
+  <h4 id="Apizr_Logging_Attributes_LogAttributeBase__ctor_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel___" data-uid="Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">LogAttributeBase(HttpMessageParts, LogLevel[])</h4>
+  <div class="markdown level1 summary"><p>Trace All http traffic and log Apizr execution steps at specified log levels</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected LogAttributeBase(HttpMessageParts trafficVerbosity, LogLevel logLevel)</code></pre>
+    <pre><code class="lang-csharp hljs">protected LogAttributeBase(HttpMessageParts trafficVerbosity, params LogLevel[] logLevels)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -379,9 +379,9 @@
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Microsoft.Extensions.Logging.LogLevel</span></td>
-        <td><span class="parametername">logLevel</span></td>
-        <td><p>Log level to apply while writing (default: Trace)</p>
+        <td><span class="xref">Microsoft.Extensions.Logging.LogLevel</span>[]</td>
+        <td><span class="parametername">logLevels</span></td>
+        <td><p>Log levels to apply while writing (default: [Low] Trace, [Medium] Information and [High] Critical)</p>
 </td>
       </tr>
     </tbody>
@@ -390,7 +390,7 @@
   
   <a id="Apizr_Logging_Attributes_LogAttributeBase__ctor_" data-uid="Apizr.Logging.Attributes.LogAttributeBase.#ctor*"></a>
   <h4 id="Apizr_Logging_Attributes_LogAttributeBase__ctor_Apizr_Logging_HttpTracerMode_" data-uid="Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpTracerMode)">LogAttributeBase(HttpTracerMode)</h4>
-  <div class="markdown level1 summary"><p>Trace All http traffic and log Apizr execution steps at specified log level</p>
+  <div class="markdown level1 summary"><p>Trace All http traffic and log Apizr execution steps at default log levels ([Low] Trace, [Medium] Information and [High] Critical)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -418,13 +418,13 @@
   
   
   <a id="Apizr_Logging_Attributes_LogAttributeBase__ctor_" data-uid="Apizr.Logging.Attributes.LogAttributeBase.#ctor*"></a>
-  <h4 id="Apizr_Logging_Attributes_LogAttributeBase__ctor_Apizr_Logging_HttpTracerMode_Microsoft_Extensions_Logging_LogLevel_" data-uid="Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)">LogAttributeBase(HttpTracerMode, LogLevel)</h4>
-  <div class="markdown level1 summary"><p>Trace All http traffic and log Apizr execution steps at specified log level</p>
+  <h4 id="Apizr_Logging_Attributes_LogAttributeBase__ctor_Apizr_Logging_HttpTracerMode_Microsoft_Extensions_Logging_LogLevel___" data-uid="Apizr.Logging.Attributes.LogAttributeBase.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])">LogAttributeBase(HttpTracerMode, LogLevel[])</h4>
+  <div class="markdown level1 summary"><p>Trace All http traffic and log Apizr execution steps at specified log levels</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected LogAttributeBase(HttpTracerMode httpTracerMode, LogLevel logLevel)</code></pre>
+    <pre><code class="lang-csharp hljs">protected LogAttributeBase(HttpTracerMode httpTracerMode, params LogLevel[] logLevels)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -443,9 +443,9 @@
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Microsoft.Extensions.Logging.LogLevel</span></td>
-        <td><span class="parametername">logLevel</span></td>
-        <td><p>Log level to apply while writing (default: Trace)</p>
+        <td><span class="xref">Microsoft.Extensions.Logging.LogLevel</span>[]</td>
+        <td><span class="parametername">logLevels</span></td>
+        <td><p>Log levels to apply while writing (default: [Low] Trace, [Medium] Information and [High] Critical)</p>
 </td>
       </tr>
     </tbody>
@@ -453,13 +453,13 @@
   
   
   <a id="Apizr_Logging_Attributes_LogAttributeBase__ctor_" data-uid="Apizr.Logging.Attributes.LogAttributeBase.#ctor*"></a>
-  <h4 id="Apizr_Logging_Attributes_LogAttributeBase__ctor_Microsoft_Extensions_Logging_LogLevel_" data-uid="Apizr.Logging.Attributes.LogAttributeBase.#ctor(Microsoft.Extensions.Logging.LogLevel)">LogAttributeBase(LogLevel)</h4>
-  <div class="markdown level1 summary"><p>Trace All http traffic and log Apizr execution steps at specified log level</p>
+  <h4 id="Apizr_Logging_Attributes_LogAttributeBase__ctor_Microsoft_Extensions_Logging_LogLevel___" data-uid="Apizr.Logging.Attributes.LogAttributeBase.#ctor(Microsoft.Extensions.Logging.LogLevel[])">LogAttributeBase(LogLevel[])</h4>
+  <div class="markdown level1 summary"><p>Trace All http traffic and log Apizr execution steps at specified log levels</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected LogAttributeBase(LogLevel logLevel)</code></pre>
+    <pre><code class="lang-csharp hljs">protected LogAttributeBase(params LogLevel[] logLevels)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -472,9 +472,9 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Microsoft.Extensions.Logging.LogLevel</span></td>
-        <td><span class="parametername">logLevel</span></td>
-        <td><p>Log level to apply while writing (default: Trace)</p>
+        <td><span class="xref">Microsoft.Extensions.Logging.LogLevel</span>[]</td>
+        <td><span class="parametername">logLevels</span></td>
+        <td><p>Log levels to apply while writing (default: [Low] Trace, [Medium] Information and [High] Critical)</p>
 </td>
       </tr>
     </tbody>
@@ -509,14 +509,14 @@
   </table>
   
   
-  <a id="Apizr_Logging_Attributes_LogAttributeBase_LogLevel_" data-uid="Apizr.Logging.Attributes.LogAttributeBase.LogLevel*"></a>
-  <h4 id="Apizr_Logging_Attributes_LogAttributeBase_LogLevel" data-uid="Apizr.Logging.Attributes.LogAttributeBase.LogLevel">LogLevel</h4>
-  <div class="markdown level1 summary"><p>Log level to apply while writing (default: Information)</p>
+  <a id="Apizr_Logging_Attributes_LogAttributeBase_LogLevels_" data-uid="Apizr.Logging.Attributes.LogAttributeBase.LogLevels*"></a>
+  <h4 id="Apizr_Logging_Attributes_LogAttributeBase_LogLevels" data-uid="Apizr.Logging.Attributes.LogAttributeBase.LogLevels">LogLevels</h4>
+  <div class="markdown level1 summary"><p>Log levels to apply while writing (default: [Low] Trace, [Medium] Information and [High] Critical)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LogLevel LogLevel { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public LogLevel[] LogLevels { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -528,7 +528,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Microsoft.Extensions.Logging.LogLevel</span></td>
+        <td><span class="xref">Microsoft.Extensions.Logging.LogLevel</span>[]</td>
         <td></td>
       </tr>
     </tbody>
@@ -537,7 +537,7 @@
   
   <a id="Apizr_Logging_Attributes_LogAttributeBase_TrafficVerbosity_" data-uid="Apizr.Logging.Attributes.LogAttributeBase.TrafficVerbosity*"></a>
   <h4 id="Apizr_Logging_Attributes_LogAttributeBase_TrafficVerbosity" data-uid="Apizr.Logging.Attributes.LogAttributeBase.TrafficVerbosity">TrafficVerbosity</h4>
-  <div class="markdown level1 summary"><p>Http traffic tracing verbosity (default: all)</p>
+  <div class="markdown level1 summary"><p>Http traffic tracing verbosity (default: All)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

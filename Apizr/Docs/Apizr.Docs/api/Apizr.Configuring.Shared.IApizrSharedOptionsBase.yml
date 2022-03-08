@@ -6,7 +6,7 @@ items:
   parent: Apizr.Configuring.Shared
   children:
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode
-  - Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevel
+  - Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.TrafficVerbosity
   langs:
   - csharp
@@ -95,33 +95,33 @@ items:
   - get
   modifiers.vb:
   - ReadOnly
-- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevel
-  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevel
-  id: LogLevel
+- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
+  id: LogLevels
   parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
   langs:
   - csharp
   - vb
-  name: LogLevel
-  nameWithType: IApizrSharedOptionsBase.LogLevel
-  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevel
+  name: LogLevels
+  nameWithType: IApizrSharedOptionsBase.LogLevels
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
   type: Property
   source:
-    id: LogLevel
+    id: LogLevels
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptionsBase.cs
     startLine: 20
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
-  summary: "\nLog level while writing\n"
+  summary: "\nLog levels while writing\n"
   example: []
   syntax:
-    content: LogLevel LogLevel { get; }
+    content: LogLevel[] LogLevels { get; }
     parameters: []
     return:
-      type: Microsoft.Extensions.Logging.LogLevel
-    content.vb: ReadOnly Property LogLevel As LogLevel
-  overload: Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevel*
+      type: Microsoft.Extensions.Logging.LogLevel[]
+    content.vb: ReadOnly Property LogLevels As LogLevel()
+  overload: Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels*
   modifiers.csharp:
   - get
   modifiers.vb:
@@ -295,21 +295,34 @@ references:
   name: HttpMessageParts
   nameWithType: HttpMessageParts
   fullName: Apizr.Logging.HttpMessageParts
-- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevel*
-  commentId: Overload:Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevel
-  name: LogLevel
-  nameWithType: IApizrSharedOptionsBase.LogLevel
-  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevel
-- uid: Microsoft.Extensions.Logging.LogLevel
-  commentId: T:Microsoft.Extensions.Logging.LogLevel
-  parent: Microsoft.Extensions.Logging
+- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
+  name: LogLevels
+  nameWithType: IApizrSharedOptionsBase.LogLevels
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
+- uid: Microsoft.Extensions.Logging.LogLevel[]
   isExternal: true
-  name: LogLevel
-  nameWithType: LogLevel
-  fullName: Microsoft.Extensions.Logging.LogLevel
-- uid: Microsoft.Extensions.Logging
-  commentId: N:Microsoft.Extensions.Logging
-  isExternal: true
-  name: Microsoft.Extensions.Logging
-  nameWithType: Microsoft.Extensions.Logging
-  fullName: Microsoft.Extensions.Logging
+  name: LogLevel[]
+  nameWithType: LogLevel[]
+  fullName: Microsoft.Extensions.Logging.LogLevel[]
+  nameWithType.vb: LogLevel()
+  fullName.vb: Microsoft.Extensions.Logging.LogLevel()
+  name.vb: LogLevel()
+  spec.csharp:
+  - uid: Microsoft.Extensions.Logging.LogLevel
+    name: LogLevel
+    nameWithType: LogLevel
+    fullName: Microsoft.Extensions.Logging.LogLevel
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: Microsoft.Extensions.Logging.LogLevel
+    name: LogLevel
+    nameWithType: LogLevel
+    fullName: Microsoft.Extensions.Logging.LogLevel
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()

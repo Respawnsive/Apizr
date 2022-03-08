@@ -5,8 +5,8 @@ items:
   id: PollyContextExtensions
   parent: Apizr.Policing
   children:
-  - Apizr.Policing.PollyContextExtensions.TryGetLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger@,Microsoft.Extensions.Logging.LogLevel@,Apizr.Logging.HttpMessageParts@,Apizr.Logging.HttpTracerMode@)
-  - Apizr.Policing.PollyContextExtensions.WithLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)
+  - Apizr.Policing.PollyContextExtensions.TryGetLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger@,Microsoft.Extensions.Logging.LogLevel[]@,Apizr.Logging.HttpMessageParts@,Apizr.Logging.HttpTracerMode@)
+  - Apizr.Policing.PollyContextExtensions.WithLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)
   langs:
   - csharp
   - vb
@@ -43,17 +43,17 @@ items:
   modifiers.vb:
   - Public
   - Module
-- uid: Apizr.Policing.PollyContextExtensions.WithLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)
-  commentId: M:Apizr.Policing.PollyContextExtensions.WithLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)
-  id: WithLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)
+- uid: Apizr.Policing.PollyContextExtensions.WithLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)
+  commentId: M:Apizr.Policing.PollyContextExtensions.WithLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)
+  id: WithLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)
   isExtensionMethod: true
   parent: Apizr.Policing.PollyContextExtensions
   langs:
   - csharp
   - vb
-  name: WithLogger(Context, ILogger, LogLevel, HttpMessageParts, HttpTracerMode)
-  nameWithType: PollyContextExtensions.WithLogger(Context, ILogger, LogLevel, HttpMessageParts, HttpTracerMode)
-  fullName: Apizr.Policing.PollyContextExtensions.WithLogger(Polly.Context, Microsoft.Extensions.Logging.ILogger, Microsoft.Extensions.Logging.LogLevel, Apizr.Logging.HttpMessageParts, Apizr.Logging.HttpTracerMode)
+  name: WithLogger(Context, ILogger, LogLevel[], HttpMessageParts, HttpTracerMode)
+  nameWithType: PollyContextExtensions.WithLogger(Context, ILogger, LogLevel[], HttpMessageParts, HttpTracerMode)
+  fullName: Apizr.Policing.PollyContextExtensions.WithLogger(Polly.Context, Microsoft.Extensions.Logging.ILogger, Microsoft.Extensions.Logging.LogLevel[], Apizr.Logging.HttpMessageParts, Apizr.Logging.HttpTracerMode)
   type: Method
   source:
     id: WithLogger
@@ -65,7 +65,7 @@ items:
   summary: "\nPassing your <xref href=\"Microsoft.Extensions.Logging.ILogger\" data-throw-if-not-resolved=\"false\"></xref> mapping implementation to Polly context\n"
   example: []
   syntax:
-    content: public static Context WithLogger(this Context context, ILogger logger, LogLevel logLevel, HttpMessageParts verbosity, HttpTracerMode tracerMode)
+    content: public static Context WithLogger(this Context context, ILogger logger, LogLevel[] logLevels, HttpMessageParts verbosity, HttpTracerMode tracerMode)
     parameters:
     - id: context
       type: Polly.Context
@@ -73,8 +73,8 @@ items:
     - id: logger
       type: Microsoft.Extensions.Logging.ILogger
       description: Your <xref href="Microsoft.Extensions.Logging.ILogger" data-throw-if-not-resolved="false"></xref> mapping implementation
-    - id: logLevel
-      type: Microsoft.Extensions.Logging.LogLevel
+    - id: logLevels
+      type: Microsoft.Extensions.Logging.LogLevel[]
       description: ''
     - id: verbosity
       type: Apizr.Logging.HttpMessageParts
@@ -88,25 +88,28 @@ items:
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function WithLogger(context As Context, logger As ILogger, logLevel As LogLevel, verbosity As HttpMessageParts, tracerMode As HttpTracerMode) As Context
+      Public Shared Function WithLogger(context As Context, logger As ILogger, logLevels As LogLevel(), verbosity As HttpMessageParts, tracerMode As HttpTracerMode) As Context
   overload: Apizr.Policing.PollyContextExtensions.WithLogger*
+  nameWithType.vb: PollyContextExtensions.WithLogger(Context, ILogger, LogLevel(), HttpMessageParts, HttpTracerMode)
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
-- uid: Apizr.Policing.PollyContextExtensions.TryGetLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger@,Microsoft.Extensions.Logging.LogLevel@,Apizr.Logging.HttpMessageParts@,Apizr.Logging.HttpTracerMode@)
-  commentId: M:Apizr.Policing.PollyContextExtensions.TryGetLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger@,Microsoft.Extensions.Logging.LogLevel@,Apizr.Logging.HttpMessageParts@,Apizr.Logging.HttpTracerMode@)
-  id: TryGetLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger@,Microsoft.Extensions.Logging.LogLevel@,Apizr.Logging.HttpMessageParts@,Apizr.Logging.HttpTracerMode@)
+  fullName.vb: Apizr.Policing.PollyContextExtensions.WithLogger(Polly.Context, Microsoft.Extensions.Logging.ILogger, Microsoft.Extensions.Logging.LogLevel(), Apizr.Logging.HttpMessageParts, Apizr.Logging.HttpTracerMode)
+  name.vb: WithLogger(Context, ILogger, LogLevel(), HttpMessageParts, HttpTracerMode)
+- uid: Apizr.Policing.PollyContextExtensions.TryGetLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger@,Microsoft.Extensions.Logging.LogLevel[]@,Apizr.Logging.HttpMessageParts@,Apizr.Logging.HttpTracerMode@)
+  commentId: M:Apizr.Policing.PollyContextExtensions.TryGetLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger@,Microsoft.Extensions.Logging.LogLevel[]@,Apizr.Logging.HttpMessageParts@,Apizr.Logging.HttpTracerMode@)
+  id: TryGetLogger(Polly.Context,Microsoft.Extensions.Logging.ILogger@,Microsoft.Extensions.Logging.LogLevel[]@,Apizr.Logging.HttpMessageParts@,Apizr.Logging.HttpTracerMode@)
   isExtensionMethod: true
   parent: Apizr.Policing.PollyContextExtensions
   langs:
   - csharp
   - vb
-  name: TryGetLogger(Context, out ILogger, out LogLevel, out HttpMessageParts, out HttpTracerMode)
-  nameWithType: PollyContextExtensions.TryGetLogger(Context, out ILogger, out LogLevel, out HttpMessageParts, out HttpTracerMode)
-  fullName: Apizr.Policing.PollyContextExtensions.TryGetLogger(Polly.Context, out Microsoft.Extensions.Logging.ILogger, out Microsoft.Extensions.Logging.LogLevel, out Apizr.Logging.HttpMessageParts, out Apizr.Logging.HttpTracerMode)
+  name: TryGetLogger(Context, out ILogger, out LogLevel[], out HttpMessageParts, out HttpTracerMode)
+  nameWithType: PollyContextExtensions.TryGetLogger(Context, out ILogger, out LogLevel[], out HttpMessageParts, out HttpTracerMode)
+  fullName: Apizr.Policing.PollyContextExtensions.TryGetLogger(Polly.Context, out Microsoft.Extensions.Logging.ILogger, out Microsoft.Extensions.Logging.LogLevel[], out Apizr.Logging.HttpMessageParts, out Apizr.Logging.HttpTracerMode)
   type: Method
   source:
     id: TryGetLogger
@@ -118,7 +121,7 @@ items:
   summary: "\nTrying to get your <xref href=\"Microsoft.Extensions.Logging.ILogger\" data-throw-if-not-resolved=\"false\"></xref> mapping implementation from Polly context\n"
   example: []
   syntax:
-    content: public static bool TryGetLogger(this Context context, out ILogger logger, out LogLevel logLevel, out HttpMessageParts verbosity, out HttpTracerMode tracerMode)
+    content: public static bool TryGetLogger(this Context context, out ILogger logger, out LogLevel[] logLevels, out HttpMessageParts verbosity, out HttpTracerMode tracerMode)
     parameters:
     - id: context
       type: Polly.Context
@@ -126,8 +129,8 @@ items:
     - id: logger
       type: Microsoft.Extensions.Logging.ILogger
       description: Your <xref href="Microsoft.Extensions.Logging.ILogger" data-throw-if-not-resolved="false"></xref> mapping implementation
-    - id: logLevel
-      type: Microsoft.Extensions.Logging.LogLevel
+    - id: logLevels
+      type: Microsoft.Extensions.Logging.LogLevel[]
       description: ''
     - id: verbosity
       type: Apizr.Logging.HttpMessageParts
@@ -141,17 +144,17 @@ items:
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function TryGetLogger(context As Context, ByRef logger As ILogger, ByRef logLevel As LogLevel, ByRef verbosity As HttpMessageParts, ByRef tracerMode As HttpTracerMode) As Boolean
+      Public Shared Function TryGetLogger(context As Context, ByRef logger As ILogger, ByRef logLevels As LogLevel(), ByRef verbosity As HttpMessageParts, ByRef tracerMode As HttpTracerMode) As Boolean
   overload: Apizr.Policing.PollyContextExtensions.TryGetLogger*
-  nameWithType.vb: PollyContextExtensions.TryGetLogger(Context, ByRef ILogger, ByRef LogLevel, ByRef HttpMessageParts, ByRef HttpTracerMode)
+  nameWithType.vb: PollyContextExtensions.TryGetLogger(Context, ByRef ILogger, ByRef LogLevel(), ByRef HttpMessageParts, ByRef HttpTracerMode)
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Apizr.Policing.PollyContextExtensions.TryGetLogger(Polly.Context, ByRef Microsoft.Extensions.Logging.ILogger, ByRef Microsoft.Extensions.Logging.LogLevel, ByRef Apizr.Logging.HttpMessageParts, ByRef Apizr.Logging.HttpTracerMode)
-  name.vb: TryGetLogger(Context, ByRef ILogger, ByRef LogLevel, ByRef HttpMessageParts, ByRef HttpTracerMode)
+  fullName.vb: Apizr.Policing.PollyContextExtensions.TryGetLogger(Polly.Context, ByRef Microsoft.Extensions.Logging.ILogger, ByRef Microsoft.Extensions.Logging.LogLevel(), ByRef Apizr.Logging.HttpMessageParts, ByRef Apizr.Logging.HttpTracerMode)
+  name.vb: TryGetLogger(Context, ByRef ILogger, ByRef LogLevel(), ByRef HttpMessageParts, ByRef HttpTracerMode)
 references:
 - uid: Apizr.Policing
   commentId: N:Apizr.Policing
@@ -469,13 +472,32 @@ references:
   name: Context
   nameWithType: Context
   fullName: Polly.Context
-- uid: Microsoft.Extensions.Logging.LogLevel
-  commentId: T:Microsoft.Extensions.Logging.LogLevel
-  parent: Microsoft.Extensions.Logging
+- uid: Microsoft.Extensions.Logging.LogLevel[]
   isExternal: true
-  name: LogLevel
-  nameWithType: LogLevel
-  fullName: Microsoft.Extensions.Logging.LogLevel
+  name: LogLevel[]
+  nameWithType: LogLevel[]
+  fullName: Microsoft.Extensions.Logging.LogLevel[]
+  nameWithType.vb: LogLevel()
+  fullName.vb: Microsoft.Extensions.Logging.LogLevel()
+  name.vb: LogLevel()
+  spec.csharp:
+  - uid: Microsoft.Extensions.Logging.LogLevel
+    name: LogLevel
+    nameWithType: LogLevel
+    fullName: Microsoft.Extensions.Logging.LogLevel
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: Microsoft.Extensions.Logging.LogLevel
+    name: LogLevel
+    nameWithType: LogLevel
+    fullName: Microsoft.Extensions.Logging.LogLevel
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
 - uid: Apizr.Logging.HttpMessageParts
   commentId: T:Apizr.Logging.HttpMessageParts
   parent: Apizr.Logging

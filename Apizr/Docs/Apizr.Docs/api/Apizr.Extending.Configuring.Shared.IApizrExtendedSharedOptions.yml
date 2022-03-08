@@ -8,7 +8,7 @@ items:
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientBuilder
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientHandlerFactory
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpTracerModeFactory
-  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelFactory
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TrafficVerbosityFactory
   langs:
   - csharp
@@ -33,7 +33,7 @@ items:
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.TrafficVerbosity
-  - Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevel
+  - Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
   extensionMethods:
   - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
   modifiers.csharp:
@@ -104,33 +104,33 @@ items:
   - get
   modifiers.vb:
   - ReadOnly
-- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelFactory
-  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelFactory
-  id: LogLevelFactory
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory
+  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory
+  id: LogLevelsFactory
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
   langs:
   - csharp
   - vb
-  name: LogLevelFactory
-  nameWithType: IApizrExtendedSharedOptions.LogLevelFactory
-  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelFactory
+  name: LogLevelsFactory
+  nameWithType: IApizrExtendedSharedOptions.LogLevelsFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory
   type: Property
   source:
-    id: LogLevelFactory
+    id: LogLevelsFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Shared\IApizrExtendedSharedOptions.cs
     startLine: 23
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
-  summary: "\nLog level factory\n"
+  summary: "\nLog levels factory\n"
   example: []
   syntax:
-    content: Func<IServiceProvider, LogLevel> LogLevelFactory { get; }
+    content: Func<IServiceProvider, LogLevel[]> LogLevelsFactory { get; }
     parameters: []
     return:
-      type: System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel}
-    content.vb: ReadOnly Property LogLevelFactory As Func(Of IServiceProvider, LogLevel)
-  overload: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelFactory*
+      type: System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]}
+    content.vb: ReadOnly Property LogLevelsFactory As Func(Of IServiceProvider, LogLevel())
+  overload: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory*
   modifiers.csharp:
   - get
   modifiers.vb:
@@ -221,12 +221,12 @@ references:
   name: TrafficVerbosity
   nameWithType: IApizrSharedOptionsBase.TrafficVerbosity
   fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.TrafficVerbosity
-- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevel
-  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevel
+- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
   parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
-  name: LogLevel
-  nameWithType: IApizrSharedOptionsBase.LogLevel
-  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevel
+  name: LogLevels
+  nameWithType: IApizrSharedOptionsBase.LogLevels
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
 - uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
   commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
   parent: Apizr.Extending.ObjectExtensions
@@ -563,21 +563,21 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelFactory*
-  commentId: Overload:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelFactory
-  name: LogLevelFactory
-  nameWithType: IApizrExtendedSharedOptions.LogLevelFactory
-  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelFactory
-- uid: System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel}
-  commentId: T:System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel}
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory*
+  commentId: Overload:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory
+  name: LogLevelsFactory
+  nameWithType: IApizrExtendedSharedOptions.LogLevelsFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory
+- uid: System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]}
+  commentId: T:System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]}
   parent: System
   definition: System.Func`2
-  name: Func<IServiceProvider, LogLevel>
-  nameWithType: Func<IServiceProvider, LogLevel>
-  fullName: System.Func<System.IServiceProvider, Microsoft.Extensions.Logging.LogLevel>
-  nameWithType.vb: Func(Of IServiceProvider, LogLevel)
-  fullName.vb: System.Func(Of System.IServiceProvider, Microsoft.Extensions.Logging.LogLevel)
-  name.vb: Func(Of IServiceProvider, LogLevel)
+  name: Func<IServiceProvider, LogLevel[]>
+  nameWithType: Func<IServiceProvider, LogLevel[]>
+  fullName: System.Func<System.IServiceProvider, Microsoft.Extensions.Logging.LogLevel[]>
+  nameWithType.vb: Func(Of IServiceProvider, LogLevel())
+  fullName.vb: System.Func(Of System.IServiceProvider, Microsoft.Extensions.Logging.LogLevel())
+  name.vb: Func(Of IServiceProvider, LogLevel())
   spec.csharp:
   - uid: System.Func`2
     name: Func
@@ -600,6 +600,9 @@ references:
     nameWithType: LogLevel
     fullName: Microsoft.Extensions.Logging.LogLevel
     isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -625,6 +628,9 @@ references:
     nameWithType: LogLevel
     fullName: Microsoft.Extensions.Logging.LogLevel
     isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
   - name: )
     nameWithType: )
     fullName: )

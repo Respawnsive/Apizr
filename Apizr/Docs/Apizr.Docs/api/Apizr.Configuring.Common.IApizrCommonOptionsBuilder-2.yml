@@ -34,7 +34,6 @@ items:
     - id: TApizrCommonOptionsBuilder
     content.vb: >-
       Public Interface IApizrCommonOptionsBuilder(Of Out TApizrCommonOptions As IApizrCommonOptionsBase, Out TApizrCommonOptionsBuilder As IApizrCommonOptionsBuilderBase(Of TApizrCommonOptions, TApizrCommonOptionsBuilder))
-
           Inherits IApizrCommonOptionsBuilderBase(Of TApizrCommonOptions, TApizrCommonOptionsBuilder), IApizrSharedOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder)
   inheritedMembers:
   - Apizr.Configuring.Common.IApizrGlobalCommonOptionsBuilderBase{{TApizrCommonOptions},{TApizrCommonOptionsBuilder}}.WithRefitSettings(Refit.RefitSettings)
@@ -50,12 +49,12 @@ items:
   - Apizr.Configuring.Shared.IApizrSharedOptionsBuilder{{TApizrCommonOptions},{TApizrCommonOptionsBuilder}}.WithAuthenticationHandler``1(System.Func{{TSettingsService}},System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   - Apizr.Configuring.Shared.IApizrSharedOptionsBuilder{{TApizrCommonOptions},{TApizrCommonOptionsBuilder}}.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler})
   - Apizr.Configuring.Shared.IApizrSharedOptionsBuilder{{TApizrCommonOptions},{TApizrCommonOptionsBuilder}}.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,System.Net.Http.DelegatingHandler})
-  - Apizr.Configuring.Shared.IApizrSharedOptionsBuilder{{TApizrCommonOptions},{TApizrCommonOptionsBuilder}}.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel})
+  - Apizr.Configuring.Shared.IApizrSharedOptionsBuilder{{TApizrCommonOptions},{TApizrCommonOptionsBuilder}}.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrCommonOptions},{TApizrCommonOptionsBuilder}}.ApizrOptions
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrCommonOptions},{TApizrCommonOptionsBuilder}}.WithHttpClientHandler(System.Net.Http.HttpClientHandler)
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrCommonOptions},{TApizrCommonOptionsBuilder}}.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrCommonOptions},{TApizrCommonOptionsBuilder}}.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
-  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrCommonOptions},{TApizrCommonOptionsBuilder}}.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrCommonOptions},{TApizrCommonOptionsBuilder}}.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
   extensionMethods:
   - Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1
   - Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(System.Func{Akavache.IBlobCache})
@@ -1802,18 +1801,18 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder{{TApizrCommonOptions},{TApizrCommonOptionsBuilder}}.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel})
-  commentId: M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder{`0,`1}.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel})
+- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder{{TApizrCommonOptions},{TApizrCommonOptionsBuilder}}.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder{`0,`1}.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})
   parent: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder{{TApizrCommonOptions},{TApizrCommonOptionsBuilder}}
-  definition: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel})
-  name: WithLogging(Func<HttpTracerMode>, Func<HttpMessageParts>, Func<LogLevel>)
-  nameWithType: IApizrSharedOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithLogging(Func<HttpTracerMode>, Func<HttpMessageParts>, Func<LogLevel>)
-  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithLogging(System.Func<Apizr.Logging.HttpTracerMode>, System.Func<Apizr.Logging.HttpMessageParts>, System.Func<Microsoft.Extensions.Logging.LogLevel>)
-  nameWithType.vb: IApizrSharedOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithLogging(Func(Of HttpTracerMode), Func(Of HttpMessageParts), Func(Of LogLevel))
-  fullName.vb: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithLogging(System.Func(Of Apizr.Logging.HttpTracerMode), System.Func(Of Apizr.Logging.HttpMessageParts), System.Func(Of Microsoft.Extensions.Logging.LogLevel))
-  name.vb: WithLogging(Func(Of HttpTracerMode), Func(Of HttpMessageParts), Func(Of LogLevel))
+  definition: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})
+  name: WithLogging(Func<HttpTracerMode>, Func<HttpMessageParts>, Func<LogLevel[]>)
+  nameWithType: IApizrSharedOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithLogging(Func<HttpTracerMode>, Func<HttpMessageParts>, Func<LogLevel[]>)
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithLogging(System.Func<Apizr.Logging.HttpTracerMode>, System.Func<Apizr.Logging.HttpMessageParts>, System.Func<Microsoft.Extensions.Logging.LogLevel[]>)
+  nameWithType.vb: IApizrSharedOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithLogging(Func(Of HttpTracerMode), Func(Of HttpMessageParts), Func(Of LogLevel()))
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithLogging(System.Func(Of Apizr.Logging.HttpTracerMode), System.Func(Of Apizr.Logging.HttpMessageParts), System.Func(Of Microsoft.Extensions.Logging.LogLevel()))
+  name.vb: WithLogging(Func(Of HttpTracerMode), Func(Of HttpMessageParts), Func(Of LogLevel()))
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel})
+  - uid: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})
     name: WithLogging
     nameWithType: IApizrSharedOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithLogging
     fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithLogging
@@ -1869,6 +1868,9 @@ references:
     nameWithType: LogLevel
     fullName: Microsoft.Extensions.Logging.LogLevel
     isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -1876,7 +1878,7 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel})
+  - uid: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})
     name: WithLogging
     nameWithType: IApizrSharedOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithLogging
     fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithLogging
@@ -1932,6 +1934,9 @@ references:
     nameWithType: LogLevel
     fullName: Microsoft.Extensions.Logging.LogLevel
     isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
   - name: )
     nameWithType: )
     fullName: )
@@ -2131,17 +2136,18 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrCommonOptions},{TApizrCommonOptionsBuilder}}.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrCommonOptions},{TApizrCommonOptionsBuilder}}.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrCommonOptions},{TApizrCommonOptionsBuilder}}
-  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)
-  name: WithLogging(HttpTracerMode, HttpMessageParts, LogLevel)
-  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithLogging(HttpTracerMode, HttpMessageParts, LogLevel)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithLogging(Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel)
-  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithLogging(HttpTracerMode, HttpMessageParts, LogLevel)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithLogging(Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel)
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
+  name: WithLogging(HttpTracerMode, HttpMessageParts, LogLevel[])
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithLogging(HttpTracerMode, HttpMessageParts, LogLevel[])
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithLogging(Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel[])
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithLogging(HttpTracerMode, HttpMessageParts, LogLevel())
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithLogging(Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel())
+  name.vb: WithLogging(HttpTracerMode, HttpMessageParts, LogLevel())
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
     name: WithLogging
     nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithLogging
     fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithLogging
@@ -2167,11 +2173,14 @@ references:
     nameWithType: LogLevel
     fullName: Microsoft.Extensions.Logging.LogLevel
     isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
     name: WithLogging
     nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithLogging
     fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithLogging
@@ -2197,6 +2206,9 @@ references:
     nameWithType: LogLevel
     fullName: Microsoft.Extensions.Logging.LogLevel
     isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
   - name: )
     nameWithType: )
     fullName: )
@@ -4083,17 +4095,17 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel})
-  commentId: M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel})
+- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})
   isExternal: true
-  name: WithLogging(Func<HttpTracerMode>, Func<HttpMessageParts>, Func<LogLevel>)
-  nameWithType: IApizrSharedOptionsBuilder<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithLogging(Func<HttpTracerMode>, Func<HttpMessageParts>, Func<LogLevel>)
-  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithLogging(System.Func<Apizr.Logging.HttpTracerMode>, System.Func<Apizr.Logging.HttpMessageParts>, System.Func<Microsoft.Extensions.Logging.LogLevel>)
-  nameWithType.vb: IApizrSharedOptionsBuilder(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithLogging(Func(Of HttpTracerMode), Func(Of HttpMessageParts), Func(Of LogLevel))
-  fullName.vb: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithLogging(System.Func(Of Apizr.Logging.HttpTracerMode), System.Func(Of Apizr.Logging.HttpMessageParts), System.Func(Of Microsoft.Extensions.Logging.LogLevel))
-  name.vb: WithLogging(Func(Of HttpTracerMode), Func(Of HttpMessageParts), Func(Of LogLevel))
+  name: WithLogging(Func<HttpTracerMode>, Func<HttpMessageParts>, Func<LogLevel[]>)
+  nameWithType: IApizrSharedOptionsBuilder<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithLogging(Func<HttpTracerMode>, Func<HttpMessageParts>, Func<LogLevel[]>)
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithLogging(System.Func<Apizr.Logging.HttpTracerMode>, System.Func<Apizr.Logging.HttpMessageParts>, System.Func<Microsoft.Extensions.Logging.LogLevel[]>)
+  nameWithType.vb: IApizrSharedOptionsBuilder(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithLogging(Func(Of HttpTracerMode), Func(Of HttpMessageParts), Func(Of LogLevel()))
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithLogging(System.Func(Of Apizr.Logging.HttpTracerMode), System.Func(Of Apizr.Logging.HttpMessageParts), System.Func(Of Microsoft.Extensions.Logging.LogLevel()))
+  name.vb: WithLogging(Func(Of HttpTracerMode), Func(Of HttpMessageParts), Func(Of LogLevel()))
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel})
+  - uid: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})
     name: WithLogging
     nameWithType: IApizrSharedOptionsBuilder<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithLogging
     fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithLogging
@@ -4149,6 +4161,9 @@ references:
     nameWithType: LogLevel
     fullName: Microsoft.Extensions.Logging.LogLevel
     isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -4156,7 +4171,7 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel})
+  - uid: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})
     name: WithLogging
     nameWithType: IApizrSharedOptionsBuilder(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithLogging
     fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithLogging
@@ -4212,6 +4227,9 @@ references:
     nameWithType: LogLevel
     fullName: Microsoft.Extensions.Logging.LogLevel
     isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
   - name: )
     nameWithType: )
     fullName: )
@@ -4456,16 +4474,17 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
   isExternal: true
-  name: WithLogging(HttpTracerMode, HttpMessageParts, LogLevel)
-  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithLogging(HttpTracerMode, HttpMessageParts, LogLevel)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithLogging(Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel)
-  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithLogging(HttpTracerMode, HttpMessageParts, LogLevel)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithLogging(Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel)
+  name: WithLogging(HttpTracerMode, HttpMessageParts, LogLevel[])
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithLogging(HttpTracerMode, HttpMessageParts, LogLevel[])
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithLogging(Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel[])
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithLogging(HttpTracerMode, HttpMessageParts, LogLevel())
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithLogging(Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel())
+  name.vb: WithLogging(HttpTracerMode, HttpMessageParts, LogLevel())
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
     name: WithLogging
     nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithLogging
     fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithLogging
@@ -4491,11 +4510,14 @@ references:
     nameWithType: LogLevel
     fullName: Microsoft.Extensions.Logging.LogLevel
     isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
     name: WithLogging
     nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithLogging
     fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithLogging
@@ -4521,6 +4543,9 @@ references:
     nameWithType: LogLevel
     fullName: Microsoft.Extensions.Logging.LogLevel
     isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
   - name: )
     nameWithType: )
     fullName: )

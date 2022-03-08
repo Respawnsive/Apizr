@@ -6,7 +6,7 @@
 - [New] [Logging] Now fully relies on **MS Logging extensions**
 - [New] [Logging] Static fluent configuration now offers a **WithLoggerFactory option** to provide a custom logger factory
 - [Breaking] [Logging] TraceAttribute has been **renamed back to LogAttribute**
-- [New] [Logging] Now we can set **Low, Medium and High LogLevel values** by attribute or fluent configuration
+- [Breaking] [Logging] Now we can set a **LogLevel value for each Low, Medium and High severity** by attribute or fluent configuration
 - [New] [Logging] Now we can set logging settings within **LogAttribute at method level**
 - [New] [Logging] Now we can set **http tracing mode within LogAttribute** to ajust log writting conditions (ExceptionsOnly, ErrorsAndExceptionsOnly or Everything)
 - [New] [Logging] **No more HttpTracer NuGet package dependency** as source code has been integrated and largely adjusted to Apizr needs

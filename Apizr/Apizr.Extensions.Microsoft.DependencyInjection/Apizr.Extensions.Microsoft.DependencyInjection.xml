@@ -82,7 +82,7 @@
             <summary>
             Provide a connectivity handler to check connectivity before sending a request
             </summary>
-            <typeparam name="TConnectivityHandler">Your <see cref="T:Apizr.Connecting.IConnectivityHandler"/> mapping implementation</typeparam>
+            <typeparam name="TConnectivityHandler">Your connectivity checking service</typeparam>
             <returns></returns>
         </member>
         <member name="M:Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder`2.WithConnectivityHandler``1">
@@ -385,9 +385,9 @@
             Http traffic tracing verbosity factory
             </summary>
         </member>
-        <member name="P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelFactory">
+        <member name="P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory">
             <summary>
-            Log level factory
+            Log levels factory
             </summary>
         </member>
         <member name="P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientHandlerFactory">
@@ -405,13 +405,13 @@
             Delegating handlers factories
             </summary>
         </member>
-        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithLogging(System.Func{System.IServiceProvider,Apizr.Logging.HttpTracerMode},System.Func{System.IServiceProvider,Apizr.Logging.HttpMessageParts},System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel})">
+        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithLogging(System.Func{System.IServiceProvider,Apizr.Logging.HttpTracerMode},System.Func{System.IServiceProvider,Apizr.Logging.HttpMessageParts},System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]})">
             <summary>
             Define http traffic tracing verbosity and log level (could be defined with TraceAttribute)
             </summary>
             <param name="httpTracerModeFactory">Http traffic tracing mode factory</param>
             <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
-            <param name="logLevelFactory">Log level factory</param>
+            <param name="logLevelsFactory">Log levels factory</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithHttpClientHandler(System.Func{System.IServiceProvider,System.Net.Http.HttpClientHandler})">

@@ -5,7 +5,10 @@ items:
   id: Constants
   parent: Apizr
   children:
+  - Apizr.Constants.HighLogLevel
   - Apizr.Constants.InterfaceTypeKey
+  - Apizr.Constants.LowLogLevel
+  - Apizr.Constants.MediumLogLevel
   - Apizr.Constants.PollyExecutionContextKey
   - Apizr.Constants.PriorityKey
   langs:
@@ -18,7 +21,7 @@ items:
   source:
     id: Constants
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Constants.cs
-    startLine: 2
+    startLine: 4
   assemblies:
   - Apizr
   namespace: Apizr
@@ -57,7 +60,7 @@ items:
   source:
     id: InterfaceTypeKey
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Constants.cs
-    startLine: 4
+    startLine: 6
   assemblies:
   - Apizr
   namespace: Apizr
@@ -86,7 +89,7 @@ items:
   source:
     id: PollyExecutionContextKey
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Constants.cs
-    startLine: 5
+    startLine: 7
   assemblies:
   - Apizr
   namespace: Apizr
@@ -115,7 +118,7 @@ items:
   source:
     id: PriorityKey
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Constants.cs
-    startLine: 6
+    startLine: 8
   assemblies:
   - Apizr
   namespace: Apizr
@@ -124,6 +127,93 @@ items:
     return:
       type: System.String
     content.vb: Public Const PriorityKey As String = "Priority"
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Apizr.Constants.LowLogLevel
+  commentId: F:Apizr.Constants.LowLogLevel
+  id: LowLogLevel
+  parent: Apizr.Constants
+  langs:
+  - csharp
+  - vb
+  name: LowLogLevel
+  nameWithType: Constants.LowLogLevel
+  fullName: Apizr.Constants.LowLogLevel
+  type: Field
+  source:
+    id: LowLogLevel
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Constants.cs
+    startLine: 9
+  assemblies:
+  - Apizr
+  namespace: Apizr
+  syntax:
+    content: public const LogLevel LowLogLevel = LogLevel.Trace
+    return:
+      type: Microsoft.Extensions.Logging.LogLevel
+    content.vb: Public Const LowLogLevel As LogLevel = LogLevel.Trace
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Apizr.Constants.MediumLogLevel
+  commentId: F:Apizr.Constants.MediumLogLevel
+  id: MediumLogLevel
+  parent: Apizr.Constants
+  langs:
+  - csharp
+  - vb
+  name: MediumLogLevel
+  nameWithType: Constants.MediumLogLevel
+  fullName: Apizr.Constants.MediumLogLevel
+  type: Field
+  source:
+    id: MediumLogLevel
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Constants.cs
+    startLine: 10
+  assemblies:
+  - Apizr
+  namespace: Apizr
+  syntax:
+    content: public const LogLevel MediumLogLevel = LogLevel.Information
+    return:
+      type: Microsoft.Extensions.Logging.LogLevel
+    content.vb: Public Const MediumLogLevel As LogLevel = LogLevel.Information
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Apizr.Constants.HighLogLevel
+  commentId: F:Apizr.Constants.HighLogLevel
+  id: HighLogLevel
+  parent: Apizr.Constants
+  langs:
+  - csharp
+  - vb
+  name: HighLogLevel
+  nameWithType: Constants.HighLogLevel
+  fullName: Apizr.Constants.HighLogLevel
+  type: Field
+  source:
+    id: HighLogLevel
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Constants.cs
+    startLine: 11
+  assemblies:
+  - Apizr
+  namespace: Apizr
+  syntax:
+    content: public const LogLevel HighLogLevel = LogLevel.Critical
+    return:
+      type: Microsoft.Extensions.Logging.LogLevel
+    content.vb: Public Const HighLogLevel As LogLevel = LogLevel.Critical
   modifiers.csharp:
   - public
   - const
@@ -571,3 +661,16 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
+- uid: Microsoft.Extensions.Logging.LogLevel
+  commentId: T:Microsoft.Extensions.Logging.LogLevel
+  parent: Microsoft.Extensions.Logging
+  isExternal: true
+  name: LogLevel
+  nameWithType: LogLevel
+  fullName: Microsoft.Extensions.Logging.LogLevel
+- uid: Microsoft.Extensions.Logging
+  commentId: N:Microsoft.Extensions.Logging
+  isExternal: true
+  name: Microsoft.Extensions.Logging
+  nameWithType: Microsoft.Extensions.Logging
+  fullName: Microsoft.Extensions.Logging

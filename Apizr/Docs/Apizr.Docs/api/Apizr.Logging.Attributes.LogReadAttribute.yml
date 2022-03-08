@@ -8,11 +8,11 @@ items:
   - Apizr.Logging.Attributes.LogReadAttribute.#ctor
   - Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpMessageParts)
   - Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)
-  - Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)
-  - Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)
+  - Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])
+  - Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
   - Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpTracerMode)
-  - Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)
-  - Apizr.Logging.Attributes.LogReadAttribute.#ctor(Microsoft.Extensions.Logging.LogLevel)
+  - Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])
+  - Apizr.Logging.Attributes.LogReadAttribute.#ctor(Microsoft.Extensions.Logging.LogLevel[])
   langs:
   - csharp
   - vb
@@ -38,7 +38,6 @@ items:
       <AttributeUsage(AttributeTargets.Assembly Or AttributeTargets.Class Or AttributeTargets.Method Or AttributeTargets.Interface)>
 
       Public Class LogReadAttribute
-
           Inherits LogAttributeBase
   inheritance:
   - System.Object
@@ -47,7 +46,7 @@ items:
   inheritedMembers:
   - Apizr.Logging.Attributes.LogAttributeBase.HttpTracerMode
   - Apizr.Logging.Attributes.LogAttributeBase.TrafficVerbosity
-  - Apizr.Logging.Attributes.LogAttributeBase.LogLevel
+  - Apizr.Logging.Attributes.LogAttributeBase.LogLevels
   - System.Attribute.Equals(System.Object)
   - System.Attribute.GetCustomAttribute(System.Reflection.Assembly,System.Type)
   - System.Attribute.GetCustomAttribute(System.Reflection.Assembly,System.Type,System.Boolean)
@@ -188,16 +187,16 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Apizr.Logging.Attributes.LogReadAttribute.#ctor(Microsoft.Extensions.Logging.LogLevel)
-  commentId: M:Apizr.Logging.Attributes.LogReadAttribute.#ctor(Microsoft.Extensions.Logging.LogLevel)
-  id: '#ctor(Microsoft.Extensions.Logging.LogLevel)'
+- uid: Apizr.Logging.Attributes.LogReadAttribute.#ctor(Microsoft.Extensions.Logging.LogLevel[])
+  commentId: M:Apizr.Logging.Attributes.LogReadAttribute.#ctor(Microsoft.Extensions.Logging.LogLevel[])
+  id: '#ctor(Microsoft.Extensions.Logging.LogLevel[])'
   parent: Apizr.Logging.Attributes.LogReadAttribute
   langs:
   - csharp
   - vb
-  name: LogReadAttribute(LogLevel)
-  nameWithType: LogReadAttribute.LogReadAttribute(LogLevel)
-  fullName: Apizr.Logging.Attributes.LogReadAttribute.LogReadAttribute(Microsoft.Extensions.Logging.LogLevel)
+  name: LogReadAttribute(LogLevel[])
+  nameWithType: LogReadAttribute.LogReadAttribute(LogLevel[])
+  fullName: Apizr.Logging.Attributes.LogReadAttribute.LogReadAttribute(Microsoft.Extensions.Logging.LogLevel[])
   type: Constructor
   source:
     id: .ctor
@@ -207,16 +206,19 @@ items:
   - Apizr
   namespace: Apizr.Logging.Attributes
   syntax:
-    content: public LogReadAttribute(LogLevel logLevel)
+    content: public LogReadAttribute(params LogLevel[] logLevels)
     parameters:
-    - id: logLevel
-      type: Microsoft.Extensions.Logging.LogLevel
-    content.vb: Public Sub New(logLevel As LogLevel)
+    - id: logLevels
+      type: Microsoft.Extensions.Logging.LogLevel[]
+    content.vb: Public Sub New(ParamArray logLevels As LogLevel())
   overload: Apizr.Logging.Attributes.LogReadAttribute.#ctor*
+  nameWithType.vb: LogReadAttribute.LogReadAttribute(LogLevel())
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
+  fullName.vb: Apizr.Logging.Attributes.LogReadAttribute.LogReadAttribute(Microsoft.Extensions.Logging.LogLevel())
+  name.vb: LogReadAttribute(LogLevel())
 - uid: Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)
   commentId: M:Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)
   id: '#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)'
@@ -248,16 +250,16 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)
-  commentId: M:Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)
-  id: '#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel)'
+- uid: Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
+  commentId: M:Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
+  id: '#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])'
   parent: Apizr.Logging.Attributes.LogReadAttribute
   langs:
   - csharp
   - vb
-  name: LogReadAttribute(HttpMessageParts, LogLevel)
-  nameWithType: LogReadAttribute.LogReadAttribute(HttpMessageParts, LogLevel)
-  fullName: Apizr.Logging.Attributes.LogReadAttribute.LogReadAttribute(Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel)
+  name: LogReadAttribute(HttpMessageParts, LogLevel[])
+  nameWithType: LogReadAttribute.LogReadAttribute(HttpMessageParts, LogLevel[])
+  fullName: Apizr.Logging.Attributes.LogReadAttribute.LogReadAttribute(Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel[])
   type: Constructor
   source:
     id: .ctor
@@ -267,28 +269,31 @@ items:
   - Apizr
   namespace: Apizr.Logging.Attributes
   syntax:
-    content: public LogReadAttribute(HttpMessageParts trafficVerbosity, LogLevel logLevel)
+    content: public LogReadAttribute(HttpMessageParts trafficVerbosity, params LogLevel[] logLevels)
     parameters:
     - id: trafficVerbosity
       type: Apizr.Logging.HttpMessageParts
-    - id: logLevel
-      type: Microsoft.Extensions.Logging.LogLevel
-    content.vb: Public Sub New(trafficVerbosity As HttpMessageParts, logLevel As LogLevel)
+    - id: logLevels
+      type: Microsoft.Extensions.Logging.LogLevel[]
+    content.vb: Public Sub New(trafficVerbosity As HttpMessageParts, ParamArray logLevels As LogLevel())
   overload: Apizr.Logging.Attributes.LogReadAttribute.#ctor*
+  nameWithType.vb: LogReadAttribute.LogReadAttribute(HttpMessageParts, LogLevel())
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)
-  commentId: M:Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)
-  id: '#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)'
+  fullName.vb: Apizr.Logging.Attributes.LogReadAttribute.LogReadAttribute(Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel())
+  name.vb: LogReadAttribute(HttpMessageParts, LogLevel())
+- uid: Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])
+  commentId: M:Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])
+  id: '#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])'
   parent: Apizr.Logging.Attributes.LogReadAttribute
   langs:
   - csharp
   - vb
-  name: LogReadAttribute(HttpTracerMode, LogLevel)
-  nameWithType: LogReadAttribute.LogReadAttribute(HttpTracerMode, LogLevel)
-  fullName: Apizr.Logging.Attributes.LogReadAttribute.LogReadAttribute(Apizr.Logging.HttpTracerMode, Microsoft.Extensions.Logging.LogLevel)
+  name: LogReadAttribute(HttpTracerMode, LogLevel[])
+  nameWithType: LogReadAttribute.LogReadAttribute(HttpTracerMode, LogLevel[])
+  fullName: Apizr.Logging.Attributes.LogReadAttribute.LogReadAttribute(Apizr.Logging.HttpTracerMode, Microsoft.Extensions.Logging.LogLevel[])
   type: Constructor
   source:
     id: .ctor
@@ -298,28 +303,31 @@ items:
   - Apizr
   namespace: Apizr.Logging.Attributes
   syntax:
-    content: public LogReadAttribute(HttpTracerMode httpTracerMode, LogLevel logLevel)
+    content: public LogReadAttribute(HttpTracerMode httpTracerMode, params LogLevel[] logLevels)
     parameters:
     - id: httpTracerMode
       type: Apizr.Logging.HttpTracerMode
-    - id: logLevel
-      type: Microsoft.Extensions.Logging.LogLevel
-    content.vb: Public Sub New(httpTracerMode As HttpTracerMode, logLevel As LogLevel)
+    - id: logLevels
+      type: Microsoft.Extensions.Logging.LogLevel[]
+    content.vb: Public Sub New(httpTracerMode As HttpTracerMode, ParamArray logLevels As LogLevel())
   overload: Apizr.Logging.Attributes.LogReadAttribute.#ctor*
+  nameWithType.vb: LogReadAttribute.LogReadAttribute(HttpTracerMode, LogLevel())
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)
-  commentId: M:Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)
-  id: '#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel)'
+  fullName.vb: Apizr.Logging.Attributes.LogReadAttribute.LogReadAttribute(Apizr.Logging.HttpTracerMode, Microsoft.Extensions.Logging.LogLevel())
+  name.vb: LogReadAttribute(HttpTracerMode, LogLevel())
+- uid: Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])
+  commentId: M:Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])
+  id: '#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])'
   parent: Apizr.Logging.Attributes.LogReadAttribute
   langs:
   - csharp
   - vb
-  name: LogReadAttribute(HttpMessageParts, HttpTracerMode, LogLevel)
-  nameWithType: LogReadAttribute.LogReadAttribute(HttpMessageParts, HttpTracerMode, LogLevel)
-  fullName: Apizr.Logging.Attributes.LogReadAttribute.LogReadAttribute(Apizr.Logging.HttpMessageParts, Apizr.Logging.HttpTracerMode, Microsoft.Extensions.Logging.LogLevel)
+  name: LogReadAttribute(HttpMessageParts, HttpTracerMode, LogLevel[])
+  nameWithType: LogReadAttribute.LogReadAttribute(HttpMessageParts, HttpTracerMode, LogLevel[])
+  fullName: Apizr.Logging.Attributes.LogReadAttribute.LogReadAttribute(Apizr.Logging.HttpMessageParts, Apizr.Logging.HttpTracerMode, Microsoft.Extensions.Logging.LogLevel[])
   type: Constructor
   source:
     id: .ctor
@@ -329,20 +337,23 @@ items:
   - Apizr
   namespace: Apizr.Logging.Attributes
   syntax:
-    content: public LogReadAttribute(HttpMessageParts trafficVerbosity, HttpTracerMode httpTracerMode, LogLevel logLevel)
+    content: public LogReadAttribute(HttpMessageParts trafficVerbosity, HttpTracerMode httpTracerMode, params LogLevel[] logLevels)
     parameters:
     - id: trafficVerbosity
       type: Apizr.Logging.HttpMessageParts
     - id: httpTracerMode
       type: Apizr.Logging.HttpTracerMode
-    - id: logLevel
-      type: Microsoft.Extensions.Logging.LogLevel
-    content.vb: Public Sub New(trafficVerbosity As HttpMessageParts, httpTracerMode As HttpTracerMode, logLevel As LogLevel)
+    - id: logLevels
+      type: Microsoft.Extensions.Logging.LogLevel[]
+    content.vb: Public Sub New(trafficVerbosity As HttpMessageParts, httpTracerMode As HttpTracerMode, ParamArray logLevels As LogLevel())
   overload: Apizr.Logging.Attributes.LogReadAttribute.#ctor*
+  nameWithType.vb: LogReadAttribute.LogReadAttribute(HttpMessageParts, HttpTracerMode, LogLevel())
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
+  fullName.vb: Apizr.Logging.Attributes.LogReadAttribute.LogReadAttribute(Apizr.Logging.HttpMessageParts, Apizr.Logging.HttpTracerMode, Microsoft.Extensions.Logging.LogLevel())
+  name.vb: LogReadAttribute(HttpMessageParts, HttpTracerMode, LogLevel())
 references:
 - uid: Apizr.Logging.Attributes
   commentId: N:Apizr.Logging.Attributes
@@ -381,12 +392,12 @@ references:
   name: TrafficVerbosity
   nameWithType: LogAttributeBase.TrafficVerbosity
   fullName: Apizr.Logging.Attributes.LogAttributeBase.TrafficVerbosity
-- uid: Apizr.Logging.Attributes.LogAttributeBase.LogLevel
-  commentId: P:Apizr.Logging.Attributes.LogAttributeBase.LogLevel
+- uid: Apizr.Logging.Attributes.LogAttributeBase.LogLevels
+  commentId: P:Apizr.Logging.Attributes.LogAttributeBase.LogLevels
   parent: Apizr.Logging.Attributes.LogAttributeBase
-  name: LogLevel
-  nameWithType: LogAttributeBase.LogLevel
-  fullName: Apizr.Logging.Attributes.LogAttributeBase.LogLevel
+  name: LogLevels
+  nameWithType: LogAttributeBase.LogLevels
+  fullName: Apizr.Logging.Attributes.LogAttributeBase.LogLevels
 - uid: System.Attribute.Equals(System.Object)
   commentId: M:System.Attribute.Equals(System.Object)
   parent: System.Attribute
@@ -2861,16 +2872,29 @@ references:
   name: HttpTracerMode
   nameWithType: HttpTracerMode
   fullName: Apizr.Logging.HttpTracerMode
-- uid: Microsoft.Extensions.Logging.LogLevel
-  commentId: T:Microsoft.Extensions.Logging.LogLevel
-  parent: Microsoft.Extensions.Logging
+- uid: Microsoft.Extensions.Logging.LogLevel[]
   isExternal: true
-  name: LogLevel
-  nameWithType: LogLevel
-  fullName: Microsoft.Extensions.Logging.LogLevel
-- uid: Microsoft.Extensions.Logging
-  commentId: N:Microsoft.Extensions.Logging
-  isExternal: true
-  name: Microsoft.Extensions.Logging
-  nameWithType: Microsoft.Extensions.Logging
-  fullName: Microsoft.Extensions.Logging
+  name: LogLevel[]
+  nameWithType: LogLevel[]
+  fullName: Microsoft.Extensions.Logging.LogLevel[]
+  nameWithType.vb: LogLevel()
+  fullName.vb: Microsoft.Extensions.Logging.LogLevel()
+  name.vb: LogLevel()
+  spec.csharp:
+  - uid: Microsoft.Extensions.Logging.LogLevel
+    name: LogLevel
+    nameWithType: LogLevel
+    fullName: Microsoft.Extensions.Logging.LogLevel
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: Microsoft.Extensions.Logging.LogLevel
+    name: LogLevel
+    nameWithType: LogLevel
+    fullName: Microsoft.Extensions.Logging.LogLevel
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()

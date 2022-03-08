@@ -99,7 +99,7 @@
 <li><code>Everything</code> logs all, anytime</li>
 </ul>
 </li>
-<li><code>logLevel</code> (default: <code>Trace</code>) Log level to apply while writing logs (see Microsoft.Enxtension.Logging), with:<ul>
+<li><code>logLevels</code> (default: [Low] <code>Trace</code>, [Medium] <code>Information</code> and [High] <code>Critical</code>) Log levels to apply while writing logs (see Microsoft.Enxtension.Logging), with:<ul>
 <li><code>Trace</code></li>
 <li><code>Debug</code></li>
 <li><code>Information</code></li>
@@ -111,6 +111,22 @@
 </li>
 </ul>
 <p>You can configure logging either by attribute decoration or by fluent configuration.</p>
+<p>In both cases, logLevels is a parameter array. It lets you provide from 0 to 3 different levels, as Apizr needs to get corresponding log level to each internal severity:</p>
+<ul>
+<li>Low: logs any internal and normal execution step</li>
+<li>Medium: logs all missconfigured things, like asking for cache without providing any cache provider</li>
+<li>High: logs errors and exceptions</li>
+</ul>
+<p>Obviously, providing more than 3 log levels would be pointlees.</p>
+<p>It means that:</p>
+<ul>
+<li>if you don&#39;t provide any log level at all, default levels will be applied ([Low] <code>Trace</code>, [Medium] <code>Information</code> and [High] <code>Critical</code>)</li>
+<li>if you provide only 1 log level like <code>Information</code>, it will be applied to all log entries ([Low] <code>Information</code>, [Medium] <code>Information</code> and [High] <code>Information</code>). Up to you to catch exceptions and to log it at any level of your choice.</li>
+<li>if you provide only 2 log levels like <code>Debug</code> and <code>Error</code>, the lowest will be applied to both Low and Medium ([Low] <code>Debug</code>, [Medium] <code>Debug</code> and [High] <code>Error</code>)</li>
+<li>if you provide 3 log levels like <code>Debug</code>, <code>Warning</code> and <code>Critical</code>, it will be applied like you said ([Low] <code>Debug</code>, [Medium] <code>Warning</code> and [High] <code>Critical</code>)</li>
+<li>if you provide more than 3 log levels, the lowest goes to Low, the highest to High and it will take the middle one for Medium</li>
+<li>if you provide a <code>None</code> at some point, it will disable logging for corresponding severity</li>
+</ul>
 <div class="tabGroup" id="tabgroup_FITRDUMniV">
 <ul role="tablist">
 <li role="presentation">
@@ -148,25 +164,25 @@ namespace Apizr.Sample
         Task&lt;User&gt; CreateUser(User user);
     }
 }
-</code></pre><p>In this example, we decided to apply the default logging configuration to all assembly api interfaces/entities. 
+</code></pre><p>In this example, we decided to apply the default logging configuration ([Low] <code>Trace</code>, [Medium] <code>Information</code> and [High] <code>Critical</code>) to all assembly api interfaces/entities. 
 But you can adjust logging configuration thanks to attribute parameters.</p>
 </section>
 <section id="tabpanel_FITRDUMniV_tabid-fluent" role="tabpanel" data-tab="tabid-fluent" aria-hidden="true" hidden="hidden">
 <p>Configuring the logging fluently allows you to set it dynamically (e.g. based on settings)</p>
 <p>You can set it thanks to this option:</p>
 <pre><code class="lang-csharp">// direct configuration
-options =&gt; options.WithLogging(HttpTracerMode.Everything,, HttpMessageParts.All, LogLevel.Information)
+options =&gt; options.WithLogging(HttpTracerMode.Everything, HttpMessageParts.All, LogLevel.Information)
 
 // OR static factory configuration
-options =&gt; options.WithLogging(() =&gt; Settings.HttpTracerMode, () =&gt; Settings.TrafficVerbosity, () =&gt; Settings.LogLevel)
+options =&gt; options.WithLogging(() =&gt; Settings.HttpTracerMode, () =&gt; Settings.TrafficVerbosity, () =&gt; Settings.LogLevels)
 
 // OR extended factory configuration
 options =&gt; options.WithLogging(
     serviceProvider =&gt; serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().HttpTracerMode,
     serviceProvider =&gt; serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().TrafficVerbosity
-    serviceProvider =&gt; serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().LogLevel)
+    serviceProvider =&gt; serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().LogLevels)
 </code></pre><p>All logging fluent options are available with and without using registry. 
-It means that you can share logging configuration setting it at registry level and/or set some specific one at api level.</p>
+It means that you can share logging configuration, setting it at registry level and/or set some specific one at api level.</p>
 </section>
 </div>
 </article>

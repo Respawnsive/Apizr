@@ -34,6 +34,7 @@ items:
     - id: TApizrExtendedSharedOptionsBuilder
     content.vb: >-
       Public Interface IApizrExtendedSharedOptionsBuilder(Of Out TApizrExtendedSharedOptions As IApizrSharedOptionsBase, Out TApizrExtendedSharedOptionsBuilder As IApizrGlobalSharedOptionsBuilderBase(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder))
+
           Inherits IApizrExtendedSharedOptionsBuilderBase, IApizrGlobalSharedOptionsBuilderBase(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder)
   inheritedMembers:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrExtendedSharedOptions},{TApizrExtendedSharedOptionsBuilder}}.ApizrOptions
@@ -251,6 +252,7 @@ items:
   syntax:
     content: >-
       TApizrExtendedSharedOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<IServiceProvider, IApizrOptionsBase, TAuthenticationHandler> authenticationHandlerFactory)
+
           where TAuthenticationHandler : AuthenticationHandlerBase
     parameters:
     - id: authenticationHandlerFactory

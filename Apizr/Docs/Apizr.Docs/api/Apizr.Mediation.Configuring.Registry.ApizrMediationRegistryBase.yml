@@ -43,6 +43,7 @@ items:
     content: 'public abstract class ApizrMediationRegistryBase : IApizrMediationEnumerableRegistry, IEnumerable<KeyValuePair<Type, Func<IApizrMediatorBase>>>, IEnumerable, IApizrEnumerableRegistryBase'
     content.vb: >-
       Public MustInherit Class ApizrMediationRegistryBase
+
           Implements IApizrMediationEnumerableRegistry, IEnumerable(Of KeyValuePair(Of Type, Func(Of IApizrMediatorBase))), IEnumerable, IApizrEnumerableRegistryBase
   inheritance:
   - System.Object
@@ -206,6 +207,7 @@ items:
   syntax:
     content: >-
       public IApizrCrudMediator<T, int, IEnumerable<T>, IDictionary<string, object>> GetCrudFor<T>()
+
           where T : class
     typeParameters:
     - id: T
@@ -243,6 +245,7 @@ items:
   syntax:
     content: >-
       public IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> GetCrudFor<T, TKey>()
+
           where T : class
     typeParameters:
     - id: T
@@ -281,6 +284,7 @@ items:
   syntax:
     content: >-
       public IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<string, object>> GetCrudFor<T, TKey, TReadAllResult>()
+
           where T : class
     typeParameters:
     - id: T
@@ -320,6 +324,7 @@ items:
   syntax:
     content: >-
       public IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams> GetCrudFor<T, TKey, TReadAllResult, TReadAllParams>()
+
           where T : class
     typeParameters:
     - id: T
@@ -395,6 +400,7 @@ items:
   syntax:
     content: >-
       public bool TryGetCrudFor<T>(out IApizrCrudMediator<T, int, IEnumerable<T>, IDictionary<string, object>> mediator)
+
           where T : class
     parameters:
     - id: mediator
@@ -435,6 +441,7 @@ items:
   syntax:
     content: >-
       public bool TryGetCrudFor<T, TKey>(out IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> mediator)
+
           where T : class
     parameters:
     - id: mediator
@@ -476,6 +483,7 @@ items:
   syntax:
     content: >-
       public bool TryGetCrudFor<T, TKey, TReadAllResult>(out IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<string, object>> mediator)
+
           where T : class
     parameters:
     - id: mediator
@@ -518,6 +526,7 @@ items:
   syntax:
     content: >-
       public bool TryGetCrudFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams> mediator)
+
           where T : class
     parameters:
     - id: mediator
@@ -632,6 +641,7 @@ items:
   syntax:
     content: >-
       public bool ContainsCrudFor<T>()
+
           where T : class
     typeParameters:
     - id: T
@@ -669,6 +679,7 @@ items:
   syntax:
     content: >-
       public bool ContainsCrudFor<T, TKey>()
+
           where T : class
     typeParameters:
     - id: T
@@ -707,6 +718,7 @@ items:
   syntax:
     content: >-
       public bool ContainsCrudFor<T, TKey, TReadAllResult>()
+
           where T : class
     typeParameters:
     - id: T
@@ -746,6 +758,7 @@ items:
   syntax:
     content: >-
       public bool ContainsCrudFor<T, TKey, TReadAllResult, TReadAllParams>()
+
           where T : class
     typeParameters:
     - id: T

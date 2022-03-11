@@ -33,6 +33,7 @@ items:
     content: 'public class ApizrRegistryBuilder : IApizrRegistryBuilder, IApizrRegistryBuilder<IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder>, IApizrRegistryBuilderBase<IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder>, IApizrRegistryBuilderBase'
     content.vb: >-
       Public Class ApizrRegistryBuilder
+
           Implements IApizrRegistryBuilder, IApizrRegistryBuilder(Of IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder), IApizrRegistryBuilderBase(Of IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder), IApizrRegistryBuilderBase
   inheritance:
   - System.Object
@@ -169,6 +170,7 @@ items:
   syntax:
     content: >-
       public IApizrRegistryBuilder AddCrudFor<T>(Action<IApizrProperOptionsBuilder> optionsBuilder = null)
+
           where T : class
     parameters:
     - id: optionsBuilder
@@ -209,6 +211,7 @@ items:
   syntax:
     content: >-
       public IApizrRegistryBuilder AddCrudFor<T, TKey>(Action<IApizrProperOptionsBuilder> properOptionsBuilder = null)
+
           where T : class
     parameters:
     - id: properOptionsBuilder
@@ -250,6 +253,7 @@ items:
   syntax:
     content: >-
       public IApizrRegistryBuilder AddCrudFor<T, TKey, TReadAllResult>(Action<IApizrProperOptionsBuilder> properOptionsBuilder = null)
+
           where T : class
     parameters:
     - id: properOptionsBuilder
@@ -292,6 +296,7 @@ items:
   syntax:
     content: >-
       public IApizrRegistryBuilder AddCrudFor<T, TKey, TReadAllResult, TReadAllParams>(Action<IApizrProperOptionsBuilder> properOptionsBuilder = null)
+
           where T : class
     parameters:
     - id: properOptionsBuilder
@@ -335,6 +340,7 @@ items:
   syntax:
     content: >-
       public IApizrRegistryBuilder AddCrudFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptionsBase, TApizrManager> apizrManagerFactory, Action<IApizrProperOptionsBuilder> properOptionsBuilder = null)
+
           where T : class where TReadAllParams : class where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>
     parameters:
     - id: apizrManagerFactory
@@ -419,6 +425,7 @@ items:
   syntax:
     content: >-
       public IApizrRegistryBuilder AddFor<TWebApi, TApizrManager>(Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptions<TWebApi>, TApizrManager> apizrManagerFactory, Action<IApizrProperOptionsBuilder> properOptionsBuilder = null)
+
           where TApizrManager : IApizrManager<TWebApi>
     parameters:
     - id: apizrManagerFactory

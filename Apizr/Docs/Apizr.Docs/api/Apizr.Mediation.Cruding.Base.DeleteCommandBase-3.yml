@@ -30,7 +30,9 @@ items:
     - id: TResultData
     content.vb: >-
       Public MustInherit Class DeleteCommandBase(Of T, TKey, TResultData)
+
           Inherits MediationCommandBase(Of TKey, TResultData)
+
           Implements IMediationCommand(Of TKey, TResultData), IRequest(Of TResultData), IBaseRequest
   inheritance:
   - System.Object

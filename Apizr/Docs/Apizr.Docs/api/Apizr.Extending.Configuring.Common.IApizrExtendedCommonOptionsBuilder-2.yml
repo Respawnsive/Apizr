@@ -37,6 +37,7 @@ items:
     - id: TApizrExtendedCommonOptionsBuilder
     content.vb: >-
       Public Interface IApizrExtendedCommonOptionsBuilder(Of Out TApizrExtendedCommonOptions As IApizrCommonOptionsBase, Out TApizrExtendedCommonOptionsBuilder As IApizrGlobalCommonOptionsBuilderBase(Of TApizrExtendedCommonOptions, TApizrExtendedCommonOptionsBuilder))
+
           Inherits IApizrExtendedCommonOptionsBuilderBase, IApizrGlobalCommonOptionsBuilderBase(Of TApizrExtendedCommonOptions, TApizrExtendedCommonOptionsBuilder), IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedCommonOptions, TApizrExtendedCommonOptionsBuilder)
   inheritedMembers:
   - Apizr.Configuring.Common.IApizrGlobalCommonOptionsBuilderBase{{TApizrExtendedCommonOptions},{TApizrExtendedCommonOptionsBuilder}}.WithRefitSettings(Refit.RefitSettings)
@@ -201,6 +202,7 @@ items:
   syntax:
     content: >-
       TApizrExtendedCommonOptionsBuilder WithConnectivityHandler<TConnectivityHandler>()
+
           where TConnectivityHandler : class, IConnectivityHandler
     typeParameters:
     - id: TConnectivityHandler
@@ -303,6 +305,7 @@ items:
   syntax:
     content: >-
       TApizrExtendedCommonOptionsBuilder WithCacheHandler<TCacheHandler>()
+
           where TCacheHandler : class, ICacheHandler
     typeParameters:
     - id: TCacheHandler
@@ -405,6 +408,7 @@ items:
   syntax:
     content: >-
       TApizrExtendedCommonOptionsBuilder WithMappingHandler<TMappingHandler>()
+
           where TMappingHandler : class, IMappingHandler
     typeParameters:
     - id: TMappingHandler

@@ -31,7 +31,9 @@ items:
     - id: TReadAllParams
     content.vb: >-
       Public Class DeleteCommandHandler(Of TModelEntity As Class, TApiEntity As Class, TApiEntityKey, TReadAllResult, TReadAllParams)
+
           Inherits DeleteCommandHandlerBase(Of TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, DeleteCommand(Of TModelEntity, TApiEntityKey), Unit)
+
           Implements IMediationCommandHandler(Of DeleteCommand(Of TModelEntity, TApiEntityKey), Unit), IRequestHandler(Of DeleteCommand(Of TModelEntity, TApiEntityKey), Unit)
   inheritance:
   - System.Object

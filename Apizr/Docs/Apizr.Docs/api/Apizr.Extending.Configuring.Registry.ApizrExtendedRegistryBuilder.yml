@@ -53,6 +53,7 @@ items:
     content: 'public class ApizrExtendedRegistryBuilder : IApizrExtendedRegistryBuilder, IApizrExtendedRegistryBuilder<IApizrExtendedRegistry, IApizrExtendedRegistryBuilder, IApizrExtendedProperOptionsBuilder>, IApizrRegistryBuilderBase<IApizrExtendedRegistry, IApizrExtendedRegistryBuilder, IApizrExtendedProperOptionsBuilder>, IApizrRegistryBuilderBase'
     content.vb: >-
       Public Class ApizrExtendedRegistryBuilder
+
           Implements IApizrExtendedRegistryBuilder, IApizrExtendedRegistryBuilder(Of IApizrExtendedRegistry, IApizrExtendedRegistryBuilder, IApizrExtendedProperOptionsBuilder), IApizrRegistryBuilderBase(Of IApizrExtendedRegistry, IApizrExtendedRegistryBuilder, IApizrExtendedProperOptionsBuilder), IApizrRegistryBuilderBase
   inheritance:
   - System.Object
@@ -218,6 +219,7 @@ items:
   syntax:
     content: >-
       public IApizrExtendedRegistryBuilder AddCrudFor<T>(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
+
           where T : class
     parameters:
     - id: optionsBuilder
@@ -258,6 +260,7 @@ items:
   syntax:
     content: >-
       public IApizrExtendedRegistryBuilder AddCrudFor<T, TKey>(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
+
           where T : class
     parameters:
     - id: optionsBuilder
@@ -299,6 +302,7 @@ items:
   syntax:
     content: >-
       public IApizrExtendedRegistryBuilder AddCrudFor<T, TKey, TReadAllResult>(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
+
           where T : class
     parameters:
     - id: optionsBuilder
@@ -341,6 +345,7 @@ items:
   syntax:
     content: >-
       public IApizrExtendedRegistryBuilder AddCrudFor<T, TKey, TReadAllResult, TReadAllParams>(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
+
           where T : class
     parameters:
     - id: optionsBuilder
@@ -384,6 +389,7 @@ items:
   syntax:
     content: >-
       public IApizrExtendedRegistryBuilder AddCrudFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
+
           where T : class where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>
     parameters:
     - id: optionsBuilder

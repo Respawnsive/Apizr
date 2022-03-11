@@ -33,7 +33,9 @@ items:
     - id: TCommandResult
     content.vb: >-
       Public MustInherit Class CreateCommandHandlerBase(Of TModelEntity As Class, TApiEntity As Class, TTApiEntityKey, TReadAllResult, TReadAllParams, TCommand As CreateCommandBase(Of TModelEntity, TCommandResult), TCommandResult)
+
           Inherits CrudRequestHandlerBase(Of TApiEntity, TTApiEntityKey, TReadAllResult, TReadAllParams)
+
           Implements IMediationCommandHandler(Of TCommand, TCommandResult), IRequestHandler(Of TCommand, TCommandResult)
   inheritance:
   - System.Object

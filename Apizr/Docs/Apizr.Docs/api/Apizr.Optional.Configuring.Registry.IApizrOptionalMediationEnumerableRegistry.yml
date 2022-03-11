@@ -33,6 +33,7 @@ items:
     content: 'public interface IApizrOptionalMediationEnumerableRegistry : IEnumerable<KeyValuePair<Type, Func<IApizrOptionalMediatorBase>>>, IEnumerable, IApizrEnumerableRegistryBase'
     content.vb: >-
       Public Interface IApizrOptionalMediationEnumerableRegistry
+
           Inherits IEnumerable(Of KeyValuePair(Of Type, Func(Of IApizrOptionalMediatorBase))), IApizrEnumerableRegistryBase
   inheritedMembers:
   - System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Type,System.Func{Apizr.Optional.Requesting.Sending.IApizrOptionalMediatorBase}}}.GetEnumerator
@@ -74,6 +75,7 @@ items:
   syntax:
     content: >-
       IApizrCrudOptionalMediator<T, int, IEnumerable<T>, IDictionary<string, object>> GetCrudFor<T>()
+
           where T : class
     typeParameters:
     - id: T
@@ -109,6 +111,7 @@ items:
   syntax:
     content: >-
       IApizrCrudOptionalMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> GetCrudFor<T, TKey>()
+
           where T : class
     typeParameters:
     - id: T
@@ -146,6 +149,7 @@ items:
   syntax:
     content: >-
       IApizrCrudOptionalMediator<T, TKey, TReadAllResult, IDictionary<string, object>> GetCrudFor<T, TKey, TReadAllResult>()
+
           where T : class
     typeParameters:
     - id: T
@@ -185,6 +189,7 @@ items:
   syntax:
     content: >-
       IApizrCrudOptionalMediator<T, TKey, TReadAllResult, TReadAllParams> GetCrudFor<T, TKey, TReadAllResult, TReadAllParams>()
+
           where T : class
     typeParameters:
     - id: T
@@ -259,6 +264,7 @@ items:
   syntax:
     content: >-
       bool TryGetCrudFor<T>(out IApizrCrudOptionalMediator<T, int, IEnumerable<T>, IDictionary<string, object>> mediator)
+
           where T : class
     parameters:
     - id: mediator
@@ -297,6 +303,7 @@ items:
   syntax:
     content: >-
       bool TryGetCrudFor<T, TKey>(out IApizrCrudOptionalMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> mediator)
+
           where T : class
     parameters:
     - id: mediator
@@ -337,6 +344,7 @@ items:
   syntax:
     content: >-
       bool TryGetCrudFor<T, TKey, TReadAllResult>(out IApizrCrudOptionalMediator<T, TKey, TReadAllResult, IDictionary<string, object>> mediator)
+
           where T : class
     parameters:
     - id: mediator
@@ -379,6 +387,7 @@ items:
   syntax:
     content: >-
       bool TryGetCrudFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrCrudOptionalMediator<T, TKey, TReadAllResult, TReadAllParams> mediator)
+
           where T : class
     parameters:
     - id: mediator

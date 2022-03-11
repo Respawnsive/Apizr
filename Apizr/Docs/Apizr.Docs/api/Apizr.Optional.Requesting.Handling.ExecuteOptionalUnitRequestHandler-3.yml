@@ -29,7 +29,9 @@ items:
     - id: TApiData
     content.vb: >-
       Public Class ExecuteOptionalUnitRequestHandler(Of TWebApi, TModelData, TApiData)
+
           Inherits ExecuteOptionalUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData))
+
           Implements IRequestHandler(Of ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData),  Option(Of Unit, ApizrException) )
   inheritance:
   - System.Object

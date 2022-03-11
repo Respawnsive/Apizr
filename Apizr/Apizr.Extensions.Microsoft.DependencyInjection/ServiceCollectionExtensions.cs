@@ -671,6 +671,11 @@ namespace Apizr
 
             if (apizrOptions.ConnectivityHandlerFactory != null)
                 services.AddOrReplaceSingleton(typeof(IConnectivityHandler), apizrOptions.ConnectivityHandlerFactory);
+            else if (apizrOptions.ConnectivityHandlerType == typeof(DefaultConnectivityHandler))
+                services.TryAddSingleton(typeof(IConnectivityHandler),
+                    serviceProvider =>
+                        serviceProvider.GetRequiredService<Func<Func<bool>, DefaultConnectivityHandler>>()
+                            .Invoke(() => true));
             else
                 services.TryAddSingleton(typeof(IConnectivityHandler), apizrOptions.ConnectivityHandlerType);
 

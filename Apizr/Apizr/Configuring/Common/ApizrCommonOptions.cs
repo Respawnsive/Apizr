@@ -22,7 +22,7 @@ namespace Apizr.Configuring.Common
             PolicyRegistryFactory = () => new PolicyRegistry();
             HttpClientHandlerFactory = () => new HttpClientHandler();
             RefitSettingsFactory = () => new RefitSettings();
-            ConnectivityHandlerFactory = () => new DefaultConnectivityHandler();
+            ConnectivityHandlerFactory = () => new DefaultConnectivityHandler(() => true);
             CacheHandlerFactory = () => new VoidCacheHandler();
             MappingHandlerFactory = () => new VoidMappingHandler();
             DelegatingHandlersFactories = new List<Func<ILogger, IApizrOptionsBase, DelegatingHandler>>();

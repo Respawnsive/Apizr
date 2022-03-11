@@ -6,16 +6,11 @@ namespace Apizr.Connecting
     {
         private readonly Func<bool> _connectivityChecker;
 
-        public DefaultConnectivityHandler()
-        {
-            _connectivityChecker = () => true;
-        }
-
         public DefaultConnectivityHandler(Func<bool> connectivityChecker)
         {
             _connectivityChecker = connectivityChecker;
         }
 
-        public bool IsConnected() => _connectivityChecker?.Invoke() != false;
+        public bool IsConnected() => _connectivityChecker.Invoke();
     }
 }

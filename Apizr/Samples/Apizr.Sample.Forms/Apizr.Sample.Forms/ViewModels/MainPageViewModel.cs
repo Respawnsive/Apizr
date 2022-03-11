@@ -55,7 +55,7 @@ namespace Apizr.Sample.Forms.ViewModels
 
         #region Properties
 
-        [Reactive] public ObservableList<User> Users { get; }
+        [Reactive] public ObservableList<User> Users { get; set; }
 
         [Reactive] public bool IsRefreshing { get; set; }
 

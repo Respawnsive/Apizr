@@ -1,0 +1,392 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Configuring data caching | Apizr </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Configuring data caching | Apizr ">
+    <meta name="generator" content="docfx 2.59.0.0">
+    
+    <link rel="shortcut icon" href="../resources/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../resources/logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h2 id="configuring-data-caching">Configuring data caching</h2>
+
+<p>You may want to cache data returned from your API.
+Apizr could handle it for you by providing an <code>ICachingHandler</code> interface implementation to it.
+Fortunately, there are some integration Nuget packages to do so.
+Of course, you can implement your own integration, but here we&#39;ll talk about the provided ones.</p>
+<p>Please first install the integration package of your choice:</p>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Current</th>
+<th>V-Next</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apizr.Extensions.Microsoft.Caching</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Extensions.Microsoft.Caching/"><img src="https://img.shields.io/nuget/v/Apizr.Extensions.Microsoft.Caching.svg" alt="NuGet"></a></td>
+<td><a href="https://www.nuget.org/packages/Apizr.Extensions.Microsoft.Caching/"><img src="https://img.shields.io/nuget/vpre/Apizr.Extensions.Microsoft.Caching.svg" alt="NuGet Pre Release"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.Akavache</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.Akavache/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.Akavache.svg" alt="NuGet"></a></td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.Akavache/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.Akavache.svg" alt="NuGet Pre Release"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.MonkeyCache</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.MonkeyCache/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.MonkeyCache.svg" alt="NuGet"></a></td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.MonkeyCache/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.MonkeyCache.svg" alt="NuGet Pre Release"></a></td>
+</tr>
+</tbody>
+</table>
+<p>Where:</p>
+<ul>
+<li><strong>Apizr.Extensions.Microsoft.Caching</strong> package brings an ICacheHandler implementation for <a href="https://www.nuget.org/packages/Microsoft.Extensions.Caching.Abstractions">MS Extensions Caching</a></li>
+<li><strong>Apizr.Integrations.Akavache</strong> package brings an ICacheHandler implementation for <a href="https://github.com/reactiveui/Akavache">Akavache</a></li>
+<li><strong>Apizr.Integrations.MonkeyCache</strong> package brings an ICacheHandler implementation for <a href="https://github.com/jamesmontemagno/monkey-cache">MonkeyCache</a></li>
+</ul>
+<div class="WARNING"><h5>Warning</h5><p><strong>Apizr.Extensions.Microsoft.Caching</strong></p>
+<p>This integration package offers you to work with any of MS Extension Caching compatible caching engines. It means that you still have to install the one of your choice right after Apizr.Extensions.Microsoft.Caching.</p>
+</div>
+<h3 id="defining">Defining</h3>
+<p>Apizr comes with a <code>Cache</code> attribute witch activate result data caching at any level (all Assembly apis, interface apis or specific api method).</p>
+<p>Here is classic api an example:</p>
+<pre><code class="lang-csharp">namespace Apizr.Sample
+{
+    [WebApi(&quot;https://reqres.in/api&quot;)]
+    public interface IReqResService
+    {
+        [Get(&quot;/users&quot;), Cache(CacheMode.GetAndFetch, &quot;01:00:00&quot;)]
+        Task&lt;UserList&gt; GetUsersAsync();
+
+        [Get(&quot;/users/{userId}&quot;), Cache(CacheMode.GetOrFetch, &quot;1.00:00:00&quot;)]
+        Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId, CancellationToken cancellationToken);
+    }
+}
+</code></pre><p>You’ll find also cache attributes dedicated to CRUD apis like <code>CacheRead</code> and <code>CacheReadAll</code>, so you could define cache settings at any level (all Assembly apis, interface apis or specific CRUD method).</p>
+<p>Here is CRUD api an example:</p>
+<pre><code class="lang-csharp">namespace Apizr.Sample.Models
+{
+    [CrudEntity(&quot;https://reqres.in/api/users&quot;, typeof(int), typeof(PagedResult&lt;&gt;))]
+    [CacheReadAll(CacheMode.GetAndFetch, &quot;01:00:00&quot;)]
+    [CacheRead(CacheMode.GetOrFetch, &quot;1.00:00:00&quot;)]
+    public class User
+    {
+        [JsonProperty(&quot;id&quot;)]
+        public int Id { get; set; }
+
+        [JsonProperty(&quot;first_name&quot;)]
+        public string FirstName { get; set; }
+
+        [JsonProperty(&quot;last_name&quot;)]
+        public string LastName { get; set; }
+
+        [JsonProperty(&quot;avatar&quot;)]
+        public string Avatar { get; set; }
+
+        [JsonProperty(&quot;email&quot;)]
+        public string Email { get; set; }
+    }
+}
+</code></pre><p>Both (classic and CRUD) define the same thing about cache life time and cache mode.</p>
+<p>Life time is actually a <code>TimeSpan</code> string representation which is parsed then. Its optional and if you don’t provide it, the default cache provider settings will be applyed.</p>
+<p>Cache mode could be set to:</p>
+<ul>
+<li><code>GetAndFetch</code> (default): the result is returned from request if it succeed, otherwise from cache if there’s some data already cached. In this specific case of request failing, cached data will be wrapped with the original exception into an ApizrException thrown by Apizr, so don’t forget to catch it.</li>
+<li><code>GetOrFetch</code>: the result is returned from cache if there’s some data already cached, otherwise from the request.</li>
+</ul>
+<p>In both cases, cached data is updated after each successful request call.</p>
+<p>You also can define global caching settings by decorating the assembly or interface, then manage specific scenarios at method level. 
+Apizr will apply the lowest level settings it could find.</p>
+<p>Back to the example, we are saying:</p>
+<ul>
+<li>When getting all users, let’s admit we could have many new users registered each hour, so:<ul>
+<li>Try to fetch it from web first<ul>
+<li>if fetch failed, try to load it from previous cached result</li>
+<li>if fetch succeed, update cached data but make it expire after 1 hour</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>When getting a specific user, let’s admit its details won’t change so much each day, so:<ul>
+<li>Try to load it from cache first<ul>
+<li>if no previous cached data or cache expired after 1 day, fetch it and update cached data but make it expire after 1 day</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="registering">Registering</h3>
+<p>Please register the one corresponding to the package you just installed</p>
+<h4 id="ms-extensions-caching">MS Extensions Caching</h4>
+<p>As you can guess, MS Extensions Caching is available only with extended registration flavor. 
+That said, you&#39;ll be able to register with one of the folowing options</p>
+<div class="tabGroup" id="tabgroup_iJTENnGr4l">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_iJTENnGr4l_tabid-inmemory" role="tab" aria-controls="tabpanel_iJTENnGr4l_tabid-inmemory" data-tab="tabid-inmemory" tabindex="0" aria-selected="true">In-Memory</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_iJTENnGr4l_tabid-distributed" role="tab" aria-controls="tabpanel_iJTENnGr4l_tabid-distributed" data-tab="tabid-distributed" tabindex="-1">Distributed</a>
+</li>
+</ul>
+<section id="tabpanel_iJTENnGr4l_tabid-inmemory" role="tabpanel" data-tab="tabid-inmemory">
+<pre><code class="lang-csharp">// direct short configuration
+options =&gt; options.WithInMemoryCacheHandler()
+
+// OR closed type configuration
+options =&gt; options.WithCacheHandler&lt;InMemoryCacheHandler&gt;()
+
+// OR type configuration
+options =&gt; options.WithCacheHandler(typeof(InMemoryCacheHandler))
+
+// OR direct configuration
+options =&gt; options.WithCacheHandler(new InMemoryCacheHandler(new YOUR_INMEMORY_CACHING_ENGINE()))
+
+// OR factory configuration with the service provider instance
+options =&gt; options.WithCacheHandler(serviceProvider =&gt; new InMemoryCacheHandler(serviceProvider.GetRequiredService&lt;IMemoryCache&gt;()))
+</code></pre></section>
+<section id="tabpanel_iJTENnGr4l_tabid-distributed" role="tabpanel" data-tab="tabid-distributed" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-csharp">// direct short configuration
+options =&gt; options.WithDistributedCacheHandler&lt;TCacheType&gt;()
+
+// OR closed type configuration
+options =&gt; options.WithCacheHandler&lt;DistributedCacheHandler&lt;TCacheType&gt;&gt;()
+
+// OR type configuration
+options =&gt; options.WithCacheHandler(typeof(DistributedCacheHandler&lt;TCacheType&gt;))
+
+// OR direct configuration
+options =&gt; options.WithCacheHandler(new DistributedCacheHandler&lt;TCacheType&gt;(new YOUR_DISTRIBUTED_CACHING_ENGINE()))
+
+// OR factory configuration
+options =&gt; options.WithCacheHandler(serviceProvider =&gt; new DistributedCacheHandler&lt;TCacheType&gt;(
+    serviceProvider.GetRequiredService&lt;IDistributedCache&gt;(), 
+    serviceProvider.GetRequiredService&lt;IHttpContentSerializer&gt;()))
+</code></pre><p>Where <code>TCacheType</code> could be either <code>string</code> or <code>byte[]</code>, conforming to MS Extensions Distributed Cache definition.</p>
+<div class="WARNING"><h5>Warning</h5><p><strong>Distributed cache</strong></p>
+<p>Registering MS Extension Distributed Cache means that you have to install the distributed cache of your choice and register it too.</p>
+</div>
+</section>
+</div>
+<h4 id="akavache">Akavache</h4>
+<p>You&#39;ll be able to register with one of the folowing options:</p>
+<div class="tabGroup" id="tabgroup_iJTENnGr4l-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_iJTENnGr4l-1_tabid-static" role="tab" aria-controls="tabpanel_iJTENnGr4l-1_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_iJTENnGr4l-1_tabid-extended" role="tab" aria-controls="tabpanel_iJTENnGr4l-1_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+</li>
+</ul>
+<section id="tabpanel_iJTENnGr4l-1_tabid-static" role="tabpanel" data-tab="tabid-static">
+<pre><code class="lang-csharp">// direct short configuration
+options =&gt; options.WithAkavacheCacheHandler()
+
+// OR direct configuration
+options =&gt; options.WithCacheHandler(new AkavacheCacheHandler())
+
+// OR factory configuration
+options =&gt; options.WithCacheHandler(() =&gt; new AkavacheCacheHandler())
+</code></pre></section>
+<section id="tabpanel_iJTENnGr4l-1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-csharp">// direct short configuration
+options =&gt; options.WithAkavacheCacheHandler()
+
+// OR closed type configuration
+options =&gt; options.WithCacheHandler&lt;AkavacheCacheHandler&gt;()
+
+// OR type configuration
+options =&gt; options.WithCacheHandler(typeof(AkavacheCacheHandler))
+
+// OR direct configuration
+options =&gt; options.WithCacheHandler(new AkavacheCacheHandler())
+
+// OR factory configuration
+options =&gt; options.WithCacheHandler(serviceProvider =&gt; new AkavacheCacheHandler())
+</code></pre></section>
+</div>
+<p>Where most of it get overloads so you could set:</p>
+<ul>
+<li><code>blobCacheFactory</code>: The factory to init the blob cache of your choice (default: LocalMachine)</li>
+<li><code>applicationName</code>: The application name used by Akavache (default: ApizrAkavacheCacheHandler)</li>
+</ul>
+<h4 id="monkeycache">MonkeyCache</h4>
+<p>Start by initializing <code>Barrel.ApplicationId</code> as you used to do with MonkeyCache:</p>
+<pre><code class="lang-csharp">Barrel.ApplicationId = &quot;YOUR_APPLICATION_NAME&quot;;
+</code></pre><p>Then you&#39;ll be able to register with one of the folowing options:</p>
+<div class="tabGroup" id="tabgroup_iJTENnGr4l-2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_iJTENnGr4l-2_tabid-static" role="tab" aria-controls="tabpanel_iJTENnGr4l-2_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_iJTENnGr4l-2_tabid-extended" role="tab" aria-controls="tabpanel_iJTENnGr4l-2_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+</li>
+</ul>
+<section id="tabpanel_iJTENnGr4l-2_tabid-static" role="tabpanel" data-tab="tabid-static">
+<pre><code class="lang-csharp">// direct configuration
+options =&gt; options.WithCacheHandler(new MonkeyCacheHandler(Barrel.Current))
+
+// OR factory configuration
+options =&gt; options.WithCacheHandler(() =&gt; new MonkeyCacheHandler(Barrel.Current))
+</code></pre></section>
+<section id="tabpanel_iJTENnGr4l-2_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-csharp">// closed type configuration
+options =&gt; options.WithCacheHandler&lt;MonkeyCacheHandler&gt;()
+
+// OR type configuration
+options =&gt; options.WithCacheHandler(typeof(MonkeyCacheHandler))
+
+// OR direct configuration
+options =&gt; options.WithCacheHandler(new MonkeyCacheHandler(Barrel.Current))
+
+// OR factory configuration
+options =&gt; options.WithCacheHandler(serviceProvider =&gt; new MonkeyCacheHandler(Barrel.Current))
+</code></pre><div class="WARNING"><h5>Warning</h5><p><strong>Barrel.Current</strong></p>
+<p>If you don&#39;t provide Barrel.Current to the MonkeyCacheHandler, don&#39;t forget to register it into your DI container.</p>
+</div>
+</section>
+</div>
+<h3 id="using">Using</h3>
+<h4 id="reading">Reading</h4>
+<p>Using Apizr caching feature is just about catching exceptions like for example:</p>
+<pre><code class="lang-csharp">IList&lt;User&gt;? users = null;
+try
+{
+    var userList = await _reqResManager.ExecuteAsync(api =&gt; api.GetUsersAsync());
+    users = userList?.Data;
+}
+catch (ApizrException&lt;UserList&gt; e)
+{
+    users = e.CachedResult?.Data;
+}
+finally
+{
+    if (users != null &amp;&amp; users.Any())
+        Users = new ObservableCollection&lt;User&gt;(users);
+}
+</code></pre><p>Here we catch an <code>ApizrException&lt;UserList&gt;</code> meaning that in case of exception, it will bring a typed object to you loaded from cache.</p>
+<h4 id="clearing">Clearing</h4>
+<p>You may need to clear cache.
+Remeber that cache will be cleared when it will expire, thanks to what you set within the <code>Cache</code> attribute.
+Anyway, sometime we need to clear it explicitly, like in a Refresh scenario.</p>
+<p>Here are different ways to clear cache:</p>
+<pre><code class="lang-csharp">// Clear on call to force fetch and update cache
+var userList = await _reqResManager.ExecuteAsync(api =&gt; api.GetUsersAsync(), true);
+
+// Clear a specific request cache
+var succeed = await _reqResManager.ClearCacheAsync(api =&gt; api.GetUsersAsync());
+
+// Clear all cache
+var succeed = await _reqResManager.ClearCacheAsync();
+</code></pre><p>Clearing all cache of all managers of entire app could also be done thanks to your cache engine api.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Supported by Respawnsive
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

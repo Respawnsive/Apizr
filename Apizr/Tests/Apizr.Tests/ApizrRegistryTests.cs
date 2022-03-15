@@ -129,13 +129,13 @@ namespace Apizr.Tests
         public void Calling_WithLogging_Should_Set_LoggingSettings()
         {
             var apizrRegistry = Apizr.Create(registry => registry
-                .AddFor<IReqResService>(options => options.WithLogging((HttpTracerMode) HttpTracerMode.ExceptionsOnly, (HttpMessageParts) HttpMessageParts.RequestCookies, (LogLevel[]) LogLevel.Warning)));
+                .AddFor<IReqResService>(options => options.WithLogging((HttpTracerMode) HttpTracerMode.ExceptionsOnly, (HttpMessageParts) HttpMessageParts.RequestCookies, LogLevel.Warning)));
 
             var reqResManager = apizrRegistry.GetFor<IReqResService>();
 
             reqResManager.Options.HttpTracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
             reqResManager.Options.TrafficVerbosity.Should().Be(HttpMessageParts.RequestCookies);
-            reqResManager.Options.LogLevels.Should().Be(LogLevel.Warning);
+            reqResManager.Options.LogLevels.Should().AllBeEquivalentTo(LogLevel.Warning);
         }
 
         [Fact]

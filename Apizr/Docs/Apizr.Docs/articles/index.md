@@ -1,12 +1,16 @@
 ﻿## Intro
 
-Clearly inspired by [Refit.Insane.PowerPack](https://github.com/thefex/Refit.Insane.PowerPack) but extended with a lot more features, the goal of Apizr is to get all ready to use for web api requesting, with the more resiliency we can, but without the boilerplate.
+The goal of Apizr is to get all ready to use for web api requesting, with the more resiliency we can, but without the boilerplate.
 
-Apizr v3+ relies on Refit v6+ witch makes System.Text.Json the default JSON serializer instead of Newtonsoft.Json. 
-If you'd like to continue to use Newtonsoft.Json, add the Refit.Newtonsoft.Json NuGet package and set your ContentSerializer to NewtonsoftJsonContentSerializer on your RefitSettings instance. You can do it by calling the ```WithRefitSettings(...)``` options builder method.
+Examples through this doc are mainly based on a Xamarin.Forms app working with Shiny. 
+Exploring the GitHub repository, you'll find a full Xamarin.Forms sample app, implementing Apizr with Shiny, Prism and MS DI all together.
+You'll find another mobile sample app with MAUI in preview.
+There's also a .Net Core console sample app, implementing Apizr without anything else (static) and also with MS DI (extensions).
 
-Examples here are based on a Xamarin.Forms app working with Shiny. 
-You'll find a sample Xamarin.Forms app browsing code, implementing Apizr with Shiny, Prism and MS DI all together.
-You'll find another sample app but .Net Core console this time, implementing Apizr without anything else (static) and also with MS DI (extensions).
+Feel free to take a look at the sample and test projects.
 
-So please, take a look at the samples :)
+Documentation structure is quite simple.
+There is first a Getting started for both classic and CRUD apis.
+Then, there is almost everything we can configure and use with Apizr.
+
+Happy coding

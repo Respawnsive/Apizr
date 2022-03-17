@@ -25,7 +25,7 @@ Where:
 
 ### Defining
 
-Apizr comes with a `Cache` attribute witch activate result data caching at any level (all Assembly apis, interface apis or specific api method).
+Apizr comes with a `Cache` attribute which activate result data caching at any level (all Assembly apis, interface apis or specific api method).
 
 Here is classic api an example:
 ```csharp

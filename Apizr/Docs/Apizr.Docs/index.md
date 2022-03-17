@@ -1,6 +1,43 @@
 ﻿# Apizr
 
-Refit based web api client, but resilient (retry, connectivity, cache, auth, log, priority, etc...)
+Refit based web api client management, but resilient (retry, connectivity, cache, auth, log, priority, etc...)
+
+[Read the doc](articles/index.md)
+
+## History
+
+The Apizr project was motivated by this [2015 famous blog post](https://github.com/RobGibbens/ResilientServices/blob/master/post/post.md) about resilient networking.
+
+Its main focus was to address at least everything explained into this article, meanning:
+
+- Easy access to restful services
+- Work offline with cache management
+- Handle errors with retry pattern and global catching
+- Handle request priority
+- Check connectivity
+- Fast development time
+- Easy maintenance
+- Reuse existing libraries
+
+But also, some more core features like:
+
+- Trace http traffic
+- Handle authentication
+
+And more integration/extension independent optional features like:
+
+- Choose cache, log and connectivity providers
+- Register it as an MS DI extension
+- Integrate with Shiny
+- Map model with DTO
+- Use Mediator pattern
+- Use Optional pattern
+
+The list is not exhaustive, there’s more, but what we wanted was playing with all of it with as less code as we could, not worrying about plumbing things and being sure everything is wired and handled by design or almost.
+
+Inspired by [Refit.Insane.PowerPack](https://github.com/thefex/Refit.Insane.PowerPack), we wanted to make it simple to use, mixing attribute decorations and fluent configuration.
+
+Also, we built this lib to make it work with any .Net Standard 2.0 compliant platform, so we could use it seamlessly from any kind of app, with or without DI goodness.
 
 ## Libraries
 

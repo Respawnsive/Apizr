@@ -63,9 +63,9 @@
 
 ### Apizr
 
-- [New] Now **based on Refit v6+ witch introduce properties parameter** provided to DelegateHandlers by the Http message. This is used by the new Fusillade priority management package.
-- [New] Now **based on Refit v6+ witch introduce dynamic headers dictionary parameter** allowing adding multiple dynamic headers in a single parameter thanks to [HeaderCollection] IDictionary<string, string> headers
-- [New] Now **based on Refit v6+ witch now relies on System.Text.Json** instead of Newtonsoft.Json. If you'd like to continue to use Newtonsoft.Json, add the Refit.Newtonsoft.Json NuGet package and follow the new Readme instructions
+- [New] Now **based on Refit v6+ which introduce properties parameter** provided to DelegateHandlers by the Http message. This is used by the new Fusillade priority management package.
+- [New] Now **based on Refit v6+ which introduce dynamic headers dictionary parameter** allowing adding multiple dynamic headers in a single parameter thanks to [HeaderCollection] IDictionary<string, string> headers
+- [New] Now **based on Refit v6+ which now relies on System.Text.Json** instead of Newtonsoft.Json. If you'd like to continue to use Newtonsoft.Json, add the Refit.Newtonsoft.Json NuGet package and follow the new Readme instructions
 - [New] Now **AuthenticationHandler is log level sensitive** so we could tell it to keep quiet while using it heavily
 - [New] Now **caching could be disabled with CacheIt attribute** thanks to CacheMode.None parameter to compose with assembly, interface and method level cache rules all together (e.g. you could now enable Cache globaly at assembly level but turn it off for a specific method like the login one)
 - [New] Now you can **initialize parameters directly from the managed method**. No more pitfalls

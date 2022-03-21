@@ -43,6 +43,7 @@ items:
     content: 'public abstract class ApizrRegistryBase : IApizrEnumerableRegistry, IEnumerable<KeyValuePair<Type, Func<IApizrManager>>>, IEnumerable, IApizrEnumerableRegistryBase'
     content.vb: >-
       Public MustInherit Class ApizrRegistryBase
+
           Implements IApizrEnumerableRegistry, IEnumerable(Of KeyValuePair(Of Type, Func(Of IApizrManager))), IEnumerable, IApizrEnumerableRegistryBase
   inheritance:
   - System.Object
@@ -207,6 +208,7 @@ items:
   syntax:
     content: >-
       public IApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>> GetCrudFor<T>()
+
           where T : class
     typeParameters:
     - id: T
@@ -244,6 +246,7 @@ items:
   syntax:
     content: >-
       public IApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>> GetCrudFor<T, TKey>()
+
           where T : class
     typeParameters:
     - id: T
@@ -282,6 +285,7 @@ items:
   syntax:
     content: >-
       public IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>> GetCrudFor<T, TKey, TReadAllResult>()
+
           where T : class
     typeParameters:
     - id: T
@@ -321,6 +325,7 @@ items:
   syntax:
     content: >-
       public IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> GetCrudFor<T, TKey, TReadAllResult, TReadAllParams>()
+
           where T : class
     typeParameters:
     - id: T
@@ -396,6 +401,7 @@ items:
   syntax:
     content: >-
       public bool TryGetCrudFor<T>(out IApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>> manager)
+
           where T : class
     parameters:
     - id: manager
@@ -436,6 +442,7 @@ items:
   syntax:
     content: >-
       public bool TryGetCrudFor<T, TKey>(out IApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>> manager)
+
           where T : class
     parameters:
     - id: manager
@@ -477,6 +484,7 @@ items:
   syntax:
     content: >-
       public bool TryGetCrudFor<T, TKey, TReadAllResult>(out IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>> manager)
+
           where T : class
     parameters:
     - id: manager
@@ -519,6 +527,7 @@ items:
   syntax:
     content: >-
       public bool TryGetCrudFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> manager)
+
           where T : class
     parameters:
     - id: manager
@@ -633,6 +642,7 @@ items:
   syntax:
     content: >-
       public bool ContainsCrudFor<T>()
+
           where T : class
     typeParameters:
     - id: T
@@ -670,6 +680,7 @@ items:
   syntax:
     content: >-
       public bool ContainsCrudFor<T, TKey>()
+
           where T : class
     typeParameters:
     - id: T
@@ -708,6 +719,7 @@ items:
   syntax:
     content: >-
       public bool ContainsCrudFor<T, TKey, TReadAllResult>()
+
           where T : class
     typeParameters:
     - id: T
@@ -747,6 +759,7 @@ items:
   syntax:
     content: >-
       public bool ContainsCrudFor<T, TKey, TReadAllResult, TReadAllParams>()
+
           where T : class
     typeParameters:
     - id: T

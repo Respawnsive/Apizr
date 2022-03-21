@@ -30,7 +30,9 @@ items:
     - id: TReadAllParams
     content.vb: >-
       Public Class UpdateCommandHandler(Of TModelEntity As Class, TApiEntity As Class, TReadAllResult, TReadAllParams)
+
           Inherits UpdateCommandHandlerBase(Of TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, UpdateCommand(Of TModelEntity))
+
           Implements IMediationCommandHandler(Of UpdateCommand(Of TModelEntity), Unit), IRequestHandler(Of UpdateCommand(Of TModelEntity), Unit)
   inheritance:
   - System.Object

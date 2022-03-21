@@ -27,7 +27,9 @@ items:
     - id: T
     content.vb: >-
       Public MustInherit Class DeleteCommandBase(Of T)
+
           Inherits DeleteCommandBase(Of T, Unit)
+
           Implements IMediationCommand(Of Integer, Unit), IRequest(Of Unit), IBaseRequest
   inheritance:
   - System.Object

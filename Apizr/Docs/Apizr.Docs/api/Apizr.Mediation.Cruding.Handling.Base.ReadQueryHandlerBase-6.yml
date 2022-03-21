@@ -32,7 +32,9 @@ items:
     - id: TQueryResult
     content.vb: >-
       Public MustInherit Class ReadQueryHandlerBase(Of TModelEntity, TApiEntity As Class, TReadAllResult, TReadAllParams, TQuery As ReadQueryBase(Of TQueryResult), TQueryResult)
+
           Inherits CrudRequestHandlerBase(Of TApiEntity, Integer, TReadAllResult, TReadAllParams)
+
           Implements IMediationQueryHandler(Of TQuery, TQueryResult), IRequestHandler(Of TQuery, TQueryResult)
   inheritance:
   - System.Object

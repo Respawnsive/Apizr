@@ -113,6 +113,7 @@ items:
   syntax:
     content: >-
       public static IApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>> CreateCrudFor<T>(Action<IApizrOptionsBuilder> optionsBuilder = null)
+
           where T : class
     parameters:
     - id: optionsBuilder
@@ -158,6 +159,7 @@ items:
   syntax:
     content: >-
       public static IApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>> CreateCrudFor<T, TKey>(Action<IApizrOptionsBuilder> optionsBuilder = null)
+
           where T : class
     parameters:
     - id: optionsBuilder
@@ -205,6 +207,7 @@ items:
   syntax:
     content: >-
       public static IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>> CreateCrudFor<T, TKey, TReadAllResult>(Action<IApizrOptionsBuilder> optionsBuilder = null)
+
           where T : class
     parameters:
     - id: optionsBuilder
@@ -257,6 +260,7 @@ items:
   syntax:
     content: >-
       public static IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> CreateCrudFor<T, TKey, TReadAllResult, TReadAllParams>(Action<IApizrOptionsBuilder> optionsBuilder = null)
+
           where T : class where TReadAllParams : class
     parameters:
     - id: optionsBuilder
@@ -311,6 +315,7 @@ items:
   syntax:
     content: >-
       public static TApizrManager CreateCrudFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptionsBase, TApizrManager> apizrManagerFactory, Action<IApizrOptionsBuilder> optionsBuilder = null)
+
           where T : class where TReadAllParams : class where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>
     parameters:
     - id: apizrManagerFactory
@@ -413,6 +418,7 @@ items:
   syntax:
     content: >-
       public static TApizrManager CreateFor<TWebApi, TApizrManager>(Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptions<TWebApi>, TApizrManager> apizrManagerFactory, Action<IApizrOptionsBuilder> optionsBuilder = null)
+
           where TApizrManager : IApizrManager<TWebApi>
     parameters:
     - id: apizrManagerFactory

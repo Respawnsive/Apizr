@@ -45,6 +45,25 @@ private void OnGetUsersException(Exception ex)
 
 ### Using `Optional.Async`
 
+Here is how we could handle exceptions using Optional.Async:
+
+```csharp
+var optionalUserList = await _reqResOptionalMediator.SendFor(api => api.GetUsersAsync());
+
+optionalPagedResult.Match(userList =>
+{
+    if (userList.Data != null && userList.Data.Any())
+        Users = new ObservableCollection<User>(userList.Data);
+}, e =>
+{
+    var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
+    UserDialogs.Instance.Toast(new ToastConfig(message) { BackgroundColor = Color.Red, MessageTextColor = Color.White });
+
+    if (e.CachedResult?.Data != null && e.CachedResult.Data.Any())
+        Users = new ObservableCollection<User>(e.CachedResult.Data);
+});
+```
+
 Optional is pretty cool when trying to handle nullables and exceptions, but what if we still want to write it shorter to get our request done and managed with as less code as possible.
 Even if we use the typed optional mediator or typed crud optional mediator to get things shorter, we still have to deal with the result matching boilerplate.
 Fortunately, Apizr provides some dedicated extensions to help getting things as short as we can with exceptions handled.

@@ -1,4 +1,4 @@
-4.0 (v-next)
+4.0
 ---
 
 ### Apizr
@@ -58,7 +58,7 @@
 >
 >This integration project has been dropped out as Shiny no longer provide built-in caching and logging feature anymore. Apizr now either relies on MS Caching extensions, Akavache or MonkeyCache for caching feature and MS Logging extensions for logging feature. You'll have to provide a connectivity handler if you want Apizr to check it.
 
-3.0 (current)
+3.0
 ---
 
 ### Apizr

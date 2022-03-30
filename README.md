@@ -2,13 +2,11 @@
 
 Refit based web api client, but resilient (retry, connectivity, cache, auth, log, priority, etc...)
 
-You'll find the V4+ (work in progress) [documentation here](https://respawnsive.github.io/Apizr/).
-
-There's also a V3- (outdated soon) [blog post series here](https://www.respawnsive.com/category/blog-en/apizr/).
+**You'll find the [documentation here](https://respawnsive.github.io/Apizr/)**
 
 ## Libraries
 
-[Change Log - Mar 12, 2021 (with v4 changes)](changelog.md)
+[Change Log - Mar 30, 2022](changelog.md)
 
 |Project|Current|V-Next|
 |-------|-----|-----|

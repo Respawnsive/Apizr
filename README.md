@@ -6,7 +6,7 @@ Refit based web api client, but resilient (retry, connectivity, cache, auth, log
 
 ## Libraries
 
-[Change Log - Mar 30, 2022](changelog.md)
+[Change Log - Mar 30, 2022](CHANGELOG.md)
 
 |Project|Current|V-Next|
 |-------|-----|-----|

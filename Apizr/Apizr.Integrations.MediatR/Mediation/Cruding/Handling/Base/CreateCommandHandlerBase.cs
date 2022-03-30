@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Apizr.Mapping;
 using Apizr.Mediation.Commanding;
 using Apizr.Mediation.Cruding.Base;
 using Apizr.Requesting;
@@ -16,8 +15,7 @@ namespace Apizr.Mediation.Cruding.Handling.Base
         where TCommand : CreateCommandBase<TModelEntity, TCommandResult>
     {
         protected CreateCommandHandlerBase(
-            IApizrManager<ICrudApi<TApiEntity, TTApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager,
-            IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
+            IApizrManager<ICrudApi<TApiEntity, TTApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {
         }
 

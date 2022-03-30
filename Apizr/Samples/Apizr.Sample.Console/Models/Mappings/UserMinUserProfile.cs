@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Apizr.Sample.Api.Models;
+using Apizr.Sample.Models;
 using AutoMapper;
 
 namespace Apizr.Sample.Console.Models.Mappings

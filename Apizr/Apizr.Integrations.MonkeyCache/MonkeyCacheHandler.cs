@@ -5,7 +5,7 @@ using Apizr.Caching;
 using MonkeyCache;
 
 [assembly: Apizr.Preserve]
-namespace Apizr.Integrations.MonkeyCache
+namespace Apizr
 {
     public class MonkeyCacheHandler : ICacheHandler
     {
@@ -16,19 +16,20 @@ namespace Apizr.Integrations.MonkeyCache
             _barrel = barrel;
         }
 
-        public Task Set(string key, object value, TimeSpan? lifeSpan = null, CancellationToken cancellationToken = default)
+        public Task SetAsync(string key, object value, TimeSpan? lifeSpan = null, CancellationToken cancellationToken = default)
         {
-            _barrel.Add(key, value, lifeSpan ?? TimeSpan.MaxValue);
+            var maxLifeSpan = DateTime.MaxValue - DateTime.Now;
+            _barrel.Add(key, value, lifeSpan ?? maxLifeSpan);
 
             return Task.CompletedTask;
         }
 
-        public Task<T> Get<T>(string key, CancellationToken cancellationToken = default)
+        public Task<T> GetAsync<T>(string key, CancellationToken cancellationToken = default)
         {
             return Task.FromResult(_barrel.Get<T>(key));
         }
 
-        public Task<bool> Remove(string key, CancellationToken cancellationToken = default)
+        public Task<bool> RemoveAsync(string key, CancellationToken cancellationToken = default)
         {
             try
             {
@@ -42,11 +43,18 @@ namespace Apizr.Integrations.MonkeyCache
             }
         }
 
-        public Task Clear(CancellationToken cancellationToken = default)
+        public Task ClearAsync(CancellationToken cancellationToken = default)
         {
-            _barrel.EmptyAll();
+            try
+            {
+                _barrel.EmptyAll();
 
-            return Task.CompletedTask;
+                return Task.FromResult(true);
+            }
+            catch (Exception)
+            {
+                return Task.FromResult(false);
+            }
         }
     }
 }

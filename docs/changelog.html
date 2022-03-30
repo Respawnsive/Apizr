@@ -1,0 +1,372 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>4.0 | Apizr </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="4.0 | Apizr ">
+    <meta name="generator" content="docfx 2.59.0.0">
+    
+    <link rel="shortcut icon" href="resources/favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="resources/logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h2 id="40">4.0</h2>
+
+<h3 id="apizr">Apizr</h3>
+<ul>
+<li>[New] [Logging] Now fully relies on <strong>MS Logging extensions</strong></li>
+<li>[New] [Logging] Static fluent configuration now offers a <strong>WithLoggerFactory option</strong> to provide a custom logger factory</li>
+<li>[Breaking] [Logging] TraceAttribute has been <strong>renamed back to LogAttribute</strong></li>
+<li>[Breaking] [Logging] Now we can set a <strong>LogLevel value for each Low, Medium and High severity</strong> by attribute or fluent configuration</li>
+<li>[New] [Logging] Now we can set logging settings within <strong>LogAttribute at method level</strong></li>
+<li>[New] [Logging] Now we can set <strong>http tracing mode within LogAttribute</strong> to ajust log writting conditions (ExceptionsOnly, ErrorsAndExceptionsOnly or Everything)</li>
+<li>[New] [Logging] <strong>No more HttpTracer NuGet package dependency</strong> as source code has been integrated and largely adjusted to Apizr needs</li>
+<li>[New] [Configuring] Both static and extended fluent configuration now offers a <strong>Registry to set common options once for all</strong> registered apis, while keeping proper options applied to selected apis</li>
+<li>[New] [Configuring] Static fluent configuration could return the <strong>registry that expose a Populate method</strong> to register each generated Apizr manager in a container</li>
+<li>[New] [Configuring] Generated <strong>registry exposes GetFor, TryGetFor, GetCrudFor and TryGetCrudFor methods</strong> so that it could be used everywhere to get managers, instead of direct access</li>
+<li>[New] [Policing] Now we can <strong>provide a custom PollyContext</strong> if defined into the called api interface method, it will carry all logging settings for DelegatingHandler use.</li>
+<li>[New] [Mapping] Now we can enjoy <strong>data mapping with both static and extended configurations</strong></li>
+<li>[Improvement] [Mapping] Now we can let Apizr <strong>auto map data</strong> right before sending request and/or after recieving response <strong>by providing types on ExecuteAsync call</strong></li>
+<li>[New] [Caching] Now we can ask for <strong>clearing request cache before executing</strong></li>
+<li>[New] [Exceptions] Brand new <strong>onException Action parameter to handle it globally</strong> (e.g. user dialog/toast) and let potential cached data return to caller as expected (e.g. refreshing UI)</li>
+</ul>
+<h3 id="apizrextensionsmicrosoftdependencyinjection">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<ul>
+<li>[New] We can now <strong>auto register crud managers for all scanned classes</strong> decorated by crud attributes</li>
+</ul>
+<h3 id="apizrextensionsmicrosoftcaching">Apizr.Extensions.Microsoft.Caching</h3>
+<ul>
+<li>[New] Brand new integration project to set <strong>MS Caching extensions</strong> as caching handler</li>
+</ul>
+<h3 id="apizrintegrationsakavache">Apizr.Integrations.Akavache</h3>
+<ul>
+<li>[Improvement] Now we can <strong>ajust Akavache settings</strong> while configuring</li>
+<li>[New] Now we can register Akavache directly with the brand new <strong>WithAkavacheCacheHandler option</strong></li>
+</ul>
+<h3 id="apizrintegrationsmediatr">Apizr.Integrations.MediatR</h3>
+<ul>
+<li>[Breaking] Now <strong>Apizr.Integrations.MediatR targets .Net Standard 2.1</strong> as MediatR v10+ does</li>
+<li>[New] Now we can let Apizr <strong>auto map data</strong> right before sending request and/or after recieving response <strong>by providing types on Apizr mediators Send call</strong></li>
+<li>[New] Brand <strong>new IApizrMediator &amp; IApizrCrudMediator interfaces</strong> to get things shorter than IMediator</li>
+<li>[New] Now we can ask for <strong>clearing request cache before executing</strong></li>
+<li>[New] Brand new <strong>onException Action parameter to handle it globally</strong> (e.g. user dialog/toast) and let potential cached data return to caller as expected (e.g. refreshing UI)</li>
+</ul>
+<h3 id="apizrintegrationsoptional">Apizr.Integrations.Optional</h3>
+<ul>
+<li>[Breaking] Now <strong>Apizr.Integrations.Optional targets .Net Standard 2.1</strong> as Apizr.Integrations.MediatR v4+ does</li>
+<li>[New] Now we can let Apizr <strong>auto map data</strong> right before sending request and/or after recieving response <strong>by providing types on Apizr optional mediators Send call</strong></li>
+<li>[New] Brand <strong>new IApizrOptionalMediator &amp; IApizrCrudOptionalMediator interfaces</strong> to get things shorter than IMediator </li>
+<li>[New] Now we can ask for <strong>clearing request cache before executing</strong></li>
+</ul>
+<h3 id="apizrintegrationsautomapper">Apizr.Integrations.AutoMapper</h3>
+<ul>
+<li>[Breaking] Now <strong>Apizr.Integrations.AutoMapper targets .Net Standard 2.1</strong> as AutoMapper v11+ does</li>
+<li>[New] Now we can register AutoMapper directly with the brand new <strong>WithAutoMapperMappingHandler option</strong></li>
+<li>[Improvement] <strong>No more extended package dependency</strong> to enjoy data mapping with both static and extended configurations</li>
+</ul>
+<div class="WARNING"><h5>Warning</h5><p><strong>Apizr.Integrations.Shiny has been discontinued</strong></p>
+<p>This integration project has been dropped out as Shiny no longer provide built-in caching and logging feature anymore. Apizr now either relies on MS Caching extensions, Akavache or MonkeyCache for caching feature and MS Logging extensions for logging feature. You&#39;ll have to provide a connectivity handler if you want Apizr to check it.</p>
+</div>
+<h2 id="30">3.0</h2>
+<h3 id="apizr-1">Apizr</h3>
+<ul>
+<li>[New] Now <strong>based on Refit v6+ which introduce properties parameter</strong> provided to DelegateHandlers by the Http message. This is used by the new Fusillade priority management package.</li>
+<li>[New] Now <strong>based on Refit v6+ which introduce dynamic headers dictionary parameter</strong> allowing adding multiple dynamic headers in a single parameter thanks to [HeaderCollection] IDictionary&lt;string, string&gt; headers</li>
+<li>[New] Now <strong>based on Refit v6+ which now relies on System.Text.Json</strong> instead of Newtonsoft.Json. If you&#39;d like to continue to use Newtonsoft.Json, add the Refit.Newtonsoft.Json NuGet package and follow the new Readme instructions</li>
+<li>[New] Now <strong>AuthenticationHandler is log level sensitive</strong> so we could tell it to keep quiet while using it heavily</li>
+<li>[New] Now <strong>caching could be disabled with CacheIt attribute</strong> thanks to CacheMode.None parameter to compose with assembly, interface and method level cache rules all together (e.g. you could now enable Cache globaly at assembly level but turn it off for a specific method like the login one)</li>
+<li>[New] Now you can <strong>initialize parameters directly from the managed method</strong>. No more pitfalls</li>
+<li>[Improvement] <strong>Cache key generator has been deeply reshaped</strong> to support all scenarios, including path parameters</li>
+<li>[Improvement] <strong>Nuget references have been updated</strong> to latest versions</li>
+<li>[BreakingChange] <strong>Fusillade has been moved to an integration package</strong>. If you used to play with it, just install it from its brand new dedicated integration package and follow the new Readme instructions</li>
+<li>[Fix] <strong>No more exception while using Apizr with Prism.Magician</strong> with Fusillade priority management enabled</li>
+</ul>
+<h3 id="apizrintegrationsfusillade">Apizr.Integrations.Fusillade</h3>
+<ul>
+<li>[New] Brand new integration package to use Apizr with Fusillade, only if you need it (no more core references and NuGet dependencies)</li>
+</ul>
+<h2 id="20">2.0</h2>
+<h3 id="apizr-2">Apizr</h3>
+<ul>
+<li>[New] Now <strong>initialization options are typed to be dedicated</strong> to each api interface manager. It means you can now get a specific configuration for each Apizr manager instance, like for caching, logging, and so on...</li>
+<li>[New] Now <strong>caching could be defined at method level</strong> for CRUD api to. It means you can define specific cache settings for each Read and ReadAll request for each your CRUD model class</li>
+<li>[New] Now <strong>caching could be defined at class level</strong> for CRUD api like you does for classic interface one. It means you can define specific cache settings for both Read and ReadAll requests for each your CRUD model class</li>
+<li>[New] Now <strong>caching could be defined at assembly level</strong> for global cache settings. It means you can define global cache settings for all your apis in one place, and then define specific settings at sub-levels to override this behavior when needed</li>
+<li>[New] Now <strong>policy keys could be defined at method level</strong> for CRUD api to. It means you can define specific policy keys for each request of each CRUD model class</li>
+<li>[New] Now <strong>policy keys could be defined at class level</strong> for CRUD api like you does for classic interface one. It means you can define specific policy keys for all requests of each CRUD model class</li>
+<li>[New] Now <strong>logging could be defined at class level</strong> for CRUD api like you does for classic interface one. It means you can define specific logging settings for all requests of each CRUD model class</li>
+<li>[New] Now <strong>logging could be defined at assembly level</strong> for global logging settings. It means you can define global logging settings for all your apis in one place, and then define specific settings at sub-levels to override this behavior when needed</li>
+<li>[BreakingChange] <strong>TraceAttribute renamed to LogItAttribute</strong> to suits its tracing and logging both features activation</li>
+<li>[BreakingChange] <strong>CacheAttribute renamed to CacheItAttribute</strong> to keep things consistent</li>
+<li>[BreakingChange] <strong>No more cache and policy attribute decorating CRUD api</strong> by default. You can activate it fluently with the options builder.</li>
+</ul>
+<h2 id="19">1.9</h2>
+<h3 id="apizr-3">Apizr</h3>
+<ul>
+<li>[New] Handling complex type as CacheKey</li>
+<li>[New] Now we can set Apizr log level within TraceAttribute to manage execution tracing verbosity</li>
+</ul>
+<h3 id="apizrintegrationsmediatr-1">Apizr.Integrations.MediatR</h3>
+<ul>
+<li>[Change] Mediation&#39;s ICommand interface renamed to IMediationCommand, avoiding conflict with System.Windows.Input.ICommand</li>
+</ul>
+<h2 id="181">1.8.1</h2>
+<h3 id="apizr-4">Apizr</h3>
+<ul>
+<li>[Fix] Parsing life span representation as TimeSpan from CacheAttribute</li>
+</ul>
+<h2 id="18">1.8</h2>
+<h3 id="apizrintegrationsoptional-1">Apizr.Integrations.Optional</h3>
+<ul>
+<li>[New] Introducing CatchAsync optional extension method to return result from fetch or cache, no matter of execption handled on the other side by an action callback to inform the user</li>
+</ul>
+<h2 id="17">1.7</h2>
+<h3 id="apizr-5">Apizr</h3>
+<ul>
+<li>[New] Now we can toggle Fusillade priority management activation</li>
+<li>[New] Now we can provide a base uri factory (e.g. depending on config)</li>
+</ul>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-1">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<ul>
+<li>[New] Now we can toggle Fusillade priority management activation</li>
+<li>[New] Now we can provide a base uri factory (e.g. depending on DI resovled settings)</li>
+</ul>
+<h2 id="16">1.6</h2>
+<ul>
+<li>[Fix] Preserve attribute added</li>
+</ul>
+<h3 id="apizr-6">Apizr</h3>
+<ul>
+<li>[New] Now we can provide a custom HttpClientHandler instance</li>
+</ul>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-2">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<ul>
+<li>[New] Now we can provide a custom HttpClientHandler instance</li>
+</ul>
+<h2 id="15">1.5</h2>
+<h3 id="apizr-7">Apizr</h3>
+<ul>
+<li>[Fix] Now the manager waits for task with no result to handle exceptions properly</li>
+</ul>
+<h3 id="apizrintegrationsmediatr-2">Apizr.Integrations.MediatR</h3>
+<ul>
+<li>[New] Introducing typed mediator and typed crud mediator for shorter request</li>
+<li>[Fix] Now MediatR handlers are registered correctly when asked from a manual registration context</li>
+<li>[Fix] Mapping null object now works correctly</li>
+<li>[Fix] Now MediatR handlers wait for its handling task to handle exceptions properly</li>
+</ul>
+<h3 id="apizrintegrationsoptional-2">Apizr.Integrations.Optional</h3>
+<ul>
+<li>[New] Introducing typed optional mediator and typed crud optional mediator for shorter request</li>
+<li>[New] Introducing OnResultAsync optional extension method to make all the thing shorter than ever</li>
+<li>[Fix] Now Optional handlers are registered correctly when asked from a manual registration context</li>
+<li>[Fix] Optional request handlers now handle exceptions as expected</li>
+<li>[Fix] Now Optional handlers wait for its handling task to handle exceptions properly</li>
+</ul>
+<h2 id="142">1.4.2</h2>
+<h3 id="apizrintegrationsmediatr-3">Apizr.Integrations.MediatR</h3>
+<ul>
+<li>[Fix] Now nuget package as library both reference MediatR.Extensions.Microsoft.DependencyInjection nuget package for assembly version compatibility</li>
+</ul>
+<h2 id="141">1.4.1</h2>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-3">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<ul>
+<li>[Fix] Now Apizr works with DryIoc and Unity containers, returning a single UserInitiated instance, while waiting for external issues beeing fixed</li>
+</ul>
+<h3 id="apizrintegrationsmediatr-4">Apizr.Integrations.MediatR</h3>
+<ul>
+<li>[Workaround] Doc updated to work with MediatR alongside DryIoc or Unity container, while waiting for external issues beeing fixed</li>
+<li>[Fix] No more <code>WithCrudMediation</code> method available but only <code>WithMediation</code></li>
+</ul>
+<h2 id="140">1.4.0</h2>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-4">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<ul>
+<li>[New] We can now auto register both crud and classic api interfaces</li>
+</ul>
+<h3 id="apizrintegrationsmediatr-5">Apizr.Integrations.MediatR</h3>
+<ul>
+<li>[New] We can now use mediation with both crud and classic api interfaces</li>
+<li>[New] We can now use execution priority with both crud and classic api mediation</li>
+<li>[BreakingChange] <code>WithCrudMediation</code> renamed to <code>WithMediation</code></li>
+</ul>
+<h3 id="apizrintegrationsoptional-3">Apizr.Integrations.Optional</h3>
+<ul>
+<li>[New] We can now use optional mediation with both crud and classic api interfaces</li>
+<li>[New] We can now use execution priority with both crud and classic api optional mediation</li>
+<li>[BreakingChange] <code>WithCrudOptionalMediation</code> renamed to <code>WithOptionalMediation</code></li>
+</ul>
+<h3 id="apizrintegrationsshiny">Apizr.Integrations.Shiny</h3>
+<ul>
+<li>[New] Shiny integration now offers all the same registration extensions methods</li>
+</ul>
+<h3 id="apizrintegrationsautomapper-1">Apizr.Integrations.AutoMapper</h3>
+<ul>
+<li>[New] We can now use auto mapping with both crud and classic api mediation and optional mediation </li>
+</ul>
+<h2 id="130">1.3.0</h2>
+<h3 id="apizr-8">Apizr</h3>
+<ul>
+<li>[New] We can now define mapped model entity type from the <code>CrudEntityAttribute</code> above api entities for automatic crud registration</li>
+</ul>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-5">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<ul>
+<li>[New] We can now provide an IMappingHandler implementation to the options builder for auto mapping</li>
+<li>[New] We can now decorate model entities with <code>MappedCrudEntityAttribute</code> to define mapped crud settings for automatic crud registration</li>
+<li>[New] We can now associate api and model entities with <code>MappedEntity&lt;TModelEntity, TApiEntity&gt;</code> during manual crud registration</li>
+</ul>
+<h3 id="apizrintegrationsmediatr-6">Apizr.Integrations.MediatR</h3>
+<ul>
+<li>[Fix] Cacheable ReadQuery now use the key value when defining cache key</li>
+<li>[Fix] Auto handling now works as expected with manual crud registration</li>
+</ul>
+<h3 id="apizrintegrationsoptional-4">Apizr.Integrations.Optional</h3>
+<ul>
+<li>[Fix] Cacheable ReadOptionalQuery now use the key value when defining cache key</li>
+</ul>
+<h3 id="apizrintegrationsautomapper-2">Apizr.Integrations.AutoMapper</h3>
+<ul>
+<li>[New] Brand new integration with AutoMapper, to let Apizr handle crud entity mapping during mediation handling</li>
+</ul>
+<h2 id="120">1.2.0</h2>
+<h3 id="apizr-9">Apizr</h3>
+<ul>
+<li>[BreakingChange] Apizr instantiation/registration methods names standardized to Apizr.For and Apizr.CrudFor</li>
+<li>[New] Introducing ICrudApi service to manage standard CRUD api calls built-in</li>
+</ul>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-6">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<ul>
+<li>[BreakingChange] Apizr instantiation/registration methods names standardized to services.AddApizrFor and services.AddApizrCrudFor</li>
+<li>[New] Enabling ICrudApi auto registration feature with CrudEntityAttribute and assembly scanning</li>
+</ul>
+<h3 id="apizrintegrationsshiny-1">Apizr.Integrations.Shiny</h3>
+<ul>
+<li>[BreakingChange] Apizr instantiation/registration methods names standardized to services.UseApizrFor and services.UseApizrCrudFor</li>
+<li>[New] Enabling ICrudApi auto registration feature with CrudEntityAttribute and assembly scanning</li>
+</ul>
+<h3 id="apizrintegrationsmediatr-7">Apizr.Integrations.MediatR</h3>
+<ul>
+<li>[New] Brand new integration with MediatR, to let Apizr handle crud requests execution with mediation</li>
+</ul>
+<h3 id="apizrintegrationsoptional-5">Apizr.Integrations.Optional</h3>
+<ul>
+<li>[New] Brand new integration with Optional, to let Apizr handle crud requests execution with mediation and optional result</li>
+</ul>
+<h2 id="110">1.1.0</h2>
+<h3 id="apizr-10">Apizr</h3>
+<ul>
+<li>[New] Aibility to manage generic web apis by setting base address with the options builder</li>
+</ul>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-7">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<ul>
+<li>[New] Same as Apizr</li>
+</ul>
+<h3 id="apizrintegrationsshiny-2">Apizr.Integrations.Shiny</h3>
+<ul>
+<li>[New] Same as Apizr</li>
+</ul>
+<h2 id="100">1.0.0</h2>
+<p>Initial Release for</p>
+<ul>
+<li>Apizr</li>
+<li>Apizr.Extensions.Microsoft.DependencyInjection</li>
+<li>Apizr.Integrations.Akavache</li>
+<li>Apizr.Integrations.MonkeyCache</li>
+<li>Apizr.Integrations.Shiny</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Supported by Respawnsive
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

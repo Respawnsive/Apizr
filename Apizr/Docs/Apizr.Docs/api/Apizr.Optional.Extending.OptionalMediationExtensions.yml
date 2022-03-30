@@ -1,0 +1,1176 @@
+### YamlMime:ManagedReference
+items:
+- uid: Apizr.Optional.Extending.OptionalMediationExtensions
+  commentId: T:Apizr.Optional.Extending.OptionalMediationExtensions
+  id: OptionalMediationExtensions
+  parent: Apizr.Optional.Extending
+  children:
+  - Apizr.Optional.Extending.OptionalMediationExtensions.CatchAsync``1(System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException{``0}}},System.Action{System.Exception},System.Boolean)
+  - Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync``1(System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException{``0}}},System.Action{``0})
+  - Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync``1(System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException{``0}}},System.Func{``0,Apizr.ApizrException{``0},System.Boolean})
+  - Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync``1(System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException{``0}}},System.Func{``0,Apizr.ApizrException{``0},System.Threading.Tasks.Task{System.Boolean}})
+  langs:
+  - csharp
+  - vb
+  name: OptionalMediationExtensions
+  nameWithType: OptionalMediationExtensions
+  fullName: Apizr.Optional.Extending.OptionalMediationExtensions
+  type: Class
+  source:
+    id: OptionalMediationExtensions
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Extending\OptionalMediationExtensions.cs
+    startLine: 7
+  assemblies:
+  - Apizr.Integrations.Optional
+  namespace: Apizr.Optional.Extending
+  syntax:
+    content: public static class OptionalMediationExtensions
+    content.vb: Public Module OptionalMediationExtensions
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - static
+  - class
+  modifiers.vb:
+  - Public
+  - Module
+- uid: Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync``1(System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException{``0}}},System.Action{``0})
+  commentId: M:Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync``1(System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException{``0}}},System.Action{``0})
+  id: OnResultAsync``1(System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException{``0}}},System.Action{``0})
+  isExtensionMethod: true
+  parent: Apizr.Optional.Extending.OptionalMediationExtensions
+  langs:
+  - csharp
+  - vb
+  name: OnResultAsync<TResult>(Task<Option<TResult, ApizrException<TResult>>>, Action<TResult>)
+  nameWithType: OptionalMediationExtensions.OnResultAsync<TResult>(Task<Option<TResult, ApizrException<TResult>>>, Action<TResult>)
+  fullName: Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync<TResult>(System.Threading.Tasks.Task<Optional.Option<TResult, Apizr.ApizrException<TResult>>>, System.Action<TResult>)
+  type: Method
+  source:
+    id: OnResultAsync
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Extending\OptionalMediationExtensions.cs
+    startLine: 16
+  assemblies:
+  - Apizr.Integrations.Optional
+  namespace: Apizr.Optional.Extending
+  summary: "\nThe action will be invoked just before throwing any exception that might have occurred during request execution\n"
+  example: []
+  syntax:
+    content: public static Task OnResultAsync<TResult>(this Task<Option<TResult, ApizrException<TResult>>> option, Action<TResult> onResult)
+    parameters:
+    - id: option
+      type: System.Threading.Tasks.Task{Optional.Option{{TResult},Apizr.ApizrException{{TResult}}}}
+      description: ''
+    - id: onResult
+      type: System.Action{{TResult}}
+      description: The action to invoke
+    typeParameters:
+    - id: TResult
+      description: The returned result (from fetch if succeed or cache if failed)
+    return:
+      type: System.Threading.Tasks.Task
+      description: ''
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function OnResultAsync(Of TResult)(option As Task(Of  Option(Of TResult, ApizrException(Of TResult)) ), onResult As Action(Of TResult)) As Task
+  overload: Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync*
+  nameWithType.vb: OptionalMediationExtensions.OnResultAsync(Of TResult)(Task(Of Option(Of TResult, ApizrException(Of TResult))), Action(Of TResult))
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync(Of TResult)(System.Threading.Tasks.Task(Of Optional.Option(Of TResult, Apizr.ApizrException(Of TResult))), System.Action(Of TResult))
+  name.vb: OnResultAsync(Of TResult)(Task(Of Option(Of TResult, ApizrException(Of TResult))), Action(Of TResult))
+- uid: Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync``1(System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException{``0}}},System.Func{``0,Apizr.ApizrException{``0},System.Boolean})
+  commentId: M:Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync``1(System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException{``0}}},System.Func{``0,Apizr.ApizrException{``0},System.Boolean})
+  id: OnResultAsync``1(System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException{``0}}},System.Func{``0,Apizr.ApizrException{``0},System.Boolean})
+  isExtensionMethod: true
+  parent: Apizr.Optional.Extending.OptionalMediationExtensions
+  langs:
+  - csharp
+  - vb
+  name: OnResultAsync<TResult>(Task<Option<TResult, ApizrException<TResult>>>, Func<TResult, ApizrException<TResult>, Boolean>)
+  nameWithType: OptionalMediationExtensions.OnResultAsync<TResult>(Task<Option<TResult, ApizrException<TResult>>>, Func<TResult, ApizrException<TResult>, Boolean>)
+  fullName: Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync<TResult>(System.Threading.Tasks.Task<Optional.Option<TResult, Apizr.ApizrException<TResult>>>, System.Func<TResult, Apizr.ApizrException<TResult>, System.Boolean>)
+  type: Method
+  source:
+    id: OnResultAsync
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Extending\OptionalMediationExtensions.cs
+    startLine: 38
+  assemblies:
+  - Apizr.Integrations.Optional
+  namespace: Apizr.Optional.Extending
+  summary: "\nThe function will be invoked with the returned result and potential occurred exception.\nYou might decide to throw from the function itself, or to return the success boolean.\n"
+  example: []
+  syntax:
+    content: public static Task<bool> OnResultAsync<TResult>(this Task<Option<TResult, ApizrException<TResult>>> option, Func<TResult, ApizrException<TResult>, bool> onResult)
+    parameters:
+    - id: option
+      type: System.Threading.Tasks.Task{Optional.Option{{TResult},Apizr.ApizrException{{TResult}}}}
+      description: ''
+    - id: onResult
+      type: System.Func{{TResult},Apizr.ApizrException{{TResult}},System.Boolean}
+      description: The function to invoke
+    typeParameters:
+    - id: TResult
+      description: The returned result (from fetch if succeed or cache if failed)
+    return:
+      type: System.Threading.Tasks.Task{System.Boolean}
+      description: ''
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function OnResultAsync(Of TResult)(option As Task(Of  Option(Of TResult, ApizrException(Of TResult)) ), onResult As Func(Of TResult, ApizrException(Of TResult), Boolean)) As Task(Of Boolean)
+  overload: Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync*
+  nameWithType.vb: OptionalMediationExtensions.OnResultAsync(Of TResult)(Task(Of Option(Of TResult, ApizrException(Of TResult))), Func(Of TResult, ApizrException(Of TResult), Boolean))
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync(Of TResult)(System.Threading.Tasks.Task(Of Optional.Option(Of TResult, Apizr.ApizrException(Of TResult))), System.Func(Of TResult, Apizr.ApizrException(Of TResult), System.Boolean))
+  name.vb: OnResultAsync(Of TResult)(Task(Of Option(Of TResult, ApizrException(Of TResult))), Func(Of TResult, ApizrException(Of TResult), Boolean))
+- uid: Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync``1(System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException{``0}}},System.Func{``0,Apizr.ApizrException{``0},System.Threading.Tasks.Task{System.Boolean}})
+  commentId: M:Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync``1(System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException{``0}}},System.Func{``0,Apizr.ApizrException{``0},System.Threading.Tasks.Task{System.Boolean}})
+  id: OnResultAsync``1(System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException{``0}}},System.Func{``0,Apizr.ApizrException{``0},System.Threading.Tasks.Task{System.Boolean}})
+  isExtensionMethod: true
+  parent: Apizr.Optional.Extending.OptionalMediationExtensions
+  langs:
+  - csharp
+  - vb
+  name: OnResultAsync<TResult>(Task<Option<TResult, ApizrException<TResult>>>, Func<TResult, ApizrException<TResult>, Task<Boolean>>)
+  nameWithType: OptionalMediationExtensions.OnResultAsync<TResult>(Task<Option<TResult, ApizrException<TResult>>>, Func<TResult, ApizrException<TResult>, Task<Boolean>>)
+  fullName: Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync<TResult>(System.Threading.Tasks.Task<Optional.Option<TResult, Apizr.ApizrException<TResult>>>, System.Func<TResult, Apizr.ApizrException<TResult>, System.Threading.Tasks.Task<System.Boolean>>)
+  type: Method
+  source:
+    id: OnResultAsync
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Extending\OptionalMediationExtensions.cs
+    startLine: 49
+  assemblies:
+  - Apizr.Integrations.Optional
+  namespace: Apizr.Optional.Extending
+  summary: "\nThe function will be invoked with the returned result and potential occurred exception.\nChecking exception, you might decide to throw it from the function itself, or to return the success boolean.\n"
+  example: []
+  syntax:
+    content: public static Task<bool> OnResultAsync<TResult>(this Task<Option<TResult, ApizrException<TResult>>> option, Func<TResult, ApizrException<TResult>, Task<bool>> onResult)
+    parameters:
+    - id: option
+      type: System.Threading.Tasks.Task{Optional.Option{{TResult},Apizr.ApizrException{{TResult}}}}
+      description: ''
+    - id: onResult
+      type: System.Func{{TResult},Apizr.ApizrException{{TResult}},System.Threading.Tasks.Task{System.Boolean}}
+      description: The function to invoke
+    typeParameters:
+    - id: TResult
+      description: The returned result (from fetch if succeed or cache if failed)
+    return:
+      type: System.Threading.Tasks.Task{System.Boolean}
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function OnResultAsync(Of TResult)(option As Task(Of  Option(Of TResult, ApizrException(Of TResult)) ), onResult As Func(Of TResult, ApizrException(Of TResult), Task(Of Boolean))) As Task(Of Boolean)
+  overload: Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync*
+  nameWithType.vb: OptionalMediationExtensions.OnResultAsync(Of TResult)(Task(Of Option(Of TResult, ApizrException(Of TResult))), Func(Of TResult, ApizrException(Of TResult), Task(Of Boolean)))
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync(Of TResult)(System.Threading.Tasks.Task(Of Optional.Option(Of TResult, Apizr.ApizrException(Of TResult))), System.Func(Of TResult, Apizr.ApizrException(Of TResult), System.Threading.Tasks.Task(Of System.Boolean)))
+  name.vb: OnResultAsync(Of TResult)(Task(Of Option(Of TResult, ApizrException(Of TResult))), Func(Of TResult, ApizrException(Of TResult), Task(Of Boolean)))
+- uid: Apizr.Optional.Extending.OptionalMediationExtensions.CatchAsync``1(System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException{``0}}},System.Action{System.Exception},System.Boolean)
+  commentId: M:Apizr.Optional.Extending.OptionalMediationExtensions.CatchAsync``1(System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException{``0}}},System.Action{System.Exception},System.Boolean)
+  id: CatchAsync``1(System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException{``0}}},System.Action{System.Exception},System.Boolean)
+  isExtensionMethod: true
+  parent: Apizr.Optional.Extending.OptionalMediationExtensions
+  langs:
+  - csharp
+  - vb
+  name: CatchAsync<TResult>(Task<Option<TResult, ApizrException<TResult>>>, Action<Exception>, Boolean)
+  nameWithType: OptionalMediationExtensions.CatchAsync<TResult>(Task<Option<TResult, ApizrException<TResult>>>, Action<Exception>, Boolean)
+  fullName: Apizr.Optional.Extending.OptionalMediationExtensions.CatchAsync<TResult>(System.Threading.Tasks.Task<Optional.Option<TResult, Apizr.ApizrException<TResult>>>, System.Action<System.Exception>, System.Boolean)
+  type: Method
+  source:
+    id: CatchAsync
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Extending\OptionalMediationExtensions.cs
+    startLine: 85
+  assemblies:
+  - Apizr.Integrations.Optional
+  namespace: Apizr.Optional.Extending
+  summary: "\nReturn <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TResult</code> (from fetch or cache), no matter of exception (handled by <code data-dev-comment-type=\"paramref\" class=\"paramref\">onException</code>).\nCould throw if you ask to with <code data-dev-comment-type=\"paramref\" class=\"paramref\">letThrowOnExceptionWithEmptyCache</code> in case of exception with empty cache (<code data-dev-comment-type=\"paramref\" class=\"paramref\">onException</code> won&apos;t be called),\notherwise return the empty cache (have to be managed) after calling <code data-dev-comment-type=\"paramref\" class=\"paramref\">onException</code> action.\n"
+  example: []
+  syntax:
+    content: public static Task<TResult> CatchAsync<TResult>(this Task<Option<TResult, ApizrException<TResult>>> option, Action<Exception> onException, bool letThrowOnExceptionWithEmptyCache = false)
+    parameters:
+    - id: option
+      type: System.Threading.Tasks.Task{Optional.Option{{TResult},Apizr.ApizrException{{TResult}}}}
+      description: ''
+    - id: onException
+      type: System.Action{System.Exception}
+      description: Action to call to handle exception (like informing the user) before returning result from cache
+    - id: letThrowOnExceptionWithEmptyCache
+      type: System.Boolean
+      description: True to let it throw the inner exception in case of empty cache, False to handle it with <code data-dev-comment-type="paramref" class="paramref">onException</code> action and return empty cache result
+    typeParameters:
+    - id: TResult
+      description: The returned result (from fetch if succeed or cache if failed)
+    return:
+      type: System.Threading.Tasks.Task{{TResult}}
+      description: ''
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function CatchAsync(Of TResult)(option As Task(Of  Option(Of TResult, ApizrException(Of TResult)) ), onException As Action(Of Exception), letThrowOnExceptionWithEmptyCache As Boolean = False) As Task(Of TResult)
+  overload: Apizr.Optional.Extending.OptionalMediationExtensions.CatchAsync*
+  nameWithType.vb: OptionalMediationExtensions.CatchAsync(Of TResult)(Task(Of Option(Of TResult, ApizrException(Of TResult))), Action(Of Exception), Boolean)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Apizr.Optional.Extending.OptionalMediationExtensions.CatchAsync(Of TResult)(System.Threading.Tasks.Task(Of Optional.Option(Of TResult, Apizr.ApizrException(Of TResult))), System.Action(Of System.Exception), System.Boolean)
+  name.vb: CatchAsync(Of TResult)(Task(Of Option(Of TResult, ApizrException(Of TResult))), Action(Of Exception), Boolean)
+references:
+- uid: Apizr.Optional.Extending
+  commentId: N:Apizr.Optional.Extending
+  name: Apizr.Optional.Extending
+  nameWithType: Apizr.Optional.Extending
+  fullName: Apizr.Optional.Extending
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync*
+  commentId: Overload:Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync
+  name: OnResultAsync
+  nameWithType: OptionalMediationExtensions.OnResultAsync
+  fullName: Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync
+- uid: System.Threading.Tasks.Task{Optional.Option{{TResult},Apizr.ApizrException{{TResult}}}}
+  commentId: T:System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException{``0}}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  name: Task<Option<TResult, ApizrException<TResult>>>
+  nameWithType: Task<Option<TResult, ApizrException<TResult>>>
+  fullName: System.Threading.Tasks.Task<Optional.Option<TResult, Apizr.ApizrException<TResult>>>
+  nameWithType.vb: Task(Of Option(Of TResult, ApizrException(Of TResult)))
+  fullName.vb: System.Threading.Tasks.Task(Of Optional.Option(Of TResult, Apizr.ApizrException(Of TResult)))
+  name.vb: Task(Of Option(Of TResult, ApizrException(Of TResult)))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Optional.Option`2
+    name: Option
+    nameWithType: Option
+    fullName: Optional.Option
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.ApizrException`1
+    name: ApizrException
+    nameWithType: ApizrException
+    fullName: Apizr.ApizrException
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Optional.Option`2
+    name: Option
+    nameWithType: Option
+    fullName: Optional.Option
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.ApizrException`1
+    name: ApizrException
+    nameWithType: ApizrException
+    fullName: Apizr.ApizrException
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Action{{TResult}}
+  commentId: T:System.Action{``0}
+  parent: System
+  definition: System.Action`1
+  name: Action<TResult>
+  nameWithType: Action<TResult>
+  fullName: System.Action<TResult>
+  nameWithType.vb: Action(Of TResult)
+  fullName.vb: System.Action(Of TResult)
+  name.vb: Action(Of TResult)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Threading.Tasks.Task
+  commentId: T:System.Threading.Tasks.Task
+  parent: System.Threading.Tasks
+  isExternal: true
+  name: Task
+  nameWithType: Task
+  fullName: System.Threading.Tasks.Task
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+- uid: System.Action`1
+  commentId: T:System.Action`1
+  isExternal: true
+  name: Action<T>
+  nameWithType: Action<T>
+  fullName: System.Action<T>
+  nameWithType.vb: Action(Of T)
+  fullName.vb: System.Action(Of T)
+  name.vb: Action(Of T)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func{{TResult},Apizr.ApizrException{{TResult}},System.Boolean}
+  commentId: T:System.Func{``0,Apizr.ApizrException{``0},System.Boolean}
+  parent: System
+  definition: System.Func`3
+  name: Func<TResult, ApizrException<TResult>, Boolean>
+  nameWithType: Func<TResult, ApizrException<TResult>, Boolean>
+  fullName: System.Func<TResult, Apizr.ApizrException<TResult>, System.Boolean>
+  nameWithType.vb: Func(Of TResult, ApizrException(Of TResult), Boolean)
+  fullName.vb: System.Func(Of TResult, Apizr.ApizrException(Of TResult), System.Boolean)
+  name.vb: Func(Of TResult, ApizrException(Of TResult), Boolean)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.ApizrException`1
+    name: ApizrException
+    nameWithType: ApizrException
+    fullName: Apizr.ApizrException
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.ApizrException`1
+    name: ApizrException
+    nameWithType: ApizrException
+    fullName: Apizr.ApizrException
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Threading.Tasks.Task{System.Boolean}
+  commentId: T:System.Threading.Tasks.Task{System.Boolean}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  name: Task<Boolean>
+  nameWithType: Task<Boolean>
+  fullName: System.Threading.Tasks.Task<System.Boolean>
+  nameWithType.vb: Task(Of Boolean)
+  fullName.vb: System.Threading.Tasks.Task(Of System.Boolean)
+  name.vb: Task(Of Boolean)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func`3
+  commentId: T:System.Func`3
+  isExternal: true
+  name: Func<T1, T2, TResult>
+  nameWithType: Func<T1, T2, TResult>
+  fullName: System.Func<T1, T2, TResult>
+  nameWithType.vb: Func(Of T1, T2, TResult)
+  fullName.vb: System.Func(Of T1, T2, TResult)
+  name.vb: Func(Of T1, T2, TResult)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T1
+    nameWithType: T1
+    fullName: T1
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T2
+    nameWithType: T2
+    fullName: T2
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T1
+    nameWithType: T1
+    fullName: T1
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T2
+    nameWithType: T2
+    fullName: T2
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func{{TResult},Apizr.ApizrException{{TResult}},System.Threading.Tasks.Task{System.Boolean}}
+  commentId: T:System.Func{``0,Apizr.ApizrException{``0},System.Threading.Tasks.Task{System.Boolean}}
+  parent: System
+  definition: System.Func`3
+  name: Func<TResult, ApizrException<TResult>, Task<Boolean>>
+  nameWithType: Func<TResult, ApizrException<TResult>, Task<Boolean>>
+  fullName: System.Func<TResult, Apizr.ApizrException<TResult>, System.Threading.Tasks.Task<System.Boolean>>
+  nameWithType.vb: Func(Of TResult, ApizrException(Of TResult), Task(Of Boolean))
+  fullName.vb: System.Func(Of TResult, Apizr.ApizrException(Of TResult), System.Threading.Tasks.Task(Of System.Boolean))
+  name.vb: Func(Of TResult, ApizrException(Of TResult), Task(Of Boolean))
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.ApizrException`1
+    name: ApizrException
+    nameWithType: ApizrException
+    fullName: Apizr.ApizrException
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.ApizrException`1
+    name: ApizrException
+    nameWithType: ApizrException
+    fullName: Apizr.ApizrException
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Extending.OptionalMediationExtensions.CatchAsync*
+  commentId: Overload:Apizr.Optional.Extending.OptionalMediationExtensions.CatchAsync
+  name: CatchAsync
+  nameWithType: OptionalMediationExtensions.CatchAsync
+  fullName: Apizr.Optional.Extending.OptionalMediationExtensions.CatchAsync
+- uid: System.Action{System.Exception}
+  commentId: T:System.Action{System.Exception}
+  parent: System
+  definition: System.Action`1
+  name: Action<Exception>
+  nameWithType: Action<Exception>
+  fullName: System.Action<System.Exception>
+  nameWithType.vb: Action(Of Exception)
+  fullName.vb: System.Action(Of System.Exception)
+  name.vb: Action(Of Exception)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Exception
+    name: Exception
+    nameWithType: Exception
+    fullName: System.Exception
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Exception
+    name: Exception
+    nameWithType: Exception
+    fullName: System.Exception
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Threading.Tasks.Task{{TResult}}
+  commentId: T:System.Threading.Tasks.Task{``0}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )

@@ -2,8 +2,8 @@
 
 namespace Apizr.Mediation.Querying
 {
-    public interface IMediationQuery<out TResponse> : 
-        IRequest<TResponse>
+    public interface IMediationQuery<out TResultData> : 
+        IRequest<TResultData>
     {
     }
 }

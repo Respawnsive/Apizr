@@ -2,7 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Extending;
-using Apizr.Mapping;
 using Apizr.Mediation.Cruding.Handling.Base;
 using Apizr.Requesting;
 using MediatR;
@@ -16,7 +15,7 @@ namespace Apizr.Optional.Cruding.Handling
         where TModelEntity : class
         where TApiEntity : class
     {
-        public UpdateOptionalCommandHandler(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
+        public UpdateOptionalCommandHandler(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {
         }
 
@@ -30,9 +29,9 @@ namespace Apizr.Optional.Cruding.Handling
                     .MapAsync(async _ =>
                     {
                         await CrudApiManager
-                            .ExecuteAsync(
-                                (ct, api) =>
-                                    api.Update(request.Key, Map<TModelEntity, TApiEntity>(request.Payload), ct),
+                            .ExecuteAsync<TModelEntity, TApiEntity>(
+                                (ctx, ct, api, apiEntity) =>
+                                    api.Update(request.Key, apiEntity, ctx, ct), request.RequestData, request.Context,
                                 cancellationToken);
 
                         return Unit.Value;
@@ -51,7 +50,7 @@ namespace Apizr.Optional.Cruding.Handling
         where TModelEntity : class
         where TApiEntity : class
     {
-        public UpdateOptionalCommandHandler(IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
+        public UpdateOptionalCommandHandler(IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {
         }
 
@@ -65,9 +64,9 @@ namespace Apizr.Optional.Cruding.Handling
                     .MapAsync(async _ =>
                     {
                         await CrudApiManager
-                            .ExecuteAsync(
-                                (ct, api) =>
-                                    api.Update(request.Key, Map<TModelEntity, TApiEntity>(request.Payload), ct),
+                            .ExecuteAsync<TModelEntity, TApiEntity>(
+                                (ctx, ct, api, apiEntity) =>
+                                    api.Update(request.Key, apiEntity, ctx, ct), request.RequestData, request.Context,
                                 cancellationToken);
 
                         return Unit.Value;

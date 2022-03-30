@@ -6,9 +6,9 @@ namespace Apizr.Caching
 {
     public class VoidCacheHandler : ICacheHandler
     {
-        public Task<T> Get<T>(string key, CancellationToken cancellationToken = default) => Task.FromResult(default(T));
-        public Task Set(string key, object obj, TimeSpan? timeSpan = null, CancellationToken cancellationToken = default) => Task.CompletedTask;
-        public Task Clear(CancellationToken cancellationToken = default) => Task.CompletedTask;
-        public Task<bool> Remove(string key, CancellationToken cancellationToken = default) => Task.FromResult(false);
+        public Task<T> GetAsync<T>(string key, CancellationToken cancellationToken = default) => Task.FromResult(default(T));
+        public Task SetAsync(string key, object obj, TimeSpan? timeSpan = null, CancellationToken cancellationToken = default) => Task.CompletedTask;
+        public Task ClearAsync(CancellationToken cancellationToken = default) => Task.FromResult(false);
+        public Task<bool> RemoveAsync(string key, CancellationToken cancellationToken = default) => Task.FromResult(false);
     }
 }

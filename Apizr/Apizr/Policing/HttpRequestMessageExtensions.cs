@@ -13,7 +13,32 @@ namespace Apizr.Policing
     /// </summary>
     public static class HttpRequestMessageExtensions
     {
-        internal static readonly string PolicyExecutionContextKey = "PolicyExecutionContext";
+        /// <summary>
+        /// Gets the <see cref="Context"/> associated with the provided <see cref="HttpRequestMessage"/>.
+        /// </summary>
+        /// <param name="request">The <see cref="HttpRequestMessage"/>.</param>
+        /// <returns>The <see cref="Context"/> if set, otherwise <c>null</c>.</returns>
+        /// <remarks>
+        /// The <see cref="PolicyHttpMessageHandler"/> will attach a context to the <see cref="HttpResponseMessage"/> prior
+        /// to executing a <see cref="Policy"/>, if one does not already exist. The <see cref="Context"/> will be provided
+        /// to the policy for use inside the <see cref="Policy"/> and in other message handlers.
+        /// </remarks>
+        public static Context GetOrBuildPolicyExecutionContext(this HttpRequestMessage request)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            var context = request.GetPolicyExecutionContext();
+            if (context == null)
+            {
+                var interfaceType = (Type)request.Properties[Constants.InterfaceTypeKey];
+                context = new Context(interfaceType.Name);
+            }
+
+            return context;
+        }
 
         /// <summary>
         /// Gets the <see cref="Context"/> associated with the provided <see cref="HttpRequestMessage"/>.
@@ -32,7 +57,7 @@ namespace Apizr.Policing
                 throw new ArgumentNullException(nameof(request));
             }
 
-            request.Properties.TryGetValue(PolicyExecutionContextKey, out var context);
+            request.Properties.TryGetValue(Constants.PollyExecutionContextKey, out var context);
             return context as Context;
         }
 
@@ -53,7 +78,7 @@ namespace Apizr.Policing
                 throw new ArgumentNullException(nameof(request));
             }
 
-            request.Properties[PolicyExecutionContextKey] = context;
+            request.Properties[Constants.PollyExecutionContextKey] = context;
         }
     }
 }

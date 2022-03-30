@@ -5,22 +5,27 @@ using System.Net.Http;
 using System.Reactive.Threading.Tasks;
 using System.Threading;
 using System.Threading.Tasks;
-using Apizr.Logging;
+using Apizr.Configuring;
+using Apizr.Extending;
+using Apizr.Policing;
 using Fusillade;
+using Microsoft.Extensions.Logging;
 using Punchclock;
 
-namespace Apizr.Integrations.Fusillade
+namespace Apizr
 {
     public class PriorityHttpMessageHandler : LimitingHttpMessageHandler
     {
         private readonly OperationQueue _opQueue;
         private readonly Dictionary<string, InflightRequest> _inflightResponses = new Dictionary<string, InflightRequest>();
-        private readonly ILogHandler _logHandler;
+        private readonly ILogger _logger;
+        private readonly IApizrOptionsBase _apizrOptions;
         private long? _maxBytesToRead;
 
-        public PriorityHttpMessageHandler(HttpMessageHandler innerHandler, ILogHandler logHandler, long? maxBytesToRead = null, OperationQueue opQueue = null) : base(innerHandler)
+        public PriorityHttpMessageHandler(HttpMessageHandler innerHandler, ILogger logger, IApizrOptionsBase apizrOptions, long? maxBytesToRead = null, OperationQueue opQueue = null) : base(innerHandler)
         {
-            _logHandler = logHandler;
+            _logger = logger;
+            _apizrOptions = apizrOptions;
             _maxBytesToRead = maxBytesToRead;
             _opQueue = opQueue;
         }
@@ -51,14 +56,29 @@ namespace Apizr.Integrations.Fusillade
                 return tcs.Task;
             }
 
+            var context = request.GetOrBuildPolicyExecutionContext();
+            if (!context.TryGetLogger(out var logger, out var logLevels, out var verbosity, out var tracerMode))
+            {
+                logger = _logger;
+                logLevels = _apizrOptions.LogLevels;
+                verbosity = _apizrOptions.TrafficVerbosity;
+                tracerMode = _apizrOptions.HttpTracerMode;
+
+                context.WithLogger(logger, logLevels, verbosity, tracerMode);
+                request.SetPolicyExecutionContext(context);
+            }
+
             var priority = (int) Priority.UserInitiated;
-            if (request.Properties.TryGetValue("Priority", out var priorityObject))
+            if (request.Properties.TryGetValue(Constants.PriorityKey, out var priorityObject))
             {
                 var priorityValue = (int) priorityObject;
                 if (priorityValue >= 0)
                     priority = priorityValue;
             }
 
+            var priorityName = Enum.IsDefined(typeof(Priority), priority)
+                ? $"a {Enum.GetName(typeof(Priority), priority)} priority"
+                : $"a custom priority of {priority}";
             var key = RateLimitedHttpMessageHandler.UniqueKeyForRequest(request);
             var realToken = new CancellationTokenSource();
             var ret = new InflightRequest(() =>
@@ -79,6 +99,8 @@ namespace Apizr.Integrations.Fusillade
                     val.AddRef();
                     cancellationToken.Register(val.Cancel);
 
+                    logger.Log(logLevels.Low(), $"{context.OperationKey}: Same request has been sent yet. Waiting for it.");
+
                     return val.Response.ToTask(cancellationToken);
                 }
 
@@ -96,6 +118,8 @@ namespace Apizr.Integrations.Fusillade
                 {
                     try
                     {
+                        logger.Log(logLevels.Low(), $"{context.OperationKey}: Sending request with {priorityName}.");
+
                         var resp = await base.SendAsync(request, realToken.Token).ConfigureAwait(false);
 
                         if (_maxBytesToRead != null && resp.Content?.Headers.ContentLength != null)

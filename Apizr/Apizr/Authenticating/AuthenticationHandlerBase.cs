@@ -4,22 +4,22 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring;
 using Apizr.Extending;
-using Apizr.Logging;
+using Apizr.Policing;
+using Microsoft.Extensions.Logging;
 
 namespace Apizr.Authenticating
 {
     public abstract class AuthenticationHandlerBase : DelegatingHandler, IAuthenticationHandler
     {
-        private readonly ILogHandler _logHandler;
+        private readonly ILogger _logger;
         private readonly IApizrOptionsBase _apizrOptions;
-        private readonly string _handlerFriendlyName;
 
-        protected AuthenticationHandlerBase(ILogHandler logHandler, IApizrOptionsBase apizrOptions)
+        protected AuthenticationHandlerBase(ILogger logger, IApizrOptionsBase apizrOptions)
         {
-            _logHandler = logHandler;
+            _logger = logger;
             _apizrOptions = apizrOptions;
-            _handlerFriendlyName = GetType().GetFriendlyName();
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
@@ -27,59 +27,57 @@ namespace Apizr.Authenticating
             HttpRequestMessage clonedRequest = null;
             string token = null;
 
+            var context = request.GetOrBuildPolicyExecutionContext();
+            if (!context.TryGetLogger(out var logger, out var logLevels, out _, out _))
+            {
+                logger = _logger;
+                logLevels = _apizrOptions.LogLevels;
+            }
+
             // See if the request has an authorize header
             var auth = request.Headers.Authorization;
             if (auth != null)
             {
                 // Authorization required! Get the token from saved settings if available
-                if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                    _logHandler.Write($"Apizr - {_handlerFriendlyName}: Authorization required with scheme {auth.Scheme}");
+                logger?.Log(logLevels.Low(), $"{context.OperationKey}: Authorization required with scheme {auth.Scheme}");
                 token = GetToken();
                 if (!string.IsNullOrWhiteSpace(token))
                 {
                     // We have one, then clone the request in case we need to re-issue it with a refreshed token
-                    if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                        _logHandler.Write($"Apizr - {_handlerFriendlyName}: Saved token will be used");
+                    logger?.Log(logLevels.Low(), $"{context.OperationKey}: Saved token will be used");
                     clonedRequest = await this.CloneHttpRequestMessageAsync(request);
                 }
                 else
                 {
                     // Refresh the token
-                    if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                        _logHandler.Write($"Apizr - {_handlerFriendlyName}: No token saved yet. Refreshing token...");
+                    logger?.Log(logLevels.Low(), $"{context.OperationKey}: No token saved yet. Refreshing token...");
                     token = await this.RefreshTokenAsync(request).ConfigureAwait(false);
                 }
 
                 // Set the authentication header
                 request.Headers.Authorization = new AuthenticationHeaderValue(auth.Scheme, token);
-                if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                    _logHandler.Write($"Apizr - {_handlerFriendlyName}: Authorization header has been set");
+                logger?.Log(logLevels.Low(), $"{context.OperationKey}: Authorization header has been set");
             }
 
             // Send the request
-            if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                _logHandler.Write($"Apizr - {_handlerFriendlyName}: Sending request with authorization header...");
+            logger?.Log(logLevels.Low(), $"{context.OperationKey}: Sending request with authorization header...");
             var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
             // Check if we get an Unauthorized response with token from settings
             if (response.StatusCode == HttpStatusCode.Unauthorized && auth != null && clonedRequest != null)
             {
-                if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                    _logHandler.Write($"Apizr - {_handlerFriendlyName}: Unauthorized !");
+                logger?.Log(logLevels.Medium(), $"{context.OperationKey}: Unauthorized !");
 
                 // Refresh the token
-                if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                    _logHandler.Write($"Apizr - {_handlerFriendlyName}: Refreshing token...");
+                logger?.Log(logLevels.Low(), $"{context.OperationKey}: Refreshing token...");
                 token = await this.RefreshTokenAsync(request).ConfigureAwait(false);
 
                 // Set the authentication header with refreshed token 
                 clonedRequest.Headers.Authorization = new AuthenticationHeaderValue(auth.Scheme, token);
-                if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                    _logHandler.Write($"Apizr - {_handlerFriendlyName}: Authorization header has been set with refreshed token");
+                logger?.Log(logLevels.Low(), $"{context.OperationKey}: Authorization header has been set with refreshed token");
 
                 // Send the request
-                if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
-                    _logHandler.Write($"Apizr - {_handlerFriendlyName}: Sending request again but with refreshed authorization header...");
+                logger?.Log(logLevels.Low(), $"{context.OperationKey}: Sending request again but with refreshed authorization header...");
                 response = await base.SendAsync(clonedRequest, cancellationToken).ConfigureAwait(false);
             }
 
@@ -87,14 +85,12 @@ namespace Apizr.Authenticating
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
                 token = null;
-                if (_apizrOptions.ApizrVerbosity >= ApizrLogLevel.Low)
-                    _logHandler.Write($"Apizr - {_handlerFriendlyName}: Unauthorized ! Token has been cleared");
+                logger?.Log(logLevels.High(), $"{context.OperationKey}: Unauthorized ! Token has been cleared");
             }
 
             // Save the refreshed token if succeed or clear it if not
             this.SetToken(token);
-            if (_apizrOptions.ApizrVerbosity == ApizrLogLevel.High)
-                _logHandler.Write($"Apizr - {_handlerFriendlyName}: Token saved");
+            logger?.Log(logLevels.Low(), $"{context.OperationKey}: Token saved");
 
             return response;
         }

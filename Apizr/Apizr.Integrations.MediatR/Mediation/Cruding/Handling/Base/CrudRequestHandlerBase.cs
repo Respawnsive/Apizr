@@ -1,5 +1,4 @@
-﻿using Apizr.Mapping;
-using Apizr.Mediation.Requesting.Handling.Base;
+﻿using Apizr.Mediation.Requesting.Handling.Base;
 using Apizr.Requesting;
 
 namespace Apizr.Mediation.Cruding.Handling.Base
@@ -11,8 +10,7 @@ namespace Apizr.Mediation.Cruding.Handling.Base
         protected readonly IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> CrudApiManager;
 
         protected CrudRequestHandlerBase(
-            IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager,
-            IMappingHandler mappingHandler) : base(mappingHandler)
+            IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager) : base()
         {
             CrudApiManager = crudApiManager;
         }

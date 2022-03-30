@@ -1,4 +1,5 @@
 ﻿using System;
+using Apizr.Caching.Attributes;
 
 namespace Apizr.Caching
 {

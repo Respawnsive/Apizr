@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Linq.Expressions;
-using System.Threading;
-using System.Threading.Tasks;
-using Apizr.Mapping;
+using MediatR;
+using Polly;
 
 namespace Apizr.Mediation.Requesting.Base
 {
-    public abstract class ExecuteRequestBase<TRequestResponse> : RequestBase<TRequestResponse>
+    public abstract class ExecuteRequestBase<TFormattedModelResultData> : RequestBase<TFormattedModelResultData>
     {
-        protected ExecuteRequestBase(Expression executeApiMethod)
+        protected ExecuteRequestBase(Expression executeApiMethod, Action<Exception> onException = null) : base(onException)
+        {
+            ExecuteApiMethod = executeApiMethod;
+        }
+
+        protected ExecuteRequestBase(Expression executeApiMethod, Context context, Action<Exception> onException = null) : base(context, onException)
         {
             ExecuteApiMethod = executeApiMethod;
         }
@@ -16,43 +20,36 @@ namespace Apizr.Mediation.Requesting.Base
         public Expression ExecuteApiMethod { get; }
     }
 
-    public abstract class ExecuteRequestBase<TWebApi, TModelResponse, TApiResponse, TRequestResponse> : ExecuteRequestBase<TRequestResponse>
+    public abstract class ExecuteRequestBase<TFormattedModelResultData, TModelRequestData> : ExecuteRequestBase<TFormattedModelResultData>
     {
-        protected ExecuteRequestBase(Expression<Func<TWebApi, Task<TApiResponse>>> executeApiMethod) : base(executeApiMethod)
+        protected ExecuteRequestBase(Expression executeApiMethod, Action<Exception> onException = null) : base(executeApiMethod, onException)
         {
         }
 
-        protected ExecuteRequestBase(Expression<Func<CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod) : base(executeApiMethod)
+        protected ExecuteRequestBase(Expression executeApiMethod, TModelRequestData modelRequestData, Action<Exception> onException = null) : base(executeApiMethod, onException)
+        {
+            ModelRequestData = modelRequestData;
+        }
+
+        protected ExecuteRequestBase(Expression executeApiMethod, Context context, Action<Exception> onException = null) : base(executeApiMethod, context, onException)
         {
         }
 
-        protected ExecuteRequestBase(Expression<Func<TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod) : base(executeApiMethod)
+        protected ExecuteRequestBase(Expression executeApiMethod, TModelRequestData modelRequestData, Context context, Action<Exception> onException = null) : base(executeApiMethod, context, onException)
         {
+            ModelRequestData = modelRequestData;
         }
 
-        protected ExecuteRequestBase(Expression<Func<CancellationToken, TWebApi, IMappingHandler, Task<TApiResponse>>> executeApiMethod) : base(executeApiMethod)
-        {
-        }
+        public TModelRequestData ModelRequestData { get; }
     }
 
-    public abstract class ExecuteRequestBase<TWebApi, TApiResponse, TRequestResponse> : ExecuteRequestBase<TRequestResponse>
+    public abstract class ExecuteRequestBase : ExecuteRequestBase<Unit>
     {
-        protected ExecuteRequestBase(Expression<Func<TWebApi, Task<TApiResponse>>> executeApiMethod) : base(executeApiMethod)
+        protected ExecuteRequestBase(Expression executeApiMethod, Action<Exception> onException = null) : base(executeApiMethod, onException)
         {
         }
 
-        protected ExecuteRequestBase(Expression<Func<CancellationToken, TWebApi, Task<TApiResponse>>> executeApiMethod) : base(executeApiMethod)
-        {
-        }
-    }
-
-    public abstract class ExecuteRequestBase<TWebApi, TRequestResponse> : ExecuteRequestBase<TRequestResponse>
-    {
-        protected ExecuteRequestBase(Expression<Func<TWebApi, Task>> executeApiMethod) : base(executeApiMethod)
-        {
-        }
-
-        protected ExecuteRequestBase(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod) : base(executeApiMethod)
+        protected ExecuteRequestBase(Expression executeApiMethod, Context context, Action<Exception> onException = null) : base(executeApiMethod, context, onException)
         {
         }
     }

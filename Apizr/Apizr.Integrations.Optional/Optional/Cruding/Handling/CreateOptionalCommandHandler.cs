@@ -2,7 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Extending;
-using Apizr.Mapping;
 using Apizr.Mediation.Cruding.Handling.Base;
 using Apizr.Requesting;
 using Optional;
@@ -15,7 +14,7 @@ namespace Apizr.Optional.Cruding.Handling
         where TModelEntity : class
         where TApiEntity : class
     {
-        public CreateOptionalCommandHandler(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager, IMappingHandler mappingHandler) : base(crudApiManager, mappingHandler)
+        public CreateOptionalCommandHandler(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {
         }
 
@@ -28,9 +27,10 @@ namespace Apizr.Optional.Cruding.Handling
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                     .MapAsync(_ =>
                         CrudApiManager
-                            .ExecuteAsync((ct, api) => api.Create(Map<TModelEntity, TApiEntity>(request.Payload), ct),
-                                cancellationToken))
-                    .MapAsync(apiResult => Task.FromResult(Map<TApiEntity, TModelEntity>(apiResult)))
+                            .ExecuteAsync<TModelEntity, TApiEntity>(
+                                (ctx, ct, api, apiData) => api.Create(apiData, ctx, ct), request.RequestData,
+                                request.Context,
+                                cancellationToken, true))
                     .ConfigureAwait(false);
             }
             catch (ApizrException e)

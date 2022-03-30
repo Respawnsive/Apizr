@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Registering a managed instance, the static way | Apizr </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Registering a managed instance, the static way | Apizr ">
+    <meta name="generator" content="docfx 2.59.0.0">
+    
+    <link rel="shortcut icon" href="../resources/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../resources/logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h2 id="registering-a-managed-instance-the-static-way">Registering a managed instance, the static way</h2>
+
+<p>Here is an example of how to register a managed instance of the CRUD api interface:</p>
+<pre><code class="lang-csharp">// Apizr registration
+myContainer.RegistrationMethod(() =&gt;
+    Apizr.CreateCrudFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(options =&gt; options
+        .WithBaseAddress(&quot;your specific T entity crud base uri&quot;))
+);
+</code></pre><p>T must be a class.</p>
+<p>TKey must be primitive. If you don&#39;t provide it here, it will be defined as <code>int</code>.</p>
+<p>TReadAllResult must inherit from <code>IEnumerable&lt;&gt;</code> or be a class.
+If you don&#39;t use paged result, just don&#39;t provide any TReadAllResult here and it will be defined as <code>IEnumerable&lt;T&gt;</code>.</p>
+<p>TReadAllParams must be a class.
+If you don&#39;t use a custom class holding your query parameters, just don&#39;t provide any TReadAllParams here and it will be defined as <code>IDictionary&lt;string, object&gt;</code>.</p>
+<p>You have to provide the specific entity crud base uri with the options builder (if you don&#39;t plan to use entity crud attribute).</p>
+<p>Also, you could use the manager directly instead of registering it.</p>
+<h2 id="registering-multiple-managed-instances-the-static-way">Registering multiple managed instances, the static way</h2>
+<p>You may want to register multiple managed api interfaces within the same project.
+Also, you may want to share some common configuration between apis without repeating yourself, but at the same time, you may need to set some specific ones for some of it.
+This is where the ApizrRegistry comes on stage.</p>
+<p>Here is an example of how to register a managed instance of multiple api interfaces:</p>
+<pre><code class="lang-csharp">// Apizr registry
+var apizrRegistry = Apizr.Create(
+    registry =&gt; registry
+        .AddCrudFor&lt;T1&gt;(
+            options =&gt; options
+                .WithBaseAddress(&quot;your specific T1 entity crud base uri&quot;)
+        .AddCrudFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;(
+            options =&gt; options
+                .WithBaseAddress(&quot;your specific T2 entity crud base uri&quot;),
+
+    config =&gt; config
+        .WithAkavacheCacheHandler()
+);
+
+// Container registration
+apizrRegistry.Populate((type, factory) =&gt; 
+    myContainer.RegistrationMethodFactory(type, factory)
+);
+</code></pre><p>Here is what we&#39;re saying in this example:</p>
+<ul>
+<li>Add a manager for T1 entity with CRUD api interface and default types into the registry<ul>
+<li>Set a specific address dedicated to T1&#39;s manager</li>
+</ul>
+</li>
+<li>Add a manager for T2 entity with CRUD api interface and custom types into the registry<ul>
+<li>Set a specific address dedicated to T2&#39;s manager</li>
+</ul>
+</li>
+<li>Apply common configuration to all managers by:<ul>
+<li>Providing a cache handler</li>
+</ul>
+</li>
+</ul>
+<p>It&#39;s an example, meaning if you don&#39;t need common and/or specific configuration, just don&#39;t provide it.
+And yes you can mix classic and CRUD manager registration into the same registry.</p>
+<p>Also, you could register the registry itslef, instead of its populated managers and then use its managers directly.</p>
+<p>Or, you could use the managers directly from the registry instead of registering anything.</p>
+<p>Here&#39;s how to get a manager from the registry:</p>
+<pre><code class="lang-csharp">// T1 with default registered types
+var t1Manager = apizrRegistry.GetCrudFor&lt;T1&gt;();
+
+// T2 with custom registered types
+var t2Manager = apizrRegistry.GetCrudFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;();
+</code></pre><h2 id="next-steps">Next steps</h2>
+<ul>
+<li><a href="crud_using.html">Using the manager</a></li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Supported by Respawnsive
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

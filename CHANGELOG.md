@@ -54,7 +54,9 @@
 - [New] Now we can register AutoMapper directly with the brand new **WithAutoMapperMappingHandler option**
 - [Improvement] **No more extended package dependency** to enjoy data mapping with both static and extended configurations
 
->[!WARNING]**Apizr.Integrations.Shiny has been discontinued**
+>[!WARNING]
+>
+>**Apizr.Integrations.Shiny has been discontinued**
 >
 >This integration project has been dropped out as Shiny no longer provide built-in caching and logging feature anymore. Apizr now either relies on MS Caching extensions, Akavache or MonkeyCache for caching feature and MS Logging extensions for logging feature. You'll have to provide a connectivity handler if you want Apizr to check it.
 

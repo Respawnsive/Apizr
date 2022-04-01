@@ -18,7 +18,9 @@ Where:
    - **Apizr.Integrations.Akavache** package brings an ICacheHandler implementation for [Akavache](https://github.com/reactiveui/Akavache)
    - **Apizr.Integrations.MonkeyCache** package brings an ICacheHandler implementation for [MonkeyCache](https://github.com/jamesmontemagno/monkey-cache)
 
->[!WARNING]**Apizr.Extensions.Microsoft.Caching**
+>[!WARNING]
+>
+>**Apizr.Extensions.Microsoft.Caching**
 >
 >This integration package offers you to work with any of MS Extension Caching compatible caching engines. It means that you still have to install the one of your choice right after Apizr.Extensions.Microsoft.Caching.
 
@@ -147,7 +149,9 @@ options => options.WithCacheHandler(serviceProvider => new DistributedCacheHandl
 
 Where `TCacheType` could be either `string` or `byte[]`, conforming to MS Extensions Distributed Cache definition.
 
->[!WARNING]**Distributed cache**
+>[!WARNING]
+>
+>**Distributed cache**
 >
 >Registering MS Extension Distributed Cache means that you have to install the distributed cache of your choice and register it too.
 
@@ -230,7 +234,9 @@ options => options.WithCacheHandler(new MonkeyCacheHandler(Barrel.Current))
 options => options.WithCacheHandler(serviceProvider => new MonkeyCacheHandler(Barrel.Current))
 ```
 
->[!WARNING]**Barrel.Current**
+>[!WARNING]
+>
+>**Barrel.Current**
 >
 >If you don't provide Barrel.Current to the MonkeyCacheHandler, don't forget to register it into your DI container.
 

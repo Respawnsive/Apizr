@@ -26,7 +26,7 @@ Every attributes here will inform Apizr on how to manage each web api request. N
 
 ## Registering
 
-As it's not mandatory to register anything in a container for DI purpose (you can use a static instance directly), we'll describe here how to use it with DI.
+It's not required to register anything in a container for DI purpose (you can use the returned static instance directly), but we'll describe here how to use it with DI anyway.
 
 ### Registering a single interface
 

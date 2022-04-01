@@ -31,9 +31,7 @@ items:
     - id: TReadAllParams
     content.vb: >-
       Public Class CreateCommandHandler(Of TModelEntity As Class, TApiEntity As Class, TApiEntityKey, TReadAllResult, TReadAllParams)
-
           Inherits CreateCommandHandlerBase(Of TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, CreateCommand(Of TModelEntity), TModelEntity)
-
           Implements IMediationCommandHandler(Of CreateCommand(Of TModelEntity), TModelEntity), IRequestHandler(Of CreateCommand(Of TModelEntity), TModelEntity)
   inheritance:
   - System.Object

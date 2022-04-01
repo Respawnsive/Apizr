@@ -24,7 +24,9 @@ options => options.WithRefitSettings(serviceProvider => YourOwnRefitSettings)
 
 ***
 
->[!WARNING]**AuthorizationHeaderValue**
+>[!WARNING]
+>
+>**AuthorizationHeaderValue**
 >
 >Apizr provides its own AuthenticationHandler to manage authorization (see Configuring > Authentication). 
 >There's no need to use AuthorizationHeaderValue properties.

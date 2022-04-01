@@ -107,7 +107,9 @@ CRUD mediator methods:
 
 Writting things shorter than ever, instead of injecting/resolving `IMediator`, `IApizrMediator` or `IApizrCrudMediator`, you could do it with `IApizrMediator<TWebApi>` or `IApizrCrudMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>`. 
 
->[!TIP]**Apizr Registry**
+>[!TIP]
+>
+>**Apizr Registry**
 >
 >Note that if you were using the registry feature while configuring, you'll be able to inject/resolve `IApizrMediationRegistry` instead and then just get an `IApizrMediator<TWebApi>` or `IApizrCrudMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>` thanks to its `Get` methods.
 

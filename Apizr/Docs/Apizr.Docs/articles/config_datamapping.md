@@ -28,7 +28,9 @@ public class UserMinUserProfile : Profile
 }
 ```
 
->[!WARNING]**Data Mapping with MediatR and/or Optional**
+>[!WARNING]
+>
+>**Data Mapping with MediatR and/or Optional**
 >
 >If you plan to use MediatR and/or Optional integrations, one more defining step need to be done.
 

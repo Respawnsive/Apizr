@@ -2,7 +2,7 @@
 
 Refit based web api client management, but resilient (retry, connectivity, cache, auth, log, priority, etc...)
 
-[Read the doc](articles/index.md)
+[![Read - Documentation](https://img.shields.io/badge/read-documentation-blue?style=for-the-badge)](articles/index.md "Go to project documentation") [![Browse - Source](https://img.shields.io/badge/browse-source_code-lightgrey?style=for-the-badge)](https://github.com/Respawnsive/Apizr "Go to project repository")
 
 ## History
 

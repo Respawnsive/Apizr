@@ -2,7 +2,7 @@
 
 Refit based web api client, but resilient (retry, connectivity, cache, auth, log, priority, etc...)
 
-**You'll find the [documentation here](https://respawnsive.github.io/Apizr/)**
+[![Read - Documentation](https://img.shields.io/badge/read-documentation-blue?style=for-the-badge)](https://respawnsive.github.io/Apizr/ "Go to project documentation")
 
 ## Libraries
 

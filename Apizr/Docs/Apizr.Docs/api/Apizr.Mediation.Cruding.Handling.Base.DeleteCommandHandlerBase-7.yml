@@ -33,9 +33,7 @@ items:
     - id: TCommandResult
     content.vb: >-
       Public MustInherit Class DeleteCommandHandlerBase(Of TModelEntity As Class, TApiEntity As Class, TApiEntityKey, TReadAllResult, TReadAllParams, TCommand As DeleteCommandBase(Of TModelEntity, TApiEntityKey, TCommandResult), TCommandResult)
-
           Inherits CrudRequestHandlerBase(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams)
-
           Implements IMediationCommandHandler(Of TCommand, TCommandResult), IRequestHandler(Of TCommand, TCommandResult)
   inheritance:
   - System.Object

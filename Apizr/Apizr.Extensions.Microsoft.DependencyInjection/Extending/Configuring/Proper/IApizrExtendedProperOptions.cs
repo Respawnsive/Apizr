@@ -12,11 +12,6 @@ namespace Apizr.Extending.Configuring.Proper
         Type ApizrManagerType { get; }
 
         /// <summary>
-        /// Base address factory
-        /// </summary>
-        Func<IServiceProvider, Uri> BaseAddressFactory { get; }
-
-        /// <summary>
         /// The Logger factory
         /// </summary>
         Func<IServiceProvider, string, ILogger> LoggerFactory { get; }

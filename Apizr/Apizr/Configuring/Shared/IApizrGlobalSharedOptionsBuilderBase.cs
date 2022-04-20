@@ -20,6 +20,20 @@ namespace Apizr.Configuring.Shared
         TApizrSharedOptions ApizrOptions { get; }
 
         /// <summary>
+        /// Define your web api base address (could be defined with WebApiAttribute)
+        /// </summary>
+        /// <param name="baseAddress">Your web api base address</param>
+        /// <returns></returns>
+        TApizrSharedOptionsBuilder WithBaseAddress(string baseAddress);
+
+        /// <summary>
+        /// Define your web api base address (could be defined with WebApiAttribute)
+        /// </summary>
+        /// <param name="baseAddress">Your web api base address</param>
+        /// <returns></returns>
+        TApizrSharedOptionsBuilder WithBaseAddress(Uri baseAddress);
+
+        /// <summary>
         /// Provide a custom HttpClientHandler
         /// </summary>
         /// <param name="httpClientHandler">An <see cref="HttpClientHandler"/> instance</param>

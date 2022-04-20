@@ -272,6 +272,7 @@ namespace Apizr
 
             commonOptionsBuilder?.Invoke(builder);
 
+            builder.ApizrOptions.BaseAddressFactory?.Invoke();
             builder.ApizrOptions.LogLevelsFactory.Invoke();
             builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();
@@ -310,8 +311,9 @@ namespace Apizr
 
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 
-            var builder = new ApizrProperOptionsBuilder(new ApizrProperOptions(commonOptions, webApiType, baseAddress,
+            var builder = new ApizrProperOptionsBuilder(new ApizrProperOptions(commonOptions, webApiType,
                 assemblyPolicyAttribute?.RegistryKeys, webApiPolicyAttribute?.RegistryKeys,
+                baseAddress,
                 logAttribute?.HttpTracerMode,
                 logAttribute?.TrafficVerbosity, logAttribute?.LogLevels));
 

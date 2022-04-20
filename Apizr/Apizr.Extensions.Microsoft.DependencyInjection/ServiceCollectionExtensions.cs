@@ -761,8 +761,9 @@ namespace Apizr
 
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 
-            var builder = new ApizrExtendedProperOptionsBuilder(new ApizrExtendedProperOptions(commonOptions, webApiType, apizrManagerType, baseAddress,
-                assemblyPolicyAttribute?.RegistryKeys, webApiPolicyAttribute?.RegistryKeys,
+            var builder = new ApizrExtendedProperOptionsBuilder(new ApizrExtendedProperOptions(commonOptions, webApiType, apizrManagerType,
+                assemblyPolicyAttribute?.RegistryKeys, webApiPolicyAttribute?.RegistryKeys, 
+                baseAddress,
                 logAttribute?.HttpTracerMode,
                 logAttribute?.TrafficVerbosity, logAttribute?.LogLevels));
 

@@ -25,6 +25,29 @@ namespace Apizr.Extending.Configuring.Common
 
         public IApizrExtendedCommonOptions ApizrOptions => Options;
 
+        public IApizrExtendedCommonOptionsBuilder WithBaseAddress(string baseAddress)
+            => WithBaseAddress(_ => baseAddress);
+
+        public IApizrExtendedCommonOptionsBuilder WithBaseAddress(Uri baseAddress)
+            => WithBaseAddress(_ => baseAddress);
+
+        public IApizrExtendedCommonOptionsBuilder WithBaseAddress(Func<IServiceProvider, string> baseAddressFactory)
+        {
+            Options.BaseAddressFactory = serviceProvider =>
+                Uri.TryCreate(baseAddressFactory.Invoke(serviceProvider), UriKind.RelativeOrAbsolute, out var baseUri)
+                    ? baseUri
+                    : null;
+
+            return this;
+        }
+
+        public IApizrExtendedCommonOptionsBuilder WithBaseAddress(Func<IServiceProvider, Uri> baseAddressFactory)
+        {
+            Options.BaseAddressFactory = baseAddressFactory;
+
+            return this;
+        }
+
         public IApizrExtendedCommonOptionsBuilder WithHttpClientHandler(HttpClientHandler httpClientHandler)
             => WithHttpClientHandler(_ => httpClientHandler);
 

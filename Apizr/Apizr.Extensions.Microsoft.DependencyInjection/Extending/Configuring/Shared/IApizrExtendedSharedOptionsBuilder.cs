@@ -17,6 +17,20 @@ namespace Apizr.Extending.Configuring.Shared
         where TApizrExtendedSharedOptionsBuilder : IApizrGlobalSharedOptionsBuilderBase<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>
     {
         /// <summary>
+        /// Define your web api base address (could be defined with WebApiAttribute)
+        /// </summary>
+        /// <param name="baseAddressFactory">Your web api base address factory</param>
+        /// <returns></returns>
+        TApizrExtendedSharedOptionsBuilder WithBaseAddress(Func<IServiceProvider, string> baseAddressFactory);
+
+        /// <summary>
+        /// Define your web api base address (could be defined with WebApiAttribute)
+        /// </summary>
+        /// <param name="baseAddressFactory">Your web api base address factory</param>
+        /// <returns></returns>
+        TApizrExtendedSharedOptionsBuilder WithBaseAddress(Func<IServiceProvider, Uri> baseAddressFactory);
+
+        /// <summary>
         /// Define http traffic tracing verbosity and log level (could be defined with TraceAttribute)
         /// </summary>
         /// <param name="httpTracerModeFactory">Http traffic tracing mode factory</param>

@@ -97,14 +97,34 @@ namespace Apizr.Tests
         [Fact]
         public void Calling_WithBaseAddress_Should_Set_BaseAddress()
         {
-            var uri = new Uri("http://api.com");
+            var attributeUri = "https://reqres.in/api";
+            var uri1 = new Uri("http://uri1.com");
+            var uri2 = new Uri("http://uri2.com");
 
+            // By attribute
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>();
+            reqResManager.Options.BaseAddress.Should().Be(attributeUri);
+
+            // By simple option
+            reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>(options =>
+                options.WithBaseAddress(uri1));
+            reqResManager.Options.BaseAddress.Should().Be(uri1);
+
+            // By registry common option overridden by attribute
             var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
-                .AddManagerFor<IReqResService>(options => options.WithBaseAddress(uri)));
+                    .AddManagerFor<IReqResService>(),
+                config => config.WithBaseAddress(uri2));
+            reqResManager = apizrRegistry.GetManagerFor<IReqResService>();
+            reqResManager.Options.BaseAddress.Should().Be(attributeUri);
 
-            var reqResManager = apizrRegistry.GetManagerFor<IReqResService>();
+            // By registry proper option overriding common option and attribute
+            apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                .AddManagerFor<IReqResService>(options => 
+                    options.WithBaseAddress(uri2)),
+                config => config.WithBaseAddress(uri1));
 
-            reqResManager.Options.BaseAddress.Should().Be(uri);
+            reqResManager = apizrRegistry.GetManagerFor<IReqResService>();
+            reqResManager.Options.BaseAddress.Should().Be(uri2);
         }
 
         [Fact]

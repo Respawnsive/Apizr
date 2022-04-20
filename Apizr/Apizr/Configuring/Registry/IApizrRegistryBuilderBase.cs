@@ -28,7 +28,7 @@ namespace Apizr.Configuring.Registry
         /// <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
         /// <param name="optionsBuilder">The builder defining some api proper options</param>
         /// <returns></returns>
-        TApizrRegistryBuilder AddCrudFor<T>(
+        TApizrRegistryBuilder AddCrudManagerFor<T>(
             Action<TApizrProperOptionsBuilder> optionsBuilder = null)
             where T : class;
 
@@ -41,7 +41,7 @@ namespace Apizr.Configuring.Registry
         /// <typeparam name="TKey">The object key type (primitive)</typeparam>
         /// <param name="optionsBuilder">The builder defining some api proper options</param>
         /// <returns></returns>
-        TApizrRegistryBuilder AddCrudFor<T, TKey>(
+        TApizrRegistryBuilder AddCrudManagerFor<T, TKey>(
             Action<TApizrProperOptionsBuilder> optionsBuilder = null)
             where T : class;
 
@@ -56,7 +56,7 @@ namespace Apizr.Configuring.Registry
         /// (should inherit from <see cref="IEnumerable{T}"/> or be of class type)</typeparam>
         /// <param name="optionsBuilder">The builder defining some api proper options</param>
         /// <returns></returns>
-        TApizrRegistryBuilder AddCrudFor<T, TKey,
+        TApizrRegistryBuilder AddCrudManagerFor<T, TKey,
             TReadAllResult>(
             Action<TApizrProperOptionsBuilder> optionsBuilder = null)
             where T : class;
@@ -73,7 +73,7 @@ namespace Apizr.Configuring.Registry
         /// <typeparam name="TReadAllParams">ReadAll query parameters</typeparam>
         /// <param name="optionsBuilder">The builder defining some api proper options</param>
         /// <returns></returns>
-        TApizrRegistryBuilder AddCrudFor<T, TKey, TReadAllResult,
+        TApizrRegistryBuilder AddCrudManagerFor<T, TKey, TReadAllResult,
             TReadAllParams>(
             Action<TApizrProperOptionsBuilder> optionsBuilder = null)
             where T : class;
@@ -88,7 +88,7 @@ namespace Apizr.Configuring.Registry
         /// <typeparam name="TWebApi">The web api interface to manage</typeparam>
         /// <param name="optionsBuilder">The builder defining some api proper options</param>
         /// <returns></returns>
-        TApizrRegistryBuilder AddFor<TWebApi>(
+        TApizrRegistryBuilder AddManagerFor<TWebApi>(
             Action<TApizrProperOptionsBuilder> optionsBuilder = null);
 
         #endregion

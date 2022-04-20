@@ -93,43 +93,298 @@
     <div>
       <span class="xref">System.Collections.IEnumerable.GetEnumerator()</span>
     </div>
-    <div>
-      <a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.html#Apizr_Configuring_Registry_IApizrEnumerableRegistryBase_Count">IApizrEnumerableRegistryBase.Count</a>
-    </div>
-    <div>
-      <a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.html#Apizr_Configuring_Registry_IApizrEnumerableRegistryBase_ContainsCrudFor__1">IApizrEnumerableRegistryBase.ContainsCrudFor&lt;T&gt;()</a>
-    </div>
-    <div>
-      <a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.html#Apizr_Configuring_Registry_IApizrEnumerableRegistryBase_ContainsCrudFor__2">IApizrEnumerableRegistryBase.ContainsCrudFor&lt;T, TKey&gt;()</a>
-    </div>
-    <div>
-      <a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.html#Apizr_Configuring_Registry_IApizrEnumerableRegistryBase_ContainsCrudFor__3">IApizrEnumerableRegistryBase.ContainsCrudFor&lt;T, TKey, TReadAllResult&gt;()</a>
-    </div>
-    <div>
-      <a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.html#Apizr_Configuring_Registry_IApizrEnumerableRegistryBase_ContainsCrudFor__4">IApizrEnumerableRegistryBase.ContainsCrudFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;()</a>
-    </div>
-    <div>
-      <a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.html#Apizr_Configuring_Registry_IApizrEnumerableRegistryBase_ContainsFor__1">IApizrEnumerableRegistryBase.ContainsFor&lt;TWebApi&gt;()</a>
-    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Apizr.Optional.Configuring.Registry.html">Apizr.Optional.Configuring.Registry</a></h6>
   <h6><strong>Assembly</strong>: Apizr.Integrations.Optional.dll</h6>
   <h5 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IApizrOptionalMediationEnumerableRegistry : IEnumerable&lt;KeyValuePair&lt;Type, Func&lt;IApizrOptionalMediatorBase&gt;&gt;&gt;, IEnumerable, IApizrEnumerableRegistryBase</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IApizrOptionalMediationEnumerableRegistry : IEnumerable&lt;KeyValuePair&lt;Type, Func&lt;IApizrOptionalMediatorBase&gt;&gt;&gt;, IEnumerable</code></pre>
   </div>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_Count_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.Count*"></a>
+  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_Count" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.Count">Count</h4>
+  <div class="markdown level1 summary"><p>Optional mediators count</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int Count { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
   </h3>
   
   
-  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_GetCrudFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.GetCrudFor*"></a>
-  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_GetCrudFor__1" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.GetCrudFor``1">GetCrudFor&lt;T&gt;()</h4>
+  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_ContainsCrudOptionalMediatorFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.ContainsCrudOptionalMediatorFor*"></a>
+  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_ContainsCrudOptionalMediatorFor__1" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.ContainsCrudOptionalMediatorFor``1">ContainsCrudOptionalMediatorFor&lt;T&gt;()</h4>
+  <div class="markdown level1 summary"><p>Check if registry contains an optional mediator for <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> entity type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool ContainsCrudOptionalMediatorFor&lt;T&gt;()
+    where T : class</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The entity type to manage</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_ContainsCrudOptionalMediatorFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.ContainsCrudOptionalMediatorFor*"></a>
+  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_ContainsCrudOptionalMediatorFor__2" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.ContainsCrudOptionalMediatorFor``2">ContainsCrudOptionalMediatorFor&lt;T, TKey&gt;()</h4>
+  <div class="markdown level1 summary"><p>Check if registry contains an optional mediator for <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> entity type with <code data-dev-comment-type="typeparamref" class="typeparamref">TKey</code> key type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool ContainsCrudOptionalMediatorFor&lt;T, TKey&gt;()
+    where T : class</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The entity type to manage</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TKey</span></td>
+        <td><p>The entity key type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_ContainsCrudOptionalMediatorFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.ContainsCrudOptionalMediatorFor*"></a>
+  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_ContainsCrudOptionalMediatorFor__3" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.ContainsCrudOptionalMediatorFor``3">ContainsCrudOptionalMediatorFor&lt;T, TKey, TReadAllResult&gt;()</h4>
+  <div class="markdown level1 summary"><p>Check if registry contains an optional mediator for <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> entity type with <code data-dev-comment-type="typeparamref" class="typeparamref">TKey</code> key type and <code data-dev-comment-type="typeparamref" class="typeparamref">TReadAllResult</code> ReadAll result type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool ContainsCrudOptionalMediatorFor&lt;T, TKey, TReadAllResult&gt;()
+    where T : class</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The entity type to manage</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TKey</span></td>
+        <td><p>The entity key type</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TReadAllResult</span></td>
+        <td><p>The ReadAll result type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_ContainsCrudOptionalMediatorFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.ContainsCrudOptionalMediatorFor*"></a>
+  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_ContainsCrudOptionalMediatorFor__4" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.ContainsCrudOptionalMediatorFor``4">ContainsCrudOptionalMediatorFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;()</h4>
+  <div class="markdown level1 summary"><p>Check if registry contains an optional mediator for <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> entity type with <code data-dev-comment-type="typeparamref" class="typeparamref">TKey</code> key type,
+<code data-dev-comment-type="typeparamref" class="typeparamref">TReadAllResult</code> ReadAll result type and <code data-dev-comment-type="typeparamref" class="typeparamref">TReadAllParams</code> ReadAll params type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool ContainsCrudOptionalMediatorFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;()
+    where T : class</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The entity type to manage</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TKey</span></td>
+        <td><p>The entity key type</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TReadAllResult</span></td>
+        <td><p>The ReadAll result type</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TReadAllParams</span></td>
+        <td><p>The ReadAll params type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_ContainsOptionalMediatorFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.ContainsOptionalMediatorFor*"></a>
+  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_ContainsOptionalMediatorFor__1" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.ContainsOptionalMediatorFor``1">ContainsOptionalMediatorFor&lt;TWebApi&gt;()</h4>
+  <div class="markdown level1 summary"><p>Check if registry contains an optional mediator for <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> api type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool ContainsOptionalMediatorFor&lt;TWebApi&gt;()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TWebApi</span></td>
+        <td><p>The api type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_GetCrudOptionalMediatorFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.GetCrudOptionalMediatorFor*"></a>
+  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_GetCrudOptionalMediatorFor__1" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.GetCrudOptionalMediatorFor``1">GetCrudOptionalMediatorFor&lt;T&gt;()</h4>
   <div class="markdown level1 summary"><p>Get a Crud optional mediator instance for an entity type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IApizrCrudOptionalMediator&lt;T, int, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt; GetCrudFor&lt;T&gt;()
+    <pre><code class="lang-csharp hljs">IApizrCrudOptionalMediator&lt;T, int, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt; GetCrudOptionalMediatorFor&lt;T&gt;()
     where T : class</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
@@ -165,14 +420,14 @@
   </table>
   
   
-  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_GetCrudFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.GetCrudFor*"></a>
-  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_GetCrudFor__2" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.GetCrudFor``2">GetCrudFor&lt;T, TKey&gt;()</h4>
+  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_GetCrudOptionalMediatorFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.GetCrudOptionalMediatorFor*"></a>
+  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_GetCrudOptionalMediatorFor__2" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.GetCrudOptionalMediatorFor``2">GetCrudOptionalMediatorFor&lt;T, TKey&gt;()</h4>
   <div class="markdown level1 summary"><p>Get a Crud optional mediator instance for an entity type with a specific key type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IApizrCrudOptionalMediator&lt;T, TKey, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt; GetCrudFor&lt;T, TKey&gt;()
+    <pre><code class="lang-csharp hljs">IApizrCrudOptionalMediator&lt;T, TKey, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt; GetCrudOptionalMediatorFor&lt;T, TKey&gt;()
     where T : class</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
@@ -213,14 +468,14 @@
   </table>
   
   
-  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_GetCrudFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.GetCrudFor*"></a>
-  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_GetCrudFor__3" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.GetCrudFor``3">GetCrudFor&lt;T, TKey, TReadAllResult&gt;()</h4>
+  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_GetCrudOptionalMediatorFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.GetCrudOptionalMediatorFor*"></a>
+  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_GetCrudOptionalMediatorFor__3" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.GetCrudOptionalMediatorFor``3">GetCrudOptionalMediatorFor&lt;T, TKey, TReadAllResult&gt;()</h4>
   <div class="markdown level1 summary"><p>Get a Crud optional mediator instance for an entity type with a specific key type and ReadAll result type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IApizrCrudOptionalMediator&lt;T, TKey, TReadAllResult, IDictionary&lt;string, object&gt;&gt; GetCrudFor&lt;T, TKey, TReadAllResult&gt;()
+    <pre><code class="lang-csharp hljs">IApizrCrudOptionalMediator&lt;T, TKey, TReadAllResult, IDictionary&lt;string, object&gt;&gt; GetCrudOptionalMediatorFor&lt;T, TKey, TReadAllResult&gt;()
     where T : class</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
@@ -266,14 +521,14 @@
   </table>
   
   
-  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_GetCrudFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.GetCrudFor*"></a>
-  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_GetCrudFor__4" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.GetCrudFor``4">GetCrudFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;()</h4>
+  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_GetCrudOptionalMediatorFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.GetCrudOptionalMediatorFor*"></a>
+  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_GetCrudOptionalMediatorFor__4" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.GetCrudOptionalMediatorFor``4">GetCrudOptionalMediatorFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;()</h4>
   <div class="markdown level1 summary"><p>Get a Crud optional mediator instance for an entity type with a specific key type, ReadAll result type and ReadAll params type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IApizrCrudOptionalMediator&lt;T, TKey, TReadAllResult, TReadAllParams&gt; GetCrudFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;()
+    <pre><code class="lang-csharp hljs">IApizrCrudOptionalMediator&lt;T, TKey, TReadAllResult, TReadAllParams&gt; GetCrudOptionalMediatorFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;()
     where T : class</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
@@ -324,14 +579,14 @@
   </table>
   
   
-  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_GetFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.GetFor*"></a>
-  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_GetFor__1" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.GetFor``1">GetFor&lt;TWebApi&gt;()</h4>
+  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_GetOptionalMediatorFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.GetOptionalMediatorFor*"></a>
+  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_GetOptionalMediatorFor__1" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.GetOptionalMediatorFor``1">GetOptionalMediatorFor&lt;TWebApi&gt;()</h4>
   <div class="markdown level1 summary"><p>Get an api optional mediator instance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IApizrOptionalMediator&lt;TWebApi&gt; GetFor&lt;TWebApi&gt;()</code></pre>
+    <pre><code class="lang-csharp hljs">IApizrOptionalMediator&lt;TWebApi&gt; GetOptionalMediatorFor&lt;TWebApi&gt;()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -366,14 +621,14 @@
   </table>
   
   
-  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_TryGetCrudFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.TryGetCrudFor*"></a>
-  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_TryGetCrudFor__1_Apizr_Optional_Cruding_Sending_IApizrCrudOptionalMediator___0_System_Int32_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.TryGetCrudFor``1(Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)">TryGetCrudFor&lt;T&gt;(out IApizrCrudOptionalMediator&lt;T, Int32, IEnumerable&lt;T&gt;, IDictionary&lt;String, Object&gt;&gt;)</h4>
+  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_TryGetCrudOptionalMediatorFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.TryGetCrudOptionalMediatorFor*"></a>
+  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_TryGetCrudOptionalMediatorFor__1_Apizr_Optional_Cruding_Sending_IApizrCrudOptionalMediator___0_System_Int32_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.TryGetCrudOptionalMediatorFor``1(Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)">TryGetCrudOptionalMediatorFor&lt;T&gt;(out IApizrCrudOptionalMediator&lt;T, Int32, IEnumerable&lt;T&gt;, IDictionary&lt;String, Object&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>Try to get a Crud optional mediator instance for an entity type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool TryGetCrudFor&lt;T&gt;(out IApizrCrudOptionalMediator&lt;T, int, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt; mediator)
+    <pre><code class="lang-csharp hljs">bool TryGetCrudOptionalMediatorFor&lt;T&gt;(out IApizrCrudOptionalMediator&lt;T, int, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt; mediator)
     where T : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -426,14 +681,14 @@
   </table>
   
   
-  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_TryGetCrudFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.TryGetCrudFor*"></a>
-  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_TryGetCrudFor__2_Apizr_Optional_Cruding_Sending_IApizrCrudOptionalMediator___0___1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.TryGetCrudFor``2(Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)">TryGetCrudFor&lt;T, TKey&gt;(out IApizrCrudOptionalMediator&lt;T, TKey, IEnumerable&lt;T&gt;, IDictionary&lt;String, Object&gt;&gt;)</h4>
+  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_TryGetCrudOptionalMediatorFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.TryGetCrudOptionalMediatorFor*"></a>
+  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_TryGetCrudOptionalMediatorFor__2_Apizr_Optional_Cruding_Sending_IApizrCrudOptionalMediator___0___1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.TryGetCrudOptionalMediatorFor``2(Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)">TryGetCrudOptionalMediatorFor&lt;T, TKey&gt;(out IApizrCrudOptionalMediator&lt;T, TKey, IEnumerable&lt;T&gt;, IDictionary&lt;String, Object&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>Try to get a Crud optional mediator instance for an entity type with a specific key type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool TryGetCrudFor&lt;T, TKey&gt;(out IApizrCrudOptionalMediator&lt;T, TKey, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt; mediator)
+    <pre><code class="lang-csharp hljs">bool TryGetCrudOptionalMediatorFor&lt;T, TKey&gt;(out IApizrCrudOptionalMediator&lt;T, TKey, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt; mediator)
     where T : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -491,14 +746,14 @@
   </table>
   
   
-  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_TryGetCrudFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.TryGetCrudFor*"></a>
-  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_TryGetCrudFor__3_Apizr_Optional_Cruding_Sending_IApizrCrudOptionalMediator___0___1___2_System_Collections_Generic_IDictionary_System_String_System_Object____" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.TryGetCrudFor``3(Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)">TryGetCrudFor&lt;T, TKey, TReadAllResult&gt;(out IApizrCrudOptionalMediator&lt;T, TKey, TReadAllResult, IDictionary&lt;String, Object&gt;&gt;)</h4>
+  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_TryGetCrudOptionalMediatorFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.TryGetCrudOptionalMediatorFor*"></a>
+  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_TryGetCrudOptionalMediatorFor__3_Apizr_Optional_Cruding_Sending_IApizrCrudOptionalMediator___0___1___2_System_Collections_Generic_IDictionary_System_String_System_Object____" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.TryGetCrudOptionalMediatorFor``3(Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)">TryGetCrudOptionalMediatorFor&lt;T, TKey, TReadAllResult&gt;(out IApizrCrudOptionalMediator&lt;T, TKey, TReadAllResult, IDictionary&lt;String, Object&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>Try to get a Crud optional mediator instance for an entity type with a specific key type and ReadAll result type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool TryGetCrudFor&lt;T, TKey, TReadAllResult&gt;(out IApizrCrudOptionalMediator&lt;T, TKey, TReadAllResult, IDictionary&lt;string, object&gt;&gt; mediator)
+    <pre><code class="lang-csharp hljs">bool TryGetCrudOptionalMediatorFor&lt;T, TKey, TReadAllResult&gt;(out IApizrCrudOptionalMediator&lt;T, TKey, TReadAllResult, IDictionary&lt;string, object&gt;&gt; mediator)
     where T : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -561,14 +816,14 @@
   </table>
   
   
-  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_TryGetCrudFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.TryGetCrudFor*"></a>
-  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_TryGetCrudFor__4_Apizr_Optional_Cruding_Sending_IApizrCrudOptionalMediator___0___1___2___3___" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.TryGetCrudFor``4(Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator{``0,``1,``2,``3}@)">TryGetCrudFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(out IApizrCrudOptionalMediator&lt;T, TKey, TReadAllResult, TReadAllParams&gt;)</h4>
+  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_TryGetCrudOptionalMediatorFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.TryGetCrudOptionalMediatorFor*"></a>
+  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_TryGetCrudOptionalMediatorFor__4_Apizr_Optional_Cruding_Sending_IApizrCrudOptionalMediator___0___1___2___3___" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.TryGetCrudOptionalMediatorFor``4(Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator{``0,``1,``2,``3}@)">TryGetCrudOptionalMediatorFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(out IApizrCrudOptionalMediator&lt;T, TKey, TReadAllResult, TReadAllParams&gt;)</h4>
   <div class="markdown level1 summary"><p>Try to get a Crud optional mediator instance for an entity type with a specific key type, ReadAll result type and ReadAll params type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool TryGetCrudFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(out IApizrCrudOptionalMediator&lt;T, TKey, TReadAllResult, TReadAllParams&gt; mediator)
+    <pre><code class="lang-csharp hljs">bool TryGetCrudOptionalMediatorFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(out IApizrCrudOptionalMediator&lt;T, TKey, TReadAllResult, TReadAllParams&gt; mediator)
     where T : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -636,14 +891,14 @@
   </table>
   
   
-  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_TryGetFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.TryGetFor*"></a>
-  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_TryGetFor__1_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0___" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.TryGetFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator{``0}@)">TryGetFor&lt;TWebApi&gt;(out IApizrOptionalMediator&lt;TWebApi&gt;)</h4>
+  <a id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_TryGetOptionalMediatorFor_" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.TryGetOptionalMediatorFor*"></a>
+  <h4 id="Apizr_Optional_Configuring_Registry_IApizrOptionalMediationEnumerableRegistry_TryGetOptionalMediatorFor__1_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0___" data-uid="Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.TryGetOptionalMediatorFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator{``0}@)">TryGetOptionalMediatorFor&lt;TWebApi&gt;(out IApizrOptionalMediator&lt;TWebApi&gt;)</h4>
   <div class="markdown level1 summary"><p>Try to get an api optional mediator instance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool TryGetFor&lt;TWebApi&gt;(out IApizrOptionalMediator&lt;TWebApi&gt; mediator)</code></pre>
+    <pre><code class="lang-csharp hljs">bool TryGetOptionalMediatorFor&lt;TWebApi&gt;(out IApizrOptionalMediator&lt;TWebApi&gt; mediator)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">

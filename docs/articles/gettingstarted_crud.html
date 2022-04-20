@@ -230,7 +230,7 @@ Caching, Logging, Policing, Prioritizing... everything is activable fluently wit
 <p>Here is an example of how to register a managed instance of the CRUD api interface:</p>
 <pre><code class="lang-csharp">// Apizr registration
 myContainer.RegistrationMethod(() =&gt;
-    Apizr.CreateCrudFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(options =&gt; options
+    ApizrBuilder.CreateCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(options =&gt; options
         .WithBaseAddress(&quot;your specific T entity crud base uri&quot;))
 );
 </code></pre><p>T must be a class.</p>
@@ -247,7 +247,7 @@ If you don&#39;t use a custom class holding your query parameters, just don&#39;
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {
     // Apizr registration
-    services.AddApizrCrudFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(options =&gt; options
+    services.AddApizrCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(options =&gt; options
         .WithBaseAddress(&quot;your specific T entity crud base uri&quot;));
 }
 </code></pre><p>Again, T must be a class.</p>
@@ -275,12 +275,12 @@ Also, you may want to share some common configuration between apis without repea
 This is where the ApizrRegistry comes on stage.</p>
 <p>Here is an example of how to register a managed instance of multiple api interfaces:</p>
 <pre><code class="lang-csharp">// Apizr registry
-var apizrRegistry = Apizr.Create(
+var apizrRegistry = ApizrBuilder.CreateRegistry(
     registry =&gt; registry
-        .AddCrudFor&lt;T1&gt;(
+        .AddCrudManagerFor&lt;T1&gt;(
             options =&gt; options
                 .WithBaseAddress(&quot;your specific T1 entity crud base uri&quot;)
-        .AddCrudFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;(
+        .AddCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;(
             options =&gt; options
                 .WithBaseAddress(&quot;your specific T2 entity crud base uri&quot;),
 
@@ -313,10 +313,10 @@ And yes you can mix classic and CRUD manager registration into the same registry
 <p>Or, you could use the managers directly from the registry instead of registering anything.</p>
 <p>Here&#39;s how to get a manager from the registry:</p>
 <pre><code class="lang-csharp">// T1 with default registered types
-var t1Manager = apizrRegistry.GetCrudFor&lt;T1&gt;();
+var t1Manager = apizrRegistry.GetCrudManagerFor&lt;T1&gt;();
 
 // T2 with custom registered types
-var t2Manager = apizrRegistry.GetCrudFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;();
+var t2Manager = apizrRegistry.GetCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;();
 </code></pre></section>
 <section id="tabpanel_u8ofuDaOMe-1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
 <p>You may want to register multiple managed CRUD api interfaces within the same project.
@@ -342,10 +342,10 @@ This is where the ApizrRegistry comes on stage.</p>
     // Apizr registration
     services.AddApizr(
         registry =&gt; registry
-            .AddCrudFor&lt;T1&gt;(
+            .AddCrudManagerFor&lt;T1&gt;(
                 options =&gt; options
                     .WithBaseAddress(&quot;your specific T1 entity crud base uri&quot;)
-            .AddCrudFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;(
+            .AddCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;(
                 options =&gt; options
                     .WithBaseAddress(&quot;your specific T2 entity crud base uri&quot;),
 
@@ -374,10 +374,10 @@ And yes you can mix classic and CRUD manager registration into the same registry
 <p>Also, the registry itslef will be registered into the container, so you could use it to get its managers, instead of using each managers.</p>
 <p>Here&#39;s how to get a manager from the registry:</p>
 <pre><code class="lang-csharp">// T1 with default registered types
-var t1Manager = apizrRegistry.GetCrudFor&lt;T1&gt;();
+var t1Manager = apizrRegistry.GetCrudManagerFor&lt;T1&gt;();
 
 // T2 with custom registered types
-var t2Manager = apizrRegistry.GetCrudFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;();
+var t2Manager = apizrRegistry.GetCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;();
 </code></pre></section>
 </div>
 <h3 id="registering-all-scanned-interfaces">Registering all scanned interfaces</h3>
@@ -415,7 +415,7 @@ public class MyEntity
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {
     // Apizr registration
-    services.AddApizrCrudFor(options =&gt; options.WithAkavacheCacheHandler(), ASSEMBLIES_CONTAINING_ENTITIES);
+    services.AddApizrCrudManagerFor(options =&gt; options.WithAkavacheCacheHandler(), ASSEMBLIES_CONTAINING_ENTITIES);
 }
 </code></pre><p>Apizr will scan assemblies to auto register managers for decorated entities.</p>
 </section>
@@ -434,7 +434,7 @@ public class MyEntity
         _userCrudManager = userCrudManager;
 
         // Or registry injection
-        //_userCrudManager = apizrRegistry.GetCrudFor&lt;User, int, PagedResult&lt;User&gt;, ReadAllUsersParams&gt;&gt;();
+        //_userCrudManager = apizrRegistry.GetCrudManagerFor&lt;User, int, PagedResult&lt;User&gt;, ReadAllUsersParams&gt;&gt;();
     }
 
     public ObservableCollection&lt;User&gt;? Users { get; set; }

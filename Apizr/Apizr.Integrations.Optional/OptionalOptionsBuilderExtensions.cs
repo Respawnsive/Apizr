@@ -295,7 +295,7 @@ namespace Apizr
                     }
 
                     // Add or update the optional mediator service into the registry
-                    registry.AddOrUpdateFor(typedCrudOptionalMediatorServiceType, typedCrudOptionalMediatorServiceType);
+                    registry.AddOrUpdate(typedCrudOptionalMediatorServiceType, typedCrudOptionalMediatorServiceType);
 
                     #endregion
                 }
@@ -470,7 +470,7 @@ namespace Apizr
                     }
 
                     // Add or update the optional mediator service into the registry
-                    registry.AddOrUpdateFor(typedOptionalMediatorServiceType, typedOptionalMediatorServiceType);
+                    registry.AddOrUpdate(typedOptionalMediatorServiceType, typedOptionalMediatorServiceType);
 
                     #endregion
                 }

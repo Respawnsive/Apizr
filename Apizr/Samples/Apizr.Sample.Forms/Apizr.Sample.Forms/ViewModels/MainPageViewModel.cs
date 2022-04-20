@@ -39,9 +39,9 @@ namespace Apizr.Sample.Forms.ViewModels
             //IMediator mediator,
             //ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> userOptionalMediator)
         {
-            _reqResManager = apizrRegistry.GetFor<IReqResService>(); //reqResManager;
-            _userCrudManager = apizrRegistry.GetCrudFor<User, int, PagedResult<User>, IDictionary<string, object>>(); //userCrudManager;
-            _httpBinManager = apizrRegistry.GetFor<IHttpBinService>(); //httpBinManager;
+            _reqResManager = apizrRegistry.GetManagerFor<IReqResService>(); //reqResManager;
+            _userCrudManager = apizrRegistry.GetCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(); //userCrudManager;
+            _httpBinManager = apizrRegistry.GetManagerFor<IHttpBinService>(); //httpBinManager;
             //_userDetailsCrudManager = userDetailsCrudManager;
             //_mediator = mediator;
             //_userOptionalMediator = userOptionalMediator;

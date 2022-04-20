@@ -5,16 +5,22 @@ items:
   id: IApizrMediationEnumerableRegistry
   parent: Apizr.Mediation.Configuring.Registry
   children:
-  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor``1
-  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor``2
-  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor``3
-  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor``4
-  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetFor``1
-  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor``1(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor``2(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor``3(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor``4(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,``3}@)
-  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator{``0}@)
+  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor``1
+  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor``2
+  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor``3
+  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor``4
+  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsMediatorFor``1
+  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.Count
+  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor``1
+  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor``2
+  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor``3
+  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor``4
+  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetMediatorFor``1
+  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor``1(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
+  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor``2(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
+  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor``3(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)
+  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor``4(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,``3}@)
+  - Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetMediatorFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator{``0}@)
   langs:
   - csharp
   - vb
@@ -30,19 +36,13 @@ items:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
   syntax:
-    content: 'public interface IApizrMediationEnumerableRegistry : IEnumerable<KeyValuePair<Type, Func<IApizrMediatorBase>>>, IEnumerable, IApizrEnumerableRegistryBase'
+    content: 'public interface IApizrMediationEnumerableRegistry : IEnumerable<KeyValuePair<Type, Func<IApizrMediatorBase>>>, IEnumerable'
     content.vb: >-
       Public Interface IApizrMediationEnumerableRegistry
-          Inherits IEnumerable(Of KeyValuePair(Of Type, Func(Of IApizrMediatorBase))), IApizrEnumerableRegistryBase
+          Inherits IEnumerable(Of KeyValuePair(Of Type, Func(Of IApizrMediatorBase)))
   inheritedMembers:
   - System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Type,System.Func{Apizr.Mediation.Requesting.Sending.IApizrMediatorBase}}}.GetEnumerator
   - System.Collections.IEnumerable.GetEnumerator
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.Count
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``1
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``2
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``3
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``4
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsFor``1
   extensionMethods:
   - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
   modifiers.csharp:
@@ -51,21 +51,237 @@ items:
   modifiers.vb:
   - Public
   - Interface
-- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor``1
-  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor``1
-  id: GetCrudFor``1
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.Count
+  commentId: P:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.Count
+  id: Count
   parent: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry
   langs:
   - csharp
   - vb
-  name: GetCrudFor<T>()
-  nameWithType: IApizrMediationEnumerableRegistry.GetCrudFor<T>()
-  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor<T>()
-  type: Method
+  name: Count
+  nameWithType: IApizrMediationEnumerableRegistry.Count
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.Count
+  type: Property
   source:
-    id: GetCrudFor
+    id: Count
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\IApizrMediationEnumerableRegistry.cs
     startLine: 15
+  assemblies:
+  - Apizr.Integrations.MediatR
+  namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nMediators count\n"
+  example: []
+  syntax:
+    content: int Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: ReadOnly Property Count As Integer
+  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.Count*
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor``1
+  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor``1
+  id: ContainsCrudMediatorFor``1
+  parent: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry
+  langs:
+  - csharp
+  - vb
+  name: ContainsCrudMediatorFor<T>()
+  nameWithType: IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor<T>()
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor<T>()
+  type: Method
+  source:
+    id: ContainsCrudMediatorFor
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\IApizrMediationEnumerableRegistry.cs
+    startLine: 22
+  assemblies:
+  - Apizr.Integrations.MediatR
+  namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nCheck if registry contains a mediator for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> entity type\n"
+  example: []
+  syntax:
+    content: >-
+      bool ContainsCrudMediatorFor<T>()
+          where T : class
+    typeParameters:
+    - id: T
+      description: The entity type to manage
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: Function ContainsCrudMediatorFor(Of T As Class) As Boolean
+  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor*
+  nameWithType.vb: IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor(Of T)()
+  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor(Of T)()
+  name.vb: ContainsCrudMediatorFor(Of T)()
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor``2
+  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor``2
+  id: ContainsCrudMediatorFor``2
+  parent: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry
+  langs:
+  - csharp
+  - vb
+  name: ContainsCrudMediatorFor<T, TKey>()
+  nameWithType: IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor<T, TKey>()
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor<T, TKey>()
+  type: Method
+  source:
+    id: ContainsCrudMediatorFor
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\IApizrMediationEnumerableRegistry.cs
+    startLine: 30
+  assemblies:
+  - Apizr.Integrations.MediatR
+  namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nCheck if registry contains a mediator for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> entity type with <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> key type\n"
+  example: []
+  syntax:
+    content: >-
+      bool ContainsCrudMediatorFor<T, TKey>()
+          where T : class
+    typeParameters:
+    - id: T
+      description: The entity type to manage
+    - id: TKey
+      description: The entity key type
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: Function ContainsCrudMediatorFor(Of T As Class, TKey) As Boolean
+  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor*
+  nameWithType.vb: IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor(Of T, TKey)()
+  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor(Of T, TKey)()
+  name.vb: ContainsCrudMediatorFor(Of T, TKey)()
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor``3
+  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor``3
+  id: ContainsCrudMediatorFor``3
+  parent: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry
+  langs:
+  - csharp
+  - vb
+  name: ContainsCrudMediatorFor<T, TKey, TReadAllResult>()
+  nameWithType: IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor<T, TKey, TReadAllResult>()
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor<T, TKey, TReadAllResult>()
+  type: Method
+  source:
+    id: ContainsCrudMediatorFor
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\IApizrMediationEnumerableRegistry.cs
+    startLine: 39
+  assemblies:
+  - Apizr.Integrations.MediatR
+  namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nCheck if registry contains a mediator for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> entity type with <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> key type and <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TReadAllResult</code> ReadAll result type\n"
+  example: []
+  syntax:
+    content: >-
+      bool ContainsCrudMediatorFor<T, TKey, TReadAllResult>()
+          where T : class
+    typeParameters:
+    - id: T
+      description: The entity type to manage
+    - id: TKey
+      description: The entity key type
+    - id: TReadAllResult
+      description: The ReadAll result type
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: Function ContainsCrudMediatorFor(Of T As Class, TKey, TReadAllResult) As Boolean
+  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor*
+  nameWithType.vb: IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor(Of T, TKey, TReadAllResult)()
+  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor(Of T, TKey, TReadAllResult)()
+  name.vb: ContainsCrudMediatorFor(Of T, TKey, TReadAllResult)()
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor``4
+  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor``4
+  id: ContainsCrudMediatorFor``4
+  parent: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry
+  langs:
+  - csharp
+  - vb
+  name: ContainsCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>()
+  nameWithType: IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>()
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>()
+  type: Method
+  source:
+    id: ContainsCrudMediatorFor
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\IApizrMediationEnumerableRegistry.cs
+    startLine: 50
+  assemblies:
+  - Apizr.Integrations.MediatR
+  namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nCheck if registry contains a mediator for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> entity type with <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> key type,\n<code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TReadAllResult</code> ReadAll result type and <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TReadAllParams</code> ReadAll params type\n"
+  example: []
+  syntax:
+    content: >-
+      bool ContainsCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>()
+          where T : class
+    typeParameters:
+    - id: T
+      description: The entity type to manage
+    - id: TKey
+      description: The entity key type
+    - id: TReadAllResult
+      description: The ReadAll result type
+    - id: TReadAllParams
+      description: The ReadAll params type
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: Function ContainsCrudMediatorFor(Of T As Class, TKey, TReadAllResult, TReadAllParams) As Boolean
+  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor*
+  nameWithType.vb: IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)()
+  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)()
+  name.vb: ContainsCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)()
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsMediatorFor``1
+  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsMediatorFor``1
+  id: ContainsMediatorFor``1
+  parent: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry
+  langs:
+  - csharp
+  - vb
+  name: ContainsMediatorFor<TWebApi>()
+  nameWithType: IApizrMediationEnumerableRegistry.ContainsMediatorFor<TWebApi>()
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsMediatorFor<TWebApi>()
+  type: Method
+  source:
+    id: ContainsMediatorFor
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\IApizrMediationEnumerableRegistry.cs
+    startLine: 57
+  assemblies:
+  - Apizr.Integrations.MediatR
+  namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nCheck if registry contains a mediator for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code> api type\n"
+  example: []
+  syntax:
+    content: bool ContainsMediatorFor<TWebApi>()
+    typeParameters:
+    - id: TWebApi
+      description: The api type
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: Function ContainsMediatorFor(Of TWebApi) As Boolean
+  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsMediatorFor*
+  nameWithType.vb: IApizrMediationEnumerableRegistry.ContainsMediatorFor(Of TWebApi)()
+  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsMediatorFor(Of TWebApi)()
+  name.vb: ContainsMediatorFor(Of TWebApi)()
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor``1
+  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor``1
+  id: GetCrudMediatorFor``1
+  parent: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry
+  langs:
+  - csharp
+  - vb
+  name: GetCrudMediatorFor<T>()
+  nameWithType: IApizrMediationEnumerableRegistry.GetCrudMediatorFor<T>()
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor<T>()
+  type: Method
+  source:
+    id: GetCrudMediatorFor
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\IApizrMediationEnumerableRegistry.cs
+    startLine: 68
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
@@ -73,7 +289,7 @@ items:
   example: []
   syntax:
     content: >-
-      IApizrCrudMediator<T, int, IEnumerable<T>, IDictionary<string, object>> GetCrudFor<T>()
+      IApizrCrudMediator<T, int, IEnumerable<T>, IDictionary<string, object>> GetCrudMediatorFor<T>()
           where T : class
     typeParameters:
     - id: T
@@ -81,26 +297,26 @@ items:
     return:
       type: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{{T},System.Int32,System.Collections.Generic.IEnumerable{{T}},System.Collections.Generic.IDictionary{System.String,System.Object}}
       description: ''
-    content.vb: Function GetCrudFor(Of T As Class) As IApizrCrudMediator(Of T, Integer, IEnumerable(Of T), IDictionary(Of String, Object))
-  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor*
-  nameWithType.vb: IApizrMediationEnumerableRegistry.GetCrudFor(Of T)()
-  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor(Of T)()
-  name.vb: GetCrudFor(Of T)()
-- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor``2
-  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor``2
-  id: GetCrudFor``2
+    content.vb: Function GetCrudMediatorFor(Of T As Class) As IApizrCrudMediator(Of T, Integer, IEnumerable(Of T), IDictionary(Of String, Object))
+  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor*
+  nameWithType.vb: IApizrMediationEnumerableRegistry.GetCrudMediatorFor(Of T)()
+  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor(Of T)()
+  name.vb: GetCrudMediatorFor(Of T)()
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor``2
+  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor``2
+  id: GetCrudMediatorFor``2
   parent: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry
   langs:
   - csharp
   - vb
-  name: GetCrudFor<T, TKey>()
-  nameWithType: IApizrMediationEnumerableRegistry.GetCrudFor<T, TKey>()
-  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor<T, TKey>()
+  name: GetCrudMediatorFor<T, TKey>()
+  nameWithType: IApizrMediationEnumerableRegistry.GetCrudMediatorFor<T, TKey>()
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor<T, TKey>()
   type: Method
   source:
-    id: GetCrudFor
+    id: GetCrudMediatorFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\IApizrMediationEnumerableRegistry.cs
-    startLine: 23
+    startLine: 76
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
@@ -108,7 +324,7 @@ items:
   example: []
   syntax:
     content: >-
-      IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> GetCrudFor<T, TKey>()
+      IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> GetCrudMediatorFor<T, TKey>()
           where T : class
     typeParameters:
     - id: T
@@ -118,26 +334,26 @@ items:
     return:
       type: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{{T},{TKey},System.Collections.Generic.IEnumerable{{T}},System.Collections.Generic.IDictionary{System.String,System.Object}}
       description: ''
-    content.vb: Function GetCrudFor(Of T As Class, TKey) As IApizrCrudMediator(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object))
-  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor*
-  nameWithType.vb: IApizrMediationEnumerableRegistry.GetCrudFor(Of T, TKey)()
-  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor(Of T, TKey)()
-  name.vb: GetCrudFor(Of T, TKey)()
-- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor``3
-  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor``3
-  id: GetCrudFor``3
+    content.vb: Function GetCrudMediatorFor(Of T As Class, TKey) As IApizrCrudMediator(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object))
+  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor*
+  nameWithType.vb: IApizrMediationEnumerableRegistry.GetCrudMediatorFor(Of T, TKey)()
+  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor(Of T, TKey)()
+  name.vb: GetCrudMediatorFor(Of T, TKey)()
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor``3
+  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor``3
+  id: GetCrudMediatorFor``3
   parent: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry
   langs:
   - csharp
   - vb
-  name: GetCrudFor<T, TKey, TReadAllResult>()
-  nameWithType: IApizrMediationEnumerableRegistry.GetCrudFor<T, TKey, TReadAllResult>()
-  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor<T, TKey, TReadAllResult>()
+  name: GetCrudMediatorFor<T, TKey, TReadAllResult>()
+  nameWithType: IApizrMediationEnumerableRegistry.GetCrudMediatorFor<T, TKey, TReadAllResult>()
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor<T, TKey, TReadAllResult>()
   type: Method
   source:
-    id: GetCrudFor
+    id: GetCrudMediatorFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\IApizrMediationEnumerableRegistry.cs
-    startLine: 32
+    startLine: 85
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
@@ -145,7 +361,7 @@ items:
   example: []
   syntax:
     content: >-
-      IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<string, object>> GetCrudFor<T, TKey, TReadAllResult>()
+      IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<string, object>> GetCrudMediatorFor<T, TKey, TReadAllResult>()
           where T : class
     typeParameters:
     - id: T
@@ -157,26 +373,26 @@ items:
     return:
       type: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{{T},{TKey},{TReadAllResult},System.Collections.Generic.IDictionary{System.String,System.Object}}
       description: ''
-    content.vb: Function GetCrudFor(Of T As Class, TKey, TReadAllResult) As IApizrCrudMediator(Of T, TKey, TReadAllResult, IDictionary(Of String, Object))
-  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor*
-  nameWithType.vb: IApizrMediationEnumerableRegistry.GetCrudFor(Of T, TKey, TReadAllResult)()
-  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor(Of T, TKey, TReadAllResult)()
-  name.vb: GetCrudFor(Of T, TKey, TReadAllResult)()
-- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor``4
-  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor``4
-  id: GetCrudFor``4
+    content.vb: Function GetCrudMediatorFor(Of T As Class, TKey, TReadAllResult) As IApizrCrudMediator(Of T, TKey, TReadAllResult, IDictionary(Of String, Object))
+  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor*
+  nameWithType.vb: IApizrMediationEnumerableRegistry.GetCrudMediatorFor(Of T, TKey, TReadAllResult)()
+  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor(Of T, TKey, TReadAllResult)()
+  name.vb: GetCrudMediatorFor(Of T, TKey, TReadAllResult)()
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor``4
+  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor``4
+  id: GetCrudMediatorFor``4
   parent: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry
   langs:
   - csharp
   - vb
-  name: GetCrudFor<T, TKey, TReadAllResult, TReadAllParams>()
-  nameWithType: IApizrMediationEnumerableRegistry.GetCrudFor<T, TKey, TReadAllResult, TReadAllParams>()
-  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor<T, TKey, TReadAllResult, TReadAllParams>()
+  name: GetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>()
+  nameWithType: IApizrMediationEnumerableRegistry.GetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>()
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>()
   type: Method
   source:
-    id: GetCrudFor
+    id: GetCrudMediatorFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\IApizrMediationEnumerableRegistry.cs
-    startLine: 43
+    startLine: 96
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
@@ -184,7 +400,7 @@ items:
   example: []
   syntax:
     content: >-
-      IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams> GetCrudFor<T, TKey, TReadAllResult, TReadAllParams>()
+      IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams> GetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>()
           where T : class
     typeParameters:
     - id: T
@@ -198,59 +414,59 @@ items:
     return:
       type: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{{T},{TKey},{TReadAllResult},{TReadAllParams}}
       description: ''
-    content.vb: Function GetCrudFor(Of T As Class, TKey, TReadAllResult, TReadAllParams) As IApizrCrudMediator(Of T, TKey, TReadAllResult, TReadAllParams)
-  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor*
-  nameWithType.vb: IApizrMediationEnumerableRegistry.GetCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)()
-  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)()
-  name.vb: GetCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)()
-- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetFor``1
-  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetFor``1
-  id: GetFor``1
+    content.vb: Function GetCrudMediatorFor(Of T As Class, TKey, TReadAllResult, TReadAllParams) As IApizrCrudMediator(Of T, TKey, TReadAllResult, TReadAllParams)
+  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor*
+  nameWithType.vb: IApizrMediationEnumerableRegistry.GetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)()
+  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)()
+  name.vb: GetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)()
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetMediatorFor``1
+  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetMediatorFor``1
+  id: GetMediatorFor``1
   parent: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry
   langs:
   - csharp
   - vb
-  name: GetFor<TWebApi>()
-  nameWithType: IApizrMediationEnumerableRegistry.GetFor<TWebApi>()
-  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetFor<TWebApi>()
+  name: GetMediatorFor<TWebApi>()
+  nameWithType: IApizrMediationEnumerableRegistry.GetMediatorFor<TWebApi>()
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetMediatorFor<TWebApi>()
   type: Method
   source:
-    id: GetFor
+    id: GetMediatorFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\IApizrMediationEnumerableRegistry.cs
-    startLine: 51
+    startLine: 104
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
   summary: "\nGet an api mediator instance\n"
   example: []
   syntax:
-    content: IApizrMediator<TWebApi> GetFor<TWebApi>()
+    content: IApizrMediator<TWebApi> GetMediatorFor<TWebApi>()
     typeParameters:
     - id: TWebApi
       description: The managed api type
     return:
       type: Apizr.Mediation.Requesting.Sending.IApizrMediator{{TWebApi}}
       description: ''
-    content.vb: Function GetFor(Of TWebApi) As IApizrMediator(Of TWebApi)
-  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetFor*
-  nameWithType.vb: IApizrMediationEnumerableRegistry.GetFor(Of TWebApi)()
-  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetFor(Of TWebApi)()
-  name.vb: GetFor(Of TWebApi)()
-- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor``1(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor``1(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-  id: TryGetCrudFor``1(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
+    content.vb: Function GetMediatorFor(Of TWebApi) As IApizrMediator(Of TWebApi)
+  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetMediatorFor*
+  nameWithType.vb: IApizrMediationEnumerableRegistry.GetMediatorFor(Of TWebApi)()
+  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetMediatorFor(Of TWebApi)()
+  name.vb: GetMediatorFor(Of TWebApi)()
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor``1(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
+  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor``1(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
+  id: TryGetCrudMediatorFor``1(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
   parent: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry
   langs:
   - csharp
   - vb
-  name: TryGetCrudFor<T>(out IApizrCrudMediator<T, Int32, IEnumerable<T>, IDictionary<String, Object>>)
-  nameWithType: IApizrMediationEnumerableRegistry.TryGetCrudFor<T>(out IApizrCrudMediator<T, Int32, IEnumerable<T>, IDictionary<String, Object>>)
-  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor<T>(out Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, System.Int32, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IDictionary<System.String, System.Object>>)
+  name: TryGetCrudMediatorFor<T>(out IApizrCrudMediator<T, Int32, IEnumerable<T>, IDictionary<String, Object>>)
+  nameWithType: IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor<T>(out IApizrCrudMediator<T, Int32, IEnumerable<T>, IDictionary<String, Object>>)
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor<T>(out Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, System.Int32, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IDictionary<System.String, System.Object>>)
   type: Method
   source:
-    id: TryGetCrudFor
+    id: TryGetCrudMediatorFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\IApizrMediationEnumerableRegistry.cs
-    startLine: 58
+    startLine: 115
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
@@ -258,7 +474,7 @@ items:
   example: []
   syntax:
     content: >-
-      bool TryGetCrudFor<T>(out IApizrCrudMediator<T, int, IEnumerable<T>, IDictionary<string, object>> mediator)
+      bool TryGetCrudMediatorFor<T>(out IApizrCrudMediator<T, int, IEnumerable<T>, IDictionary<string, object>> mediator)
           where T : class
     parameters:
     - id: mediator
@@ -269,26 +485,26 @@ items:
     return:
       type: System.Boolean
       description: ''
-    content.vb: Function TryGetCrudFor(Of T As Class)(ByRef mediator As IApizrCrudMediator(Of T, Integer, IEnumerable(Of T), IDictionary(Of String, Object))) As Boolean
-  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor*
-  nameWithType.vb: IApizrMediationEnumerableRegistry.TryGetCrudFor(Of T)(ByRef IApizrCrudMediator(Of T, Int32, IEnumerable(Of T), IDictionary(Of String, Object)))
-  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor(Of T)(ByRef Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, System.Int32, System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IDictionary(Of System.String, System.Object)))
-  name.vb: TryGetCrudFor(Of T)(ByRef IApizrCrudMediator(Of T, Int32, IEnumerable(Of T), IDictionary(Of String, Object)))
-- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor``2(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor``2(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-  id: TryGetCrudFor``2(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
+    content.vb: Function TryGetCrudMediatorFor(Of T As Class)(ByRef mediator As IApizrCrudMediator(Of T, Integer, IEnumerable(Of T), IDictionary(Of String, Object))) As Boolean
+  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor*
+  nameWithType.vb: IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor(Of T)(ByRef IApizrCrudMediator(Of T, Int32, IEnumerable(Of T), IDictionary(Of String, Object)))
+  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor(Of T)(ByRef Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, System.Int32, System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IDictionary(Of System.String, System.Object)))
+  name.vb: TryGetCrudMediatorFor(Of T)(ByRef IApizrCrudMediator(Of T, Int32, IEnumerable(Of T), IDictionary(Of String, Object)))
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor``2(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
+  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor``2(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
+  id: TryGetCrudMediatorFor``2(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
   parent: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry
   langs:
   - csharp
   - vb
-  name: TryGetCrudFor<T, TKey>(out IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<String, Object>>)
-  nameWithType: IApizrMediationEnumerableRegistry.TryGetCrudFor<T, TKey>(out IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<String, Object>>)
-  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor<T, TKey>(out Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, TKey, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IDictionary<System.String, System.Object>>)
+  name: TryGetCrudMediatorFor<T, TKey>(out IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<String, Object>>)
+  nameWithType: IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor<T, TKey>(out IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<String, Object>>)
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor<T, TKey>(out Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, TKey, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IDictionary<System.String, System.Object>>)
   type: Method
   source:
-    id: TryGetCrudFor
+    id: TryGetCrudMediatorFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\IApizrMediationEnumerableRegistry.cs
-    startLine: 66
+    startLine: 123
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
@@ -296,7 +512,7 @@ items:
   example: []
   syntax:
     content: >-
-      bool TryGetCrudFor<T, TKey>(out IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> mediator)
+      bool TryGetCrudMediatorFor<T, TKey>(out IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> mediator)
           where T : class
     parameters:
     - id: mediator
@@ -309,26 +525,26 @@ items:
     return:
       type: System.Boolean
       description: ''
-    content.vb: Function TryGetCrudFor(Of T As Class, TKey)(ByRef mediator As IApizrCrudMediator(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object))) As Boolean
-  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor*
-  nameWithType.vb: IApizrMediationEnumerableRegistry.TryGetCrudFor(Of T, TKey)(ByRef IApizrCrudMediator(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object)))
-  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor(Of T, TKey)(ByRef Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, TKey, System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IDictionary(Of System.String, System.Object)))
-  name.vb: TryGetCrudFor(Of T, TKey)(ByRef IApizrCrudMediator(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object)))
-- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor``3(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor``3(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-  id: TryGetCrudFor``3(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)
+    content.vb: Function TryGetCrudMediatorFor(Of T As Class, TKey)(ByRef mediator As IApizrCrudMediator(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object))) As Boolean
+  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor*
+  nameWithType.vb: IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor(Of T, TKey)(ByRef IApizrCrudMediator(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object)))
+  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor(Of T, TKey)(ByRef Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, TKey, System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IDictionary(Of System.String, System.Object)))
+  name.vb: TryGetCrudMediatorFor(Of T, TKey)(ByRef IApizrCrudMediator(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object)))
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor``3(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)
+  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor``3(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)
+  id: TryGetCrudMediatorFor``3(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)
   parent: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry
   langs:
   - csharp
   - vb
-  name: TryGetCrudFor<T, TKey, TReadAllResult>(out IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<String, Object>>)
-  nameWithType: IApizrMediationEnumerableRegistry.TryGetCrudFor<T, TKey, TReadAllResult>(out IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<String, Object>>)
-  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor<T, TKey, TReadAllResult>(out Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, TKey, TReadAllResult, System.Collections.Generic.IDictionary<System.String, System.Object>>)
+  name: TryGetCrudMediatorFor<T, TKey, TReadAllResult>(out IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<String, Object>>)
+  nameWithType: IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor<T, TKey, TReadAllResult>(out IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<String, Object>>)
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor<T, TKey, TReadAllResult>(out Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, TKey, TReadAllResult, System.Collections.Generic.IDictionary<System.String, System.Object>>)
   type: Method
   source:
-    id: TryGetCrudFor
+    id: TryGetCrudMediatorFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\IApizrMediationEnumerableRegistry.cs
-    startLine: 75
+    startLine: 132
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
@@ -336,7 +552,7 @@ items:
   example: []
   syntax:
     content: >-
-      bool TryGetCrudFor<T, TKey, TReadAllResult>(out IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<string, object>> mediator)
+      bool TryGetCrudMediatorFor<T, TKey, TReadAllResult>(out IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<string, object>> mediator)
           where T : class
     parameters:
     - id: mediator
@@ -351,26 +567,26 @@ items:
     return:
       type: System.Boolean
       description: ''
-    content.vb: Function TryGetCrudFor(Of T As Class, TKey, TReadAllResult)(ByRef mediator As IApizrCrudMediator(Of T, TKey, TReadAllResult, IDictionary(Of String, Object))) As Boolean
-  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor*
-  nameWithType.vb: IApizrMediationEnumerableRegistry.TryGetCrudFor(Of T, TKey, TReadAllResult)(ByRef IApizrCrudMediator(Of T, TKey, TReadAllResult, IDictionary(Of String, Object)))
-  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor(Of T, TKey, TReadAllResult)(ByRef Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, TKey, TReadAllResult, System.Collections.Generic.IDictionary(Of System.String, System.Object)))
-  name.vb: TryGetCrudFor(Of T, TKey, TReadAllResult)(ByRef IApizrCrudMediator(Of T, TKey, TReadAllResult, IDictionary(Of String, Object)))
-- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor``4(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,``3}@)
-  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor``4(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,``3}@)
-  id: TryGetCrudFor``4(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,``3}@)
+    content.vb: Function TryGetCrudMediatorFor(Of T As Class, TKey, TReadAllResult)(ByRef mediator As IApizrCrudMediator(Of T, TKey, TReadAllResult, IDictionary(Of String, Object))) As Boolean
+  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor*
+  nameWithType.vb: IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult)(ByRef IApizrCrudMediator(Of T, TKey, TReadAllResult, IDictionary(Of String, Object)))
+  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult)(ByRef Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, TKey, TReadAllResult, System.Collections.Generic.IDictionary(Of System.String, System.Object)))
+  name.vb: TryGetCrudMediatorFor(Of T, TKey, TReadAllResult)(ByRef IApizrCrudMediator(Of T, TKey, TReadAllResult, IDictionary(Of String, Object)))
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor``4(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,``3}@)
+  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor``4(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,``3}@)
+  id: TryGetCrudMediatorFor``4(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,``3}@)
   parent: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry
   langs:
   - csharp
   - vb
-  name: TryGetCrudFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)
-  nameWithType: IApizrMediationEnumerableRegistry.TryGetCrudFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)
-  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor<T, TKey, TReadAllResult, TReadAllParams>(out Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)
+  name: TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)
+  nameWithType: IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>(out Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)
   type: Method
   source:
-    id: TryGetCrudFor
+    id: TryGetCrudMediatorFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\IApizrMediationEnumerableRegistry.cs
-    startLine: 85
+    startLine: 142
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
@@ -378,7 +594,7 @@ items:
   example: []
   syntax:
     content: >-
-      bool TryGetCrudFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams> mediator)
+      bool TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams> mediator)
           where T : class
     parameters:
     - id: mediator
@@ -395,33 +611,33 @@ items:
     return:
       type: System.Boolean
       description: ''
-    content.vb: Function TryGetCrudFor(Of T As Class, TKey, TReadAllResult, TReadAllParams)(ByRef mediator As IApizrCrudMediator(Of T, TKey, TReadAllResult, TReadAllParams)) As Boolean
-  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor*
-  nameWithType.vb: IApizrMediationEnumerableRegistry.TryGetCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)(ByRef IApizrCrudMediator(Of T, TKey, TReadAllResult, TReadAllParams))
-  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)(ByRef Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, TKey, TReadAllResult, TReadAllParams))
-  name.vb: TryGetCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)(ByRef IApizrCrudMediator(Of T, TKey, TReadAllResult, TReadAllParams))
-- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator{``0}@)
-  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator{``0}@)
-  id: TryGetFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator{``0}@)
+    content.vb: Function TryGetCrudMediatorFor(Of T As Class, TKey, TReadAllResult, TReadAllParams)(ByRef mediator As IApizrCrudMediator(Of T, TKey, TReadAllResult, TReadAllParams)) As Boolean
+  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor*
+  nameWithType.vb: IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)(ByRef IApizrCrudMediator(Of T, TKey, TReadAllResult, TReadAllParams))
+  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)(ByRef Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, TKey, TReadAllResult, TReadAllParams))
+  name.vb: TryGetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)(ByRef IApizrCrudMediator(Of T, TKey, TReadAllResult, TReadAllParams))
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetMediatorFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator{``0}@)
+  commentId: M:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetMediatorFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator{``0}@)
+  id: TryGetMediatorFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator{``0}@)
   parent: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry
   langs:
   - csharp
   - vb
-  name: TryGetFor<TWebApi>(out IApizrMediator<TWebApi>)
-  nameWithType: IApizrMediationEnumerableRegistry.TryGetFor<TWebApi>(out IApizrMediator<TWebApi>)
-  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetFor<TWebApi>(out Apizr.Mediation.Requesting.Sending.IApizrMediator<TWebApi>)
+  name: TryGetMediatorFor<TWebApi>(out IApizrMediator<TWebApi>)
+  nameWithType: IApizrMediationEnumerableRegistry.TryGetMediatorFor<TWebApi>(out IApizrMediator<TWebApi>)
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetMediatorFor<TWebApi>(out Apizr.Mediation.Requesting.Sending.IApizrMediator<TWebApi>)
   type: Method
   source:
-    id: TryGetFor
+    id: TryGetMediatorFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\IApizrMediationEnumerableRegistry.cs
-    startLine: 92
+    startLine: 149
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
   summary: "\nTry to get an api mediator instance\n"
   example: []
   syntax:
-    content: bool TryGetFor<TWebApi>(out IApizrMediator<TWebApi> mediator)
+    content: bool TryGetMediatorFor<TWebApi>(out IApizrMediator<TWebApi> mediator)
     parameters:
     - id: mediator
       type: Apizr.Mediation.Requesting.Sending.IApizrMediator{{TWebApi}}
@@ -431,11 +647,11 @@ items:
     return:
       type: System.Boolean
       description: ''
-    content.vb: Function TryGetFor(Of TWebApi)(ByRef mediator As IApizrMediator(Of TWebApi)) As Boolean
-  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetFor*
-  nameWithType.vb: IApizrMediationEnumerableRegistry.TryGetFor(Of TWebApi)(ByRef IApizrMediator(Of TWebApi))
-  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetFor(Of TWebApi)(ByRef Apizr.Mediation.Requesting.Sending.IApizrMediator(Of TWebApi))
-  name.vb: TryGetFor(Of TWebApi)(ByRef IApizrMediator(Of TWebApi))
+    content.vb: Function TryGetMediatorFor(Of TWebApi)(ByRef mediator As IApizrMediator(Of TWebApi)) As Boolean
+  overload: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetMediatorFor*
+  nameWithType.vb: IApizrMediationEnumerableRegistry.TryGetMediatorFor(Of TWebApi)(ByRef IApizrMediator(Of TWebApi))
+  fullName.vb: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetMediatorFor(Of TWebApi)(ByRef Apizr.Mediation.Requesting.Sending.IApizrMediator(Of TWebApi))
+  name.vb: TryGetMediatorFor(Of TWebApi)(ByRef IApizrMediator(Of TWebApi))
 references:
 - uid: Apizr.Mediation.Configuring.Registry
   commentId: N:Apizr.Mediation.Configuring.Registry
@@ -500,167 +716,6 @@ references:
     nameWithType: IEnumerable.GetEnumerator
     fullName: System.Collections.IEnumerable.GetEnumerator
     isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.Count
-  commentId: P:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.Count
-  parent: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase
-  name: Count
-  nameWithType: IApizrEnumerableRegistryBase.Count
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.Count
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``1
-  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``1
-  parent: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase
-  name: ContainsCrudFor<T>()
-  nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor<T>()
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor<T>()
-  nameWithType.vb: IApizrEnumerableRegistryBase.ContainsCrudFor(Of T)()
-  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor(Of T)()
-  name.vb: ContainsCrudFor(Of T)()
-  spec.csharp:
-  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``1
-    name: ContainsCrudFor<T>
-    nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor<T>
-    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor<T>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``1
-    name: ContainsCrudFor(Of T)
-    nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor(Of T)
-    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor(Of T)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``2
-  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``2
-  parent: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase
-  name: ContainsCrudFor<T, TKey>()
-  nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey>()
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey>()
-  nameWithType.vb: IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey)()
-  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey)()
-  name.vb: ContainsCrudFor(Of T, TKey)()
-  spec.csharp:
-  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``2
-    name: ContainsCrudFor<T, TKey>
-    nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey>
-    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``2
-    name: ContainsCrudFor(Of T, TKey)
-    nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey)
-    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``3
-  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``3
-  parent: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase
-  name: ContainsCrudFor<T, TKey, TReadAllResult>()
-  nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey, TReadAllResult>()
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey, TReadAllResult>()
-  nameWithType.vb: IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey, TReadAllResult)()
-  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey, TReadAllResult)()
-  name.vb: ContainsCrudFor(Of T, TKey, TReadAllResult)()
-  spec.csharp:
-  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``3
-    name: ContainsCrudFor<T, TKey, TReadAllResult>
-    nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey, TReadAllResult>
-    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey, TReadAllResult>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``3
-    name: ContainsCrudFor(Of T, TKey, TReadAllResult)
-    nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey, TReadAllResult)
-    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey, TReadAllResult)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``4
-  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``4
-  parent: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase
-  name: ContainsCrudFor<T, TKey, TReadAllResult, TReadAllParams>()
-  nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey, TReadAllResult, TReadAllParams>()
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey, TReadAllResult, TReadAllParams>()
-  nameWithType.vb: IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)()
-  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)()
-  name.vb: ContainsCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)()
-  spec.csharp:
-  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``4
-    name: ContainsCrudFor<T, TKey, TReadAllResult, TReadAllParams>
-    nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey, TReadAllResult, TReadAllParams>
-    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey, TReadAllResult, TReadAllParams>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``4
-    name: ContainsCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)
-    nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)
-    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsFor``1
-  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsFor``1
-  parent: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase
-  name: ContainsFor<TWebApi>()
-  nameWithType: IApizrEnumerableRegistryBase.ContainsFor<TWebApi>()
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsFor<TWebApi>()
-  nameWithType.vb: IApizrEnumerableRegistryBase.ContainsFor(Of TWebApi)()
-  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsFor(Of TWebApi)()
-  name.vb: ContainsFor(Of TWebApi)()
-  spec.csharp:
-  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsFor``1
-    name: ContainsFor<TWebApi>
-    nameWithType: IApizrEnumerableRegistryBase.ContainsFor<TWebApi>
-    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsFor<TWebApi>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsFor``1
-    name: ContainsFor(Of TWebApi)
-    nameWithType: IApizrEnumerableRegistryBase.ContainsFor(Of TWebApi)
-    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsFor(Of TWebApi)
   - name: (
     nameWithType: (
     fullName: (
@@ -863,12 +918,6 @@ references:
   name: IEnumerable
   nameWithType: IEnumerable
   fullName: System.Collections.IEnumerable
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase
-  commentId: T:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase
-  parent: Apizr.Configuring.Registry
-  name: IApizrEnumerableRegistryBase
-  nameWithType: IApizrEnumerableRegistryBase
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase
 - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
   commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
   isExternal: true
@@ -996,21 +1045,51 @@ references:
   name: System.Collections
   nameWithType: System.Collections
   fullName: System.Collections
-- uid: Apizr.Configuring.Registry
-  commentId: N:Apizr.Configuring.Registry
-  name: Apizr.Configuring.Registry
-  nameWithType: Apizr.Configuring.Registry
-  fullName: Apizr.Configuring.Registry
 - uid: Apizr.Extending
   commentId: N:Apizr.Extending
   name: Apizr.Extending
   nameWithType: Apizr.Extending
   fullName: Apizr.Extending
-- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor*
-  commentId: Overload:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor
-  name: GetCrudFor
-  nameWithType: IApizrMediationEnumerableRegistry.GetCrudFor
-  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudFor
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.Count*
+  commentId: Overload:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.Count
+  name: Count
+  nameWithType: IApizrMediationEnumerableRegistry.Count
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.Count
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor*
+  commentId: Overload:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor
+  name: ContainsCrudMediatorFor
+  nameWithType: IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsMediatorFor*
+  commentId: Overload:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsMediatorFor
+  name: ContainsMediatorFor
+  nameWithType: IApizrMediationEnumerableRegistry.ContainsMediatorFor
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsMediatorFor
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor*
+  commentId: Overload:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor
+  name: GetCrudMediatorFor
+  nameWithType: IApizrMediationEnumerableRegistry.GetCrudMediatorFor
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{{T},System.Int32,System.Collections.Generic.IEnumerable{{T}},System.Collections.Generic.IDictionary{System.String,System.Object}}
   commentId: T:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}
   parent: Apizr.Mediation.Cruding.Sending
@@ -1558,11 +1637,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetFor*
-  commentId: Overload:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetFor
-  name: GetFor
-  nameWithType: IApizrMediationEnumerableRegistry.GetFor
-  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetFor
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetMediatorFor*
+  commentId: Overload:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetMediatorFor
+  name: GetMediatorFor
+  nameWithType: IApizrMediationEnumerableRegistry.GetMediatorFor
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetMediatorFor
 - uid: Apizr.Mediation.Requesting.Sending.IApizrMediator{{TWebApi}}
   commentId: T:Apizr.Mediation.Requesting.Sending.IApizrMediator{``0}
   parent: Apizr.Mediation.Requesting.Sending
@@ -1642,26 +1721,13 @@ references:
   name: Apizr.Mediation.Requesting.Sending
   nameWithType: Apizr.Mediation.Requesting.Sending
   fullName: Apizr.Mediation.Requesting.Sending
-- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor*
-  commentId: Overload:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor
-  name: TryGetCrudFor
-  nameWithType: IApizrMediationEnumerableRegistry.TryGetCrudFor
-  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudFor
-- uid: System.Boolean
-  commentId: T:System.Boolean
-  parent: System
-  isExternal: true
-  name: Boolean
-  nameWithType: Boolean
-  fullName: System.Boolean
-- uid: System
-  commentId: N:System
-  isExternal: true
-  name: System
-  nameWithType: System
-  fullName: System
-- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetFor*
-  commentId: Overload:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetFor
-  name: TryGetFor
-  nameWithType: IApizrMediationEnumerableRegistry.TryGetFor
-  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetFor
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor*
+  commentId: Overload:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor
+  name: TryGetCrudMediatorFor
+  nameWithType: IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor
+- uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetMediatorFor*
+  commentId: Overload:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetMediatorFor
+  name: TryGetMediatorFor
+  nameWithType: IApizrMediationEnumerableRegistry.TryGetMediatorFor
+  fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetMediatorFor

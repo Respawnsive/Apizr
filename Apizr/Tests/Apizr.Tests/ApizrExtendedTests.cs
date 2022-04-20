@@ -66,9 +66,9 @@ namespace Apizr.Tests
         public void ServiceCollection_Should_Contain_Managers()
         {
             var services = new ServiceCollection();
-            services.AddApizrFor<IReqResService>();
-            services.AddApizrFor<IHttpBinService>();
-            services.AddApizrCrudFor<User, int, PagedResult<User>, IDictionary<string, object>>();
+            services.AddApizrManagerFor<IReqResService>();
+            services.AddApizrManagerFor<IHttpBinService>();
+            services.AddApizrCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>();
             
             services.Should().Contain(x => x.ServiceType == typeof(IApizrManager<IReqResService>));
             services.Should().Contain(x => x.ServiceType == typeof(IApizrManager<IHttpBinService>));
@@ -80,9 +80,9 @@ namespace Apizr.Tests
         {
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddApizrFor<IReqResService>();
-            services.AddApizrFor<IHttpBinService>();
-            services.AddApizrCrudFor<User, int, PagedResult<User>, IDictionary<string, object>>();
+            services.AddApizrManagerFor<IReqResService>();
+            services.AddApizrManagerFor<IHttpBinService>();
+            services.AddApizrCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>();
 
             var serviceProvider = services.BuildServiceProvider();
             var reqResManager = serviceProvider.GetService<IApizrManager<IReqResService>>();
@@ -99,7 +99,7 @@ namespace Apizr.Tests
         {
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddApizrCrudFor(_assembly);
+            services.AddApizrCrudManagerFor(_assembly);
 
             var serviceProvider = services.BuildServiceProvider();
             var userManager = serviceProvider.GetService<IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>>>();
@@ -114,7 +114,7 @@ namespace Apizr.Tests
 
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddApizrFor<IReqResService>(options => options.WithBaseAddress(uri));
+            services.AddApizrManagerFor<IReqResService>(options => options.WithBaseAddress(uri));
 
             var serviceProvider = services.BuildServiceProvider();
             var fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
@@ -129,7 +129,7 @@ namespace Apizr.Tests
 
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddApizrFor<IHttpBinService>(options => options
+            services.AddApizrManagerFor<IHttpBinService>(options => options
                     .WithAuthenticationHandler(_ => Task.FromResult(token = "token")));
 
             var serviceProvider = services.BuildServiceProvider();
@@ -146,7 +146,7 @@ namespace Apizr.Tests
         {
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddApizrFor<IReqResService>(options => options.WithLogging((HttpTracerMode) HttpTracerMode.ExceptionsOnly, (HttpMessageParts) HttpMessageParts.RequestCookies, LogLevel.Warning));
+            services.AddApizrManagerFor<IReqResService>(options => options.WithLogging((HttpTracerMode) HttpTracerMode.ExceptionsOnly, (HttpMessageParts) HttpMessageParts.RequestCookies, LogLevel.Warning));
 
             var serviceProvider = services.BuildServiceProvider();
             var fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
@@ -163,7 +163,7 @@ namespace Apizr.Tests
 
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddApizrFor<IHttpBinService>(options => options
+            services.AddApizrManagerFor<IHttpBinService>(options => options
                         .WithAuthenticationHandler(_ => Task.FromResult(token = "tokenA")));
 
             var serviceProvider = services.BuildServiceProvider();
@@ -181,7 +181,7 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
 
-            services.AddApizrFor<IReqResService>(config => config
+            services.AddApizrManagerFor<IReqResService>(config => config
                     .WithAkavacheCacheHandler()
                     .AddDelegatingHandler(new FailingRequestHandler()));
 
@@ -232,7 +232,7 @@ namespace Apizr.Tests
             services.AddPolicyRegistry(policyRegistry);
             services.AddMemoryCache();
 
-            services.AddApizrFor<IReqResService>(config => config
+            services.AddApizrManagerFor<IReqResService>(config => config
                     .AddDelegatingHandler(new FailingRequestHandler()));
 
             var serviceProvider = services.BuildServiceProvider();
@@ -255,7 +255,7 @@ namespace Apizr.Tests
 
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddApizrFor<IReqResService>(config => config
+            services.AddApizrManagerFor<IReqResService>(config => config
                     .WithConnectivityHandler(() => isConnected));
 
             var serviceProvider = services.BuildServiceProvider();
@@ -281,7 +281,7 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
             services.AddAutoMapper(_assembly);
-            services.AddApizrFor<IReqResService>(config => config
+            services.AddApizrManagerFor<IReqResService>(config => config
                     .WithRefitSettings(_refitSettings));
 
             var serviceProvider = services.BuildServiceProvider();
@@ -296,7 +296,7 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
             services.AddAutoMapper(_assembly);
-            services.AddApizrFor<IReqResService>(config => config
+            services.AddApizrManagerFor<IReqResService>(config => config
                     .WithRefitSettings(_refitSettings)
                     .WithAutoMapperMappingHandler());
 
@@ -319,7 +319,7 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
             services.AddAutoMapper(_assembly);
-            services.AddApizrFor<IReqResService>(config => config
+            services.AddApizrManagerFor<IReqResService>(config => config
                     .WithRefitSettings(_refitSettings)
                     .WithMappingHandler<AutoMapperMappingHandler>());
 
@@ -343,7 +343,7 @@ namespace Apizr.Tests
             services.AddPolicyRegistry(_policyRegistry);
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
-            services.AddApizrFor<IReqResService>(config => config
+            services.AddApizrManagerFor<IReqResService>(config => config
                     .WithMediation());
 
             var serviceProvider = services.BuildServiceProvider();
@@ -363,7 +363,7 @@ namespace Apizr.Tests
             services.AddPolicyRegistry(_policyRegistry);
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
-            services.AddApizrFor<IReqResService>(config => config
+            services.AddApizrManagerFor<IReqResService>(config => config
                     .WithOptionalMediation());
 
             var serviceProvider = services.BuildServiceProvider();

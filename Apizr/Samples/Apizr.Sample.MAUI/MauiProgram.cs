@@ -47,10 +47,10 @@ namespace Apizr.Sample.MAUI
 
             services.AddApizr(
                 apizrRegistry => apizrRegistry
-                    .AddFor<IReqResService>()
-                    .AddFor<IHttpBinService>(options => options
+                    .AddManagerFor<IReqResService>()
+                    .AddManagerFor<IHttpBinService>(options => options
                         .WithAuthenticationHandler(OnRefreshToken))
-                    .AddCrudFor(typeof(User).Assembly),
+                    .AddCrudManagerFor(typeof(User).Assembly),
 
                 config => config
                     .WithAkavacheCacheHandler()

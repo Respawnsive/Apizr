@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>4.0 | Apizr </title>
+    <title>4.1 (upcoming) | Apizr </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="4.0 | Apizr ">
+    <meta name="title" content="4.1 (upcoming) | Apizr ">
     <meta name="generator" content="docfx 2.59.0.0">
     
     <link rel="shortcut icon" href="resources/favicon.ico">
@@ -70,9 +70,30 @@
         <div class="article row grid">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="40">4.0</h2>
+<h2 id="41-upcoming">4.1 (upcoming)</h2>
 
 <h3 id="apizr">Apizr</h3>
+<ul>
+<li>[Breaking] [Naming] <strong>Apizr static class renamed to ApizrBuilder to match its purpose</strong> and doesn&#39;t conflict with its namespace anymore</li>
+<li>[Breaking] [Naming] <strong>ApizrBuilder&#39;s methods renamed to match their return type</strong> so that we know what we&#39;re about to build (e.g. CreateRegistry, AddManagerFor, CreateManagerFor)</li>
+<li>[Breaking] [Naming] <strong>ApizrRegistry&#39;s methods renamed to match their return type</strong> so that we know what we&#39;re about to get (e.g. GetManagerFor, GetCrudManagerFor, ContainsManagerFor)</li>
+<li>[Fix] [Connectivity] <strong>No more exception</strong> while using Apizr the extended way but <strong>without providing any IConnectivityHandler implementation</strong> with Fusillade priority management enabled</li>
+</ul>
+<h3 id="apizrextensionsmicrosoftdependencyinjection">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<ul>
+<li>[Breaking] [Naming] <strong>Extension methods renamed to match their return type</strong> so that we know what we&#39;re about to build (e.g. AddManagerFor, AddCrudManagerFor)</li>
+<li>[Breaking] [Naming] <strong>ApizrExtendedRegistry&#39;s methods renamed to match their return type</strong> so that we know what we&#39;re about to get (e.g. GetManagerFor, GetCrudManagerFor, ContainsManagerFor)</li>
+</ul>
+<h3 id="apizrintegrationsmediatr">Apizr.Integrations.MediatR</h3>
+<ul>
+<li>[Breaking] [Naming] <strong>ApizrMediationRegistry&#39;s methods renamed to match their return type</strong> so that we know what we&#39;re about to get (e.g. GetMediatorFor, GetCrudMediatorFor, ContainsMediatorFor)</li>
+</ul>
+<h3 id="apizrintegrationsoptional">Apizr.Integrations.Optional</h3>
+<ul>
+<li>[Breaking] [Naming] <strong>ApizrOptionalMediationRegistry&#39;s methods renamed to match their return type</strong> so that we know what we&#39;re about to get (e.g. GetOptionalMediatorFor, GetCrudOptionalMediatorFor, ContainsOptionalMediatorFor)</li>
+</ul>
+<h2 id="40-current">4.0 (current)</h2>
+<h3 id="apizr-1">Apizr</h3>
 <ul>
 <li>[New] [Logging] Now fully relies on <strong>MS Logging extensions</strong></li>
 <li>[New] [Logging] Static fluent configuration now offers a <strong>WithLoggerFactory option</strong> to provide a custom logger factory</li>
@@ -90,7 +111,7 @@
 <li>[New] [Caching] Now we can ask for <strong>clearing request cache before executing</strong></li>
 <li>[New] [Exceptions] Brand new <strong>onException Action parameter to handle it globally</strong> (e.g. user dialog/toast) and let potential cached data return to caller as expected (e.g. refreshing UI)</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-1">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[New] We can now <strong>auto register crud managers for all scanned classes</strong> decorated by crud attributes</li>
 </ul>
@@ -103,7 +124,7 @@
 <li>[Improvement] Now we can <strong>ajust Akavache settings</strong> while configuring</li>
 <li>[New] Now we can register Akavache directly with the brand new <strong>WithAkavacheCacheHandler option</strong></li>
 </ul>
-<h3 id="apizrintegrationsmediatr">Apizr.Integrations.MediatR</h3>
+<h3 id="apizrintegrationsmediatr-1">Apizr.Integrations.MediatR</h3>
 <ul>
 <li>[Breaking] Now <strong>Apizr.Integrations.MediatR targets .Net Standard 2.1</strong> as MediatR v10+ does</li>
 <li>[New] Now we can let Apizr <strong>auto map data</strong> right before sending request and/or after recieving response <strong>by providing types on Apizr mediators Send call</strong></li>
@@ -111,7 +132,7 @@
 <li>[New] Now we can ask for <strong>clearing request cache before executing</strong></li>
 <li>[New] Brand new <strong>onException Action parameter to handle it globally</strong> (e.g. user dialog/toast) and let potential cached data return to caller as expected (e.g. refreshing UI)</li>
 </ul>
-<h3 id="apizrintegrationsoptional">Apizr.Integrations.Optional</h3>
+<h3 id="apizrintegrationsoptional-1">Apizr.Integrations.Optional</h3>
 <ul>
 <li>[Breaking] Now <strong>Apizr.Integrations.Optional targets .Net Standard 2.1</strong> as Apizr.Integrations.MediatR v4+ does</li>
 <li>[New] Now we can let Apizr <strong>auto map data</strong> right before sending request and/or after recieving response <strong>by providing types on Apizr optional mediators Send call</strong></li>
@@ -128,7 +149,7 @@
 <p>This integration project has been dropped out as Shiny no longer provide built-in caching and logging feature anymore. Apizr now either relies on MS Caching extensions, Akavache or MonkeyCache for caching feature and MS Logging extensions for logging feature. You&#39;ll have to provide a connectivity handler if you want Apizr to check it.</p>
 </div>
 <h2 id="30">3.0</h2>
-<h3 id="apizr-1">Apizr</h3>
+<h3 id="apizr-2">Apizr</h3>
 <ul>
 <li>[New] Now <strong>based on Refit v6+ which introduce properties parameter</strong> provided to DelegateHandlers by the Http message. This is used by the new Fusillade priority management package.</li>
 <li>[New] Now <strong>based on Refit v6+ which introduce dynamic headers dictionary parameter</strong> allowing adding multiple dynamic headers in a single parameter thanks to [HeaderCollection] IDictionary&lt;string, string&gt; headers</li>
@@ -146,7 +167,7 @@
 <li>[New] Brand new integration package to use Apizr with Fusillade, only if you need it (no more core references and NuGet dependencies)</li>
 </ul>
 <h2 id="20">2.0</h2>
-<h3 id="apizr-2">Apizr</h3>
+<h3 id="apizr-3">Apizr</h3>
 <ul>
 <li>[New] Now <strong>initialization options are typed to be dedicated</strong> to each api interface manager. It means you can now get a specific configuration for each Apizr manager instance, like for caching, logging, and so on...</li>
 <li>[New] Now <strong>caching could be defined at method level</strong> for CRUD api to. It means you can define specific cache settings for each Read and ReadAll request for each your CRUD model class</li>
@@ -161,32 +182,32 @@
 <li>[BreakingChange] <strong>No more cache and policy attribute decorating CRUD api</strong> by default. You can activate it fluently with the options builder.</li>
 </ul>
 <h2 id="19">1.9</h2>
-<h3 id="apizr-3">Apizr</h3>
+<h3 id="apizr-4">Apizr</h3>
 <ul>
 <li>[New] Handling complex type as CacheKey</li>
 <li>[New] Now we can set Apizr log level within TraceAttribute to manage execution tracing verbosity</li>
 </ul>
-<h3 id="apizrintegrationsmediatr-1">Apizr.Integrations.MediatR</h3>
+<h3 id="apizrintegrationsmediatr-2">Apizr.Integrations.MediatR</h3>
 <ul>
 <li>[Change] Mediation&#39;s ICommand interface renamed to IMediationCommand, avoiding conflict with System.Windows.Input.ICommand</li>
 </ul>
 <h2 id="181">1.8.1</h2>
-<h3 id="apizr-4">Apizr</h3>
+<h3 id="apizr-5">Apizr</h3>
 <ul>
 <li>[Fix] Parsing life span representation as TimeSpan from CacheAttribute</li>
 </ul>
 <h2 id="18">1.8</h2>
-<h3 id="apizrintegrationsoptional-1">Apizr.Integrations.Optional</h3>
+<h3 id="apizrintegrationsoptional-2">Apizr.Integrations.Optional</h3>
 <ul>
 <li>[New] Introducing CatchAsync optional extension method to return result from fetch or cache, no matter of execption handled on the other side by an action callback to inform the user</li>
 </ul>
 <h2 id="17">1.7</h2>
-<h3 id="apizr-5">Apizr</h3>
+<h3 id="apizr-6">Apizr</h3>
 <ul>
 <li>[New] Now we can toggle Fusillade priority management activation</li>
 <li>[New] Now we can provide a base uri factory (e.g. depending on config)</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-1">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-2">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[New] Now we can toggle Fusillade priority management activation</li>
 <li>[New] Now we can provide a base uri factory (e.g. depending on DI resovled settings)</li>
@@ -195,27 +216,27 @@
 <ul>
 <li>[Fix] Preserve attribute added</li>
 </ul>
-<h3 id="apizr-6">Apizr</h3>
+<h3 id="apizr-7">Apizr</h3>
 <ul>
 <li>[New] Now we can provide a custom HttpClientHandler instance</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-2">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-3">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[New] Now we can provide a custom HttpClientHandler instance</li>
 </ul>
 <h2 id="15">1.5</h2>
-<h3 id="apizr-7">Apizr</h3>
+<h3 id="apizr-8">Apizr</h3>
 <ul>
 <li>[Fix] Now the manager waits for task with no result to handle exceptions properly</li>
 </ul>
-<h3 id="apizrintegrationsmediatr-2">Apizr.Integrations.MediatR</h3>
+<h3 id="apizrintegrationsmediatr-3">Apizr.Integrations.MediatR</h3>
 <ul>
 <li>[New] Introducing typed mediator and typed crud mediator for shorter request</li>
 <li>[Fix] Now MediatR handlers are registered correctly when asked from a manual registration context</li>
 <li>[Fix] Mapping null object now works correctly</li>
 <li>[Fix] Now MediatR handlers wait for its handling task to handle exceptions properly</li>
 </ul>
-<h3 id="apizrintegrationsoptional-2">Apizr.Integrations.Optional</h3>
+<h3 id="apizrintegrationsoptional-3">Apizr.Integrations.Optional</h3>
 <ul>
 <li>[New] Introducing typed optional mediator and typed crud optional mediator for shorter request</li>
 <li>[New] Introducing OnResultAsync optional extension method to make all the thing shorter than ever</li>
@@ -224,32 +245,32 @@
 <li>[Fix] Now Optional handlers wait for its handling task to handle exceptions properly</li>
 </ul>
 <h2 id="142">1.4.2</h2>
-<h3 id="apizrintegrationsmediatr-3">Apizr.Integrations.MediatR</h3>
+<h3 id="apizrintegrationsmediatr-4">Apizr.Integrations.MediatR</h3>
 <ul>
 <li>[Fix] Now nuget package as library both reference MediatR.Extensions.Microsoft.DependencyInjection nuget package for assembly version compatibility</li>
 </ul>
 <h2 id="141">1.4.1</h2>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-3">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-4">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[Fix] Now Apizr works with DryIoc and Unity containers, returning a single UserInitiated instance, while waiting for external issues beeing fixed</li>
 </ul>
-<h3 id="apizrintegrationsmediatr-4">Apizr.Integrations.MediatR</h3>
+<h3 id="apizrintegrationsmediatr-5">Apizr.Integrations.MediatR</h3>
 <ul>
 <li>[Workaround] Doc updated to work with MediatR alongside DryIoc or Unity container, while waiting for external issues beeing fixed</li>
 <li>[Fix] No more <code>WithCrudMediation</code> method available but only <code>WithMediation</code></li>
 </ul>
 <h2 id="140">1.4.0</h2>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-4">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-5">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[New] We can now auto register both crud and classic api interfaces</li>
 </ul>
-<h3 id="apizrintegrationsmediatr-5">Apizr.Integrations.MediatR</h3>
+<h3 id="apizrintegrationsmediatr-6">Apizr.Integrations.MediatR</h3>
 <ul>
 <li>[New] We can now use mediation with both crud and classic api interfaces</li>
 <li>[New] We can now use execution priority with both crud and classic api mediation</li>
 <li>[BreakingChange] <code>WithCrudMediation</code> renamed to <code>WithMediation</code></li>
 </ul>
-<h3 id="apizrintegrationsoptional-3">Apizr.Integrations.Optional</h3>
+<h3 id="apizrintegrationsoptional-4">Apizr.Integrations.Optional</h3>
 <ul>
 <li>[New] We can now use optional mediation with both crud and classic api interfaces</li>
 <li>[New] We can now use execution priority with both crud and classic api optional mediation</li>
@@ -264,22 +285,22 @@
 <li>[New] We can now use auto mapping with both crud and classic api mediation and optional mediation </li>
 </ul>
 <h2 id="130">1.3.0</h2>
-<h3 id="apizr-8">Apizr</h3>
+<h3 id="apizr-9">Apizr</h3>
 <ul>
 <li>[New] We can now define mapped model entity type from the <code>CrudEntityAttribute</code> above api entities for automatic crud registration</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-5">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-6">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[New] We can now provide an IMappingHandler implementation to the options builder for auto mapping</li>
 <li>[New] We can now decorate model entities with <code>MappedCrudEntityAttribute</code> to define mapped crud settings for automatic crud registration</li>
 <li>[New] We can now associate api and model entities with <code>MappedEntity&lt;TModelEntity, TApiEntity&gt;</code> during manual crud registration</li>
 </ul>
-<h3 id="apizrintegrationsmediatr-6">Apizr.Integrations.MediatR</h3>
+<h3 id="apizrintegrationsmediatr-7">Apizr.Integrations.MediatR</h3>
 <ul>
 <li>[Fix] Cacheable ReadQuery now use the key value when defining cache key</li>
 <li>[Fix] Auto handling now works as expected with manual crud registration</li>
 </ul>
-<h3 id="apizrintegrationsoptional-4">Apizr.Integrations.Optional</h3>
+<h3 id="apizrintegrationsoptional-5">Apizr.Integrations.Optional</h3>
 <ul>
 <li>[Fix] Cacheable ReadOptionalQuery now use the key value when defining cache key</li>
 </ul>
@@ -288,12 +309,12 @@
 <li>[New] Brand new integration with AutoMapper, to let Apizr handle crud entity mapping during mediation handling</li>
 </ul>
 <h2 id="120">1.2.0</h2>
-<h3 id="apizr-9">Apizr</h3>
+<h3 id="apizr-10">Apizr</h3>
 <ul>
 <li>[BreakingChange] Apizr instantiation/registration methods names standardized to Apizr.For and Apizr.CrudFor</li>
 <li>[New] Introducing ICrudApi service to manage standard CRUD api calls built-in</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-6">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-7">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[BreakingChange] Apizr instantiation/registration methods names standardized to services.AddApizrFor and services.AddApizrCrudFor</li>
 <li>[New] Enabling ICrudApi auto registration feature with CrudEntityAttribute and assembly scanning</li>
@@ -303,20 +324,20 @@
 <li>[BreakingChange] Apizr instantiation/registration methods names standardized to services.UseApizrFor and services.UseApizrCrudFor</li>
 <li>[New] Enabling ICrudApi auto registration feature with CrudEntityAttribute and assembly scanning</li>
 </ul>
-<h3 id="apizrintegrationsmediatr-7">Apizr.Integrations.MediatR</h3>
+<h3 id="apizrintegrationsmediatr-8">Apizr.Integrations.MediatR</h3>
 <ul>
 <li>[New] Brand new integration with MediatR, to let Apizr handle crud requests execution with mediation</li>
 </ul>
-<h3 id="apizrintegrationsoptional-5">Apizr.Integrations.Optional</h3>
+<h3 id="apizrintegrationsoptional-6">Apizr.Integrations.Optional</h3>
 <ul>
 <li>[New] Brand new integration with Optional, to let Apizr handle crud requests execution with mediation and optional result</li>
 </ul>
 <h2 id="110">1.1.0</h2>
-<h3 id="apizr-10">Apizr</h3>
+<h3 id="apizr-11">Apizr</h3>
 <ul>
 <li>[New] Aibility to manage generic web apis by setting base address with the options builder</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-7">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-8">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[New] Same as Apizr</li>
 </ul>

@@ -132,10 +132,10 @@ namespace Apizr.Sample.Console
                 //    .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current)));
                 ////.WithLogging());
 
-                var apizrRegistry = Apizr.Create(
+                var apizrRegistry = ApizrBuilder.CreateRegistry(
                     registry => registry
-                        .AddFor<IReqResService>()//options => options.WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.ResponseAll, LogLevel.Trace, LogLevel.Information, LogLevel.Critical))
-                        .AddCrudFor<User, int, PagedResult<User>>(options => options.WithBaseAddress("https://reqres.in/api/users")),
+                        .AddManagerFor<IReqResService>()//options => options.WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.ResponseAll, LogLevel.Trace, LogLevel.Information, LogLevel.Critical))
+                        .AddCrudManagerFor<User, int, PagedResult<User>>(options => options.WithBaseAddress("https://reqres.in/api/users")),
 
                     config => config//.WithConnectivityHandler(() => false)
                         .WithPriorityManagement()
@@ -143,9 +143,9 @@ namespace Apizr.Sample.Console
                         .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
                         .WithLoggerFactory(() => lazyLoggerFactory.Value));
 
-                _reqResManager = apizrRegistry.GetFor<IReqResService>();
+                _reqResManager = apizrRegistry.GetManagerFor<IReqResService>();
 
-                _userManager = apizrRegistry.GetCrudFor<User, int, PagedResult<User>>();
+                _userManager = apizrRegistry.GetCrudManagerFor<User, int, PagedResult<User>>();
 
 
                 System.Console.WriteLine("");
@@ -169,13 +169,13 @@ namespace Apizr.Sample.Console
                         {
                             services.AddApizr(
                                 registry => registry
-                                    .AddFor<IReqResService>(options => options
+                                    .AddManagerFor<IReqResService>(options => options
                                         .WithHttpClientHandler(new HttpClientHandler
                                         {
                                             AutomaticDecompression = DecompressionMethods.All,
                                             CookieContainer = CookieContainer
                                         }))
-                                    .AddCrudFor(optionsBuilder => optionsBuilder
+                                    .AddCrudManagerFor(optionsBuilder => optionsBuilder
                                         .WithLogging(), typeof(User)),
 
                                 config => config
@@ -225,7 +225,7 @@ namespace Apizr.Sample.Console
                             if (configChoice == 3)
                             {
                                 // Classic auto assembly detection and registration and handling with mediation
-                                services.AddApizrFor(
+                                services.AddApizrManagerFor(
                                     optionsBuilder => optionsBuilder
                                         .WithCacheHandler<AkavacheCacheHandler>()
                                         .WithMediation()
@@ -236,7 +236,7 @@ namespace Apizr.Sample.Console
                                 //services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All));
 
                                 // Crud auto assembly detection, registration and handling with mediation
-                                services.AddApizrCrudFor(
+                                services.AddApizrCrudManagerFor(
                                     optionsBuilder => optionsBuilder
                                         .WithCacheHandler<AkavacheCacheHandler>()
                                         .WithMediation()
@@ -248,14 +248,14 @@ namespace Apizr.Sample.Console
                                 if (configChoice == 4)
                                 {
                                     // Classic auto assembly detection and registration and handling with both mediation and optional mediation
-                                    services.AddApizrFor(
+                                    services.AddApizrManagerFor(
                                         optionsBuilder =>
                                             optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation()
                                                 .WithOptionalMediation()
                                                 .WithLogging(), typeof(User));
 
                                     // Auto assembly detection, registration and handling with both mediation and optional mediation
-                                    services.AddApizrCrudFor(
+                                    services.AddApizrCrudManagerFor(
                                         optionsBuilder =>
                                             optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation()
                                                 .WithOptionalMediation()
@@ -268,7 +268,7 @@ namespace Apizr.Sample.Console
                                     //services.AddApizrCrudFor<MappedEntity<UserInfos, UserDetails>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithCrudOptionalMediation().WithMappingHandler<AutoMapperMappingHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All));
 
                                     // Classic auto assembly detection and registration and handling with both mediation and optional mediation
-                                    services.AddApizrFor(
+                                    services.AddApizrManagerFor(
                                         optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>()
                                             .WithMediation()
                                             .WithOptionalMediation()
@@ -277,7 +277,7 @@ namespace Apizr.Sample.Console
                                         typeof(Program));
 
                                     // Auto assembly detection, registration and handling with mediation, optional mediation and mapping
-                                    services.AddApizrCrudFor(
+                                    services.AddApizrCrudManagerFor(
                                         optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>()
                                             .WithMediation()
                                             .WithOptionalMediation()

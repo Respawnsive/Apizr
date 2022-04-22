@@ -44,10 +44,8 @@ items:
   - Apizr.Configuring.Common.IApizrGlobalCommonOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithConnectivityHandler(System.Func{System.Boolean})
   - Apizr.Configuring.Common.IApizrGlobalCommonOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithCacheHandler(Apizr.Caching.ICacheHandler)
   - Apizr.Configuring.Common.IApizrGlobalCommonOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithMappingHandler(Apizr.Mapping.IMappingHandler)
-  - Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
-  - Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
-  - Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithBaseAddress(System.String)
-  - Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithBaseAddress(System.Uri)
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithLogging(System.Func{System.IServiceProvider,Apizr.Logging.HttpTracerMode},System.Func{System.IServiceProvider,Apizr.Logging.HttpMessageParts},System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]})
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithHttpClientHandler(System.Func{System.IServiceProvider,System.Net.Http.HttpClientHandler})
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.ConfigureHttpClientBuilder(System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder})
@@ -57,6 +55,8 @@ items:
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithAuthenticationHandler``2(System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}},System.Linq.Expressions.Expression{System.Func{{TTokenService},System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.ApizrOptions
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithBaseAddress(System.String)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithBaseAddress(System.Uri)
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithHttpClientHandler(System.Net.Http.HttpClientHandler)
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
@@ -937,21 +937,21 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
-  commentId: M:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder{`0,`1}.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
-  parent: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}
-  definition: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{`0,`1}.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}
+  definition: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
   name: WithBaseAddress(Func<IServiceProvider, String>)
-  nameWithType: IApizrExtendedProperOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress(Func<IServiceProvider, String>)
-  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress(System.Func<System.IServiceProvider, System.String>)
-  nameWithType.vb: IApizrExtendedProperOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress(Func(Of IServiceProvider, String))
-  fullName.vb: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress(System.Func(Of System.IServiceProvider, System.String))
+  nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress(Func<IServiceProvider, String>)
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress(System.Func<System.IServiceProvider, System.String>)
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress(Func(Of IServiceProvider, String))
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress(System.Func(Of System.IServiceProvider, System.String))
   name.vb: WithBaseAddress(Func(Of IServiceProvider, String))
   spec.csharp:
-  - uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
     name: WithBaseAddress
-    nameWithType: IApizrExtendedProperOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress
-    fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress
+    nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress
   - name: (
     nameWithType: (
     fullName: (
@@ -983,10 +983,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
     name: WithBaseAddress
-    nameWithType: IApizrExtendedProperOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress
-    fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress
+    nameWithType: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress
   - name: (
     nameWithType: (
     fullName: (
@@ -1017,21 +1017,21 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
-  commentId: M:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder{`0,`1}.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
-  parent: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}
-  definition: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{`0,`1}.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}
+  definition: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
   name: WithBaseAddress(Func<IServiceProvider, Uri>)
-  nameWithType: IApizrExtendedProperOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress(Func<IServiceProvider, Uri>)
-  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress(System.Func<System.IServiceProvider, System.Uri>)
-  nameWithType.vb: IApizrExtendedProperOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress(Func(Of IServiceProvider, Uri))
-  fullName.vb: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress(System.Func(Of System.IServiceProvider, System.Uri))
+  nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress(Func<IServiceProvider, Uri>)
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress(System.Func<System.IServiceProvider, System.Uri>)
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress(Func(Of IServiceProvider, Uri))
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress(System.Func(Of System.IServiceProvider, System.Uri))
   name.vb: WithBaseAddress(Func(Of IServiceProvider, Uri))
   spec.csharp:
-  - uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
     name: WithBaseAddress
-    nameWithType: IApizrExtendedProperOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress
-    fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress
+    nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress
   - name: (
     nameWithType: (
     fullName: (
@@ -1063,10 +1063,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
     name: WithBaseAddress
-    nameWithType: IApizrExtendedProperOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress
-    fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress
+    nameWithType: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress
   - name: (
     nameWithType: (
     fullName: (
@@ -1094,88 +1094,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithBaseAddress(System.String)
-  commentId: M:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{`0,`1}.WithBaseAddress(System.String)
-  parent: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}
-  definition: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithBaseAddress(System.String)
-  name: WithBaseAddress(String)
-  nameWithType: IApizrGlobalProperOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress(String)
-  fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress(System.String)
-  nameWithType.vb: IApizrGlobalProperOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress(String)
-  fullName.vb: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress(System.String)
-  spec.csharp:
-  - uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithBaseAddress(System.String)
-    name: WithBaseAddress
-    nameWithType: IApizrGlobalProperOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress
-    fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithBaseAddress(System.String)
-    name: WithBaseAddress
-    nameWithType: IApizrGlobalProperOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress
-    fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithBaseAddress(System.Uri)
-  commentId: M:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{`0,`1}.WithBaseAddress(System.Uri)
-  parent: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}
-  definition: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithBaseAddress(System.Uri)
-  name: WithBaseAddress(Uri)
-  nameWithType: IApizrGlobalProperOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress(Uri)
-  fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress(System.Uri)
-  nameWithType.vb: IApizrGlobalProperOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress(Uri)
-  fullName.vb: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress(System.Uri)
-  spec.csharp:
-  - uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithBaseAddress(System.Uri)
-    name: WithBaseAddress
-    nameWithType: IApizrGlobalProperOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress
-    fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Uri
-    name: Uri
-    nameWithType: Uri
-    fullName: System.Uri
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithBaseAddress(System.Uri)
-    name: WithBaseAddress
-    nameWithType: IApizrGlobalProperOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress
-    fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Uri
-    name: Uri
-    nameWithType: Uri
-    fullName: System.Uri
-    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -2168,6 +2086,88 @@ references:
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.ApizrOptions
   nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).ApizrOptions
   fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).ApizrOptions
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithBaseAddress(System.String)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithBaseAddress(System.String)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBaseAddress(System.String)
+  name: WithBaseAddress(String)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress(String)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress(System.String)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress(String)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress(System.String)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBaseAddress(System.String)
+    name: WithBaseAddress
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBaseAddress(System.String)
+    name: WithBaseAddress
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithBaseAddress(System.Uri)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithBaseAddress(System.Uri)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBaseAddress(System.Uri)
+  name: WithBaseAddress(Uri)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress(Uri)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress(System.Uri)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress(Uri)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress(System.Uri)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBaseAddress(System.Uri)
+    name: WithBaseAddress
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>.WithBaseAddress
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBaseAddress(System.Uri)
+    name: WithBaseAddress
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder).WithBaseAddress
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}.WithHttpClientHandler(System.Net.Http.HttpClientHandler)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithHttpClientHandler(System.Net.Http.HttpClientHandler)
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}
@@ -3696,20 +3696,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
-  commentId: M:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
   isExternal: true
   name: WithBaseAddress(Func<IServiceProvider, String>)
-  nameWithType: IApizrExtendedProperOptionsBuilder<TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder>.WithBaseAddress(Func<IServiceProvider, String>)
-  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder<TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder>.WithBaseAddress(System.Func<System.IServiceProvider, System.String>)
-  nameWithType.vb: IApizrExtendedProperOptionsBuilder(Of TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder).WithBaseAddress(Func(Of IServiceProvider, String))
-  fullName.vb: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder(Of TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder).WithBaseAddress(System.Func(Of System.IServiceProvider, System.String))
+  nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBaseAddress(Func<IServiceProvider, String>)
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBaseAddress(System.Func<System.IServiceProvider, System.String>)
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBaseAddress(Func(Of IServiceProvider, String))
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBaseAddress(System.Func(Of System.IServiceProvider, System.String))
   name.vb: WithBaseAddress(Func(Of IServiceProvider, String))
   spec.csharp:
-  - uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
     name: WithBaseAddress
-    nameWithType: IApizrExtendedProperOptionsBuilder<TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder>.WithBaseAddress
-    fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder<TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder>.WithBaseAddress
+    nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBaseAddress
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBaseAddress
   - name: (
     nameWithType: (
     fullName: (
@@ -3741,10 +3741,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
     name: WithBaseAddress
-    nameWithType: IApizrExtendedProperOptionsBuilder(Of TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder).WithBaseAddress
-    fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder(Of TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder).WithBaseAddress
+    nameWithType: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBaseAddress
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBaseAddress
   - name: (
     nameWithType: (
     fullName: (
@@ -3775,21 +3775,21 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}
-  commentId: T:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder{`0,`1}
-  parent: Apizr.Extending.Configuring.Proper
-  definition: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2
-  name: IApizrExtendedProperOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>
-  nameWithType: IApizrExtendedProperOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>
-  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>
-  nameWithType.vb: IApizrExtendedProperOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder)
-  fullName.vb: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder)
-  name.vb: IApizrExtendedProperOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder)
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}
+  commentId: T:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{`0,`1}
+  parent: Apizr.Extending.Configuring.Shared
+  definition: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2
+  name: IApizrExtendedSharedOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>
+  nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder)
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder)
+  name.vb: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder)
   spec.csharp:
-  - uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2
-    name: IApizrExtendedProperOptionsBuilder
-    nameWithType: IApizrExtendedProperOptionsBuilder
-    fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2
+    name: IApizrExtendedSharedOptionsBuilder
+    nameWithType: IApizrExtendedSharedOptionsBuilder
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder
   - name: <
     nameWithType: <
     fullName: <
@@ -3806,10 +3806,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2
-    name: IApizrExtendedProperOptionsBuilder
-    nameWithType: IApizrExtendedProperOptionsBuilder
-    fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2
+    name: IApizrExtendedSharedOptionsBuilder
+    nameWithType: IApizrExtendedSharedOptionsBuilder
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
@@ -3825,20 +3825,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
-  commentId: M:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
   isExternal: true
   name: WithBaseAddress(Func<IServiceProvider, Uri>)
-  nameWithType: IApizrExtendedProperOptionsBuilder<TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder>.WithBaseAddress(Func<IServiceProvider, Uri>)
-  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder<TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder>.WithBaseAddress(System.Func<System.IServiceProvider, System.Uri>)
-  nameWithType.vb: IApizrExtendedProperOptionsBuilder(Of TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder).WithBaseAddress(Func(Of IServiceProvider, Uri))
-  fullName.vb: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder(Of TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder).WithBaseAddress(System.Func(Of System.IServiceProvider, System.Uri))
+  nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBaseAddress(Func<IServiceProvider, Uri>)
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBaseAddress(System.Func<System.IServiceProvider, System.Uri>)
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBaseAddress(Func(Of IServiceProvider, Uri))
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBaseAddress(System.Func(Of System.IServiceProvider, System.Uri))
   name.vb: WithBaseAddress(Func(Of IServiceProvider, Uri))
   spec.csharp:
-  - uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
     name: WithBaseAddress
-    nameWithType: IApizrExtendedProperOptionsBuilder<TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder>.WithBaseAddress
-    fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder<TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder>.WithBaseAddress
+    nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBaseAddress
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBaseAddress
   - name: (
     nameWithType: (
     fullName: (
@@ -3870,10 +3870,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
     name: WithBaseAddress
-    nameWithType: IApizrExtendedProperOptionsBuilder(Of TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder).WithBaseAddress
-    fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder(Of TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder).WithBaseAddress
+    nameWithType: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBaseAddress
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBaseAddress
   - name: (
     nameWithType: (
     fullName: (
@@ -3901,136 +3901,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithBaseAddress(System.String)
-  commentId: M:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithBaseAddress(System.String)
-  isExternal: true
-  name: WithBaseAddress(String)
-  nameWithType: IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>.WithBaseAddress(String)
-  fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>.WithBaseAddress(System.String)
-  nameWithType.vb: IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder).WithBaseAddress(String)
-  fullName.vb: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder).WithBaseAddress(System.String)
-  spec.csharp:
-  - uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithBaseAddress(System.String)
-    name: WithBaseAddress
-    nameWithType: IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>.WithBaseAddress
-    fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>.WithBaseAddress
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithBaseAddress(System.String)
-    name: WithBaseAddress
-    nameWithType: IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder).WithBaseAddress
-    fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder).WithBaseAddress
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}
-  commentId: T:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{`0,`1}
-  parent: Apizr.Configuring.Proper
-  definition: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2
-  name: IApizrGlobalProperOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>
-  nameWithType: IApizrGlobalProperOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>
-  fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>
-  nameWithType.vb: IApizrGlobalProperOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder)
-  fullName.vb: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder)
-  name.vb: IApizrGlobalProperOptionsBuilderBase(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder)
-  spec.csharp:
-  - uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2
-    name: IApizrGlobalProperOptionsBuilderBase
-    nameWithType: IApizrGlobalProperOptionsBuilderBase
-    fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TApizrExtendedOptions
-    nameWithType: TApizrExtendedOptions
-    fullName: TApizrExtendedOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApizrExtendedOptionsBuilder
-    nameWithType: TApizrExtendedOptionsBuilder
-    fullName: TApizrExtendedOptionsBuilder
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2
-    name: IApizrGlobalProperOptionsBuilderBase
-    nameWithType: IApizrGlobalProperOptionsBuilderBase
-    fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TApizrExtendedOptions
-    nameWithType: TApizrExtendedOptions
-    fullName: TApizrExtendedOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApizrExtendedOptionsBuilder
-    nameWithType: TApizrExtendedOptionsBuilder
-    fullName: TApizrExtendedOptionsBuilder
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithBaseAddress(System.Uri)
-  commentId: M:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithBaseAddress(System.Uri)
-  isExternal: true
-  name: WithBaseAddress(Uri)
-  nameWithType: IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>.WithBaseAddress(Uri)
-  fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>.WithBaseAddress(System.Uri)
-  nameWithType.vb: IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder).WithBaseAddress(Uri)
-  fullName.vb: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder).WithBaseAddress(System.Uri)
-  spec.csharp:
-  - uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithBaseAddress(System.Uri)
-    name: WithBaseAddress
-    nameWithType: IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>.WithBaseAddress
-    fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>.WithBaseAddress
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Uri
-    name: Uri
-    nameWithType: Uri
-    fullName: System.Uri
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithBaseAddress(System.Uri)
-    name: WithBaseAddress
-    nameWithType: IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder).WithBaseAddress
-    fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder).WithBaseAddress
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Uri
-    name: Uri
-    nameWithType: Uri
-    fullName: System.Uri
-    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -4220,56 +4090,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{{TApizrExtendedOptions},{TApizrExtendedOptionsBuilder}}
-  commentId: T:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{`0,`1}
-  parent: Apizr.Extending.Configuring.Shared
-  definition: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2
-  name: IApizrExtendedSharedOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>
-  nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>
-  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>
-  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder)
-  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder)
-  name.vb: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedOptions, TApizrExtendedOptionsBuilder)
-  spec.csharp:
-  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2
-    name: IApizrExtendedSharedOptionsBuilder
-    nameWithType: IApizrExtendedSharedOptionsBuilder
-    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TApizrExtendedOptions
-    nameWithType: TApizrExtendedOptions
-    fullName: TApizrExtendedOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApizrExtendedOptionsBuilder
-    nameWithType: TApizrExtendedOptionsBuilder
-    fullName: TApizrExtendedOptionsBuilder
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2
-    name: IApizrExtendedSharedOptionsBuilder
-    nameWithType: IApizrExtendedSharedOptionsBuilder
-    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TApizrExtendedOptions
-    nameWithType: TApizrExtendedOptions
-    fullName: TApizrExtendedOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApizrExtendedOptionsBuilder
-    nameWithType: TApizrExtendedOptionsBuilder
-    fullName: TApizrExtendedOptionsBuilder
   - name: )
     nameWithType: )
     fullName: )
@@ -5113,6 +4933,86 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBaseAddress(System.String)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBaseAddress(System.String)
+  isExternal: true
+  name: WithBaseAddress(String)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithBaseAddress(String)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithBaseAddress(System.String)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithBaseAddress(String)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithBaseAddress(System.String)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBaseAddress(System.String)
+    name: WithBaseAddress
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithBaseAddress
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithBaseAddress
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBaseAddress(System.String)
+    name: WithBaseAddress
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithBaseAddress
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithBaseAddress
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBaseAddress(System.Uri)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBaseAddress(System.Uri)
+  isExternal: true
+  name: WithBaseAddress(Uri)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithBaseAddress(Uri)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithBaseAddress(System.Uri)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithBaseAddress(Uri)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithBaseAddress(System.Uri)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBaseAddress(System.Uri)
+    name: WithBaseAddress
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithBaseAddress
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithBaseAddress
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBaseAddress(System.Uri)
+    name: WithBaseAddress
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithBaseAddress
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithBaseAddress
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHttpClientHandler(System.Net.Http.HttpClientHandler)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHttpClientHandler(System.Net.Http.HttpClientHandler)
   isExternal: true
@@ -5896,112 +5796,6 @@ references:
   name: Apizr.Configuring.Common
   nameWithType: Apizr.Configuring.Common
   fullName: Apizr.Configuring.Common
-- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2
-  commentId: T:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2
-  name: IApizrExtendedProperOptionsBuilder<TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder>
-  nameWithType: IApizrExtendedProperOptionsBuilder<TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder>
-  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder<TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder>
-  nameWithType.vb: IApizrExtendedProperOptionsBuilder(Of TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder)
-  fullName.vb: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder(Of TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder)
-  name.vb: IApizrExtendedProperOptionsBuilder(Of TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder)
-  spec.csharp:
-  - uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2
-    name: IApizrExtendedProperOptionsBuilder
-    nameWithType: IApizrExtendedProperOptionsBuilder
-    fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TApizrExtendedProperOptions
-    nameWithType: TApizrExtendedProperOptions
-    fullName: TApizrExtendedProperOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApizrExtendedProperOptionsBuilder
-    nameWithType: TApizrExtendedProperOptionsBuilder
-    fullName: TApizrExtendedProperOptionsBuilder
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2
-    name: IApizrExtendedProperOptionsBuilder
-    nameWithType: IApizrExtendedProperOptionsBuilder
-    fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TApizrExtendedProperOptions
-    nameWithType: TApizrExtendedProperOptions
-    fullName: TApizrExtendedProperOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApizrExtendedProperOptionsBuilder
-    nameWithType: TApizrExtendedProperOptionsBuilder
-    fullName: TApizrExtendedProperOptionsBuilder
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.Configuring.Proper
-  commentId: N:Apizr.Extending.Configuring.Proper
-  name: Apizr.Extending.Configuring.Proper
-  nameWithType: Apizr.Extending.Configuring.Proper
-  fullName: Apizr.Extending.Configuring.Proper
-- uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2
-  commentId: T:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2
-  name: IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>
-  nameWithType: IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>
-  fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>
-  nameWithType.vb: IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder)
-  fullName.vb: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder)
-  name.vb: IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder)
-  spec.csharp:
-  - uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2
-    name: IApizrGlobalProperOptionsBuilderBase
-    nameWithType: IApizrGlobalProperOptionsBuilderBase
-    fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TApizrProperOptions
-    nameWithType: TApizrProperOptions
-    fullName: TApizrProperOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApizrProperOptionsBuilder
-    nameWithType: TApizrProperOptionsBuilder
-    fullName: TApizrProperOptionsBuilder
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2
-    name: IApizrGlobalProperOptionsBuilderBase
-    nameWithType: IApizrGlobalProperOptionsBuilderBase
-    fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TApizrProperOptions
-    nameWithType: TApizrProperOptions
-    fullName: TApizrProperOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApizrProperOptionsBuilder
-    nameWithType: TApizrProperOptionsBuilder
-    fullName: TApizrProperOptionsBuilder
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Proper
-  commentId: N:Apizr.Configuring.Proper
-  name: Apizr.Configuring.Proper
-  nameWithType: Apizr.Configuring.Proper
-  fullName: Apizr.Configuring.Proper
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2
   commentId: T:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2
   name: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>

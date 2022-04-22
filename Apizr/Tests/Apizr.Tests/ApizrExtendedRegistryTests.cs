@@ -142,17 +142,55 @@ namespace Apizr.Tests
         [Fact]
         public void Calling_WithBaseAddress_Should_Set_BaseAddress()
         {
-            var uri = new Uri("http://api.com");
+            var attributeUri = "https://reqres.in/api";
+            var uri1 = new Uri("http://uri1.com");
+            var uri2 = new Uri("http://uri2.com");
 
+            // By attribute
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
-                .AddManagerFor<IReqResService>(options => options.WithBaseAddress(uri)));
+                .AddManagerFor<IReqResService>());
 
             var serviceProvider = services.BuildServiceProvider();
             var fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
 
-            fixture.Options.BaseAddress.Should().Be(uri);
+            fixture.Options.BaseAddress.Should().Be(attributeUri);
+
+            // By proper option overriding attribute
+            services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddApizr(registry => registry
+                .AddManagerFor<IReqResService>(options => options.WithBaseAddress(uri1)));
+
+            serviceProvider = services.BuildServiceProvider();
+            fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
+
+            fixture.Options.BaseAddress.Should().Be(uri1);
+
+            // By attribute overriding common option
+            services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddApizr(registry => registry
+                    .AddManagerFor<IReqResService>(),
+                config => config.WithBaseAddress(uri1));
+
+            serviceProvider = services.BuildServiceProvider();
+            fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
+
+            fixture.Options.BaseAddress.Should().Be(attributeUri);
+
+            // By proper option overriding proper option and attribute
+            services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddApizr(registry => registry
+                .AddManagerFor<IReqResService>(options => options.WithBaseAddress(uri2)),
+                config => config.WithBaseAddress(uri1));
+
+            serviceProvider = services.BuildServiceProvider();
+            fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
+
+            fixture.Options.BaseAddress.Should().Be(uri2);
         }
 
         [Fact]

@@ -5,7 +5,6 @@ items:
   id: IApizrProperOptionsBase
   parent: Apizr.Configuring.Proper
   children:
-  - Apizr.Configuring.Proper.IApizrProperOptionsBase.BaseAddress
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
@@ -31,6 +30,7 @@ items:
       Public Interface IApizrProperOptionsBase
           Inherits IApizrSharedOptionsBase
   inheritedMembers:
+  - Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.TrafficVerbosity
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
@@ -73,37 +73,6 @@ items:
   - get
   modifiers.vb:
   - ReadOnly
-- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.BaseAddress
-  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.BaseAddress
-  id: BaseAddress
-  parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
-  langs:
-  - csharp
-  - vb
-  name: BaseAddress
-  nameWithType: IApizrProperOptionsBase.BaseAddress
-  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.BaseAddress
-  type: Property
-  source:
-    id: BaseAddress
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\IApizrProperOptionsBase.cs
-    startLine: 19
-  assemblies:
-  - Apizr
-  namespace: Apizr.Configuring.Proper
-  summary: "\nBase address\n"
-  example: []
-  syntax:
-    content: Uri BaseAddress { get; }
-    parameters: []
-    return:
-      type: System.Uri
-    content.vb: ReadOnly Property BaseAddress As Uri
-  overload: Apizr.Configuring.Proper.IApizrProperOptionsBase.BaseAddress*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
 - uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
   commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
   id: PolicyRegistryKeys
@@ -118,7 +87,7 @@ items:
   source:
     id: PolicyRegistryKeys
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\IApizrProperOptionsBase.cs
-    startLine: 24
+    startLine: 19
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -149,7 +118,7 @@ items:
   source:
     id: Logger
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\IApizrProperOptionsBase.cs
-    startLine: 29
+    startLine: 24
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -172,6 +141,12 @@ references:
   name: Apizr.Configuring.Proper
   nameWithType: Apizr.Configuring.Proper
   fullName: Apizr.Configuring.Proper
+- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
+  parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
+  name: BaseAddress
+  nameWithType: IApizrSharedOptionsBase.BaseAddress
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
 - uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode
   commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode
   parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
@@ -355,18 +330,6 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.BaseAddress*
-  commentId: Overload:Apizr.Configuring.Proper.IApizrProperOptionsBase.BaseAddress
-  name: BaseAddress
-  nameWithType: IApizrProperOptionsBase.BaseAddress
-  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.BaseAddress
-- uid: System.Uri
-  commentId: T:System.Uri
-  parent: System
-  isExternal: true
-  name: Uri
-  nameWithType: Uri
-  fullName: System.Uri
 - uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys*
   commentId: Overload:Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
   name: PolicyRegistryKeys

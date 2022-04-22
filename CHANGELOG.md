@@ -7,6 +7,7 @@
 - [Breaking] [Naming] **ApizrBuilder's methods renamed to match their return type** so that we know what we're about to build (e.g. CreateRegistry, AddManagerFor, CreateManagerFor)
 - [Breaking] [Naming] **ApizrRegistry's methods renamed to match their return type** so that we know what we're about to get (e.g. GetManagerFor, GetCrudManagerFor, ContainsManagerFor)
 - [Fix] [Connectivity] **No more exception** while using Apizr the extended way but **without providing any IConnectivityHandler implementation** with Fusillade priority management enabled
+- [Improvement] [Address] Now we can **set base address at both common and proper levels** so we can define a base address shared by all apis, but also a specific one if needed
 
 ### Apizr.Extensions.Microsoft.DependencyInjection
 

@@ -110,16 +110,28 @@ namespace Apizr.Tests
         [Fact]
         public void Calling_WithBaseAddress_Should_Set_BaseAddress()
         {
-            var uri = new Uri("http://api.com");
+            var attributeUri = "https://reqres.in/api";
+            var uri1 = new Uri("http://uri1.com");
 
+            // By attribute
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddApizrManagerFor<IReqResService>(options => options.WithBaseAddress(uri));
+            services.AddApizrManagerFor<IReqResService>();
 
             var serviceProvider = services.BuildServiceProvider();
             var fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
 
-            fixture.Options.BaseAddress.Should().Be(uri);
+            fixture.Options.BaseAddress.Should().Be(attributeUri);
+
+            // By proper option overriding attribute
+            services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddApizrManagerFor<IReqResService>(options => options.WithBaseAddress(uri1));
+
+            serviceProvider = services.BuildServiceProvider();
+            fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
+
+            fixture.Options.BaseAddress.Should().Be(uri1);
         }
 
         [Fact]

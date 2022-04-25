@@ -20,7 +20,7 @@ namespace Apizr.Configuring.Proper
             params LogLevel[] logLevels) : base(sharedOptions, webApiType, assemblyPolicyRegistryKeys,
             webApiPolicyRegistryKeys)
         {
-            BaseAddressFactory = () => baseAddress ?? sharedOptions.BaseAddressFactory.Invoke();
+            BaseAddressFactory = () => baseAddress ?? sharedOptions.BaseAddressFactory?.Invoke();
             HttpTracerModeFactory = () => httpTracerMode ?? sharedOptions.HttpTracerModeFactory.Invoke();
             TrafficVerbosityFactory = () => trafficVerbosity ?? sharedOptions.TrafficVerbosityFactory.Invoke();
             LogLevelsFactory = () => logLevels?.Any() == true ? logLevels : sharedOptions.LogLevelsFactory.Invoke();

@@ -117,6 +117,9 @@ namespace Apizr.Tests
                     .WithAkavacheCacheHandler()
                     .AddDelegatingHandler(new FailingRequestHandler()));
 
+            // Clearing cache
+            await reqResManager.ClearCacheAsync();
+
             // Defining a throwing request
             Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.BadRequest));
 

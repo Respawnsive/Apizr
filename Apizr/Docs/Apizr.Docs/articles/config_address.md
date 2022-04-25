@@ -58,4 +58,6 @@ It could help you to resolve the setting at runtime:
 options => options.WithBaseAddress(serviceProvider => serviceProvider.GetRequiredService<IYourSettingsService>().YourBaseAddress))
 ```
 
+The ```WithBaseAddress``` option is available at both common and specific configuration level, meanning that you can share a base address with several api interfaces and/or set a specific one for some others.
+
 ***

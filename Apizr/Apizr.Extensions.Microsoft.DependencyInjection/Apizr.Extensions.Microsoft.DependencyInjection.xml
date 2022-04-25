@@ -146,29 +146,10 @@
             Type of the manager
             </summary>
         </member>
-        <member name="P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.BaseAddressFactory">
-            <summary>
-            Base address factory
-            </summary>
-        </member>
         <member name="P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.LoggerFactory">
             <summary>
             The Logger factory
             </summary>
-        </member>
-        <member name="M:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})">
-            <summary>
-            Define your web api base address (could be defined with WebApiAttribute)
-            </summary>
-            <param name="baseAddressFactory">Your web api base address factory</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})">
-            <summary>
-            Define your web api base address (could be defined with WebApiAttribute)
-            </summary>
-            <param name="baseAddressFactory">Your web api base address factory</param>
-            <returns></returns>
         </member>
         <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`3.AddCrudManagerFor``5(System.Action{`2})">
             <summary>
@@ -375,6 +356,11 @@
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <returns></returns>
         </member>
+        <member name="P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory">
+            <summary>
+            Base address factory
+            </summary>
+        </member>
         <member name="P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpTracerModeFactory">
             <summary>
             Http traffic tracing mode factory
@@ -404,6 +390,20 @@
             <summary>
             Delegating handlers factories
             </summary>
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})">
+            <summary>
+            Define your web api base address (could be defined with WebApiAttribute)
+            </summary>
+            <param name="baseAddressFactory">Your web api base address factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})">
+            <summary>
+            Define your web api base address (could be defined with WebApiAttribute)
+            </summary>
+            <param name="baseAddressFactory">Your web api base address factory</param>
+            <returns></returns>
         </member>
         <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithLogging(System.Func{System.IServiceProvider,Apizr.Logging.HttpTracerMode},System.Func{System.IServiceProvider,Apizr.Logging.HttpMessageParts},System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]})">
             <summary>

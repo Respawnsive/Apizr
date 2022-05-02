@@ -108,14 +108,14 @@ All fluent configuration flavors offer a contextualized options builder, dependi
     // Apizr registration
     services.AddApizr(
         registry =&gt; registry
-            .AddFor&lt;IReqResService&gt;()
-            .AddFor&lt;IHttpBinService&gt;(
+            .AddManagerFor&lt;IReqResService&gt;()
+            .AddManagerFor&lt;IHttpBinService&gt;(
                 options =&gt; options
                     .WithLogging(
                         HttpTracerMode.Everything, 
                         HttpMessageParts.All, 
                         LogLevel.Trace))
-            .AddCrudFor&lt;User, int, PagedResult&lt;User&gt;, IDictionary&lt;string, object&gt;&gt;(
+            .AddCrudManagerFor&lt;User, int, PagedResult&lt;User&gt;, IDictionary&lt;string, object&gt;&gt;(
                 options =&gt; options
                     .WithBaseAddress(&quot;https://reqres.in/api/users&quot;))),
 

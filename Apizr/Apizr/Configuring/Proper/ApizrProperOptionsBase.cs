@@ -12,6 +12,7 @@ namespace Apizr.Configuring.Proper
             string[] assemblyPolicyRegistryKeys,
             string[] webApiPolicyRegistryKeys)
         {
+            BaseAddress = sharedOptions.BaseAddress;
             HttpTracerMode = sharedOptions.HttpTracerMode;
             TrafficVerbosity = sharedOptions.TrafficVerbosity;
             LogLevels = sharedOptions.LogLevels;
@@ -22,7 +23,6 @@ namespace Apizr.Configuring.Proper
         }
 
         public Type WebApiType { get; }
-        public Uri BaseAddress { get; protected set; }
         public string[] PolicyRegistryKeys { get; }
         public ILogger Logger { get; protected set; }
     }

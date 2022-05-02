@@ -30,7 +30,7 @@ namespace Apizr.Configuring.Registry
         /// <param name="apizrManagerFactory">The custom manager implementation instance factory</param>
         /// <param name="properOptionsBuilder">The builder defining some api proper options</param>
         /// <returns></returns>
-        TApizrRegistryBuilder AddCrudFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(
+        TApizrRegistryBuilder AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(
             Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler,
                 IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptionsBase,
                 TApizrManager> apizrManagerFactory,
@@ -51,7 +51,7 @@ namespace Apizr.Configuring.Registry
         /// <param name="apizrManagerFactory">The custom manager implementation instance factory</param>
         /// <param name="properOptionsBuilder">The builder defining some api proper options</param>
         /// <returns></returns>
-        TApizrRegistryBuilder AddFor<TWebApi, TApizrManager>(
+        TApizrRegistryBuilder AddManagerFor<TWebApi, TApizrManager>(
             Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler,
                 IReadOnlyPolicyRegistry<string>, IApizrOptions<TWebApi>, TApizrManager> apizrManagerFactory,
             Action<TApizrProperOptionsBuilder> properOptionsBuilder = null)

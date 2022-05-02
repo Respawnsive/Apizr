@@ -54,10 +54,10 @@ items:
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase
   inheritedMembers:
   - Apizr.Configuring.ApizrOptionsBase.WebApiType
-  - Apizr.Configuring.ApizrOptionsBase.BaseAddress
   - Apizr.Configuring.ApizrOptionsBase.PolicyRegistryKeys
   - Apizr.Configuring.ApizrOptionsBase.Logger
   - Apizr.Configuring.ApizrOptionsBase.RefitSettings
+  - Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseAddress
   - Apizr.Configuring.Shared.ApizrSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.ApizrSharedOptionsBase.TrafficVerbosity
   - Apizr.Configuring.Shared.ApizrSharedOptionsBase.LogLevels
@@ -133,7 +133,7 @@ items:
     content.vb: Public Property BaseAddressFactory As Func(Of Uri)
   overload: Apizr.Configuring.ApizrOptions.BaseAddressFactory*
   implements:
-  - Apizr.Configuring.Proper.IApizrProperOptions.BaseAddressFactory
+  - Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory
   modifiers.csharp:
   - public
   - get
@@ -615,12 +615,6 @@ references:
   name: WebApiType
   nameWithType: ApizrOptionsBase.WebApiType
   fullName: Apizr.Configuring.ApizrOptionsBase.WebApiType
-- uid: Apizr.Configuring.ApizrOptionsBase.BaseAddress
-  commentId: P:Apizr.Configuring.ApizrOptionsBase.BaseAddress
-  parent: Apizr.Configuring.ApizrOptionsBase
-  name: BaseAddress
-  nameWithType: ApizrOptionsBase.BaseAddress
-  fullName: Apizr.Configuring.ApizrOptionsBase.BaseAddress
 - uid: Apizr.Configuring.ApizrOptionsBase.PolicyRegistryKeys
   commentId: P:Apizr.Configuring.ApizrOptionsBase.PolicyRegistryKeys
   parent: Apizr.Configuring.ApizrOptionsBase
@@ -639,6 +633,12 @@ references:
   name: RefitSettings
   nameWithType: ApizrOptionsBase.RefitSettings
   fullName: Apizr.Configuring.ApizrOptionsBase.RefitSettings
+- uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseAddress
+  commentId: P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseAddress
+  parent: Apizr.Configuring.Shared.ApizrSharedOptionsBase
+  name: BaseAddress
+  nameWithType: ApizrSharedOptionsBase.BaseAddress
+  fullName: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseAddress
 - uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase.HttpTracerMode
   commentId: P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.HttpTracerMode
   parent: Apizr.Configuring.Shared.ApizrSharedOptionsBase
@@ -1103,12 +1103,12 @@ references:
   name: BaseAddressFactory
   nameWithType: ApizrOptions.BaseAddressFactory
   fullName: Apizr.Configuring.ApizrOptions.BaseAddressFactory
-- uid: Apizr.Configuring.Proper.IApizrProperOptions.BaseAddressFactory
-  commentId: P:Apizr.Configuring.Proper.IApizrProperOptions.BaseAddressFactory
-  parent: Apizr.Configuring.Proper.IApizrProperOptions
+- uid: Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory
+  parent: Apizr.Configuring.Shared.IApizrSharedOptions
   name: BaseAddressFactory
-  nameWithType: IApizrProperOptions.BaseAddressFactory
-  fullName: Apizr.Configuring.Proper.IApizrProperOptions.BaseAddressFactory
+  nameWithType: IApizrSharedOptions.BaseAddressFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory
 - uid: System.Func{System.Uri}
   commentId: T:System.Func{System.Uri}
   parent: System

@@ -29,3 +29,9 @@ options => options.AddDelegatingHandler((serviceProvider, options) => YourDelega
 ```
 
 ***
+
+>[!WARNING]
+>
+>**Inner DelegatingHandler**
+>
+>Don't manage delegating handlers hierarchy by yourself, providing any inner handlers. Instead, just add your handlers thanks to the AddDelegatingHandler option the order you want and Apizr will do it for you.

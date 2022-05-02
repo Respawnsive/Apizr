@@ -41,7 +41,7 @@ Also, we built this lib to make it work with any .Net Standard 2.0 compliant pla
 
 ## Libraries
 
-[Change Log](changelog.md)
+[Change Log](https://respawnsive.github.io/Apizr/changelog.html)
 
 |Project|Current|Upcoming|
 |-------|-----|-----|

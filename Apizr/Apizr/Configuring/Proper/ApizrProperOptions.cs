@@ -11,15 +11,16 @@ namespace Apizr.Configuring.Proper
     public class ApizrProperOptions : ApizrProperOptionsBase, IApizrProperOptions
     {
         public ApizrProperOptions(IApizrSharedOptions sharedOptions,
-            Type webApiType, Uri baseAddress,
+            Type webApiType,
             string[] assemblyPolicyRegistryKeys,
-            string[] webApiPolicyRegistryKeys,
+            string[] webApiPolicyRegistryKeys, 
+            Uri baseAddress,
             HttpTracerMode? httpTracerMode,
             HttpMessageParts? trafficVerbosity,
             params LogLevel[] logLevels) : base(sharedOptions, webApiType, assemblyPolicyRegistryKeys,
             webApiPolicyRegistryKeys)
         {
-            BaseAddressFactory = () => baseAddress;
+            BaseAddressFactory = () => baseAddress ?? sharedOptions.BaseAddressFactory?.Invoke();
             HttpTracerModeFactory = () => httpTracerMode ?? sharedOptions.HttpTracerModeFactory.Invoke();
             TrafficVerbosityFactory = () => trafficVerbosity ?? sharedOptions.TrafficVerbosityFactory.Invoke();
             LogLevelsFactory = () => logLevels?.Any() == true ? logLevels : sharedOptions.LogLevelsFactory.Invoke();

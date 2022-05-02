@@ -93,43 +93,298 @@
     <div>
       <span class="xref">System.Collections.IEnumerable.GetEnumerator()</span>
     </div>
-    <div>
-      <a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.html#Apizr_Configuring_Registry_IApizrEnumerableRegistryBase_Count">IApizrEnumerableRegistryBase.Count</a>
-    </div>
-    <div>
-      <a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.html#Apizr_Configuring_Registry_IApizrEnumerableRegistryBase_ContainsCrudFor__1">IApizrEnumerableRegistryBase.ContainsCrudFor&lt;T&gt;()</a>
-    </div>
-    <div>
-      <a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.html#Apizr_Configuring_Registry_IApizrEnumerableRegistryBase_ContainsCrudFor__2">IApizrEnumerableRegistryBase.ContainsCrudFor&lt;T, TKey&gt;()</a>
-    </div>
-    <div>
-      <a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.html#Apizr_Configuring_Registry_IApizrEnumerableRegistryBase_ContainsCrudFor__3">IApizrEnumerableRegistryBase.ContainsCrudFor&lt;T, TKey, TReadAllResult&gt;()</a>
-    </div>
-    <div>
-      <a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.html#Apizr_Configuring_Registry_IApizrEnumerableRegistryBase_ContainsCrudFor__4">IApizrEnumerableRegistryBase.ContainsCrudFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;()</a>
-    </div>
-    <div>
-      <a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.html#Apizr_Configuring_Registry_IApizrEnumerableRegistryBase_ContainsFor__1">IApizrEnumerableRegistryBase.ContainsFor&lt;TWebApi&gt;()</a>
-    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Apizr.Configuring.Registry.html">Apizr.Configuring.Registry</a></h6>
   <h6><strong>Assembly</strong>: Apizr.dll</h6>
   <h5 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IApizrEnumerableRegistry : IEnumerable&lt;KeyValuePair&lt;Type, Func&lt;IApizrManager&gt;&gt;&gt;, IEnumerable, IApizrEnumerableRegistryBase</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IApizrEnumerableRegistry : IEnumerable&lt;KeyValuePair&lt;Type, Func&lt;IApizrManager&gt;&gt;&gt;, IEnumerable</code></pre>
   </div>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_Count_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.Count*"></a>
+  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_Count" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.Count">Count</h4>
+  <div class="markdown level1 summary"><p>Managers count</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int Count { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
   </h3>
   
   
-  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_GetCrudFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor*"></a>
-  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_GetCrudFor__1" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``1">GetCrudFor&lt;T&gt;()</h4>
+  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_ContainsCrudManagerFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor*"></a>
+  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_ContainsCrudManagerFor__1" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor``1">ContainsCrudManagerFor&lt;T&gt;()</h4>
+  <div class="markdown level1 summary"><p>Check if registry contains a manager for <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> entity type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool ContainsCrudManagerFor&lt;T&gt;()
+    where T : class</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The entity type to manage</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_ContainsCrudManagerFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor*"></a>
+  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_ContainsCrudManagerFor__2" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor``2">ContainsCrudManagerFor&lt;T, TKey&gt;()</h4>
+  <div class="markdown level1 summary"><p>Check if registry contains a manager for <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> entity type with <code data-dev-comment-type="typeparamref" class="typeparamref">TKey</code> key type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool ContainsCrudManagerFor&lt;T, TKey&gt;()
+    where T : class</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The entity type to manage</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TKey</span></td>
+        <td><p>The entity key type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_ContainsCrudManagerFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor*"></a>
+  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_ContainsCrudManagerFor__3" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor``3">ContainsCrudManagerFor&lt;T, TKey, TReadAllResult&gt;()</h4>
+  <div class="markdown level1 summary"><p>Check if registry contains a manager for <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> entity type with <code data-dev-comment-type="typeparamref" class="typeparamref">TKey</code> key type and <code data-dev-comment-type="typeparamref" class="typeparamref">TReadAllResult</code> ReadAll result type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool ContainsCrudManagerFor&lt;T, TKey, TReadAllResult&gt;()
+    where T : class</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The entity type to manage</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TKey</span></td>
+        <td><p>The entity key type</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TReadAllResult</span></td>
+        <td><p>The ReadAll result type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_ContainsCrudManagerFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor*"></a>
+  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_ContainsCrudManagerFor__4" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor``4">ContainsCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;()</h4>
+  <div class="markdown level1 summary"><p>Check if registry contains a manager for <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> entity type with <code data-dev-comment-type="typeparamref" class="typeparamref">TKey</code> key type,
+<code data-dev-comment-type="typeparamref" class="typeparamref">TReadAllResult</code> ReadAll result type and <code data-dev-comment-type="typeparamref" class="typeparamref">TReadAllParams</code> ReadAll params type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool ContainsCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;()
+    where T : class</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The entity type to manage</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TKey</span></td>
+        <td><p>The entity key type</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TReadAllResult</span></td>
+        <td><p>The ReadAll result type</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TReadAllParams</span></td>
+        <td><p>The ReadAll params type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_ContainsManagerFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsManagerFor*"></a>
+  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_ContainsManagerFor__1" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsManagerFor``1">ContainsManagerFor&lt;TWebApi&gt;()</h4>
+  <div class="markdown level1 summary"><p>Check if registry contains a manager for <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> api type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool ContainsManagerFor&lt;TWebApi&gt;()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TWebApi</span></td>
+        <td><p>The api type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_GetCrudManagerFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor*"></a>
+  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_GetCrudManagerFor__1" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor``1">GetCrudManagerFor&lt;T&gt;()</h4>
   <div class="markdown level1 summary"><p>Get a Crud manager instance for an entity type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IApizrManager&lt;ICrudApi&lt;T, int, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt;&gt; GetCrudFor&lt;T&gt;()
+    <pre><code class="lang-csharp hljs">IApizrManager&lt;ICrudApi&lt;T, int, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt;&gt; GetCrudManagerFor&lt;T&gt;()
     where T : class</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
@@ -165,14 +420,14 @@
   </table>
   
   
-  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_GetCrudFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor*"></a>
-  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_GetCrudFor__2" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``2">GetCrudFor&lt;T, TKey&gt;()</h4>
+  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_GetCrudManagerFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor*"></a>
+  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_GetCrudManagerFor__2" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor``2">GetCrudManagerFor&lt;T, TKey&gt;()</h4>
   <div class="markdown level1 summary"><p>Get a Crud manager instance for an entity type with a specific key type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IApizrManager&lt;ICrudApi&lt;T, TKey, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt;&gt; GetCrudFor&lt;T, TKey&gt;()
+    <pre><code class="lang-csharp hljs">IApizrManager&lt;ICrudApi&lt;T, TKey, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt;&gt; GetCrudManagerFor&lt;T, TKey&gt;()
     where T : class</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
@@ -213,14 +468,14 @@
   </table>
   
   
-  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_GetCrudFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor*"></a>
-  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_GetCrudFor__3" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``3">GetCrudFor&lt;T, TKey, TReadAllResult&gt;()</h4>
+  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_GetCrudManagerFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor*"></a>
+  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_GetCrudManagerFor__3" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor``3">GetCrudManagerFor&lt;T, TKey, TReadAllResult&gt;()</h4>
   <div class="markdown level1 summary"><p>Get a Crud manager instance for an entity type with a specific key type and ReadAll result type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, IDictionary&lt;string, object&gt;&gt;&gt; GetCrudFor&lt;T, TKey, TReadAllResult&gt;()
+    <pre><code class="lang-csharp hljs">IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, IDictionary&lt;string, object&gt;&gt;&gt; GetCrudManagerFor&lt;T, TKey, TReadAllResult&gt;()
     where T : class</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
@@ -266,14 +521,14 @@
   </table>
   
   
-  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_GetCrudFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor*"></a>
-  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_GetCrudFor__4" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``4">GetCrudFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;()</h4>
+  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_GetCrudManagerFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor*"></a>
+  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_GetCrudManagerFor__4" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor``4">GetCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;()</h4>
   <div class="markdown level1 summary"><p>Get a Crud manager instance for an entity type with a specific key type, ReadAll result type and ReadAll params type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt; GetCrudFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;()
+    <pre><code class="lang-csharp hljs">IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt; GetCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;()
     where T : class</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
@@ -324,14 +579,14 @@
   </table>
   
   
-  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_GetFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetFor*"></a>
-  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_GetFor__1" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetFor``1">GetFor&lt;TWebApi&gt;()</h4>
+  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_GetManagerFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetManagerFor*"></a>
+  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_GetManagerFor__1" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetManagerFor``1">GetManagerFor&lt;TWebApi&gt;()</h4>
   <div class="markdown level1 summary"><p>Get an api manager instance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IApizrManager&lt;TWebApi&gt; GetFor&lt;TWebApi&gt;()</code></pre>
+    <pre><code class="lang-csharp hljs">IApizrManager&lt;TWebApi&gt; GetManagerFor&lt;TWebApi&gt;()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -366,14 +621,14 @@
   </table>
   
   
-  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_TryGetCrudFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor*"></a>
-  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_TryGetCrudFor__1_Apizr_IApizrManager_Apizr_Requesting_ICrudApi___0_System_Int32_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object_____" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``1(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)">TryGetCrudFor&lt;T&gt;(out IApizrManager&lt;ICrudApi&lt;T, Int32, IEnumerable&lt;T&gt;, IDictionary&lt;String, Object&gt;&gt;&gt;)</h4>
+  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_TryGetCrudManagerFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor*"></a>
+  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_TryGetCrudManagerFor__1_Apizr_IApizrManager_Apizr_Requesting_ICrudApi___0_System_Int32_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object_____" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor``1(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)">TryGetCrudManagerFor&lt;T&gt;(out IApizrManager&lt;ICrudApi&lt;T, Int32, IEnumerable&lt;T&gt;, IDictionary&lt;String, Object&gt;&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>Try to get a Crud manager instance for an entity type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool TryGetCrudFor&lt;T&gt;(out IApizrManager&lt;ICrudApi&lt;T, int, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt;&gt; manager)
+    <pre><code class="lang-csharp hljs">bool TryGetCrudManagerFor&lt;T&gt;(out IApizrManager&lt;ICrudApi&lt;T, int, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt;&gt; manager)
     where T : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -426,14 +681,14 @@
   </table>
   
   
-  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_TryGetCrudFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor*"></a>
-  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_TryGetCrudFor__2_Apizr_IApizrManager_Apizr_Requesting_ICrudApi___0___1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object_____" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``2(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)">TryGetCrudFor&lt;T, TKey&gt;(out IApizrManager&lt;ICrudApi&lt;T, TKey, IEnumerable&lt;T&gt;, IDictionary&lt;String, Object&gt;&gt;&gt;)</h4>
+  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_TryGetCrudManagerFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor*"></a>
+  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_TryGetCrudManagerFor__2_Apizr_IApizrManager_Apizr_Requesting_ICrudApi___0___1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object_____" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor``2(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)">TryGetCrudManagerFor&lt;T, TKey&gt;(out IApizrManager&lt;ICrudApi&lt;T, TKey, IEnumerable&lt;T&gt;, IDictionary&lt;String, Object&gt;&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>Try to get a Crud manager instance for an entity type with a specific key type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool TryGetCrudFor&lt;T, TKey&gt;(out IApizrManager&lt;ICrudApi&lt;T, TKey, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt;&gt; manager)
+    <pre><code class="lang-csharp hljs">bool TryGetCrudManagerFor&lt;T, TKey&gt;(out IApizrManager&lt;ICrudApi&lt;T, TKey, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt;&gt; manager)
     where T : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -491,14 +746,14 @@
   </table>
   
   
-  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_TryGetCrudFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor*"></a>
-  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_TryGetCrudFor__3_Apizr_IApizrManager_Apizr_Requesting_ICrudApi___0___1___2_System_Collections_Generic_IDictionary_System_String_System_Object_____" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``3(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}}@)">TryGetCrudFor&lt;T, TKey, TReadAllResult&gt;(out IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, IDictionary&lt;String, Object&gt;&gt;&gt;)</h4>
+  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_TryGetCrudManagerFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor*"></a>
+  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_TryGetCrudManagerFor__3_Apizr_IApizrManager_Apizr_Requesting_ICrudApi___0___1___2_System_Collections_Generic_IDictionary_System_String_System_Object_____" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor``3(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}}@)">TryGetCrudManagerFor&lt;T, TKey, TReadAllResult&gt;(out IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, IDictionary&lt;String, Object&gt;&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>Try to get a Crud manager instance for an entity type with a specific key type and ReadAll result type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool TryGetCrudFor&lt;T, TKey, TReadAllResult&gt;(out IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, IDictionary&lt;string, object&gt;&gt;&gt; manager)
+    <pre><code class="lang-csharp hljs">bool TryGetCrudManagerFor&lt;T, TKey, TReadAllResult&gt;(out IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, IDictionary&lt;string, object&gt;&gt;&gt; manager)
     where T : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -561,14 +816,14 @@
   </table>
   
   
-  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_TryGetCrudFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor*"></a>
-  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_TryGetCrudFor__4_Apizr_IApizrManager_Apizr_Requesting_ICrudApi___0___1___2___3____" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``4(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}}@)">TryGetCrudFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(out IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;)</h4>
+  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_TryGetCrudManagerFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor*"></a>
+  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_TryGetCrudManagerFor__4_Apizr_IApizrManager_Apizr_Requesting_ICrudApi___0___1___2___3____" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor``4(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}}@)">TryGetCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(out IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>Try to get a Crud manager instance for an entity type with a specific key type, ReadAll result type and ReadAll params type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool TryGetCrudFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(out IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt; manager)
+    <pre><code class="lang-csharp hljs">bool TryGetCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(out IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt; manager)
     where T : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -636,14 +891,14 @@
   </table>
   
   
-  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_TryGetFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetFor*"></a>
-  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_TryGetFor__1_Apizr_IApizrManager___0___" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetFor``1(Apizr.IApizrManager{``0}@)">TryGetFor&lt;TWebApi&gt;(out IApizrManager&lt;TWebApi&gt;)</h4>
+  <a id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_TryGetManagerFor_" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetManagerFor*"></a>
+  <h4 id="Apizr_Configuring_Registry_IApizrEnumerableRegistry_TryGetManagerFor__1_Apizr_IApizrManager___0___" data-uid="Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetManagerFor``1(Apizr.IApizrManager{``0}@)">TryGetManagerFor&lt;TWebApi&gt;(out IApizrManager&lt;TWebApi&gt;)</h4>
   <div class="markdown level1 summary"><p>Try to get an api manager instance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool TryGetFor&lt;TWebApi&gt;(out IApizrManager&lt;TWebApi&gt; manager)</code></pre>
+    <pre><code class="lang-csharp hljs">bool TryGetManagerFor&lt;TWebApi&gt;(out IApizrManager&lt;TWebApi&gt; manager)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">

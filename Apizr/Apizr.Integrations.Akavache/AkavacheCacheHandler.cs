@@ -44,7 +44,7 @@ namespace Apizr
         /// <param name="applicationName">The application name used by Akavache</param>
         public AkavacheCacheHandler(Func<IBlobCache> blobCacheFactory, string applicationName)
         {
-            Registrations.Start(applicationName ?? $"{nameof(Apizr)}{nameof(AkavacheCacheHandler)}");
+            Registrations.Start(applicationName ?? $"{nameof(ApizrBuilder)}{nameof(AkavacheCacheHandler)}");
             _blobCache = blobCacheFactory?.Invoke() ?? BlobCache.LocalMachine;
         }
 

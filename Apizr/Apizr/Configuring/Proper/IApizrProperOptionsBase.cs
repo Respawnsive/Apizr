@@ -15,11 +15,6 @@ namespace Apizr.Configuring.Proper
         Type WebApiType { get; }
 
         /// <summary>
-        /// Base address
-        /// </summary>
-        Uri BaseAddress { get; }
-
-        /// <summary>
         /// Policy keys from the registry
         /// </summary>
         string[] PolicyRegistryKeys { get; }

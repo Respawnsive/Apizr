@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;
 
@@ -11,6 +12,7 @@ namespace Apizr.Configuring.Shared
             
         }
 
+        public Uri BaseAddress { get; protected set; }
         public HttpTracerMode HttpTracerMode { get; protected set; }
         public HttpMessageParts TrafficVerbosity { get; protected set; }
         

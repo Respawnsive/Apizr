@@ -42,29 +42,29 @@ namespace Apizr.Tests
         [Fact]
         public void ApizrRegistry_Should_Contain_Managers()
         {
-            var apizrRegistry = Apizr.Create(registry => registry
-                .AddFor<IReqResService>()
-                .AddFor<IHttpBinService>()
-                .AddCrudFor<User, int, PagedResult<User>, IDictionary<string, object>>());
+            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                .AddManagerFor<IReqResService>()
+                .AddManagerFor<IHttpBinService>()
+                .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>());
 
             apizrRegistry.Should().NotBeNull();
-            apizrRegistry.ContainsFor<IReqResService>().Should().BeTrue();
-            apizrRegistry.ContainsFor<IHttpBinService>().Should().BeTrue();
-            apizrRegistry.ContainsCrudFor<User, int, PagedResult<User>, IDictionary<string, object>>().Should()
+            apizrRegistry.ContainsManagerFor<IReqResService>().Should().BeTrue();
+            apizrRegistry.ContainsManagerFor<IHttpBinService>().Should().BeTrue();
+            apizrRegistry.ContainsCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>().Should()
                 .BeTrue();
         }
 
         [Fact]
         public void ApizrRegistry_Should_Get_Managers()
         {
-            var apizrRegistry = Apizr.Create(registry => registry
-                .AddFor<IReqResService>()
-                .AddFor<IHttpBinService>()
-                .AddCrudFor<User, int, PagedResult<User>, IDictionary<string, object>>());
+            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                .AddManagerFor<IReqResService>()
+                .AddManagerFor<IHttpBinService>()
+                .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>());
 
-            apizrRegistry.TryGetFor<IReqResService>(out var reqResManager).Should().BeTrue();
-            apizrRegistry.TryGetFor<IHttpBinService>(out var httpBinManager).Should().BeTrue();
-            apizrRegistry.TryGetCrudFor<User, int, PagedResult<User>, IDictionary<string, object>>(out var userManager)
+            apizrRegistry.TryGetManagerFor<IReqResService>(out var reqResManager).Should().BeTrue();
+            apizrRegistry.TryGetManagerFor<IHttpBinService>(out var httpBinManager).Should().BeTrue();
+            apizrRegistry.TryGetCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(out var userManager)
                 .Should().BeTrue();
 
             reqResManager.Should().NotBeNull();
@@ -75,10 +75,10 @@ namespace Apizr.Tests
         [Fact]
         public void ApizrRegistry_Should_Populate_Managers()
         {
-            var apizrRegistry = Apizr.Create(registry => registry
-                .AddFor<IReqResService>()
-                .AddFor<IHttpBinService>()
-                .AddCrudFor<User, int, PagedResult<User>, IDictionary<string, object>>());
+            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                .AddManagerFor<IReqResService>()
+                .AddManagerFor<IHttpBinService>()
+                .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>());
 
             var count = 0;
             apizrRegistry.Populate((type, factory) =>
@@ -97,14 +97,39 @@ namespace Apizr.Tests
         [Fact]
         public void Calling_WithBaseAddress_Should_Set_BaseAddress()
         {
-            var uri = new Uri("http://api.com");
+            var attributeUri = "https://reqres.in/api";
+            var uri1 = new Uri("http://uri1.com");
+            var uri2 = new Uri("http://uri2.com");
 
-            var apizrRegistry = Apizr.Create(registry => registry
-                .AddFor<IReqResService>(options => options.WithBaseAddress(uri)));
+            // By attribute
+            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                    .AddManagerFor<IReqResService>());
+            var reqResManager = apizrRegistry.GetManagerFor<IReqResService>();
+            reqResManager.Options.BaseAddress.Should().Be(attributeUri);
 
-            var reqResManager = apizrRegistry.GetFor<IReqResService>();
+            // By attribute overriding common option
+            apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                    .AddManagerFor<IReqResService>(),
+                config => config.WithBaseAddress(uri2));
+            reqResManager = apizrRegistry.GetManagerFor<IReqResService>();
+            reqResManager.Options.BaseAddress.Should().Be(attributeUri);
 
-            reqResManager.Options.BaseAddress.Should().Be(uri);
+            // By proper option overriding attribute
+            apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                    .AddManagerFor<IReqResService>(options =>
+                        options.WithBaseAddress(uri2)));
+
+            reqResManager = apizrRegistry.GetManagerFor<IReqResService>();
+            reqResManager.Options.BaseAddress.Should().Be(uri2);
+
+            // By proper option overriding common option and attribute
+            apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                .AddManagerFor<IReqResService>(options => 
+                    options.WithBaseAddress(uri2)),
+                config => config.WithBaseAddress(uri1));
+
+            reqResManager = apizrRegistry.GetManagerFor<IReqResService>();
+            reqResManager.Options.BaseAddress.Should().Be(uri2);
         }
 
         [Fact]
@@ -112,12 +137,12 @@ namespace Apizr.Tests
         {
             string token = null;
 
-            var apizrRegistry = Apizr.Create(
+            var apizrRegistry = ApizrBuilder.CreateRegistry(
                 registry => registry
-                    .AddFor<IHttpBinService>(options =>
+                    .AddManagerFor<IHttpBinService>(options =>
                         options.WithAuthenticationHandler(_ => Task.FromResult(token = "token"))));
 
-            var httpBinManager = apizrRegistry.GetFor<IHttpBinService>();
+            var httpBinManager = apizrRegistry.GetManagerFor<IHttpBinService>();
 
             var result = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
 
@@ -128,10 +153,10 @@ namespace Apizr.Tests
         [Fact]
         public void Calling_WithLogging_Should_Set_LoggingSettings()
         {
-            var apizrRegistry = Apizr.Create(registry => registry
-                .AddFor<IReqResService>(options => options.WithLogging((HttpTracerMode) HttpTracerMode.ExceptionsOnly, (HttpMessageParts) HttpMessageParts.RequestCookies, LogLevel.Warning)));
+            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                .AddManagerFor<IReqResService>(options => options.WithLogging((HttpTracerMode) HttpTracerMode.ExceptionsOnly, (HttpMessageParts) HttpMessageParts.RequestCookies, LogLevel.Warning)));
 
-            var reqResManager = apizrRegistry.GetFor<IReqResService>();
+            var reqResManager = apizrRegistry.GetManagerFor<IReqResService>();
 
             reqResManager.Options.HttpTracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
             reqResManager.Options.TrafficVerbosity.Should().Be(HttpMessageParts.RequestCookies);
@@ -143,12 +168,12 @@ namespace Apizr.Tests
         {
             string token = null;
 
-            var apizrRegistry = Apizr.Create(registry => registry
-                    .AddFor<IHttpBinService>(),
+            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                    .AddManagerFor<IHttpBinService>(),
                 config => config
                     .WithAuthenticationHandler(_ => Task.FromResult(token = "token")));
 
-            var httpBinManager = apizrRegistry.GetFor<IHttpBinService>();
+            var httpBinManager = apizrRegistry.GetManagerFor<IHttpBinService>();
 
             var result = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
 
@@ -161,13 +186,13 @@ namespace Apizr.Tests
         {
             string token = null;
 
-            var apizrRegistry = Apizr.Create(registry => registry
-                    .AddFor<IHttpBinService>(options => options
+            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                    .AddManagerFor<IHttpBinService>(options => options
                         .WithAuthenticationHandler(_ => Task.FromResult(token = "tokenA"))),
                 config => config
                     .WithAuthenticationHandler(_ => Task.FromResult(token = "tokenB")));
 
-            var httpBinManager = apizrRegistry.GetFor<IHttpBinService>();
+            var httpBinManager = apizrRegistry.GetManagerFor<IHttpBinService>();
 
             var result = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
 
@@ -178,13 +203,13 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithAkavacheCacheHandler_Should_Cache_Result()
         {
-            var apizrRegistry = Apizr.Create(registry => registry
-                    .AddFor<IReqResService>(),
+            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                    .AddManagerFor<IReqResService>(),
                 config => config
                     .WithAkavacheCacheHandler()
                     .AddDelegatingHandler(new FailingRequestHandler()));
 
-            var reqResManager = apizrRegistry.GetFor<IReqResService>();
+            var reqResManager = apizrRegistry.GetManagerFor<IReqResService>();
 
             // Clearing cache
             await reqResManager.ClearCacheAsync();
@@ -227,13 +252,13 @@ namespace Apizr.Tests
                 }
             };
 
-            var apizrRegistry = Apizr.Create(registry => registry
-                    .AddFor<IReqResService>(),
+            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                    .AddManagerFor<IReqResService>(),
                 config => config
                     .WithPolicyRegistry(policyRegistry)
                     .AddDelegatingHandler(new FailingRequestHandler()));
 
-            var reqResManager = apizrRegistry.GetFor<IReqResService>();
+            var reqResManager = apizrRegistry.GetManagerFor<IReqResService>();
 
             // Defining a transient throwing request
             Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.RequestTimeout));
@@ -250,12 +275,12 @@ namespace Apizr.Tests
         {
             var isConnected = false;
 
-            var apizrRegistry = Apizr.Create(registry => registry
-                    .AddFor<IReqResService>(),
+            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                    .AddManagerFor<IReqResService>(),
                 config => config
                     .WithConnectivityHandler(() => isConnected));
 
-            var reqResManager = apizrRegistry.GetFor<IReqResService>();
+            var reqResManager = apizrRegistry.GetManagerFor<IReqResService>();
 
             // Defining a request
             Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync());
@@ -274,12 +299,12 @@ namespace Apizr.Tests
         [Fact]
         public void Calling_WithRefitSettings_Should_Set_Settings()
         {
-            var apizrRegistry = Apizr.Create(registry => registry
-                    .AddFor<IReqResService>(),
+            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                    .AddManagerFor<IReqResService>(),
                 config => config
                     .WithRefitSettings(_refitSettings));
 
-            var reqResManager = apizrRegistry.GetFor<IReqResService>();
+            var reqResManager = apizrRegistry.GetManagerFor<IReqResService>();
 
             reqResManager.Options.RefitSettings.Should().Be(_refitSettings);
         }
@@ -293,13 +318,13 @@ namespace Apizr.Tests
                 config.AddProfile<UserMinUserProfile>();
             });
 
-            var apizrRegistry = Apizr.Create(registry => registry
-                    .AddFor<IReqResService>(),
+            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                    .AddManagerFor<IReqResService>(),
                 config => config
                     .WithRefitSettings(_refitSettings)
                     .WithAutoMapperMappingHandler(mapperConfig));
 
-            var reqResManager = apizrRegistry.GetFor<IReqResService>();
+            var reqResManager = apizrRegistry.GetManagerFor<IReqResService>();
 
             var minUser = new MinUser { Name = "John" };
 
@@ -322,13 +347,13 @@ namespace Apizr.Tests
                 config.AddProfile<UserMinUserProfile>();
             });
 
-            var apizrRegistry = Apizr.Create(registry => registry
-                    .AddFor<IReqResService>(),
+            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                    .AddManagerFor<IReqResService>(),
                 config => config
                     .WithRefitSettings(_refitSettings)
                     .WithMappingHandler(new AutoMapperMappingHandler(mapperConfig.CreateMapper())));
 
-            var reqResManager = apizrRegistry.GetFor<IReqResService>();
+            var reqResManager = apizrRegistry.GetManagerFor<IReqResService>();
 
             var minUser = new MinUser { Name = "John" };
 

@@ -4,7 +4,7 @@
         <name>Apizr</name>
     </assembly>
     <members>
-        <member name="M:Apizr.Apizr.Create(System.Action{Apizr.Configuring.Registry.IApizrRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})">
+        <member name="M:Apizr.ApizrBuilder.CreateRegistry(System.Action{Apizr.Configuring.Registry.IApizrRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})">
             <summary>
             Create a registry with all managers built with both common and proper options
             </summary>
@@ -12,7 +12,7 @@
             <param name="commonOptionsBuilder">The common options shared by all managers</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Apizr.CreateCrudFor``1(System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
+        <member name="M:Apizr.ApizrBuilder.CreateCrudManagerFor``1(System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
             <summary>
             Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
             with key of type <see cref="T:System.Int32"/> and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
@@ -22,7 +22,7 @@
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Apizr.CreateCrudFor``2(System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
+        <member name="M:Apizr.ApizrBuilder.CreateCrudManagerFor``2(System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
             <summary>
             Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
             with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
@@ -33,7 +33,7 @@
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Apizr.CreateCrudFor``3(System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
+        <member name="M:Apizr.ApizrBuilder.CreateCrudManagerFor``3(System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
             <summary>
             Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
             with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
@@ -46,7 +46,7 @@
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Apizr.CreateCrudFor``4(System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
+        <member name="M:Apizr.ApizrBuilder.CreateCrudManagerFor``4(System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
             <summary>
             Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
             with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
@@ -60,7 +60,7 @@
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Apizr.CreateCrudFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptionsBase,``4},System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
+        <member name="M:Apizr.ApizrBuilder.CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptionsBase,``4},System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
             <summary>
             Create a <typeparamref name="TApizrManager"/> instance for a managed crud api for <typeparamref name="T"/> object (class), 
             with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
@@ -76,7 +76,7 @@
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Apizr.CreateFor``1(System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
+        <member name="M:Apizr.ApizrBuilder.CreateManagerFor``1(System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
             <summary>
             Create a <see cref="T:Apizr.ApizrManager`1"/> instance
             </summary>
@@ -84,7 +84,7 @@
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Apizr.CreateFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptions{``0},``1},System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
+        <member name="M:Apizr.ApizrBuilder.CreateManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptions{``0},``1},System.Action{Apizr.Configuring.IApizrOptionsBuilder})">
             <summary>
             Create a <typeparamref name="TApizrManager"/> instance for a managed <typeparamref name="TWebApi"/>
             </summary>
@@ -429,25 +429,6 @@
             The options builder
             </summary>
         </member>
-        <member name="M:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithBaseAddress(System.String)">
-            <summary>
-            Define your web api base address (could be defined with WebApiAttribute)
-            </summary>
-            <param name="baseAddress">Your web api base address</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithBaseAddress(System.Uri)">
-            <summary>
-            Define your web api base address (could be defined with WebApiAttribute)
-            </summary>
-            <param name="baseAddress">Your web api base address</param>
-            <returns></returns>
-        </member>
-        <member name="P:Apizr.Configuring.Proper.IApizrProperOptions.BaseAddressFactory">
-            <summary>
-            Base address factory
-            </summary>
-        </member>
         <member name="P:Apizr.Configuring.Proper.IApizrProperOptions.LoggerFactory">
             <summary>
             The Logger factory
@@ -463,11 +444,6 @@
             Web api interface type
             </summary>
         </member>
-        <member name="P:Apizr.Configuring.Proper.IApizrProperOptionsBase.BaseAddress">
-            <summary>
-            Base address
-            </summary>
-        </member>
         <member name="P:Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys">
             <summary>
             Policy keys from the registry
@@ -478,115 +454,19 @@
             The logger instance
             </summary>
         </member>
-        <member name="M:Apizr.Configuring.Proper.IApizrProperOptionsBuilder`2.WithBaseAddress(System.Func{System.String})">
-            <summary>
-            Define your web api base address (could be defined with WebApiAttribute)
-            </summary>
-            <param name="baseAddressFactory">Your web api base address factory</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Configuring.Proper.IApizrProperOptionsBuilder`2.WithBaseAddress(System.Func{System.Uri})">
-            <summary>
-            Define your web api base address (could be defined with WebApiAttribute)
-            </summary>
-            <param name="baseAddressFactory">Your web api base address factory</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``1">
-            <summary>
-            Get a Crud manager instance for an entity type
-            </summary>
-            <typeparam name="T">The managed entity type</typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``2">
-            <summary>
-            Get a Crud manager instance for an entity type with a specific key type
-            </summary>
-            <typeparam name="T">The managed entity type</typeparam>
-            <typeparam name="TKey">The entity's key type</typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``3">
-            <summary>
-            Get a Crud manager instance for an entity type with a specific key type and ReadAll result type
-            </summary>
-            <typeparam name="T">The managed entity type</typeparam>
-            <typeparam name="TKey">The entity's key type</typeparam>
-            <typeparam name="TReadAllResult">The ReadAll request result type</typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``4">
-            <summary>
-            Get a Crud manager instance for an entity type with a specific key type, ReadAll result type and ReadAll params type
-            </summary>
-            <typeparam name="T">The managed entity type</typeparam>
-            <typeparam name="TKey">The entity's key type</typeparam>
-            <typeparam name="TReadAllResult">The ReadAll request result type</typeparam>
-            <typeparam name="TReadAllParams">The ReadAll request params type</typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetFor``1">
-            <summary>
-            Get an api manager instance
-            </summary>
-            <typeparam name="TWebApi">The managed api type</typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``1(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)">
-            <summary>
-            Try to get a Crud manager instance for an entity type
-            </summary>
-            <typeparam name="T">The managed entity type</typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``2(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)">
-            <summary>
-            Try to get a Crud manager instance for an entity type with a specific key type
-            </summary>
-            <typeparam name="T">The managed entity type</typeparam>
-            <typeparam name="TKey">The entity's key type</typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``3(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}}@)">
-            <summary>
-            Try to get a Crud manager instance for an entity type with a specific key type and ReadAll result type
-            </summary>
-            <typeparam name="T">The managed entity type</typeparam>
-            <typeparam name="TKey">The entity's key type</typeparam>
-            <typeparam name="TReadAllResult">The ReadAll request result type</typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``4(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}}@)">
-            <summary>
-            Try to get a Crud manager instance for an entity type with a specific key type, ReadAll result type and ReadAll params type
-            </summary>
-            <typeparam name="T">The managed entity type</typeparam>
-            <typeparam name="TKey">The entity's key type</typeparam>
-            <typeparam name="TReadAllResult">The ReadAll request result type</typeparam>
-            <typeparam name="TReadAllParams">The ReadAll request params type</typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetFor``1(Apizr.IApizrManager{``0}@)">
-            <summary>
-            Try to get an api manager instance
-            </summary>
-            <typeparam name="TWebApi">The managed api type</typeparam>
-            <returns></returns>
-        </member>
-        <member name="P:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.Count">
+        <member name="P:Apizr.Configuring.Registry.IApizrEnumerableRegistry.Count">
             <summary>
             Managers count
             </summary>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``1">
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor``1">
             <summary>
             Check if registry contains a manager for <typeparamref name="T"/> entity type
             </summary>
             <typeparam name="T">The entity type to manage</typeparam>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``2">
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor``2">
             <summary>
             Check if registry contains a manager for <typeparamref name="T"/> entity type with <typeparamref name="TKey"/> key type
             </summary>
@@ -594,7 +474,7 @@
             <typeparam name="TKey">The entity key type</typeparam>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``3">
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor``3">
             <summary>
             Check if registry contains a manager for <typeparamref name="T"/> entity type with <typeparamref name="TKey"/> key type and <typeparamref name="TReadAllResult"/> ReadAll result type
             </summary>
@@ -603,7 +483,7 @@
             <typeparam name="TReadAllResult">The ReadAll result type</typeparam>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``4">
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor``4">
             <summary>
             Check if registry contains a manager for <typeparamref name="T"/> entity type with <typeparamref name="TKey"/> key type,
             <typeparamref name="TReadAllResult"/> ReadAll result type and <typeparamref name="TReadAllParams"/> ReadAll params type
@@ -614,14 +494,96 @@
             <typeparam name="TReadAllParams">The ReadAll params type</typeparam>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsFor``1">
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsManagerFor``1">
             <summary>
             Check if registry contains a manager for <typeparamref name="TWebApi"/> api type
             </summary>
             <typeparam name="TWebApi">The api type</typeparam>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilder`3.AddCrudFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptionsBase,``4},System.Action{`2})">
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor``1">
+            <summary>
+            Get a Crud manager instance for an entity type
+            </summary>
+            <typeparam name="T">The managed entity type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor``2">
+            <summary>
+            Get a Crud manager instance for an entity type with a specific key type
+            </summary>
+            <typeparam name="T">The managed entity type</typeparam>
+            <typeparam name="TKey">The entity's key type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor``3">
+            <summary>
+            Get a Crud manager instance for an entity type with a specific key type and ReadAll result type
+            </summary>
+            <typeparam name="T">The managed entity type</typeparam>
+            <typeparam name="TKey">The entity's key type</typeparam>
+            <typeparam name="TReadAllResult">The ReadAll request result type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor``4">
+            <summary>
+            Get a Crud manager instance for an entity type with a specific key type, ReadAll result type and ReadAll params type
+            </summary>
+            <typeparam name="T">The managed entity type</typeparam>
+            <typeparam name="TKey">The entity's key type</typeparam>
+            <typeparam name="TReadAllResult">The ReadAll request result type</typeparam>
+            <typeparam name="TReadAllParams">The ReadAll request params type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetManagerFor``1">
+            <summary>
+            Get an api manager instance
+            </summary>
+            <typeparam name="TWebApi">The managed api type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor``1(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)">
+            <summary>
+            Try to get a Crud manager instance for an entity type
+            </summary>
+            <typeparam name="T">The managed entity type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor``2(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)">
+            <summary>
+            Try to get a Crud manager instance for an entity type with a specific key type
+            </summary>
+            <typeparam name="T">The managed entity type</typeparam>
+            <typeparam name="TKey">The entity's key type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor``3(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}}@)">
+            <summary>
+            Try to get a Crud manager instance for an entity type with a specific key type and ReadAll result type
+            </summary>
+            <typeparam name="T">The managed entity type</typeparam>
+            <typeparam name="TKey">The entity's key type</typeparam>
+            <typeparam name="TReadAllResult">The ReadAll request result type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor``4(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}}@)">
+            <summary>
+            Try to get a Crud manager instance for an entity type with a specific key type, ReadAll result type and ReadAll params type
+            </summary>
+            <typeparam name="T">The managed entity type</typeparam>
+            <typeparam name="TKey">The entity's key type</typeparam>
+            <typeparam name="TReadAllResult">The ReadAll request result type</typeparam>
+            <typeparam name="TReadAllParams">The ReadAll request params type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetManagerFor``1(Apizr.IApizrManager{``0}@)">
+            <summary>
+            Try to get an api manager instance
+            </summary>
+            <typeparam name="TWebApi">The managed api type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilder`3.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptionsBase,``4},System.Action{`2})">
             <summary>
             Create a <typeparamref name="TApizrManager"/> instance for a managed crud api for <typeparamref name="T"/> object (class), 
             with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
@@ -637,7 +599,7 @@
             <param name="properOptionsBuilder">The builder defining some api proper options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilder`3.AddFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptions{``0},``1},System.Action{`2})">
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilder`3.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptions{``0},``1},System.Action{`2})">
             <summary>
             Create a <typeparamref name="TApizrManager"/> instance for a managed <typeparamref name="TWebApi"/>
             </summary>
@@ -652,7 +614,7 @@
             Apizr registry
             </summary>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.AddCrudFor``1(System.Action{`2})">
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.AddCrudManagerFor``1(System.Action{`2})">
             <summary>
             Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
             with key of type <see cref="T:System.Int32"/> and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
@@ -662,7 +624,7 @@
             <param name="optionsBuilder">The builder defining some api proper options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.AddCrudFor``2(System.Action{`2})">
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.AddCrudManagerFor``2(System.Action{`2})">
             <summary>
             Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
             with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
@@ -673,7 +635,7 @@
             <param name="optionsBuilder">The builder defining some api proper options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.AddCrudFor``3(System.Action{`2})">
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.AddCrudManagerFor``3(System.Action{`2})">
             <summary>
             Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
             with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
@@ -686,7 +648,7 @@
             <param name="optionsBuilder">The builder defining some api proper options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.AddCrudFor``4(System.Action{`2})">
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.AddCrudManagerFor``4(System.Action{`2})">
             <summary>
             Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
             with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
@@ -700,7 +662,7 @@
             <param name="optionsBuilder">The builder defining some api proper options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.AddFor``1(System.Action{`2})">
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.AddManagerFor``1(System.Action{`2})">
             <summary>
             Create a <see cref="T:Apizr.ApizrManager`1"/> instance
             </summary>
@@ -712,6 +674,20 @@
             <summary>
             Apizr common options
             </summary>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBaseAddress(System.String)">
+            <summary>
+            Define your web api base address (could be defined with WebApiAttribute)
+            </summary>
+            <param name="baseAddress">Your web api base address</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBaseAddress(System.Uri)">
+            <summary>
+            Define your web api base address (could be defined with WebApiAttribute)
+            </summary>
+            <param name="baseAddress">Your web api base address</param>
+            <returns></returns>
         </member>
         <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHttpClientHandler(System.Net.Http.HttpClientHandler)">
             <summary>
@@ -743,6 +719,11 @@
             <param name="logLevels">Log levels to apply while writing (default: Information)</param>
             <returns></returns>
         </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory">
+            <summary>
+            Base address factory
+            </summary>
+        </member>
         <member name="P:Apizr.Configuring.Shared.IApizrSharedOptions.HttpTracerModeFactory">
             <summary>
             Http traffic tracing mode factory
@@ -768,6 +749,11 @@
             Delegating handlers factories
             </summary>
         </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress">
+            <summary>
+            Base address
+            </summary>
+        </member>
         <member name="P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode">
             <summary>
             Http traffic tracing mode
@@ -782,6 +768,20 @@
             <summary>
             Log levels while writing
             </summary>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.String})">
+            <summary>
+            Define your web api base address (could be defined with WebApiAttribute)
+            </summary>
+            <param name="baseAddressFactory">Your web api base address factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.Uri})">
+            <summary>
+            Define your web api base address (could be defined with WebApiAttribute)
+            </summary>
+            <param name="baseAddressFactory">Your web api base address factory</param>
+            <returns></returns>
         </member>
         <member name="M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithHttpClientHandler(System.Func{System.Net.Http.HttpClientHandler})">
             <summary>

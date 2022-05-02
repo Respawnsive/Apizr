@@ -14,9 +14,10 @@ namespace Apizr.Extending.Configuring.Proper
     public class ApizrExtendedProperOptions : ApizrProperOptionsBase, IApizrExtendedProperOptions
     {
         public ApizrExtendedProperOptions(IApizrExtendedSharedOptions sharedOptions,
-            Type webApiType, Type apizrManagerType, Uri baseAddress,
+            Type webApiType, Type apizrManagerType,
             string[] assemblyPolicyRegistryKeys, 
             string[] webApiPolicyRegistryKeys,
+            Uri baseAddress,
             HttpTracerMode? httpTracerMode,
             HttpMessageParts? trafficVerbosity,
             params LogLevel[] logLevels) : base(sharedOptions, 
@@ -25,7 +26,7 @@ namespace Apizr.Extending.Configuring.Proper
             webApiPolicyRegistryKeys)
         {
             ApizrManagerType = apizrManagerType;
-            BaseAddressFactory = _ => baseAddress;
+            BaseAddressFactory = serviceProvider => baseAddress ?? sharedOptions.BaseAddressFactory.Invoke(serviceProvider);
             HttpTracerModeFactory = serviceProvider => httpTracerMode ?? sharedOptions.HttpTracerModeFactory.Invoke(serviceProvider);
             TrafficVerbosityFactory = serviceProvider => trafficVerbosity ?? sharedOptions.TrafficVerbosityFactory.Invoke(serviceProvider);
             LogLevelsFactory = serviceProvider => logLevels?.Any() == true ? logLevels : sharedOptions.LogLevelsFactory.Invoke(serviceProvider);

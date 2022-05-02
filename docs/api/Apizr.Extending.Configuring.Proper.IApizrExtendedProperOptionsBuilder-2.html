@@ -88,10 +88,10 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase-2.html#Apizr_Configuring_Proper_IApizrGlobalProperOptionsBuilderBase_2_WithBaseAddress_System_String_">IApizrGlobalProperOptionsBuilderBase&lt;TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder&gt;.WithBaseAddress(String)</a>
+      <a class="xref" href="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_String__">IApizrExtendedSharedOptionsBuilder&lt;TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder&gt;.WithBaseAddress(Func&lt;IServiceProvider, String&gt;)</a>
     </div>
     <div>
-      <a class="xref" href="Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase-2.html#Apizr_Configuring_Proper_IApizrGlobalProperOptionsBuilderBase_2_WithBaseAddress_System_Uri_">IApizrGlobalProperOptionsBuilderBase&lt;TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder&gt;.WithBaseAddress(Uri)</a>
+      <a class="xref" href="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_Uri__">IApizrExtendedSharedOptionsBuilder&lt;TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder&gt;.WithBaseAddress(Func&lt;IServiceProvider, Uri&gt;)</a>
     </div>
     <div>
       <a class="xref" href="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithLogging_System_Func_System_IServiceProvider_Apizr_Logging_HttpTracerMode__System_Func_System_IServiceProvider_Apizr_Logging_HttpMessageParts__System_Func_System_IServiceProvider_Microsoft_Extensions_Logging_LogLevel____">IApizrExtendedSharedOptionsBuilder&lt;TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder&gt;.WithLogging(Func&lt;IServiceProvider, HttpTracerMode&gt;, Func&lt;IServiceProvider, HttpMessageParts&gt;, Func&lt;IServiceProvider, LogLevel[]&gt;)</a>
@@ -119,6 +119,12 @@
     </div>
     <div>
       <a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_ApizrOptions">IApizrGlobalSharedOptionsBuilderBase&lt;TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder&gt;.ApizrOptions</a>
+    </div>
+    <div>
+      <a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithBaseAddress_System_String_">IApizrGlobalSharedOptionsBuilderBase&lt;TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder&gt;.WithBaseAddress(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithBaseAddress_System_Uri_">IApizrGlobalSharedOptionsBuilderBase&lt;TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder&gt;.WithBaseAddress(Uri)</a>
     </div>
     <div>
       <a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHttpClientHandler_System_Net_Http_HttpClientHandler_">IApizrGlobalSharedOptionsBuilderBase&lt;TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder&gt;.WithHttpClientHandler(HttpClientHandler)</a>
@@ -154,96 +160,6 @@
       </tr>
       <tr>
         <td><span class="parametername">TApizrExtendedProperOptionsBuilder</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="methods">Methods
-  </h3>
-  
-  
-  <a id="Apizr_Extending_Configuring_Proper_IApizrExtendedProperOptionsBuilder_2_WithBaseAddress_" data-uid="Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2.WithBaseAddress*"></a>
-  <h4 id="Apizr_Extending_Configuring_Proper_IApizrExtendedProperOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_String__" data-uid="Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})">WithBaseAddress(Func&lt;IServiceProvider, String&gt;)</h4>
-  <div class="markdown level1 summary"><p>Define your web api base address (could be defined with WebApiAttribute)</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">TApizrExtendedProperOptionsBuilder WithBaseAddress(Func&lt;IServiceProvider, string&gt; baseAddressFactory)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.IServiceProvider</span>, <span class="xref">System.String</span>&gt;</td>
-        <td><span class="parametername">baseAddressFactory</span></td>
-        <td><p>Your web api base address factory</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApizrExtendedProperOptionsBuilder</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Extending_Configuring_Proper_IApizrExtendedProperOptionsBuilder_2_WithBaseAddress_" data-uid="Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2.WithBaseAddress*"></a>
-  <h4 id="Apizr_Extending_Configuring_Proper_IApizrExtendedProperOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_Uri__" data-uid="Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})">WithBaseAddress(Func&lt;IServiceProvider, Uri&gt;)</h4>
-  <div class="markdown level1 summary"><p>Define your web api base address (could be defined with WebApiAttribute)</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">TApizrExtendedProperOptionsBuilder WithBaseAddress(Func&lt;IServiceProvider, Uri&gt; baseAddressFactory)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.IServiceProvider</span>, <span class="xref">System.Uri</span>&gt;</td>
-        <td><span class="parametername">baseAddressFactory</span></td>
-        <td><p>Your web api base address factory</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApizrExtendedProperOptionsBuilder</span></td>
         <td></td>
       </tr>
     </tbody>

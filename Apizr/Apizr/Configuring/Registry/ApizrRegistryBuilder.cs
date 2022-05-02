@@ -24,28 +24,28 @@ namespace Apizr.Configuring.Registry
 
         #region Crud
 
-        public IApizrRegistryBuilder AddCrudFor<T>(Action<IApizrProperOptionsBuilder> optionsBuilder = null) where T : class =>
-            AddFor<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>,
+        public IApizrRegistryBuilder AddCrudManagerFor<T>(Action<IApizrProperOptionsBuilder> optionsBuilder = null) where T : class =>
+            AddManagerFor<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>,
                 ApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>>(
                 (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>(lazyWebApi,
                         connectivityHandler, cacheHandler, mappingHandler,
                         policyRegistry, apizrOptions), optionsBuilder);
 
-        public IApizrRegistryBuilder AddCrudFor<T, TKey>(
+        public IApizrRegistryBuilder AddCrudManagerFor<T, TKey>(
             Action<IApizrProperOptionsBuilder> properOptionsBuilder = null) where T : class =>
-            AddFor<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>,
+            AddManagerFor<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>,
                 ApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>>>(
                 (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>>(lazyWebApi,
                         connectivityHandler, cacheHandler, mappingHandler,
                         policyRegistry, apizrOptions), properOptionsBuilder);
 
-        public IApizrRegistryBuilder AddCrudFor<T, TKey,
+        public IApizrRegistryBuilder AddCrudManagerFor<T, TKey,
             TReadAllResult>(
             Action<IApizrProperOptionsBuilder> properOptionsBuilder = null)
             where T : class =>
-            AddFor<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>,
+            AddManagerFor<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>,
                 ApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>>>(
                 (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>>(lazyWebApi,
@@ -53,11 +53,11 @@ namespace Apizr.Configuring.Registry
                         cacheHandler, mappingHandler,
                         policyRegistry, apizrOptions), properOptionsBuilder);
 
-        public IApizrRegistryBuilder AddCrudFor<T, TKey, TReadAllResult,
+        public IApizrRegistryBuilder AddCrudManagerFor<T, TKey, TReadAllResult,
             TReadAllParams>(
             Action<IApizrProperOptionsBuilder> properOptionsBuilder = null)
             where T : class =>
-            AddFor<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>,
+            AddManagerFor<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>,
                 ApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>>(
                 (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>(lazyWebApi,
@@ -65,7 +65,7 @@ namespace Apizr.Configuring.Registry
                         cacheHandler, mappingHandler,
                         policyRegistry, apizrOptions), properOptionsBuilder);
 
-        public IApizrRegistryBuilder AddCrudFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(
+        public IApizrRegistryBuilder AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(
             Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler,
                 IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptionsBase,
                 TApizrManager> apizrManagerFactory,
@@ -73,27 +73,27 @@ namespace Apizr.Configuring.Registry
             where T : class
             where TReadAllParams : class
             where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> =>
-            AddFor(apizrManagerFactory, properOptionsBuilder);
+            AddManagerFor(apizrManagerFactory, properOptionsBuilder);
 
         #endregion
 
         #region General
 
-        public IApizrRegistryBuilder AddFor<TWebApi>(
+        public IApizrRegistryBuilder AddManagerFor<TWebApi>(
             Action<IApizrProperOptionsBuilder> properOptionsBuilder = null) =>
-            AddFor<TWebApi, ApizrManager<TWebApi>>(
+            AddManagerFor<TWebApi, ApizrManager<TWebApi>>(
                 (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<TWebApi>(lazyWebApi, connectivityHandler, cacheHandler, mappingHandler,
                         policyRegistry, apizrOptions), properOptionsBuilder);
 
-        public IApizrRegistryBuilder AddFor<TWebApi, TApizrManager>(Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler,
+        public IApizrRegistryBuilder AddManagerFor<TWebApi, TApizrManager>(Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler,
                 IReadOnlyPolicyRegistry<string>, IApizrOptions<TWebApi>, TApizrManager> apizrManagerFactory,
             Action<IApizrProperOptionsBuilder> properOptionsBuilder = null)
             where TApizrManager : IApizrManager<TWebApi>
         {
-            var properOptions = Apizr.CreateApizrProperOptions<TWebApi>(CommonOptions, properOptionsBuilder);
-            var managerFactory = new Func<IApizrManager<TWebApi>>(() => Apizr.CreateFor(apizrManagerFactory, CommonOptions, properOptions));
-            Registry.AddOrUpdateFor(managerFactory);
+            var properOptions = ApizrBuilder.CreateProperOptions<TWebApi>(CommonOptions, properOptionsBuilder);
+            var managerFactory = new Func<IApizrManager<TWebApi>>(() => ApizrBuilder.CreateManagerFor(apizrManagerFactory, CommonOptions, properOptions));
+            Registry.AddOrUpdateManagerFor(managerFactory);
 
             return this;
         } 

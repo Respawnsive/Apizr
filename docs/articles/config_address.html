@@ -125,7 +125,8 @@ public class YourCrudEntity
 </code></pre><p>The extended world offers another option with a factory providing a service provider instance.
 It could help you to resolve the setting at runtime:</p>
 <pre><code class="lang-csharp">options =&gt; options.WithBaseAddress(serviceProvider =&gt; serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().YourBaseAddress))
-</code></pre></section>
+</code></pre><p>The <code>WithBaseAddress</code> option is available at both common and specific configuration level, meanning that you can share a base address with several api interfaces and/or set a specific one for some others.</p>
+</section>
 </div>
 </article>
           </div>

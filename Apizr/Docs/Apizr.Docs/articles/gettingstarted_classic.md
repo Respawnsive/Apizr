@@ -49,7 +49,7 @@ var registry = new PolicyRegistry
 
 // Apizr registration
 myContainer.RegistrationMethodFactory(() => 
-    Apizr.CreateFor<IReqResService>(options => options
+    ApizrBuilder.CreateManagerFor<IReqResService>(options => options
         .WithPolicyRegistry(registry)
         .WithAkavacheCacheHandler())
 );
@@ -79,7 +79,7 @@ public override void ConfigureServices(IServiceCollection services)
     services.AddPolicyRegistry(registry);
 
     // Apizr registration
-    services.AddApizrFor<IReqResService>(options => options.WithAkavacheCacheHandler());
+    services.AddApizrManagerFor<IReqResService>(options => options.WithAkavacheCacheHandler());
 }
 ```
 
@@ -111,10 +111,10 @@ var registry = new PolicyRegistry
 };
 
 // Apizr registry
-var apizrRegistry = Apizr.Create(
+var apizrRegistry = ApizrBuilder.CreateRegistry(
     registry => registry
-        .AddFor<IReqResService>()
-        .AddFor<IHttpBinService>(
+        .AddManagerFor<IReqResService>()
+        .AddManagerFor<IHttpBinService>(
             options => options
                 .WithLogging(
                     HttpTracerMode.Everything, 
@@ -155,9 +155,9 @@ Or, you could use the managers directly from the registry instead of registering
 Here's how to get a manager from the registry:
 
 ```csharp
-var reqResManager = apizrRegistry.GetFor<IReqResService>();
+var reqResManager = apizrRegistry.GetManagerFor<IReqResService>();
 
-var httpBinManager = apizrRegistry.GetFor<IHttpBinService>();
+var httpBinManager = apizrRegistry.GetManagerFor<IHttpBinService>();
 ```
 
 #### [Extended](#tab/tabid-extended)
@@ -187,8 +187,8 @@ public override void ConfigureServices(IServiceCollection services)
     // Apizr registration
     services.AddApizr(
         registry => registry
-            .AddFor<IReqResService>()
-            .AddFor<IHttpBinService>(
+            .AddManagerFor<IReqResService>()
+            .AddManagerFor<IHttpBinService>(
                 options => options
                     .WithLogging(
                         HttpTracerMode.Everything, 
@@ -225,9 +225,9 @@ Also, the registry itslef will be registered into the container, so you could us
 Here's how to get a manager from the registry:
 
 ```csharp
-var reqResManager = apizrRegistry.GetFor<IReqResService>();
+var reqResManager = apizrRegistry.GetManagerFor<IReqResService>();
 
-var httpBinManager = apizrRegistry.GetFor<IHttpBinService>();
+var httpBinManager = apizrRegistry.GetManagerFor<IHttpBinService>();
 ```
 ***
 
@@ -258,7 +258,7 @@ public override void ConfigureServices(IServiceCollection services)
     services.AddPolicyRegistry(registry);
 
     // Apizr registration
-    services.AddApizrFor(options => options.WithAkavacheCacheHandler(), ASSEMBLIES_CONTAINING_INTERFACES);
+    services.AddApizrManagerFor(options => options.WithAkavacheCacheHandler(), ASSEMBLIES_CONTAINING_INTERFACES);
 }
 ```
 
@@ -285,7 +285,7 @@ public class YourViewModel
         _reqResManager = reqResManager;
 
         // Or registry injection
-        //_reqResManager = apizrRegistry.GetFor<IReqResService>();
+        //_reqResManager = apizrRegistry.GetManagerFor<IReqResService>();
     }
     
     public ObservableCollection<User>? Users { get; set; }

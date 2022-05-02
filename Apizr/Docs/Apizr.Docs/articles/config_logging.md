@@ -1,6 +1,10 @@
 ﻿## Configuring logging
 
 You can adjust logging configuration with:
+- `httpTracerMode` (default: `Everything`) Http traffic tracing mode:
+  - `ExceptionsOnly` logs only when an exception occurs
+  - `ErrorsAndExceptionsOnly` logs only when an exception or any error occurs
+  - `Everything` logs all, anytime
 - `trafficVerbosity` (default: `All`) Http traffic tracing verbosity (see HttpTracer), with:
   - `None`
   - `RequestBody`
@@ -11,10 +15,6 @@ You can adjust logging configuration with:
   - `ResponseHeaders`
   - `ResponseAll` = `ResponseBody | ResponseHeaders`
   - `All` = `ResponseAll | RequestAll`
-- `httpTracerMode` (default: `Everything`) Http traffic tracing mode:
-  - `ExceptionsOnly` logs only when an exception occurs
-  - `ErrorsAndExceptionsOnly` logs only when an exception or any error occurs
-  - `Everything` logs all, anytime
 - `logLevels` (default: [Low] `Trace`, [Medium] `Information` and [High] `Critical`) Log levels to apply while writing logs (see Microsoft.Enxtension.Logging), with:
   - `Trace`
   - `Debug`

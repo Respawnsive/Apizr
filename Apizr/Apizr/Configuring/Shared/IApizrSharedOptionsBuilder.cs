@@ -14,6 +14,20 @@ namespace Apizr.Configuring.Shared
         where TApizrSharedOptionsBuilder : IApizrSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>
     {
         /// <summary>
+        /// Define your web api base address (could be defined with WebApiAttribute)
+        /// </summary>
+        /// <param name="baseAddressFactory">Your web api base address factory</param>
+        /// <returns></returns>
+        TApizrSharedOptionsBuilder WithBaseAddress(Func<string> baseAddressFactory);
+
+        /// <summary>
+        /// Define your web api base address (could be defined with WebApiAttribute)
+        /// </summary>
+        /// <param name="baseAddressFactory">Your web api base address factory</param>
+        /// <returns></returns>
+        TApizrSharedOptionsBuilder WithBaseAddress(Func<Uri> baseAddressFactory);
+
+        /// <summary>
         /// Provide a custom HttpClientHandler
         /// </summary>
         /// <param name="httpClientHandlerFactory">An <see cref="HttpClientHandler"/> instance factory</param>

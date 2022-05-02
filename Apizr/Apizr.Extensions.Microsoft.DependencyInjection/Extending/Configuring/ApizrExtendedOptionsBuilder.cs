@@ -26,19 +26,10 @@ namespace Apizr.Extending.Configuring
         public IApizrExtendedOptions ApizrOptions => Options;
 
         public IApizrExtendedOptionsBuilder WithBaseAddress(string baseAddress)
-        {
-            if (Uri.TryCreate(baseAddress, UriKind.RelativeOrAbsolute, out var baseUri))
-                Options.BaseAddressFactory = _ => baseUri;
-
-            return this;
-        }
+            => WithBaseAddress(_ => baseAddress);
 
         public IApizrExtendedOptionsBuilder WithBaseAddress(Uri baseAddress)
-        {
-            Options.BaseAddressFactory = _ => baseAddress;
-
-            return this;
-        }
+            => WithBaseAddress(_ => baseAddress);
 
         public IApizrExtendedOptionsBuilder WithBaseAddress(Func<IServiceProvider, string> baseAddressFactory)
         {

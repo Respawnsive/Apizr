@@ -45,9 +45,9 @@ namespace Apizr.Tests
         [Fact]
         public void Apizr_Should_Create_Manager()
         {
-            var reqResManager = Apizr.CreateFor<IReqResService>();
-            var httpBinManager = Apizr.CreateFor<IHttpBinService>();
-            var userManager = Apizr.CreateCrudFor<User, int, PagedResult<User>, IDictionary<string, object>>();
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>();
+            var httpBinManager = ApizrBuilder.CreateManagerFor<IHttpBinService>();
+            var userManager = ApizrBuilder.CreateCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>();
 
             reqResManager.Should().NotBeNull();
             httpBinManager.Should().NotBeNull();
@@ -57,11 +57,17 @@ namespace Apizr.Tests
         [Fact]
         public void Calling_WithBaseAddress_Should_Set_BaseAddress()
         {
-            var uri = new Uri("http://api.com");
+            var attributeUri = "https://reqres.in/api";
+            var uri1 = new Uri("http://uri1.com");
 
-            var reqResManager = Apizr.CreateFor<IReqResService>(options => options.WithBaseAddress(uri));
+            // By attribute
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>();
+            reqResManager.Options.BaseAddress.Should().Be(attributeUri);
 
-            reqResManager.Options.BaseAddress.Should().Be(uri);
+            // By proper option overriding attribute
+            reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>(options =>
+                options.WithBaseAddress(uri1));
+            reqResManager.Options.BaseAddress.Should().Be(uri1);
         }
 
         [Fact]
@@ -69,7 +75,7 @@ namespace Apizr.Tests
         {
             string token = null;
 
-            var httpBinManager = Apizr.CreateFor<IHttpBinService>(options =>
+            var httpBinManager = ApizrBuilder.CreateManagerFor<IHttpBinService>(options =>
                         options.WithAuthenticationHandler(_ => Task.FromResult(token = "token")));
 
             var result = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
@@ -81,7 +87,9 @@ namespace Apizr.Tests
         [Fact]
         public void Calling_WithLogging_Should_Set_LoggingSettings()
         {
-            var reqResManager = Apizr.CreateFor<IReqResService>(options => options.WithLogging((HttpTracerMode) HttpTracerMode.ExceptionsOnly, (HttpMessageParts) HttpMessageParts.RequestCookies, LogLevel.Warning));
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>(
+                options => options.WithLogging((HttpTracerMode) HttpTracerMode.ExceptionsOnly,
+                    (HttpMessageParts) HttpMessageParts.RequestCookies, LogLevel.Warning));
 
             reqResManager.Options.HttpTracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
             reqResManager.Options.TrafficVerbosity.Should().Be(HttpMessageParts.RequestCookies);
@@ -93,7 +101,7 @@ namespace Apizr.Tests
         {
             string token = null;
 
-            var httpBinManager = Apizr.CreateFor<IHttpBinService>(options => options
+            var httpBinManager = ApizrBuilder.CreateManagerFor<IHttpBinService>(options => options
                     .WithAuthenticationHandler(_ => Task.FromResult(token = "token")));
 
             var result = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
@@ -105,9 +113,12 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithAkavacheCacheHandler_Should_Cache_Result()
         {
-            var reqResManager = Apizr.CreateFor<IReqResService>(options => options
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>(options => options
                     .WithAkavacheCacheHandler()
                     .AddDelegatingHandler(new FailingRequestHandler()));
+
+            // Clearing cache
+            await reqResManager.ClearCacheAsync();
 
             // Defining a throwing request
             Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.BadRequest));
@@ -147,7 +158,7 @@ namespace Apizr.Tests
                 }
             };
 
-            var reqResManager = Apizr.CreateFor<IReqResService>(options => options
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>(options => options
                     .WithPolicyRegistry(policyRegistry)
                     .AddDelegatingHandler(new FailingRequestHandler()));
 
@@ -166,7 +177,7 @@ namespace Apizr.Tests
         {
             var isConnected = false;
 
-            var reqResManager = Apizr.CreateFor<IReqResService>(options => options
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>(options => options
                     .WithConnectivityHandler(() => isConnected));
 
             // Defining a request
@@ -186,7 +197,7 @@ namespace Apizr.Tests
         [Fact]
         public void Calling_WithRefitSettings_Should_Set_Settings()
         {
-            var reqResManager = Apizr.CreateFor<IReqResService>(options => options
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>(options => options
                     .WithRefitSettings(_refitSettings));
 
             reqResManager.Options.RefitSettings.Should().Be(_refitSettings);
@@ -201,7 +212,7 @@ namespace Apizr.Tests
                 config.AddProfile<UserMinUserProfile>();
             });
 
-            var reqResManager = Apizr.CreateFor<IReqResService>(options => options
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>(options => options
                     .WithRefitSettings(_refitSettings)
                     .WithAutoMapperMappingHandler(mapperConfig));
 
@@ -226,7 +237,7 @@ namespace Apizr.Tests
                 config.AddProfile<UserMinUserProfile>();
             });
 
-            var reqResManager = Apizr.CreateFor<IReqResService>(options => options
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>(options => options
                     .WithRefitSettings(_refitSettings)
                     .WithMappingHandler(new AutoMapperMappingHandler(mapperConfig.CreateMapper())));
 

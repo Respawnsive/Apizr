@@ -5,16 +5,22 @@ items:
   id: IApizrEnumerableRegistry
   parent: Apizr.Configuring.Registry
   children:
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``1
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``2
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``3
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``4
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetFor``1
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``1(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``2(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``3(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``4(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}}@)
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetFor``1(Apizr.IApizrManager{``0}@)
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor``1
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor``2
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor``3
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor``4
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsManagerFor``1
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Count
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor``1
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor``2
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor``3
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor``4
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetManagerFor``1
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor``1(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor``2(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor``3(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor``4(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}}@)
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetManagerFor``1(Apizr.IApizrManager{``0}@)
   langs:
   - csharp
   - vb
@@ -30,19 +36,13 @@ items:
   - Apizr
   namespace: Apizr.Configuring.Registry
   syntax:
-    content: 'public interface IApizrEnumerableRegistry : IEnumerable<KeyValuePair<Type, Func<IApizrManager>>>, IEnumerable, IApizrEnumerableRegistryBase'
+    content: 'public interface IApizrEnumerableRegistry : IEnumerable<KeyValuePair<Type, Func<IApizrManager>>>, IEnumerable'
     content.vb: >-
       Public Interface IApizrEnumerableRegistry
-          Inherits IEnumerable(Of KeyValuePair(Of Type, Func(Of IApizrManager))), IApizrEnumerableRegistryBase
+          Inherits IEnumerable(Of KeyValuePair(Of Type, Func(Of IApizrManager)))
   inheritedMembers:
   - System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Type,System.Func{Apizr.IApizrManager}}}.GetEnumerator
   - System.Collections.IEnumerable.GetEnumerator
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.Count
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``1
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``2
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``3
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``4
-  - Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsFor``1
   extensionMethods:
   - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
   modifiers.csharp:
@@ -51,21 +51,237 @@ items:
   modifiers.vb:
   - Public
   - Interface
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``1
-  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``1
-  id: GetCrudFor``1
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Count
+  commentId: P:Apizr.Configuring.Registry.IApizrEnumerableRegistry.Count
+  id: Count
   parent: Apizr.Configuring.Registry.IApizrEnumerableRegistry
   langs:
   - csharp
   - vb
-  name: GetCrudFor<T>()
-  nameWithType: IApizrEnumerableRegistry.GetCrudFor<T>()
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor<T>()
-  type: Method
+  name: Count
+  nameWithType: IApizrEnumerableRegistry.Count
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Count
+  type: Property
   source:
-    id: GetCrudFor
+    id: Count
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\IApizrEnumerableRegistry.cs
     startLine: 13
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Registry
+  summary: "\nManagers count\n"
+  example: []
+  syntax:
+    content: int Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: ReadOnly Property Count As Integer
+  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Count*
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor``1
+  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor``1
+  id: ContainsCrudManagerFor``1
+  parent: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  langs:
+  - csharp
+  - vb
+  name: ContainsCrudManagerFor<T>()
+  nameWithType: IApizrEnumerableRegistry.ContainsCrudManagerFor<T>()
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor<T>()
+  type: Method
+  source:
+    id: ContainsCrudManagerFor
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\IApizrEnumerableRegistry.cs
+    startLine: 20
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Registry
+  summary: "\nCheck if registry contains a manager for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> entity type\n"
+  example: []
+  syntax:
+    content: >-
+      bool ContainsCrudManagerFor<T>()
+          where T : class
+    typeParameters:
+    - id: T
+      description: The entity type to manage
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: Function ContainsCrudManagerFor(Of T As Class) As Boolean
+  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor*
+  nameWithType.vb: IApizrEnumerableRegistry.ContainsCrudManagerFor(Of T)()
+  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor(Of T)()
+  name.vb: ContainsCrudManagerFor(Of T)()
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor``2
+  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor``2
+  id: ContainsCrudManagerFor``2
+  parent: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  langs:
+  - csharp
+  - vb
+  name: ContainsCrudManagerFor<T, TKey>()
+  nameWithType: IApizrEnumerableRegistry.ContainsCrudManagerFor<T, TKey>()
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor<T, TKey>()
+  type: Method
+  source:
+    id: ContainsCrudManagerFor
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\IApizrEnumerableRegistry.cs
+    startLine: 28
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Registry
+  summary: "\nCheck if registry contains a manager for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> entity type with <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> key type\n"
+  example: []
+  syntax:
+    content: >-
+      bool ContainsCrudManagerFor<T, TKey>()
+          where T : class
+    typeParameters:
+    - id: T
+      description: The entity type to manage
+    - id: TKey
+      description: The entity key type
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: Function ContainsCrudManagerFor(Of T As Class, TKey) As Boolean
+  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor*
+  nameWithType.vb: IApizrEnumerableRegistry.ContainsCrudManagerFor(Of T, TKey)()
+  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor(Of T, TKey)()
+  name.vb: ContainsCrudManagerFor(Of T, TKey)()
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor``3
+  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor``3
+  id: ContainsCrudManagerFor``3
+  parent: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  langs:
+  - csharp
+  - vb
+  name: ContainsCrudManagerFor<T, TKey, TReadAllResult>()
+  nameWithType: IApizrEnumerableRegistry.ContainsCrudManagerFor<T, TKey, TReadAllResult>()
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor<T, TKey, TReadAllResult>()
+  type: Method
+  source:
+    id: ContainsCrudManagerFor
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\IApizrEnumerableRegistry.cs
+    startLine: 37
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Registry
+  summary: "\nCheck if registry contains a manager for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> entity type with <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> key type and <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TReadAllResult</code> ReadAll result type\n"
+  example: []
+  syntax:
+    content: >-
+      bool ContainsCrudManagerFor<T, TKey, TReadAllResult>()
+          where T : class
+    typeParameters:
+    - id: T
+      description: The entity type to manage
+    - id: TKey
+      description: The entity key type
+    - id: TReadAllResult
+      description: The ReadAll result type
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: Function ContainsCrudManagerFor(Of T As Class, TKey, TReadAllResult) As Boolean
+  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor*
+  nameWithType.vb: IApizrEnumerableRegistry.ContainsCrudManagerFor(Of T, TKey, TReadAllResult)()
+  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor(Of T, TKey, TReadAllResult)()
+  name.vb: ContainsCrudManagerFor(Of T, TKey, TReadAllResult)()
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor``4
+  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor``4
+  id: ContainsCrudManagerFor``4
+  parent: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  langs:
+  - csharp
+  - vb
+  name: ContainsCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams>()
+  nameWithType: IApizrEnumerableRegistry.ContainsCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams>()
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams>()
+  type: Method
+  source:
+    id: ContainsCrudManagerFor
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\IApizrEnumerableRegistry.cs
+    startLine: 48
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Registry
+  summary: "\nCheck if registry contains a manager for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> entity type with <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> key type,\n<code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TReadAllResult</code> ReadAll result type and <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TReadAllParams</code> ReadAll params type\n"
+  example: []
+  syntax:
+    content: >-
+      bool ContainsCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams>()
+          where T : class
+    typeParameters:
+    - id: T
+      description: The entity type to manage
+    - id: TKey
+      description: The entity key type
+    - id: TReadAllResult
+      description: The ReadAll result type
+    - id: TReadAllParams
+      description: The ReadAll params type
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: Function ContainsCrudManagerFor(Of T As Class, TKey, TReadAllResult, TReadAllParams) As Boolean
+  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor*
+  nameWithType.vb: IApizrEnumerableRegistry.ContainsCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams)()
+  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams)()
+  name.vb: ContainsCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams)()
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsManagerFor``1
+  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsManagerFor``1
+  id: ContainsManagerFor``1
+  parent: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  langs:
+  - csharp
+  - vb
+  name: ContainsManagerFor<TWebApi>()
+  nameWithType: IApizrEnumerableRegistry.ContainsManagerFor<TWebApi>()
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsManagerFor<TWebApi>()
+  type: Method
+  source:
+    id: ContainsManagerFor
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\IApizrEnumerableRegistry.cs
+    startLine: 55
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Registry
+  summary: "\nCheck if registry contains a manager for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code> api type\n"
+  example: []
+  syntax:
+    content: bool ContainsManagerFor<TWebApi>()
+    typeParameters:
+    - id: TWebApi
+      description: The api type
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: Function ContainsManagerFor(Of TWebApi) As Boolean
+  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsManagerFor*
+  nameWithType.vb: IApizrEnumerableRegistry.ContainsManagerFor(Of TWebApi)()
+  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsManagerFor(Of TWebApi)()
+  name.vb: ContainsManagerFor(Of TWebApi)()
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor``1
+  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor``1
+  id: GetCrudManagerFor``1
+  parent: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  langs:
+  - csharp
+  - vb
+  name: GetCrudManagerFor<T>()
+  nameWithType: IApizrEnumerableRegistry.GetCrudManagerFor<T>()
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor<T>()
+  type: Method
+  source:
+    id: GetCrudManagerFor
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\IApizrEnumerableRegistry.cs
+    startLine: 66
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
@@ -73,7 +289,7 @@ items:
   example: []
   syntax:
     content: >-
-      IApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>> GetCrudFor<T>()
+      IApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>> GetCrudManagerFor<T>()
           where T : class
     typeParameters:
     - id: T
@@ -81,26 +297,26 @@ items:
     return:
       type: Apizr.IApizrManager{Apizr.Requesting.ICrudApi{{T},System.Int32,System.Collections.Generic.IEnumerable{{T}},System.Collections.Generic.IDictionary{System.String,System.Object}}}
       description: ''
-    content.vb: Function GetCrudFor(Of T As Class) As IApizrManager(Of ICrudApi(Of T, Integer, IEnumerable(Of T), IDictionary(Of String, Object)))
-  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor*
-  nameWithType.vb: IApizrEnumerableRegistry.GetCrudFor(Of T)()
-  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor(Of T)()
-  name.vb: GetCrudFor(Of T)()
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``2
-  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``2
-  id: GetCrudFor``2
+    content.vb: Function GetCrudManagerFor(Of T As Class) As IApizrManager(Of ICrudApi(Of T, Integer, IEnumerable(Of T), IDictionary(Of String, Object)))
+  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor*
+  nameWithType.vb: IApizrEnumerableRegistry.GetCrudManagerFor(Of T)()
+  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor(Of T)()
+  name.vb: GetCrudManagerFor(Of T)()
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor``2
+  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor``2
+  id: GetCrudManagerFor``2
   parent: Apizr.Configuring.Registry.IApizrEnumerableRegistry
   langs:
   - csharp
   - vb
-  name: GetCrudFor<T, TKey>()
-  nameWithType: IApizrEnumerableRegistry.GetCrudFor<T, TKey>()
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor<T, TKey>()
+  name: GetCrudManagerFor<T, TKey>()
+  nameWithType: IApizrEnumerableRegistry.GetCrudManagerFor<T, TKey>()
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor<T, TKey>()
   type: Method
   source:
-    id: GetCrudFor
+    id: GetCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\IApizrEnumerableRegistry.cs
-    startLine: 21
+    startLine: 74
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
@@ -108,7 +324,7 @@ items:
   example: []
   syntax:
     content: >-
-      IApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>> GetCrudFor<T, TKey>()
+      IApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>> GetCrudManagerFor<T, TKey>()
           where T : class
     typeParameters:
     - id: T
@@ -118,26 +334,26 @@ items:
     return:
       type: Apizr.IApizrManager{Apizr.Requesting.ICrudApi{{T},{TKey},System.Collections.Generic.IEnumerable{{T}},System.Collections.Generic.IDictionary{System.String,System.Object}}}
       description: ''
-    content.vb: Function GetCrudFor(Of T As Class, TKey) As IApizrManager(Of ICrudApi(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object)))
-  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor*
-  nameWithType.vb: IApizrEnumerableRegistry.GetCrudFor(Of T, TKey)()
-  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor(Of T, TKey)()
-  name.vb: GetCrudFor(Of T, TKey)()
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``3
-  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``3
-  id: GetCrudFor``3
+    content.vb: Function GetCrudManagerFor(Of T As Class, TKey) As IApizrManager(Of ICrudApi(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object)))
+  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor*
+  nameWithType.vb: IApizrEnumerableRegistry.GetCrudManagerFor(Of T, TKey)()
+  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor(Of T, TKey)()
+  name.vb: GetCrudManagerFor(Of T, TKey)()
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor``3
+  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor``3
+  id: GetCrudManagerFor``3
   parent: Apizr.Configuring.Registry.IApizrEnumerableRegistry
   langs:
   - csharp
   - vb
-  name: GetCrudFor<T, TKey, TReadAllResult>()
-  nameWithType: IApizrEnumerableRegistry.GetCrudFor<T, TKey, TReadAllResult>()
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor<T, TKey, TReadAllResult>()
+  name: GetCrudManagerFor<T, TKey, TReadAllResult>()
+  nameWithType: IApizrEnumerableRegistry.GetCrudManagerFor<T, TKey, TReadAllResult>()
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor<T, TKey, TReadAllResult>()
   type: Method
   source:
-    id: GetCrudFor
+    id: GetCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\IApizrEnumerableRegistry.cs
-    startLine: 30
+    startLine: 83
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
@@ -145,7 +361,7 @@ items:
   example: []
   syntax:
     content: >-
-      IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>> GetCrudFor<T, TKey, TReadAllResult>()
+      IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>> GetCrudManagerFor<T, TKey, TReadAllResult>()
           where T : class
     typeParameters:
     - id: T
@@ -157,26 +373,26 @@ items:
     return:
       type: Apizr.IApizrManager{Apizr.Requesting.ICrudApi{{T},{TKey},{TReadAllResult},System.Collections.Generic.IDictionary{System.String,System.Object}}}
       description: ''
-    content.vb: Function GetCrudFor(Of T As Class, TKey, TReadAllResult) As IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, IDictionary(Of String, Object)))
-  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor*
-  nameWithType.vb: IApizrEnumerableRegistry.GetCrudFor(Of T, TKey, TReadAllResult)()
-  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor(Of T, TKey, TReadAllResult)()
-  name.vb: GetCrudFor(Of T, TKey, TReadAllResult)()
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``4
-  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor``4
-  id: GetCrudFor``4
+    content.vb: Function GetCrudManagerFor(Of T As Class, TKey, TReadAllResult) As IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, IDictionary(Of String, Object)))
+  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor*
+  nameWithType.vb: IApizrEnumerableRegistry.GetCrudManagerFor(Of T, TKey, TReadAllResult)()
+  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor(Of T, TKey, TReadAllResult)()
+  name.vb: GetCrudManagerFor(Of T, TKey, TReadAllResult)()
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor``4
+  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor``4
+  id: GetCrudManagerFor``4
   parent: Apizr.Configuring.Registry.IApizrEnumerableRegistry
   langs:
   - csharp
   - vb
-  name: GetCrudFor<T, TKey, TReadAllResult, TReadAllParams>()
-  nameWithType: IApizrEnumerableRegistry.GetCrudFor<T, TKey, TReadAllResult, TReadAllParams>()
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor<T, TKey, TReadAllResult, TReadAllParams>()
+  name: GetCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams>()
+  nameWithType: IApizrEnumerableRegistry.GetCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams>()
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams>()
   type: Method
   source:
-    id: GetCrudFor
+    id: GetCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\IApizrEnumerableRegistry.cs
-    startLine: 41
+    startLine: 94
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
@@ -184,7 +400,7 @@ items:
   example: []
   syntax:
     content: >-
-      IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> GetCrudFor<T, TKey, TReadAllResult, TReadAllParams>()
+      IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> GetCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams>()
           where T : class
     typeParameters:
     - id: T
@@ -198,59 +414,59 @@ items:
     return:
       type: Apizr.IApizrManager{Apizr.Requesting.ICrudApi{{T},{TKey},{TReadAllResult},{TReadAllParams}}}
       description: ''
-    content.vb: Function GetCrudFor(Of T As Class, TKey, TReadAllResult, TReadAllParams) As IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams))
-  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor*
-  nameWithType.vb: IApizrEnumerableRegistry.GetCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)()
-  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)()
-  name.vb: GetCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)()
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetFor``1
-  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetFor``1
-  id: GetFor``1
+    content.vb: Function GetCrudManagerFor(Of T As Class, TKey, TReadAllResult, TReadAllParams) As IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams))
+  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor*
+  nameWithType.vb: IApizrEnumerableRegistry.GetCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams)()
+  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams)()
+  name.vb: GetCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams)()
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetManagerFor``1
+  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetManagerFor``1
+  id: GetManagerFor``1
   parent: Apizr.Configuring.Registry.IApizrEnumerableRegistry
   langs:
   - csharp
   - vb
-  name: GetFor<TWebApi>()
-  nameWithType: IApizrEnumerableRegistry.GetFor<TWebApi>()
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetFor<TWebApi>()
+  name: GetManagerFor<TWebApi>()
+  nameWithType: IApizrEnumerableRegistry.GetManagerFor<TWebApi>()
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetManagerFor<TWebApi>()
   type: Method
   source:
-    id: GetFor
+    id: GetManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\IApizrEnumerableRegistry.cs
-    startLine: 49
+    startLine: 102
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
   summary: "\nGet an api manager instance\n"
   example: []
   syntax:
-    content: IApizrManager<TWebApi> GetFor<TWebApi>()
+    content: IApizrManager<TWebApi> GetManagerFor<TWebApi>()
     typeParameters:
     - id: TWebApi
       description: The managed api type
     return:
       type: Apizr.IApizrManager{{TWebApi}}
       description: ''
-    content.vb: Function GetFor(Of TWebApi) As IApizrManager(Of TWebApi)
-  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetFor*
-  nameWithType.vb: IApizrEnumerableRegistry.GetFor(Of TWebApi)()
-  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetFor(Of TWebApi)()
-  name.vb: GetFor(Of TWebApi)()
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``1(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
-  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``1(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
-  id: TryGetCrudFor``1(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
+    content.vb: Function GetManagerFor(Of TWebApi) As IApizrManager(Of TWebApi)
+  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetManagerFor*
+  nameWithType.vb: IApizrEnumerableRegistry.GetManagerFor(Of TWebApi)()
+  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetManagerFor(Of TWebApi)()
+  name.vb: GetManagerFor(Of TWebApi)()
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor``1(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
+  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor``1(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
+  id: TryGetCrudManagerFor``1(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
   parent: Apizr.Configuring.Registry.IApizrEnumerableRegistry
   langs:
   - csharp
   - vb
-  name: TryGetCrudFor<T>(out IApizrManager<ICrudApi<T, Int32, IEnumerable<T>, IDictionary<String, Object>>>)
-  nameWithType: IApizrEnumerableRegistry.TryGetCrudFor<T>(out IApizrManager<ICrudApi<T, Int32, IEnumerable<T>, IDictionary<String, Object>>>)
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor<T>(out Apizr.IApizrManager<Apizr.Requesting.ICrudApi<T, System.Int32, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IDictionary<System.String, System.Object>>>)
+  name: TryGetCrudManagerFor<T>(out IApizrManager<ICrudApi<T, Int32, IEnumerable<T>, IDictionary<String, Object>>>)
+  nameWithType: IApizrEnumerableRegistry.TryGetCrudManagerFor<T>(out IApizrManager<ICrudApi<T, Int32, IEnumerable<T>, IDictionary<String, Object>>>)
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor<T>(out Apizr.IApizrManager<Apizr.Requesting.ICrudApi<T, System.Int32, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IDictionary<System.String, System.Object>>>)
   type: Method
   source:
-    id: TryGetCrudFor
+    id: TryGetCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\IApizrEnumerableRegistry.cs
-    startLine: 56
+    startLine: 113
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
@@ -258,7 +474,7 @@ items:
   example: []
   syntax:
     content: >-
-      bool TryGetCrudFor<T>(out IApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>> manager)
+      bool TryGetCrudManagerFor<T>(out IApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>> manager)
           where T : class
     parameters:
     - id: manager
@@ -269,26 +485,26 @@ items:
     return:
       type: System.Boolean
       description: ''
-    content.vb: Function TryGetCrudFor(Of T As Class)(ByRef manager As IApizrManager(Of ICrudApi(Of T, Integer, IEnumerable(Of T), IDictionary(Of String, Object)))) As Boolean
-  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor*
-  nameWithType.vb: IApizrEnumerableRegistry.TryGetCrudFor(Of T)(ByRef IApizrManager(Of ICrudApi(Of T, Int32, IEnumerable(Of T), IDictionary(Of String, Object))))
-  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor(Of T)(ByRef Apizr.IApizrManager(Of Apizr.Requesting.ICrudApi(Of T, System.Int32, System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IDictionary(Of System.String, System.Object))))
-  name.vb: TryGetCrudFor(Of T)(ByRef IApizrManager(Of ICrudApi(Of T, Int32, IEnumerable(Of T), IDictionary(Of String, Object))))
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``2(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
-  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``2(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
-  id: TryGetCrudFor``2(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
+    content.vb: Function TryGetCrudManagerFor(Of T As Class)(ByRef manager As IApizrManager(Of ICrudApi(Of T, Integer, IEnumerable(Of T), IDictionary(Of String, Object)))) As Boolean
+  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor*
+  nameWithType.vb: IApizrEnumerableRegistry.TryGetCrudManagerFor(Of T)(ByRef IApizrManager(Of ICrudApi(Of T, Int32, IEnumerable(Of T), IDictionary(Of String, Object))))
+  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor(Of T)(ByRef Apizr.IApizrManager(Of Apizr.Requesting.ICrudApi(Of T, System.Int32, System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IDictionary(Of System.String, System.Object))))
+  name.vb: TryGetCrudManagerFor(Of T)(ByRef IApizrManager(Of ICrudApi(Of T, Int32, IEnumerable(Of T), IDictionary(Of String, Object))))
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor``2(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
+  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor``2(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
+  id: TryGetCrudManagerFor``2(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
   parent: Apizr.Configuring.Registry.IApizrEnumerableRegistry
   langs:
   - csharp
   - vb
-  name: TryGetCrudFor<T, TKey>(out IApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<String, Object>>>)
-  nameWithType: IApizrEnumerableRegistry.TryGetCrudFor<T, TKey>(out IApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<String, Object>>>)
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor<T, TKey>(out Apizr.IApizrManager<Apizr.Requesting.ICrudApi<T, TKey, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IDictionary<System.String, System.Object>>>)
+  name: TryGetCrudManagerFor<T, TKey>(out IApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<String, Object>>>)
+  nameWithType: IApizrEnumerableRegistry.TryGetCrudManagerFor<T, TKey>(out IApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<String, Object>>>)
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor<T, TKey>(out Apizr.IApizrManager<Apizr.Requesting.ICrudApi<T, TKey, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IDictionary<System.String, System.Object>>>)
   type: Method
   source:
-    id: TryGetCrudFor
+    id: TryGetCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\IApizrEnumerableRegistry.cs
-    startLine: 64
+    startLine: 121
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
@@ -296,7 +512,7 @@ items:
   example: []
   syntax:
     content: >-
-      bool TryGetCrudFor<T, TKey>(out IApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>> manager)
+      bool TryGetCrudManagerFor<T, TKey>(out IApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>> manager)
           where T : class
     parameters:
     - id: manager
@@ -309,26 +525,26 @@ items:
     return:
       type: System.Boolean
       description: ''
-    content.vb: Function TryGetCrudFor(Of T As Class, TKey)(ByRef manager As IApizrManager(Of ICrudApi(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object)))) As Boolean
-  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor*
-  nameWithType.vb: IApizrEnumerableRegistry.TryGetCrudFor(Of T, TKey)(ByRef IApizrManager(Of ICrudApi(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object))))
-  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor(Of T, TKey)(ByRef Apizr.IApizrManager(Of Apizr.Requesting.ICrudApi(Of T, TKey, System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IDictionary(Of System.String, System.Object))))
-  name.vb: TryGetCrudFor(Of T, TKey)(ByRef IApizrManager(Of ICrudApi(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object))))
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``3(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
-  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``3(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
-  id: TryGetCrudFor``3(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
+    content.vb: Function TryGetCrudManagerFor(Of T As Class, TKey)(ByRef manager As IApizrManager(Of ICrudApi(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object)))) As Boolean
+  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor*
+  nameWithType.vb: IApizrEnumerableRegistry.TryGetCrudManagerFor(Of T, TKey)(ByRef IApizrManager(Of ICrudApi(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object))))
+  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor(Of T, TKey)(ByRef Apizr.IApizrManager(Of Apizr.Requesting.ICrudApi(Of T, TKey, System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IDictionary(Of System.String, System.Object))))
+  name.vb: TryGetCrudManagerFor(Of T, TKey)(ByRef IApizrManager(Of ICrudApi(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object))))
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor``3(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
+  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor``3(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
+  id: TryGetCrudManagerFor``3(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
   parent: Apizr.Configuring.Registry.IApizrEnumerableRegistry
   langs:
   - csharp
   - vb
-  name: TryGetCrudFor<T, TKey, TReadAllResult>(out IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<String, Object>>>)
-  nameWithType: IApizrEnumerableRegistry.TryGetCrudFor<T, TKey, TReadAllResult>(out IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<String, Object>>>)
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor<T, TKey, TReadAllResult>(out Apizr.IApizrManager<Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, System.Collections.Generic.IDictionary<System.String, System.Object>>>)
+  name: TryGetCrudManagerFor<T, TKey, TReadAllResult>(out IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<String, Object>>>)
+  nameWithType: IApizrEnumerableRegistry.TryGetCrudManagerFor<T, TKey, TReadAllResult>(out IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<String, Object>>>)
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor<T, TKey, TReadAllResult>(out Apizr.IApizrManager<Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, System.Collections.Generic.IDictionary<System.String, System.Object>>>)
   type: Method
   source:
-    id: TryGetCrudFor
+    id: TryGetCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\IApizrEnumerableRegistry.cs
-    startLine: 73
+    startLine: 130
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
@@ -336,7 +552,7 @@ items:
   example: []
   syntax:
     content: >-
-      bool TryGetCrudFor<T, TKey, TReadAllResult>(out IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>> manager)
+      bool TryGetCrudManagerFor<T, TKey, TReadAllResult>(out IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>> manager)
           where T : class
     parameters:
     - id: manager
@@ -351,26 +567,26 @@ items:
     return:
       type: System.Boolean
       description: ''
-    content.vb: Function TryGetCrudFor(Of T As Class, TKey, TReadAllResult)(ByRef manager As IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, IDictionary(Of String, Object)))) As Boolean
-  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor*
-  nameWithType.vb: IApizrEnumerableRegistry.TryGetCrudFor(Of T, TKey, TReadAllResult)(ByRef IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, IDictionary(Of String, Object))))
-  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor(Of T, TKey, TReadAllResult)(ByRef Apizr.IApizrManager(Of Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, System.Collections.Generic.IDictionary(Of System.String, System.Object))))
-  name.vb: TryGetCrudFor(Of T, TKey, TReadAllResult)(ByRef IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, IDictionary(Of String, Object))))
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``4(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}}@)
-  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor``4(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}}@)
-  id: TryGetCrudFor``4(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}}@)
+    content.vb: Function TryGetCrudManagerFor(Of T As Class, TKey, TReadAllResult)(ByRef manager As IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, IDictionary(Of String, Object)))) As Boolean
+  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor*
+  nameWithType.vb: IApizrEnumerableRegistry.TryGetCrudManagerFor(Of T, TKey, TReadAllResult)(ByRef IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, IDictionary(Of String, Object))))
+  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor(Of T, TKey, TReadAllResult)(ByRef Apizr.IApizrManager(Of Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, System.Collections.Generic.IDictionary(Of System.String, System.Object))))
+  name.vb: TryGetCrudManagerFor(Of T, TKey, TReadAllResult)(ByRef IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, IDictionary(Of String, Object))))
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor``4(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}}@)
+  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor``4(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}}@)
+  id: TryGetCrudManagerFor``4(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}}@)
   parent: Apizr.Configuring.Registry.IApizrEnumerableRegistry
   langs:
   - csharp
   - vb
-  name: TryGetCrudFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>)
-  nameWithType: IApizrEnumerableRegistry.TryGetCrudFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>)
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor<T, TKey, TReadAllResult, TReadAllParams>(out Apizr.IApizrManager<Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>)
+  name: TryGetCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>)
+  nameWithType: IApizrEnumerableRegistry.TryGetCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>)
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams>(out Apizr.IApizrManager<Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>)
   type: Method
   source:
-    id: TryGetCrudFor
+    id: TryGetCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\IApizrEnumerableRegistry.cs
-    startLine: 83
+    startLine: 140
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
@@ -378,7 +594,7 @@ items:
   example: []
   syntax:
     content: >-
-      bool TryGetCrudFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> manager)
+      bool TryGetCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> manager)
           where T : class
     parameters:
     - id: manager
@@ -395,33 +611,33 @@ items:
     return:
       type: System.Boolean
       description: ''
-    content.vb: Function TryGetCrudFor(Of T As Class, TKey, TReadAllResult, TReadAllParams)(ByRef manager As IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams))) As Boolean
-  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor*
-  nameWithType.vb: IApizrEnumerableRegistry.TryGetCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)(ByRef IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)))
-  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)(ByRef Apizr.IApizrManager(Of Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)))
-  name.vb: TryGetCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)(ByRef IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)))
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetFor``1(Apizr.IApizrManager{``0}@)
-  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetFor``1(Apizr.IApizrManager{``0}@)
-  id: TryGetFor``1(Apizr.IApizrManager{``0}@)
+    content.vb: Function TryGetCrudManagerFor(Of T As Class, TKey, TReadAllResult, TReadAllParams)(ByRef manager As IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams))) As Boolean
+  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor*
+  nameWithType.vb: IApizrEnumerableRegistry.TryGetCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams)(ByRef IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)))
+  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams)(ByRef Apizr.IApizrManager(Of Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)))
+  name.vb: TryGetCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams)(ByRef IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)))
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetManagerFor``1(Apizr.IApizrManager{``0}@)
+  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetManagerFor``1(Apizr.IApizrManager{``0}@)
+  id: TryGetManagerFor``1(Apizr.IApizrManager{``0}@)
   parent: Apizr.Configuring.Registry.IApizrEnumerableRegistry
   langs:
   - csharp
   - vb
-  name: TryGetFor<TWebApi>(out IApizrManager<TWebApi>)
-  nameWithType: IApizrEnumerableRegistry.TryGetFor<TWebApi>(out IApizrManager<TWebApi>)
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetFor<TWebApi>(out Apizr.IApizrManager<TWebApi>)
+  name: TryGetManagerFor<TWebApi>(out IApizrManager<TWebApi>)
+  nameWithType: IApizrEnumerableRegistry.TryGetManagerFor<TWebApi>(out IApizrManager<TWebApi>)
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetManagerFor<TWebApi>(out Apizr.IApizrManager<TWebApi>)
   type: Method
   source:
-    id: TryGetFor
+    id: TryGetManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\IApizrEnumerableRegistry.cs
-    startLine: 90
+    startLine: 147
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
   summary: "\nTry to get an api manager instance\n"
   example: []
   syntax:
-    content: bool TryGetFor<TWebApi>(out IApizrManager<TWebApi> manager)
+    content: bool TryGetManagerFor<TWebApi>(out IApizrManager<TWebApi> manager)
     parameters:
     - id: manager
       type: Apizr.IApizrManager{{TWebApi}}
@@ -431,11 +647,11 @@ items:
     return:
       type: System.Boolean
       description: ''
-    content.vb: Function TryGetFor(Of TWebApi)(ByRef manager As IApizrManager(Of TWebApi)) As Boolean
-  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetFor*
-  nameWithType.vb: IApizrEnumerableRegistry.TryGetFor(Of TWebApi)(ByRef IApizrManager(Of TWebApi))
-  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetFor(Of TWebApi)(ByRef Apizr.IApizrManager(Of TWebApi))
-  name.vb: TryGetFor(Of TWebApi)(ByRef IApizrManager(Of TWebApi))
+    content.vb: Function TryGetManagerFor(Of TWebApi)(ByRef manager As IApizrManager(Of TWebApi)) As Boolean
+  overload: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetManagerFor*
+  nameWithType.vb: IApizrEnumerableRegistry.TryGetManagerFor(Of TWebApi)(ByRef IApizrManager(Of TWebApi))
+  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetManagerFor(Of TWebApi)(ByRef Apizr.IApizrManager(Of TWebApi))
+  name.vb: TryGetManagerFor(Of TWebApi)(ByRef IApizrManager(Of TWebApi))
 references:
 - uid: Apizr.Configuring.Registry
   commentId: N:Apizr.Configuring.Registry
@@ -500,167 +716,6 @@ references:
     nameWithType: IEnumerable.GetEnumerator
     fullName: System.Collections.IEnumerable.GetEnumerator
     isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.Count
-  commentId: P:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.Count
-  parent: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase
-  name: Count
-  nameWithType: IApizrEnumerableRegistryBase.Count
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.Count
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``1
-  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``1
-  parent: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase
-  name: ContainsCrudFor<T>()
-  nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor<T>()
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor<T>()
-  nameWithType.vb: IApizrEnumerableRegistryBase.ContainsCrudFor(Of T)()
-  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor(Of T)()
-  name.vb: ContainsCrudFor(Of T)()
-  spec.csharp:
-  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``1
-    name: ContainsCrudFor<T>
-    nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor<T>
-    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor<T>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``1
-    name: ContainsCrudFor(Of T)
-    nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor(Of T)
-    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor(Of T)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``2
-  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``2
-  parent: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase
-  name: ContainsCrudFor<T, TKey>()
-  nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey>()
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey>()
-  nameWithType.vb: IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey)()
-  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey)()
-  name.vb: ContainsCrudFor(Of T, TKey)()
-  spec.csharp:
-  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``2
-    name: ContainsCrudFor<T, TKey>
-    nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey>
-    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``2
-    name: ContainsCrudFor(Of T, TKey)
-    nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey)
-    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``3
-  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``3
-  parent: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase
-  name: ContainsCrudFor<T, TKey, TReadAllResult>()
-  nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey, TReadAllResult>()
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey, TReadAllResult>()
-  nameWithType.vb: IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey, TReadAllResult)()
-  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey, TReadAllResult)()
-  name.vb: ContainsCrudFor(Of T, TKey, TReadAllResult)()
-  spec.csharp:
-  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``3
-    name: ContainsCrudFor<T, TKey, TReadAllResult>
-    nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey, TReadAllResult>
-    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey, TReadAllResult>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``3
-    name: ContainsCrudFor(Of T, TKey, TReadAllResult)
-    nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey, TReadAllResult)
-    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey, TReadAllResult)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``4
-  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``4
-  parent: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase
-  name: ContainsCrudFor<T, TKey, TReadAllResult, TReadAllParams>()
-  nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey, TReadAllResult, TReadAllParams>()
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey, TReadAllResult, TReadAllParams>()
-  nameWithType.vb: IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)()
-  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)()
-  name.vb: ContainsCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)()
-  spec.csharp:
-  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``4
-    name: ContainsCrudFor<T, TKey, TReadAllResult, TReadAllParams>
-    nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey, TReadAllResult, TReadAllParams>
-    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor<T, TKey, TReadAllResult, TReadAllParams>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor``4
-    name: ContainsCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)
-    nameWithType: IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)
-    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsCrudFor(Of T, TKey, TReadAllResult, TReadAllParams)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsFor``1
-  commentId: M:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsFor``1
-  parent: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase
-  name: ContainsFor<TWebApi>()
-  nameWithType: IApizrEnumerableRegistryBase.ContainsFor<TWebApi>()
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsFor<TWebApi>()
-  nameWithType.vb: IApizrEnumerableRegistryBase.ContainsFor(Of TWebApi)()
-  fullName.vb: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsFor(Of TWebApi)()
-  name.vb: ContainsFor(Of TWebApi)()
-  spec.csharp:
-  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsFor``1
-    name: ContainsFor<TWebApi>
-    nameWithType: IApizrEnumerableRegistryBase.ContainsFor<TWebApi>
-    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsFor<TWebApi>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsFor``1
-    name: ContainsFor(Of TWebApi)
-    nameWithType: IApizrEnumerableRegistryBase.ContainsFor(Of TWebApi)
-    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase.ContainsFor(Of TWebApi)
   - name: (
     nameWithType: (
     fullName: (
@@ -863,12 +918,6 @@ references:
   name: IEnumerable
   nameWithType: IEnumerable
   fullName: System.Collections.IEnumerable
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase
-  commentId: T:Apizr.Configuring.Registry.IApizrEnumerableRegistryBase
-  parent: Apizr.Configuring.Registry
-  name: IApizrEnumerableRegistryBase
-  nameWithType: IApizrEnumerableRegistryBase
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistryBase
 - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
   commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
   isExternal: true
@@ -1001,11 +1050,46 @@ references:
   name: Apizr.Extending
   nameWithType: Apizr.Extending
   fullName: Apizr.Extending
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor*
-  commentId: Overload:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor
-  name: GetCrudFor
-  nameWithType: IApizrEnumerableRegistry.GetCrudFor
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudFor
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Count*
+  commentId: Overload:Apizr.Configuring.Registry.IApizrEnumerableRegistry.Count
+  name: Count
+  nameWithType: IApizrEnumerableRegistry.Count
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Count
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor*
+  commentId: Overload:Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor
+  name: ContainsCrudManagerFor
+  nameWithType: IApizrEnumerableRegistry.ContainsCrudManagerFor
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsCrudManagerFor
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsManagerFor*
+  commentId: Overload:Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsManagerFor
+  name: ContainsManagerFor
+  nameWithType: IApizrEnumerableRegistry.ContainsManagerFor
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.ContainsManagerFor
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor*
+  commentId: Overload:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor
+  name: GetCrudManagerFor
+  nameWithType: IApizrEnumerableRegistry.GetCrudManagerFor
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetCrudManagerFor
 - uid: Apizr.IApizrManager{Apizr.Requesting.ICrudApi{{T},System.Int32,System.Collections.Generic.IEnumerable{{T}},System.Collections.Generic.IDictionary{System.String,System.Object}}}
   commentId: T:Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}
   parent: Apizr
@@ -1597,11 +1681,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetFor*
-  commentId: Overload:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetFor
-  name: GetFor
-  nameWithType: IApizrEnumerableRegistry.GetFor
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetFor
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetManagerFor*
+  commentId: Overload:Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetManagerFor
+  name: GetManagerFor
+  nameWithType: IApizrEnumerableRegistry.GetManagerFor
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.GetManagerFor
 - uid: Apizr.IApizrManager{{TWebApi}}
   commentId: T:Apizr.IApizrManager{``0}
   parent: Apizr
@@ -1640,26 +1724,13 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor*
-  commentId: Overload:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor
-  name: TryGetCrudFor
-  nameWithType: IApizrEnumerableRegistry.TryGetCrudFor
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudFor
-- uid: System.Boolean
-  commentId: T:System.Boolean
-  parent: System
-  isExternal: true
-  name: Boolean
-  nameWithType: Boolean
-  fullName: System.Boolean
-- uid: System
-  commentId: N:System
-  isExternal: true
-  name: System
-  nameWithType: System
-  fullName: System
-- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetFor*
-  commentId: Overload:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetFor
-  name: TryGetFor
-  nameWithType: IApizrEnumerableRegistry.TryGetFor
-  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetFor
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor*
+  commentId: Overload:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor
+  name: TryGetCrudManagerFor
+  nameWithType: IApizrEnumerableRegistry.TryGetCrudManagerFor
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetCrudManagerFor
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetManagerFor*
+  commentId: Overload:Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetManagerFor
+  name: TryGetManagerFor
+  nameWithType: IApizrEnumerableRegistry.TryGetManagerFor
+  fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetManagerFor

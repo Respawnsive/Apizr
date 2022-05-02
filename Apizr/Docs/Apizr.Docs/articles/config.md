@@ -33,14 +33,14 @@ public override void ConfigureServices(IServiceCollection services)
     // Apizr registration
     services.AddApizr(
         registry => registry
-            .AddFor<IReqResService>()
-            .AddFor<IHttpBinService>(
+            .AddManagerFor<IReqResService>()
+            .AddManagerFor<IHttpBinService>(
                 options => options
                     .WithLogging(
                         HttpTracerMode.Everything, 
                         HttpMessageParts.All, 
                         LogLevel.Trace))
-            .AddCrudFor<User, int, PagedResult<User>, IDictionary<string, object>>(
+            .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(
                 options => options
                     .WithBaseAddress("https://reqres.in/api/users"))),
     

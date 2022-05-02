@@ -1,3 +1,28 @@
+4.1
+---
+
+### Apizr
+
+- [Breaking] [Naming] **Apizr static class renamed to ApizrBuilder to match its purpose** and doesn't conflict with its namespace anymore
+- [Breaking] [Naming] **ApizrBuilder's methods renamed to match their return type** so that we know what we're about to build (e.g. CreateRegistry, AddManagerFor, CreateManagerFor)
+- [Breaking] [Naming] **ApizrRegistry's methods renamed to match their return type** so that we know what we're about to get (e.g. GetManagerFor, GetCrudManagerFor, ContainsManagerFor)
+- [Fix] [Connectivity] **No more exception** while using Apizr the extended way but **without providing any IConnectivityHandler implementation** with Fusillade priority management enabled
+- [Improvement] [Address] Now we can **set base address at both common and proper levels** so we can define a base address shared by all apis, but also a specific one if needed
+
+### Apizr.Extensions.Microsoft.DependencyInjection
+
+- [Breaking] [Naming] **Extension methods renamed to match their return type** so that we know what we're about to build (e.g. AddManagerFor, AddCrudManagerFor)
+- [Breaking] [Naming] **ApizrExtendedRegistry's methods renamed to match their return type** so that we know what we're about to get (e.g. GetManagerFor, GetCrudManagerFor, ContainsManagerFor)
+
+### Apizr.Integrations.MediatR
+
+- [Breaking] [Naming] **ApizrMediationRegistry's methods renamed to match their return type** so that we know what we're about to get (e.g. GetMediatorFor, GetCrudMediatorFor, ContainsMediatorFor)
+
+### Apizr.Integrations.Optional
+
+- [Breaking] [Naming] **ApizrOptionalMediationRegistry's methods renamed to match their return type** so that we know what we're about to get (e.g. GetOptionalMediatorFor, GetCrudOptionalMediatorFor, ContainsOptionalMediatorFor)
+
+
 4.0
 ---
 

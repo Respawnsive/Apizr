@@ -8,19 +8,6 @@ namespace Apizr.Configuring.Proper
         where TApizrProperOptions : IApizrProperOptionsBase
         where TApizrProperOptionsBuilder : IApizrProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>
     {
-        /// <summary>
-        /// Define your web api base address (could be defined with WebApiAttribute)
-        /// </summary>
-        /// <param name="baseAddressFactory">Your web api base address factory</param>
-        /// <returns></returns>
-        TApizrProperOptionsBuilder WithBaseAddress(Func<string> baseAddressFactory);
-
-        /// <summary>
-        /// Define your web api base address (could be defined with WebApiAttribute)
-        /// </summary>
-        /// <param name="baseAddressFactory">Your web api base address factory</param>
-        /// <returns></returns>
-        TApizrProperOptionsBuilder WithBaseAddress(Func<Uri> baseAddressFactory);
     }
 
     public interface IApizrProperOptionsBuilder : IApizrProperOptionsBuilder<IApizrProperOptions, IApizrProperOptionsBuilder>

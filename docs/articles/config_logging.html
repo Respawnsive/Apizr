@@ -81,6 +81,12 @@
 
 <p>You can adjust logging configuration with:</p>
 <ul>
+<li><code>httpTracerMode</code> (default: <code>Everything</code>) Http traffic tracing mode:<ul>
+<li><code>ExceptionsOnly</code> logs only when an exception occurs</li>
+<li><code>ErrorsAndExceptionsOnly</code> logs only when an exception or any error occurs</li>
+<li><code>Everything</code> logs all, anytime</li>
+</ul>
+</li>
 <li><code>trafficVerbosity</code> (default: <code>All</code>) Http traffic tracing verbosity (see HttpTracer), with:<ul>
 <li><code>None</code></li>
 <li><code>RequestBody</code></li>
@@ -91,12 +97,6 @@
 <li><code>ResponseHeaders</code></li>
 <li><code>ResponseAll</code> = <code>ResponseBody | ResponseHeaders</code></li>
 <li><code>All</code> = <code>ResponseAll | RequestAll</code></li>
-</ul>
-</li>
-<li><code>httpTracerMode</code> (default: <code>Everything</code>) Http traffic tracing mode:<ul>
-<li><code>ExceptionsOnly</code> logs only when an exception occurs</li>
-<li><code>ErrorsAndExceptionsOnly</code> logs only when an exception or any error occurs</li>
-<li><code>Everything</code> logs all, anytime</li>
 </ul>
 </li>
 <li><code>logLevels</code> (default: [Low] <code>Trace</code>, [Medium] <code>Information</code> and [High] <code>Critical</code>) Log levels to apply while writing logs (see Microsoft.Enxtension.Logging), with:<ul>

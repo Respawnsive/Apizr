@@ -15,7 +15,7 @@ namespace Apizr.Configuring.Registry
             throw new InvalidOperationException($"This {nameof(ApizrRegistryBase)} is not configured for concurrent operations.");
         }
 
-        public void AddOrUpdateFor<TWebApi>(Func<IApizrManager<TWebApi>> managerFactory)
+        public void AddOrUpdateManagerFor<TWebApi>(Func<IApizrManager<TWebApi>> managerFactory)
         {
             var registry = ThrowIfNotConcurrentImplementation();
 

@@ -6,7 +6,6 @@ items:
   parent: Apizr.Extending.Configuring.Proper
   children:
   - Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerType
-  - Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.BaseAddressFactory
   - Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.LoggerFactory
   langs:
   - csharp
@@ -29,15 +28,16 @@ items:
           Inherits IApizrExtendedProperOptionsBase, IApizrExtendedSharedOptions
   inheritedMembers:
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
-  - Apizr.Configuring.Proper.IApizrProperOptionsBase.BaseAddress
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpTracerModeFactory
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TrafficVerbosityFactory
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientHandlerFactory
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientBuilder
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
+  - Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.TrafficVerbosity
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
@@ -80,37 +80,6 @@ items:
   - get
   modifiers.vb:
   - ReadOnly
-- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.BaseAddressFactory
-  commentId: P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.BaseAddressFactory
-  id: BaseAddressFactory
-  parent: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions
-  langs:
-  - csharp
-  - vb
-  name: BaseAddressFactory
-  nameWithType: IApizrExtendedProperOptions.BaseAddressFactory
-  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.BaseAddressFactory
-  type: Property
-  source:
-    id: BaseAddressFactory
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\IApizrExtendedProperOptions.cs
-    startLine: 16
-  assemblies:
-  - Apizr.Extensions.Microsoft.DependencyInjection
-  namespace: Apizr.Extending.Configuring.Proper
-  summary: "\nBase address factory\n"
-  example: []
-  syntax:
-    content: Func<IServiceProvider, Uri> BaseAddressFactory { get; }
-    parameters: []
-    return:
-      type: System.Func{System.IServiceProvider,System.Uri}
-    content.vb: ReadOnly Property BaseAddressFactory As Func(Of IServiceProvider, Uri)
-  overload: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.BaseAddressFactory*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
 - uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.LoggerFactory
   commentId: P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.LoggerFactory
   id: LoggerFactory
@@ -125,7 +94,7 @@ items:
   source:
     id: LoggerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\IApizrExtendedProperOptions.cs
-    startLine: 21
+    startLine: 16
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -154,12 +123,6 @@ references:
   name: WebApiType
   nameWithType: IApizrProperOptionsBase.WebApiType
   fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
-- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.BaseAddress
-  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.BaseAddress
-  parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
-  name: BaseAddress
-  nameWithType: IApizrProperOptionsBase.BaseAddress
-  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.BaseAddress
 - uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
   commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
   parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
@@ -172,6 +135,12 @@ references:
   name: Logger
   nameWithType: IApizrProperOptionsBase.Logger
   fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
+  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  name: BaseAddressFactory
+  nameWithType: IApizrExtendedSharedOptions.BaseAddressFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpTracerModeFactory
   commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpTracerModeFactory
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
@@ -208,6 +177,12 @@ references:
   name: DelegatingHandlersExtendedFactories
   nameWithType: IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
+- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
+  parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
+  name: BaseAddress
+  nameWithType: IApizrSharedOptionsBase.BaseAddress
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
 - uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode
   commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode
   parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
@@ -419,122 +394,6 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.BaseAddressFactory*
-  commentId: Overload:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.BaseAddressFactory
-  name: BaseAddressFactory
-  nameWithType: IApizrExtendedProperOptions.BaseAddressFactory
-  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.BaseAddressFactory
-- uid: System.Func{System.IServiceProvider,System.Uri}
-  commentId: T:System.Func{System.IServiceProvider,System.Uri}
-  parent: System
-  definition: System.Func`2
-  name: Func<IServiceProvider, Uri>
-  nameWithType: Func<IServiceProvider, Uri>
-  fullName: System.Func<System.IServiceProvider, System.Uri>
-  nameWithType.vb: Func(Of IServiceProvider, Uri)
-  fullName.vb: System.Func(Of System.IServiceProvider, System.Uri)
-  name.vb: Func(Of IServiceProvider, Uri)
-  spec.csharp:
-  - uid: System.Func`2
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.IServiceProvider
-    name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Uri
-    name: Uri
-    nameWithType: Uri
-    fullName: System.Uri
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Func`2
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.IServiceProvider
-    name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Uri
-    name: Uri
-    nameWithType: Uri
-    fullName: System.Uri
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Func`2
-  commentId: T:System.Func`2
-  isExternal: true
-  name: Func<T, TResult>
-  nameWithType: Func<T, TResult>
-  fullName: System.Func<T, TResult>
-  nameWithType.vb: Func(Of T, TResult)
-  fullName.vb: System.Func(Of T, TResult)
-  name.vb: Func(Of T, TResult)
-  spec.csharp:
-  - uid: System.Func`2
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Func`2
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.LoggerFactory*
   commentId: Overload:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.LoggerFactory
   name: LoggerFactory

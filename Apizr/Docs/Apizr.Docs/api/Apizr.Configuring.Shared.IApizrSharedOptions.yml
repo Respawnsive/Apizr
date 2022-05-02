@@ -5,6 +5,7 @@ items:
   id: IApizrSharedOptions
   parent: Apizr.Configuring.Shared
   children:
+  - Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory
   - Apizr.Configuring.Shared.IApizrSharedOptions.DelegatingHandlersFactories
   - Apizr.Configuring.Shared.IApizrSharedOptions.HttpClientHandlerFactory
   - Apizr.Configuring.Shared.IApizrSharedOptions.HttpTracerModeFactory
@@ -30,6 +31,7 @@ items:
       Public Interface IApizrSharedOptions
           Inherits IApizrSharedOptionsBase
   inheritedMembers:
+  - Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.TrafficVerbosity
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
@@ -41,6 +43,37 @@ items:
   modifiers.vb:
   - Public
   - Interface
+- uid: Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory
+  id: BaseAddressFactory
+  parent: Apizr.Configuring.Shared.IApizrSharedOptions
+  langs:
+  - csharp
+  - vb
+  name: BaseAddressFactory
+  nameWithType: IApizrSharedOptions.BaseAddressFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory
+  type: Property
+  source:
+    id: BaseAddressFactory
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptions.cs
+    startLine: 13
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  summary: "\nBase address factory\n"
+  example: []
+  syntax:
+    content: Func<Uri> BaseAddressFactory { get; }
+    parameters: []
+    return:
+      type: System.Func{System.Uri}
+    content.vb: ReadOnly Property BaseAddressFactory As Func(Of Uri)
+  overload: Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory*
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
 - uid: Apizr.Configuring.Shared.IApizrSharedOptions.HttpTracerModeFactory
   commentId: P:Apizr.Configuring.Shared.IApizrSharedOptions.HttpTracerModeFactory
   id: HttpTracerModeFactory
@@ -55,7 +88,7 @@ items:
   source:
     id: HttpTracerModeFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptions.cs
-    startLine: 13
+    startLine: 18
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -86,7 +119,7 @@ items:
   source:
     id: TrafficVerbosityFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptions.cs
-    startLine: 18
+    startLine: 23
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -117,7 +150,7 @@ items:
   source:
     id: LogLevelsFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptions.cs
-    startLine: 23
+    startLine: 28
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -148,7 +181,7 @@ items:
   source:
     id: HttpClientHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptions.cs
-    startLine: 28
+    startLine: 33
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -179,7 +212,7 @@ items:
   source:
     id: DelegatingHandlersFactories
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptions.cs
-    startLine: 33
+    startLine: 38
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -202,6 +235,12 @@ references:
   name: Apizr.Configuring.Shared
   nameWithType: Apizr.Configuring.Shared
   fullName: Apizr.Configuring.Shared
+- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
+  parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
+  name: BaseAddress
+  nameWithType: IApizrSharedOptionsBase.BaseAddress
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
 - uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode
   commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode
   parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
@@ -362,21 +401,21 @@ references:
   name: Apizr.Extending
   nameWithType: Apizr.Extending
   fullName: Apizr.Extending
-- uid: Apizr.Configuring.Shared.IApizrSharedOptions.HttpTracerModeFactory*
-  commentId: Overload:Apizr.Configuring.Shared.IApizrSharedOptions.HttpTracerModeFactory
-  name: HttpTracerModeFactory
-  nameWithType: IApizrSharedOptions.HttpTracerModeFactory
-  fullName: Apizr.Configuring.Shared.IApizrSharedOptions.HttpTracerModeFactory
-- uid: System.Func{Apizr.Logging.HttpTracerMode}
-  commentId: T:System.Func{Apizr.Logging.HttpTracerMode}
+- uid: Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory
+  name: BaseAddressFactory
+  nameWithType: IApizrSharedOptions.BaseAddressFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory
+- uid: System.Func{System.Uri}
+  commentId: T:System.Func{System.Uri}
   parent: System
   definition: System.Func`1
-  name: Func<HttpTracerMode>
-  nameWithType: Func<HttpTracerMode>
-  fullName: System.Func<Apizr.Logging.HttpTracerMode>
-  nameWithType.vb: Func(Of HttpTracerMode)
-  fullName.vb: System.Func(Of Apizr.Logging.HttpTracerMode)
-  name.vb: Func(Of HttpTracerMode)
+  name: Func<Uri>
+  nameWithType: Func<Uri>
+  fullName: System.Func<System.Uri>
+  nameWithType.vb: Func(Of Uri)
+  fullName.vb: System.Func(Of System.Uri)
+  name.vb: Func(Of Uri)
   spec.csharp:
   - uid: System.Func`1
     name: Func
@@ -386,10 +425,11 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Apizr.Logging.HttpTracerMode
-    name: HttpTracerMode
-    nameWithType: HttpTracerMode
-    fullName: Apizr.Logging.HttpTracerMode
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -402,10 +442,11 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Apizr.Logging.HttpTracerMode
-    name: HttpTracerMode
-    nameWithType: HttpTracerMode
-    fullName: Apizr.Logging.HttpTracerMode
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -454,6 +495,53 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: Apizr.Configuring.Shared.IApizrSharedOptions.HttpTracerModeFactory*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrSharedOptions.HttpTracerModeFactory
+  name: HttpTracerModeFactory
+  nameWithType: IApizrSharedOptions.HttpTracerModeFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptions.HttpTracerModeFactory
+- uid: System.Func{Apizr.Logging.HttpTracerMode}
+  commentId: T:System.Func{Apizr.Logging.HttpTracerMode}
+  parent: System
+  definition: System.Func`1
+  name: Func<HttpTracerMode>
+  nameWithType: Func<HttpTracerMode>
+  fullName: System.Func<Apizr.Logging.HttpTracerMode>
+  nameWithType.vb: Func(Of HttpTracerMode)
+  fullName.vb: System.Func(Of Apizr.Logging.HttpTracerMode)
+  name.vb: Func(Of HttpTracerMode)
+  spec.csharp:
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Logging.HttpTracerMode
+    name: HttpTracerMode
+    nameWithType: HttpTracerMode
+    fullName: Apizr.Logging.HttpTracerMode
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Logging.HttpTracerMode
+    name: HttpTracerMode
+    nameWithType: HttpTracerMode
+    fullName: Apizr.Logging.HttpTracerMode
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Configuring.Shared.IApizrSharedOptions.TrafficVerbosityFactory*
   commentId: Overload:Apizr.Configuring.Shared.IApizrSharedOptions.TrafficVerbosityFactory
   name: TrafficVerbosityFactory

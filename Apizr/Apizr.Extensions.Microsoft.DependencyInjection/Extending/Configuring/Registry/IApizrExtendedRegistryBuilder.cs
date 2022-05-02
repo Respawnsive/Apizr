@@ -30,7 +30,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// <typeparam name="TApizrManager">A custom <see cref="IApizrManager{ICrudApi}"/> implementation</typeparam>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(
+        TApizrExtendedRegistryBuilder AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null)
             where T : class
             where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>;
@@ -43,7 +43,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// <param name="crudedType">The object type to manage with crud api calls (class)</param>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudFor(Type crudedType,
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type crudedType,
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// <param name="crudedKeyType">The object key type (primitive)</param>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudFor(Type crudedType,
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type crudedType,
             Type crudedKeyType, Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// (should inherit from <see cref="IEnumerable{T}"/> or be of class type)</param>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudFor(Type crudedType,
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type crudedType,
             Type crudedKeyType, Type crudedReadAllResultType,
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
@@ -86,7 +86,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// <param name="crudedReadAllParamsType">ReadAll query parameters type</param>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudFor(Type crudedType,
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type crudedType,
             Type crudedKeyType, Type crudedReadAllResultType, Type crudedReadAllParamsType,
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
@@ -104,7 +104,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudFor(Type crudedType,
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type crudedType,
             Type crudedKeyType, Type crudedReadAllResultType, Type crudedReadAllParamsType, Type apizrManagerType,
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
@@ -113,14 +113,14 @@ namespace Apizr.Extending.Configuring.Registry
         /// </summary>
         /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudFor(params Type[] assemblyMarkerTypes);
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(params Type[] assemblyMarkerTypes);
 
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
         /// </summary>
         /// <param name="assemblies">Any assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudFor(params Assembly[] assemblies);
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(params Assembly[] assemblies);
 
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
@@ -128,7 +128,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudFor(Action<TApizrExtendedProperOptionsBuilder> optionsBuilder,
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(Action<TApizrExtendedProperOptionsBuilder> optionsBuilder,
             params Type[] assemblyMarkerTypes);
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <param name="assemblies">Any assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudFor(Action<TApizrExtendedProperOptionsBuilder> optionsBuilder,
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(Action<TApizrExtendedProperOptionsBuilder> optionsBuilder,
             params Assembly[] assemblies);
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
         /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudFor(Type apizrManagerType, params Type[] assemblyMarkerTypes);
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type apizrManagerType, params Type[] assemblyMarkerTypes);
 
         /// <summary>
         /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
@@ -154,7 +154,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
         /// <param name="assemblies">Any assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudFor(Type apizrManagerType, params Assembly[] assemblies);
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type apizrManagerType, params Assembly[] assemblies);
 
         /// <summary>
         /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
@@ -163,7 +163,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudFor(Type apizrManagerType,
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type apizrManagerType,
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder, params Type[] assemblyMarkerTypes);
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <param name="assemblies">Any assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudFor(Type apizrManagerType,
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type apizrManagerType,
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder, params Assembly[] assemblies);
 
         #endregion
@@ -187,7 +187,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// <typeparam name="TApizrManager">A custom <see cref="IApizrManager{TWebApi}"/> implementation</typeparam>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddFor<TWebApi, TApizrManager>(
+        TApizrExtendedRegistryBuilder AddManagerFor<TWebApi, TApizrManager>(
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// <param name="webApiType">The web api interface type to manage</param>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddFor(Type webApiType,
+        TApizrExtendedRegistryBuilder AddManagerFor(Type webApiType,
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="WebApiAttribute"/></param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddFor(Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null,
+        TApizrExtendedRegistryBuilder AddManagerFor(Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null,
             params Type[] assemblyMarkerTypes);
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <param name="assemblies">Any assembly to scan for <see cref="WebApiAttribute"/></param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddFor(Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null,
+        TApizrExtendedRegistryBuilder AddManagerFor(Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null,
             params Assembly[] assemblies);
 
         /// <summary>
@@ -224,7 +224,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="WebApiAttribute"/></param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddFor(Type apizrManagerType,
+        TApizrExtendedRegistryBuilder AddManagerFor(Type apizrManagerType,
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes);
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <param name="assemblies">Any assembly to scan for <see cref="WebApiAttribute"/></param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddFor(Type apizrManagerType,
+        TApizrExtendedRegistryBuilder AddManagerFor(Type apizrManagerType,
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies);
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace Apizr.Extending.Configuring.Registry
         /// <param name="apizrManagerType">A custom <see cref="IApizrManager{webApiType}"/> implementation type</param>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddFor(
+        TApizrExtendedRegistryBuilder AddManagerFor(
             Type webApiType, Type apizrManagerType,
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 

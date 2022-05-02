@@ -1,4 +1,4 @@
-4.1 (upcoming)
+4.1
 ---
 
 ### Apizr
@@ -23,7 +23,7 @@
 - [Breaking] [Naming] **ApizrOptionalMediationRegistry's methods renamed to match their return type** so that we know what we're about to get (e.g. GetOptionalMediatorFor, GetCrudOptionalMediatorFor, ContainsOptionalMediatorFor)
 
 
-4.0 (current)
+4.0
 ---
 
 ### Apizr

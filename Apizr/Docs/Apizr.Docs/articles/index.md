@@ -14,3 +14,13 @@ There is first a Getting started for both classic and CRUD apis.
 Then, there is almost everything we can configure and use with Apizr.
 
 Happy coding
+
+
+>[!WARNING]
+>
+>**Breaking changes**
+>
+>Apizr v4.1 brings some renaming breaking changes:
+>- **Apizr static class renamed to ApizrBuilder to match its purpose** and doesn't conflict with its namespace anymore
+>- **ApizrBuilder's methods renamed to match their return type** so that we know what we're about to build (e.g. CreateRegistry, AddManagerFor, CreateManagerFor)
+>- **ApizrRegistry's methods renamed to match their return type** so that we know what we're about to get (e.g. GetManagerFor, GetCrudManagerFor, ContainsManagerFor)

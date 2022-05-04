@@ -1,0 +1,37 @@
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using Refit;
+
+namespace {{ NameSpace }}
+{
+    public interface I{{ Class }}
+    {
+{%     for operation in Operations -%}
+{%         if operation.HasSummary -%}
+        /// <summary>
+        /// {{ operation.Summary | csharpdocs }}
+        /// </summary>
+{%         endif -%}
+{%         for parameter in operation.NoHeaderParameters -%}
+{%             if parameter.HasDescription -%}
+        /// <param name="{{ parameter.VariableName }}">{{ parameter.Description | csharpdocs }}</param>
+{%             endif -%}
+{%         endfor -%}
+{%         if operation.HasResultDescription -%}
+        /// <returns>{{ operation.ResultDescription | csharpdocs }}</returns>
+{%         endif -%}
+{%         if operation.IsDeprecated -%}
+        [System.Obsolete]
+{%         endif -%}
+{% assign httpMethodLower = operation.HttpMethodLower -%}
+{% case httpMethodLower -%}{% when 'post' -%}
+        [Post("{{ operation.Path }}")]{% when 'get' -%}
+        [Get("{{ operation.Path }}")]{% when 'put' -%}
+        [Put("{{ operation.Path }}")]{% when 'delete' -%}
+        [Delete("{{ operation.Path }}")]{% endcase -%}    
+        [Headers({% for headerParameter in operation.HeaderParameters -%}"{{ headerParameter.Name }}"{% if headerParameter.IsLast == false  -%},{% endif -%}{%  endfor -%})] 
+        {{ operation.PascalizeResultType }} {{ operation.ActualOperationName }}Async({% for parameter in operation.NoHeaderParameters -%}{% assign kindName = parameter.KindName -%}{% case kindName -%}{% when 'Query' -%}[Query]{% when 'Body' -%}[Body]{% endcase -%}[AliasAs("{{ parameter.VariableName }}")] {{ parameter.TypeInControllerInterface }} {{ parameter.VariableName }}{% if GenerateOptionalParameters and parameter.IsOptional and parameter.HasDefault == false -%}= null{% endif %}{% if parameter.IsSortLast == false or UseCancellationToken -%},{% endif -%}{% endfor -%}{% if UseCancellationToken -%}System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken){% endif -%});
+
+{%  endfor -%}
+    }
+}

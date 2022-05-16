@@ -17,7 +17,9 @@ namespace Apizr.Tools.Generator
             CSharpGeneratorSettings.ArrayInstanceType = "System.Collections.Generic.List";
             RouteNamingStrategy = ApizrRouteNamingStrategy.None;
             GenerateModelValidationAttributes = false;
-            UseCancellationToken = false;
+            WithPriority = false;
+            WithContext = false;
+            WithCancellationToken = false;
         }
 
         /// <summary>Returns the route name for a controller method.</summary>
@@ -37,7 +39,13 @@ namespace Apizr.Tools.Generator
         public string ControllerBaseClass { get; set; }
 
         /// <summary>Gets or sets a value indicating whether to allow adding cancellation token </summary>
-        public bool UseCancellationToken { get; set; }
+        public bool WithPriority { get; set; }
+
+        /// <summary>Gets or sets a value indicating whether to allow adding cancellation token </summary>
+        public bool WithContext { get; set; }
+
+        /// <summary>Gets or sets a value indicating whether to allow adding cancellation token </summary>
+        public bool WithCancellationToken { get; set; }
 
         /// <summary>Gets or sets the strategy for naming routes (default: CSharpRouteNamingStrategy.None).</summary>
         public ApizrRouteNamingStrategy RouteNamingStrategy { get; set; }

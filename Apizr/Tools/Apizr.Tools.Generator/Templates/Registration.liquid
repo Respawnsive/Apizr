@@ -1,0 +1,17 @@
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using Refit;
+using Apizr;
+
+namespace {{ NameSpace }}
+{
+    public static class ApizrRegistration
+    {
+        public static IApizrRegistry Register() =>
+            ApizrBuilder.CreateRegistry(registry => registry
+{%              for class in Classes -%}
+                .AddManagerFor<I{{ class }}Service>()
+{%              endfor -%}
+            );
+    }
+}

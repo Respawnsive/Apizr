@@ -11,6 +11,16 @@ using NSwag;
 using NSwag.CodeGeneration.CSharp;
 using NSwag.CodeGeneration.OperationNameGenerators;
 
+// cmd: C:\Dev\Community\Apizr\Apizr\tools\apizr.tools.generator.cli\bin\debug\net6.0> .\Apizr.Tools.Generator.CLI.exe "http://localhost/ApizrSampleApi/swagger/v1/swagger.json"
+
+#if DEBUG
+var ns = "Test";
+//var url = "http://localhost/ApizrSampleApi/swagger/v1/swagger.json";
+var url = "https://petstore.swagger.io/v2/swagger.json";
+var withPriority = true;
+var withContext = true;
+var withToken = true;
+#else
 var urlArg = new Argument<string>("url", "Swagger.json absolute url");
 
 var nsOption = new Option<string>(new[] {"--namespace", "--ns"},
@@ -20,15 +30,41 @@ var nsOption = new Option<string>(new[] {"--namespace", "--ns"},
     IsRequired = false
 };
 
+var withPriorityOption = new Option<bool>(new[] {"--withPriority", "--p"},
+    () => false, 
+    "Add a Priority parameter")
+{
+    IsRequired = false
+};
+
+var withContextOption = new Option<bool>(new[] {"--withContext", "--ctx"},
+    () => false, 
+    "Add a Context parameter")
+{
+    IsRequired = false
+};
+
+var withTokenOption = new Option<bool>(new[] {"--withCancellationToken", "--ct"},
+    () => false, 
+    "Add a CancellationToken parameter")
+{
+    IsRequired = false
+};
+
 var rootCommand = new RootCommand
 {
     urlArg,
-    nsOption
+    nsOption,
+    withPriorityOption,
+    withContextOption,
+    withTokenOption
 };
 
-rootCommand.SetHandler(async (string url, string ns) =>
+rootCommand.SetHandler(async (string url, string ns, bool withPriority, bool withContext, bool withToken) =>
 {
-    var assemblies = new[]
+#endif
+
+var assemblies = new[]
     {
         typeof(CSharpGeneratorSettings).GetTypeInfo().Assembly,
         typeof(CSharpGeneratorBaseSettings).GetTypeInfo().Assembly,
@@ -49,10 +85,11 @@ rootCommand.SetHandler(async (string url, string ns) =>
     clientSettings.ResponseDictionaryType = "IDictionary";
     clientSettings.ParameterArrayType = "IEnumerable";
     clientSettings.ParameterDictionaryType = "IDictionary";
+    clientSettings.WithPriority = withPriority;
+    clientSettings.WithContext = withContext;
+    clientSettings.WithCancellationToken = withToken;
 
-
-    //var swagger = "https://petstore.swagger.io/v2/swagger.json";
-    var result = await OpenApiDocument.FromUrlAsync(url);
+var result = await OpenApiDocument.FromUrlAsync(url);
 
     var clientGenerator = new ApizrGenerator(result, clientSettings);
     var data = clientGenerator.GetAllClientType();
@@ -66,16 +103,24 @@ rootCommand.SetHandler(async (string url, string ns) =>
 
     foreach (var api in data)
     {
-        var file = Path.Combine(apisPath, $"{api.TypeName}.cs");
+        var file = Path.Combine(apisPath, $"I{api.TypeName}Service.cs");
         File.WriteAllText(file, api.Code, Encoding.UTF8);
         Console.WriteLine($"Interface output file：{file}");
     }
-    foreach (var model in models)
-    {
-        var file = Path.Combine(modelsPath, $"{model.TypeName}.cs");
-        File.WriteAllText(file, model.Code, Encoding.UTF8);
-        Console.WriteLine($"Model output file：{file}");
-    }
-}, urlArg, nsOption);
+    //foreach (var model in models)
+    //{
+    //    var file = Path.Combine(modelsPath, $"{model.TypeName}.cs");
+    //    File.WriteAllText(file, model.Code, Encoding.UTF8);
+    //    Console.WriteLine($"Model output file：{file}");
+    //}
+#if DEBUG
+Console.WriteLine($"Done!");
+#else
+}, urlArg, 
+nsOption,
+withPriorityOption,
+withContextOption,
+withTokenOption);
 
 return await rootCommand.InvokeAsync(args);
+#endif

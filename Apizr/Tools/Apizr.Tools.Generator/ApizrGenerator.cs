@@ -98,7 +98,7 @@ namespace Apizr.Tools.Generator
 
             var model = new ApizrTemplateModel(controllerClassName, cSharpOperationModels, _document, Settings, tag);
 
-            var template = Settings.CodeGeneratorSettings.TemplateFactory.CreateTemplate("CSharp", "Apizr", model);
+            var template = Settings.CodeGeneratorSettings.TemplateFactory.CreateTemplate("CSharp", "Service", model);
             var data = new CodeArtifact(model.Class, CodeArtifactType.Class, CodeArtifactLanguage.CSharp,
                 CodeArtifactCategory.Client, template);
             yield return data;

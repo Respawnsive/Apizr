@@ -89,6 +89,9 @@ namespace Apizr.Tools.Generator.Models
         /// <summary>Gets or sets a value indicating whether the controller has operations.</summary>
         public bool HasOperations => Operations.Any();
 
+        /// <summary>Gets or sets a value indicating whether the controller has operations.</summary>
+        public bool HasHeaders => Operations.Any();
+
         /// <summary>Gets or sets the operations.</summary>
         public IEnumerable<CSharpOperationModel> Operations { get; set; }
 
@@ -103,7 +106,15 @@ namespace Apizr.Tools.Generator.Models
         
 
         /// <summary>Gets a value indicating whether to allow adding cancellation token.</summary>
-        public bool UseCancellationToken => _settings.UseCancellationToken;
+        public bool WithPriority => _settings.WithPriority;
+
+
+        /// <summary>Gets a value indicating whether to allow adding cancellation token.</summary>
+        public bool WithContext => _settings.WithContext;
+
+
+        /// <summary>Gets a value indicating whether to allow adding cancellation token.</summary>
+        public bool WithCancellationToken => _settings.WithCancellationToken;
 
         /// <summary>Gets a value indicating whether to allow adding model validation attributes</summary>
         public bool GenerateModelValidationAttributes => _settings.GenerateModelValidationAttributes;
@@ -119,5 +130,7 @@ namespace Apizr.Tools.Generator.Models
 
         /// <summary>Gets the API version.</summary>
         public string Version => _document.Info.Version;
+
+        public bool HasSystemReferences => Operations.Any(o => o.IsDeprecated);
     }
 }

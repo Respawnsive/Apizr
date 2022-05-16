@@ -61,6 +61,8 @@ namespace Apizr.Tools.Generator.Models
             }
         }
 
+        public List<ApizrParameterModel> ApizrHeaderParameters => ApizrParameters.Where(x => x.IsHeader && !string.IsNullOrWhiteSpace(x.Name)).ToList();
+
         /// <summary>
         /// Parameters
         /// </summary>

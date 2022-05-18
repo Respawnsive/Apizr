@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Akavache;
+using Apizr.Configuring.Registry;
 using Apizr.Extending;
 using Apizr.Logging;
 using Apizr.Mediation.Cruding;
@@ -42,6 +43,16 @@ using Refit;
 
 namespace Apizr.Sample.Console
 {
+    public static class ApizrRegistration
+    {
+        public static IApizrRegistry Build() =>
+            ApizrBuilder.CreateRegistry(registry => registry
+                .AddManagerFor<IReqResService>()
+                .AddManagerFor<IReqResService>()
+                .AddManagerFor<IReqResService>()
+            );
+    }
+
     class Program
     {
         /*

@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using Apizr.Tools.Generator;
 using Apizr.Tools.Generator.Models;
+using NJsonSchema.CodeGeneration;
 using NJsonSchema.CodeGeneration.CSharp;
 using NSwag;
 using NSwag.CodeGeneration.CSharp;
@@ -64,7 +65,7 @@ rootCommand.SetHandler(async (string url, string ns, bool withPriority, bool wit
 {
 #endif
 
-var assemblies = new[]
+    var assemblies = new[]
     {
         typeof(CSharpGeneratorSettings).GetTypeInfo().Assembly,
         typeof(CSharpGeneratorBaseSettings).GetTypeInfo().Assembly,
@@ -89,30 +90,35 @@ var assemblies = new[]
     clientSettings.WithContext = withContext;
     clientSettings.WithCancellationToken = withToken;
 
-var result = await OpenApiDocument.FromUrlAsync(url);
+    var result = await OpenApiDocument.FromUrlAsync(url);
 
-    var clientGenerator = new ApizrGenerator(result, clientSettings);
-    var data = clientGenerator.GetAllClientType();
-    var models = clientGenerator.GetAllGenerateDtoType();
-    var dir = Path.Combine("output", clientSettings.CSharpGeneratorSettings.Namespace);
-    var apisPath = Path.Combine(dir, "HttpApis");
-    var modelsPath = Path.Combine(dir, "HttpModels");
+    var generator = new ApizrGenerator(result, clientSettings);
+    var all = generator.GenerateAll().ToList();
+    var dir = Path.Combine("Output", clientSettings.CSharpGeneratorSettings.Namespace);
+    var modelsPath = Path.Combine(dir, "Models");
+    var servicesPath = Path.Combine(dir, "Services");
 
-    Directory.CreateDirectory(apisPath);
     Directory.CreateDirectory(modelsPath);
+    Directory.CreateDirectory(servicesPath);
 
-    foreach (var api in data)
+    foreach (var model in all.Where(a => a.Category == CodeArtifactCategory.Contract && a.Type == CodeArtifactType.Class))
     {
-        var file = Path.Combine(apisPath, $"I{api.TypeName}Service.cs");
-        File.WriteAllText(file, api.Code, Encoding.UTF8);
-        Console.WriteLine($"Interface output file：{file}");
+        var modelFile = Path.Combine(modelsPath, $"{model.TypeName}.cs");
+        File.WriteAllText(modelFile, model.Code, Encoding.UTF8);
+        Console.WriteLine($"Model output file：{modelFile}");
     }
-    //foreach (var model in models)
-    //{
-    //    var file = Path.Combine(modelsPath, $"{model.TypeName}.cs");
-    //    File.WriteAllText(file, model.Code, Encoding.UTF8);
-    //    Console.WriteLine($"Model output file：{file}");
-    //}
+    foreach (var service in all.Where(a => a.Category == CodeArtifactCategory.Client && a.Type == CodeArtifactType.Interface))
+    {
+        var serviceFile = Path.Combine(servicesPath, $"I{service.TypeName}Service.cs");
+        File.WriteAllText(serviceFile, service.Code, Encoding.UTF8);
+        Console.WriteLine($"Interface output file：{serviceFile}");
+    }
+
+    var registration = all.First(a => a.Category == CodeArtifactCategory.Utility && a.Type == CodeArtifactType.Class);
+    var registrationFile = Path.Combine(dir, $"{registration.TypeName}.cs");
+    File.WriteAllText(registrationFile, registration.Code, Encoding.UTF8);
+    Console.WriteLine($"Registration output file：{registrationFile}");
+
 #if DEBUG
 Console.WriteLine($"Done!");
 #else

@@ -59,22 +59,28 @@ namespace Apizr.Tools.Generator
 
         /// <summary>Generates the client types.</summary>
         /// <returns>The code artifact collection.</returns>
-        protected override IEnumerable<CodeArtifact> GenerateAllClientTypes()
-        {
-            var artifacts = base.GenerateAllClientTypes().ToList();
-            return artifacts;
-        }
+        //protected override IEnumerable<CodeArtifact> GenerateAllClientTypes() => base.GenerateAllClientTypes().ToList();
 
-        public IEnumerable<CodeArtifact> GetAllClientType()
-        {
-            var allClientTypes = this.GenerateAllClientTypes();
-            return allClientTypes;
-        }
+        public IEnumerable<CodeArtifact> GenerateServices() => GenerateAllClientTypes();
 
-        public IEnumerable<CodeArtifact> GetAllGenerateDtoType()
+        public IEnumerable<CodeArtifact> GenerateModels() => base.GenerateDtoTypes();
+
+        public IEnumerable<CodeArtifact> GenerateAll()
         {
-            var allClientTypes = base.GenerateDtoTypes();
-            return allClientTypes;
+            var all = new List<CodeArtifact>();
+            var models = GenerateModels();
+            var services = GenerateServices().ToList();
+
+            var model = new ApizrRegistrationTemplateModel("ApizrRegistration", services.Select(a => a.TypeName), Settings);
+            var template = Settings.CodeGeneratorSettings.TemplateFactory.CreateTemplate("CSharp", "Registration", model);
+            var registration = new CodeArtifact(model.Class, CodeArtifactType.Class, CodeArtifactLanguage.CSharp,
+                CodeArtifactCategory.Utility, template);
+
+            all.AddRange(models);
+            all.AddRange(services);
+            all.Add(registration);
+
+            return all;
         }
 
         /// <summary>Generates the client class.</summary>
@@ -98,8 +104,8 @@ namespace Apizr.Tools.Generator
 
             var model = new ApizrTemplateModel(controllerClassName, cSharpOperationModels, _document, Settings, tag);
 
-            var template = Settings.CodeGeneratorSettings.TemplateFactory.CreateTemplate("CSharp", "Service", model);
-            var data = new CodeArtifact(model.Class, CodeArtifactType.Class, CodeArtifactLanguage.CSharp,
+            var template = Settings.CodeGeneratorSettings.TemplateFactory.CreateTemplate("CSharp", "Interface", model);
+            var data = new CodeArtifact(model.Class, CodeArtifactType.Interface, CodeArtifactLanguage.CSharp,
                 CodeArtifactCategory.Client, template);
             yield return data;
         }

@@ -101,7 +101,7 @@ rootCommand.SetHandler(async (string url, string ns, bool withPriority, bool wit
     Directory.CreateDirectory(modelsPath);
     Directory.CreateDirectory(servicesPath);
 
-    foreach (var model in all.Where(a => a.Category == CodeArtifactCategory.Contract && a.Type == CodeArtifactType.Class))
+    foreach (var model in all.Where(a => a.Category == CodeArtifactCategory.Contract))
     {
         var modelFile = Path.Combine(modelsPath, $"{model.TypeName}.cs");
         File.WriteAllText(modelFile, model.Code, Encoding.UTF8);

@@ -32,9 +32,9 @@ namespace Apizr.Tools.Generator
             CSharpGeneratorSettings settings,
             OpenApiDocument document)
         {
-            JsonSchema exceptionSchema = document.Definitions.ContainsKey("Exception") ? document.Definitions["Exception"] : (JsonSchema) null;
-            CSharpTypeResolver csharpTypeResolver = new ApizrTypeResolver(settings, exceptionSchema);
-            csharpTypeResolver.RegisterSchemaDefinitions((IDictionary<string, JsonSchema>) document.Definitions.Where<KeyValuePair<string, JsonSchema>>((Func<KeyValuePair<string, JsonSchema>, bool>) (p => p.Value != exceptionSchema)).ToDictionary<KeyValuePair<string, JsonSchema>, string, JsonSchema>((Func<KeyValuePair<string, JsonSchema>, string>) (p => p.Key), (Func<KeyValuePair<string, JsonSchema>, JsonSchema>) (p => p.Value)));
+            var exceptionSchema = document.Definitions.ContainsKey("Exception") ? document.Definitions["Exception"] : null;
+            var csharpTypeResolver = new ApizrTypeResolver(settings, exceptionSchema);
+            csharpTypeResolver.RegisterSchemaDefinitions(document.Definitions.Where(p => p.Value != exceptionSchema).ToDictionary(p => p.Key, p => p.Value));
             return csharpTypeResolver;
         }
 

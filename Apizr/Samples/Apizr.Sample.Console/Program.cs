@@ -43,16 +43,6 @@ using Refit;
 
 namespace Apizr.Sample.Console
 {
-    public static class ApizrRegistration
-    {
-        public static IApizrRegistry Build() =>
-            ApizrBuilder.CreateRegistry(registry => registry
-                .AddManagerFor<IReqResService>()
-                .AddManagerFor<IReqResService>()
-                .AddManagerFor<IReqResService>()
-            );
-    }
-
     class Program
     {
         /*

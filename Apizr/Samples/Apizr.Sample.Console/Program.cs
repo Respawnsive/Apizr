@@ -120,9 +120,9 @@ namespace Apizr.Sample.Console
                 stopwatch.Start();
                 try
                 {
-                    var fileSuffix = "large";
-                    var fileExtension = "bin";
-                    var fileType = "application/octet-stream";
+                    var fileSuffix = "small";
+                    var fileExtension = "pdf";
+                    var fileType = "application/pdf";
 
                     //_httpBinService = RestService.For<IHttpBinService>("https://httpbin.org");
                     //await using var stream = GetTestFileStream("Files/Test_large.pdf");
@@ -130,33 +130,34 @@ namespace Apizr.Sample.Console
                     //    await _httpBinService.UploadStreamPart(new StreamPart(stream, "test_small-streampart.pdf", "application/pdf"));
                     //var test = await result.Content.ReadAsStringAsync();
 
-                    //var lazyLoggerFactory = new Lazy<ILoggerFactory>(() => LoggerFactory.Create(logging =>
-                    //{
-                    //    logging.AddConsole();
-                    //    logging.AddDebug();
-                    //    logging.SetMinimumLevel(LogLevel.Trace);
-                    //}));
+                    var lazyLoggerFactory = new Lazy<ILoggerFactory>(() => LoggerFactory.Create(logging =>
+                    {
+                        logging.AddConsole();
+                        logging.AddDebug();
+                        logging.SetMinimumLevel(LogLevel.Trace);
+                    }));
 
-                    //_httpBinManager = ApizrBuilder.CreateManagerFor<IHttpBinService>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
-                    
-
-                    var host = Host.CreateDefaultBuilder()
-                        .ConfigureLogging(logging =>
-                        {
-                            logging.AddConsole();
-                            logging.AddConsole();
-                            logging.SetMinimumLevel(LogLevel.Trace);
-                        })
-                        .ConfigureServices(services =>
-                        {
-                            services.AddPolicyRegistry(policyRegistry);
-                            services.AddApizrManagerFor<IHttpBinService>();
-                        }).Build();
+                    _httpBinManager = ApizrBuilder.CreateManagerFor<IHttpBinService>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
 
 
-                    var scope = host.Services.CreateScope();
+                    //var host = Host.CreateDefaultBuilder()
+                    //    .ConfigureLogging(logging =>
+                    //    {
+                    //        logging.AddConsole();
+                    //        logging.AddConsole();
+                    //        logging.SetMinimumLevel(LogLevel.Trace);
+                    //    })
+                    //    .ConfigureServices(services =>
+                    //    {
+                    //        services.AddPolicyRegistry(policyRegistry);
+                    //        services.AddApizrManagerFor<IHttpBinService>();
+                    //    }).Build();
 
-                    _httpBinManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IHttpBinService>>();
+
+                    //var scope = host.Services.CreateScope();
+
+                    //_httpBinManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IHttpBinService>>();
+
                     await using var stream = GetTestFileStream($"Files/Test_{fileSuffix}.{fileExtension}");
                     var streamPart = new StreamPart(stream, $"test_{fileSuffix}-streampart.{fileExtension}", $"{fileType}");
 

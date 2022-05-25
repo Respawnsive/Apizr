@@ -2266,6 +2266,15 @@ namespace Apizr
                     return false;
                 }
 
+                // Is it a Get request
+                var getAttribute = methodToCacheData.MethodInfo.GetCustomAttribute<GetAttribute>();
+                if (getAttribute == null)
+                {
+                    // No it's not! Save details for next calls and return False
+                    _cachingMethodsSet.Add(methodToCacheData, (cacheAttribute, cacheKey));
+                    return false;
+                }
+
                 // Method is cacheable so prepare cache key
                 var methodCallExpression = GetMethodCallExpression<TResult>(restExpression);
                 cacheKey = $"{_webApiFriendlyName}.{methodCallExpression.Method.Name}(";

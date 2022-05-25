@@ -18,7 +18,6 @@ namespace Apizr.Sample
 
         [Multipart]
         [Post("/post")]
-        [Cache(CacheMode.None)]
         Task<HttpResponseMessage> UploadStreamPart(StreamPart stream);
     }
 }

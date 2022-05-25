@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Akavache;
@@ -47,6 +50,9 @@ namespace Apizr.Sample.Console
         /*
          * Next are all the ways to play with Apizr
          */
+        
+        private static IHttpBinService _httpBinService;
+        private static IApizrManager<IHttpBinService> _httpBinManager;
 
         // With an api interface
         private static IApizrManager<IReqResService> _reqResManager;
@@ -108,8 +114,67 @@ namespace Apizr.Sample.Console
                     }, LoggedPolicies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
                 }
             };
+            if (configChoice == 0)
+            {
+                var stopwatch = new Stopwatch();
+                stopwatch.Start();
+                try
+                {
+                    var fileSuffix = "large";
+                    var fileExtension = "bin";
+                    var fileType = "application/octet-stream";
 
-            if (configChoice == 1)
+                    //_httpBinService = RestService.For<IHttpBinService>("https://httpbin.org");
+                    //await using var stream = GetTestFileStream("Files/Test_large.pdf");
+                    //var result =
+                    //    await _httpBinService.UploadStreamPart(new StreamPart(stream, "test_small-streampart.pdf", "application/pdf"));
+                    //var test = await result.Content.ReadAsStringAsync();
+
+                    //var lazyLoggerFactory = new Lazy<ILoggerFactory>(() => LoggerFactory.Create(logging =>
+                    //{
+                    //    logging.AddConsole();
+                    //    logging.AddDebug();
+                    //    logging.SetMinimumLevel(LogLevel.Trace);
+                    //}));
+
+                    //_httpBinManager = ApizrBuilder.CreateManagerFor<IHttpBinService>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
+                    
+
+                    var host = Host.CreateDefaultBuilder()
+                        .ConfigureLogging(logging =>
+                        {
+                            logging.AddConsole();
+                            logging.AddConsole();
+                            logging.SetMinimumLevel(LogLevel.Trace);
+                        })
+                        .ConfigureServices(services =>
+                        {
+                            services.AddPolicyRegistry(policyRegistry);
+                            services.AddApizrManagerFor<IHttpBinService>();
+                        }).Build();
+
+
+                    var scope = host.Services.CreateScope();
+
+                    _httpBinManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IHttpBinService>>();
+                    await using var stream = GetTestFileStream($"Files/Test_{fileSuffix}.{fileExtension}");
+                    var streamPart = new StreamPart(stream, $"test_{fileSuffix}-streampart.{fileExtension}", $"{fileType}");
+
+                    var result =
+                        await _httpBinManager.ExecuteAsync(api => api.UploadStreamPart(streamPart));
+                    //var test = await result.Content.ReadAsStringAsync();
+                }
+                catch (Exception e)
+                {
+                }
+                finally
+                {
+                    System.Console.WriteLine(stopwatch.Elapsed);
+                    stopwatch.Stop();
+                }
+
+            }
+            else if (configChoice == 1)
             {
                 Barrel.ApplicationId = nameof(Program);
 
@@ -526,6 +591,37 @@ namespace Apizr.Sample.Console
                     System.Console.WriteLine($"{nameof(userInfos.Text)}: {userInfos.Text}");
                 }
             }
+        }
+
+        internal static Stream GetTestFileStream(string relativeFilePath)
+        {
+            const char namespaceSeparator = '.';
+
+            // get calling assembly
+            var assembly = Assembly.GetCallingAssembly();
+
+            // compute resource name suffix
+            var relativeName = "." + relativeFilePath
+                .Replace('\\', namespaceSeparator)
+                .Replace('/', namespaceSeparator)
+                .Replace(' ', '_');
+
+            // get resource stream
+            var fullName = assembly
+                .GetManifestResourceNames()
+                .FirstOrDefault(name => name.EndsWith(relativeName, StringComparison.InvariantCulture));
+            if (fullName == null)
+            {
+                throw new Exception($"Unable to find resource for path \"{relativeFilePath}\". Resource with name ending on \"{relativeName}\" was not found in assembly.");
+            }
+
+            var stream = assembly.GetManifestResourceStream(fullName);
+            if (stream == null)
+            {
+                throw new Exception($"Unable to find resource for path \"{relativeFilePath}\". Resource named \"{fullName}\" was not found in assembly.");
+            }
+
+            return stream;
         }
     }
 }

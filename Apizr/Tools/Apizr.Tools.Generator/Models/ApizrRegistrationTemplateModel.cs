@@ -42,7 +42,9 @@ namespace Apizr.Tools.Generator.Models
 
         public string LastService => Services.LastOrDefault();
 
-        /// <summary>Gets a value indicating whether to allow adding cancellation token.</summary>
         public bool WithRetry => _settings.WithRetry;
+
+        public string RegistrationType => _settings.RegistrationType.ToString();
+
     }
 }

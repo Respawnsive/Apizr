@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Apizr.Tools.Generator.Models;
+using DotLiquid;
 using NJsonSchema;
 using NJsonSchema.CodeGeneration;
 using NJsonSchema.CodeGeneration.CSharp;
@@ -23,6 +24,7 @@ namespace Apizr.Tools.Generator
         public ApizrGenerator(OpenApiDocument document, ApizrGeneratorSettings settings)
             : this(document, settings, CreateApizrResolverWithExceptionSchema(settings.CSharpGeneratorSettings, document))
         {
+            Template.RegisterSafeType(typeof(ApizrRegistrationType), o => o.ToString());
         }
         
         /// <summary>Creates a new resolver, adds the given schema definitions and registers an exception schema if available.</summary>

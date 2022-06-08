@@ -17,6 +17,7 @@ namespace Apizr.Tools.Generator
             CSharpGeneratorSettings.ArrayInstanceType = "System.Collections.Generic.List";
             RouteNamingStrategy = ApizrRouteNamingStrategy.None;
             GenerateModelValidationAttributes = false;
+            RegistrationType = ApizrRegistrationType.Both;
             WithPriority = false;
             WithContext = false;
             WithCancellationToken = false;
@@ -37,6 +38,9 @@ namespace Apizr.Tools.Generator
 
         /// <summary>Gets or sets the full name of the base class.</summary>
         public string ControllerBaseClass { get; set; }
+
+        /// <summary>Gets or sets a value indicating whether to allow adding priority management </summary>
+        public ApizrRegistrationType RegistrationType { get; set; }
 
         /// <summary>Gets or sets a value indicating whether to allow adding priority management </summary>
         public bool WithPriority { get; set; }

@@ -18,11 +18,11 @@ using NSwag.CodeGeneration.OperationNameGenerators;
 var ns = "Test";
 //var url = "http://localhost/ApizrSampleApi/swagger/v1/swagger.json";
 var url = "https://petstore.swagger.io/v2/swagger.json";
+var registrationType = ApizrRegistrationType.Both;
 var withPriority = true;
 var withContext = true;
 var withToken = true;
 var withRetry = true;
-#else
 var urlArg = new Argument<string>("url", "Swagger.json absolute url");
 
 var nsOption = new Option<string>(new[] {"--namespace", "--ns"},
@@ -32,7 +32,14 @@ var nsOption = new Option<string>(new[] {"--namespace", "--ns"},
     IsRequired = false
 };
 
-var withPriorityOption = new Option<bool>(new[] {"--withPriority", "--p"},
+var registrationTypeOption = new Option<ApizrRegistrationType>(new[] {"--registrationType", "--reg"},
+    () => ApizrRegistrationType.Both, 
+    "Set generated registration type")
+{
+    IsRequired = false
+};
+
+var withPriorityOption = new Option<bool>(new[] {"--withPriority", "--pri"},
     () => false, 
     "Add a Priority parameter")
 {
@@ -53,7 +60,7 @@ var withTokenOption = new Option<bool>(new[] {"--withCancellationToken", "--ct"}
     IsRequired = false
 };
 
-var withRetryOption = new Option<bool>(new[] {"--withRetry", "--rt"},
+var withRetryOption = new Option<bool>(new[] {"--withRetry", "--ret"},
     () => false, 
     "Add retry management")
 {
@@ -64,13 +71,15 @@ var rootCommand = new RootCommand
 {
     urlArg,
     nsOption,
+    registrationTypeOption,
     withPriorityOption,
     withContextOption,
     withTokenOption,
     withRetryOption
 };
 
-rootCommand.SetHandler(async (string url, string ns, bool withPriority, bool withContext, bool withToken, bool withRetry) =>
+#else
+rootCommand.SetHandler(async (string url, string ns, ApizrRegistrationType registrationType, bool withPriority, bool withContext, bool withToken, bool withRetry) =>
 {
 #endif
 
@@ -95,6 +104,7 @@ var assemblies = new[]
     clientSettings.ResponseDictionaryType = "IDictionary";
     clientSettings.ParameterArrayType = "IEnumerable";
     clientSettings.ParameterDictionaryType = "IDictionary";
+    clientSettings.RegistrationType = registrationType;
     clientSettings.WithPriority = withPriority;
     clientSettings.WithContext = withContext;
     clientSettings.WithCancellationToken = withToken;
@@ -134,6 +144,7 @@ Console.WriteLine($"Done!");
 #else
 }, urlArg, 
 nsOption,
+registrationTypeOption,
 withPriorityOption,
 withContextOption,
 withTokenOption,

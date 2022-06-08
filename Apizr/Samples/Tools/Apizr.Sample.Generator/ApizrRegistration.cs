@@ -1,22 +1,17 @@
-using Apizr;
+﻿using Apizr;
 using Apizr.Configuring.Registry;
 using Microsoft.Extensions.DependencyInjection;
-{% if WithRetry -%}
 using System;
 using Apizr.Policing;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
-{% endif -%}
 
-{% if WithRetry -%}
-[assembly:Policy("TransientHttpError")]
-{% endif -%}
-namespace {{ NameSpace }}
+[assembly: Policy("TransientHttpError")]
+namespace Test
 {
     public static class ApizrRegistration
     {
-{%      if WithRetry -%}
         public static PolicyRegistry ApizrPolicyRegistry = new PolicyRegistry
         {
             {
@@ -29,31 +24,26 @@ namespace {{ NameSpace }}
             }
         };
 
-{%      endif -%}
         public static IApizrRegistry Build() =>
             ApizrBuilder.CreateRegistry(
                 registry => registry
-{%                  for service in Services -%}
-                    .AddManagerFor<I{{ service }}Service>(){% if service == LastService %},{% endif %}
-{%                  endfor -%}
-                options => options.WithBaseAddress("{{BaseUrl}}")
-{%                  if WithRetry -%}
+                    .AddManagerFor<IPetService>()
+                    .AddManagerFor<IStoreService>()
+                    .AddManagerFor<IUserService>(),
+                options => options.WithBaseAddress("https://petstore.swagger.io/v2")
                     .WithPolicyRegistry(ApizrPolicyRegistry)
-{%                  endif -%}
             );
 
         public static IServiceCollection AddApizr(this IServiceCollection services)
         {
-{%          if WithRetry -%}
             services.AddPolicyRegistry(ApizrPolicyRegistry);
 
-{%          endif -%}
             services.AddApizr(
                 registry => registry
-{%                  for service in Services -%}
-                    .AddManagerFor<I{{ service }}Service>(){% if service == LastService %},{% endif %}
-{%                  endfor -%}
-                options => options.WithBaseAddress("{{BaseUrl}}")
+                    .AddManagerFor<IPetService>()
+                    .AddManagerFor<IStoreService>()
+                    .AddManagerFor<IUserService>(),
+                options => options.WithBaseAddress("https://petstore.swagger.io/v2")
             );
 
             return services;

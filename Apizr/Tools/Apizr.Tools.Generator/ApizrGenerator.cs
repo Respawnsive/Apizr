@@ -71,7 +71,7 @@ namespace Apizr.Tools.Generator
             var models = GenerateModels();
             var services = GenerateServices().ToList();
 
-            var model = new ApizrRegistrationTemplateModel("ApizrRegistration", services.Select(a => a.TypeName), Settings);
+            var model = new ApizrRegistrationTemplateModel("ApizrRegistration", services.Select(a => a.TypeName), _document, Settings);
             var template = Settings.CodeGeneratorSettings.TemplateFactory.CreateTemplate("CSharp", "Registration", model);
             var registration = new CodeArtifact(model.Class, CodeArtifactType.Class, CodeArtifactLanguage.CSharp,
                 CodeArtifactCategory.Utility, template);

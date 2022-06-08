@@ -21,6 +21,7 @@ var url = "https://petstore.swagger.io/v2/swagger.json";
 var withPriority = true;
 var withContext = true;
 var withToken = true;
+var withRetry = true;
 #else
 var urlArg = new Argument<string>("url", "Swagger.json absolute url");
 
@@ -40,7 +41,7 @@ var withPriorityOption = new Option<bool>(new[] {"--withPriority", "--p"},
 
 var withContextOption = new Option<bool>(new[] {"--withContext", "--ctx"},
     () => false, 
-    "Add a Context parameter")
+    "Add a Polly Context parameter")
 {
     IsRequired = false
 };
@@ -52,20 +53,28 @@ var withTokenOption = new Option<bool>(new[] {"--withCancellationToken", "--ct"}
     IsRequired = false
 };
 
+var withRetryOption = new Option<bool>(new[] {"--withRetry", "--rt"},
+    () => false, 
+    "Add retry management")
+{
+    IsRequired = false
+};
+
 var rootCommand = new RootCommand
 {
     urlArg,
     nsOption,
     withPriorityOption,
     withContextOption,
-    withTokenOption
+    withTokenOption,
+    withRetryOption
 };
 
-rootCommand.SetHandler(async (string url, string ns, bool withPriority, bool withContext, bool withToken) =>
+rootCommand.SetHandler(async (string url, string ns, bool withPriority, bool withContext, bool withToken, bool withRetry) =>
 {
 #endif
 
-    var assemblies = new[]
+var assemblies = new[]
     {
         typeof(CSharpGeneratorSettings).GetTypeInfo().Assembly,
         typeof(CSharpGeneratorBaseSettings).GetTypeInfo().Assembly,
@@ -89,8 +98,9 @@ rootCommand.SetHandler(async (string url, string ns, bool withPriority, bool wit
     clientSettings.WithPriority = withPriority;
     clientSettings.WithContext = withContext;
     clientSettings.WithCancellationToken = withToken;
+    clientSettings.WithRetry = withRetry;
 
-    var result = await OpenApiDocument.FromUrlAsync(url);
+var result = await OpenApiDocument.FromUrlAsync(url);
 
     var generator = new ApizrGenerator(result, clientSettings);
     var all = generator.GenerateAll().ToList();
@@ -126,7 +136,8 @@ Console.WriteLine($"Done!");
 nsOption,
 withPriorityOption,
 withContextOption,
-withTokenOption);
+withTokenOption,
+withRetryOption);
 
 return await rootCommand.InvokeAsync(args);
 #endif

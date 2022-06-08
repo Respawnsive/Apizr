@@ -104,15 +104,12 @@ namespace Apizr.Tools.Generator.Models
         /// <summary>Gets a value indicating whether to generate optional parameters.</summary>
         public bool GenerateOptionalParameters => _settings.GenerateOptionalParameters;
         
-
         /// <summary>Gets a value indicating whether to allow adding cancellation token.</summary>
         public bool WithPriority => _settings.WithPriority;
-
-
+        
         /// <summary>Gets a value indicating whether to allow adding cancellation token.</summary>
         public bool WithContext => _settings.WithContext;
-
-
+        
         /// <summary>Gets a value indicating whether to allow adding cancellation token.</summary>
         public bool WithCancellationToken => _settings.WithCancellationToken;
 

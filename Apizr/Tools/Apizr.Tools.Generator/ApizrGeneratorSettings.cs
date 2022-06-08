@@ -38,14 +38,17 @@ namespace Apizr.Tools.Generator
         /// <summary>Gets or sets the full name of the base class.</summary>
         public string ControllerBaseClass { get; set; }
 
-        /// <summary>Gets or sets a value indicating whether to allow adding cancellation token </summary>
+        /// <summary>Gets or sets a value indicating whether to allow adding priority management </summary>
         public bool WithPriority { get; set; }
 
-        /// <summary>Gets or sets a value indicating whether to allow adding cancellation token </summary>
+        /// <summary>Gets or sets a value indicating whether to allow adding Polly context </summary>
         public bool WithContext { get; set; }
 
         /// <summary>Gets or sets a value indicating whether to allow adding cancellation token </summary>
         public bool WithCancellationToken { get; set; }
+
+        /// <summary>Gets or sets a value indicating whether to allow adding Polly retry management </summary>
+        public bool WithRetry { get; set; }
 
         /// <summary>Gets or sets the strategy for naming routes (default: CSharpRouteNamingStrategy.None).</summary>
         public ApizrRouteNamingStrategy RouteNamingStrategy { get; set; }

@@ -7,7 +7,9 @@
 //-----------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using Apizr.Tools.Generator.Extensions;
 using NSwag;
 using NSwag.CodeGeneration.CSharp.Models;
 
@@ -57,6 +59,20 @@ namespace Apizr.Tools.Generator.Models
             _settings = settings;
 
             Class = controllerName;
+            if(string.IsNullOrWhiteSpace(Class))
+                if (!string.IsNullOrWhiteSpace(document.Info.Title))
+                    Class = document.Info.Title.ToPascalCase()
+                        .Replace(" ", "")
+                        .Replace("Swagger", "");
+                else
+                    Class = "Api";
+
+            Class = !string.IsNullOrWhiteSpace(controllerName)
+                ? controllerName
+                : document.Info.Title
+                    .Replace(" ", "")
+                    .Replace("Swagger", "");
+
             Operations = operations;
 
             BaseClass = _settings.ControllerBaseClass?.Replace("{controller}", controllerName);

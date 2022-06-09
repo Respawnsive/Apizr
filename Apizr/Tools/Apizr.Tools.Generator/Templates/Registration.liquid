@@ -1,5 +1,7 @@
 using Apizr;
+{% if HasManyServices -%}
 using Apizr.Configuring.Registry;
+{% endif -%}
 using Microsoft.Extensions.DependencyInjection;
 {% if WithRetry -%}
 using System;
@@ -32,6 +34,7 @@ namespace {{ NameSpace }}
 {%      endif -%}
 {%      if RegistrationType == 'Static' or RegistrationType == 'Both' -%}
         public static IApizrRegistry Build() =>
+{%          if HasManyServices -%}
             ApizrBuilder.CreateRegistry(
                 registry => registry
 {%                  for service in Services -%}
@@ -42,6 +45,14 @@ namespace {{ NameSpace }}
                     .WithPolicyRegistry(ApizrPolicyRegistry)
 {%                  endif -%}
             );
+{%          else -%}
+            ApizrBuilder.CreateManagerFor<I{{ LastService }}Service>(
+                options => options.WithBaseAddress("{{BaseUrl}}")
+{%                  if WithRetry -%}
+                    .WithPolicyRegistry(ApizrPolicyRegistry)
+{%                  endif -%}
+            );
+{%          endif -%}
 {%      endif -%}
 {%      if RegistrationType == 'Extended' or RegistrationType == 'Both' -%}
 {%      if RegistrationType == 'Both' -%}
@@ -53,6 +64,7 @@ namespace {{ NameSpace }}
             services.AddPolicyRegistry(ApizrPolicyRegistry);
 
 {%          endif -%}
+{%          if HasManyServices -%}
             services.AddApizr(
                 registry => registry
 {%                  for service in Services -%}
@@ -60,6 +72,11 @@ namespace {{ NameSpace }}
 {%                  endfor -%}
                 options => options.WithBaseAddress("{{BaseUrl}}")
             );
+{%          else -%}
+            services.AddManagerFor<I{{ LastService }}Service>(
+                options => options.WithBaseAddress("{{BaseUrl}}")
+            );
+{%          endif -%}
 
             return services;
         }

@@ -40,6 +40,8 @@ namespace Apizr.Tools.Generator.Models
         /// <summary>Gets or sets the operations.</summary>
         public IEnumerable<string> Services { get; set; }
 
+        public bool HasManyServices => Services.Count() > 1;
+
         public string LastService => Services.LastOrDefault();
 
         public bool WithRetry => _settings.WithRetry;

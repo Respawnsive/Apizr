@@ -94,7 +94,7 @@ var assemblies = new[]
     {
         UseActionResultType = true,
         WrapResponses = false,
-        OperationNameGenerator = new MultipleClientsFromFirstTagAndOperationIdGenerator(),
+        OperationNameGenerator = new SingleClientFromOperationIdOperationNameGenerator()// MultipleClientsFromFirstTagAndOperationIdGenerator(),
     };
     clientSettings.CodeGeneratorSettings.TemplateFactory = new ApizrTemplateFactory(clientSettings.CSharpGeneratorSettings, assemblies);
     clientSettings.CSharpGeneratorSettings.Namespace = ns;
@@ -129,7 +129,7 @@ var result = await OpenApiDocument.FromUrlAsync(url);
     }
     foreach (var service in all.Where(a => a.Category == CodeArtifactCategory.Client && a.Type == CodeArtifactType.Interface))
     {
-        var serviceFile = Path.Combine(servicesPath, $"I{service.TypeName}Service.cs");
+        var serviceFile = Path.Combine(servicesPath, $"I{service.TypeName ?? "Api"}Service.cs");
         File.WriteAllText(serviceFile, service.Code, Encoding.UTF8);
         Console.WriteLine($"Interface output file：{serviceFile}");
     }

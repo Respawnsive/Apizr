@@ -46,6 +46,8 @@ namespace Apizr.Tools.Generator.Models
 
         public bool WithRetry => _settings.WithRetry;
 
+        public bool WithLogs => _settings.WithLogs;
+
         public string RegistrationType => _settings.RegistrationType.ToString();
 
     }

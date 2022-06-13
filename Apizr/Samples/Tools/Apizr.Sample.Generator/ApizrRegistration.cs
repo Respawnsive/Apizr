@@ -1,13 +1,14 @@
 ﻿using Apizr;
-using Apizr.Configuring.Registry;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using Apizr.Policing;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
+using Apizr.Logging.Attributes;
 
 [assembly: Policy("TransientHttpError")]
+[assembly: Log]
 namespace Test
 {
     public static class ApizrRegistration
@@ -24,12 +25,8 @@ namespace Test
             }
         };
 
-        public static IApizrRegistry Build() =>
-            ApizrBuilder.CreateRegistry(
-                registry => registry
-                    .AddManagerFor<IPetService>()
-                    .AddManagerFor<IStoreService>()
-                    .AddManagerFor<IUserService>(),
+        public static IApizrManager<IPetstoreService> Build() =>
+            ApizrBuilder.CreateManagerFor<IPetstoreService>(
                 options => options.WithBaseAddress("https://petstore.swagger.io/v2")
                     .WithPolicyRegistry(ApizrPolicyRegistry)
             );
@@ -38,11 +35,7 @@ namespace Test
         {
             services.AddPolicyRegistry(ApizrPolicyRegistry);
 
-            services.AddApizr(
-                registry => registry
-                    .AddManagerFor<IPetService>()
-                    .AddManagerFor<IStoreService>()
-                    .AddManagerFor<IUserService>(),
+            services.AddApizrManagerFor<IPetstoreService>(
                 options => options.WithBaseAddress("https://petstore.swagger.io/v2")
             );
 

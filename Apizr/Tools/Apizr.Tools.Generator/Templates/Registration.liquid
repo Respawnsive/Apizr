@@ -10,9 +10,15 @@ using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
 {% endif -%}
+{% if WithLogs -%}
+using Apizr.Logging.Attributes;
+{% endif -%}
 
 {% if WithRetry -%}
 [assembly:Policy("TransientHttpError")]
+{% endif -%}
+{% if WithLogs -%}
+[assembly:Log]
 {% endif -%}
 namespace {{ NameSpace }}
 {
@@ -33,7 +39,7 @@ namespace {{ NameSpace }}
 
 {%      endif -%}
 {%      if RegistrationType == 'Static' or RegistrationType == 'Both' -%}
-        public static IApizrRegistry Build() =>
+        public static {% if HasManyServices  -%}IApizrRegistry {% else -%}IApizrManager<I{{ LastService }}Service> {% endif -%} Build() =>
 {%          if HasManyServices -%}
             ApizrBuilder.CreateRegistry(
                 registry => registry
@@ -73,7 +79,7 @@ namespace {{ NameSpace }}
                 options => options.WithBaseAddress("{{BaseUrl}}")
             );
 {%          else -%}
-            services.AddManagerFor<I{{ LastService }}Service>(
+            services.AddApizrManagerFor<I{{ LastService }}Service>(
                 options => options.WithBaseAddress("{{BaseUrl}}")
             );
 {%          endif -%}

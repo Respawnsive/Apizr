@@ -23,6 +23,7 @@ var withPriority = true;
 var withContext = true;
 var withToken = true;
 var withRetry = true;
+var withLogs = true;
 var urlArg = new Argument<string>("url", "Swagger.json absolute url");
 
 var nsOption = new Option<string>(new[] {"--namespace", "--ns"},
@@ -67,6 +68,13 @@ var withRetryOption = new Option<bool>(new[] {"--withRetry", "--ret"},
     IsRequired = false
 };
 
+var withLogsOption = new Option<bool>(new[] { "--withLogs", "--log" },
+    () => false,
+    "Add logs")
+{
+    IsRequired = false
+};
+
 var rootCommand = new RootCommand
 {
     urlArg,
@@ -75,11 +83,12 @@ var rootCommand = new RootCommand
     withPriorityOption,
     withContextOption,
     withTokenOption,
-    withRetryOption
+    withRetryOption,
+    withLogsOption
 };
 
 #else
-rootCommand.SetHandler(async (string url, string ns, ApizrRegistrationType registrationType, bool withPriority, bool withContext, bool withToken, bool withRetry) =>
+rootCommand.SetHandler(async (string url, string ns, ApizrRegistrationType registrationType, bool withPriority, bool withContext, bool withToken, bool withRetry, bool withLogs) =>
 {
 #endif
 
@@ -109,6 +118,7 @@ var assemblies = new[]
     clientSettings.WithContext = withContext;
     clientSettings.WithCancellationToken = withToken;
     clientSettings.WithRetry = withRetry;
+    clientSettings.WithLogs = withLogs;
 
 var result = await OpenApiDocument.FromUrlAsync(url);
 
@@ -148,7 +158,8 @@ registrationTypeOption,
 withPriorityOption,
 withContextOption,
 withTokenOption,
-withRetryOption);
+withRetryOption,
+withLogsOption);
 
 return await rootCommand.InvokeAsync(args);
 #endif

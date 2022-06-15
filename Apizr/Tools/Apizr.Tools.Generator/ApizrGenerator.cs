@@ -70,17 +70,21 @@ namespace Apizr.Tools.Generator
         public IEnumerable<CodeArtifact> GenerateAll()
         {
             var all = new List<CodeArtifact>();
+
             var models = GenerateModels();
-            var services = GenerateServices().ToList();
-
-            var model = new ApizrRegistrationTemplateModel("ApizrRegistration", services.Select(a => a.TypeName), _document, Settings);
-            var template = Settings.CodeGeneratorSettings.TemplateFactory.CreateTemplate("CSharp", "Registration", model);
-            var registration = new CodeArtifact(model.Class, CodeArtifactType.Class, CodeArtifactLanguage.CSharp,
-                CodeArtifactCategory.Utility, template);
-
             all.AddRange(models);
+
+            var services = GenerateServices().ToList();
             all.AddRange(services);
-            all.Add(registration);
+
+            if (Settings.RegistrationType != ApizrRegistrationType.None)
+            {
+                var model = new ApizrRegistrationTemplateModel("ApizrRegistration", services.Select(a => a.TypeName), _document, Settings);
+                var template = Settings.CodeGeneratorSettings.TemplateFactory.CreateTemplate("CSharp", "Registration", model);
+                var registration = new CodeArtifact(model.Class, CodeArtifactType.Class, CodeArtifactLanguage.CSharp,
+                    CodeArtifactCategory.Utility, template);
+                all.Add(registration); 
+            }
 
             return all;
         }

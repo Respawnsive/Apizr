@@ -4,11 +4,13 @@ using System.Text;
 
 namespace Apizr.Tools.Generator
 {
-    public enum ApizrRegistrationType
+    public enum CacheProviderType
     {
         None = -1,
-        Static,
-        Extended,
-        Both
+        Akavache,
+        MonkeyCache,
+        InMemory,
+        Distributed,
+        Custom
     }
 }

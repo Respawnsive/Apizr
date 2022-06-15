@@ -8,7 +8,31 @@ using System.Threading;
 {% endif -%}
 using Refit;
 using Apizr;
+{% if RegistrationType == 'None' -%}
+{% if WithRetry -%}
+using System;
+using Apizr.Policing;
+using Polly;
+using Polly.Extensions.Http;
+using Polly.Registry;
+{% endif -%}
+{% if WithLogs -%}
+using Apizr.Logging.Attributes;
+{% endif -%}
+{% if WithCacheProvider != 'None' -%}
+using Apizr.Caching.Attributes;
+{% endif -%}
 
+{% if WithRetry -%}
+[assembly:Policy("TransientHttpError")]
+{% endif -%}
+{% if WithLogs -%}
+[assembly:Log]
+{% endif -%}
+{% if WithCacheProvider != 'None' -%}
+[assembly:Cache]
+{% endif -%}
+{% endif -%}
 namespace {{ NameSpace }}
 {
     [WebApi]

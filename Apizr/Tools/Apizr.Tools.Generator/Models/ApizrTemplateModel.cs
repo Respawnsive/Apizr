@@ -129,6 +129,14 @@ namespace Apizr.Tools.Generator.Models
         /// <summary>Gets a value indicating whether to allow adding cancellation token.</summary>
         public bool WithCancellationToken => _settings.WithCancellationToken;
 
+        public bool WithRetry => _settings.WithRetry;
+
+        public bool WithLogs => _settings.WithLogs;
+
+        public string WithCacheProvider => _settings.WithCacheProvider.ToString();
+
+        public string RegistrationType => _settings.RegistrationType.ToString();
+
         /// <summary>Gets a value indicating whether to allow adding model validation attributes</summary>
         public bool GenerateModelValidationAttributes => _settings.GenerateModelValidationAttributes;
 

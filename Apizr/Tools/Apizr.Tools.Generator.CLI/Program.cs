@@ -24,6 +24,7 @@ var withContext = true;
 var withToken = true;
 var withRetry = true;
 var withLogs = true;
+var withCacheProvider = CacheProviderType.Akavache;
 var urlArg = new Argument<string>("url", "Swagger.json absolute url");
 
 var nsOption = new Option<string>(new[] {"--namespace", "--ns"},
@@ -33,44 +34,51 @@ var nsOption = new Option<string>(new[] {"--namespace", "--ns"},
     IsRequired = false
 };
 
-var registrationTypeOption = new Option<ApizrRegistrationType>(new[] {"--registrationType", "--reg"},
+var registrationTypeOption = new Option<ApizrRegistrationType>(new[] {"--registrationType", "--register", "--rg" },
     () => ApizrRegistrationType.Both, 
     "Set generated registration type")
 {
     IsRequired = false
 };
 
-var withPriorityOption = new Option<bool>(new[] {"--withPriority", "--pri"},
+var withPriorityOption = new Option<bool>(new[] {"--withPriority", "--priority", "--pr"},
     () => false, 
     "Add a Priority parameter")
 {
     IsRequired = false
 };
 
-var withContextOption = new Option<bool>(new[] {"--withContext", "--ctx"},
+var withContextOption = new Option<bool>(new[] {"--withContext", "--context", "--ctx"},
     () => false, 
     "Add a Polly Context parameter")
 {
     IsRequired = false
 };
 
-var withTokenOption = new Option<bool>(new[] {"--withCancellationToken", "--ct"},
+var withTokenOption = new Option<bool>(new[] {"--withCancellationToken", "--token", "--ct"},
     () => false, 
     "Add a CancellationToken parameter")
 {
     IsRequired = false
 };
 
-var withRetryOption = new Option<bool>(new[] {"--withRetry", "--ret"},
+var withRetryOption = new Option<bool>(new[] {"--withRetry", "--retry", "--rt"},
     () => false, 
     "Add retry management")
 {
     IsRequired = false
 };
 
-var withLogsOption = new Option<bool>(new[] { "--withLogs", "--log" },
+var withLogsOption = new Option<bool>(new[] { "--withLogs", "--log", "--l" },
     () => false,
     "Add logs")
+{
+    IsRequired = false
+};
+
+var withCacheProviderOption = new Option<CacheProviderType>(new[] { "--withCacheProvider", "--cache", "--cp" },
+    () => CacheProviderType.None,
+    "Add cache management")
 {
     IsRequired = false
 };
@@ -84,11 +92,12 @@ var rootCommand = new RootCommand
     withContextOption,
     withTokenOption,
     withRetryOption,
-    withLogsOption
+    withLogsOption,
+    withCacheProviderOption
 };
 
 #else
-rootCommand.SetHandler(async (string url, string ns, ApizrRegistrationType registrationType, bool withPriority, bool withContext, bool withToken, bool withRetry, bool withLogs) =>
+rootCommand.SetHandler(async (string url, string ns, ApizrRegistrationType registrationType, bool withPriority, bool withContext, bool withToken, bool withRetry, bool withLogs, CacheProviderType withCacheProvider) =>
 {
 #endif
 
@@ -119,6 +128,7 @@ var assemblies = new[]
     clientSettings.WithCancellationToken = withToken;
     clientSettings.WithRetry = withRetry;
     clientSettings.WithLogs = withLogs;
+    clientSettings.WithCacheProvider = withCacheProvider;
 
 var result = await OpenApiDocument.FromUrlAsync(url);
 
@@ -144,10 +154,13 @@ var result = await OpenApiDocument.FromUrlAsync(url);
         Console.WriteLine($"Interface output file：{serviceFile}");
     }
 
-    var registration = all.First(a => a.Category == CodeArtifactCategory.Utility && a.Type == CodeArtifactType.Class);
-    var registrationFile = Path.Combine(dir, $"{registration.TypeName}.cs");
-    File.WriteAllText(registrationFile, registration.Code, Encoding.UTF8);
-    Console.WriteLine($"Registration output file：{registrationFile}");
+    var registration = all.FirstOrDefault(a => a.Category == CodeArtifactCategory.Utility && a.Type == CodeArtifactType.Class);
+    if (registration != null)
+    {
+        var registrationFile = Path.Combine(dir, $"{registration.TypeName}.cs");
+        File.WriteAllText(registrationFile, registration.Code, Encoding.UTF8);
+        Console.WriteLine($"Registration output file：{registrationFile}"); 
+    }
 
 #if DEBUG
 Console.WriteLine($"Done!");
@@ -159,7 +172,8 @@ withPriorityOption,
 withContextOption,
 withTokenOption,
 withRetryOption,
-withLogsOption);
+withLogsOption,
+withCacheProviderOption);
 
 return await rootCommand.InvokeAsync(args);
 #endif

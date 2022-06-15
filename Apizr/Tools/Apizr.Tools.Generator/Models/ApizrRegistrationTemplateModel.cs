@@ -48,6 +48,8 @@ namespace Apizr.Tools.Generator.Models
 
         public bool WithLogs => _settings.WithLogs;
 
+        public string WithCacheProvider => _settings.WithCacheProvider.ToString();
+
         public string RegistrationType => _settings.RegistrationType.ToString();
 
     }

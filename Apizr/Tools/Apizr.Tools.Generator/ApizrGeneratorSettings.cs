@@ -60,6 +60,12 @@ namespace Apizr.Tools.Generator
         /// <summary>Gets or sets a value indicating whether to allow adding Cache management </summary>
         public CacheProviderType WithCacheProvider { get; set; }
 
+        /// <summary>Gets or sets a value indicating whether to allow adding Logs </summary>
+        public bool WithMediation { get; set; }
+
+        /// <summary>Gets or sets a value indicating whether to allow adding Logs </summary>
+        public bool WithOptionalMediation { get; set; }
+
         /// <summary>Gets or sets the strategy for naming routes (default: CSharpRouteNamingStrategy.None).</summary>
         public ApizrRouteNamingStrategy RouteNamingStrategy { get; set; }
 

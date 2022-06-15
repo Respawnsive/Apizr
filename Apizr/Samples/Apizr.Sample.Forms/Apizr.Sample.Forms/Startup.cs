@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
 using Apizr.Extending;
 using Apizr.Policing;
@@ -79,7 +80,7 @@ namespace Apizr.Sample.Forms
                     .WithMediation()
                     .WithOptionalMediation());
 
-            services.AddMediatR(typeof(Startup));
+            services.AddMediatR(Assembly.GetExecutingAssembly());
         }
 
         private static Task<string> OnRefreshToken(HttpRequestMessage request) => Task.FromResult("tokenValue");

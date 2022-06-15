@@ -59,5 +59,9 @@ namespace Apizr.Tools.Generator.Models
 
         public string RegistrationType => _settings.RegistrationType.ToString();
 
+        public bool WithMediation => _settings.WithMediation;
+
+        public bool WithOptionalMediation => _settings.WithOptionalMediation;
+
     }
 }

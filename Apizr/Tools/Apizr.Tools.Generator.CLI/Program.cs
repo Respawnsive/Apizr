@@ -25,6 +25,8 @@ var withToken = true;
 var withRetry = true;
 var withLogs = true;
 var withCacheProvider = CacheProviderType.Akavache;
+var withMediation = true;
+var withOptionalMediation = true;
 var urlArg = new Argument<string>("url", "Swagger.json absolute url");
 
 var nsOption = new Option<string>(new[] {"--namespace", "--ns"},
@@ -83,6 +85,20 @@ var withCacheProviderOption = new Option<CacheProviderType>(new[] { "--withCache
     IsRequired = false
 };
 
+var withMediationOption = new Option<bool>(new[] { "--withMediation", "--mediation", "--med" },
+    () => false,
+    "Add MediatR")
+{
+    IsRequired = false
+};
+
+var withOptionalMediationOption = new Option<bool>(new[] { "--withOptionalMediation", "--optional", "--opt" },
+    () => false,
+    "Add Optional")
+{
+    IsRequired = false
+};
+
 var rootCommand = new RootCommand
 {
     urlArg,
@@ -93,15 +109,17 @@ var rootCommand = new RootCommand
     withTokenOption,
     withRetryOption,
     withLogsOption,
-    withCacheProviderOption
+    withCacheProviderOption,
+    withMediationOption,
+    withOptionalMediationOption
 };
 
 #else
-rootCommand.SetHandler(async (string url, string ns, ApizrRegistrationType registrationType, bool withPriority, bool withContext, bool withToken, bool withRetry, bool withLogs, CacheProviderType withCacheProvider) =>
+rootCommand.SetHandler(async (string url, string ns, ApizrRegistrationType registrationType, bool withPriority, bool withContext, bool withToken, bool withRetry, bool withLogs, CacheProviderType withCacheProvider, bool withMediation, bool withOptionalMediation) =>
 {
 #endif
 
-var assemblies = new[]
+    var assemblies = new[]
     {
         typeof(CSharpGeneratorSettings).GetTypeInfo().Assembly,
         typeof(CSharpGeneratorBaseSettings).GetTypeInfo().Assembly,
@@ -129,8 +147,10 @@ var assemblies = new[]
     clientSettings.WithRetry = withRetry;
     clientSettings.WithLogs = withLogs;
     clientSettings.WithCacheProvider = withCacheProvider;
+    clientSettings.WithMediation = withMediation;
+    clientSettings.WithOptionalMediation = withOptionalMediation;
 
-var result = await OpenApiDocument.FromUrlAsync(url);
+    var result = await OpenApiDocument.FromUrlAsync(url);
 
     var generator = new ApizrGenerator(result, clientSettings);
     var all = generator.GenerateAll().ToList();
@@ -173,7 +193,9 @@ withContextOption,
 withTokenOption,
 withRetryOption,
 withLogsOption,
-withCacheProviderOption);
+withCacheProviderOption,
+withMediationOption,
+withOptionalMediationOption);
 
 return await rootCommand.InvokeAsync(args);
 #endif

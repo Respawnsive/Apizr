@@ -36,7 +36,7 @@ namespace {{ NameSpace }}
     public static class ApizrRegistration
     {
 {%      if WithRetry -%}
-        // Define your PolicyRegistry
+        // Define your PolicyRegistry if not done yet somewhere else
         public static PolicyRegistry ApizrPolicyRegistry = new PolicyRegistry
         {
             {
@@ -58,7 +58,11 @@ namespace {{ NameSpace }}
             Barrel.ApplicationId = "{{Title}}";
 
 {%          elsif WithCacheProvider == 'InMemory' or WithCacheProvider == 'Distributed' -%}
-            // Microsoft.Extensions.Caching.{{WithCacheProvider}} is not compatible with static registration
+            // Microsoft.Extensions.Caching.{{WithCacheProvider}} is not compatible with Apizr static registration (ignored)
+
+{%          endif -%}
+{%          if WithMediation or WithOptionalMediation -%}
+            // MediatR is not compatible with Apizr static registration (ignored)
 
 {%          endif -%}
 {%          if HasManyServices -%}
@@ -114,7 +118,7 @@ namespace {{ NameSpace }}
         public static IServiceCollection AddApizr(this IServiceCollection services)
         {
 {%          if WithRetry -%}
-            services.AddPolicyRegistry(ApizrPolicyRegistry);
+            services.AddPolicyRegistry(ApizrPolicyRegistry); // Remove this line if already registered somewhere else
 
 {%          endif -%}
 {%          if WithCacheProvider == 'MonkeyCache' -%}
@@ -122,6 +126,10 @@ namespace {{ NameSpace }}
 
 {%          elsif WithCacheProvider == 'Distributed' -%}
             // You selected Distributed cache so do not forget to register the distributed cache provider of your choice
+
+{%          endif -%}
+{%          if WithMediation or WithOptionalMediation -%}
+            services.AddMediatR(Assembly.GetExecutingAssembly()); // Remove this line if already registered somewhere else
 
 {%          endif -%}
 {%          if HasManyServices -%}
@@ -145,6 +153,12 @@ namespace {{ NameSpace }}
 {%                  elsif WithCacheProvider == 'Custom' -%}
                     .WithCacheHandler(() => new YOUR_ICACHEHANDLER_CUSTOM_IMPLEMENTATION_HERE())
 {%                  endif -%}
+{%                  if WithMediation -%}
+                    .WithMediation()
+{%                  endif -%}
+{%                  if WithOptionalMediation -%}
+                    .WithOptionalMediation()
+{%                  endif -%}
             );
 {%          else -%}
             services.AddApizrManagerFor<I{{ LastService }}Service>(
@@ -162,6 +176,12 @@ namespace {{ NameSpace }}
                     .WithDistributedCacheHandler<CHOOSE_STRING_OR_BYTEARRAY_CACHE_TYPE>()
 {%                  elsif WithCacheProvider == 'Custom' -%}
                     .WithCacheHandler(() => new YOUR_ICACHEHANDLER_CUSTOM_IMPLEMENTATION_HERE())
+{%                  endif -%}
+{%                  if WithMediation -%}
+                    .WithMediation()
+{%                  endif -%}
+{%                  if WithOptionalMediation -%}
+                    .WithOptionalMediation()
 {%                  endif -%}
             );
 {%          endif -%}

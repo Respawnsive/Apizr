@@ -22,6 +22,9 @@ namespace Apizr.Tools.Generator.Models
             BaseClass = _settings.ControllerBaseClass?.Replace("{controller}", controllerName);
             NameSpace = _settings.CSharpGeneratorSettings.Namespace;
             Services = services;
+            Title = document.Info.Title
+                .Replace(" ", "")
+                .Replace("Swagger", "");
         }
 
         public string BaseUrl { get; }
@@ -37,6 +40,8 @@ namespace Apizr.Tools.Generator.Models
         /// <summary>Gets the base class.</summary>
         public string BaseClass { get; }
 
+        public string Title { get; }
+
         /// <summary>Gets or sets the operations.</summary>
         public IEnumerable<string> Services { get; set; }
 
@@ -45,6 +50,8 @@ namespace Apizr.Tools.Generator.Models
         public string LastService => Services.LastOrDefault();
 
         public bool WithRetry => _settings.WithRetry;
+
+        public bool WithPriority => _settings.WithPriority;
 
         public bool WithLogs => _settings.WithLogs;
 

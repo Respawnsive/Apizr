@@ -18,18 +18,18 @@ using Apizr.Caching.Attributes;
 {% endif -%}
 {% if WithCacheProvider == 'Akavache' -%}
 using Akavache;
-{% else if WithCacheProvider == 'MonkeyCache' -%}
+{% elsif WithCacheProvider == 'MonkeyCache' -%}
 using MonkeyCache.FileStore;
 {% endif -%}
 
 {% if WithRetry -%}
-[assembly:Policy("TransientHttpError")]
+[assembly:Policy("TransientHttpError")] // Adjust policies if needed
 {% endif -%}
 {% if WithLogs -%}
-[assembly:Log]
+[assembly:Log] // Adjust log levels if needed
 {% endif -%}
 {% if WithCacheProvider != 'None' -%}
-[assembly:Cache]
+[assembly:Cache] // Adjust cache mode and duration if needed
 {% endif -%}
 namespace {{ NameSpace }}
 {
@@ -55,9 +55,9 @@ namespace {{ NameSpace }}
         public static {% if HasManyServices  -%}IApizrRegistry {% else -%}IApizrManager<I{{ LastService }}Service> {% endif -%} Build()
         {
 {%          if WithCacheProvider == 'MonkeyCache' -%}
-            Barrel.ApplicationId = "{{Class}}";
+            Barrel.ApplicationId = "{{Title}}";
 
-{%          else if WithCacheProvider == 'InMemory' or WithCacheProvider == 'Distributed' -%}
+{%          elsif WithCacheProvider == 'InMemory' or WithCacheProvider == 'Distributed' -%}
             // Microsoft.Extensions.Caching.{{WithCacheProvider}} is not compatible with static registration
 
 {%          endif -%}
@@ -71,11 +71,14 @@ namespace {{ NameSpace }}
 {%                  if WithRetry -%}
                     .WithPolicyRegistry(ApizrPolicyRegistry)
 {%                  endif -%}
+{%                  if WithPriority -%}
+                    .WithPriorityManagement()
+{%                  endif -%}
 {%                  if WithCacheProvider == 'Akavache' -%}
                     .WithAkavacheCacheHandler()
-{%                  else if WithCacheProvider == 'MonkeyCache' -%}
+{%                  elsif WithCacheProvider == 'MonkeyCache' -%}
                     .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
-{%                  else if WithCacheProvider == 'Custom' -%}
+{%                  elsif WithCacheProvider == 'Custom' -%}
                     .WithCacheHandler(() => new YOUR_ICACHEHANDLER_CUSTOM_IMPLEMENTATION_HERE())
 {%                  endif -%}
             );
@@ -87,11 +90,14 @@ namespace {{ NameSpace }}
 {%                  if WithRetry -%}
                     .WithPolicyRegistry(ApizrPolicyRegistry)
 {%                  endif -%}
+{%                  if WithPriority -%}
+                    .WithPriorityManagement()
+{%                  endif -%}
 {%                  if WithCacheProvider == 'Akavache' -%}
                     .WithAkavacheCacheHandler()
-{%                  else if WithCacheProvider == 'MonkeyCache' -%}
+{%                  elsif WithCacheProvider == 'MonkeyCache' -%}
                     .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
-{%                  else if WithCacheProvider == 'Custom' -%}
+{%                  elsif WithCacheProvider == 'Custom' -%}
                     .WithCacheHandler(() => new YOUR_ICACHEHANDLER_CUSTOM_IMPLEMENTATION_HERE())
 {%                  endif -%}
             );
@@ -112,9 +118,9 @@ namespace {{ NameSpace }}
 
 {%          endif -%}
 {%          if WithCacheProvider == 'MonkeyCache' -%}
-            Barrel.ApplicationId = "{{Class}}";
+            Barrel.ApplicationId = "{{Title}}";
 
-{%          else if WithCacheProvider == 'Distributed' -%}
+{%          elsif WithCacheProvider == 'Distributed' -%}
             // You selected Distributed cache so do not forget to register the distributed cache provider of your choice
 
 {%          endif -%}
@@ -125,30 +131,36 @@ namespace {{ NameSpace }}
                     .AddManagerFor<I{{ service }}Service>(){% if service == LastService %},{% endif %}
 {%                  endfor -%}
                 options => options.WithBaseAddress("{{BaseUrl}}")
+{%                  if WithPriority -%}
+                    .WithPriorityManagement()
+{%                  endif -%}
 {%                  if WithCacheProvider == 'Akavache' -%}
                     .WithAkavacheCacheHandler()
-{%                  else if WithCacheProvider == 'MonkeyCache' -%}
+{%                  elsif WithCacheProvider == 'MonkeyCache' -%}
                     .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
-{%                  else if WithCacheProvider == 'InMemory' -%}
+{%                  elsif WithCacheProvider == 'InMemory' -%}
                     .WithInMemoryCacheHandler()
-{%                  else if WithCacheProvider == 'Distributed' -%}
-                    .WithDistributedCacheHandler<YOUR_STRING_OR_BYTEARRAY_CACHE_TYPE>()
-{%                  else if WithCacheProvider == 'Custom' -%}
+{%                  elsif WithCacheProvider == 'Distributed' -%}
+                    .WithDistributedCacheHandler<CHOOSE_STRING_OR_BYTEARRAY_CACHE_TYPE>()
+{%                  elsif WithCacheProvider == 'Custom' -%}
                     .WithCacheHandler(() => new YOUR_ICACHEHANDLER_CUSTOM_IMPLEMENTATION_HERE())
 {%                  endif -%}
             );
 {%          else -%}
             services.AddApizrManagerFor<I{{ LastService }}Service>(
                 options => options.WithBaseAddress("{{BaseUrl}}")
+{%                  if WithPriority -%}
+                    .WithPriorityManagement()
+{%                  endif -%}
 {%                  if WithCacheProvider == 'Akavache' -%}
                     .WithAkavacheCacheHandler()
-{%                  else if WithCacheProvider == 'MonkeyCache' -%}
+{%                  elsif WithCacheProvider == 'MonkeyCache' -%}
                     .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
-{%                  else if WithCacheProvider == 'InMemory' -%}
+{%                  elsif WithCacheProvider == 'InMemory' -%}
                     .WithInMemoryCacheHandler()
-{%                  else if WithCacheProvider == 'Distributed' -%}
-                    .WithDistributedCacheHandler<YOUR_STRING_OR_BYTEARRAY_CACHE_TYPE>()
-{%                  else if WithCacheProvider == 'Custom' -%}
+{%                  elsif WithCacheProvider == 'Distributed' -%}
+                    .WithDistributedCacheHandler<CHOOSE_STRING_OR_BYTEARRAY_CACHE_TYPE>()
+{%                  elsif WithCacheProvider == 'Custom' -%}
                     .WithCacheHandler(() => new YOUR_ICACHEHANDLER_CUSTOM_IMPLEMENTATION_HERE())
 {%                  endif -%}
             );

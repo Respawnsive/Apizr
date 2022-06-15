@@ -152,6 +152,6 @@ namespace Apizr.Tools.Generator.Models
         /// <summary>Gets the API version.</summary>
         public string Version => _document.Info.Version;
 
-        public bool HasSystemReferences => Operations.Any(o => o.IsDeprecated);
+        public bool HasSystemReferences => Operations.Any(o => o.IsDeprecated) || WithRetry;
     }
 }

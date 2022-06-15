@@ -3,16 +3,24 @@ using System.Collections.Generic;
 {% if HasSystemReferences -%}
 using System;
 {% endif -%}
+{% if WithContext -%}
+using Polly;
+using Apizr.Policing;
+{% endif -%}
 {% if WithCancellationToken -%}
 using System.Threading;
+{% endif -%}
+{% if WithPriority -%}
+using Fusillade;
 {% endif -%}
 using Refit;
 using Apizr;
 {% if RegistrationType == 'None' -%}
 {% if WithRetry -%}
-using System;
-using Apizr.Policing;
+{% if WithContext == false -%}
 using Polly;
+using Apizr.Policing;
+{% endif -%}
 using Polly.Extensions.Http;
 using Polly.Registry;
 {% endif -%}
@@ -33,6 +41,7 @@ using Apizr.Caching.Attributes;
 [assembly:Cache]
 {% endif -%}
 {% endif -%}
+
 namespace {{ NameSpace }}
 {
     [WebApi]
@@ -69,7 +78,7 @@ namespace {{ NameSpace }}
 {%      if operation.ApizrHeaderParameters.size > 0 -%}
         [Headers({% for headerParameter in operation.ApizrHeaderParameters -%}"{{ headerParameter.Name }}"{% if operation.ApizrHeaderParameters.size > 1 and headerParameter.IsLast == false  -%}, {% endif -%}{%  endfor -%})] 
 {%      endif -%}
-        {{ operation.PascalizeResultType }} {{ operation.ActualOperationName }}Async({% for parameter in operation.NoHeaderParameters -%}{% assign kindName = parameter.KindName -%}{% case kindName -%}{% when 'Query' -%}[Query] {% when 'Body' -%}[Body] {% endcase -%}{{ parameter.TypeInControllerInterface }} {{ parameter.VariableName }}{% if GenerateOptionalParameters and parameter.IsOptional and parameter.HasDefault == false -%}= null{% endif %}{% if parameter.IsSortLast == false or WithContext or WithCancellationToken or WithPriority and operation.HttpMethodLower == 'get' -%}, {% endif -%}{% endfor -%}{% if WithPriority and operation.HttpMethodLower == 'get'  -%}[Priority] int priority = (int)Priority.UserInitiated{% if WithContext or WithCancellationToken -%}, {% endif -%}{% endif -%}{% if WithContext -%}[Context] Context context = null{% if WithCancellationToken -%}, {% endif -%}{% endif -%}{% if WithCancellationToken -%}CancellationToken cancellationToken = default(CancellationToken){% endif -%});
+        {{ operation.PascalizeResultType }} {{ operation.ActualOperationName }}Async({% for parameter in operation.NoHeaderParameters -%}{% assign kindName = parameter.KindName -%}{% case kindName -%}{% when 'Query' -%}[Query] {% when 'Body' -%}[Body] {% endcase -%}{{ parameter.TypeInControllerInterface }} {{ parameter.VariableName }}{% if GenerateOptionalParameters and parameter.IsOptional and parameter.HasDefault == false -%}= null{% endif %}{% if parameter.IsSortLast == false or WithContext or WithCancellationToken or WithPriority and operation.HttpMethodLower == 'get' -%}, {% endif -%}{% endfor -%}{% if WithPriority and operation.HttpMethodLower == 'get'  -%}[Priority] int priority = (int)Priority.UserInitiated{% if WithContext or WithCancellationToken -%}, {% endif -%}{% endif -%}{% if WithContext -%}[Context] Context context = null{% if WithCancellationToken -%}, {% endif -%}{% endif -%}{% if WithCancellationToken -%}CancellationToken cancellationToken = default{% endif -%});
 
 {%  endfor -%}
     }

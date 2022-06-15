@@ -112,7 +112,7 @@ var assemblies = new[]
     {
         UseActionResultType = true,
         WrapResponses = false,
-        OperationNameGenerator = new SingleClientFromOperationIdOperationNameGenerator()// MultipleClientsFromFirstTagAndOperationIdGenerator(),
+        OperationNameGenerator = new MultipleClientsFromFirstTagAndOperationIdGenerator()//SingleClientFromOperationIdOperationNameGenerator() or MultipleClientsFromFirstTagAndOperationIdGenerator(),
     };
     clientSettings.CodeGeneratorSettings.TemplateFactory = new ApizrTemplateFactory(clientSettings.CSharpGeneratorSettings, assemblies);
     clientSettings.CSharpGeneratorSettings.Namespace = ns;

@@ -1,23 +1,29 @@
 using System.Reflection;
-using TCDev.ApiGenerator.Extension;
+using TCDev.APIGenerator;
+using TCDev.APIGenerator.Extension;
+using TCDev.APIGenerator.Identity;
+using TCDev.APIGenerator.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//builder.Services.AddApiGeneratorIdentity(builder.Configuration);
 
-builder.Services.AddControllers();
-builder.Services.AddApiGeneratorServices(builder.Configuration, Assembly.GetExecutingAssembly());
+//builder.Services.AddControllers();
+builder.Services.AddApiGeneratorIdentity(builder.Configuration)
+    .AddApiGeneratorServices()
+    .AddAssembly(Assembly.GetExecutingAssembly())
+    //.AddOData()
+    .AddSwagger(true);
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
 app.UseApiGenerator()
     .UseHttpsRedirection()
-    .UseAutomaticApiMigrations(true)
+    .UseStaticFiles()
     .UseRouting()
-    .UseAuthentication()
-    .UseAuthorization()
+    .UseApiGeneratorAuthentication()
     .UseEndpoints(endpoints =>
     {
         endpoints.UseApiGeneratorEndpoints();

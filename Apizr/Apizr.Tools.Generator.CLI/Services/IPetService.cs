@@ -1,13 +1,10 @@
 ﻿using System.Threading.Tasks;
 using System.Collections.Generic;
 using System;
-using Polly;
-using Apizr.Policing;
-using System.Threading;
-using Fusillade;
 using Refit;
 using Apizr;
-namespace Test
+
+namespace Apizr.Tools.Generator.CLI
 {
     [WebApi]
     public interface IPetService
@@ -20,21 +17,21 @@ namespace Test
         /// <param name="file">file to upload</param>
         /// <returns>successful operation</returns>
         [Post("pet/{petId}/uploadImage")]
-        Task<ApiResponse> UploadFileAsync(long petId, string additionalMetadata, FileParameter file, [Context] Context context = null, CancellationToken cancellationToken = default);
+        Task<ApiResponse> UploadFileAsync(long petId, string additionalMetadata, FileParameter file);
 
         /// <summary>
         /// Add a new pet to the store
         /// </summary>
         /// <param name="body">Pet object that needs to be added to the store</param>
         [Post("pet")]
-        Task AddPetAsync([Body] Pet body, [Context] Context context = null, CancellationToken cancellationToken = default);
+        Task AddPetAsync([Body] Pet body);
 
         /// <summary>
         /// Update an existing pet
         /// </summary>
         /// <param name="body">Pet object that needs to be added to the store</param>
         [Put("pet")]
-        Task UpdatePetAsync([Body] Pet body, [Context] Context context = null, CancellationToken cancellationToken = default);
+        Task UpdatePetAsync([Body] Pet body);
 
         /// <summary>
         /// Finds Pets by status
@@ -42,7 +39,7 @@ namespace Test
         /// <param name="status">Status values that need to be considered for filter</param>
         /// <returns>successful operation</returns>
         [Get("pet/findByStatus")]
-        Task<ICollection<Pet>> FindPetsByStatusAsync([Query] IEnumerable<Anonymous> status, [Priority] int priority = (int)Priority.UserInitiated, [Context] Context context = null, CancellationToken cancellationToken = default);
+        Task<ICollection<Pet>> FindPetsByStatusAsync([Query] IEnumerable<Anonymous> status);
 
         /// <summary>
         /// Finds Pets by tags
@@ -51,7 +48,7 @@ namespace Test
         /// <returns>successful operation</returns>
         [Obsolete]
         [Get("pet/findByTags")]
-        Task<ICollection<Pet>> FindPetsByTagsAsync([Query] IEnumerable<string> tags, [Priority] int priority = (int)Priority.UserInitiated, [Context] Context context = null, CancellationToken cancellationToken = default);
+        Task<ICollection<Pet>> FindPetsByTagsAsync([Query] IEnumerable<string> tags);
 
         /// <summary>
         /// Find pet by ID
@@ -59,7 +56,7 @@ namespace Test
         /// <param name="petId">ID of pet to return</param>
         /// <returns>successful operation</returns>
         [Get("pet/{petId}")]
-        Task<Pet> GetPetByIdAsync(long petId, [Priority] int priority = (int)Priority.UserInitiated, [Context] Context context = null, CancellationToken cancellationToken = default);
+        Task<Pet> GetPetByIdAsync(long petId);
 
         /// <summary>
         /// Updates a pet in the store with form data
@@ -68,15 +65,15 @@ namespace Test
         /// <param name="name">Updated name of the pet</param>
         /// <param name="status">Updated status of the pet</param>
         [Post("pet/{petId}")]
-        Task UpdatePetWithFormAsync(long petId, string name, string status, [Context] Context context = null, CancellationToken cancellationToken = default);
+        Task UpdatePetWithFormAsync(long petId, string name, string status);
 
         /// <summary>
         /// Deletes a pet
         /// </summary>
         /// <param name="petId">Pet id to delete</param>
         [Delete("pet/{petId}")]
-        [Headers("api_key")]
-        Task DeletePetAsync(long petId, [Context] Context context = null, CancellationToken cancellationToken = default);
+        [Headers("api_key")] 
+        Task DeletePetAsync(long petId);
 
     }
 }

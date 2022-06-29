@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Apizr.Tools.Generator;
+using Apizr.Tools.Generator.CLI;
 using Apizr.Tools.Generator.Models;
 using NJsonSchema.CodeGeneration;
 using NJsonSchema.CodeGeneration.CSharp;
@@ -12,12 +13,14 @@ using NSwag;
 using NSwag.CodeGeneration.CSharp;
 using NSwag.CodeGeneration.OperationNameGenerators;
 
-// cmd: C:\Dev\Community\Apizr\Apizr\tools\apizr.tools.generator.cli\bin\debug\net6.0> .\Apizr.Tools.Generator.CLI.exe "http://localhost/ApizrSampleApi/swagger/v1/swagger.json"
+/* cmd: C:\Dev\Community\Apizr\Apizr\tools\apizr.tools.generator.cli\bin\debug\net6.0> .\Apizr.Tools.Generator.CLI.exe "http://localhost/ApizrSampleApi/swagger/v1/swagger.json"
 
-#if DEBUG
+dotnet tool install -g Apizr.Tools.Generator.CLI --version 5.0.0-preview.1
+apizr "https://petstore.swagger.io/v2/swagger.json"
+
 var ns = "Test";
-//var url = "http://localhost/ApizrSampleApi/swagger/v1/swagger.json";
-var url = "https://petstore.swagger.io/v2/swagger.json";
+var url = "http://localhost/ApizrSampleApi/swagger/v1/swagger.json";
+//var url = "https://petstore.swagger.io/v2/swagger.json";
 var registrationType = ApizrRegistrationType.Both;
 var withPriority = true;
 var withContext = true;
@@ -27,7 +30,16 @@ var withLogs = true;
 var withCacheProvider = CacheProviderType.Akavache;
 var withMediation = true;
 var withOptionalMediation = true;
+*/
+
 var urlArg = new Argument<string>("url", "Swagger.json absolute url");
+
+var outputPathOption = new Option<string>(new[] { "--outputPath", "--op" },
+    () => string.Empty,
+    "Generated files output path")
+{
+    IsRequired = true
+};
 
 var nsOption = new Option<string>(new[] {"--namespace", "--ns"},
     () => Assembly.GetExecutingAssembly().GetName().Name ?? "Apizr.Tools.Generations", 
@@ -99,9 +111,10 @@ var withOptionalMediationOption = new Option<bool>(new[] { "--withOptionalMediat
     IsRequired = false
 };
 
-var rootCommand = new RootCommand
+var rootCommand = new RootCommand("An Apizr .NET Tool to generate models, interfaces and registration methods from a swagger url")
 {
     urlArg,
+    outputPathOption,
     nsOption,
     registrationTypeOption,
     withPriorityOption,
@@ -114,10 +127,8 @@ var rootCommand = new RootCommand
     withOptionalMediationOption
 };
 
-#else
-rootCommand.SetHandler(async (string url, string ns, ApizrRegistrationType registrationType, bool withPriority, bool withContext, bool withToken, bool withRetry, bool withLogs, CacheProviderType withCacheProvider, bool withMediation, bool withOptionalMediation) =>
+rootCommand.SetHandler(async (url, options) =>
 {
-#endif
 
     var assemblies = new[]
     {
@@ -133,28 +144,28 @@ rootCommand.SetHandler(async (string url, string ns, ApizrRegistrationType regis
         OperationNameGenerator = new MultipleClientsFromFirstTagAndOperationIdGenerator()//SingleClientFromOperationIdOperationNameGenerator() or MultipleClientsFromFirstTagAndOperationIdGenerator(),
     };
     clientSettings.CodeGeneratorSettings.TemplateFactory = new ApizrTemplateFactory(clientSettings.CSharpGeneratorSettings, assemblies);
-    clientSettings.CSharpGeneratorSettings.Namespace = ns;
+    clientSettings.CSharpGeneratorSettings.Namespace = options.Namespace;
     clientSettings.CSharpGeneratorSettings.ArrayType = "List";
     clientSettings.CSharpGeneratorSettings.ArrayInstanceType = "List";
     clientSettings.ResponseArrayType = "ICollection";
     clientSettings.ResponseDictionaryType = "IDictionary";
     clientSettings.ParameterArrayType = "IEnumerable";
     clientSettings.ParameterDictionaryType = "IDictionary";
-    clientSettings.RegistrationType = registrationType;
-    clientSettings.WithPriority = withPriority;
-    clientSettings.WithContext = withContext;
-    clientSettings.WithCancellationToken = withToken;
-    clientSettings.WithRetry = withRetry;
-    clientSettings.WithLogs = withLogs;
-    clientSettings.WithCacheProvider = withCacheProvider;
-    clientSettings.WithMediation = withMediation;
-    clientSettings.WithOptionalMediation = withOptionalMediation;
+    clientSettings.RegistrationType = options.RegistrationType;
+    clientSettings.WithPriority = options.WithPriority;
+    clientSettings.WithContext = options.WithContext;
+    clientSettings.WithCancellationToken = options.WithCancellationToken;
+    clientSettings.WithRetry = options.WithRetry;
+    clientSettings.WithLogs = options.WithLogs;
+    clientSettings.WithCacheProvider = options.CacheProviderType;
+    clientSettings.WithMediation = options.WithMediation;
+    clientSettings.WithOptionalMediation = options.WithOptionalMediation;
 
     var result = await OpenApiDocument.FromUrlAsync(url);
 
     var generator = new ApizrGenerator(result, clientSettings);
     var all = generator.GenerateAll().ToList();
-    var dir = Path.Combine("Output", clientSettings.CSharpGeneratorSettings.Namespace);
+    var dir = Path.Combine(options.OutputPath, clientSettings.CSharpGeneratorSettings.Namespace);
     var modelsPath = Path.Combine(dir, "Models");
     var servicesPath = Path.Combine(dir, "Services");
 
@@ -181,21 +192,19 @@ rootCommand.SetHandler(async (string url, string ns, ApizrRegistrationType regis
         File.WriteAllText(registrationFile, registration.Code, Encoding.UTF8);
         Console.WriteLine($"Registration output file：{registrationFile}"); 
     }
-
-#if DEBUG
-Console.WriteLine($"Done!");
-#else
-}, urlArg, 
-nsOption,
-registrationTypeOption,
-withPriorityOption,
-withContextOption,
-withTokenOption,
-withRetryOption,
-withLogsOption,
-withCacheProviderOption,
-withMediationOption,
-withOptionalMediationOption);
+    
+}, 
+    urlArg, 
+    new ApizrGeneratorOptionsBinder(outputPathOption,
+        nsOption,
+        registrationTypeOption,
+        withPriorityOption,
+        withContextOption,
+        withTokenOption,
+        withRetryOption,
+        withLogsOption,
+        withCacheProviderOption,
+        withMediationOption,
+        withOptionalMediationOption));
 
 return await rootCommand.InvokeAsync(args);
-#endif

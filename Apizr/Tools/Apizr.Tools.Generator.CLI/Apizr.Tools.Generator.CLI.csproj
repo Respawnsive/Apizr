@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,10 +6,24 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 	<PackAsTool>true</PackAsTool>
+	<ToolCommandName>apizr</ToolCommandName>
+	<!-- NuGet package metadata -->
+	<PackageId>Apizr.Tools.Generator.CLI</PackageId>
+	<PackageVersion>5.0.0-preview.1</PackageVersion>
+	<Description>An Apizr .NET Tool to generate models, interfaces and registration methods from a swagger url</Description>
+	<Authors>Respawnsive</Authors>
+	<PackageTags>Refit Polly Fusillade HttpTracer Web Api Generator CLI</PackageTags>
+	<PackageIconUrl>https://raw.githubusercontent.com/Respawnsive/Apizr/master/logo.png</PackageIconUrl>
+	<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+	<!-- SourceLink metadata -->
+	<PublishRepositoryUrl>true</PublishRepositoryUrl>
+	<Product>Apizr</Product>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.CommandLine" Version="2.0.0-beta3.22114.1" />
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+    <!-- SourceLink package for GitHub -->
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>

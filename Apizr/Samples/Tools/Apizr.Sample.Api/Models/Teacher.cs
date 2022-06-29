@@ -1,5 +1,5 @@
-﻿using TCDev.ApiGenerator.Attributes;
-using TCDev.ApiGenerator.Interfaces;
+﻿using TCDev.APIGenerator.Attributes;
+using TCDev.APIGenerator.Interfaces;
 
 namespace Apizr.Sample.Api.Models;
 

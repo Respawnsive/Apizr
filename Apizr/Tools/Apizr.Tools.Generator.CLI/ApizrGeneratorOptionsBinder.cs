@@ -16,6 +16,7 @@ public class ApizrGeneratorOptionsBinder : BinderBase<ApizrGeneratorOptions>
     private readonly Option<CacheProviderType> _withCacheProviderOption;
     private readonly Option<bool> _withMediationOption;
     private readonly Option<bool> _withOptionalMediationOption;
+    private readonly Option<bool> _withMappingOption;
 
     public ApizrGeneratorOptionsBinder(Option<string> outputPathOption,
         Option<string> nsOption,
@@ -27,7 +28,8 @@ public class ApizrGeneratorOptionsBinder : BinderBase<ApizrGeneratorOptions>
         Option<bool> withLogsOption, 
         Option<CacheProviderType> withCacheProviderOption,
         Option<bool> withMediationOption, 
-        Option<bool> withOptionalMediationOption)
+        Option<bool> withOptionalMediationOption, 
+        Option<bool> withMappingOption)
     {
         _outputPathOption = outputPathOption;
         _nsOption = nsOption;
@@ -40,6 +42,7 @@ public class ApizrGeneratorOptionsBinder : BinderBase<ApizrGeneratorOptions>
         _withCacheProviderOption = withCacheProviderOption;
         _withMediationOption = withMediationOption;
         _withOptionalMediationOption = withOptionalMediationOption;
+        _withMappingOption = withMappingOption;
     }
 
     protected override ApizrGeneratorOptions GetBoundValue(BindingContext bindingContext) =>
@@ -53,5 +56,6 @@ public class ApizrGeneratorOptionsBinder : BinderBase<ApizrGeneratorOptions>
             bindingContext.ParseResult.GetValueForOption(_withLogsOption),
             bindingContext.ParseResult.GetValueForOption(_withCacheProviderOption),
             bindingContext.ParseResult.GetValueForOption(_withMediationOption),
-            bindingContext.ParseResult.GetValueForOption(_withOptionalMediationOption));
+            bindingContext.ParseResult.GetValueForOption(_withOptionalMediationOption),
+            bindingContext.ParseResult.GetValueForOption(_withMappingOption));
 }

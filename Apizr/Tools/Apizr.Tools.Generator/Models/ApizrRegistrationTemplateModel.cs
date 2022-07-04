@@ -63,5 +63,7 @@ namespace Apizr.Tools.Generator.Models
 
         public bool WithOptionalMediation => _settings.WithOptionalMediation;
 
+        public bool WithMapping => _settings.WithMapping;
+
     }
 }

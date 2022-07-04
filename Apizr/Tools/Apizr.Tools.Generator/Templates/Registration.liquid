@@ -65,6 +65,16 @@ namespace {{ NameSpace }}
             // MediatR is not compatible with Apizr static registration (ignored)
 
 {%          endif -%}
+{%          if WithMapping -%}
+            var mapperConfig = new MapperConfiguration(config =>
+            {
+                // todo: replace with your own mapping profiles
+                config.AddProfile<YOUR_FIRST_PROFILE_HERE>();
+                config.AddProfile<YOUR_SECOND_PROFILE_HERE>();
+                // and so on...
+            });
+
+{%          endif -%}
 {%          if HasManyServices -%}
             var apizrRegisry = ApizrBuilder.CreateRegistry(
                 registry => registry
@@ -85,6 +95,9 @@ namespace {{ NameSpace }}
 {%                  elsif WithCacheProvider == 'Custom' -%}
                     .WithCacheHandler(() => new YOUR_ICACHEHANDLER_CUSTOM_IMPLEMENTATION_HERE())
 {%                  endif -%}
+{%                  if WithMapping -%}
+                    .WithAutoMapperMappingHandler(mapperConfig)
+{%                  endif -%}
             );
 
             return apizrRegistry;
@@ -103,6 +116,9 @@ namespace {{ NameSpace }}
                     .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
 {%                  elsif WithCacheProvider == 'Custom' -%}
                     .WithCacheHandler(() => new YOUR_ICACHEHANDLER_CUSTOM_IMPLEMENTATION_HERE())
+{%                  endif -%}
+{%                  if WithMapping -%}
+                    .WithAutoMapperMappingHandler(mapperConfig)
 {%                  endif -%}
             );
 
@@ -132,6 +148,10 @@ namespace {{ NameSpace }}
             services.AddMediatR(Assembly.GetExecutingAssembly()); // Remove this line if already registered somewhere else
 
 {%          endif -%}
+{%          if WithMapping -%}
+            services.AddAutoMapper(Assembly.GetExecutingAssembly()); // Remove this line if already registered somewhere else
+
+{%          endif -%}
 {%          if HasManyServices -%}
             services.AddApizr(
                 registry => registry
@@ -159,6 +179,9 @@ namespace {{ NameSpace }}
 {%                  if WithOptionalMediation -%}
                     .WithOptionalMediation()
 {%                  endif -%}
+{%                  if WithMapping -%}
+                    .WithAutoMapperMappingHandler()
+{%                  endif -%}
             );
 {%          else -%}
             services.AddApizrManagerFor<I{{ LastService }}Service>(
@@ -182,6 +205,9 @@ namespace {{ NameSpace }}
 {%                  endif -%}
 {%                  if WithOptionalMediation -%}
                     .WithOptionalMediation()
+{%                  endif -%}
+{%                  if WithMapping -%}
+                    .WithAutoMapperMappingHandler()
 {%                  endif -%}
             );
 {%          endif -%}

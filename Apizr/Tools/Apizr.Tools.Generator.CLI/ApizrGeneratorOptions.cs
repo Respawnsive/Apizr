@@ -2,7 +2,7 @@
 {
     public class ApizrGeneratorOptions
     {
-        public ApizrGeneratorOptions(string outputPath, string ns, ApizrRegistrationType registrationType, bool withPriority, bool withContext, bool withCancellationToken, bool withRetry, bool withLogs, CacheProviderType cacheProviderType, bool withMediation, bool withOptionalMediation)
+        public ApizrGeneratorOptions(string outputPath, string ns, ApizrRegistrationType registrationType, bool withPriority, bool withContext, bool withCancellationToken, bool withRetry, bool withLogs, CacheProviderType cacheProviderType, bool withMediation, bool withOptionalMediation, bool withMapping)
         {
             OutputPath = outputPath;
             Namespace = ns;
@@ -15,6 +15,7 @@
             CacheProviderType = cacheProviderType;
             WithMediation = withMediation;
             WithOptionalMediation = withOptionalMediation;
+            WithMapping = withMapping;
         }
 
         public string OutputPath { get; set; }
@@ -28,5 +29,6 @@
         public CacheProviderType CacheProviderType { get; set; }
         public bool WithMediation { get; set; }
         public bool WithOptionalMediation { get; set; }
+        public bool WithMapping { get; set; }
     }
 }

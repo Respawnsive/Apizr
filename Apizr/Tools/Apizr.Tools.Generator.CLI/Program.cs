@@ -34,7 +34,7 @@ var withOptionalMediation = true;
 
 var urlArg = new Argument<string>("url", "Swagger.json absolute url");
 
-var outputPathOption = new Option<string>(new[] { "--outputPath", "--op" },
+var outputPathOption = new Option<string>(new[] { "--outputPath", "--out" },
     () => string.Empty,
     "Generated files output path")
 {
@@ -48,65 +48,72 @@ var nsOption = new Option<string>(new[] {"--namespace", "--ns"},
     IsRequired = false
 };
 
-var registrationTypeOption = new Option<ApizrRegistrationType>(new[] {"--registrationType", "--register", "--rg" },
+var registrationTypeOption = new Option<ApizrRegistrationType>(new[] {"--registrationType", "--reg" },
     () => ApizrRegistrationType.Both, 
     "Set generated registration type")
 {
     IsRequired = false
 };
 
-var withPriorityOption = new Option<bool>(new[] {"--withPriority", "--priority", "--pr"},
+var withPriorityOption = new Option<bool>(new[] {"--withPriority", "--prt"},
     () => false, 
     "Add a Priority parameter")
 {
     IsRequired = false
 };
 
-var withContextOption = new Option<bool>(new[] {"--withContext", "--context", "--ctx"},
+var withContextOption = new Option<bool>(new[] {"--withContext", "--ctx"},
     () => false, 
     "Add a Polly Context parameter")
 {
     IsRequired = false
 };
 
-var withTokenOption = new Option<bool>(new[] {"--withCancellationToken", "--token", "--ct"},
+var withTokenOption = new Option<bool>(new[] {"--withCancellationToken", "--ct"},
     () => false, 
     "Add a CancellationToken parameter")
 {
     IsRequired = false
 };
 
-var withRetryOption = new Option<bool>(new[] {"--withRetry", "--retry", "--rt"},
+var withRetryOption = new Option<bool>(new[] {"--withRetry", "--rty"},
     () => false, 
     "Add retry management")
 {
     IsRequired = false
 };
 
-var withLogsOption = new Option<bool>(new[] { "--withLogs", "--log", "--l" },
+var withLogsOption = new Option<bool>(new[] { "--withLogs", "--log" },
     () => false,
     "Add logs")
 {
     IsRequired = false
 };
 
-var withCacheProviderOption = new Option<CacheProviderType>(new[] { "--withCacheProvider", "--cache", "--cp" },
+var withCacheProviderOption = new Option<CacheProviderType>(new[] { "--withCacheProvider", "--chp" },
     () => CacheProviderType.None,
     "Add cache management")
 {
     IsRequired = false
 };
 
-var withMediationOption = new Option<bool>(new[] { "--withMediation", "--mediation", "--med" },
+var withMediationOption = new Option<bool>(new[] { "--withMediation", "--med" },
     () => false,
     "Add MediatR")
 {
     IsRequired = false
 };
 
-var withOptionalMediationOption = new Option<bool>(new[] { "--withOptionalMediation", "--optional", "--opt" },
+var withOptionalMediationOption = new Option<bool>(new[] { "--withOptionalMediation", "--opt" },
     () => false,
     "Add Optional")
+{
+    IsRequired = false
+};
+
+var withMappingOption = new Option<bool>(new[] { "--withMapping", "--map" },
+    () => false,
+    "Add data mapping")
 {
     IsRequired = false
 };
@@ -124,7 +131,8 @@ var rootCommand = new RootCommand("An Apizr .NET Tool to generate models, interf
     withLogsOption,
     withCacheProviderOption,
     withMediationOption,
-    withOptionalMediationOption
+    withOptionalMediationOption,
+    withMappingOption
 };
 
 rootCommand.SetHandler(async (url, options) =>
@@ -160,6 +168,7 @@ rootCommand.SetHandler(async (url, options) =>
     clientSettings.WithCacheProvider = options.CacheProviderType;
     clientSettings.WithMediation = options.WithMediation;
     clientSettings.WithOptionalMediation = options.WithOptionalMediation;
+    clientSettings.WithMapping = options.WithMapping;
 
     var result = await OpenApiDocument.FromUrlAsync(url);
 
@@ -205,6 +214,7 @@ rootCommand.SetHandler(async (url, options) =>
         withLogsOption,
         withCacheProviderOption,
         withMediationOption,
-        withOptionalMediationOption));
+        withOptionalMediationOption,
+        withMappingOption));
 
 return await rootCommand.InvokeAsync(args);

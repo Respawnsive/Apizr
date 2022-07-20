@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <PackAsTool>true</PackAsTool>
+	  <ToolCommandName>apizr</ToolCommandName>
+	  <!-- NuGet package metadata -->
+	  <PackageId>Apizr.Tools.NSwag</PackageId>
+	  <PackageVersion>5.0.0-preview.1</PackageVersion>
+	  <Description>An Apizr .NET Tool to generate models, interfaces and registration methods from a swagger url</Description>
+	  <Authors>Respawnsive</Authors>
+	  <PackageTags>Refit Polly Fusillade HttpTracer Web Api Generator CLI</PackageTags>
+	  <PackageIconUrl>https://raw.githubusercontent.com/Respawnsive/Apizr/master/logo.png</PackageIconUrl>
+	  <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+	  <!-- SourceLink metadata -->
+	  <PublishRepositoryUrl>true</PublishRepositoryUrl>
+	  <Product>Apizr</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Generation\Templates\Interface.liquid" />
+    <None Remove="Generation\Templates\Registration.liquid" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Templates\Interface.liquid" />
+    <EmbeddedResource Include="Generation\Templates\Registration.liquid" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotLiquid" Version="2.2.656" />
+    <PackageReference Include="Humanizer.Core" Version="2.14.1" />
+    <PackageReference Include="NSwag.CodeGeneration.CSharp" Version="13.16.1" />
+    <PackageReference Include="NSwag.Commands" Version="13.16.1" />
+  </ItemGroup>
+
+</Project>

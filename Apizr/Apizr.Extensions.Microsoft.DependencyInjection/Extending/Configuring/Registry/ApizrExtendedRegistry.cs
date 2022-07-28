@@ -8,7 +8,7 @@ namespace Apizr.Extending.Configuring.Registry
     public class ApizrExtendedRegistry : ApizrRegistryBase, IApizrExtendedConcurrentRegistry
     {
         private IServiceProvider _serviceProvider;
-        
+
         private ConcurrentDictionary<Type, Func<IApizrManager>> ThrowIfNotConcurrentImplementation()
         {
             if (ConcurrentRegistry is ConcurrentDictionary<Type, Func<IApizrManager>> concurrentRegistry)
@@ -32,5 +32,7 @@ namespace Apizr.Extending.Configuring.Registry
             Func<IApizrManager> managerFactory = () => _serviceProvider.GetRequiredService(serviceType) as IApizrManager;
             registry.AddOrUpdate(webApiType, k => managerFactory, (k, e) => managerFactory);
         }
+
+        IApizrExtendedRegistry IApizrExtendedRegistry.SubRegistry { get; set; }
     }
 }

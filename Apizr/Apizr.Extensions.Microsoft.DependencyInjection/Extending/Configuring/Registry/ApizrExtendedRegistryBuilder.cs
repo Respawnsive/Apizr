@@ -22,7 +22,16 @@ namespace Apizr.Extending.Configuring.Registry
             CommonOptions = commonOptions;
         }
 
+        #region Registry
+
         public IApizrExtendedRegistry ApizrRegistry => Registry;
+
+        public IApizrExtendedRegistryBuilder CreateSubRegistry(Action<IApizrExtendedRegistryBuilder> subRegistryBuilder, Action<IApizrExtendedCommonOptionsBuilder> commonOptionsBuilder = null)
+        {
+            throw new NotImplementedException();
+        } 
+
+        #endregion
 
         #region Crud
 

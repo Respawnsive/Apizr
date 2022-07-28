@@ -5,14 +5,17 @@ using Apizr.Mapping;
 using Polly.Registry;
 using System;
 using System.Collections.Generic;
+using Apizr.Configuring.Common;
 using Apizr.Requesting;
 
 namespace Apizr.Configuring.Registry
 {
-    public interface IApizrRegistryBuilder<out TApizrRegistry, out TApizrRegistryBuilder, out TApizrProperOptionsBuilder> : IApizrRegistryBuilderBase<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder>
+    public interface IApizrRegistryBuilder<out TApizrRegistry, out TApizrRegistryBuilder, out TApizrProperOptionsBuilder, out TApizrCommonOptionsBuilder> : 
+        IApizrRegistryBuilderBase<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>
         where TApizrRegistry : IApizrEnumerableRegistry
-        where TApizrRegistryBuilder : IApizrRegistryBuilderBase<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder>
+        where TApizrRegistryBuilder : IApizrRegistryBuilderBase<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>
         where TApizrProperOptionsBuilder : IApizrProperOptionsBuilderBase
+        where TApizrCommonOptionsBuilder : IApizrCommonOptionsBuilderBase
     {
         #region Crud
         
@@ -60,7 +63,7 @@ namespace Apizr.Configuring.Registry
         #endregion
     }
 
-    public interface IApizrRegistryBuilder : IApizrRegistryBuilder<IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder>
+    public interface IApizrRegistryBuilder : IApizrRegistryBuilder<IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder, IApizrCommonOptionsBuilder>
     {
     }
 }

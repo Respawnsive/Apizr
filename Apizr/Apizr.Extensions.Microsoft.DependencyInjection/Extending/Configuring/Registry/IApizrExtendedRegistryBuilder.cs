@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Apizr.Configuring.Common;
 using Apizr.Configuring.Proper;
 using Apizr.Configuring.Registry;
+using Apizr.Extending.Configuring.Common;
 using Apizr.Extending.Configuring.Proper;
 using Apizr.Requesting;
 
 namespace Apizr.Extending.Configuring.Registry
 {
-    public interface IApizrExtendedRegistryBuilder<out TApizrExtendedRegistry, out TApizrExtendedRegistryBuilder, out TApizrExtendedProperOptionsBuilder> : 
-        IApizrRegistryBuilderBase<TApizrExtendedRegistry, TApizrExtendedRegistryBuilder, TApizrExtendedProperOptionsBuilder>
+    public interface IApizrExtendedRegistryBuilder<out TApizrExtendedRegistry, out TApizrExtendedRegistryBuilder, out TApizrExtendedProperOptionsBuilder, out TApizrExtendedCommonOptionsBuilder> : 
+        IApizrRegistryBuilderBase<TApizrExtendedRegistry, TApizrExtendedRegistryBuilder, TApizrExtendedProperOptionsBuilder, TApizrExtendedCommonOptionsBuilder>
         where TApizrExtendedRegistry : IApizrEnumerableRegistry
-        where TApizrExtendedRegistryBuilder : IApizrRegistryBuilderBase<TApizrExtendedRegistry, TApizrExtendedRegistryBuilder, TApizrExtendedProperOptionsBuilder>
+        where TApizrExtendedRegistryBuilder : IApizrRegistryBuilderBase<TApizrExtendedRegistry, TApizrExtendedRegistryBuilder, TApizrExtendedProperOptionsBuilder, TApizrExtendedCommonOptionsBuilder>
         where TApizrExtendedProperOptionsBuilder : IApizrGlobalProperOptionsBuilderBase
+        where TApizrExtendedCommonOptionsBuilder : IApizrGlobalCommonOptionsBuilderBase
     {
         #region Crud
 
@@ -251,7 +254,7 @@ namespace Apizr.Extending.Configuring.Registry
         #endregion
     }
 
-    public interface IApizrExtendedRegistryBuilder : IApizrExtendedRegistryBuilder<IApizrExtendedRegistry, IApizrExtendedRegistryBuilder, IApizrExtendedProperOptionsBuilder>
+    public interface IApizrExtendedRegistryBuilder : IApizrExtendedRegistryBuilder<IApizrExtendedRegistry, IApizrExtendedRegistryBuilder, IApizrExtendedProperOptionsBuilder, IApizrExtendedCommonOptionsBuilder>
     {
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Apizr.Configuring.Common;
 using Apizr.Configuring.Proper;
 
 namespace Apizr.Configuring.Registry
@@ -8,15 +9,24 @@ namespace Apizr.Configuring.Registry
     {
     }
 
-    public interface IApizrRegistryBuilderBase<out TApizrRegistry, out TApizrRegistryBuilder, out TApizrProperOptionsBuilder> : IApizrRegistryBuilderBase
+    public interface IApizrRegistryBuilderBase<out TApizrRegistry, out TApizrRegistryBuilder, out TApizrProperOptionsBuilder, out TApizrCommonOptionsBuilder> : IApizrRegistryBuilderBase
         where TApizrRegistry : IApizrEnumerableRegistry
-        where TApizrRegistryBuilder : IApizrRegistryBuilderBase<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder>
+        where TApizrRegistryBuilder : IApizrRegistryBuilderBase<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>
         where TApizrProperOptionsBuilder : IApizrGlobalProperOptionsBuilderBase
+        where TApizrCommonOptionsBuilder : IApizrGlobalCommonOptionsBuilderBase
     {
+
+        #region Registry
+
         /// <summary>
         /// Apizr registry
         /// </summary>
         TApizrRegistry ApizrRegistry { get; }
+
+        TApizrRegistryBuilder CreateSubRegistry(Action<TApizrRegistryBuilder> subRegistryBuilder,
+            Action<TApizrCommonOptionsBuilder> commonOptionsBuilder = null);
+
+        #endregion
 
         #region Crud
 

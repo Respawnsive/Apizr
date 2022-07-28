@@ -20,7 +20,19 @@ namespace Apizr.Configuring.Registry
             CommonOptions = commonOptions;
         }
 
+        #region Registry
+
         public IApizrRegistry ApizrRegistry => Registry;
+
+        public IApizrRegistryBuilder CreateSubRegistry(Action<IApizrRegistryBuilder> subRegistryBuilder,
+            Action<IApizrCommonOptionsBuilder> commonOptionsBuilder = null)
+        {
+            ApizrRegistry.SubRegistry = ApizrBuilder.CreateRegistry(subRegistryBuilder, commonOptionsBuilder);
+
+            return this;
+        }
+
+        #endregion
 
         #region Crud
 

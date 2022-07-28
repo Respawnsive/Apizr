@@ -5,6 +5,8 @@ namespace Apizr.Configuring.Registry
 {
     public class ApizrRegistry : ApizrRegistryBase, IApizrConcurrentRegistry
     {
+        IApizrRegistry IApizrRegistry.SubRegistry { get; set; }
+
         private ConcurrentDictionary<Type, Func<IApizrManager>> ThrowIfNotConcurrentImplementation()
         {
             if (ConcurrentRegistry is ConcurrentDictionary<Type, Func<IApizrManager>> concurrentRegistry)

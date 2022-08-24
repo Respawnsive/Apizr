@@ -26,9 +26,13 @@ namespace Apizr.Extending.Configuring.Registry
 
         public IApizrExtendedRegistry ApizrRegistry => Registry;
 
-        public IApizrExtendedRegistryBuilder CreateSubRegistry(Action<IApizrExtendedRegistryBuilder> subRegistryBuilder, Action<IApizrExtendedCommonOptionsBuilder> commonOptionsBuilder = null)
+        public IApizrExtendedRegistryBuilder AddRegistryGroup(Action<IApizrExtendedRegistryBuilder> registryGroupBuilder, Action<IApizrExtendedCommonOptionsBuilder> commonOptionsBuilder = null)
         {
-            throw new NotImplementedException();
+            var registryGroup = ServiceCollectionExtensions.CreateRegistry(Services, registryGroupBuilder, CommonOptions, commonOptionsBuilder);
+
+            ApizrRegistry.Import(registryGroup);
+
+            return this;
         } 
 
         #endregion

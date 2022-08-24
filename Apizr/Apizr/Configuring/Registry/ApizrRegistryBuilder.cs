@@ -24,10 +24,12 @@ namespace Apizr.Configuring.Registry
 
         public IApizrRegistry ApizrRegistry => Registry;
 
-        public IApizrRegistryBuilder CreateSubRegistry(Action<IApizrRegistryBuilder> subRegistryBuilder,
+        public IApizrRegistryBuilder AddRegistryGroup(Action<IApizrRegistryBuilder> registryGroupBuilder,
             Action<IApizrCommonOptionsBuilder> commonOptionsBuilder = null)
         {
-            ApizrRegistry.SubRegistry = ApizrBuilder.CreateRegistry(subRegistryBuilder, commonOptionsBuilder);
+            var registryGroup = ApizrBuilder.CreateRegistry(registryGroupBuilder, CommonOptions, commonOptionsBuilder);
+            
+            ApizrRegistry.Import(registryGroup);
 
             return this;
         }

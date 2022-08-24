@@ -8,7 +8,7 @@ namespace Apizr.Configuring.Registry
 {
     public abstract class ApizrRegistryBase : IApizrEnumerableRegistry
     {
-        protected readonly IDictionary<Type, Func<IApizrManager>> ConcurrentRegistry = new ConcurrentDictionary<Type, Func<IApizrManager>>();
+        internal readonly IDictionary<Type, Func<IApizrManager>> ConcurrentRegistry = new ConcurrentDictionary<Type, Func<IApizrManager>>();
 
         protected ApizrRegistryBase()
         {

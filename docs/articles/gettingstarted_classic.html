@@ -159,6 +159,11 @@ Also, you could use the manager directly instead of registering it.</p>
 </section>
 </div>
 <h3 id="registering-multiple-interfaces">Registering multiple interfaces</h3>
+<p>You may want to register multiple managed api interfaces within the same project.
+Also, you may want to share some common configuration between apis without repeating yourself, but at the same time, you may need to set some specific ones for some of it.
+This is where the ApizrRegistry comes on stage.</p>
+<h4 id="single-common-configuration">Single common configuration</h4>
+<p>Here is an example of how to register a managed instance of multiple api interfaces, sharing a single common configuration:</p>
 <div class="tabGroup" id="tabgroup_LbStR6+alZ-1">
 <ul role="tablist">
 <li role="presentation">
@@ -169,10 +174,6 @@ Also, you could use the manager directly instead of registering it.</p>
 </li>
 </ul>
 <section id="tabpanel_LbStR6+alZ-1_tabid-static" role="tabpanel" data-tab="tabid-static">
-<p>You may want to register multiple managed api interfaces within the same project.
-Also, you may want to share some common configuration between apis without repeating yourself, but at the same time, you may need to set some specific ones for some of it.
-This is where the ApizrRegistry comes on stage.</p>
-<p>Here is an example of how to register a managed instance of multiple api interfaces:</p>
 <pre><code class="lang-csharp">// Some policies
 var registry = new PolicyRegistry
 {
@@ -228,16 +229,8 @@ apizrRegistry.Populate((type, factory) =&gt;
 And yes you can mix classic and CRUD manager registration into the same registry.</p>
 <p>Also, you could register the registry itslef, instead of its populated managers and then use its managers directly.</p>
 <p>Or, you could use the managers directly from the registry instead of registering anything.</p>
-<p>Here&#39;s how to get a manager from the registry:</p>
-<pre><code class="lang-csharp">var reqResManager = apizrRegistry.GetManagerFor&lt;IReqResService&gt;();
-
-var httpBinManager = apizrRegistry.GetManagerFor&lt;IHttpBinService&gt;();
-</code></pre></section>
+</section>
 <section id="tabpanel_LbStR6+alZ-1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
-<p>You may want to register multiple managed api interfaces within the same project.
-Also, you may want to share some common configuration between apis without repeating yourself, but at the same time, you may need to set some specific ones for some of it.
-This is where the ApizrRegistry comes on stage.</p>
-<p>Here is an example of how to register multiple managed api interfaces manually:</p>
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {
     // Some policies
@@ -291,14 +284,16 @@ This is where the ApizrRegistry comes on stage.</p>
 <p>It&#39;s an example, meaning if you don&#39;t need common and/or specific configuration, just don&#39;t provide it.
 And yes you can mix classic and CRUD manager registration into the same registry.</p>
 <p>Of course, each managers will be regitered into the container so that you can use it directly.</p>
-<p>Also, the registry itslef will be registered into the container, so you could use it to get its managers, instead of using each managers.</p>
-<p>Here&#39;s how to get a manager from the registry:</p>
+<p>Also, the registry itslef will be registered into the container, so you could resolve it to get its managers, instead of resolving each managers.</p>
+</section>
+</div>
+<p>Here is how to get a manager from the registry:</p>
 <pre><code class="lang-csharp">var reqResManager = apizrRegistry.GetManagerFor&lt;IReqResService&gt;();
 
 var httpBinManager = apizrRegistry.GetManagerFor&lt;IHttpBinService&gt;();
-</code></pre></section>
-</div>
-<h3 id="registering-all-scanned-interfaces">Registering all scanned interfaces</h3>
+</code></pre><h4 id="multiple-common-configurations">Multiple common configurations</h4>
+<p>Here is an example of how to register a managed instance of multiple api interfaces, sharing multiple common configurations at different group level.
+It could be usefull when requesting mutliple apis (multiple base address) comming with multiple endpoints (multiple base path).</p>
 <div class="tabGroup" id="tabgroup_LbStR6+alZ-2">
 <ul role="tablist">
 <li role="presentation">
@@ -309,9 +304,135 @@ var httpBinManager = apizrRegistry.GetManagerFor&lt;IHttpBinService&gt;();
 </li>
 </ul>
 <section id="tabpanel_LbStR6+alZ-2_tabid-static" role="tabpanel" data-tab="tabid-static">
-<p>Not available.</p>
+<pre><code class="lang-csharp">// Some policies
+var registry = new PolicyRegistry
+{
+    {
+        &quot;TransientHttpError&quot;, HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+        {
+            TimeSpan.FromSeconds(1),
+            TimeSpan.FromSeconds(5),
+            TimeSpan.FromSeconds(10)
+        })
+    }
+};
+
+// Apizr registry
+var apizrRegistry = ApizrBuilder.CreateRegistry(
+    registry =&gt; registry
+        .AddRegistryGroup(
+            group =&gt; group
+                .AddManagerFor&lt;IReqResUserService&gt;(config =&gt; config.WithBasePath(&quot;users&quot;))
+                .AddManagerFor&lt;IReqResResourceService&gt;(config =&gt; config.WithBasePath(&quot;resources&quot;)),
+            config =&gt; config.WithBaseAddress(&quot;https://reqres.in/api&quot;))
+        .AddManagerFor&lt;IHttpBinService&gt;(options =&gt; options.WithBaseAddress(&quot;https://httpbin.org&quot;)),
+
+    config =&gt; config
+        .WithPolicyRegistry(registry)
+        .WithAkavacheCacheHandler()
+        .WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.ResponseAll, LogLevel.Error)
+);
+
+// Container registration
+apizrRegistry.Populate((type, factory) =&gt; 
+    myContainer.RegistrationMethodFactory(type, factory)
+);
+</code></pre><p>Here is what we&#39;re saying in this example:</p>
+<ul>
+<li>Add a manager for IReqResUserService api interface into the registry with a common base address (<a href="https://reqres.in/api">https://reqres.in/api</a>) and a specific base path (users)</li>
+<li>Add a manager for IReqResResourceService api interface into the registry with a common base address (<a href="https://reqres.in/api">https://reqres.in/api</a>) and a specific base path (resources)</li>
+<li>Add a manager for IHttpBinService api interface into the registry with a speific base address (<a href="https://httpbin.org">https://httpbin.org</a>)</li>
+<li>Apply common configuration to all managers by:<ul>
+<li>Providing a policy registry</li>
+<li>Providing a cache handler</li>
+<li>Providing some logging settings</li>
+</ul>
+</li>
+</ul>
+<p>It&#39;s an example, meaning if you don&#39;t need common and/or specific configuration, just don&#39;t provide it.
+And yes you can mix classic and CRUD manager registration into the same registry/group.
+You can add mutliple group at the same level and go deeper with group into group itself.</p>
+<p>Also, you could register the registry itslef, instead of its populated managers and then use its managers directly.</p>
+<p>Or, you could use the managers directly from the registry instead of registering anything.</p>
 </section>
 <section id="tabpanel_LbStR6+alZ-2_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
+{
+    // Some policies
+    var registry = new PolicyRegistry
+    {
+        {
+            &quot;TransientHttpError&quot;, HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(1),
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10)
+            })
+        }
+    };
+    services.AddPolicyRegistry(registry);
+
+    // Apizr registration
+    services.AddApizr(
+        registry =&gt; registry
+            .AddRegistryGroup(
+                group =&gt; group
+                    .AddManagerFor&lt;IReqResUserService&gt;(
+                        config =&gt; config.WithBasePath(&quot;users&quot;))
+                    .AddManagerFor&lt;IReqResResourceService&gt;(
+                        config =&gt; config.WithBasePath(&quot;resources&quot;)),
+                config =&gt; config.WithBaseAddress(&quot;https://reqres.in/api&quot;))
+            .AddManagerFor&lt;IHttpBinService&gt;(
+                config =&gt; config.WithBaseAddress(&quot;https://httpbin.org&quot;)),
+
+        config =&gt; config
+            .WithPolicyRegistry(registry)
+            .WithAkavacheCacheHandler()
+            .WithLogging(
+                HttpTracerMode.ExceptionsOnly, 
+                HttpMessageParts.ResponseAll, 
+                LogLevel.Error)
+    );
+}
+</code></pre><p>Here is what we&#39;re saying in this example:</p>
+<ul>
+<li>Add a manager for IReqResUserService api interface into the registry with a common base address (<a href="https://reqres.in/api">https://reqres.in/api</a>) and a specific base path (users), to register it into the container</li>
+<li>Add a manager for IReqResResourceService api interface into the registry with a common base address (<a href="https://reqres.in/api">https://reqres.in/api</a>) and a specific base path (resources), to register it into the container</li>
+<li>Add a manager for IHttpBinService api interface into the registry with a speific base address (<a href="https://httpbin.org">https://httpbin.org</a>), to register it into the container</li>
+<li>Apply common configuration to all managers by:<ul>
+<li>Providing a policy registry</li>
+<li>Providing a cache handler</li>
+<li>Providing some logging settings</li>
+</ul>
+</li>
+</ul>
+<p>It&#39;s an example, meaning if you don&#39;t need common and/or specific configuration, just don&#39;t provide it.
+And yes you can mix classic and CRUD manager registration into the same registry.
+You can add mutliple group at the same level and go deeper with group into group itself.</p>
+<p>Of course, each managers will be regitered into the container so that you can use it directly.</p>
+<p>Also, the registry itslef will be registered into the container, so you could use it to get its managers, instead of using each managers.</p>
+</section>
+</div>
+<p>Here&#39;s how to get a manager from the registry:</p>
+<pre><code class="lang-csharp">var reqResUserManager = apizrRegistry.GetManagerFor&lt;IReqResUserService&gt;();
+
+var reqResResourceManager = apizrRegistry.GetManagerFor&lt;IReqResResourceService&gt;();
+
+var httpBinManager = apizrRegistry.GetManagerFor&lt;IHttpBinService&gt;();
+</code></pre><h3 id="registering-all-scanned-interfaces">Registering all scanned interfaces</h3>
+<div class="tabGroup" id="tabgroup_LbStR6+alZ-3">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_LbStR6+alZ-3_tabid-static" role="tab" aria-controls="tabpanel_LbStR6+alZ-3_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_LbStR6+alZ-3_tabid-extended" role="tab" aria-controls="tabpanel_LbStR6+alZ-3_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+</li>
+</ul>
+<section id="tabpanel_LbStR6+alZ-3_tabid-static" role="tabpanel" data-tab="tabid-static">
+<p>Not available.</p>
+</section>
+<section id="tabpanel_LbStR6+alZ-3_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
 <p>Here is an example of how to auto register all scanned interfaces:</p>
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {

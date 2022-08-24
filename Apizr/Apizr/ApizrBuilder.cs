@@ -33,17 +33,9 @@ namespace Apizr
         /// <param name="registryBuilder">The registry builder with access to proper options</param>
         /// <param name="commonOptionsBuilder">The common options shared by all managers</param>
         /// <returns></returns>
-        public static IApizrRegistry CreateRegistry(Action<IApizrRegistryBuilder> registryBuilder, Action<IApizrCommonOptionsBuilder> commonOptionsBuilder = null)
-        {
-            if (registryBuilder == null)
-                throw new ArgumentNullException(nameof(registryBuilder));
-
-            var commonOptions = CreateCommonOptions(commonOptionsBuilder);
-
-            var apizrRegistry = CreateRegistry(commonOptions, registryBuilder);
-
-            return apizrRegistry;
-        }
+        public static IApizrRegistry CreateRegistry(Action<IApizrRegistryBuilder> registryBuilder,
+            Action<IApizrCommonOptionsBuilder> commonOptionsBuilder = null)
+            => CreateRegistry(registryBuilder, null, commonOptionsBuilder);
 
         #endregion
 
@@ -265,10 +257,13 @@ namespace Apizr
 
         #region Builder
 
-        private static IApizrCommonOptions CreateCommonOptions(
-            Action<IApizrCommonOptionsBuilder> commonOptionsBuilder = null)
+        internal static IApizrCommonOptions CreateCommonOptions(
+            Action<IApizrCommonOptionsBuilder> commonOptionsBuilder = null, IApizrCommonOptions baseCommonOptions = null)
         {
-            var builder = new ApizrCommonOptionsBuilder(new ApizrCommonOptions());
+            if (baseCommonOptions is not ApizrCommonOptions baseApizrCommonOptions)
+                baseApizrCommonOptions = new ApizrCommonOptions();
+
+            var builder = new ApizrCommonOptionsBuilder(baseApizrCommonOptions);
 
             commonOptionsBuilder?.Invoke(builder);
 
@@ -327,7 +322,21 @@ namespace Apizr
             return builder.ApizrOptions;
         }
 
-        private static IApizrRegistry CreateRegistry(IApizrCommonOptions commonOptions, Action<IApizrRegistryBuilder> registryBuilder)
+        internal static IApizrRegistry CreateRegistry(Action<IApizrRegistryBuilder> registryBuilder,
+            IApizrCommonOptions baseCommonOptions,
+            Action<IApizrCommonOptionsBuilder> commonOptionsBuilder = null)
+        {
+            if (registryBuilder == null)
+                throw new ArgumentNullException(nameof(registryBuilder));
+
+            var commonOptions = CreateCommonOptions(commonOptionsBuilder, baseCommonOptions);
+
+            var apizrRegistry = CreateRegistry(commonOptions, registryBuilder);
+
+            return apizrRegistry;
+        }
+
+        internal static IApizrRegistry CreateRegistry(IApizrCommonOptions commonOptions, Action<IApizrRegistryBuilder> registryBuilder)
         {
             if (commonOptions == null)
                 throw new ArgumentNullException(nameof(commonOptions));

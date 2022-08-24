@@ -93,8 +93,8 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder.html">IApizrExtendedRegistryBuilder</a></div>
-    <div><a class="xref" href="Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder-3.html">IApizrExtendedRegistryBuilder</a>&lt;<a class="xref" href="Apizr.Extending.Configuring.Registry.IApizrExtendedRegistry.html">IApizrExtendedRegistry</a>, <a class="xref" href="Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder.html">IApizrExtendedRegistryBuilder</a>, <a class="xref" href="Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder.html">IApizrExtendedProperOptionsBuilder</a>&gt;</div>
-    <div><a class="xref" href="Apizr.Configuring.Registry.IApizrRegistryBuilderBase-3.html">IApizrRegistryBuilderBase</a>&lt;<a class="xref" href="Apizr.Extending.Configuring.Registry.IApizrExtendedRegistry.html">IApizrExtendedRegistry</a>, <a class="xref" href="Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder.html">IApizrExtendedRegistryBuilder</a>, <a class="xref" href="Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder.html">IApizrExtendedProperOptionsBuilder</a>&gt;</div>
+    <div><a class="xref" href="Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder-4.html">IApizrExtendedRegistryBuilder</a>&lt;<a class="xref" href="Apizr.Extending.Configuring.Registry.IApizrExtendedRegistry.html">IApizrExtendedRegistry</a>, <a class="xref" href="Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder.html">IApizrExtendedRegistryBuilder</a>, <a class="xref" href="Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder.html">IApizrExtendedProperOptionsBuilder</a>, <a class="xref" href="Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder.html">IApizrExtendedCommonOptionsBuilder</a>&gt;</div>
+    <div><a class="xref" href="Apizr.Configuring.Registry.IApizrRegistryBuilderBase-4.html">IApizrRegistryBuilderBase</a>&lt;<a class="xref" href="Apizr.Extending.Configuring.Registry.IApizrExtendedRegistry.html">IApizrExtendedRegistry</a>, <a class="xref" href="Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder.html">IApizrExtendedRegistryBuilder</a>, <a class="xref" href="Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder.html">IApizrExtendedProperOptionsBuilder</a>, <a class="xref" href="Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder.html">IApizrExtendedCommonOptionsBuilder</a>&gt;</div>
     <div><a class="xref" href="Apizr.Configuring.Registry.IApizrRegistryBuilderBase.html">IApizrRegistryBuilderBase</a></div>
   </div>
   <div class="inheritedMembers">
@@ -125,7 +125,7 @@
   <h6><strong>Assembly</strong>: Apizr.Extensions.Microsoft.DependencyInjection.dll</h6>
   <h5 id="Apizr_Extending_Configuring_Registry_ApizrExtendedRegistryBuilder_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ApizrExtendedRegistryBuilder : IApizrExtendedRegistryBuilder, IApizrExtendedRegistryBuilder&lt;IApizrExtendedRegistry, IApizrExtendedRegistryBuilder, IApizrExtendedProperOptionsBuilder&gt;, IApizrRegistryBuilderBase&lt;IApizrExtendedRegistry, IApizrExtendedRegistryBuilder, IApizrExtendedProperOptionsBuilder&gt;, IApizrRegistryBuilderBase</code></pre>
+    <pre><code class="lang-csharp hljs">public class ApizrExtendedRegistryBuilder : IApizrExtendedRegistryBuilder, IApizrExtendedRegistryBuilder&lt;IApizrExtendedRegistry, IApizrExtendedRegistryBuilder, IApizrExtendedProperOptionsBuilder, IApizrExtendedCommonOptionsBuilder&gt;, IApizrRegistryBuilderBase&lt;IApizrExtendedRegistry, IApizrExtendedRegistryBuilder, IApizrExtendedProperOptionsBuilder, IApizrExtendedCommonOptionsBuilder&gt;, IApizrRegistryBuilderBase</code></pre>
   </div>
   <h3 id="fields">Fields
   </h3>
@@ -1636,15 +1636,62 @@
       </tr>
     </tbody>
   </table>
+  
+  
+  <a id="Apizr_Extending_Configuring_Registry_ApizrExtendedRegistryBuilder_AddRegistryGroup_" data-uid="Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddRegistryGroup*"></a>
+  <h4 id="Apizr_Extending_Configuring_Registry_ApizrExtendedRegistryBuilder_AddRegistryGroup_System_Action_Apizr_Extending_Configuring_Registry_IApizrExtendedRegistryBuilder__System_Action_Apizr_Extending_Configuring_Common_IApizrExtendedCommonOptionsBuilder__" data-uid="Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddRegistryGroup(System.Action{Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder},System.Action{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder})">AddRegistryGroup(Action&lt;IApizrExtendedRegistryBuilder&gt;, Action&lt;IApizrExtendedCommonOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrExtendedRegistryBuilder AddRegistryGroup(Action&lt;IApizrExtendedRegistryBuilder&gt; registryGroupBuilder, Action&lt;IApizrExtendedCommonOptionsBuilder&gt; commonOptionsBuilder = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder.html">IApizrExtendedRegistryBuilder</a>&gt;</td>
+        <td><span class="parametername">registryGroupBuilder</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder.html">IApizrExtendedCommonOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">commonOptionsBuilder</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder.html">IApizrExtendedRegistryBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder.html">IApizrExtendedRegistryBuilder</a>
   </div>
   <div>
-      <a class="xref" href="Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder-3.html">IApizrExtendedRegistryBuilder&lt;TApizrExtendedRegistry, TApizrExtendedRegistryBuilder, TApizrExtendedProperOptionsBuilder&gt;</a>
+      <a class="xref" href="Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder-4.html">IApizrExtendedRegistryBuilder&lt;TApizrExtendedRegistry, TApizrExtendedRegistryBuilder, TApizrExtendedProperOptionsBuilder, TApizrExtendedCommonOptionsBuilder&gt;</a>
   </div>
   <div>
-      <a class="xref" href="Apizr.Configuring.Registry.IApizrRegistryBuilderBase-3.html">IApizrRegistryBuilderBase&lt;TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder&gt;</a>
+      <a class="xref" href="Apizr.Configuring.Registry.IApizrRegistryBuilderBase-4.html">IApizrRegistryBuilderBase&lt;TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder&gt;</a>
   </div>
   <div>
       <a class="xref" href="Apizr.Configuring.Registry.IApizrRegistryBuilderBase.html">IApizrRegistryBuilderBase</a>

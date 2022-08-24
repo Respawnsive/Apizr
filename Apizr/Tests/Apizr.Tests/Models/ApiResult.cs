@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Apizr.Tests.Models
 {
-    public class UserList
+    public class ApiResult<TData> where TData : class, new()
     {
         [JsonPropertyName("page")]
         public int Page { get; set; }
@@ -18,6 +18,6 @@ namespace Apizr.Tests.Models
         public int TotalPages { get; set; }
 
         [JsonPropertyName("data")]
-        public List<User> Data { get; set; }
+        public List<TData> Data { get; set; }
     }
 }

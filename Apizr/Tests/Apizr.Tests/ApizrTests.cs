@@ -23,7 +23,6 @@ using Polly.Extensions.Http;
 using Polly.Registry;
 using Refit;
 using Xunit;
-using IReqResService = Apizr.Tests.Apis.IReqResService;
 
 namespace Apizr.Tests
 {
@@ -45,7 +44,7 @@ namespace Apizr.Tests
         [Fact]
         public void Apizr_Should_Create_Manager()
         {
-            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>();
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>();
             var httpBinManager = ApizrBuilder.CreateManagerFor<IHttpBinService>();
             var userManager = ApizrBuilder.CreateCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>();
 
@@ -61,11 +60,11 @@ namespace Apizr.Tests
             var uri1 = new Uri("http://uri1.com");
 
             // By attribute
-            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>();
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>();
             reqResManager.Options.BaseAddress.Should().Be(attributeUri);
 
             // By proper option overriding attribute
-            reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>(options =>
+            reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>(options =>
                 options.WithBaseAddress(uri1));
             reqResManager.Options.BaseAddress.Should().Be(uri1);
         }
@@ -87,7 +86,7 @@ namespace Apizr.Tests
         [Fact]
         public void Calling_WithLogging_Should_Set_LoggingSettings()
         {
-            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>(
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>(
                 options => options.WithLogging((HttpTracerMode) HttpTracerMode.ExceptionsOnly,
                     (HttpMessageParts) HttpMessageParts.RequestCookies, LogLevel.Warning));
 
@@ -113,7 +112,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithAkavacheCacheHandler_Should_Cache_Result()
         {
-            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>(options => options
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>(options => options
                     .WithAkavacheCacheHandler()
                     .AddDelegatingHandler(new FailingRequestHandler()));
 
@@ -124,7 +123,7 @@ namespace Apizr.Tests
             Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.BadRequest));
 
             // Calling it at first execution should throw as expected without any cached result
-            var ex = await act.Should().ThrowAsync<ApizrException<UserList>>();
+            var ex = await act.Should().ThrowAsync<ApizrException<ApiResult<User>>>();
             ex.And.CachedResult.Should().BeNull();
 
             // This one should succeed
@@ -135,7 +134,7 @@ namespace Apizr.Tests
             result.Data.Should().NotBeNullOrEmpty();
 
             // This one should fail but with cached result
-            var ex2 = await act.Should().ThrowAsync<ApizrException<UserList>>();
+            var ex2 = await act.Should().ThrowAsync<ApizrException<ApiResult<User>>>();
             ex2.And.CachedResult.Should().NotBeNull();
         }
 
@@ -158,7 +157,7 @@ namespace Apizr.Tests
                 }
             };
 
-            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>(options => options
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>(options => options
                     .WithPolicyRegistry(policyRegistry)
                     .AddDelegatingHandler(new FailingRequestHandler()));
 
@@ -177,7 +176,7 @@ namespace Apizr.Tests
         {
             var isConnected = false;
 
-            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>(options => options
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>(options => options
                     .WithConnectivityHandler(() => isConnected));
 
             // Defining a request
@@ -197,7 +196,7 @@ namespace Apizr.Tests
         [Fact]
         public void Calling_WithRefitSettings_Should_Set_Settings()
         {
-            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>(options => options
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>(options => options
                     .WithRefitSettings(_refitSettings));
 
             reqResManager.Options.RefitSettings.Should().Be(_refitSettings);
@@ -212,7 +211,7 @@ namespace Apizr.Tests
                 config.AddProfile<UserMinUserProfile>();
             });
 
-            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>(options => options
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>(options => options
                     .WithRefitSettings(_refitSettings)
                     .WithAutoMapperMappingHandler(mapperConfig));
 
@@ -237,7 +236,7 @@ namespace Apizr.Tests
                 config.AddProfile<UserMinUserProfile>();
             });
 
-            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResService>(options => options
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>(options => options
                     .WithRefitSettings(_refitSettings)
                     .WithMappingHandler(new AutoMapperMappingHandler(mapperConfig.CreateMapper())));
 

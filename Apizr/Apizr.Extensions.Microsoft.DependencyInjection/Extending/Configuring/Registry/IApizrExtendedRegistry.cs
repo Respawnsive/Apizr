@@ -1,9 +1,10 @@
-﻿using Apizr.Configuring.Registry;
+﻿using System.Collections.Generic;
+using Apizr.Configuring.Registry;
 
 namespace Apizr.Extending.Configuring.Registry
 {
     public interface IApizrExtendedRegistry : IApizrEnumerableRegistry
     {
-        internal IApizrExtendedRegistry SubRegistry { get; set; }
+        internal void Import(IApizrExtendedRegistry registry);
     }
 }

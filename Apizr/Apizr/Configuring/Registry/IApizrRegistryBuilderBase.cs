@@ -23,7 +23,7 @@ namespace Apizr.Configuring.Registry
         /// </summary>
         TApizrRegistry ApizrRegistry { get; }
 
-        TApizrRegistryBuilder CreateSubRegistry(Action<TApizrRegistryBuilder> subRegistryBuilder,
+        TApizrRegistryBuilder AddRegistryGroup(Action<TApizrRegistryBuilder> registryGroupBuilder,
             Action<TApizrCommonOptionsBuilder> commonOptionsBuilder = null);
 
         #endregion

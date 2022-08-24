@@ -199,13 +199,16 @@ You have to provide the specific entity crud base uri with the options builder (
 
 ### Registering multiple interfaces
 
-#### [Static](#tab/tabid-static)
-
 You may want to register multiple managed api interfaces within the same project.
 Also, you may want to share some common configuration between apis without repeating yourself, but at the same time, you may need to set some specific ones for some of it.
 This is where the ApizrRegistry comes on stage.
 
-Here is an example of how to register a managed instance of multiple api interfaces:
+#### Single common configuration
+
+Here is an example of how to register a managed instance of multiple api interfaces, sharing a single common configuration:
+
+##### [Static](#tab/tabid-static)
+
 ```csharp
 // Apizr registry
 var apizrRegistry = ApizrBuilder.CreateRegistry(
@@ -252,13 +255,8 @@ var t1Manager = apizrRegistry.GetCrudManagerFor<T1>();
 var t2Manager = apizrRegistry.GetCrudManagerFor<T2, T2Key, T2ReadAllResult, T2ReadAllParams>();
 ```
 
-#### [Extended](#tab/tabid-extended)
+##### [Extended](#tab/tabid-extended)
 
-You may want to register multiple managed CRUD api interfaces within the same project.
-Also, you may want to share some common configuration between apis without repeating yourself, but at the same time, you may need to set some specific ones for some of it.
-This is where the ApizrRegistry comes on stage.
-
-Here is an example of how to register multiple managed CRUD api interfaces manually:
 ```csharp
 public override void ConfigureServices(IServiceCollection services)
 {
@@ -307,6 +305,8 @@ Of course, each managers will be regitered into the container so that you can us
 
 Also, the registry itslef will be registered into the container, so you could use it to get its managers, instead of using each managers.
 
+***
+
 Here's how to get a manager from the registry:
 
 ```csharp
@@ -317,7 +317,129 @@ var t1Manager = apizrRegistry.GetCrudManagerFor<T1>();
 var t2Manager = apizrRegistry.GetCrudManagerFor<T2, T2Key, T2ReadAllResult, T2ReadAllParams>();
 ```
 
+#### Multiple common configurations
+
+Here is an example of how to register a managed instance of multiple api interfaces, sharing multiple common configurations at different group level.
+It could be usefull when requesting mutliple apis (multiple base address) comming with multiple endpoints (multiple base path).
+
+##### [Static](#tab/tabid-static)
+
+```csharp
+// Apizr registry
+var apizrRegistry = ApizrBuilder.CreateRegistry(
+    registry => registry
+        .AddRegistryGroup(
+            group => group
+                .AddCrudManagerFor<T1>(
+                    config => config.WithBasePath("t1")
+                .AddCrudManagerFor<T2, T2Key, T2ReadAllResult, T2ReadAllParams>(
+                    config => config.WithBasePath("t2"),
+            config => config.WithBaseAddress("https://crud.io/api"))
+        .AddCrudManagerFor<T3>(
+            config => config.WithBaseAddress("https://crud.com/api"),
+    
+    config => config
+        .WithAkavacheCacheHandler()
+);
+
+// Container registration
+apizrRegistry.Populate((type, factory) => 
+    myContainer.RegistrationMethodFactory(type, factory)
+);
+```
+
+Here is what we're saying in this example:
+- Add a manager for T1 entity with CRUD api interface and default types into the registry
+  - Set a common base address (https://crud.io/api) dedicated to T1's manager
+  - Set a specific base path (t1) dedicated to T1's manager
+- Add a manager for T2 entity with CRUD api interface and custom types into the registry
+  - Set a common base address (https://crud.io/api) dedicated to T2's manager
+  - Set a specific base path (t1) dedicated to T2's manager
+- Add a manager for T3 entity with CRUD api interface and default types into the registry
+  - Set a specific base address (https://crud.com/api) dedicated to T3's manager
+- Apply common configuration to all managers by:
+  - Providing a cache handler
+
+It's an example, meaning if you don't need common and/or specific configuration, just don't provide it.
+And yes you can mix classic and CRUD manager registration into the same registry/group.
+You can add mutliple group at the same level and go deeper with group into group itself.
+
+Also, you could register the registry itslef, instead of its populated managers and then use its managers directly.
+
+Or, you could use the managers directly from the registry instead of registering anything.
+
+##### [Extended](#tab/tabid-extended)
+
+```csharp
+public override void ConfigureServices(IServiceCollection services)
+{
+    // Some policies
+    var registry = new PolicyRegistry
+    {
+        {
+            "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(1),
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10)
+            })
+        }
+    };
+    services.AddPolicyRegistry(registry);
+
+    // Apizr registration
+    services.AddApizr(
+        registry => registry
+            .AddRegistryGroup(
+                group => group
+                    .AddCrudManagerFor<T1>(
+                        config => config.WithBasePath("t1")
+                    .AddCrudManagerFor<T2, T2Key, T2ReadAllResult, T2ReadAllParams>(
+                        config => config.WithBasePath("t2"),
+                config => config.WithBaseAddress("https://crud.io/api"))
+            .AddCrudManagerFor<T3>(
+                config => config.WithBaseAddress("https://crud.com/api"),
+    
+        config => config
+            .WithAkavacheCacheHandler()
+    );
+}
+```
+
+Here is what we're saying in this example:
+- Add a manager for T1 entity with CRUD api interface and default types into the registry, to register it into the container
+  - Set a common base address (https://crud.io/api) dedicated to T1's manager
+  - Set a specific base path (t1) dedicated to T1's manager
+- Add a manager for T2 entity with CRUD api interface and custom types into the registry, to register it into the container
+  - Set a common base address (https://crud.io/api) dedicated to T2's manager
+  - Set a specific base path (t1) dedicated to T2's manager
+- Add a manager for T3 entity with CRUD api interface and default types into the registry, to register it into the container
+  - Set a specific base address (https://crud.com/api) dedicated to T3's manager
+- Apply common configuration to all managers by:
+  - Providing a cache handler
+
+It's an example, meaning if you don't need common and/or specific configuration, just don't provide it.
+And yes you can mix classic and CRUD manager registration into the same registry/group.
+You can add mutliple group at the same level and go deeper with group into group itself.
+
+Of course, each managers will be regitered into the container so that you can use it directly.
+
+Also, the registry itslef will be registered into the container, so you could use it to get its managers, instead of using each managers.
+
 ***
+
+Here's how to get a manager from the registry:
+
+```csharp
+// T1 with default registered types
+var t1Manager = apizrRegistry.GetCrudManagerFor<T1>();
+
+// T2 with custom registered types
+var t2Manager = apizrRegistry.GetCrudManagerFor<T2, T2Key, T2ReadAllResult, T2ReadAllParams>();
+
+// T3 with default registered types
+var t3Manager = apizrRegistry.GetCrudManagerFor<T3>();
+```
 
 ### Registering all scanned interfaces
 

@@ -5,6 +5,7 @@ items:
   id: ApizrRegistry
   parent: Apizr.Configuring.Registry
   children:
+  - Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManagerFor(System.Type,System.Func{Apizr.IApizrManager})
   - Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManagerFor``1(System.Func{Apizr.IApizrManager{``0}})
   - Apizr.Configuring.Registry.ApizrRegistry.Populate(System.Action{System.Type,System.Func{System.Object}})
   langs:
@@ -17,7 +18,7 @@ items:
   source:
     id: ApizrRegistry
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistry.cs
-    startLine: 5
+    startLine: 6
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
@@ -36,7 +37,6 @@ items:
   - System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Type,System.Func{Apizr.IApizrManager}}}
   - System.Collections.IEnumerable
   inheritedMembers:
-  - Apizr.Configuring.Registry.ApizrRegistryBase.ConcurrentRegistry
   - Apizr.Configuring.Registry.ApizrRegistryBase.GetEnumerator
   - Apizr.Configuring.Registry.ApizrRegistryBase.System#Collections#IEnumerable#GetEnumerator
   - Apizr.Configuring.Registry.ApizrRegistryBase.GetCrudManagerFor``1
@@ -84,7 +84,7 @@ items:
   source:
     id: AddOrUpdateManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistry.cs
-    startLine: 17
+    startLine: 41
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
@@ -104,6 +104,40 @@ items:
   - Public
   fullName.vb: Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManagerFor(Of TWebApi)(System.Func(Of Apizr.IApizrManager(Of TWebApi)))
   name.vb: AddOrUpdateManagerFor(Of TWebApi)(Func(Of IApizrManager(Of TWebApi)))
+- uid: Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManagerFor(System.Type,System.Func{Apizr.IApizrManager})
+  commentId: M:Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManagerFor(System.Type,System.Func{Apizr.IApizrManager})
+  id: AddOrUpdateManagerFor(System.Type,System.Func{Apizr.IApizrManager})
+  parent: Apizr.Configuring.Registry.ApizrRegistry
+  langs:
+  - csharp
+  - vb
+  name: AddOrUpdateManagerFor(Type, Func<IApizrManager>)
+  nameWithType: ApizrRegistry.AddOrUpdateManagerFor(Type, Func<IApizrManager>)
+  fullName: Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManagerFor(System.Type, System.Func<Apizr.IApizrManager>)
+  type: Method
+  source:
+    id: AddOrUpdateManagerFor
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistry.cs
+    startLine: 44
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Registry
+  syntax:
+    content: public void AddOrUpdateManagerFor(Type webApiType, Func<IApizrManager> managerFactory)
+    parameters:
+    - id: webApiType
+      type: System.Type
+    - id: managerFactory
+      type: System.Func{Apizr.IApizrManager}
+    content.vb: Public Sub AddOrUpdateManagerFor(webApiType As Type, managerFactory As Func(Of IApizrManager))
+  overload: Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManagerFor*
+  nameWithType.vb: ApizrRegistry.AddOrUpdateManagerFor(Type, Func(Of IApizrManager))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManagerFor(System.Type, System.Func(Of Apizr.IApizrManager))
+  name.vb: AddOrUpdateManagerFor(Type, Func(Of IApizrManager))
 - uid: Apizr.Configuring.Registry.ApizrRegistry.Populate(System.Action{System.Type,System.Func{System.Object}})
   commentId: M:Apizr.Configuring.Registry.ApizrRegistry.Populate(System.Action{System.Type,System.Func{System.Object}})
   id: Populate(System.Action{System.Type,System.Func{System.Object}})
@@ -118,7 +152,7 @@ items:
   source:
     id: Populate
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistry.cs
-    startLine: 24
+    startLine: 51
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
@@ -278,12 +312,6 @@ references:
   name: IEnumerable
   nameWithType: IEnumerable
   fullName: System.Collections.IEnumerable
-- uid: Apizr.Configuring.Registry.ApizrRegistryBase.ConcurrentRegistry
-  commentId: F:Apizr.Configuring.Registry.ApizrRegistryBase.ConcurrentRegistry
-  parent: Apizr.Configuring.Registry.ApizrRegistryBase
-  name: ConcurrentRegistry
-  nameWithType: ApizrRegistryBase.ConcurrentRegistry
-  fullName: Apizr.Configuring.Registry.ApizrRegistryBase.ConcurrentRegistry
 - uid: Apizr.Configuring.Registry.ApizrRegistryBase.GetEnumerator
   commentId: M:Apizr.Configuring.Registry.ApizrRegistryBase.GetEnumerator
   parent: Apizr.Configuring.Registry.ApizrRegistryBase
@@ -2600,6 +2628,55 @@ references:
   - name: TResult
     nameWithType: TResult
     fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.Func{Apizr.IApizrManager}
+  commentId: T:System.Func{Apizr.IApizrManager}
+  parent: System
+  definition: System.Func`1
+  name: Func<IApizrManager>
+  nameWithType: Func<IApizrManager>
+  fullName: System.Func<Apizr.IApizrManager>
+  nameWithType.vb: Func(Of IApizrManager)
+  fullName.vb: System.Func(Of Apizr.IApizrManager)
+  name.vb: Func(Of IApizrManager)
+  spec.csharp:
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.IApizrManager
+    name: IApizrManager
+    nameWithType: IApizrManager
+    fullName: Apizr.IApizrManager
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.IApizrManager
+    name: IApizrManager
+    nameWithType: IApizrManager
+    fullName: Apizr.IApizrManager
   - name: )
     nameWithType: )
     fullName: )

@@ -21,11 +21,18 @@ namespace Apizr.Configuring.Shared
         TApizrSharedOptionsBuilder WithBaseAddress(Func<string> baseAddressFactory);
 
         /// <summary>
-        /// Define your web api base address (could be defined with WebApiAttribute)
+        /// Define your web api base Uri (could be defined with WebApiAttribute)
         /// </summary>
-        /// <param name="baseAddressFactory">Your web api base address factory</param>
+        /// <param name="baseUriFactory">Your web api base address factory</param>
         /// <returns></returns>
-        TApizrSharedOptionsBuilder WithBaseAddress(Func<Uri> baseAddressFactory);
+        TApizrSharedOptionsBuilder WithBaseUri(Func<Uri> baseUriFactory);
+
+        /// <summary>
+        /// Define your web api base path (could be defined with WebApiAttribute)
+        /// </summary>
+        /// <param name="basePathFactory">Your web api base path factory</param>
+        /// <returns></returns>
+        TApizrSharedOptionsBuilder WithBasePath(Func<string> basePathFactory);
 
         /// <summary>
         /// Provide a custom HttpClientHandler

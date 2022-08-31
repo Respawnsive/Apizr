@@ -28,11 +28,25 @@ namespace Apizr.Configuring.Common
             DelegatingHandlersFactories = new List<Func<ILogger, IApizrOptionsBase, DelegatingHandler>>();
         }
 
-        private Func<Uri> _baseAddressFactory;
-        public Func<Uri> BaseAddressFactory
+        private Func<Uri> _baseUriFactory;
+        public Func<Uri> BaseUriFactory
+        {
+            get => _baseUriFactory;
+            set => _baseUriFactory = value != null ? () => BaseUri = value.Invoke() : null;
+        }
+
+        private Func<string> _baseAddressFactory;
+        public Func<string> BaseAddressFactory
         {
             get => _baseAddressFactory;
-            set => _baseAddressFactory = () => BaseAddress = value.Invoke();
+            set => _baseAddressFactory = value != null ? () => BaseAddress = value.Invoke() : null;
+        }
+
+        private Func<string> _basePathFactory;
+        public Func<string> BasePathFactory
+        {
+            get => _basePathFactory;
+            set => _basePathFactory = value != null ? () => BasePath = value.Invoke() : null;
         }
 
         public Func<ILoggerFactory> LoggerFactoryFactory { get; set; }

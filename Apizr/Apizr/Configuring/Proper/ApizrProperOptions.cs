@@ -14,13 +14,16 @@ namespace Apizr.Configuring.Proper
             Type webApiType,
             string[] assemblyPolicyRegistryKeys,
             string[] webApiPolicyRegistryKeys, 
-            Uri baseAddress,
+            string baseAddress,
+            string basePath,
             HttpTracerMode? httpTracerMode,
             HttpMessageParts? trafficVerbosity,
             params LogLevel[] logLevels) : base(sharedOptions, webApiType, assemblyPolicyRegistryKeys,
             webApiPolicyRegistryKeys)
         {
+            BaseUriFactory = sharedOptions.BaseUriFactory;
             BaseAddressFactory = () => baseAddress ?? sharedOptions.BaseAddressFactory?.Invoke();
+            BasePathFactory = () => basePath ?? sharedOptions.BasePathFactory?.Invoke();
             HttpTracerModeFactory = () => httpTracerMode ?? sharedOptions.HttpTracerModeFactory.Invoke();
             TrafficVerbosityFactory = () => trafficVerbosity ?? sharedOptions.TrafficVerbosityFactory.Invoke();
             LogLevelsFactory = () => logLevels?.Any() == true ? logLevels : sharedOptions.LogLevelsFactory.Invoke();
@@ -29,11 +32,25 @@ namespace Apizr.Configuring.Proper
             DelegatingHandlersFactories = sharedOptions.DelegatingHandlersFactories;
         }
 
-        private Func<Uri> _baseAddressFactory;
-        public Func<Uri> BaseAddressFactory
+        private Func<Uri> _baseUriFactory;
+        public Func<Uri> BaseUriFactory
+        {
+            get => _baseUriFactory;
+            set => _baseUriFactory = value != null ? () => BaseUri = value.Invoke() : null;
+        }
+
+        private Func<string> _baseAddressFactory;
+        public Func<string> BaseAddressFactory
         {
             get => _baseAddressFactory;
-            set => _baseAddressFactory = () => BaseAddress = value.Invoke();
+            set => _baseAddressFactory = value != null ? () => BaseAddress = value.Invoke() : null;
+        }
+
+        private Func<string> _basePathFactory;
+        public Func<string> BasePathFactory
+        {
+            get => _basePathFactory;
+            set => _basePathFactory = value != null ? () => BasePath = value.Invoke() : null;
         }
 
         private Func<HttpTracerMode> _httpTracerModeFactory;

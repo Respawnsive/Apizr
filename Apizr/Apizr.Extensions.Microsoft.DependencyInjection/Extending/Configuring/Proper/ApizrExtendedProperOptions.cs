@@ -17,7 +17,8 @@ namespace Apizr.Extending.Configuring.Proper
             Type webApiType, Type apizrManagerType,
             string[] assemblyPolicyRegistryKeys, 
             string[] webApiPolicyRegistryKeys,
-            Uri baseAddress,
+            string baseAddress,
+            string basePath,
             HttpTracerMode? httpTracerMode,
             HttpMessageParts? trafficVerbosity,
             params LogLevel[] logLevels) : base(sharedOptions, 
@@ -26,7 +27,9 @@ namespace Apizr.Extending.Configuring.Proper
             webApiPolicyRegistryKeys)
         {
             ApizrManagerType = apizrManagerType;
+            BaseUriFactory = sharedOptions.BaseUriFactory;
             BaseAddressFactory = serviceProvider => baseAddress ?? sharedOptions.BaseAddressFactory.Invoke(serviceProvider);
+            BasePathFactory = serviceProvider => basePath ?? sharedOptions.BasePathFactory.Invoke(serviceProvider);
             HttpTracerModeFactory = serviceProvider => httpTracerMode ?? sharedOptions.HttpTracerModeFactory.Invoke(serviceProvider);
             TrafficVerbosityFactory = serviceProvider => trafficVerbosity ?? sharedOptions.TrafficVerbosityFactory.Invoke(serviceProvider);
             LogLevelsFactory = serviceProvider => logLevels?.Any() == true ? logLevels : sharedOptions.LogLevelsFactory.Invoke(serviceProvider);
@@ -37,11 +40,25 @@ namespace Apizr.Extending.Configuring.Proper
 
         public Type ApizrManagerType { get; }
 
-        private Func<IServiceProvider, Uri> _baseAddressFactory;
-        public Func<IServiceProvider, Uri> BaseAddressFactory
+        private Func<IServiceProvider, Uri> _baseUriFactory;
+        public Func<IServiceProvider, Uri> BaseUriFactory
+        {
+            get => _baseUriFactory;
+            set => _baseUriFactory = serviceProvider => BaseUri = value.Invoke(serviceProvider);
+        }
+
+        private Func<IServiceProvider, string> _baseAddressFactory;
+        public Func<IServiceProvider, string> BaseAddressFactory
         {
             get => _baseAddressFactory;
             set => _baseAddressFactory = serviceProvider => BaseAddress = value.Invoke(serviceProvider);
+        }
+
+        private Func<IServiceProvider, string> _basePathFactory;
+        public Func<IServiceProvider, string> BasePathFactory
+        {
+            get => _basePathFactory;
+            set => _basePathFactory = serviceProvider => BasePath = value.Invoke(serviceProvider);
         }
 
         private Func<IServiceProvider, HttpTracerMode> _httpTracerModeFactory;

@@ -10,6 +10,7 @@ using Apizr.Configuring.Proper;
 using Apizr.Configuring.Registry;
 using Apizr.Connecting;
 using Apizr.Extending;
+using Apizr.Helping;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Mapping;
@@ -242,8 +243,8 @@ namespace Apizr
 
                 return primaryMessageHandler;
             });
-
-            var webApiFactory = new Func<object>(() => RestService.For<TWebApi>(new HttpClient(httpHandlerFactory.Invoke(), false) { BaseAddress = apizrOptions.BaseAddress }, apizrOptions.RefitSettings));
+            
+            var webApiFactory = new Func<object>(() => RestService.For<TWebApi>(new HttpClient(httpHandlerFactory.Invoke(), false) { BaseAddress = apizrOptions.BaseUri }, apizrOptions.RefitSettings));
             var lazyWebApi = new LazyFactory<TWebApi>(webApiFactory);
             var apizrManager = apizrManagerFactory(lazyWebApi, apizrOptions.ConnectivityHandlerFactory.Invoke(),
                 apizrOptions.GetCacheHanderFactory()?.Invoke() ?? apizrOptions.CacheHandlerFactory.Invoke(),
@@ -267,7 +268,8 @@ namespace Apizr
 
             commonOptionsBuilder?.Invoke(builder);
 
-            builder.ApizrOptions.BaseAddressFactory?.Invoke();
+            builder.ApizrOptions.BaseUriFactory?.Invoke();
+            builder.ApizrOptions.BasePathFactory?.Invoke();
             builder.ApizrOptions.LogLevelsFactory.Invoke();
             builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();
@@ -284,8 +286,16 @@ namespace Apizr
 
             var webApiType = typeof(TWebApi);
 
+            string baseAddress = null;
+            string basePath = null;
             var webApiAttribute = webApiType.GetTypeInfo().GetCustomAttribute<WebApiAttribute>(true);
-            Uri.TryCreate(webApiAttribute?.BaseUri, UriKind.RelativeOrAbsolute, out var baseAddress);
+            if (!string.IsNullOrWhiteSpace(webApiAttribute?.BaseAddressOrPath))
+            {
+                if(Uri.IsWellFormedUriString(webApiAttribute.BaseAddressOrPath, UriKind.Absolute))
+                    baseAddress = webApiAttribute.BaseAddressOrPath;
+                else
+                    basePath = webApiAttribute.BaseAddressOrPath;
+            }
 
             LogAttribute logAttribute;
             PolicyAttribute webApiPolicyAttribute;
@@ -309,12 +319,15 @@ namespace Apizr
             var builder = new ApizrProperOptionsBuilder(new ApizrProperOptions(commonOptions, webApiType,
                 assemblyPolicyAttribute?.RegistryKeys, webApiPolicyAttribute?.RegistryKeys,
                 baseAddress,
+                basePath,
                 logAttribute?.HttpTracerMode,
                 logAttribute?.TrafficVerbosity, logAttribute?.LogLevels));
 
             properOptionsBuilder?.Invoke(builder);
 
-            builder.ApizrOptions.BaseAddressFactory.Invoke();
+            builder.ApizrOptions.BaseUriFactory?.Invoke();
+            builder.ApizrOptions.BaseAddressFactory?.Invoke();
+            builder.ApizrOptions.BasePathFactory?.Invoke();
             builder.ApizrOptions.LogLevelsFactory.Invoke();
             builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();
@@ -357,7 +370,15 @@ namespace Apizr
 
             optionsBuilder?.Invoke(builder);
 
-            builder.ApizrOptions.BaseAddressFactory.Invoke();
+            if (builder.ApizrOptions.BaseUriFactory == null)
+            {
+                builder.ApizrOptions.BaseAddressFactory?.Invoke();
+                builder.ApizrOptions.BasePathFactory?.Invoke();
+                if (Uri.TryCreate(UrlHelper.Combine(builder.ApizrOptions.BaseAddress, builder.ApizrOptions.BasePath), UriKind.RelativeOrAbsolute, out var baseUri))
+                    builder.WithBaseUri(baseUri);
+            }
+
+            builder.ApizrOptions.BaseUriFactory?.Invoke();
             builder.ApizrOptions.LogLevelsFactory.Invoke();
             builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();

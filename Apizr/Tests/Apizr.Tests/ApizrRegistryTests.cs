@@ -104,31 +104,31 @@ namespace Apizr.Tests
             var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>());
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
-            reqResManager.Options.BaseAddress.Should().Be(attributeUri);
+            reqResManager.Options.BaseUri.Should().Be(attributeUri);
 
             // By attribute overriding common option
             apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
-                config => config.WithBaseAddress(uri2));
+                config => config.WithBaseUri(uri2));
             reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
-            reqResManager.Options.BaseAddress.Should().Be(attributeUri);
+            reqResManager.Options.BaseUri.Should().Be(attributeUri);
 
             // By proper option overriding attribute
             apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(options =>
-                        options.WithBaseAddress(uri2)));
+                        options.WithBaseUri(uri2)));
 
             reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
-            reqResManager.Options.BaseAddress.Should().Be(uri2);
+            reqResManager.Options.BaseUri.Should().Be(uri2);
 
             // By proper option overriding common option and attribute
             apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
                 .AddManagerFor<IReqResUserService>(options => 
-                    options.WithBaseAddress(uri2)),
-                config => config.WithBaseAddress(uri1));
+                    options.WithBaseUri(uri2)),
+                config => config.WithBaseUri(uri1));
 
             reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
-            reqResManager.Options.BaseAddress.Should().Be(uri2);
+            reqResManager.Options.BaseUri.Should().Be(uri2);
         }
 
         [Fact]
@@ -444,30 +444,30 @@ namespace Apizr.Tests
                     .AddRegistryGroup(group => group
                             .AddManagerFor<IReqResUserService>()
                             .AddManagerFor<IReqResResourceService>(),
-                        config => config.WithBaseAddress(uri3))
-                    .AddManagerFor<IHttpBinService>(options => options.WithBaseAddress(uri2)),
-                config => config.WithBaseAddress(uri1));
+                        config => config.WithBaseUri(uri3))
+                    .AddManagerFor<IHttpBinService>(options => options.WithBaseUri(uri2)),
+                config => config.WithBaseUri(uri1));
 
             var userFixture = apizrRegistry.GetManagerFor<IReqResUserService>();
-            userFixture.Options.BaseAddress.Should().Be(attributeUri);
+            userFixture.Options.BaseUri.Should().Be(attributeUri);
 
             var resourceFixture = apizrRegistry.GetManagerFor<IReqResResourceService>();
-            resourceFixture.Options.BaseAddress.Should().Be(uri3);
+            resourceFixture.Options.BaseUri.Should().Be(uri3);
 
             apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
                     .AddRegistryGroup(group => group
-                            .AddManagerFor<IReqResUserService>(config => config.WithBaseAddress(uri4))
+                            .AddManagerFor<IReqResUserService>(config => config.WithBaseUri(uri4))
                             .AddManagerFor<IReqResResourceService>(),
-                        config => config.WithBaseAddress(uri3))
-                    .AddManagerFor<IHttpBinService>(options => options.WithBaseAddress(uri2)),
-                config => config.WithBaseAddress(uri1));
+                        config => config.WithBaseUri(uri3))
+                    .AddManagerFor<IHttpBinService>(options => options.WithBaseUri(uri2)),
+                config => config.WithBaseUri(uri1));
 
 
             userFixture = apizrRegistry.GetManagerFor<IReqResUserService>();
-            userFixture.Options.BaseAddress.Should().Be(uri4);
+            userFixture.Options.BaseUri.Should().Be(uri4);
 
             resourceFixture = apizrRegistry.GetManagerFor<IReqResResourceService>();
-            resourceFixture.Options.BaseAddress.Should().Be(uri3);
+            resourceFixture.Options.BaseUri.Should().Be(uri3);
         }
     }
 }

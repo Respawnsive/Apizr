@@ -17,7 +17,9 @@ namespace Apizr.Configuring
     {
         public ApizrOptions(IApizrCommonOptions commonOptions, IApizrProperOptions properOptions) : base(commonOptions, properOptions)
         {
+            BaseUriFactory = properOptions.BaseUriFactory;
             BaseAddressFactory = properOptions.BaseAddressFactory;
+            BasePathFactory = properOptions.BasePathFactory;
             HttpTracerModeFactory = properOptions.HttpTracerModeFactory;
             TrafficVerbosityFactory = properOptions.TrafficVerbosityFactory;
             LogLevelsFactory = properOptions.LogLevelsFactory;
@@ -32,11 +34,25 @@ namespace Apizr.Configuring
             DelegatingHandlersFactories = properOptions.DelegatingHandlersFactories;
         }
 
-        private Func<Uri> _baseAddressFactory;
-        public Func<Uri> BaseAddressFactory
+        private Func<Uri> _baseUriFactory;
+        public Func<Uri> BaseUriFactory
+        {
+            get => _baseUriFactory;
+            set => _baseUriFactory = value != null ? () => BaseUri = value.Invoke() : null;
+        }
+
+        private Func<string> _baseAddressFactory;
+        public Func<string> BaseAddressFactory
         {
             get => _baseAddressFactory;
-            set => _baseAddressFactory = () => BaseAddress = value.Invoke();
+            set => _baseAddressFactory = value != null ? () => BaseAddress = value.Invoke() : null;
+        }
+
+        private Func<string> _basePathFactory;
+        public Func<string> BasePathFactory
+        {
+            get => _basePathFactory;
+            set => _basePathFactory = value != null ? () => BasePath = value.Invoke() : null;
         }
 
         private Func<HttpTracerMode> _httpTracerModeFactory;
@@ -91,7 +107,9 @@ namespace Apizr.Configuring
         }
 
         public Type WebApiType => Options.WebApiType;
-        public Uri BaseAddress => Options.BaseAddress;
+        public Uri BaseUri => Options.BaseUri;
+        public string BaseAddress => Options.BaseAddress;
+        public string BasePath => Options.BasePath;
         public HttpTracerMode HttpTracerMode => Options.HttpTracerMode;
         public HttpMessageParts TrafficVerbosity => Options.TrafficVerbosity;
         public LogLevel[] LogLevels => Options.LogLevels;

@@ -9,7 +9,17 @@ namespace Apizr.Configuring.Shared
         /// <summary>
         /// Base address
         /// </summary>
-        Uri BaseAddress { get; }
+        Uri BaseUri { get; }
+
+        /// <summary>
+        /// Base address
+        /// </summary>
+        string BaseAddress { get; }
+
+        /// <summary>
+        /// Base path
+        /// </summary>
+        string BasePath { get; }
 
         /// <summary>
         /// Http traffic tracing mode

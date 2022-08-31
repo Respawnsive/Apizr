@@ -24,22 +24,29 @@ namespace Apizr.Configuring.Proper
         public IApizrProperOptionsBuilder WithBaseAddress(string baseAddress)
             => WithBaseAddress(() => baseAddress);
 
-        public IApizrProperOptionsBuilder WithBaseAddress(Uri baseAddress)
-            => WithBaseAddress(() => baseAddress);
-
         public IApizrProperOptionsBuilder WithBaseAddress(Func<string> baseAddressFactory)
         {
-            Options.BaseAddressFactory = () =>
-                Uri.TryCreate(baseAddressFactory.Invoke(), UriKind.RelativeOrAbsolute, out var baseUri)
-                    ? baseUri
-                    : null;
+            Options.BaseAddressFactory = baseAddressFactory;
 
             return this;
         }
 
-        public IApizrProperOptionsBuilder WithBaseAddress(Func<Uri> baseAddressFactory)
+        public IApizrProperOptionsBuilder WithBaseUri(Uri baseUri)
+            => WithBaseUri(() => baseUri);
+
+        public IApizrProperOptionsBuilder WithBaseUri(Func<Uri> baseUriFactory)
         {
-            Options.BaseAddressFactory = baseAddressFactory;
+            Options.BaseUriFactory = baseUriFactory;
+
+            return this;
+        }
+
+        public IApizrProperOptionsBuilder WithBasePath(string basePath)
+            => WithBasePath(() => basePath);
+
+        public IApizrProperOptionsBuilder WithBasePath(Func<string> basePathFactory)
+        {
+            Options.BasePathFactory = basePathFactory;
 
             return this;
         }

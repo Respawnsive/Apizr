@@ -9,9 +9,19 @@ namespace Apizr.Extending.Configuring.Shared
     public interface IApizrExtendedSharedOptions : IApizrExtendedSharedOptionsBase
     {
         /// <summary>
+        /// Base Uri factory
+        /// </summary>
+        Func<IServiceProvider, Uri> BaseUriFactory { get; }
+
+        /// <summary>
         /// Base address factory
         /// </summary>
-        Func<IServiceProvider, Uri> BaseAddressFactory { get; }
+        Func<IServiceProvider, string> BaseAddressFactory { get; }
+
+        /// <summary>
+        /// Base path factory
+        /// </summary>
+        Func<IServiceProvider, string> BasePathFactory { get; }
 
         /// <summary>
         /// Http traffic tracing mode factory

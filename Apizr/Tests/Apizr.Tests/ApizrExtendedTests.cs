@@ -121,17 +121,17 @@ namespace Apizr.Tests
             var serviceProvider = services.BuildServiceProvider();
             var fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
 
-            fixture.Options.BaseAddress.Should().Be(attributeUri);
+            fixture.Options.BaseUri.Should().Be(attributeUri);
 
             // By proper option overriding attribute
             services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddApizrManagerFor<IReqResUserService>(options => options.WithBaseAddress(uri1));
+            services.AddApizrManagerFor<IReqResUserService>(options => options.WithBaseUri(uri1));
 
             serviceProvider = services.BuildServiceProvider();
             fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
 
-            fixture.Options.BaseAddress.Should().Be(uri1);
+            fixture.Options.BaseUri.Should().Be(uri1);
         }
 
         [Fact]

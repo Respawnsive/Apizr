@@ -54,19 +54,31 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public void Calling_WithBaseAddress_Should_Set_BaseAddress()
+        public void Calling_WithBaseAddress_Should_Set_BaseUri()
         {
-            var attributeUri = "https://reqres.in/api";
+            var attributeAddress = "https://reqres.in/api";
             var uri1 = new Uri("http://uri1.com");
 
             // By attribute
             var reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>();
-            reqResManager.Options.BaseAddress.Should().Be(attributeUri);
+            reqResManager.Options.BaseUri.Should().Be(attributeAddress);
 
             // By proper option overriding attribute
             reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>(options =>
-                options.WithBaseAddress(uri1));
-            reqResManager.Options.BaseAddress.Should().Be(uri1);
+                options.WithBaseUri(uri1));
+            reqResManager.Options.BaseUri.Should().Be(uri1);
+        }
+
+        [Fact]
+        public void Calling_WithBaseAddress_And_WithBasePath_Should_Set_BaseUri()
+        {
+            var baseAddress = "https://reqres.in/api";
+            var basePath = "users";
+            var baseUri = $"{baseAddress}/{basePath}";
+
+            // By attribute
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserPathService>(options => options.WithBaseAddress(baseAddress));
+            reqResManager.Options.BaseUri.Should().Be(baseUri);
         }
 
         [Fact]

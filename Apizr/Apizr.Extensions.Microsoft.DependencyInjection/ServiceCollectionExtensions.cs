@@ -11,6 +11,7 @@ using Apizr.Extending.Configuring;
 using Apizr.Extending.Configuring.Common;
 using Apizr.Extending.Configuring.Proper;
 using Apizr.Extending.Configuring.Registry;
+using Apizr.Helping;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Mapping;
@@ -582,7 +583,8 @@ namespace Apizr
                     $"Your Apizr manager class must inherit from IApizrManager generic interface or derived");
             
             var webApiFriendlyName = properOptions.WebApiType.GetFriendlyName();
-            var apizrOptions = CreateOptions(commonOptions, properOptions, optionsBuilder);
+            var apizrOptionsBuilder = CreateOptions(commonOptions, properOptions, optionsBuilder);
+            var apizrOptions = apizrOptionsBuilder.ApizrOptions;
             var apizrOptionsRegistrationType = typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType);
 
             var builder = services.AddHttpClient(ForType(apizrOptions.WebApiType))
@@ -653,9 +655,7 @@ namespace Apizr
 
                         if (client.BaseAddress == null)
                         {
-                            client.BaseAddress = options.BaseAddress;
-                            if (client.BaseAddress == null)
-                                throw new ArgumentNullException(nameof(client.BaseAddress), $"You must provide a valid web api uri with the {nameof(WebApiAttribute)} or the options builder");
+                            client.BaseAddress = options.BaseUri;
                         }
 
                         return typeof(LazyFactory<>).MakeGenericType(options.WebApiType)
@@ -690,7 +690,15 @@ namespace Apizr
 
             services.TryAddSingleton(apizrOptionsRegistrationType, serviceProvider =>
             {
-                apizrOptions.BaseAddressFactory.Invoke(serviceProvider);
+                if (apizrOptions.BaseUriFactory == null)
+                {
+                    apizrOptions.BaseAddressFactory?.Invoke(serviceProvider);
+                    apizrOptions.BasePathFactory?.Invoke(serviceProvider);
+                    if (Uri.TryCreate(UrlHelper.Combine(apizrOptions.BaseAddress, apizrOptions.BasePath), UriKind.RelativeOrAbsolute, out var baseUri))
+                        apizrOptionsBuilder.WithBaseUri(baseUri);
+                }
+
+                apizrOptions.BaseUriFactory?.Invoke(serviceProvider);
                 apizrOptions.LogLevelsFactory.Invoke(serviceProvider);
                 apizrOptions.TrafficVerbosityFactory.Invoke(serviceProvider);
                 apizrOptions.HttpTracerModeFactory.Invoke(serviceProvider);
@@ -737,11 +745,18 @@ namespace Apizr
             if (commonOptions == null)
                 throw new ArgumentNullException(nameof(commonOptions));
 
-            Uri baseAddress = null;
+            string baseAddress = null;
+            string basePath = null;
             var webApiAttribute = webApiType.GetTypeInfo().GetCustomAttribute<WebApiAttribute>(true);
             if (webApiAttribute != null)
             {
-                Uri.TryCreate(webApiAttribute.BaseUri, UriKind.RelativeOrAbsolute, out baseAddress);
+                if (!string.IsNullOrWhiteSpace(webApiAttribute.BaseAddressOrPath))
+                {
+                    if (Uri.IsWellFormedUriString(webApiAttribute.BaseAddressOrPath, UriKind.Absolute))
+                        baseAddress = webApiAttribute.BaseAddressOrPath;
+                    else
+                        basePath = webApiAttribute.BaseAddressOrPath;
+                }
                 commonOptions.WebApis.Add(webApiType, webApiAttribute);
             }
 
@@ -767,6 +782,7 @@ namespace Apizr
             var builder = new ApizrExtendedProperOptionsBuilder(new ApizrExtendedProperOptions(commonOptions, webApiType, apizrManagerType,
                 assemblyPolicyAttribute?.RegistryKeys, webApiPolicyAttribute?.RegistryKeys, 
                 baseAddress,
+                basePath,
                 logAttribute?.HttpTracerMode,
                 logAttribute?.TrafficVerbosity, logAttribute?.LogLevels));
 
@@ -804,14 +820,14 @@ namespace Apizr
             return builder.ApizrRegistry;
         }
 
-        private static IApizrExtendedOptions CreateOptions(IApizrExtendedCommonOptions commonOptions,
+        private static IApizrExtendedOptionsBuilder CreateOptions(IApizrExtendedCommonOptions commonOptions,
             IApizrExtendedProperOptions properOptions, Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
         {
             var builder = new ApizrExtendedOptionsBuilder(new ApizrExtendedOptions(commonOptions, properOptions));
 
             optionsBuilder?.Invoke(builder);
 
-            return builder.ApizrOptions;
+            return builder;
         } 
 
         #endregion

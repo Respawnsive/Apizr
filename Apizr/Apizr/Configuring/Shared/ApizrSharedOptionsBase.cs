@@ -12,7 +12,9 @@ namespace Apizr.Configuring.Shared
             
         }
 
-        public Uri BaseAddress { get; protected set; }
+        public Uri BaseUri { get; protected set; }
+        public string BaseAddress { get; protected set; }
+        public string BasePath { get; protected set; }
         public HttpTracerMode HttpTracerMode { get; protected set; }
         public HttpMessageParts TrafficVerbosity { get; protected set; }
         

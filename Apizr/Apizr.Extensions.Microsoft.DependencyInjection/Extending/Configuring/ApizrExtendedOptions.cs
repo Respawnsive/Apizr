@@ -21,7 +21,9 @@ namespace Apizr.Extending.Configuring
         public ApizrExtendedOptions(IApizrExtendedCommonOptions commonOptions, IApizrExtendedProperOptions properOptions) : base(commonOptions, properOptions)
         {
             ApizrManagerType = properOptions.ApizrManagerType;
+            BaseUriFactory = properOptions.BaseUriFactory;
             BaseAddressFactory = properOptions.BaseAddressFactory;
+            BasePathFactory = properOptions.BasePathFactory;
             HttpTracerModeFactory = properOptions.HttpTracerModeFactory;
             TrafficVerbosityFactory = properOptions.TrafficVerbosityFactory;
             LogLevelsFactory = properOptions.LogLevelsFactory;
@@ -47,13 +49,27 @@ namespace Apizr.Extending.Configuring
         public Type CacheHandlerType { get; set; }
         public Type MappingHandlerType { get; set; }
 
-        private Func<IServiceProvider, Uri> _baseAddressFactory;
-        public Func<IServiceProvider, Uri> BaseAddressFactory
+        private Func<IServiceProvider, Uri> _baseUriFactory;
+        public Func<IServiceProvider, Uri> BaseUriFactory
+        {
+            get => _baseUriFactory;
+            set => _baseUriFactory = serviceProvider => BaseUri = value.Invoke(serviceProvider);
+        }
+
+        private Func<IServiceProvider, string> _baseAddressFactory;
+        public Func<IServiceProvider, string> BaseAddressFactory
         {
             get => _baseAddressFactory;
             set => _baseAddressFactory = serviceProvider => BaseAddress = value.Invoke(serviceProvider);
         }
-        
+
+        private Func<IServiceProvider, string> _basePathFactory;
+        public Func<IServiceProvider, string> BasePathFactory
+        {
+            get => _basePathFactory;
+            set => _basePathFactory = serviceProvider => BasePath = value.Invoke(serviceProvider);
+        }
+
         private Func<IServiceProvider, HttpTracerMode> _httpTracerModeFactory;
         public Func<IServiceProvider, HttpTracerMode> HttpTracerModeFactory
         {

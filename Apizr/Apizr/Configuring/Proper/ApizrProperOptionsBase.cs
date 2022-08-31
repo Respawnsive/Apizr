@@ -12,7 +12,9 @@ namespace Apizr.Configuring.Proper
             string[] assemblyPolicyRegistryKeys,
             string[] webApiPolicyRegistryKeys)
         {
+            BaseUri = sharedOptions.BaseUri;
             BaseAddress = sharedOptions.BaseAddress;
+            BasePath = sharedOptions.BasePath;
             HttpTracerMode = sharedOptions.HttpTracerMode;
             TrafficVerbosity = sharedOptions.TrafficVerbosity;
             LogLevels = sharedOptions.LogLevels;

@@ -38,11 +38,25 @@ namespace Apizr.Extending.Configuring.Common
         public Type CacheHandlerType { get; set; }
         public Type MappingHandlerType { get; set; }
 
-        private Func<IServiceProvider, Uri> _baseAddressFactory;
-        public Func<IServiceProvider, Uri> BaseAddressFactory
+        private Func<IServiceProvider, Uri> _baseUriFactory;
+        public Func<IServiceProvider, Uri> BaseUriFactory
+        {
+            get => _baseUriFactory;
+            set => _baseUriFactory = serviceProvider => BaseUri = value.Invoke(serviceProvider);
+        }
+
+        private Func<IServiceProvider, string> _baseAddressFactory;
+        public Func<IServiceProvider, string> BaseAddressFactory
         {
             get => _baseAddressFactory;
             set => _baseAddressFactory = serviceProvider => BaseAddress = value.Invoke(serviceProvider);
+        }
+
+        private Func<IServiceProvider, string> _basePathFactory;
+        public Func<IServiceProvider, string> BasePathFactory
+        {
+            get => _basePathFactory;
+            set => _basePathFactory = serviceProvider => BasePath = value.Invoke(serviceProvider);
         }
 
         private Func<IServiceProvider, HttpTracerMode> _httpTracerModeFactory;

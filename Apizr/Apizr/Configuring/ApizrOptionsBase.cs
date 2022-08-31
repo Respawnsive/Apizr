@@ -12,7 +12,9 @@ namespace Apizr.Configuring
         protected ApizrOptionsBase(IApizrCommonOptionsBase commonOptions, IApizrProperOptionsBase properOptions)
         {
             WebApiType = properOptions.WebApiType;
+            BaseUri = properOptions.BaseUri;
             BaseAddress = properOptions.BaseAddress;
+            BasePath = properOptions.BasePath;
             HttpTracerMode = properOptions.HttpTracerMode;
             PolicyRegistryKeys = properOptions.PolicyRegistryKeys;
         }

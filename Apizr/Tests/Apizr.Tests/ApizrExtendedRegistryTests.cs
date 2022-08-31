@@ -154,42 +154,42 @@ namespace Apizr.Tests
             var serviceProvider = services.BuildServiceProvider();
             var fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
 
-            fixture.Options.BaseAddress.Should().Be(attributeUri);
+            fixture.Options.BaseUri.Should().Be(attributeUri);
 
             // By proper option overriding attribute
             services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
-                .AddManagerFor<IReqResUserService>(options => options.WithBaseAddress(uri1)));
+                .AddManagerFor<IReqResUserService>(options => options.WithBaseUri(uri1)));
 
             serviceProvider = services.BuildServiceProvider();
             fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
 
-            fixture.Options.BaseAddress.Should().Be(uri1);
+            fixture.Options.BaseUri.Should().Be(uri1);
 
             // By attribute overriding common option
             services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
                     .AddManagerFor<IReqResUserService>(),
-                config => config.WithBaseAddress(uri1));
+                config => config.WithBaseUri(uri1));
 
             serviceProvider = services.BuildServiceProvider();
             fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
 
-            fixture.Options.BaseAddress.Should().Be(attributeUri);
+            fixture.Options.BaseUri.Should().Be(attributeUri);
 
             // By proper option overriding proper option and attribute
             services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
-                .AddManagerFor<IReqResUserService>(options => options.WithBaseAddress(uri2)),
-                config => config.WithBaseAddress(uri1));
+                .AddManagerFor<IReqResUserService>(options => options.WithBaseUri(uri2)),
+                config => config.WithBaseUri(uri1));
 
             serviceProvider = services.BuildServiceProvider();
             fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
 
-            fixture.Options.BaseAddress.Should().Be(uri2);
+            fixture.Options.BaseUri.Should().Be(uri2);
         }
 
         [Fact]
@@ -641,36 +641,36 @@ namespace Apizr.Tests
                     .AddRegistryGroup(group => group
                         .AddManagerFor<IReqResUserService>()
                         .AddManagerFor<IReqResResourceService>(),
-                        config => config.WithBaseAddress(uri3))
-                    .AddManagerFor<IHttpBinService>(options => options.WithBaseAddress(uri2)),
-                config => config.WithBaseAddress(uri1));
+                        config => config.WithBaseUri(uri3))
+                    .AddManagerFor<IHttpBinService>(options => options.WithBaseUri(uri2)),
+                config => config.WithBaseUri(uri1));
 
             var serviceProvider = services.BuildServiceProvider();
 
             var userFixture = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
-            userFixture.Options.BaseAddress.Should().Be(attributeUri);
+            userFixture.Options.BaseUri.Should().Be(attributeUri);
 
             var resourceFixture = serviceProvider.GetRequiredService<IApizrManager<IReqResResourceService>>();
-            resourceFixture.Options.BaseAddress.Should().Be(uri3);
+            resourceFixture.Options.BaseUri.Should().Be(uri3);
 
             // Test 2
             services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
                     .AddRegistryGroup(group => group
-                            .AddManagerFor<IReqResUserService>(config => config.WithBaseAddress(uri4))
+                            .AddManagerFor<IReqResUserService>(config => config.WithBaseUri(uri4))
                             .AddManagerFor<IReqResResourceService>(),
-                        config => config.WithBaseAddress(uri3))
-                    .AddManagerFor<IHttpBinService>(options => options.WithBaseAddress(uri2)),
-                config => config.WithBaseAddress(uri1));
+                        config => config.WithBaseUri(uri3))
+                    .AddManagerFor<IHttpBinService>(options => options.WithBaseUri(uri2)),
+                config => config.WithBaseUri(uri1));
 
             serviceProvider = services.BuildServiceProvider();
 
             userFixture = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
-            userFixture.Options.BaseAddress.Should().Be(uri4);
+            userFixture.Options.BaseUri.Should().Be(uri4);
 
             resourceFixture = serviceProvider.GetRequiredService<IApizrManager<IReqResResourceService>>();
-            resourceFixture.Options.BaseAddress.Should().Be(uri3);
+            resourceFixture.Options.BaseUri.Should().Be(uri3);
         }
     }
 }

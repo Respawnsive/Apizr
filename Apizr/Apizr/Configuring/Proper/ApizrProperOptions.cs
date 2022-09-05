@@ -21,12 +21,12 @@ namespace Apizr.Configuring.Proper
             params LogLevel[] logLevels) : base(sharedOptions, webApiType, assemblyPolicyRegistryKeys,
             webApiPolicyRegistryKeys)
         {
-            BaseUriFactory = sharedOptions.BaseUriFactory;
-            BaseAddressFactory = () => baseAddress ?? sharedOptions.BaseAddressFactory?.Invoke();
-            BasePathFactory = () => basePath ?? sharedOptions.BasePathFactory?.Invoke();
-            HttpTracerModeFactory = () => httpTracerMode ?? sharedOptions.HttpTracerModeFactory.Invoke();
-            TrafficVerbosityFactory = () => trafficVerbosity ?? sharedOptions.TrafficVerbosityFactory.Invoke();
-            LogLevelsFactory = () => logLevels?.Any() == true ? logLevels : sharedOptions.LogLevelsFactory.Invoke();
+            BaseUriFactory = !string.IsNullOrWhiteSpace(baseAddress) ? null : sharedOptions.BaseUriFactory;
+            BaseAddressFactory = !string.IsNullOrWhiteSpace(baseAddress) ? () => baseAddress : sharedOptions.BaseAddressFactory;
+            BasePathFactory = !string.IsNullOrWhiteSpace(basePath) ? () => basePath : sharedOptions.BasePathFactory;
+            HttpTracerModeFactory = httpTracerMode.HasValue ? () => httpTracerMode.Value : sharedOptions.HttpTracerModeFactory;
+            TrafficVerbosityFactory = trafficVerbosity.HasValue ? () => trafficVerbosity.Value : sharedOptions.TrafficVerbosityFactory;
+            LogLevelsFactory = logLevels?.Any() == true ? () => logLevels : sharedOptions.LogLevelsFactory;
             LoggerFactory = (loggerFactory, webApiFriendlyName) => Logger = loggerFactory.CreateLogger(webApiFriendlyName);
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
             DelegatingHandlersFactories = sharedOptions.DelegatingHandlersFactories;

@@ -27,12 +27,12 @@ namespace Apizr.Extending.Configuring.Proper
             webApiPolicyRegistryKeys)
         {
             ApizrManagerType = apizrManagerType;
-            BaseUriFactory = sharedOptions.BaseUriFactory;
-            BaseAddressFactory = serviceProvider => baseAddress ?? sharedOptions.BaseAddressFactory.Invoke(serviceProvider);
-            BasePathFactory = serviceProvider => basePath ?? sharedOptions.BasePathFactory.Invoke(serviceProvider);
-            HttpTracerModeFactory = serviceProvider => httpTracerMode ?? sharedOptions.HttpTracerModeFactory.Invoke(serviceProvider);
-            TrafficVerbosityFactory = serviceProvider => trafficVerbosity ?? sharedOptions.TrafficVerbosityFactory.Invoke(serviceProvider);
-            LogLevelsFactory = serviceProvider => logLevels?.Any() == true ? logLevels : sharedOptions.LogLevelsFactory.Invoke(serviceProvider);
+            BaseUriFactory = !string.IsNullOrWhiteSpace(baseAddress) ? null : sharedOptions.BaseUriFactory;
+            BaseAddressFactory = !string.IsNullOrWhiteSpace(baseAddress) ? _ => baseAddress : sharedOptions.BaseAddressFactory;
+            BasePathFactory = !string.IsNullOrWhiteSpace(basePath) ? _ => basePath : sharedOptions.BasePathFactory;
+            HttpTracerModeFactory = httpTracerMode.HasValue ? _ => httpTracerMode.Value : sharedOptions.HttpTracerModeFactory;
+            TrafficVerbosityFactory = trafficVerbosity.HasValue ? _ => trafficVerbosity.Value : sharedOptions.TrafficVerbosityFactory;
+            LogLevelsFactory = logLevels?.Any() == true ? _ => logLevels : sharedOptions.LogLevelsFactory;
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
             LoggerFactory = (serviceProvider, webApiFriendlyName) => serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName);
             DelegatingHandlersExtendedFactories = sharedOptions.DelegatingHandlersExtendedFactories;

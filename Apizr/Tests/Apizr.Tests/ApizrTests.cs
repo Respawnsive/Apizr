@@ -76,8 +76,8 @@ namespace Apizr.Tests
             var basePath = "users";
             var baseUri = $"{baseAddress}/{basePath}";
 
-            // By attribute
-            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserPathService>(options => options.WithBaseAddress(baseAddress));
+            // By proper option
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserPathService>(options => options.WithBaseAddress(baseAddress).WithBasePath(basePath));
             reqResManager.Options.BaseUri.Should().Be(baseUri);
         }
 

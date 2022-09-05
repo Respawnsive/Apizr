@@ -377,6 +377,13 @@ namespace Apizr
                 if (Uri.TryCreate(UrlHelper.Combine(builder.ApizrOptions.BaseAddress, builder.ApizrOptions.BasePath), UriKind.RelativeOrAbsolute, out var baseUri))
                     builder.WithBaseUri(baseUri);
             }
+            else if (builder.ApizrOptions.BasePathFactory != null)
+            {
+                builder.ApizrOptions.BaseUriFactory?.Invoke();
+                builder.ApizrOptions.BasePathFactory?.Invoke();
+                if (Uri.TryCreate(UrlHelper.Combine(builder.ApizrOptions.BaseUri.ToString(), builder.ApizrOptions.BasePath), UriKind.RelativeOrAbsolute, out var baseUri))
+                    builder.WithBaseUri(baseUri);
+            }
 
             builder.ApizrOptions.BaseUriFactory?.Invoke();
             builder.ApizrOptions.LogLevelsFactory.Invoke();

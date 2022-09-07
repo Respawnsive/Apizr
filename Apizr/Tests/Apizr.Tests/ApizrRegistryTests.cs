@@ -94,7 +94,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public void Calling_WithBaseAddress_Should_Set_BaseAddress()
+        public void Calling_WithBaseAddress_Should_Set_BaseUri()
         {
             var attributeUri = "https://reqres.in/api";
             var uri1 = new Uri("http://uri1.com");
@@ -129,6 +129,58 @@ namespace Apizr.Tests
 
             reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
             reqResManager.Options.BaseUri.Should().Be(uri2);
+        }
+
+        [Fact]
+        public void Calling_WithBaseAddress_And_WithBasePath_Grouped_Should_Set_BaseUri()
+        {
+            var attributeUri = "https://reqres.in/api";
+            var uri1 = new Uri("http://uri1.com");
+            var uri2 = new Uri("http://uri2.com");
+            var uri3 = new Uri("http://uri3.com");
+            var uri4 = new Uri("http://uri4.com");
+            var path = "users";
+            var fullUri3 = $"{uri3}{path}";
+            var fullUri4 = $"{uri4}{path}";
+
+            // By common option overriding attribute
+            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                    .AddRegistryGroup(group => group
+                            .AddManagerFor<IReqResUserService>()
+                            .AddManagerFor<IReqResUserPathService>(config => config.WithBasePath(path)) // completing with base path
+                            .AddManagerFor<IReqResResourceService>(),
+                        config => config.WithBaseUri(uri3))
+                    .AddManagerFor<IHttpBinService>(options => options.WithBaseUri(uri2)),
+                config => config.WithBaseUri(uri1));
+
+            var userFixture = apizrRegistry.GetManagerFor<IReqResUserService>();
+            userFixture.Options.BaseUri.Should().Be(attributeUri);
+
+            var userPathFixture = apizrRegistry.GetManagerFor<IReqResUserPathService>();
+            userPathFixture.Options.BaseUri.Should().Be(fullUri3);
+
+            var resourceFixture = apizrRegistry.GetManagerFor<IReqResResourceService>();
+            resourceFixture.Options.BaseUri.Should().Be(uri3);
+
+            // By proper option overriding all common options and attribute
+            apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                    .AddRegistryGroup(group => group
+                            .AddManagerFor<IReqResUserService>(config => config.WithBaseUri(uri4)) // changing base uri
+                            .AddManagerFor<IReqResUserPathService>(config => config.WithBaseUri(uri4).WithBasePath(path)) // changing base uri completing with base path
+                            .AddManagerFor<IReqResResourceService>(),
+                        config => config.WithBaseUri(uri3))
+                    .AddManagerFor<IHttpBinService>(options => options.WithBaseUri(uri2)),
+                config => config.WithBaseUri(uri1));
+
+
+            userFixture = apizrRegistry.GetManagerFor<IReqResUserService>();
+            userFixture.Options.BaseUri.Should().Be(uri4);
+
+            userPathFixture = apizrRegistry.GetManagerFor<IReqResUserPathService>();
+            userPathFixture.Options.BaseUri.Should().Be(fullUri4);
+
+            resourceFixture = apizrRegistry.GetManagerFor<IReqResResourceService>();
+            resourceFixture.Options.BaseUri.Should().Be(uri3);
         }
 
         [Fact]
@@ -428,58 +480,6 @@ namespace Apizr.Tests
             });
 
             count.Should().Be(apizrRegistry.Count);
-        }
-
-        [Fact]
-        public void Calling_WithBaseAddress_And_WithBasePath_Grouped_Should_Set_BaseAddress()
-        {
-            var attributeUri = "https://reqres.in/api";
-            var uri1 = new Uri("http://uri1.com");
-            var uri2 = new Uri("http://uri2.com");
-            var uri3 = new Uri("http://uri3.com");
-            var uri4 = new Uri("http://uri4.com");
-            var path = "users";
-            var fullUri3 = $"{uri3}{path}";
-            var fullUri4 = $"{uri4}{path}";
-
-            // By common option overriding attribute
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
-                    .AddRegistryGroup(group => group
-                            .AddManagerFor<IReqResUserService>()
-                            .AddManagerFor<IReqResUserPathService>(config => config.WithBasePath(path)) // completing with base path
-                            .AddManagerFor<IReqResResourceService>(),
-                        config => config.WithBaseUri(uri3))
-                    .AddManagerFor<IHttpBinService>(options => options.WithBaseUri(uri2)),
-                config => config.WithBaseUri(uri1));
-
-            var userFixture = apizrRegistry.GetManagerFor<IReqResUserService>();
-            userFixture.Options.BaseUri.Should().Be(attributeUri);
-
-            var userPathFixture = apizrRegistry.GetManagerFor<IReqResUserPathService>();
-            userPathFixture.Options.BaseUri.Should().Be(fullUri3);
-
-            var resourceFixture = apizrRegistry.GetManagerFor<IReqResResourceService>();
-            resourceFixture.Options.BaseUri.Should().Be(uri3);
-
-            // By proper option overriding all common options and attribute
-            apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
-                    .AddRegistryGroup(group => group
-                            .AddManagerFor<IReqResUserService>(config => config.WithBaseUri(uri4)) // changing base uri
-                            .AddManagerFor<IReqResUserPathService>(config => config.WithBaseUri(uri4).WithBasePath(path)) // changing base uri completing with base path
-                            .AddManagerFor<IReqResResourceService>(),
-                        config => config.WithBaseUri(uri3))
-                    .AddManagerFor<IHttpBinService>(options => options.WithBaseUri(uri2)),
-                config => config.WithBaseUri(uri1));
-
-
-            userFixture = apizrRegistry.GetManagerFor<IReqResUserService>();
-            userFixture.Options.BaseUri.Should().Be(uri4);
-
-            userPathFixture = apizrRegistry.GetManagerFor<IReqResUserPathService>();
-            userPathFixture.Options.BaseUri.Should().Be(fullUri4);
-
-            resourceFixture = apizrRegistry.GetManagerFor<IReqResResourceService>();
-            resourceFixture.Options.BaseUri.Should().Be(uri3);
         }
     }
 }

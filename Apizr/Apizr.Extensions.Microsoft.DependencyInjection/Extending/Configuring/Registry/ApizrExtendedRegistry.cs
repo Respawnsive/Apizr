@@ -41,7 +41,7 @@ namespace Apizr.Extending.Configuring.Registry
             {
                 concurrentRegistryToExportTo.AddOrUpdate(webApi.Key, k => webApi.Value, (k, e) => webApi.Value);
             }
-            concurrentRegistryToImportFrom.Clear();
+            //concurrentRegistryToImportFrom.Clear();
         }
 
         internal IApizrExtendedRegistry GetInstance(IServiceProvider serviceProvider)

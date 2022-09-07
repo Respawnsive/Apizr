@@ -17,6 +17,7 @@ using Apizr.Requesting;
 using Apizr.Tests.Apis;
 using Apizr.Tests.Helpers;
 using Apizr.Tests.Models;
+using Castle.DynamicProxy.Internal;
 using FluentAssertions;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -132,6 +133,23 @@ namespace Apizr.Tests
             fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
 
             fixture.Options.BaseUri.Should().Be(uri1);
+        }
+
+        [Fact]
+        public void Calling_WithBaseAddress_And_WithBasePath_Should_Set_BaseUri()
+        {
+            var baseAddress = "https://reqres.in/api";
+            var basePath = "users";
+            var baseUri = $"{baseAddress}/{basePath}";
+
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddApizrManagerFor<IReqResUserService>(options => options.WithBaseAddress(baseAddress).WithBasePath(basePath));
+
+            var serviceProvider = services.BuildServiceProvider();
+            var fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
+
+            fixture.Options.BaseUri.Should().Be(baseUri);
         }
 
         [Fact]

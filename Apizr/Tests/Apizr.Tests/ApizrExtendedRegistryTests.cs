@@ -131,7 +131,7 @@ namespace Apizr.Tests
             
             registry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
             registry.TryGetManagerFor<IHttpBinService>(out var httpBinManager).Should().BeTrue();
-            registry.TryGetCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(out var userManager);
+            registry.TryGetCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(out var userManager).Should().BeTrue();
 
             reqResManager.Should().NotBeNull();
             httpBinManager.Should().NotBeNull();
@@ -139,7 +139,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public void Calling_WithBaseAddress_Should_Set_BaseAddress()
+        public void Calling_WithBaseAddress_Should_Set_BaseUri()
         {
             var attributeUri = "https://reqres.in/api";
             var uri1 = new Uri("http://uri1.com");
@@ -190,6 +190,74 @@ namespace Apizr.Tests
             fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
 
             fixture.Options.BaseUri.Should().Be(uri2);
+        }
+
+        [Fact]
+        public void Calling_WithBaseAddress_And_WithBasePath_Grouped_Should_Set_BaseUri()
+        {
+            var attributeUri = "https://reqres.in/api";
+            var uri1 = new Uri("http://uri1.com");
+            var uri2 = new Uri("http://uri2.com");
+            var uri3 = new Uri("http://uri3.com");
+            var uri4 = new Uri("http://uri4.com");
+            var userPath = "users";
+            var fullUri3 = $"{uri3}{userPath}";
+            var fullUri4 = $"{uri4}{userPath}";
+            var resPath = "resources";
+            var fullResUri = $"{attributeUri}/{resPath}";
+
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+
+            // By attribute option overriding common options
+            services.AddApizr(registry => registry
+                    .AddRegistryGroup(group => group
+                            .AddManagerFor<IReqResUserService>()
+                            .AddManagerFor<IReqResUserPathService>() // completing with base path by attribute
+                            .AddManagerFor<IReqResResourceService>(config => config.WithBasePath(userPath)), // completing with base path by proper option
+                        config => config.WithBaseUri(uri3))
+                    .AddManagerFor<IHttpBinService>(options => options.WithBaseUri(uri2)),
+                config => config.WithBaseUri(uri1));
+
+            var serviceProvider = services.BuildServiceProvider();
+            var apizrRegistry = serviceProvider.GetRequiredService<IApizrExtendedRegistry>();
+
+            var userFixture = apizrRegistry.GetManagerFor<IReqResUserService>();
+            userFixture.Options.BaseUri.Should().Be(attributeUri);
+
+            var userPathFixture = apizrRegistry.GetManagerFor<IReqResUserPathService>();
+            userPathFixture.Options.BaseUri.Should().Be(fullUri3);
+
+            var resourceFixture = apizrRegistry.GetManagerFor<IReqResResourceService>();
+            resourceFixture.Options.BaseUri.Should().Be(fullUri3);
+
+            // By proper option overriding all common options and attribute
+            services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddApizr(registry => registry
+                    .AddRegistryGroup(group => group
+                            .AddManagerFor<IReqResUserService>(config => config.WithBaseUri(uri4)) // changing base uri
+                            .AddManagerFor<IReqResUserPathService>(config => config.WithBaseUri(uri4).WithBasePath(userPath)) // changing base uri completing with base path
+                            .AddManagerFor<IReqResResourceService>()
+                            .AddManagerFor<IReqResResourceAddressService>(config => config.WithBasePath(resPath)), // completing attribute address with base path by proper options
+                        config => config.WithBaseUri(uri3))
+                    .AddManagerFor<IHttpBinService>(options => options.WithBaseUri(uri2)),
+                config => config.WithBaseUri(uri1));
+
+            serviceProvider = services.BuildServiceProvider();
+            apizrRegistry = serviceProvider.GetRequiredService<IApizrExtendedRegistry>();
+
+            userFixture = apizrRegistry.GetManagerFor<IReqResUserService>();
+            userFixture.Options.BaseUri.Should().Be(uri4);
+
+            userPathFixture = apizrRegistry.GetManagerFor<IReqResUserPathService>();
+            userPathFixture.Options.BaseUri.Should().Be(fullUri4);
+
+            resourceFixture = apizrRegistry.GetManagerFor<IReqResResourceService>();
+            resourceFixture.Options.BaseUri.Should().Be(uri3);
+
+            var resourceAddressFixture = apizrRegistry.GetManagerFor<IReqResResourceAddressService>();
+            resourceAddressFixture.Options.BaseUri.Should().Be(fullResUri);
         }
 
         [Fact]
@@ -581,14 +649,14 @@ namespace Apizr.Tests
             services.AddApizr(registry => registry
                 .AddRegistryGroup(group => group
                     .AddManagerFor<IReqResUserService>()
-                    .AddManagerFor<IReqResResourceService>())
+                    .AddManagerFor<IReqResResourceAddressService>())
                 .AddManagerFor<IHttpBinService>()
                 .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>());
 
             var serviceProvider = services.BuildServiceProvider();
             var registry = serviceProvider.GetService<IApizrExtendedRegistry>();
             var reqResUserManager = serviceProvider.GetService<IApizrManager<IReqResUserService>>();
-            var reqResResourceManager = serviceProvider.GetService<IApizrManager<IReqResResourceService>>();
+            var reqResResourceManager = serviceProvider.GetService<IApizrManager<IReqResResourceAddressService>>();
             var httpBinManager = serviceProvider.GetService<IApizrManager<IHttpBinService>>();
             var userManager = serviceProvider.GetService<IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>>>();
 
@@ -607,7 +675,7 @@ namespace Apizr.Tests
             services.AddApizr(registry => registry
                 .AddRegistryGroup(group => group
                     .AddManagerFor<IReqResUserService>()
-                    .AddManagerFor<IReqResResourceService>())
+                    .AddManagerFor<IReqResResourceAddressService>())
                 .AddManagerFor<IHttpBinService>()
                 .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>());
 
@@ -615,7 +683,7 @@ namespace Apizr.Tests
             var registry = serviceProvider.GetRequiredService<IApizrExtendedRegistry>();
 
             registry.TryGetManagerFor<IReqResUserService>(out var reqResUserManager).Should().BeTrue();
-            registry.TryGetManagerFor<IReqResResourceService>(out var reqResResourceManager).Should().BeTrue();
+            registry.TryGetManagerFor<IReqResResourceAddressService>(out var reqResResourceManager).Should().BeTrue();
             registry.TryGetManagerFor<IHttpBinService>(out var httpBinManager).Should().BeTrue();
             registry.TryGetCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(out var userManager);
 

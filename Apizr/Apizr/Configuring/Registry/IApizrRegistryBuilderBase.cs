@@ -23,7 +23,13 @@ namespace Apizr.Configuring.Registry
         /// </summary>
         TApizrRegistry ApizrRegistry { get; }
 
-        TApizrRegistryBuilder AddRegistryGroup(Action<TApizrRegistryBuilder> registryGroupBuilder,
+        /// <summary>
+        /// Group registrations sharing specific common options
+        /// </summary>
+        /// <param name="registryGroupBuilder">The registry group</param>
+        /// <param name="commonOptionsBuilder">The group common options</param>
+        /// <returns></returns>
+        TApizrRegistryBuilder AddGroup(Action<TApizrRegistryBuilder> registryGroupBuilder,
             Action<TApizrCommonOptionsBuilder> commonOptionsBuilder = null);
 
         #endregion

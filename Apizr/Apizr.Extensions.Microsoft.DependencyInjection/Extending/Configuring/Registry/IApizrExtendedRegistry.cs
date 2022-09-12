@@ -5,6 +5,5 @@ namespace Apizr.Extending.Configuring.Registry
 {
     public interface IApizrExtendedRegistry : IApizrEnumerableRegistry
     {
-        internal void Import(IApizrExtendedRegistry registry);
     }
 }

@@ -337,19 +337,19 @@ namespace Apizr
 
         internal static IApizrRegistry CreateRegistry(Action<IApizrRegistryBuilder> registryBuilder,
             IApizrCommonOptions baseCommonOptions,
-            Action<IApizrCommonOptionsBuilder> commonOptionsBuilder = null)
+            Action<IApizrCommonOptionsBuilder> commonOptionsBuilder = null, ApizrRegistry mainRegistry = null)
         {
             if (registryBuilder == null)
                 throw new ArgumentNullException(nameof(registryBuilder));
 
             var commonOptions = CreateCommonOptions(commonOptionsBuilder, baseCommonOptions);
 
-            var apizrRegistry = CreateRegistry(commonOptions, registryBuilder);
+            var apizrRegistry = CreateRegistry(commonOptions, registryBuilder, mainRegistry);
 
             return apizrRegistry;
         }
 
-        internal static IApizrRegistry CreateRegistry(IApizrCommonOptions commonOptions, Action<IApizrRegistryBuilder> registryBuilder)
+        internal static IApizrRegistry CreateRegistry(IApizrCommonOptions commonOptions, Action<IApizrRegistryBuilder> registryBuilder, ApizrRegistry mainRegistry = null)
         {
             if (commonOptions == null)
                 throw new ArgumentNullException(nameof(commonOptions));
@@ -357,7 +357,7 @@ namespace Apizr
             if (registryBuilder == null)
                 throw new ArgumentNullException(nameof(registryBuilder));
 
-            var builder = new ApizrRegistryBuilder(commonOptions);
+            var builder = new ApizrRegistryBuilder(commonOptions, mainRegistry);
 
             registryBuilder.Invoke(builder);
 

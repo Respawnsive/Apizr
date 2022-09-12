@@ -211,7 +211,7 @@ namespace Apizr.Tests
 
             // By attribute option overriding common options
             services.AddApizr(registry => registry
-                    .AddRegistryGroup(group => group
+                    .AddGroup(group => group
                             .AddManagerFor<IReqResUserService>()
                             .AddManagerFor<IReqResUserPathService>() // completing with base path by attribute
                             .AddManagerFor<IReqResResourceService>(config => config.WithBasePath(userPath)), // completing with base path by proper option
@@ -235,7 +235,7 @@ namespace Apizr.Tests
             services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
-                    .AddRegistryGroup(group => group
+                    .AddGroup(group => group
                             .AddManagerFor<IReqResUserService>(config => config.WithBaseUri(uri4)) // changing base uri
                             .AddManagerFor<IReqResUserPathService>(config => config.WithBaseUri(uri4).WithBasePath(userPath)) // changing base uri completing with base path
                             .AddManagerFor<IReqResResourceService>()
@@ -628,7 +628,7 @@ namespace Apizr.Tests
         {
             var services = new ServiceCollection();
             services.AddApizr(registry => registry
-                .AddRegistryGroup(group => group
+                .AddGroup(group => group
                     .AddManagerFor<IReqResUserService>()
                     .AddManagerFor<IReqResResourceService>())
                 .AddManagerFor<IHttpBinService>()
@@ -647,7 +647,7 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
-                .AddRegistryGroup(group => group
+                .AddGroup(group => group
                     .AddManagerFor<IReqResUserService>()
                     .AddManagerFor<IReqResResourceAddressService>())
                 .AddManagerFor<IHttpBinService>()
@@ -673,7 +673,7 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
-                .AddRegistryGroup(group => group
+                .AddGroup(group => group
                     .AddManagerFor<IReqResUserService>()
                     .AddManagerFor<IReqResResourceAddressService>())
                 .AddManagerFor<IHttpBinService>()
@@ -685,7 +685,7 @@ namespace Apizr.Tests
             registry.TryGetManagerFor<IReqResUserService>(out var reqResUserManager).Should().BeTrue();
             registry.TryGetManagerFor<IReqResResourceAddressService>(out var reqResResourceManager).Should().BeTrue();
             registry.TryGetManagerFor<IHttpBinService>(out var httpBinManager).Should().BeTrue();
-            registry.TryGetCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(out var userManager);
+            registry.TryGetCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(out var userManager).Should().BeTrue();
 
             reqResUserManager.Should().NotBeNull();
             reqResResourceManager.Should().NotBeNull();
@@ -706,7 +706,7 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
-                    .AddRegistryGroup(group => group
+                    .AddGroup(group => group
                         .AddManagerFor<IReqResUserService>()
                         .AddManagerFor<IReqResResourceService>(),
                         config => config.WithBaseUri(uri3))
@@ -725,7 +725,7 @@ namespace Apizr.Tests
             services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
-                    .AddRegistryGroup(group => group
+                    .AddGroup(group => group
                             .AddManagerFor<IReqResUserService>(config => config.WithBaseUri(uri4))
                             .AddManagerFor<IReqResResourceService>(),
                         config => config.WithBaseUri(uri3))

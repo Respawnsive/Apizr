@@ -145,7 +145,7 @@ namespace Apizr.Tests
 
             // By common option overriding attribute
             var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
-                    .AddRegistryGroup(group => group
+                    .AddGroup(group => group
                             .AddManagerFor<IReqResUserService>()
                             .AddManagerFor<IReqResUserPathService>(config => config.WithBasePath(path)) // completing with base path
                             .AddManagerFor<IReqResResourceService>(),
@@ -164,7 +164,7 @@ namespace Apizr.Tests
 
             // By proper option overriding all common options and attribute
             apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
-                    .AddRegistryGroup(group => group
+                    .AddGroup(group => group
                             .AddManagerFor<IReqResUserService>(config => config.WithBaseUri(uri4)) // changing base uri
                             .AddManagerFor<IReqResUserPathService>(config => config.WithBaseUri(uri4).WithBasePath(path)) // changing base uri completing with base path
                             .AddManagerFor<IReqResResourceService>(),
@@ -422,7 +422,7 @@ namespace Apizr.Tests
         public void Grouped_ApizrRegistry_Should_Contain_Managers()
         {
             var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
-                .AddRegistryGroup(group => group
+                .AddGroup(group => group
                     .AddManagerFor<IReqResUserService>()
                     .AddManagerFor<IReqResResourceService>())
                 .AddManagerFor<IHttpBinService>()
@@ -440,7 +440,7 @@ namespace Apizr.Tests
         public void Grouped_ApizrRegistry_Should_Get_Managers()
         {
             var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
-                .AddRegistryGroup(group => group
+                .AddGroup(group => group
                     .AddManagerFor<IReqResUserService>()
                     .AddManagerFor<IReqResResourceService>())
                 .AddManagerFor<IHttpBinService>()
@@ -462,7 +462,7 @@ namespace Apizr.Tests
         public void Grouped_ApizrRegistry_Should_Populate_Managers()
         {
             var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
-                .AddRegistryGroup(group => group
+                .AddGroup(group => group
                     .AddManagerFor<IReqResUserService>()
                     .AddManagerFor<IReqResResourceService>())
                 .AddManagerFor<IHttpBinService>()

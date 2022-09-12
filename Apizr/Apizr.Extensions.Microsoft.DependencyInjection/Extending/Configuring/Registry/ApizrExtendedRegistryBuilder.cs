@@ -12,28 +12,27 @@ namespace Apizr.Extending.Configuring.Registry
 {
     public class ApizrExtendedRegistryBuilder : IApizrExtendedRegistryBuilder
     {
-        protected readonly ApizrExtendedRegistry Registry = new ApizrExtendedRegistry();
+        protected readonly ApizrExtendedRegistry Registry;
         protected readonly IApizrExtendedCommonOptions CommonOptions;
         protected readonly IServiceCollection Services;
 
-        internal ApizrExtendedRegistryBuilder(IServiceCollection services, IApizrExtendedCommonOptions commonOptions)
+        internal ApizrExtendedRegistryBuilder(IServiceCollection services, IApizrExtendedCommonOptions commonOptions, ApizrExtendedRegistry mainRegistry = null)
         {
             Services = services;
             CommonOptions = commonOptions;
+            Registry = mainRegistry ?? new ApizrExtendedRegistry();
         }
 
         #region Registry
 
         public IApizrExtendedRegistry ApizrRegistry => Registry;
 
-        public IApizrExtendedRegistryBuilder AddRegistryGroup(Action<IApizrExtendedRegistryBuilder> registryGroupBuilder, Action<IApizrExtendedCommonOptionsBuilder> commonOptionsBuilder = null)
+        public IApizrExtendedRegistryBuilder AddGroup(Action<IApizrExtendedRegistryBuilder> registryGroupBuilder, Action<IApizrExtendedCommonOptionsBuilder> commonOptionsBuilder = null)
         {
-            var registryGroup = ServiceCollectionExtensions.CreateRegistry(Services, registryGroupBuilder, CommonOptions, commonOptionsBuilder);
-
-            ApizrRegistry.Import(registryGroup);
+            Services.CreateRegistry(registryGroupBuilder, CommonOptions, commonOptionsBuilder, Registry);
 
             return this;
-        } 
+        }
 
         #endregion
 

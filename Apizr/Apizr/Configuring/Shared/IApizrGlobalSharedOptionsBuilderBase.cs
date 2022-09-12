@@ -27,11 +27,11 @@ namespace Apizr.Configuring.Shared
         TApizrSharedOptionsBuilder WithBaseAddress(string baseAddress);
 
         /// <summary>
-        /// Define your web api base Uri (could be defined with WebApiAttribute)
+        /// Define your web api base address (could be defined with WebApiAttribute)
         /// </summary>
-        /// <param name="baseUri">Your web api base Uri</param>
+        /// <param name="baseAddress">Your web api base address</param>
         /// <returns></returns>
-        TApizrSharedOptionsBuilder WithBaseUri(Uri baseUri);
+        TApizrSharedOptionsBuilder WithBaseAddress(Uri baseAddress);
 
         /// <summary>
         /// Define your web api base path (could be defined with WebApiAttribute)

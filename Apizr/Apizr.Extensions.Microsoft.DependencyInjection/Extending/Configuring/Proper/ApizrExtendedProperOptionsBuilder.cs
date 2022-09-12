@@ -24,8 +24,8 @@ namespace Apizr.Extending.Configuring.Proper
         public IApizrExtendedProperOptionsBuilder WithBaseAddress(string baseAddress)
             => WithBaseAddress(_ => baseAddress);
 
-        public IApizrExtendedProperOptionsBuilder WithBaseUri(Uri baseAddress)
-            => WithBaseUri(_ => baseAddress);
+        public IApizrExtendedProperOptionsBuilder WithBaseAddress(Uri baseAddress)
+            => WithBaseAddress(_ => baseAddress);
 
         public IApizrExtendedProperOptionsBuilder WithBaseAddress(Func<IServiceProvider, string> baseAddressFactory)
         {
@@ -37,7 +37,7 @@ namespace Apizr.Extending.Configuring.Proper
             return this;
         }
 
-        public IApizrExtendedProperOptionsBuilder WithBaseUri(Func<IServiceProvider, Uri> baseAddressFactory)
+        public IApizrExtendedProperOptionsBuilder WithBaseAddress(Func<IServiceProvider, Uri> baseAddressFactory)
         {
             Options.BaseUriFactory = baseAddressFactory;
 

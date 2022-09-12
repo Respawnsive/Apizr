@@ -31,12 +31,12 @@ namespace Apizr.Configuring.Proper
             return this;
         }
 
-        public IApizrProperOptionsBuilder WithBaseUri(Uri baseUri)
-            => WithBaseUri(() => baseUri);
+        public IApizrProperOptionsBuilder WithBaseAddress(Uri baseAddress)
+            => WithBaseAddress(() => baseAddress);
 
-        public IApizrProperOptionsBuilder WithBaseUri(Func<Uri> baseUriFactory)
+        public IApizrProperOptionsBuilder WithBaseAddress(Func<Uri> baseAddressFactory)
         {
-            Options.BaseUriFactory = baseUriFactory;
+            Options.BaseUriFactory = baseAddressFactory;
 
             return this;
         }

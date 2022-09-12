@@ -375,14 +375,14 @@ namespace Apizr
                 builder.ApizrOptions.BaseAddressFactory?.Invoke();
                 builder.ApizrOptions.BasePathFactory?.Invoke();
                 if (Uri.TryCreate(UrlHelper.Combine(builder.ApizrOptions.BaseAddress, builder.ApizrOptions.BasePath), UriKind.RelativeOrAbsolute, out var baseUri))
-                    builder.WithBaseUri(baseUri);
+                    builder.WithBaseAddress(baseUri);
             }
             else if (builder.ApizrOptions.BasePathFactory != null)
             {
                 builder.ApizrOptions.BaseUriFactory?.Invoke();
                 builder.ApizrOptions.BasePathFactory?.Invoke();
                 if (Uri.TryCreate(UrlHelper.Combine(builder.ApizrOptions.BaseUri.ToString(), builder.ApizrOptions.BasePath), UriKind.RelativeOrAbsolute, out var baseUri))
-                    builder.WithBaseUri(baseUri);
+                    builder.WithBaseAddress(baseUri);
             }
 
             builder.ApizrOptions.BaseUriFactory?.Invoke();

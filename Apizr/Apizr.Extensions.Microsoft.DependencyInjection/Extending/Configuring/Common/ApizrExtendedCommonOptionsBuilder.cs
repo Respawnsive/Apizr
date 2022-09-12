@@ -35,12 +35,12 @@ namespace Apizr.Extending.Configuring.Common
             return this;
         }
 
-        public IApizrExtendedCommonOptionsBuilder WithBaseUri(Uri baseUri)
-            => WithBaseUri(_ => baseUri);
+        public IApizrExtendedCommonOptionsBuilder WithBaseAddress(Uri baseAddress)
+            => WithBaseAddress(_ => baseAddress);
 
-        public IApizrExtendedCommonOptionsBuilder WithBaseUri(Func<IServiceProvider, Uri> baseUriFactory)
+        public IApizrExtendedCommonOptionsBuilder WithBaseAddress(Func<IServiceProvider, Uri> baseAddressFactory)
         {
-            Options.BaseUriFactory = baseUriFactory;
+            Options.BaseUriFactory = baseAddressFactory;
 
             return this;
         }

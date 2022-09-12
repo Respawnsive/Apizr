@@ -65,7 +65,7 @@ namespace Apizr.Tests
 
             // By proper option overriding attribute
             reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>(options =>
-                options.WithBaseUri(uri1));
+                options.WithBaseAddress((Func<Uri>) uri1));
             reqResManager.Options.BaseUri.Should().Be(uri1);
         }
 

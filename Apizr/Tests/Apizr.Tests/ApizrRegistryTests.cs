@@ -109,14 +109,14 @@ namespace Apizr.Tests
             // By attribute overriding common option
             apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
-                config => config.WithBaseUri(uri2));
+                config => config.WithBaseAddress((Func<Uri>) uri2));
             reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
             reqResManager.Options.BaseUri.Should().Be(attributeUri);
 
             // By proper option overriding attribute
             apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(options =>
-                        options.WithBaseUri(uri2)));
+                        options.WithBaseAddress((Func<Uri>) uri2)));
 
             reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
             reqResManager.Options.BaseUri.Should().Be(uri2);
@@ -124,8 +124,8 @@ namespace Apizr.Tests
             // By proper option overriding common option and attribute
             apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
                 .AddManagerFor<IReqResUserService>(options => 
-                    options.WithBaseUri(uri2)),
-                config => config.WithBaseUri(uri1));
+                    options.WithBaseAddress((Func<Uri>) uri2)),
+                config => config.WithBaseAddress((Func<Uri>) uri1));
 
             reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
             reqResManager.Options.BaseUri.Should().Be(uri2);
@@ -149,9 +149,9 @@ namespace Apizr.Tests
                             .AddManagerFor<IReqResUserService>()
                             .AddManagerFor<IReqResUserPathService>(config => config.WithBasePath(path)) // completing with base path
                             .AddManagerFor<IReqResResourceService>(),
-                        config => config.WithBaseUri(uri3))
-                    .AddManagerFor<IHttpBinService>(options => options.WithBaseUri(uri2)),
-                config => config.WithBaseUri(uri1));
+                        config => config.WithBaseAddress((Func<Uri>) uri3))
+                    .AddManagerFor<IHttpBinService>(options => options.WithBaseAddress((Func<Uri>) uri2)),
+                config => config.WithBaseAddress((Func<Uri>) uri1));
 
             var userFixture = apizrRegistry.GetManagerFor<IReqResUserService>();
             userFixture.Options.BaseUri.Should().Be(attributeUri);
@@ -165,12 +165,12 @@ namespace Apizr.Tests
             // By proper option overriding all common options and attribute
             apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
                     .AddGroup(group => group
-                            .AddManagerFor<IReqResUserService>(config => config.WithBaseUri(uri4)) // changing base uri
-                            .AddManagerFor<IReqResUserPathService>(config => config.WithBaseUri(uri4).WithBasePath(path)) // changing base uri completing with base path
+                            .AddManagerFor<IReqResUserService>(config => config.WithBaseAddress((Func<Uri>) uri4)) // changing base uri
+                            .AddManagerFor<IReqResUserPathService>(config => config.WithBaseAddress((Func<Uri>) uri4).WithBasePath(path)) // changing base uri completing with base path
                             .AddManagerFor<IReqResResourceService>(),
-                        config => config.WithBaseUri(uri3))
-                    .AddManagerFor<IHttpBinService>(options => options.WithBaseUri(uri2)),
-                config => config.WithBaseUri(uri1));
+                        config => config.WithBaseAddress((Func<Uri>) uri3))
+                    .AddManagerFor<IHttpBinService>(options => options.WithBaseAddress((Func<Uri>) uri2)),
+                config => config.WithBaseAddress((Func<Uri>) uri1));
 
 
             userFixture = apizrRegistry.GetManagerFor<IReqResUserService>();

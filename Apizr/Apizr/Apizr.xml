@@ -583,7 +583,7 @@
             <typeparam name="TWebApi">The managed api type</typeparam>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilder`3.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptionsBase,``4},System.Action{`2})">
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptionsBase,``4},System.Action{`2})">
             <summary>
             Create a <typeparamref name="TApizrManager"/> instance for a managed crud api for <typeparamref name="T"/> object (class), 
             with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
@@ -599,7 +599,7 @@
             <param name="properOptionsBuilder">The builder defining some api proper options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilder`3.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptions{``0},``1},System.Action{`2})">
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptions{``0},``1},System.Action{`2})">
             <summary>
             Create a <typeparamref name="TApizrManager"/> instance for a managed <typeparamref name="TWebApi"/>
             </summary>
@@ -609,12 +609,20 @@
             <param name="properOptionsBuilder">The builder defining some api proper options</param>
             <returns></returns>
         </member>
-        <member name="P:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.ApizrRegistry">
+        <member name="P:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`4.ApizrRegistry">
             <summary>
             Apizr registry
             </summary>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.AddCrudManagerFor``1(System.Action{`2})">
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`4.AddGroup(System.Action{`1},System.Action{`3})">
+            <summary>
+            Group registrations sharing specific common options
+            </summary>
+            <param name="registryGroupBuilder">The registry group</param>
+            <param name="commonOptionsBuilder">The group common options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`4.AddCrudManagerFor``1(System.Action{`2})">
             <summary>
             Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
             with key of type <see cref="T:System.Int32"/> and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
@@ -624,7 +632,7 @@
             <param name="optionsBuilder">The builder defining some api proper options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.AddCrudManagerFor``2(System.Action{`2})">
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`4.AddCrudManagerFor``2(System.Action{`2})">
             <summary>
             Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
             with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
@@ -635,7 +643,7 @@
             <param name="optionsBuilder">The builder defining some api proper options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.AddCrudManagerFor``3(System.Action{`2})">
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`4.AddCrudManagerFor``3(System.Action{`2})">
             <summary>
             Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
             with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
@@ -648,7 +656,7 @@
             <param name="optionsBuilder">The builder defining some api proper options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.AddCrudManagerFor``4(System.Action{`2})">
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`4.AddCrudManagerFor``4(System.Action{`2})">
             <summary>
             Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
             with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
@@ -662,7 +670,7 @@
             <param name="optionsBuilder">The builder defining some api proper options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`3.AddManagerFor``1(System.Action{`2})">
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`4.AddManagerFor``1(System.Action{`2})">
             <summary>
             Create a <see cref="T:Apizr.ApizrManager`1"/> instance
             </summary>
@@ -687,6 +695,13 @@
             Define your web api base address (could be defined with WebApiAttribute)
             </summary>
             <param name="baseAddress">Your web api base address</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBasePath(System.String)">
+            <summary>
+            Define your web api base path (could be defined with WebApiAttribute)
+            </summary>
+            <param name="basePath">Your web api base path</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHttpClientHandler(System.Net.Http.HttpClientHandler)">
@@ -719,9 +734,19 @@
             <param name="logLevels">Log levels to apply while writing (default: Information)</param>
             <returns></returns>
         </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrSharedOptions.BaseUriFactory">
+            <summary>
+            Base uri factory
+            </summary>
+        </member>
         <member name="P:Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory">
             <summary>
             Base address factory
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrSharedOptions.BasePathFactory">
+            <summary>
+            Base path factory
             </summary>
         </member>
         <member name="P:Apizr.Configuring.Shared.IApizrSharedOptions.HttpTracerModeFactory">
@@ -749,9 +774,19 @@
             Delegating handlers factories
             </summary>
         </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseUri">
+            <summary>
+            Base address
+            </summary>
+        </member>
         <member name="P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress">
             <summary>
             Base address
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BasePath">
+            <summary>
+            Base path
             </summary>
         </member>
         <member name="P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode">
@@ -781,6 +816,13 @@
             Define your web api base address (could be defined with WebApiAttribute)
             </summary>
             <param name="baseAddressFactory">Your web api base address factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithBasePath(System.Func{System.String})">
+            <summary>
+            Define your web api base path (could be defined with WebApiAttribute)
+            </summary>
+            <param name="basePathFactory">Your web api base path factory</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithHttpClientHandler(System.Func{System.Net.Http.HttpClientHandler})">
@@ -876,6 +918,22 @@
             Map Apizr connectivity check to your connectivity handler
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Apizr.Helping.UrlHelper.Combine(System.String,System.String)">
+            <summary>
+            Combines the url base and the relative url into one, consolidating the '/' between them
+            </summary>
+            <param name="baseUrl">Base url that will be combined</param>
+            <param name="relativePath">The relative path to combine</param>
+            <returns>The merged url</returns>
+        </member>
+        <member name="M:Apizr.Helping.UrlHelper.Combine(System.String,System.String[])">
+            <summary>
+            Combines the url base and the array of relatives urls into one, consolidating the '/' between them
+            </summary>
+            <param name="baseUrl">Base url that will be combined</param>
+            <param name="relativePaths">The array of relative paths to combine</param>
+            <returns>The merged url</returns>
         </member>
         <member name="T:Apizr.IApizrManager`1">
             <summary>
@@ -1663,31 +1721,31 @@
         </member>
         <member name="M:Apizr.WebApiAttribute.#ctor">
             <summary>
-            Define web api with priority management and auto registration enabled, but without base Uri (should be defined with options builder)
+            Define a web api without any base absolute address or relative path (has to be defined fluently) but discoverable for auto registration
             </summary>
         </member>
         <member name="M:Apizr.WebApiAttribute.#ctor(System.String)">
             <summary>
-            Define web api with a base Uri and with priority management and auto registration enabled
+            Define a web api with a base absolute address or relative path (if path, base address has to be defined fluently) and discoverable for auto registration
             </summary>
-            <param name="baseUri">The web api base Uri</param>
+            <param name="baseAddressOrPath">The web api base absolute address or relative path</param>
         </member>
         <member name="M:Apizr.WebApiAttribute.#ctor(System.Boolean)">
             <summary>
-            Define web api enabling or not priority management and auto registration, but without base Uri (should be defined with options builder)
+            Define a web api without any base absolute address or relative path (has to be defined fluently) and make it discoverable for auto registration or not
             </summary>
             <param name="isAutoRegistrable">Makes decorated interface registrable by assembly scanning</param>
         </member>
         <member name="M:Apizr.WebApiAttribute.#ctor(System.String,System.Boolean)">
             <summary>
-            Define web api with a base Uri, enabling or not priority management and auto registration
+            Define a web api with a base absolute address or relative path (if path, base address has to be defined fluently) and make it discoverable for auto registration or not
             </summary>
-            <param name="baseUri">The web api base Uri</param>
+            <param name="baseAddressOrPath">The web api base absolute address or relative path</param>
             <param name="isAutoRegistrable">Makes decorated interface registrable by assembly scanning</param>
         </member>
-        <member name="P:Apizr.WebApiAttribute.BaseUri">
+        <member name="P:Apizr.WebApiAttribute.BaseAddressOrPath">
             <summary>
-            The web api base Uri
+            The web api base absolute address or relative path
             </summary>
         </member>
         <member name="P:Apizr.WebApiAttribute.IsAutoRegistrable">

@@ -6,6 +6,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Apizr.Configuring.Shared
 {
+    /// <summary>
+    /// Options available at both common and proper level for static registrations
+    /// </summary>
     public interface IApizrSharedOptions : IApizrSharedOptionsBase
     {
         /// <summary>

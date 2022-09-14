@@ -8,8 +8,21 @@ using Microsoft.Extensions.Logging;
 
 namespace Apizr.Configuring.Proper
 {
+    /// <inheritdoc cref="IApizrProperOptions"/>
     public class ApizrProperOptions : ApizrProperOptionsBase, IApizrProperOptions
     {
+        /// <summary>
+        /// The common options constructor
+        /// </summary>
+        /// <param name="sharedOptions">The shared options</param>
+        /// <param name="webApiType">The web api type</param>
+        /// <param name="assemblyPolicyRegistryKeys">Global policies</param>
+        /// <param name="webApiPolicyRegistryKeys">Specific policies</param>
+        /// <param name="baseAddress">The web api base address</param>
+        /// <param name="basePath">The web api base path</param>
+        /// <param name="httpTracerMode">The http tracer mode</param>
+        /// <param name="trafficVerbosity">The traffic verbosity</param>
+        /// <param name="logLevels">The log levels</param>
         public ApizrProperOptions(IApizrSharedOptions sharedOptions,
             Type webApiType,
             string[] assemblyPolicyRegistryKeys,
@@ -33,6 +46,7 @@ namespace Apizr.Configuring.Proper
         }
 
         private Func<Uri> _baseUriFactory;
+        /// <inheritdoc />
         public Func<Uri> BaseUriFactory
         {
             get => _baseUriFactory;
@@ -40,6 +54,7 @@ namespace Apizr.Configuring.Proper
         }
 
         private Func<string> _baseAddressFactory;
+        /// <inheritdoc />
         public Func<string> BaseAddressFactory
         {
             get => _baseAddressFactory;
@@ -47,6 +62,7 @@ namespace Apizr.Configuring.Proper
         }
 
         private Func<string> _basePathFactory;
+        /// <inheritdoc />
         public Func<string> BasePathFactory
         {
             get => _basePathFactory;
@@ -54,6 +70,7 @@ namespace Apizr.Configuring.Proper
         }
 
         private Func<HttpTracerMode> _httpTracerModeFactory;
+        /// <inheritdoc />
         public Func<HttpTracerMode> HttpTracerModeFactory
         {
             get => _httpTracerModeFactory;
@@ -61,6 +78,7 @@ namespace Apizr.Configuring.Proper
         }
 
         private Func<HttpMessageParts> _trafficVerbosityFactory;
+        /// <inheritdoc />
         public Func<HttpMessageParts> TrafficVerbosityFactory
         {
             get => _trafficVerbosityFactory;
@@ -68,16 +86,20 @@ namespace Apizr.Configuring.Proper
         }
 
         private Func<LogLevel[]> _logLevelsFactory;
+        /// <inheritdoc />
         public Func<LogLevel[]> LogLevelsFactory
         {
             get => _logLevelsFactory;
             set => _logLevelsFactory = () => LogLevels = value.Invoke();
         }
-        
+
+        /// <inheritdoc />
         public Func<ILoggerFactory, string, ILogger> LoggerFactory { get; }
 
+        /// <inheritdoc />
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
 
+        /// <inheritdoc />
         public IList<Func<ILogger, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
     }
 }

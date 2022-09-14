@@ -31,10 +31,12 @@ items:
   source:
     id: ApizrOptions
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptions.cs
-    startLine: 15
+    startLine: 16
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nOptions available for static registrations\n"
+  example: []
   syntax:
     content: 'public class ApizrOptions : ApizrOptionsBase, IApizrOptions, IApizrOptionsBase, IApizrCommonOptions, IApizrCommonOptionsBase, IApizrProperOptions, IApizrProperOptionsBase, IApizrSharedOptions, IApizrSharedOptionsBase'
     content.vb: >-
@@ -72,8 +74,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
   modifiers.csharp:
   - public
   - class
@@ -94,17 +94,21 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptions.cs
-    startLine: 17
+    startLine: 23
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nThe options constructor\n"
+  example: []
   syntax:
     content: public ApizrOptions(IApizrCommonOptions commonOptions, IApizrProperOptions properOptions)
     parameters:
     - id: commonOptions
       type: Apizr.Configuring.Common.IApizrCommonOptions
+      description: The common options
     - id: properOptions
       type: Apizr.Configuring.Proper.IApizrProperOptions
+      description: The proper options
     content.vb: Public Sub New(commonOptions As IApizrCommonOptions, properOptions As IApizrProperOptions)
   overload: Apizr.Configuring.ApizrOptions.#ctor*
   modifiers.csharp:
@@ -125,10 +129,12 @@ items:
   source:
     id: BaseUriFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptions.cs
-    startLine: 37
+    startLine: 44
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nBase uri factory\n"
+  example: []
   syntax:
     content: public Func<Uri> BaseUriFactory { get; set; }
     parameters: []
@@ -158,10 +164,12 @@ items:
   source:
     id: BaseAddressFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptions.cs
-    startLine: 44
+    startLine: 52
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nBase address factory\n"
+  example: []
   syntax:
     content: public Func<string> BaseAddressFactory { get; set; }
     parameters: []
@@ -191,10 +199,12 @@ items:
   source:
     id: BasePathFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptions.cs
-    startLine: 51
+    startLine: 60
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nBase path factory\n"
+  example: []
   syntax:
     content: public Func<string> BasePathFactory { get; set; }
     parameters: []
@@ -224,10 +234,12 @@ items:
   source:
     id: HttpTracerModeFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptions.cs
-    startLine: 58
+    startLine: 68
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nHttp traffic tracing mode factory\n"
+  example: []
   syntax:
     content: public Func<HttpTracerMode> HttpTracerModeFactory { get; set; }
     parameters: []
@@ -257,10 +269,12 @@ items:
   source:
     id: TrafficVerbosityFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptions.cs
-    startLine: 65
+    startLine: 76
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nHttp traffic tracing verbosity factory\n"
+  example: []
   syntax:
     content: public Func<HttpMessageParts> TrafficVerbosityFactory { get; set; }
     parameters: []
@@ -290,10 +304,12 @@ items:
   source:
     id: LogLevelsFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptions.cs
-    startLine: 72
+    startLine: 84
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nLog levels factory\n"
+  example: []
   syntax:
     content: public Func<LogLevel[]> LogLevelsFactory { get; set; }
     parameters: []
@@ -323,10 +339,12 @@ items:
   source:
     id: LoggerFactoryFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptions.cs
-    startLine: 78
+    startLine: 91
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nThe LoggerFactory factory (I know, I know...)\n"
+  example: []
   syntax:
     content: public Func<ILoggerFactory> LoggerFactoryFactory { get; set; }
     parameters: []
@@ -356,10 +374,12 @@ items:
   source:
     id: LoggerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptions.cs
-    startLine: 80
+    startLine: 94
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nThe Logger factory\n"
+  example: []
   syntax:
     content: public Func<ILoggerFactory, string, ILogger> LoggerFactory { get; }
     parameters: []
@@ -389,10 +409,12 @@ items:
   source:
     id: HttpClientHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptions.cs
-    startLine: 82
+    startLine: 97
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nHttpClientHandler factory\n"
+  example: []
   syntax:
     content: public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
     parameters: []
@@ -422,10 +444,12 @@ items:
   source:
     id: PolicyRegistryFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptions.cs
-    startLine: 84
+    startLine: 100
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nPolicy registry factory\n"
+  example: []
   syntax:
     content: public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set; }
     parameters: []
@@ -455,10 +479,12 @@ items:
   source:
     id: RefitSettingsFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptions.cs
-    startLine: 87
+    startLine: 104
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nRefit settings factory\n"
+  example: []
   syntax:
     content: public Func<RefitSettings> RefitSettingsFactory { get; set; }
     parameters: []
@@ -488,10 +514,12 @@ items:
   source:
     id: ConnectivityHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptions.cs
-    startLine: 93
+    startLine: 111
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nConnectivity handler factory\n"
+  example: []
   syntax:
     content: public Func<IConnectivityHandler> ConnectivityHandlerFactory { get; set; }
     parameters: []
@@ -521,10 +549,12 @@ items:
   source:
     id: CacheHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptions.cs
-    startLine: 94
+    startLine: 114
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nCache handler factory\n"
+  example: []
   syntax:
     content: public Func<ICacheHandler> CacheHandlerFactory { get; set; }
     parameters: []
@@ -554,10 +584,12 @@ items:
   source:
     id: MappingHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptions.cs
-    startLine: 95
+    startLine: 117
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nMapping handler factory\n"
+  example: []
   syntax:
     content: public Func<IMappingHandler> MappingHandlerFactory { get; set; }
     parameters: []
@@ -587,10 +619,12 @@ items:
   source:
     id: DelegatingHandlersFactories
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptions.cs
-    startLine: 96
+    startLine: 120
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nDelegating handlers factories\n"
+  example: []
   syntax:
     content: public IList<Func<ILogger, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
     parameters: []
@@ -607,6 +641,12 @@ items:
   - Public
   - ReadOnly
 references:
+- uid: Apizr.Configuring.IApizrOptions
+  commentId: T:Apizr.Configuring.IApizrOptions
+  parent: Apizr.Configuring
+  name: IApizrOptions
+  nameWithType: IApizrOptions
+  fullName: Apizr.Configuring.IApizrOptions
 - uid: Apizr.Configuring
   commentId: N:Apizr.Configuring
   name: Apizr.Configuring
@@ -631,12 +671,6 @@ references:
   name: ApizrOptionsBase
   nameWithType: ApizrOptionsBase
   fullName: Apizr.Configuring.ApizrOptionsBase
-- uid: Apizr.Configuring.IApizrOptions
-  commentId: T:Apizr.Configuring.IApizrOptions
-  parent: Apizr.Configuring
-  name: IApizrOptions
-  nameWithType: IApizrOptions
-  fullName: Apizr.Configuring.IApizrOptions
 - uid: Apizr.Configuring.IApizrOptionsBase
   commentId: T:Apizr.Configuring.IApizrOptionsBase
   parent: Apizr.Configuring
@@ -1018,61 +1052,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  parent: Apizr.Extending.ObjectExtensions
-  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  name: ToString(String, String)
-  nameWithType: ObjectExtensions.ToString(String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
@@ -1094,87 +1073,6 @@ references:
   name: Apizr.Configuring.Proper
   nameWithType: Apizr.Configuring.Proper
   fullName: Apizr.Configuring.Proper
-- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  isExternal: true
-  name: ToString(Object, String, String)
-  nameWithType: ObjectExtensions.ToString(Object, String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.ObjectExtensions
-  commentId: T:Apizr.Extending.ObjectExtensions
-  parent: Apizr.Extending
-  name: ObjectExtensions
-  nameWithType: ObjectExtensions
-  fullName: Apizr.Extending.ObjectExtensions
-- uid: Apizr.Extending
-  commentId: N:Apizr.Extending
-  name: Apizr.Extending
-  nameWithType: Apizr.Extending
-  fullName: Apizr.Extending
 - uid: Apizr.Configuring.ApizrOptions.#ctor*
   commentId: Overload:Apizr.Configuring.ApizrOptions.#ctor
   name: ApizrOptions

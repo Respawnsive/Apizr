@@ -11,8 +11,12 @@ using Refit;
 
 namespace Apizr.Configuring.Common
 {
+    /// <inheritdoc cref="IApizrCommonOptions"/>
     public class ApizrCommonOptions : ApizrCommonOptionsBase, IApizrCommonOptions
     {
+        /// <summary>
+        /// The Apizr common options constructor
+        /// </summary>
         public ApizrCommonOptions()
         {
             HttpTracerModeFactory = () => HttpTracerMode.Everything;
@@ -29,6 +33,7 @@ namespace Apizr.Configuring.Common
         }
 
         private Func<Uri> _baseUriFactory;
+        /// <inheritdoc />
         public Func<Uri> BaseUriFactory
         {
             get => _baseUriFactory;
@@ -36,6 +41,7 @@ namespace Apizr.Configuring.Common
         }
 
         private Func<string> _baseAddressFactory;
+        /// <inheritdoc />
         public Func<string> BaseAddressFactory
         {
             get => _baseAddressFactory;
@@ -43,29 +49,45 @@ namespace Apizr.Configuring.Common
         }
 
         private Func<string> _basePathFactory;
+        /// <inheritdoc />
         public Func<string> BasePathFactory
         {
             get => _basePathFactory;
             set => _basePathFactory = value != null ? () => BasePath = value.Invoke() : null;
         }
 
+        /// <inheritdoc />
         public Func<ILoggerFactory> LoggerFactoryFactory { get; set; }
-        public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set; }
-        public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
 
+        /// <inheritdoc />
+        public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set; }
+
+        /// <inheritdoc />
+        public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
+        
         private Func<RefitSettings> _refitSettingsFactory;
+        /// <inheritdoc />
         public Func<RefitSettings> RefitSettingsFactory
         {
             get => _refitSettingsFactory;
             set => _refitSettingsFactory = () => RefitSettings = value.Invoke();
         }
 
+        /// <inheritdoc />
         public Func<IConnectivityHandler> ConnectivityHandlerFactory { get; set; }
+
+        /// <inheritdoc />
         public Func<ICacheHandler> CacheHandlerFactory { get; set; }
+
+        /// <inheritdoc />
         public Func<IMappingHandler> MappingHandlerFactory { get; set; }
+
+        /// <inheritdoc />
         public IList<Func<ILogger, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
 
+
         private Func<HttpTracerMode> _httpTracerModeFactory;
+        /// <inheritdoc />
         public Func<HttpTracerMode> HttpTracerModeFactory
         {
             get => _httpTracerModeFactory;
@@ -73,6 +95,7 @@ namespace Apizr.Configuring.Common
         }
 
         private Func<HttpMessageParts> _trafficVerbosityFactory;
+        /// <inheritdoc />
         public Func<HttpMessageParts> TrafficVerbosityFactory
         {
             get => _trafficVerbosityFactory;
@@ -80,6 +103,7 @@ namespace Apizr.Configuring.Common
         }
 
         private Func<LogLevel[]> _logLevelsFactory;
+        /// <inheritdoc />
         public Func<LogLevel[]> LogLevelsFactory
         {
             get => _logLevelsFactory;

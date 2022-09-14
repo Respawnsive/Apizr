@@ -83,7 +83,9 @@
   
   <h1 id="Apizr_Caching_Attributes_CacheReadAttribute" data-uid="Apizr.Caching.Attributes.CacheReadAttribute" class="text-break">Class CacheReadAttribute
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Tells Apizr to cache Read method
+You have to provide an <a class="xref" href="Apizr.Caching.ICacheHandler.html">ICacheHandler</a> mapping implementation to Apizr to use this feature</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
@@ -253,7 +255,8 @@ public class CacheReadAttribute : CacheAttributeBase</code></pre>
   
   <a id="Apizr_Caching_Attributes_CacheReadAttribute__ctor_" data-uid="Apizr.Caching.Attributes.CacheReadAttribute.#ctor*"></a>
   <h4 id="Apizr_Caching_Attributes_CacheReadAttribute__ctor_Apizr_Caching_CacheMode_" data-uid="Apizr.Caching.Attributes.CacheReadAttribute.#ctor(Apizr.Caching.CacheMode)">CacheReadAttribute(CacheMode)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Cache with no specific lifetime, no invalidation on error but a specific cache mode</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -272,7 +275,8 @@ public class CacheReadAttribute : CacheAttributeBase</code></pre>
       <tr>
         <td><a class="xref" href="Apizr.Caching.CacheMode.html">CacheMode</a></td>
         <td><span class="parametername">mode</span></td>
-        <td></td>
+        <td><p>GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -280,7 +284,8 @@ public class CacheReadAttribute : CacheAttributeBase</code></pre>
   
   <a id="Apizr_Caching_Attributes_CacheReadAttribute__ctor_" data-uid="Apizr.Caching.Attributes.CacheReadAttribute.#ctor*"></a>
   <h4 id="Apizr_Caching_Attributes_CacheReadAttribute__ctor_Apizr_Caching_CacheMode_System_Boolean_" data-uid="Apizr.Caching.Attributes.CacheReadAttribute.#ctor(Apizr.Caching.CacheMode,System.Boolean)">CacheReadAttribute(CacheMode, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Cache with a specific cache and invalidation on error, but no specific lifetime</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -299,12 +304,14 @@ public class CacheReadAttribute : CacheAttributeBase</code></pre>
       <tr>
         <td><a class="xref" href="Apizr.Caching.CacheMode.html">CacheMode</a></td>
         <td><span class="parametername">mode</span></td>
-        <td></td>
+        <td><p>GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">shouldInvalidateOnError</span></td>
-        <td></td>
+        <td><p>Should invalidate on error</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -312,7 +319,8 @@ public class CacheReadAttribute : CacheAttributeBase</code></pre>
   
   <a id="Apizr_Caching_Attributes_CacheReadAttribute__ctor_" data-uid="Apizr.Caching.Attributes.CacheReadAttribute.#ctor*"></a>
   <h4 id="Apizr_Caching_Attributes_CacheReadAttribute__ctor_Apizr_Caching_CacheMode_System_String_" data-uid="Apizr.Caching.Attributes.CacheReadAttribute.#ctor(Apizr.Caching.CacheMode,System.String)">CacheReadAttribute(CacheMode, String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Cache with a specific cache and mode specific lifetime, but no invalidation on error</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -331,12 +339,14 @@ public class CacheReadAttribute : CacheAttributeBase</code></pre>
       <tr>
         <td><a class="xref" href="Apizr.Caching.CacheMode.html">CacheMode</a></td>
         <td><span class="parametername">mode</span></td>
-        <td></td>
+        <td><p>GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">lifeSpanRepresentation</span></td>
-        <td></td>
+        <td><p>TimeSpan representation to parse</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -344,7 +354,8 @@ public class CacheReadAttribute : CacheAttributeBase</code></pre>
   
   <a id="Apizr_Caching_Attributes_CacheReadAttribute__ctor_" data-uid="Apizr.Caching.Attributes.CacheReadAttribute.#ctor*"></a>
   <h4 id="Apizr_Caching_Attributes_CacheReadAttribute__ctor_Apizr_Caching_CacheMode_System_String_System_Boolean_" data-uid="Apizr.Caching.Attributes.CacheReadAttribute.#ctor(Apizr.Caching.CacheMode,System.String,System.Boolean)">CacheReadAttribute(CacheMode, String, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Cache with a specific cache mode, a specific lifetime and invalidation on error</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -363,17 +374,20 @@ public class CacheReadAttribute : CacheAttributeBase</code></pre>
       <tr>
         <td><a class="xref" href="Apizr.Caching.CacheMode.html">CacheMode</a></td>
         <td><span class="parametername">mode</span></td>
-        <td></td>
+        <td><p>GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">lifeSpanRepresentation</span></td>
-        <td></td>
+        <td><p>This specific caching lifetime</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">shouldInvalidateOnError</span></td>
-        <td></td>
+        <td><p>Should invalidate on error</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -381,7 +395,8 @@ public class CacheReadAttribute : CacheAttributeBase</code></pre>
   
   <a id="Apizr_Caching_Attributes_CacheReadAttribute__ctor_" data-uid="Apizr.Caching.Attributes.CacheReadAttribute.#ctor*"></a>
   <h4 id="Apizr_Caching_Attributes_CacheReadAttribute__ctor_System_Boolean_" data-uid="Apizr.Caching.Attributes.CacheReadAttribute.#ctor(System.Boolean)">CacheReadAttribute(Boolean)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Cache with no specific lifetime, default GetAndFetch mode but with or without invalidation on error</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -400,7 +415,8 @@ public class CacheReadAttribute : CacheAttributeBase</code></pre>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">shouldInvalidateOnError</span></td>
-        <td></td>
+        <td><p>Should invalidate on error</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -408,7 +424,8 @@ public class CacheReadAttribute : CacheAttributeBase</code></pre>
   
   <a id="Apizr_Caching_Attributes_CacheReadAttribute__ctor_" data-uid="Apizr.Caching.Attributes.CacheReadAttribute.#ctor*"></a>
   <h4 id="Apizr_Caching_Attributes_CacheReadAttribute__ctor_System_String_" data-uid="Apizr.Caching.Attributes.CacheReadAttribute.#ctor(System.String)">CacheReadAttribute(String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Cache with default GetAndFetch mode, no invalidation on error but with a specific lifetime</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -427,7 +444,8 @@ public class CacheReadAttribute : CacheAttributeBase</code></pre>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">lifeSpanRepresentation</span></td>
-        <td></td>
+        <td><p>TimeSpan representation to parse</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -435,7 +453,8 @@ public class CacheReadAttribute : CacheAttributeBase</code></pre>
   
   <a id="Apizr_Caching_Attributes_CacheReadAttribute__ctor_" data-uid="Apizr.Caching.Attributes.CacheReadAttribute.#ctor*"></a>
   <h4 id="Apizr_Caching_Attributes_CacheReadAttribute__ctor_System_TimeSpan_System_Boolean_" data-uid="Apizr.Caching.Attributes.CacheReadAttribute.#ctor(System.TimeSpan,System.Boolean)">CacheReadAttribute(TimeSpan, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Cache with a specific lifetime and invalidation on error, but default GetAndFetch mode</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -454,19 +473,17 @@ public class CacheReadAttribute : CacheAttributeBase</code></pre>
       <tr>
         <td><span class="xref">System.TimeSpan</span></td>
         <td><span class="parametername">lifeSpan</span></td>
-        <td></td>
+        <td><p>This specific caching lifetime</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">shouldInvalidateOnError</span></td>
-        <td></td>
+        <td><p>Should invalidate on error</p>
+</td>
       </tr>
     </tbody>
   </table>
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="Apizr.Extending.ObjectExtensions.html#Apizr_Extending_ObjectExtensions_ToString_System_Object_System_String_System_String_">ObjectExtensions.ToString(Object, String, String)</a>
-  </div>
 </article>
           </div>
           

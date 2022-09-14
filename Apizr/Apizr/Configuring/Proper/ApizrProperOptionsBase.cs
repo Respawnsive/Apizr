@@ -5,8 +5,16 @@ using Microsoft.Extensions.Logging;
 
 namespace Apizr.Configuring.Proper
 {
+    /// <inheritdoc cref="IApizrProperOptionsBase" />
     public abstract class ApizrProperOptionsBase : ApizrSharedOptionsBase, IApizrProperOptionsBase
     {
+        /// <summary>
+        /// The proper options constructor
+        /// </summary>
+        /// <param name="sharedOptions">The shared options</param>
+        /// <param name="webApiType">The web api type</param>
+        /// <param name="assemblyPolicyRegistryKeys">Global policies</param>
+        /// <param name="webApiPolicyRegistryKeys">Specific policies</param>
         protected ApizrProperOptionsBase(IApizrSharedOptionsBase sharedOptions, 
             Type webApiType,
             string[] assemblyPolicyRegistryKeys,
@@ -24,8 +32,13 @@ namespace Apizr.Configuring.Proper
                 webApiPolicyRegistryKeys ?? Array.Empty<string>();
         }
 
+        /// <inheritdoc />
         public Type WebApiType { get; }
+
+        /// <inheritdoc />
         public string[] PolicyRegistryKeys { get; }
+
+        /// <inheritdoc />
         public ILogger Logger { get; protected set; }
     }
 }

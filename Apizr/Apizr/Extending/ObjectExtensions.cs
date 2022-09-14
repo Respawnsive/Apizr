@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Apizr.Extending
 {
-    public static class ObjectExtensions
+    internal static class ObjectExtensions
     {
-        public static string ToString(this object source, string keyValueSeparator, string sequenceSeparator)
+        internal static string ToString(this object source, string keyValueSeparator, string sequenceSeparator)
         {
             var props = new Dictionary<string, string>();
             if (source == null)

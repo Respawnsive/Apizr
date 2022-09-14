@@ -4,6 +4,9 @@ using Apizr.Requesting;
 
 namespace Apizr.Configuring.Registry
 {
+    /// <summary>
+    /// Registry options available for both static and extended registrations
+    /// </summary>
     public interface IApizrEnumerableRegistry : IEnumerable<KeyValuePair<Type, Func<IApizrManager>>>
     {
         #region Contains

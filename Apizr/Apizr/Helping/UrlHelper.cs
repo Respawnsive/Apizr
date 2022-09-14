@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace Apizr.Helping
 {
+    /// <summary>
+    /// Some url helpers
+    /// </summary>
     public static class UrlHelper
     {
         /// <summary>

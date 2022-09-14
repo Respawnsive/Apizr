@@ -19,10 +19,12 @@ items:
   source:
     id: TypeExtensions
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Extending\TypeExtensions.cs
-    startLine: 6
+    startLine: 9
   assemblies:
   - Apizr
   namespace: Apizr.Extending
+  summary: "\nSome Type extensions\n"
+  example: []
   syntax:
     content: public static class TypeExtensions
     content.vb: Public Module TypeExtensions
@@ -58,19 +60,24 @@ items:
   source:
     id: IsAssignableFromGenericType
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Extending\TypeExtensions.cs
-    startLine: 8
+    startLine: 17
   assemblies:
   - Apizr
   namespace: Apizr.Extending
+  summary: "\nChecks if the generic type is assignable from the given type\n"
+  example: []
   syntax:
     content: public static bool IsAssignableFromGenericType(this Type genericType, Type givenType)
     parameters:
     - id: genericType
       type: System.Type
+      description: The generic type
     - id: givenType
       type: System.Type
+      description: The given type
     return:
       type: System.Boolean
+      description: ''
     content.vb: >-
       <ExtensionAttribute>
 
@@ -97,19 +104,24 @@ items:
   source:
     id: MakeGenericTypeIfNeeded
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Extending\TypeExtensions.cs
-    startLine: 21
+    startLine: 36
   assemblies:
   - Apizr
   namespace: Apizr.Extending
+  summary: "\nReturns a closed generic type based on provided type arguments\n"
+  example: []
   syntax:
     content: public static Type MakeGenericTypeIfNeeded(this Type type, params Type[] typeArguments)
     parameters:
     - id: type
       type: System.Type
+      description: The open generic type
     - id: typeArguments
       type: System.Type[]
+      description: The type arguments
     return:
       type: System.Type
+      description: ''
     content.vb: >-
       <ExtensionAttribute>
 
@@ -139,17 +151,21 @@ items:
   source:
     id: IsOpenGeneric
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Extending\TypeExtensions.cs
-    startLine: 29
+    startLine: 49
   assemblies:
   - Apizr
   namespace: Apizr.Extending
+  summary: "\nChecks if the type is open generic\n"
+  example: []
   syntax:
     content: public static bool IsOpenGeneric(this Type type)
     parameters:
     - id: type
       type: System.Type
+      description: ''
     return:
       type: System.Boolean
+      description: ''
     content.vb: >-
       <ExtensionAttribute>
 
@@ -176,17 +192,21 @@ items:
   source:
     id: GetFriendlyName
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Extending\TypeExtensions.cs
-    startLine: 34
+    startLine: 59
   assemblies:
   - Apizr
   namespace: Apizr.Extending
+  summary: "\nReturns a more friendly readable type name\n"
+  example: []
   syntax:
     content: public static string GetFriendlyName(this Type type)
     parameters:
     - id: type
       type: System.Type
+      description: The type to get friendly name of
     return:
       type: System.String
+      description: ''
     content.vb: >-
       <ExtensionAttribute>
 

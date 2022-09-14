@@ -20,10 +20,12 @@ items:
   source:
     id: ApizrOptionsBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptionsBase.cs
-    startLine: 9
+    startLine: 10
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nOptions available for both static and extended registrations\n"
+  example: []
   syntax:
     content: 'public abstract class ApizrOptionsBase : ApizrSharedOptionsBase, IApizrOptionsBase, IApizrCommonOptionsBase, IApizrProperOptionsBase, IApizrSharedOptionsBase'
     content.vb: >-
@@ -55,8 +57,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
   modifiers.csharp:
   - public
   - abstract
@@ -79,17 +79,21 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptionsBase.cs
-    startLine: 11
+    startLine: 17
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nThe options constructor\n"
+  example: []
   syntax:
     content: protected ApizrOptionsBase(IApizrCommonOptionsBase commonOptions, IApizrProperOptionsBase properOptions)
     parameters:
     - id: commonOptions
       type: Apizr.Configuring.Common.IApizrCommonOptionsBase
+      description: The common options
     - id: properOptions
       type: Apizr.Configuring.Proper.IApizrProperOptionsBase
+      description: The proper options
     content.vb: Protected Sub New(commonOptions As IApizrCommonOptionsBase, properOptions As IApizrProperOptionsBase)
   overload: Apizr.Configuring.ApizrOptionsBase.#ctor*
   modifiers.csharp:
@@ -110,10 +114,12 @@ items:
   source:
     id: WebApiType
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptionsBase.cs
-    startLine: 21
+    startLine: 28
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nWeb api interface type\n"
+  example: []
   syntax:
     content: public Type WebApiType { get; }
     parameters: []
@@ -143,10 +149,12 @@ items:
   source:
     id: PolicyRegistryKeys
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptionsBase.cs
-    startLine: 22
+    startLine: 31
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nPolicy keys from the registry\n"
+  example: []
   syntax:
     content: public string[] PolicyRegistryKeys { get; }
     parameters: []
@@ -176,10 +184,12 @@ items:
   source:
     id: Logger
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptionsBase.cs
-    startLine: 23
+    startLine: 34
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nThe logger instance\n"
+  example: []
   syntax:
     content: public ILogger Logger { get; protected set; }
     parameters: []
@@ -211,10 +221,12 @@ items:
   source:
     id: RefitSettings
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\ApizrOptionsBase.cs
-    startLine: 24
+    startLine: 37
   assemblies:
   - Apizr
   namespace: Apizr.Configuring
+  summary: "\nRefit settings\n"
+  example: []
   syntax:
     content: public RefitSettings RefitSettings { get; protected set; }
     parameters: []
@@ -233,6 +245,12 @@ items:
   - Get
   - Protected Set
 references:
+- uid: Apizr.Configuring.IApizrOptionsBase
+  commentId: T:Apizr.Configuring.IApizrOptionsBase
+  parent: Apizr.Configuring
+  name: IApizrOptionsBase
+  nameWithType: IApizrOptionsBase
+  fullName: Apizr.Configuring.IApizrOptionsBase
 - uid: Apizr.Configuring
   commentId: N:Apizr.Configuring
   name: Apizr.Configuring
@@ -251,12 +269,6 @@ references:
   name: ApizrSharedOptionsBase
   nameWithType: ApizrSharedOptionsBase
   fullName: Apizr.Configuring.Shared.ApizrSharedOptionsBase
-- uid: Apizr.Configuring.IApizrOptionsBase
-  commentId: T:Apizr.Configuring.IApizrOptionsBase
-  parent: Apizr.Configuring
-  name: IApizrOptionsBase
-  nameWithType: IApizrOptionsBase
-  fullName: Apizr.Configuring.IApizrOptionsBase
 - uid: Apizr.Configuring.Common.IApizrCommonOptionsBase
   commentId: T:Apizr.Configuring.Common.IApizrCommonOptionsBase
   parent: Apizr.Configuring.Common
@@ -590,61 +602,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  parent: Apizr.Extending.ObjectExtensions
-  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  name: ToString(String, String)
-  nameWithType: ObjectExtensions.ToString(String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
@@ -666,87 +623,6 @@ references:
   name: Apizr.Configuring.Proper
   nameWithType: Apizr.Configuring.Proper
   fullName: Apizr.Configuring.Proper
-- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  isExternal: true
-  name: ToString(Object, String, String)
-  nameWithType: ObjectExtensions.ToString(Object, String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.ObjectExtensions
-  commentId: T:Apizr.Extending.ObjectExtensions
-  parent: Apizr.Extending
-  name: ObjectExtensions
-  nameWithType: ObjectExtensions
-  fullName: Apizr.Extending.ObjectExtensions
-- uid: Apizr.Extending
-  commentId: N:Apizr.Extending
-  name: Apizr.Extending
-  nameWithType: Apizr.Extending
-  fullName: Apizr.Extending
 - uid: Apizr.Configuring.ApizrOptionsBase.#ctor*
   commentId: Overload:Apizr.Configuring.ApizrOptionsBase.#ctor
   name: ApizrOptionsBase

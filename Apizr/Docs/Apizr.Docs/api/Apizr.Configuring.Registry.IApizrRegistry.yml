@@ -16,10 +16,12 @@ items:
   source:
     id: IApizrRegistry
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\IApizrRegistry.cs
-    startLine: 4
+    startLine: 7
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
+  summary: "\nRegistry options available for static registrations\n"
+  example: []
   syntax:
     content: 'public interface IApizrRegistry : IApizrEnumerableRegistry, IEnumerable<KeyValuePair<Type, Func<IApizrManager>>>, IEnumerable'
     content.vb: >-
@@ -44,8 +46,6 @@ items:
   - Apizr.Configuring.Registry.IApizrEnumerableRegistry.TryGetManagerFor``1(Apizr.IApizrManager{{TWebApi}}@)
   - System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Type,System.Func{Apizr.IApizrManager}}}.GetEnumerator
   - System.Collections.IEnumerable.GetEnumerator
-  extensionMethods:
-  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
   modifiers.csharp:
   - public
   - interface
@@ -66,15 +66,18 @@ items:
   source:
     id: Populate
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\IApizrRegistry.cs
-    startLine: 6
+    startLine: 13
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
+  summary: "\nPopulate all registered types and its factories\n"
+  example: []
   syntax:
     content: void Populate(Action<Type, Func<object>> populateAction)
     parameters:
     - id: populateAction
       type: System.Action{System.Type,System.Func{System.Object}}
+      description: The action to execute when populating
     content.vb: Sub Populate(populateAction As Action(Of Type, Func(Of Object)))
   overload: Apizr.Configuring.Registry.IApizrRegistry.Populate*
   nameWithType.vb: IApizrRegistry.Populate(Action(Of Type, Func(Of Object)))
@@ -1154,61 +1157,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  parent: Apizr.Extending.ObjectExtensions
-  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  name: ToString(String, String)
-  nameWithType: ObjectExtensions.ToString(String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
   commentId: T:Apizr.Configuring.Registry.IApizrEnumerableRegistry
   parent: Apizr.Configuring.Registry
@@ -2037,82 +1985,6 @@ references:
   name: IEnumerable
   nameWithType: IEnumerable
   fullName: System.Collections.IEnumerable
-- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  isExternal: true
-  name: ToString(Object, String, String)
-  nameWithType: ObjectExtensions.ToString(Object, String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.ObjectExtensions
-  commentId: T:Apizr.Extending.ObjectExtensions
-  parent: Apizr.Extending
-  name: ObjectExtensions
-  nameWithType: ObjectExtensions
-  fullName: Apizr.Extending.ObjectExtensions
 - uid: System.Collections.Generic.IEnumerable`1
   commentId: T:System.Collections.Generic.IEnumerable`1
   isExternal: true
@@ -2164,11 +2036,6 @@ references:
   name: System.Collections
   nameWithType: System.Collections
   fullName: System.Collections
-- uid: Apizr.Extending
-  commentId: N:Apizr.Extending
-  name: Apizr.Extending
-  nameWithType: Apizr.Extending
-  fullName: Apizr.Extending
 - uid: Apizr.Configuring.Registry.IApizrRegistry.Populate*
   commentId: Overload:Apizr.Configuring.Registry.IApizrRegistry.Populate
   name: Populate

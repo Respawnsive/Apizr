@@ -27,6 +27,7 @@ using Refit;
 
 namespace Apizr
 {
+    /// <inheritdoc />
     public class ApizrManager<TWebApi> : IApizrManager<TWebApi>
     {
         private readonly ILazyFactory<TWebApi> _lazyWebApi;
@@ -41,6 +42,15 @@ namespace Apizr
         private readonly Dictionary<MethodDetails, LogAttributeBase> _loggingMethodsSet;
         private readonly Dictionary<MethodDetails, IsPolicy> _policingMethodsSet;
 
+        /// <summary>
+        /// Apizr manager constructor
+        /// </summary>
+        /// <param name="lazyWebApi">The managed web api</param>
+        /// <param name="connectivityHandler">The connectivity handler</param>
+        /// <param name="cacheHandler">The cache handler</param>
+        /// <param name="mappingHandler">The mapping handler</param>
+        /// <param name="policyRegistry">The policy registry</param>
+        /// <param name="apizrOptions">The web api dedicated options</param>
         public ApizrManager(ILazyFactory<TWebApi> lazyWebApi, IConnectivityHandler connectivityHandler, ICacheHandler cacheHandler, IMappingHandler mappingHandler, IReadOnlyPolicyRegistry<string> policyRegistry, IApizrOptions<TWebApi> apizrOptions)
         {
             _lazyWebApi = lazyWebApi;
@@ -58,14 +68,17 @@ namespace Apizr
 
         #region Implementation
 
+        /// <inheritdoc />
         public TWebApi Api => _lazyWebApi.Value;
 
+        /// <inheritdoc />
         public IApizrOptionsBase Options => _apizrOptions;
 
         #region ExecuteAsync
 
         #region Task
 
+        /// <inheritdoc />
         public async Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod,
             Action<Exception> onException = null)
         {
@@ -111,6 +124,7 @@ namespace Apizr
             }
         }
 
+        /// <inheritdoc />
         public async Task ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
             TModelData modelData, Action<Exception> onException = null)
         {
@@ -160,6 +174,7 @@ namespace Apizr
             }
         }
 
+        /// <inheritdoc />
         public async Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod,
             CancellationToken cancellationToken = default, Action<Exception> onException = null)
         {
@@ -206,6 +221,7 @@ namespace Apizr
             }
         }
 
+        /// <inheritdoc />
         public async Task ExecuteAsync(Expression<Func<Context, TWebApi, Task>> executeApiMethod,
             Context context = null, Action<Exception> onException = null)
         {
@@ -252,6 +268,7 @@ namespace Apizr
             }
         }
 
+        /// <inheritdoc />
         public async Task ExecuteAsync<TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData,
             CancellationToken cancellationToken = default, Action<Exception> onException = null)
@@ -303,6 +320,7 @@ namespace Apizr
             }
         }
 
+        /// <inheritdoc />
         public async Task ExecuteAsync<TModelData, TApiData>(
             Expression<Func<Context, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData,
             Context context = null, Action<Exception> onException = null)
@@ -354,6 +372,7 @@ namespace Apizr
             }
         }
 
+        /// <inheritdoc />
         public async Task ExecuteAsync(Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod,
             Context context = null, CancellationToken cancellationToken = default, Action<Exception> onException = null)
         {
@@ -401,6 +420,7 @@ namespace Apizr
             }
         }
 
+        /// <inheritdoc />
         public async Task ExecuteAsync<TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task>> executeApiMethod,
             TModelData modelData, Context context = null,
@@ -458,6 +478,7 @@ namespace Apizr
 
         #region Task<T>
 
+        /// <inheritdoc />
         public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod,
             bool clearCache = false, Action<Exception> onException = null)
         {
@@ -553,6 +574,7 @@ namespace Apizr
             return result;
         }
 
+        /// <inheritdoc />
         public async Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
             TModelRequestData>(Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
             TModelRequestData modelRequestData, bool clearCache = false, Action<Exception> onException = null)
@@ -656,6 +678,7 @@ namespace Apizr
             return Map<TApiResultData, TModelResultData>(result);
         }
 
+        /// <inheritdoc />
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
             bool clearCache = false, Action<Exception> onException = null)
@@ -759,6 +782,7 @@ namespace Apizr
             return Map<TApiData, TModelData>(result);
         }
 
+        /// <inheritdoc />
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false,
             Action<Exception> onException = null)
@@ -857,6 +881,7 @@ namespace Apizr
             return Map<TApiData, TModelData>(result);
         }
 
+        /// <inheritdoc />
         public async Task<TResult> ExecuteAsync<TResult>(
             Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod,
             CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null)
@@ -954,6 +979,7 @@ namespace Apizr
             return result;
         }
 
+        /// <inheritdoc />
         public async Task<TResult> ExecuteAsync<TResult>(
             Expression<Func<Context, TWebApi, Task<TResult>>> executeApiMethod, Context context = null,
             bool clearCache = false, Action<Exception> onException = null)
@@ -1051,6 +1077,7 @@ namespace Apizr
             return result;
         }
 
+        /// <inheritdoc />
         public async Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
             TModelRequestData>(
             Expression<Func<CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
@@ -1157,6 +1184,7 @@ namespace Apizr
             return Map<TApiResultData, TModelResultData>(result);
         }
 
+        /// <inheritdoc />
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData,
@@ -1262,6 +1290,7 @@ namespace Apizr
             return Map<TApiData, TModelData>(result);
         }
 
+        /// <inheritdoc />
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
             CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null)
@@ -1362,6 +1391,7 @@ namespace Apizr
             return Map<TApiData, TModelData>(result);
         }
 
+        /// <inheritdoc />
         public async Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
             TModelRequestData>(
             Expression<Func<Context, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
@@ -1468,6 +1498,7 @@ namespace Apizr
             return Map<TApiResultData, TModelResultData>(result);
         }
 
+        /// <inheritdoc />
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<Context, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
             Context context = null, bool clearCache = false, Action<Exception> onException = null)
@@ -1572,6 +1603,7 @@ namespace Apizr
             return Map<TApiData, TModelData>(result);
         }
 
+        /// <inheritdoc />
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null,
             bool clearCache = false, Action<Exception> onException = null)
@@ -1672,6 +1704,7 @@ namespace Apizr
             return Map<TApiData, TModelData>(result);
         }
 
+        /// <inheritdoc />
         public async Task<TResult> ExecuteAsync<TResult>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TResult>>> executeApiMethod,
             Context context = null, CancellationToken cancellationToken = default, bool clearCache = false,
@@ -1771,6 +1804,7 @@ namespace Apizr
             return result;
         }
 
+        /// <inheritdoc />
         public async Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
             TModelRequestData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>>
@@ -1879,6 +1913,7 @@ namespace Apizr
             return Map<TApiResultData, TModelResultData>(result);
         }
 
+        /// <inheritdoc />
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData, Context context = null,
@@ -1985,6 +2020,7 @@ namespace Apizr
             return Map<TApiData, TModelData>(result);
         }
 
+        /// <inheritdoc />
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
             Context context = null,
@@ -2086,13 +2122,14 @@ namespace Apizr
 
             return Map<TApiData, TModelData>(result);
         }
-        
+
         #endregion
 
         #endregion
 
         #region ClearCacheAsync
 
+        /// <inheritdoc />
         public async Task<bool> ClearCacheAsync(CancellationToken cancellationToken = default)
         {
             if (_cacheHandler is VoidCacheHandler)
@@ -2113,9 +2150,11 @@ namespace Apizr
             }
         }
 
+        /// <inheritdoc />
         public Task<bool> ClearCacheAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod)
             => ClearCacheAsync((ct, api) => executeApiMethod.Compile()(api), CancellationToken.None);
 
+        /// <inheritdoc />
         public async Task<bool> ClearCacheAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken = default)
         {
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
@@ -2735,7 +2774,7 @@ namespace Apizr
             }
         }
 
-        private class ExtractedConstant
+        private sealed class ExtractedConstant
         {
             public object Value { get; set; }
         }

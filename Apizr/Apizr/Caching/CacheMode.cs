@@ -1,5 +1,8 @@
 ﻿namespace Apizr.Caching
 {
+    /// <summary>
+    /// Define the caching behaviour
+    /// </summary>
     public enum CacheMode
     {
         /// <summary>

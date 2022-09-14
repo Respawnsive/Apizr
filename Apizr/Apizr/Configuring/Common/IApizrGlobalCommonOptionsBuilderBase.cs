@@ -7,10 +7,16 @@ using Refit;
 
 namespace Apizr.Configuring.Common
 {
+    /// <summary>
+    /// Builder options available at common level for both static and extended registrations
+    /// </summary>
     public interface IApizrGlobalCommonOptionsBuilderBase : IApizrGlobalSharedOptionsBuilderBase
     {
     }
 
+    /// <summary>
+    /// Builder options available at common level for both static and extended registrations
+    /// </summary>
     public interface IApizrGlobalCommonOptionsBuilderBase<out TApizrCommonOptions, out TApizrCommonOptionsBuilder> : IApizrGlobalCommonOptionsBuilderBase,
         IApizrGlobalSharedOptionsBuilderBase<TApizrCommonOptions, TApizrCommonOptionsBuilder>
     where TApizrCommonOptions : IApizrCommonOptionsBase

@@ -3,6 +3,9 @@ using Apizr.Configuring.Shared;
 
 namespace Apizr.Configuring.Proper
 {
+    /// <summary>
+    /// Builder options available at proper level for static registrations
+    /// </summary>
     public interface IApizrProperOptionsBuilder<out TApizrProperOptions, out TApizrProperOptionsBuilder> : IApizrProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>,
         IApizrSharedOptionsBuilder<TApizrProperOptions, TApizrProperOptionsBuilder>
         where TApizrProperOptions : IApizrProperOptionsBase
@@ -10,6 +13,7 @@ namespace Apizr.Configuring.Proper
     {
     }
 
+    /// <inheritdoc />
     public interface IApizrProperOptionsBuilder : IApizrProperOptionsBuilder<IApizrProperOptions, IApizrProperOptionsBuilder>
     { }
 }

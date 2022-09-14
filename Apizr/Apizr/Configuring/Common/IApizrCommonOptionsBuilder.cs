@@ -9,6 +9,9 @@ using Refit;
 
 namespace Apizr.Configuring.Common
 {
+    /// <summary>
+    /// Builder options available at common level for static registrations
+    /// </summary>
     public interface IApizrCommonOptionsBuilder<out TApizrCommonOptions, out TApizrCommonOptionsBuilder> : IApizrCommonOptionsBuilderBase<TApizrCommonOptions, TApizrCommonOptionsBuilder>, 
         IApizrSharedOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>
         where TApizrCommonOptions : IApizrCommonOptionsBase
@@ -71,6 +74,7 @@ namespace Apizr.Configuring.Common
         TApizrCommonOptionsBuilder WithMappingHandler(Func<IMappingHandler> mappingHandlerFactory);
     }
 
+    /// <inheritdoc />
     public interface IApizrCommonOptionsBuilder : IApizrCommonOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>
     {}
 }

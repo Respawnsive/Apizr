@@ -9,34 +9,42 @@ namespace Apizr.Caching.Attributes
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Method)]
     public class CacheAttribute : CacheAttributeBase
     {
+        /// <inheritdoc />
         public CacheAttribute()
         {
         }
 
+        /// <inheritdoc />
         public CacheAttribute(CacheMode mode) : base(mode)
         {
         }
 
+        /// <inheritdoc />
         public CacheAttribute(string lifeSpanRepresentation) : base(lifeSpanRepresentation)
         {
         }
 
+        /// <inheritdoc />
         public CacheAttribute(bool shouldInvalidateOnError) : base(shouldInvalidateOnError)
         {
         }
 
+        /// <inheritdoc />
         public CacheAttribute(CacheMode mode, string lifeSpanRepresentation) : base(mode, lifeSpanRepresentation)
         {
         }
 
+        /// <inheritdoc />
         public CacheAttribute(CacheMode mode, bool shouldInvalidateOnError) : base(mode, shouldInvalidateOnError)
         {
         }
 
+        /// <inheritdoc />
         public CacheAttribute(TimeSpan lifeSpan, bool shouldInvalidateOnError) : base(lifeSpan, shouldInvalidateOnError)
         {
         }
 
+        /// <inheritdoc />
         public CacheAttribute(CacheMode mode, string lifeSpanRepresentation, bool shouldInvalidateOnError) : base(mode, lifeSpanRepresentation, shouldInvalidateOnError)
         {
         }

@@ -5,7 +5,6 @@ items:
   id: ApizrSharedOptionsBase
   parent: Apizr.Configuring.Shared
   children:
-  - Apizr.Configuring.Shared.ApizrSharedOptionsBase.#ctor
   - Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseAddress
   - Apizr.Configuring.Shared.ApizrSharedOptionsBase.BasePath
   - Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseUri
@@ -22,10 +21,12 @@ items:
   source:
     id: ApizrSharedOptionsBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\ApizrSharedOptionsBase.cs
-    startLine: 7
+    startLine: 8
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
+  summary: "\nOptions available at both common and proper level for both static and extended registrations\n"
+  example: []
   syntax:
     content: 'public abstract class ApizrSharedOptionsBase : IApizrSharedOptionsBase'
     content.vb: >-
@@ -47,8 +48,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
   modifiers.csharp:
   - public
   - abstract
@@ -57,32 +56,6 @@ items:
   - Public
   - MustInherit
   - Class
-- uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase.#ctor
-  commentId: M:Apizr.Configuring.Shared.ApizrSharedOptionsBase.#ctor
-  id: '#ctor'
-  parent: Apizr.Configuring.Shared.ApizrSharedOptionsBase
-  langs:
-  - csharp
-  - vb
-  name: ApizrSharedOptionsBase()
-  nameWithType: ApizrSharedOptionsBase.ApizrSharedOptionsBase()
-  fullName: Apizr.Configuring.Shared.ApizrSharedOptionsBase.ApizrSharedOptionsBase()
-  type: Constructor
-  source:
-    id: .ctor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\ApizrSharedOptionsBase.cs
-    startLine: 9
-  assemblies:
-  - Apizr
-  namespace: Apizr.Configuring.Shared
-  syntax:
-    content: protected ApizrSharedOptionsBase()
-    content.vb: Protected Sub New
-  overload: Apizr.Configuring.Shared.ApizrSharedOptionsBase.#ctor*
-  modifiers.csharp:
-  - protected
-  modifiers.vb:
-  - Protected
 - uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseUri
   commentId: P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseUri
   id: BaseUri
@@ -97,10 +70,12 @@ items:
   source:
     id: BaseUri
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\ApizrSharedOptionsBase.cs
-    startLine: 14
+    startLine: 11
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
+  summary: "\nBase address\n"
+  example: []
   syntax:
     content: public Uri BaseUri { get; protected set; }
     parameters: []
@@ -132,10 +107,12 @@ items:
   source:
     id: BaseAddress
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\ApizrSharedOptionsBase.cs
-    startLine: 15
+    startLine: 14
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
+  summary: "\nBase address\n"
+  example: []
   syntax:
     content: public string BaseAddress { get; protected set; }
     parameters: []
@@ -167,10 +144,12 @@ items:
   source:
     id: BasePath
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\ApizrSharedOptionsBase.cs
-    startLine: 16
+    startLine: 17
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
+  summary: "\nBase path\n"
+  example: []
   syntax:
     content: public string BasePath { get; protected set; }
     parameters: []
@@ -202,10 +181,12 @@ items:
   source:
     id: HttpTracerMode
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\ApizrSharedOptionsBase.cs
-    startLine: 17
+    startLine: 20
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
+  summary: "\nHttp traffic tracing mode\n"
+  example: []
   syntax:
     content: public HttpTracerMode HttpTracerMode { get; protected set; }
     parameters: []
@@ -237,10 +218,12 @@ items:
   source:
     id: TrafficVerbosity
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\ApizrSharedOptionsBase.cs
-    startLine: 18
+    startLine: 23
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
+  summary: "\nHttp traffic tracing verbosity\n"
+  example: []
   syntax:
     content: public HttpMessageParts TrafficVerbosity { get; protected set; }
     parameters: []
@@ -272,10 +255,12 @@ items:
   source:
     id: LogLevels
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\ApizrSharedOptionsBase.cs
-    startLine: 21
+    startLine: 29
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
+  summary: "\nLog levels while writing\n"
+  example: []
   syntax:
     content: public LogLevel[] LogLevels { get; protected set; }
     parameters: []
@@ -591,153 +576,12 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  parent: Apizr.Extending.ObjectExtensions
-  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  name: ToString(String, String)
-  nameWithType: ObjectExtensions.ToString(String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
   name: System
   nameWithType: System
   fullName: System
-- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  isExternal: true
-  name: ToString(Object, String, String)
-  nameWithType: ObjectExtensions.ToString(Object, String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.ObjectExtensions
-  commentId: T:Apizr.Extending.ObjectExtensions
-  parent: Apizr.Extending
-  name: ObjectExtensions
-  nameWithType: ObjectExtensions
-  fullName: Apizr.Extending.ObjectExtensions
-- uid: Apizr.Extending
-  commentId: N:Apizr.Extending
-  name: Apizr.Extending
-  nameWithType: Apizr.Extending
-  fullName: Apizr.Extending
-- uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase.#ctor*
-  commentId: Overload:Apizr.Configuring.Shared.ApizrSharedOptionsBase.#ctor
-  name: ApizrSharedOptionsBase
-  nameWithType: ApizrSharedOptionsBase.ApizrSharedOptionsBase
-  fullName: Apizr.Configuring.Shared.ApizrSharedOptionsBase.ApizrSharedOptionsBase
 - uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseUri*
   commentId: Overload:Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseUri
   name: BaseUri

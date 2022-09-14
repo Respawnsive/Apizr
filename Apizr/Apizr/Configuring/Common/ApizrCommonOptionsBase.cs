@@ -3,12 +3,10 @@ using Refit;
 
 namespace Apizr.Configuring.Common
 {
+    /// <inheritdoc cref="IApizrCommonOptionsBase" />
     public abstract class ApizrCommonOptionsBase : ApizrSharedOptionsBase, IApizrCommonOptionsBase
     {
-        protected ApizrCommonOptionsBase()
-        {
-        }
-        
+        /// <inheritdoc />
         public RefitSettings RefitSettings { get; protected set; }
     }
 }

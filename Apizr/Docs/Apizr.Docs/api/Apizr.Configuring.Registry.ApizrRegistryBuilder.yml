@@ -26,10 +26,12 @@ items:
   source:
     id: ApizrRegistryBuilder
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
-    startLine: 12
+    startLine: 13
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
+  summary: "\nRegistry builder options available for static registrations\n"
+  example: []
   syntax:
     content: 'public class ApizrRegistryBuilder : IApizrRegistryBuilder, IApizrRegistryBuilder<IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder, IApizrCommonOptionsBuilder>, IApizrRegistryBuilderBase<IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder, IApizrCommonOptionsBuilder>, IApizrRegistryBuilderBase'
     content.vb: >-
@@ -50,8 +52,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
   modifiers.csharp:
   - public
   - class
@@ -72,10 +72,12 @@ items:
   source:
     id: Registry
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
-    startLine: 14
+    startLine: 18
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
+  summary: "\nThe registry\n"
+  example: []
   syntax:
     content: protected readonly ApizrRegistry Registry
     return:
@@ -101,10 +103,12 @@ items:
   source:
     id: CommonOptions
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
-    startLine: 15
+    startLine: 23
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
+  summary: "\nThe common options\n"
+  example: []
   syntax:
     content: protected readonly IApizrCommonOptions CommonOptions
     return:
@@ -130,10 +134,12 @@ items:
   source:
     id: ApizrRegistry
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
-    startLine: 25
+    startLine: 34
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
+  summary: "\nApizr registry\n"
+  example: []
   syntax:
     content: public IApizrRegistry ApizrRegistry { get; }
     parameters: []
@@ -163,10 +169,12 @@ items:
   source:
     id: AddGroup
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
-    startLine: 27
+    startLine: 37
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
+  summary: "\nGroup registrations sharing specific common options\n"
+  example: []
   syntax:
     content: public IApizrRegistryBuilder AddGroup(Action<IApizrRegistryBuilder> registryGroupBuilder, Action<IApizrCommonOptionsBuilder> commonOptionsBuilder = null)
     parameters:
@@ -176,6 +184,7 @@ items:
       type: System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder}
     return:
       type: Apizr.Configuring.Registry.IApizrRegistryBuilder
+      description: ''
     content.vb: Public Function AddGroup(registryGroupBuilder As Action(Of IApizrRegistryBuilder), commonOptionsBuilder As Action(Of IApizrCommonOptionsBuilder) = Nothing) As IApizrRegistryBuilder
   overload: Apizr.Configuring.Registry.ApizrRegistryBuilder.AddGroup*
   implements:
@@ -201,10 +210,12 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
-    startLine: 39
+    startLine: 50
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
+  summary: "\nCreate a <xref href=\"Apizr.ApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> instance for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> object type (class), \nwith key of type <xref href=\"System.Int32\" data-throw-if-not-resolved=\"false\"></xref> and &quot;ReadAll&quot; query result of type <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref>\nand ReadAll query parameters of type IDictionary{string,object}\n"
+  example: []
   syntax:
     content: >-
       public IApizrRegistryBuilder AddCrudManagerFor<T>(Action<IApizrProperOptionsBuilder> optionsBuilder = null)
@@ -214,8 +225,10 @@ items:
       type: System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder}
     typeParameters:
     - id: T
+      description: The object type to manage with crud api calls (class)
     return:
       type: Apizr.Configuring.Registry.IApizrRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(Of T As Class)(optionsBuilder As Action(Of IApizrProperOptionsBuilder) = Nothing) As IApizrRegistryBuilder
   overload: Apizr.Configuring.Registry.ApizrRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -241,10 +254,12 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
-    startLine: 47
+    startLine: 59
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
+  summary: "\nCreate a <xref href=\"Apizr.ApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> instance for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> object type (class), \nwith key of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> (primitive) and &quot;ReadAll&quot; query result of type <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref>\nand ReadAll query parameters of type IDictionary{string,object}\n"
+  example: []
   syntax:
     content: >-
       public IApizrRegistryBuilder AddCrudManagerFor<T, TKey>(Action<IApizrProperOptionsBuilder> properOptionsBuilder = null)
@@ -254,9 +269,12 @@ items:
       type: System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder}
     typeParameters:
     - id: T
+      description: The object type to manage with crud api calls (class)
     - id: TKey
+      description: The object key type (primitive)
     return:
       type: Apizr.Configuring.Registry.IApizrRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(Of T As Class, TKey)(properOptionsBuilder As Action(Of IApizrProperOptionsBuilder) = Nothing) As IApizrRegistryBuilder
   overload: Apizr.Configuring.Registry.ApizrRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -282,10 +300,12 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
-    startLine: 56
+    startLine: 69
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
+  summary: "\nCreate a <xref href=\"Apizr.ApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> instance for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> object type (class), \nwith key of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> (primitive) and &quot;ReadAll&quot; query result of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TReadAllResult</code>\nand ReadAll query parameters of type IDictionary{string,object}\n"
+  example: []
   syntax:
     content: >-
       public IApizrRegistryBuilder AddCrudManagerFor<T, TKey, TReadAllResult>(Action<IApizrProperOptionsBuilder> properOptionsBuilder = null)
@@ -295,10 +315,17 @@ items:
       type: System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder}
     typeParameters:
     - id: T
+      description: The object type to manage with crud api calls (class)
     - id: TKey
+      description: The object key type (primitive)
     - id: TReadAllResult
+      description: >-
+        &quot;ReadAll&quot; query result type
+
+        (should inherit from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
     return:
       type: Apizr.Configuring.Registry.IApizrRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(Of T As Class, TKey, TReadAllResult)(properOptionsBuilder As Action(Of IApizrProperOptionsBuilder) = Nothing) As IApizrRegistryBuilder
   overload: Apizr.Configuring.Registry.ApizrRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -324,10 +351,12 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
-    startLine: 68
+    startLine: 82
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
+  summary: "\nCreate a <xref href=\"Apizr.ApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> instance for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> object type (class), \nwith key of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> (primitive) and &quot;ReadAll&quot; query result of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TReadAllResult</code>\nand ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)\n"
+  example: []
   syntax:
     content: >-
       public IApizrRegistryBuilder AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams>(Action<IApizrProperOptionsBuilder> properOptionsBuilder = null)
@@ -337,11 +366,19 @@ items:
       type: System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder}
     typeParameters:
     - id: T
+      description: The object type to manage with crud api calls (class)
     - id: TKey
+      description: The object key type (primitive)
     - id: TReadAllResult
+      description: >-
+        &quot;ReadAll&quot; query result type
+
+        (should inherit from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
     - id: TReadAllParams
+      description: ReadAll query parameters
     return:
       type: Apizr.Configuring.Registry.IApizrRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(Of T As Class, TKey, TReadAllResult, TReadAllParams)(properOptionsBuilder As Action(Of IApizrProperOptionsBuilder) = Nothing) As IApizrRegistryBuilder
   overload: Apizr.Configuring.Registry.ApizrRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -367,10 +404,12 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
-    startLine: 80
+    startLine: 95
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
+  summary: "\nCreate a <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TApizrManager</code> instance for a managed crud api for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> object (class), \nwith key of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> (primitive) and &quot;ReadAll&quot; query result of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TReadAllResult</code>\nand ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)\n"
+  example: []
   syntax:
     content: >-
       public IApizrRegistryBuilder AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptionsBase, TApizrManager> apizrManagerFactory, Action<IApizrProperOptionsBuilder> properOptionsBuilder = null)
@@ -378,16 +417,26 @@ items:
     parameters:
     - id: apizrManagerFactory
       type: System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{{T},{TKey},{TReadAllResult},{TReadAllParams}}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptionsBase,{TApizrManager}}
+      description: The custom manager implementation instance factory
     - id: properOptionsBuilder
       type: System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder}
     typeParameters:
     - id: T
+      description: The object type to manage with crud api calls (class)
     - id: TKey
+      description: The object key type (primitive)
     - id: TReadAllResult
+      description: >-
+        &quot;ReadAll&quot; query result type
+
+        (should inherit from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
     - id: TReadAllParams
+      description: ReadAll query parameters
     - id: TApizrManager
+      description: A custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> implementation
     return:
       type: Apizr.Configuring.Registry.IApizrRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(Of T As Class, TKey, TReadAllResult, TReadAllParams As Class, TApizrManager As IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)))(apizrManagerFactory As Func(Of ILazyFactory(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry(Of String), IApizrOptionsBase, TApizrManager), properOptionsBuilder As Action(Of IApizrProperOptionsBuilder) = Nothing) As IApizrRegistryBuilder
   overload: Apizr.Configuring.Registry.ApizrRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -413,10 +462,12 @@ items:
   source:
     id: AddManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
-    startLine: 94
+    startLine: 110
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
+  summary: "\nCreate a <xref href=\"Apizr.ApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> instance\n"
+  example: []
   syntax:
     content: public IApizrRegistryBuilder AddManagerFor<TWebApi>(Action<IApizrProperOptionsBuilder> properOptionsBuilder = null)
     parameters:
@@ -424,8 +475,10 @@ items:
       type: System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder}
     typeParameters:
     - id: TWebApi
+      description: The web api interface to manage
     return:
       type: Apizr.Configuring.Registry.IApizrRegistryBuilder
+      description: ''
     content.vb: Public Function AddManagerFor(Of TWebApi)(properOptionsBuilder As Action(Of IApizrProperOptionsBuilder) = Nothing) As IApizrRegistryBuilder
   overload: Apizr.Configuring.Registry.ApizrRegistryBuilder.AddManagerFor*
   implements:
@@ -451,10 +504,12 @@ items:
   source:
     id: AddManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
-    startLine: 101
+    startLine: 118
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
+  summary: "\nCreate a <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TApizrManager</code> instance for a managed <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code>\n"
+  example: []
   syntax:
     content: >-
       public IApizrRegistryBuilder AddManagerFor<TWebApi, TApizrManager>(Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptions<TWebApi>, TApizrManager> apizrManagerFactory, Action<IApizrProperOptionsBuilder> properOptionsBuilder = null)
@@ -462,13 +517,17 @@ items:
     parameters:
     - id: apizrManagerFactory
       type: System.Func{Apizr.ILazyFactory{{TWebApi}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptions{{TWebApi}},{TApizrManager}}
+      description: The custom manager implementation instance factory
     - id: properOptionsBuilder
       type: System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder}
     typeParameters:
     - id: TWebApi
+      description: The web api interface to manage
     - id: TApizrManager
+      description: A custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> implementation
     return:
       type: Apizr.Configuring.Registry.IApizrRegistryBuilder
+      description: ''
     content.vb: Public Function AddManagerFor(Of TWebApi, TApizrManager As IApizrManager(Of TWebApi))(apizrManagerFactory As Func(Of ILazyFactory(Of TWebApi), IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry(Of String), IApizrOptions(Of TWebApi), TApizrManager), properOptionsBuilder As Action(Of IApizrProperOptionsBuilder) = Nothing) As IApizrRegistryBuilder
   overload: Apizr.Configuring.Registry.ApizrRegistryBuilder.AddManagerFor*
   implements:
@@ -948,61 +1007,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  parent: Apizr.Extending.ObjectExtensions
-  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  name: ToString(String, String)
-  nameWithType: ObjectExtensions.ToString(String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
@@ -1153,87 +1157,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  isExternal: true
-  name: ToString(Object, String, String)
-  nameWithType: ObjectExtensions.ToString(Object, String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.ObjectExtensions
-  commentId: T:Apizr.Extending.ObjectExtensions
-  parent: Apizr.Extending
-  name: ObjectExtensions
-  nameWithType: ObjectExtensions
-  fullName: Apizr.Extending.ObjectExtensions
-- uid: Apizr.Extending
-  commentId: N:Apizr.Extending
-  name: Apizr.Extending
-  nameWithType: Apizr.Extending
-  fullName: Apizr.Extending
 - uid: Apizr.Configuring.Registry.ApizrRegistry
   commentId: T:Apizr.Configuring.Registry.ApizrRegistry
   parent: Apizr.Configuring.Registry

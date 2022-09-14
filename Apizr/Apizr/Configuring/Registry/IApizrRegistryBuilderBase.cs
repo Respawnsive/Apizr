@@ -5,10 +5,16 @@ using Apizr.Configuring.Proper;
 
 namespace Apizr.Configuring.Registry
 {
+    /// <summary>
+    /// Registry builder options available for both static and extended registrations
+    /// </summary>
     public interface IApizrRegistryBuilderBase
     {
     }
-
+    
+    /// <summary>
+    /// Registry builder options available for both static and extended registrations
+    /// </summary>
     public interface IApizrRegistryBuilderBase<out TApizrRegistry, out TApizrRegistryBuilder, out TApizrProperOptionsBuilder, out TApizrCommonOptionsBuilder> : IApizrRegistryBuilderBase
         where TApizrRegistry : IApizrEnumerableRegistry
         where TApizrRegistryBuilder : IApizrRegistryBuilderBase<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>

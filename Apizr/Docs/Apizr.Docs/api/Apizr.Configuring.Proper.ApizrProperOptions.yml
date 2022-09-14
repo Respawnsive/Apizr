@@ -25,10 +25,12 @@ items:
   source:
     id: ApizrProperOptions
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 10
+    startLine: 11
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nOptions available at proper level for static registrations\n"
+  example: []
   syntax:
     content: 'public class ApizrProperOptions : ApizrProperOptionsBase, IApizrProperOptions, IApizrProperOptionsBase, IApizrSharedOptions, IApizrSharedOptionsBase'
     content.vb: >-
@@ -61,8 +63,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
   modifiers.csharp:
   - public
   - class
@@ -83,31 +83,42 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 12
+    startLine: 25
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nThe common options constructor\n"
+  example: []
   syntax:
     content: public ApizrProperOptions(IApizrSharedOptions sharedOptions, Type webApiType, string[] assemblyPolicyRegistryKeys, string[] webApiPolicyRegistryKeys, string baseAddress, string basePath, HttpTracerMode? httpTracerMode, HttpMessageParts? trafficVerbosity, params LogLevel[] logLevels)
     parameters:
     - id: sharedOptions
       type: Apizr.Configuring.Shared.IApizrSharedOptions
+      description: The shared options
     - id: webApiType
       type: System.Type
+      description: The web api type
     - id: assemblyPolicyRegistryKeys
       type: System.String[]
+      description: Global policies
     - id: webApiPolicyRegistryKeys
       type: System.String[]
+      description: Specific policies
     - id: baseAddress
       type: System.String
+      description: The web api base address
     - id: basePath
       type: System.String
+      description: The web api base path
     - id: httpTracerMode
       type: System.Nullable{Apizr.Logging.HttpTracerMode}
+      description: The http tracer mode
     - id: trafficVerbosity
       type: System.Nullable{Apizr.Logging.HttpMessageParts}
+      description: The traffic verbosity
     - id: logLevels
       type: Microsoft.Extensions.Logging.LogLevel[]
+      description: The log levels
     content.vb: Public Sub New(sharedOptions As IApizrSharedOptions, webApiType As Type, assemblyPolicyRegistryKeys As String(), webApiPolicyRegistryKeys As String(), baseAddress As String, basePath As String, httpTracerMode As HttpTracerMode?, trafficVerbosity As HttpMessageParts?, ParamArray logLevels As LogLevel())
   overload: Apizr.Configuring.Proper.ApizrProperOptions.#ctor*
   nameWithType.vb: ApizrProperOptions.ApizrProperOptions(IApizrSharedOptions, Type, String(), String(), String, String, Nullable(Of HttpTracerMode), Nullable(Of HttpMessageParts), LogLevel())
@@ -131,10 +142,12 @@ items:
   source:
     id: BaseUriFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 35
+    startLine: 49
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nBase uri factory\n"
+  example: []
   syntax:
     content: public Func<Uri> BaseUriFactory { get; set; }
     parameters: []
@@ -164,10 +177,12 @@ items:
   source:
     id: BaseAddressFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 42
+    startLine: 57
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nBase address factory\n"
+  example: []
   syntax:
     content: public Func<string> BaseAddressFactory { get; set; }
     parameters: []
@@ -197,10 +212,12 @@ items:
   source:
     id: BasePathFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 49
+    startLine: 65
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nBase path factory\n"
+  example: []
   syntax:
     content: public Func<string> BasePathFactory { get; set; }
     parameters: []
@@ -230,10 +247,12 @@ items:
   source:
     id: HttpTracerModeFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 56
+    startLine: 73
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nHttp traffic tracing mode factory\n"
+  example: []
   syntax:
     content: public Func<HttpTracerMode> HttpTracerModeFactory { get; set; }
     parameters: []
@@ -263,10 +282,12 @@ items:
   source:
     id: TrafficVerbosityFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 63
+    startLine: 81
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nHttp traffic tracing verbosity factory\n"
+  example: []
   syntax:
     content: public Func<HttpMessageParts> TrafficVerbosityFactory { get; set; }
     parameters: []
@@ -296,10 +317,12 @@ items:
   source:
     id: LogLevelsFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 70
+    startLine: 89
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nLog levels factory\n"
+  example: []
   syntax:
     content: public Func<LogLevel[]> LogLevelsFactory { get; set; }
     parameters: []
@@ -329,10 +352,12 @@ items:
   source:
     id: LoggerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 76
+    startLine: 96
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nThe Logger factory\n"
+  example: []
   syntax:
     content: public Func<ILoggerFactory, string, ILogger> LoggerFactory { get; }
     parameters: []
@@ -362,10 +387,12 @@ items:
   source:
     id: HttpClientHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 78
+    startLine: 99
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nHttpClientHandler factory\n"
+  example: []
   syntax:
     content: public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
     parameters: []
@@ -395,10 +422,12 @@ items:
   source:
     id: DelegatingHandlersFactories
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 80
+    startLine: 102
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nDelegating handlers factories\n"
+  example: []
   syntax:
     content: public IList<Func<ILogger, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
     parameters: []
@@ -415,6 +444,12 @@ items:
   - Public
   - ReadOnly
 references:
+- uid: Apizr.Configuring.Proper.IApizrProperOptions
+  commentId: T:Apizr.Configuring.Proper.IApizrProperOptions
+  parent: Apizr.Configuring.Proper
+  name: IApizrProperOptions
+  nameWithType: IApizrProperOptions
+  fullName: Apizr.Configuring.Proper.IApizrProperOptions
 - uid: Apizr.Configuring.Proper
   commentId: N:Apizr.Configuring.Proper
   name: Apizr.Configuring.Proper
@@ -439,12 +474,6 @@ references:
   name: ApizrProperOptionsBase
   nameWithType: ApizrProperOptionsBase
   fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase
-- uid: Apizr.Configuring.Proper.IApizrProperOptions
-  commentId: T:Apizr.Configuring.Proper.IApizrProperOptions
-  parent: Apizr.Configuring.Proper
-  name: IApizrProperOptions
-  nameWithType: IApizrProperOptions
-  fullName: Apizr.Configuring.Proper.IApizrProperOptions
 - uid: Apizr.Configuring.Proper.IApizrProperOptionsBase
   commentId: T:Apizr.Configuring.Proper.IApizrProperOptionsBase
   parent: Apizr.Configuring.Proper
@@ -796,61 +825,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  parent: Apizr.Extending.ObjectExtensions
-  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  name: ToString(String, String)
-  nameWithType: ObjectExtensions.ToString(String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
@@ -862,87 +836,6 @@ references:
   name: Apizr.Configuring.Shared
   nameWithType: Apizr.Configuring.Shared
   fullName: Apizr.Configuring.Shared
-- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  isExternal: true
-  name: ToString(Object, String, String)
-  nameWithType: ObjectExtensions.ToString(Object, String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.ObjectExtensions
-  commentId: T:Apizr.Extending.ObjectExtensions
-  parent: Apizr.Extending
-  name: ObjectExtensions
-  nameWithType: ObjectExtensions
-  fullName: Apizr.Extending.ObjectExtensions
-- uid: Apizr.Extending
-  commentId: N:Apizr.Extending
-  name: Apizr.Extending
-  nameWithType: Apizr.Extending
-  fullName: Apizr.Extending
 - uid: Apizr.Configuring.Proper.ApizrProperOptions.#ctor*
   commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptions.#ctor
   name: ApizrProperOptions

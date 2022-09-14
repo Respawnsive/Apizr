@@ -69,8 +69,6 @@ items:
     - id: TReadAllParams
       description: ReadAll query parameters type
     content.vb: Public Interface ICrudApi(Of T As Class, In TKey, TReadAllResult, In TReadAllParams)
-  extensionMethods:
-  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
   nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)
   modifiers.csharp:
   - public
@@ -94,10 +92,12 @@ items:
   source:
     id: Create
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 20
+    startLine: 25
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a Create request with a <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> payload\n"
+  example: []
   syntax:
     content: >-
       [Post("")]
@@ -106,12 +106,14 @@ items:
     parameters:
     - id: payload
       type: '{T}'
+      description: The payload
       attributes:
       - type: Refit.BodyAttribute
         ctor: Refit.BodyAttribute.#ctor
         arguments: []
     return:
       type: System.Threading.Tasks.Task{{T}}
+      description: ''
     content.vb: >-
       <Post("")>
 
@@ -139,10 +141,12 @@ items:
   source:
     id: Create
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 23
+    startLine: 34
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a Create request with a <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> payload, passing a Polly context through the request\n"
+  example: []
   syntax:
     content: >-
       [Post("")]
@@ -151,18 +155,21 @@ items:
     parameters:
     - id: payload
       type: '{T}'
+      description: The payload
       attributes:
       - type: Refit.BodyAttribute
         ctor: Refit.BodyAttribute.#ctor
         arguments: []
     - id: context
       type: Polly.Context
+      description: The Polly context
       attributes:
       - type: Apizr.Policing.ContextAttribute
         ctor: Apizr.Policing.ContextAttribute.#ctor
         arguments: []
     return:
       type: System.Threading.Tasks.Task{{T}}
+      description: ''
     content.vb: >-
       <Post("")>
 
@@ -190,10 +197,12 @@ items:
   source:
     id: Create
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 26
+    startLine: 43
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a Create request with a <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> payload, passing a cancellation token through the request\n"
+  example: []
   syntax:
     content: >-
       [Post("")]
@@ -202,14 +211,17 @@ items:
     parameters:
     - id: payload
       type: '{T}'
+      description: The payload
       attributes:
       - type: Refit.BodyAttribute
         ctor: Refit.BodyAttribute.#ctor
         arguments: []
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     return:
       type: System.Threading.Tasks.Task{{T}}
+      description: ''
     content.vb: >-
       <Post("")>
 
@@ -237,10 +249,12 @@ items:
   source:
     id: Create
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 29
+    startLine: 53
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a Create request with a <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> payload, passing a Polly context and a cancellation token through the request\n"
+  example: []
   syntax:
     content: >-
       [Post("")]
@@ -249,20 +263,24 @@ items:
     parameters:
     - id: payload
       type: '{T}'
+      description: The payload
       attributes:
       - type: Refit.BodyAttribute
         ctor: Refit.BodyAttribute.#ctor
         arguments: []
     - id: context
       type: Polly.Context
+      description: The Polly context
       attributes:
       - type: Apizr.Policing.ContextAttribute
         ctor: Apizr.Policing.ContextAttribute.#ctor
         arguments: []
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     return:
       type: System.Threading.Tasks.Task{{T}}
+      description: ''
     content.vb: >-
       <Post("")>
 
@@ -290,10 +308,12 @@ items:
   source:
     id: ReadAll
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 36
+    startLine: 64
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a ReadAll request\n"
+  example: []
   syntax:
     content: >-
       [Get("")]
@@ -301,6 +321,7 @@ items:
       Task<TReadAllResult> ReadAll()
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: >-
       <Get("")>
 
@@ -328,10 +349,12 @@ items:
   source:
     id: ReadAll
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 39
+    startLine: 72
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a ReadAll request with some query params used as cache key\n"
+  example: []
   syntax:
     content: >-
       [Get("")]
@@ -340,12 +363,14 @@ items:
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: Query params used as cache key
       attributes:
       - type: Apizr.Caching.Attributes.CacheKeyAttribute
         ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
         arguments: []
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: >-
       <Get("")>
 
@@ -373,10 +398,12 @@ items:
   source:
     id: ReadAll
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 42
+    startLine: 80
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a ReadAll request with an execution priority level\n"
+  example: []
   syntax:
     content: >-
       [Get("")]
@@ -385,6 +412,7 @@ items:
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority level
       attributes:
       - type: Refit.PropertyAttribute
         ctor: Refit.PropertyAttribute.#ctor(System.String)
@@ -393,6 +421,7 @@ items:
           value: Priority
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: >-
       <Get("")>
 
@@ -420,10 +449,12 @@ items:
   source:
     id: ReadAll
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 45
+    startLine: 88
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a ReadAll request, passing a Polly context through the request\n"
+  example: []
   syntax:
     content: >-
       [Get("")]
@@ -432,12 +463,14 @@ items:
     parameters:
     - id: context
       type: Polly.Context
+      description: The Polly context
       attributes:
       - type: Apizr.Policing.ContextAttribute
         ctor: Apizr.Policing.ContextAttribute.#ctor
         arguments: []
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: >-
       <Get("")>
 
@@ -465,10 +498,12 @@ items:
   source:
     id: ReadAll
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 48
+    startLine: 96
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a ReadAll request, passing a cancellation token through the request\n"
+  example: []
   syntax:
     content: >-
       [Get("")]
@@ -477,8 +512,10 @@ items:
     parameters:
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: >-
       <Get("")>
 
@@ -506,10 +543,12 @@ items:
   source:
     id: ReadAll
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 51
+    startLine: 105
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a ReadAll request with some query params used as cache key and an execution priority level\n"
+  example: []
   syntax:
     content: >-
       [Get("")]
@@ -518,12 +557,14 @@ items:
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: Query params used as cache key
       attributes:
       - type: Apizr.Caching.Attributes.CacheKeyAttribute
         ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
         arguments: []
     - id: priority
       type: System.Int32
+      description: The execution priority level
       attributes:
       - type: Refit.PropertyAttribute
         ctor: Refit.PropertyAttribute.#ctor(System.String)
@@ -532,6 +573,7 @@ items:
           value: Priority
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: >-
       <Get("")>
 
@@ -559,10 +601,12 @@ items:
   source:
     id: ReadAll
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 54
+    startLine: 114
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a ReadAll request with some query params used as cache key and passing a Polly context through the request\n"
+  example: []
   syntax:
     content: >-
       [Get("")]
@@ -571,18 +615,21 @@ items:
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: Query params used as cache key
       attributes:
       - type: Apizr.Caching.Attributes.CacheKeyAttribute
         ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
         arguments: []
     - id: context
       type: Polly.Context
+      description: The Polly context
       attributes:
       - type: Apizr.Policing.ContextAttribute
         ctor: Apizr.Policing.ContextAttribute.#ctor
         arguments: []
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: >-
       <Get("")>
 
@@ -610,10 +657,12 @@ items:
   source:
     id: ReadAll
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 57
+    startLine: 123
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a ReadAll request with some query params used as cache key, passing a cancellation token through the request\n"
+  example: []
   syntax:
     content: >-
       [Get("")]
@@ -622,14 +671,17 @@ items:
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: Query params used as cache key
       attributes:
       - type: Apizr.Caching.Attributes.CacheKeyAttribute
         ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
         arguments: []
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: >-
       <Get("")>
 
@@ -657,10 +709,12 @@ items:
   source:
     id: ReadAll
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 60
+    startLine: 132
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a ReadAll request with an execution priority level and passing a Polly context through the request\n"
+  example: []
   syntax:
     content: >-
       [Get("")]
@@ -669,6 +723,7 @@ items:
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority level
       attributes:
       - type: Refit.PropertyAttribute
         ctor: Refit.PropertyAttribute.#ctor(System.String)
@@ -677,12 +732,14 @@ items:
           value: Priority
     - id: context
       type: Polly.Context
+      description: The Polly context
       attributes:
       - type: Apizr.Policing.ContextAttribute
         ctor: Apizr.Policing.ContextAttribute.#ctor
         arguments: []
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: >-
       <Get("")>
 
@@ -710,10 +767,12 @@ items:
   source:
     id: ReadAll
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 63
+    startLine: 141
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a ReadAll request with an execution priority level, passing a cancellation token through the request\n"
+  example: []
   syntax:
     content: >-
       [Get("")]
@@ -722,6 +781,7 @@ items:
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority level
       attributes:
       - type: Refit.PropertyAttribute
         ctor: Refit.PropertyAttribute.#ctor(System.String)
@@ -730,8 +790,10 @@ items:
           value: Priority
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: >-
       <Get("")>
 
@@ -759,10 +821,12 @@ items:
   source:
     id: ReadAll
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 66
+    startLine: 150
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a ReadAll request, passing a Polly context and a cancellation token through the request\n"
+  example: []
   syntax:
     content: >-
       [Get("")]
@@ -771,14 +835,17 @@ items:
     parameters:
     - id: context
       type: Polly.Context
+      description: The Polly context
       attributes:
       - type: Apizr.Policing.ContextAttribute
         ctor: Apizr.Policing.ContextAttribute.#ctor
         arguments: []
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: >-
       <Get("")>
 
@@ -806,10 +873,12 @@ items:
   source:
     id: ReadAll
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 69
+    startLine: 160
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a ReadAll request with some query params used as cache key and an execution priority level, passing a Polly context through the request\n"
+  example: []
   syntax:
     content: >-
       [Get("")]
@@ -818,12 +887,14 @@ items:
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: Query params used as cache key
       attributes:
       - type: Apizr.Caching.Attributes.CacheKeyAttribute
         ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
         arguments: []
     - id: priority
       type: System.Int32
+      description: The execution priority level
       attributes:
       - type: Refit.PropertyAttribute
         ctor: Refit.PropertyAttribute.#ctor(System.String)
@@ -832,12 +903,14 @@ items:
           value: Priority
     - id: context
       type: Polly.Context
+      description: The Polly context
       attributes:
       - type: Apizr.Policing.ContextAttribute
         ctor: Apizr.Policing.ContextAttribute.#ctor
         arguments: []
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: >-
       <Get("")>
 
@@ -865,10 +938,12 @@ items:
   source:
     id: ReadAll
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 72
+    startLine: 170
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a ReadAll request with some query params used as cache key and an execution priority level, passing a cancellation token through the request\n"
+  example: []
   syntax:
     content: >-
       [Get("")]
@@ -877,12 +952,14 @@ items:
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: Query params used as cache key
       attributes:
       - type: Apizr.Caching.Attributes.CacheKeyAttribute
         ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
         arguments: []
     - id: priority
       type: System.Int32
+      description: The execution priority level
       attributes:
       - type: Refit.PropertyAttribute
         ctor: Refit.PropertyAttribute.#ctor(System.String)
@@ -891,8 +968,10 @@ items:
           value: Priority
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: >-
       <Get("")>
 
@@ -920,10 +999,12 @@ items:
   source:
     id: ReadAll
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 75
+    startLine: 180
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a ReadAll request with some query params used as cache key, passing a Polly context and a cancellation token through the request\n"
+  example: []
   syntax:
     content: >-
       [Get("")]
@@ -932,20 +1013,24 @@ items:
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: Query params used as cache key
       attributes:
       - type: Apizr.Caching.Attributes.CacheKeyAttribute
         ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
         arguments: []
     - id: context
       type: Polly.Context
+      description: The Polly context
       attributes:
       - type: Apizr.Policing.ContextAttribute
         ctor: Apizr.Policing.ContextAttribute.#ctor
         arguments: []
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: >-
       <Get("")>
 
@@ -973,10 +1058,12 @@ items:
   source:
     id: ReadAll
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 78
+    startLine: 191
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a ReadAll request with some query params used as cache key and an execution priority level, passing a Polly context and a cancellation token through the request\n"
+  example: []
   syntax:
     content: >-
       [Get("")]
@@ -985,12 +1072,14 @@ items:
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: Query params used as cache key
       attributes:
       - type: Apizr.Caching.Attributes.CacheKeyAttribute
         ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
         arguments: []
     - id: priority
       type: System.Int32
+      description: The execution priority level
       attributes:
       - type: Refit.PropertyAttribute
         ctor: Refit.PropertyAttribute.#ctor(System.String)
@@ -999,14 +1088,17 @@ items:
           value: Priority
     - id: context
       type: Polly.Context
+      description: The Polly context
       attributes:
       - type: Apizr.Policing.ContextAttribute
         ctor: Apizr.Policing.ContextAttribute.#ctor
         arguments: []
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: >-
       <Get("")>
 
@@ -1034,10 +1126,12 @@ items:
   source:
     id: Read
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 85
+    startLine: 203
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a Read request with a key param\n"
+  example: []
   syntax:
     content: >-
       [Get("/{key}")]
@@ -1046,12 +1140,14 @@ items:
     parameters:
     - id: key
       type: '{TKey}'
+      description: The key
       attributes:
       - type: Apizr.Caching.Attributes.CacheKeyAttribute
         ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
         arguments: []
     return:
       type: System.Threading.Tasks.Task{{T}}
+      description: ''
     content.vb: >-
       <Get("/{key}")>
 
@@ -1079,10 +1175,12 @@ items:
   source:
     id: Read
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 88
+    startLine: 212
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a Read request with a key param and an execution priority level\n"
+  example: []
   syntax:
     content: >-
       [Get("/{key}")]
@@ -1091,12 +1189,14 @@ items:
     parameters:
     - id: key
       type: '{TKey}'
+      description: The key
       attributes:
       - type: Apizr.Caching.Attributes.CacheKeyAttribute
         ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
         arguments: []
     - id: priority
       type: System.Int32
+      description: The execution priority level
       attributes:
       - type: Refit.PropertyAttribute
         ctor: Refit.PropertyAttribute.#ctor(System.String)
@@ -1105,6 +1205,7 @@ items:
           value: Priority
     return:
       type: System.Threading.Tasks.Task{{T}}
+      description: ''
     content.vb: >-
       <Get("/{key}")>
 
@@ -1132,10 +1233,12 @@ items:
   source:
     id: Read
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 91
+    startLine: 221
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a Read request with a key param, passing a Polly context through the request\n"
+  example: []
   syntax:
     content: >-
       [Get("/{key}")]
@@ -1144,18 +1247,21 @@ items:
     parameters:
     - id: key
       type: '{TKey}'
+      description: The key
       attributes:
       - type: Apizr.Caching.Attributes.CacheKeyAttribute
         ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
         arguments: []
     - id: context
       type: Polly.Context
+      description: The Polly context
       attributes:
       - type: Apizr.Policing.ContextAttribute
         ctor: Apizr.Policing.ContextAttribute.#ctor
         arguments: []
     return:
       type: System.Threading.Tasks.Task{{T}}
+      description: ''
     content.vb: >-
       <Get("/{key}")>
 
@@ -1183,10 +1289,12 @@ items:
   source:
     id: Read
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 94
+    startLine: 230
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a Read request with a key param, passing a cancellation token through the request\n"
+  example: []
   syntax:
     content: >-
       [Get("/{key}")]
@@ -1195,14 +1303,17 @@ items:
     parameters:
     - id: key
       type: '{TKey}'
+      description: The key
       attributes:
       - type: Apizr.Caching.Attributes.CacheKeyAttribute
         ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
         arguments: []
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     return:
       type: System.Threading.Tasks.Task{{T}}
+      description: ''
     content.vb: >-
       <Get("/{key}")>
 
@@ -1230,10 +1341,12 @@ items:
   source:
     id: Read
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 97
+    startLine: 240
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a Read request with a key param and an execution priority level, passing a Polly context through the request\n"
+  example: []
   syntax:
     content: >-
       [Get("/{key}")]
@@ -1242,12 +1355,14 @@ items:
     parameters:
     - id: key
       type: '{TKey}'
+      description: The key
       attributes:
       - type: Apizr.Caching.Attributes.CacheKeyAttribute
         ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
         arguments: []
     - id: priority
       type: System.Int32
+      description: The execution priority level
       attributes:
       - type: Refit.PropertyAttribute
         ctor: Refit.PropertyAttribute.#ctor(System.String)
@@ -1256,12 +1371,14 @@ items:
           value: Priority
     - id: context
       type: Polly.Context
+      description: The Polly context
       attributes:
       - type: Apizr.Policing.ContextAttribute
         ctor: Apizr.Policing.ContextAttribute.#ctor
         arguments: []
     return:
       type: System.Threading.Tasks.Task{{T}}
+      description: ''
     content.vb: >-
       <Get("/{key}")>
 
@@ -1289,10 +1406,12 @@ items:
   source:
     id: Read
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 100
+    startLine: 250
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a Read request with a key param and an execution priority level, passing a cancellation token through the request\n"
+  example: []
   syntax:
     content: >-
       [Get("/{key}")]
@@ -1301,12 +1420,14 @@ items:
     parameters:
     - id: key
       type: '{TKey}'
+      description: The key
       attributes:
       - type: Apizr.Caching.Attributes.CacheKeyAttribute
         ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
         arguments: []
     - id: priority
       type: System.Int32
+      description: The execution priority level
       attributes:
       - type: Refit.PropertyAttribute
         ctor: Refit.PropertyAttribute.#ctor(System.String)
@@ -1315,8 +1436,10 @@ items:
           value: Priority
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     return:
       type: System.Threading.Tasks.Task{{T}}
+      description: ''
     content.vb: >-
       <Get("/{key}")>
 
@@ -1344,10 +1467,12 @@ items:
   source:
     id: Read
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 103
+    startLine: 261
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a Read request with a key param and an execution priority level, passing a Polly context and a cancellation token through the request\n"
+  example: []
   syntax:
     content: >-
       [Get("/{key}")]
@@ -1356,12 +1481,14 @@ items:
     parameters:
     - id: key
       type: '{TKey}'
+      description: The key
       attributes:
       - type: Apizr.Caching.Attributes.CacheKeyAttribute
         ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
         arguments: []
     - id: priority
       type: System.Int32
+      description: The execution priority level
       attributes:
       - type: Refit.PropertyAttribute
         ctor: Refit.PropertyAttribute.#ctor(System.String)
@@ -1370,14 +1497,17 @@ items:
           value: Priority
     - id: context
       type: Polly.Context
+      description: The Polly context
       attributes:
       - type: Apizr.Policing.ContextAttribute
         ctor: Apizr.Policing.ContextAttribute.#ctor
         arguments: []
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     return:
       type: System.Threading.Tasks.Task{{T}}
+      description: ''
     content.vb: >-
       <Get("/{key}")>
 
@@ -1405,10 +1535,12 @@ items:
   source:
     id: Update
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 110
+    startLine: 274
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend an Update request with a key and a payload\n"
+  example: []
   syntax:
     content: >-
       [Put("/{key}")]
@@ -1417,14 +1549,17 @@ items:
     parameters:
     - id: key
       type: '{TKey}'
+      description: The key
     - id: payload
       type: '{T}'
+      description: The payload
       attributes:
       - type: Refit.BodyAttribute
         ctor: Refit.BodyAttribute.#ctor
         arguments: []
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: >-
       <Put("/{key}")>
 
@@ -1452,10 +1587,12 @@ items:
   source:
     id: Update
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 113
+    startLine: 284
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend an Update request with a key and a payload, passing a Polly context through the request\n"
+  example: []
   syntax:
     content: >-
       [Put("/{key}")]
@@ -1464,20 +1601,24 @@ items:
     parameters:
     - id: key
       type: '{TKey}'
+      description: The key
     - id: payload
       type: '{T}'
+      description: The payload
       attributes:
       - type: Refit.BodyAttribute
         ctor: Refit.BodyAttribute.#ctor
         arguments: []
     - id: context
       type: Polly.Context
+      description: The Polly context
       attributes:
       - type: Apizr.Policing.ContextAttribute
         ctor: Apizr.Policing.ContextAttribute.#ctor
         arguments: []
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: >-
       <Put("/{key}")>
 
@@ -1505,10 +1646,12 @@ items:
   source:
     id: Update
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 116
+    startLine: 294
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend an Update request with a key and a payload, passing a cancellation token through the request\n"
+  example: []
   syntax:
     content: >-
       [Put("/{key}")]
@@ -1517,16 +1660,20 @@ items:
     parameters:
     - id: key
       type: '{TKey}'
+      description: The key
     - id: payload
       type: '{T}'
+      description: The payload
       attributes:
       - type: Refit.BodyAttribute
         ctor: Refit.BodyAttribute.#ctor
         arguments: []
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: >-
       <Put("/{key}")>
 
@@ -1554,10 +1701,12 @@ items:
   source:
     id: Update
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 119
+    startLine: 305
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend an Update request with a key and a payload, passing a Polly context and a cancellation token through the request\n"
+  example: []
   syntax:
     content: >-
       [Put("/{key}")]
@@ -1566,22 +1715,27 @@ items:
     parameters:
     - id: key
       type: '{TKey}'
+      description: The key
     - id: payload
       type: '{T}'
+      description: The payload
       attributes:
       - type: Refit.BodyAttribute
         ctor: Refit.BodyAttribute.#ctor
         arguments: []
     - id: context
       type: Polly.Context
+      description: The Polly context
       attributes:
       - type: Apizr.Policing.ContextAttribute
         ctor: Apizr.Policing.ContextAttribute.#ctor
         arguments: []
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: >-
       <Put("/{key}")>
 
@@ -1609,10 +1763,12 @@ items:
   source:
     id: Delete
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 126
+    startLine: 317
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a Delete request with a key param\n"
+  example: []
   syntax:
     content: >-
       [Delete("/{key}")]
@@ -1621,8 +1777,10 @@ items:
     parameters:
     - id: key
       type: '{TKey}'
+      description: The key
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: >-
       <Delete("/{key}")>
 
@@ -1650,10 +1808,12 @@ items:
   source:
     id: Delete
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 129
+    startLine: 326
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a Delete request with a key param, passing a Polly context through the request\n"
+  example: []
   syntax:
     content: >-
       [Delete("/{key}")]
@@ -1662,14 +1822,17 @@ items:
     parameters:
     - id: key
       type: '{TKey}'
+      description: The key
     - id: context
       type: Polly.Context
+      description: The Polly context
       attributes:
       - type: Apizr.Policing.ContextAttribute
         ctor: Apizr.Policing.ContextAttribute.#ctor
         arguments: []
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: >-
       <Delete("/{key}")>
 
@@ -1697,10 +1860,12 @@ items:
   source:
     id: Delete
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 132
+    startLine: 335
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a Delete request with a key param, passing a cancellation token through the request\n"
+  example: []
   syntax:
     content: >-
       [Delete("/{key}")]
@@ -1709,10 +1874,13 @@ items:
     parameters:
     - id: key
       type: '{TKey}'
+      description: The key
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: >-
       <Delete("/{key}")>
 
@@ -1740,10 +1908,12 @@ items:
   source:
     id: Delete
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Requesting\ICrudApi.cs
-    startLine: 135
+    startLine: 345
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
+  summary: "\nSend a Delete request with a key param, passing a Polly context and a cancellation token through the request\n"
+  example: []
   syntax:
     content: >-
       [Delete("/{key}")]
@@ -1752,16 +1922,20 @@ items:
     parameters:
     - id: key
       type: '{TKey}'
+      description: The key
     - id: context
       type: Polly.Context
+      description: The Polly context
       attributes:
       - type: Apizr.Policing.ContextAttribute
         ctor: Apizr.Policing.ContextAttribute.#ctor
         arguments: []
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: >-
       <Delete("/{key}")>
 
@@ -1781,142 +1955,6 @@ references:
   name: Apizr.Requesting
   nameWithType: Apizr.Requesting
   fullName: Apizr.Requesting
-- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  parent: Apizr.Extending.ObjectExtensions
-  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  name: ToString(String, String)
-  nameWithType: ObjectExtensions.ToString(String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  isExternal: true
-  name: ToString(Object, String, String)
-  nameWithType: ObjectExtensions.ToString(Object, String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.ObjectExtensions
-  commentId: T:Apizr.Extending.ObjectExtensions
-  parent: Apizr.Extending
-  name: ObjectExtensions
-  nameWithType: ObjectExtensions
-  fullName: Apizr.Extending.ObjectExtensions
-- uid: Apizr.Extending
-  commentId: N:Apizr.Extending
-  name: Apizr.Extending
-  nameWithType: Apizr.Extending
-  fullName: Apizr.Extending
 - uid: Apizr.Requesting.ICrudApi`4.Create*
   commentId: Overload:Apizr.Requesting.ICrudApi`4.Create
   name: Create

@@ -26,6 +26,9 @@ namespace Apizr.Caching.Attributes
             PropertyName = propertyName;
         }
 
+        /// <summary>
+        /// Property name of primitive primary Id
+        /// </summary>
         public string PropertyName { get; }
     }
 }

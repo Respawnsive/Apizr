@@ -13,8 +13,12 @@ using Refit;
 
 namespace Apizr.Configuring
 {
+    /// <inheritdoc />
     public class ApizrOptionsBuilder : IApizrOptionsBuilder
     {
+        /// <summary>
+        /// The options
+        /// </summary>
         protected readonly ApizrOptions Options;
 
         internal ApizrOptionsBuilder(ApizrOptions apizrOptions)
@@ -22,11 +26,14 @@ namespace Apizr.Configuring
             Options = apizrOptions;
         }
 
+        /// <inheritdoc />
         public IApizrOptions ApizrOptions => Options;
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithBaseAddress(string baseAddress)
             => WithBaseAddress(() => baseAddress);
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithBaseAddress(Func<string> baseAddressFactory)
         {
             Options.BaseAddressFactory = baseAddressFactory;
@@ -34,9 +41,11 @@ namespace Apizr.Configuring
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithBaseAddress(Uri baseAddress)
             => WithBaseAddress(() => baseAddress);
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithBaseAddress(Func<Uri> baseAddressFactory)
         {
             Options.BaseUriFactory = baseAddressFactory;
@@ -44,9 +53,11 @@ namespace Apizr.Configuring
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithBasePath(string basePath)
             => WithBasePath(() => basePath);
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithBasePath(Func<string> basePathFactory)
         {
             Options.BasePathFactory = basePathFactory;
@@ -54,9 +65,11 @@ namespace Apizr.Configuring
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithHttpClientHandler(HttpClientHandler httpClientHandler)
             => WithHttpClientHandler(() => httpClientHandler);
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithHttpClientHandler(Func<HttpClientHandler> httpClientHandlerFactory)
         {
             Options.HttpClientHandlerFactory = httpClientHandlerFactory;
@@ -64,6 +77,7 @@ namespace Apizr.Configuring
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<ILogger, IApizrOptionsBase, TAuthenticationHandler> authenticationHandler) where TAuthenticationHandler : AuthenticationHandlerBase
         {
             Options.DelegatingHandlersFactories.Add(authenticationHandler);
@@ -71,6 +85,7 @@ namespace Apizr.Configuring
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshToken)
         {
             var authenticationHandler = new Func<ILogger, IApizrOptionsBase, DelegatingHandler>((logger, options) =>
@@ -80,11 +95,13 @@ namespace Apizr.Configuring
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithAuthenticationHandler<TSettingsService>(TSettingsService settingsService,
             Expression<Func<TSettingsService, string>> tokenProperty,
             Func<HttpRequestMessage, Task<string>> refreshToken)
             => WithAuthenticationHandler(() => settingsService, tokenProperty, refreshToken);
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithAuthenticationHandler<TSettingsService>(
             Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> tokenProperty,
             Func<HttpRequestMessage, Task<string>> refreshToken)
@@ -96,12 +113,14 @@ namespace Apizr.Configuring
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(
             TSettingsService settingsService,
             Expression<Func<TSettingsService, string>> tokenProperty, TTokenService tokenService,
             Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
             => WithAuthenticationHandler(() => settingsService, tokenProperty, () => tokenService, refreshTokenMethod);
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(
             Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> tokenProperty,
             Func<TTokenService> tokenServiceFactory,
@@ -117,12 +136,15 @@ namespace Apizr.Configuring
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler)
             => AddDelegatingHandler(_ => delegatingHandler);
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder AddDelegatingHandler(Func<ILogger, DelegatingHandler> delegatingHandlerFactory)
             => AddDelegatingHandler((logger, _) => delegatingHandlerFactory(logger));
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder AddDelegatingHandler(Func<ILogger, IApizrOptionsBase, DelegatingHandler> delegatingHandlerFactory)
         {
             Options.DelegatingHandlersFactories.Add(delegatingHandlerFactory);
@@ -130,9 +152,11 @@ namespace Apizr.Configuring
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithRefitSettings(RefitSettings refitSettings)
             => WithRefitSettings(() => refitSettings);
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithRefitSettings(Func<RefitSettings> refitSettingsFactory)
         {
             Options.RefitSettingsFactory = refitSettingsFactory;
@@ -140,9 +164,11 @@ namespace Apizr.Configuring
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithPolicyRegistry(IReadOnlyPolicyRegistry<string> policyRegistry)
             => WithPolicyRegistry(() => policyRegistry);
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<string>> policyRegistryFactory)
         {
             Options.PolicyRegistryFactory = policyRegistryFactory;
@@ -150,12 +176,15 @@ namespace Apizr.Configuring
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithConnectivityHandler(Func<bool> connectivityCheckingFunction)
             => WithConnectivityHandler(() => new DefaultConnectivityHandler(connectivityCheckingFunction));
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithConnectivityHandler(IConnectivityHandler connectivityHandler)
             => WithConnectivityHandler(() => connectivityHandler);
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithConnectivityHandler(Func<IConnectivityHandler> connectivityHandlerFactory)
         {
             Options.ConnectivityHandlerFactory = connectivityHandlerFactory;
@@ -163,9 +192,11 @@ namespace Apizr.Configuring
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithCacheHandler(ICacheHandler cacheHandler)
             => WithCacheHandler(() => cacheHandler);
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithCacheHandler(Func<ICacheHandler> cacheHandlerFactory)
         {
             Options.CacheHandlerFactory = cacheHandlerFactory;
@@ -173,11 +204,13 @@ namespace Apizr.Configuring
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
             HttpMessageParts trafficVerbosity = HttpMessageParts.All,
             params LogLevel[] logLevels)
             => WithLogging(() => httpTracerMode, () => trafficVerbosity, () => logLevels);
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithLogging(Func<HttpTracerMode> httpTracerModeFactory,
             Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel[]> logLevelsFactory)
         {
@@ -188,9 +221,11 @@ namespace Apizr.Configuring
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithLoggerFactory(ILoggerFactory loggerFactory)
             => WithLoggerFactory(() => loggerFactory);
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithLoggerFactory(Func<ILoggerFactory> loggerFactory)
         {
             Options.LoggerFactoryFactory = loggerFactory;
@@ -198,9 +233,11 @@ namespace Apizr.Configuring
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithMappingHandler(IMappingHandler mappingHandler)
             => WithMappingHandler(() => mappingHandler);
 
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithMappingHandler(Func<IMappingHandler> mappingHandlerFactory)
         {
             Options.MappingHandlerFactory = mappingHandlerFactory;

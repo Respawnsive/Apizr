@@ -7,6 +7,9 @@ using Polly;
 
 namespace Apizr
 {
+    /// <summary>
+    /// The manager definition
+    /// </summary>
     public interface IApizrManager
     {}
 

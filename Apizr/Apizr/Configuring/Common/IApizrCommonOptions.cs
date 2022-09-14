@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
 using Apizr.Caching;
 using Apizr.Configuring.Shared;
 using Apizr.Connecting;
@@ -11,6 +9,9 @@ using Refit;
 
 namespace Apizr.Configuring.Common
 {
+    /// <summary>
+    /// Options available at common level for static registrations
+    /// </summary>
     public interface IApizrCommonOptions : IApizrCommonOptionsBase, IApizrSharedOptions
     {
         /// <summary>

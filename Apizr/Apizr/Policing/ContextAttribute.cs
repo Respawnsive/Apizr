@@ -2,9 +2,15 @@
 
 namespace Apizr.Policing
 {
+    /// <summary>
+    /// The Polly context property attribute
+    /// </summary>
     public class ContextAttribute : PropertyAttribute
     {
-        public ContextAttribute() : base("PollyExecutionContext")
+        /// <summary>
+        /// Create a Polly context
+        /// </summary>
+        public ContextAttribute() : base(Constants.PollyExecutionContextKey)
         {
 
         }

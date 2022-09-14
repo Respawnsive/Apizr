@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace Apizr.Extending
 {
-    public static class DictionaryExtensions
+    internal static class DictionaryExtensions
     {
-        public static string ToString(this IDictionary source, string keyValueSeparator, string sequenceSeparator)
+        internal static string ToString(this IDictionary source, string keyValueSeparator, string sequenceSeparator)
         {
             if (source == null)
                 throw new ArgumentException("Parameter source can not be null.");

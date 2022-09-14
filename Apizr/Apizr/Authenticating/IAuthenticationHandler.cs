@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 
 namespace Apizr.Authenticating
 {
+    /// <summary>
+    /// The authentication handler definition
+    /// </summary>
     public interface IAuthenticationHandler
     {
         /// <summary>

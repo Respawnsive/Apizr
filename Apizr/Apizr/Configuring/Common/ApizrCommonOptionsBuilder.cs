@@ -13,8 +13,12 @@ using Refit;
 
 namespace Apizr.Configuring.Common
 {
+    /// <inheritdoc />
     public class ApizrCommonOptionsBuilder : IApizrCommonOptionsBuilder
     {
+        /// <summary>
+        /// The common options
+        /// </summary>
         protected readonly ApizrCommonOptions Options;
 
         internal ApizrCommonOptionsBuilder(ApizrCommonOptions commonOptions)
@@ -22,11 +26,14 @@ namespace Apizr.Configuring.Common
             Options = commonOptions;
         }
 
+        /// <inheritdoc />
         public IApizrCommonOptions ApizrOptions => Options;
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithBaseAddress(string baseAddress)
             => WithBaseAddress(() => baseAddress);
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithBaseAddress(Func<string> baseAddressFactory)
         {
             Options.BaseAddressFactory = baseAddressFactory;
@@ -34,9 +41,11 @@ namespace Apizr.Configuring.Common
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithBaseAddress(Uri baseAddress)
             => WithBaseAddress(() => baseAddress);
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithBaseAddress(Func<Uri> baseAddressFactory)
         {
             Options.BaseUriFactory = baseAddressFactory;
@@ -44,9 +53,11 @@ namespace Apizr.Configuring.Common
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithBasePath(string basePath)
             => WithBasePath(() => basePath);
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithBasePath(Func<string> basePathFactory)
         {
             Options.BasePathFactory = basePathFactory;
@@ -54,9 +65,11 @@ namespace Apizr.Configuring.Common
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithHttpClientHandler(HttpClientHandler httpClientHandler)
             => WithHttpClientHandler(() => httpClientHandler);
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithHttpClientHandler(Func<HttpClientHandler> httpClientHandlerFactory)
         {
             Options.HttpClientHandlerFactory = httpClientHandlerFactory;
@@ -64,6 +77,7 @@ namespace Apizr.Configuring.Common
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
         {
             var authenticationHandler = new Func<ILogger, IApizrOptionsBase, DelegatingHandler>((logger, options) =>
@@ -73,6 +87,7 @@ namespace Apizr.Configuring.Common
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<ILogger, IApizrOptionsBase, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase
         {
             Options.DelegatingHandlersFactories.Add(authenticationHandlerFactory);
@@ -80,10 +95,12 @@ namespace Apizr.Configuring.Common
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(TSettingsService settingsService,
             Expression<Func<TSettingsService, string>> tokenProperty, TTokenService tokenService, Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
             => WithAuthenticationHandler(() => settingsService, tokenProperty, () => tokenService, refreshTokenMethod);
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(Func<TSettingsService> settingsServiceFactory,
             Expression<Func<TSettingsService, string>> tokenProperty, Func<TTokenService> tokenServiceFactory, Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
         {
@@ -97,10 +114,12 @@ namespace Apizr.Configuring.Common
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithAuthenticationHandler<TSettingsService>(TSettingsService settingsService,
             Expression<Func<TSettingsService, string>> tokenProperty, Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
             => WithAuthenticationHandler(() => settingsService, tokenProperty, refreshTokenFactory);
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithAuthenticationHandler<TSettingsService>(Func<TSettingsService> settingsServiceFactory,
             Expression<Func<TSettingsService, string>> tokenProperty, Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
         {
@@ -111,12 +130,15 @@ namespace Apizr.Configuring.Common
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler)
             => AddDelegatingHandler(_ => delegatingHandler);
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder AddDelegatingHandler(Func<ILogger, DelegatingHandler> delegatingHandlerFactory)
             => AddDelegatingHandler((logger, _) => delegatingHandlerFactory(logger));
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder AddDelegatingHandler(Func<ILogger, IApizrOptionsBase, DelegatingHandler> delegatingHandlerFactory)
         {
             Options.DelegatingHandlersFactories.Add(delegatingHandlerFactory);
@@ -124,9 +146,11 @@ namespace Apizr.Configuring.Common
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithPolicyRegistry(IReadOnlyPolicyRegistry<string> policyRegistry)
             => WithPolicyRegistry(() => policyRegistry);
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<string>> policyRegistryFactory)
         {
             Options.PolicyRegistryFactory = policyRegistryFactory;
@@ -134,9 +158,11 @@ namespace Apizr.Configuring.Common
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithRefitSettings(RefitSettings refitSettings)
             => WithRefitSettings(() => refitSettings);
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithRefitSettings(Func<RefitSettings> refitSettingsFactory)
         {
             Options.RefitSettingsFactory = refitSettingsFactory;
@@ -144,12 +170,15 @@ namespace Apizr.Configuring.Common
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithConnectivityHandler(IConnectivityHandler connectivityHandler)
             => WithConnectivityHandler(() => connectivityHandler);
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithConnectivityHandler(Func<bool> connectivityCheckingFunction)
             => WithConnectivityHandler(() => new DefaultConnectivityHandler(connectivityCheckingFunction));
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithConnectivityHandler(Func<IConnectivityHandler> connectivityHandlerFactory)
         {
             Options.ConnectivityHandlerFactory = connectivityHandlerFactory;
@@ -157,9 +186,11 @@ namespace Apizr.Configuring.Common
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithCacheHandler(ICacheHandler cacheHandler)
             => WithCacheHandler(() => cacheHandler);
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithCacheHandler(Func<ICacheHandler> cacheHandlerFactory)
         {
             Options.CacheHandlerFactory = cacheHandlerFactory;
@@ -167,10 +198,12 @@ namespace Apizr.Configuring.Common
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
             HttpMessageParts trafficVerbosity = HttpMessageParts.All, params LogLevel[] logLevels)
             => WithLogging(() => httpTracerMode, () => trafficVerbosity, () => logLevels);
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithLogging(Func<HttpTracerMode> httpTracerModeFactory,
             Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel[]> logLevelsFactory)
         {
@@ -181,9 +214,11 @@ namespace Apizr.Configuring.Common
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithLoggerFactory(ILoggerFactory loggerFactory)
             => WithLoggerFactory(() => loggerFactory);
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithLoggerFactory(Func<ILoggerFactory> loggerFactory)
         {
             Options.LoggerFactoryFactory = loggerFactory;
@@ -191,9 +226,11 @@ namespace Apizr.Configuring.Common
             return this;
         }
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithMappingHandler(IMappingHandler mappingHandler)
             => WithMappingHandler(() => mappingHandler);
 
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithMappingHandler(Func<IMappingHandler> mappingHandlerFactory)
         {
             Options.MappingHandlerFactory = mappingHandlerFactory;

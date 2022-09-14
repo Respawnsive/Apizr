@@ -8,6 +8,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Apizr.Configuring.Shared
 {
+    /// <summary>
+    /// Builder options available at both common and proper level for static registrations
+    /// </summary>
     public interface IApizrSharedOptionsBuilder<out TApizrSharedOptions, out TApizrSharedOptionsBuilder> : 
         IApizrSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>
         where TApizrSharedOptions : IApizrSharedOptionsBase

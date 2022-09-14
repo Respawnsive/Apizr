@@ -36,10 +36,12 @@ items:
   source:
     id: ApizrProperOptionsBuilder
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 12
+    startLine: 13
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nBuilder options available at proper level for static registrations\n"
+  example: []
   syntax:
     content: 'public class ApizrProperOptionsBuilder : IApizrProperOptionsBuilder, IApizrProperOptionsBuilder<IApizrProperOptions, IApizrProperOptionsBuilder>, IApizrProperOptionsBuilderBase<IApizrProperOptions, IApizrProperOptionsBuilder>, IApizrGlobalProperOptionsBuilderBase<IApizrProperOptions, IApizrProperOptionsBuilder>, IApizrProperOptionsBuilderBase, IApizrGlobalProperOptionsBuilderBase, IApizrSharedOptionsBuilder<IApizrProperOptions, IApizrProperOptionsBuilder>, IApizrSharedOptionsBuilderBase<IApizrProperOptions, IApizrProperOptionsBuilder>, IApizrGlobalSharedOptionsBuilderBase<IApizrProperOptions, IApizrProperOptionsBuilder>, IApizrSharedOptionsBuilderBase, IApizrGlobalSharedOptionsBuilderBase'
     content.vb: >-
@@ -67,8 +69,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
   modifiers.csharp:
   - public
   - class
@@ -89,10 +89,12 @@ items:
   source:
     id: Options
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 14
+    startLine: 18
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nThe proper options\n"
+  example: []
   syntax:
     content: protected readonly ApizrProperOptions Options
     return:
@@ -118,10 +120,12 @@ items:
   source:
     id: ApizrOptions
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 21
+    startLine: 26
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nApizr common options\n"
+  example: []
   syntax:
     content: public IApizrProperOptions ApizrOptions { get; }
     parameters: []
@@ -151,17 +155,21 @@ items:
   source:
     id: WithBaseAddress
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 23
+    startLine: 29
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nDefine your web api base address (could be defined with WebApiAttribute)\n"
+  example: []
   syntax:
     content: public IApizrProperOptionsBuilder WithBaseAddress(string baseAddress)
     parameters:
     - id: baseAddress
       type: System.String
+      description: Your web api base address
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
     content.vb: Public Function WithBaseAddress(baseAddress As String) As IApizrProperOptionsBuilder
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithBaseAddress*
   implements:
@@ -184,17 +192,21 @@ items:
   source:
     id: WithBaseAddress
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 26
+    startLine: 33
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nDefine your web api base address (could be defined with WebApiAttribute)\n"
+  example: []
   syntax:
     content: public IApizrProperOptionsBuilder WithBaseAddress(Func<string> baseAddressFactory)
     parameters:
     - id: baseAddressFactory
       type: System.Func{System.String}
+      description: Your web api base address factory
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
     content.vb: Public Function WithBaseAddress(baseAddressFactory As Func(Of String)) As IApizrProperOptionsBuilder
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithBaseAddress*
   implements:
@@ -220,17 +232,21 @@ items:
   source:
     id: WithBaseAddress
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 33
+    startLine: 41
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nDefine your web api base address (could be defined with WebApiAttribute)\n"
+  example: []
   syntax:
     content: public IApizrProperOptionsBuilder WithBaseAddress(Uri baseAddress)
     parameters:
     - id: baseAddress
       type: System.Uri
+      description: Your web api base address
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
     content.vb: Public Function WithBaseAddress(baseAddress As Uri) As IApizrProperOptionsBuilder
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithBaseAddress*
   implements:
@@ -253,17 +269,21 @@ items:
   source:
     id: WithBaseAddress
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 36
+    startLine: 45
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nDefine your web api base address (could be defined with WebApiAttribute)\n"
+  example: []
   syntax:
     content: public IApizrProperOptionsBuilder WithBaseAddress(Func<Uri> baseAddressFactory)
     parameters:
     - id: baseAddressFactory
       type: System.Func{System.Uri}
+      description: Your web api base address factory
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
     content.vb: Public Function WithBaseAddress(baseAddressFactory As Func(Of Uri)) As IApizrProperOptionsBuilder
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithBaseAddress*
   implements:
@@ -289,17 +309,21 @@ items:
   source:
     id: WithBasePath
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 43
+    startLine: 53
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nDefine your web api base path (could be defined with WebApiAttribute)\n"
+  example: []
   syntax:
     content: public IApizrProperOptionsBuilder WithBasePath(string basePath)
     parameters:
     - id: basePath
       type: System.String
+      description: Your web api base path
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
     content.vb: Public Function WithBasePath(basePath As String) As IApizrProperOptionsBuilder
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithBasePath*
   implements:
@@ -322,17 +346,21 @@ items:
   source:
     id: WithBasePath
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 46
+    startLine: 57
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nDefine your web api base path (could be defined with WebApiAttribute)\n"
+  example: []
   syntax:
     content: public IApizrProperOptionsBuilder WithBasePath(Func<string> basePathFactory)
     parameters:
     - id: basePathFactory
       type: System.Func{System.String}
+      description: Your web api base path factory
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
     content.vb: Public Function WithBasePath(basePathFactory As Func(Of String)) As IApizrProperOptionsBuilder
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithBasePath*
   implements:
@@ -358,17 +386,21 @@ items:
   source:
     id: WithHttpClientHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 53
+    startLine: 65
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nProvide a custom HttpClientHandler\n"
+  example: []
   syntax:
     content: public IApizrProperOptionsBuilder WithHttpClientHandler(HttpClientHandler httpClientHandler)
     parameters:
     - id: httpClientHandler
       type: System.Net.Http.HttpClientHandler
+      description: An <xref href="System.Net.Http.HttpClientHandler" data-throw-if-not-resolved="false"></xref> instance
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
     content.vb: Public Function WithHttpClientHandler(httpClientHandler As HttpClientHandler) As IApizrProperOptionsBuilder
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpClientHandler*
   implements:
@@ -391,17 +423,21 @@ items:
   source:
     id: WithHttpClientHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 56
+    startLine: 69
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nProvide a custom HttpClientHandler\n"
+  example: []
   syntax:
     content: public IApizrProperOptionsBuilder WithHttpClientHandler(Func<HttpClientHandler> httpClientHandlerFactory)
     parameters:
     - id: httpClientHandlerFactory
       type: System.Func{System.Net.Http.HttpClientHandler}
+      description: An <xref href="System.Net.Http.HttpClientHandler" data-throw-if-not-resolved="false"></xref> instance factory
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
     content.vb: Public Function WithHttpClientHandler(httpClientHandlerFactory As Func(Of HttpClientHandler)) As IApizrProperOptionsBuilder
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpClientHandler*
   implements:
@@ -427,17 +463,21 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 63
+    startLine: 77
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nProvide a method to refresh the authorization token when needed\n"
+  example: []
   syntax:
     content: public IApizrProperOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
     parameters:
     - id: refreshTokenFactory
       type: System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}
+      description: Refresh token method called when expired or empty
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
     content.vb: Public Function WithAuthenticationHandler(refreshTokenFactory As Func(Of HttpRequestMessage, Task(Of String))) As IApizrProperOptionsBuilder
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler*
   implements:
@@ -463,10 +503,12 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 72
+    startLine: 87
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nProvide your own <xref href=\"Apizr.Authenticating.AuthenticationHandlerBase\" data-throw-if-not-resolved=\"false\"></xref> implementation factory\n"
+  example: []
   syntax:
     content: >-
       public IApizrProperOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<ILogger, IApizrOptionsBase, TAuthenticationHandler> authenticationHandlerFactory)
@@ -474,10 +516,13 @@ items:
     parameters:
     - id: authenticationHandlerFactory
       type: System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,{TAuthenticationHandler}}
+      description: A <code data-dev-comment-type="typeparamref" class="typeparamref">TAuthenticationHandler</code> instance factory
     typeParameters:
     - id: TAuthenticationHandler
+      description: Your <xref href="Apizr.Authenticating.AuthenticationHandlerBase" data-throw-if-not-resolved="false"></xref> implementation
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
     content.vb: Public Function WithAuthenticationHandler(Of TAuthenticationHandler As AuthenticationHandlerBase)(authenticationHandlerFactory As Func(Of ILogger, IApizrOptionsBase, TAuthenticationHandler)) As IApizrProperOptionsBuilder
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler*
   implements:
@@ -503,26 +548,35 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 79
+    startLine: 95
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nProvide your own settings management and token management services\n"
+  example: []
   syntax:
     content: public IApizrProperOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(TSettingsService settingsService, Expression<Func<TSettingsService, string>> tokenProperty, TTokenService tokenService, Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
     parameters:
     - id: settingsService
       type: '{TSettingsService}'
+      description: A <code data-dev-comment-type="typeparamref" class="typeparamref">TSettingsService</code> instance
     - id: tokenProperty
       type: System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}}
+      description: The token property used for saving
     - id: tokenService
       type: '{TTokenService}'
+      description: A <code data-dev-comment-type="typeparamref" class="typeparamref">TTokenService</code> instance
     - id: refreshTokenMethod
       type: System.Linq.Expressions.Expression{System.Func{{TTokenService},System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}}
+      description: The method called to refresh the token
     typeParameters:
     - id: TSettingsService
+      description: Your settings management service (saving/getting token)
     - id: TTokenService
+      description: Your token management service (refreshing token)
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
     content.vb: Public Function WithAuthenticationHandler(Of TSettingsService, TTokenService)(settingsService As TSettingsService, tokenProperty As Expression(Of Func(Of TSettingsService, String)), tokenService As TTokenService, refreshTokenMethod As Expression(Of Func(Of TTokenService, HttpRequestMessage, Task(Of String)))) As IApizrProperOptionsBuilder
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler*
   implements:
@@ -548,26 +602,35 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 83
+    startLine: 100
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nProvide your own settings management and token management services\n"
+  example: []
   syntax:
     content: public IApizrProperOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> tokenProperty, Func<TTokenService> tokenServiceFactory, Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
     parameters:
     - id: settingsServiceFactory
       type: System.Func{{TSettingsService}}
+      description: A <code data-dev-comment-type="typeparamref" class="typeparamref">TSettingsService</code> instance factory
     - id: tokenProperty
       type: System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}}
+      description: The token property used for saving
     - id: tokenServiceFactory
       type: System.Func{{TTokenService}}
+      description: A <code data-dev-comment-type="typeparamref" class="typeparamref">TTokenService</code> instance factory
     - id: refreshTokenMethod
       type: System.Linq.Expressions.Expression{System.Func{{TTokenService},System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}}
+      description: The method called to refresh the token
     typeParameters:
     - id: TSettingsService
+      description: Your settings management service (saving/getting token)
     - id: TTokenService
+      description: Your token management service (refreshing token)
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
     content.vb: Public Function WithAuthenticationHandler(Of TSettingsService, TTokenService)(settingsServiceFactory As Func(Of TSettingsService), tokenProperty As Expression(Of Func(Of TSettingsService, String)), tokenServiceFactory As Func(Of TTokenService), refreshTokenMethod As Expression(Of Func(Of TTokenService, HttpRequestMessage, Task(Of String)))) As IApizrProperOptionsBuilder
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler*
   implements:
@@ -593,23 +656,30 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 96
+    startLine: 114
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nProvide your own settings management service and a method to refresh the token\n"
+  example: []
   syntax:
     content: public IApizrProperOptionsBuilder WithAuthenticationHandler<TSettingsService>(TSettingsService settingsService, Expression<Func<TSettingsService, string>> tokenProperty, Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
     parameters:
     - id: settingsService
       type: '{TSettingsService}'
+      description: A <code data-dev-comment-type="typeparamref" class="typeparamref">TSettingsService</code> instance
     - id: tokenProperty
       type: System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}}
+      description: The token property used for saving
     - id: refreshTokenFactory
       type: System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}
+      description: The method factory called to refresh the token
     typeParameters:
     - id: TSettingsService
+      description: Your settings management service (saving/getting token)
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
     content.vb: Public Function WithAuthenticationHandler(Of TSettingsService)(settingsService As TSettingsService, tokenProperty As Expression(Of Func(Of TSettingsService, String)), refreshTokenFactory As Func(Of HttpRequestMessage, Task(Of String))) As IApizrProperOptionsBuilder
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler*
   implements:
@@ -635,23 +705,30 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 100
+    startLine: 119
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nProvide your own settings management service and a method to refresh the token\n"
+  example: []
   syntax:
     content: public IApizrProperOptionsBuilder WithAuthenticationHandler<TSettingsService>(Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> tokenProperty, Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
     parameters:
     - id: settingsServiceFactory
       type: System.Func{{TSettingsService}}
+      description: A <code data-dev-comment-type="typeparamref" class="typeparamref">TSettingsService</code> instance factory
     - id: tokenProperty
       type: System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}}
+      description: The token property used for saving
     - id: refreshTokenFactory
       type: System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}
+      description: The method factory called to refresh the token
     typeParameters:
     - id: TSettingsService
+      description: Your settings management service (saving/getting token)
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
     content.vb: Public Function WithAuthenticationHandler(Of TSettingsService)(settingsServiceFactory As Func(Of TSettingsService), tokenProperty As Expression(Of Func(Of TSettingsService, String)), refreshTokenFactory As Func(Of HttpRequestMessage, Task(Of String))) As IApizrProperOptionsBuilder
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler*
   implements:
@@ -677,17 +754,21 @@ items:
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 110
+    startLine: 130
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nAdd a custom delegating handler\n"
+  example: []
   syntax:
     content: public IApizrProperOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler)
     parameters:
     - id: delegatingHandler
       type: System.Net.Http.DelegatingHandler
+      description: A delegating handler
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
     content.vb: Public Function AddDelegatingHandler(delegatingHandler As DelegatingHandler) As IApizrProperOptionsBuilder
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler*
   implements:
@@ -710,17 +791,21 @@ items:
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 113
+    startLine: 134
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nAdd a custom delegating handler\n"
+  example: []
   syntax:
     content: public IApizrProperOptionsBuilder AddDelegatingHandler(Func<ILogger, DelegatingHandler> delegatingHandlerFactory)
     parameters:
     - id: delegatingHandlerFactory
       type: System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler}
+      description: A delegating handler factory
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
     content.vb: Public Function AddDelegatingHandler(delegatingHandlerFactory As Func(Of ILogger, DelegatingHandler)) As IApizrProperOptionsBuilder
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler*
   implements:
@@ -746,17 +831,21 @@ items:
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 116
+    startLine: 138
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nAdd a custom delegating handler\n"
+  example: []
   syntax:
     content: public IApizrProperOptionsBuilder AddDelegatingHandler(Func<ILogger, IApizrOptionsBase, DelegatingHandler> delegatingHandlerFactory)
     parameters:
     - id: delegatingHandlerFactory
       type: System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,System.Net.Http.DelegatingHandler}
+      description: A delegating handler factory
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
     content.vb: Public Function AddDelegatingHandler(delegatingHandlerFactory As Func(Of ILogger, IApizrOptionsBase, DelegatingHandler)) As IApizrProperOptionsBuilder
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler*
   implements:
@@ -782,21 +871,27 @@ items:
   source:
     id: WithLogging
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 123
+    startLine: 146
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nConfigure logging level for the api\n"
+  example: []
   syntax:
     content: public IApizrProperOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything, HttpMessageParts trafficVerbosity = HttpMessageParts.All, params LogLevel[] logLevels)
     parameters:
     - id: httpTracerMode
       type: Apizr.Logging.HttpTracerMode
+      description: ''
     - id: trafficVerbosity
       type: Apizr.Logging.HttpMessageParts
+      description: 'Http traffic tracing verbosity (default: All)'
     - id: logLevels
       type: Microsoft.Extensions.Logging.LogLevel[]
+      description: 'Log levels to apply while writing (default: Information)'
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
     content.vb: Public Function WithLogging(httpTracerMode As HttpTracerMode = HttpTracerMode.Everything, trafficVerbosity As HttpMessageParts = HttpMessageParts.All, ParamArray logLevels As LogLevel()) As IApizrProperOptionsBuilder
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLogging*
   implements:
@@ -822,21 +917,27 @@ items:
   source:
     id: WithLogging
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 127
+    startLine: 151
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
+  summary: "\nConfigure logging level for the api\n"
+  example: []
   syntax:
     content: public IApizrProperOptionsBuilder WithLogging(Func<HttpTracerMode> httpTracerModeFactory, Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel[]> logLevelsFactory)
     parameters:
     - id: httpTracerModeFactory
       type: System.Func{Apizr.Logging.HttpTracerMode}
+      description: Http traffic tracing mode
     - id: trafficVerbosityFactory
       type: System.Func{Apizr.Logging.HttpMessageParts}
+      description: Http traffic tracing verbosity factory
     - id: logLevelsFactory
       type: System.Func{Microsoft.Extensions.Logging.LogLevel[]}
+      description: ''
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
     content.vb: Public Function WithLogging(httpTracerModeFactory As Func(Of HttpTracerMode), trafficVerbosityFactory As Func(Of HttpMessageParts), logLevelsFactory As Func(Of LogLevel())) As IApizrProperOptionsBuilder
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLogging*
   implements:
@@ -1494,61 +1595,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  parent: Apizr.Extending.ObjectExtensions
-  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  name: ToString(String, String)
-  nameWithType: ObjectExtensions.ToString(String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
@@ -1848,87 +1894,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  isExternal: true
-  name: ToString(Object, String, String)
-  nameWithType: ObjectExtensions.ToString(Object, String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.ObjectExtensions
-  commentId: T:Apizr.Extending.ObjectExtensions
-  parent: Apizr.Extending
-  name: ObjectExtensions
-  nameWithType: ObjectExtensions
-  fullName: Apizr.Extending.ObjectExtensions
-- uid: Apizr.Extending
-  commentId: N:Apizr.Extending
-  name: Apizr.Extending
-  nameWithType: Apizr.Extending
-  fullName: Apizr.Extending
 - uid: Apizr.Configuring.Proper.ApizrProperOptions
   commentId: T:Apizr.Configuring.Proper.ApizrProperOptions
   parent: Apizr.Configuring.Proper

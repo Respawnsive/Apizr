@@ -4,7 +4,7 @@ using Apizr.Configuring.Proper;
 namespace Apizr.Configuring
 {
     /// <summary>
-    /// The options builder
+    /// Builder options available for static registrations
     /// </summary>
     public interface IApizrOptionsBuilder<out TApizrOptions, out TApizrOptionsBuilder> : 
         IApizrOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>,
@@ -14,6 +14,9 @@ namespace Apizr.Configuring
         where TApizrOptionsBuilder : IApizrOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>
     {}
 
+    /// <summary>
+    /// Builder options available for static registrations
+    /// </summary>
     public interface IApizrOptionsBuilder : IApizrOptionsBuilder<IApizrOptions, IApizrOptionsBuilder>
     {}
 }

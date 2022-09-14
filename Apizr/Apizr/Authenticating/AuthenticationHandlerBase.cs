@@ -11,17 +11,24 @@ using Microsoft.Extensions.Logging;
 
 namespace Apizr.Authenticating
 {
+    /// <inheritdoc cref="IAuthenticationHandler" />
     public abstract class AuthenticationHandlerBase : DelegatingHandler, IAuthenticationHandler
     {
         private readonly ILogger _logger;
         private readonly IApizrOptionsBase _apizrOptions;
 
+        /// <summary>
+        /// The authentication handler constructor
+        /// </summary>
+        /// <param name="logger">The logger</param>
+        /// <param name="apizrOptions">The Apizr options</param>
         protected AuthenticationHandlerBase(ILogger logger, IApizrOptionsBase apizrOptions)
         {
             _logger = logger;
             _apizrOptions = apizrOptions;
         }
 
+        /// <inheritdoc />
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             HttpRequestMessage clonedRequest = null;
@@ -95,10 +102,13 @@ namespace Apizr.Authenticating
             return response;
         }
 
+        /// <inheritdoc />
         public abstract string GetToken();
 
+        /// <inheritdoc />
         public abstract void SetToken(string token);
 
+        /// <inheritdoc />
         public abstract Task<string> RefreshTokenAsync(HttpRequestMessage request);
 
         /// <summary>

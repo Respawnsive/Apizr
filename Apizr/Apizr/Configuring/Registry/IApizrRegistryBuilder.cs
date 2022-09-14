@@ -10,6 +10,9 @@ using Apizr.Requesting;
 
 namespace Apizr.Configuring.Registry
 {
+    /// <summary>
+    /// Registry builder options available for static registrations
+    /// </summary>
     public interface IApizrRegistryBuilder<out TApizrRegistry, out TApizrRegistryBuilder, out TApizrProperOptionsBuilder, out TApizrCommonOptionsBuilder> : 
         IApizrRegistryBuilderBase<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>
         where TApizrRegistry : IApizrEnumerableRegistry
@@ -63,6 +66,9 @@ namespace Apizr.Configuring.Registry
         #endregion
     }
 
+    /// <summary>
+    /// Registry builder options available for static registrations
+    /// </summary>
     public interface IApizrRegistryBuilder : IApizrRegistryBuilder<IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder, IApizrCommonOptionsBuilder>
     {
     }

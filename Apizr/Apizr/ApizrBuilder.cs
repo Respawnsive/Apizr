@@ -24,6 +24,9 @@ using Refit;
 [assembly: Apizr.Preserve]
 namespace Apizr
 {
+    /// <summary>
+    /// The static builder
+    /// </summary>
     public static class ApizrBuilder
     {
         #region Registry

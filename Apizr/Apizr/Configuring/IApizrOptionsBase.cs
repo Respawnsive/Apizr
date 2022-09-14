@@ -4,7 +4,7 @@ using Apizr.Configuring.Proper;
 namespace Apizr.Configuring
 {
     /// <summary>
-    /// Specific options
+    /// Options available for both static and extended registrations
     /// </summary>
     public interface IApizrOptionsBase : IApizrCommonOptionsBase, IApizrProperOptionsBase
     {

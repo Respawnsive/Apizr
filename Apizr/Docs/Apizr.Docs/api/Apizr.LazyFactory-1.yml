@@ -17,14 +17,17 @@ items:
   source:
     id: LazyFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\LazyFactory.cs
-    startLine: 4
+    startLine: 5
   assemblies:
   - Apizr
   namespace: Apizr
+  summary: "\nA lazy instance\n"
+  example: []
   syntax:
     content: 'public class LazyFactory<TInstance> : Lazy<TInstance>, ILazyFactory<TInstance>'
     typeParameters:
     - id: TInstance
+      description: Type of your instance
     content.vb: >-
       Public Class LazyFactory(Of TInstance)
           Inherits Lazy(Of TInstance)
@@ -44,8 +47,6 @@ items:
   - System.Object.GetType
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
-  extensionMethods:
-  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
   nameWithType.vb: LazyFactory(Of TInstance)
   modifiers.csharp:
   - public
@@ -69,15 +70,18 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\LazyFactory.cs
-    startLine: 6
+    startLine: 11
   assemblies:
   - Apizr
   namespace: Apizr
+  summary: "\nLazy factory constructor\n"
+  example: []
   syntax:
     content: public LazyFactory(Func<TInstance> instanceFactory)
     parameters:
     - id: instanceFactory
       type: System.Func{{TInstance}}
+      description: The factory to be lazy
     content.vb: Public Sub New(instanceFactory As Func(Of TInstance))
   overload: Apizr.LazyFactory`1.#ctor*
   nameWithType.vb: LazyFactory(Of TInstance).LazyFactory(Func(Of TInstance))
@@ -101,15 +105,18 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\LazyFactory.cs
-    startLine: 10
+    startLine: 19
   assemblies:
   - Apizr
   namespace: Apizr
+  summary: "\nLazy factory constructor\n"
+  example: []
   syntax:
     content: public LazyFactory(Func<object> instanceFactory)
     parameters:
     - id: instanceFactory
       type: System.Func{System.Object}
+      description: The factory to be lazy
     content.vb: Public Sub New(instanceFactory As Func(Of Object))
   overload: Apizr.LazyFactory`1.#ctor*
   nameWithType.vb: LazyFactory(Of TInstance).LazyFactory(Func(Of Object))
@@ -120,6 +127,42 @@ items:
   fullName.vb: Apizr.LazyFactory(Of TInstance).LazyFactory(System.Func(Of System.Object))
   name.vb: LazyFactory(Func(Of Object))
 references:
+- uid: Apizr.ILazyFactory`1
+  commentId: T:Apizr.ILazyFactory`1
+  name: ILazyFactory<TInstance>
+  nameWithType: ILazyFactory<TInstance>
+  fullName: Apizr.ILazyFactory<TInstance>
+  nameWithType.vb: ILazyFactory(Of TInstance)
+  fullName.vb: Apizr.ILazyFactory(Of TInstance)
+  name.vb: ILazyFactory(Of TInstance)
+  spec.csharp:
+  - uid: Apizr.ILazyFactory`1
+    name: ILazyFactory
+    nameWithType: ILazyFactory
+    fullName: Apizr.ILazyFactory
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TInstance
+    nameWithType: TInstance
+    fullName: TInstance
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.ILazyFactory`1
+    name: ILazyFactory
+    nameWithType: ILazyFactory
+    fullName: Apizr.ILazyFactory
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TInstance
+    nameWithType: TInstance
+    fullName: TInstance
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr
   commentId: N:Apizr
   name: Apizr
@@ -509,61 +552,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  parent: Apizr.Extending.ObjectExtensions
-  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  name: ToString(String, String)
-  nameWithType: ObjectExtensions.ToString(String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
@@ -606,42 +594,6 @@ references:
   - name: T
     nameWithType: T
     fullName: T
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.ILazyFactory`1
-  commentId: T:Apizr.ILazyFactory`1
-  name: ILazyFactory<TInstance>
-  nameWithType: ILazyFactory<TInstance>
-  fullName: Apizr.ILazyFactory<TInstance>
-  nameWithType.vb: ILazyFactory(Of TInstance)
-  fullName.vb: Apizr.ILazyFactory(Of TInstance)
-  name.vb: ILazyFactory(Of TInstance)
-  spec.csharp:
-  - uid: Apizr.ILazyFactory`1
-    name: ILazyFactory
-    nameWithType: ILazyFactory
-    fullName: Apizr.ILazyFactory
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TInstance
-    nameWithType: TInstance
-    fullName: TInstance
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Apizr.ILazyFactory`1
-    name: ILazyFactory
-    nameWithType: ILazyFactory
-    fullName: Apizr.ILazyFactory
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TInstance
-    nameWithType: TInstance
-    fullName: TInstance
   - name: )
     nameWithType: )
     fullName: )
@@ -693,87 +645,6 @@ references:
   fullName: System.Lazy<T>.Value
   nameWithType.vb: Lazy(Of T).Value
   fullName.vb: System.Lazy(Of T).Value
-- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  isExternal: true
-  name: ToString(Object, String, String)
-  nameWithType: ObjectExtensions.ToString(Object, String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.ObjectExtensions
-  commentId: T:Apizr.Extending.ObjectExtensions
-  parent: Apizr.Extending
-  name: ObjectExtensions
-  nameWithType: ObjectExtensions
-  fullName: Apizr.Extending.ObjectExtensions
-- uid: Apizr.Extending
-  commentId: N:Apizr.Extending
-  name: Apizr.Extending
-  nameWithType: Apizr.Extending
-  fullName: Apizr.Extending
 - uid: Apizr.LazyFactory`1.#ctor*
   commentId: Overload:Apizr.LazyFactory`1.#ctor
   name: LazyFactory

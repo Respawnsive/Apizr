@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 namespace Apizr.Configuring.Proper
 {
     /// <summary>
-    /// Common options
+    /// Options available at proper level for both static and extended registrations
     /// </summary>
     public interface IApizrProperOptionsBase : IApizrSharedOptionsBase
     {

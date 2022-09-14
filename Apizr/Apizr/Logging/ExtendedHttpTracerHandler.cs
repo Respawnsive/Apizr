@@ -15,6 +15,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Apizr.Logging
 {
+    /// <summary>
+    /// The Http tracer delegating handler
+    /// </summary>
     public class ExtendedHttpTracerHandler : DelegatingHandler
     {
         private readonly IApizrOptionsBase _apizrOptions;
@@ -39,13 +42,11 @@ namespace Apizr.Logging
         public static string LogMessageIndicatorSuffix = MessageIndicator;
 
         /// <summary> Constructs the <see cref="ExtendedHttpTracerHandler"/> with a custom <see cref="ILogger"/> and a custom <see cref="HttpMessageHandler"/></summary>
-        /// <param name="logger">Microsoft extended logger</param>
         /// <param name="apizrOptions">Apizr options</param>
         public ExtendedHttpTracerHandler(IApizrOptionsBase apizrOptions) : this(null, apizrOptions) { }
 
         /// <summary> Constructs the <see cref="ExtendedHttpTracerHandler"/> with a custom <see cref="ILogger"/> and a custom <see cref="HttpMessageHandler"/></summary>
         /// <param name="handler">User defined <see cref="HttpMessageHandler"/></param>
-        /// <param name="logger">Microsoft extended logger</param>
         /// <param name="apizrOptions">Apizr options</param>
         public ExtendedHttpTracerHandler(HttpMessageHandler handler, IApizrOptionsBase apizrOptions)
         {
@@ -56,6 +57,7 @@ namespace Apizr.Logging
             _apizrOptions = apizrOptions;
         }
 
+        /// <inheritdoc />
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var context = request.GetOrBuildPolicyExecutionContext();
@@ -119,6 +121,14 @@ namespace Apizr.Logging
                 logger.Log(logLevels.High(), sb.ToString());
         }
 
+        /// <summary>
+        /// Logs Http request
+        /// </summary>
+        /// <param name="request">The request</param>
+        /// <param name="logger">The logger</param>
+        /// <param name="logLevels">The log levels</param>
+        /// <param name="verbosity">The verbosity</param>
+        /// <returns></returns>
         protected virtual async Task LogHttpRequest(HttpRequestMessage request, ILogger logger, LogLevel[] logLevels, HttpMessageParts verbosity)
         {
             var sb = new StringBuilder();
@@ -148,6 +158,15 @@ namespace Apizr.Logging
                 logger.Log(logLevels.Low(), sb.ToString());
         }
 
+        /// <summary>
+        /// Logs Http response
+        /// </summary>
+        /// <param name="response">The response</param>
+        /// <param name="duration">The duration</param>
+        /// <param name="logger">The logger</param>
+        /// <param name="logLevels">The log levels</param>
+        /// <param name="verbosity">The verbosity</param>
+        /// <returns></returns>
         protected virtual async Task LogHttpResponse(HttpResponseMessage response, TimeSpan duration, ILogger logger, LogLevel[] logLevels, HttpMessageParts verbosity)
         {
             var sb = new StringBuilder();
@@ -200,6 +219,13 @@ namespace Apizr.Logging
             return responseResult;
         }
 
+        /// <summary>
+        /// Logs Http exceptions
+        /// </summary>
+        /// <param name="request">The request</param>
+        /// <param name="ex">The exception</param>
+        /// <param name="logger">The logger</param>
+        /// <param name="logLevels">The log levels</param>
         protected void LogHttpException(HttpRequestMessage request, Exception ex, ILogger logger, LogLevel[] logLevels)
         {
             var httpExceptionString = $@"{LogMessageIndicatorPrefix} HTTP EXCEPTION: [{request.Method}]{LogMessageIndicatorSuffix}
@@ -231,8 +257,18 @@ namespace Apizr.Logging
             return httpRequestHeaders;
         }
 
+        /// <summary>
+        /// Get the request body
+        /// </summary>
+        /// <param name="request">The request</param>
+        /// <returns></returns>
         protected Task<string> GetRequestBody(HttpRequestMessage request) => request?.Content?.ReadAsStringAsync() ?? Task.FromResult(string.Empty);
 
+        /// <summary>
+        /// Get the response body
+        /// </summary>
+        /// <param name="response">The response</param>
+        /// <returns></returns>
         protected Task<string> GetResponseBody(HttpResponseMessage response) => response?.Content?.ReadAsStringAsync() ?? Task.FromResult(string.Empty);
     }
 }

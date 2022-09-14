@@ -21,12 +21,5 @@ namespace Apizr.Mapping
         public MappedCrudEntityAttribute(string apiEntityBaseUri, Type apiEntityType, Type apiEntityKeyType = null, Type apiEntityReadAllResultType = null, Type apiEntityReadAllParamsType = null) : base(apiEntityBaseUri, apiEntityKeyType, apiEntityReadAllResultType, apiEntityReadAllParamsType, apiEntityType)
         {
         }
-
-        public CrudEntityAttribute ToCrudEntityAttribute(Type modelEntityType)
-        {
-            var attribute = this as CrudEntityAttribute;
-            attribute.MappedEntityType = modelEntityType;
-            return attribute;
-        }
     }
 }

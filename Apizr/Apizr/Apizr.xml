@@ -4,6 +4,11 @@
         <name>Apizr</name>
     </assembly>
     <members>
+        <member name="T:Apizr.ApizrBuilder">
+            <summary>
+            The static builder
+            </summary>
+        </member>
         <member name="M:Apizr.ApizrBuilder.CreateRegistry(System.Action{Apizr.Configuring.Registry.IApizrRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})">
             <summary>
             Create a registry with all managers built with both common and proper options
@@ -104,6 +109,129 @@
             An exception with optional cached <typeparamref name="TResult"/>
             </summary>
         </member>
+        <member name="T:Apizr.ApizrManager`1">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.#ctor(Apizr.ILazyFactory{`0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptions{`0})">
+            <summary>
+            Apizr manager constructor
+            </summary>
+            <param name="lazyWebApi">The managed web api</param>
+            <param name="connectivityHandler">The connectivity handler</param>
+            <param name="cacheHandler">The cache handler</param>
+            <param name="mappingHandler">The mapping handler</param>
+            <param name="policyRegistry">The policy registry</param>
+            <param name="apizrOptions">The web api dedicated options</param>
+        </member>
+        <member name="P:Apizr.ApizrManager`1.Api">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.ApizrManager`1.Options">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}},System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task}},``0,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task}},Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task}},``0,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,``1,System.Threading.Tasks.Task}},``0,Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},Polly.Context,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task}},``0,Polly.Context,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}},System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``1}}},System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``0}}},System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{``0}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``1}}},System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,``2,System.Threading.Tasks.Task{``1}}},``3,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,``1,System.Threading.Tasks.Task{``1}}},``0,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{``1}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``0}}},Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,``2,System.Threading.Tasks.Task{``1}}},``3,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task{``1}}},``0,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``1}}},Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ClearCacheAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ClearCacheAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ClearCacheAsync``1(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``0}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Authenticating.AuthenticationHandlerBase">
+            <inheritdoc cref="T:Apizr.Authenticating.IAuthenticationHandler" />
+        </member>
+        <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase)">
+            <summary>
+            The authentication handler constructor
+            </summary>
+            <param name="logger">The logger</param>
+            <param name="apizrOptions">The Apizr options</param>
+        </member>
+        <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.GetToken">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.SetToken(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.CloneHttpRequestMessageAsync(System.Net.Http.HttpRequestMessage)">
             <summary>
             Clone a HttpRequestMessage
@@ -111,6 +239,11 @@
             </summary>
             <param name="req">The request</param>
             <returns>A copy of the request</returns>
+        </member>
+        <member name="T:Apizr.Authenticating.IAuthenticationHandler">
+            <summary>
+            The authentication handler definition
+            </summary>
         </member>
         <member name="M:Apizr.Authenticating.IAuthenticationHandler.GetToken">
             <summary>
@@ -136,6 +269,30 @@
             Tells Apizr to cache all methods returning result when decorating an interface or a specific one when decorating a method
             You have to provide an <see cref="T:Apizr.Caching.ICacheHandler"/> mapping implementation to Apizr to use this feature
             </summary>
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheAttribute.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheAttribute.#ctor(Apizr.Caching.CacheMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheAttribute.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheAttribute.#ctor(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheAttribute.#ctor(Apizr.Caching.CacheMode,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheAttribute.#ctor(Apizr.Caching.CacheMode,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheAttribute.#ctor(System.TimeSpan,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheAttribute.#ctor(Apizr.Caching.CacheMode,System.String,System.Boolean)">
+            <inheritdoc />
         </member>
         <member name="T:Apizr.Caching.Attributes.CacheAttributeBase">
             <summary>
@@ -227,6 +384,76 @@
             </summary>
             <param name="propertyName">Property name.</param>
         </member>
+        <member name="P:Apizr.Caching.Attributes.CacheKeyAttribute.PropertyName">
+            <summary>
+            Property name of primitive primary Id
+            </summary>
+        </member>
+        <member name="T:Apizr.Caching.Attributes.CacheReadAllAttribute">
+            <summary>
+            Tells Apizr to cache ReadAll method
+            You have to provide an <see cref="T:Apizr.Caching.ICacheHandler"/> mapping implementation to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheReadAllAttribute.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheReadAllAttribute.#ctor(Apizr.Caching.CacheMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheReadAllAttribute.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheReadAllAttribute.#ctor(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheReadAllAttribute.#ctor(Apizr.Caching.CacheMode,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheReadAllAttribute.#ctor(Apizr.Caching.CacheMode,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheReadAllAttribute.#ctor(System.TimeSpan,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheReadAllAttribute.#ctor(Apizr.Caching.CacheMode,System.String,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Caching.Attributes.CacheReadAttribute">
+            <summary>
+            Tells Apizr to cache Read method
+            You have to provide an <see cref="T:Apizr.Caching.ICacheHandler"/> mapping implementation to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheReadAttribute.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheReadAttribute.#ctor(Apizr.Caching.CacheMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheReadAttribute.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheReadAttribute.#ctor(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheReadAttribute.#ctor(Apizr.Caching.CacheMode,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheReadAttribute.#ctor(Apizr.Caching.CacheMode,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheReadAttribute.#ctor(System.TimeSpan,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.Attributes.CacheReadAttribute.#ctor(Apizr.Caching.CacheMode,System.String,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Caching.CacheMode">
+            <summary>
+            Define the caching behaviour
+            </summary>
+        </member>
         <member name="F:Apizr.Caching.CacheMode.None">
             <summary>
             Returns fresh data when request succeed (no cache)
@@ -282,6 +509,417 @@
             <param name="cancellationToken">An optional cancellation token</param>
             <returns></returns>
         </member>
+        <member name="T:Apizr.Caching.VoidCacheHandler">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.VoidCacheHandler.GetAsync``1(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.VoidCacheHandler.SetAsync(System.String,System.Object,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.VoidCacheHandler.ClearAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Caching.VoidCacheHandler.RemoveAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Configuring.ApizrOptions">
+            <inheritdoc cref="T:Apizr.Configuring.IApizrOptions"/>
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptions.#ctor(Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Proper.IApizrProperOptions)">
+            <summary>
+            The options constructor
+            </summary>
+            <param name="commonOptions">The common options</param>
+            <param name="properOptions">The proper options</param>
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions.BaseUriFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions.BaseAddressFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions.BasePathFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions.HttpTracerModeFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions.TrafficVerbosityFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions.LogLevelsFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions.LoggerFactoryFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions.LoggerFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions.HttpClientHandlerFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions.PolicyRegistryFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions.RefitSettingsFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions.ConnectivityHandlerFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions.CacheHandlerFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions.MappingHandlerFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions.DelegatingHandlersFactories">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Configuring.ApizrOptions`1">
+            <inheritdoc cref="T:Apizr.Configuring.IApizrOptions`1"/>
+        </member>
+        <member name="F:Apizr.Configuring.ApizrOptions`1.Options">
+            <summary>
+            The options
+            </summary>
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptions`1.#ctor(Apizr.Configuring.IApizrOptionsBase)">
+            <summary>
+            The options constructor
+            </summary>
+            <param name="apizrOptions">The base options</param>
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions`1.WebApiType">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions`1.BaseUri">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions`1.BaseAddress">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions`1.BasePath">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions`1.HttpTracerMode">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions`1.TrafficVerbosity">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions`1.LogLevels">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions`1.Logger">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions`1.PolicyRegistryKeys">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptions`1.RefitSettings">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Configuring.ApizrOptionsBase">
+            <inheritdoc cref="T:Apizr.Configuring.IApizrOptionsBase" />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBase.#ctor(Apizr.Configuring.Common.IApizrCommonOptionsBase,Apizr.Configuring.Proper.IApizrProperOptionsBase)">
+            <summary>
+            The options constructor
+            </summary>
+            <param name="commonOptions">The common options</param>
+            <param name="properOptions">The proper options</param>
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptionsBase.WebApiType">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptionsBase.PolicyRegistryKeys">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptionsBase.Logger">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptionsBase.RefitSettings">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Configuring.ApizrOptionsBuilder">
+            <inheritdoc />
+        </member>
+        <member name="F:Apizr.Configuring.ApizrOptionsBuilder.Options">
+            <summary>
+            The options
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.ApizrOptionsBuilder.ApizrOptions">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithBaseAddress(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithBaseAddress(System.Func{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithBaseAddress(System.Uri)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithBaseAddress(System.Func{System.Uri})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithBasePath(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithBasePath(System.Func{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithHttpClientHandler(System.Net.Http.HttpClientHandler)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithHttpClientHandler(System.Func{System.Net.Http.HttpClientHandler})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithAuthenticationHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,``0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.AddDelegatingHandler(System.Net.Http.DelegatingHandler)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,System.Net.Http.DelegatingHandler})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithRefitSettings(Refit.RefitSettings)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithRefitSettings(System.Func{Refit.RefitSettings})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithPolicyRegistry(System.Func{Polly.Registry.IReadOnlyPolicyRegistry{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithConnectivityHandler(System.Func{System.Boolean})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithConnectivityHandler(Apizr.Connecting.IConnectivityHandler)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithConnectivityHandler(System.Func{Apizr.Connecting.IConnectivityHandler})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithCacheHandler(Apizr.Caching.ICacheHandler)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithCacheHandler(System.Func{Apizr.Caching.ICacheHandler})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithLoggerFactory(Microsoft.Extensions.Logging.ILoggerFactory)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithLoggerFactory(System.Func{Microsoft.Extensions.Logging.ILoggerFactory})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithMappingHandler(Apizr.Mapping.IMappingHandler)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrOptionsBuilder.WithMappingHandler(System.Func{Apizr.Mapping.IMappingHandler})">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Configuring.Common.ApizrCommonOptions">
+            <inheritdoc cref="T:Apizr.Configuring.Common.IApizrCommonOptions"/>
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptions.#ctor">
+            <summary>
+            The Apizr common options constructor
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.BaseUriFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.BaseAddressFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.BasePathFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.LoggerFactoryFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.PolicyRegistryFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.HttpClientHandlerFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.RefitSettingsFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.ConnectivityHandlerFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.CacheHandlerFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.MappingHandlerFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.DelegatingHandlersFactories">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.HttpTracerModeFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.TrafficVerbosityFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.LogLevelsFactory">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Configuring.Common.ApizrCommonOptionsBase">
+            <inheritdoc cref="T:Apizr.Configuring.Common.IApizrCommonOptionsBase" />
+        </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptionsBase.RefitSettings">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Configuring.Common.ApizrCommonOptionsBuilder">
+            <inheritdoc />
+        </member>
+        <member name="F:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.Options">
+            <summary>
+            The common options
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.ApizrOptions">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithBaseAddress(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithBaseAddress(System.Func{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithBaseAddress(System.Uri)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithBaseAddress(System.Func{System.Uri})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithBasePath(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithBasePath(System.Func{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHttpClientHandler(System.Net.Http.HttpClientHandler)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHttpClientHandler(System.Func{System.Net.Http.HttpClientHandler})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,``0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(System.Net.Http.DelegatingHandler)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,System.Net.Http.DelegatingHandler})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithPolicyRegistry(System.Func{Polly.Registry.IReadOnlyPolicyRegistry{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithRefitSettings(Refit.RefitSettings)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithRefitSettings(System.Func{Refit.RefitSettings})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithConnectivityHandler(Apizr.Connecting.IConnectivityHandler)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithConnectivityHandler(System.Func{System.Boolean})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithConnectivityHandler(System.Func{Apizr.Connecting.IConnectivityHandler})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithCacheHandler(Apizr.Caching.ICacheHandler)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithCacheHandler(System.Func{Apizr.Caching.ICacheHandler})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLoggerFactory(Microsoft.Extensions.Logging.ILoggerFactory)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLoggerFactory(System.Func{Microsoft.Extensions.Logging.ILoggerFactory})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithMappingHandler(Apizr.Mapping.IMappingHandler)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithMappingHandler(System.Func{Apizr.Mapping.IMappingHandler})">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Configuring.Common.IApizrCommonOptions">
+            <summary>
+            Options available at common level for static registrations
+            </summary>
+        </member>
         <member name="P:Apizr.Configuring.Common.IApizrCommonOptions.LoggerFactoryFactory">
             <summary>
             The LoggerFactory factory (I know, I know...)
@@ -314,12 +952,17 @@
         </member>
         <member name="T:Apizr.Configuring.Common.IApizrCommonOptionsBase">
             <summary>
-            Common options
+            Options available at common for both static and extended registrations
             </summary>
         </member>
         <member name="P:Apizr.Configuring.Common.IApizrCommonOptionsBase.RefitSettings">
             <summary>
             Refit settings
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2">
+            <summary>
+            Builder options available at common level for static registrations
             </summary>
         </member>
         <member name="M:Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry{System.String})">
@@ -378,6 +1021,34 @@
             <param name="mappingHandlerFactory">An <see cref="T:Apizr.Mapping.IMappingHandler"/> mapping implementation instance factory</param>
             <returns></returns>
         </member>
+        <member name="T:Apizr.Configuring.Common.IApizrCommonOptionsBuilder">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Configuring.Common.IApizrCommonOptionsBuilderBase">
+            <summary>
+            Builder options available at common level for both static and extended registrations
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Common.IApizrCommonOptionsBuilderBase`2">
+            <summary>
+            Builder options available at common level for both static and extended registrations
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase">
+            <summary>
+            Builder options available at common level for extended registration
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Common.IApizrGlobalCommonOptionsBuilderBase">
+            <summary>
+            Builder options available at common level for both static and extended registrations
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Common.IApizrGlobalCommonOptionsBuilderBase`2">
+            <summary>
+            Builder options available at common level for both static and extended registrations
+            </summary>
+        </member>
         <member name="M:Apizr.Configuring.Common.IApizrGlobalCommonOptionsBuilderBase`2.WithRefitSettings(Refit.RefitSettings)">
             <summary>
             Provide some Refit specific settings
@@ -413,20 +1084,208 @@
             <param name="mappingHandler">An <see cref="T:Apizr.Mapping.IMappingHandler"/> mapping implementation instance</param>
             <returns></returns>
         </member>
+        <member name="T:Apizr.Configuring.IApizrExtendedOptionsBuilderBase">
+            <summary>
+            Builder options available for extended registration
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.IApizrGlobalOptionsBuilderBase">
+            <summary>
+            Builder options available for both static and extended registrations
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.IApizrGlobalOptionsBuilderBase`2">
+            <summary>
+            Builder options available for both static and extended registrations
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.IApizrOptions">
+            <summary>
+            Options available for static registrations
+            </summary>
+        </member>
         <member name="T:Apizr.Configuring.IApizrOptions`1">
             <summary>
-            Options dedicated to <typeparamref name="TWebApi"/>
+            Options available for static registrations
             </summary>
             <typeparam name="TWebApi"></typeparam>
         </member>
         <member name="T:Apizr.Configuring.IApizrOptionsBase">
             <summary>
-            Specific options
+            Options available for both static and extended registrations
             </summary>
         </member>
         <member name="T:Apizr.Configuring.IApizrOptionsBuilder`2">
             <summary>
-            The options builder
+            Builder options available for static registrations
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.IApizrOptionsBuilder">
+            <summary>
+            Builder options available for static registrations
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.IApizrOptionsBuilderBase">
+            <summary>
+            Builder options available for both static and extended registrations
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.IApizrOptionsBuilderBase`2">
+            <summary>
+            Builder options available for both static and extended registrations
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Proper.ApizrProperOptions">
+            <inheritdoc cref="T:Apizr.Configuring.Proper.IApizrProperOptions"/>
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptions.#ctor(Apizr.Configuring.Shared.IApizrSharedOptions,System.Type,System.String[],System.String[],System.String,System.String,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])">
+            <summary>
+            The common options constructor
+            </summary>
+            <param name="sharedOptions">The shared options</param>
+            <param name="webApiType">The web api type</param>
+            <param name="assemblyPolicyRegistryKeys">Global policies</param>
+            <param name="webApiPolicyRegistryKeys">Specific policies</param>
+            <param name="baseAddress">The web api base address</param>
+            <param name="basePath">The web api base path</param>
+            <param name="httpTracerMode">The http tracer mode</param>
+            <param name="trafficVerbosity">The traffic verbosity</param>
+            <param name="logLevels">The log levels</param>
+        </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.BaseUriFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.BaseAddressFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.BasePathFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.HttpTracerModeFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.TrafficVerbosityFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.LogLevelsFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.LoggerFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.HttpClientHandlerFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.DelegatingHandlersFactories">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Configuring.Proper.ApizrProperOptionsBase">
+            <inheritdoc cref="T:Apizr.Configuring.Proper.IApizrProperOptionsBase" />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrSharedOptionsBase,System.Type,System.String[],System.String[])">
+            <summary>
+            The proper options constructor
+            </summary>
+            <param name="sharedOptions">The shared options</param>
+            <param name="webApiType">The web api type</param>
+            <param name="assemblyPolicyRegistryKeys">Global policies</param>
+            <param name="webApiPolicyRegistryKeys">Specific policies</param>
+        </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptionsBase.PolicyRegistryKeys">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptionsBase.Logger">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Configuring.Proper.ApizrProperOptionsBuilder">
+            <inheritdoc />
+        </member>
+        <member name="F:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.Options">
+            <summary>
+            The proper options
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.ApizrOptions">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithBaseAddress(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithBaseAddress(System.Func{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithBaseAddress(System.Uri)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithBaseAddress(System.Func{System.Uri})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithBasePath(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithBasePath(System.Func{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpClientHandler(System.Net.Http.HttpClientHandler)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpClientHandler(System.Func{System.Net.Http.HttpClientHandler})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,``0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler(System.Net.Http.DelegatingHandler)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,System.Net.Http.DelegatingHandler})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Configuring.Proper.IApizrExtendedProperOptionsBuilderBase">
+            <summary>
+            Builder options available at proper level for extended registration
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase">
+            <summary>
+            Builder options available at proper level for both static and extended registrations
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2">
+            <summary>
+            Builder options available at proper level for both static and extended registrations
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Proper.IApizrProperOptions">
+            <summary>
+            Options available at proper level for static registrations
             </summary>
         </member>
         <member name="P:Apizr.Configuring.Proper.IApizrProperOptions.LoggerFactory">
@@ -436,7 +1295,7 @@
         </member>
         <member name="T:Apizr.Configuring.Proper.IApizrProperOptionsBase">
             <summary>
-            Common options
+            Options available at proper level for both static and extended registrations
             </summary>
         </member>
         <member name="P:Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType">
@@ -452,6 +1311,135 @@
         <member name="P:Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger">
             <summary>
             The logger instance
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Proper.IApizrProperOptionsBuilder`2">
+            <summary>
+            Builder options available at proper level for static registrations
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Proper.IApizrProperOptionsBuilder">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Configuring.Proper.IApizrProperOptionsBuilderBase">
+            <summary>
+            Builder options available at proper level for both static and extended registrations
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Proper.IApizrProperOptionsBuilderBase`2">
+            <summary>
+            Builder options available at proper level for both static and extended registrations
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Registry.ApizrRegistry">
+            <inheritdoc cref="T:Apizr.Configuring.Registry.IApizrConcurrentRegistry"/>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManagerFor``1(System.Func{Apizr.IApizrManager{``0}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManagerFor(System.Type,System.Func{Apizr.IApizrManager})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistry.Populate(System.Action{System.Type,System.Func{System.Object}})">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Configuring.Registry.ApizrRegistryBase">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.GetCrudManagerFor``1">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.GetCrudManagerFor``2">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.GetCrudManagerFor``3">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.GetCrudManagerFor``4">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.GetManagerFor``1">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.TryGetCrudManagerFor``1(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.TryGetCrudManagerFor``2(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.TryGetCrudManagerFor``3(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.TryGetCrudManagerFor``4(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerFor``1(Apizr.IApizrManager{``0}@)">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Registry.ApizrRegistryBase.Count">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.ContainsCrudManagerFor``1">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.ContainsCrudManagerFor``2">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.ContainsCrudManagerFor``3">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.ContainsCrudManagerFor``4">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.ContainsManagerFor``1">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Configuring.Registry.ApizrRegistryBuilder">
+            <inheritdoc />
+        </member>
+        <member name="F:Apizr.Configuring.Registry.ApizrRegistryBuilder.Registry">
+            <summary>
+            The registry
+            </summary>
+        </member>
+        <member name="F:Apizr.Configuring.Registry.ApizrRegistryBuilder.CommonOptions">
+            <summary>
+            The common options
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Registry.ApizrRegistryBuilder.ApizrRegistry">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddGroup(System.Action{Apizr.Configuring.Registry.IApizrRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddCrudManagerFor``1(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddCrudManagerFor``2(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddCrudManagerFor``3(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddCrudManagerFor``4(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptionsBase,``4},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddManagerFor``1(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptions{``0},``1},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Configuring.Registry.IApizrEnumerableRegistry">
+            <summary>
+            Registry options available for both static and extended registrations
             </summary>
         </member>
         <member name="P:Apizr.Configuring.Registry.IApizrEnumerableRegistry.Count">
@@ -583,6 +1571,22 @@
             <typeparam name="TWebApi">The managed api type</typeparam>
             <returns></returns>
         </member>
+        <member name="T:Apizr.Configuring.Registry.IApizrRegistry">
+            <summary>
+            Registry options available for static registrations
+            </summary>
+        </member>
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistry.Populate(System.Action{System.Type,System.Func{System.Object}})">
+            <summary>
+            Populate all registered types and its factories
+            </summary>
+            <param name="populateAction">The action to execute when populating</param>
+        </member>
+        <member name="T:Apizr.Configuring.Registry.IApizrRegistryBuilder`4">
+            <summary>
+            Registry builder options available for static registrations
+            </summary>
+        </member>
         <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptionsBase,``4},System.Action{`2})">
             <summary>
             Create a <typeparamref name="TApizrManager"/> instance for a managed crud api for <typeparamref name="T"/> object (class), 
@@ -608,6 +1612,21 @@
             <param name="apizrManagerFactory">The custom manager implementation instance factory</param>
             <param name="properOptionsBuilder">The builder defining some api proper options</param>
             <returns></returns>
+        </member>
+        <member name="T:Apizr.Configuring.Registry.IApizrRegistryBuilder">
+            <summary>
+            Registry builder options available for static registrations
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Registry.IApizrRegistryBuilderBase">
+            <summary>
+            Registry builder options available for both static and extended registrations
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`4">
+            <summary>
+            Registry builder options available for both static and extended registrations
+            </summary>
         </member>
         <member name="P:Apizr.Configuring.Registry.IApizrRegistryBuilderBase`4.ApizrRegistry">
             <summary>
@@ -678,6 +1697,43 @@
             <param name="optionsBuilder">The builder defining some api proper options</param>
             <returns></returns>
         </member>
+        <member name="T:Apizr.Configuring.Shared.ApizrSharedOptionsBase">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseUri">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseAddress">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.BasePath">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.HttpTracerMode">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.TrafficVerbosity">
+            <inheritdoc />
+        </member>
+        <member name="F:Apizr.Configuring.Shared.ApizrSharedOptionsBase._logLevels">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.LogLevels">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Configuring.Shared.IApizrExtendedSharedOptionsBuilderBase">
+            <summary>
+            Builder options available at both common and proper level for extended registration
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase">
+            <summary>
+            Builder options available at both common and proper level for both static and extended registrations
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.ApizrOptions">
             <summary>
             Apizr common options
@@ -734,6 +1790,11 @@
             <param name="logLevels">Log levels to apply while writing (default: Information)</param>
             <returns></returns>
         </member>
+        <member name="T:Apizr.Configuring.Shared.IApizrSharedOptions">
+            <summary>
+            Options available at both common and proper level for static registrations
+            </summary>
+        </member>
         <member name="P:Apizr.Configuring.Shared.IApizrSharedOptions.BaseUriFactory">
             <summary>
             Base uri factory
@@ -774,6 +1835,11 @@
             Delegating handlers factories
             </summary>
         </member>
+        <member name="T:Apizr.Configuring.Shared.IApizrSharedOptionsBase">
+            <summary>
+            Options available at both common and proper level for both static and extended registrations
+            </summary>
+        </member>
         <member name="P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseUri">
             <summary>
             Base address
@@ -802,6 +1868,11 @@
         <member name="P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels">
             <summary>
             Log levels while writing
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2">
+            <summary>
+            Builder options available at both common and proper level for static registrations
             </summary>
         </member>
         <member name="M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.String})">
@@ -907,6 +1978,28 @@
             <param name="logLevelsFactory"></param>
             <returns></returns>
         </member>
+        <member name="T:Apizr.Configuring.Shared.IApizrSharedOptionsBuilderBase">
+            <summary>
+            Builder options available at both common and proper level for both static and extended registrations
+            </summary>
+        </member>
+        <member name="T:Apizr.Configuring.Shared.IApizrSharedOptionsBuilderBase`2">
+            <summary>
+            Builder options available at both common and proper level for both static and extended registrations
+            </summary>
+        </member>
+        <member name="T:Apizr.Connecting.DefaultConnectivityHandler">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Connecting.DefaultConnectivityHandler.#ctor(System.Func{System.Boolean})">
+            <summary>
+            The connectivity handler constructor
+            </summary>
+            <param name="connectivityChecker"></param>
+        </member>
+        <member name="M:Apizr.Connecting.DefaultConnectivityHandler.IsConnected">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Connecting.IConnectivityHandler">
             <summary>
             The connectivity handler method mapping interface
@@ -918,6 +2011,72 @@
             Map Apizr connectivity check to your connectivity handler
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:Apizr.Extending.EnumerableExtensions">
+            <summary>
+            Some enumerable extensions
+            </summary>
+        </member>
+        <member name="M:Apizr.Extending.EnumerableExtensions.Low(System.Collections.Generic.IEnumerable{Microsoft.Extensions.Logging.LogLevel})">
+            <summary>
+            Return the lowest value
+            </summary>
+            <param name="enumerable">The source enumerable</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.EnumerableExtensions.Medium(System.Collections.Generic.IEnumerable{Microsoft.Extensions.Logging.LogLevel})">
+            <summary>
+            Return the closest value to the middle
+            </summary>
+            <param name="enumerable">The source enumerable</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.EnumerableExtensions.High(System.Collections.Generic.IEnumerable{Microsoft.Extensions.Logging.LogLevel})">
+            <summary>
+            Return the highest value
+            </summary>
+            <param name="enumerable">The source enumerable</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Extending.TypeExtensions">
+            <summary>
+            Some Type extensions
+            </summary>
+        </member>
+        <member name="M:Apizr.Extending.TypeExtensions.IsAssignableFromGenericType(System.Type,System.Type)">
+            <summary>
+            Checks if the generic type is assignable from the given type
+            </summary>
+            <param name="genericType">The generic type</param>
+            <param name="givenType">The given type</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.TypeExtensions.MakeGenericTypeIfNeeded(System.Type,System.Type[])">
+            <summary>
+            Returns a closed generic type based on provided type arguments
+            </summary>
+            <param name="type">The open generic type</param>
+            <param name="typeArguments">The type arguments</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.TypeExtensions.IsOpenGeneric(System.Type)">
+            <summary>
+            Checks if the type is open generic
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.TypeExtensions.GetFriendlyName(System.Type)">
+            <summary>
+            Returns a more friendly readable type name
+            </summary>
+            <param name="type">The type to get friendly name of</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Helping.UrlHelper">
+            <summary>
+            Some url helpers
+            </summary>
         </member>
         <member name="M:Apizr.Helping.UrlHelper.Combine(System.String,System.String)">
             <summary>
@@ -934,6 +2093,11 @@
             <param name="baseUrl">Base url that will be combined</param>
             <param name="relativePaths">The array of relative paths to combine</param>
             <returns>The merged url</returns>
+        </member>
+        <member name="T:Apizr.IApizrManager">
+            <summary>
+            The manager definition
+            </summary>
         </member>
         <member name="T:Apizr.IApizrManager`1">
             <summary>
@@ -1274,10 +2438,49 @@
             The lazy instance
             </summary>
         </member>
+        <member name="T:Apizr.LazyFactory`1">
+            <inheritdoc cref="T:Apizr.ILazyFactory`1"/>
+        </member>
+        <member name="M:Apizr.LazyFactory`1.#ctor(System.Func{`0})">
+            <summary>
+            Lazy factory constructor
+            </summary>
+            <param name="instanceFactory">The factory to be lazy</param>
+        </member>
+        <member name="M:Apizr.LazyFactory`1.#ctor(System.Func{System.Object})">
+            <summary>
+            Lazy factory constructor
+            </summary>
+            <param name="instanceFactory">The factory to be lazy</param>
+        </member>
         <member name="T:Apizr.Logging.Attributes.LogAttribute">
             <summary>
             Tells Apizr to trace and log HTTP(s) traffic
             </summary>
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogAttribute.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogAttribute.#ctor(Apizr.Logging.HttpMessageParts)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogAttribute.#ctor(Apizr.Logging.HttpTracerMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogAttribute.#ctor(Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogAttribute.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogAttribute.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
         </member>
         <member name="T:Apizr.Logging.Attributes.LogAttributeBase">
             <summary>
@@ -1353,27 +2556,152 @@
         </member>
         <member name="T:Apizr.Logging.Attributes.LogCreateAttribute">
             <summary>
-            Tells Apizr to trace and log HTTP(s) traffic
+            Tells Apizr to trace and log HTTP(s) traffic on Create method
             </summary>
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogCreateAttribute.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogCreateAttribute.#ctor(Apizr.Logging.HttpMessageParts)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogCreateAttribute.#ctor(Apizr.Logging.HttpTracerMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogCreateAttribute.#ctor(Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogCreateAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogCreateAttribute.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogCreateAttribute.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogCreateAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
         </member>
         <member name="T:Apizr.Logging.Attributes.LogDeleteAttribute">
             <summary>
-            Tells Apizr to trace and log HTTP(s) traffic
+            Tells Apizr to trace and log HTTP(s) traffic on Delete method
             </summary>
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogDeleteAttribute.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogDeleteAttribute.#ctor(Apizr.Logging.HttpMessageParts)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogDeleteAttribute.#ctor(Apizr.Logging.HttpTracerMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogDeleteAttribute.#ctor(Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogDeleteAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogDeleteAttribute.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogDeleteAttribute.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogDeleteAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
         </member>
         <member name="T:Apizr.Logging.Attributes.LogReadAllAttribute">
             <summary>
-            Tells Apizr to trace and log HTTP(s) traffic
+            Tells Apizr to trace and log HTTP(s) traffic on ReadAll method
             </summary>
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogReadAllAttribute.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogReadAllAttribute.#ctor(Apizr.Logging.HttpMessageParts)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogReadAllAttribute.#ctor(Apizr.Logging.HttpTracerMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogReadAllAttribute.#ctor(Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogReadAllAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogReadAllAttribute.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogReadAllAttribute.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogReadAllAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
         </member>
         <member name="T:Apizr.Logging.Attributes.LogReadAttribute">
             <summary>
-            Tells Apizr to trace and log HTTP(s) traffic
+            Tells Apizr to trace and log HTTP(s) traffic on Read method
             </summary>
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogReadAttribute.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpMessageParts)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpTracerMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogReadAttribute.#ctor(Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogReadAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
         </member>
         <member name="T:Apizr.Logging.Attributes.LogUpdateAttribute">
             <summary>
-            Tells Apizr to trace and log HTTP(s) traffic
+            Tells Apizr to trace and log HTTP(s) traffic on Update method
+            </summary>
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogUpdateAttribute.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogUpdateAttribute.#ctor(Apizr.Logging.HttpMessageParts)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogUpdateAttribute.#ctor(Apizr.Logging.HttpTracerMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogUpdateAttribute.#ctor(Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogUpdateAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogUpdateAttribute.#ctor(Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogUpdateAttribute.#ctor(Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.Attributes.LogUpdateAttribute.#ctor(Apizr.Logging.HttpMessageParts,Apizr.Logging.HttpTracerMode,Microsoft.Extensions.Logging.LogLevel[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Logging.ExtendedHttpHandlerBuilder">
+            <summary>
+            HttpHandler builder
             </summary>
         </member>
         <member name="P:Apizr.Logging.ExtendedHttpHandlerBuilder.HttpTracerHandler">
@@ -1385,7 +2713,6 @@
             <summary>
             Initializes a new instance of the <typeparamref name="T:ExtendedHttpTracerHandler:ExtendedHttpTracerHandler"/> class.
             </summary>
-            <param name="logger">Logger.</param>
             <param name="apizrOptions"></param>
         </member>
         <member name="M:Apizr.Logging.ExtendedHttpHandlerBuilder.#ctor(System.Net.Http.HttpClientHandler,Apizr.Configuring.IApizrOptionsBase)">
@@ -1393,7 +2720,6 @@
             Initializes a new instance of the <typeparamref name="T:ExtendedHttpTracerHandler:ExtendedHttpTracerHandler"/> class.
             </summary>
             <param name="innerHandler">HttpClientHandler.</param>
-            <param name="logger">Logger.</param>
             <param name="apizrOptions"></param>
         </member>
         <member name="M:Apizr.Logging.ExtendedHttpHandlerBuilder.#ctor(Apizr.Logging.ExtendedHttpTracerHandler)">
@@ -1415,6 +2741,11 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Apizr.Logging.ExtendedHttpTracerHandler">
+            <summary>
+            The Http tracer delegating handler
+            </summary>
+        </member>
         <member name="P:Apizr.Logging.ExtendedHttpTracerHandler.DefaultDurationFormat">
             <summary>
             Duration string format. Defaults to "Duration: {0:ss\\:fffffff}"
@@ -1430,14 +2761,139 @@
         </member>
         <member name="M:Apizr.Logging.ExtendedHttpTracerHandler.#ctor(Apizr.Configuring.IApizrOptionsBase)">
             <summary> Constructs the <see cref="T:Apizr.Logging.ExtendedHttpTracerHandler"/> with a custom <see cref="T:Microsoft.Extensions.Logging.ILogger"/> and a custom <see cref="T:System.Net.Http.HttpMessageHandler"/></summary>
-            <param name="logger">Microsoft extended logger</param>
             <param name="apizrOptions">Apizr options</param>
         </member>
         <member name="M:Apizr.Logging.ExtendedHttpTracerHandler.#ctor(System.Net.Http.HttpMessageHandler,Apizr.Configuring.IApizrOptionsBase)">
             <summary> Constructs the <see cref="T:Apizr.Logging.ExtendedHttpTracerHandler"/> with a custom <see cref="T:Microsoft.Extensions.Logging.ILogger"/> and a custom <see cref="T:System.Net.Http.HttpMessageHandler"/></summary>
             <param name="handler">User defined <see cref="T:System.Net.Http.HttpMessageHandler"/></param>
-            <param name="logger">Microsoft extended logger</param>
             <param name="apizrOptions">Apizr options</param>
+        </member>
+        <member name="M:Apizr.Logging.ExtendedHttpTracerHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest(System.Net.Http.HttpRequestMessage,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts)">
+            <summary>
+            Logs Http request
+            </summary>
+            <param name="request">The request</param>
+            <param name="logger">The logger</param>
+            <param name="logLevels">The log levels</param>
+            <param name="verbosity">The verbosity</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse(System.Net.Http.HttpResponseMessage,System.TimeSpan,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts)">
+            <summary>
+            Logs Http response
+            </summary>
+            <param name="response">The response</param>
+            <param name="duration">The duration</param>
+            <param name="logger">The logger</param>
+            <param name="logLevels">The log levels</param>
+            <param name="verbosity">The verbosity</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpException(System.Net.Http.HttpRequestMessage,System.Exception,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[])">
+            <summary>
+            Logs Http exceptions
+            </summary>
+            <param name="request">The request</param>
+            <param name="ex">The exception</param>
+            <param name="logger">The logger</param>
+            <param name="logLevels">The log levels</param>
+        </member>
+        <member name="M:Apizr.Logging.ExtendedHttpTracerHandler.GetRequestBody(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Get the request body
+            </summary>
+            <param name="request">The request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Logging.ExtendedHttpTracerHandler.GetResponseBody(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Get the response body
+            </summary>
+            <param name="response">The response</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Logging.HttpMessageParts">
+            <summary>
+            Http message parts to log
+            </summary>
+        </member>
+        <member name="F:Apizr.Logging.HttpMessageParts.Unspecified">
+            <summary>
+            Unspecified
+            </summary>
+        </member>
+        <member name="F:Apizr.Logging.HttpMessageParts.None">
+            <summary>
+            Logs no parts
+            </summary>
+        </member>
+        <member name="F:Apizr.Logging.HttpMessageParts.RequestBody">
+            <summary>
+            Logs request body only
+            </summary>
+        </member>
+        <member name="F:Apizr.Logging.HttpMessageParts.RequestHeaders">
+            <summary>
+            Logs request headers only
+            </summary>
+        </member>
+        <member name="F:Apizr.Logging.HttpMessageParts.RequestCookies">
+            <summary>
+            Logs request cookies only
+            </summary>
+        </member>
+        <member name="F:Apizr.Logging.HttpMessageParts.RequestAll">
+            <summary>
+            Logs request body, headers and cookies only
+            </summary>
+        </member>
+        <member name="F:Apizr.Logging.HttpMessageParts.ResponseBody">
+            <summary>
+            Logs response body only
+            </summary>
+        </member>
+        <member name="F:Apizr.Logging.HttpMessageParts.ResponseHeaders">
+            <summary>
+            Logs response headers only
+            </summary>
+        </member>
+        <member name="F:Apizr.Logging.HttpMessageParts.ResponseAll">
+            <summary>
+            Logs response body and headers only
+            </summary>
+        </member>
+        <member name="F:Apizr.Logging.HttpMessageParts.All">
+            <summary>
+            Logs all parts
+            </summary>
+        </member>
+        <member name="T:Apizr.Logging.HttpTracerMode">
+            <summary>
+            The Http tracer logging mode
+            </summary>
+        </member>
+        <member name="F:Apizr.Logging.HttpTracerMode.ExceptionsOnly">
+            <summary>
+            Logs given parts only when an exception occurs
+            </summary>
+        </member>
+        <member name="F:Apizr.Logging.HttpTracerMode.ErrorsAndExceptionsOnly">
+            <summary>
+            Logs given parts only when an exception or an error occurs
+            </summary>
+        </member>
+        <member name="F:Apizr.Logging.HttpTracerMode.Everything">
+            <summary>
+            Logs given parts anytime
+            </summary>
+        </member>
+        <member name="T:Apizr.Mapping.IMappingHandler">
+            <summary>
+            The mapping handler definition
+            </summary>
         </member>
         <member name="M:Apizr.Mapping.IMappingHandler.Map``1(System.Object)">
             <summary>
@@ -1530,6 +2986,49 @@
             Void mapping should never be used and will just be ignored
             </summary>
         </member>
+        <member name="M:Apizr.Mapping.VoidMappingHandler.Map``1(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mapping.VoidMappingHandler.Map``2(``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mapping.VoidMappingHandler.Map``2(``0,``1)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mapping.VoidMappingHandler.Map(System.Object,System.Type,System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mapping.VoidMappingHandler.Map(System.Object,System.Object,System.Type,System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Policing.ContextAttribute">
+            <summary>
+            The Polly context property attribute
+            </summary>
+        </member>
+        <member name="M:Apizr.Policing.ContextAttribute.#ctor">
+            <summary>
+            Create a Polly context
+            </summary>
+        </member>
+        <member name="T:Apizr.Policing.CreatePolicyAttribute">
+            <summary>
+            Tells Apizr to apply some policies to Create method
+            You have to provide a policy registry to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Policing.CreatePolicyAttribute.#ctor(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Policing.DeletePolicyAttribute">
+            <summary>
+            Tells Apizr to apply some policies to Delete method
+            You have to provide a policy registry to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Policing.DeletePolicyAttribute.#ctor(System.String[])">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Policing.HttpRequestMessageExtensions">
             <summary>
             Extension methods for <see cref="T:System.Net.Http.HttpRequestMessage"/> Polly integration.
@@ -1594,6 +3093,12 @@
             <param name="retryCount"></param>
             <param name="context"></param>
             <param name="onRetry"></param>
+        </member>
+        <member name="T:Apizr.Policing.PolicyAttribute">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Policing.PolicyAttribute.#ctor(System.String[])">
+            <inheritdoc />
         </member>
         <member name="T:Apizr.Policing.PolicyAttributeBase">
             <summary>
@@ -1665,6 +3170,42 @@
             <param name="tracerMode"></param>
             <returns></returns>
         </member>
+        <member name="T:Apizr.Policing.ReadAllPolicyAttribute">
+            <summary>
+            Tells Apizr to apply some policies to ReadAll method
+            You have to provide a policy registry to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Policing.ReadAllPolicyAttribute.#ctor(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Policing.ReadPolicyAttribute">
+            <summary>
+            Tells Apizr to apply some policies to Read method
+            You have to provide a policy registry to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Policing.ReadPolicyAttribute.#ctor(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Policing.UpdatePolicyAttribute">
+            <summary>
+            Tells Apizr to apply some policies to Update method
+            You have to provide a policy registry to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Policing.UpdatePolicyAttribute.#ctor(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.PreserveAttribute">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.PreserveAttribute.#ctor(System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.PreserveAttribute.#ctor">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Requesting.CrudEntityAttribute">
             <summary>
             Tells Apizr to auto register an <see cref="T:Apizr.IApizrManager`1"/> for this decorated entity (works only with IServiceCollection extensions registration)
@@ -1713,6 +3254,284 @@
             <typeparam name="TKey">The entity's crud key type</typeparam>
             <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
             <typeparam name="TReadAllParams">ReadAll query parameters type</typeparam>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.Create(`0)">
+            <summary>
+            Send a Create request with a <typeparamref name="T"/> payload
+            </summary>
+            <param name="payload">The payload</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.Create(`0,Polly.Context)">
+            <summary>
+            Send a Create request with a <typeparamref name="T"/> payload, passing a Polly context through the request
+            </summary>
+            <param name="payload">The payload</param>
+            <param name="context">The Polly context</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.Create(`0,System.Threading.CancellationToken)">
+            <summary>
+            Send a Create request with a <typeparamref name="T"/> payload, passing a cancellation token through the request
+            </summary>
+            <param name="payload">The payload</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.Create(`0,Polly.Context,System.Threading.CancellationToken)">
+            <summary>
+            Send a Create request with a <typeparamref name="T"/> payload, passing a Polly context and a cancellation token through the request
+            </summary>
+            <param name="payload">The payload</param>
+            <param name="context">The Polly context</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll">
+            <summary>
+            Send a ReadAll request
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll(`3)">
+            <summary>
+            Send a ReadAll request with some query params used as cache key
+            </summary>
+            <param name="readAllParams">Query params used as cache key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll(System.Int32)">
+            <summary>
+            Send a ReadAll request with an execution priority level
+            </summary>
+            <param name="priority">The execution priority level</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll(Polly.Context)">
+            <summary>
+            Send a ReadAll request, passing a Polly context through the request
+            </summary>
+            <param name="context">The Polly context</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll(System.Threading.CancellationToken)">
+            <summary>
+            Send a ReadAll request, passing a cancellation token through the request
+            </summary>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll(`3,System.Int32)">
+            <summary>
+            Send a ReadAll request with some query params used as cache key and an execution priority level
+            </summary>
+            <param name="readAllParams">Query params used as cache key</param>
+            <param name="priority">The execution priority level</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll(`3,Polly.Context)">
+            <summary>
+            Send a ReadAll request with some query params used as cache key and passing a Polly context through the request
+            </summary>
+            <param name="readAllParams">Query params used as cache key</param>
+            <param name="context">The Polly context</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll(`3,System.Threading.CancellationToken)">
+            <summary>
+            Send a ReadAll request with some query params used as cache key, passing a cancellation token through the request
+            </summary>
+            <param name="readAllParams">Query params used as cache key</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll(System.Int32,Polly.Context)">
+            <summary>
+            Send a ReadAll request with an execution priority level and passing a Polly context through the request
+            </summary>
+            <param name="priority">The execution priority level</param>
+            <param name="context">The Polly context</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Send a ReadAll request with an execution priority level, passing a cancellation token through the request
+            </summary>
+            <param name="priority">The execution priority level</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll(Polly.Context,System.Threading.CancellationToken)">
+            <summary>
+            Send a ReadAll request, passing a Polly context and a cancellation token through the request
+            </summary>
+            <param name="context">The Polly context</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll(`3,System.Int32,Polly.Context)">
+            <summary>
+            Send a ReadAll request with some query params used as cache key and an execution priority level, passing a Polly context through the request
+            </summary>
+            <param name="readAllParams">Query params used as cache key</param>
+            <param name="priority">The execution priority level</param>
+            <param name="context">The Polly context</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll(`3,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Send a ReadAll request with some query params used as cache key and an execution priority level, passing a cancellation token through the request
+            </summary>
+            <param name="readAllParams">Query params used as cache key</param>
+            <param name="priority">The execution priority level</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll(`3,Polly.Context,System.Threading.CancellationToken)">
+            <summary>
+            Send a ReadAll request with some query params used as cache key, passing a Polly context and a cancellation token through the request
+            </summary>
+            <param name="readAllParams">Query params used as cache key</param>
+            <param name="context">The Polly context</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll(`3,System.Int32,Polly.Context,System.Threading.CancellationToken)">
+            <summary>
+            Send a ReadAll request with some query params used as cache key and an execution priority level, passing a Polly context and a cancellation token through the request
+            </summary>
+            <param name="readAllParams">Query params used as cache key</param>
+            <param name="priority">The execution priority level</param>
+            <param name="context">The Polly context</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.Read(`1)">
+            <summary>
+            Send a Read request with a key param
+            </summary>
+            <param name="key">The key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.Read(`1,System.Int32)">
+            <summary>
+            Send a Read request with a key param and an execution priority level
+            </summary>
+            <param name="key">The key</param>
+            <param name="priority">The execution priority level</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.Read(`1,Polly.Context)">
+            <summary>
+            Send a Read request with a key param, passing a Polly context through the request
+            </summary>
+            <param name="key">The key</param>
+            <param name="context">The Polly context</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.Read(`1,System.Threading.CancellationToken)">
+            <summary>
+            Send a Read request with a key param, passing a cancellation token through the request
+            </summary>
+            <param name="key">The key</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.Read(`1,System.Int32,Polly.Context)">
+            <summary>
+            Send a Read request with a key param and an execution priority level, passing a Polly context through the request
+            </summary>
+            <param name="key">The key</param>
+            <param name="priority">The execution priority level</param>
+            <param name="context">The Polly context</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.Read(`1,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Send a Read request with a key param and an execution priority level, passing a cancellation token through the request
+            </summary>
+            <param name="key">The key</param>
+            <param name="priority">The execution priority level</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.Read(`1,System.Int32,Polly.Context,System.Threading.CancellationToken)">
+            <summary>
+            Send a Read request with a key param and an execution priority level, passing a Polly context and a cancellation token through the request
+            </summary>
+            <param name="key">The key</param>
+            <param name="priority">The execution priority level</param>
+            <param name="context">The Polly context</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.Update(`1,`0)">
+            <summary>
+            Send an Update request with a key and a payload
+            </summary>
+            <param name="key">The key</param>
+            <param name="payload">The payload</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.Update(`1,`0,Polly.Context)">
+            <summary>
+            Send an Update request with a key and a payload, passing a Polly context through the request
+            </summary>
+            <param name="key">The key</param>
+            <param name="payload">The payload</param>
+            <param name="context">The Polly context</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.Update(`1,`0,System.Threading.CancellationToken)">
+            <summary>
+            Send an Update request with a key and a payload, passing a cancellation token through the request
+            </summary>
+            <param name="key">The key</param>
+            <param name="payload">The payload</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.Update(`1,`0,Polly.Context,System.Threading.CancellationToken)">
+            <summary>
+            Send an Update request with a key and a payload, passing a Polly context and a cancellation token through the request
+            </summary>
+            <param name="key">The key</param>
+            <param name="payload">The payload</param>
+            <param name="context">The Polly context</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.Delete(`1)">
+            <summary>
+            Send a Delete request with a key param
+            </summary>
+            <param name="key">The key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.Delete(`1,Polly.Context)">
+            <summary>
+            Send a Delete request with a key param, passing a Polly context through the request
+            </summary>
+            <param name="key">The key</param>
+            <param name="context">The Polly context</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.Delete(`1,System.Threading.CancellationToken)">
+            <summary>
+            Send a Delete request with a key param, passing a cancellation token through the request
+            </summary>
+            <param name="key">The key</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Requesting.ICrudApi`4.Delete(`1,Polly.Context,System.Threading.CancellationToken)">
+            <summary>
+            Send a Delete request with a key param, passing a Polly context and a cancellation token through the request
+            </summary>
+            <param name="key">The key</param>
+            <param name="context">The Polly context</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns></returns>
         </member>
         <member name="T:Apizr.WebApiAttribute">
             <summary>

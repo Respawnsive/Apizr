@@ -10,6 +10,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Apizr.Logging
 {
+    /// <summary>
+    /// HttpHandler builder
+    /// </summary>
     public class ExtendedHttpHandlerBuilder
     {
         private readonly IList<DelegatingHandler> _handlersList = new List<DelegatingHandler>();
@@ -23,7 +26,6 @@ namespace Apizr.Logging
         /// <summary>
         /// Initializes a new instance of the <typeparamref name="T:ExtendedHttpTracerHandler"/> class.
         /// </summary>
-        /// <param name="logger">Logger.</param>
         /// <param name="apizrOptions"></param>
         public ExtendedHttpHandlerBuilder(IApizrOptionsBase apizrOptions) : this(new ExtendedHttpTracerHandler(null, apizrOptions)) { }
 
@@ -31,7 +33,6 @@ namespace Apizr.Logging
         /// Initializes a new instance of the <typeparamref name="T:ExtendedHttpTracerHandler"/> class.
         /// </summary>
         /// <param name="innerHandler">HttpClientHandler.</param>
-        /// <param name="logger">Logger.</param>
         /// <param name="apizrOptions"></param>
         public ExtendedHttpHandlerBuilder(HttpClientHandler innerHandler, IApizrOptionsBase apizrOptions) : this(new ExtendedHttpTracerHandler(innerHandler, apizrOptions)) { }
 

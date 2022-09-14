@@ -5,20 +5,28 @@ using Microsoft.Extensions.Logging;
 
 namespace Apizr.Configuring.Shared
 {
+    /// <inheritdoc />
     public abstract class ApizrSharedOptionsBase : IApizrSharedOptionsBase
     {
-        protected ApizrSharedOptionsBase()
-        {
-            
-        }
-
+        /// <inheritdoc />
         public Uri BaseUri { get; protected set; }
+
+        /// <inheritdoc />
         public string BaseAddress { get; protected set; }
+
+        /// <inheritdoc />
         public string BasePath { get; protected set; }
+
+        /// <inheritdoc />
         public HttpTracerMode HttpTracerMode { get; protected set; }
+
+        /// <inheritdoc />
         public HttpMessageParts TrafficVerbosity { get; protected set; }
-        
+
+        /// <inheritdoc />
+
         private LogLevel[] _logLevels;
+        /// <inheritdoc />
         public LogLevel[] LogLevels
         {
             get => _logLevels;

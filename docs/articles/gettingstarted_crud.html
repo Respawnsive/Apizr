@@ -8,7 +8,7 @@
     <title>Defining | Apizr </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Defining | Apizr ">
-    <meta name="generator" content="docfx 2.59.0.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -279,11 +279,9 @@ This is where the ApizrRegistry comes on stage.</p>
 var apizrRegistry = ApizrBuilder.CreateRegistry(
     registry =&gt; registry
         .AddCrudManagerFor&lt;T1&gt;(
-            options =&gt; options
-                .WithBaseAddress(&quot;your specific T1 entity crud base uri&quot;)
+            options =&gt; options.WithBaseAddress(&quot;your specific T1 entity crud base uri&quot;)
         .AddCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;(
-            options =&gt; options
-                .WithBaseAddress(&quot;your specific T2 entity crud base uri&quot;),
+            options =&gt; options.WithBaseAddress(&quot;your specific T2 entity crud base uri&quot;),
 
     config =&gt; config
         .WithAkavacheCacheHandler()
@@ -326,7 +324,10 @@ var t2Manager = apizrRegistry.GetCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T
     var registry = new PolicyRegistry
     {
         {
-            &quot;TransientHttpError&quot;, HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            &quot;TransientHttpError&quot;, 
+            HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .WaitAndRetryAsync(new[]
             {
                 TimeSpan.FromSeconds(1),
                 TimeSpan.FromSeconds(5),
@@ -340,11 +341,9 @@ var t2Manager = apizrRegistry.GetCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T
     services.AddApizr(
         registry =&gt; registry
             .AddCrudManagerFor&lt;T1&gt;(
-                options =&gt; options
-                    .WithBaseAddress(&quot;your specific T1 entity crud base uri&quot;)
+                options =&gt; options.WithBaseAddress(&quot;your specific T1 entity crud base uri&quot;)
             .AddCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;(
-                options =&gt; options
-                    .WithBaseAddress(&quot;your specific T2 entity crud base uri&quot;),
+                options =&gt; options.WithBaseAddress(&quot;your specific T2 entity crud base uri&quot;),
 
         config =&gt; config
             .WithAkavacheCacheHandler()
@@ -393,18 +392,18 @@ It could be usefull when requesting mutliple apis (multiple base address) commin
 <pre><code class="lang-csharp">// Apizr registry
 var apizrRegistry = ApizrBuilder.CreateRegistry(
     registry =&gt; registry
-        .AddRegistryGroup(
+        .AddGroup(
             group =&gt; group
                 .AddCrudManagerFor&lt;T1&gt;(
                     config =&gt; config.WithBasePath(&quot;t1&quot;)
                 .AddCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;(
                     config =&gt; config.WithBasePath(&quot;t2&quot;),
             config =&gt; config.WithBaseAddress(&quot;https://crud.io/api&quot;))
+
         .AddCrudManagerFor&lt;T3&gt;(
             config =&gt; config.WithBaseAddress(&quot;https://crud.com/api&quot;),
 
-    config =&gt; config
-        .WithAkavacheCacheHandler()
+    config =&gt; config.WithAkavacheCacheHandler()
 );
 
 // Container registration
@@ -445,7 +444,10 @@ You can add mutliple group at the same level and go deeper with group into group
     var registry = new PolicyRegistry
     {
         {
-            &quot;TransientHttpError&quot;, HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            &quot;TransientHttpError&quot;, 
+            HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .WaitAndRetryAsync(new[]
             {
                 TimeSpan.FromSeconds(1),
                 TimeSpan.FromSeconds(5),
@@ -458,18 +460,18 @@ You can add mutliple group at the same level and go deeper with group into group
     // Apizr registration
     services.AddApizr(
         registry =&gt; registry
-            .AddRegistryGroup(
+            .AddGroup(
                 group =&gt; group
                     .AddCrudManagerFor&lt;T1&gt;(
                         config =&gt; config.WithBasePath(&quot;t1&quot;)
                     .AddCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;(
                         config =&gt; config.WithBasePath(&quot;t2&quot;),
                 config =&gt; config.WithBaseAddress(&quot;https://crud.io/api&quot;))
+
             .AddCrudManagerFor&lt;T3&gt;(
                 config =&gt; config.WithBaseAddress(&quot;https://crud.com/api&quot;),
 
-        config =&gt; config
-            .WithAkavacheCacheHandler()
+        config =&gt; config.WithAkavacheCacheHandler()
     );
 }
 </code></pre><p>Here is what we&#39;re saying in this example:</p>

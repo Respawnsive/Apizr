@@ -8,7 +8,7 @@
     <title>Defining | Apizr </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Defining | Apizr ">
-    <meta name="generator" content="docfx 2.59.0.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -116,7 +116,10 @@ namespace Apizr.Sample
 var registry = new PolicyRegistry
 {
     {
-        &quot;TransientHttpError&quot;, HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+        &quot;TransientHttpError&quot;, 
+        HttpPolicyExtensions
+            .HandleTransientHttpError()
+            .WaitAndRetryAsync(new[]
         {
             TimeSpan.FromSeconds(1),
             TimeSpan.FromSeconds(5),
@@ -142,7 +145,10 @@ Also, you could use the manager directly instead of registering it.</p>
     var registry = new PolicyRegistry
     {
         {
-            &quot;TransientHttpError&quot;, HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            &quot;TransientHttpError&quot;, 
+            HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .WaitAndRetryAsync(new[]
             {
                 TimeSpan.FromSeconds(1),
                 TimeSpan.FromSeconds(5),
@@ -178,7 +184,10 @@ This is where the ApizrRegistry comes on stage.</p>
 var registry = new PolicyRegistry
 {
     {
-        &quot;TransientHttpError&quot;, HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+        &quot;TransientHttpError&quot;, 
+        HttpPolicyExtensions
+            .HandleTransientHttpError()
+            .WaitAndRetryAsync(new[]
         {
             TimeSpan.FromSeconds(1),
             TimeSpan.FromSeconds(5),
@@ -237,7 +246,10 @@ And yes you can mix classic and CRUD manager registration into the same registry
     var registry = new PolicyRegistry
     {
         {
-            &quot;TransientHttpError&quot;, HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            &quot;TransientHttpError&quot;, 
+            HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .WaitAndRetryAsync(new[]
             {
                 TimeSpan.FromSeconds(1),
                 TimeSpan.FromSeconds(5),
@@ -308,7 +320,10 @@ It could be usefull when requesting mutliple apis (multiple base address) commin
 var registry = new PolicyRegistry
 {
     {
-        &quot;TransientHttpError&quot;, HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+        &quot;TransientHttpError&quot;, 
+        HttpPolicyExtensions
+            .HandleTransientHttpError()
+            .WaitAndRetryAsync(new[]
         {
             TimeSpan.FromSeconds(1),
             TimeSpan.FromSeconds(5),
@@ -320,12 +335,16 @@ var registry = new PolicyRegistry
 // Apizr registry
 var apizrRegistry = ApizrBuilder.CreateRegistry(
     registry =&gt; registry
-        .AddRegistryGroup(
+        .AddGroup(
             group =&gt; group
-                .AddManagerFor&lt;IReqResUserService&gt;(config =&gt; config.WithBasePath(&quot;users&quot;))
-                .AddManagerFor&lt;IReqResResourceService&gt;(config =&gt; config.WithBasePath(&quot;resources&quot;)),
+                .AddManagerFor&lt;IReqResUserService&gt;(
+                    config =&gt; config.WithBasePath(&quot;users&quot;))
+                .AddManagerFor&lt;IReqResResourceService&gt;(
+                    config =&gt; config.WithBasePath(&quot;resources&quot;)),
             config =&gt; config.WithBaseAddress(&quot;https://reqres.in/api&quot;))
-        .AddManagerFor&lt;IHttpBinService&gt;(options =&gt; options.WithBaseAddress(&quot;https://httpbin.org&quot;)),
+
+        .AddManagerFor&lt;IHttpBinService&gt;(
+            config =&gt; config.WithBaseAddress(&quot;https://httpbin.org&quot;)),
 
     config =&gt; config
         .WithPolicyRegistry(registry)
@@ -362,7 +381,10 @@ You can add mutliple group at the same level and go deeper with group into group
     var registry = new PolicyRegistry
     {
         {
-            &quot;TransientHttpError&quot;, HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            &quot;TransientHttpError&quot;, 
+            HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .WaitAndRetryAsync(new[]
             {
                 TimeSpan.FromSeconds(1),
                 TimeSpan.FromSeconds(5),
@@ -375,13 +397,14 @@ You can add mutliple group at the same level and go deeper with group into group
     // Apizr registration
     services.AddApizr(
         registry =&gt; registry
-            .AddRegistryGroup(
+            .AddGroup(
                 group =&gt; group
                     .AddManagerFor&lt;IReqResUserService&gt;(
                         config =&gt; config.WithBasePath(&quot;users&quot;))
                     .AddManagerFor&lt;IReqResResourceService&gt;(
                         config =&gt; config.WithBasePath(&quot;resources&quot;)),
                 config =&gt; config.WithBaseAddress(&quot;https://reqres.in/api&quot;))
+
             .AddManagerFor&lt;IHttpBinService&gt;(
                 config =&gt; config.WithBaseAddress(&quot;https://httpbin.org&quot;)),
 
@@ -440,7 +463,10 @@ var httpBinManager = apizrRegistry.GetManagerFor&lt;IHttpBinService&gt;();
     var registry = new PolicyRegistry
     {
         {
-            &quot;TransientHttpError&quot;, HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            &quot;TransientHttpError&quot;, 
+            HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .WaitAndRetryAsync(new[]
             {
                 TimeSpan.FromSeconds(1),
                 TimeSpan.FromSeconds(5),

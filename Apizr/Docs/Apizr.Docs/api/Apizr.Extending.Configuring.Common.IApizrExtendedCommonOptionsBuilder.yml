@@ -43,6 +43,7 @@ items:
   - Apizr.Configuring.Common.IApizrGlobalCommonOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithMappingHandler(Apizr.Mapping.IMappingHandler)
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithBasePath(System.Func{System.IServiceProvider,System.String})
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithLogging(System.Func{System.IServiceProvider,Apizr.Logging.HttpTracerMode},System.Func{System.IServiceProvider,Apizr.Logging.HttpMessageParts},System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]})
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithHttpClientHandler(System.Func{System.IServiceProvider,System.Net.Http.HttpClientHandler})
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.ConfigureHttpClientBuilder(System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder})
@@ -54,6 +55,7 @@ items:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.ApizrOptions
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithBaseAddress(System.String)
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithBaseAddress(System.Uri)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithBasePath(System.String)
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithHttpClientHandler(System.Net.Http.HttpClientHandler)
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
@@ -1088,6 +1090,86 @@ references:
     name: Uri
     nameWithType: Uri
     fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithBasePath(System.Func{System.IServiceProvider,System.String})
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithBasePath(System.Func{System.IServiceProvider,System.String})
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}
+  definition: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBasePath(System.Func{System.IServiceProvider,System.String})
+  name: WithBasePath(Func<IServiceProvider, String>)
+  nameWithType: IApizrExtendedSharedOptionsBuilder<IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder>.WithBasePath(Func<IServiceProvider, String>)
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder>.WithBasePath(System.Func<System.IServiceProvider, System.String>)
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder).WithBasePath(Func(Of IServiceProvider, String))
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder).WithBasePath(System.Func(Of System.IServiceProvider, System.String))
+  name.vb: WithBasePath(Func(Of IServiceProvider, String))
+  spec.csharp:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBasePath(System.Func{System.IServiceProvider,System.String})
+    name: WithBasePath
+    nameWithType: IApizrExtendedSharedOptionsBuilder<IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder>.WithBasePath
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder>.WithBasePath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBasePath(System.Func{System.IServiceProvider,System.String})
+    name: WithBasePath
+    nameWithType: IApizrExtendedSharedOptionsBuilder(Of IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder).WithBasePath
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder).WithBasePath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
     isExternal: true
   - name: )
     nameWithType: )
@@ -2162,6 +2244,47 @@ references:
     name: Uri
     nameWithType: Uri
     fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithBasePath(System.String)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithBasePath(System.String)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBasePath(System.String)
+  name: WithBasePath(String)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder>.WithBasePath(String)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder>.WithBasePath(System.String)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder).WithBasePath(String)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder).WithBasePath(System.String)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBasePath(System.String)
+    name: WithBasePath
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder>.WithBasePath
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder>.WithBasePath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBasePath(System.String)
+    name: WithBasePath
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder).WithBasePath
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder).WithBasePath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
     isExternal: true
   - name: )
     nameWithType: )
@@ -4036,6 +4159,85 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBasePath(System.Func{System.IServiceProvider,System.String})
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBasePath(System.Func{System.IServiceProvider,System.String})
+  isExternal: true
+  name: WithBasePath(Func<IServiceProvider, String>)
+  nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBasePath(Func<IServiceProvider, String>)
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBasePath(System.Func<System.IServiceProvider, System.String>)
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBasePath(Func(Of IServiceProvider, String))
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBasePath(System.Func(Of System.IServiceProvider, System.String))
+  name.vb: WithBasePath(Func(Of IServiceProvider, String))
+  spec.csharp:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBasePath(System.Func{System.IServiceProvider,System.String})
+    name: WithBasePath
+    nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBasePath
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBasePath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBasePath(System.Func{System.IServiceProvider,System.String})
+    name: WithBasePath
+    nameWithType: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBasePath
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBasePath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithLogging(System.Func{System.IServiceProvider,Apizr.Logging.HttpTracerMode},System.Func{System.IServiceProvider,Apizr.Logging.HttpMessageParts},System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]})
   commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithLogging(System.Func{System.IServiceProvider,Apizr.Logging.HttpTracerMode},System.Func{System.IServiceProvider,Apizr.Logging.HttpMessageParts},System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]})
   isExternal: true
@@ -5145,6 +5347,46 @@ references:
     name: Uri
     nameWithType: Uri
     fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBasePath(System.String)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBasePath(System.String)
+  isExternal: true
+  name: WithBasePath(String)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithBasePath(String)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithBasePath(System.String)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithBasePath(String)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithBasePath(System.String)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBasePath(System.String)
+    name: WithBasePath
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithBasePath
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithBasePath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBasePath(System.String)
+    name: WithBasePath
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithBasePath
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithBasePath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
     isExternal: true
   - name: )
     nameWithType: )

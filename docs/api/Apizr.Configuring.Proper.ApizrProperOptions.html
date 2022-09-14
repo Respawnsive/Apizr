@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ApizrProperOptions
    | Apizr ">
-    <meta name="generator" content="docfx 2.59.0.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -92,7 +92,7 @@
     <div class="level2"><a class="xref" href="Apizr.Configuring.Proper.ApizrProperOptionsBase.html">ApizrProperOptionsBase</a></div>
     <div class="level3"><span class="xref">ApizrProperOptions</span></div>
   </div>
-  <div classs="implements">
+  <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Apizr.Configuring.Proper.IApizrProperOptions.html">IApizrProperOptions</a></div>
     <div><a class="xref" href="Apizr.Configuring.Proper.IApizrProperOptionsBase.html">IApizrProperOptionsBase</a></div>
@@ -111,7 +111,13 @@
       <a class="xref" href="Apizr.Configuring.Proper.ApizrProperOptionsBase.html#Apizr_Configuring_Proper_ApizrProperOptionsBase_Logger">ApizrProperOptionsBase.Logger</a>
     </div>
     <div>
+      <a class="xref" href="Apizr.Configuring.Shared.ApizrSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrSharedOptionsBase_BaseUri">ApizrSharedOptionsBase.BaseUri</a>
+    </div>
+    <div>
       <a class="xref" href="Apizr.Configuring.Shared.ApizrSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrSharedOptionsBase_BaseAddress">ApizrSharedOptionsBase.BaseAddress</a>
+    </div>
+    <div>
+      <a class="xref" href="Apizr.Configuring.Shared.ApizrSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrSharedOptionsBase_BasePath">ApizrSharedOptionsBase.BasePath</a>
     </div>
     <div>
       <a class="xref" href="Apizr.Configuring.Shared.ApizrSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrSharedOptionsBase_HttpTracerMode">ApizrSharedOptionsBase.HttpTracerMode</a>
@@ -155,12 +161,12 @@
   
   
   <a id="Apizr_Configuring_Proper_ApizrProperOptions__ctor_" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.#ctor*"></a>
-  <h4 id="Apizr_Configuring_Proper_ApizrProperOptions__ctor_Apizr_Configuring_Shared_IApizrSharedOptions_System_Type_System_String___System_String___System_Uri_System_Nullable_Apizr_Logging_HttpTracerMode__System_Nullable_Apizr_Logging_HttpMessageParts__Microsoft_Extensions_Logging_LogLevel___" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.#ctor(Apizr.Configuring.Shared.IApizrSharedOptions,System.Type,System.String[],System.String[],System.Uri,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])">ApizrProperOptions(IApizrSharedOptions, Type, String[], String[], Uri, Nullable&lt;HttpTracerMode&gt;, Nullable&lt;HttpMessageParts&gt;, LogLevel[])</h4>
+  <h4 id="Apizr_Configuring_Proper_ApizrProperOptions__ctor_Apizr_Configuring_Shared_IApizrSharedOptions_System_Type_System_String___System_String___System_String_System_String_System_Nullable_Apizr_Logging_HttpTracerMode__System_Nullable_Apizr_Logging_HttpMessageParts__Microsoft_Extensions_Logging_LogLevel___" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.#ctor(Apizr.Configuring.Shared.IApizrSharedOptions,System.Type,System.String[],System.String[],System.String,System.String,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])">ApizrProperOptions(IApizrSharedOptions, Type, String[], String[], String, String, Nullable&lt;HttpTracerMode&gt;, Nullable&lt;HttpMessageParts&gt;, LogLevel[])</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ApizrProperOptions(IApizrSharedOptions sharedOptions, Type webApiType, string[] assemblyPolicyRegistryKeys, string[] webApiPolicyRegistryKeys, Uri baseAddress, HttpTracerMode? httpTracerMode, HttpMessageParts? trafficVerbosity, params LogLevel[] logLevels)</code></pre>
+    <pre><code class="lang-csharp hljs">public ApizrProperOptions(IApizrSharedOptions sharedOptions, Type webApiType, string[] assemblyPolicyRegistryKeys, string[] webApiPolicyRegistryKeys, string baseAddress, string basePath, HttpTracerMode? httpTracerMode, HttpMessageParts? trafficVerbosity, params LogLevel[] logLevels)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -193,8 +199,13 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Uri</span></td>
+        <td><span class="xref">System.String</span></td>
         <td><span class="parametername">baseAddress</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">basePath</span></td>
         <td></td>
       </tr>
       <tr>
@@ -224,7 +235,57 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Func&lt;Uri&gt; BaseAddressFactory { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Func&lt;string&gt; BaseAddressFactory { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Configuring_Proper_ApizrProperOptions_BasePathFactory_" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.BasePathFactory*"></a>
+  <h4 id="Apizr_Configuring_Proper_ApizrProperOptions_BasePathFactory" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.BasePathFactory">BasePathFactory</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Func&lt;string&gt; BasePathFactory { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Configuring_Proper_ApizrProperOptions_BaseUriFactory_" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.BaseUriFactory*"></a>
+  <h4 id="Apizr_Configuring_Proper_ApizrProperOptions_BaseUriFactory" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.BaseUriFactory">BaseUriFactory</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Func&lt;Uri&gt; BaseUriFactory { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">

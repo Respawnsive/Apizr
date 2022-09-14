@@ -8,6 +8,8 @@ items:
   - Apizr.Extending.Configuring.ApizrExtendedOptions.#ctor(Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions)
   - Apizr.Extending.Configuring.ApizrExtendedOptions.ApizrManagerType
   - Apizr.Extending.Configuring.ApizrExtendedOptions.BaseAddressFactory
+  - Apizr.Extending.Configuring.ApizrExtendedOptions.BasePathFactory
+  - Apizr.Extending.Configuring.ApizrExtendedOptions.BaseUriFactory
   - Apizr.Extending.Configuring.ApizrExtendedOptions.CacheHandlerFactory
   - Apizr.Extending.Configuring.ApizrExtendedOptions.CacheHandlerType
   - Apizr.Extending.Configuring.ApizrExtendedOptions.ConnectivityHandlerFactory
@@ -71,7 +73,9 @@ items:
   - Apizr.Configuring.ApizrOptionsBase.PolicyRegistryKeys
   - Apizr.Configuring.ApizrOptionsBase.Logger
   - Apizr.Configuring.ApizrOptionsBase.RefitSettings
+  - Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseUri
   - Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseAddress
+  - Apizr.Configuring.Shared.ApizrSharedOptionsBase.BasePath
   - Apizr.Configuring.Shared.ApizrSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.ApizrSharedOptionsBase.TrafficVerbosity
   - Apizr.Configuring.Shared.ApizrSharedOptionsBase.LogLevels
@@ -135,7 +139,7 @@ items:
   source:
     id: ApizrManagerType
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 44
+    startLine: 46
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -168,7 +172,7 @@ items:
   source:
     id: ConnectivityHandlerType
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 45
+    startLine: 47
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -201,7 +205,7 @@ items:
   source:
     id: CacheHandlerType
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 46
+    startLine: 48
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -234,7 +238,7 @@ items:
   source:
     id: MappingHandlerType
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 47
+    startLine: 49
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -247,6 +251,39 @@ items:
   overload: Apizr.Extending.Configuring.ApizrExtendedOptions.MappingHandlerType*
   implements:
   - Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.MappingHandlerType
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Apizr.Extending.Configuring.ApizrExtendedOptions.BaseUriFactory
+  commentId: P:Apizr.Extending.Configuring.ApizrExtendedOptions.BaseUriFactory
+  id: BaseUriFactory
+  parent: Apizr.Extending.Configuring.ApizrExtendedOptions
+  langs:
+  - csharp
+  - vb
+  name: BaseUriFactory
+  nameWithType: ApizrExtendedOptions.BaseUriFactory
+  fullName: Apizr.Extending.Configuring.ApizrExtendedOptions.BaseUriFactory
+  type: Property
+  source:
+    id: BaseUriFactory
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
+    startLine: 52
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring
+  syntax:
+    content: public Func<IServiceProvider, Uri> BaseUriFactory { get; set; }
+    parameters: []
+    return:
+      type: System.Func{System.IServiceProvider,System.Uri}
+    content.vb: Public Property BaseUriFactory As Func(Of IServiceProvider, Uri)
+  overload: Apizr.Extending.Configuring.ApizrExtendedOptions.BaseUriFactory*
+  implements:
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseUriFactory
   modifiers.csharp:
   - public
   - get
@@ -267,19 +304,52 @@ items:
   source:
     id: BaseAddressFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 50
+    startLine: 59
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
   syntax:
-    content: public Func<IServiceProvider, Uri> BaseAddressFactory { get; set; }
+    content: public Func<IServiceProvider, string> BaseAddressFactory { get; set; }
     parameters: []
     return:
-      type: System.Func{System.IServiceProvider,System.Uri}
-    content.vb: Public Property BaseAddressFactory As Func(Of IServiceProvider, Uri)
+      type: System.Func{System.IServiceProvider,System.String}
+    content.vb: Public Property BaseAddressFactory As Func(Of IServiceProvider, String)
   overload: Apizr.Extending.Configuring.ApizrExtendedOptions.BaseAddressFactory*
   implements:
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Apizr.Extending.Configuring.ApizrExtendedOptions.BasePathFactory
+  commentId: P:Apizr.Extending.Configuring.ApizrExtendedOptions.BasePathFactory
+  id: BasePathFactory
+  parent: Apizr.Extending.Configuring.ApizrExtendedOptions
+  langs:
+  - csharp
+  - vb
+  name: BasePathFactory
+  nameWithType: ApizrExtendedOptions.BasePathFactory
+  fullName: Apizr.Extending.Configuring.ApizrExtendedOptions.BasePathFactory
+  type: Property
+  source:
+    id: BasePathFactory
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
+    startLine: 66
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring
+  syntax:
+    content: public Func<IServiceProvider, string> BasePathFactory { get; set; }
+    parameters: []
+    return:
+      type: System.Func{System.IServiceProvider,System.String}
+    content.vb: Public Property BasePathFactory As Func(Of IServiceProvider, String)
+  overload: Apizr.Extending.Configuring.ApizrExtendedOptions.BasePathFactory*
+  implements:
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BasePathFactory
   modifiers.csharp:
   - public
   - get
@@ -300,7 +370,7 @@ items:
   source:
     id: HttpTracerModeFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 57
+    startLine: 73
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -333,7 +403,7 @@ items:
   source:
     id: TrafficVerbosityFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 64
+    startLine: 80
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -366,7 +436,7 @@ items:
   source:
     id: LogLevelsFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 71
+    startLine: 87
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -399,7 +469,7 @@ items:
   source:
     id: LoggerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 78
+    startLine: 94
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -434,7 +504,7 @@ items:
   source:
     id: HttpClientHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 85
+    startLine: 101
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -467,7 +537,7 @@ items:
   source:
     id: RefitSettingsFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 93
+    startLine: 109
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -500,7 +570,7 @@ items:
   source:
     id: ConnectivityHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 99
+    startLine: 115
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -533,7 +603,7 @@ items:
   source:
     id: CacheHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 100
+    startLine: 116
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -566,7 +636,7 @@ items:
   source:
     id: MappingHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 101
+    startLine: 117
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -599,7 +669,7 @@ items:
   source:
     id: HttpClientBuilder
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 102
+    startLine: 118
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -632,7 +702,7 @@ items:
   source:
     id: CrudEntities
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 103
+    startLine: 119
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -665,7 +735,7 @@ items:
   source:
     id: WebApis
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 104
+    startLine: 120
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -698,7 +768,7 @@ items:
   source:
     id: ObjectMappings
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 105
+    startLine: 121
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -731,7 +801,7 @@ items:
   source:
     id: PostRegistries
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 106
+    startLine: 122
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -764,7 +834,7 @@ items:
   source:
     id: PostRegistrationActions
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 107
+    startLine: 123
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
@@ -922,12 +992,24 @@ references:
   name: RefitSettings
   nameWithType: ApizrOptionsBase.RefitSettings
   fullName: Apizr.Configuring.ApizrOptionsBase.RefitSettings
+- uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseUri
+  commentId: P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseUri
+  parent: Apizr.Configuring.Shared.ApizrSharedOptionsBase
+  name: BaseUri
+  nameWithType: ApizrSharedOptionsBase.BaseUri
+  fullName: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseUri
 - uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseAddress
   commentId: P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseAddress
   parent: Apizr.Configuring.Shared.ApizrSharedOptionsBase
   name: BaseAddress
   nameWithType: ApizrSharedOptionsBase.BaseAddress
   fullName: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseAddress
+- uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BasePath
+  commentId: P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.BasePath
+  parent: Apizr.Configuring.Shared.ApizrSharedOptionsBase
+  name: BasePath
+  nameWithType: ApizrSharedOptionsBase.BasePath
+  fullName: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BasePath
 - uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase.HttpTracerMode
   commentId: P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.HttpTracerMode
   parent: Apizr.Configuring.Shared.ApizrSharedOptionsBase
@@ -1458,17 +1540,17 @@ references:
   name: MappingHandlerType
   nameWithType: IApizrExtendedCommonOptions.MappingHandlerType
   fullName: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.MappingHandlerType
-- uid: Apizr.Extending.Configuring.ApizrExtendedOptions.BaseAddressFactory*
-  commentId: Overload:Apizr.Extending.Configuring.ApizrExtendedOptions.BaseAddressFactory
-  name: BaseAddressFactory
-  nameWithType: ApizrExtendedOptions.BaseAddressFactory
-  fullName: Apizr.Extending.Configuring.ApizrExtendedOptions.BaseAddressFactory
-- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
-  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
+- uid: Apizr.Extending.Configuring.ApizrExtendedOptions.BaseUriFactory*
+  commentId: Overload:Apizr.Extending.Configuring.ApizrExtendedOptions.BaseUriFactory
+  name: BaseUriFactory
+  nameWithType: ApizrExtendedOptions.BaseUriFactory
+  fullName: Apizr.Extending.Configuring.ApizrExtendedOptions.BaseUriFactory
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseUriFactory
+  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseUriFactory
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
-  name: BaseAddressFactory
-  nameWithType: IApizrExtendedSharedOptions.BaseAddressFactory
-  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
+  name: BaseUriFactory
+  nameWithType: IApizrExtendedSharedOptions.BaseUriFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseUriFactory
 - uid: System.Func{System.IServiceProvider,System.Uri}
   commentId: T:System.Func{System.IServiceProvider,System.Uri}
   parent: System
@@ -1580,6 +1662,88 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Extending.Configuring.ApizrExtendedOptions.BaseAddressFactory*
+  commentId: Overload:Apizr.Extending.Configuring.ApizrExtendedOptions.BaseAddressFactory
+  name: BaseAddressFactory
+  nameWithType: ApizrExtendedOptions.BaseAddressFactory
+  fullName: Apizr.Extending.Configuring.ApizrExtendedOptions.BaseAddressFactory
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
+  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  name: BaseAddressFactory
+  nameWithType: IApizrExtendedSharedOptions.BaseAddressFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
+- uid: System.Func{System.IServiceProvider,System.String}
+  commentId: T:System.Func{System.IServiceProvider,System.String}
+  parent: System
+  definition: System.Func`2
+  name: Func<IServiceProvider, String>
+  nameWithType: Func<IServiceProvider, String>
+  fullName: System.Func<System.IServiceProvider, System.String>
+  nameWithType.vb: Func(Of IServiceProvider, String)
+  fullName.vb: System.Func(Of System.IServiceProvider, System.String)
+  name.vb: Func(Of IServiceProvider, String)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Extending.Configuring.ApizrExtendedOptions.BasePathFactory*
+  commentId: Overload:Apizr.Extending.Configuring.ApizrExtendedOptions.BasePathFactory
+  name: BasePathFactory
+  nameWithType: ApizrExtendedOptions.BasePathFactory
+  fullName: Apizr.Extending.Configuring.ApizrExtendedOptions.BasePathFactory
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BasePathFactory
+  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BasePathFactory
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  name: BasePathFactory
+  nameWithType: IApizrExtendedSharedOptions.BasePathFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BasePathFactory
 - uid: Apizr.Extending.Configuring.ApizrExtendedOptions.HttpTracerModeFactory*
   commentId: Overload:Apizr.Extending.Configuring.ApizrExtendedOptions.HttpTracerModeFactory
   name: HttpTracerModeFactory

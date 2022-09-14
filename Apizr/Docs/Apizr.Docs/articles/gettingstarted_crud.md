@@ -214,11 +214,9 @@ Here is an example of how to register a managed instance of multiple api interfa
 var apizrRegistry = ApizrBuilder.CreateRegistry(
     registry => registry
         .AddCrudManagerFor<T1>(
-            options => options
-                .WithBaseAddress("your specific T1 entity crud base uri")
+            options => options.WithBaseAddress("your specific T1 entity crud base uri")
         .AddCrudManagerFor<T2, T2Key, T2ReadAllResult, T2ReadAllParams>(
-            options => options
-                .WithBaseAddress("your specific T2 entity crud base uri"),
+            options => options.WithBaseAddress("your specific T2 entity crud base uri"),
     
     config => config
         .WithAkavacheCacheHandler()
@@ -264,7 +262,10 @@ public override void ConfigureServices(IServiceCollection services)
     var registry = new PolicyRegistry
     {
         {
-            "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            "TransientHttpError", 
+            HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .WaitAndRetryAsync(new[]
             {
                 TimeSpan.FromSeconds(1),
                 TimeSpan.FromSeconds(5),
@@ -278,11 +279,9 @@ public override void ConfigureServices(IServiceCollection services)
     services.AddApizr(
         registry => registry
             .AddCrudManagerFor<T1>(
-                options => options
-                    .WithBaseAddress("your specific T1 entity crud base uri")
+                options => options.WithBaseAddress("your specific T1 entity crud base uri")
             .AddCrudManagerFor<T2, T2Key, T2ReadAllResult, T2ReadAllParams>(
-                options => options
-                    .WithBaseAddress("your specific T2 entity crud base uri"),
+                options => options.WithBaseAddress("your specific T2 entity crud base uri"),
     
         config => config
             .WithAkavacheCacheHandler()
@@ -328,18 +327,18 @@ It could be usefull when requesting mutliple apis (multiple base address) commin
 // Apizr registry
 var apizrRegistry = ApizrBuilder.CreateRegistry(
     registry => registry
-        .AddRegistryGroup(
+        .AddGroup(
             group => group
                 .AddCrudManagerFor<T1>(
                     config => config.WithBasePath("t1")
                 .AddCrudManagerFor<T2, T2Key, T2ReadAllResult, T2ReadAllParams>(
                     config => config.WithBasePath("t2"),
             config => config.WithBaseAddress("https://crud.io/api"))
+
         .AddCrudManagerFor<T3>(
             config => config.WithBaseAddress("https://crud.com/api"),
     
-    config => config
-        .WithAkavacheCacheHandler()
+    config => config.WithAkavacheCacheHandler()
 );
 
 // Container registration
@@ -377,7 +376,10 @@ public override void ConfigureServices(IServiceCollection services)
     var registry = new PolicyRegistry
     {
         {
-            "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            "TransientHttpError", 
+            HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .WaitAndRetryAsync(new[]
             {
                 TimeSpan.FromSeconds(1),
                 TimeSpan.FromSeconds(5),
@@ -390,18 +392,18 @@ public override void ConfigureServices(IServiceCollection services)
     // Apizr registration
     services.AddApizr(
         registry => registry
-            .AddRegistryGroup(
+            .AddGroup(
                 group => group
                     .AddCrudManagerFor<T1>(
                         config => config.WithBasePath("t1")
                     .AddCrudManagerFor<T2, T2Key, T2ReadAllResult, T2ReadAllParams>(
                         config => config.WithBasePath("t2"),
                 config => config.WithBaseAddress("https://crud.io/api"))
+
             .AddCrudManagerFor<T3>(
                 config => config.WithBaseAddress("https://crud.com/api"),
     
-        config => config
-            .WithAkavacheCacheHandler()
+        config => config.WithAkavacheCacheHandler()
     );
 }
 ```

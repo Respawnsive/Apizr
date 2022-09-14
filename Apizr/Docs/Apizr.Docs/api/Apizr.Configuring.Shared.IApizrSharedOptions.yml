@@ -6,6 +6,8 @@ items:
   parent: Apizr.Configuring.Shared
   children:
   - Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory
+  - Apizr.Configuring.Shared.IApizrSharedOptions.BasePathFactory
+  - Apizr.Configuring.Shared.IApizrSharedOptions.BaseUriFactory
   - Apizr.Configuring.Shared.IApizrSharedOptions.DelegatingHandlersFactories
   - Apizr.Configuring.Shared.IApizrSharedOptions.HttpClientHandlerFactory
   - Apizr.Configuring.Shared.IApizrSharedOptions.HttpTracerModeFactory
@@ -31,7 +33,9 @@ items:
       Public Interface IApizrSharedOptions
           Inherits IApizrSharedOptionsBase
   inheritedMembers:
+  - Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseUri
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
+  - Apizr.Configuring.Shared.IApizrSharedOptionsBase.BasePath
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.TrafficVerbosity
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
@@ -43,6 +47,37 @@ items:
   modifiers.vb:
   - Public
   - Interface
+- uid: Apizr.Configuring.Shared.IApizrSharedOptions.BaseUriFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptions.BaseUriFactory
+  id: BaseUriFactory
+  parent: Apizr.Configuring.Shared.IApizrSharedOptions
+  langs:
+  - csharp
+  - vb
+  name: BaseUriFactory
+  nameWithType: IApizrSharedOptions.BaseUriFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptions.BaseUriFactory
+  type: Property
+  source:
+    id: BaseUriFactory
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptions.cs
+    startLine: 13
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  summary: "\nBase uri factory\n"
+  example: []
+  syntax:
+    content: Func<Uri> BaseUriFactory { get; }
+    parameters: []
+    return:
+      type: System.Func{System.Uri}
+    content.vb: ReadOnly Property BaseUriFactory As Func(Of Uri)
+  overload: Apizr.Configuring.Shared.IApizrSharedOptions.BaseUriFactory*
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
 - uid: Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory
   commentId: P:Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory
   id: BaseAddressFactory
@@ -57,19 +92,50 @@ items:
   source:
     id: BaseAddressFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptions.cs
-    startLine: 13
+    startLine: 18
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
   summary: "\nBase address factory\n"
   example: []
   syntax:
-    content: Func<Uri> BaseAddressFactory { get; }
+    content: Func<string> BaseAddressFactory { get; }
     parameters: []
     return:
-      type: System.Func{System.Uri}
-    content.vb: ReadOnly Property BaseAddressFactory As Func(Of Uri)
+      type: System.Func{System.String}
+    content.vb: ReadOnly Property BaseAddressFactory As Func(Of String)
   overload: Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory*
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
+- uid: Apizr.Configuring.Shared.IApizrSharedOptions.BasePathFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptions.BasePathFactory
+  id: BasePathFactory
+  parent: Apizr.Configuring.Shared.IApizrSharedOptions
+  langs:
+  - csharp
+  - vb
+  name: BasePathFactory
+  nameWithType: IApizrSharedOptions.BasePathFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptions.BasePathFactory
+  type: Property
+  source:
+    id: BasePathFactory
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptions.cs
+    startLine: 23
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  summary: "\nBase path factory\n"
+  example: []
+  syntax:
+    content: Func<string> BasePathFactory { get; }
+    parameters: []
+    return:
+      type: System.Func{System.String}
+    content.vb: ReadOnly Property BasePathFactory As Func(Of String)
+  overload: Apizr.Configuring.Shared.IApizrSharedOptions.BasePathFactory*
   modifiers.csharp:
   - get
   modifiers.vb:
@@ -88,7 +154,7 @@ items:
   source:
     id: HttpTracerModeFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptions.cs
-    startLine: 18
+    startLine: 28
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -119,7 +185,7 @@ items:
   source:
     id: TrafficVerbosityFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptions.cs
-    startLine: 23
+    startLine: 33
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -150,7 +216,7 @@ items:
   source:
     id: LogLevelsFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptions.cs
-    startLine: 28
+    startLine: 38
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -181,7 +247,7 @@ items:
   source:
     id: HttpClientHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptions.cs
-    startLine: 33
+    startLine: 43
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -212,7 +278,7 @@ items:
   source:
     id: DelegatingHandlersFactories
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptions.cs
-    startLine: 38
+    startLine: 48
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -235,12 +301,24 @@ references:
   name: Apizr.Configuring.Shared
   nameWithType: Apizr.Configuring.Shared
   fullName: Apizr.Configuring.Shared
+- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseUri
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseUri
+  parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
+  name: BaseUri
+  nameWithType: IApizrSharedOptionsBase.BaseUri
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseUri
 - uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
   commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
   parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
   name: BaseAddress
   nameWithType: IApizrSharedOptionsBase.BaseAddress
   fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
+- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BasePath
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BasePath
+  parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
+  name: BasePath
+  nameWithType: IApizrSharedOptionsBase.BasePath
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BasePath
 - uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode
   commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode
   parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
@@ -401,11 +479,11 @@ references:
   name: Apizr.Extending
   nameWithType: Apizr.Extending
   fullName: Apizr.Extending
-- uid: Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory*
-  commentId: Overload:Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory
-  name: BaseAddressFactory
-  nameWithType: IApizrSharedOptions.BaseAddressFactory
-  fullName: Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory
+- uid: Apizr.Configuring.Shared.IApizrSharedOptions.BaseUriFactory*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrSharedOptions.BaseUriFactory
+  name: BaseUriFactory
+  nameWithType: IApizrSharedOptions.BaseUriFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptions.BaseUriFactory
 - uid: System.Func{System.Uri}
   commentId: T:System.Func{System.Uri}
   parent: System
@@ -495,6 +573,60 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory
+  name: BaseAddressFactory
+  nameWithType: IApizrSharedOptions.BaseAddressFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptions.BaseAddressFactory
+- uid: System.Func{System.String}
+  commentId: T:System.Func{System.String}
+  parent: System
+  definition: System.Func`1
+  name: Func<String>
+  nameWithType: Func<String>
+  fullName: System.Func<System.String>
+  nameWithType.vb: Func(Of String)
+  fullName.vb: System.Func(Of System.String)
+  name.vb: Func(Of String)
+  spec.csharp:
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrSharedOptions.BasePathFactory*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrSharedOptions.BasePathFactory
+  name: BasePathFactory
+  nameWithType: IApizrSharedOptions.BasePathFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptions.BasePathFactory
 - uid: Apizr.Configuring.Shared.IApizrSharedOptions.HttpTracerModeFactory*
   commentId: Overload:Apizr.Configuring.Shared.IApizrSharedOptions.HttpTracerModeFactory
   name: HttpTracerModeFactory

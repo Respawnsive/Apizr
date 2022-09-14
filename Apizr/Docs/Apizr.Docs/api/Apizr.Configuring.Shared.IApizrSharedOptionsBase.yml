@@ -6,6 +6,8 @@ items:
   parent: Apizr.Configuring.Shared
   children:
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
+  - Apizr.Configuring.Shared.IApizrSharedOptionsBase.BasePath
+  - Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseUri
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
   - Apizr.Configuring.Shared.IApizrSharedOptionsBase.TrafficVerbosity
@@ -34,6 +36,37 @@ items:
   modifiers.vb:
   - Public
   - Interface
+- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseUri
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseUri
+  id: BaseUri
+  parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
+  langs:
+  - csharp
+  - vb
+  name: BaseUri
+  nameWithType: IApizrSharedOptionsBase.BaseUri
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseUri
+  type: Property
+  source:
+    id: BaseUri
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptionsBase.cs
+    startLine: 11
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  summary: "\nBase address\n"
+  example: []
+  syntax:
+    content: Uri BaseUri { get; }
+    parameters: []
+    return:
+      type: System.Uri
+    content.vb: ReadOnly Property BaseUri As Uri
+  overload: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseUri*
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
 - uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
   commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
   id: BaseAddress
@@ -48,19 +81,50 @@ items:
   source:
     id: BaseAddress
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptionsBase.cs
-    startLine: 11
+    startLine: 16
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
   summary: "\nBase address\n"
   example: []
   syntax:
-    content: Uri BaseAddress { get; }
+    content: string BaseAddress { get; }
     parameters: []
     return:
-      type: System.Uri
-    content.vb: ReadOnly Property BaseAddress As Uri
+      type: System.String
+    content.vb: ReadOnly Property BaseAddress As String
   overload: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress*
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
+- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BasePath
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BasePath
+  id: BasePath
+  parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
+  langs:
+  - csharp
+  - vb
+  name: BasePath
+  nameWithType: IApizrSharedOptionsBase.BasePath
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BasePath
+  type: Property
+  source:
+    id: BasePath
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptionsBase.cs
+    startLine: 21
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  summary: "\nBase path\n"
+  example: []
+  syntax:
+    content: string BasePath { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: ReadOnly Property BasePath As String
+  overload: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BasePath*
   modifiers.csharp:
   - get
   modifiers.vb:
@@ -79,7 +143,7 @@ items:
   source:
     id: HttpTracerMode
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptionsBase.cs
-    startLine: 16
+    startLine: 26
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -110,7 +174,7 @@ items:
   source:
     id: TrafficVerbosity
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptionsBase.cs
-    startLine: 21
+    startLine: 31
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -141,7 +205,7 @@ items:
   source:
     id: LogLevels
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptionsBase.cs
-    startLine: 26
+    startLine: 36
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -300,11 +364,11 @@ references:
   name: Apizr.Extending
   nameWithType: Apizr.Extending
   fullName: Apizr.Extending
-- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress*
-  commentId: Overload:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
-  name: BaseAddress
-  nameWithType: IApizrSharedOptionsBase.BaseAddress
-  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
+- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseUri*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseUri
+  name: BaseUri
+  nameWithType: IApizrSharedOptionsBase.BaseUri
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseUri
 - uid: System.Uri
   commentId: T:System.Uri
   parent: System
@@ -318,6 +382,23 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
+  name: BaseAddress
+  nameWithType: IApizrSharedOptionsBase.BaseAddress
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BasePath*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BasePath
+  name: BasePath
+  nameWithType: IApizrSharedOptionsBase.BasePath
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BasePath
 - uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode*
   commentId: Overload:Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode
   name: HttpTracerMode

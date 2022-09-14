@@ -9,7 +9,7 @@ items:
   - Apizr.WebApiAttribute.#ctor(System.Boolean)
   - Apizr.WebApiAttribute.#ctor(System.String)
   - Apizr.WebApiAttribute.#ctor(System.String,System.Boolean)
-  - Apizr.WebApiAttribute.BaseUri
+  - Apizr.WebApiAttribute.BaseAddressOrPath
   - Apizr.WebApiAttribute.IsAutoRegistrable
   langs:
   - csharp
@@ -115,7 +115,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nDefine web api with priority management and auto registration enabled, but without base uri (should be defined with options builder)\n"
+  summary: "\nDefine a web api without any base absolute address or relative path (has to be defined fluently) but discoverable for auto registration\n"
   example: []
   syntax:
     content: public WebApiAttribute()
@@ -143,15 +143,15 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nDefine web api with a base uri and with priority management and auto registration enabled\n"
+  summary: "\nDefine a web api with a base absolute address or relative path (if path, base address has to be defined fluently) and discoverable for auto registration\n"
   example: []
   syntax:
-    content: public WebApiAttribute(string baseUri)
+    content: public WebApiAttribute(string baseAddressOrPath)
     parameters:
-    - id: baseUri
+    - id: baseAddressOrPath
       type: System.String
-      description: The web api base uri
-    content.vb: Public Sub New(baseUri As String)
+      description: The web api base absolute address or relative path
+    content.vb: Public Sub New(baseAddressOrPath As String)
   overload: Apizr.WebApiAttribute.#ctor*
   modifiers.csharp:
   - public
@@ -175,7 +175,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nDefine web api enabling or not priority management and auto registration, but without base uri (should be defined with options builder)\n"
+  summary: "\nDefine a web api without any base absolute address or relative path (has to be defined fluently) and make it discoverable for auto registration or not\n"
   example: []
   syntax:
     content: public WebApiAttribute(bool isAutoRegistrable)
@@ -207,50 +207,50 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nDefine web api with a base uri, enabling or not priority management and auto registration\n"
+  summary: "\nDefine a web api with a base absolute address or relative path (if path, base address has to be defined fluently) and make it discoverable for auto registration or not\n"
   example: []
   syntax:
-    content: public WebApiAttribute(string baseUri, bool isAutoRegistrable)
+    content: public WebApiAttribute(string baseAddressOrPath, bool isAutoRegistrable)
     parameters:
-    - id: baseUri
+    - id: baseAddressOrPath
       type: System.String
-      description: The web api base uri
+      description: The web api base absolute address or relative path
     - id: isAutoRegistrable
       type: System.Boolean
       description: Makes decorated interface registrable by assembly scanning
-    content.vb: Public Sub New(baseUri As String, isAutoRegistrable As Boolean)
+    content.vb: Public Sub New(baseAddressOrPath As String, isAutoRegistrable As Boolean)
   overload: Apizr.WebApiAttribute.#ctor*
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Apizr.WebApiAttribute.BaseUri
-  commentId: P:Apizr.WebApiAttribute.BaseUri
-  id: BaseUri
+- uid: Apizr.WebApiAttribute.BaseAddressOrPath
+  commentId: P:Apizr.WebApiAttribute.BaseAddressOrPath
+  id: BaseAddressOrPath
   parent: Apizr.WebApiAttribute
   langs:
   - csharp
   - vb
-  name: BaseUri
-  nameWithType: WebApiAttribute.BaseUri
-  fullName: Apizr.WebApiAttribute.BaseUri
+  name: BaseAddressOrPath
+  nameWithType: WebApiAttribute.BaseAddressOrPath
+  fullName: Apizr.WebApiAttribute.BaseAddressOrPath
   type: Property
   source:
-    id: BaseUri
+    id: BaseAddressOrPath
     path: C:\Dev\Community\Apizr\Apizr\Apizr\WebApiAttribute.cs
     startLine: 48
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nThe web api base uri\n"
+  summary: "\nThe web api base absolute address or relative path\n"
   example: []
   syntax:
-    content: public string BaseUri { get; }
+    content: public string BaseAddressOrPath { get; }
     parameters: []
     return:
       type: System.String
-    content.vb: Public ReadOnly Property BaseUri As String
-  overload: Apizr.WebApiAttribute.BaseUri*
+    content.vb: Public ReadOnly Property BaseAddressOrPath As String
+  overload: Apizr.WebApiAttribute.BaseAddressOrPath*
   modifiers.csharp:
   - public
   - get
@@ -2781,11 +2781,11 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
-- uid: Apizr.WebApiAttribute.BaseUri*
-  commentId: Overload:Apizr.WebApiAttribute.BaseUri
-  name: BaseUri
-  nameWithType: WebApiAttribute.BaseUri
-  fullName: Apizr.WebApiAttribute.BaseUri
+- uid: Apizr.WebApiAttribute.BaseAddressOrPath*
+  commentId: Overload:Apizr.WebApiAttribute.BaseAddressOrPath
+  name: BaseAddressOrPath
+  nameWithType: WebApiAttribute.BaseAddressOrPath
+  fullName: Apizr.WebApiAttribute.BaseAddressOrPath
 - uid: Apizr.WebApiAttribute.IsAutoRegistrable*
   commentId: Overload:Apizr.WebApiAttribute.IsAutoRegistrable
   name: IsAutoRegistrable

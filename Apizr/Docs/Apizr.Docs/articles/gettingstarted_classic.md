@@ -38,7 +38,10 @@ Here is an example of how to register a managed instance of an api interface:
 var registry = new PolicyRegistry
 {
     {
-        "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+        "TransientHttpError", 
+        HttpPolicyExtensions
+            .HandleTransientHttpError()
+            .WaitAndRetryAsync(new[]
         {
             TimeSpan.FromSeconds(1),
             TimeSpan.FromSeconds(5),
@@ -68,7 +71,10 @@ public override void ConfigureServices(IServiceCollection services)
     var registry = new PolicyRegistry
     {
         {
-            "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            "TransientHttpError", 
+            HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .WaitAndRetryAsync(new[]
             {
                 TimeSpan.FromSeconds(1),
                 TimeSpan.FromSeconds(5),
@@ -104,7 +110,10 @@ Here is an example of how to register a managed instance of multiple api interfa
 var registry = new PolicyRegistry
 {
     {
-        "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+        "TransientHttpError", 
+        HttpPolicyExtensions
+            .HandleTransientHttpError()
+            .WaitAndRetryAsync(new[]
         {
             TimeSpan.FromSeconds(1),
             TimeSpan.FromSeconds(5),
@@ -164,7 +173,10 @@ public override void ConfigureServices(IServiceCollection services)
     var registry = new PolicyRegistry
     {
         {
-            "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            "TransientHttpError", 
+            HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .WaitAndRetryAsync(new[]
             {
                 TimeSpan.FromSeconds(1),
                 TimeSpan.FromSeconds(5),
@@ -234,7 +246,10 @@ It could be usefull when requesting mutliple apis (multiple base address) commin
 var registry = new PolicyRegistry
 {
     {
-        "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+        "TransientHttpError", 
+        HttpPolicyExtensions
+            .HandleTransientHttpError()
+            .WaitAndRetryAsync(new[]
         {
             TimeSpan.FromSeconds(1),
             TimeSpan.FromSeconds(5),
@@ -246,12 +261,16 @@ var registry = new PolicyRegistry
 // Apizr registry
 var apizrRegistry = ApizrBuilder.CreateRegistry(
     registry => registry
-        .AddRegistryGroup(
+        .AddGroup(
             group => group
-                .AddManagerFor<IReqResUserService>(config => config.WithBasePath("users"))
-                .AddManagerFor<IReqResResourceService>(config => config.WithBasePath("resources")),
+                .AddManagerFor<IReqResUserService>(
+                    config => config.WithBasePath("users"))
+                .AddManagerFor<IReqResResourceService>(
+                    config => config.WithBasePath("resources")),
             config => config.WithBaseAddress("https://reqres.in/api"))
-        .AddManagerFor<IHttpBinService>(options => options.WithBaseAddress("https://httpbin.org")),
+
+        .AddManagerFor<IHttpBinService>(
+            config => config.WithBaseAddress("https://httpbin.org")),
     
     config => config
         .WithPolicyRegistry(registry)
@@ -291,7 +310,10 @@ public override void ConfigureServices(IServiceCollection services)
     var registry = new PolicyRegistry
     {
         {
-            "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            "TransientHttpError", 
+            HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .WaitAndRetryAsync(new[]
             {
                 TimeSpan.FromSeconds(1),
                 TimeSpan.FromSeconds(5),
@@ -304,13 +326,14 @@ public override void ConfigureServices(IServiceCollection services)
     // Apizr registration
     services.AddApizr(
         registry => registry
-            .AddRegistryGroup(
+            .AddGroup(
                 group => group
                     .AddManagerFor<IReqResUserService>(
                         config => config.WithBasePath("users"))
                     .AddManagerFor<IReqResResourceService>(
                         config => config.WithBasePath("resources")),
                 config => config.WithBaseAddress("https://reqres.in/api"))
+
             .AddManagerFor<IHttpBinService>(
                 config => config.WithBaseAddress("https://httpbin.org")),
     
@@ -370,7 +393,10 @@ public override void ConfigureServices(IServiceCollection services)
     var registry = new PolicyRegistry
     {
         {
-            "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            "TransientHttpError", 
+            HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .WaitAndRetryAsync(new[]
             {
                 TimeSpan.FromSeconds(1),
                 TimeSpan.FromSeconds(5),

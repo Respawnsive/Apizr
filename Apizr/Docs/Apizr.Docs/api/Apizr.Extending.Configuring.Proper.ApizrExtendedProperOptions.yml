@@ -5,9 +5,11 @@ items:
   id: ApizrExtendedProperOptions
   parent: Apizr.Extending.Configuring.Proper
   children:
-  - Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.#ctor(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions,System.Type,System.Type,System.String[],System.String[],System.Uri,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])
+  - Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.#ctor(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions,System.Type,System.Type,System.String[],System.String[],System.String,System.String,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])
   - Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.ApizrManagerType
   - Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BaseAddressFactory
+  - Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BasePathFactory
+  - Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BaseUriFactory
   - Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.DelegatingHandlersExtendedFactories
   - Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.HttpClientBuilder
   - Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.HttpClientHandlerFactory
@@ -50,7 +52,9 @@ items:
   - Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType
   - Apizr.Configuring.Proper.ApizrProperOptionsBase.PolicyRegistryKeys
   - Apizr.Configuring.Proper.ApizrProperOptionsBase.Logger
+  - Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseUri
   - Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseAddress
+  - Apizr.Configuring.Shared.ApizrSharedOptionsBase.BasePath
   - Apizr.Configuring.Shared.ApizrSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.ApizrSharedOptionsBase.TrafficVerbosity
   - Apizr.Configuring.Shared.ApizrSharedOptionsBase.LogLevels
@@ -69,16 +73,16 @@ items:
   modifiers.vb:
   - Public
   - Class
-- uid: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.#ctor(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions,System.Type,System.Type,System.String[],System.String[],System.Uri,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])
-  commentId: M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.#ctor(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions,System.Type,System.Type,System.String[],System.String[],System.Uri,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])
-  id: '#ctor(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions,System.Type,System.Type,System.String[],System.String[],System.Uri,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])'
+- uid: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.#ctor(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions,System.Type,System.Type,System.String[],System.String[],System.String,System.String,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])
+  commentId: M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.#ctor(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions,System.Type,System.Type,System.String[],System.String[],System.String,System.String,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])
+  id: '#ctor(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions,System.Type,System.Type,System.String[],System.String[],System.String,System.String,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])'
   parent: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions
   langs:
   - csharp
   - vb
-  name: ApizrExtendedProperOptions(IApizrExtendedSharedOptions, Type, Type, String[], String[], Uri, Nullable<HttpTracerMode>, Nullable<HttpMessageParts>, LogLevel[])
-  nameWithType: ApizrExtendedProperOptions.ApizrExtendedProperOptions(IApizrExtendedSharedOptions, Type, Type, String[], String[], Uri, Nullable<HttpTracerMode>, Nullable<HttpMessageParts>, LogLevel[])
-  fullName: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.ApizrExtendedProperOptions(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions, System.Type, System.Type, System.String[], System.String[], System.Uri, System.Nullable<Apizr.Logging.HttpTracerMode>, System.Nullable<Apizr.Logging.HttpMessageParts>, Microsoft.Extensions.Logging.LogLevel[])
+  name: ApizrExtendedProperOptions(IApizrExtendedSharedOptions, Type, Type, String[], String[], String, String, Nullable<HttpTracerMode>, Nullable<HttpMessageParts>, LogLevel[])
+  nameWithType: ApizrExtendedProperOptions.ApizrExtendedProperOptions(IApizrExtendedSharedOptions, Type, Type, String[], String[], String, String, Nullable<HttpTracerMode>, Nullable<HttpMessageParts>, LogLevel[])
+  fullName: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.ApizrExtendedProperOptions(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions, System.Type, System.Type, System.String[], System.String[], System.String, System.String, System.Nullable<Apizr.Logging.HttpTracerMode>, System.Nullable<Apizr.Logging.HttpMessageParts>, Microsoft.Extensions.Logging.LogLevel[])
   type: Constructor
   source:
     id: .ctor
@@ -88,7 +92,7 @@ items:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
   syntax:
-    content: public ApizrExtendedProperOptions(IApizrExtendedSharedOptions sharedOptions, Type webApiType, Type apizrManagerType, string[] assemblyPolicyRegistryKeys, string[] webApiPolicyRegistryKeys, Uri baseAddress, HttpTracerMode? httpTracerMode, HttpMessageParts? trafficVerbosity, params LogLevel[] logLevels)
+    content: public ApizrExtendedProperOptions(IApizrExtendedSharedOptions sharedOptions, Type webApiType, Type apizrManagerType, string[] assemblyPolicyRegistryKeys, string[] webApiPolicyRegistryKeys, string baseAddress, string basePath, HttpTracerMode? httpTracerMode, HttpMessageParts? trafficVerbosity, params LogLevel[] logLevels)
     parameters:
     - id: sharedOptions
       type: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
@@ -101,22 +105,24 @@ items:
     - id: webApiPolicyRegistryKeys
       type: System.String[]
     - id: baseAddress
-      type: System.Uri
+      type: System.String
+    - id: basePath
+      type: System.String
     - id: httpTracerMode
       type: System.Nullable{Apizr.Logging.HttpTracerMode}
     - id: trafficVerbosity
       type: System.Nullable{Apizr.Logging.HttpMessageParts}
     - id: logLevels
       type: Microsoft.Extensions.Logging.LogLevel[]
-    content.vb: Public Sub New(sharedOptions As IApizrExtendedSharedOptions, webApiType As Type, apizrManagerType As Type, assemblyPolicyRegistryKeys As String(), webApiPolicyRegistryKeys As String(), baseAddress As Uri, httpTracerMode As HttpTracerMode?, trafficVerbosity As HttpMessageParts?, ParamArray logLevels As LogLevel())
+    content.vb: Public Sub New(sharedOptions As IApizrExtendedSharedOptions, webApiType As Type, apizrManagerType As Type, assemblyPolicyRegistryKeys As String(), webApiPolicyRegistryKeys As String(), baseAddress As String, basePath As String, httpTracerMode As HttpTracerMode?, trafficVerbosity As HttpMessageParts?, ParamArray logLevels As LogLevel())
   overload: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.#ctor*
-  nameWithType.vb: ApizrExtendedProperOptions.ApizrExtendedProperOptions(IApizrExtendedSharedOptions, Type, Type, String(), String(), Uri, Nullable(Of HttpTracerMode), Nullable(Of HttpMessageParts), LogLevel())
+  nameWithType.vb: ApizrExtendedProperOptions.ApizrExtendedProperOptions(IApizrExtendedSharedOptions, Type, Type, String(), String(), String, String, Nullable(Of HttpTracerMode), Nullable(Of HttpMessageParts), LogLevel())
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.ApizrExtendedProperOptions(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions, System.Type, System.Type, System.String(), System.String(), System.Uri, System.Nullable(Of Apizr.Logging.HttpTracerMode), System.Nullable(Of Apizr.Logging.HttpMessageParts), Microsoft.Extensions.Logging.LogLevel())
-  name.vb: ApizrExtendedProperOptions(IApizrExtendedSharedOptions, Type, Type, String(), String(), Uri, Nullable(Of HttpTracerMode), Nullable(Of HttpMessageParts), LogLevel())
+  fullName.vb: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.ApizrExtendedProperOptions(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions, System.Type, System.Type, System.String(), System.String(), System.String, System.String, System.Nullable(Of Apizr.Logging.HttpTracerMode), System.Nullable(Of Apizr.Logging.HttpMessageParts), Microsoft.Extensions.Logging.LogLevel())
+  name.vb: ApizrExtendedProperOptions(IApizrExtendedSharedOptions, Type, Type, String(), String(), String, String, Nullable(Of HttpTracerMode), Nullable(Of HttpMessageParts), LogLevel())
 - uid: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.ApizrManagerType
   commentId: P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.ApizrManagerType
   id: ApizrManagerType
@@ -131,7 +137,7 @@ items:
   source:
     id: ApizrManagerType
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 37
+    startLine: 40
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -150,6 +156,39 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
+- uid: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BaseUriFactory
+  commentId: P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BaseUriFactory
+  id: BaseUriFactory
+  parent: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions
+  langs:
+  - csharp
+  - vb
+  name: BaseUriFactory
+  nameWithType: ApizrExtendedProperOptions.BaseUriFactory
+  fullName: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BaseUriFactory
+  type: Property
+  source:
+    id: BaseUriFactory
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
+    startLine: 43
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Proper
+  syntax:
+    content: public Func<IServiceProvider, Uri> BaseUriFactory { get; set; }
+    parameters: []
+    return:
+      type: System.Func{System.IServiceProvider,System.Uri}
+    content.vb: Public Property BaseUriFactory As Func(Of IServiceProvider, Uri)
+  overload: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BaseUriFactory*
+  implements:
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseUriFactory
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
 - uid: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BaseAddressFactory
   commentId: P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BaseAddressFactory
   id: BaseAddressFactory
@@ -164,19 +203,52 @@ items:
   source:
     id: BaseAddressFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 40
+    startLine: 50
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
   syntax:
-    content: public Func<IServiceProvider, Uri> BaseAddressFactory { get; set; }
+    content: public Func<IServiceProvider, string> BaseAddressFactory { get; set; }
     parameters: []
     return:
-      type: System.Func{System.IServiceProvider,System.Uri}
-    content.vb: Public Property BaseAddressFactory As Func(Of IServiceProvider, Uri)
+      type: System.Func{System.IServiceProvider,System.String}
+    content.vb: Public Property BaseAddressFactory As Func(Of IServiceProvider, String)
   overload: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BaseAddressFactory*
   implements:
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BasePathFactory
+  commentId: P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BasePathFactory
+  id: BasePathFactory
+  parent: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions
+  langs:
+  - csharp
+  - vb
+  name: BasePathFactory
+  nameWithType: ApizrExtendedProperOptions.BasePathFactory
+  fullName: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BasePathFactory
+  type: Property
+  source:
+    id: BasePathFactory
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
+    startLine: 57
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Proper
+  syntax:
+    content: public Func<IServiceProvider, string> BasePathFactory { get; set; }
+    parameters: []
+    return:
+      type: System.Func{System.IServiceProvider,System.String}
+    content.vb: Public Property BasePathFactory As Func(Of IServiceProvider, String)
+  overload: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BasePathFactory*
+  implements:
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BasePathFactory
   modifiers.csharp:
   - public
   - get
@@ -197,7 +269,7 @@ items:
   source:
     id: HttpTracerModeFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 47
+    startLine: 64
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -230,7 +302,7 @@ items:
   source:
     id: TrafficVerbosityFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 54
+    startLine: 71
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -263,7 +335,7 @@ items:
   source:
     id: LogLevelsFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 61
+    startLine: 78
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -296,7 +368,7 @@ items:
   source:
     id: LoggerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 68
+    startLine: 85
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -331,7 +403,7 @@ items:
   source:
     id: HttpClientHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 74
+    startLine: 91
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -364,7 +436,7 @@ items:
   source:
     id: HttpClientBuilder
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 75
+    startLine: 92
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -397,7 +469,7 @@ items:
   source:
     id: DelegatingHandlersExtendedFactories
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 76
+    startLine: 93
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -495,12 +567,24 @@ references:
   name: Logger
   nameWithType: ApizrProperOptionsBase.Logger
   fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.Logger
+- uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseUri
+  commentId: P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseUri
+  parent: Apizr.Configuring.Shared.ApizrSharedOptionsBase
+  name: BaseUri
+  nameWithType: ApizrSharedOptionsBase.BaseUri
+  fullName: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseUri
 - uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseAddress
   commentId: P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseAddress
   parent: Apizr.Configuring.Shared.ApizrSharedOptionsBase
   name: BaseAddress
   nameWithType: ApizrSharedOptionsBase.BaseAddress
   fullName: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseAddress
+- uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BasePath
+  commentId: P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.BasePath
+  parent: Apizr.Configuring.Shared.ApizrSharedOptionsBase
+  name: BasePath
+  nameWithType: ApizrSharedOptionsBase.BasePath
+  fullName: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BasePath
 - uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase.HttpTracerMode
   commentId: P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.HttpTracerMode
   parent: Apizr.Configuring.Shared.ApizrSharedOptionsBase
@@ -993,13 +1077,13 @@ references:
   - name: ()
     nameWithType: ()
     fullName: ()
-- uid: System.Uri
-  commentId: T:System.Uri
+- uid: System.String
+  commentId: T:System.String
   parent: System
   isExternal: true
-  name: Uri
-  nameWithType: Uri
-  fullName: System.Uri
+  name: String
+  nameWithType: String
+  fullName: System.String
 - uid: System.Nullable{Apizr.Logging.HttpTracerMode}
   commentId: T:System.Nullable{Apizr.Logging.HttpTracerMode}
   parent: System
@@ -1160,17 +1244,17 @@ references:
   name: ApizrManagerType
   nameWithType: IApizrExtendedProperOptions.ApizrManagerType
   fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerType
-- uid: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BaseAddressFactory*
-  commentId: Overload:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BaseAddressFactory
-  name: BaseAddressFactory
-  nameWithType: ApizrExtendedProperOptions.BaseAddressFactory
-  fullName: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BaseAddressFactory
-- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
-  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
+- uid: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BaseUriFactory*
+  commentId: Overload:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BaseUriFactory
+  name: BaseUriFactory
+  nameWithType: ApizrExtendedProperOptions.BaseUriFactory
+  fullName: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BaseUriFactory
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseUriFactory
+  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseUriFactory
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
-  name: BaseAddressFactory
-  nameWithType: IApizrExtendedSharedOptions.BaseAddressFactory
-  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
+  name: BaseUriFactory
+  nameWithType: IApizrExtendedSharedOptions.BaseUriFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseUriFactory
 - uid: System.Func{System.IServiceProvider,System.Uri}
   commentId: T:System.Func{System.IServiceProvider,System.Uri}
   parent: System
@@ -1282,6 +1366,88 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BaseAddressFactory*
+  commentId: Overload:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BaseAddressFactory
+  name: BaseAddressFactory
+  nameWithType: ApizrExtendedProperOptions.BaseAddressFactory
+  fullName: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BaseAddressFactory
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
+  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  name: BaseAddressFactory
+  nameWithType: IApizrExtendedSharedOptions.BaseAddressFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
+- uid: System.Func{System.IServiceProvider,System.String}
+  commentId: T:System.Func{System.IServiceProvider,System.String}
+  parent: System
+  definition: System.Func`2
+  name: Func<IServiceProvider, String>
+  nameWithType: Func<IServiceProvider, String>
+  fullName: System.Func<System.IServiceProvider, System.String>
+  nameWithType.vb: Func(Of IServiceProvider, String)
+  fullName.vb: System.Func(Of System.IServiceProvider, System.String)
+  name.vb: Func(Of IServiceProvider, String)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BasePathFactory*
+  commentId: Overload:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BasePathFactory
+  name: BasePathFactory
+  nameWithType: ApizrExtendedProperOptions.BasePathFactory
+  fullName: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BasePathFactory
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BasePathFactory
+  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BasePathFactory
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  name: BasePathFactory
+  nameWithType: IApizrExtendedSharedOptions.BasePathFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BasePathFactory
 - uid: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.HttpTracerModeFactory*
   commentId: Overload:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.HttpTracerModeFactory
   name: HttpTracerModeFactory

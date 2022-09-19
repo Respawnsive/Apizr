@@ -65,7 +65,7 @@ namespace Apizr.Tests
 
             // By proper option overriding attribute
             reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>(options =>
-                options.WithBaseAddress((Func<Uri>) uri1));
+                options.WithBaseAddress(uri1));
             reqResManager.Options.BaseUri.Should().Be(uri1);
         }
 
@@ -82,7 +82,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Calling_WithAuthenticationHandler_ProperOption_Should_Authenticate_Request()
+        public async Task Calling_WithAuthenticationHandler_Should_Authenticate_Request()
         {
             string token = null;
 
@@ -105,20 +105,6 @@ namespace Apizr.Tests
             reqResManager.Options.HttpTracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
             reqResManager.Options.TrafficVerbosity.Should().Be(HttpMessageParts.RequestCookies);
             reqResManager.Options.LogLevels.Should().AllBeEquivalentTo(LogLevel.Warning);
-        }
-
-        [Fact]
-        public async Task Calling_WithAuthenticationHandler_CommonOption_Should_Authenticate_Request()
-        {
-            string token = null;
-
-            var httpBinManager = ApizrBuilder.CreateManagerFor<IHttpBinService>(options => options
-                    .WithAuthenticationHandler(_ => Task.FromResult(token = "token")));
-
-            var result = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
-
-            result.IsSuccessStatusCode.Should().BeTrue();
-            token.Should().Be("token");
         }
 
         [Fact]

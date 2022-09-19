@@ -160,7 +160,7 @@ namespace Apizr.Tests
             services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
-                .AddManagerFor<IReqResUserService>(options => options.WithBaseAddress((Func<IServiceProvider, Uri>) uri1)));
+                .AddManagerFor<IReqResUserService>(options => options.WithBaseAddress(uri1)));
 
             serviceProvider = services.BuildServiceProvider();
             fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
@@ -172,7 +172,7 @@ namespace Apizr.Tests
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
                     .AddManagerFor<IReqResUserService>(),
-                config => config.WithBaseAddress((Func<IServiceProvider, Uri>) uri1));
+                config => config.WithBaseAddress(uri1));
 
             serviceProvider = services.BuildServiceProvider();
             fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
@@ -183,8 +183,8 @@ namespace Apizr.Tests
             services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
-                .AddManagerFor<IReqResUserService>(options => options.WithBaseAddress((Func<IServiceProvider, Uri>) uri2)),
-                config => config.WithBaseAddress((Func<IServiceProvider, Uri>) uri1));
+                .AddManagerFor<IReqResUserService>(options => options.WithBaseAddress(uri2)),
+                config => config.WithBaseAddress(uri1));
 
             serviceProvider = services.BuildServiceProvider();
             fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
@@ -215,9 +215,9 @@ namespace Apizr.Tests
                             .AddManagerFor<IReqResUserService>()
                             .AddManagerFor<IReqResUserPathService>() // completing with base path by attribute
                             .AddManagerFor<IReqResResourceService>(config => config.WithBasePath(userPath)), // completing with base path by proper option
-                        config => config.WithBaseAddress((Func<IServiceProvider, Uri>) uri3))
-                    .AddManagerFor<IHttpBinService>(options => options.WithBaseAddress((Func<IServiceProvider, Uri>) uri2)),
-                config => config.WithBaseAddress((Func<IServiceProvider, Uri>) uri1));
+                        config => config.WithBaseAddress(uri3))
+                    .AddManagerFor<IHttpBinService>(options => options.WithBaseAddress(uri2)),
+                config => config.WithBaseAddress(uri1));
 
             var serviceProvider = services.BuildServiceProvider();
             var apizrRegistry = serviceProvider.GetRequiredService<IApizrExtendedRegistry>();
@@ -236,13 +236,13 @@ namespace Apizr.Tests
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
                     .AddGroup(group => group
-                            .AddManagerFor<IReqResUserService>(config => config.WithBaseAddress((Func<IServiceProvider, Uri>) uri4)) // changing base uri
-                            .AddManagerFor<IReqResUserPathService>(config => config.WithBaseAddress((Func<IServiceProvider, Uri>) uri4).WithBasePath(userPath)) // changing base uri completing with base path
+                            .AddManagerFor<IReqResUserService>(config => config.WithBaseAddress(uri4)) // changing base uri
+                            .AddManagerFor<IReqResUserPathService>(config => config.WithBaseAddress(uri4).WithBasePath(userPath)) // changing base uri completing with base path
                             .AddManagerFor<IReqResResourceService>()
                             .AddManagerFor<IReqResResourceAddressService>(config => config.WithBasePath(resPath)), // completing attribute address with base path by proper options
-                        config => config.WithBaseAddress((Func<IServiceProvider, Uri>) uri3))
-                    .AddManagerFor<IHttpBinService>(options => options.WithBaseAddress((Func<IServiceProvider, Uri>) uri2)),
-                config => config.WithBaseAddress((Func<IServiceProvider, Uri>) uri1));
+                        config => config.WithBaseAddress(uri3))
+                    .AddManagerFor<IHttpBinService>(options => options.WithBaseAddress(uri2)),
+                config => config.WithBaseAddress(uri1));
 
             serviceProvider = services.BuildServiceProvider();
             apizrRegistry = serviceProvider.GetRequiredService<IApizrExtendedRegistry>();
@@ -709,9 +709,9 @@ namespace Apizr.Tests
                     .AddGroup(group => group
                         .AddManagerFor<IReqResUserService>()
                         .AddManagerFor<IReqResResourceService>(),
-                        config => config.WithBaseAddress((Func<IServiceProvider, Uri>) uri3))
-                    .AddManagerFor<IHttpBinService>(options => options.WithBaseAddress((Func<IServiceProvider, Uri>) uri2)),
-                config => config.WithBaseAddress((Func<IServiceProvider, Uri>) uri1));
+                        config => config.WithBaseAddress(uri3))
+                    .AddManagerFor<IHttpBinService>(options => options.WithBaseAddress(uri2)),
+                config => config.WithBaseAddress(uri1));
 
             var serviceProvider = services.BuildServiceProvider();
 
@@ -726,11 +726,11 @@ namespace Apizr.Tests
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
                     .AddGroup(group => group
-                            .AddManagerFor<IReqResUserService>(config => config.WithBaseAddress((Func<IServiceProvider, Uri>) uri4))
+                            .AddManagerFor<IReqResUserService>(config => config.WithBaseAddress(uri4))
                             .AddManagerFor<IReqResResourceService>(),
-                        config => config.WithBaseAddress((Func<IServiceProvider, Uri>) uri3))
-                    .AddManagerFor<IHttpBinService>(options => options.WithBaseAddress((Func<IServiceProvider, Uri>) uri2)),
-                config => config.WithBaseAddress((Func<IServiceProvider, Uri>) uri1));
+                        config => config.WithBaseAddress(uri3))
+                    .AddManagerFor<IHttpBinService>(options => options.WithBaseAddress(uri2)),
+                config => config.WithBaseAddress(uri1));
 
             serviceProvider = services.BuildServiceProvider();
 

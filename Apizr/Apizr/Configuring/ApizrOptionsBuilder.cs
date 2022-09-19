@@ -78,6 +78,14 @@ namespace Apizr.Configuring
         }
 
         /// <inheritdoc />
+        public IApizrOptionsBuilder WithHttpClient(Func<HttpMessageHandler, Uri, HttpClient> httpClientFactory)
+        {
+            Options.HttpClientFactory = httpClientFactory;
+
+            return this;
+        }
+
+        /// <inheritdoc />
         public IApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<ILogger, IApizrOptionsBase, TAuthenticationHandler> authenticationHandler) where TAuthenticationHandler : AuthenticationHandlerBase
         {
             Options.DelegatingHandlersFactories.Add(authenticationHandler);

@@ -5,6 +5,7 @@
 
 - [New] [Core] Now we can **group registry common configurations** at any level to share configurations without any limit
 - [New] [Core] Now we can **set a base path** with the brand new WithBasePath fluent option or using attribute
+- [New] [Core] Now we can **set a custom HttpClient** with the brand new WithHttpClient fluent option
 
 ### Apizr.Tools.NSwag
 

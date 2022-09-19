@@ -9,6 +9,7 @@ items:
   - Apizr.Configuring.Shared.IApizrSharedOptions.BasePathFactory
   - Apizr.Configuring.Shared.IApizrSharedOptions.BaseUriFactory
   - Apizr.Configuring.Shared.IApizrSharedOptions.DelegatingHandlersFactories
+  - Apizr.Configuring.Shared.IApizrSharedOptions.HttpClientFactory
   - Apizr.Configuring.Shared.IApizrSharedOptions.HttpClientHandlerFactory
   - Apizr.Configuring.Shared.IApizrSharedOptions.HttpTracerModeFactory
   - Apizr.Configuring.Shared.IApizrSharedOptions.LogLevelsFactory
@@ -264,6 +265,37 @@ items:
   - get
   modifiers.vb:
   - ReadOnly
+- uid: Apizr.Configuring.Shared.IApizrSharedOptions.HttpClientFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptions.HttpClientFactory
+  id: HttpClientFactory
+  parent: Apizr.Configuring.Shared.IApizrSharedOptions
+  langs:
+  - csharp
+  - vb
+  name: HttpClientFactory
+  nameWithType: IApizrSharedOptions.HttpClientFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptions.HttpClientFactory
+  type: Property
+  source:
+    id: HttpClientFactory
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptions.cs
+    startLine: 51
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  summary: "\nHttpClient factory\n"
+  example: []
+  syntax:
+    content: Func<HttpMessageHandler, Uri, HttpClient> HttpClientFactory { get; }
+    parameters: []
+    return:
+      type: System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient}
+    content.vb: ReadOnly Property HttpClientFactory As Func(Of HttpMessageHandler, Uri, HttpClient)
+  overload: Apizr.Configuring.Shared.IApizrSharedOptions.HttpClientFactory*
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
 - uid: Apizr.Configuring.Shared.IApizrSharedOptions.DelegatingHandlersFactories
   commentId: P:Apizr.Configuring.Shared.IApizrSharedOptions.DelegatingHandlersFactories
   id: DelegatingHandlersFactories
@@ -278,7 +310,7 @@ items:
   source:
     id: DelegatingHandlersFactories
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrSharedOptions.cs
-    startLine: 51
+    startLine: 56
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -686,6 +718,150 @@ references:
     nameWithType: HttpClientHandler
     fullName: System.Net.Http.HttpClientHandler
     isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrSharedOptions.HttpClientFactory*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrSharedOptions.HttpClientFactory
+  name: HttpClientFactory
+  nameWithType: IApizrSharedOptions.HttpClientFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptions.HttpClientFactory
+- uid: System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient}
+  commentId: T:System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient}
+  parent: System
+  definition: System.Func`3
+  name: Func<HttpMessageHandler, Uri, HttpClient>
+  nameWithType: Func<HttpMessageHandler, Uri, HttpClient>
+  fullName: System.Func<System.Net.Http.HttpMessageHandler, System.Uri, System.Net.Http.HttpClient>
+  nameWithType.vb: Func(Of HttpMessageHandler, Uri, HttpClient)
+  fullName.vb: System.Func(Of System.Net.Http.HttpMessageHandler, System.Uri, System.Net.Http.HttpClient)
+  name.vb: Func(Of HttpMessageHandler, Uri, HttpClient)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    nameWithType: HttpMessageHandler
+    fullName: System.Net.Http.HttpMessageHandler
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    nameWithType: HttpMessageHandler
+    fullName: System.Net.Http.HttpMessageHandler
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func`3
+  commentId: T:System.Func`3
+  isExternal: true
+  name: Func<T1, T2, TResult>
+  nameWithType: Func<T1, T2, TResult>
+  fullName: System.Func<T1, T2, TResult>
+  nameWithType.vb: Func(Of T1, T2, TResult)
+  fullName.vb: System.Func(Of T1, T2, TResult)
+  name.vb: Func(Of T1, T2, TResult)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T1
+    nameWithType: T1
+    fullName: T1
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T2
+    nameWithType: T2
+    fullName: T2
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T1
+    nameWithType: T1
+    fullName: T1
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T2
+    nameWithType: T2
+    fullName: T2
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
   - name: )
     nameWithType: )
     fullName: )

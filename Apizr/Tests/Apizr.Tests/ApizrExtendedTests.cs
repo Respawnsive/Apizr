@@ -127,7 +127,7 @@ namespace Apizr.Tests
             // By proper option overriding attribute
             services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddApizrManagerFor<IReqResUserService>(options => options.WithBaseAddress((Func<IServiceProvider, Uri>) uri1));
+            services.AddApizrManagerFor<IReqResUserService>(options => options.WithBaseAddress(uri1));
 
             serviceProvider = services.BuildServiceProvider();
             fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();

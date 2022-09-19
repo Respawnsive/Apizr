@@ -12,6 +12,7 @@ items:
   - Apizr.Configuring.Common.ApizrCommonOptions.CacheHandlerFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.ConnectivityHandlerFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.DelegatingHandlersFactories
+  - Apizr.Configuring.Common.ApizrCommonOptions.HttpClientFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.HttpClientHandlerFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.HttpTracerModeFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.LoggerFactoryFactory
@@ -114,7 +115,7 @@ items:
   source:
     id: BaseUriFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptions.cs
-    startLine: 36
+    startLine: 37
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -149,7 +150,7 @@ items:
   source:
     id: BaseAddressFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptions.cs
-    startLine: 44
+    startLine: 45
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -184,7 +185,7 @@ items:
   source:
     id: BasePathFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptions.cs
-    startLine: 52
+    startLine: 53
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -219,7 +220,7 @@ items:
   source:
     id: LoggerFactoryFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptions.cs
-    startLine: 59
+    startLine: 60
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -254,7 +255,7 @@ items:
   source:
     id: PolicyRegistryFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptions.cs
-    startLine: 62
+    startLine: 63
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -289,7 +290,7 @@ items:
   source:
     id: HttpClientHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptions.cs
-    startLine: 65
+    startLine: 66
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -310,6 +311,41 @@ items:
   - set
   modifiers.vb:
   - Public
+- uid: Apizr.Configuring.Common.ApizrCommonOptions.HttpClientFactory
+  commentId: P:Apizr.Configuring.Common.ApizrCommonOptions.HttpClientFactory
+  id: HttpClientFactory
+  parent: Apizr.Configuring.Common.ApizrCommonOptions
+  langs:
+  - csharp
+  - vb
+  name: HttpClientFactory
+  nameWithType: ApizrCommonOptions.HttpClientFactory
+  fullName: Apizr.Configuring.Common.ApizrCommonOptions.HttpClientFactory
+  type: Property
+  source:
+    id: HttpClientFactory
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptions.cs
+    startLine: 69
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Common
+  summary: "\nHttpClient factory\n"
+  example: []
+  syntax:
+    content: public Func<HttpMessageHandler, Uri, HttpClient> HttpClientFactory { get; set; }
+    parameters: []
+    return:
+      type: System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient}
+    content.vb: Public Property HttpClientFactory As Func(Of HttpMessageHandler, Uri, HttpClient)
+  overload: Apizr.Configuring.Common.ApizrCommonOptions.HttpClientFactory*
+  implements:
+  - Apizr.Configuring.Shared.IApizrSharedOptions.HttpClientFactory
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
 - uid: Apizr.Configuring.Common.ApizrCommonOptions.RefitSettingsFactory
   commentId: P:Apizr.Configuring.Common.ApizrCommonOptions.RefitSettingsFactory
   id: RefitSettingsFactory
@@ -324,7 +360,7 @@ items:
   source:
     id: RefitSettingsFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptions.cs
-    startLine: 69
+    startLine: 73
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -359,7 +395,7 @@ items:
   source:
     id: ConnectivityHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptions.cs
-    startLine: 76
+    startLine: 80
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -394,7 +430,7 @@ items:
   source:
     id: CacheHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptions.cs
-    startLine: 79
+    startLine: 83
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -429,7 +465,7 @@ items:
   source:
     id: MappingHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptions.cs
-    startLine: 82
+    startLine: 86
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -464,7 +500,7 @@ items:
   source:
     id: DelegatingHandlersFactories
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptions.cs
-    startLine: 85
+    startLine: 89
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -499,7 +535,7 @@ items:
   source:
     id: HttpTracerModeFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptions.cs
-    startLine: 90
+    startLine: 94
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -534,7 +570,7 @@ items:
   source:
     id: TrafficVerbosityFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptions.cs
-    startLine: 98
+    startLine: 102
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -569,7 +605,7 @@ items:
   source:
     id: LogLevelsFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptions.cs
-    startLine: 106
+    startLine: 110
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1320,6 +1356,156 @@ references:
     nameWithType: HttpClientHandler
     fullName: System.Net.Http.HttpClientHandler
     isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Common.ApizrCommonOptions.HttpClientFactory*
+  commentId: Overload:Apizr.Configuring.Common.ApizrCommonOptions.HttpClientFactory
+  name: HttpClientFactory
+  nameWithType: ApizrCommonOptions.HttpClientFactory
+  fullName: Apizr.Configuring.Common.ApizrCommonOptions.HttpClientFactory
+- uid: Apizr.Configuring.Shared.IApizrSharedOptions.HttpClientFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptions.HttpClientFactory
+  parent: Apizr.Configuring.Shared.IApizrSharedOptions
+  name: HttpClientFactory
+  nameWithType: IApizrSharedOptions.HttpClientFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptions.HttpClientFactory
+- uid: System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient}
+  commentId: T:System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient}
+  parent: System
+  definition: System.Func`3
+  name: Func<HttpMessageHandler, Uri, HttpClient>
+  nameWithType: Func<HttpMessageHandler, Uri, HttpClient>
+  fullName: System.Func<System.Net.Http.HttpMessageHandler, System.Uri, System.Net.Http.HttpClient>
+  nameWithType.vb: Func(Of HttpMessageHandler, Uri, HttpClient)
+  fullName.vb: System.Func(Of System.Net.Http.HttpMessageHandler, System.Uri, System.Net.Http.HttpClient)
+  name.vb: Func(Of HttpMessageHandler, Uri, HttpClient)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    nameWithType: HttpMessageHandler
+    fullName: System.Net.Http.HttpMessageHandler
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    nameWithType: HttpMessageHandler
+    fullName: System.Net.Http.HttpMessageHandler
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func`3
+  commentId: T:System.Func`3
+  isExternal: true
+  name: Func<T1, T2, TResult>
+  nameWithType: Func<T1, T2, TResult>
+  fullName: System.Func<T1, T2, TResult>
+  nameWithType.vb: Func(Of T1, T2, TResult)
+  fullName.vb: System.Func(Of T1, T2, TResult)
+  name.vb: Func(Of T1, T2, TResult)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T1
+    nameWithType: T1
+    fullName: T1
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T2
+    nameWithType: T2
+    fullName: T2
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T1
+    nameWithType: T1
+    fullName: T1
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T2
+    nameWithType: T2
+    fullName: T2
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
   - name: )
     nameWithType: )
     fullName: )

@@ -27,6 +27,7 @@ items:
   - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithConnectivityHandler(Apizr.Connecting.IConnectivityHandler)
   - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithConnectivityHandler(System.Func{Apizr.Connecting.IConnectivityHandler})
   - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithConnectivityHandler(System.Func{System.Boolean})
+  - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})
   - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHttpClientHandler(System.Func{System.Net.Http.HttpClientHandler})
   - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHttpClientHandler(System.Net.Http.HttpClientHandler)
   - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLoggerFactory(Microsoft.Extensions.Logging.ILoggerFactory)
@@ -469,6 +470,46 @@ items:
   - Public
   fullName.vb: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHttpClientHandler(System.Func(Of System.Net.Http.HttpClientHandler))
   name.vb: WithHttpClientHandler(Func(Of HttpClientHandler))
+- uid: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})
+  commentId: M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})
+  id: WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})
+  parent: Apizr.Configuring.Common.ApizrCommonOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithHttpClient(Func<HttpMessageHandler, Uri, HttpClient>)
+  nameWithType: ApizrCommonOptionsBuilder.WithHttpClient(Func<HttpMessageHandler, Uri, HttpClient>)
+  fullName: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHttpClient(System.Func<System.Net.Http.HttpMessageHandler, System.Uri, System.Net.Http.HttpClient>)
+  type: Method
+  source:
+    id: WithHttpClient
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
+    startLine: 80
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Common
+  summary: "\nProvide a custom HttpClient\n"
+  example: []
+  syntax:
+    content: public IApizrCommonOptionsBuilder WithHttpClient(Func<HttpMessageHandler, Uri, HttpClient> httpClientFactory)
+    parameters:
+    - id: httpClientFactory
+      type: System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient}
+      description: An <xref href="System.Net.Http.HttpClient" data-throw-if-not-resolved="false"></xref> instance factory
+    return:
+      type: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+      description: ''
+    content.vb: Public Function WithHttpClient(httpClientFactory As Func(Of HttpMessageHandler, Uri, HttpClient)) As IApizrCommonOptionsBuilder
+  overload: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHttpClient*
+  implements:
+  - Apizr.Configuring.Shared.IApizrSharedOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})
+  nameWithType.vb: ApizrCommonOptionsBuilder.WithHttpClient(Func(Of HttpMessageHandler, Uri, HttpClient))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHttpClient(System.Func(Of System.Net.Http.HttpMessageHandler, System.Uri, System.Net.Http.HttpClient))
+  name.vb: WithHttpClient(Func(Of HttpMessageHandler, Uri, HttpClient))
 - uid: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   commentId: M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   id: WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
@@ -483,7 +524,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 80
+    startLine: 88
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -523,7 +564,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 90
+    startLine: 98
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -568,7 +609,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 98
+    startLine: 106
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -622,7 +663,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 103
+    startLine: 111
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -676,7 +717,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 117
+    startLine: 125
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -725,7 +766,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 122
+    startLine: 130
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -774,7 +815,7 @@ items:
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 133
+    startLine: 141
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -811,7 +852,7 @@ items:
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 137
+    startLine: 145
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -851,7 +892,7 @@ items:
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 141
+    startLine: 149
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -891,7 +932,7 @@ items:
   source:
     id: WithPolicyRegistry
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 149
+    startLine: 157
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -931,7 +972,7 @@ items:
   source:
     id: WithPolicyRegistry
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 153
+    startLine: 161
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -971,7 +1012,7 @@ items:
   source:
     id: WithRefitSettings
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 161
+    startLine: 169
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1008,7 +1049,7 @@ items:
   source:
     id: WithRefitSettings
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 165
+    startLine: 173
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1048,7 +1089,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 173
+    startLine: 181
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1085,7 +1126,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 177
+    startLine: 185
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1125,7 +1166,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 181
+    startLine: 189
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1165,7 +1206,7 @@ items:
   source:
     id: WithCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 189
+    startLine: 197
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1202,7 +1243,7 @@ items:
   source:
     id: WithCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 193
+    startLine: 201
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1242,7 +1283,7 @@ items:
   source:
     id: WithLogging
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 201
+    startLine: 209
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1288,7 +1329,7 @@ items:
   source:
     id: WithLogging
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 206
+    startLine: 214
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1334,7 +1375,7 @@ items:
   source:
     id: WithLoggerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 217
+    startLine: 225
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1371,7 +1412,7 @@ items:
   source:
     id: WithLoggerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 221
+    startLine: 229
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1411,7 +1452,7 @@ items:
   source:
     id: WithMappingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 229
+    startLine: 237
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1448,7 +1489,7 @@ items:
   source:
     id: WithMappingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 233
+    startLine: 241
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -4156,6 +4197,341 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHttpClient*
+  commentId: Overload:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHttpClient
+  name: WithHttpClient
+  nameWithType: ApizrCommonOptionsBuilder.WithHttpClient
+  fullName: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHttpClient
+- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})
+  parent: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})
+  name: WithHttpClient(Func<HttpMessageHandler, Uri, HttpClient>)
+  nameWithType: IApizrSharedOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>.WithHttpClient(Func<HttpMessageHandler, Uri, HttpClient>)
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.WithHttpClient(System.Func<System.Net.Http.HttpMessageHandler, System.Uri, System.Net.Http.HttpClient>)
+  nameWithType.vb: IApizrSharedOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).WithHttpClient(Func(Of HttpMessageHandler, Uri, HttpClient))
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).WithHttpClient(System.Func(Of System.Net.Http.HttpMessageHandler, System.Uri, System.Net.Http.HttpClient))
+  name.vb: WithHttpClient(Func(Of HttpMessageHandler, Uri, HttpClient))
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})
+    name: WithHttpClient
+    nameWithType: IApizrSharedOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>.WithHttpClient
+    fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.WithHttpClient
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    nameWithType: HttpMessageHandler
+    fullName: System.Net.Http.HttpMessageHandler
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})
+    name: WithHttpClient
+    nameWithType: IApizrSharedOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).WithHttpClient
+    fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).WithHttpClient
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    nameWithType: HttpMessageHandler
+    fullName: System.Net.Http.HttpMessageHandler
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient}
+  commentId: T:System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient}
+  parent: System
+  definition: System.Func`3
+  name: Func<HttpMessageHandler, Uri, HttpClient>
+  nameWithType: Func<HttpMessageHandler, Uri, HttpClient>
+  fullName: System.Func<System.Net.Http.HttpMessageHandler, System.Uri, System.Net.Http.HttpClient>
+  nameWithType.vb: Func(Of HttpMessageHandler, Uri, HttpClient)
+  fullName.vb: System.Func(Of System.Net.Http.HttpMessageHandler, System.Uri, System.Net.Http.HttpClient)
+  name.vb: Func(Of HttpMessageHandler, Uri, HttpClient)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    nameWithType: HttpMessageHandler
+    fullName: System.Net.Http.HttpMessageHandler
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    nameWithType: HttpMessageHandler
+    fullName: System.Net.Http.HttpMessageHandler
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})
+  isExternal: true
+  name: WithHttpClient(Func<HttpMessageHandler, Uri, HttpClient>)
+  nameWithType: IApizrSharedOptionsBuilder<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithHttpClient(Func<HttpMessageHandler, Uri, HttpClient>)
+  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithHttpClient(System.Func<System.Net.Http.HttpMessageHandler, System.Uri, System.Net.Http.HttpClient>)
+  nameWithType.vb: IApizrSharedOptionsBuilder(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithHttpClient(Func(Of HttpMessageHandler, Uri, HttpClient))
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithHttpClient(System.Func(Of System.Net.Http.HttpMessageHandler, System.Uri, System.Net.Http.HttpClient))
+  name.vb: WithHttpClient(Func(Of HttpMessageHandler, Uri, HttpClient))
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})
+    name: WithHttpClient
+    nameWithType: IApizrSharedOptionsBuilder<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithHttpClient
+    fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder<TApizrSharedOptions, TApizrSharedOptionsBuilder>.WithHttpClient
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    nameWithType: HttpMessageHandler
+    fullName: System.Net.Http.HttpMessageHandler
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder`2.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})
+    name: WithHttpClient
+    nameWithType: IApizrSharedOptionsBuilder(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithHttpClient
+    fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBuilder(Of TApizrSharedOptions, TApizrSharedOptionsBuilder).WithHttpClient
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    nameWithType: HttpMessageHandler
+    fullName: System.Net.Http.HttpMessageHandler
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func`3
+  commentId: T:System.Func`3
+  isExternal: true
+  name: Func<T1, T2, TResult>
+  nameWithType: Func<T1, T2, TResult>
+  fullName: System.Func<T1, T2, TResult>
+  nameWithType.vb: Func(Of T1, T2, TResult)
+  fullName.vb: System.Func(Of T1, T2, TResult)
+  name.vb: Func(Of T1, T2, TResult)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T1
+    nameWithType: T1
+    fullName: T1
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T2
+    nameWithType: T2
+    fullName: T2
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T1
+    nameWithType: T1
+    fullName: T1
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T2
+    nameWithType: T2
+    fullName: T2
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler*
   commentId: Overload:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler
   name: WithAuthenticationHandler
@@ -4743,69 +5119,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Func`3
-  commentId: T:System.Func`3
-  isExternal: true
-  name: Func<T1, T2, TResult>
-  nameWithType: Func<T1, T2, TResult>
-  fullName: System.Func<T1, T2, TResult>
-  nameWithType.vb: Func(Of T1, T2, TResult)
-  fullName.vb: System.Func(Of T1, T2, TResult)
-  name.vb: Func(Of T1, T2, TResult)
-  spec.csharp:
-  - uid: System.Func`3
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: T1
-    nameWithType: T1
-    fullName: T1
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: T2
-    nameWithType: T2
-    fullName: T2
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Func`3
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: T1
-    nameWithType: T1
-    fullName: T1
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: T2
-    nameWithType: T2
-    fullName: T2
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
     nameWithType: )
     fullName: )

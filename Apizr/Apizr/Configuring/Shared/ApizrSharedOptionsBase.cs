@@ -22,9 +22,7 @@ namespace Apizr.Configuring.Shared
 
         /// <inheritdoc />
         public HttpMessageParts TrafficVerbosity { get; protected set; }
-
-        /// <inheritdoc />
-
+        
         private LogLevel[] _logLevels;
         /// <inheritdoc />
         public LogLevel[] LogLevels

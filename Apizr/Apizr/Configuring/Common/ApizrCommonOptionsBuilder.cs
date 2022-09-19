@@ -78,6 +78,14 @@ namespace Apizr.Configuring.Common
         }
 
         /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithHttpClient(Func<HttpMessageHandler, Uri, HttpClient> httpClientFactory)
+        {
+            Options.HttpClientFactory = httpClientFactory;
+
+            return this;
+        }
+
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
         {
             var authenticationHandler = new Func<ILogger, IApizrOptionsBase, DelegatingHandler>((logger, options) =>

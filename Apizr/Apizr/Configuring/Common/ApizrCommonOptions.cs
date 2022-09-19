@@ -25,6 +25,7 @@ namespace Apizr.Configuring.Common
             LoggerFactoryFactory = () => new DebugLoggerFactory(LogLevel.Trace);
             PolicyRegistryFactory = () => new PolicyRegistry();
             HttpClientHandlerFactory = () => new HttpClientHandler();
+            HttpClientFactory = (handler, uri) => new HttpClient(handler, false) {BaseAddress = uri};
             RefitSettingsFactory = () => new RefitSettings();
             ConnectivityHandlerFactory = () => new DefaultConnectivityHandler(() => true);
             CacheHandlerFactory = () => new VoidCacheHandler();
@@ -64,7 +65,10 @@ namespace Apizr.Configuring.Common
 
         /// <inheritdoc />
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
-        
+
+        /// <inheritdoc />
+        public Func<HttpMessageHandler, Uri, HttpClient> HttpClientFactory { get; set; }
+
         private Func<RefitSettings> _refitSettingsFactory;
         /// <inheritdoc />
         public Func<RefitSettings> RefitSettingsFactory

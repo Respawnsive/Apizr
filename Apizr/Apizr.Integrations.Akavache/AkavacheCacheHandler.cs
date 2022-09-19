@@ -9,6 +9,9 @@ using Apizr.Caching;
 [assembly: Apizr.Preserve]
 namespace Apizr
 {
+    /// <summary>
+    /// Akavache cache handler implementation
+    /// </summary>
     public class AkavacheCacheHandler : ICacheHandler
     {
         private readonly IBlobCache _blobCache;
@@ -48,6 +51,7 @@ namespace Apizr
             _blobCache = blobCacheFactory?.Invoke() ?? BlobCache.LocalMachine;
         }
 
+        /// <inheritdoc />
         public Task SetAsync(string key, object value, TimeSpan? lifeSpan = null,
             CancellationToken cancellationToken = default)
         {
@@ -56,6 +60,7 @@ namespace Apizr
                 : _blobCache.InsertObject(key, value).ToTask(cancellationToken);
         }
 
+        /// <inheritdoc />
         public Task<T> GetAsync<T>(string key, CancellationToken cancellationToken = default)
         {
             return _blobCache.GetObject<T>(key)
@@ -63,6 +68,7 @@ namespace Apizr
                 .ToTask(cancellationToken);
         }
 
+        /// <inheritdoc />
         public Task<bool> RemoveAsync(string key, CancellationToken cancellationToken = default)
         {
             return _blobCache.Invalidate(key)
@@ -71,6 +77,7 @@ namespace Apizr
                 .ToTask(cancellationToken);
         }
 
+        /// <inheritdoc />
         public Task ClearAsync(CancellationToken cancellationToken = default)
         {
             return _blobCache.InvalidateAll()

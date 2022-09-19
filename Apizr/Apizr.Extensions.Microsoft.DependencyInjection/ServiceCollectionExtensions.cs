@@ -28,6 +28,9 @@ using HttpRequestMessageExtensions = Apizr.Policing.HttpRequestMessageExtensions
 [assembly: Apizr.Preserve]
 namespace Apizr
 {
+    /// <summary>
+    /// Apizr service collection extensions
+    /// </summary>
     public static class ServiceCollectionExtensions
     {
         #region Registry

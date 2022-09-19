@@ -9,6 +9,9 @@ using Refit;
 
 namespace Apizr.Extending.Configuring.Common
 {
+    /// <summary>
+    /// Builder options available at common level for extended registration
+    /// </summary>
     public interface IApizrExtendedCommonOptionsBuilder<out TApizrExtendedCommonOptions, out TApizrExtendedCommonOptionsBuilder> : IApizrExtendedCommonOptionsBuilderBase,
         IApizrGlobalCommonOptionsBuilderBase<TApizrExtendedCommonOptions, TApizrExtendedCommonOptionsBuilder>,
         IApizrExtendedSharedOptionsBuilder<TApizrExtendedCommonOptions, TApizrExtendedCommonOptionsBuilder>

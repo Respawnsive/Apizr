@@ -7,6 +7,10 @@ using Refit;
 
 namespace Apizr
 {
+    /// <summary>
+    /// Distributed cache handler implementation
+    /// </summary>
+    /// <typeparam name="TCache"></typeparam>
     public class DistributedCacheHandler<TCache> : ICacheHandler
     {
         private readonly IDistributedCache _distributedCache;
@@ -18,6 +22,7 @@ namespace Apizr
             _contentSerializer = contentSerializer;
         }
 
+        /// <inheritdoc />
         public async Task SetAsync(string key, object value, TimeSpan? lifeSpan = null, CancellationToken cancellationToken = default)
         {
             var options = new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = lifeSpan };
@@ -38,6 +43,7 @@ namespace Apizr
             }
         }
 
+        /// <inheritdoc />
         public async Task<TData> GetAsync<TData>(string key, CancellationToken cancellationToken = default)
         {
             if (typeof(TCache) == typeof(byte[]))
@@ -56,6 +62,7 @@ namespace Apizr
             }
         }
 
+        /// <inheritdoc />
         public async Task<bool> RemoveAsync(string key, CancellationToken cancellationToken = default)
         {
             try
@@ -69,6 +76,7 @@ namespace Apizr
             }
         }
 
+        /// <inheritdoc />
         public Task ClearAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException("Clearing feature is not available with IDistributedCache");

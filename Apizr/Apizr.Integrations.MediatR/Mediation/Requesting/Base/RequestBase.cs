@@ -4,6 +4,10 @@ using Polly;
 
 namespace Apizr.Mediation.Requesting.Base
 {
+    /// <summary>
+    /// The top level base mediation request
+    /// </summary>
+    /// <typeparam name="TFormattedModelResultData">The result type</typeparam>
     public abstract class RequestBase<TFormattedModelResultData> : IRequest<TFormattedModelResultData>
     {
         protected RequestBase(Action<Exception> onException = null) : this(null, onException)
@@ -22,6 +26,11 @@ namespace Apizr.Mediation.Requesting.Base
         public Action<Exception> OnException { get; }
     }
 
+    /// <summary>
+    /// The top level base mediation request
+    /// </summary>
+    /// <typeparam name="TFormattedModelResultData">The result type</typeparam>
+    /// <typeparam name="TModelRequestData">The request type</typeparam>
     public abstract class RequestBase<TFormattedModelResultData, TModelRequestData> : RequestBase<TFormattedModelResultData>
     {
         protected RequestBase(Action<Exception> onException = null) : this(default, null, onException)

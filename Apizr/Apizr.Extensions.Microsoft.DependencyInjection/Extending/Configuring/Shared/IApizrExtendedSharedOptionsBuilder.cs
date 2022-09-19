@@ -11,6 +11,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Apizr.Extending.Configuring.Shared
 {
+    /// <summary>
+    /// Builder options available at both common and proper level for extended registrations
+    /// </summary>
     public interface IApizrExtendedSharedOptionsBuilder<out TApizrExtendedSharedOptions, out TApizrExtendedSharedOptionsBuilder> : IApizrExtendedSharedOptionsBuilderBase, 
         IApizrGlobalSharedOptionsBuilderBase<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>
         where TApizrExtendedSharedOptions : IApizrSharedOptionsBase

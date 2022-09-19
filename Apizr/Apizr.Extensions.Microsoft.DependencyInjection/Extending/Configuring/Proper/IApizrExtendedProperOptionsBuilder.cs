@@ -3,6 +3,9 @@ using Apizr.Extending.Configuring.Shared;
 
 namespace Apizr.Extending.Configuring.Proper
 {
+    /// <summary>
+    /// Builder options available at proper level for extended registrations
+    /// </summary>
     public interface IApizrExtendedProperOptionsBuilder<out TApizrExtendedProperOptions, out TApizrExtendedProperOptionsBuilder> : IApizrExtendedProperOptionsBuilderBase,
         IApizrGlobalProperOptionsBuilderBase<TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder>,
         IApizrExtendedSharedOptionsBuilder<TApizrExtendedProperOptions, TApizrExtendedProperOptionsBuilder>
@@ -11,6 +14,7 @@ namespace Apizr.Extending.Configuring.Proper
     {
     }
 
+    /// <inheritdoc />
     public interface IApizrExtendedProperOptionsBuilder : IApizrExtendedProperOptionsBuilder<IApizrExtendedProperOptions, IApizrExtendedProperOptionsBuilder>
     { }
 }

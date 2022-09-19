@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Apizr.Extending
 {
-    public static class HttpClientBuilderExtensions
+    internal static class HttpClientBuilderExtensions
     {
         internal static IHttpClientBuilder AddTypedClient(this IHttpClientBuilder builder, Type type, Func<HttpClient, IServiceProvider, object> factory)
         {

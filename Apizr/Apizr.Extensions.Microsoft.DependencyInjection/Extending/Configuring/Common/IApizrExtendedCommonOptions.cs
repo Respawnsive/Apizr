@@ -11,6 +11,9 @@ using Refit;
 
 namespace Apizr.Extending.Configuring.Common
 {
+    /// <summary>
+    /// Options available at common level for extended registrations
+    /// </summary>
     public interface IApizrExtendedCommonOptions : IApizrExtendedCommonOptionsBase, IApizrExtendedSharedOptions
     {
         /// <summary>

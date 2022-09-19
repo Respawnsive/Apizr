@@ -22,6 +22,9 @@ using Refit;
 [assembly: Apizr.Preserve]
 namespace Apizr
 {
+    /// <summary>
+    /// MediatR options builder extensions
+    /// </summary>
     public static class MediationOptionsBuilderExtensions
     {
         /// <summary>

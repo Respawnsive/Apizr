@@ -6,6 +6,9 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace Apizr
 {
+    /// <summary>
+    /// InMemory cache handler implementation
+    /// </summary>
     public class InMemoryCacheHandler : ICacheHandler
     {
         private readonly IMemoryCache _memoryCache;
@@ -15,6 +18,7 @@ namespace Apizr
             _memoryCache = memoryCache ?? throw new ArgumentNullException(nameof(memoryCache), $"You must register an implementation of {nameof(IMemoryCache)} before trying to use it");
         }
 
+        /// <inheritdoc />
         public Task SetAsync(string key, object value, TimeSpan? lifeSpan = null, CancellationToken cancellationToken = default)
         {
             var options = new MemoryCacheEntryOptions { AbsoluteExpirationRelativeToNow = lifeSpan };
@@ -22,6 +26,7 @@ namespace Apizr
             return Task.CompletedTask;
         }
 
+        /// <inheritdoc />
         public Task<T> GetAsync<T>(string key, CancellationToken cancellationToken = default)
         {
             if (!_memoryCache.TryGetValue<T>(key, out var result))
@@ -30,6 +35,7 @@ namespace Apizr
             return Task.FromResult(result);
         }
 
+        /// <inheritdoc />
         public Task<bool> RemoveAsync(string key, CancellationToken cancellationToken = default)
         {
             try
@@ -43,6 +49,7 @@ namespace Apizr
             }
         }
 
+        /// <inheritdoc />
         public Task ClearAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();

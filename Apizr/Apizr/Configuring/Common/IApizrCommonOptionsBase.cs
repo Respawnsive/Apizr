@@ -4,7 +4,7 @@ using Refit;
 namespace Apizr.Configuring.Common
 {
     /// <summary>
-    /// Options available at common for both static and extended registrations
+    /// Options available at common level for both static and extended registrations
     /// </summary>
     public interface IApizrCommonOptionsBase : IApizrSharedOptionsBase
     {

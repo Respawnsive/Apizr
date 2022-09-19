@@ -5,6 +5,13 @@ using Polly;
 
 namespace Apizr.Mediation.Commanding
 {
+    /// <summary>
+    /// The top level base mediation command
+    /// </summary>
+    /// <typeparam name="TModelResultData">The model result type to map to</typeparam>
+    /// <typeparam name="TApiRequestData">The api result type to map from</typeparam>
+    /// <typeparam name="TApiResultData">The api request type to map to</typeparam>
+    /// <typeparam name="TModelRequestData">The model request type to map from</typeparam>
     public abstract class MediationCommandBase<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData> : RequestBase<TModelResultData>, IMediationCommand<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>
     {
         protected MediationCommandBase(Action<Exception> onException = null) : base(onException)
@@ -18,6 +25,11 @@ namespace Apizr.Mediation.Commanding
         }
     }
 
+    /// <summary>
+    /// The top level base mediation command
+    /// </summary>
+    /// <typeparam name="TRequestData">The api request type</typeparam>
+    /// <typeparam name="TResultData">The api result type</typeparam>
     public abstract class MediationCommandBase<TRequestData, TResultData> : RequestBase<TResultData>, IMediationCommand<TRequestData, TResultData>
     {
         protected MediationCommandBase(Action<Exception> onException = null) : base(onException)
@@ -31,6 +43,10 @@ namespace Apizr.Mediation.Commanding
         }
     }
 
+    /// <summary>
+    /// The top level base mediation command
+    /// </summary>
+    /// <typeparam name="TRequestData">The api request type</typeparam>
     public abstract class MediationCommandBase<TRequestData> : RequestBase<Unit>, IMediationCommand<TRequestData>
     {
         protected MediationCommandBase(Action<Exception> onException = null) : base(onException)
@@ -44,6 +60,9 @@ namespace Apizr.Mediation.Commanding
         }
     }
 
+    /// <summary>
+    /// The top level base mediation command
+    /// </summary>
     public abstract class MediationCommandBase : RequestBase<Unit>, IMediationCommand
     {
         protected MediationCommandBase(Action<Exception> onException = null) : base(onException)

@@ -4,6 +4,9 @@ using Apizr.Configuring.Common;
 
 namespace Apizr
 {
+    /// <summary>
+    /// Akavache options builder extensions
+    /// </summary>
     public static class AkavacheOptionsBuilderExtensions
     {
         /// <summary>

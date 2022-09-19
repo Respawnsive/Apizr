@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Apizr.Extending.Configuring.Proper
 {
+    /// <inheritdoc cref="IApizrExtendedProperOptions"/>
     public class ApizrExtendedProperOptions : ApizrProperOptionsBase, IApizrExtendedProperOptions
     {
         public ApizrExtendedProperOptions(IApizrExtendedSharedOptions sharedOptions,
@@ -38,9 +39,11 @@ namespace Apizr.Extending.Configuring.Proper
             DelegatingHandlersExtendedFactories = sharedOptions.DelegatingHandlersExtendedFactories;
         }
 
+        /// <inheritdoc />
         public Type ApizrManagerType { get; }
 
         private Func<IServiceProvider, Uri> _baseUriFactory;
+        /// <inheritdoc />
         public Func<IServiceProvider, Uri> BaseUriFactory
         {
             get => _baseUriFactory;
@@ -48,6 +51,7 @@ namespace Apizr.Extending.Configuring.Proper
         }
 
         private Func<IServiceProvider, string> _baseAddressFactory;
+        /// <inheritdoc />
         public Func<IServiceProvider, string> BaseAddressFactory
         {
             get => _baseAddressFactory;
@@ -55,6 +59,7 @@ namespace Apizr.Extending.Configuring.Proper
         }
 
         private Func<IServiceProvider, string> _basePathFactory;
+        /// <inheritdoc />
         public Func<IServiceProvider, string> BasePathFactory
         {
             get => _basePathFactory;
@@ -62,6 +67,7 @@ namespace Apizr.Extending.Configuring.Proper
         }
 
         private Func<IServiceProvider, HttpTracerMode> _httpTracerModeFactory;
+        /// <inheritdoc />
         public Func<IServiceProvider, HttpTracerMode> HttpTracerModeFactory
         {
             get => _httpTracerModeFactory;
@@ -69,6 +75,7 @@ namespace Apizr.Extending.Configuring.Proper
         }
 
         private Func<IServiceProvider, HttpMessageParts> _trafficVerbosityFactory;
+        /// <inheritdoc />
         public Func<IServiceProvider, HttpMessageParts> TrafficVerbosityFactory
         {
             get => _trafficVerbosityFactory;
@@ -76,6 +83,7 @@ namespace Apizr.Extending.Configuring.Proper
         }
 
         private Func<IServiceProvider, LogLevel[]> _logLevelsFactory;
+        /// <inheritdoc />
         public Func<IServiceProvider, LogLevel[]> LogLevelsFactory
         {
             get => _logLevelsFactory;
@@ -83,14 +91,20 @@ namespace Apizr.Extending.Configuring.Proper
         }
 
         private Func<IServiceProvider, string, ILogger> _loggerFactory;
+        /// <inheritdoc />
         public Func<IServiceProvider, string, ILogger> LoggerFactory
         {
             get => _loggerFactory;
             protected set => _loggerFactory = (serviceProvider, webApiFriendlyName) => Logger = value.Invoke(serviceProvider, webApiFriendlyName);
         }
 
+        /// <inheritdoc />
         public Func<IServiceProvider, HttpClientHandler> HttpClientHandlerFactory { get; set; }
+
+        /// <inheritdoc />
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
+
+        /// <inheritdoc />
         public IList<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
     }
 }

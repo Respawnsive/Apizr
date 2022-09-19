@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Copied from Fusillade official repo and then adjusted to Apizr needs
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;

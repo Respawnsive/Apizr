@@ -6,6 +6,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Apizr.Extending.Configuring.Shared
 {
+    /// <summary>
+    /// Options available at both common and proper level for extended registrations
+    /// </summary>
     public interface IApizrExtendedSharedOptions : IApizrExtendedSharedOptionsBase
     {
         /// <summary>

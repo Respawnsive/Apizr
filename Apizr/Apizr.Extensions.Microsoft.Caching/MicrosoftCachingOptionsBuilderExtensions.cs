@@ -3,6 +3,9 @@
 [assembly: Apizr.Preserve]
 namespace Apizr
 {
+    /// <summary>
+    /// Microsoft Caching options builder extensions
+    /// </summary>
     public static class MicrosoftCachingOptionsBuilderExtensions
     {
         /// <summary>

@@ -4,6 +4,9 @@ using Apizr.Extending.Configuring.Proper;
 
 namespace Apizr.Extending.Configuring
 {
+    /// <summary>
+    /// Builder options available for extended registrations
+    /// </summary>
     public interface IApizrExtendedOptionsBuilder<out TApizrExtendedOptions, out TApizrExtendedOptionsBuilder> : 
         IApizrExtendedOptionsBuilderBase<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>,
         IApizrExtendedCommonOptionsBuilder<TApizrExtendedOptions, TApizrExtendedOptionsBuilder>,
@@ -13,6 +16,9 @@ namespace Apizr.Extending.Configuring
     {
     }
 
+    /// <summary>
+    /// Builder options available for extended registrations
+    /// </summary>
     public interface IApizrExtendedOptionsBuilder : IApizrExtendedOptionsBuilder<IApizrExtendedOptions, IApizrExtendedOptionsBuilder>
     { }
 }

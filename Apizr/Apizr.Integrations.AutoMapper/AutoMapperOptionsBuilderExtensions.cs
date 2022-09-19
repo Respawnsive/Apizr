@@ -3,6 +3,9 @@ using AutoMapper;
 
 namespace Apizr
 {
+    /// <summary>
+    /// AutoMapper options builder extensions
+    /// </summary>
     public static class AutoMapperOptionsBuilderExtensions
     {
         /// <summary>

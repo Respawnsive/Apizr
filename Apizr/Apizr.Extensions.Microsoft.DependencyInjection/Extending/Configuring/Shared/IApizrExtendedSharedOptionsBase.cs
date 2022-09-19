@@ -6,6 +6,9 @@ using Apizr.Configuring.Shared;
 
 namespace Apizr.Extending.Configuring.Shared
 {
+    /// <summary>
+    /// Options available at both common and proper level for extended registrations
+    /// </summary>
     public interface IApizrExtendedSharedOptionsBase : IApizrSharedOptionsBase
     {
         /// <summary>

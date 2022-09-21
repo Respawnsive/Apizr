@@ -84,10 +84,12 @@ items:
   source:
     id: ApizrCrudMediator
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 361
+    startLine: 431
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nApizr mediator dedicated to <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TApiEntity</code> cruding, getting all shorter\n"
+  example: []
   syntax:
     content: 'public class ApizrCrudMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> : IApizrCrudMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>, IApizrCrudMediatorBase, IApizrMediatorBase where TApiEntity : class'
     typeParameters:
@@ -135,7 +137,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 365
+    startLine: 435
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
@@ -166,19 +168,24 @@ items:
   source:
     id: SendCreateCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 374
+    startLine: 445
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.CreateCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task<TApiEntity> SendCreateCommand(TApiEntity entity, Action<Exception> onException = null)
     parameters:
     - id: entity
       type: '{TApiEntity}'
+      description: The entity to create
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TApiEntity}}
+      description: ''
     content.vb: Public Function SendCreateCommand(entity As TApiEntity, onException As Action(Of Exception) = Nothing) As Task(Of TApiEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendCreateCommand*
   implements:
@@ -204,21 +211,27 @@ items:
   source:
     id: SendCreateCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 377
+    startLine: 449
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.CreateCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task<TApiEntity> SendCreateCommand(TApiEntity entity, Context context, Action<Exception> onException = null)
     parameters:
     - id: entity
       type: '{TApiEntity}'
+      description: The entity to create
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TApiEntity}}
+      description: ''
     content.vb: Public Function SendCreateCommand(entity As TApiEntity, context As Context, onException As Action(Of Exception) = Nothing) As Task(Of TApiEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendCreateCommand*
   implements:
@@ -244,21 +257,27 @@ items:
   source:
     id: SendCreateCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 380
+    startLine: 453
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.CreateCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task<TApiEntity> SendCreateCommand(TApiEntity entity, CancellationToken cancellationToken, Action<Exception> onException = null)
     parameters:
     - id: entity
       type: '{TApiEntity}'
+      description: The entity to create
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TApiEntity}}
+      description: ''
     content.vb: Public Function SendCreateCommand(entity As TApiEntity, cancellationToken As CancellationToken, onException As Action(Of Exception) = Nothing) As Task(Of TApiEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendCreateCommand*
   implements:
@@ -284,23 +303,30 @@ items:
   source:
     id: SendCreateCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 384
+    startLine: 458
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.CreateCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task<TApiEntity> SendCreateCommand(TApiEntity entity, Context context, CancellationToken cancellationToken, Action<Exception> onException = null)
     parameters:
     - id: entity
       type: '{TApiEntity}'
+      description: The entity to create
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TApiEntity}}
+      description: ''
     content.vb: Public Function SendCreateCommand(entity As TApiEntity, context As Context, cancellationToken As CancellationToken, onException As Action(Of Exception) = Nothing) As Task(Of TApiEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendCreateCommand*
   implements:
@@ -326,21 +352,27 @@ items:
   source:
     id: SendCreateCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 392
+    startLine: 467
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.CreateCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning a mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelEntity> SendCreateCommand<TModelEntity>(TModelEntity entity, Action<Exception> onException = null)
     parameters:
     - id: entity
       type: '{TModelEntity}'
+      description: The entity to create
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception (default: null = throwing)'
     typeParameters:
     - id: TModelEntity
+      description: ''
     return:
       type: System.Threading.Tasks.Task{{TModelEntity}}
+      description: ''
     content.vb: Public Function SendCreateCommand(Of TModelEntity)(entity As TModelEntity, onException As Action(Of Exception) = Nothing) As Task(Of TModelEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendCreateCommand*
   implements:
@@ -366,23 +398,30 @@ items:
   source:
     id: SendCreateCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 395
+    startLine: 471
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.CreateCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning a mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelEntity> SendCreateCommand<TModelEntity>(TModelEntity entity, Context context, Action<Exception> onException = null)
     parameters:
     - id: entity
       type: '{TModelEntity}'
+      description: The entity to create
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception (default: null = throwing)'
     typeParameters:
     - id: TModelEntity
+      description: ''
     return:
       type: System.Threading.Tasks.Task{{TModelEntity}}
+      description: ''
     content.vb: Public Function SendCreateCommand(Of TModelEntity)(entity As TModelEntity, context As Context, onException As Action(Of Exception) = Nothing) As Task(Of TModelEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendCreateCommand*
   implements:
@@ -408,23 +447,30 @@ items:
   source:
     id: SendCreateCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 398
+    startLine: 475
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.CreateCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning a mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelEntity> SendCreateCommand<TModelEntity>(TModelEntity entity, CancellationToken cancellationToken, Action<Exception> onException = null)
     parameters:
     - id: entity
       type: '{TModelEntity}'
+      description: The entity to create
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception (default: null = throwing)'
     typeParameters:
     - id: TModelEntity
+      description: ''
     return:
       type: System.Threading.Tasks.Task{{TModelEntity}}
+      description: ''
     content.vb: Public Function SendCreateCommand(Of TModelEntity)(entity As TModelEntity, cancellationToken As CancellationToken, onException As Action(Of Exception) = Nothing) As Task(Of TModelEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendCreateCommand*
   implements:
@@ -450,25 +496,33 @@ items:
   source:
     id: SendCreateCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 402
+    startLine: 480
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.CreateCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning a mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelEntity> SendCreateCommand<TModelEntity>(TModelEntity entity, Context context, CancellationToken cancellationToken, Action<Exception> onException = null)
     parameters:
     - id: entity
       type: '{TModelEntity}'
+      description: The entity to create
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception (default: null = throwing)'
     typeParameters:
     - id: TModelEntity
+      description: ''
     return:
       type: System.Threading.Tasks.Task{{TModelEntity}}
+      description: ''
     content.vb: Public Function SendCreateCommand(Of TModelEntity)(entity As TModelEntity, context As Context, cancellationToken As CancellationToken, onException As Action(Of Exception) = Nothing) As Task(Of TModelEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendCreateCommand*
   implements:
@@ -494,19 +548,24 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 414
+    startLine: 493
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task<TReadAllResult> SendReadAllQuery(bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -532,21 +591,27 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 416
+    startLine: 496
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task<TReadAllResult> SendReadAllQuery(Context context, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(context As Context, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -572,21 +637,27 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 419
+    startLine: 500
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task<TReadAllResult> SendReadAllQuery(CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -612,21 +683,27 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 422
+    startLine: 504
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority\n"
+  example: []
   syntax:
     content: public Task<TReadAllResult> SendReadAllQuery(int priority, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(priority As Integer, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -652,23 +729,30 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 425
+    startLine: 508
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority\n"
+  example: []
   syntax:
     content: public Task<TReadAllResult> SendReadAllQuery(int priority, Context context, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(priority As Integer, context As Context, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -694,23 +778,30 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 428
+    startLine: 512
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority\n"
+  example: []
   syntax:
     content: public Task<TReadAllResult> SendReadAllQuery(int priority, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(priority As Integer, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -736,23 +827,30 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 432
+    startLine: 517
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority\n"
+  example: []
   syntax:
     content: public Task<TReadAllResult> SendReadAllQuery(Context context, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -778,25 +876,33 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 436
+    startLine: 522
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority\n"
+  example: []
   syntax:
     content: public Task<TReadAllResult> SendReadAllQuery(int priority, Context context, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(priority As Integer, context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -822,21 +928,26 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 444
+    startLine: 531
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelReadAllResult
     return:
       type: System.Threading.Tasks.Task{{TModelReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(Of TModelReadAllResult)(clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -862,23 +973,29 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 447
+    startLine: 535
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(Context context, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelReadAllResult
     return:
       type: System.Threading.Tasks.Task{{TModelReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(Of TModelReadAllResult)(context As Context, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -904,23 +1021,29 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 450
+    startLine: 539
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelReadAllResult
     return:
       type: System.Threading.Tasks.Task{{TModelReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(Of TModelReadAllResult)(cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -946,23 +1069,29 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 454
+    startLine: 544
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority returning mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(int priority, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelReadAllResult
     return:
       type: System.Threading.Tasks.Task{{TModelReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(Of TModelReadAllResult)(priority As Integer, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -988,25 +1117,32 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 457
+    startLine: 548
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority returning mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(int priority, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelReadAllResult
     return:
       type: System.Threading.Tasks.Task{{TModelReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(Of TModelReadAllResult)(priority As Integer, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -1032,25 +1168,32 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 461
+    startLine: 553
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority returning mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(int priority, Context context, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelReadAllResult
     return:
       type: System.Threading.Tasks.Task{{TModelReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(Of TModelReadAllResult)(priority As Integer, context As Context, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -1076,25 +1219,32 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 465
+    startLine: 558
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority returning mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(Context context, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelReadAllResult
     return:
       type: System.Threading.Tasks.Task{{TModelReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(Of TModelReadAllResult)(context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -1120,27 +1270,35 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 469
+    startLine: 563
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority returning mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(int priority, Context context, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelReadAllResult
     return:
       type: System.Threading.Tasks.Task{{TModelReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(Of TModelReadAllResult)(priority As Integer, context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -1166,21 +1324,27 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 477
+    startLine: 572
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(readAllParams As TReadAllParams, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -1206,23 +1370,30 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 480
+    startLine: 576
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams, Context context, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(readAllParams As TReadAllParams, context As Context, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -1248,23 +1419,30 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 484
+    startLine: 581
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(readAllParams As TReadAllParams, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -1290,23 +1468,30 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 488
+    startLine: 586
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority\n"
+  example: []
   syntax:
     content: public Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams, int priority, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(readAllParams As TReadAllParams, priority As Integer, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -1332,25 +1517,33 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 492
+    startLine: 591
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority\n"
+  example: []
   syntax:
     content: public Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams, int priority, Context context, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(readAllParams As TReadAllParams, priority As Integer, context As Context, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -1376,25 +1569,33 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 496
+    startLine: 596
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority\n"
+  example: []
   syntax:
     content: public Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams, int priority, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(readAllParams As TReadAllParams, priority As Integer, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -1420,25 +1621,33 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 502
+    startLine: 603
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams, Context context, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(readAllParams As TReadAllParams, context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -1464,27 +1673,36 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 506
+    startLine: 608
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority\n"
+  example: []
   syntax:
     content: public Task<TReadAllResult> SendReadAllQuery(TReadAllParams readAllParams, int priority, Context context, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(readAllParams As TReadAllParams, priority As Integer, context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -1510,23 +1728,29 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 514
+    startLine: 617
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning a mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(TReadAllParams readAllParams, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelReadAllResult
     return:
       type: System.Threading.Tasks.Task{{TModelReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(Of TModelReadAllResult)(readAllParams As TReadAllParams, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -1552,25 +1776,32 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 518
+    startLine: 622
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning a mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(TReadAllParams readAllParams, Context context, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelReadAllResult
     return:
       type: System.Threading.Tasks.Task{{TModelReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(Of TModelReadAllResult)(readAllParams As TReadAllParams, context As Context, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -1596,25 +1827,32 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 522
+    startLine: 627
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning a mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(TReadAllParams readAllParams, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelReadAllResult
     return:
       type: System.Threading.Tasks.Task{{TModelReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(Of TModelReadAllResult)(readAllParams As TReadAllParams, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -1640,25 +1878,32 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 527
+    startLine: 633
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority returning a mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(TReadAllParams readAllParams, int priority, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelReadAllResult
     return:
       type: System.Threading.Tasks.Task{{TModelReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(Of TModelReadAllResult)(readAllParams As TReadAllParams, priority As Integer, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -1684,27 +1929,35 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 531
+    startLine: 638
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority returning a mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(TReadAllParams readAllParams, int priority, Context context, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelReadAllResult
     return:
       type: System.Threading.Tasks.Task{{TModelReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(Of TModelReadAllResult)(readAllParams As TReadAllParams, priority As Integer, context As Context, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -1730,27 +1983,35 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 535
+    startLine: 643
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority returning a mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(TReadAllParams readAllParams, int priority, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelReadAllResult
     return:
       type: System.Threading.Tasks.Task{{TModelReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(Of TModelReadAllResult)(readAllParams As TReadAllParams, priority As Integer, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -1776,27 +2037,35 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 541
+    startLine: 650
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning a mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(TReadAllParams readAllParams, Context context, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelReadAllResult
     return:
       type: System.Threading.Tasks.Task{{TModelReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(Of TModelReadAllResult)(readAllParams As TReadAllParams, context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -1822,29 +2091,38 @@ items:
   source:
     id: SendReadAllQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 547
+    startLine: 657
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority returning a mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult>(TReadAllParams readAllParams, int priority, Context context, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelReadAllResult
     return:
       type: System.Threading.Tasks.Task{{TModelReadAllResult}}
+      description: ''
     content.vb: Public Function SendReadAllQuery(Of TModelReadAllResult)(readAllParams As TReadAllParams, priority As Integer, context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelReadAllResult)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery*
   implements:
@@ -1870,21 +2148,27 @@ items:
   source:
     id: SendReadQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 561
+    startLine: 672
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task<TApiEntity> SendReadQuery(TApiEntityKey key, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TApiEntity}}
+      description: ''
     content.vb: Public Function SendReadQuery(key As TApiEntityKey, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TApiEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery*
   implements:
@@ -1910,23 +2194,30 @@ items:
   source:
     id: SendReadQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 564
+    startLine: 676
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task<TApiEntity> SendReadQuery(TApiEntityKey key, Context context, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TApiEntity}}
+      description: ''
     content.vb: Public Function SendReadQuery(key As TApiEntityKey, context As Context, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TApiEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery*
   implements:
@@ -1952,23 +2243,30 @@ items:
   source:
     id: SendReadQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 567
+    startLine: 680
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task<TApiEntity> SendReadQuery(TApiEntityKey key, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TApiEntity}}
+      description: ''
     content.vb: Public Function SendReadQuery(key As TApiEntityKey, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TApiEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery*
   implements:
@@ -1994,23 +2292,30 @@ items:
   source:
     id: SendReadQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 571
+    startLine: 685
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority\n"
+  example: []
   syntax:
     content: public Task<TApiEntity> SendReadQuery(TApiEntityKey key, int priority, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TApiEntity}}
+      description: ''
     content.vb: Public Function SendReadQuery(key As TApiEntityKey, priority As Integer, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TApiEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery*
   implements:
@@ -2036,25 +2341,33 @@ items:
   source:
     id: SendReadQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 575
+    startLine: 690
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task<TApiEntity> SendReadQuery(TApiEntityKey key, Context context, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TApiEntity}}
+      description: ''
     content.vb: Public Function SendReadQuery(key As TApiEntityKey, context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TApiEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery*
   implements:
@@ -2080,25 +2393,33 @@ items:
   source:
     id: SendReadQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 579
+    startLine: 695
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority\n"
+  example: []
   syntax:
     content: public Task<TApiEntity> SendReadQuery(TApiEntityKey key, int priority, Context context, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TApiEntity}}
+      description: ''
     content.vb: Public Function SendReadQuery(key As TApiEntityKey, priority As Integer, context As Context, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TApiEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery*
   implements:
@@ -2124,25 +2445,33 @@ items:
   source:
     id: SendReadQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 582
+    startLine: 699
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority\n"
+  example: []
   syntax:
     content: public Task<TApiEntity> SendReadQuery(TApiEntityKey key, int priority, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TApiEntity}}
+      description: ''
     content.vb: Public Function SendReadQuery(key As TApiEntityKey, priority As Integer, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TApiEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery*
   implements:
@@ -2168,27 +2497,36 @@ items:
   source:
     id: SendReadQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 587
+    startLine: 705
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority\n"
+  example: []
   syntax:
     content: public Task<TApiEntity> SendReadQuery(TApiEntityKey key, int priority, Context context, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task{{TApiEntity}}
+      description: ''
     content.vb: Public Function SendReadQuery(key As TApiEntityKey, priority As Integer, context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TApiEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery*
   implements:
@@ -2214,23 +2552,30 @@ items:
   source:
     id: SendReadQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 595
+    startLine: 714
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning a mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelEntity
+      description: ''
     return:
       type: System.Threading.Tasks.Task{{TModelEntity}}
+      description: ''
     content.vb: Public Function SendReadQuery(Of TModelEntity)(key As TApiEntityKey, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery*
   implements:
@@ -2256,25 +2601,33 @@ items:
   source:
     id: SendReadQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 598
+    startLine: 718
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning a mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key, Context context, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelEntity
+      description: ''
     return:
       type: System.Threading.Tasks.Task{{TModelEntity}}
+      description: ''
     content.vb: Public Function SendReadQuery(Of TModelEntity)(key As TApiEntityKey, context As Context, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery*
   implements:
@@ -2300,25 +2653,33 @@ items:
   source:
     id: SendReadQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 602
+    startLine: 723
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning a mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelEntity
+      description: ''
     return:
       type: System.Threading.Tasks.Task{{TModelEntity}}
+      description: ''
     content.vb: Public Function SendReadQuery(Of TModelEntity)(key As TApiEntityKey, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery*
   implements:
@@ -2344,25 +2705,33 @@ items:
   source:
     id: SendReadQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 606
+    startLine: 728
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority returning a mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key, int priority, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelEntity
+      description: ''
     return:
       type: System.Threading.Tasks.Task{{TModelEntity}}
+      description: ''
     content.vb: Public Function SendReadQuery(Of TModelEntity)(key As TApiEntityKey, priority As Integer, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery*
   implements:
@@ -2388,27 +2757,36 @@ items:
   source:
     id: SendReadQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 610
+    startLine: 733
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning a mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key, Context context, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelEntity
+      description: ''
     return:
       type: System.Threading.Tasks.Task{{TModelEntity}}
+      description: ''
     content.vb: Public Function SendReadQuery(Of TModelEntity)(key As TApiEntityKey, context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery*
   implements:
@@ -2434,27 +2812,36 @@ items:
   source:
     id: SendReadQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 614
+    startLine: 738
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority returning a mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key, int priority, Context context, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelEntity
+      description: ''
     return:
       type: System.Threading.Tasks.Task{{TModelEntity}}
+      description: ''
     content.vb: Public Function SendReadQuery(Of TModelEntity)(key As TApiEntityKey, priority As Integer, context As Context, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery*
   implements:
@@ -2480,27 +2867,36 @@ items:
   source:
     id: SendReadQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 618
+    startLine: 743
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority returning a mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key, int priority, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelEntity
+      description: ''
     return:
       type: System.Threading.Tasks.Task{{TModelEntity}}
+      description: ''
     content.vb: Public Function SendReadQuery(Of TModelEntity)(key As TApiEntityKey, priority As Integer, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery*
   implements:
@@ -2526,29 +2922,39 @@ items:
   source:
     id: SendReadQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 623
+    startLine: 749
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority returning a mapped result\n"
+  example: []
   syntax:
     content: public Task<TModelEntity> SendReadQuery<TModelEntity>(TApiEntityKey key, int priority, Context context, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: Clear request cache before executing
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception and return cached result (default: null = throwing)'
     typeParameters:
     - id: TModelEntity
+      description: ''
     return:
       type: System.Threading.Tasks.Task{{TModelEntity}}
+      description: ''
     content.vb: Public Function SendReadQuery(Of TModelEntity)(key As TApiEntityKey, priority As Integer, context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing) As Task(Of TModelEntity)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery*
   implements:
@@ -2574,21 +2980,27 @@ items:
   source:
     id: SendUpdateCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 635
+    startLine: 762
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task SendUpdateCommand(TApiEntityKey key, TApiEntity entity, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: entity
       type: '{TApiEntity}'
+      description: The entity to update
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Public Function SendUpdateCommand(key As TApiEntityKey, entity As TApiEntity, onException As Action(Of Exception) = Nothing) As Task
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendUpdateCommand*
   implements:
@@ -2614,23 +3026,30 @@ items:
   source:
     id: SendUpdateCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 639
+    startLine: 767
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task SendUpdateCommand(TApiEntityKey key, TApiEntity entity, Context context, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: entity
       type: '{TApiEntity}'
+      description: The entity to update
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Public Function SendUpdateCommand(key As TApiEntityKey, entity As TApiEntity, context As Context, onException As Action(Of Exception) = Nothing) As Task
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendUpdateCommand*
   implements:
@@ -2656,23 +3075,30 @@ items:
   source:
     id: SendUpdateCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 642
+    startLine: 771
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task SendUpdateCommand(TApiEntityKey key, TApiEntity entity, CancellationToken cancellationToken, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: entity
       type: '{TApiEntity}'
+      description: The entity to update
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Public Function SendUpdateCommand(key As TApiEntityKey, entity As TApiEntity, cancellationToken As CancellationToken, onException As Action(Of Exception) = Nothing) As Task
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendUpdateCommand*
   implements:
@@ -2698,25 +3124,33 @@ items:
   source:
     id: SendUpdateCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 647
+    startLine: 777
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task SendUpdateCommand(TApiEntityKey key, TApiEntity entity, Context context, CancellationToken cancellationToken, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: entity
       type: '{TApiEntity}'
+      description: The entity to update
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Public Function SendUpdateCommand(key As TApiEntityKey, entity As TApiEntity, context As Context, cancellationToken As CancellationToken, onException As Action(Of Exception) = Nothing) As Task
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendUpdateCommand*
   implements:
@@ -2742,23 +3176,30 @@ items:
   source:
     id: SendUpdateCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 655
+    startLine: 786
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task SendUpdateCommand<TModelEntity>(TApiEntityKey key, TModelEntity entity, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: entity
       type: '{TModelEntity}'
+      description: The entity to update
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception (default: null = throwing)'
     typeParameters:
     - id: TModelEntity
+      description: ''
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Public Function SendUpdateCommand(Of TModelEntity)(key As TApiEntityKey, entity As TModelEntity, onException As Action(Of Exception) = Nothing) As Task
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendUpdateCommand*
   implements:
@@ -2784,25 +3225,33 @@ items:
   source:
     id: SendUpdateCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 659
+    startLine: 791
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task SendUpdateCommand<TModelEntity>(TApiEntityKey key, TModelEntity entity, Context context, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: entity
       type: '{TModelEntity}'
+      description: The entity to update
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception (default: null = throwing)'
     typeParameters:
     - id: TModelEntity
+      description: ''
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Public Function SendUpdateCommand(Of TModelEntity)(key As TApiEntityKey, entity As TModelEntity, context As Context, onException As Action(Of Exception) = Nothing) As Task
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendUpdateCommand*
   implements:
@@ -2828,25 +3277,33 @@ items:
   source:
     id: SendUpdateCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 662
+    startLine: 795
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task SendUpdateCommand<TModelEntity>(TApiEntityKey key, TModelEntity entity, CancellationToken cancellationToken, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: entity
       type: '{TModelEntity}'
+      description: The entity to update
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception (default: null = throwing)'
     typeParameters:
     - id: TModelEntity
+      description: ''
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Public Function SendUpdateCommand(Of TModelEntity)(key As TApiEntityKey, entity As TModelEntity, cancellationToken As CancellationToken, onException As Action(Of Exception) = Nothing) As Task
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendUpdateCommand*
   implements:
@@ -2872,27 +3329,36 @@ items:
   source:
     id: SendUpdateCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 667
+    startLine: 801
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task SendUpdateCommand<TModelEntity>(TApiEntityKey key, TModelEntity entity, Context context, CancellationToken cancellationToken, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: entity
       type: '{TModelEntity}'
+      description: The entity to update
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception (default: null = throwing)'
     typeParameters:
     - id: TModelEntity
+      description: ''
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Public Function SendUpdateCommand(Of TModelEntity)(key As TApiEntityKey, entity As TModelEntity, context As Context, cancellationToken As CancellationToken, onException As Action(Of Exception) = Nothing) As Task
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendUpdateCommand*
   implements:
@@ -2918,19 +3384,24 @@ items:
   source:
     id: SendDeleteCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 677
+    startLine: 812
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.DeleteCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task SendDeleteCommand(TApiEntityKey key, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Public Function SendDeleteCommand(key As TApiEntityKey, onException As Action(Of Exception) = Nothing) As Task
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendDeleteCommand*
   implements:
@@ -2956,21 +3427,27 @@ items:
   source:
     id: SendDeleteCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 680
+    startLine: 816
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.DeleteCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task SendDeleteCommand(TApiEntityKey key, Context context, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Public Function SendDeleteCommand(key As TApiEntityKey, context As Context, onException As Action(Of Exception) = Nothing) As Task
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendDeleteCommand*
   implements:
@@ -2996,21 +3473,27 @@ items:
   source:
     id: SendDeleteCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 683
+    startLine: 820
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.DeleteCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task SendDeleteCommand(TApiEntityKey key, CancellationToken cancellationToken, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Public Function SendDeleteCommand(key As TApiEntityKey, cancellationToken As CancellationToken, onException As Action(Of Exception) = Nothing) As Task
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendDeleteCommand*
   implements:
@@ -3036,23 +3519,30 @@ items:
   source:
     id: SendDeleteCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Sending\ApizrCrudMediator.cs
-    startLine: 687
+    startLine: 825
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.DeleteCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  example: []
   syntax:
     content: public Task SendDeleteCommand(TApiEntityKey key, Context context, CancellationToken cancellationToken, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: onException
       type: System.Action{System.Exception}
+      description: 'Handle exception (default: null = throwing)'
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Public Function SendDeleteCommand(key As TApiEntityKey, context As Context, cancellationToken As CancellationToken, onException As Action(Of Exception) = Nothing) As Task
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendDeleteCommand*
   implements:

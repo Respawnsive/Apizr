@@ -17,18 +17,25 @@ items:
   source:
     id: DeleteCommandHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\DeleteCommandHandler.cs
-    startLine: 8
+    startLine: 16
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling
+  summary: "\nThe Delete command handler\n"
+  example: []
   syntax:
     content: 'public class DeleteCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> : DeleteCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, DeleteCommand<TModelEntity, TApiEntityKey>, Unit>, IMediationCommandHandler<DeleteCommand<TModelEntity, TApiEntityKey>, Unit>, IRequestHandler<DeleteCommand<TModelEntity, TApiEntityKey>, Unit> where TModelEntity : class where TApiEntity : class'
     typeParameters:
     - id: TModelEntity
+      description: The model entity type
     - id: TApiEntity
+      description: The api entity type
     - id: TApiEntityKey
+      description: The api entity&apos;s crud key type
     - id: TReadAllResult
+      description: The returned result type
     - id: TReadAllParams
+      description: The read all params type
     content.vb: >-
       Public Class DeleteCommandHandler(Of TModelEntity As Class, TApiEntity As Class, TApiEntityKey, TReadAllResult, TReadAllParams)
           Inherits DeleteCommandHandlerBase(Of TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, DeleteCommand(Of TModelEntity, TApiEntityKey), Unit)
@@ -74,7 +81,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\DeleteCommandHandler.cs
-    startLine: 14
+    startLine: 22
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling
@@ -106,10 +113,12 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\DeleteCommandHandler.cs
-    startLine: 20
+    startLine: 29
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling
+  summary: "\nHandling the Delete command\n"
+  example: []
   syntax:
     content: public override async Task<Unit> Handle(DeleteCommand<TModelEntity, TApiEntityKey> request, CancellationToken cancellationToken)
     parameters:
@@ -117,8 +126,10 @@ items:
       type: Apizr.Mediation.Cruding.DeleteCommand{{TModelEntity},{TApiEntityKey}}
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: A cancellation token
     return:
       type: System.Threading.Tasks.Task{MediatR.Unit}
+      description: ''
     content.vb: Public Overrides Function Handle(request As DeleteCommand(Of TModelEntity, TApiEntityKey), cancellationToken As CancellationToken) As Task(Of Unit)
   overridden: Apizr.Mediation.Cruding.Handling.Base.DeleteCommandHandlerBase{{TModelEntity},{TApiEntity},{TApiEntityKey},{TReadAllResult},{TReadAllParams},Apizr.Mediation.Cruding.DeleteCommand{{TModelEntity},{TApiEntityKey}},MediatR.Unit}.Handle(Apizr.Mediation.Cruding.DeleteCommand{{TModelEntity},{TApiEntityKey}},System.Threading.CancellationToken)
   overload: Apizr.Mediation.Cruding.Handling.DeleteCommandHandler`5.Handle*

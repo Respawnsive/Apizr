@@ -17,17 +17,23 @@ items:
   source:
     id: ReadAllQueryHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\ReadAllQueryHandler.cs
-    startLine: 31
+    startLine: 47
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling
+  summary: "\nThe ReadAll query handler\n"
+  example: []
   syntax:
     content: 'public class ReadAllQueryHandler<TApiEntity, TApiEntityKey, TModelReadAllResult, TApiReadAllResult> : ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelReadAllResult, TApiReadAllResult, ReadAllQuery<TModelReadAllResult>, TModelReadAllResult>, IMediationQueryHandler<ReadAllQuery<TModelReadAllResult>, TModelReadAllResult>, IRequestHandler<ReadAllQuery<TModelReadAllResult>, TModelReadAllResult> where TApiEntity : class'
     typeParameters:
     - id: TApiEntity
+      description: ''
     - id: TApiEntityKey
+      description: The api entity type
     - id: TModelReadAllResult
+      description: The returned model result type
     - id: TApiReadAllResult
+      description: The received api result type
     content.vb: >-
       Public Class ReadAllQueryHandler(Of TApiEntity As Class, TApiEntityKey, TModelReadAllResult, TApiReadAllResult)
           Inherits ReadAllQueryHandlerBase(Of TApiEntity, TApiEntityKey, TModelReadAllResult, TApiReadAllResult, ReadAllQuery(Of TModelReadAllResult), TModelReadAllResult)
@@ -73,7 +79,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\ReadAllQueryHandler.cs
-    startLine: 37
+    startLine: 53
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling
@@ -105,10 +111,12 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\ReadAllQueryHandler.cs
-    startLine: 43
+    startLine: 60
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling
+  summary: "\nHandling the ReadAll query\n"
+  example: []
   syntax:
     content: public override async Task<TModelReadAllResult> Handle(ReadAllQuery<TModelReadAllResult> request, CancellationToken cancellationToken)
     parameters:
@@ -116,8 +124,10 @@ items:
       type: Apizr.Mediation.Cruding.ReadAllQuery{{TModelReadAllResult}}
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: A cancellation token
     return:
       type: System.Threading.Tasks.Task{{TModelReadAllResult}}
+      description: ''
     content.vb: Public Overrides Function Handle(request As ReadAllQuery(Of TModelReadAllResult), cancellationToken As CancellationToken) As Task(Of TModelReadAllResult)
   overridden: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase{{TApiEntity},{TApiEntityKey},{TModelReadAllResult},{TApiReadAllResult},Apizr.Mediation.Cruding.ReadAllQuery{{TModelReadAllResult}},{TModelReadAllResult}}.Handle(Apizr.Mediation.Cruding.ReadAllQuery{{TModelReadAllResult}},System.Threading.CancellationToken)
   overload: Apizr.Mediation.Cruding.Handling.ReadAllQueryHandler`4.Handle*

@@ -17,15 +17,19 @@ items:
   source:
     id: UpdateCommandBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\UpdateCommandBase.cs
-    startLine: 25
+    startLine: 52
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  summary: "\nThe top level base mediation Update command\n"
+  example: []
   syntax:
     content: 'public abstract class UpdateCommandBase<TRequestData, TResultData> : UpdateCommandBase<int, TRequestData, TResultData>, IMediationCommand<TRequestData, TResultData>, IRequest<TResultData>, IBaseRequest'
     typeParameters:
     - id: TRequestData
+      description: The api request type
     - id: TResultData
+      description: The api result type
     content.vb: >-
       Public MustInherit Class UpdateCommandBase(Of TRequestData, TResultData)
           Inherits UpdateCommandBase(Of Integer, TRequestData, TResultData)
@@ -79,10 +83,11 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\UpdateCommandBase.cs
-    startLine: 27
+    startLine: 55
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  example: []
   syntax:
     content: protected UpdateCommandBase(int key, TRequestData requestData, Action<Exception> onException = null)
     parameters:
@@ -115,10 +120,11 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\UpdateCommandBase.cs
-    startLine: 31
+    startLine: 60
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  example: []
   syntax:
     content: protected UpdateCommandBase(int key, TRequestData requestData, Context context, Action<Exception> onException = null)
     parameters:

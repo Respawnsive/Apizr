@@ -17,16 +17,21 @@ items:
   source:
     id: ExecuteUnitRequestHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\ExecuteUnitRequestHandler.cs
-    startLine: 12
+    startLine: 18
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling
+  summary: "\nThe mediation execute unit request handler\n"
+  example: []
   syntax:
     content: 'public class ExecuteUnitRequestHandler<TWebApi, TModelData, TApiData> : ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, ExecuteUnitRequest<TWebApi, TModelData, TApiData>>, IRequestHandler<ExecuteUnitRequest<TWebApi, TModelData, TApiData>, Unit>'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelData
+      description: The model data type
     - id: TApiData
+      description: The api data type
     content.vb: >-
       Public Class ExecuteUnitRequestHandler(Of TWebApi, TModelData, TApiData)
           Inherits ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, ExecuteUnitRequest(Of TWebApi, TModelData, TApiData))
@@ -69,7 +74,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\ExecuteUnitRequestHandler.cs
-    startLine: 14
+    startLine: 20
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling
@@ -101,10 +106,12 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\ExecuteUnitRequestHandler.cs
-    startLine: 18
+    startLine: 25
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling
+  summary: "\nHandling the execute unit request\n"
+  example: []
   syntax:
     content: public override async Task<Unit> Handle(ExecuteUnitRequest<TWebApi, TModelData, TApiData> request, CancellationToken cancellationToken)
     parameters:
@@ -112,8 +119,10 @@ items:
       type: Apizr.Mediation.Requesting.ExecuteUnitRequest{{TWebApi},{TModelData},{TApiData}}
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: A cancellation token
     return:
       type: System.Threading.Tasks.Task{MediatR.Unit}
+      description: ''
     content.vb: Public Overrides Function Handle(request As ExecuteUnitRequest(Of TWebApi, TModelData, TApiData), cancellationToken As CancellationToken) As Task(Of Unit)
   overridden: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase{{TWebApi},{TModelData},{TApiData},Apizr.Mediation.Requesting.ExecuteUnitRequest{{TWebApi},{TModelData},{TApiData}}}.Handle(Apizr.Mediation.Requesting.ExecuteUnitRequest{{TWebApi},{TModelData},{TApiData}},System.Threading.CancellationToken)
   overload: Apizr.Mediation.Requesting.Handling.ExecuteUnitRequestHandler`3.Handle*

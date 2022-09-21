@@ -17,18 +17,25 @@ items:
   source:
     id: CreateCommandHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\CreateCommandHandler.cs
-    startLine: 7
+    startLine: 15
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling
+  summary: "\nThe Create command handler\n"
+  example: []
   syntax:
     content: 'public class CreateCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> : CreateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, CreateCommand<TModelEntity>, TModelEntity>, IMediationCommandHandler<CreateCommand<TModelEntity>, TModelEntity>, IRequestHandler<CreateCommand<TModelEntity>, TModelEntity> where TModelEntity : class where TApiEntity : class'
     typeParameters:
     - id: TModelEntity
+      description: The model entity type
     - id: TApiEntity
+      description: The api entity type
     - id: TApiEntityKey
+      description: The api entity&apos;s crud key type
     - id: TReadAllResult
+      description: The returned result type
     - id: TReadAllParams
+      description: The read all params
     content.vb: >-
       Public Class CreateCommandHandler(Of TModelEntity As Class, TApiEntity As Class, TApiEntityKey, TReadAllResult, TReadAllParams)
           Inherits CreateCommandHandlerBase(Of TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, CreateCommand(Of TModelEntity), TModelEntity)
@@ -74,7 +81,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\CreateCommandHandler.cs
-    startLine: 13
+    startLine: 21
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling
@@ -106,10 +113,12 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\CreateCommandHandler.cs
-    startLine: 19
+    startLine: 28
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling
+  summary: "\nHandling the Create command\n"
+  example: []
   syntax:
     content: public override async Task<TModelEntity> Handle(CreateCommand<TModelEntity> request, CancellationToken cancellationToken)
     parameters:
@@ -117,8 +126,10 @@ items:
       type: Apizr.Mediation.Cruding.CreateCommand{{TModelEntity}}
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: A cancellation token
     return:
       type: System.Threading.Tasks.Task{{TModelEntity}}
+      description: ''
     content.vb: Public Overrides Function Handle(request As CreateCommand(Of TModelEntity), cancellationToken As CancellationToken) As Task(Of TModelEntity)
   overridden: Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase{{TModelEntity},{TApiEntity},{TApiEntityKey},{TReadAllResult},{TReadAllParams},Apizr.Mediation.Cruding.CreateCommand{{TModelEntity}},{TModelEntity}}.Handle(Apizr.Mediation.Cruding.CreateCommand{{TModelEntity}},System.Threading.CancellationToken)
   overload: Apizr.Mediation.Cruding.Handling.CreateCommandHandler`5.Handle*
@@ -949,12 +960,12 @@ references:
   fullName: Apizr.Mediation.Cruding.Handling.Base
 - uid: Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase`7
   commentId: T:Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase`7
-  name: CreateCommandHandlerBase<TModelEntity, TApiEntity, TTApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult>
-  nameWithType: CreateCommandHandlerBase<TModelEntity, TApiEntity, TTApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult>
-  fullName: Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase<TModelEntity, TApiEntity, TTApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult>
-  nameWithType.vb: CreateCommandHandlerBase(Of TModelEntity, TApiEntity, TTApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult)
-  fullName.vb: Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase(Of TModelEntity, TApiEntity, TTApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult)
-  name.vb: CreateCommandHandlerBase(Of TModelEntity, TApiEntity, TTApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult)
+  name: CreateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult>
+  nameWithType: CreateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult>
+  fullName: Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult>
+  nameWithType.vb: CreateCommandHandlerBase(Of TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult)
+  fullName.vb: Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase(Of TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult)
+  name.vb: CreateCommandHandlerBase(Of TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult)
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase`7
     name: CreateCommandHandlerBase
@@ -975,9 +986,9 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - name: TTApiEntityKey
-    nameWithType: TTApiEntityKey
-    fullName: TTApiEntityKey
+  - name: TApiEntityKey
+    nameWithType: TApiEntityKey
+    fullName: TApiEntityKey
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -1025,9 +1036,9 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - name: TTApiEntityKey
-    nameWithType: TTApiEntityKey
-    fullName: TTApiEntityKey
+  - name: TApiEntityKey
+    nameWithType: TApiEntityKey
+    fullName: TApiEntityKey
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -1169,15 +1180,15 @@ references:
   commentId: M:Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase`7.Handle(`5,System.Threading.CancellationToken)
   isExternal: true
   name: Handle(TCommand, CancellationToken)
-  nameWithType: CreateCommandHandlerBase<TModelEntity, TApiEntity, TTApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult>.Handle(TCommand, CancellationToken)
-  fullName: Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase<TModelEntity, TApiEntity, TTApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult>.Handle(TCommand, System.Threading.CancellationToken)
-  nameWithType.vb: CreateCommandHandlerBase(Of TModelEntity, TApiEntity, TTApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult).Handle(TCommand, CancellationToken)
-  fullName.vb: Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase(Of TModelEntity, TApiEntity, TTApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult).Handle(TCommand, System.Threading.CancellationToken)
+  nameWithType: CreateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult>.Handle(TCommand, CancellationToken)
+  fullName: Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult>.Handle(TCommand, System.Threading.CancellationToken)
+  nameWithType.vb: CreateCommandHandlerBase(Of TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult).Handle(TCommand, CancellationToken)
+  fullName.vb: Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase(Of TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult).Handle(TCommand, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase`7.Handle(`5,System.Threading.CancellationToken)
     name: Handle
-    nameWithType: CreateCommandHandlerBase<TModelEntity, TApiEntity, TTApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult>.Handle
-    fullName: Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase<TModelEntity, TApiEntity, TTApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult>.Handle
+    nameWithType: CreateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult>.Handle
+    fullName: Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult>.Handle
   - name: (
     nameWithType: (
     fullName: (
@@ -1198,8 +1209,8 @@ references:
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase`7.Handle(`5,System.Threading.CancellationToken)
     name: Handle
-    nameWithType: CreateCommandHandlerBase(Of TModelEntity, TApiEntity, TTApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult).Handle
-    fullName: Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase(Of TModelEntity, TApiEntity, TTApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult).Handle
+    nameWithType: CreateCommandHandlerBase(Of TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult).Handle
+    fullName: Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase(Of TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult).Handle
   - name: (
     nameWithType: (
     fullName: (

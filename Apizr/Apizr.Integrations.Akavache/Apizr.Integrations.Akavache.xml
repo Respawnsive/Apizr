@@ -4,6 +4,11 @@
         <name>Apizr.Integrations.Akavache</name>
     </assembly>
     <members>
+        <member name="T:Apizr.AkavacheCacheHandler">
+            <summary>
+            Akavache cache handler implementation
+            </summary>
+        </member>
         <member name="M:Apizr.AkavacheCacheHandler.#ctor">
             <summary>
             Set Akavache as CacheHandler with LocalMachine blob cache and ApizrAkavacheCacheHandler name
@@ -27,6 +32,23 @@
             </summary>
             <param name="blobCacheFactory">The blob cache factory of your choice</param>
             <param name="applicationName">The application name used by Akavache</param>
+        </member>
+        <member name="M:Apizr.AkavacheCacheHandler.SetAsync(System.String,System.Object,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.AkavacheCacheHandler.GetAsync``1(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.AkavacheCacheHandler.RemoveAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.AkavacheCacheHandler.ClearAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.AkavacheOptionsBuilderExtensions">
+            <summary>
+            Akavache options builder extensions
+            </summary>
         </member>
         <member name="M:Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0)">
             <summary>

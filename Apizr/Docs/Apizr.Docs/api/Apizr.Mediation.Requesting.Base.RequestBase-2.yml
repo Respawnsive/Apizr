@@ -20,15 +20,19 @@ items:
   source:
     id: RequestBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\RequestBase.cs
-    startLine: 24
+    startLine: 45
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe top level base mediation request\n"
+  example: []
   syntax:
     content: 'public abstract class RequestBase<TFormattedModelResultData, TModelRequestData> : RequestBase<TFormattedModelResultData>, IRequest<TFormattedModelResultData>, IBaseRequest'
     typeParameters:
     - id: TFormattedModelResultData
+      description: The result type
     - id: TModelRequestData
+      description: The request type
     content.vb: >-
       Public MustInherit Class RequestBase(Of TFormattedModelResultData, TModelRequestData)
           Inherits RequestBase(Of TFormattedModelResultData)
@@ -74,10 +78,11 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\RequestBase.cs
-    startLine: 26
+    startLine: 48
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  example: []
   syntax:
     content: protected RequestBase(Action<Exception> onException = null)
     parameters:
@@ -106,10 +111,11 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\RequestBase.cs
-    startLine: 30
+    startLine: 54
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  example: []
   syntax:
     content: protected RequestBase(TModelRequestData modelRequestData, Action<Exception> onException = null)
     parameters:
@@ -140,10 +146,11 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\RequestBase.cs
-    startLine: 35
+    startLine: 60
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  example: []
   syntax:
     content: protected RequestBase(Context context, Action<Exception> onException = null)
     parameters:
@@ -174,19 +181,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\RequestBase.cs
-    startLine: 39
+    startLine: 70
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe base request constructor\n"
+  example: []
   syntax:
     content: protected RequestBase(TModelRequestData modelRequestData, Context context, Action<Exception> onException = null)
     parameters:
     - id: modelRequestData
       type: '{TModelRequestData}'
+      description: The request type
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(modelRequestData As TModelRequestData, context As Context, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.Base.RequestBase`2.#ctor*
   nameWithType.vb: RequestBase(Of TFormattedModelResultData, TModelRequestData).RequestBase(TModelRequestData, Context, Action(Of Exception))
@@ -210,10 +222,12 @@ items:
   source:
     id: ModelRequestData
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\RequestBase.cs
-    startLine: 44
+    startLine: 78
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe request to send\n"
+  example: []
   syntax:
     content: public TModelRequestData ModelRequestData { get; }
     parameters: []

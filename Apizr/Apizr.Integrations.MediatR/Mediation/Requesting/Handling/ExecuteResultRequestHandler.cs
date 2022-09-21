@@ -7,6 +7,14 @@ using Polly;
 
 namespace Apizr.Mediation.Requesting.Handling
 {
+    /// <summary>
+    /// The mediation execute result request handler
+    /// </summary>
+    /// <typeparam name="TWebApi">The web api type</typeparam>
+    /// <typeparam name="TModelResultData">The model result type</typeparam>
+    /// <typeparam name="TApiResultData">The api result type</typeparam>
+    /// <typeparam name="TApiRequestData">The api request type</typeparam>
+    /// <typeparam name="TModelRequestData">The model request type</typeparam>
     public class ExecuteResultRequestHandler<TWebApi, TModelResultData, TApiResultData, TApiRequestData,
         TModelRequestData> : ExecuteResultRequestHandlerBase<TWebApi,
         TModelResultData, TApiResultData, TApiRequestData, TModelRequestData, ExecuteResultRequest<TWebApi,
@@ -16,6 +24,7 @@ namespace Apizr.Mediation.Requesting.Handling
         {
         }
 
+        /// <inheritdoc />
         public override Task<TModelResultData> Handle(
             ExecuteResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData> request,
             CancellationToken cancellationToken)
@@ -50,6 +59,10 @@ namespace Apizr.Mediation.Requesting.Handling
         }
     }
 
+    /// <summary>
+    /// The mediation execute result request handler
+    /// </summary>
+    /// <typeparam name="TWebApi">The web api type</typeparam>
     public class ExecuteResultRequestHandler<TWebApi, TModelData, TApiData> : ExecuteResultRequestHandlerBase<TWebApi,
         TModelData, TApiData, ExecuteResultRequest<TWebApi,
             TModelData, TApiData>>
@@ -58,6 +71,7 @@ namespace Apizr.Mediation.Requesting.Handling
         {
         }
 
+        /// <inheritdoc />
         public override Task<TModelData> Handle(
             ExecuteResultRequest<TWebApi, TModelData, TApiData> request,
             CancellationToken cancellationToken)
@@ -114,6 +128,11 @@ namespace Apizr.Mediation.Requesting.Handling
         }
     }
 
+    /// <summary>
+    /// The mediation execute result request handler
+    /// </summary>
+    /// <typeparam name="TWebApi">The web api type</typeparam>
+    /// <typeparam name="TApiData">The api data type</typeparam>
     public class ExecuteResultRequestHandler<TWebApi, TApiData> : ExecuteResultRequestHandlerBase<TWebApi,
         TApiData, ExecuteResultRequest<TWebApi, TApiData>>
     {
@@ -121,6 +140,7 @@ namespace Apizr.Mediation.Requesting.Handling
         {
         }
 
+        /// <inheritdoc />
         public override Task<TApiData> Handle(
             ExecuteResultRequest<TWebApi, TApiData> request,
             CancellationToken cancellationToken)

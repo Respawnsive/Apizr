@@ -6,6 +6,14 @@ using MediatR;
 
 namespace Apizr.Mediation.Cruding.Handling
 {
+    /// <summary>
+    /// The Delete command handler
+    /// </summary>
+    /// <typeparam name="TModelEntity">The model entity type</typeparam>
+    /// <typeparam name="TApiEntity">The api entity type</typeparam>
+    /// <typeparam name="TApiEntityKey">The api entity's crud key type</typeparam>
+    /// <typeparam name="TReadAllResult">The returned result type</typeparam>
+    /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     public class DeleteCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> :
         DeleteCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams,
             DeleteCommand<TModelEntity, TApiEntityKey>, Unit>
@@ -18,6 +26,7 @@ namespace Apizr.Mediation.Cruding.Handling
         {
         }
 
+        /// <inheritdoc />
         public override async Task<Unit> Handle(DeleteCommand<TModelEntity, TApiEntityKey> request,
             CancellationToken cancellationToken)
         {
@@ -29,6 +38,13 @@ namespace Apizr.Mediation.Cruding.Handling
         }
     }
 
+    /// <summary>
+    /// The Delete command handler
+    /// </summary>
+    /// <typeparam name="TModelEntity">The model entity type</typeparam>
+    /// <typeparam name="TApiEntity">The api entity type</typeparam>
+    /// <typeparam name="TReadAllResult">The returned result type</typeparam>
+    /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     public class DeleteCommandHandler<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams> :
         DeleteCommandHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, DeleteCommand<TModelEntity>,
             Unit>
@@ -41,6 +57,7 @@ namespace Apizr.Mediation.Cruding.Handling
         {
         }
 
+        /// <inheritdoc />
         public override async Task<Unit> Handle(DeleteCommand<TModelEntity> request,
             CancellationToken cancellationToken)
         {

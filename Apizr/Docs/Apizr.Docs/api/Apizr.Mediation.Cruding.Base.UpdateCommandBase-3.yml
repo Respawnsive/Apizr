@@ -19,16 +19,21 @@ items:
   source:
     id: UpdateCommandBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\UpdateCommandBase.cs
-    startLine: 7
+    startLine: 13
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  summary: "\nThe top level base mediation Update command\n"
+  example: []
   syntax:
     content: 'public abstract class UpdateCommandBase<TKey, TRequestData, TResultData> : MediationCommandBase<TRequestData, TResultData>, IMediationCommand<TRequestData, TResultData>, IRequest<TResultData>, IBaseRequest'
     typeParameters:
     - id: TKey
+      description: The entity&apos;s crud key type
     - id: TRequestData
+      description: The request data type
     - id: TResultData
+      description: The result data type
     content.vb: >-
       Public MustInherit Class UpdateCommandBase(Of TKey, TRequestData, TResultData)
           Inherits MediationCommandBase(Of TRequestData, TResultData)
@@ -80,19 +85,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\UpdateCommandBase.cs
-    startLine: 9
+    startLine: 21
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  summary: "\nThe top level base mediation Update command constructor\n"
+  example: []
   syntax:
     content: protected UpdateCommandBase(TKey key, TRequestData requestData, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TKey}'
+      description: The entity&apos;s crud key
     - id: requestData
       type: '{TRequestData}'
+      description: The request data to send
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(key As TKey, requestData As TRequestData, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Cruding.Base.UpdateCommandBase`3.#ctor*
   nameWithType.vb: UpdateCommandBase(Of TKey, TRequestData, TResultData).UpdateCommandBase(TKey, TRequestData, Action(Of Exception))
@@ -116,21 +126,27 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\UpdateCommandBase.cs
-    startLine: 15
+    startLine: 34
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  summary: "\nThe top level base mediation Update command constructor\n"
+  example: []
   syntax:
     content: protected UpdateCommandBase(TKey key, TRequestData requestData, Context context, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TKey}'
+      description: The entity&apos;s crud key
     - id: requestData
       type: '{TRequestData}'
+      description: The request data to send
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(key As TKey, requestData As TRequestData, context As Context, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Cruding.Base.UpdateCommandBase`3.#ctor*
   nameWithType.vb: UpdateCommandBase(Of TKey, TRequestData, TResultData).UpdateCommandBase(TKey, TRequestData, Context, Action(Of Exception))
@@ -154,10 +170,12 @@ items:
   source:
     id: Key
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\UpdateCommandBase.cs
-    startLine: 21
+    startLine: 43
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  summary: "\nThe entity&apos;s crud key\n"
+  example: []
   syntax:
     content: public TKey Key { get; }
     parameters: []
@@ -187,10 +205,12 @@ items:
   source:
     id: RequestData
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\UpdateCommandBase.cs
-    startLine: 22
+    startLine: 48
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  summary: "\nThe request data to send\n"
+  example: []
   syntax:
     content: public TRequestData RequestData { get; }
     parameters: []

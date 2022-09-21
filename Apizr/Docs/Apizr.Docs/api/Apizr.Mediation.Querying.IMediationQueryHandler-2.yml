@@ -15,15 +15,19 @@ items:
   source:
     id: IMediationQueryHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Querying\IMediationQueryHandler.cs
-    startLine: 4
+    startLine: 9
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Querying
+  summary: "\nThe mediation query handler\n"
+  example: []
   syntax:
     content: 'public interface IMediationQueryHandler<in TQuery, TResponse> : IRequestHandler<TQuery, TResponse> where TQuery : IMediationQuery<TResponse>'
     typeParameters:
     - id: TQuery
+      description: The query to handle
     - id: TResponse
+      description: The response to send back
     content.vb: >-
       Public Interface IMediationQueryHandler(Of In TQuery As IMediationQuery(Of TResponse), TResponse)
           Inherits IRequestHandler(Of TQuery, TResponse)

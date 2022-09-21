@@ -4,6 +4,11 @@
         <name>Apizr.Integrations.MediatR</name>
     </assembly>
     <members>
+        <member name="T:Apizr.MediationOptionsBuilderExtensions">
+            <summary>
+            MediatR options builder extensions
+            </summary>
+        </member>
         <member name="M:Apizr.MediationOptionsBuilderExtensions.WithMediation(Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder)">
             <summary>
             Let Apizr handle requests execution with some mediation
@@ -17,6 +22,172 @@
             </summary>
             <param name="optionsBuilder"></param>
             <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Commanding.IMediationCommand`4">
+            <summary>
+            A mediation command sending mapped request and returning a mapped result
+            </summary>
+            <typeparam name="TModelResultData">The model result type to map to</typeparam>
+            <typeparam name="TApiRequestData">The api result type to map from</typeparam>
+            <typeparam name="TApiResultData">The api request type to map to</typeparam>
+            <typeparam name="TModelRequestData">The model request type to map from</typeparam>
+        </member>
+        <member name="T:Apizr.Mediation.Commanding.IMediationCommand`2">
+            <summary>
+            A mediation command sending a request and returning a result
+            </summary>
+            <typeparam name="TRequestData">The api request type</typeparam>
+            <typeparam name="TResultData">The api result type</typeparam>
+        </member>
+        <member name="T:Apizr.Mediation.Commanding.IMediationCommand`1">
+            <summary>
+            A mediation command sending a request
+            </summary>
+            <typeparam name="TRequestData">The api request type</typeparam>
+        </member>
+        <member name="T:Apizr.Mediation.Commanding.IMediationCommand">
+            <summary>
+            A mediation command
+            </summary>
+        </member>
+        <member name="T:Apizr.Mediation.Commanding.IMediationCommandHandler`2">
+            <summary>
+            The mediation command handler
+            </summary>
+            <typeparam name="TCommand">The handled command type</typeparam>
+            <typeparam name="TResponse">The response type</typeparam>
+        </member>
+        <member name="T:Apizr.Mediation.Commanding.IMediationCommandHandler`1">
+            <summary>
+            The mediation command handler
+            </summary>
+            <typeparam name="TCommand">The handled command type</typeparam>
+        </member>
+        <member name="T:Apizr.Mediation.Commanding.MediationCommandBase`4">
+            <summary>
+            The top level base mediation command
+            </summary>
+            <typeparam name="TModelResultData">The model result type to map to</typeparam>
+            <typeparam name="TApiRequestData">The api result type to map from</typeparam>
+            <typeparam name="TApiResultData">The api request type to map to</typeparam>
+            <typeparam name="TModelRequestData">The model request type to map from</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Commanding.MediationCommandBase`4.#ctor(System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Commanding.MediationCommandBase`4.#ctor(Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation command constructor
+            </summary>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="T:Apizr.Mediation.Commanding.MediationCommandBase`2">
+            <summary>
+            The top level base mediation command
+            </summary>
+            <typeparam name="TRequestData">The api request type</typeparam>
+            <typeparam name="TResultData">The api result type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Commanding.MediationCommandBase`2.#ctor(System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Commanding.MediationCommandBase`2.#ctor(Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Commanding.MediationCommandBase`1">
+            <summary>
+            The top level base mediation command
+            </summary>
+            <typeparam name="TRequestData">The api request type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Commanding.MediationCommandBase`1.#ctor(System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Commanding.MediationCommandBase`1.#ctor(Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Commanding.MediationCommandBase">
+            <summary>
+            The top level base mediation command
+            </summary>
+        </member>
+        <member name="M:Apizr.Mediation.Commanding.MediationCommandBase.#ctor(System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Commanding.MediationCommandBase.#ctor(Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistry">
+            <inheritdoc cref="T:Apizr.Mediation.Configuring.Registry.IApizrMediationConcurrentRegistry" />
+        </member>
+        <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistry.AddOrUpdate(System.Type,System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``1">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``2">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``3">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``4">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetMediatorFor``1">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``1(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``2(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``3(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``4(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,``3}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator{``0}@)">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.Count">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor``1">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor``2">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor``3">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor``4">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsMediatorFor``1">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Configuring.Registry.IApizrMediationConcurrentRegistry">
+            <inheritdoc cref="T:Apizr.Mediation.Configuring.Registry.IApizrMediationRegistry" />
+        </member>
+        <member name="T:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry">
+            <summary>
+            Registry options available for extended registrations with mediation
+            </summary>
         </member>
         <member name="P:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.Count">
             <summary>
@@ -146,6 +317,1285 @@
             </summary>
             <typeparam name="TWebApi">The managed api type</typeparam>
             <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Configuring.Registry.IApizrMediationRegistry">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Base.CreateCommandBase`2">
+            <summary>
+            The top level base mediation Create command
+            </summary>
+            <typeparam name="TRequestData">The api request type</typeparam>
+            <typeparam name="TResultData">The api result type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.CreateCommandBase`2.#ctor(`0,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.CreateCommandBase`2.#ctor(`0,Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation Create command constructor
+            </summary>
+            <param name="requestData">The request data to send</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="P:Apizr.Mediation.Cruding.Base.CreateCommandBase`2.RequestData">
+            <summary>
+            The request data to send
+            </summary>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Base.DeleteCommandBase`3">
+            <summary>
+            The top level base mediation Delete command
+            </summary>
+            <typeparam name="T">The api entity type</typeparam>
+            <typeparam name="TKey">The entity's crud key type</typeparam>
+            <typeparam name="TResultData">The api result type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.DeleteCommandBase`3.#ctor(`1,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation Delete command constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.DeleteCommandBase`3.#ctor(`1,Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation Delete command constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="P:Apizr.Mediation.Cruding.Base.DeleteCommandBase`3.Key">
+            <summary>
+            The entity's crud key
+            </summary>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Base.DeleteCommandBase`2">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.DeleteCommandBase`2.#ctor(System.Int32,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.DeleteCommandBase`2.#ctor(System.Int32,Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Base.DeleteCommandBase`1">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.DeleteCommandBase`1.#ctor(System.Int32,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.DeleteCommandBase`1.#ctor(System.Int32,Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Base.ReadAllQueryBase`2">
+            <summary>
+            The top level base mediation ReadAll query
+            </summary>
+            <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
+            <typeparam name="TReadAllResult">The api result type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.ReadAllQueryBase`2.#ctor(`0,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation ReadAll query constructor
+            </summary>
+            <param name="parameters">The query parameters to send</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.ReadAllQueryBase`2.#ctor(`0,System.Int32,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation ReadAll query constructor
+            </summary>
+            <param name="parameters">The query parameters to send</param>
+            <param name="priority">The execution priority to apply</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.ReadAllQueryBase`2.#ctor(`0,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation ReadAll query constructor
+            </summary>
+            <param name="parameters">The query parameters to send</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.ReadAllQueryBase`2.#ctor(`0,System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation ReadAll query constructor
+            </summary>
+            <param name="parameters">The query parameters to send</param>
+            <param name="priority">The execution priority to apply</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="P:Apizr.Mediation.Cruding.Base.ReadAllQueryBase`2.Parameters">
+            <summary>
+            The query parameters to send
+            </summary>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Base.ReadAllQueryBase`1">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.ReadAllQueryBase`1.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object},System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.ReadAllQueryBase`1.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object},System.Int32,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.ReadAllQueryBase`1.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.ReadAllQueryBase`1.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object},System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Base.ReadQueryBase`2">
+            <summary>
+            The top level base mediation Read query
+            </summary>
+            <typeparam name="TResponse">The result entity type</typeparam>
+            <typeparam name="TKey">The entity's crud key type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.ReadQueryBase`2.#ctor(`1,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation Read query
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.ReadQueryBase`2.#ctor(`1,System.Int32,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation Read query
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="priority">The execution priority to apply</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.ReadQueryBase`2.#ctor(`1,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation Read query
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.ReadQueryBase`2.#ctor(`1,System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation Read query
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="priority">The execution priority to apply</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="P:Apizr.Mediation.Cruding.Base.ReadQueryBase`2.Key">
+            <summary>
+            The entity's crud key
+            </summary>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Base.ReadQueryBase`1">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.ReadQueryBase`1.#ctor(System.Int32,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.ReadQueryBase`1.#ctor(System.Int32,System.Int32,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.ReadQueryBase`1.#ctor(System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.ReadQueryBase`1.#ctor(System.Int32,System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Base.UpdateCommandBase`3">
+            <summary>
+            The top level base mediation Update command
+            </summary>
+            <typeparam name="TKey">The entity's crud key type</typeparam>
+            <typeparam name="TRequestData">The request data type</typeparam>
+            <typeparam name="TResultData">The result data type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.UpdateCommandBase`3.#ctor(`0,`1,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation Update command constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="requestData">The request data to send</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.UpdateCommandBase`3.#ctor(`0,`1,Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation Update command constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="requestData">The request data to send</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="P:Apizr.Mediation.Cruding.Base.UpdateCommandBase`3.Key">
+            <summary>
+            The entity's crud key
+            </summary>
+        </member>
+        <member name="P:Apizr.Mediation.Cruding.Base.UpdateCommandBase`3.RequestData">
+            <summary>
+            The request data to send
+            </summary>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Base.UpdateCommandBase`2">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.UpdateCommandBase`2.#ctor(System.Int32,`0,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.UpdateCommandBase`2.#ctor(System.Int32,`0,Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Base.UpdateCommandBase`1">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.UpdateCommandBase`1.#ctor(System.Int32,`0,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Base.UpdateCommandBase`1.#ctor(System.Int32,`0,Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.CreateCommand`1">
+            <summary>
+            The mediation Create command
+            </summary>
+            <typeparam name="TModelData">The data type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.CreateCommand`1.#ctor(`0,System.Action{System.Exception})">
+            <summary>
+            The mediation Create command constructor
+            </summary>
+            <param name="modelData">The request data to send</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.CreateCommand`1.#ctor(`0,Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The mediation Create command constructor
+            </summary>
+            <param name="modelData">The request data to send</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.DeleteCommand`2">
+            <summary>
+            The mediation Delete command
+            </summary>
+            <typeparam name="T">The api entity type</typeparam>
+            <typeparam name="TKey">The entity's crud key type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.DeleteCommand`2.#ctor(`1,System.Action{System.Exception})">
+            <summary>
+            The mediation Delete command constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.DeleteCommand`2.#ctor(`1,Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The mediation Delete command constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.DeleteCommand`1">
+            <summary>
+            The mediation Delete command
+            </summary>
+            <typeparam name="T">The api entity type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.DeleteCommand`1.#ctor(System.Int32,System.Action{System.Exception})">
+            <summary>
+            The mediation Delete command constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.DeleteCommand`1.#ctor(System.Int32,Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The mediation Delete command constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase`7">
+            <summary>
+            The base Create command handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TApiEntityKey">The api entity's crud key type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params</typeparam>
+            <typeparam name="TCommand">The command to handle</typeparam>
+            <typeparam name="TCommandResult">The command result to return</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Handling.Base.CreateCommandHandlerBase`7.Handle(`5,System.Threading.CancellationToken)">
+            <summary>
+            Handling the Create command
+            </summary>
+            <param name="request">The Create command</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase`4">
+            <summary>
+            The base CRUD request handler
+            </summary>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TApiEntityKey">The api entity's crud key type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params</typeparam>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Handling.Base.DeleteCommandHandlerBase`7">
+            <summary>
+            The base Delete command handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TApiEntityKey">The api entity's crud key type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params type</typeparam>
+            <typeparam name="TCommand">The command type to handle</typeparam>
+            <typeparam name="TCommandResult">The command result type to return</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Handling.Base.DeleteCommandHandlerBase`7.Handle(`5,System.Threading.CancellationToken)">
+            <summary>
+            Handling the Delete command
+            </summary>
+            <param name="request">The Delete command</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Handling.Base.DeleteCommandHandlerBase`6">
+            <summary>
+            The base Delete command handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params</typeparam>
+            <typeparam name="TCommand">The command to handle</typeparam>
+            <typeparam name="TCommandResult">The command result to return</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Handling.Base.DeleteCommandHandlerBase`6.Handle(`4,System.Threading.CancellationToken)">
+            <summary>
+            Handling the Delete command
+            </summary>
+            <param name="request">The Delete command</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase`7">
+            <summary>
+            The base ReadAll query handler
+            </summary>
+            <typeparam name="TApiEntity"></typeparam>
+            <typeparam name="TApiEntityKey">The api entity type</typeparam>
+            <typeparam name="TModelEntityReadAllResult">The returned model result type</typeparam>
+            <typeparam name="TApiEntityReadAllResult">The received api result type</typeparam>
+            <typeparam name="TReadAllParams">The query parameters type</typeparam>
+            <typeparam name="TQuery">The query type to handle</typeparam>
+            <typeparam name="TQueryResult">The query result type to handle</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase`7.Handle(`5,System.Threading.CancellationToken)">
+            <summary>
+            Handling the ReadAll query
+            </summary>
+            <param name="request">The ReadAll query</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase`6">
+            <summary>
+            The base ReadAll query handler
+            </summary>
+            <typeparam name="TApiEntity"></typeparam>
+            <typeparam name="TApiEntityKey">The api entity type</typeparam>
+            <typeparam name="TModelEntityReadAllResult">The returned model result type</typeparam>
+            <typeparam name="TApiEntityReadAllResult">The received api result type</typeparam>
+            <typeparam name="TQuery">The query type to handle</typeparam>
+            <typeparam name="TQueryResult">The query result type to handle</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase`6.Handle(`4,System.Threading.CancellationToken)">
+            <summary>
+            Handling the ReadAll query
+            </summary>
+            <param name="request">The ReadAll query</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Handling.Base.ReadQueryHandlerBase`7">
+            <summary>
+            The base Read query handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TApiEntityKey">The api entity's crud key type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params type</typeparam>
+            <typeparam name="TQuery">The query type to handle</typeparam>
+            <typeparam name="TQueryResult">The query result type to handle</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Handling.Base.ReadQueryHandlerBase`7.Handle(`5,System.Threading.CancellationToken)">
+            <summary>
+            Handling the Read query
+            </summary>
+            <param name="request">The Read query</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Handling.Base.ReadQueryHandlerBase`6">
+            <summary>
+            The base Read query handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params type</typeparam>
+            <typeparam name="TQuery">The query type to handle</typeparam>
+            <typeparam name="TQueryResult">The query result type to handle</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Handling.Base.ReadQueryHandlerBase`6.Handle(`4,System.Threading.CancellationToken)">
+            <summary>
+            Handling the Read query
+            </summary>
+            <param name="request">The Read query</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Handling.Base.UpdateCommandHandlerBase`7">
+            <summary>
+            The base Update command handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TApiEntityKey">The api entity's crud key type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params type</typeparam>
+            <typeparam name="TCommand">The command type to handle</typeparam>
+            <typeparam name="TCommandResult">The command result type to return</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Handling.Base.UpdateCommandHandlerBase`7.Handle(`5,System.Threading.CancellationToken)">
+            <summary>
+            Handling the Update command
+            </summary>
+            <param name="request">The Update command</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Handling.Base.UpdateCommandHandlerBase`5">
+            <summary>
+            The base Update command handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params type</typeparam>
+            <typeparam name="TCommand">The command type to handle</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Handling.Base.UpdateCommandHandlerBase`5.Handle(`4,System.Threading.CancellationToken)">
+            <summary>
+            Handling the Update command
+            </summary>
+            <param name="request">The Update command</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Handling.Base.UpdateCommandHandlerBase`6">
+            <summary>
+            The base Update command handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params type</typeparam>
+            <typeparam name="TCommand">The command type to handle</typeparam>
+            <typeparam name="TCommandResult">The command result type to return</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Handling.Base.UpdateCommandHandlerBase`6.Handle(`4,System.Threading.CancellationToken)">
+            <summary>
+            Handling the Update command
+            </summary>
+            <param name="request">The Update command</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Handling.CreateCommandHandler`5">
+            <summary>
+            The Create command handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TApiEntityKey">The api entity's crud key type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Handling.CreateCommandHandler`5.Handle(Apizr.Mediation.Cruding.CreateCommand{`0},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Handling.DeleteCommandHandler`5">
+            <summary>
+            The Delete command handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TApiEntityKey">The api entity's crud key type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Handling.DeleteCommandHandler`5.Handle(Apizr.Mediation.Cruding.DeleteCommand{`0,`2},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Handling.DeleteCommandHandler`4">
+            <summary>
+            The Delete command handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Handling.DeleteCommandHandler`4.Handle(Apizr.Mediation.Cruding.DeleteCommand{`0},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Handling.ReadAllQueryHandler`5">
+            <summary>
+            The ReadAll query handler
+            </summary>
+            <typeparam name="TApiEntity"></typeparam>
+            <typeparam name="TApiEntityKey">The api entity type</typeparam>
+            <typeparam name="TModelReadAllResult">The returned model result type</typeparam>
+            <typeparam name="TApiReadAllResult">The received api result type</typeparam>
+            <typeparam name="TReadAllParams">The query parameters type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Handling.ReadAllQueryHandler`5.Handle(Apizr.Mediation.Cruding.ReadAllQuery{`4,`2},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Handling.ReadAllQueryHandler`4">
+            <summary>
+            The ReadAll query handler
+            </summary>
+            <typeparam name="TApiEntity"></typeparam>
+            <typeparam name="TApiEntityKey">The api entity type</typeparam>
+            <typeparam name="TModelReadAllResult">The returned model result type</typeparam>
+            <typeparam name="TApiReadAllResult">The received api result type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Handling.ReadAllQueryHandler`4.Handle(Apizr.Mediation.Cruding.ReadAllQuery{`2},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Handling.ReadQueryHandler`5">
+            <summary>
+            The Read query handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TApiEntityKey">The api entity's crud key type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Handling.ReadQueryHandler`5.Handle(Apizr.Mediation.Cruding.ReadQuery{`0,`2},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Handling.ReadQueryHandler`4">
+            <summary>
+            The Read query handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Handling.ReadQueryHandler`4.Handle(Apizr.Mediation.Cruding.ReadQuery{`0},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Handling.UpdateCommandHandler`5">
+            <summary>
+            The Update command handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TApiEntityKey">The api entity's crud key type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Handling.UpdateCommandHandler`5.Handle(Apizr.Mediation.Cruding.UpdateCommand{`2,`0},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Handling.UpdateCommandHandler`4">
+            <summary>
+            The Update command handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Handling.UpdateCommandHandler`4.Handle(Apizr.Mediation.Cruding.UpdateCommand{`0},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.ReadAllQuery`2">
+            <summary>
+            The mediation ReadAll query
+            </summary>
+            <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
+            <typeparam name="TReadAllResult">The api result type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadAllQuery`2.#ctor(System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation ReadAll query constructor
+            </summary>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadAllQuery`2.#ctor(`0,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation ReadAll query constructor
+            </summary>
+            <param name="parameters">The query parameters to send</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadAllQuery`2.#ctor(System.Int32,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation ReadAll query constructor
+            </summary>
+            <param name="priority">The execution priority to apply</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadAllQuery`2.#ctor(Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation ReadAll query constructor
+            </summary>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadAllQuery`2.#ctor(`0,System.Int32,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation ReadAll query constructor
+            </summary>
+            <param name="parameters">The query parameters to send</param>
+            <param name="priority">The execution priority to apply</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadAllQuery`2.#ctor(`0,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation ReadAll query constructor
+            </summary>
+            <param name="parameters">The query parameters to send</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadAllQuery`2.#ctor(System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation ReadAll query constructor
+            </summary>
+            <param name="priority">The execution priority to apply</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadAllQuery`2.#ctor(`0,System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation ReadAll query constructor
+            </summary>
+            <param name="parameters">The query parameters to send</param>
+            <param name="priority">The execution priority to apply</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.ReadAllQuery`1">
+            <summary>
+            The mediation ReadAll query
+            </summary>
+            <typeparam name="TReadAllResult">The api result type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadAllQuery`1.#ctor(System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation ReadAll query constructor
+            </summary>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadAllQuery`1.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object},System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation ReadAll query constructor
+            </summary>
+            <param name="parameters">The query parameters to send</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadAllQuery`1.#ctor(System.Int32,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation ReadAll query constructor
+            </summary>
+            <param name="priority">The execution priority to apply</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadAllQuery`1.#ctor(Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation ReadAll query constructor
+            </summary>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadAllQuery`1.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object},System.Int32,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation ReadAll query constructor
+            </summary>
+            <param name="parameters">The query parameters to send</param>
+            <param name="priority">The execution priority to apply</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadAllQuery`1.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation ReadAll query constructor
+            </summary>
+            <param name="parameters">The query parameters to send</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadAllQuery`1.#ctor(System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation ReadAll query constructor
+            </summary>
+            <param name="priority">The execution priority to apply</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadAllQuery`1.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object},System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation ReadAll query constructor
+            </summary>
+            <param name="parameters">The query parameters to send</param>
+            <param name="priority">The execution priority to apply</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.ReadQuery`2">
+            <summary>
+            The mediation Read query
+            </summary>
+            <typeparam name="TResultData">The result entity type</typeparam>
+            <typeparam name="TKey">The entity's crud key type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadQuery`2.#ctor(`1,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation Read query constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadQuery`2.#ctor(`1,System.Int32,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation Read query constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="priority">The execution priority to apply</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadQuery`2.#ctor(`1,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation Read query constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadQuery`2.#ctor(`1,System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation Read query constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="priority">The execution priority to apply</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.ReadQuery`1">
+            <summary>
+            The mediation Read query
+            </summary>
+            <typeparam name="TResultData">The result entity type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadQuery`1.#ctor(System.Int32,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation Read query constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadQuery`1.#ctor(System.Int32,System.Int32,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation Read query constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="priority">The execution priority to apply</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadQuery`1.#ctor(System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation Read query constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.ReadQuery`1.#ctor(System.Int32,System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation Read query constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="priority">The execution priority to apply</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendCreateCommand``1(``0,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendCreateCommand``1(``0,Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendCreateCommand``1(``0,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendCreateCommand``1(``0,Polly.Context,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendCreateCommand``2(``0,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendCreateCommand``2(``0,Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendCreateCommand``2(``0,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendCreateCommand``2(``0,Polly.Context,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``1(System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``1(Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``1(System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``1(System.Int32,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``1(System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``1(System.Int32,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``1(Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``1(System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(System.Int32,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(System.Int32,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(``1,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(``1,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(``1,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(``1,System.Int32,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(``1,System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(``1,System.Int32,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(``1,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(``1,System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``3(``2,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``3(``2,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``3(``2,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``3(``2,System.Int32,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``3(``2,System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``3(``2,System.Int32,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``3(``2,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``3(``2,System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery``2(``1,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery``2(``1,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery``2(``1,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery``2(``1,System.Int32,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery``2(``1,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery``2(``1,System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery``2(``1,System.Int32,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery``2(``1,System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery``3(``2,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery``3(``2,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery``3(``2,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery``3(``2,System.Int32,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery``3(``2,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery``3(``2,System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery``3(``2,System.Int32,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery``3(``2,System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendUpdateCommand``2(``1,``0,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendUpdateCommand``2(``1,``0,Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendUpdateCommand``2(``1,``0,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendUpdateCommand``2(``1,``0,Polly.Context,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendUpdateCommand``3(``2,``0,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendUpdateCommand``3(``2,``0,Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendUpdateCommand``3(``2,``0,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendUpdateCommand``3(``2,``0,Polly.Context,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendDeleteCommand``2(``1,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendDeleteCommand``2(``1,Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendDeleteCommand``2(``1,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendDeleteCommand``2(``1,Polly.Context,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendCreateCommand(`0,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendCreateCommand(`0,Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendCreateCommand(`0,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendCreateCommand(`0,Polly.Context,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendCreateCommand``1(``0,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendCreateCommand``1(``0,Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendCreateCommand``1(``0,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendCreateCommand``1(``0,Polly.Context,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery(System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery(Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery(System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery(System.Int32,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery(System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery(System.Int32,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery(Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery(System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery``1(System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery``1(Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery``1(System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery``1(System.Int32,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery``1(System.Int32,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery``1(System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery``1(Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery``1(System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery(`3,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery(`3,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery(`3,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery(`3,System.Int32,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery(`3,System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery(`3,System.Int32,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery(`3,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery(`3,System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery``1(`3,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery``1(`3,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery``1(`3,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery``1(`3,System.Int32,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery``1(`3,System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery``1(`3,System.Int32,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery``1(`3,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadAllQuery``1(`3,System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery(`1,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery(`1,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery(`1,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery(`1,System.Int32,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery(`1,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery(`1,System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery(`1,System.Int32,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery(`1,System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery``1(`1,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery``1(`1,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery``1(`1,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery``1(`1,System.Int32,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery``1(`1,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery``1(`1,System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery``1(`1,System.Int32,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendReadQuery``1(`1,System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendUpdateCommand(`1,`0,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendUpdateCommand(`1,`0,Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendUpdateCommand(`1,`0,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendUpdateCommand(`1,`0,Polly.Context,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendUpdateCommand``1(`1,``0,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendUpdateCommand``1(`1,``0,Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendUpdateCommand``1(`1,``0,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendUpdateCommand``1(`1,``0,Polly.Context,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendDeleteCommand(`1,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendDeleteCommand(`1,Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendDeleteCommand(`1,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendDeleteCommand(`1,Polly.Context,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
         </member>
         <member name="T:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator">
             <summary>
@@ -1684,6 +3134,1250 @@
             <param name="onException">Handle exception (default: null = throwing)</param>
             <returns></returns>
         </member>
+        <member name="T:Apizr.Mediation.Cruding.Sending.IApizrCrudMediatorBase">
+            <summary>
+            Apizr base mediator dedicated to cruding
+            </summary>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.UpdateCommand`2">
+            <summary>
+            The mediation Update command
+            </summary>
+            <typeparam name="TKey">The entity's crud key type</typeparam>
+            <typeparam name="TRequestData">The request data type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.UpdateCommand`2.#ctor(`0,`1,System.Action{System.Exception})">
+            <summary>
+            The mediation Update command constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="requestData">The request data to send</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.UpdateCommand`2.#ctor(`0,`1,Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The mediation Update command constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="requestData">The request data to send</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="T:Apizr.Mediation.Cruding.UpdateCommand`1">
+            <summary>
+            The mediation Update command
+            </summary>
+            <typeparam name="TRequestData">The request data type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.UpdateCommand`1.#ctor(System.Int32,`0,System.Action{System.Exception})">
+            <summary>
+            The mediation Update command constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="requestData">The request data to send</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Cruding.UpdateCommand`1.#ctor(System.Int32,`0,Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The mediation Update command constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="requestData">The request data to send</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="T:Apizr.Mediation.Querying.IMediationQuery`1">
+            <summary>
+            A mediation query getting some <typeparamref name="TResultData"/> data
+            </summary>
+            <typeparam name="TResultData">The returned data</typeparam>
+        </member>
+        <member name="T:Apizr.Mediation.Querying.IMediationQueryHandler`2">
+            <summary>
+            The mediation query handler
+            </summary>
+            <typeparam name="TQuery">The query to handle</typeparam>
+            <typeparam name="TResponse">The response to send back</typeparam>
+        </member>
+        <member name="T:Apizr.Mediation.Querying.MediationQueryBase`1">
+            <summary>
+            The base mediation query getting some <typeparamref name="TResultData"/> data
+            </summary>
+            <typeparam name="TResultData">The returned data</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Querying.MediationQueryBase`1.#ctor(System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The base mediation query constructor
+            </summary>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Querying.MediationQueryBase`1.#ctor(System.Int32,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The base mediation query constructor
+            </summary>
+            <param name="priority">The execution priority to apply</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Querying.MediationQueryBase`1.#ctor(Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The base mediation query constructor
+            </summary>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Querying.MediationQueryBase`1.#ctor(System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The base mediation query constructor
+            </summary>
+            <param name="priority">The execution priority to apply</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="P:Apizr.Mediation.Querying.MediationQueryBase`1.ClearCache">
+            <summary>
+            Asking to clear cache before sending the request
+            </summary>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Base.ExecuteRequestBase`1">
+            <summary>
+            The top level base mediation execute request
+            </summary>
+            <typeparam name="TFormattedModelResultData">The result type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteRequestBase`1.#ctor(System.Linq.Expressions.Expression,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteRequestBase`1.#ctor(System.Linq.Expressions.Expression,Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="P:Apizr.Mediation.Requesting.Base.ExecuteRequestBase`1.ExecuteApiMethod">
+            <summary>
+            The request to execute
+            </summary>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Base.ExecuteRequestBase`2">
+            <summary>
+            The top level base mediation execute request
+            </summary>
+            <typeparam name="TFormattedModelResultData">The result type</typeparam>
+            <typeparam name="TModelRequestData">The request data type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteRequestBase`2.#ctor(System.Linq.Expressions.Expression,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteRequestBase`2.#ctor(System.Linq.Expressions.Expression,`1,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelRequestData">The data provided to the request</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteRequestBase`2.#ctor(System.Linq.Expressions.Expression,Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteRequestBase`2.#ctor(System.Linq.Expressions.Expression,`1,Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelRequestData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="P:Apizr.Mediation.Requesting.Base.ExecuteRequestBase`2.ModelRequestData">
+            <summary>
+            The data provided to the request
+            </summary>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Base.ExecuteRequestBase">
+            <summary>
+            The top level base mediation execute request
+            </summary>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteRequestBase.#ctor(System.Linq.Expressions.Expression,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteRequestBase.#ctor(System.Linq.Expressions.Expression,Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`6">
+            <summary>
+            The top level base mediation execute result request (returning result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelResultData">The model result type</typeparam>
+            <typeparam name="TApiResultData">The api result type</typeparam>
+            <typeparam name="TFormattedModelResultData">The formatted model result type</typeparam>
+            <typeparam name="TApiRequestData">The api request type</typeparam>
+            <typeparam name="TModelRequestData">The model request type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`6.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{`2}}},System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`6.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`2}}},System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`6.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{`2}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`6.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`2}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`6.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`4,System.Threading.Tasks.Task{`2}}},`5,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelRequestData">The data provided to the request</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`6.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,`4,System.Threading.Tasks.Task{`2}}},`5,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelRequestData">The data provided to the request</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`6.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,`4,System.Threading.Tasks.Task{`2}}},`5,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelRequestData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`6.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,`4,System.Threading.Tasks.Task{`2}}},`5,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelRequestData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="P:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`6.ClearCache">
+            <summary>
+            Asking to clear cache before sending the request
+            </summary>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`5">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`5.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{`2}}},System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`5.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`2}}},System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`5.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{`2}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`5.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`2}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`5.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`3,System.Threading.Tasks.Task{`2}}},`4,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`5.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,`3,System.Threading.Tasks.Task{`2}}},`4,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`5.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,`3,System.Threading.Tasks.Task{`2}}},`4,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`5.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,`3,System.Threading.Tasks.Task{`2}}},`4,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`4">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`4.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{`2}}},System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`4.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`2}}},System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`4.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{`2}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`4.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`2}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`4.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`2,System.Threading.Tasks.Task{`2}}},`1,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`4.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task{`2}}},`1,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`4.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,`2,System.Threading.Tasks.Task{`2}}},`1,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`4.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task{`2}}},`1,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`3">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{`2}}},System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`2}}},System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{`2}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`2}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`2,System.Threading.Tasks.Task{`2}}},`1,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task{`2}}},`1,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,`2,System.Threading.Tasks.Task{`2}}},`1,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task{`2}}},`1,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`2">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`2.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{`1}}},System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`2.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`1}}},System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`2.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{`1}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`2.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`1}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`4">
+            <summary>
+            The top level base mediation execute unit request (returning no result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <typeparam name="TFormattedModelResultData">The formatted model result data type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`4.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`2,System.Threading.Tasks.Task}},`1,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`4.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task}},`1,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`4.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,`2,System.Threading.Tasks.Task}},`1,Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`4.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task}},`1,Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`3">
+            <summary>
+            The top level base mediation execute unit request (returning no result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`2,System.Threading.Tasks.Task}},`1,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task}},`1,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,`2,System.Threading.Tasks.Task}},`1,Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task}},`1,Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`2">
+            <summary>
+            The top level base mediation execute unit request (returning no result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TFormattedModelResultData">The formatted model result data type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`2.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}},System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`2.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`2.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task}},Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`2.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`1">
+            <summary>
+            The top level base mediation execute unit request (returning no result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`1.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}},System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`1.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`1.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task}},Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`1.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The top level base mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Base.PrioritizedRequestBase`1">
+            <summary>
+            The base prioritized mediation request getting some <typeparamref name="TResultData"/> data
+            </summary>
+            <typeparam name="TResultData">The returned data</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.PrioritizedRequestBase`1.#ctor(System.Action{System.Exception})">
+            <summary>
+            The base prioritized mediation query constructor
+            </summary>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.PrioritizedRequestBase`1.#ctor(System.Int32,System.Action{System.Exception})">
+            <summary>
+            The base prioritized mediation query constructor
+            </summary>
+            <param name="priority">The execution priority to apply</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.PrioritizedRequestBase`1.#ctor(Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The base prioritized mediation query constructor
+            </summary>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.PrioritizedRequestBase`1.#ctor(System.Int32,Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The base prioritized mediation query constructor
+            </summary>
+            <param name="priority">The execution priority to apply</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="P:Apizr.Mediation.Requesting.Base.PrioritizedRequestBase`1.Priority">
+            <summary>
+            The execution priority to apply
+            </summary>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Base.RequestBase`1">
+            <summary>
+            The top level base mediation request
+            </summary>
+            <typeparam name="TFormattedModelResultData">The result type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.RequestBase`1.#ctor(System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.RequestBase`1.#ctor(Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The base request constructor
+            </summary>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="P:Apizr.Mediation.Requesting.Base.RequestBase`1.Context">
+            <summary>
+            The Polly context to pass through
+            </summary>
+        </member>
+        <member name="P:Apizr.Mediation.Requesting.Base.RequestBase`1.OnException">
+            <summary>
+            Action to execute when an exception occurs
+            </summary>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Base.RequestBase`2">
+            <summary>
+            The top level base mediation request
+            </summary>
+            <typeparam name="TFormattedModelResultData">The result type</typeparam>
+            <typeparam name="TModelRequestData">The request type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.RequestBase`2.#ctor(System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.RequestBase`2.#ctor(`1,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.RequestBase`2.#ctor(Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Base.RequestBase`2.#ctor(`1,Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The base request constructor
+            </summary>
+            <param name="modelRequestData">The request type</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="P:Apizr.Mediation.Requesting.Base.RequestBase`2.ModelRequestData">
+            <summary>
+            The request to send
+            </summary>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.ExecuteResultRequest`5">
+            <summary>
+            The mediation execute result request (returning result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelResultData">The model result type</typeparam>
+            <typeparam name="TApiResultData">The api result type</typeparam>
+            <typeparam name="TApiRequestData">The api request type</typeparam>
+            <typeparam name="TModelRequestData">The model request type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteResultRequest`5.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`3,System.Threading.Tasks.Task{`2}}},`4,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelRequestData">The data provided to the request</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteResultRequest`5.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,`3,System.Threading.Tasks.Task{`2}}},`4,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelRequestData">The data provided to the request</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteResultRequest`5.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,`3,System.Threading.Tasks.Task{`2}}},`4,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelRequestData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteResultRequest`5.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,`3,System.Threading.Tasks.Task{`2}}},`4,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelRequestData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.ExecuteResultRequest`3">
+            <summary>
+            The mediation execute result request (returning result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteResultRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{`2}}},System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteResultRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{`2}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteResultRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`2}}},System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteResultRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`2,System.Threading.Tasks.Task{`2}}},`1,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteResultRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task{`2}}},`1,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteResultRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`2}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteResultRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,`2,System.Threading.Tasks.Task{`2}}},`1,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteResultRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task{`2}}},`1,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.ExecuteResultRequest`2">
+            <summary>
+            The mediation execute result request (returning result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteResultRequest`2.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{`1}}},System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteResultRequest`2.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`1}}},System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteResultRequest`2.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{`1}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteResultRequest`2.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`1}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <summary>
+            The mediation execute result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.ExecuteUnitRequest`3">
+            <summary>
+            The mediation execute unit request (returning no result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteUnitRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`2,System.Threading.Tasks.Task}},`1,System.Action{System.Exception})">
+            <summary>
+            The mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteUnitRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task}},`1,System.Action{System.Exception})">
+            <summary>
+            The mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteUnitRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,`2,System.Threading.Tasks.Task}},`1,Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteUnitRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task}},`1,Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.ExecuteUnitRequest`1">
+            <summary>
+            The mediation execute unit request (returning no result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteUnitRequest`1.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}},System.Action{System.Exception})">
+            <summary>
+            The mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteUnitRequest`1.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},System.Action{System.Exception})">
+            <summary>
+            The mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteUnitRequest`1.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task}},Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.ExecuteUnitRequest`1.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},Polly.Context,System.Action{System.Exception})">
+            <summary>
+            The mediation execute unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="onException">Action to execute when an exception occurs</param>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Handling.Base.ExecuteResultRequestHandlerBase`7">
+            <summary>
+            The top level base mediation execute result request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelResultData">The model result type</typeparam>
+            <typeparam name="TApiResultData">The api result type</typeparam>
+            <typeparam name="TFormattedModelResultData">The formatted model result type</typeparam>
+            <typeparam name="TApiRequestData">The api request type</typeparam>
+            <typeparam name="TModelRequestData">The model request type</typeparam>
+            <typeparam name="TRequest">The request to handle</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Handling.Base.ExecuteResultRequestHandlerBase`7.Handle(`6,System.Threading.CancellationToken)">
+            <summary>
+            Handling the execute result request
+            </summary>
+            <param name="request">The execute result request</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Handling.Base.ExecuteResultRequestHandlerBase`6">
+            <summary>
+            The top level base mediation execute result request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelResultData">The model result type</typeparam>
+            <typeparam name="TApiResultData">The api result type</typeparam>
+            <typeparam name="TApiRequestData">The api request type</typeparam>
+            <typeparam name="TModelRequestData">The model request type</typeparam>
+            <typeparam name="TRequest">The request to handle</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Handling.Base.ExecuteResultRequestHandlerBase`6.Handle(`5,System.Threading.CancellationToken)">
+            <summary>
+            Handling the execute result request
+            </summary>
+            <param name="request">The execute result request</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Handling.Base.ExecuteResultRequestHandlerBase`5">
+            <summary>
+            The top level base mediation execute result request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <typeparam name="TFormattedModelResultData">The formatted model result type</typeparam>
+            <typeparam name="TRequest">The request to handle</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Handling.Base.ExecuteResultRequestHandlerBase`5.Handle(`4,System.Threading.CancellationToken)">
+            <summary>
+            Handling the execute result request
+            </summary>
+            <param name="request">The execute result request</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Handling.Base.ExecuteResultRequestHandlerBase`4">
+            <summary>
+            The top level base mediation execute result request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <typeparam name="TRequest">The request to handle</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Handling.Base.ExecuteResultRequestHandlerBase`4.Handle(`3,System.Threading.CancellationToken)">
+            <summary>
+            Handling the execute result request
+            </summary>
+            <param name="request">The execute result request</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Handling.Base.ExecuteResultRequestHandlerBase`3">
+            <summary>
+            The top level base mediation execute result request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <typeparam name="TRequest">The request to handle</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Handling.Base.ExecuteResultRequestHandlerBase`3.Handle(`2,System.Threading.CancellationToken)">
+            <summary>
+            Handling the execute result request
+            </summary>
+            <param name="request">The execute result request</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5">
+            <summary>
+            The top level base mediation execute unit request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <typeparam name="TFormattedModelResultData">The formatted model result data type</typeparam>
+            <typeparam name="TRequest">The execute unit request to handle</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.Handle(`4,System.Threading.CancellationToken)">
+            <summary>
+            Handling the execute unit request
+            </summary>
+            <param name="request">The execute result request</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`4">
+            <summary>
+            The top level base mediation execute unit request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <typeparam name="TRequest">The execute unit request to handle</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`4.Handle(`3,System.Threading.CancellationToken)">
+            <summary>
+            Handling the execute unit request
+            </summary>
+            <param name="request">The execute result request</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`3">
+            <summary>
+            The top level base mediation execute unit request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TFormattedModelResultData">The formatted model result data type</typeparam>
+            <typeparam name="TRequest">The execute unit request to handle</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`3.Handle(`2,System.Threading.CancellationToken)">
+            <summary>
+            Handling the execute unit request
+            </summary>
+            <param name="request">The execute result request</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`2">
+            <summary>
+            The top level base mediation execute unit request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TRequest">The execute unit request to handle</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`2.Handle(`1,System.Threading.CancellationToken)">
+            <summary>
+            Handling the execute unit request
+            </summary>
+            <param name="request">The execute result request</param>
+            <param name="cancellationToken">A cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase">
+            <summary>
+            The top level base request handler
+            </summary>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Handling.ExecuteResultRequestHandler`5">
+            <summary>
+            The mediation execute result request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelResultData">The model result type</typeparam>
+            <typeparam name="TApiResultData">The api result type</typeparam>
+            <typeparam name="TApiRequestData">The api request type</typeparam>
+            <typeparam name="TModelRequestData">The model request type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Handling.ExecuteResultRequestHandler`5.Handle(Apizr.Mediation.Requesting.ExecuteResultRequest{`0,`1,`2,`3,`4},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Handling.ExecuteResultRequestHandler`3">
+            <summary>
+            The mediation execute result request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Handling.ExecuteResultRequestHandler`3.Handle(Apizr.Mediation.Requesting.ExecuteResultRequest{`0,`1,`2},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Handling.ExecuteResultRequestHandler`2">
+            <summary>
+            The mediation execute result request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Handling.ExecuteResultRequestHandler`2.Handle(Apizr.Mediation.Requesting.ExecuteResultRequest{`0,`1},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Handling.ExecuteUnitRequestHandler`3">
+            <summary>
+            The mediation execute unit request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Handling.ExecuteUnitRequestHandler`3.Handle(Apizr.Mediation.Requesting.ExecuteUnitRequest{`0,`1,`2},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Handling.ExecuteUnitRequestHandler`1">
+            <summary>
+            The mediation execute unit request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Handling.ExecuteUnitRequestHandler`1.Handle(Apizr.Mediation.Requesting.ExecuteUnitRequest{`0},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Sending.ApizrMediator">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``1(System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task}},System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``1(System.Linq.Expressions.Expression{System.Func{Polly.Context,``0,System.Threading.Tasks.Task}},Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``1(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,``0,System.Threading.Tasks.Task}},System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``1(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,``0,System.Threading.Tasks.Task}},Polly.Context,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{``0,``2,System.Threading.Tasks.Task}},``1,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,``0,``2,System.Threading.Tasks.Task}},``1,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{Polly.Context,``0,``2,System.Threading.Tasks.Task}},``1,Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,``0,``2,System.Threading.Tasks.Task}},``1,Polly.Context,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``2(System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{``1}}},System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,``0,System.Threading.Tasks.Task{``1}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``2(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,``0,System.Threading.Tasks.Task{``1}}},System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,``0,System.Threading.Tasks.Task{``1}}},Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{``2}}},System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{Polly.Context,``0,System.Threading.Tasks.Task{``2}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,``0,System.Threading.Tasks.Task{``2}}},System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,``0,System.Threading.Tasks.Task{``2}}},Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{``0,``2,System.Threading.Tasks.Task{``2}}},``1,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{Polly.Context,``0,``2,System.Threading.Tasks.Task{``2}}},``1,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,``0,``2,System.Threading.Tasks.Task{``2}}},``1,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,``0,``2,System.Threading.Tasks.Task{``2}}},``1,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``5(System.Linq.Expressions.Expression{System.Func{``0,``3,System.Threading.Tasks.Task{``2}}},``4,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``5(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,``0,``3,System.Threading.Tasks.Task{``2}}},``4,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``5(System.Linq.Expressions.Expression{System.Func{Polly.Context,``0,``3,System.Threading.Tasks.Task{``2}}},``4,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``5(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,``0,``3,System.Threading.Tasks.Task{``2}}},``4,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Sending.ApizrMediator`1">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}},System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task}},Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},Polly.Context,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task}},``0,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task}},``0,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,``1,System.Threading.Tasks.Task}},``0,Polly.Context,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task}},``0,Polly.Context,System.Threading.CancellationToken,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor``1(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}},System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor``1(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{``0}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor``1(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``0}}},System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor``1(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``0}}},Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``1}}},System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{``1}}},Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``1}}},System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``1}}},Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,``1,System.Threading.Tasks.Task{``1}}},``0,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task{``1}}},``0,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor``4(System.Linq.Expressions.Expression{System.Func{`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor``4(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor``4(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,``2,System.Threading.Tasks.Task{``1}}},``3,Polly.Context,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor``4(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,``2,System.Threading.Tasks.Task{``1}}},``3,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Mediation.Requesting.Sending.IApizrMediator">
             <summary>
             Apizr mediator to send request using MediatR by calling expression
@@ -2296,6 +4990,11 @@
             <param name="clearCache">Clear request cache before executing (default: false)</param>
             <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
             <returns></returns>
+        </member>
+        <member name="T:Apizr.Mediation.Requesting.Sending.IApizrMediatorBase">
+            <summary>
+            Apizr base mediator
+            </summary>
         </member>
     </members>
 </doc>

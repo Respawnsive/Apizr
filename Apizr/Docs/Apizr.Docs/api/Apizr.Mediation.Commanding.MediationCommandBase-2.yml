@@ -17,15 +17,19 @@ items:
   source:
     id: MediationCommandBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Commanding\MediationCommandBase.cs
-    startLine: 20
+    startLine: 38
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Commanding
+  summary: "\nThe top level base mediation command\n"
+  example: []
   syntax:
     content: 'public abstract class MediationCommandBase<TRequestData, TResultData> : RequestBase<TResultData>, IMediationCommand<TRequestData, TResultData>, IRequest<TResultData>, IBaseRequest'
     typeParameters:
     - id: TRequestData
+      description: The api request type
     - id: TResultData
+      description: The api result type
     content.vb: >-
       Public MustInherit Class MediationCommandBase(Of TRequestData, TResultData)
           Inherits RequestBase(Of TResultData)
@@ -76,10 +80,11 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Commanding\MediationCommandBase.cs
-    startLine: 22
+    startLine: 41
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Commanding
+  example: []
   syntax:
     content: protected MediationCommandBase(Action<Exception> onException = null)
     parameters:
@@ -108,10 +113,11 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Commanding\MediationCommandBase.cs
-    startLine: 27
+    startLine: 47
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Commanding
+  example: []
   syntax:
     content: protected MediationCommandBase(Context context, Action<Exception> onException = null)
     parameters:

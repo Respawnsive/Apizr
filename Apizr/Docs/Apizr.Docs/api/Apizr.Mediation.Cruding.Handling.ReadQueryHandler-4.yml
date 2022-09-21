@@ -17,17 +17,23 @@ items:
   source:
     id: ReadQueryHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\ReadQueryHandler.cs
-    startLine: 30
+    startLine: 46
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling
+  summary: "\nThe Read query handler\n"
+  example: []
   syntax:
     content: 'public class ReadQueryHandler<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams> : ReadQueryHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, ReadQuery<TModelEntity>, TModelEntity>, IMediationQueryHandler<ReadQuery<TModelEntity>, TModelEntity>, IRequestHandler<ReadQuery<TModelEntity>, TModelEntity> where TModelEntity : class where TApiEntity : class'
     typeParameters:
     - id: TModelEntity
+      description: The model entity type
     - id: TApiEntity
+      description: The api entity type
     - id: TReadAllResult
+      description: The returned result type
     - id: TReadAllParams
+      description: The read all params type
     content.vb: >-
       Public Class ReadQueryHandler(Of TModelEntity As Class, TApiEntity As Class, TReadAllResult, TReadAllParams)
           Inherits ReadQueryHandlerBase(Of TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, ReadQuery(Of TModelEntity), TModelEntity)
@@ -73,7 +79,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\ReadQueryHandler.cs
-    startLine: 36
+    startLine: 52
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling
@@ -105,10 +111,12 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\ReadQueryHandler.cs
-    startLine: 41
+    startLine: 58
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling
+  summary: "\nHandling the Read query\n"
+  example: []
   syntax:
     content: public override async Task<TModelEntity> Handle(ReadQuery<TModelEntity> request, CancellationToken cancellationToken)
     parameters:
@@ -116,8 +124,10 @@ items:
       type: Apizr.Mediation.Cruding.ReadQuery{{TModelEntity}}
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: A cancellation token
     return:
       type: System.Threading.Tasks.Task{{TModelEntity}}
+      description: ''
     content.vb: Public Overrides Function Handle(request As ReadQuery(Of TModelEntity), cancellationToken As CancellationToken) As Task(Of TModelEntity)
   overridden: Apizr.Mediation.Cruding.Handling.Base.ReadQueryHandlerBase{{TModelEntity},{TApiEntity},{TReadAllResult},{TReadAllParams},Apizr.Mediation.Cruding.ReadQuery{{TModelEntity}},{TModelEntity}}.Handle(Apizr.Mediation.Cruding.ReadQuery{{TModelEntity}},System.Threading.CancellationToken)
   overload: Apizr.Mediation.Cruding.Handling.ReadQueryHandler`4.Handle*

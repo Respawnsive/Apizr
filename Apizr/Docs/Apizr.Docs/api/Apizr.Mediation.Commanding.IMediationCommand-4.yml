@@ -15,17 +15,23 @@ items:
   source:
     id: IMediationCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Commanding\IMediationCommand.cs
-    startLine: 4
+    startLine: 11
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Commanding
+  summary: "\nA mediation command sending mapped request and returning a mapped result\n"
+  example: []
   syntax:
     content: 'public interface IMediationCommand<out TModelResultData, TApiResultData, TApiRequestData, TModelRequestData> : IRequest<TModelResultData>, IBaseRequest'
     typeParameters:
     - id: TModelResultData
+      description: The model result type to map to
     - id: TApiResultData
+      description: The api request type to map to
     - id: TApiRequestData
+      description: The api result type to map from
     - id: TModelRequestData
+      description: The model request type to map from
     content.vb: >-
       Public Interface IMediationCommand(Of Out TModelResultData, TApiResultData, TApiRequestData, TModelRequestData)
           Inherits IRequest(Of TModelResultData)

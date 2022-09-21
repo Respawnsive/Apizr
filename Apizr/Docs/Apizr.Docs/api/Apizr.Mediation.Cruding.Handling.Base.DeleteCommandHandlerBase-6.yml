@@ -17,19 +17,27 @@ items:
   source:
     id: DeleteCommandHandlerBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\Base\DeleteCommandHandlerBase.cs
-    startLine: 22
+    startLine: 47
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling.Base
+  summary: "\nThe base Delete command handler\n"
+  example: []
   syntax:
     content: 'public abstract class DeleteCommandHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, TCommand, TCommandResult> : CrudRequestHandlerBase<TApiEntity, int, TReadAllResult, TReadAllParams>, IMediationCommandHandler<TCommand, TCommandResult>, IRequestHandler<TCommand, TCommandResult> where TModelEntity : class where TApiEntity : class where TCommand : DeleteCommandBase<TModelEntity, int, TCommandResult>'
     typeParameters:
     - id: TModelEntity
+      description: The model entity type
     - id: TApiEntity
+      description: The api entity type
     - id: TReadAllResult
+      description: The returned result type
     - id: TReadAllParams
+      description: The read all params
     - id: TCommand
+      description: The command to handle
     - id: TCommandResult
+      description: The command result to return
     content.vb: >-
       Public MustInherit Class DeleteCommandHandlerBase(Of TModelEntity As Class, TApiEntity As Class, TReadAllResult, TReadAllParams, TCommand As DeleteCommandBase(Of TModelEntity, Integer, TCommandResult), TCommandResult)
           Inherits CrudRequestHandlerBase(Of TApiEntity, Integer, TReadAllResult, TReadAllParams)
@@ -78,7 +86,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\Base\DeleteCommandHandlerBase.cs
-    startLine: 29
+    startLine: 54
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling.Base
@@ -110,19 +118,24 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\Base\DeleteCommandHandlerBase.cs
-    startLine: 33
+    startLine: 64
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling.Base
+  summary: "\nHandling the Delete command\n"
+  example: []
   syntax:
     content: public abstract Task<TCommandResult> Handle(TCommand request, CancellationToken cancellationToken)
     parameters:
     - id: request
       type: '{TCommand}'
+      description: The Delete command
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: A cancellation token
     return:
       type: System.Threading.Tasks.Task{{TCommandResult}}
+      description: ''
     content.vb: Public MustOverride Function Handle(request As TCommand, cancellationToken As CancellationToken) As Task(Of TCommandResult)
   overload: Apizr.Mediation.Cruding.Handling.Base.DeleteCommandHandlerBase`6.Handle*
   implements:

@@ -18,18 +18,25 @@ items:
   source:
     id: ExecuteResultRequestHandlerBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\Base\ExecuteResultRequestHandlerBase.cs
-    startLine: 40
+    startLine: 79
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling.Base
+  summary: "\nThe top level base mediation execute result request handler\n"
+  example: []
   syntax:
     content: 'public abstract class ExecuteResultRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest> : RequestHandlerBase, IRequestHandler<TRequest, TFormattedModelResultData> where TRequest : ExecuteResultRequestBase<TWebApi, TModelData, TApiData, TFormattedModelResultData>'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelData
+      description: The model data type
     - id: TApiData
+      description: The api data type
     - id: TFormattedModelResultData
+      description: The formatted model result type
     - id: TRequest
+      description: The request to handle
     content.vb: >-
       Public MustInherit Class ExecuteResultRequestHandlerBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest As ExecuteResultRequestBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData))
           Inherits RequestHandlerBase
@@ -75,7 +82,7 @@ items:
   source:
     id: WebApiManager
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\Base\ExecuteResultRequestHandlerBase.cs
-    startLine: 44
+    startLine: 83
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling.Base
@@ -106,7 +113,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\Base\ExecuteResultRequestHandlerBase.cs
-    startLine: 46
+    startLine: 85
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling.Base
@@ -138,19 +145,24 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\Base\ExecuteResultRequestHandlerBase.cs
-    startLine: 51
+    startLine: 96
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling.Base
+  summary: "\nHandling the execute result request\n"
+  example: []
   syntax:
     content: public abstract Task<TFormattedModelResultData> Handle(TRequest request, CancellationToken cancellationToken)
     parameters:
     - id: request
       type: '{TRequest}'
+      description: The execute result request
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: A cancellation token
     return:
       type: System.Threading.Tasks.Task{{TFormattedModelResultData}}
+      description: ''
     content.vb: Public MustOverride Function Handle(request As TRequest, cancellationToken As CancellationToken) As Task(Of TFormattedModelResultData)
   overload: Apizr.Mediation.Requesting.Handling.Base.ExecuteResultRequestHandlerBase`5.Handle*
   implements:

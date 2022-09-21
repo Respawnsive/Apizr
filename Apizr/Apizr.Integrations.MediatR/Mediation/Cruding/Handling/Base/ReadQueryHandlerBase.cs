@@ -6,6 +6,16 @@ using Apizr.Requesting;
 
 namespace Apizr.Mediation.Cruding.Handling.Base
 {
+    /// <summary>
+    /// The base Read query handler
+    /// </summary>
+    /// <typeparam name="TModelEntity">The model entity type</typeparam>
+    /// <typeparam name="TApiEntity">The api entity type</typeparam>
+    /// <typeparam name="TApiEntityKey">The api entity's crud key type</typeparam>
+    /// <typeparam name="TReadAllResult">The returned result type</typeparam>
+    /// <typeparam name="TReadAllParams">The read all params type</typeparam>
+    /// <typeparam name="TQuery">The query type to handle</typeparam>
+    /// <typeparam name="TQueryResult">The query result type to handle</typeparam>
     public abstract class ReadQueryHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TQuery, TQueryResult> :
         CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>,
         IMediationQueryHandler<TQuery, TQueryResult>
@@ -17,9 +27,24 @@ namespace Apizr.Mediation.Cruding.Handling.Base
         {
         }
 
+        /// <summary>
+        /// Handling the Read query
+        /// </summary>
+        /// <param name="request">The Read query</param>
+        /// <param name="cancellationToken">A cancellation token</param>
+        /// <returns></returns>
         public abstract Task<TQueryResult> Handle(TQuery request, CancellationToken cancellationToken);
     }
 
+    /// <summary>
+    /// The base Read query handler
+    /// </summary>
+    /// <typeparam name="TModelEntity">The model entity type</typeparam>
+    /// <typeparam name="TApiEntity">The api entity type</typeparam>
+    /// <typeparam name="TReadAllResult">The returned result type</typeparam>
+    /// <typeparam name="TReadAllParams">The read all params type</typeparam>
+    /// <typeparam name="TQuery">The query type to handle</typeparam>
+    /// <typeparam name="TQueryResult">The query result type to handle</typeparam>
     public abstract class ReadQueryHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, TQuery, TQueryResult> : CrudRequestHandlerBase<TApiEntity, int, TReadAllResult, TReadAllParams>,
         IMediationQueryHandler<TQuery, TQueryResult> where TApiEntity : class where TQuery : ReadQueryBase<TQueryResult>
     {
@@ -27,6 +52,12 @@ namespace Apizr.Mediation.Cruding.Handling.Base
         {
         }
 
+        /// <summary>
+        /// Handling the Read query
+        /// </summary>
+        /// <param name="request">The Read query</param>
+        /// <param name="cancellationToken">A cancellation token</param>
+        /// <returns></returns>
         public abstract Task<TQueryResult> Handle(TQuery request, CancellationToken cancellationToken);
     }
 }

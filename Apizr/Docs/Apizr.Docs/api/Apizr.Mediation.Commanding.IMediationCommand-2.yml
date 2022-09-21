@@ -15,15 +15,19 @@ items:
   source:
     id: IMediationCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Commanding\IMediationCommand.cs
-    startLine: 9
+    startLine: 21
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Commanding
+  summary: "\nA mediation command sending a request and returning a result\n"
+  example: []
   syntax:
     content: 'public interface IMediationCommand<out TRequestData, out TResultData> : IRequest<TResultData>, IBaseRequest'
     typeParameters:
     - id: TRequestData
+      description: The api request type
     - id: TResultData
+      description: The api result type
     content.vb: >-
       Public Interface IMediationCommand(Of Out TRequestData, Out TResultData)
           Inherits IRequest(Of TResultData)

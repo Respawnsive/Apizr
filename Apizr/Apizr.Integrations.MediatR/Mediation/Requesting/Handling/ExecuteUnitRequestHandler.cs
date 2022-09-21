@@ -10,12 +10,19 @@ using Polly;
 
 namespace Apizr.Mediation.Requesting.Handling
 {
+    /// <summary>
+    /// The mediation execute unit request handler
+    /// </summary>
+    /// <typeparam name="TWebApi">The web api type</typeparam>
+    /// <typeparam name="TModelData">The model data type</typeparam>
+    /// <typeparam name="TApiData">The api data type</typeparam>
     public class ExecuteUnitRequestHandler<TWebApi, TModelData, TApiData> : ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, ExecuteUnitRequest<TWebApi, TModelData, TApiData>>
     {
         public ExecuteUnitRequestHandler(IApizrManager<TWebApi> webApiManager) : base(webApiManager)
         {
         }
 
+        /// <inheritdoc />
         public override async Task<Unit> Handle(ExecuteUnitRequest<TWebApi, TModelData, TApiData> request, CancellationToken cancellationToken)
         {
             switch (request.ExecuteApiMethod)
@@ -48,12 +55,17 @@ namespace Apizr.Mediation.Requesting.Handling
         }
     }
 
+    /// <summary>
+    /// The mediation execute unit request handler
+    /// </summary>
+    /// <typeparam name="TWebApi">The web api type</typeparam>
     public class ExecuteUnitRequestHandler<TWebApi> : ExecuteUnitRequestHandlerBase<TWebApi, ExecuteUnitRequest<TWebApi>>
     {
         public ExecuteUnitRequestHandler(IApizrManager<TWebApi> webApiManager) : base(webApiManager)
         {
         }
 
+        /// <inheritdoc />
         public override async Task<Unit> Handle(ExecuteUnitRequest<TWebApi> request, CancellationToken cancellationToken)
         {
             switch (request.ExecuteApiMethod)

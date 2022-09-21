@@ -19,15 +19,19 @@ items:
   source:
     id: ExecuteResultRequest
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\ExecuteResultRequest.cs
-    startLine: 73
+    startLine: 178
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting
+  summary: "\nThe mediation execute result request (returning result)\n"
+  example: []
   syntax:
     content: 'public class ExecuteResultRequest<TWebApi, TApiData> : ExecuteResultRequestBase<TWebApi, TApiData>, IRequest<TApiData>, IBaseRequest'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TApiData
+      description: The api data type
     content.vb: >-
       Public Class ExecuteResultRequest(Of TWebApi, TApiData)
           Inherits ExecuteResultRequestBase(Of TWebApi, TApiData)
@@ -80,19 +84,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\ExecuteResultRequest.cs
-    startLine: 75
+    startLine: 186
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting
+  summary: "\nThe mediation execute result request constructor\n"
+  example: []
   syntax:
     content: public ExecuteResultRequest(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
+      description: The request to execute
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Public Sub New(executeApiMethod As Expression(Of Func(Of TWebApi, Task(Of TApiData))), clearCache As Boolean = False, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.ExecuteResultRequest`2.#ctor*
   nameWithType.vb: ExecuteResultRequest(Of TWebApi, TApiData).ExecuteResultRequest(Expression(Of Func(Of TWebApi, Task(Of TApiData))), Boolean, Action(Of Exception))
@@ -116,19 +125,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\ExecuteResultRequest.cs
-    startLine: 79
+    startLine: 196
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting
+  summary: "\nThe mediation execute result request constructor\n"
+  example: []
   syntax:
     content: public ExecuteResultRequest(Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
+      description: The request to execute
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Public Sub New(executeApiMethod As Expression(Of Func(Of CancellationToken, TWebApi, Task(Of TApiData))), clearCache As Boolean = False, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.ExecuteResultRequest`2.#ctor*
   nameWithType.vb: ExecuteResultRequest(Of TWebApi, TApiData).ExecuteResultRequest(Expression(Of Func(Of CancellationToken, TWebApi, Task(Of TApiData))), Boolean, Action(Of Exception))
@@ -152,21 +166,27 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\ExecuteResultRequest.cs
-    startLine: 83
+    startLine: 207
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting
+  summary: "\nThe mediation execute result request constructor\n"
+  example: []
   syntax:
     content: public ExecuteResultRequest(Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
+      description: The request to execute
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Public Sub New(executeApiMethod As Expression(Of Func(Of Context, TWebApi, Task(Of TApiData))), context As Context, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.ExecuteResultRequest`2.#ctor*
   nameWithType.vb: ExecuteResultRequest(Of TWebApi, TApiData).ExecuteResultRequest(Expression(Of Func(Of Context, TWebApi, Task(Of TApiData))), Context, Boolean, Action(Of Exception))
@@ -190,21 +210,27 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\ExecuteResultRequest.cs
-    startLine: 87
+    startLine: 218
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting
+  summary: "\nThe mediation execute result request constructor\n"
+  example: []
   syntax:
     content: public ExecuteResultRequest(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, Context context, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
+      description: The request to execute
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Public Sub New(executeApiMethod As Expression(Of Func(Of Context, CancellationToken, TWebApi, Task(Of TApiData))), context As Context, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.ExecuteResultRequest`2.#ctor*
   nameWithType.vb: ExecuteResultRequest(Of TWebApi, TApiData).ExecuteResultRequest(Expression(Of Func(Of Context, CancellationToken, TWebApi, Task(Of TApiData))), Context, Boolean, Action(Of Exception))

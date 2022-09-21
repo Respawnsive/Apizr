@@ -19,14 +19,17 @@ items:
   source:
     id: RequestBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\RequestBase.cs
-    startLine: 6
+    startLine: 10
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe top level base mediation request\n"
+  example: []
   syntax:
     content: 'public abstract class RequestBase<TFormattedModelResultData> : IRequest<TFormattedModelResultData>, IBaseRequest'
     typeParameters:
     - id: TFormattedModelResultData
+      description: The result type
     content.vb: >-
       Public MustInherit Class RequestBase(Of TFormattedModelResultData)
           Implements IRequest(Of TFormattedModelResultData), IBaseRequest
@@ -76,10 +79,11 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\RequestBase.cs
-    startLine: 8
+    startLine: 13
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  example: []
   syntax:
     content: protected RequestBase(Action<Exception> onException = null)
     parameters:
@@ -108,17 +112,21 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\RequestBase.cs
-    startLine: 13
+    startLine: 23
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe base request constructor\n"
+  example: []
   syntax:
     content: protected RequestBase(Context context, Action<Exception> onException = null)
     parameters:
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(context As Context, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.Base.RequestBase`1.#ctor*
   nameWithType.vb: RequestBase(Of TFormattedModelResultData).RequestBase(Context, Action(Of Exception))
@@ -142,10 +150,12 @@ items:
   source:
     id: Context
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\RequestBase.cs
-    startLine: 19
+    startLine: 32
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe Polly context to pass through\n"
+  example: []
   syntax:
     content: public Context Context { get; }
     parameters: []
@@ -175,10 +185,12 @@ items:
   source:
     id: OnException
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\RequestBase.cs
-    startLine: 21
+    startLine: 37
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nAction to execute when an exception occurs\n"
+  example: []
   syntax:
     content: public Action<Exception> OnException { get; }
     parameters: []

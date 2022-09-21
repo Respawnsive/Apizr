@@ -18,18 +18,25 @@ items:
   source:
     id: ExecuteUnitRequestHandlerBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\Base\ExecuteUnitRequestHandlerBase.cs
-    startLine: 10
+    startLine: 18
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling.Base
+  summary: "\nThe top level base mediation execute unit request handler\n"
+  example: []
   syntax:
     content: 'public abstract class ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest> : IRequestHandler<TRequest, TFormattedModelResultData> where TRequest : ExecuteUnitRequestBase<TWebApi, TModelData, TApiData, TFormattedModelResultData>'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelData
+      description: The model data type
     - id: TApiData
+      description: The api data type
     - id: TFormattedModelResultData
+      description: The formatted model result data type
     - id: TRequest
+      description: The execute unit request to handle
     content.vb: >-
       Public MustInherit Class ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest As ExecuteUnitRequestBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData))
           Implements IRequestHandler(Of TRequest, TFormattedModelResultData)
@@ -72,7 +79,7 @@ items:
   source:
     id: WebApiManager
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\Base\ExecuteUnitRequestHandlerBase.cs
-    startLine: 15
+    startLine: 23
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling.Base
@@ -103,7 +110,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\Base\ExecuteUnitRequestHandlerBase.cs
-    startLine: 17
+    startLine: 25
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling.Base
@@ -135,19 +142,24 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\Base\ExecuteUnitRequestHandlerBase.cs
-    startLine: 22
+    startLine: 36
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling.Base
+  summary: "\nHandling the execute unit request\n"
+  example: []
   syntax:
     content: public abstract Task<TFormattedModelResultData> Handle(TRequest request, CancellationToken cancellationToken)
     parameters:
     - id: request
       type: '{TRequest}'
+      description: The execute result request
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: A cancellation token
     return:
       type: System.Threading.Tasks.Task{{TFormattedModelResultData}}
+      description: ''
     content.vb: Public MustOverride Function Handle(request As TRequest, cancellationToken As CancellationToken) As Task(Of TFormattedModelResultData)
   overload: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.Handle*
   implements:

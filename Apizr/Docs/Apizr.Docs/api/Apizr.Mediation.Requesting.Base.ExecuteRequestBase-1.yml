@@ -18,14 +18,17 @@ items:
   source:
     id: ExecuteRequestBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\ExecuteRequestBase.cs
-    startLine: 7
+    startLine: 11
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe top level base mediation execute request\n"
+  example: []
   syntax:
     content: 'public abstract class ExecuteRequestBase<TFormattedModelResultData> : RequestBase<TFormattedModelResultData>, IRequest<TFormattedModelResultData>, IBaseRequest'
     typeParameters:
     - id: TFormattedModelResultData
+      description: The result type
     content.vb: >-
       Public MustInherit Class ExecuteRequestBase(Of TFormattedModelResultData)
           Inherits RequestBase(Of TFormattedModelResultData)
@@ -75,17 +78,21 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\ExecuteRequestBase.cs
-    startLine: 9
+    startLine: 18
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe top level base mediation execute request constructor\n"
+  example: []
   syntax:
     content: protected ExecuteRequestBase(Expression executeApiMethod, Action<Exception> onException = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression
+      description: The request to execute
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(executeApiMethod As Expression, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`1.#ctor*
   nameWithType.vb: ExecuteRequestBase(Of TFormattedModelResultData).ExecuteRequestBase(Expression, Action(Of Exception))
@@ -109,19 +116,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\ExecuteRequestBase.cs
-    startLine: 14
+    startLine: 29
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe top level base mediation execute request constructor\n"
+  example: []
   syntax:
     content: protected ExecuteRequestBase(Expression executeApiMethod, Context context, Action<Exception> onException = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression
+      description: The request to execute
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(executeApiMethod As Expression, context As Context, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`1.#ctor*
   nameWithType.vb: ExecuteRequestBase(Of TFormattedModelResultData).ExecuteRequestBase(Expression, Context, Action(Of Exception))
@@ -145,10 +157,12 @@ items:
   source:
     id: ExecuteApiMethod
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\ExecuteRequestBase.cs
-    startLine: 19
+    startLine: 37
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe request to execute\n"
+  example: []
   syntax:
     content: public Expression ExecuteApiMethod { get; }
     parameters: []

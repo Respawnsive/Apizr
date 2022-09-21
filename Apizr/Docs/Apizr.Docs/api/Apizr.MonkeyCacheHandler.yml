@@ -20,10 +20,12 @@ items:
   source:
     id: MonkeyCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MonkeyCache\MonkeyCacheHandler.cs
-    startLine: 9
+    startLine: 12
   assemblies:
   - Apizr.Integrations.MonkeyCache
   namespace: Apizr
+  summary: "\nMonkeyCache cache handler implementation\n"
+  example: []
   syntax:
     content: 'public class MonkeyCacheHandler : ICacheHandler'
     content.vb: >-
@@ -61,7 +63,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MonkeyCache\MonkeyCacheHandler.cs
-    startLine: 13
+    startLine: 16
   assemblies:
   - Apizr.Integrations.MonkeyCache
   namespace: Apizr
@@ -90,23 +92,30 @@ items:
   source:
     id: SetAsync
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MonkeyCache\MonkeyCacheHandler.cs
-    startLine: 18
+    startLine: 22
   assemblies:
   - Apizr.Integrations.MonkeyCache
   namespace: Apizr
+  summary: "\nMap Apizr cache saving method to your cache handler method\n"
+  example: []
   syntax:
     content: public Task SetAsync(string key, object value, TimeSpan? lifeSpan = null, CancellationToken cancellationToken = default(CancellationToken))
     parameters:
     - id: key
       type: System.String
+      description: The key to cache at
     - id: value
       type: System.Object
+      description: The value to cache
     - id: lifeSpan
       type: System.Nullable{System.TimeSpan}
+      description: The optional life span
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: An optional cancellation token
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Public Function SetAsync(key As String, value As Object, lifeSpan As TimeSpan? = Nothing, cancellationToken As CancellationToken = Nothing) As Task
   overload: Apizr.MonkeyCacheHandler.SetAsync*
   implements:
@@ -132,21 +141,27 @@ items:
   source:
     id: GetAsync
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MonkeyCache\MonkeyCacheHandler.cs
-    startLine: 26
+    startLine: 31
   assemblies:
   - Apizr.Integrations.MonkeyCache
   namespace: Apizr
+  summary: "\nMap Apizr cache getting method to your cache handler method\n"
+  example: []
   syntax:
     content: public Task<T> GetAsync<T>(string key, CancellationToken cancellationToken = default(CancellationToken))
     parameters:
     - id: key
       type: System.String
+      description: The key to get from
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: An optional cancellation token
     typeParameters:
     - id: T
+      description: The expected value type
     return:
       type: System.Threading.Tasks.Task{{T}}
+      description: ''
     content.vb: Public Function GetAsync(Of T)(key As String, cancellationToken As CancellationToken = Nothing) As Task(Of T)
   overload: Apizr.MonkeyCacheHandler.GetAsync*
   implements:
@@ -172,19 +187,24 @@ items:
   source:
     id: RemoveAsync
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MonkeyCache\MonkeyCacheHandler.cs
-    startLine: 31
+    startLine: 37
   assemblies:
   - Apizr.Integrations.MonkeyCache
   namespace: Apizr
+  summary: "\nMap Apizr cache removing method to your cache handler method\n"
+  example: []
   syntax:
     content: public Task<bool> RemoveAsync(string key, CancellationToken cancellationToken = default(CancellationToken))
     parameters:
     - id: key
       type: System.String
+      description: The key to remove from
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: An optional cancellation token
     return:
       type: System.Threading.Tasks.Task{System.Boolean}
+      description: ''
     content.vb: Public Function RemoveAsync(key As String, cancellationToken As CancellationToken = Nothing) As Task(Of Boolean)
   overload: Apizr.MonkeyCacheHandler.RemoveAsync*
   implements:
@@ -207,17 +227,21 @@ items:
   source:
     id: ClearAsync
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MonkeyCache\MonkeyCacheHandler.cs
-    startLine: 45
+    startLine: 52
   assemblies:
   - Apizr.Integrations.MonkeyCache
   namespace: Apizr
+  summary: "\nMap Apizr cache clearing method to your cache handler method\n"
+  example: []
   syntax:
     content: public Task ClearAsync(CancellationToken cancellationToken = default(CancellationToken))
     parameters:
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: An optional cancellation token
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Public Function ClearAsync(cancellationToken As CancellationToken = Nothing) As Task
   overload: Apizr.MonkeyCacheHandler.ClearAsync*
   implements:

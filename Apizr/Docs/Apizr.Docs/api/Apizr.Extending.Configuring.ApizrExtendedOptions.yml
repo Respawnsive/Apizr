@@ -38,10 +38,12 @@ items:
   source:
     id: ApizrExtendedOptions
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 18
+    startLine: 19
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nOptions available for extended registrations\n"
+  example: []
   syntax:
     content: 'public class ApizrExtendedOptions : ApizrExtendedOptionsBase, IApizrExtendedOptions, IApizrExtendedOptionsBase, IApizrOptionsBase, IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBase, IApizrCommonOptionsBase, IApizrExtendedProperOptions, IApizrExtendedProperOptionsBase, IApizrProperOptionsBase, IApizrExtendedSharedOptions, IApizrExtendedSharedOptionsBase, IApizrSharedOptionsBase'
     content.vb: >-
@@ -106,17 +108,21 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 20
+    startLine: 26
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nThe options constructor\n"
+  example: []
   syntax:
     content: public ApizrExtendedOptions(IApizrExtendedCommonOptions commonOptions, IApizrExtendedProperOptions properOptions)
     parameters:
     - id: commonOptions
       type: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions
+      description: The common options
     - id: properOptions
       type: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions
+      description: The proper options
     content.vb: Public Sub New(commonOptions As IApizrExtendedCommonOptions, properOptions As IApizrExtendedProperOptions)
   overload: Apizr.Extending.Configuring.ApizrExtendedOptions.#ctor*
   modifiers.csharp:
@@ -137,10 +143,12 @@ items:
   source:
     id: ApizrManagerType
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 46
+    startLine: 53
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nType of the manager\n"
+  example: []
   syntax:
     content: public Type ApizrManagerType { get; }
     parameters: []
@@ -170,10 +178,12 @@ items:
   source:
     id: ConnectivityHandlerType
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 47
+    startLine: 56
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nType of the connectivity handler\n"
+  example: []
   syntax:
     content: public Type ConnectivityHandlerType { get; set; }
     parameters: []
@@ -203,10 +213,12 @@ items:
   source:
     id: CacheHandlerType
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 48
+    startLine: 59
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nType of the cache handler\n"
+  example: []
   syntax:
     content: public Type CacheHandlerType { get; set; }
     parameters: []
@@ -236,10 +248,12 @@ items:
   source:
     id: MappingHandlerType
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 49
+    startLine: 62
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nType of the mapping handler\n"
+  example: []
   syntax:
     content: public Type MappingHandlerType { get; set; }
     parameters: []
@@ -269,10 +283,12 @@ items:
   source:
     id: BaseUriFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 52
+    startLine: 68
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nBase Uri factory\n"
+  example: []
   syntax:
     content: public Func<IServiceProvider, Uri> BaseUriFactory { get; set; }
     parameters: []
@@ -302,10 +318,12 @@ items:
   source:
     id: BaseAddressFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 59
+    startLine: 76
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nBase address factory\n"
+  example: []
   syntax:
     content: public Func<IServiceProvider, string> BaseAddressFactory { get; set; }
     parameters: []
@@ -335,10 +353,12 @@ items:
   source:
     id: BasePathFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 66
+    startLine: 84
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nBase path factory\n"
+  example: []
   syntax:
     content: public Func<IServiceProvider, string> BasePathFactory { get; set; }
     parameters: []
@@ -368,10 +388,12 @@ items:
   source:
     id: HttpTracerModeFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 73
+    startLine: 92
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nHttp traffic tracing mode factory\n"
+  example: []
   syntax:
     content: public Func<IServiceProvider, HttpTracerMode> HttpTracerModeFactory { get; set; }
     parameters: []
@@ -401,10 +423,12 @@ items:
   source:
     id: TrafficVerbosityFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 80
+    startLine: 100
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nHttp traffic tracing verbosity factory\n"
+  example: []
   syntax:
     content: public Func<IServiceProvider, HttpMessageParts> TrafficVerbosityFactory { get; set; }
     parameters: []
@@ -434,10 +458,12 @@ items:
   source:
     id: LogLevelsFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 87
+    startLine: 108
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nLog levels factory\n"
+  example: []
   syntax:
     content: public Func<IServiceProvider, LogLevel[]> LogLevelsFactory { get; set; }
     parameters: []
@@ -467,10 +493,12 @@ items:
   source:
     id: LoggerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 94
+    startLine: 116
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nThe Logger factory\n"
+  example: []
   syntax:
     content: public Func<IServiceProvider, string, ILogger> LoggerFactory { get; protected set; }
     parameters: []
@@ -502,10 +530,12 @@ items:
   source:
     id: HttpClientHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 101
+    startLine: 124
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nHttpClientHandler factory\n"
+  example: []
   syntax:
     content: public Func<IServiceProvider, HttpClientHandler> HttpClientHandlerFactory { get; set; }
     parameters: []
@@ -535,10 +565,12 @@ items:
   source:
     id: RefitSettingsFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 109
+    startLine: 133
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nRefit settings factory\n"
+  example: []
   syntax:
     content: public Func<IServiceProvider, RefitSettings> RefitSettingsFactory { get; set; }
     parameters: []
@@ -568,10 +600,12 @@ items:
   source:
     id: ConnectivityHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 115
+    startLine: 140
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nConnectivity handler factory\n"
+  example: []
   syntax:
     content: public Func<IServiceProvider, IConnectivityHandler> ConnectivityHandlerFactory { get; set; }
     parameters: []
@@ -601,10 +635,12 @@ items:
   source:
     id: CacheHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 116
+    startLine: 143
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nCache handler factory\n"
+  example: []
   syntax:
     content: public Func<IServiceProvider, ICacheHandler> CacheHandlerFactory { get; set; }
     parameters: []
@@ -634,10 +670,12 @@ items:
   source:
     id: MappingHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 117
+    startLine: 146
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nMapping handler factory\n"
+  example: []
   syntax:
     content: public Func<IServiceProvider, IMappingHandler> MappingHandlerFactory { get; set; }
     parameters: []
@@ -667,10 +705,12 @@ items:
   source:
     id: HttpClientBuilder
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 118
+    startLine: 149
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nHttpClient builder\n"
+  example: []
   syntax:
     content: public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
     parameters: []
@@ -700,10 +740,12 @@ items:
   source:
     id: CrudEntities
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 119
+    startLine: 152
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nEntities auto registered with <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref>\n"
+  example: []
   syntax:
     content: public IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }
     parameters: []
@@ -733,10 +775,12 @@ items:
   source:
     id: WebApis
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 120
+    startLine: 155
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nWeb apis auto registered with <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref>\n"
+  example: []
   syntax:
     content: public IDictionary<Type, WebApiAttribute> WebApis { get; }
     parameters: []
@@ -766,10 +810,12 @@ items:
   source:
     id: ObjectMappings
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 121
+    startLine: 158
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nMappings between api request object and model object used for classic auto registration\n"
+  example: []
   syntax:
     content: public IDictionary<Type, MappedWithAttribute> ObjectMappings { get; }
     parameters: []
@@ -799,10 +845,12 @@ items:
   source:
     id: PostRegistries
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 122
+    startLine: 161
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nOther registries plugged during post registration actions\n"
+  example: []
   syntax:
     content: public IDictionary<Type, IApizrExtendedConcurrentRegistryBase> PostRegistries { get; }
     parameters: []
@@ -832,10 +880,12 @@ items:
   source:
     id: PostRegistrationActions
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\ApizrExtendedOptions.cs
-    startLine: 123
+    startLine: 164
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring
+  summary: "\nPost registration actions\n"
+  example: []
   syntax:
     content: public IList<Action<Type, IServiceCollection>> PostRegistrationActions { get; }
     parameters: []
@@ -852,6 +902,12 @@ items:
   - Public
   - ReadOnly
 references:
+- uid: Apizr.Extending.Configuring.IApizrExtendedOptions
+  commentId: T:Apizr.Extending.Configuring.IApizrExtendedOptions
+  parent: Apizr.Extending.Configuring
+  name: IApizrExtendedOptions
+  nameWithType: IApizrExtendedOptions
+  fullName: Apizr.Extending.Configuring.IApizrExtendedOptions
 - uid: Apizr.Extending.Configuring
   commentId: N:Apizr.Extending.Configuring
   name: Apizr.Extending.Configuring
@@ -882,12 +938,6 @@ references:
   name: ApizrExtendedOptionsBase
   nameWithType: ApizrExtendedOptionsBase
   fullName: Apizr.Extending.Configuring.ApizrExtendedOptionsBase
-- uid: Apizr.Extending.Configuring.IApizrExtendedOptions
-  commentId: T:Apizr.Extending.Configuring.IApizrExtendedOptions
-  parent: Apizr.Extending.Configuring
-  name: IApizrExtendedOptions
-  nameWithType: IApizrExtendedOptions
-  fullName: Apizr.Extending.Configuring.IApizrExtendedOptions
 - uid: Apizr.Extending.Configuring.IApizrExtendedOptionsBase
   commentId: T:Apizr.Extending.Configuring.IApizrExtendedOptionsBase
   parent: Apizr.Extending.Configuring

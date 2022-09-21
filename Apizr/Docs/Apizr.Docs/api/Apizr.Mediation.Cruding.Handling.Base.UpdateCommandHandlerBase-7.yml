@@ -17,20 +17,29 @@ items:
   source:
     id: UpdateCommandHandlerBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\Base\UpdateCommandHandlerBase.cs
-    startLine: 9
+    startLine: 19
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling.Base
+  summary: "\nThe base Update command handler\n"
+  example: []
   syntax:
     content: 'public abstract class UpdateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult> : CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>, IMediationCommandHandler<TCommand, TCommandResult>, IRequestHandler<TCommand, TCommandResult> where TModelEntity : class where TApiEntity : class where TCommand : UpdateCommandBase<TApiEntityKey, TModelEntity, TCommandResult>'
     typeParameters:
     - id: TModelEntity
+      description: The model entity type
     - id: TApiEntity
+      description: The api entity type
     - id: TApiEntityKey
+      description: The api entity&apos;s crud key type
     - id: TReadAllResult
+      description: The returned result type
     - id: TReadAllParams
+      description: The read all params type
     - id: TCommand
+      description: The command type to handle
     - id: TCommandResult
+      description: The command result type to return
     content.vb: >-
       Public MustInherit Class UpdateCommandHandlerBase(Of TModelEntity As Class, TApiEntity As Class, TApiEntityKey, TReadAllResult, TReadAllParams, TCommand As UpdateCommandBase(Of TApiEntityKey, TModelEntity, TCommandResult), TCommandResult)
           Inherits CrudRequestHandlerBase(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams)
@@ -79,7 +88,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\Base\UpdateCommandHandlerBase.cs
-    startLine: 16
+    startLine: 26
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling.Base
@@ -111,19 +120,24 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\Base\UpdateCommandHandlerBase.cs
-    startLine: 20
+    startLine: 36
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling.Base
+  summary: "\nHandling the Update command\n"
+  example: []
   syntax:
     content: public abstract Task<TCommandResult> Handle(TCommand request, CancellationToken cancellationToken)
     parameters:
     - id: request
       type: '{TCommand}'
+      description: The Update command
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: A cancellation token
     return:
       type: System.Threading.Tasks.Task{{TCommandResult}}
+      description: ''
     content.vb: Public MustOverride Function Handle(request As TCommand, cancellationToken As CancellationToken) As Task(Of TCommandResult)
   overload: Apizr.Mediation.Cruding.Handling.Base.UpdateCommandHandlerBase`7.Handle*
   implements:

@@ -18,15 +18,19 @@ items:
   source:
     id: CreateCommandBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\CreateCommandBase.cs
-    startLine: 6
+    startLine: 11
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  summary: "\nThe top level base mediation Create command\n"
+  example: []
   syntax:
     content: 'public abstract class CreateCommandBase<TRequestData, TResultData> : MediationCommandBase<TRequestData, TResultData>, IMediationCommand<TRequestData, TResultData>, IRequest<TResultData>, IBaseRequest'
     typeParameters:
     - id: TRequestData
+      description: The api request type
     - id: TResultData
+      description: The api result type
     content.vb: >-
       Public MustInherit Class CreateCommandBase(Of TRequestData, TResultData)
           Inherits MediationCommandBase(Of TRequestData, TResultData)
@@ -77,10 +81,11 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\CreateCommandBase.cs
-    startLine: 8
+    startLine: 14
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  example: []
   syntax:
     content: protected CreateCommandBase(TRequestData requestData, Action<Exception> onException = null)
     parameters:
@@ -111,19 +116,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\CreateCommandBase.cs
-    startLine: 13
+    startLine: 25
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  summary: "\nThe top level base mediation Create command constructor\n"
+  example: []
   syntax:
     content: protected CreateCommandBase(TRequestData requestData, Context context, Action<Exception> onException = null)
     parameters:
     - id: requestData
       type: '{TRequestData}'
+      description: The request data to send
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(requestData As TRequestData, context As Context, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Cruding.Base.CreateCommandBase`2.#ctor*
   nameWithType.vb: CreateCommandBase(Of TRequestData, TResultData).CreateCommandBase(TRequestData, Context, Action(Of Exception))
@@ -147,10 +157,12 @@ items:
   source:
     id: RequestData
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\CreateCommandBase.cs
-    startLine: 18
+    startLine: 33
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  summary: "\nThe request data to send\n"
+  example: []
   syntax:
     content: public TRequestData RequestData { get; }
     parameters: []

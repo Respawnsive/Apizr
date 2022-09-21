@@ -20,14 +20,17 @@ items:
   source:
     id: PrioritizedRequestBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\PrioritizedRequestBase.cs
-    startLine: 5
+    startLine: 9
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe base prioritized mediation request getting some <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TResultData</code> data\n"
+  example: []
   syntax:
     content: 'public abstract class PrioritizedRequestBase<TResultData> : RequestBase<TResultData>, IRequest<TResultData>, IBaseRequest'
     typeParameters:
     - id: TResultData
+      description: The returned data
     content.vb: >-
       Public MustInherit Class PrioritizedRequestBase(Of TResultData)
           Inherits RequestBase(Of TResultData)
@@ -75,15 +78,18 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\PrioritizedRequestBase.cs
-    startLine: 7
+    startLine: 15
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe base prioritized mediation query constructor\n"
+  example: []
   syntax:
     content: protected PrioritizedRequestBase(Action<Exception> onException = null)
     parameters:
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.Base.PrioritizedRequestBase`1.#ctor*
   nameWithType.vb: PrioritizedRequestBase(Of TResultData).PrioritizedRequestBase(Action(Of Exception))
@@ -107,17 +113,21 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\PrioritizedRequestBase.cs
-    startLine: 12
+    startLine: 25
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe base prioritized mediation query constructor\n"
+  example: []
   syntax:
     content: protected PrioritizedRequestBase(int priority, Action<Exception> onException = null)
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority to apply
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(priority As Integer, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.Base.PrioritizedRequestBase`1.#ctor*
   nameWithType.vb: PrioritizedRequestBase(Of TResultData).PrioritizedRequestBase(Int32, Action(Of Exception))
@@ -141,17 +151,21 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\PrioritizedRequestBase.cs
-    startLine: 17
+    startLine: 35
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe base prioritized mediation query constructor\n"
+  example: []
   syntax:
     content: protected PrioritizedRequestBase(Context context, Action<Exception> onException = null)
     parameters:
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(context As Context, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.Base.PrioritizedRequestBase`1.#ctor*
   nameWithType.vb: PrioritizedRequestBase(Of TResultData).PrioritizedRequestBase(Context, Action(Of Exception))
@@ -175,19 +189,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\PrioritizedRequestBase.cs
-    startLine: 22
+    startLine: 46
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe base prioritized mediation query constructor\n"
+  example: []
   syntax:
     content: protected PrioritizedRequestBase(int priority, Context context, Action<Exception> onException = null)
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority to apply
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(priority As Integer, context As Context, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.Base.PrioritizedRequestBase`1.#ctor*
   nameWithType.vb: PrioritizedRequestBase(Of TResultData).PrioritizedRequestBase(Int32, Context, Action(Of Exception))
@@ -211,10 +230,12 @@ items:
   source:
     id: Priority
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\PrioritizedRequestBase.cs
-    startLine: 27
+    startLine: 54
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe execution priority to apply\n"
+  example: []
   syntax:
     content: public int Priority { get; }
     parameters: []

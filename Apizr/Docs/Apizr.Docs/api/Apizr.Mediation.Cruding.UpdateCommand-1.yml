@@ -17,14 +17,17 @@ items:
   source:
     id: UpdateCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\UpdateCommand.cs
-    startLine: 18
+    startLine: 40
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding
+  summary: "\nThe mediation Update command\n"
+  example: []
   syntax:
     content: 'public class UpdateCommand<TRequestData> : UpdateCommandBase<TRequestData>, IMediationCommand<TRequestData, Unit>, IRequest<Unit>, IBaseRequest'
     typeParameters:
     - id: TRequestData
+      description: The request data type
     content.vb: >-
       Public Class UpdateCommand(Of TRequestData)
           Inherits UpdateCommandBase(Of TRequestData)
@@ -75,19 +78,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\UpdateCommand.cs
-    startLine: 20
+    startLine: 48
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding
+  summary: "\nThe mediation Update command constructor\n"
+  example: []
   syntax:
     content: public UpdateCommand(int key, TRequestData requestData, Action<Exception> onException = null)
     parameters:
     - id: key
       type: System.Int32
+      description: The entity&apos;s crud key
     - id: requestData
       type: '{TRequestData}'
+      description: The request data to send
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Public Sub New(key As Integer, requestData As TRequestData, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Cruding.UpdateCommand`1.#ctor*
   nameWithType.vb: UpdateCommand(Of TRequestData).UpdateCommand(Int32, TRequestData, Action(Of Exception))
@@ -111,21 +119,27 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\UpdateCommand.cs
-    startLine: 24
+    startLine: 59
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding
+  summary: "\nThe mediation Update command constructor\n"
+  example: []
   syntax:
     content: public UpdateCommand(int key, TRequestData requestData, Context context, Action<Exception> onException = null)
     parameters:
     - id: key
       type: System.Int32
+      description: The entity&apos;s crud key
     - id: requestData
       type: '{TRequestData}'
+      description: The request data to send
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Public Sub New(key As Integer, requestData As TRequestData, context As Context, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Cruding.UpdateCommand`1.#ctor*
   nameWithType.vb: UpdateCommand(Of TRequestData).UpdateCommand(Int32, TRequestData, Context, Action(Of Exception))

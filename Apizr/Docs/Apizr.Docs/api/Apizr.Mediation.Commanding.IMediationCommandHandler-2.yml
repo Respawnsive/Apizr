@@ -15,15 +15,19 @@ items:
   source:
     id: IMediationCommandHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Commanding\IMediationCommandHandler.cs
-    startLine: 4
+    startLine: 9
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Commanding
+  summary: "\nThe mediation command handler\n"
+  example: []
   syntax:
     content: 'public interface IMediationCommandHandler<in TCommand, TResponse> : IRequestHandler<TCommand, TResponse> where TCommand : IRequest<TResponse>'
     typeParameters:
     - id: TCommand
+      description: The handled command type
     - id: TResponse
+      description: The response type
     content.vb: >-
       Public Interface IMediationCommandHandler(Of In TCommand As IRequest(Of TResponse), TResponse)
           Inherits IRequestHandler(Of TCommand, TResponse)

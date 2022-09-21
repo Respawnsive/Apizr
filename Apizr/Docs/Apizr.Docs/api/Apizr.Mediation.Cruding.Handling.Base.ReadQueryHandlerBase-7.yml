@@ -17,20 +17,29 @@ items:
   source:
     id: ReadQueryHandlerBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\Base\ReadQueryHandlerBase.cs
-    startLine: 8
+    startLine: 18
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling.Base
+  summary: "\nThe base Read query handler\n"
+  example: []
   syntax:
     content: 'public abstract class ReadQueryHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TQuery, TQueryResult> : CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>, IMediationQueryHandler<TQuery, TQueryResult>, IRequestHandler<TQuery, TQueryResult> where TModelEntity : class where TApiEntity : class where TQuery : ReadQueryBase<TQueryResult, TApiEntityKey>'
     typeParameters:
     - id: TModelEntity
+      description: The model entity type
     - id: TApiEntity
+      description: The api entity type
     - id: TApiEntityKey
+      description: The api entity&apos;s crud key type
     - id: TReadAllResult
+      description: The returned result type
     - id: TReadAllParams
+      description: The read all params type
     - id: TQuery
+      description: The query type to handle
     - id: TQueryResult
+      description: The query result type to handle
     content.vb: >-
       Public MustInherit Class ReadQueryHandlerBase(Of TModelEntity As Class, TApiEntity As Class, TApiEntityKey, TReadAllResult, TReadAllParams, TQuery As ReadQueryBase(Of TQueryResult, TApiEntityKey), TQueryResult)
           Inherits CrudRequestHandlerBase(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams)
@@ -79,7 +88,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\Base\ReadQueryHandlerBase.cs
-    startLine: 15
+    startLine: 25
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling.Base
@@ -111,19 +120,24 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Handling\Base\ReadQueryHandlerBase.cs
-    startLine: 19
+    startLine: 35
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Handling.Base
+  summary: "\nHandling the Read query\n"
+  example: []
   syntax:
     content: public abstract Task<TQueryResult> Handle(TQuery request, CancellationToken cancellationToken)
     parameters:
     - id: request
       type: '{TQuery}'
+      description: The Read query
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: A cancellation token
     return:
       type: System.Threading.Tasks.Task{{TQueryResult}}
+      description: ''
     content.vb: Public MustOverride Function Handle(request As TQuery, cancellationToken As CancellationToken) As Task(Of TQueryResult)
   overload: Apizr.Mediation.Cruding.Handling.Base.ReadQueryHandlerBase`7.Handle*
   implements:

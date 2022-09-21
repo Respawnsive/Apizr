@@ -21,10 +21,12 @@ items:
   source:
     id: AutoMapperMappingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.AutoMapper\AutoMapperMappingHandler.cs
-    startLine: 7
+    startLine: 10
   assemblies:
   - Apizr.Integrations.AutoMapper
   namespace: Apizr
+  summary: "\nAutoMapper mapping handler implementation\n"
+  example: []
   syntax:
     content: 'public class AutoMapperMappingHandler : IMappingHandler'
     content.vb: >-
@@ -62,7 +64,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.AutoMapper\AutoMapperMappingHandler.cs
-    startLine: 11
+    startLine: 14
   assemblies:
   - Apizr.Integrations.AutoMapper
   namespace: Apizr
@@ -91,19 +93,24 @@ items:
   source:
     id: Map
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.AutoMapper\AutoMapperMappingHandler.cs
-    startLine: 16
+    startLine: 20
   assemblies:
   - Apizr.Integrations.AutoMapper
   namespace: Apizr
+  summary: "\nExecute a mapping from the source object to a new destination object.\nThe source type is inferred from the source object.\n"
+  example: []
   syntax:
     content: public TDestination Map<TDestination>(object source)
     parameters:
     - id: source
       type: System.Object
+      description: Source object to map from
     typeParameters:
     - id: TDestination
+      description: Destination type to create
     return:
       type: '{TDestination}'
+      description: Mapped destination object
     content.vb: Public Function Map(Of TDestination)(source As Object) As TDestination
   overload: Apizr.AutoMapperMappingHandler.Map*
   implements:
@@ -129,20 +136,26 @@ items:
   source:
     id: Map
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.AutoMapper\AutoMapperMappingHandler.cs
-    startLine: 18
+    startLine: 23
   assemblies:
   - Apizr.Integrations.AutoMapper
   namespace: Apizr
+  summary: "\nExecute a mapping from the source object to a new destination object.\n"
+  example: []
   syntax:
     content: public TDestination Map<TSource, TDestination>(TSource source)
     parameters:
     - id: source
       type: '{TSource}'
+      description: Source object to map from
     typeParameters:
     - id: TSource
+      description: Source type to use, regardless of the runtime type
     - id: TDestination
+      description: Destination type to create
     return:
       type: '{TDestination}'
+      description: Mapped destination object
     content.vb: Public Function Map(Of TSource, TDestination)(source As TSource) As TDestination
   overload: Apizr.AutoMapperMappingHandler.Map*
   implements:
@@ -168,22 +181,29 @@ items:
   source:
     id: Map
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.AutoMapper\AutoMapperMappingHandler.cs
-    startLine: 20
+    startLine: 26
   assemblies:
   - Apizr.Integrations.AutoMapper
   namespace: Apizr
+  summary: "\nExecute a mapping from the source object to the existing destination object.\n"
+  example: []
   syntax:
     content: public TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
     parameters:
     - id: source
       type: '{TSource}'
+      description: Source object to map from
     - id: destination
       type: '{TDestination}'
+      description: Destination object to map into
     typeParameters:
     - id: TSource
+      description: Source type to use
     - id: TDestination
+      description: Destination type
     return:
       type: '{TDestination}'
+      description: The mapped destination object, same instance as the <code data-dev-comment-type="paramref" class="paramref">destination</code> object
     content.vb: Public Function Map(Of TSource, TDestination)(source As TSource, destination As TDestination) As TDestination
   overload: Apizr.AutoMapperMappingHandler.Map*
   implements:
@@ -209,21 +229,27 @@ items:
   source:
     id: Map
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.AutoMapper\AutoMapperMappingHandler.cs
-    startLine: 22
+    startLine: 29
   assemblies:
   - Apizr.Integrations.AutoMapper
   namespace: Apizr
+  summary: "\nExecute a mapping from the source object to a new destination object with explicit <xref href=\"System.Type\" data-throw-if-not-resolved=\"false\"></xref> objects\n"
+  example: []
   syntax:
     content: public object Map(object source, Type sourceType, Type destinationType)
     parameters:
     - id: source
       type: System.Object
+      description: Source object to map from
     - id: sourceType
       type: System.Type
+      description: Source type to use
     - id: destinationType
       type: System.Type
+      description: Destination type to create
     return:
       type: System.Object
+      description: Mapped destination object
     content.vb: Public Function Map(source As Object, sourceType As Type, destinationType As Type) As Object
   overload: Apizr.AutoMapperMappingHandler.Map*
   implements:
@@ -246,23 +272,30 @@ items:
   source:
     id: Map
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.AutoMapper\AutoMapperMappingHandler.cs
-    startLine: 24
+    startLine: 32
   assemblies:
   - Apizr.Integrations.AutoMapper
   namespace: Apizr
+  summary: "\nExecute a mapping from the source object to existing destination object with explicit <xref href=\"System.Type\" data-throw-if-not-resolved=\"false\"></xref> objects\n"
+  example: []
   syntax:
     content: public object Map(object source, object destination, Type sourceType, Type destinationType)
     parameters:
     - id: source
       type: System.Object
+      description: Source object to map from
     - id: destination
       type: System.Object
+      description: Destination object to map into
     - id: sourceType
       type: System.Type
+      description: Source type to use
     - id: destinationType
       type: System.Type
+      description: Destination type to use
     return:
       type: System.Object
+      description: Mapped destination object, same instance as the <code data-dev-comment-type="paramref" class="paramref">destination</code> object
     content.vb: Public Function Map(source As Object, destination As Object, sourceType As Type, destinationType As Type) As Object
   overload: Apizr.AutoMapperMappingHandler.Map*
   implements:

@@ -20,15 +20,19 @@ items:
   source:
     id: ReadAllQueryBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\ReadAllQueryBase.cs
-    startLine: 7
+    startLine: 12
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  summary: "\nThe top level base mediation ReadAll query\n"
+  example: []
   syntax:
     content: 'public abstract class ReadAllQueryBase<TReadAllParams, TReadAllResult> : MediationQueryBase<TReadAllResult>, IMediationQuery<TReadAllResult>, IRequest<TReadAllResult>, IBaseRequest'
     typeParameters:
     - id: TReadAllParams
+      description: The ReadAll parameters type
     - id: TReadAllResult
+      description: The api result type
     content.vb: >-
       Public MustInherit Class ReadAllQueryBase(Of TReadAllParams, TReadAllResult)
           Inherits MediationQueryBase(Of TReadAllResult)
@@ -83,19 +87,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\ReadAllQueryBase.cs
-    startLine: 9
+    startLine: 20
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  summary: "\nThe top level base mediation ReadAll query constructor\n"
+  example: []
   syntax:
     content: protected ReadAllQueryBase(TReadAllParams parameters, bool clearCache, Action<Exception> onException = null)
     parameters:
     - id: parameters
       type: '{TReadAllParams}'
+      description: The query parameters to send
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(parameters As TReadAllParams, clearCache As Boolean, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Cruding.Base.ReadAllQueryBase`2.#ctor*
   nameWithType.vb: ReadAllQueryBase(Of TReadAllParams, TReadAllResult).ReadAllQueryBase(TReadAllParams, Boolean, Action(Of Exception))
@@ -119,21 +128,27 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\ReadAllQueryBase.cs
-    startLine: 14
+    startLine: 32
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  summary: "\nThe top level base mediation ReadAll query constructor\n"
+  example: []
   syntax:
     content: protected ReadAllQueryBase(TReadAllParams parameters, int priority, bool clearCache, Action<Exception> onException = null)
     parameters:
     - id: parameters
       type: '{TReadAllParams}'
+      description: The query parameters to send
     - id: priority
       type: System.Int32
+      description: The execution priority to apply
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(parameters As TReadAllParams, priority As Integer, clearCache As Boolean, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Cruding.Base.ReadAllQueryBase`2.#ctor*
   nameWithType.vb: ReadAllQueryBase(Of TReadAllParams, TReadAllResult).ReadAllQueryBase(TReadAllParams, Int32, Boolean, Action(Of Exception))
@@ -157,21 +172,27 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\ReadAllQueryBase.cs
-    startLine: 19
+    startLine: 44
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  summary: "\nThe top level base mediation ReadAll query constructor\n"
+  example: []
   syntax:
     content: protected ReadAllQueryBase(TReadAllParams parameters, Context context, bool clearCache, Action<Exception> onException = null)
     parameters:
     - id: parameters
       type: '{TReadAllParams}'
+      description: The query parameters to send
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(parameters As TReadAllParams, context As Context, clearCache As Boolean, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Cruding.Base.ReadAllQueryBase`2.#ctor*
   nameWithType.vb: ReadAllQueryBase(Of TReadAllParams, TReadAllResult).ReadAllQueryBase(TReadAllParams, Context, Boolean, Action(Of Exception))
@@ -195,23 +216,30 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\ReadAllQueryBase.cs
-    startLine: 24
+    startLine: 57
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  summary: "\nThe top level base mediation ReadAll query constructor\n"
+  example: []
   syntax:
     content: protected ReadAllQueryBase(TReadAllParams parameters, int priority, Context context, bool clearCache, Action<Exception> onException = null)
     parameters:
     - id: parameters
       type: '{TReadAllParams}'
+      description: The query parameters to send
     - id: priority
       type: System.Int32
+      description: The execution priority to apply
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(parameters As TReadAllParams, priority As Integer, context As Context, clearCache As Boolean, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Cruding.Base.ReadAllQueryBase`2.#ctor*
   nameWithType.vb: ReadAllQueryBase(Of TReadAllParams, TReadAllResult).ReadAllQueryBase(TReadAllParams, Int32, Context, Boolean, Action(Of Exception))
@@ -235,10 +263,12 @@ items:
   source:
     id: Parameters
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\ReadAllQueryBase.cs
-    startLine: 29
+    startLine: 65
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  summary: "\nThe query parameters to send\n"
+  example: []
   syntax:
     content: public TReadAllParams Parameters { get; }
     parameters: []

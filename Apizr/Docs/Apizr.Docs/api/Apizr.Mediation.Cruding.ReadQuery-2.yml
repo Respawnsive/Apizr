@@ -19,15 +19,19 @@ items:
   source:
     id: ReadQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\ReadQuery.cs
-    startLine: 6
+    startLine: 11
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding
+  summary: "\nThe mediation Read query\n"
+  example: []
   syntax:
     content: 'public class ReadQuery<TResultData, TKey> : ReadQueryBase<TResultData, TKey>, IMediationQuery<TResultData>, IRequest<TResultData>, IBaseRequest'
     typeParameters:
     - id: TResultData
+      description: The result entity type
     - id: TKey
+      description: The entity&apos;s crud key type
     content.vb: >-
       Public Class ReadQuery(Of TResultData, TKey)
           Inherits ReadQueryBase(Of TResultData, TKey)
@@ -78,19 +82,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\ReadQuery.cs
-    startLine: 8
+    startLine: 19
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding
+  summary: "\nThe mediation Read query constructor\n"
+  example: []
   syntax:
     content: public ReadQuery(TKey key, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TKey}'
+      description: The entity&apos;s crud key
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Public Sub New(key As TKey, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Cruding.ReadQuery`2.#ctor*
   nameWithType.vb: ReadQuery(Of TResultData, TKey).ReadQuery(TKey, Boolean, Action(Of Exception))
@@ -114,21 +123,27 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\ReadQuery.cs
-    startLine: 12
+    startLine: 30
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding
+  summary: "\nThe mediation Read query constructor\n"
+  example: []
   syntax:
     content: public ReadQuery(TKey key, int priority, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TKey}'
+      description: The entity&apos;s crud key
     - id: priority
       type: System.Int32
+      description: The execution priority to apply
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Public Sub New(key As TKey, priority As Integer, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Cruding.ReadQuery`2.#ctor*
   nameWithType.vb: ReadQuery(Of TResultData, TKey).ReadQuery(TKey, Int32, Boolean, Action(Of Exception))
@@ -152,21 +167,27 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\ReadQuery.cs
-    startLine: 16
+    startLine: 41
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding
+  summary: "\nThe mediation Read query constructor\n"
+  example: []
   syntax:
     content: public ReadQuery(TKey key, Context context, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TKey}'
+      description: The entity&apos;s crud key
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Public Sub New(key As TKey, context As Context, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Cruding.ReadQuery`2.#ctor*
   nameWithType.vb: ReadQuery(Of TResultData, TKey).ReadQuery(TKey, Context, Boolean, Action(Of Exception))
@@ -190,23 +211,30 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\ReadQuery.cs
-    startLine: 20
+    startLine: 53
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding
+  summary: "\nThe mediation Read query constructor\n"
+  example: []
   syntax:
     content: public ReadQuery(TKey key, int priority, Context context, bool clearCache = false, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TKey}'
+      description: The entity&apos;s crud key
     - id: priority
       type: System.Int32
+      description: The execution priority to apply
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Public Sub New(key As TKey, priority As Integer, context As Context, clearCache As Boolean = False, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Cruding.ReadQuery`2.#ctor*
   nameWithType.vb: ReadQuery(Of TResultData, TKey).ReadQuery(TKey, Int32, Context, Boolean, Action(Of Exception))

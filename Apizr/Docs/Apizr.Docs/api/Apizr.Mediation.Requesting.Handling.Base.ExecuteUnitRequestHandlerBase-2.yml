@@ -18,15 +18,19 @@ items:
   source:
     id: ExecuteUnitRequestHandlerBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\Base\ExecuteUnitRequestHandlerBase.cs
-    startLine: 54
+    startLine: 98
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling.Base
+  summary: "\nThe top level base mediation execute unit request handler\n"
+  example: []
   syntax:
     content: 'public abstract class ExecuteUnitRequestHandlerBase<TWebApi, TRequest> : IRequestHandler<TRequest, Unit> where TRequest : ExecuteUnitRequestBase<TWebApi>'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TRequest
+      description: The execute unit request to handle
     content.vb: >-
       Public MustInherit Class ExecuteUnitRequestHandlerBase(Of TWebApi, TRequest As ExecuteUnitRequestBase(Of TWebApi))
           Implements IRequestHandler(Of TRequest, Unit)
@@ -69,7 +73,7 @@ items:
   source:
     id: WebApiManager
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\Base\ExecuteUnitRequestHandlerBase.cs
-    startLine: 58
+    startLine: 102
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling.Base
@@ -100,7 +104,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\Base\ExecuteUnitRequestHandlerBase.cs
-    startLine: 60
+    startLine: 104
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling.Base
@@ -132,19 +136,24 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\Base\ExecuteUnitRequestHandlerBase.cs
-    startLine: 65
+    startLine: 115
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling.Base
+  summary: "\nHandling the execute unit request\n"
+  example: []
   syntax:
     content: public abstract Task<Unit> Handle(TRequest request, CancellationToken cancellationToken)
     parameters:
     - id: request
       type: '{TRequest}'
+      description: The execute result request
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: A cancellation token
     return:
       type: System.Threading.Tasks.Task{MediatR.Unit}
+      description: ''
     content.vb: Public MustOverride Function Handle(request As TRequest, cancellationToken As CancellationToken) As Task(Of Unit)
   overload: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`2.Handle*
   implements:

@@ -24,19 +24,27 @@ items:
   source:
     id: ExecuteResultRequestBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\ExecuteResultRequestBase.cs
-    startLine: 8
+    startLine: 17
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe top level base mediation execute result request (returning result)\n"
+  example: []
   syntax:
     content: 'public abstract class ExecuteResultRequestBase<TWebApi, TModelResultData, TApiResultData, TFormattedModelResultData, TApiRequestData, TModelRequestData> : ExecuteRequestBase<TFormattedModelResultData, TModelRequestData>, IRequest<TFormattedModelResultData>, IBaseRequest'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelResultData
+      description: The model result type
     - id: TApiResultData
+      description: The api result type
     - id: TFormattedModelResultData
+      description: The formatted model result type
     - id: TApiRequestData
+      description: The api request type
     - id: TModelRequestData
+      description: The model request type
     content.vb: >-
       Public MustInherit Class ExecuteResultRequestBase(Of TWebApi, TModelResultData, TApiResultData, TFormattedModelResultData, TApiRequestData, TModelRequestData)
           Inherits ExecuteRequestBase(Of TFormattedModelResultData, TModelRequestData)
@@ -90,19 +98,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\ExecuteResultRequestBase.cs
-    startLine: 12
+    startLine: 27
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe top level base mediation execute result request constructor\n"
+  example: []
   syntax:
     content: protected ExecuteResultRequestBase(Expression<Func<TWebApi, Task<TApiResultData>>> executeApiMethod, bool clearCache, Action<Exception> onException = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{{TWebApi},System.Threading.Tasks.Task{{TApiResultData}}}}
+      description: The request to execute
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(executeApiMethod As Expression(Of Func(Of TWebApi, Task(Of TApiResultData))), clearCache As Boolean, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`6.#ctor*
   nameWithType.vb: ExecuteResultRequestBase(Of TWebApi, TModelResultData, TApiResultData, TFormattedModelResultData, TApiRequestData, TModelRequestData).ExecuteResultRequestBase(Expression(Of Func(Of TWebApi, Task(Of TApiResultData))), Boolean, Action(Of Exception))
@@ -126,19 +139,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\ExecuteResultRequestBase.cs
-    startLine: 18
+    startLine: 39
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe top level base mediation execute result request constructor\n"
+  example: []
   syntax:
     content: protected ExecuteResultRequestBase(Expression<Func<CancellationToken, TWebApi, Task<TApiResultData>>> executeApiMethod, bool clearCache, Action<Exception> onException = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,{TWebApi},System.Threading.Tasks.Task{{TApiResultData}}}}
+      description: The request to execute
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(executeApiMethod As Expression(Of Func(Of CancellationToken, TWebApi, Task(Of TApiResultData))), clearCache As Boolean, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`6.#ctor*
   nameWithType.vb: ExecuteResultRequestBase(Of TWebApi, TModelResultData, TApiResultData, TFormattedModelResultData, TApiRequestData, TModelRequestData).ExecuteResultRequestBase(Expression(Of Func(Of CancellationToken, TWebApi, Task(Of TApiResultData))), Boolean, Action(Of Exception))
@@ -162,21 +180,27 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\ExecuteResultRequestBase.cs
-    startLine: 25
+    startLine: 53
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe top level base mediation execute result request constructor\n"
+  example: []
   syntax:
     content: protected ExecuteResultRequestBase(Expression<Func<Context, TWebApi, Task<TApiResultData>>> executeApiMethod, Context context, bool clearCache, Action<Exception> onException = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,{TWebApi},System.Threading.Tasks.Task{{TApiResultData}}}}
+      description: The request to execute
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(executeApiMethod As Expression(Of Func(Of Context, TWebApi, Task(Of TApiResultData))), context As Context, clearCache As Boolean, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`6.#ctor*
   nameWithType.vb: ExecuteResultRequestBase(Of TWebApi, TModelResultData, TApiResultData, TFormattedModelResultData, TApiRequestData, TModelRequestData).ExecuteResultRequestBase(Expression(Of Func(Of Context, TWebApi, Task(Of TApiResultData))), Context, Boolean, Action(Of Exception))
@@ -200,21 +224,27 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\ExecuteResultRequestBase.cs
-    startLine: 31
+    startLine: 66
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe top level base mediation execute result request constructor\n"
+  example: []
   syntax:
     content: protected ExecuteResultRequestBase(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResultData>>> executeApiMethod, Context context, bool clearCache, Action<Exception> onException = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,{TWebApi},System.Threading.Tasks.Task{{TApiResultData}}}}
+      description: The request to execute
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(executeApiMethod As Expression(Of Func(Of Context, CancellationToken, TWebApi, Task(Of TApiResultData))), context As Context, clearCache As Boolean, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`6.#ctor*
   nameWithType.vb: ExecuteResultRequestBase(Of TWebApi, TModelResultData, TApiResultData, TFormattedModelResultData, TApiRequestData, TModelRequestData).ExecuteResultRequestBase(Expression(Of Func(Of Context, CancellationToken, TWebApi, Task(Of TApiResultData))), Context, Boolean, Action(Of Exception))
@@ -238,21 +268,27 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\ExecuteResultRequestBase.cs
-    startLine: 38
+    startLine: 80
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe top level base mediation execute result request constructor\n"
+  example: []
   syntax:
     content: protected ExecuteResultRequestBase(Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod, TModelRequestData modelRequestData, bool clearCache, Action<Exception> onException = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{{TWebApi},{TApiRequestData},System.Threading.Tasks.Task{{TApiResultData}}}}
+      description: The request to execute
     - id: modelRequestData
       type: '{TModelRequestData}'
+      description: The data provided to the request
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(executeApiMethod As Expression(Of Func(Of TWebApi, TApiRequestData, Task(Of TApiResultData))), modelRequestData As TModelRequestData, clearCache As Boolean, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`6.#ctor*
   nameWithType.vb: ExecuteResultRequestBase(Of TWebApi, TModelResultData, TApiResultData, TFormattedModelResultData, TApiRequestData, TModelRequestData).ExecuteResultRequestBase(Expression(Of Func(Of TWebApi, TApiRequestData, Task(Of TApiResultData))), TModelRequestData, Boolean, Action(Of Exception))
@@ -276,21 +312,27 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\ExecuteResultRequestBase.cs
-    startLine: 45
+    startLine: 94
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe top level base mediation execute result request constructor\n"
+  example: []
   syntax:
     content: protected ExecuteResultRequestBase(Expression<Func<CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod, TModelRequestData modelRequestData, bool clearCache, Action<Exception> onException = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,{TWebApi},{TApiRequestData},System.Threading.Tasks.Task{{TApiResultData}}}}
+      description: The request to execute
     - id: modelRequestData
       type: '{TModelRequestData}'
+      description: The data provided to the request
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(executeApiMethod As Expression(Of Func(Of CancellationToken, TWebApi, TApiRequestData, Task(Of TApiResultData))), modelRequestData As TModelRequestData, clearCache As Boolean, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`6.#ctor*
   nameWithType.vb: ExecuteResultRequestBase(Of TWebApi, TModelResultData, TApiResultData, TFormattedModelResultData, TApiRequestData, TModelRequestData).ExecuteResultRequestBase(Expression(Of Func(Of CancellationToken, TWebApi, TApiRequestData, Task(Of TApiResultData))), TModelRequestData, Boolean, Action(Of Exception))
@@ -314,23 +356,30 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\ExecuteResultRequestBase.cs
-    startLine: 52
+    startLine: 109
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe top level base mediation execute result request constructor\n"
+  example: []
   syntax:
     content: protected ExecuteResultRequestBase(Expression<Func<Context, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod, TModelRequestData modelRequestData, Context context, bool clearCache, Action<Exception> onException = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,{TWebApi},{TApiRequestData},System.Threading.Tasks.Task{{TApiResultData}}}}
+      description: The request to execute
     - id: modelRequestData
       type: '{TModelRequestData}'
+      description: The data provided to the request
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(executeApiMethod As Expression(Of Func(Of Context, TWebApi, TApiRequestData, Task(Of TApiResultData))), modelRequestData As TModelRequestData, context As Context, clearCache As Boolean, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`6.#ctor*
   nameWithType.vb: ExecuteResultRequestBase(Of TWebApi, TModelResultData, TApiResultData, TFormattedModelResultData, TApiRequestData, TModelRequestData).ExecuteResultRequestBase(Expression(Of Func(Of Context, TWebApi, TApiRequestData, Task(Of TApiResultData))), TModelRequestData, Context, Boolean, Action(Of Exception))
@@ -354,23 +403,30 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\ExecuteResultRequestBase.cs
-    startLine: 59
+    startLine: 124
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe top level base mediation execute result request constructor\n"
+  example: []
   syntax:
     content: protected ExecuteResultRequestBase(Expression<Func<Context, CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod, TModelRequestData modelRequestData, Context context, bool clearCache, Action<Exception> onException = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,{TWebApi},{TApiRequestData},System.Threading.Tasks.Task{{TApiResultData}}}}
+      description: The request to execute
     - id: modelRequestData
       type: '{TModelRequestData}'
+      description: The data provided to the request
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(executeApiMethod As Expression(Of Func(Of Context, CancellationToken, TWebApi, TApiRequestData, Task(Of TApiResultData))), modelRequestData As TModelRequestData, context As Context, clearCache As Boolean, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`6.#ctor*
   nameWithType.vb: ExecuteResultRequestBase(Of TWebApi, TModelResultData, TApiResultData, TFormattedModelResultData, TApiRequestData, TModelRequestData).ExecuteResultRequestBase(Expression(Of Func(Of Context, CancellationToken, TWebApi, TApiRequestData, Task(Of TApiResultData))), TModelRequestData, Context, Boolean, Action(Of Exception))
@@ -394,10 +450,12 @@ items:
   source:
     id: ClearCache
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\ExecuteResultRequestBase.cs
-    startLine: 67
+    startLine: 135
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nAsking to clear cache before sending the request\n"
+  example: []
   syntax:
     content: public bool ClearCache { get; }
     parameters: []

@@ -17,15 +17,19 @@ items:
   source:
     id: DeleteCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\DeleteCommand.cs
-    startLine: 7
+    startLine: 12
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding
+  summary: "\nThe mediation Delete command\n"
+  example: []
   syntax:
     content: 'public class DeleteCommand<T, TKey> : DeleteCommandBase<T, TKey, Unit>, IMediationCommand<TKey, Unit>, IRequest<Unit>, IBaseRequest'
     typeParameters:
     - id: T
+      description: The api entity type
     - id: TKey
+      description: The entity&apos;s crud key type
     content.vb: >-
       Public Class DeleteCommand(Of T, TKey)
           Inherits DeleteCommandBase(Of T, TKey, Unit)
@@ -73,17 +77,21 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\DeleteCommand.cs
-    startLine: 9
+    startLine: 19
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding
+  summary: "\nThe mediation Delete command constructor\n"
+  example: []
   syntax:
     content: public DeleteCommand(TKey key, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TKey}'
+      description: The entity&apos;s crud key
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Public Sub New(key As TKey, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Cruding.DeleteCommand`2.#ctor*
   nameWithType.vb: DeleteCommand(Of T, TKey).DeleteCommand(TKey, Action(Of Exception))
@@ -107,19 +115,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\DeleteCommand.cs
-    startLine: 13
+    startLine: 29
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding
+  summary: "\nThe mediation Delete command constructor\n"
+  example: []
   syntax:
     content: public DeleteCommand(TKey key, Context context, Action<Exception> onException = null)
     parameters:
     - id: key
       type: '{TKey}'
+      description: The entity&apos;s crud key
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Public Sub New(key As TKey, context As Context, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Cruding.DeleteCommand`2.#ctor*
   nameWithType.vb: DeleteCommand(Of T, TKey).DeleteCommand(TKey, Context, Action(Of Exception))

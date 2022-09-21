@@ -20,14 +20,17 @@ items:
   source:
     id: DistributedCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.Caching\DistributedCacheHandler.cs
-    startLine: 9
+    startLine: 13
   assemblies:
   - Apizr.Extensions.Microsoft.Caching
   namespace: Apizr
+  summary: "\nDistributed cache handler implementation\n"
+  example: []
   syntax:
     content: 'public class DistributedCacheHandler<TCache> : ICacheHandler'
     typeParameters:
     - id: TCache
+      description: ''
     content.vb: >-
       Public Class DistributedCacheHandler(Of TCache)
           Implements ICacheHandler
@@ -66,7 +69,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.Caching\DistributedCacheHandler.cs
-    startLine: 14
+    startLine: 18
   assemblies:
   - Apizr.Extensions.Microsoft.Caching
   namespace: Apizr
@@ -99,23 +102,30 @@ items:
   source:
     id: SetAsync
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.Caching\DistributedCacheHandler.cs
-    startLine: 20
+    startLine: 25
   assemblies:
   - Apizr.Extensions.Microsoft.Caching
   namespace: Apizr
+  summary: "\nMap Apizr cache saving method to your cache handler method\n"
+  example: []
   syntax:
     content: public async Task SetAsync(string key, object value, TimeSpan? lifeSpan = null, CancellationToken cancellationToken = default(CancellationToken))
     parameters:
     - id: key
       type: System.String
+      description: The key to cache at
     - id: value
       type: System.Object
+      description: The value to cache
     - id: lifeSpan
       type: System.Nullable{System.TimeSpan}
+      description: The optional life span
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: An optional cancellation token
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Public Function SetAsync(key As String, value As Object, lifeSpan As TimeSpan? = Nothing, cancellationToken As CancellationToken = Nothing) As Task
   overload: Apizr.DistributedCacheHandler`1.SetAsync*
   implements:
@@ -142,21 +152,26 @@ items:
   source:
     id: GetAsync
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.Caching\DistributedCacheHandler.cs
-    startLine: 40
+    startLine: 46
   assemblies:
   - Apizr.Extensions.Microsoft.Caching
   namespace: Apizr
+  summary: "\nMap Apizr cache getting method to your cache handler method\n"
+  example: []
   syntax:
     content: public async Task<TData> GetAsync<TData>(string key, CancellationToken cancellationToken = default(CancellationToken))
     parameters:
     - id: key
       type: System.String
+      description: The key to get from
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: An optional cancellation token
     typeParameters:
     - id: TData
     return:
       type: System.Threading.Tasks.Task{{TData}}
+      description: ''
     content.vb: Public Function GetAsync(Of TData)(key As String, cancellationToken As CancellationToken = Nothing) As Task(Of TData)
   overload: Apizr.DistributedCacheHandler`1.GetAsync*
   implements:
@@ -183,19 +198,24 @@ items:
   source:
     id: RemoveAsync
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.Caching\DistributedCacheHandler.cs
-    startLine: 58
+    startLine: 65
   assemblies:
   - Apizr.Extensions.Microsoft.Caching
   namespace: Apizr
+  summary: "\nMap Apizr cache removing method to your cache handler method\n"
+  example: []
   syntax:
     content: public async Task<bool> RemoveAsync(string key, CancellationToken cancellationToken = default(CancellationToken))
     parameters:
     - id: key
       type: System.String
+      description: The key to remove from
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: An optional cancellation token
     return:
       type: System.Threading.Tasks.Task{System.Boolean}
+      description: ''
     content.vb: Public Function RemoveAsync(key As String, cancellationToken As CancellationToken = Nothing) As Task(Of Boolean)
   overload: Apizr.DistributedCacheHandler`1.RemoveAsync*
   implements:
@@ -221,17 +241,21 @@ items:
   source:
     id: ClearAsync
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.Caching\DistributedCacheHandler.cs
-    startLine: 71
+    startLine: 79
   assemblies:
   - Apizr.Extensions.Microsoft.Caching
   namespace: Apizr
+  summary: "\nMap Apizr cache clearing method to your cache handler method\n"
+  example: []
   syntax:
     content: public Task ClearAsync(CancellationToken cancellationToken = default(CancellationToken))
     parameters:
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: An optional cancellation token
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Public Function ClearAsync(cancellationToken As CancellationToken = Nothing) As Task
   overload: Apizr.DistributedCacheHandler`1.ClearAsync*
   implements:

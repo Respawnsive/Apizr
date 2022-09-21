@@ -17,14 +17,17 @@ items:
   source:
     id: ExecuteResultRequestHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\ExecuteResultRequestHandler.cs
-    startLine: 52
+    startLine: 65
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling
+  summary: "\nThe mediation execute result request handler\n"
+  example: []
   syntax:
     content: 'public class ExecuteResultRequestHandler<TWebApi, TModelData, TApiData> : ExecuteResultRequestHandlerBase<TWebApi, TModelData, TApiData, ExecuteResultRequest<TWebApi, TModelData, TApiData>>, IRequestHandler<ExecuteResultRequest<TWebApi, TModelData, TApiData>, TModelData>'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelData
     - id: TApiData
     content.vb: >-
@@ -70,7 +73,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\ExecuteResultRequestHandler.cs
-    startLine: 56
+    startLine: 69
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling
@@ -102,10 +105,12 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\ExecuteResultRequestHandler.cs
-    startLine: 60
+    startLine: 74
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling
+  summary: "\nHandling the execute result request\n"
+  example: []
   syntax:
     content: public override Task<TModelData> Handle(ExecuteResultRequest<TWebApi, TModelData, TApiData> request, CancellationToken cancellationToken)
     parameters:
@@ -113,8 +118,10 @@ items:
       type: Apizr.Mediation.Requesting.ExecuteResultRequest{{TWebApi},{TModelData},{TApiData}}
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: A cancellation token
     return:
       type: System.Threading.Tasks.Task{{TModelData}}
+      description: ''
     content.vb: Public Overrides Function Handle(request As ExecuteResultRequest(Of TWebApi, TModelData, TApiData), cancellationToken As CancellationToken) As Task(Of TModelData)
   overridden: Apizr.Mediation.Requesting.Handling.Base.ExecuteResultRequestHandlerBase{{TWebApi},{TModelData},{TApiData},Apizr.Mediation.Requesting.ExecuteResultRequest{{TWebApi},{TModelData},{TApiData}}}.Handle(Apizr.Mediation.Requesting.ExecuteResultRequest{{TWebApi},{TModelData},{TApiData}},System.Threading.CancellationToken)
   overload: Apizr.Mediation.Requesting.Handling.ExecuteResultRequestHandler`3.Handle*

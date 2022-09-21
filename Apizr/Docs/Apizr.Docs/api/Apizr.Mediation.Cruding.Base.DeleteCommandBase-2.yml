@@ -17,15 +17,18 @@ items:
   source:
     id: DeleteCommandBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\DeleteCommandBase.cs
-    startLine: 22
+    startLine: 43
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  summary: "\nThe top level base mediation Delete command\n"
+  example: []
   syntax:
     content: 'public abstract class DeleteCommandBase<T, TResultData> : DeleteCommandBase<T, int, TResultData>, IMediationCommand<int, TResultData>, IRequest<TResultData>, IBaseRequest'
     typeParameters:
     - id: T
     - id: TResultData
+      description: The api result type
     content.vb: >-
       Public MustInherit Class DeleteCommandBase(Of T, TResultData)
           Inherits DeleteCommandBase(Of T, Integer, TResultData)
@@ -78,10 +81,11 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\DeleteCommandBase.cs
-    startLine: 24
+    startLine: 46
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  example: []
   syntax:
     content: protected DeleteCommandBase(int key, Action<Exception> onException = null)
     parameters:
@@ -112,10 +116,11 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\Base\DeleteCommandBase.cs
-    startLine: 28
+    startLine: 51
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Base
+  example: []
   syntax:
     content: protected DeleteCommandBase(int key, Context context, Action<Exception> onException = null)
     parameters:

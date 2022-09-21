@@ -14,11 +14,17 @@ namespace Apizr.Mediation.Commanding
     /// <typeparam name="TModelRequestData">The model request type to map from</typeparam>
     public abstract class MediationCommandBase<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData> : RequestBase<TModelResultData>, IMediationCommand<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>
     {
+        /// <inheritdoc />
         protected MediationCommandBase(Action<Exception> onException = null) : base(onException)
         {
 
         }
 
+        /// <summary>
+        /// The top level base mediation command constructor
+        /// </summary>
+        /// <param name="context">The Polly context to pass through</param>
+        /// <param name="onException">Action to execute when an exception occurs</param>
         protected MediationCommandBase(Context context, Action<Exception> onException = null) : base(context, onException)
         {
 
@@ -32,11 +38,13 @@ namespace Apizr.Mediation.Commanding
     /// <typeparam name="TResultData">The api result type</typeparam>
     public abstract class MediationCommandBase<TRequestData, TResultData> : RequestBase<TResultData>, IMediationCommand<TRequestData, TResultData>
     {
+        /// <inheritdoc />
         protected MediationCommandBase(Action<Exception> onException = null) : base(onException)
         {
 
         }
 
+        /// <inheritdoc />
         protected MediationCommandBase(Context context, Action<Exception> onException = null) : base(context, onException)
         {
 
@@ -49,11 +57,13 @@ namespace Apizr.Mediation.Commanding
     /// <typeparam name="TRequestData">The api request type</typeparam>
     public abstract class MediationCommandBase<TRequestData> : RequestBase<Unit>, IMediationCommand<TRequestData>
     {
+        /// <inheritdoc />
         protected MediationCommandBase(Action<Exception> onException = null) : base(onException)
         {
 
         }
 
+        /// <inheritdoc />
         protected MediationCommandBase(Context context, Action<Exception> onException = null) : base(context, onException)
         {
 
@@ -65,11 +75,13 @@ namespace Apizr.Mediation.Commanding
     /// </summary>
     public abstract class MediationCommandBase : RequestBase<Unit>, IMediationCommand
     {
+        /// <inheritdoc />
         protected MediationCommandBase(Action<Exception> onException = null) : base(onException)
         {
 
         }
 
+        /// <inheritdoc />
         protected MediationCommandBase(Context context, Action<Exception> onException = null) : base(context, onException)
         {
 

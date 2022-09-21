@@ -19,16 +19,21 @@ items:
   source:
     id: ExecuteUnitRequestBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\ExecuteUnitRequestBase.cs
-    startLine: 28
+    startLine: 67
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe top level base mediation execute unit request (returning no result)\n"
+  example: []
   syntax:
     content: 'public abstract class ExecuteUnitRequestBase<TWebApi, TModelData, TApiData> : ExecuteRequestBase<Unit, TModelData>, IRequest<Unit>, IBaseRequest'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelData
+      description: The model data type
     - id: TApiData
+      description: The api data type
     content.vb: >-
       Public MustInherit Class ExecuteUnitRequestBase(Of TWebApi, TModelData, TApiData)
           Inherits ExecuteRequestBase(Of Unit, TModelData)
@@ -80,19 +85,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\ExecuteUnitRequestBase.cs
-    startLine: 30
+    startLine: 75
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe top level base mediation execute unit request constructor\n"
+  example: []
   syntax:
     content: protected ExecuteUnitRequestBase(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Action<Exception> onException = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{{TWebApi},{TApiData},System.Threading.Tasks.Task}}
+      description: The request to execute
     - id: modelData
       type: '{TModelData}'
+      description: The data provided to the request
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(executeApiMethod As Expression(Of Func(Of TWebApi, TApiData, Task)), modelData As TModelData, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`3.#ctor*
   nameWithType.vb: ExecuteUnitRequestBase(Of TWebApi, TModelData, TApiData).ExecuteUnitRequestBase(Expression(Of Func(Of TWebApi, TApiData, Task)), TModelData, Action(Of Exception))
@@ -116,19 +126,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\ExecuteUnitRequestBase.cs
-    startLine: 34
+    startLine: 85
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe top level base mediation execute unit request constructor\n"
+  example: []
   syntax:
     content: protected ExecuteUnitRequestBase(Expression<Func<CancellationToken, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Action<Exception> onException = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,{TWebApi},{TApiData},System.Threading.Tasks.Task}}
+      description: The request to execute
     - id: modelData
       type: '{TModelData}'
+      description: The data provided to the request
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(executeApiMethod As Expression(Of Func(Of CancellationToken, TWebApi, TApiData, Task)), modelData As TModelData, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`3.#ctor*
   nameWithType.vb: ExecuteUnitRequestBase(Of TWebApi, TModelData, TApiData).ExecuteUnitRequestBase(Expression(Of Func(Of CancellationToken, TWebApi, TApiData, Task)), TModelData, Action(Of Exception))
@@ -152,21 +167,27 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\ExecuteUnitRequestBase.cs
-    startLine: 38
+    startLine: 96
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe top level base mediation execute unit request constructor\n"
+  example: []
   syntax:
     content: protected ExecuteUnitRequestBase(Expression<Func<Context, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Context context, Action<Exception> onException = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,{TWebApi},{TApiData},System.Threading.Tasks.Task}}
+      description: The request to execute
     - id: modelData
       type: '{TModelData}'
+      description: The data provided to the request
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(executeApiMethod As Expression(Of Func(Of Context, TWebApi, TApiData, Task)), modelData As TModelData, context As Context, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`3.#ctor*
   nameWithType.vb: ExecuteUnitRequestBase(Of TWebApi, TModelData, TApiData).ExecuteUnitRequestBase(Expression(Of Func(Of Context, TWebApi, TApiData, Task)), TModelData, Context, Action(Of Exception))
@@ -190,21 +211,27 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Base\ExecuteUnitRequestBase.cs
-    startLine: 42
+    startLine: 107
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Base
+  summary: "\nThe top level base mediation execute unit request constructor\n"
+  example: []
   syntax:
     content: protected ExecuteUnitRequestBase(Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Context context, Action<Exception> onException = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,{TWebApi},{TApiData},System.Threading.Tasks.Task}}
+      description: The request to execute
     - id: modelData
       type: '{TModelData}'
+      description: The data provided to the request
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(executeApiMethod As Expression(Of Func(Of Context, CancellationToken, TWebApi, TApiData, Task)), modelData As TModelData, context As Context, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`3.#ctor*
   nameWithType.vb: ExecuteUnitRequestBase(Of TWebApi, TModelData, TApiData).ExecuteUnitRequestBase(Expression(Of Func(Of Context, CancellationToken, TWebApi, TApiData, Task)), TModelData, Context, Action(Of Exception))

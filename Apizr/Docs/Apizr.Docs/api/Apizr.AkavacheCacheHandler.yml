@@ -23,10 +23,12 @@ items:
   source:
     id: AkavacheCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Akavache\AkavacheCacheHandler.cs
-    startLine: 11
+    startLine: 14
   assemblies:
   - Apizr.Integrations.Akavache
   namespace: Apizr
+  summary: "\nAkavache cache handler implementation\n"
+  example: []
   syntax:
     content: 'public class AkavacheCacheHandler : ICacheHandler'
     content.vb: >-
@@ -64,7 +66,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Akavache\AkavacheCacheHandler.cs
-    startLine: 18
+    startLine: 21
   assemblies:
   - Apizr.Integrations.Akavache
   namespace: Apizr
@@ -92,7 +94,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Akavache\AkavacheCacheHandler.cs
-    startLine: 26
+    startLine: 29
   assemblies:
   - Apizr.Integrations.Akavache
   namespace: Apizr
@@ -127,7 +129,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Akavache\AkavacheCacheHandler.cs
-    startLine: 34
+    startLine: 37
   assemblies:
   - Apizr.Integrations.Akavache
   namespace: Apizr
@@ -159,7 +161,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Akavache\AkavacheCacheHandler.cs
-    startLine: 44
+    startLine: 47
   assemblies:
   - Apizr.Integrations.Akavache
   namespace: Apizr
@@ -197,23 +199,30 @@ items:
   source:
     id: SetAsync
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Akavache\AkavacheCacheHandler.cs
-    startLine: 50
+    startLine: 54
   assemblies:
   - Apizr.Integrations.Akavache
   namespace: Apizr
+  summary: "\nMap Apizr cache saving method to your cache handler method\n"
+  example: []
   syntax:
     content: public Task SetAsync(string key, object value, TimeSpan? lifeSpan = null, CancellationToken cancellationToken = default(CancellationToken))
     parameters:
     - id: key
       type: System.String
+      description: The key to cache at
     - id: value
       type: System.Object
+      description: The value to cache
     - id: lifeSpan
       type: System.Nullable{System.TimeSpan}
+      description: The optional life span
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: An optional cancellation token
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Public Function SetAsync(key As String, value As Object, lifeSpan As TimeSpan? = Nothing, cancellationToken As CancellationToken = Nothing) As Task
   overload: Apizr.AkavacheCacheHandler.SetAsync*
   implements:
@@ -239,21 +248,27 @@ items:
   source:
     id: GetAsync
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Akavache\AkavacheCacheHandler.cs
-    startLine: 58
+    startLine: 63
   assemblies:
   - Apizr.Integrations.Akavache
   namespace: Apizr
+  summary: "\nMap Apizr cache getting method to your cache handler method\n"
+  example: []
   syntax:
     content: public Task<T> GetAsync<T>(string key, CancellationToken cancellationToken = default(CancellationToken))
     parameters:
     - id: key
       type: System.String
+      description: The key to get from
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: An optional cancellation token
     typeParameters:
     - id: T
+      description: The expected value type
     return:
       type: System.Threading.Tasks.Task{{T}}
+      description: ''
     content.vb: Public Function GetAsync(Of T)(key As String, cancellationToken As CancellationToken = Nothing) As Task(Of T)
   overload: Apizr.AkavacheCacheHandler.GetAsync*
   implements:
@@ -279,19 +294,24 @@ items:
   source:
     id: RemoveAsync
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Akavache\AkavacheCacheHandler.cs
-    startLine: 65
+    startLine: 71
   assemblies:
   - Apizr.Integrations.Akavache
   namespace: Apizr
+  summary: "\nMap Apizr cache removing method to your cache handler method\n"
+  example: []
   syntax:
     content: public Task<bool> RemoveAsync(string key, CancellationToken cancellationToken = default(CancellationToken))
     parameters:
     - id: key
       type: System.String
+      description: The key to remove from
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: An optional cancellation token
     return:
       type: System.Threading.Tasks.Task{System.Boolean}
+      description: ''
     content.vb: Public Function RemoveAsync(key As String, cancellationToken As CancellationToken = Nothing) As Task(Of Boolean)
   overload: Apizr.AkavacheCacheHandler.RemoveAsync*
   implements:
@@ -314,17 +334,21 @@ items:
   source:
     id: ClearAsync
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Akavache\AkavacheCacheHandler.cs
-    startLine: 73
+    startLine: 80
   assemblies:
   - Apizr.Integrations.Akavache
   namespace: Apizr
+  summary: "\nMap Apizr cache clearing method to your cache handler method\n"
+  example: []
   syntax:
     content: public Task ClearAsync(CancellationToken cancellationToken = default(CancellationToken))
     parameters:
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: An optional cancellation token
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Public Function ClearAsync(cancellationToken As CancellationToken = Nothing) As Task
   overload: Apizr.AkavacheCacheHandler.ClearAsync*
   implements:

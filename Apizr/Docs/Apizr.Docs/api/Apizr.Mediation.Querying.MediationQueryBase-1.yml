@@ -20,14 +20,17 @@ items:
   source:
     id: MediationQueryBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Querying\MediationQueryBase.cs
-    startLine: 6
+    startLine: 10
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Querying
+  summary: "\nThe base mediation query getting some <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TResultData</code> data\n"
+  example: []
   syntax:
     content: 'public abstract class MediationQueryBase<TResultData> : PrioritizedRequestBase<TResultData>, IMediationQuery<TResultData>, IRequest<TResultData>, IBaseRequest'
     typeParameters:
     - id: TResultData
+      description: The returned data
     content.vb: >-
       Public MustInherit Class MediationQueryBase(Of TResultData)
           Inherits PrioritizedRequestBase(Of TResultData)
@@ -79,17 +82,21 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Querying\MediationQueryBase.cs
-    startLine: 8
+    startLine: 17
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Querying
+  summary: "\nThe base mediation query constructor\n"
+  example: []
   syntax:
     content: protected MediationQueryBase(bool clearCache, Action<Exception> onException = null)
     parameters:
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(clearCache As Boolean, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Querying.MediationQueryBase`1.#ctor*
   nameWithType.vb: MediationQueryBase(Of TResultData).MediationQueryBase(Boolean, Action(Of Exception))
@@ -113,19 +120,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Querying\MediationQueryBase.cs
-    startLine: 13
+    startLine: 28
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Querying
+  summary: "\nThe base mediation query constructor\n"
+  example: []
   syntax:
     content: protected MediationQueryBase(int priority, bool clearCache, Action<Exception> onException = null)
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority to apply
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(priority As Integer, clearCache As Boolean, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Querying.MediationQueryBase`1.#ctor*
   nameWithType.vb: MediationQueryBase(Of TResultData).MediationQueryBase(Int32, Boolean, Action(Of Exception))
@@ -149,19 +161,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Querying\MediationQueryBase.cs
-    startLine: 18
+    startLine: 39
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Querying
+  summary: "\nThe base mediation query constructor\n"
+  example: []
   syntax:
     content: protected MediationQueryBase(Context context, bool clearCache, Action<Exception> onException = null)
     parameters:
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(context As Context, clearCache As Boolean, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Querying.MediationQueryBase`1.#ctor*
   nameWithType.vb: MediationQueryBase(Of TResultData).MediationQueryBase(Context, Boolean, Action(Of Exception))
@@ -185,21 +202,27 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Querying\MediationQueryBase.cs
-    startLine: 23
+    startLine: 51
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Querying
+  summary: "\nThe base mediation query constructor\n"
+  example: []
   syntax:
     content: protected MediationQueryBase(int priority, Context context, bool clearCache, Action<Exception> onException = null)
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority to apply
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     - id: onException
       type: System.Action{System.Exception}
+      description: Action to execute when an exception occurs
     content.vb: Protected Sub New(priority As Integer, context As Context, clearCache As Boolean, onException As Action(Of Exception) = Nothing)
   overload: Apizr.Mediation.Querying.MediationQueryBase`1.#ctor*
   nameWithType.vb: MediationQueryBase(Of TResultData).MediationQueryBase(Int32, Context, Boolean, Action(Of Exception))
@@ -223,10 +246,12 @@ items:
   source:
     id: ClearCache
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Querying\MediationQueryBase.cs
-    startLine: 28
+    startLine: 59
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Querying
+  summary: "\nAsking to clear cache before sending the request\n"
+  example: []
   syntax:
     content: public bool ClearCache { get; }
     parameters: []

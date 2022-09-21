@@ -46,10 +46,12 @@ items:
   source:
     id: ApizrExtendedRegistryBuilder
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 12
+    startLine: 13
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegistry builder options available for extended registrations\n"
+  example: []
   syntax:
     content: 'public class ApizrExtendedRegistryBuilder : IApizrExtendedRegistryBuilder, IApizrExtendedRegistryBuilder<IApizrExtendedRegistry, IApizrExtendedRegistryBuilder, IApizrExtendedProperOptionsBuilder, IApizrExtendedCommonOptionsBuilder>, IApizrRegistryBuilderBase<IApizrExtendedRegistry, IApizrExtendedRegistryBuilder, IApizrExtendedProperOptionsBuilder, IApizrExtendedCommonOptionsBuilder>, IApizrRegistryBuilderBase'
     content.vb: >-
@@ -90,7 +92,7 @@ items:
   source:
     id: Registry
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 14
+    startLine: 15
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
@@ -119,7 +121,7 @@ items:
   source:
     id: CommonOptions
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 15
+    startLine: 16
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
@@ -148,7 +150,7 @@ items:
   source:
     id: Services
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 16
+    startLine: 17
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
@@ -177,10 +179,12 @@ items:
   source:
     id: ApizrRegistry
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 27
+    startLine: 29
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nApizr registry\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistry ApizrRegistry { get; }
     parameters: []
@@ -210,10 +214,12 @@ items:
   source:
     id: AddGroup
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 29
+    startLine: 32
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nGroup registrations sharing specific common options\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddGroup(Action<IApizrExtendedRegistryBuilder> registryGroupBuilder, Action<IApizrExtendedCommonOptionsBuilder> commonOptionsBuilder = null)
     parameters:
@@ -223,6 +229,7 @@ items:
       type: System.Action{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddGroup(registryGroupBuilder As Action(Of IApizrExtendedRegistryBuilder), commonOptionsBuilder As Action(Of IApizrExtendedCommonOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddGroup*
   implements:
@@ -248,10 +255,12 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 40
+    startLine: 44
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nCreate a <xref href=\"Apizr.ApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> instance for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> object type (class), \nwith key of type <xref href=\"System.Int32\" data-throw-if-not-resolved=\"false\"></xref> and &quot;ReadAll&quot; query result of type <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref>\nand ReadAll query parameters of type IDictionary{string,object}\n"
+  example: []
   syntax:
     content: >-
       public IApizrExtendedRegistryBuilder AddCrudManagerFor<T>(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
@@ -261,8 +270,10 @@ items:
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     typeParameters:
     - id: T
+      description: The object type to manage with crud api calls (class)
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(Of T As Class)(optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -288,10 +299,12 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 45
+    startLine: 50
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nCreate a <xref href=\"Apizr.ApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> instance for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> object type (class), \nwith key of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> (primitive) and &quot;ReadAll&quot; query result of type <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref>\nand ReadAll query parameters of type IDictionary{string,object}\n"
+  example: []
   syntax:
     content: >-
       public IApizrExtendedRegistryBuilder AddCrudManagerFor<T, TKey>(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
@@ -301,9 +314,12 @@ items:
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     typeParameters:
     - id: T
+      description: The object type to manage with crud api calls (class)
     - id: TKey
+      description: The object key type (primitive)
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(Of T As Class, TKey)(optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -329,10 +345,12 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 50
+    startLine: 56
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nCreate a <xref href=\"Apizr.ApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> instance for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> object type (class), \nwith key of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> (primitive) and &quot;ReadAll&quot; query result of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TReadAllResult</code>\nand ReadAll query parameters of type IDictionary{string,object}\n"
+  example: []
   syntax:
     content: >-
       public IApizrExtendedRegistryBuilder AddCrudManagerFor<T, TKey, TReadAllResult>(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
@@ -342,10 +360,17 @@ items:
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     typeParameters:
     - id: T
+      description: The object type to manage with crud api calls (class)
     - id: TKey
+      description: The object key type (primitive)
     - id: TReadAllResult
+      description: >-
+        &quot;ReadAll&quot; query result type
+
+        (should inherit from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(Of T As Class, TKey, TReadAllResult)(optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -371,10 +396,12 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 55
+    startLine: 62
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nCreate a <xref href=\"Apizr.ApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> instance for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> object type (class), \nwith key of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> (primitive) and &quot;ReadAll&quot; query result of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TReadAllResult</code>\nand ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)\n"
+  example: []
   syntax:
     content: >-
       public IApizrExtendedRegistryBuilder AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams>(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
@@ -384,11 +411,19 @@ items:
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     typeParameters:
     - id: T
+      description: The object type to manage with crud api calls (class)
     - id: TKey
+      description: The object key type (primitive)
     - id: TReadAllResult
+      description: >-
+        &quot;ReadAll&quot; query result type
+
+        (should inherit from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
     - id: TReadAllParams
+      description: ReadAll query parameters
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(Of T As Class, TKey, TReadAllResult, TReadAllParams)(optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -414,10 +449,12 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 61
+    startLine: 69
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister a custom <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> object type, \nwith key of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> (primitive) and &quot;ReadAll&quot; query result of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TReadAllResult</code>\n(inheriting from <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> or be of class type)\nand ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)\n"
+  example: []
   syntax:
     content: >-
       public IApizrExtendedRegistryBuilder AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
@@ -427,12 +464,21 @@ items:
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     typeParameters:
     - id: T
+      description: The object type to manage with crud api calls
     - id: TKey
+      description: The object key type (primitive)
     - id: TReadAllResult
+      description: >-
+        &quot;ReadAll&quot; query result type
+
+        (should inherit from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
     - id: TReadAllParams
+      description: ReadAll query parameters
     - id: TApizrManager
+      description: A custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> implementation
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(Of T As Class, TKey, TReadAllResult, TReadAllParams, TApizrManager As IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)))(optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -458,19 +504,23 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 67
+    startLine: 76
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedType</code> object type (class), \nwith key of type <xref href=\"System.Int32\" data-throw-if-not-resolved=\"false\"></xref> and &quot;ReadAll&quot; query result of type <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref>\nand ReadAll query parameters of type IDictionary{string,object}\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type crudedType, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: crudedType
       type: System.Type
+      description: The object type to manage with crud api calls (class)
     - id: optionsBuilder
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(crudedType As Type, optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -496,21 +546,26 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 72
+    startLine: 82
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedType</code> object type (class), \nwith key of type <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedKeyType</code> (primitive) and &quot;ReadAll&quot; query result of type <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref>\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type crudedType, Type crudedKeyType, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: crudedType
       type: System.Type
+      description: The object type to manage with crud api calls (class)
     - id: crudedKeyType
       type: System.Type
+      description: The object key type (primitive)
     - id: optionsBuilder
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(crudedType As Type, crudedKeyType As Type, optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -536,23 +591,32 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 77
+    startLine: 88
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedType</code> object type (class), \nwith key of type <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedKeyType</code> (primitive) and &quot;ReadAll&quot; query result of type <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedReadAllResultType</code>\n(inheriting from <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> or be of class type)\nand ReadAll query parameters of type IDictionary{string,object}\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type crudedType, Type crudedKeyType, Type crudedReadAllResultType, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: crudedType
       type: System.Type
+      description: The object type to manage with crud api calls (class)
     - id: crudedKeyType
       type: System.Type
+      description: The object key type (primitive)
     - id: crudedReadAllResultType
       type: System.Type
+      description: >-
+        &quot;ReadAll&quot; query result type
+
+        (should inherit from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
     - id: optionsBuilder
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(crudedType As Type, crudedKeyType As Type, crudedReadAllResultType As Type, optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -578,25 +642,35 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 83
+    startLine: 95
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedType</code> object type (class), \nwith key of type <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedKeyType</code> (primitive) and &quot;ReadAll&quot; query result of type <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedReadAllResultType</code>\n(inheriting from <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> or be of class type)\nand ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type crudedType, Type crudedKeyType, Type crudedReadAllResultType, Type crudedReadAllParamsType, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: crudedType
       type: System.Type
+      description: The object type to manage with crud api calls (class)
     - id: crudedKeyType
       type: System.Type
+      description: The object key type (primitive)
     - id: crudedReadAllResultType
       type: System.Type
+      description: >-
+        &quot;ReadAll&quot; query result type
+
+        (should inherit from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
     - id: crudedReadAllParamsType
       type: System.Type
+      description: ReadAll query parameters type
     - id: optionsBuilder
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(crudedType As Type, crudedKeyType As Type, crudedReadAllResultType As Type, crudedReadAllParamsType As Type, optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -622,27 +696,38 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 89
+    startLine: 102
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister a custom <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedType</code> object type (class), \nwith key of type <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedKeyType</code> (primitive) and &quot;ReadAll&quot; query result of type <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedReadAllResultType</code>\n(inheriting from <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> or be of class type)\nand ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type crudedType, Type crudedKeyType, Type crudedReadAllResultType, Type crudedReadAllParamsType, Type apizrManagerType, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: crudedType
       type: System.Type
+      description: The object type to manage with crud api calls
     - id: crudedKeyType
       type: System.Type
+      description: The object key type
     - id: crudedReadAllResultType
       type: System.Type
+      description: >-
+        &quot;ReadAll&quot; query result type
+
+        (should inherit from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
     - id: crudedReadAllParamsType
       type: System.Type
+      description: ReadAll query parameters type
     - id: apizrManagerType
       type: System.Type
+      description: A custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> implementation type
     - id: optionsBuilder
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(crudedType As Type, crudedKeyType As Type, crudedReadAllResultType As Type, crudedReadAllParamsType As Type, apizrManagerType As Type, optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -668,17 +753,21 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 149
+    startLine: 163
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.Requesting.CrudEntityAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated classes\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddCrudManagerFor(params Type[] assemblyMarkerTypes)
     parameters:
     - id: assemblyMarkerTypes
       type: System.Type[]
+      description: Any type contained in assembly to scan for <xref href="Apizr.Requesting.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(ParamArray assemblyMarkerTypes As Type()) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -704,17 +793,21 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 153
+    startLine: 168
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.Requesting.CrudEntityAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated classes\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddCrudManagerFor(params Assembly[] assemblies)
     parameters:
     - id: assemblies
       type: System.Reflection.Assembly[]
+      description: Any assembly to scan for <xref href="Apizr.Requesting.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(ParamArray assemblies As Assembly()) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -740,10 +833,12 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 157
+    startLine: 173
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.Requesting.CrudEntityAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated classes\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddCrudManagerFor(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes)
     parameters:
@@ -751,8 +846,10 @@ items:
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     - id: assemblyMarkerTypes
       type: System.Type[]
+      description: Any type contained in assembly to scan for <xref href="Apizr.Requesting.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing, ParamArray assemblyMarkerTypes As Type()) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -778,10 +875,12 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 161
+    startLine: 178
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.Requesting.CrudEntityAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated classes\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddCrudManagerFor(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies)
     parameters:
@@ -789,8 +888,10 @@ items:
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     - id: assemblies
       type: System.Reflection.Assembly[]
+      description: Any assembly to scan for <xref href="Apizr.Requesting.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing, ParamArray assemblies As Assembly()) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -816,19 +917,24 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 165
+    startLine: 183
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister a custom <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.Requesting.CrudEntityAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated classes\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type apizrManagerType, params Type[] assemblyMarkerTypes)
     parameters:
     - id: apizrManagerType
       type: System.Type
+      description: A custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> implementation type
     - id: assemblyMarkerTypes
       type: System.Type[]
+      description: Any type contained in assembly to scan for <xref href="Apizr.Requesting.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(apizrManagerType As Type, ParamArray assemblyMarkerTypes As Type()) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -854,19 +960,24 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 170
+    startLine: 189
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister a custom <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.Requesting.CrudEntityAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated classes\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type apizrManagerType, params Assembly[] assemblies)
     parameters:
     - id: apizrManagerType
       type: System.Type
+      description: A custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> implementation type
     - id: assemblies
       type: System.Reflection.Assembly[]
+      description: Any assembly to scan for <xref href="Apizr.Requesting.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(apizrManagerType As Type, ParamArray assemblies As Assembly()) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -892,21 +1003,26 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 175
+    startLine: 195
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister a custom <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.Requesting.CrudEntityAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated classes\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type apizrManagerType, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder, params Type[] assemblyMarkerTypes)
     parameters:
     - id: apizrManagerType
       type: System.Type
+      description: A custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> implementation type
     - id: optionsBuilder
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     - id: assemblyMarkerTypes
       type: System.Type[]
+      description: Any type contained in assembly to scan for <xref href="Apizr.Requesting.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(apizrManagerType As Type, optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder), ParamArray assemblyMarkerTypes As Type()) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -932,21 +1048,26 @@ items:
   source:
     id: AddCrudManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 180
+    startLine: 201
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister a custom <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.Requesting.CrudEntityAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated classes\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type apizrManagerType, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder, params Assembly[] assemblies)
     parameters:
     - id: apizrManagerType
       type: System.Type
+      description: A custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> implementation type
     - id: optionsBuilder
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     - id: assemblies
       type: System.Reflection.Assembly[]
+      description: Any assembly to scan for <xref href="Apizr.Requesting.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddCrudManagerFor(apizrManagerType As Type, optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder), ParamArray assemblies As Assembly()) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor*
   implements:
@@ -972,10 +1093,12 @@ items:
   source:
     id: AddManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 239
+    startLine: 261
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nCreate a <xref href=\"Apizr.ApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> instance\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddManagerFor<TWebApi>(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
     parameters:
@@ -983,8 +1106,10 @@ items:
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     typeParameters:
     - id: TWebApi
+      description: The web api interface to manage
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddManagerFor(Of TWebApi)(optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddManagerFor*
   implements:
@@ -1010,10 +1135,12 @@ items:
   source:
     id: AddManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 243
+    startLine: 266
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister a custom <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref>\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddManagerFor<TWebApi, TApizrManager>(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
     parameters:
@@ -1021,9 +1148,12 @@ items:
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     typeParameters:
     - id: TWebApi
+      description: The web api interface to manage
     - id: TApizrManager
+      description: A custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> implementation
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddManagerFor(Of TWebApi, TApizrManager)(optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddManagerFor*
   implements:
@@ -1049,19 +1179,23 @@ items:
   source:
     id: AddManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 247
+    startLine: 271
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref>\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddManagerFor(Type webApiType, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: webApiType
       type: System.Type
+      description: The web api interface type to manage
     - id: optionsBuilder
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddManagerFor(webApiType As Type, optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddManagerFor*
   implements:
@@ -1087,10 +1221,12 @@ items:
   source:
     id: AddManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 251
+    startLine: 276
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister a <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.WebApiAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated interfaces\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddManagerFor(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes)
     parameters:
@@ -1098,8 +1234,10 @@ items:
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     - id: assemblyMarkerTypes
       type: System.Type[]
+      description: Any type contained in assembly to scan for <xref href="Apizr.WebApiAttribute" data-throw-if-not-resolved="false"></xref>
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddManagerFor(optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing, ParamArray assemblyMarkerTypes As Type()) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddManagerFor*
   implements:
@@ -1125,10 +1263,12 @@ items:
   source:
     id: AddManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 256
+    startLine: 282
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister a <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.WebApiAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated interfaces\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddManagerFor(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies)
     parameters:
@@ -1136,8 +1276,10 @@ items:
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     - id: assemblies
       type: System.Reflection.Assembly[]
+      description: Any assembly to scan for <xref href="Apizr.WebApiAttribute" data-throw-if-not-resolved="false"></xref>
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddManagerFor(optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing, ParamArray assemblies As Assembly()) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddManagerFor*
   implements:
@@ -1163,21 +1305,26 @@ items:
   source:
     id: AddManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 261
+    startLine: 288
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister a custom <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.WebApiAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated interfaces\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddManagerFor(Type apizrManagerType, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes)
     parameters:
     - id: apizrManagerType
       type: System.Type
+      description: A custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> implementation type
     - id: optionsBuilder
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     - id: assemblyMarkerTypes
       type: System.Type[]
+      description: Any type contained in assembly to scan for <xref href="Apizr.WebApiAttribute" data-throw-if-not-resolved="false"></xref>
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddManagerFor(apizrManagerType As Type, optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing, ParamArray assemblyMarkerTypes As Type()) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddManagerFor*
   implements:
@@ -1203,21 +1350,26 @@ items:
   source:
     id: AddManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 267
+    startLine: 295
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister a custom <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.WebApiAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated interfaces\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddManagerFor(Type apizrManagerType, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies)
     parameters:
     - id: apizrManagerType
       type: System.Type
+      description: A custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> implementation type
     - id: optionsBuilder
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     - id: assemblies
       type: System.Reflection.Assembly[]
+      description: Any assembly to scan for <xref href="Apizr.WebApiAttribute" data-throw-if-not-resolved="false"></xref>
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddManagerFor(apizrManagerType As Type, optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing, ParamArray assemblies As Assembly()) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddManagerFor*
   implements:
@@ -1243,21 +1395,26 @@ items:
   source:
     id: AddManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Registry\ApizrExtendedRegistryBuilder.cs
-    startLine: 296
+    startLine: 325
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Registry
+  summary: "\nRegister a custom <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref>\n"
+  example: []
   syntax:
     content: public IApizrExtendedRegistryBuilder AddManagerFor(Type webApiType, Type apizrManagerType, Action<IApizrExtendedProperOptionsBuilder> properOptionsBuilder = null)
     parameters:
     - id: webApiType
       type: System.Type
+      description: The web api interface type to manage
     - id: apizrManagerType
       type: System.Type
+      description: A custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> implementation type
     - id: properOptionsBuilder
       type: System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder}
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+      description: ''
     content.vb: Public Function AddManagerFor(webApiType As Type, apizrManagerType As Type, properOptionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
   overload: Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddManagerFor*
   implements:

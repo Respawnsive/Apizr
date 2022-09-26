@@ -5,6 +5,9 @@ using Apizr.Optional.Requesting.Sending;
 
 namespace Apizr.Optional.Configuring.Registry
 {
+    /// <summary>
+    /// Registry options available for extended registrations with optional mediation
+    /// </summary>
     public interface IApizrOptionalMediationEnumerableRegistry : IEnumerable<KeyValuePair<Type, Func<IApizrOptionalMediatorBase>>>
     {
         #region Contains

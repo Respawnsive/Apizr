@@ -17,16 +17,21 @@ items:
   source:
     id: ExecuteOptionalUnitRequestHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Handling\ExecuteOptionalUnitRequestHandler.cs
-    startLine: 13
+    startLine: 19
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Handling
+  summary: "\nThe mediation execute optional unit request handler\n"
+  example: []
   syntax:
     content: 'public class ExecuteOptionalUnitRequestHandler<TWebApi, TModelData, TApiData> : ExecuteOptionalUnitRequestHandlerBase<TWebApi, TModelData, TApiData, ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>>, IRequestHandler<ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, Option<Unit, ApizrException>>'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelData
+      description: The model data type
     - id: TApiData
+      description: The api data type
     content.vb: >-
       Public Class ExecuteOptionalUnitRequestHandler(Of TWebApi, TModelData, TApiData)
           Inherits ExecuteOptionalUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData))
@@ -70,7 +75,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Handling\ExecuteOptionalUnitRequestHandler.cs
-    startLine: 15
+    startLine: 21
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Handling
@@ -102,10 +107,12 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Handling\ExecuteOptionalUnitRequestHandler.cs
-    startLine: 19
+    startLine: 26
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Handling
+  summary: "\nHandling the execute unit request\n"
+  example: []
   syntax:
     content: public override async Task<Option<Unit, ApizrException>> Handle(ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData> request, CancellationToken cancellationToken)
     parameters:
@@ -113,8 +120,10 @@ items:
       type: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{{TWebApi},{TModelData},{TApiData}}
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: A cancellation token
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Overrides Function Handle(request As ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData), cancellationToken As CancellationToken) As Task(Of  Option(Of Unit, ApizrException)
   overridden: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase{{TWebApi},{TModelData},{TApiData},Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{{TWebApi},{TModelData},{TApiData}}}.Handle(Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{{TWebApi},{TModelData},{TApiData}},System.Threading.CancellationToken)
   overload: Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler`3.Handle*

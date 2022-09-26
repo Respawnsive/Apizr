@@ -19,16 +19,21 @@ items:
   source:
     id: ExecuteOptionalUnitRequest
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\ExecuteOptionalUnitRequest.cs
-    startLine: 9
+    startLine: 15
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting
+  summary: "\nThe mediation execute optional unit request (returning no result)\n"
+  example: []
   syntax:
     content: 'public class ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData> : ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData>, IRequest<Option<Unit, ApizrException>>, IBaseRequest'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelData
+      description: The model data type
     - id: TApiData
+      description: The api data type
     content.vb: >-
       Public Class ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData)
           Inherits ExecuteOptionalUnitRequestBase(Of TWebApi, TModelData, TApiData)
@@ -78,17 +83,21 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\ExecuteOptionalUnitRequest.cs
-    startLine: 11
+    startLine: 22
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting
+  summary: "\nThe mediation execute optional unit request constructor\n"
+  example: []
   syntax:
     content: public ExecuteOptionalUnitRequest(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{{TWebApi},{TApiData},System.Threading.Tasks.Task}}
+      description: The request to execute
     - id: modelData
       type: '{TModelData}'
+      description: The data provided to the request
     content.vb: Public Sub New(executeApiMethod As Expression(Of Func(Of TWebApi, TApiData, Task)), modelData As TModelData)
   overload: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3.#ctor*
   nameWithType.vb: ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData).ExecuteOptionalUnitRequest(Expression(Of Func(Of TWebApi, TApiData, Task)), TModelData)
@@ -112,17 +121,21 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\ExecuteOptionalUnitRequest.cs
-    startLine: 15
+    startLine: 31
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting
+  summary: "\nThe mediation execute optional unit request constructor\n"
+  example: []
   syntax:
     content: public ExecuteOptionalUnitRequest(Expression<Func<CancellationToken, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,{TWebApi},{TApiData},System.Threading.Tasks.Task}}
+      description: The request to execute
     - id: modelData
       type: '{TModelData}'
+      description: The data provided to the request
     content.vb: Public Sub New(executeApiMethod As Expression(Of Func(Of CancellationToken, TWebApi, TApiData, Task)), modelData As TModelData)
   overload: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3.#ctor*
   nameWithType.vb: ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData).ExecuteOptionalUnitRequest(Expression(Of Func(Of CancellationToken, TWebApi, TApiData, Task)), TModelData)
@@ -146,19 +159,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\ExecuteOptionalUnitRequest.cs
-    startLine: 19
+    startLine: 41
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting
+  summary: "\nThe mediation execute optional unit request constructor\n"
+  example: []
   syntax:
     content: public ExecuteOptionalUnitRequest(Expression<Func<Context, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Context context)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,{TWebApi},{TApiData},System.Threading.Tasks.Task}}
+      description: The request to execute
     - id: modelData
       type: '{TModelData}'
+      description: The data provided to the request
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     content.vb: Public Sub New(executeApiMethod As Expression(Of Func(Of Context, TWebApi, TApiData, Task)), modelData As TModelData, context As Context)
   overload: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3.#ctor*
   nameWithType.vb: ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData).ExecuteOptionalUnitRequest(Expression(Of Func(Of Context, TWebApi, TApiData, Task)), TModelData, Context)
@@ -182,19 +200,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\ExecuteOptionalUnitRequest.cs
-    startLine: 23
+    startLine: 51
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting
+  summary: "\nThe mediation execute optional unit request constructor\n"
+  example: []
   syntax:
     content: public ExecuteOptionalUnitRequest(Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Context context)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,{TWebApi},{TApiData},System.Threading.Tasks.Task}}
+      description: The request to execute
     - id: modelData
       type: '{TModelData}'
+      description: The data provided to the request
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     content.vb: Public Sub New(executeApiMethod As Expression(Of Func(Of Context, CancellationToken, TWebApi, TApiData, Task)), modelData As TModelData, context As Context)
   overload: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3.#ctor*
   nameWithType.vb: ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData).ExecuteOptionalUnitRequest(Expression(Of Func(Of Context, CancellationToken, TWebApi, TApiData, Task)), TModelData, Context)

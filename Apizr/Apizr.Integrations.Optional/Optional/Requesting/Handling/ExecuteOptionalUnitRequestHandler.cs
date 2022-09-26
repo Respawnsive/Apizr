@@ -11,12 +11,19 @@ using Polly;
 
 namespace Apizr.Optional.Requesting.Handling
 {
+    /// <summary>
+    /// The mediation execute optional unit request handler
+    /// </summary>
+    /// <typeparam name="TWebApi">The web api type</typeparam>
+    /// <typeparam name="TModelData">The model data type</typeparam>
+    /// <typeparam name="TApiData">The api data type</typeparam>
     public class ExecuteOptionalUnitRequestHandler<TWebApi, TModelData, TApiData> : ExecuteOptionalUnitRequestHandlerBase<TWebApi, TModelData, TApiData, ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>>
     {
         public ExecuteOptionalUnitRequestHandler(IApizrManager<TWebApi> webApiManager) : base(webApiManager)
         {
         }
 
+        /// <inheritdoc />
         public override async Task<Option<Unit, ApizrException>> Handle(ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData> request, CancellationToken cancellationToken)
         {
             try
@@ -74,12 +81,17 @@ namespace Apizr.Optional.Requesting.Handling
         }
     }
 
+    /// <summary>
+    /// The mediation execute optional unit request handler
+    /// </summary>
+    /// <typeparam name="TWebApi">The web api type</typeparam>
     public class ExecuteOptionalUnitRequestHandler<TWebApi> : ExecuteOptionalUnitRequestHandlerBase<TWebApi, ExecuteOptionalUnitRequest<TWebApi>>
     {
         public ExecuteOptionalUnitRequestHandler(IApizrManager<TWebApi> webApiManager) : base(webApiManager)
         {
         }
 
+        /// <inheritdoc />
         public override async Task<Option<Unit, ApizrException>> Handle(ExecuteOptionalUnitRequest<TWebApi> request,
             CancellationToken cancellationToken)
         {

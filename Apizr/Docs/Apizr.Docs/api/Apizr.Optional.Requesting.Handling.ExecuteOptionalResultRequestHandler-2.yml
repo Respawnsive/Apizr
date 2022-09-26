@@ -17,15 +17,19 @@ items:
   source:
     id: ExecuteOptionalResultRequestHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Handling\ExecuteOptionalResultRequestHandler.cs
-    startLine: 177
+    startLine: 198
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Handling
+  summary: "\nThe mediation execute optional result request handler\n"
+  example: []
   syntax:
     content: 'public class ExecuteOptionalResultRequestHandler<TWebApi, TApiData> : ExecuteOptionalResultRequestHandlerBase<TWebApi, TApiData, ExecuteOptionalResultRequest<TWebApi, TApiData>>, IRequestHandler<ExecuteOptionalResultRequest<TWebApi, TApiData>, Option<TApiData, ApizrException<TApiData>>>'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TApiData
+      description: The api data type
     content.vb: >-
       Public Class ExecuteOptionalResultRequestHandler(Of TWebApi, TApiData)
           Inherits ExecuteOptionalResultRequestHandlerBase(Of TWebApi, TApiData, ExecuteOptionalResultRequest(Of TWebApi, TApiData))
@@ -70,7 +74,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Handling\ExecuteOptionalResultRequestHandler.cs
-    startLine: 180
+    startLine: 201
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Handling
@@ -102,10 +106,12 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Handling\ExecuteOptionalResultRequestHandler.cs
-    startLine: 184
+    startLine: 206
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Handling
+  summary: "\nHandling the execute result request\n"
+  example: []
   syntax:
     content: public override async Task<Option<TApiData, ApizrException<TApiData>>> Handle(ExecuteOptionalResultRequest<TWebApi, TApiData> request, CancellationToken cancellationToken)
     parameters:
@@ -113,8 +119,10 @@ items:
       type: Apizr.Optional.Requesting.ExecuteOptionalResultRequest{{TWebApi},{TApiData}}
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: A cancellation token
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TApiData},Apizr.ApizrException{{TApiData}}}}
+      description: ''
     content.vb: Public Overrides Function Handle(request As ExecuteOptionalResultRequest(Of TWebApi, TApiData), cancellationToken As CancellationToken) As Task(Of  Option(Of TApiData, ApizrException(Of TApiData))
   overridden: Apizr.Mediation.Requesting.Handling.Base.ExecuteResultRequestHandlerBase{{TWebApi},{TApiData},{TApiData},Optional.Option{{TApiData},Apizr.ApizrException{{TApiData}}},Apizr.Optional.Requesting.ExecuteOptionalResultRequest{{TWebApi},{TApiData}}}.Handle(Apizr.Optional.Requesting.ExecuteOptionalResultRequest{{TWebApi},{TApiData}},System.Threading.CancellationToken)
   overload: Apizr.Optional.Requesting.Handling.ExecuteOptionalResultRequestHandler`2.Handle*

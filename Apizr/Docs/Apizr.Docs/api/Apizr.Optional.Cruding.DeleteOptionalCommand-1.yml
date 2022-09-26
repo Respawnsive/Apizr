@@ -17,14 +17,17 @@ items:
   source:
     id: DeleteOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\DeleteOptionalCommand.cs
-    startLine: 18
+    startLine: 36
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding
+  summary: "\nThe mediation Delete optional command\n"
+  example: []
   syntax:
     content: 'public class DeleteOptionalCommand<T> : DeleteCommandBase<T, Option<Unit, ApizrException>>, IMediationCommand<int, Option<Unit, ApizrException>>, IRequest<Option<Unit, ApizrException>>, IBaseRequest'
     typeParameters:
     - id: T
+      description: The api entity type
     content.vb: "Public Class DeleteOptionalCommand(Of T)\n    Inherits DeleteCommandBase(Of T,  Option(Of Unit, ApizrException) ) \n    Implements IMediationCommand(Of Integer,  Option(Of Unit, ApizrException) ), IRequest(Of  Option(Of Unit, ApizrException) ), IBaseRequest"
   inheritance:
   - System.Object
@@ -70,15 +73,18 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\DeleteOptionalCommand.cs
-    startLine: 20
+    startLine: 42
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding
+  summary: "\nThe mediation Delete optional command constructor\n"
+  example: []
   syntax:
     content: public DeleteOptionalCommand(int key)
     parameters:
     - id: key
       type: System.Int32
+      description: The entity&apos;s crud key
     content.vb: Public Sub New(key As Integer)
   overload: Apizr.Optional.Cruding.DeleteOptionalCommand`1.#ctor*
   nameWithType.vb: DeleteOptionalCommand(Of T).DeleteOptionalCommand(Int32)
@@ -101,17 +107,21 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\DeleteOptionalCommand.cs
-    startLine: 24
+    startLine: 51
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding
+  summary: "\nThe mediation Delete optional command constructor\n"
+  example: []
   syntax:
     content: public DeleteOptionalCommand(int key, Context context)
     parameters:
     - id: key
       type: System.Int32
+      description: The entity&apos;s crud key
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     content.vb: Public Sub New(key As Integer, context As Context)
   overload: Apizr.Optional.Cruding.DeleteOptionalCommand`1.#ctor*
   nameWithType.vb: DeleteOptionalCommand(Of T).DeleteOptionalCommand(Int32, Context)

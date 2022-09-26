@@ -16,16 +16,21 @@ items:
   source:
     id: ExecuteOptionalResultRequestHandlerBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Handling\Base\ExecuteOptionalResultRequestHandlerBase.cs
-    startLine: 29
+    startLine: 51
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Handling.Base
+  summary: "\nThe top level base mediation execute optional result request handler\n"
+  example: []
   syntax:
     content: 'public abstract class ExecuteOptionalResultRequestHandlerBase<TWebApi, TApiData, TRequest> : ExecuteResultRequestHandlerBase<TWebApi, TApiData, TApiData, Option<TApiData, ApizrException<TApiData>>, TRequest>, IRequestHandler<TRequest, Option<TApiData, ApizrException<TApiData>>> where TRequest : ExecuteOptionalResultRequestBase<TWebApi, TApiData>'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TApiData
+      description: The api data type
     - id: TRequest
+      description: The request to handle
     content.vb: "Public MustInherit Class ExecuteOptionalResultRequestHandlerBase(Of TWebApi, TApiData, TRequest As ExecuteOptionalResultRequestBase(Of TWebApi, TApiData))\n    Inherits ExecuteResultRequestHandlerBase(Of TWebApi, TApiData, TApiData,  Option(Of TApiData, ApizrException(Of TApiData)) ,  TRequest) \n    Implements IRequestHandler(Of TRequest,  Option(Of TApiData, ApizrException(Of TApiData)) )"
   inheritance:
   - System.Object
@@ -70,7 +75,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Handling\Base\ExecuteOptionalResultRequestHandlerBase.cs
-    startLine: 34
+    startLine: 56
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Handling.Base

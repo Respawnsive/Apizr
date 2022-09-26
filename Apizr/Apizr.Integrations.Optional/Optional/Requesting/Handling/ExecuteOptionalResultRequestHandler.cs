@@ -10,6 +10,14 @@ using Polly;
 
 namespace Apizr.Optional.Requesting.Handling
 {
+    /// <summary>
+    /// The mediation execute optional result request handler
+    /// </summary>
+    /// <typeparam name="TWebApi">The web api type</typeparam>
+    /// <typeparam name="TModelResultData">The model result type</typeparam>
+    /// <typeparam name="TApiResultData">The api result type</typeparam>
+    /// <typeparam name="TApiRequestData">The api request type</typeparam>
+    /// <typeparam name="TModelRequestData">The model request type</typeparam>
     public class ExecuteOptionalResultRequestHandler<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData> :
         ExecuteOptionalResultRequestHandlerBase<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData,
             ExecuteOptionalResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>>
@@ -19,6 +27,7 @@ namespace Apizr.Optional.Requesting.Handling
         {
         }
 
+        /// <inheritdoc />
         public override async Task<Option<TModelResultData, ApizrException<TModelResultData>>> Handle(ExecuteOptionalResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData> request, CancellationToken cancellationToken)
         {
             try
@@ -92,6 +101,12 @@ namespace Apizr.Optional.Requesting.Handling
         }
     }
 
+    /// <summary>
+    /// The mediation execute optional result request handler
+    /// </summary>
+    /// <typeparam name="TWebApi">The web api type</typeparam>
+    /// <typeparam name="TModelData">The model data type</typeparam>
+    /// <typeparam name="TApiData">The api data type</typeparam>
     public class ExecuteOptionalResultRequestHandler<TWebApi, TModelData, TApiData> :
         ExecuteOptionalResultRequestHandlerBase<TWebApi, TModelData, TApiData,
             ExecuteOptionalResultRequest<TWebApi, TModelData, TApiData>>
@@ -101,6 +116,7 @@ namespace Apizr.Optional.Requesting.Handling
         {
         }
 
+        /// <inheritdoc />
         public override async Task<Option<TModelData, ApizrException<TModelData>>> Handle(
             ExecuteOptionalResultRequest<TWebApi, TModelData, TApiData> request, CancellationToken cancellationToken)
         {
@@ -175,6 +191,11 @@ namespace Apizr.Optional.Requesting.Handling
         }
     }
 
+    /// <summary>
+    /// The mediation execute optional result request handler
+    /// </summary>
+    /// <typeparam name="TWebApi">The web api type</typeparam>
+    /// <typeparam name="TApiData">The api data type</typeparam>
     public class ExecuteOptionalResultRequestHandler<TWebApi, TApiData> : ExecuteOptionalResultRequestHandlerBase<TWebApi,
         TApiData, ExecuteOptionalResultRequest<TWebApi, TApiData>>
     {
@@ -182,6 +203,7 @@ namespace Apizr.Optional.Requesting.Handling
         {
         }
 
+        /// <inheritdoc />
         public override async Task<Option<TApiData, ApizrException<TApiData>>> Handle(
             ExecuteOptionalResultRequest<TWebApi, TApiData> request, CancellationToken cancellationToken)
         {

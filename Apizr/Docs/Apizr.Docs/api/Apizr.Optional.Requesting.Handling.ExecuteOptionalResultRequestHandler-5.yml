@@ -17,18 +17,25 @@ items:
   source:
     id: ExecuteOptionalResultRequestHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Handling\ExecuteOptionalResultRequestHandler.cs
-    startLine: 12
+    startLine: 20
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Handling
+  summary: "\nThe mediation execute optional result request handler\n"
+  example: []
   syntax:
     content: 'public class ExecuteOptionalResultRequestHandler<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData> : ExecuteOptionalResultRequestHandlerBase<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData, ExecuteOptionalResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>>, IRequestHandler<ExecuteOptionalResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>, Option<TModelResultData, ApizrException<TModelResultData>>>'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelResultData
+      description: The model result type
     - id: TApiResultData
+      description: The api result type
     - id: TApiRequestData
+      description: The api request type
     - id: TModelRequestData
+      description: The model request type
     content.vb: >-
       Public Class ExecuteOptionalResultRequestHandler(Of TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData)
           Inherits ExecuteOptionalResultRequestHandlerBase(Of TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData, ExecuteOptionalResultRequest(Of TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData))
@@ -73,7 +80,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Handling\ExecuteOptionalResultRequestHandler.cs
-    startLine: 16
+    startLine: 24
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Handling
@@ -105,10 +112,12 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Handling\ExecuteOptionalResultRequestHandler.cs
-    startLine: 21
+    startLine: 30
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Handling
+  summary: "\nHandling the execute result request\n"
+  example: []
   syntax:
     content: public override async Task<Option<TModelResultData, ApizrException<TModelResultData>>> Handle(ExecuteOptionalResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData> request, CancellationToken cancellationToken)
     parameters:
@@ -116,8 +125,10 @@ items:
       type: Apizr.Optional.Requesting.ExecuteOptionalResultRequest{{TWebApi},{TModelResultData},{TApiResultData},{TApiRequestData},{TModelRequestData}}
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: A cancellation token
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelResultData},Apizr.ApizrException{{TModelResultData}}}}
+      description: ''
     content.vb: Public Overrides Function Handle(request As ExecuteOptionalResultRequest(Of TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData), cancellationToken As CancellationToken) As Task(Of  Option(Of TModelResultData, ApizrException(Of TModelResultData))
   overridden: Apizr.Mediation.Requesting.Handling.Base.ExecuteResultRequestHandlerBase{{TWebApi},{TModelResultData},{TApiResultData},Optional.Option{{TModelResultData},Apizr.ApizrException{{TModelResultData}}},{TApiRequestData},{TModelRequestData},Apizr.Optional.Requesting.ExecuteOptionalResultRequest{{TWebApi},{TModelResultData},{TApiResultData},{TApiRequestData},{TModelRequestData}}}.Handle(Apizr.Optional.Requesting.ExecuteOptionalResultRequest{{TWebApi},{TModelResultData},{TApiResultData},{TApiRequestData},{TModelRequestData}},System.Threading.CancellationToken)
   overload: Apizr.Optional.Requesting.Handling.ExecuteOptionalResultRequestHandler`5.Handle*

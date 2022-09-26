@@ -17,15 +17,19 @@ items:
   source:
     id: DeleteOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\DeleteOptionalCommand.cs
-    startLine: 7
+    startLine: 12
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding
+  summary: "\nThe mediation Delete optional command\n"
+  example: []
   syntax:
     content: 'public class DeleteOptionalCommand<T, TKey> : DeleteCommandBase<T, TKey, Option<Unit, ApizrException>>, IMediationCommand<TKey, Option<Unit, ApizrException>>, IRequest<Option<Unit, ApizrException>>, IBaseRequest'
     typeParameters:
     - id: T
+      description: The api entity type
     - id: TKey
+      description: The entity&apos;s crud key type
     content.vb: "Public Class DeleteOptionalCommand(Of T, TKey)\n    Inherits DeleteCommandBase(Of T, TKey,  Option(Of Unit, ApizrException) ) \n    Implements IMediationCommand(Of TKey,  Option(Of Unit, ApizrException) ), IRequest(Of  Option(Of Unit, ApizrException) ), IBaseRequest"
   inheritance:
   - System.Object
@@ -70,15 +74,18 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\DeleteOptionalCommand.cs
-    startLine: 9
+    startLine: 18
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding
+  summary: "\nThe mediation Delete optional command constructor\n"
+  example: []
   syntax:
     content: public DeleteOptionalCommand(TKey key)
     parameters:
     - id: key
       type: '{TKey}'
+      description: The entity&apos;s crud key
     content.vb: Public Sub New(key As TKey)
   overload: Apizr.Optional.Cruding.DeleteOptionalCommand`2.#ctor*
   nameWithType.vb: DeleteOptionalCommand(Of T, TKey).DeleteOptionalCommand(TKey)
@@ -101,17 +108,21 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\DeleteOptionalCommand.cs
-    startLine: 13
+    startLine: 27
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding
+  summary: "\nThe mediation Delete optional command constructor\n"
+  example: []
   syntax:
     content: public DeleteOptionalCommand(TKey key, Context context)
     parameters:
     - id: key
       type: '{TKey}'
+      description: The entity&apos;s crud key
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     content.vb: Public Sub New(key As TKey, context As Context)
   overload: Apizr.Optional.Cruding.DeleteOptionalCommand`2.#ctor*
   nameWithType.vb: DeleteOptionalCommand(Of T, TKey).DeleteOptionalCommand(TKey, Context)

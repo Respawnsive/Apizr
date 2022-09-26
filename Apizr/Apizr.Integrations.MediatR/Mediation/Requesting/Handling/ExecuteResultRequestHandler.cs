@@ -63,6 +63,8 @@ namespace Apizr.Mediation.Requesting.Handling
     /// The mediation execute result request handler
     /// </summary>
     /// <typeparam name="TWebApi">The web api type</typeparam>
+    /// <typeparam name="TModelData">The model data type</typeparam>
+    /// <typeparam name="TApiData">The api data type</typeparam>
     public class ExecuteResultRequestHandler<TWebApi, TModelData, TApiData> : ExecuteResultRequestHandlerBase<TWebApi,
         TModelData, TApiData, ExecuteResultRequest<TWebApi,
             TModelData, TApiData>>

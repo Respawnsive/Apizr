@@ -9,6 +9,14 @@ using Optional.Async.Extensions;
 
 namespace Apizr.Optional.Cruding.Handling
 {
+    /// <summary>
+    /// The Read optional query handler
+    /// </summary>
+    /// <typeparam name="TModelEntity">The model entity type</typeparam>
+    /// <typeparam name="TApiEntity">The api entity type</typeparam>
+    /// <typeparam name="TApiEntityKey">The api entity's crud key type</typeparam>
+    /// <typeparam name="TReadAllResult">The returned result type</typeparam>
+    /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     public class ReadOptionalQueryHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> : 
         ReadQueryHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, ReadOptionalQuery<TModelEntity, TApiEntityKey>, Option<TModelEntity, ApizrException<TModelEntity>>>
         where TModelEntity : class
@@ -36,6 +44,13 @@ namespace Apizr.Optional.Cruding.Handling
         }
     }
 
+    /// <summary>
+    /// The Read optional query handler
+    /// </summary>
+    /// <typeparam name="TModelEntity">The model entity type</typeparam>
+    /// <typeparam name="TApiEntity">The api entity type</typeparam>
+    /// <typeparam name="TReadAllResult">The returned result type</typeparam>
+    /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     public class ReadOptionalQueryHandler<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams> : 
         ReadQueryHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, ReadOptionalQuery<TModelEntity>, Option<TModelEntity, ApizrException<TModelEntity>>> 
         where TApiEntity : class

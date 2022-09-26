@@ -23,6 +23,9 @@ using Refit;
 [assembly: Apizr.Preserve]
 namespace Apizr
 {
+    /// <summary>
+    /// Optional with MediatR options builder extensions
+    /// </summary>
     public static class OptionalOptionsBuilderExtensions
     {
         /// <summary>

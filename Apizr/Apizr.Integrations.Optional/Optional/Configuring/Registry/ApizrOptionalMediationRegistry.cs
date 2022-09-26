@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Apizr.Optional.Configuring.Registry
 {
+    /// <inheritdoc cref="IApizrOptionalMediationConcurrentRegistry" />
     public class ApizrOptionalMediationRegistry : ApizrOptionalMediationRegistryBase, IApizrOptionalMediationConcurrentRegistry
     {
         private IServiceProvider _serviceProvider;
@@ -26,6 +27,7 @@ namespace Apizr.Optional.Configuring.Registry
             return this;
         }
 
+        /// <inheritdoc />
         public void AddOrUpdate(Type webApiType, Type serviceType)
         {
             var registry = ThrowIfNotConcurrentImplementation();

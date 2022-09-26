@@ -19,15 +19,19 @@ items:
   source:
     id: ExecuteOptionalResultRequest
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\ExecuteOptionalResultRequest.cs
-    startLine: 86
+    startLine: 201
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting
+  summary: "\nThe mediation execute optional result request (returning result)\n"
+  example: []
   syntax:
     content: 'public class ExecuteOptionalResultRequest<TWebApi, TApiData> : ExecuteOptionalResultRequestBase<TWebApi, TApiData>, IRequest<Option<TApiData, ApizrException<TApiData>>>, IBaseRequest'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TApiData
+      description: The api data type
     content.vb: >-
       Public Class ExecuteOptionalResultRequest(Of TWebApi, TApiData)
           Inherits ExecuteOptionalResultRequestBase(Of TWebApi, TApiData)
@@ -79,17 +83,21 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\ExecuteOptionalResultRequest.cs
-    startLine: 88
+    startLine: 208
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting
+  summary: "\nThe mediation execute optional result request constructor\n"
+  example: []
   syntax:
     content: public ExecuteOptionalResultRequest(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
+      description: The request to execute
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     content.vb: Public Sub New(executeApiMethod As Expression(Of Func(Of TWebApi, Task(Of TApiData))), clearCache As Boolean = False)
   overload: Apizr.Optional.Requesting.ExecuteOptionalResultRequest`2.#ctor*
   nameWithType.vb: ExecuteOptionalResultRequest(Of TWebApi, TApiData).ExecuteOptionalResultRequest(Expression(Of Func(Of TWebApi, Task(Of TApiData))), Boolean)
@@ -113,17 +121,21 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\ExecuteOptionalResultRequest.cs
-    startLine: 92
+    startLine: 217
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting
+  summary: "\nThe mediation execute optional result request constructor\n"
+  example: []
   syntax:
     content: public ExecuteOptionalResultRequest(Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
+      description: The request to execute
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     content.vb: Public Sub New(executeApiMethod As Expression(Of Func(Of CancellationToken, TWebApi, Task(Of TApiData))), clearCache As Boolean = False)
   overload: Apizr.Optional.Requesting.ExecuteOptionalResultRequest`2.#ctor*
   nameWithType.vb: ExecuteOptionalResultRequest(Of TWebApi, TApiData).ExecuteOptionalResultRequest(Expression(Of Func(Of CancellationToken, TWebApi, Task(Of TApiData))), Boolean)
@@ -147,19 +159,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\ExecuteOptionalResultRequest.cs
-    startLine: 96
+    startLine: 227
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting
+  summary: "\nThe mediation execute optional result request constructor\n"
+  example: []
   syntax:
     content: public ExecuteOptionalResultRequest(Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context, bool clearCache = false)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
+      description: The request to execute
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     content.vb: Public Sub New(executeApiMethod As Expression(Of Func(Of Context, TWebApi, Task(Of TApiData))), context As Context, clearCache As Boolean = False)
   overload: Apizr.Optional.Requesting.ExecuteOptionalResultRequest`2.#ctor*
   nameWithType.vb: ExecuteOptionalResultRequest(Of TWebApi, TApiData).ExecuteOptionalResultRequest(Expression(Of Func(Of Context, TWebApi, Task(Of TApiData))), Context, Boolean)
@@ -183,19 +200,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\ExecuteOptionalResultRequest.cs
-    startLine: 100
+    startLine: 237
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting
+  summary: "\nThe mediation execute optional result request constructor\n"
+  example: []
   syntax:
     content: public ExecuteOptionalResultRequest(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, Context context, bool clearCache = false)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
+      description: The request to execute
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     - id: clearCache
       type: System.Boolean
+      description: Asking to clear cache before sending
     content.vb: Public Sub New(executeApiMethod As Expression(Of Func(Of Context, CancellationToken, TWebApi, Task(Of TApiData))), context As Context, clearCache As Boolean = False)
   overload: Apizr.Optional.Requesting.ExecuteOptionalResultRequest`2.#ctor*
   nameWithType.vb: ExecuteOptionalResultRequest(Of TWebApi, TApiData).ExecuteOptionalResultRequest(Expression(Of Func(Of Context, CancellationToken, TWebApi, Task(Of TApiData))), Context, Boolean)

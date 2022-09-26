@@ -40,10 +40,12 @@ items:
   source:
     id: ApizrOptionalMediator
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 11
+    startLine: 12
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nApizr mediator to send request using MediatR by calling expression and returning optional result\n"
+  example: []
   syntax:
     content: 'public class ApizrOptionalMediator : IApizrOptionalMediator, IApizrOptionalMediatorBase, IApizrMediatorBase'
     content.vb: >-
@@ -83,7 +85,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 15
+    startLine: 16
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
@@ -112,19 +114,24 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 24
+    startLine: 26
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<Unit, ApizrException>> SendFor<TWebApi>(Expression<Func<TWebApi, Task>> executeApiMethod)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{{TWebApi},System.Threading.Tasks.Task}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     typeParameters:
     - id: TWebApi
+      description: The web api type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi)(executeApiMethod As Expression(Of Func(Of TWebApi, Task))) As Task(Of  Option(Of Unit, ApizrException)
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -150,21 +157,27 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 27
+    startLine: 30
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with a Polly Context and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<Unit, ApizrException>> SendFor<TWebApi>(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,{TWebApi},System.Threading.Tasks.Task}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: context
       type: Polly.Context
+      description: The Polly context
     typeParameters:
     - id: TWebApi
+      description: The web api type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi)(executeApiMethod As Expression(Of Func(Of Context, TWebApi, Task)), context As Context = Nothing) As Task(Of  Option(Of Unit, ApizrException)
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -190,21 +203,27 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 30
+    startLine: 34
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with a cancellation token and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<Unit, ApizrException>> SendFor<TWebApi>(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod, CancellationToken token = default(CancellationToken))
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,{TWebApi},System.Threading.Tasks.Task}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: token
       type: System.Threading.CancellationToken
+      description: The cancellation token
     typeParameters:
     - id: TWebApi
+      description: The web api type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi)(executeApiMethod As Expression(Of Func(Of CancellationToken, TWebApi, Task)), token As CancellationToken = Nothing) As Task(Of  Option(Of Unit, ApizrException)
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -230,23 +249,30 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 33
+    startLine: 38
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with a Polly Context and a cancellation token and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<Unit, ApizrException>> SendFor<TWebApi>(Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod, Context context = null, CancellationToken token = default(CancellationToken))
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,{TWebApi},System.Threading.Tasks.Task}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: token
       type: System.Threading.CancellationToken
+      description: The cancellation token
     typeParameters:
     - id: TWebApi
+      description: The web api type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi)(executeApiMethod As Expression(Of Func(Of Context, CancellationToken, TWebApi, Task)), context As Context = Nothing, token As CancellationToken = Nothing) As Task(Of  Option(Of Unit, ApizrException)
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -272,23 +298,31 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 40
+    startLine: 46
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with mapped request and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<Unit, ApizrException>> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{{TWebApi},{TApiData},System.Threading.Tasks.Task}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: modelData
       type: '{TModelData}'
+      description: The model data to map
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelData
+      description: The model request type to map from
     - id: TApiData
+      description: The api request type to map to
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi, TModelData, TApiData)(executeApiMethod As Expression(Of Func(Of TWebApi, TApiData, Task)), modelData As TModelData) As Task(Of  Option(Of Unit, ApizrException)
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -314,25 +348,34 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 43
+    startLine: 50
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with mapped request and a cancellation token and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<Unit, ApizrException>> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<CancellationToken, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, CancellationToken token = default(CancellationToken))
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,{TWebApi},{TApiData},System.Threading.Tasks.Task}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: modelData
       type: '{TModelData}'
+      description: The model data to map
     - id: token
       type: System.Threading.CancellationToken
+      description: A cancellation token
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelData
+      description: The model request type to map from
     - id: TApiData
+      description: The api request type to map to
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi, TModelData, TApiData)(executeApiMethod As Expression(Of Func(Of CancellationToken, TWebApi, TApiData, Task)), modelData As TModelData, token As CancellationToken = Nothing) As Task(Of  Option(Of Unit, ApizrException)
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -358,25 +401,34 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 47
+    startLine: 55
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with mapped request and a Polly Context and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<Unit, ApizrException>> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<Context, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Context context = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,{TWebApi},{TApiData},System.Threading.Tasks.Task}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: modelData
       type: '{TModelData}'
+      description: The model data to map
     - id: context
       type: Polly.Context
+      description: The Polly Context to pass through it all
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelData
+      description: The model request type to map from
     - id: TApiData
+      description: The api request type to map to
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi, TModelData, TApiData)(executeApiMethod As Expression(Of Func(Of Context, TWebApi, TApiData, Task)), modelData As TModelData, context As Context = Nothing) As Task(Of  Option(Of Unit, ApizrException)
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -402,27 +454,37 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 50
+    startLine: 59
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with mapped request, a Polly Context and cancellation token and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<Unit, ApizrException>> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Context context = null, CancellationToken token = default(CancellationToken))
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,{TWebApi},{TApiData},System.Threading.Tasks.Task}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: modelData
       type: '{TModelData}'
+      description: The model data to map
     - id: context
       type: Polly.Context
+      description: The Polly Context to pass through it all
     - id: token
       type: System.Threading.CancellationToken
+      description: A cancellation token
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelData
+      description: The model request type to map from
     - id: TApiData
+      description: The api request type to map to
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi, TModelData, TApiData)(executeApiMethod As Expression(Of Func(Of Context, CancellationToken, TWebApi, TApiData, Task)), modelData As TModelData, context As Context = Nothing, token As CancellationToken = Nothing) As Task(Of  Option(Of Unit, ApizrException)
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -448,22 +510,29 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 62
+    startLine: 72
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TWebApi, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TApiData
+      description: The api result type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TApiData},Apizr.ApizrException{{TApiData}}}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi, TApiData)(executeApiMethod As Expression(Of Func(Of TWebApi, Task(Of TApiData))), clearCache As Boolean = False) As Task(Of  Option(Of TApiData, ApizrException(Of TApiData))
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -489,24 +558,32 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 66
+    startLine: 77
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with a Polly Context and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TWebApi, TApiData>(Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null, bool clearCache = false)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TApiData
+      description: The api response
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TApiData},Apizr.ApizrException{{TApiData}}}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi, TApiData)(executeApiMethod As Expression(Of Func(Of Context, TWebApi, Task(Of TApiData))), context As Context = Nothing, clearCache As Boolean = False) As Task(Of  Option(Of TApiData, ApizrException(Of TApiData))
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -532,24 +609,32 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 71
+    startLine: 83
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with a cancellation token and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TWebApi, TApiData>(Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, CancellationToken token = default(CancellationToken), bool clearCache = false)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: token
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TApiData
+      description: The api response
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TApiData},Apizr.ApizrException{{TApiData}}}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi, TApiData)(executeApiMethod As Expression(Of Func(Of CancellationToken, TWebApi, Task(Of TApiData))), token As CancellationToken = Nothing, clearCache As Boolean = False) As Task(Of  Option(Of TApiData, ApizrException(Of TApiData))
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -575,26 +660,35 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 76
+    startLine: 89
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with a Polly Context and a cancellation token and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TWebApi, TApiData>(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null, CancellationToken token = default(CancellationToken), bool clearCache = false)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: token
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TApiData
+      description: The api response
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TApiData},Apizr.ApizrException{{TApiData}}}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi, TApiData)(executeApiMethod As Expression(Of Func(Of Context, CancellationToken, TWebApi, Task(Of TApiData))), context As Context = Nothing, token As CancellationToken = Nothing, clearCache As Boolean = False) As Task(Of  Option(Of TApiData, ApizrException(Of TApiData))
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -620,23 +714,31 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 85
+    startLine: 99
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR returning an optional mapped result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelData
+      description: The mapped model type to map to
     - id: TApiData
+      description: The api result type to map from
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelData},Apizr.ApizrException{{TModelData}}}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi, TModelData, TApiData)(executeApiMethod As Expression(Of Func(Of TWebApi, Task(Of TApiData))), clearCache As Boolean = False) As Task(Of  Option(Of TModelData, ApizrException(Of TModelData))
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -662,25 +764,34 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 89
+    startLine: 104
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with a Polly Context and returning an optional mapped result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null, bool clearCache = false)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelData
+      description: The mapped model type to map to
     - id: TApiData
+      description: The api result type to map from
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelData},Apizr.ApizrException{{TModelData}}}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi, TModelData, TApiData)(executeApiMethod As Expression(Of Func(Of Context, TWebApi, Task(Of TApiData))), context As Context = Nothing, clearCache As Boolean = False) As Task(Of  Option(Of TModelData, ApizrException(Of TModelData))
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -706,25 +817,34 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 94
+    startLine: 110
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with a cancellation token and returning an optional mapped result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, CancellationToken token = default(CancellationToken), bool clearCache = false)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: token
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelData
+      description: The mapped model type to map to
     - id: TApiData
+      description: The api result type to map from
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelData},Apizr.ApizrException{{TModelData}}}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi, TModelData, TApiData)(executeApiMethod As Expression(Of Func(Of CancellationToken, TWebApi, Task(Of TApiData))), token As CancellationToken = Nothing, clearCache As Boolean = False) As Task(Of  Option(Of TModelData, ApizrException(Of TModelData))
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -750,27 +870,37 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 100
+    startLine: 117
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with a Polly Context and a cancellation token and returning an optional mapped result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null, CancellationToken token = default(CancellationToken), bool clearCache = false)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: token
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelData
+      description: The mapped model type to map to
     - id: TApiData
+      description: The api result type to map from
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelData},Apizr.ApizrException{{TModelData}}}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi, TModelData, TApiData)(executeApiMethod As Expression(Of Func(Of Context, CancellationToken, TWebApi, Task(Of TApiData))), context As Context = Nothing, token As CancellationToken = Nothing, clearCache As Boolean = False) As Task(Of  Option(Of TModelData, ApizrException(Of TModelData))
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -796,25 +926,34 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 107
+    startLine: 125
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with a mapped request and returning an optional mapped result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, bool clearCache = false)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{{TWebApi},{TApiData},System.Threading.Tasks.Task{{TApiData}}}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: modelData
       type: '{TModelData}'
+      description: The model data to map
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelData
+      description: The mapped model type to map request from and result to
     - id: TApiData
+      description: The api result type to map request to and result from
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelData},Apizr.ApizrException{{TModelData}}}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi, TModelData, TApiData)(executeApiMethod As Expression(Of Func(Of TWebApi, TApiData, Task(Of TApiData))), modelData As TModelData, clearCache As Boolean = False) As Task(Of  Option(Of TModelData, ApizrException(Of TModelData))
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -840,27 +979,37 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 113
+    startLine: 132
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with a mapped request and a Polly Context and returning an optional mapped result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<Context, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Context context = null, bool clearCache = false)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,{TWebApi},{TApiData},System.Threading.Tasks.Task{{TApiData}}}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: modelData
       type: '{TModelData}'
+      description: The model data to map
     - id: context
       type: Polly.Context
+      description: The Polly Context to pass through it all
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelData
+      description: The mapped model type to map request from and result to
     - id: TApiData
+      description: The api result type to map request to and result from
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelData},Apizr.ApizrException{{TModelData}}}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi, TModelData, TApiData)(executeApiMethod As Expression(Of Func(Of Context, TWebApi, TApiData, Task(Of TApiData))), modelData As TModelData, context As Context = Nothing, clearCache As Boolean = False) As Task(Of  Option(Of TModelData, ApizrException(Of TModelData))
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -886,27 +1035,37 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 119
+    startLine: 139
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with a mapped request and a cancellation token and returning an optional mapped result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, CancellationToken token = default(CancellationToken), bool clearCache = false)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,{TWebApi},{TApiData},System.Threading.Tasks.Task{{TApiData}}}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: modelData
       type: '{TModelData}'
+      description: The model data to map
     - id: token
       type: System.Threading.CancellationToken
+      description: A cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelData
+      description: The mapped model type to map request from and result to
     - id: TApiData
+      description: The api result type to map request to and result from
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelData},Apizr.ApizrException{{TModelData}}}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi, TModelData, TApiData)(executeApiMethod As Expression(Of Func(Of CancellationToken, TWebApi, TApiData, Task(Of TApiData))), modelData As TModelData, token As CancellationToken = Nothing, clearCache As Boolean = False) As Task(Of  Option(Of TModelData, ApizrException(Of TModelData))
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -932,29 +1091,40 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 127
+    startLine: 148
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with a mapped request, a Polly Context and a cancellation token and returning an optional mapped result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Context context = null, CancellationToken token = default(CancellationToken), bool clearCache = false)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,{TWebApi},{TApiData},System.Threading.Tasks.Task{{TApiData}}}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: modelData
       type: '{TModelData}'
+      description: The model data to map
     - id: context
       type: Polly.Context
+      description: The Polly Context to pass through it all
     - id: token
       type: System.Threading.CancellationToken
+      description: A cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelData
+      description: The mapped model type to map request from and result to
     - id: TApiData
+      description: The api result type to map request to and result from
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelData},Apizr.ApizrException{{TModelData}}}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi, TModelData, TApiData)(executeApiMethod As Expression(Of Func(Of Context, CancellationToken, TWebApi, TApiData, Task(Of TApiData))), modelData As TModelData, context As Context = Nothing, token As CancellationToken = Nothing, clearCache As Boolean = False) As Task(Of  Option(Of TModelData, ApizrException(Of TModelData))
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -980,27 +1150,38 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 139
+    startLine: 161
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with a mapped request and returning an optional mapped result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelResultData, ApizrException<TModelResultData>>> SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod, TModelRequestData modelRequestData, bool clearCache = false)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{{TWebApi},{TApiRequestData},System.Threading.Tasks.Task{{TApiResultData}}}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: modelRequestData
       type: '{TModelRequestData}'
+      description: The model request data
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelResultData
+      description: The model result type to map to
     - id: TApiResultData
+      description: The api request type to map to
     - id: TApiRequestData
+      description: The api result type to map from
     - id: TModelRequestData
+      description: The model request type to map from
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelResultData},Apizr.ApizrException{{TModelResultData}}}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData)(executeApiMethod As Expression(Of Func(Of TWebApi, TApiRequestData, Task(Of TApiResultData))), modelRequestData As TModelRequestData, clearCache As Boolean = False) As Task(Of  Option(Of TModelResultData, ApizrException(Of TModelResultData))
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -1026,29 +1207,41 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 147
+    startLine: 170
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with a mapped request and a cancellation token and returning an optional mapped result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelResultData, ApizrException<TModelResultData>>> SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod, TModelRequestData modelRequestData, CancellationToken token = default(CancellationToken), bool clearCache = false)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,{TWebApi},{TApiRequestData},System.Threading.Tasks.Task{{TApiResultData}}}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: modelRequestData
       type: '{TModelRequestData}'
+      description: The model request data
     - id: token
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelResultData
+      description: The model result type to map to
     - id: TApiResultData
+      description: The api request type to map to
     - id: TApiRequestData
+      description: The api result type to map from
     - id: TModelRequestData
+      description: The model request type to map from
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelResultData},Apizr.ApizrException{{TModelResultData}}}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData)(executeApiMethod As Expression(Of Func(Of CancellationToken, TWebApi, TApiRequestData, Task(Of TApiResultData))), modelRequestData As TModelRequestData, token As CancellationToken = Nothing, clearCache As Boolean = False) As Task(Of  Option(Of TModelResultData, ApizrException(Of TModelResultData))
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -1074,29 +1267,41 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 156
+    startLine: 180
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with a mapped request and a Polly Context and returning an optional mapped result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelResultData, ApizrException<TModelResultData>>> SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<Context, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod, TModelRequestData modelRequestData, Context context = null, bool clearCache = false)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,{TWebApi},{TApiRequestData},System.Threading.Tasks.Task{{TApiResultData}}}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: modelRequestData
       type: '{TModelRequestData}'
+      description: The model request data
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelResultData
+      description: The model result type to map to
     - id: TApiResultData
+      description: The api request type to map to
     - id: TApiRequestData
+      description: The api result type to map from
     - id: TModelRequestData
+      description: The model request type to map from
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelResultData},Apizr.ApizrException{{TModelResultData}}}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData)(executeApiMethod As Expression(Of Func(Of Context, TWebApi, TApiRequestData, Task(Of TApiResultData))), modelRequestData As TModelRequestData, context As Context = Nothing, clearCache As Boolean = False) As Task(Of  Option(Of TModelResultData, ApizrException(Of TModelResultData))
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:
@@ -1122,31 +1327,44 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 164
+    startLine: 189
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
+  summary: "\nSend an api call to Apizr using MediatR with a mapped request, a Polly Context and a cancellation token and returning an optional mapped result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelResultData, ApizrException<TModelResultData>>> SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<Context, CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod, TModelRequestData modelRequestData, Context context = null, CancellationToken token = default(CancellationToken), bool clearCache = false)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,{TWebApi},{TApiRequestData},System.Threading.Tasks.Task{{TApiResultData}}}}
+      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
     - id: modelRequestData
       type: '{TModelRequestData}'
+      description: The model request data
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: token
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     - id: TModelResultData
+      description: The model result type to map to
     - id: TApiResultData
+      description: The api request type to map to
     - id: TApiRequestData
+      description: The api result type to map from
     - id: TModelRequestData
+      description: The model request type to map from
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelResultData},Apizr.ApizrException{{TModelResultData}}}}
+      description: ''
     content.vb: Public Function SendFor(Of TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData)(executeApiMethod As Expression(Of Func(Of Context, CancellationToken, TWebApi, TApiRequestData, Task(Of TApiResultData))), modelRequestData As TModelRequestData, context As Context = Nothing, token As CancellationToken = Nothing, clearCache As Boolean = False) As Task(Of  Option(Of TModelResultData, ApizrException(Of TModelResultData))
   overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor*
   implements:

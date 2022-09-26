@@ -5,6 +5,9 @@ using Optional.Async.Extensions;
 
 namespace Apizr.Optional.Extending
 {
+    /// <summary>
+    /// Optional request extensions
+    /// </summary>
     public static class OptionalMediationExtensions
     {
         /// <summary>

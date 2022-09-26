@@ -17,15 +17,19 @@ items:
   source:
     id: UpdateOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\UpdateOptionalCommand.cs
-    startLine: 7
+    startLine: 12
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding
+  summary: "\nThe mediation Update optional command\n"
+  example: []
   syntax:
     content: 'public class UpdateOptionalCommand<TKey, TRequestData> : UpdateCommandBase<TKey, TRequestData, Option<Unit, ApizrException>>, IMediationCommand<TRequestData, Option<Unit, ApizrException>>, IRequest<Option<Unit, ApizrException>>, IBaseRequest'
     typeParameters:
     - id: TKey
+      description: The entity&apos;s crud key type
     - id: TRequestData
+      description: The request data type
     content.vb: "Public Class UpdateOptionalCommand(Of TKey, TRequestData)\n    Inherits UpdateCommandBase(Of TKey, TRequestData,  Option(Of Unit, ApizrException) ) \n    Implements IMediationCommand(Of TRequestData,  Option(Of Unit, ApizrException) ), IRequest(Of  Option(Of Unit, ApizrException) ), IBaseRequest"
   inheritance:
   - System.Object
@@ -71,17 +75,21 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\UpdateOptionalCommand.cs
-    startLine: 9
+    startLine: 19
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding
+  summary: "\nThe mediation Update optional command constructor\n"
+  example: []
   syntax:
     content: public UpdateOptionalCommand(TKey key, TRequestData requestData)
     parameters:
     - id: key
       type: '{TKey}'
+      description: The entity&apos;s crud key
     - id: requestData
       type: '{TRequestData}'
+      description: The request data to send
     content.vb: Public Sub New(key As TKey, requestData As TRequestData)
   overload: Apizr.Optional.Cruding.UpdateOptionalCommand`2.#ctor*
   nameWithType.vb: UpdateOptionalCommand(Of TKey, TRequestData).UpdateOptionalCommand(TKey, TRequestData)
@@ -104,19 +112,24 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\UpdateOptionalCommand.cs
-    startLine: 13
+    startLine: 29
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding
+  summary: "\nThe mediation Update optional command constructor\n"
+  example: []
   syntax:
     content: public UpdateOptionalCommand(TKey key, TRequestData requestData, Context context)
     parameters:
     - id: key
       type: '{TKey}'
+      description: The entity&apos;s crud key
     - id: requestData
       type: '{TRequestData}'
+      description: The request data to send
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     content.vb: Public Sub New(key As TKey, requestData As TRequestData, context As Context)
   overload: Apizr.Optional.Cruding.UpdateOptionalCommand`2.#ctor*
   nameWithType.vb: UpdateOptionalCommand(Of TKey, TRequestData).UpdateOptionalCommand(TKey, TRequestData, Context)

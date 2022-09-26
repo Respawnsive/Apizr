@@ -10,6 +10,14 @@ using Optional.Async.Extensions;
 
 namespace Apizr.Optional.Cruding.Handling
 {
+    /// <summary>
+    /// The Update optional command handler
+    /// </summary>
+    /// <typeparam name="TModelEntity">The model entity type</typeparam>
+    /// <typeparam name="TApiEntity">The api entity type</typeparam>
+    /// <typeparam name="TApiEntityKey">The api entity's crud key type</typeparam>
+    /// <typeparam name="TReadAllResult">The returned result type</typeparam>
+    /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     public class UpdateOptionalCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> : 
         UpdateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, UpdateOptionalCommand<TApiEntityKey, TModelEntity>, Option<Unit, ApizrException>>
         where TModelEntity : class
@@ -45,6 +53,13 @@ namespace Apizr.Optional.Cruding.Handling
         }
     }
 
+    /// <summary>
+    /// The Update optional command handler
+    /// </summary>
+    /// <typeparam name="TModelEntity">The model entity type</typeparam>
+    /// <typeparam name="TApiEntity">The api entity type</typeparam>
+    /// <typeparam name="TReadAllResult">The returned result type</typeparam>
+    /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     public class UpdateOptionalCommandHandler<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams> : 
         UpdateCommandHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, UpdateOptionalCommand<TModelEntity>, Option<Unit, ApizrException>>
         where TModelEntity : class

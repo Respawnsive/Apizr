@@ -17,14 +17,17 @@ items:
   source:
     id: CreateOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\CreateOptionalCommand.cs
-    startLine: 6
+    startLine: 10
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding
+  summary: "\nThe mediation Create optional command\n"
+  example: []
   syntax:
     content: 'public class CreateOptionalCommand<TModelData> : CreateCommandBase<TModelData, Option<TModelData, ApizrException>>, IMediationCommand<TModelData, Option<TModelData, ApizrException>>, IRequest<Option<TModelData, ApizrException>>, IBaseRequest'
     typeParameters:
     - id: TModelData
+      description: The data type
     content.vb: "Public Class CreateOptionalCommand(Of TModelData)\n    Inherits CreateCommandBase(Of TModelData,  Option(Of TModelData, ApizrException) ) \n    Implements IMediationCommand(Of TModelData,  Option(Of TModelData, ApizrException) ), IRequest(Of  Option(Of TModelData, ApizrException) ), IBaseRequest"
   inheritance:
   - System.Object
@@ -69,15 +72,18 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\CreateOptionalCommand.cs
-    startLine: 8
+    startLine: 16
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding
+  summary: "\nThe mediation Create optional command constructor\n"
+  example: []
   syntax:
     content: public CreateOptionalCommand(TModelData modelData)
     parameters:
     - id: modelData
       type: '{TModelData}'
+      description: The request data to send
     content.vb: Public Sub New(modelData As TModelData)
   overload: Apizr.Optional.Cruding.CreateOptionalCommand`1.#ctor*
   nameWithType.vb: CreateOptionalCommand(Of TModelData).CreateOptionalCommand(TModelData)
@@ -100,17 +106,21 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\CreateOptionalCommand.cs
-    startLine: 12
+    startLine: 25
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding
+  summary: "\nThe mediation Create optional command constructor\n"
+  example: []
   syntax:
     content: public CreateOptionalCommand(TModelData modelData, Context context)
     parameters:
     - id: modelData
       type: '{TModelData}'
+      description: The request data to send
     - id: context
       type: Polly.Context
+      description: The Polly context to pass through
     content.vb: Public Sub New(modelData As TModelData, context As Context)
   overload: Apizr.Optional.Cruding.CreateOptionalCommand`1.#ctor*
   nameWithType.vb: CreateOptionalCommand(Of TModelData).CreateOptionalCommand(TModelData, Context)

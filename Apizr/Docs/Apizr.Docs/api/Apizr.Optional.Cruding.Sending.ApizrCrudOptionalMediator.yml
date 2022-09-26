@@ -84,10 +84,12 @@ items:
   source:
     id: ApizrCrudOptionalMediator
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 8
+    startLine: 9
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nApizr mediator dedicated to cruding and with optional result\n"
+  example: []
   syntax:
     content: 'public class ApizrCrudOptionalMediator : IApizrCrudOptionalMediator, IApizrCrudOptionalMediatorBase, IApizrCrudMediatorBase, IApizrOptionalMediatorBase, IApizrMediatorBase'
     content.vb: >-
@@ -129,7 +131,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 12
+    startLine: 13
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
@@ -158,19 +160,24 @@ items:
   source:
     id: SendCreateOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 21
+    startLine: 23
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Optional.Cruding.CreateOptionalCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TApiEntity, ApizrException>> SendCreateOptionalCommand<TApiEntity>(TApiEntity entity)
     parameters:
     - id: entity
       type: '{TApiEntity}'
+      description: The entity to create
     typeParameters:
     - id: TApiEntity
+      description: The api entity type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TApiEntity},Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendCreateOptionalCommand(Of TApiEntity)(entity As TApiEntity) As Task(Of  Option(Of TApiEntity, ApizrException)
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendCreateOptionalCommand*
   implements:
@@ -196,21 +203,27 @@ items:
   source:
     id: SendCreateOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 24
+    startLine: 27
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Optional.Cruding.CreateOptionalCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TApiEntity, ApizrException>> SendCreateOptionalCommand<TApiEntity>(TApiEntity entity, Context context)
     parameters:
     - id: entity
       type: '{TApiEntity}'
+      description: The entity to create
     - id: context
       type: Polly.Context
+      description: The Polly context
     typeParameters:
     - id: TApiEntity
+      description: The api entity type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TApiEntity},Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendCreateOptionalCommand(Of TApiEntity)(entity As TApiEntity, context As Context) As Task(Of  Option(Of TApiEntity, ApizrException)
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendCreateOptionalCommand*
   implements:
@@ -236,21 +249,27 @@ items:
   source:
     id: SendCreateOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 28
+    startLine: 32
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Optional.Cruding.CreateOptionalCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TApiEntity, ApizrException>> SendCreateOptionalCommand<TApiEntity>(TApiEntity entity, CancellationToken cancellationToken)
     parameters:
     - id: entity
       type: '{TApiEntity}'
+      description: The entity to create
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     typeParameters:
     - id: TApiEntity
+      description: The api entity type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TApiEntity},Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendCreateOptionalCommand(Of TApiEntity)(entity As TApiEntity, cancellationToken As CancellationToken) As Task(Of  Option(Of TApiEntity, ApizrException)
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendCreateOptionalCommand*
   implements:
@@ -276,23 +295,30 @@ items:
   source:
     id: SendCreateOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 32
+    startLine: 37
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Optional.Cruding.CreateOptionalCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TApiEntity, ApizrException>> SendCreateOptionalCommand<TApiEntity>(TApiEntity entity, Context context, CancellationToken cancellationToken)
     parameters:
     - id: entity
       type: '{TApiEntity}'
+      description: The entity to create
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     typeParameters:
     - id: TApiEntity
+      description: The api entity type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TApiEntity},Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendCreateOptionalCommand(Of TApiEntity)(entity As TApiEntity, context As Context, cancellationToken As CancellationToken) As Task(Of  Option(Of TApiEntity, ApizrException)
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendCreateOptionalCommand*
   implements:
@@ -318,20 +344,26 @@ items:
   source:
     id: SendCreateOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 40
+    startLine: 46
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.CreateCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning a mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelEntity, ApizrException>> SendCreateOptionalCommand<TModelEntity, TApiEntity>(TModelEntity entity)
     parameters:
     - id: entity
       type: '{TModelEntity}'
+      description: The entity to create
     typeParameters:
     - id: TModelEntity
+      description: The model entity type to map from
     - id: TApiEntity
+      description: The api entity type to map to
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelEntity},Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendCreateOptionalCommand(Of TModelEntity, TApiEntity)(entity As TModelEntity) As Task(Of  Option(Of TModelEntity, ApizrException)
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendCreateOptionalCommand*
   implements:
@@ -357,22 +389,29 @@ items:
   source:
     id: SendCreateOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 44
+    startLine: 51
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.CreateCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning a mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelEntity, ApizrException>> SendCreateOptionalCommand<TModelEntity, TApiEntity>(TModelEntity entity, Context context)
     parameters:
     - id: entity
       type: '{TModelEntity}'
+      description: The entity to create
     - id: context
       type: Polly.Context
+      description: The Polly context
     typeParameters:
     - id: TModelEntity
+      description: The model entity type to map from
     - id: TApiEntity
+      description: The api entity type to map to
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelEntity},Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendCreateOptionalCommand(Of TModelEntity, TApiEntity)(entity As TModelEntity, context As Context) As Task(Of  Option(Of TModelEntity, ApizrException)
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendCreateOptionalCommand*
   implements:
@@ -398,22 +437,29 @@ items:
   source:
     id: SendCreateOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 47
+    startLine: 55
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.CreateCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning a mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelEntity, ApizrException>> SendCreateOptionalCommand<TModelEntity, TApiEntity>(TModelEntity entity, CancellationToken cancellationToken)
     parameters:
     - id: entity
       type: '{TModelEntity}'
+      description: The entity to create
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     typeParameters:
     - id: TModelEntity
+      description: The model entity type to map from
     - id: TApiEntity
+      description: The api entity type to map to
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelEntity},Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendCreateOptionalCommand(Of TModelEntity, TApiEntity)(entity As TModelEntity, cancellationToken As CancellationToken) As Task(Of  Option(Of TModelEntity, ApizrException)
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendCreateOptionalCommand*
   implements:
@@ -439,24 +485,32 @@ items:
   source:
     id: SendCreateOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 51
+    startLine: 60
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.CreateCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning a mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelEntity, ApizrException>> SendCreateOptionalCommand<TModelEntity, TApiEntity>(TModelEntity entity, Context context, CancellationToken cancellationToken)
     parameters:
     - id: entity
       type: '{TModelEntity}'
+      description: The entity to create
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     typeParameters:
     - id: TModelEntity
+      description: The model entity type to map from
     - id: TApiEntity
+      description: The api entity type to map to
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelEntity},Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendCreateOptionalCommand(Of TModelEntity, TApiEntity)(entity As TModelEntity, context As Context, cancellationToken As CancellationToken) As Task(Of  Option(Of TModelEntity, ApizrException)
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendCreateOptionalCommand*
   implements:
@@ -482,19 +536,24 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 64
+    startLine: 74
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult>(bool clearCache = false)
     parameters:
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TReadAllResult
+      description: The &quot;ReadAll&quot; query result type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TReadAllResult},Apizr.ApizrException{{TReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TReadAllResult)(clearCache As Boolean = False) As Task(Of  Option(Of TReadAllResult, ApizrException(Of TReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -520,7 +579,7 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 68
+    startLine: 78
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
@@ -560,21 +619,27 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 71
+    startLine: 82
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult>(CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TReadAllResult
+      description: The &quot;ReadAll&quot; query result type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TReadAllResult},Apizr.ApizrException{{TReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TReadAllResult)(cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TReadAllResult, ApizrException(Of TReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -600,21 +665,27 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 76
+    startLine: 88
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult>(int priority, bool clearCache = false)
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TReadAllResult
+      description: The &quot;ReadAll&quot; query result type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TReadAllResult},Apizr.ApizrException{{TReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TReadAllResult)(priority As Integer, clearCache As Boolean = False) As Task(Of  Option(Of TReadAllResult, ApizrException(Of TReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -640,23 +711,30 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 79
+    startLine: 92
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult>(int priority, Context context, bool clearCache = false)
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TReadAllResult
+      description: The &quot;ReadAll&quot; query result type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TReadAllResult},Apizr.ApizrException{{TReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TReadAllResult)(priority As Integer, context As Context, clearCache As Boolean = False) As Task(Of  Option(Of TReadAllResult, ApizrException(Of TReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -682,23 +760,30 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 83
+    startLine: 97
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult>(int priority, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TReadAllResult
+      description: The &quot;ReadAll&quot; query result type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TReadAllResult},Apizr.ApizrException{{TReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TReadAllResult)(priority As Integer, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TReadAllResult, ApizrException(Of TReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -724,23 +809,30 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 88
+    startLine: 103
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult>(Context context, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TReadAllResult
+      description: The &quot;ReadAll&quot; query result type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TReadAllResult},Apizr.ApizrException{{TReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TReadAllResult)(context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TReadAllResult, ApizrException(Of TReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -766,25 +858,33 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 94
+    startLine: 110
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult>(int priority, Context context, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TReadAllResult
+      description: The &quot;ReadAll&quot; query result type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TReadAllResult},Apizr.ApizrException{{TReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TReadAllResult)(priority As Integer, context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TReadAllResult, ApizrException(Of TReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -810,20 +910,26 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 103
+    startLine: 120
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>> SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(bool clearCache = false)
     parameters:
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelReadAllResult
+      description: The model result type to map to
     - id: TApiReadAllResult
+      description: The api result type to map from
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelReadAllResult},Apizr.ApizrException{{TModelReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TModelReadAllResult, TApiReadAllResult)(clearCache As Boolean = False) As Task(Of  Option(Of TModelReadAllResult, ApizrException(Of TModelReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -849,22 +955,29 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 108
+    startLine: 126
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>> SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(Context context, bool clearCache = false)
     parameters:
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelReadAllResult
+      description: The model result type to map to
     - id: TApiReadAllResult
+      description: The api result type to map from
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelReadAllResult},Apizr.ApizrException{{TModelReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TModelReadAllResult, TApiReadAllResult)(context As Context, clearCache As Boolean = False) As Task(Of  Option(Of TModelReadAllResult, ApizrException(Of TModelReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -890,22 +1003,29 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 113
+    startLine: 132
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>> SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelReadAllResult
+      description: The model result type to map to
     - id: TApiReadAllResult
+      description: The api result type to map from
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelReadAllResult},Apizr.ApizrException{{TModelReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TModelReadAllResult, TApiReadAllResult)(cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TModelReadAllResult, ApizrException(Of TModelReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -931,22 +1051,29 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 120
+    startLine: 140
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>> SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(int priority, bool clearCache = false)
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelReadAllResult
+      description: The model result type to map to
     - id: TApiReadAllResult
+      description: The api result type to map from
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelReadAllResult},Apizr.ApizrException{{TModelReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TModelReadAllResult, TApiReadAllResult)(priority As Integer, clearCache As Boolean = False) As Task(Of  Option(Of TModelReadAllResult, ApizrException(Of TModelReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -972,24 +1099,32 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 125
+    startLine: 146
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>> SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(int priority, Context context, bool clearCache = false)
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelReadAllResult
+      description: The model result type to map to
     - id: TApiReadAllResult
+      description: The api result type to map from
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelReadAllResult},Apizr.ApizrException{{TModelReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TModelReadAllResult, TApiReadAllResult)(priority As Integer, context As Context, clearCache As Boolean = False) As Task(Of  Option(Of TModelReadAllResult, ApizrException(Of TModelReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -1015,24 +1150,32 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 130
+    startLine: 152
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>> SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(int priority, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelReadAllResult
+      description: The model result type to map to
     - id: TApiReadAllResult
+      description: The api result type to map from
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelReadAllResult},Apizr.ApizrException{{TModelReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TModelReadAllResult, TApiReadAllResult)(priority As Integer, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TModelReadAllResult, ApizrException(Of TModelReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -1058,24 +1201,32 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 137
+    startLine: 160
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>> SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(Context context, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelReadAllResult
+      description: The model result type to map to
     - id: TApiReadAllResult
+      description: The api result type to map from
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelReadAllResult},Apizr.ApizrException{{TModelReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TModelReadAllResult, TApiReadAllResult)(context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TModelReadAllResult, ApizrException(Of TModelReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -1101,26 +1252,35 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 144
+    startLine: 168
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>> SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(int priority, Context context, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelReadAllResult
+      description: The model result type to map to
     - id: TApiReadAllResult
+      description: The api result type to map from
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelReadAllResult},Apizr.ApizrException{{TModelReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TModelReadAllResult, TApiReadAllResult)(priority As Integer, context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TModelReadAllResult, ApizrException(Of TModelReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -1146,22 +1306,29 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 155
+    startLine: 180
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, bool clearCache = false)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TReadAllResult
+      description: The api result type
     - id: TReadAllParams
+      description: The ReadAll parameters type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TReadAllResult},Apizr.ApizrException{{TReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TReadAllResult, TReadAllParams)(readAllParams As TReadAllParams, clearCache As Boolean = False) As Task(Of  Option(Of TReadAllResult, ApizrException(Of TReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -1187,24 +1354,32 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 159
+    startLine: 185
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Context context, bool clearCache = false)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TReadAllResult
+      description: The api result type
     - id: TReadAllParams
+      description: The ReadAll parameters type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TReadAllResult},Apizr.ApizrException{{TReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TReadAllResult, TReadAllParams)(readAllParams As TReadAllParams, context As Context, clearCache As Boolean = False) As Task(Of  Option(Of TReadAllResult, ApizrException(Of TReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -1230,24 +1405,32 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 163
+    startLine: 190
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TReadAllResult
+      description: The api result type
     - id: TReadAllParams
+      description: The ReadAll parameters type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TReadAllResult},Apizr.ApizrException{{TReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TReadAllResult, TReadAllParams)(readAllParams As TReadAllParams, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TReadAllResult, ApizrException(Of TReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -1273,24 +1456,32 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 169
+    startLine: 197
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, int priority, bool clearCache = false)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TReadAllResult
+      description: The api result type
     - id: TReadAllParams
+      description: The ReadAll parameters type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TReadAllResult},Apizr.ApizrException{{TReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TReadAllResult, TReadAllParams)(readAllParams As TReadAllParams, priority As Integer, clearCache As Boolean = False) As Task(Of  Option(Of TReadAllResult, ApizrException(Of TReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -1316,26 +1507,35 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 174
+    startLine: 203
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, int priority, Context context, bool clearCache = false)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TReadAllResult
+      description: The api result type
     - id: TReadAllParams
+      description: The ReadAll parameters type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TReadAllResult},Apizr.ApizrException{{TReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TReadAllResult, TReadAllParams)(readAllParams As TReadAllParams, priority As Integer, context As Context, clearCache As Boolean = False) As Task(Of  Option(Of TReadAllResult, ApizrException(Of TReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -1361,26 +1561,35 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 179
+    startLine: 209
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, int priority, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TReadAllResult
+      description: The api result type
     - id: TReadAllParams
+      description: The ReadAll parameters type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TReadAllResult},Apizr.ApizrException{{TReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TReadAllResult, TReadAllParams)(readAllParams As TReadAllParams, priority As Integer, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TReadAllResult, ApizrException(Of TReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -1406,26 +1615,35 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 185
+    startLine: 216
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Context context, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TReadAllResult
+      description: The api result type
     - id: TReadAllParams
+      description: The ReadAll parameters type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TReadAllResult},Apizr.ApizrException{{TReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TReadAllResult, TReadAllParams)(readAllParams As TReadAllParams, context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TReadAllResult, ApizrException(Of TReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -1451,28 +1669,38 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 190
+    startLine: 222
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, int priority, Context context, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TReadAllResult
+      description: The api result type
     - id: TReadAllParams
+      description: The ReadAll parameters type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TReadAllResult},Apizr.ApizrException{{TReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TReadAllResult, TReadAllParams)(readAllParams As TReadAllParams, priority As Integer, context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TReadAllResult, ApizrException(Of TReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -1498,23 +1726,31 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 200
+    startLine: 233
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning a mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>> SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, bool clearCache = false)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelReadAllResult
+      description: The model result type to map to
     - id: TApiReadAllResult
+      description: The api result type to map from
     - id: TReadAllParams
+      description: The ReadAll parameters type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelReadAllResult},Apizr.ApizrException{{TModelReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TModelReadAllResult, TApiReadAllResult, TReadAllParams)(readAllParams As TReadAllParams, clearCache As Boolean = False) As Task(Of  Option(Of TModelReadAllResult, ApizrException(Of TModelReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -1540,25 +1776,34 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 205
+    startLine: 239
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning a mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>> SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Context context, bool clearCache = false)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelReadAllResult
+      description: The model result type to map to
     - id: TApiReadAllResult
+      description: The api result type to map from
     - id: TReadAllParams
+      description: The ReadAll parameters type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelReadAllResult},Apizr.ApizrException{{TModelReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TModelReadAllResult, TApiReadAllResult, TReadAllParams)(readAllParams As TReadAllParams, context As Context, clearCache As Boolean = False) As Task(Of  Option(Of TModelReadAllResult, ApizrException(Of TModelReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -1584,25 +1829,34 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 211
+    startLine: 246
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning a mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>> SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelReadAllResult
+      description: The model result type to map to
     - id: TApiReadAllResult
+      description: The api result type to map from
     - id: TReadAllParams
+      description: The ReadAll parameters type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelReadAllResult},Apizr.ApizrException{{TModelReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TModelReadAllResult, TApiReadAllResult, TReadAllParams)(readAllParams As TReadAllParams, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TModelReadAllResult, ApizrException(Of TModelReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -1628,25 +1882,34 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 218
+    startLine: 254
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning a mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>> SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, int priority, bool clearCache = false)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelReadAllResult
+      description: The model result type to map to
     - id: TApiReadAllResult
+      description: The api result type to map from
     - id: TReadAllParams
+      description: The ReadAll parameters type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelReadAllResult},Apizr.ApizrException{{TModelReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TModelReadAllResult, TApiReadAllResult, TReadAllParams)(readAllParams As TReadAllParams, priority As Integer, clearCache As Boolean = False) As Task(Of  Option(Of TModelReadAllResult, ApizrException(Of TModelReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -1672,27 +1935,37 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 224
+    startLine: 261
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning a mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>> SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, int priority, Context context, bool clearCache = false)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelReadAllResult
+      description: The model result type to map to
     - id: TApiReadAllResult
+      description: The api result type to map from
     - id: TReadAllParams
+      description: The ReadAll parameters type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelReadAllResult},Apizr.ApizrException{{TModelReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TModelReadAllResult, TApiReadAllResult, TReadAllParams)(readAllParams As TReadAllParams, priority As Integer, context As Context, clearCache As Boolean = False) As Task(Of  Option(Of TModelReadAllResult, ApizrException(Of TModelReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -1718,27 +1991,37 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 230
+    startLine: 268
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning a mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>> SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, int priority, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelReadAllResult
+      description: The model result type to map to
     - id: TApiReadAllResult
+      description: The api result type to map from
     - id: TReadAllParams
+      description: The ReadAll parameters type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelReadAllResult},Apizr.ApizrException{{TModelReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TModelReadAllResult, TApiReadAllResult, TReadAllParams)(readAllParams As TReadAllParams, priority As Integer, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TModelReadAllResult, ApizrException(Of TModelReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -1764,27 +2047,37 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 237
+    startLine: 276
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning a mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>> SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Context context, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelReadAllResult
+      description: The model result type to map to
     - id: TApiReadAllResult
+      description: The api result type to map from
     - id: TReadAllParams
+      description: The ReadAll parameters type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelReadAllResult},Apizr.ApizrException{{TModelReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TModelReadAllResult, TApiReadAllResult, TReadAllParams)(readAllParams As TReadAllParams, context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TModelReadAllResult, ApizrException(Of TModelReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -1810,29 +2103,40 @@ items:
   source:
     id: SendReadAllOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 244
+    startLine: 284
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning a mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>> SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, int priority, Context context, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
+      description: The read all filters
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelReadAllResult
+      description: The model result type to map to
     - id: TApiReadAllResult
+      description: The api result type to map from
     - id: TReadAllParams
+      description: The ReadAll parameters type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelReadAllResult},Apizr.ApizrException{{TModelReadAllResult}}}}
+      description: ''
     content.vb: Public Function SendReadAllOptionalQuery(Of TModelReadAllResult, TApiReadAllResult, TReadAllParams)(readAllParams As TReadAllParams, priority As Integer, context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TModelReadAllResult, ApizrException(Of TModelReadAllResult))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery*
   implements:
@@ -1858,22 +2162,29 @@ items:
   source:
     id: SendReadOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 260
+    startLine: 301
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, bool clearCache = false)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TApiEntity
+      description: The api entity type
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TApiEntity},Apizr.ApizrException{{TApiEntity}}}}
+      description: ''
     content.vb: Public Function SendReadOptionalQuery(Of TApiEntity, TApiEntityKey)(key As TApiEntityKey, clearCache As Boolean = False) As Task(Of  Option(Of TApiEntity, ApizrException(Of TApiEntity))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery*
   implements:
@@ -1899,24 +2210,32 @@ items:
   source:
     id: SendReadOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 263
+    startLine: 305
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context, bool clearCache = false)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TApiEntity
+      description: The api entity type
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TApiEntity},Apizr.ApizrException{{TApiEntity}}}}
+      description: ''
     content.vb: Public Function SendReadOptionalQuery(Of TApiEntity, TApiEntityKey)(key As TApiEntityKey, context As Context, clearCache As Boolean = False) As Task(Of  Option(Of TApiEntity, ApizrException(Of TApiEntity))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery*
   implements:
@@ -1942,24 +2261,32 @@ items:
   source:
     id: SendReadOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 267
+    startLine: 310
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TApiEntity
+      description: The api entity type
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TApiEntity},Apizr.ApizrException{{TApiEntity}}}}
+      description: ''
     content.vb: Public Function SendReadOptionalQuery(Of TApiEntity, TApiEntityKey)(key As TApiEntityKey, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TApiEntity, ApizrException(Of TApiEntity))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery*
   implements:
@@ -1985,24 +2312,32 @@ items:
   source:
     id: SendReadOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 271
+    startLine: 315
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, int priority, bool clearCache = false)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TApiEntity
+      description: The api entity type
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TApiEntity},Apizr.ApizrException{{TApiEntity}}}}
+      description: ''
     content.vb: Public Function SendReadOptionalQuery(Of TApiEntity, TApiEntityKey)(key As TApiEntityKey, priority As Integer, clearCache As Boolean = False) As Task(Of  Option(Of TApiEntity, ApizrException(Of TApiEntity))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery*
   implements:
@@ -2028,26 +2363,35 @@ items:
   source:
     id: SendReadOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 276
+    startLine: 321
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, int priority, Context context, bool clearCache = false)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TApiEntity
+      description: The api entity type
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TApiEntity},Apizr.ApizrException{{TApiEntity}}}}
+      description: ''
     content.vb: Public Function SendReadOptionalQuery(Of TApiEntity, TApiEntityKey)(key As TApiEntityKey, priority As Integer, context As Context, clearCache As Boolean = False) As Task(Of  Option(Of TApiEntity, ApizrException(Of TApiEntity))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery*
   implements:
@@ -2073,26 +2417,35 @@ items:
   source:
     id: SendReadOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 281
+    startLine: 327
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, int priority, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TApiEntity
+      description: The api entity type
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TApiEntity},Apizr.ApizrException{{TApiEntity}}}}
+      description: ''
     content.vb: Public Function SendReadOptionalQuery(Of TApiEntity, TApiEntityKey)(key As TApiEntityKey, priority As Integer, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TApiEntity, ApizrException(Of TApiEntity))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery*
   implements:
@@ -2118,26 +2471,35 @@ items:
   source:
     id: SendReadOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 286
+    startLine: 333
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TApiEntity
+      description: The api entity type
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TApiEntity},Apizr.ApizrException{{TApiEntity}}}}
+      description: ''
     content.vb: Public Function SendReadOptionalQuery(Of TApiEntity, TApiEntityKey)(key As TApiEntityKey, context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TApiEntity, ApizrException(Of TApiEntity))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery*
   implements:
@@ -2163,28 +2525,38 @@ items:
   source:
     id: SendReadOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 290
+    startLine: 338
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, int priority, Context context, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TApiEntity
+      description: The api entity type
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TApiEntity},Apizr.ApizrException{{TApiEntity}}}}
+      description: ''
     content.vb: Public Function SendReadOptionalQuery(Of TApiEntity, TApiEntityKey)(key As TApiEntityKey, priority As Integer, context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TApiEntity, ApizrException(Of TApiEntity))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery*
   implements:
@@ -2210,23 +2582,31 @@ items:
   source:
     id: SendReadOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 299
+    startLine: 348
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning a mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, bool clearCache = false)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelEntity
+      description: The model entity type to map from
     - id: TApiEntity
+      description: The api entity type to map to
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelEntity},Apizr.ApizrException{{TModelEntity}}}}
+      description: ''
     content.vb: Public Function SendReadOptionalQuery(Of TModelEntity, TApiEntity, TApiEntityKey)(key As TApiEntityKey, clearCache As Boolean = False) As Task(Of  Option(Of TModelEntity, ApizrException(Of TModelEntity))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery*
   implements:
@@ -2252,25 +2632,34 @@ items:
   source:
     id: SendReadOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 303
+    startLine: 353
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning a mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context, bool clearCache = false)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelEntity
+      description: The model entity type to map from
     - id: TApiEntity
+      description: The api entity type to map to
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelEntity},Apizr.ApizrException{{TModelEntity}}}}
+      description: ''
     content.vb: Public Function SendReadOptionalQuery(Of TModelEntity, TApiEntity, TApiEntityKey)(key As TApiEntityKey, context As Context, clearCache As Boolean = False) As Task(Of  Option(Of TModelEntity, ApizrException(Of TModelEntity))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery*
   implements:
@@ -2296,25 +2685,34 @@ items:
   source:
     id: SendReadOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 307
+    startLine: 358
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning a mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelEntity
+      description: The model entity type to map from
     - id: TApiEntity
+      description: The api entity type to map to
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelEntity},Apizr.ApizrException{{TModelEntity}}}}
+      description: ''
     content.vb: Public Function SendReadOptionalQuery(Of TModelEntity, TApiEntity, TApiEntityKey)(key As TApiEntityKey, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TModelEntity, ApizrException(Of TModelEntity))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery*
   implements:
@@ -2340,25 +2738,34 @@ items:
   source:
     id: SendReadOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 311
+    startLine: 363
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning a mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, int priority, bool clearCache = false)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelEntity
+      description: The model entity type to map from
     - id: TApiEntity
+      description: The api entity type to map to
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelEntity},Apizr.ApizrException{{TModelEntity}}}}
+      description: ''
     content.vb: Public Function SendReadOptionalQuery(Of TModelEntity, TApiEntity, TApiEntityKey)(key As TApiEntityKey, priority As Integer, clearCache As Boolean = False) As Task(Of  Option(Of TModelEntity, ApizrException(Of TModelEntity))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery*
   implements:
@@ -2384,27 +2791,37 @@ items:
   source:
     id: SendReadOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 316
+    startLine: 369
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning a mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, int priority, Context context, bool clearCache = false)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelEntity
+      description: The model entity type to map from
     - id: TApiEntity
+      description: The api entity type to map to
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelEntity},Apizr.ApizrException{{TModelEntity}}}}
+      description: ''
     content.vb: Public Function SendReadOptionalQuery(Of TModelEntity, TApiEntity, TApiEntityKey)(key As TApiEntityKey, priority As Integer, context As Context, clearCache As Boolean = False) As Task(Of  Option(Of TModelEntity, ApizrException(Of TModelEntity))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery*
   implements:
@@ -2430,27 +2847,37 @@ items:
   source:
     id: SendReadOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 320
+    startLine: 374
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning a mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, int priority, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelEntity
+      description: The model entity type to map from
     - id: TApiEntity
+      description: The api entity type to map to
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelEntity},Apizr.ApizrException{{TModelEntity}}}}
+      description: ''
     content.vb: Public Function SendReadOptionalQuery(Of TModelEntity, TApiEntity, TApiEntityKey)(key As TApiEntityKey, priority As Integer, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TModelEntity, ApizrException(Of TModelEntity))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery*
   implements:
@@ -2476,27 +2903,37 @@ items:
   source:
     id: SendReadOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 325
+    startLine: 380
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning a mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelEntity
+      description: The model entity type to map from
     - id: TApiEntity
+      description: The api entity type to map to
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelEntity},Apizr.ApizrException{{TModelEntity}}}}
+      description: ''
     content.vb: Public Function SendReadOptionalQuery(Of TModelEntity, TApiEntity, TApiEntityKey)(key As TApiEntityKey, context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TModelEntity, ApizrException(Of TModelEntity))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery*
   implements:
@@ -2522,29 +2959,40 @@ items:
   source:
     id: SendReadOptionalQuery
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 329
+    startLine: 385
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR with priority and returning a mapped optional result\n"
+  example: []
   syntax:
     content: public Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, int priority, Context context, CancellationToken cancellationToken, bool clearCache = false)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: priority
       type: System.Int32
+      description: The execution priority
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     - id: clearCache
       type: System.Boolean
+      description: 'Clear request cache before executing (default: false)'
     typeParameters:
     - id: TModelEntity
+      description: The model entity type to map from
     - id: TApiEntity
+      description: The api entity type to map to
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelEntity},Apizr.ApizrException{{TModelEntity}}}}
+      description: ''
     content.vb: Public Function SendReadOptionalQuery(Of TModelEntity, TApiEntity, TApiEntityKey)(key As TApiEntityKey, priority As Integer, context As Context, cancellationToken As CancellationToken, clearCache As Boolean = False) As Task(Of  Option(Of TModelEntity, ApizrException(Of TModelEntity))
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery*
   implements:
@@ -2570,22 +3018,29 @@ items:
   source:
     id: SendUpdateOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 343
+    startLine: 400
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, TApiEntity entity)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: entity
       type: '{TApiEntity}'
+      description: The entity to update
     typeParameters:
     - id: TApiEntity
+      description: The api entity type
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendUpdateOptionalCommand(Of TApiEntity, TApiEntityKey)(key As TApiEntityKey, entity As TApiEntity) As Task(Of  Option(Of Unit, ApizrException)
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendUpdateOptionalCommand*
   implements:
@@ -2611,24 +3066,32 @@ items:
   source:
     id: SendUpdateOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 346
+    startLine: 404
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, TApiEntity entity, Context context)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: entity
       type: '{TApiEntity}'
+      description: The entity to update
     - id: context
       type: Polly.Context
+      description: The Polly context
     typeParameters:
     - id: TApiEntity
+      description: The api entity type
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendUpdateOptionalCommand(Of TApiEntity, TApiEntityKey)(key As TApiEntityKey, entity As TApiEntity, context As Context) As Task(Of  Option(Of Unit, ApizrException)
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendUpdateOptionalCommand*
   implements:
@@ -2654,24 +3117,32 @@ items:
   source:
     id: SendUpdateOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 350
+    startLine: 409
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, TApiEntity entity, CancellationToken cancellationToken)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: entity
       type: '{TApiEntity}'
+      description: The entity to update
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     typeParameters:
     - id: TApiEntity
+      description: The api entity type
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendUpdateOptionalCommand(Of TApiEntity, TApiEntityKey)(key As TApiEntityKey, entity As TApiEntity, cancellationToken As CancellationToken) As Task(Of  Option(Of Unit, ApizrException)
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendUpdateOptionalCommand*
   implements:
@@ -2697,26 +3168,35 @@ items:
   source:
     id: SendUpdateOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 355
+    startLine: 415
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, TApiEntity entity, Context context, CancellationToken cancellationToken)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: entity
       type: '{TApiEntity}'
+      description: The entity to update
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     typeParameters:
     - id: TApiEntity
+      description: The api entity type
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendUpdateOptionalCommand(Of TApiEntity, TApiEntityKey)(key As TApiEntityKey, entity As TApiEntity, context As Context, cancellationToken As CancellationToken) As Task(Of  Option(Of Unit, ApizrException)
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendUpdateOptionalCommand*
   implements:
@@ -2742,23 +3222,31 @@ items:
   source:
     id: SendUpdateOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 365
+    startLine: 426
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, TModelEntity entity)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: entity
       type: '{TModelEntity}'
+      description: The entity to update
     typeParameters:
     - id: TModelEntity
+      description: The model entity type to map from
     - id: TApiEntity
+      description: The api entity type to map to
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendUpdateOptionalCommand(Of TModelEntity, TApiEntity, TApiEntityKey)(key As TApiEntityKey, entity As TModelEntity) As Task(Of  Option(Of Unit, ApizrException)
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendUpdateOptionalCommand*
   implements:
@@ -2784,25 +3272,34 @@ items:
   source:
     id: SendUpdateOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 369
+    startLine: 431
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, TModelEntity entity, Context context)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: entity
       type: '{TModelEntity}'
+      description: The entity to update
     - id: context
       type: Polly.Context
+      description: The Polly context
     typeParameters:
     - id: TModelEntity
+      description: The model entity type to map from
     - id: TApiEntity
+      description: The api entity type to map to
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendUpdateOptionalCommand(Of TModelEntity, TApiEntity, TApiEntityKey)(key As TApiEntityKey, entity As TModelEntity, context As Context) As Task(Of  Option(Of Unit, ApizrException)
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendUpdateOptionalCommand*
   implements:
@@ -2828,25 +3325,34 @@ items:
   source:
     id: SendUpdateOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 373
+    startLine: 436
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, TModelEntity entity, CancellationToken cancellationToken)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: entity
       type: '{TModelEntity}'
+      description: The entity to update
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     typeParameters:
     - id: TModelEntity
+      description: The model entity type to map from
     - id: TApiEntity
+      description: The api entity type to map to
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendUpdateOptionalCommand(Of TModelEntity, TApiEntity, TApiEntityKey)(key As TApiEntityKey, entity As TModelEntity, cancellationToken As CancellationToken) As Task(Of  Option(Of Unit, ApizrException)
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendUpdateOptionalCommand*
   implements:
@@ -2872,27 +3378,37 @@ items:
   source:
     id: SendUpdateOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 378
+    startLine: 442
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, TModelEntity entity, Context context, CancellationToken cancellationToken)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: entity
       type: '{TModelEntity}'
+      description: The entity to update
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     typeParameters:
     - id: TModelEntity
+      description: The model entity type to map from
     - id: TApiEntity
+      description: The api entity type to map to
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendUpdateOptionalCommand(Of TModelEntity, TApiEntity, TApiEntityKey)(key As TApiEntityKey, entity As TModelEntity, context As Context, cancellationToken As CancellationToken) As Task(Of  Option(Of Unit, ApizrException)
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendUpdateOptionalCommand*
   implements:
@@ -2918,20 +3434,26 @@ items:
   source:
     id: SendDeleteOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 390
+    startLine: 455
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.DeleteCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<Unit, ApizrException>> SendDeleteOptionalCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     typeParameters:
     - id: TApiEntity
+      description: The api entity type
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendDeleteOptionalCommand(Of TApiEntity, TApiEntityKey)(key As TApiEntityKey) As Task(Of  Option(Of Unit, ApizrException)
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendDeleteOptionalCommand*
   implements:
@@ -2957,22 +3479,29 @@ items:
   source:
     id: SendDeleteOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 393
+    startLine: 459
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.DeleteCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<Unit, ApizrException>> SendDeleteOptionalCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: context
       type: Polly.Context
+      description: The Polly context
     typeParameters:
     - id: TApiEntity
+      description: The api entity type
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendDeleteOptionalCommand(Of TApiEntity, TApiEntityKey)(key As TApiEntityKey, context As Context) As Task(Of  Option(Of Unit, ApizrException)
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendDeleteOptionalCommand*
   implements:
@@ -2998,22 +3527,29 @@ items:
   source:
     id: SendDeleteOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 396
+    startLine: 463
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.DeleteCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<Unit, ApizrException>> SendDeleteOptionalCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, CancellationToken cancellationToken)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     typeParameters:
     - id: TApiEntity
+      description: The api entity type
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendDeleteOptionalCommand(Of TApiEntity, TApiEntityKey)(key As TApiEntityKey, cancellationToken As CancellationToken) As Task(Of  Option(Of Unit, ApizrException)
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendDeleteOptionalCommand*
   implements:
@@ -3039,24 +3575,32 @@ items:
   source:
     id: SendDeleteOptionalCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Cruding\Sending\ApizrCrudOptionalMediator.cs
-    startLine: 401
+    startLine: 469
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
+  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.DeleteCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  example: []
   syntax:
     content: public Task<Option<Unit, ApizrException>> SendDeleteOptionalCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context, CancellationToken cancellationToken)
     parameters:
     - id: key
       type: '{TApiEntityKey}'
+      description: The entity key
     - id: context
       type: Polly.Context
+      description: The Polly context
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token
     typeParameters:
     - id: TApiEntity
+      description: The api entity type
     - id: TApiEntityKey
+      description: The entity&apos;s crud key type
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function SendDeleteOptionalCommand(Of TApiEntity, TApiEntityKey)(key As TApiEntityKey, context As Context, cancellationToken As CancellationToken) As Task(Of  Option(Of Unit, ApizrException)
   overload: Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendDeleteOptionalCommand*
   implements:

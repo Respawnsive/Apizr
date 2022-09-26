@@ -4,6 +4,11 @@
         <name>Apizr.Integrations.Optional</name>
     </assembly>
     <members>
+        <member name="T:Apizr.OptionalOptionsBuilderExtensions">
+            <summary>
+            Optional with MediatR options builder extensions
+            </summary>
+        </member>
         <member name="M:Apizr.OptionalOptionsBuilderExtensions.WithOptionalMediation(Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder)">
             <summary>
             Let Apizr handle requests execution with some mediation and optional result
@@ -17,6 +22,83 @@
             </summary>
             <param name="optionsBuilder"></param>
             <returns></returns>
+        </member>
+        <member name="T:Apizr.Optional.Commanding.IOptionalCommand`1">
+            <summary>
+            A mediation command returning an optional error
+            </summary>
+            <typeparam name="TError">The optional error</typeparam>
+        </member>
+        <member name="T:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistry">
+            <inheritdoc cref="T:Apizr.Optional.Configuring.Registry.IApizrOptionalMediationConcurrentRegistry" />
+        </member>
+        <member name="M:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistry.AddOrUpdate(System.Type,System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistryBase">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistryBase.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistryBase.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistryBase.GetCrudOptionalMediatorFor``1">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistryBase.GetCrudOptionalMediatorFor``2">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistryBase.GetCrudOptionalMediatorFor``3">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistryBase.GetCrudOptionalMediatorFor``4">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistryBase.GetOptionalMediatorFor``1">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistryBase.TryGetCrudOptionalMediatorFor``1(Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistryBase.TryGetCrudOptionalMediatorFor``2(Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistryBase.TryGetCrudOptionalMediatorFor``3(Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistryBase.TryGetCrudOptionalMediatorFor``4(Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator{``0,``1,``2,``3}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistryBase.TryGetOptionalMediatorFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator{``0}@)">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistryBase.Count">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistryBase.ContainsCrudOptionalMediatorFor``1">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistryBase.ContainsCrudOptionalMediatorFor``2">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistryBase.ContainsCrudOptionalMediatorFor``3">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistryBase.ContainsCrudOptionalMediatorFor``4">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistryBase.ContainsOptionalMediatorFor``1">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Optional.Configuring.Registry.IApizrOptionalMediationConcurrentRegistry">
+            <inheritdoc cref="T:Apizr.Optional.Configuring.Registry.IApizrOptionalMediationRegistry" />
+        </member>
+        <member name="T:Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry">
+            <summary>
+            Registry options available for extended registrations with optional mediation
+            </summary>
         </member>
         <member name="P:Apizr.Optional.Configuring.Registry.IApizrOptionalMediationEnumerableRegistry.Count">
             <summary>
@@ -146,6 +228,774 @@
             </summary>
             <typeparam name="TWebApi">The managed api type</typeparam>
             <returns></returns>
+        </member>
+        <member name="T:Apizr.Optional.Configuring.Registry.IApizrOptionalMediationRegistry">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Optional.Cruding.CreateOptionalCommand`1">
+            <summary>
+            The mediation Create optional command
+            </summary>
+            <typeparam name="TModelData">The data type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.CreateOptionalCommand`1.#ctor(`0)">
+            <summary>
+            The mediation Create optional command constructor
+            </summary>
+            <param name="modelData">The request data to send</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.CreateOptionalCommand`1.#ctor(`0,Polly.Context)">
+            <summary>
+            The mediation Create optional command constructor
+            </summary>
+            <param name="modelData">The request data to send</param>
+            <param name="context">The Polly context to pass through</param>
+        </member>
+        <member name="T:Apizr.Optional.Cruding.DeleteOptionalCommand`2">
+            <summary>
+            The mediation Delete optional command
+            </summary>
+            <typeparam name="T">The api entity type</typeparam>
+            <typeparam name="TKey">The entity's crud key type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.DeleteOptionalCommand`2.#ctor(`1)">
+            <summary>
+            The mediation Delete optional command constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.DeleteOptionalCommand`2.#ctor(`1,Polly.Context)">
+            <summary>
+            The mediation Delete optional command constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="context">The Polly context to pass through</param>
+        </member>
+        <member name="T:Apizr.Optional.Cruding.DeleteOptionalCommand`1">
+            <summary>
+            The mediation Delete optional command
+            </summary>
+            <typeparam name="T">The api entity type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.DeleteOptionalCommand`1.#ctor(System.Int32)">
+            <summary>
+            The mediation Delete optional command constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.DeleteOptionalCommand`1.#ctor(System.Int32,Polly.Context)">
+            <summary>
+            The mediation Delete optional command constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="context">The Polly context to pass through</param>
+        </member>
+        <member name="T:Apizr.Optional.Cruding.Handling.CreateOptionalCommandHandler`5">
+            <summary>
+            The Create optional command handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TApiEntityKey">The api entity's crud key type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params</typeparam>
+        </member>
+        <member name="T:Apizr.Optional.Cruding.Handling.DeleteOptionalCommandHandler`5">
+            <summary>
+            The Delete optional command handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TApiEntityKey">The api entity's crud key type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params type</typeparam>
+        </member>
+        <member name="T:Apizr.Optional.Cruding.Handling.DeleteOptionalCommandHandler`4">
+            <summary>
+            The Delete optional command handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params type</typeparam>
+        </member>
+        <member name="T:Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler`5">
+            <summary>
+            The ReadAll optional query handler
+            </summary>
+            <typeparam name="TApiEntity"></typeparam>
+            <typeparam name="TApiEntityKey">The api entity type</typeparam>
+            <typeparam name="TModelEntityReadAllResult">The returned model result type</typeparam>
+            <typeparam name="TApiEntityReadAllResult">The received api result type</typeparam>
+            <typeparam name="TReadAllParams">The query parameters type</typeparam>
+        </member>
+        <member name="T:Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler`4">
+            <summary>
+            The ReadAll optional query handler
+            </summary>
+            <typeparam name="TApiEntity"></typeparam>
+            <typeparam name="TApiEntityKey">The api entity type</typeparam>
+            <typeparam name="TModelEntityReadAllResult">The returned model result type</typeparam>
+            <typeparam name="TApiEntityReadAllResult">The received api result type</typeparam>
+        </member>
+        <member name="T:Apizr.Optional.Cruding.Handling.ReadOptionalQueryHandler`5">
+            <summary>
+            The Read optional query handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TApiEntityKey">The api entity's crud key type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params type</typeparam>
+        </member>
+        <member name="T:Apizr.Optional.Cruding.Handling.ReadOptionalQueryHandler`4">
+            <summary>
+            The Read optional query handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params type</typeparam>
+        </member>
+        <member name="T:Apizr.Optional.Cruding.Handling.UpdateOptionalCommandHandler`5">
+            <summary>
+            The Update optional command handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TApiEntityKey">The api entity's crud key type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params type</typeparam>
+        </member>
+        <member name="T:Apizr.Optional.Cruding.Handling.UpdateOptionalCommandHandler`4">
+            <summary>
+            The Update optional command handler
+            </summary>
+            <typeparam name="TModelEntity">The model entity type</typeparam>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TReadAllResult">The returned result type</typeparam>
+            <typeparam name="TReadAllParams">The read all params type</typeparam>
+        </member>
+        <member name="T:Apizr.Optional.Cruding.ReadAllOptionalQuery`2">
+            <summary>
+            The mediation ReadAll optional query
+            </summary>
+            <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
+            <typeparam name="TReadAllResult">The api result type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadAllOptionalQuery`2.#ctor(System.Boolean)">
+            <summary>
+            The mediation ReadAll optional query constructor
+            </summary>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadAllOptionalQuery`2.#ctor(`0,System.Boolean)">
+            <summary>
+            The mediation ReadAll optional query constructor
+            </summary>
+            <param name="parameters">The query parameters to send</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadAllOptionalQuery`2.#ctor(System.Int32,System.Boolean)">
+            <summary>
+            The mediation ReadAll optional query constructor
+            </summary>
+            <param name="priority">The execution priority to apply</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadAllOptionalQuery`2.#ctor(Polly.Context,System.Boolean)">
+            <summary>
+            The mediation ReadAll optional query constructor
+            </summary>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadAllOptionalQuery`2.#ctor(`0,System.Int32,System.Boolean)">
+            <summary>
+            The mediation ReadAll optional query constructor
+            </summary>
+            <param name="parameters">The query parameters to send</param>
+            <param name="priority">The execution priority to apply</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadAllOptionalQuery`2.#ctor(`0,Polly.Context,System.Boolean)">
+            <summary>
+            The mediation ReadAll optional query constructor
+            </summary>
+            <param name="parameters">The query parameters to send</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadAllOptionalQuery`2.#ctor(System.Int32,Polly.Context,System.Boolean)">
+            <summary>
+            The mediation ReadAll optional query constructor
+            </summary>
+            <param name="priority">The execution priority to apply</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadAllOptionalQuery`2.#ctor(`0,System.Int32,Polly.Context,System.Boolean)">
+            <summary>
+            The mediation ReadAll optional query constructor
+            </summary>
+            <param name="parameters">The query parameters to send</param>
+            <param name="priority">The execution priority to apply</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="T:Apizr.Optional.Cruding.ReadAllOptionalQuery`1">
+            <summary>
+            The mediation ReadAll optional query
+            </summary>
+            <typeparam name="TReadAllResult">The api result type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadAllOptionalQuery`1.#ctor(System.Boolean)">
+            <summary>
+            The mediation ReadAll optional query constructor
+            </summary>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadAllOptionalQuery`1.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object},System.Boolean)">
+            <summary>
+            The mediation ReadAll optional query constructor
+            </summary>
+            <param name="parameters">The query parameters to send</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadAllOptionalQuery`1.#ctor(System.Int32,System.Boolean)">
+            <summary>
+            The mediation ReadAll optional query constructor
+            </summary>
+            <param name="priority">The execution priority to apply</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadAllOptionalQuery`1.#ctor(Polly.Context,System.Boolean)">
+            <summary>
+            The mediation ReadAll optional query constructor
+            </summary>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadAllOptionalQuery`1.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object},System.Int32,System.Boolean)">
+            <summary>
+            The mediation ReadAll optional query constructor
+            </summary>
+            <param name="parameters">The query parameters to send</param>
+            <param name="priority">The execution priority to apply</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadAllOptionalQuery`1.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object},Polly.Context,System.Boolean)">
+            <summary>
+            The mediation ReadAll optional query constructor
+            </summary>
+            <param name="parameters">The query parameters to send</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadAllOptionalQuery`1.#ctor(System.Int32,Polly.Context,System.Boolean)">
+            <summary>
+            The mediation ReadAll optional query constructor
+            </summary>
+            <param name="priority">The execution priority to apply</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadAllOptionalQuery`1.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object},System.Int32,Polly.Context,System.Boolean)">
+            <summary>
+            The mediation ReadAll optional query constructor
+            </summary>
+            <param name="parameters">The query parameters to send</param>
+            <param name="priority">The execution priority to apply</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="T:Apizr.Optional.Cruding.ReadOptionalQuery`2">
+            <summary>
+            The mediation Read optional query
+            </summary>
+            <typeparam name="TResultData">The result entity type</typeparam>
+            <typeparam name="TKey">The entity's crud key type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadOptionalQuery`2.#ctor(`1,System.Boolean)">
+            <summary>
+            The mediation Read optional query constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadOptionalQuery`2.#ctor(`1,System.Int32,System.Boolean)">
+            <summary>
+            The mediation Read optional query constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="priority">The execution priority to apply</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadOptionalQuery`2.#ctor(`1,Polly.Context,System.Boolean)">
+            <summary>
+            The mediation Read optional query constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadOptionalQuery`2.#ctor(`1,System.Int32,Polly.Context,System.Boolean)">
+            <summary>
+            The mediation Read optional query constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="priority">The execution priority to apply</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="T:Apizr.Optional.Cruding.ReadOptionalQuery`1">
+            <summary>
+            The mediation Read optional query
+            </summary>
+            <typeparam name="TResultData">The result entity type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadOptionalQuery`1.#ctor(System.Int32,System.Boolean)">
+            <summary>
+            The mediation Read optional query constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadOptionalQuery`1.#ctor(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            The mediation Read optional query constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="priority">The execution priority to apply</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadOptionalQuery`1.#ctor(System.Int32,Polly.Context,System.Boolean)">
+            <summary>
+            The mediation Read optional query constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.ReadOptionalQuery`1.#ctor(System.Int32,System.Int32,Polly.Context,System.Boolean)">
+            <summary>
+            The mediation Read optional query constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="priority">The execution priority to apply</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="T:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendCreateOptionalCommand``1(``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendCreateOptionalCommand``1(``0,Polly.Context)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendCreateOptionalCommand``1(``0,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendCreateOptionalCommand``1(``0,Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendCreateOptionalCommand``2(``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendCreateOptionalCommand``2(``0,Polly.Context)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendCreateOptionalCommand``2(``0,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendCreateOptionalCommand``2(``0,Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``1(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``1(System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``1(System.Int32,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``1(System.Int32,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``1(System.Int32,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``1(Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``1(System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``2(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``2(Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``2(System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``2(System.Int32,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``2(System.Int32,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``2(System.Int32,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``2(Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``2(System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``2(``1,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``2(``1,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``2(``1,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``2(``1,System.Int32,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``2(``1,System.Int32,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``2(``1,System.Int32,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``2(``1,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``2(``1,System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``3(``2,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``3(``2,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``3(``2,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``3(``2,System.Int32,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``3(``2,System.Int32,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``3(``2,System.Int32,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``3(``2,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadAllOptionalQuery``3(``2,System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery``2(``1,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery``2(``1,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery``2(``1,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery``2(``1,System.Int32,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery``2(``1,System.Int32,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery``2(``1,System.Int32,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery``2(``1,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery``2(``1,System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery``3(``2,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery``3(``2,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery``3(``2,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery``3(``2,System.Int32,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery``3(``2,System.Int32,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery``3(``2,System.Int32,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery``3(``2,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendReadOptionalQuery``3(``2,System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendUpdateOptionalCommand``2(``1,``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendUpdateOptionalCommand``2(``1,``0,Polly.Context)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendUpdateOptionalCommand``2(``1,``0,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendUpdateOptionalCommand``2(``1,``0,Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendUpdateOptionalCommand``3(``2,``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendUpdateOptionalCommand``3(``2,``0,Polly.Context)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendUpdateOptionalCommand``3(``2,``0,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendUpdateOptionalCommand``3(``2,``0,Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendDeleteOptionalCommand``2(``1)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendDeleteOptionalCommand``2(``1,Polly.Context)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendDeleteOptionalCommand``2(``1,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator.SendDeleteOptionalCommand``2(``1,Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendCreateOptionalCommand(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendCreateOptionalCommand(`0,Polly.Context)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendCreateOptionalCommand(`0,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendCreateOptionalCommand(`0,Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendCreateOptionalCommand``1(``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendCreateOptionalCommand``1(``0,Polly.Context)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendCreateOptionalCommand``1(``0,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendCreateOptionalCommand``1(``0,Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery(Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery(System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery(System.Int32,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery(System.Int32,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery(System.Int32,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery(Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery(System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery``1(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery``1(Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery``1(System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery``1(System.Int32,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery``1(System.Int32,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery``1(System.Int32,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery``1(Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery``1(System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery(`3,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery(`3,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery(`3,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery(`3,System.Int32,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery(`3,System.Int32,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery(`3,System.Int32,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery(`3,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery(`3,System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery``1(`3,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery``1(`3,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery``1(`3,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery``1(`3,System.Int32,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery``1(`3,System.Int32,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery``1(`3,System.Int32,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery``1(`3,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadAllOptionalQuery``1(`3,System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadOptionalQuery(`1,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadOptionalQuery(`1,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadOptionalQuery(`1,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadOptionalQuery(`1,System.Int32,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadOptionalQuery(`1,System.Int32,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadOptionalQuery(`1,System.Int32,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadOptionalQuery(`1,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadOptionalQuery(`1,System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadOptionalQuery``1(`1,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadOptionalQuery``1(`1,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadOptionalQuery``1(`1,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadOptionalQuery``1(`1,System.Int32,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadOptionalQuery``1(`1,System.Int32,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadOptionalQuery``1(`1,System.Int32,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadOptionalQuery``1(`1,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendReadOptionalQuery``1(`1,System.Int32,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendUpdateOptionalCommand(`1,`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendUpdateOptionalCommand(`1,`0,Polly.Context)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendUpdateOptionalCommand(`1,`0,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendUpdateOptionalCommand(`1,`0,Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendUpdateOptionalCommand``1(`1,``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendUpdateOptionalCommand``1(`1,``0,Polly.Context)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendUpdateOptionalCommand``1(`1,``0,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendUpdateOptionalCommand``1(`1,``0,Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendDeleteOptionalCommand(`1)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendDeleteOptionalCommand(`1,Polly.Context)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendDeleteOptionalCommand(`1,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Cruding.Sending.ApizrCrudOptionalMediator`4.SendDeleteOptionalCommand(`1,Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
         </member>
         <member name="T:Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator">
             <summary>
@@ -1549,6 +2399,59 @@
             <param name="cancellationToken">The cancellation token</param>
             <returns></returns>
         </member>
+        <member name="T:Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediatorBase">
+            <summary>
+            Apizr base optional mediator dedicated to cruding
+            </summary>
+        </member>
+        <member name="T:Apizr.Optional.Cruding.UpdateOptionalCommand`2">
+            <summary>
+            The mediation Update optional command
+            </summary>
+            <typeparam name="TKey">The entity's crud key type</typeparam>
+            <typeparam name="TRequestData">The request data type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.UpdateOptionalCommand`2.#ctor(`0,`1)">
+            <summary>
+            The mediation Update optional command constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="requestData">The request data to send</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.UpdateOptionalCommand`2.#ctor(`0,`1,Polly.Context)">
+            <summary>
+            The mediation Update optional command constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="requestData">The request data to send</param>
+            <param name="context">The Polly context to pass through</param>
+        </member>
+        <member name="T:Apizr.Optional.Cruding.UpdateOptionalCommand`1">
+            <summary>
+            The mediation Update optional command
+            </summary>
+            <typeparam name="TRequestData">The request data type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.UpdateOptionalCommand`1.#ctor(System.Int32,`0)">
+            <summary>
+            The mediation Update optional command constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="requestData">The request data to send</param>
+        </member>
+        <member name="M:Apizr.Optional.Cruding.UpdateOptionalCommand`1.#ctor(System.Int32,`0,Polly.Context)">
+            <summary>
+            The mediation Update optional command constructor
+            </summary>
+            <param name="key">The entity's crud key</param>
+            <param name="requestData">The request data to send</param>
+            <param name="context">The Polly context to pass through</param>
+        </member>
+        <member name="T:Apizr.Optional.Extending.OptionalMediationExtensions">
+            <summary>
+            Optional request extensions
+            </summary>
+        </member>
         <member name="M:Apizr.Optional.Extending.OptionalMediationExtensions.OnResultAsync``1(System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException{``0}}},System.Action{``0})">
             <summary>
             The action will be invoked just before throwing any exception that might have occurred during request execution
@@ -1588,6 +2491,693 @@
             <param name="onException">Action to call to handle exception (like informing the user) before returning result from cache</param>
             <param name="letThrowOnExceptionWithEmptyCache">True to let it throw the inner exception in case of empty cache, False to handle it with <paramref name="onException"/> action and return empty cache result</param>
             <returns></returns>
+        </member>
+        <member name="T:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`5">
+            <summary>
+            The top level base mediation execute result request (returning optional result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelResultData">The model result type</typeparam>
+            <typeparam name="TApiResultData">The api result type</typeparam>
+            <typeparam name="TApiRequestData">The api request type</typeparam>
+            <typeparam name="TModelRequestData">The model request type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`5.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{`2}}},System.Boolean)">
+            <summary>
+            The top level base mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`5.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`2}}},System.Boolean)">
+            <summary>
+            The top level base mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`5.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{`2}}},Polly.Context,System.Boolean)">
+            <summary>
+            The top level base mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`5.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`2}}},Polly.Context,System.Boolean)">
+            <summary>
+            The top level base mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`5.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`3,System.Threading.Tasks.Task{`2}}},`4,System.Boolean)">
+            <summary>
+            The top level base mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`5.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,`3,System.Threading.Tasks.Task{`2}}},`4,System.Boolean)">
+            <summary>
+            The top level base mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`5.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,`3,System.Threading.Tasks.Task{`2}}},`4,Polly.Context,System.Boolean)">
+            <summary>
+            The top level base mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`5.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,`3,System.Threading.Tasks.Task{`2}}},`4,Polly.Context,System.Boolean)">
+            <summary>
+            The top level base mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="T:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`3">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{`2}}},System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`2}}},System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{`2}}},Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`2}}},Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`2,System.Threading.Tasks.Task{`2}}},`1,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task{`2}}},`1,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,`2,System.Threading.Tasks.Task{`2}}},`1,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task{`2}}},`1,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`2">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`2.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{`1}}},System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`2.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`1}}},System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`2.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{`1}}},Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalResultRequestBase`2.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`1}}},Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3">
+            <summary>
+            The top level base mediation execute optional unit request (returning no result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`2,System.Threading.Tasks.Task}},`1)">
+            <summary>
+            The top level base mediation execute optional unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task}},`1)">
+            <summary>
+            The top level base mediation execute optional unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,`2,System.Threading.Tasks.Task}},`1,Polly.Context)">
+            <summary>
+            The top level base mediation execute optional unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task}},`1,Polly.Context)">
+            <summary>
+            The top level base mediation execute optional unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+        </member>
+        <member name="T:Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`1">
+            <summary>
+            The top level base mediation execute optional unit request (returning no result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`1.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}})">
+            <summary>
+            The top level base mediation execute optional unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`1.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}})">
+            <summary>
+            The top level base mediation execute optional unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`1.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task}},Polly.Context)">
+            <summary>
+            The top level base mediation execute optional unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`1.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},Polly.Context)">
+            <summary>
+            The top level base mediation execute optional unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+        </member>
+        <member name="T:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`5">
+            <summary>
+            The mediation execute optional result request (returning result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelResultData">The model result type</typeparam>
+            <typeparam name="TApiResultData">The api result type</typeparam>
+            <typeparam name="TApiRequestData">The api request type</typeparam>
+            <typeparam name="TModelRequestData">The model request type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`5.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{`2}}},System.Boolean)">
+            <summary>
+            The mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`5.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`2}}},System.Boolean)">
+            <summary>
+            The mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`5.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{`2}}},Polly.Context,System.Boolean)">
+            <summary>
+            The mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`5.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`2}}},Polly.Context,System.Boolean)">
+            <summary>
+            The mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`5.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`3,System.Threading.Tasks.Task{`2}}},`4,System.Boolean)">
+            <summary>
+            The mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`5.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,`3,System.Threading.Tasks.Task{`2}}},`4,System.Boolean)">
+            <summary>
+            The mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`5.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,`3,System.Threading.Tasks.Task{`2}}},`4,Polly.Context,System.Boolean)">
+            <summary>
+            The mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`5.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,`3,System.Threading.Tasks.Task{`2}}},`4,Polly.Context,System.Boolean)">
+            <summary>
+            The mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="T:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`3">
+            <summary>
+            The mediation execute optional result request (returning result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{`2}}},System.Boolean)">
+            <summary>
+            The mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`2}}},System.Boolean)">
+            <summary>
+            The mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{`2}}},Polly.Context,System.Boolean)">
+            <summary>
+            The mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`2}}},Polly.Context,System.Boolean)">
+            <summary>
+            The mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`2,System.Threading.Tasks.Task{`2}}},`1,System.Boolean)">
+            <summary>
+            The mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task{`2}}},`1,System.Boolean)">
+            <summary>
+            The mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,`2,System.Threading.Tasks.Task{`2}}},`1,Polly.Context,System.Boolean)">
+            <summary>
+            The mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task{`2}}},`1,Polly.Context,System.Boolean)">
+            <summary>
+            The mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="T:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`2">
+            <summary>
+            The mediation execute optional result request (returning result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`2.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{`1}}},System.Boolean)">
+            <summary>
+            The mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`2.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`1}}},System.Boolean)">
+            <summary>
+            The mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`2.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{`1}}},Polly.Context,System.Boolean)">
+            <summary>
+            The mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalResultRequest`2.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{`1}}},Polly.Context,System.Boolean)">
+            <summary>
+            The mediation execute optional result request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+            <param name="clearCache">Asking to clear cache before sending</param>
+        </member>
+        <member name="T:Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3">
+            <summary>
+            The mediation execute optional unit request (returning no result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`2,System.Threading.Tasks.Task}},`1)">
+            <summary>
+            The mediation execute optional unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task}},`1)">
+            <summary>
+            The mediation execute optional unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,`2,System.Threading.Tasks.Task}},`1,Polly.Context)">
+            <summary>
+            The mediation execute optional unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task}},`1,Polly.Context)">
+            <summary>
+            The mediation execute optional unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="modelData">The data provided to the request</param>
+            <param name="context">The Polly context to pass through</param>
+        </member>
+        <member name="T:Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`1">
+            <summary>
+            The mediation execute optional unit request (returning no result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`1.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}})">
+            <summary>
+            The mediation execute optional unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`1.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}})">
+            <summary>
+            The mediation execute optional unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`1.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task}},Polly.Context)">
+            <summary>
+            The mediation execute optional unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`1.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},Polly.Context)">
+            <summary>
+            The mediation execute optional unit request constructor
+            </summary>
+            <param name="executeApiMethod">The request to execute</param>
+            <param name="context">The Polly context to pass through</param>
+        </member>
+        <member name="T:Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalResultRequestHandlerBase`6">
+            <summary>
+            The top level base mediation execute optional result request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelResultData">The model result type</typeparam>
+            <typeparam name="TApiResultData">The api result type</typeparam>
+            <typeparam name="TApiRequestData">The api request type</typeparam>
+            <typeparam name="TModelRequestData">The model request type</typeparam>
+            <typeparam name="TRequest">The request to handle</typeparam>
+        </member>
+        <member name="T:Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalResultRequestHandlerBase`4">
+            <summary>
+            The top level base mediation execute optional result request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <typeparam name="TRequest">The request to handle</typeparam>
+        </member>
+        <member name="T:Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalResultRequestHandlerBase`3">
+            <summary>
+            The top level base mediation execute optional result request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <typeparam name="TRequest">The request to handle</typeparam>
+        </member>
+        <member name="T:Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase`4">
+            <summary>
+            The top level base mediation execute optional unit request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <typeparam name="TRequest">The execute unit request to handle</typeparam>
+        </member>
+        <member name="T:Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase`2">
+            <summary>
+            The top level base mediation execute optional unit request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TRequest">The execute unit request to handle</typeparam>
+        </member>
+        <member name="T:Apizr.Optional.Requesting.Handling.ExecuteOptionalResultRequestHandler`5">
+            <summary>
+            The mediation execute optional result request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelResultData">The model result type</typeparam>
+            <typeparam name="TApiResultData">The api result type</typeparam>
+            <typeparam name="TApiRequestData">The api request type</typeparam>
+            <typeparam name="TModelRequestData">The model request type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Handling.ExecuteOptionalResultRequestHandler`5.Handle(Apizr.Optional.Requesting.ExecuteOptionalResultRequest{`0,`1,`2,`3,`4},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Optional.Requesting.Handling.ExecuteOptionalResultRequestHandler`3">
+            <summary>
+            The mediation execute optional result request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Handling.ExecuteOptionalResultRequestHandler`3.Handle(Apizr.Optional.Requesting.ExecuteOptionalResultRequest{`0,`1,`2},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Optional.Requesting.Handling.ExecuteOptionalResultRequestHandler`2">
+            <summary>
+            The mediation execute optional result request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Handling.ExecuteOptionalResultRequestHandler`2.Handle(Apizr.Optional.Requesting.ExecuteOptionalResultRequest{`0,`1},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler`3">
+            <summary>
+            The mediation execute optional unit request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler`3.Handle(Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{`0,`1,`2},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler`1">
+            <summary>
+            The mediation execute optional unit request handler
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler`1.Handle(Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{`0},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``1(System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``1(System.Linq.Expressions.Expression{System.Func{Polly.Context,``0,System.Threading.Tasks.Task}},Polly.Context)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``1(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,``0,System.Threading.Tasks.Task}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``1(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,``0,System.Threading.Tasks.Task}},Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{``0,``2,System.Threading.Tasks.Task}},``1)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,``0,``2,System.Threading.Tasks.Task}},``1,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{Polly.Context,``0,``2,System.Threading.Tasks.Task}},``1,Polly.Context)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,``0,``2,System.Threading.Tasks.Task}},``1,Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``2(System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{``1}}},System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,``0,System.Threading.Tasks.Task{``1}}},Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``2(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,``0,System.Threading.Tasks.Task{``1}}},System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,``0,System.Threading.Tasks.Task{``1}}},Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{``2}}},System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{Polly.Context,``0,System.Threading.Tasks.Task{``2}}},Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,``0,System.Threading.Tasks.Task{``2}}},System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,``0,System.Threading.Tasks.Task{``2}}},Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{``0,``2,System.Threading.Tasks.Task{``2}}},``1,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{Polly.Context,``0,``2,System.Threading.Tasks.Task{``2}}},``1,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,``0,``2,System.Threading.Tasks.Task{``2}}},``1,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``3(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,``0,``2,System.Threading.Tasks.Task{``2}}},``1,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``5(System.Linq.Expressions.Expression{System.Func{``0,``3,System.Threading.Tasks.Task{``2}}},``4,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``5(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,``0,``3,System.Threading.Tasks.Task{``2}}},``4,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``5(System.Linq.Expressions.Expression{System.Func{Polly.Context,``0,``3,System.Threading.Tasks.Task{``2}}},``4,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``5(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,``0,``3,System.Threading.Tasks.Task{``2}}},``4,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task}},Polly.Context)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task}},``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task}},``0,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,``1,System.Threading.Tasks.Task}},``0,Polly.Context)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task}},``0,Polly.Context,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``1(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}},System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``1(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{``0}}},Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``1(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``0}}},System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``1(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``0}}},Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``1}}},System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{``1}}},Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``1}}},System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``1}}},Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,``1,System.Threading.Tasks.Task{``1}}},``0,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task{``1}}},``0,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``4(System.Linq.Expressions.Expression{System.Func{`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``4(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``4(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,``2,System.Threading.Tasks.Task{``1}}},``3,Polly.Context,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``4(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,``2,System.Threading.Tasks.Task{``1}}},``3,Polly.Context,System.Threading.CancellationToken,System.Boolean)">
+            <inheritdoc />
         </member>
         <member name="T:Apizr.Optional.Requesting.Sending.IApizrOptionalMediator">
             <summary>
@@ -2150,6 +3740,11 @@
             <param name="token">The cancellation token</param>
             <param name="clearCache">Clear request cache before executing (default: false)</param>
             <returns></returns>
+        </member>
+        <member name="T:Apizr.Optional.Requesting.Sending.IApizrOptionalMediatorBase">
+            <summary>
+            Apizr base optional mediator
+            </summary>
         </member>
     </members>
 </doc>

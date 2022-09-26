@@ -17,14 +17,17 @@ items:
   source:
     id: ExecuteOptionalUnitRequestHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Handling\ExecuteOptionalUnitRequestHandler.cs
-    startLine: 76
+    startLine: 87
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Handling
+  summary: "\nThe mediation execute optional unit request handler\n"
+  example: []
   syntax:
     content: 'public class ExecuteOptionalUnitRequestHandler<TWebApi> : ExecuteOptionalUnitRequestHandlerBase<TWebApi, ExecuteOptionalUnitRequest<TWebApi>>, IRequestHandler<ExecuteOptionalUnitRequest<TWebApi>, Option<Unit, ApizrException>>'
     typeParameters:
     - id: TWebApi
+      description: The web api type
     content.vb: >-
       Public Class ExecuteOptionalUnitRequestHandler(Of TWebApi)
           Inherits ExecuteOptionalUnitRequestHandlerBase(Of TWebApi, ExecuteOptionalUnitRequest(Of TWebApi))
@@ -68,7 +71,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Handling\ExecuteOptionalUnitRequestHandler.cs
-    startLine: 78
+    startLine: 89
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Handling
@@ -100,10 +103,12 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Handling\ExecuteOptionalUnitRequestHandler.cs
-    startLine: 82
+    startLine: 94
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Handling
+  summary: "\nHandling the execute unit request\n"
+  example: []
   syntax:
     content: public override async Task<Option<Unit, ApizrException>> Handle(ExecuteOptionalUnitRequest<TWebApi> request, CancellationToken cancellationToken)
     parameters:
@@ -111,8 +116,10 @@ items:
       type: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{{TWebApi}}
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: A cancellation token
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Overrides Function Handle(request As ExecuteOptionalUnitRequest(Of TWebApi), cancellationToken As CancellationToken) As Task(Of  Option(Of Unit, ApizrException)
   overridden: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase{{TWebApi},Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{{TWebApi}}}.Handle(Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{{TWebApi}},System.Threading.CancellationToken)
   overload: Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler`1.Handle*

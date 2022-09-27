@@ -110,7 +110,9 @@
             </summary>
         </member>
         <member name="T:Apizr.ApizrManager`1">
-            <inheritdoc />
+            <summary>
+            The manager
+            </summary>
         </member>
         <member name="M:Apizr.ApizrManager`1.#ctor(Apizr.ILazyFactory{`0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptions{`0})">
             <summary>
@@ -211,7 +213,9 @@
             <inheritdoc />
         </member>
         <member name="T:Apizr.Authenticating.AuthenticationHandlerBase">
-            <inheritdoc cref="T:Apizr.Authenticating.IAuthenticationHandler" />
+            <summary>
+            The authentication handler base implementation
+            </summary>
         </member>
         <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase)">
             <summary>
@@ -219,9 +223,6 @@
             </summary>
             <param name="logger">The logger</param>
             <param name="apizrOptions">The Apizr options</param>
-        </member>
-        <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
-            <inheritdoc />
         </member>
         <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.GetToken">
             <inheritdoc />
@@ -510,7 +511,9 @@
             <returns></returns>
         </member>
         <member name="T:Apizr.Caching.VoidCacheHandler">
-            <inheritdoc />
+            <summary>
+            The cache handler method mapping void implementation
+            </summary>
         </member>
         <member name="M:Apizr.Caching.VoidCacheHandler.GetAsync``1(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
@@ -649,7 +652,9 @@
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.ApizrOptionsBuilder">
-            <inheritdoc />
+            <summary>
+            Builder options available for static registrations
+            </summary>
         </member>
         <member name="F:Apizr.Configuring.ApizrOptionsBuilder.Options">
             <summary>
@@ -818,7 +823,9 @@
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Common.ApizrCommonOptionsBuilder">
-            <inheritdoc />
+            <summary>
+            Builder options available at common level for static registrations
+            </summary>
         </member>
         <member name="F:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.Options">
             <summary>
@@ -1216,7 +1223,9 @@
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Proper.ApizrProperOptionsBuilder">
-            <inheritdoc />
+            <summary>
+            Builder options available at proper level for static registrations
+            </summary>
         </member>
         <member name="F:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.Options">
             <summary>
@@ -1350,7 +1359,9 @@
             </summary>
         </member>
         <member name="T:Apizr.Configuring.Registry.ApizrRegistry">
-            <inheritdoc cref="T:Apizr.Configuring.Registry.IApizrConcurrentRegistry"/>
+            <summary>
+            Registry options available for static registrations
+            </summary>
         </member>
         <member name="M:Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManagerFor``1(System.Func{Apizr.IApizrManager{``0}})">
             <inheritdoc />
@@ -1362,10 +1373,15 @@
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Registry.ApizrRegistryBase">
-            <inheritdoc />
+            <summary>
+            Registry options available for both static and extended registrations
+            </summary>
         </member>
         <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.GetEnumerator">
-            <inheritdoc />
+            <summary>
+            Get factory enumerator
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.GetCrudManagerFor``1">
             <inheritdoc />
@@ -1416,7 +1432,9 @@
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Registry.ApizrRegistryBuilder">
-            <inheritdoc />
+            <summary>
+            Registry builder options available for static registrations
+            </summary>
         </member>
         <member name="F:Apizr.Configuring.Registry.ApizrRegistryBuilder.Registry">
             <summary>
@@ -1716,7 +1734,9 @@
             <returns></returns>
         </member>
         <member name="T:Apizr.Configuring.Shared.ApizrSharedOptionsBase">
-            <inheritdoc />
+            <summary>
+            Options available at both common and proper level for both static and extended registrations
+            </summary>
         </member>
         <member name="P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseUri">
             <inheritdoc />
@@ -2016,7 +2036,9 @@
             </summary>
         </member>
         <member name="T:Apizr.Connecting.DefaultConnectivityHandler">
-            <inheritdoc />
+            <summary>
+            The connectivity handler method mapping default implementation
+            </summary>
         </member>
         <member name="M:Apizr.Connecting.DefaultConnectivityHandler.#ctor(System.Func{System.Boolean})">
             <summary>
@@ -2794,9 +2816,6 @@
             <summary> Constructs the <see cref="T:Apizr.Logging.ExtendedHttpTracerHandler"/> with a custom <see cref="T:Microsoft.Extensions.Logging.ILogger"/> and a custom <see cref="T:System.Net.Http.HttpMessageHandler"/></summary>
             <param name="handler">User defined <see cref="T:System.Net.Http.HttpMessageHandler"/></param>
             <param name="apizrOptions">Apizr options</param>
-        </member>
-        <member name="M:Apizr.Logging.ExtendedHttpTracerHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
-            <inheritdoc />
         </member>
         <member name="M:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest(System.Net.Http.HttpRequestMessage,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts)">
             <summary>

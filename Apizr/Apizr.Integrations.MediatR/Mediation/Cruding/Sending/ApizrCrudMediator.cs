@@ -6,7 +6,9 @@ using Polly;
 
 namespace Apizr.Mediation.Cruding.Sending
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Apizr mediator dedicated to cruding
+    /// </summary>
     public class ApizrCrudMediator : IApizrCrudMediator
     {
         private readonly IMediator _mediator;
@@ -428,7 +430,9 @@ namespace Apizr.Mediation.Cruding.Sending
         #endregion
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Apizr mediator dedicated to cruding
+    /// </summary>
     public class ApizrCrudMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> : IApizrCrudMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> where TApiEntity : class
     {
         private readonly IApizrCrudMediator _apizrMediator;

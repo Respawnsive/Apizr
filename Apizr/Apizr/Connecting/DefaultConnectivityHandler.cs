@@ -2,8 +2,9 @@
 
 namespace Apizr.Connecting
 {
-
-    /// <inheritdoc />
+    /// <summary>
+    /// The connectivity handler method mapping default implementation
+    /// </summary>
     public class DefaultConnectivityHandler : IConnectivityHandler
     {
         private readonly Func<bool> _connectivityChecker;

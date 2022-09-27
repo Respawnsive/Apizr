@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 
 namespace Apizr.Caching
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// The cache handler method mapping void implementation
+    /// </summary>
     public class VoidCacheHandler : ICacheHandler
     {
         /// <inheritdoc />

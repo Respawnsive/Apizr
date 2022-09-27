@@ -65,7 +65,10 @@ namespace Apizr.Mediation.Cruding.Base
         public TKey Key { get; }
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// The top level base mediation Read query
+    /// </summary>
+    /// <typeparam name="TResponse">The result entity type</typeparam>
     public abstract class ReadQueryBase<TResponse> : ReadQueryBase<TResponse, int>
     {
         /// <inheritdoc />

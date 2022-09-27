@@ -14,7 +14,9 @@ using Refit;
 
 namespace Apizr.Extending.Configuring.Common
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Builder options available at common level for extended registration
+    /// </summary>
     public class ApizrExtendedCommonOptionsBuilder : IApizrExtendedCommonOptionsBuilder
     {
         protected readonly ApizrExtendedCommonOptions Options;

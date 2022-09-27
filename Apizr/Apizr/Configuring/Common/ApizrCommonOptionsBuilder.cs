@@ -13,7 +13,9 @@ using Refit;
 
 namespace Apizr.Configuring.Common
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Builder options available at common level for static registrations
+    /// </summary>
     public class ApizrCommonOptionsBuilder : IApizrCommonOptionsBuilder
     {
         /// <summary>

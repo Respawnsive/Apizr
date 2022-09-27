@@ -10,7 +10,9 @@ using Polly.Registry;
 
 namespace Apizr.Configuring.Registry
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Registry builder options available for static registrations
+    /// </summary>
     public class ApizrRegistryBuilder : IApizrRegistryBuilder
     {
         /// <summary>

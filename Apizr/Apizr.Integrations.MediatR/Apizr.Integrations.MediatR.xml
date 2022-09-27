@@ -119,19 +119,29 @@
             <inheritdoc />
         </member>
         <member name="T:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistry">
-            <inheritdoc cref="T:Apizr.Mediation.Configuring.Registry.IApizrMediationConcurrentRegistry" />
+            <summary>
+            Registry options available for extended registrations with mediation
+            </summary>
         </member>
         <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistry.AddOrUpdate(System.Type,System.Type)">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase">
-            <inheritdoc />
+            <summary>
+            Registry options available for extended registrations with mediation
+            </summary>
         </member>
         <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetEnumerator">
-            <inheritdoc />
+            <summary>
+            Get factory enumerator
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.System#Collections#IEnumerable#GetEnumerator">
-            <inheritdoc />
+            <summary>
+            Get factory enumerator
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``1">
             <inheritdoc />
@@ -373,7 +383,11 @@
             </summary>
         </member>
         <member name="T:Apizr.Mediation.Cruding.Base.DeleteCommandBase`2">
-            <inheritdoc />
+            <summary>
+            The top level base mediation Delete command
+            </summary>
+            <typeparam name="T">The api entity type</typeparam>
+            <typeparam name="TResultData">The api result type</typeparam>
         </member>
         <member name="M:Apizr.Mediation.Cruding.Base.DeleteCommandBase`2.#ctor(System.Int32,System.Action{System.Exception})">
             <inheritdoc />
@@ -382,7 +396,10 @@
             <inheritdoc />
         </member>
         <member name="T:Apizr.Mediation.Cruding.Base.DeleteCommandBase`1">
-            <inheritdoc />
+            <summary>
+            The top level base mediation Delete command
+            </summary>
+            <typeparam name="T">The api entity type</typeparam>
         </member>
         <member name="M:Apizr.Mediation.Cruding.Base.DeleteCommandBase`1.#ctor(System.Int32,System.Action{System.Exception})">
             <inheritdoc />
@@ -439,7 +456,10 @@
             </summary>
         </member>
         <member name="T:Apizr.Mediation.Cruding.Base.ReadAllQueryBase`1">
-            <inheritdoc />
+            <summary>
+            The top level base mediation ReadAll query
+            </summary>
+            <typeparam name="TReadAllResult">The api result type</typeparam>
         </member>
         <member name="M:Apizr.Mediation.Cruding.Base.ReadAllQueryBase`1.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object},System.Boolean,System.Action{System.Exception})">
             <inheritdoc />
@@ -502,7 +522,10 @@
             </summary>
         </member>
         <member name="T:Apizr.Mediation.Cruding.Base.ReadQueryBase`1">
-            <inheritdoc />
+            <summary>
+            The top level base mediation Read query
+            </summary>
+            <typeparam name="TResponse">The result entity type</typeparam>
         </member>
         <member name="M:Apizr.Mediation.Cruding.Base.ReadQueryBase`1.#ctor(System.Int32,System.Boolean,System.Action{System.Exception})">
             <inheritdoc />
@@ -552,7 +575,11 @@
             </summary>
         </member>
         <member name="T:Apizr.Mediation.Cruding.Base.UpdateCommandBase`2">
-            <inheritdoc />
+            <summary>
+            The top level base mediation Update command
+            </summary>
+            <typeparam name="TRequestData">The request data type</typeparam>
+            <typeparam name="TResultData">The result data type</typeparam>
         </member>
         <member name="M:Apizr.Mediation.Cruding.Base.UpdateCommandBase`2.#ctor(System.Int32,`0,System.Action{System.Exception})">
             <inheritdoc />
@@ -561,7 +588,10 @@
             <inheritdoc />
         </member>
         <member name="T:Apizr.Mediation.Cruding.Base.UpdateCommandBase`1">
-            <inheritdoc />
+            <summary>
+            The top level base mediation Update command
+            </summary>
+            <typeparam name="TRequestData">The request data type</typeparam>
         </member>
         <member name="M:Apizr.Mediation.Cruding.Base.UpdateCommandBase`1.#ctor(System.Int32,`0,System.Action{System.Exception})">
             <inheritdoc />
@@ -1184,7 +1214,9 @@
             <param name="onException">Action to execute when an exception occurs</param>
         </member>
         <member name="T:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator">
-            <inheritdoc />
+            <summary>
+            Apizr mediator dedicated to cruding
+            </summary>
         </member>
         <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendCreateCommand``1(``0,System.Action{System.Exception})">
             <inheritdoc />
@@ -1391,7 +1423,9 @@
             <inheritdoc />
         </member>
         <member name="T:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4">
-            <inheritdoc />
+            <summary>
+            Apizr mediator dedicated to cruding
+            </summary>
         </member>
         <member name="M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator`4.SendCreateCommand(`0,System.Action{System.Exception})">
             <inheritdoc />
@@ -3421,7 +3455,14 @@
             </summary>
         </member>
         <member name="T:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`5">
-            <inheritdoc />
+            <summary>
+            The top level base mediation execute result request (returning result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelResultData">The model result type</typeparam>
+            <typeparam name="TApiResultData">The api result type</typeparam>
+            <typeparam name="TApiRequestData">The api request type</typeparam>
+            <typeparam name="TModelRequestData">The model request type</typeparam>
         </member>
         <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`5.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{`2}}},System.Boolean,System.Action{System.Exception})">
             <inheritdoc />
@@ -3448,7 +3489,13 @@
             <inheritdoc />
         </member>
         <member name="T:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`4">
-            <inheritdoc />
+            <summary>
+            The top level base mediation execute result request (returning result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <typeparam name="TFormattedModelResultData">The formatted model result type</typeparam>
         </member>
         <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`4.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{`2}}},System.Boolean,System.Action{System.Exception})">
             <inheritdoc />
@@ -3475,7 +3522,12 @@
             <inheritdoc />
         </member>
         <member name="T:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`3">
-            <inheritdoc />
+            <summary>
+            The top level base mediation execute result request (returning result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
         </member>
         <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{`2}}},System.Boolean,System.Action{System.Exception})">
             <inheritdoc />
@@ -3502,7 +3554,11 @@
             <inheritdoc />
         </member>
         <member name="T:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`2">
-            <inheritdoc />
+            <summary>
+            The top level base mediation execute result request (returning result)
+            </summary>
+            <typeparam name="TWebApi">The web api type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
         </member>
         <member name="M:Apizr.Mediation.Requesting.Base.ExecuteResultRequestBase`2.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{`1}}},System.Boolean,System.Action{System.Exception})">
             <inheritdoc />
@@ -4231,7 +4287,9 @@
             <inheritdoc />
         </member>
         <member name="T:Apizr.Mediation.Requesting.Sending.ApizrMediator">
-            <inheritdoc />
+            <summary>
+            Apizr mediator to send request using MediatR by calling expression
+            </summary>
         </member>
         <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator.SendFor``1(System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task}},System.Action{System.Exception})">
             <inheritdoc />
@@ -4306,7 +4364,9 @@
             <inheritdoc />
         </member>
         <member name="T:Apizr.Mediation.Requesting.Sending.ApizrMediator`1">
-            <inheritdoc />
+            <summary>
+            Apizr mediator to send request using MediatR by calling expression
+            </summary>
         </member>
         <member name="M:Apizr.Mediation.Requesting.Sending.ApizrMediator`1.SendFor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}},System.Action{System.Exception})">
             <inheritdoc />

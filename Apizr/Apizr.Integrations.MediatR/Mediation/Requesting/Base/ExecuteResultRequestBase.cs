@@ -136,7 +136,14 @@ namespace Apizr.Mediation.Requesting.Base
         public bool ClearCache { get; }
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// The top level base mediation execute result request (returning result)
+    /// </summary>
+    /// <typeparam name="TWebApi">The web api type</typeparam>
+    /// <typeparam name="TModelResultData">The model result type</typeparam>
+    /// <typeparam name="TApiResultData">The api result type</typeparam>
+    /// <typeparam name="TApiRequestData">The api request type</typeparam>
+    /// <typeparam name="TModelRequestData">The model request type</typeparam>
     public abstract class ExecuteResultRequestBase<TWebApi, TModelResultData, TApiResultData, TApiRequestData,
         TModelRequestData> :
         ExecuteResultRequestBase<TWebApi, TModelResultData, TApiResultData, TModelResultData, TApiRequestData,
@@ -198,7 +205,13 @@ namespace Apizr.Mediation.Requesting.Base
         }
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// The top level base mediation execute result request (returning result)
+    /// </summary>
+    /// <typeparam name="TWebApi">The web api type</typeparam>
+    /// <typeparam name="TModelData">The model data type</typeparam>
+    /// <typeparam name="TApiData">The api data type</typeparam>
+    /// <typeparam name="TFormattedModelResultData">The formatted model result type</typeparam>
     public abstract class ExecuteResultRequestBase<TWebApi, TModelData, TApiData, TFormattedModelResultData> :
         ExecuteResultRequestBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TApiData, TModelData>
     {
@@ -255,7 +268,12 @@ namespace Apizr.Mediation.Requesting.Base
         }
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// The top level base mediation execute result request (returning result)
+    /// </summary>
+    /// <typeparam name="TWebApi">The web api type</typeparam>
+    /// <typeparam name="TModelData">The model data type</typeparam>
+    /// <typeparam name="TApiData">The api data type</typeparam>
     public abstract class
         ExecuteResultRequestBase<TWebApi, TModelData, TApiData> : ExecuteResultRequestBase<TWebApi, TModelData, TApiData
             , TModelData>
@@ -313,7 +331,11 @@ namespace Apizr.Mediation.Requesting.Base
         }
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// The top level base mediation execute result request (returning result)
+    /// </summary>
+    /// <typeparam name="TWebApi">The web api type</typeparam>
+    /// <typeparam name="TApiData">The api data type</typeparam>
     public abstract class
         ExecuteResultRequestBase<TWebApi, TApiData> : ExecuteResultRequestBase<TWebApi, TApiData, TApiData>
     {

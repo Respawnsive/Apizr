@@ -66,7 +66,10 @@ namespace Apizr.Mediation.Cruding.Base
         public TReadAllParams Parameters { get; }
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// The top level base mediation ReadAll query
+    /// </summary>
+    /// <typeparam name="TReadAllResult">The api result type</typeparam>
     public abstract class ReadAllQueryBase<TReadAllResult> : ReadAllQueryBase<IDictionary<string, object>, TReadAllResult>
     {
         /// <inheritdoc />

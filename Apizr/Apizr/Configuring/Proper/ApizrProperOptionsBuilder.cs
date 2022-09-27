@@ -10,7 +10,9 @@ using Polly.Registry;
 
 namespace Apizr.Configuring.Proper
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Builder options available at proper level for static registrations
+    /// </summary>
     public class ApizrProperOptionsBuilder : IApizrProperOptionsBuilder
     {
         /// <summary>

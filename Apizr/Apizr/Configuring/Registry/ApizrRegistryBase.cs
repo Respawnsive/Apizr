@@ -6,12 +6,17 @@ using Apizr.Requesting;
 
 namespace Apizr.Configuring.Registry
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Registry options available for both static and extended registrations
+    /// </summary>
     public abstract class ApizrRegistryBase : IApizrEnumerableRegistry
     {
         internal readonly IDictionary<Type, Func<IApizrManager>> ConcurrentRegistry = new ConcurrentDictionary<Type, Func<IApizrManager>>();
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Get factory enumerator
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator<KeyValuePair<Type, Func<IApizrManager>>> GetEnumerator() => ConcurrentRegistry.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

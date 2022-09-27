@@ -10,7 +10,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Apizr.Extending.Configuring.Registry
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Registry builder options available for extended registrations
+    /// </summary>
     public class ApizrExtendedRegistryBuilder : IApizrExtendedRegistryBuilder
     {
         protected readonly ApizrExtendedRegistry Registry;

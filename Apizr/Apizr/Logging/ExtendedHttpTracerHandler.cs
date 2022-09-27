@@ -56,8 +56,7 @@ namespace Apizr.Logging
             };
             _apizrOptions = apizrOptions;
         }
-
-        /// <inheritdoc />
+        
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var context = request.GetOrBuildPolicyExecutionContext();

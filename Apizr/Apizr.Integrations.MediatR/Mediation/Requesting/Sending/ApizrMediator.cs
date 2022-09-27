@@ -8,7 +8,9 @@ using Polly;
 
 namespace Apizr.Mediation.Requesting.Sending
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Apizr mediator to send request using MediatR by calling expression
+    /// </summary>
     public class ApizrMediator : IApizrMediator
     {
         private readonly IMediator _mediator;
@@ -213,7 +215,9 @@ namespace Apizr.Mediation.Requesting.Sending
         #endregion
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Apizr mediator to send request using MediatR by calling expression
+    /// </summary>
     public class ApizrMediator<TWebApi> : IApizrMediator<TWebApi>
     {
         private readonly IApizrMediator _apizrMediator;

@@ -5,7 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Apizr.Extending.Configuring.Registry
 {
-    /// <inheritdoc cref="IApizrExtendedConcurrentRegistry"/>
+    /// <summary>
+    /// Registry options available for extended registrations
+    /// </summary>
     public class ApizrExtendedRegistry : ApizrRegistryBase, IApizrExtendedConcurrentRegistry
     {
         private IServiceProvider _serviceProvider;

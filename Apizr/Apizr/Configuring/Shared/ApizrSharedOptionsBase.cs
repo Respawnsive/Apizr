@@ -5,7 +5,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Apizr.Configuring.Shared
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Options available at both common and proper level for both static and extended registrations
+    /// </summary>
     public abstract class ApizrSharedOptionsBase : IApizrSharedOptionsBase
     {
         /// <inheritdoc />

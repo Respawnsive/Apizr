@@ -9,7 +9,9 @@ using Polly;
 
 namespace Apizr.Optional.Requesting.Sending
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Apizr mediator to send request using MediatR by calling expression and returning optional result
+    /// </summary>
     public class ApizrOptionalMediator : IApizrOptionalMediator
     {
         private readonly IMediator _mediator;
@@ -203,7 +205,9 @@ namespace Apizr.Optional.Requesting.Sending
         #endregion
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// <see cref="IApizrOptionalMediator"/> but dedicated to <typeparamref name="TWebApi"/> with optional result, getting all shorter
+    /// </summary>
     public class ApizrOptionalMediator<TWebApi> : IApizrOptionalMediator<TWebApi>
     {
         private readonly IApizrOptionalMediator _apizrMediator;

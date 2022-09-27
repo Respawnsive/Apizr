@@ -5,7 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Apizr.Optional.Configuring.Registry
 {
-    /// <inheritdoc cref="IApizrOptionalMediationConcurrentRegistry" />
+    /// <summary>
+    /// Registry options available for extended registrations with optional mediation
+    /// </summary>
     public class ApizrOptionalMediationRegistry : ApizrOptionalMediationRegistryBase, IApizrOptionalMediationConcurrentRegistry
     {
         private IServiceProvider _serviceProvider;

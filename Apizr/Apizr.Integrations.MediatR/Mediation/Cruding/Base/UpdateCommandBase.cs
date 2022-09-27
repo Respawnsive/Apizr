@@ -49,7 +49,11 @@ namespace Apizr.Mediation.Cruding.Base
         public TRequestData RequestData { get; }
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// The top level base mediation Update command
+    /// </summary>
+    /// <typeparam name="TRequestData">The request data type</typeparam>
+    /// <typeparam name="TResultData">The result data type</typeparam>
     public abstract class UpdateCommandBase<TRequestData, TResultData> : UpdateCommandBase<int, TRequestData, TResultData>
     {
         /// <inheritdoc />
@@ -63,7 +67,10 @@ namespace Apizr.Mediation.Cruding.Base
         }
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// The top level base mediation Update command
+    /// </summary>
+    /// <typeparam name="TRequestData">The request data type</typeparam>
     public abstract class UpdateCommandBase<TRequestData> : UpdateCommandBase<TRequestData, Unit>
     {
         /// <inheritdoc />

@@ -14,7 +14,9 @@ namespace Apizr.Extending.Configuring.Proper
     {
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Builder options available at proper level for extended registrations
+    /// </summary>
     public interface IApizrExtendedProperOptionsBuilder : IApizrExtendedProperOptionsBuilder<IApizrExtendedProperOptions, IApizrExtendedProperOptionsBuilder>
     { }
 }

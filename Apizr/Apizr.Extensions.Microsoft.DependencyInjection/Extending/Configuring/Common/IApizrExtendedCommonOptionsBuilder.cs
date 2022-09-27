@@ -97,6 +97,9 @@ namespace Apizr.Extending.Configuring.Common
         TApizrExtendedCommonOptionsBuilder WithMappingHandler(Type mappingHandlerType);
     }
 
+    /// <summary>
+    /// Builder options available at common level for extended registration
+    /// </summary>
     public interface IApizrExtendedCommonOptionsBuilder : IApizrExtendedCommonOptionsBuilder<IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder>
     { }
 }

@@ -11,7 +11,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Apizr.Authenticating
 {
-    /// <inheritdoc cref="IAuthenticationHandler" />
+    /// <summary>
+    /// The authentication handler base implementation
+    /// </summary>
     public abstract class AuthenticationHandlerBase : DelegatingHandler, IAuthenticationHandler
     {
         private readonly ILogger _logger;
@@ -27,8 +29,7 @@ namespace Apizr.Authenticating
             _logger = logger;
             _apizrOptions = apizrOptions;
         }
-
-        /// <inheritdoc />
+        
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             HttpRequestMessage clonedRequest = null;

@@ -27,7 +27,9 @@ using Refit;
 
 namespace Apizr
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// The manager
+    /// </summary>
     public class ApizrManager<TWebApi> : IApizrManager<TWebApi>
     {
         private readonly ILazyFactory<TWebApi> _lazyWebApi;

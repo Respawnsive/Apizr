@@ -39,8 +39,12 @@ namespace Apizr.Mediation.Cruding.Base
         /// </summary>
         public TKey Key { get; }
     }
-    
-    /// <inheritdoc />
+
+    /// <summary>
+    /// The top level base mediation Delete command
+    /// </summary>
+    /// <typeparam name="T">The api entity type</typeparam>
+    /// <typeparam name="TResultData">The api result type</typeparam>
     public abstract class DeleteCommandBase<T, TResultData> : DeleteCommandBase<T, int, TResultData>
     {
         /// <inheritdoc />
@@ -54,7 +58,10 @@ namespace Apizr.Mediation.Cruding.Base
         }
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// The top level base mediation Delete command
+    /// </summary>
+    /// <typeparam name="T">The api entity type</typeparam>
     public abstract class DeleteCommandBase<T> : DeleteCommandBase<T, Unit>
     {
         /// <inheritdoc />

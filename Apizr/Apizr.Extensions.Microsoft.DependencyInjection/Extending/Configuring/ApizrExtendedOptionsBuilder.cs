@@ -14,7 +14,9 @@ using Refit;
 
 namespace Apizr.Extending.Configuring
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Builder options available for extended registrations
+    /// </summary>
     public class ApizrExtendedOptionsBuilder : IApizrExtendedOptionsBuilder
     {
         protected readonly ApizrExtendedOptions Options;

@@ -13,7 +13,9 @@ using Refit;
 
 namespace Apizr.Configuring
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Builder options available for static registrations
+    /// </summary>
     public class ApizrOptionsBuilder : IApizrOptionsBuilder
     {
         /// <summary>

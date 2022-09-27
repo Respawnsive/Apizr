@@ -3,7 +3,9 @@ using System.Collections.Concurrent;
 
 namespace Apizr.Configuring.Registry
 {
-    /// <inheritdoc cref="IApizrConcurrentRegistry"/>
+    /// <summary>
+    /// Registry options available for static registrations
+    /// </summary>
     public class ApizrRegistry : ApizrRegistryBase, IApizrConcurrentRegistry
     {
         private ConcurrentDictionary<Type, Func<IApizrManager>> ThrowIfNotConcurrentImplementation()

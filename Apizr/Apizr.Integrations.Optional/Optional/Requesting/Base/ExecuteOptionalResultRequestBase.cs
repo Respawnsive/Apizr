@@ -106,7 +106,12 @@ namespace Apizr.Optional.Requesting.Base
         }
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// The top level base mediation execute result request (returning optional result)
+    /// </summary>
+    /// <typeparam name="TWebApi">The web api type</typeparam>
+    /// <typeparam name="TModelData">The model data type</typeparam>
+    /// <typeparam name="TApiData">The api data type</typeparam>
     public abstract class ExecuteOptionalResultRequestBase<TWebApi, TModelData, TApiData> :
         ExecuteResultRequestBase<TWebApi, TModelData, TApiData, Option<TModelData, ApizrException<TModelData>>>
     {
@@ -155,7 +160,11 @@ namespace Apizr.Optional.Requesting.Base
         }
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// The top level base mediation execute result request (returning optional result)
+    /// </summary>
+    /// <typeparam name="TWebApi">The web api type</typeparam>
+    /// <typeparam name="TApiData">The api data type</typeparam>
     public abstract class ExecuteOptionalResultRequestBase<TWebApi, TApiData> : ExecuteResultRequestBase<TWebApi, TApiData, TApiData,
         Option<TApiData, ApizrException<TApiData>>>
     {

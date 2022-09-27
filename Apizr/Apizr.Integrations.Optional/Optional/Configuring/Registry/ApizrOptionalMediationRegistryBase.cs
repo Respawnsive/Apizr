@@ -7,7 +7,9 @@ using Apizr.Optional.Requesting.Sending;
 
 namespace Apizr.Optional.Configuring.Registry
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Registry options available for extended registrations with optional mediation
+    /// </summary>
     public abstract class ApizrOptionalMediationRegistryBase : IApizrOptionalMediationEnumerableRegistry
     {
         protected readonly IDictionary<Type, Func<IApizrOptionalMediatorBase>> ConcurrentRegistry = new ConcurrentDictionary<Type, Func<IApizrOptionalMediatorBase>>();
@@ -17,10 +19,16 @@ namespace Apizr.Optional.Configuring.Registry
 
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Get factory enumerator
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator<KeyValuePair<Type, Func<IApizrOptionalMediatorBase>>> GetEnumerator() => ConcurrentRegistry.GetEnumerator();
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Get factory enumerator
+        /// </summary>
+        /// <returns></returns>
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />

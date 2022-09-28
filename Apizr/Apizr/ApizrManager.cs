@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Caching.Attributes;
 using Apizr.Configuring;
+using Apizr.Configuring.Request;
 using Apizr.Connecting;
 using Apizr.Extending;
 using Apizr.Logging;
@@ -2020,6 +2021,22 @@ namespace Apizr
                 $"{methodDetails.MethodInfo.Name}: Returning mapped result from {typeof(TApiData).Name} to {typeof(TModelData).Name}");
 
             return Map<TApiData, TModelData>(result);
+        }
+
+        /// <inheritdoc />
+        public Task<TModelData> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            var requestOptions = new ApizrRequestOptions();
+            var builder = new ApizrRequestOptionsBuilder(requestOptions);
+            optionsBuilder?.Invoke(builder);
+
+            return ExecuteAsync<TModelData, TApiData>(executeApiMethod, 
+                builder.ApizrOptions.Context,
+                builder.ApizrOptions.CancellationToken, 
+                builder.ApizrOptions.ClearCache,
+                builder.ApizrOptions.OnException);
         }
 
         /// <inheritdoc />

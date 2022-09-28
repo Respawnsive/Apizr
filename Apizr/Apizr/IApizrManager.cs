@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring;
+using Apizr.Configuring.Request;
 using Polly;
 
 namespace Apizr
@@ -346,6 +347,18 @@ namespace Apizr
             Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData,
             Context context = null, CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// </summary>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="optionsBuilder">Options provided the request</param>
+        /// <returns></returns>
+        Task<TModelData> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result

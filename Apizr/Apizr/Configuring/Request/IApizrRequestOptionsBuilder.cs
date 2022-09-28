@@ -17,7 +17,7 @@ namespace Apizr.Configuring.Request
 
         TApizrRequestOptionsBuilder WithCancellationToken(CancellationToken cancellationToken);
 
-        TApizrRequestOptionsBuilder WithCacheCleared();
+        TApizrRequestOptionsBuilder WithCacheCleared(bool clearCache);
 
         TApizrRequestOptionsBuilder WithExceptionCatcher(Action<Exception> onException);
     }

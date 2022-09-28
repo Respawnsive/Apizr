@@ -354,10 +354,10 @@ namespace Apizr
         /// <typeparam name="TModelData">The model data type</typeparam>
         /// <typeparam name="TApiData">The api data type</typeparam>
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
-        /// <param name="optionsBuilder">Options provided the request</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>

@@ -32,10 +32,11 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder
         return this;
     }
 
+    /// <param name="clearCache"></param>
     /// <inheritdoc />
-    public IApizrRequestOptionsBuilder WithCacheCleared()
+    public IApizrRequestOptionsBuilder WithCacheCleared(bool clearCache)
     {
-        Options.ClearCache = true;
+        Options.ClearCache = clearCache;
 
         return this;
     }

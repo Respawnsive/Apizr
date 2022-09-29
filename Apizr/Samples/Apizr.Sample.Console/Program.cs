@@ -507,9 +507,12 @@ namespace Apizr.Sample.Console
                                 CancellationToken.None)
                             : await _mediator.Send(new ReadQuery<UserDetails>(userChoice), CancellationToken.None);
 
-                        var test = await _reqResManager.ExecuteAsync<MinUser, User>(
-                            (options, api) => api.CreateUser(users.First(), options.CancellationToken),
-                            options => options.WithCacheCleared(true).WithContext(new Context()).WithCancellationToken(CancellationToken.None));
+                        //var test = await _reqResManager.ExecuteAsync<MinUser, User>(
+                        //    (options, api) => api.CreateUser(users.First(), options.CancellationToken),
+                        //    options => options.WithCacheCleared(true).WithContext(new Context()).WithCancellationToken(CancellationToken.None));
+
+                        //var test = await _reqResManager.ExecuteAsync<MinUser, User>(
+                        //    (ctx, ct, api) => api.CreateUser(users.First(), ct), new Context(), CancellationToken.None, true);
 
                         userInfos = new UserInfos
                         {

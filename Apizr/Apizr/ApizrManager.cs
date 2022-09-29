@@ -2088,8 +2088,7 @@ namespace Apizr
                             $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
 
                     var pollyContext = new Context(methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.Context ?? new Context());
-                    pollyContext.WithLogger(_apizrOptions.Logger, logAttribute.LogLevels, logAttribute.TrafficVerbosity,
-                        logAttribute.HttpTracerMode);
+                    pollyContext.WithLogger(_apizrOptions.Logger, logAttribute.LogLevels, logAttribute.TrafficVerbosity, logAttribute.HttpTracerMode);
                     requestOptionsBuilder.WithContext(pollyContext);
                     result = await policy.ExecuteAsync(
                         (_, _) => executeApiMethod.Compile()(requestOptionsBuilder.ApizrOptions, webApi), requestOptionsBuilder.ApizrOptions.Context,

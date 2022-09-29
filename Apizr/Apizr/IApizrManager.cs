@@ -42,6 +42,7 @@ namespace Apizr
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
         /// <param name="onException">Handle exception (default: null = throwing)</param>
         /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
         Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod, Action<Exception> onException = null);
 
         /// <summary>
@@ -53,6 +54,7 @@ namespace Apizr
         /// <param name="modelData">The model data to map</param>
         /// <param name="onException">Handle exception (default: null = throwing)</param>
         /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
         Task ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
             TModelData modelData, Action<Exception> onException = null);
 
@@ -63,6 +65,7 @@ namespace Apizr
         /// <param name="cancellationToken">A cancellation token</param>
         /// <param name="onException">Handle exception (default: null = throwing)</param>
         /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
         Task ExecuteAsync(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod,
             CancellationToken cancellationToken = default, Action<Exception> onException = null);
 
@@ -73,6 +76,7 @@ namespace Apizr
         /// <param name="context">The Polly Context to pass through it all</param>
         /// <param name="onException">Handle exception (default: null = throwing)</param>
         /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
         Task ExecuteAsync(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context = null, Action<Exception> onException = null);
 
         /// <summary>
@@ -85,6 +89,7 @@ namespace Apizr
         /// <param name="cancellationToken">A cancellation token</param>
         /// <param name="onException">Handle exception (default: null = throwing)</param>
         /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
         Task ExecuteAsync<TModelData, TApiData>(
             Expression<Func<CancellationToken, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData,
             CancellationToken cancellationToken = default, Action<Exception> onException = null);
@@ -99,6 +104,7 @@ namespace Apizr
         /// <param name="context">The Polly Context to pass through it all</param>
         /// <param name="onException">Handle exception (default: null = throwing)</param>
         /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
         Task ExecuteAsync<TModelData, TApiData>(Expression<Func<Context, TWebApi, TApiData, Task>> executeApiMethod,
             TModelData modelData, Context context = null, Action<Exception> onException = null);
 
@@ -110,6 +116,7 @@ namespace Apizr
         /// <param name="cancellationToken">A cancellation token</param>
         /// <param name="onException">Handle exception (default: null = throwing)</param>
         /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
         Task ExecuteAsync(Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod,
             Context context = null,
             CancellationToken cancellationToken = default, Action<Exception> onException = null);
@@ -125,6 +132,7 @@ namespace Apizr
         /// <param name="cancellationToken">A cancellation token</param>
         /// <param name="onException">Handle exception (default: null = throwing)</param>
         /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
         Task ExecuteAsync<TModelData, TApiData>(
             Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task>> executeApiMethod,
             TModelData modelData,

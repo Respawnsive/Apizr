@@ -81,9 +81,11 @@ namespace Apizr
 
         #region Task
 
+        #region Obsolete
+
         /// <inheritdoc />
         public async Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod,
-            Action<Exception> onException = null)
+            Action<Exception> onException)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
@@ -129,7 +131,7 @@ namespace Apizr
 
         /// <inheritdoc />
         public async Task ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
-            TModelData modelData, Action<Exception> onException = null)
+            TModelData modelData, Action<Exception> onException)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
@@ -479,11 +481,58 @@ namespace Apizr
 
         #endregion
 
+        /// <inheritdoc />
+        public Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task ExecuteAsync(Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
         #region Task<T>
+
+        #region Obsolete
+
+        /// <inheritdoc />
+        public Task<TApiData> ExecuteAsync<TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<TApiData> ExecuteAsync<TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<Exception> onException)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <inheritdoc />
         public async Task<TResult> ExecuteAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod,
-            bool clearCache = false, Action<Exception> onException = null)
+            bool clearCache, Action<Exception> onException)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TResult>(executeApiMethod);
@@ -503,7 +552,7 @@ namespace Apizr
 
                 _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
-                
+
                 result = await _cacheHandler.GetAsync<TResult>(cacheKey);
                 if (!Equals(result, default))
                 {
@@ -517,9 +566,9 @@ namespace Apizr
                     else
                     {
                         _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
-                                    $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key"); 
+                                    $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
                     }
-                } 
+                }
             }
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
@@ -578,9 +627,23 @@ namespace Apizr
         }
 
         /// <inheritdoc />
+        public Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            TModelRequestData modelRequestData, bool clearCache)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            TModelRequestData modelRequestData, Action<Exception> onException)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public async Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
             TModelRequestData>(Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, bool clearCache = false, Action<Exception> onException = null)
+            TModelRequestData modelRequestData, bool clearCache, Action<Exception> onException)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiResultData>(executeApiMethod);
@@ -682,9 +745,21 @@ namespace Apizr
         }
 
         /// <inheritdoc />
+        public Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, bool clearCache)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<Exception> onException)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
-            bool clearCache = false, Action<Exception> onException = null)
+            bool clearCache, Action<Exception> onException)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
@@ -786,9 +861,21 @@ namespace Apizr
         }
 
         /// <inheritdoc />
+        public Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<Exception> onException)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false,
-            Action<Exception> onException = null)
+            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache,
+            Action<Exception> onException)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
@@ -2024,6 +2111,79 @@ namespace Apizr
         }
 
         /// <inheritdoc />
+        public Task<TModelData> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
+            Context context = null,
+            CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null) =>
+            ExecuteAsync<TModelData, TApiData>(
+                (options, api) => executeApiMethod.Compile()(options.Context, options.CancellationToken, api),
+                options => options.WithContext(context)
+                    .WithCancellationToken(cancellationToken)
+                    .WithCacheCleared(clearCache)
+                    .WithExceptionCatcher(onException));
+
+        #endregion
+
+        /// <inheritdoc />
+        public Task<TApiData> ExecuteAsync<TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<TApiData> ExecuteAsync<TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            throw new NotImplementedException();
+        }
+        
+        /// <inheritdoc />
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -2124,115 +2284,6 @@ namespace Apizr
                 $"{methodDetails.MethodInfo.Name}: Returning mapped result from {typeof(TApiData).Name} to {typeof(TModelData).Name}");
 
             return Map<TApiData, TModelData>(result);
-        }
-
-        /// <inheritdoc />
-        public Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
-            Context context = null,
-            CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null)
-        {
-            return ExecuteAsync<TModelData, TApiData>(
-                (options, api) => executeApiMethod.Compile()(options.Context, options.CancellationToken, api),
-                options => options.WithContext(context)
-                    .WithCancellationToken(cancellationToken)
-                    .WithCacheCleared(clearCache)
-                    .WithExceptionCatcher(onException));
-            //var webApi = _lazyWebApi.Value;
-            //var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
-            //var logAttribute = GetLogAttribute(methodDetails);
-            //_apizrOptions.Logger.Log(logAttribute.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Calling method");
-
-            //TApiData result = default;
-
-            //if (IsMethodCacheable<TApiData>(methodDetails, executeApiMethod, out var cacheAttribute,
-            //    out var cacheKey))
-            //{
-            //    _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
-            //        $"{methodDetails.MethodInfo.Name}: Called method is cacheable");
-
-            //    if (_cacheHandler is VoidCacheHandler)
-            //        _apizrOptions.Logger.Log(logAttribute.LogLevels.Medium(),
-            //            $"{methodDetails.MethodInfo.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
-
-            //    _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
-            //        $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
-
-            //    result = await _cacheHandler.GetAsync<TApiData>(cacheKey, cancellationToken);
-            //    if (!Equals(result, default))
-            //    {
-            //        if (clearCache)
-            //        {
-            //            await _cacheHandler.RemoveAsync(cacheKey, cancellationToken);
-            //            result = default;
-            //            _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
-            //                $"{methodDetails.MethodInfo.Name}: Cached data cleared for this cache key");
-            //        }
-            //        else
-            //        {
-            //            _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
-            //                $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
-            //        }
-            //    }
-            //}
-
-            //if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
-            //{
-            //    Exception ex = null;
-            //    try
-            //    {
-            //        if (!_connectivityHandler.IsConnected())
-            //        {
-            //            _apizrOptions.Logger.Log(logAttribute.LogLevels.Medium(),
-            //                $"{methodDetails.MethodInfo.Name}: Connectivity check failed, throw {nameof(IOException)}");
-            //            throw new IOException("Connectivity check failed");
-            //        }
-            //        else
-            //            _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
-            //                $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
-
-            //        var policy = GetMethodPolicy<TApiData>(methodDetails, logAttribute.LogLevels.Low());
-            //        if (!(policy is INoOpPolicy))
-            //            _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
-            //                $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
-
-            //        var pollyContext = new Context(methodDetails.MethodInfo.Name, context ?? new Context());
-            //        pollyContext.WithLogger(_apizrOptions.Logger, logAttribute.LogLevels, logAttribute.TrafficVerbosity,
-            //            logAttribute.HttpTracerMode);
-            //        result = await policy.ExecuteAsync(
-            //            (ctx, ct) => executeApiMethod.Compile()(ctx, ct, webApi), pollyContext,
-            //            cancellationToken);
-            //    }
-            //    catch (Exception e)
-            //    {
-            //        _apizrOptions.Logger.Log(logAttribute.LogLevels.High(),
-            //            $"{methodDetails.MethodInfo.Name}: Request throwed an exception with message {e.Message}");
-            //        _apizrOptions.Logger.Log(logAttribute.LogLevels.High(), !Equals(result, default(TApiData))
-            //            ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and cached result"
-            //            : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException but no cached result");
-
-            //        ex = new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
-            //        if (onException == null)
-            //            throw ex;
-
-            //        _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
-            //            $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
-            //        onException(ex);
-            //    }
-
-            //    if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
-            //        cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
-            //    {
-            //        _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Caching result");
-
-            //        await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan, cancellationToken);
-            //    }
-            //}
-
-            //_apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
-            //    $"{methodDetails.MethodInfo.Name}: Returning mapped result from {typeof(TApiData).Name} to {typeof(TModelData).Name}");
-
-            //return Map<TApiData, TModelData>(result);
         }
 
         #endregion

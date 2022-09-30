@@ -43,7 +43,7 @@ namespace Apizr
         /// <param name="onException">Handle exception (default: null = throwing)</param>
         /// <returns></returns>
         [Obsolete("Use the one with the request options builder parameter instead")]
-        Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod, Action<Exception> onException = null);
+        Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod, Action<Exception> onException);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -56,7 +56,7 @@ namespace Apizr
         /// <returns></returns>
         [Obsolete("Use the one with the request options builder parameter instead")]
         Task ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
-            TModelData modelData, Action<Exception> onException = null);
+            TModelData modelData, Action<Exception> onException);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -209,7 +209,61 @@ namespace Apizr
         /// <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
         /// <returns></returns>
         [Obsolete("Use the one with the request options builder parameter instead")]
-        Task<TApiData> ExecuteAsync<TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false, Action<Exception> onException = null);
+        Task<TApiData> ExecuteAsync<TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task
+        /// </summary>
+        /// <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
+        /// <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
+        /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        Task<TApiData> ExecuteAsync<TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<Exception> onException);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task
+        /// </summary>
+        /// <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
+        /// <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
+        /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        Task<TApiData> ExecuteAsync<TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache, Action<Exception> onException);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// </summary>
+        /// <typeparam name="TModelResultData">The mapped model result type</typeparam>
+        /// <typeparam name="TApiResultData">The api result type</typeparam>
+        /// <typeparam name="TApiRequestData">The mapped api request data type</typeparam>
+        /// <typeparam name="TModelRequestData">The model request data type</typeparam>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="modelRequestData">The model request data to map</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
+        /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
+            Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            TModelRequestData modelRequestData, bool clearCache);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// </summary>
+        /// <typeparam name="TModelResultData">The mapped model result type</typeparam>
+        /// <typeparam name="TApiResultData">The api result type</typeparam>
+        /// <typeparam name="TApiRequestData">The mapped api request data type</typeparam>
+        /// <typeparam name="TModelRequestData">The model request data type</typeparam>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="modelRequestData">The model request data to map</param>
+        /// <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
+        /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
+            Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            TModelRequestData modelRequestData, Action<Exception> onException);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -223,9 +277,36 @@ namespace Apizr
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
         /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
         Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, bool clearCache = false, Action<Exception> onException = null);
+            TModelRequestData modelRequestData, bool clearCache, Action<Exception> onException);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// </summary>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="modelData">The model data to map</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
+        /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        Task<TModelData> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, bool clearCache);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// </summary>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="modelData">The model data to map</param>
+        /// <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
+        /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        Task<TModelData> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<Exception> onException);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -239,7 +320,29 @@ namespace Apizr
         /// <returns></returns>
         [Obsolete("Use the one with the request options builder parameter instead")]
         Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, bool clearCache = false, Action<Exception> onException = null);
+            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, bool clearCache, Action<Exception> onException);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// </summary>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
+        /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// </summary>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
+        /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<Exception> onException);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -251,7 +354,7 @@ namespace Apizr
         /// <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
         /// <returns></returns>
         [Obsolete("Use the one with the request options builder parameter instead")]
-        Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache = false, Action<Exception> onException = null);
+        Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache, Action<Exception> onException);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task

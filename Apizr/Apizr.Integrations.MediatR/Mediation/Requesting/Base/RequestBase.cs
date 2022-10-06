@@ -1,4 +1,5 @@
 ﻿using System;
+using Apizr.Configuring.Request;
 using MediatR;
 using Polly;
 
@@ -11,9 +12,15 @@ namespace Apizr.Mediation.Requesting.Base
     public abstract class RequestBase<TFormattedModelResultData> : IRequest<TFormattedModelResultData>
     {
         /// <inheritdoc />
-        protected RequestBase(Action<Exception> onException = null) : this(null, onException)
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        protected RequestBase(Action<Exception> onException) : this(null, onException)
         {
+        }
 
+        /// <inheritdoc />
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        protected RequestBase(Context context) : this(context, null)
+        {
         }
 
         /// <summary>
@@ -21,21 +28,25 @@ namespace Apizr.Mediation.Requesting.Base
         /// </summary>
         /// <param name="context">The Polly context to pass through</param>
         /// <param name="onException">Action to execute when an exception occurs</param>
-        protected RequestBase(Context context, Action<Exception> onException = null)
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        protected RequestBase(Context context, Action<Exception> onException) : this(options =>
+            options.WithContext(context).WithExceptionCatcher(onException))
         {
-            Context = context;
-            OnException = onException;
         }
 
         /// <summary>
-        /// The Polly context to pass through
+        /// The base request constructor
         /// </summary>
-        public Context Context { get; }
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        protected RequestBase(Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            OptionsBuilder = optionsBuilder;
+        }
 
         /// <summary>
-        /// Action to execute when an exception occurs
+        /// The request options builder
         /// </summary>
-        public Action<Exception> OnException { get; }
+        public Action<IApizrRequestOptionsBuilder> OptionsBuilder { get; protected set; }
     }
 
     /// <summary>
@@ -46,19 +57,34 @@ namespace Apizr.Mediation.Requesting.Base
     public abstract class RequestBase<TFormattedModelResultData, TModelRequestData> : RequestBase<TFormattedModelResultData>
     {
         /// <inheritdoc />
-        protected RequestBase(Action<Exception> onException = null) : this(default, null, onException)
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        protected RequestBase(Action<Exception> onException) : this(default, null, onException)
         {
 
         }
 
         /// <inheritdoc />
-        protected RequestBase(TModelRequestData modelRequestData, Action<Exception> onException = null) : this(modelRequestData, null, onException)
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        protected RequestBase(Context context) : this(default, context, null)
+        {
+        }
+
+        /// <inheritdoc />
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        protected RequestBase(Context context, Action<Exception> onException) : this(default, context, onException)
+        {
+        }
+
+        /// <inheritdoc />
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        protected RequestBase(TModelRequestData modelRequestData, Action<Exception> onException) : this(modelRequestData, null, onException)
         {
 
         }
 
         /// <inheritdoc />
-        protected RequestBase(Context context, Action<Exception> onException = null) : this(default, context, onException)
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        protected RequestBase(TModelRequestData modelRequestData, Context context) : this(modelRequestData, context, null)
         {
         }
 
@@ -68,7 +94,18 @@ namespace Apizr.Mediation.Requesting.Base
         /// <param name="modelRequestData">The request type</param>
         /// <param name="context">The Polly context to pass through</param>
         /// <param name="onException">Action to execute when an exception occurs</param>
-        protected RequestBase(TModelRequestData modelRequestData, Context context, Action<Exception> onException = null) : base(context, onException)
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        protected RequestBase(TModelRequestData modelRequestData, Context context, Action<Exception> onException) : this(modelRequestData, options =>
+            options.WithContext(context).WithExceptionCatcher(onException))
+        {
+        }
+
+        /// <summary>
+        /// The base request constructor
+        /// </summary>
+        /// <param name="modelRequestData">The request type</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        protected RequestBase(TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(optionsBuilder)
         {
             ModelRequestData = modelRequestData;
         }

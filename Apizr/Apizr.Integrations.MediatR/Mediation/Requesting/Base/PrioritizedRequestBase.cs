@@ -1,4 +1,5 @@
 ﻿using System;
+using Apizr.Configuring.Request;
 using Polly;
 
 namespace Apizr.Mediation.Requesting.Base
@@ -13,7 +14,8 @@ namespace Apizr.Mediation.Requesting.Base
         /// The base prioritized mediation query constructor
         /// </summary>
         /// <param name="onException">Action to execute when an exception occurs</param>
-        protected PrioritizedRequestBase(Action<Exception> onException = null) : this(-1, onException)
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        protected PrioritizedRequestBase(Action<Exception> onException) : this(-1, null, onException)
         {
             
         }
@@ -23,9 +25,9 @@ namespace Apizr.Mediation.Requesting.Base
         /// </summary>
         /// <param name="priority">The execution priority to apply</param>
         /// <param name="onException">Action to execute when an exception occurs</param>
-        protected PrioritizedRequestBase(int priority, Action<Exception> onException = null) : base(onException)
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        protected PrioritizedRequestBase(int priority, Action<Exception> onException) : this(priority, null, onException)
         {
-            Priority = priority;
         }
 
         /// <summary>
@@ -33,7 +35,8 @@ namespace Apizr.Mediation.Requesting.Base
         /// </summary>
         /// <param name="context">The Polly context to pass through</param>
         /// <param name="onException">Action to execute when an exception occurs</param>
-        protected PrioritizedRequestBase(Context context, Action<Exception> onException = null) : this(-1, context, onException)
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        protected PrioritizedRequestBase(Context context, Action<Exception> onException) : this(-1, context, onException)
         {
 
         }
@@ -44,7 +47,27 @@ namespace Apizr.Mediation.Requesting.Base
         /// <param name="priority">The execution priority to apply</param>
         /// <param name="context">The Polly context to pass through</param>
         /// <param name="onException">Action to execute when an exception occurs</param>
-        protected PrioritizedRequestBase(int priority, Context context, Action<Exception> onException = null) : base(context, onException)
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        protected PrioritizedRequestBase(int priority, Context context, Action<Exception> onException) : base(context, onException)
+        {
+            Priority = priority;
+        }
+
+        /// <summary>
+        /// The base prioritized mediation query constructor
+        /// </summary>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        protected PrioritizedRequestBase(Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : this(-1, optionsBuilder)
+        {
+
+        }
+
+        /// <summary>
+        /// The base prioritized mediation query constructor
+        /// </summary>
+        /// <param name="priority">The execution priority to apply</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        protected PrioritizedRequestBase(int priority, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(optionsBuilder)
         {
             Priority = priority;
         }

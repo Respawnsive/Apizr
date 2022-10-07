@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Caching;
@@ -26,6 +27,8 @@ using Polly.NoOp;
 using Polly.Registry;
 using Refit;
 
+[assembly: InternalsVisibleTo("Apizr.Integrations.MediatR"),
+           InternalsVisibleTo("Apizr.Integrations.Optional")]
 namespace Apizr
 {
     /// <summary>
@@ -643,7 +646,7 @@ namespace Apizr
 
         #endregion
 
-        public IApizrRequestOptionsBuilder CreateRequestOptionsBuilder(Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        internal static IApizrRequestOptionsBuilder CreateRequestOptionsBuilder(Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
             var requestOptions = new ApizrRequestOptions();
             var builder = new ApizrRequestOptionsBuilder(requestOptions);

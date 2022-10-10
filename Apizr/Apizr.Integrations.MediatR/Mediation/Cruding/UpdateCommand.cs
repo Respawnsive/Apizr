@@ -1,4 +1,5 @@
 ﻿using System;
+using Apizr.Configuring.Request;
 using Apizr.Mediation.Cruding.Base;
 using MediatR;
 using Polly;
@@ -17,19 +18,8 @@ namespace Apizr.Mediation.Cruding
         /// </summary>
         /// <param name="key">The entity's crud key</param>
         /// <param name="requestData">The request data to send</param>
-        /// <param name="onException">Action to execute when an exception occurs</param>
-        public UpdateCommand(TKey key, TRequestData requestData, Action<Exception> onException = null) : base(key, requestData, onException)
-        {
-        }
-
-        /// <summary>
-        /// The mediation Update command constructor
-        /// </summary>
-        /// <param name="key">The entity's crud key</param>
-        /// <param name="requestData">The request data to send</param>
-        /// <param name="context">The Polly context to pass through</param>
-        /// <param name="onException">Action to execute when an exception occurs</param>
-        public UpdateCommand(TKey key, TRequestData requestData, Context context, Action<Exception> onException = null) : base(key, requestData, context, onException)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        public UpdateCommand(TKey key, TRequestData requestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, requestData, optionsBuilder)
         {
         }
     }
@@ -45,19 +35,8 @@ namespace Apizr.Mediation.Cruding
         /// </summary>
         /// <param name="key">The entity's crud key</param>
         /// <param name="requestData">The request data to send</param>
-        /// <param name="onException">Action to execute when an exception occurs</param>
-        public UpdateCommand(int key, TRequestData requestData, Action<Exception> onException = null) : base(key, requestData, onException)
-        {
-        }
-
-        /// <summary>
-        /// The mediation Update command constructor
-        /// </summary>
-        /// <param name="key">The entity's crud key</param>
-        /// <param name="requestData">The request data to send</param>
-        /// <param name="context">The Polly context to pass through</param>
-        /// <param name="onException">Action to execute when an exception occurs</param>
-        public UpdateCommand(int key, TRequestData requestData, Context context, Action<Exception> onException = null) : base(key, requestData, context, onException)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        public UpdateCommand(int key, TRequestData requestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, requestData, optionsBuilder)
         {
         }
     }

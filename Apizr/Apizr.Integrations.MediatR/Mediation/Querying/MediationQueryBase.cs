@@ -1,4 +1,5 @@
 ﻿using System;
+using Apizr.Configuring.Request;
 using Apizr.Mediation.Requesting.Base;
 using Polly;
 
@@ -13,50 +14,18 @@ namespace Apizr.Mediation.Querying
         /// <summary>
         /// The base mediation query constructor
         /// </summary>
-        /// <param name="clearCache">Asking to clear cache before sending</param>
-        /// <param name="onException">Action to execute when an exception occurs</param>
-        protected MediationQueryBase(bool clearCache, Action<Exception> onException = null) : base(onException)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        protected MediationQueryBase(Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(optionsBuilder)
         {
-            ClearCache = clearCache;
         }
 
         /// <summary>
         /// The base mediation query constructor
         /// </summary>
         /// <param name="priority">The execution priority to apply</param>
-        /// <param name="clearCache">Asking to clear cache before sending</param>
-        /// <param name="onException">Action to execute when an exception occurs</param>
-        protected MediationQueryBase(int priority, bool clearCache, Action<Exception> onException = null) : base(priority, onException)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        protected MediationQueryBase(int priority, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(priority, optionsBuilder)
         {
-            ClearCache = clearCache;
         }
-
-        /// <summary>
-        /// The base mediation query constructor
-        /// </summary>
-        /// <param name="context">The Polly context to pass through</param>
-        /// <param name="clearCache">Asking to clear cache before sending</param>
-        /// <param name="onException">Action to execute when an exception occurs</param>
-        protected MediationQueryBase(Context context, bool clearCache, Action<Exception> onException = null) : base(context, onException)
-        {
-            ClearCache = clearCache;
-        }
-
-        /// <summary>
-        /// The base mediation query constructor
-        /// </summary>
-        /// <param name="priority">The execution priority to apply</param>
-        /// <param name="context">The Polly context to pass through</param>
-        /// <param name="clearCache">Asking to clear cache before sending</param>
-        /// <param name="onException">Action to execute when an exception occurs</param>
-        protected MediationQueryBase(int priority, Context context, bool clearCache, Action<Exception> onException = null) : base(priority, context, onException)
-        {
-            ClearCache = clearCache;
-        }
-
-        /// <summary>
-        /// Asking to clear cache before sending the request
-        /// </summary>
-        public bool ClearCache { get; }
     }
 }

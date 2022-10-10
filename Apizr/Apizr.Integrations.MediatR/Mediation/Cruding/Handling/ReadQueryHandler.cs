@@ -26,14 +26,14 @@ namespace Apizr.Mediation.Cruding.Handling
         }
 
         /// <inheritdoc />
-        public override async Task<TModelEntity> Handle(ReadQuery<TModelEntity, TApiEntityKey> request,
+        public override Task<TModelEntity> Handle(ReadQuery<TModelEntity, TApiEntityKey> request,
             CancellationToken cancellationToken)
         {
-            return await CrudApiManager
+            return CrudApiManager
                 .ExecuteAsync<TModelEntity, TApiEntity>(
-                    (ctx, ct, api) => api.Read(request.Key, request.Priority, ctx, ct), request.Context,
-                    cancellationToken, request.ClearCache, request.OnException)
-                .ConfigureAwait(false);
+                    (options, api) =>
+                        api.Read(request.Key, request.Priority, options.Context, options.CancellationToken),
+                    request.OptionsBuilder);
         }
     }
 
@@ -56,14 +56,14 @@ namespace Apizr.Mediation.Cruding.Handling
         }
 
         /// <inheritdoc />
-        public override async Task<TModelEntity> Handle(ReadQuery<TModelEntity> request,
+        public override Task<TModelEntity> Handle(ReadQuery<TModelEntity> request,
             CancellationToken cancellationToken)
         {
-            return await CrudApiManager
+            return CrudApiManager
                 .ExecuteAsync<TModelEntity, TApiEntity>(
-                    (ctx, ct, api) => api.Read(request.Key, request.Priority, ctx, ct), request.Context,
-                    cancellationToken, request.ClearCache, request.OnException)
-                .ConfigureAwait(false);
+                    (options, api) =>
+                        api.Read(request.Key, request.Priority, options.Context, options.CancellationToken),
+                    request.OptionsBuilder);
         }
     }
 }

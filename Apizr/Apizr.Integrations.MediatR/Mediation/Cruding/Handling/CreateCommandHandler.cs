@@ -26,13 +26,12 @@ namespace Apizr.Mediation.Cruding.Handling
         }
 
         /// <inheritdoc />
-        public override async Task<TModelEntity> Handle(CreateCommand<TModelEntity> request,
+        public override Task<TModelEntity> Handle(CreateCommand<TModelEntity> request,
             CancellationToken cancellationToken)
         {
-            return await CrudApiManager
-                .ExecuteAsync<TModelEntity, TApiEntity>((ctx, ct, api, apiEntity) => api.Create(apiEntity, ctx, ct),
-                    request.RequestData, request.Context, cancellationToken, true, request.OnException)
-                .ConfigureAwait(false);
+            return CrudApiManager
+                .ExecuteAsync<TModelEntity, TApiEntity>((options, api, apiEntity) => api.Create(apiEntity, options.Context, options.CancellationToken),
+                    request.RequestData, request.OptionsBuilder);
         }
     }
 }

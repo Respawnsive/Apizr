@@ -11,7 +11,7 @@ namespace Apizr.Mediation.Requesting.Sending
     /// <summary>
     /// Apizr mediator to send request using MediatR by calling expression
     /// </summary>
-    public class ApizrMediator : IApizrMediator
+    public class ApizrMediator : ApizrMediatorBase, IApizrMediator
     {
         private readonly IMediator _mediator;
 
@@ -27,12 +27,12 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <inheritdoc />
         public Task SendFor<TWebApi>(Expression<Func<TWebApi, Task>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => _mediator.Send(new ExecuteUnitRequest<TWebApi>(executeApiMethod, optionsBuilder), CreateRequestOptionsBuilder<TWebApi>(optionsBuilder).ApizrOptions.CancellationToken);
+            => _mediator.Send(new ExecuteUnitRequest<TWebApi>(executeApiMethod, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <inheritdoc />
         public Task SendFor<TWebApi>(Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => _mediator.Send(new ExecuteUnitRequest<TWebApi>(executeApiMethod, optionsBuilder), CreateRequestOptionsBuilder<TWebApi>(optionsBuilder).ApizrOptions.CancellationToken);
+            => _mediator.Send(new ExecuteUnitRequest<TWebApi>(executeApiMethod, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         #endregion
 
@@ -41,14 +41,14 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <inheritdoc />
         public Task SendFor<TWebApi, TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
             TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => _mediator.Send(new ExecuteUnitRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder), CreateRequestOptionsBuilder<TWebApi>(optionsBuilder).ApizrOptions.CancellationToken);
+            => _mediator.Send(new ExecuteUnitRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <inheritdoc />
         public Task SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod,
             TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => _mediator.Send(
-                new ExecuteUnitRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder), CreateRequestOptionsBuilder<TWebApi>(optionsBuilder).ApizrOptions.CancellationToken);
+                new ExecuteUnitRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         #endregion
 
@@ -61,13 +61,13 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <inheritdoc />
         public Task<TApiData> SendFor<TWebApi, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => _mediator.Send(new ExecuteResultRequest<TWebApi, TApiData>(executeApiMethod, optionsBuilder), CreateRequestOptionsBuilder<TWebApi>(optionsBuilder).ApizrOptions.CancellationToken);
+            => _mediator.Send(new ExecuteResultRequest<TWebApi, TApiData>(executeApiMethod, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <inheritdoc />
         public Task<TApiData> SendFor<TWebApi, TApiData>(
             Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => _mediator.Send(new ExecuteResultRequest<TWebApi, TApiData>(executeApiMethod, optionsBuilder), CreateRequestOptionsBuilder<TWebApi>(optionsBuilder).ApizrOptions.CancellationToken);
+            => _mediator.Send(new ExecuteResultRequest<TWebApi, TApiData>(executeApiMethod, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         #endregion
 
@@ -77,27 +77,27 @@ namespace Apizr.Mediation.Requesting.Sending
         public Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => _mediator.Send(new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, optionsBuilder), CreateRequestOptionsBuilder<TWebApi>(optionsBuilder).ApizrOptions.CancellationToken);
+            => _mediator.Send(new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <inheritdoc />
         public Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => _mediator.Send(new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, optionsBuilder),
-                CreateRequestOptionsBuilder<TWebApi>(optionsBuilder).ApizrOptions.CancellationToken);
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <inheritdoc />
         public Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => _mediator.Send(new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder), CreateRequestOptionsBuilder<TWebApi>(optionsBuilder).ApizrOptions.CancellationToken);
+            => _mediator.Send(new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <inheritdoc />
         public Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => _mediator.Send(
-                new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder), CreateRequestOptionsBuilder<TWebApi>(optionsBuilder).ApizrOptions.CancellationToken);
+                new ExecuteResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         #endregion
 
@@ -109,7 +109,7 @@ namespace Apizr.Mediation.Requesting.Sending
             TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => _mediator.Send(
                 new ExecuteResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                    executeApiMethod, modelRequestData, optionsBuilder), CreateRequestOptionsBuilder<TWebApi>(optionsBuilder).ApizrOptions.CancellationToken);
+                    executeApiMethod, modelRequestData, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <inheritdoc />
         public Task<TModelResultData> SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData,
@@ -118,15 +118,11 @@ namespace Apizr.Mediation.Requesting.Sending
             TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => _mediator.Send(
                 new ExecuteResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                    executeApiMethod, modelRequestData, optionsBuilder), CreateRequestOptionsBuilder<TWebApi>(optionsBuilder).ApizrOptions.CancellationToken);
+                    executeApiMethod, modelRequestData, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         #endregion
 
         #endregion
-        
-        private static IApizrRequestOptionsBuilder
-            CreateRequestOptionsBuilder<TWebApi>(Action<IApizrRequestOptionsBuilder> optionsBuilder) =>
-            ApizrManager<TWebApi>.CreateRequestOptionsBuilder(optionsBuilder);
     }
 
     /// <summary>

@@ -27,14 +27,12 @@ namespace Apizr.Mediation.Cruding.Handling
         }
 
         /// <inheritdoc />
-        public override async Task<Unit> Handle(DeleteCommand<TModelEntity, TApiEntityKey> request,
+        public override Task<Unit> Handle(DeleteCommand<TModelEntity, TApiEntityKey> request,
             CancellationToken cancellationToken)
         {
-            await CrudApiManager.ExecuteAsync((ctx, ct, api) => api.Delete(request.Key, ctx, ct), request.Context,
-                    cancellationToken, request.OnException)
-                .ConfigureAwait(false);
-
-            return Unit.Value;
+            return CrudApiManager
+                .ExecuteAsync((options, api) => api.Delete(request.Key, options.Context, options.CancellationToken),
+                    request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken);
         }
     }
 
@@ -58,14 +56,12 @@ namespace Apizr.Mediation.Cruding.Handling
         }
 
         /// <inheritdoc />
-        public override async Task<Unit> Handle(DeleteCommand<TModelEntity> request,
+        public override Task<Unit> Handle(DeleteCommand<TModelEntity> request,
             CancellationToken cancellationToken)
         {
-            await CrudApiManager.ExecuteAsync((ctx, ct, api) => api.Delete(request.Key, ctx, ct), request.Context,
-                    cancellationToken, request.OnException)
-                .ConfigureAwait(false);
-
-            return Unit.Value;
+            return CrudApiManager
+                .ExecuteAsync((options, api) => api.Delete(request.Key, options.Context, options.CancellationToken),
+                    request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken);
         }
     }
 }

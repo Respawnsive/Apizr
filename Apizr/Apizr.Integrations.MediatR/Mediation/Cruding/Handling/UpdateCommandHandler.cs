@@ -27,16 +27,15 @@ namespace Apizr.Mediation.Cruding.Handling
         }
 
         /// <inheritdoc />
-        public override async Task<Unit> Handle(UpdateCommand<TApiEntityKey, TModelEntity> request,
+        public override Task<Unit> Handle(UpdateCommand<TApiEntityKey, TModelEntity> request,
             CancellationToken cancellationToken)
         {
-            await CrudApiManager
+            return CrudApiManager
                 .ExecuteAsync<TModelEntity, TApiEntity>(
-                    (ctx, ct, api, apiEntity) => api.Update(request.Key, apiEntity, ctx, ct), request.RequestData,
-                    request.Context, cancellationToken, request.OnException)
-                .ConfigureAwait(false);
-
-            return Unit.Value;
+                    (options, api, apiEntity) =>
+                        api.Update(request.Key, apiEntity, options.Context, options.CancellationToken),
+                    request.RequestData,
+                    request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken);
         }
     }
 
@@ -59,16 +58,15 @@ namespace Apizr.Mediation.Cruding.Handling
         }
 
         /// <inheritdoc />
-        public override async Task<Unit> Handle(UpdateCommand<TModelEntity> request,
+        public override Task<Unit> Handle(UpdateCommand<TModelEntity> request,
             CancellationToken cancellationToken)
         {
-            await CrudApiManager
+            return CrudApiManager
                 .ExecuteAsync<TModelEntity, TApiEntity>(
-                    (ctx, ct, api, apiEntity) => api.Update(request.Key, apiEntity, ctx, ct), request.RequestData,
-                    request.Context, cancellationToken, request.OnException)
-                .ConfigureAwait(false);
-
-            return Unit.Value;
+                    (options, api, apiEntity) =>
+                        api.Update(request.Key, apiEntity, options.Context, options.CancellationToken),
+                    request.RequestData,
+                    request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken);
         }
     }
 }

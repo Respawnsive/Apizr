@@ -1,4 +1,5 @@
 ﻿using System;
+using Apizr.Configuring.Request;
 using Apizr.Mediation.Cruding.Base;
 using MediatR;
 using Polly;
@@ -16,18 +17,8 @@ namespace Apizr.Mediation.Cruding
         /// The mediation Delete command constructor
         /// </summary>
         /// <param name="key">The entity's crud key</param>
-        /// <param name="onException">Action to execute when an exception occurs</param>
-        public DeleteCommand(TKey key, Action<Exception> onException = null) : base(key, onException)
-        {
-        }
-
-        /// <summary>
-        /// The mediation Delete command constructor
-        /// </summary>
-        /// <param name="key">The entity's crud key</param>
-        /// <param name="context">The Polly context to pass through</param>
-        /// <param name="onException">Action to execute when an exception occurs</param>
-        public DeleteCommand(TKey key, Context context, Action<Exception> onException = null) : base(key, context, onException)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        public DeleteCommand(TKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, optionsBuilder)
         {
         }
     }
@@ -42,18 +33,8 @@ namespace Apizr.Mediation.Cruding
         /// The mediation Delete command constructor
         /// </summary>
         /// <param name="key">The entity's crud key</param>
-        /// <param name="onException">Action to execute when an exception occurs</param>
-        public DeleteCommand(int key, Action<Exception> onException = null) : base(key, onException)
-        {
-        }
-
-        /// <summary>
-        /// The mediation Delete command constructor
-        /// </summary>
-        /// <param name="key">The entity's crud key</param>
-        /// <param name="context">The Polly context to pass through</param>
-        /// <param name="onException">Action to execute when an exception occurs</param>
-        public DeleteCommand(int key, Context context, Action<Exception> onException = null) : base(key, context, onException)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        public DeleteCommand(int key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, optionsBuilder)
         {
         }
     }

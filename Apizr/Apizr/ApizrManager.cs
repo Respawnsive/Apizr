@@ -31,10 +31,22 @@ using Refit;
            InternalsVisibleTo("Apizr.Integrations.Optional")]
 namespace Apizr
 {
+    public abstract class ApizrManager : IApizrManager
+    {
+        internal static IApizrRequestOptionsBuilder CreateRequestOptionsBuilder(Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            var requestOptions = new ApizrRequestOptions();
+            var builder = new ApizrRequestOptionsBuilder(requestOptions);
+            optionsBuilder?.Invoke(builder);
+
+            return builder;
+        }
+    }
+
     /// <summary>
     /// The manager
     /// </summary>
-    public class ApizrManager<TWebApi> : IApizrManager<TWebApi>
+    public class ApizrManager<TWebApi> : ApizrManager, IApizrManager<TWebApi>
     {
         private readonly ILazyFactory<TWebApi> _lazyWebApi;
         private readonly IConnectivityHandler _connectivityHandler;
@@ -645,15 +657,6 @@ namespace Apizr
         }
 
         #endregion
-
-        internal static IApizrRequestOptionsBuilder CreateRequestOptionsBuilder(Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-        {
-            var requestOptions = new ApizrRequestOptions();
-            var builder = new ApizrRequestOptionsBuilder(requestOptions);
-            optionsBuilder?.Invoke(builder);
-
-            return builder;
-        }
 
         #endregion
 

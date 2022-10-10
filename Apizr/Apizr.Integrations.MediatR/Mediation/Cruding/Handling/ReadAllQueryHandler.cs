@@ -27,14 +27,13 @@ namespace Apizr.Mediation.Cruding.Handling
         }
 
         /// <inheritdoc />
-        public override async Task<TModelReadAllResult> Handle(
+        public override Task<TModelReadAllResult> Handle(
             ReadAllQuery<TReadAllParams, TModelReadAllResult> request, CancellationToken cancellationToken)
         {
-            return await CrudApiManager
+            return CrudApiManager
                 .ExecuteAsync<TModelReadAllResult, TApiReadAllResult>(
-                    (ctx, ct, api) => api.ReadAll(request.Parameters, request.Priority, ctx, ct), request.Context,
-                    cancellationToken, request.ClearCache, request.OnException)
-                .ConfigureAwait(false);
+                    (options, api) => api.ReadAll(request.Parameters, request.Priority, options.Context,
+                        options.CancellationToken), request.OptionsBuilder);
         }
     }
 
@@ -58,14 +57,13 @@ namespace Apizr.Mediation.Cruding.Handling
         }
 
         /// <inheritdoc />
-        public override async Task<TModelReadAllResult> Handle(ReadAllQuery<TModelReadAllResult> request,
+        public override Task<TModelReadAllResult> Handle(ReadAllQuery<TModelReadAllResult> request,
             CancellationToken cancellationToken)
         {
-            return await CrudApiManager
+            return CrudApiManager
                 .ExecuteAsync<TModelReadAllResult, TApiReadAllResult>(
-                    (ctx, ct, api) => api.ReadAll(request.Parameters, request.Priority, ctx, ct), request.Context,
-                    cancellationToken, request.ClearCache, request.OnException)
-                .ConfigureAwait(false);
+                    (options, api) => api.ReadAll(request.Parameters, request.Priority, options.Context,
+                        options.CancellationToken), request.OptionsBuilder);
         }
     }
 }

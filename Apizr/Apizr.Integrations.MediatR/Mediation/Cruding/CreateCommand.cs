@@ -1,4 +1,5 @@
 ﻿using System;
+using Apizr.Configuring.Request;
 using Apizr.Mediation.Cruding.Base;
 using Polly;
 
@@ -14,18 +15,8 @@ namespace Apizr.Mediation.Cruding
         /// The mediation Create command constructor
         /// </summary>
         /// <param name="modelData">The request data to send</param>
-        /// <param name="onException">Action to execute when an exception occurs</param>
-        public CreateCommand(TModelData modelData, Action<Exception> onException = null) : base(modelData, onException)
-        {
-        }
-
-        /// <summary>
-        /// The mediation Create command constructor
-        /// </summary>
-        /// <param name="modelData">The request data to send</param>
-        /// <param name="context">The Polly context to pass through</param>
-        /// <param name="onException">Action to execute when an exception occurs</param>
-        public CreateCommand(TModelData modelData, Context context, Action<Exception> onException = null) : base(modelData, context, onException)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        public CreateCommand(TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(modelData, optionsBuilder)
         {
         }
     }

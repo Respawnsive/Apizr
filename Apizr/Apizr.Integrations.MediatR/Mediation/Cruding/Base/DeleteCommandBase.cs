@@ -1,4 +1,5 @@
 ﻿using System;
+using Apizr.Configuring.Request;
 using Apizr.Mediation.Commanding;
 using MediatR;
 using Polly;
@@ -17,19 +18,8 @@ namespace Apizr.Mediation.Cruding.Base
         /// The top level base mediation Delete command constructor
         /// </summary>
         /// <param name="key">The entity's crud key</param>
-        /// <param name="onException">Action to execute when an exception occurs</param>
-        protected DeleteCommandBase(TKey key, Action<Exception> onException = null) : base(onException)
-        {
-            Key = key;
-        }
-
-        /// <summary>
-        /// The top level base mediation Delete command constructor
-        /// </summary>
-        /// <param name="key">The entity's crud key</param>
-        /// <param name="context">The Polly context to pass through</param>
-        /// <param name="onException">Action to execute when an exception occurs</param>
-        protected DeleteCommandBase(TKey key, Context context, Action<Exception> onException = null) : base(context, onException)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        protected DeleteCommandBase(TKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(optionsBuilder)
         {
             Key = key;
         }
@@ -48,12 +38,7 @@ namespace Apizr.Mediation.Cruding.Base
     public abstract class DeleteCommandBase<T, TResultData> : DeleteCommandBase<T, int, TResultData>
     {
         /// <inheritdoc />
-        protected DeleteCommandBase(int key, Action<Exception> onException = null) : base(key, onException)
-        {
-        }
-
-        /// <inheritdoc />
-        protected DeleteCommandBase(int key, Context context, Action<Exception> onException = null) : base(key, context, onException)
+        protected DeleteCommandBase(int key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, optionsBuilder)  
         {
         }
     }
@@ -65,12 +50,7 @@ namespace Apizr.Mediation.Cruding.Base
     public abstract class DeleteCommandBase<T> : DeleteCommandBase<T, Unit>
     {
         /// <inheritdoc />
-        protected DeleteCommandBase(int key, Action<Exception> onException = null) : base(key, onException)
-        {
-        }
-
-        /// <inheritdoc />
-        protected DeleteCommandBase(int key, Context context, Action<Exception> onException = null) : base(key, context, onException)
+        protected DeleteCommandBase(int key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, optionsBuilder)
         {
         }
     }

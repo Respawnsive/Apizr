@@ -1,4 +1,5 @@
 ﻿using System;
+using Apizr.Configuring.Request;
 using Apizr.Mediation.Commanding;
 using Polly;
 
@@ -11,19 +12,12 @@ namespace Apizr.Mediation.Cruding.Base
     /// <typeparam name="TResultData">The api result type</typeparam>
     public abstract class CreateCommandBase<TRequestData, TResultData> : MediationCommandBase<TRequestData, TResultData>
     {
-        /// <inheritdoc />
-        protected CreateCommandBase(TRequestData requestData, Action<Exception> onException = null) : base(onException)
-        {
-            RequestData = requestData;
-        }
-
         /// <summary>
-        /// The top level base mediation Create command constructor
+        /// 
         /// </summary>
-        /// <param name="requestData">The request data to send</param>
-        /// <param name="context">The Polly context to pass through</param>
-        /// <param name="onException">Action to execute when an exception occurs</param>
-        protected CreateCommandBase(TRequestData requestData, Context context, Action<Exception> onException = null) : base(context, onException)
+        /// <param name="requestData">The api request</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        protected CreateCommandBase(TRequestData requestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(optionsBuilder)
         {
             RequestData = requestData;
         }

@@ -506,7 +506,7 @@ namespace Apizr.Sample.Console
                             ? await _reqResManager.ExecuteAsync((ct, api) => api.GetUserAsync(userChoice, (int)Priority.UserInitiated, ct),
                                 CancellationToken.None)
                             : await _mediator.Send(new ReadQuery<UserDetails>(userChoice), CancellationToken.None);
-
+                        
                         //var test = await _reqResManager.ExecuteAsync<MinUser, User>(
                         //    (options, api) => api.CreateUser(users.First(), options.CancellationToken),
                         //    options => options.WithCacheCleared(true).WithContext(new Context()).WithCancellationToken(CancellationToken.None));
@@ -531,14 +531,14 @@ namespace Apizr.Sample.Console
                         // Classic auto mapped request and result
                         var minUser = new MinUser { Name = "John" };
                         var createdMinUser = await _mediator.Send(
-                            new ExecuteUnitRequest<IReqResService, MinUser, User>((ct, api, mappedUser) =>
-                                api.CreateUser(mappedUser, ct), minUser), CancellationToken.None);
+                            new ExecuteUnitRequest<IReqResService, MinUser, User>((options, api, mappedUser) =>
+                                api.CreateUser(mappedUser, options.CancellationToken), minUser), CancellationToken.None);
 
                         // Classic Auto mapped result only
                         //userInfos = await _mediator.Send(new ExecuteRequest<IReqResService, UserInfos, UserDetails>((ct, api) => api.GetUserAsync(userChoice, ct)), CancellationToken.None);
 
                         // Classic dedicated mediator with auto mapped result
-                        //userInfos = await _reqResMediator.SendFor<UserInfos, UserDetails>((ct, api) => api.GetUserAsync(userChoice, ct), CancellationToken.None);
+                        userInfos = await _reqResMediator.SendFor<IReqResService, UserInfos, UserDetails>((ct, api) => api.GetUserAsync(userChoice, 80, ct), CancellationToken.None);
 
                         // Auto mapped crud
                         userInfos = await _mediator.Send(new ReadQuery<UserInfos>(userChoice), CancellationToken.None);

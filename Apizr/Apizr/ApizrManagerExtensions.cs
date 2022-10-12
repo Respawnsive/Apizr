@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Apizr.Caching;
-using Apizr.Policing;
 using Polly;
-using Polly.NoOp;
 
-namespace Apizr.Extending
+namespace Apizr
 {
-    public static class ManagerExtensions
+    public static class ApizrManagerExtensions
     {
         #region ExecuteAsync
 
@@ -197,7 +191,8 @@ namespace Apizr.Extending
         /// <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
         /// <returns></returns>
         [Obsolete("Use the one with the request options builder parameter instead")]
-        public static Task<TApiData> ExecuteAsync<TWebApi, TApiData>(this IApizrManager<TWebApi> manager, Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<Exception> onException)
+        public static Task<TApiData> ExecuteAsync<TWebApi, TApiData>(this IApizrManager<TWebApi> manager, 
+            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<Exception> onException)
             => manager.ExecuteAsync<TApiData>(api => executeApiMethod.Compile()(api),
                 options => options.WithExceptionCatcher(onException));
 
@@ -315,7 +310,8 @@ namespace Apizr.Extending
         /// <param name="onException">Handle exception and return cached result (default: null = throwing)</param>
         /// <returns></returns>
         [Obsolete("Use the one with the request options builder parameter instead")]
-        public static Task<TModelData> ExecuteAsync<TWebApi, TModelData, TApiData>(this IApizrManager<TWebApi> manager, Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<Exception> onException)
+        public static Task<TModelData> ExecuteAsync<TWebApi, TModelData, TApiData>(this IApizrManager<TWebApi> manager, 
+            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<Exception> onException)
             => manager.ExecuteAsync<TModelData, TApiData>(
                 (api, apiData) => executeApiMethod.Compile()(api, apiData), modelData,
                 options => options.WithExceptionCatcher(onException));

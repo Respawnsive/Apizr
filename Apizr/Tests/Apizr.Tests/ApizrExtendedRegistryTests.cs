@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring;
+using Apizr.Extending;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Logging;
 using Apizr.Mediation.Requesting.Sending;

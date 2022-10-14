@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Acr.UserDialogs;
 using Apizr.Configuring.Registry;
+using Apizr.Extending;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Optional.Cruding;
 using Apizr.Optional.Cruding.Sending;

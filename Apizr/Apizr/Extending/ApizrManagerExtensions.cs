@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Polly;
 
-namespace Apizr
+namespace Apizr.Extending
 {
     public static class ApizrManagerExtensions
     {

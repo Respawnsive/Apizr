@@ -14,6 +14,7 @@ using Apizr.Extending;
 using Apizr.Logging;
 using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Cruding.Sending;
+using Apizr.Mediation.Extending;
 using Apizr.Mediation.Requesting;
 using Apizr.Mediation.Requesting.Sending;
 using Apizr.Optional.Cruding;
@@ -63,6 +64,9 @@ namespace Apizr.Sample.Console
 
         // With MediatR
         private static IMediator _mediator;
+
+        // With apizr mediator
+        private static IApizrMediator _apizrMediator;
 
         // With a mediator dedicated to an api interface (getting things shorter)
         private static IApizrMediator<IReqResService> _reqResMediator;
@@ -380,6 +384,7 @@ namespace Apizr.Sample.Console
                 else
                 {
                     _mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
+                    _apizrMediator = scope.ServiceProvider.GetRequiredService<IApizrMediator>();
                     _reqResMediator = scope.ServiceProvider.GetRequiredService<IApizrMediator<IReqResService>>();
                     _userMediator = scope.ServiceProvider.GetRequiredService<IApizrCrudMediator<User, int, PagedResult<User>, IDictionary<string, object>>>();
 
@@ -428,9 +433,11 @@ namespace Apizr.Sample.Console
                 {
                     //var userList = await _mediator.Send(new ExecuteRequest<IReqResService, UserList>(api => api.GetUsersAsync()));
                     //var userList = await _reqResMediator.SendFor(api => api.GetUsersAsync());
-                    //pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>(), CancellationToken.None);
-                    //pagedUsers = await _userMediator.SendReadAllQuery(parameters1, priority, cancellationToken);
+                    //pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>(), CancellationToken.None);parameters1, priority, cancellationToken
+                    pagedUsers = await _userMediator.SendReadAllQuery(parameters1, priority);
                     pagedUsers = await _userMediator.SendReadAllQuery();
+
+                    var test = await _apizrMediator.SendFor<IReqResService, UserList>(api => api.GetUsersAsync(), onException: exception => {});
                 }
                 else
                 {

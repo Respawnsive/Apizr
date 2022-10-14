@@ -471,7 +471,7 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task SendDeleteCommand(TApiEntityKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
-        
+
         #endregion
     }
 }

@@ -36,9 +36,8 @@ namespace Apizr.Optional.Cruding.Handling
                     .MapAsync(_ =>
                         CrudApiManager
                             .ExecuteAsync<TModelEntity, TApiEntity>(
-                                (ctx, ct, api, apiData) => api.Create(apiData, ctx, ct), request.RequestData,
-                                request.Context,
-                                cancellationToken, true))
+                                (options, api, apiData) => api.Create(apiData, options.Context, options.CancellationToken), request.RequestData,
+                                request.OptionsBuilder))
                     .ConfigureAwait(false);
             }
             catch (ApizrException e)

@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring.Request;
 using Apizr.Mediation.Requesting.Base;
 using MediatR;
 using Optional;
@@ -22,7 +23,8 @@ namespace Apizr.Optional.Requesting.Base
         /// </summary>
         /// <param name="executeApiMethod">The request to execute</param>
         /// <param name="modelData">The data provided to the request</param>
-        protected ExecuteOptionalUnitRequestBase(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData) : base(executeApiMethod, modelData)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        protected ExecuteOptionalUnitRequestBase(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, modelData, optionsBuilder)
         {
         }
 
@@ -31,27 +33,8 @@ namespace Apizr.Optional.Requesting.Base
         /// </summary>
         /// <param name="executeApiMethod">The request to execute</param>
         /// <param name="modelData">The data provided to the request</param>
-        protected ExecuteOptionalUnitRequestBase(Expression<Func<CancellationToken, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData) : base(executeApiMethod, modelData)
-        {
-        }
-
-        /// <summary>
-        /// The top level base mediation execute optional unit request constructor
-        /// </summary>
-        /// <param name="executeApiMethod">The request to execute</param>
-        /// <param name="modelData">The data provided to the request</param>
-        /// <param name="context">The Polly context to pass through</param>
-        protected ExecuteOptionalUnitRequestBase(Expression<Func<Context, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Context context) : base(executeApiMethod, modelData, context)
-        {
-        }
-
-        /// <summary>
-        /// The top level base mediation execute optional unit request constructor
-        /// </summary>
-        /// <param name="executeApiMethod">The request to execute</param>
-        /// <param name="modelData">The data provided to the request</param>
-        /// <param name="context">The Polly context to pass through</param>
-        protected ExecuteOptionalUnitRequestBase(Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Context context) : base(executeApiMethod, modelData, context)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        protected ExecuteOptionalUnitRequestBase(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, modelData, optionsBuilder)
         {
         }
     }
@@ -66,7 +49,8 @@ namespace Apizr.Optional.Requesting.Base
         /// The top level base mediation execute optional unit request constructor
         /// </summary>
         /// <param name="executeApiMethod">The request to execute</param>
-        protected ExecuteOptionalUnitRequestBase(Expression<Func<TWebApi, Task>> executeApiMethod) : base(executeApiMethod)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        protected ExecuteOptionalUnitRequestBase(Expression<Func<TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
         {
         }
 
@@ -74,25 +58,8 @@ namespace Apizr.Optional.Requesting.Base
         /// The top level base mediation execute optional unit request constructor
         /// </summary>
         /// <param name="executeApiMethod">The request to execute</param>
-        protected ExecuteOptionalUnitRequestBase(Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod) : base(executeApiMethod)
-        {
-        }
-
-        /// <summary>
-        /// The top level base mediation execute optional unit request constructor
-        /// </summary>
-        /// <param name="executeApiMethod">The request to execute</param>
-        /// <param name="context">The Polly context to pass through</param>
-        protected ExecuteOptionalUnitRequestBase(Expression<Func<Context, TWebApi, Task>> executeApiMethod, Context context) : base(executeApiMethod, context)
-        {
-        }
-
-        /// <summary>
-        /// The top level base mediation execute optional unit request constructor
-        /// </summary>
-        /// <param name="executeApiMethod">The request to execute</param>
-        /// <param name="context">The Polly context to pass through</param>
-        protected ExecuteOptionalUnitRequestBase(Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod, Context context) : base(executeApiMethod, context)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        protected ExecuteOptionalUnitRequestBase(Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
         {
         }
     }

@@ -34,16 +34,12 @@ namespace Apizr.Optional.Cruding.Handling
                 return await request
                     .SomeNotNull(new ApizrException(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                    .MapAsync(async _ =>
-                    {
-                        await CrudApiManager
-                            .ExecuteAsync<TModelEntity, TApiEntity>(
-                                (ctx, ct, api, apiEntity) =>
-                                    api.Update(request.Key, apiEntity, ctx, ct), request.RequestData, request.Context,
-                                cancellationToken);
-
-                        return Unit.Value;
-                    })
+                    .MapAsync(_ => CrudApiManager
+                        .ExecuteAsync<TModelEntity, TApiEntity>(
+                            (options, api, apiEntity) =>
+                                api.Update(request.Key, apiEntity, options.Context, options.CancellationToken),
+                            request.RequestData, request.OptionsBuilder)
+                        .ContinueWith(_ => Unit.Value, cancellationToken))
                     .ConfigureAwait(false);
             }
             catch (ApizrException e)
@@ -76,16 +72,12 @@ namespace Apizr.Optional.Cruding.Handling
                 return await request
                     .SomeNotNull(new ApizrException(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                    .MapAsync(async _ =>
-                    {
-                        await CrudApiManager
-                            .ExecuteAsync<TModelEntity, TApiEntity>(
-                                (ctx, ct, api, apiEntity) =>
-                                    api.Update(request.Key, apiEntity, ctx, ct), request.RequestData, request.Context,
-                                cancellationToken);
-
-                        return Unit.Value;
-                    })
+                    .MapAsync(_ => CrudApiManager
+                        .ExecuteAsync<TModelEntity, TApiEntity>(
+                            (options, api, apiEntity) =>
+                                api.Update(request.Key, apiEntity, options.Context, options.CancellationToken),
+                            request.RequestData, request.OptionsBuilder)
+                        .ContinueWith(_ => Unit.Value, cancellationToken))
                     .ConfigureAwait(false);
             }
             catch (ApizrException e)

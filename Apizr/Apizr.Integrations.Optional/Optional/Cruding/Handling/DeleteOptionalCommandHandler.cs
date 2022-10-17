@@ -35,13 +35,10 @@ namespace Apizr.Optional.Cruding.Handling
                 return await request
                     .SomeNotNull(new ApizrException(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                    .MapAsync(async _ =>
-                    {
-                        await CrudApiManager
-                            .ExecuteAsync((ctx, ct, api) => api.Delete(request.Key, ctx, ct), request.Context, cancellationToken);
-
-                        return Unit.Value;
-                    })
+                    .MapAsync(_ => CrudApiManager
+                        .ExecuteAsync(
+                            (options, api) => api.Delete(request.Key, options.Context, options.CancellationToken),
+                            request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken))
                     .ConfigureAwait(false);
             }
             catch (ApizrException e)
@@ -74,13 +71,10 @@ namespace Apizr.Optional.Cruding.Handling
                 return await request
                     .SomeNotNull(new ApizrException(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                    .MapAsync(async _ =>
-                    {
-                        await CrudApiManager
-                            .ExecuteAsync((ctx, ct, api) => api.Delete(request.Key, ctx, ct), request.Context, cancellationToken);
-
-                        return Unit.Value;
-                    })
+                    .MapAsync(_ => CrudApiManager
+                        .ExecuteAsync(
+                            (options, api) => api.Delete(request.Key, options.Context, options.CancellationToken),
+                            request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken))
                     .ConfigureAwait(false);
             }
             catch (ApizrException e)

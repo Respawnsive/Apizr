@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring.Request;
 using Apizr.Mediation.Requesting.Base;
 using Optional;
 using Polly;
@@ -25,37 +26,16 @@ namespace Apizr.Optional.Requesting.Base
         /// The top level base mediation execute optional result request constructor
         /// </summary>
         /// <param name="executeApiMethod">The request to execute</param>
-        /// <param name="clearCache">Asking to clear cache before sending</param>
-        protected ExecuteOptionalResultRequestBase(Expression<Func<TWebApi, Task<TApiResultData>>> executeApiMethod, bool clearCache) : base(executeApiMethod, clearCache)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        protected ExecuteOptionalResultRequestBase(Expression<Func<TWebApi, Task<TApiResultData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
         {
         }
-
         /// <summary>
         /// The top level base mediation execute optional result request constructor
         /// </summary>
         /// <param name="executeApiMethod">The request to execute</param>
-        /// <param name="clearCache">Asking to clear cache before sending</param>
-        protected ExecuteOptionalResultRequestBase(Expression<Func<CancellationToken, TWebApi, Task<TApiResultData>>> executeApiMethod, bool clearCache) : base(executeApiMethod, clearCache)
-        {
-        }
-
-        /// <summary>
-        /// The top level base mediation execute optional result request constructor
-        /// </summary>
-        /// <param name="executeApiMethod">The request to execute</param>
-        /// <param name="context">The Polly context to pass through</param>
-        /// <param name="clearCache">Asking to clear cache before sending</param>
-        protected ExecuteOptionalResultRequestBase(Expression<Func<Context, TWebApi, Task<TApiResultData>>> executeApiMethod, Context context, bool clearCache) : base(executeApiMethod, context, clearCache)
-        {
-        }
-
-        /// <summary>
-        /// The top level base mediation execute optional result request constructor
-        /// </summary>
-        /// <param name="executeApiMethod">The request to execute</param>
-        /// <param name="context">The Polly context to pass through</param>
-        /// <param name="clearCache">Asking to clear cache before sending</param>
-        protected ExecuteOptionalResultRequestBase(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResultData>>> executeApiMethod, Context context, bool clearCache) : base(executeApiMethod, context, clearCache)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        protected ExecuteOptionalResultRequestBase(Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiResultData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
         {
         }
 
@@ -64,9 +44,9 @@ namespace Apizr.Optional.Requesting.Base
         /// </summary>
         /// <param name="executeApiMethod">The request to execute</param>
         /// <param name="modelData">The data provided to the request</param>
-        /// <param name="clearCache">Asking to clear cache before sending</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
         protected ExecuteOptionalResultRequestBase(Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelData, bool clearCache) : base(executeApiMethod, modelData, clearCache)
+            TModelRequestData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, modelData, optionsBuilder)
         {
         }
 
@@ -75,33 +55,9 @@ namespace Apizr.Optional.Requesting.Base
         /// </summary>
         /// <param name="executeApiMethod">The request to execute</param>
         /// <param name="modelData">The data provided to the request</param>
-        /// <param name="clearCache">Asking to clear cache before sending</param>
-        protected ExecuteOptionalResultRequestBase(Expression<Func<CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelData, bool clearCache) : base(executeApiMethod, modelData, clearCache)
-        {
-        }
-
-        /// <summary>
-        /// The top level base mediation execute optional result request constructor
-        /// </summary>
-        /// <param name="executeApiMethod">The request to execute</param>
-        /// <param name="modelData">The data provided to the request</param>
-        /// <param name="context">The Polly context to pass through</param>
-        /// <param name="clearCache">Asking to clear cache before sending</param>
-        protected ExecuteOptionalResultRequestBase(Expression<Func<Context, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelData, Context context, bool clearCache) : base(executeApiMethod, modelData, context, clearCache)
-        {
-        }
-
-        /// <summary>
-        /// The top level base mediation execute optional result request constructor
-        /// </summary>
-        /// <param name="executeApiMethod">The request to execute</param>
-        /// <param name="modelData">The data provided to the request</param>
-        /// <param name="context">The Polly context to pass through</param>
-        /// <param name="clearCache">Asking to clear cache before sending</param>
-        protected ExecuteOptionalResultRequestBase(Expression<Func<Context, CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelData, Context context, bool clearCache) : base(executeApiMethod, modelData, context, clearCache)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        protected ExecuteOptionalResultRequestBase(Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            TModelRequestData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, modelData, optionsBuilder)
         {
         }
     }
@@ -116,46 +72,24 @@ namespace Apizr.Optional.Requesting.Base
         ExecuteResultRequestBase<TWebApi, TModelData, TApiData, Option<TModelData, ApizrException<TModelData>>>
     {
         /// <inheritdoc />
-        protected ExecuteOptionalResultRequestBase(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache) : base(executeApiMethod, clearCache)
+        protected ExecuteOptionalResultRequestBase(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
         {
         }
 
         /// <inheritdoc />
-        protected ExecuteOptionalResultRequestBase(Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache) : base(executeApiMethod, clearCache)
-        {
-        }
-
-        /// <inheritdoc />
-        protected ExecuteOptionalResultRequestBase(Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context, bool clearCache) : base(executeApiMethod, context, clearCache)
-        {
-        }
-
-        /// <inheritdoc />
-        protected ExecuteOptionalResultRequestBase(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, Context context, bool clearCache) : base(executeApiMethod, context, clearCache)
+        protected ExecuteOptionalResultRequestBase(Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
         {
         }
 
         /// <inheritdoc />
         protected ExecuteOptionalResultRequestBase(Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
-            TModelData modelData, bool clearCache) : base(executeApiMethod, modelData, clearCache)
+            TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, modelData, optionsBuilder)
         {
         }
 
         /// <inheritdoc />
-        protected ExecuteOptionalResultRequestBase(Expression<Func<CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
-            TModelData modelData, bool clearCache) : base(executeApiMethod, modelData, clearCache)
-        {
-        }
-
-        /// <inheritdoc />
-        protected ExecuteOptionalResultRequestBase(Expression<Func<Context, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
-            TModelData modelData, Context context, bool clearCache) : base(executeApiMethod, modelData, context, clearCache)
-        {
-        }
-
-        /// <inheritdoc />
-        protected ExecuteOptionalResultRequestBase(Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
-            TModelData modelData, Context context, bool clearCache) : base(executeApiMethod, modelData, context, clearCache)
+        protected ExecuteOptionalResultRequestBase(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
+            TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, modelData, optionsBuilder)
         {
         }
     }
@@ -169,22 +103,12 @@ namespace Apizr.Optional.Requesting.Base
         Option<TApiData, ApizrException<TApiData>>>
     {
         /// <inheritdoc />
-        protected ExecuteOptionalResultRequestBase(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache) : base(executeApiMethod, clearCache)
+        protected ExecuteOptionalResultRequestBase(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
         {
         }
 
         /// <inheritdoc />
-        protected ExecuteOptionalResultRequestBase(Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache) : base(executeApiMethod, clearCache)
-        {
-        }
-
-        /// <inheritdoc />
-        protected ExecuteOptionalResultRequestBase(Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context, bool clearCache) : base(executeApiMethod, context, clearCache)
-        {
-        }
-
-        /// <inheritdoc />
-        protected ExecuteOptionalResultRequestBase(Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod, Context context, bool clearCache) : base(executeApiMethod, context, clearCache)
+        protected ExecuteOptionalResultRequestBase(Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
         {
         }
     }

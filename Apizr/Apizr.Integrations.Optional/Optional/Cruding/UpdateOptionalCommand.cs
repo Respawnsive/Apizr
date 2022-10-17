@@ -1,7 +1,9 @@
-﻿using Apizr.Mediation.Cruding.Base;
+﻿using Apizr.Configuring.Request;
+using Apizr.Mediation.Cruding.Base;
 using MediatR;
 using Optional;
 using Polly;
+using System;
 
 namespace Apizr.Optional.Cruding
 {
@@ -17,17 +19,8 @@ namespace Apizr.Optional.Cruding
         /// </summary>
         /// <param name="key">The entity's crud key</param>
         /// <param name="requestData">The request data to send</param>
-        public UpdateOptionalCommand(TKey key, TRequestData requestData) : base(key, requestData)
-        {
-        }
-
-        /// <summary>
-        /// The mediation Update optional command constructor
-        /// </summary>
-        /// <param name="key">The entity's crud key</param>
-        /// <param name="requestData">The request data to send</param>
-        /// <param name="context">The Polly context to pass through</param>
-        public UpdateOptionalCommand(TKey key, TRequestData requestData, Context context) : base(key, requestData, context)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        public UpdateOptionalCommand(TKey key, TRequestData requestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, requestData, optionsBuilder)
         {
         }
     }
@@ -43,17 +36,8 @@ namespace Apizr.Optional.Cruding
         /// </summary>
         /// <param name="key">The entity's crud key</param>
         /// <param name="requestData">The request data to send</param>
-        public UpdateOptionalCommand(int key, TRequestData requestData) : base(key, requestData)
-        {
-        }
-
-        /// <summary>
-        /// The mediation Update optional command constructor
-        /// </summary>
-        /// <param name="key">The entity's crud key</param>
-        /// <param name="requestData">The request data to send</param>
-        /// <param name="context">The Polly context to pass through</param>
-        public UpdateOptionalCommand(int key, TRequestData requestData, Context context) : base(key, requestData, context)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        public UpdateOptionalCommand(int key, TRequestData requestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, requestData, optionsBuilder)
         {
         }
     }

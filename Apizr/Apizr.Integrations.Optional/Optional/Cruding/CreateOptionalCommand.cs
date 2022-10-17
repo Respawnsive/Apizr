@@ -1,6 +1,8 @@
-﻿using Apizr.Mediation.Cruding.Base;
+﻿using Apizr.Configuring.Request;
+using Apizr.Mediation.Cruding.Base;
 using Optional;
 using Polly;
+using System;
 
 namespace Apizr.Optional.Cruding
 {
@@ -14,16 +16,8 @@ namespace Apizr.Optional.Cruding
         /// The mediation Create optional command constructor
         /// </summary>
         /// <param name="modelData">The request data to send</param>
-        public CreateOptionalCommand(TModelData modelData) : base(modelData)
-        {
-        }
-
-        /// <summary>
-        /// The mediation Create optional command constructor
-        /// </summary>
-        /// <param name="modelData">The request data to send</param>
-        /// <param name="context">The Polly context to pass through</param>
-        public CreateOptionalCommand(TModelData modelData, Context context) : base(modelData, context)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        public CreateOptionalCommand(TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(modelData, optionsBuilder)
         {
         }
     }

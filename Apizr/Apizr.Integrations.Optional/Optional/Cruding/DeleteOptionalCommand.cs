@@ -1,7 +1,9 @@
-﻿using Apizr.Mediation.Cruding.Base;
+﻿using Apizr.Configuring.Request;
+using Apizr.Mediation.Cruding.Base;
 using MediatR;
 using Optional;
 using Polly;
+using System;
 
 namespace Apizr.Optional.Cruding
 {
@@ -16,16 +18,8 @@ namespace Apizr.Optional.Cruding
         /// The mediation Delete optional command constructor
         /// </summary>
         /// <param name="key">The entity's crud key</param>
-        public DeleteOptionalCommand(TKey key) : base(key)
-        {
-        }
-
-        /// <summary>
-        /// The mediation Delete optional command constructor
-        /// </summary>
-        /// <param name="key">The entity's crud key</param>
-        /// <param name="context">The Polly context to pass through</param>
-        public DeleteOptionalCommand(TKey key, Context context) : base(key, context)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        public DeleteOptionalCommand(TKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, optionsBuilder)
         {
         }
     }
@@ -40,16 +34,8 @@ namespace Apizr.Optional.Cruding
         /// The mediation Delete optional command constructor
         /// </summary>
         /// <param name="key">The entity's crud key</param>
-        public DeleteOptionalCommand(int key) : base(key)
-        {
-        }
-
-        /// <summary>
-        /// The mediation Delete optional command constructor
-        /// </summary>
-        /// <param name="key">The entity's crud key</param>
-        /// <param name="context">The Polly context to pass through</param>
-        public DeleteOptionalCommand(int key, Context context) : base(key, context)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        public DeleteOptionalCommand(int key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, optionsBuilder)
         {
         }
     }

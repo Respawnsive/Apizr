@@ -1,6 +1,8 @@
-﻿using Apizr.Mediation.Cruding.Base;
+﻿using Apizr.Configuring.Request;
+using Apizr.Mediation.Cruding.Base;
 using Optional;
 using Polly;
+using System;
 
 namespace Apizr.Optional.Cruding
 {
@@ -15,8 +17,8 @@ namespace Apizr.Optional.Cruding
         /// The mediation Read optional query constructor
         /// </summary>
         /// <param name="key">The entity's crud key</param>
-        /// <param name="clearCache">Asking to clear cache before sending</param>
-        public ReadOptionalQuery(TKey key, bool clearCache = false) : base(key, clearCache)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        public ReadOptionalQuery(TKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, optionsBuilder)
         {
         }
 
@@ -25,29 +27,8 @@ namespace Apizr.Optional.Cruding
         /// </summary>
         /// <param name="key">The entity's crud key</param>
         /// <param name="priority">The execution priority to apply</param>
-        /// <param name="clearCache">Asking to clear cache before sending</param>
-        public ReadOptionalQuery(TKey key, int priority, bool clearCache = false) : base(key, priority, clearCache)
-        {
-        }
-
-        /// <summary>
-        /// The mediation Read optional query constructor
-        /// </summary>
-        /// <param name="key">The entity's crud key</param>
-        /// <param name="context">The Polly context to pass through</param>
-        /// <param name="clearCache">Asking to clear cache before sending</param>
-        public ReadOptionalQuery(TKey key, Context context, bool clearCache = false) : base(key, context, clearCache)
-        {
-        }
-
-        /// <summary>
-        /// The mediation Read optional query constructor
-        /// </summary>
-        /// <param name="key">The entity's crud key</param>
-        /// <param name="priority">The execution priority to apply</param>
-        /// <param name="context">The Polly context to pass through</param>
-        /// <param name="clearCache">Asking to clear cache before sending</param>
-        public ReadOptionalQuery(TKey key, int priority, Context context, bool clearCache = false) : base(key, priority, context, clearCache)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        public ReadOptionalQuery(TKey key, int priority, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, priority, optionsBuilder)
         {
         }
     }
@@ -62,8 +43,8 @@ namespace Apizr.Optional.Cruding
         /// The mediation Read optional query constructor
         /// </summary>
         /// <param name="key">The entity's crud key</param>
-        /// <param name="clearCache">Asking to clear cache before sending</param>
-        public ReadOptionalQuery(int key, bool clearCache = false) : base(key, clearCache)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        public ReadOptionalQuery(int key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, optionsBuilder)
         {
         }
 
@@ -72,29 +53,8 @@ namespace Apizr.Optional.Cruding
         /// </summary>
         /// <param name="key">The entity's crud key</param>
         /// <param name="priority">The execution priority to apply</param>
-        /// <param name="clearCache">Asking to clear cache before sending</param>
-        public ReadOptionalQuery(int key, int priority, bool clearCache = false) : base(key, priority, clearCache)
-        {
-        }
-
-        /// <summary>
-        /// The mediation Read optional query constructor
-        /// </summary>
-        /// <param name="key">The entity's crud key</param>
-        /// <param name="context">The Polly context to pass through</param>
-        /// <param name="clearCache">Asking to clear cache before sending</param>
-        public ReadOptionalQuery(int key, Context context, bool clearCache = false) : base(key, context, clearCache)
-        {
-        }
-
-        /// <summary>
-        /// The mediation Read optional query constructor
-        /// </summary>
-        /// <param name="key">The entity's crud key</param>
-        /// <param name="priority">The execution priority to apply</param>
-        /// <param name="context">The Polly context to pass through</param>
-        /// <param name="clearCache">Asking to clear cache before sending</param>
-        public ReadOptionalQuery(int key, int priority, Context context, bool clearCache = false) : base(key, priority, context, clearCache)
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        public ReadOptionalQuery(int key, int priority, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, priority, optionsBuilder)
         {
         }
     }

@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring.Request;
 using Apizr.Extending;
 using Apizr.Optional.Requesting.Handling.Base;
 using Optional;
@@ -38,56 +39,28 @@ namespace Apizr.Optional.Requesting.Handling
                         return await request
                             .SomeNotNull(new ApizrException<TModelResultData>(
                                 new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelResultData, TApiResultData>(executeApiMethod, request.ClearCache))
+                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelResultData, TApiResultData>(executeApiMethod, request.OptionsBuilder))
                             .ConfigureAwait(false);
 
-                    case Expression<Func<Context, TWebApi, Task<TApiResultData>>> executeApiMethod:
+                    case Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiResultData>>> executeApiMethod:
                         return await request
                             .SomeNotNull(new ApizrException<TModelResultData>(
                                 new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelResultData, TApiResultData>(executeApiMethod, request.Context, request.ClearCache))
-                            .ConfigureAwait(false);
-
-                    case Expression<Func<CancellationToken, TWebApi, Task<TApiResultData>>> executeApiMethod:
-                        return await request
-                            .SomeNotNull(new ApizrException<TModelResultData>(
-                                new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelResultData, TApiResultData>(executeApiMethod, cancellationToken, request.ClearCache))
-                            .ConfigureAwait(false);
-
-                    case Expression<Func<Context, CancellationToken, TWebApi, Task<TApiResultData>>> executeApiMethod:
-                        return await request
-                            .SomeNotNull(new ApizrException<TModelResultData>(
-                                new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelResultData, TApiResultData>(executeApiMethod, request.Context, cancellationToken, request.ClearCache))
+                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelResultData, TApiResultData>(executeApiMethod, request.OptionsBuilder))
                             .ConfigureAwait(false);
 
                     case Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod:
                         return await request
                             .SomeNotNull(new ApizrException<TModelResultData>(
                                 new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(executeApiMethod, request.ModelRequestData, request.ClearCache))
+                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(executeApiMethod, request.ModelRequestData, request.OptionsBuilder))
                             .ConfigureAwait(false);
 
-                    case Expression<Func<Context, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod:
+                    case Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod:
                         return await request
                             .SomeNotNull(new ApizrException<TModelResultData>(
                                 new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(executeApiMethod, request.ModelRequestData, request.Context, request.ClearCache))
-                            .ConfigureAwait(false);
-
-                    case Expression<Func<CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod:
-                        return await request
-                            .SomeNotNull(new ApizrException<TModelResultData>(
-                                new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(executeApiMethod, request.ModelRequestData, cancellationToken, request.ClearCache))
-                            .ConfigureAwait(false);
-
-                    case Expression<Func<Context, CancellationToken, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod:
-                        return await request
-                            .SomeNotNull(new ApizrException<TModelResultData>(
-                                new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(executeApiMethod, request.ModelRequestData, request.Context, cancellationToken, request.ClearCache))
+                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(executeApiMethod, request.ModelRequestData, request.OptionsBuilder))
                             .ConfigureAwait(false);
 
                     default:
@@ -128,56 +101,28 @@ namespace Apizr.Optional.Requesting.Handling
                         return await request
                             .SomeNotNull(new ApizrException<TModelData>(
                                 new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ClearCache))
+                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.OptionsBuilder))
                             .ConfigureAwait(false);
 
-                    case Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod:
+                    case Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod:
                         return await request
                             .SomeNotNull(new ApizrException<TModelData>(
                                 new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.Context, request.ClearCache))
-                            .ConfigureAwait(false);
-
-                    case Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod:
-                        return await request
-                            .SomeNotNull(new ApizrException<TModelData>(
-                                new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, cancellationToken, request.ClearCache))
-                            .ConfigureAwait(false);
-
-                    case Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod:
-                        return await request
-                            .SomeNotNull(new ApizrException<TModelData>(
-                                new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.Context, cancellationToken, request.ClearCache))
+                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.OptionsBuilder))
                             .ConfigureAwait(false);
 
                     case Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod:
                         return await request
                             .SomeNotNull(new ApizrException<TModelData>(
                                 new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, request.ClearCache))
+                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, request.OptionsBuilder))
                             .ConfigureAwait(false);
 
-                    case Expression<Func<Context, TWebApi, TApiData, Task<TApiData>>> executeApiMethod:
+                    case Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod:
                         return await request
                             .SomeNotNull(new ApizrException<TModelData>(
                                 new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, request.Context, request.ClearCache))
-                            .ConfigureAwait(false);
-
-                    case Expression<Func<CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod:
-                        return await request
-                            .SomeNotNull(new ApizrException<TModelData>(
-                                new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, cancellationToken, request.ClearCache))
-                            .ConfigureAwait(false);
-
-                    case Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task<TApiData>>> executeApiMethod:
-                        return await request
-                            .SomeNotNull(new ApizrException<TModelData>(
-                                new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, request.Context, cancellationToken, request.ClearCache))
+                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, request.OptionsBuilder))
                             .ConfigureAwait(false);
 
                     default:
@@ -216,31 +161,15 @@ namespace Apizr.Optional.Requesting.Handling
                             .SomeNotNull(new ApizrException<TApiData>(
                                 new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                             .MapAsync(_ =>
-                                WebApiManager.ExecuteAsync(executeApiMethod, request.ClearCache))
+                                WebApiManager.ExecuteAsync(executeApiMethod, request.OptionsBuilder))
                             .ConfigureAwait(false);
 
-                    case Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod:
+                    case Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod:
                         return await request
                             .SomeNotNull(new ApizrException<TApiData>(
                                 new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                             .MapAsync(_ =>
-                                WebApiManager.ExecuteAsync(executeApiMethod, request.Context, request.ClearCache))
-                            .ConfigureAwait(false);
-
-                    case Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod:
-                        return await request
-                            .SomeNotNull(new ApizrException<TApiData>(
-                                new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ =>
-                                WebApiManager.ExecuteAsync(executeApiMethod, cancellationToken, request.ClearCache))
-                            .ConfigureAwait(false);
-
-                    case Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod:
-                        return await request
-                            .SomeNotNull(new ApizrException<TApiData>(
-                                new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ =>
-                                WebApiManager.ExecuteAsync(executeApiMethod, request.Context, cancellationToken, request.ClearCache))
+                                WebApiManager.ExecuteAsync(executeApiMethod, request.OptionsBuilder))
                             .ConfigureAwait(false);
 
                     default:

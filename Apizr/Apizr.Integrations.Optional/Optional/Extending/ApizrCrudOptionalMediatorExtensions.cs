@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Mediation.Cruding;
 using Apizr.Optional.Cruding;
+using Apizr.Optional.Cruding.Sending;
 using MediatR;
 using Optional;
 using Polly;
@@ -18,21 +19,17 @@ namespace Apizr.Optional.Extending
         #region SendCreateOptionalCommand
 
         /// <summary>
-        /// Send a <see cref="CreateOptionalCommand{TModelData}"/> to Apizr using MediatR and returning an optional result
-        /// </summary>
-        /// <typeparam name="TApiEntity">The api entity type</typeparam>
-        /// <param name="entity">The entity to create</param>
-        /// <returns></returns>
-        Task<Option<TApiEntity, ApizrException>> SendCreateOptionalCommand<TApiEntity>(TApiEntity entity);
-
-        /// <summary>
         /// Send a <see cref="CreateOptionalCommand{TApiEntity}"/> to Apizr using MediatR and returning an optional result
         /// </summary>
         /// <typeparam name="TApiEntity">The api entity type</typeparam>
         /// <param name="entity">The entity to create</param>
         /// <param name="context">The Polly context</param>
         /// <returns></returns>
-        Task<Option<TApiEntity, ApizrException>> SendCreateOptionalCommand<TApiEntity>(TApiEntity entity, Context context);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TApiEntity, ApizrException>> SendCreateOptionalCommand<TApiEntity>(
+            this IApizrCrudOptionalMediator mediator, TApiEntity entity, Context context) =>
+            mediator.SendCreateOptionalCommand<TApiEntity>(entity,
+                options => options.WithContext(context));
 
         /// <summary>
         /// Send a <see cref="CreateOptionalCommand{TApiEntity}"/> to Apizr using MediatR and returning an optional result
@@ -41,8 +38,12 @@ namespace Apizr.Optional.Extending
         /// <param name="entity">The entity to create</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
-        Task<Option<TApiEntity, ApizrException>> SendCreateOptionalCommand<TApiEntity>(TApiEntity entity,
-            CancellationToken cancellationToken);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TApiEntity, ApizrException>> SendCreateOptionalCommand<TApiEntity>(
+            this IApizrCrudOptionalMediator mediator, TApiEntity entity,
+            CancellationToken cancellationToken) =>
+            mediator.SendCreateOptionalCommand<TApiEntity>(entity,
+                options => options.WithCancellationToken(cancellationToken));
 
         /// <summary>
         /// Send a <see cref="CreateOptionalCommand{TApiEntity}"/> to Apizr using MediatR and returning an optional result
@@ -52,23 +53,19 @@ namespace Apizr.Optional.Extending
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
-        Task<Option<TApiEntity, ApizrException>> SendCreateOptionalCommand<TApiEntity>(TApiEntity entity, Context context,
-            CancellationToken cancellationToken);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TApiEntity, ApizrException>> SendCreateOptionalCommand<TApiEntity>(
+            this IApizrCrudOptionalMediator mediator, TApiEntity entity, Context context,
+            CancellationToken cancellationToken) =>
+            mediator.SendCreateOptionalCommand<TApiEntity>(entity,
+                options => options.WithContext(context)
+                    .WithCancellationToken(cancellationToken));
 
         #endregion
 
         #region SendCreateOptionalCommand<TModelEntity>
 
         /// <summary>
-        /// Send a mapped <see cref="CreateCommand{TModelData}"/> to Apizr using MediatR and returning a mapped optional result
-        /// </summary>
-        /// <typeparam name="TModelEntity">The model entity type to map from</typeparam>
-        /// <typeparam name="TApiEntity">The api entity type to map to</typeparam>
-        /// <param name="entity">The entity to create</param>
-        /// <returns></returns>
-        Task<Option<TModelEntity, ApizrException>> SendCreateOptionalCommand<TModelEntity, TApiEntity>(TModelEntity entity);
-
-        /// <summary>
         /// Send a mapped <see cref="CreateCommand{TModelEntity}"/> to Apizr using MediatR and returning a mapped optional result
         /// </summary>
         /// <typeparam name="TModelEntity">The model entity type to map from</typeparam>
@@ -76,7 +73,11 @@ namespace Apizr.Optional.Extending
         /// <param name="entity">The entity to create</param>
         /// <param name="context">The Polly context</param>
         /// <returns></returns>
-        Task<Option<TModelEntity, ApizrException>> SendCreateOptionalCommand<TModelEntity, TApiEntity>(TModelEntity entity, Context context);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelEntity, ApizrException>> SendCreateOptionalCommand<TModelEntity, TApiEntity>(
+            this IApizrCrudOptionalMediator mediator, TModelEntity entity, Context context) =>
+            mediator.SendCreateOptionalCommand<TModelEntity, TApiEntity>(entity,
+                options => options.WithContext(context));
 
         /// <summary>
         /// Send a mapped <see cref="CreateCommand{TModelEntity}"/> to Apizr using MediatR and returning a mapped optional result
@@ -86,8 +87,12 @@ namespace Apizr.Optional.Extending
         /// <param name="entity">The entity to create</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
-        Task<Option<TModelEntity, ApizrException>> SendCreateOptionalCommand<TModelEntity, TApiEntity>(TModelEntity entity,
-            CancellationToken cancellationToken);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelEntity, ApizrException>> SendCreateOptionalCommand<TModelEntity, TApiEntity>(
+            this IApizrCrudOptionalMediator mediator, TModelEntity entity,
+            CancellationToken cancellationToken) =>
+            mediator.SendCreateOptionalCommand<TModelEntity, TApiEntity>(entity,
+                options => options.WithCancellationToken(cancellationToken));
 
         /// <summary>
         /// Send a mapped <see cref="CreateCommand{TModelEntity}"/> to Apizr using MediatR and returning a mapped optional result
@@ -98,8 +103,13 @@ namespace Apizr.Optional.Extending
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
-        Task<Option<TModelEntity, ApizrException>> SendCreateOptionalCommand<TModelEntity, TApiEntity>(TModelEntity entity, Context context,
-            CancellationToken cancellationToken);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelEntity, ApizrException>> SendCreateOptionalCommand<TModelEntity, TApiEntity>(
+            this IApizrCrudOptionalMediator mediator, TModelEntity entity, Context context,
+            CancellationToken cancellationToken) =>
+            mediator.SendCreateOptionalCommand<TModelEntity, TApiEntity>(entity,
+                options => options.WithContext(context)
+                    .WithCancellationToken(cancellationToken));
 
         #endregion
 
@@ -113,68 +123,91 @@ namespace Apizr.Optional.Extending
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR and returning an optional result
         /// </summary>
         /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
+        /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult>(bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TReadAllResult, ApizrException<TReadAllResult>>>
+            SendReadAllOptionalQuery<TReadAllResult>(this IApizrCrudOptionalMediator mediator, Context context,
+                bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TReadAllResult>(options => options.WithContext(context)
+                .WithCacheCleared(clearCache));
+
+        /// <summary>
+        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR and returning an optional result
+        /// </summary>
+        /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
+        /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
+        /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TReadAllResult, ApizrException<TReadAllResult>>>
+            SendReadAllOptionalQuery<TReadAllResult>(this IApizrCrudOptionalMediator mediator,
+                CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TReadAllResult>(options => options
+                .WithCancellationToken(cancellationToken)
+                .WithCacheCleared(clearCache));
+
+        /// <summary>
+        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority and returning an optional result
+        /// </summary>
+        /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
+        /// <param name="priority">The execution priority</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
+        /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TReadAllResult, ApizrException<TReadAllResult>>>
+            SendReadAllOptionalQuery<TReadAllResult>(this IApizrCrudOptionalMediator mediator, int priority,
+                bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TReadAllResult>(priority,
+                options => options.WithCacheCleared(clearCache));
+
+        /// <summary>
+        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority and returning an optional result
+        /// </summary>
+        /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
+        /// <param name="priority">The execution priority</param>
+        /// <param name="context">The Polly context</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
+        /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TReadAllResult, ApizrException<TReadAllResult>>>
+            SendReadAllOptionalQuery<TReadAllResult>(this IApizrCrudOptionalMediator mediator, int priority,
+                Context context, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TReadAllResult>(priority, options => options.WithContext(context)
+                .WithCacheCleared(clearCache));
+
+        /// <summary>
+        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority and returning an optional result
+        /// </summary>
+        /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
+        /// <param name="priority">The execution priority</param>
+        /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
+        /// <returns></returns>
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TReadAllResult, ApizrException<TReadAllResult>>>
+            SendReadAllOptionalQuery<TReadAllResult>(this IApizrCrudOptionalMediator mediator, int priority,
+                CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TReadAllResult>(priority, options => options
+                .WithCancellationToken(cancellationToken)
+                .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR and returning an optional result
         /// </summary>
         /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
         /// <param name="context">The Polly context</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
-        /// <returns></returns>
-        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult>(Context context, bool clearCache = false);
-
-        /// <summary>
-        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR and returning an optional result
-        /// </summary>
-        /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult>(CancellationToken cancellationToken, bool clearCache = false);
-
-        /// <summary>
-        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority and returning an optional result
-        /// </summary>
-        /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
-        /// <param name="priority">The execution priority</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
-        /// <returns></returns>
-        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult>(int priority, bool clearCache = false);
-
-        /// <summary>
-        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority and returning an optional result
-        /// </summary>
-        /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
-        /// <param name="priority">The execution priority</param>
-        /// <param name="context">The Polly context</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
-        /// <returns></returns>
-        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult>(int priority, Context context, bool clearCache = false);
-
-        /// <summary>
-        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority and returning an optional result
-        /// </summary>
-        /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
-        /// <param name="priority">The execution priority</param>
-        /// <param name="cancellationToken">The cancellation token</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
-        /// <returns></returns>
-        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult>(int priority,
-            CancellationToken cancellationToken, bool clearCache = false);
-
-        /// <summary>
-        /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR and returning an optional result
-        /// </summary>
-        /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
-        /// <param name="context">The Polly context</param>
-        /// <param name="cancellationToken">The cancellation token</param>
-        /// <param name="clearCache">Clear request cache before executing (default: false)</param>
-        /// <returns></returns>
-        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult>(Context context,
-            CancellationToken cancellationToken, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TReadAllResult, ApizrException<TReadAllResult>>>
+            SendReadAllOptionalQuery<TReadAllResult>(this IApizrCrudOptionalMediator mediator, Context context,
+                CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TReadAllResult>(options => options.WithContext(context)
+                .WithCancellationToken(cancellationToken)
+                .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority and returning an optional result
@@ -185,8 +218,14 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult>(int priority, Context context,
-            CancellationToken cancellationToken, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TReadAllResult, ApizrException<TReadAllResult>>>
+            SendReadAllOptionalQuery<TReadAllResult>(this IApizrCrudOptionalMediator mediator, int priority,
+                Context context,
+                CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TReadAllResult>(priority, options => options.WithContext(context)
+                .WithCancellationToken(cancellationToken)
+                .WithCacheCleared(clearCache));
 
         #endregion
 
@@ -199,8 +238,12 @@ namespace Apizr.Optional.Extending
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
         /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <returns></returns>
-        Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
-            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
+            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(this IApizrCrudOptionalMediator mediator,
+                bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(options => options
+                .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR and returning mapped optional result
@@ -210,8 +253,13 @@ namespace Apizr.Optional.Extending
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
-            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(Context context, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
+            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(this IApizrCrudOptionalMediator mediator,
+                Context context, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(options => options
+                .WithContext(context)
+                .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR and returning mapped optional result
@@ -221,8 +269,13 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
-            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(CancellationToken cancellationToken, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
+            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(this IApizrCrudOptionalMediator mediator,
+                CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(options => options
+                .WithCancellationToken(cancellationToken)
+                .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR with priority and returning mapped optional result
@@ -232,8 +285,12 @@ namespace Apizr.Optional.Extending
         /// <param name="priority">The execution priority</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
-            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(int priority, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
+            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(this IApizrCrudOptionalMediator mediator,
+                int priority, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(priority, options => options
+                .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR with priority and returning mapped optional result
@@ -244,8 +301,13 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
-            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(int priority, CancellationToken cancellationToken, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
+            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(this IApizrCrudOptionalMediator mediator,
+                int priority, CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(priority, options => options
+                .WithCancellationToken(cancellationToken)
+                .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR with priority and returning mapped optional result
@@ -256,8 +318,13 @@ namespace Apizr.Optional.Extending
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
-            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(int priority, Context context, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
+            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(this IApizrCrudOptionalMediator mediator,
+                int priority, Context context, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(priority, options => options
+                .WithContext(context)
+                .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR and returning mapped optional result
@@ -268,9 +335,15 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
-            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(Context context,
-                CancellationToken cancellationToken, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
+            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(this IApizrCrudOptionalMediator mediator,
+                Context context,
+                CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(options => options
+                .WithContext(context)
+                .WithCancellationToken(cancellationToken)
+                .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR with priority and returning mapped optional result
@@ -282,9 +355,15 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
-            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(int priority, Context context,
-                CancellationToken cancellationToken, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
+            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(this IApizrCrudOptionalMediator mediator,
+                int priority, Context context,
+                CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(priority, options => options
+                .WithContext(context)
+                .WithCancellationToken(cancellationToken)
+                .WithCacheCleared(clearCache));
 
         #endregion
 
@@ -298,8 +377,13 @@ namespace Apizr.Optional.Extending
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(
-            TReadAllParams readAllParams, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TReadAllResult, ApizrException<TReadAllResult>>>
+            SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(this IApizrCrudOptionalMediator mediator,
+                TReadAllParams readAllParams, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(readAllParams, options =>
+                options
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR and returning an optional result
@@ -310,8 +394,14 @@ namespace Apizr.Optional.Extending
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(
-            TReadAllParams readAllParams, Context context, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TReadAllResult, ApizrException<TReadAllResult>>>
+            SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(this IApizrCrudOptionalMediator mediator,
+                TReadAllParams readAllParams, Context context, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(readAllParams, options =>
+                options
+                    .WithContext(context)
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR and returning an optional result
@@ -322,9 +412,15 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(
-            TReadAllParams readAllParams,
-            CancellationToken cancellationToken, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TReadAllResult, ApizrException<TReadAllResult>>>
+            SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(this IApizrCrudOptionalMediator mediator,
+                TReadAllParams readAllParams,
+                CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(readAllParams, options =>
+                options
+                    .WithCancellationToken(cancellationToken)
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority and returning an optional result
@@ -335,9 +431,14 @@ namespace Apizr.Optional.Extending
         /// <param name="priority">The execution priority</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(
-            TReadAllParams readAllParams,
-            int priority, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TReadAllResult, ApizrException<TReadAllResult>>>
+            SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(this IApizrCrudOptionalMediator mediator,
+                TReadAllParams readAllParams,
+                int priority, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(readAllParams, priority, options =>
+                options
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority and returning an optional result
@@ -349,9 +450,15 @@ namespace Apizr.Optional.Extending
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(
-            TReadAllParams readAllParams,
-            int priority, Context context, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TReadAllResult, ApizrException<TReadAllResult>>>
+            SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(this IApizrCrudOptionalMediator mediator,
+                TReadAllParams readAllParams,
+                int priority, Context context, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(readAllParams, priority, options =>
+                options
+                    .WithContext(context)
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority and returning an optional result
@@ -363,10 +470,16 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(
-            TReadAllParams readAllParams,
-            int priority,
-            CancellationToken cancellationToken, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TReadAllResult, ApizrException<TReadAllResult>>>
+            SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(this IApizrCrudOptionalMediator mediator,
+                TReadAllParams readAllParams,
+                int priority,
+                CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(readAllParams, priority, options =>
+                options
+                    .WithCancellationToken(cancellationToken)
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR and returning an optional result
@@ -378,9 +491,16 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(
-            TReadAllParams readAllParams, Context context,
-            CancellationToken cancellationToken, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TReadAllResult, ApizrException<TReadAllResult>>>
+            SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(this IApizrCrudOptionalMediator mediator,
+                TReadAllParams readAllParams, Context context,
+                CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(readAllParams, options =>
+                options
+                    .WithContext(context)
+                    .WithCancellationToken(cancellationToken)
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR with priority and returning an optional result
@@ -393,14 +513,21 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(
-            TReadAllParams readAllParams,
-            int priority, Context context,
-            CancellationToken cancellationToken, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TReadAllResult, ApizrException<TReadAllResult>>>
+            SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(this IApizrCrudOptionalMediator mediator,
+                TReadAllParams readAllParams,
+                int priority, Context context,
+                CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(readAllParams, priority, options =>
+                options
+                    .WithContext(context)
+                    .WithCancellationToken(cancellationToken)
+                    .WithCacheCleared(clearCache));
 
         #endregion
 
-        #region SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams)
+        #region SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(this IApizrCrudOptionalMediator mediator, TReadAllParams)
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR and returning a mapped optional result
@@ -411,8 +538,13 @@ namespace Apizr.Optional.Extending
         /// <param name="readAllParams">The read all filters</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
-            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
+            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(
+                this IApizrCrudOptionalMediator mediator, TReadAllParams readAllParams, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(readAllParams,
+                options => options
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR and returning a mapped optional result
@@ -424,8 +556,15 @@ namespace Apizr.Optional.Extending
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
-            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Context context, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
+            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(
+                this IApizrCrudOptionalMediator mediator, TReadAllParams readAllParams, Context context,
+                bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(readAllParams,
+                options => options
+                    .WithContext(context)
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR and returning a mapped optional result
@@ -437,9 +576,15 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
-            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
-                CancellationToken cancellationToken, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
+            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(
+                this IApizrCrudOptionalMediator mediator, TReadAllParams readAllParams,
+                CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(readAllParams,
+                options => options
+                    .WithCancellationToken(cancellationToken)
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR with priority and returning a mapped optional result
@@ -451,9 +596,15 @@ namespace Apizr.Optional.Extending
         /// <param name="priority">The execution priority</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
-            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
-                int priority, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
+            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(
+                this IApizrCrudOptionalMediator mediator, TReadAllParams readAllParams,
+                int priority, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(readAllParams,
+                priority,
+                options => options
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR with priority and returning a mapped optional result
@@ -466,9 +617,16 @@ namespace Apizr.Optional.Extending
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
-            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
-                int priority, Context context, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
+            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(
+                this IApizrCrudOptionalMediator mediator, TReadAllParams readAllParams,
+                int priority, Context context, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(readAllParams,
+                priority,
+                options => options
+                    .WithContext(context)
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR with priority and returning a mapped optional result
@@ -481,10 +639,17 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
-            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
+            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(
+                this IApizrCrudOptionalMediator mediator, TReadAllParams readAllParams,
                 int priority,
-                CancellationToken cancellationToken, bool clearCache = false);
+                CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(readAllParams,
+                priority,
+                options => options
+                    .WithCancellationToken(cancellationToken)
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR and returning a mapped optional result
@@ -497,9 +662,16 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
-            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Context context,
-                CancellationToken cancellationToken, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
+            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(
+                this IApizrCrudOptionalMediator mediator, TReadAllParams readAllParams, Context context,
+                CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(readAllParams,
+                options => options
+                    .WithContext(context)
+                    .WithCancellationToken(cancellationToken)
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR with priority and returning a mapped optional result
@@ -513,10 +685,18 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
-            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
+            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(
+                this IApizrCrudOptionalMediator mediator, TReadAllParams readAllParams,
                 int priority, Context context,
-                CancellationToken cancellationToken, bool clearCache = false);
+                CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(readAllParams,
+                priority,
+                options => options
+                    .WithContext(context)
+                    .WithCancellationToken(cancellationToken)
+                    .WithCacheCleared(clearCache));
 
         #endregion
 
@@ -534,7 +714,13 @@ namespace Apizr.Optional.Extending
         /// <param name="key">The entity key</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TApiEntity, ApizrException<TApiEntity>>>
+            SendReadOptionalQuery<TApiEntity, TApiEntityKey>(this IApizrCrudOptionalMediator mediator,
+                TApiEntityKey key, bool clearCache = false) =>
+            mediator.SendReadOptionalQuery<TApiEntity, TApiEntityKey>(key,
+                options => options
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR and returning an optional result
@@ -545,7 +731,13 @@ namespace Apizr.Optional.Extending
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TApiEntity, ApizrException<TApiEntity>>>
+            SendReadOptionalQuery<TApiEntity, TApiEntityKey>(this IApizrCrudOptionalMediator mediator,
+                TApiEntityKey key, Context context, bool clearCache = false) =>
+            mediator.SendReadOptionalQuery<TApiEntity, TApiEntityKey>(key,
+                options => options
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR and returning an optional result
@@ -556,8 +748,15 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            CancellationToken cancellationToken, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TApiEntity, ApizrException<TApiEntity>>>
+            SendReadOptionalQuery<TApiEntity, TApiEntityKey>(this IApizrCrudOptionalMediator mediator,
+                TApiEntityKey key,
+                CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadOptionalQuery<TApiEntity, TApiEntityKey>(key,
+                options => options
+                    .WithCancellationToken(cancellationToken)
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR with priority and returning an optional result
@@ -568,8 +767,14 @@ namespace Apizr.Optional.Extending
         /// <param name="priority">The execution priority</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            int priority, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TApiEntity, ApizrException<TApiEntity>>>
+            SendReadOptionalQuery<TApiEntity, TApiEntityKey>(this IApizrCrudOptionalMediator mediator,
+                TApiEntityKey key,
+                int priority, bool clearCache = false) =>
+            mediator.SendReadOptionalQuery<TApiEntity, TApiEntityKey>(key, priority,
+                options => options
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR and returning an optional result
@@ -581,8 +786,15 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context,
-            CancellationToken cancellationToken, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TApiEntity, ApizrException<TApiEntity>>>
+            SendReadOptionalQuery<TApiEntity, TApiEntityKey>(this IApizrCrudOptionalMediator mediator,
+                TApiEntityKey key, Context context,
+                CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadOptionalQuery<TApiEntity, TApiEntityKey>(key,
+                options => options
+                    .WithCancellationToken(cancellationToken)
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR with priority and returning an optional result
@@ -594,8 +806,14 @@ namespace Apizr.Optional.Extending
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            int priority, Context context, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TApiEntity, ApizrException<TApiEntity>>>
+            SendReadOptionalQuery<TApiEntity, TApiEntityKey>(this IApizrCrudOptionalMediator mediator,
+                TApiEntityKey key,
+                int priority, Context context, bool clearCache = false) =>
+            mediator.SendReadOptionalQuery<TApiEntity, TApiEntityKey>(key, priority,
+                options => options
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR with priority and returning an optional result
@@ -607,9 +825,16 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            int priority,
-            CancellationToken cancellationToken, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TApiEntity, ApizrException<TApiEntity>>>
+            SendReadOptionalQuery<TApiEntity, TApiEntityKey>(this IApizrCrudOptionalMediator mediator,
+                TApiEntityKey key,
+                int priority,
+                CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadOptionalQuery<TApiEntity, TApiEntityKey>(key, priority,
+                options => options
+                    .WithCancellationToken(cancellationToken)
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR with priority and returning an optional result
@@ -622,9 +847,17 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            int priority, Context context,
-            CancellationToken cancellationToken, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TApiEntity, ApizrException<TApiEntity>>>
+            SendReadOptionalQuery<TApiEntity, TApiEntityKey>(this IApizrCrudOptionalMediator mediator,
+                TApiEntityKey key,
+                int priority, Context context,
+                CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadOptionalQuery<TApiEntity, TApiEntityKey>(key, priority,
+                options => options
+                    .WithContext(context)
+                    .WithCancellationToken(cancellationToken)
+                    .WithCacheCleared(clearCache));
 
         #endregion
 
@@ -639,8 +872,13 @@ namespace Apizr.Optional.Extending
         /// <param name="key">The entity key</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, bool clearCache = false);
-
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelEntity, ApizrException<TModelEntity>>>
+            SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(this IApizrCrudOptionalMediator mediator,
+                TApiEntityKey key, bool clearCache = false) =>
+            mediator.SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(key,
+                options => options
+                    .WithCacheCleared(clearCache));
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR and returning a mapped optional result
         /// </summary>
@@ -651,7 +889,14 @@ namespace Apizr.Optional.Extending
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelEntity, ApizrException<TModelEntity>>>
+            SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(this IApizrCrudOptionalMediator mediator,
+                TApiEntityKey key, Context context, bool clearCache = false) =>
+            mediator.SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(key,
+                options => options
+                    .WithContext(context)
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR and returning a mapped optional result
@@ -663,8 +908,14 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            CancellationToken cancellationToken, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity,
+            TApiEntity, TApiEntityKey>(this IApizrCrudOptionalMediator mediator, TApiEntityKey key,
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(key,
+                options => options
+                    .WithCancellationToken(cancellationToken)
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR with priority and returning a mapped optional result
@@ -676,8 +927,13 @@ namespace Apizr.Optional.Extending
         /// <param name="priority">The execution priority</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            int priority, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity,
+            TApiEntity, TApiEntityKey>(this IApizrCrudOptionalMediator mediator, TApiEntityKey key,
+            int priority, bool clearCache = false) =>
+            mediator.SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, priority,
+                options => options
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR and returning a mapped optional result
@@ -690,8 +946,15 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context,
-            CancellationToken cancellationToken, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity,
+            TApiEntity, TApiEntityKey>(this IApizrCrudOptionalMediator mediator, TApiEntityKey key, Context context,
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(key,
+                options => options
+                    .WithContext(context)
+                    .WithCancellationToken(cancellationToken)
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR with priority and returning a mapped optional result
@@ -704,8 +967,14 @@ namespace Apizr.Optional.Extending
         /// <param name="context">The Polly context</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            int priority, Context context, bool clearCache = false);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity,
+            TApiEntity, TApiEntityKey>(this IApizrCrudOptionalMediator mediator, TApiEntityKey key,
+            int priority, Context context, bool clearCache = false) =>
+            mediator.SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, priority,
+                options => options
+                    .WithContext(context)
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR with priority and returning a mapped optional result
@@ -718,9 +987,15 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity,
+            TApiEntity, TApiEntityKey>(this IApizrCrudOptionalMediator mediator, TApiEntityKey key,
             int priority,
-            CancellationToken cancellationToken, bool clearCache = false);
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, priority,
+                options => options
+                    .WithCancellationToken(cancellationToken)
+                    .WithCacheCleared(clearCache));
 
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR with priority and returning a mapped optional result
@@ -734,9 +1009,16 @@ namespace Apizr.Optional.Extending
         /// <param name="cancellationToken">The cancellation token</param>
         /// <param name="clearCache">Clear request cache before executing (default: false)</param>
         /// <returns></returns>
-        Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity,
+            TApiEntity, TApiEntityKey>(this IApizrCrudOptionalMediator mediator, TApiEntityKey key,
             int priority, Context context,
-            CancellationToken cancellationToken, bool clearCache = false);
+            CancellationToken cancellationToken, bool clearCache = false) =>
+            mediator.SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, priority,
+                options => options
+                    .WithContext(context)
+                    .WithCancellationToken(cancellationToken)
+                    .WithCacheCleared(clearCache));
 
         #endregion
 
@@ -753,19 +1035,14 @@ namespace Apizr.Optional.Extending
         /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
         /// <param name="key">The entity key</param>
         /// <param name="entity">The entity to update</param>
-        /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, TApiEntity entity);
-
-        /// <summary>
-        /// Send a <see cref="UpdateCommand{TApiEntityKey, TApiEntity}"/> to Apizr using MediatR and returning an optional result
-        /// </summary>
-        /// <typeparam name="TApiEntity">The api entity type</typeparam>
-        /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
-        /// <param name="key">The entity key</param>
-        /// <param name="entity">The entity to update</param>
         /// <param name="context">The Polly context</param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, TApiEntity entity, Context context);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TApiEntity, TApiEntityKey>(
+            this IApizrCrudOptionalMediator mediator, TApiEntityKey key, TApiEntity entity, Context context) =>
+            mediator.SendUpdateOptionalCommand<TApiEntity, TApiEntityKey>(key, entity,
+                options => options
+                    .WithContext(context));
 
         /// <summary>
         /// Send a <see cref="UpdateCommand{TApiEntityKey, TApiEntity}"/> to Apizr using MediatR and returning an optional result
@@ -776,8 +1053,13 @@ namespace Apizr.Optional.Extending
         /// <param name="entity">The entity to update</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, TApiEntity entity,
-            CancellationToken cancellationToken);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TApiEntity, TApiEntityKey>(
+            this IApizrCrudOptionalMediator mediator, TApiEntityKey key, TApiEntity entity,
+            CancellationToken cancellationToken) =>
+            mediator.SendUpdateOptionalCommand<TApiEntity, TApiEntityKey>(key, entity,
+                options => options
+                    .WithCancellationToken(cancellationToken));
 
         /// <summary>
         /// Send a <see cref="UpdateCommand{TApiEntityKey, TApiEntity}"/> to Apizr using MediatR and returning an optional result
@@ -789,8 +1071,14 @@ namespace Apizr.Optional.Extending
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, TApiEntity entity, Context context,
-            CancellationToken cancellationToken);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TApiEntity, TApiEntityKey>(
+            this IApizrCrudOptionalMediator mediator, TApiEntityKey key, TApiEntity entity, Context context,
+            CancellationToken cancellationToken) =>
+            mediator.SendUpdateOptionalCommand<TApiEntity, TApiEntityKey>(key, entity,
+                options => options
+                    .WithContext(context)
+                    .WithCancellationToken(cancellationToken));
 
         #endregion
 
@@ -804,22 +1092,15 @@ namespace Apizr.Optional.Extending
         /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
         /// <param name="key">The entity key</param>
         /// <param name="entity">The entity to update</param>
-        /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            TModelEntity entity);
-
-        /// <summary>
-        /// Send a mapped <see cref="UpdateCommand{TApiEntityKey, TModelEntity}"/> to Apizr using MediatR and returning an optional result
-        /// </summary>
-        /// <typeparam name="TModelEntity">The model entity type to map from</typeparam>
-        /// <typeparam name="TApiEntity">The api entity type to map to</typeparam>
-        /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
-        /// <param name="key">The entity key</param>
-        /// <param name="entity">The entity to update</param>
         /// <param name="context">The Polly context</param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            TModelEntity entity, Context context);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TModelEntity, TApiEntity,
+            TApiEntityKey>(this IApizrCrudOptionalMediator mediator, TApiEntityKey key,
+            TModelEntity entity, Context context) =>
+            mediator.SendUpdateOptionalCommand<TModelEntity, TApiEntity, TApiEntityKey>(key, entity,
+                options => options
+                    .WithContext(context));
 
         /// <summary>
         /// Send a mapped <see cref="UpdateCommand{TApiEntityKey, TModelEntity}"/> to Apizr using MediatR and returning an optional result
@@ -831,8 +1112,13 @@ namespace Apizr.Optional.Extending
         /// <param name="entity">The entity to update</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            TModelEntity entity, CancellationToken cancellationToken);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TModelEntity, TApiEntity,
+            TApiEntityKey>(this IApizrCrudOptionalMediator mediator, TApiEntityKey key,
+            TModelEntity entity, CancellationToken cancellationToken) =>
+            mediator.SendUpdateOptionalCommand<TModelEntity, TApiEntity, TApiEntityKey>(key, entity,
+                options => options
+                    .WithCancellationToken(cancellationToken));
 
         /// <summary>
         /// Send a mapped <see cref="UpdateCommand{TApiEntityKey, TModelEntity}"/> to Apizr using MediatR and returning an optional result
@@ -845,9 +1131,15 @@ namespace Apizr.Optional.Extending
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TModelEntity, TApiEntity,
+            TApiEntityKey>(this IApizrCrudOptionalMediator mediator, TApiEntityKey key,
             TModelEntity entity, Context context,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken) =>
+            mediator.SendUpdateOptionalCommand<TModelEntity, TApiEntity, TApiEntityKey>(key, entity,
+                options => options
+                    .WithContext(context)
+                    .WithCancellationToken(cancellationToken));
 
         #endregion
 
@@ -861,18 +1153,14 @@ namespace Apizr.Optional.Extending
         /// <typeparam name="TApiEntity">The api entity type</typeparam>
         /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
         /// <param name="key">The entity key</param>
-        /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendDeleteOptionalCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key);
-
-        /// <summary>
-        /// Send a <see cref="DeleteCommand{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR and returning an optional result
-        /// </summary>
-        /// <typeparam name="TApiEntity">The api entity type</typeparam>
-        /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
-        /// <param name="key">The entity key</param>
         /// <param name="context">The Polly context</param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendDeleteOptionalCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<Unit, ApizrException>> SendDeleteOptionalCommand<TApiEntity, TApiEntityKey>(
+            this IApizrCrudOptionalMediator mediator, TApiEntityKey key, Context context) =>
+            mediator.SendDeleteOptionalCommand<TApiEntity, TApiEntityKey>(key,
+                options => options
+                    .WithContext(context));
 
         /// <summary>
         /// Send a <see cref="DeleteCommand{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR and returning an optional result
@@ -882,8 +1170,13 @@ namespace Apizr.Optional.Extending
         /// <param name="key">The entity key</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendDeleteOptionalCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            CancellationToken cancellationToken);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<Unit, ApizrException>> SendDeleteOptionalCommand<TApiEntity, TApiEntityKey>(
+            this IApizrCrudOptionalMediator mediator, TApiEntityKey key,
+            CancellationToken cancellationToken) =>
+            mediator.SendDeleteOptionalCommand<TApiEntity, TApiEntityKey>(key,
+                options => options
+                    .WithCancellationToken(cancellationToken));
 
         /// <summary>
         /// Send a <see cref="DeleteCommand{TApiEntity, TApiEntityKey}"/> to Apizr using MediatR and returning an optional result
@@ -894,8 +1187,14 @@ namespace Apizr.Optional.Extending
         /// <param name="context">The Polly context</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendDeleteOptionalCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, Context context,
-            CancellationToken cancellationToken);
+        [Obsolete("Use the one with the request options builder parameter instead")]
+        public static Task<Option<Unit, ApizrException>> SendDeleteOptionalCommand<TApiEntity, TApiEntityKey>(
+            this IApizrCrudOptionalMediator mediator, TApiEntityKey key, Context context,
+            CancellationToken cancellationToken) =>
+            mediator.SendDeleteOptionalCommand<TApiEntity, TApiEntityKey>(key,
+                options => options
+                    .WithContext(context)
+                    .WithCancellationToken(cancellationToken));
 
         #endregion
     }

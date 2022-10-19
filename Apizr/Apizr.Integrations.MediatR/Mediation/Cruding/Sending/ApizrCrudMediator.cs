@@ -27,7 +27,8 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <inheritdoc />
         public Task<TApiEntity> SendCreateCommand<TApiEntity>(TApiEntity entity,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new CreateCommand<TApiEntity>(entity, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+            _mediator.Send(new CreateCommand<TApiEntity>(entity, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
         #endregion
 
@@ -36,7 +37,8 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <inheritdoc />
         public Task<TModelEntity> SendCreateCommand<TModelEntity, TApiEntity>(TModelEntity entity,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new CreateCommand<TModelEntity>(entity, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+            _mediator.Send(new CreateCommand<TModelEntity>(entity, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
         #endregion
 
@@ -48,13 +50,15 @@ namespace Apizr.Mediation.Cruding.Sending
 
         /// <inheritdoc />
         public Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null) => 
-            _mediator.Send(new ReadAllQuery<TReadAllResult>(optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
-        
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
+            _mediator.Send(new ReadAllQuery<TReadAllResult>(optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+
         /// <inheritdoc />
         public Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(int priority,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new ReadAllQuery<TReadAllResult>(priority, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+            _mediator.Send(new ReadAllQuery<TReadAllResult>(priority, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
         #endregion
 
@@ -63,12 +67,14 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <inheritdoc />
         public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new ReadAllQuery<TModelReadAllResult>(optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
-        
+            _mediator.Send(new ReadAllQuery<TModelReadAllResult>(optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+
         /// <inheritdoc />
         public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(int priority,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new ReadAllQuery<TModelReadAllResult>(priority, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+            _mediator.Send(new ReadAllQuery<TModelReadAllResult>(priority, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
         #endregion
 
@@ -77,12 +83,14 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <inheritdoc />
         public Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new ReadAllQuery<TReadAllParams, TReadAllResult>(readAllParams, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
-        
+            _mediator.Send(new ReadAllQuery<TReadAllParams, TReadAllResult>(readAllParams, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+
         /// <inheritdoc />
         public Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams,
             int priority, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new ReadAllQuery<TReadAllParams, TReadAllResult>(readAllParams, priority, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+            _mediator.Send(new ReadAllQuery<TReadAllParams, TReadAllResult>(readAllParams, priority, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
         #endregion
 
@@ -91,13 +99,16 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <inheritdoc />
         public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(
             TReadAllParams readAllParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new ReadAllQuery<TReadAllParams, TModelReadAllResult>(readAllParams, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
-        
+            _mediator.Send(new ReadAllQuery<TReadAllParams, TModelReadAllResult>(readAllParams, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+
         /// <inheritdoc />
         public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(
             TReadAllParams readAllParams,
             int priority, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new ReadAllQuery<TReadAllParams, TModelReadAllResult>(readAllParams, priority, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+            _mediator.Send(
+                new ReadAllQuery<TReadAllParams, TModelReadAllResult>(readAllParams, priority, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
         #endregion
 
@@ -110,12 +121,14 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <inheritdoc />
         public Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new ReadQuery<TApiEntity, TApiEntityKey>(key, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
-        
+            _mediator.Send(new ReadQuery<TApiEntity, TApiEntityKey>(key, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+
         /// <inheritdoc />
         public Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key,
             int priority, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new ReadQuery<TApiEntity, TApiEntityKey>(key, priority, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+            _mediator.Send(new ReadQuery<TApiEntity, TApiEntityKey>(key, priority, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
         #endregion
 
@@ -124,12 +137,14 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <inheritdoc />
         public Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new ReadQuery<TModelEntity, TApiEntityKey>(key, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
-        
+            _mediator.Send(new ReadQuery<TModelEntity, TApiEntityKey>(key, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+
         /// <inheritdoc />
         public Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
             int priority, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new ReadQuery<TModelEntity, TApiEntityKey>(key, priority, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+            _mediator.Send(new ReadQuery<TModelEntity, TApiEntityKey>(key, priority, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
         #endregion
 
@@ -142,7 +157,8 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <inheritdoc />
         public Task SendUpdateCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key,
             TApiEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new UpdateCommand<TApiEntityKey, TApiEntity>(key, entity, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+            _mediator.Send(new UpdateCommand<TApiEntityKey, TApiEntity>(key, entity, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
         #endregion
 
@@ -151,7 +167,8 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <inheritdoc />
         public Task SendUpdateCommand<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
             TModelEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new UpdateCommand<TApiEntityKey, TModelEntity>(key, entity, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+            _mediator.Send(new UpdateCommand<TApiEntityKey, TModelEntity>(key, entity, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
         #endregion
 
@@ -162,8 +179,9 @@ namespace Apizr.Mediation.Cruding.Sending
         /// <inheritdoc />
         public Task SendDeleteCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new DeleteCommand<TApiEntity, TApiEntityKey>(key, optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
-        
+            _mediator.Send(new DeleteCommand<TApiEntity, TApiEntityKey>(key, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+
         #endregion
     }
 

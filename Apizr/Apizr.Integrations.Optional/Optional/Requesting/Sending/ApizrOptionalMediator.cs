@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring.Request;
 using Apizr.Mapping;
+using Apizr.Mediation.Requesting.Sending;
 using MediatR;
 using Optional;
 using Polly;
@@ -13,7 +14,7 @@ namespace Apizr.Optional.Requesting.Sending
     /// <summary>
     /// Apizr mediator to send request using MediatR by calling expression and returning optional result
     /// </summary>
-    public class ApizrOptionalMediator : IApizrOptionalMediator
+    public class ApizrOptionalMediator : ApizrMediatorBase, IApizrOptionalMediator
     {
         private readonly IMediator _mediator;
 
@@ -29,13 +30,15 @@ namespace Apizr.Optional.Requesting.Sending
         /// <inheritdoc />
         public Task<Option<Unit, ApizrException>> SendFor<TWebApi>(Expression<Func<TWebApi, Task>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new ExecuteOptionalUnitRequest<TWebApi>(executeApiMethod, optionsBuilder));
+            _mediator.Send(new ExecuteOptionalUnitRequest<TWebApi>(executeApiMethod, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <inheritdoc />
         public Task<Option<Unit, ApizrException>> SendFor<TWebApi>(
             Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new ExecuteOptionalUnitRequest<TWebApi>(executeApiMethod, optionsBuilder));
+            _mediator.Send(new ExecuteOptionalUnitRequest<TWebApi>(executeApiMethod, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         #endregion
 
@@ -47,7 +50,7 @@ namespace Apizr.Optional.Requesting.Sending
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(
                 new ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData,
-                    optionsBuilder));
+                    optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <inheritdoc />
         public Task<Option<Unit, ApizrException>> SendFor<TWebApi, TModelData, TApiData>(
@@ -55,7 +58,7 @@ namespace Apizr.Optional.Requesting.Sending
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(
                 new ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData,
-                    optionsBuilder));
+                    optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         #endregion
 
@@ -69,11 +72,15 @@ namespace Apizr.Optional.Requesting.Sending
         public Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TWebApi, TApiData>(
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new ExecuteOptionalResultRequest<TWebApi, TApiData>(executeApiMethod, optionsBuilder));
+            _mediator.Send(new ExecuteOptionalResultRequest<TWebApi, TApiData>(executeApiMethod, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <inheritdoc />
-        public Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TWebApi, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new ExecuteOptionalResultRequest<TWebApi, TApiData>(executeApiMethod, optionsBuilder));
+        public Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TWebApi, TApiData>(
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
+            _mediator.Send(new ExecuteOptionalResultRequest<TWebApi, TApiData>(executeApiMethod, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
         #endregion
 
@@ -83,14 +90,17 @@ namespace Apizr.Optional.Requesting.Sending
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new ExecuteOptionalResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, optionsBuilder));
+            _mediator.Send(
+                new ExecuteOptionalResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <inheritdoc />
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(
-                new ExecuteOptionalResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, optionsBuilder));
+                new ExecuteOptionalResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <inheritdoc />
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
@@ -98,7 +108,7 @@ namespace Apizr.Optional.Requesting.Sending
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(
                 new ExecuteOptionalResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData,
-                    optionsBuilder));
+                    optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <inheritdoc />
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
@@ -107,7 +117,7 @@ namespace Apizr.Optional.Requesting.Sending
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(
                 new ExecuteOptionalResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData,
-                    optionsBuilder));
+                    optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         #endregion
 
@@ -120,7 +130,8 @@ namespace Apizr.Optional.Requesting.Sending
             TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(
                 new ExecuteOptionalResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData,
-                    TModelRequestData>(executeApiMethod, modelRequestData, optionsBuilder));
+                    TModelRequestData>(executeApiMethod, modelRequestData, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <inheritdoc />
         public Task<Option<TModelResultData, ApizrException<TModelResultData>>> SendFor<TWebApi, TModelResultData,
@@ -129,9 +140,10 @@ namespace Apizr.Optional.Requesting.Sending
             TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(
                 new ExecuteOptionalResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData,
-                    TModelRequestData>(executeApiMethod, modelRequestData, optionsBuilder));
+                    TModelRequestData>(executeApiMethod, modelRequestData, optionsBuilder),
+                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
-        #endregion 
+        #endregion
 
         #endregion
     }

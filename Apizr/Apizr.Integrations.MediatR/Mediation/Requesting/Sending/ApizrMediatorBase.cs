@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Apizr.Mediation.Requesting.Sending
 {
-    public abstract class ApizrMediatorBase
+    public abstract class ApizrMediatorBase : IApizrMediatorBase
     {
         protected static IApizrRequestOptionsBuilder
             CreateRequestOptionsBuilder(Action<IApizrRequestOptionsBuilder> optionsBuilder) =>

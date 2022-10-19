@@ -59,11 +59,11 @@ namespace Apizr.Mediation.Requesting.Handling
             return request.ExecuteApiMethod switch
             {
                 Expression<Func<TWebApi, Task>> executeApiMethod => 
-                    WebApiManager.ExecuteAsync(executeApiMethod, request.OptionsBuilder)
+                    WebApiManager.ExecuteAsync(executeApiMethod, (Action<IApizrCatchUnitRequestOptionsBuilder>) request.OptionsBuilder)
                         .ContinueWith(_ => Unit.Value, cancellationToken),
 
                 Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod => 
-                    WebApiManager.ExecuteAsync(executeApiMethod, request.OptionsBuilder)
+                    WebApiManager.ExecuteAsync(executeApiMethod, (Action<IApizrCatchUnitRequestOptionsBuilder>) request.OptionsBuilder)
                         .ContinueWith(_ => Unit.Value, cancellationToken),
 
                 _ => throw new ApizrException(new NotImplementedException())

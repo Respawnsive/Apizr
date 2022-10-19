@@ -33,15 +33,6 @@ namespace Apizr
         #region ExecuteAsync
 
         #region Task
-        
-        /// <summary>
-        /// Execute a managed <typeparamref name="TWebApi"/>'s task
-        /// </summary>
-        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
-        /// <param name="optionsBuilder">Options provided to the request</param>
-        /// <returns></returns>
-        Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -49,8 +40,17 @@ namespace Apizr
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task ExecuteAsync(Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+        Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod,
+            Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task
+        /// </summary>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        Task ExecuteAsync(Expression<Func<IApizrCatchUnitRequestOptions, TWebApi, Task>> executeApiMethod,
+            Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task

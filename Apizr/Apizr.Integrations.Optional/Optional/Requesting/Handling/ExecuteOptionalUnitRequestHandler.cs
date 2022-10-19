@@ -85,7 +85,7 @@ namespace Apizr.Optional.Requesting.Handling
                             .SomeNotNull(new ApizrException(new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                             .MapAsync(async _ =>
                             {
-                                await WebApiManager.ExecuteAsync(executeApiMethod, request.OptionsBuilder);
+                                await WebApiManager.ExecuteAsync(executeApiMethod, (Action<IApizrCatchUnitRequestOptionsBuilder>) request.OptionsBuilder);
 
                                 return Unit.Value;
                             }).ConfigureAwait(false);
@@ -95,7 +95,7 @@ namespace Apizr.Optional.Requesting.Handling
                             .SomeNotNull(new ApizrException(new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                             .MapAsync(async _ =>
                             {
-                                await WebApiManager.ExecuteAsync(executeApiMethod, request.OptionsBuilder);
+                                await WebApiManager.ExecuteAsync(executeApiMethod, (Action<IApizrCatchUnitRequestOptionsBuilder>) request.OptionsBuilder);
 
                                 return Unit.Value;
                             }).ConfigureAwait(false);

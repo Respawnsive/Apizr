@@ -4,48 +4,119 @@ using Polly;
 
 namespace Apizr.Configuring.Request;
 
-public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder
+public abstract class
+    ApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder> : IApizrRequestOptionsBuilderBase<
+        TApizrRequestOptions, TApizrRequestOptionsBuilder>
+    where TApizrRequestOptions : IApizrRequestOptionsBase
+    where TApizrRequestOptionsBuilder :
+    IApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
 {
     protected readonly ApizrRequestOptions Options;
 
-    public ApizrRequestOptionsBuilder(ApizrRequestOptions options)
+    protected ApizrRequestOptionsBuilderBase(ApizrRequestOptions options)
     {
         Options = options;
     }
 
-    /// <inheritdoc />
-    public IApizrRequestOptions ApizrOptions => Options;
+    protected abstract TApizrRequestOptionsBuilder Builder { get; }
 
     /// <inheritdoc />
-    public IApizrRequestOptionsBuilder WithContext(Context context)
+    public abstract TApizrRequestOptions ApizrOptions { get; }
+
+    /// <inheritdoc />
+    public TApizrRequestOptionsBuilder WithContext(Context context)
     {
         Options.Context = context;
 
-        return this;
+        return Builder;
     }
 
     /// <inheritdoc />
-    public IApizrRequestOptionsBuilder WithCancellationToken(CancellationToken cancellationToken)
+    public TApizrRequestOptionsBuilder WithCancellationToken(CancellationToken cancellationToken)
     {
         Options.CancellationToken = cancellationToken;
 
-        return this;
+        return Builder;
     }
 
     /// <param name="clearCache"></param>
     /// <inheritdoc />
-    public IApizrRequestOptionsBuilder WithCacheCleared(bool clearCache)
+    public TApizrRequestOptionsBuilder WithCacheCleared(bool clearCache)
     {
         Options.ClearCache = clearCache;
 
-        return this;
+        return Builder;
     }
 
     /// <inheritdoc />
-    public IApizrRequestOptionsBuilder WithExceptionCatcher(Action<Exception> onException)
+    public TApizrRequestOptionsBuilder WithExceptionCatcher(Action<Exception> onException)
     {
         Options.OnException = onException;
 
-        return this;
+        return Builder;
     }
+}
+
+public class ApizrUnitRequestOptionsBuilder :
+    ApizrRequestOptionsBuilderBase<IApizrUnitRequestOptions, IApizrUnitRequestOptionsBuilder>,
+    IApizrUnitRequestOptionsBuilder
+{
+    /// <inheritdoc />
+    public ApizrUnitRequestOptionsBuilder(ApizrRequestOptions options) : base(options)
+    {
+    }
+
+    /// <inheritdoc />
+    protected override IApizrUnitRequestOptionsBuilder Builder => this;
+
+    /// <inheritdoc />
+    public override IApizrUnitRequestOptions ApizrOptions => Options;
+}
+
+public class ApizrCatchUnitRequestOptionsBuilder :
+    ApizrRequestOptionsBuilderBase<IApizrCatchUnitRequestOptions, IApizrCatchUnitRequestOptionsBuilder>,
+    IApizrCatchUnitRequestOptionsBuilder
+{
+    /// <inheritdoc />
+    public ApizrCatchUnitRequestOptionsBuilder(ApizrRequestOptions options) : base(options)
+    {
+    }
+
+    /// <inheritdoc />
+    protected override IApizrCatchUnitRequestOptionsBuilder Builder => this;
+
+    /// <inheritdoc />
+    public override IApizrCatchUnitRequestOptions ApizrOptions => Options;
+}
+
+public class ApizrResultRequestOptionsBuilder :
+    ApizrRequestOptionsBuilderBase<IApizrResultRequestOptions, IApizrResultRequestOptionsBuilder>,
+    IApizrResultRequestOptionsBuilder
+{
+    /// <inheritdoc />
+    public ApizrResultRequestOptionsBuilder(ApizrRequestOptions options) : base(options)
+    {
+    }
+
+    /// <inheritdoc />
+    protected override IApizrResultRequestOptionsBuilder Builder => this;
+
+    /// <inheritdoc />
+    public override IApizrResultRequestOptions ApizrOptions => Options;
+}
+
+public class ApizrCatchResultRequestOptionsBuilder :
+    ApizrRequestOptionsBuilderBase<IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>,
+    IApizrCatchResultRequestOptionsBuilder
+{
+    /// <inheritdoc />
+    public ApizrCatchResultRequestOptionsBuilder(ApizrRequestOptions options) : base(options)
+    {
+    }
+
+    /// <inheritdoc />
+    protected override IApizrCatchResultRequestOptionsBuilder Builder => this;
+
+    /// <inheritdoc />
+    public override IApizrCatchResultRequestOptions ApizrOptions => Options;
 }

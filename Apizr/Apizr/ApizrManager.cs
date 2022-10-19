@@ -33,10 +33,10 @@ namespace Apizr
 {
     public abstract class ApizrManager : IApizrManager
     {
-        internal static IApizrRequestOptionsBuilder CreateRequestOptionsBuilder(Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        internal static IApizrCatchUnitRequestOptionsBuilder CreateRequestOptionsBuilder(Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null)
         {
             var requestOptions = new ApizrRequestOptions();
-            var builder = new ApizrRequestOptionsBuilder(requestOptions);
+            var builder = new ApizrCatchUnitRequestOptionsBuilder(requestOptions);
             optionsBuilder?.Invoke(builder);
 
             return builder;
@@ -98,13 +98,14 @@ namespace Apizr
         
         /// <inheritdoc />
         public Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync(
                 (_, api) =>
                     executeApiMethod.Compile()(api), optionsBuilder);
 
         /// <inheritdoc />
-        public async Task ExecuteAsync(Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        public async Task ExecuteAsync(Expression<Func<IApizrCatchUnitRequestOptions, TWebApi, Task>> executeApiMethod,
+            Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null)
         {
             var requestOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
             var webApi = _lazyWebApi.Value;

@@ -26,7 +26,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendFor<TWebApi>(Expression<Func<TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<Unit, ApizrException>> SendFor<TWebApi>(Expression<Func<TWebApi, Task>> executeApiMethod, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR and returning an optional result
@@ -35,7 +35,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendFor<TWebApi>(Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<Unit, ApizrException>> SendFor<TWebApi>(Expression<Func<IApizrUnitRequestOptions, TWebApi, Task>> executeApiMethod, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion
 
@@ -52,7 +52,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<Option<Unit, ApizrException>> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
-            TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            TModelData modelData, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with mapped request and returning an optional result
@@ -64,8 +64,8 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="modelData">The model data to map</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod,
-            TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<Unit, ApizrException>> SendFor<TWebApi, TModelData, TApiData>(Expression<Func<IApizrUnitRequestOptions, TWebApi, TApiData, Task>> executeApiMethod,
+            TModelData modelData, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion
 
@@ -83,7 +83,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TWebApi, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TWebApi, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR and returning an optional result
@@ -93,7 +93,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TWebApi, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TWebApi, TApiData>(Expression<Func<IApizrResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
         
         #endregion
 
@@ -109,7 +109,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
-            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR returning an optional mapped result
@@ -121,7 +121,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<IApizrResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request and returning an optional mapped result
@@ -134,7 +134,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
-            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request and returning an optional mapped result
@@ -147,7 +147,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<IApizrResultRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
         
         #endregion
 
@@ -167,7 +167,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <returns></returns>
         Task<Option<TModelResultData, ApizrException<TModelResultData>>> SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            TModelRequestData modelRequestData, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request and returning an optional mapped result
@@ -182,8 +182,8 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<Option<TModelResultData, ApizrException<TModelResultData>>> SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<IApizrResultRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            TModelRequestData modelRequestData, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion
 
@@ -203,15 +203,17 @@ namespace Apizr.Optional.Requesting.Sending
         /// Send an api call to Apizr using MediatR and returning an optional result
         /// </summary>
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="optionsBuilder"></param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendFor(Expression<Func<TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<Unit, ApizrException>> SendFor(Expression<Func<TWebApi, Task>> executeApiMethod, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR and returning an optional result
         /// </summary>
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="optionsBuilder"></param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendFor(Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<Unit, ApizrException>> SendFor(Expression<Func<IApizrUnitRequestOptions, TWebApi, Task>> executeApiMethod, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion
 
@@ -224,9 +226,10 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TApiData">The api request type to map to</typeparam>
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
+        /// <param name="optionsBuilder"></param>
         /// <returns></returns>
         Task<Option<Unit, ApizrException>> SendFor<TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
-            TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            TModelData modelData, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with mapped request and returning an optional result
@@ -235,9 +238,10 @@ namespace Apizr.Optional.Requesting.Sending
         /// <typeparam name="TApiData">The api request type to map to</typeparam>
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="modelData">The model data to map</param>
+        /// <param name="optionsBuilder"></param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendFor<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod,
-            TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<Unit, ApizrException>> SendFor<TModelData, TApiData>(Expression<Func<IApizrUnitRequestOptions, TWebApi, TApiData, Task>> executeApiMethod,
+            TModelData modelData, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion
 
@@ -254,7 +258,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR and returning an optional result
@@ -263,7 +267,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TApiData>(Expression<Func<IApizrResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion
 
@@ -278,7 +282,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TModelData, TApiData>(
-            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR returning an optional mapped result
@@ -289,7 +293,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TModelData, TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<IApizrResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request and returning an optional mapped result
@@ -301,7 +305,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TModelData, TApiData>(
-            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request and returning an optional mapped result
@@ -313,7 +317,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TModelData, TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<IApizrResultRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion
 
@@ -332,7 +336,7 @@ namespace Apizr.Optional.Requesting.Sending
         /// <returns></returns>
         Task<Option<TModelResultData, ApizrException<TModelResultData>>> SendFor<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            TModelRequestData modelRequestData, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request and returning an optional mapped result
@@ -346,8 +350,8 @@ namespace Apizr.Optional.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<Option<TModelResultData, ApizrException<TModelResultData>>> SendFor<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<IApizrResultRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            TModelRequestData modelRequestData, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion
 

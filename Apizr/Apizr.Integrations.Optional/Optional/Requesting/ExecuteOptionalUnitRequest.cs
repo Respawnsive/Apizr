@@ -14,7 +14,7 @@ namespace Apizr.Optional.Requesting
     /// <typeparam name="TWebApi">The web api type</typeparam>
     /// <typeparam name="TModelData">The model data type</typeparam>
     /// <typeparam name="TApiData">The api data type</typeparam>
-    public class ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData> : ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData>
+    public class ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData> : ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData, IApizrUnitRequestOptions, IApizrUnitRequestOptionsBuilder>
     {
         /// <summary>
         /// The mediation execute optional unit request constructor
@@ -22,7 +22,7 @@ namespace Apizr.Optional.Requesting
         /// <param name="executeApiMethod">The request to execute</param>
         /// <param name="modelData">The data provided to the request</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        public ExecuteOptionalUnitRequest(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, modelData, optionsBuilder)
+        public ExecuteOptionalUnitRequest(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, modelData, optionsBuilder)
         {
         }
 
@@ -32,7 +32,7 @@ namespace Apizr.Optional.Requesting
         /// <param name="executeApiMethod">The request to execute</param>
         /// <param name="modelData">The data provided to the request</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        public ExecuteOptionalUnitRequest(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, modelData, optionsBuilder)
+        public ExecuteOptionalUnitRequest(Expression<Func<IApizrUnitRequestOptions, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, modelData, optionsBuilder)
         {
         }
     }
@@ -41,14 +41,14 @@ namespace Apizr.Optional.Requesting
     /// The mediation execute optional unit request (returning no result)
     /// </summary>
     /// <typeparam name="TWebApi">The web api type</typeparam>
-    public class ExecuteOptionalUnitRequest<TWebApi> : ExecuteOptionalUnitRequestBase<TWebApi>
+    public class ExecuteOptionalUnitRequest<TWebApi> : ExecuteOptionalUnitRequestBase<TWebApi, IApizrUnitRequestOptions, IApizrUnitRequestOptionsBuilder>
     {
         /// <summary>
         /// The mediation execute optional unit request constructor
         /// </summary>
         /// <param name="executeApiMethod">The request to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        public ExecuteOptionalUnitRequest(Expression<Func<TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
+        public ExecuteOptionalUnitRequest(Expression<Func<TWebApi, Task>> executeApiMethod, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
         {
         }
 
@@ -57,7 +57,7 @@ namespace Apizr.Optional.Requesting
         /// </summary>
         /// <param name="executeApiMethod">The request to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        public ExecuteOptionalUnitRequest(Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
+        public ExecuteOptionalUnitRequest(Expression<Func<IApizrUnitRequestOptions, TWebApi, Task>> executeApiMethod, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
         {
         }
     }

@@ -18,7 +18,7 @@ namespace Apizr.Optional.Requesting.Handling
     /// <typeparam name="TWebApi">The web api type</typeparam>
     /// <typeparam name="TModelData">The model data type</typeparam>
     /// <typeparam name="TApiData">The api data type</typeparam>
-    public class ExecuteOptionalUnitRequestHandler<TWebApi, TModelData, TApiData> : ExecuteOptionalUnitRequestHandlerBase<TWebApi, TModelData, TApiData, ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>>
+    public class ExecuteOptionalUnitRequestHandler<TWebApi, TModelData, TApiData> : ExecuteOptionalUnitRequestHandlerBase<TWebApi, TModelData, TApiData, ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, IApizrUnitRequestOptions, IApizrUnitRequestOptionsBuilder>
     {
         public ExecuteOptionalUnitRequestHandler(IApizrManager<TWebApi> webApiManager) : base(webApiManager)
         {
@@ -36,17 +36,17 @@ namespace Apizr.Optional.Requesting.Handling
                             .SomeNotNull(new ApizrException(new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                             .MapAsync(async _ =>
                             {
-                                await WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, (Action<IApizrCatchUnitRequestOptionsBuilder>) request.OptionsBuilder);
+                                await WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, (Action<IApizrCatchUnitRequestOptionsBuilder>)request.OptionsBuilder);
 
                                 return Unit.Value;
                             }).ConfigureAwait(false);
 
-                    case Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod:
+                    case Expression<Func<IApizrUnitRequestOptions, TWebApi, TApiData, Task>> executeApiMethod:
                         return await request
                             .SomeNotNull(new ApizrException(new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                             .MapAsync(async _ =>
                             {
-                                await WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, request.OptionsBuilder);
+                                await WebApiManager.ExecuteAsync<TModelData, TApiData>((options, api, apiData) => executeApiMethod.Compile()(options, api, apiData), request.ModelRequestData, (Action<IApizrCatchUnitRequestOptionsBuilder>)request.OptionsBuilder);
 
                                 return Unit.Value;
                             }).ConfigureAwait(false);
@@ -66,7 +66,7 @@ namespace Apizr.Optional.Requesting.Handling
     /// The mediation execute optional unit request handler
     /// </summary>
     /// <typeparam name="TWebApi">The web api type</typeparam>
-    public class ExecuteOptionalUnitRequestHandler<TWebApi> : ExecuteOptionalUnitRequestHandlerBase<TWebApi, ExecuteOptionalUnitRequest<TWebApi>>
+    public class ExecuteOptionalUnitRequestHandler<TWebApi> : ExecuteOptionalUnitRequestHandlerBase<TWebApi, ExecuteOptionalUnitRequest<TWebApi>, IApizrUnitRequestOptions, IApizrUnitRequestOptionsBuilder>
     {
         public ExecuteOptionalUnitRequestHandler(IApizrManager<TWebApi> webApiManager) : base(webApiManager)
         {
@@ -90,12 +90,12 @@ namespace Apizr.Optional.Requesting.Handling
                                 return Unit.Value;
                             }).ConfigureAwait(false);
 
-                    case Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod:
+                    case Expression<Func<IApizrUnitRequestOptions, TWebApi, Task>> executeApiMethod:
                         return await request
                             .SomeNotNull(new ApizrException(new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                             .MapAsync(async _ =>
                             {
-                                await WebApiManager.ExecuteAsync(executeApiMethod, (Action<IApizrCatchUnitRequestOptionsBuilder>) request.OptionsBuilder);
+                                await WebApiManager.ExecuteAsync((options, api) => executeApiMethod.Compile()(options, api), (Action<IApizrCatchUnitRequestOptionsBuilder>) request.OptionsBuilder);
 
                                 return Unit.Value;
                             }).ConfigureAwait(false);

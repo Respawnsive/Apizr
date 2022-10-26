@@ -32,7 +32,7 @@ public abstract class
     }
 
     /// <inheritdoc />
-    public TApizrRequestOptionsBuilder WithCancellationToken(CancellationToken cancellationToken)
+    public TApizrRequestOptionsBuilder WithToken(CancellationToken cancellationToken)
     {
         Options.CancellationToken = cancellationToken;
 
@@ -41,7 +41,7 @@ public abstract class
 
     /// <param name="clearCache"></param>
     /// <inheritdoc />
-    public TApizrRequestOptionsBuilder WithCacheCleared(bool clearCache)
+    public TApizrRequestOptionsBuilder ClearCache(bool clearCache)
     {
         Options.ClearCache = clearCache;
 
@@ -49,7 +49,7 @@ public abstract class
     }
 
     /// <inheritdoc />
-    public TApizrRequestOptionsBuilder WithExceptionCatcher(Action<Exception> onException)
+    public TApizrRequestOptionsBuilder Catch(Action<Exception> onException)
     {
         Options.OnException = onException;
 

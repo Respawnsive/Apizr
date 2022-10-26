@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring.Request;
 using Apizr.Mediation.Cruding.Handling.Base;
 using Apizr.Requesting;
 
@@ -17,7 +18,7 @@ namespace Apizr.Mediation.Cruding.Handling
     public class ReadAllQueryHandler<TApiEntity, TApiEntityKey, TModelReadAllResult, TApiReadAllResult,
         TReadAllParams> :
         ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelReadAllResult, TApiReadAllResult,
-            TReadAllParams, ReadAllQuery<TReadAllParams, TModelReadAllResult>, TModelReadAllResult>
+            TReadAllParams, ReadAllQuery<TReadAllParams, TModelReadAllResult>, TModelReadAllResult, IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>
         where TApiEntity : class
     {
         public ReadAllQueryHandler(
@@ -28,13 +29,11 @@ namespace Apizr.Mediation.Cruding.Handling
 
         /// <inheritdoc />
         public override Task<TModelReadAllResult> Handle(
-            ReadAllQuery<TReadAllParams, TModelReadAllResult> request, CancellationToken cancellationToken)
-        {
-            return CrudApiManager
+            ReadAllQuery<TReadAllParams, TModelReadAllResult> request, CancellationToken cancellationToken) =>
+            CrudApiManager
                 .ExecuteAsync<TModelReadAllResult, TApiReadAllResult>(
                     (options, api) => api.ReadAll(request.Parameters, request.Priority, options.Context,
                         options.CancellationToken), request.OptionsBuilder);
-        }
     }
 
     /// <summary>
@@ -46,7 +45,7 @@ namespace Apizr.Mediation.Cruding.Handling
     /// <typeparam name="TApiReadAllResult">The received api result type</typeparam>
     public class ReadAllQueryHandler<TApiEntity, TApiEntityKey, TModelReadAllResult, TApiReadAllResult> :
         ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelReadAllResult, TApiReadAllResult,
-            ReadAllQuery<TModelReadAllResult>, TModelReadAllResult>
+            ReadAllQuery<TModelReadAllResult>, TModelReadAllResult, IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>
         where TApiEntity : class
     {
 
@@ -58,12 +57,10 @@ namespace Apizr.Mediation.Cruding.Handling
 
         /// <inheritdoc />
         public override Task<TModelReadAllResult> Handle(ReadAllQuery<TModelReadAllResult> request,
-            CancellationToken cancellationToken)
-        {
-            return CrudApiManager
+            CancellationToken cancellationToken) =>
+            CrudApiManager
                 .ExecuteAsync<TModelReadAllResult, TApiReadAllResult>(
                     (options, api) => api.ReadAll(request.Parameters, request.Priority, options.Context,
                         options.CancellationToken), request.OptionsBuilder);
-        }
     }
 }

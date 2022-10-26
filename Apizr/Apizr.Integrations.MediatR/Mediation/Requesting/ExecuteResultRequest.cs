@@ -17,7 +17,7 @@ namespace Apizr.Mediation.Requesting
     /// <typeparam name="TApiRequestData">The api request type</typeparam>
     /// <typeparam name="TModelRequestData">The model request type</typeparam>
     public class ExecuteResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData> :
-        ExecuteResultRequestBase<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>
+        ExecuteResultRequestBase<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData, IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>
     {
         /// <summary>
         /// The mediation execute result request constructor
@@ -27,7 +27,7 @@ namespace Apizr.Mediation.Requesting
         /// <param name="optionsBuilder">Options provided to the request</param>
         public ExecuteResultRequest(
             Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>>
-                executeApiMethod, TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod,
+                executeApiMethod, TModelRequestData modelRequestData, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod,
             modelRequestData, optionsBuilder)
         {
         }
@@ -39,8 +39,8 @@ namespace Apizr.Mediation.Requesting
         /// <param name="modelRequestData">The data provided to the request</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         public ExecuteResultRequest(
-            Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>>
-                executeApiMethod, TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod,
+            Expression<Func<IApizrCatchResultRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>>
+                executeApiMethod, TModelRequestData modelRequestData, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod,
             modelRequestData, optionsBuilder)
         {
         }
@@ -53,7 +53,7 @@ namespace Apizr.Mediation.Requesting
     /// <typeparam name="TModelData">The model data type</typeparam>
     /// <typeparam name="TApiData">The api data type</typeparam>
     public class ExecuteResultRequest<TWebApi, TModelData, TApiData> :
-            ExecuteResultRequestBase<TWebApi, TModelData, TApiData>
+            ExecuteResultRequestBase<TWebApi, TModelData, TApiData, IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>
     {
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Apizr.Mediation.Requesting
         /// </summary>
         /// <param name="executeApiMethod">The request to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        public ExecuteResultRequest(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
+        public ExecuteResultRequest(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
         {
         }
 
@@ -70,17 +70,7 @@ namespace Apizr.Mediation.Requesting
         /// </summary>
         /// <param name="executeApiMethod">The request to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        public ExecuteResultRequest(Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
-        {
-        }
-
-        /// <summary>
-        /// The mediation execute result request constructor
-        /// </summary>
-        /// <param name="executeApiMethod">The request to execute</param>
-        /// <param name="modelData">The data provided to the request</param>
-        /// <param name="optionsBuilder">Options provided to the request</param>
-        public ExecuteResultRequest(Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, modelData, optionsBuilder)
+        public ExecuteResultRequest(Expression<Func<IApizrCatchResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
         {
         }
 
@@ -90,7 +80,17 @@ namespace Apizr.Mediation.Requesting
         /// <param name="executeApiMethod">The request to execute</param>
         /// <param name="modelData">The data provided to the request</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        public ExecuteResultRequest(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, modelData, optionsBuilder)
+        public ExecuteResultRequest(Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, modelData, optionsBuilder)
+        {
+        }
+
+        /// <summary>
+        /// The mediation execute result request constructor
+        /// </summary>
+        /// <param name="executeApiMethod">The request to execute</param>
+        /// <param name="modelData">The data provided to the request</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        public ExecuteResultRequest(Expression<Func<IApizrCatchResultRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, modelData, optionsBuilder)
         {
         }
     }
@@ -100,14 +100,14 @@ namespace Apizr.Mediation.Requesting
     /// </summary>
     /// <typeparam name="TWebApi">The web api type</typeparam>
     /// <typeparam name="TApiData">The api data type</typeparam>
-    public class ExecuteResultRequest<TWebApi, TApiData> : ExecuteResultRequestBase<TWebApi, TApiData>
+    public class ExecuteResultRequest<TWebApi, TApiData> : ExecuteResultRequestBase<TWebApi, TApiData, IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>
     {
         /// <summary>
         /// The mediation execute result request constructor
         /// </summary>
         /// <param name="executeApiMethod">The request to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        public ExecuteResultRequest(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
+        public ExecuteResultRequest(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
         {
         }
 
@@ -116,7 +116,7 @@ namespace Apizr.Mediation.Requesting
         /// </summary>
         /// <param name="executeApiMethod">The request to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        public ExecuteResultRequest(Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
+        public ExecuteResultRequest(Expression<Func<IApizrCatchResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
         {
         }
     }

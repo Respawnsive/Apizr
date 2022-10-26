@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring.Request;
 using Apizr.Extending;
 using Apizr.Mediation.Cruding.Handling.Base;
 using Apizr.Requesting;
@@ -34,7 +35,7 @@ namespace Apizr.Optional.Cruding.Handling
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                     .MapAsync(_ => CrudApiManager.ExecuteAsync<TModelEntity, TApiEntity>(
                         (options, api) => api.Read(request.Key, request.Priority, options.Context,
-                            options.CancellationToken), request.OptionsBuilder))
+                            options.CancellationToken), (Action<IApizrCatchResultRequestOptionsBuilder>) request.OptionsBuilder))
                     .ConfigureAwait(false);
             }
             catch (ApizrException<TModelEntity> e)
@@ -67,7 +68,7 @@ namespace Apizr.Optional.Cruding.Handling
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                     .MapAsync(_ => CrudApiManager.ExecuteAsync<TModelEntity, TApiEntity>(
                         (options, api) => api.Read(request.Key, request.Priority, options.Context,
-                            options.CancellationToken), request.OptionsBuilder))
+                            options.CancellationToken), (Action<IApizrCatchResultRequestOptionsBuilder>) request.OptionsBuilder))
                     .ConfigureAwait(false);
             }
             catch (ApizrException<TModelEntity> e)

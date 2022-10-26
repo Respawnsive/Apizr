@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring.Request;
 using Apizr.Mediation.Cruding.Handling.Base;
 using Apizr.Requesting;
 using MediatR;
@@ -16,7 +17,7 @@ namespace Apizr.Mediation.Cruding.Handling
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     public class UpdateCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> :
         UpdateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams,
-            UpdateCommand<TApiEntityKey, TModelEntity>, Unit>
+            UpdateCommand<TApiEntityKey, TModelEntity>, Unit, IApizrCatchUnitRequestOptions, IApizrCatchUnitRequestOptionsBuilder>
         where TModelEntity : class
         where TApiEntity : class
     {
@@ -28,15 +29,13 @@ namespace Apizr.Mediation.Cruding.Handling
 
         /// <inheritdoc />
         public override Task<Unit> Handle(UpdateCommand<TApiEntityKey, TModelEntity> request,
-            CancellationToken cancellationToken)
-        {
-            return CrudApiManager
+            CancellationToken cancellationToken) =>
+            CrudApiManager
                 .ExecuteAsync<TModelEntity, TApiEntity>(
                     (options, api, apiEntity) =>
                         api.Update(request.Key, apiEntity, options.Context, options.CancellationToken),
                     request.RequestData,
                     request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken);
-        }
     }
 
     /// <summary>
@@ -47,7 +46,7 @@ namespace Apizr.Mediation.Cruding.Handling
     /// <typeparam name="TReadAllResult">The returned result type</typeparam>
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     public class UpdateCommandHandler<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams> :
-        UpdateCommandHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, UpdateCommand<TModelEntity>>
+        UpdateCommandHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, UpdateCommand<TModelEntity>, IApizrCatchUnitRequestOptions, IApizrCatchUnitRequestOptionsBuilder>
         where TModelEntity : class
         where TApiEntity : class
     {
@@ -59,14 +58,12 @@ namespace Apizr.Mediation.Cruding.Handling
 
         /// <inheritdoc />
         public override Task<Unit> Handle(UpdateCommand<TModelEntity> request,
-            CancellationToken cancellationToken)
-        {
-            return CrudApiManager
+            CancellationToken cancellationToken) =>
+            CrudApiManager
                 .ExecuteAsync<TModelEntity, TApiEntity>(
                     (options, api, apiEntity) =>
                         api.Update(request.Key, apiEntity, options.Context, options.CancellationToken),
                     request.RequestData,
                     request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken);
-        }
     }
 }

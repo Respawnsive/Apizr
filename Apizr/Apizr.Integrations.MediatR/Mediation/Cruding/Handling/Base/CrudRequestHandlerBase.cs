@@ -1,4 +1,5 @@
-﻿using Apizr.Mediation.Requesting.Handling.Base;
+﻿using Apizr.Configuring.Request;
+using Apizr.Mediation.Requesting.Handling.Base;
 using Apizr.Requesting;
 
 namespace Apizr.Mediation.Cruding.Handling.Base
@@ -11,8 +12,10 @@ namespace Apizr.Mediation.Cruding.Handling.Base
     /// <typeparam name="TReadAllResult">The returned result type</typeparam>
     /// <typeparam name="TReadAllParams">The read all params</typeparam>
     public abstract class
-        CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> : RequestHandlerBase
+        CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TApizrRequestOptions, TApizrRequestOptionsBuilder> : RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
         where TApiEntity : class
+        where TApizrRequestOptions : IApizrRequestOptionsBase
+        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         protected readonly IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> CrudApiManager;
 

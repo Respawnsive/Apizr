@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring.Request;
 using Apizr.Mediation.Commanding;
 using Apizr.Mediation.Cruding.Base;
 using Apizr.Requesting;
@@ -17,12 +18,14 @@ namespace Apizr.Mediation.Cruding.Handling.Base
     /// <typeparam name="TCommand">The command to handle</typeparam>
     /// <typeparam name="TCommandResult">The command result to return</typeparam>
     public abstract class CreateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult,
-        TReadAllParams, TCommand, TCommandResult> :
-        CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>,
+        TReadAllParams, TCommand, TCommandResult, TApizrRequestOptions, TApizrRequestOptionsBuilder> :
+        CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TApizrRequestOptions, TApizrRequestOptionsBuilder>,
         IMediationCommandHandler<TCommand, TCommandResult> 
         where TModelEntity : class
         where TApiEntity : class
-        where TCommand : CreateCommandBase<TModelEntity, TCommandResult>
+        where TCommand : CreateCommandBase<TModelEntity, TCommandResult, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrResultRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         protected CreateCommandHandlerBase(
             IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)

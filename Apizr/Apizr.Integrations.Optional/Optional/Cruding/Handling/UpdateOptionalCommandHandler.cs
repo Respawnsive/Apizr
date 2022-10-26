@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring.Request;
 using Apizr.Extending;
 using Apizr.Mediation.Cruding.Handling.Base;
 using Apizr.Requesting;
@@ -34,11 +35,10 @@ namespace Apizr.Optional.Cruding.Handling
                 return await request
                     .SomeNotNull(new ApizrException(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                    .MapAsync(_ => CrudApiManager
-                        .ExecuteAsync<TModelEntity, TApiEntity>(
+                    .MapAsync(_ => CrudApiManager.ExecuteAsync<TModelEntity, TApiEntity>(
                             (options, api, apiEntity) =>
                                 api.Update(request.Key, apiEntity, options.Context, options.CancellationToken),
-                            request.RequestData, request.OptionsBuilder)
+                            request.RequestData, (Action<IApizrCatchUnitRequestOptionsBuilder>) request.OptionsBuilder)
                         .ContinueWith(_ => Unit.Value, cancellationToken))
                     .ConfigureAwait(false);
             }
@@ -72,11 +72,10 @@ namespace Apizr.Optional.Cruding.Handling
                 return await request
                     .SomeNotNull(new ApizrException(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                    .MapAsync(_ => CrudApiManager
-                        .ExecuteAsync<TModelEntity, TApiEntity>(
+                    .MapAsync(_ => CrudApiManager.ExecuteAsync<TModelEntity, TApiEntity>(
                             (options, api, apiEntity) =>
                                 api.Update(request.Key, apiEntity, options.Context, options.CancellationToken),
-                            request.RequestData, request.OptionsBuilder)
+                            request.RequestData, (Action<IApizrCatchUnitRequestOptionsBuilder>) request.OptionsBuilder)
                         .ContinueWith(_ => Unit.Value, cancellationToken))
                     .ConfigureAwait(false);
             }

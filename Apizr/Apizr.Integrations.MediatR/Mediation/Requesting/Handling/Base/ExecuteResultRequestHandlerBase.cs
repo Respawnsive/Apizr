@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring.Request;
 using Apizr.Mapping;
 using Apizr.Mediation.Requesting.Base;
 using MediatR;
@@ -17,10 +18,12 @@ namespace Apizr.Mediation.Requesting.Handling.Base
     /// <typeparam name="TModelRequestData">The model request type</typeparam>
     /// <typeparam name="TRequest">The request to handle</typeparam>
     public abstract class ExecuteResultRequestHandlerBase<TWebApi, TModelResultData, TApiResultData,
-        TFormattedModelResultData, TApiRequestData, TModelRequestData, TRequest> : RequestHandlerBase,
+        TFormattedModelResultData, TApiRequestData, TModelRequestData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder> : RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>,
         IRequestHandler<TRequest, TFormattedModelResultData>
         where TRequest : ExecuteResultRequestBase<TWebApi, TModelResultData, TApiResultData, TFormattedModelResultData,
-            TApiRequestData, TModelRequestData>
+            TApiRequestData, TModelRequestData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrResultRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         protected readonly IApizrManager<TWebApi> WebApiManager;
 
@@ -48,10 +51,12 @@ namespace Apizr.Mediation.Requesting.Handling.Base
     /// <typeparam name="TModelRequestData">The model request type</typeparam>
     /// <typeparam name="TRequest">The request to handle</typeparam>
     public abstract class ExecuteResultRequestHandlerBase<TWebApi, TModelResultData, TApiResultData, TApiRequestData,
-        TModelRequestData, TRequest> : RequestHandlerBase,
+        TModelRequestData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder> : RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>,
         IRequestHandler<TRequest, TModelResultData>
         where TRequest : ExecuteResultRequestBase<TWebApi, TModelResultData, TApiResultData, TApiRequestData,
-            TModelRequestData>
+            TModelRequestData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrResultRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         protected readonly IApizrManager<TWebApi> WebApiManager;
 
@@ -78,8 +83,10 @@ namespace Apizr.Mediation.Requesting.Handling.Base
     /// <typeparam name="TFormattedModelResultData">The formatted model result type</typeparam>
     /// <typeparam name="TRequest">The request to handle</typeparam>
     public abstract class ExecuteResultRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData,
-        TRequest> : RequestHandlerBase, IRequestHandler<TRequest, TFormattedModelResultData>
-        where TRequest : ExecuteResultRequestBase<TWebApi, TModelData, TApiData, TFormattedModelResultData>
+        TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder> : RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>, IRequestHandler<TRequest, TFormattedModelResultData>
+        where TRequest : ExecuteResultRequestBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrResultRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         protected readonly IApizrManager<TWebApi> WebApiManager;
 
@@ -105,8 +112,10 @@ namespace Apizr.Mediation.Requesting.Handling.Base
     /// <typeparam name="TApiData">The api data type</typeparam>
     /// <typeparam name="TRequest">The request to handle</typeparam>
     public abstract class ExecuteResultRequestHandlerBase<TWebApi, TModelData, TApiData,
-        TRequest> : RequestHandlerBase, IRequestHandler<TRequest, TModelData>
-        where TRequest : ExecuteResultRequestBase<TWebApi, TModelData, TApiData>
+        TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder> : RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>, IRequestHandler<TRequest, TModelData>
+        where TRequest : ExecuteResultRequestBase<TWebApi, TModelData, TApiData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrResultRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         protected readonly IApizrManager<TWebApi> WebApiManager;
 
@@ -130,8 +139,10 @@ namespace Apizr.Mediation.Requesting.Handling.Base
     /// <typeparam name="TWebApi">The web api type</typeparam>
     /// <typeparam name="TApiData">The api data type</typeparam>
     /// <typeparam name="TRequest">The request to handle</typeparam>
-    public abstract class ExecuteResultRequestHandlerBase<TWebApi, TApiData, TRequest> : IRequestHandler<TRequest, TApiData>
-    where TRequest : ExecuteResultRequestBase<TWebApi, TApiData>
+    public abstract class ExecuteResultRequestHandlerBase<TWebApi, TApiData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder> : IRequestHandler<TRequest, TApiData>
+    where TRequest : ExecuteResultRequestBase<TWebApi, TApiData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+    where TApizrRequestOptions : IApizrResultRequestOptions
+    where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         protected readonly IApizrManager<TWebApi> WebApiManager;
 

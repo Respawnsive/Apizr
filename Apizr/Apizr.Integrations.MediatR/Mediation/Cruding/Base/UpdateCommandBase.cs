@@ -12,7 +12,9 @@ namespace Apizr.Mediation.Cruding.Base
     /// <typeparam name="TKey">The entity's crud key type</typeparam>
     /// <typeparam name="TRequestData">The request data type</typeparam>
     /// <typeparam name="TResultData">The result data type</typeparam>
-    public abstract class UpdateCommandBase<TKey, TRequestData, TResultData> : MediationCommandBase<TRequestData, TResultData>
+    public abstract class UpdateCommandBase<TKey, TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : MediationCommandBase<TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrUnitRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         /// <summary>
         /// The top level base mediation Update command constructor
@@ -20,7 +22,7 @@ namespace Apizr.Mediation.Cruding.Base
         /// <param name="key">The entity's crud key</param>
         /// <param name="requestData">The request data to send</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        protected UpdateCommandBase(TKey key, TRequestData requestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(optionsBuilder)
+        protected UpdateCommandBase(TKey key, TRequestData requestData, Action<TApizrRequestOptionsBuilder> optionsBuilder = null) : base(optionsBuilder)
         {
             Key = key;
             RequestData = requestData;
@@ -42,10 +44,12 @@ namespace Apizr.Mediation.Cruding.Base
     /// </summary>
     /// <typeparam name="TRequestData">The request data type</typeparam>
     /// <typeparam name="TResultData">The result data type</typeparam>
-    public abstract class UpdateCommandBase<TRequestData, TResultData> : UpdateCommandBase<int, TRequestData, TResultData>
+    public abstract class UpdateCommandBase<TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : UpdateCommandBase<int, TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrUnitRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         /// <inheritdoc />
-        protected UpdateCommandBase(int key, TRequestData requestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, requestData, optionsBuilder)
+        protected UpdateCommandBase(int key, TRequestData requestData, Action<TApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, requestData, optionsBuilder)
         {
         }
     }
@@ -54,10 +58,12 @@ namespace Apizr.Mediation.Cruding.Base
     /// The top level base mediation Update command
     /// </summary>
     /// <typeparam name="TRequestData">The request data type</typeparam>
-    public abstract class UpdateCommandBase<TRequestData> : UpdateCommandBase<TRequestData, Unit>
+    public abstract class UpdateCommandBase<TRequestData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : UpdateCommandBase<TRequestData, Unit, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrUnitRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         /// <inheritdoc />
-        protected UpdateCommandBase(int key, TRequestData requestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, requestData, optionsBuilder)
+        protected UpdateCommandBase(int key, TRequestData requestData, Action<TApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, requestData, optionsBuilder)
         {
         }
     }

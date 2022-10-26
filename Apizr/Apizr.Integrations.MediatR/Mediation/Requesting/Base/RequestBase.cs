@@ -9,13 +9,15 @@ namespace Apizr.Mediation.Requesting.Base
     /// The top level base mediation request
     /// </summary>
     /// <typeparam name="TFormattedModelResultData">The result type</typeparam>
-    public abstract class RequestBase<TFormattedModelResultData> : IRequest<TFormattedModelResultData>
+    public abstract class RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : IRequest<TFormattedModelResultData> 
+        where TApizrRequestOptions : IApizrRequestOptionsBase
+        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         /// <summary>
         /// The base request constructor
         /// </summary>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        protected RequestBase(Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        protected RequestBase(Action<TApizrRequestOptionsBuilder> optionsBuilder = null)
         {
             OptionsBuilder = optionsBuilder;
         }
@@ -23,7 +25,7 @@ namespace Apizr.Mediation.Requesting.Base
         /// <summary>
         /// The request options builder
         /// </summary>
-        public Action<IApizrRequestOptionsBuilder> OptionsBuilder { get; protected set; }
+        public Action<TApizrRequestOptionsBuilder> OptionsBuilder { get; protected set; }
     }
 
     /// <summary>
@@ -31,14 +33,16 @@ namespace Apizr.Mediation.Requesting.Base
     /// </summary>
     /// <typeparam name="TFormattedModelResultData">The result type</typeparam>
     /// <typeparam name="TModelRequestData">The request type</typeparam>
-    public abstract class RequestBase<TFormattedModelResultData, TModelRequestData> : RequestBase<TFormattedModelResultData>
+    public abstract class RequestBase<TFormattedModelResultData, TModelRequestData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder> 
+        where TApizrRequestOptions : IApizrRequestOptionsBase
+        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         /// <summary>
         /// The base request constructor
         /// </summary>
         /// <param name="modelRequestData">The request type</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        protected RequestBase(TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(optionsBuilder)
+        protected RequestBase(TModelRequestData modelRequestData, Action<TApizrRequestOptionsBuilder> optionsBuilder = null) : base(optionsBuilder)
         {
             ModelRequestData = modelRequestData;
         }

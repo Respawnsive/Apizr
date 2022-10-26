@@ -25,7 +25,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task SendFor<TWebApi>(Expression<Func<TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+        Task SendFor<TWebApi>(Expression<Func<TWebApi, Task>> executeApiMethod, Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a Polly Context and a cancellation token
@@ -34,7 +34,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task SendFor<TWebApi>(Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+        Task SendFor<TWebApi>(Expression<Func<IApizrCatchUnitRequestOptions, TWebApi, Task>> executeApiMethod, Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion
 
@@ -51,7 +51,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task SendFor<TWebApi, TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
-            TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            TModelData modelData, Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with mapped request, a Polly Context and cancellation token
@@ -64,8 +64,8 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task SendFor<TWebApi, TModelData, TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod,
-            TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<IApizrCatchUnitRequestOptions, TWebApi, TApiData, Task>> executeApiMethod,
+            TModelData modelData, Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion
 
@@ -83,7 +83,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<TApiData> SendFor<TWebApi, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+        Task<TApiData> SendFor<TWebApi, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a Polly Context and a cancellation token
@@ -94,7 +94,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TApiData> SendFor<TWebApi, TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<IApizrCatchResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion
 
@@ -110,7 +110,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(
-            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a Polly Context and a cancellation token and returning a mapped result
@@ -122,7 +122,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<IApizrCatchResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request and returning a mapped result
@@ -135,7 +135,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(
-            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request, a Polly Context and a cancellation token and returning a mapped result
@@ -148,8 +148,8 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TModelData> SendFor<TWebApi, TModelData, TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
-            TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<IApizrCatchResultRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
+            TModelData modelData, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion
 
@@ -169,7 +169,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <returns></returns>
         Task<TModelResultData> SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            TModelRequestData modelRequestData, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request, a Polly Context and a cancellation token and returning a mapped result
@@ -184,8 +184,8 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TModelResultData> SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>>
-                executeApiMethod, TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<IApizrCatchResultRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>>
+                executeApiMethod, TModelRequestData modelRequestData, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion
 
@@ -208,7 +208,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task SendFor(Expression<Func<TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+        Task SendFor(Expression<Func<TWebApi, Task>> executeApiMethod, Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a Polly Context and a cancellation token
@@ -216,7 +216,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task SendFor(Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+        Task SendFor(Expression<Func<IApizrCatchUnitRequestOptions, TWebApi, Task>> executeApiMethod, Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion
 
@@ -232,7 +232,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task SendFor<TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
-            TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            TModelData modelData, Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with mapped request, a Polly Context and cancellation token
@@ -244,8 +244,8 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task SendFor<TModelData, TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod,
-            TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<IApizrCatchUnitRequestOptions, TWebApi, TApiData, Task>> executeApiMethod,
+            TModelData modelData, Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion
 
@@ -262,7 +262,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<TApiData> SendFor<TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+        Task<TApiData> SendFor<TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a Polly Context and a cancellation token
@@ -272,7 +272,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TApiData> SendFor<TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<IApizrCatchResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion
 
@@ -287,7 +287,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TModelData> SendFor<TModelData, TApiData>(
-            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a Polly Context and a cancellation token and returning a mapped result
@@ -298,7 +298,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TModelData> SendFor<TModelData, TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<IApizrCatchResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request and returning a mapped result
@@ -311,7 +311,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <returns></returns>
         /// <returns></returns>
         Task<TModelData> SendFor<TModelData, TApiData>(
-            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request, a Polly Context and a cancellation token and returning a mapped result
@@ -324,8 +324,8 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TModelData> SendFor<TModelData, TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
-            TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<IApizrCatchResultRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
+            TModelData modelData, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion
 
@@ -344,7 +344,7 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <returns></returns>
         Task<TModelResultData> SendFor<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            TModelRequestData modelRequestData, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request, a Polly Context and a cancellation token and returning a mapped result
@@ -358,8 +358,8 @@ namespace Apizr.Mediation.Requesting.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TModelResultData> SendFor<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>>
-                executeApiMethod, TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<IApizrCatchResultRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>>
+                executeApiMethod, TModelRequestData modelRequestData, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion
 

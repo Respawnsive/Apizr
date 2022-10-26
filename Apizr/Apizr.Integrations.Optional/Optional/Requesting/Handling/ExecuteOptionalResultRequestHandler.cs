@@ -39,7 +39,7 @@ namespace Apizr.Optional.Requesting.Handling
                         return await request
                             .SomeNotNull(new ApizrException<TModelResultData>(
                                 new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelResultData, TApiResultData>(executeApiMethod, request.OptionsBuilder))
+                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelResultData, TApiResultData>(executeApiMethod, (Action<IApizrCatchResultRequestOptionsBuilder>) request.OptionsBuilder))
                             .ConfigureAwait(false);
 
                     case Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiResultData>>> executeApiMethod:
@@ -53,7 +53,7 @@ namespace Apizr.Optional.Requesting.Handling
                         return await request
                             .SomeNotNull(new ApizrException<TModelResultData>(
                                 new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(executeApiMethod, request.ModelRequestData, request.OptionsBuilder))
+                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(executeApiMethod, request.ModelRequestData, (Action<IApizrCatchResultRequestOptionsBuilder>) request.OptionsBuilder))
                             .ConfigureAwait(false);
 
                     case Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod:
@@ -101,7 +101,7 @@ namespace Apizr.Optional.Requesting.Handling
                         return await request
                             .SomeNotNull(new ApizrException<TModelData>(
                                 new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.OptionsBuilder))
+                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, (Action<IApizrCatchResultRequestOptionsBuilder>) request.OptionsBuilder))
                             .ConfigureAwait(false);
 
                     case Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod:
@@ -115,7 +115,7 @@ namespace Apizr.Optional.Requesting.Handling
                         return await request
                             .SomeNotNull(new ApizrException<TModelData>(
                                 new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, request.OptionsBuilder))
+                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, (Action<IApizrCatchResultRequestOptionsBuilder>) request.OptionsBuilder))
                             .ConfigureAwait(false);
 
                     case Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod:
@@ -161,7 +161,7 @@ namespace Apizr.Optional.Requesting.Handling
                             .SomeNotNull(new ApizrException<TApiData>(
                                 new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                             .MapAsync(_ =>
-                                WebApiManager.ExecuteAsync(executeApiMethod, request.OptionsBuilder))
+                                WebApiManager.ExecuteAsync(executeApiMethod, (Action<IApizrCatchResultRequestOptionsBuilder>) request.OptionsBuilder))
                             .ConfigureAwait(false);
 
                     case Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod:

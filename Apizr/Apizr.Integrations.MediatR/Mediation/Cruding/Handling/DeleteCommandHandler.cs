@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring.Request;
 using Apizr.Mediation.Cruding.Handling.Base;
 using Apizr.Requesting;
 using MediatR;
@@ -16,7 +17,7 @@ namespace Apizr.Mediation.Cruding.Handling
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     public class DeleteCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> :
         DeleteCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams,
-            DeleteCommand<TModelEntity, TApiEntityKey>, Unit>
+            DeleteCommand<TModelEntity, TApiEntityKey>, Unit, IApizrCatchUnitRequestOptions, IApizrCatchUnitRequestOptionsBuilder>
         where TModelEntity : class
         where TApiEntity : class
     {
@@ -28,12 +29,10 @@ namespace Apizr.Mediation.Cruding.Handling
 
         /// <inheritdoc />
         public override Task<Unit> Handle(DeleteCommand<TModelEntity, TApiEntityKey> request,
-            CancellationToken cancellationToken)
-        {
-            return CrudApiManager
+            CancellationToken cancellationToken) =>
+            CrudApiManager
                 .ExecuteAsync((options, api) => api.Delete(request.Key, options.Context, options.CancellationToken),
                     request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken);
-        }
     }
 
     /// <summary>
@@ -45,7 +44,7 @@ namespace Apizr.Mediation.Cruding.Handling
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     public class DeleteCommandHandler<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams> :
         DeleteCommandHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, DeleteCommand<TModelEntity>,
-            Unit>
+            Unit, IApizrCatchUnitRequestOptions, IApizrCatchUnitRequestOptionsBuilder>
         where TModelEntity : class
         where TApiEntity : class
     {
@@ -57,11 +56,9 @@ namespace Apizr.Mediation.Cruding.Handling
 
         /// <inheritdoc />
         public override Task<Unit> Handle(DeleteCommand<TModelEntity> request,
-            CancellationToken cancellationToken)
-        {
-            return CrudApiManager
+            CancellationToken cancellationToken) =>
+            CrudApiManager
                 .ExecuteAsync((options, api) => api.Delete(request.Key, options.Context, options.CancellationToken),
                     request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken);
-        }
     }
 }

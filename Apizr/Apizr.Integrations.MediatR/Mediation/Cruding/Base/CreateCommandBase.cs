@@ -10,14 +10,16 @@ namespace Apizr.Mediation.Cruding.Base
     /// </summary>
     /// <typeparam name="TRequestData">The api request type</typeparam>
     /// <typeparam name="TResultData">The api result type</typeparam>
-    public abstract class CreateCommandBase<TRequestData, TResultData> : MediationCommandBase<TRequestData, TResultData>
+    public abstract class CreateCommandBase<TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : MediationCommandBase<TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrResultRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="requestData">The api request</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        protected CreateCommandBase(TRequestData requestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(optionsBuilder)
+        protected CreateCommandBase(TRequestData requestData, Action<TApizrRequestOptionsBuilder> optionsBuilder = null) : base(optionsBuilder)
         {
             RequestData = requestData;
         }

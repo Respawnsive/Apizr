@@ -63,7 +63,7 @@ namespace Apizr
         /// <returns></returns>
         Task ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
             TModelData modelData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -74,9 +74,9 @@ namespace Apizr
         /// <param name="modelData">The model data to map</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod,
+        Task ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrCatchUnitRequestOptions, TWebApi, TApiData, Task>> executeApiMethod,
             TModelData modelData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion
 
@@ -90,7 +90,7 @@ namespace Apizr
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TApiData> ExecuteAsync<TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -106,7 +106,7 @@ namespace Apizr
         Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
             TModelRequestData modelRequestData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -119,7 +119,7 @@ namespace Apizr
         /// <returns></returns>
         Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -130,7 +130,7 @@ namespace Apizr
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -140,8 +140,8 @@ namespace Apizr
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TApiData> ExecuteAsync<TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<IApizrCatchResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -155,9 +155,9 @@ namespace Apizr
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>>
+            Expression<Func<IApizrCatchResultRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>>
                 executeApiMethod, TModelRequestData modelRequestData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -169,9 +169,9 @@ namespace Apizr
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
+            Expression<Func<IApizrCatchResultRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -182,8 +182,8 @@ namespace Apizr
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<IApizrCatchResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion 
 

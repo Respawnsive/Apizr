@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring.Request;
 using Apizr.Mediation.Cruding.Base;
 using Apizr.Mediation.Querying;
 using Apizr.Requesting;
@@ -16,12 +17,14 @@ namespace Apizr.Mediation.Cruding.Handling.Base
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     /// <typeparam name="TQuery">The query type to handle</typeparam>
     /// <typeparam name="TQueryResult">The query result type to handle</typeparam>
-    public abstract class ReadQueryHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TQuery, TQueryResult> :
-        CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>,
+    public abstract class ReadQueryHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TQuery, TQueryResult, TApizrRequestOptions, TApizrRequestOptionsBuilder> :
+        CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TApizrRequestOptions, TApizrRequestOptionsBuilder>,
         IMediationQueryHandler<TQuery, TQueryResult>
         where TModelEntity : class 
         where TApiEntity : class 
-        where TQuery : ReadQueryBase<TQueryResult, TApiEntityKey>
+        where TQuery : ReadQueryBase<TQueryResult, TApiEntityKey, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrResultRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         protected ReadQueryHandlerBase(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {
@@ -45,8 +48,13 @@ namespace Apizr.Mediation.Cruding.Handling.Base
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     /// <typeparam name="TQuery">The query type to handle</typeparam>
     /// <typeparam name="TQueryResult">The query result type to handle</typeparam>
-    public abstract class ReadQueryHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, TQuery, TQueryResult> : CrudRequestHandlerBase<TApiEntity, int, TReadAllResult, TReadAllParams>,
-        IMediationQueryHandler<TQuery, TQueryResult> where TApiEntity : class where TQuery : ReadQueryBase<TQueryResult>
+    public abstract class ReadQueryHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, TQuery, TQueryResult, TApizrRequestOptions, TApizrRequestOptionsBuilder> : 
+        CrudRequestHandlerBase<TApiEntity, int, TReadAllResult, TReadAllParams, TApizrRequestOptions, TApizrRequestOptionsBuilder>,
+        IMediationQueryHandler<TQuery, TQueryResult> 
+        where TApiEntity : class 
+        where TQuery : ReadQueryBase<TQueryResult, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrResultRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         protected ReadQueryHandlerBase(IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {

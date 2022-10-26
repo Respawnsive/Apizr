@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring.Request;
 using Apizr.Mediation.Requesting.Base;
 using MediatR;
 
@@ -18,8 +19,11 @@ namespace Apizr.Mediation.Requesting.Handling.Base
     /// <typeparam name="TRequest">The execute unit request to handle</typeparam>
     public abstract class
         ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData,
-            TRequest> : IRequestHandler<TRequest, TFormattedModelResultData>
-        where TRequest : ExecuteUnitRequestBase<TWebApi, TModelData, TApiData, TFormattedModelResultData>
+            TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder> : RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>, 
+            IRequestHandler<TRequest, TFormattedModelResultData>
+        where TRequest : ExecuteUnitRequestBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrUnitRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         protected readonly IApizrManager<TWebApi> WebApiManager;
 
@@ -46,8 +50,11 @@ namespace Apizr.Mediation.Requesting.Handling.Base
     /// <typeparam name="TRequest">The execute unit request to handle</typeparam>
     public abstract class
         ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData,
-            TRequest> : IRequestHandler<TRequest, Unit>
-        where TRequest : ExecuteUnitRequestBase<TWebApi, TModelData, TApiData>
+            TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder> : RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>, 
+            IRequestHandler<TRequest, Unit>
+        where TRequest : ExecuteUnitRequestBase<TWebApi, TModelData, TApiData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrUnitRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         protected readonly IApizrManager<TWebApi> WebApiManager;
 
@@ -72,8 +79,11 @@ namespace Apizr.Mediation.Requesting.Handling.Base
     /// <typeparam name="TFormattedModelResultData">The formatted model result data type</typeparam>
     /// <typeparam name="TRequest">The execute unit request to handle</typeparam>
     public abstract class
-        ExecuteUnitRequestHandlerBase<TWebApi, TFormattedModelResultData, TRequest> : IRequestHandler<TRequest, TFormattedModelResultData>
-        where TRequest : ExecuteUnitRequestBase<TWebApi, TFormattedModelResultData>
+        ExecuteUnitRequestHandlerBase<TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder> : RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>, 
+            IRequestHandler<TRequest, TFormattedModelResultData>
+        where TRequest : ExecuteUnitRequestBase<TWebApi, TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrUnitRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         protected readonly IApizrManager<TWebApi> WebApiManager;
 
@@ -97,8 +107,11 @@ namespace Apizr.Mediation.Requesting.Handling.Base
     /// <typeparam name="TWebApi">The web api type</typeparam>
     /// <typeparam name="TRequest">The execute unit request to handle</typeparam>
     public abstract class
-        ExecuteUnitRequestHandlerBase<TWebApi, TRequest> : IRequestHandler<TRequest, Unit>
-        where TRequest : ExecuteUnitRequestBase<TWebApi>
+        ExecuteUnitRequestHandlerBase<TWebApi, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder> : RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>, 
+            IRequestHandler<TRequest, Unit>
+        where TRequest : ExecuteUnitRequestBase<TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrUnitRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         protected readonly IApizrManager<TWebApi> WebApiManager;
 

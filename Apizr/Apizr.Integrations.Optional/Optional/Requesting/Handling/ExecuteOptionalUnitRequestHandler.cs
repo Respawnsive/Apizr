@@ -36,7 +36,7 @@ namespace Apizr.Optional.Requesting.Handling
                             .SomeNotNull(new ApizrException(new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                             .MapAsync(async _ =>
                             {
-                                await WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, request.OptionsBuilder);
+                                await WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, (Action<IApizrCatchUnitRequestOptionsBuilder>) request.OptionsBuilder);
 
                                 return Unit.Value;
                             }).ConfigureAwait(false);

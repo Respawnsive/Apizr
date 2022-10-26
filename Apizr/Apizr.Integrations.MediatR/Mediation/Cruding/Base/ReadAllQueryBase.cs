@@ -11,14 +11,16 @@ namespace Apizr.Mediation.Cruding.Base
     /// </summary>
     /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
     /// <typeparam name="TReadAllResult">The api result type</typeparam>
-    public abstract class ReadAllQueryBase<TReadAllParams, TReadAllResult> : MediationQueryBase<TReadAllResult>
+    public abstract class ReadAllQueryBase<TReadAllParams, TReadAllResult, TApizrRequestOptions, TApizrRequestOptionsBuilder> : MediationQueryBase<TReadAllResult, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrResultRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         /// <summary>
         /// The top level base mediation ReadAll query constructor
         /// </summary>
         /// <param name="parameters">The query parameters to send</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        protected ReadAllQueryBase(TReadAllParams parameters, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(optionsBuilder)
+        protected ReadAllQueryBase(TReadAllParams parameters, Action<TApizrRequestOptionsBuilder> optionsBuilder = null) : base(optionsBuilder)
         {
             Parameters = parameters;
         }
@@ -29,7 +31,7 @@ namespace Apizr.Mediation.Cruding.Base
         /// <param name="parameters">The query parameters to send</param>
         /// <param name="priority">The execution priority to apply</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        protected ReadAllQueryBase(TReadAllParams parameters, int priority, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(priority, optionsBuilder)
+        protected ReadAllQueryBase(TReadAllParams parameters, int priority, Action<TApizrRequestOptionsBuilder> optionsBuilder = null) : base(priority, optionsBuilder)
         {
             Parameters = parameters;
         }
@@ -44,15 +46,17 @@ namespace Apizr.Mediation.Cruding.Base
     /// The top level base mediation ReadAll query
     /// </summary>
     /// <typeparam name="TReadAllResult">The api result type</typeparam>
-    public abstract class ReadAllQueryBase<TReadAllResult> : ReadAllQueryBase<IDictionary<string, object>, TReadAllResult>
+    public abstract class ReadAllQueryBase<TReadAllResult, TApizrRequestOptions, TApizrRequestOptionsBuilder> : ReadAllQueryBase<IDictionary<string, object>, TReadAllResult, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrResultRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         /// <inheritdoc />
-        protected ReadAllQueryBase(IDictionary<string, object> parameters, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(parameters, optionsBuilder)
+        protected ReadAllQueryBase(IDictionary<string, object> parameters, Action<TApizrRequestOptionsBuilder> optionsBuilder = null) : base(parameters, optionsBuilder)
         {
         }
 
         /// <inheritdoc />
-        protected ReadAllQueryBase(IDictionary<string, object> parameters, int priority, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(parameters, priority, optionsBuilder)
+        protected ReadAllQueryBase(IDictionary<string, object> parameters, int priority, Action<TApizrRequestOptionsBuilder> optionsBuilder = null) : base(parameters, priority, optionsBuilder)
         {
         }
     }

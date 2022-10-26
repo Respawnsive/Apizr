@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring.Request;
 using Apizr.Mediation.Cruding.Handling.Base;
 using Apizr.Requesting;
 
@@ -15,7 +16,7 @@ namespace Apizr.Mediation.Cruding.Handling
     /// <typeparam name="TReadAllParams">The read all params</typeparam>
     public class CreateCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> :
         CreateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams,
-            CreateCommand<TModelEntity>, TModelEntity>
+            CreateCommand<TModelEntity>, TModelEntity, IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>
         where TModelEntity : class
         where TApiEntity : class
     {
@@ -27,11 +28,9 @@ namespace Apizr.Mediation.Cruding.Handling
 
         /// <inheritdoc />
         public override Task<TModelEntity> Handle(CreateCommand<TModelEntity> request,
-            CancellationToken cancellationToken)
-        {
-            return CrudApiManager
+            CancellationToken cancellationToken) =>
+            CrudApiManager
                 .ExecuteAsync<TModelEntity, TApiEntity>((options, api, apiEntity) => api.Create(apiEntity, options.Context, options.CancellationToken),
                     request.RequestData, request.OptionsBuilder);
-        }
     }
 }

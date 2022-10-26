@@ -21,7 +21,7 @@ namespace Apizr.Optional.Cruding.Handling
     /// <typeparam name="TReadAllResult">The returned result type</typeparam>
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     public class DeleteOptionalCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> : 
-        DeleteCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, DeleteOptionalCommand<TModelEntity, TApiEntityKey>, Option<Unit, ApizrException>>
+        DeleteCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, DeleteOptionalCommand<TModelEntity, TApiEntityKey>, Option<Unit, ApizrException>, IApizrUnitRequestOptions, IApizrUnitRequestOptionsBuilder>
         where TModelEntity : class
         where TApiEntity : class
     {
@@ -56,7 +56,7 @@ namespace Apizr.Optional.Cruding.Handling
     /// <typeparam name="TReadAllResult">The returned result type</typeparam>
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     public class DeleteOptionalCommandHandler<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams> : 
-        DeleteCommandHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, DeleteOptionalCommand<TModelEntity>, Option<Unit, ApizrException>>
+        DeleteCommandHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, DeleteOptionalCommand<TModelEntity>, Option<Unit, ApizrException>, IApizrUnitRequestOptions, IApizrUnitRequestOptionsBuilder>
         where TModelEntity : class
         where TApiEntity : class
     {

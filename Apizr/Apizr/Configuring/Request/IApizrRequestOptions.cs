@@ -35,7 +35,7 @@ namespace Apizr.Configuring.Request
         /// <summary>
         /// Handle exception and return cached result (default: null = throwing)
         /// </summary>
-        Action<Exception> OnException { get; }
+        Action<ApizrException> OnException { get; }
     }
 
     /// <summary>

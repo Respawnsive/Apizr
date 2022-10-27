@@ -29,7 +29,7 @@ namespace Apizr.Sample
         [Get("/users")]
         Task<UserList> GetUsersAsync([Priority] int priority);
 
-        [Get("/users"), Log(HttpMessageParts.RequestBody, HttpTracerMode.ErrorsAndExceptionsOnly, LogLevel.Information)]
+        [Get("/users")]//, Log(HttpMessageParts.RequestBody, HttpTracerMode.ErrorsAndExceptionsOnly, LogLevel.Information)]
         Task<UserList> GetUsersAsync([Priority] int priority, [Context] Context context);
 
         [Get("/users")]

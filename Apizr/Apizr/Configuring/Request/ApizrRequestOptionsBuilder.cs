@@ -32,7 +32,7 @@ public abstract class
     }
 
     /// <inheritdoc />
-    public TApizrRequestOptionsBuilder WithToken(CancellationToken cancellationToken)
+    public TApizrRequestOptionsBuilder WithCancellation(CancellationToken cancellationToken)
     {
         Options.CancellationToken = cancellationToken;
 
@@ -49,7 +49,7 @@ public abstract class
     }
 
     /// <inheritdoc />
-    public TApizrRequestOptionsBuilder Catch(Action<Exception> onException)
+    public TApizrRequestOptionsBuilder Catch(Action<ApizrException> onException)
     {
         Options.OnException = onException;
 

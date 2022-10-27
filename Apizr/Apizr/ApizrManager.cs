@@ -170,12 +170,13 @@ namespace Apizr
                 _apizrOptions.Logger.Log(logAttribute.LogLevels.High(),
                     $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException)} with InnerException");
 
+                var ex = new ApizrException(e);
                 if (requestOptionsBuilder.ApizrOptions.OnException == null)
-                    throw new ApizrException(e);
+                    throw ex;
 
                 _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
-                requestOptionsBuilder.ApizrOptions.OnException(e);
+                requestOptionsBuilder.ApizrOptions.OnException(ex);
             }
         }
 
@@ -232,12 +233,13 @@ namespace Apizr
                 _apizrOptions.Logger.Log(logAttribute.LogLevels.High(),
                     $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException)} with InnerException");
 
+                var ex = new ApizrException(e);
                 if (requestOptionsBuilder.ApizrOptions.OnException == null)
-                    throw new ApizrException(e);
+                    throw ex;
 
                 _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
-                requestOptionsBuilder.ApizrOptions.OnException(e);
+                requestOptionsBuilder.ApizrOptions.OnException(ex);
             }
         }
 
@@ -357,7 +359,7 @@ namespace Apizr
 
                     _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
                         $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
-                    requestOptionsBuilder.ApizrOptions.OnException(ex);
+                    requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
                 }
 
                 if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
@@ -467,7 +469,7 @@ namespace Apizr
 
                     _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
                         $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
-                    requestOptionsBuilder.ApizrOptions.OnException(ex);
+                    requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
                 }
 
                 if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
@@ -575,7 +577,7 @@ namespace Apizr
 
                     _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
                         $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
-                    requestOptionsBuilder.ApizrOptions.OnException(ex);
+                    requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
                 }
 
                 if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
@@ -678,7 +680,7 @@ namespace Apizr
 
                     _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
                         $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
-                    requestOptionsBuilder.ApizrOptions.OnException(ex);
+                    requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
                 }
 
                 if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&

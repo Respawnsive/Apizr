@@ -412,8 +412,9 @@ namespace Apizr.Sample.Console
                 {
                     //var test = new ReadAllUsersParams("value1", 2);
 
-                    var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
+                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
                     //var userList = await _reqResManager.ExecuteAsync((ctx, api) => api.GetUsersAsync((int)Priority.UserInitiated, ctx), new Context{{"key1", "value1"}});
+                    var userList = await _reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync((int)Priority.UserInitiated, opt.Context), options => options.WithContext(new Context { { "key1", "value1" } }));
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(true));
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(parameters1));

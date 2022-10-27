@@ -55,7 +55,7 @@ namespace Apizr.Mediation.Extending
         public static Task<TApiEntity> SendCreateCommand<TApiEntity>(this IApizrCrudMediator mediator,
             TApiEntity entity, CancellationToken cancellationToken, Action<Exception> onException = null) =>
             mediator.SendCreateCommand<TApiEntity>(entity,
-                options => options.WithToken(cancellationToken)
+                options => options.WithCancellation(cancellationToken)
                     .Catch(onException));
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Apizr.Mediation.Extending
             Action<Exception> onException = null) =>
             mediator.SendCreateCommand<TApiEntity>(entity,
                 options => options.WithContext(context)
-                    .WithToken(cancellationToken)
+                    .WithCancellation(cancellationToken)
                     .Catch(onException));
 
         #endregion
@@ -123,7 +123,7 @@ namespace Apizr.Mediation.Extending
         public static Task<TModelEntity> SendCreateCommand<TModelEntity, TApiEntity>(this IApizrCrudMediator mediator,
             TModelEntity entity, CancellationToken cancellationToken, Action<Exception> onException = null) =>
             mediator.SendCreateCommand<TModelEntity, TApiEntity>(entity,
-                options => options.WithToken(cancellationToken)
+                options => options.WithCancellation(cancellationToken)
                     .Catch(onException));
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace Apizr.Mediation.Extending
             Action<Exception> onException = null) =>
             mediator.SendCreateCommand<TModelEntity, TApiEntity>(entity,
                 options => options.WithContext(context)
-                    .WithToken(cancellationToken)
+                    .WithCancellation(cancellationToken)
                     .Catch(onException));
 
         #endregion
@@ -202,7 +202,7 @@ namespace Apizr.Mediation.Extending
         [Obsolete("Use the one with the request options builder parameter instead")]
         public static Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(this IApizrCrudMediator mediator,
             CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null) =>
-            mediator.SendReadAllQuery<TReadAllResult>(options => options.WithToken(cancellationToken)
+            mediator.SendReadAllQuery<TReadAllResult>(options => options.WithCancellation(cancellationToken)
                 .ClearCache(clearCache)
                 .Catch(onException));
 
@@ -250,7 +250,7 @@ namespace Apizr.Mediation.Extending
             int priority, CancellationToken cancellationToken, bool clearCache = false,
             Action<Exception> onException = null) =>
             mediator.SendReadAllQuery<TReadAllResult>(priority, options => options
-                .WithToken(cancellationToken)
+                .WithCancellation(cancellationToken)
                 .ClearCache(clearCache)
                 .Catch(onException));
 
@@ -266,7 +266,7 @@ namespace Apizr.Mediation.Extending
         [Obsolete("Use the one with the request options builder parameter instead")]
         public static Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(this IApizrCrudMediator mediator, Context context, CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null) =>
             mediator.SendReadAllQuery<TReadAllResult>(options => options.WithContext(context)
-                .WithToken(cancellationToken)
+                .WithCancellation(cancellationToken)
                 .ClearCache(clearCache)
                 .Catch(onException));
 
@@ -285,7 +285,7 @@ namespace Apizr.Mediation.Extending
             int priority, Context context, CancellationToken cancellationToken, bool clearCache = false,
             Action<Exception> onException = null) =>
             mediator.SendReadAllQuery<TReadAllResult>(priority, options => options.WithContext(context)
-                .WithToken(cancellationToken)
+                .WithCancellation(cancellationToken)
                 .ClearCache(clearCache)
                 .Catch(onException));
 
@@ -352,7 +352,7 @@ namespace Apizr.Mediation.Extending
             this IApizrCrudMediator mediator, CancellationToken cancellationToken, bool clearCache = false,
             Action<Exception> onException = null) =>
             mediator.SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(options => options
-                .WithToken(cancellationToken)
+                .WithCancellation(cancellationToken)
                 .ClearCache(clearCache)
                 .Catch(onException));
 
@@ -388,7 +388,7 @@ namespace Apizr.Mediation.Extending
             this IApizrCrudMediator mediator, int priority,
             CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null) =>
             mediator.SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(priority, options => options
-                .WithToken(cancellationToken)
+                .WithCancellation(cancellationToken)
                 .ClearCache(clearCache)
                 .Catch(onException));
 
@@ -426,7 +426,7 @@ namespace Apizr.Mediation.Extending
             this IApizrCrudMediator mediator, Context context,
             CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null) =>
             mediator.SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(options => options.WithContext(context)
-                .WithToken(cancellationToken)
+                .WithCancellation(cancellationToken)
                 .ClearCache(clearCache)
                 .Catch(onException));
 
@@ -447,7 +447,7 @@ namespace Apizr.Mediation.Extending
             CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null) =>
             mediator.SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(priority, options => options
                 .WithContext(context)
-                .WithToken(cancellationToken)
+                .WithCancellation(cancellationToken)
                 .ClearCache(clearCache)
                 .Catch(onException));
 
@@ -520,7 +520,7 @@ namespace Apizr.Mediation.Extending
             this IApizrCrudMediator mediator, TReadAllParams readAllParams,
             CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null) =>
             mediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(readAllParams, options => options
-                .WithToken(cancellationToken)
+                .WithCancellation(cancellationToken)
                 .ClearCache(clearCache)
                 .Catch(onException));
 
@@ -579,7 +579,7 @@ namespace Apizr.Mediation.Extending
             int priority,
             CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null) =>
             mediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(readAllParams, priority, options => options
-                .WithToken(cancellationToken)
+                .WithCancellation(cancellationToken)
                 .ClearCache(clearCache)
                 .Catch(onException));
 
@@ -600,7 +600,7 @@ namespace Apizr.Mediation.Extending
             CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null) =>
             mediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(readAllParams, options => options
                 .WithContext(context)
-                .WithToken(cancellationToken)
+                .WithCancellation(cancellationToken)
                 .ClearCache(clearCache)
                 .Catch(onException));
 
@@ -623,7 +623,7 @@ namespace Apizr.Mediation.Extending
             CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null) =>
             mediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(readAllParams, priority, options => options
                 .WithContext(context)
-                .WithToken(cancellationToken)
+                .WithCancellation(cancellationToken)
                 .ClearCache(clearCache)
                 .Catch(onException));
 
@@ -707,7 +707,7 @@ namespace Apizr.Mediation.Extending
                 CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null) =>
             mediator.SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(readAllParams, options =>
                 options
-                    .WithToken(cancellationToken)
+                    .WithCancellation(cancellationToken)
                     .ClearCache(clearCache)
                     .Catch(onException));
 
@@ -775,7 +775,7 @@ namespace Apizr.Mediation.Extending
                 CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null) =>
             mediator.SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(readAllParams, priority,
                 options => options
-                    .WithToken(cancellationToken)
+                    .WithCancellation(cancellationToken)
                     .ClearCache(clearCache)
                     .Catch(onException));
 
@@ -799,7 +799,7 @@ namespace Apizr.Mediation.Extending
             mediator.SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(readAllParams, options =>
                 options
                     .WithContext(context)
-                    .WithToken(cancellationToken)
+                    .WithCancellation(cancellationToken)
                     .ClearCache(clearCache)
                     .Catch(onException));
 
@@ -825,7 +825,7 @@ namespace Apizr.Mediation.Extending
             mediator.SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(readAllParams, priority,
                 options => options
                     .WithContext(context)
-                    .WithToken(cancellationToken)
+                    .WithCancellation(cancellationToken)
                     .ClearCache(clearCache)
                     .Catch(onException));
 
@@ -900,7 +900,7 @@ namespace Apizr.Mediation.Extending
             TApiEntityKey key,
             CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null) =>
             mediator.SendReadAllQuery<TApiEntity, TApiEntityKey>(key, options => options
-                .WithToken(cancellationToken)
+                .WithCancellation(cancellationToken)
                 .ClearCache(clearCache)
                 .Catch(onException));
 
@@ -940,7 +940,7 @@ namespace Apizr.Mediation.Extending
             CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null) =>
             mediator.SendReadAllQuery<TApiEntity, TApiEntityKey>(key, options => options
                 .WithContext(context)
-                .WithToken(cancellationToken)
+                .WithCancellation(cancellationToken)
                 .ClearCache(clearCache)
                 .Catch(onException));
 
@@ -983,7 +983,7 @@ namespace Apizr.Mediation.Extending
             CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null) =>
             mediator.SendReadAllQuery<TApiEntity, TApiEntityKey>(key, priority,
                 options => options
-                    .WithToken(cancellationToken)
+                    .WithCancellation(cancellationToken)
                     .ClearCache(clearCache)
                     .Catch(onException));
 
@@ -1007,7 +1007,7 @@ namespace Apizr.Mediation.Extending
             mediator.SendReadAllQuery<TApiEntity, TApiEntityKey>(key, priority,
                 options => options
                     .WithContext(context)
-                    .WithToken(cancellationToken)
+                    .WithCancellation(cancellationToken)
                     .ClearCache(clearCache)
                     .Catch(onException));
 
@@ -1087,7 +1087,7 @@ namespace Apizr.Mediation.Extending
             CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null) =>
             mediator.SendReadAllQuery<TModelEntity, TApiEntity, TApiEntityKey>(key,
                 options => options
-                    .WithToken(cancellationToken)
+                    .WithCancellation(cancellationToken)
                     .ClearCache(clearCache)
                     .Catch(onException));
 
@@ -1130,7 +1130,7 @@ namespace Apizr.Mediation.Extending
             mediator.SendReadAllQuery<TModelEntity, TApiEntity, TApiEntityKey>(key,
                 options => options
                     .WithContext(context)
-                    .WithToken(cancellationToken)
+                    .WithCancellation(cancellationToken)
                     .ClearCache(clearCache)
                     .Catch(onException));
 
@@ -1175,7 +1175,7 @@ namespace Apizr.Mediation.Extending
             CancellationToken cancellationToken, bool clearCache = false, Action<Exception> onException = null) =>
             mediator.SendReadAllQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, priority,
                 options => options
-                    .WithToken(cancellationToken)
+                    .WithCancellation(cancellationToken)
                     .ClearCache(clearCache)
                     .Catch(onException));
 
@@ -1200,7 +1200,7 @@ namespace Apizr.Mediation.Extending
             mediator.SendReadAllQuery<TModelEntity, TApiEntity, TApiEntityKey>(key, priority,
                 options => options
                     .WithContext(context)
-                    .WithToken(cancellationToken)
+                    .WithCancellation(cancellationToken)
                     .ClearCache(clearCache)
                     .Catch(onException));
 
@@ -1265,7 +1265,7 @@ namespace Apizr.Mediation.Extending
             CancellationToken cancellationToken, Action<Exception> onException = null) =>
             mediator.SendUpdateCommand<TApiEntity, TApiEntityKey>(key, entity,
                 options => options
-                    .WithToken(cancellationToken)
+                    .WithCancellation(cancellationToken)
                     .Catch(onException));
 
         /// <summary>
@@ -1287,7 +1287,7 @@ namespace Apizr.Mediation.Extending
             mediator.SendUpdateCommand<TApiEntity, TApiEntityKey>(key, entity,
                 options => options
                     .WithContext(context)
-                    .WithToken(cancellationToken)
+                    .WithCancellation(cancellationToken)
                     .Catch(onException));
 
         #endregion
@@ -1350,7 +1350,7 @@ namespace Apizr.Mediation.Extending
             CancellationToken cancellationToken, Action<Exception> onException = null) =>
             mediator.SendUpdateCommand<TModelEntity, TApiEntity, TApiEntityKey>(key, entity,
                 options => options
-                    .WithToken(cancellationToken)
+                    .WithCancellation(cancellationToken)
                     .Catch(onException));
 
         /// <summary>
@@ -1373,7 +1373,7 @@ namespace Apizr.Mediation.Extending
             mediator.SendUpdateCommand<TModelEntity, TApiEntity, TApiEntityKey>(key, entity,
                 options => options
                     .WithContext(context)
-                    .WithToken(cancellationToken)
+                    .WithCancellation(cancellationToken)
                     .Catch(onException));
 
         #endregion
@@ -1429,7 +1429,7 @@ namespace Apizr.Mediation.Extending
             CancellationToken cancellationToken, Action<Exception> onException = null) =>
             mediator.SendDeleteCommand<TApiEntity, TApiEntityKey>(key,
                 options => options
-                    .WithToken(cancellationToken)
+                    .WithCancellation(cancellationToken)
                     .Catch(onException));
 
         /// <summary>
@@ -1449,7 +1449,7 @@ namespace Apizr.Mediation.Extending
             mediator.SendDeleteCommand<TApiEntity, TApiEntityKey>(key,
                 options => options
                     .WithContext(context)
-                    .WithToken(cancellationToken)
+                    .WithCancellation(cancellationToken)
                     .Catch(onException));
 
         #endregion

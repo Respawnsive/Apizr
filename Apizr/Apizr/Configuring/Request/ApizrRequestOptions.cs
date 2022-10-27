@@ -16,5 +16,5 @@ public class ApizrRequestOptions : IApizrRequestOptions
     public bool ClearCache { get; set; }
 
     /// <inheritdoc />
-    public Action<Exception> OnException { get; set; }
+    public Action<ApizrException> OnException { get; set; }
 }

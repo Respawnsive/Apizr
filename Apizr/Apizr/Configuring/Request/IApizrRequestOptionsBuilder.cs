@@ -19,7 +19,7 @@ namespace Apizr.Configuring.Request
         where TApizrRequestOptions : IApizrCancellationRequestOption
         where TApizrRequestOptionsBuilder : IApizrCancellationRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
-        TApizrRequestOptionsBuilder WithToken(CancellationToken cancellationToken);
+        TApizrRequestOptionsBuilder WithCancellation(CancellationToken cancellationToken);
     }
 
     public interface IApizrCacheRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :
@@ -35,7 +35,7 @@ namespace Apizr.Configuring.Request
         where TApizrRequestOptions : IApizrCatchRequestOption
         where TApizrRequestOptionsBuilder : IApizrCatchRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
-        TApizrRequestOptionsBuilder Catch(Action<Exception> onException);
+        TApizrRequestOptionsBuilder Catch(Action<ApizrException> onException);
     }
 
     #endregion
@@ -99,21 +99,6 @@ namespace Apizr.Configuring.Request
 
     public interface IApizrCatchResultRequestOptionsBuilder : IApizrCatchResultRequestOptionsBuilder<IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>
     { }
-
-    #endregion
-
-    #region Request
-
-    public interface IApizrRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :
-    IApizrCatchUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>,
-    IApizrCatchResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-    where TApizrRequestOptions : IApizrRequestOptions
-    where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-    {
-    }
-
-    public interface IApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>
-    { } 
 
     #endregion
 

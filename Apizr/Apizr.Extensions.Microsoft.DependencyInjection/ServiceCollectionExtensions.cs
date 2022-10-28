@@ -771,7 +771,7 @@ namespace Apizr
             if (baseCommonOptions is not ApizrExtendedCommonOptions baseApizrCommonOptions)
                 baseApizrCommonOptions = new ApizrExtendedCommonOptions();
 
-            var builder = new ApizrExtendedCommonOptionsBuilder(baseApizrCommonOptions);
+            var builder = new ApizrExtendedCommonOptionsBuilder(baseApizrCommonOptions) as IApizrExtendedCommonOptionsBuilder;
 
             commonOptionsBuilder?.Invoke(builder);
 
@@ -823,7 +823,7 @@ namespace Apizr
                 baseAddress,
                 basePath,
                 logAttribute?.HttpTracerMode,
-                logAttribute?.TrafficVerbosity, logAttribute?.LogLevels));
+                logAttribute?.TrafficVerbosity, logAttribute?.LogLevels)) as IApizrExtendedProperOptionsBuilder;
 
             properOptionsBuilder?.Invoke(builder);
 

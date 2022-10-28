@@ -18,5 +18,7 @@ namespace Apizr.Configuring
     /// Builder options available for static registrations
     /// </summary>
     public interface IApizrOptionsBuilder : IApizrOptionsBuilder<IApizrOptions, IApizrOptionsBuilder>
-    {}
+    {
+        internal IApizrOptions ApizrOptions { get; }
+    }
 }

@@ -15,5 +15,7 @@ namespace Apizr.Configuring.Proper
 
     /// <inheritdoc />
     public interface IApizrProperOptionsBuilder : IApizrProperOptionsBuilder<IApizrProperOptions, IApizrProperOptionsBuilder>
-    { }
+    {
+        internal IApizrProperOptions ApizrOptions { get; }
+    }
 }

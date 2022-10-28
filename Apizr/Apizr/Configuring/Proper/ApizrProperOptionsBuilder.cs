@@ -26,7 +26,7 @@ namespace Apizr.Configuring.Proper
         }
 
         /// <inheritdoc />
-        public IApizrProperOptions ApizrOptions => Options;
+        IApizrProperOptions IApizrProperOptionsBuilder.ApizrOptions => Options;
 
         /// <inheritdoc />
         public IApizrProperOptionsBuilder WithBaseAddress(string baseAddress)

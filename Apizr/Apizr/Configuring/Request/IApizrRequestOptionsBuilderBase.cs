@@ -4,9 +4,11 @@
         where TApizrRequestOptions : IApizrRequestOptionsBase
         where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
-        TApizrRequestOptions ApizrOptions { get; }
     }
 
-    public interface IApizrRequestOptionsBuilderBase : IApizrRequestOptionsBuilderBase<IApizrRequestOptionsBase, IApizrRequestOptionsBuilderBase>
-    {}
+    public interface IApizrRequestOptionsBuilderBase : IApizrRequestOptionsBuilderBase<IApizrRequestOptionsBase,
+        IApizrRequestOptionsBuilderBase>
+    {
+        internal IApizrRequestOptions ApizrOptions { get; }
+    }
 }

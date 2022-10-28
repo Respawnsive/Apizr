@@ -267,7 +267,7 @@ namespace Apizr
             if (baseCommonOptions is not ApizrCommonOptions baseApizrCommonOptions)
                 baseApizrCommonOptions = new ApizrCommonOptions();
 
-            var builder = new ApizrCommonOptionsBuilder(baseApizrCommonOptions);
+            var builder = new ApizrCommonOptionsBuilder(baseApizrCommonOptions) as IApizrCommonOptionsBuilder;
 
             commonOptionsBuilder?.Invoke(builder);
 
@@ -324,7 +324,7 @@ namespace Apizr
                 baseAddress,
                 basePath,
                 logAttribute?.HttpTracerMode,
-                logAttribute?.TrafficVerbosity, logAttribute?.LogLevels));
+                logAttribute?.TrafficVerbosity, logAttribute?.LogLevels)) as IApizrProperOptionsBuilder;
 
             properOptionsBuilder?.Invoke(builder);
 
@@ -369,7 +369,7 @@ namespace Apizr
 
         private static IApizrOptions CreateOptions(IApizrCommonOptions commonOptions, IApizrProperOptions properOptions, Action<IApizrOptionsBuilder> optionsBuilder = null)
         {
-            var builder = new ApizrOptionsBuilder(new ApizrOptions(commonOptions, properOptions));
+            var builder = new ApizrOptionsBuilder(new ApizrOptions(commonOptions, properOptions)) as IApizrOptionsBuilder;
 
             optionsBuilder?.Invoke(builder);
 

@@ -19,11 +19,6 @@ namespace Apizr.Configuring.Shared
         where TApizrSharedOptionsBuilder : IApizrGlobalSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>
     {
         /// <summary>
-        /// Apizr common options
-        /// </summary>
-        TApizrSharedOptions ApizrOptions { get; }
-
-        /// <summary>
         /// Define your web api base address (could be defined with WebApiAttribute)
         /// </summary>
         /// <param name="baseAddress">Your web api base address</param>

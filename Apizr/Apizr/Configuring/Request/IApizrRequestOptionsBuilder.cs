@@ -19,7 +19,7 @@ namespace Apizr.Configuring.Request
         where TApizrRequestOptions : IApizrCancellationRequestOption
         where TApizrRequestOptionsBuilder : IApizrCancellationRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
-        TApizrRequestOptionsBuilder WithCancellation(CancellationToken cancellationToken);
+        TApizrRequestOptionsBuilder CancelWith(CancellationToken cancellationToken);
     }
 
     public interface IApizrCacheRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :
@@ -52,7 +52,7 @@ namespace Apizr.Configuring.Request
     {
     }
 
-    public interface IApizrUnitRequestOptionsBuilder : IApizrUnitRequestOptionsBuilder<IApizrUnitRequestOptions, IApizrUnitRequestOptionsBuilder>
+    public interface IApizrUnitRequestOptionsBuilder : IApizrUnitRequestOptionsBuilder<IApizrUnitRequestOptions, IApizrUnitRequestOptionsBuilder>, IApizrRequestOptionsBuilderBase
     { }
 
     #endregion
@@ -67,7 +67,7 @@ namespace Apizr.Configuring.Request
     {
     }
 
-    public interface IApizrCatchUnitRequestOptionsBuilder : IApizrCatchUnitRequestOptionsBuilder<IApizrCatchUnitRequestOptions, IApizrCatchUnitRequestOptionsBuilder>
+    public interface IApizrCatchUnitRequestOptionsBuilder : IApizrCatchUnitRequestOptionsBuilder<IApizrCatchUnitRequestOptions, IApizrCatchUnitRequestOptionsBuilder>, IApizrRequestOptionsBuilderBase
     { }
 
     #endregion
@@ -82,7 +82,7 @@ namespace Apizr.Configuring.Request
     {
     }
 
-    public interface IApizrResultRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<IApizrResultRequestOptions, IApizrResultRequestOptionsBuilder>
+    public interface IApizrResultRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<IApizrResultRequestOptions, IApizrResultRequestOptionsBuilder>, IApizrRequestOptionsBuilderBase
     { }
 
     #endregion
@@ -97,7 +97,7 @@ namespace Apizr.Configuring.Request
     {
     }
 
-    public interface IApizrCatchResultRequestOptionsBuilder : IApizrCatchResultRequestOptionsBuilder<IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>
+    public interface IApizrCatchResultRequestOptionsBuilder : IApizrCatchResultRequestOptionsBuilder<IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>, IApizrRequestOptionsBuilderBase
     { }
 
     #endregion

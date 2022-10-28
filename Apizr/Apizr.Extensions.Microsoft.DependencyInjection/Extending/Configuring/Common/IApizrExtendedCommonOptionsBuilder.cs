@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using Apizr.Caching;
 using Apizr.Configuring.Common;
 using Apizr.Connecting;
 using Apizr.Extending.Configuring.Shared;
 using Apizr.Mapping;
+using Microsoft.Extensions.Options;
 using Refit;
 
+
+[assembly: InternalsVisibleTo("Apizr.Integrations.MediatR"),
+           InternalsVisibleTo("Apizr.Integrations.Optional")]
 namespace Apizr.Extending.Configuring.Common
 {
     /// <summary>
@@ -101,5 +106,7 @@ namespace Apizr.Extending.Configuring.Common
     /// Builder options available at common level for extended registration
     /// </summary>
     public interface IApizrExtendedCommonOptionsBuilder : IApizrExtendedCommonOptionsBuilder<IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder>
-    { }
+    {
+        internal IApizrExtendedCommonOptions ApizrOptions { get; }
+    }
 }

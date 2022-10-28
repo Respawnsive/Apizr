@@ -25,9 +25,9 @@ namespace Apizr.Extending.Configuring.Common
         {
             Options = commonOptions;
         }
-
+        
         /// <inheritdoc />
-        public IApizrExtendedCommonOptions ApizrOptions => Options;
+        IApizrExtendedCommonOptions IApizrExtendedCommonOptionsBuilder.ApizrOptions => Options;
 
         /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithBaseAddress(string baseAddress)

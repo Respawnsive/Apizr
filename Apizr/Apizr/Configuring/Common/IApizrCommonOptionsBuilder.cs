@@ -75,6 +75,9 @@ namespace Apizr.Configuring.Common
     }
 
     /// <inheritdoc />
-    public interface IApizrCommonOptionsBuilder : IApizrCommonOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>
-    {}
+    public interface
+        IApizrCommonOptionsBuilder : IApizrCommonOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>
+    {
+        internal IApizrCommonOptions ApizrOptions { get; }
+    }
 }

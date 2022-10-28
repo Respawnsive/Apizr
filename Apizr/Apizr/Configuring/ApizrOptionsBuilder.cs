@@ -29,7 +29,7 @@ namespace Apizr.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrOptions ApizrOptions => Options;
+        IApizrOptions IApizrOptionsBuilder.ApizrOptions => Options;
 
         /// <inheritdoc />
         public IApizrOptionsBuilder WithBaseAddress(string baseAddress)

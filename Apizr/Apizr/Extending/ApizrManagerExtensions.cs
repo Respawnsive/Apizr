@@ -57,7 +57,7 @@ namespace Apizr.Extending
             => manager.ExecuteAsync(
                 (options, api) =>
                     executeApiMethod.Compile()(options.CancellationToken, api),
-                options => options.WithCancellation(cancellationToken)
+                options => options.CancelWith(cancellationToken)
                     .Catch(onException));
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Apizr.Extending
             => manager.ExecuteAsync<TModelData, TApiData>(
                 (options, api, apiData) =>
                     executeApiMethod.Compile()(options.CancellationToken, api, apiData), modelData,
-                options => options.WithCancellation(cancellationToken)
+                options => options.CancelWith(cancellationToken)
                     .Catch(onException));
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Apizr.Extending
                 (options, api) =>
                     executeApiMethod.Compile()(options.Context, options.CancellationToken, api),
                 options => options.WithContext(context)
-                    .WithCancellation(cancellationToken)
+                    .CancelWith(cancellationToken)
                     .Catch(onException));
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace Apizr.Extending
                 (options, api, apiData) =>
                     executeApiMethod.Compile()(options.Context, options.CancellationToken, api, apiData), modelData,
                 options => options.WithContext(context)
-                    .WithCancellation(cancellationToken)
+                    .CancelWith(cancellationToken)
                     .Catch(onException));
 
         #endregion
@@ -407,7 +407,7 @@ namespace Apizr.Extending
             Action<Exception> onException = null)
             => manager.ExecuteAsync<TApiData>(
                 (options, api) => executeApiMethod.Compile()(options.CancellationToken, api),
-                options => options.WithCancellation(cancellationToken).ClearCache(clearCache)
+                options => options.CancelWith(cancellationToken).ClearCache(clearCache)
                     .Catch(onException));
 
         /// <summary>
@@ -455,7 +455,7 @@ namespace Apizr.Extending
                 TModelRequestData>(
                 (options, api, apiData) => executeApiMethod.Compile()(options.CancellationToken, api, apiData),
                 modelRequestData,
-                options => options.WithCancellation(cancellationToken).ClearCache(clearCache)
+                options => options.CancelWith(cancellationToken).ClearCache(clearCache)
                     .Catch(onException));
 
         /// <summary>
@@ -480,7 +480,7 @@ namespace Apizr.Extending
             => manager.ExecuteAsync<TModelData, TApiData>(
                 (options, api, apiData) => executeApiMethod.Compile()(options.CancellationToken, api, apiData),
                 modelData,
-                options => options.WithCancellation(cancellationToken).ClearCache(clearCache)
+                options => options.CancelWith(cancellationToken).ClearCache(clearCache)
                     .Catch(onException));
 
         /// <summary>
@@ -501,7 +501,7 @@ namespace Apizr.Extending
             CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null)
             => manager.ExecuteAsync<TModelData, TApiData>(
                 (options, api) => executeApiMethod.Compile()(options.CancellationToken, api),
-                options => options.WithCancellation(cancellationToken).ClearCache(clearCache)
+                options => options.CancelWith(cancellationToken).ClearCache(clearCache)
                     .Catch(onException));
 
         /// <summary>
@@ -594,7 +594,7 @@ namespace Apizr.Extending
             Action<Exception> onException = null)
             => manager.ExecuteAsync<TApiData>(
                 (options, api) => executeApiMethod.Compile()(options.Context, options.CancellationToken, api),
-                options => options.WithContext(context).WithCancellation(cancellationToken)
+                options => options.WithContext(context).CancelWith(cancellationToken)
                     .ClearCache(clearCache)
                     .Catch(onException));
 
@@ -627,7 +627,7 @@ namespace Apizr.Extending
                 (options, api, apiData) =>
                     executeApiMethod.Compile()(options.Context, options.CancellationToken, api, apiData),
                 modelRequestData,
-                options => options.WithContext(context).WithCancellation(cancellationToken)
+                options => options.WithContext(context).CancelWith(cancellationToken)
                     .ClearCache(clearCache)
                     .Catch(onException));
 
@@ -678,7 +678,7 @@ namespace Apizr.Extending
             manager.ExecuteAsync<TModelData, TApiData>(
                 (options, api) => executeApiMethod.Compile()(options.Context, options.CancellationToken, api),
                 options => options.WithContext(context)
-                    .WithCancellation(cancellationToken)
+                    .CancelWith(cancellationToken)
                     .ClearCache(clearCache)
                     .Catch(onException));
 

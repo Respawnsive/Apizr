@@ -1,4 +1,5 @@
 ﻿using Apizr.Configuring.Proper;
+using Apizr.Extending.Configuring.Common;
 using Apizr.Extending.Configuring.Shared;
 
 namespace Apizr.Extending.Configuring.Proper
@@ -18,5 +19,7 @@ namespace Apizr.Extending.Configuring.Proper
     /// Builder options available at proper level for extended registrations
     /// </summary>
     public interface IApizrExtendedProperOptionsBuilder : IApizrExtendedProperOptionsBuilder<IApizrExtendedProperOptions, IApizrExtendedProperOptionsBuilder>
-    { }
+    {
+        internal IApizrExtendedProperOptions ApizrOptions { get; }
+    }
 }

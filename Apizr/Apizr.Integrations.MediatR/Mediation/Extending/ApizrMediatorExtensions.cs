@@ -57,7 +57,7 @@ namespace Apizr.Mediation.Extending
             Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod,
             CancellationToken token = default, Action<Exception> onException = null) =>
             mediator.SendFor<TWebApi>((options, api) => executeApiMethod.Compile()(options.CancellationToken, api),
-                options => options.WithCancellation(token)
+                options => options.CancelWith(token)
                     .Catch(onException));
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Apizr.Mediation.Extending
             mediator.SendFor<TWebApi>(
                 (options, api) => executeApiMethod.Compile()(options.Context, options.CancellationToken, api),
                 options => options.WithContext(context)
-                    .WithCancellation(token)
+                    .CancelWith(token)
                     .Catch(onException));
 
         #endregion
@@ -120,7 +120,7 @@ namespace Apizr.Mediation.Extending
             mediator.SendFor<TWebApi, TModelData, TApiData>(
                 (options, api, apiData) => executeApiMethod.Compile()(options.CancellationToken, api, apiData),
                 modelData,
-                options => options.WithCancellation(token)
+                options => options.CancelWith(token)
                     .Catch(onException));
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace Apizr.Mediation.Extending
                 (options, api, apiData) =>
                     executeApiMethod.Compile()(options.Context, options.CancellationToken, api, apiData), modelData,
                 options => options.WithContext(context)
-                    .WithCancellation(token)
+                    .CancelWith(token)
                     .Catch(onException));
 
         #endregion
@@ -240,7 +240,7 @@ namespace Apizr.Mediation.Extending
             CancellationToken token = default, bool clearCache = false, Action<Exception> onException = null) =>
             mediator.SendFor<TWebApi, TApiData>(
                 (options, api) => executeApiMethod.Compile()(options.CancellationToken, api),
-                options => options.WithCancellation(token)
+                options => options.CancelWith(token)
                     .ClearCache(clearCache)
                     .Catch(onException));
 
@@ -263,7 +263,7 @@ namespace Apizr.Mediation.Extending
             mediator.SendFor<TWebApi, TApiData>(
                 (options, api) => executeApiMethod.Compile()(options.Context, options.CancellationToken, api),
                 options => options.WithContext(context)
-                    .WithCancellation(token)
+                    .CancelWith(token)
                     .ClearCache(clearCache)
                     .Catch(onException));
 
@@ -343,7 +343,7 @@ namespace Apizr.Mediation.Extending
             CancellationToken token = default, bool clearCache = false, Action<Exception> onException = null) =>
             mediator.SendFor<TWebApi, TModelData, TApiData>(
                 (options, api) => executeApiMethod.Compile()(options.CancellationToken, api),
-                options => options.WithCancellation(token)
+                options => options.CancelWith(token)
                     .ClearCache(clearCache)
                     .Catch(onException));
 
@@ -367,7 +367,7 @@ namespace Apizr.Mediation.Extending
             mediator.SendFor<TWebApi, TModelData, TApiData>(
                 (options, api) => executeApiMethod.Compile()(options.Context, options.CancellationToken, api),
                 options => options.WithContext(context)
-                    .WithCancellation(token)
+                    .CancelWith(token)
                     .ClearCache(clearCache)
                     .Catch(onException));
 
@@ -451,7 +451,7 @@ namespace Apizr.Mediation.Extending
             mediator.SendFor<TWebApi, TModelData, TApiData>(
                 (options, api, apiData) => executeApiMethod.Compile()(options.CancellationToken, api, apiData),
                 modelData,
-                options => options.WithCancellation(token)
+                options => options.CancelWith(token)
                     .ClearCache(clearCache)
                     .Catch(onException));
 
@@ -478,7 +478,7 @@ namespace Apizr.Mediation.Extending
                     executeApiMethod.Compile()(options.Context, options.CancellationToken, api, apiData),
                 modelData,
                 options => options.WithContext(context)
-                    .WithCancellation(token)
+                    .CancelWith(token)
                     .ClearCache(clearCache)
                     .Catch(onException));
 
@@ -561,7 +561,7 @@ namespace Apizr.Mediation.Extending
                 (options, api, apiData) =>
                     executeApiMethod.Compile()(options.CancellationToken, api, apiData),
                 modelRequestData,
-                options => options.WithCancellation(token)
+                options => options.CancelWith(token)
                     .ClearCache(clearCache)
                     .Catch(onException));
 
@@ -621,7 +621,7 @@ namespace Apizr.Mediation.Extending
                     executeApiMethod.Compile()(options.Context, options.CancellationToken, api, apiData),
                 modelRequestData,
                 options => options.WithContext(context)
-                    .WithCancellation(token)
+                    .CancelWith(token)
                     .ClearCache(clearCache)
                     .Catch(onException));
 

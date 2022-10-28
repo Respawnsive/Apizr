@@ -21,9 +21,6 @@ public abstract class
     protected abstract TApizrRequestOptionsBuilder Builder { get; }
 
     /// <inheritdoc />
-    public abstract TApizrRequestOptions ApizrOptions { get; }
-
-    /// <inheritdoc />
     public TApizrRequestOptionsBuilder WithContext(Context context)
     {
         Options.Context = context;
@@ -32,7 +29,7 @@ public abstract class
     }
 
     /// <inheritdoc />
-    public TApizrRequestOptionsBuilder WithCancellation(CancellationToken cancellationToken)
+    public TApizrRequestOptionsBuilder CancelWith(CancellationToken cancellationToken)
     {
         Options.CancellationToken = cancellationToken;
 
@@ -70,7 +67,7 @@ public class ApizrUnitRequestOptionsBuilder :
     protected override IApizrUnitRequestOptionsBuilder Builder => this;
 
     /// <inheritdoc />
-    public override IApizrUnitRequestOptions ApizrOptions => Options;
+    IApizrRequestOptions IApizrRequestOptionsBuilderBase.ApizrOptions => Options;
 }
 
 public class ApizrCatchUnitRequestOptionsBuilder :
@@ -86,7 +83,7 @@ public class ApizrCatchUnitRequestOptionsBuilder :
     protected override IApizrCatchUnitRequestOptionsBuilder Builder => this;
 
     /// <inheritdoc />
-    public override IApizrCatchUnitRequestOptions ApizrOptions => Options;
+    IApizrRequestOptions IApizrRequestOptionsBuilderBase.ApizrOptions => Options;
 }
 
 public class ApizrResultRequestOptionsBuilder :
@@ -102,7 +99,7 @@ public class ApizrResultRequestOptionsBuilder :
     protected override IApizrResultRequestOptionsBuilder Builder => this;
 
     /// <inheritdoc />
-    public override IApizrResultRequestOptions ApizrOptions => Options;
+    IApizrRequestOptions IApizrRequestOptionsBuilderBase.ApizrOptions => Options;
 }
 
 public class ApizrCatchResultRequestOptionsBuilder :
@@ -118,5 +115,5 @@ public class ApizrCatchResultRequestOptionsBuilder :
     protected override IApizrCatchResultRequestOptionsBuilder Builder => this;
 
     /// <inheritdoc />
-    public override IApizrCatchResultRequestOptions ApizrOptions => Options;
+    IApizrRequestOptions IApizrRequestOptionsBuilderBase.ApizrOptions => Options;
 }

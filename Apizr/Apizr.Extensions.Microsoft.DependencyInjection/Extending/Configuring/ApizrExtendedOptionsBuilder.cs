@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Configuring;
+using Apizr.Configuring.Shared;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
@@ -27,7 +28,7 @@ namespace Apizr.Extending.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptions ApizrOptions => Options;
+        IApizrExtendedOptions IApizrExtendedOptionsBuilder.ApizrOptions => Options;
 
         /// <inheritdoc />
         public IApizrExtendedOptionsBuilder WithBaseAddress(string baseAddress)

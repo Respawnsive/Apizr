@@ -47,6 +47,10 @@ public abstract class
 
     /// <inheritdoc />
     public TApizrRequestOptionsBuilder Catch(Action<ApizrException> onException)
+        => Catch(onException, false);
+
+    /// <inheritdoc />
+    public TApizrRequestOptionsBuilder Catch(Action<ApizrException> onException, bool letThrowOnExceptionWithEmptyCache)
     {
         Options.OnException = onException;
 

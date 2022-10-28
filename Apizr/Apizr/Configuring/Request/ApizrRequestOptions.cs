@@ -6,6 +6,15 @@ namespace Apizr.Configuring.Request;
 
 public class ApizrRequestOptions : IApizrRequestOptions
 {
+    public ApizrRequestOptions()
+    {
+        Context = new Context();
+        CancellationToken = CancellationToken.None;
+        ClearCache = false;
+        OnException = null;
+        LetThrowOnExceptionWithEmptyCache = true;
+    }
+
     /// <inheritdoc />
     public Context Context { get; set; }
 
@@ -17,4 +26,7 @@ public class ApizrRequestOptions : IApizrRequestOptions
 
     /// <inheritdoc />
     public Action<ApizrException> OnException { get; set; }
+
+    /// <inheritdoc />
+    public bool LetThrowOnExceptionWithEmptyCache { get; set; }
 }

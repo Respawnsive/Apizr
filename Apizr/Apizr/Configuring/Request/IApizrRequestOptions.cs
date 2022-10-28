@@ -60,7 +60,9 @@ namespace Apizr.Configuring.Request
     /// Options available for a result request with exception catching
     /// </summary>
     public interface IApizrCatchResultRequestOptions : IApizrResultRequestOptions, IApizrCatchRequestOption
-    {}
+    {
+        bool LetThrowOnExceptionWithEmptyCache { get; }
+    }
 
     /// <summary>
     /// Options available for a request

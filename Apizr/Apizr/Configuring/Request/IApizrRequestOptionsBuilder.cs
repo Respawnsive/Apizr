@@ -95,6 +95,7 @@ namespace Apizr.Configuring.Request
         where TApizrRequestOptions : IApizrCatchResultRequestOptions
         where TApizrRequestOptionsBuilder : IApizrCatchResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
+        TApizrRequestOptionsBuilder Catch(Action<ApizrException> onException, bool letThrowOnExceptionWithEmptyCache);
     }
 
     public interface IApizrCatchResultRequestOptionsBuilder : IApizrCatchResultRequestOptionsBuilder<IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>, IApizrRequestOptionsBuilderBase

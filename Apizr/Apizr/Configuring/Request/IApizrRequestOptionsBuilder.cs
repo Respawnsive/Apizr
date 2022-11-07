@@ -75,7 +75,8 @@ namespace Apizr.Configuring.Request
     #region Result
 
     public interface IApizrResultRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :
-        IApizrUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>,
+        IApizrContextRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>,
+        IApizrCancellationRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>,
         IApizrCacheRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
         where TApizrRequestOptions : IApizrResultRequestOptions
         where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>

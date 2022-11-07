@@ -53,7 +53,7 @@ namespace Apizr.Configuring.Request
     /// <summary>
     /// Options available for a result request
     /// </summary>
-    public interface IApizrResultRequestOptions : IApizrUnitRequestOptions, IApizrCacheRequestOption
+    public interface IApizrResultRequestOptions : IApizrContextRequestOption, IApizrCancellationRequestOption, IApizrCacheRequestOption
     {}
 
     /// <summary>

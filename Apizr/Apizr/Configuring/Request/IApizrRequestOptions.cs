@@ -1,4 +1,6 @@
-﻿using Polly;
+﻿using Apizr.Logging;
+using Microsoft.Extensions.Logging;
+using Polly;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,20 +8,32 @@ using System.Threading;
 
 namespace Apizr.Configuring.Request
 {
-    public interface IApizrContextRequestOption : IApizrRequestOptionsBase
+    public interface IApizrSharedRequestOptions : IApizrRequestOptionsBase
     {
         /// <summary>
         /// The Polly Context to pass through it all
         /// </summary>
         Context Context { get; }
-    }
 
-    public interface IApizrCancellationRequestOption : IApizrRequestOptionsBase
-    {
         /// <summary>
         /// A cancellation token to pass through it all
         /// </summary>
         CancellationToken CancellationToken { get; }
+
+        /// <summary>
+        /// Http traffic tracing mode
+        /// </summary>
+        HttpTracerMode HttpTracerMode { get; }
+
+        /// <summary>
+        /// Http traffic tracing verbosity
+        /// </summary>
+        HttpMessageParts TrafficVerbosity { get; }
+
+        /// <summary>
+        /// Log levels while writing
+        /// </summary>
+        LogLevel[] LogLevels { get; }
     }
 
     public interface IApizrCacheRequestOption : IApizrRequestOptionsBase
@@ -41,8 +55,8 @@ namespace Apizr.Configuring.Request
     /// <summary>
     /// Options available for a unit request
     /// </summary>
-    public interface IApizrUnitRequestOptions : IApizrContextRequestOption, IApizrCancellationRequestOption
-    {}
+    public interface IApizrUnitRequestOptions : IApizrSharedRequestOptions
+    { }
 
     /// <summary>
     /// Options available for a unit request with exception catching
@@ -53,7 +67,7 @@ namespace Apizr.Configuring.Request
     /// <summary>
     /// Options available for a result request
     /// </summary>
-    public interface IApizrResultRequestOptions : IApizrContextRequestOption, IApizrCancellationRequestOption, IApizrCacheRequestOption
+    public interface IApizrResultRequestOptions : IApizrSharedRequestOptions, IApizrCacheRequestOption
     {}
 
     /// <summary>

@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Threading;
+using Apizr.Configuring.Common;
+using Apizr.Logging;
+using Microsoft.Extensions.Logging;
 using Polly;
 
 namespace Apizr.Configuring.Request;
@@ -19,6 +22,17 @@ public abstract class
     }
 
     protected abstract TApizrRequestOptionsBuilder Builder { get; }
+
+    /// <inheritdoc />
+    public TApizrRequestOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
+        HttpMessageParts trafficVerbosity = HttpMessageParts.All, params LogLevel[] logLevels)
+    {
+        Options.HttpTracerMode = httpTracerMode;
+        Options.TrafficVerbosity = trafficVerbosity;
+        Options.LogLevels = logLevels;
+
+        return Builder;
+    }
 
     /// <inheritdoc />
     public TApizrRequestOptionsBuilder WithContext(Context context)

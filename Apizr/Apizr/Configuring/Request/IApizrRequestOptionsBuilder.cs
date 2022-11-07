@@ -1,25 +1,33 @@
 ﻿using System;
 using System.Threading;
+using Apizr.Configuring.Shared;
+using Apizr.Logging;
+using Microsoft.Extensions.Logging;
 using Polly;
 
 namespace Apizr.Configuring.Request
 {
     #region Builders
 
-    public interface IApizrContextRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :
+    public interface IApizrSharedRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :
     IApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-    where TApizrRequestOptions : IApizrContextRequestOption
-    where TApizrRequestOptionsBuilder : IApizrContextRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+    where TApizrRequestOptions : IApizrSharedRequestOptions
+    where TApizrRequestOptionsBuilder : IApizrSharedRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         TApizrRequestOptionsBuilder WithContext(Context context);
-    }
 
-    public interface IApizrCancellationRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :
-        IApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrCancellationRequestOption
-        where TApizrRequestOptionsBuilder : IApizrCancellationRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-    {
         TApizrRequestOptionsBuilder CancelWith(CancellationToken cancellationToken);
+
+
+        /// <summary>
+        /// Configure logging level for the request
+        /// </summary>
+        /// <param name="httpTracerMode"></param>
+        /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: All)</param>
+        /// <param name="logLevels">Log levels to apply while writing (default: Information)</param>
+        /// <returns></returns>
+        TApizrRequestOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
+            HttpMessageParts trafficVerbosity = HttpMessageParts.All, params LogLevel[] logLevels);
     }
 
     public interface IApizrCacheRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :
@@ -45,8 +53,7 @@ namespace Apizr.Configuring.Request
     #region Unit
 
     public interface IApizrUnitRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :
-    IApizrContextRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>,
-    IApizrCancellationRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+    IApizrSharedRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     where TApizrRequestOptions : IApizrUnitRequestOptions
     where TApizrRequestOptionsBuilder : IApizrUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
@@ -75,8 +82,7 @@ namespace Apizr.Configuring.Request
     #region Result
 
     public interface IApizrResultRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :
-        IApizrContextRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>,
-        IApizrCancellationRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>,
+        IApizrSharedRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>,
         IApizrCacheRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
         where TApizrRequestOptions : IApizrResultRequestOptions
         where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>

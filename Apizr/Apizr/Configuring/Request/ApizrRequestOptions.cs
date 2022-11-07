@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
+using Apizr.Logging;
+using Microsoft.Extensions.Logging;
 using Polly;
 
 namespace Apizr.Configuring.Request;
@@ -20,6 +23,27 @@ public class ApizrRequestOptions : IApizrRequestOptions
 
     /// <inheritdoc />
     public CancellationToken CancellationToken { get; set; }
+
+    /// <inheritdoc />
+    public HttpTracerMode HttpTracerMode { get; set; }
+
+    /// <inheritdoc />
+    public HttpMessageParts TrafficVerbosity { get; set; }
+    
+    private LogLevel[] _logLevels;
+    /// <inheritdoc />
+    public LogLevel[] LogLevels
+    {
+        get => _logLevels;
+        set => _logLevels = value?.Any() == true
+            ? value
+            : new[]
+            {
+                Constants.LowLogLevel,
+                Constants.MediumLogLevel,
+                Constants.HighLogLevel
+            };
+    }
 
     /// <inheritdoc />
     public bool ClearCache { get; set; }

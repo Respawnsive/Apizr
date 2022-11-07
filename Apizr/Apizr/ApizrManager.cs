@@ -349,20 +349,34 @@ namespace Apizr
                 {
                     _apizrOptions.Logger.Log(logAttribute.LogLevels.High(),
                         $"{methodDetails.MethodInfo.Name}: Request throwed an exception with message {e.Message}");
-                    _apizrOptions.Logger.Log(logAttribute.LogLevels.High(), !Equals(result, default(TApiData))
-                        ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TApiData>)} with InnerException and cached result"
-                        : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TApiData>)} with InnerException but no cached result");
 
                     ex = new ApizrException<TApiData>(e, result);
-                    if (requestOptionsBuilder.ApizrOptions.OnException != null)
+                    if (requestOptionsBuilder.ApizrOptions.OnException == null)
                     {
-                        _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
-                            $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
-                        requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
+                        _apizrOptions.Logger.Log(logAttribute.LogLevels.High(), Equals(result, default(TApiData))
+                            ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TApiData>)} with InnerException but no cached result"
+                            : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TApiData>)} with InnerException and cached result");
+
+                        throw ex;
                     }
 
-                    if (requestOptionsBuilder.ApizrOptions.LetThrowOnExceptionWithEmptyCache)
-                        throw ex;
+                    if (Equals(result, default(TApiData)))
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Handling an {nameof(ApizrException<TApiData>)} with InnerException but no cached result");
+
+                        requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
+
+                        if (requestOptionsBuilder.ApizrOptions.LetThrowOnExceptionWithEmptyCache)
+                            throw ex;
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Handling an {nameof(ApizrException<TApiData>)} with InnerException and cached result");
+
+                        requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
+                    }
                 }
 
                 if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
@@ -462,20 +476,34 @@ namespace Apizr
                 {
                     _apizrOptions.Logger.Log(logAttribute.LogLevels.High(),
                         $"{methodDetails.MethodInfo.Name}: Request throwed an exception with message {e.Message}");
-                    _apizrOptions.Logger.Log(logAttribute.LogLevels.High(), !Equals(result, default(TApiResultData))
-                        ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelResultData>)} with InnerException and cached result"
-                        : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelResultData>)} with InnerException but no cached result");
-
+                    
                     ex = new ApizrException<TModelResultData>(e, Map<TApiResultData, TModelResultData>(result));
-                    if (requestOptionsBuilder.ApizrOptions.OnException != null)
+                    if (requestOptionsBuilder.ApizrOptions.OnException == null)
                     {
-                        _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
-                            $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
-                        requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
+                        _apizrOptions.Logger.Log(logAttribute.LogLevels.High(), Equals(result, default(TApiResultData))
+                            ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelResultData>)} with InnerException but no cached result"
+                            : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelResultData>)} with InnerException and cached result");
+
+                        throw ex;
                     }
 
-                    if (requestOptionsBuilder.ApizrOptions.LetThrowOnExceptionWithEmptyCache)
-                        throw ex;
+                    if (Equals(result, default(TApiResultData)))
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Handling an {nameof(ApizrException<TModelResultData>)} with InnerException but no cached result");
+
+                        requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
+
+                        if (requestOptionsBuilder.ApizrOptions.LetThrowOnExceptionWithEmptyCache)
+                            throw ex;
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Handling an {nameof(ApizrException<TModelResultData>)} with InnerException and cached result");
+
+                        requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
+                    }
                 }
 
                 if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
@@ -573,20 +601,34 @@ namespace Apizr
                 {
                     _apizrOptions.Logger.Log(logAttribute.LogLevels.High(),
                         $"{methodDetails.MethodInfo.Name}: Request throwed an exception with message {e.Message}");
-                    _apizrOptions.Logger.Log(logAttribute.LogLevels.High(), !Equals(result, default(TApiData))
-                        ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and cached result"
-                        : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException but no cached result");
 
-                    ex = new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
-                    if (requestOptionsBuilder.ApizrOptions.OnException != null)
+                    ex = new ApizrException<TApiData>(e, result);
+                    if (requestOptionsBuilder.ApizrOptions.OnException == null)
                     {
-                        _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
-                            $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
-                        requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
+                        _apizrOptions.Logger.Log(logAttribute.LogLevels.High(), Equals(result, default(TApiData))
+                            ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TApiData>)} with InnerException but no cached result"
+                            : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TApiData>)} with InnerException and cached result");
+
+                        throw ex;
                     }
 
-                    if (requestOptionsBuilder.ApizrOptions.LetThrowOnExceptionWithEmptyCache)
-                        throw ex;
+                    if (Equals(result, default(TApiData)))
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Handling an {nameof(ApizrException<TApiData>)} with InnerException but no cached result");
+
+                        requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
+
+                        if (requestOptionsBuilder.ApizrOptions.LetThrowOnExceptionWithEmptyCache)
+                            throw ex;
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Handling an {nameof(ApizrException<TApiData>)} with InnerException and cached result");
+
+                        requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
+                    }
                 }
 
                 if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
@@ -679,20 +721,34 @@ namespace Apizr
                 {
                     _apizrOptions.Logger.Log(logAttribute.LogLevels.High(),
                         $"{methodDetails.MethodInfo.Name}: Request throwed an exception with message {e.Message}");
-                    _apizrOptions.Logger.Log(logAttribute.LogLevels.High(), !Equals(result, default(TApiData))
-                        ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and cached result"
-                        : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException but no cached result");
-
+                    
                     ex = new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
-                    if (requestOptionsBuilder.ApizrOptions.OnException != null)
+                    if (requestOptionsBuilder.ApizrOptions.OnException == null)
                     {
-                        _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
-                            $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
-                        requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
+                        _apizrOptions.Logger.Log(logAttribute.LogLevels.High(), Equals(result, default(TApiData))
+                            ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException but no cached result"
+                            : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and cached result");
+
+                        throw ex;
                     }
 
-                    if(requestOptionsBuilder.ApizrOptions.LetThrowOnExceptionWithEmptyCache)
-                        throw ex;
+                    if (Equals(result, default(TApiData)))
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Handling an {nameof(ApizrException<TModelData>)} with InnerException but no cached result");
+
+                        requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
+
+                        if (requestOptionsBuilder.ApizrOptions.LetThrowOnExceptionWithEmptyCache)
+                            throw ex;
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(logAttribute.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Handling an {nameof(ApizrException<TModelData>)} with InnerException and cached result");
+
+                        requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
+                    }
                 }
 
                 if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&

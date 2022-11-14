@@ -21,16 +21,6 @@ namespace Apizr.Mediation.Cruding
         public ReadQuery(TKey key, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null) : base(key, optionsBuilder)
         {
         }
-
-        /// <summary>
-        /// The mediation Read query constructor
-        /// </summary>
-        /// <param name="key">The entity's crud key</param>
-        /// <param name="priority">The execution priority to apply</param>
-        /// <param name="optionsBuilder">Options provided to the request</param>
-        public ReadQuery(TKey key, int priority, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null) : base(key, priority, optionsBuilder)
-        {
-        }
     }
 
     /// <summary>
@@ -45,16 +35,6 @@ namespace Apizr.Mediation.Cruding
         /// <param name="key">The entity's crud key</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         public ReadQuery(int key, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null) : base(key, optionsBuilder)
-        {
-        }
-
-        /// <summary>
-        /// The mediation Read query constructor
-        /// </summary>
-        /// <param name="key">The entity's crud key</param>
-        /// <param name="priority">The execution priority to apply</param>
-        /// <param name="optionsBuilder">Options provided to the request</param>
-        public ReadQuery(int key, int priority, Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null) : base(key, priority, optionsBuilder)
         {
         }
     }

@@ -50,6 +50,14 @@ public abstract class
         return Builder;
     }
 
+    /// <inheritdoc />
+    public TApizrRequestOptionsBuilder AddHandlersParameter(string key, object value)
+    {
+        Options.HandlersParameters[key] = value;
+
+        return Builder;
+    }
+
     /// <param name="clearCache"></param>
     /// <inheritdoc />
     public TApizrRequestOptionsBuilder ClearCache(bool clearCache)

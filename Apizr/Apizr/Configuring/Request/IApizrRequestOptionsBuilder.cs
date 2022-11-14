@@ -18,7 +18,8 @@ namespace Apizr.Configuring.Request
 
         TApizrRequestOptionsBuilder CancelWith(CancellationToken cancellationToken);
 
-
+        TApizrRequestOptionsBuilder AddHandlersParameter(string key, object value);
+        
         /// <summary>
         /// Configure logging level for the request
         /// </summary>
@@ -89,7 +90,7 @@ namespace Apizr.Configuring.Request
     {
     }
 
-    public interface IApizrResultRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<IApizrResultRequestOptions, IApizrResultRequestOptionsBuilder>, IApizrRequestOptionsBuilderBase
+    public interface IApizrResultRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<IApizrResultRequestOptions, IApizrResultRequestOptionsBuilder>, IApizrResultRequestOptionsBuilderBase
     { }
 
     #endregion
@@ -105,7 +106,7 @@ namespace Apizr.Configuring.Request
         TApizrRequestOptionsBuilder Catch(Action<ApizrException> onException, bool letThrowOnExceptionWithEmptyCache);
     }
 
-    public interface IApizrCatchResultRequestOptionsBuilder : IApizrCatchResultRequestOptionsBuilder<IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>, IApizrRequestOptionsBuilderBase
+    public interface IApizrCatchResultRequestOptionsBuilder : IApizrCatchResultRequestOptionsBuilder<IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>, IApizrResultRequestOptionsBuilderBase
     { }
 
     #endregion

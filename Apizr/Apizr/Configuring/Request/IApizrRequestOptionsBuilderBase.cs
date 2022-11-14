@@ -11,4 +11,9 @@
     {
         internal IApizrRequestOptions ApizrOptions { get; }
     }
+
+    public interface IApizrResultRequestOptionsBuilderBase : IApizrRequestOptionsBuilderBase
+    {
+
+    }
 }

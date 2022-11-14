@@ -32,7 +32,7 @@ namespace Apizr.Mediation.Cruding.Handling
             CrudApiManager
                 .ExecuteAsync<TModelEntity, TApiEntity>(
                     (options, api) =>
-                        api.Read(request.Key, request.Priority, options.Context, options.CancellationToken),
+                        api.Read(request.Key, options, options.CancellationToken),
                     request.OptionsBuilder);
     }
 
@@ -60,7 +60,7 @@ namespace Apizr.Mediation.Cruding.Handling
             CrudApiManager
                 .ExecuteAsync<TModelEntity, TApiEntity>(
                     (options, api) =>
-                        api.Read(request.Key, request.Priority, options.Context, options.CancellationToken),
+                        api.Read(request.Key, options, options.CancellationToken),
                     request.OptionsBuilder);
     }
 }

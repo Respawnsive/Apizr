@@ -4,6 +4,7 @@
 
 using System;
 using System.Net.Http;
+using Apizr.Configuring.Request;
 using Polly;
 
 namespace Apizr.Policing
@@ -57,8 +58,16 @@ namespace Apizr.Policing
                 throw new ArgumentNullException(nameof(request));
             }
 
-            request.Properties.TryGetValue(Constants.PollyExecutionContextKey, out var context);
-            return context as Context;
+            Context context = null;
+            if (request.Properties.TryGetValue(Constants.PollyExecutionContextKey, out var contextProperty) && contextProperty is Context contextValue)
+            {
+                context = contextValue;
+            }
+            else if (request.Properties.TryGetValue(Constants.ApizrRequestOptionsKey, out var optionsProperty) && optionsProperty is IApizrRequestOptions optionsValue)
+            {
+                context = optionsValue.Context;
+            }
+            return context;
         }
 
         /// <summary>

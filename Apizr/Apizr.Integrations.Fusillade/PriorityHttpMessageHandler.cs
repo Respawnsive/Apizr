@@ -8,6 +8,7 @@ using System.Reactive.Threading.Tasks;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring;
+using Apizr.Configuring.Request;
 using Apizr.Extending;
 using Apizr.Policing;
 using Fusillade;
@@ -61,21 +62,36 @@ namespace Apizr
             var context = request.GetOrBuildPolicyExecutionContext();
             if (!context.TryGetLogger(out var logger, out var logLevels, out var verbosity, out var tracerMode))
             {
+                if (request.Properties.TryGetValue(Constants.ApizrRequestOptionsKey, out var optionsObject) && optionsObject is IApizrRequestOptions options)
+                {
+                    logLevels = options.LogLevels;
+                    verbosity = options.TrafficVerbosity;
+                    tracerMode = options.HttpTracerMode;
+                }
+                else
+                {
+                    logLevels = _apizrOptions.LogLevels;
+                    verbosity = _apizrOptions.TrafficVerbosity;
+                    tracerMode = _apizrOptions.HttpTracerMode;
+                }
                 logger = _logger;
-                logLevels = _apizrOptions.LogLevels;
-                verbosity = _apizrOptions.TrafficVerbosity;
-                tracerMode = _apizrOptions.HttpTracerMode;
 
                 context.WithLogger(logger, logLevels, verbosity, tracerMode);
                 request.SetPolicyExecutionContext(context);
             }
 
             var priority = (int) Priority.UserInitiated;
-            if (request.Properties.TryGetValue(Constants.PriorityKey, out var priorityObject))
+            if (request.Properties.TryGetValue(Constants.PriorityKey, out var priorityObject) &&
+                priorityObject is int priorityValue and >= 0)
             {
-                var priorityValue = (int) priorityObject;
-                if (priorityValue >= 0)
-                    priority = priorityValue;
+                priority = priorityValue;
+            }
+            else if (request.Properties.TryGetValue(Constants.ApizrRequestOptionsKey, out var optionsObject) &&
+                     optionsObject is IApizrRequestOptions options &&
+                     options.HandlersParameters.TryGetValue(Constants.PriorityKey, out priorityObject) &&
+                     priorityObject is int optionsPriorityValue and >= 0)
+            {
+                priority = optionsPriorityValue;
             }
 
             var priorityName = Enum.IsDefined(typeof(Priority), priority)

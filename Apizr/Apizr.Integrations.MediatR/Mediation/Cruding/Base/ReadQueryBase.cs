@@ -25,17 +25,6 @@ namespace Apizr.Mediation.Cruding.Base
         }
 
         /// <summary>
-        /// The top level base mediation Read query
-        /// </summary>
-        /// <param name="key">The entity's crud key</param>
-        /// <param name="priority">The execution priority to apply</param>
-        /// <param name="optionsBuilder">Options provided to the request</param>
-        protected ReadQueryBase(TKey key, int priority, Action<TApizrRequestOptionsBuilder> optionsBuilder = null) : base(priority, optionsBuilder)
-        {
-            Key = key;
-        }
-
-        /// <summary>
         /// The entity's crud key
         /// </summary>
         public TKey Key { get; }
@@ -51,11 +40,6 @@ namespace Apizr.Mediation.Cruding.Base
     {
         /// <inheritdoc />
         protected ReadQueryBase(int key, Action<TApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, optionsBuilder)
-        {
-        }
-
-        /// <inheritdoc />
-        protected ReadQueryBase(int key, int priority, Action<TApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, priority, optionsBuilder)
         {
         }
     }

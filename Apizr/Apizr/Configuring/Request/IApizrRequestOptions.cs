@@ -34,6 +34,11 @@ namespace Apizr.Configuring.Request
         /// Log levels while writing
         /// </summary>
         LogLevel[] LogLevels { get; }
+
+        /// <summary>
+        /// Custom parameters to pass through delegating handlers
+        /// </summary>
+        IDictionary<string, object> HandlersParameters { get; }
     }
 
     public interface IApizrCacheRequestOption : IApizrRequestOptionsBase
@@ -62,13 +67,13 @@ namespace Apizr.Configuring.Request
     /// Options available for a unit request with exception catching
     /// </summary>
     public interface IApizrCatchUnitRequestOptions : IApizrUnitRequestOptions, IApizrCatchRequestOption
-    {}
+    { }
 
     /// <summary>
     /// Options available for a result request
     /// </summary>
     public interface IApizrResultRequestOptions : IApizrSharedRequestOptions, IApizrCacheRequestOption
-    {}
+    { }
 
     /// <summary>
     /// Options available for a result request with exception catching

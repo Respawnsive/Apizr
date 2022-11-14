@@ -1,4 +1,7 @@
-﻿using Apizr.Configuring.Common;
+﻿using System.Threading.Tasks;
+using Apizr.Configuring.Common;
+using Apizr.Configuring.Request;
+using Fusillade;
 
 namespace Apizr
 {
@@ -17,6 +20,18 @@ namespace Apizr
             where T : IApizrGlobalCommonOptionsBuilderBase
         {
             builder.SetPrimaryHttpMessageHandler((innerHandler, logger, options) => new PriorityHttpMessageHandler(innerHandler, logger, options));
+
+            return builder;
+        }
+
+        public static T WithPriority<T>(this T builder, Priority priority)
+            where T : IApizrResultRequestOptionsBuilderBase
+            => builder.WithPriority((int) priority);
+
+        public static T WithPriority<T>(this T builder, int priority)
+            where T : IApizrResultRequestOptionsBuilderBase
+        {
+            builder.ApizrOptions.HandlersParameters[Constants.PriorityKey] = priority;
 
             return builder;
         }

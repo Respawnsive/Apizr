@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Apizr.Logging;
@@ -11,31 +12,32 @@ public class ApizrRequestOptions : IApizrRequestOptions
 {
     public ApizrRequestOptions()
     {
-        Context = new Context();
+        Context = null;
         CancellationToken = CancellationToken.None;
+        HandlersParameters = new Dictionary<string, object>();
         ClearCache = false;
         OnException = null;
         LetThrowOnExceptionWithEmptyCache = true;
     }
 
     /// <inheritdoc />
-    public Context Context { get; set; }
+    public Context Context { get; internal set; }
 
     /// <inheritdoc />
-    public CancellationToken CancellationToken { get; set; }
+    public CancellationToken CancellationToken { get; internal set; }
 
     /// <inheritdoc />
-    public HttpTracerMode HttpTracerMode { get; set; }
+    public HttpTracerMode HttpTracerMode { get; internal set; }
 
     /// <inheritdoc />
-    public HttpMessageParts TrafficVerbosity { get; set; }
+    public HttpMessageParts TrafficVerbosity { get; internal set; }
     
     private LogLevel[] _logLevels;
     /// <inheritdoc />
     public LogLevel[] LogLevels
     {
         get => _logLevels;
-        set => _logLevels = value?.Any() == true
+        internal set => _logLevels = value?.Any() == true
             ? value
             : new[]
             {
@@ -46,11 +48,14 @@ public class ApizrRequestOptions : IApizrRequestOptions
     }
 
     /// <inheritdoc />
-    public bool ClearCache { get; set; }
+    public IDictionary<string, object> HandlersParameters { get; }
 
     /// <inheritdoc />
-    public Action<ApizrException> OnException { get; set; }
+    public bool ClearCache { get; internal set; }
 
     /// <inheritdoc />
-    public bool LetThrowOnExceptionWithEmptyCache { get; set; }
+    public Action<ApizrException> OnException { get; internal set; }
+
+    /// <inheritdoc />
+    public bool LetThrowOnExceptionWithEmptyCache { get; internal set; }
 }

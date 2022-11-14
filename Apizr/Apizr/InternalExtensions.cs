@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using Apizr.Caching;
 using Apizr.Configuring;
 using Apizr.Configuring.Common;
+using Apizr.Configuring.Request;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
 using Apizr.Mapping;
@@ -80,7 +81,7 @@ namespace Apizr
         }
 
         internal static Type GetMappingHanderType(this IApizrCommonOptionsBase builder) =>
-            _mappingHandlerType; 
+            _mappingHandlerType;
 
         #endregion
 

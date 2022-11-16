@@ -21,16 +21,6 @@ namespace Apizr.Optional.Cruding
         public ReadOptionalQuery(TKey key, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) : base(key, optionsBuilder)
         {
         }
-
-        /// <summary>
-        /// The mediation Read optional query constructor
-        /// </summary>
-        /// <param name="key">The entity's crud key</param>
-        /// <param name="priority">The execution priority to apply</param>
-        /// <param name="optionsBuilder">Options provided to the request</param>
-        public ReadOptionalQuery(TKey key, int priority, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) : base(key, priority, optionsBuilder)
-        {
-        }
     }
 
     /// <summary>
@@ -45,16 +35,6 @@ namespace Apizr.Optional.Cruding
         /// <param name="key">The entity's crud key</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         public ReadOptionalQuery(int key, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) : base(key, optionsBuilder)
-        {
-        }
-
-        /// <summary>
-        /// The mediation Read optional query constructor
-        /// </summary>
-        /// <param name="key">The entity's crud key</param>
-        /// <param name="priority">The execution priority to apply</param>
-        /// <param name="optionsBuilder">Options provided to the request</param>
-        public ReadOptionalQuery(int key, int priority, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) : base(key, priority, optionsBuilder)
         {
         }
     }

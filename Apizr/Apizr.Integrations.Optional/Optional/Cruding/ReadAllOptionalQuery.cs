@@ -32,27 +32,6 @@ namespace Apizr.Optional.Cruding
         {
 
         }
-
-        /// <summary>
-        /// The mediation ReadAll optional query constructor
-        /// </summary>
-        /// <param name="priority">The execution priority to apply</param>
-        /// <param name="optionsBuilder">Options provided to the request</param>
-        public ReadAllOptionalQuery(int priority, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) : base(default, priority, optionsBuilder)
-        {
-
-        }
-
-        /// <summary>
-        /// The mediation ReadAll optional query constructor
-        /// </summary>
-        /// <param name="parameters">The query parameters to send</param>
-        /// <param name="priority">The execution priority to apply</param>
-        /// <param name="optionsBuilder">Options provided to the request</param>
-        public ReadAllOptionalQuery(TReadAllParams parameters, int priority, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) : base(parameters, priority, optionsBuilder)
-        {
-
-        }
     }
 
     /// <summary>
@@ -76,27 +55,6 @@ namespace Apizr.Optional.Cruding
         /// <param name="parameters">The query parameters to send</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         public ReadAllOptionalQuery(IDictionary<string, object> parameters, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) : base(parameters, optionsBuilder)
-        {
-
-        }
-
-        /// <summary>
-        /// The mediation ReadAll optional query constructor
-        /// </summary>
-        /// <param name="priority">The execution priority to apply</param>
-        /// <param name="optionsBuilder">Options provided to the request</param>
-        public ReadAllOptionalQuery(int priority, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) : base(default, priority, optionsBuilder)
-        {
-
-        }
-
-        /// <summary>
-        /// The mediation ReadAll optional query constructor
-        /// </summary>
-        /// <param name="parameters">The query parameters to send</param>
-        /// <param name="priority">The execution priority to apply</param>
-        /// <param name="optionsBuilder">Options provided to the request</param>
-        public ReadAllOptionalQuery(IDictionary<string, object> parameters, int priority, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) : base(parameters, priority, optionsBuilder)
         {
 
         }

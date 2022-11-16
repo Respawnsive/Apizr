@@ -36,7 +36,7 @@ namespace Apizr.Optional.Cruding.Handling
                     .MapAsync(_ =>
                         CrudApiManager.ExecuteAsync<TModelEntityReadAllResult, TApiEntityReadAllResult>(
                             (options, api) => api.ReadAll(request.Parameters,
-                                request.Priority, options.Context, options.CancellationToken), (Action<IApizrCatchResultRequestOptionsBuilder>) request.OptionsBuilder))
+                                options, options.CancellationToken), (Action<IApizrCatchResultRequestOptionsBuilder>) request.OptionsBuilder))
                     .ConfigureAwait(false);
             }
             catch (ApizrException<TModelEntityReadAllResult> e)
@@ -70,7 +70,7 @@ namespace Apizr.Optional.Cruding.Handling
                     .MapAsync(_ =>
                         CrudApiManager.ExecuteAsync<TModelEntityReadAllResult, TApiEntityReadAllResult>(
                             (options, api) => api.ReadAll(request.Parameters,
-                                request.Priority, options.Context, options.CancellationToken), (Action<IApizrCatchResultRequestOptionsBuilder>) request.OptionsBuilder))
+                                options, options.CancellationToken), (Action<IApizrCatchResultRequestOptionsBuilder>) request.OptionsBuilder))
                     .ConfigureAwait(false);
             }
             catch (ApizrException<TModelEntityReadAllResult> e)

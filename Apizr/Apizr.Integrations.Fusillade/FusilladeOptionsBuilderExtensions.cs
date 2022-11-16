@@ -24,14 +24,23 @@ namespace Apizr
             return builder;
         }
 
-        public static T WithPriority<T>(this T builder, Priority priority)
-            where T : IApizrResultRequestOptionsBuilderBase
+        public static IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+            WithPriority<TApizrRequestOptions, TApizrRequestOptionsBuilder>(
+                this IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder> builder,
+                Priority priority)
+            where TApizrRequestOptions : IApizrResultRequestOptions
+            where TApizrRequestOptionsBuilder :
+            IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
             => builder.WithPriority((int) priority);
 
-        public static T WithPriority<T>(this T builder, int priority)
-            where T : IApizrResultRequestOptionsBuilderBase
+        public static IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+            WithPriority<TApizrRequestOptions, TApizrRequestOptionsBuilder>(
+                this IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder> builder, int priority)
+            where TApizrRequestOptions : IApizrResultRequestOptions
+            where TApizrRequestOptionsBuilder :
+            IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
         {
-            builder.ApizrOptions.HandlersParameters[Constants.PriorityKey] = priority;
+            builder.AddHandlerParameter(Constants.PriorityKey, priority);
 
             return builder;
         }

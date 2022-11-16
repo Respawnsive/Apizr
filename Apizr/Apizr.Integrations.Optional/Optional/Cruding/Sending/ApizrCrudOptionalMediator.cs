@@ -20,19 +20,13 @@ namespace Apizr.Optional.Cruding.Sending
         }
 
         #region Create
-
-        #region SendCreateOptionalCommand
-
+        
         /// <inheritdoc />
         public Task<Option<TApiEntity, ApizrException>> SendCreateOptionalCommand<TApiEntity>(TApiEntity entity,
             Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(new CreateOptionalCommand<TApiEntity>(entity, optionsBuilder),
                 CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
-        #endregion
-
-        #region SendCreateOptionalCommand<TModelEntity>
-
         /// <inheritdoc />
         public Task<Option<TModelEntity, ApizrException>> SendCreateOptionalCommand<TModelEntity, TApiEntity>(
             TModelEntity entity, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
@@ -41,66 +35,28 @@ namespace Apizr.Optional.Cruding.Sending
         
         #endregion
 
-        #endregion
-
         #region ReadAll
-
-        #region SendReadAllOptionalQuery
 
         /// <inheritdoc />
         public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult>(
             Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(new ReadAllOptionalQuery<TReadAllResult>(optionsBuilder),
                 CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
-
-        /// <inheritdoc />
-        public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult>(
-            int priority, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new ReadAllOptionalQuery<TReadAllResult>(priority, optionsBuilder),
-                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
-        #endregion
-
-        #region SendReadAllOptionalQuery<TModelReadAllResult>
-
         /// <inheritdoc />
         public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>> SendReadAllOptionalQuery<
             TModelReadAllResult, TApiReadAllResult>(Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(
                 new ReadAllOptionalQuery<TModelReadAllResult>(optionsBuilder),
                 CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
-
-        /// <inheritdoc />
-        public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>> SendReadAllOptionalQuery<
-            TModelReadAllResult, TApiReadAllResult>(int priority,
-            Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(
-                new ReadAllOptionalQuery<TModelReadAllResult>(priority, optionsBuilder),
-                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
-        #endregion
-
-        #region SendReadAllOptionalQuery(TReadAllParams)
-
         /// <inheritdoc />
         public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult,
             TReadAllParams>(TReadAllParams readAllParams,
             Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(new ReadAllOptionalQuery<TReadAllParams, TReadAllResult>(readAllParams, optionsBuilder),
                 CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
-
-        /// <inheritdoc />
-        public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult,
-            TReadAllParams>(TReadAllParams readAllParams,
-            int priority, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(
-                new ReadAllOptionalQuery<TReadAllParams, TReadAllResult>(readAllParams, priority, optionsBuilder),
-                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
-        #endregion
-
-        #region SendReadAllOptionalQuery<TModelReadAllResult>(TReadAllParams)
-
         /// <inheritdoc />
         public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
             SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(
@@ -108,71 +64,33 @@ namespace Apizr.Optional.Cruding.Sending
             _mediator.Send(
                 new ReadAllOptionalQuery<TReadAllParams, TModelReadAllResult>(readAllParams, optionsBuilder),
                 CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
-
-        /// <inheritdoc />
-        public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>> SendReadAllOptionalQuery<
-            TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, int priority,
-            Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(
-                new ReadAllOptionalQuery<TReadAllParams, TModelReadAllResult>(readAllParams, priority, optionsBuilder),
-                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
         #endregion
 
-        #endregion
-
         #region Read
-
-        #region SendReadOptionalQuery
-
+        
         /// <inheritdoc />
         public Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery<TApiEntity, TApiEntityKey>(
             TApiEntityKey key, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(new ReadOptionalQuery<TApiEntity, TApiEntityKey>(key, optionsBuilder),
                 CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
-
-        /// <inheritdoc />
-        public Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery<TApiEntity, TApiEntityKey>(
-            TApiEntityKey key,
-            int priority, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new ReadOptionalQuery<TApiEntity, TApiEntityKey>(key, priority, optionsBuilder),
-                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
-        #endregion
-
-        #region SendReadOptionalQuery<TModelEntity>
-
         /// <inheritdoc />
         public Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity, TApiEntity,
             TApiEntityKey>(TApiEntityKey key, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(new ReadOptionalQuery<TModelEntity, TApiEntityKey>(key, optionsBuilder),
                 CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
-
-        /// <inheritdoc />
-        public Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity, TApiEntity,
-            TApiEntityKey>(TApiEntityKey key,
-            int priority, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
-            _mediator.Send(new ReadOptionalQuery<TModelEntity, TApiEntityKey>(key, priority, optionsBuilder),
-                CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
         #endregion
 
-        #endregion
-
         #region Update
-
-        #region SendUpdateOptionalCommand
-
+        
         /// <inheritdoc />
         public Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TApiEntity, TApiEntityKey>(
             TApiEntityKey key, TApiEntity entity, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(new UpdateOptionalCommand<TApiEntityKey, TApiEntity>(key, entity, optionsBuilder),
                 CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
-        #endregion
-
-        #region SendUpdateOptionalCommand<TModelEntity>
-
         /// <inheritdoc />
         public Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TModelEntity, TApiEntity, TApiEntityKey>(
             TApiEntityKey key,
@@ -180,8 +98,6 @@ namespace Apizr.Optional.Cruding.Sending
             _mediator.Send(new UpdateOptionalCommand<TApiEntityKey, TModelEntity>(key, entity, optionsBuilder),
                 CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
-        #endregion
-
         #endregion
 
         #region Delete
@@ -209,18 +125,12 @@ namespace Apizr.Optional.Cruding.Sending
         }
 
         #region Create
-
-        #region SendCreateOptionalCommand
-
+        
         /// <inheritdoc />
         public Task<Option<TApiEntity, ApizrException>> SendCreateOptionalCommand(TApiEntity entity,
             Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
             _apizrMediator.SendCreateOptionalCommand<TApiEntity>(entity, optionsBuilder);
         
-        #endregion
-
-        #region SendCreateOptionalCommand<TModelEntity>
-
         /// <inheritdoc />
         public Task<Option<TModelEntity, ApizrException>> SendCreateOptionalCommand<TModelEntity>(TModelEntity entity,
             Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
@@ -228,26 +138,13 @@ namespace Apizr.Optional.Cruding.Sending
         
         #endregion
 
-        #endregion
-
         #region ReadAll
-
-        #region SendReadAllOptionalQuery
-
+        
         /// <inheritdoc />
         public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery(
             Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
             _apizrMediator.SendReadAllOptionalQuery<TReadAllResult>(optionsBuilder);
         
-        /// <inheritdoc />
-        public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery(int priority,
-            Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
-            _apizrMediator.SendReadAllOptionalQuery<TReadAllResult>(priority, optionsBuilder);
-        
-        #endregion
-
-        #region SendReadAllOptionalQuery<TModelReadAllResult>
-
         /// <inheritdoc />
         public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
             SendReadAllOptionalQuery<TModelReadAllResult>(
@@ -255,99 +152,44 @@ namespace Apizr.Optional.Cruding.Sending
             _apizrMediator.SendReadAllOptionalQuery<TModelReadAllResult, TReadAllResult>(optionsBuilder);
         
         /// <inheritdoc />
-        public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>> SendReadAllOptionalQuery<
-            TModelReadAllResult>(int priority,
-            Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
-            _apizrMediator.SendReadAllOptionalQuery<TModelReadAllResult, TReadAllResult>(priority, optionsBuilder);
-        
-        #endregion
-
-        #region SendReadAllOptionalQuery(TReadAllParams)
-
-        /// <inheritdoc />
         public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery(
             TReadAllParams readAllParams, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
             _apizrMediator.SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(readAllParams, optionsBuilder);
         
-        /// <inheritdoc />
-        public Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery(
-            TReadAllParams readAllParams,
-            int priority, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
-            _apizrMediator.SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(readAllParams, priority, optionsBuilder);
-        
-        #endregion
-
-        #region SendReadAllOptionalQuery<TModelReadAllResult>(TReadAllParams)
-
         /// <inheritdoc />
         public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
             SendReadAllOptionalQuery<TModelReadAllResult>(TReadAllParams readAllParams,
                 Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
             _apizrMediator.SendReadAllOptionalQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(readAllParams, optionsBuilder);
         
-        /// <inheritdoc />
-        public Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
-            SendReadAllOptionalQuery<TModelReadAllResult>(TReadAllParams readAllParams, int priority,
-                Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
-            _apizrMediator.SendReadAllOptionalQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(readAllParams, priority, optionsBuilder);
-        
-        #endregion
-
         #endregion
 
         #region Read
-
-        #region SendReadOptionalQuery
-
+        
         /// <inheritdoc />
         public Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery(TApiEntityKey key,
             Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
             _apizrMediator.SendReadOptionalQuery<TApiEntity, TApiEntityKey>(key, optionsBuilder);
         
         /// <inheritdoc />
-        public Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery(TApiEntityKey key,
-            int priority, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
-            _apizrMediator.SendReadOptionalQuery<TApiEntity, TApiEntityKey>(key, priority, optionsBuilder);
-        
-        #endregion
-
-        #region SendReadOptionalQuery<TModelEntity>
-
-        /// <inheritdoc />
         public Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity>(
             TApiEntityKey key, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
             _apizrMediator.SendReadOptionalQuery<TModelEntity, TApiEntityKey>(key, optionsBuilder);
         
-        /// <inheritdoc />
-        public Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity>(
-            TApiEntityKey key,
-            int priority, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
-            _apizrMediator.SendReadOptionalQuery<TModelEntity, TApiEntityKey>(key, priority, optionsBuilder);
-        
-        #endregion
-
         #endregion
 
         #region Update
-
-        #region SendUpdateOptionalCommand
-
+        
         /// <inheritdoc />
         public Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand(TApiEntityKey key, TApiEntity entity,
             Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null) =>
             _apizrMediator.SendUpdateOptionalCommand<TApiEntity, TApiEntityKey>(key, entity, optionsBuilder);
         
-        #endregion
-
-        #region SendUpdateOptionalCommand<TModelEntity>
-
         /// <inheritdoc />
         public Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TModelEntity>(TApiEntityKey key,
             TModelEntity entity, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null) =>
             _apizrMediator.SendUpdateOptionalCommand<TModelEntity, TApiEntity, TApiEntityKey>(key, entity, optionsBuilder);
         
-        #endregion
-
         #endregion
 
         #region Delete

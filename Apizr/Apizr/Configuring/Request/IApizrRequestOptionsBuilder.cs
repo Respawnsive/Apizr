@@ -7,7 +7,7 @@ using Polly;
 
 namespace Apizr.Configuring.Request
 {
-    #region Builders
+    #region Individual Builders
 
     public interface IApizrSharedRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :
     IApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
@@ -18,7 +18,7 @@ namespace Apizr.Configuring.Request
 
         TApizrRequestOptionsBuilder CancelWith(CancellationToken cancellationToken);
 
-        TApizrRequestOptionsBuilder AddHandlersParameter(string key, object value);
+        TApizrRequestOptionsBuilder AddHandlerParameter(string key, object value);
         
         /// <summary>
         /// Configure logging level for the request
@@ -49,8 +49,8 @@ namespace Apizr.Configuring.Request
 
     #endregion
 
-    #region Combinations
-
+    #region Combinated Builders
+    
     #region Unit
 
     public interface IApizrUnitRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :

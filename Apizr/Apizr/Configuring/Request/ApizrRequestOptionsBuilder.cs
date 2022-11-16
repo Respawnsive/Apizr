@@ -51,7 +51,7 @@ public abstract class
     }
 
     /// <inheritdoc />
-    public TApizrRequestOptionsBuilder AddHandlersParameter(string key, object value)
+    public TApizrRequestOptionsBuilder AddHandlerParameter(string key, object value)
     {
         Options.HandlersParameters[key] = value;
 
@@ -75,6 +75,7 @@ public abstract class
     public TApizrRequestOptionsBuilder Catch(Action<ApizrException> onException, bool letThrowOnExceptionWithEmptyCache)
     {
         Options.OnException = onException;
+        Options.LetThrowOnExceptionWithEmptyCache = letThrowOnExceptionWithEmptyCache;
 
         return Builder;
     }

@@ -249,5 +249,43 @@ namespace Apizr.Tests
             result.Name.Should().Be(minUser.Name);
             result.Id.Should().BeGreaterThanOrEqualTo(1);
         }
+
+        [Fact]
+        public async Task Requesting_With_Context_into_Options_Should_Set_Context()
+        {
+            var watcher = new WatchingRequestHandler();
+
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher));
+
+            var testKey = "TestKey1";
+            var testValue = 1;
+            // Defining Context
+            var context = new Context {{ testKey, testValue } };
+
+            await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithContext(context));
+            watcher.Context.Should().NotBeNull();
+            watcher.Context.Keys.Should().Contain(testKey);
+            watcher.Context.TryGetValue(testKey, out var value).Should().BeTrue();
+            value.Should().Be(testValue);
+        }
+
+        [Fact]
+        public async Task Requesting_With_LogSettings_Into_Options_Should_Win_Over_All_Others()
+        {
+            var watcher = new WatchingRequestHandler();
+
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher));
+            
+            await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.RequestCookies));
+            watcher.Context.Should().NotBeNull();
+            watcher.Context.TryGetLogger(out var logger, out var logLevels, out var verbosity, out var tracerMode)
+                .Should().BeTrue();
+            verbosity.Should().Be(HttpMessageParts.RequestCookies);
+            tracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
+
+            watcher.Options.Should().NotBeNull();
+            watcher.Options.TrafficVerbosity.Should().Be(HttpMessageParts.RequestCookies);
+            watcher.Options.HttpTracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
+        }
     }
 }

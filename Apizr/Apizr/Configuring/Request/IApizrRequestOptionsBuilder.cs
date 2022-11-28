@@ -111,5 +111,20 @@ namespace Apizr.Configuring.Request
 
     #endregion
 
+    #region All
+
+    public interface IApizrRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :
+        IApizrCatchUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>,
+        IApizrCatchResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+    {
+    }
+
+    public interface IApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>, IApizrRequestOptionsBuilderBase
+    { }
+
+    #endregion
+
     #endregion
 }

@@ -35,7 +35,7 @@ namespace Apizr.Authenticating
             HttpRequestMessage clonedRequest = null;
             string token = null;
 
-            var context = request.GetOrBuildPolicyExecutionContext();
+            var context = request.GetOrBuildApizrPolicyExecutionContext();
             if (!context.TryGetLogger(out var logger, out var logLevels, out _, out _))
             {
                 logger = _logger;

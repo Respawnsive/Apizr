@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Caching.Attributes;
+using Apizr.Configuring.Request;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Policing;
@@ -25,6 +26,9 @@ namespace Apizr.Tests.Apis
 
         [Get("/users")]
         Task<ApiResult<User>> GetUsersAsync([Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
+
+        [Get("/users")]
+        Task<ApiResult<User>> GetUsersAsync([RequestOptions] IApizrRequestOptionsBase options);
 
         [Get("/users")]
         Task<ApiResult<User>> GetUsersAsync([Priority] int priority);

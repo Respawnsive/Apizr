@@ -8,6 +8,7 @@ using Apizr.Configuring;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Proper;
 using Apizr.Configuring.Registry;
+using Apizr.Configuring.Request;
 using Apizr.Connecting;
 using Apizr.Extending;
 using Apizr.Helping;
@@ -218,16 +219,25 @@ namespace Apizr
                             var policySelector = new Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>>(
                                     request =>
                                     {
-                                        var context = request.GetOrBuildPolicyExecutionContext();
+                                        var context = request.GetOrBuildApizrPolicyExecutionContext();
                                         if (!context.TryGetLogger(out var contextLogger, out var logLevels, out var verbosity, out var tracerMode))
                                         {
+                                            if (request.Properties.TryGetValue(Constants.ApizrRequestOptionsKey, out var optionsObject) && optionsObject is IApizrRequestOptions requestOptions)
+                                            {
+                                                logLevels = requestOptions.LogLevels;
+                                                verbosity = requestOptions.TrafficVerbosity;
+                                                tracerMode = requestOptions.HttpTracerMode;
+                                            }
+                                            else
+                                            {
+                                                logLevels = apizrOptions.LogLevels;
+                                                verbosity = apizrOptions.TrafficVerbosity;
+                                                tracerMode = apizrOptions.HttpTracerMode;
+                                            }
                                             contextLogger = apizrOptions.Logger;
-                                            logLevels = apizrOptions.LogLevels;
-                                            verbosity = apizrOptions.TrafficVerbosity;
-                                            tracerMode = apizrOptions.HttpTracerMode;
 
                                             context.WithLogger(contextLogger, logLevels, verbosity, tracerMode);
-                                            request.SetPolicyExecutionContext(context);
+                                            request.SetApizrPolicyExecutionContext(context);
                                         }
 
                                         contextLogger.Log(logLevels.Low(), $"{context.OperationKey}: Policy with key {policyRegistryKey} will be applied");

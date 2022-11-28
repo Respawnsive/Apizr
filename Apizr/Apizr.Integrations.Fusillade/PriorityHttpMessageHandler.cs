@@ -59,14 +59,14 @@ namespace Apizr
                 return tcs.Task;
             }
 
-            var context = request.GetOrBuildPolicyExecutionContext();
+            var context = request.GetOrBuildApizrPolicyExecutionContext();
             if (!context.TryGetLogger(out var logger, out var logLevels, out var verbosity, out var tracerMode))
             {
-                if (request.Properties.TryGetValue(Constants.ApizrRequestOptionsKey, out var optionsObject) && optionsObject is IApizrRequestOptions options)
+                if (request.TryGetOptions(out var requestOptions))
                 {
-                    logLevels = options.LogLevels;
-                    verbosity = options.TrafficVerbosity;
-                    tracerMode = options.HttpTracerMode;
+                    logLevels = requestOptions.LogLevels;
+                    verbosity = requestOptions.TrafficVerbosity;
+                    tracerMode = requestOptions.HttpTracerMode;
                 }
                 else
                 {
@@ -77,7 +77,7 @@ namespace Apizr
                 logger = _logger;
 
                 context.WithLogger(logger, logLevels, verbosity, tracerMode);
-                request.SetPolicyExecutionContext(context);
+                request.SetApizrPolicyExecutionContext(context);
             }
 
             var priority = (int) Priority.UserInitiated;

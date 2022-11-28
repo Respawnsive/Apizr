@@ -62,11 +62,12 @@ namespace Apizr.Policing
                 // Guarantee the existence of a context for every policy execution, but only create a new one if needed. This
                 // allows later handlers to flow state if desired.
                 // We do it right after policy selection so one could set the context during selection
-                var context = request.GetPolicyExecutionContext();
+                var context = request.GetApizrPolicyExecutionContext();
                 if (context == null)
                 {
-                    context = new Context();
-                    request.SetPolicyExecutionContext(context);
+                    var interfaceType = (Type)request.Properties[Constants.InterfaceTypeKey];
+                    context = new Context(interfaceType.Name);
+                    request.SetApizrPolicyExecutionContext(context);
                     cleanUpContext = true;
                 }
 
@@ -76,7 +77,7 @@ namespace Apizr.Policing
             {
                 if (cleanUpContext)
                 {
-                    request.SetPolicyExecutionContext(null);
+                    request.SetApizrPolicyExecutionContext(null);
                 }
             }
 

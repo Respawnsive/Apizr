@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Reflection;
 using Apizr.Caching;
 using Apizr.Configuring;
+using Apizr.Configuring.Request;
 using Apizr.Connecting;
 using Apizr.Extending;
 using Apizr.Extending.Configuring;
@@ -23,7 +24,6 @@ using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Registry;
 using Refit;
-using HttpRequestMessageExtensions = Apizr.Policing.HttpRequestMessageExtensions;
 
 [assembly: Apizr.Preserve]
 namespace Apizr
@@ -621,16 +621,25 @@ namespace Apizr
                                             new Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>>(
                                                 request =>
                                                 {
-                                                    var context = request.GetOrBuildPolicyExecutionContext();
+                                                    var context = request.GetOrBuildApizrPolicyExecutionContext();
                                                     if (!context.TryGetLogger(out var contextLogger, out var logLevels, out var verbosity, out var tracerMode))
                                                     {
+                                                        if (request.Properties.TryGetValue(Constants.ApizrRequestOptionsKey, out var optionsObject) && optionsObject is IApizrRequestOptions requestOptions)
+                                                        {
+                                                            logLevels = requestOptions.LogLevels;
+                                                            verbosity = requestOptions.TrafficVerbosity;
+                                                            tracerMode = requestOptions.HttpTracerMode;
+                                                        }
+                                                        else
+                                                        {
+                                                            logLevels = options.LogLevels;
+                                                            verbosity = options.TrafficVerbosity;
+                                                            tracerMode = options.HttpTracerMode;
+                                                        }
                                                         contextLogger = options.Logger;
-                                                        logLevels = options.LogLevels;
-                                                        verbosity = options.TrafficVerbosity;
-                                                        tracerMode = options.HttpTracerMode;
 
                                                         context.WithLogger(contextLogger, logLevels, verbosity, tracerMode);
-                                                        HttpRequestMessageExtensions.SetPolicyExecutionContext(request, context);
+                                                        HttpRequestMessageApizrExtensions.SetApizrPolicyExecutionContext(request, context);
                                                     }
 
                                                     contextLogger.Log(logLevels.Low(), $"{context.OperationKey}: Policy with key {policyRegistryKey} will be applied");

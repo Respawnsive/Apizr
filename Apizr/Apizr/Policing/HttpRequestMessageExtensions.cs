@@ -12,7 +12,7 @@ namespace Apizr.Policing
     /// <summary>
     /// Extension methods for <see cref="HttpRequestMessage"/> Polly integration.
     /// </summary>
-    public static class HttpRequestMessageExtensions
+    public static class HttpRequestMessageApizrExtensions
     {
         /// <summary>
         /// Gets the <see cref="Context"/> associated with the provided <see cref="HttpRequestMessage"/>.
@@ -24,14 +24,9 @@ namespace Apizr.Policing
         /// to executing a <see cref="Policy"/>, if one does not already exist. The <see cref="Context"/> will be provided
         /// to the policy for use inside the <see cref="Policy"/> and in other message handlers.
         /// </remarks>
-        public static Context GetOrBuildPolicyExecutionContext(this HttpRequestMessage request)
+        public static Context GetOrBuildApizrPolicyExecutionContext(this HttpRequestMessage request)
         {
-            if (request == null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-
-            var context = request.GetPolicyExecutionContext();
+            var context = request.GetApizrPolicyExecutionContext();
             if (context == null)
             {
                 var interfaceType = (Type)request.Properties[Constants.InterfaceTypeKey];
@@ -51,23 +46,39 @@ namespace Apizr.Policing
         /// to executing a <see cref="Policy"/>, if one does not already exist. The <see cref="Context"/> will be provided
         /// to the policy for use inside the <see cref="Policy"/> and in other message handlers.
         /// </remarks>
-        public static Context GetPolicyExecutionContext(this HttpRequestMessage request)
+        public static Context GetApizrPolicyExecutionContext(this HttpRequestMessage request)
         {
-            if (request == null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-
-            Context context = null;
-            if (request.Properties.TryGetValue(Constants.PollyExecutionContextKey, out var contextProperty) && contextProperty is Context contextValue)
-            {
-                context = contextValue;
-            }
-            else if (request.Properties.TryGetValue(Constants.ApizrRequestOptionsKey, out var optionsProperty) && optionsProperty is IApizrRequestOptions optionsValue)
+            var context = request.GetPolicyExecutionContext();
+            if (context == null && request.Properties.TryGetValue(Constants.ApizrRequestOptionsKey, out var optionsProperty) && optionsProperty is IApizrRequestOptions optionsValue)
             {
                 context = optionsValue.Context;
             }
+
             return context;
+        }
+
+        /// <summary>
+        /// Gets the <see cref="IApizrRequestOptions"/> associated with the provided <see cref="HttpRequestMessage"/>.
+        /// </summary>
+        /// <param name="request">The <see cref="HttpRequestMessage"/>.</param>
+        /// <returns>The <see cref="IApizrRequestOptions"/> if set, otherwise <c>null</c>.</returns>
+        public static IApizrRequestOptions GetApizrRequestOptions(this HttpRequestMessage request) =>
+            request.Properties.TryGetValue(Constants.ApizrRequestOptionsKey, out var optionsProperty) &&
+            optionsProperty is IApizrRequestOptions optionsValue
+                ? optionsValue
+                : null;
+
+        /// <summary>
+        /// Try to get the <see cref="IApizrRequestOptions"/> associated with the provided <see cref="HttpRequestMessage"/>.
+        /// </summary>
+        /// <param name="request">The <see cref="HttpRequestMessage"/>.</param>
+        /// <param name="options">The <see cref="IApizrRequestOptions"/> if set, otherwise <c>null</c>.</param>
+        /// <returns></returns>
+        public static bool TryGetOptions(this HttpRequestMessage request, out IApizrRequestOptions options)
+        {
+            options = request.GetApizrRequestOptions();
+
+            return options != null;
         }
 
         /// <summary>
@@ -80,14 +91,7 @@ namespace Apizr.Policing
         /// to executing a <see cref="Policy"/>, if one does not already exist. The <see cref="Context"/> will be provided
         /// to the policy for use inside the <see cref="Policy"/> and in other message handlers.
         /// </remarks>
-        public static void SetPolicyExecutionContext(this HttpRequestMessage request, Context context)
-        {
-            if (request == null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-
-            request.Properties[Constants.PollyExecutionContextKey] = context;
-        }
+        public static void SetApizrPolicyExecutionContext(this HttpRequestMessage request, Context context) =>
+            request.SetPolicyExecutionContext(context);
     }
 }

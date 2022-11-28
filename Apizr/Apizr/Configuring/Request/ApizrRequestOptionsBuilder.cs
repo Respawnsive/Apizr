@@ -27,9 +27,12 @@ public abstract class
     public TApizrRequestOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
         HttpMessageParts trafficVerbosity = HttpMessageParts.All, params LogLevel[] logLevels)
     {
-        Options.HttpTracerMode = httpTracerMode;
-        Options.TrafficVerbosity = trafficVerbosity;
-        Options.LogLevels = logLevels;
+        if(Options.HttpTracerMode == HttpTracerMode.Unspecified)
+            Options.HttpTracerMode = httpTracerMode;
+        if(Options.TrafficVerbosity == HttpMessageParts.Unspecified)
+            Options.TrafficVerbosity = trafficVerbosity;
+        if(Options.LogLevels?.Length is null or 0)
+            Options.LogLevels = logLevels;
 
         return Builder;
     }

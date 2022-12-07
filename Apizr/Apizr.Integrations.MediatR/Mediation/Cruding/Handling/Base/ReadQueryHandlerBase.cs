@@ -23,8 +23,8 @@ namespace Apizr.Mediation.Cruding.Handling.Base
         where TModelEntity : class 
         where TApiEntity : class 
         where TQuery : ReadQueryBase<TQueryResult, TApiEntityKey, TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrResultRequestOptions
-        where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         protected ReadQueryHandlerBase(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {
@@ -53,8 +53,8 @@ namespace Apizr.Mediation.Cruding.Handling.Base
         IMediationQueryHandler<TQuery, TQueryResult> 
         where TApiEntity : class 
         where TQuery : ReadQueryBase<TQueryResult, TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrResultRequestOptions
-        where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         protected ReadQueryHandlerBase(IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {

@@ -1,15 +1,18 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Configuring;
+using Apizr.Configuring.Manager;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Polly;
 using Refit;
 
 namespace Apizr.Extending.Configuring.Common
@@ -80,7 +83,7 @@ namespace Apizr.Extending.Configuring.Common
         /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
         {
-            var authenticationHandler = new Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>((serviceProvider, options) =>
+            var authenticationHandler = new Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>((serviceProvider, options) =>
                 new AuthenticationHandler(serviceProvider.GetService<ILogger>(), options, refreshTokenFactory));
             Options.DelegatingHandlersExtendedFactories.Add(authenticationHandler);
 
@@ -89,7 +92,7 @@ namespace Apizr.Extending.Configuring.Common
 
         /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(
-            Func<IServiceProvider, IApizrOptionsBase, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase
+            Func<IServiceProvider, IApizrManagerOptionsBase, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase
         {
             Options.DelegatingHandlersExtendedFactories.Add(authenticationHandlerFactory);
 
@@ -132,7 +135,7 @@ namespace Apizr.Extending.Configuring.Common
             => AddDelegatingHandler((serviceProvider, _) => delegatingHandlerFactory(serviceProvider));
 
         /// <inheritdoc />
-        public IApizrExtendedCommonOptionsBuilder AddDelegatingHandler(Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler> delegatingHandlerFactory)
+        public IApizrExtendedCommonOptionsBuilder AddDelegatingHandler(Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler> delegatingHandlerFactory)
         {
             Options.DelegatingHandlersExtendedFactories.Add(delegatingHandlerFactory);
 
@@ -143,6 +146,60 @@ namespace Apizr.Extending.Configuring.Common
         public IApizrExtendedCommonOptionsBuilder ConfigureHttpClientBuilder(Action<IHttpClientBuilder> httpClientBuilder)
         {
             Options.HttpClientBuilder = httpClientBuilder;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrExtendedCommonOptionsBuilder WithContext(Context context,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
+        {
+
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.Context ??= context;
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.Context = context;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.Context == null)
+                    {
+                        Options.Context = context;
+                    }
+                    else
+                    {
+                        var operationKey = !string.IsNullOrWhiteSpace(context.OperationKey)
+                            ? context.OperationKey
+                            : Options.Context.OperationKey;
+
+                        Options.Context = new Context(operationKey,
+                            Options.Context.Concat(context.ToList()).ToDictionary(x => x.Key, x => x.Value));
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrExtendedCommonOptionsBuilder WithCatching(Action<ApizrException> onException,
+            bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+        {
+            Options.OnException = onException;
+            Options.LetThrowOnExceptionWithEmptyCache = letThrowOnExceptionWithEmptyCache;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrExtendedCommonOptionsBuilder WithHandlerParameter(string key, object value)
+        {
+            Options.HandlersParameters[key] = value;
 
             return this;
         }

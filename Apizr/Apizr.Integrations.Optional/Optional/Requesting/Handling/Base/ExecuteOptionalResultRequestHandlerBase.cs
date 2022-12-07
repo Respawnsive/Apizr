@@ -17,8 +17,8 @@ namespace Apizr.Optional.Requesting.Handling.Base
     public abstract class ExecuteOptionalResultRequestHandlerBase<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder> :
         ExecuteResultRequestHandlerBase<TWebApi, TModelResultData, TApiResultData, Option<TModelResultData, ApizrException<TModelResultData>>, TApiRequestData, TModelRequestData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>
         where TRequest : ExecuteOptionalResultRequestBase<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrResultRequestOptions
-        where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         protected ExecuteOptionalResultRequestHandlerBase(IApizrManager<TWebApi> webApiManager) : base(webApiManager)
         {
@@ -35,8 +35,8 @@ namespace Apizr.Optional.Requesting.Handling.Base
     public abstract class ExecuteOptionalResultRequestHandlerBase<TWebApi, TModelData, TApiData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder> :
         ExecuteResultRequestHandlerBase<TWebApi, TModelData, TApiData, Option<TModelData, ApizrException<TModelData>>, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>
         where TRequest : ExecuteOptionalResultRequestBase<TWebApi, TModelData, TApiData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrResultRequestOptions
-        where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         protected ExecuteOptionalResultRequestHandlerBase(IApizrManager<TWebApi> webApiManager) : base(webApiManager)
         {
@@ -52,8 +52,8 @@ namespace Apizr.Optional.Requesting.Handling.Base
     public abstract class ExecuteOptionalResultRequestHandlerBase<TWebApi, TApiData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder> : 
         ExecuteResultRequestHandlerBase<TWebApi, TApiData, TApiData, Option<TApiData, ApizrException<TApiData>>, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>
         where TRequest : ExecuteOptionalResultRequestBase<TWebApi, TApiData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrResultRequestOptions
-        where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         protected ExecuteOptionalResultRequestHandlerBase(IApizrManager<TWebApi> webApiManager) : base(webApiManager)
         {

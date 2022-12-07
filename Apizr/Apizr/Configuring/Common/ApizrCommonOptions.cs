@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using Apizr.Caching;
+using Apizr.Configuring.Manager;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
@@ -22,7 +23,7 @@ namespace Apizr.Configuring.Common
             HttpTracerModeFactory = () => HttpTracerMode.Everything;
             TrafficVerbosityFactory = () => HttpMessageParts.All;
             LogLevelsFactory = () => new []{Constants.LowLogLevel, Constants.MediumLogLevel, Constants.HighLogLevel};
-            LoggerFactoryFactory = () => new DebugLoggerFactory(LogLevel.Trace);
+            LoggerFactoryFactory = () => new DebugLoggerFactory(Constants.LowLogLevel);
             PolicyRegistryFactory = () => new PolicyRegistry();
             HttpClientHandlerFactory = () => new HttpClientHandler();
             HttpClientFactory = (handler, uri) => new HttpClient(handler, false) {BaseAddress = uri};
@@ -30,7 +31,7 @@ namespace Apizr.Configuring.Common
             ConnectivityHandlerFactory = () => new DefaultConnectivityHandler(() => true);
             CacheHandlerFactory = () => new VoidCacheHandler();
             MappingHandlerFactory = () => new VoidMappingHandler();
-            DelegatingHandlersFactories = new List<Func<ILogger, IApizrOptionsBase, DelegatingHandler>>();
+            DelegatingHandlersFactories = new List<Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>>();
         }
 
         private Func<Uri> _baseUriFactory;
@@ -87,7 +88,7 @@ namespace Apizr.Configuring.Common
         public Func<IMappingHandler> MappingHandlerFactory { get; set; }
 
         /// <inheritdoc />
-        public IList<Func<ILogger, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
+        public IList<Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
 
 
         private Func<HttpTracerMode> _httpTracerModeFactory;

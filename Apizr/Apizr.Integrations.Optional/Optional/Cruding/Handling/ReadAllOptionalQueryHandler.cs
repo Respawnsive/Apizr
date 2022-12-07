@@ -20,7 +20,7 @@ namespace Apizr.Optional.Cruding.Handling
     /// <typeparam name="TApiEntityReadAllResult">The received api result type</typeparam>
     /// <typeparam name="TReadAllParams">The query parameters type</typeparam>
     public class ReadAllOptionalQueryHandler<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams> : 
-        ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>, IApizrResultRequestOptions, IApizrResultRequestOptionsBuilder> 
+        ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>, IApizrRequestOptions, IApizrRequestOptionsBuilder> 
         where TApiEntity : class
     {
         public ReadAllOptionalQueryHandler(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
@@ -36,7 +36,7 @@ namespace Apizr.Optional.Cruding.Handling
                     .MapAsync(_ =>
                         CrudApiManager.ExecuteAsync<TModelEntityReadAllResult, TApiEntityReadAllResult>(
                             (options, api) => api.ReadAll(request.Parameters,
-                                options, options.CancellationToken), (Action<IApizrCatchResultRequestOptionsBuilder>) request.OptionsBuilder))
+                                options, options.CancellationToken), (Action<IApizrRequestOptionsBuilder>) request.OptionsBuilder))
                     .ConfigureAwait(false);
             }
             catch (ApizrException<TModelEntityReadAllResult> e)
@@ -54,7 +54,7 @@ namespace Apizr.Optional.Cruding.Handling
     /// <typeparam name="TModelEntityReadAllResult">The returned model result type</typeparam>
     /// <typeparam name="TApiEntityReadAllResult">The received api result type</typeparam>
     public class ReadAllOptionalQueryHandler<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult> : 
-        ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, ReadAllOptionalQuery<TModelEntityReadAllResult>, Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>, IApizrResultRequestOptions, IApizrResultRequestOptionsBuilder> 
+        ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, ReadAllOptionalQuery<TModelEntityReadAllResult>, Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>, IApizrRequestOptions, IApizrRequestOptionsBuilder> 
         where TApiEntity : class
     {
         public ReadAllOptionalQueryHandler(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, IDictionary<string, object>>> crudApiManager) : base(crudApiManager)
@@ -70,7 +70,7 @@ namespace Apizr.Optional.Cruding.Handling
                     .MapAsync(_ =>
                         CrudApiManager.ExecuteAsync<TModelEntityReadAllResult, TApiEntityReadAllResult>(
                             (options, api) => api.ReadAll(request.Parameters,
-                                options, options.CancellationToken), (Action<IApizrCatchResultRequestOptionsBuilder>) request.OptionsBuilder))
+                                options, options.CancellationToken), (Action<IApizrRequestOptionsBuilder>) request.OptionsBuilder))
                     .ConfigureAwait(false);
             }
             catch (ApizrException<TModelEntityReadAllResult> e)

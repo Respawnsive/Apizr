@@ -23,8 +23,8 @@ namespace Apizr.Mediation.Cruding.Handling.Base
         where TModelEntity : class
         where TApiEntity : class 
         where TCommand : DeleteCommandBase<TModelEntity, TApiEntityKey, TCommandResult, TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrUnitRequestOptions
-        where TApizrRequestOptionsBuilder : IApizrUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         protected DeleteCommandHandlerBase(IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {
@@ -54,8 +54,8 @@ namespace Apizr.Mediation.Cruding.Handling.Base
         where TModelEntity : class
         where TApiEntity : class
         where TCommand : DeleteCommandBase<TModelEntity, int, TCommandResult, TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrUnitRequestOptions
-        where TApizrRequestOptionsBuilder : IApizrUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         protected DeleteCommandHandlerBase(IApizrManager<ICrudApi<TApiEntity, int, TReadAllResult, TReadAllParams>> crudApiManager) : base(crudApiManager)
         {

@@ -26,14 +26,14 @@ namespace Apizr.Optional.Requesting.Sending
 
         /// <inheritdoc />
         public Task<Option<Unit, ApizrException>> SendFor<TWebApi>(Expression<Func<TWebApi, Task>> executeApiMethod,
-            Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null) =>
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(new ExecuteOptionalUnitRequest<TWebApi>(executeApiMethod, optionsBuilder),
                 CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <inheritdoc />
         public Task<Option<Unit, ApizrException>> SendFor<TWebApi>(
-            Expression<Func<IApizrUnitRequestOptions, TWebApi, Task>> executeApiMethod,
-            Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null) =>
+            Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(new ExecuteOptionalUnitRequest<TWebApi>(executeApiMethod, optionsBuilder),
                 CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
@@ -44,15 +44,15 @@ namespace Apizr.Optional.Requesting.Sending
         /// <inheritdoc />
         public Task<Option<Unit, ApizrException>> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData,
-            Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null) =>
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(
                 new ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData,
                     optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <inheritdoc />
         public Task<Option<Unit, ApizrException>> SendFor<TWebApi, TModelData, TApiData>(
-            Expression<Func<IApizrUnitRequestOptions, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData,
-            Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null) =>
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(
                 new ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData,
                     optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
@@ -68,14 +68,14 @@ namespace Apizr.Optional.Requesting.Sending
         /// <inheritdoc />
         public Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TWebApi, TApiData>(
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(new ExecuteOptionalResultRequest<TWebApi, TApiData>(executeApiMethod, optionsBuilder),
                 CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <inheritdoc />
         public Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TWebApi, TApiData>(
-            Expression<Func<IApizrResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(new ExecuteOptionalResultRequest<TWebApi, TApiData>(executeApiMethod, optionsBuilder),
                 CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
         
@@ -86,15 +86,15 @@ namespace Apizr.Optional.Requesting.Sending
         /// <inheritdoc />
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(
                 new ExecuteOptionalResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, optionsBuilder),
                 CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <inheritdoc />
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
-            Expression<Func<IApizrResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(
                 new ExecuteOptionalResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, optionsBuilder),
                 CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
@@ -102,16 +102,16 @@ namespace Apizr.Optional.Requesting.Sending
         /// <inheritdoc />
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
             Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
-            Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(
                 new ExecuteOptionalResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData,
                     optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <inheritdoc />
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TWebApi, TModelData, TApiData>(
-            Expression<Func<IApizrResultRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData,
-            Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(
                 new ExecuteOptionalResultRequest<TWebApi, TModelData, TApiData>(executeApiMethod, modelData,
                     optionsBuilder), CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
@@ -124,7 +124,7 @@ namespace Apizr.Optional.Requesting.Sending
         public Task<Option<TModelResultData, ApizrException<TModelResultData>>> SendFor<TWebApi, TModelResultData,
             TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
+            TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(
                 new ExecuteOptionalResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData,
                     TModelRequestData>(executeApiMethod, modelRequestData, optionsBuilder),
@@ -133,9 +133,9 @@ namespace Apizr.Optional.Requesting.Sending
         /// <inheritdoc />
         public Task<Option<TModelResultData, ApizrException<TModelResultData>>> SendFor<TWebApi, TModelResultData,
             TApiResultData, TApiRequestData, TModelRequestData>(
-            Expression<Func<IApizrResultRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>>
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>>
                 executeApiMethod,
-            TModelRequestData modelRequestData, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) =>
+            TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             _mediator.Send(
                 new ExecuteOptionalResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData,
                     TModelRequestData>(executeApiMethod, modelRequestData, optionsBuilder),
@@ -164,13 +164,13 @@ namespace Apizr.Optional.Requesting.Sending
 
         /// <inheritdoc />
         public Task<Option<Unit, ApizrException>> SendFor(Expression<Func<TWebApi, Task>> executeApiMethod,
-            Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null)
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => _apizrMediator.SendFor<TWebApi>(executeApiMethod, optionsBuilder);
 
         /// <inheritdoc />
         public Task<Option<Unit, ApizrException>> SendFor(
-            Expression<Func<IApizrUnitRequestOptions, TWebApi, Task>> executeApiMethod,
-            Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null)
+            Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => _apizrMediator.SendFor<TWebApi>(executeApiMethod, optionsBuilder);
 
         #endregion
@@ -180,13 +180,13 @@ namespace Apizr.Optional.Requesting.Sending
         /// <inheritdoc />
         public Task<Option<Unit, ApizrException>> SendFor<TModelData, TApiData>(
             Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
-            TModelData modelData, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null)
+            TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder);
 
         /// <inheritdoc />
         public Task<Option<Unit, ApizrException>> SendFor<TModelData, TApiData>(
-            Expression<Func<IApizrUnitRequestOptions, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData,
-            Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null)
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder);
         
         #endregion
@@ -200,13 +200,13 @@ namespace Apizr.Optional.Requesting.Sending
         /// <inheritdoc />
         public Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TApiData>(
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null)
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => _apizrMediator.SendFor<TWebApi, TApiData>(executeApiMethod, optionsBuilder);
 
         /// <inheritdoc />
         public Task<Option<TApiData, ApizrException<TApiData>>> SendFor<TApiData>(
-            Expression<Func<IApizrResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null)
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => _apizrMediator.SendFor<TWebApi, TApiData>(executeApiMethod, optionsBuilder);
 
         #endregion
@@ -216,25 +216,25 @@ namespace Apizr.Optional.Requesting.Sending
         /// <inheritdoc />
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TModelData, TApiData>(
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null)
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, optionsBuilder);
 
         /// <inheritdoc />
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TModelData, TApiData>(
-            Expression<Func<IApizrResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null)
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, optionsBuilder);
 
         /// <inheritdoc />
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TModelData, TApiData>(
             Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
-            Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null)
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder);
 
         /// <inheritdoc />
         public Task<Option<TModelData, ApizrException<TModelData>>> SendFor<TModelData, TApiData>(
-            Expression<Func<IApizrResultRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
-            TModelData modelData, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null)
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
+            TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => _apizrMediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder);
 
         #endregion
@@ -245,16 +245,16 @@ namespace Apizr.Optional.Requesting.Sending
         public Task<Option<TModelResultData, ApizrException<TModelResultData>>> SendFor<TModelResultData,
             TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null)
+            TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => _apizrMediator.SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
                 executeApiMethod, modelRequestData, optionsBuilder);
 
         /// <inheritdoc />
         public Task<Option<TModelResultData, ApizrException<TModelResultData>>> SendFor<TModelResultData,
             TApiResultData, TApiRequestData, TModelRequestData>(
-            Expression<Func<IApizrResultRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>>
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>>
                 executeApiMethod,
-            TModelRequestData modelRequestData, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null)
+            TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => _apizrMediator.SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
                 executeApiMethod, modelRequestData, optionsBuilder);
 

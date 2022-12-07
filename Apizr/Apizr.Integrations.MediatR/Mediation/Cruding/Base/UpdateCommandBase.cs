@@ -13,8 +13,8 @@ namespace Apizr.Mediation.Cruding.Base
     /// <typeparam name="TRequestData">The request data type</typeparam>
     /// <typeparam name="TResultData">The result data type</typeparam>
     public abstract class UpdateCommandBase<TKey, TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : MediationCommandBase<TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrUnitRequestOptions
-        where TApizrRequestOptionsBuilder : IApizrUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         /// <summary>
         /// The top level base mediation Update command constructor
@@ -45,8 +45,8 @@ namespace Apizr.Mediation.Cruding.Base
     /// <typeparam name="TRequestData">The request data type</typeparam>
     /// <typeparam name="TResultData">The result data type</typeparam>
     public abstract class UpdateCommandBase<TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : UpdateCommandBase<int, TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrUnitRequestOptions
-        where TApizrRequestOptionsBuilder : IApizrUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         /// <inheritdoc />
         protected UpdateCommandBase(int key, TRequestData requestData, Action<TApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, requestData, optionsBuilder)
@@ -59,8 +59,8 @@ namespace Apizr.Mediation.Cruding.Base
     /// </summary>
     /// <typeparam name="TRequestData">The request data type</typeparam>
     public abstract class UpdateCommandBase<TRequestData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : UpdateCommandBase<TRequestData, Unit, TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrUnitRequestOptions
-        where TApizrRequestOptionsBuilder : IApizrUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         /// <inheritdoc />
         protected UpdateCommandBase(int key, TRequestData requestData, Action<TApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, requestData, optionsBuilder)

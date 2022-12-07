@@ -8,6 +8,7 @@ using System.Reactive.Threading.Tasks;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring;
+using Apizr.Configuring.Manager;
 using Apizr.Configuring.Request;
 using Apizr.Extending;
 using Apizr.Policing;
@@ -22,10 +23,10 @@ namespace Apizr
         private readonly OperationQueue _opQueue;
         private readonly Dictionary<string, InflightRequest> _inflightResponses = new Dictionary<string, InflightRequest>();
         private readonly ILogger _logger;
-        private readonly IApizrOptionsBase _apizrOptions;
+        private readonly IApizrManagerOptionsBase _apizrOptions;
         private long? _maxBytesToRead;
 
-        public PriorityHttpMessageHandler(HttpMessageHandler innerHandler, ILogger logger, IApizrOptionsBase apizrOptions, long? maxBytesToRead = null, OperationQueue opQueue = null) : base(innerHandler)
+        public PriorityHttpMessageHandler(HttpMessageHandler innerHandler, ILogger logger, IApizrManagerOptionsBase apizrOptions, long? maxBytesToRead = null, OperationQueue opQueue = null) : base(innerHandler)
         {
             _logger = logger;
             _apizrOptions = apizrOptions;

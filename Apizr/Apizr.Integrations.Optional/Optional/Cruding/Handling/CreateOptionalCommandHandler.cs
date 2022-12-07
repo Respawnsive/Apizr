@@ -19,7 +19,7 @@ namespace Apizr.Optional.Cruding.Handling
     /// <typeparam name="TReadAllResult">The returned result type</typeparam>
     /// <typeparam name="TReadAllParams">The read all params</typeparam>
     public class CreateOptionalCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> : 
-        CreateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, CreateOptionalCommand<TModelEntity>, Option<TModelEntity, ApizrException>, IApizrResultRequestOptions, IApizrResultRequestOptionsBuilder>
+        CreateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, CreateOptionalCommand<TModelEntity>, Option<TModelEntity, ApizrException>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
         where TModelEntity : class
         where TApiEntity : class
     {
@@ -37,7 +37,7 @@ namespace Apizr.Optional.Cruding.Handling
                     .MapAsync(_ =>
                         CrudApiManager.ExecuteAsync<TModelEntity, TApiEntity>(
                                 (options, api, apiData) => api.Create(apiData, options.Context, options.CancellationToken), request.RequestData,
-                                (Action<IApizrCatchResultRequestOptionsBuilder>) request.OptionsBuilder))
+                                (Action<IApizrRequestOptionsBuilder>) request.OptionsBuilder))
                     .ConfigureAwait(false);
             }
             catch (ApizrException e)

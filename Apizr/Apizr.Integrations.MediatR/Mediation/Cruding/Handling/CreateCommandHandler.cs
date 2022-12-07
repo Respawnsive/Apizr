@@ -16,7 +16,7 @@ namespace Apizr.Mediation.Cruding.Handling
     /// <typeparam name="TReadAllParams">The read all params</typeparam>
     public class CreateCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> :
         CreateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams,
-            CreateCommand<TModelEntity>, TModelEntity, IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>
+            CreateCommand<TModelEntity>, TModelEntity, IApizrRequestOptions, IApizrRequestOptionsBuilder>
         where TModelEntity : class
         where TApiEntity : class
     {

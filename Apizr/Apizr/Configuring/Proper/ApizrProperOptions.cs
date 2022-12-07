@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;
@@ -23,7 +24,7 @@ namespace Apizr.Configuring.Proper
         /// <param name="httpTracerMode">The http tracer mode</param>
         /// <param name="trafficVerbosity">The traffic verbosity</param>
         /// <param name="logLevels">The log levels</param>
-        public ApizrProperOptions(IApizrSharedOptions sharedOptions,
+        public ApizrProperOptions(IApizrSharedRegistrationOptions sharedOptions,
             Type webApiType,
             string[] assemblyPolicyRegistryKeys,
             string[] webApiPolicyRegistryKeys, 
@@ -104,6 +105,6 @@ namespace Apizr.Configuring.Proper
         public Func<HttpMessageHandler, Uri, HttpClient> HttpClientFactory { get; set; }
 
         /// <inheritdoc />
-        public IList<Func<ILogger, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
+        public IList<Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
     }
 }

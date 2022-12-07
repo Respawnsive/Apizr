@@ -13,7 +13,9 @@ using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Caching.Attributes;
 using Apizr.Configuring;
+using Apizr.Configuring.Manager;
 using Apizr.Configuring.Request;
+using Apizr.Configuring.Shared;
 using Apizr.Connecting;
 using Apizr.Extending;
 using Apizr.Logging;
@@ -33,37 +35,14 @@ namespace Apizr
 {
     public abstract class ApizrManager : IApizrManager
     {
-        internal static IApizrUnitRequestOptionsBuilder CreateRequestOptionsBuilder(Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null)
+        internal static IApizrRequestOptionsBuilder CreateRequestOptionsBuilder(
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => CreateRequestOptionsBuilder(null, optionsBuilder);
+
+        internal static IApizrRequestOptionsBuilder CreateRequestOptionsBuilder(IApizrGlobalSharedOptionsBase baseOptions, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
-            var requestOptions = new ApizrRequestOptions();
-            var builder = new ApizrUnitRequestOptionsBuilder(requestOptions);
-            optionsBuilder?.Invoke(builder);
-
-            return builder;
-        }
-
-        internal static IApizrCatchUnitRequestOptionsBuilder CreateRequestOptionsBuilder(Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null)
-        {
-            var requestOptions = new ApizrRequestOptions();
-            var builder = new ApizrCatchUnitRequestOptionsBuilder(requestOptions);
-            optionsBuilder?.Invoke(builder);
-
-            return builder;
-        }
-
-        internal static IApizrResultRequestOptionsBuilder CreateRequestOptionsBuilder(Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null)
-        {
-            var requestOptions = new ApizrRequestOptions();
-            var builder = new ApizrResultRequestOptionsBuilder(requestOptions);
-            optionsBuilder?.Invoke(builder);
-
-            return builder;
-        }
-
-        internal static IApizrCatchResultRequestOptionsBuilder CreateRequestOptionsBuilder(Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null)
-        {
-            var requestOptions = new ApizrRequestOptions();
-            var builder = new ApizrCatchResultRequestOptionsBuilder(requestOptions);
+            var requestOptions = new ApizrRequestOptions(baseOptions);
+            var builder = new ApizrRequestOptionsBuilder(requestOptions);
             optionsBuilder?.Invoke(builder);
 
             return builder;
@@ -81,7 +60,7 @@ namespace Apizr
         private readonly IMappingHandler _mappingHandler;
         private readonly IReadOnlyPolicyRegistry<string> _policyRegistry;
         private readonly string _webApiFriendlyName;
-        private readonly IApizrOptions<TWebApi> _apizrOptions;
+        private readonly IApizrManagerOptions<TWebApi> _apizrOptions;
 
         private readonly Dictionary<MethodDetails, (CacheAttributeBase cacheAttribute, string cacheKey)> _cachingMethodsSet;
         private readonly Dictionary<MethodDetails, LogAttributeBase> _loggingMethodsSet;
@@ -96,7 +75,7 @@ namespace Apizr
         /// <param name="mappingHandler">The mapping handler</param>
         /// <param name="policyRegistry">The policy registry</param>
         /// <param name="apizrOptions">The web api dedicated options</param>
-        public ApizrManager(ILazyFactory<TWebApi> lazyWebApi, IConnectivityHandler connectivityHandler, ICacheHandler cacheHandler, IMappingHandler mappingHandler, IReadOnlyPolicyRegistry<string> policyRegistry, IApizrOptions<TWebApi> apizrOptions)
+        public ApizrManager(ILazyFactory<TWebApi> lazyWebApi, IConnectivityHandler connectivityHandler, ICacheHandler cacheHandler, IMappingHandler mappingHandler, IReadOnlyPolicyRegistry<string> policyRegistry, IApizrManagerOptions<TWebApi> apizrOptions)
         {
             _lazyWebApi = lazyWebApi;
             _connectivityHandler = connectivityHandler;
@@ -117,7 +96,7 @@ namespace Apizr
         public TWebApi Api => _lazyWebApi.Value;
 
         /// <inheritdoc />
-        public IApizrOptionsBase Options => _apizrOptions;
+        public IApizrManagerOptionsBase Options => _apizrOptions;
 
         #region ExecuteAsync
 
@@ -125,16 +104,16 @@ namespace Apizr
         
         /// <inheritdoc />
         public Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod,
-            Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null)
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync(
                 (_, api) =>
                     executeApiMethod.Compile()(api), optionsBuilder);
 
         /// <inheritdoc />
-        public async Task ExecuteAsync(Expression<Func<IApizrCatchUnitRequestOptions, TWebApi, Task>> executeApiMethod,
-            Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null)
+        public async Task ExecuteAsync(Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder);
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
             var logAttribute = GetLogAttribute(methodDetails);
@@ -160,7 +139,7 @@ namespace Apizr
 
                 var pollyContext = new Context(methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.Context ?? new Context());
                 pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels, requestOptionsBuilder.ApizrOptions.TrafficVerbosity, requestOptionsBuilder.ApizrOptions.HttpTracerMode);
-                requestOptionsBuilder.WithContext(pollyContext);
+                requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
                 await policy.ExecuteAsync((_, _) => executeApiMethod.Compile()(requestOptionsBuilder.ApizrOptions, webApi), requestOptionsBuilder.ApizrOptions.Context,
                     requestOptionsBuilder.ApizrOptions.CancellationToken);
             }
@@ -183,18 +162,18 @@ namespace Apizr
 
         /// <inheritdoc />
         public Task ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
-            TModelData modelData, Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null)
+            TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync<TModelData, TApiData>(
                 (_, api, apiData) =>
                     executeApiMethod.Compile()(api, apiData), modelData, optionsBuilder);
 
         /// <inheritdoc />
         public async Task ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<IApizrCatchUnitRequestOptions, TWebApi, TApiData, Task>> executeApiMethod,
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod,
             TModelData modelData,
-            Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null)
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder);
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
             var logAttribute = GetLogAttribute(methodDetails);
@@ -224,7 +203,7 @@ namespace Apizr
 
                 var pollyContext = new Context(methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.Context ?? new Context());
                 pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels, requestOptionsBuilder.ApizrOptions.TrafficVerbosity, requestOptionsBuilder.ApizrOptions.HttpTracerMode);
-                requestOptionsBuilder.WithContext(pollyContext);
+                requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
                 await policy.ExecuteAsync((_, _) => executeApiMethod.Compile()(requestOptionsBuilder.ApizrOptions, webApi, apiData),
                     requestOptionsBuilder.ApizrOptions.Context, requestOptionsBuilder.ApizrOptions.CancellationToken);
             }
@@ -251,7 +230,7 @@ namespace Apizr
 
         /// <inheritdoc />
         public Task<TApiData> ExecuteAsync<TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null)
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync(
                 (_, api) => executeApiMethod.Compile()(api), optionsBuilder);
 
@@ -260,30 +239,30 @@ namespace Apizr
             ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
                 Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
                 TModelRequestData modelRequestData,
-                Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null)
+                Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
                 (_, api, apiData) => executeApiMethod.Compile()(api, apiData), modelRequestData, optionsBuilder);
 
         /// <inheritdoc />
         public Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
-            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null)
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync<TModelData, TApiData>(
                 (_, api, apiData) => executeApiMethod.Compile()(api, apiData), modelData, optionsBuilder);
 
         /// <inheritdoc />
         public Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null)
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync<TModelData, TApiData>(
                 (_, api) => executeApiMethod.Compile()(api), optionsBuilder);
 
         /// <inheritdoc />
         public async Task<TApiData> ExecuteAsync<TApiData>(
-            Expression<Func<IApizrCatchResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null)
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder);
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
             var logAttribute = GetLogAttribute(methodDetails);
@@ -344,7 +323,7 @@ namespace Apizr
 
                     var pollyContext = new Context(methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.Context ?? new Context());
                     pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels, requestOptionsBuilder.ApizrOptions.TrafficVerbosity, requestOptionsBuilder.ApizrOptions.HttpTracerMode);
-                    requestOptionsBuilder.WithContext(pollyContext);
+                    requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
                     result = await policy.ExecuteAsync((_, _) => executeApiMethod.Compile()(requestOptionsBuilder.ApizrOptions, webApi),
                         requestOptionsBuilder.ApizrOptions.Context, requestOptionsBuilder.ApizrOptions.CancellationToken);
                 }
@@ -399,12 +378,12 @@ namespace Apizr
         /// <inheritdoc />
         public async Task<TModelResultData>
             ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                Expression<Func<IApizrCatchResultRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>>
+                Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>>
                     executeApiMethod,
                 TModelRequestData modelRequestData,
-                Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null)
+                Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder);
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiResultData>(executeApiMethod);
             var logAttribute = GetLogAttribute(methodDetails);
@@ -470,7 +449,7 @@ namespace Apizr
 
                     var pollyContext = new Context(methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.Context ?? new Context());
                     pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels, requestOptionsBuilder.ApizrOptions.TrafficVerbosity, requestOptionsBuilder.ApizrOptions.HttpTracerMode);
-                    requestOptionsBuilder.WithContext(pollyContext);
+                    requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
                     result = await policy.ExecuteAsync(
                         (_, _) => executeApiMethod.Compile()(requestOptionsBuilder.ApizrOptions, webApi,
                             apiRequestData), requestOptionsBuilder.ApizrOptions.Context,
@@ -527,11 +506,11 @@ namespace Apizr
 
         /// <inheritdoc />
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<IApizrCatchResultRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData,
-            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null)
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder);
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
             var logAttribute = GetLogAttribute(methodDetails);
@@ -597,7 +576,7 @@ namespace Apizr
 
                     var pollyContext = new Context(methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.Context ?? new Context());
                     pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels, requestOptionsBuilder.ApizrOptions.TrafficVerbosity, requestOptionsBuilder.ApizrOptions.HttpTracerMode);
-                    requestOptionsBuilder.WithContext(pollyContext);
+                    requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
                     result = await policy.ExecuteAsync(
                         (_, _) => executeApiMethod.Compile()(requestOptionsBuilder.ApizrOptions, webApi, apiData), requestOptionsBuilder.ApizrOptions.Context,
                         requestOptionsBuilder.ApizrOptions.CancellationToken);
@@ -653,10 +632,10 @@ namespace Apizr
         
         /// <inheritdoc />
         public async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<IApizrCatchResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null)
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder);
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
             var logAttribute = GetLogAttribute(methodDetails);
@@ -718,7 +697,7 @@ namespace Apizr
 
                     var pollyContext = new Context(methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.Context ?? new Context());
                     pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels, requestOptionsBuilder.ApizrOptions.TrafficVerbosity, requestOptionsBuilder.ApizrOptions.HttpTracerMode);
-                    requestOptionsBuilder.WithContext(pollyContext);
+                    requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
                     result = await policy.ExecuteAsync(
                         (_, _) => executeApiMethod.Compile()(requestOptionsBuilder.ApizrOptions, webApi), requestOptionsBuilder.ApizrOptions.Context,
                         requestOptionsBuilder.ApizrOptions.CancellationToken);

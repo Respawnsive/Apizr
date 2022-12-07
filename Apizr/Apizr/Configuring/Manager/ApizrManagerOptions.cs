@@ -8,20 +8,21 @@ using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
 using Microsoft.Extensions.Logging;
+using Polly;
 using Polly.Registry;
 using Refit;
 
-namespace Apizr.Configuring
+namespace Apizr.Configuring.Manager
 {
-    /// <inheritdoc cref="IApizrOptions"/>
-    public class ApizrOptions : ApizrOptionsBase, IApizrOptions
+    /// <inheritdoc cref="IApizrManagerOptions"/>
+    public class ApizrManagerOptions : ApizrManagerOptionsBase, IApizrManagerOptions
     {
         /// <summary>
         /// The options constructor
         /// </summary>
         /// <param name="commonOptions">The common options</param>
         /// <param name="properOptions">The proper options</param>
-        public ApizrOptions(IApizrCommonOptions commonOptions, IApizrProperOptions properOptions) : base(commonOptions, properOptions)
+        public ApizrManagerOptions(IApizrCommonOptions commonOptions, IApizrProperOptions properOptions) : base(commonOptions, properOptions)
         {
             BaseUriFactory = properOptions.BaseUriFactory;
             BaseAddressFactory = properOptions.BaseAddressFactory;
@@ -122,22 +123,22 @@ namespace Apizr.Configuring
         public Func<IMappingHandler> MappingHandlerFactory { get; set; }
 
         /// <inheritdoc />
-        public IList<Func<ILogger, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
+        public IList<Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
     }
     
-    /// <inheritdoc cref="IApizrOptions{TWebApi}"/>
-    public class ApizrOptions<TWebApi> : IApizrOptions<TWebApi>
+    /// <inheritdoc cref="IApizrManagerOptions{TWebApi}"/>
+    public class ApizrManagerOptions<TWebApi> : IApizrManagerOptions<TWebApi>
     {
         /// <summary>
         /// The options
         /// </summary>
-        protected readonly IApizrOptionsBase Options;
+        protected readonly IApizrManagerOptionsBase Options;
 
         /// <summary>
         /// The options constructor
         /// </summary>
         /// <param name="apizrOptions">The base options</param>
-        public ApizrOptions(IApizrOptionsBase apizrOptions)
+        public ApizrManagerOptions(IApizrManagerOptionsBase apizrOptions)
         {
             Options = apizrOptions;
         }
@@ -162,6 +163,18 @@ namespace Apizr.Configuring
 
         /// <inheritdoc />
         public LogLevel[] LogLevels => Options.LogLevels;
+
+        /// <inheritdoc />
+        public Context Context => Options.Context;
+
+        /// <inheritdoc />
+        public Action<ApizrException> OnException => Options.OnException;
+
+        /// <inheritdoc />
+        public bool LetThrowOnExceptionWithEmptyCache => Options.LetThrowOnExceptionWithEmptyCache;
+
+        /// <inheritdoc />
+        public IDictionary<string, object> HandlersParameters => Options.HandlersParameters;
 
         /// <inheritdoc />
         public ILogger Logger => Options.Logger;

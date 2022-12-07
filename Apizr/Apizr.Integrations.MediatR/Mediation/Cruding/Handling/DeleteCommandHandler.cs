@@ -17,7 +17,7 @@ namespace Apizr.Mediation.Cruding.Handling
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     public class DeleteCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> :
         DeleteCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams,
-            DeleteCommand<TModelEntity, TApiEntityKey>, Unit, IApizrCatchUnitRequestOptions, IApizrCatchUnitRequestOptionsBuilder>
+            DeleteCommand<TModelEntity, TApiEntityKey>, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder>
         where TModelEntity : class
         where TApiEntity : class
     {
@@ -44,7 +44,7 @@ namespace Apizr.Mediation.Cruding.Handling
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     public class DeleteCommandHandler<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams> :
         DeleteCommandHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, DeleteCommand<TModelEntity>,
-            Unit, IApizrCatchUnitRequestOptions, IApizrCatchUnitRequestOptionsBuilder>
+            Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder>
         where TModelEntity : class
         where TApiEntity : class
     {

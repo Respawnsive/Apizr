@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring;
+using Apizr.Configuring.Manager;
 using Apizr.Configuring.Request;
 using Apizr.Extending;
 using Apizr.Policing;
@@ -21,7 +22,7 @@ namespace Apizr.Logging
     /// </summary>
     public class ExtendedHttpTracerHandler : DelegatingHandler
     {
-        private readonly IApizrOptionsBase _apizrOptions;
+        private readonly IApizrManagerOptionsBase _apizrOptions;
         
         /// <summary>
         /// Duration string format. Defaults to "Duration: {0:ss\\:fffffff}"
@@ -44,12 +45,12 @@ namespace Apizr.Logging
 
         /// <summary> Constructs the <see cref="ExtendedHttpTracerHandler"/> with a custom <see cref="ILogger"/> and a custom <see cref="HttpMessageHandler"/></summary>
         /// <param name="apizrOptions">Apizr options</param>
-        public ExtendedHttpTracerHandler(IApizrOptionsBase apizrOptions) : this(null, apizrOptions) { }
+        public ExtendedHttpTracerHandler(IApizrManagerOptionsBase apizrOptions) : this(null, apizrOptions) { }
 
         /// <summary> Constructs the <see cref="ExtendedHttpTracerHandler"/> with a custom <see cref="ILogger"/> and a custom <see cref="HttpMessageHandler"/></summary>
         /// <param name="handler">User defined <see cref="HttpMessageHandler"/></param>
         /// <param name="apizrOptions">Apizr options</param>
-        public ExtendedHttpTracerHandler(HttpMessageHandler handler, IApizrOptionsBase apizrOptions)
+        public ExtendedHttpTracerHandler(HttpMessageHandler handler, IApizrManagerOptionsBase apizrOptions)
         {
             InnerHandler = handler ?? new HttpClientHandler
             {

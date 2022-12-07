@@ -12,8 +12,8 @@ namespace Apizr.Mediation.Cruding.Base
     /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
     /// <typeparam name="TReadAllResult">The api result type</typeparam>
     public abstract class ReadAllQueryBase<TReadAllParams, TReadAllResult, TApizrRequestOptions, TApizrRequestOptionsBuilder> : MediationQueryBase<TReadAllResult, TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrResultRequestOptions
-        where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         /// <summary>
         /// The top level base mediation ReadAll query constructor
@@ -36,8 +36,8 @@ namespace Apizr.Mediation.Cruding.Base
     /// </summary>
     /// <typeparam name="TReadAllResult">The api result type</typeparam>
     public abstract class ReadAllQueryBase<TReadAllResult, TApizrRequestOptions, TApizrRequestOptionsBuilder> : ReadAllQueryBase<IDictionary<string, object>, TReadAllResult, TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrResultRequestOptions
-        where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         /// <inheritdoc />
         protected ReadAllQueryBase(IDictionary<string, object> parameters, Action<TApizrRequestOptionsBuilder> optionsBuilder = null) : base(parameters, optionsBuilder)

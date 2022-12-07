@@ -7,7 +7,7 @@ namespace Apizr.Configuring.Proper
     /// <summary>
     /// Options available at proper level for static registrations
     /// </summary>
-    public interface IApizrProperOptions : IApizrProperOptionsBase, IApizrSharedOptions
+    public interface IApizrProperOptions : IApizrProperOptionsBase, IApizrSharedRegistrationOptions
     {
         /// <summary>
         /// The Logger factory

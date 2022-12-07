@@ -5,24 +5,22 @@ using Apizr.Configuring.Shared;
 using Microsoft.Extensions.Logging;
 using Refit;
 
-namespace Apizr.Configuring
+namespace Apizr.Configuring.Manager
 {
-    /// <inheritdoc cref="IApizrOptionsBase" />
-    public abstract class ApizrOptionsBase : ApizrSharedOptionsBase, IApizrOptionsBase
+    /// <inheritdoc cref="IApizrManagerOptionsBase" />
+    public abstract class ApizrManagerOptionsBase : ApizrGlobalSharedRegistrationOptionsBase, IApizrManagerOptionsBase
     {
         /// <summary>
         /// The options constructor
         /// </summary>
         /// <param name="commonOptions">The common options</param>
         /// <param name="properOptions">The proper options</param>
-        protected ApizrOptionsBase(IApizrCommonOptionsBase commonOptions, IApizrProperOptionsBase properOptions)
+        protected ApizrManagerOptionsBase(IApizrCommonOptionsBase commonOptions, IApizrProperOptionsBase properOptions) : base(properOptions)
         {
             WebApiType = properOptions.WebApiType;
-            BaseUri = properOptions.BaseUri;
-            BaseAddress = properOptions.BaseAddress;
-            BasePath = properOptions.BasePath;
-            HttpTracerMode = properOptions.HttpTracerMode;
             PolicyRegistryKeys = properOptions.PolicyRegistryKeys;
+            Logger = properOptions.Logger;
+            RefitSettings = commonOptions.RefitSettings;
         }
 
         /// <inheritdoc />

@@ -1,30 +1,26 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
-using Apizr.Configuring.Common;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;
 using Polly;
 
 namespace Apizr.Configuring.Request;
 
-public abstract class
-    ApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder> : IApizrRequestOptionsBuilderBase<
-        TApizrRequestOptions, TApizrRequestOptionsBuilder>
-    where TApizrRequestOptions : IApizrRequestOptionsBase
-    where TApizrRequestOptionsBuilder :
-    IApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder
 {
     protected readonly ApizrRequestOptions Options;
 
-    protected ApizrRequestOptionsBuilderBase(ApizrRequestOptions options)
+    public ApizrRequestOptionsBuilder(ApizrRequestOptions options)
     {
         Options = options;
     }
 
-    protected abstract TApizrRequestOptionsBuilder Builder { get; }
+    /// <inheritdoc />
+    IApizrRequestOptions IApizrRequestOptionsBuilder.ApizrOptions => Options;
 
     /// <inheritdoc />
-    public TApizrRequestOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
+    public IApizrRequestOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
         HttpMessageParts trafficVerbosity = HttpMessageParts.All, params LogLevel[] logLevels)
     {
         if(Options.HttpTracerMode == HttpTracerMode.Unspecified)
@@ -34,116 +30,74 @@ public abstract class
         if(Options.LogLevels?.Length is null or 0)
             Options.LogLevels = logLevels;
 
-        return Builder;
+        return this;
     }
 
     /// <inheritdoc />
-    public TApizrRequestOptionsBuilder WithContext(Context context)
+    public IApizrRequestOptionsBuilder WithContext(Context context, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
     {
-        Options.Context = context;
+        switch (strategy)
+        {
+            case ApizrDuplicateStrategy.Ignore:
+                Options.Context ??= context;
+                break;
+            case ApizrDuplicateStrategy.Replace:
+                Options.Context = context;
+                break;
+            case ApizrDuplicateStrategy.Add:
+            case ApizrDuplicateStrategy.Merge:
+                if (Options.Context == null)
+                {
+                    Options.Context = context;
+                }
+                else
+                {
+                    var operationKey = !string.IsNullOrWhiteSpace(context.OperationKey)
+                        ? context.OperationKey
+                        : Options.Context.OperationKey;
 
-        return Builder;
+                    Options.Context = new Context(operationKey,
+                        Options.Context.Concat(context.ToList()).ToDictionary(x => x.Key, x => x.Value));
+                }
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+        }
+
+        return this;
     }
 
     /// <inheritdoc />
-    public TApizrRequestOptionsBuilder CancelWith(CancellationToken cancellationToken)
+    public IApizrRequestOptionsBuilder WithCancellation(CancellationToken cancellationToken)
     {
         Options.CancellationToken = cancellationToken;
 
-        return Builder;
+        return this;
     }
-
+    
     /// <inheritdoc />
-    public TApizrRequestOptionsBuilder AddHandlerParameter(string key, object value)
-    {
-        Options.HandlersParameters[key] = value;
-
-        return Builder;
-    }
-
-    /// <param name="clearCache"></param>
-    /// <inheritdoc />
-    public TApizrRequestOptionsBuilder ClearCache(bool clearCache)
+    public IApizrRequestOptionsBuilder WithClearing(bool clearCache)
     {
         Options.ClearCache = clearCache;
 
-        return Builder;
+        return this;
     }
 
     /// <inheritdoc />
-    public TApizrRequestOptionsBuilder Catch(Action<ApizrException> onException)
-        => Catch(onException, false);
-
-    /// <inheritdoc />
-    public TApizrRequestOptionsBuilder Catch(Action<ApizrException> onException, bool letThrowOnExceptionWithEmptyCache)
+    public IApizrRequestOptionsBuilder WithCatching(Action<ApizrException> onException,
+        bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
     {
         Options.OnException = onException;
         Options.LetThrowOnExceptionWithEmptyCache = letThrowOnExceptionWithEmptyCache;
 
-        return Builder;
+        return this;
     }
-}
 
-public class ApizrUnitRequestOptionsBuilder :
-    ApizrRequestOptionsBuilderBase<IApizrUnitRequestOptions, IApizrUnitRequestOptionsBuilder>,
-    IApizrUnitRequestOptionsBuilder
-{
     /// <inheritdoc />
-    public ApizrUnitRequestOptionsBuilder(ApizrRequestOptions options) : base(options)
+    public IApizrRequestOptionsBuilder WithHandlerParameter(string key, object value)
     {
+        Options.HandlersParameters[key] = value;
+
+        return this;
     }
-
-    /// <inheritdoc />
-    protected override IApizrUnitRequestOptionsBuilder Builder => this;
-
-    /// <inheritdoc />
-    IApizrRequestOptions IApizrRequestOptionsBuilderBase.ApizrOptions => Options;
-}
-
-public class ApizrCatchUnitRequestOptionsBuilder :
-    ApizrRequestOptionsBuilderBase<IApizrCatchUnitRequestOptions, IApizrCatchUnitRequestOptionsBuilder>,
-    IApizrCatchUnitRequestOptionsBuilder
-{
-    /// <inheritdoc />
-    public ApizrCatchUnitRequestOptionsBuilder(ApizrRequestOptions options) : base(options)
-    {
-    }
-
-    /// <inheritdoc />
-    protected override IApizrCatchUnitRequestOptionsBuilder Builder => this;
-
-    /// <inheritdoc />
-    IApizrRequestOptions IApizrRequestOptionsBuilderBase.ApizrOptions => Options;
-}
-
-public class ApizrResultRequestOptionsBuilder :
-    ApizrRequestOptionsBuilderBase<IApizrResultRequestOptions, IApizrResultRequestOptionsBuilder>,
-    IApizrResultRequestOptionsBuilder
-{
-    /// <inheritdoc />
-    public ApizrResultRequestOptionsBuilder(ApizrRequestOptions options) : base(options)
-    {
-    }
-
-    /// <inheritdoc />
-    protected override IApizrResultRequestOptionsBuilder Builder => this;
-
-    /// <inheritdoc />
-    IApizrRequestOptions IApizrRequestOptionsBuilderBase.ApizrOptions => Options;
-}
-
-public class ApizrCatchResultRequestOptionsBuilder :
-    ApizrRequestOptionsBuilderBase<IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>,
-    IApizrCatchResultRequestOptionsBuilder
-{
-    /// <inheritdoc />
-    public ApizrCatchResultRequestOptionsBuilder(ApizrRequestOptions options) : base(options)
-    {
-    }
-
-    /// <inheritdoc />
-    protected override IApizrCatchResultRequestOptionsBuilder Builder => this;
-
-    /// <inheritdoc />
-    IApizrRequestOptions IApizrRequestOptionsBuilderBase.ApizrOptions => Options;
 }

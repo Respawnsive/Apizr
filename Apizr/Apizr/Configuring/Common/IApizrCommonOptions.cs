@@ -12,7 +12,7 @@ namespace Apizr.Configuring.Common
     /// <summary>
     /// Options available at common level for static registrations
     /// </summary>
-    public interface IApizrCommonOptions : IApizrCommonOptionsBase, IApizrSharedOptions
+    public interface IApizrCommonOptions : IApizrCommonOptionsBase, IApizrSharedRegistrationOptions
     {
         /// <summary>
         /// The LoggerFactory factory (I know, I know...)

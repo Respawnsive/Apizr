@@ -7,124 +7,19 @@ using Polly;
 
 namespace Apizr.Configuring.Request
 {
-    #region Individual Builders
-
-    public interface IApizrSharedRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :
-    IApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-    where TApizrRequestOptions : IApizrSharedRequestOptions
-    where TApizrRequestOptionsBuilder : IApizrSharedRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+    public interface IApizrRequestOptionsBuilder<out TApizrOptions, out TApizrOptionsBuilder> :
+        IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>
+        where TApizrOptions : IApizrRequestOptions
+        where TApizrOptionsBuilder : IApizrRequestOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>
     {
-        TApizrRequestOptionsBuilder WithContext(Context context);
+        TApizrOptionsBuilder WithCancellation(CancellationToken cancellationToken);
 
-        TApizrRequestOptionsBuilder CancelWith(CancellationToken cancellationToken);
-
-        TApizrRequestOptionsBuilder AddHandlerParameter(string key, object value);
-        
-        /// <summary>
-        /// Configure logging level for the request
-        /// </summary>
-        /// <param name="httpTracerMode"></param>
-        /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: All)</param>
-        /// <param name="logLevels">Log levels to apply while writing (default: Information)</param>
-        /// <returns></returns>
-        TApizrRequestOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
-            HttpMessageParts trafficVerbosity = HttpMessageParts.All, params LogLevel[] logLevels);
+        TApizrOptionsBuilder WithClearing(bool clearCache);
     }
 
-    public interface IApizrCacheRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :
-        IApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrCacheRequestOption
-        where TApizrRequestOptionsBuilder : IApizrCacheRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+    public interface IApizrRequestOptionsBuilder :
+        IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>
     {
-        TApizrRequestOptionsBuilder ClearCache(bool clearCache);
+        internal IApizrRequestOptions ApizrOptions { get; }
     }
-
-    public interface IApizrCatchRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :
-        IApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrCatchRequestOption
-        where TApizrRequestOptionsBuilder : IApizrCatchRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-    {
-        TApizrRequestOptionsBuilder Catch(Action<ApizrException> onException);
-    }
-
-    #endregion
-
-    #region Combinated Builders
-    
-    #region Unit
-
-    public interface IApizrUnitRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :
-    IApizrSharedRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-    where TApizrRequestOptions : IApizrUnitRequestOptions
-    where TApizrRequestOptionsBuilder : IApizrUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-    {
-    }
-
-    public interface IApizrUnitRequestOptionsBuilder : IApizrUnitRequestOptionsBuilder<IApizrUnitRequestOptions, IApizrUnitRequestOptionsBuilder>, IApizrRequestOptionsBuilderBase
-    { }
-
-    #endregion
-
-    #region CatchUnit
-
-    public interface IApizrCatchUnitRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :
-    IApizrUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>,
-    IApizrCatchRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-    where TApizrRequestOptions : IApizrCatchUnitRequestOptions
-    where TApizrRequestOptionsBuilder : IApizrCatchUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-    {
-    }
-
-    public interface IApizrCatchUnitRequestOptionsBuilder : IApizrCatchUnitRequestOptionsBuilder<IApizrCatchUnitRequestOptions, IApizrCatchUnitRequestOptionsBuilder>, IApizrRequestOptionsBuilderBase
-    { }
-
-    #endregion
-
-    #region Result
-
-    public interface IApizrResultRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :
-        IApizrSharedRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>,
-        IApizrCacheRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrResultRequestOptions
-        where TApizrRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-    {
-    }
-
-    public interface IApizrResultRequestOptionsBuilder : IApizrResultRequestOptionsBuilder<IApizrResultRequestOptions, IApizrResultRequestOptionsBuilder>, IApizrResultRequestOptionsBuilderBase
-    { }
-
-    #endregion
-
-    #region CatchResult
-
-    public interface IApizrCatchResultRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :
-        IApizrResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>,
-        IApizrCatchRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrCatchResultRequestOptions
-        where TApizrRequestOptionsBuilder : IApizrCatchResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-    {
-        TApizrRequestOptionsBuilder Catch(Action<ApizrException> onException, bool letThrowOnExceptionWithEmptyCache);
-    }
-
-    public interface IApizrCatchResultRequestOptionsBuilder : IApizrCatchResultRequestOptionsBuilder<IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>, IApizrResultRequestOptionsBuilderBase
-    { }
-
-    #endregion
-
-    #region All
-
-    public interface IApizrRequestOptionsBuilder<out TApizrRequestOptions, out TApizrRequestOptionsBuilder> :
-        IApizrCatchUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>,
-        IApizrCatchResultRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrRequestOptions
-        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-    {
-    }
-
-    public interface IApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>, IApizrRequestOptionsBuilderBase
-    { }
-
-    #endregion
-
-    #endregion
 }

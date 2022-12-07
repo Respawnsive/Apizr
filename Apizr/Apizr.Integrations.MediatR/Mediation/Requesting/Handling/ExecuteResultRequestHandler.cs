@@ -19,7 +19,7 @@ namespace Apizr.Mediation.Requesting.Handling
     public class ExecuteResultRequestHandler<TWebApi, TModelResultData, TApiResultData, TApiRequestData,
         TModelRequestData> : ExecuteResultRequestHandlerBase<TWebApi,
         TModelResultData, TApiResultData, TApiRequestData, TModelRequestData, ExecuteResultRequest<TWebApi,
-            TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>, IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>
+            TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
     {
         public ExecuteResultRequestHandler(IApizrManager<TWebApi> webApiManager) : base(webApiManager)
         {
@@ -36,7 +36,7 @@ namespace Apizr.Mediation.Requesting.Handling
                     WebApiManager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
                         executeApiMethod, request.ModelRequestData, request.OptionsBuilder),
 
-                Expression<Func<IApizrCatchResultRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod => 
+                Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod => 
                     WebApiManager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
                         executeApiMethod, request.ModelRequestData, request.OptionsBuilder),
 
@@ -53,7 +53,7 @@ namespace Apizr.Mediation.Requesting.Handling
     /// <typeparam name="TApiData">The api data type</typeparam>
     public class ExecuteResultRequestHandler<TWebApi, TModelData, TApiData> : ExecuteResultRequestHandlerBase<TWebApi,
         TModelData, TApiData, ExecuteResultRequest<TWebApi,
-            TModelData, TApiData>, IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>
+            TModelData, TApiData>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
     {
         public ExecuteResultRequestHandler(IApizrManager<TWebApi> webApiManager) : base(webApiManager)
         {
@@ -69,14 +69,14 @@ namespace Apizr.Mediation.Requesting.Handling
                 Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod => 
                     WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.OptionsBuilder),
 
-                Expression<Func<IApizrCatchResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod => 
+                Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod => 
                     WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.OptionsBuilder),
 
                 Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod => 
                     WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, 
                         request.OptionsBuilder),
 
-                Expression<Func<IApizrCatchResultRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod =>
+                Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod =>
                     WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData,
                         request.OptionsBuilder),
 
@@ -91,7 +91,7 @@ namespace Apizr.Mediation.Requesting.Handling
     /// <typeparam name="TWebApi">The web api type</typeparam>
     /// <typeparam name="TApiData">The api data type</typeparam>
     public class ExecuteResultRequestHandler<TWebApi, TApiData> : ExecuteResultRequestHandlerBase<TWebApi,
-        TApiData, ExecuteResultRequest<TWebApi, TApiData>, IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>
+        TApiData, ExecuteResultRequest<TWebApi, TApiData>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
     {
         public ExecuteResultRequestHandler(IApizrManager<TWebApi> webApiManager) : base(webApiManager)
         {
@@ -107,13 +107,13 @@ namespace Apizr.Mediation.Requesting.Handling
                 Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod => 
                     WebApiManager.ExecuteAsync(executeApiMethod, request.OptionsBuilder),
 
-                Expression<Func<IApizrCatchResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod =>
+                Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod =>
                     WebApiManager.ExecuteAsync(executeApiMethod, request.OptionsBuilder),
 
                 Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod => 
                     WebApiManager.ExecuteAsync(executeApiMethod, request.ModelRequestData, request.OptionsBuilder),
 
-                Expression<Func<IApizrCatchResultRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod =>
+                Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod =>
                     WebApiManager.ExecuteAsync(executeApiMethod, request.ModelRequestData, request.OptionsBuilder),
 
                 _ => throw new ApizrException<TApiData>(new NotImplementedException())

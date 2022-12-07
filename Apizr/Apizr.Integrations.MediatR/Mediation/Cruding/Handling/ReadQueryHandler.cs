@@ -16,7 +16,7 @@ namespace Apizr.Mediation.Cruding.Handling
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     public class ReadQueryHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> :
         ReadQueryHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams,
-            ReadQuery<TModelEntity, TApiEntityKey>, TModelEntity, IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>
+            ReadQuery<TModelEntity, TApiEntityKey>, TModelEntity, IApizrRequestOptions, IApizrRequestOptionsBuilder>
         where TModelEntity : class
         where TApiEntity : class
     {
@@ -45,7 +45,7 @@ namespace Apizr.Mediation.Cruding.Handling
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     public class ReadQueryHandler<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams> :
         ReadQueryHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, ReadQuery<TModelEntity>,
-            TModelEntity, IApizrCatchResultRequestOptions, IApizrCatchResultRequestOptionsBuilder>
+            TModelEntity, IApizrRequestOptions, IApizrRequestOptionsBuilder>
         where TModelEntity : class
         where TApiEntity : class
     {

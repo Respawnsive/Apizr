@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using Apizr.Configuring.Manager;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;
 
@@ -9,7 +10,7 @@ namespace Apizr.Configuring.Shared
     /// <summary>
     /// Options available at both common and proper level for static registrations
     /// </summary>
-    public interface IApizrSharedOptions : IApizrSharedOptionsBase
+    public interface IApizrSharedRegistrationOptions : IApizrSharedRegistrationOptionsBase
     {
         /// <summary>
         /// Base uri factory
@@ -54,6 +55,6 @@ namespace Apizr.Configuring.Shared
         /// <summary>
         /// Delegating handlers factories
         /// </summary>
-        IList<Func<ILogger, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
+        IList<Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
     }
 }

@@ -1,19 +1,11 @@
-﻿namespace Apizr.Configuring.Request
+﻿using Apizr.Configuring.Shared;
+
+namespace Apizr.Configuring.Request
 {
-    public interface IApizrRequestOptionsBuilderBase<out TApizrRequestOptions, out TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrRequestOptionsBase
-        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+    public interface IApizrRequestOptionsBuilderBase<out TApizrOptions, out TApizrOptionsBuilder> :
+        IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>
+        where TApizrOptions : IApizrRequestOptionsBase
+        where TApizrOptionsBuilder : IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>
     {
-    }
-
-    public interface IApizrRequestOptionsBuilderBase : IApizrRequestOptionsBuilderBase<IApizrRequestOptionsBase,
-        IApizrRequestOptionsBuilderBase>
-    {
-        internal IApizrRequestOptions ApizrOptions { get; }
-    }
-
-    public interface IApizrResultRequestOptionsBuilderBase : IApizrRequestOptionsBuilderBase
-    {
-
     }
 }

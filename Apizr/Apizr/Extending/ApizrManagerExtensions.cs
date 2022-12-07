@@ -23,7 +23,7 @@ namespace Apizr.Extending
         public static Task ExecuteAsync<TWebApi>(this IApizrManager<TWebApi> manager, Expression<Func<TWebApi, Task>> executeApiMethod,
             Action<Exception> onException)
             => manager.ExecuteAsync(api => executeApiMethod.Compile()(api),
-                options => options.Catch(onException));
+                options => options.WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -41,7 +41,7 @@ namespace Apizr.Extending
             => manager.ExecuteAsync<TModelData, TApiData>(
                 (api, apiData) =>
                     executeApiMethod.Compile()(api, apiData), modelData,
-                options => options.Catch(onException));
+                options => options.WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -57,8 +57,8 @@ namespace Apizr.Extending
             => manager.ExecuteAsync(
                 (options, api) =>
                     executeApiMethod.Compile()(options.CancellationToken, api),
-                options => options.CancelWith(cancellationToken)
-                    .Catch(onException));
+                options => options.WithCancellation(cancellationToken)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -75,7 +75,7 @@ namespace Apizr.Extending
                 (options, api) =>
                     executeApiMethod.Compile()(options.Context, api),
                 options => options.WithContext(context)
-                    .Catch(onException));
+                    .WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -95,8 +95,8 @@ namespace Apizr.Extending
             => manager.ExecuteAsync<TModelData, TApiData>(
                 (options, api, apiData) =>
                     executeApiMethod.Compile()(options.CancellationToken, api, apiData), modelData,
-                options => options.CancelWith(cancellationToken)
-                    .Catch(onException));
+                options => options.WithCancellation(cancellationToken)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -117,7 +117,7 @@ namespace Apizr.Extending
                 (options, api, apiData) =>
                     executeApiMethod.Compile()(options.Context, api, apiData), modelData,
                 options => options.WithContext(context)
-                    .Catch(onException));
+                    .WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -135,8 +135,8 @@ namespace Apizr.Extending
                 (options, api) =>
                     executeApiMethod.Compile()(options.Context, options.CancellationToken, api),
                 options => options.WithContext(context)
-                    .CancelWith(cancellationToken)
-                    .Catch(onException));
+                    .WithCancellation(cancellationToken)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -159,8 +159,8 @@ namespace Apizr.Extending
                 (options, api, apiData) =>
                     executeApiMethod.Compile()(options.Context, options.CancellationToken, api, apiData), modelData,
                 options => options.WithContext(context)
-                    .CancelWith(cancellationToken)
-                    .Catch(onException));
+                    .WithCancellation(cancellationToken)
+                    .WithCatching(onException));
 
         #endregion
 
@@ -179,7 +179,7 @@ namespace Apizr.Extending
         public static Task<TApiData> ExecuteAsync<TWebApi, TApiData>(this IApizrManager<TWebApi> manager,
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache)
             => manager.ExecuteAsync<TApiData>(api => executeApiMethod.Compile()(api),
-                options => options.ClearCache(clearCache));
+                options => options.WithClearing(clearCache));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -194,7 +194,7 @@ namespace Apizr.Extending
         public static Task<TApiData> ExecuteAsync<TWebApi, TApiData>(this IApizrManager<TWebApi> manager, 
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<Exception> onException)
             => manager.ExecuteAsync<TApiData>(api => executeApiMethod.Compile()(api),
-                options => options.Catch(onException));
+                options => options.WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -211,7 +211,7 @@ namespace Apizr.Extending
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
             bool clearCache, Action<Exception> onException)
             => manager.ExecuteAsync<TApiData>(api => executeApiMethod.Compile()(api),
-                options => options.ClearCache(clearCache).Catch(onException));
+                options => options.WithClearing(clearCache).WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -233,7 +233,7 @@ namespace Apizr.Extending
             TModelRequestData modelRequestData, bool clearCache)
             => manager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
                 (api, apiData) => executeApiMethod.Compile()(api, apiData), modelRequestData,
-                options => options.ClearCache(clearCache));
+                options => options.WithClearing(clearCache));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -255,7 +255,7 @@ namespace Apizr.Extending
             TModelRequestData modelRequestData, Action<Exception> onException)
             => manager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
                 (api, apiData) => executeApiMethod.Compile()(api, apiData), modelRequestData,
-                options => options.Catch(onException));
+                options => options.WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -278,7 +278,7 @@ namespace Apizr.Extending
             TModelRequestData modelRequestData, bool clearCache, Action<Exception> onException)
             => manager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
                 (api, apiData) => executeApiMethod.Compile()(api, apiData), modelRequestData,
-                options => options.ClearCache(clearCache).Catch(onException));
+                options => options.WithClearing(clearCache).WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -296,7 +296,7 @@ namespace Apizr.Extending
             Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, bool clearCache)
             => manager.ExecuteAsync<TModelData, TApiData>(
                 (api, apiData) => executeApiMethod.Compile()(api, apiData), modelData,
-                options => options.ClearCache(clearCache));
+                options => options.WithClearing(clearCache));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -314,7 +314,7 @@ namespace Apizr.Extending
             Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<Exception> onException)
             => manager.ExecuteAsync<TModelData, TApiData>(
                 (api, apiData) => executeApiMethod.Compile()(api, apiData), modelData,
-                options => options.Catch(onException));
+                options => options.WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -334,7 +334,7 @@ namespace Apizr.Extending
             bool clearCache, Action<Exception> onException)
             => manager.ExecuteAsync<TModelData, TApiData>(
                 (api, apiData) => executeApiMethod.Compile()(api, apiData), modelData,
-                options => options.ClearCache(clearCache).Catch(onException));
+                options => options.WithClearing(clearCache).WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -351,7 +351,7 @@ namespace Apizr.Extending
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache)
             => manager.ExecuteAsync<TModelData, TApiData>(
                 api => executeApiMethod.Compile()(api),
-                options => options.ClearCache(clearCache));
+                options => options.WithClearing(clearCache));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -368,7 +368,7 @@ namespace Apizr.Extending
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<Exception> onException)
             => manager.ExecuteAsync<TModelData, TApiData>(
                 api => executeApiMethod.Compile()(api),
-                options => options.Catch(onException));
+                options => options.WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -387,7 +387,7 @@ namespace Apizr.Extending
             Action<Exception> onException)
             => manager.ExecuteAsync<TModelData, TApiData>(
                 api => executeApiMethod.Compile()(api),
-                options => options.ClearCache(clearCache).Catch(onException));
+                options => options.WithClearing(clearCache).WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -407,8 +407,8 @@ namespace Apizr.Extending
             Action<Exception> onException = null)
             => manager.ExecuteAsync<TApiData>(
                 (options, api) => executeApiMethod.Compile()(options.CancellationToken, api),
-                options => options.CancelWith(cancellationToken).ClearCache(clearCache)
-                    .Catch(onException));
+                options => options.WithCancellation(cancellationToken).WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -427,8 +427,8 @@ namespace Apizr.Extending
             bool clearCache = false, Action<Exception> onException = null)
             => manager.ExecuteAsync<TApiData>(
                 (options, api) => executeApiMethod.Compile()(options.Context, api),
-                options => options.WithContext(context).ClearCache(clearCache)
-                    .Catch(onException));
+                options => options.WithContext(context).WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -455,8 +455,8 @@ namespace Apizr.Extending
                 TModelRequestData>(
                 (options, api, apiData) => executeApiMethod.Compile()(options.CancellationToken, api, apiData),
                 modelRequestData,
-                options => options.CancelWith(cancellationToken).ClearCache(clearCache)
-                    .Catch(onException));
+                options => options.WithCancellation(cancellationToken).WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -480,8 +480,8 @@ namespace Apizr.Extending
             => manager.ExecuteAsync<TModelData, TApiData>(
                 (options, api, apiData) => executeApiMethod.Compile()(options.CancellationToken, api, apiData),
                 modelData,
-                options => options.CancelWith(cancellationToken).ClearCache(clearCache)
-                    .Catch(onException));
+                options => options.WithCancellation(cancellationToken).WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -501,8 +501,8 @@ namespace Apizr.Extending
             CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null)
             => manager.ExecuteAsync<TModelData, TApiData>(
                 (options, api) => executeApiMethod.Compile()(options.CancellationToken, api),
-                options => options.CancelWith(cancellationToken).ClearCache(clearCache)
-                    .Catch(onException));
+                options => options.WithCancellation(cancellationToken).WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -529,8 +529,8 @@ namespace Apizr.Extending
                 TModelRequestData>(
                 (options, api, apiData) => executeApiMethod.Compile()(options.Context, api, apiData),
                 modelRequestData,
-                options => options.WithContext(context).ClearCache(clearCache)
-                    .Catch(onException));
+                options => options.WithContext(context).WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -551,8 +551,8 @@ namespace Apizr.Extending
             Context context = null, bool clearCache = false, Action<Exception> onException = null)
             => manager.ExecuteAsync<TModelData, TApiData>(
                 (options, api, apiData) => executeApiMethod.Compile()(options.Context, api, apiData), modelData,
-                options => options.WithContext(context).ClearCache(clearCache)
-                    .Catch(onException));
+                options => options.WithContext(context).WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -572,8 +572,8 @@ namespace Apizr.Extending
             bool clearCache = false, Action<Exception> onException = null)
             => manager.ExecuteAsync<TModelData, TApiData>(
                 (options, api) => executeApiMethod.Compile()(options.Context, api),
-                options => options.WithContext(context).ClearCache(clearCache)
-                    .Catch(onException));
+                options => options.WithContext(context).WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -594,9 +594,9 @@ namespace Apizr.Extending
             Action<Exception> onException = null)
             => manager.ExecuteAsync<TApiData>(
                 (options, api) => executeApiMethod.Compile()(options.Context, options.CancellationToken, api),
-                options => options.WithContext(context).CancelWith(cancellationToken)
-                    .ClearCache(clearCache)
-                    .Catch(onException));
+                options => options.WithContext(context).WithCancellation(cancellationToken)
+                    .WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -627,9 +627,9 @@ namespace Apizr.Extending
                 (options, api, apiData) =>
                     executeApiMethod.Compile()(options.Context, options.CancellationToken, api, apiData),
                 modelRequestData,
-                options => options.WithContext(context).CancelWith(cancellationToken)
-                    .ClearCache(clearCache)
-                    .Catch(onException));
+                options => options.WithContext(context).WithCancellation(cancellationToken)
+                    .WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -654,8 +654,8 @@ namespace Apizr.Extending
             => manager.ExecuteAsync<TModelData, TApiData>(
                 (options, api, apiData) =>
                     executeApiMethod.Compile()(options.Context, options.CancellationToken, api, apiData), modelData,
-                options => options.WithContext(context).ClearCache(clearCache)
-                    .Catch(onException));
+                options => options.WithContext(context).WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -678,9 +678,9 @@ namespace Apizr.Extending
             manager.ExecuteAsync<TModelData, TApiData>(
                 (options, api) => executeApiMethod.Compile()(options.Context, options.CancellationToken, api),
                 options => options.WithContext(context)
-                    .CancelWith(cancellationToken)
-                    .ClearCache(clearCache)
-                    .Catch(onException));
+                    .WithCancellation(cancellationToken)
+                    .WithClearing(clearCache)
+                    .WithCatching(onException));
 
         #endregion 
 

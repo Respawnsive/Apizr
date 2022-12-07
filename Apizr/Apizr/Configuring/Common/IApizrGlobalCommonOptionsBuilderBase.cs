@@ -10,7 +10,7 @@ namespace Apizr.Configuring.Common
     /// <summary>
     /// Builder options available at common level for both static and extended registrations
     /// </summary>
-    public interface IApizrGlobalCommonOptionsBuilderBase : IApizrGlobalSharedOptionsBuilderBase
+    public interface IApizrGlobalCommonOptionsBuilderBase : IApizrGlobalSharedRegistrationOptionsBuilderBase
     {
     }
 
@@ -18,7 +18,7 @@ namespace Apizr.Configuring.Common
     /// Builder options available at common level for both static and extended registrations
     /// </summary>
     public interface IApizrGlobalCommonOptionsBuilderBase<out TApizrCommonOptions, out TApizrCommonOptionsBuilder> : IApizrGlobalCommonOptionsBuilderBase,
-        IApizrGlobalSharedOptionsBuilderBase<TApizrCommonOptions, TApizrCommonOptionsBuilder>
+        IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrCommonOptions, TApizrCommonOptionsBuilder>
     where TApizrCommonOptions : IApizrCommonOptionsBase
     where TApizrCommonOptionsBuilder : IApizrGlobalCommonOptionsBuilderBase<TApizrCommonOptions, TApizrCommonOptionsBuilder>
     {

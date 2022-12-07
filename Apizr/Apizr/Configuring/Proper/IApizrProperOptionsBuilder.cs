@@ -7,7 +7,7 @@ namespace Apizr.Configuring.Proper
     /// Builder options available at proper level for static registrations
     /// </summary>
     public interface IApizrProperOptionsBuilder<out TApizrProperOptions, out TApizrProperOptionsBuilder> : IApizrProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>,
-        IApizrSharedOptionsBuilder<TApizrProperOptions, TApizrProperOptionsBuilder>
+        IApizrSharedRegistrationOptionsBuilder<TApizrProperOptions, TApizrProperOptionsBuilder>
         where TApizrProperOptions : IApizrProperOptionsBase
         where TApizrProperOptionsBuilder : IApizrProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>
     {

@@ -17,7 +17,7 @@ namespace Apizr.Mediation.Cruding.Handling
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     public class UpdateCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> :
         UpdateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams,
-            UpdateCommand<TApiEntityKey, TModelEntity>, Unit, IApizrCatchUnitRequestOptions, IApizrCatchUnitRequestOptionsBuilder>
+            UpdateCommand<TApiEntityKey, TModelEntity>, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder>
         where TModelEntity : class
         where TApiEntity : class
     {
@@ -46,7 +46,7 @@ namespace Apizr.Mediation.Cruding.Handling
     /// <typeparam name="TReadAllResult">The returned result type</typeparam>
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     public class UpdateCommandHandler<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams> :
-        UpdateCommandHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, UpdateCommand<TModelEntity>, IApizrCatchUnitRequestOptions, IApizrCatchUnitRequestOptionsBuilder>
+        UpdateCommandHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, UpdateCommand<TModelEntity>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
         where TModelEntity : class
         where TApiEntity : class
     {

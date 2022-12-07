@@ -26,7 +26,7 @@ namespace Apizr.Mediation.Extending
         [Obsolete("Use the one with the request options builder parameter instead")]
         public static Task SendFor<TWebApi>(this IApizrMediator mediator,
             Expression<Func<TWebApi, Task>> executeApiMethod, Action<Exception> onException) =>
-            mediator.SendFor<TWebApi>(executeApiMethod, options => options.Catch(onException));
+            mediator.SendFor<TWebApi>(executeApiMethod, options => options.WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a Polly Context
@@ -42,7 +42,7 @@ namespace Apizr.Mediation.Extending
             Action<Exception> onException = null) =>
             mediator.SendFor<TWebApi>((options, api) => executeApiMethod.Compile()(options.Context, api),
                 options => options.WithContext(context)
-                    .Catch(onException));
+                    .WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a cancellation token
@@ -57,8 +57,8 @@ namespace Apizr.Mediation.Extending
             Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod,
             CancellationToken token = default, Action<Exception> onException = null) =>
             mediator.SendFor<TWebApi>((options, api) => executeApiMethod.Compile()(options.CancellationToken, api),
-                options => options.CancelWith(token)
-                    .Catch(onException));
+                options => options.WithCancellation(token)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a Polly Context and a cancellation token
@@ -77,8 +77,8 @@ namespace Apizr.Mediation.Extending
             mediator.SendFor<TWebApi>(
                 (options, api) => executeApiMethod.Compile()(options.Context, options.CancellationToken, api),
                 options => options.WithContext(context)
-                    .CancelWith(token)
-                    .Catch(onException));
+                    .WithCancellation(token)
+                    .WithCatching(onException));
 
         #endregion
 
@@ -100,7 +100,7 @@ namespace Apizr.Mediation.Extending
             TModelData modelData, Action<Exception> onException) =>
             mediator.SendFor<TWebApi, TModelData, TApiData>(
                 (api, apiData) => executeApiMethod.Compile()(api, apiData), modelData,
-                options => options.Catch(onException));
+                options => options.WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with mapped request and a cancellation token
@@ -120,8 +120,8 @@ namespace Apizr.Mediation.Extending
             mediator.SendFor<TWebApi, TModelData, TApiData>(
                 (options, api, apiData) => executeApiMethod.Compile()(options.CancellationToken, api, apiData),
                 modelData,
-                options => options.CancelWith(token)
-                    .Catch(onException));
+                options => options.WithCancellation(token)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with mapped request and a Polly Context
@@ -141,7 +141,7 @@ namespace Apizr.Mediation.Extending
             mediator.SendFor<TWebApi, TModelData, TApiData>(
                 (options, api, apiData) => executeApiMethod.Compile()(options.Context, api, apiData), modelData,
                 options => options.WithContext(context)
-                    .Catch(onException));
+                    .WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with mapped request, a Polly Context and cancellation token
@@ -164,8 +164,8 @@ namespace Apizr.Mediation.Extending
                 (options, api, apiData) =>
                     executeApiMethod.Compile()(options.Context, options.CancellationToken, api, apiData), modelData,
                 options => options.WithContext(context)
-                    .CancelWith(token)
-                    .Catch(onException));
+                    .WithCancellation(token)
+                    .WithCatching(onException));
 
         #endregion
 
@@ -187,7 +187,7 @@ namespace Apizr.Mediation.Extending
         public static Task<TApiData> SendFor<TWebApi, TApiData>(this IApizrMediator mediator,
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
             Action<Exception> onException) =>
-            mediator.SendFor<TWebApi, TApiData>(executeApiMethod, options => options.Catch(onException));
+            mediator.SendFor<TWebApi, TApiData>(executeApiMethod, options => options.WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR
@@ -202,8 +202,8 @@ namespace Apizr.Mediation.Extending
         public static Task<TApiData> SendFor<TWebApi, TApiData>(this IApizrMediator mediator,
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache,
             Action<Exception> onException = null) =>
-            mediator.SendFor<TWebApi, TApiData>(executeApiMethod, options => options.ClearCache(clearCache)
-                .Catch(onException));
+            mediator.SendFor<TWebApi, TApiData>(executeApiMethod, options => options.WithClearing(clearCache)
+                .WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a Polly Context
@@ -221,8 +221,8 @@ namespace Apizr.Mediation.Extending
             Context context = null, bool clearCache = false, Action<Exception> onException = null) =>
             mediator.SendFor<TWebApi, TApiData>((options, api) => executeApiMethod.Compile()(options.Context, api),
                 options => options.WithContext(context)
-                    .ClearCache(clearCache)
-                    .Catch(onException));
+                    .WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a cancellation token
@@ -240,9 +240,9 @@ namespace Apizr.Mediation.Extending
             CancellationToken token = default, bool clearCache = false, Action<Exception> onException = null) =>
             mediator.SendFor<TWebApi, TApiData>(
                 (options, api) => executeApiMethod.Compile()(options.CancellationToken, api),
-                options => options.CancelWith(token)
-                    .ClearCache(clearCache)
-                    .Catch(onException));
+                options => options.WithCancellation(token)
+                    .WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a Polly Context and a cancellation token
@@ -263,9 +263,9 @@ namespace Apizr.Mediation.Extending
             mediator.SendFor<TWebApi, TApiData>(
                 (options, api) => executeApiMethod.Compile()(options.Context, options.CancellationToken, api),
                 options => options.WithContext(context)
-                    .CancelWith(token)
-                    .ClearCache(clearCache)
-                    .Catch(onException));
+                    .WithCancellation(token)
+                    .WithClearing(clearCache)
+                    .WithCatching(onException));
 
         #endregion
 
@@ -285,7 +285,7 @@ namespace Apizr.Mediation.Extending
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
             Action<Exception> onException) =>
             mediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod,
-                options => options.Catch(onException));
+                options => options.WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR returning a mapped result
@@ -302,8 +302,8 @@ namespace Apizr.Mediation.Extending
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache,
             Action<Exception> onException = null) =>
             mediator.SendFor<TWebApi, TModelData, TApiData>(executeApiMethod,
-                options => options.ClearCache(clearCache)
-                    .Catch(onException));
+                options => options.WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a Polly Context and returning a mapped result
@@ -323,8 +323,8 @@ namespace Apizr.Mediation.Extending
             mediator.SendFor<TWebApi, TModelData, TApiData>(
                 (options, api) => executeApiMethod.Compile()(options.Context, api),
                 options => options.WithContext(context)
-                    .ClearCache(clearCache)
-                    .Catch(onException));
+                    .WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a cancellation token and returning a mapped result
@@ -343,9 +343,9 @@ namespace Apizr.Mediation.Extending
             CancellationToken token = default, bool clearCache = false, Action<Exception> onException = null) =>
             mediator.SendFor<TWebApi, TModelData, TApiData>(
                 (options, api) => executeApiMethod.Compile()(options.CancellationToken, api),
-                options => options.CancelWith(token)
-                    .ClearCache(clearCache)
-                    .Catch(onException));
+                options => options.WithCancellation(token)
+                    .WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a Polly Context and a cancellation token and returning a mapped result
@@ -367,9 +367,9 @@ namespace Apizr.Mediation.Extending
             mediator.SendFor<TWebApi, TModelData, TApiData>(
                 (options, api) => executeApiMethod.Compile()(options.Context, options.CancellationToken, api),
                 options => options.WithContext(context)
-                    .CancelWith(token)
-                    .ClearCache(clearCache)
-                    .Catch(onException));
+                    .WithCancellation(token)
+                    .WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request and returning a mapped result
@@ -387,7 +387,7 @@ namespace Apizr.Mediation.Extending
             Action<Exception> onException) =>
             mediator.SendFor<TWebApi, TModelData, TApiData>(
                 (api, apiData) => executeApiMethod.Compile()(api, apiData), modelData,
-                options => options.Catch(onException));
+                options => options.WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request and returning a mapped result
@@ -406,8 +406,8 @@ namespace Apizr.Mediation.Extending
             bool clearCache, Action<Exception> onException = null) =>
             mediator.SendFor<TWebApi, TModelData, TApiData>(
                 (api, apiData) => executeApiMethod.Compile()(api, apiData), modelData,
-                options => options.ClearCache(clearCache)
-                    .Catch(onException));
+                options => options.WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request and a Polly Context and returning a mapped result
@@ -428,8 +428,8 @@ namespace Apizr.Mediation.Extending
             mediator.SendFor<TWebApi, TModelData, TApiData>(
                 (options, api, apiData) => executeApiMethod.Compile()(options.Context, api, apiData), modelData,
                 options => options.WithContext(context)
-                    .ClearCache(clearCache)
-                    .Catch(onException));
+                    .WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request and a cancellation token and returning a mapped result
@@ -451,9 +451,9 @@ namespace Apizr.Mediation.Extending
             mediator.SendFor<TWebApi, TModelData, TApiData>(
                 (options, api, apiData) => executeApiMethod.Compile()(options.CancellationToken, api, apiData),
                 modelData,
-                options => options.CancelWith(token)
-                    .ClearCache(clearCache)
-                    .Catch(onException));
+                options => options.WithCancellation(token)
+                    .WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request, a Polly Context and a cancellation token and returning a mapped result
@@ -478,9 +478,9 @@ namespace Apizr.Mediation.Extending
                     executeApiMethod.Compile()(options.Context, options.CancellationToken, api, apiData),
                 modelData,
                 options => options.WithContext(context)
-                    .CancelWith(token)
-                    .ClearCache(clearCache)
-                    .Catch(onException));
+                    .WithCancellation(token)
+                    .WithClearing(clearCache)
+                    .WithCatching(onException));
 
         #endregion
 
@@ -508,7 +508,7 @@ namespace Apizr.Mediation.Extending
                 (options, api, apiData) =>
                     executeApiMethod.Compile()(api, apiData),
                 modelRequestData,
-                options => options.Catch(onException));
+                options => options.WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request and returning a mapped result
@@ -533,8 +533,8 @@ namespace Apizr.Mediation.Extending
                 (options, api, apiData) =>
                     executeApiMethod.Compile()(api, apiData),
                 modelRequestData,
-                options => options.ClearCache(clearCache)
-                    .Catch(onException));
+                options => options.WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request and a cancellation token and returning a mapped result
@@ -561,9 +561,9 @@ namespace Apizr.Mediation.Extending
                 (options, api, apiData) =>
                     executeApiMethod.Compile()(options.CancellationToken, api, apiData),
                 modelRequestData,
-                options => options.CancelWith(token)
-                    .ClearCache(clearCache)
-                    .Catch(onException));
+                options => options.WithCancellation(token)
+                    .WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request and a Polly Context and returning a mapped result
@@ -591,8 +591,8 @@ namespace Apizr.Mediation.Extending
                     executeApiMethod.Compile()(options.Context, api, apiData),
                 modelRequestData,
                 options => options.WithContext(context)
-                    .ClearCache(clearCache)
-                    .Catch(onException));
+                    .WithClearing(clearCache)
+                    .WithCatching(onException));
 
         /// <summary>
         /// Send an api call to Apizr using MediatR with a mapped request, a Polly Context and a cancellation token and returning a mapped result
@@ -621,9 +621,9 @@ namespace Apizr.Mediation.Extending
                     executeApiMethod.Compile()(options.Context, options.CancellationToken, api, apiData),
                 modelRequestData,
                 options => options.WithContext(context)
-                    .CancelWith(token)
-                    .ClearCache(clearCache)
-                    .Catch(onException));
+                    .WithCancellation(token)
+                    .WithClearing(clearCache)
+                    .WithCatching(onException));
 
         #endregion
 

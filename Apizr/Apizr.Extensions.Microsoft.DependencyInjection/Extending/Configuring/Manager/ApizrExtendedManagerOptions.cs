@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using Apizr.Caching;
-using Apizr.Configuring;
+using Apizr.Configuring.Manager;
 using Apizr.Connecting;
 using Apizr.Extending.Configuring.Common;
 using Apizr.Extending.Configuring.Proper;
@@ -14,17 +14,17 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Refit;
 
-namespace Apizr.Extending.Configuring
+namespace Apizr.Extending.Configuring.Manager
 {
-    /// <inheritdoc cref="IApizrExtendedOptions"/>
-    public class ApizrExtendedOptions : ApizrExtendedOptionsBase, IApizrExtendedOptions
+    /// <inheritdoc cref="IApizrExtendedManagerOptions"/>
+    public class ApizrExtendedManagerOptions : ApizrExtendedManagerOptionsBase, IApizrExtendedManagerOptions
     {
         /// <summary>
         /// The options constructor
         /// </summary>
         /// <param name="commonOptions">The common options</param>
         /// <param name="properOptions">The proper options</param>
-        public ApizrExtendedOptions(IApizrExtendedCommonOptions commonOptions, IApizrExtendedProperOptions properOptions) : base(commonOptions, properOptions)
+        public ApizrExtendedManagerOptions(IApizrExtendedCommonOptions commonOptions, IApizrExtendedProperOptions properOptions) : base(commonOptions, properOptions)
         {
             ApizrManagerType = properOptions.ApizrManagerType;
             BaseUriFactory = properOptions.BaseUriFactory;
@@ -165,11 +165,11 @@ namespace Apizr.Extending.Configuring
         public IList<Action<Type, IServiceCollection>> PostRegistrationActions { get; }
     }
 
-    /// <inheritdoc cref="IApizrExtendedOptionsBase"/>
-    public class ApizrExtendedOptions<TWebApi> : ApizrOptions<TWebApi>, IApizrExtendedOptionsBase
+    /// <inheritdoc cref="IApizrExtendedManagerOptionsBase"/>
+    public class ApizrExtendedManagerOptions<TWebApi> : ApizrManagerOptions<TWebApi>, IApizrExtendedManagerOptionsBase
     {
-        private readonly IApizrExtendedOptionsBase _apizrExtendedOptions;
-        public ApizrExtendedOptions(IApizrExtendedOptionsBase apizrOptions) : base(apizrOptions)
+        private readonly IApizrExtendedManagerOptionsBase _apizrExtendedOptions;
+        public ApizrExtendedManagerOptions(IApizrExtendedManagerOptionsBase apizrOptions) : base(apizrOptions)
         {
             _apizrExtendedOptions = apizrOptions;
         }
@@ -179,7 +179,7 @@ namespace Apizr.Extending.Configuring
 
         /// <inheritdoc />
 
-        public IList<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>>
+        public IList<Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>>
             DelegatingHandlersExtendedFactories => _apizrExtendedOptions.DelegatingHandlersExtendedFactories;
     }
 }

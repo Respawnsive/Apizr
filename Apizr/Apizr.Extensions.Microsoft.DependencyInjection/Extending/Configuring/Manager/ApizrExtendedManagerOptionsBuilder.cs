@@ -5,37 +5,38 @@ using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Configuring;
-using Apizr.Configuring.Shared;
+using Apizr.Configuring.Manager;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Polly;
 using Refit;
 
-namespace Apizr.Extending.Configuring
+namespace Apizr.Extending.Configuring.Manager
 {
     /// <summary>
     /// Builder options available for extended registrations
     /// </summary>
-    public class ApizrExtendedOptionsBuilder : IApizrExtendedOptionsBuilder
+    public class ApizrExtendedManagerOptionsBuilder : IApizrExtendedManagerOptionsBuilder
     {
-        protected readonly ApizrExtendedOptions Options;
+        protected readonly ApizrExtendedManagerOptions Options;
 
-        public ApizrExtendedOptionsBuilder(ApizrExtendedOptions apizrOptions)
+        public ApizrExtendedManagerOptionsBuilder(ApizrExtendedManagerOptions apizrOptions)
         {
             Options = apizrOptions;
         }
 
         /// <inheritdoc />
-        IApizrExtendedOptions IApizrExtendedOptionsBuilder.ApizrOptions => Options;
+        IApizrExtendedManagerOptions IApizrExtendedManagerOptionsBuilder.ApizrOptions => Options;
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithBaseAddress(string baseAddress)
+        public IApizrExtendedManagerOptionsBuilder WithBaseAddress(string baseAddress)
             => WithBaseAddress(_ => baseAddress);
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithBaseAddress(Func<IServiceProvider, string> baseAddressFactory)
+        public IApizrExtendedManagerOptionsBuilder WithBaseAddress(Func<IServiceProvider, string> baseAddressFactory)
         {
             Options.BaseAddressFactory = baseAddressFactory;
 
@@ -43,11 +44,11 @@ namespace Apizr.Extending.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithBaseAddress(Uri baseAddress)
+        public IApizrExtendedManagerOptionsBuilder WithBaseAddress(Uri baseAddress)
             => WithBaseAddress(_ => baseAddress);
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithBaseAddress(Func<IServiceProvider, Uri> baseAddressFactory)
+        public IApizrExtendedManagerOptionsBuilder WithBaseAddress(Func<IServiceProvider, Uri> baseAddressFactory)
         {
             Options.BaseUriFactory = baseAddressFactory;
 
@@ -55,11 +56,11 @@ namespace Apizr.Extending.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithBasePath(string basePath)
+        public IApizrExtendedManagerOptionsBuilder WithBasePath(string basePath)
             => WithBasePath(_ => basePath);
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithBasePath(Func<IServiceProvider, string> basePathFactory)
+        public IApizrExtendedManagerOptionsBuilder WithBasePath(Func<IServiceProvider, string> basePathFactory)
         {
             Options.BasePathFactory = basePathFactory;
 
@@ -67,11 +68,11 @@ namespace Apizr.Extending.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithHttpClientHandler(HttpClientHandler httpClientHandler)
+        public IApizrExtendedManagerOptionsBuilder WithHttpClientHandler(HttpClientHandler httpClientHandler)
             => WithHttpClientHandler(_ => httpClientHandler);
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithHttpClientHandler(Func<IServiceProvider, HttpClientHandler> httpClientHandlerFactory)
+        public IApizrExtendedManagerOptionsBuilder WithHttpClientHandler(Func<IServiceProvider, HttpClientHandler> httpClientHandlerFactory)
         {
             Options.HttpClientHandlerFactory = httpClientHandlerFactory;
 
@@ -79,7 +80,7 @@ namespace Apizr.Extending.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder ConfigureHttpClientBuilder(Action<IHttpClientBuilder> httpClientBuilder)
+        public IApizrExtendedManagerOptionsBuilder ConfigureHttpClientBuilder(Action<IHttpClientBuilder> httpClientBuilder)
         {
             Options.HttpClientBuilder = httpClientBuilder;
 
@@ -87,9 +88,9 @@ namespace Apizr.Extending.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
+        public IApizrExtendedManagerOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
         {
-            var authenticationHandler = new Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>((serviceProvider, options) =>
+            var authenticationHandler = new Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>((serviceProvider, options) =>
                 new AuthenticationHandler(serviceProvider.GetService<ILogger>(), options, refreshTokenFactory));
             Options.DelegatingHandlersExtendedFactories.Add(authenticationHandler);
 
@@ -97,8 +98,8 @@ namespace Apizr.Extending.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(
-            Func<IServiceProvider, IApizrOptionsBase, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase
+        public IApizrExtendedManagerOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(
+            Func<IServiceProvider, IApizrManagerOptionsBase, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase
         {
             Options.DelegatingHandlersExtendedFactories.Add(authenticationHandlerFactory);
 
@@ -106,7 +107,7 @@ namespace Apizr.Extending.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(Expression<Func<TSettingsService, string>> tokenProperty,
+        public IApizrExtendedManagerOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(Expression<Func<TSettingsService, string>> tokenProperty,
             Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
         {
             Options.DelegatingHandlersExtendedFactories.Add((serviceProvider, options) =>
@@ -120,7 +121,7 @@ namespace Apizr.Extending.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithAuthenticationHandler<TSettingsService>(Expression<Func<TSettingsService, string>> tokenProperty, Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
+        public IApizrExtendedManagerOptionsBuilder WithAuthenticationHandler<TSettingsService>(Expression<Func<TSettingsService, string>> tokenProperty, Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
         {
             Options.DelegatingHandlersExtendedFactories.Add((serviceProvider, options) =>
                 new AuthenticationHandler<TSettingsService>(
@@ -132,16 +133,16 @@ namespace Apizr.Extending.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler)
+        public IApizrExtendedManagerOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler)
             => AddDelegatingHandler(_ => delegatingHandler);
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder AddDelegatingHandler(
+        public IApizrExtendedManagerOptionsBuilder AddDelegatingHandler(
             Func<IServiceProvider, DelegatingHandler> delegatingHandlerFactory)
             => AddDelegatingHandler((serviceProvider, _) => delegatingHandlerFactory(serviceProvider));
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder AddDelegatingHandler(Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler> delegatingHandlerFactory)
+        public IApizrExtendedManagerOptionsBuilder AddDelegatingHandler(Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler> delegatingHandlerFactory)
         {
             Options.DelegatingHandlersExtendedFactories.Add(delegatingHandlerFactory);
 
@@ -149,13 +150,40 @@ namespace Apizr.Extending.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
+        public IApizrExtendedManagerOptionsBuilder WithContext(Context context,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
+        {
+            Options.Context = context;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithCatching(Action<ApizrException> onException,
+            bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+        {
+            Options.OnException = onException;
+            Options.LetThrowOnExceptionWithEmptyCache = letThrowOnExceptionWithEmptyCache;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithHandlerParameter(string key, object value)
+        {
+            Options.HandlersParameters[key] = value;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
             HttpMessageParts trafficVerbosity = HttpMessageParts.All,
             params LogLevel[] logLevels)
             => WithLogging(_ => httpTracerMode, _ => trafficVerbosity, _ => logLevels);
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithLogging(Func<IServiceProvider, HttpTracerMode> httpTracerModeFactory,
+        public IApizrExtendedManagerOptionsBuilder WithLogging(Func<IServiceProvider, HttpTracerMode> httpTracerModeFactory,
             Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory,
             Func<IServiceProvider, LogLevel[]> logLevelFactory)
         {
@@ -167,17 +195,17 @@ namespace Apizr.Extending.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithRefitSettings(RefitSettings refitSettings)
+        public IApizrExtendedManagerOptionsBuilder WithRefitSettings(RefitSettings refitSettings)
             => WithRefitSettings(_ => refitSettings);
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithConnectivityHandler(IConnectivityHandler connectivityHandler)
+        public IApizrExtendedManagerOptionsBuilder WithConnectivityHandler(IConnectivityHandler connectivityHandler)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithRefitSettings(
+        public IApizrExtendedManagerOptionsBuilder WithRefitSettings(
             Func<IServiceProvider, RefitSettings> refitSettingsFactory)
         {
             Options.RefitSettingsFactory = refitSettingsFactory;
@@ -186,7 +214,7 @@ namespace Apizr.Extending.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithConnectivityHandler(Func<IServiceProvider, IConnectivityHandler> connectivityHandlerFactory)
+        public IApizrExtendedManagerOptionsBuilder WithConnectivityHandler(Func<IServiceProvider, IConnectivityHandler> connectivityHandlerFactory)
         {
             Options.ConnectivityHandlerFactory = connectivityHandlerFactory;
 
@@ -194,7 +222,7 @@ namespace Apizr.Extending.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithConnectivityHandler<TConnectivityHandler>(Expression<Func<TConnectivityHandler, bool>> factory)
+        public IApizrExtendedManagerOptionsBuilder WithConnectivityHandler<TConnectivityHandler>(Expression<Func<TConnectivityHandler, bool>> factory)
         {
             Options.ConnectivityHandlerFactory = serviceProvider => new DefaultConnectivityHandler(() => factory.Compile()(serviceProvider.GetRequiredService<TConnectivityHandler>()));
 
@@ -202,7 +230,7 @@ namespace Apizr.Extending.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithConnectivityHandler(Func<bool> connectivityCheckingFunction)
+        public IApizrExtendedManagerOptionsBuilder WithConnectivityHandler(Func<bool> connectivityCheckingFunction)
         {
             Options.ConnectivityHandlerFactory = _ => new DefaultConnectivityHandler(connectivityCheckingFunction);
 
@@ -210,12 +238,12 @@ namespace Apizr.Extending.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithConnectivityHandler<TConnectivityHandler>()
+        public IApizrExtendedManagerOptionsBuilder WithConnectivityHandler<TConnectivityHandler>()
             where TConnectivityHandler : class, IConnectivityHandler
             => WithConnectivityHandler(typeof(TConnectivityHandler));
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithConnectivityHandler(Type connectivityHandlerType)
+        public IApizrExtendedManagerOptionsBuilder WithConnectivityHandler(Type connectivityHandlerType)
         {
             if (!typeof(IConnectivityHandler).IsAssignableFrom(connectivityHandlerType))
                 throw new ArgumentException(
@@ -227,11 +255,11 @@ namespace Apizr.Extending.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithCacheHandler(ICacheHandler cacheHandler)
+        public IApizrExtendedManagerOptionsBuilder WithCacheHandler(ICacheHandler cacheHandler)
             => WithCacheHandler(_ => cacheHandler);
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithCacheHandler(Func<IServiceProvider, ICacheHandler> cacheHandlerFactory)
+        public IApizrExtendedManagerOptionsBuilder WithCacheHandler(Func<IServiceProvider, ICacheHandler> cacheHandlerFactory)
         {
             Options.CacheHandlerFactory = cacheHandlerFactory;
 
@@ -239,12 +267,12 @@ namespace Apizr.Extending.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithCacheHandler<TCacheHandler>()
+        public IApizrExtendedManagerOptionsBuilder WithCacheHandler<TCacheHandler>()
             where TCacheHandler : class, ICacheHandler
             => WithCacheHandler(typeof(TCacheHandler));
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithCacheHandler(Type cacheHandlerType)
+        public IApizrExtendedManagerOptionsBuilder WithCacheHandler(Type cacheHandlerType)
         {
             if (!typeof(ICacheHandler).IsAssignableFrom(cacheHandlerType))
                 throw new ArgumentException(
@@ -256,11 +284,11 @@ namespace Apizr.Extending.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithMappingHandler(IMappingHandler mappingHandler)
+        public IApizrExtendedManagerOptionsBuilder WithMappingHandler(IMappingHandler mappingHandler)
             => WithMappingHandler(_ => mappingHandler);
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithMappingHandler(Func<IServiceProvider, IMappingHandler> mappingHandlerFactory)
+        public IApizrExtendedManagerOptionsBuilder WithMappingHandler(Func<IServiceProvider, IMappingHandler> mappingHandlerFactory)
         {
             Options.MappingHandlerFactory = mappingHandlerFactory;
 
@@ -268,12 +296,12 @@ namespace Apizr.Extending.Configuring
         }
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithMappingHandler<TMappingHandler>()
+        public IApizrExtendedManagerOptionsBuilder WithMappingHandler<TMappingHandler>()
             where TMappingHandler : class, IMappingHandler
             => WithMappingHandler(typeof(TMappingHandler));
 
         /// <inheritdoc />
-        public IApizrExtendedOptionsBuilder WithMappingHandler(Type mappingHandlerType)
+        public IApizrExtendedManagerOptionsBuilder WithMappingHandler(Type mappingHandlerType)
         {
             if (!typeof(IMappingHandler).IsAssignableFrom(mappingHandlerType))
                 throw new ArgumentException(

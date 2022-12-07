@@ -13,8 +13,8 @@ namespace Apizr.Mediation.Cruding.Base
     /// <typeparam name="TKey">The entity's crud key type</typeparam>
     /// <typeparam name="TResultData">The api result type</typeparam>
     public abstract class DeleteCommandBase<T, TKey, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : MediationCommandBase<TKey, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrUnitRequestOptions
-        where TApizrRequestOptionsBuilder : IApizrUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         /// <summary>
         /// The top level base mediation Delete command constructor
@@ -38,8 +38,8 @@ namespace Apizr.Mediation.Cruding.Base
     /// <typeparam name="T">The api entity type</typeparam>
     /// <typeparam name="TResultData">The api result type</typeparam>
     public abstract class DeleteCommandBase<T, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : DeleteCommandBase<T, int, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrUnitRequestOptions
-        where TApizrRequestOptionsBuilder : IApizrUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         /// <inheritdoc />
         protected DeleteCommandBase(int key, Action<TApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, optionsBuilder)  
@@ -52,8 +52,8 @@ namespace Apizr.Mediation.Cruding.Base
     /// </summary>
     /// <typeparam name="T">The api entity type</typeparam>
     public abstract class DeleteCommandBase<T, TApizrRequestOptions, TApizrRequestOptionsBuilder> : DeleteCommandBase<T, Unit, TApizrRequestOptions, TApizrRequestOptionsBuilder>
-        where TApizrRequestOptions : IApizrUnitRequestOptions
-        where TApizrRequestOptionsBuilder : IApizrUnitRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        where TApizrRequestOptions : IApizrRequestOptions
+        where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
     {
         /// <inheritdoc />
         protected DeleteCommandBase(int key, Action<TApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, optionsBuilder)

@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using Apizr.Caching;
 using Apizr.Configuring;
 using Apizr.Configuring.Common;
+using Apizr.Configuring.Manager;
 using Apizr.Configuring.Request;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
@@ -21,17 +22,17 @@ namespace Apizr
     {
         #region PrimaryHttpMessageHandler
 
-        private static Func<DelegatingHandler, ILogger, IApizrOptionsBase, HttpMessageHandler> _primaryHandlerFactory;
+        private static Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> _primaryHandlerFactory;
 
         internal static void SetPrimaryHttpMessageHandler<T>(this T builder,
-            Func<DelegatingHandler, ILogger, IApizrOptionsBase, HttpMessageHandler> primaryHandlerFactory)
-            where T : IApizrGlobalSharedOptionsBuilderBase
+            Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> primaryHandlerFactory)
+            where T : IApizrGlobalSharedRegistrationOptionsBuilderBase
         {
             _primaryHandlerFactory = primaryHandlerFactory;
         }
 
         internal static HttpMessageHandler GetPrimaryHttpMessageHandler(this ExtendedHttpHandlerBuilder httpHandlerBuilder,
-            ILogger logger, IApizrOptionsBase options)
+            ILogger logger, IApizrManagerOptionsBase options)
         {
             var innerHandler = httpHandlerBuilder.Build();
             return _primaryHandlerFactory?.Invoke(innerHandler, logger, options) ?? innerHandler;

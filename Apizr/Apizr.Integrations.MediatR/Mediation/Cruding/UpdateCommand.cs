@@ -11,7 +11,7 @@ namespace Apizr.Mediation.Cruding
     /// </summary>
     /// <typeparam name="TKey">The entity's crud key type</typeparam>
     /// <typeparam name="TRequestData">The request data type</typeparam>
-    public class UpdateCommand<TKey, TRequestData> : UpdateCommandBase<TKey, TRequestData, Unit, IApizrCatchUnitRequestOptions, IApizrCatchUnitRequestOptionsBuilder>
+    public class UpdateCommand<TKey, TRequestData> : UpdateCommandBase<TKey, TRequestData, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder>
     {
         /// <summary>
         /// The mediation Update command constructor
@@ -19,7 +19,7 @@ namespace Apizr.Mediation.Cruding
         /// <param name="key">The entity's crud key</param>
         /// <param name="requestData">The request data to send</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        public UpdateCommand(TKey key, TRequestData requestData, Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null) : base(key, requestData, optionsBuilder)
+        public UpdateCommand(TKey key, TRequestData requestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, requestData, optionsBuilder)
         {
         }
     }
@@ -28,7 +28,7 @@ namespace Apizr.Mediation.Cruding
     /// The mediation Update command
     /// </summary>
     /// <typeparam name="TRequestData">The request data type</typeparam>
-    public class UpdateCommand<TRequestData> : UpdateCommandBase<TRequestData, IApizrCatchUnitRequestOptions, IApizrCatchUnitRequestOptionsBuilder>
+    public class UpdateCommand<TRequestData> : UpdateCommandBase<TRequestData, IApizrRequestOptions, IApizrRequestOptionsBuilder>
     {
         /// <summary>
         /// The mediation Update command constructor
@@ -36,7 +36,7 @@ namespace Apizr.Mediation.Cruding
         /// <param name="key">The entity's crud key</param>
         /// <param name="requestData">The request data to send</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        public UpdateCommand(int key, TRequestData requestData, Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null) : base(key, requestData, optionsBuilder)
+        public UpdateCommand(int key, TRequestData requestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(key, requestData, optionsBuilder)
         {
         }
     }

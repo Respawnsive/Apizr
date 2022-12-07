@@ -270,6 +270,36 @@ namespace Apizr.Tests
         }
 
         [Fact]
+        public async Task Requesting_With_Context_At_Multiple_Levels_Should_Merge_It_All_At_The_End()
+        {
+            var watcher = new WatchingRequestHandler();
+            var testKey1 = "TestKey1";
+            var testValue1 = 1;
+            // Defining Context 1
+            var context1 = new Context { { testKey1, testValue1 } };
+
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>(options =>
+                options.WithContext(context1)
+                    .AddDelegatingHandler(watcher));
+
+            var testKey2 = "TestKey2";
+            var testValue2 = 2;
+            // Defining Context 2
+            var context2 = new Context { { testKey2, testValue2 } };
+
+            await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
+                options => options.WithContext(context2));
+
+            watcher.Context.Should().NotBeNull();
+            watcher.Context.Keys.Should().Contain(testKey1);
+            watcher.Context.TryGetValue(testKey1, out var value1).Should().BeTrue();
+            value1.Should().Be(testValue1);
+            watcher.Context.Keys.Should().Contain(testKey2);
+            watcher.Context.TryGetValue(testKey2, out var value2).Should().BeTrue();
+            value2.Should().Be(testValue2);
+        }
+
+        [Fact]
         public async Task Requesting_With_LogSettings_Into_Options_Should_Win_Over_All_Others()
         {
             var watcher = new WatchingRequestHandler();

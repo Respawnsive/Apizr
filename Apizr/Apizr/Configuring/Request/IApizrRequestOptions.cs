@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Apizr.Configuring.Request
 {
-    public interface IApizrSharedRequestOptions : IApizrRequestOptionsBase
+    public interface IApizrRequestOptions : IApizrRequestOptionsBase
     {
         /// <summary>
         /// The Polly Context to pass through it all
@@ -21,71 +21,23 @@ namespace Apizr.Configuring.Request
         CancellationToken CancellationToken { get; }
 
         /// <summary>
-        /// Http traffic tracing mode
+        /// Clear request cache before executing (default: false)
         /// </summary>
-        HttpTracerMode HttpTracerMode { get; }
+        bool ClearCache { get; }
 
         /// <summary>
-        /// Http traffic tracing verbosity
+        /// Handle exception and return cached result (default: null = throwing)
         /// </summary>
-        HttpMessageParts TrafficVerbosity { get; }
+        Action<ApizrException> OnException { get; }
 
         /// <summary>
-        /// Log levels while writing
+        /// 
         /// </summary>
-        LogLevel[] LogLevels { get; }
+        bool LetThrowOnExceptionWithEmptyCache { get; }
 
         /// <summary>
         /// Custom parameters to pass through delegating handlers
         /// </summary>
         IDictionary<string, object> HandlersParameters { get; }
     }
-
-    public interface IApizrCacheRequestOption : IApizrRequestOptionsBase
-    {
-        /// <summary>
-        /// Clear request cache before executing (default: false)
-        /// </summary>
-        bool ClearCache { get; }
-    }
-
-    public interface IApizrCatchRequestOption : IApizrRequestOptionsBase
-    {
-        /// <summary>
-        /// Handle exception and return cached result (default: null = throwing)
-        /// </summary>
-        Action<ApizrException> OnException { get; }
-    }
-
-    /// <summary>
-    /// Options available for a unit request
-    /// </summary>
-    public interface IApizrUnitRequestOptions : IApizrSharedRequestOptions
-    { }
-
-    /// <summary>
-    /// Options available for a unit request with exception catching
-    /// </summary>
-    public interface IApizrCatchUnitRequestOptions : IApizrUnitRequestOptions, IApizrCatchRequestOption
-    { }
-
-    /// <summary>
-    /// Options available for a result request
-    /// </summary>
-    public interface IApizrResultRequestOptions : IApizrSharedRequestOptions, IApizrCacheRequestOption
-    { }
-
-    /// <summary>
-    /// Options available for a result request with exception catching
-    /// </summary>
-    public interface IApizrCatchResultRequestOptions : IApizrResultRequestOptions, IApizrCatchRequestOption
-    {
-        bool LetThrowOnExceptionWithEmptyCache { get; }
-    }
-
-    /// <summary>
-    /// Options available for a request
-    /// </summary>
-    public interface IApizrRequestOptions : IApizrCatchUnitRequestOptions, IApizrCatchResultRequestOptions
-    {}
 }

@@ -1,64 +1,27 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Apizr.Logging;
+﻿using Apizr.Logging;
 using Microsoft.Extensions.Logging;
+using Polly;
+using System;
 
 namespace Apizr.Configuring.Shared
 {
     /// <summary>
-    /// Builder options available at both common and proper level for both static and extended registrations
+    /// Builder options available at all (common, proper and request) levels and for all (static and extended) registration types
     /// </summary>
     public interface IApizrGlobalSharedOptionsBuilderBase
     {
     }
 
     /// <inheritdoc />
-    public interface IApizrGlobalSharedOptionsBuilderBase<out TApizrSharedOptions, out TApizrSharedOptionsBuilder> : IApizrGlobalSharedOptionsBuilderBase
-        where TApizrSharedOptions : IApizrSharedOptionsBase
-        where TApizrSharedOptionsBuilder : IApizrGlobalSharedOptionsBuilderBase<TApizrSharedOptions, TApizrSharedOptionsBuilder>
+    public interface IApizrGlobalSharedOptionsBuilderBase<out TApizrOptions, out TApizrOptionsBuilder> : IApizrGlobalSharedOptionsBuilderBase
+        where TApizrOptions : IApizrGlobalSharedOptionsBase
+        where TApizrOptionsBuilder : IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>
     {
-        /// <summary>
-        /// Define your web api base address (could be defined with WebApiAttribute)
-        /// </summary>
-        /// <param name="baseAddress">Your web api base address</param>
-        /// <returns></returns>
-        TApizrSharedOptionsBuilder WithBaseAddress(string baseAddress);
+        TApizrOptionsBuilder WithContext(Context context, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge);
 
-        /// <summary>
-        /// Define your web api base address (could be defined with WebApiAttribute)
-        /// </summary>
-        /// <param name="baseAddress">Your web api base address</param>
-        /// <returns></returns>
-        TApizrSharedOptionsBuilder WithBaseAddress(Uri baseAddress);
+        TApizrOptionsBuilder WithCatching(Action<ApizrException> onException, bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace);
 
-        /// <summary>
-        /// Define your web api base path (could be defined with WebApiAttribute)
-        /// </summary>
-        /// <param name="basePath">Your web api base path</param>
-        /// <returns></returns>
-        TApizrSharedOptionsBuilder WithBasePath(string basePath);
-
-        /// <summary>
-        /// Provide a custom HttpClientHandler
-        /// </summary>
-        /// <param name="httpClientHandler">An <see cref="HttpClientHandler"/> instance</param>
-        /// <returns></returns>
-        TApizrSharedOptionsBuilder WithHttpClientHandler(HttpClientHandler httpClientHandler);
-
-        /// <summary>
-        /// Provide a method to refresh the authorization token when needed
-        /// </summary>
-        /// <param name="refreshTokenFactory">Refresh token method called when expired or empty</param>
-        /// <returns></returns>
-        TApizrSharedOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshTokenFactory);
-
-        /// <summary>
-        /// Add a custom delegating handler
-        /// </summary>
-        /// <param name="delegatingHandler">A delegating handler</param>
-        /// <returns></returns>
-        TApizrSharedOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler);
+        TApizrOptionsBuilder WithHandlerParameter(string key, object value);
 
         /// <summary>
         /// Configure logging level for the api
@@ -67,7 +30,7 @@ namespace Apizr.Configuring.Shared
         /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: All)</param>
         /// <param name="logLevels">Log levels to apply while writing (default: Information)</param>
         /// <returns></returns>
-        TApizrSharedOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
+        TApizrOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
             HttpMessageParts trafficVerbosity = HttpMessageParts.All, params LogLevel[] logLevels);
     }
 }

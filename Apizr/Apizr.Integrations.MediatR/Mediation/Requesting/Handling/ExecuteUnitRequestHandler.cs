@@ -17,7 +17,7 @@ namespace Apizr.Mediation.Requesting.Handling
     /// <typeparam name="TWebApi">The web api type</typeparam>
     /// <typeparam name="TModelData">The model data type</typeparam>
     /// <typeparam name="TApiData">The api data type</typeparam>
-    public class ExecuteUnitRequestHandler<TWebApi, TModelData, TApiData> : ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, ExecuteUnitRequest<TWebApi, TModelData, TApiData>, IApizrCatchUnitRequestOptions, IApizrCatchUnitRequestOptionsBuilder>
+    public class ExecuteUnitRequestHandler<TWebApi, TModelData, TApiData> : ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, ExecuteUnitRequest<TWebApi, TModelData, TApiData>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
     {
         public ExecuteUnitRequestHandler(IApizrManager<TWebApi> webApiManager) : base(webApiManager)
         {
@@ -32,7 +32,7 @@ namespace Apizr.Mediation.Requesting.Handling
                     WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData,request.OptionsBuilder)
                     .ContinueWith(_ => Unit.Value, cancellationToken),
 
-                Expression<Func<IApizrCatchUnitRequestOptions, TWebApi, TApiData, Task>> executeApiMethod => 
+                Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod => 
                     WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData,
                         request.OptionsBuilder)
                     .ContinueWith(_ => Unit.Value, cancellationToken),
@@ -46,7 +46,7 @@ namespace Apizr.Mediation.Requesting.Handling
     /// The mediation execute unit request handler
     /// </summary>
     /// <typeparam name="TWebApi">The web api type</typeparam>
-    public class ExecuteUnitRequestHandler<TWebApi> : ExecuteUnitRequestHandlerBase<TWebApi, ExecuteUnitRequest<TWebApi>, IApizrCatchUnitRequestOptions, IApizrCatchUnitRequestOptionsBuilder>
+    public class ExecuteUnitRequestHandler<TWebApi> : ExecuteUnitRequestHandlerBase<TWebApi, ExecuteUnitRequest<TWebApi>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
     {
         public ExecuteUnitRequestHandler(IApizrManager<TWebApi> webApiManager) : base(webApiManager)
         {
@@ -61,7 +61,7 @@ namespace Apizr.Mediation.Requesting.Handling
                     WebApiManager.ExecuteAsync(executeApiMethod, request.OptionsBuilder)
                         .ContinueWith(_ => Unit.Value, cancellationToken),
 
-                Expression<Func<IApizrCatchUnitRequestOptions, TWebApi, Task>> executeApiMethod => 
+                Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod => 
                     WebApiManager.ExecuteAsync(executeApiMethod, request.OptionsBuilder)
                         .ContinueWith(_ => Unit.Value, cancellationToken),
 

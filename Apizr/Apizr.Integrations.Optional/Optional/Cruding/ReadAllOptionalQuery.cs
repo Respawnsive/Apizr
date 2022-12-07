@@ -12,13 +12,13 @@ namespace Apizr.Optional.Cruding
     /// </summary>
     /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
     /// <typeparam name="TReadAllResult">The api result type</typeparam>
-    public class ReadAllOptionalQuery<TReadAllParams, TReadAllResult> : ReadAllQueryBase<TReadAllParams, Option<TReadAllResult, ApizrException<TReadAllResult>>, IApizrResultRequestOptions, IApizrResultRequestOptionsBuilder>
+    public class ReadAllOptionalQuery<TReadAllParams, TReadAllResult> : ReadAllQueryBase<TReadAllParams, Option<TReadAllResult, ApizrException<TReadAllResult>>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
     {
         /// <summary>
         /// The mediation ReadAll optional query constructor
         /// </summary>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        public ReadAllOptionalQuery(Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) : base(default, optionsBuilder)
+        public ReadAllOptionalQuery(Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(default, optionsBuilder)
         {
             
         }
@@ -28,7 +28,7 @@ namespace Apizr.Optional.Cruding
         /// </summary>
         /// <param name="parameters">The query parameters to send</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        public ReadAllOptionalQuery(TReadAllParams parameters, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) : base(parameters, optionsBuilder)
+        public ReadAllOptionalQuery(TReadAllParams parameters, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(parameters, optionsBuilder)
         {
 
         }
@@ -38,13 +38,13 @@ namespace Apizr.Optional.Cruding
     /// The mediation ReadAll optional query
     /// </summary>
     /// <typeparam name="TReadAllResult">The api result type</typeparam>
-    public class ReadAllOptionalQuery<TReadAllResult> : ReadAllQueryBase<Option<TReadAllResult, ApizrException<TReadAllResult>>, IApizrResultRequestOptions, IApizrResultRequestOptionsBuilder>
+    public class ReadAllOptionalQuery<TReadAllResult> : ReadAllQueryBase<Option<TReadAllResult, ApizrException<TReadAllResult>>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
     {
         /// <summary>
         /// The mediation ReadAll optional query constructor
         /// </summary>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        public ReadAllOptionalQuery(Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) : base(default, optionsBuilder)
+        public ReadAllOptionalQuery(Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(default, optionsBuilder)
         {
             
         }
@@ -54,7 +54,7 @@ namespace Apizr.Optional.Cruding
         /// </summary>
         /// <param name="parameters">The query parameters to send</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        public ReadAllOptionalQuery(IDictionary<string, object> parameters, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null) : base(parameters, optionsBuilder)
+        public ReadAllOptionalQuery(IDictionary<string, object> parameters, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(parameters, optionsBuilder)
         {
 
         }

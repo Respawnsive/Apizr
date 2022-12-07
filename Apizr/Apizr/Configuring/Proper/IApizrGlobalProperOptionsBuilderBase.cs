@@ -5,7 +5,7 @@ namespace Apizr.Configuring.Proper
     /// <summary>
     /// Builder options available at proper level for both static and extended registrations
     /// </summary>
-    public interface IApizrGlobalProperOptionsBuilderBase : IApizrGlobalSharedOptionsBuilderBase
+    public interface IApizrGlobalProperOptionsBuilderBase : IApizrGlobalSharedRegistrationOptionsBuilderBase
     {
     }
 
@@ -13,7 +13,7 @@ namespace Apizr.Configuring.Proper
     /// Builder options available at proper level for both static and extended registrations
     /// </summary>
     public interface IApizrGlobalProperOptionsBuilderBase<out TApizrProperOptions, out TApizrProperOptionsBuilder> : IApizrGlobalProperOptionsBuilderBase,
-        IApizrGlobalSharedOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>
+        IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>
     where TApizrProperOptions : IApizrProperOptionsBase
     where TApizrProperOptionsBuilder : IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>
     {

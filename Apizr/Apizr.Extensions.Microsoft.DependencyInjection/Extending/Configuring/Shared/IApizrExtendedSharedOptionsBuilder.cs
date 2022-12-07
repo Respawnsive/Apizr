@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Configuring;
+using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,10 +15,11 @@ namespace Apizr.Extending.Configuring.Shared
     /// <summary>
     /// Builder options available at both common and proper level for extended registrations
     /// </summary>
-    public interface IApizrExtendedSharedOptionsBuilder<out TApizrExtendedSharedOptions, out TApizrExtendedSharedOptionsBuilder> : IApizrExtendedSharedOptionsBuilderBase, 
-        IApizrGlobalSharedOptionsBuilderBase<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>
-        where TApizrExtendedSharedOptions : IApizrSharedOptionsBase
-        where TApizrExtendedSharedOptionsBuilder : IApizrGlobalSharedOptionsBuilderBase<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>
+    public interface IApizrExtendedSharedOptionsBuilder<out TApizrExtendedSharedOptions, out TApizrExtendedSharedOptionsBuilder> : 
+        IApizrExtendedSharedRegistrationOptionsBuilderBase, 
+        IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>
+        where TApizrExtendedSharedOptions : IApizrSharedRegistrationOptionsBase
+        where TApizrExtendedSharedOptionsBuilder : IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>
     {
         /// <summary>
         /// Define your web api base address (could be defined with WebApiAttribute)
@@ -75,7 +77,7 @@ namespace Apizr.Extending.Configuring.Shared
         /// </summary>
         /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
         /// <returns></returns>
-        TApizrExtendedSharedOptionsBuilder AddDelegatingHandler(Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler> delegatingHandlerFactory);
+        TApizrExtendedSharedOptionsBuilder AddDelegatingHandler(Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler> delegatingHandlerFactory);
 
         /// <summary>
         /// Provide your own <see cref="AuthenticationHandlerBase"/> implementation
@@ -83,7 +85,7 @@ namespace Apizr.Extending.Configuring.Shared
         /// <typeparam name="TAuthenticationHandler">Your <see cref="AuthenticationHandlerBase"/> implementation</typeparam>
         /// <param name="authenticationHandlerFactory">A <typeparamref name="TAuthenticationHandler"/> instance factory</param>
         /// <returns></returns>
-        TApizrExtendedSharedOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<IServiceProvider, IApizrOptionsBase, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase;
+        TApizrExtendedSharedOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<IServiceProvider, IApizrManagerOptionsBase, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase;
 
         /// <summary>
         /// Provide your own settings management and token management services

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using Apizr.Configuring;
+using Apizr.Configuring.Manager;
 using Microsoft.Extensions.Logging;
 
 namespace Apizr.Logging
@@ -27,14 +28,14 @@ namespace Apizr.Logging
         /// Initializes a new instance of the <typeparamref name="T:ExtendedHttpTracerHandler"/> class.
         /// </summary>
         /// <param name="apizrOptions"></param>
-        public ExtendedHttpHandlerBuilder(IApizrOptionsBase apizrOptions) : this(new ExtendedHttpTracerHandler(null, apizrOptions)) { }
+        public ExtendedHttpHandlerBuilder(IApizrManagerOptionsBase apizrOptions) : this(new ExtendedHttpTracerHandler(null, apizrOptions)) { }
 
         /// <summary>
         /// Initializes a new instance of the <typeparamref name="T:ExtendedHttpTracerHandler"/> class.
         /// </summary>
         /// <param name="innerHandler">HttpClientHandler.</param>
         /// <param name="apizrOptions"></param>
-        public ExtendedHttpHandlerBuilder(HttpClientHandler innerHandler, IApizrOptionsBase apizrOptions) : this(new ExtendedHttpTracerHandler(innerHandler, apizrOptions)) { }
+        public ExtendedHttpHandlerBuilder(HttpClientHandler innerHandler, IApizrManagerOptionsBase apizrOptions) : this(new ExtendedHttpTracerHandler(innerHandler, apizrOptions)) { }
 
         /// <summary>
         /// Initializes a new instance of the <typeparamref name="T:ExtendedHttpTracerHandler"/> class.

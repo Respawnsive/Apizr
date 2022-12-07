@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Apizr.Extending;
 using Apizr.Extending.Configuring;
 using Apizr.Extending.Configuring.Common;
+using Apizr.Extending.Configuring.Manager;
 using Apizr.Mapping;
 using Apizr.Optional.Configuring.Registry;
 using Apizr.Optional.Cruding;
@@ -45,8 +46,8 @@ namespace Apizr
         /// </summary>
         /// <param name="optionsBuilder"></param>
         /// <returns></returns>
-        public static IApizrExtendedOptionsBuilder WithOptionalMediation(
-            this IApizrExtendedOptionsBuilder optionsBuilder)
+        public static IApizrExtendedManagerOptionsBuilder WithOptionalMediation(
+            this IApizrExtendedManagerOptionsBuilder optionsBuilder)
         {
             WithMediation(optionsBuilder.ApizrOptions);
 

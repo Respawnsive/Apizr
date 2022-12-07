@@ -1,6 +1,8 @@
-﻿namespace Apizr.Configuring.Request
+﻿using Apizr.Configuring.Shared;
+
+namespace Apizr.Configuring.Request
 {
-    public interface IApizrRequestOptionsBase
+    public interface IApizrRequestOptionsBase : IApizrGlobalSharedOptionsBase
     {
     }
 }

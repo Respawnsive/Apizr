@@ -20,7 +20,7 @@ namespace Apizr.Optional.Cruding.Handling
     /// <typeparam name="TReadAllResult">The returned result type</typeparam>
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     public class UpdateOptionalCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams> : 
-        UpdateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, UpdateOptionalCommand<TApiEntityKey, TModelEntity>, Option<Unit, ApizrException>, IApizrUnitRequestOptions, IApizrUnitRequestOptionsBuilder>
+        UpdateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, UpdateOptionalCommand<TApiEntityKey, TModelEntity>, Option<Unit, ApizrException>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
         where TModelEntity : class
         where TApiEntity : class
     {
@@ -38,7 +38,7 @@ namespace Apizr.Optional.Cruding.Handling
                     .MapAsync(_ => CrudApiManager.ExecuteAsync<TModelEntity, TApiEntity>(
                             (options, api, apiEntity) =>
                                 api.Update(request.Key, apiEntity, options.Context, options.CancellationToken),
-                            request.RequestData, (Action<IApizrCatchUnitRequestOptionsBuilder>) request.OptionsBuilder)
+                            request.RequestData, (Action<IApizrRequestOptionsBuilder>) request.OptionsBuilder)
                         .ContinueWith(_ => Unit.Value, cancellationToken))
                     .ConfigureAwait(false);
             }
@@ -57,7 +57,7 @@ namespace Apizr.Optional.Cruding.Handling
     /// <typeparam name="TReadAllResult">The returned result type</typeparam>
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     public class UpdateOptionalCommandHandler<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams> : 
-        UpdateCommandHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, UpdateOptionalCommand<TModelEntity>, Option<Unit, ApizrException>, IApizrUnitRequestOptions, IApizrUnitRequestOptionsBuilder>
+        UpdateCommandHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, UpdateOptionalCommand<TModelEntity>, Option<Unit, ApizrException>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
         where TModelEntity : class
         where TApiEntity : class
     {
@@ -75,7 +75,7 @@ namespace Apizr.Optional.Cruding.Handling
                     .MapAsync(_ => CrudApiManager.ExecuteAsync<TModelEntity, TApiEntity>(
                             (options, api, apiEntity) =>
                                 api.Update(request.Key, apiEntity, options.Context, options.CancellationToken),
-                            request.RequestData, (Action<IApizrCatchUnitRequestOptionsBuilder>) request.OptionsBuilder)
+                            request.RequestData, (Action<IApizrRequestOptionsBuilder>) request.OptionsBuilder)
                         .ContinueWith(_ => Unit.Value, cancellationToken))
                     .ConfigureAwait(false);
             }

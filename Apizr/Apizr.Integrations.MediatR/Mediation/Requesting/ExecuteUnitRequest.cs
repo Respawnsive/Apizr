@@ -15,7 +15,7 @@ namespace Apizr.Mediation.Requesting
     /// <typeparam name="TModelData">The model data type</typeparam>
     /// <typeparam name="TApiData">The api data type</typeparam>
     public class ExecuteUnitRequest<TWebApi, TModelData, TApiData> :
-        ExecuteUnitRequestBase<TWebApi, TModelData, TApiData, IApizrCatchUnitRequestOptions, IApizrCatchUnitRequestOptionsBuilder>
+        ExecuteUnitRequestBase<TWebApi, TModelData, TApiData, IApizrRequestOptions, IApizrRequestOptionsBuilder>
     {
         /// <summary>
         /// The mediation execute unit request constructor
@@ -23,7 +23,7 @@ namespace Apizr.Mediation.Requesting
         /// <param name="executeApiMethod">The request to execute</param>
         /// <param name="modelData">The data provided to the request</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        public ExecuteUnitRequest(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, modelData, optionsBuilder)
+        public ExecuteUnitRequest(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, modelData, optionsBuilder)
         {
         }
 
@@ -33,7 +33,7 @@ namespace Apizr.Mediation.Requesting
         /// <param name="executeApiMethod">The request to execute</param>
         /// <param name="modelData">The data provided to the request</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        public ExecuteUnitRequest(Expression<Func<IApizrCatchUnitRequestOptions, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, modelData, optionsBuilder)
+        public ExecuteUnitRequest(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, modelData, optionsBuilder)
         {
         }
     }
@@ -42,14 +42,14 @@ namespace Apizr.Mediation.Requesting
     /// The mediation execute unit request (returning no result)
     /// </summary>
     /// <typeparam name="TWebApi">The web api type</typeparam>
-    public class ExecuteUnitRequest<TWebApi> : ExecuteUnitRequestBase<TWebApi, IApizrCatchUnitRequestOptions, IApizrCatchUnitRequestOptionsBuilder>
+    public class ExecuteUnitRequest<TWebApi> : ExecuteUnitRequestBase<TWebApi, IApizrRequestOptions, IApizrRequestOptionsBuilder>
     {
         /// <summary>
         /// The mediation execute unit request constructor
         /// </summary>
         /// <param name="executeApiMethod">The request to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        public ExecuteUnitRequest(Expression<Func<TWebApi, Task>> executeApiMethod, Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
+        public ExecuteUnitRequest(Expression<Func<TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
         {
         }
 
@@ -58,7 +58,7 @@ namespace Apizr.Mediation.Requesting
         /// </summary>
         /// <param name="executeApiMethod">The request to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
-        public ExecuteUnitRequest(Expression<Func<IApizrCatchUnitRequestOptions, TWebApi, Task>> executeApiMethod, Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
+        public ExecuteUnitRequest(Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(executeApiMethod, optionsBuilder)
         {
         }
     }

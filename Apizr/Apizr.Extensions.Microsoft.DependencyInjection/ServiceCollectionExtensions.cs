@@ -5,11 +5,13 @@ using System.Net.Http;
 using System.Reflection;
 using Apizr.Caching;
 using Apizr.Configuring;
+using Apizr.Configuring.Manager;
 using Apizr.Configuring.Request;
 using Apizr.Connecting;
 using Apizr.Extending;
 using Apizr.Extending.Configuring;
 using Apizr.Extending.Configuring.Common;
+using Apizr.Extending.Configuring.Manager;
 using Apizr.Extending.Configuring.Proper;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Helping;
@@ -71,7 +73,7 @@ namespace Apizr
         /// <param name="services">The service collection</param>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        public static IServiceCollection AddApizrCrudManagerFor<T>(this IServiceCollection services,Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) where T : class =>
+        public static IServiceCollection AddApizrCrudManagerFor<T>(this IServiceCollection services,Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) where T : class =>
             AddApizrCrudManagerFor(services, typeof(T), typeof(int), typeof(IEnumerable<>), typeof(IDictionary<string, object>), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
@@ -85,7 +87,7 @@ namespace Apizr
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
         public static IServiceCollection AddApizrCrudManagerFor<T, TKey>(this IServiceCollection services,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) where T : class =>
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) where T : class =>
             AddApizrCrudManagerFor(services, typeof(T), typeof(TKey), typeof(IEnumerable<>), typeof(IDictionary<string, object>), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
@@ -102,7 +104,7 @@ namespace Apizr
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
         public static IServiceCollection AddApizrCrudManagerFor<T, TKey, TReadAllResult>(this IServiceCollection services,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
             where T : class =>
             AddApizrCrudManagerFor(services, typeof(T), typeof(TKey), typeof(TReadAllResult), typeof(IDictionary<string, object>), typeof(ApizrManager<>), optionsBuilder);
 
@@ -121,7 +123,7 @@ namespace Apizr
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
         public static IServiceCollection AddApizrCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams>(this IServiceCollection services,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
             where T : class =>
             AddApizrCrudManagerFor(services, typeof(T), typeof(TKey), typeof(TReadAllResult), typeof(TReadAllParams), typeof(ApizrManager<>), optionsBuilder);
 
@@ -141,7 +143,7 @@ namespace Apizr
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
         public static IServiceCollection AddApizrCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(this IServiceCollection services,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
             where T : class
             where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> =>
             AddApizrCrudManagerFor(services, typeof(T), typeof(TKey), typeof(TReadAllResult), typeof(TReadAllParams), typeof(TApizrManager), optionsBuilder);
@@ -156,7 +158,7 @@ namespace Apizr
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
         public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services, Type crudedType,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) =>
             AddApizrCrudManagerFor(services, crudedType, typeof(int), typeof(IEnumerable<>), typeof(IDictionary<string, object>), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
@@ -169,7 +171,7 @@ namespace Apizr
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
         public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services, Type crudedType,
-            Type crudedKeyType, Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
+            Type crudedKeyType, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) =>
             AddApizrCrudManagerFor(services, crudedType, crudedKeyType, typeof(IEnumerable<>), typeof(IDictionary<string, object>), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
@@ -186,7 +188,7 @@ namespace Apizr
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
         public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services, Type crudedType,
-            Type crudedKeyType, Type crudedReadAllResultType, Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
+            Type crudedKeyType, Type crudedReadAllResultType, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) =>
             AddApizrCrudManagerFor(services, crudedType, crudedType, crudedReadAllResultType, typeof(IDictionary<string, object>), typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
@@ -205,7 +207,7 @@ namespace Apizr
         /// <returns></returns>
         public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services, Type crudedType,
             Type crudedKeyType, Type crudedReadAllResultType, Type crudedReadAllParamsType,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) =>
             AddApizrCrudManagerFor(services, crudedType, crudedType, crudedReadAllResultType, crudedReadAllParamsType, typeof(ApizrManager<>), optionsBuilder);
 
         /// <summary>
@@ -225,7 +227,7 @@ namespace Apizr
         /// <returns></returns>
         public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services, Type crudedType,
             Type crudedKeyType, Type crudedReadAllResultType, Type crudedReadAllParamsType, Type apizrManagerType,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
         {
             if (!crudedType.GetTypeInfo().IsClass)
                 throw new ArgumentException($"{crudedType.Name} is not a class", nameof(crudedType));
@@ -313,7 +315,7 @@ namespace Apizr
         /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
         public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes) =>
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes) =>
             AddApizrCrudManagerFor(services, typeof(ApizrManager<>), optionsBuilder,
                 assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
 
@@ -325,7 +327,7 @@ namespace Apizr
         /// <param name="assemblies">Any assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
         public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies) =>
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies) =>
             AddApizrCrudManagerFor(services, typeof(ApizrManager<>), optionsBuilder,
                 assemblies);
 
@@ -360,7 +362,7 @@ namespace Apizr
         /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
         public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services, Type apizrManagerType,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes) =>
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes) =>
             AddApizrCrudManagerFor(services, apizrManagerType, optionsBuilder,
                 assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
 
@@ -373,7 +375,7 @@ namespace Apizr
         /// <param name="assemblies">Any assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
         public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services, Type apizrManagerType,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies)
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies)
         {
             if (!assemblies.Any())
                 throw new ArgumentException(
@@ -443,7 +445,7 @@ namespace Apizr
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
         public static IServiceCollection AddApizrManagerFor<TWebApi>(this IServiceCollection services,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) =>
             AddApizrManagerFor(services, typeof(TWebApi), typeof(ApizrManager<TWebApi>),
                 CreateCommonOptions(), optionsBuilder);
 
@@ -456,7 +458,7 @@ namespace Apizr
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
         public static IServiceCollection AddApizrManagerFor<TWebApi, TApizrManager>(this IServiceCollection services,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
             where TApizrManager : IApizrManager<TWebApi> =>
             AddApizrManagerFor(services, typeof(TWebApi), typeof(TApizrManager),
                 CreateCommonOptions(), optionsBuilder);
@@ -469,7 +471,7 @@ namespace Apizr
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
         public static IServiceCollection AddApizrManagerFor(this IServiceCollection services, Type webApiType,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null) =>
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) =>
             AddApizrManagerFor(services, webApiType, typeof(ApizrManager<>).MakeGenericType(webApiType),
                 CreateCommonOptions(), optionsBuilder);
 
@@ -481,7 +483,7 @@ namespace Apizr
         /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="WebApiAttribute"/></param>
         /// <returns></returns>
         public static IServiceCollection AddApizrManagerFor(this IServiceCollection services,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes) =>
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes) =>
             AddApizrManagerFor(services, typeof(ApizrManager<>), optionsBuilder,
                 assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
 
@@ -493,7 +495,7 @@ namespace Apizr
         /// <param name="assemblies">Any assembly to scan for <see cref="WebApiAttribute"/></param>
         /// <returns></returns>
         public static IServiceCollection AddApizrManagerFor(this IServiceCollection services,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies) =>
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies) =>
             AddApizrManagerFor(services, typeof(ApizrManager<>), optionsBuilder,
                 assemblies);
 
@@ -506,7 +508,7 @@ namespace Apizr
         /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="WebApiAttribute"/></param>
         /// <returns></returns>
         public static IServiceCollection AddApizrManagerFor(this IServiceCollection services, Type apizrManagerType,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes) =>
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes) =>
             AddApizrManagerFor(services, apizrManagerType, optionsBuilder,
                 assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
 
@@ -519,7 +521,7 @@ namespace Apizr
         /// <param name="assemblies">Any assembly to scan for <see cref="WebApiAttribute"/></param>
         /// <returns></returns>
         public static IServiceCollection AddApizrManagerFor(this IServiceCollection services, Type apizrManagerType,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies)
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies)
         {
             if (!assemblies.Any())
                 throw new ArgumentException(
@@ -561,13 +563,13 @@ namespace Apizr
         /// <returns></returns>
         public static IServiceCollection AddApizrManagerFor(
             this IServiceCollection services, Type webApiType, Type apizrManagerType,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
             => AddApizrManagerFor(services, webApiType, apizrManagerType, CreateCommonOptions(), optionsBuilder);
 
         private static IServiceCollection AddApizrManagerFor(
             this IServiceCollection services, Type webApiType, Type apizrManagerType,
             IApizrExtendedCommonOptions commonOptions,
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
         {
             AddApizrManagerFor(services, commonOptions,
                 CreateProperOptions(commonOptions, webApiType, apizrManagerType), optionsBuilder);
@@ -579,7 +581,7 @@ namespace Apizr
             this IServiceCollection services,
             IApizrExtendedCommonOptions commonOptions,
             IApizrExtendedProperOptions properOptions, 
-            Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
+            Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
         {
             if (!typeof(IApizrManager<>).MakeGenericType(properOptions.WebApiType).IsAssignableFrom(properOptions.ApizrManagerType))
                 throw new ArgumentException(
@@ -588,12 +590,12 @@ namespace Apizr
             var webApiFriendlyName = properOptions.WebApiType.GetFriendlyName();
             var apizrOptionsBuilder = CreateOptions(commonOptions, properOptions, optionsBuilder);
             var apizrOptions = apizrOptionsBuilder.ApizrOptions;
-            var apizrOptionsRegistrationType = typeof(IApizrOptions<>).MakeGenericType(apizrOptions.WebApiType);
+            var apizrOptionsRegistrationType = typeof(IApizrManagerOptions<>).MakeGenericType(apizrOptions.WebApiType);
 
             var builder = services.AddHttpClient(ForType(apizrOptions.WebApiType))
                 .ConfigurePrimaryHttpMessageHandler(serviceProvider =>
                 {
-                    var options = (IApizrExtendedOptionsBase)serviceProvider.GetRequiredService(apizrOptionsRegistrationType);
+                    var options = (IApizrExtendedManagerOptionsBase)serviceProvider.GetRequiredService(apizrOptionsRegistrationType);
                     var handlerBuilder = new ExtendedHttpHandlerBuilder(options.HttpClientHandler, options);
 
                     if (options.PolicyRegistryKeys != null && options.PolicyRegistryKeys.Any())
@@ -663,7 +665,7 @@ namespace Apizr
                 .AddTypedClient(typeof(ILazyFactory<>).MakeGenericType(apizrOptions.WebApiType),
                     (client, serviceProvider) =>
                     {
-                        var options = (IApizrExtendedOptionsBase)serviceProvider.GetRequiredService(apizrOptionsRegistrationType);
+                        var options = (IApizrExtendedManagerOptionsBase)serviceProvider.GetRequiredService(apizrOptionsRegistrationType);
 
                         if (client.BaseAddress == null)
                         {
@@ -725,10 +727,10 @@ namespace Apizr
                 apizrOptions.HttpClientHandlerFactory.Invoke(serviceProvider);
                 apizrOptions.LoggerFactory.Invoke(serviceProvider, webApiFriendlyName);
 
-                return Activator.CreateInstance(typeof(ApizrExtendedOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions);
+                return Activator.CreateInstance(typeof(ApizrExtendedManagerOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions);
             });
 
-            services.TryAddSingleton(serviceProvider => ((IApizrOptionsBase)serviceProvider.GetRequiredService(apizrOptionsRegistrationType)).RefitSettings.ContentSerializer);
+            services.TryAddSingleton(serviceProvider => ((IApizrManagerOptionsBase)serviceProvider.GetRequiredService(apizrOptionsRegistrationType)).RefitSettings.ContentSerializer);
 
             var serviceType = typeof(IApizrManager<>).MakeGenericType(apizrOptions.WebApiType);
             services.TryAddSingleton(serviceType, apizrOptions.ApizrManagerType);
@@ -839,10 +841,10 @@ namespace Apizr
             return builder.ApizrOptions;
         }
 
-        private static IApizrExtendedOptionsBuilder CreateOptions(IApizrExtendedCommonOptions commonOptions,
-            IApizrExtendedProperOptions properOptions, Action<IApizrExtendedOptionsBuilder> optionsBuilder = null)
+        private static IApizrExtendedManagerOptionsBuilder CreateOptions(IApizrExtendedCommonOptions commonOptions,
+            IApizrExtendedProperOptions properOptions, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
         {
-            var builder = new ApizrExtendedOptionsBuilder(new ApizrExtendedOptions(commonOptions, properOptions));
+            var builder = new ApizrExtendedManagerOptionsBuilder(new ApizrExtendedManagerOptions(commonOptions, properOptions));
 
             optionsBuilder?.Invoke(builder);
 

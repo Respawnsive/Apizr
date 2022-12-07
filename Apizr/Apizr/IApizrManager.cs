@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring;
+using Apizr.Configuring.Manager;
 using Apizr.Configuring.Request;
 using Polly;
 
@@ -28,7 +29,7 @@ namespace Apizr
         /// <summary>
         /// Basic Apizr options
         /// </summary>
-        IApizrOptionsBase Options { get; }
+        IApizrManagerOptionsBase Options { get; }
 
         #region ExecuteAsync
 
@@ -41,7 +42,7 @@ namespace Apizr
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod,
-            Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null);
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -49,8 +50,8 @@ namespace Apizr
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task ExecuteAsync(Expression<Func<IApizrCatchUnitRequestOptions, TWebApi, Task>> executeApiMethod,
-            Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null);
+        Task ExecuteAsync(Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -63,7 +64,7 @@ namespace Apizr
         /// <returns></returns>
         Task ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
             TModelData modelData,
-            Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null);
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -74,9 +75,9 @@ namespace Apizr
         /// <param name="modelData">The model data to map</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrCatchUnitRequestOptions, TWebApi, TApiData, Task>> executeApiMethod,
+        Task ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod,
             TModelData modelData,
-            Action<IApizrCatchUnitRequestOptionsBuilder> optionsBuilder = null);
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion
 
@@ -90,7 +91,7 @@ namespace Apizr
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TApiData> ExecuteAsync<TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -106,7 +107,7 @@ namespace Apizr
         Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
             TModelRequestData modelRequestData,
-            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -119,7 +120,7 @@ namespace Apizr
         /// <returns></returns>
         Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
-            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -130,7 +131,7 @@ namespace Apizr
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
@@ -140,8 +141,8 @@ namespace Apizr
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TApiData> ExecuteAsync<TApiData>(
-            Expression<Func<IApizrCatchResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -155,9 +156,9 @@ namespace Apizr
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-            Expression<Func<IApizrCatchResultRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>>
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>>
                 executeApiMethod, TModelRequestData modelRequestData,
-            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -169,9 +170,9 @@ namespace Apizr
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<IApizrCatchResultRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData,
-            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -182,8 +183,8 @@ namespace Apizr
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<IApizrCatchResultRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrCatchResultRequestOptionsBuilder> optionsBuilder = null);
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion 
 

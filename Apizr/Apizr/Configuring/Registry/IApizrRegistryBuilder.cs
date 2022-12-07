@@ -6,6 +6,7 @@ using Polly.Registry;
 using System;
 using System.Collections.Generic;
 using Apizr.Configuring.Common;
+using Apizr.Configuring.Manager;
 using Apizr.Requesting;
 
 namespace Apizr.Configuring.Registry
@@ -38,7 +39,7 @@ namespace Apizr.Configuring.Registry
         /// <returns></returns>
         TApizrRegistryBuilder AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(
             Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler,
-                IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrOptionsBase,
+                IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrManagerOptionsBase,
                 TApizrManager> apizrManagerFactory,
             Action<TApizrProperOptionsBuilder> properOptionsBuilder = null)
             where T : class
@@ -59,7 +60,7 @@ namespace Apizr.Configuring.Registry
         /// <returns></returns>
         TApizrRegistryBuilder AddManagerFor<TWebApi, TApizrManager>(
             Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler,
-                IReadOnlyPolicyRegistry<string>, IApizrOptions<TWebApi>, TApizrManager> apizrManagerFactory,
+                IReadOnlyPolicyRegistry<string>, IApizrManagerOptions<TWebApi>, TApizrManager> apizrManagerFactory,
             Action<TApizrProperOptionsBuilder> properOptionsBuilder = null)
             where TApizrManager : IApizrManager<TWebApi>; 
 

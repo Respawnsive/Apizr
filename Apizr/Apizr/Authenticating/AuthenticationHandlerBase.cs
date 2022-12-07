@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring;
+using Apizr.Configuring.Manager;
 using Apizr.Extending;
 using Apizr.Policing;
 using Microsoft.Extensions.Logging;
@@ -17,14 +18,14 @@ namespace Apizr.Authenticating
     public abstract class AuthenticationHandlerBase : DelegatingHandler, IAuthenticationHandler
     {
         private readonly ILogger _logger;
-        private readonly IApizrOptionsBase _apizrOptions;
+        private readonly IApizrManagerOptionsBase _apizrOptions;
 
         /// <summary>
         /// The authentication handler constructor
         /// </summary>
         /// <param name="logger">The logger</param>
         /// <param name="apizrOptions">The Apizr options</param>
-        protected AuthenticationHandlerBase(ILogger logger, IApizrOptionsBase apizrOptions)
+        protected AuthenticationHandlerBase(ILogger logger, IApizrManagerOptionsBase apizrOptions)
         {
             _logger = logger;
             _apizrOptions = apizrOptions;

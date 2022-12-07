@@ -4,6 +4,7 @@ using System.Net.Http;
 using Apizr.Caching;
 using Apizr.Configuring;
 using Apizr.Configuring.Common;
+using Apizr.Configuring.Manager;
 using Apizr.Connecting;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Logging;
@@ -28,7 +29,7 @@ namespace Apizr.Extending.Configuring.Common
             ConnectivityHandlerType = typeof(DefaultConnectivityHandler);
             CacheHandlerType = typeof(VoidCacheHandler);
             MappingHandlerType = typeof(VoidMappingHandler);
-            DelegatingHandlersExtendedFactories = new List<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>>();
+            DelegatingHandlersExtendedFactories = new List<Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>>();
             CrudEntities = new Dictionary<Type, CrudEntityAttribute>();
             WebApis = new Dictionary<Type, WebApiAttribute>();
             ObjectMappings = new Dictionary<Type, MappedWithAttribute>();
@@ -117,7 +118,7 @@ namespace Apizr.Extending.Configuring.Common
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
 
         /// <inheritdoc />
-        public IList<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
+        public IList<Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
 
         /// <inheritdoc />
         public IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }

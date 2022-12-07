@@ -7,7 +7,7 @@ namespace Apizr.Configuring.Proper
     /// <summary>
     /// Options available at proper level for both static and extended registrations
     /// </summary>
-    public interface IApizrProperOptionsBase : IApizrSharedOptionsBase
+    public interface IApizrProperOptionsBase : IApizrSharedRegistrationOptionsBase
     {
         /// <summary>
         /// Web api interface type

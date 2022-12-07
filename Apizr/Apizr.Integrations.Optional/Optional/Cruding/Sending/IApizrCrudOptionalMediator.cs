@@ -23,7 +23,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="entity">The entity to create</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<TApiEntity, ApizrException>> SendCreateOptionalCommand<TApiEntity>(TApiEntity entity, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<TApiEntity, ApizrException>> SendCreateOptionalCommand<TApiEntity>(TApiEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         /// <summary>
         /// Send a mapped <see cref="CreateCommand{TModelEntity}"/> to Apizr using MediatR and returning a mapped optional result
@@ -33,7 +33,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="entity">The entity to create</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<TModelEntity, ApizrException>> SendCreateOptionalCommand<TModelEntity, TApiEntity>(TModelEntity entity, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<TModelEntity, ApizrException>> SendCreateOptionalCommand<TModelEntity, TApiEntity>(TModelEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         #endregion
 
@@ -45,7 +45,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult>(Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult>(Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR and returning mapped optional result
@@ -55,7 +55,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
         /// <returns></returns>
         Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
-            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
+            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult>(Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR and returning an optional result
@@ -66,7 +66,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery<TReadAllResult, TReadAllParams>(
-            TReadAllParams readAllParams, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
+            TReadAllParams readAllParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR and returning a mapped optional result
@@ -78,7 +78,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<Option<TModelReadAllResult, ApizrException<TModelReadAllResult>>>
-            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
+            SendReadAllOptionalQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         #endregion
 
@@ -92,7 +92,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="key">The entity key</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR and returning a mapped optional result
@@ -103,7 +103,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="key">The entity key</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         #endregion
 
@@ -118,7 +118,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="entity">The entity to update</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, TApiEntity entity, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, TApiEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         /// <summary>
         /// Send a mapped <see cref="UpdateCommand{TApiEntityKey, TModelEntity}"/> to Apizr using MediatR and returning an optional result
@@ -131,7 +131,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key,
-            TModelEntity entity, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null);
+            TModelEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         #endregion
 
@@ -145,7 +145,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="key">The entity key</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendDeleteOptionalCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<Unit, ApizrException>> SendDeleteOptionalCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         #endregion
     }
@@ -164,7 +164,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="payload">The entity to create</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<TApiEntity, ApizrException>> SendCreateOptionalCommand(TApiEntity payload, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<TApiEntity, ApizrException>> SendCreateOptionalCommand(TApiEntity payload, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         /// <summary>
         /// Send a mapped <see cref="CreateCommand{TModelEntity}"/> to Apizr using MediatR and returning a mapped optional result
@@ -173,7 +173,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="payload">The entity to create</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<TModelEntity, ApizrException>> SendCreateOptionalCommand<TModelEntity>(TModelEntity payload, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<TModelEntity, ApizrException>> SendCreateOptionalCommand<TModelEntity>(TModelEntity payload, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         #endregion
 
@@ -184,7 +184,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// </summary>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery(Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery(Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR and returning mapped optional result
@@ -193,7 +193,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>>
-            SendReadAllOptionalQuery<TModelEntityReadAllResult>(Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
+            SendReadAllOptionalQuery<TModelEntityReadAllResult>(Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         /// <summary>
         /// Send a <see cref="ReadAllQuery{TReadAllResult}"/> to Apizr using MediatR and returning an optional result
@@ -202,7 +202,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery(
-            TReadAllParams readAllParams, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
+            TReadAllParams readAllParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         /// <summary>
         /// Send a mapped <see cref="ReadAllQuery{TModelEntityReadAllResult}"/> to Apizr using MediatR and returning a mapped optional result
@@ -212,7 +212,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>>
-            SendReadAllOptionalQuery<TModelEntityReadAllResult>(TReadAllParams readAllParams, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
+            SendReadAllOptionalQuery<TModelEntityReadAllResult>(TReadAllParams readAllParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         #endregion
 
@@ -224,7 +224,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="key">The entity key</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery(TApiEntityKey key, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery(TApiEntityKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         /// <summary>
         /// Send a <see cref="ReadQuery{TModelEntity, TApiEntityKey}"/> to Apizr using MediatR and returning a mapped optional result
@@ -233,7 +233,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="key">The entity key</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity>(TApiEntityKey key, Action<IApizrResultRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity>(TApiEntityKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         #endregion
 
@@ -246,7 +246,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="payload">The entity to update</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand(TApiEntityKey key, TApiEntity payload, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand(TApiEntityKey key, TApiEntity payload, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         /// <summary>
         /// Send a mapped <see cref="UpdateCommand{TApiEntityKey, TModelEntity}"/> to Apizr using MediatR and returning an optional result
@@ -257,7 +257,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TModelEntity>(TApiEntityKey key,
-            TModelEntity payload, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null);
+            TModelEntity payload, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         #endregion
 
@@ -269,7 +269,7 @@ namespace Apizr.Optional.Cruding.Sending
         /// <param name="key">The entity key</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<Option<Unit, ApizrException>> SendDeleteOptionalCommand(TApiEntityKey key, Action<IApizrUnitRequestOptionsBuilder> optionsBuilder = null);
+        Task<Option<Unit, ApizrException>> SendDeleteOptionalCommand(TApiEntityKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
         
         #endregion
     }

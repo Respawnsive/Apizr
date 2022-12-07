@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 namespace Apizr.Configuring.Proper
 {
     /// <inheritdoc cref="IApizrProperOptionsBase" />
-    public abstract class ApizrProperOptionsBase : ApizrSharedOptionsBase, IApizrProperOptionsBase
+    public abstract class ApizrProperOptionsBase : ApizrGlobalSharedRegistrationOptionsBase, IApizrProperOptionsBase
     {
         /// <summary>
         /// The proper options constructor
@@ -15,17 +15,11 @@ namespace Apizr.Configuring.Proper
         /// <param name="webApiType">The web api type</param>
         /// <param name="assemblyPolicyRegistryKeys">Global policies</param>
         /// <param name="webApiPolicyRegistryKeys">Specific policies</param>
-        protected ApizrProperOptionsBase(IApizrSharedOptionsBase sharedOptions, 
+        protected ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase sharedOptions, 
             Type webApiType,
             string[] assemblyPolicyRegistryKeys,
-            string[] webApiPolicyRegistryKeys)
+            string[] webApiPolicyRegistryKeys) : base(sharedOptions)
         {
-            BaseUri = sharedOptions.BaseUri;
-            BaseAddress = sharedOptions.BaseAddress;
-            BasePath = sharedOptions.BasePath;
-            HttpTracerMode = sharedOptions.HttpTracerMode;
-            TrafficVerbosity = sharedOptions.TrafficVerbosity;
-            LogLevels = sharedOptions.LogLevels;
             WebApiType = webApiType;
             PolicyRegistryKeys =
                 assemblyPolicyRegistryKeys?.Union(webApiPolicyRegistryKeys ?? Array.Empty<string>()).ToArray() ??

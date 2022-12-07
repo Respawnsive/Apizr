@@ -1,22 +1,22 @@
 ﻿using Apizr.Configuring.Common;
 using Apizr.Configuring.Proper;
 
-namespace Apizr.Configuring
+namespace Apizr.Configuring.Manager
 {
     /// <summary>
     /// Builder options available for both static and extended registrations
     /// </summary>
-    public interface IApizrGlobalOptionsBuilderBase : IApizrGlobalCommonOptionsBuilderBase, IApizrGlobalProperOptionsBuilderBase
+    public interface IApizrGlobalManagerOptionsBuilderBase : IApizrGlobalCommonOptionsBuilderBase, IApizrGlobalProperOptionsBuilderBase
     { }
 
     /// <summary>
     /// Builder options available for both static and extended registrations
     /// </summary>
-    public interface IApizrGlobalOptionsBuilderBase<out TApizrOptions, out TApizrOptionsBuilder> : IApizrGlobalOptionsBuilderBase,
+    public interface IApizrGlobalManagerOptionsBuilderBase<out TApizrOptions, out TApizrOptionsBuilder> : IApizrGlobalManagerOptionsBuilderBase,
         IApizrGlobalCommonOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>,
         IApizrGlobalProperOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder> 
-        where TApizrOptions : IApizrOptionsBase 
-        where TApizrOptionsBuilder : IApizrGlobalOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>
+        where TApizrOptions : IApizrManagerOptionsBase 
+        where TApizrOptionsBuilder : IApizrGlobalManagerOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>
     {
     }
 }

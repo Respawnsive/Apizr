@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring;
+using Apizr.Configuring.Manager;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Logging;
 using Apizr.Mediation.Requesting.Sending;
@@ -315,7 +316,7 @@ namespace Apizr.Tests
                     .WithRefitSettings(_refitSettings));
 
             var serviceProvider = services.BuildServiceProvider();
-            var apizrOptions = serviceProvider.GetRequiredService<IApizrOptions<IReqResUserService>>();
+            var apizrOptions = serviceProvider.GetRequiredService<IApizrManagerOptions<IReqResUserService>>();
 
             apizrOptions.RefitSettings.Should().Be(_refitSettings);
         }

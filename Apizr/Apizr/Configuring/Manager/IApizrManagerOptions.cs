@@ -1,12 +1,12 @@
 ﻿using Apizr.Configuring.Common;
 using Apizr.Configuring.Proper;
 
-namespace Apizr.Configuring
+namespace Apizr.Configuring.Manager
 {
     /// <summary>
     /// Options available for static registrations
     /// </summary>
-    public interface IApizrOptions : IApizrOptionsBase, IApizrCommonOptions, IApizrProperOptions
+    public interface IApizrManagerOptions : IApizrManagerOptionsBase, IApizrCommonOptions, IApizrProperOptions
     {
     }
 
@@ -14,7 +14,7 @@ namespace Apizr.Configuring
     /// Options available for static registrations
     /// </summary>
     /// <typeparam name="TWebApi"></typeparam>
-    public interface IApizrOptions<TWebApi> : IApizrOptionsBase
+    public interface IApizrManagerOptions<TWebApi> : IApizrManagerOptionsBase
     {
     }
 }

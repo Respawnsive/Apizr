@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Caching;
+using Apizr.Configuring.Manager;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
 using Microsoft.Extensions.Logging;
+using Polly;
 using Polly.Registry;
 using Refit;
 
@@ -90,7 +93,7 @@ namespace Apizr.Configuring.Common
         /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
         {
-            var authenticationHandler = new Func<ILogger, IApizrOptionsBase, DelegatingHandler>((logger, options) =>
+            var authenticationHandler = new Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>((logger, options) =>
                 new AuthenticationHandler(logger, options, refreshTokenFactory));
             Options.DelegatingHandlersFactories.Add(authenticationHandler);
 
@@ -98,7 +101,7 @@ namespace Apizr.Configuring.Common
         }
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<ILogger, IApizrOptionsBase, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase
+        public IApizrCommonOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<ILogger, IApizrManagerOptionsBase, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase
         {
             Options.DelegatingHandlersFactories.Add(authenticationHandlerFactory);
 
@@ -114,7 +117,7 @@ namespace Apizr.Configuring.Common
         public IApizrCommonOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(Func<TSettingsService> settingsServiceFactory,
             Expression<Func<TSettingsService, string>> tokenProperty, Func<TTokenService> tokenServiceFactory, Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
         {
-            var authenticationHandler = new Func<ILogger, IApizrOptionsBase, DelegatingHandler>((logHger, options) =>
+            var authenticationHandler = new Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>((logHger, options) =>
                 new AuthenticationHandler<TSettingsService, TTokenService>(logHger,
                     options,
                     settingsServiceFactory, tokenProperty,
@@ -133,7 +136,7 @@ namespace Apizr.Configuring.Common
         public IApizrCommonOptionsBuilder WithAuthenticationHandler<TSettingsService>(Func<TSettingsService> settingsServiceFactory,
             Expression<Func<TSettingsService, string>> tokenProperty, Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
         {
-            var authenticationHandler = new Func<ILogger, IApizrOptionsBase, DelegatingHandler>((logger, options) =>
+            var authenticationHandler = new Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>((logger, options) =>
                 new AuthenticationHandler<TSettingsService>(logger, options, settingsServiceFactory, tokenProperty, refreshTokenFactory));
             Options.DelegatingHandlersFactories.Add(authenticationHandler);
 
@@ -149,7 +152,7 @@ namespace Apizr.Configuring.Common
             => AddDelegatingHandler((logger, _) => delegatingHandlerFactory(logger));
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder AddDelegatingHandler(Func<ILogger, IApizrOptionsBase, DelegatingHandler> delegatingHandlerFactory)
+        public IApizrCommonOptionsBuilder AddDelegatingHandler(Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler> delegatingHandlerFactory)
         {
             Options.DelegatingHandlersFactories.Add(delegatingHandlerFactory);
 
@@ -204,6 +207,58 @@ namespace Apizr.Configuring.Common
         public IApizrCommonOptionsBuilder WithCacheHandler(Func<ICacheHandler> cacheHandlerFactory)
         {
             Options.CacheHandlerFactory = cacheHandlerFactory;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithContext(Context context, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
+        {
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.Context ??= context;
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.Context = context;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.Context == null)
+                    {
+                        Options.Context = context;
+                    }
+                    else
+                    {
+                        var operationKey = !string.IsNullOrWhiteSpace(context.OperationKey)
+                            ? context.OperationKey
+                            : Options.Context.OperationKey;
+
+                        Options.Context = new Context(operationKey,
+                            Options.Context.Concat(context.ToList()).ToDictionary(x => x.Key, x => x.Value));
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithCatching(Action<ApizrException> onException,
+            bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+        {
+            Options.OnException = onException;
+            Options.LetThrowOnExceptionWithEmptyCache = letThrowOnExceptionWithEmptyCache;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithHandlerParameter(string key, object value)
+        {
+            Options.HandlersParameters[key] = value;
 
             return this;
         }

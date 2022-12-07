@@ -17,7 +17,6 @@ namespace Apizr.Configuring.Shared
             HttpTracerMode = sharedOptions?.HttpTracerMode ?? default;
             TrafficVerbosity = sharedOptions?.TrafficVerbosity ?? default;
             LogLevels = sharedOptions?.LogLevels;
-            Context = sharedOptions?.Context;
             OnException = sharedOptions?.OnException;
             LetThrowOnExceptionWithEmptyCache = sharedOptions?.LetThrowOnExceptionWithEmptyCache ?? true;
             HandlersParameters = sharedOptions?.HandlersParameters ?? new Dictionary<string, object>();
@@ -43,9 +42,6 @@ namespace Apizr.Configuring.Shared
                     Constants.HighLogLevel
                 };
         }
-
-        /// <inheritdoc />
-        public Context Context { get; internal set; }
 
         /// <inheritdoc />
         public Action<ApizrException> OnException { get; internal set; }

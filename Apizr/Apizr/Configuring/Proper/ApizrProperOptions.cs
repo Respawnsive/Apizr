@@ -6,6 +6,7 @@ using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;
+using Polly;
 
 namespace Apizr.Configuring.Proper
 {
@@ -45,6 +46,7 @@ namespace Apizr.Configuring.Proper
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
             HttpClientFactory = sharedOptions.HttpClientFactory;
             DelegatingHandlersFactories = sharedOptions.DelegatingHandlersFactories;
+            ContextFactory = sharedOptions.ContextFactory;
         }
 
         private Func<Uri> _baseUriFactory;
@@ -106,5 +108,8 @@ namespace Apizr.Configuring.Proper
 
         /// <inheritdoc />
         public IList<Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
+
+        /// <inheritdoc />
+        public Func<Context> ContextFactory { get; set; }
     }
 }

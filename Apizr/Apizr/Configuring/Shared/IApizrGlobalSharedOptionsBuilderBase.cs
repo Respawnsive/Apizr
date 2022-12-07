@@ -17,9 +17,7 @@ namespace Apizr.Configuring.Shared
         where TApizrOptions : IApizrGlobalSharedOptionsBase
         where TApizrOptionsBuilder : IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>
     {
-        TApizrOptionsBuilder WithContext(Context context, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge);
-
-        TApizrOptionsBuilder WithCatching(Action<ApizrException> onException, bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace);
+        TApizrOptionsBuilder WithExCatching(Action<ApizrException> onException, bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace);
 
         TApizrOptionsBuilder WithHandlerParameter(string key, object value);
 

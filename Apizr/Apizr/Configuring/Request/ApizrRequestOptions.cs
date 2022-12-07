@@ -8,13 +8,8 @@ namespace Apizr.Configuring.Request;
 
 public class ApizrRequestOptions : ApizrRequestOptionsBase, IApizrRequestOptions
 {
-    public ApizrRequestOptions(IApizrGlobalSharedOptionsBase sharedOptions) : base(sharedOptions)
+    public ApizrRequestOptions(IApizrGlobalSharedRegistrationOptionsBase sharedOptions) : base(sharedOptions)
     {
-        CancellationToken = CancellationToken.None;
-        ClearCache = false;
-        //OnException = null;
-        //LetThrowOnExceptionWithEmptyCache = true;
-        //HandlersParameters = new Dictionary<string, object>();
     }
 
     /// <inheritdoc />

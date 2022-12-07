@@ -275,11 +275,9 @@ namespace Apizr.Tests
             var watcher = new WatchingRequestHandler();
             var testKey1 = "TestKey1";
             var testValue1 = 1;
-            // Defining Context 1
-            var context1 = new Context { { testKey1, testValue1 } };
 
             var reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>(options =>
-                options.WithContext(context1)
+                options.WithContext(() => new Context { { testKey1, testValue1 } })
                     .AddDelegatingHandler(watcher));
 
             var testKey2 = "TestKey2";

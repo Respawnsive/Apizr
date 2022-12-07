@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -150,16 +151,39 @@ namespace Apizr.Extending.Configuring.Manager
         }
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithContext(Context context,
+        public IApizrExtendedManagerOptionsBuilder WithContext(Func<Context> contextFactory,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
         {
-            Options.Context = context;
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.ContextFactory ??= contextFactory;
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.ContextFactory = contextFactory;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.ContextFactory == null)
+                    {
+                        Options.ContextFactory = contextFactory;
+                    }
+                    else
+                    {
+                        Options.ContextFactory = () => new Context(null,
+                            Options.ContextFactory.Invoke().Concat(contextFactory.Invoke().ToList())
+                                .ToDictionary(x => x.Key, x => x.Value));
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
 
             return this;
         }
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithCatching(Action<ApizrException> onException,
+        public IApizrExtendedManagerOptionsBuilder WithExCatching(Action<ApizrException> onException,
             bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
         {
             Options.OnException = onException;

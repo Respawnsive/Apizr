@@ -40,6 +40,7 @@ namespace Apizr.Configuring.Manager
             CacheHandlerFactory = commonOptions.CacheHandlerFactory;
             MappingHandlerFactory = commonOptions.MappingHandlerFactory;
             DelegatingHandlersFactories = properOptions.DelegatingHandlersFactories;
+            ContextFactory = properOptions.ContextFactory;
         }
 
         private Func<Uri> _baseUriFactory;
@@ -124,6 +125,9 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public IList<Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
+
+        /// <inheritdoc />
+        public Func<Context> ContextFactory { get; set; }
     }
     
     /// <inheritdoc cref="IApizrManagerOptions{TWebApi}"/>
@@ -156,6 +160,9 @@ namespace Apizr.Configuring.Manager
         public string BasePath => Options.BasePath;
 
         /// <inheritdoc />
+        public Func<Context> ContextFactory => Options.ContextFactory;
+
+        /// <inheritdoc />
         public HttpTracerMode HttpTracerMode => Options.HttpTracerMode;
 
         /// <inheritdoc />
@@ -163,9 +170,6 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public LogLevel[] LogLevels => Options.LogLevels;
-
-        /// <inheritdoc />
-        public Context Context => Options.Context;
 
         /// <inheritdoc />
         public Action<ApizrException> OnException => Options.OnException;

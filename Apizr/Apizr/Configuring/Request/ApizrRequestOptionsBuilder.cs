@@ -76,7 +76,7 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder
     }
     
     /// <inheritdoc />
-    public IApizrRequestOptionsBuilder WithClearing(bool clearCache)
+    public IApizrRequestOptionsBuilder WithCacheClearing(bool clearCache)
     {
         Options.ClearCache = clearCache;
 
@@ -84,7 +84,7 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder
     }
 
     /// <inheritdoc />
-    public IApizrRequestOptionsBuilder WithCatching(Action<ApizrException> onException,
+    public IApizrRequestOptionsBuilder WithExCatching(Action<ApizrException> onException,
         bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
     {
         Options.OnException = onException;

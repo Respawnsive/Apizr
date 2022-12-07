@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Caching;
+using Apizr.Configuring.Common;
 using Apizr.Configuring.Manager;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;
@@ -157,30 +158,28 @@ namespace Apizr.Configuring.Proper
         }
 
         /// <inheritdoc />
-        public IApizrProperOptionsBuilder WithContext(Context context, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
+        public IApizrProperOptionsBuilder WithContext(Func<Context> contextFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
         {
             switch (strategy)
             {
                 case ApizrDuplicateStrategy.Ignore:
-                    Options.Context ??= context;
+                    Options.ContextFactory ??= contextFactory;
                     break;
                 case ApizrDuplicateStrategy.Replace:
-                    Options.Context = context;
+                    Options.ContextFactory = contextFactory;
                     break;
                 case ApizrDuplicateStrategy.Add:
                 case ApizrDuplicateStrategy.Merge:
-                    if (Options.Context == null)
+                    if (Options.ContextFactory == null)
                     {
-                        Options.Context = context;
+                        Options.ContextFactory = contextFactory;
                     }
                     else
                     {
-                        var operationKey = !string.IsNullOrWhiteSpace(context.OperationKey)
-                            ? context.OperationKey
-                            : Options.Context.OperationKey;
-
-                        Options.Context = new Context(operationKey,
-                            Options.Context.Concat(context.ToList()).ToDictionary(x => x.Key, x => x.Value));
+                        Options.ContextFactory = () => new Context(null,
+                            Options.ContextFactory.Invoke().Concat(contextFactory.Invoke().ToList())
+                                .ToDictionary(x => x.Key, x => x.Value));
                     }
                     break;
                 default:
@@ -191,7 +190,7 @@ namespace Apizr.Configuring.Proper
         }
 
         /// <inheritdoc />
-        public IApizrProperOptionsBuilder WithCatching(Action<ApizrException> onException,
+        public IApizrProperOptionsBuilder WithExCatching(Action<ApizrException> onException,
             bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
         {
             Options.OnException = onException;

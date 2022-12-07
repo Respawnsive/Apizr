@@ -1,15 +1,17 @@
 ﻿using Apizr.Configuring.Shared;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Polly;
 
 namespace Apizr.Configuring.Request
 {
     public abstract class ApizrRequestOptionsBase : ApizrGlobalSharedOptionsBase, IApizrRequestOptionsBase
     {
         /// <inheritdoc />
-        protected ApizrRequestOptionsBase(IApizrGlobalSharedOptionsBase sharedOptions) : base(sharedOptions)
+        protected ApizrRequestOptionsBase(IApizrGlobalSharedRegistrationOptionsBase sharedOptions) : base(sharedOptions)
         {
+            Context = sharedOptions.ContextFactory?.Invoke();
         }
+
+        /// <inheritdoc />
+        public Context Context { get; internal set; }
     }
 }

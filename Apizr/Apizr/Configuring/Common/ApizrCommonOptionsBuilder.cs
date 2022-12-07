@@ -212,41 +212,7 @@ namespace Apizr.Configuring.Common
         }
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithContext(Context context, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
-        {
-            switch (strategy)
-            {
-                case ApizrDuplicateStrategy.Ignore:
-                    Options.Context ??= context;
-                    break;
-                case ApizrDuplicateStrategy.Replace:
-                    Options.Context = context;
-                    break;
-                case ApizrDuplicateStrategy.Add:
-                case ApizrDuplicateStrategy.Merge:
-                    if (Options.Context == null)
-                    {
-                        Options.Context = context;
-                    }
-                    else
-                    {
-                        var operationKey = !string.IsNullOrWhiteSpace(context.OperationKey)
-                            ? context.OperationKey
-                            : Options.Context.OperationKey;
-
-                        Options.Context = new Context(operationKey,
-                            Options.Context.Concat(context.ToList()).ToDictionary(x => x.Key, x => x.Value));
-                    }
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
-            }
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithCatching(Action<ApizrException> onException,
+        public IApizrCommonOptionsBuilder WithExCatching(Action<ApizrException> onException,
             bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
         {
             Options.OnException = onException;
@@ -275,6 +241,38 @@ namespace Apizr.Configuring.Common
             Options.HttpTracerModeFactory = httpTracerModeFactory;
             Options.TrafficVerbosityFactory = trafficVerbosityFactory;
             Options.LogLevelsFactory = logLevelsFactory;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithContext(Func<Context> contextFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
+        {
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.ContextFactory ??= contextFactory;
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.ContextFactory = contextFactory;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.ContextFactory == null)
+                    {
+                        Options.ContextFactory = contextFactory;
+                    }
+                    else
+                    {
+                        Options.ContextFactory = () => new Context(null,
+                            Options.ContextFactory.Invoke().Concat(contextFactory.Invoke().ToList())
+                                .ToDictionary(x => x.Key, x => x.Value));
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
 
             return this;
         }

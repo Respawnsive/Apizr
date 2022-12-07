@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
-using Apizr.Logging;
-using Microsoft.Extensions.Logging;
+using Polly;
 
 namespace Apizr.Configuring.Shared
 {
@@ -17,6 +15,7 @@ namespace Apizr.Configuring.Shared
             BaseUri = sharedOptions?.BaseUri;
             BaseAddress = sharedOptions?.BaseAddress;
             BasePath = sharedOptions?.BasePath;
+            ContextFactory = sharedOptions?.ContextFactory;
         }
 
         /// <inheritdoc />
@@ -27,5 +26,8 @@ namespace Apizr.Configuring.Shared
 
         /// <inheritdoc />
         public string BasePath { get; protected set; }
+
+        /// <inheritdoc />
+        public Func<Context> ContextFactory { get; internal set; }
     }
 }

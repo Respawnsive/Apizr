@@ -39,7 +39,7 @@ namespace Apizr
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => CreateRequestOptionsBuilder(null, optionsBuilder);
 
-        internal static IApizrRequestOptionsBuilder CreateRequestOptionsBuilder(IApizrGlobalSharedOptionsBase baseOptions, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        internal static IApizrRequestOptionsBuilder CreateRequestOptionsBuilder(IApizrGlobalSharedRegistrationOptionsBase baseOptions, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
             var requestOptions = new ApizrRequestOptions(baseOptions);
             var builder = new ApizrRequestOptionsBuilder(requestOptions);

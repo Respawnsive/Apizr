@@ -149,32 +149,28 @@ namespace Apizr.Extending.Configuring.Proper
         }
 
         /// <inheritdoc />
-        public IApizrExtendedProperOptionsBuilder WithContext(Context context,
+        public IApizrExtendedProperOptionsBuilder WithContext(Func<Context> contextFactory,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
         {
-
             switch (strategy)
             {
                 case ApizrDuplicateStrategy.Ignore:
-                    Options.Context ??= context;
+                    Options.ContextFactory ??= contextFactory;
                     break;
                 case ApizrDuplicateStrategy.Replace:
-                    Options.Context = context;
+                    Options.ContextFactory = contextFactory;
                     break;
                 case ApizrDuplicateStrategy.Add:
                 case ApizrDuplicateStrategy.Merge:
-                    if (Options.Context == null)
+                    if (Options.ContextFactory == null)
                     {
-                        Options.Context = context;
+                        Options.ContextFactory = contextFactory;
                     }
                     else
                     {
-                        var operationKey = !string.IsNullOrWhiteSpace(context.OperationKey)
-                            ? context.OperationKey
-                            : Options.Context.OperationKey;
-
-                        Options.Context = new Context(operationKey,
-                            Options.Context.Concat(context.ToList()).ToDictionary(x => x.Key, x => x.Value));
+                        Options.ContextFactory = () => new Context(null,
+                            Options.ContextFactory.Invoke().Concat(contextFactory.Invoke().ToList())
+                                .ToDictionary(x => x.Key, x => x.Value));
                     }
                     break;
                 default:
@@ -185,7 +181,7 @@ namespace Apizr.Extending.Configuring.Proper
         }
 
         /// <inheritdoc />
-        public IApizrExtendedProperOptionsBuilder WithCatching(Action<ApizrException> onException,
+        public IApizrExtendedProperOptionsBuilder WithExCatching(Action<ApizrException> onException,
             bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
         {
             Options.OnException = onException;

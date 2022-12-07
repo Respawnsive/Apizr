@@ -12,9 +12,11 @@ namespace Apizr.Configuring.Request
         where TApizrOptions : IApizrRequestOptions
         where TApizrOptionsBuilder : IApizrRequestOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>
     {
+        TApizrOptionsBuilder WithContext(Context context, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge);
+
         TApizrOptionsBuilder WithCancellation(CancellationToken cancellationToken);
 
-        TApizrOptionsBuilder WithClearing(bool clearCache);
+        TApizrOptionsBuilder WithCacheClearing(bool clearCache);
     }
 
     public interface IApizrRequestOptionsBuilder :

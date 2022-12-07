@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Polly;
+using System;
 
 namespace Apizr.Configuring.Shared
 {
@@ -21,5 +22,7 @@ namespace Apizr.Configuring.Shared
         /// Base path
         /// </summary>
         string BasePath { get; }
+
+        Func<Context> ContextFactory { get; }
     }
 }

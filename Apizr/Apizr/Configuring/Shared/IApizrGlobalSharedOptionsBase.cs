@@ -27,9 +27,6 @@ namespace Apizr.Configuring.Shared
         LogLevel[] LogLevels { get; }
 
         /// <inheritdoc />
-        Context Context { get; }
-
-        /// <inheritdoc />
         Action<ApizrException> OnException { get; }
 
         /// <inheritdoc />

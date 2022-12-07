@@ -193,7 +193,29 @@ namespace Apizr.Configuring.Proper
         public IApizrProperOptionsBuilder WithExCatching(Action<ApizrException> onException,
             bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
         {
-            Options.OnException = onException;
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.OnException ??= onException;
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.OnException = onException;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.OnException == null)
+                    {
+                        Options.OnException = onException;
+                    }
+                    else
+                    {
+                        Options.OnException += onException.Invoke;
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
+
             Options.LetThrowOnExceptionWithEmptyCache = letThrowOnExceptionWithEmptyCache;
 
             return this;

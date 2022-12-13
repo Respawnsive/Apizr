@@ -6,6 +6,7 @@ using Polly;
 
 namespace Apizr.Configuring.Request
 {
+    /// <inheritdoc cref="IApizrRequestOptionsBase" />
     public abstract class ApizrRequestOptionsBase : ApizrGlobalSharedOptionsBase, IApizrRequestOptionsBase
     {
         /// <inheritdoc />

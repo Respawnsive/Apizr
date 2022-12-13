@@ -16,6 +16,8 @@ namespace Apizr.Optional.Requesting.Base
     /// <typeparam name="TWebApi">The web api type</typeparam>
     /// <typeparam name="TModelData">The model data type</typeparam>
     /// <typeparam name="TApiData">The api data type</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : 
         ExecuteUnitRequestBase<TWebApi, TModelData, TApiData, Option<Unit, ApizrException>, TApizrRequestOptions, TApizrRequestOptionsBuilder>
         where TApizrRequestOptions : IApizrRequestOptions
@@ -46,6 +48,8 @@ namespace Apizr.Optional.Requesting.Base
     /// The top level base mediation execute optional unit request (returning no result)
     /// </summary>
     /// <typeparam name="TWebApi">The web api type</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class ExecuteOptionalUnitRequestBase<TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder> : ExecuteUnitRequestBase<TWebApi, Option<Unit, ApizrException>, TApizrRequestOptions, TApizrRequestOptionsBuilder>
         where TApizrRequestOptions : IApizrRequestOptions
         where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>

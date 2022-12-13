@@ -8,6 +8,7 @@ using Polly;
 
 namespace Apizr.Configuring.Request;
 
+/// <inheritdoc cref="IApizrRequestOptions" />
 public class ApizrRequestOptions : ApizrRequestOptionsBase, IApizrRequestOptions
 {
     public ApizrRequestOptions(IApizrGlobalSharedRegistrationOptionsBase sharedOptions,

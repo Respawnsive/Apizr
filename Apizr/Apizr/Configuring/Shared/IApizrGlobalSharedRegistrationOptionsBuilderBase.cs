@@ -14,7 +14,7 @@ namespace Apizr.Configuring.Shared
     {
     }
 
-    /// <inheritdoc />
+    /// <inheritdoc cref="IApizrGlobalSharedRegistrationOptionsBuilderBase" />
     public interface IApizrGlobalSharedRegistrationOptionsBuilderBase<out TApizrOptions, out TApizrOptionsBuilder> : 
         IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>,
         IApizrGlobalSharedRegistrationOptionsBuilderBase
@@ -63,6 +63,12 @@ namespace Apizr.Configuring.Shared
         /// <returns></returns>
         TApizrOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler);
 
+        /// <summary>
+        /// Set the Polly Context
+        /// </summary>
+        /// <param name="contextFactory">The Polly Context to pass through it all</param>
+        /// <param name="strategy">The duplicate strategy if there's another one already (default: Merge)</param>
+        /// <returns></returns>
         TApizrOptionsBuilder WithContext(Func<Context> contextFactory, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge);
     }
 }

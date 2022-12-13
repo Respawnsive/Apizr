@@ -17,6 +17,8 @@ namespace Apizr.Mediation.Cruding.Handling.Base
     /// <typeparam name="TReadAllParams">The read all params</typeparam>
     /// <typeparam name="TCommand">The command to handle</typeparam>
     /// <typeparam name="TCommandResult">The command result to return</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class CreateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult,
         TReadAllParams, TCommand, TCommandResult, TApizrRequestOptions, TApizrRequestOptionsBuilder> :
         CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TApizrRequestOptions, TApizrRequestOptionsBuilder>,

@@ -89,12 +89,11 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-1.html">RequestBase</a>&lt;TResultData&gt;</div>
-    <div class="level2"><a class="xref" href="Apizr.Mediation.Requesting.Base.PrioritizedRequestBase-1.html">PrioritizedRequestBase</a>&lt;TResultData&gt;</div>
-    <div class="level3"><a class="xref" href="Apizr.Mediation.Querying.MediationQueryBase-1.html">MediationQueryBase</a>&lt;TResultData&gt;</div>
-    <div class="level4"><a class="xref" href="Apizr.Mediation.Cruding.Base.ReadQueryBase-2.html">ReadQueryBase</a>&lt;TResultData, <span class="xref">System.Int32</span>&gt;</div>
-    <div class="level5"><a class="xref" href="Apizr.Mediation.Cruding.Base.ReadQueryBase-1.html">ReadQueryBase</a>&lt;TResultData&gt;</div>
-    <div class="level6"><span class="xref">ReadQuery&lt;TResultData&gt;</span></div>
+    <div class="level1"><a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-3.html">RequestBase</a>&lt;TResultData, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
+    <div class="level2"><a class="xref" href="Apizr.Mediation.Querying.MediationQueryBase-3.html">MediationQueryBase</a>&lt;TResultData, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
+    <div class="level3"><a class="xref" href="Apizr.Mediation.Cruding.Base.ReadQueryBase-4.html">ReadQueryBase</a>&lt;TResultData, <span class="xref">System.Int32</span>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
+    <div class="level4"><a class="xref" href="Apizr.Mediation.Cruding.Base.ReadQueryBase-3.html">ReadQueryBase</a>&lt;TResultData, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
+    <div class="level5"><span class="xref">ReadQuery&lt;TResultData&gt;</span></div>
   </div>
   <div class="implements">
     <h5>Implements</h5>
@@ -105,19 +104,10 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="Apizr.Mediation.Cruding.Base.ReadQueryBase-2.html#Apizr_Mediation_Cruding_Base_ReadQueryBase_2_Key">ReadQueryBase&lt;TResultData, Int32&gt;.Key</a>
+      <a class="xref" href="Apizr.Mediation.Cruding.Base.ReadQueryBase-4.html#Apizr_Mediation_Cruding_Base_ReadQueryBase_4_Key">ReadQueryBase&lt;TResultData, Int32, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;.Key</a>
     </div>
     <div>
-      <a class="xref" href="Apizr.Mediation.Querying.MediationQueryBase-1.html#Apizr_Mediation_Querying_MediationQueryBase_1_ClearCache">MediationQueryBase&lt;TResultData&gt;.ClearCache</a>
-    </div>
-    <div>
-      <a class="xref" href="Apizr.Mediation.Requesting.Base.PrioritizedRequestBase-1.html#Apizr_Mediation_Requesting_Base_PrioritizedRequestBase_1_Priority">PrioritizedRequestBase&lt;TResultData&gt;.Priority</a>
-    </div>
-    <div>
-      <a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-1.html#Apizr_Mediation_Requesting_Base_RequestBase_1_Context">RequestBase&lt;TResultData&gt;.Context</a>
-    </div>
-    <div>
-      <a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-1.html#Apizr_Mediation_Requesting_Base_RequestBase_1_OnException">RequestBase&lt;TResultData&gt;.OnException</a>
+      <a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-3.html#Apizr_Mediation_Requesting_Base_RequestBase_3_OptionsBuilder">RequestBase&lt;TResultData, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;.OptionsBuilder</a>
     </div>
     <div>
       <span class="xref">System.Object.Equals(System.Object)</span>
@@ -145,7 +135,7 @@
   <h6><strong>Assembly</strong>: Apizr.Integrations.MediatR.dll</h6>
   <h5 id="Apizr_Mediation_Cruding_ReadQuery_1_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ReadQuery&lt;TResultData&gt; : ReadQueryBase&lt;TResultData&gt;, IMediationQuery&lt;TResultData&gt;, IRequest&lt;TResultData&gt;, IBaseRequest</code></pre>
+    <pre><code class="lang-csharp hljs">public class ReadQuery&lt;TResultData&gt; : ReadQueryBase&lt;TResultData, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;, IMediationQuery&lt;TResultData&gt;, IRequest&lt;TResultData&gt;, IBaseRequest</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -168,13 +158,13 @@
   
   
   <a id="Apizr_Mediation_Cruding_ReadQuery_1__ctor_" data-uid="Apizr.Mediation.Cruding.ReadQuery`1.#ctor*"></a>
-  <h4 id="Apizr_Mediation_Cruding_ReadQuery_1__ctor_System_Int32_Polly_Context_System_Boolean_System_Action_System_Exception__" data-uid="Apizr.Mediation.Cruding.ReadQuery`1.#ctor(System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">ReadQuery(Int32, Context, Boolean, Action&lt;Exception&gt;)</h4>
+  <h4 id="Apizr_Mediation_Cruding_ReadQuery_1__ctor_System_Int32_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.ReadQuery`1.#ctor(System.Int32,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">ReadQuery(Int32, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
   <div class="markdown level1 summary"><p>The mediation Read query constructor</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ReadQuery(int key, Context context, bool clearCache = false, Action&lt;Exception&gt; onException = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public ReadQuery(int key, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -193,162 +183,9 @@
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td><p>The Polly context to pass through</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td><p>Asking to clear cache before sending</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td><p>Action to execute when an exception occurs</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Mediation_Cruding_ReadQuery_1__ctor_" data-uid="Apizr.Mediation.Cruding.ReadQuery`1.#ctor*"></a>
-  <h4 id="Apizr_Mediation_Cruding_ReadQuery_1__ctor_System_Int32_System_Boolean_System_Action_System_Exception__" data-uid="Apizr.Mediation.Cruding.ReadQuery`1.#ctor(System.Int32,System.Boolean,System.Action{System.Exception})">ReadQuery(Int32, Boolean, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"><p>The mediation Read query constructor</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ReadQuery(int key, bool clearCache = false, Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">key</span></td>
-        <td><p>The entity&apos;s crud key</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td><p>Asking to clear cache before sending</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td><p>Action to execute when an exception occurs</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Mediation_Cruding_ReadQuery_1__ctor_" data-uid="Apizr.Mediation.Cruding.ReadQuery`1.#ctor*"></a>
-  <h4 id="Apizr_Mediation_Cruding_ReadQuery_1__ctor_System_Int32_System_Int32_Polly_Context_System_Boolean_System_Action_System_Exception__" data-uid="Apizr.Mediation.Cruding.ReadQuery`1.#ctor(System.Int32,System.Int32,Polly.Context,System.Boolean,System.Action{System.Exception})">ReadQuery(Int32, Int32, Context, Boolean, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"><p>The mediation Read query constructor</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ReadQuery(int key, int priority, Context context, bool clearCache = false, Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">key</span></td>
-        <td><p>The entity&apos;s crud key</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">priority</span></td>
-        <td><p>The execution priority to apply</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td><p>The Polly context to pass through</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td><p>Asking to clear cache before sending</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td><p>Action to execute when an exception occurs</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Mediation_Cruding_ReadQuery_1__ctor_" data-uid="Apizr.Mediation.Cruding.ReadQuery`1.#ctor*"></a>
-  <h4 id="Apizr_Mediation_Cruding_ReadQuery_1__ctor_System_Int32_System_Int32_System_Boolean_System_Action_System_Exception__" data-uid="Apizr.Mediation.Cruding.ReadQuery`1.#ctor(System.Int32,System.Int32,System.Boolean,System.Action{System.Exception})">ReadQuery(Int32, Int32, Boolean, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"><p>The mediation Read query constructor</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ReadQuery(int key, int priority, bool clearCache = false, Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">key</span></td>
-        <td><p>The entity&apos;s crud key</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">priority</span></td>
-        <td><p>The execution priority to apply</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td><p>Asking to clear cache before sending</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td><p>Action to execute when an exception occurs</p>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
 </td>
       </tr>
     </tbody>

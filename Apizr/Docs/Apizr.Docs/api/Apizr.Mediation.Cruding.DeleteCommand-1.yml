@@ -5,8 +5,7 @@ items:
   id: DeleteCommand`1
   parent: Apizr.Mediation.Cruding
   children:
-  - Apizr.Mediation.Cruding.DeleteCommand`1.#ctor(System.Int32,Polly.Context,System.Action{System.Exception})
-  - Apizr.Mediation.Cruding.DeleteCommand`1.#ctor(System.Int32,System.Action{System.Exception})
+  - Apizr.Mediation.Cruding.DeleteCommand`1.#ctor(System.Int32,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   langs:
   - csharp
   - vb
@@ -17,36 +16,35 @@ items:
   source:
     id: DeleteCommand
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\DeleteCommand.cs
-    startLine: 38
+    startLine: 29
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding
   summary: "\nThe mediation Delete command\n"
   example: []
   syntax:
-    content: 'public class DeleteCommand<T> : DeleteCommandBase<T>, IMediationCommand<int, Unit>, IRequest<Unit>, IBaseRequest'
+    content: 'public class DeleteCommand<T> : DeleteCommandBase<T, IApizrRequestOptions, IApizrRequestOptionsBuilder>, IMediationCommand<int, Unit>, IRequest<Unit>, IBaseRequest'
     typeParameters:
     - id: T
       description: The api entity type
     content.vb: >-
       Public Class DeleteCommand(Of T)
-          Inherits DeleteCommandBase(Of T)
+          Inherits DeleteCommandBase(Of T, IApizrRequestOptions, IApizrRequestOptionsBuilder)
           Implements IMediationCommand(Of Integer, Unit), IRequest(Of Unit), IBaseRequest
   inheritance:
   - System.Object
-  - Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit}
-  - Apizr.Mediation.Commanding.MediationCommandBase{System.Int32,MediatR.Unit}
-  - Apizr.Mediation.Cruding.Base.DeleteCommandBase{{T},System.Int32,MediatR.Unit}
-  - Apizr.Mediation.Cruding.Base.DeleteCommandBase{{T},MediatR.Unit}
-  - Apizr.Mediation.Cruding.Base.DeleteCommandBase{{T}}
+  - Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  - Apizr.Mediation.Commanding.MediationCommandBase{System.Int32,MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  - Apizr.Mediation.Cruding.Base.DeleteCommandBase{{T},System.Int32,MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  - Apizr.Mediation.Cruding.Base.DeleteCommandBase{{T},MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  - Apizr.Mediation.Cruding.Base.DeleteCommandBase{{T},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   implements:
   - Apizr.Mediation.Commanding.IMediationCommand{System.Int32,MediatR.Unit}
   - MediatR.IRequest{MediatR.Unit}
   - MediatR.IBaseRequest
   inheritedMembers:
-  - Apizr.Mediation.Cruding.Base.DeleteCommandBase{{T},System.Int32,MediatR.Unit}.Key
-  - Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit}.Context
-  - Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit}.OnException
+  - Apizr.Mediation.Cruding.Base.DeleteCommandBase{{T},System.Int32,MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.Key
+  - Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.OptionsBuilder
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -63,85 +61,44 @@ items:
   - Class
   fullName.vb: Apizr.Mediation.Cruding.DeleteCommand(Of T)
   name.vb: DeleteCommand(Of T)
-- uid: Apizr.Mediation.Cruding.DeleteCommand`1.#ctor(System.Int32,System.Action{System.Exception})
-  commentId: M:Apizr.Mediation.Cruding.DeleteCommand`1.#ctor(System.Int32,System.Action{System.Exception})
-  id: '#ctor(System.Int32,System.Action{System.Exception})'
+- uid: Apizr.Mediation.Cruding.DeleteCommand`1.#ctor(System.Int32,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Mediation.Cruding.DeleteCommand`1.#ctor(System.Int32,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  id: '#ctor(System.Int32,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})'
   parent: Apizr.Mediation.Cruding.DeleteCommand`1
   langs:
   - csharp
   - vb
-  name: DeleteCommand(Int32, Action<Exception>)
-  nameWithType: DeleteCommand<T>.DeleteCommand(Int32, Action<Exception>)
-  fullName: Apizr.Mediation.Cruding.DeleteCommand<T>.DeleteCommand(System.Int32, System.Action<System.Exception>)
+  name: DeleteCommand(Int32, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: DeleteCommand<T>.DeleteCommand(Int32, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Mediation.Cruding.DeleteCommand<T>.DeleteCommand(System.Int32, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
   type: Constructor
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\DeleteCommand.cs
-    startLine: 45
+    startLine: 36
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding
   summary: "\nThe mediation Delete command constructor\n"
   example: []
   syntax:
-    content: public DeleteCommand(int key, Action<Exception> onException = null)
+    content: public DeleteCommand(int key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: key
       type: System.Int32
       description: The entity&apos;s crud key
-    - id: onException
-      type: System.Action{System.Exception}
-      description: Action to execute when an exception occurs
-    content.vb: Public Sub New(key As Integer, onException As Action(Of Exception) = Nothing)
+    - id: optionsBuilder
+      type: System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+      description: Options provided to the request
+    content.vb: Public Sub New(key As Integer, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing)
   overload: Apizr.Mediation.Cruding.DeleteCommand`1.#ctor*
-  nameWithType.vb: DeleteCommand(Of T).DeleteCommand(Int32, Action(Of Exception))
+  nameWithType.vb: DeleteCommand(Of T).DeleteCommand(Int32, Action(Of IApizrRequestOptionsBuilder))
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Apizr.Mediation.Cruding.DeleteCommand(Of T).DeleteCommand(System.Int32, System.Action(Of System.Exception))
-  name.vb: DeleteCommand(Int32, Action(Of Exception))
-- uid: Apizr.Mediation.Cruding.DeleteCommand`1.#ctor(System.Int32,Polly.Context,System.Action{System.Exception})
-  commentId: M:Apizr.Mediation.Cruding.DeleteCommand`1.#ctor(System.Int32,Polly.Context,System.Action{System.Exception})
-  id: '#ctor(System.Int32,Polly.Context,System.Action{System.Exception})'
-  parent: Apizr.Mediation.Cruding.DeleteCommand`1
-  langs:
-  - csharp
-  - vb
-  name: DeleteCommand(Int32, Context, Action<Exception>)
-  nameWithType: DeleteCommand<T>.DeleteCommand(Int32, Context, Action<Exception>)
-  fullName: Apizr.Mediation.Cruding.DeleteCommand<T>.DeleteCommand(System.Int32, Polly.Context, System.Action<System.Exception>)
-  type: Constructor
-  source:
-    id: .ctor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Cruding\DeleteCommand.cs
-    startLine: 55
-  assemblies:
-  - Apizr.Integrations.MediatR
-  namespace: Apizr.Mediation.Cruding
-  summary: "\nThe mediation Delete command constructor\n"
-  example: []
-  syntax:
-    content: public DeleteCommand(int key, Context context, Action<Exception> onException = null)
-    parameters:
-    - id: key
-      type: System.Int32
-      description: The entity&apos;s crud key
-    - id: context
-      type: Polly.Context
-      description: The Polly context to pass through
-    - id: onException
-      type: System.Action{System.Exception}
-      description: Action to execute when an exception occurs
-    content.vb: Public Sub New(key As Integer, context As Context, onException As Action(Of Exception) = Nothing)
-  overload: Apizr.Mediation.Cruding.DeleteCommand`1.#ctor*
-  nameWithType.vb: DeleteCommand(Of T).DeleteCommand(Int32, Context, Action(Of Exception))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-  fullName.vb: Apizr.Mediation.Cruding.DeleteCommand(Of T).DeleteCommand(System.Int32, Polly.Context, System.Action(Of System.Exception))
-  name.vb: DeleteCommand(Int32, Context, Action(Of Exception))
+  fullName.vb: Apizr.Mediation.Cruding.DeleteCommand(Of T).DeleteCommand(System.Int32, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: DeleteCommand(Int32, Action(Of IApizrRequestOptionsBuilder))
 references:
 - uid: Apizr.Mediation.Cruding
   commentId: N:Apizr.Mediation.Cruding
@@ -155,18 +112,18 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit}
-  commentId: T:Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit}
+- uid: Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  commentId: T:Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: Apizr.Mediation.Requesting.Base
-  definition: Apizr.Mediation.Requesting.Base.RequestBase`1
-  name: RequestBase<Unit>
-  nameWithType: RequestBase<Unit>
-  fullName: Apizr.Mediation.Requesting.Base.RequestBase<MediatR.Unit>
-  nameWithType.vb: RequestBase(Of Unit)
-  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of MediatR.Unit)
-  name.vb: RequestBase(Of Unit)
+  definition: Apizr.Mediation.Requesting.Base.RequestBase`3
+  name: RequestBase<Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder>
+  nameWithType: RequestBase<Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Requesting.Base.RequestBase<MediatR.Unit, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
+  nameWithType.vb: RequestBase(Of Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of MediatR.Unit, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder)
+  name.vb: RequestBase(Of Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder)
   spec.csharp:
-  - uid: Apizr.Mediation.Requesting.Base.RequestBase`1
+  - uid: Apizr.Mediation.Requesting.Base.RequestBase`3
     name: RequestBase
     nameWithType: RequestBase
     fullName: Apizr.Mediation.Requesting.Base.RequestBase
@@ -178,11 +135,25 @@ references:
     nameWithType: Unit
     fullName: MediatR.Unit
     isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Mediation.Requesting.Base.RequestBase`1
+  - uid: Apizr.Mediation.Requesting.Base.RequestBase`3
     name: RequestBase
     nameWithType: RequestBase
     fullName: Apizr.Mediation.Requesting.Base.RequestBase
@@ -194,21 +165,35 @@ references:
     nameWithType: Unit
     fullName: MediatR.Unit
     isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Mediation.Commanding.MediationCommandBase{System.Int32,MediatR.Unit}
-  commentId: T:Apizr.Mediation.Commanding.MediationCommandBase{System.Int32,MediatR.Unit}
+- uid: Apizr.Mediation.Commanding.MediationCommandBase{System.Int32,MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  commentId: T:Apizr.Mediation.Commanding.MediationCommandBase{System.Int32,MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: Apizr.Mediation.Commanding
-  definition: Apizr.Mediation.Commanding.MediationCommandBase`2
-  name: MediationCommandBase<Int32, Unit>
-  nameWithType: MediationCommandBase<Int32, Unit>
-  fullName: Apizr.Mediation.Commanding.MediationCommandBase<System.Int32, MediatR.Unit>
-  nameWithType.vb: MediationCommandBase(Of Int32, Unit)
-  fullName.vb: Apizr.Mediation.Commanding.MediationCommandBase(Of System.Int32, MediatR.Unit)
-  name.vb: MediationCommandBase(Of Int32, Unit)
+  definition: Apizr.Mediation.Commanding.MediationCommandBase`4
+  name: MediationCommandBase<Int32, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder>
+  nameWithType: MediationCommandBase<Int32, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Commanding.MediationCommandBase<System.Int32, MediatR.Unit, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
+  nameWithType.vb: MediationCommandBase(Of Int32, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Commanding.MediationCommandBase(Of System.Int32, MediatR.Unit, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder)
+  name.vb: MediationCommandBase(Of Int32, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder)
   spec.csharp:
-  - uid: Apizr.Mediation.Commanding.MediationCommandBase`2
+  - uid: Apizr.Mediation.Commanding.MediationCommandBase`4
     name: MediationCommandBase
     nameWithType: MediationCommandBase
     fullName: Apizr.Mediation.Commanding.MediationCommandBase
@@ -228,11 +213,25 @@ references:
     nameWithType: Unit
     fullName: MediatR.Unit
     isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Mediation.Commanding.MediationCommandBase`2
+  - uid: Apizr.Mediation.Commanding.MediationCommandBase`4
     name: MediationCommandBase
     nameWithType: MediationCommandBase
     fullName: Apizr.Mediation.Commanding.MediationCommandBase
@@ -252,19 +251,213 @@ references:
     nameWithType: Unit
     fullName: MediatR.Unit
     isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase{{T},System.Int32,MediatR.Unit}
-  commentId: T:Apizr.Mediation.Cruding.Base.DeleteCommandBase{`0,System.Int32,MediatR.Unit}
+- uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase{{T},System.Int32,MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  commentId: T:Apizr.Mediation.Cruding.Base.DeleteCommandBase{`0,System.Int32,MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  parent: Apizr.Mediation.Cruding.Base
+  definition: Apizr.Mediation.Cruding.Base.DeleteCommandBase`5
+  name: DeleteCommandBase<T, Int32, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder>
+  nameWithType: DeleteCommandBase<T, Int32, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase<T, System.Int32, MediatR.Unit, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
+  nameWithType.vb: DeleteCommandBase(Of T, Int32, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Cruding.Base.DeleteCommandBase(Of T, System.Int32, MediatR.Unit, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder)
+  name.vb: DeleteCommandBase(Of T, Int32, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder)
+  spec.csharp:
+  - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`5
+    name: DeleteCommandBase
+    nameWithType: DeleteCommandBase
+    fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: MediatR.Unit
+    name: Unit
+    nameWithType: Unit
+    fullName: MediatR.Unit
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`5
+    name: DeleteCommandBase
+    nameWithType: DeleteCommandBase
+    fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: MediatR.Unit
+    name: Unit
+    nameWithType: Unit
+    fullName: MediatR.Unit
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase{{T},MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  commentId: T:Apizr.Mediation.Cruding.Base.DeleteCommandBase{`0,MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  parent: Apizr.Mediation.Cruding.Base
+  definition: Apizr.Mediation.Cruding.Base.DeleteCommandBase`4
+  name: DeleteCommandBase<T, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder>
+  nameWithType: DeleteCommandBase<T, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase<T, MediatR.Unit, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
+  nameWithType.vb: DeleteCommandBase(Of T, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Cruding.Base.DeleteCommandBase(Of T, MediatR.Unit, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder)
+  name.vb: DeleteCommandBase(Of T, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder)
+  spec.csharp:
+  - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`4
+    name: DeleteCommandBase
+    nameWithType: DeleteCommandBase
+    fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: MediatR.Unit
+    name: Unit
+    nameWithType: Unit
+    fullName: MediatR.Unit
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`4
+    name: DeleteCommandBase
+    nameWithType: DeleteCommandBase
+    fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: MediatR.Unit
+    name: Unit
+    nameWithType: Unit
+    fullName: MediatR.Unit
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase{{T},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  commentId: T:Apizr.Mediation.Cruding.Base.DeleteCommandBase{`0,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: Apizr.Mediation.Cruding.Base
   definition: Apizr.Mediation.Cruding.Base.DeleteCommandBase`3
-  name: DeleteCommandBase<T, Int32, Unit>
-  nameWithType: DeleteCommandBase<T, Int32, Unit>
-  fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase<T, System.Int32, MediatR.Unit>
-  nameWithType.vb: DeleteCommandBase(Of T, Int32, Unit)
-  fullName.vb: Apizr.Mediation.Cruding.Base.DeleteCommandBase(Of T, System.Int32, MediatR.Unit)
-  name.vb: DeleteCommandBase(Of T, Int32, Unit)
+  name: DeleteCommandBase<T, IApizrRequestOptions, IApizrRequestOptionsBuilder>
+  nameWithType: DeleteCommandBase<T, IApizrRequestOptions, IApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase<T, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
+  nameWithType.vb: DeleteCommandBase(Of T, IApizrRequestOptions, IApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Cruding.Base.DeleteCommandBase(Of T, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder)
+  name.vb: DeleteCommandBase(Of T, IApizrRequestOptions, IApizrRequestOptionsBuilder)
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`3
     name: DeleteCommandBase
@@ -279,19 +472,17 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
-    isExternal: true
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
-    isExternal: true
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -309,111 +500,17 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
-    isExternal: true
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase{{T},MediatR.Unit}
-  commentId: T:Apizr.Mediation.Cruding.Base.DeleteCommandBase{`0,MediatR.Unit}
-  parent: Apizr.Mediation.Cruding.Base
-  definition: Apizr.Mediation.Cruding.Base.DeleteCommandBase`2
-  name: DeleteCommandBase<T, Unit>
-  nameWithType: DeleteCommandBase<T, Unit>
-  fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase<T, MediatR.Unit>
-  nameWithType.vb: DeleteCommandBase(Of T, Unit)
-  fullName.vb: Apizr.Mediation.Cruding.Base.DeleteCommandBase(Of T, MediatR.Unit)
-  name.vb: DeleteCommandBase(Of T, Unit)
-  spec.csharp:
-  - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`2
-    name: DeleteCommandBase
-    nameWithType: DeleteCommandBase
-    fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`2
-    name: DeleteCommandBase
-    nameWithType: DeleteCommandBase
-    fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase{{T}}
-  commentId: T:Apizr.Mediation.Cruding.Base.DeleteCommandBase{`0}
-  parent: Apizr.Mediation.Cruding.Base
-  definition: Apizr.Mediation.Cruding.Base.DeleteCommandBase`1
-  name: DeleteCommandBase<T>
-  nameWithType: DeleteCommandBase<T>
-  fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase<T>
-  nameWithType.vb: DeleteCommandBase(Of T)
-  fullName.vb: Apizr.Mediation.Cruding.Base.DeleteCommandBase(Of T)
-  name.vb: DeleteCommandBase(Of T)
-  spec.csharp:
-  - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`1
-    name: DeleteCommandBase
-    nameWithType: DeleteCommandBase
-    fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`1
-    name: DeleteCommandBase
-    nameWithType: DeleteCommandBase
-    fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
   - name: )
     nameWithType: )
     fullName: )
@@ -526,33 +623,24 @@ references:
   name: IBaseRequest
   nameWithType: IBaseRequest
   fullName: MediatR.IBaseRequest
-- uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase{{T},System.Int32,MediatR.Unit}.Key
-  commentId: P:Apizr.Mediation.Cruding.Base.DeleteCommandBase{`0,System.Int32,MediatR.Unit}.Key
-  parent: Apizr.Mediation.Cruding.Base.DeleteCommandBase{{T},System.Int32,MediatR.Unit}
-  definition: Apizr.Mediation.Cruding.Base.DeleteCommandBase`3.Key
+- uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase{{T},System.Int32,MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.Key
+  commentId: P:Apizr.Mediation.Cruding.Base.DeleteCommandBase{`0,System.Int32,MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.Key
+  parent: Apizr.Mediation.Cruding.Base.DeleteCommandBase{{T},System.Int32,MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  definition: Apizr.Mediation.Cruding.Base.DeleteCommandBase`5.Key
   name: Key
-  nameWithType: DeleteCommandBase<T, Int32, Unit>.Key
-  fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase<T, System.Int32, MediatR.Unit>.Key
-  nameWithType.vb: DeleteCommandBase(Of T, Int32, Unit).Key
-  fullName.vb: Apizr.Mediation.Cruding.Base.DeleteCommandBase(Of T, System.Int32, MediatR.Unit).Key
-- uid: Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit}.Context
-  commentId: P:Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit}.Context
-  parent: Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit}
-  definition: Apizr.Mediation.Requesting.Base.RequestBase`1.Context
-  name: Context
-  nameWithType: RequestBase<Unit>.Context
-  fullName: Apizr.Mediation.Requesting.Base.RequestBase<MediatR.Unit>.Context
-  nameWithType.vb: RequestBase(Of Unit).Context
-  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of MediatR.Unit).Context
-- uid: Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit}.OnException
-  commentId: P:Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit}.OnException
-  parent: Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit}
-  definition: Apizr.Mediation.Requesting.Base.RequestBase`1.OnException
-  name: OnException
-  nameWithType: RequestBase<Unit>.OnException
-  fullName: Apizr.Mediation.Requesting.Base.RequestBase<MediatR.Unit>.OnException
-  nameWithType.vb: RequestBase(Of Unit).OnException
-  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of MediatR.Unit).OnException
+  nameWithType: DeleteCommandBase<T, Int32, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder>.Key
+  fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase<T, System.Int32, MediatR.Unit, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.Key
+  nameWithType.vb: DeleteCommandBase(Of T, Int32, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder).Key
+  fullName.vb: Apizr.Mediation.Cruding.Base.DeleteCommandBase(Of T, System.Int32, MediatR.Unit, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder).Key
+- uid: Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.OptionsBuilder
+  commentId: P:Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.OptionsBuilder
+  parent: Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  definition: Apizr.Mediation.Requesting.Base.RequestBase`3.OptionsBuilder
+  name: OptionsBuilder
+  nameWithType: RequestBase<Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder>.OptionsBuilder
+  fullName: Apizr.Mediation.Requesting.Base.RequestBase<MediatR.Unit, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.OptionsBuilder
+  nameWithType.vb: RequestBase(Of Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder).OptionsBuilder
+  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of MediatR.Unit, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder).OptionsBuilder
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -838,16 +926,16 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: Apizr.Mediation.Requesting.Base.RequestBase`1
-  commentId: T:Apizr.Mediation.Requesting.Base.RequestBase`1
-  name: RequestBase<TFormattedModelResultData>
-  nameWithType: RequestBase<TFormattedModelResultData>
-  fullName: Apizr.Mediation.Requesting.Base.RequestBase<TFormattedModelResultData>
-  nameWithType.vb: RequestBase(Of TFormattedModelResultData)
-  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of TFormattedModelResultData)
-  name.vb: RequestBase(Of TFormattedModelResultData)
+- uid: Apizr.Mediation.Requesting.Base.RequestBase`3
+  commentId: T:Apizr.Mediation.Requesting.Base.RequestBase`3
+  name: RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType: RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Requesting.Base.RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType.vb: RequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  name.vb: RequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
   spec.csharp:
-  - uid: Apizr.Mediation.Requesting.Base.RequestBase`1
+  - uid: Apizr.Mediation.Requesting.Base.RequestBase`3
     name: RequestBase
     nameWithType: RequestBase
     fullName: Apizr.Mediation.Requesting.Base.RequestBase
@@ -857,11 +945,23 @@ references:
   - name: TFormattedModelResultData
     nameWithType: TFormattedModelResultData
     fullName: TFormattedModelResultData
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Mediation.Requesting.Base.RequestBase`1
+  - uid: Apizr.Mediation.Requesting.Base.RequestBase`3
     name: RequestBase
     nameWithType: RequestBase
     fullName: Apizr.Mediation.Requesting.Base.RequestBase
@@ -871,6 +971,18 @@ references:
   - name: TFormattedModelResultData
     nameWithType: TFormattedModelResultData
     fullName: TFormattedModelResultData
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: )
     nameWithType: )
     fullName: )
@@ -879,16 +991,16 @@ references:
   name: Apizr.Mediation.Requesting.Base
   nameWithType: Apizr.Mediation.Requesting.Base
   fullName: Apizr.Mediation.Requesting.Base
-- uid: Apizr.Mediation.Commanding.MediationCommandBase`2
-  commentId: T:Apizr.Mediation.Commanding.MediationCommandBase`2
-  name: MediationCommandBase<TRequestData, TResultData>
-  nameWithType: MediationCommandBase<TRequestData, TResultData>
-  fullName: Apizr.Mediation.Commanding.MediationCommandBase<TRequestData, TResultData>
-  nameWithType.vb: MediationCommandBase(Of TRequestData, TResultData)
-  fullName.vb: Apizr.Mediation.Commanding.MediationCommandBase(Of TRequestData, TResultData)
-  name.vb: MediationCommandBase(Of TRequestData, TResultData)
+- uid: Apizr.Mediation.Commanding.MediationCommandBase`4
+  commentId: T:Apizr.Mediation.Commanding.MediationCommandBase`4
+  name: MediationCommandBase<TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType: MediationCommandBase<TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Commanding.MediationCommandBase<TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType.vb: MediationCommandBase(Of TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Commanding.MediationCommandBase(Of TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  name.vb: MediationCommandBase(Of TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
   spec.csharp:
-  - uid: Apizr.Mediation.Commanding.MediationCommandBase`2
+  - uid: Apizr.Mediation.Commanding.MediationCommandBase`4
     name: MediationCommandBase
     nameWithType: MediationCommandBase
     fullName: Apizr.Mediation.Commanding.MediationCommandBase
@@ -904,11 +1016,23 @@ references:
   - name: TResultData
     nameWithType: TResultData
     fullName: TResultData
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Mediation.Commanding.MediationCommandBase`2
+  - uid: Apizr.Mediation.Commanding.MediationCommandBase`4
     name: MediationCommandBase
     nameWithType: MediationCommandBase
     fullName: Apizr.Mediation.Commanding.MediationCommandBase
@@ -924,6 +1048,18 @@ references:
   - name: TResultData
     nameWithType: TResultData
     fullName: TResultData
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: )
     nameWithType: )
     fullName: )
@@ -932,16 +1068,16 @@ references:
   name: Apizr.Mediation.Commanding
   nameWithType: Apizr.Mediation.Commanding
   fullName: Apizr.Mediation.Commanding
-- uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`3
-  commentId: T:Apizr.Mediation.Cruding.Base.DeleteCommandBase`3
-  name: DeleteCommandBase<T, TKey, TResultData>
-  nameWithType: DeleteCommandBase<T, TKey, TResultData>
-  fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase<T, TKey, TResultData>
-  nameWithType.vb: DeleteCommandBase(Of T, TKey, TResultData)
-  fullName.vb: Apizr.Mediation.Cruding.Base.DeleteCommandBase(Of T, TKey, TResultData)
-  name.vb: DeleteCommandBase(Of T, TKey, TResultData)
+- uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`5
+  commentId: T:Apizr.Mediation.Cruding.Base.DeleteCommandBase`5
+  name: DeleteCommandBase<T, TKey, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType: DeleteCommandBase<T, TKey, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase<T, TKey, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType.vb: DeleteCommandBase(Of T, TKey, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Cruding.Base.DeleteCommandBase(Of T, TKey, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  name.vb: DeleteCommandBase(Of T, TKey, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
   spec.csharp:
-  - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`3
+  - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`5
     name: DeleteCommandBase
     nameWithType: DeleteCommandBase
     fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase
@@ -963,11 +1099,23 @@ references:
   - name: TResultData
     nameWithType: TResultData
     fullName: TResultData
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`3
+  - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`5
     name: DeleteCommandBase
     nameWithType: DeleteCommandBase
     fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase
@@ -989,6 +1137,18 @@ references:
   - name: TResultData
     nameWithType: TResultData
     fullName: TResultData
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: )
     nameWithType: )
     fullName: )
@@ -997,16 +1157,16 @@ references:
   name: Apizr.Mediation.Cruding.Base
   nameWithType: Apizr.Mediation.Cruding.Base
   fullName: Apizr.Mediation.Cruding.Base
-- uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`2
-  commentId: T:Apizr.Mediation.Cruding.Base.DeleteCommandBase`2
-  name: DeleteCommandBase<T, TResultData>
-  nameWithType: DeleteCommandBase<T, TResultData>
-  fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase<T, TResultData>
-  nameWithType.vb: DeleteCommandBase(Of T, TResultData)
-  fullName.vb: Apizr.Mediation.Cruding.Base.DeleteCommandBase(Of T, TResultData)
-  name.vb: DeleteCommandBase(Of T, TResultData)
+- uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`4
+  commentId: T:Apizr.Mediation.Cruding.Base.DeleteCommandBase`4
+  name: DeleteCommandBase<T, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType: DeleteCommandBase<T, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase<T, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType.vb: DeleteCommandBase(Of T, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Cruding.Base.DeleteCommandBase(Of T, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  name.vb: DeleteCommandBase(Of T, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
   spec.csharp:
-  - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`2
+  - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`4
     name: DeleteCommandBase
     nameWithType: DeleteCommandBase
     fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase
@@ -1022,11 +1182,23 @@ references:
   - name: TResultData
     nameWithType: TResultData
     fullName: TResultData
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`2
+  - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`4
     name: DeleteCommandBase
     nameWithType: DeleteCommandBase
     fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase
@@ -1042,19 +1214,31 @@ references:
   - name: TResultData
     nameWithType: TResultData
     fullName: TResultData
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`1
-  commentId: T:Apizr.Mediation.Cruding.Base.DeleteCommandBase`1
-  name: DeleteCommandBase<T>
-  nameWithType: DeleteCommandBase<T>
-  fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase<T>
-  nameWithType.vb: DeleteCommandBase(Of T)
-  fullName.vb: Apizr.Mediation.Cruding.Base.DeleteCommandBase(Of T)
-  name.vb: DeleteCommandBase(Of T)
+- uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`3
+  commentId: T:Apizr.Mediation.Cruding.Base.DeleteCommandBase`3
+  name: DeleteCommandBase<T, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType: DeleteCommandBase<T, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase<T, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType.vb: DeleteCommandBase(Of T, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Cruding.Base.DeleteCommandBase(Of T, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  name.vb: DeleteCommandBase(Of T, TApizrRequestOptions, TApizrRequestOptionsBuilder)
   spec.csharp:
-  - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`1
+  - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`3
     name: DeleteCommandBase
     nameWithType: DeleteCommandBase
     fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase
@@ -1064,11 +1248,23 @@ references:
   - name: T
     nameWithType: T
     fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`1
+  - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`3
     name: DeleteCommandBase
     nameWithType: DeleteCommandBase
     fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase
@@ -1078,6 +1274,18 @@ references:
   - name: T
     nameWithType: T
     fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: )
     nameWithType: )
     fullName: )
@@ -1174,27 +1382,20 @@ references:
   name: MediatR
   nameWithType: MediatR
   fullName: MediatR
-- uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`3.Key
-  commentId: P:Apizr.Mediation.Cruding.Base.DeleteCommandBase`3.Key
+- uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`5.Key
+  commentId: P:Apizr.Mediation.Cruding.Base.DeleteCommandBase`5.Key
   name: Key
-  nameWithType: DeleteCommandBase<T, TKey, TResultData>.Key
-  fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase<T, TKey, TResultData>.Key
-  nameWithType.vb: DeleteCommandBase(Of T, TKey, TResultData).Key
-  fullName.vb: Apizr.Mediation.Cruding.Base.DeleteCommandBase(Of T, TKey, TResultData).Key
-- uid: Apizr.Mediation.Requesting.Base.RequestBase`1.Context
-  commentId: P:Apizr.Mediation.Requesting.Base.RequestBase`1.Context
-  name: Context
-  nameWithType: RequestBase<TFormattedModelResultData>.Context
-  fullName: Apizr.Mediation.Requesting.Base.RequestBase<TFormattedModelResultData>.Context
-  nameWithType.vb: RequestBase(Of TFormattedModelResultData).Context
-  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of TFormattedModelResultData).Context
-- uid: Apizr.Mediation.Requesting.Base.RequestBase`1.OnException
-  commentId: P:Apizr.Mediation.Requesting.Base.RequestBase`1.OnException
-  name: OnException
-  nameWithType: RequestBase<TFormattedModelResultData>.OnException
-  fullName: Apizr.Mediation.Requesting.Base.RequestBase<TFormattedModelResultData>.OnException
-  nameWithType.vb: RequestBase(Of TFormattedModelResultData).OnException
-  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of TFormattedModelResultData).OnException
+  nameWithType: DeleteCommandBase<T, TKey, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>.Key
+  fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase<T, TKey, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>.Key
+  nameWithType.vb: DeleteCommandBase(Of T, TKey, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder).Key
+  fullName.vb: Apizr.Mediation.Cruding.Base.DeleteCommandBase(Of T, TKey, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder).Key
+- uid: Apizr.Mediation.Requesting.Base.RequestBase`3.OptionsBuilder
+  commentId: P:Apizr.Mediation.Requesting.Base.RequestBase`3.OptionsBuilder
+  name: OptionsBuilder
+  nameWithType: RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>.OptionsBuilder
+  fullName: Apizr.Mediation.Requesting.Base.RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>.OptionsBuilder
+  nameWithType.vb: RequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder).OptionsBuilder
+  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder).OptionsBuilder
 - uid: Apizr.Mediation.Cruding.DeleteCommand`1.#ctor*
   commentId: Overload:Apizr.Mediation.Cruding.DeleteCommand`1.#ctor
   name: DeleteCommand
@@ -1209,16 +1410,16 @@ references:
   name: Int32
   nameWithType: Int32
   fullName: System.Int32
-- uid: System.Action{System.Exception}
-  commentId: T:System.Action{System.Exception}
+- uid: System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  commentId: T:System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: System
   definition: System.Action`1
-  name: Action<Exception>
-  nameWithType: Action<Exception>
-  fullName: System.Action<System.Exception>
-  nameWithType.vb: Action(Of Exception)
-  fullName.vb: System.Action(Of System.Exception)
-  name.vb: Action(Of Exception)
+  name: Action<IApizrRequestOptionsBuilder>
+  nameWithType: Action<IApizrRequestOptionsBuilder>
+  fullName: System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
+  nameWithType.vb: Action(Of IApizrRequestOptionsBuilder)
+  fullName.vb: System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder)
+  name.vb: Action(Of IApizrRequestOptionsBuilder)
   spec.csharp:
   - uid: System.Action`1
     name: Action
@@ -1228,11 +1429,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -1245,11 +1445,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
   - name: )
     nameWithType: )
     fullName: )
@@ -1292,16 +1491,3 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Polly.Context
-  commentId: T:Polly.Context
-  parent: Polly
-  isExternal: true
-  name: Context
-  nameWithType: Context
-  fullName: Polly.Context
-- uid: Polly
-  commentId: N:Polly
-  isExternal: true
-  name: Polly
-  nameWithType: Polly
-  fullName: Polly

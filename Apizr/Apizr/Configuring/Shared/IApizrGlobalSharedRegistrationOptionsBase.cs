@@ -23,6 +23,9 @@ namespace Apizr.Configuring.Shared
         /// </summary>
         string BasePath { get; }
 
+        /// <summary>
+        /// The Polly Context to pass through it all
+        /// </summary>
         Func<Context> ContextFactory { get; }
     }
 }

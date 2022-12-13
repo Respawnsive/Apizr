@@ -17,8 +17,21 @@ namespace Apizr.Configuring.Shared
         where TApizrOptions : IApizrGlobalSharedOptionsBase
         where TApizrOptionsBuilder : IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>
     {
+        /// <summary>
+        /// Catch potential exceptions
+        /// </summary>
+        /// <param name="onException">The exception callback</param>
+        /// <param name="letThrowOnExceptionWithEmptyCache">Let throw potential exception if there's no cached data to return (default: true)</param>
+        /// <param name="strategy">The duplicate strategy if there's another callback already (default: Replace)</param>
+        /// <returns></returns>
         TApizrOptionsBuilder WithExCatching(Action<ApizrException> onException, bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace);
 
+        /// <summary>
+        /// Set some parameters passed through all delegating handlers
+        /// </summary>
+        /// <param name="key">The parameter's key</param>
+        /// <param name="value">The parameter's value</param>
+        /// <returns></returns>
         TApizrOptionsBuilder WithHandlerParameter(string key, object value);
 
         /// <summary>

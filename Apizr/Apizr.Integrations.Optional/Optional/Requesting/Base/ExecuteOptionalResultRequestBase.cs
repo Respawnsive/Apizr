@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
-using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring.Request;
 using Apizr.Mediation.Requesting.Base;
 using Optional;
-using Polly;
 
 namespace Apizr.Optional.Requesting.Base
 {
@@ -17,6 +15,8 @@ namespace Apizr.Optional.Requesting.Base
     /// <typeparam name="TApiResultData">The api result type</typeparam>
     /// <typeparam name="TApiRequestData">The api request type</typeparam>
     /// <typeparam name="TModelRequestData">The model request type</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class ExecuteOptionalResultRequestBase<TWebApi, TModelResultData, TApiResultData, TApiRequestData,
         TModelRequestData, TApizrRequestOptions, TApizrRequestOptionsBuilder> :
         ExecuteResultRequestBase<TWebApi, TModelResultData, TApiResultData, Option<TModelResultData, ApizrException<TModelResultData>>, TApiRequestData,
@@ -70,6 +70,8 @@ namespace Apizr.Optional.Requesting.Base
     /// <typeparam name="TWebApi">The web api type</typeparam>
     /// <typeparam name="TModelData">The model data type</typeparam>
     /// <typeparam name="TApiData">The api data type</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class ExecuteOptionalResultRequestBase<TWebApi, TModelData, TApiData, TApizrRequestOptions, TApizrRequestOptionsBuilder> :
         ExecuteResultRequestBase<TWebApi, TModelData, TApiData, Option<TModelData, ApizrException<TModelData>>, TApizrRequestOptions, TApizrRequestOptionsBuilder>
         where TApizrRequestOptions : IApizrRequestOptions
@@ -103,6 +105,8 @@ namespace Apizr.Optional.Requesting.Base
     /// </summary>
     /// <typeparam name="TWebApi">The web api type</typeparam>
     /// <typeparam name="TApiData">The api data type</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class ExecuteOptionalResultRequestBase<TWebApi, TApiData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : ExecuteResultRequestBase<TWebApi, TApiData, TApiData,
         Option<TApiData, ApizrException<TApiData>>, TApizrRequestOptions, TApizrRequestOptionsBuilder>
         where TApizrRequestOptions : IApizrRequestOptions

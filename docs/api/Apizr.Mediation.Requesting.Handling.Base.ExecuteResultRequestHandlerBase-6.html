@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class ExecuteResultRequestHandlerBase&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData, TRequest&gt;
+    <title>Class ExecuteResultRequestHandlerBase&lt;TWebApi, TModelData, TApiData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder&gt;
    | Apizr </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class ExecuteResultRequestHandlerBase&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData, TRequest&gt;
+    <meta name="title" content="Class ExecuteResultRequestHandlerBase&lt;TWebApi, TModelData, TApiData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder&gt;
    | Apizr ">
     <meta name="generator" content="docfx 2.59.4.0">
     
@@ -81,7 +81,7 @@
             <article class="content wrap" id="_content" data-uid="Apizr.Mediation.Requesting.Handling.Base.ExecuteResultRequestHandlerBase`6">
   
   
-  <h1 id="Apizr_Mediation_Requesting_Handling_Base_ExecuteResultRequestHandlerBase_6" data-uid="Apizr.Mediation.Requesting.Handling.Base.ExecuteResultRequestHandlerBase`6" class="text-break">Class ExecuteResultRequestHandlerBase&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData, TRequest&gt;
+  <h1 id="Apizr_Mediation_Requesting_Handling_Base_ExecuteResultRequestHandlerBase_6" data-uid="Apizr.Mediation.Requesting.Handling.Base.ExecuteResultRequestHandlerBase`6" class="text-break">Class ExecuteResultRequestHandlerBase&lt;TWebApi, TModelData, TApiData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder&gt;
   </h1>
   <div class="markdown level0 summary"><p>The top level base mediation execute result request handler</p>
 </div>
@@ -89,13 +89,13 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><a class="xref" href="Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase.html">RequestHandlerBase</a></div>
-    <div class="level2"><span class="xref">ExecuteResultRequestHandlerBase&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData, TRequest&gt;</span></div>
-      <div class="level3"><a class="xref" href="Apizr.Mediation.Requesting.Handling.ExecuteResultRequestHandler-5.html">ExecuteResultRequestHandler&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;</a></div>
+    <div class="level1"><a class="xref" href="Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html">RequestHandlerBase</a>&lt;TApizrRequestOptions, TApizrRequestOptionsBuilder&gt;</div>
+    <div class="level2"><span class="xref">ExecuteResultRequestHandlerBase&lt;TWebApi, TModelData, TApiData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder&gt;</span></div>
+      <div class="level3"><a class="xref" href="Apizr.Mediation.Requesting.Handling.ExecuteResultRequestHandler-3.html">ExecuteResultRequestHandler&lt;TWebApi, TModelData, TApiData&gt;</a></div>
   </div>
   <div class="implements">
     <h5>Implements</h5>
-    <div><span class="xref">MediatR.IRequestHandler</span>&lt;TRequest, TModelResultData&gt;</div>
+    <div><span class="xref">MediatR.IRequestHandler</span>&lt;TRequest, TModelData&gt;</div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -125,7 +125,7 @@
   <h6><strong>Assembly</strong>: Apizr.Integrations.MediatR.dll</h6>
   <h5 id="Apizr_Mediation_Requesting_Handling_Base_ExecuteResultRequestHandlerBase_6_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class ExecuteResultRequestHandlerBase&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData, TRequest&gt; : RequestHandlerBase, IRequestHandler&lt;TRequest, TModelResultData&gt; where TRequest : ExecuteResultRequestBase&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract class ExecuteResultRequestHandlerBase&lt;TWebApi, TModelData, TApiData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder&gt; : RequestHandlerBase&lt;TApizrRequestOptions, TApizrRequestOptionsBuilder&gt;, IRequestHandler&lt;TRequest, TModelData&gt; where TRequest : ExecuteResultRequestBase&lt;TWebApi, TModelData, TApiData, TApizrRequestOptions, TApizrRequestOptionsBuilder&gt; where TApizrRequestOptions : IApizrRequestOptions where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder&lt;TApizrRequestOptions, TApizrRequestOptionsBuilder&gt;</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -142,28 +142,28 @@
 </td>
       </tr>
       <tr>
-        <td><span class="parametername">TModelResultData</span></td>
-        <td><p>The model result type</p>
+        <td><span class="parametername">TModelData</span></td>
+        <td><p>The model data type</p>
 </td>
       </tr>
       <tr>
-        <td><span class="parametername">TApiResultData</span></td>
-        <td><p>The api result type</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiRequestData</span></td>
-        <td><p>The api request type</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TModelRequestData</span></td>
-        <td><p>The model request type</p>
+        <td><span class="parametername">TApiData</span></td>
+        <td><p>The api data type</p>
 </td>
       </tr>
       <tr>
         <td><span class="parametername">TRequest</span></td>
         <td><p>The request to handle</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TApizrRequestOptions</span></td>
+        <td><p>Options provided to the request</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TApizrRequestOptionsBuilder</span></td>
+        <td><p>The request options builder</p>
 </td>
       </tr>
     </tbody>
@@ -228,13 +228,13 @@
   
   
   <a id="Apizr_Mediation_Requesting_Handling_Base_ExecuteResultRequestHandlerBase_6_Handle_" data-uid="Apizr.Mediation.Requesting.Handling.Base.ExecuteResultRequestHandlerBase`6.Handle*"></a>
-  <h4 id="Apizr_Mediation_Requesting_Handling_Base_ExecuteResultRequestHandlerBase_6_Handle__5_System_Threading_CancellationToken_" data-uid="Apizr.Mediation.Requesting.Handling.Base.ExecuteResultRequestHandlerBase`6.Handle(`5,System.Threading.CancellationToken)">Handle(TRequest, CancellationToken)</h4>
+  <h4 id="Apizr_Mediation_Requesting_Handling_Base_ExecuteResultRequestHandlerBase_6_Handle__3_System_Threading_CancellationToken_" data-uid="Apizr.Mediation.Requesting.Handling.Base.ExecuteResultRequestHandlerBase`6.Handle(`3,System.Threading.CancellationToken)">Handle(TRequest, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Handling the execute result request</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract Task&lt;TModelResultData&gt; Handle(TRequest request, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract Task&lt;TModelData&gt; Handle(TRequest request, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -270,7 +270,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TModelResultData&gt;</td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TModelData&gt;</td>
         <td></td>
       </tr>
     </tbody>

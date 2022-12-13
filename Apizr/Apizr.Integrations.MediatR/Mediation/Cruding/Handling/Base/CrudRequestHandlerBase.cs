@@ -11,6 +11,8 @@ namespace Apizr.Mediation.Cruding.Handling.Base
     /// <typeparam name="TApiEntityKey">The api entity's crud key type</typeparam>
     /// <typeparam name="TReadAllResult">The returned result type</typeparam>
     /// <typeparam name="TReadAllParams">The read all params</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class
         CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TApizrRequestOptions, TApizrRequestOptionsBuilder> : RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
         where TApiEntity : class

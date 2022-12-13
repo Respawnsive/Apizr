@@ -9,6 +9,8 @@ namespace Apizr.Mediation.Requesting.Base
     /// The top level base mediation request
     /// </summary>
     /// <typeparam name="TFormattedModelResultData">The result type</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : IRequest<TFormattedModelResultData> 
         where TApizrRequestOptions : IApizrRequestOptionsBase
         where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
@@ -33,6 +35,8 @@ namespace Apizr.Mediation.Requesting.Base
     /// </summary>
     /// <typeparam name="TFormattedModelResultData">The result type</typeparam>
     /// <typeparam name="TModelRequestData">The request type</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class RequestBase<TFormattedModelResultData, TModelRequestData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder> 
         where TApizrRequestOptions : IApizrRequestOptionsBase
         where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>

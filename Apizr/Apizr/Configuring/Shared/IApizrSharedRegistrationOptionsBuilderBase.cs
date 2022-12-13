@@ -9,9 +9,7 @@ namespace Apizr.Configuring.Shared
     {
     }
 
-    /// <summary>
-    /// Builder options available at both common and proper level for both static and extended registrations
-    /// </summary>
+    /// <inheritdoc cref="IApizrSharedRegistrationOptionsBuilderBase" />
     public interface IApizrSharedRegistrationOptionsBuilderBase<out TApizrOptions, out TApizrOptionsBuilder> :
             IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, 
             IApizrSharedRegistrationOptionsBuilderBase

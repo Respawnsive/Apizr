@@ -18,6 +18,8 @@ namespace Apizr.Mediation.Cruding.Handling.Base
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     /// <typeparam name="TCommand">The command type to handle</typeparam>
     /// <typeparam name="TCommandResult">The command result type to return</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class UpdateCommandHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TCommand, TCommandResult, TApizrRequestOptions, TApizrRequestOptionsBuilder> :
         CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TApizrRequestOptions, TApizrRequestOptionsBuilder>,
         IMediationCommandHandler<TCommand, TCommandResult>
@@ -48,6 +50,8 @@ namespace Apizr.Mediation.Cruding.Handling.Base
     /// <typeparam name="TReadAllResult">The returned result type</typeparam>
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     /// <typeparam name="TCommand">The command type to handle</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class UpdateCommandHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, TCommand, TApizrRequestOptions, TApizrRequestOptionsBuilder> : 
         CrudRequestHandlerBase<TApiEntity, int, TReadAllResult, TReadAllParams, TApizrRequestOptions, TApizrRequestOptionsBuilder>,
         IMediationCommandHandler<TCommand, Unit>
@@ -79,6 +83,8 @@ namespace Apizr.Mediation.Cruding.Handling.Base
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     /// <typeparam name="TCommand">The command type to handle</typeparam>
     /// <typeparam name="TCommandResult">The command result type to return</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class UpdateCommandHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, TCommand, TCommandResult, TApizrRequestOptions, TApizrRequestOptionsBuilder> : 
         CrudRequestHandlerBase<TApiEntity, int, TReadAllResult, TReadAllParams, TApizrRequestOptions, TApizrRequestOptionsBuilder>,
         IMediationCommandHandler<TCommand, TCommandResult>

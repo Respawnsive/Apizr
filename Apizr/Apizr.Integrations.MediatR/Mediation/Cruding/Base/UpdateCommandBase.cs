@@ -12,6 +12,8 @@ namespace Apizr.Mediation.Cruding.Base
     /// <typeparam name="TKey">The entity's crud key type</typeparam>
     /// <typeparam name="TRequestData">The request data type</typeparam>
     /// <typeparam name="TResultData">The result data type</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class UpdateCommandBase<TKey, TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : MediationCommandBase<TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
         where TApizrRequestOptions : IApizrRequestOptions
         where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
@@ -44,6 +46,8 @@ namespace Apizr.Mediation.Cruding.Base
     /// </summary>
     /// <typeparam name="TRequestData">The request data type</typeparam>
     /// <typeparam name="TResultData">The result data type</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class UpdateCommandBase<TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : UpdateCommandBase<int, TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
         where TApizrRequestOptions : IApizrRequestOptions
         where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
@@ -58,6 +62,8 @@ namespace Apizr.Mediation.Cruding.Base
     /// The top level base mediation Update command
     /// </summary>
     /// <typeparam name="TRequestData">The request data type</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class UpdateCommandBase<TRequestData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : UpdateCommandBase<TRequestData, Unit, TApizrRequestOptions, TApizrRequestOptionsBuilder>
         where TApizrRequestOptions : IApizrRequestOptions
         where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>

@@ -5,49 +5,43 @@ items:
   id: MediationCommandBase`2
   parent: Apizr.Mediation.Commanding
   children:
-  - Apizr.Mediation.Commanding.MediationCommandBase`2.#ctor(Polly.Context,System.Action{System.Exception})
-  - Apizr.Mediation.Commanding.MediationCommandBase`2.#ctor(System.Action{System.Exception})
+  - Apizr.Mediation.Commanding.MediationCommandBase`2.#ctor(System.Action{`1})
   langs:
   - csharp
   - vb
-  name: MediationCommandBase<TRequestData, TResultData>
-  nameWithType: MediationCommandBase<TRequestData, TResultData>
-  fullName: Apizr.Mediation.Commanding.MediationCommandBase<TRequestData, TResultData>
+  name: MediationCommandBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType: MediationCommandBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Commanding.MediationCommandBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
   type: Class
   source:
     id: MediationCommandBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Commanding\MediationCommandBase.cs
-    startLine: 38
+    startLine: 68
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Commanding
   summary: "\nThe top level base mediation command\n"
   example: []
   syntax:
-    content: 'public abstract class MediationCommandBase<TRequestData, TResultData> : RequestBase<TResultData>, IMediationCommand<TRequestData, TResultData>, IRequest<TResultData>, IBaseRequest'
+    content: 'public abstract class MediationCommandBase<TApizrRequestOptions, TApizrRequestOptionsBuilder> : RequestBase<Unit, TApizrRequestOptions, TApizrRequestOptionsBuilder>, IMediationCommand, IRequest<Unit>, IBaseRequest where TApizrRequestOptions : IApizrRequestOptionsBase where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>'
     typeParameters:
-    - id: TRequestData
-      description: The api request type
-    - id: TResultData
-      description: The api result type
+    - id: TApizrRequestOptions
+      description: Options provided to the request
+    - id: TApizrRequestOptionsBuilder
+      description: The request options builder
     content.vb: >-
-      Public MustInherit Class MediationCommandBase(Of TRequestData, TResultData)
-          Inherits RequestBase(Of TResultData)
-          Implements IMediationCommand(Of TRequestData, TResultData), IRequest(Of TResultData), IBaseRequest
+      Public MustInherit Class MediationCommandBase(Of TApizrRequestOptions As IApizrRequestOptionsBase, TApizrRequestOptionsBuilder As IApizrRequestOptionsBuilderBase(Of TApizrRequestOptions, TApizrRequestOptionsBuilder))
+          Inherits RequestBase(Of Unit, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+          Implements IMediationCommand, IRequest(Of Unit), IBaseRequest
   inheritance:
   - System.Object
-  - Apizr.Mediation.Requesting.Base.RequestBase{{TResultData}}
-  derivedClasses:
-  - Apizr.Mediation.Cruding.Base.CreateCommandBase`2
-  - Apizr.Mediation.Cruding.Base.DeleteCommandBase`3
-  - Apizr.Mediation.Cruding.Base.UpdateCommandBase`3
+  - Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}
   implements:
-  - Apizr.Mediation.Commanding.IMediationCommand{{TRequestData},{TResultData}}
-  - MediatR.IRequest{{TResultData}}
+  - Apizr.Mediation.Commanding.IMediationCommand
+  - MediatR.IRequest{MediatR.Unit}
   - MediatR.IBaseRequest
   inheritedMembers:
-  - Apizr.Mediation.Requesting.Base.RequestBase{{TResultData}}.Context
-  - Apizr.Mediation.Requesting.Base.RequestBase{{TResultData}}.OnException
+  - Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}.OptionsBuilder
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -55,7 +49,7 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  nameWithType.vb: MediationCommandBase(Of TRequestData, TResultData)
+  nameWithType.vb: MediationCommandBase(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)
   modifiers.csharp:
   - public
   - abstract
@@ -64,76 +58,41 @@ items:
   - Public
   - MustInherit
   - Class
-  fullName.vb: Apizr.Mediation.Commanding.MediationCommandBase(Of TRequestData, TResultData)
-  name.vb: MediationCommandBase(Of TRequestData, TResultData)
-- uid: Apizr.Mediation.Commanding.MediationCommandBase`2.#ctor(System.Action{System.Exception})
-  commentId: M:Apizr.Mediation.Commanding.MediationCommandBase`2.#ctor(System.Action{System.Exception})
-  id: '#ctor(System.Action{System.Exception})'
+  fullName.vb: Apizr.Mediation.Commanding.MediationCommandBase(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  name.vb: MediationCommandBase(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)
+- uid: Apizr.Mediation.Commanding.MediationCommandBase`2.#ctor(System.Action{`1})
+  commentId: M:Apizr.Mediation.Commanding.MediationCommandBase`2.#ctor(System.Action{`1})
+  id: '#ctor(System.Action{`1})'
   parent: Apizr.Mediation.Commanding.MediationCommandBase`2
   langs:
   - csharp
   - vb
-  name: MediationCommandBase(Action<Exception>)
-  nameWithType: MediationCommandBase<TRequestData, TResultData>.MediationCommandBase(Action<Exception>)
-  fullName: Apizr.Mediation.Commanding.MediationCommandBase<TRequestData, TResultData>.MediationCommandBase(System.Action<System.Exception>)
+  name: MediationCommandBase(Action<TApizrRequestOptionsBuilder>)
+  nameWithType: MediationCommandBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>.MediationCommandBase(Action<TApizrRequestOptionsBuilder>)
+  fullName: Apizr.Mediation.Commanding.MediationCommandBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>.MediationCommandBase(System.Action<TApizrRequestOptionsBuilder>)
   type: Constructor
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Commanding\MediationCommandBase.cs
-    startLine: 41
+    startLine: 73
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Commanding
   example: []
   syntax:
-    content: protected MediationCommandBase(Action<Exception> onException = null)
+    content: protected MediationCommandBase(Action<TApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
-    - id: onException
-      type: System.Action{System.Exception}
-    content.vb: Protected Sub New(onException As Action(Of Exception) = Nothing)
+    - id: optionsBuilder
+      type: System.Action{{TApizrRequestOptionsBuilder}}
+    content.vb: Protected Sub New(optionsBuilder As Action(Of TApizrRequestOptionsBuilder) = Nothing)
   overload: Apizr.Mediation.Commanding.MediationCommandBase`2.#ctor*
-  nameWithType.vb: MediationCommandBase(Of TRequestData, TResultData).MediationCommandBase(Action(Of Exception))
+  nameWithType.vb: MediationCommandBase(Of TApizrRequestOptions, TApizrRequestOptionsBuilder).MediationCommandBase(Action(Of TApizrRequestOptionsBuilder))
   modifiers.csharp:
   - protected
   modifiers.vb:
   - Protected
-  fullName.vb: Apizr.Mediation.Commanding.MediationCommandBase(Of TRequestData, TResultData).MediationCommandBase(System.Action(Of System.Exception))
-  name.vb: MediationCommandBase(Action(Of Exception))
-- uid: Apizr.Mediation.Commanding.MediationCommandBase`2.#ctor(Polly.Context,System.Action{System.Exception})
-  commentId: M:Apizr.Mediation.Commanding.MediationCommandBase`2.#ctor(Polly.Context,System.Action{System.Exception})
-  id: '#ctor(Polly.Context,System.Action{System.Exception})'
-  parent: Apizr.Mediation.Commanding.MediationCommandBase`2
-  langs:
-  - csharp
-  - vb
-  name: MediationCommandBase(Context, Action<Exception>)
-  nameWithType: MediationCommandBase<TRequestData, TResultData>.MediationCommandBase(Context, Action<Exception>)
-  fullName: Apizr.Mediation.Commanding.MediationCommandBase<TRequestData, TResultData>.MediationCommandBase(Polly.Context, System.Action<System.Exception>)
-  type: Constructor
-  source:
-    id: .ctor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Commanding\MediationCommandBase.cs
-    startLine: 47
-  assemblies:
-  - Apizr.Integrations.MediatR
-  namespace: Apizr.Mediation.Commanding
-  example: []
-  syntax:
-    content: protected MediationCommandBase(Context context, Action<Exception> onException = null)
-    parameters:
-    - id: context
-      type: Polly.Context
-    - id: onException
-      type: System.Action{System.Exception}
-    content.vb: Protected Sub New(context As Context, onException As Action(Of Exception) = Nothing)
-  overload: Apizr.Mediation.Commanding.MediationCommandBase`2.#ctor*
-  nameWithType.vb: MediationCommandBase(Of TRequestData, TResultData).MediationCommandBase(Context, Action(Of Exception))
-  modifiers.csharp:
-  - protected
-  modifiers.vb:
-  - Protected
-  fullName.vb: Apizr.Mediation.Commanding.MediationCommandBase(Of TRequestData, TResultData).MediationCommandBase(Polly.Context, System.Action(Of System.Exception))
-  name.vb: MediationCommandBase(Context, Action(Of Exception))
+  fullName.vb: Apizr.Mediation.Commanding.MediationCommandBase(Of TApizrRequestOptions, TApizrRequestOptionsBuilder).MediationCommandBase(System.Action(Of TApizrRequestOptionsBuilder))
+  name.vb: MediationCommandBase(Action(Of TApizrRequestOptionsBuilder))
 references:
 - uid: Apizr.Mediation.Commanding
   commentId: N:Apizr.Mediation.Commanding
@@ -147,104 +106,88 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Apizr.Mediation.Requesting.Base.RequestBase{{TResultData}}
-  commentId: T:Apizr.Mediation.Requesting.Base.RequestBase{`1}
+- uid: Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}
+  commentId: T:Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,`1,`2}
   parent: Apizr.Mediation.Requesting.Base
-  definition: Apizr.Mediation.Requesting.Base.RequestBase`1
-  name: RequestBase<TResultData>
-  nameWithType: RequestBase<TResultData>
-  fullName: Apizr.Mediation.Requesting.Base.RequestBase<TResultData>
-  nameWithType.vb: RequestBase(Of TResultData)
-  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of TResultData)
-  name.vb: RequestBase(Of TResultData)
+  definition: Apizr.Mediation.Requesting.Base.RequestBase`3
+  name: RequestBase<Unit, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType: RequestBase<Unit, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Requesting.Base.RequestBase<MediatR.Unit, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType.vb: RequestBase(Of Unit, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of MediatR.Unit, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  name.vb: RequestBase(Of Unit, TApizrRequestOptions, TApizrRequestOptionsBuilder)
   spec.csharp:
-  - uid: Apizr.Mediation.Requesting.Base.RequestBase`1
+  - uid: Apizr.Mediation.Requesting.Base.RequestBase`3
     name: RequestBase
     nameWithType: RequestBase
     fullName: Apizr.Mediation.Requesting.Base.RequestBase
   - name: <
     nameWithType: <
     fullName: <
-  - name: TResultData
-    nameWithType: TResultData
-    fullName: TResultData
+  - uid: MediatR.Unit
+    name: Unit
+    nameWithType: Unit
+    fullName: MediatR.Unit
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Mediation.Requesting.Base.RequestBase`1
+  - uid: Apizr.Mediation.Requesting.Base.RequestBase`3
     name: RequestBase
     nameWithType: RequestBase
     fullName: Apizr.Mediation.Requesting.Base.RequestBase
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TResultData
-    nameWithType: TResultData
-    fullName: TResultData
+  - uid: MediatR.Unit
+    name: Unit
+    nameWithType: Unit
+    fullName: MediatR.Unit
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Mediation.Commanding.IMediationCommand{{TRequestData},{TResultData}}
-  commentId: T:Apizr.Mediation.Commanding.IMediationCommand{`0,`1}
+- uid: Apizr.Mediation.Commanding.IMediationCommand
+  commentId: T:Apizr.Mediation.Commanding.IMediationCommand
   parent: Apizr.Mediation.Commanding
-  definition: Apizr.Mediation.Commanding.IMediationCommand`2
-  name: IMediationCommand<TRequestData, TResultData>
-  nameWithType: IMediationCommand<TRequestData, TResultData>
-  fullName: Apizr.Mediation.Commanding.IMediationCommand<TRequestData, TResultData>
-  nameWithType.vb: IMediationCommand(Of TRequestData, TResultData)
-  fullName.vb: Apizr.Mediation.Commanding.IMediationCommand(Of TRequestData, TResultData)
-  name.vb: IMediationCommand(Of TRequestData, TResultData)
-  spec.csharp:
-  - uid: Apizr.Mediation.Commanding.IMediationCommand`2
-    name: IMediationCommand
-    nameWithType: IMediationCommand
-    fullName: Apizr.Mediation.Commanding.IMediationCommand
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TRequestData
-    nameWithType: TRequestData
-    fullName: TRequestData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TResultData
-    nameWithType: TResultData
-    fullName: TResultData
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Apizr.Mediation.Commanding.IMediationCommand`2
-    name: IMediationCommand
-    nameWithType: IMediationCommand
-    fullName: Apizr.Mediation.Commanding.IMediationCommand
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TRequestData
-    nameWithType: TRequestData
-    fullName: TRequestData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TResultData
-    nameWithType: TResultData
-    fullName: TResultData
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: MediatR.IRequest{{TResultData}}
-  commentId: T:MediatR.IRequest{`1}
+  name: IMediationCommand
+  nameWithType: IMediationCommand
+  fullName: Apizr.Mediation.Commanding.IMediationCommand
+- uid: MediatR.IRequest{MediatR.Unit}
+  commentId: T:MediatR.IRequest{MediatR.Unit}
   parent: MediatR
   definition: MediatR.IRequest`1
-  name: IRequest<TResultData>
-  nameWithType: IRequest<TResultData>
-  fullName: MediatR.IRequest<TResultData>
-  nameWithType.vb: IRequest(Of TResultData)
-  fullName.vb: MediatR.IRequest(Of TResultData)
-  name.vb: IRequest(Of TResultData)
+  name: IRequest<Unit>
+  nameWithType: IRequest<Unit>
+  fullName: MediatR.IRequest<MediatR.Unit>
+  nameWithType.vb: IRequest(Of Unit)
+  fullName.vb: MediatR.IRequest(Of MediatR.Unit)
+  name.vb: IRequest(Of Unit)
   spec.csharp:
   - uid: MediatR.IRequest`1
     name: IRequest
@@ -254,9 +197,11 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - name: TResultData
-    nameWithType: TResultData
-    fullName: TResultData
+  - uid: MediatR.Unit
+    name: Unit
+    nameWithType: Unit
+    fullName: MediatR.Unit
+    isExternal: true
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -269,9 +214,11 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TResultData
-    nameWithType: TResultData
-    fullName: TResultData
+  - uid: MediatR.Unit
+    name: Unit
+    nameWithType: Unit
+    fullName: MediatR.Unit
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -282,24 +229,15 @@ references:
   name: IBaseRequest
   nameWithType: IBaseRequest
   fullName: MediatR.IBaseRequest
-- uid: Apizr.Mediation.Requesting.Base.RequestBase{{TResultData}}.Context
-  commentId: P:Apizr.Mediation.Requesting.Base.RequestBase{`1}.Context
-  parent: Apizr.Mediation.Requesting.Base.RequestBase{{TResultData}}
-  definition: Apizr.Mediation.Requesting.Base.RequestBase`1.Context
-  name: Context
-  nameWithType: RequestBase<TResultData>.Context
-  fullName: Apizr.Mediation.Requesting.Base.RequestBase<TResultData>.Context
-  nameWithType.vb: RequestBase(Of TResultData).Context
-  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of TResultData).Context
-- uid: Apizr.Mediation.Requesting.Base.RequestBase{{TResultData}}.OnException
-  commentId: P:Apizr.Mediation.Requesting.Base.RequestBase{`1}.OnException
-  parent: Apizr.Mediation.Requesting.Base.RequestBase{{TResultData}}
-  definition: Apizr.Mediation.Requesting.Base.RequestBase`1.OnException
-  name: OnException
-  nameWithType: RequestBase<TResultData>.OnException
-  fullName: Apizr.Mediation.Requesting.Base.RequestBase<TResultData>.OnException
-  nameWithType.vb: RequestBase(Of TResultData).OnException
-  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of TResultData).OnException
+- uid: Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}.OptionsBuilder
+  commentId: P:Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,`1,`2}.OptionsBuilder
+  parent: Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}
+  definition: Apizr.Mediation.Requesting.Base.RequestBase`3.OptionsBuilder
+  name: OptionsBuilder
+  nameWithType: RequestBase<Unit, TApizrRequestOptions, TApizrRequestOptionsBuilder>.OptionsBuilder
+  fullName: Apizr.Mediation.Requesting.Base.RequestBase<MediatR.Unit, TApizrRequestOptions, TApizrRequestOptionsBuilder>.OptionsBuilder
+  nameWithType.vb: RequestBase(Of Unit, TApizrRequestOptions, TApizrRequestOptionsBuilder).OptionsBuilder
+  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of MediatR.Unit, TApizrRequestOptions, TApizrRequestOptionsBuilder).OptionsBuilder
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -585,16 +523,16 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: Apizr.Mediation.Requesting.Base.RequestBase`1
-  commentId: T:Apizr.Mediation.Requesting.Base.RequestBase`1
-  name: RequestBase<TFormattedModelResultData>
-  nameWithType: RequestBase<TFormattedModelResultData>
-  fullName: Apizr.Mediation.Requesting.Base.RequestBase<TFormattedModelResultData>
-  nameWithType.vb: RequestBase(Of TFormattedModelResultData)
-  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of TFormattedModelResultData)
-  name.vb: RequestBase(Of TFormattedModelResultData)
+- uid: Apizr.Mediation.Requesting.Base.RequestBase`3
+  commentId: T:Apizr.Mediation.Requesting.Base.RequestBase`3
+  name: RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType: RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Requesting.Base.RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType.vb: RequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  name.vb: RequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
   spec.csharp:
-  - uid: Apizr.Mediation.Requesting.Base.RequestBase`1
+  - uid: Apizr.Mediation.Requesting.Base.RequestBase`3
     name: RequestBase
     nameWithType: RequestBase
     fullName: Apizr.Mediation.Requesting.Base.RequestBase
@@ -604,11 +542,23 @@ references:
   - name: TFormattedModelResultData
     nameWithType: TFormattedModelResultData
     fullName: TFormattedModelResultData
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Mediation.Requesting.Base.RequestBase`1
+  - uid: Apizr.Mediation.Requesting.Base.RequestBase`3
     name: RequestBase
     nameWithType: RequestBase
     fullName: Apizr.Mediation.Requesting.Base.RequestBase
@@ -618,6 +568,18 @@ references:
   - name: TFormattedModelResultData
     nameWithType: TFormattedModelResultData
     fullName: TFormattedModelResultData
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: )
     nameWithType: )
     fullName: )
@@ -626,54 +588,6 @@ references:
   name: Apizr.Mediation.Requesting.Base
   nameWithType: Apizr.Mediation.Requesting.Base
   fullName: Apizr.Mediation.Requesting.Base
-- uid: Apizr.Mediation.Commanding.IMediationCommand`2
-  commentId: T:Apizr.Mediation.Commanding.IMediationCommand`2
-  name: IMediationCommand<TRequestData, TResultData>
-  nameWithType: IMediationCommand<TRequestData, TResultData>
-  fullName: Apizr.Mediation.Commanding.IMediationCommand<TRequestData, TResultData>
-  nameWithType.vb: IMediationCommand(Of TRequestData, TResultData)
-  fullName.vb: Apizr.Mediation.Commanding.IMediationCommand(Of TRequestData, TResultData)
-  name.vb: IMediationCommand(Of TRequestData, TResultData)
-  spec.csharp:
-  - uid: Apizr.Mediation.Commanding.IMediationCommand`2
-    name: IMediationCommand
-    nameWithType: IMediationCommand
-    fullName: Apizr.Mediation.Commanding.IMediationCommand
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TRequestData
-    nameWithType: TRequestData
-    fullName: TRequestData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TResultData
-    nameWithType: TResultData
-    fullName: TResultData
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Apizr.Mediation.Commanding.IMediationCommand`2
-    name: IMediationCommand
-    nameWithType: IMediationCommand
-    fullName: Apizr.Mediation.Commanding.IMediationCommand
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TRequestData
-    nameWithType: TRequestData
-    fullName: TRequestData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TResultData
-    nameWithType: TResultData
-    fullName: TResultData
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: MediatR.IRequest`1
   commentId: T:MediatR.IRequest`1
   isExternal: true
@@ -719,37 +633,30 @@ references:
   name: MediatR
   nameWithType: MediatR
   fullName: MediatR
-- uid: Apizr.Mediation.Requesting.Base.RequestBase`1.Context
-  commentId: P:Apizr.Mediation.Requesting.Base.RequestBase`1.Context
-  name: Context
-  nameWithType: RequestBase<TFormattedModelResultData>.Context
-  fullName: Apizr.Mediation.Requesting.Base.RequestBase<TFormattedModelResultData>.Context
-  nameWithType.vb: RequestBase(Of TFormattedModelResultData).Context
-  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of TFormattedModelResultData).Context
-- uid: Apizr.Mediation.Requesting.Base.RequestBase`1.OnException
-  commentId: P:Apizr.Mediation.Requesting.Base.RequestBase`1.OnException
-  name: OnException
-  nameWithType: RequestBase<TFormattedModelResultData>.OnException
-  fullName: Apizr.Mediation.Requesting.Base.RequestBase<TFormattedModelResultData>.OnException
-  nameWithType.vb: RequestBase(Of TFormattedModelResultData).OnException
-  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of TFormattedModelResultData).OnException
+- uid: Apizr.Mediation.Requesting.Base.RequestBase`3.OptionsBuilder
+  commentId: P:Apizr.Mediation.Requesting.Base.RequestBase`3.OptionsBuilder
+  name: OptionsBuilder
+  nameWithType: RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>.OptionsBuilder
+  fullName: Apizr.Mediation.Requesting.Base.RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>.OptionsBuilder
+  nameWithType.vb: RequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder).OptionsBuilder
+  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder).OptionsBuilder
 - uid: Apizr.Mediation.Commanding.MediationCommandBase`2.#ctor*
   commentId: Overload:Apizr.Mediation.Commanding.MediationCommandBase`2.#ctor
   name: MediationCommandBase
-  nameWithType: MediationCommandBase<TRequestData, TResultData>.MediationCommandBase
-  fullName: Apizr.Mediation.Commanding.MediationCommandBase<TRequestData, TResultData>.MediationCommandBase
-  nameWithType.vb: MediationCommandBase(Of TRequestData, TResultData).MediationCommandBase
-  fullName.vb: Apizr.Mediation.Commanding.MediationCommandBase(Of TRequestData, TResultData).MediationCommandBase
-- uid: System.Action{System.Exception}
-  commentId: T:System.Action{System.Exception}
+  nameWithType: MediationCommandBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>.MediationCommandBase
+  fullName: Apizr.Mediation.Commanding.MediationCommandBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>.MediationCommandBase
+  nameWithType.vb: MediationCommandBase(Of TApizrRequestOptions, TApizrRequestOptionsBuilder).MediationCommandBase
+  fullName.vb: Apizr.Mediation.Commanding.MediationCommandBase(Of TApizrRequestOptions, TApizrRequestOptionsBuilder).MediationCommandBase
+- uid: System.Action{{TApizrRequestOptionsBuilder}}
+  commentId: T:System.Action{`5}
   parent: System
   definition: System.Action`1
-  name: Action<Exception>
-  nameWithType: Action<Exception>
-  fullName: System.Action<System.Exception>
-  nameWithType.vb: Action(Of Exception)
-  fullName.vb: System.Action(Of System.Exception)
-  name.vb: Action(Of Exception)
+  name: Action<TApizrRequestOptionsBuilder>
+  nameWithType: Action<TApizrRequestOptionsBuilder>
+  fullName: System.Action<TApizrRequestOptionsBuilder>
+  nameWithType.vb: Action(Of TApizrRequestOptionsBuilder)
+  fullName.vb: System.Action(Of TApizrRequestOptionsBuilder)
+  name.vb: Action(Of TApizrRequestOptionsBuilder)
   spec.csharp:
   - uid: System.Action`1
     name: Action
@@ -759,11 +666,9 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -776,11 +681,9 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: )
     nameWithType: )
     fullName: )
@@ -823,16 +726,3 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Polly.Context
-  commentId: T:Polly.Context
-  parent: Polly
-  isExternal: true
-  name: Context
-  nameWithType: Context
-  fullName: Polly.Context
-- uid: Polly
-  commentId: N:Polly
-  isExternal: true
-  name: Polly
-  nameWithType: Polly
-  fullName: Polly

@@ -89,9 +89,9 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><a class="xref" href="Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase.html">RequestHandlerBase</a></div>
-    <div class="level2"><a class="xref" href="Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase-4.html">CrudRequestHandlerBase</a>&lt;TApiEntity, <span class="xref">System.Int32</span>, TReadAllResult, TReadAllParams&gt;</div>
-    <div class="level3"><a class="xref" href="Apizr.Mediation.Cruding.Handling.Base.ReadQueryHandlerBase-6.html">ReadQueryHandlerBase</a>&lt;TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, <a class="xref" href="Apizr.Mediation.Cruding.ReadQuery-1.html">ReadQuery</a>&lt;TModelEntity&gt;, TModelEntity&gt;</div>
+    <div class="level1"><a class="xref" href="Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html">RequestHandlerBase</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
+    <div class="level2"><a class="xref" href="Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase-6.html">CrudRequestHandlerBase</a>&lt;TApiEntity, <span class="xref">System.Int32</span>, TReadAllResult, TReadAllParams, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
+    <div class="level3"><a class="xref" href="Apizr.Mediation.Cruding.Handling.Base.ReadQueryHandlerBase-8.html">ReadQueryHandlerBase</a>&lt;TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, <a class="xref" href="Apizr.Mediation.Cruding.ReadQuery-1.html">ReadQuery</a>&lt;TModelEntity&gt;, TModelEntity, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
     <div class="level4"><span class="xref">ReadQueryHandler&lt;TModelEntity, TApiEntity, TReadAllResult, TReadAllParams&gt;</span></div>
   </div>
   <div class="implements">
@@ -102,10 +102,10 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="Apizr.Mediation.Cruding.Handling.Base.ReadQueryHandlerBase-6.html#Apizr_Mediation_Cruding_Handling_Base_ReadQueryHandlerBase_6_Handle__4_System_Threading_CancellationToken_">ReadQueryHandlerBase&lt;TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, ReadQuery&lt;TModelEntity&gt;, TModelEntity&gt;.Handle(ReadQuery&lt;TModelEntity&gt;, CancellationToken)</a>
+      <a class="xref" href="Apizr.Mediation.Cruding.Handling.Base.ReadQueryHandlerBase-8.html#Apizr_Mediation_Cruding_Handling_Base_ReadQueryHandlerBase_8_Handle__4_System_Threading_CancellationToken_">ReadQueryHandlerBase&lt;TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, ReadQuery&lt;TModelEntity&gt;, TModelEntity, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;.Handle(ReadQuery&lt;TModelEntity&gt;, CancellationToken)</a>
     </div>
     <div>
-      <a class="xref" href="Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase-4.html#Apizr_Mediation_Cruding_Handling_Base_CrudRequestHandlerBase_4_CrudApiManager">CrudRequestHandlerBase&lt;TApiEntity, Int32, TReadAllResult, TReadAllParams&gt;.CrudApiManager</a>
+      <a class="xref" href="Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase-6.html#Apizr_Mediation_Cruding_Handling_Base_CrudRequestHandlerBase_6_CrudApiManager">CrudRequestHandlerBase&lt;TApiEntity, Int32, TReadAllResult, TReadAllParams, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;.CrudApiManager</a>
     </div>
     <div>
       <span class="xref">System.Object.Equals(System.Object)</span>
@@ -133,7 +133,7 @@
   <h6><strong>Assembly</strong>: Apizr.Integrations.MediatR.dll</h6>
   <h5 id="Apizr_Mediation_Cruding_Handling_ReadQueryHandler_4_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ReadQueryHandler&lt;TModelEntity, TApiEntity, TReadAllResult, TReadAllParams&gt; : ReadQueryHandlerBase&lt;TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, ReadQuery&lt;TModelEntity&gt;, TModelEntity&gt;, IMediationQueryHandler&lt;ReadQuery&lt;TModelEntity&gt;, TModelEntity&gt;, IRequestHandler&lt;ReadQuery&lt;TModelEntity&gt;, TModelEntity&gt; where TModelEntity : class where TApiEntity : class</code></pre>
+    <pre><code class="lang-csharp hljs">public class ReadQueryHandler&lt;TModelEntity, TApiEntity, TReadAllResult, TReadAllParams&gt; : ReadQueryHandlerBase&lt;TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, ReadQuery&lt;TModelEntity&gt;, TModelEntity, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;, IMediationQueryHandler&lt;ReadQuery&lt;TModelEntity&gt;, TModelEntity&gt;, IRequestHandler&lt;ReadQuery&lt;TModelEntity&gt;, TModelEntity&gt; where TModelEntity : class where TApiEntity : class</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -206,7 +206,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override async Task&lt;TModelEntity&gt; Handle(ReadQuery&lt;TModelEntity&gt; request, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public override Task&lt;TModelEntity&gt; Handle(ReadQuery&lt;TModelEntity&gt; request, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -247,7 +247,7 @@
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">Apizr.Mediation.Cruding.Handling.Base.ReadQueryHandlerBase&lt;TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, Apizr.Mediation.Cruding.ReadQuery&lt;TModelEntity&gt;, TModelEntity&gt;.Handle(Apizr.Mediation.Cruding.ReadQuery&lt;TModelEntity&gt;, System.Threading.CancellationToken)</span></div>
+  <div><span class="xref">Apizr.Mediation.Cruding.Handling.Base.ReadQueryHandlerBase&lt;TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, Apizr.Mediation.Cruding.ReadQuery&lt;TModelEntity&gt;, TModelEntity, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder&gt;.Handle(Apizr.Mediation.Cruding.ReadQuery&lt;TModelEntity&gt;, System.Threading.CancellationToken)</span></div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="Apizr.Mediation.Querying.IMediationQueryHandler-2.html">IMediationQueryHandler&lt;TQuery, TResponse&gt;</a>

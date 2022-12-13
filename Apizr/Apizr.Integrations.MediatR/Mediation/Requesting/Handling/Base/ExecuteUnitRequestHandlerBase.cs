@@ -17,6 +17,8 @@ namespace Apizr.Mediation.Requesting.Handling.Base
     /// <typeparam name="TApiData">The api data type</typeparam>
     /// <typeparam name="TFormattedModelResultData">The formatted model result data type</typeparam>
     /// <typeparam name="TRequest">The execute unit request to handle</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class
         ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData,
             TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder> : RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>, 
@@ -48,6 +50,8 @@ namespace Apizr.Mediation.Requesting.Handling.Base
     /// <typeparam name="TModelData">The model data type</typeparam>
     /// <typeparam name="TApiData">The api data type</typeparam>
     /// <typeparam name="TRequest">The execute unit request to handle</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class
         ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData,
             TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder> : RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>, 
@@ -78,6 +82,8 @@ namespace Apizr.Mediation.Requesting.Handling.Base
     /// <typeparam name="TWebApi">The web api type</typeparam>
     /// <typeparam name="TFormattedModelResultData">The formatted model result data type</typeparam>
     /// <typeparam name="TRequest">The execute unit request to handle</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class
         ExecuteUnitRequestHandlerBase<TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder> : RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>, 
             IRequestHandler<TRequest, TFormattedModelResultData>
@@ -106,6 +112,8 @@ namespace Apizr.Mediation.Requesting.Handling.Base
     /// </summary>
     /// <typeparam name="TWebApi">The web api type</typeparam>
     /// <typeparam name="TRequest">The execute unit request to handle</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class
         ExecuteUnitRequestHandlerBase<TWebApi, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder> : RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>, 
             IRequestHandler<TRequest, Unit>

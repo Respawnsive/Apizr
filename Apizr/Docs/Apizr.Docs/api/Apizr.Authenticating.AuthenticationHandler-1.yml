@@ -5,7 +5,7 @@ items:
   id: AuthenticationHandler`1
   parent: Apizr.Authenticating
   children:
-  - Apizr.Authenticating.AuthenticationHandler`1.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,System.Func{`0},System.Linq.Expressions.Expression{System.Func{`0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
+  - Apizr.Authenticating.AuthenticationHandler`1.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{`0},System.Linq.Expressions.Expression{System.Func{`0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   - Apizr.Authenticating.AuthenticationHandler`1.GetToken
   - Apizr.Authenticating.AuthenticationHandler`1.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
   - Apizr.Authenticating.AuthenticationHandler`1.SetToken(System.String)
@@ -19,7 +19,7 @@ items:
   source:
     id: AuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Authenticating\AuthenticationHandler.cs
-    startLine: 26
+    startLine: 27
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
@@ -61,46 +61,46 @@ items:
   - Class
   fullName.vb: Apizr.Authenticating.AuthenticationHandler(Of TSettingsService)
   name.vb: AuthenticationHandler(Of TSettingsService)
-- uid: Apizr.Authenticating.AuthenticationHandler`1.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,System.Func{`0},System.Linq.Expressions.Expression{System.Func{`0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
-  commentId: M:Apizr.Authenticating.AuthenticationHandler`1.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,System.Func{`0},System.Linq.Expressions.Expression{System.Func{`0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
-  id: '#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,System.Func{`0},System.Linq.Expressions.Expression{System.Func{`0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})'
+- uid: Apizr.Authenticating.AuthenticationHandler`1.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{`0},System.Linq.Expressions.Expression{System.Func{`0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
+  commentId: M:Apizr.Authenticating.AuthenticationHandler`1.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{`0},System.Linq.Expressions.Expression{System.Func{`0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
+  id: '#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{`0},System.Linq.Expressions.Expression{System.Func{`0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})'
   parent: Apizr.Authenticating.AuthenticationHandler`1
   langs:
   - csharp
   - vb
-  name: AuthenticationHandler(ILogger, IApizrOptionsBase, Func<TSettingsService>, Expression<Func<TSettingsService, String>>, Func<HttpRequestMessage, Task<String>>)
-  nameWithType: AuthenticationHandler<TSettingsService>.AuthenticationHandler(ILogger, IApizrOptionsBase, Func<TSettingsService>, Expression<Func<TSettingsService, String>>, Func<HttpRequestMessage, Task<String>>)
-  fullName: Apizr.Authenticating.AuthenticationHandler<TSettingsService>.AuthenticationHandler(Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.IApizrOptionsBase, System.Func<TSettingsService>, System.Linq.Expressions.Expression<System.Func<TSettingsService, System.String>>, System.Func<System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task<System.String>>)
+  name: AuthenticationHandler(ILogger, IApizrManagerOptionsBase, Func<TSettingsService>, Expression<Func<TSettingsService, String>>, Func<HttpRequestMessage, Task<String>>)
+  nameWithType: AuthenticationHandler<TSettingsService>.AuthenticationHandler(ILogger, IApizrManagerOptionsBase, Func<TSettingsService>, Expression<Func<TSettingsService, String>>, Func<HttpRequestMessage, Task<String>>)
+  fullName: Apizr.Authenticating.AuthenticationHandler<TSettingsService>.AuthenticationHandler(Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Func<TSettingsService>, System.Linq.Expressions.Expression<System.Func<TSettingsService, System.String>>, System.Func<System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task<System.String>>)
   type: Constructor
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Authenticating\AuthenticationHandler.cs
-    startLine: 32
+    startLine: 33
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
   syntax:
-    content: public AuthenticationHandler(ILogger logger, IApizrOptionsBase apizrOptions, Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> settingsTokenProperty, Func<HttpRequestMessage, Task<string>> refreshToken)
+    content: public AuthenticationHandler(ILogger logger, IApizrManagerOptionsBase apizrOptions, Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> settingsTokenProperty, Func<HttpRequestMessage, Task<string>> refreshToken)
     parameters:
     - id: logger
       type: Microsoft.Extensions.Logging.ILogger
     - id: apizrOptions
-      type: Apizr.Configuring.IApizrOptionsBase
+      type: Apizr.Configuring.Manager.IApizrManagerOptionsBase
     - id: settingsServiceFactory
       type: System.Func{{TSettingsService}}
     - id: settingsTokenProperty
       type: System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}}
     - id: refreshToken
       type: System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}
-    content.vb: Public Sub New(logger As ILogger, apizrOptions As IApizrOptionsBase, settingsServiceFactory As Func(Of TSettingsService), settingsTokenProperty As Expression(Of Func(Of TSettingsService, String)), refreshToken As Func(Of HttpRequestMessage, Task(Of String)))
+    content.vb: Public Sub New(logger As ILogger, apizrOptions As IApizrManagerOptionsBase, settingsServiceFactory As Func(Of TSettingsService), settingsTokenProperty As Expression(Of Func(Of TSettingsService, String)), refreshToken As Func(Of HttpRequestMessage, Task(Of String)))
   overload: Apizr.Authenticating.AuthenticationHandler`1.#ctor*
-  nameWithType.vb: AuthenticationHandler(Of TSettingsService).AuthenticationHandler(ILogger, IApizrOptionsBase, Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String)), Func(Of HttpRequestMessage, Task(Of String)))
+  nameWithType.vb: AuthenticationHandler(Of TSettingsService).AuthenticationHandler(ILogger, IApizrManagerOptionsBase, Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String)), Func(Of HttpRequestMessage, Task(Of String)))
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Apizr.Authenticating.AuthenticationHandler(Of TSettingsService).AuthenticationHandler(Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.IApizrOptionsBase, System.Func(Of TSettingsService), System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, System.String)), System.Func(Of System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task(Of System.String)))
-  name.vb: AuthenticationHandler(ILogger, IApizrOptionsBase, Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String)), Func(Of HttpRequestMessage, Task(Of String)))
+  fullName.vb: Apizr.Authenticating.AuthenticationHandler(Of TSettingsService).AuthenticationHandler(Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Func(Of TSettingsService), System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, System.String)), System.Func(Of System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task(Of System.String)))
+  name.vb: AuthenticationHandler(ILogger, IApizrManagerOptionsBase, Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String)), Func(Of HttpRequestMessage, Task(Of String)))
 - uid: Apizr.Authenticating.AuthenticationHandler`1.GetToken
   commentId: M:Apizr.Authenticating.AuthenticationHandler`1.GetToken
   id: GetToken
@@ -115,7 +115,7 @@ items:
   source:
     id: GetToken
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Authenticating\AuthenticationHandler.cs
-    startLine: 41
+    startLine: 42
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
@@ -148,7 +148,7 @@ items:
   source:
     id: SetToken
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Authenticating\AuthenticationHandler.cs
-    startLine: 43
+    startLine: 44
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
@@ -182,7 +182,7 @@ items:
   source:
     id: RefreshTokenAsync
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Authenticating\AuthenticationHandler.cs
-    startLine: 54
+    startLine: 55
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
@@ -728,12 +728,12 @@ references:
   name: ILogger
   nameWithType: ILogger
   fullName: Microsoft.Extensions.Logging.ILogger
-- uid: Apizr.Configuring.IApizrOptionsBase
-  commentId: T:Apizr.Configuring.IApizrOptionsBase
-  parent: Apizr.Configuring
-  name: IApizrOptionsBase
-  nameWithType: IApizrOptionsBase
-  fullName: Apizr.Configuring.IApizrOptionsBase
+- uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  commentId: T:Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  parent: Apizr.Configuring.Manager
+  name: IApizrManagerOptionsBase
+  nameWithType: IApizrManagerOptionsBase
+  fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
 - uid: System.Func{{TSettingsService}}
   commentId: T:System.Func{`0}
   parent: System
@@ -940,11 +940,11 @@ references:
   name: Microsoft.Extensions.Logging
   nameWithType: Microsoft.Extensions.Logging
   fullName: Microsoft.Extensions.Logging
-- uid: Apizr.Configuring
-  commentId: N:Apizr.Configuring
-  name: Apizr.Configuring
-  nameWithType: Apizr.Configuring
-  fullName: Apizr.Configuring
+- uid: Apizr.Configuring.Manager
+  commentId: N:Apizr.Configuring.Manager
+  name: Apizr.Configuring.Manager
+  nameWithType: Apizr.Configuring.Manager
+  fullName: Apizr.Configuring.Manager
 - uid: System.Func`1
   commentId: T:System.Func`1
   isExternal: true

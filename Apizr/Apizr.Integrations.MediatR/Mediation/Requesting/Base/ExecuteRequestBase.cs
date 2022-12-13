@@ -10,6 +10,8 @@ namespace Apizr.Mediation.Requesting.Base
     /// The top level base mediation execute request
     /// </summary>
     /// <typeparam name="TFormattedModelResultData">The result type</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class ExecuteRequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder> 
         where TApizrRequestOptions : IApizrRequestOptionsBase
         where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
@@ -35,6 +37,8 @@ namespace Apizr.Mediation.Requesting.Base
     /// </summary>
     /// <typeparam name="TFormattedModelResultData">The result type</typeparam>
     /// <typeparam name="TModelRequestData">The request data type</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class ExecuteRequestBase<TFormattedModelResultData, TModelRequestData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : ExecuteRequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder> 
         where TApizrRequestOptions : IApizrRequestOptionsBase
         where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
@@ -68,6 +72,8 @@ namespace Apizr.Mediation.Requesting.Base
     /// <summary>
     /// The top level base mediation execute request
     /// </summary>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class ExecuteRequestBase<TApizrRequestOptions, TApizrRequestOptionsBuilder> : ExecuteRequestBase<Unit, TApizrRequestOptions, TApizrRequestOptionsBuilder> 
         where TApizrRequestOptions : IApizrRequestOptionsBase
         where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>

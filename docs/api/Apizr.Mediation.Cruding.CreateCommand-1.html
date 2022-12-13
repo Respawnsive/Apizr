@@ -89,9 +89,9 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-1.html">RequestBase</a>&lt;TModelData&gt;</div>
-    <div class="level2"><a class="xref" href="Apizr.Mediation.Commanding.MediationCommandBase-2.html">MediationCommandBase</a>&lt;TModelData, TModelData&gt;</div>
-    <div class="level3"><a class="xref" href="Apizr.Mediation.Cruding.Base.CreateCommandBase-2.html">CreateCommandBase</a>&lt;TModelData, TModelData&gt;</div>
+    <div class="level1"><a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-3.html">RequestBase</a>&lt;TModelData, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
+    <div class="level2"><a class="xref" href="Apizr.Mediation.Commanding.MediationCommandBase-4.html">MediationCommandBase</a>&lt;TModelData, TModelData, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
+    <div class="level3"><a class="xref" href="Apizr.Mediation.Cruding.Base.CreateCommandBase-4.html">CreateCommandBase</a>&lt;TModelData, TModelData, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
     <div class="level4"><span class="xref">CreateCommand&lt;TModelData&gt;</span></div>
   </div>
   <div class="implements">
@@ -103,13 +103,10 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="Apizr.Mediation.Cruding.Base.CreateCommandBase-2.html#Apizr_Mediation_Cruding_Base_CreateCommandBase_2_RequestData">CreateCommandBase&lt;TModelData, TModelData&gt;.RequestData</a>
+      <a class="xref" href="Apizr.Mediation.Cruding.Base.CreateCommandBase-4.html#Apizr_Mediation_Cruding_Base_CreateCommandBase_4_RequestData">CreateCommandBase&lt;TModelData, TModelData, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;.RequestData</a>
     </div>
     <div>
-      <a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-1.html#Apizr_Mediation_Requesting_Base_RequestBase_1_Context">RequestBase&lt;TModelData&gt;.Context</a>
-    </div>
-    <div>
-      <a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-1.html#Apizr_Mediation_Requesting_Base_RequestBase_1_OnException">RequestBase&lt;TModelData&gt;.OnException</a>
+      <a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-3.html#Apizr_Mediation_Requesting_Base_RequestBase_3_OptionsBuilder">RequestBase&lt;TModelData, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;.OptionsBuilder</a>
     </div>
     <div>
       <span class="xref">System.Object.Equals(System.Object)</span>
@@ -137,7 +134,7 @@
   <h6><strong>Assembly</strong>: Apizr.Integrations.MediatR.dll</h6>
   <h5 id="Apizr_Mediation_Cruding_CreateCommand_1_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class CreateCommand&lt;TModelData&gt; : CreateCommandBase&lt;TModelData, TModelData&gt;, IMediationCommand&lt;TModelData, TModelData&gt;, IRequest&lt;TModelData&gt;, IBaseRequest</code></pre>
+    <pre><code class="lang-csharp hljs">public class CreateCommand&lt;TModelData&gt; : CreateCommandBase&lt;TModelData, TModelData, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;, IMediationCommand&lt;TModelData, TModelData&gt;, IRequest&lt;TModelData&gt;, IBaseRequest</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -160,13 +157,13 @@
   
   
   <a id="Apizr_Mediation_Cruding_CreateCommand_1__ctor_" data-uid="Apizr.Mediation.Cruding.CreateCommand`1.#ctor*"></a>
-  <h4 id="Apizr_Mediation_Cruding_CreateCommand_1__ctor__0_Polly_Context_System_Action_System_Exception__" data-uid="Apizr.Mediation.Cruding.CreateCommand`1.#ctor(`0,Polly.Context,System.Action{System.Exception})">CreateCommand(TModelData, Context, Action&lt;Exception&gt;)</h4>
+  <h4 id="Apizr_Mediation_Cruding_CreateCommand_1__ctor__0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.CreateCommand`1.#ctor(`0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">CreateCommand(TModelData, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
   <div class="markdown level1 summary"><p>The mediation Create command constructor</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CreateCommand(TModelData modelData, Context context, Action&lt;Exception&gt; onException = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public CreateCommand(TModelData modelData, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -185,50 +182,9 @@
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td><p>The Polly context to pass through</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td><p>Action to execute when an exception occurs</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Mediation_Cruding_CreateCommand_1__ctor_" data-uid="Apizr.Mediation.Cruding.CreateCommand`1.#ctor*"></a>
-  <h4 id="Apizr_Mediation_Cruding_CreateCommand_1__ctor__0_System_Action_System_Exception__" data-uid="Apizr.Mediation.Cruding.CreateCommand`1.#ctor(`0,System.Action{System.Exception})">CreateCommand(TModelData, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"><p>The mediation Create command constructor</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CreateCommand(TModelData modelData, Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TModelData</span></td>
-        <td><span class="parametername">modelData</span></td>
-        <td><p>The request data to send</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td><p>Action to execute when an exception occurs</p>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
 </td>
       </tr>
     </tbody>

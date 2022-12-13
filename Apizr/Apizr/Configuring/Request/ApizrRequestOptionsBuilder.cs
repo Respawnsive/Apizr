@@ -7,6 +7,7 @@ using Polly;
 
 namespace Apizr.Configuring.Request;
 
+/// <inheritdoc />
 public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder
 {
     protected readonly ApizrRequestOptions Options;

@@ -9,6 +9,8 @@ namespace Apizr.Mediation.Querying
     /// The base mediation query getting some <typeparamref name="TResultData"/> data
     /// </summary>
     /// <typeparam name="TResultData">The returned data</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class MediationQueryBase<TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder> : RequestBase<TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>, IMediationQuery<TResultData>
         where TApizrRequestOptions : IApizrRequestOptionsBase
         where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilderBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>

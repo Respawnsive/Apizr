@@ -27,39 +27,46 @@ items:
   source:
     id: ApizrExtendedProperOptions
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 14
+    startLine: 15
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
   summary: "\nOptions available at proper level for extended registrations\n"
   example: []
   syntax:
-    content: 'public class ApizrExtendedProperOptions : ApizrProperOptionsBase, IApizrExtendedProperOptions, IApizrExtendedProperOptionsBase, IApizrProperOptionsBase, IApizrExtendedSharedOptions, IApizrExtendedSharedOptionsBase, IApizrSharedOptionsBase'
+    content: 'public class ApizrExtendedProperOptions : ApizrProperOptionsBase, IApizrExtendedProperOptions, IApizrExtendedProperOptionsBase, IApizrProperOptionsBase, IApizrSharedRegistrationOptionsBase, IApizrExtendedSharedOptions, IApizrExtendedSharedOptionsBase, IApizrGlobalSharedRegistrationOptionsBase, IApizrGlobalSharedOptionsBase'
     content.vb: >-
       Public Class ApizrExtendedProperOptions
           Inherits ApizrProperOptionsBase
-          Implements IApizrExtendedProperOptions, IApizrExtendedProperOptionsBase, IApizrProperOptionsBase, IApizrExtendedSharedOptions, IApizrExtendedSharedOptionsBase, IApizrSharedOptionsBase
+          Implements IApizrExtendedProperOptions, IApizrExtendedProperOptionsBase, IApizrProperOptionsBase, IApizrSharedRegistrationOptionsBase, IApizrExtendedSharedOptions, IApizrExtendedSharedOptionsBase, IApizrGlobalSharedRegistrationOptionsBase, IApizrGlobalSharedOptionsBase
   inheritance:
   - System.Object
-  - Apizr.Configuring.Shared.ApizrSharedOptionsBase
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  - Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase
   - Apizr.Configuring.Proper.ApizrProperOptionsBase
   implements:
   - Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions
   - Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBase
   - Apizr.Configuring.Proper.IApizrProperOptionsBase
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBase
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase
-  - Apizr.Configuring.Shared.IApizrSharedOptionsBase
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   inheritedMembers:
   - Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType
   - Apizr.Configuring.Proper.ApizrProperOptionsBase.PolicyRegistryKeys
   - Apizr.Configuring.Proper.ApizrProperOptionsBase.Logger
-  - Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseUri
-  - Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseAddress
-  - Apizr.Configuring.Shared.ApizrSharedOptionsBase.BasePath
-  - Apizr.Configuring.Shared.ApizrSharedOptionsBase.HttpTracerMode
-  - Apizr.Configuring.Shared.ApizrSharedOptionsBase.TrafficVerbosity
-  - Apizr.Configuring.Shared.ApizrSharedOptionsBase.LogLevels
+  - Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.BaseUri
+  - Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.BaseAddress
+  - Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.BasePath
+  - Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.ContextFactory
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HttpTracerMode
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.TrafficVerbosity
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LogLevels
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -87,7 +94,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 16
+    startLine: 17
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -137,7 +144,7 @@ items:
   source:
     id: ApizrManagerType
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 42
+    startLine: 43
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -172,7 +179,7 @@ items:
   source:
     id: BaseUriFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 46
+    startLine: 47
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -207,7 +214,7 @@ items:
   source:
     id: BaseAddressFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 54
+    startLine: 55
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -242,7 +249,7 @@ items:
   source:
     id: BasePathFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 62
+    startLine: 63
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -277,7 +284,7 @@ items:
   source:
     id: HttpTracerModeFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 70
+    startLine: 71
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -312,7 +319,7 @@ items:
   source:
     id: TrafficVerbosityFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 78
+    startLine: 79
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -347,7 +354,7 @@ items:
   source:
     id: LogLevelsFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 86
+    startLine: 87
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -382,7 +389,7 @@ items:
   source:
     id: LoggerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 94
+    startLine: 95
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -419,7 +426,7 @@ items:
   source:
     id: HttpClientHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 101
+    startLine: 102
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -454,7 +461,7 @@ items:
   source:
     id: HttpClientBuilder
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 104
+    startLine: 105
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -489,18 +496,18 @@ items:
   source:
     id: DelegatingHandlersExtendedFactories
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Proper\ApizrExtendedProperOptions.cs
-    startLine: 107
+    startLine: 108
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
   summary: "\nDelegating handlers factories\n"
   example: []
   syntax:
-    content: public IList<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
+    content: public IList<Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
     parameters: []
     return:
-      type: System.Collections.Generic.IList{System.Func{System.IServiceProvider,Apizr.Configuring.IApizrOptionsBase,System.Net.Http.DelegatingHandler}}
-    content.vb: Public ReadOnly Property DelegatingHandlersExtendedFactories As IList(Of Func(Of IServiceProvider, IApizrOptionsBase, DelegatingHandler))
+      type: System.Collections.Generic.IList{System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler}}
+    content.vb: Public ReadOnly Property DelegatingHandlersExtendedFactories As IList(Of Func(Of IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler))
   overload: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.DelegatingHandlersExtendedFactories*
   implements:
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
@@ -529,12 +536,18 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase
-  commentId: T:Apizr.Configuring.Shared.ApizrSharedOptionsBase
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  commentId: T:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
   parent: Apizr.Configuring.Shared
-  name: ApizrSharedOptionsBase
-  nameWithType: ApizrSharedOptionsBase
-  fullName: Apizr.Configuring.Shared.ApizrSharedOptionsBase
+  name: ApizrGlobalSharedOptionsBase
+  nameWithType: ApizrGlobalSharedOptionsBase
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase
+  commentId: T:Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase
+  parent: Apizr.Configuring.Shared
+  name: ApizrGlobalSharedRegistrationOptionsBase
+  nameWithType: ApizrGlobalSharedRegistrationOptionsBase
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase
 - uid: Apizr.Configuring.Proper.ApizrProperOptionsBase
   commentId: T:Apizr.Configuring.Proper.ApizrProperOptionsBase
   parent: Apizr.Configuring.Proper
@@ -553,6 +566,12 @@ references:
   name: IApizrProperOptionsBase
   nameWithType: IApizrProperOptionsBase
   fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBase
+  commentId: T:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBase
+  parent: Apizr.Configuring.Shared
+  name: IApizrSharedRegistrationOptionsBase
+  nameWithType: IApizrSharedRegistrationOptionsBase
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBase
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
   commentId: T:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
   parent: Apizr.Extending.Configuring.Shared
@@ -565,12 +584,18 @@ references:
   name: IApizrExtendedSharedOptionsBase
   nameWithType: IApizrExtendedSharedOptionsBase
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase
-- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase
-  commentId: T:Apizr.Configuring.Shared.IApizrSharedOptionsBase
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   parent: Apizr.Configuring.Shared
-  name: IApizrSharedOptionsBase
-  nameWithType: IApizrSharedOptionsBase
-  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase
+  name: IApizrGlobalSharedRegistrationOptionsBase
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBase
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  parent: Apizr.Configuring.Shared
+  name: IApizrGlobalSharedOptionsBase
+  nameWithType: IApizrGlobalSharedOptionsBase
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
 - uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType
   commentId: P:Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType
   parent: Apizr.Configuring.Proper.ApizrProperOptionsBase
@@ -589,42 +614,66 @@ references:
   name: Logger
   nameWithType: ApizrProperOptionsBase.Logger
   fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.Logger
-- uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseUri
-  commentId: P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseUri
-  parent: Apizr.Configuring.Shared.ApizrSharedOptionsBase
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.BaseUri
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.BaseUri
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase
   name: BaseUri
-  nameWithType: ApizrSharedOptionsBase.BaseUri
-  fullName: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseUri
-- uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseAddress
-  commentId: P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseAddress
-  parent: Apizr.Configuring.Shared.ApizrSharedOptionsBase
+  nameWithType: ApizrGlobalSharedRegistrationOptionsBase.BaseUri
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.BaseUri
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.BaseAddress
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.BaseAddress
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase
   name: BaseAddress
-  nameWithType: ApizrSharedOptionsBase.BaseAddress
-  fullName: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BaseAddress
-- uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BasePath
-  commentId: P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.BasePath
-  parent: Apizr.Configuring.Shared.ApizrSharedOptionsBase
+  nameWithType: ApizrGlobalSharedRegistrationOptionsBase.BaseAddress
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.BaseAddress
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.BasePath
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.BasePath
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase
   name: BasePath
-  nameWithType: ApizrSharedOptionsBase.BasePath
-  fullName: Apizr.Configuring.Shared.ApizrSharedOptionsBase.BasePath
-- uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase.HttpTracerMode
-  commentId: P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.HttpTracerMode
-  parent: Apizr.Configuring.Shared.ApizrSharedOptionsBase
+  nameWithType: ApizrGlobalSharedRegistrationOptionsBase.BasePath
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.BasePath
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.ContextFactory
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.ContextFactory
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase
+  name: ContextFactory
+  nameWithType: ApizrGlobalSharedRegistrationOptionsBase.ContextFactory
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.ContextFactory
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HttpTracerMode
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HttpTracerMode
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
   name: HttpTracerMode
-  nameWithType: ApizrSharedOptionsBase.HttpTracerMode
-  fullName: Apizr.Configuring.Shared.ApizrSharedOptionsBase.HttpTracerMode
-- uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase.TrafficVerbosity
-  commentId: P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.TrafficVerbosity
-  parent: Apizr.Configuring.Shared.ApizrSharedOptionsBase
+  nameWithType: ApizrGlobalSharedOptionsBase.HttpTracerMode
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HttpTracerMode
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.TrafficVerbosity
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.TrafficVerbosity
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
   name: TrafficVerbosity
-  nameWithType: ApizrSharedOptionsBase.TrafficVerbosity
-  fullName: Apizr.Configuring.Shared.ApizrSharedOptionsBase.TrafficVerbosity
-- uid: Apizr.Configuring.Shared.ApizrSharedOptionsBase.LogLevels
-  commentId: P:Apizr.Configuring.Shared.ApizrSharedOptionsBase.LogLevels
-  parent: Apizr.Configuring.Shared.ApizrSharedOptionsBase
+  nameWithType: ApizrGlobalSharedOptionsBase.TrafficVerbosity
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.TrafficVerbosity
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LogLevels
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LogLevels
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
   name: LogLevels
-  nameWithType: ApizrSharedOptionsBase.LogLevels
-  fullName: Apizr.Configuring.Shared.ApizrSharedOptionsBase.LogLevels
+  nameWithType: ApizrGlobalSharedOptionsBase.LogLevels
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LogLevels
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  name: OnException
+  nameWithType: ApizrGlobalSharedOptionsBase.OnException
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  name: LetThrowOnExceptionWithEmptyCache
+  nameWithType: ApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  name: HandlersParameters
+  nameWithType: ApizrGlobalSharedOptionsBase.HandlersParameters
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -1875,16 +1924,16 @@ references:
   name: DelegatingHandlersExtendedFactories
   nameWithType: IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
-- uid: System.Collections.Generic.IList{System.Func{System.IServiceProvider,Apizr.Configuring.IApizrOptionsBase,System.Net.Http.DelegatingHandler}}
-  commentId: T:System.Collections.Generic.IList{System.Func{System.IServiceProvider,Apizr.Configuring.IApizrOptionsBase,System.Net.Http.DelegatingHandler}}
+- uid: System.Collections.Generic.IList{System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler}}
+  commentId: T:System.Collections.Generic.IList{System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler}}
   parent: System.Collections.Generic
   definition: System.Collections.Generic.IList`1
-  name: IList<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>>
-  nameWithType: IList<Func<IServiceProvider, IApizrOptionsBase, DelegatingHandler>>
-  fullName: System.Collections.Generic.IList<System.Func<System.IServiceProvider, Apizr.Configuring.IApizrOptionsBase, System.Net.Http.DelegatingHandler>>
-  nameWithType.vb: IList(Of Func(Of IServiceProvider, IApizrOptionsBase, DelegatingHandler))
-  fullName.vb: System.Collections.Generic.IList(Of System.Func(Of System.IServiceProvider, Apizr.Configuring.IApizrOptionsBase, System.Net.Http.DelegatingHandler))
-  name.vb: IList(Of Func(Of IServiceProvider, IApizrOptionsBase, DelegatingHandler))
+  name: IList<Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>>
+  nameWithType: IList<Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>>
+  fullName: System.Collections.Generic.IList<System.Func<System.IServiceProvider, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.DelegatingHandler>>
+  nameWithType.vb: IList(Of Func(Of IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler))
+  fullName.vb: System.Collections.Generic.IList(Of System.Func(Of System.IServiceProvider, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.DelegatingHandler))
+  name.vb: IList(Of Func(Of IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler))
   spec.csharp:
   - uid: System.Collections.Generic.IList`1
     name: IList
@@ -1910,10 +1959,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Apizr.Configuring.IApizrOptionsBase
-    name: IApizrOptionsBase
-    nameWithType: IApizrOptionsBase
-    fullName: Apizr.Configuring.IApizrOptionsBase
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    nameWithType: IApizrManagerOptionsBase
+    fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -1953,10 +2002,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Apizr.Configuring.IApizrOptionsBase
-    name: IApizrOptionsBase
-    nameWithType: IApizrOptionsBase
-    fullName: Apizr.Configuring.IApizrOptionsBase
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    nameWithType: IApizrManagerOptionsBase
+    fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
   - name: ', '
     nameWithType: ', '
     fullName: ', '

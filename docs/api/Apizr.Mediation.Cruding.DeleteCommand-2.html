@@ -89,9 +89,9 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-1.html">RequestBase</a>&lt;<span class="xref">MediatR.Unit</span>&gt;</div>
-    <div class="level2"><a class="xref" href="Apizr.Mediation.Commanding.MediationCommandBase-2.html">MediationCommandBase</a>&lt;TKey, <span class="xref">MediatR.Unit</span>&gt;</div>
-    <div class="level3"><a class="xref" href="Apizr.Mediation.Cruding.Base.DeleteCommandBase-3.html">DeleteCommandBase</a>&lt;T, TKey, <span class="xref">MediatR.Unit</span>&gt;</div>
+    <div class="level1"><a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-3.html">RequestBase</a>&lt;<span class="xref">MediatR.Unit</span>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
+    <div class="level2"><a class="xref" href="Apizr.Mediation.Commanding.MediationCommandBase-4.html">MediationCommandBase</a>&lt;TKey, <span class="xref">MediatR.Unit</span>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
+    <div class="level3"><a class="xref" href="Apizr.Mediation.Cruding.Base.DeleteCommandBase-5.html">DeleteCommandBase</a>&lt;T, TKey, <span class="xref">MediatR.Unit</span>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
     <div class="level4"><span class="xref">DeleteCommand&lt;T, TKey&gt;</span></div>
   </div>
   <div class="implements">
@@ -103,13 +103,10 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="Apizr.Mediation.Cruding.Base.DeleteCommandBase-3.html#Apizr_Mediation_Cruding_Base_DeleteCommandBase_3_Key">DeleteCommandBase&lt;T, TKey, Unit&gt;.Key</a>
+      <a class="xref" href="Apizr.Mediation.Cruding.Base.DeleteCommandBase-5.html#Apizr_Mediation_Cruding_Base_DeleteCommandBase_5_Key">DeleteCommandBase&lt;T, TKey, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;.Key</a>
     </div>
     <div>
-      <a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-1.html#Apizr_Mediation_Requesting_Base_RequestBase_1_Context">RequestBase&lt;Unit&gt;.Context</a>
-    </div>
-    <div>
-      <a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-1.html#Apizr_Mediation_Requesting_Base_RequestBase_1_OnException">RequestBase&lt;Unit&gt;.OnException</a>
+      <a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-3.html#Apizr_Mediation_Requesting_Base_RequestBase_3_OptionsBuilder">RequestBase&lt;Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;.OptionsBuilder</a>
     </div>
     <div>
       <span class="xref">System.Object.Equals(System.Object)</span>
@@ -137,7 +134,7 @@
   <h6><strong>Assembly</strong>: Apizr.Integrations.MediatR.dll</h6>
   <h5 id="Apizr_Mediation_Cruding_DeleteCommand_2_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class DeleteCommand&lt;T, TKey&gt; : DeleteCommandBase&lt;T, TKey, Unit&gt;, IMediationCommand&lt;TKey, Unit&gt;, IRequest&lt;Unit&gt;, IBaseRequest</code></pre>
+    <pre><code class="lang-csharp hljs">public class DeleteCommand&lt;T, TKey&gt; : DeleteCommandBase&lt;T, TKey, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;, IMediationCommand&lt;TKey, Unit&gt;, IRequest&lt;Unit&gt;, IBaseRequest</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -165,13 +162,13 @@
   
   
   <a id="Apizr_Mediation_Cruding_DeleteCommand_2__ctor_" data-uid="Apizr.Mediation.Cruding.DeleteCommand`2.#ctor*"></a>
-  <h4 id="Apizr_Mediation_Cruding_DeleteCommand_2__ctor__1_Polly_Context_System_Action_System_Exception__" data-uid="Apizr.Mediation.Cruding.DeleteCommand`2.#ctor(`1,Polly.Context,System.Action{System.Exception})">DeleteCommand(TKey, Context, Action&lt;Exception&gt;)</h4>
+  <h4 id="Apizr_Mediation_Cruding_DeleteCommand_2__ctor__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.DeleteCommand`2.#ctor(`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">DeleteCommand(TKey, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
   <div class="markdown level1 summary"><p>The mediation Delete command constructor</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DeleteCommand(TKey key, Context context, Action&lt;Exception&gt; onException = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public DeleteCommand(TKey key, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -190,50 +187,9 @@
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td><p>The Polly context to pass through</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td><p>Action to execute when an exception occurs</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Mediation_Cruding_DeleteCommand_2__ctor_" data-uid="Apizr.Mediation.Cruding.DeleteCommand`2.#ctor*"></a>
-  <h4 id="Apizr_Mediation_Cruding_DeleteCommand_2__ctor__1_System_Action_System_Exception__" data-uid="Apizr.Mediation.Cruding.DeleteCommand`2.#ctor(`1,System.Action{System.Exception})">DeleteCommand(TKey, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"><p>The mediation Delete command constructor</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DeleteCommand(TKey key, Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TKey</span></td>
-        <td><span class="parametername">key</span></td>
-        <td><p>The entity&apos;s crud key</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td><p>Action to execute when an exception occurs</p>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
 </td>
       </tr>
     </tbody>

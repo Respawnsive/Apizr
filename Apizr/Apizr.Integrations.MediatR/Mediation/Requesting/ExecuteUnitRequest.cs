@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
-using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring.Request;
 using Apizr.Mediation.Requesting.Base;
-using Polly;
 
 namespace Apizr.Mediation.Requesting
 {

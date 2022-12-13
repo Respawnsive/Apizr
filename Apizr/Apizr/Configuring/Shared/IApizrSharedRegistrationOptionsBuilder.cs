@@ -10,13 +10,14 @@ using Polly;
 
 namespace Apizr.Configuring.Shared
 {
+    /// <summary>
+    /// Builder options available at both common and proper level for static registrations
+    /// </summary>
     public interface IApizrSharedRegistrationOptionsBuilder : IApizrSharedRegistrationOptionsBuilderBase
     {
     }
 
-    /// <summary>
-    /// Builder options available at both common and proper level for static registrations
-    /// </summary>
+    /// <inheritdoc cref="IApizrSharedRegistrationOptionsBuilder" />
     public interface IApizrSharedRegistrationOptionsBuilder<out TApizrOptions, out TApizrOptionsBuilder> : 
         IApizrSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>,
         IApizrSharedRegistrationOptionsBuilder

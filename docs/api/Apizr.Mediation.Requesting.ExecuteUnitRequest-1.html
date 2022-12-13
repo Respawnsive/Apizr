@@ -89,10 +89,10 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-1.html">RequestBase</a>&lt;<span class="xref">MediatR.Unit</span>&gt;</div>
-    <div class="level2"><a class="xref" href="Apizr.Mediation.Requesting.Base.ExecuteRequestBase-1.html">ExecuteRequestBase</a>&lt;<span class="xref">MediatR.Unit</span>&gt;</div>
-    <div class="level3"><a class="xref" href="Apizr.Mediation.Requesting.Base.ExecuteRequestBase.html">ExecuteRequestBase</a></div>
-    <div class="level4"><a class="xref" href="Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase-1.html">ExecuteUnitRequestBase</a>&lt;TWebApi&gt;</div>
+    <div class="level1"><a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-3.html">RequestBase</a>&lt;<span class="xref">MediatR.Unit</span>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
+    <div class="level2"><a class="xref" href="Apizr.Mediation.Requesting.Base.ExecuteRequestBase-3.html">ExecuteRequestBase</a>&lt;<span class="xref">MediatR.Unit</span>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
+    <div class="level3"><a class="xref" href="Apizr.Mediation.Requesting.Base.ExecuteRequestBase-2.html">ExecuteRequestBase</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
+    <div class="level4"><a class="xref" href="Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase-3.html">ExecuteUnitRequestBase</a>&lt;TWebApi, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
     <div class="level5"><span class="xref">ExecuteUnitRequest&lt;TWebApi&gt;</span></div>
   </div>
   <div class="implements">
@@ -103,13 +103,10 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="Apizr.Mediation.Requesting.Base.ExecuteRequestBase-1.html#Apizr_Mediation_Requesting_Base_ExecuteRequestBase_1_ExecuteApiMethod">ExecuteRequestBase&lt;Unit&gt;.ExecuteApiMethod</a>
+      <a class="xref" href="Apizr.Mediation.Requesting.Base.ExecuteRequestBase-3.html#Apizr_Mediation_Requesting_Base_ExecuteRequestBase_3_ExecuteApiMethod">ExecuteRequestBase&lt;Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;.ExecuteApiMethod</a>
     </div>
     <div>
-      <a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-1.html#Apizr_Mediation_Requesting_Base_RequestBase_1_Context">RequestBase&lt;Unit&gt;.Context</a>
-    </div>
-    <div>
-      <a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-1.html#Apizr_Mediation_Requesting_Base_RequestBase_1_OnException">RequestBase&lt;Unit&gt;.OnException</a>
+      <a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-3.html#Apizr_Mediation_Requesting_Base_RequestBase_3_OptionsBuilder">RequestBase&lt;Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;.OptionsBuilder</a>
     </div>
     <div>
       <span class="xref">System.Object.Equals(System.Object)</span>
@@ -137,7 +134,7 @@
   <h6><strong>Assembly</strong>: Apizr.Integrations.MediatR.dll</h6>
   <h5 id="Apizr_Mediation_Requesting_ExecuteUnitRequest_1_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ExecuteUnitRequest&lt;TWebApi&gt; : ExecuteUnitRequestBase&lt;TWebApi&gt;, IRequest&lt;Unit&gt;, IBaseRequest</code></pre>
+    <pre><code class="lang-csharp hljs">public class ExecuteUnitRequest&lt;TWebApi&gt; : ExecuteUnitRequestBase&lt;TWebApi, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;, IRequest&lt;Unit&gt;, IBaseRequest</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -160,13 +157,13 @@
   
   
   <a id="Apizr_Mediation_Requesting_ExecuteUnitRequest_1__ctor_" data-uid="Apizr.Mediation.Requesting.ExecuteUnitRequest`1.#ctor*"></a>
-  <h4 id="Apizr_Mediation_Requesting_ExecuteUnitRequest_1__ctor_System_Linq_Expressions_Expression_System_Func__0_System_Threading_Tasks_Task___System_Action_System_Exception__" data-uid="Apizr.Mediation.Requesting.ExecuteUnitRequest`1.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}},System.Action{System.Exception})">ExecuteUnitRequest(Expression&lt;Func&lt;TWebApi, Task&gt;&gt;, Action&lt;Exception&gt;)</h4>
+  <h4 id="Apizr_Mediation_Requesting_ExecuteUnitRequest_1__ctor_System_Linq_Expressions_Expression_System_Func__0_System_Threading_Tasks_Task___System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Requesting.ExecuteUnitRequest`1.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">ExecuteUnitRequest(Expression&lt;Func&lt;TWebApi, Task&gt;&gt;, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
   <div class="markdown level1 summary"><p>The mediation execute unit request constructor</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ExecuteUnitRequest(Expression&lt;Func&lt;TWebApi, Task&gt;&gt; executeApiMethod, Action&lt;Exception&gt; onException = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public ExecuteUnitRequest(Expression&lt;Func&lt;TWebApi, Task&gt;&gt; executeApiMethod, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -185,9 +182,9 @@
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td><p>Action to execute when an exception occurs</p>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
 </td>
       </tr>
     </tbody>
@@ -195,13 +192,13 @@
   
   
   <a id="Apizr_Mediation_Requesting_ExecuteUnitRequest_1__ctor_" data-uid="Apizr.Mediation.Requesting.ExecuteUnitRequest`1.#ctor*"></a>
-  <h4 id="Apizr_Mediation_Requesting_ExecuteUnitRequest_1__ctor_System_Linq_Expressions_Expression_System_Func_Polly_Context__0_System_Threading_Tasks_Task___Polly_Context_System_Action_System_Exception__" data-uid="Apizr.Mediation.Requesting.ExecuteUnitRequest`1.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task}},Polly.Context,System.Action{System.Exception})">ExecuteUnitRequest(Expression&lt;Func&lt;Context, TWebApi, Task&gt;&gt;, Context, Action&lt;Exception&gt;)</h4>
+  <h4 id="Apizr_Mediation_Requesting_ExecuteUnitRequest_1__ctor_System_Linq_Expressions_Expression_System_Func_Apizr_Configuring_Request_IApizrRequestOptions__0_System_Threading_Tasks_Task___System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Requesting.ExecuteUnitRequest`1.#ctor(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">ExecuteUnitRequest(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, Task&gt;&gt;, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
   <div class="markdown level1 summary"><p>The mediation execute unit request constructor</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ExecuteUnitRequest(Expression&lt;Func&lt;Context, TWebApi, Task&gt;&gt; executeApiMethod, Context context, Action&lt;Exception&gt; onException = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public ExecuteUnitRequest(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, Task&gt;&gt; executeApiMethod, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -214,97 +211,15 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
         <td><p>The request to execute</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td><p>The Polly context to pass through</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td><p>Action to execute when an exception occurs</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Mediation_Requesting_ExecuteUnitRequest_1__ctor_" data-uid="Apizr.Mediation.Requesting.ExecuteUnitRequest`1.#ctor*"></a>
-  <h4 id="Apizr_Mediation_Requesting_ExecuteUnitRequest_1__ctor_System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken__0_System_Threading_Tasks_Task___Polly_Context_System_Action_System_Exception__" data-uid="Apizr.Mediation.Requesting.ExecuteUnitRequest`1.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},Polly.Context,System.Action{System.Exception})">ExecuteUnitRequest(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, Task&gt;&gt;, Context, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"><p>The mediation execute unit request constructor</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ExecuteUnitRequest(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, Task&gt;&gt; executeApiMethod, Context context, Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, <span class="xref">System.Threading.CancellationToken</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td><p>The request to execute</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td><p>The Polly context to pass through</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td><p>Action to execute when an exception occurs</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Mediation_Requesting_ExecuteUnitRequest_1__ctor_" data-uid="Apizr.Mediation.Requesting.ExecuteUnitRequest`1.#ctor*"></a>
-  <h4 id="Apizr_Mediation_Requesting_ExecuteUnitRequest_1__ctor_System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken__0_System_Threading_Tasks_Task___System_Action_System_Exception__" data-uid="Apizr.Mediation.Requesting.ExecuteUnitRequest`1.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},System.Action{System.Exception})">ExecuteUnitRequest(Expression&lt;Func&lt;CancellationToken, TWebApi, Task&gt;&gt;, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"><p>The mediation execute unit request constructor</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ExecuteUnitRequest(Expression&lt;Func&lt;CancellationToken, TWebApi, Task&gt;&gt; executeApiMethod, Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">System.Threading.CancellationToken</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td><p>The request to execute</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td><p>Action to execute when an exception occurs</p>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
 </td>
       </tr>
     </tbody>

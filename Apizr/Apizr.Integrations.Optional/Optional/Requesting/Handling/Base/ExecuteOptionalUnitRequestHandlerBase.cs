@@ -13,6 +13,8 @@ namespace Apizr.Optional.Requesting.Handling.Base
     /// <typeparam name="TModelData">The model data type</typeparam>
     /// <typeparam name="TApiData">The api data type</typeparam>
     /// <typeparam name="TRequest">The execute unit request to handle</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class ExecuteOptionalUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder> : 
         ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, Option<Unit, ApizrException>, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>
         where TRequest : ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
@@ -29,6 +31,8 @@ namespace Apizr.Optional.Requesting.Handling.Base
     /// </summary>
     /// <typeparam name="TWebApi">The web api type</typeparam>
     /// <typeparam name="TRequest">The execute unit request to handle</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class ExecuteOptionalUnitRequestHandlerBase<TWebApi, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder> : 
         ExecuteUnitRequestHandlerBase<TWebApi, Option<Unit, ApizrException>, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>
         where TRequest : ExecuteOptionalUnitRequestBase<TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder>

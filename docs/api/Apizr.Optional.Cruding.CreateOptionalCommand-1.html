@@ -89,9 +89,9 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-1.html">RequestBase</a>&lt;<span class="xref">Optional.Option</span>&lt;TModelData, <a class="xref" href="Apizr.ApizrException.html">ApizrException</a>&gt;&gt;</div>
-    <div class="level2"><a class="xref" href="Apizr.Mediation.Commanding.MediationCommandBase-2.html">MediationCommandBase</a>&lt;TModelData, <span class="xref">Optional.Option</span>&lt;TModelData, <a class="xref" href="Apizr.ApizrException.html">ApizrException</a>&gt;&gt;</div>
-    <div class="level3"><a class="xref" href="Apizr.Mediation.Cruding.Base.CreateCommandBase-2.html">CreateCommandBase</a>&lt;TModelData, <span class="xref">Optional.Option</span>&lt;TModelData, <a class="xref" href="Apizr.ApizrException.html">ApizrException</a>&gt;&gt;</div>
+    <div class="level1"><a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-3.html">RequestBase</a>&lt;<span class="xref">Optional.Option</span>&lt;TModelData, <a class="xref" href="Apizr.ApizrException.html">ApizrException</a>&gt;, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
+    <div class="level2"><a class="xref" href="Apizr.Mediation.Commanding.MediationCommandBase-4.html">MediationCommandBase</a>&lt;TModelData, <span class="xref">Optional.Option</span>&lt;TModelData, <a class="xref" href="Apizr.ApizrException.html">ApizrException</a>&gt;, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
+    <div class="level3"><a class="xref" href="Apizr.Mediation.Cruding.Base.CreateCommandBase-4.html">CreateCommandBase</a>&lt;TModelData, <span class="xref">Optional.Option</span>&lt;TModelData, <a class="xref" href="Apizr.ApizrException.html">ApizrException</a>&gt;, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
     <div class="level4"><span class="xref">CreateOptionalCommand&lt;TModelData&gt;</span></div>
   </div>
   <div class="implements">
@@ -103,13 +103,10 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="Apizr.Mediation.Cruding.Base.CreateCommandBase-2.html#Apizr_Mediation_Cruding_Base_CreateCommandBase_2_RequestData">CreateCommandBase&lt;TModelData, Option&lt;TModelData, ApizrException&gt;&gt;.RequestData</a>
+      <a class="xref" href="Apizr.Mediation.Cruding.Base.CreateCommandBase-4.html#Apizr_Mediation_Cruding_Base_CreateCommandBase_4_RequestData">CreateCommandBase&lt;TModelData, Option&lt;TModelData, ApizrException&gt;, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;.RequestData</a>
     </div>
     <div>
-      <a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-1.html#Apizr_Mediation_Requesting_Base_RequestBase_1_Context">RequestBase&lt;Option&lt;TModelData, ApizrException&gt;&gt;.Context</a>
-    </div>
-    <div>
-      <a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-1.html#Apizr_Mediation_Requesting_Base_RequestBase_1_OnException">RequestBase&lt;Option&lt;TModelData, ApizrException&gt;&gt;.OnException</a>
+      <a class="xref" href="Apizr.Mediation.Requesting.Base.RequestBase-3.html#Apizr_Mediation_Requesting_Base_RequestBase_3_OptionsBuilder">RequestBase&lt;Option&lt;TModelData, ApizrException&gt;, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;.OptionsBuilder</a>
     </div>
     <div>
       <span class="xref">System.Object.Equals(System.Object)</span>
@@ -137,7 +134,7 @@
   <h6><strong>Assembly</strong>: Apizr.Integrations.Optional.dll</h6>
   <h5 id="Apizr_Optional_Cruding_CreateOptionalCommand_1_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class CreateOptionalCommand&lt;TModelData&gt; : CreateCommandBase&lt;TModelData, Option&lt;TModelData, ApizrException&gt;&gt;, IMediationCommand&lt;TModelData, Option&lt;TModelData, ApizrException&gt;&gt;, IRequest&lt;Option&lt;TModelData, ApizrException&gt;&gt;, IBaseRequest</code></pre>
+    <pre><code class="lang-csharp hljs">public class CreateOptionalCommand&lt;TModelData&gt; : CreateCommandBase&lt;TModelData, Option&lt;TModelData, ApizrException&gt;, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;, IMediationCommand&lt;TModelData, Option&lt;TModelData, ApizrException&gt;&gt;, IRequest&lt;Option&lt;TModelData, ApizrException&gt;&gt;, IBaseRequest</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -160,42 +157,13 @@
   
   
   <a id="Apizr_Optional_Cruding_CreateOptionalCommand_1__ctor_" data-uid="Apizr.Optional.Cruding.CreateOptionalCommand`1.#ctor*"></a>
-  <h4 id="Apizr_Optional_Cruding_CreateOptionalCommand_1__ctor__0_" data-uid="Apizr.Optional.Cruding.CreateOptionalCommand`1.#ctor(`0)">CreateOptionalCommand(TModelData)</h4>
+  <h4 id="Apizr_Optional_Cruding_CreateOptionalCommand_1__ctor__0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Optional.Cruding.CreateOptionalCommand`1.#ctor(`0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">CreateOptionalCommand(TModelData, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
   <div class="markdown level1 summary"><p>The mediation Create optional command constructor</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CreateOptionalCommand(TModelData modelData)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TModelData</span></td>
-        <td><span class="parametername">modelData</span></td>
-        <td><p>The request data to send</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Optional_Cruding_CreateOptionalCommand_1__ctor_" data-uid="Apizr.Optional.Cruding.CreateOptionalCommand`1.#ctor*"></a>
-  <h4 id="Apizr_Optional_Cruding_CreateOptionalCommand_1__ctor__0_Polly_Context_" data-uid="Apizr.Optional.Cruding.CreateOptionalCommand`1.#ctor(`0,Polly.Context)">CreateOptionalCommand(TModelData, Context)</h4>
-  <div class="markdown level1 summary"><p>The mediation Create optional command constructor</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CreateOptionalCommand(TModelData modelData, Context context)</code></pre>
+    <pre><code class="lang-csharp hljs">public CreateOptionalCommand(TModelData modelData, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -214,9 +182,9 @@
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td><p>The Polly context to pass through</p>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
 </td>
       </tr>
     </tbody>

@@ -37,8 +37,8 @@ namespace Apizr.Optional.Cruding.Handling
                     .SomeNotNull(new ApizrException(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                     .MapAsync(_ => CrudApiManager.ExecuteAsync(
-                            (options, api) => api.Delete(request.Key, options.Context, options.CancellationToken),
-                            (Action<IApizrRequestOptionsBuilder>) request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken))
+                            (options, api) => api.Delete(request.Key, options, options.CancellationToken),
+                            request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken))
                     .ConfigureAwait(false);
             }
             catch (ApizrException e)
@@ -72,8 +72,8 @@ namespace Apizr.Optional.Cruding.Handling
                     .SomeNotNull(new ApizrException(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                     .MapAsync(_ => CrudApiManager.ExecuteAsync(
-                            (options, api) => api.Delete(request.Key, options.Context, options.CancellationToken),
-                            (Action<IApizrRequestOptionsBuilder>) request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken))
+                            (options, api) => api.Delete(request.Key, options, options.CancellationToken),
+                            request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken))
                     .ConfigureAwait(false);
             }
             catch (ApizrException e)

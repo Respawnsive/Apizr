@@ -10,6 +10,8 @@ namespace Apizr.Mediation.Cruding.Base
     /// </summary>
     /// <typeparam name="TResponse">The result entity type</typeparam>
     /// <typeparam name="TKey">The entity's crud key type</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class ReadQueryBase<TResponse, TKey, TApizrRequestOptions, TApizrRequestOptionsBuilder> : MediationQueryBase<TResponse, TApizrRequestOptions, TApizrRequestOptionsBuilder>
         where TApizrRequestOptions : IApizrRequestOptions
         where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
@@ -34,6 +36,8 @@ namespace Apizr.Mediation.Cruding.Base
     /// The top level base mediation Read query
     /// </summary>
     /// <typeparam name="TResponse">The result entity type</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class ReadQueryBase<TResponse, TApizrRequestOptions, TApizrRequestOptionsBuilder> : ReadQueryBase<TResponse, int, TApizrRequestOptions, TApizrRequestOptionsBuilder>
         where TApizrRequestOptions : IApizrRequestOptions
         where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>

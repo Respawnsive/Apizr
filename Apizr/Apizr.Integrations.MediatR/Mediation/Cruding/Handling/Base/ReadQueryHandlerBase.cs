@@ -17,6 +17,8 @@ namespace Apizr.Mediation.Cruding.Handling.Base
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     /// <typeparam name="TQuery">The query type to handle</typeparam>
     /// <typeparam name="TQueryResult">The query result type to handle</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class ReadQueryHandlerBase<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TQuery, TQueryResult, TApizrRequestOptions, TApizrRequestOptionsBuilder> :
         CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TApizrRequestOptions, TApizrRequestOptionsBuilder>,
         IMediationQueryHandler<TQuery, TQueryResult>
@@ -48,6 +50,8 @@ namespace Apizr.Mediation.Cruding.Handling.Base
     /// <typeparam name="TReadAllParams">The read all params type</typeparam>
     /// <typeparam name="TQuery">The query type to handle</typeparam>
     /// <typeparam name="TQueryResult">The query result type to handle</typeparam>
+    /// <typeparam name="TApizrRequestOptions">Options provided to the request</typeparam>
+    /// <typeparam name="TApizrRequestOptionsBuilder">The request options builder</typeparam>
     public abstract class ReadQueryHandlerBase<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams, TQuery, TQueryResult, TApizrRequestOptions, TApizrRequestOptionsBuilder> : 
         CrudRequestHandlerBase<TApiEntity, int, TReadAllResult, TReadAllParams, TApizrRequestOptions, TApizrRequestOptionsBuilder>,
         IMediationQueryHandler<TQuery, TQueryResult> 

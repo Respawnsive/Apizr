@@ -34,7 +34,7 @@ items:
   summary: "\nOptions available at common level for extended registrations\n"
   example: []
   syntax:
-    content: 'public interface IApizrExtendedCommonOptions : IApizrExtendedCommonOptionsBase, IApizrCommonOptionsBase, IApizrExtendedSharedOptions, IApizrExtendedSharedOptionsBase, IApizrSharedOptionsBase'
+    content: 'public interface IApizrExtendedCommonOptions : IApizrExtendedCommonOptionsBase, IApizrCommonOptionsBase, IApizrSharedRegistrationOptionsBase, IApizrExtendedSharedOptions, IApizrExtendedSharedOptionsBase, IApizrGlobalSharedRegistrationOptionsBase, IApizrGlobalSharedOptionsBase'
     content.vb: >-
       Public Interface IApizrExtendedCommonOptions
           Inherits IApizrExtendedCommonOptionsBase, IApizrExtendedSharedOptions
@@ -49,12 +49,16 @@ items:
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientHandlerFactory
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientBuilder
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
-  - Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseUri
-  - Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
-  - Apizr.Configuring.Shared.IApizrSharedOptionsBase.BasePath
-  - Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode
-  - Apizr.Configuring.Shared.IApizrSharedOptionsBase.TrafficVerbosity
-  - Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
   modifiers.csharp:
   - public
   - interface
@@ -499,42 +503,66 @@ references:
   name: DelegatingHandlersExtendedFactories
   nameWithType: IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
-- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseUri
-  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseUri
-  parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   name: BaseUri
-  nameWithType: IApizrSharedOptionsBase.BaseUri
-  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseUri
-- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
-  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
-  parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BaseUri
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   name: BaseAddress
-  nameWithType: IApizrSharedOptionsBase.BaseAddress
-  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BaseAddress
-- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BasePath
-  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.BasePath
-  parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   name: BasePath
-  nameWithType: IApizrSharedOptionsBase.BasePath
-  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.BasePath
-- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode
-  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode
-  parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BasePath
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  name: ContextFactory
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   name: HttpTracerMode
-  nameWithType: IApizrSharedOptionsBase.HttpTracerMode
-  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.HttpTracerMode
-- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.TrafficVerbosity
-  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.TrafficVerbosity
-  parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
+  nameWithType: IApizrGlobalSharedOptionsBase.HttpTracerMode
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   name: TrafficVerbosity
-  nameWithType: IApizrSharedOptionsBase.TrafficVerbosity
-  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.TrafficVerbosity
-- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
-  commentId: P:Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
-  parent: Apizr.Configuring.Shared.IApizrSharedOptionsBase
+  nameWithType: IApizrGlobalSharedOptionsBase.TrafficVerbosity
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   name: LogLevels
-  nameWithType: IApizrSharedOptionsBase.LogLevels
-  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase.LogLevels
+  nameWithType: IApizrGlobalSharedOptionsBase.LogLevels
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  name: OnException
+  nameWithType: IApizrGlobalSharedOptionsBase.OnException
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  name: LetThrowOnExceptionWithEmptyCache
+  nameWithType: IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  name: HandlersParameters
+  nameWithType: IApizrGlobalSharedOptionsBase.HandlersParameters
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
 - uid: Apizr.Configuring.Common.IApizrCommonOptionsBase
   commentId: T:Apizr.Configuring.Common.IApizrCommonOptionsBase
   parent: Apizr.Configuring.Common
@@ -553,12 +581,18 @@ references:
   name: IApizrExtendedSharedOptionsBase
   nameWithType: IApizrExtendedSharedOptionsBase
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase
-- uid: Apizr.Configuring.Shared.IApizrSharedOptionsBase
-  commentId: T:Apizr.Configuring.Shared.IApizrSharedOptionsBase
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   parent: Apizr.Configuring.Shared
-  name: IApizrSharedOptionsBase
-  nameWithType: IApizrSharedOptionsBase
-  fullName: Apizr.Configuring.Shared.IApizrSharedOptionsBase
+  name: IApizrGlobalSharedRegistrationOptionsBase
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBase
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  parent: Apizr.Configuring.Shared
+  name: IApizrGlobalSharedOptionsBase
+  nameWithType: IApizrGlobalSharedOptionsBase
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
 - uid: Apizr.Configuring.Common
   commentId: N:Apizr.Configuring.Common
   name: Apizr.Configuring.Common

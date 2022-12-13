@@ -26,13 +26,19 @@ namespace Apizr.Configuring.Shared
         /// </summary>
         LogLevel[] LogLevels { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Catching potential exception if defined
+        /// </summary>
         Action<ApizrException> OnException { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Let throw potential exception if there's no cached data to return
+        /// </summary>
         bool LetThrowOnExceptionWithEmptyCache { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Parameters passed through delegating handlers
+        /// </summary>
         IDictionary<string, object> HandlersParameters { get; }
     }
 }

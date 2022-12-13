@@ -31,7 +31,7 @@ namespace Apizr.Mediation.Cruding.Handling
         public override Task<Unit> Handle(DeleteCommand<TModelEntity, TApiEntityKey> request,
             CancellationToken cancellationToken) =>
             CrudApiManager
-                .ExecuteAsync((options, api) => api.Delete(request.Key, options.Context, options.CancellationToken),
+                .ExecuteAsync((options, api) => api.Delete(request.Key, options, options.CancellationToken),
                     request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken);
     }
 
@@ -58,7 +58,7 @@ namespace Apizr.Mediation.Cruding.Handling
         public override Task<Unit> Handle(DeleteCommand<TModelEntity> request,
             CancellationToken cancellationToken) =>
             CrudApiManager
-                .ExecuteAsync((options, api) => api.Delete(request.Key, options.Context, options.CancellationToken),
+                .ExecuteAsync((options, api) => api.Delete(request.Key, options, options.CancellationToken),
                     request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken);
     }
 }

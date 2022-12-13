@@ -6,42 +6,44 @@ items:
   parent: Apizr.Mediation.Requesting.Handling.Base
   children:
   - Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.#ctor(Apizr.IApizrManager{`0})
-  - Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.Handle(`4,System.Threading.CancellationToken)
+  - Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.Handle(`2,System.Threading.CancellationToken)
   - Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.WebApiManager
   langs:
   - csharp
   - vb
-  name: ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest>
-  nameWithType: ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest>
-  fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest>
+  name: ExecuteUnitRequestHandlerBase<TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType: ExecuteUnitRequestHandlerBase<TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase<TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>
   type: Class
   source:
     id: ExecuteUnitRequestHandlerBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\Base\ExecuteUnitRequestHandlerBase.cs
-    startLine: 18
+    startLine: 86
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling.Base
   summary: "\nThe top level base mediation execute unit request handler\n"
   example: []
   syntax:
-    content: 'public abstract class ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest> : IRequestHandler<TRequest, TFormattedModelResultData> where TRequest : ExecuteUnitRequestBase<TWebApi, TModelData, TApiData, TFormattedModelResultData>'
+    content: 'public abstract class ExecuteUnitRequestHandlerBase<TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder> : RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>, IRequestHandler<TRequest, TFormattedModelResultData> where TRequest : ExecuteUnitRequestBase<TWebApi, TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder> where TApizrRequestOptions : IApizrRequestOptions where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>'
     typeParameters:
     - id: TWebApi
       description: The web api type
-    - id: TModelData
-      description: The model data type
-    - id: TApiData
-      description: The api data type
     - id: TFormattedModelResultData
       description: The formatted model result data type
     - id: TRequest
       description: The execute unit request to handle
+    - id: TApizrRequestOptions
+      description: Options provided to the request
+    - id: TApizrRequestOptionsBuilder
+      description: The request options builder
     content.vb: >-
-      Public MustInherit Class ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest As ExecuteUnitRequestBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData))
+      Public MustInherit Class ExecuteUnitRequestHandlerBase(Of TWebApi, TFormattedModelResultData, TRequest As ExecuteUnitRequestBase(Of TWebApi, TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder), TApizrRequestOptions As IApizrRequestOptions, TApizrRequestOptionsBuilder As IApizrRequestOptionsBuilder(Of TApizrRequestOptions, TApizrRequestOptionsBuilder))
+          Inherits RequestHandlerBase(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)
           Implements IRequestHandler(Of TRequest, TFormattedModelResultData)
   inheritance:
   - System.Object
+  - Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase{{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}
   derivedClasses:
   - Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase`4
   implements:
@@ -54,7 +56,7 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  nameWithType.vb: ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest)
+  nameWithType.vb: ExecuteUnitRequestHandlerBase(Of TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder)
   modifiers.csharp:
   - public
   - abstract
@@ -63,8 +65,8 @@ items:
   - Public
   - MustInherit
   - Class
-  fullName.vb: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest)
-  name.vb: ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest)
+  fullName.vb: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase(Of TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  name.vb: ExecuteUnitRequestHandlerBase(Of TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder)
 - uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.WebApiManager
   commentId: F:Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.WebApiManager
   id: WebApiManager
@@ -73,13 +75,13 @@ items:
   - csharp
   - vb
   name: WebApiManager
-  nameWithType: ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest>.WebApiManager
-  fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest>.WebApiManager
+  nameWithType: ExecuteUnitRequestHandlerBase<TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>.WebApiManager
+  fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase<TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>.WebApiManager
   type: Field
   source:
     id: WebApiManager
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\Base\ExecuteUnitRequestHandlerBase.cs
-    startLine: 23
+    startLine: 93
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling.Base
@@ -88,14 +90,14 @@ items:
     return:
       type: Apizr.IApizrManager{{TWebApi}}
     content.vb: Protected ReadOnly WebApiManager As IApizrManager(Of TWebApi)
-  nameWithType.vb: ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest).WebApiManager
+  nameWithType.vb: ExecuteUnitRequestHandlerBase(Of TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder).WebApiManager
   modifiers.csharp:
   - protected
   - readonly
   modifiers.vb:
   - Protected
   - ReadOnly
-  fullName.vb: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest).WebApiManager
+  fullName.vb: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase(Of TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder).WebApiManager
 - uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.#ctor(Apizr.IApizrManager{`0})
   commentId: M:Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.#ctor(Apizr.IApizrManager{`0})
   id: '#ctor(Apizr.IApizrManager{`0})'
@@ -104,13 +106,13 @@ items:
   - csharp
   - vb
   name: ExecuteUnitRequestHandlerBase(IApizrManager<TWebApi>)
-  nameWithType: ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest>.ExecuteUnitRequestHandlerBase(IApizrManager<TWebApi>)
-  fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest>.ExecuteUnitRequestHandlerBase(Apizr.IApizrManager<TWebApi>)
+  nameWithType: ExecuteUnitRequestHandlerBase<TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>.ExecuteUnitRequestHandlerBase(IApizrManager<TWebApi>)
+  fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase<TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>.ExecuteUnitRequestHandlerBase(Apizr.IApizrManager<TWebApi>)
   type: Constructor
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\Base\ExecuteUnitRequestHandlerBase.cs
-    startLine: 25
+    startLine: 95
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling.Base
@@ -121,28 +123,28 @@ items:
       type: Apizr.IApizrManager{{TWebApi}}
     content.vb: Protected Sub New(webApiManager As IApizrManager(Of TWebApi))
   overload: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.#ctor*
-  nameWithType.vb: ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest).ExecuteUnitRequestHandlerBase(IApizrManager(Of TWebApi))
+  nameWithType.vb: ExecuteUnitRequestHandlerBase(Of TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder).ExecuteUnitRequestHandlerBase(IApizrManager(Of TWebApi))
   modifiers.csharp:
   - protected
   modifiers.vb:
   - Protected
-  fullName.vb: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest).ExecuteUnitRequestHandlerBase(Apizr.IApizrManager(Of TWebApi))
+  fullName.vb: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase(Of TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder).ExecuteUnitRequestHandlerBase(Apizr.IApizrManager(Of TWebApi))
   name.vb: ExecuteUnitRequestHandlerBase(IApizrManager(Of TWebApi))
-- uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.Handle(`4,System.Threading.CancellationToken)
-  commentId: M:Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.Handle(`4,System.Threading.CancellationToken)
-  id: Handle(`4,System.Threading.CancellationToken)
+- uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.Handle(`2,System.Threading.CancellationToken)
+  commentId: M:Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.Handle(`2,System.Threading.CancellationToken)
+  id: Handle(`2,System.Threading.CancellationToken)
   parent: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5
   langs:
   - csharp
   - vb
   name: Handle(TRequest, CancellationToken)
-  nameWithType: ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest>.Handle(TRequest, CancellationToken)
-  fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest>.Handle(TRequest, System.Threading.CancellationToken)
+  nameWithType: ExecuteUnitRequestHandlerBase<TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>.Handle(TRequest, CancellationToken)
+  fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase<TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>.Handle(TRequest, System.Threading.CancellationToken)
   type: Method
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Requesting\Handling\Base\ExecuteUnitRequestHandlerBase.cs
-    startLine: 36
+    startLine: 106
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Requesting.Handling.Base
@@ -164,14 +166,14 @@ items:
   overload: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.Handle*
   implements:
   - MediatR.IRequestHandler{{TRequest},{TFormattedModelResultData}}.Handle({TRequest},System.Threading.CancellationToken)
-  nameWithType.vb: ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest).Handle(TRequest, CancellationToken)
+  nameWithType.vb: ExecuteUnitRequestHandlerBase(Of TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder).Handle(TRequest, CancellationToken)
   modifiers.csharp:
   - public
   - abstract
   modifiers.vb:
   - Public
   - MustOverride
-  fullName.vb: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest).Handle(TRequest, System.Threading.CancellationToken)
+  fullName.vb: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase(Of TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder).Handle(TRequest, System.Threading.CancellationToken)
 references:
 - uid: Apizr.Mediation.Requesting.Handling.Base
   commentId: N:Apizr.Mediation.Requesting.Handling.Base
@@ -185,6 +187,56 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase{{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}
+  commentId: T:Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase{`7,`8}
+  parent: Apizr.Mediation.Requesting.Handling.Base
+  definition: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
+  name: RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType: RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType.vb: RequestHandlerBase(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  name.vb: RequestHandlerBase(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  spec.csharp:
+  - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
+    name: RequestHandlerBase
+    nameWithType: RequestHandlerBase
+    fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
+    name: RequestHandlerBase
+    nameWithType: RequestHandlerBase
+    fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: MediatR.IRequestHandler{{TRequest},{TFormattedModelResultData}}
   commentId: T:MediatR.IRequestHandler{`6,`3}
   parent: MediatR
@@ -522,6 +574,54 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
+  commentId: T:Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
+  name: RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType: RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType.vb: RequestHandlerBase(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  name.vb: RequestHandlerBase(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  spec.csharp:
+  - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
+    name: RequestHandlerBase
+    nameWithType: RequestHandlerBase
+    fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
+    name: RequestHandlerBase
+    nameWithType: RequestHandlerBase
+    fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: MediatR.IRequestHandler`2
   commentId: T:MediatR.IRequestHandler`2
   isExternal: true
@@ -661,17 +761,17 @@ references:
 - uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.#ctor*
   commentId: Overload:Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.#ctor
   name: ExecuteUnitRequestHandlerBase
-  nameWithType: ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest>.ExecuteUnitRequestHandlerBase
-  fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest>.ExecuteUnitRequestHandlerBase
-  nameWithType.vb: ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest).ExecuteUnitRequestHandlerBase
-  fullName.vb: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest).ExecuteUnitRequestHandlerBase
+  nameWithType: ExecuteUnitRequestHandlerBase<TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>.ExecuteUnitRequestHandlerBase
+  fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase<TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>.ExecuteUnitRequestHandlerBase
+  nameWithType.vb: ExecuteUnitRequestHandlerBase(Of TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder).ExecuteUnitRequestHandlerBase
+  fullName.vb: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase(Of TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder).ExecuteUnitRequestHandlerBase
 - uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.Handle*
   commentId: Overload:Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.Handle
   name: Handle
-  nameWithType: ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest>.Handle
-  fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest>.Handle
-  nameWithType.vb: ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest).Handle
-  fullName.vb: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest).Handle
+  nameWithType: ExecuteUnitRequestHandlerBase<TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>.Handle
+  fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase<TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>.Handle
+  nameWithType.vb: ExecuteUnitRequestHandlerBase(Of TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder).Handle
+  fullName.vb: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase(Of TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder).Handle
 - uid: MediatR.IRequestHandler{{TRequest},{TFormattedModelResultData}}.Handle({TRequest},System.Threading.CancellationToken)
   commentId: M:MediatR.IRequestHandler{`6,`3}.Handle(`6,System.Threading.CancellationToken)
   parent: MediatR.IRequestHandler{{TRequest},{TFormattedModelResultData}}

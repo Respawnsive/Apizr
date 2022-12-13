@@ -36,7 +36,7 @@ namespace Apizr.Optional.Requesting.Handling
                             .SomeNotNull(new ApizrException(new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                             .MapAsync(async _ =>
                             {
-                                await WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, (Action<IApizrRequestOptionsBuilder>)request.OptionsBuilder);
+                                await WebApiManager.ExecuteAsync<TModelData, TApiData>(executeApiMethod, request.ModelRequestData, request.OptionsBuilder);
 
                                 return Unit.Value;
                             }).ConfigureAwait(false);
@@ -46,7 +46,7 @@ namespace Apizr.Optional.Requesting.Handling
                             .SomeNotNull(new ApizrException(new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                             .MapAsync(async _ =>
                             {
-                                await WebApiManager.ExecuteAsync<TModelData, TApiData>((options, api, apiData) => executeApiMethod.Compile()(options, api, apiData), request.ModelRequestData, (Action<IApizrRequestOptionsBuilder>)request.OptionsBuilder);
+                                await WebApiManager.ExecuteAsync<TModelData, TApiData>((options, api, apiData) => executeApiMethod.Compile()(options, api, apiData), request.ModelRequestData, request.OptionsBuilder);
 
                                 return Unit.Value;
                             }).ConfigureAwait(false);
@@ -85,7 +85,7 @@ namespace Apizr.Optional.Requesting.Handling
                             .SomeNotNull(new ApizrException(new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                             .MapAsync(async _ =>
                             {
-                                await WebApiManager.ExecuteAsync(executeApiMethod, (Action<IApizrRequestOptionsBuilder>) request.OptionsBuilder);
+                                await WebApiManager.ExecuteAsync(executeApiMethod, request.OptionsBuilder);
 
                                 return Unit.Value;
                             }).ConfigureAwait(false);
@@ -95,7 +95,7 @@ namespace Apizr.Optional.Requesting.Handling
                             .SomeNotNull(new ApizrException(new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                             .MapAsync(async _ =>
                             {
-                                await WebApiManager.ExecuteAsync((options, api) => executeApiMethod.Compile()(options, api), (Action<IApizrRequestOptionsBuilder>) request.OptionsBuilder);
+                                await WebApiManager.ExecuteAsync((options, api) => executeApiMethod.Compile()(options, api), request.OptionsBuilder);
 
                                 return Unit.Value;
                             }).ConfigureAwait(false);

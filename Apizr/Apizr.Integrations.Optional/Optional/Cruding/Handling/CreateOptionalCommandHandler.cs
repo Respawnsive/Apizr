@@ -36,8 +36,8 @@ namespace Apizr.Optional.Cruding.Handling
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                     .MapAsync(_ =>
                         CrudApiManager.ExecuteAsync<TModelEntity, TApiEntity>(
-                                (options, api, apiData) => api.Create(apiData, options.Context, options.CancellationToken), request.RequestData,
-                                (Action<IApizrRequestOptionsBuilder>) request.OptionsBuilder))
+                                (options, api, apiData) => api.Create(apiData, options, options.CancellationToken), request.RequestData,
+                                request.OptionsBuilder))
                     .ConfigureAwait(false);
             }
             catch (ApizrException e)

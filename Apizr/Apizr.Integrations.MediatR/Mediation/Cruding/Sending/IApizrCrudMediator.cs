@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring.Request;
-using Polly;
 
 namespace Apizr.Mediation.Cruding.Sending
 {

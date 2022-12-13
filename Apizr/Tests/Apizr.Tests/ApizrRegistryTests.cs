@@ -6,7 +6,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring.Registry;
 using Apizr.Logging;
+using Apizr.Policing;
 using Apizr.Tests.Apis;
 using Apizr.Tests.Helpers;
 using Apizr.Tests.Models;
@@ -480,6 +482,75 @@ namespace Apizr.Tests
             });
 
             count.Should().Be(apizrRegistry.Count);
+        }
+
+        [Fact]
+        public async Task Requesting_With_Context_into_Options_Should_Set_Context()
+        {
+            var watcher = new WatchingRequestHandler();
+
+            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry.AddManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher)));
+            var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
+
+            var testKey = "TestKey1";
+            var testValue = 1;
+            // Defining Context
+            var context = new Context { { testKey, testValue } };
+
+            await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithContext(context));
+            watcher.Context.Should().NotBeNull();
+            watcher.Context.Keys.Should().Contain(testKey);
+            watcher.Context.TryGetValue(testKey, out var value).Should().BeTrue();
+            value.Should().Be(testValue);
+        }
+
+        [Fact]
+        public async Task Requesting_With_Context_At_Multiple_Levels_Should_Merge_It_All_At_The_End()
+        {
+            var watcher = new WatchingRequestHandler();
+            var testKey1 = "TestKey1";
+            var testValue1 = 1;
+
+            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry.AddManagerFor<IReqResUserService>(options =>
+                options.WithContext(() => new Context { { testKey1, testValue1 } })
+                    .AddDelegatingHandler(watcher)));
+            var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
+
+            var testKey2 = "TestKey2";
+            var testValue2 = 2;
+            // Defining Context 2
+            var context2 = new Context { { testKey2, testValue2 } };
+
+            await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
+                options => options.WithContext(context2));
+
+            watcher.Context.Should().NotBeNull();
+            watcher.Context.Keys.Should().Contain(testKey1);
+            watcher.Context.TryGetValue(testKey1, out var value1).Should().BeTrue();
+            value1.Should().Be(testValue1);
+            watcher.Context.Keys.Should().Contain(testKey2);
+            watcher.Context.TryGetValue(testKey2, out var value2).Should().BeTrue();
+            value2.Should().Be(testValue2);
+        }
+
+        [Fact]
+        public async Task Requesting_With_LogSettings_Into_Options_Should_Win_Over_All_Others()
+        {
+            var watcher = new WatchingRequestHandler();
+
+            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry.AddManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher)));
+            var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
+
+            await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.RequestCookies));
+            watcher.Context.Should().NotBeNull();
+            watcher.Context.TryGetLogger(out var logger, out var logLevels, out var verbosity, out var tracerMode)
+                .Should().BeTrue();
+            verbosity.Should().Be(HttpMessageParts.RequestCookies);
+            tracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
+
+            watcher.Options.Should().NotBeNull();
+            watcher.Options.TrafficVerbosity.Should().Be(HttpMessageParts.RequestCookies);
+            watcher.Options.HttpTracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
         }
     }
 }

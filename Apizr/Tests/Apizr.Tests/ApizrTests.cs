@@ -302,18 +302,23 @@ namespace Apizr.Tests
         {
             var watcher = new WatchingRequestHandler();
 
-            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher));
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher)
+                .WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.ResponseBody, LogLevel.Debug));
             
-            await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.RequestCookies));
+            await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options
+                .WithLogging(HttpTracerMode.Everything, HttpMessageParts.RequestCookies, LogLevel.Error));
+
             watcher.Context.Should().NotBeNull();
             watcher.Context.TryGetLogger(out var logger, out var logLevels, out var verbosity, out var tracerMode)
                 .Should().BeTrue();
+            tracerMode.Should().Be(HttpTracerMode.Everything);
             verbosity.Should().Be(HttpMessageParts.RequestCookies);
-            tracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
+            logLevels.Should().Contain(LogLevel.Error);
 
             watcher.Options.Should().NotBeNull();
+            watcher.Options.HttpTracerMode.Should().Be(HttpTracerMode.Everything);
             watcher.Options.TrafficVerbosity.Should().Be(HttpMessageParts.RequestCookies);
-            watcher.Options.HttpTracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
+            watcher.Options.LogLevels.Should().Contain(LogLevel.Error);
         }
     }
 }

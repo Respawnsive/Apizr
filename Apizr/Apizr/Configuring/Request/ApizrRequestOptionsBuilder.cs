@@ -23,12 +23,9 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder
     public IApizrRequestOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
         HttpMessageParts trafficVerbosity = HttpMessageParts.All, params LogLevel[] logLevels)
     {
-        if(Options.HttpTracerMode == HttpTracerMode.Unspecified)
-            Options.HttpTracerMode = httpTracerMode;
-        if(Options.TrafficVerbosity == HttpMessageParts.Unspecified)
-            Options.TrafficVerbosity = trafficVerbosity;
-        if(Options.LogLevels?.Length is null or 0)
-            Options.LogLevels = logLevels;
+        Options.HttpTracerMode = httpTracerMode;
+        Options.TrafficVerbosity = trafficVerbosity;
+        Options.LogLevels = logLevels;
 
         return this;
     }

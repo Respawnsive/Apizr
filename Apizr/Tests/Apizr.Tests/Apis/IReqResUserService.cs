@@ -15,10 +15,10 @@ using Refit;
 
 [assembly:Policy("TransientHttpError")]
 [assembly:Cache(CacheMode.GetAndFetch, "00:10:00")]
-//[assembly:Log]
+[assembly:Log(HttpMessageParts.All, HttpTracerMode.Everything, LogLevel.Trace)]
 namespace Apizr.Tests.Apis
 {
-    [WebApi("https://reqres.in/api"), Log(HttpMessageParts.None)]
+    [WebApi("https://reqres.in/api"), Log(HttpMessageParts.RequestAll, HttpTracerMode.ErrorsAndExceptionsOnly, LogLevel.Information)]
     public interface IReqResUserService
     {
         [Get("/users")]
@@ -27,8 +27,8 @@ namespace Apizr.Tests.Apis
         [Get("/users")]
         Task<ApiResult<User>> GetUsersAsync([Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
 
-        [Get("/users")]
-        Task<ApiResult<User>> GetUsersAsync([RequestOptions] IApizrRequestOptionsBase options);
+        [Get("/users"), Log(HttpMessageParts.RequestBody, HttpTracerMode.ExceptionsOnly, LogLevel.Warning)]
+        Task<ApiResult<User>> GetUsersAsync([RequestOptions] IApizrRequestOptions options);
 
         [Get("/users")]
         Task<ApiResult<User>> GetUsersAsync([Priority] int priority);

@@ -311,22 +311,21 @@ namespace Apizr
                     basePath = webApiAttribute.BaseAddressOrPath;
             }
 
-            LogAttribute logAttribute;
+            LogAttribute properLogAttribute, commonLogAttribute;
             PolicyAttribute webApiPolicyAttribute;
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
             {
                 var modelType = webApiType.GetGenericArguments().First();
-                logAttribute = modelType.GetTypeInfo().GetCustomAttribute<LogAttribute>(true);
+                properLogAttribute = modelType.GetTypeInfo().GetCustomAttribute<LogAttribute>(true);
+                commonLogAttribute = modelType.Assembly.GetCustomAttribute<LogAttribute>();
                 webApiPolicyAttribute = modelType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
             else
             {
-                logAttribute = webApiType.GetTypeInfo().GetCustomAttribute<LogAttribute>(true);
+                properLogAttribute = webApiType.GetTypeInfo().GetCustomAttribute<LogAttribute>(true);
+                commonLogAttribute = webApiType.Assembly.GetCustomAttribute<LogAttribute>();
                 webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
             }
-
-            if (logAttribute == null)
-                logAttribute = webApiType.Assembly.GetCustomAttribute<LogAttribute>();
 
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
 
@@ -334,8 +333,9 @@ namespace Apizr
                 assemblyPolicyAttribute?.RegistryKeys, webApiPolicyAttribute?.RegistryKeys,
                 baseAddress,
                 basePath,
-                logAttribute?.HttpTracerMode,
-                logAttribute?.TrafficVerbosity, logAttribute?.LogLevels)) as IApizrProperOptionsBuilder;
+                properLogAttribute?.HttpTracerMode ?? (commonOptions.HttpTracerMode != HttpTracerMode.Unspecified ? commonOptions.HttpTracerMode : commonLogAttribute?.HttpTracerMode),
+                properLogAttribute?.TrafficVerbosity ?? (commonOptions.TrafficVerbosity != HttpMessageParts.Unspecified ? commonOptions.TrafficVerbosity : commonLogAttribute?.TrafficVerbosity), 
+                properLogAttribute?.LogLevels ?? (commonOptions.LogLevels?.Any() == true ? commonOptions.LogLevels : commonLogAttribute?.LogLevels))) as IApizrProperOptionsBuilder;
 
             properOptionsBuilder?.Invoke(builder);
 

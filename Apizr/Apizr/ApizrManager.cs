@@ -39,9 +39,13 @@ namespace Apizr
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => CreateRequestOptionsBuilder(null, optionsBuilder);
 
-        internal static IApizrRequestOptionsBuilder CreateRequestOptionsBuilder(IApizrGlobalSharedRegistrationOptionsBase baseOptions, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        internal static IApizrRequestOptionsBuilder CreateRequestOptionsBuilder(
+            IApizrGlobalSharedRegistrationOptionsBase baseOptions,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null, 
+            LogAttributeBase requestLogAttribute = null)
         {
-            var requestOptions = new ApizrRequestOptions(baseOptions);
+            var requestOptions = new ApizrRequestOptions(baseOptions, requestLogAttribute?.HttpTracerMode,
+                requestLogAttribute?.TrafficVerbosity, requestLogAttribute?.LogLevels);
             var builder = new ApizrRequestOptionsBuilder(requestOptions);
             optionsBuilder?.Invoke(builder);
 
@@ -113,11 +117,10 @@ namespace Apizr
         public async Task ExecuteAsync(Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder);
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
-            var logAttribute = GetLogAttribute(methodDetails);
-            requestOptionsBuilder.WithLogging(logAttribute.HttpTracerMode, logAttribute.TrafficVerbosity, logAttribute.LogLevels);
+            var requestLogAttribute = GetRequestLogAttribute(methodDetails);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute);
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Calling method");
 
             try
@@ -173,11 +176,10 @@ namespace Apizr
             TModelData modelData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder);
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
-            var logAttribute = GetLogAttribute(methodDetails);
-            requestOptionsBuilder.WithLogging(logAttribute.HttpTracerMode, logAttribute.TrafficVerbosity, logAttribute.LogLevels);
+            var requestLogAttribute = GetRequestLogAttribute(methodDetails);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute);
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Calling method");
 
             try
@@ -262,11 +264,10 @@ namespace Apizr
             Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder);
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
-            var logAttribute = GetLogAttribute(methodDetails);
-            requestOptionsBuilder.WithLogging(logAttribute.HttpTracerMode, logAttribute.TrafficVerbosity, logAttribute.LogLevels);
+            var requestLogAttribute = GetRequestLogAttribute(methodDetails);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute);
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Calling method");
 
             TApiData result = default;
@@ -383,11 +384,10 @@ namespace Apizr
                 TModelRequestData modelRequestData,
                 Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder);
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiResultData>(executeApiMethod);
-            var logAttribute = GetLogAttribute(methodDetails);
-            requestOptionsBuilder.WithLogging(logAttribute.HttpTracerMode, logAttribute.TrafficVerbosity, logAttribute.LogLevels);
+            var requestLogAttribute = GetRequestLogAttribute(methodDetails);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute);
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Calling method");
 
             TApiResultData result = default;
@@ -510,11 +510,10 @@ namespace Apizr
             TModelData modelData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder);
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
-            var logAttribute = GetLogAttribute(methodDetails);
-            requestOptionsBuilder.WithLogging(logAttribute.HttpTracerMode, logAttribute.TrafficVerbosity, logAttribute.LogLevels);
+            var requestLogAttribute = GetRequestLogAttribute(methodDetails);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute);
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Calling method");
 
             TApiData result = default;
@@ -635,11 +634,10 @@ namespace Apizr
             Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder);
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
-            var logAttribute = GetLogAttribute(methodDetails);
-            requestOptionsBuilder.WithLogging(logAttribute.HttpTracerMode, logAttribute.TrafficVerbosity, logAttribute.LogLevels);
+            var requestLogAttribute = GetRequestLogAttribute(methodDetails);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute);
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Calling method");
 
             TApiData result = default;
@@ -826,49 +824,31 @@ namespace Apizr
 
         #region Logging
 
-        private LogAttributeBase GetLogAttribute(MethodDetails methodDetails)
+        private LogAttributeBase GetRequestLogAttribute(MethodDetails methodDetails)
         {
             if (_loggingMethodsSet.TryGetValue(methodDetails, out var logAttribute))
                 return logAttribute;
             
-            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.ApiInterfaceType)) // Crud api logging
-            {
+            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.ApiInterfaceType))
+            { 
+                // Crud api logging
                 var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
                 var methodName = methodDetails.MethodInfo.Name;
-                switch (methodName) // Specific method logging
+                logAttribute = methodName switch // Request logging
                 {
-                    case "ReadAll":
-                        logAttribute = modelType.GetTypeInfo().GetCustomAttribute<LogReadAllAttribute>(true);
-                        break;
-                    case "Read":
-                        logAttribute = modelType.GetTypeInfo().GetCustomAttribute<LogReadAttribute>(true);
-                        break;
-                    case "Create":
-                        logAttribute = modelType.GetTypeInfo().GetCustomAttribute<LogCreateAttribute>(true);
-                        break;
-                    case "Update":
-                        logAttribute = modelType.GetTypeInfo().GetCustomAttribute<LogUpdateAttribute>(true);
-                        break;
-                    case "Delete":
-                        logAttribute = modelType.GetTypeInfo().GetCustomAttribute<LogDeleteAttribute>(true);
-                        break;
-                }
-
-                if (logAttribute == null) // Global model logging
-                    logAttribute = modelType.GetTypeInfo().GetCustomAttribute<LogAttribute>(true);
+                    "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<LogReadAllAttribute>(true),
+                    "Read" => modelType.GetTypeInfo().GetCustomAttribute<LogReadAttribute>(true),
+                    "Create" => modelType.GetTypeInfo().GetCustomAttribute<LogCreateAttribute>(true),
+                    "Update" => modelType.GetTypeInfo().GetCustomAttribute<LogUpdateAttribute>(true),
+                    "Delete" => modelType.GetTypeInfo().GetCustomAttribute<LogDeleteAttribute>(true),
+                    _ => null
+                };
             }
-            else // Classic api logging
+            else
             {
-                logAttribute =
-                    (methodDetails.MethodInfo.GetCustomAttribute<LogAttribute>() ?? // Specific method logging
-                     methodDetails.ApiInterfaceType.GetTypeInfo().GetCustomAttribute<LogAttribute>()) ??
-                    new LogAttribute(_apizrOptions.TrafficVerbosity, _apizrOptions.HttpTracerMode,
-                        _apizrOptions.LogLevels); // Global api interface logging (by attribute decoration)
+                // Classic api logging
+                logAttribute = methodDetails.MethodInfo.GetCustomAttribute<LogAttribute>(); // Request logging
             }
-
-            if (logAttribute == null) // Global assembly caching
-                logAttribute = methodDetails.ApiInterfaceType.Assembly.GetCustomAttribute<LogAttribute>() ??
-                               new LogAttribute(HttpMessageParts.None, HttpTracerMode.ExceptionsOnly);
 
             // Return log attribute
             _loggingMethodsSet.Add(methodDetails, logAttribute);

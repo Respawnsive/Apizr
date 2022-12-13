@@ -70,7 +70,7 @@ namespace Apizr.Requesting
         /// <param name="options">The request options</param>
         /// <returns></returns>
         [Post("")]
-        Task<T> Create([Body] T payload, [RequestOptions] IApizrRequestOptionsBase options);
+        Task<T> Create([Body] T payload, [RequestOptions] IApizrRequestOptions options);
 
         /// <summary>
         /// Send a Create request with a <typeparamref name="T"/> payload, passing a Polly context and a cancellation token through the request
@@ -80,7 +80,7 @@ namespace Apizr.Requesting
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
         [Post("")]
-        Task<T> Create([Body] T payload, [RequestOptions] IApizrRequestOptionsBase options, CancellationToken cancellationToken);
+        Task<T> Create([Body] T payload, [RequestOptions] IApizrRequestOptions options, CancellationToken cancellationToken);
 
         #endregion
 
@@ -216,7 +216,7 @@ namespace Apizr.Requesting
         /// <param name="options">The request options</param>
         /// <returns></returns>
         [Get("")]
-        Task<TReadAllResult> ReadAll([RequestOptions] IApizrRequestOptionsBase options);
+        Task<TReadAllResult> ReadAll([RequestOptions] IApizrRequestOptions options);
 
         /// <summary>
         /// Send a ReadAll request with some query params used as cache key
@@ -241,7 +241,7 @@ namespace Apizr.Requesting
         /// <param name="options">The request options</param>
         /// <returns></returns>
         [Get("")]
-        Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [RequestOptions] IApizrRequestOptionsBase options);
+        Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [RequestOptions] IApizrRequestOptions options);
 
         /// <summary>
         /// Send a ReadAll request with some query params used as cache key, passing a cancellation token through the request
@@ -259,7 +259,7 @@ namespace Apizr.Requesting
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
         [Get("")]
-        Task<TReadAllResult> ReadAll([RequestOptions] IApizrRequestOptionsBase options, CancellationToken cancellationToken);
+        Task<TReadAllResult> ReadAll([RequestOptions] IApizrRequestOptions options, CancellationToken cancellationToken);
 
         /// <summary>
         /// Send a ReadAll request with some query params used as cache key
@@ -269,7 +269,7 @@ namespace Apizr.Requesting
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
         [Get("")]
-        Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [RequestOptions] IApizrRequestOptionsBase options, CancellationToken cancellationToken);
+        Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [RequestOptions] IApizrRequestOptions options, CancellationToken cancellationToken);
 
         #endregion
 
@@ -348,7 +348,7 @@ namespace Apizr.Requesting
         /// <param name="options">The request options</param>
         /// <returns></returns>
         [Get("/{key}")]
-        Task<T> Read([CacheKey] TKey key, [RequestOptions] IApizrRequestOptionsBase options);
+        Task<T> Read([CacheKey] TKey key, [RequestOptions] IApizrRequestOptions options);
 
         /// <summary>
         /// Send a Read request with a key param, passing a cancellation token through the request
@@ -367,7 +367,7 @@ namespace Apizr.Requesting
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
         [Get("/{key}")]
-        Task<T> Read([CacheKey] TKey key, [RequestOptions] IApizrRequestOptionsBase options, CancellationToken cancellationToken);
+        Task<T> Read([CacheKey] TKey key, [RequestOptions] IApizrRequestOptions options, CancellationToken cancellationToken);
 
         #endregion
 
@@ -417,7 +417,7 @@ namespace Apizr.Requesting
         /// <param name="options">The request options</param>
         /// <returns></returns>
         [Put("/{key}")]
-        Task Update(TKey key, [Body] T payload, [RequestOptions] IApizrRequestOptionsBase options);
+        Task Update(TKey key, [Body] T payload, [RequestOptions] IApizrRequestOptions options);
 
         /// <summary>
         /// Send an Update request with a key and a payload, passing a cancellation token through the request
@@ -438,7 +438,7 @@ namespace Apizr.Requesting
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
         [Put("/{key}")]
-        Task Update(TKey key, [Body] T payload, [RequestOptions] IApizrRequestOptionsBase options, CancellationToken cancellationToken);
+        Task Update(TKey key, [Body] T payload, [RequestOptions] IApizrRequestOptions options, CancellationToken cancellationToken);
 
         #endregion
 
@@ -484,7 +484,7 @@ namespace Apizr.Requesting
         /// <param name="options">The request options</param>
         /// <returns></returns>
         [Delete("/{key}")]
-        Task Delete(TKey key, [RequestOptions] IApizrRequestOptionsBase options);
+        Task Delete(TKey key, [RequestOptions] IApizrRequestOptions options);
 
         /// <summary>
         /// Send a Delete request with a key param, passing a cancellation token through the request
@@ -503,7 +503,7 @@ namespace Apizr.Requesting
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns></returns>
         [Delete("/{key}")]
-        Task Delete(TKey key, [RequestOptions] IApizrRequestOptionsBase options, CancellationToken cancellationToken);
+        Task Delete(TKey key, [RequestOptions] IApizrRequestOptions options, CancellationToken cancellationToken);
 
         #endregion
     }

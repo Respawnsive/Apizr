@@ -38,6 +38,7 @@ items:
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpClientHandler(System.Net.Http.HttpClientHandler)
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithLogging(System.Func{System.IServiceProvider,Apizr.Logging.HttpTracerMode},System.Func{System.IServiceProvider,Apizr.Logging.HttpMessageParts},System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]})
+  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithLogging(System.Func{System.IServiceProvider,System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithMappingHandler(Apizr.Mapping.IMappingHandler)
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithMappingHandler(System.Func{System.IServiceProvider,Apizr.Mapping.IMappingHandler})
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithMappingHandler(System.Type)
@@ -960,7 +961,7 @@ items:
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
-  summary: "\nConfigure logging level for the api\n"
+  summary: "\nDefine tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)\n"
   example: []
   syntax:
     content: public IApizrExtendedManagerOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything, HttpMessageParts trafficVerbosity = HttpMessageParts.All, params LogLevel[] logLevels)
@@ -988,6 +989,46 @@ items:
   - Public
   fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel())
   name.vb: WithLogging(HttpTracerMode, HttpMessageParts, LogLevel())
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithLogging(System.Func{System.IServiceProvider,System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})
+  commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithLogging(System.Func{System.IServiceProvider,System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})
+  id: WithLogging(System.Func{System.IServiceProvider,System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})
+  parent: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithLogging(Func<IServiceProvider, (HttpTracerMode, HttpMessageParts, LogLevel[])>)
+  nameWithType: ApizrExtendedManagerOptionsBuilder.WithLogging(Func<IServiceProvider, (HttpTracerMode, HttpMessageParts, LogLevel[])>)
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithLogging(System.Func<System.IServiceProvider, System.ValueTuple<Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel[]>>)
+  type: Method
+  source:
+    id: WithLogging
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
+    startLine: 231
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Manager
+  summary: "\nDefine tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)\n"
+  example: []
+  syntax:
+    content: public IApizrExtendedManagerOptionsBuilder WithLogging(Func<IServiceProvider, (HttpTracerMode, HttpMessageParts, LogLevel[])> loggingConfigurationFactory)
+    parameters:
+    - id: loggingConfigurationFactory
+      type: System.Func{System.IServiceProvider,System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}}
+      description: Logging configuration factory
+    return:
+      type: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
+      description: ''
+    content.vb: Public Function WithLogging(loggingConfigurationFactory As Func(Of IServiceProvider, (HttpTracerMode, HttpMessageParts, LogLevel())(Of HttpTracerMode , HttpMessageParts, LogLevel()))) As IApizrExtendedManagerOptionsBuilder
+  overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithLogging*
+  implements:
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithLogging(System.Func{System.IServiceProvider,System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})
+  nameWithType.vb: ApizrExtendedManagerOptionsBuilder.WithLogging(Func(Of IServiceProvider, (HttpTracerMode, HttpMessageParts, LogLevel())(Of HttpTracerMode, HttpMessageParts, LogLevel())))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithLogging(System.Func(Of System.IServiceProvider, System.ValueTuple(Of Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel())))
+  name.vb: WithLogging(Func(Of IServiceProvider, (HttpTracerMode, HttpMessageParts, LogLevel())(Of HttpTracerMode, HttpMessageParts, LogLevel())))
 - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithLogging(System.Func{System.IServiceProvider,Apizr.Logging.HttpTracerMode},System.Func{System.IServiceProvider,Apizr.Logging.HttpMessageParts},System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]})
   commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithLogging(System.Func{System.IServiceProvider,Apizr.Logging.HttpTracerMode},System.Func{System.IServiceProvider,Apizr.Logging.HttpMessageParts},System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]})
   id: WithLogging(System.Func{System.IServiceProvider,Apizr.Logging.HttpTracerMode},System.Func{System.IServiceProvider,Apizr.Logging.HttpMessageParts},System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]})
@@ -1002,11 +1043,11 @@ items:
   source:
     id: WithLogging
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 231
+    startLine: 238
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
-  summary: "\nDefine http traffic tracing verbosity and log level (could be defined with TraceAttribute)\n"
+  summary: "\nDefine tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)\n"
   example: []
   syntax:
     content: public IApizrExtendedManagerOptionsBuilder WithLogging(Func<IServiceProvider, HttpTracerMode> httpTracerModeFactory, Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory, Func<IServiceProvider, LogLevel[]> logLevelFactory)
@@ -1047,7 +1088,7 @@ items:
   source:
     id: WithRefitSettings
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 243
+    startLine: 250
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1084,7 +1125,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 247
+    startLine: 254
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1121,7 +1162,7 @@ items:
   source:
     id: WithRefitSettings
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 253
+    startLine: 260
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1161,7 +1202,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 262
+    startLine: 269
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1201,7 +1242,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 270
+    startLine: 277
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1243,7 +1284,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 278
+    startLine: 285
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1283,7 +1324,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 286
+    startLine: 293
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1324,7 +1365,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 291
+    startLine: 298
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1361,7 +1402,7 @@ items:
   source:
     id: WithCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 303
+    startLine: 310
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1398,7 +1439,7 @@ items:
   source:
     id: WithCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 307
+    startLine: 314
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1438,7 +1479,7 @@ items:
   source:
     id: WithCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 315
+    startLine: 322
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1479,7 +1520,7 @@ items:
   source:
     id: WithCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 320
+    startLine: 327
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1516,7 +1557,7 @@ items:
   source:
     id: WithMappingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 332
+    startLine: 339
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1553,7 +1594,7 @@ items:
   source:
     id: WithMappingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 336
+    startLine: 343
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1593,7 +1634,7 @@ items:
   source:
     id: WithMappingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 344
+    startLine: 351
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1634,7 +1675,7 @@ items:
   source:
     id: WithMappingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 349
+    startLine: 356
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -8285,6 +8326,393 @@ references:
   name: Apizr.Logging
   nameWithType: Apizr.Logging
   fullName: Apizr.Logging
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithLogging(System.Func{System.IServiceProvider,System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithLogging(System.Func{System.IServiceProvider,System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}
+  definition: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithLogging(System.Func{System.IServiceProvider,System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})
+  name: WithLogging(Func<IServiceProvider, (T1, T2, T3)<HttpTracerMode, HttpMessageParts, LogLevel[]>>)
+  nameWithType: IApizrExtendedSharedOptionsBuilder<IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder>.WithLogging(Func<IServiceProvider, (T1, T2, T3)<HttpTracerMode, HttpMessageParts, LogLevel[]>>)
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>.WithLogging(System.Func<System.IServiceProvider, System.ValueTuple<Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel[]>>)
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder).WithLogging(Func(Of IServiceProvider, (T1, T2, T3)(Of HttpTracerMode, HttpMessageParts, LogLevel())))
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder).WithLogging(System.Func(Of System.IServiceProvider, System.ValueTuple(Of Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel())))
+  name.vb: WithLogging(Func(Of IServiceProvider, (T1, T2, T3)(Of HttpTracerMode, HttpMessageParts, LogLevel())))
+  spec.csharp:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithLogging(System.Func{System.IServiceProvider,System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})
+    name: WithLogging
+    nameWithType: IApizrExtendedSharedOptionsBuilder<IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder>.WithLogging
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>.WithLogging
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.ValueTuple`3
+    name: (T1, T2, T3)
+    nameWithType: (T1, T2, T3)
+    fullName: System.ValueTuple
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Logging.HttpTracerMode
+    name: HttpTracerMode
+    nameWithType: HttpTracerMode
+    fullName: Apizr.Logging.HttpTracerMode
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    nameWithType: HttpMessageParts
+    fullName: Apizr.Logging.HttpMessageParts
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.LogLevel
+    name: LogLevel
+    nameWithType: LogLevel
+    fullName: Microsoft.Extensions.Logging.LogLevel
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithLogging(System.Func{System.IServiceProvider,System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})
+    name: WithLogging
+    nameWithType: IApizrExtendedSharedOptionsBuilder(Of IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder).WithLogging
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder).WithLogging
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.ValueTuple`3
+    name: (T1, T2, T3)
+    nameWithType: (T1, T2, T3)
+    fullName: System.ValueTuple
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Logging.HttpTracerMode
+    name: HttpTracerMode
+    nameWithType: HttpTracerMode
+    fullName: Apizr.Logging.HttpTracerMode
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    nameWithType: HttpMessageParts
+    fullName: Apizr.Logging.HttpMessageParts
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.LogLevel
+    name: LogLevel
+    nameWithType: LogLevel
+    fullName: Microsoft.Extensions.Logging.LogLevel
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func{System.IServiceProvider,System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}}
+  commentId: T:System.Func{System.IServiceProvider,System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}}
+  parent: System
+  definition: System.Func`2
+  name: Func<IServiceProvider, (T1, T2, T3)<HttpTracerMode, HttpMessageParts, LogLevel[]>>
+  nameWithType: Func<IServiceProvider, (T1, T2, T3)<HttpTracerMode, HttpMessageParts, LogLevel[]>>
+  fullName: System.Func<System.IServiceProvider, System.ValueTuple<Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel[]>>
+  nameWithType.vb: Func(Of IServiceProvider, (T1, T2, T3)(Of HttpTracerMode, HttpMessageParts, LogLevel()))
+  fullName.vb: System.Func(Of System.IServiceProvider, System.ValueTuple(Of Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel()))
+  name.vb: Func(Of IServiceProvider, (T1, T2, T3)(Of HttpTracerMode, HttpMessageParts, LogLevel()))
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.ValueTuple`3
+    name: (T1, T2, T3)
+    nameWithType: (T1, T2, T3)
+    fullName: System.ValueTuple
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Logging.HttpTracerMode
+    name: HttpTracerMode
+    nameWithType: HttpTracerMode
+    fullName: Apizr.Logging.HttpTracerMode
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    nameWithType: HttpMessageParts
+    fullName: Apizr.Logging.HttpMessageParts
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.LogLevel
+    name: LogLevel
+    nameWithType: LogLevel
+    fullName: Microsoft.Extensions.Logging.LogLevel
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.ValueTuple`3
+    name: (T1, T2, T3)
+    nameWithType: (T1, T2, T3)
+    fullName: System.ValueTuple
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Logging.HttpTracerMode
+    name: HttpTracerMode
+    nameWithType: HttpTracerMode
+    fullName: Apizr.Logging.HttpTracerMode
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    nameWithType: HttpMessageParts
+    fullName: Apizr.Logging.HttpMessageParts
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.LogLevel
+    name: LogLevel
+    nameWithType: LogLevel
+    fullName: Microsoft.Extensions.Logging.LogLevel
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithLogging(System.Func{System.IServiceProvider,System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithLogging(System.Func{System.IServiceProvider,System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})
+  isExternal: true
+  name: WithLogging(Func<IServiceProvider, (T1, T2, T3)<HttpTracerMode, HttpMessageParts, LogLevel[]>>)
+  nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithLogging(Func<IServiceProvider, (T1, T2, T3)<HttpTracerMode, HttpMessageParts, LogLevel[]>>)
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithLogging(System.Func<System.IServiceProvider, System.ValueTuple<Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel[]>>)
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithLogging(Func(Of IServiceProvider, (T1, T2, T3)(Of HttpTracerMode, HttpMessageParts, LogLevel())))
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithLogging(System.Func(Of System.IServiceProvider, System.ValueTuple(Of Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel())))
+  name.vb: WithLogging(Func(Of IServiceProvider, (T1, T2, T3)(Of HttpTracerMode, HttpMessageParts, LogLevel())))
+  spec.csharp:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithLogging(System.Func{System.IServiceProvider,System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})
+    name: WithLogging
+    nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithLogging
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithLogging
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.ValueTuple`3
+    name: (T1, T2, T3)
+    nameWithType: (T1, T2, T3)
+    fullName: System.ValueTuple
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Logging.HttpTracerMode
+    name: HttpTracerMode
+    nameWithType: HttpTracerMode
+    fullName: Apizr.Logging.HttpTracerMode
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    nameWithType: HttpMessageParts
+    fullName: Apizr.Logging.HttpMessageParts
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.LogLevel
+    name: LogLevel
+    nameWithType: LogLevel
+    fullName: Microsoft.Extensions.Logging.LogLevel
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithLogging(System.Func{System.IServiceProvider,System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})
+    name: WithLogging
+    nameWithType: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithLogging
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithLogging
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.ValueTuple`3
+    name: (T1, T2, T3)
+    nameWithType: (T1, T2, T3)
+    fullName: System.ValueTuple
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Logging.HttpTracerMode
+    name: HttpTracerMode
+    nameWithType: HttpTracerMode
+    fullName: Apizr.Logging.HttpTracerMode
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    nameWithType: HttpMessageParts
+    fullName: Apizr.Logging.HttpMessageParts
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.LogLevel
+    name: LogLevel
+    nameWithType: LogLevel
+    fullName: Microsoft.Extensions.Logging.LogLevel
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithLogging(System.Func{System.IServiceProvider,Apizr.Logging.HttpTracerMode},System.Func{System.IServiceProvider,Apizr.Logging.HttpMessageParts},System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]})
   commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithLogging(System.Func{System.IServiceProvider,Apizr.Logging.HttpTracerMode},System.Func{System.IServiceProvider,Apizr.Logging.HttpMessageParts},System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]})
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}

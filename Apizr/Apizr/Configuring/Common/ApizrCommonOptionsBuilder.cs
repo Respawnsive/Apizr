@@ -268,6 +268,13 @@ namespace Apizr.Configuring.Common
         }
 
         /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithLogging(
+            Func<(HttpTracerMode, HttpMessageParts, LogLevel[])> loggingConfigurationFactory)
+            => WithLogging(() => loggingConfigurationFactory.Invoke().Item1,
+                () => loggingConfigurationFactory.Invoke().Item2, 
+                () => loggingConfigurationFactory.Invoke().Item3);
+
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithContext(Func<Context> contextFactory,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
         {

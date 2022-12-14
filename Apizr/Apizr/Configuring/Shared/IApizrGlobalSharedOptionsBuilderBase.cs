@@ -35,7 +35,7 @@ namespace Apizr.Configuring.Shared
         TApizrOptionsBuilder WithHandlerParameter(string key, object value);
 
         /// <summary>
-        /// Configure logging level for the api
+        /// Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)
         /// </summary>
         /// <param name="httpTracerMode"></param>
         /// <param name="trafficVerbosity">Http traffic tracing verbosity (default: All)</param>

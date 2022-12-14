@@ -664,6 +664,9 @@
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLogging(System.Func{System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
@@ -1096,6 +1099,9 @@
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLogging(System.Func{System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggerFactory(Microsoft.Extensions.Logging.ILoggerFactory)">
             <inheritdoc />
         </member>
@@ -1310,6 +1316,9 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLogging(System.Func{System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Proper.IApizrExtendedProperOptionsBuilderBase">
@@ -1769,7 +1778,7 @@
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Request.ApizrRequestOptionsBuilder">
-            <inheritdoc />
+            <inheritdoc cref="T:Apizr.Configuring.Request.IApizrRequestOptionsBuilder" />
         </member>
         <member name="P:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.Apizr#Configuring#Request#IApizrRequestOptionsBuilder#ApizrOptions">
             <inheritdoc />
@@ -1967,7 +1976,7 @@
         </member>
         <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
             <summary>
-            Configure logging level for the api
+            Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)
             </summary>
             <param name="httpTracerMode"></param>
             <param name="trafficVerbosity">Http traffic tracing verbosity (default: All)</param>
@@ -2223,11 +2232,18 @@
         </member>
         <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})">
             <summary>
-            Configure logging level for the api
+            Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)
             </summary>
             <param name="httpTracerModeFactory">Http traffic tracing mode</param>
             <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
-            <param name="logLevelsFactory"></param>
+            <param name="logLevelsFactory">Log levels factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithLogging(System.Func{System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})">
+            <summary>
+            Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)
+            </summary>
+            <param name="loggingConfigurationFactory">Logging configuration factory</param>
             <returns></returns>
         </member>
         <member name="T:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilderBase">

@@ -24,9 +24,7 @@ You can adjust logging configuration with:
   - `Critical`
   - `None`
 
-You can configure logging either by attribute decoration or by fluent configuration.
-
-In both cases, logLevels is a parameter array. It lets you provide from 0 to 3 different levels, as Apizr needs to get corresponding log level to each internal severity:
+Note that parameter logLevels is an array. It lets you provide from 0 to 3 different levels, as Apizr needs to get corresponding log level to each internal severity:
 - Low: logs any internal and normal execution step
 - Medium: logs all missconfigured things, like asking for cache without providing any cache provider
 - High: logs errors and exceptions
@@ -41,9 +39,14 @@ It means that:
 - if you provide more than 3 log levels, the lowest goes to Low, the highest to High and it will take the middle one for Medium
 - if you provide a `None` at some point, it will disable logging for corresponding severity
 
-### [Attribute](#tab/tabid-attribute)
+You can configure logging at:
+- Design time by attribute decoration
+- Register time by fluent configuration
+- Request time by fluent configuration.
 
-You can set logging configuration thanks to `Log` attribute.
+### [Designing](#tab/tabid-designing)
+
+You can set logging configuration at design time, decorating with the provided `Log` attribute.
 Configuring logging with attribute allows you to use assembly scanning auto registration feature.
 
 The `Log` attribute could decorate:
@@ -59,10 +62,14 @@ and/or a specific to an api interface method.
 [assembly:Log]
 namespace Apizr.Sample
 {
-    [WebApi("https://reqres.in/")]
+    [WebApi("https://reqres.in/"), Log(HttpMessageParts.RequestAll, 
+        HttpTracerMode.ErrorsAndExceptionsOnly, 
+        LogLevel.Information)]
     public interface IReqResService
     {
-        [Get("/api/users")]
+        [Get("/api/users"), Log(HttpMessageParts.RequestBody, 
+            HttpTracerMode.ExceptionsOnly, 
+            LogLevel.Warning)]
         Task<UserList> GetUsersAsync();
 
         [Get("/api/users/{userId}")]
@@ -77,9 +84,9 @@ namespace Apizr.Sample
 In this example, we decided to apply the default logging configuration ([Low] `Trace`, [Medium] `Information` and [High] `Critical`) to all assembly api interfaces/entities. 
 But you can adjust logging configuration thanks to attribute parameters.
 
-### [Fluent](#tab/tabid-fluent)
+### [Registering](#tab/tabid-registering)
 
-Configuring the logging fluently allows you to set it dynamically (e.g. based on settings)
+Configuring the logging fluently at registration time allows you to set it dynamically (e.g. based on settings)
 
 You can set it thanks to this option:
 
@@ -87,17 +94,49 @@ You can set it thanks to this option:
 // direct configuration
 options => options.WithLogging(HttpTracerMode.Everything, HttpMessageParts.All, LogLevel.Information)
 
-// OR static factory configuration
+// OR static individual factory configuration
 options => options.WithLogging(() => Settings.HttpTracerMode, () => Settings.TrafficVerbosity, () => Settings.LogLevels)
 
-// OR extended factory configuration
+// OR static single factory configuration
+options => options.WithLogging(() => (Settings.HttpTracerMode, Settings.TrafficVerbosity, Settings.LogLevels))
+
+// OR extended individual factory configuration
 options => options.WithLogging(
     serviceProvider => serviceProvider.GetRequiredService<IYourSettingsService>().HttpTracerMode,
     serviceProvider => serviceProvider.GetRequiredService<IYourSettingsService>().TrafficVerbosity
     serviceProvider => serviceProvider.GetRequiredService<IYourSettingsService>().LogLevels)
+
+// OR extended single factory configuration
+options => options.WithLogging(servieProvider =>
+    {
+        var settings = servieProvider.GetRequiredService<IYourSettingsService>();
+        return (settings.HttpTracerMode, settings.TrafficVerbosity, settings.LogLevels);
+    });
 ```
 
 All logging fluent options are available with and without using registry. 
 It means that you can share logging configuration, setting it at registry level and/or set some specific one at api level.
 
+### [Requesting](#tab/tabid-requesting)
+
+Configuring the logging fluently at request time allows you to set it at the very end, just before sending the request.
+
+You can set it thanks to this option:
+
+```csharp
+// direct configuration
+options => options.WithLogging(HttpTracerMode.Everything, HttpMessageParts.All, LogLevel.Information)
+```
+
 ***
+
+Note that you can mix design, register and request time logging configurations.
+In case of mixed configurations, the internal duplicate strategy will be to take the closest one to the request.
+
+Logging configuration duplicate strategy order:
+- take fluent request configuration first if defined
+- otherwise the request attribute decoration one
+- otherwise the fluent proper resgistration one
+- otherwise the api attribute decoration one
+- otherwise the fluent common resgistration one
+- otherwise the global attribute decoration one

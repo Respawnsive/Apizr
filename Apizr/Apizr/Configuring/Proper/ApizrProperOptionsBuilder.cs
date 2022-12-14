@@ -244,5 +244,12 @@ namespace Apizr.Configuring.Proper
 
             return this;
         }
+
+        /// <inheritdoc />
+        public IApizrProperOptionsBuilder WithLogging(
+            Func<(HttpTracerMode, HttpMessageParts, LogLevel[])> loggingConfigurationFactory)
+            => WithLogging(() => loggingConfigurationFactory.Invoke().Item1,
+                () => loggingConfigurationFactory.Invoke().Item2,
+                () => loggingConfigurationFactory.Invoke().Item3);
     }
 }

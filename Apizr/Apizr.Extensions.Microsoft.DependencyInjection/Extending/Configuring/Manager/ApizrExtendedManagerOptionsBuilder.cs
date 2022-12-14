@@ -229,6 +229,13 @@ namespace Apizr.Extending.Configuring.Manager
             => WithLogging(_ => httpTracerMode, _ => trafficVerbosity, _ => logLevels);
 
         /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithLogging(
+            Func<IServiceProvider, (HttpTracerMode, HttpMessageParts, LogLevel[])> loggingConfigurationFactory)
+            => WithLogging(serviceProvider => loggingConfigurationFactory.Invoke(serviceProvider).Item1,
+                serviceProvider => loggingConfigurationFactory.Invoke(serviceProvider).Item2,
+                serviceProvider => loggingConfigurationFactory.Invoke(serviceProvider).Item3);
+
+        /// <inheritdoc />
         public IApizrExtendedManagerOptionsBuilder WithLogging(Func<IServiceProvider, HttpTracerMode> httpTracerModeFactory,
             Func<IServiceProvider, HttpMessageParts> trafficVerbosityFactory,
             Func<IServiceProvider, LogLevel[]> logLevelFactory)

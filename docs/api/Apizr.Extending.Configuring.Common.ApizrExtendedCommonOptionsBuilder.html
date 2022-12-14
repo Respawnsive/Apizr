@@ -1546,7 +1546,7 @@
   
   <a id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithLogging_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithLogging*"></a>
   <h4 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithLogging_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel___" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">WithLogging(HttpTracerMode, HttpMessageParts, LogLevel[])</h4>
-  <div class="markdown level1 summary"><p>Configure logging level for the api</p>
+  <div class="markdown level1 summary"><p>Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1601,7 +1601,7 @@
   
   <a id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithLogging_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithLogging*"></a>
   <h4 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithLogging_System_Func_System_IServiceProvider_Apizr_Logging_HttpTracerMode__System_Func_System_IServiceProvider_Apizr_Logging_HttpMessageParts__System_Func_System_IServiceProvider_Microsoft_Extensions_Logging_LogLevel____" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithLogging(System.Func{System.IServiceProvider,Apizr.Logging.HttpTracerMode},System.Func{System.IServiceProvider,Apizr.Logging.HttpMessageParts},System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]})">WithLogging(Func&lt;IServiceProvider, HttpTracerMode&gt;, Func&lt;IServiceProvider, HttpMessageParts&gt;, Func&lt;IServiceProvider, LogLevel[]&gt;)</h4>
-  <div class="markdown level1 summary"><p>Define http traffic tracing verbosity and log level (could be defined with TraceAttribute)</p>
+  <div class="markdown level1 summary"><p>Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1634,6 +1634,50 @@
         <td><span class="xref">System.Func</span>&lt;<span class="xref">System.IServiceProvider</span>, <span class="xref">Microsoft.Extensions.Logging.LogLevel</span>[]&gt;</td>
         <td><span class="parametername">logLevelsFactory</span></td>
         <td><p>Log levels factory</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder.html">IApizrExtendedCommonOptionsBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithLogging_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithLogging*"></a>
+  <h4 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithLogging_System_Func_System_IServiceProvider_System_ValueTuple_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel_____" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithLogging(System.Func{System.IServiceProvider,System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})">WithLogging(Func&lt;IServiceProvider, (HttpTracerMode, HttpMessageParts, LogLevel[])&gt;)</h4>
+  <div class="markdown level1 summary"><p>Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrExtendedCommonOptionsBuilder WithLogging(Func&lt;IServiceProvider, (HttpTracerMode, HttpMessageParts, LogLevel[])&gt; loggingConfigurationFactory)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.IServiceProvider</span>, <span class="xref">System.ValueTuple</span>&lt;<a class="xref" href="Apizr.Logging.HttpTracerMode.html">HttpTracerMode</a>, <a class="xref" href="Apizr.Logging.HttpMessageParts.html">HttpMessageParts</a>, <span class="xref">Microsoft.Extensions.Logging.LogLevel</span>[]&gt;&gt;</td>
+        <td><span class="parametername">loggingConfigurationFactory</span></td>
+        <td><p>Logging configuration factory</p>
 </td>
       </tr>
     </tbody>

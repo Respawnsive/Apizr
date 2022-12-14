@@ -126,13 +126,20 @@ namespace Apizr.Configuring.Shared
         TApizrOptionsBuilder AddDelegatingHandler(Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler> delegatingHandlerFactory);
 
         /// <summary>
-        /// Configure logging level for the api
+        /// Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)
         /// </summary>
         /// <param name="httpTracerModeFactory">Http traffic tracing mode</param>
         /// <param name="trafficVerbosityFactory">Http traffic tracing verbosity factory</param>
-        /// <param name="logLevelsFactory"></param>
+        /// <param name="logLevelsFactory">Log levels factory</param>
         /// <returns></returns>
         TApizrOptionsBuilder WithLogging(Func<HttpTracerMode> httpTracerModeFactory,
             Func<HttpMessageParts> trafficVerbosityFactory, Func<LogLevel[]> logLevelsFactory);
+
+        /// <summary>
+        /// Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)
+        /// </summary>
+        /// <param name="loggingConfigurationFactory">Logging configuration factory</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithLogging(Func<(HttpTracerMode, HttpMessageParts, LogLevel[])> loggingConfigurationFactory);
     }
 }

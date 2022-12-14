@@ -308,6 +308,13 @@ namespace Apizr.Configuring.Manager
         }
 
         /// <inheritdoc />
+        public IApizrManagerOptionsBuilder WithLogging(
+            Func<(HttpTracerMode, HttpMessageParts, LogLevel[])> loggingConfigurationFactory)
+            => WithLogging(() => loggingConfigurationFactory.Invoke().Item1,
+                () => loggingConfigurationFactory.Invoke().Item2,
+                () => loggingConfigurationFactory.Invoke().Item3);
+
+        /// <inheritdoc />
         public IApizrManagerOptionsBuilder WithLoggerFactory(ILoggerFactory loggerFactory)
             => WithLoggerFactory(() => loggerFactory);
 

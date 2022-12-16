@@ -27,21 +27,93 @@ if(users != null)
 We catch any ApizrException as it will contain the original inner exception, but also the previously cached result if some.
 If you provided an IConnectivityHandler implementation and there's no network connectivity before sending request, Apizr will throw an IO inner exception without sending the request.
 
-### Using `Action<Exception> onException`
+### Using `Action<Exception>`
 
-Instead of trycatching all the things, you may want to provide an exception handling action on call, thanks to `Action<Exception> onException` optional parameter.
+Instead of trycatching all the things, you may want to provide an exception handling action, thanks to `WithExCatching` builder option, available at both register and request time.
 
-Something like:
+You can set it thanks to this option:
+
 ```csharp
-reqResManager.ExecuteAsync(api => api.GetUsersAsync(), clearCache: false, onException: OnGetUsersException);
+// direct configuration
+options => options.WithExCatching(OnException)
+```
 
-...
+### [Registering](#tab/tabid-registering)
 
-private void OnGetUsersException(Exception ex)
+Configuring an exception handler at register time allows you to get some Global Exception Handling concepts right in place.
+
+`WithExCatching` builder option is available with or without using registry.
+It means that you can share your exception handler globally by setting it at registry level and/or set some specific one at api level.
+
+Here is a pretty complexe scenario:
+```csharp
+var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+        .AddGroup(group => group
+                .AddManagerFor<IReqResUserService>(options => options
+                    .WithExCatching(OnReqResUserException, strategy: ApizrDuplicateStrategy.Add)
+                    .AddDelegatingHandler(new FailingRequestHandler()))
+                .AddManagerFor<IReqResResourceService>(),
+            options => options.WithExCatching(OnReqResException, strategy: ApizrDuplicateStrategy.Add))
+        .AddManagerFor<IHttpBinService>()
+        .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(),
+    options => options.WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add));
+
+private void OnException(ApizrException ex)
 {
-    ...
+    // this is a global exception handler 
+    // called back in case of exception thrown 
+    // while requesting with any managed api from the registry
+}
+private void OnReqResException(ApizrException ex)
+{
+    // this is a group exception handler 
+    // called back in case of exception thrown 
+    // while requesting with any managed api from the group
+}
+private void OnReqResUserException(ApizrException ex)
+{
+    // this is a dedicated exception handler 
+    // called back in case of exception thrown 
+    // while requesting with a specific managed api
 }
 ```
+
+Here I'm telling Apizr to:
+- Call back all exception handlers in case of any exception thrown while requesting with ```IReqResUserService``` api
+- Call back ```OnReqResException``` and ```OnException``` handlers in case of any exception thrown while requesting with ```IReqResResourceService``` api
+- Call back only ```OnException``` handler in case of any exception thrown while requesting with ```IHttpBinService``` api or ```User``` CRUD api
+
+Feel free to configure your exception handlers at the level of your choice, depending on your needs.
+You definitly can mix it all with request option exception handling.
+
+### [Requesting](#tab/tabid-requesting)
+
+Configuring an exception handler at request time allows you to set it at the very end, just before sending the request, like trycatching does.
+
+```csharp
+var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
+
+reqResManager.ExecuteAsync(api => api.GetUsersAsync(), options => options.WithExCatching(OnGetUsersException));
+
+private void OnGetUsersException(ApizrException ex)
+{
+    // this is a dedicated exception handler 
+    // called back in case of exception thrown 
+    // while requesting with a specific managed api
+}
+```
+
+You definitly can mix it with registration option exception handling.
+
+***
+
+You may notice that:
+- ```strategy``` parameter let you adjust the behavior in case of mixing (default: ```Replace```):
+  - ```Ignore```: if there's another handler yet configured, ignore this one
+  - ```Add```: add/queue this handler, no matter of yet configured ones
+  - ```Replace```: replace all yet configured handlers by this one
+  - ```Merge```: add/queue this handler, no matter of yet configured ones
+- ```letThrowOnExceptionWithEmptyCache``` parameter tells Apizr to throw the actual exception if there's no cached data to return
 
 ### Using `Optional.Async`
 

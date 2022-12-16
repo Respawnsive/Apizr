@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring;
 using Apizr.Configuring.Registry;
 using Apizr.Logging;
 using Apizr.Policing;
@@ -551,6 +552,52 @@ namespace Apizr.Tests
             watcher.Options.Should().NotBeNull();
             watcher.Options.TrafficVerbosity.Should().Be(HttpMessageParts.RequestCookies);
             watcher.Options.HttpTracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
+        }
+
+        [Fact]
+        public async Task Configuring_Exceptions_Handler_Should_Handle_Exceptions()
+        {
+            var handledException = 0;
+            void OnException(ApizrException ex)
+            {
+                handledException++;
+            }
+
+            // Try to queue ex handlers
+            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                    .AddGroup(group => group
+                            .AddManagerFor<IReqResUserService>(options => options
+                                .WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add)
+                                .AddDelegatingHandler(new FailingRequestHandler()))
+                            .AddManagerFor<IReqResResourceService>(),
+                        options => options.WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add))
+                    .AddManagerFor<IHttpBinService>()
+                    .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(),
+                options => options.WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add));
+
+
+            var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
+
+            // Defining a transient throwing request
+            Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.RequestTimeout),
+                options => options.WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add));
+
+            // Calling it should throw but handled by Polly
+            await act.Should().ThrowAsync<ApizrException>();
+            
+            handledException.Should().Be(4);
+
+            // Try to replace queued ex handlers by the last one set at request time
+            handledException = 0;
+
+            // Defining a transient throwing request
+            act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.RequestTimeout),
+                options => options.WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Replace));
+
+            // Calling it should throw but handled by Polly
+            await act.Should().ThrowAsync<ApizrException>();
+
+            handledException.Should().Be(1);
         }
     }
 }

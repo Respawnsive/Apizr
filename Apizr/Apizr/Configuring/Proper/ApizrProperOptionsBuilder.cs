@@ -222,6 +222,13 @@ namespace Apizr.Configuring.Proper
         }
 
         /// <inheritdoc />
+        public IApizrProperOptionsBuilder WithExCatching<TResult>(Action<ApizrException<TResult>> onException,
+            bool letThrowOnExceptionWithEmptyCache = true,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+            => WithExCatching(ex => onException.Invoke((ApizrException<TResult>)ex), letThrowOnExceptionWithEmptyCache,
+                strategy);
+
+        /// <inheritdoc />
         public IApizrProperOptionsBuilder WithHandlerParameter(string key, object value)
         {
             Options.HandlersParameters[key] = value;

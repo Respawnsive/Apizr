@@ -244,6 +244,13 @@ namespace Apizr.Configuring.Common
         }
 
         /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithExCatching<TResult>(Action<ApizrException<TResult>> onException,
+            bool letThrowOnExceptionWithEmptyCache = true,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+            => WithExCatching(ex => onException.Invoke((ApizrException<TResult>) ex), letThrowOnExceptionWithEmptyCache,
+                strategy);
+
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithHandlerParameter(string key, object value)
         {
             Options.HandlersParameters[key] = value;

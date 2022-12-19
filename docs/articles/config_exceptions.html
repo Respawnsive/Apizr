@@ -118,12 +118,21 @@ options =&gt; options.WithExCatching(OnException)
 <p>Configuring an exception handler at register time allows you to get some Global Exception Handling concepts right in place.</p>
 <p><code>WithExCatching</code> builder option is available with or without using registry.
 It means that you can share your exception handler globally by setting it at registry level and/or set some specific one at api level.</p>
-<p>Here is a pretty complexe scenario:</p>
+<p>Here is a quite simple scenario:</p>
+<pre><code class="lang-csharp">var reqResUserManager = ApizrBuilder.CreateManagerFor&lt;IReqResUserService&gt;(options =&gt; options
+                    .WithExCatching(OnException));
+
+private void OnException(ApizrException ex)
+{
+    // this is a global exception handler 
+    // called back in case of exception thrown 
+    // while requesting with IReqResUserService managed api
+}
+</code></pre><p>And here is a pretty complexe scenario:</p>
 <pre><code class="lang-csharp">var apizrRegistry = ApizrBuilder.CreateRegistry(registry =&gt; registry
         .AddGroup(group =&gt; group
                 .AddManagerFor&lt;IReqResUserService&gt;(options =&gt; options
-                    .WithExCatching(OnReqResUserException, strategy: ApizrDuplicateStrategy.Add)
-                    .AddDelegatingHandler(new FailingRequestHandler()))
+                    .WithExCatching(OnReqResUserException, strategy: ApizrDuplicateStrategy.Add))
                 .AddManagerFor&lt;IReqResResourceService&gt;(),
             options =&gt; options.WithExCatching(OnReqResException, strategy: ApizrDuplicateStrategy.Add))
         .AddManagerFor&lt;IHttpBinService&gt;()
@@ -161,15 +170,23 @@ You definitly can mix it all with request option exception handling.</p>
 <p>Configuring an exception handler at request time allows you to set it at the very end, just before sending the request, like trycatching does.</p>
 <pre><code class="lang-csharp">var reqResManager = apizrRegistry.GetManagerFor&lt;IReqResUserService&gt;();
 
-reqResManager.ExecuteAsync(api =&gt; api.GetUsersAsync(), options =&gt; options.WithExCatching(OnGetUsersException));
+var users = await reqResManager.ExecuteAsync(api =&gt; api.GetUsersAsync(), options =&gt; 
+    options.WithExCatching(OnGetUsersException, 
+        strategy: ApizrDuplicateStrategy.Add));
 
-private void OnGetUsersException(ApizrException ex)
+private void OnGetUsersException(ApizrException&lt;ApiResult&lt;User&gt;&gt; ex)
 {
     // this is a dedicated exception handler 
     // called back in case of exception thrown 
     // while requesting with a specific managed api
 }
-</code></pre><p>You definitly can mix it with registration option exception handling.</p>
+</code></pre><p>Here I&#39;m telling Apizr in case of exception while resting to:</p>
+<ul>
+<li>Call back any other registered exception handlers if any, thanks to <code>Add</code> duplicate strategy</li>
+<li>Call back <code>OnGetUsersException</code> (e.g. to display a dedicated message or something)</li>
+<li>Return result from cache to <code>users</code> if any</li>
+</ul>
+<p>You definitly can mix it with registration option exception handling.</p>
 </section>
 </div>
 <p>You may notice that:</p>

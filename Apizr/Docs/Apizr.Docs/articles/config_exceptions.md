@@ -45,13 +45,25 @@ Configuring an exception handler at register time allows you to get some Global 
 `WithExCatching` builder option is available with or without using registry.
 It means that you can share your exception handler globally by setting it at registry level and/or set some specific one at api level.
 
-Here is a pretty complexe scenario:
+Here is a quite simple scenario:
+```csharp
+var reqResUserManager = ApizrBuilder.CreateManagerFor<IReqResUserService>(options => options
+                    .WithExCatching(OnException));
+
+private void OnException(ApizrException ex)
+{
+    // this is a global exception handler 
+    // called back in case of exception thrown 
+    // while requesting with IReqResUserService managed api
+}
+```
+
+And here is a pretty complexe scenario:
 ```csharp
 var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
         .AddGroup(group => group
                 .AddManagerFor<IReqResUserService>(options => options
-                    .WithExCatching(OnReqResUserException, strategy: ApizrDuplicateStrategy.Add)
-                    .AddDelegatingHandler(new FailingRequestHandler()))
+                    .WithExCatching(OnReqResUserException, strategy: ApizrDuplicateStrategy.Add))
                 .AddManagerFor<IReqResResourceService>(),
             options => options.WithExCatching(OnReqResException, strategy: ApizrDuplicateStrategy.Add))
         .AddManagerFor<IHttpBinService>()
@@ -93,15 +105,22 @@ Configuring an exception handler at request time allows you to set it at the ver
 ```csharp
 var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
 
-reqResManager.ExecuteAsync(api => api.GetUsersAsync(), options => options.WithExCatching(OnGetUsersException));
+var users = await reqResManager.ExecuteAsync(api => api.GetUsersAsync(), options => 
+    options.WithExCatching(OnGetUsersException, 
+        strategy: ApizrDuplicateStrategy.Add));
 
-private void OnGetUsersException(ApizrException ex)
+private void OnGetUsersException(ApizrException<ApiResult<User>> ex)
 {
     // this is a dedicated exception handler 
     // called back in case of exception thrown 
     // while requesting with a specific managed api
 }
 ```
+
+Here I'm telling Apizr in case of exception while resting to:
+- Call back any other registered exception handlers if any, thanks to ```Add``` duplicate strategy
+- Call back ```OnGetUsersException``` (e.g. to display a dedicated message or something)
+- Return result from cache to ```users``` if any
 
 You definitly can mix it with registration option exception handling.
 

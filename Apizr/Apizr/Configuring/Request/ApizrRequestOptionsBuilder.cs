@@ -114,6 +114,13 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder
     }
 
     /// <inheritdoc />
+    public IApizrRequestOptionsBuilder WithExCatching<TResult>(Action<ApizrException<TResult>> onException, bool letThrowOnExceptionWithEmptyCache = true,
+        ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <inheritdoc />
     public IApizrRequestOptionsBuilder WithHandlerParameter(string key, object value)
     {
         Options.HandlersParameters[key] = value;

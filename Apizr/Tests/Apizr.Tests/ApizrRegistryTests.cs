@@ -599,5 +599,21 @@ namespace Apizr.Tests
 
             handledException.Should().Be(1);
         }
+
+        [Fact]
+        public async Task Requesting_With_CancellationToken_Into_Options_Should_Cancel_Request_When_Asked()
+        {
+            var watcher = new WatchingRequestHandler();
+
+            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry.AddManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher)));
+            var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
+
+            var cts = new CancellationTokenSource(3000);
+            Func<Task> act = () => reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
+                options => options.WithCancellation(cts.Token));
+            
+            var res = await act.Should().ThrowAsync<ApizrException>();
+            res.WithInnerException<TaskCanceledException>();
+        }
     }
 }

@@ -114,11 +114,11 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder
     }
 
     /// <inheritdoc />
-    public IApizrRequestOptionsBuilder WithExCatching<TResult>(Action<ApizrException<TResult>> onException, bool letThrowOnExceptionWithEmptyCache = true,
+    public IApizrRequestOptionsBuilder WithExCatching<TResult>(Action<ApizrException<TResult>> onException,
+        bool letThrowOnExceptionWithEmptyCache = true,
         ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
-    {
-        throw new NotImplementedException();
-    }
+        => WithExCatching(ex => onException.Invoke((ApizrException<TResult>)ex), letThrowOnExceptionWithEmptyCache,
+            strategy);
 
     /// <inheritdoc />
     public IApizrRequestOptionsBuilder WithHandlerParameter(string key, object value)

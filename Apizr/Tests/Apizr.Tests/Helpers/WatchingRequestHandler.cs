@@ -15,12 +15,15 @@ namespace Apizr.Tests.Helpers
 
 
         /// <inheritdoc />
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             Context = request.GetApizrPolicyExecutionContext();
             Options = request.GetApizrRequestOptions();
 
-            return base.SendAsync(request, cancellationToken);
+            if (Options.CancellationToken != cancellationToken)
+                await Task.Delay(5000, cancellationToken);
+
+            return await base.SendAsync(request, cancellationToken);
         }
     }
 }

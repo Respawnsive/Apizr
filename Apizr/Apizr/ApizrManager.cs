@@ -184,6 +184,8 @@ namespace Apizr
 
             try
             {
+                requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
                 if (!_connectivityHandler.IsConnected())
                 {
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Medium(),
@@ -206,8 +208,10 @@ namespace Apizr
                 var pollyContext = new Context(methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.Context ?? new Context());
                 pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels, requestOptionsBuilder.ApizrOptions.TrafficVerbosity, requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                 requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
-                await policy.ExecuteAsync((_, _) => executeApiMethod.Compile()(requestOptionsBuilder.ApizrOptions, webApi, apiData),
-                    requestOptionsBuilder.ApizrOptions.Context, requestOptionsBuilder.ApizrOptions.CancellationToken);
+
+                requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                await policy.ExecuteAsync(options => executeApiMethod.Compile()(options, webApi, apiData), requestOptionsBuilder);
             }
             catch (Exception e)
             {
@@ -307,6 +311,8 @@ namespace Apizr
                 Exception ex = null;
                 try
                 {
+                    requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
                     if (!_connectivityHandler.IsConnected())
                     {
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Medium(),
@@ -325,8 +331,10 @@ namespace Apizr
                     var pollyContext = new Context(methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.Context ?? new Context());
                     pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels, requestOptionsBuilder.ApizrOptions.TrafficVerbosity, requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                     requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
-                    result = await policy.ExecuteAsync((_, _) => executeApiMethod.Compile()(requestOptionsBuilder.ApizrOptions, webApi),
-                        requestOptionsBuilder.ApizrOptions.Context, requestOptionsBuilder.ApizrOptions.CancellationToken);
+
+                    requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                    result = await policy.ExecuteAsync(options => executeApiMethod.Compile()(options, webApi), requestOptionsBuilder);
                 }
                 catch (Exception e)
                 {
@@ -428,6 +436,8 @@ namespace Apizr
                 Exception ex = null;
                 try
                 {
+                    requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
                     if (!_connectivityHandler.IsConnected())
                     {
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Medium(),
@@ -450,10 +460,10 @@ namespace Apizr
                     var pollyContext = new Context(methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.Context ?? new Context());
                     pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels, requestOptionsBuilder.ApizrOptions.TrafficVerbosity, requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                     requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
-                    result = await policy.ExecuteAsync(
-                        (_, _) => executeApiMethod.Compile()(requestOptionsBuilder.ApizrOptions, webApi,
-                            apiRequestData), requestOptionsBuilder.ApizrOptions.Context,
-                        requestOptionsBuilder.ApizrOptions.CancellationToken);
+
+                    requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                    result = await policy.ExecuteAsync(options => executeApiMethod.Compile()(options, webApi, apiRequestData), requestOptionsBuilder); ;
                 }
                 catch (Exception e)
                 {
@@ -554,6 +564,8 @@ namespace Apizr
                 Exception ex = null;
                 try
                 {
+                    requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
                     if (!_connectivityHandler.IsConnected())
                     {
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Medium(),
@@ -576,9 +588,10 @@ namespace Apizr
                     var pollyContext = new Context(methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.Context ?? new Context());
                     pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels, requestOptionsBuilder.ApizrOptions.TrafficVerbosity, requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                     requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
-                    result = await policy.ExecuteAsync(
-                        (_, _) => executeApiMethod.Compile()(requestOptionsBuilder.ApizrOptions, webApi, apiData), requestOptionsBuilder.ApizrOptions.Context,
-                        requestOptionsBuilder.ApizrOptions.CancellationToken);
+
+                    requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                    result = await policy.ExecuteAsync(options => executeApiMethod.Compile()(options, webApi, apiData), requestOptionsBuilder);
                 }
                 catch (Exception e)
                 {
@@ -678,6 +691,8 @@ namespace Apizr
                 Exception ex = null;
                 try
                 {
+                    requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
                     if (!_connectivityHandler.IsConnected())
                     {
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Medium(),
@@ -696,9 +711,10 @@ namespace Apizr
                     var pollyContext = new Context(methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.Context ?? new Context());
                     pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels, requestOptionsBuilder.ApizrOptions.TrafficVerbosity, requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                     requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
-                    result = await policy.ExecuteAsync(
-                        (_, _) => executeApiMethod.Compile()(requestOptionsBuilder.ApizrOptions, webApi), requestOptionsBuilder.ApizrOptions.Context,
-                        requestOptionsBuilder.ApizrOptions.CancellationToken);
+
+                    requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                    result = await policy.ExecuteAsync(options => executeApiMethod.Compile()(options, webApi), requestOptionsBuilder);
                 }
                 catch (Exception e)
                 {

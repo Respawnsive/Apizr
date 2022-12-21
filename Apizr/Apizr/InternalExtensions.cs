@@ -35,7 +35,8 @@ namespace Apizr
             ILogger logger, IApizrManagerOptionsBase options)
         {
             var innerHandler = httpHandlerBuilder.Build();
-            return _primaryHandlerFactory?.Invoke(innerHandler, logger, options) ?? innerHandler;
+            var primaryHandler = _primaryHandlerFactory?.Invoke(innerHandler, logger, options) ?? innerHandler;
+            return new ApizrHttpMessageHandler(primaryHandler);
         }
 
         #endregion

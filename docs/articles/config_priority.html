@@ -106,19 +106,20 @@
 </tr>
 </tbody>
 </table>
-<p>Then you&#39;ll be able to register with this option:</p>
+<p>Then you&#39;ll be able to register with this option (extension method):</p>
 <pre><code class="lang-csharp">options =&gt; options.WithPriorityManagement()
 </code></pre><h3 id="defining">Defining</h3>
-<p>While defining your api interfaces using Apizr to send a request, you can add an int property param decorated with the provided Property attribute to your methods like:</p>
+<p>While defining your api interfaces using Apizr to send a request, you can add an <code>IApizrRequestOptions</code> param decorated with the provided <code>RequestOptions</code> attribute to your methods like:</p>
 <pre><code class="lang-csharp">[WebApi(&quot;https://reqres.in/api&quot;)]
 public interface IReqResService
 {
     [Get(&quot;/users&quot;)]
-    Task&lt;UserList&gt; GetUsersAsync([Priority] int priority);
+    Task&lt;UserList&gt; GetUsersAsync([RequestOptions] IApizrRequestOptions options);
 }
 </code></pre><h3 id="using">Using</h3>
-<p>Just call your api with your priority:</p>
-<pre><code class="lang-csharp">var result = await _reqResManager.ExecuteAsync(api =&gt; api.GetUsersAsync((int)Priority.Background));
+<p>Just call your api with your priority thanks to the request options builder (extension method):</p>
+<pre><code class="lang-csharp">var result = await _reqResManager.ExecuteAsync((options, api) =&gt; api.GetUsersAsync(options), 
+    options =&gt; options.WithPriority(Priority.Background));
 </code></pre></article>
           </div>
           

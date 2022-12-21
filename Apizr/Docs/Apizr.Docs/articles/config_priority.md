@@ -19,7 +19,7 @@ Please first install this integration package:
 |-------|-----|-----|
 |Apizr.Integrations.Fusillade|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Fusillade.svg)](https://www.nuget.org/packages/Apizr.Integrations.Fusillade/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.Fusillade.svg)](https://www.nuget.org/packages/Apizr.Integrations.Fusillade/)|
 
-Then you'll be able to register with this option:
+Then you'll be able to register with this option (extension method):
 
 ```csharp
 options => options.WithPriorityManagement()
@@ -27,21 +27,22 @@ options => options.WithPriorityManagement()
 
 ### Defining
 
-While defining your api interfaces using Apizr to send a request, you can add an int property param decorated with the provided Property attribute to your methods like:
+While defining your api interfaces using Apizr to send a request, you can add an `IApizrRequestOptions` param decorated with the provided `RequestOptions` attribute to your methods like:
 
 ```csharp
 [WebApi("https://reqres.in/api")]
 public interface IReqResService
 {
     [Get("/users")]
-    Task<UserList> GetUsersAsync([Priority] int priority);
+    Task<UserList> GetUsersAsync([RequestOptions] IApizrRequestOptions options);
 }
 ```
 
 ### Using
 
-Just call your api with your priority:
+Just call your api with your priority thanks to the request options builder (extension method):
 
 ```csharp
-var result = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.Background));
+var result = await _reqResManager.ExecuteAsync((options, api) => api.GetUsersAsync(options), 
+    options => options.WithPriority(Priority.Background));
 ```

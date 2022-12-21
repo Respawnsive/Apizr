@@ -277,7 +277,7 @@ Anyway, sometime we need to clear it explicitly, like in a Refresh scenario.
 Here are different ways to clear cache:
 ```csharp
 // Clear on call to force fetch and update cache
-var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(), true);
+var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(), options => options.WithCacheClearing(true));
 
 // Clear a specific request cache
 var succeed = await _reqResManager.ClearCacheAsync(api => api.GetUsersAsync());

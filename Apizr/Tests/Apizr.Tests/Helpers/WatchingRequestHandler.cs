@@ -20,7 +20,7 @@ namespace Apizr.Tests.Helpers
             Context = request.GetApizrPolicyExecutionContext();
             Options = request.GetApizrRequestOptions();
 
-            if (Options.CancellationToken != cancellationToken)
+            if (Options.CancellationToken != CancellationToken.None)
                 await Task.Delay(5000, cancellationToken);
 
             return await base.SendAsync(request, cancellationToken);

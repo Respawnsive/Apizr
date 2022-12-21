@@ -105,9 +105,8 @@ Configuring an exception handler at request time allows you to set it at the ver
 ```csharp
 var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
 
-var users = await reqResManager.ExecuteAsync(api => api.GetUsersAsync(), options => 
-    options.WithExCatching(OnGetUsersException, 
-        strategy: ApizrDuplicateStrategy.Add));
+var users = await reqResManager.ExecuteAsync((options, api) => api.GetUsersAsync(options), options => 
+    options.WithExCatching(OnGetUsersException, strategy: ApizrDuplicateStrategy.Add));
 
 private void OnGetUsersException(ApizrException<ApiResult<User>> ex)
 {

@@ -170,9 +170,8 @@ You definitly can mix it all with request option exception handling.</p>
 <p>Configuring an exception handler at request time allows you to set it at the very end, just before sending the request, like trycatching does.</p>
 <pre><code class="lang-csharp">var reqResManager = apizrRegistry.GetManagerFor&lt;IReqResUserService&gt;();
 
-var users = await reqResManager.ExecuteAsync(api =&gt; api.GetUsersAsync(), options =&gt; 
-    options.WithExCatching(OnGetUsersException, 
-        strategy: ApizrDuplicateStrategy.Add));
+var users = await reqResManager.ExecuteAsync((options, api) =&gt; api.GetUsersAsync(options), options =&gt; 
+    options.WithExCatching(OnGetUsersException, strategy: ApizrDuplicateStrategy.Add));
 
 private void OnGetUsersException(ApizrException&lt;ApiResult&lt;User&gt;&gt; ex)
 {

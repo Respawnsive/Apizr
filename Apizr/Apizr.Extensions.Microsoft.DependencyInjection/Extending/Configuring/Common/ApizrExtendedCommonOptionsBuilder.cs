@@ -21,7 +21,7 @@ namespace Apizr.Extending.Configuring.Common
     /// <summary>
     /// Builder options available at common level for extended registration
     /// </summary>
-    public class ApizrExtendedCommonOptionsBuilder : IApizrExtendedCommonOptionsBuilder, IApizrGlobalSharedVoidOptionsBuilderBase
+    public class ApizrExtendedCommonOptionsBuilder : IApizrExtendedCommonOptionsBuilder, IApizrVoidOptionsBuilderBase
     {
         protected readonly ApizrExtendedCommonOptions Options;
 

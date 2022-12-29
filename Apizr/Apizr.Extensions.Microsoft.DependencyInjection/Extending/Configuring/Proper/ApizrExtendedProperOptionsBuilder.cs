@@ -17,7 +17,7 @@ namespace Apizr.Extending.Configuring.Proper
     /// <summary>
     /// Builder options available at proper level for extended registrations
     /// </summary>
-    public class ApizrExtendedProperOptionsBuilder : IApizrExtendedProperOptionsBuilder, IApizrGlobalSharedVoidOptionsBuilderBase
+    public class ApizrExtendedProperOptionsBuilder : IApizrExtendedProperOptionsBuilder, IApizrVoidOptionsBuilderBase
     {
         protected readonly ApizrExtendedProperOptions Options;
 

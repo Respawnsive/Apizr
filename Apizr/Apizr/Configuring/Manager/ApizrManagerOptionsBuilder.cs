@@ -20,7 +20,7 @@ namespace Apizr.Configuring.Manager
     /// <summary>
     /// Builder options available for static registrations
     /// </summary>
-    public class ApizrManagerOptionsBuilder : IApizrManagerOptionsBuilder, IApizrGlobalSharedVoidOptionsBuilderBase
+    public class ApizrManagerOptionsBuilder : IApizrManagerOptionsBuilder, IApizrVoidOptionsBuilderBase
     {
         /// <summary>
         /// The options

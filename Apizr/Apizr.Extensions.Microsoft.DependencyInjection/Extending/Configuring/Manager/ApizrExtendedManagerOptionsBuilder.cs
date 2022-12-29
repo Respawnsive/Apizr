@@ -21,7 +21,7 @@ namespace Apizr.Extending.Configuring.Manager
     /// <summary>
     /// Builder options available for extended registrations
     /// </summary>
-    public class ApizrExtendedManagerOptionsBuilder : IApizrExtendedManagerOptionsBuilder, IApizrGlobalSharedVoidOptionsBuilderBase
+    public class ApizrExtendedManagerOptionsBuilder : IApizrExtendedManagerOptionsBuilder, IApizrVoidOptionsBuilderBase
     {
         protected readonly ApizrExtendedManagerOptions Options;
 

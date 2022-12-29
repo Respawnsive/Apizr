@@ -15,7 +15,7 @@ namespace Apizr.Configuring.Proper
     /// <summary>
     /// Builder options available at proper level for static registrations
     /// </summary>
-    public class ApizrProperOptionsBuilder : IApizrProperOptionsBuilder, IApizrGlobalSharedVoidOptionsBuilderBase
+    public class ApizrProperOptionsBuilder : IApizrProperOptionsBuilder, IApizrVoidOptionsBuilderBase
     {
         /// <summary>
         /// The proper options

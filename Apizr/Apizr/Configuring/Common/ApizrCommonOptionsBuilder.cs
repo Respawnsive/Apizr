@@ -20,7 +20,7 @@ namespace Apizr.Configuring.Common
     /// <summary>
     /// Builder options available at common level for static registrations
     /// </summary>
-    public class ApizrCommonOptionsBuilder : IApizrCommonOptionsBuilder, IApizrGlobalSharedVoidOptionsBuilderBase
+    public class ApizrCommonOptionsBuilder : IApizrCommonOptionsBuilder, IApizrVoidOptionsBuilderBase
     {
         /// <summary>
         /// The common options

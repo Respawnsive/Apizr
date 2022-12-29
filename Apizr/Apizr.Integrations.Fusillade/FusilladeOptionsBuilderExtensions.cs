@@ -17,7 +17,7 @@ namespace Apizr
         /// <param name="builder"></param>
         /// <returns></returns>
         public static T WithPriority<T>(this T builder)
-            where T : IApizrGlobalCommonOptionsBuilderBase
+            where T : IApizrGlobalSharedRegistrationOptionsBuilderBase
         {
             builder.SetPrimaryHttpMessageHandler((innerHandler, logger, options) =>
                 new PriorityHttpMessageHandler(innerHandler, logger, options));
@@ -43,7 +43,6 @@ namespace Apizr
         /// <param name="builder"></param>
         /// <param name="priority"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidCastException"></exception>
         public static T WithPriority<T>(this T builder, int priority)
             where T : IApizrGlobalSharedOptionsBuilderBase
         {
@@ -51,7 +50,7 @@ namespace Apizr
                 commonBuilder.SetPrimaryHttpMessageHandler((innerHandler, logger, options) =>
                     new PriorityHttpMessageHandler(innerHandler, logger, options));
 
-            if (builder is IApizrGlobalSharedVoidOptionsBuilderBase voidBuilder)
+            if (builder is IApizrVoidOptionsBuilderBase voidBuilder)
                 voidBuilder.SetHandlerParameter(Constants.PriorityKey, priority);
 
             return builder;

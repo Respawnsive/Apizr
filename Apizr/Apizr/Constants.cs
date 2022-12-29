@@ -1,5 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Runtime.CompilerServices;
+using Microsoft.Extensions.Logging;
 
+
+[assembly: InternalsVisibleTo("Apizr.Tests")]
 namespace Apizr
 {
     internal static class Constants

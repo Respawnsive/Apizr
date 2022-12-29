@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Configuring;
 using Apizr.Configuring.Manager;
+using Apizr.Configuring.Shared;
 using Apizr.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -16,7 +17,7 @@ namespace Apizr.Extending.Configuring.Proper
     /// <summary>
     /// Builder options available at proper level for extended registrations
     /// </summary>
-    public class ApizrExtendedProperOptionsBuilder : IApizrExtendedProperOptionsBuilder
+    public class ApizrExtendedProperOptionsBuilder : IApizrExtendedProperOptionsBuilder, IApizrGlobalSharedVoidOptionsBuilderBase
     {
         protected readonly ApizrExtendedProperOptions Options;
 
@@ -251,5 +252,8 @@ namespace Apizr.Extending.Configuring.Proper
 
             return this;
         }
+
+        /// <inheritdoc />
+        public void SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);
     }
 }

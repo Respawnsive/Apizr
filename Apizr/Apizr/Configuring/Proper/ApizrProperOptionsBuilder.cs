@@ -4,20 +4,18 @@ using System.Linq.Expressions;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Authenticating;
-using Apizr.Caching;
-using Apizr.Configuring.Common;
 using Apizr.Configuring.Manager;
+using Apizr.Configuring.Shared;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;
 using Polly;
-using Polly.Registry;
 
 namespace Apizr.Configuring.Proper
 {
     /// <summary>
     /// Builder options available at proper level for static registrations
     /// </summary>
-    public class ApizrProperOptionsBuilder : IApizrProperOptionsBuilder
+    public class ApizrProperOptionsBuilder : IApizrProperOptionsBuilder, IApizrGlobalSharedVoidOptionsBuilderBase
     {
         /// <summary>
         /// The proper options
@@ -258,5 +256,8 @@ namespace Apizr.Configuring.Proper
             => WithLogging(() => loggingConfigurationFactory.Invoke().Item1,
                 () => loggingConfigurationFactory.Invoke().Item2,
                 () => loggingConfigurationFactory.Invoke().Item3);
+
+        /// <inheritdoc />
+        public void SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);
     }
 }

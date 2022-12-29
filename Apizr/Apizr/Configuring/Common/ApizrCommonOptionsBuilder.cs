@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Configuring.Manager;
+using Apizr.Configuring.Shared;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
@@ -19,7 +20,7 @@ namespace Apizr.Configuring.Common
     /// <summary>
     /// Builder options available at common level for static registrations
     /// </summary>
-    public class ApizrCommonOptionsBuilder : IApizrCommonOptionsBuilder
+    public class ApizrCommonOptionsBuilder : IApizrCommonOptionsBuilder, IApizrGlobalSharedVoidOptionsBuilderBase
     {
         /// <summary>
         /// The common options
@@ -336,5 +337,8 @@ namespace Apizr.Configuring.Common
 
             return this;
         }
+
+        /// <inheritdoc />
+        public void SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);
     }
 }

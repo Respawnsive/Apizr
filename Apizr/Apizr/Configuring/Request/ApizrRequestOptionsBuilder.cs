@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
+using Apizr.Configuring.Shared;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;
 using Polly;
@@ -8,7 +9,7 @@ using Polly;
 namespace Apizr.Configuring.Request;
 
 /// <inheritdoc cref="IApizrRequestOptionsBuilder" />
-public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder
+public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrGlobalSharedVoidOptionsBuilderBase
 {
     protected readonly ApizrRequestOptions Options;
 
@@ -127,4 +128,7 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder
 
         return this;
     }
+
+    /// <inheritdoc />
+    public void SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);
 }

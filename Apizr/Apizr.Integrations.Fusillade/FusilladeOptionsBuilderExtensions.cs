@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
 using Apizr.Configuring.Common;
-using Apizr.Configuring.Request;
+using Apizr.Configuring.Shared;
 using Fusillade;
 
 namespace Apizr
@@ -11,36 +11,48 @@ namespace Apizr
     public static class FusilladeOptionsBuilderExtensions
     {
         /// <summary>
-        /// Tells Apizr to manage request priorities
+        /// Tells Apizr to manage request priority
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="builder"></param>
         /// <returns></returns>
-        public static T WithPriorityManagement<T>(this T builder) 
+        public static T WithPriority<T>(this T builder)
             where T : IApizrGlobalCommonOptionsBuilderBase
         {
-            builder.SetPrimaryHttpMessageHandler((innerHandler, logger, options) => new PriorityHttpMessageHandler(innerHandler, logger, options));
+            builder.SetPrimaryHttpMessageHandler((innerHandler, logger, options) =>
+                new PriorityHttpMessageHandler(innerHandler, logger, options));
 
             return builder;
         }
 
-        public static IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-            WithPriority<TApizrRequestOptions, TApizrRequestOptionsBuilder>(
-                this IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder> builder,
-                Priority priority)
-            where TApizrRequestOptions : IApizrRequestOptions
-            where TApizrRequestOptionsBuilder :
-            IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-            => builder.WithPriority((int) priority);
+        /// <summary>
+        /// Tells Apizr to manage request priority
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="priority"></param>
+        /// <returns></returns>
+        public static T WithPriority<T>(this T builder, Priority priority)
+            where T : IApizrGlobalSharedOptionsBuilderBase
+            => builder.WithPriority((int)priority);
 
-        public static IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-            WithPriority<TApizrRequestOptions, TApizrRequestOptionsBuilder>(
-                this IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder> builder, int priority)
-            where TApizrRequestOptions : IApizrRequestOptions
-            where TApizrRequestOptionsBuilder :
-            IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+        /// <summary>
+        /// Tells Apizr to manage request priority
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="priority"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidCastException"></exception>
+        public static T WithPriority<T>(this T builder, int priority)
+            where T : IApizrGlobalSharedOptionsBuilderBase
         {
-            builder.WithHandlerParameter(Constants.PriorityKey, priority);
+            if(builder is IApizrGlobalCommonOptionsBuilderBase commonBuilder)
+                commonBuilder.SetPrimaryHttpMessageHandler((innerHandler, logger, options) =>
+                    new PriorityHttpMessageHandler(innerHandler, logger, options));
+
+            if (builder is IApizrGlobalSharedVoidOptionsBuilderBase voidBuilder)
+                voidBuilder.SetHandlerParameter(Constants.PriorityKey, priority);
 
             return builder;
         }

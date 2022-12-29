@@ -16,6 +16,7 @@ using Apizr.Tests.Models;
 using Apizr.Tests.Models.Mappings;
 using AutoMapper;
 using FluentAssertions;
+using Fusillade;
 using Microsoft.Extensions.Logging;
 using MonkeyCache.FileStore;
 using Polly;
@@ -614,6 +615,37 @@ namespace Apizr.Tests
             
             var res = await act.Should().ThrowAsync<ApizrException>();
             res.WithInnerException<TaskCanceledException>();
+        }
+
+        [Fact]
+        public async Task Configuring_Priority_Should_Prioritize_Request()
+        {
+            var watcher = new WatchingRequestHandler();
+
+            // Try to configure priority
+            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+                    .AddGroup(group => group
+                            .AddManagerFor<IReqResUserService>(options => options
+                                .WithPriority(Priority.UserInitiated)
+                                .AddDelegatingHandler(watcher))
+                            .AddManagerFor<IReqResResourceService>(),
+                        options => options.WithPriority(Priority.Background))
+                    .AddManagerFor<IHttpBinService>()
+                    .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(),
+                options => options.WithPriority());
+
+
+            var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
+
+            // Defining a transient throwing request
+            await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
+                options => options.WithPriority(Priority.Speculative));
+
+
+            watcher.Options.Should().NotBeNull();
+            watcher.Options.HandlersParameters.Should().NotBeNullOrEmpty();
+            watcher.Options.HandlersParameters.TryGetValue(Constants.PriorityKey, out var priority).Should().BeTrue();
+            priority.Should().Be((int) Priority.Speculative);
         }
     }
 }

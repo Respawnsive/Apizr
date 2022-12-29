@@ -7,6 +7,7 @@ using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Configuring;
 using Apizr.Configuring.Manager;
+using Apizr.Configuring.Shared;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
@@ -20,7 +21,7 @@ namespace Apizr.Extending.Configuring.Manager
     /// <summary>
     /// Builder options available for extended registrations
     /// </summary>
-    public class ApizrExtendedManagerOptionsBuilder : IApizrExtendedManagerOptionsBuilder
+    public class ApizrExtendedManagerOptionsBuilder : IApizrExtendedManagerOptionsBuilder, IApizrGlobalSharedVoidOptionsBuilderBase
     {
         protected readonly ApizrExtendedManagerOptions Options;
 
@@ -371,5 +372,8 @@ namespace Apizr.Extending.Configuring.Manager
 
             return this;
         }
+
+        /// <inheritdoc />
+        public void SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);
     }
 }

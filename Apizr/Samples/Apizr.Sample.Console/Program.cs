@@ -209,7 +209,7 @@ namespace Apizr.Sample.Console
                         .AddCrudManagerFor<User, int, PagedResult<User>>(options => options.WithBaseAddress("https://reqres.in/api/users")),
 
                     config => config//.WithConnectivityHandler(() => false)
-                        .WithPriorityManagement()
+                        .WithPriority()
                         .WithPolicyRegistry(policyRegistry)
                         .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
                         .WithLoggerFactory(() => lazyLoggerFactory.Value));
@@ -250,7 +250,7 @@ namespace Apizr.Sample.Console
                                         .WithLogging(), typeof(User)),
 
                                 config => config
-                                    .WithPriorityManagement()
+                                    .WithPriority()
                                     //.WithInMemoryCacheHandler()
                                     //.WithCacheHandler<AkavacheCacheHandler>()
                                     .WithAkavacheCacheHandler()

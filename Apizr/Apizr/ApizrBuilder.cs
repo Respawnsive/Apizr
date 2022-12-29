@@ -19,6 +19,7 @@ using Apizr.Mapping;
 using Apizr.Policing;
 using Apizr.Requesting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Polly;
 using Polly.Registry;
 using Refit;
@@ -253,7 +254,9 @@ namespace Apizr
                 foreach (var delegatingHandlersFactory in apizrOptions.DelegatingHandlersFactories)
                     handlerBuilder.AddHandler(delegatingHandlersFactory.Invoke(apizrOptions.Logger, apizrOptions));
 
-                var primaryMessageHandler = handlerBuilder.GetPrimaryHttpMessageHandler(apizrOptions.Logger, apizrOptions);
+                var innerHandler = handlerBuilder.Build();
+                var primaryHandler = apizrOptions.PrimaryHandlerFactory?.Invoke(innerHandler, apizrOptions.Logger, apizrOptions) ?? innerHandler;
+                var primaryMessageHandler = new ApizrHttpMessageHandler(primaryHandler);
 
                 return primaryMessageHandler;
             });

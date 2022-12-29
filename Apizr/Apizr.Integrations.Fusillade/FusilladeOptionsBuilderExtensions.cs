@@ -19,8 +19,9 @@ namespace Apizr
         public static T WithPriority<T>(this T builder)
             where T : IApizrGlobalSharedRegistrationOptionsBuilderBase
         {
-            builder.SetPrimaryHttpMessageHandler((innerHandler, logger, options) =>
-                new PriorityHttpMessageHandler(innerHandler, logger, options));
+            if (builder is IApizrInternalRegistrationOptionsBuilder registrationBuilder)
+                registrationBuilder.SetPrimaryHttpMessageHandler((innerHandler, logger, options) =>
+                    new PriorityHttpMessageHandler(innerHandler, logger, options));
 
             return builder;
         }
@@ -46,11 +47,11 @@ namespace Apizr
         public static T WithPriority<T>(this T builder, int priority)
             where T : IApizrGlobalSharedOptionsBuilderBase
         {
-            if(builder is IApizrGlobalCommonOptionsBuilderBase commonBuilder)
-                commonBuilder.SetPrimaryHttpMessageHandler((innerHandler, logger, options) =>
+            if (builder is IApizrInternalRegistrationOptionsBuilder registrationBuilder)
+                registrationBuilder.SetPrimaryHttpMessageHandler((innerHandler, logger, options) =>
                     new PriorityHttpMessageHandler(innerHandler, logger, options));
 
-            if (builder is IApizrVoidOptionsBuilderBase voidBuilder)
+            if (builder is IApizrInternalOptionsBuilder voidBuilder)
                 voidBuilder.SetHandlerParameter(Constants.PriorityKey, priority);
 
             return builder;

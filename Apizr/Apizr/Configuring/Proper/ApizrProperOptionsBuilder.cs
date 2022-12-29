@@ -15,7 +15,7 @@ namespace Apizr.Configuring.Proper
     /// <summary>
     /// Builder options available at proper level for static registrations
     /// </summary>
-    public class ApizrProperOptionsBuilder : IApizrProperOptionsBuilder, IApizrVoidOptionsBuilderBase
+    public class ApizrProperOptionsBuilder : IApizrProperOptionsBuilder, IApizrInternalRegistrationOptionsBuilder
     {
         /// <summary>
         /// The proper options
@@ -257,7 +257,15 @@ namespace Apizr.Configuring.Proper
                 () => loggingConfigurationFactory.Invoke().Item2,
                 () => loggingConfigurationFactory.Invoke().Item3);
 
-        /// <inheritdoc />
+        #region Internal
+
         public void SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);
+
+        public void SetPrimaryHttpMessageHandler(Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> primaryHandlerFactory)
+        {
+            Options.PrimaryHandlerFactory = primaryHandlerFactory;
+        } 
+
+        #endregion
     }
 }

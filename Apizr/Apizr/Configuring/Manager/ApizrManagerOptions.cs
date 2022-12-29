@@ -163,6 +163,10 @@ namespace Apizr.Configuring.Manager
         public Func<Context> ContextFactory => Options.ContextFactory;
 
         /// <inheritdoc />
+        public Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> PrimaryHandlerFactory
+            => Options.PrimaryHandlerFactory;
+
+        /// <inheritdoc />
         public HttpTracerMode HttpTracerMode => Options.HttpTracerMode;
 
         /// <inheritdoc />

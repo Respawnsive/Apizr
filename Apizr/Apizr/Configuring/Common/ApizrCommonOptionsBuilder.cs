@@ -20,7 +20,7 @@ namespace Apizr.Configuring.Common
     /// <summary>
     /// Builder options available at common level for static registrations
     /// </summary>
-    public class ApizrCommonOptionsBuilder : IApizrCommonOptionsBuilder, IApizrVoidOptionsBuilderBase
+    public class ApizrCommonOptionsBuilder : IApizrCommonOptionsBuilder, IApizrInternalRegistrationOptionsBuilder
     {
         /// <summary>
         /// The common options
@@ -338,7 +338,15 @@ namespace Apizr.Configuring.Common
             return this;
         }
 
-        /// <inheritdoc />
+        #region Internal
+        
         public void SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);
+        
+        public void SetPrimaryHttpMessageHandler(Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> primaryHandlerFactory)
+        {
+            Options.PrimaryHandlerFactory = primaryHandlerFactory;
+        }
+
+        #endregion
     }
 }

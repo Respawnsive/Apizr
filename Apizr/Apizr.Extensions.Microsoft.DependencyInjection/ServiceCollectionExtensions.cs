@@ -658,7 +658,9 @@ namespace Apizr
                     foreach (var delegatingHandlerExtendedFactory in options.DelegatingHandlersExtendedFactories)
                         handlerBuilder.AddHandler(delegatingHandlerExtendedFactory.Invoke(serviceProvider, options));
 
-                    var primaryMessageHandler = handlerBuilder.GetPrimaryHttpMessageHandler(options.Logger, options);
+                    var innerHandler = handlerBuilder.Build();
+                    var primaryHandler = apizrOptions.PrimaryHandlerFactory?.Invoke(innerHandler, apizrOptions.Logger, apizrOptions) ?? innerHandler;
+                    var primaryMessageHandler = new ApizrHttpMessageHandler(primaryHandler);
 
                     return primaryMessageHandler;
                 })

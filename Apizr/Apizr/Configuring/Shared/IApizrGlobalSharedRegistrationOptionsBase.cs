@@ -1,5 +1,8 @@
-﻿using Polly;
+﻿using Apizr.Configuring.Manager;
+using Microsoft.Extensions.Logging;
+using Polly;
 using System;
+using System.Net.Http;
 
 namespace Apizr.Configuring.Shared
 {
@@ -27,5 +30,10 @@ namespace Apizr.Configuring.Shared
         /// The Polly Context to pass through it all
         /// </summary>
         Func<Context> ContextFactory { get; }
+
+        /// <summary>
+        /// The primary Http message handler factory (set internally)
+        /// </summary>
+        Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> PrimaryHandlerFactory { get; }
     }
 }

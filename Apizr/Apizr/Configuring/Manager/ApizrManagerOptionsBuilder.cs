@@ -20,7 +20,7 @@ namespace Apizr.Configuring.Manager
     /// <summary>
     /// Builder options available for static registrations
     /// </summary>
-    public class ApizrManagerOptionsBuilder : IApizrManagerOptionsBuilder, IApizrVoidOptionsBuilderBase
+    public class ApizrManagerOptionsBuilder : IApizrManagerOptionsBuilder, IApizrInternalRegistrationOptionsBuilder
     {
         /// <summary>
         /// The options
@@ -346,7 +346,15 @@ namespace Apizr.Configuring.Manager
             return this;
         }
 
-        /// <inheritdoc />
+        #region Internal
+
         public void SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);
+
+        public void SetPrimaryHttpMessageHandler(Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> primaryHandlerFactory)
+        {
+            Options.PrimaryHandlerFactory = primaryHandlerFactory;
+        } 
+
+        #endregion
     }
 }

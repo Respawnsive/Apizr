@@ -21,7 +21,7 @@ namespace Apizr.Extending.Configuring.Manager
     /// <summary>
     /// Builder options available for extended registrations
     /// </summary>
-    public class ApizrExtendedManagerOptionsBuilder : IApizrExtendedManagerOptionsBuilder, IApizrVoidOptionsBuilderBase
+    public class ApizrExtendedManagerOptionsBuilder : IApizrExtendedManagerOptionsBuilder, IApizrInternalRegistrationOptionsBuilder
     {
         protected readonly ApizrExtendedManagerOptions Options;
 
@@ -373,7 +373,15 @@ namespace Apizr.Extending.Configuring.Manager
             return this;
         }
 
-        /// <inheritdoc />
+        #region Internal
+
         public void SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);
+
+        public void SetPrimaryHttpMessageHandler(Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> primaryHandlerFactory)
+        {
+            Options.PrimaryHandlerFactory = primaryHandlerFactory;
+        } 
+
+        #endregion
     }
 }

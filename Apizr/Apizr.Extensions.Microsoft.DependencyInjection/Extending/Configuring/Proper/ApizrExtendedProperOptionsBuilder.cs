@@ -17,7 +17,7 @@ namespace Apizr.Extending.Configuring.Proper
     /// <summary>
     /// Builder options available at proper level for extended registrations
     /// </summary>
-    public class ApizrExtendedProperOptionsBuilder : IApizrExtendedProperOptionsBuilder, IApizrVoidOptionsBuilderBase
+    public class ApizrExtendedProperOptionsBuilder : IApizrExtendedProperOptionsBuilder, IApizrInternalRegistrationOptionsBuilder
     {
         protected readonly ApizrExtendedProperOptions Options;
 
@@ -253,7 +253,15 @@ namespace Apizr.Extending.Configuring.Proper
             return this;
         }
 
-        /// <inheritdoc />
+        #region Internal
+
         public void SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);
+
+        public void SetPrimaryHttpMessageHandler(Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> primaryHandlerFactory)
+        {
+            Options.PrimaryHandlerFactory = primaryHandlerFactory;
+        } 
+
+        #endregion
     }
 }

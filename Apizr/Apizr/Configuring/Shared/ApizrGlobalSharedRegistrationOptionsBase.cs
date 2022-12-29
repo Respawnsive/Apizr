@@ -1,4 +1,7 @@
 ﻿using System;
+using Apizr.Configuring.Manager;
+using Microsoft.Extensions.Logging;
+using System.Net.Http;
 using Polly;
 
 namespace Apizr.Configuring.Shared
@@ -16,6 +19,7 @@ namespace Apizr.Configuring.Shared
             BaseAddress = sharedOptions?.BaseAddress;
             BasePath = sharedOptions?.BasePath;
             ContextFactory = sharedOptions?.ContextFactory;
+            PrimaryHandlerFactory = sharedOptions?.PrimaryHandlerFactory;
         }
 
         /// <inheritdoc />
@@ -29,5 +33,8 @@ namespace Apizr.Configuring.Shared
 
         /// <inheritdoc />
         public Func<Context> ContextFactory { get; internal set; }
+
+        /// <inheritdoc />
+        public Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> PrimaryHandlerFactory { get; internal set; }
     }
 }

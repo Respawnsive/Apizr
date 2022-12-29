@@ -22,6 +22,7 @@ namespace Apizr.Configuring.Proper
         /// <param name="webApiPolicyRegistryKeys">Specific policies</param>
         /// <param name="baseAddress">The web api base address</param>
         /// <param name="basePath">The web api base path</param>
+        /// <param name="handlersParameters">Some handlers parameters</param>
         /// <param name="httpTracerMode">The http tracer mode</param>
         /// <param name="trafficVerbosity">The traffic verbosity</param>
         /// <param name="logLevels">The log levels</param>
@@ -31,6 +32,7 @@ namespace Apizr.Configuring.Proper
             string[] webApiPolicyRegistryKeys, 
             string baseAddress,
             string basePath,
+            IDictionary<string, object> handlersParameters,
             HttpTracerMode? httpTracerMode,
             HttpMessageParts? trafficVerbosity,
             params LogLevel[] logLevels) : base(sharedOptions, webApiType, assemblyPolicyRegistryKeys,
@@ -39,6 +41,7 @@ namespace Apizr.Configuring.Proper
             BaseUriFactory = !string.IsNullOrWhiteSpace(baseAddress) ? null : sharedOptions.BaseUriFactory;
             BaseAddressFactory = !string.IsNullOrWhiteSpace(baseAddress) ? () => baseAddress : sharedOptions.BaseAddressFactory;
             BasePathFactory = !string.IsNullOrWhiteSpace(basePath) ? () => basePath : sharedOptions.BasePathFactory;
+            HandlersParameters = handlersParameters;
             HttpTracerModeFactory = httpTracerMode.HasValue ? () => httpTracerMode.Value : sharedOptions.HttpTracerModeFactory;
             TrafficVerbosityFactory = trafficVerbosity.HasValue ? () => trafficVerbosity.Value : sharedOptions.TrafficVerbosityFactory;
             LogLevelsFactory = logLevels?.Any() == true ? () => logLevels : sharedOptions.LogLevelsFactory;
@@ -108,8 +111,5 @@ namespace Apizr.Configuring.Proper
 
         /// <inheritdoc />
         public IList<Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
-
-        /// <inheritdoc />
-        public Func<Context> ContextFactory { get; set; }
     }
 }

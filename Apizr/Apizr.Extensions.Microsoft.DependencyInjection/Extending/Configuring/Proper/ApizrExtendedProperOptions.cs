@@ -21,6 +21,7 @@ namespace Apizr.Extending.Configuring.Proper
             string[] webApiPolicyRegistryKeys,
             string baseAddress,
             string basePath,
+            IDictionary<string, object> handlersParameters,
             HttpTracerMode? httpTracerMode,
             HttpMessageParts? trafficVerbosity,
             params LogLevel[] logLevels) : base(sharedOptions, 
@@ -32,6 +33,7 @@ namespace Apizr.Extending.Configuring.Proper
             BaseUriFactory = !string.IsNullOrWhiteSpace(baseAddress) ? null : sharedOptions.BaseUriFactory;
             BaseAddressFactory = !string.IsNullOrWhiteSpace(baseAddress) ? _ => baseAddress : sharedOptions.BaseAddressFactory;
             BasePathFactory = !string.IsNullOrWhiteSpace(basePath) ? _ => basePath : sharedOptions.BasePathFactory;
+            HandlersParameters = handlersParameters;
             HttpTracerModeFactory = httpTracerMode.HasValue ? _ => httpTracerMode.Value : sharedOptions.HttpTracerModeFactory;
             TrafficVerbosityFactory = trafficVerbosity.HasValue ? _ => trafficVerbosity.Value : sharedOptions.TrafficVerbosityFactory;
             LogLevelsFactory = logLevels?.Any() == true ? _ => logLevels : sharedOptions.LogLevelsFactory;

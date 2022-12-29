@@ -314,28 +314,44 @@ namespace Apizr
                     basePath = webApiAttribute.BaseAddressOrPath;
             }
 
+            IList<HandlerParameterAttribute> properParameterAttributes, commonParameterAttributes;
             LogAttribute properLogAttribute, commonLogAttribute;
             PolicyAttribute webApiPolicyAttribute;
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
             {
                 var modelType = webApiType.GetGenericArguments().First();
-                properLogAttribute = modelType.GetTypeInfo().GetCustomAttribute<LogAttribute>(true);
+                var modelTypeInfo = modelType.GetTypeInfo();
+                properParameterAttributes = modelTypeInfo.GetCustomAttributes<HandlerParameterAttribute>(true).ToList();
+                commonParameterAttributes = modelType.Assembly.GetCustomAttributes<HandlerParameterAttribute>().ToList();
+                properLogAttribute = modelTypeInfo.GetCustomAttribute<LogAttribute>(true);
                 commonLogAttribute = modelType.Assembly.GetCustomAttribute<LogAttribute>();
-                webApiPolicyAttribute = modelType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
+                webApiPolicyAttribute = modelTypeInfo.GetCustomAttribute<PolicyAttribute>(true);
             }
             else
             {
-                properLogAttribute = webApiType.GetTypeInfo().GetCustomAttribute<LogAttribute>(true);
+                var webApiTypeInfo = webApiType.GetTypeInfo();
+                properParameterAttributes = webApiTypeInfo.GetCustomAttributes<HandlerParameterAttribute>(true).ToList();
+                commonParameterAttributes = webApiType.Assembly.GetCustomAttributes<HandlerParameterAttribute>().ToList();
+                properLogAttribute = webApiTypeInfo.GetCustomAttribute<LogAttribute>(true);
                 commonLogAttribute = webApiType.Assembly.GetCustomAttribute<LogAttribute>();
-                webApiPolicyAttribute = webApiType.GetTypeInfo().GetCustomAttribute<PolicyAttribute>(true);
+                webApiPolicyAttribute = webApiTypeInfo.GetCustomAttribute<PolicyAttribute>(true);
             }
 
             var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
+
+            var handlersParameters = new Dictionary<string, object>();
+            foreach (var commonParameterAttribute in commonParameterAttributes.Where(att => !string.IsNullOrWhiteSpace(att.Key)))
+                handlersParameters[commonParameterAttribute.Key!] = commonParameterAttribute.Value;
+            foreach (var commonOptionsHandlersParameter in commonOptions.HandlersParameters)
+                handlersParameters[commonOptionsHandlersParameter.Key] = commonOptionsHandlersParameter.Value;
+            foreach (var properParameterAttribute in properParameterAttributes.Where(att => !string.IsNullOrWhiteSpace(att.Key)))
+                handlersParameters[properParameterAttribute.Key!] = properParameterAttribute.Value;
 
             var builder = new ApizrProperOptionsBuilder(new ApizrProperOptions(commonOptions, webApiType,
                 assemblyPolicyAttribute?.RegistryKeys, webApiPolicyAttribute?.RegistryKeys,
                 baseAddress,
                 basePath,
+                handlersParameters,
                 properLogAttribute?.HttpTracerMode ?? (commonOptions.HttpTracerMode != HttpTracerMode.Unspecified ? commonOptions.HttpTracerMode : commonLogAttribute?.HttpTracerMode),
                 properLogAttribute?.TrafficVerbosity ?? (commonOptions.TrafficVerbosity != HttpMessageParts.Unspecified ? commonOptions.TrafficVerbosity : commonLogAttribute?.TrafficVerbosity), 
                 properLogAttribute?.LogLevels ?? (commonOptions.LogLevels?.Any() == true ? commonOptions.LogLevels : commonLogAttribute?.LogLevels))) as IApizrProperOptionsBuilder;

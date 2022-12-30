@@ -32,8 +32,7 @@ namespace Apizr.Mediation.Cruding.Handling
             ReadAllQuery<TReadAllParams, TModelReadAllResult> request, CancellationToken cancellationToken) =>
             CrudApiManager
                 .ExecuteAsync<TModelReadAllResult, TApiReadAllResult>(
-                    (options, api) => api.ReadAll(request.Parameters, options,
-                        options.CancellationToken), request.OptionsBuilder);
+                    (options, api) => api.ReadAll(request.Parameters, options), request.OptionsBuilder);
     }
 
     /// <summary>
@@ -60,7 +59,6 @@ namespace Apizr.Mediation.Cruding.Handling
             CancellationToken cancellationToken) =>
             CrudApiManager
                 .ExecuteAsync<TModelReadAllResult, TApiReadAllResult>(
-                    (options, api) => api.ReadAll(request.Parameters, options,
-                        options.CancellationToken), request.OptionsBuilder);
+                    (options, api) => api.ReadAll(request.Parameters, options), request.OptionsBuilder);
     }
 }

@@ -33,7 +33,7 @@ namespace Apizr.Mediation.Cruding.Handling
             CrudApiManager
                 .ExecuteAsync<TModelEntity, TApiEntity>(
                     (options, api, apiEntity) =>
-                        api.Update(request.Key, apiEntity, options, options.CancellationToken),
+                        api.Update(request.Key, apiEntity, options),
                     request.RequestData,
                     request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken);
     }
@@ -62,7 +62,7 @@ namespace Apizr.Mediation.Cruding.Handling
             CrudApiManager
                 .ExecuteAsync<TModelEntity, TApiEntity>(
                     (options, api, apiEntity) =>
-                        api.Update(request.Key, apiEntity, options, options.CancellationToken),
+                        api.Update(request.Key, apiEntity, options),
                     request.RequestData,
                     request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken);
     }

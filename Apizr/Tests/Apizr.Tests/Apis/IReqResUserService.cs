@@ -31,7 +31,9 @@ namespace Apizr.Tests.Apis
         [Get("/users")]
         Task<ApiResult<User>> GetUsersAsync([Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
 
-        [Get("/users"), Log(HttpMessageParts.RequestBody, HttpTracerMode.ExceptionsOnly, LogLevel.Warning)]
+        [Get("/users"), 
+         Log(HttpMessageParts.RequestBody, HttpTracerMode.ExceptionsOnly, LogLevel.Warning),
+         Priority(Priority.UserInitiated)]
         Task<ApiResult<User>> GetUsersAsync([RequestOptions] IApizrRequestOptions options);
 
         [Get("/users")]

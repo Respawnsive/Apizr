@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Proper;
 using Apizr.Configuring.Shared;
@@ -18,7 +19,7 @@ namespace Apizr.Configuring.Manager
         protected ApizrManagerOptionsBase(IApizrCommonOptionsBase commonOptions, IApizrProperOptionsBase properOptions) : base(properOptions)
         {
             WebApiType = properOptions.WebApiType;
-            PolicyRegistryKeys = properOptions.PolicyRegistryKeys;
+            PolicyRegistryKeys = properOptions.PolicyRegistryKeys.ToArray();
             Logger = properOptions.Logger;
             RefitSettings = commonOptions.RefitSettings;
         }

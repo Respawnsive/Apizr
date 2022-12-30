@@ -48,4 +48,62 @@ namespace Apizr
 
         }
     }
+
+    /// <summary>
+    /// The Fusillade priority attribute
+    /// </summary>
+    /// <remarks>
+    /// <para>Info:</para>
+    /// <para>. Don't forget to activate priority management fluently at register time.</para>
+    /// </remarks>
+    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Method)]
+    public class ReadAllPriorityAttribute : ReadAllHandlerParameterAttribute
+    {
+        /// <summary>
+        /// Define priority
+        /// </summary>
+        /// <param name="priority">The priority</param>
+        public ReadAllPriorityAttribute(Priority priority) : this((int)priority)
+        {
+
+        }
+
+        /// <summary>
+        /// Define priority
+        /// </summary>
+        /// <param name="priority">The priority</param>
+        public ReadAllPriorityAttribute(int priority) : base(Constants.PriorityKey, priority)
+        {
+
+        }
+    }
+
+    /// <summary>
+    /// The Fusillade priority attribute
+    /// </summary>
+    /// <remarks>
+    /// <para>Info:</para>
+    /// <para>. Don't forget to activate priority management fluently at register time.</para>
+    /// </remarks>
+    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Method)]
+    public class ReadPriorityAttribute : ReadHandlerParameterAttribute
+    {
+        /// <summary>
+        /// Define priority
+        /// </summary>
+        /// <param name="priority">The priority</param>
+        public ReadPriorityAttribute(Priority priority) : this((int)priority)
+        {
+
+        }
+
+        /// <summary>
+        /// Define priority
+        /// </summary>
+        /// <param name="priority">The priority</param>
+        public ReadPriorityAttribute(int priority) : base(Constants.PriorityKey, priority)
+        {
+
+        }
+    }
 }

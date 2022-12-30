@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring.Request;
 using Apizr.Extending;
-using Apizr.Mapping;
 using Apizr.Mediation.Cruding.Handling.Base;
 using Apizr.Requesting;
 using MediatR;
@@ -37,7 +36,7 @@ namespace Apizr.Optional.Cruding.Handling
                     .SomeNotNull(new ApizrException(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                     .MapAsync(_ => CrudApiManager.ExecuteAsync(
-                            (options, api) => api.Delete(request.Key, options, options.CancellationToken),
+                            (options, api) => api.Delete(request.Key, options),
                             request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken))
                     .ConfigureAwait(false);
             }
@@ -72,7 +71,7 @@ namespace Apizr.Optional.Cruding.Handling
                     .SomeNotNull(new ApizrException(
                         new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                     .MapAsync(_ => CrudApiManager.ExecuteAsync(
-                            (options, api) => api.Delete(request.Key, options, options.CancellationToken),
+                            (options, api) => api.Delete(request.Key, options),
                             request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken))
                     .ConfigureAwait(false);
             }

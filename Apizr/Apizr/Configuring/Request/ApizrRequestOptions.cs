@@ -12,11 +12,14 @@ namespace Apizr.Configuring.Request;
 public class ApizrRequestOptions : ApizrRequestOptionsBase, IApizrRequestOptions
 {
     public ApizrRequestOptions(IApizrGlobalSharedRegistrationOptionsBase sharedOptions,
+        IDictionary<string, object> handlersParameters,
         HttpTracerMode? httpTracerMode,
         HttpMessageParts? trafficVerbosity,
         params LogLevel[] logLevels) : 
         base(sharedOptions, httpTracerMode, trafficVerbosity, logLevels)
     {
+        foreach (var handlersParameter in handlersParameters)
+            HandlersParameters[handlersParameter.Key] = handlersParameter.Value;
     }
 
     /// <inheritdoc />

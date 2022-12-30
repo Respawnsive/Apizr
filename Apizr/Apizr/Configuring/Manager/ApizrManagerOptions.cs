@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using Apizr.Caching;
 using Apizr.Configuring.Common;
@@ -39,7 +40,7 @@ namespace Apizr.Configuring.Manager
             ConnectivityHandlerFactory = commonOptions.ConnectivityHandlerFactory;
             CacheHandlerFactory = commonOptions.CacheHandlerFactory;
             MappingHandlerFactory = commonOptions.MappingHandlerFactory;
-            DelegatingHandlersFactories = properOptions.DelegatingHandlersFactories;
+            DelegatingHandlersFactories = properOptions.DelegatingHandlersFactories.ToList();
             ContextFactory = properOptions.ContextFactory;
         }
 

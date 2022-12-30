@@ -18,7 +18,6 @@ using Apizr.Configuring.Request;
 using Apizr.Configuring.Shared;
 using Apizr.Connecting;
 using Apizr.Extending;
-using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Mapping;
 using Apizr.Policing;
@@ -41,10 +40,14 @@ namespace Apizr
 
         internal static IApizrRequestOptionsBuilder CreateRequestOptionsBuilder(
             IApizrGlobalSharedRegistrationOptionsBase baseOptions,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null, 
-            LogAttributeBase requestLogAttribute = null)
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null,
+            LogAttributeBase requestLogAttribute = null,
+            IList<HandlerParameterAttribute> requestHandlerParameterAttributes = null)
         {
-            var requestOptions = new ApizrRequestOptions(baseOptions, requestLogAttribute?.HttpTracerMode,
+            var requestOptions = new ApizrRequestOptions(baseOptions,
+                requestHandlerParameterAttributes?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
+                new Dictionary<string, object>(),
+                requestLogAttribute?.HttpTracerMode,
                 requestLogAttribute?.TrafficVerbosity, requestLogAttribute?.LogLevels);
             var builder = new ApizrRequestOptionsBuilder(requestOptions);
             optionsBuilder?.Invoke(builder);
@@ -69,6 +72,7 @@ namespace Apizr
         private readonly Dictionary<MethodDetails, (CacheAttributeBase cacheAttribute, string cacheKey)> _cachingMethodsSet;
         private readonly Dictionary<MethodDetails, LogAttributeBase> _loggingMethodsSet;
         private readonly Dictionary<MethodDetails, IsPolicy> _policingMethodsSet;
+        private readonly Dictionary<MethodDetails, IList<HandlerParameterAttribute>> _handlerParameterMethodsSet;
 
         /// <summary>
         /// Apizr manager constructor
@@ -92,6 +96,7 @@ namespace Apizr
             _cachingMethodsSet = new Dictionary<MethodDetails, (CacheAttributeBase cacheAttribute, string cacheKey)>();
             _loggingMethodsSet = new Dictionary<MethodDetails, LogAttributeBase>();
             _policingMethodsSet = new Dictionary<MethodDetails, IsPolicy>();
+            _handlerParameterMethodsSet = new Dictionary<MethodDetails, IList<HandlerParameterAttribute>>();
         }
 
         #region Implementation
@@ -179,7 +184,8 @@ namespace Apizr
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute);
+            var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute, requestHandlerParameterAttributes);
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Calling method");
 
             try
@@ -271,7 +277,8 @@ namespace Apizr
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute);
+            var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute, requestHandlerParameterAttributes);
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Calling method");
 
             TApiData result = default;
@@ -395,7 +402,8 @@ namespace Apizr
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiResultData>(executeApiMethod);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute);
+            var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute, requestHandlerParameterAttributes);
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Calling method");
 
             TApiResultData result = default;
@@ -463,7 +471,7 @@ namespace Apizr
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
-                    result = await policy.ExecuteAsync(options => executeApiMethod.Compile()(options, webApi, apiRequestData), requestOptionsBuilder); ;
+                    result = await policy.ExecuteAsync(options => executeApiMethod.Compile()(options, webApi, apiRequestData), requestOptionsBuilder);
                 }
                 catch (Exception e)
                 {
@@ -523,7 +531,8 @@ namespace Apizr
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute);
+            var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute, requestHandlerParameterAttributes);
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Calling method");
 
             TApiData result = default;
@@ -650,7 +659,8 @@ namespace Apizr
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute);
+            var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute, requestHandlerParameterAttributes);
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Calling method");
 
             TApiData result = default;
@@ -849,8 +859,7 @@ namespace Apizr
             { 
                 // Crud api logging
                 var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
-                var methodName = methodDetails.MethodInfo.Name;
-                logAttribute = methodName switch // Request logging
+                logAttribute = methodDetails.MethodInfo.Name switch // Request logging
                 {
                     "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<LogReadAllAttribute>(true),
                     "Read" => modelType.GetTypeInfo().GetCustomAttribute<LogReadAttribute>(true),
@@ -1156,24 +1165,53 @@ namespace Apizr
 
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(_apizrOptions.WebApiType)) // Crud api method
             {
-                var modelType = _apizrOptions.WebApiType.GetGenericArguments().First();
-                switch (methodDetails.MethodInfo.Name) // Specific method policies
+                var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
+                PolicyAttributeBase policyAttribute = methodDetails.MethodInfo.Name switch // Specific method policies
                 {
-                    case "Create":
-                        return modelType.GetTypeInfo().GetCustomAttribute<CreatePolicyAttribute>();
-                    case "ReadAll":
-                        return modelType.GetTypeInfo().GetCustomAttribute<ReadAllPolicyAttribute>();
-                    case "Read":
-                        return modelType.GetTypeInfo().GetCustomAttribute<ReadPolicyAttribute>();
-                    case "Update":
-                        return modelType.GetTypeInfo().GetCustomAttribute<UpdatePolicyAttribute>();
-                    case "Delete":
-                        return modelType.GetTypeInfo().GetCustomAttribute<DeletePolicyAttribute>();
-                }
+                    "Create" => modelType.GetTypeInfo().GetCustomAttribute<CreatePolicyAttribute>(),
+                    "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<ReadAllPolicyAttribute>(),
+                    "Read" => modelType.GetTypeInfo().GetCustomAttribute<ReadPolicyAttribute>(),
+                    "Update" => modelType.GetTypeInfo().GetCustomAttribute<UpdatePolicyAttribute>(),
+                    "Delete" => modelType.GetTypeInfo().GetCustomAttribute<DeletePolicyAttribute>(),
+                    _ => null
+                };
+
+                return policyAttribute;
             }
             
             // Standard api method
             return methodDetails.MethodInfo.GetCustomAttribute<PolicyAttribute>();
+        }
+
+        #endregion
+
+        #region Prioritizing
+
+        private IList<HandlerParameterAttribute> GetRequestHandlerParameterAttributes(MethodDetails methodDetails)
+        {
+            if (_handlerParameterMethodsSet.TryGetValue(methodDetails, out var handlerParameterAttributes))
+                return handlerParameterAttributes;
+
+            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.ApiInterfaceType))
+            {
+                // Crud api parameters
+                var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
+                handlerParameterAttributes = methodDetails.MethodInfo.Name switch // Request parameters
+                {
+                    "ReadAll" => modelType.GetTypeInfo().GetCustomAttributes<ReadAllHandlerParameterAttribute>(true).Cast<HandlerParameterAttribute>().ToList(),
+                    "Read" => modelType.GetTypeInfo().GetCustomAttributes<ReadHandlerParameterAttribute>(true).Cast<HandlerParameterAttribute>().ToList(),
+                    _ => null
+                };
+            }
+            else
+            {
+                // Classic api parameters
+                handlerParameterAttributes = methodDetails.MethodInfo.GetCustomAttributes<HandlerParameterAttribute>().ToList(); // Request parameters
+            }
+
+            // Return log attribute
+            _handlerParameterMethodsSet.Add(methodDetails, handlerParameterAttributes);
+            return handlerParameterAttributes;
         }
 
         #endregion

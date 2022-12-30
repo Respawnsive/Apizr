@@ -48,7 +48,7 @@ namespace Apizr.Configuring.Proper
             LoggerFactory = (loggerFactory, webApiFriendlyName) => Logger = loggerFactory.CreateLogger(webApiFriendlyName);
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
             HttpClientFactory = sharedOptions.HttpClientFactory;
-            DelegatingHandlersFactories = sharedOptions.DelegatingHandlersFactories;
+            DelegatingHandlersFactories = sharedOptions.DelegatingHandlersFactories.ToList();
             ContextFactory = sharedOptions.ContextFactory;
         }
 

@@ -9,7 +9,6 @@ using Apizr.Configuring.Common;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Proper;
 using Apizr.Configuring.Registry;
-using Apizr.Configuring.Request;
 using Apizr.Connecting;
 using Apizr.Extending;
 using Apizr.Helping;
@@ -19,7 +18,6 @@ using Apizr.Mapping;
 using Apizr.Policing;
 using Apizr.Requesting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Polly;
 using Polly.Registry;
 using Refit;
@@ -321,7 +319,9 @@ namespace Apizr
             {
                 var modelType = webApiType.GetGenericArguments().First();
                 var modelTypeInfo = modelType.GetTypeInfo();
-                properParameterAttributes = modelTypeInfo.GetCustomAttributes<HandlerParameterAttribute>(true).ToList();
+                properParameterAttributes = modelTypeInfo.GetCustomAttributes<HandlerParameterAttribute>(true)
+                    .Where(att => att is not CrudHandlerParameterAttribute)
+                    .ToList();
                 commonParameterAttributes = modelType.Assembly.GetCustomAttributes<HandlerParameterAttribute>().ToList();
                 properLogAttribute = modelTypeInfo.GetCustomAttribute<LogAttribute>(true);
                 commonLogAttribute = modelType.Assembly.GetCustomAttribute<LogAttribute>();

@@ -620,21 +620,25 @@ namespace Apizr.Tests
         [Fact]
         public async Task Configuring_Priority_Should_Prioritize_Request()
         {
-            var watcher = new WatchingRequestHandler();
+            var watcher1 = new WatchingRequestHandler { Context = new Context("watcher1") };
+            var watcher2 = new WatchingRequestHandler { Context = new Context("watcher2") };
 
             // Try to configure priority
             var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
                     .AddGroup(group => group
                             .AddManagerFor<IReqResUserService>(options => options
-                                .WithPriority(Priority.UserInitiated)
-                                .AddDelegatingHandler(watcher))
+                                .AddDelegatingHandler(watcher1)
+                                .WithPriority(Priority.UserInitiated))
                             .AddManagerFor<IReqResResourceService>(),
                         options => options.WithPriority(Priority.Background))
                     .AddManagerFor<IHttpBinService>()
-                    .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(),
-                options => options.WithPriority());
-
-
+                    .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(options => options
+                        .WithBaseAddress("https://reqres.in/api/users")
+                        .AddDelegatingHandler(watcher2)
+                        .WithPriority(Priority.Speculative)),
+                options => options
+                    .WithPriority());
+            
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
 
             // Defining a transient throwing request
@@ -642,10 +646,19 @@ namespace Apizr.Tests
                 options => options.WithPriority(Priority.Speculative));
 
 
-            watcher.Options.Should().NotBeNull();
-            watcher.Options.HandlersParameters.Should().NotBeNullOrEmpty();
-            watcher.Options.HandlersParameters.TryGetValue(Constants.PriorityKey, out var priority).Should().BeTrue();
-            priority.Should().Be((int) Priority.Speculative);
+            watcher1.Options.Should().NotBeNull();
+            watcher1.Options.HandlersParameters.Should().NotBeNullOrEmpty();
+            watcher1.Options.HandlersParameters.TryGetValue(Constants.PriorityKey, out var priority).Should().BeTrue();
+            priority.Should().Be((int)Priority.Speculative);
+
+            var userManager = apizrRegistry.GetCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>();
+            await userManager.ExecuteAsync((opt, api) => api.ReadAll(opt),
+                options => options.WithPriority(Priority.UserInitiated));
+
+            watcher2.Options.Should().NotBeNull();
+            watcher2.Options.HandlersParameters.Should().NotBeNullOrEmpty();
+            watcher2.Options.HandlersParameters.TryGetValue(Constants.PriorityKey, out priority).Should().BeTrue();
+            priority.Should().Be((int)Priority.UserInitiated);
         }
     }
 }

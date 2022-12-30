@@ -91,10 +91,14 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">System.Attribute</span></div>
     <div class="level2"><span class="xref">Refit.PropertyAttribute</span></div>
-    <div class="level3"><span class="xref">PriorityAttribute</span></div>
+    <div class="level3"><a class="xref" href="Apizr.Configuring.HandlerParameterAttribute.html">HandlerParameterAttribute</a></div>
+    <div class="level4"><span class="xref">PriorityAttribute</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Apizr.Configuring.HandlerParameterAttribute.html#Apizr_Configuring_HandlerParameterAttribute_Value">HandlerParameterAttribute.Value</a>
+    </div>
     <div>
       <span class="xref">Refit.PropertyAttribute.Key</span>
     </div>
@@ -229,21 +233,91 @@
   <h6><strong>Assembly</strong>: Apizr.Integrations.Fusillade.dll</h6>
   <h5 id="Apizr_PriorityAttribute_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class PriorityAttribute : PropertyAttribute</code></pre>
+    <pre><code class="lang-csharp hljs">[AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Interface | AttributeTargets.Parameter)]
+public class PriorityAttribute : HandlerParameterAttribute</code></pre>
   </div>
+  <h5 id="Apizr_PriorityAttribute_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Info:</p>
+<p>. Decorating a request parameter with PriorityAttribute is obsolete. Please use the request options parameter instead.</p>
+<p>. Decorating anything else must come with the priority value.</p>
+<p>. Don&apos;t forget to activate priority management fluently at register time.</p>
+</div>
   <h3 id="constructors">Constructors
   </h3>
   
   
   <a id="Apizr_PriorityAttribute__ctor_" data-uid="Apizr.PriorityAttribute.#ctor*"></a>
   <h4 id="Apizr_PriorityAttribute__ctor" data-uid="Apizr.PriorityAttribute.#ctor">PriorityAttribute()</h4>
-  <div class="markdown level1 summary"><p>Set a priority for the current request</p>
+  <div class="markdown level1 summary"><p>Define priority</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public PriorityAttribute()</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Please use the request options parameter instead&quot;)]
+public PriorityAttribute()</code></pre>
   </div>
+  <h5 id="Apizr_PriorityAttribute__ctor_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p><p>Warning: Decorating a request parameter with PriorityAttribute is obsolete. Please use the request options parameter instead.</p>
+Error: Decorating anything else must come with the priority value.</p>
+</div>
+  
+  
+  <a id="Apizr_PriorityAttribute__ctor_" data-uid="Apizr.PriorityAttribute.#ctor*"></a>
+  <h4 id="Apizr_PriorityAttribute__ctor_Fusillade_Priority_" data-uid="Apizr.PriorityAttribute.#ctor(Fusillade.Priority)">PriorityAttribute(Priority)</h4>
+  <div class="markdown level1 summary"><p>Define priority</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PriorityAttribute(Priority priority)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Fusillade.Priority</span></td>
+        <td><span class="parametername">priority</span></td>
+        <td><p>The priority</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_PriorityAttribute__ctor_" data-uid="Apizr.PriorityAttribute.#ctor*"></a>
+  <h4 id="Apizr_PriorityAttribute__ctor_System_Int32_" data-uid="Apizr.PriorityAttribute.#ctor(System.Int32)">PriorityAttribute(Int32)</h4>
+  <div class="markdown level1 summary"><p>Define priority</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PriorityAttribute(int priority)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">priority</span></td>
+        <td><p>The priority</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 </article>
           </div>
           

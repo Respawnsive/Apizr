@@ -124,6 +124,12 @@
       <a class="xref" href="Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedRegistrationOptionsBase_BasePath">ApizrGlobalSharedRegistrationOptionsBase.BasePath</a>
     </div>
     <div>
+      <a class="xref" href="Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedRegistrationOptionsBase_ContextFactory">ApizrGlobalSharedRegistrationOptionsBase.ContextFactory</a>
+    </div>
+    <div>
+      <a class="xref" href="Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedRegistrationOptionsBase_PrimaryHandlerFactory">ApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory</a>
+    </div>
+    <div>
       <a class="xref" href="Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_HttpTracerMode">ApizrGlobalSharedOptionsBase.HttpTracerMode</a>
     </div>
     <div>
@@ -174,13 +180,13 @@
   
   
   <a id="Apizr_Configuring_Proper_ApizrProperOptions__ctor_" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.#ctor*"></a>
-  <h4 id="Apizr_Configuring_Proper_ApizrProperOptions__ctor_Apizr_Configuring_Shared_IApizrSharedRegistrationOptions_System_Type_System_String___System_String___System_String_System_String_System_Nullable_Apizr_Logging_HttpTracerMode__System_Nullable_Apizr_Logging_HttpMessageParts__Microsoft_Extensions_Logging_LogLevel___" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.#ctor(Apizr.Configuring.Shared.IApizrSharedRegistrationOptions,System.Type,System.String[],System.String[],System.String,System.String,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])">ApizrProperOptions(IApizrSharedRegistrationOptions, Type, String[], String[], String, String, Nullable&lt;HttpTracerMode&gt;, Nullable&lt;HttpMessageParts&gt;, LogLevel[])</h4>
+  <h4 id="Apizr_Configuring_Proper_ApizrProperOptions__ctor_Apizr_Configuring_Shared_IApizrSharedRegistrationOptions_System_Type_System_String___System_String___System_String_System_String_System_Collections_Generic_IDictionary_System_String_System_Object__System_Nullable_Apizr_Logging_HttpTracerMode__System_Nullable_Apizr_Logging_HttpMessageParts__Microsoft_Extensions_Logging_LogLevel___" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.#ctor(Apizr.Configuring.Shared.IApizrSharedRegistrationOptions,System.Type,System.String[],System.String[],System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])">ApizrProperOptions(IApizrSharedRegistrationOptions, Type, String[], String[], String, String, IDictionary&lt;String, Object&gt;, Nullable&lt;HttpTracerMode&gt;, Nullable&lt;HttpMessageParts&gt;, LogLevel[])</h4>
   <div class="markdown level1 summary"><p>The common options constructor</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ApizrProperOptions(IApizrSharedRegistrationOptions sharedOptions, Type webApiType, string[] assemblyPolicyRegistryKeys, string[] webApiPolicyRegistryKeys, string baseAddress, string basePath, HttpTracerMode? httpTracerMode, HttpMessageParts? trafficVerbosity, params LogLevel[] logLevels)</code></pre>
+    <pre><code class="lang-csharp hljs">public ApizrProperOptions(IApizrSharedRegistrationOptions sharedOptions, Type webApiType, string[] assemblyPolicyRegistryKeys, string[] webApiPolicyRegistryKeys, string baseAddress, string basePath, IDictionary&lt;string, object&gt; handlersParameters, HttpTracerMode? httpTracerMode, HttpMessageParts? trafficVerbosity, params LogLevel[] logLevels)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -226,6 +232,12 @@
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">basePath</span></td>
         <td><p>The web api base path</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Object</span>&gt;</td>
+        <td><span class="parametername">handlersParameters</span></td>
+        <td><p>Some handlers parameters</p>
 </td>
       </tr>
       <tr>
@@ -324,32 +336,6 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Func</span>&lt;<span class="xref">System.Uri</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Configuring_Proper_ApizrProperOptions_ContextFactory_" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.ContextFactory*"></a>
-  <h4 id="Apizr_Configuring_Proper_ApizrProperOptions_ContextFactory" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.ContextFactory">ContextFactory</h4>
-  <div class="markdown level1 summary"><p>The Polly Context to pass through it all</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Func&lt;Context&gt; ContextFactory { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>

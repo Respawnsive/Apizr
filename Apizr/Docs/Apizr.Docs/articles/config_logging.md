@@ -86,7 +86,7 @@ But you can adjust logging configuration thanks to attribute parameters.
 
 ### [Registering](#tab/tabid-registering)
 
-Configuring the logging fluently at registration time allows you to set it dynamically (e.g. based on settings)
+Configuring the logging fluently at register time allows you to set it dynamically (e.g. based on settings)
 
 You can set it thanks to this option:
 
@@ -134,9 +134,9 @@ Note that you can mix design, register and request time logging configurations.
 In case of mixed configurations, the internal duplicate strategy will be to take the closest one to the request.
 
 Logging configuration duplicate strategy order:
-- take fluent request configuration first if defined
-- otherwise the request attribute decoration one
-- otherwise the fluent proper resgistration one
-- otherwise the api attribute decoration one
-- otherwise the fluent common resgistration one
-- otherwise the global attribute decoration one
+- take fluent request configuration first if defined (request options)
+- otherwise the request attribute decoration one (method)
+- otherwise the fluent proper resgistration one (api proper options)
+- otherwise the api attribute decoration one (interface)
+- otherwise the fluent common resgistration one (registry common options)
+- otherwise the global attribute decoration one (assembly)

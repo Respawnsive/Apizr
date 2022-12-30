@@ -5,8 +5,9 @@ items:
   id: FusilladeOptionsBuilderExtensions
   parent: Apizr
   children:
-  - Apizr.FusilladeOptionsBuilderExtensions.WithPriority``2(Apizr.Configuring.Request.IApizrRequestOptionsBuilder{``0,``1},Fusillade.Priority)
-  - Apizr.FusilladeOptionsBuilderExtensions.WithPriority``2(Apizr.Configuring.Request.IApizrRequestOptionsBuilder{``0,``1},System.Int32)
+  - Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+  - Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  - Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
   - Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)
   langs:
   - csharp
@@ -59,16 +60,70 @@ items:
   source:
     id: WithPriorityManagement
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Fusillade\FusilladeOptionsBuilderExtensions.cs
-    startLine: 18
+    startLine: 12
   assemblies:
   - Apizr.Integrations.Fusillade
   namespace: Apizr
-  summary: "\nTells Apizr to manage request priorities\n"
+  syntax:
+    content: >-
+      [Obsolete("Use WithPriority instead")]
+
+      public static T WithPriorityManagement<T>(this T builder)
+          where T : IApizrGlobalCommonOptionsBuilderBase
+    parameters:
+    - id: builder
+      type: '{T}'
+    typeParameters:
+    - id: T
+    return:
+      type: '{T}'
+    content.vb: >-
+      <Obsolete("Use WithPriority instead")>
+
+      <ExtensionAttribute>
+
+      Public Shared Function WithPriorityManagement(Of T As IApizrGlobalCommonOptionsBuilderBase)(builder As T) As T
+  overload: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Use WithPriority instead
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of T)(T)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of T)(T)
+  name.vb: WithPriorityManagement(Of T)(T)
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+  id: WithPriority``1(``0)
+  isExtensionMethod: true
+  parent: Apizr.FusilladeOptionsBuilderExtensions
+  langs:
+  - csharp
+  - vb
+  name: WithPriority<T>(T)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T)
+  type: Method
+  source:
+    id: WithPriority
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Fusillade\FusilladeOptionsBuilderExtensions.cs
+    startLine: 28
+  assemblies:
+  - Apizr.Integrations.Fusillade
+  namespace: Apizr
+  summary: "\nTells Apizr to manage request priority\n"
   example: []
   syntax:
     content: >-
-      public static T WithPriorityManagement<T>(this T builder)
-          where T : IApizrGlobalCommonOptionsBuilderBase
+      public static T WithPriority<T>(this T builder)
+          where T : IApizrGlobalSharedRegistrationOptionsBuilderBase
     parameters:
     - id: builder
       type: '{T}'
@@ -82,111 +137,121 @@ items:
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function WithPriorityManagement(Of T As IApizrGlobalCommonOptionsBuilderBase)(builder As T) As T
-  overload: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement*
-  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of T)(T)
+      Public Shared Function WithPriority(Of T As IApizrGlobalSharedRegistrationOptionsBuilderBase)(builder As T) As T
+  overload: Apizr.FusilladeOptionsBuilderExtensions.WithPriority*
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T)
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of T)(T)
-  name.vb: WithPriorityManagement(Of T)(T)
-- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``2(Apizr.Configuring.Request.IApizrRequestOptionsBuilder{``0,``1},Fusillade.Priority)
-  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``2(Apizr.Configuring.Request.IApizrRequestOptionsBuilder{``0,``1},Fusillade.Priority)
-  id: WithPriority``2(Apizr.Configuring.Request.IApizrRequestOptionsBuilder{``0,``1},Fusillade.Priority)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T)
+  name.vb: WithPriority(Of T)(T)
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  id: WithPriority``1(``0,Fusillade.Priority)
   isExtensionMethod: true
   parent: Apizr.FusilladeOptionsBuilderExtensions
   langs:
   - csharp
   - vb
-  name: WithPriority<TApizrRequestOptions, TApizrRequestOptionsBuilder>(IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>, Priority)
-  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<TApizrRequestOptions, TApizrRequestOptionsBuilder>(IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>, Priority)
-  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<TApizrRequestOptions, TApizrRequestOptionsBuilder>(Apizr.Configuring.Request.IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>, Fusillade.Priority)
+  name: WithPriority<T>(T, Priority)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Priority)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Fusillade.Priority)
   type: Method
   source:
     id: WithPriority
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Fusillade\FusilladeOptionsBuilderExtensions.cs
-    startLine: 26
+    startLine: 45
   assemblies:
   - Apizr.Integrations.Fusillade
   namespace: Apizr
+  summary: "\nTells Apizr to manage request priority\n"
+  example: []
   syntax:
     content: >-
-      public static IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder> WithPriority<TApizrRequestOptions, TApizrRequestOptionsBuilder>(this IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder> builder, Priority priority)
-          where TApizrRequestOptions : IApizrRequestOptions where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+      public static T WithPriority<T>(this T builder, Priority priority)
+          where T : IApizrGlobalSharedOptionsBuilderBase
     parameters:
     - id: builder
-      type: Apizr.Configuring.Request.IApizrRequestOptionsBuilder{{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}
+      type: '{T}'
+      description: ''
     - id: priority
       type: Fusillade.Priority
+      description: ''
     typeParameters:
-    - id: TApizrRequestOptions
-    - id: TApizrRequestOptionsBuilder
+    - id: T
+      description: ''
     return:
-      type: Apizr.Configuring.Request.IApizrRequestOptionsBuilder{{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}
+      type: '{T}'
+      description: ''
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function WithPriority(Of TApizrRequestOptions As IApizrRequestOptions, TApizrRequestOptionsBuilder As IApizrRequestOptionsBuilder(Of TApizrRequestOptions, TApizrRequestOptionsBuilder))(builder As IApizrRequestOptionsBuilder(Of TApizrRequestOptions, TApizrRequestOptionsBuilder), priority As Priority) As IApizrRequestOptionsBuilder(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)
+      Public Shared Function WithPriority(Of T As IApizrGlobalSharedOptionsBuilderBase)(builder As T, priority As Priority) As T
   overload: Apizr.FusilladeOptionsBuilderExtensions.WithPriority*
-  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)(IApizrRequestOptionsBuilder(Of TApizrRequestOptions, TApizrRequestOptionsBuilder), Priority)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Priority)
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)(Apizr.Configuring.Request.IApizrRequestOptionsBuilder(Of TApizrRequestOptions, TApizrRequestOptionsBuilder), Fusillade.Priority)
-  name.vb: WithPriority(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)(IApizrRequestOptionsBuilder(Of TApizrRequestOptions, TApizrRequestOptionsBuilder), Priority)
-- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``2(Apizr.Configuring.Request.IApizrRequestOptionsBuilder{``0,``1},System.Int32)
-  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``2(Apizr.Configuring.Request.IApizrRequestOptionsBuilder{``0,``1},System.Int32)
-  id: WithPriority``2(Apizr.Configuring.Request.IApizrRequestOptionsBuilder{``0,``1},System.Int32)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Fusillade.Priority)
+  name.vb: WithPriority(Of T)(T, Priority)
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  id: WithPriority``1(``0,System.Int32)
   isExtensionMethod: true
   parent: Apizr.FusilladeOptionsBuilderExtensions
   langs:
   - csharp
   - vb
-  name: WithPriority<TApizrRequestOptions, TApizrRequestOptionsBuilder>(IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>, Int32)
-  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<TApizrRequestOptions, TApizrRequestOptionsBuilder>(IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>, Int32)
-  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<TApizrRequestOptions, TApizrRequestOptionsBuilder>(Apizr.Configuring.Request.IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>, System.Int32)
+  name: WithPriority<T>(T, Int32)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Int32)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T, System.Int32)
   type: Method
   source:
     id: WithPriority
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Fusillade\FusilladeOptionsBuilderExtensions.cs
-    startLine: 35
+    startLine: 56
   assemblies:
   - Apizr.Integrations.Fusillade
   namespace: Apizr
+  summary: "\nTells Apizr to manage request priority\n"
+  example: []
   syntax:
     content: >-
-      public static IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder> WithPriority<TApizrRequestOptions, TApizrRequestOptionsBuilder>(this IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder> builder, int priority)
-          where TApizrRequestOptions : IApizrRequestOptions where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
+      public static T WithPriority<T>(this T builder, int priority)
+          where T : IApizrGlobalSharedOptionsBuilderBase
     parameters:
     - id: builder
-      type: Apizr.Configuring.Request.IApizrRequestOptionsBuilder{{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}
+      type: '{T}'
+      description: ''
     - id: priority
       type: System.Int32
+      description: ''
     typeParameters:
-    - id: TApizrRequestOptions
-    - id: TApizrRequestOptionsBuilder
+    - id: T
+      description: ''
     return:
-      type: Apizr.Configuring.Request.IApizrRequestOptionsBuilder{{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}
+      type: '{T}'
+      description: ''
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function WithPriority(Of TApizrRequestOptions As IApizrRequestOptions, TApizrRequestOptionsBuilder As IApizrRequestOptionsBuilder(Of TApizrRequestOptions, TApizrRequestOptionsBuilder))(builder As IApizrRequestOptionsBuilder(Of TApizrRequestOptions, TApizrRequestOptionsBuilder), priority As Integer) As IApizrRequestOptionsBuilder(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)
+      Public Shared Function WithPriority(Of T As IApizrGlobalSharedOptionsBuilderBase)(builder As T, priority As Integer) As T
   overload: Apizr.FusilladeOptionsBuilderExtensions.WithPriority*
-  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)(IApizrRequestOptionsBuilder(Of TApizrRequestOptions, TApizrRequestOptionsBuilder), Int32)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Int32)
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)(Apizr.Configuring.Request.IApizrRequestOptionsBuilder(Of TApizrRequestOptions, TApizrRequestOptionsBuilder), System.Int32)
-  name.vb: WithPriority(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)(IApizrRequestOptionsBuilder(Of TApizrRequestOptions, TApizrRequestOptionsBuilder), Int32)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, System.Int32)
+  name.vb: WithPriority(Of T)(T, Int32)
 references:
 - uid: Apizr
   commentId: N:Apizr
@@ -505,56 +570,6 @@ references:
   name: WithPriority
   nameWithType: FusilladeOptionsBuilderExtensions.WithPriority
   fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority
-- uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder{{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}
-  commentId: T:Apizr.Configuring.Request.IApizrRequestOptionsBuilder{``0,``1}
-  parent: Apizr.Configuring.Request
-  definition: Apizr.Configuring.Request.IApizrRequestOptionsBuilder`2
-  name: IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-  nameWithType: IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-  fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>
-  nameWithType.vb: IApizrRequestOptionsBuilder(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)
-  fullName.vb: Apizr.Configuring.Request.IApizrRequestOptionsBuilder(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)
-  name.vb: IApizrRequestOptionsBuilder(Of TApizrRequestOptions, TApizrRequestOptionsBuilder)
-  spec.csharp:
-  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder`2
-    name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder`2
-    name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Fusillade.Priority
   commentId: T:Fusillade.Priority
   parent: Fusillade
@@ -562,59 +577,6 @@ references:
   name: Priority
   nameWithType: Priority
   fullName: Fusillade.Priority
-- uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder`2
-  commentId: T:Apizr.Configuring.Request.IApizrRequestOptionsBuilder`2
-  name: IApizrRequestOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>
-  nameWithType: IApizrRequestOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>
-  fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>
-  nameWithType.vb: IApizrRequestOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder)
-  fullName.vb: Apizr.Configuring.Request.IApizrRequestOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder)
-  name.vb: IApizrRequestOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder)
-  spec.csharp:
-  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder`2
-    name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TApizrOptions
-    nameWithType: TApizrOptions
-    fullName: TApizrOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApizrOptionsBuilder
-    nameWithType: TApizrOptionsBuilder
-    fullName: TApizrOptionsBuilder
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder`2
-    name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TApizrOptions
-    nameWithType: TApizrOptions
-    fullName: TApizrOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApizrOptionsBuilder
-    nameWithType: TApizrOptionsBuilder
-    fullName: TApizrOptionsBuilder
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Request
-  commentId: N:Apizr.Configuring.Request
-  name: Apizr.Configuring.Request
-  nameWithType: Apizr.Configuring.Request
-  fullName: Apizr.Configuring.Request
 - uid: Fusillade
   commentId: N:Fusillade
   isExternal: true

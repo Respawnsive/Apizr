@@ -11,6 +11,8 @@ items:
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.ConfigureHttpClientBuilder(System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder})
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Options
+  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.SetHandlerParameter(System.String,System.Object)
+  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.SetPrimaryHttpMessageHandler(System.Func{System.Net.Http.DelegatingHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler})
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
@@ -56,7 +58,7 @@ items:
   source:
     id: ApizrExtendedManagerOptionsBuilder
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 22
+    startLine: 23
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -107,6 +109,9 @@ items:
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr.AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler``1
   - Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder.Apizr.OptionalOptionsBuilderExtensions.WithOptionalMediation
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1
+  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1
+  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
+  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
   modifiers.csharp:
   - public
   - class
@@ -127,7 +132,7 @@ items:
   source:
     id: Options
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 24
+    startLine: 25
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -156,7 +161,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 26
+    startLine: 27
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -185,7 +190,7 @@ items:
   source:
     id: WithBaseAddress
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 35
+    startLine: 36
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -222,7 +227,7 @@ items:
   source:
     id: WithBaseAddress
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 39
+    startLine: 40
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -262,7 +267,7 @@ items:
   source:
     id: WithBaseAddress
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 47
+    startLine: 48
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -299,7 +304,7 @@ items:
   source:
     id: WithBaseAddress
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 51
+    startLine: 52
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -339,7 +344,7 @@ items:
   source:
     id: WithBasePath
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 59
+    startLine: 60
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -376,7 +381,7 @@ items:
   source:
     id: WithBasePath
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 63
+    startLine: 64
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -416,7 +421,7 @@ items:
   source:
     id: WithHttpClientHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 71
+    startLine: 72
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -453,7 +458,7 @@ items:
   source:
     id: WithHttpClientHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 75
+    startLine: 76
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -493,7 +498,7 @@ items:
   source:
     id: ConfigureHttpClientBuilder
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 83
+    startLine: 84
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -533,7 +538,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 91
+    startLine: 92
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -573,7 +578,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 101
+    startLine: 102
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -618,7 +623,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 110
+    startLine: 111
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -666,7 +671,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 124
+    startLine: 125
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -712,7 +717,7 @@ items:
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 136
+    startLine: 137
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -749,7 +754,7 @@ items:
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 140
+    startLine: 141
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -789,7 +794,7 @@ items:
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 145
+    startLine: 146
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -829,7 +834,7 @@ items:
   source:
     id: WithContext
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 153
+    startLine: 154
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -872,7 +877,7 @@ items:
   source:
     id: WithExCatching
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 185
+    startLine: 186
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -918,7 +923,7 @@ items:
   source:
     id: WithExCatching
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 217
+    startLine: 218
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -966,7 +971,7 @@ items:
   source:
     id: WithHandlerParameter
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 224
+    startLine: 225
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1006,7 +1011,7 @@ items:
   source:
     id: WithLogging
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 232
+    startLine: 233
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1052,7 +1057,7 @@ items:
   source:
     id: WithLogging
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 238
+    startLine: 239
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1092,7 +1097,7 @@ items:
   source:
     id: WithLogging
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 245
+    startLine: 246
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1137,7 +1142,7 @@ items:
   source:
     id: WithRefitSettings
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 257
+    startLine: 258
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1174,7 +1179,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 261
+    startLine: 262
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1211,7 +1216,7 @@ items:
   source:
     id: WithRefitSettings
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 267
+    startLine: 268
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1251,7 +1256,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 276
+    startLine: 277
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1291,7 +1296,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 284
+    startLine: 285
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1333,7 +1338,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 292
+    startLine: 293
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1373,7 +1378,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 300
+    startLine: 301
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1414,7 +1419,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 305
+    startLine: 306
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1451,7 +1456,7 @@ items:
   source:
     id: WithCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 317
+    startLine: 318
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1488,7 +1493,7 @@ items:
   source:
     id: WithCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 321
+    startLine: 322
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1528,7 +1533,7 @@ items:
   source:
     id: WithCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 329
+    startLine: 330
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1569,7 +1574,7 @@ items:
   source:
     id: WithCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 334
+    startLine: 335
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1606,7 +1611,7 @@ items:
   source:
     id: WithMappingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 346
+    startLine: 347
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1643,7 +1648,7 @@ items:
   source:
     id: WithMappingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 350
+    startLine: 351
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1683,7 +1688,7 @@ items:
   source:
     id: WithMappingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 358
+    startLine: 359
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1724,7 +1729,7 @@ items:
   source:
     id: WithMappingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 363
+    startLine: 364
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1747,6 +1752,69 @@ items:
   - public
   modifiers.vb:
   - Public
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.SetHandlerParameter(System.String,System.Object)
+  commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.SetHandlerParameter(System.String,System.Object)
+  id: SetHandlerParameter(System.String,System.Object)
+  parent: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: SetHandlerParameter(String, Object)
+  nameWithType: ApizrExtendedManagerOptionsBuilder.SetHandlerParameter(String, Object)
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.SetHandlerParameter(System.String, System.Object)
+  type: Method
+  source:
+    id: SetHandlerParameter
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
+    startLine: 377
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Manager
+  syntax:
+    content: public void SetHandlerParameter(string key, object value)
+    parameters:
+    - id: key
+      type: System.String
+    - id: value
+      type: System.Object
+    content.vb: Public Sub SetHandlerParameter(key As String, value As Object)
+  overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.SetHandlerParameter*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.SetPrimaryHttpMessageHandler(System.Func{System.Net.Http.DelegatingHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler})
+  commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.SetPrimaryHttpMessageHandler(System.Func{System.Net.Http.DelegatingHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler})
+  id: SetPrimaryHttpMessageHandler(System.Func{System.Net.Http.DelegatingHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler})
+  parent: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: SetPrimaryHttpMessageHandler(Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler>)
+  nameWithType: ApizrExtendedManagerOptionsBuilder.SetPrimaryHttpMessageHandler(Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler>)
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.SetPrimaryHttpMessageHandler(System.Func<System.Net.Http.DelegatingHandler, Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler>)
+  type: Method
+  source:
+    id: SetPrimaryHttpMessageHandler
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
+    startLine: 379
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Manager
+  syntax:
+    content: public void SetPrimaryHttpMessageHandler(Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> primaryHandlerFactory)
+    parameters:
+    - id: primaryHandlerFactory
+      type: System.Func{System.Net.Http.DelegatingHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+    content.vb: Public Sub SetPrimaryHttpMessageHandler(primaryHandlerFactory As Func(Of DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler))
+  overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.SetPrimaryHttpMessageHandler*
+  nameWithType.vb: ApizrExtendedManagerOptionsBuilder.SetPrimaryHttpMessageHandler(Func(Of DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.SetPrimaryHttpMessageHandler(System.Func(Of System.Net.Http.DelegatingHandler, Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler))
+  name.vb: SetPrimaryHttpMessageHandler(Func(Of DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler))
 references:
 - uid: Apizr.Extending.Configuring.Manager
   commentId: N:Apizr.Extending.Configuring.Manager
@@ -2979,6 +3047,122 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+  parent: Apizr.FusilladeOptionsBuilderExtensions
+  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+  name: WithPriority<ApizrExtendedManagerOptionsBuilder>()
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<ApizrExtendedManagerOptionsBuilder>()
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder>()
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of ApizrExtendedManagerOptionsBuilder)()
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder)()
+  name.vb: WithPriority(Of ApizrExtendedManagerOptionsBuilder)()
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1
+    name: WithPriority<ApizrExtendedManagerOptionsBuilder>
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<ApizrExtendedManagerOptionsBuilder>
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1
+    name: WithPriority(Of ApizrExtendedManagerOptionsBuilder)
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of ApizrExtendedManagerOptionsBuilder)
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  parent: Apizr.FusilladeOptionsBuilderExtensions
+  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  name: WithPriority<ApizrExtendedManagerOptionsBuilder>(Priority)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<ApizrExtendedManagerOptionsBuilder>(Priority)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder>(Fusillade.Priority)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of ApizrExtendedManagerOptionsBuilder)(Priority)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder)(Fusillade.Priority)
+  name.vb: WithPriority(Of ApizrExtendedManagerOptionsBuilder)(Priority)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
+    name: WithPriority<ApizrExtendedManagerOptionsBuilder>
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<ApizrExtendedManagerOptionsBuilder>
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Fusillade.Priority
+    name: Priority
+    nameWithType: Priority
+    fullName: Fusillade.Priority
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
+    name: WithPriority(Of ApizrExtendedManagerOptionsBuilder)
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of ApizrExtendedManagerOptionsBuilder)
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Fusillade.Priority
+    name: Priority
+    nameWithType: Priority
+    fullName: Fusillade.Priority
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  parent: Apizr.FusilladeOptionsBuilderExtensions
+  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  name: WithPriority<ApizrExtendedManagerOptionsBuilder>(Int32)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<ApizrExtendedManagerOptionsBuilder>(Int32)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder>(System.Int32)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of ApizrExtendedManagerOptionsBuilder)(Int32)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder)(System.Int32)
+  name.vb: WithPriority(Of ApizrExtendedManagerOptionsBuilder)(Int32)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
+    name: WithPriority<ApizrExtendedManagerOptionsBuilder>
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<ApizrExtendedManagerOptionsBuilder>
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
+    name: WithPriority(Of ApizrExtendedManagerOptionsBuilder)
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of ApizrExtendedManagerOptionsBuilder)
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
@@ -3927,6 +4111,148 @@ references:
   name: FusilladeOptionsBuilderExtensions
   nameWithType: FusilladeOptionsBuilderExtensions
   fullName: Apizr.FusilladeOptionsBuilderExtensions
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+  name: WithPriority<T>(T)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T)
+  name.vb: WithPriority(Of T)(T)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+    name: WithPriority<T>
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+    name: WithPriority(Of T)
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of T)
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  isExternal: true
+  name: WithPriority<T>(T, Priority)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Priority)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Fusillade.Priority)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Priority)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Fusillade.Priority)
+  name.vb: WithPriority(Of T)(T, Priority)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+    name: WithPriority<T>
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Fusillade.Priority
+    name: Priority
+    nameWithType: Priority
+    fullName: Fusillade.Priority
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+    name: WithPriority(Of T)
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of T)
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Fusillade.Priority
+    name: Priority
+    nameWithType: Priority
+    fullName: Fusillade.Priority
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  isExternal: true
+  name: WithPriority<T>(T, Int32)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Int32)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T, System.Int32)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Int32)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, System.Int32)
+  name.vb: WithPriority(Of T)(T, Int32)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+    name: WithPriority<T>
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+    name: WithPriority(Of T)
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of T)
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr
   commentId: N:Apizr
   name: Apizr
@@ -11712,6 +12038,181 @@ references:
     nameWithType: Type
     fullName: System.Type
     isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.SetHandlerParameter*
+  commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.SetHandlerParameter
+  name: SetHandlerParameter
+  nameWithType: ApizrExtendedManagerOptionsBuilder.SetHandlerParameter
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.SetHandlerParameter
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.SetPrimaryHttpMessageHandler*
+  commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.SetPrimaryHttpMessageHandler
+  name: SetPrimaryHttpMessageHandler
+  nameWithType: ApizrExtendedManagerOptionsBuilder.SetPrimaryHttpMessageHandler
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.SetPrimaryHttpMessageHandler
+- uid: System.Func{System.Net.Http.DelegatingHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+  commentId: T:System.Func{System.Net.Http.DelegatingHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+  parent: System
+  definition: System.Func`4
+  name: Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler>
+  nameWithType: Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler>
+  fullName: System.Func<System.Net.Http.DelegatingHandler, Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler>
+  nameWithType.vb: Func(Of DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler)
+  fullName.vb: System.Func(Of System.Net.Http.DelegatingHandler, Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler)
+  name.vb: Func(Of DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler)
+  spec.csharp:
+  - uid: System.Func`4
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.Http.DelegatingHandler
+    name: DelegatingHandler
+    nameWithType: DelegatingHandler
+    fullName: System.Net.Http.DelegatingHandler
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    nameWithType: IApizrManagerOptionsBase
+    fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    nameWithType: HttpMessageHandler
+    fullName: System.Net.Http.HttpMessageHandler
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`4
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.Http.DelegatingHandler
+    name: DelegatingHandler
+    nameWithType: DelegatingHandler
+    fullName: System.Net.Http.DelegatingHandler
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    nameWithType: IApizrManagerOptionsBase
+    fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    nameWithType: HttpMessageHandler
+    fullName: System.Net.Http.HttpMessageHandler
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func`4
+  commentId: T:System.Func`4
+  isExternal: true
+  name: Func<T1, T2, T3, TResult>
+  nameWithType: Func<T1, T2, T3, TResult>
+  fullName: System.Func<T1, T2, T3, TResult>
+  nameWithType.vb: Func(Of T1, T2, T3, TResult)
+  fullName.vb: System.Func(Of T1, T2, T3, TResult)
+  name.vb: Func(Of T1, T2, T3, TResult)
+  spec.csharp:
+  - uid: System.Func`4
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T1
+    nameWithType: T1
+    fullName: T1
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T2
+    nameWithType: T2
+    fullName: T2
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T3
+    nameWithType: T3
+    fullName: T3
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`4
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T1
+    nameWithType: T1
+    fullName: T1
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T2
+    nameWithType: T2
+    fullName: T2
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T3
+    nameWithType: T3
+    fullName: T3
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
   - name: )
     nameWithType: )
     fullName: )

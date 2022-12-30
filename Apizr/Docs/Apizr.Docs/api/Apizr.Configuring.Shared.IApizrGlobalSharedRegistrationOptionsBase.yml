@@ -9,6 +9,7 @@ items:
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   langs:
   - csharp
   - vb
@@ -19,7 +20,7 @@ items:
   source:
     id: IApizrGlobalSharedRegistrationOptionsBase
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrGlobalSharedRegistrationOptionsBase.cs
-    startLine: 8
+    startLine: 11
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -57,7 +58,7 @@ items:
   source:
     id: BaseUri
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrGlobalSharedRegistrationOptionsBase.cs
-    startLine: 13
+    startLine: 16
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -88,7 +89,7 @@ items:
   source:
     id: BaseAddress
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrGlobalSharedRegistrationOptionsBase.cs
-    startLine: 18
+    startLine: 21
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -119,7 +120,7 @@ items:
   source:
     id: BasePath
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrGlobalSharedRegistrationOptionsBase.cs
-    startLine: 23
+    startLine: 26
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -150,7 +151,7 @@ items:
   source:
     id: ContextFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrGlobalSharedRegistrationOptionsBase.cs
-    startLine: 28
+    startLine: 31
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -163,6 +164,37 @@ items:
       type: System.Func{Polly.Context}
     content.vb: ReadOnly Property ContextFactory As Func(Of Context)
   overload: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory*
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
+  id: PrimaryHandlerFactory
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  langs:
+  - csharp
+  - vb
+  name: PrimaryHandlerFactory
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
+  type: Property
+  source:
+    id: PrimaryHandlerFactory
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrGlobalSharedRegistrationOptionsBase.cs
+    startLine: 36
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  summary: "\nThe primary Http message handler factory (set internally)\n"
+  example: []
+  syntax:
+    content: Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> PrimaryHandlerFactory { get; }
+    parameters: []
+    return:
+      type: System.Func{System.Net.Http.DelegatingHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+    content.vb: ReadOnly Property PrimaryHandlerFactory As Func(Of DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler)
+  overload: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory*
   modifiers.csharp:
   - get
   modifiers.vb:
@@ -332,6 +364,176 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
+  name: PrimaryHandlerFactory
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
+- uid: System.Func{System.Net.Http.DelegatingHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+  commentId: T:System.Func{System.Net.Http.DelegatingHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+  parent: System
+  definition: System.Func`4
+  name: Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler>
+  nameWithType: Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler>
+  fullName: System.Func<System.Net.Http.DelegatingHandler, Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler>
+  nameWithType.vb: Func(Of DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler)
+  fullName.vb: System.Func(Of System.Net.Http.DelegatingHandler, Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler)
+  name.vb: Func(Of DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler)
+  spec.csharp:
+  - uid: System.Func`4
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.Http.DelegatingHandler
+    name: DelegatingHandler
+    nameWithType: DelegatingHandler
+    fullName: System.Net.Http.DelegatingHandler
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    nameWithType: IApizrManagerOptionsBase
+    fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    nameWithType: HttpMessageHandler
+    fullName: System.Net.Http.HttpMessageHandler
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`4
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.Http.DelegatingHandler
+    name: DelegatingHandler
+    nameWithType: DelegatingHandler
+    fullName: System.Net.Http.DelegatingHandler
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    nameWithType: IApizrManagerOptionsBase
+    fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    nameWithType: HttpMessageHandler
+    fullName: System.Net.Http.HttpMessageHandler
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func`4
+  commentId: T:System.Func`4
+  isExternal: true
+  name: Func<T1, T2, T3, TResult>
+  nameWithType: Func<T1, T2, T3, TResult>
+  fullName: System.Func<T1, T2, T3, TResult>
+  nameWithType.vb: Func(Of T1, T2, T3, TResult)
+  fullName.vb: System.Func(Of T1, T2, T3, TResult)
+  name.vb: Func(Of T1, T2, T3, TResult)
+  spec.csharp:
+  - uid: System.Func`4
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T1
+    nameWithType: T1
+    fullName: T1
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T2
+    nameWithType: T2
+    fullName: T2
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T3
+    nameWithType: T3
+    fullName: T3
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`4
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T1
+    nameWithType: T1
+    fullName: T1
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T2
+    nameWithType: T2
+    fullName: T2
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T3
+    nameWithType: T3
+    fullName: T3
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
   - name: TResult
     nameWithType: TResult
     fullName: TResult

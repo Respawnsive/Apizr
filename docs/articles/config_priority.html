@@ -88,7 +88,7 @@
 <li>Speculative requests</li>
 </ul>
 <p>Please refer to its <a href="https://github.com/reactiveui/Fusillade">official documentation</a> if you’d like to know more about it.</p>
-<h3 id="registering">Registering</h3>
+<h3 id="installing">Installing</h3>
 <p>Please first install this integration package:</p>
 <table>
 <thead>
@@ -106,21 +106,103 @@
 </tr>
 </tbody>
 </table>
-<p>Then you&#39;ll be able to register with this option (extension method):</p>
-<pre><code class="lang-csharp">options =&gt; options.WithPriorityManagement()
-</code></pre><h3 id="defining">Defining</h3>
-<p>While defining your api interfaces using Apizr to send a request, you can add an <code>IApizrRequestOptions</code> param decorated with the provided <code>RequestOptions</code> attribute to your methods like:</p>
+<p>You can configure priority at:</p>
+<ul>
+<li>Design time by attribute decoration</li>
+<li>Register time by fluent configuration</li>
+<li>Request time by fluent configuration</li>
+</ul>
+<div class="tabGroup" id="tabgroup_c9tVA8-tLr">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_c9tVA8-tLr_tabid-designing" role="tab" aria-controls="tabpanel_c9tVA8-tLr_tabid-designing" data-tab="tabid-designing" tabindex="0" aria-selected="true">Designing</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_c9tVA8-tLr_tabid-registering" role="tab" aria-controls="tabpanel_c9tVA8-tLr_tabid-registering" data-tab="tabid-registering" tabindex="-1">Registering</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_c9tVA8-tLr_tabid-requesting" role="tab" aria-controls="tabpanel_c9tVA8-tLr_tabid-requesting" data-tab="tabid-requesting" tabindex="-1">Requesting</a>
+</li>
+</ul>
+<section id="tabpanel_c9tVA8-tLr_tabid-designing" role="tabpanel" data-tab="tabid-designing">
+<p>The first thing to do while designing your api interfaces using Apizr to send a request, is to add an <code>IApizrRequestOptions</code> param decorated with the provided <code>RequestOptions</code> attribute to your methods like:</p>
 <pre><code class="lang-csharp">[WebApi(&quot;https://reqres.in/api&quot;)]
 public interface IReqResService
 {
     [Get(&quot;/users&quot;)]
     Task&lt;UserList&gt; GetUsersAsync([RequestOptions] IApizrRequestOptions options);
+
+    [Get(&quot;/users/{userId}&quot;)]
+    Task&lt;UserDetails&gt; GetUserAsync(int userId, [RequestOptions] IApizrRequestOptions options);
 }
-</code></pre><h3 id="using">Using</h3>
+</code></pre><p>This way you&#39;ll make sure to pass your priority to the priority handler, defined thanks to request options builder at request time.</p>
+<p>Another way to deal with priority at design time is to use the <code>PriorityAttribute</code>:</p>
+<pre><code class="lang-csharp">[assembly:Priority(Priority.UserInitiated)]
+namespace Your.Namespace
+{
+    [WebApi(&quot;https://reqres.in/api&quot;), Priority(Priority.Background)]
+    public interface IReqResService
+    {
+        [Get(&quot;/users&quot;), Priority(Priority.Speculative)]
+        Task&lt;UserList&gt; GetUsersAsync([RequestOptions] IApizrRequestOptions options);
+
+        [Get(&quot;/users/{userId}&quot;)]
+        Task&lt;UserDetails&gt; GetUserAsync(int userId, [RequestOptions] IApizrRequestOptions options);
+    }
+}
+</code></pre><p>Here I&#39;m saying:</p>
+<ul>
+<li>Send all requests of all apis with a default <code>UserInitiated</code> priority (the assembly one)</li>
+<li>Excepted for all the requests of the <code>IReqResService</code> with a <code>Background</code> priority instead (the interface one)</li>
+<li>Excepted for any GetUsersAsync request with a <code>Speculative</code> priority instead (the method one)</li>
+</ul>
+<p>Of course, you could (should) mix it with the <code>RequestOptions</code> method parameter implementation, so you could change your mind at request time with the request options builder.</p>
+</section>
+<section id="tabpanel_c9tVA8-tLr_tabid-registering" role="tabpanel" data-tab="tabid-registering" aria-hidden="true" hidden="hidden">
+<p>Designing your apis using PriorityAttribute or not, you still have to activate priority management at register time.
+By activating it, you&#39;re free to provide a priority or not.</p>
+<p>Here is how to activate it, thanks to the <code>WithPriority</code> extension method:</p>
+<pre><code class="lang-csharp">// activation configuration only
+options =&gt; options.WithPriority()
+
+// activation with default priority configuration
+options =&gt; options.WithPriority(Priority.Background)
+
+// activation with default custom priority configuration
+options =&gt; options.WithPriority(70)
+</code></pre><p>All priority fluent options are available with and without using registry. 
+It means that you can share priority configuration, setting it at registry level and/or set some specific one at api level, something like:</p>
+<pre><code class="lang-csharp">var apizrRegistry = ApizrBuilder.CreateRegistry(registry =&gt; registry
+        .AddGroup(group =&gt; group
+                .AddManagerFor&lt;IReqResUserService&gt;(options =&gt; options
+                    .WithPriority(Priority.UserInitiated))
+                .AddManagerFor&lt;IReqResResourceService&gt;(),
+            options =&gt; options.WithPriority(Priority.Background))
+        .AddManagerFor&lt;IHttpBinService&gt;()
+        .AddCrudManagerFor&lt;User, int, PagedResult&lt;User&gt;, IDictionary&lt;string, object&gt;&gt;(options =&gt; options
+            .WithBaseAddress(&quot;https://reqres.in/api/users&quot;)
+            .WithPriority(Priority.Speculative)),
+    options =&gt; options.WithPriority());
+</code></pre><p>In this quite complexe example, we can see we defined some default priorities to apply at deferent levels.</p>
+</section>
+<section id="tabpanel_c9tVA8-tLr_tabid-requesting" role="tabpanel" data-tab="tabid-requesting" aria-hidden="true" hidden="hidden">
 <p>Just call your api with your priority thanks to the request options builder (extension method):</p>
-<pre><code class="lang-csharp">var result = await _reqResManager.ExecuteAsync((options, api) =&gt; api.GetUsersAsync(options), 
+<pre><code class="lang-csharp">var result = await _reqResManager.ExecuteAsync((opt, api) =&gt; api.GetUsersAsync(opt), 
     options =&gt; options.WithPriority(Priority.Background));
-</code></pre></article>
+</code></pre></section>
+</div>
+<p>Note that you can mix design, register and request time priority configurations.
+In case of mixed configurations, the internal duplicate strategy will be to take the closest one to the request.</p>
+<p>Priority configuration duplicate strategy order:</p>
+<ul>
+<li>take fluent request configuration first if defined (request options)</li>
+<li>otherwise the request attribute decoration one (method)</li>
+<li>otherwise the fluent proper resgistration one (api proper options)</li>
+<li>otherwise the api attribute decoration one (interface)</li>
+<li>otherwise the fluent common resgistration one (registry common options)</li>
+<li>otherwise the global attribute decoration one (assembly)</li>
+</ul>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">

@@ -180,7 +180,7 @@ namespace Apizr.Sample
 But you can adjust logging configuration thanks to attribute parameters.</p>
 </section>
 <section id="tabpanel_FITRDUMniV_tabid-registering" role="tabpanel" data-tab="tabid-registering" aria-hidden="true" hidden="hidden">
-<p>Configuring the logging fluently at registration time allows you to set it dynamically (e.g. based on settings)</p>
+<p>Configuring the logging fluently at register time allows you to set it dynamically (e.g. based on settings)</p>
 <p>You can set it thanks to this option:</p>
 <pre><code class="lang-csharp">// direct configuration
 options =&gt; options.WithLogging(HttpTracerMode.Everything, HttpMessageParts.All, LogLevel.Information)
@@ -217,12 +217,12 @@ options =&gt; options.WithLogging(HttpTracerMode.Everything, HttpMessageParts.Al
 In case of mixed configurations, the internal duplicate strategy will be to take the closest one to the request.</p>
 <p>Logging configuration duplicate strategy order:</p>
 <ul>
-<li>take fluent request configuration first if defined</li>
-<li>otherwise the request attribute decoration one</li>
-<li>otherwise the fluent proper resgistration one</li>
-<li>otherwise the api attribute decoration one</li>
-<li>otherwise the fluent common resgistration one</li>
-<li>otherwise the global attribute decoration one</li>
+<li>take fluent request configuration first if defined (request options)</li>
+<li>otherwise the request attribute decoration one (method)</li>
+<li>otherwise the fluent proper resgistration one (api proper options)</li>
+<li>otherwise the api attribute decoration one (interface)</li>
+<li>otherwise the fluent common resgistration one (registry common options)</li>
+<li>otherwise the global attribute decoration one (assembly)</li>
 </ul>
 </article>
           </div>

@@ -857,6 +857,24 @@
             <param name="mappingHandler">An <see cref="T:Apizr.Mapping.IMappingHandler"/> mapping implementation instance</param>
             <returns></returns>
         </member>
+        <member name="M:Apizr.Configuring.CrudHandlerParameterAttribute.#ctor(System.String,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ReadAllHandlerParameterAttribute.#ctor(System.String,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ReadHandlerParameterAttribute.#ctor(System.String,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.CreateHandlerParameterAttribute.#ctor(System.String,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.UpdateHandlerParameterAttribute.#ctor(System.String,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.DeleteHandlerParameterAttribute.#ctor(System.String,System.Object)">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Configuring.Manager.ApizrManagerOptions">
             <inheritdoc cref="T:Apizr.Configuring.Manager.IApizrManagerOptions"/>
         </member>
@@ -945,6 +963,9 @@
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.ContextFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.PrimaryHandlerFactory">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.HttpTracerMode">
@@ -1177,7 +1198,7 @@
         <member name="T:Apizr.Configuring.Proper.ApizrProperOptions">
             <inheritdoc cref="T:Apizr.Configuring.Proper.IApizrProperOptions"/>
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptions.#ctor(Apizr.Configuring.Shared.IApizrSharedRegistrationOptions,System.Type,System.String[],System.String[],System.String,System.String,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptions.#ctor(Apizr.Configuring.Shared.IApizrSharedRegistrationOptions,System.Type,System.String[],System.String[],System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])">
             <summary>
             The common options constructor
             </summary>
@@ -1187,6 +1208,7 @@
             <param name="webApiPolicyRegistryKeys">Specific policies</param>
             <param name="baseAddress">The web api base address</param>
             <param name="basePath">The web api base path</param>
+            <param name="handlersParameters">Some handlers parameters</param>
             <param name="httpTracerMode">The http tracer mode</param>
             <param name="trafficVerbosity">The traffic verbosity</param>
             <param name="logLevels">The log levels</param>
@@ -1219,9 +1241,6 @@
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.DelegatingHandlersFactories">
-            <inheritdoc />
-        </member>
-        <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.ContextFactory">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Proper.ApizrProperOptionsBase">
@@ -1924,6 +1943,9 @@
         <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.ContextFactory">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Configuring.Shared.IApizrExtendedSharedRegistrationOptionsBuilderBase">
             <summary>
             Builder options available at both common and proper level for extended registration
@@ -2030,6 +2052,11 @@
         <member name="P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory">
             <summary>
             The Polly Context to pass through it all
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory">
+            <summary>
+            The primary Http message handler factory (set internally)
             </summary>
         </member>
         <member name="T:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase">
@@ -3849,29 +3876,12 @@
             <param name="payload">The payload</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Requesting.ICrudApi`4.Create(`0,System.Threading.CancellationToken)">
-            <summary>
-            Send a Create request with a <typeparamref name="T"/> payload, passing a cancellation token through the request
-            </summary>
-            <param name="payload">The payload</param>
-            <param name="cancellationToken">The cancellation token</param>
-            <returns></returns>
-        </member>
         <member name="M:Apizr.Requesting.ICrudApi`4.Create(`0,Apizr.Configuring.Request.IApizrRequestOptions)">
             <summary>
             Send a Create request with a <typeparamref name="T"/> payload, passing a Polly context and a cancellation token through the request
             </summary>
             <param name="payload">The payload</param>
             <param name="options">The request options</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Requesting.ICrudApi`4.Create(`0,Apizr.Configuring.Request.IApizrRequestOptions,System.Threading.CancellationToken)">
-            <summary>
-            Send a Create request with a <typeparamref name="T"/> payload, passing a Polly context and a cancellation token through the request
-            </summary>
-            <param name="payload">The payload</param>
-            <param name="options">The request options</param>
-            <param name="cancellationToken">The cancellation token</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll(System.Int32)">
@@ -3985,44 +3995,12 @@
             <param name="readAllParams">Query params used as cache key</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll(System.Threading.CancellationToken)">
-            <summary>
-            Send a ReadAll request, passing a cancellation token through the request
-            </summary>
-            <param name="cancellationToken">The cancellation token</param>
-            <returns></returns>
-        </member>
         <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll(`3,Apizr.Configuring.Request.IApizrRequestOptions)">
             <summary>
             Send a ReadAll request with some query params used as cache key
             </summary>
             <param name="readAllParams">Query params used as cache key</param>
             <param name="options">The request options</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll(`3,System.Threading.CancellationToken)">
-            <summary>
-            Send a ReadAll request with some query params used as cache key, passing a cancellation token through the request
-            </summary>
-            <param name="readAllParams">Query params used as cache key</param>
-            <param name="cancellationToken">The cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll(Apizr.Configuring.Request.IApizrRequestOptions,System.Threading.CancellationToken)">
-            <summary>
-            Send a ReadAll request, passing a cancellation token through the request
-            </summary>
-            <param name="options">The request options</param>
-            <param name="cancellationToken">The cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Requesting.ICrudApi`4.ReadAll(`3,Apizr.Configuring.Request.IApizrRequestOptions,System.Threading.CancellationToken)">
-            <summary>
-            Send a ReadAll request with some query params used as cache key
-            </summary>
-            <param name="readAllParams">Query params used as cache key</param>
-            <param name="options">The request options</param>
-            <param name="cancellationToken">The cancellation token</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Requesting.ICrudApi`4.Read(`1,System.Int32)">
@@ -4084,23 +4062,6 @@
             <param name="options">The request options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Requesting.ICrudApi`4.Read(`1,System.Threading.CancellationToken)">
-            <summary>
-            Send a Read request with a key param, passing a cancellation token through the request
-            </summary>
-            <param name="key">The key</param>
-            <param name="cancellationToken">The cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Requesting.ICrudApi`4.Read(`1,Apizr.Configuring.Request.IApizrRequestOptions,System.Threading.CancellationToken)">
-            <summary>
-            Send a Read request with a key param
-            </summary>
-            <param name="key">The key</param>
-            <param name="options">The request options</param>
-            <param name="cancellationToken">The cancellation token</param>
-            <returns></returns>
-        </member>
         <member name="M:Apizr.Requesting.ICrudApi`4.Update(`1,`0,Polly.Context)">
             <summary>
             Send an Update request with a key and a payload, passing a Polly context through the request
@@ -4137,25 +4098,6 @@
             <param name="options">The request options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Requesting.ICrudApi`4.Update(`1,`0,System.Threading.CancellationToken)">
-            <summary>
-            Send an Update request with a key and a payload, passing a cancellation token through the request
-            </summary>
-            <param name="key">The key</param>
-            <param name="payload">The payload</param>
-            <param name="cancellationToken">The cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Requesting.ICrudApi`4.Update(`1,`0,Apizr.Configuring.Request.IApizrRequestOptions,System.Threading.CancellationToken)">
-            <summary>
-            Send an Update request with a key and a payload, passing a cancellation token through the request
-            </summary>
-            <param name="key">The key</param>
-            <param name="payload">The payload</param>
-            <param name="options">The request options</param>
-            <param name="cancellationToken">The cancellation token</param>
-            <returns></returns>
-        </member>
         <member name="M:Apizr.Requesting.ICrudApi`4.Delete(`1,Polly.Context)">
             <summary>
             Send a Delete request with a key param, passing a Polly context through the request
@@ -4186,23 +4128,6 @@
             </summary>
             <param name="key">The key</param>
             <param name="options">The request options</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Requesting.ICrudApi`4.Delete(`1,System.Threading.CancellationToken)">
-            <summary>
-            Send a Delete request with a key param, passing a cancellation token through the request
-            </summary>
-            <param name="key">The key</param>
-            <param name="cancellationToken">The cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Requesting.ICrudApi`4.Delete(`1,Apizr.Configuring.Request.IApizrRequestOptions,System.Threading.CancellationToken)">
-            <summary>
-            Send a Delete request with a key param, passing a cancellation token through the request
-            </summary>
-            <param name="key">The key</param>
-            <param name="options">The request options</param>
-            <param name="cancellationToken">The cancellation token</param>
             <returns></returns>
         </member>
         <member name="T:Apizr.WebApiAttribute">
@@ -4265,13 +4190,7 @@
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Create(`0)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Create(`0,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Create(`0,Apizr.Configuring.Request.IApizrRequestOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Create(`0,Apizr.Configuring.Request.IApizrRequestOptions,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll(System.Int32)">
@@ -4316,19 +4235,7 @@
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll(`3)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll(`3,Apizr.Configuring.Request.IApizrRequestOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll(`3,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll(Apizr.Configuring.Request.IApizrRequestOptions,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.ReadAll(`3,Apizr.Configuring.Request.IApizrRequestOptions,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Read(`1,System.Int32)">
@@ -4352,12 +4259,6 @@
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Read(`1,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Read(`1,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Read(`1,Apizr.Configuring.Request.IApizrRequestOptions,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Update(`1,`0,Polly.Context)">
             <inheritdoc />
         </member>
@@ -4368,12 +4269,6 @@
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Update(`1,`0,Apizr.Configuring.Request.IApizrRequestOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Update(`1,`0,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Update(`1,`0,Apizr.Configuring.Request.IApizrRequestOptions,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Delete(`1,Polly.Context)">
@@ -4388,12 +4283,6 @@
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Delete(`1,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Delete(`1,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Delete(`1,Apizr.Configuring.Request.IApizrRequestOptions,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Create(`0,Polly.Context)">
             <inheritdoc />
         </member>
@@ -4403,13 +4292,7 @@
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Create(`0)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Create(`0,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Create(`0,Apizr.Configuring.Request.IApizrRequestOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Create(`0,Apizr.Configuring.Request.IApizrRequestOptions,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll(System.Int32)">
@@ -4454,19 +4337,7 @@
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll(`3)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll(`3,Apizr.Configuring.Request.IApizrRequestOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll(`3,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll(Apizr.Configuring.Request.IApizrRequestOptions,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#ReadAll(`3,Apizr.Configuring.Request.IApizrRequestOptions,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Read(`1,System.Int32)">
@@ -4490,12 +4361,6 @@
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Read(`1,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Read(`1,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Read(`1,Apizr.Configuring.Request.IApizrRequestOptions,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Update(`1,`0,Polly.Context)">
             <inheritdoc />
         </member>
@@ -4508,12 +4373,6 @@
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Update(`1,`0,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Update(`1,`0,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Update(`1,`0,Apizr.Configuring.Request.IApizrRequestOptions,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Delete(`1,Polly.Context)">
             <inheritdoc />
         </member>
@@ -4524,12 +4383,6 @@
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Delete(`1,Apizr.Configuring.Request.IApizrRequestOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Delete(`1,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrRequestingICrudApi`4.Apizr#Requesting#ICrudApi{T,TKey,TReadAllResult,TReadAllParams}#Delete(`1,Apizr.Configuring.Request.IApizrRequestOptions,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
     </members>

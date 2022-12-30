@@ -9,23 +9,105 @@
             Fusillade options builder extensions
             </summary>
         </member>
-        <member name="M:Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)">
+        <member name="M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)">
             <summary>
-            Tells Apizr to manage request priorities
+            Tells Apizr to manage request priority
             </summary>
             <typeparam name="T"></typeparam>
             <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)">
+            <summary>
+            Tells Apizr to manage request priority
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="builder"></param>
+            <param name="priority"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)">
+            <summary>
+            Tells Apizr to manage request priority
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="builder"></param>
+            <param name="priority"></param>
             <returns></returns>
         </member>
         <member name="T:Apizr.PriorityAttribute">
             <summary>
             The Fusillade priority attribute
             </summary>
+            <remarks>
+            <para>Info:</para>
+            <para>. Decorating a request parameter with PriorityAttribute is obsolete. Please use the request options parameter instead.</para>
+            <para>. Decorating anything else must come with the priority value.</para>
+            <para>. Don't forget to activate priority management fluently at register time.</para>
+            </remarks>
         </member>
         <member name="M:Apizr.PriorityAttribute.#ctor">
             <summary>
-            Set a priority for the current request
+            Define priority
             </summary>
+            <remarks>
+            <para>Warning: Decorating a request parameter with PriorityAttribute is obsolete. Please use the request options parameter instead.</para>
+            Error: Decorating anything else must come with the priority value.
+            </remarks>
+        </member>
+        <member name="M:Apizr.PriorityAttribute.#ctor(Fusillade.Priority)">
+            <summary>
+            Define priority
+            </summary>
+            <param name="priority">The priority</param>
+        </member>
+        <member name="M:Apizr.PriorityAttribute.#ctor(System.Int32)">
+            <summary>
+            Define priority
+            </summary>
+            <param name="priority">The priority</param>
+        </member>
+        <member name="T:Apizr.ReadAllPriorityAttribute">
+            <summary>
+            The Fusillade priority attribute
+            </summary>
+            <remarks>
+            <para>Info:</para>
+            <para>. Don't forget to activate priority management fluently at register time.</para>
+            </remarks>
+        </member>
+        <member name="M:Apizr.ReadAllPriorityAttribute.#ctor(Fusillade.Priority)">
+            <summary>
+            Define priority
+            </summary>
+            <param name="priority">The priority</param>
+        </member>
+        <member name="M:Apizr.ReadAllPriorityAttribute.#ctor(System.Int32)">
+            <summary>
+            Define priority
+            </summary>
+            <param name="priority">The priority</param>
+        </member>
+        <member name="T:Apizr.ReadPriorityAttribute">
+            <summary>
+            The Fusillade priority attribute
+            </summary>
+            <remarks>
+            <para>Info:</para>
+            <para>. Don't forget to activate priority management fluently at register time.</para>
+            </remarks>
+        </member>
+        <member name="M:Apizr.ReadPriorityAttribute.#ctor(Fusillade.Priority)">
+            <summary>
+            Define priority
+            </summary>
+            <param name="priority">The priority</param>
+        </member>
+        <member name="M:Apizr.ReadPriorityAttribute.#ctor(System.Int32)">
+            <summary>
+            Define priority
+            </summary>
+            <param name="priority">The priority</param>
         </member>
     </members>
 </doc>

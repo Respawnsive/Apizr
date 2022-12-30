@@ -9,6 +9,8 @@ items:
   - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler})
   - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
   - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.Options
+  - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.SetHandlerParameter(System.String,System.Object)
+  - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.SetPrimaryHttpMessageHandler(System.Func{System.Net.Http.DelegatingHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler})
   - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
@@ -54,7 +56,7 @@ items:
   source:
     id: ApizrCommonOptionsBuilder
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 21
+    startLine: 22
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -97,6 +99,9 @@ items:
   - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(System.Func{Akavache.IBlobCache},System.String)
   - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.Apizr.AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler``1(AutoMapper.IConfigurationProvider)
   - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1
+  - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1
+  - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
+  - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
   modifiers.csharp:
   - public
   - class
@@ -117,7 +122,7 @@ items:
   source:
     id: Options
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 26
+    startLine: 27
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -148,7 +153,7 @@ items:
   source:
     id: WithBaseAddress
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 37
+    startLine: 38
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -185,7 +190,7 @@ items:
   source:
     id: WithBaseAddress
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 41
+    startLine: 42
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -225,7 +230,7 @@ items:
   source:
     id: WithBaseAddress
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 49
+    startLine: 50
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -262,7 +267,7 @@ items:
   source:
     id: WithBaseAddress
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 53
+    startLine: 54
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -302,7 +307,7 @@ items:
   source:
     id: WithBasePath
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 61
+    startLine: 62
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -339,7 +344,7 @@ items:
   source:
     id: WithBasePath
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 65
+    startLine: 66
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -379,7 +384,7 @@ items:
   source:
     id: WithHttpClientHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 73
+    startLine: 74
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -416,7 +421,7 @@ items:
   source:
     id: WithHttpClientHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 77
+    startLine: 78
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -456,7 +461,7 @@ items:
   source:
     id: WithHttpClient
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 85
+    startLine: 86
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -496,7 +501,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 93
+    startLine: 94
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -536,7 +541,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 103
+    startLine: 104
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -581,7 +586,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 111
+    startLine: 112
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -635,7 +640,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 116
+    startLine: 117
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -689,7 +694,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 130
+    startLine: 131
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -738,7 +743,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 135
+    startLine: 136
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -787,7 +792,7 @@ items:
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 146
+    startLine: 147
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -824,7 +829,7 @@ items:
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 150
+    startLine: 151
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -864,7 +869,7 @@ items:
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 154
+    startLine: 155
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -904,7 +909,7 @@ items:
   source:
     id: WithPolicyRegistry
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 162
+    startLine: 163
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -944,7 +949,7 @@ items:
   source:
     id: WithPolicyRegistry
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 166
+    startLine: 167
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -984,7 +989,7 @@ items:
   source:
     id: WithRefitSettings
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 174
+    startLine: 175
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1021,7 +1026,7 @@ items:
   source:
     id: WithRefitSettings
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 178
+    startLine: 179
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1061,7 +1066,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 186
+    startLine: 187
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1098,7 +1103,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 190
+    startLine: 191
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1138,7 +1143,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 194
+    startLine: 195
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1178,7 +1183,7 @@ items:
   source:
     id: WithCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 202
+    startLine: 203
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1215,7 +1220,7 @@ items:
   source:
     id: WithCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 206
+    startLine: 207
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1255,7 +1260,7 @@ items:
   source:
     id: WithExCatching
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 214
+    startLine: 215
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1301,7 +1306,7 @@ items:
   source:
     id: WithExCatching
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 246
+    startLine: 247
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1349,7 +1354,7 @@ items:
   source:
     id: WithHandlerParameter
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 253
+    startLine: 254
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1389,7 +1394,7 @@ items:
   source:
     id: WithLogging
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 261
+    startLine: 262
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1435,7 +1440,7 @@ items:
   source:
     id: WithLogging
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 266
+    startLine: 267
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1481,7 +1486,7 @@ items:
   source:
     id: WithLogging
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 277
+    startLine: 278
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1521,7 +1526,7 @@ items:
   source:
     id: WithContext
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 284
+    startLine: 285
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1564,7 +1569,7 @@ items:
   source:
     id: WithLoggerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 316
+    startLine: 317
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1601,7 +1606,7 @@ items:
   source:
     id: WithLoggerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 320
+    startLine: 321
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1641,7 +1646,7 @@ items:
   source:
     id: WithMappingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 328
+    startLine: 329
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1678,7 +1683,7 @@ items:
   source:
     id: WithMappingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 332
+    startLine: 333
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1704,6 +1709,69 @@ items:
   - Public
   fullName.vb: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithMappingHandler(System.Func(Of Apizr.Mapping.IMappingHandler))
   name.vb: WithMappingHandler(Func(Of IMappingHandler))
+- uid: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.SetHandlerParameter(System.String,System.Object)
+  commentId: M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.SetHandlerParameter(System.String,System.Object)
+  id: SetHandlerParameter(System.String,System.Object)
+  parent: Apizr.Configuring.Common.ApizrCommonOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: SetHandlerParameter(String, Object)
+  nameWithType: ApizrCommonOptionsBuilder.SetHandlerParameter(String, Object)
+  fullName: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.SetHandlerParameter(System.String, System.Object)
+  type: Method
+  source:
+    id: SetHandlerParameter
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
+    startLine: 342
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Common
+  syntax:
+    content: public void SetHandlerParameter(string key, object value)
+    parameters:
+    - id: key
+      type: System.String
+    - id: value
+      type: System.Object
+    content.vb: Public Sub SetHandlerParameter(key As String, value As Object)
+  overload: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.SetHandlerParameter*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.SetPrimaryHttpMessageHandler(System.Func{System.Net.Http.DelegatingHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler})
+  commentId: M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.SetPrimaryHttpMessageHandler(System.Func{System.Net.Http.DelegatingHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler})
+  id: SetPrimaryHttpMessageHandler(System.Func{System.Net.Http.DelegatingHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler})
+  parent: Apizr.Configuring.Common.ApizrCommonOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: SetPrimaryHttpMessageHandler(Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler>)
+  nameWithType: ApizrCommonOptionsBuilder.SetPrimaryHttpMessageHandler(Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler>)
+  fullName: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.SetPrimaryHttpMessageHandler(System.Func<System.Net.Http.DelegatingHandler, Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler>)
+  type: Method
+  source:
+    id: SetPrimaryHttpMessageHandler
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
+    startLine: 344
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Common
+  syntax:
+    content: public void SetPrimaryHttpMessageHandler(Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> primaryHandlerFactory)
+    parameters:
+    - id: primaryHandlerFactory
+      type: System.Func{System.Net.Http.DelegatingHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+    content.vb: Public Sub SetPrimaryHttpMessageHandler(primaryHandlerFactory As Func(Of DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler))
+  overload: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.SetPrimaryHttpMessageHandler*
+  nameWithType.vb: ApizrCommonOptionsBuilder.SetPrimaryHttpMessageHandler(Func(Of DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.SetPrimaryHttpMessageHandler(System.Func(Of System.Net.Http.DelegatingHandler, Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler))
+  name.vb: SetPrimaryHttpMessageHandler(Func(Of DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler))
 references:
 - uid: Apizr.Configuring.Common
   commentId: N:Apizr.Configuring.Common
@@ -2708,6 +2776,122 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+  parent: Apizr.FusilladeOptionsBuilderExtensions
+  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+  name: WithPriority<ApizrCommonOptionsBuilder>()
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<ApizrCommonOptionsBuilder>()
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Common.ApizrCommonOptionsBuilder>()
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of ApizrCommonOptionsBuilder)()
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Common.ApizrCommonOptionsBuilder)()
+  name.vb: WithPriority(Of ApizrCommonOptionsBuilder)()
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1
+    name: WithPriority<ApizrCommonOptionsBuilder>
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<ApizrCommonOptionsBuilder>
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Common.ApizrCommonOptionsBuilder>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1
+    name: WithPriority(Of ApizrCommonOptionsBuilder)
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of ApizrCommonOptionsBuilder)
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Common.ApizrCommonOptionsBuilder)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  parent: Apizr.FusilladeOptionsBuilderExtensions
+  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  name: WithPriority<ApizrCommonOptionsBuilder>(Priority)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<ApizrCommonOptionsBuilder>(Priority)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Common.ApizrCommonOptionsBuilder>(Fusillade.Priority)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of ApizrCommonOptionsBuilder)(Priority)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Common.ApizrCommonOptionsBuilder)(Fusillade.Priority)
+  name.vb: WithPriority(Of ApizrCommonOptionsBuilder)(Priority)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
+    name: WithPriority<ApizrCommonOptionsBuilder>
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<ApizrCommonOptionsBuilder>
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Common.ApizrCommonOptionsBuilder>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Fusillade.Priority
+    name: Priority
+    nameWithType: Priority
+    fullName: Fusillade.Priority
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
+    name: WithPriority(Of ApizrCommonOptionsBuilder)
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of ApizrCommonOptionsBuilder)
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Common.ApizrCommonOptionsBuilder)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Fusillade.Priority
+    name: Priority
+    nameWithType: Priority
+    fullName: Fusillade.Priority
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  parent: Apizr.FusilladeOptionsBuilderExtensions
+  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  name: WithPriority<ApizrCommonOptionsBuilder>(Int32)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<ApizrCommonOptionsBuilder>(Int32)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Common.ApizrCommonOptionsBuilder>(System.Int32)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of ApizrCommonOptionsBuilder)(Int32)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Common.ApizrCommonOptionsBuilder)(System.Int32)
+  name.vb: WithPriority(Of ApizrCommonOptionsBuilder)(Int32)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
+    name: WithPriority<ApizrCommonOptionsBuilder>
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<ApizrCommonOptionsBuilder>
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Common.ApizrCommonOptionsBuilder>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
+    name: WithPriority(Of ApizrCommonOptionsBuilder)
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of ApizrCommonOptionsBuilder)
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Common.ApizrCommonOptionsBuilder)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
@@ -3417,6 +3601,148 @@ references:
   name: FusilladeOptionsBuilderExtensions
   nameWithType: FusilladeOptionsBuilderExtensions
   fullName: Apizr.FusilladeOptionsBuilderExtensions
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+  name: WithPriority<T>(T)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T)
+  name.vb: WithPriority(Of T)(T)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+    name: WithPriority<T>
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+    name: WithPriority(Of T)
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of T)
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  isExternal: true
+  name: WithPriority<T>(T, Priority)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Priority)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Fusillade.Priority)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Priority)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Fusillade.Priority)
+  name.vb: WithPriority(Of T)(T, Priority)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+    name: WithPriority<T>
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Fusillade.Priority
+    name: Priority
+    nameWithType: Priority
+    fullName: Fusillade.Priority
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+    name: WithPriority(Of T)
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of T)
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Fusillade.Priority
+    name: Priority
+    nameWithType: Priority
+    fullName: Fusillade.Priority
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  isExternal: true
+  name: WithPriority<T>(T, Int32)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Int32)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T, System.Int32)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Int32)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, System.Int32)
+  name.vb: WithPriority(Of T)(T, Int32)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+    name: WithPriority<T>
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+    name: WithPriority(Of T)
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of T)
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr
   commentId: N:Apizr
   name: Apizr
@@ -11890,6 +12216,181 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.SetHandlerParameter*
+  commentId: Overload:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.SetHandlerParameter
+  name: SetHandlerParameter
+  nameWithType: ApizrCommonOptionsBuilder.SetHandlerParameter
+  fullName: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.SetHandlerParameter
+- uid: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.SetPrimaryHttpMessageHandler*
+  commentId: Overload:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.SetPrimaryHttpMessageHandler
+  name: SetPrimaryHttpMessageHandler
+  nameWithType: ApizrCommonOptionsBuilder.SetPrimaryHttpMessageHandler
+  fullName: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.SetPrimaryHttpMessageHandler
+- uid: System.Func{System.Net.Http.DelegatingHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+  commentId: T:System.Func{System.Net.Http.DelegatingHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+  parent: System
+  definition: System.Func`4
+  name: Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler>
+  nameWithType: Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler>
+  fullName: System.Func<System.Net.Http.DelegatingHandler, Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler>
+  nameWithType.vb: Func(Of DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler)
+  fullName.vb: System.Func(Of System.Net.Http.DelegatingHandler, Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler)
+  name.vb: Func(Of DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler)
+  spec.csharp:
+  - uid: System.Func`4
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.Http.DelegatingHandler
+    name: DelegatingHandler
+    nameWithType: DelegatingHandler
+    fullName: System.Net.Http.DelegatingHandler
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    nameWithType: IApizrManagerOptionsBase
+    fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    nameWithType: HttpMessageHandler
+    fullName: System.Net.Http.HttpMessageHandler
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`4
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.Http.DelegatingHandler
+    name: DelegatingHandler
+    nameWithType: DelegatingHandler
+    fullName: System.Net.Http.DelegatingHandler
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    nameWithType: ILogger
+    fullName: Microsoft.Extensions.Logging.ILogger
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    nameWithType: IApizrManagerOptionsBase
+    fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    nameWithType: HttpMessageHandler
+    fullName: System.Net.Http.HttpMessageHandler
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func`4
+  commentId: T:System.Func`4
+  isExternal: true
+  name: Func<T1, T2, T3, TResult>
+  nameWithType: Func<T1, T2, T3, TResult>
+  fullName: System.Func<T1, T2, T3, TResult>
+  nameWithType.vb: Func(Of T1, T2, T3, TResult)
+  fullName.vb: System.Func(Of T1, T2, T3, TResult)
+  name.vb: Func(Of T1, T2, T3, TResult)
+  spec.csharp:
+  - uid: System.Func`4
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T1
+    nameWithType: T1
+    fullName: T1
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T2
+    nameWithType: T2
+    fullName: T2
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T3
+    nameWithType: T3
+    fullName: T3
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`4
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T1
+    nameWithType: T1
+    fullName: T1
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T2
+    nameWithType: T2
+    fullName: T2
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T3
+    nameWithType: T3
+    fullName: T3
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
   - name: )
     nameWithType: )
     fullName: )

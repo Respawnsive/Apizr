@@ -17,7 +17,7 @@ using Refit;
 
 [assembly:Policy("TransientHttpError")]
 [assembly:Cache(CacheMode.GetAndFetch, "00:10:00")]
-[assembly:Log(HttpMessageParts.All, HttpTracerMode.Everything, LogLevel.Trace)]
+//[assembly:Log(HttpMessageParts.All, HttpTracerMode.Everything, LogLevel.Trace)]
 [assembly:Priority(Priority.Background)]
 namespace Apizr.Tests.Apis
 {

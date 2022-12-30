@@ -16,7 +16,8 @@ namespace Apizr
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var options = request.GetApizrRequestOptions();
-            cancellationToken = options.CancellationToken;
+            if(options?.CancellationToken != null)
+                cancellationToken = options.CancellationToken;
 
             return base.SendAsync(request, cancellationToken);
         }

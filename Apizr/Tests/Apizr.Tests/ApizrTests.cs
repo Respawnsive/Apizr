@@ -106,6 +106,16 @@ namespace Apizr.Tests
             reqResManager.Options.TrafficVerbosity.Should().Be(HttpMessageParts.RequestCookies);
             reqResManager.Options.LogLevels.Should().AllBeEquivalentTo(LogLevel.Warning);
         }
+        
+        [Fact]
+        public async Task Calling_Without_Configuring_Logging_Should_Log_With_Default_Values()
+        {
+            var reqResManager = ApizrBuilder.CreateManagerFor<IReqResSimpleService>();
+
+            var result = await reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+
+            result.Should().NotBeNull();
+        }
 
         [Fact]
         public async Task Calling_WithAkavacheCacheHandler_Should_Cache_Result()

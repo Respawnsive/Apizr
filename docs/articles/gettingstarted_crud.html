@@ -83,127 +83,41 @@
 <p>Here is what the provided interface looks like then:</p>
 <pre><code class="lang-csharp">public interface ICrudApi&lt;T, in TKey, TReadAllResult, in TReadAllParams&gt; where T : class
 {
-    #region Create
-
     [Post(&quot;&quot;)]
     Task&lt;T&gt; Create([Body] T payload);
 
     [Post(&quot;&quot;)]
-    Task&lt;T&gt; Create([Body] T payload, [Context] Context context);
-
-    [Post(&quot;&quot;)]
-    Task&lt;T&gt; Create([Body] T payload, CancellationToken cancellationToken);
-
-    [Post(&quot;&quot;)]
-    Task&lt;T&gt; Create([Body] T payload, [Context] Context context, CancellationToken cancellationToken);
-
-    #endregion
-
-    #region ReadAll
+    Task&lt;T&gt; Create([Body] T payload, [RequestOptions] IApizrRequestOptions options);
 
     [Get(&quot;&quot;)]
     Task&lt;TReadAllResult&gt; ReadAll();
 
     [Get(&quot;&quot;)]
+    Task&lt;TReadAllResult&gt; ReadAll([RequestOptions] IApizrRequestOptions options);
+
+    [Get(&quot;&quot;)]
     Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams);
 
     [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([Property(Constants.PriorityKey)] int priority);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([Context] Context context);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll(CancellationToken cancellationToken);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams, [Property(Constants.PriorityKey)] int priority);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams, [Context] Context context);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams, CancellationToken cancellationToken);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([Property(Constants.PriorityKey)] int priority, [Context] Context context);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([Property(Constants.PriorityKey)] int priority, CancellationToken cancellationToken);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([Context] Context context, CancellationToken cancellationToken);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams, [Property(Constants.PriorityKey)] int priority, [Context] Context context);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams, [Property(Constants.PriorityKey)] int priority, CancellationToken cancellationToken);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams, [Context] Context context, CancellationToken cancellationToken);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams, [Property(Constants.PriorityKey)] int priority, [Context] Context context, CancellationToken cancellationToken);
-
-    #endregion
-
-    #region Read
+    Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams, [RequestOptions] IApizrRequestOptions options);
 
     [Get(&quot;/{key}&quot;)]
     Task&lt;T&gt; Read([CacheKey] TKey key);
 
     [Get(&quot;/{key}&quot;)]
-    Task&lt;T&gt; Read([CacheKey] TKey key, [Property(Constants.PriorityKey)] int priority);
-
-    [Get(&quot;/{key}&quot;)]
-    Task&lt;T&gt; Read([CacheKey] TKey key, [Context] Context context);
-
-    [Get(&quot;/{key}&quot;)]
-    Task&lt;T&gt; Read([CacheKey] TKey key, CancellationToken cancellationToken);
-
-    [Get(&quot;/{key}&quot;)]
-    Task&lt;T&gt; Read([CacheKey] TKey key, [Property(Constants.PriorityKey)] int priority, [Context] Context context);
-
-    [Get(&quot;/{key}&quot;)]
-    Task&lt;T&gt; Read([CacheKey] TKey key, [Property(Constants.PriorityKey)] int priority, CancellationToken cancellationToken);
-
-    [Get(&quot;/{key}&quot;)]
-    Task&lt;T&gt; Read([CacheKey] TKey key, [Property(Constants.PriorityKey)] int priority, [Context] Context context, CancellationToken cancellationToken);
-
-    #endregion
-
-    #region Update
+    Task&lt;T&gt; Read([CacheKey] TKey key, [RequestOptions] IApizrRequestOptions options);
 
     [Put(&quot;/{key}&quot;)]
     Task Update(TKey key, [Body] T payload);
 
     [Put(&quot;/{key}&quot;)]
-    Task Update(TKey key, [Body] T payload, [Context] Context context);
-
-    [Put(&quot;/{key}&quot;)]
-    Task Update(TKey key, [Body] T payload, CancellationToken cancellationToken);
-
-    [Put(&quot;/{key}&quot;)]
-    Task Update(TKey key, [Body] T payload, [Context] Context context, CancellationToken cancellationToken);
-
-    #endregion
-
-    #region Delete
+    Task Update(TKey key, [Body] T payload, [RequestOptions] IApizrRequestOptions options);
 
     [Delete(&quot;/{key}&quot;)]
     Task Delete(TKey key);
 
     [Delete(&quot;/{key}&quot;)]
-    Task Delete(TKey key, [Context] Context context);
-
-    [Delete(&quot;/{key}&quot;)]
-    Task Delete(TKey key, CancellationToken cancellationToken);
-
-    [Delete(&quot;/{key}&quot;)]
-    Task Delete(TKey key, [Context] Context context, CancellationToken cancellationToken); 
-
-    #endregion
+    Task Delete(TKey key, [RequestOptions] IApizrRequestOptions options);
 }
 </code></pre><p>We can see that it comes with many parameter combinations, but it won&#39;t do anything until you ask Apizr to. 
 Caching, Logging, Policing, Prioritizing... everything is activable fluently with the options builder.</p>

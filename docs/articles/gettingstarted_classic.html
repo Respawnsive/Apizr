@@ -489,14 +489,18 @@ var httpBinManager = apizrRegistry.GetManagerFor&lt;IHttpBinService&gt;();
 <pre><code class="lang-csharp">public class YourViewModel
 {
     private readonly IApizrManager&lt;IReqResService&gt; _reqResManager;
+    //private readonly IApizrRegistry _apizrRegistry;
 
     public YouViewModel(IApizrManager&lt;IReqResService&gt; reqResManager)
-    // Or registry injection
+    // OR registry injection
     //public YouViewModel(IApizrRegistry apizrRegistry)
     {
         _reqResManager = reqResManager;
 
-        // Or registry injection
+        // OR registry injection
+        //_apizrRegistry = apizrRegistry;
+
+        // Or registry injection AND getting the manager
         //_reqResManager = apizrRegistry.GetManagerFor&lt;IReqResService&gt;();
     }
 
@@ -507,7 +511,9 @@ var httpBinManager = apizrRegistry.GetManagerFor&lt;IHttpBinService&gt;();
         IList&lt;User&gt;? users;
         try
         {
-            var userList = await _reqResManager.ExecuteAsync(api =&gt; api.GetUsersAsync());
+            var userList = await _reqResManager.ExecuteAsync(api =&gt; api.GetUsersAsync()); 
+            // OR with dedicated registry shortcut extension
+            // var userList = await _apizrRegistry.ExecuteAsync&lt;IReqResService&gt;(api =&gt; api.GetUsersAsync()); 
             users = userList.Data;
         }
         catch (ApizrException&lt;UserList&gt; e)

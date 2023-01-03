@@ -426,14 +426,18 @@ Inject ```IApizrManager<IYourDefinedInterface>``` where you need it - e.g. into 
 public class YourViewModel
 {
     private readonly IApizrManager<IReqResService> _reqResManager;
+    //private readonly IApizrRegistry _apizrRegistry;
 	
     public YouViewModel(IApizrManager<IReqResService> reqResManager)
-    // Or registry injection
+    // OR registry injection
     //public YouViewModel(IApizrRegistry apizrRegistry)
     {
         _reqResManager = reqResManager;
 
-        // Or registry injection
+        // OR registry injection
+        //_apizrRegistry = apizrRegistry;
+
+        // Or registry injection AND getting the manager
         //_reqResManager = apizrRegistry.GetManagerFor<IReqResService>();
     }
     
@@ -444,7 +448,9 @@ public class YourViewModel
         IList<User>? users;
         try
         {
-            var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+            var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync()); 
+            // OR with dedicated registry shortcut extension
+            // var userList = await _apizrRegistry.ExecuteAsync<IReqResService>(api => api.GetUsersAsync()); 
             users = userList.Data;
         }
         catch (ApizrException<UserList> e)

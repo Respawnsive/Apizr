@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
+using Apizr.Configuring.Request;
 using Refit;
 
 namespace Apizr.Tests.Apis
@@ -8,6 +9,6 @@ namespace Apizr.Tests.Apis
     public interface IFileTransferService
     {
         [Get("/{fileName}")]
-        Task<HttpResponseMessage> DownloadAsync(string fileName);
+        Task<HttpResponseMessage> DownloadAsync(string fileName, [RequestOptions] IApizrRequestOptions options);
     }
 }

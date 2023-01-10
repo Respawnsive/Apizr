@@ -16,10 +16,11 @@ namespace Apizr.Configuring.Shared
         {
             HttpTracerMode = sharedOptions?.HttpTracerMode ?? default;
             TrafficVerbosity = sharedOptions?.TrafficVerbosity ?? default;
-            LogLevels = sharedOptions?.LogLevels;
+            LogLevels = sharedOptions?.LogLevels.ToArray();
             OnException = sharedOptions?.OnException;
             LetThrowOnExceptionWithEmptyCache = sharedOptions?.LetThrowOnExceptionWithEmptyCache ?? true;
-            HandlersParameters = sharedOptions?.HandlersParameters ?? new Dictionary<string, object>();
+            HandlersParameters = sharedOptions?.HandlersParameters?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
+                                 new Dictionary<string, object>();
         }
 
         /// <inheritdoc />

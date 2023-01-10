@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Handlers;
-//using System.Net.Http.Handlers;
 using System.Reflection;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
@@ -16,9 +9,7 @@ using System.Threading.Tasks;
 using Apizr.Integrations.FileTransfer;
 using Apizr.Policing;
 using Apizr.Tests.Apis;
-using Apizr.Tests.Helpers;
 using FluentAssertions;
-using Microsoft.Extensions.DependencyInjection;
 using MonkeyCache.FileStore;
 using Polly;
 using Polly.Extensions.Http;
@@ -71,7 +62,7 @@ namespace Apizr.Tests
                 Console.WriteLine(f);
             };
             var fileManager = ApizrBuilder.CreateManagerFor<IFileTransferService>();
-            using (var response = await fileManager.ExecuteAsync(api => api.DownloadAsync("test10Mb.db"))
+            using (var response = await fileManager.ExecuteAsync((opt, api) => api.DownloadAsync("test10Mb.db", opt))
                        .ConfigureAwait(false))
             {
                 // Obtenez la taille totale du fichier à télécharger.
@@ -141,71 +132,6 @@ namespace Apizr.Tests
 
 
         [Fact]
-        public async Task Downloading_File_Should_Report_Progress_3()
-        {
-            var handler = new HttpClientHandler() { AllowAutoRedirect = true };
-            var ph = new ProgressMessageHandler(handler);
-
-            ph.HttpSendProgress += (_, args) =>
-            {
-                Console.WriteLine($"upload progress: {(double)args.BytesTransferred / args.TotalBytes}");
-            };
-
-            ph.HttpReceiveProgress += (_, args) =>
-            {
-                Console.WriteLine($"download progress: {(double)args.BytesTransferred / args.TotalBytes}");
-            };
-
-            // for the sake of the example lets add a client definition here
-            var client = new HttpClient(ph);
-            var docUrl = "http://speedtest.ftp.otenet.gr/files/test10Mb.db";
-            var response = await client.GetAsync(docUrl);
-            response.EnsureSuccessStatusCode();
-            var guid = Guid.NewGuid();
-            var fileInfo = new FileInfo($"{guid}.txt");
-            await using var ms = await response.Content.ReadAsStreamAsync();
-            await using var fs = File.Create(fileInfo.FullName);
-            ms.Seek(0, SeekOrigin.Begin);
-            await ms.CopyToAsync(fs);
-
-            fileInfo.Length.Should().BePositive();
-        }
-
-
-        [Fact]
-        public async Task Downloading_File_Should_Report_Progress_4()
-        {
-            var ph = new ProgressMessageHandler();
-
-            ph.HttpSendProgress += (_, args) =>
-            {
-                Console.WriteLine($"upload progress: {(double)args.BytesTransferred / args.TotalBytes}");
-            };
-
-            ph.HttpReceiveProgress += (_, args) =>
-            {
-                Console.WriteLine($"download progress: {(double)args.BytesTransferred / args.TotalBytes}");
-            };
-
-            // for the sake of the example lets add a client definition here
-            var guid = Guid.NewGuid();
-            var fileInfo = new FileInfo($"{guid}.txt");
-            var fileManager = ApizrBuilder.CreateManagerFor<IFileTransferService>(options => options.AddDelegatingHandler(ph));
-            using (var response = await fileManager.ExecuteAsync(api => api.DownloadAsync("test10Mb.db"))
-                       .ConfigureAwait(false))
-            {
-                response.EnsureSuccessStatusCode();
-                await using var ms = await response.Content.ReadAsStreamAsync();
-                await using var fs = File.Create(fileInfo.FullName);
-                ms.Seek(0, SeekOrigin.Begin);
-                await ms.CopyToAsync(fs);
-            }
-
-            fileInfo.Length.Should().BePositive();
-        }
-
-
-        [Fact]
         public async Task Downloading_File_Should_Report_Progress_5()
         {
             var progress = new ApizrProgress();
@@ -216,7 +142,7 @@ namespace Apizr.Tests
             var guid = Guid.NewGuid();
             var fileInfo = new FileInfo($"{guid}.txt");
             var fileManager = ApizrBuilder.CreateManagerFor<IFileTransferService>(options => options.WithProgress(progress));
-            using (var response = await fileManager.ExecuteAsync(api => api.DownloadAsync("test10Mb.db"))
+            using (var response = await fileManager.ExecuteAsync((opt, api) => api.DownloadAsync("test10Mb.db", opt))
                        .ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();

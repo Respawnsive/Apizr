@@ -61,7 +61,7 @@ namespace Apizr.Configuring.Shared
         /// </summary>
         /// <param name="delegatingHandler">A delegating handler</param>
         /// <returns></returns>
-        TApizrOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler);
+        TApizrOptionsBuilder AddDelegatingHandler<THandler>(THandler delegatingHandler) where THandler : DelegatingHandler;
 
         /// <summary>
         /// Set the Polly Context

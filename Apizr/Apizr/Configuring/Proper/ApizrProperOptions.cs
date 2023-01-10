@@ -48,7 +48,7 @@ namespace Apizr.Configuring.Proper
             LoggerFactory = (loggerFactory, webApiFriendlyName) => Logger = loggerFactory.CreateLogger(webApiFriendlyName);
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
             HttpClientFactory = sharedOptions.HttpClientFactory;
-            DelegatingHandlersFactories = sharedOptions.DelegatingHandlersFactories.ToList();
+            DelegatingHandlersFactories = sharedOptions.DelegatingHandlersFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             ContextFactory = sharedOptions.ContextFactory;
         }
 
@@ -110,6 +110,6 @@ namespace Apizr.Configuring.Proper
         public Func<HttpMessageHandler, Uri, HttpClient> HttpClientFactory { get; set; }
 
         /// <inheritdoc />
-        public IList<Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
+        public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
     }
 }

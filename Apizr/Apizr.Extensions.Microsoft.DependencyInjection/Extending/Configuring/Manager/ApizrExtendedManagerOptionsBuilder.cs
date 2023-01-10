@@ -90,63 +90,51 @@ namespace Apizr.Extending.Configuring.Manager
         }
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
-        {
-            var authenticationHandler = new Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>((serviceProvider, options) =>
+        public IApizrExtendedManagerOptionsBuilder WithAuthenticationHandler(
+            Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
+            => AddDelegatingHandler((serviceProvider, options) =>
                 new AuthenticationHandler(serviceProvider.GetService<ILogger>(), options, refreshTokenFactory));
-            Options.DelegatingHandlersExtendedFactories.Add(authenticationHandler);
-
-            return this;
-        }
 
         /// <inheritdoc />
         public IApizrExtendedManagerOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(
-            Func<IServiceProvider, IApizrManagerOptionsBase, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase
-        {
-            Options.DelegatingHandlersExtendedFactories.Add(authenticationHandlerFactory);
-
-            return this;
-        }
+            Func<IServiceProvider, IApizrManagerOptionsBase, TAuthenticationHandler> authenticationHandlerFactory)
+            where TAuthenticationHandler : AuthenticationHandlerBase
+            => AddDelegatingHandler(authenticationHandlerFactory);
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(Expression<Func<TSettingsService, string>> tokenProperty,
+        public IApizrExtendedManagerOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(
+            Expression<Func<TSettingsService, string>> tokenProperty,
             Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
-        {
-            Options.DelegatingHandlersExtendedFactories.Add((serviceProvider, options) =>
+            => AddDelegatingHandler((serviceProvider, options) =>
                 new AuthenticationHandler<TSettingsService, TTokenService>(
                     serviceProvider.GetService<ILogger>(),
                     options,
                     serviceProvider.GetRequiredService<TSettingsService>, tokenProperty,
                     serviceProvider.GetRequiredService<TTokenService>, refreshTokenMethod));
 
-            return this;
-        }
-
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithAuthenticationHandler<TSettingsService>(Expression<Func<TSettingsService, string>> tokenProperty, Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
-        {
-            Options.DelegatingHandlersExtendedFactories.Add((serviceProvider, options) =>
+        public IApizrExtendedManagerOptionsBuilder WithAuthenticationHandler<TSettingsService>(
+            Expression<Func<TSettingsService, string>> tokenProperty,
+            Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
+            => AddDelegatingHandler((serviceProvider, options) =>
                 new AuthenticationHandler<TSettingsService>(
                     serviceProvider.GetService<ILogger>(),
                     options,
                     serviceProvider.GetRequiredService<TSettingsService>, tokenProperty, refreshTokenFactory));
 
-            return this;
-        }
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder AddDelegatingHandler<THandler>(THandler delegatingHandler) where THandler : DelegatingHandler
+            => AddDelegatingHandler((_, _) => delegatingHandler);
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler)
-            => AddDelegatingHandler(_ => delegatingHandler);
-
-        /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder AddDelegatingHandler(
-            Func<IServiceProvider, DelegatingHandler> delegatingHandlerFactory)
+        public IApizrExtendedManagerOptionsBuilder AddDelegatingHandler<THandler>(
+            Func<IServiceProvider, THandler> delegatingHandlerFactory) where THandler : DelegatingHandler
             => AddDelegatingHandler((serviceProvider, _) => delegatingHandlerFactory(serviceProvider));
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder AddDelegatingHandler(Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler> delegatingHandlerFactory)
+        public IApizrExtendedManagerOptionsBuilder AddDelegatingHandler<THandler>(Func<IServiceProvider, IApizrManagerOptionsBase, THandler> delegatingHandlerFactory) where THandler : DelegatingHandler
         {
-            Options.DelegatingHandlersExtendedFactories.Add(delegatingHandlerFactory);
+            Options.DelegatingHandlersExtendedFactories[typeof(THandler)] = delegatingHandlerFactory;
 
             return this;
         }
@@ -380,7 +368,11 @@ namespace Apizr.Extending.Configuring.Manager
         public void SetPrimaryHttpMessageHandler(Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> primaryHandlerFactory)
         {
             Options.PrimaryHandlerFactory = primaryHandlerFactory;
-        } 
+        }
+
+        /// <inheritdoc />
+        public void AddDelegatingHandler<THandler>(Func<IApizrManagerOptionsBase, THandler> handlerFactory)
+            where THandler : DelegatingHandler => AddDelegatingHandler((_, opt) => handlerFactory.Invoke(opt));
 
         #endregion
     }

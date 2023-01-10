@@ -18,6 +18,6 @@ namespace Apizr.Extending.Configuring.Manager
         public HttpClientHandler HttpClientHandler { get; protected set; }
 
         /// <inheritdoc />
-        public IList<Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; protected set; }
+        public IDictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; protected set; }
     }
 }

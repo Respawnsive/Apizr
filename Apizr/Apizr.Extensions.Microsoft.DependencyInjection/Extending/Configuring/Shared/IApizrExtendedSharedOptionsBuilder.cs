@@ -77,14 +77,14 @@ namespace Apizr.Extending.Configuring.Shared
         /// </summary>
         /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
         /// <returns></returns>
-        TApizrExtendedSharedOptionsBuilder AddDelegatingHandler(Func<IServiceProvider, DelegatingHandler> delegatingHandlerFactory);
+        TApizrExtendedSharedOptionsBuilder AddDelegatingHandler<THandler>(Func<IServiceProvider, THandler> delegatingHandlerFactory) where THandler : DelegatingHandler;
 
         /// <summary>
         /// Add a custom delegating handler
         /// </summary>
         /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
         /// <returns></returns>
-        TApizrExtendedSharedOptionsBuilder AddDelegatingHandler(Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler> delegatingHandlerFactory);
+        TApizrExtendedSharedOptionsBuilder AddDelegatingHandler<THandler>(Func<IServiceProvider, IApizrManagerOptionsBase, THandler> delegatingHandlerFactory) where THandler : DelegatingHandler;
 
         /// <summary>
         /// Provide your own <see cref="AuthenticationHandlerBase"/> implementation

@@ -116,14 +116,14 @@ namespace Apizr.Configuring.Shared
         /// </summary>
         /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
         /// <returns></returns>
-        TApizrOptionsBuilder AddDelegatingHandler(Func<ILogger, DelegatingHandler> delegatingHandlerFactory);
+        TApizrOptionsBuilder AddDelegatingHandler<THandler>(Func<ILogger, THandler> delegatingHandlerFactory) where THandler : DelegatingHandler;
 
         /// <summary>
         /// Add a custom delegating handler
         /// </summary>
         /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
         /// <returns></returns>
-        TApizrOptionsBuilder AddDelegatingHandler(Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler> delegatingHandlerFactory);
+        TApizrOptionsBuilder AddDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler> delegatingHandlerFactory) where THandler : DelegatingHandler;
 
         /// <summary>
         /// Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)

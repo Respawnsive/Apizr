@@ -655,7 +655,7 @@ namespace Apizr
                         }
                     }
 
-                    foreach (var delegatingHandlerExtendedFactory in options.DelegatingHandlersExtendedFactories)
+                    foreach (var delegatingHandlerExtendedFactory in options.DelegatingHandlersExtendedFactories.Values)
                         handlerBuilder.AddHandler(delegatingHandlerExtendedFactory.Invoke(serviceProvider, options));
 
                     var innerHandler = handlerBuilder.Build();

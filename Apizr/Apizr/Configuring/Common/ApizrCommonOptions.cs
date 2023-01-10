@@ -32,7 +32,7 @@ namespace Apizr.Configuring.Common
             ConnectivityHandlerFactory = () => new DefaultConnectivityHandler(() => true);
             CacheHandlerFactory = () => new VoidCacheHandler();
             MappingHandlerFactory = () => new VoidMappingHandler();
-            DelegatingHandlersFactories = new List<Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>>();
+            DelegatingHandlersFactories = new Dictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>>();
         }
 
         private Func<Uri> _baseUriFactory;
@@ -89,7 +89,7 @@ namespace Apizr.Configuring.Common
         public Func<IMappingHandler> MappingHandlerFactory { get; set; }
 
         /// <inheritdoc />
-        public IList<Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
+        public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
 
 
         private Func<HttpTracerMode> _httpTracerModeFactory;

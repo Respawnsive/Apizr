@@ -10,5 +10,8 @@ namespace Apizr.Configuring.Shared
     {
         void SetPrimaryHttpMessageHandler(
             Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> primaryHandlerFactory);
+
+        void AddDelegatingHandler<THandler>(
+            Func<IApizrManagerOptionsBase, THandler> handlerFactory) where THandler : DelegatingHandler;
     }
 }

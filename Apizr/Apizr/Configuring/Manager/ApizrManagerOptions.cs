@@ -40,7 +40,7 @@ namespace Apizr.Configuring.Manager
             ConnectivityHandlerFactory = commonOptions.ConnectivityHandlerFactory;
             CacheHandlerFactory = commonOptions.CacheHandlerFactory;
             MappingHandlerFactory = commonOptions.MappingHandlerFactory;
-            DelegatingHandlersFactories = properOptions.DelegatingHandlersFactories.ToList();
+            DelegatingHandlersFactories = properOptions.DelegatingHandlersFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             ContextFactory = properOptions.ContextFactory;
         }
 
@@ -125,7 +125,7 @@ namespace Apizr.Configuring.Manager
         public Func<IMappingHandler> MappingHandlerFactory { get; set; }
 
         /// <inheritdoc />
-        public IList<Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
+        public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
 
         /// <inheritdoc />
         public Func<Context> ContextFactory { get; set; }

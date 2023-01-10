@@ -39,7 +39,7 @@ namespace Apizr.Extending.Configuring.Proper
             LogLevelsFactory = logLevels?.Any() == true ? _ => logLevels : sharedOptions.LogLevelsFactory;
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
             LoggerFactory = (serviceProvider, webApiFriendlyName) => serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName);
-            DelegatingHandlersExtendedFactories = sharedOptions.DelegatingHandlersExtendedFactories;
+            DelegatingHandlersExtendedFactories = sharedOptions.DelegatingHandlersExtendedFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
         }
 
         /// <inheritdoc />
@@ -108,6 +108,6 @@ namespace Apizr.Extending.Configuring.Proper
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
 
         /// <inheritdoc />
-        public IList<Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
+        public IDictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
     }
 }

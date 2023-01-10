@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using Apizr.Caching;
 using Apizr.Configuring.Manager;
@@ -42,7 +43,7 @@ namespace Apizr.Extending.Configuring.Manager
             CacheHandlerFactory = commonOptions.CacheHandlerFactory;
             MappingHandlerType = commonOptions.MappingHandlerType;
             MappingHandlerFactory = commonOptions.MappingHandlerFactory;
-            DelegatingHandlersExtendedFactories = properOptions.DelegatingHandlersExtendedFactories;
+            DelegatingHandlersExtendedFactories = properOptions.DelegatingHandlersExtendedFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value); ;
             CrudEntities = commonOptions.CrudEntities;
             WebApis = commonOptions.WebApis;
             ObjectMappings = commonOptions.ObjectMappings;
@@ -179,7 +180,6 @@ namespace Apizr.Extending.Configuring.Manager
 
         /// <inheritdoc />
 
-        public IList<Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>>
-            DelegatingHandlersExtendedFactories => _apizrExtendedOptions.DelegatingHandlersExtendedFactories;
+        public IDictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories => _apizrExtendedOptions.DelegatingHandlersExtendedFactories;
     }
 }

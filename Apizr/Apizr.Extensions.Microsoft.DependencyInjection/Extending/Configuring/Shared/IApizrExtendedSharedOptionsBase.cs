@@ -15,6 +15,6 @@ namespace Apizr.Extending.Configuring.Shared
         /// <summary>
         /// Delegating handlers factories
         /// </summary>
-        IList<Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
+        IDictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
     }
 }

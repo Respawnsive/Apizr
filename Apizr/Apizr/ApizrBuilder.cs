@@ -249,7 +249,7 @@ namespace Apizr
                     }
                 }
 
-                foreach (var delegatingHandlersFactory in apizrOptions.DelegatingHandlersFactories)
+                foreach (var delegatingHandlersFactory in apizrOptions.DelegatingHandlersFactories.Values)
                     handlerBuilder.AddHandler(delegatingHandlersFactory.Invoke(apizrOptions.Logger, apizrOptions));
 
                 var innerHandler = handlerBuilder.Build();

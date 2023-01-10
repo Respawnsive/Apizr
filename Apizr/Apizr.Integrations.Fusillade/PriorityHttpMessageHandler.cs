@@ -87,9 +87,8 @@ namespace Apizr
             {
                 priority = priorityValue;
             }
-            else if (request.Properties.TryGetValue(Constants.ApizrRequestOptionsKey, out var optionsObject) &&
-                     optionsObject is IApizrRequestOptions options &&
-                     options.HandlersParameters.TryGetValue(Constants.PriorityKey, out priorityObject) &&
+            else if (request.TryGetOptions(out var requestOptions) &&
+                     requestOptions.HandlersParameters.TryGetValue(Constants.PriorityKey, out priorityObject) &&
                      priorityObject is int optionsPriorityValue and >= 0)
             {
                 priority = optionsPriorityValue;

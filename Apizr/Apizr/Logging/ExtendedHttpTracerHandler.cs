@@ -81,7 +81,7 @@ namespace Apizr.Logging
 
             try
             {
-                if(tracerMode == HttpTracerMode.Everything)
+                if(verbosity.HasRequestFlags() && tracerMode == HttpTracerMode.Everything)
                     await LogHttpRequest(request, logger, logLevels, verbosity).ConfigureAwait(false);
 
                 var stopwatch = new Stopwatch();
@@ -91,25 +91,29 @@ namespace Apizr.Logging
 
                 if (tracerMode >= HttpTracerMode.ErrorsAndExceptionsOnly)
                 {
-                    if (!response.IsSuccessStatusCode)
+                    if (!response.IsSuccessStatusCode && verbosity.HasRequestFlags())
                     {
                         if (tracerMode == HttpTracerMode.ErrorsAndExceptionsOnly)
                             await LogHttpRequest(request, logger, logLevels, verbosity).ConfigureAwait(false);
 
-                        await LogHttpErrorRequest(request, logger, logLevels, verbosity);
+                        await LogHttpErrorRequest(request, logger, logLevels, verbosity).ConfigureAwait(false);
                     }
 
-                    await LogHttpResponse(response, stopwatch.Elapsed, logger, logLevels, verbosity).ConfigureAwait(false);  
+                    if(verbosity.HasResponseFlags())
+                        await LogHttpResponse(response, stopwatch.Elapsed, logger, logLevels, verbosity).ConfigureAwait(false);  
                 }
 
                 return response;
             }
             catch (Exception ex)
             {
-                if (tracerMode == HttpTracerMode.ExceptionsOnly)
-                    await LogHttpRequest(request, logger, logLevels, verbosity).ConfigureAwait(false);
+                if (verbosity.HasRequestFlags())
+                {
+                    if (tracerMode == HttpTracerMode.ExceptionsOnly)
+                        await LogHttpRequest(request, logger, logLevels, verbosity).ConfigureAwait(false);
 
-                LogHttpException(request, ex, logger, logLevels);
+                    LogHttpException(request, ex, logger, logLevels); 
+                }
                 throw;
             }
         }

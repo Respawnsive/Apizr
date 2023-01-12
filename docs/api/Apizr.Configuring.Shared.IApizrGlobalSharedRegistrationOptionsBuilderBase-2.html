@@ -130,13 +130,14 @@
   
   
   <a id="Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_AddDelegatingHandler_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler*"></a>
-  <h4 id="Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_AddDelegatingHandler_System_Net_Http_DelegatingHandler_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler(System.Net.Http.DelegatingHandler)">AddDelegatingHandler(DelegatingHandler)</h4>
+  <h4 id="Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_AddDelegatingHandler__1___0_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler``1(``0)">AddDelegatingHandler&lt;THandler&gt;(THandler)</h4>
   <div class="markdown level1 summary"><p>Add a custom delegating handler</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">TApizrOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler)</code></pre>
+    <pre><code class="lang-csharp hljs">TApizrOptionsBuilder AddDelegatingHandler&lt;THandler&gt;(THandler delegatingHandler)
+    where THandler : DelegatingHandler</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -149,7 +150,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Net.Http.DelegatingHandler</span></td>
+        <td><span class="xref">THandler</span></td>
         <td><span class="parametername">delegatingHandler</span></td>
         <td><p>A delegating handler</p>
 </td>
@@ -167,6 +168,21 @@
     <tbody>
       <tr>
         <td><span class="xref">TApizrOptionsBuilder</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">THandler</span></td>
         <td></td>
       </tr>
     </tbody>

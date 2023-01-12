@@ -5,7 +5,7 @@ items:
   id: IApizrGlobalSharedRegistrationOptionsBuilderBase`2
   parent: Apizr.Configuring.Shared
   children:
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler``1(``0)
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.String)
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.Uri)
@@ -219,16 +219,16 @@ items:
   nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(Func(Of HttpRequestMessage, Task(Of String)))
   fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(System.Func(Of System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task(Of System.String)))
   name.vb: WithAuthenticationHandler(Func(Of HttpRequestMessage, Task(Of String)))
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
-  id: AddDelegatingHandler(System.Net.Http.DelegatingHandler)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler``1(``0)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler``1(``0)
+  id: AddDelegatingHandler``1(``0)
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2
   langs:
   - csharp
   - vb
-  name: AddDelegatingHandler(DelegatingHandler)
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler(DelegatingHandler)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
+  name: AddDelegatingHandler<THandler>(THandler)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>(THandler)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>(THandler)
   type: Method
   source:
     id: AddDelegatingHandler
@@ -240,18 +240,23 @@ items:
   summary: "\nAdd a custom delegating handler\n"
   example: []
   syntax:
-    content: TApizrOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler)
+    content: >-
+      TApizrOptionsBuilder AddDelegatingHandler<THandler>(THandler delegatingHandler)
+          where THandler : DelegatingHandler
     parameters:
     - id: delegatingHandler
-      type: System.Net.Http.DelegatingHandler
+      type: '{THandler}'
       description: A delegating handler
+    typeParameters:
+    - id: THandler
     return:
       type: '{TApizrOptionsBuilder}'
       description: ''
-    content.vb: Function AddDelegatingHandler(delegatingHandler As DelegatingHandler) As TApizrOptionsBuilder
+    content.vb: Function AddDelegatingHandler(Of THandler As DelegatingHandler)(delegatingHandler As THandler) As TApizrOptionsBuilder
   overload: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler*
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(DelegatingHandler)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(System.Net.Http.DelegatingHandler)
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)(THandler)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)(THandler)
+  name.vb: AddDelegatingHandler(Of THandler)(THandler)
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
   id: WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
@@ -1545,13 +1550,16 @@ references:
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler
   nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler
   fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler
-- uid: System.Net.Http.DelegatingHandler
-  commentId: T:System.Net.Http.DelegatingHandler
-  parent: System.Net.Http
-  isExternal: true
-  name: DelegatingHandler
-  nameWithType: DelegatingHandler
-  fullName: System.Net.Http.DelegatingHandler
+- uid: '{THandler}'
+  commentId: '!:THandler'
+  definition: THandler
+  name: THandler
+  nameWithType: THandler
+  fullName: THandler
+- uid: THandler
+  name: THandler
+  nameWithType: THandler
+  fullName: THandler
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithContext*
   commentId: Overload:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithContext
   name: WithContext

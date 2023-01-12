@@ -56,7 +56,7 @@ namespace Apizr.Tests
             var filePath = Path.Combine(Path.GetTempPath(), "test10Mb.db");
 
             // Setup your progress reporter
-            var progress = new Progress<int>();
+            var progress = new Progress<float>();
             progress.ProgressChanged += (sender, f) =>
             {
                 Console.WriteLine(f);
@@ -66,55 +66,40 @@ namespace Apizr.Tests
                        .ConfigureAwait(false))
             {
                 // Obtenez la taille totale du fichier à télécharger.
-                var totalBytes = response.Content.Headers.ContentLength ?? 0;
+                var totalRequestBytes = response.Content.Headers.ContentLength ?? 0;
 
-                // Ouvrez un flux de lecture pour lire les données du fichier.
-                using (var downloadStream = await response.Content.ReadAsStreamAsync())
+                using (Stream file = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
                 {
-                    // Créez un buffer pour stocker les données téléchargées.
-                    var buffer = new byte[4096];
-                    int bytesRead;
-                    long bytesReceived = 0;
-
-                    // Continuez à lire les données du fichier tant que la tâche n'est pas annulée.
-                    while ((bytesRead = await downloadStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                    var contentLength = response.Content.Headers.ContentLength;
+                    using (var download = await response.Content.ReadAsStreamAsync())
                     {
-                        // Mettre à jour le nombre de bytes reçus.
-                        bytesReceived += bytesRead;
+                        // no progress... no contentLength... very sad
+                        if (progress is null || !contentLength.HasValue)
+                        {
+                            await download.CopyToAsync(file);
+                            return;
+                        }
 
-                        // Mettre à jour la progression de la tâche en appelant la méthode Report sur l'objet IProgress<T>.
-                        ((IProgress<int>)progress).Report((int)((double)bytesReceived / totalBytes * 100));
+                        // Such progress and contentLength much reporting Wow!
+                        var progressWrapper = new Progress<long>(totalBytes =>
+                            ((IProgress<float>) progress).Report(GetProgressPercentage(totalBytes,
+                                contentLength.Value)));
+                        await download.CopyToAsync(file, 81920, progressWrapper, CancellationToken.None);
                     }
                 }
+
+                float GetProgressPercentage(float totalBytes, float currentBytes) => (totalBytes / currentBytes) * 100f;
             }
-
-                //using (Stream file = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
-                //    using (var response = await fileManager.ExecuteAsync(api => api.DownloadAsync("test10Mb.db")).ConfigureAwait(false))
-                //    {
-                //        var contentLength = response.Content.Headers.ContentLength;
-                //        using (var download = await response.Content.ReadAsStreamAsync())
-                //        {
-                //            // no progress... no contentLength... very sad
-                //            if (progress is null || !contentLength.HasValue)
-                //            {
-                //                await download.CopyToAsync(file);
-                //                return;
-                //            }
-                //            // Such progress and contentLength much reporting Wow!
-                //            var progressWrapper = new Progress<long>(totalBytes => ((IProgress<float>)progress).Report(GetProgressPercentage(totalBytes, contentLength.Value)));
-                //            await download.CopyToAsync(file, 81920, progressWrapper, CancellationToken.None);
-                //        }
-                //    }
-
-                //float GetProgressPercentage(float totalBytes, float currentBytes) => (totalBytes / currentBytes) * 100f;
         }
 
 
         [Fact]
         public async Task Downloading_File_Should_Report_Progress_2()
         {
+            var httpHandler = new HttpClientHandler();
+            var progresHandler = new ProgressMessageHandler(httpHandler);
             // for the sake of the example lets add a client definition here
-            var client = new HttpClient();
+            var client = new HttpClient(progresHandler);
             var docUrl = "http://speedtest.ftp.otenet.gr/files/test10Mb.db";
             var filePath = Path.Combine(Path.GetTempPath(), "test10Mb.db");
 
@@ -128,6 +113,31 @@ namespace Apizr.Tests
             // Use the provided extension method
             using (var file = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
                 await client.DownloadDataAsync(docUrl, file, progress);
+        }
+
+
+        [Fact]
+        public async Task Downloading_File_Should_Report_Progress_3()
+        {
+            var httpHandler = new HttpClientHandler();
+            var progresHandler = new ProgressMessageHandler(httpHandler);
+            progresHandler.HttpReceiveProgress += (sender, args) =>
+            {
+                Console.WriteLine(args.ProgressPercentage);
+            };
+            // for the sake of the example lets add a client definition here
+            var client = new HttpClient(progresHandler);
+            var docUrl = "http://speedtest.ftp.otenet.gr/files/test10Mb.db";
+            var response = await client.GetAsync(docUrl);
+            response.EnsureSuccessStatusCode();
+            var guid = Guid.NewGuid();
+            var fileInfo = new FileInfo($"{guid}.txt");
+            await using var ms = await response.Content.ReadAsStreamAsync();
+            await using var fs = File.Create(fileInfo.FullName);
+            ms.Seek(0, SeekOrigin.Begin);
+            await ms.CopyToAsync(fs);
+
+            fileInfo.Length.Should().BePositive();
         }
 
 

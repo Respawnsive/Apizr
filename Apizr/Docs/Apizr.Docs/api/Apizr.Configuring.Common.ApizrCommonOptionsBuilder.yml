@@ -5,9 +5,10 @@ items:
   id: ApizrCommonOptionsBuilder
   parent: Apizr.Configuring.Common
   children:
-  - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler})
-  - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler})
-  - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
+  - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler``1(``0)
+  - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+  - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+  - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
   - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.Options
   - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.SetHandlerParameter(System.String,System.Object)
   - Apizr.Configuring.Common.ApizrCommonOptionsBuilder.SetPrimaryHttpMessageHandler(System.Func{System.Net.Http.DelegatingHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler})
@@ -541,7 +542,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 104
+    startLine: 100
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -586,7 +587,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 112
+    startLine: 106
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -640,7 +641,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 117
+    startLine: 111
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -694,7 +695,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 131
+    startLine: 122
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -743,7 +744,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 136
+    startLine: 127
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -778,123 +779,138 @@ items:
   - Public
   fullName.vb: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler(Of TSettingsService)(System.Func(Of TSettingsService), System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, System.String)), System.Func(Of System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task(Of System.String)))
   name.vb: WithAuthenticationHandler(Of TSettingsService)(Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String)), Func(Of HttpRequestMessage, Task(Of String)))
-- uid: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
-  commentId: M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
-  id: AddDelegatingHandler(System.Net.Http.DelegatingHandler)
+- uid: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler``1(``0)
+  commentId: M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler``1(``0)
+  id: AddDelegatingHandler``1(``0)
   parent: Apizr.Configuring.Common.ApizrCommonOptionsBuilder
   langs:
   - csharp
   - vb
-  name: AddDelegatingHandler(DelegatingHandler)
-  nameWithType: ApizrCommonOptionsBuilder.AddDelegatingHandler(DelegatingHandler)
-  fullName: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
+  name: AddDelegatingHandler<THandler>(THandler)
+  nameWithType: ApizrCommonOptionsBuilder.AddDelegatingHandler<THandler>(THandler)
+  fullName: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler<THandler>(THandler)
   type: Method
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 147
+    startLine: 136
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
   summary: "\nAdd a custom delegating handler\n"
   example: []
   syntax:
-    content: public IApizrCommonOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler)
+    content: >-
+      public IApizrCommonOptionsBuilder AddDelegatingHandler<THandler>(THandler delegatingHandler)
+          where THandler : DelegatingHandler
     parameters:
     - id: delegatingHandler
-      type: System.Net.Http.DelegatingHandler
+      type: '{THandler}'
       description: A delegating handler
+    typeParameters:
+    - id: THandler
     return:
       type: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
       description: ''
-    content.vb: Public Function AddDelegatingHandler(delegatingHandler As DelegatingHandler) As IApizrCommonOptionsBuilder
+    content.vb: Public Function AddDelegatingHandler(Of THandler As DelegatingHandler)(delegatingHandler As THandler) As IApizrCommonOptionsBuilder
   overload: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler*
   implements:
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddDelegatingHandler``1({THandler})
+  nameWithType.vb: ApizrCommonOptionsBuilder.AddDelegatingHandler(Of THandler)(THandler)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler})
-  commentId: M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler})
-  id: AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler})
+  fullName.vb: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(Of THandler)(THandler)
+  name.vb: AddDelegatingHandler(Of THandler)(THandler)
+- uid: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+  commentId: M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+  id: AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
   parent: Apizr.Configuring.Common.ApizrCommonOptionsBuilder
   langs:
   - csharp
   - vb
-  name: AddDelegatingHandler(Func<ILogger, DelegatingHandler>)
-  nameWithType: ApizrCommonOptionsBuilder.AddDelegatingHandler(Func<ILogger, DelegatingHandler>)
-  fullName: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(System.Func<Microsoft.Extensions.Logging.ILogger, System.Net.Http.DelegatingHandler>)
+  name: AddDelegatingHandler<THandler>(Func<ILogger, THandler>)
+  nameWithType: ApizrCommonOptionsBuilder.AddDelegatingHandler<THandler>(Func<ILogger, THandler>)
+  fullName: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, THandler>)
   type: Method
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 151
+    startLine: 140
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
   summary: "\nAdd a custom delegating handler\n"
   example: []
   syntax:
-    content: public IApizrCommonOptionsBuilder AddDelegatingHandler(Func<ILogger, DelegatingHandler> delegatingHandlerFactory)
+    content: >-
+      public IApizrCommonOptionsBuilder AddDelegatingHandler<THandler>(Func<ILogger, THandler> delegatingHandlerFactory)
+          where THandler : DelegatingHandler
     parameters:
     - id: delegatingHandlerFactory
-      type: System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler}
+      type: System.Func{Microsoft.Extensions.Logging.ILogger,{THandler}}
       description: A delegating handler factory
+    typeParameters:
+    - id: THandler
     return:
       type: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
       description: ''
-    content.vb: Public Function AddDelegatingHandler(delegatingHandlerFactory As Func(Of ILogger, DelegatingHandler)) As IApizrCommonOptionsBuilder
+    content.vb: Public Function AddDelegatingHandler(Of THandler As DelegatingHandler)(delegatingHandlerFactory As Func(Of ILogger, THandler)) As IApizrCommonOptionsBuilder
   overload: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler*
   implements:
-  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler})
-  nameWithType.vb: ApizrCommonOptionsBuilder.AddDelegatingHandler(Func(Of ILogger, DelegatingHandler))
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,{THandler}})
+  nameWithType.vb: ApizrCommonOptionsBuilder.AddDelegatingHandler(Of THandler)(Func(Of ILogger, THandler))
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(System.Func(Of Microsoft.Extensions.Logging.ILogger, System.Net.Http.DelegatingHandler))
-  name.vb: AddDelegatingHandler(Func(Of ILogger, DelegatingHandler))
-- uid: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler})
-  commentId: M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler})
-  id: AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler})
+  fullName.vb: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, THandler))
+  name.vb: AddDelegatingHandler(Of THandler)(Func(Of ILogger, THandler))
+- uid: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+  commentId: M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+  id: AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
   parent: Apizr.Configuring.Common.ApizrCommonOptionsBuilder
   langs:
   - csharp
   - vb
-  name: AddDelegatingHandler(Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>)
-  nameWithType: ApizrCommonOptionsBuilder.AddDelegatingHandler(Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>)
-  fullName: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.DelegatingHandler>)
+  name: AddDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>)
+  nameWithType: ApizrCommonOptionsBuilder.AddDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>)
+  fullName: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler>)
   type: Method
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 155
+    startLine: 144
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
   summary: "\nAdd a custom delegating handler\n"
   example: []
   syntax:
-    content: public IApizrCommonOptionsBuilder AddDelegatingHandler(Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler> delegatingHandlerFactory)
+    content: >-
+      public IApizrCommonOptionsBuilder AddDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler> delegatingHandlerFactory)
+          where THandler : DelegatingHandler
     parameters:
     - id: delegatingHandlerFactory
-      type: System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler}
+      type: System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,{THandler}}
       description: A delegating handler factory
+    typeParameters:
+    - id: THandler
     return:
       type: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
       description: ''
-    content.vb: Public Function AddDelegatingHandler(delegatingHandlerFactory As Func(Of ILogger, IApizrManagerOptionsBase, DelegatingHandler)) As IApizrCommonOptionsBuilder
+    content.vb: Public Function AddDelegatingHandler(Of THandler As DelegatingHandler)(delegatingHandlerFactory As Func(Of ILogger, IApizrManagerOptionsBase, THandler)) As IApizrCommonOptionsBuilder
   overload: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler*
   implements:
-  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler})
-  nameWithType.vb: ApizrCommonOptionsBuilder.AddDelegatingHandler(Func(Of ILogger, IApizrManagerOptionsBase, DelegatingHandler))
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,{THandler}})
+  nameWithType.vb: ApizrCommonOptionsBuilder.AddDelegatingHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler))
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.DelegatingHandler))
-  name.vb: AddDelegatingHandler(Func(Of ILogger, IApizrManagerOptionsBase, DelegatingHandler))
+  fullName.vb: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler))
+  name.vb: AddDelegatingHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler))
 - uid: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry{System.String})
   commentId: M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry{System.String})
   id: WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry{System.String})
@@ -909,7 +925,7 @@ items:
   source:
     id: WithPolicyRegistry
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 163
+    startLine: 152
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -949,7 +965,7 @@ items:
   source:
     id: WithPolicyRegistry
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 167
+    startLine: 156
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -989,7 +1005,7 @@ items:
   source:
     id: WithRefitSettings
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 175
+    startLine: 164
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1026,7 +1042,7 @@ items:
   source:
     id: WithRefitSettings
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 179
+    startLine: 168
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1066,7 +1082,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 187
+    startLine: 176
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1103,7 +1119,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 191
+    startLine: 180
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1143,7 +1159,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 195
+    startLine: 184
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1183,7 +1199,7 @@ items:
   source:
     id: WithCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 203
+    startLine: 192
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1220,7 +1236,7 @@ items:
   source:
     id: WithCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 207
+    startLine: 196
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1260,7 +1276,7 @@ items:
   source:
     id: WithExCatching
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 215
+    startLine: 204
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1306,7 +1322,7 @@ items:
   source:
     id: WithExCatching
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 247
+    startLine: 236
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1354,7 +1370,7 @@ items:
   source:
     id: WithHandlerParameter
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 254
+    startLine: 243
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1394,7 +1410,7 @@ items:
   source:
     id: WithLogging
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 262
+    startLine: 251
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1440,7 +1456,7 @@ items:
   source:
     id: WithLogging
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 267
+    startLine: 256
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1486,7 +1502,7 @@ items:
   source:
     id: WithLogging
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 278
+    startLine: 267
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1526,7 +1542,7 @@ items:
   source:
     id: WithContext
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 285
+    startLine: 274
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1569,7 +1585,7 @@ items:
   source:
     id: WithLoggerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 317
+    startLine: 306
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1606,7 +1622,7 @@ items:
   source:
     id: WithLoggerFactory
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 321
+    startLine: 310
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1646,7 +1662,7 @@ items:
   source:
     id: WithMappingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 329
+    startLine: 318
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1683,7 +1699,7 @@ items:
   source:
     id: WithMappingHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 333
+    startLine: 322
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1723,7 +1739,7 @@ items:
   source:
     id: SetHandlerParameter
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 342
+    startLine: 331
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1754,7 +1770,7 @@ items:
   source:
     id: SetPrimaryHttpMessageHandler
     path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
-    startLine: 344
+    startLine: 333
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1772,6 +1788,43 @@ items:
   - Public
   fullName.vb: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.SetPrimaryHttpMessageHandler(System.Func(Of System.Net.Http.DelegatingHandler, Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler))
   name.vb: SetPrimaryHttpMessageHandler(Func(Of DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler))
+- uid: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+  commentId: M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+  id: AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+  parent: Apizr.Configuring.Common.ApizrCommonOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: AddDelegatingHandler<THandler>(Func<IApizrManagerOptionsBase, THandler>)
+  nameWithType: ApizrCommonOptionsBuilder.AddDelegatingHandler<THandler>(Func<IApizrManagerOptionsBase, THandler>)
+  fullName: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler<THandler>(System.Func<Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler>)
+  type: Method
+  source:
+    id: AddDelegatingHandler
+    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Common\ApizrCommonOptionsBuilder.cs
+    startLine: 339
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Common
+  example: []
+  syntax:
+    content: >-
+      public void AddDelegatingHandler<THandler>(Func<IApizrManagerOptionsBase, THandler> handlerFactory)
+          where THandler : DelegatingHandler
+    parameters:
+    - id: handlerFactory
+      type: System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,{THandler}}
+    typeParameters:
+    - id: THandler
+    content.vb: Public Sub AddDelegatingHandler(Of THandler As DelegatingHandler)(handlerFactory As Func(Of IApizrManagerOptionsBase, THandler))
+  overload: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler*
+  nameWithType.vb: ApizrCommonOptionsBuilder.AddDelegatingHandler(Of THandler)(Func(Of IApizrManagerOptionsBase, THandler))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler(Of THandler)(System.Func(Of Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler))
+  name.vb: AddDelegatingHandler(Of THandler)(Func(Of IApizrManagerOptionsBase, THandler))
 references:
 - uid: Apizr.Configuring.Common
   commentId: N:Apizr.Configuring.Common
@@ -7868,109 +7921,105 @@ references:
   name: AddDelegatingHandler
   nameWithType: ApizrCommonOptionsBuilder.AddDelegatingHandler
   fullName: Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddDelegatingHandler``1({THandler})
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddDelegatingHandler``1(``0)
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}
-  definition: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
-  name: AddDelegatingHandler(DelegatingHandler)
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrCommonOptions, IApizrCommonOptionsBuilder>.AddDelegatingHandler(DelegatingHandler)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).AddDelegatingHandler(DelegatingHandler)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).AddDelegatingHandler(System.Net.Http.DelegatingHandler)
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler``1(``0)
+  name: AddDelegatingHandler<THandler>(THandler)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrCommonOptions, IApizrCommonOptionsBuilder>.AddDelegatingHandler<THandler>(THandler)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.AddDelegatingHandler<THandler>(THandler)
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).AddDelegatingHandler(Of THandler)(THandler)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).AddDelegatingHandler(Of THandler)(THandler)
+  name.vb: AddDelegatingHandler(Of THandler)(THandler)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
-    name: AddDelegatingHandler
-    nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrCommonOptions, IApizrCommonOptionsBuilder>.AddDelegatingHandler
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.AddDelegatingHandler
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler``1(``0)
+    name: AddDelegatingHandler<THandler>
+    nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrCommonOptions, IApizrCommonOptionsBuilder>.AddDelegatingHandler<THandler>
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.AddDelegatingHandler<THandler>
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Net.Http.DelegatingHandler
-    name: DelegatingHandler
-    nameWithType: DelegatingHandler
-    fullName: System.Net.Http.DelegatingHandler
-    isExternal: true
+  - name: THandler
+    nameWithType: THandler
+    fullName: THandler
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
-    name: AddDelegatingHandler
-    nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).AddDelegatingHandler
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).AddDelegatingHandler
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler``1(``0)
+    name: AddDelegatingHandler(Of THandler)
+    nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).AddDelegatingHandler(Of THandler)
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).AddDelegatingHandler(Of THandler)
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Net.Http.DelegatingHandler
-    name: DelegatingHandler
-    nameWithType: DelegatingHandler
-    fullName: System.Net.Http.DelegatingHandler
-    isExternal: true
+  - name: THandler
+    nameWithType: THandler
+    fullName: THandler
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Net.Http.DelegatingHandler
-  commentId: T:System.Net.Http.DelegatingHandler
-  parent: System.Net.Http
-  isExternal: true
-  name: DelegatingHandler
-  nameWithType: DelegatingHandler
-  fullName: System.Net.Http.DelegatingHandler
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
-  isExternal: true
-  name: AddDelegatingHandler(DelegatingHandler)
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler(DelegatingHandler)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(DelegatingHandler)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(System.Net.Http.DelegatingHandler)
+- uid: '{THandler}'
+  commentId: '!:THandler'
+  definition: THandler
+  name: THandler
+  nameWithType: THandler
+  fullName: THandler
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler``1(``0)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler``1(``0)
+  name: AddDelegatingHandler<THandler>(THandler)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>(THandler)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>(THandler)
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)(THandler)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)(THandler)
+  name.vb: AddDelegatingHandler(Of THandler)(THandler)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
-    name: AddDelegatingHandler
-    nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler``1(``0)
+    name: AddDelegatingHandler<THandler>
+    nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Net.Http.DelegatingHandler
-    name: DelegatingHandler
-    nameWithType: DelegatingHandler
-    fullName: System.Net.Http.DelegatingHandler
-    isExternal: true
+  - name: THandler
+    nameWithType: THandler
+    fullName: THandler
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler(System.Net.Http.DelegatingHandler)
-    name: AddDelegatingHandler
-    nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler``1(``0)
+    name: AddDelegatingHandler(Of THandler)
+    nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Net.Http.DelegatingHandler
-    name: DelegatingHandler
-    nameWithType: DelegatingHandler
-    fullName: System.Net.Http.DelegatingHandler
-    isExternal: true
+  - name: THandler
+    nameWithType: THandler
+    fullName: THandler
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler})
-  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler})
+- uid: THandler
+  name: THandler
+  nameWithType: THandler
+  fullName: THandler
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,{THandler}})
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
   parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}
-  definition: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler})
-  name: AddDelegatingHandler(Func<ILogger, DelegatingHandler>)
-  nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>.AddDelegatingHandler(Func<ILogger, DelegatingHandler>)
-  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.AddDelegatingHandler(System.Func<Microsoft.Extensions.Logging.ILogger, System.Net.Http.DelegatingHandler>)
-  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).AddDelegatingHandler(Func(Of ILogger, DelegatingHandler))
-  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).AddDelegatingHandler(System.Func(Of Microsoft.Extensions.Logging.ILogger, System.Net.Http.DelegatingHandler))
-  name.vb: AddDelegatingHandler(Func(Of ILogger, DelegatingHandler))
+  definition: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+  name: AddDelegatingHandler<THandler>(Func<ILogger, THandler>)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>.AddDelegatingHandler<THandler>(Func<ILogger, THandler>)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.AddDelegatingHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, THandler>)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).AddDelegatingHandler(Of THandler)(Func(Of ILogger, THandler))
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).AddDelegatingHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, THandler))
+  name.vb: AddDelegatingHandler(Of THandler)(Func(Of ILogger, THandler))
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler})
-    name: AddDelegatingHandler
-    nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>.AddDelegatingHandler
-    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.AddDelegatingHandler
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+    name: AddDelegatingHandler<THandler>
+    nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>.AddDelegatingHandler<THandler>
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.AddDelegatingHandler<THandler>
   - name: (
     nameWithType: (
     fullName: (
@@ -7990,11 +8039,9 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Net.Http.DelegatingHandler
-    name: DelegatingHandler
-    nameWithType: DelegatingHandler
-    fullName: System.Net.Http.DelegatingHandler
-    isExternal: true
+  - name: THandler
+    nameWithType: THandler
+    fullName: THandler
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -8002,10 +8049,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler})
-    name: AddDelegatingHandler
-    nameWithType: IApizrSharedRegistrationOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).AddDelegatingHandler
-    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).AddDelegatingHandler
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+    name: AddDelegatingHandler(Of THandler)
+    nameWithType: IApizrSharedRegistrationOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).AddDelegatingHandler(Of THandler)
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).AddDelegatingHandler(Of THandler)
   - name: (
     nameWithType: (
     fullName: (
@@ -8025,27 +8072,25 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Net.Http.DelegatingHandler
-    name: DelegatingHandler
-    nameWithType: DelegatingHandler
-    fullName: System.Net.Http.DelegatingHandler
-    isExternal: true
+  - name: THandler
+    nameWithType: THandler
+    fullName: THandler
   - name: )
     nameWithType: )
     fullName: )
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler}
-  commentId: T:System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler}
+- uid: System.Func{Microsoft.Extensions.Logging.ILogger,{THandler}}
+  commentId: T:System.Func{Microsoft.Extensions.Logging.ILogger,``0}
   parent: System
   definition: System.Func`2
-  name: Func<ILogger, DelegatingHandler>
-  nameWithType: Func<ILogger, DelegatingHandler>
-  fullName: System.Func<Microsoft.Extensions.Logging.ILogger, System.Net.Http.DelegatingHandler>
-  nameWithType.vb: Func(Of ILogger, DelegatingHandler)
-  fullName.vb: System.Func(Of Microsoft.Extensions.Logging.ILogger, System.Net.Http.DelegatingHandler)
-  name.vb: Func(Of ILogger, DelegatingHandler)
+  name: Func<ILogger, THandler>
+  nameWithType: Func<ILogger, THandler>
+  fullName: System.Func<Microsoft.Extensions.Logging.ILogger, THandler>
+  nameWithType.vb: Func(Of ILogger, THandler)
+  fullName.vb: System.Func(Of Microsoft.Extensions.Logging.ILogger, THandler)
+  name.vb: Func(Of ILogger, THandler)
   spec.csharp:
   - uid: System.Func`2
     name: Func
@@ -8063,11 +8108,9 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Net.Http.DelegatingHandler
-    name: DelegatingHandler
-    nameWithType: DelegatingHandler
-    fullName: System.Net.Http.DelegatingHandler
-    isExternal: true
+  - name: THandler
+    nameWithType: THandler
+    fullName: THandler
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -8088,28 +8131,26 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Net.Http.DelegatingHandler
-    name: DelegatingHandler
-    nameWithType: DelegatingHandler
-    fullName: System.Net.Http.DelegatingHandler
-    isExternal: true
+  - name: THandler
+    nameWithType: THandler
+    fullName: THandler
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler})
-  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler})
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
   isExternal: true
-  name: AddDelegatingHandler(Func<ILogger, DelegatingHandler>)
-  nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler(Func<ILogger, DelegatingHandler>)
-  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler(System.Func<Microsoft.Extensions.Logging.ILogger, System.Net.Http.DelegatingHandler>)
-  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Func(Of ILogger, DelegatingHandler))
-  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(System.Func(Of Microsoft.Extensions.Logging.ILogger, System.Net.Http.DelegatingHandler))
-  name.vb: AddDelegatingHandler(Func(Of ILogger, DelegatingHandler))
+  name: AddDelegatingHandler<THandler>(Func<ILogger, THandler>)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>(Func<ILogger, THandler>)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, THandler>)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)(Func(Of ILogger, THandler))
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, THandler))
+  name.vb: AddDelegatingHandler(Of THandler)(Func(Of ILogger, THandler))
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler})
-    name: AddDelegatingHandler
-    nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler
-    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+    name: AddDelegatingHandler<THandler>
+    nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>
   - name: (
     nameWithType: (
     fullName: (
@@ -8129,11 +8170,9 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Net.Http.DelegatingHandler
-    name: DelegatingHandler
-    nameWithType: DelegatingHandler
-    fullName: System.Net.Http.DelegatingHandler
-    isExternal: true
+  - name: THandler
+    nameWithType: THandler
+    fullName: THandler
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -8141,10 +8180,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,System.Net.Http.DelegatingHandler})
-    name: AddDelegatingHandler
-    nameWithType: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler
-    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+    name: AddDelegatingHandler(Of THandler)
+    nameWithType: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)
   - name: (
     nameWithType: (
     fullName: (
@@ -8164,32 +8203,30 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Net.Http.DelegatingHandler
-    name: DelegatingHandler
-    nameWithType: DelegatingHandler
-    fullName: System.Net.Http.DelegatingHandler
-    isExternal: true
+  - name: THandler
+    nameWithType: THandler
+    fullName: THandler
   - name: )
     nameWithType: )
     fullName: )
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler})
-  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler})
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,{THandler}})
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
   parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}
-  definition: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler})
-  name: AddDelegatingHandler(Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>)
-  nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>.AddDelegatingHandler(Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>)
-  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.AddDelegatingHandler(System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.DelegatingHandler>)
-  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).AddDelegatingHandler(Func(Of ILogger, IApizrManagerOptionsBase, DelegatingHandler))
-  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).AddDelegatingHandler(System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.DelegatingHandler))
-  name.vb: AddDelegatingHandler(Func(Of ILogger, IApizrManagerOptionsBase, DelegatingHandler))
+  definition: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+  name: AddDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>.AddDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.AddDelegatingHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler>)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).AddDelegatingHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler))
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).AddDelegatingHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler))
+  name.vb: AddDelegatingHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler))
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler})
-    name: AddDelegatingHandler
-    nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>.AddDelegatingHandler
-    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.AddDelegatingHandler
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+    name: AddDelegatingHandler<THandler>
+    nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>.AddDelegatingHandler<THandler>
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.AddDelegatingHandler<THandler>
   - name: (
     nameWithType: (
     fullName: (
@@ -8216,11 +8253,9 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Net.Http.DelegatingHandler
-    name: DelegatingHandler
-    nameWithType: DelegatingHandler
-    fullName: System.Net.Http.DelegatingHandler
-    isExternal: true
+  - name: THandler
+    nameWithType: THandler
+    fullName: THandler
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -8228,10 +8263,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler})
-    name: AddDelegatingHandler
-    nameWithType: IApizrSharedRegistrationOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).AddDelegatingHandler
-    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).AddDelegatingHandler
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+    name: AddDelegatingHandler(Of THandler)
+    nameWithType: IApizrSharedRegistrationOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).AddDelegatingHandler(Of THandler)
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).AddDelegatingHandler(Of THandler)
   - name: (
     nameWithType: (
     fullName: (
@@ -8258,27 +8293,25 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Net.Http.DelegatingHandler
-    name: DelegatingHandler
-    nameWithType: DelegatingHandler
-    fullName: System.Net.Http.DelegatingHandler
-    isExternal: true
+  - name: THandler
+    nameWithType: THandler
+    fullName: THandler
   - name: )
     nameWithType: )
     fullName: )
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler}
-  commentId: T:System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler}
+- uid: System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,{THandler}}
+  commentId: T:System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0}
   parent: System
   definition: System.Func`3
-  name: Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>
-  nameWithType: Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>
-  fullName: System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.DelegatingHandler>
-  nameWithType.vb: Func(Of ILogger, IApizrManagerOptionsBase, DelegatingHandler)
-  fullName.vb: System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.DelegatingHandler)
-  name.vb: Func(Of ILogger, IApizrManagerOptionsBase, DelegatingHandler)
+  name: Func<ILogger, IApizrManagerOptionsBase, THandler>
+  nameWithType: Func<ILogger, IApizrManagerOptionsBase, THandler>
+  fullName: System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler>
+  nameWithType.vb: Func(Of ILogger, IApizrManagerOptionsBase, THandler)
+  fullName.vb: System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler)
+  name.vb: Func(Of ILogger, IApizrManagerOptionsBase, THandler)
   spec.csharp:
   - uid: System.Func`3
     name: Func
@@ -8303,11 +8336,9 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Net.Http.DelegatingHandler
-    name: DelegatingHandler
-    nameWithType: DelegatingHandler
-    fullName: System.Net.Http.DelegatingHandler
-    isExternal: true
+  - name: THandler
+    nameWithType: THandler
+    fullName: THandler
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -8335,28 +8366,26 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Net.Http.DelegatingHandler
-    name: DelegatingHandler
-    nameWithType: DelegatingHandler
-    fullName: System.Net.Http.DelegatingHandler
-    isExternal: true
+  - name: THandler
+    nameWithType: THandler
+    fullName: THandler
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler})
-  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler})
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
   isExternal: true
-  name: AddDelegatingHandler(Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>)
-  nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler(Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>)
-  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler(System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.DelegatingHandler>)
-  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Func(Of ILogger, IApizrManagerOptionsBase, DelegatingHandler))
-  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.DelegatingHandler))
-  name.vb: AddDelegatingHandler(Func(Of ILogger, IApizrManagerOptionsBase, DelegatingHandler))
+  name: AddDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler>)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler))
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler))
+  name.vb: AddDelegatingHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler))
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler})
-    name: AddDelegatingHandler
-    nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler
-    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+    name: AddDelegatingHandler<THandler>
+    nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>
   - name: (
     nameWithType: (
     fullName: (
@@ -8383,11 +8412,9 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Net.Http.DelegatingHandler
-    name: DelegatingHandler
-    nameWithType: DelegatingHandler
-    fullName: System.Net.Http.DelegatingHandler
-    isExternal: true
+  - name: THandler
+    nameWithType: THandler
+    fullName: THandler
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -8395,10 +8422,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler})
-    name: AddDelegatingHandler
-    nameWithType: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler
-    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+    name: AddDelegatingHandler(Of THandler)
+    nameWithType: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)
   - name: (
     nameWithType: (
     fullName: (
@@ -8425,11 +8452,9 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Net.Http.DelegatingHandler
-    name: DelegatingHandler
-    nameWithType: DelegatingHandler
-    fullName: System.Net.Http.DelegatingHandler
-    isExternal: true
+  - name: THandler
+    nameWithType: THandler
+    fullName: THandler
   - name: )
     nameWithType: )
     fullName: )
@@ -12391,6 +12416,60 @@ references:
   - name: TResult
     nameWithType: TResult
     fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,{THandler}}
+  commentId: T:System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0}
+  parent: System
+  definition: System.Func`2
+  name: Func<IApizrManagerOptionsBase, THandler>
+  nameWithType: Func<IApizrManagerOptionsBase, THandler>
+  fullName: System.Func<Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler>
+  nameWithType.vb: Func(Of IApizrManagerOptionsBase, THandler)
+  fullName.vb: System.Func(Of Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler)
+  name.vb: Func(Of IApizrManagerOptionsBase, THandler)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    nameWithType: IApizrManagerOptionsBase
+    fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: THandler
+    nameWithType: THandler
+    fullName: THandler
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    nameWithType: IApizrManagerOptionsBase
+    fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: THandler
+    nameWithType: THandler
+    fullName: THandler
   - name: )
     nameWithType: )
     fullName: )

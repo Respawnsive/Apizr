@@ -204,13 +204,14 @@
   
   
   <a id="Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_AddDelegatingHandler_" data-uid="Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.AddDelegatingHandler*"></a>
-  <h4 id="Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_AddDelegatingHandler_System_Func_System_IServiceProvider_Apizr_Configuring_Manager_IApizrManagerOptionsBase_System_Net_Http_DelegatingHandler__" data-uid="Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.AddDelegatingHandler(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler})">AddDelegatingHandler(Func&lt;IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler&gt;)</h4>
+  <h4 id="Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_AddDelegatingHandler__1___0_" data-uid="Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.AddDelegatingHandler``1(``0)">AddDelegatingHandler&lt;THandler&gt;(THandler)</h4>
   <div class="markdown level1 summary"><p>Add a custom delegating handler</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrExtendedManagerOptionsBuilder AddDelegatingHandler(Func&lt;IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler&gt; delegatingHandlerFactory)</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrExtendedManagerOptionsBuilder AddDelegatingHandler&lt;THandler&gt;(THandler delegatingHandler)
+    where THandler : DelegatingHandler</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -223,95 +224,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.IServiceProvider</span>, <a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a>, <span class="xref">System.Net.Http.DelegatingHandler</span>&gt;</td>
-        <td><span class="parametername">delegatingHandlerFactory</span></td>
-        <td><p>A delegating handler factory</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder.html">IApizrExtendedManagerOptionsBuilder</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_AddDelegatingHandler_" data-uid="Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.AddDelegatingHandler*"></a>
-  <h4 id="Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_AddDelegatingHandler_System_Func_System_IServiceProvider_System_Net_Http_DelegatingHandler__" data-uid="Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.AddDelegatingHandler(System.Func{System.IServiceProvider,System.Net.Http.DelegatingHandler})">AddDelegatingHandler(Func&lt;IServiceProvider, DelegatingHandler&gt;)</h4>
-  <div class="markdown level1 summary"><p>Add a custom delegating handler</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrExtendedManagerOptionsBuilder AddDelegatingHandler(Func&lt;IServiceProvider, DelegatingHandler&gt; delegatingHandlerFactory)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.IServiceProvider</span>, <span class="xref">System.Net.Http.DelegatingHandler</span>&gt;</td>
-        <td><span class="parametername">delegatingHandlerFactory</span></td>
-        <td><p>A delegating handler factory</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder.html">IApizrExtendedManagerOptionsBuilder</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_AddDelegatingHandler_" data-uid="Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.AddDelegatingHandler*"></a>
-  <h4 id="Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_AddDelegatingHandler_System_Net_Http_DelegatingHandler_" data-uid="Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.AddDelegatingHandler(System.Net.Http.DelegatingHandler)">AddDelegatingHandler(DelegatingHandler)</h4>
-  <div class="markdown level1 summary"><p>Add a custom delegating handler</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrExtendedManagerOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Net.Http.DelegatingHandler</span></td>
+        <td><span class="xref">THandler</span></td>
         <td><span class="parametername">delegatingHandler</span></td>
         <td><p>A delegating handler</p>
 </td>
@@ -329,6 +242,184 @@
     <tbody>
       <tr>
         <td><a class="xref" href="Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder.html">IApizrExtendedManagerOptionsBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">THandler</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_AddDelegatingHandler_" data-uid="Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.AddDelegatingHandler*"></a>
+  <h4 id="Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_AddDelegatingHandler__1_System_Func_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__" data-uid="Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">AddDelegatingHandler&lt;THandler&gt;(Func&lt;IApizrManagerOptionsBase, THandler&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddDelegatingHandler&lt;THandler&gt;(Func&lt;IApizrManagerOptionsBase, THandler&gt; handlerFactory)
+    where THandler : DelegatingHandler</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a>, THandler&gt;</td>
+        <td><span class="parametername">handlerFactory</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">THandler</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_AddDelegatingHandler_" data-uid="Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.AddDelegatingHandler*"></a>
+  <h4 id="Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_AddDelegatingHandler__1_System_Func_System_IServiceProvider___0__" data-uid="Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.AddDelegatingHandler``1(System.Func{System.IServiceProvider,``0})">AddDelegatingHandler&lt;THandler&gt;(Func&lt;IServiceProvider, THandler&gt;)</h4>
+  <div class="markdown level1 summary"><p>Add a custom delegating handler</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrExtendedManagerOptionsBuilder AddDelegatingHandler&lt;THandler&gt;(Func&lt;IServiceProvider, THandler&gt; delegatingHandlerFactory)
+    where THandler : DelegatingHandler</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.IServiceProvider</span>, THandler&gt;</td>
+        <td><span class="parametername">delegatingHandlerFactory</span></td>
+        <td><p>A delegating handler factory</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder.html">IApizrExtendedManagerOptionsBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">THandler</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_AddDelegatingHandler_" data-uid="Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.AddDelegatingHandler*"></a>
+  <h4 id="Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_AddDelegatingHandler__1_System_Func_System_IServiceProvider_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__" data-uid="Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.AddDelegatingHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">AddDelegatingHandler&lt;THandler&gt;(Func&lt;IServiceProvider, IApizrManagerOptionsBase, THandler&gt;)</h4>
+  <div class="markdown level1 summary"><p>Add a custom delegating handler</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrExtendedManagerOptionsBuilder AddDelegatingHandler&lt;THandler&gt;(Func&lt;IServiceProvider, IApizrManagerOptionsBase, THandler&gt; delegatingHandlerFactory)
+    where THandler : DelegatingHandler</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.IServiceProvider</span>, <a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a>, THandler&gt;</td>
+        <td><span class="parametername">delegatingHandlerFactory</span></td>
+        <td><p>A delegating handler factory</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder.html">IApizrExtendedManagerOptionsBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">THandler</span></td>
         <td></td>
       </tr>
     </tbody>

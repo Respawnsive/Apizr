@@ -9,7 +9,7 @@ public static class FileTransferOptionsBuilderExtensions
     {
         if (builder is IApizrInternalRegistrationOptionsBuilder registrationBuilder)
             registrationBuilder.AddDelegatingHandler(_ =>
-                new ProgressMessageHandler());
+                new ApizrProgressMessageHandler());
 
         return builder;
     }
@@ -19,7 +19,7 @@ public static class FileTransferOptionsBuilderExtensions
     {
         if (builder is IApizrInternalRegistrationOptionsBuilder registrationBuilder)
             registrationBuilder.AddDelegatingHandler(_ =>
-                new ProgressMessageHandler());
+                new ApizrProgressMessageHandler());
 
         if (builder is IApizrInternalOptionsBuilder voidBuilder)
             voidBuilder.SetHandlerParameter(Constants.ApizrProgressKey, progress);

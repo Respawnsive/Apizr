@@ -97,7 +97,7 @@ namespace Apizr.Tests
         public async Task Downloading_File_Should_Report_Progress_2()
         {
             var httpHandler = new HttpClientHandler();
-            var progresHandler = new ProgressMessageHandler(httpHandler);
+            var progresHandler = new ApizrProgressMessageHandler(httpHandler);
             // for the sake of the example lets add a client definition here
             var client = new HttpClient(progresHandler);
             var docUrl = "http://speedtest.ftp.otenet.gr/files/test10Mb.db";
@@ -120,7 +120,7 @@ namespace Apizr.Tests
         public async Task Downloading_File_Should_Report_Progress_3()
         {
             var httpHandler = new HttpClientHandler();
-            var progresHandler = new ProgressMessageHandler(httpHandler);
+            var progresHandler = new ApizrProgressMessageHandler(httpHandler);
             progresHandler.HttpReceiveProgress += (sender, args) =>
             {
                 Console.WriteLine(args.ProgressPercentage);

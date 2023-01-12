@@ -119,11 +119,12 @@ namespace Apizr.Tests
         [Fact]
         public async Task Downloading_File_Should_Report_Progress_3()
         {
+            var percentage = 0;
             var httpHandler = new HttpClientHandler();
             var progresHandler = new ApizrProgressMessageHandler(httpHandler);
             progresHandler.HttpReceiveProgress += (sender, args) =>
             {
-                Console.WriteLine(args.ProgressPercentage);
+                percentage = args.ProgressPercentage;
             };
             // for the sake of the example lets add a client definition here
             var client = new HttpClient(progresHandler);
@@ -137,6 +138,31 @@ namespace Apizr.Tests
             ms.Seek(0, SeekOrigin.Begin);
             await ms.CopyToAsync(fs);
 
+            percentage.Should().Be(100);
+            fileInfo.Length.Should().BePositive();
+        }
+
+
+        [Fact]
+        public async Task Downloading_File_Should_Report_Progress_4()
+        {
+            var percentage = 0;
+            var progresHandler = new ApizrProgressMessageHandler();
+            progresHandler.HttpReceiveProgress += (sender, args) =>
+            {
+                percentage = args.ProgressPercentage;
+            };
+            var fileManager = ApizrBuilder.CreateManagerFor<IFileTransferService>(options => options.AddDelegatingHandler(progresHandler));
+            var response = await fileManager.ExecuteAsync((opt, api) => api.DownloadAsync("test10Mb.db", opt)).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var guid = Guid.NewGuid();
+            var fileInfo = new FileInfo($"{guid}.txt");
+            await using var ms = await response.Content.ReadAsStreamAsync();
+            await using var fs = File.Create(fileInfo.FullName);
+            ms.Seek(0, SeekOrigin.Begin);
+            await ms.CopyToAsync(fs);
+
+            percentage.Should().Be(100);
             fileInfo.Length.Should().BePositive();
         }
 
@@ -162,6 +188,33 @@ namespace Apizr.Tests
                 await ms.CopyToAsync(fs);
             }
 
+            fileInfo.Length.Should().BePositive();
+        }
+
+
+        [Fact]
+        public async Task Downloading_File_Should_Report_Progress_6()
+        {
+            var percentage = 0;
+            var httpHandler = new HttpClientHandler();
+            var progresHandler = new ApizrProgressMessageHandler(httpHandler);
+            progresHandler.HttpReceiveProgress += (sender, args) =>
+            {
+                percentage = args.ProgressPercentage;
+            };
+            // for the sake of the example lets add a client definition here
+            var client = new HttpClient(progresHandler){BaseAddress = new Uri("http://speedtest.ftp.otenet.gr/files") };
+            var fileManager = RestService.For<IFileTransferService>(client);
+            var response = await fileManager.DownloadAsync("test10Mb.db").ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var contentLength = response.Content.Headers.ContentLength;
+            var guid = Guid.NewGuid();
+            var fileInfo = new FileInfo($"{guid}.txt");
+            await using var ms = await response.Content.ReadAsStreamAsync();
+            await using var fs = File.Create(fileInfo.FullName);
+            await ms.CopyToAsync(fs, 8192);
+
+            percentage.Should().Be(100);
             fileInfo.Length.Should().BePositive();
         }
     }

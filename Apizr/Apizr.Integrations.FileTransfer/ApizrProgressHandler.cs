@@ -48,10 +48,12 @@ namespace Apizr.Integrations.FileTransfer
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            AddRequestProgress(request);
+            var hasProgress = request.ContainsApizrProgress();
+            if(hasProgress)
+                AddRequestProgress(request);
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
 
-            if (HttpReceiveProgress != null && response != null && response.Content != null)
+            if (hasProgress && response != null && response.Content != null)
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 await AddResponseProgressAsync(request, response);
@@ -71,6 +73,9 @@ namespace Apizr.Integrations.FileTransfer
             {
                 HttpSendProgress(request, e);
             }
+
+            if (request.TryGetApizrProgress(out var apizrProgress))
+                apizrProgress.Report(new ApizrProgressEventArgs(ApizrProgressType.Request, e));
         }
 
         /// <summary>
@@ -84,6 +89,9 @@ namespace Apizr.Integrations.FileTransfer
             {
                 HttpReceiveProgress(request, e);
             }
+
+            if (request.TryGetApizrProgress(out var apizrProgress))
+                apizrProgress.Report(new ApizrProgressEventArgs(ApizrProgressType.Response, e));
         }
 
         private void AddRequestProgress(HttpRequestMessage request)

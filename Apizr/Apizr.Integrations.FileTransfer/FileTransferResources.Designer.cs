@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Apizr.Integrations.FileTransfer {
+namespace Apizr {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Apizr.Integrations.FileTransfer {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Apizr.Integrations.FileTransfer.FileTransferResources", typeof(FileTransferResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Apizr.FileTransferResources", typeof(FileTransferResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

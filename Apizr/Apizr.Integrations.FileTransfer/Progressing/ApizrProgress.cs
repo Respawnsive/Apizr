@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Apizr.Integrations.FileTransfer;
+namespace Apizr.Progressing;
 
 public class ApizrProgress : Progress<ApizrProgressEventArgs>, IApizrProgress
 {

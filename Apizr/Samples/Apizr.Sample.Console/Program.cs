@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Akavache;
 using Apizr.Configuring.Registry;
 using Apizr.Extending;
-using Apizr.Integrations.FileTransfer;
 using Apizr.Logging;
 using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Cruding.Sending;
@@ -24,6 +23,7 @@ using Apizr.Optional.Extending;
 using Apizr.Optional.Requesting;
 using Apizr.Optional.Requesting.Sending;
 using Apizr.Policing;
+using Apizr.Progressing;
 using Apizr.Requesting;
 using Apizr.Sample.Console.Models;
 using Apizr.Sample.Models;
@@ -131,41 +131,6 @@ namespace Apizr.Sample.Console
                     var fileSuffix = "small";
                     var fileExtension = "pdf";
                     var fileType = "application/pdf";
-
-                    var percentage = 0;
-                    var progresHandler = new ApizrProgressMessageHandler();
-                    progresHandler.HttpReceiveProgress += (sender, args) =>
-                    {
-                        percentage = args.ProgressPercentage;
-                    };
-                    var builder = new HttpTracer.HttpHandlerBuilder(new HttpClientHandler());
-                    builder.SetHttpTracerVerbosity(HttpTracer.HttpMessageParts.RequestAll |
-                                                   HttpTracer.HttpMessageParts.ResponseHeaders);
-                    builder.AddHandler(progresHandler);
-                    // for the sake of the example lets add a client definition here
-                    var tracer = builder.Build();
-                    // for the sake of the example lets add a client definition here
-                    var client = new HttpClient(tracer) { BaseAddress = new Uri("http://speedtest.ftp.otenet.gr/files") };
-                    var fileManager = RestService.For<IFileTransferService>(client);
-                    var response = await fileManager.DownloadAsync("test10Mb.db").ConfigureAwait(false);
-                    response.EnsureSuccessStatusCode();
-                    var guid = Guid.NewGuid();
-                    var fileInfo = new FileInfo($"{guid}.txt");
-                    await using var ms = await response.Content.ReadAsStreamAsync();
-                    await using var fs = File.Create(fileInfo.FullName);
-                    ms.Seek(0, SeekOrigin.Begin);
-                    await ms.CopyToAsync(fs);
-
-                    //var client = new HttpClient(tracer);
-                    //var docUrl = "http://speedtest.ftp.otenet.gr/files/test10Mb.db";
-                    //var response = await client.GetAsync(docUrl);
-                    //response.EnsureSuccessStatusCode();
-                    //var guid = Guid.NewGuid();
-                    //var fileInfo = new FileInfo($"{guid}.txt");
-                    //await using var ms = await response.Content.ReadAsStreamAsync();
-                    //await using var fs = File.Create(fileInfo.FullName);
-                    //ms.Seek(0, SeekOrigin.Begin);
-                    //await ms.CopyToAsync(fs);
 
                     //_httpBinService = RestService.For<IHttpBinService>("https://httpbin.org");
                     //await using var stream = GetTestFileStream("Files/Test_large.pdf");

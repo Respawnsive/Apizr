@@ -1,7 +1,8 @@
 ﻿using System.Net.Http;
 using Apizr.Policing;
+using Apizr.Progressing;
 
-namespace Apizr.Integrations.FileTransfer;
+namespace Apizr.Extending;
 
 public static class HttpRequestMessageExtensions
 {

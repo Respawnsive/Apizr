@@ -1,4 +1,4 @@
-﻿namespace Apizr.Integrations.FileTransfer;
+﻿namespace Apizr.Progressing;
 
 public enum ApizrProgressType
 {

@@ -1,4 +1,4 @@
-﻿// Largely inspired by Refit.Insane.PowerPack, but with more features
+﻿// Largely inspired by Refit.Insane.PowerPack, but with many more features
 
 using System;
 using System.Collections;

@@ -6,8 +6,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using Apizr.Integrations.FileTransfer;
 using Apizr.Policing;
+using Apizr.Progressing;
 using Apizr.Tests.Apis;
 using FluentAssertions;
 using MonkeyCache.FileStore;
@@ -51,82 +51,7 @@ namespace Apizr.Tests
         }
         
         [Fact]
-        public async Task Downloading_File_Should_Report_Progress_1()
-        {
-            var percentage = 0;
-            var httpHandler = new HttpClientHandler();
-            var progressHandler = new ApizrProgressMessageHandler(httpHandler);
-            progressHandler.HttpReceiveProgress += (sender, args) =>
-            {
-                percentage = args.ProgressPercentage;
-            };
-            // for the sake of the example lets add a client definition here
-            var client = new HttpClient(progressHandler);
-            var docUrl = "http://speedtest.ftp.otenet.gr/files/test10Mb.db";
-            using var response = await client.GetAsync(docUrl).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            var guid = Guid.NewGuid();
-            var fileInfo = new FileInfo($"{guid}.txt");
-            await using var ms = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-            await using var fs = File.Create(fileInfo.FullName);
-            if (ms.CanSeek) ms.Seek(0, SeekOrigin.Begin);
-            await ms.CopyToAsync(fs);
-
-            percentage.Should().Be(100);
-            fileInfo.Length.Should().BePositive();
-        }
-
-        [Fact]
-        public async Task Downloading_File_Should_Report_Progress_2()
-        {
-            var percentage = 0;
-            var httpHandler = new HttpClientHandler();
-            var progressHandler = new ApizrProgressMessageHandler(httpHandler);
-            progressHandler.HttpReceiveProgress += (sender, args) =>
-            {
-                percentage = args.ProgressPercentage;
-            };
-            // for the sake of the example lets add a client definition here
-            var client = new HttpClient(progressHandler) { BaseAddress = new Uri("http://speedtest.ftp.otenet.gr/files") };
-            var fileManager = RestService.For<IFileTransferService>(client);
-            using var response = await fileManager.DownloadAsync("test10Mb.db").ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            var guid = Guid.NewGuid();
-            var fileInfo = new FileInfo($"{guid}.txt");
-            await using var ms = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-            await using var fs = File.Create(fileInfo.FullName);
-            if (ms.CanSeek) ms.Seek(0, SeekOrigin.Begin);
-            await ms.CopyToAsync(fs);
-
-            percentage.Should().Be(100);
-            fileInfo.Length.Should().BePositive();
-        }
-
-        [Fact]
-        public async Task Downloading_File_Should_Report_Progress_3()
-        {
-            var percentage = 0;
-            var progressHandler = new ApizrProgressMessageHandler();
-            progressHandler.HttpReceiveProgress += (sender, args) =>
-            {
-                percentage = args.ProgressPercentage;
-            };
-            var fileManager = ApizrBuilder.CreateManagerFor<IFileTransferService>(options => options.AddDelegatingHandler(progressHandler));
-            using var response = await fileManager.ExecuteAsync((opt, api) => api.DownloadAsync("test10Mb.db", opt)).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            var guid = Guid.NewGuid();
-            var fileInfo = new FileInfo($"{guid}.txt");
-            await using var ms = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-            await using var fs = File.Create(fileInfo.FullName);
-            if (ms.CanSeek) ms.Seek(0, SeekOrigin.Begin);
-            await ms.CopyToAsync(fs);
-
-            percentage.Should().Be(100);
-            fileInfo.Length.Should().BePositive();
-        }
-        
-        [Fact]
-        public async Task Downloading_File_Should_Report_Progress_4()
+        public async Task Downloading_File_Should_Report_Progress()
         {
             var percentage = 0;
             var progress = new ApizrProgress();

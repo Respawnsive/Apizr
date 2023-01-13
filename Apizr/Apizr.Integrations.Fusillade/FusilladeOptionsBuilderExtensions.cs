@@ -21,7 +21,7 @@ namespace Apizr
         }
 
         /// <summary>
-        /// Tells Apizr to manage request priority
+        /// Enables priority management with Apizr
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="builder"></param>
@@ -37,22 +37,22 @@ namespace Apizr
         }
 
         /// <summary>
-        /// Tells Apizr to manage request priority
+        /// Tells Apizr to manage request with a priority
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="builder"></param>
-        /// <param name="priority"></param>
+        /// <param name="priority">The priority to manage the request with</param>
         /// <returns></returns>
         public static T WithPriority<T>(this T builder, Priority priority)
             where T : IApizrGlobalSharedOptionsBuilderBase
             => builder.WithPriority((int)priority);
 
         /// <summary>
-        /// Tells Apizr to manage request priority
+        /// Tells Apizr to manage request with a priority
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="builder"></param>
-        /// <param name="priority"></param>
+        /// <param name="priority">The priority to manage the request with</param>
         /// <returns></returns>
         public static T WithPriority<T>(this T builder, int priority)
             where T : IApizrGlobalSharedOptionsBuilderBase

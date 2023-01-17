@@ -18,6 +18,8 @@ using Apizr.Requesting;
 using Apizr.Tests.Apis;
 using Apizr.Tests.Helpers;
 using Apizr.Tests.Models;
+using Apizr.Transferring;
+using Apizr.Transferring.Managing;
 using Castle.DynamicProxy.Internal;
 using FluentAssertions;
 using MediatR;
@@ -412,6 +414,27 @@ namespace Apizr.Tests
                 e => {
                     // ignore error
                 });
+        }
+
+        [Fact]
+        public async Task Calling_WithOptionalMediation_Should_Handle_Requests_With_Optional_Result2()
+        {
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+
+            services.AddApizrManagerFor<IFileTransferSampleApi>();
+            services.AddSingleton<IApizrDownloadManager<IFileTransferSampleApi>, ApizrDownloadManager<IFileTransferSampleApi>>();
+            services.AddSingleton<IApizrUploadManager<IFileTransferSampleApi>, ApizrUploadManager<IFileTransferSampleApi>>();
+            services.AddSingleton<IApizrFileTransferManager<IFileTransferSampleApi>, ApizrFileTransferManager<IFileTransferSampleApi>>();
+
+            var serviceProvider = services.BuildServiceProvider();
+            var fileTransferManager = serviceProvider.GetRequiredService<IApizrFileTransferManager<IFileTransferSampleApi>>();
+
+            fileTransferManager.Should().NotBeNull();
+            var fileInfo = await fileTransferManager.DownloadAsync(new FileInfo("test10Mb.db"));
+
+            fileInfo.Should().NotBeNull();
+            fileInfo.Length.Should().BePositive();
         }
     }
 }

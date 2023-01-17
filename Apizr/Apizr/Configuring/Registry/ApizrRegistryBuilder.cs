@@ -41,7 +41,7 @@ namespace Apizr.Configuring.Registry
         public IApizrRegistryBuilder AddGroup(Action<IApizrRegistryBuilder> registryGroupBuilder,
             Action<IApizrCommonOptionsBuilder> commonOptionsBuilder = null)
         {
-            ApizrBuilder.CreateRegistry(registryGroupBuilder, CommonOptions, commonOptionsBuilder, Registry);
+            ApizrBuilder.Instance.CreateRegistry(registryGroupBuilder, CommonOptions, commonOptionsBuilder, Registry);
 
             return this;
         }
@@ -124,8 +124,8 @@ namespace Apizr.Configuring.Registry
             Action<IApizrProperOptionsBuilder> properOptionsBuilder = null)
             where TApizrManager : IApizrManager<TWebApi>
         {
-            var properOptions = ApizrBuilder.CreateProperOptions<TWebApi>(CommonOptions, properOptionsBuilder);
-            var managerFactory = new Func<IApizrManager<TWebApi>>(() => ApizrBuilder.CreateManagerFor(apizrManagerFactory, CommonOptions, properOptions));
+            var properOptions = ApizrBuilder.Instance.CreateProperOptions<TWebApi>(CommonOptions, properOptionsBuilder);
+            var managerFactory = new Func<IApizrManager<TWebApi>>(() => ApizrBuilder.Instance.CreateManagerFor(apizrManagerFactory, CommonOptions, properOptions));
             Registry.AddOrUpdateManagerFor(managerFactory);
 
             return this;

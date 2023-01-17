@@ -144,7 +144,7 @@ Caching, Logging, Policing, Prioritizing... everything is activable fluently wit
 <p>Here is an example of how to register a managed instance of the CRUD api interface:</p>
 <pre><code class="lang-csharp">// Apizr registration
 myContainer.RegistrationMethod(() =&gt;
-    ApizrBuilder.CreateCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(options =&gt; options
+    ApizrBuilder.Current.CreateCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(options =&gt; options
         .WithBaseAddress(&quot;your specific T entity crud base uri&quot;))
 );
 </code></pre><p>T must be a class.</p>
@@ -190,7 +190,7 @@ This is where the ApizrRegistry comes on stage.</p>
 </ul>
 <section id="tabpanel_u8ofuDaOMe-1_tabid-static" role="tabpanel" data-tab="tabid-static">
 <pre><code class="lang-csharp">// Apizr registry
-var apizrRegistry = ApizrBuilder.CreateRegistry(
+var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
     registry =&gt; registry
         .AddCrudManagerFor&lt;T1&gt;(
             options =&gt; options.WithBaseAddress(&quot;your specific T1 entity crud base uri&quot;)
@@ -304,7 +304,7 @@ It could be usefull when requesting mutliple apis (multiple base address) commin
 </ul>
 <section id="tabpanel_u8ofuDaOMe-2_tabid-static" role="tabpanel" data-tab="tabid-static">
 <pre><code class="lang-csharp">// Apizr registry
-var apizrRegistry = ApizrBuilder.CreateRegistry(
+var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
     registry =&gt; registry
         .AddGroup(
             group =&gt; group

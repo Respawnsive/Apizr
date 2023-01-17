@@ -85,7 +85,7 @@ options => options.WithPriority(70)
 All priority fluent options are available with and without using registry. 
 It means that you can share priority configuration, setting it at registry level and/or set some specific one at api level, something like:
 ```csharp
-var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
         .AddGroup(group => group
                 .AddManagerFor<IReqResUserService>(options => options
                     .WithPriority(Priority.UserInitiated))

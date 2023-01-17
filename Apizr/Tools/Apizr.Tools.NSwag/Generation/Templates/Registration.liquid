@@ -110,7 +110,7 @@ namespace {{ NameSpace }}
 
 {%          endif -%}
 {%          if HasManyServices -%}
-            var apizrRegisry = ApizrBuilder.CreateRegistry(
+            var apizrRegisry = ApizrBuilder.Current.CreateRegistry(
                 registry => registry
 {%                  for service in Services -%}
                     .AddManagerFor<I{{ service }}Service>(){% if service == LastService %},{% endif %}
@@ -145,7 +145,7 @@ namespace {{ NameSpace }}
 
             return apizrRegistry;
 {%          else -%}
-            var apizrManager = ApizrBuilder.CreateManagerFor<I{{ LastService }}Service>(
+            var apizrManager = ApizrBuilder.Current.CreateManagerFor<I{{ LastService }}Service>(
                 options => options.WithBaseAddress("{{BaseUrl}}")
 {%                  if WithLogs -%}
                     .WithLoggerFactory(() => LoggerFactory.Create(logging =>

@@ -5,99 +5,31 @@
     </assembly>
     <members>
         <member name="T:Apizr.ApizrBuilder">
-            <summary>
-            The static builder
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Apizr.ApizrBuilder.CreateRegistry(System.Action{Apizr.Configuring.Registry.IApizrRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})">
-            <summary>
-            Create a registry with all managers built with both common and proper options
-            </summary>
-            <param name="registryBuilder">The registry builder with access to proper options</param>
-            <param name="commonOptionsBuilder">The common options shared by all managers</param>
-            <returns></returns>
+            <inheritdoc/>
         </member>
         <member name="M:Apizr.ApizrBuilder.CreateCrudManagerFor``1(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
-            <summary>
-            Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
-            with key of type <see cref="T:System.Int32"/> and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
-            and ReadAll query parameters of type IDictionary{string,object}
-            </summary>
-            <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
-            <param name="optionsBuilder">The builder defining some options</param>
-            <returns></returns>
+            <inheritdoc/>
         </member>
         <member name="M:Apizr.ApizrBuilder.CreateCrudManagerFor``2(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
-            <summary>
-            Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
-            with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
-            and ReadAll query parameters of type IDictionary{string,object}
-            </summary>
-            <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
-            <typeparam name="TKey">The object key type (primitive)</typeparam>
-            <param name="optionsBuilder">The builder defining some options</param>
-            <returns></returns>
+            <inheritdoc/>
         </member>
         <member name="M:Apizr.ApizrBuilder.CreateCrudManagerFor``3(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
-            <summary>
-            Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
-            with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
-            and ReadAll query parameters of type IDictionary{string,object}
-            </summary>
-            <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
-            <typeparam name="TKey">The object key type (primitive)</typeparam>
-            <typeparam name="TReadAllResult">"ReadAll" query result type
-            (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
-            <param name="optionsBuilder">The builder defining some options</param>
-            <returns></returns>
+            <inheritdoc/>
         </member>
         <member name="M:Apizr.ApizrBuilder.CreateCrudManagerFor``4(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
-            <summary>
-            Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
-            with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
-            and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
-            </summary>
-            <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
-            <typeparam name="TKey">The object key type (primitive)</typeparam>
-            <typeparam name="TReadAllResult">"ReadAll" query result type
-            (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
-            <typeparam name="TReadAllParams">ReadAll query parameters</typeparam>
-            <param name="optionsBuilder">The builder defining some options</param>
-            <returns></returns>
+            <inheritdoc/>
         </member>
         <member name="M:Apizr.ApizrBuilder.CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptionsBase,``4},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
-            <summary>
-            Create a <typeparamref name="TApizrManager"/> instance for a managed crud api for <typeparamref name="T"/> object (class), 
-            with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
-            and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
-            </summary>
-            <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
-            <typeparam name="TKey">The object key type (primitive)</typeparam>
-            <typeparam name="TApizrManager">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation</typeparam>
-            <typeparam name="TReadAllResult">"ReadAll" query result type
-            (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
-            <typeparam name="TReadAllParams">ReadAll query parameters</typeparam>
-            <param name="apizrManagerFactory">The custom manager implementation instance factory</param>
-            <param name="optionsBuilder">The builder defining some options</param>
-            <returns></returns>
+            <inheritdoc/>
         </member>
         <member name="M:Apizr.ApizrBuilder.CreateManagerFor``1(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
-            <summary>
-            Create a <see cref="T:Apizr.ApizrManager`1"/> instance
-            </summary>
-            <typeparam name="TWebApi">The web api interface to manage</typeparam>
-            <param name="optionsBuilder">The builder defining some options</param>
-            <returns></returns>
+            <inheritdoc/>
         </member>
         <member name="M:Apizr.ApizrBuilder.CreateManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
-            <summary>
-            Create a <typeparamref name="TApizrManager"/> instance for a managed <typeparamref name="TWebApi"/>
-            </summary>
-            <typeparam name="TWebApi">The web api interface to manage</typeparam>
-            <typeparam name="TApizrManager">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation</typeparam>
-            <param name="apizrManagerFactory">The custom manager implementation instance factory</param>
-            <param name="optionsBuilder">The builder defining some options</param>
-            <returns></returns>
+            <inheritdoc/>
         </member>
         <member name="T:Apizr.ApizrException">
             <summary>
@@ -3027,6 +2959,101 @@
             <param name="baseUrl">Base url that will be combined</param>
             <param name="relativePaths">The array of relative paths to combine</param>
             <returns>The merged url</returns>
+        </member>
+        <member name="T:Apizr.IApizrBuilder">
+            <summary>
+            The builder
+            </summary>
+        </member>
+        <member name="M:Apizr.IApizrBuilder.CreateRegistry(System.Action{Apizr.Configuring.Registry.IApizrRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})">
+            <summary>
+            Create a registry with all managers built with both common and proper options
+            </summary>
+            <param name="registryBuilder">The registry builder with access to proper options</param>
+            <param name="commonOptionsBuilder">The common options shared by all managers</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrBuilder.CreateCrudManagerFor``1(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+            <summary>
+            Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
+            with key of type <see cref="T:System.Int32"/> and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            and ReadAll query parameters of type IDictionary{string,object}
+            </summary>
+            <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrBuilder.CreateCrudManagerFor``2(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+            <summary>
+            Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
+            with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            and ReadAll query parameters of type IDictionary{string,object}
+            </summary>
+            <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
+            <typeparam name="TKey">The object key type (primitive)</typeparam>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrBuilder.CreateCrudManagerFor``3(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+            <summary>
+            Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
+            with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
+            and ReadAll query parameters of type IDictionary{string,object}
+            </summary>
+            <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
+            <typeparam name="TKey">The object key type (primitive)</typeparam>
+            <typeparam name="TReadAllResult">"ReadAll" query result type
+            (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrBuilder.CreateCrudManagerFor``4(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+            <summary>
+            Create a <see cref="T:Apizr.ApizrManager`1"/> instance for <typeparamref name="T"/> object type (class), 
+            with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
+            and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
+            </summary>
+            <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
+            <typeparam name="TKey">The object key type (primitive)</typeparam>
+            <typeparam name="TReadAllResult">"ReadAll" query result type
+            (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
+            <typeparam name="TReadAllParams">ReadAll query parameters</typeparam>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrBuilder.CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptionsBase,``4},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+            <summary>
+            Create a <typeparamref name="TApizrManager"/> instance for a managed crud api for <typeparamref name="T"/> object (class), 
+            with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
+            and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
+            </summary>
+            <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
+            <typeparam name="TKey">The object key type (primitive)</typeparam>
+            <typeparam name="TApizrManager">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation</typeparam>
+            <typeparam name="TReadAllResult">"ReadAll" query result type
+            (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
+            <typeparam name="TReadAllParams">ReadAll query parameters</typeparam>
+            <param name="apizrManagerFactory">The custom manager implementation instance factory</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrBuilder.CreateManagerFor``1(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+            <summary>
+            Create a <see cref="T:Apizr.ApizrManager`1"/> instance
+            </summary>
+            <typeparam name="TWebApi">The web api interface to manage</typeparam>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrBuilder.CreateManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+            <summary>
+            Create a <typeparamref name="TApizrManager"/> instance for a managed <typeparamref name="TWebApi"/>
+            </summary>
+            <typeparam name="TWebApi">The web api interface to manage</typeparam>
+            <typeparam name="TApizrManager">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation</typeparam>
+            <param name="apizrManagerFactory">The custom manager implementation instance factory</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
         </member>
         <member name="T:Apizr.IApizrManager">
             <summary>

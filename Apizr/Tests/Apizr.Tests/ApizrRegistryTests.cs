@@ -45,7 +45,7 @@ namespace Apizr.Tests
         [Fact]
         public void ApizrRegistry_Should_Contain_Managers()
         {
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddManagerFor<IReqResUserService>()
                 .AddManagerFor<IHttpBinService>()
                 .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>());
@@ -60,7 +60,7 @@ namespace Apizr.Tests
         [Fact]
         public void ApizrRegistry_Should_Get_Managers()
         {
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddManagerFor<IReqResUserService>()
                 .AddManagerFor<IHttpBinService>()
                 .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>());
@@ -78,7 +78,7 @@ namespace Apizr.Tests
         [Fact]
         public void ApizrRegistry_Should_Populate_Managers()
         {
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddManagerFor<IReqResUserService>()
                 .AddManagerFor<IHttpBinService>()
                 .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>());
@@ -105,20 +105,20 @@ namespace Apizr.Tests
             var uri2 = new Uri("http://uri2.com");
 
             // By attribute
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>());
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
             reqResManager.Options.BaseUri.Should().Be(attributeUri);
 
             // By attribute overriding common option
-            apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
                 config => config.WithBaseAddress(uri2));
             reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
             reqResManager.Options.BaseUri.Should().Be(attributeUri);
 
             // By proper option overriding attribute
-            apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(options =>
                         options.WithBaseAddress(uri2)));
 
@@ -126,7 +126,7 @@ namespace Apizr.Tests
             reqResManager.Options.BaseUri.Should().Be(uri2);
 
             // By proper option overriding common option and attribute
-            apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddManagerFor<IReqResUserService>(options => 
                     options.WithBaseAddress(uri2)),
                 config => config.WithBaseAddress(uri1));
@@ -148,7 +148,7 @@ namespace Apizr.Tests
             var fullUri4 = $"{uri4}{path}";
 
             // By common option overriding attribute
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddGroup(group => group
                             .AddManagerFor<IReqResUserService>()
                             .AddManagerFor<IReqResUserPathService>(config => config.WithBasePath(path)) // completing with base path
@@ -167,7 +167,7 @@ namespace Apizr.Tests
             resourceFixture.Options.BaseUri.Should().Be(uri3);
 
             // By proper option overriding all common options and attribute
-            apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddGroup(group => group
                             .AddManagerFor<IReqResUserService>(config => config.WithBaseAddress(uri4)) // changing base uri
                             .AddManagerFor<IReqResUserPathService>(config => config.WithBaseAddress(uri4).WithBasePath(path)) // changing base uri completing with base path
@@ -192,7 +192,7 @@ namespace Apizr.Tests
         {
             string token = null;
 
-            var apizrRegistry = ApizrBuilder.CreateRegistry(
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
                 registry => registry
                     .AddManagerFor<IHttpBinService>(options =>
                         options.WithAuthenticationHandler(_ => Task.FromResult(token = "token"))));
@@ -208,7 +208,7 @@ namespace Apizr.Tests
         [Fact]
         public void Calling_WithLogging_Should_Set_LoggingSettings()
         {
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddManagerFor<IReqResUserService>(options => options.WithLogging((HttpTracerMode) HttpTracerMode.ExceptionsOnly, (HttpMessageParts) HttpMessageParts.RequestCookies, LogLevel.Warning)));
 
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
@@ -223,7 +223,7 @@ namespace Apizr.Tests
         {
             string token = null;
 
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IHttpBinService>(),
                 config => config
                     .WithAuthenticationHandler(_ => Task.FromResult(token = "token")));
@@ -241,7 +241,7 @@ namespace Apizr.Tests
         {
             string token = null;
 
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IHttpBinService>(options => options
                         .WithAuthenticationHandler(_ => Task.FromResult(token = "tokenA"))),
                 config => config
@@ -258,7 +258,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithAkavacheCacheHandler_Should_Cache_Result()
         {
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
                 config => config
                     .WithAkavacheCacheHandler()
@@ -307,7 +307,7 @@ namespace Apizr.Tests
                 }
             };
 
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
                 config => config
                     .WithPolicyRegistry(policyRegistry)
@@ -330,7 +330,7 @@ namespace Apizr.Tests
         {
             var isConnected = false;
 
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
                 config => config
                     .WithConnectivityHandler(() => isConnected));
@@ -354,7 +354,7 @@ namespace Apizr.Tests
         [Fact]
         public void Calling_WithRefitSettings_Should_Set_Settings()
         {
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
                 config => config
                     .WithRefitSettings(_refitSettings));
@@ -373,7 +373,7 @@ namespace Apizr.Tests
                 config.AddProfile<UserMinUserProfile>();
             });
 
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
                 config => config
                     .WithRefitSettings(_refitSettings)
@@ -402,7 +402,7 @@ namespace Apizr.Tests
                 config.AddProfile<UserMinUserProfile>();
             });
 
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
                 config => config
                     .WithRefitSettings(_refitSettings)
@@ -425,7 +425,7 @@ namespace Apizr.Tests
         [Fact]
         public void Grouped_ApizrRegistry_Should_Contain_Managers()
         {
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddGroup(group => group
                     .AddManagerFor<IReqResUserService>()
                     .AddManagerFor<IReqResResourceService>())
@@ -443,7 +443,7 @@ namespace Apizr.Tests
         [Fact]
         public void Grouped_ApizrRegistry_Should_Get_Managers()
         {
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddGroup(group => group
                     .AddManagerFor<IReqResUserService>()
                     .AddManagerFor<IReqResResourceService>())
@@ -465,7 +465,7 @@ namespace Apizr.Tests
         [Fact]
         public void Grouped_ApizrRegistry_Should_Populate_Managers()
         {
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddGroup(group => group
                     .AddManagerFor<IReqResUserService>()
                     .AddManagerFor<IReqResResourceService>())
@@ -491,7 +491,7 @@ namespace Apizr.Tests
         {
             var watcher = new WatchingRequestHandler();
 
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry.AddManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher)));
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry.AddManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher)));
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
 
             var testKey = "TestKey1";
@@ -513,7 +513,7 @@ namespace Apizr.Tests
             var testKey1 = "TestKey1";
             var testValue1 = 1;
 
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry.AddManagerFor<IReqResUserService>(options =>
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry.AddManagerFor<IReqResUserService>(options =>
                 options.WithContext(() => new Context { { testKey1, testValue1 } })
                     .AddDelegatingHandler(watcher)));
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
@@ -540,7 +540,7 @@ namespace Apizr.Tests
         {
             var watcher = new WatchingRequestHandler();
 
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry.AddManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher)));
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry.AddManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher)));
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
 
             await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.RequestCookies));
@@ -565,7 +565,7 @@ namespace Apizr.Tests
             }
 
             // Try to queue ex handlers
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddGroup(group => group
                             .AddManagerFor<IReqResUserService>(options => options
                                 .WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add)
@@ -606,7 +606,7 @@ namespace Apizr.Tests
         {
             var watcher = new WatchingRequestHandler();
 
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry.AddManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher)));
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry.AddManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher)));
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
 
             var cts = new CancellationTokenSource(3000);
@@ -624,7 +624,7 @@ namespace Apizr.Tests
             var watcher2 = new WatchingRequestHandler { Context = new Context("watcher2") };
 
             // Try to configure priority
-            var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddGroup(group => group
                             .AddManagerFor<IReqResUserService>(options => options
                                 .AddDelegatingHandler(watcher1)

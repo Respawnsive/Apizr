@@ -66,7 +66,7 @@ Here is an example of how to register a managed instance of the CRUD api interfa
 ```csharp
 // Apizr registration
 myContainer.RegistrationMethod(() =>
-    ApizrBuilder.CreateCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams>(options => options
+    ApizrBuilder.Current.CreateCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams>(options => options
         .WithBaseAddress("your specific T entity crud base uri"))
 );
 ```
@@ -125,7 +125,7 @@ Here is an example of how to register a managed instance of multiple api interfa
 
 ```csharp
 // Apizr registry
-var apizrRegistry = ApizrBuilder.CreateRegistry(
+var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
     registry => registry
         .AddCrudManagerFor<T1>(
             options => options.WithBaseAddress("your specific T1 entity crud base uri")
@@ -239,7 +239,7 @@ It could be usefull when requesting mutliple apis (multiple base address) commin
 
 ```csharp
 // Apizr registry
-var apizrRegistry = ApizrBuilder.CreateRegistry(
+var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
     registry => registry
         .AddGroup(
             group => group

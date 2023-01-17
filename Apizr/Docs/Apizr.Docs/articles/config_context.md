@@ -12,7 +12,7 @@ As it's not recomended to share the same context instance between requests, `Wit
 
 Here is a quite simple scenario:
 ```csharp
-var reqResUserManager = ApizrBuilder.CreateManagerFor<IReqResUserService>(options => options
+var reqResUserManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
                     .WithContext(() => new Context { { testKey1, testValue1 } }));
 ```
 
@@ -22,7 +22,7 @@ private Context FirstContextFactory() => new() { { testKey1, testValue1 } };
 private Context SecondContextFactory() => new() { { testKey2, testValue2 } };
 private Context ThirdContextFactory() => new() { { testKey3, testValue3 } };
 
-var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
         .AddGroup(group => group
                 .AddManagerFor<IReqResUserService>(options => options
                     .WithContext(ThirdContextFactory))

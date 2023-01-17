@@ -95,14 +95,14 @@
 It means that you can share a context globally by setting it at registry level and/or set some specific one at api level.
 As it&#39;s not recomended to share the same context instance between requests, <code>WithContext</code> registration option comes with a factory style.</p>
 <p>Here is a quite simple scenario:</p>
-<pre><code class="lang-csharp">var reqResUserManager = ApizrBuilder.CreateManagerFor&lt;IReqResUserService&gt;(options =&gt; options
+<pre><code class="lang-csharp">var reqResUserManager = ApizrBuilder.Current.CreateManagerFor&lt;IReqResUserService&gt;(options =&gt; options
                     .WithContext(() =&gt; new Context { { testKey1, testValue1 } }));
 </code></pre><p>And here is a pretty complexe scenario:</p>
 <pre><code class="lang-csharp">private Context FirstContextFactory() =&gt; new() { { testKey1, testValue1 } };
 private Context SecondContextFactory() =&gt; new() { { testKey2, testValue2 } };
 private Context ThirdContextFactory() =&gt; new() { { testKey3, testValue3 } };
 
-var apizrRegistry = ApizrBuilder.CreateRegistry(registry =&gt; registry
+var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry =&gt; registry
         .AddGroup(group =&gt; group
                 .AddManagerFor&lt;IReqResUserService&gt;(options =&gt; options
                     .WithContext(ThirdContextFactory))

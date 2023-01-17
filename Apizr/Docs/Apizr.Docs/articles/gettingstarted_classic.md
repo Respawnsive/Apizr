@@ -52,7 +52,7 @@ var registry = new PolicyRegistry
 
 // Apizr registration
 myContainer.RegistrationMethodFactory(() => 
-    ApizrBuilder.CreateManagerFor<IReqResService>(options => options
+    ApizrBuilder.Current.CreateManagerFor<IReqResService>(options => options
         .WithPolicyRegistry(registry)
         .WithAkavacheCacheHandler())
 );
@@ -123,7 +123,7 @@ var registry = new PolicyRegistry
 };
 
 // Apizr registry
-var apizrRegistry = ApizrBuilder.CreateRegistry(
+var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
     registry => registry
         .AddManagerFor<IReqResService>()
         .AddManagerFor<IHttpBinService>(
@@ -259,7 +259,7 @@ var registry = new PolicyRegistry
 };
 
 // Apizr registry
-var apizrRegistry = ApizrBuilder.CreateRegistry(
+var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
     registry => registry
         .AddGroup(
             group => group

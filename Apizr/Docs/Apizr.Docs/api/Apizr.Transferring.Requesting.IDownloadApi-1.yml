@@ -1,0 +1,357 @@
+### YamlMime:ManagedReference
+items:
+- uid: Apizr.Transferring.Requesting.IDownloadApi`1
+  commentId: T:Apizr.Transferring.Requesting.IDownloadApi`1
+  id: IDownloadApi`1
+  parent: Apizr.Transferring.Requesting
+  children:
+  - Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String)
+  - Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,`0)
+  - Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,`0,Apizr.Configuring.Request.IApizrRequestOptions)
+  - Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  langs:
+  - csharp
+  - vb
+  name: IDownloadApi<TDownloadParams>
+  nameWithType: IDownloadApi<TDownloadParams>
+  fullName: Apizr.Transferring.Requesting.IDownloadApi<TDownloadParams>
+  type: Interface
+  source:
+    id: IDownloadApi
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.FileTransfer\Transferring\Requesting\IDownloadApi.cs
+    startLine: 8
+  assemblies:
+  - Apizr.Integrations.FileTransfer
+  namespace: Apizr.Transferring.Requesting
+  syntax:
+    content: 'public interface IDownloadApi<in TDownloadParams> : IDataTransferApi'
+    typeParameters:
+    - id: TDownloadParams
+    content.vb: >-
+      Public Interface IDownloadApi(Of In TDownloadParams)
+          Inherits IDataTransferApi
+  nameWithType.vb: IDownloadApi(Of TDownloadParams)
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+  fullName.vb: Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams)
+  name.vb: IDownloadApi(Of TDownloadParams)
+- uid: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String)
+  commentId: M:Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String)
+  id: DownloadAsync(System.String)
+  parent: Apizr.Transferring.Requesting.IDownloadApi`1
+  langs:
+  - csharp
+  - vb
+  name: DownloadAsync(String)
+  nameWithType: IDownloadApi<TDownloadParams>.DownloadAsync(String)
+  fullName: Apizr.Transferring.Requesting.IDownloadApi<TDownloadParams>.DownloadAsync(System.String)
+  type: Method
+  source:
+    id: DownloadAsync
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.FileTransfer\Transferring\Requesting\IDownloadApi.cs
+    startLine: 10
+  assemblies:
+  - Apizr.Integrations.FileTransfer
+  namespace: Apizr.Transferring.Requesting
+  syntax:
+    content: >-
+      [Get("/{fileName}")]
+
+      Task<HttpResponseMessage> DownloadAsync(string fileName)
+    parameters:
+    - id: fileName
+      type: System.String
+    return:
+      type: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
+    content.vb: >-
+      <Get("/{fileName}")>
+
+      Function DownloadAsync(fileName As String) As Task(Of HttpResponseMessage)
+  overload: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync*
+  attributes:
+  - type: Refit.GetAttribute
+    ctor: Refit.GetAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: /{fileName}
+  nameWithType.vb: IDownloadApi(Of TDownloadParams).DownloadAsync(String)
+  fullName.vb: Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams).DownloadAsync(System.String)
+- uid: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  commentId: M:Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  id: DownloadAsync(System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  parent: Apizr.Transferring.Requesting.IDownloadApi`1
+  langs:
+  - csharp
+  - vb
+  name: DownloadAsync(String, IApizrRequestOptions)
+  nameWithType: IDownloadApi<TDownloadParams>.DownloadAsync(String, IApizrRequestOptions)
+  fullName: Apizr.Transferring.Requesting.IDownloadApi<TDownloadParams>.DownloadAsync(System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  type: Method
+  source:
+    id: DownloadAsync
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.FileTransfer\Transferring\Requesting\IDownloadApi.cs
+    startLine: 13
+  assemblies:
+  - Apizr.Integrations.FileTransfer
+  namespace: Apizr.Transferring.Requesting
+  syntax:
+    content: >-
+      [Get("/{fileName}")]
+
+      Task<HttpResponseMessage> DownloadAsync(string fileName, [RequestOptions] IApizrRequestOptions options)
+    parameters:
+    - id: fileName
+      type: System.String
+    - id: options
+      type: Apizr.Configuring.Request.IApizrRequestOptions
+      attributes:
+      - type: Apizr.Configuring.Request.RequestOptionsAttribute
+        ctor: Apizr.Configuring.Request.RequestOptionsAttribute.#ctor
+        arguments: []
+    return:
+      type: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
+    content.vb: >-
+      <Get("/{fileName}")>
+
+      Function DownloadAsync(fileName As String, options As IApizrRequestOptions) As Task(Of HttpResponseMessage)
+  overload: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync*
+  attributes:
+  - type: Refit.GetAttribute
+    ctor: Refit.GetAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: /{fileName}
+  nameWithType.vb: IDownloadApi(Of TDownloadParams).DownloadAsync(String, IApizrRequestOptions)
+  fullName.vb: Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams).DownloadAsync(System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+- uid: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,`0)
+  commentId: M:Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,`0)
+  id: DownloadAsync(System.String,`0)
+  parent: Apizr.Transferring.Requesting.IDownloadApi`1
+  langs:
+  - csharp
+  - vb
+  name: DownloadAsync(String, TDownloadParams)
+  nameWithType: IDownloadApi<TDownloadParams>.DownloadAsync(String, TDownloadParams)
+  fullName: Apizr.Transferring.Requesting.IDownloadApi<TDownloadParams>.DownloadAsync(System.String, TDownloadParams)
+  type: Method
+  source:
+    id: DownloadAsync
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.FileTransfer\Transferring\Requesting\IDownloadApi.cs
+    startLine: 16
+  assemblies:
+  - Apizr.Integrations.FileTransfer
+  namespace: Apizr.Transferring.Requesting
+  syntax:
+    content: >-
+      [Get("/{fileName}")]
+
+      Task<HttpResponseMessage> DownloadAsync(string fileName, TDownloadParams downloadParams)
+    parameters:
+    - id: fileName
+      type: System.String
+    - id: downloadParams
+      type: '{TDownloadParams}'
+    return:
+      type: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
+    content.vb: >-
+      <Get("/{fileName}")>
+
+      Function DownloadAsync(fileName As String, downloadParams As TDownloadParams) As Task(Of HttpResponseMessage)
+  overload: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync*
+  attributes:
+  - type: Refit.GetAttribute
+    ctor: Refit.GetAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: /{fileName}
+  nameWithType.vb: IDownloadApi(Of TDownloadParams).DownloadAsync(String, TDownloadParams)
+  fullName.vb: Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams).DownloadAsync(System.String, TDownloadParams)
+- uid: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,`0,Apizr.Configuring.Request.IApizrRequestOptions)
+  commentId: M:Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,`0,Apizr.Configuring.Request.IApizrRequestOptions)
+  id: DownloadAsync(System.String,`0,Apizr.Configuring.Request.IApizrRequestOptions)
+  parent: Apizr.Transferring.Requesting.IDownloadApi`1
+  langs:
+  - csharp
+  - vb
+  name: DownloadAsync(String, TDownloadParams, IApizrRequestOptions)
+  nameWithType: IDownloadApi<TDownloadParams>.DownloadAsync(String, TDownloadParams, IApizrRequestOptions)
+  fullName: Apizr.Transferring.Requesting.IDownloadApi<TDownloadParams>.DownloadAsync(System.String, TDownloadParams, Apizr.Configuring.Request.IApizrRequestOptions)
+  type: Method
+  source:
+    id: DownloadAsync
+    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.FileTransfer\Transferring\Requesting\IDownloadApi.cs
+    startLine: 19
+  assemblies:
+  - Apizr.Integrations.FileTransfer
+  namespace: Apizr.Transferring.Requesting
+  syntax:
+    content: >-
+      [Get("/{fileName}")]
+
+      Task<HttpResponseMessage> DownloadAsync(string fileName, TDownloadParams downloadParams, [RequestOptions] IApizrRequestOptions options)
+    parameters:
+    - id: fileName
+      type: System.String
+    - id: downloadParams
+      type: '{TDownloadParams}'
+    - id: options
+      type: Apizr.Configuring.Request.IApizrRequestOptions
+      attributes:
+      - type: Apizr.Configuring.Request.RequestOptionsAttribute
+        ctor: Apizr.Configuring.Request.RequestOptionsAttribute.#ctor
+        arguments: []
+    return:
+      type: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
+    content.vb: >-
+      <Get("/{fileName}")>
+
+      Function DownloadAsync(fileName As String, downloadParams As TDownloadParams, options As IApizrRequestOptions) As Task(Of HttpResponseMessage)
+  overload: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync*
+  attributes:
+  - type: Refit.GetAttribute
+    ctor: Refit.GetAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: /{fileName}
+  nameWithType.vb: IDownloadApi(Of TDownloadParams).DownloadAsync(String, TDownloadParams, IApizrRequestOptions)
+  fullName.vb: Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams).DownloadAsync(System.String, TDownloadParams, Apizr.Configuring.Request.IApizrRequestOptions)
+references:
+- uid: Apizr.Transferring.Requesting
+  commentId: N:Apizr.Transferring.Requesting
+  name: Apizr.Transferring.Requesting
+  nameWithType: Apizr.Transferring.Requesting
+  fullName: Apizr.Transferring.Requesting
+- uid: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync*
+  commentId: Overload:Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync
+  name: DownloadAsync
+  nameWithType: IDownloadApi<TDownloadParams>.DownloadAsync
+  fullName: Apizr.Transferring.Requesting.IDownloadApi<TDownloadParams>.DownloadAsync
+  nameWithType.vb: IDownloadApi(Of TDownloadParams).DownloadAsync
+  fullName.vb: Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams).DownloadAsync
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
+  commentId: T:System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  name: Task<HttpResponseMessage>
+  nameWithType: Task<HttpResponseMessage>
+  fullName: System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>
+  nameWithType.vb: Task(Of HttpResponseMessage)
+  fullName.vb: System.Threading.Tasks.Task(Of System.Net.Http.HttpResponseMessage)
+  name.vb: Task(Of HttpResponseMessage)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+- uid: Apizr.Configuring.Request.IApizrRequestOptions
+  commentId: T:Apizr.Configuring.Request.IApizrRequestOptions
+  parent: Apizr.Configuring.Request
+  name: IApizrRequestOptions
+  nameWithType: IApizrRequestOptions
+  fullName: Apizr.Configuring.Request.IApizrRequestOptions
+- uid: Apizr.Configuring.Request
+  commentId: N:Apizr.Configuring.Request
+  name: Apizr.Configuring.Request
+  nameWithType: Apizr.Configuring.Request
+  fullName: Apizr.Configuring.Request
+- uid: '{TDownloadParams}'
+  commentId: '!:TDownloadParams'
+  definition: TDownloadParams
+  name: TDownloadParams
+  nameWithType: TDownloadParams
+  fullName: TDownloadParams
+- uid: TDownloadParams
+  name: TDownloadParams
+  nameWithType: TDownloadParams
+  fullName: TDownloadParams

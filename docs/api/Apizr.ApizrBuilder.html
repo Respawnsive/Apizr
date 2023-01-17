@@ -83,13 +83,17 @@
   
   <h1 id="Apizr_ApizrBuilder" data-uid="Apizr.ApizrBuilder" class="text-break">Class ApizrBuilder
   </h1>
-  <div class="markdown level0 summary"><p>The static builder</p>
+  <div class="markdown level0 summary"><p>The builder</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">ApizrBuilder</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Apizr.IApizrBuilder.html">IApizrBuilder</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -119,8 +123,35 @@
   <h6><strong>Assembly</strong>: Apizr.dll</h6>
   <h5 id="Apizr_ApizrBuilder_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class ApizrBuilder</code></pre>
+    <pre><code class="lang-csharp hljs">public class ApizrBuilder : IApizrBuilder</code></pre>
   </div>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="Apizr_ApizrBuilder_Current_" data-uid="Apizr.ApizrBuilder.Current*"></a>
+  <h4 id="Apizr_ApizrBuilder_Current" data-uid="Apizr.ApizrBuilder.Current">Current</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IApizrBuilder Current { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.IApizrBuilder.html">IApizrBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
   </h3>
   
@@ -134,7 +165,7 @@ and ReadAll query parameters of type IDictionary{string,object}</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IApizrManager&lt;ICrudApi&lt;T, int, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt;&gt; CreateCrudManagerFor&lt;T&gt;(Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)
+    <pre><code class="lang-csharp hljs">public IApizrManager&lt;ICrudApi&lt;T, int, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt;&gt; CreateCrudManagerFor&lt;T&gt;(Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)
     where T : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -197,7 +228,7 @@ and ReadAll query parameters of type IDictionary{string,object}</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IApizrManager&lt;ICrudApi&lt;T, TKey, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt;&gt; CreateCrudManagerFor&lt;T, TKey&gt;(Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)
+    <pre><code class="lang-csharp hljs">public IApizrManager&lt;ICrudApi&lt;T, TKey, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt;&gt; CreateCrudManagerFor&lt;T, TKey&gt;(Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)
     where T : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -265,7 +296,7 @@ and ReadAll query parameters of type IDictionary{string,object}</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, IDictionary&lt;string, object&gt;&gt;&gt; CreateCrudManagerFor&lt;T, TKey, TReadAllResult&gt;(Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)
+    <pre><code class="lang-csharp hljs">public IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, IDictionary&lt;string, object&gt;&gt;&gt; CreateCrudManagerFor&lt;T, TKey, TReadAllResult&gt;(Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)
     where T : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -339,7 +370,7 @@ and ReadAll query parameters type (inheriting from IDictionary{string,object} or
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt; CreateCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)
+    <pre><code class="lang-csharp hljs">public IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt; CreateCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)
     where T : class where TReadAllParams : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -418,7 +449,7 @@ and ReadAll query parameters type (inheriting from IDictionary{string,object} or
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static TApizrManager CreateCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams, TApizrManager&gt;(Func&lt;ILazyFactory&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry&lt;string&gt;, IApizrManagerOptionsBase, TApizrManager&gt; apizrManagerFactory, Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)
+    <pre><code class="lang-csharp hljs">public TApizrManager CreateCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams, TApizrManager&gt;(Func&lt;ILazyFactory&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry&lt;string&gt;, IApizrManagerOptionsBase, TApizrManager&gt; apizrManagerFactory, Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)
     where T : class where TReadAllParams : class where TApizrManager : IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -506,7 +537,7 @@ and ReadAll query parameters type (inheriting from IDictionary{string,object} or
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IApizrManager&lt;TWebApi&gt; CreateManagerFor&lt;TWebApi&gt;(Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrManager&lt;TWebApi&gt; CreateManagerFor&lt;TWebApi&gt;(Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -566,7 +597,7 @@ and ReadAll query parameters type (inheriting from IDictionary{string,object} or
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static TApizrManager CreateManagerFor&lt;TWebApi, TApizrManager&gt;(Func&lt;ILazyFactory&lt;TWebApi&gt;, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry&lt;string&gt;, IApizrManagerOptions&lt;TWebApi&gt;, TApizrManager&gt; apizrManagerFactory, Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)
+    <pre><code class="lang-csharp hljs">public TApizrManager CreateManagerFor&lt;TWebApi, TApizrManager&gt;(Func&lt;ILazyFactory&lt;TWebApi&gt;, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry&lt;string&gt;, IApizrManagerOptions&lt;TWebApi&gt;, TApizrManager&gt; apizrManagerFactory, Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)
     where TApizrManager : IApizrManager&lt;TWebApi&gt;</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -638,7 +669,7 @@ and ReadAll query parameters type (inheriting from IDictionary{string,object} or
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IApizrRegistry CreateRegistry(Action&lt;IApizrRegistryBuilder&gt; registryBuilder, Action&lt;IApizrCommonOptionsBuilder&gt; commonOptionsBuilder = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrRegistry CreateRegistry(Action&lt;IApizrRegistryBuilder&gt; registryBuilder, Action&lt;IApizrCommonOptionsBuilder&gt; commonOptionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -679,6 +710,10 @@ and ReadAll query parameters type (inheriting from IDictionary{string,object} or
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Apizr.IApizrBuilder.html">IApizrBuilder</a>
+  </div>
 </article>
           </div>
           

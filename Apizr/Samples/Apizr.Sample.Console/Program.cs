@@ -145,7 +145,7 @@ namespace Apizr.Sample.Console
                         logging.SetMinimumLevel(LogLevel.Trace);
                     }));
 
-                    _httpBinManager = ApizrBuilder.CreateManagerFor<IHttpBinService>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
+                    _httpBinManager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
 
 
                     //var host = Host.CreateDefaultBuilder()
@@ -206,7 +206,7 @@ namespace Apizr.Sample.Console
                 //    .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current)));
                 ////.WithLogging());
 
-                var apizrRegistry = ApizrBuilder.CreateRegistry(
+                var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
                     registry => registry
                         .AddManagerFor<IReqResService>()//options => options.WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.ResponseAll, LogLevel.Trace, LogLevel.Information, LogLevel.Critical))
                         .AddCrudManagerFor<User, int, PagedResult<User>>(options => options.WithBaseAddress("https://reqres.in/api/users")),

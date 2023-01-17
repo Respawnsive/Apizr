@@ -81,7 +81,7 @@
 
 <p>You may want to provide a CancellationToken, thanks to <code>WithCancellation</code> builder option, available at request time.</p>
 <pre><code class="lang-csharp">// With static builder here but works the same with the extended one
-var reqResManager = ApizrBuilder.CreateManagerFor&lt;IReqResUserService&gt;();
+var reqResManager = ApizrBuilder.Current.CreateManagerFor&lt;IReqResUserService&gt;();
 
 // Create your token source
 var cts = new CancellationTokenSource();

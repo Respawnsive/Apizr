@@ -47,7 +47,7 @@ It means that you can share your exception handler globally by setting it at reg
 
 Here is a quite simple scenario:
 ```csharp
-var reqResUserManager = ApizrBuilder.CreateManagerFor<IReqResUserService>(options => options
+var reqResUserManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
                     .WithExCatching(OnException));
 
 private void OnException(ApizrException ex)
@@ -60,7 +60,7 @@ private void OnException(ApizrException ex)
 
 And here is a pretty complexe scenario:
 ```csharp
-var apizrRegistry = ApizrBuilder.CreateRegistry(registry => registry
+var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
         .AddGroup(group => group
                 .AddManagerFor<IReqResUserService>(options => options
                     .WithExCatching(OnReqResUserException, strategy: ApizrDuplicateStrategy.Add))

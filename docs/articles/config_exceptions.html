@@ -119,7 +119,7 @@ options =&gt; options.WithExCatching(OnException)
 <p><code>WithExCatching</code> builder option is available with or without using registry.
 It means that you can share your exception handler globally by setting it at registry level and/or set some specific one at api level.</p>
 <p>Here is a quite simple scenario:</p>
-<pre><code class="lang-csharp">var reqResUserManager = ApizrBuilder.CreateManagerFor&lt;IReqResUserService&gt;(options =&gt; options
+<pre><code class="lang-csharp">var reqResUserManager = ApizrBuilder.Current.CreateManagerFor&lt;IReqResUserService&gt;(options =&gt; options
                     .WithExCatching(OnException));
 
 private void OnException(ApizrException ex)
@@ -129,7 +129,7 @@ private void OnException(ApizrException ex)
     // while requesting with IReqResUserService managed api
 }
 </code></pre><p>And here is a pretty complexe scenario:</p>
-<pre><code class="lang-csharp">var apizrRegistry = ApizrBuilder.CreateRegistry(registry =&gt; registry
+<pre><code class="lang-csharp">var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry =&gt; registry
         .AddGroup(group =&gt; group
                 .AddManagerFor&lt;IReqResUserService&gt;(options =&gt; options
                     .WithExCatching(OnReqResUserException, strategy: ApizrDuplicateStrategy.Add))

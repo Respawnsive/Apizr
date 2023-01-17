@@ -3,7 +3,7 @@
 You may want to provide a CancellationToken, thanks to `WithCancellation` builder option, available at request time.
 ```csharp
 // With static builder here but works the same with the extended one
-var reqResManager = ApizrBuilder.CreateManagerFor<IReqResUserService>();
+var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>();
 
 // Create your token source
 var cts = new CancellationTokenSource();

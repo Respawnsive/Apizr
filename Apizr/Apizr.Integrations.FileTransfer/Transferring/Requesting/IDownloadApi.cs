@@ -6,7 +6,7 @@ using Refit;
 
 namespace Apizr.Transferring.Requesting;
 
-public interface IDownloadApi<in TDownloadParams> : IDataTransferApi
+public interface IDownloadApi<in TDownloadParams> : ITransferApiBase
 {
     [Get("/{fileName}")]
     Task<HttpResponseMessage> DownloadAsync(string fileName);

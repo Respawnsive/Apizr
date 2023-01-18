@@ -6,7 +6,7 @@ using Apizr.Transferring.Requesting;
 
 namespace Apizr.Transferring.Managing;
 
-public class ApizrUploadManager<TUploadApi> : ApizrDataTransferManager<TUploadApi>, IApizrUploadManager<TUploadApi> where TUploadApi : IUploadApi
+public class ApizrUploadManager<TUploadApi> : ApizrTransferManagerBase<TUploadApi>, IApizrUploadManager<TUploadApi> where TUploadApi : IUploadApi
 {
     public ApizrUploadManager(IApizrManager<TUploadApi> fileTransferApiManager) : base(fileTransferApiManager)
     {

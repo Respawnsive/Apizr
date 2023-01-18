@@ -48,7 +48,8 @@ namespace Apizr.Tests
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddManagerFor<IReqResUserService>()
                 .AddManagerFor<IHttpBinService>()
-                .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>());
+                .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
+                /*.AddUploadManagerFor<ITransferSampleApi>()*/);
 
             apizrRegistry.Should().NotBeNull();
             apizrRegistry.ContainsManagerFor<IReqResUserService>().Should().BeTrue();

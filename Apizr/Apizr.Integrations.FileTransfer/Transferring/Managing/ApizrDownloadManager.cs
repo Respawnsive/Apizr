@@ -7,7 +7,7 @@ using Apizr.Transferring.Requesting;
 
 namespace Apizr.Transferring.Managing;
 
-public class ApizrDownloadManager<TDownloadApi, TDownloadParams> : ApizrDataTransferManager<TDownloadApi>, IApizrDownloadManager<TDownloadApi, TDownloadParams> where TDownloadApi : IDownloadApi<TDownloadParams>
+public class ApizrDownloadManager<TDownloadApi, TDownloadParams> : ApizrTransferManagerBase<TDownloadApi>, IApizrDownloadManager<TDownloadApi, TDownloadParams> where TDownloadApi : IDownloadApi<TDownloadParams>
 {
     public ApizrDownloadManager(IApizrManager<TDownloadApi> fileTransferApiManager) : base(fileTransferApiManager)
     {

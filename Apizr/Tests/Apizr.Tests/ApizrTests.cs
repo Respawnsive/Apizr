@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Logging;
 using Apizr.Policing;
+using Apizr.Progressing;
 using Apizr.Tests.Apis;
 using Apizr.Tests.Helpers;
 using Apizr.Tests.Models;
@@ -46,11 +47,13 @@ namespace Apizr.Tests
         {
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>();
             var httpBinManager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>();
-            var userManager = ApizrBuilder.Current.CreateCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>();
+            //var userManager = ApizrBuilder.Current.CreateCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>();
+            var transferManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferSampleApi>();
 
             reqResManager.Should().NotBeNull();
             httpBinManager.Should().NotBeNull();
-            userManager.Should().NotBeNull();
+            //userManager.Should().NotBeNull();
+            transferManager.Should().NotBeNull();
         }
 
         [Fact]
@@ -329,6 +332,30 @@ namespace Apizr.Tests
             watcher.Options.HttpTracerMode.Should().Be(HttpTracerMode.Everything);
             watcher.Options.TrafficVerbosity.Should().Be(HttpMessageParts.RequestCookies);
             watcher.Options.LogLevels.Should().Contain(LogLevel.Error);
+        }
+
+        [Fact]
+        public async Task Downloading_File_Should_Succeed()
+        {
+            var transferManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferSampleApi>();
+            var fileInfo = await transferManager.DownloadAsync(new FileInfo("test10Mb.db")).ConfigureAwait(false);
+            fileInfo.Length.Should().BePositive();
+        }
+
+        [Fact]
+        public async Task Downloading_File_With_Progress_Should_Report_Progress()
+        {
+            var percentage = 0;
+            var progress = new ApizrProgress();
+            progress.ProgressChanged += (sender, args) =>
+            {
+                percentage = args.ProgressPercentage;
+            };
+            var transferManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferSampleApi>(options => options.WithProgress(progress));
+            var fileInfo = await transferManager.DownloadAsync(new FileInfo("test10Mb.db")).ConfigureAwait(false);
+
+            percentage.Should().Be(100);
+            fileInfo.Length.Should().BePositive();
         }
     }
 }

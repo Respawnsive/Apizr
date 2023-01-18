@@ -7,12 +7,12 @@ using Apizr.Transferring.Requesting;
 
 namespace Apizr.Transferring.Managing;
 
-public class ApizrFileTransferManager<TFileTransferApi, TDownloadParams> : IApizrFileTransferManager<TFileTransferApi, TDownloadParams> where TFileTransferApi : IFileTransferApi<TDownloadParams>
+public class ApizrTransferManager<TTransferApi, TDownloadParams> : IApizrTransferManager<TTransferApi, TDownloadParams> where TTransferApi : ITransferApi<TDownloadParams>
 {
-    private readonly IApizrDownloadManager<TFileTransferApi, TDownloadParams> _downloadManager;
-    private readonly IApizrUploadManager<TFileTransferApi> _uploadManager;
+    private readonly IApizrDownloadManager<TTransferApi, TDownloadParams> _downloadManager;
+    private readonly IApizrUploadManager<TTransferApi> _uploadManager;
 
-    public ApizrFileTransferManager(IApizrDownloadManager<TFileTransferApi, TDownloadParams> downloadManager,IApizrUploadManager<TFileTransferApi> uploadManager)
+    public ApizrTransferManager(IApizrDownloadManager<TTransferApi, TDownloadParams> downloadManager,IApizrUploadManager<TTransferApi> uploadManager)
     {
         _downloadManager = downloadManager;
         _uploadManager = uploadManager;
@@ -32,10 +32,10 @@ public class ApizrFileTransferManager<TFileTransferApi, TDownloadParams> : IApiz
         => _uploadManager.UploadAsync(fileInfo, optionsBuilder);
 }
 
-public class ApizrFileTransferManager<TFileTransferApi> : ApizrFileTransferManager<TFileTransferApi, IDictionary<string, object>>, IApizrFileTransferManager<TFileTransferApi> where TFileTransferApi : IFileTransferApi
+public class ApizrTransferManager<TTransferApi> : ApizrTransferManager<TTransferApi, IDictionary<string, object>>, IApizrTransferManager<TTransferApi> where TTransferApi : ITransferApi
 {
     /// <inheritdoc />
-    public ApizrFileTransferManager(IApizrDownloadManager<TFileTransferApi> downloadManager, IApizrUploadManager<TFileTransferApi> uploadManager) : base(downloadManager, uploadManager)
+    public ApizrTransferManager(IApizrDownloadManager<TTransferApi> downloadManager, IApizrUploadManager<TTransferApi> uploadManager) : base(downloadManager, uploadManager)
     {
     }
 }

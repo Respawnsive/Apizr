@@ -1,6 +1,6 @@
 ﻿namespace Apizr.Transferring.Requesting;
 
-public interface IUploadApi : IDataTransferApi
+public interface IUploadApi : ITransferApiBase
 {
 
 }

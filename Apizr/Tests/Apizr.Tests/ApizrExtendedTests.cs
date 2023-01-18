@@ -422,13 +422,13 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
 
-            services.AddApizrManagerFor<IFileTransferSampleApi>();
-            services.AddSingleton<IApizrDownloadManager<IFileTransferSampleApi>, ApizrDownloadManager<IFileTransferSampleApi>>();
-            services.AddSingleton<IApizrUploadManager<IFileTransferSampleApi>, ApizrUploadManager<IFileTransferSampleApi>>();
-            services.AddSingleton<IApizrFileTransferManager<IFileTransferSampleApi>, ApizrFileTransferManager<IFileTransferSampleApi>>();
+            services.AddApizrManagerFor<ITransferSampleApi>();
+            services.AddSingleton<IApizrDownloadManager<ITransferSampleApi>, ApizrDownloadManager<ITransferSampleApi>>();
+            services.AddSingleton<IApizrUploadManager<ITransferSampleApi>, ApizrUploadManager<ITransferSampleApi>>();
+            services.AddSingleton<IApizrTransferManager<ITransferSampleApi>, ApizrTransferManager<ITransferSampleApi>>();
 
             var serviceProvider = services.BuildServiceProvider();
-            var fileTransferManager = serviceProvider.GetRequiredService<IApizrFileTransferManager<IFileTransferSampleApi>>();
+            var fileTransferManager = serviceProvider.GetRequiredService<IApizrTransferManager<ITransferSampleApi>>();
 
             fileTransferManager.Should().NotBeNull();
             var fileInfo = await fileTransferManager.DownloadAsync(new FileInfo("test10Mb.db"));

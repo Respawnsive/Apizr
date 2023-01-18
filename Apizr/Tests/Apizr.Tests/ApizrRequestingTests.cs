@@ -59,7 +59,7 @@ namespace Apizr.Tests
             {
                 percentage = args.ProgressPercentage;
             };
-            var fileManager = ApizrBuilder.Current.CreateManagerFor<IFileTransferService>(options => options.WithProgress(progress));
+            var fileManager = ApizrBuilder.Current.CreateManagerFor<ITransferService>(options => options.WithProgress(progress));
             using var response = await fileManager.ExecuteAsync((opt, api) => api.DownloadAsync("test10Mb.db", opt)).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var guid = Guid.NewGuid();

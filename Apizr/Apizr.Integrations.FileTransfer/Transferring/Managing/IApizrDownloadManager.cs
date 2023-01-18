@@ -7,7 +7,7 @@ using Apizr.Transferring.Requesting;
 
 namespace Apizr.Transferring.Managing;
 
-public interface IApizrDownloadManager<TDownloadApi, in TDownloadParams> : IApizrDataTransferManager<TDownloadApi> where TDownloadApi : IDownloadApi<TDownloadParams>
+public interface IApizrDownloadManager<TDownloadApi, in TDownloadParams> : IApizrTransferManagerBase<TDownloadApi> where TDownloadApi : IDownloadApi<TDownloadParams>
 {
     Task<FileInfo> DownloadAsync(FileInfo fileInfo, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 

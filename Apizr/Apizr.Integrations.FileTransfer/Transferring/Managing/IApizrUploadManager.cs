@@ -6,7 +6,7 @@ using Apizr.Transferring.Requesting;
 
 namespace Apizr.Transferring.Managing;
 
-public interface IApizrUploadManager<TUploadApi> : IApizrDataTransferManager<TUploadApi> where TUploadApi : IUploadApi
+public interface IApizrUploadManager<TUploadApi> : IApizrTransferManagerBase<TUploadApi> where TUploadApi : IUploadApi
 {
     Task<FileInfo> UploadAsync(FileInfo fileInfo, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 }

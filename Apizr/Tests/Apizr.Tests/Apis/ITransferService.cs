@@ -9,7 +9,7 @@ using Refit;
 namespace Apizr.Tests.Apis
 {
     [WebApi("http://speedtest.ftp.otenet.gr/files"), Log(HttpMessageParts.None, LogLevel.None)]
-    public interface IFileTransferService
+    public interface ITransferService
     {
         [Get("/{fileName}")]
         Task<HttpResponseMessage> DownloadAsync(string fileName, [RequestOptions] IApizrRequestOptions options);

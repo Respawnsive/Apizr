@@ -34,7 +34,7 @@ namespace Apizr.Extending.Configuring.Registry
         {
             var registry = ThrowIfNotConcurrentImplementation();
             Func<IApizrManager> managerFactory = () => _serviceProvider.GetRequiredService(serviceType) as IApizrManager;
-            registry.AddOrUpdate(webApiType, k => managerFactory, (k, e) => managerFactory);
+            registry.AddOrUpdate(serviceType, k => managerFactory, (k, e) => managerFactory);
         }
     }
 }

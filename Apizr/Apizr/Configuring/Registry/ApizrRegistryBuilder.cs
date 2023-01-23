@@ -14,7 +14,7 @@ namespace Apizr.Configuring.Registry
     /// <summary>
     /// Registry builder options available for static registrations
     /// </summary>
-    public class ApizrRegistryBuilder : IApizrRegistryBuilder
+    public class ApizrRegistryBuilder : IApizrRegistryBuilder, IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder>
     {
         /// <summary>
         /// The registry
@@ -129,7 +129,22 @@ namespace Apizr.Configuring.Registry
             Registry.AddOrUpdateManagerFor(managerFactory);
 
             return this;
-        } 
+        }
+
+        #endregion
+
+        #region Internal
+
+        /// <inheritdoc />
+        public void AddWrappedManagerFor<TWebApi, TWrappedManager>(
+            Func<IApizrManager<TWebApi>, TWrappedManager> wrappedManagerFactory,
+            Action<IApizrProperOptionsBuilder> optionsBuilder = null) where TWrappedManager : IApizrManager
+        {
+            AddManagerFor<TWebApi>(optionsBuilder);
+            var managerFactory = new Func<IApizrManager>(() => wrappedManagerFactory.Invoke(Registry.GetManagerFor<TWebApi>()));
+
+            Registry.AddOrUpdateManagerFor(typeof(TWrappedManager), managerFactory);
+        }
 
         #endregion
     }

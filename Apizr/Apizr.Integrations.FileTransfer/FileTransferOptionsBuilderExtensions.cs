@@ -1,5 +1,4 @@
 ﻿using System;
-using Apizr.Configuring.Common;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Proper;
 using Apizr.Configuring.Registry;
@@ -17,7 +16,7 @@ public static class FileTransferOptionsBuilderExtensions
 {
     #region Transfer
 
-    #region Static
+    #region ApizrBuilder
 
     /// <summary>
     /// Create an <see cref="ApizrUploadManager{TUploadApi}"/> instance
@@ -44,7 +43,7 @@ public static class FileTransferOptionsBuilderExtensions
         new ApizrDownloadManager<TDownloadApi>(builder.CreateManagerFor<TDownloadApi>(optionsBuilder));
 
     /// <summary>
-    /// Create an <see cref="ApizrDownloadManager{TUploadApi}"/> instance
+    /// Create an <see cref="ApizrDownloadManager{TUploadApi, TDownloadParams}"/> instance
     /// </summary>
     /// <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
     /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
@@ -70,7 +69,7 @@ public static class FileTransferOptionsBuilderExtensions
             builder.CreateUploadManagerFor<TTransferApi>(optionsBuilder));
 
     /// <summary>
-    /// Create an <see cref="ApizrTransferManager{TTransferApi}"/> instance
+    /// Create an <see cref="ApizrTransferManager{TTransferApi, TDownloadParams}"/> instance
     /// </summary>
     /// <typeparam name="TTransferApi">The transfer api interface to manage</typeparam>
     /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
@@ -85,8 +84,10 @@ public static class FileTransferOptionsBuilderExtensions
 
     #endregion
 
-    #region Registry
-    
+    #region ApizrRegistry
+
+    #region Add
+
     /// <summary>
     /// Create an <see cref="ApizrUploadManager{TUploadApi}"/> instance
     /// </summary>
@@ -94,19 +95,209 @@ public static class FileTransferOptionsBuilderExtensions
     /// <param name="builder">The builder to create the manager from</param>
     /// <param name="optionsBuilder">The builder defining some options</param>
     /// <returns></returns>
-    public static TApizrRegistryBuilder AddUploadManagerFor<TUploadApi, TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>(this TApizrRegistryBuilder builder,
-        Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
-        where TApizrRegistry : IApizrEnumerableRegistry
-        where TApizrRegistryBuilder : IApizrRegistryBuilderBase<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>
-        where TApizrProperOptionsBuilder : IApizrGlobalProperOptionsBuilderBase
-        where TApizrCommonOptionsBuilder : IApizrGlobalCommonOptionsBuilderBase
+    public static IApizrRegistryBuilder AddUploadManagerFor<TUploadApi>(this IApizrRegistryBuilder builder, Action<IApizrProperOptionsBuilder> optionsBuilder = null)
         where TUploadApi : IUploadApi
 
     {
-        //builder.AddManagerFor<>()
+        if (builder is IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder> internalBuilder)
+            internalBuilder.AddWrappedManagerFor<TUploadApi, IApizrUploadManager<TUploadApi>>(apizrManager => new ApizrUploadManager<TUploadApi>(apizrManager), optionsBuilder);
 
         return builder;
     }
+
+    /// <summary>
+    /// Create an <see cref="ApizrDownloadManager{TDownloadApi}"/> instance
+    /// </summary>
+    /// <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
+    /// <param name="builder">The builder to create the manager from</param>
+    /// <param name="optionsBuilder">The builder defining some options</param>
+    /// <returns></returns>
+    public static IApizrRegistryBuilder AddDownloadManagerFor<TDownloadApi>(this IApizrRegistryBuilder builder, Action<IApizrProperOptionsBuilder> optionsBuilder = null)
+        where TDownloadApi : IDownloadApi
+
+    {
+        if (builder is IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder> internalBuilder)
+            internalBuilder.AddWrappedManagerFor<TDownloadApi, IApizrDownloadManager<TDownloadApi>>(apizrManager => new ApizrDownloadManager<TDownloadApi>(apizrManager), optionsBuilder);
+
+        return builder;
+    }
+
+    /// <summary>
+    /// Create an <see cref="ApizrDownloadManager{TDownloadApi, TDownloadParams}"/> instance
+    /// </summary>
+    /// <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
+    /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+    /// <param name="builder">The builder to create the manager from</param>
+    /// <param name="optionsBuilder">The builder defining some options</param>
+    /// <returns></returns>
+    public static IApizrRegistryBuilder AddDownloadManagerFor<TDownloadApi, TDownloadParams>(this IApizrRegistryBuilder builder, Action<IApizrProperOptionsBuilder> optionsBuilder = null)
+        where TDownloadApi : IDownloadApi<TDownloadParams>
+
+    {
+        if (builder is IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder> internalBuilder)
+            internalBuilder.AddWrappedManagerFor<TDownloadApi, IApizrDownloadManager<TDownloadApi, TDownloadParams>>(apizrManager => new ApizrDownloadManager<TDownloadApi, TDownloadParams>(apizrManager), optionsBuilder);
+
+        return builder;
+    }
+
+    /// <summary>
+    /// Create an <see cref="ApizrTransferManager{TTransferApi}"/> instance
+    /// </summary>
+    /// <typeparam name="TTransferApi">The Transfer api interface to manage</typeparam>
+    /// <param name="builder">The builder to create the manager from</param>
+    /// <param name="optionsBuilder">The builder defining some options</param>
+    /// <returns></returns>
+    public static IApizrRegistryBuilder AddTransferManagerFor<TTransferApi>(this IApizrRegistryBuilder builder, Action<IApizrProperOptionsBuilder> optionsBuilder = null)
+        where TTransferApi : ITransferApi
+
+    {
+        if (builder is IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder> internalBuilder)
+            internalBuilder.AddWrappedManagerFor<TTransferApi, IApizrTransferManager<TTransferApi>>(
+                apizrManager => new ApizrTransferManager<TTransferApi>(
+                    new ApizrDownloadManager<TTransferApi>(apizrManager),
+                    new ApizrUploadManager<TTransferApi>(apizrManager)), optionsBuilder);
+
+        return builder;
+    }
+
+    /// <summary>
+    /// Create an <see cref="ApizrTransferManager{TTransferApi, TDownloadParams}"/> instance
+    /// </summary>
+    /// <typeparam name="TTransferApi">The Transfer api interface to manage</typeparam>
+    /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+    /// <param name="builder">The builder to create the manager from</param>
+    /// <param name="optionsBuilder">The builder defining some options</param>
+    /// <returns></returns>
+    public static IApizrRegistryBuilder AddTransferManagerFor<TTransferApi, TDownloadParams>(this IApizrRegistryBuilder builder, Action<IApizrProperOptionsBuilder> optionsBuilder = null)
+        where TTransferApi : ITransferApi<TDownloadParams>
+
+    {
+        if (builder is IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder> internalBuilder)
+            internalBuilder.AddWrappedManagerFor<TTransferApi, IApizrTransferManager<TTransferApi, TDownloadParams>>(
+                apizrManager => new ApizrTransferManager<TTransferApi, TDownloadParams>(
+                    new ApizrDownloadManager<TTransferApi, TDownloadParams>(apizrManager),
+                    new ApizrUploadManager<TTransferApi>(apizrManager)), optionsBuilder);
+
+        return builder;
+    }
+
+    #endregion
+
+    #region Get
+
+    /// <summary>
+    /// Get an upload manager instance
+    /// </summary>
+    /// <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
+    /// <param name="registry">The registry to get the manager from</param>
+    /// <returns></returns>
+    public static IApizrUploadManager<TUploadApi> GetUploadManagerFor<TUploadApi>(
+        this IApizrEnumerableRegistry registry)
+        where TUploadApi : IUploadApi =>
+        ((IApizrInternalEnumerableRegistry)registry).GetWrappedManager<IApizrUploadManager<TUploadApi>>();
+
+    /// <summary>
+    /// Get a download manager instance
+    /// </summary>
+    /// <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
+    /// <param name="registry">The registry to get the manager from</param>
+    /// <returns></returns>
+    public static IApizrDownloadManager<TDownloadApi> GetDownloadManagerFor<TDownloadApi>(this IApizrEnumerableRegistry registry)
+        where TDownloadApi : IDownloadApi =>
+        ((IApizrInternalEnumerableRegistry)registry).GetWrappedManager<IApizrDownloadManager<TDownloadApi>>();
+
+    /// <summary>
+    /// Get a download manager instance
+    /// </summary>
+    /// <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
+    /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+    /// <param name="registry">The registry to get the manager from</param>
+    /// <returns></returns>
+    public static IApizrDownloadManager<TDownloadApi, TDownloadParams> GetDownloadManagerFor<TDownloadApi, TDownloadParams>(this IApizrEnumerableRegistry registry)
+        where TDownloadApi : IDownloadApi<TDownloadParams> =>
+        ((IApizrInternalEnumerableRegistry)registry).GetWrappedManager<IApizrDownloadManager<TDownloadApi, TDownloadParams>>();
+
+    /// <summary>
+    /// Get a transfer manager instance
+    /// </summary>
+    /// <typeparam name="TTransferApi">The Transfer api interface to manage</typeparam>
+    /// <param name="registry">The registry to get the manager from</param>
+    /// <returns></returns>
+    public static IApizrTransferManager<TTransferApi> GetTransferManagerFor<TTransferApi>(this IApizrEnumerableRegistry registry)
+        where TTransferApi : ITransferApi =>
+        ((IApizrInternalEnumerableRegistry)registry).GetWrappedManager<IApizrTransferManager<TTransferApi>>();
+
+    /// <summary>
+    /// Get a transfer manager instance
+    /// </summary>
+    /// <typeparam name="TTransferApi">The Transfer api interface to manage</typeparam>
+    /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+    /// <param name="registry">The registry to get the manager from</param>
+    /// <returns></returns>
+    public static IApizrTransferManager<TTransferApi, TDownloadParams> GetTransferManagerFor<TTransferApi, TDownloadParams>(this IApizrEnumerableRegistry registry)
+        where TTransferApi : ITransferApi<TDownloadParams> =>
+        ((IApizrInternalEnumerableRegistry)registry).GetWrappedManager<IApizrTransferManager<TTransferApi, TDownloadParams>>();
+
+
+    #endregion
+
+    #region TryGet
+
+    /// <summary>
+    /// Get an upload manager instance
+    /// </summary>
+    /// <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
+    /// <param name="registry">The registry to get the manager from</param>
+    /// <returns></returns>
+    public static bool TryGetUploadManagerFor<TUploadApi>(
+        this IApizrEnumerableRegistry registry, out IApizrUploadManager<TUploadApi> manager)
+        where TUploadApi : IUploadApi =>
+        ((IApizrInternalEnumerableRegistry)registry).TryGetWrappedManager<IApizrUploadManager<TUploadApi>>(out manager);
+
+    /// <summary>
+    /// Get a download manager instance
+    /// </summary>
+    /// <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
+    /// <param name="registry">The registry to get the manager from</param>
+    /// <returns></returns>
+    public static bool TryGetDownloadManagerFor<TDownloadApi>(this IApizrEnumerableRegistry registry, out IApizrDownloadManager<TDownloadApi> manager)
+        where TDownloadApi : IDownloadApi =>
+        ((IApizrInternalEnumerableRegistry)registry).TryGetWrappedManager<IApizrDownloadManager<TDownloadApi>>(out manager);
+
+    /// <summary>
+    /// Get a download manager instance
+    /// </summary>
+    /// <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
+    /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+    /// <param name="registry">The registry to get the manager from</param>
+    /// <returns></returns>
+    public static bool TryGetDownloadManagerFor<TDownloadApi, TDownloadParams>(this IApizrEnumerableRegistry registry, out IApizrDownloadManager<TDownloadApi, TDownloadParams> manager)
+        where TDownloadApi : IDownloadApi<TDownloadParams> =>
+        ((IApizrInternalEnumerableRegistry)registry).TryGetWrappedManager<IApizrDownloadManager<TDownloadApi, TDownloadParams>>(out manager);
+
+    /// <summary>
+    /// Get a transfer manager instance
+    /// </summary>
+    /// <typeparam name="TTransferApi">The Transfer api interface to manage</typeparam>
+    /// <param name="registry">The registry to get the manager from</param>
+    /// <returns></returns>
+    public static bool TryGetTransferManagerFor<TTransferApi>(this IApizrEnumerableRegistry registry, out IApizrTransferManager<TTransferApi> manager)
+        where TTransferApi : ITransferApi =>
+        ((IApizrInternalEnumerableRegistry)registry).TryGetWrappedManager<IApizrTransferManager<TTransferApi>>(out manager);
+
+    /// <summary>
+    /// Get a transfer manager instance
+    /// </summary>
+    /// <typeparam name="TTransferApi">The Transfer api interface to manage</typeparam>
+    /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+    /// <param name="registry">The registry to get the manager from</param>
+    /// <returns></returns>
+    public static bool TryGetTransferManagerFor<TTransferApi, TDownloadParams>(this IApizrEnumerableRegistry registry, out IApizrTransferManager<TTransferApi, TDownloadParams> manager)
+        where TTransferApi : ITransferApi<TDownloadParams> =>
+        ((IApizrInternalEnumerableRegistry)registry).TryGetWrappedManager<IApizrTransferManager<TTransferApi, TDownloadParams>>(out manager);
+
+
+    #endregion
 
     #endregion
 

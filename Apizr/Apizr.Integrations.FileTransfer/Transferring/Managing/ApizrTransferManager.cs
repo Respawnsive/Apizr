@@ -12,7 +12,7 @@ public class ApizrTransferManager<TTransferApi, TDownloadParams> : IApizrTransfe
     private readonly IApizrDownloadManager<TTransferApi, TDownloadParams> _downloadManager;
     private readonly IApizrUploadManager<TTransferApi> _uploadManager;
 
-    public ApizrTransferManager(IApizrDownloadManager<TTransferApi, TDownloadParams> downloadManager,IApizrUploadManager<TTransferApi> uploadManager)
+    public ApizrTransferManager(IApizrDownloadManager<TTransferApi, TDownloadParams> downloadManager, IApizrUploadManager<TTransferApi> uploadManager)
     {
         _downloadManager = downloadManager;
         _uploadManager = uploadManager;

@@ -9,7 +9,7 @@ namespace Apizr.Configuring.Registry
     /// <summary>
     /// Registry options available for both static and extended registrations
     /// </summary>
-    public abstract class ApizrRegistryBase : IApizrEnumerableRegistry
+    public abstract class ApizrRegistryBase : IApizrEnumerableRegistry, IApizrInternalEnumerableRegistry
     {
         internal readonly IDictionary<Type, Func<IApizrManager>> ConcurrentRegistry = new ConcurrentDictionary<Type, Func<IApizrManager>>();
 
@@ -42,7 +42,7 @@ namespace Apizr.Configuring.Registry
 
         /// <inheritdoc />
         public IApizrManager<TWebApi> GetManagerFor<TWebApi>()
-            => (IApizrManager<TWebApi>)ConcurrentRegistry[typeof(TWebApi)].Invoke();
+            => (IApizrManager<TWebApi>)ConcurrentRegistry[typeof(IApizrManager<TWebApi>)].Invoke();
 
         /// <inheritdoc />
         public bool TryGetCrudManagerFor<T>(out IApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>> manager) where T : class
@@ -64,7 +64,7 @@ namespace Apizr.Configuring.Registry
         /// <inheritdoc />
         public bool TryGetManagerFor<TWebApi>(out IApizrManager<TWebApi> manager)
         {
-            if (!ConcurrentRegistry.TryGetValue(typeof(TWebApi), out var managerFactory))
+            if (!ConcurrentRegistry.TryGetValue(typeof(IApizrManager<TWebApi>), out var managerFactory))
             {
                 manager = default;
                 return false;
@@ -95,6 +95,27 @@ namespace Apizr.Configuring.Registry
 
         /// <inheritdoc />
         public bool ContainsManagerFor<TWebApi>()
-            => ConcurrentRegistry.ContainsKey(typeof(TWebApi));
+            => ConcurrentRegistry.ContainsKey(typeof(IApizrManager<TWebApi>));
+
+        #region Internal
+
+        /// <inheritdoc />
+        public TWrappedManager GetWrappedManager<TWrappedManager>()
+            => (TWrappedManager)ConcurrentRegistry[typeof(TWrappedManager)].Invoke();
+
+        /// <inheritdoc />
+        public bool TryGetWrappedManager<TWrappedManager>(out TWrappedManager manager)
+        {
+            if (!ConcurrentRegistry.TryGetValue(typeof(TWrappedManager), out var managerFactory))
+            {
+                manager = default;
+                return false;
+            }
+
+            manager = (TWrappedManager)managerFactory.Invoke();
+            return true;
+        }
+
+        #endregion
     }
 }

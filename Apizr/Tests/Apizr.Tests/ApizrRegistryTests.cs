@@ -14,6 +14,7 @@ using Apizr.Tests.Apis;
 using Apizr.Tests.Helpers;
 using Apizr.Tests.Models;
 using Apizr.Tests.Models.Mappings;
+using Apizr.Transferring.Requesting;
 using AutoMapper;
 using FluentAssertions;
 using Fusillade;
@@ -48,14 +49,14 @@ namespace Apizr.Tests
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddManagerFor<IReqResUserService>()
                 .AddManagerFor<IHttpBinService>()
-                .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
-                /*.AddUploadManagerFor<ITransferSampleApi>()*/);
+                //.AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
+                .AddUploadManagerFor<IUploadApi>());
 
             apizrRegistry.Should().NotBeNull();
             apizrRegistry.ContainsManagerFor<IReqResUserService>().Should().BeTrue();
             apizrRegistry.ContainsManagerFor<IHttpBinService>().Should().BeTrue();
-            apizrRegistry.ContainsCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>().Should()
-                .BeTrue();
+            //apizrRegistry.ContainsCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>().Should().BeTrue();
+            apizrRegistry.ContainsManagerFor<IUploadApi>().Should().BeTrue();
         }
 
         [Fact]

@@ -20,7 +20,7 @@ namespace Apizr.Configuring.Registry
 
         /// <inheritdoc />
         public void AddOrUpdateManagerFor<TWebApi>(Func<IApizrManager<TWebApi>> managerFactory)
-            => AddOrUpdateManagerFor(typeof(TWebApi), managerFactory);
+            => AddOrUpdateManagerFor(typeof(IApizrManager<TWebApi>), managerFactory);
 
         /// <inheritdoc />
         public void AddOrUpdateManagerFor(Type webApiType, Func<IApizrManager> managerFactory)
@@ -35,7 +35,7 @@ namespace Apizr.Configuring.Registry
         {
             foreach (var entry in ConcurrentRegistry)
             {
-                populateAction(typeof(IApizrManager<>).MakeGenericType(entry.Key), entry.Value);
+                populateAction(entry.Key, entry.Value);
             }
         }
     }

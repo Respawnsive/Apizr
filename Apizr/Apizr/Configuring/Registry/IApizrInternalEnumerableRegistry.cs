@@ -6,7 +6,8 @@ namespace Apizr.Configuring.Registry
 {
     internal interface IApizrInternalEnumerableRegistry
     {
-        TWrappedManager GetWrappedManager<TWrappedManager>();
-        bool TryGetWrappedManager<TWrappedManager>(out TWrappedManager manager);
+        TApizrManager GetManagerInternal<TApizrManager>() where TApizrManager : IApizrManager;
+        bool TryGetManagerInternal<TApizrManager>(out TApizrManager manager) where TApizrManager : IApizrManager;
+        bool ContainsManagerInternal<TApizrManager>() where TApizrManager : IApizrManager;
     }
 }

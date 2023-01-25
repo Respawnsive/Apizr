@@ -4,10 +4,10 @@ using System;
 namespace Apizr.Configuring.Registry
 {
     internal interface IApizrInternalRegistryBuilderBase<out TApizrProperOptionsBuilder>
-        where TApizrProperOptionsBuilder : IApizrProperOptionsBuilderBase
+        where TApizrProperOptionsBuilder : IApizrGlobalProperOptionsBuilderBase
     {
-        void AddWrappedManagerFor<TWebApi, TWrappedManager>(
-            Func<IApizrManager<TWebApi>, TWrappedManager> wrappedManagerFactory,
-            Action<TApizrProperOptionsBuilder> optionsBuilder = null) where TWrappedManager : IApizrManager;
+        void AddWrappingManagerFor<TWebApi, TWrappingManager>(
+            Func<IApizrManager<TWebApi>, TWrappingManager> wrappingManagerFactory,
+            Action<TApizrProperOptionsBuilder> optionsBuilder = null) where TWrappingManager : IApizrManager;
     }
 }

@@ -11,7 +11,7 @@ namespace Apizr.Configuring.Registry
     public interface IApizrRegistryBuilderBase
     {
     }
-    
+
     /// <summary>
     /// Registry builder options available for both static and extended registrations
     /// </summary>

@@ -1,4 +1,5 @@
 ﻿using System;
+using Apizr.Configuring.Common;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Proper;
 using Apizr.Configuring.Registry;
@@ -6,6 +7,7 @@ using Apizr.Configuring.Shared;
 using Apizr.Progressing;
 using Apizr.Transferring.Managing;
 using Apizr.Transferring.Requesting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Apizr;
 
@@ -91,6 +93,31 @@ public static class FileTransferOptionsBuilderExtensions
     /// <summary>
     /// Create an <see cref="ApizrUploadManager{TUploadApi}"/> instance
     /// </summary>
+    /// <param name="builder">The builder to create the manager from</param>
+    /// <param name="uploadRegistry">The builder to create the manager from</param>
+    /// <param name="optionsBuilder">The builder defining some options</param>
+    /// <returns></returns>
+    public static TApizrRegistryBuilder
+        AddUploadManager<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>(
+            this IApizrRegistryBuilderBase<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder> builder,
+            Action<IApizrUploadRegistryBuilder<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>> uploadRegistry,
+            Action<TApizrCommonOptionsBuilder> optionsBuilder = null)
+        where TApizrRegistry : IApizrEnumerableRegistry
+        where TApizrRegistryBuilder : IApizrRegistryBuilderBase<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>
+        where TApizrProperOptionsBuilder : IApizrGlobalProperOptionsBuilderBase
+        where TApizrCommonOptionsBuilder : IApizrGlobalCommonOptionsBuilderBase
+    {
+        builder.AddGroup(
+            group => uploadRegistry.Invoke(
+                new ApizrUploadRegistryBuilder<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder,
+                    TApizrCommonOptionsBuilder>(group)), optionsBuilder);
+
+        return (TApizrRegistryBuilder) builder;
+    }
+
+    /// <summary>
+    /// Create an <see cref="ApizrUploadManager{TUploadApi}"/> instance
+    /// </summary>
     /// <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
     /// <param name="builder">The builder to create the manager from</param>
     /// <param name="optionsBuilder">The builder defining some options</param>
@@ -100,7 +127,7 @@ public static class FileTransferOptionsBuilderExtensions
 
     {
         if (builder is IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder> internalBuilder)
-            internalBuilder.AddWrappedManagerFor<TUploadApi, IApizrUploadManager<TUploadApi>>(apizrManager => new ApizrUploadManager<TUploadApi>(apizrManager), optionsBuilder);
+            internalBuilder.AddWrappingManagerFor<TUploadApi, IApizrUploadManager<TUploadApi>>(apizrManager => new ApizrUploadManager<TUploadApi>(apizrManager), optionsBuilder);
 
         return builder;
     }
@@ -117,7 +144,7 @@ public static class FileTransferOptionsBuilderExtensions
 
     {
         if (builder is IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder> internalBuilder)
-            internalBuilder.AddWrappedManagerFor<TDownloadApi, IApizrDownloadManager<TDownloadApi>>(apizrManager => new ApizrDownloadManager<TDownloadApi>(apizrManager), optionsBuilder);
+            internalBuilder.AddWrappingManagerFor<TDownloadApi, IApizrDownloadManager<TDownloadApi>>(apizrManager => new ApizrDownloadManager<TDownloadApi>(apizrManager), optionsBuilder);
 
         return builder;
     }
@@ -135,7 +162,7 @@ public static class FileTransferOptionsBuilderExtensions
 
     {
         if (builder is IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder> internalBuilder)
-            internalBuilder.AddWrappedManagerFor<TDownloadApi, IApizrDownloadManager<TDownloadApi, TDownloadParams>>(apizrManager => new ApizrDownloadManager<TDownloadApi, TDownloadParams>(apizrManager), optionsBuilder);
+            internalBuilder.AddWrappingManagerFor<TDownloadApi, IApizrDownloadManager<TDownloadApi, TDownloadParams>>(apizrManager => new ApizrDownloadManager<TDownloadApi, TDownloadParams>(apizrManager), optionsBuilder);
 
         return builder;
     }
@@ -152,7 +179,7 @@ public static class FileTransferOptionsBuilderExtensions
 
     {
         if (builder is IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder> internalBuilder)
-            internalBuilder.AddWrappedManagerFor<TTransferApi, IApizrTransferManager<TTransferApi>>(
+            internalBuilder.AddWrappingManagerFor<TTransferApi, IApizrTransferManager<TTransferApi>>(
                 apizrManager => new ApizrTransferManager<TTransferApi>(
                     new ApizrDownloadManager<TTransferApi>(apizrManager),
                     new ApizrUploadManager<TTransferApi>(apizrManager)), optionsBuilder);
@@ -173,7 +200,7 @@ public static class FileTransferOptionsBuilderExtensions
 
     {
         if (builder is IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder> internalBuilder)
-            internalBuilder.AddWrappedManagerFor<TTransferApi, IApizrTransferManager<TTransferApi, TDownloadParams>>(
+            internalBuilder.AddWrappingManagerFor<TTransferApi, IApizrTransferManager<TTransferApi, TDownloadParams>>(
                 apizrManager => new ApizrTransferManager<TTransferApi, TDownloadParams>(
                     new ApizrDownloadManager<TTransferApi, TDownloadParams>(apizrManager),
                     new ApizrUploadManager<TTransferApi>(apizrManager)), optionsBuilder);

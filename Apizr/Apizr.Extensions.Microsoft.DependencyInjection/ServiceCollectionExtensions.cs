@@ -895,7 +895,7 @@ namespace Apizr
             return typeName;
         }
 
-        private static IServiceCollection AddOrReplaceSingleton(this IServiceCollection services, Type serviceType, Type implementationType)
+        internal static IServiceCollection AddOrReplaceSingleton(this IServiceCollection services, Type serviceType, Type implementationType)
         {
             var serviceDescriptors = services.Where(sd => sd.ServiceType == serviceType).ToList();
             if (serviceDescriptors.Any())
@@ -913,7 +913,7 @@ namespace Apizr
             return services;
         }
 
-        private static IServiceCollection AddOrReplaceSingleton(this IServiceCollection services, Type serviceType, Func<IServiceProvider, object> factory)
+        internal static IServiceCollection AddOrReplaceSingleton(this IServiceCollection services, Type serviceType, Func<IServiceProvider, object> factory)
         {
             var serviceDescriptors = services.Where(sd => sd.ServiceType == serviceType).ToList();
             if (serviceDescriptors.Any())

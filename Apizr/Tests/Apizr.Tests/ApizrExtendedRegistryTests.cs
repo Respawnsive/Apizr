@@ -20,6 +20,8 @@ using Apizr.Requesting;
 using Apizr.Tests.Apis;
 using Apizr.Tests.Helpers;
 using Apizr.Tests.Models;
+using Apizr.Transferring.Managing;
+using Apizr.Transferring.Requesting;
 using FluentAssertions;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -71,13 +73,16 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
             services.AddApizr(registry => registry
                 .AddManagerFor<IReqResUserService>()
-                .AddManagerFor<IHttpBinService>()
-                .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>());
+                .AddManagerFor<IHttpBinService>()//);
+                //.AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>());
+                .AddUploadManager(uploadRegistry => uploadRegistry.AddFor<IUploadApi>()));
 
             services.Should().Contain(x => x.ServiceType == typeof(IApizrExtendedRegistry));
             services.Should().Contain(x => x.ServiceType == typeof(IApizrManager<IReqResUserService>));
             services.Should().Contain(x => x.ServiceType == typeof(IApizrManager<IHttpBinService>));
-            services.Should().Contain(x => x.ServiceType == typeof(IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>>));
+            //services.Should().Contain(x => x.ServiceType == typeof(IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>>));
+            services.Should().Contain(x => x.ServiceType == typeof(IApizrManager<IUploadApi>));
+            services.Should().Contain(x => x.ServiceType == typeof(IApizrUploadManager<IUploadApi>));
         }
 
         [Fact]

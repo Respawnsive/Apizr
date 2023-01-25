@@ -7,6 +7,6 @@ namespace Apizr.Extending.Configuring.Registry
     /// </summary>
     public interface IApizrExtendedConcurrentRegistryBase
     {
-        void AddOrUpdate(Type webApiType, Type serviceType);
+        void AddOrUpdateManager(Type managerType);
     }
 }

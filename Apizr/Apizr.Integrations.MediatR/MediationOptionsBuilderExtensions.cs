@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using Apizr.Extending;
-using Apizr.Extending.Configuring;
 using Apizr.Extending.Configuring.Common;
 using Apizr.Extending.Configuring.Manager;
 using Apizr.Mapping;
@@ -287,7 +286,7 @@ namespace Apizr
                     }
 
                     // Add or update the mediator service into the registry
-                    registry.AddOrUpdate(typedCrudMediatorServiceType, typedCrudMediatorServiceType);
+                    registry.AddOrUpdateManager(typedCrudMediatorServiceType);
 
                     #endregion
                 }
@@ -455,7 +454,7 @@ namespace Apizr
                     }
 
                     // Add or update the mediator service into the registry
-                    registry.AddOrUpdate(typedMediatorServiceType, typedMediatorServiceType);
+                    registry.AddOrUpdateManager(typedMediatorServiceType);
 
                     #endregion
                 }

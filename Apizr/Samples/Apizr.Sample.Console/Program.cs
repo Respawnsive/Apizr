@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Akavache;
 using Apizr.Configuring.Registry;
 using Apizr.Extending;
+using Apizr.Extending.Configuring.Registry;
 using Apizr.Logging;
 using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Cruding.Sending;
@@ -27,6 +28,7 @@ using Apizr.Progressing;
 using Apizr.Requesting;
 using Apizr.Sample.Console.Models;
 using Apizr.Sample.Models;
+using Apizr.Transferring.Requesting;
 using AutoMapper;
 using Fusillade;
 using HttpTracer;
@@ -148,23 +150,37 @@ namespace Apizr.Sample.Console
                     _httpBinManager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
 
 
-                    //var host = Host.CreateDefaultBuilder()
-                    //    .ConfigureLogging(logging =>
-                    //    {
-                    //        logging.AddConsole();
-                    //        logging.AddConsole();
-                    //        logging.SetMinimumLevel(LogLevel.Trace);
-                    //    })
-                    //    .ConfigureServices(services =>
-                    //    {
-                    //        services.AddPolicyRegistry(policyRegistry);
-                    //        services.AddApizrManagerFor<IHttpBinService>();
-                    //    }).Build();
+                    var host = Host.CreateDefaultBuilder()
+                        .ConfigureLogging(logging =>
+                        {
+                            logging.AddConsole();
+                            logging.AddConsole();
+                            logging.SetMinimumLevel(LogLevel.Trace);
+                        })
+                        .ConfigureServices(services =>
+                        {
+                            services.AddPolicyRegistry(policyRegistry);
+                            services.AddApizr(registry => registry
+                                .AddManagerFor<IReqResService>()
+                                .AddManagerFor<IHttpBinService>()//);
+                            //.AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>());
+                            .AddUploadManager(uploadRegistry => uploadRegistry.AddFor<IUploadApi>()));
+
+                            // This is just to let you know what's registered from/for Apizr and ready to use
+                            foreach (var service in services.Where(d =>
+                                         (d.ServiceType != null) ||
+                                         (d.ImplementationType != null)))
+                            {
+                                System.Console.WriteLine(
+                                    $"Registered {service.Lifetime} service: {service.ServiceType?.GetFriendlyName()} - {service.ImplementationType?.GetFriendlyName()}");
+                            }
+                        }).Build();
 
 
-                    //var scope = host.Services.CreateScope();
+                    var scope = host.Services.CreateScope();
 
-                    //_httpBinManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IHttpBinService>>();
+                    _httpBinManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IHttpBinService>>();
+                    var testRegistry = scope.ServiceProvider.GetRequiredService<IApizrExtendedRegistry>();
 
                     await using var stream = GetTestFileStream($"Files/Test_{fileSuffix}.{fileExtension}");
                     var streamPart = new StreamPart(stream, $"test_{fileSuffix}-streampart.{fileExtension}", $"{fileType}");

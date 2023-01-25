@@ -30,11 +30,11 @@ namespace Apizr.Optional.Configuring.Registry
         }
 
         /// <inheritdoc />
-        public void AddOrUpdate(Type webApiType, Type serviceType)
+        public void AddOrUpdateManager(Type managerType)
         {
             var registry = ThrowIfNotConcurrentImplementation();
-            Func<IApizrOptionalMediatorBase> mediatorFactory = () => _serviceProvider.GetRequiredService(serviceType) as IApizrOptionalMediatorBase;
-            registry.AddOrUpdate(webApiType, k => mediatorFactory, (k, e) => mediatorFactory);
+            Func<IApizrOptionalMediatorBase> mediatorFactory = () => _serviceProvider.GetRequiredService(managerType) as IApizrOptionalMediatorBase;
+            registry.AddOrUpdate(managerType, k => mediatorFactory, (k, e) => mediatorFactory);
         }
     }
 }

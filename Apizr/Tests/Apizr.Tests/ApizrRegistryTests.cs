@@ -50,13 +50,14 @@ namespace Apizr.Tests
                 .AddManagerFor<IReqResUserService>()
                 .AddManagerFor<IHttpBinService>()
                 //.AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
-                .AddUploadManagerFor<IUploadApi>());
+                .AddUploadManager(uploadRegistry => uploadRegistry.AddFor<IUploadApi>()));
 
             apizrRegistry.Should().NotBeNull();
             apizrRegistry.ContainsManagerFor<IReqResUserService>().Should().BeTrue();
             apizrRegistry.ContainsManagerFor<IHttpBinService>().Should().BeTrue();
             //apizrRegistry.ContainsCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>().Should().BeTrue();
             apizrRegistry.ContainsManagerFor<IUploadApi>().Should().BeTrue();
+            apizrRegistry.ContainsUploadManagerFor<IUploadApi>().Should().BeTrue();
         }
 
         [Fact]

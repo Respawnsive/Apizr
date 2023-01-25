@@ -31,6 +31,8 @@ namespace Apizr.Mediation.Configuring.Registry
         /// <returns></returns>
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+        #region Get
+
         /// <inheritdoc />
         public IApizrCrudMediator<T, int, IEnumerable<T>, IDictionary<string, object>> GetCrudMediatorFor<T>() where T : class
             => GetCrudMediatorFor<T, int, IEnumerable<T>, IDictionary<string, object>>();
@@ -51,7 +53,9 @@ namespace Apizr.Mediation.Configuring.Registry
 
         /// <inheritdoc />
         public IApizrMediator<TWebApi> GetMediatorFor<TWebApi>()
-            => (IApizrMediator<TWebApi>)ConcurrentRegistry[typeof(TWebApi)].Invoke();
+            => (IApizrMediator<TWebApi>)ConcurrentRegistry[typeof(TWebApi)].Invoke(); 
+
+        #endregion
 
         /// <inheritdoc />
         public bool TryGetCrudMediatorFor<T>(out IApizrCrudMediator<T, int, IEnumerable<T>, IDictionary<string, object>> mediator) where T : class

@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Apizr.Configuring.Proper;
+using Apizr.Configuring.Registry;
 using Apizr.Extending.Configuring.Common;
 using Apizr.Extending.Configuring.Proper;
 using Apizr.Mapping;
 using Apizr.Requesting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Apizr.Extending.Configuring.Registry
 {
     /// <summary>
     /// Registry builder options available for extended registrations
     /// </summary>
-    public class ApizrExtendedRegistryBuilder : IApizrExtendedRegistryBuilder
+    public class ApizrExtendedRegistryBuilder : IApizrExtendedRegistryBuilder, IApizrInternalRegistryBuilderBase<IApizrExtendedProperOptionsBuilder>
     {
         protected readonly ApizrExtendedRegistry Registry;
         protected readonly IApizrExtendedCommonOptions CommonOptions;
@@ -330,13 +333,21 @@ namespace Apizr.Extending.Configuring.Registry
             Action<IApizrExtendedProperOptionsBuilder> properOptionsBuilder = null)
         {
             var properOptions = ServiceCollectionExtensions.CreateProperOptions(CommonOptions, webApiType, apizrManagerType, properOptionsBuilder);
-            var serviceType = Services.AddApizrManagerFor(CommonOptions, properOptions);
+            var apizrManagerServiceType = Services.AddApizrManagerFor(CommonOptions, properOptions);
 
-            Registry.AddOrUpdate(webApiType, serviceType);
+            Registry.AddOrUpdateManager(apizrManagerServiceType);
 
             return this;
         }
 
         #endregion
+
+        /// <inheritdoc />
+        public void AddWrappingManagerFor<TWebApi, TWrappingManager>(Func<IApizrManager<TWebApi>, TWrappingManager> wrappingManagerFactory, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) where TWrappingManager : IApizrManager
+        {
+            AddManagerFor<TWebApi>(optionsBuilder);
+            Services.AddOrReplaceSingleton(typeof(TWrappingManager), serviceProvider => wrappingManagerFactory.Invoke(serviceProvider.GetRequiredService<IApizrManager<TWebApi>>()));
+            Registry.AddOrUpdateManager(typeof(TWrappingManager));
+        }
     }
 }

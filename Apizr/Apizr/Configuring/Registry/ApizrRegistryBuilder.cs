@@ -136,14 +136,14 @@ namespace Apizr.Configuring.Registry
         #region Internal
 
         /// <inheritdoc />
-        public void AddWrappedManagerFor<TWebApi, TWrappedManager>(
-            Func<IApizrManager<TWebApi>, TWrappedManager> wrappedManagerFactory,
-            Action<IApizrProperOptionsBuilder> optionsBuilder = null) where TWrappedManager : IApizrManager
+        public void AddWrappingManagerFor<TWebApi, TWrappingManager>(
+            Func<IApizrManager<TWebApi>, TWrappingManager> wrappingManagerFactory,
+            Action<IApizrProperOptionsBuilder> optionsBuilder = null) where TWrappingManager : IApizrManager
         {
             AddManagerFor<TWebApi>(optionsBuilder);
-            var managerFactory = new Func<IApizrManager>(() => wrappedManagerFactory.Invoke(Registry.GetManagerFor<TWebApi>()));
+            var managerFactory = new Func<IApizrManager>(() => wrappingManagerFactory.Invoke(Registry.GetManagerFor<TWebApi>()));
 
-            Registry.AddOrUpdateManagerFor(typeof(TWrappedManager), managerFactory);
+            Registry.AddOrUpdateManager(typeof(TWrappingManager), managerFactory);
         }
 
         #endregion

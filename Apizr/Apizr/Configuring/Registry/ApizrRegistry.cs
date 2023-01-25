@@ -20,10 +20,10 @@ namespace Apizr.Configuring.Registry
 
         /// <inheritdoc />
         public void AddOrUpdateManagerFor<TWebApi>(Func<IApizrManager<TWebApi>> managerFactory)
-            => AddOrUpdateManagerFor(typeof(IApizrManager<TWebApi>), managerFactory);
+            => AddOrUpdateManager(typeof(IApizrManager<TWebApi>), managerFactory);
 
         /// <inheritdoc />
-        public void AddOrUpdateManagerFor(Type webApiType, Func<IApizrManager> managerFactory)
+        public void AddOrUpdateManager(Type webApiType, Func<IApizrManager> managerFactory)
         {
             var registry = ThrowIfNotConcurrentImplementation();
 

@@ -50,8 +50,12 @@ namespace Apizr.Tests
                 .AddManagerFor<IReqResUserService>()
                 .AddManagerFor<IHttpBinService>()
                 //.AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
-                .AddUploadManager(uploadRegistry => uploadRegistry.AddFor<IUploadApi>()));
-                //.AddUploadManager(options => options.WithBaseAddress("https://test.com")));
+                .AddUploadManager(uploadRegistry => uploadRegistry.AddFor<IUploadApi>())
+                //.AddUploadManager(options => options.WithBaseAddress("https://test.com"))
+                .AddDownloadManager(downloadRegistry => downloadRegistry.AddFor<IDownloadApi>())
+                //.AddDownloadManager(options => options.WithBaseAddress("https://test.com"))
+                .AddTransferManager(downloadRegistry => downloadRegistry.AddFor<ITransferApi>()));
+                //.AddTransferManager(options => options.WithBaseAddress("https://test.com"))
 
             apizrRegistry.Should().NotBeNull();
             apizrRegistry.ContainsManagerFor<IReqResUserService>().Should().BeTrue();
@@ -59,6 +63,13 @@ namespace Apizr.Tests
             //apizrRegistry.ContainsCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>().Should().BeTrue();
             apizrRegistry.ContainsManagerFor<IUploadApi>().Should().BeTrue();
             apizrRegistry.ContainsUploadManagerFor<IUploadApi>().Should().BeTrue();
+            apizrRegistry.ContainsUploadManager().Should().BeTrue();
+            apizrRegistry.ContainsManagerFor<IDownloadApi>().Should().BeTrue();
+            apizrRegistry.ContainsDownloadManagerFor<IDownloadApi>().Should().BeTrue();
+            apizrRegistry.ContainsDownloadManager().Should().BeTrue();
+            apizrRegistry.ContainsManagerFor<ITransferApi>().Should().BeTrue();
+            apizrRegistry.ContainsTransferManagerFor<ITransferApi>().Should().BeTrue();
+            apizrRegistry.ContainsTransferManager().Should().BeTrue();
         }
 
         [Fact]

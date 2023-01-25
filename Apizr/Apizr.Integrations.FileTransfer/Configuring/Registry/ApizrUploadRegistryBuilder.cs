@@ -24,11 +24,11 @@ public class ApizrUploadRegistryBuilder<TApizrRegistry, TApizrRegistryBuilder, T
 
     /// <inheritdoc />
     public IApizrUploadRegistryBuilder<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder,
-        TApizrCommonOptionsBuilder> AddFor<TWebApi>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
-        where TWebApi : IUploadApi
+        TApizrCommonOptionsBuilder> AddFor<TUploadApi>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
+        where TUploadApi : IUploadApi
     {
-        _internalBuilder?.AddWrappingManagerFor<TWebApi, IApizrUploadManager<TWebApi>>(
-            apizrManager => new ApizrUploadManager<TWebApi>(apizrManager), optionsBuilder);
+        _internalBuilder?.AddWrappingManagerFor<TUploadApi, IApizrUploadManager<TUploadApi>>(
+            apizrManager => new ApizrUploadManager<TUploadApi>(apizrManager), optionsBuilder);
 
         return this;
     }

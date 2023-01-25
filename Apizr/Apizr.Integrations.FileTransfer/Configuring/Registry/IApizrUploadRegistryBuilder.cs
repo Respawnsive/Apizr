@@ -12,7 +12,7 @@ namespace Apizr.Configuring.Registry
         where TApizrCommonOptionsBuilder : IApizrGlobalCommonOptionsBuilderBase
     {
         IApizrUploadRegistryBuilder<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder,
-            TApizrCommonOptionsBuilder> AddFor<TWebApi>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
-            where TWebApi : IUploadApi;
+            TApizrCommonOptionsBuilder> AddFor<TUploadApi>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
+            where TUploadApi : IUploadApi;
     }
 }

@@ -51,6 +51,7 @@ namespace Apizr.Tests
                 .AddManagerFor<IHttpBinService>()
                 //.AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
                 .AddUploadManager(uploadRegistry => uploadRegistry.AddFor<IUploadApi>()));
+                //.AddUploadManager(options => options.WithBaseAddress("https://test.com")));
 
             apizrRegistry.Should().NotBeNull();
             apizrRegistry.ContainsManagerFor<IReqResUserService>().Should().BeTrue();

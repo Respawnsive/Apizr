@@ -91,7 +91,28 @@ public static class FileTransferOptionsBuilderExtensions
     #region Add
 
     /// <summary>
-    /// Create an <see cref="ApizrUploadManager{TUploadApi}"/> instance
+    /// Add an upload manager for IUploadApi (you must at least provide a base url)
+    /// </summary>
+    /// <param name="builder">The builder to create the manager from</param>
+    /// <param name="optionsBuilder">The builder defining some options</param>
+    /// <returns></returns>
+    public static TApizrRegistryBuilder
+        AddUploadManager<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>(
+            this IApizrRegistryBuilderBase<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder> builder,
+            Action<TApizrProperOptionsBuilder> optionsBuilder)
+        where TApizrRegistry : IApizrEnumerableRegistry
+        where TApizrRegistryBuilder : IApizrRegistryBuilderBase<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>
+        where TApizrProperOptionsBuilder : IApizrGlobalProperOptionsBuilderBase
+        where TApizrCommonOptionsBuilder : IApizrGlobalCommonOptionsBuilderBase
+    {
+        if (builder is IApizrInternalRegistryBuilderBase<TApizrProperOptionsBuilder> internalBuilder)
+            internalBuilder.AddWrappingManagerFor<IUploadApi, IApizrUploadManager<IUploadApi>>(apizrManager => new ApizrUploadManager<IUploadApi>(apizrManager), optionsBuilder);
+        
+        return (TApizrRegistryBuilder)builder;
+    }
+
+    /// <summary>
+    /// Add an upload manager for each provided upload api derived from IUploadApi
     /// </summary>
     /// <param name="builder">The builder to create the manager from</param>
     /// <param name="uploadRegistry">The builder to create the manager from</param>
@@ -113,23 +134,6 @@ public static class FileTransferOptionsBuilderExtensions
                     TApizrCommonOptionsBuilder>(group)), optionsBuilder);
 
         return (TApizrRegistryBuilder) builder;
-    }
-
-    /// <summary>
-    /// Create an <see cref="ApizrUploadManager{TUploadApi}"/> instance
-    /// </summary>
-    /// <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
-    /// <param name="builder">The builder to create the manager from</param>
-    /// <param name="optionsBuilder">The builder defining some options</param>
-    /// <returns></returns>
-    public static IApizrRegistryBuilder AddUploadManagerFor<TUploadApi>(this IApizrRegistryBuilder builder, Action<IApizrProperOptionsBuilder> optionsBuilder = null)
-        where TUploadApi : IUploadApi
-
-    {
-        if (builder is IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder> internalBuilder)
-            internalBuilder.AddWrappingManagerFor<TUploadApi, IApizrUploadManager<TUploadApi>>(apizrManager => new ApizrUploadManager<TUploadApi>(apizrManager), optionsBuilder);
-
-        return builder;
     }
 
     /// <summary>

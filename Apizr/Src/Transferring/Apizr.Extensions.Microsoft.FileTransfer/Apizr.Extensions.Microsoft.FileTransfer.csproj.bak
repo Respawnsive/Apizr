@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	  <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+	  <RootNamespace>Apizr</RootNamespace>
+  </PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>Apizr.Extensions.Microsoft.FileTransfer.xml</DocumentationFile>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Apizr.Extensions.Microsoft.DependencyInjection\Apizr.Extensions.Microsoft.DependencyInjection.csproj" />
+	  <ProjectReference Include="..\Apizr.Integrations.FileTransfer\Apizr.Integrations.FileTransfer.csproj" />
+	</ItemGroup>
+
+</Project>

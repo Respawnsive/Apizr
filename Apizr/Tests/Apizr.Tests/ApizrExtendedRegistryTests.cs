@@ -73,9 +73,14 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
             services.AddApizr(registry => registry
                 .AddManagerFor<IReqResUserService>()
-                .AddManagerFor<IHttpBinService>()//);
-                //.AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>());
-                .AddUploadManager(uploadRegistry => uploadRegistry.AddFor<IUploadApi>()));
+                .AddManagerFor<IHttpBinService>()
+                //.AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
+                .AddUploadManager(uploadRegistry => uploadRegistry.AddFor<IUploadApi>())
+                //.AddUploadManager(options => options.WithBaseAddress("https://test.com"))
+                .AddDownloadManager(downloadRegistry => downloadRegistry.AddFor<IDownloadApi>())
+                //.AddDownloadManager(options => options.WithBaseAddress("https://test.com"))
+                .AddTransferManager(downloadRegistry => downloadRegistry.AddFor<ITransferApi>()));
+            //.AddTransferManager(options => options.WithBaseAddress("https://test.com"))
 
             services.Should().Contain(x => x.ServiceType == typeof(IApizrExtendedRegistry));
             services.Should().Contain(x => x.ServiceType == typeof(IApizrManager<IReqResUserService>));
@@ -83,6 +88,10 @@ namespace Apizr.Tests
             //services.Should().Contain(x => x.ServiceType == typeof(IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>>));
             services.Should().Contain(x => x.ServiceType == typeof(IApizrManager<IUploadApi>));
             services.Should().Contain(x => x.ServiceType == typeof(IApizrUploadManager<IUploadApi>));
+            services.Should().Contain(x => x.ServiceType == typeof(IApizrManager<IDownloadApi>));
+            services.Should().Contain(x => x.ServiceType == typeof(IApizrDownloadManager<IDownloadApi>));
+            services.Should().Contain(x => x.ServiceType == typeof(IApizrManager<ITransferApi>));
+            services.Should().Contain(x => x.ServiceType == typeof(IApizrTransferManager<ITransferApi>));
         }
 
         [Fact]

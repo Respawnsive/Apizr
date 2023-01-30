@@ -15,18 +15,18 @@ items:
   type: Interface
   source:
     id: IApizrUploadManager
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.FileTransfer\Transferring\Managing\IApizrUploadManager.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Managing\IApizrUploadManager.cs
     startLine: 8
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
   syntax:
-    content: 'public interface IApizrUploadManager<TUploadApi> : IApizrDataTransferManager<TUploadApi>, IApizrManager where TUploadApi : IUploadApi'
+    content: 'public interface IApizrUploadManager<TUploadApi> : IApizrTransferManagerBase<TUploadApi>, IApizrManager where TUploadApi : IUploadApi'
     typeParameters:
     - id: TUploadApi
     content.vb: >-
       Public Interface IApizrUploadManager(Of TUploadApi As IUploadApi)
-          Inherits IApizrDataTransferManager(Of TUploadApi)
+          Inherits IApizrTransferManagerBase(Of TUploadApi)
   nameWithType.vb: IApizrUploadManager(Of TUploadApi)
   modifiers.csharp:
   - public
@@ -49,7 +49,7 @@ items:
   type: Method
   source:
     id: UploadAsync
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.FileTransfer\Transferring\Managing\IApizrUploadManager.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Managing\IApizrUploadManager.cs
     startLine: 10
   assemblies:
   - Apizr.Integrations.FileTransfer

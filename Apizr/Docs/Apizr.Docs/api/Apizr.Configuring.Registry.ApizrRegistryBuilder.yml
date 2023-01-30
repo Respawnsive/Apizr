@@ -13,6 +13,7 @@ items:
   - Apizr.Configuring.Registry.ApizrRegistryBuilder.AddGroup(System.Action{Apizr.Configuring.Registry.IApizrRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
   - Apizr.Configuring.Registry.ApizrRegistryBuilder.AddManagerFor``1(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
   - Apizr.Configuring.Registry.ApizrRegistryBuilder.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  - Apizr.Configuring.Registry.ApizrRegistryBuilder.AddWrappingManagerFor``2(System.Func{Apizr.IApizrManager{``0},``1},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
   - Apizr.Configuring.Registry.ApizrRegistryBuilder.ApizrRegistry
   - Apizr.Configuring.Registry.ApizrRegistryBuilder.CommonOptions
   - Apizr.Configuring.Registry.ApizrRegistryBuilder.Registry
@@ -25,7 +26,7 @@ items:
   type: Class
   source:
     id: ApizrRegistryBuilder
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
     startLine: 16
   assemblies:
   - Apizr
@@ -52,6 +53,13 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
+  extensionMethods:
+  - Apizr.Configuring.Registry.IApizrRegistryBuilder.Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  - Apizr.Configuring.Registry.IApizrRegistryBuilder.Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(System.Action{Apizr.Configuring.Registry.IApizrUploadRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+  - Apizr.Configuring.Registry.IApizrRegistryBuilder.Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  - Apizr.Configuring.Registry.IApizrRegistryBuilder.Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(System.Action{Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+  - Apizr.Configuring.Registry.IApizrRegistryBuilder.Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  - Apizr.Configuring.Registry.IApizrRegistryBuilder.Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(System.Action{Apizr.Configuring.Registry.IApizrTransferRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
   modifiers.csharp:
   - public
   - class
@@ -71,7 +79,7 @@ items:
   type: Field
   source:
     id: Registry
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
     startLine: 21
   assemblies:
   - Apizr
@@ -102,7 +110,7 @@ items:
   type: Field
   source:
     id: CommonOptions
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
     startLine: 26
   assemblies:
   - Apizr
@@ -133,7 +141,7 @@ items:
   type: Property
   source:
     id: ApizrRegistry
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
     startLine: 37
   assemblies:
   - Apizr
@@ -168,7 +176,7 @@ items:
   type: Method
   source:
     id: AddGroup
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
     startLine: 40
   assemblies:
   - Apizr
@@ -209,7 +217,7 @@ items:
   type: Method
   source:
     id: AddCrudManagerFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
     startLine: 53
   assemblies:
   - Apizr
@@ -253,7 +261,7 @@ items:
   type: Method
   source:
     id: AddCrudManagerFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
     startLine: 62
   assemblies:
   - Apizr
@@ -299,7 +307,7 @@ items:
   type: Method
   source:
     id: AddCrudManagerFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
     startLine: 72
   assemblies:
   - Apizr
@@ -350,7 +358,7 @@ items:
   type: Method
   source:
     id: AddCrudManagerFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
     startLine: 85
   assemblies:
   - Apizr
@@ -403,7 +411,7 @@ items:
   type: Method
   source:
     id: AddCrudManagerFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
     startLine: 98
   assemblies:
   - Apizr
@@ -461,7 +469,7 @@ items:
   type: Method
   source:
     id: AddManagerFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
     startLine: 113
   assemblies:
   - Apizr
@@ -503,7 +511,7 @@ items:
   type: Method
   source:
     id: AddManagerFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
     startLine: 121
   assemblies:
   - Apizr
@@ -539,6 +547,46 @@ items:
   - Public
   fullName.vb: Apizr.Configuring.Registry.ApizrRegistryBuilder.AddManagerFor(Of TWebApi, TApizrManager)(System.Func(Of Apizr.ILazyFactory(Of TWebApi), Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Polly.Registry.IReadOnlyPolicyRegistry(Of System.String), Apizr.Configuring.Manager.IApizrManagerOptions(Of TWebApi), TApizrManager), System.Action(Of Apizr.Configuring.Proper.IApizrProperOptionsBuilder))
   name.vb: AddManagerFor(Of TWebApi, TApizrManager)(Func(Of ILazyFactory(Of TWebApi), IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry(Of String), IApizrManagerOptions(Of TWebApi), TApizrManager), Action(Of IApizrProperOptionsBuilder))
+- uid: Apizr.Configuring.Registry.ApizrRegistryBuilder.AddWrappingManagerFor``2(System.Func{Apizr.IApizrManager{``0},``1},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  commentId: M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddWrappingManagerFor``2(System.Func{Apizr.IApizrManager{``0},``1},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  id: AddWrappingManagerFor``2(System.Func{Apizr.IApizrManager{``0},``1},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  parent: Apizr.Configuring.Registry.ApizrRegistryBuilder
+  langs:
+  - csharp
+  - vb
+  name: AddWrappingManagerFor<TWebApi, TWrappingManager>(Func<IApizrManager<TWebApi>, TWrappingManager>, Action<IApizrProperOptionsBuilder>)
+  nameWithType: ApizrRegistryBuilder.AddWrappingManagerFor<TWebApi, TWrappingManager>(Func<IApizrManager<TWebApi>, TWrappingManager>, Action<IApizrProperOptionsBuilder>)
+  fullName: Apizr.Configuring.Registry.ApizrRegistryBuilder.AddWrappingManagerFor<TWebApi, TWrappingManager>(System.Func<Apizr.IApizrManager<TWebApi>, TWrappingManager>, System.Action<Apizr.Configuring.Proper.IApizrProperOptionsBuilder>)
+  type: Method
+  source:
+    id: AddWrappingManagerFor
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Registry\ApizrRegistryBuilder.cs
+    startLine: 138
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Registry
+  example: []
+  syntax:
+    content: >-
+      public void AddWrappingManagerFor<TWebApi, TWrappingManager>(Func<IApizrManager<TWebApi>, TWrappingManager> wrappingManagerFactory, Action<IApizrProperOptionsBuilder> optionsBuilder = null)
+          where TWrappingManager : IApizrManager
+    parameters:
+    - id: wrappingManagerFactory
+      type: System.Func{Apizr.IApizrManager{{TWebApi}},{TWrappingManager}}
+    - id: optionsBuilder
+      type: System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder}
+    typeParameters:
+    - id: TWebApi
+    - id: TWrappingManager
+    content.vb: Public Sub AddWrappingManagerFor(Of TWebApi, TWrappingManager As IApizrManager)(wrappingManagerFactory As Func(Of IApizrManager(Of TWebApi), TWrappingManager), optionsBuilder As Action(Of IApizrProperOptionsBuilder) = Nothing)
+  overload: Apizr.Configuring.Registry.ApizrRegistryBuilder.AddWrappingManagerFor*
+  nameWithType.vb: ApizrRegistryBuilder.AddWrappingManagerFor(Of TWebApi, TWrappingManager)(Func(Of IApizrManager(Of TWebApi), TWrappingManager), Action(Of IApizrProperOptionsBuilder))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Apizr.Configuring.Registry.ApizrRegistryBuilder.AddWrappingManagerFor(Of TWebApi, TWrappingManager)(System.Func(Of Apizr.IApizrManager(Of TWebApi), TWrappingManager), System.Action(Of Apizr.Configuring.Proper.IApizrProperOptionsBuilder))
+  name.vb: AddWrappingManagerFor(Of TWebApi, TWrappingManager)(Func(Of IApizrManager(Of TWebApi), TWrappingManager), Action(Of IApizrProperOptionsBuilder))
 references:
 - uid: Apizr.Configuring.Registry
   commentId: N:Apizr.Configuring.Registry
@@ -1007,6 +1055,486 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Configuring.Registry.IApizrRegistryBuilder.Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  name: AddUploadManager(Action<IApizrProperOptionsBuilder>)
+  nameWithType: FileTransferOptionsBuilderExtensions.AddUploadManager(Action<IApizrProperOptionsBuilder>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(System.Action<Apizr.Configuring.Proper.IApizrProperOptionsBuilder>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.AddUploadManager(Action(Of IApizrProperOptionsBuilder))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(System.Action(Of Apizr.Configuring.Proper.IApizrProperOptionsBuilder))
+  name.vb: AddUploadManager(Action(Of IApizrProperOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+    name: AddUploadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddUploadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+    name: IApizrProperOptionsBuilder
+    nameWithType: IApizrProperOptionsBuilder
+    fullName: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+    name: AddUploadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddUploadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+    name: IApizrProperOptionsBuilder
+    nameWithType: IApizrProperOptionsBuilder
+    fullName: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrRegistryBuilder.Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(System.Action{Apizr.Configuring.Registry.IApizrUploadRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Registry.IApizrUploadRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Registry.IApizrUploadRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+  name: AddUploadManager(Action<IApizrUploadRegistryBuilder>, Action<IApizrCommonOptionsBuilder>)
+  nameWithType: FileTransferOptionsBuilderExtensions.AddUploadManager(Action<IApizrUploadRegistryBuilder>, Action<IApizrCommonOptionsBuilder>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(System.Action<Apizr.Configuring.Registry.IApizrUploadRegistryBuilder>, System.Action<Apizr.Configuring.Common.IApizrCommonOptionsBuilder>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.AddUploadManager(Action(Of IApizrUploadRegistryBuilder), Action(Of IApizrCommonOptionsBuilder))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(System.Action(Of Apizr.Configuring.Registry.IApizrUploadRegistryBuilder), System.Action(Of Apizr.Configuring.Common.IApizrCommonOptionsBuilder))
+  name.vb: AddUploadManager(Action(Of IApizrUploadRegistryBuilder), Action(Of IApizrCommonOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(System.Action{Apizr.Configuring.Registry.IApizrUploadRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+    name: AddUploadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddUploadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Registry.IApizrUploadRegistryBuilder
+    name: IApizrUploadRegistryBuilder
+    nameWithType: IApizrUploadRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrUploadRegistryBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+    name: IApizrCommonOptionsBuilder
+    nameWithType: IApizrCommonOptionsBuilder
+    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(System.Action{Apizr.Configuring.Registry.IApizrUploadRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+    name: AddUploadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddUploadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Registry.IApizrUploadRegistryBuilder
+    name: IApizrUploadRegistryBuilder
+    nameWithType: IApizrUploadRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrUploadRegistryBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+    name: IApizrCommonOptionsBuilder
+    nameWithType: IApizrCommonOptionsBuilder
+    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrRegistryBuilder.Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  name: AddDownloadManager(Action<IApizrProperOptionsBuilder>)
+  nameWithType: FileTransferOptionsBuilderExtensions.AddDownloadManager(Action<IApizrProperOptionsBuilder>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(System.Action<Apizr.Configuring.Proper.IApizrProperOptionsBuilder>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.AddDownloadManager(Action(Of IApizrProperOptionsBuilder))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(System.Action(Of Apizr.Configuring.Proper.IApizrProperOptionsBuilder))
+  name.vb: AddDownloadManager(Action(Of IApizrProperOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+    name: AddDownloadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddDownloadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+    name: IApizrProperOptionsBuilder
+    nameWithType: IApizrProperOptionsBuilder
+    fullName: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+    name: AddDownloadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddDownloadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+    name: IApizrProperOptionsBuilder
+    nameWithType: IApizrProperOptionsBuilder
+    fullName: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrRegistryBuilder.Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(System.Action{Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+  name: AddDownloadManager(Action<IApizrDownloadRegistryBuilder>, Action<IApizrCommonOptionsBuilder>)
+  nameWithType: FileTransferOptionsBuilderExtensions.AddDownloadManager(Action<IApizrDownloadRegistryBuilder>, Action<IApizrCommonOptionsBuilder>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(System.Action<Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder>, System.Action<Apizr.Configuring.Common.IApizrCommonOptionsBuilder>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.AddDownloadManager(Action(Of IApizrDownloadRegistryBuilder), Action(Of IApizrCommonOptionsBuilder))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(System.Action(Of Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder), System.Action(Of Apizr.Configuring.Common.IApizrCommonOptionsBuilder))
+  name.vb: AddDownloadManager(Action(Of IApizrDownloadRegistryBuilder), Action(Of IApizrCommonOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(System.Action{Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+    name: AddDownloadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddDownloadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder
+    name: IApizrDownloadRegistryBuilder
+    nameWithType: IApizrDownloadRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+    name: IApizrCommonOptionsBuilder
+    nameWithType: IApizrCommonOptionsBuilder
+    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(System.Action{Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+    name: AddDownloadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddDownloadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder
+    name: IApizrDownloadRegistryBuilder
+    nameWithType: IApizrDownloadRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+    name: IApizrCommonOptionsBuilder
+    nameWithType: IApizrCommonOptionsBuilder
+    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrRegistryBuilder.Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  name: AddTransferManager(Action<IApizrProperOptionsBuilder>)
+  nameWithType: FileTransferOptionsBuilderExtensions.AddTransferManager(Action<IApizrProperOptionsBuilder>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(System.Action<Apizr.Configuring.Proper.IApizrProperOptionsBuilder>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.AddTransferManager(Action(Of IApizrProperOptionsBuilder))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(System.Action(Of Apizr.Configuring.Proper.IApizrProperOptionsBuilder))
+  name.vb: AddTransferManager(Action(Of IApizrProperOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+    name: AddTransferManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddTransferManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+    name: IApizrProperOptionsBuilder
+    nameWithType: IApizrProperOptionsBuilder
+    fullName: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+    name: AddTransferManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddTransferManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+    name: IApizrProperOptionsBuilder
+    nameWithType: IApizrProperOptionsBuilder
+    fullName: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrRegistryBuilder.Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(System.Action{Apizr.Configuring.Registry.IApizrTransferRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Registry.IApizrTransferRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Registry.IApizrTransferRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+  name: AddTransferManager(Action<IApizrTransferRegistryBuilder>, Action<IApizrCommonOptionsBuilder>)
+  nameWithType: FileTransferOptionsBuilderExtensions.AddTransferManager(Action<IApizrTransferRegistryBuilder>, Action<IApizrCommonOptionsBuilder>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(System.Action<Apizr.Configuring.Registry.IApizrTransferRegistryBuilder>, System.Action<Apizr.Configuring.Common.IApizrCommonOptionsBuilder>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.AddTransferManager(Action(Of IApizrTransferRegistryBuilder), Action(Of IApizrCommonOptionsBuilder))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(System.Action(Of Apizr.Configuring.Registry.IApizrTransferRegistryBuilder), System.Action(Of Apizr.Configuring.Common.IApizrCommonOptionsBuilder))
+  name.vb: AddTransferManager(Action(Of IApizrTransferRegistryBuilder), Action(Of IApizrCommonOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(System.Action{Apizr.Configuring.Registry.IApizrTransferRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+    name: AddTransferManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddTransferManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Registry.IApizrTransferRegistryBuilder
+    name: IApizrTransferRegistryBuilder
+    nameWithType: IApizrTransferRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrTransferRegistryBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+    name: IApizrCommonOptionsBuilder
+    nameWithType: IApizrCommonOptionsBuilder
+    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(System.Action{Apizr.Configuring.Registry.IApizrTransferRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+    name: AddTransferManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddTransferManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Registry.IApizrTransferRegistryBuilder
+    name: IApizrTransferRegistryBuilder
+    nameWithType: IApizrTransferRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrTransferRegistryBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+    name: IApizrCommonOptionsBuilder
+    nameWithType: IApizrCommonOptionsBuilder
+    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
@@ -1157,6 +1685,575 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  isExternal: true
+  name: AddUploadManager(IApizrRegistryBuilder, Action<IApizrProperOptionsBuilder>)
+  nameWithType: FileTransferOptionsBuilderExtensions.AddUploadManager(IApizrRegistryBuilder, Action<IApizrProperOptionsBuilder>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder, System.Action<Apizr.Configuring.Proper.IApizrProperOptionsBuilder>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.AddUploadManager(IApizrRegistryBuilder, Action(Of IApizrProperOptionsBuilder))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder, System.Action(Of Apizr.Configuring.Proper.IApizrProperOptionsBuilder))
+  name.vb: AddUploadManager(IApizrRegistryBuilder, Action(Of IApizrProperOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+    name: AddUploadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddUploadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder
+    name: IApizrRegistryBuilder
+    nameWithType: IApizrRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+    name: IApizrProperOptionsBuilder
+    nameWithType: IApizrProperOptionsBuilder
+    fullName: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+    name: AddUploadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddUploadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder
+    name: IApizrRegistryBuilder
+    nameWithType: IApizrRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+    name: IApizrProperOptionsBuilder
+    nameWithType: IApizrProperOptionsBuilder
+    fullName: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions
+  commentId: T:Apizr.FileTransferOptionsBuilderExtensions
+  parent: Apizr
+  name: FileTransferOptionsBuilderExtensions
+  nameWithType: FileTransferOptionsBuilderExtensions
+  fullName: Apizr.FileTransferOptionsBuilderExtensions
+- uid: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Registry.IApizrUploadRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Registry.IApizrUploadRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+  isExternal: true
+  name: AddUploadManager(IApizrRegistryBuilder, Action<IApizrUploadRegistryBuilder>, Action<IApizrCommonOptionsBuilder>)
+  nameWithType: FileTransferOptionsBuilderExtensions.AddUploadManager(IApizrRegistryBuilder, Action<IApizrUploadRegistryBuilder>, Action<IApizrCommonOptionsBuilder>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder, System.Action<Apizr.Configuring.Registry.IApizrUploadRegistryBuilder>, System.Action<Apizr.Configuring.Common.IApizrCommonOptionsBuilder>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.AddUploadManager(IApizrRegistryBuilder, Action(Of IApizrUploadRegistryBuilder), Action(Of IApizrCommonOptionsBuilder))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder, System.Action(Of Apizr.Configuring.Registry.IApizrUploadRegistryBuilder), System.Action(Of Apizr.Configuring.Common.IApizrCommonOptionsBuilder))
+  name.vb: AddUploadManager(IApizrRegistryBuilder, Action(Of IApizrUploadRegistryBuilder), Action(Of IApizrCommonOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Registry.IApizrUploadRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+    name: AddUploadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddUploadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder
+    name: IApizrRegistryBuilder
+    nameWithType: IApizrRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Registry.IApizrUploadRegistryBuilder
+    name: IApizrUploadRegistryBuilder
+    nameWithType: IApizrUploadRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrUploadRegistryBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+    name: IApizrCommonOptionsBuilder
+    nameWithType: IApizrCommonOptionsBuilder
+    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Registry.IApizrUploadRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+    name: AddUploadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddUploadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder
+    name: IApizrRegistryBuilder
+    nameWithType: IApizrRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Registry.IApizrUploadRegistryBuilder
+    name: IApizrUploadRegistryBuilder
+    nameWithType: IApizrUploadRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrUploadRegistryBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+    name: IApizrCommonOptionsBuilder
+    nameWithType: IApizrCommonOptionsBuilder
+    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  isExternal: true
+  name: AddDownloadManager(IApizrRegistryBuilder, Action<IApizrProperOptionsBuilder>)
+  nameWithType: FileTransferOptionsBuilderExtensions.AddDownloadManager(IApizrRegistryBuilder, Action<IApizrProperOptionsBuilder>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder, System.Action<Apizr.Configuring.Proper.IApizrProperOptionsBuilder>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.AddDownloadManager(IApizrRegistryBuilder, Action(Of IApizrProperOptionsBuilder))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder, System.Action(Of Apizr.Configuring.Proper.IApizrProperOptionsBuilder))
+  name.vb: AddDownloadManager(IApizrRegistryBuilder, Action(Of IApizrProperOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+    name: AddDownloadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddDownloadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder
+    name: IApizrRegistryBuilder
+    nameWithType: IApizrRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+    name: IApizrProperOptionsBuilder
+    nameWithType: IApizrProperOptionsBuilder
+    fullName: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+    name: AddDownloadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddDownloadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder
+    name: IApizrRegistryBuilder
+    nameWithType: IApizrRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+    name: IApizrProperOptionsBuilder
+    nameWithType: IApizrProperOptionsBuilder
+    fullName: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+  isExternal: true
+  name: AddDownloadManager(IApizrRegistryBuilder, Action<IApizrDownloadRegistryBuilder>, Action<IApizrCommonOptionsBuilder>)
+  nameWithType: FileTransferOptionsBuilderExtensions.AddDownloadManager(IApizrRegistryBuilder, Action<IApizrDownloadRegistryBuilder>, Action<IApizrCommonOptionsBuilder>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder, System.Action<Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder>, System.Action<Apizr.Configuring.Common.IApizrCommonOptionsBuilder>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.AddDownloadManager(IApizrRegistryBuilder, Action(Of IApizrDownloadRegistryBuilder), Action(Of IApizrCommonOptionsBuilder))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder, System.Action(Of Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder), System.Action(Of Apizr.Configuring.Common.IApizrCommonOptionsBuilder))
+  name.vb: AddDownloadManager(IApizrRegistryBuilder, Action(Of IApizrDownloadRegistryBuilder), Action(Of IApizrCommonOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+    name: AddDownloadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddDownloadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder
+    name: IApizrRegistryBuilder
+    nameWithType: IApizrRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder
+    name: IApizrDownloadRegistryBuilder
+    nameWithType: IApizrDownloadRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+    name: IApizrCommonOptionsBuilder
+    nameWithType: IApizrCommonOptionsBuilder
+    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+    name: AddDownloadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddDownloadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder
+    name: IApizrRegistryBuilder
+    nameWithType: IApizrRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder
+    name: IApizrDownloadRegistryBuilder
+    nameWithType: IApizrDownloadRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrDownloadRegistryBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+    name: IApizrCommonOptionsBuilder
+    nameWithType: IApizrCommonOptionsBuilder
+    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  isExternal: true
+  name: AddTransferManager(IApizrRegistryBuilder, Action<IApizrProperOptionsBuilder>)
+  nameWithType: FileTransferOptionsBuilderExtensions.AddTransferManager(IApizrRegistryBuilder, Action<IApizrProperOptionsBuilder>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(Apizr.Configuring.Registry.IApizrRegistryBuilder, System.Action<Apizr.Configuring.Proper.IApizrProperOptionsBuilder>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.AddTransferManager(IApizrRegistryBuilder, Action(Of IApizrProperOptionsBuilder))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(Apizr.Configuring.Registry.IApizrRegistryBuilder, System.Action(Of Apizr.Configuring.Proper.IApizrProperOptionsBuilder))
+  name.vb: AddTransferManager(IApizrRegistryBuilder, Action(Of IApizrProperOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+    name: AddTransferManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddTransferManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder
+    name: IApizrRegistryBuilder
+    nameWithType: IApizrRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+    name: IApizrProperOptionsBuilder
+    nameWithType: IApizrProperOptionsBuilder
+    fullName: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+    name: AddTransferManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddTransferManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder
+    name: IApizrRegistryBuilder
+    nameWithType: IApizrRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+    name: IApizrProperOptionsBuilder
+    nameWithType: IApizrProperOptionsBuilder
+    fullName: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Registry.IApizrTransferRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Registry.IApizrTransferRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+  isExternal: true
+  name: AddTransferManager(IApizrRegistryBuilder, Action<IApizrTransferRegistryBuilder>, Action<IApizrCommonOptionsBuilder>)
+  nameWithType: FileTransferOptionsBuilderExtensions.AddTransferManager(IApizrRegistryBuilder, Action<IApizrTransferRegistryBuilder>, Action<IApizrCommonOptionsBuilder>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(Apizr.Configuring.Registry.IApizrRegistryBuilder, System.Action<Apizr.Configuring.Registry.IApizrTransferRegistryBuilder>, System.Action<Apizr.Configuring.Common.IApizrCommonOptionsBuilder>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.AddTransferManager(IApizrRegistryBuilder, Action(Of IApizrTransferRegistryBuilder), Action(Of IApizrCommonOptionsBuilder))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(Apizr.Configuring.Registry.IApizrRegistryBuilder, System.Action(Of Apizr.Configuring.Registry.IApizrTransferRegistryBuilder), System.Action(Of Apizr.Configuring.Common.IApizrCommonOptionsBuilder))
+  name.vb: AddTransferManager(IApizrRegistryBuilder, Action(Of IApizrTransferRegistryBuilder), Action(Of IApizrCommonOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Registry.IApizrTransferRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+    name: AddTransferManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddTransferManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder
+    name: IApizrRegistryBuilder
+    nameWithType: IApizrRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Registry.IApizrTransferRegistryBuilder
+    name: IApizrTransferRegistryBuilder
+    nameWithType: IApizrTransferRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrTransferRegistryBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+    name: IApizrCommonOptionsBuilder
+    nameWithType: IApizrCommonOptionsBuilder
+    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Registry.IApizrTransferRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
+    name: AddTransferManager
+    nameWithType: FileTransferOptionsBuilderExtensions.AddTransferManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder
+    name: IApizrRegistryBuilder
+    nameWithType: IApizrRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Registry.IApizrTransferRegistryBuilder
+    name: IApizrTransferRegistryBuilder
+    nameWithType: IApizrTransferRegistryBuilder
+    fullName: Apizr.Configuring.Registry.IApizrTransferRegistryBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+    name: IApizrCommonOptionsBuilder
+    nameWithType: IApizrCommonOptionsBuilder
+    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr
+  commentId: N:Apizr
+  name: Apizr
+  nameWithType: Apizr
+  fullName: Apizr
 - uid: Apizr.Configuring.Registry.ApizrRegistry
   commentId: T:Apizr.Configuring.Registry.ApizrRegistry
   parent: Apizr.Configuring.Registry
@@ -3721,6 +4818,134 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.ApizrRegistryBuilder.AddWrappingManagerFor*
+  commentId: Overload:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddWrappingManagerFor
+  name: AddWrappingManagerFor
+  nameWithType: ApizrRegistryBuilder.AddWrappingManagerFor
+  fullName: Apizr.Configuring.Registry.ApizrRegistryBuilder.AddWrappingManagerFor
+- uid: System.Func{Apizr.IApizrManager{{TWebApi}},{TWrappingManager}}
+  commentId: T:System.Func{Apizr.IApizrManager{``0},``1}
+  parent: System
+  definition: System.Func`2
+  name: Func<IApizrManager<TWebApi>, TWrappingManager>
+  nameWithType: Func<IApizrManager<TWebApi>, TWrappingManager>
+  fullName: System.Func<Apizr.IApizrManager<TWebApi>, TWrappingManager>
+  nameWithType.vb: Func(Of IApizrManager(Of TWebApi), TWrappingManager)
+  fullName.vb: System.Func(Of Apizr.IApizrManager(Of TWebApi), TWrappingManager)
+  name.vb: Func(Of IApizrManager(Of TWebApi), TWrappingManager)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.IApizrManager`1
+    name: IApizrManager
+    nameWithType: IApizrManager
+    fullName: Apizr.IApizrManager
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TWebApi
+    nameWithType: TWebApi
+    fullName: TWebApi
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TWrappingManager
+    nameWithType: TWrappingManager
+    fullName: TWrappingManager
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.IApizrManager`1
+    name: IApizrManager
+    nameWithType: IApizrManager
+    fullName: Apizr.IApizrManager
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TWebApi
+    nameWithType: TWebApi
+    fullName: TWebApi
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TWrappingManager
+    nameWithType: TWrappingManager
+    fullName: TWrappingManager
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func`2
+  commentId: T:System.Func`2
+  isExternal: true
+  name: Func<T, TResult>
+  nameWithType: Func<T, TResult>
+  fullName: System.Func<T, TResult>
+  nameWithType.vb: Func(Of T, TResult)
+  fullName.vb: System.Func(Of T, TResult)
+  name.vb: Func(Of T, TResult)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
   - name: )
     nameWithType: )
     fullName: )

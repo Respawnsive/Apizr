@@ -16,19 +16,19 @@ items:
   type: Interface
   source:
     id: IApizrDownloadManager
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.FileTransfer\Transferring\Managing\IApizrDownloadManager.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Managing\IApizrDownloadManager.cs
     startLine: 9
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
   syntax:
-    content: 'public interface IApizrDownloadManager<TDownloadApi, in TDownloadParams> : IApizrDataTransferManager<TDownloadApi>, IApizrManager where TDownloadApi : IDownloadApi<TDownloadParams>'
+    content: 'public interface IApizrDownloadManager<TDownloadApi, in TDownloadParams> : IApizrTransferManagerBase<TDownloadApi>, IApizrManager where TDownloadApi : IDownloadApi<TDownloadParams>'
     typeParameters:
     - id: TDownloadApi
     - id: TDownloadParams
     content.vb: >-
       Public Interface IApizrDownloadManager(Of TDownloadApi As IDownloadApi(Of TDownloadParams), In TDownloadParams)
-          Inherits IApizrDataTransferManager(Of TDownloadApi)
+          Inherits IApizrTransferManagerBase(Of TDownloadApi)
   nameWithType.vb: IApizrDownloadManager(Of TDownloadApi, TDownloadParams)
   modifiers.csharp:
   - public
@@ -51,7 +51,7 @@ items:
   type: Method
   source:
     id: DownloadAsync
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.FileTransfer\Transferring\Managing\IApizrDownloadManager.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Managing\IApizrDownloadManager.cs
     startLine: 11
   assemblies:
   - Apizr.Integrations.FileTransfer
@@ -83,7 +83,7 @@ items:
   type: Method
   source:
     id: DownloadAsync
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.FileTransfer\Transferring\Managing\IApizrDownloadManager.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Managing\IApizrDownloadManager.cs
     startLine: 13
   assemblies:
   - Apizr.Integrations.FileTransfer

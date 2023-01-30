@@ -143,7 +143,7 @@
       <span class="xref">System.Collections.IEnumerable.GetEnumerator()</span>
     </div>
     <div>
-      <a class="xref" href="Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.html#Apizr_Extending_Configuring_Registry_IApizrExtendedConcurrentRegistryBase_AddOrUpdate_System_Type_System_Type_">IApizrExtendedConcurrentRegistryBase.AddOrUpdate(Type, Type)</a>
+      <a class="xref" href="Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.html#Apizr_Extending_Configuring_Registry_IApizrExtendedConcurrentRegistryBase_AddOrUpdateManager_System_Type_">IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager(Type)</a>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Apizr.Extending.Configuring.Registry.html">Apizr.Extending.Configuring.Registry</a></h6>
@@ -151,6 +151,61 @@
   <h5 id="Apizr_Extending_Configuring_Registry_IApizrExtendedConcurrentRegistry_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public interface IApizrExtendedConcurrentRegistry : IApizrExtendedRegistry, IApizrEnumerableRegistry, IEnumerable&lt;KeyValuePair&lt;Type, Func&lt;IApizrManager&gt;&gt;&gt;, IEnumerable, IApizrExtendedConcurrentRegistryBase</code></pre>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_GetUploadManagerFor__1_Apizr_Configuring_Registry_IApizrEnumerableRegistry_">FileTransferOptionsBuilderExtensions.GetUploadManagerFor&lt;TUploadApi&gt;(IApizrEnumerableRegistry)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_GetDownloadManagerFor__1_Apizr_Configuring_Registry_IApizrEnumerableRegistry_">FileTransferOptionsBuilderExtensions.GetDownloadManagerFor&lt;TDownloadApi&gt;(IApizrEnumerableRegistry)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_GetDownloadManagerFor__2_Apizr_Configuring_Registry_IApizrEnumerableRegistry_">FileTransferOptionsBuilderExtensions.GetDownloadManagerFor&lt;TDownloadApi, TDownloadParams&gt;(IApizrEnumerableRegistry)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_GetTransferManagerFor__1_Apizr_Configuring_Registry_IApizrEnumerableRegistry_">FileTransferOptionsBuilderExtensions.GetTransferManagerFor&lt;TTransferApi&gt;(IApizrEnumerableRegistry)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_GetTransferManagerFor__2_Apizr_Configuring_Registry_IApizrEnumerableRegistry_">FileTransferOptionsBuilderExtensions.GetTransferManagerFor&lt;TTransferApi, TDownloadParams&gt;(IApizrEnumerableRegistry)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_TryGetUploadManagerFor__1_Apizr_Configuring_Registry_IApizrEnumerableRegistry_Apizr_Transferring_Managing_IApizrUploadManager___0___">FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor&lt;TUploadApi&gt;(IApizrEnumerableRegistry, out IApizrUploadManager&lt;TUploadApi&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_TryGetDownloadManagerFor__1_Apizr_Configuring_Registry_IApizrEnumerableRegistry_Apizr_Transferring_Managing_IApizrDownloadManager___0___">FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor&lt;TDownloadApi&gt;(IApizrEnumerableRegistry, out IApizrDownloadManager&lt;TDownloadApi&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_TryGetDownloadManagerFor__2_Apizr_Configuring_Registry_IApizrEnumerableRegistry_Apizr_Transferring_Managing_IApizrDownloadManager___0___1___">FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor&lt;TDownloadApi, TDownloadParams&gt;(IApizrEnumerableRegistry, out IApizrDownloadManager&lt;TDownloadApi, TDownloadParams&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_TryGetTransferManagerFor__1_Apizr_Configuring_Registry_IApizrEnumerableRegistry_Apizr_Transferring_Managing_IApizrTransferManager___0___">FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor&lt;TTransferApi&gt;(IApizrEnumerableRegistry, out IApizrTransferManager&lt;TTransferApi&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_TryGetTransferManagerFor__2_Apizr_Configuring_Registry_IApizrEnumerableRegistry_Apizr_Transferring_Managing_IApizrTransferManager___0___1___">FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor&lt;TTransferApi, TDownloadParams&gt;(IApizrEnumerableRegistry, out IApizrTransferManager&lt;TTransferApi, TDownloadParams&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_ContainsUploadManager_Apizr_Configuring_Registry_IApizrEnumerableRegistry_">FileTransferOptionsBuilderExtensions.ContainsUploadManager(IApizrEnumerableRegistry)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_ContainsUploadManagerFor__1_Apizr_Configuring_Registry_IApizrEnumerableRegistry_">FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor&lt;TUploadApi&gt;(IApizrEnumerableRegistry)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_ContainsDownloadManager_Apizr_Configuring_Registry_IApizrEnumerableRegistry_">FileTransferOptionsBuilderExtensions.ContainsDownloadManager(IApizrEnumerableRegistry)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_ContainsDownloadManagerFor__1_Apizr_Configuring_Registry_IApizrEnumerableRegistry_">FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor&lt;TDownloadApi&gt;(IApizrEnumerableRegistry)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_ContainsDownloadManagerFor__2_Apizr_Configuring_Registry_IApizrEnumerableRegistry_">FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor&lt;TDownloadApi, TDownloadParams&gt;(IApizrEnumerableRegistry)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_ContainsTransferManager_Apizr_Configuring_Registry_IApizrEnumerableRegistry_">FileTransferOptionsBuilderExtensions.ContainsTransferManager(IApizrEnumerableRegistry)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_ContainsTransferManagerFor__1_Apizr_Configuring_Registry_IApizrEnumerableRegistry_">FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor&lt;TTransferApi&gt;(IApizrEnumerableRegistry)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_ContainsTransferManagerFor__2_Apizr_Configuring_Registry_IApizrEnumerableRegistry_">FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor&lt;TTransferApi, TDownloadParams&gt;(IApizrEnumerableRegistry)</a>
   </div>
 </article>
           </div>

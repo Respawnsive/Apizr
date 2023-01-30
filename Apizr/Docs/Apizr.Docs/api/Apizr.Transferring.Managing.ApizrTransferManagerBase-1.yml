@@ -1,40 +1,40 @@
 ### YamlMime:ManagedReference
 items:
-- uid: Apizr.Transferring.Managing.ApizrDataTransferManager`1
-  commentId: T:Apizr.Transferring.Managing.ApizrDataTransferManager`1
-  id: ApizrDataTransferManager`1
+- uid: Apizr.Transferring.Managing.ApizrTransferManagerBase`1
+  commentId: T:Apizr.Transferring.Managing.ApizrTransferManagerBase`1
+  id: ApizrTransferManagerBase`1
   parent: Apizr.Transferring.Managing
   children:
-  - Apizr.Transferring.Managing.ApizrDataTransferManager`1.#ctor(Apizr.IApizrManager{`0})
-  - Apizr.Transferring.Managing.ApizrDataTransferManager`1.TransferApiManager
+  - Apizr.Transferring.Managing.ApizrTransferManagerBase`1.#ctor(Apizr.IApizrManager{`0})
+  - Apizr.Transferring.Managing.ApizrTransferManagerBase`1.TransferApiManager
   langs:
   - csharp
   - vb
-  name: ApizrDataTransferManager<TDataTransferApi>
-  nameWithType: ApizrDataTransferManager<TDataTransferApi>
-  fullName: Apizr.Transferring.Managing.ApizrDataTransferManager<TDataTransferApi>
+  name: ApizrTransferManagerBase<TTransferApiBase>
+  nameWithType: ApizrTransferManagerBase<TTransferApiBase>
+  fullName: Apizr.Transferring.Managing.ApizrTransferManagerBase<TTransferApiBase>
   type: Class
   source:
-    id: ApizrDataTransferManager
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.FileTransfer\Transferring\Managing\ApizrDataTransferManager.cs
+    id: ApizrTransferManagerBase
+    path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Managing\ApizrTransferManagerBase.cs
     startLine: 4
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
   syntax:
-    content: 'public class ApizrDataTransferManager<TDataTransferApi> : IApizrDataTransferManager<TDataTransferApi>, IApizrManager where TDataTransferApi : IDataTransferApi'
+    content: 'public abstract class ApizrTransferManagerBase<TTransferApiBase> : IApizrTransferManagerBase<TTransferApiBase>, IApizrManager where TTransferApiBase : ITransferApiBase'
     typeParameters:
-    - id: TDataTransferApi
+    - id: TTransferApiBase
     content.vb: >-
-      Public Class ApizrDataTransferManager(Of TDataTransferApi As IDataTransferApi)
-          Implements IApizrDataTransferManager(Of TDataTransferApi), IApizrManager
+      Public MustInherit Class ApizrTransferManagerBase(Of TTransferApiBase As ITransferApiBase)
+          Implements IApizrTransferManagerBase(Of TTransferApiBase), IApizrManager
   inheritance:
   - System.Object
   derivedClasses:
   - Apizr.Transferring.Managing.ApizrDownloadManager`2
   - Apizr.Transferring.Managing.ApizrUploadManager`1
   implements:
-  - Apizr.Transferring.Managing.IApizrDataTransferManager{{TDataTransferApi}}
+  - Apizr.Transferring.Managing.IApizrTransferManagerBase{{TTransferApiBase}}
   - Apizr.IApizrManager
   inheritedMembers:
   - System.Object.Equals(System.Object)
@@ -44,78 +44,80 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  nameWithType.vb: ApizrDataTransferManager(Of TDataTransferApi)
+  nameWithType.vb: ApizrTransferManagerBase(Of TTransferApiBase)
   modifiers.csharp:
   - public
+  - abstract
   - class
   modifiers.vb:
   - Public
+  - MustInherit
   - Class
-  fullName.vb: Apizr.Transferring.Managing.ApizrDataTransferManager(Of TDataTransferApi)
-  name.vb: ApizrDataTransferManager(Of TDataTransferApi)
-- uid: Apizr.Transferring.Managing.ApizrDataTransferManager`1.TransferApiManager
-  commentId: F:Apizr.Transferring.Managing.ApizrDataTransferManager`1.TransferApiManager
+  fullName.vb: Apizr.Transferring.Managing.ApizrTransferManagerBase(Of TTransferApiBase)
+  name.vb: ApizrTransferManagerBase(Of TTransferApiBase)
+- uid: Apizr.Transferring.Managing.ApizrTransferManagerBase`1.TransferApiManager
+  commentId: F:Apizr.Transferring.Managing.ApizrTransferManagerBase`1.TransferApiManager
   id: TransferApiManager
-  parent: Apizr.Transferring.Managing.ApizrDataTransferManager`1
+  parent: Apizr.Transferring.Managing.ApizrTransferManagerBase`1
   langs:
   - csharp
   - vb
   name: TransferApiManager
-  nameWithType: ApizrDataTransferManager<TDataTransferApi>.TransferApiManager
-  fullName: Apizr.Transferring.Managing.ApizrDataTransferManager<TDataTransferApi>.TransferApiManager
+  nameWithType: ApizrTransferManagerBase<TTransferApiBase>.TransferApiManager
+  fullName: Apizr.Transferring.Managing.ApizrTransferManagerBase<TTransferApiBase>.TransferApiManager
   type: Field
   source:
     id: TransferApiManager
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.FileTransfer\Transferring\Managing\ApizrDataTransferManager.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Managing\ApizrTransferManagerBase.cs
     startLine: 6
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
   syntax:
-    content: protected readonly IApizrManager<TDataTransferApi> TransferApiManager
+    content: protected readonly IApizrManager<TTransferApiBase> TransferApiManager
     return:
-      type: Apizr.IApizrManager{{TDataTransferApi}}
-    content.vb: Protected ReadOnly TransferApiManager As IApizrManager(Of TDataTransferApi)
-  nameWithType.vb: ApizrDataTransferManager(Of TDataTransferApi).TransferApiManager
+      type: Apizr.IApizrManager{{TTransferApiBase}}
+    content.vb: Protected ReadOnly TransferApiManager As IApizrManager(Of TTransferApiBase)
+  nameWithType.vb: ApizrTransferManagerBase(Of TTransferApiBase).TransferApiManager
   modifiers.csharp:
   - protected
   - readonly
   modifiers.vb:
   - Protected
   - ReadOnly
-  fullName.vb: Apizr.Transferring.Managing.ApizrDataTransferManager(Of TDataTransferApi).TransferApiManager
-- uid: Apizr.Transferring.Managing.ApizrDataTransferManager`1.#ctor(Apizr.IApizrManager{`0})
-  commentId: M:Apizr.Transferring.Managing.ApizrDataTransferManager`1.#ctor(Apizr.IApizrManager{`0})
+  fullName.vb: Apizr.Transferring.Managing.ApizrTransferManagerBase(Of TTransferApiBase).TransferApiManager
+- uid: Apizr.Transferring.Managing.ApizrTransferManagerBase`1.#ctor(Apizr.IApizrManager{`0})
+  commentId: M:Apizr.Transferring.Managing.ApizrTransferManagerBase`1.#ctor(Apizr.IApizrManager{`0})
   id: '#ctor(Apizr.IApizrManager{`0})'
-  parent: Apizr.Transferring.Managing.ApizrDataTransferManager`1
+  parent: Apizr.Transferring.Managing.ApizrTransferManagerBase`1
   langs:
   - csharp
   - vb
-  name: ApizrDataTransferManager(IApizrManager<TDataTransferApi>)
-  nameWithType: ApizrDataTransferManager<TDataTransferApi>.ApizrDataTransferManager(IApizrManager<TDataTransferApi>)
-  fullName: Apizr.Transferring.Managing.ApizrDataTransferManager<TDataTransferApi>.ApizrDataTransferManager(Apizr.IApizrManager<TDataTransferApi>)
+  name: ApizrTransferManagerBase(IApizrManager<TTransferApiBase>)
+  nameWithType: ApizrTransferManagerBase<TTransferApiBase>.ApizrTransferManagerBase(IApizrManager<TTransferApiBase>)
+  fullName: Apizr.Transferring.Managing.ApizrTransferManagerBase<TTransferApiBase>.ApizrTransferManagerBase(Apizr.IApizrManager<TTransferApiBase>)
   type: Constructor
   source:
     id: .ctor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.FileTransfer\Transferring\Managing\ApizrDataTransferManager.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Managing\ApizrTransferManagerBase.cs
     startLine: 8
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
   syntax:
-    content: public ApizrDataTransferManager(IApizrManager<TDataTransferApi> transferApiManager)
+    content: protected ApizrTransferManagerBase(IApizrManager<TTransferApiBase> transferApiManager)
     parameters:
     - id: transferApiManager
-      type: Apizr.IApizrManager{{TDataTransferApi}}
-    content.vb: Public Sub New(transferApiManager As IApizrManager(Of TDataTransferApi))
-  overload: Apizr.Transferring.Managing.ApizrDataTransferManager`1.#ctor*
-  nameWithType.vb: ApizrDataTransferManager(Of TDataTransferApi).ApizrDataTransferManager(IApizrManager(Of TDataTransferApi))
+      type: Apizr.IApizrManager{{TTransferApiBase}}
+    content.vb: Protected Sub New(transferApiManager As IApizrManager(Of TTransferApiBase))
+  overload: Apizr.Transferring.Managing.ApizrTransferManagerBase`1.#ctor*
+  nameWithType.vb: ApizrTransferManagerBase(Of TTransferApiBase).ApizrTransferManagerBase(IApizrManager(Of TTransferApiBase))
   modifiers.csharp:
-  - public
+  - protected
   modifiers.vb:
-  - Public
-  fullName.vb: Apizr.Transferring.Managing.ApizrDataTransferManager(Of TDataTransferApi).ApizrDataTransferManager(Apizr.IApizrManager(Of TDataTransferApi))
-  name.vb: ApizrDataTransferManager(IApizrManager(Of TDataTransferApi))
+  - Protected
+  fullName.vb: Apizr.Transferring.Managing.ApizrTransferManagerBase(Of TTransferApiBase).ApizrTransferManagerBase(Apizr.IApizrManager(Of TTransferApiBase))
+  name.vb: ApizrTransferManagerBase(IApizrManager(Of TTransferApiBase))
 references:
 - uid: Apizr.Transferring.Managing
   commentId: N:Apizr.Transferring.Managing
@@ -129,41 +131,41 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Apizr.Transferring.Managing.IApizrDataTransferManager{{TDataTransferApi}}
-  commentId: T:Apizr.Transferring.Managing.IApizrDataTransferManager{`0}
+- uid: Apizr.Transferring.Managing.IApizrTransferManagerBase{{TTransferApiBase}}
+  commentId: T:Apizr.Transferring.Managing.IApizrTransferManagerBase{`0}
   parent: Apizr.Transferring.Managing
-  definition: Apizr.Transferring.Managing.IApizrDataTransferManager`1
-  name: IApizrDataTransferManager<TDataTransferApi>
-  nameWithType: IApizrDataTransferManager<TDataTransferApi>
-  fullName: Apizr.Transferring.Managing.IApizrDataTransferManager<TDataTransferApi>
-  nameWithType.vb: IApizrDataTransferManager(Of TDataTransferApi)
-  fullName.vb: Apizr.Transferring.Managing.IApizrDataTransferManager(Of TDataTransferApi)
-  name.vb: IApizrDataTransferManager(Of TDataTransferApi)
+  definition: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+  name: IApizrTransferManagerBase<TTransferApiBase>
+  nameWithType: IApizrTransferManagerBase<TTransferApiBase>
+  fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase<TTransferApiBase>
+  nameWithType.vb: IApizrTransferManagerBase(Of TTransferApiBase)
+  fullName.vb: Apizr.Transferring.Managing.IApizrTransferManagerBase(Of TTransferApiBase)
+  name.vb: IApizrTransferManagerBase(Of TTransferApiBase)
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrDataTransferManager`1
-    name: IApizrDataTransferManager
-    nameWithType: IApizrDataTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrDataTransferManager
+  - uid: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+    name: IApizrTransferManagerBase
+    nameWithType: IApizrTransferManagerBase
+    fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase
   - name: <
     nameWithType: <
     fullName: <
-  - name: TDataTransferApi
-    nameWithType: TDataTransferApi
-    fullName: TDataTransferApi
+  - name: TTransferApiBase
+    nameWithType: TTransferApiBase
+    fullName: TTransferApiBase
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrDataTransferManager`1
-    name: IApizrDataTransferManager
-    nameWithType: IApizrDataTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrDataTransferManager
+  - uid: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+    name: IApizrTransferManagerBase
+    nameWithType: IApizrTransferManagerBase
+    fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TDataTransferApi
-    nameWithType: TDataTransferApi
-    fullName: TDataTransferApi
+  - name: TTransferApiBase
+    nameWithType: TTransferApiBase
+    fullName: TTransferApiBase
   - name: )
     nameWithType: )
     fullName: )
@@ -458,39 +460,39 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: Apizr.Transferring.Managing.IApizrDataTransferManager`1
-  commentId: T:Apizr.Transferring.Managing.IApizrDataTransferManager`1
-  name: IApizrDataTransferManager<TDataTransferApi>
-  nameWithType: IApizrDataTransferManager<TDataTransferApi>
-  fullName: Apizr.Transferring.Managing.IApizrDataTransferManager<TDataTransferApi>
-  nameWithType.vb: IApizrDataTransferManager(Of TDataTransferApi)
-  fullName.vb: Apizr.Transferring.Managing.IApizrDataTransferManager(Of TDataTransferApi)
-  name.vb: IApizrDataTransferManager(Of TDataTransferApi)
+- uid: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+  commentId: T:Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+  name: IApizrTransferManagerBase<TTransferApiBase>
+  nameWithType: IApizrTransferManagerBase<TTransferApiBase>
+  fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase<TTransferApiBase>
+  nameWithType.vb: IApizrTransferManagerBase(Of TTransferApiBase)
+  fullName.vb: Apizr.Transferring.Managing.IApizrTransferManagerBase(Of TTransferApiBase)
+  name.vb: IApizrTransferManagerBase(Of TTransferApiBase)
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrDataTransferManager`1
-    name: IApizrDataTransferManager
-    nameWithType: IApizrDataTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrDataTransferManager
+  - uid: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+    name: IApizrTransferManagerBase
+    nameWithType: IApizrTransferManagerBase
+    fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase
   - name: <
     nameWithType: <
     fullName: <
-  - name: TDataTransferApi
-    nameWithType: TDataTransferApi
-    fullName: TDataTransferApi
+  - name: TTransferApiBase
+    nameWithType: TTransferApiBase
+    fullName: TTransferApiBase
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrDataTransferManager`1
-    name: IApizrDataTransferManager
-    nameWithType: IApizrDataTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrDataTransferManager
+  - uid: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+    name: IApizrTransferManagerBase
+    nameWithType: IApizrTransferManagerBase
+    fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TDataTransferApi
-    nameWithType: TDataTransferApi
-    fullName: TDataTransferApi
+  - name: TTransferApiBase
+    nameWithType: TTransferApiBase
+    fullName: TTransferApiBase
   - name: )
     nameWithType: )
     fullName: )
@@ -499,16 +501,16 @@ references:
   name: Apizr
   nameWithType: Apizr
   fullName: Apizr
-- uid: Apizr.IApizrManager{{TDataTransferApi}}
+- uid: Apizr.IApizrManager{{TTransferApiBase}}
   commentId: T:Apizr.IApizrManager{`0}
   parent: Apizr
   definition: Apizr.IApizrManager`1
-  name: IApizrManager<TDataTransferApi>
-  nameWithType: IApizrManager<TDataTransferApi>
-  fullName: Apizr.IApizrManager<TDataTransferApi>
-  nameWithType.vb: IApizrManager(Of TDataTransferApi)
-  fullName.vb: Apizr.IApizrManager(Of TDataTransferApi)
-  name.vb: IApizrManager(Of TDataTransferApi)
+  name: IApizrManager<TTransferApiBase>
+  nameWithType: IApizrManager<TTransferApiBase>
+  fullName: Apizr.IApizrManager<TTransferApiBase>
+  nameWithType.vb: IApizrManager(Of TTransferApiBase)
+  fullName.vb: Apizr.IApizrManager(Of TTransferApiBase)
+  name.vb: IApizrManager(Of TTransferApiBase)
   spec.csharp:
   - uid: Apizr.IApizrManager`1
     name: IApizrManager
@@ -517,9 +519,9 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - name: TDataTransferApi
-    nameWithType: TDataTransferApi
-    fullName: TDataTransferApi
+  - name: TTransferApiBase
+    nameWithType: TTransferApiBase
+    fullName: TTransferApiBase
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -531,9 +533,9 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TDataTransferApi
-    nameWithType: TDataTransferApi
-    fullName: TDataTransferApi
+  - name: TTransferApiBase
+    nameWithType: TTransferApiBase
+    fullName: TTransferApiBase
   - name: )
     nameWithType: )
     fullName: )
@@ -573,10 +575,10 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Transferring.Managing.ApizrDataTransferManager`1.#ctor*
-  commentId: Overload:Apizr.Transferring.Managing.ApizrDataTransferManager`1.#ctor
-  name: ApizrDataTransferManager
-  nameWithType: ApizrDataTransferManager<TDataTransferApi>.ApizrDataTransferManager
-  fullName: Apizr.Transferring.Managing.ApizrDataTransferManager<TDataTransferApi>.ApizrDataTransferManager
-  nameWithType.vb: ApizrDataTransferManager(Of TDataTransferApi).ApizrDataTransferManager
-  fullName.vb: Apizr.Transferring.Managing.ApizrDataTransferManager(Of TDataTransferApi).ApizrDataTransferManager
+- uid: Apizr.Transferring.Managing.ApizrTransferManagerBase`1.#ctor*
+  commentId: Overload:Apizr.Transferring.Managing.ApizrTransferManagerBase`1.#ctor
+  name: ApizrTransferManagerBase
+  nameWithType: ApizrTransferManagerBase<TTransferApiBase>.ApizrTransferManagerBase
+  fullName: Apizr.Transferring.Managing.ApizrTransferManagerBase<TTransferApiBase>.ApizrTransferManagerBase
+  nameWithType.vb: ApizrTransferManagerBase(Of TTransferApiBase).ApizrTransferManagerBase
+  fullName.vb: Apizr.Transferring.Managing.ApizrTransferManagerBase(Of TTransferApiBase).ApizrTransferManagerBase

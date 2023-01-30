@@ -5,7 +5,7 @@ items:
   id: ApizrRegistry
   parent: Apizr.Configuring.Registry
   children:
-  - Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManagerFor(System.Type,System.Func{Apizr.IApizrManager})
+  - Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManager(System.Type,System.Func{Apizr.IApizrManager})
   - Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManagerFor``1(System.Func{Apizr.IApizrManager{``0}})
   - Apizr.Configuring.Registry.ApizrRegistry.Populate(System.Action{System.Type,System.Func{System.Object}})
   langs:
@@ -17,7 +17,7 @@ items:
   type: Class
   source:
     id: ApizrRegistry
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistry.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Registry\ApizrRegistry.cs
     startLine: 8
   assemblies:
   - Apizr
@@ -46,17 +46,20 @@ items:
   - Apizr.Configuring.Registry.ApizrRegistryBase.GetCrudManagerFor``3
   - Apizr.Configuring.Registry.ApizrRegistryBase.GetCrudManagerFor``4
   - Apizr.Configuring.Registry.ApizrRegistryBase.GetManagerFor``1
+  - Apizr.Configuring.Registry.ApizrRegistryBase.GetManagerInternal``1
   - Apizr.Configuring.Registry.ApizrRegistryBase.TryGetCrudManagerFor``1(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{{T},System.Int32,System.Collections.Generic.IEnumerable{{T}},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
   - Apizr.Configuring.Registry.ApizrRegistryBase.TryGetCrudManagerFor``2(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{{T},{TKey},System.Collections.Generic.IEnumerable{{T}},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
   - Apizr.Configuring.Registry.ApizrRegistryBase.TryGetCrudManagerFor``3(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{{T},{TKey},{TReadAllResult},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)
   - Apizr.Configuring.Registry.ApizrRegistryBase.TryGetCrudManagerFor``4(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{{T},{TKey},{TReadAllResult},{TReadAllParams}}}@)
   - Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerFor``1(Apizr.IApizrManager{{TWebApi}}@)
+  - Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerInternal``1({TApizrManager}@)
   - Apizr.Configuring.Registry.ApizrRegistryBase.Count
   - Apizr.Configuring.Registry.ApizrRegistryBase.ContainsCrudManagerFor``1
   - Apizr.Configuring.Registry.ApizrRegistryBase.ContainsCrudManagerFor``2
   - Apizr.Configuring.Registry.ApizrRegistryBase.ContainsCrudManagerFor``3
   - Apizr.Configuring.Registry.ApizrRegistryBase.ContainsCrudManagerFor``4
   - Apizr.Configuring.Registry.ApizrRegistryBase.ContainsManagerFor``1
+  - Apizr.Configuring.Registry.ApizrRegistryBase.ContainsManagerInternal``1
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -65,6 +68,24 @@ items:
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
   extensionMethods:
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.GetUploadManagerFor``1
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor``1
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor``2
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor``1
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor``2
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor``1(Apizr.Transferring.Managing.IApizrUploadManager{{TUploadApi}}@)
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor``1(Apizr.Transferring.Managing.IApizrDownloadManager{{TDownloadApi}}@)
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor``2(Apizr.Transferring.Managing.IApizrDownloadManager{{TDownloadApi},{TDownloadParams}}@)
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor``1(Apizr.Transferring.Managing.IApizrTransferManager{{TTransferApi}}@)
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor``2(Apizr.Transferring.Managing.IApizrTransferManager{{TTransferApi},{TDownloadParams}}@)
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManager
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor``1
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManager
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor``1
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor``2
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManager
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor``1
+  - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor``2
   - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.Extending.ApizrRegistryExtensions.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{{TWebApi},System.Threading.Tasks.Task}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.Extending.ApizrRegistryExtensions.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,{TWebApi},System.Threading.Tasks.Task}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.Extending.ApizrRegistryExtensions.ExecuteAsync``3(System.Linq.Expressions.Expression{System.Func{{TWebApi},{TApiData},System.Threading.Tasks.Task}},{TModelData},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -99,7 +120,7 @@ items:
   type: Method
   source:
     id: AddOrUpdateManagerFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistry.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Registry\ApizrRegistry.cs
     startLine: 21
   assemblies:
   - Apizr
@@ -121,41 +142,41 @@ items:
   - Public
   fullName.vb: Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManagerFor(Of TWebApi)(System.Func(Of Apizr.IApizrManager(Of TWebApi)))
   name.vb: AddOrUpdateManagerFor(Of TWebApi)(Func(Of IApizrManager(Of TWebApi)))
-- uid: Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManagerFor(System.Type,System.Func{Apizr.IApizrManager})
-  commentId: M:Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManagerFor(System.Type,System.Func{Apizr.IApizrManager})
-  id: AddOrUpdateManagerFor(System.Type,System.Func{Apizr.IApizrManager})
+- uid: Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManager(System.Type,System.Func{Apizr.IApizrManager})
+  commentId: M:Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManager(System.Type,System.Func{Apizr.IApizrManager})
+  id: AddOrUpdateManager(System.Type,System.Func{Apizr.IApizrManager})
   parent: Apizr.Configuring.Registry.ApizrRegistry
   langs:
   - csharp
   - vb
-  name: AddOrUpdateManagerFor(Type, Func<IApizrManager>)
-  nameWithType: ApizrRegistry.AddOrUpdateManagerFor(Type, Func<IApizrManager>)
-  fullName: Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManagerFor(System.Type, System.Func<Apizr.IApizrManager>)
+  name: AddOrUpdateManager(Type, Func<IApizrManager>)
+  nameWithType: ApizrRegistry.AddOrUpdateManager(Type, Func<IApizrManager>)
+  fullName: Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManager(System.Type, System.Func<Apizr.IApizrManager>)
   type: Method
   source:
-    id: AddOrUpdateManagerFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistry.cs
+    id: AddOrUpdateManager
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Registry\ApizrRegistry.cs
     startLine: 25
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Registry
   example: []
   syntax:
-    content: public void AddOrUpdateManagerFor(Type webApiType, Func<IApizrManager> managerFactory)
+    content: public void AddOrUpdateManager(Type webApiType, Func<IApizrManager> managerFactory)
     parameters:
     - id: webApiType
       type: System.Type
     - id: managerFactory
       type: System.Func{Apizr.IApizrManager}
-    content.vb: Public Sub AddOrUpdateManagerFor(webApiType As Type, managerFactory As Func(Of IApizrManager))
-  overload: Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManagerFor*
-  nameWithType.vb: ApizrRegistry.AddOrUpdateManagerFor(Type, Func(Of IApizrManager))
+    content.vb: Public Sub AddOrUpdateManager(webApiType As Type, managerFactory As Func(Of IApizrManager))
+  overload: Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManager*
+  nameWithType.vb: ApizrRegistry.AddOrUpdateManager(Type, Func(Of IApizrManager))
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManagerFor(System.Type, System.Func(Of Apizr.IApizrManager))
-  name.vb: AddOrUpdateManagerFor(Type, Func(Of IApizrManager))
+  fullName.vb: Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManager(System.Type, System.Func(Of Apizr.IApizrManager))
+  name.vb: AddOrUpdateManager(Type, Func(Of IApizrManager))
 - uid: Apizr.Configuring.Registry.ApizrRegistry.Populate(System.Action{System.Type,System.Func{System.Object}})
   commentId: M:Apizr.Configuring.Registry.ApizrRegistry.Populate(System.Action{System.Type,System.Func{System.Object}})
   id: Populate(System.Action{System.Type,System.Func{System.Object}})
@@ -169,7 +190,7 @@ items:
   type: Method
   source:
     id: Populate
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Registry\ApizrRegistry.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Registry\ApizrRegistry.cs
     startLine: 33
   assemblies:
   - Apizr
@@ -540,6 +561,37 @@ references:
     name: GetManagerFor(Of TWebApi)
     nameWithType: ApizrRegistryBase.GetManagerFor(Of TWebApi)
     fullName: Apizr.Configuring.Registry.ApizrRegistryBase.GetManagerFor(Of TWebApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.ApizrRegistryBase.GetManagerInternal``1
+  commentId: M:Apizr.Configuring.Registry.ApizrRegistryBase.GetManagerInternal``1
+  parent: Apizr.Configuring.Registry.ApizrRegistryBase
+  name: GetManagerInternal<TApizrManager>()
+  nameWithType: ApizrRegistryBase.GetManagerInternal<TApizrManager>()
+  fullName: Apizr.Configuring.Registry.ApizrRegistryBase.GetManagerInternal<TApizrManager>()
+  nameWithType.vb: ApizrRegistryBase.GetManagerInternal(Of TApizrManager)()
+  fullName.vb: Apizr.Configuring.Registry.ApizrRegistryBase.GetManagerInternal(Of TApizrManager)()
+  name.vb: GetManagerInternal(Of TApizrManager)()
+  spec.csharp:
+  - uid: Apizr.Configuring.Registry.ApizrRegistryBase.GetManagerInternal``1
+    name: GetManagerInternal<TApizrManager>
+    nameWithType: ApizrRegistryBase.GetManagerInternal<TApizrManager>
+    fullName: Apizr.Configuring.Registry.ApizrRegistryBase.GetManagerInternal<TApizrManager>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Registry.ApizrRegistryBase.GetManagerInternal``1
+    name: GetManagerInternal(Of TApizrManager)
+    nameWithType: ApizrRegistryBase.GetManagerInternal(Of TApizrManager)
+    fullName: Apizr.Configuring.Registry.ApizrRegistryBase.GetManagerInternal(Of TApizrManager)
   - name: (
     nameWithType: (
     fullName: (
@@ -1234,6 +1286,44 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerInternal``1({TApizrManager}@)
+  commentId: M:Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerInternal``1(``0@)
+  parent: Apizr.Configuring.Registry.ApizrRegistryBase
+  definition: Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerInternal``1(``0@)
+  name: TryGetManagerInternal<TApizrManager>(TApizrManager)
+  nameWithType: ApizrRegistryBase.TryGetManagerInternal<TApizrManager>(TApizrManager)
+  fullName: Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerInternal<TApizrManager>(TApizrManager)
+  nameWithType.vb: ApizrRegistryBase.TryGetManagerInternal(Of TApizrManager)(TApizrManager)
+  fullName.vb: Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerInternal(Of TApizrManager)(TApizrManager)
+  name.vb: TryGetManagerInternal(Of TApizrManager)(TApizrManager)
+  spec.csharp:
+  - uid: Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerInternal``1(``0@)
+    name: TryGetManagerInternal<TApizrManager>
+    nameWithType: ApizrRegistryBase.TryGetManagerInternal<TApizrManager>
+    fullName: Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerInternal<TApizrManager>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TApizrManager
+    nameWithType: TApizrManager
+    fullName: TApizrManager
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerInternal``1(``0@)
+    name: TryGetManagerInternal(Of TApizrManager)
+    nameWithType: ApizrRegistryBase.TryGetManagerInternal(Of TApizrManager)
+    fullName: Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerInternal(Of TApizrManager)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TApizrManager
+    nameWithType: TApizrManager
+    fullName: TApizrManager
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Configuring.Registry.ApizrRegistryBase.Count
   commentId: P:Apizr.Configuring.Registry.ApizrRegistryBase.Count
   parent: Apizr.Configuring.Registry.ApizrRegistryBase
@@ -1389,6 +1479,37 @@ references:
     name: ContainsManagerFor(Of TWebApi)
     nameWithType: ApizrRegistryBase.ContainsManagerFor(Of TWebApi)
     fullName: Apizr.Configuring.Registry.ApizrRegistryBase.ContainsManagerFor(Of TWebApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.ApizrRegistryBase.ContainsManagerInternal``1
+  commentId: M:Apizr.Configuring.Registry.ApizrRegistryBase.ContainsManagerInternal``1
+  parent: Apizr.Configuring.Registry.ApizrRegistryBase
+  name: ContainsManagerInternal<TApizrManager>()
+  nameWithType: ApizrRegistryBase.ContainsManagerInternal<TApizrManager>()
+  fullName: Apizr.Configuring.Registry.ApizrRegistryBase.ContainsManagerInternal<TApizrManager>()
+  nameWithType.vb: ApizrRegistryBase.ContainsManagerInternal(Of TApizrManager)()
+  fullName.vb: Apizr.Configuring.Registry.ApizrRegistryBase.ContainsManagerInternal(Of TApizrManager)()
+  name.vb: ContainsManagerInternal(Of TApizrManager)()
+  spec.csharp:
+  - uid: Apizr.Configuring.Registry.ApizrRegistryBase.ContainsManagerInternal``1
+    name: ContainsManagerInternal<TApizrManager>
+    nameWithType: ApizrRegistryBase.ContainsManagerInternal<TApizrManager>
+    fullName: Apizr.Configuring.Registry.ApizrRegistryBase.ContainsManagerInternal<TApizrManager>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Registry.ApizrRegistryBase.ContainsManagerInternal``1
+    name: ContainsManagerInternal(Of TApizrManager)
+    nameWithType: ApizrRegistryBase.ContainsManagerInternal(Of TApizrManager)
+    fullName: Apizr.Configuring.Registry.ApizrRegistryBase.ContainsManagerInternal(Of TApizrManager)
   - name: (
     nameWithType: (
     fullName: (
@@ -1668,6 +1789,727 @@ references:
     nameWithType: Object.ToString
     fullName: System.Object.ToString
     isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.GetUploadManagerFor``1
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.GetUploadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.GetUploadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: GetUploadManagerFor<TUploadApi>()
+  nameWithType: FileTransferOptionsBuilderExtensions.GetUploadManagerFor<TUploadApi>()
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.GetUploadManagerFor<TUploadApi>()
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.GetUploadManagerFor(Of TUploadApi)()
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.GetUploadManagerFor(Of TUploadApi)()
+  name.vb: GetUploadManagerFor(Of TUploadApi)()
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.GetUploadManagerFor``1
+    name: GetUploadManagerFor<TUploadApi>
+    nameWithType: FileTransferOptionsBuilderExtensions.GetUploadManagerFor<TUploadApi>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.GetUploadManagerFor<TUploadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.GetUploadManagerFor``1
+    name: GetUploadManagerFor(Of TUploadApi)
+    nameWithType: FileTransferOptionsBuilderExtensions.GetUploadManagerFor(Of TUploadApi)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.GetUploadManagerFor(Of TUploadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor``1
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: GetDownloadManagerFor<TDownloadApi>()
+  nameWithType: FileTransferOptionsBuilderExtensions.GetDownloadManagerFor<TDownloadApi>()
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor<TDownloadApi>()
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.GetDownloadManagerFor(Of TDownloadApi)()
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor(Of TDownloadApi)()
+  name.vb: GetDownloadManagerFor(Of TDownloadApi)()
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor``1
+    name: GetDownloadManagerFor<TDownloadApi>
+    nameWithType: FileTransferOptionsBuilderExtensions.GetDownloadManagerFor<TDownloadApi>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor<TDownloadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor``1
+    name: GetDownloadManagerFor(Of TDownloadApi)
+    nameWithType: FileTransferOptionsBuilderExtensions.GetDownloadManagerFor(Of TDownloadApi)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor(Of TDownloadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor``2
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: GetDownloadManagerFor<TDownloadApi, TDownloadParams>()
+  nameWithType: FileTransferOptionsBuilderExtensions.GetDownloadManagerFor<TDownloadApi, TDownloadParams>()
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor<TDownloadApi, TDownloadParams>()
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.GetDownloadManagerFor(Of TDownloadApi, TDownloadParams)()
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor(Of TDownloadApi, TDownloadParams)()
+  name.vb: GetDownloadManagerFor(Of TDownloadApi, TDownloadParams)()
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor``2
+    name: GetDownloadManagerFor<TDownloadApi, TDownloadParams>
+    nameWithType: FileTransferOptionsBuilderExtensions.GetDownloadManagerFor<TDownloadApi, TDownloadParams>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor<TDownloadApi, TDownloadParams>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor``2
+    name: GetDownloadManagerFor(Of TDownloadApi, TDownloadParams)
+    nameWithType: FileTransferOptionsBuilderExtensions.GetDownloadManagerFor(Of TDownloadApi, TDownloadParams)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor(Of TDownloadApi, TDownloadParams)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor``1
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: GetTransferManagerFor<TTransferApi>()
+  nameWithType: FileTransferOptionsBuilderExtensions.GetTransferManagerFor<TTransferApi>()
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor<TTransferApi>()
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.GetTransferManagerFor(Of TTransferApi)()
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor(Of TTransferApi)()
+  name.vb: GetTransferManagerFor(Of TTransferApi)()
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor``1
+    name: GetTransferManagerFor<TTransferApi>
+    nameWithType: FileTransferOptionsBuilderExtensions.GetTransferManagerFor<TTransferApi>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor<TTransferApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor``1
+    name: GetTransferManagerFor(Of TTransferApi)
+    nameWithType: FileTransferOptionsBuilderExtensions.GetTransferManagerFor(Of TTransferApi)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor(Of TTransferApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor``2
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: GetTransferManagerFor<TTransferApi, TDownloadParams>()
+  nameWithType: FileTransferOptionsBuilderExtensions.GetTransferManagerFor<TTransferApi, TDownloadParams>()
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor<TTransferApi, TDownloadParams>()
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.GetTransferManagerFor(Of TTransferApi, TDownloadParams)()
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor(Of TTransferApi, TDownloadParams)()
+  name.vb: GetTransferManagerFor(Of TTransferApi, TDownloadParams)()
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor``2
+    name: GetTransferManagerFor<TTransferApi, TDownloadParams>
+    nameWithType: FileTransferOptionsBuilderExtensions.GetTransferManagerFor<TTransferApi, TDownloadParams>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor<TTransferApi, TDownloadParams>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor``2
+    name: GetTransferManagerFor(Of TTransferApi, TDownloadParams)
+    nameWithType: FileTransferOptionsBuilderExtensions.GetTransferManagerFor(Of TTransferApi, TDownloadParams)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor(Of TTransferApi, TDownloadParams)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor``1(Apizr.Transferring.Managing.IApizrUploadManager{{TUploadApi}}@)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrUploadManager{``0}@)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrUploadManager{``0}@)
+  name: TryGetUploadManagerFor<TUploadApi>(IApizrUploadManager<TUploadApi>)
+  nameWithType: FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor<TUploadApi>(IApizrUploadManager<TUploadApi>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor<TUploadApi>(Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor(Of TUploadApi)(IApizrUploadManager(Of TUploadApi))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor(Of TUploadApi)(Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi))
+  name.vb: TryGetUploadManagerFor(Of TUploadApi)(IApizrUploadManager(Of TUploadApi))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor``1(Apizr.Transferring.Managing.IApizrUploadManager{``0}@)
+    name: TryGetUploadManagerFor<TUploadApi>
+    nameWithType: FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor<TUploadApi>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor<TUploadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1
+    name: IApizrUploadManager
+    nameWithType: IApizrUploadManager
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TUploadApi
+    nameWithType: TUploadApi
+    fullName: TUploadApi
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor``1(Apizr.Transferring.Managing.IApizrUploadManager{``0}@)
+    name: TryGetUploadManagerFor(Of TUploadApi)
+    nameWithType: FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor(Of TUploadApi)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor(Of TUploadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1
+    name: IApizrUploadManager
+    nameWithType: IApizrUploadManager
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TUploadApi
+    nameWithType: TUploadApi
+    fullName: TUploadApi
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor``1(Apizr.Transferring.Managing.IApizrDownloadManager{{TDownloadApi}}@)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrDownloadManager{``0}@)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrDownloadManager{``0}@)
+  name: TryGetDownloadManagerFor<TDownloadApi>(IApizrDownloadManager<TDownloadApi>)
+  nameWithType: FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor<TDownloadApi>(IApizrDownloadManager<TDownloadApi>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor<TDownloadApi>(Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor(Of TDownloadApi)(IApizrDownloadManager(Of TDownloadApi))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor(Of TDownloadApi)(Apizr.Transferring.Managing.IApizrDownloadManager(Of TDownloadApi))
+  name.vb: TryGetDownloadManagerFor(Of TDownloadApi)(IApizrDownloadManager(Of TDownloadApi))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor``1(Apizr.Transferring.Managing.IApizrDownloadManager{``0}@)
+    name: TryGetDownloadManagerFor<TDownloadApi>
+    nameWithType: FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor<TDownloadApi>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor<TDownloadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`1
+    name: IApizrDownloadManager
+    nameWithType: IApizrDownloadManager
+    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TDownloadApi
+    nameWithType: TDownloadApi
+    fullName: TDownloadApi
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor``1(Apizr.Transferring.Managing.IApizrDownloadManager{``0}@)
+    name: TryGetDownloadManagerFor(Of TDownloadApi)
+    nameWithType: FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor(Of TDownloadApi)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor(Of TDownloadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`1
+    name: IApizrDownloadManager
+    nameWithType: IApizrDownloadManager
+    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TDownloadApi
+    nameWithType: TDownloadApi
+    fullName: TDownloadApi
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor``2(Apizr.Transferring.Managing.IApizrDownloadManager{{TDownloadApi},{TDownloadParams}}@)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrDownloadManager{``0,``1}@)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrDownloadManager{``0,``1}@)
+  name: TryGetDownloadManagerFor<TDownloadApi, TDownloadParams>(IApizrDownloadManager<TDownloadApi, TDownloadParams>)
+  nameWithType: FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor<TDownloadApi, TDownloadParams>(IApizrDownloadManager<TDownloadApi, TDownloadParams>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor<TDownloadApi, TDownloadParams>(Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, TDownloadParams>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor(Of TDownloadApi, TDownloadParams)(IApizrDownloadManager(Of TDownloadApi, TDownloadParams))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor(Of TDownloadApi, TDownloadParams)(Apizr.Transferring.Managing.IApizrDownloadManager(Of TDownloadApi, TDownloadParams))
+  name.vb: TryGetDownloadManagerFor(Of TDownloadApi, TDownloadParams)(IApizrDownloadManager(Of TDownloadApi, TDownloadParams))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor``2(Apizr.Transferring.Managing.IApizrDownloadManager{``0,``1}@)
+    name: TryGetDownloadManagerFor<TDownloadApi, TDownloadParams>
+    nameWithType: FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor<TDownloadApi, TDownloadParams>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor<TDownloadApi, TDownloadParams>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
+    name: IApizrDownloadManager
+    nameWithType: IApizrDownloadManager
+    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TDownloadApi
+    nameWithType: TDownloadApi
+    fullName: TDownloadApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TDownloadParams
+    nameWithType: TDownloadParams
+    fullName: TDownloadParams
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor``2(Apizr.Transferring.Managing.IApizrDownloadManager{``0,``1}@)
+    name: TryGetDownloadManagerFor(Of TDownloadApi, TDownloadParams)
+    nameWithType: FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor(Of TDownloadApi, TDownloadParams)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor(Of TDownloadApi, TDownloadParams)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
+    name: IApizrDownloadManager
+    nameWithType: IApizrDownloadManager
+    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TDownloadApi
+    nameWithType: TDownloadApi
+    fullName: TDownloadApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TDownloadParams
+    nameWithType: TDownloadParams
+    fullName: TDownloadParams
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor``1(Apizr.Transferring.Managing.IApizrTransferManager{{TTransferApi}}@)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrTransferManager{``0}@)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrTransferManager{``0}@)
+  name: TryGetTransferManagerFor<TTransferApi>(IApizrTransferManager<TTransferApi>)
+  nameWithType: FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor<TTransferApi>(IApizrTransferManager<TTransferApi>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor<TTransferApi>(Apizr.Transferring.Managing.IApizrTransferManager<TTransferApi>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor(Of TTransferApi)(IApizrTransferManager(Of TTransferApi))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor(Of TTransferApi)(Apizr.Transferring.Managing.IApizrTransferManager(Of TTransferApi))
+  name.vb: TryGetTransferManagerFor(Of TTransferApi)(IApizrTransferManager(Of TTransferApi))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor``1(Apizr.Transferring.Managing.IApizrTransferManager{``0}@)
+    name: TryGetTransferManagerFor<TTransferApi>
+    nameWithType: FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor<TTransferApi>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor<TTransferApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Transferring.Managing.IApizrTransferManager`1
+    name: IApizrTransferManager
+    nameWithType: IApizrTransferManager
+    fullName: Apizr.Transferring.Managing.IApizrTransferManager
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TTransferApi
+    nameWithType: TTransferApi
+    fullName: TTransferApi
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor``1(Apizr.Transferring.Managing.IApizrTransferManager{``0}@)
+    name: TryGetTransferManagerFor(Of TTransferApi)
+    nameWithType: FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor(Of TTransferApi)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor(Of TTransferApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Transferring.Managing.IApizrTransferManager`1
+    name: IApizrTransferManager
+    nameWithType: IApizrTransferManager
+    fullName: Apizr.Transferring.Managing.IApizrTransferManager
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TTransferApi
+    nameWithType: TTransferApi
+    fullName: TTransferApi
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor``2(Apizr.Transferring.Managing.IApizrTransferManager{{TTransferApi},{TDownloadParams}}@)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrTransferManager{``0,``1}@)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrTransferManager{``0,``1}@)
+  name: TryGetTransferManagerFor<TTransferApi, TDownloadParams>(IApizrTransferManager<TTransferApi, TDownloadParams>)
+  nameWithType: FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor<TTransferApi, TDownloadParams>(IApizrTransferManager<TTransferApi, TDownloadParams>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor<TTransferApi, TDownloadParams>(Apizr.Transferring.Managing.IApizrTransferManager<TTransferApi, TDownloadParams>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor(Of TTransferApi, TDownloadParams)(IApizrTransferManager(Of TTransferApi, TDownloadParams))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor(Of TTransferApi, TDownloadParams)(Apizr.Transferring.Managing.IApizrTransferManager(Of TTransferApi, TDownloadParams))
+  name.vb: TryGetTransferManagerFor(Of TTransferApi, TDownloadParams)(IApizrTransferManager(Of TTransferApi, TDownloadParams))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor``2(Apizr.Transferring.Managing.IApizrTransferManager{``0,``1}@)
+    name: TryGetTransferManagerFor<TTransferApi, TDownloadParams>
+    nameWithType: FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor<TTransferApi, TDownloadParams>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor<TTransferApi, TDownloadParams>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Transferring.Managing.IApizrTransferManager`2
+    name: IApizrTransferManager
+    nameWithType: IApizrTransferManager
+    fullName: Apizr.Transferring.Managing.IApizrTransferManager
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TTransferApi
+    nameWithType: TTransferApi
+    fullName: TTransferApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TDownloadParams
+    nameWithType: TDownloadParams
+    fullName: TDownloadParams
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor``2(Apizr.Transferring.Managing.IApizrTransferManager{``0,``1}@)
+    name: TryGetTransferManagerFor(Of TTransferApi, TDownloadParams)
+    nameWithType: FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor(Of TTransferApi, TDownloadParams)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor(Of TTransferApi, TDownloadParams)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Transferring.Managing.IApizrTransferManager`2
+    name: IApizrTransferManager
+    nameWithType: IApizrTransferManager
+    fullName: Apizr.Transferring.Managing.IApizrTransferManager
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TTransferApi
+    nameWithType: TTransferApi
+    fullName: TTransferApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TDownloadParams
+    nameWithType: TDownloadParams
+    fullName: TDownloadParams
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManager
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: ContainsUploadManager()
+  nameWithType: FileTransferOptionsBuilderExtensions.ContainsUploadManager()
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManager()
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManager
+    name: ContainsUploadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsUploadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManager
+    name: ContainsUploadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsUploadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor``1
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: ContainsUploadManagerFor<TUploadApi>()
+  nameWithType: FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor<TUploadApi>()
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor<TUploadApi>()
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor(Of TUploadApi)()
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor(Of TUploadApi)()
+  name.vb: ContainsUploadManagerFor(Of TUploadApi)()
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor``1
+    name: ContainsUploadManagerFor<TUploadApi>
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor<TUploadApi>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor<TUploadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor``1
+    name: ContainsUploadManagerFor(Of TUploadApi)
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor(Of TUploadApi)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor(Of TUploadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManager
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: ContainsDownloadManager()
+  nameWithType: FileTransferOptionsBuilderExtensions.ContainsDownloadManager()
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManager()
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManager
+    name: ContainsDownloadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsDownloadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManager
+    name: ContainsDownloadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsDownloadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor``1
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: ContainsDownloadManagerFor<TDownloadApi>()
+  nameWithType: FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor<TDownloadApi>()
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor<TDownloadApi>()
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor(Of TDownloadApi)()
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor(Of TDownloadApi)()
+  name.vb: ContainsDownloadManagerFor(Of TDownloadApi)()
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor``1
+    name: ContainsDownloadManagerFor<TDownloadApi>
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor<TDownloadApi>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor<TDownloadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor``1
+    name: ContainsDownloadManagerFor(Of TDownloadApi)
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor(Of TDownloadApi)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor(Of TDownloadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor``2
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: ContainsDownloadManagerFor<TDownloadApi, TDownloadParams>()
+  nameWithType: FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor<TDownloadApi, TDownloadParams>()
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor<TDownloadApi, TDownloadParams>()
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor(Of TDownloadApi, TDownloadParams)()
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor(Of TDownloadApi, TDownloadParams)()
+  name.vb: ContainsDownloadManagerFor(Of TDownloadApi, TDownloadParams)()
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor``2
+    name: ContainsDownloadManagerFor<TDownloadApi, TDownloadParams>
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor<TDownloadApi, TDownloadParams>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor<TDownloadApi, TDownloadParams>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor``2
+    name: ContainsDownloadManagerFor(Of TDownloadApi, TDownloadParams)
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor(Of TDownloadApi, TDownloadParams)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor(Of TDownloadApi, TDownloadParams)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManager
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: ContainsTransferManager()
+  nameWithType: FileTransferOptionsBuilderExtensions.ContainsTransferManager()
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManager()
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManager
+    name: ContainsTransferManager
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsTransferManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManager
+    name: ContainsTransferManager
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsTransferManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor``1
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: ContainsTransferManagerFor<TTransferApi>()
+  nameWithType: FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor<TTransferApi>()
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor<TTransferApi>()
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor(Of TTransferApi)()
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor(Of TTransferApi)()
+  name.vb: ContainsTransferManagerFor(Of TTransferApi)()
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor``1
+    name: ContainsTransferManagerFor<TTransferApi>
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor<TTransferApi>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor<TTransferApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor``1
+    name: ContainsTransferManagerFor(Of TTransferApi)
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor(Of TTransferApi)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor(Of TTransferApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry.Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor``2
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: ContainsTransferManagerFor<TTransferApi, TDownloadParams>()
+  nameWithType: FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor<TTransferApi, TDownloadParams>()
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor<TTransferApi, TDownloadParams>()
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor(Of TTransferApi, TDownloadParams)()
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor(Of TTransferApi, TDownloadParams)()
+  name.vb: ContainsTransferManagerFor(Of TTransferApi, TDownloadParams)()
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor``2
+    name: ContainsTransferManagerFor<TTransferApi, TDownloadParams>
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor<TTransferApi, TDownloadParams>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor<TTransferApi, TDownloadParams>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor``2
+    name: ContainsTransferManagerFor(Of TTransferApi, TDownloadParams)
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor(Of TTransferApi, TDownloadParams)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor(Of TTransferApi, TDownloadParams)
   - name: (
     nameWithType: (
     fullName: (
@@ -4698,6 +5540,907 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerInternal``1(``0@)
+  commentId: M:Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerInternal``1(``0@)
+  name: TryGetManagerInternal<TApizrManager>(TApizrManager)
+  nameWithType: ApizrRegistryBase.TryGetManagerInternal<TApizrManager>(TApizrManager)
+  fullName: Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerInternal<TApizrManager>(TApizrManager)
+  nameWithType.vb: ApizrRegistryBase.TryGetManagerInternal(Of TApizrManager)(TApizrManager)
+  fullName.vb: Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerInternal(Of TApizrManager)(TApizrManager)
+  name.vb: TryGetManagerInternal(Of TApizrManager)(TApizrManager)
+  spec.csharp:
+  - uid: Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerInternal``1(``0@)
+    name: TryGetManagerInternal<TApizrManager>
+    nameWithType: ApizrRegistryBase.TryGetManagerInternal<TApizrManager>
+    fullName: Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerInternal<TApizrManager>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TApizrManager
+    nameWithType: TApizrManager
+    fullName: TApizrManager
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerInternal``1(``0@)
+    name: TryGetManagerInternal(Of TApizrManager)
+    nameWithType: ApizrRegistryBase.TryGetManagerInternal(Of TApizrManager)
+    fullName: Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerInternal(Of TApizrManager)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TApizrManager
+    nameWithType: TApizrManager
+    fullName: TApizrManager
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.GetUploadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.GetUploadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: GetUploadManagerFor<TUploadApi>(IApizrEnumerableRegistry)
+  nameWithType: FileTransferOptionsBuilderExtensions.GetUploadManagerFor<TUploadApi>(IApizrEnumerableRegistry)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.GetUploadManagerFor<TUploadApi>(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.GetUploadManagerFor(Of TUploadApi)(IApizrEnumerableRegistry)
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.GetUploadManagerFor(Of TUploadApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name.vb: GetUploadManagerFor(Of TUploadApi)(IApizrEnumerableRegistry)
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.GetUploadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: GetUploadManagerFor<TUploadApi>
+    nameWithType: FileTransferOptionsBuilderExtensions.GetUploadManagerFor<TUploadApi>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.GetUploadManagerFor<TUploadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.GetUploadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: GetUploadManagerFor(Of TUploadApi)
+    nameWithType: FileTransferOptionsBuilderExtensions.GetUploadManagerFor(Of TUploadApi)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.GetUploadManagerFor(Of TUploadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions
+  commentId: T:Apizr.FileTransferOptionsBuilderExtensions
+  parent: Apizr
+  name: FileTransferOptionsBuilderExtensions
+  nameWithType: FileTransferOptionsBuilderExtensions
+  fullName: Apizr.FileTransferOptionsBuilderExtensions
+- uid: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: GetDownloadManagerFor<TDownloadApi>(IApizrEnumerableRegistry)
+  nameWithType: FileTransferOptionsBuilderExtensions.GetDownloadManagerFor<TDownloadApi>(IApizrEnumerableRegistry)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor<TDownloadApi>(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.GetDownloadManagerFor(Of TDownloadApi)(IApizrEnumerableRegistry)
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor(Of TDownloadApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name.vb: GetDownloadManagerFor(Of TDownloadApi)(IApizrEnumerableRegistry)
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: GetDownloadManagerFor<TDownloadApi>
+    nameWithType: FileTransferOptionsBuilderExtensions.GetDownloadManagerFor<TDownloadApi>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor<TDownloadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: GetDownloadManagerFor(Of TDownloadApi)
+    nameWithType: FileTransferOptionsBuilderExtensions.GetDownloadManagerFor(Of TDownloadApi)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor(Of TDownloadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: GetDownloadManagerFor<TDownloadApi, TDownloadParams>(IApizrEnumerableRegistry)
+  nameWithType: FileTransferOptionsBuilderExtensions.GetDownloadManagerFor<TDownloadApi, TDownloadParams>(IApizrEnumerableRegistry)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor<TDownloadApi, TDownloadParams>(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.GetDownloadManagerFor(Of TDownloadApi, TDownloadParams)(IApizrEnumerableRegistry)
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor(Of TDownloadApi, TDownloadParams)(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name.vb: GetDownloadManagerFor(Of TDownloadApi, TDownloadParams)(IApizrEnumerableRegistry)
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: GetDownloadManagerFor<TDownloadApi, TDownloadParams>
+    nameWithType: FileTransferOptionsBuilderExtensions.GetDownloadManagerFor<TDownloadApi, TDownloadParams>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor<TDownloadApi, TDownloadParams>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: GetDownloadManagerFor(Of TDownloadApi, TDownloadParams)
+    nameWithType: FileTransferOptionsBuilderExtensions.GetDownloadManagerFor(Of TDownloadApi, TDownloadParams)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.GetDownloadManagerFor(Of TDownloadApi, TDownloadParams)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: GetTransferManagerFor<TTransferApi>(IApizrEnumerableRegistry)
+  nameWithType: FileTransferOptionsBuilderExtensions.GetTransferManagerFor<TTransferApi>(IApizrEnumerableRegistry)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor<TTransferApi>(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.GetTransferManagerFor(Of TTransferApi)(IApizrEnumerableRegistry)
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor(Of TTransferApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name.vb: GetTransferManagerFor(Of TTransferApi)(IApizrEnumerableRegistry)
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: GetTransferManagerFor<TTransferApi>
+    nameWithType: FileTransferOptionsBuilderExtensions.GetTransferManagerFor<TTransferApi>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor<TTransferApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: GetTransferManagerFor(Of TTransferApi)
+    nameWithType: FileTransferOptionsBuilderExtensions.GetTransferManagerFor(Of TTransferApi)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor(Of TTransferApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: GetTransferManagerFor<TTransferApi, TDownloadParams>(IApizrEnumerableRegistry)
+  nameWithType: FileTransferOptionsBuilderExtensions.GetTransferManagerFor<TTransferApi, TDownloadParams>(IApizrEnumerableRegistry)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor<TTransferApi, TDownloadParams>(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.GetTransferManagerFor(Of TTransferApi, TDownloadParams)(IApizrEnumerableRegistry)
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor(Of TTransferApi, TDownloadParams)(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name.vb: GetTransferManagerFor(Of TTransferApi, TDownloadParams)(IApizrEnumerableRegistry)
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: GetTransferManagerFor<TTransferApi, TDownloadParams>
+    nameWithType: FileTransferOptionsBuilderExtensions.GetTransferManagerFor<TTransferApi, TDownloadParams>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor<TTransferApi, TDownloadParams>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: GetTransferManagerFor(Of TTransferApi, TDownloadParams)
+    nameWithType: FileTransferOptionsBuilderExtensions.GetTransferManagerFor(Of TTransferApi, TDownloadParams)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.GetTransferManagerFor(Of TTransferApi, TDownloadParams)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrUploadManager{``0}@)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrUploadManager{``0}@)
+  name: TryGetUploadManagerFor<TUploadApi>(IApizrEnumerableRegistry, IApizrUploadManager<TUploadApi>)
+  nameWithType: FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor<TUploadApi>(IApizrEnumerableRegistry, IApizrUploadManager<TUploadApi>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor<TUploadApi>(Apizr.Configuring.Registry.IApizrEnumerableRegistry, Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor(Of TUploadApi)(IApizrEnumerableRegistry, IApizrUploadManager(Of TUploadApi))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor(Of TUploadApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry, Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi))
+  name.vb: TryGetUploadManagerFor(Of TUploadApi)(IApizrEnumerableRegistry, IApizrUploadManager(Of TUploadApi))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrUploadManager{``0}@)
+    name: TryGetUploadManagerFor<TUploadApi>
+    nameWithType: FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor<TUploadApi>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor<TUploadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1
+    name: IApizrUploadManager
+    nameWithType: IApizrUploadManager
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TUploadApi
+    nameWithType: TUploadApi
+    fullName: TUploadApi
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrUploadManager{``0}@)
+    name: TryGetUploadManagerFor(Of TUploadApi)
+    nameWithType: FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor(Of TUploadApi)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetUploadManagerFor(Of TUploadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1
+    name: IApizrUploadManager
+    nameWithType: IApizrUploadManager
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TUploadApi
+    nameWithType: TUploadApi
+    fullName: TUploadApi
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrDownloadManager{``0}@)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrDownloadManager{``0}@)
+  name: TryGetDownloadManagerFor<TDownloadApi>(IApizrEnumerableRegistry, IApizrDownloadManager<TDownloadApi>)
+  nameWithType: FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor<TDownloadApi>(IApizrEnumerableRegistry, IApizrDownloadManager<TDownloadApi>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor<TDownloadApi>(Apizr.Configuring.Registry.IApizrEnumerableRegistry, Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor(Of TDownloadApi)(IApizrEnumerableRegistry, IApizrDownloadManager(Of TDownloadApi))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor(Of TDownloadApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry, Apizr.Transferring.Managing.IApizrDownloadManager(Of TDownloadApi))
+  name.vb: TryGetDownloadManagerFor(Of TDownloadApi)(IApizrEnumerableRegistry, IApizrDownloadManager(Of TDownloadApi))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrDownloadManager{``0}@)
+    name: TryGetDownloadManagerFor<TDownloadApi>
+    nameWithType: FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor<TDownloadApi>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor<TDownloadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`1
+    name: IApizrDownloadManager
+    nameWithType: IApizrDownloadManager
+    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TDownloadApi
+    nameWithType: TDownloadApi
+    fullName: TDownloadApi
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrDownloadManager{``0}@)
+    name: TryGetDownloadManagerFor(Of TDownloadApi)
+    nameWithType: FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor(Of TDownloadApi)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor(Of TDownloadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`1
+    name: IApizrDownloadManager
+    nameWithType: IApizrDownloadManager
+    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TDownloadApi
+    nameWithType: TDownloadApi
+    fullName: TDownloadApi
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrDownloadManager{``0,``1}@)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrDownloadManager{``0,``1}@)
+  name: TryGetDownloadManagerFor<TDownloadApi, TDownloadParams>(IApizrEnumerableRegistry, IApizrDownloadManager<TDownloadApi, TDownloadParams>)
+  nameWithType: FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor<TDownloadApi, TDownloadParams>(IApizrEnumerableRegistry, IApizrDownloadManager<TDownloadApi, TDownloadParams>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor<TDownloadApi, TDownloadParams>(Apizr.Configuring.Registry.IApizrEnumerableRegistry, Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, TDownloadParams>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor(Of TDownloadApi, TDownloadParams)(IApizrEnumerableRegistry, IApizrDownloadManager(Of TDownloadApi, TDownloadParams))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor(Of TDownloadApi, TDownloadParams)(Apizr.Configuring.Registry.IApizrEnumerableRegistry, Apizr.Transferring.Managing.IApizrDownloadManager(Of TDownloadApi, TDownloadParams))
+  name.vb: TryGetDownloadManagerFor(Of TDownloadApi, TDownloadParams)(IApizrEnumerableRegistry, IApizrDownloadManager(Of TDownloadApi, TDownloadParams))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrDownloadManager{``0,``1}@)
+    name: TryGetDownloadManagerFor<TDownloadApi, TDownloadParams>
+    nameWithType: FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor<TDownloadApi, TDownloadParams>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor<TDownloadApi, TDownloadParams>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
+    name: IApizrDownloadManager
+    nameWithType: IApizrDownloadManager
+    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TDownloadApi
+    nameWithType: TDownloadApi
+    fullName: TDownloadApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TDownloadParams
+    nameWithType: TDownloadParams
+    fullName: TDownloadParams
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrDownloadManager{``0,``1}@)
+    name: TryGetDownloadManagerFor(Of TDownloadApi, TDownloadParams)
+    nameWithType: FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor(Of TDownloadApi, TDownloadParams)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetDownloadManagerFor(Of TDownloadApi, TDownloadParams)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
+    name: IApizrDownloadManager
+    nameWithType: IApizrDownloadManager
+    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TDownloadApi
+    nameWithType: TDownloadApi
+    fullName: TDownloadApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TDownloadParams
+    nameWithType: TDownloadParams
+    fullName: TDownloadParams
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrTransferManager{``0}@)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrTransferManager{``0}@)
+  name: TryGetTransferManagerFor<TTransferApi>(IApizrEnumerableRegistry, IApizrTransferManager<TTransferApi>)
+  nameWithType: FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor<TTransferApi>(IApizrEnumerableRegistry, IApizrTransferManager<TTransferApi>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor<TTransferApi>(Apizr.Configuring.Registry.IApizrEnumerableRegistry, Apizr.Transferring.Managing.IApizrTransferManager<TTransferApi>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor(Of TTransferApi)(IApizrEnumerableRegistry, IApizrTransferManager(Of TTransferApi))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor(Of TTransferApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry, Apizr.Transferring.Managing.IApizrTransferManager(Of TTransferApi))
+  name.vb: TryGetTransferManagerFor(Of TTransferApi)(IApizrEnumerableRegistry, IApizrTransferManager(Of TTransferApi))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrTransferManager{``0}@)
+    name: TryGetTransferManagerFor<TTransferApi>
+    nameWithType: FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor<TTransferApi>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor<TTransferApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Transferring.Managing.IApizrTransferManager`1
+    name: IApizrTransferManager
+    nameWithType: IApizrTransferManager
+    fullName: Apizr.Transferring.Managing.IApizrTransferManager
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TTransferApi
+    nameWithType: TTransferApi
+    fullName: TTransferApi
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrTransferManager{``0}@)
+    name: TryGetTransferManagerFor(Of TTransferApi)
+    nameWithType: FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor(Of TTransferApi)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor(Of TTransferApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Transferring.Managing.IApizrTransferManager`1
+    name: IApizrTransferManager
+    nameWithType: IApizrTransferManager
+    fullName: Apizr.Transferring.Managing.IApizrTransferManager
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TTransferApi
+    nameWithType: TTransferApi
+    fullName: TTransferApi
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrTransferManager{``0,``1}@)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrTransferManager{``0,``1}@)
+  name: TryGetTransferManagerFor<TTransferApi, TDownloadParams>(IApizrEnumerableRegistry, IApizrTransferManager<TTransferApi, TDownloadParams>)
+  nameWithType: FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor<TTransferApi, TDownloadParams>(IApizrEnumerableRegistry, IApizrTransferManager<TTransferApi, TDownloadParams>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor<TTransferApi, TDownloadParams>(Apizr.Configuring.Registry.IApizrEnumerableRegistry, Apizr.Transferring.Managing.IApizrTransferManager<TTransferApi, TDownloadParams>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor(Of TTransferApi, TDownloadParams)(IApizrEnumerableRegistry, IApizrTransferManager(Of TTransferApi, TDownloadParams))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor(Of TTransferApi, TDownloadParams)(Apizr.Configuring.Registry.IApizrEnumerableRegistry, Apizr.Transferring.Managing.IApizrTransferManager(Of TTransferApi, TDownloadParams))
+  name.vb: TryGetTransferManagerFor(Of TTransferApi, TDownloadParams)(IApizrEnumerableRegistry, IApizrTransferManager(Of TTransferApi, TDownloadParams))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrTransferManager{``0,``1}@)
+    name: TryGetTransferManagerFor<TTransferApi, TDownloadParams>
+    nameWithType: FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor<TTransferApi, TDownloadParams>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor<TTransferApi, TDownloadParams>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Transferring.Managing.IApizrTransferManager`2
+    name: IApizrTransferManager
+    nameWithType: IApizrTransferManager
+    fullName: Apizr.Transferring.Managing.IApizrTransferManager
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TTransferApi
+    nameWithType: TTransferApi
+    fullName: TTransferApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TDownloadParams
+    nameWithType: TDownloadParams
+    fullName: TDownloadParams
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrTransferManager{``0,``1}@)
+    name: TryGetTransferManagerFor(Of TTransferApi, TDownloadParams)
+    nameWithType: FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor(Of TTransferApi, TDownloadParams)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.TryGetTransferManagerFor(Of TTransferApi, TDownloadParams)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Transferring.Managing.IApizrTransferManager`2
+    name: IApizrTransferManager
+    nameWithType: IApizrTransferManager
+    fullName: Apizr.Transferring.Managing.IApizrTransferManager
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TTransferApi
+    nameWithType: TTransferApi
+    fullName: TTransferApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TDownloadParams
+    nameWithType: TDownloadParams
+    fullName: TDownloadParams
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: ContainsUploadManager(IApizrEnumerableRegistry)
+  nameWithType: FileTransferOptionsBuilderExtensions.ContainsUploadManager(IApizrEnumerableRegistry)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: ContainsUploadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsUploadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: ContainsUploadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsUploadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: ContainsUploadManagerFor<TUploadApi>(IApizrEnumerableRegistry)
+  nameWithType: FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor<TUploadApi>(IApizrEnumerableRegistry)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor<TUploadApi>(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor(Of TUploadApi)(IApizrEnumerableRegistry)
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor(Of TUploadApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name.vb: ContainsUploadManagerFor(Of TUploadApi)(IApizrEnumerableRegistry)
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: ContainsUploadManagerFor<TUploadApi>
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor<TUploadApi>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor<TUploadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: ContainsUploadManagerFor(Of TUploadApi)
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor(Of TUploadApi)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsUploadManagerFor(Of TUploadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: ContainsDownloadManager(IApizrEnumerableRegistry)
+  nameWithType: FileTransferOptionsBuilderExtensions.ContainsDownloadManager(IApizrEnumerableRegistry)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: ContainsDownloadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsDownloadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: ContainsDownloadManager
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsDownloadManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: ContainsDownloadManagerFor<TDownloadApi>(IApizrEnumerableRegistry)
+  nameWithType: FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor<TDownloadApi>(IApizrEnumerableRegistry)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor<TDownloadApi>(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor(Of TDownloadApi)(IApizrEnumerableRegistry)
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor(Of TDownloadApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name.vb: ContainsDownloadManagerFor(Of TDownloadApi)(IApizrEnumerableRegistry)
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: ContainsDownloadManagerFor<TDownloadApi>
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor<TDownloadApi>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor<TDownloadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: ContainsDownloadManagerFor(Of TDownloadApi)
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor(Of TDownloadApi)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor(Of TDownloadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: ContainsDownloadManagerFor<TDownloadApi, TDownloadParams>(IApizrEnumerableRegistry)
+  nameWithType: FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor<TDownloadApi, TDownloadParams>(IApizrEnumerableRegistry)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor<TDownloadApi, TDownloadParams>(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor(Of TDownloadApi, TDownloadParams)(IApizrEnumerableRegistry)
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor(Of TDownloadApi, TDownloadParams)(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name.vb: ContainsDownloadManagerFor(Of TDownloadApi, TDownloadParams)(IApizrEnumerableRegistry)
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: ContainsDownloadManagerFor<TDownloadApi, TDownloadParams>
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor<TDownloadApi, TDownloadParams>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor<TDownloadApi, TDownloadParams>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: ContainsDownloadManagerFor(Of TDownloadApi, TDownloadParams)
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor(Of TDownloadApi, TDownloadParams)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsDownloadManagerFor(Of TDownloadApi, TDownloadParams)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: ContainsTransferManager(IApizrEnumerableRegistry)
+  nameWithType: FileTransferOptionsBuilderExtensions.ContainsTransferManager(IApizrEnumerableRegistry)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: ContainsTransferManager
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsTransferManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: ContainsTransferManager
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsTransferManager
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: ContainsTransferManagerFor<TTransferApi>(IApizrEnumerableRegistry)
+  nameWithType: FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor<TTransferApi>(IApizrEnumerableRegistry)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor<TTransferApi>(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor(Of TTransferApi)(IApizrEnumerableRegistry)
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor(Of TTransferApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name.vb: ContainsTransferManagerFor(Of TTransferApi)(IApizrEnumerableRegistry)
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: ContainsTransferManagerFor<TTransferApi>
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor<TTransferApi>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor<TTransferApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: ContainsTransferManagerFor(Of TTransferApi)
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor(Of TTransferApi)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor(Of TTransferApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name: ContainsTransferManagerFor<TTransferApi, TDownloadParams>(IApizrEnumerableRegistry)
+  nameWithType: FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor<TTransferApi, TDownloadParams>(IApizrEnumerableRegistry)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor<TTransferApi, TDownloadParams>(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor(Of TTransferApi, TDownloadParams)(IApizrEnumerableRegistry)
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor(Of TTransferApi, TDownloadParams)(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+  name.vb: ContainsTransferManagerFor(Of TTransferApi, TDownloadParams)(IApizrEnumerableRegistry)
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: ContainsTransferManagerFor<TTransferApi, TDownloadParams>
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor<TTransferApi, TDownloadParams>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor<TTransferApi, TDownloadParams>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
+    name: ContainsTransferManagerFor(Of TTransferApi, TDownloadParams)
+    nameWithType: FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor(Of TTransferApi, TDownloadParams)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.ContainsTransferManagerFor(Of TTransferApi, TDownloadParams)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+    name: IApizrEnumerableRegistry
+    nameWithType: IApizrEnumerableRegistry
+    fullName: Apizr.Configuring.Registry.IApizrEnumerableRegistry
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Extending.ApizrRegistryExtensions.ExecuteAsync``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Extending.ApizrRegistryExtensions.ExecuteAsync``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   isExternal: true
@@ -7185,6 +8928,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr
+  commentId: N:Apizr
+  name: Apizr
+  nameWithType: Apizr
+  fullName: Apizr
 - uid: Apizr.Extending
   commentId: N:Apizr.Extending
   name: Apizr.Extending
@@ -7294,6 +9042,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManager*
+  commentId: Overload:Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManager
+  name: AddOrUpdateManager
+  nameWithType: ApizrRegistry.AddOrUpdateManager
+  fullName: Apizr.Configuring.Registry.ApizrRegistry.AddOrUpdateManager
 - uid: System.Type
   commentId: T:System.Type
   parent: System

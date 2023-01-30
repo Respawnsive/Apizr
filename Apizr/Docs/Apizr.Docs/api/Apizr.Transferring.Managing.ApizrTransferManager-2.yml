@@ -1,45 +1,45 @@
 ### YamlMime:ManagedReference
 items:
-- uid: Apizr.Transferring.Managing.ApizrFileTransferManager`2
-  commentId: T:Apizr.Transferring.Managing.ApizrFileTransferManager`2
-  id: ApizrFileTransferManager`2
+- uid: Apizr.Transferring.Managing.ApizrTransferManager`2
+  commentId: T:Apizr.Transferring.Managing.ApizrTransferManager`2
+  id: ApizrTransferManager`2
   parent: Apizr.Transferring.Managing
   children:
-  - Apizr.Transferring.Managing.ApizrFileTransferManager`2.#ctor(Apizr.Transferring.Managing.IApizrDownloadManager{`0,`1},Apizr.Transferring.Managing.IApizrUploadManager{`0})
-  - Apizr.Transferring.Managing.ApizrFileTransferManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  - Apizr.Transferring.Managing.ApizrFileTransferManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  - Apizr.Transferring.Managing.ApizrFileTransferManager`2.UploadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Transferring.Managing.ApizrTransferManager`2.#ctor(Apizr.Transferring.Managing.IApizrDownloadManager{`0,`1},Apizr.Transferring.Managing.IApizrUploadManager{`0})
+  - Apizr.Transferring.Managing.ApizrTransferManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Transferring.Managing.ApizrTransferManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Transferring.Managing.ApizrTransferManager`2.UploadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   langs:
   - csharp
   - vb
-  name: ApizrFileTransferManager<TFileTransferApi, TDownloadParams>
-  nameWithType: ApizrFileTransferManager<TFileTransferApi, TDownloadParams>
-  fullName: Apizr.Transferring.Managing.ApizrFileTransferManager<TFileTransferApi, TDownloadParams>
+  name: ApizrTransferManager<TTransferApi, TDownloadParams>
+  nameWithType: ApizrTransferManager<TTransferApi, TDownloadParams>
+  fullName: Apizr.Transferring.Managing.ApizrTransferManager<TTransferApi, TDownloadParams>
   type: Class
   source:
-    id: ApizrFileTransferManager
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.FileTransfer\Transferring\Managing\ApizrFileTransferManager.cs
+    id: ApizrTransferManager
+    path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Managing\ApizrTransferManager.cs
     startLine: 9
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
   syntax:
-    content: 'public class ApizrFileTransferManager<TFileTransferApi, TDownloadParams> : IApizrFileTransferManager<TFileTransferApi, TDownloadParams>, IApizrDownloadManager<TFileTransferApi, TDownloadParams>, IApizrUploadManager<TFileTransferApi>, IApizrDataTransferManager<TFileTransferApi>, IApizrManager where TFileTransferApi : IFileTransferApi<TDownloadParams>'
+    content: 'public class ApizrTransferManager<TTransferApi, TDownloadParams> : IApizrTransferManager<TTransferApi, TDownloadParams>, IApizrDownloadManager<TTransferApi, TDownloadParams>, IApizrUploadManager<TTransferApi>, IApizrTransferManagerBase<TTransferApi>, IApizrManager where TTransferApi : ITransferApi<TDownloadParams>'
     typeParameters:
-    - id: TFileTransferApi
+    - id: TTransferApi
     - id: TDownloadParams
     content.vb: >-
-      Public Class ApizrFileTransferManager(Of TFileTransferApi As IFileTransferApi(Of TDownloadParams), TDownloadParams)
-          Implements IApizrFileTransferManager(Of TFileTransferApi, TDownloadParams), IApizrDownloadManager(Of TFileTransferApi, TDownloadParams), IApizrUploadManager(Of TFileTransferApi), IApizrDataTransferManager(Of TFileTransferApi), IApizrManager
+      Public Class ApizrTransferManager(Of TTransferApi As ITransferApi(Of TDownloadParams), TDownloadParams)
+          Implements IApizrTransferManager(Of TTransferApi, TDownloadParams), IApizrDownloadManager(Of TTransferApi, TDownloadParams), IApizrUploadManager(Of TTransferApi), IApizrTransferManagerBase(Of TTransferApi), IApizrManager
   inheritance:
   - System.Object
   derivedClasses:
-  - Apizr.Transferring.Managing.ApizrFileTransferManager`1
+  - Apizr.Transferring.Managing.ApizrTransferManager`1
   implements:
-  - Apizr.Transferring.Managing.IApizrFileTransferManager{{TFileTransferApi},{TDownloadParams}}
-  - Apizr.Transferring.Managing.IApizrDownloadManager{{TFileTransferApi},{TDownloadParams}}
-  - Apizr.Transferring.Managing.IApizrUploadManager{{TFileTransferApi}}
-  - Apizr.Transferring.Managing.IApizrDataTransferManager{{TFileTransferApi}}
+  - Apizr.Transferring.Managing.IApizrTransferManager{{TTransferApi},{TDownloadParams}}
+  - Apizr.Transferring.Managing.IApizrDownloadManager{{TTransferApi},{TDownloadParams}}
+  - Apizr.Transferring.Managing.IApizrUploadManager{{TTransferApi}}
+  - Apizr.Transferring.Managing.IApizrTransferManagerBase{{TTransferApi}}
   - Apizr.IApizrManager
   inheritedMembers:
   - System.Object.Equals(System.Object)
@@ -49,63 +49,63 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  nameWithType.vb: ApizrFileTransferManager(Of TFileTransferApi, TDownloadParams)
+  nameWithType.vb: ApizrTransferManager(Of TTransferApi, TDownloadParams)
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
-  fullName.vb: Apizr.Transferring.Managing.ApizrFileTransferManager(Of TFileTransferApi, TDownloadParams)
-  name.vb: ApizrFileTransferManager(Of TFileTransferApi, TDownloadParams)
-- uid: Apizr.Transferring.Managing.ApizrFileTransferManager`2.#ctor(Apizr.Transferring.Managing.IApizrDownloadManager{`0,`1},Apizr.Transferring.Managing.IApizrUploadManager{`0})
-  commentId: M:Apizr.Transferring.Managing.ApizrFileTransferManager`2.#ctor(Apizr.Transferring.Managing.IApizrDownloadManager{`0,`1},Apizr.Transferring.Managing.IApizrUploadManager{`0})
+  fullName.vb: Apizr.Transferring.Managing.ApizrTransferManager(Of TTransferApi, TDownloadParams)
+  name.vb: ApizrTransferManager(Of TTransferApi, TDownloadParams)
+- uid: Apizr.Transferring.Managing.ApizrTransferManager`2.#ctor(Apizr.Transferring.Managing.IApizrDownloadManager{`0,`1},Apizr.Transferring.Managing.IApizrUploadManager{`0})
+  commentId: M:Apizr.Transferring.Managing.ApizrTransferManager`2.#ctor(Apizr.Transferring.Managing.IApizrDownloadManager{`0,`1},Apizr.Transferring.Managing.IApizrUploadManager{`0})
   id: '#ctor(Apizr.Transferring.Managing.IApizrDownloadManager{`0,`1},Apizr.Transferring.Managing.IApizrUploadManager{`0})'
-  parent: Apizr.Transferring.Managing.ApizrFileTransferManager`2
+  parent: Apizr.Transferring.Managing.ApizrTransferManager`2
   langs:
   - csharp
   - vb
-  name: ApizrFileTransferManager(IApizrDownloadManager<TFileTransferApi, TDownloadParams>, IApizrUploadManager<TFileTransferApi>)
-  nameWithType: ApizrFileTransferManager<TFileTransferApi, TDownloadParams>.ApizrFileTransferManager(IApizrDownloadManager<TFileTransferApi, TDownloadParams>, IApizrUploadManager<TFileTransferApi>)
-  fullName: Apizr.Transferring.Managing.ApizrFileTransferManager<TFileTransferApi, TDownloadParams>.ApizrFileTransferManager(Apizr.Transferring.Managing.IApizrDownloadManager<TFileTransferApi, TDownloadParams>, Apizr.Transferring.Managing.IApizrUploadManager<TFileTransferApi>)
+  name: ApizrTransferManager(IApizrDownloadManager<TTransferApi, TDownloadParams>, IApizrUploadManager<TTransferApi>)
+  nameWithType: ApizrTransferManager<TTransferApi, TDownloadParams>.ApizrTransferManager(IApizrDownloadManager<TTransferApi, TDownloadParams>, IApizrUploadManager<TTransferApi>)
+  fullName: Apizr.Transferring.Managing.ApizrTransferManager<TTransferApi, TDownloadParams>.ApizrTransferManager(Apizr.Transferring.Managing.IApizrDownloadManager<TTransferApi, TDownloadParams>, Apizr.Transferring.Managing.IApizrUploadManager<TTransferApi>)
   type: Constructor
   source:
     id: .ctor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.FileTransfer\Transferring\Managing\ApizrFileTransferManager.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Managing\ApizrTransferManager.cs
     startLine: 14
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
   syntax:
-    content: public ApizrFileTransferManager(IApizrDownloadManager<TFileTransferApi, TDownloadParams> downloadManager, IApizrUploadManager<TFileTransferApi> uploadManager)
+    content: public ApizrTransferManager(IApizrDownloadManager<TTransferApi, TDownloadParams> downloadManager, IApizrUploadManager<TTransferApi> uploadManager)
     parameters:
     - id: downloadManager
-      type: Apizr.Transferring.Managing.IApizrDownloadManager{{TFileTransferApi},{TDownloadParams}}
+      type: Apizr.Transferring.Managing.IApizrDownloadManager{{TTransferApi},{TDownloadParams}}
     - id: uploadManager
-      type: Apizr.Transferring.Managing.IApizrUploadManager{{TFileTransferApi}}
-    content.vb: Public Sub New(downloadManager As IApizrDownloadManager(Of TFileTransferApi, TDownloadParams), uploadManager As IApizrUploadManager(Of TFileTransferApi))
-  overload: Apizr.Transferring.Managing.ApizrFileTransferManager`2.#ctor*
-  nameWithType.vb: ApizrFileTransferManager(Of TFileTransferApi, TDownloadParams).ApizrFileTransferManager(IApizrDownloadManager(Of TFileTransferApi, TDownloadParams), IApizrUploadManager(Of TFileTransferApi))
+      type: Apizr.Transferring.Managing.IApizrUploadManager{{TTransferApi}}
+    content.vb: Public Sub New(downloadManager As IApizrDownloadManager(Of TTransferApi, TDownloadParams), uploadManager As IApizrUploadManager(Of TTransferApi))
+  overload: Apizr.Transferring.Managing.ApizrTransferManager`2.#ctor*
+  nameWithType.vb: ApizrTransferManager(Of TTransferApi, TDownloadParams).ApizrTransferManager(IApizrDownloadManager(Of TTransferApi, TDownloadParams), IApizrUploadManager(Of TTransferApi))
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Apizr.Transferring.Managing.ApizrFileTransferManager(Of TFileTransferApi, TDownloadParams).ApizrFileTransferManager(Apizr.Transferring.Managing.IApizrDownloadManager(Of TFileTransferApi, TDownloadParams), Apizr.Transferring.Managing.IApizrUploadManager(Of TFileTransferApi))
-  name.vb: ApizrFileTransferManager(IApizrDownloadManager(Of TFileTransferApi, TDownloadParams), IApizrUploadManager(Of TFileTransferApi))
-- uid: Apizr.Transferring.Managing.ApizrFileTransferManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  commentId: M:Apizr.Transferring.Managing.ApizrFileTransferManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  fullName.vb: Apizr.Transferring.Managing.ApizrTransferManager(Of TTransferApi, TDownloadParams).ApizrTransferManager(Apizr.Transferring.Managing.IApizrDownloadManager(Of TTransferApi, TDownloadParams), Apizr.Transferring.Managing.IApizrUploadManager(Of TTransferApi))
+  name.vb: ApizrTransferManager(IApizrDownloadManager(Of TTransferApi, TDownloadParams), IApizrUploadManager(Of TTransferApi))
+- uid: Apizr.Transferring.Managing.ApizrTransferManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Transferring.Managing.ApizrTransferManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   id: DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  parent: Apizr.Transferring.Managing.ApizrFileTransferManager`2
+  parent: Apizr.Transferring.Managing.ApizrTransferManager`2
   langs:
   - csharp
   - vb
   name: DownloadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
-  nameWithType: ApizrFileTransferManager<TFileTransferApi, TDownloadParams>.DownloadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
-  fullName: Apizr.Transferring.Managing.ApizrFileTransferManager<TFileTransferApi, TDownloadParams>.DownloadAsync(System.IO.FileInfo, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrTransferManager<TTransferApi, TDownloadParams>.DownloadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Transferring.Managing.ApizrTransferManager<TTransferApi, TDownloadParams>.DownloadAsync(System.IO.FileInfo, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
   type: Method
   source:
     id: DownloadAsync
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.FileTransfer\Transferring\Managing\ApizrFileTransferManager.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Managing\ApizrTransferManager.cs
     startLine: 21
   assemblies:
   - Apizr.Integrations.FileTransfer
@@ -121,30 +121,30 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.IO.FileInfo}
     content.vb: Public Function DownloadAsync(fileInfo As FileInfo, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
-  overload: Apizr.Transferring.Managing.ApizrFileTransferManager`2.DownloadAsync*
+  overload: Apizr.Transferring.Managing.ApizrTransferManager`2.DownloadAsync*
   implements:
-  - Apizr.Transferring.Managing.IApizrDownloadManager{{TFileTransferApi},{TDownloadParams}}.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  nameWithType.vb: ApizrFileTransferManager(Of TFileTransferApi, TDownloadParams).DownloadAsync(FileInfo, Action(Of IApizrRequestOptionsBuilder))
+  - Apizr.Transferring.Managing.IApizrDownloadManager{{TTransferApi},{TDownloadParams}}.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  nameWithType.vb: ApizrTransferManager(Of TTransferApi, TDownloadParams).DownloadAsync(FileInfo, Action(Of IApizrRequestOptionsBuilder))
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Apizr.Transferring.Managing.ApizrFileTransferManager(Of TFileTransferApi, TDownloadParams).DownloadAsync(System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Transferring.Managing.ApizrTransferManager(Of TTransferApi, TDownloadParams).DownloadAsync(System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: DownloadAsync(FileInfo, Action(Of IApizrRequestOptionsBuilder))
-- uid: Apizr.Transferring.Managing.ApizrFileTransferManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  commentId: M:Apizr.Transferring.Managing.ApizrFileTransferManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+- uid: Apizr.Transferring.Managing.ApizrTransferManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Transferring.Managing.ApizrTransferManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   id: DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  parent: Apizr.Transferring.Managing.ApizrFileTransferManager`2
+  parent: Apizr.Transferring.Managing.ApizrTransferManager`2
   langs:
   - csharp
   - vb
   name: DownloadAsync(FileInfo, TDownloadParams, Action<IApizrRequestOptionsBuilder>)
-  nameWithType: ApizrFileTransferManager<TFileTransferApi, TDownloadParams>.DownloadAsync(FileInfo, TDownloadParams, Action<IApizrRequestOptionsBuilder>)
-  fullName: Apizr.Transferring.Managing.ApizrFileTransferManager<TFileTransferApi, TDownloadParams>.DownloadAsync(System.IO.FileInfo, TDownloadParams, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrTransferManager<TTransferApi, TDownloadParams>.DownloadAsync(FileInfo, TDownloadParams, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Transferring.Managing.ApizrTransferManager<TTransferApi, TDownloadParams>.DownloadAsync(System.IO.FileInfo, TDownloadParams, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
   type: Method
   source:
     id: DownloadAsync
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.FileTransfer\Transferring\Managing\ApizrFileTransferManager.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Managing\ApizrTransferManager.cs
     startLine: 25
   assemblies:
   - Apizr.Integrations.FileTransfer
@@ -162,30 +162,30 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.IO.FileInfo}
     content.vb: Public Function DownloadAsync(fileInfo As FileInfo, downloadParams As TDownloadParams, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
-  overload: Apizr.Transferring.Managing.ApizrFileTransferManager`2.DownloadAsync*
+  overload: Apizr.Transferring.Managing.ApizrTransferManager`2.DownloadAsync*
   implements:
-  - Apizr.Transferring.Managing.IApizrDownloadManager{{TFileTransferApi},{TDownloadParams}}.DownloadAsync(System.IO.FileInfo,{TDownloadParams},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  nameWithType.vb: ApizrFileTransferManager(Of TFileTransferApi, TDownloadParams).DownloadAsync(FileInfo, TDownloadParams, Action(Of IApizrRequestOptionsBuilder))
+  - Apizr.Transferring.Managing.IApizrDownloadManager{{TTransferApi},{TDownloadParams}}.DownloadAsync(System.IO.FileInfo,{TDownloadParams},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  nameWithType.vb: ApizrTransferManager(Of TTransferApi, TDownloadParams).DownloadAsync(FileInfo, TDownloadParams, Action(Of IApizrRequestOptionsBuilder))
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Apizr.Transferring.Managing.ApizrFileTransferManager(Of TFileTransferApi, TDownloadParams).DownloadAsync(System.IO.FileInfo, TDownloadParams, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Transferring.Managing.ApizrTransferManager(Of TTransferApi, TDownloadParams).DownloadAsync(System.IO.FileInfo, TDownloadParams, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: DownloadAsync(FileInfo, TDownloadParams, Action(Of IApizrRequestOptionsBuilder))
-- uid: Apizr.Transferring.Managing.ApizrFileTransferManager`2.UploadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  commentId: M:Apizr.Transferring.Managing.ApizrFileTransferManager`2.UploadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+- uid: Apizr.Transferring.Managing.ApizrTransferManager`2.UploadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Transferring.Managing.ApizrTransferManager`2.UploadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   id: UploadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  parent: Apizr.Transferring.Managing.ApizrFileTransferManager`2
+  parent: Apizr.Transferring.Managing.ApizrTransferManager`2
   langs:
   - csharp
   - vb
   name: UploadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
-  nameWithType: ApizrFileTransferManager<TFileTransferApi, TDownloadParams>.UploadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
-  fullName: Apizr.Transferring.Managing.ApizrFileTransferManager<TFileTransferApi, TDownloadParams>.UploadAsync(System.IO.FileInfo, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrTransferManager<TTransferApi, TDownloadParams>.UploadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Transferring.Managing.ApizrTransferManager<TTransferApi, TDownloadParams>.UploadAsync(System.IO.FileInfo, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
   type: Method
   source:
     id: UploadAsync
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.FileTransfer\Transferring\Managing\ApizrFileTransferManager.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Managing\ApizrTransferManager.cs
     startLine: 30
   assemblies:
   - Apizr.Integrations.FileTransfer
@@ -201,15 +201,15 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.IO.FileInfo}
     content.vb: Public Function UploadAsync(fileInfo As FileInfo, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
-  overload: Apizr.Transferring.Managing.ApizrFileTransferManager`2.UploadAsync*
+  overload: Apizr.Transferring.Managing.ApizrTransferManager`2.UploadAsync*
   implements:
-  - Apizr.Transferring.Managing.IApizrUploadManager{{TFileTransferApi}}.UploadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  nameWithType.vb: ApizrFileTransferManager(Of TFileTransferApi, TDownloadParams).UploadAsync(FileInfo, Action(Of IApizrRequestOptionsBuilder))
+  - Apizr.Transferring.Managing.IApizrUploadManager{{TTransferApi}}.UploadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  nameWithType.vb: ApizrTransferManager(Of TTransferApi, TDownloadParams).UploadAsync(FileInfo, Action(Of IApizrRequestOptionsBuilder))
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Apizr.Transferring.Managing.ApizrFileTransferManager(Of TFileTransferApi, TDownloadParams).UploadAsync(System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Transferring.Managing.ApizrTransferManager(Of TTransferApi, TDownloadParams).UploadAsync(System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: UploadAsync(FileInfo, Action(Of IApizrRequestOptionsBuilder))
 references:
 - uid: Apizr.Transferring.Managing
@@ -224,27 +224,27 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Apizr.Transferring.Managing.IApizrFileTransferManager{{TFileTransferApi},{TDownloadParams}}
-  commentId: T:Apizr.Transferring.Managing.IApizrFileTransferManager{`0,`1}
+- uid: Apizr.Transferring.Managing.IApizrTransferManager{{TTransferApi},{TDownloadParams}}
+  commentId: T:Apizr.Transferring.Managing.IApizrTransferManager{``0,``1}
   parent: Apizr.Transferring.Managing
-  definition: Apizr.Transferring.Managing.IApizrFileTransferManager`2
-  name: IApizrFileTransferManager<TFileTransferApi, TDownloadParams>
-  nameWithType: IApizrFileTransferManager<TFileTransferApi, TDownloadParams>
-  fullName: Apizr.Transferring.Managing.IApizrFileTransferManager<TFileTransferApi, TDownloadParams>
-  nameWithType.vb: IApizrFileTransferManager(Of TFileTransferApi, TDownloadParams)
-  fullName.vb: Apizr.Transferring.Managing.IApizrFileTransferManager(Of TFileTransferApi, TDownloadParams)
-  name.vb: IApizrFileTransferManager(Of TFileTransferApi, TDownloadParams)
+  definition: Apizr.Transferring.Managing.IApizrTransferManager`2
+  name: IApizrTransferManager<TTransferApi, TDownloadParams>
+  nameWithType: IApizrTransferManager<TTransferApi, TDownloadParams>
+  fullName: Apizr.Transferring.Managing.IApizrTransferManager<TTransferApi, TDownloadParams>
+  nameWithType.vb: IApizrTransferManager(Of TTransferApi, TDownloadParams)
+  fullName.vb: Apizr.Transferring.Managing.IApizrTransferManager(Of TTransferApi, TDownloadParams)
+  name.vb: IApizrTransferManager(Of TTransferApi, TDownloadParams)
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrFileTransferManager`2
-    name: IApizrFileTransferManager
-    nameWithType: IApizrFileTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrFileTransferManager
+  - uid: Apizr.Transferring.Managing.IApizrTransferManager`2
+    name: IApizrTransferManager
+    nameWithType: IApizrTransferManager
+    fullName: Apizr.Transferring.Managing.IApizrTransferManager
   - name: <
     nameWithType: <
     fullName: <
-  - name: TFileTransferApi
-    nameWithType: TFileTransferApi
-    fullName: TFileTransferApi
+  - name: TTransferApi
+    nameWithType: TTransferApi
+    fullName: TTransferApi
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -255,16 +255,16 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrFileTransferManager`2
-    name: IApizrFileTransferManager
-    nameWithType: IApizrFileTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrFileTransferManager
+  - uid: Apizr.Transferring.Managing.IApizrTransferManager`2
+    name: IApizrTransferManager
+    nameWithType: IApizrTransferManager
+    fullName: Apizr.Transferring.Managing.IApizrTransferManager
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TFileTransferApi
-    nameWithType: TFileTransferApi
-    fullName: TFileTransferApi
+  - name: TTransferApi
+    nameWithType: TTransferApi
+    fullName: TTransferApi
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -274,16 +274,16 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Transferring.Managing.IApizrDownloadManager{{TFileTransferApi},{TDownloadParams}}
+- uid: Apizr.Transferring.Managing.IApizrDownloadManager{{TTransferApi},{TDownloadParams}}
   commentId: T:Apizr.Transferring.Managing.IApizrDownloadManager{`0,`1}
   parent: Apizr.Transferring.Managing
   definition: Apizr.Transferring.Managing.IApizrDownloadManager`2
-  name: IApizrDownloadManager<TFileTransferApi, TDownloadParams>
-  nameWithType: IApizrDownloadManager<TFileTransferApi, TDownloadParams>
-  fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TFileTransferApi, TDownloadParams>
-  nameWithType.vb: IApizrDownloadManager(Of TFileTransferApi, TDownloadParams)
-  fullName.vb: Apizr.Transferring.Managing.IApizrDownloadManager(Of TFileTransferApi, TDownloadParams)
-  name.vb: IApizrDownloadManager(Of TFileTransferApi, TDownloadParams)
+  name: IApizrDownloadManager<TTransferApi, TDownloadParams>
+  nameWithType: IApizrDownloadManager<TTransferApi, TDownloadParams>
+  fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TTransferApi, TDownloadParams>
+  nameWithType.vb: IApizrDownloadManager(Of TTransferApi, TDownloadParams)
+  fullName.vb: Apizr.Transferring.Managing.IApizrDownloadManager(Of TTransferApi, TDownloadParams)
+  name.vb: IApizrDownloadManager(Of TTransferApi, TDownloadParams)
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
     name: IApizrDownloadManager
@@ -292,9 +292,9 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - name: TFileTransferApi
-    nameWithType: TFileTransferApi
-    fullName: TFileTransferApi
+  - name: TTransferApi
+    nameWithType: TTransferApi
+    fullName: TTransferApi
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -312,9 +312,9 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TFileTransferApi
-    nameWithType: TFileTransferApi
-    fullName: TFileTransferApi
+  - name: TTransferApi
+    nameWithType: TTransferApi
+    fullName: TTransferApi
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -324,16 +324,16 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Transferring.Managing.IApizrUploadManager{{TFileTransferApi}}
+- uid: Apizr.Transferring.Managing.IApizrUploadManager{{TTransferApi}}
   commentId: T:Apizr.Transferring.Managing.IApizrUploadManager{`0}
   parent: Apizr.Transferring.Managing
   definition: Apizr.Transferring.Managing.IApizrUploadManager`1
-  name: IApizrUploadManager<TFileTransferApi>
-  nameWithType: IApizrUploadManager<TFileTransferApi>
-  fullName: Apizr.Transferring.Managing.IApizrUploadManager<TFileTransferApi>
-  nameWithType.vb: IApizrUploadManager(Of TFileTransferApi)
-  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of TFileTransferApi)
-  name.vb: IApizrUploadManager(Of TFileTransferApi)
+  name: IApizrUploadManager<TTransferApi>
+  nameWithType: IApizrUploadManager<TTransferApi>
+  fullName: Apizr.Transferring.Managing.IApizrUploadManager<TTransferApi>
+  nameWithType.vb: IApizrUploadManager(Of TTransferApi)
+  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of TTransferApi)
+  name.vb: IApizrUploadManager(Of TTransferApi)
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrUploadManager`1
     name: IApizrUploadManager
@@ -342,9 +342,9 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - name: TFileTransferApi
-    nameWithType: TFileTransferApi
-    fullName: TFileTransferApi
+  - name: TTransferApi
+    nameWithType: TTransferApi
+    fullName: TTransferApi
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -356,47 +356,47 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TFileTransferApi
-    nameWithType: TFileTransferApi
-    fullName: TFileTransferApi
+  - name: TTransferApi
+    nameWithType: TTransferApi
+    fullName: TTransferApi
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Transferring.Managing.IApizrDataTransferManager{{TFileTransferApi}}
-  commentId: T:Apizr.Transferring.Managing.IApizrDataTransferManager{`0}
+- uid: Apizr.Transferring.Managing.IApizrTransferManagerBase{{TTransferApi}}
+  commentId: T:Apizr.Transferring.Managing.IApizrTransferManagerBase{`0}
   parent: Apizr.Transferring.Managing
-  definition: Apizr.Transferring.Managing.IApizrDataTransferManager`1
-  name: IApizrDataTransferManager<TFileTransferApi>
-  nameWithType: IApizrDataTransferManager<TFileTransferApi>
-  fullName: Apizr.Transferring.Managing.IApizrDataTransferManager<TFileTransferApi>
-  nameWithType.vb: IApizrDataTransferManager(Of TFileTransferApi)
-  fullName.vb: Apizr.Transferring.Managing.IApizrDataTransferManager(Of TFileTransferApi)
-  name.vb: IApizrDataTransferManager(Of TFileTransferApi)
+  definition: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+  name: IApizrTransferManagerBase<TTransferApi>
+  nameWithType: IApizrTransferManagerBase<TTransferApi>
+  fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase<TTransferApi>
+  nameWithType.vb: IApizrTransferManagerBase(Of TTransferApi)
+  fullName.vb: Apizr.Transferring.Managing.IApizrTransferManagerBase(Of TTransferApi)
+  name.vb: IApizrTransferManagerBase(Of TTransferApi)
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrDataTransferManager`1
-    name: IApizrDataTransferManager
-    nameWithType: IApizrDataTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrDataTransferManager
+  - uid: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+    name: IApizrTransferManagerBase
+    nameWithType: IApizrTransferManagerBase
+    fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase
   - name: <
     nameWithType: <
     fullName: <
-  - name: TFileTransferApi
-    nameWithType: TFileTransferApi
-    fullName: TFileTransferApi
+  - name: TTransferApi
+    nameWithType: TTransferApi
+    fullName: TTransferApi
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrDataTransferManager`1
-    name: IApizrDataTransferManager
-    nameWithType: IApizrDataTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrDataTransferManager
+  - uid: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+    name: IApizrTransferManagerBase
+    nameWithType: IApizrTransferManagerBase
+    fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TFileTransferApi
-    nameWithType: TFileTransferApi
-    fullName: TFileTransferApi
+  - name: TTransferApi
+    nameWithType: TTransferApi
+    fullName: TTransferApi
   - name: )
     nameWithType: )
     fullName: )
@@ -691,25 +691,25 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: Apizr.Transferring.Managing.IApizrFileTransferManager`2
-  commentId: T:Apizr.Transferring.Managing.IApizrFileTransferManager`2
-  name: IApizrFileTransferManager<TFileTransferApi, TDownloadParams>
-  nameWithType: IApizrFileTransferManager<TFileTransferApi, TDownloadParams>
-  fullName: Apizr.Transferring.Managing.IApizrFileTransferManager<TFileTransferApi, TDownloadParams>
-  nameWithType.vb: IApizrFileTransferManager(Of TFileTransferApi, TDownloadParams)
-  fullName.vb: Apizr.Transferring.Managing.IApizrFileTransferManager(Of TFileTransferApi, TDownloadParams)
-  name.vb: IApizrFileTransferManager(Of TFileTransferApi, TDownloadParams)
+- uid: Apizr.Transferring.Managing.IApizrTransferManager`2
+  commentId: T:Apizr.Transferring.Managing.IApizrTransferManager`2
+  name: IApizrTransferManager<TTransferApi, TDownloadParams>
+  nameWithType: IApizrTransferManager<TTransferApi, TDownloadParams>
+  fullName: Apizr.Transferring.Managing.IApizrTransferManager<TTransferApi, TDownloadParams>
+  nameWithType.vb: IApizrTransferManager(Of TTransferApi, TDownloadParams)
+  fullName.vb: Apizr.Transferring.Managing.IApizrTransferManager(Of TTransferApi, TDownloadParams)
+  name.vb: IApizrTransferManager(Of TTransferApi, TDownloadParams)
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrFileTransferManager`2
-    name: IApizrFileTransferManager
-    nameWithType: IApizrFileTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrFileTransferManager
+  - uid: Apizr.Transferring.Managing.IApizrTransferManager`2
+    name: IApizrTransferManager
+    nameWithType: IApizrTransferManager
+    fullName: Apizr.Transferring.Managing.IApizrTransferManager
   - name: <
     nameWithType: <
     fullName: <
-  - name: TFileTransferApi
-    nameWithType: TFileTransferApi
-    fullName: TFileTransferApi
+  - name: TTransferApi
+    nameWithType: TTransferApi
+    fullName: TTransferApi
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -720,16 +720,16 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrFileTransferManager`2
-    name: IApizrFileTransferManager
-    nameWithType: IApizrFileTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrFileTransferManager
+  - uid: Apizr.Transferring.Managing.IApizrTransferManager`2
+    name: IApizrTransferManager
+    nameWithType: IApizrTransferManager
+    fullName: Apizr.Transferring.Managing.IApizrTransferManager
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TFileTransferApi
-    nameWithType: TFileTransferApi
-    fullName: TFileTransferApi
+  - name: TTransferApi
+    nameWithType: TTransferApi
+    fullName: TTransferApi
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -823,39 +823,39 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Transferring.Managing.IApizrDataTransferManager`1
-  commentId: T:Apizr.Transferring.Managing.IApizrDataTransferManager`1
-  name: IApizrDataTransferManager<TDataTransferApi>
-  nameWithType: IApizrDataTransferManager<TDataTransferApi>
-  fullName: Apizr.Transferring.Managing.IApizrDataTransferManager<TDataTransferApi>
-  nameWithType.vb: IApizrDataTransferManager(Of TDataTransferApi)
-  fullName.vb: Apizr.Transferring.Managing.IApizrDataTransferManager(Of TDataTransferApi)
-  name.vb: IApizrDataTransferManager(Of TDataTransferApi)
+- uid: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+  commentId: T:Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+  name: IApizrTransferManagerBase<TTransferApiBase>
+  nameWithType: IApizrTransferManagerBase<TTransferApiBase>
+  fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase<TTransferApiBase>
+  nameWithType.vb: IApizrTransferManagerBase(Of TTransferApiBase)
+  fullName.vb: Apizr.Transferring.Managing.IApizrTransferManagerBase(Of TTransferApiBase)
+  name.vb: IApizrTransferManagerBase(Of TTransferApiBase)
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrDataTransferManager`1
-    name: IApizrDataTransferManager
-    nameWithType: IApizrDataTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrDataTransferManager
+  - uid: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+    name: IApizrTransferManagerBase
+    nameWithType: IApizrTransferManagerBase
+    fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase
   - name: <
     nameWithType: <
     fullName: <
-  - name: TDataTransferApi
-    nameWithType: TDataTransferApi
-    fullName: TDataTransferApi
+  - name: TTransferApiBase
+    nameWithType: TTransferApiBase
+    fullName: TTransferApiBase
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrDataTransferManager`1
-    name: IApizrDataTransferManager
-    nameWithType: IApizrDataTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrDataTransferManager
+  - uid: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+    name: IApizrTransferManagerBase
+    nameWithType: IApizrTransferManagerBase
+    fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TDataTransferApi
-    nameWithType: TDataTransferApi
-    fullName: TDataTransferApi
+  - name: TTransferApiBase
+    nameWithType: TTransferApiBase
+    fullName: TTransferApiBase
   - name: )
     nameWithType: )
     fullName: )
@@ -864,35 +864,35 @@ references:
   name: Apizr
   nameWithType: Apizr
   fullName: Apizr
-- uid: Apizr.Transferring.Managing.ApizrFileTransferManager`2.#ctor*
-  commentId: Overload:Apizr.Transferring.Managing.ApizrFileTransferManager`2.#ctor
-  name: ApizrFileTransferManager
-  nameWithType: ApizrFileTransferManager<TFileTransferApi, TDownloadParams>.ApizrFileTransferManager
-  fullName: Apizr.Transferring.Managing.ApizrFileTransferManager<TFileTransferApi, TDownloadParams>.ApizrFileTransferManager
-  nameWithType.vb: ApizrFileTransferManager(Of TFileTransferApi, TDownloadParams).ApizrFileTransferManager
-  fullName.vb: Apizr.Transferring.Managing.ApizrFileTransferManager(Of TFileTransferApi, TDownloadParams).ApizrFileTransferManager
-- uid: Apizr.Transferring.Managing.ApizrFileTransferManager`2.DownloadAsync*
-  commentId: Overload:Apizr.Transferring.Managing.ApizrFileTransferManager`2.DownloadAsync
+- uid: Apizr.Transferring.Managing.ApizrTransferManager`2.#ctor*
+  commentId: Overload:Apizr.Transferring.Managing.ApizrTransferManager`2.#ctor
+  name: ApizrTransferManager
+  nameWithType: ApizrTransferManager<TTransferApi, TDownloadParams>.ApizrTransferManager
+  fullName: Apizr.Transferring.Managing.ApizrTransferManager<TTransferApi, TDownloadParams>.ApizrTransferManager
+  nameWithType.vb: ApizrTransferManager(Of TTransferApi, TDownloadParams).ApizrTransferManager
+  fullName.vb: Apizr.Transferring.Managing.ApizrTransferManager(Of TTransferApi, TDownloadParams).ApizrTransferManager
+- uid: Apizr.Transferring.Managing.ApizrTransferManager`2.DownloadAsync*
+  commentId: Overload:Apizr.Transferring.Managing.ApizrTransferManager`2.DownloadAsync
   name: DownloadAsync
-  nameWithType: ApizrFileTransferManager<TFileTransferApi, TDownloadParams>.DownloadAsync
-  fullName: Apizr.Transferring.Managing.ApizrFileTransferManager<TFileTransferApi, TDownloadParams>.DownloadAsync
-  nameWithType.vb: ApizrFileTransferManager(Of TFileTransferApi, TDownloadParams).DownloadAsync
-  fullName.vb: Apizr.Transferring.Managing.ApizrFileTransferManager(Of TFileTransferApi, TDownloadParams).DownloadAsync
-- uid: Apizr.Transferring.Managing.IApizrDownloadManager{{TFileTransferApi},{TDownloadParams}}.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  nameWithType: ApizrTransferManager<TTransferApi, TDownloadParams>.DownloadAsync
+  fullName: Apizr.Transferring.Managing.ApizrTransferManager<TTransferApi, TDownloadParams>.DownloadAsync
+  nameWithType.vb: ApizrTransferManager(Of TTransferApi, TDownloadParams).DownloadAsync
+  fullName.vb: Apizr.Transferring.Managing.ApizrTransferManager(Of TTransferApi, TDownloadParams).DownloadAsync
+- uid: Apizr.Transferring.Managing.IApizrDownloadManager{{TTransferApi},{TDownloadParams}}.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Transferring.Managing.IApizrDownloadManager{`0,`1}.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  parent: Apizr.Transferring.Managing.IApizrDownloadManager{{TFileTransferApi},{TDownloadParams}}
+  parent: Apizr.Transferring.Managing.IApizrDownloadManager{{TTransferApi},{TDownloadParams}}
   definition: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   name: DownloadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
-  nameWithType: IApizrDownloadManager<TFileTransferApi, TDownloadParams>.DownloadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
-  fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TFileTransferApi, TDownloadParams>.DownloadAsync(System.IO.FileInfo, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
-  nameWithType.vb: IApizrDownloadManager(Of TFileTransferApi, TDownloadParams).DownloadAsync(FileInfo, Action(Of IApizrRequestOptionsBuilder))
-  fullName.vb: Apizr.Transferring.Managing.IApizrDownloadManager(Of TFileTransferApi, TDownloadParams).DownloadAsync(System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  nameWithType: IApizrDownloadManager<TTransferApi, TDownloadParams>.DownloadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TTransferApi, TDownloadParams>.DownloadAsync(System.IO.FileInfo, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: IApizrDownloadManager(Of TTransferApi, TDownloadParams).DownloadAsync(FileInfo, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Transferring.Managing.IApizrDownloadManager(Of TTransferApi, TDownloadParams).DownloadAsync(System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: DownloadAsync(FileInfo, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: DownloadAsync
-    nameWithType: IApizrDownloadManager<TFileTransferApi, TDownloadParams>.DownloadAsync
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TFileTransferApi, TDownloadParams>.DownloadAsync
+    nameWithType: IApizrDownloadManager<TTransferApi, TDownloadParams>.DownloadAsync
+    fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TTransferApi, TDownloadParams>.DownloadAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -925,8 +925,8 @@ references:
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: DownloadAsync
-    nameWithType: IApizrDownloadManager(Of TFileTransferApi, TDownloadParams).DownloadAsync
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager(Of TFileTransferApi, TDownloadParams).DownloadAsync
+    nameWithType: IApizrDownloadManager(Of TTransferApi, TDownloadParams).DownloadAsync
+    fullName: Apizr.Transferring.Managing.IApizrDownloadManager(Of TTransferApi, TDownloadParams).DownloadAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -1216,21 +1216,21 @@ references:
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
-- uid: Apizr.Transferring.Managing.IApizrDownloadManager{{TFileTransferApi},{TDownloadParams}}.DownloadAsync(System.IO.FileInfo,{TDownloadParams},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+- uid: Apizr.Transferring.Managing.IApizrDownloadManager{{TTransferApi},{TDownloadParams}}.DownloadAsync(System.IO.FileInfo,{TDownloadParams},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Transferring.Managing.IApizrDownloadManager{`0,`1}.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  parent: Apizr.Transferring.Managing.IApizrDownloadManager{{TFileTransferApi},{TDownloadParams}}
+  parent: Apizr.Transferring.Managing.IApizrDownloadManager{{TTransferApi},{TDownloadParams}}
   definition: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   name: DownloadAsync(FileInfo, TDownloadParams, Action<IApizrRequestOptionsBuilder>)
-  nameWithType: IApizrDownloadManager<TFileTransferApi, TDownloadParams>.DownloadAsync(FileInfo, TDownloadParams, Action<IApizrRequestOptionsBuilder>)
-  fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TFileTransferApi, TDownloadParams>.DownloadAsync(System.IO.FileInfo, TDownloadParams, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
-  nameWithType.vb: IApizrDownloadManager(Of TFileTransferApi, TDownloadParams).DownloadAsync(FileInfo, TDownloadParams, Action(Of IApizrRequestOptionsBuilder))
-  fullName.vb: Apizr.Transferring.Managing.IApizrDownloadManager(Of TFileTransferApi, TDownloadParams).DownloadAsync(System.IO.FileInfo, TDownloadParams, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  nameWithType: IApizrDownloadManager<TTransferApi, TDownloadParams>.DownloadAsync(FileInfo, TDownloadParams, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TTransferApi, TDownloadParams>.DownloadAsync(System.IO.FileInfo, TDownloadParams, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: IApizrDownloadManager(Of TTransferApi, TDownloadParams).DownloadAsync(FileInfo, TDownloadParams, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Transferring.Managing.IApizrDownloadManager(Of TTransferApi, TDownloadParams).DownloadAsync(System.IO.FileInfo, TDownloadParams, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: DownloadAsync(FileInfo, TDownloadParams, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: DownloadAsync
-    nameWithType: IApizrDownloadManager<TFileTransferApi, TDownloadParams>.DownloadAsync
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TFileTransferApi, TDownloadParams>.DownloadAsync
+    nameWithType: IApizrDownloadManager<TTransferApi, TDownloadParams>.DownloadAsync
+    fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TTransferApi, TDownloadParams>.DownloadAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -1269,8 +1269,8 @@ references:
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: DownloadAsync
-    nameWithType: IApizrDownloadManager(Of TFileTransferApi, TDownloadParams).DownloadAsync
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager(Of TFileTransferApi, TDownloadParams).DownloadAsync
+    nameWithType: IApizrDownloadManager(Of TTransferApi, TDownloadParams).DownloadAsync
+    fullName: Apizr.Transferring.Managing.IApizrDownloadManager(Of TTransferApi, TDownloadParams).DownloadAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -1405,28 +1405,28 @@ references:
   name: TDownloadParams
   nameWithType: TDownloadParams
   fullName: TDownloadParams
-- uid: Apizr.Transferring.Managing.ApizrFileTransferManager`2.UploadAsync*
-  commentId: Overload:Apizr.Transferring.Managing.ApizrFileTransferManager`2.UploadAsync
+- uid: Apizr.Transferring.Managing.ApizrTransferManager`2.UploadAsync*
+  commentId: Overload:Apizr.Transferring.Managing.ApizrTransferManager`2.UploadAsync
   name: UploadAsync
-  nameWithType: ApizrFileTransferManager<TFileTransferApi, TDownloadParams>.UploadAsync
-  fullName: Apizr.Transferring.Managing.ApizrFileTransferManager<TFileTransferApi, TDownloadParams>.UploadAsync
-  nameWithType.vb: ApizrFileTransferManager(Of TFileTransferApi, TDownloadParams).UploadAsync
-  fullName.vb: Apizr.Transferring.Managing.ApizrFileTransferManager(Of TFileTransferApi, TDownloadParams).UploadAsync
-- uid: Apizr.Transferring.Managing.IApizrUploadManager{{TFileTransferApi}}.UploadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  nameWithType: ApizrTransferManager<TTransferApi, TDownloadParams>.UploadAsync
+  fullName: Apizr.Transferring.Managing.ApizrTransferManager<TTransferApi, TDownloadParams>.UploadAsync
+  nameWithType.vb: ApizrTransferManager(Of TTransferApi, TDownloadParams).UploadAsync
+  fullName.vb: Apizr.Transferring.Managing.ApizrTransferManager(Of TTransferApi, TDownloadParams).UploadAsync
+- uid: Apizr.Transferring.Managing.IApizrUploadManager{{TTransferApi}}.UploadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Transferring.Managing.IApizrUploadManager{`0}.UploadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  parent: Apizr.Transferring.Managing.IApizrUploadManager{{TFileTransferApi}}
+  parent: Apizr.Transferring.Managing.IApizrUploadManager{{TTransferApi}}
   definition: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   name: UploadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
-  nameWithType: IApizrUploadManager<TFileTransferApi>.UploadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
-  fullName: Apizr.Transferring.Managing.IApizrUploadManager<TFileTransferApi>.UploadAsync(System.IO.FileInfo, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
-  nameWithType.vb: IApizrUploadManager(Of TFileTransferApi).UploadAsync(FileInfo, Action(Of IApizrRequestOptionsBuilder))
-  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of TFileTransferApi).UploadAsync(System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  nameWithType: IApizrUploadManager<TTransferApi>.UploadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Transferring.Managing.IApizrUploadManager<TTransferApi>.UploadAsync(System.IO.FileInfo, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: IApizrUploadManager(Of TTransferApi).UploadAsync(FileInfo, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of TTransferApi).UploadAsync(System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: UploadAsync(FileInfo, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager<TFileTransferApi>.UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager<TFileTransferApi>.UploadAsync
+    nameWithType: IApizrUploadManager<TTransferApi>.UploadAsync
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager<TTransferApi>.UploadAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -1459,8 +1459,8 @@ references:
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager(Of TFileTransferApi).UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager(Of TFileTransferApi).UploadAsync
+    nameWithType: IApizrUploadManager(Of TTransferApi).UploadAsync
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager(Of TTransferApi).UploadAsync
   - name: (
     nameWithType: (
     fullName: (

@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Apizr.Configuring.Request;
 using Apizr.Transferring.Requesting;
+using Refit;
 
 namespace Apizr.Transferring.Managing;
 
@@ -28,8 +29,16 @@ public class ApizrTransferManager<TTransferApi, TDownloadParams> : IApizrTransfe
         => _downloadManager.DownloadAsync(fileInfo, downloadParams, optionsBuilder);
 
     /// <inheritdoc />
-    public Task<FileInfo> UploadAsync(FileInfo fileInfo, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-        => _uploadManager.UploadAsync(fileInfo, optionsBuilder);
+    public Task UploadAsync(ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        => _uploadManager.UploadAsync(byteArrayPart, optionsBuilder);
+
+    /// <inheritdoc />
+    public Task UploadAsync(StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        => _uploadManager.UploadAsync(streamPart, optionsBuilder);
+
+    /// <inheritdoc />
+    public Task UploadAsync(FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        => _uploadManager.UploadAsync(fileInfoPart, optionsBuilder);
 }
 
 public class ApizrTransferManager<TTransferApi> : ApizrTransferManager<TTransferApi, IDictionary<string, object>>, IApizrTransferManager<TTransferApi> where TTransferApi : ITransferApi

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Apizr.Configuring.Request;
+using Apizr.Extending;
 using Apizr.Transferring.Requesting;
 
 namespace Apizr.Transferring.Managing;
 
-public class ApizrDownloadManager<TDownloadApi, TDownloadParams> : ApizrTransferManagerBase<TDownloadApi>, IApizrDownloadManager<TDownloadApi, TDownloadParams> where TDownloadApi : IDownloadApi<TDownloadParams>
+public class ApizrDownloadManager<TDownloadApi, TDownloadParams> : ApizrTransferManagerBase<TDownloadApi>,
+    IApizrDownloadManager<TDownloadApi, TDownloadParams> where TDownloadApi : IDownloadApi<TDownloadParams>
 {
     public ApizrDownloadManager(IApizrManager<TDownloadApi> fileTransferApiManager) : base(fileTransferApiManager)
     {
@@ -17,7 +19,9 @@ public class ApizrDownloadManager<TDownloadApi, TDownloadParams> : ApizrTransfer
     public async Task<FileInfo> DownloadAsync(FileInfo fileInfo,
         Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     {
-        using var response = await TransferApiManager.ExecuteAsync((opt, api) => api.DownloadAsync(fileInfo.Name, opt), optionsBuilder).ConfigureAwait(false);
+        using var response = await TransferApiManager
+            .ExecuteAsync((opt, api) => api.DownloadAsync(opt.GetEndingPathOrDefault(fileInfo.Name), opt),
+                optionsBuilder).ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
         using var ms = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
         using var fs = File.Create(fileInfo.FullName);
@@ -31,7 +35,10 @@ public class ApizrDownloadManager<TDownloadApi, TDownloadParams> : ApizrTransfer
     public async Task<FileInfo> DownloadAsync(FileInfo fileInfo, TDownloadParams downloadParams,
         Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     {
-        using var response = await TransferApiManager.ExecuteAsync((opt, api) => api.DownloadAsync(fileInfo.Name, downloadParams, opt), optionsBuilder).ConfigureAwait(false);
+        using var response = await TransferApiManager
+            .ExecuteAsync(
+                (opt, api) => api.DownloadAsync(opt.GetEndingPathOrDefault(fileInfo.Name), downloadParams, opt),
+                optionsBuilder).ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
         using var ms = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
         using var fs = File.Create(fileInfo.FullName);
@@ -43,10 +50,10 @@ public class ApizrDownloadManager<TDownloadApi, TDownloadParams> : ApizrTransfer
 }
 
 
-public class ApizrDownloadManager<TDownloadApi> : ApizrDownloadManager<TDownloadApi, IDictionary<string, object>>, IApizrDownloadManager<TDownloadApi> where TDownloadApi : IDownloadApi<IDictionary<string, object>>
+public class ApizrDownloadManager<TDownloadApi> : ApizrDownloadManager<TDownloadApi, IDictionary<string, object>>,
+    IApizrDownloadManager<TDownloadApi> where TDownloadApi : IDownloadApi<IDictionary<string, object>>
 {
     public ApizrDownloadManager(IApizrManager<TDownloadApi> fileTransferApiManager) : base(fileTransferApiManager)
     {
     }
-
 }

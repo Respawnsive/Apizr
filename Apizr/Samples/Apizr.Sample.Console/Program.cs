@@ -147,46 +147,49 @@ namespace Apizr.Sample.Console
                         logging.SetMinimumLevel(LogLevel.Trace);
                     }));
 
-                    _httpBinManager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
+                    //_httpBinManager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
+
+                    var fileManager = ApizrBuilder.Current.CreateTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr").WithLoggerFactory(() => lazyLoggerFactory.Value));
+                    var fileInfo = await fileManager.DownloadAsync(new FileInfo("test10Mb.db"), options => options.WithEndingPath("files")).ConfigureAwait(false);
 
 
-                    var host = Host.CreateDefaultBuilder()
-                        .ConfigureLogging(logging =>
-                        {
-                            logging.AddConsole();
-                            logging.AddConsole();
-                            logging.SetMinimumLevel(LogLevel.Trace);
-                        })
-                        .ConfigureServices(services =>
-                        {
-                            services.AddPolicyRegistry(policyRegistry);
-                            services.AddApizr(registry => registry
-                                .AddManagerFor<IReqResService>()
-                                .AddManagerFor<IHttpBinService>()//);
-                            //.AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>());
-                            .AddUploadManager(uploadRegistry => uploadRegistry.AddFor<IUploadApi>()));
+                    //var host = Host.CreateDefaultBuilder()
+                    //    .ConfigureLogging(logging =>
+                    //    {
+                    //        logging.AddConsole();
+                    //        logging.AddConsole();
+                    //        logging.SetMinimumLevel(LogLevel.Trace);
+                    //    })
+                    //    .ConfigureServices(services =>
+                    //    {
+                    //        services.AddPolicyRegistry(policyRegistry);
+                    //        services.AddApizr(registry => registry
+                    //            .AddManagerFor<IReqResService>()
+                    //            .AddManagerFor<IHttpBinService>()//);
+                    //        //.AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>());
+                    //        .AddUploadManager(uploadRegistry => uploadRegistry.AddFor<IUploadApi>()));
 
-                            // This is just to let you know what's registered from/for Apizr and ready to use
-                            foreach (var service in services.Where(d =>
-                                         (d.ServiceType != null) ||
-                                         (d.ImplementationType != null)))
-                            {
-                                System.Console.WriteLine(
-                                    $"Registered {service.Lifetime} service: {service.ServiceType?.GetFriendlyName()} - {service.ImplementationType?.GetFriendlyName()}");
-                            }
-                        }).Build();
+                    //        // This is just to let you know what's registered from/for Apizr and ready to use
+                    //        foreach (var service in services.Where(d =>
+                    //                     (d.ServiceType != null) ||
+                    //                     (d.ImplementationType != null)))
+                    //        {
+                    //            System.Console.WriteLine(
+                    //                $"Registered {service.Lifetime} service: {service.ServiceType?.GetFriendlyName()} - {service.ImplementationType?.GetFriendlyName()}");
+                    //        }
+                    //    }).Build();
 
 
-                    var scope = host.Services.CreateScope();
+                    //var scope = host.Services.CreateScope();
 
-                    _httpBinManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IHttpBinService>>();
-                    var testRegistry = scope.ServiceProvider.GetRequiredService<IApizrExtendedRegistry>();
+                    //_httpBinManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IHttpBinService>>();
+                    //var testRegistry = scope.ServiceProvider.GetRequiredService<IApizrExtendedRegistry>();
 
-                    await using var stream = GetTestFileStream($"Files/Test_{fileSuffix}.{fileExtension}");
-                    var streamPart = new StreamPart(stream, $"test_{fileSuffix}-streampart.{fileExtension}", $"{fileType}");
+                    //await using var stream = GetTestFileStream($"Files/Test_{fileSuffix}.{fileExtension}");
+                    //var streamPart = new StreamPart(stream, $"test_{fileSuffix}-streampart.{fileExtension}", $"{fileType}");
 
-                    var result =
-                        await _httpBinManager.ExecuteAsync(api => api.UploadStreamPart(streamPart));
+                    //var result =
+                    //    await _httpBinManager.ExecuteAsync(api => api.UploadStreamPart(streamPart));
                     //var test = await result.Content.ReadAsStringAsync();
                 }
                 catch (Exception e)

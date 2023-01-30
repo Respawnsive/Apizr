@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
-using System.Net.Http;
 using System.Threading;
-using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;

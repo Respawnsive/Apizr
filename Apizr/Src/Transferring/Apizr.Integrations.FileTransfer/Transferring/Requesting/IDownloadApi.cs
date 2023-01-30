@@ -8,17 +8,17 @@ namespace Apizr.Transferring.Requesting;
 
 public interface IDownloadApi<in TDownloadParams> : ITransferApiBase
 {
-    [Get("/{fileName}")]
-    Task<HttpResponseMessage> DownloadAsync(string fileName);
+    [Get("/{filePathOrName}")]
+    Task<HttpResponseMessage> DownloadAsync(string filePathOrName);
 
-    [Get("/{fileName}")]
-    Task<HttpResponseMessage> DownloadAsync(string fileName, [RequestOptions] IApizrRequestOptions options);
+    [Get("/{filePathOrName}")]
+    Task<HttpResponseMessage> DownloadAsync(string filePathOrName, [RequestOptions] IApizrRequestOptions options);
 
-    [Get("/{fileName}")]
-    Task<HttpResponseMessage> DownloadAsync(string fileName, TDownloadParams downloadParams);
+    [Get("/{filePathOrName}")]
+    Task<HttpResponseMessage> DownloadAsync(string filePathOrName, TDownloadParams downloadParams);
 
-    [Get("/{fileName}")]
-    Task<HttpResponseMessage> DownloadAsync(string fileName, TDownloadParams downloadParams, [RequestOptions] IApizrRequestOptions options);
+    [Get("/{filePathOrName}")]
+    Task<HttpResponseMessage> DownloadAsync(string filePathOrName, TDownloadParams downloadParams, [RequestOptions] IApizrRequestOptions options);
 }
 
 public interface IDownloadApi : IDownloadApi<IDictionary<string, object>>

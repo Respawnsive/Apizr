@@ -3,6 +3,7 @@ using Apizr.Configuring.Common;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Proper;
 using Apizr.Configuring.Registry;
+using Apizr.Configuring.Request;
 using Apizr.Configuring.Shared;
 using Apizr.Progressing;
 using Apizr.Transferring.Managing;
@@ -485,7 +486,27 @@ public static class FileTransferOptionsBuilderExtensions
             voidBuilder.SetHandlerParameter(Constants.ApizrProgressKey, progress);
 
         return builder;
-    } 
+    }
+
+    #endregion
+
+    #region Path
+
+    /// <summary>
+    /// Tells Apizr to set the ending of the request uri with the provided path
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="builder"></param>
+    /// <param name="endingPath">The path ending the request uri</param>
+    /// <returns></returns>
+    public static T WithEndingPath<T>(this T builder, string endingPath)
+        where T : IApizrRequestOptionsBuilderBase
+    {
+        if (builder is IApizrInternalOptionsBuilder voidBuilder)
+            voidBuilder.SetHandlerParameter(Constants.ApizrEndingPathKey, endingPath);
+
+        return builder;
+    }
 
     #endregion
 }

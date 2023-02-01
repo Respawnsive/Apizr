@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Configuring.Request;
@@ -8,16 +9,16 @@ namespace Apizr.Transferring.Requesting;
 
 public interface IDownloadApi<in TDownloadParams> : ITransferApiBase
 {
-    [Get("/{filePathOrName}")]
+    [Get("/{filePathOrName}"), QueryUriFormat(UriFormat.Unescaped)]
     Task<HttpResponseMessage> DownloadAsync(string filePathOrName);
 
-    [Get("/{filePathOrName}")]
+    [Get("/{filePathOrName}"), QueryUriFormat(UriFormat.Unescaped)]
     Task<HttpResponseMessage> DownloadAsync(string filePathOrName, [RequestOptions] IApizrRequestOptions options);
 
-    [Get("/{filePathOrName}")]
+    [Get("/{filePathOrName}"), QueryUriFormat(UriFormat.Unescaped)]
     Task<HttpResponseMessage> DownloadAsync(string filePathOrName, TDownloadParams downloadParams);
 
-    [Get("/{filePathOrName}")]
+    [Get("/{filePathOrName}"), QueryUriFormat(UriFormat.Unescaped)]
     Task<HttpResponseMessage> DownloadAsync(string filePathOrName, TDownloadParams downloadParams, [RequestOptions] IApizrRequestOptions options);
 }
 

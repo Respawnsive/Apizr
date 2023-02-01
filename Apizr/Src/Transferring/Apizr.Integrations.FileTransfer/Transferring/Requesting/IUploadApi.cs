@@ -1,5 +1,6 @@
 ﻿using Apizr.Configuring.Request;
 using Refit;
+using System;
 using System.Threading.Tasks;
 
 namespace Apizr.Transferring.Requesting;
@@ -13,7 +14,7 @@ public interface IUploadApi : ITransferApiBase
     Task UploadAsync(ByteArrayPart byteArrayPart);
 
     [Multipart]
-    [Post("/{path}")]
+    [Post("/{path}"), QueryUriFormat(UriFormat.Unescaped)]
     Task UploadAsync(ByteArrayPart byteArrayPart, string path);
 
     [Multipart]
@@ -21,7 +22,7 @@ public interface IUploadApi : ITransferApiBase
     Task UploadAsync(ByteArrayPart byteArrayPart, [RequestOptions] IApizrRequestOptions options);
 
     [Multipart]
-    [Post("/{path}")]
+    [Post("/{path}"), QueryUriFormat(UriFormat.Unescaped)]
     Task UploadAsync(ByteArrayPart byteArrayPart, string path, [RequestOptions] IApizrRequestOptions options);
 
     #endregion
@@ -33,7 +34,7 @@ public interface IUploadApi : ITransferApiBase
     Task UploadAsync(StreamPart streamPart);
 
     [Multipart]
-    [Post("/{path}")]
+    [Post("/{path}"), QueryUriFormat(UriFormat.Unescaped)]
     Task UploadAsync(StreamPart streamPart, string path);
 
     [Multipart]
@@ -41,7 +42,7 @@ public interface IUploadApi : ITransferApiBase
     Task UploadAsync(StreamPart streamPart, [RequestOptions] IApizrRequestOptions options);
 
     [Multipart]
-    [Post("/{path}")]
+    [Post("/{path}"), QueryUriFormat(UriFormat.Unescaped)]
     Task UploadAsync(StreamPart streamPart, string path, [RequestOptions] IApizrRequestOptions options);
 
     #endregion
@@ -53,7 +54,7 @@ public interface IUploadApi : ITransferApiBase
     Task UploadAsync(FileInfoPart fileInfoPart);
 
     [Multipart]
-    [Post("/{filePath}")]
+    [Post("/{filePath}"), QueryUriFormat(UriFormat.Unescaped)]
     Task UploadAsync(FileInfoPart fileInfoPart, string filePath);
 
     [Multipart]
@@ -61,7 +62,7 @@ public interface IUploadApi : ITransferApiBase
     Task UploadAsync(FileInfoPart fileInfoPart, [RequestOptions] IApizrRequestOptions options);
 
     [Multipart]
-    [Post("/{filePath}")]
+    [Post("/{filePath}"), QueryUriFormat(UriFormat.Unescaped)]
     Task UploadAsync(FileInfoPart fileInfoPart, string filePath, [RequestOptions] IApizrRequestOptions options); 
 
     #endregion

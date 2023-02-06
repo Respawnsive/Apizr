@@ -1,18 +1,22 @@
 ﻿using System;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Proper;
+using Apizr.Logging;
 using Apizr.Transferring.Managing;
 using Apizr.Transferring.Requesting;
 
 namespace Apizr.Configuring.Registry;
 
-public abstract class ApizrDownloadRegistryBuilderBase<TApizrDownloadRegistryBuilder, TApizrRegistryBuilder, TApizrProperOptionsBuilder,
-    TApizrCommonOptionsBuilder> : IApizrDownloadRegistryBuilderBase<TApizrDownloadRegistryBuilder, TApizrRegistryBuilder,
+public abstract class ApizrDownloadRegistryBuilderBase<TApizrDownloadRegistryBuilder, TApizrRegistryBuilder,
+    TApizrProperOptionsBuilder,
+    TApizrCommonOptionsBuilder> : IApizrDownloadRegistryBuilderBase<TApizrDownloadRegistryBuilder, TApizrRegistryBuilder
+    ,
     TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>
     where TApizrRegistryBuilder : IApizrRegistryBuilderBase
     where TApizrProperOptionsBuilder : IApizrGlobalProperOptionsBuilderBase
     where TApizrCommonOptionsBuilder : IApizrGlobalCommonOptionsBuilderBase
-    where TApizrDownloadRegistryBuilder : IApizrDownloadRegistryBuilderBase<TApizrDownloadRegistryBuilder, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>
+    where TApizrDownloadRegistryBuilder : IApizrDownloadRegistryBuilderBase<TApizrDownloadRegistryBuilder,
+        TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>
 {
     private readonly IApizrInternalRegistryBuilderBase<TApizrProperOptionsBuilder> _internalBuilder;
 
@@ -28,16 +32,19 @@ public abstract class ApizrDownloadRegistryBuilderBase<TApizrDownloadRegistryBui
         where TDownloadApi : IDownloadApi
     {
         _internalBuilder?.AddWrappingManagerFor<TDownloadApi, IApizrDownloadManager<TDownloadApi>>(
-            apizrManager => new ApizrDownloadManager<TDownloadApi>(apizrManager), optionsBuilder);
+            apizrManager => new ApizrDownloadManager<TDownloadApi>(apizrManager),
+            FileTransferOptionsBuilderExtensions.IgnoreMessageParts(optionsBuilder, HttpMessageParts.ResponseBody));
 
         return Builder;
     }
 
     /// <inheritdoc />
-    public TApizrDownloadRegistryBuilder AddFor<TDownloadApi, TDownloadParams>(Action<TApizrProperOptionsBuilder> optionsBuilder = null) where TDownloadApi : IDownloadApi<TDownloadParams>
+    public TApizrDownloadRegistryBuilder AddFor<TDownloadApi, TDownloadParams>(
+        Action<TApizrProperOptionsBuilder> optionsBuilder = null) where TDownloadApi : IDownloadApi<TDownloadParams>
     {
         _internalBuilder?.AddWrappingManagerFor<TDownloadApi, IApizrDownloadManager<TDownloadApi, TDownloadParams>>(
-            apizrManager => new ApizrDownloadManager<TDownloadApi, TDownloadParams>(apizrManager), optionsBuilder);
+            apizrManager => new ApizrDownloadManager<TDownloadApi, TDownloadParams>(apizrManager),
+            FileTransferOptionsBuilderExtensions.IgnoreMessageParts(optionsBuilder, HttpMessageParts.ResponseBody));
 
         return Builder;
     }

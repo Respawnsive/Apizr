@@ -77,7 +77,7 @@ namespace Apizr.Tests
         public async Task Downloading_File_With_Ending_Path_Should_Use_Path()
         {
             var fileManager = ApizrBuilder.Current.CreateTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr"));
-            var fileInfo = await fileManager.DownloadAsync(new FileInfo("test10Mb.db"), options => options.WithEndingPath("files")).ConfigureAwait(false);
+            var fileInfo = await fileManager.DownloadAsync(new FileInfo("test10Mb.db"), options => options.WithDynamicPath("files")).ConfigureAwait(false);
             
             fileInfo.Length.Should().BePositive();
         }

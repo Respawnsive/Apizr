@@ -149,10 +149,10 @@ namespace Apizr.Sample.Console
 
                     //_httpBinManager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
 
-                    var fileManager = ApizrBuilder.Current.CreateTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr").WithLoggerFactory(() => lazyLoggerFactory.Value));
-                    var fileInfo = await fileManager.DownloadAsync(new FileInfo("test10Mb.db"), new Dictionary<string, object> { { "key1", "value1" } }, options => options.WithEndingPath("files")).ConfigureAwait(false);
-                    //var fileManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferSampleApi>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
-                    //var fileInfo = await fileManager.DownloadAsync(new FileInfo("test10Mb.db"), new Dictionary<string, object> { { "path", "files" }, { "key1", "value1" } }).ConfigureAwait(false);
+                    //var fileManager = ApizrBuilder.Current.CreateTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr").WithLoggerFactory(() => lazyLoggerFactory.Value));
+                    //var fileInfo = await fileManager.DownloadAsync(new FileInfo("test10Mb.db"), new Dictionary<string, object> { { "key1", "value1" } }, options => options.WithDynamicPath("files")).ConfigureAwait(false);
+                    var fileManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferSampleApi>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
+                    var fileInfo = await fileManager.DownloadAsync(new FileInfo("test10Mb.db")).ConfigureAwait(false);
 
 
 

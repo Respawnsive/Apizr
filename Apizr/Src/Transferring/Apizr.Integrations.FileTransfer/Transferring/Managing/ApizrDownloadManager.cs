@@ -20,7 +20,7 @@ public class ApizrDownloadManager<TDownloadApi, TDownloadParams> : ApizrTransfer
         Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     {
         using var response = await TransferApiManager
-            .ExecuteAsync((opt, api) => api.DownloadAsync(opt.GetEndingPathOrDefault(fileInfo.Name), opt),
+            .ExecuteAsync((opt, api) => api.DownloadAsync(opt.GetDynamicPathOrDefault(fileInfo.Name), opt),
                 optionsBuilder).ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
         using var ms = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
@@ -37,7 +37,7 @@ public class ApizrDownloadManager<TDownloadApi, TDownloadParams> : ApizrTransfer
     {
         using var response = await TransferApiManager
             .ExecuteAsync(
-                (opt, api) => api.DownloadAsync(opt.GetEndingPathOrDefault(fileInfo.Name), downloadParams, opt),
+                (opt, api) => api.DownloadAsync(opt.GetDynamicPathOrDefault(fileInfo.Name), downloadParams, opt),
                 optionsBuilder).ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
         using var ms = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);

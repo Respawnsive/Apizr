@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -61,10 +62,11 @@ namespace Apizr.Logging
         
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
+            IApizrRequestOptions requestOptions = null;
             var context = request.GetOrBuildApizrPolicyExecutionContext();
             if (!context.TryGetLogger(out var logger, out var logLevels, out var verbosity, out var tracerMode))
             {
-                if (request.TryGetOptions(out var requestOptions))
+                if (request.TryGetOptions(out requestOptions))
                 {
                     logLevels = requestOptions.LogLevels;
                     verbosity = requestOptions.TrafficVerbosity;
@@ -77,6 +79,17 @@ namespace Apizr.Logging
                     tracerMode = _apizrOptions.HttpTracerMode;
                 }
                 logger = _apizrOptions.Logger;
+            }
+
+            // Ignore some message parts if asked to
+            if ((requestOptions != null || request.TryGetOptions(out requestOptions)) &&
+                requestOptions.HandlersParameters.TryGetValue(Constants.ApizrIgnoreMessagePartsKey,
+                    out var ignoreMessagePartsProperty) &&
+                ignoreMessagePartsProperty is HttpMessageParts ignoreMessageParts)
+            {
+                foreach (var ignoreMessagePart in Enum.GetValues(ignoreMessageParts.GetType()).Cast<Enum>()
+                             .Where(ignoreMessageParts.HasFlag).Cast<HttpMessageParts>())
+                    verbosity &= ~ignoreMessagePart;
             }
 
             try

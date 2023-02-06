@@ -5,6 +5,7 @@ using Apizr.Configuring.Proper;
 using Apizr.Configuring.Registry;
 using Apizr.Configuring.Request;
 using Apizr.Configuring.Shared;
+using Apizr.Logging;
 using Apizr.Progressing;
 using Apizr.Transferring.Managing;
 using Apizr.Transferring.Requesting;
@@ -40,7 +41,8 @@ public static class FileTransferOptionsBuilderExtensions
     public static IApizrUploadManager<TUploadApi> CreateUploadManagerFor<TUploadApi>(this IApizrBuilder builder,
         Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
         where TUploadApi : IUploadApi =>
-        new ApizrUploadManager<TUploadApi>(builder.CreateManagerFor<TUploadApi>(optionsBuilder));
+        new ApizrUploadManager<TUploadApi>(
+            builder.CreateManagerFor<TUploadApi>(optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody)));
 
     /// <summary>
     /// Create a download manager for IDownloadApi (you must at least provide a base url thanks to the options builder)
@@ -62,7 +64,8 @@ public static class FileTransferOptionsBuilderExtensions
     public static IApizrDownloadManager<TDownloadApi> CreateDownloadManagerFor<TDownloadApi>(this IApizrBuilder builder,
         Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
         where TDownloadApi : IDownloadApi =>
-        new ApizrDownloadManager<TDownloadApi>(builder.CreateManagerFor<TDownloadApi>(optionsBuilder));
+        new ApizrDownloadManager<TDownloadApi>(
+            builder.CreateManagerFor<TDownloadApi>(optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody)));
 
     /// <summary>
     /// Create a download manager for the provided download api derived from IDownloadApi{TDownloadParams}
@@ -72,10 +75,12 @@ public static class FileTransferOptionsBuilderExtensions
     /// <param name="builder">The builder to create the manager from</param>
     /// <param name="optionsBuilder">The builder defining some options</param>
     /// <returns></returns>
-    public static IApizrDownloadManager<TDownloadApi, TDownloadParams> CreateDownloadManagerFor<TDownloadApi, TDownloadParams>(this IApizrBuilder builder,
+    public static IApizrDownloadManager<TDownloadApi, TDownloadParams> CreateDownloadManagerFor<TDownloadApi,
+        TDownloadParams>(this IApizrBuilder builder,
         Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
         where TDownloadApi : IDownloadApi<TDownloadParams> =>
-        new ApizrDownloadManager<TDownloadApi, TDownloadParams>(builder.CreateManagerFor<TDownloadApi>(optionsBuilder));
+        new ApizrDownloadManager<TDownloadApi, TDownloadParams>(
+            builder.CreateManagerFor<TDownloadApi>(optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody)));
 
     /// <summary>
     /// Create a transfer manager for ITransferApi (you must at least provide a base url thanks to the options builder)
@@ -97,8 +102,11 @@ public static class FileTransferOptionsBuilderExtensions
     public static IApizrTransferManager<TTransferApi> CreateTransferManagerFor<TTransferApi>(this IApizrBuilder builder,
         Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
         where TTransferApi : ITransferApi =>
-        new ApizrTransferManager<TTransferApi>(builder.CreateDownloadManagerFor<TTransferApi>(optionsBuilder),
-            builder.CreateUploadManagerFor<TTransferApi>(optionsBuilder));
+        new ApizrTransferManager<TTransferApi>(
+            builder.CreateDownloadManagerFor<TTransferApi>(IgnoreMessageParts(optionsBuilder,
+                HttpMessageParts.ResponseBody)),
+            builder.CreateUploadManagerFor<TTransferApi>(IgnoreMessageParts(optionsBuilder,
+                HttpMessageParts.RequestBody)));
 
     /// <summary>
     /// Create a transfer manager for the provided transfer api derived from ITransferApi{TDownloadParams}
@@ -108,11 +116,15 @@ public static class FileTransferOptionsBuilderExtensions
     /// <param name="builder">The builder to create the manager from</param>
     /// <param name="optionsBuilder">The builder defining some options</param>
     /// <returns></returns>
-    public static IApizrTransferManager<TTransferApi, TDownloadParams> CreateTransferManagerFor<TTransferApi, TDownloadParams>(this IApizrBuilder builder,
+    public static IApizrTransferManager<TTransferApi, TDownloadParams> CreateTransferManagerFor<TTransferApi,
+        TDownloadParams>(this IApizrBuilder builder,
         Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
         where TTransferApi : ITransferApi<TDownloadParams> =>
-        new ApizrTransferManager<TTransferApi, TDownloadParams>(builder.CreateDownloadManagerFor<TTransferApi, TDownloadParams>(optionsBuilder),
-            builder.CreateUploadManagerFor<TTransferApi>(optionsBuilder));
+        new ApizrTransferManager<TTransferApi, TDownloadParams>(
+            builder.CreateDownloadManagerFor<TTransferApi, TDownloadParams>(IgnoreMessageParts(optionsBuilder,
+                HttpMessageParts.ResponseBody)),
+            builder.CreateUploadManagerFor<TTransferApi>(IgnoreMessageParts(optionsBuilder,
+                HttpMessageParts.RequestBody)));
 
     #endregion
     
@@ -130,7 +142,9 @@ public static class FileTransferOptionsBuilderExtensions
         Action<IApizrProperOptionsBuilder> optionsBuilder)
     {
         if (builder is IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder> internalBuilder)
-            internalBuilder.AddWrappingManagerFor<IUploadApi, IApizrUploadManager<IUploadApi>>(apizrManager => new ApizrUploadManager<IUploadApi>(apizrManager), optionsBuilder);
+            internalBuilder.AddWrappingManagerFor<IUploadApi, IApizrUploadManager<IUploadApi>>(
+                apizrManager => new ApizrUploadManager<IUploadApi>(apizrManager),
+                optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody));
 
         return builder;
     }
@@ -167,7 +181,9 @@ public static class FileTransferOptionsBuilderExtensions
             Action<IApizrProperOptionsBuilder> optionsBuilder)
     {
         if (builder is IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder> internalBuilder)
-            internalBuilder.AddWrappingManagerFor<IDownloadApi, IApizrDownloadManager<IDownloadApi>>(apizrManager => new ApizrDownloadManager<IDownloadApi>(apizrManager), optionsBuilder);
+            internalBuilder.AddWrappingManagerFor<IDownloadApi, IApizrDownloadManager<IDownloadApi>>(
+                apizrManager => new ApizrDownloadManager<IDownloadApi>(apizrManager),
+                optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody));
 
         return builder;
     }
@@ -205,8 +221,9 @@ public static class FileTransferOptionsBuilderExtensions
     {
         if (builder is IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder> internalBuilder)
             internalBuilder.AddWrappingManagerFor<ITransferApi, IApizrTransferManager<ITransferApi>>(apizrManager =>
-                new ApizrTransferManager<ITransferApi>(new ApizrDownloadManager<ITransferApi>(apizrManager),
-                    new ApizrUploadManager<ITransferApi>(apizrManager)), optionsBuilder);
+                    new ApizrTransferManager<ITransferApi>(new ApizrDownloadManager<ITransferApi>(apizrManager),
+                        new ApizrUploadManager<ITransferApi>(apizrManager)),
+                optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody | HttpMessageParts.ResponseBody));
 
         return builder;
     }
@@ -444,11 +461,11 @@ public static class FileTransferOptionsBuilderExtensions
     /// Enables transfer progress reporting with Apizr
     /// (you should provide a progress callback or reporter at request time)
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TBuilder"></typeparam>
     /// <param name="builder"></param>
     /// <returns></returns>
-    public static T WithProgress<T>(this T builder)
-        where T : IApizrGlobalSharedOptionsBuilderBase
+    public static TBuilder WithProgress<TBuilder>(this TBuilder builder)
+        where TBuilder : IApizrGlobalSharedOptionsBuilderBase
     {
         if (builder is IApizrInternalRegistrationOptionsBuilder registrationBuilder)
             registrationBuilder.AddDelegatingHandler(_ =>
@@ -460,23 +477,23 @@ public static class FileTransferOptionsBuilderExtensions
     /// <summary>
     /// Tells Apizr to report any transfer progress
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TBuilder"></typeparam>
     /// <param name="builder"></param>
     /// <param name="onProgress">The action called back on any progress</param>
     /// <returns></returns>
-    public static T WithProgress<T>(this T builder, Action<ApizrProgressEventArgs> onProgress)
-        where T : IApizrGlobalSharedOptionsBuilderBase
+    public static TBuilder WithProgress<TBuilder>(this TBuilder builder, Action<ApizrProgressEventArgs> onProgress)
+        where TBuilder : IApizrGlobalSharedOptionsBuilderBase
         => builder.WithProgress(new ApizrProgress(onProgress));
 
     /// <summary>
     /// Tells Apizr to report any transfer progress
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TBuilder"></typeparam>
     /// <param name="builder"></param>
     /// <param name="progress">The progress reporter</param>
     /// <returns></returns>
-    public static T WithProgress<T>(this T builder, IApizrProgress progress)
-        where T : IApizrGlobalSharedOptionsBuilderBase
+    public static TBuilder WithProgress<TBuilder>(this TBuilder builder, IApizrProgress progress)
+        where TBuilder : IApizrGlobalSharedOptionsBuilderBase
     {
         if (builder is IApizrInternalRegistrationOptionsBuilder registrationBuilder)
             registrationBuilder.AddDelegatingHandler(_ =>
@@ -497,15 +514,33 @@ public static class FileTransferOptionsBuilderExtensions
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="builder"></param>
-    /// <param name="endingPath">The path ending the request uri</param>
+    /// <param name="dynamicPath">The path ending the request uri</param>
     /// <returns></returns>
-    public static T WithEndingPath<T>(this T builder, string endingPath)
+    public static T WithDynamicPath<T>(this T builder, string dynamicPath)
         where T : IApizrRequestOptionsBuilderBase
     {
         if (builder is IApizrInternalOptionsBuilder voidBuilder)
-            voidBuilder.SetHandlerParameter(Constants.ApizrEndingPathKey, endingPath);
+            voidBuilder.SetHandlerParameter(Constants.ApizrDynamicPathKey, dynamicPath);
 
         return builder;
+    }
+
+    #endregion
+
+    #region Internal
+
+    internal static Action<T> IgnoreMessageParts<T>(this 
+        Action<T> optionsBuilder, HttpMessageParts messageParts)
+    where T : IApizrGlobalSharedOptionsBuilderBase
+    {
+        if (optionsBuilder == null)
+            optionsBuilder = optionsBuilderInstance =>
+                ((IApizrInternalOptionsBuilder)optionsBuilderInstance).SetHandlerParameter(Constants.ApizrIgnoreMessagePartsKey, messageParts);
+        else
+            optionsBuilder += optionsBuilderInstance =>
+                ((IApizrInternalOptionsBuilder)optionsBuilderInstance).SetHandlerParameter(Constants.ApizrIgnoreMessagePartsKey, messageParts);
+
+        return optionsBuilder;
     }
 
     #endregion

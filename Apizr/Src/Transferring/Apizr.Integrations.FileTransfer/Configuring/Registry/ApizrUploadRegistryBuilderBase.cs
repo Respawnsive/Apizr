@@ -1,18 +1,21 @@
 ﻿using System;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Proper;
+using Apizr.Logging;
 using Apizr.Transferring.Managing;
 using Apizr.Transferring.Requesting;
 
 namespace Apizr.Configuring.Registry;
 
-public abstract class ApizrUploadRegistryBuilderBase<TApizrUploadRegistryBuilder, TApizrRegistryBuilder, TApizrProperOptionsBuilder,
+public abstract class ApizrUploadRegistryBuilderBase<TApizrUploadRegistryBuilder, TApizrRegistryBuilder,
+    TApizrProperOptionsBuilder,
     TApizrCommonOptionsBuilder> : IApizrUploadRegistryBuilderBase<TApizrUploadRegistryBuilder, TApizrRegistryBuilder,
     TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>
     where TApizrRegistryBuilder : IApizrRegistryBuilderBase
     where TApizrProperOptionsBuilder : IApizrGlobalProperOptionsBuilderBase
     where TApizrCommonOptionsBuilder : IApizrGlobalCommonOptionsBuilderBase
-    where TApizrUploadRegistryBuilder : IApizrUploadRegistryBuilderBase<TApizrUploadRegistryBuilder, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>
+    where TApizrUploadRegistryBuilder : IApizrUploadRegistryBuilderBase<TApizrUploadRegistryBuilder,
+        TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>
 {
     private readonly IApizrInternalRegistryBuilderBase<TApizrProperOptionsBuilder> _internalBuilder;
 
@@ -28,7 +31,8 @@ public abstract class ApizrUploadRegistryBuilderBase<TApizrUploadRegistryBuilder
         where TUploadApi : IUploadApi
     {
         _internalBuilder?.AddWrappingManagerFor<TUploadApi, IApizrUploadManager<TUploadApi>>(
-            apizrManager => new ApizrUploadManager<TUploadApi>(apizrManager), optionsBuilder);
+            apizrManager => new ApizrUploadManager<TUploadApi>(apizrManager),
+            FileTransferOptionsBuilderExtensions.IgnoreMessageParts(optionsBuilder, HttpMessageParts.RequestBody));
 
         return Builder;
     }

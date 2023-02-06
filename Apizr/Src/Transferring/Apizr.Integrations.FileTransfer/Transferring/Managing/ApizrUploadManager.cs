@@ -17,18 +17,18 @@ public class ApizrUploadManager<TUploadApi> : ApizrTransferManagerBase<TUploadAp
     /// <inheritdoc />
     public Task UploadAsync(ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         => TransferApiManager.ExecuteAsync(
-            (opt, api) => api.UploadAsync(byteArrayPart, opt.GetEndingPathOrDefault(),
+            (opt, api) => api.UploadAsync(byteArrayPart, opt.GetDynamicPathOrDefault(),
                 opt), optionsBuilder);
 
     /// <inheritdoc />
     public Task UploadAsync(StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         => TransferApiManager.ExecuteAsync(
-            (opt, api) => api.UploadAsync(streamPart, opt.GetEndingPathOrDefault(),
+            (opt, api) => api.UploadAsync(streamPart, opt.GetDynamicPathOrDefault(),
                 opt), optionsBuilder);
 
     /// <inheritdoc />
     public Task UploadAsync(FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         => TransferApiManager.ExecuteAsync(
-            (opt, api) => api.UploadAsync(fileInfoPart, opt.GetEndingPathOrDefault(),
+            (opt, api) => api.UploadAsync(fileInfoPart, opt.GetDynamicPathOrDefault(),
                 opt), optionsBuilder);
 }

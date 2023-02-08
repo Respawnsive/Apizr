@@ -11,6 +11,7 @@ using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Logging;
+using Apizr.Mediation.Extending;
 using Apizr.Mediation.Requesting.Sending;
 using Apizr.Optional.Requesting.Sending;
 using Apizr.Policing;
@@ -387,6 +388,26 @@ namespace Apizr.Tests
             result.Should().NotBeNull();
             result.Data.Should().NotBeNull();
             result.Data.Count.Should().BeGreaterOrEqualTo(1);
+        }
+
+        [Fact]
+        public async Task Calling_WithFileTransferMediation_Should_Handle_Requests()
+        {
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddApizrTransferManager(config => config
+                .WithMediation()
+                .WithFileTransferMediation());
+
+            var serviceProvider = services.BuildServiceProvider();
+            var apizrMediator = serviceProvider.GetRequiredService<IApizrMediator>();
+
+            apizrMediator.Should().NotBeNull();
+            var result = await apizrMediator.SendDownloadQuery(new FileInfo("test10Mb.db"));
+            result.Should().NotBeNull();
+            result.Length.Should().BePositive();
         }
 
         [Fact]

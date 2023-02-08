@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using Apizr.Extending;
-using Apizr.Extending.Configuring;
 using Apizr.Extending.Configuring.Common;
 using Apizr.Extending.Configuring.Manager;
 using Apizr.Mapping;
@@ -16,6 +15,7 @@ using Apizr.Optional.Cruding.Sending;
 using Apizr.Optional.Requesting;
 using Apizr.Optional.Requesting.Handling;
 using Apizr.Optional.Requesting.Sending;
+using Apizr.Requesting;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Optional;
@@ -60,248 +60,251 @@ namespace Apizr
             {
                 #region Crud
 
-                // Register crud optional mediator
-                services.TryAddSingleton<IApizrCrudOptionalMediator, ApizrCrudOptionalMediator>();
-
-                // Crud entities auto registration
-                foreach (var crudEntity in apizrOptions.CrudEntities)
+                // Crud interfaces auto registration
+                var isCrudApi = typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType);
+                if (isCrudApi)
                 {
-                    var apiEntityAttribute = crudEntity.Value;
-                    var apiEntityType = crudEntity.Key;
-                    var modelEntityType = apiEntityAttribute.MappedEntityType;
-                    var apiEntityKeyType = apiEntityAttribute.KeyType;
-                    var apiEntityReadAllResultType = apiEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(apiEntityType);
-                    var modelEntityReadAllResultType = apiEntityAttribute.ReadAllResultType.IsGenericTypeDefinition
-                        ? apiEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(modelEntityType)
-                        : apiEntityAttribute.ReadAllResultType.GetGenericTypeDefinition()
-                            .MakeGenericTypeIfNeeded(modelEntityType);
-                    var apiEntityReadAllParamsType = apiEntityAttribute.ReadAllParamsType;
+                    // Register crud optional mediator
+                    services.TryAddSingleton<IApizrCrudOptionalMediator, ApizrCrudOptionalMediator>();
 
-                    #region ShortRead
-
-                    // Read but short default version if concerned
-                    if (apiEntityKeyType == typeof(int))
+                    var apiEntityType = webApiType.GetGenericArguments().First();
+                    if (apizrOptions.CrudEntities.TryGetValue(apiEntityType, out var apiEntityAttribute))
                     {
+                        var modelEntityType = apiEntityAttribute.MappedEntityType;
+                        var apiEntityKeyType = apiEntityAttribute.KeyType;
+                        var apiEntityReadAllResultType = apiEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(apiEntityType);
+                        var modelEntityReadAllResultType = apiEntityAttribute.ReadAllResultType.IsGenericTypeDefinition
+                            ? apiEntityAttribute.ReadAllResultType.MakeGenericTypeIfNeeded(modelEntityType)
+                            : apiEntityAttribute.ReadAllResultType.GetGenericTypeDefinition()
+                                .MakeGenericTypeIfNeeded(modelEntityType);
+                        var apiEntityReadAllParamsType = apiEntityAttribute.ReadAllParamsType;
+
+                        #region ShortRead
+
+                        // Read but short default version if concerned
+                        if (apiEntityKeyType == typeof(int))
+                        {
+                            // ServiceType
+                            var shortReadQueryType = typeof(ReadOptionalQuery<>).MakeGenericType(modelEntityType);
+                            var shortReadQueryExceptionType = typeof(ApizrException<>).MakeGenericType(modelEntityType);
+                            var shortReadQueryResponseType = typeof(Option<,>).MakeGenericType(modelEntityType, shortReadQueryExceptionType);
+                            var shortReadQueryHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortReadQueryType, shortReadQueryResponseType);
+
+                            // ImplementationType
+                            var shortReadQueryHandlerImplementationType = typeof(ReadOptionalQueryHandler<,,,>).MakeGenericType(
+                                modelEntityType,
+                                apiEntityType,
+                                apiEntityReadAllResultType,
+                                apiEntityReadAllParamsType);
+
+                            // Registration
+                            services.TryAddTransient(shortReadQueryHandlerServiceType, shortReadQueryHandlerImplementationType);
+                        }
+
+                        #endregion
+
+                        #region Read
+
                         // ServiceType
-                        var shortReadQueryType = typeof(ReadOptionalQuery<>).MakeGenericType(modelEntityType);
-                        var shortReadQueryExceptionType = typeof(ApizrException<>).MakeGenericType(modelEntityType);
-                        var shortReadQueryResponseType = typeof(Option<,>).MakeGenericType(modelEntityType, shortReadQueryExceptionType);
-                        var shortReadQueryHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortReadQueryType, shortReadQueryResponseType);
+                        var readQueryType = typeof(ReadOptionalQuery<,>).MakeGenericType(modelEntityType, apiEntityKeyType);
+                        var readQueryExceptionType = typeof(ApizrException<>).MakeGenericType(modelEntityType);
+                        var readQueryResponseType = typeof(Option<,>).MakeGenericType(modelEntityType, readQueryExceptionType);
+                        var readQueryHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(readQueryType, readQueryResponseType);
 
                         // ImplementationType
-                        var shortReadQueryHandlerImplementationType = typeof(ReadOptionalQueryHandler<,,,>).MakeGenericType(
+                        var readQueryHandlerImplementationType = typeof(ReadOptionalQueryHandler<,,,,>).MakeGenericType(
                             modelEntityType,
                             apiEntityType,
+                            apiEntityKeyType,
                             apiEntityReadAllResultType,
                             apiEntityReadAllParamsType);
 
                         // Registration
-                        services.TryAddTransient(shortReadQueryHandlerServiceType, shortReadQueryHandlerImplementationType);
-                    }
+                        services.TryAddTransient(readQueryHandlerServiceType, readQueryHandlerImplementationType);
 
-                    #endregion
+                        #endregion
 
-                    #region Read
+                        #region ShortReadAll
 
-                    // ServiceType
-                    var readQueryType = typeof(ReadOptionalQuery<,>).MakeGenericType(modelEntityType, apiEntityKeyType);
-                    var readQueryExceptionType = typeof(ApizrException<>).MakeGenericType(modelEntityType);
-                    var readQueryResponseType = typeof(Option<,>).MakeGenericType(modelEntityType, readQueryExceptionType);
-                    var readQueryHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(readQueryType, readQueryResponseType);
+                        // ReadAll but short default version if concerned
+                        if (apiEntityReadAllParamsType == typeof(IDictionary<string, object>))
+                        {
+                            // ServiceType
+                            var shortReadAllQueryType = typeof(ReadAllOptionalQuery<>).MakeGenericType(modelEntityReadAllResultType);
+                            var shortReadAllQueryExceptionType = typeof(ApizrException<>).MakeGenericType(modelEntityReadAllResultType);
+                            var shortReadAllQueryResponseType = typeof(Option<,>).MakeGenericType(modelEntityReadAllResultType, shortReadAllQueryExceptionType);
+                            var shortReadAllQueryHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortReadAllQueryType, shortReadAllQueryResponseType);
 
-                    // ImplementationType
-                    var readQueryHandlerImplementationType = typeof(ReadOptionalQueryHandler<,,,,>).MakeGenericType(
-                        modelEntityType,
-                        apiEntityType,
-                        apiEntityKeyType,
-                        apiEntityReadAllResultType,
-                        apiEntityReadAllParamsType);
+                            // ImplementationType
+                            var shortReadAllQueryHandlerImplementationType = typeof(ReadAllOptionalQueryHandler<,,,>).MakeGenericType(
+                                apiEntityType,
+                                apiEntityKeyType,
+                                modelEntityReadAllResultType,
+                                apiEntityReadAllResultType);
 
-                    // Registration
-                    services.TryAddTransient(readQueryHandlerServiceType, readQueryHandlerImplementationType);
+                            // Registration
+                            services.TryAddTransient(shortReadAllQueryHandlerServiceType, shortReadAllQueryHandlerImplementationType);
+                        }
 
-                    #endregion
+                        #endregion
 
-                    #region ShortReadAll
+                        #region ReadAll
 
-                    // ReadAll but short default version if concerned
-                    if (apiEntityReadAllParamsType == typeof(IDictionary<string, object>))
-                    {
                         // ServiceType
-                        var shortReadAllQueryType = typeof(ReadAllOptionalQuery<>).MakeGenericType(modelEntityReadAllResultType);
-                        var shortReadAllQueryExceptionType = typeof(ApizrException<>).MakeGenericType(modelEntityReadAllResultType);
-                        var shortReadAllQueryResponseType = typeof(Option<,>).MakeGenericType(modelEntityReadAllResultType, shortReadAllQueryExceptionType);
-                        var shortReadAllQueryHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortReadAllQueryType, shortReadAllQueryResponseType);
+                        var readAllQueryType = typeof(ReadAllOptionalQuery<,>).MakeGenericType(apiEntityReadAllParamsType, modelEntityReadAllResultType);
+                        var readAllQueryExceptionType = typeof(ApizrException<>).MakeGenericType(modelEntityReadAllResultType);
+                        var readAllQueryResponseType = typeof(Option<,>).MakeGenericType(modelEntityReadAllResultType, readAllQueryExceptionType);
+                        var readAllQueryHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(readAllQueryType, readAllQueryResponseType);
 
                         // ImplementationType
-                        var shortReadAllQueryHandlerImplementationType = typeof(ReadAllOptionalQueryHandler<,,,>).MakeGenericType(
+                        var readAllQueryHandlerImplementationType = typeof(ReadAllOptionalQueryHandler<,,,,>).MakeGenericType(
                             apiEntityType,
                             apiEntityKeyType,
                             modelEntityReadAllResultType,
-                            apiEntityReadAllResultType);
-
-                        // Registration
-                        services.TryAddTransient(shortReadAllQueryHandlerServiceType, shortReadAllQueryHandlerImplementationType);
-                    }
-
-                    #endregion
-
-                    #region ReadAll
-
-                    // ServiceType
-                    var readAllQueryType = typeof(ReadAllOptionalQuery<,>).MakeGenericType(apiEntityReadAllParamsType, modelEntityReadAllResultType);
-                    var readAllQueryExceptionType = typeof(ApizrException<>).MakeGenericType(modelEntityReadAllResultType);
-                    var readAllQueryResponseType = typeof(Option<,>).MakeGenericType(modelEntityReadAllResultType, readAllQueryExceptionType);
-                    var readAllQueryHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(readAllQueryType, readAllQueryResponseType);
-
-                    // ImplementationType
-                    var readAllQueryHandlerImplementationType = typeof(ReadAllOptionalQueryHandler<,,,,>).MakeGenericType(
-                        apiEntityType,
-                        apiEntityKeyType,
-                        modelEntityReadAllResultType,
-                        apiEntityReadAllResultType,
-                        apiEntityReadAllParamsType);
-
-                    // Registration
-                    services.TryAddTransient(readAllQueryHandlerServiceType, readAllQueryHandlerImplementationType);
-
-                    #endregion
-
-                    #region Create
-
-                    // ServiceType
-                    var createCommandType = typeof(CreateOptionalCommand<>).MakeGenericType(modelEntityType);
-                    var createCommandExceptionType = typeof(ApizrException);
-                    var createCommandResponseType = typeof(Option<,>).MakeGenericType(modelEntityType, createCommandExceptionType);
-                    var createCommandHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(createCommandType, createCommandResponseType);
-
-                    // ImplementationType
-                    var createCommandHandlerImplementationType = typeof(CreateOptionalCommandHandler<,,,,>).MakeGenericType(
-                        modelEntityType,
-                        apiEntityType,
-                        apiEntityKeyType,
-                        apiEntityReadAllResultType,
-                        apiEntityReadAllParamsType);
-
-                    // Registration
-                    services.TryAddTransient(createCommandHandlerServiceType, createCommandHandlerImplementationType);
-
-                    #endregion
-
-                    #region ShortUpdate
-
-                    // Update but short default version if concerned
-                    if (apiEntityKeyType == typeof(int))
-                    {
-                        // ServiceType
-                        var shortUpdateCommandType = typeof(UpdateOptionalCommand<>).MakeGenericType(modelEntityType);
-                        var shortUpdateCommandResponseType = typeof(Option<Unit, ApizrException>);
-                        var shortUpdateCommandHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortUpdateCommandType, shortUpdateCommandResponseType);
-
-                        // ImplementationType
-                        var shortUpdateCommandHandlerImplementationType = typeof(UpdateOptionalCommandHandler<,,,>).MakeGenericType(
-                            modelEntityType,
-                            apiEntityType,
                             apiEntityReadAllResultType,
                             apiEntityReadAllParamsType);
 
                         // Registration
-                        services.TryAddTransient(shortUpdateCommandHandlerServiceType, shortUpdateCommandHandlerImplementationType);
-                    }
+                        services.TryAddTransient(readAllQueryHandlerServiceType, readAllQueryHandlerImplementationType);
 
-                    #endregion
+                        #endregion
 
-                    #region Update
+                        #region Create
 
-                    // ServiceType
-                    var updateCommandType = typeof(UpdateOptionalCommand<,>).MakeGenericType(apiEntityKeyType, modelEntityType);
-                    var updateCommandResponseType = typeof(Option<Unit, ApizrException>);
-                    var updateCommandHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(updateCommandType, updateCommandResponseType);
-
-                    // ImplementationType
-                    var updateCommandHandlerImplementationType = typeof(UpdateOptionalCommandHandler<,,,,>).MakeGenericType(
-                        modelEntityType,
-                        apiEntityType,
-                        apiEntityKeyType,
-                        apiEntityReadAllResultType,
-                        apiEntityReadAllParamsType);
-
-                    // Registration
-                    services.TryAddTransient(updateCommandHandlerServiceType, updateCommandHandlerImplementationType);
-
-                    #endregion
-
-                    #region ShortDelete
-
-                    // Delete but short default version if concerned
-                    if (apiEntityKeyType == typeof(int))
-                    {
                         // ServiceType
-                        var shortDeleteCommandType = typeof(DeleteOptionalCommand<>).MakeGenericType(modelEntityType);
-                        var shortDeleteCommandResponseType = typeof(Option<Unit, ApizrException>);
-                        var shortDeleteCommandHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortDeleteCommandType, shortDeleteCommandResponseType);
+                        var createCommandType = typeof(CreateOptionalCommand<>).MakeGenericType(modelEntityType);
+                        var createCommandExceptionType = typeof(ApizrException);
+                        var createCommandResponseType = typeof(Option<,>).MakeGenericType(modelEntityType, createCommandExceptionType);
+                        var createCommandHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(createCommandType, createCommandResponseType);
 
                         // ImplementationType
-                        var shortDeleteCommandHandlerImplementationType = typeof(DeleteOptionalCommandHandler<,,,>).MakeGenericType(
+                        var createCommandHandlerImplementationType = typeof(CreateOptionalCommandHandler<,,,,>).MakeGenericType(
                             modelEntityType,
                             apiEntityType,
+                            apiEntityKeyType,
                             apiEntityReadAllResultType,
                             apiEntityReadAllParamsType);
 
                         // Registration
-                        services.TryAddTransient(shortDeleteCommandHandlerServiceType, shortDeleteCommandHandlerImplementationType);
+                        services.TryAddTransient(createCommandHandlerServiceType, createCommandHandlerImplementationType);
+
+                        #endregion
+
+                        #region ShortUpdate
+
+                        // Update but short default version if concerned
+                        if (apiEntityKeyType == typeof(int))
+                        {
+                            // ServiceType
+                            var shortUpdateCommandType = typeof(UpdateOptionalCommand<>).MakeGenericType(modelEntityType);
+                            var shortUpdateCommandResponseType = typeof(Option<Unit, ApizrException>);
+                            var shortUpdateCommandHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortUpdateCommandType, shortUpdateCommandResponseType);
+
+                            // ImplementationType
+                            var shortUpdateCommandHandlerImplementationType = typeof(UpdateOptionalCommandHandler<,,,>).MakeGenericType(
+                                modelEntityType,
+                                apiEntityType,
+                                apiEntityReadAllResultType,
+                                apiEntityReadAllParamsType);
+
+                            // Registration
+                            services.TryAddTransient(shortUpdateCommandHandlerServiceType, shortUpdateCommandHandlerImplementationType);
+                        }
+
+                        #endregion
+
+                        #region Update
+
+                        // ServiceType
+                        var updateCommandType = typeof(UpdateOptionalCommand<,>).MakeGenericType(apiEntityKeyType, modelEntityType);
+                        var updateCommandResponseType = typeof(Option<Unit, ApizrException>);
+                        var updateCommandHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(updateCommandType, updateCommandResponseType);
+
+                        // ImplementationType
+                        var updateCommandHandlerImplementationType = typeof(UpdateOptionalCommandHandler<,,,,>).MakeGenericType(
+                            modelEntityType,
+                            apiEntityType,
+                            apiEntityKeyType,
+                            apiEntityReadAllResultType,
+                            apiEntityReadAllParamsType);
+
+                        // Registration
+                        services.TryAddTransient(updateCommandHandlerServiceType, updateCommandHandlerImplementationType);
+
+                        #endregion
+
+                        #region ShortDelete
+
+                        // Delete but short default version if concerned
+                        if (apiEntityKeyType == typeof(int))
+                        {
+                            // ServiceType
+                            var shortDeleteCommandType = typeof(DeleteOptionalCommand<>).MakeGenericType(modelEntityType);
+                            var shortDeleteCommandResponseType = typeof(Option<Unit, ApizrException>);
+                            var shortDeleteCommandHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortDeleteCommandType, shortDeleteCommandResponseType);
+
+                            // ImplementationType
+                            var shortDeleteCommandHandlerImplementationType = typeof(DeleteOptionalCommandHandler<,,,>).MakeGenericType(
+                                modelEntityType,
+                                apiEntityType,
+                                apiEntityReadAllResultType,
+                                apiEntityReadAllParamsType);
+
+                            // Registration
+                            services.TryAddTransient(shortDeleteCommandHandlerServiceType, shortDeleteCommandHandlerImplementationType);
+                        }
+
+                        #endregion
+
+                        #region Delete
+
+                        // ServiceType
+                        var deleteCommandType = typeof(DeleteOptionalCommand<,>).MakeGenericType(modelEntityType, apiEntityKeyType);
+                        var deleteCommandResponseType = typeof(Option<Unit, ApizrException>);
+                        var deleteCommandHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(deleteCommandType, deleteCommandResponseType);
+
+                        // ImplementationType
+                        var deleteCommandHandlerImplementationType = typeof(DeleteOptionalCommandHandler<,,,,>).MakeGenericType(
+                            modelEntityType,
+                            apiEntityType,
+                            apiEntityKeyType,
+                            apiEntityReadAllResultType,
+                            apiEntityReadAllParamsType);
+
+                        // Registration
+                        services.TryAddTransient(deleteCommandHandlerServiceType, deleteCommandHandlerImplementationType);
+
+                        #endregion
+
+                        #region Typed
+
+                        // Typed crud optional mediator
+                        var typedCrudOptionalMediatorServiceType = typeof(IApizrCrudOptionalMediator<,,,>).MakeGenericType(apiEntityType,
+                            apiEntityKeyType,
+                            apiEntityReadAllResultType,
+                            apiEntityReadAllParamsType);
+                        var typedCrudOptionalMediatorImplementationType = typeof(ApizrCrudOptionalMediator<,,,>).MakeGenericType(apiEntityType,
+                            apiEntityKeyType,
+                            apiEntityReadAllResultType,
+                            apiEntityReadAllParamsType);
+
+                        // Register typed crud optional mediator
+                        services.TryAddTransient(typedCrudOptionalMediatorServiceType, typedCrudOptionalMediatorImplementationType);
+
+                        // Get or create and register an optional mediation registry
+                        if (!apizrOptions.PostRegistries.TryGetValue(typeof(IApizrOptionalMediationConcurrentRegistry), out var registry))
+                        {
+                            var optionalMediationRegistry = new ApizrOptionalMediationRegistry();
+                            registry = optionalMediationRegistry;
+                            apizrOptions.PostRegistries.Add(typeof(IApizrOptionalMediationConcurrentRegistry), registry);
+                            services.TryAddSingleton(serviceProvider => optionalMediationRegistry.GetInstance(serviceProvider));
+                        }
+
+                        // Add or update the optional mediator service into the registry
+                        registry.AddOrUpdateManager(typedCrudOptionalMediatorServiceType);
+
+                        #endregion
                     }
-
-                    #endregion
-
-                    #region Delete
-
-                    // ServiceType
-                    var deleteCommandType = typeof(DeleteOptionalCommand<,>).MakeGenericType(modelEntityType, apiEntityKeyType);
-                    var deleteCommandResponseType = typeof(Option<Unit, ApizrException>);
-                    var deleteCommandHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(deleteCommandType, deleteCommandResponseType);
-
-                    // ImplementationType
-                    var deleteCommandHandlerImplementationType = typeof(DeleteOptionalCommandHandler<,,,,>).MakeGenericType(
-                        modelEntityType,
-                        apiEntityType,
-                        apiEntityKeyType,
-                        apiEntityReadAllResultType,
-                        apiEntityReadAllParamsType);
-
-                    // Registration
-                    services.TryAddTransient(deleteCommandHandlerServiceType, deleteCommandHandlerImplementationType);
-
-                    #endregion
-
-                    #region Typed
-
-                    // Typed crud optional mediator
-                    var typedCrudOptionalMediatorServiceType = typeof(IApizrCrudOptionalMediator<,,,>).MakeGenericType(apiEntityType,
-                        apiEntityKeyType,
-                        apiEntityReadAllResultType,
-                        apiEntityReadAllParamsType);
-                    var typedCrudOptionalMediatorImplementationType = typeof(ApizrCrudOptionalMediator<,,,>).MakeGenericType(apiEntityType,
-                        apiEntityKeyType,
-                        apiEntityReadAllResultType,
-                        apiEntityReadAllParamsType);
-
-                    // Register typed crud optional mediator
-                    services.TryAddTransient(typedCrudOptionalMediatorServiceType, typedCrudOptionalMediatorImplementationType);
-
-                    // Get or create and register an optional mediation registry
-                    if (!apizrOptions.PostRegistries.TryGetValue(typeof(IApizrOptionalMediationConcurrentRegistry), out var registry))
-                    {
-                        var optionalMediationRegistry = new ApizrOptionalMediationRegistry();
-                        registry = optionalMediationRegistry;
-                        apizrOptions.PostRegistries.Add(typeof(IApizrOptionalMediationConcurrentRegistry), registry);
-                        services.TryAddSingleton(serviceProvider => optionalMediationRegistry.GetInstance(serviceProvider));
-                    }
-
-                    // Add or update the optional mediator service into the registry
-                    registry.AddOrUpdateManager(typedCrudOptionalMediatorServiceType);
-
-                    #endregion
                 }
 
                 #endregion
@@ -312,10 +315,10 @@ namespace Apizr
                 services.TryAddSingleton<IApizrOptionalMediator, ApizrOptionalMediator>();
 
                 // Classic interfaces auto registration
-                foreach (var webApiKey in apizrOptions.WebApis.Select(w => w.Key))
+                if (apizrOptions.WebApis.ContainsKey(webApiType))
                 {
                     // Request handlers registration
-                    foreach (var methodInfo in webApiKey.GetInterfaces().SelectMany(i => i.GetMethods()))
+                    foreach (var methodInfo in MediationOptionsBuilderExtensions.GetMethods(webApiType))
                     {
                         var returnType = methodInfo.ReturnType;
 
@@ -326,7 +329,7 @@ namespace Apizr
                                              || methodInfo.ReturnType.GetGenericTypeDefinition() != typeof(IObservable<>)))
                         {
                             var apiResponseType = returnType.GetGenericArguments()[0];
-                            
+
                             #region Unmapped
 
                             if (apiResponseType.IsGenericType &&
@@ -401,7 +404,7 @@ namespace Apizr
                                     // Registration
                                     services.TryAddTransient(executeMappedRequestHandlerServiceType, executeMappedRequestHandlerImplementationType);
                                 }
-                            } 
+                            }
 
                             #endregion
                         }
@@ -426,7 +429,7 @@ namespace Apizr
                             services.TryAddTransient(executeRequestHandlerServiceType, executeRequestHandlerImplementationType);
 
                             #endregion
-                            
+
                             #region Mapped
 
                             // Mapped object
@@ -459,8 +462,8 @@ namespace Apizr
                     #region Typed
 
                     // Typed optional mediator
-                    var typedOptionalMediatorServiceType = typeof(IApizrOptionalMediator<>).MakeGenericType(webApiKey);
-                    var typedOptionalMediatorImplementationType = typeof(ApizrOptionalMediator<>).MakeGenericType(webApiKey);
+                    var typedOptionalMediatorServiceType = typeof(IApizrOptionalMediator<>).MakeGenericType(webApiType);
+                    var typedOptionalMediatorImplementationType = typeof(ApizrOptionalMediator<>).MakeGenericType(webApiType);
 
                     // Register typed optional mediator
                     services.TryAddTransient(typedOptionalMediatorServiceType, typedOptionalMediatorImplementationType);

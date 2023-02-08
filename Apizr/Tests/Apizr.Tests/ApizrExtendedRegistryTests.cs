@@ -595,7 +595,10 @@ namespace Apizr.Tests
 
             services.AddApizr(
                 registry => registry
-                    .AddManagerFor<IReqResUserService>(),
+                    .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
+                    .AddCrudManagerFor<UserInfos, int, PagedResult<UserInfos>, IDictionary<string, object>>()
+                    .AddManagerFor<IReqResUserService>()
+                    .AddManagerFor<IReqResResourceService>(),
                 config => config
                     .WithMediation());
 
@@ -618,7 +621,10 @@ namespace Apizr.Tests
 
             services.AddApizr(
                 registry => registry
-                    .AddManagerFor<IReqResUserService>(),
+                    .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
+                    .AddCrudManagerFor<UserInfos, int, PagedResult<UserInfos>, IDictionary<string, object>>()
+                    .AddManagerFor<IReqResUserService>()
+                    .AddManagerFor<IReqResResourceService>(),
                 config => config
                     .WithOptionalMediation());
 

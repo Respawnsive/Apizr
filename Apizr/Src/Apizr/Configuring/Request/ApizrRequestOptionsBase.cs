@@ -15,7 +15,7 @@ namespace Apizr.Configuring.Request
             HttpMessageParts? trafficVerbosity,
             params LogLevel[] logLevels) : base(sharedOptions)
         {
-            Context = sharedOptions.ContextFactory?.Invoke();
+            Context = sharedOptions?.ContextFactory?.Invoke();
             if (httpTracerMode != null)
                 HttpTracerMode = httpTracerMode.Value;
             if (trafficVerbosity != null)

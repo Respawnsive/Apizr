@@ -312,9 +312,10 @@ namespace Apizr
                 services.TryAddSingleton<IApizrOptionalMediator, ApizrOptionalMediator>();
 
                 // Classic interfaces auto registration
-                foreach (var webApi in apizrOptions.WebApis)
+                foreach (var webApiKey in apizrOptions.WebApis.Select(w => w.Key))
                 {
-                    foreach (var methodInfo in webApi.Key.GetMethods())
+                    // Request handlers registration
+                    foreach (var methodInfo in webApiKey.GetInterfaces().SelectMany(i => i.GetMethods()))
                     {
                         var returnType = methodInfo.ReturnType;
 
@@ -458,8 +459,8 @@ namespace Apizr
                     #region Typed
 
                     // Typed optional mediator
-                    var typedOptionalMediatorServiceType = typeof(IApizrOptionalMediator<>).MakeGenericType(webApi.Key);
-                    var typedOptionalMediatorImplementationType = typeof(ApizrOptionalMediator<>).MakeGenericType(webApi.Key);
+                    var typedOptionalMediatorServiceType = typeof(IApizrOptionalMediator<>).MakeGenericType(webApiKey);
+                    var typedOptionalMediatorImplementationType = typeof(ApizrOptionalMediator<>).MakeGenericType(webApiKey);
 
                     // Register typed optional mediator
                     services.TryAddTransient(typedOptionalMediatorServiceType, typedOptionalMediatorImplementationType);

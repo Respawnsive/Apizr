@@ -799,9 +799,7 @@ namespace Apizr
 
             string baseAddress = null;
             string basePath = null;
-            var webApiAttribute = webApiType.GetInterfaces()
-                .Select(i => i.GetTypeInfo().GetCustomAttribute<WebApiAttribute>(true))
-                .FirstOrDefault(a => a != null);
+            var webApiAttribute = ApizrBuilder.GetWebApiAttribute(webApiType);
             if (webApiAttribute != null)
             {
                 if (!string.IsNullOrWhiteSpace(webApiAttribute.BaseAddressOrPath))

@@ -241,9 +241,7 @@ namespace Apizr
 
             string baseAddress = null;
             string basePath = null;
-            var webApiAttribute = webApiType.GetInterfaces()
-                .Select(i => i.GetTypeInfo().GetCustomAttribute<WebApiAttribute>(true))
-                .FirstOrDefault(a => a != null);
+            var webApiAttribute = GetWebApiAttribute(webApiType);
             if (!string.IsNullOrWhiteSpace(webApiAttribute?.BaseAddressOrPath))
             {
                 if(Uri.IsWellFormedUriString(webApiAttribute.BaseAddressOrPath, UriKind.Absolute))
@@ -366,7 +364,27 @@ namespace Apizr
             builder.ApizrOptions.LoggerFactory.Invoke(builder.ApizrOptions.LoggerFactoryFactory.Invoke(), builder.ApizrOptions.WebApiType.GetFriendlyName());
 
             return builder.ApizrOptions;
-        } 
+        }
+
+        #endregion
+
+        #region Internal
+        
+        internal static WebApiAttribute GetWebApiAttribute(Type webApiType)
+        {
+            var webApiAttribute = webApiType.GetTypeInfo().GetCustomAttribute<WebApiAttribute>(true);
+            if (webApiAttribute != null)
+                return webApiAttribute;
+
+            foreach (var parentInterface in webApiType.GetInterfaces())
+            {
+                webApiAttribute = parentInterface.GetTypeInfo().GetCustomAttribute<WebApiAttribute>(true);
+                if (webApiAttribute != null)
+                    return webApiAttribute;
+            }
+
+            return null;
+        }
 
         #endregion
     }

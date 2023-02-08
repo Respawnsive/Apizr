@@ -583,10 +583,15 @@ namespace Apizr
             IApizrExtendedProperOptions properOptions, 
             Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
         {
-            if (!typeof(IApizrManager<>).MakeGenericType(properOptions.WebApiType).IsAssignableFrom(properOptions.ApizrManagerType))
+            var serviceType = typeof(IApizrManager<>).MakeGenericType(properOptions.WebApiType);
+
+            if (!serviceType.IsAssignableFrom(properOptions.ApizrManagerType))
                 throw new ArgumentException(
                     $"Your Apizr manager class must inherit from IApizrManager generic interface or derived");
-            
+
+            if (services.Any(sd => sd.ServiceType == serviceType && sd.ImplementationType == properOptions.ApizrManagerType))
+                return serviceType;
+
             var webApiFriendlyName = properOptions.WebApiType.GetFriendlyName();
             var apizrOptionsBuilder = CreateOptions(commonOptions, properOptions, optionsBuilder);
             var apizrOptions = apizrOptionsBuilder.ApizrOptions;
@@ -734,7 +739,6 @@ namespace Apizr
 
             services.TryAddSingleton(serviceProvider => ((IApizrManagerOptionsBase)serviceProvider.GetRequiredService(apizrOptionsRegistrationType)).RefitSettings.ContentSerializer);
 
-            var serviceType = typeof(IApizrManager<>).MakeGenericType(apizrOptions.WebApiType);
             services.TryAddSingleton(serviceType, apizrOptions.ApizrManagerType);
 
             foreach (var postRegistrationAction in apizrOptions.PostRegistrationActions)
@@ -929,6 +933,13 @@ namespace Apizr
                 services.AddSingleton(serviceType, factory);
 
             return services;
+        }
+
+        internal static IServiceCollection TryAddSingleton<TService, TImplementation>(this IServiceCollection service)
+        {
+            service.TryAddSingleton(typeof(TService), typeof(TImplementation));
+
+            return service;
         }
     }
 }

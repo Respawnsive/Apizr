@@ -241,7 +241,9 @@ namespace Apizr
 
             string baseAddress = null;
             string basePath = null;
-            var webApiAttribute = webApiType.GetTypeInfo().GetCustomAttribute<WebApiAttribute>(true);
+            var webApiAttribute = webApiType.GetInterfaces()
+                .Select(i => i.GetTypeInfo().GetCustomAttribute<WebApiAttribute>(true))
+                .FirstOrDefault(a => a != null);
             if (!string.IsNullOrWhiteSpace(webApiAttribute?.BaseAddressOrPath))
             {
                 if(Uri.IsWellFormedUriString(webApiAttribute.BaseAddressOrPath, UriKind.Absolute))

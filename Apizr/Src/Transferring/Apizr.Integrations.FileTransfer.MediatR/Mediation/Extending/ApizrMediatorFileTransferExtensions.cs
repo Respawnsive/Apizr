@@ -24,7 +24,7 @@ namespace Apizr.Mediation.Extending
         /// <param name="downloadParams">Some custom query parameters</param>
         /// <param name="optionsBuilder">Some request options</param>
         /// <returns></returns>
-        public static Task SendDownloadQueryFor<TDownloadApi, TDownloadParams>(this IApizrMediator apizrMediator,
+        public static Task<FileInfo> SendDownloadQueryFor<TDownloadApi, TDownloadParams>(this IApizrMediator apizrMediator,
             FileInfo fileInfo,
             TDownloadParams downloadParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             where TDownloadApi : IDownloadApi<TDownloadParams> =>
@@ -41,7 +41,7 @@ namespace Apizr.Mediation.Extending
         /// <param name="fileInfo">Some information about the file to download</param>
         /// <param name="optionsBuilder">Some request options</param>
         /// <returns></returns>
-        public static Task SendDownloadQueryFor<TDownloadApi, TDownloadParams>(this IApizrMediator apizrMediator,
+        public static Task<FileInfo> SendDownloadQueryFor<TDownloadApi, TDownloadParams>(this IApizrMediator apizrMediator,
             FileInfo fileInfo, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             where TDownloadApi : IDownloadApi<TDownloadParams> =>
             ((IApizrInternalMediator) apizrMediator).Send(
@@ -57,7 +57,7 @@ namespace Apizr.Mediation.Extending
         /// <param name="downloadParams">Some custom query parameters</param>
         /// <param name="optionsBuilder">Some request options</param>
         /// <returns></returns>
-        public static Task SendDownloadQueryFor<TDownloadApi>(this IApizrMediator apizrMediator, FileInfo fileInfo,
+        public static Task<FileInfo> SendDownloadQueryFor<TDownloadApi>(this IApizrMediator apizrMediator, FileInfo fileInfo,
             IDictionary<string, object> downloadParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             where TDownloadApi : IDownloadApi =>
             ((IApizrInternalMediator) apizrMediator).Send(
@@ -72,7 +72,7 @@ namespace Apizr.Mediation.Extending
         /// <param name="fileInfo">Some information about the file to download</param>
         /// <param name="optionsBuilder">Some request options</param>
         /// <returns></returns>
-        public static Task SendDownloadQueryFor<TDownloadApi>(this IApizrMediator apizrMediator, FileInfo fileInfo,
+        public static Task<FileInfo> SendDownloadQueryFor<TDownloadApi>(this IApizrMediator apizrMediator, FileInfo fileInfo,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             where TDownloadApi : IDownloadApi =>
             ((IApizrInternalMediator) apizrMediator).Send(
@@ -87,7 +87,7 @@ namespace Apizr.Mediation.Extending
         /// <param name="downloadParams">Some custom query parameters</param>
         /// <param name="optionsBuilder">Some request options</param>
         /// <returns></returns>
-        public static Task SendDownloadQuery(this IApizrMediator apizrMediator, FileInfo fileInfo,
+        public static Task<FileInfo> SendDownloadQuery(this IApizrMediator apizrMediator, FileInfo fileInfo,
             IDictionary<string, object> downloadParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             ((IApizrInternalMediator) apizrMediator).Send(
                 new DownloadQuery(fileInfo, downloadParams, optionsBuilder),
@@ -100,7 +100,7 @@ namespace Apizr.Mediation.Extending
         /// <param name="fileInfo">Some information about the file to download</param>
         /// <param name="optionsBuilder">Some request options</param>
         /// <returns></returns>
-        public static Task SendDownloadQuery(this IApizrMediator apizrMediator, FileInfo fileInfo,
+        public static Task<FileInfo> SendDownloadQuery(this IApizrMediator apizrMediator, FileInfo fileInfo,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             ((IApizrInternalMediator) apizrMediator).Send(
                 new DownloadQuery(fileInfo, optionsBuilder),

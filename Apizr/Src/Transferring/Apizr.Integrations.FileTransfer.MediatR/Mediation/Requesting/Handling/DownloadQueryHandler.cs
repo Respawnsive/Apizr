@@ -14,8 +14,10 @@ namespace Apizr.Mediation.Requesting.Handling
     /// </summary>
     /// <typeparam name="TDownloadApi">The download api type to manage</typeparam>
     /// <typeparam name="TDownloadParams">The query parameters type</typeparam>
-    public class DownloadQueryHandler<TDownloadApi, TDownloadParams> : RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>,
-        IRequestHandler<DownloadQuery<TDownloadApi, TDownloadParams>, FileInfo> where TDownloadApi : IDownloadApi<TDownloadParams>
+    public class DownloadQueryHandler<TDownloadApi, TDownloadParams> :
+        RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>,
+        IRequestHandler<DownloadQuery<TDownloadApi, TDownloadParams>, FileInfo>
+        where TDownloadApi : IDownloadApi<TDownloadParams>
     {
         private readonly IApizrDownloadManager<TDownloadApi, TDownloadParams> _downloadManager;
 
@@ -34,8 +36,11 @@ namespace Apizr.Mediation.Requesting.Handling
     /// The mediation handler for <see cref="DownloadQuery{TDownloadApi}"/>
     /// </summary>
     /// <typeparam name="TDownloadApi">The download api type to manage</typeparam>
-    public class DownloadQueryHandler<TDownloadApi> : RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>,
-        IRequestHandler<DownloadQuery<TDownloadApi>, FileInfo> where TDownloadApi : IDownloadApi
+    public class DownloadQueryHandler<TDownloadApi> :
+        RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>,
+        IRequestHandler<DownloadQuery<TDownloadApi>, FileInfo>,
+        IRequestHandler<DownloadQuery, FileInfo> 
+        where TDownloadApi : IDownloadApi
     {
         private readonly IApizrDownloadManager<TDownloadApi> _downloadManager;
 
@@ -48,24 +53,9 @@ namespace Apizr.Mediation.Requesting.Handling
         public Task<FileInfo> Handle(DownloadQuery<TDownloadApi> request,
             CancellationToken cancellationToken) =>
             _downloadManager.DownloadAsync(request.FileInfo, request.DownloadParams, request.OptionsBuilder);
-    }
-
-    /// <summary>
-    /// The mediation handler for <see cref="DownloadQuery"/>
-    /// </summary>
-    public class DownloadQueryHandler : RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>,
-        IRequestHandler<DownloadQuery, FileInfo>
-    {
-        private readonly IApizrDownloadManager<IDownloadApi> _downloadManager;
-
-        public DownloadQueryHandler(IApizrDownloadManager<IDownloadApi> downloadManager)
-        {
-            _downloadManager = downloadManager;
-        }
 
         /// <inheritdoc />
-        public Task<FileInfo> Handle(DownloadQuery request,
-            CancellationToken cancellationToken) =>
+        public Task<FileInfo> Handle(DownloadQuery request, CancellationToken cancellationToken) =>
             _downloadManager.DownloadAsync(request.FileInfo, request.DownloadParams, request.OptionsBuilder);
     }
 }

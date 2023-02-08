@@ -21,11 +21,13 @@ using Apizr.Tests.Helpers;
 using Apizr.Tests.Models;
 using Apizr.Transferring;
 using Apizr.Transferring.Managing;
+using Apizr.Transferring.Requesting;
 using Castle.DynamicProxy.Internal;
 using FluentAssertions;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using MonkeyCache.FileStore;
 using Polly;
 using Polly.Extensions.Http;
@@ -391,26 +393,6 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Calling_WithFileTransferMediation_Should_Handle_Requests()
-        {
-            var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
-            services.AddMediatR(Assembly.GetExecutingAssembly());
-
-            services.AddApizrTransferManager(config => config
-                .WithMediation()
-                .WithFileTransferMediation());
-
-            var serviceProvider = services.BuildServiceProvider();
-            var apizrMediator = serviceProvider.GetRequiredService<IApizrMediator>();
-
-            apizrMediator.Should().NotBeNull();
-            var result = await apizrMediator.SendDownloadQuery(new FileInfo("test10Mb.db"));
-            result.Should().NotBeNull();
-            result.Length.Should().BePositive();
-        }
-
-        [Fact]
         public async Task Calling_WithOptionalMediation_Should_Handle_Requests_With_Optional_Result()
         {
             var services = new ServiceCollection();
@@ -456,6 +438,45 @@ namespace Apizr.Tests
 
             fileInfo.Should().NotBeNull();
             fileInfo.Length.Should().BePositive();
+        }
+
+        [Fact]
+        public async Task Calling_WithFileTransfer_Should_Transfer()
+        {
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddApizrTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr/files"));
+
+            var serviceProvider = services.BuildServiceProvider();
+            var apizrMediator = serviceProvider.GetRequiredService<IApizrTransferManager<ITransferApi>>();
+
+            apizrMediator.Should().NotBeNull();
+            var result = await apizrMediator.DownloadAsync(new FileInfo("test10Mb.db"));
+            result.Should().NotBeNull();
+            result.Length.Should().BePositive();
+        }
+
+        [Fact]
+        public async Task Calling_WithFileTransferMediation_Should_Handle_Requests()
+        {
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddApizrTransferManager(config => config
+                .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
+                .WithMediation()
+                .WithFileTransferMediation());
+
+            var serviceProvider = services.BuildServiceProvider();
+            var apizrMediator = serviceProvider.GetRequiredService<IApizrMediator>();
+
+            apizrMediator.Should().NotBeNull();
+            var result = await apizrMediator.SendDownloadQuery(new FileInfo("test10Mb.db"));
+            result.Should().NotBeNull();
+            result.Length.Should().BePositive();
         }
     }
 }

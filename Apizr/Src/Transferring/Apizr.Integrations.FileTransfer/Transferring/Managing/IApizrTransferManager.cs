@@ -21,3 +21,6 @@ public interface IApizrTransferManager<TTransferApi> : IApizrTransferManager<TTr
 {
 
 }
+
+public interface IApizrTransferManager : IApizrTransferManager<ITransferApi>
+{}

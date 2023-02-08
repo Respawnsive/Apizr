@@ -39,3 +39,10 @@ public interface IApizrDownloadManager<TDownloadApi, in TDownloadParams> : IApiz
 public interface IApizrDownloadManager<TDownloadApi> : IApizrDownloadManager<TDownloadApi, IDictionary<string, object>> where TDownloadApi : IDownloadApi<IDictionary<string, object>>
 {
 }
+
+/// <summary>
+/// The download manager with a dictionary query parameters type
+/// </summary>
+public interface IApizrDownloadManager : IApizrDownloadManager<IDownloadApi>
+{
+}

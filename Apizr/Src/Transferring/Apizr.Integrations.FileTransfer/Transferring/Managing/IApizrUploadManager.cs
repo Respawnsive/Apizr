@@ -36,3 +36,9 @@ public interface IApizrUploadManager<TUploadApi> : IApizrTransferManagerBase<TUp
     /// <returns></returns>
     Task UploadAsync(FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 }
+
+/// <summary>
+/// The upload manager
+/// </summary>
+public interface IApizrUploadManager : IApizrUploadManager<IUploadApi>
+{}

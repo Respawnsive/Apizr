@@ -146,6 +146,11 @@ namespace Apizr.Configuring.Registry
             Registry.AddOrUpdateManager(typeof(TWrappingManager), managerFactory);
         }
 
+        /// <inheritdoc />
+        public void AddAliasingManagerFor<TAliasedManager, TAliasingManager>() =>
+            Registry.AddOrUpdateManager(typeof(TAliasingManager),
+                () => Registry.ConcurrentRegistry[typeof(TAliasedManager)].Invoke());
+
         #endregion
     }
 }

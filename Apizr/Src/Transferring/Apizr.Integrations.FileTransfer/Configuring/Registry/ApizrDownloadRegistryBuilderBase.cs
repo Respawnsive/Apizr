@@ -31,9 +31,18 @@ public abstract class ApizrDownloadRegistryBuilderBase<TApizrDownloadRegistryBui
     public TApizrDownloadRegistryBuilder AddFor<TDownloadApi>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
         where TDownloadApi : IDownloadApi
     {
-        _internalBuilder?.AddWrappingManagerFor<TDownloadApi, IApizrDownloadManager<TDownloadApi>>(
-            apizrManager => new ApizrDownloadManager<TDownloadApi>(apizrManager),
-            FileTransferOptionsBuilderExtensions.IgnoreMessageParts(optionsBuilder, HttpMessageParts.ResponseBody));
+        if (typeof(TDownloadApi) == typeof(IDownloadApi))
+        {
+            _internalBuilder?.AddWrappingManagerFor<IDownloadApi, IApizrDownloadManager>(
+                apizrManager => new ApizrDownloadManager(apizrManager),
+                optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody));
+
+            _internalBuilder?.AddAliasingManagerFor<IApizrDownloadManager, IApizrDownloadManager<IDownloadApi>>();
+        }
+        else
+            _internalBuilder?.AddWrappingManagerFor<TDownloadApi, IApizrDownloadManager<TDownloadApi>>(
+                apizrManager => new ApizrDownloadManager<TDownloadApi>(apizrManager),
+                optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody));
 
         return Builder;
     }
@@ -44,7 +53,7 @@ public abstract class ApizrDownloadRegistryBuilderBase<TApizrDownloadRegistryBui
     {
         _internalBuilder?.AddWrappingManagerFor<TDownloadApi, IApizrDownloadManager<TDownloadApi, TDownloadParams>>(
             apizrManager => new ApizrDownloadManager<TDownloadApi, TDownloadParams>(apizrManager),
-            FileTransferOptionsBuilderExtensions.IgnoreMessageParts(optionsBuilder, HttpMessageParts.ResponseBody));
+            optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody));
 
         return Builder;
     }

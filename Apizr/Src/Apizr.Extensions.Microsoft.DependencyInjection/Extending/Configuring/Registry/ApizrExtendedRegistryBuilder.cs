@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using Apizr.Configuring.Proper;
 using Apizr.Configuring.Registry;
 using Apizr.Extending.Configuring.Common;
@@ -348,6 +349,12 @@ namespace Apizr.Extending.Configuring.Registry
             AddManagerFor<TWebApi>(optionsBuilder);
             Services.AddOrReplaceSingleton(typeof(TWrappingManager), serviceProvider => wrappingManagerFactory.Invoke(serviceProvider.GetRequiredService<IApizrManager<TWebApi>>()));
             Registry.AddOrUpdateManager(typeof(TWrappingManager));
+        }
+
+        public void AddAliasingManagerFor<TAliasedManager, TAliasingManager>()
+        {
+            Services.TryAddSingleton<TAliasingManager>(serviceProvider => serviceProvider.GetRequiredService<TAliasedManager>());
+            Registry.AddOrUpdateManager(typeof(TAliasingManager));
         }
     }
 }

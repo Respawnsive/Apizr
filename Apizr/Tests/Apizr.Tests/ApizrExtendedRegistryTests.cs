@@ -762,5 +762,54 @@ namespace Apizr.Tests
             resourceFixture = serviceProvider.GetRequiredService<IApizrManager<IReqResResourceService>>();
             resourceFixture.Options.BaseUri.Should().Be(uri3);
         }
+
+        [Fact]
+        public async Task Calling_WithFileTransfer_Should_Transfer()
+        {
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddApizr(registry => registry
+                .AddTransferManager(transferRegistry => transferRegistry
+                    .AddFor<ITransferSampleApi>()
+                    .AddFor<ITransferApi>(options => options
+                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))));
+
+            var serviceProvider = services.BuildServiceProvider();
+            var apizrTransferManager = serviceProvider.GetService<IApizrTransferManager>(); // Built-in
+            var apizrTransferTypedManager = serviceProvider.GetService<IApizrTransferManager<ITransferApi>>(); // Built-in
+            var transferSampleApiManager = serviceProvider.GetService<IApizrTransferManager<ITransferSampleApi>>(); // Custom
+
+            apizrTransferManager.Should().NotBeNull(); // Built-in
+            apizrTransferTypedManager.Should().NotBeNull(); // Built-in
+            transferSampleApiManager.Should().NotBeNull(); // Custom
+
+
+            //var registry = serviceProvider.GetRequiredService<IApizrExtendedRegistry>();
+
+            //registry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
+            //registry.TryGetManagerFor<IHttpBinService>(out var httpBinManager).Should().BeTrue();
+            //registry.TryGetCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(out var userManager).Should().BeTrue();
+
+            //reqResManager.Should().NotBeNull();
+            //httpBinManager.Should().NotBeNull();
+            //userManager.Should().NotBeNull();
+
+            // Built-in
+            var apizrTransferManagerResult = await apizrTransferManager.DownloadAsync(new FileInfo("test100k.db"));
+            apizrTransferManagerResult.Should().NotBeNull();
+            apizrTransferManagerResult.Length.Should().BePositive();
+
+            // Built-in
+            var apizrTransferTypedManagerResult = await apizrTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            apizrTransferTypedManagerResult.Should().NotBeNull();
+            apizrTransferTypedManagerResult.Length.Should().BePositive();
+
+            // Custom
+            var transferSampleApiManagerResult = await transferSampleApiManager.DownloadAsync(new FileInfo("test100k.db"));
+            transferSampleApiManagerResult.Should().NotBeNull();
+            transferSampleApiManagerResult.Length.Should().BePositive();
+        }
     }
 }

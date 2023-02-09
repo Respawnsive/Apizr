@@ -30,9 +30,18 @@ public abstract class ApizrUploadRegistryBuilderBase<TApizrUploadRegistryBuilder
     public TApizrUploadRegistryBuilder AddFor<TUploadApi>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
         where TUploadApi : IUploadApi
     {
-        _internalBuilder?.AddWrappingManagerFor<TUploadApi, IApizrUploadManager<TUploadApi>>(
-            apizrManager => new ApizrUploadManager<TUploadApi>(apizrManager),
-            FileTransferOptionsBuilderExtensions.IgnoreMessageParts(optionsBuilder, HttpMessageParts.RequestBody));
+        if (typeof(TUploadApi) == typeof(IUploadApi))
+        {
+            _internalBuilder?.AddWrappingManagerFor<IUploadApi, IApizrUploadManager>(
+                apizrManager => new ApizrUploadManager(apizrManager),
+                optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody));
+
+            _internalBuilder?.AddAliasingManagerFor<IApizrUploadManager, IApizrUploadManager<IUploadApi>>();
+        }
+        else
+            _internalBuilder?.AddWrappingManagerFor<TUploadApi, IApizrUploadManager<TUploadApi>>(
+                apizrManager => new ApizrUploadManager<TUploadApi>(apizrManager),
+                optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody));
 
         return Builder;
     }

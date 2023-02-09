@@ -27,9 +27,10 @@ public static class FileTransferOptionsBuilderExtensions
     /// <param name="builder">The builder to create the manager from</param>
     /// <param name="optionsBuilder">The builder defining some options</param>
     /// <returns></returns>
-    public static IApizrUploadManager<IUploadApi> CreateUploadManager(this IApizrBuilder builder,
+    public static IApizrUploadManager CreateUploadManager(this IApizrBuilder builder,
         Action<IApizrManagerOptionsBuilder> optionsBuilder) =>
-        builder.CreateUploadManagerFor<IUploadApi>(optionsBuilder);
+        new ApizrUploadManager(
+            builder.CreateManagerFor<IUploadApi>(optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody)));
 
     /// <summary>
     /// Create an upload manager for the provided upload api derived from IUploadApi
@@ -50,9 +51,10 @@ public static class FileTransferOptionsBuilderExtensions
     /// <param name="builder">The builder to create the manager from</param>
     /// <param name="optionsBuilder">The builder defining some options</param>
     /// <returns></returns>
-    public static IApizrDownloadManager<IDownloadApi> CreateDownloadManager(this IApizrBuilder builder,
+    public static IApizrDownloadManager CreateDownloadManager(this IApizrBuilder builder,
         Action<IApizrManagerOptionsBuilder> optionsBuilder = null) =>
-        builder.CreateDownloadManagerFor<IDownloadApi>(optionsBuilder);
+        new ApizrDownloadManager(
+            builder.CreateManagerFor<IDownloadApi>(optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody)));
 
     /// <summary>
     /// Create a download manager for the provided download api derived from IDownloadApi
@@ -88,9 +90,13 @@ public static class FileTransferOptionsBuilderExtensions
     /// <param name="builder">The builder to create the manager from</param>
     /// <param name="optionsBuilder">The builder defining some options</param>
     /// <returns></returns>
-    public static IApizrTransferManager<ITransferApi> CreateTransferManager(this IApizrBuilder builder,
+    public static IApizrTransferManager CreateTransferManager(this IApizrBuilder builder,
         Action<IApizrManagerOptionsBuilder> optionsBuilder = null) =>
-        builder.CreateTransferManagerFor<ITransferApi>(optionsBuilder);
+        new ApizrTransferManager(
+            builder.CreateDownloadManagerFor<ITransferApi>(IgnoreMessageParts(optionsBuilder,
+                HttpMessageParts.ResponseBody)),
+            builder.CreateUploadManagerFor<ITransferApi>(IgnoreMessageParts(optionsBuilder,
+                HttpMessageParts.RequestBody)));
 
     /// <summary>
     /// Create a transfer manager for the provided transfer api derived from ITransferApi
@@ -142,9 +148,13 @@ public static class FileTransferOptionsBuilderExtensions
         Action<IApizrProperOptionsBuilder> optionsBuilder)
     {
         if (builder is IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder> internalBuilder)
-            internalBuilder.AddWrappingManagerFor<IUploadApi, IApizrUploadManager<IUploadApi>>(
-                apizrManager => new ApizrUploadManager<IUploadApi>(apizrManager),
+        {
+            internalBuilder.AddWrappingManagerFor<IUploadApi, IApizrUploadManager>(
+                apizrManager => new ApizrUploadManager(apizrManager),
                 optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody));
+
+            internalBuilder.AddAliasingManagerFor<IApizrUploadManager, IApizrUploadManager<IUploadApi>>();
+        }
 
         return builder;
     }
@@ -181,9 +191,13 @@ public static class FileTransferOptionsBuilderExtensions
             Action<IApizrProperOptionsBuilder> optionsBuilder)
     {
         if (builder is IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder> internalBuilder)
-            internalBuilder.AddWrappingManagerFor<IDownloadApi, IApizrDownloadManager<IDownloadApi>>(
-                apizrManager => new ApizrDownloadManager<IDownloadApi>(apizrManager),
+        {
+            internalBuilder.AddWrappingManagerFor<IDownloadApi, IApizrDownloadManager>(
+                apizrManager => new ApizrDownloadManager(apizrManager),
                 optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody));
+
+            internalBuilder.AddAliasingManagerFor<IApizrDownloadManager, IApizrDownloadManager<IDownloadApi>>();
+        }
 
         return builder;
     }
@@ -220,10 +234,14 @@ public static class FileTransferOptionsBuilderExtensions
             Action<IApizrProperOptionsBuilder> optionsBuilder)
     {
         if (builder is IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder> internalBuilder)
-            internalBuilder.AddWrappingManagerFor<ITransferApi, IApizrTransferManager<ITransferApi>>(apizrManager =>
-                    new ApizrTransferManager<ITransferApi>(new ApizrDownloadManager<ITransferApi>(apizrManager),
+        {
+            internalBuilder.AddWrappingManagerFor<ITransferApi, IApizrTransferManager>(apizrManager =>
+                    new ApizrTransferManager(new ApizrDownloadManager<ITransferApi>(apizrManager),
                         new ApizrUploadManager<ITransferApi>(apizrManager)),
                 optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody | HttpMessageParts.ResponseBody));
+
+            internalBuilder.AddAliasingManagerFor<IApizrTransferManager, IApizrTransferManager<ITransferApi>>();
+        }
 
         return builder;
     }

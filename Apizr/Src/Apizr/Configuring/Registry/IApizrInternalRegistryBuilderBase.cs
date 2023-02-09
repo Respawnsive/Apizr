@@ -9,5 +9,7 @@ namespace Apizr.Configuring.Registry
         void AddWrappingManagerFor<TWebApi, TWrappingManager>(
             Func<IApizrManager<TWebApi>, TWrappingManager> wrappingManagerFactory,
             Action<TApizrProperOptionsBuilder> optionsBuilder = null) where TWrappingManager : IApizrManager;
+
+        void AddAliasingManagerFor<TAliasedManager, TAliasingManager>();
     }
 }

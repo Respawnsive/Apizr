@@ -48,3 +48,11 @@ public class ApizrTransferManager<TTransferApi> : ApizrTransferManager<TTransfer
     {
     }
 }
+
+public class ApizrTransferManager : ApizrTransferManager<ITransferApi>, IApizrTransferManager
+{
+    /// <inheritdoc />
+    public ApizrTransferManager(IApizrDownloadManager<ITransferApi> downloadManager, IApizrUploadManager<ITransferApi> uploadManager) : base(downloadManager, uploadManager)
+    {
+    }
+}

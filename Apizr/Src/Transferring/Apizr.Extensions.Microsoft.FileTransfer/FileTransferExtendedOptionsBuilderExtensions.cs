@@ -40,9 +40,19 @@ public static class FileTransferExtendedOptionsBuilderExtensions
     /// <returns></returns>
     public static IServiceCollection AddApizrUploadManagerFor<TUploadApi>(this IServiceCollection services,
         Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
-        where TUploadApi : IUploadApi =>
-        services.AddApizrManagerFor<TUploadApi>(optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody))
-            .TryAddSingleton<IApizrUploadManager<TUploadApi>, ApizrUploadManager<TUploadApi>>();
+        where TUploadApi : IUploadApi
+    {
+        services.AddApizrManagerFor<TUploadApi>(optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody));
+
+        if (typeof(TUploadApi) == typeof(IUploadApi))
+            services.TryAddSingleton<IApizrUploadManager, ApizrUploadManager>()
+                .TryAddSingleton<IApizrUploadManager<IUploadApi>>(serviceProvider =>
+                    serviceProvider.GetRequiredService<IApizrUploadManager>());
+        else
+            services.TryAddSingleton<IApizrUploadManager<TUploadApi>, ApizrUploadManager<TUploadApi>>();
+
+        return services;
+    }
 
     /// <summary>
     /// Add a download manager for IDownloadApi (you must at least provide a base url thanks to the options builder)
@@ -63,9 +73,19 @@ public static class FileTransferExtendedOptionsBuilderExtensions
     /// <returns></returns>
     public static IServiceCollection AddApizrDownloadManagerFor<TDownloadApi>(this IServiceCollection services,
         Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
-        where TDownloadApi : IDownloadApi =>
-        services.AddApizrManagerFor<TDownloadApi>(optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody))
-            .TryAddSingleton<IApizrDownloadManager<TDownloadApi>, ApizrDownloadManager<TDownloadApi>>();
+        where TDownloadApi : IDownloadApi
+    {
+        services.AddApizrManagerFor<TDownloadApi>(optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody));
+
+        if (typeof(TDownloadApi) == typeof(IDownloadApi))
+            services.TryAddSingleton<IApizrDownloadManager, ApizrDownloadManager>()
+                .TryAddSingleton<IApizrDownloadManager<IDownloadApi>>(serviceProvider =>
+                    serviceProvider.GetRequiredService<IApizrDownloadManager>());
+        else
+            services.TryAddSingleton<IApizrDownloadManager<TDownloadApi>, ApizrDownloadManager<TDownloadApi>>();
+
+        return services;
+    }
 
     /// <summary>
     /// Add a download manager for the provided download api derived from IDownloadApi{TDownloadParams}
@@ -90,8 +110,7 @@ public static class FileTransferExtendedOptionsBuilderExtensions
     /// <returns></returns>
     public static IServiceCollection AddApizrTransferManager(this IServiceCollection services,
         Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) =>
-        services.AddTransferManagerFor<ITransferApi>(optionsBuilder)
-            .TryAddSingleton<IApizrTransferManager>(serviceProvider => serviceProvider.GetRequiredService<IApizrTransferManager<ITransferApi>>() as IApizrTransferManager);
+        services.AddApizrTransferManagerFor<ITransferApi>(optionsBuilder);
 
     /// <summary>
     /// Add a transfer manager for the provided transfer api derived from ITransferApi
@@ -100,14 +119,24 @@ public static class FileTransferExtendedOptionsBuilderExtensions
     /// <param name="services">The service collection where to add the manager</param>
     /// <param name="optionsBuilder">The builder defining some options</param>
     /// <returns></returns>
-    public static IServiceCollection AddTransferManagerFor<TTransferApi>(this IServiceCollection services,
+    public static IServiceCollection AddApizrTransferManagerFor<TTransferApi>(this IServiceCollection services,
         Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
-        where TTransferApi : ITransferApi =>
+        where TTransferApi : ITransferApi
+    {
         services.AddApizrManagerFor<TTransferApi>(
                 optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody | HttpMessageParts.ResponseBody))
             .AddApizrDownloadManagerFor<TTransferApi>()
-            .AddApizrUploadManagerFor<TTransferApi>()
-            .TryAddSingleton<IApizrTransferManager<TTransferApi>, ApizrTransferManager<TTransferApi>>();
+            .AddApizrUploadManagerFor<TTransferApi>();
+
+        if (typeof(TTransferApi) == typeof(ITransferApi))
+            services.TryAddSingleton<IApizrTransferManager, ApizrTransferManager>()
+                .TryAddSingleton<IApizrTransferManager<ITransferApi>>(serviceProvider =>
+                    serviceProvider.GetRequiredService<IApizrTransferManager>());
+        else
+            services.TryAddSingleton<IApizrTransferManager<TTransferApi>, ApizrTransferManager<TTransferApi>>();
+
+        return services;
+    }
 
     /// <summary>
     /// Add a transfer manager for the provided transfer api derived from ITransferApi{TDownloadParams}
@@ -117,7 +146,7 @@ public static class FileTransferExtendedOptionsBuilderExtensions
     /// <param name="services">The service collection where to add the manager</param>
     /// <param name="optionsBuilder">The builder defining some options</param>
     /// <returns></returns>
-    public static IServiceCollection AddTransferManagerFor<TTransferApi, TDownloadParams>(
+    public static IServiceCollection AddApizrTransferManagerFor<TTransferApi, TDownloadParams>(
         this IServiceCollection services,
         Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
         where TTransferApi : ITransferApi<TDownloadParams> =>

@@ -447,15 +447,32 @@ namespace Apizr.Tests
             services.AddPolicyRegistry(_policyRegistry);
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
-            services.AddApizrTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr/files"));
+            services.AddApizrTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr/files")); // Built-in
+            services.AddApizrTransferManagerFor<ITransferSampleApi>(); // Custom
 
             var serviceProvider = services.BuildServiceProvider();
-            var apizrMediator = serviceProvider.GetRequiredService<IApizrTransferManager<ITransferApi>>();
+            var apizrTransferManager = serviceProvider.GetService<IApizrTransferManager>(); // Built-in
+            var apizrTransferTypedManager = serviceProvider.GetService<IApizrTransferManager<ITransferApi>>(); // Built-in
+            var transferSampleApiManager = serviceProvider.GetService<IApizrTransferManager<ITransferSampleApi>>(); // Custom
 
-            apizrMediator.Should().NotBeNull();
-            var result = await apizrMediator.DownloadAsync(new FileInfo("test10Mb.db"));
-            result.Should().NotBeNull();
-            result.Length.Should().BePositive();
+            apizrTransferManager.Should().NotBeNull(); // Built-in
+            apizrTransferTypedManager.Should().NotBeNull(); // Built-in
+            transferSampleApiManager.Should().NotBeNull(); // Custom
+
+            // Built-in
+            var apizrTransferManagerResult = await apizrTransferManager.DownloadAsync(new FileInfo("test100k.db"));
+            apizrTransferManagerResult.Should().NotBeNull();
+            apizrTransferManagerResult.Length.Should().BePositive();
+
+            // Built-in
+            var apizrTransferTypedManagerResult = await apizrTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            apizrTransferTypedManagerResult.Should().NotBeNull();
+            apizrTransferTypedManagerResult.Length.Should().BePositive();
+
+            // Custom
+            var transferSampleApiManagerResult = await transferSampleApiManager.DownloadAsync(new FileInfo("test100k.db"));
+            transferSampleApiManagerResult.Should().NotBeNull();
+            transferSampleApiManagerResult.Length.Should().BePositive();
         }
 
         [Fact]

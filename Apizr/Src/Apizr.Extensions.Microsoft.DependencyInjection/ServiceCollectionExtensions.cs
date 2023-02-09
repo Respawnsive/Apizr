@@ -941,5 +941,12 @@ namespace Apizr
 
             return service;
         }
+
+        internal static IServiceCollection TryAddSingleton<TService>(this IServiceCollection service, Func<IServiceProvider, object> factory)
+        {
+            service.TryAddSingleton(typeof(TService), factory);
+
+            return service;
+        }
     }
 }

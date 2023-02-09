@@ -32,3 +32,11 @@ public class ApizrUploadManager<TUploadApi> : ApizrTransferManagerBase<TUploadAp
             (opt, api) => api.UploadAsync(fileInfoPart, opt.GetDynamicPathOrDefault(),
                 opt), optionsBuilder);
 }
+
+public class ApizrUploadManager : ApizrUploadManager<IUploadApi>, IApizrUploadManager
+{
+    /// <inheritdoc />
+    public ApizrUploadManager(IApizrManager<IUploadApi> fileTransferApiManager) : base(fileTransferApiManager)
+    {
+    }
+}

@@ -10,7 +10,9 @@ using MediatR;
 namespace Apizr.Mediation.Requesting.Handling
 {
     public class UploadCommandHandler<TUploadApi> : RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>,
-        IRequestHandler<UploadCommand<TUploadApi>, Unit> where TUploadApi : IUploadApi
+        IRequestHandler<UploadCommand<TUploadApi>, Unit>,
+        IRequestHandler<UploadCommand, Unit> 
+        where TUploadApi : IUploadApi
     {
         private readonly IApizrUploadManager<TUploadApi> _uploadManager;
 
@@ -30,17 +32,6 @@ namespace Apizr.Mediation.Requesting.Handling
                 return _uploadManager.UploadAsync(request.FileInfoPart, request.OptionsBuilder).ContinueWith(_ => Unit.Value, cancellationToken);
 
             throw new NullReferenceException("You must provide some data to upload");
-        }
-    }
-
-    public class UploadCommandHandler : RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>,
-        IRequestHandler<UploadCommand, Unit>
-    {
-        private readonly IApizrUploadManager<IUploadApi> _uploadManager;
-
-        public UploadCommandHandler(IApizrUploadManager<IUploadApi> uploadManager)
-        {
-            _uploadManager = uploadManager;
         }
 
         /// <inheritdoc />

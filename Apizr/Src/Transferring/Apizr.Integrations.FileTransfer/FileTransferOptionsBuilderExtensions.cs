@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Proper;
@@ -9,11 +12,12 @@ using Apizr.Logging;
 using Apizr.Progressing;
 using Apizr.Transferring.Managing;
 using Apizr.Transferring.Requesting;
+using Refit;
 
 namespace Apizr;
 
 /// <summary>
-/// File transfer options builder extensions
+/// File transfer builder extensions
 /// </summary>
 public static class FileTransferOptionsBuilderExtensions
 {
@@ -133,10 +137,8 @@ public static class FileTransferOptionsBuilderExtensions
                 HttpMessageParts.RequestBody)));
 
     #endregion
-    
-    #region Multiple
 
-    #region Add
+    #region Multiple
 
     /// <summary>
     /// Add an upload manager for IUploadApi (you must at least provide a base url)
@@ -265,267 +267,6 @@ public static class FileTransferOptionsBuilderExtensions
 
         return builder;
     }
-
-    #endregion
-
-    #region Get
-
-    /// <summary>
-    /// Get an upload manager instance
-    /// </summary>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <returns></returns>
-    public static IApizrUploadManager GetUploadManager(
-        this IApizrEnumerableRegistry registry) =>
-        ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrUploadManager>();
-
-    /// <summary>
-    /// Get an upload manager instance
-    /// </summary>
-    /// <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <returns></returns>
-    public static IApizrUploadManager<TUploadApi> GetUploadManagerFor<TUploadApi>(
-        this IApizrEnumerableRegistry registry)
-        where TUploadApi : IUploadApi =>
-        ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrUploadManager<TUploadApi>>();
-
-    /// <summary>
-    /// Get a download manager instance
-    /// </summary>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <returns></returns>
-    public static IApizrDownloadManager GetDownloadManager(this IApizrEnumerableRegistry registry) =>
-        ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrDownloadManager>();
-
-    /// <summary>
-    /// Get a download manager instance
-    /// </summary>
-    /// <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <returns></returns>
-    public static IApizrDownloadManager<TDownloadApi> GetDownloadManagerFor<TDownloadApi>(this IApizrEnumerableRegistry registry)
-        where TDownloadApi : IDownloadApi =>
-        ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrDownloadManager<TDownloadApi>>();
-
-    /// <summary>
-    /// Get a download manager instance
-    /// </summary>
-    /// <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
-    /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <returns></returns>
-    public static IApizrDownloadManager<TDownloadApi, TDownloadParams> GetDownloadManagerFor<TDownloadApi, TDownloadParams>(this IApizrEnumerableRegistry registry)
-        where TDownloadApi : IDownloadApi<TDownloadParams> =>
-        ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrDownloadManager<TDownloadApi, TDownloadParams>>();
-
-    /// <summary>
-    /// Get a transfer manager instance
-    /// </summary>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <returns></returns>
-    public static IApizrTransferManager GetTransferManager(this IApizrEnumerableRegistry registry) =>
-        ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrTransferManager>();
-
-    /// <summary>
-    /// Get a transfer manager instance
-    /// </summary>
-    /// <typeparam name="TTransferApi">The Transfer api interface to manage</typeparam>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <returns></returns>
-    public static IApizrTransferManager<TTransferApi> GetTransferManagerFor<TTransferApi>(this IApizrEnumerableRegistry registry)
-        where TTransferApi : ITransferApi =>
-        ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrTransferManager<TTransferApi>>();
-
-    /// <summary>
-    /// Get a transfer manager instance
-    /// </summary>
-    /// <typeparam name="TTransferApi">The Transfer api interface to manage</typeparam>
-    /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <returns></returns>
-    public static IApizrTransferManager<TTransferApi, TDownloadParams> GetTransferManagerFor<TTransferApi, TDownloadParams>(this IApizrEnumerableRegistry registry)
-        where TTransferApi : ITransferApi<TDownloadParams> =>
-        ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrTransferManager<TTransferApi, TDownloadParams>>();
-
-
-    #endregion
-
-    #region TryGet
-
-    /// <summary>
-    /// Get an upload manager instance
-    /// </summary>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <param name="manager">The upload manager instance</param>
-    /// <returns></returns>
-    public static bool TryGetUploadManager(
-        this IApizrEnumerableRegistry registry, out IApizrUploadManager manager) =>
-        ((IApizrInternalEnumerableRegistry)registry).TryGetManagerInternal<IApizrUploadManager>(out manager);
-
-    /// <summary>
-    /// Get an upload manager instance
-    /// </summary>
-    /// <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <param name="manager">The upload manager instance</param>
-    /// <returns></returns>
-    public static bool TryGetUploadManagerFor<TUploadApi>(
-        this IApizrEnumerableRegistry registry, out IApizrUploadManager<TUploadApi> manager)
-        where TUploadApi : IUploadApi =>
-        ((IApizrInternalEnumerableRegistry)registry).TryGetManagerInternal<IApizrUploadManager<TUploadApi>>(out manager);
-
-    /// <summary>
-    /// Get a download manager instance
-    /// </summary>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <param name="manager">The download manager instance</param>
-    /// <returns></returns>
-    public static bool TryGetDownloadManager(this IApizrEnumerableRegistry registry, out IApizrDownloadManager manager) =>
-        ((IApizrInternalEnumerableRegistry)registry).TryGetManagerInternal<IApizrDownloadManager>(out manager);
-
-    /// <summary>
-    /// Get a download manager instance
-    /// </summary>
-    /// <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <param name="manager">The download manager instance</param>
-    /// <returns></returns>
-    public static bool TryGetDownloadManagerFor<TDownloadApi>(this IApizrEnumerableRegistry registry, out IApizrDownloadManager<TDownloadApi> manager)
-        where TDownloadApi : IDownloadApi =>
-        ((IApizrInternalEnumerableRegistry)registry).TryGetManagerInternal<IApizrDownloadManager<TDownloadApi>>(out manager);
-
-    /// <summary>
-    /// Get a download manager instance
-    /// </summary>
-    /// <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
-    /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <param name="manager">The download manager instance</param>
-    /// <returns></returns>
-    public static bool TryGetDownloadManagerFor<TDownloadApi, TDownloadParams>(this IApizrEnumerableRegistry registry, out IApizrDownloadManager<TDownloadApi, TDownloadParams> manager)
-        where TDownloadApi : IDownloadApi<TDownloadParams> =>
-        ((IApizrInternalEnumerableRegistry)registry).TryGetManagerInternal<IApizrDownloadManager<TDownloadApi, TDownloadParams>>(out manager);
-
-    /// <summary>
-    /// Get a transfer manager instance
-    /// </summary>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <param name="manager">The transfer manager instance</param>
-    /// <returns></returns>
-    public static bool TryGetTransferManager(this IApizrEnumerableRegistry registry, out IApizrTransferManager manager) =>
-        ((IApizrInternalEnumerableRegistry)registry).TryGetManagerInternal<IApizrTransferManager>(out manager);
-
-    /// <summary>
-    /// Get a transfer manager instance
-    /// </summary>
-    /// <typeparam name="TTransferApi">The Transfer api interface to manage</typeparam>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <param name="manager">The transfer manager instance</param>
-    /// <returns></returns>
-    public static bool TryGetTransferManagerFor<TTransferApi>(this IApizrEnumerableRegistry registry, out IApizrTransferManager<TTransferApi> manager)
-        where TTransferApi : ITransferApi =>
-        ((IApizrInternalEnumerableRegistry)registry).TryGetManagerInternal<IApizrTransferManager<TTransferApi>>(out manager);
-
-    /// <summary>
-    /// Get a transfer manager instance
-    /// </summary>
-    /// <typeparam name="TTransferApi">The Transfer api interface to manage</typeparam>
-    /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <param name="manager">The transfer manager instance</param>
-    /// <returns></returns>
-    public static bool TryGetTransferManagerFor<TTransferApi, TDownloadParams>(this IApizrEnumerableRegistry registry, out IApizrTransferManager<TTransferApi, TDownloadParams> manager)
-        where TTransferApi : ITransferApi<TDownloadParams> =>
-        ((IApizrInternalEnumerableRegistry)registry).TryGetManagerInternal<IApizrTransferManager<TTransferApi, TDownloadParams>>(out manager);
-
-
-    #endregion
-
-    #region Contains
-
-    /// <summary>
-    /// Check if registry contains a manager for the default <see cref="IUploadApi"/> api type
-    /// </summary>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <returns></returns>
-    public static bool ContainsUploadManager(
-        this IApizrEnumerableRegistry registry) =>
-        ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrUploadManager>();
-
-    /// <summary>
-    /// Check if registry contains a manager for <typeparamref name="TUploadApi"/> api type
-    /// </summary>
-    /// <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <returns></returns>
-    public static bool ContainsUploadManagerFor<TUploadApi>(
-        this IApizrEnumerableRegistry registry)
-        where TUploadApi : IUploadApi =>
-        ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrUploadManager<TUploadApi>>();
-
-    /// <summary>
-    /// Check if registry contains a manager for the default <see cref="IDownloadApi"/> api type
-    /// </summary>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <returns></returns>
-    public static bool ContainsDownloadManager(
-        this IApizrEnumerableRegistry registry) =>
-        ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrDownloadManager>();
-
-    /// <summary>
-    /// Check if registry contains a manager for <typeparamref name="TDownloadApi"/> api type
-    /// </summary>
-    /// <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <returns></returns>
-    public static bool ContainsDownloadManagerFor<TDownloadApi>(this IApizrEnumerableRegistry registry)
-        where TDownloadApi : IDownloadApi =>
-        ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrDownloadManager<TDownloadApi>>();
-
-    /// <summary>
-    /// Check if registry contains a manager for <typeparamref name="TDownloadApi"/> api type
-    /// </summary>
-    /// <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
-    /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <returns></returns>
-    public static bool ContainsDownloadManagerFor<TDownloadApi, TDownloadParams>(this IApizrEnumerableRegistry registry)
-        where TDownloadApi : IDownloadApi<TDownloadParams> =>
-        ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrDownloadManager<TDownloadApi, TDownloadParams>>();
-
-    /// <summary>
-    /// Check if registry contains a manager for the default <see cref="ITransferApi"/> api type
-    /// </summary>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <returns></returns>
-    public static bool ContainsTransferManager(
-        this IApizrEnumerableRegistry registry) =>
-        ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrTransferManager>();
-
-    /// <summary>
-    /// Check if registry contains a manager for <typeparamref name="TTransferApi"/> api type
-    /// </summary>
-    /// <typeparam name="TTransferApi">The Transfer api interface to manage</typeparam>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <returns></returns>
-    public static bool ContainsTransferManagerFor<TTransferApi>(this IApizrEnumerableRegistry registry)
-        where TTransferApi : ITransferApi =>
-        ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrTransferManager<TTransferApi>>();
-
-    /// <summary>
-    /// Check if registry contains a manager for <typeparamref name="TTransferApi"/> api type
-    /// </summary>
-    /// <typeparam name="TTransferApi">The Transfer api interface to manage</typeparam>
-    /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
-    /// <param name="registry">The registry to get the manager from</param>
-    /// <returns></returns>
-    public static bool ContainsTransferManagerFor<TTransferApi, TDownloadParams>(this IApizrEnumerableRegistry registry)
-        where TTransferApi : ITransferApi<TDownloadParams> =>
-        ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrTransferManager<TTransferApi, TDownloadParams>>();
-
-
-    #endregion
 
     #endregion
 

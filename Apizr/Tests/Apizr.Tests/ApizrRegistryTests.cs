@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring;
 using Apizr.Configuring.Registry;
+using Apizr.Extending;
 using Apizr.Logging;
 using Apizr.Policing;
 using Apizr.Progressing;

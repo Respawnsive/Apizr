@@ -27,7 +27,11 @@ public abstract class ApizrUploadRegistryBuilderBase<TApizrUploadRegistryBuilder
     protected abstract TApizrUploadRegistryBuilder Builder { get; }
 
     /// <inheritdoc />
-    public TApizrUploadRegistryBuilder AddFor<TUploadApi>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
+    public TApizrUploadRegistryBuilder AddUploadManager(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
+        => AddUploadManagerFor<IUploadApi>(optionsBuilder);
+
+    /// <inheritdoc />
+    public TApizrUploadRegistryBuilder AddUploadManagerFor<TUploadApi>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
         where TUploadApi : IUploadApi
     {
         if (typeof(TUploadApi) == typeof(IUploadApi))

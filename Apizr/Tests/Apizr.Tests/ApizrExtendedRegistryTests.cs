@@ -12,10 +12,12 @@ using Apizr.Configuring.Manager;
 using Apizr.Extending;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Logging;
+using Apizr.Mediation.Extending;
 using Apizr.Mediation.Requesting.Sending;
 using Apizr.Optional.Extending;
 using Apizr.Optional.Requesting.Sending;
 using Apizr.Policing;
+using Apizr.Progressing;
 using Apizr.Requesting;
 using Apizr.Tests.Apis;
 using Apizr.Tests.Helpers;
@@ -75,11 +77,11 @@ namespace Apizr.Tests
                 .AddManagerFor<IReqResUserService>()
                 .AddManagerFor<IHttpBinService>()
                 //.AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
-                .AddUploadManager(uploadRegistry => uploadRegistry.AddFor<IUploadApi>())
+                .AddUploadGroup(uploadRegistry => uploadRegistry.AddUploadManagerFor<IUploadApi>())
                 //.AddUploadManager(options => options.WithBaseAddress("https://test.com"))
-                .AddDownloadManager(downloadRegistry => downloadRegistry.AddFor<IDownloadApi>())
+                .AddDownloadGroup(downloadRegistry => downloadRegistry.AddDownloadManagerFor<IDownloadApi>())
                 //.AddDownloadManager(options => options.WithBaseAddress("https://test.com"))
-                .AddTransferManager(downloadRegistry => downloadRegistry.AddFor<ITransferApi>()));
+                .AddTransferGroup(downloadRegistry => downloadRegistry.AddTransferManagerFor<ITransferApi>()));
             //.AddTransferManager(options => options.WithBaseAddress("https://test.com"))
 
             services.Should().Contain(x => x.ServiceType == typeof(IApizrExtendedRegistry));
@@ -764,19 +766,20 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Calling_WithFileTransfer_Should_Transfer()
+        public async Task Downloading_File_Should_Succeed()
         {
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddApizr(registry => registry
-                .AddTransferManager(transferRegistry => transferRegistry
-                    .AddFor<ITransferSampleApi>()
-                    .AddFor<ITransferApi>(options => options
+                .AddTransferGroup(transferRegistry => transferRegistry
+                    .AddTransferManagerFor<ITransferSampleApi>()
+                    .AddTransferManagerFor<ITransferApi>(options => options
                         .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))));
 
             var serviceProvider = services.BuildServiceProvider();
+
+            // Get instances from the container
             var apizrTransferManager = serviceProvider.GetService<IApizrTransferManager>(); // Built-in
             var apizrTransferTypedManager = serviceProvider.GetService<IApizrTransferManager<ITransferApi>>(); // Built-in
             var transferSampleApiManager = serviceProvider.GetService<IApizrTransferManager<ITransferSampleApi>>(); // Custom
@@ -785,16 +788,16 @@ namespace Apizr.Tests
             apizrTransferTypedManager.Should().NotBeNull(); // Built-in
             transferSampleApiManager.Should().NotBeNull(); // Custom
 
+            // Get instances from the registry
+            var registry = serviceProvider.GetRequiredService<IApizrExtendedRegistry>();
 
-            //var registry = serviceProvider.GetRequiredService<IApizrExtendedRegistry>();
+            registry.TryGetTransferManager(out var regTransferManager).Should().BeTrue(); // Built-in
+            registry.TryGetTransferManagerFor<ITransferApi>(out var regTransferTypedManager).Should().BeTrue(); // Built-in
+            registry.TryGetTransferManagerFor<ITransferSampleApi>(out var regTransferSampleApiManager).Should().BeTrue(); // Custom
 
-            //registry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
-            //registry.TryGetManagerFor<IHttpBinService>(out var httpBinManager).Should().BeTrue();
-            //registry.TryGetCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(out var userManager).Should().BeTrue();
-
-            //reqResManager.Should().NotBeNull();
-            //httpBinManager.Should().NotBeNull();
-            //userManager.Should().NotBeNull();
+            regTransferManager.Should().NotBeNull(); // Built-in
+            regTransferTypedManager.Should().NotBeNull(); // Built-in
+            regTransferSampleApiManager.Should().NotBeNull(); // Custom
 
             // Built-in
             var apizrTransferManagerResult = await apizrTransferManager.DownloadAsync(new FileInfo("test100k.db"));
@@ -810,6 +813,60 @@ namespace Apizr.Tests
             var transferSampleApiManagerResult = await transferSampleApiManager.DownloadAsync(new FileInfo("test100k.db"));
             transferSampleApiManagerResult.Should().NotBeNull();
             transferSampleApiManagerResult.Length.Should().BePositive();
+        }
+
+        [Fact]
+        public async Task Downloading_File_With_Progress_Should_Report_Progress()
+        {
+            var percentage = 0;
+            var progress = new ApizrProgress();
+            progress.ProgressChanged += (sender, args) =>
+            {
+                percentage = args.ProgressPercentage;
+            };
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddApizr(registry => registry
+                .AddTransferGroup(transferRegistry => transferRegistry
+                    .AddTransferManagerFor<ITransferSampleApi>()
+                    .AddTransferManagerFor<ITransferApi>(options => options
+                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))),
+                options => options.WithProgress(progress));
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            var apizrTransferManager = serviceProvider.GetService<IApizrTransferManager>(); // Built-in
+            apizrTransferManager.Should().NotBeNull(); // Built-in
+
+            var fileInfo = await apizrTransferManager.DownloadAsync(new FileInfo("test10Mb.db")).ConfigureAwait(false);
+
+            percentage.Should().Be(100);
+            fileInfo.Length.Should().BePositive();
+        }
+
+        [Fact]
+        public async Task Calling_WithFileTransferMediation_Should_Handle_Requests()
+        {
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddApizr(registry => registry
+                .AddTransferGroup(transferRegistry => transferRegistry
+                    .AddTransferManagerFor<ITransferSampleApi>()
+                    .AddTransferManagerFor<ITransferApi>(options => options
+                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))),
+                config => config
+                    .WithMediation()
+                    .WithFileTransferMediation());
+
+            var serviceProvider = services.BuildServiceProvider();
+            var apizrMediator = serviceProvider.GetRequiredService<IApizrMediator>();
+
+            apizrMediator.Should().NotBeNull();
+            var result = await apizrMediator.SendDownloadQuery(new FileInfo("test10Mb.db"));
+            result.Should().NotBeNull();
+            result.Length.Should().BePositive();
         }
     }
 }

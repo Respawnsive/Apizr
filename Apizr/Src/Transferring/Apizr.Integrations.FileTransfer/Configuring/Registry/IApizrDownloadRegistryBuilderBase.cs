@@ -11,10 +11,13 @@ namespace Apizr.Configuring.Registry
         where TApizrProperOptionsBuilder : IApizrGlobalProperOptionsBuilderBase
         where TApizrCommonOptionsBuilder : IApizrGlobalCommonOptionsBuilderBase
     {
-        TApizrDownloadRegistryBuilder AddFor<TDownloadApi>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
+        TApizrDownloadRegistryBuilder AddDownloadManager(
+            Action<TApizrProperOptionsBuilder> optionsBuilder = null);
+
+        TApizrDownloadRegistryBuilder AddDownloadManagerFor<TDownloadApi>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
             where TDownloadApi : IDownloadApi;
 
-        TApizrDownloadRegistryBuilder AddFor<TDownloadApi, TDownloadParams>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
+        TApizrDownloadRegistryBuilder AddDownloadFor<TDownloadApi, TDownloadParams>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
             where TDownloadApi : IDownloadApi<TDownloadParams>;
     }
 }

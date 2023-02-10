@@ -191,7 +191,7 @@ public static class FileTransferExtendedOptionsBuilderExtensions
     /// <param name="optionsBuilder">The builder defining some options</param>
     /// <returns></returns>
     public static IApizrExtendedRegistryBuilder
-        AddUploadManager(
+        AddUploadGroup(
             this IApizrExtendedRegistryBuilder builder,
             Action<IApizrExtendedUploadRegistryBuilder> uploadRegistry,
             Action<IApizrExtendedCommonOptionsBuilder> optionsBuilder = null)
@@ -235,7 +235,7 @@ public static class FileTransferExtendedOptionsBuilderExtensions
     /// <param name="optionsBuilder">The builder defining some options</param>
     /// <returns></returns>
     public static IApizrExtendedRegistryBuilder
-        AddDownloadManager(
+        AddDownloadGroup(
             this IApizrExtendedRegistryBuilder builder,
             Action<IApizrExtendedDownloadRegistryBuilder> downloadRegistry,
             Action<IApizrExtendedCommonOptionsBuilder> optionsBuilder = null)
@@ -280,7 +280,7 @@ public static class FileTransferExtendedOptionsBuilderExtensions
     /// <param name="optionsBuilder">The builder defining some options</param>
     /// <returns></returns>
     public static IApizrExtendedRegistryBuilder
-        AddTransferManager(
+        AddTransferGroup(
             this IApizrExtendedRegistryBuilder builder,
             Action<IApizrExtendedTransferRegistryBuilder> transferRegistry,
             Action<IApizrExtendedCommonOptionsBuilder> optionsBuilder = null)

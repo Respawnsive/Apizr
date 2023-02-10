@@ -27,7 +27,11 @@ public abstract class ApizrTransferRegistryBuilderBase<TApizrTransferRegistryBui
     protected abstract TApizrTransferRegistryBuilder Builder { get; }
 
     /// <inheritdoc />
-    public TApizrTransferRegistryBuilder AddFor<TTransferApi>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
+    public TApizrTransferRegistryBuilder AddTransferManager(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
+        => AddTransferManagerFor<ITransferApi>(optionsBuilder);
+
+    /// <inheritdoc />
+    public TApizrTransferRegistryBuilder AddTransferManagerFor<TTransferApi>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
         where TTransferApi : ITransferApi
     {
         if (typeof(TTransferApi) == typeof(ITransferApi))
@@ -51,7 +55,7 @@ public abstract class ApizrTransferRegistryBuilderBase<TApizrTransferRegistryBui
     }
 
     /// <inheritdoc />
-    public TApizrTransferRegistryBuilder AddFor<TTransferApi, TDownloadParams>(
+    public TApizrTransferRegistryBuilder AddTransferManagerFor<TTransferApi, TDownloadParams>(
         Action<TApizrProperOptionsBuilder> optionsBuilder = null) where TTransferApi : ITransferApi<TDownloadParams>
     {
         _internalBuilder?.AddWrappingManagerFor<TTransferApi, IApizrTransferManager<TTransferApi, TDownloadParams>>(

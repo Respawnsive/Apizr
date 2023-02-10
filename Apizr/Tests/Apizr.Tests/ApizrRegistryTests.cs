@@ -10,6 +10,7 @@ using Apizr.Configuring;
 using Apizr.Configuring.Registry;
 using Apizr.Logging;
 using Apizr.Policing;
+using Apizr.Progressing;
 using Apizr.Tests.Apis;
 using Apizr.Tests.Helpers;
 using Apizr.Tests.Models;
@@ -19,6 +20,7 @@ using AutoMapper;
 using FluentAssertions;
 using Fusillade;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using MonkeyCache.FileStore;
 using Polly;
 using Polly.Extensions.Http;
@@ -50,11 +52,11 @@ namespace Apizr.Tests
                 .AddManagerFor<IReqResUserService>()
                 .AddManagerFor<IHttpBinService>()
                 //.AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
-                .AddUploadManager(uploadRegistry => uploadRegistry.AddFor<IUploadApi>())
+                .AddUploadGroup(uploadRegistry => uploadRegistry.AddUploadManagerFor<IUploadApi>())
                 //.AddUploadManager(options => options.WithBaseAddress("https://test.com"))
-                .AddDownloadManager(downloadRegistry => downloadRegistry.AddFor<IDownloadApi>())
+                .AddDownloadGroup(downloadRegistry => downloadRegistry.AddDownloadManagerFor<IDownloadApi>())
                 //.AddDownloadManager(options => options.WithBaseAddress("https://test.com"))
-                .AddTransferManager(downloadRegistry => downloadRegistry.AddFor<ITransferApi>()));
+                .AddTransferGroup(downloadRegistry => downloadRegistry.AddTransferManagerFor<ITransferApi>()));
                 //.AddTransferManager(options => options.WithBaseAddress("https://test.com"))
 
             apizrRegistry.Should().NotBeNull();
@@ -674,6 +676,54 @@ namespace Apizr.Tests
             watcher2.Options.HandlersParameters.Should().NotBeNullOrEmpty();
             watcher2.Options.HandlersParameters.TryGetValue(Constants.PriorityKey, out priority).Should().BeTrue();
             priority.Should().Be((int)Priority.UserInitiated);
+        }
+
+        [Fact]
+        public async Task Downloading_File_Should_Succeed()
+        {
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
+            .AddTransferGroup(group => group
+                    .AddTransferManager(options => options
+                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))
+                    .AddTransferManagerFor<ITransferSampleApi>()));
+
+            var apizrTransferManager = apizrRegistry.GetTransferManager(); // Built-in
+            var transferSampleApiManager = apizrRegistry.GetTransferManagerFor<ITransferSampleApi>(); // Custom
+
+            apizrTransferManager.Should().NotBeNull(); // Built-in
+            transferSampleApiManager.Should().NotBeNull(); // Custom
+
+            var fileInfo = await transferSampleApiManager.DownloadAsync(new FileInfo("test100k.db")).ConfigureAwait(false);
+            fileInfo.Length.Should().BePositive();
+        }
+
+        [Fact]
+        public async Task Downloading_File_With_Progress_Should_Report_Progress()
+        {
+            var percentage = 0;
+            var progress = new ApizrProgress();
+            progress.ProgressChanged += (sender, args) =>
+            {
+                percentage = args.ProgressPercentage;
+            };
+
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
+                .AddTransferGroup(group => group
+                    .AddTransferManager(options => options
+                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))
+                    .AddTransferManagerFor<ITransferSampleApi>()),
+                options => options.WithProgress(progress));
+
+            var apizrTransferManager = apizrRegistry.GetTransferManager(); // Built-in
+            var transferSampleApiManager = apizrRegistry.GetTransferManagerFor<ITransferSampleApi>(); // Custom
+
+            apizrTransferManager.Should().NotBeNull(); // Built-in
+            transferSampleApiManager.Should().NotBeNull(); // Custom
+            
+            var fileInfo = await apizrTransferManager.DownloadAsync(new FileInfo("test10Mb.db")).ConfigureAwait(false);
+
+            percentage.Should().Be(100);
+            fileInfo.Length.Should().BePositive();
         }
     }
 }

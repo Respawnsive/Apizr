@@ -16,6 +16,7 @@ using Apizr.Tests.Models;
 using Apizr.Tests.Models.Mappings;
 using AutoMapper;
 using FluentAssertions;
+using FluentAssertions.Common;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using MonkeyCache.FileStore;
@@ -337,8 +338,13 @@ namespace Apizr.Tests
         [Fact]
         public async Task Downloading_File_Should_Succeed()
         {
-            var transferManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferSampleApi>();
-            var fileInfo = await transferManager.DownloadAsync(new FileInfo("test10Mb.db")).ConfigureAwait(false);
+            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr/files")); // Built-in
+            var transferSampleApiManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferSampleApi>(); // Custom
+            
+            apizrTransferManager.Should().NotBeNull(); // Built-in
+            transferSampleApiManager.Should().NotBeNull(); // Custom
+
+            var fileInfo = await transferSampleApiManager.DownloadAsync(new FileInfo("test100k.db")).ConfigureAwait(false);
             fileInfo.Length.Should().BePositive();
         }
 

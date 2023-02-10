@@ -167,7 +167,7 @@ public static class FileTransferOptionsBuilderExtensions
     /// <param name="optionsBuilder">The builder defining some options</param>
     /// <returns></returns>
     public static IApizrRegistryBuilder
-        AddUploadManager(
+        AddUploadGroup(
             this IApizrRegistryBuilder builder,
             Action<IApizrUploadRegistryBuilder> uploadRegistry,
             Action<IApizrCommonOptionsBuilder> optionsBuilder = null)
@@ -210,7 +210,7 @@ public static class FileTransferOptionsBuilderExtensions
     /// <param name="optionsBuilder">The builder defining some options</param>
     /// <returns></returns>
     public static IApizrRegistryBuilder
-        AddDownloadManager(
+        AddDownloadGroup(
             this IApizrRegistryBuilder builder,
             Action<IApizrDownloadRegistryBuilder> downloadRegistry,
             Action<IApizrCommonOptionsBuilder> optionsBuilder = null)
@@ -254,7 +254,7 @@ public static class FileTransferOptionsBuilderExtensions
     /// <param name="optionsBuilder">The builder defining some options</param>
     /// <returns></returns>
     public static IApizrRegistryBuilder
-        AddTransferManager(
+        AddTransferGroup(
             this IApizrRegistryBuilder builder,
             Action<IApizrTransferRegistryBuilder> transferRegistry,
             Action<IApizrCommonOptionsBuilder> optionsBuilder = null)
@@ -273,6 +273,15 @@ public static class FileTransferOptionsBuilderExtensions
     /// <summary>
     /// Get an upload manager instance
     /// </summary>
+    /// <param name="registry">The registry to get the manager from</param>
+    /// <returns></returns>
+    public static IApizrUploadManager GetUploadManager(
+        this IApizrEnumerableRegistry registry) =>
+        ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrUploadManager>();
+
+    /// <summary>
+    /// Get an upload manager instance
+    /// </summary>
     /// <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
     /// <param name="registry">The registry to get the manager from</param>
     /// <returns></returns>
@@ -280,6 +289,14 @@ public static class FileTransferOptionsBuilderExtensions
         this IApizrEnumerableRegistry registry)
         where TUploadApi : IUploadApi =>
         ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrUploadManager<TUploadApi>>();
+
+    /// <summary>
+    /// Get a download manager instance
+    /// </summary>
+    /// <param name="registry">The registry to get the manager from</param>
+    /// <returns></returns>
+    public static IApizrDownloadManager GetDownloadManager(this IApizrEnumerableRegistry registry) =>
+        ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrDownloadManager>();
 
     /// <summary>
     /// Get a download manager instance
@@ -301,6 +318,14 @@ public static class FileTransferOptionsBuilderExtensions
     public static IApizrDownloadManager<TDownloadApi, TDownloadParams> GetDownloadManagerFor<TDownloadApi, TDownloadParams>(this IApizrEnumerableRegistry registry)
         where TDownloadApi : IDownloadApi<TDownloadParams> =>
         ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrDownloadManager<TDownloadApi, TDownloadParams>>();
+
+    /// <summary>
+    /// Get a transfer manager instance
+    /// </summary>
+    /// <param name="registry">The registry to get the manager from</param>
+    /// <returns></returns>
+    public static IApizrTransferManager GetTransferManager(this IApizrEnumerableRegistry registry) =>
+        ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrTransferManager>();
 
     /// <summary>
     /// Get a transfer manager instance
@@ -331,8 +356,19 @@ public static class FileTransferOptionsBuilderExtensions
     /// <summary>
     /// Get an upload manager instance
     /// </summary>
+    /// <param name="registry">The registry to get the manager from</param>
+    /// <param name="manager">The upload manager instance</param>
+    /// <returns></returns>
+    public static bool TryGetUploadManager(
+        this IApizrEnumerableRegistry registry, out IApizrUploadManager manager) =>
+        ((IApizrInternalEnumerableRegistry)registry).TryGetManagerInternal<IApizrUploadManager>(out manager);
+
+    /// <summary>
+    /// Get an upload manager instance
+    /// </summary>
     /// <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
     /// <param name="registry">The registry to get the manager from</param>
+    /// <param name="manager">The upload manager instance</param>
     /// <returns></returns>
     public static bool TryGetUploadManagerFor<TUploadApi>(
         this IApizrEnumerableRegistry registry, out IApizrUploadManager<TUploadApi> manager)
@@ -342,8 +378,18 @@ public static class FileTransferOptionsBuilderExtensions
     /// <summary>
     /// Get a download manager instance
     /// </summary>
+    /// <param name="registry">The registry to get the manager from</param>
+    /// <param name="manager">The download manager instance</param>
+    /// <returns></returns>
+    public static bool TryGetDownloadManager(this IApizrEnumerableRegistry registry, out IApizrDownloadManager manager) =>
+        ((IApizrInternalEnumerableRegistry)registry).TryGetManagerInternal<IApizrDownloadManager>(out manager);
+
+    /// <summary>
+    /// Get a download manager instance
+    /// </summary>
     /// <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
     /// <param name="registry">The registry to get the manager from</param>
+    /// <param name="manager">The download manager instance</param>
     /// <returns></returns>
     public static bool TryGetDownloadManagerFor<TDownloadApi>(this IApizrEnumerableRegistry registry, out IApizrDownloadManager<TDownloadApi> manager)
         where TDownloadApi : IDownloadApi =>
@@ -355,6 +401,7 @@ public static class FileTransferOptionsBuilderExtensions
     /// <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
     /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
     /// <param name="registry">The registry to get the manager from</param>
+    /// <param name="manager">The download manager instance</param>
     /// <returns></returns>
     public static bool TryGetDownloadManagerFor<TDownloadApi, TDownloadParams>(this IApizrEnumerableRegistry registry, out IApizrDownloadManager<TDownloadApi, TDownloadParams> manager)
         where TDownloadApi : IDownloadApi<TDownloadParams> =>
@@ -363,8 +410,18 @@ public static class FileTransferOptionsBuilderExtensions
     /// <summary>
     /// Get a transfer manager instance
     /// </summary>
+    /// <param name="registry">The registry to get the manager from</param>
+    /// <param name="manager">The transfer manager instance</param>
+    /// <returns></returns>
+    public static bool TryGetTransferManager(this IApizrEnumerableRegistry registry, out IApizrTransferManager manager) =>
+        ((IApizrInternalEnumerableRegistry)registry).TryGetManagerInternal<IApizrTransferManager>(out manager);
+
+    /// <summary>
+    /// Get a transfer manager instance
+    /// </summary>
     /// <typeparam name="TTransferApi">The Transfer api interface to manage</typeparam>
     /// <param name="registry">The registry to get the manager from</param>
+    /// <param name="manager">The transfer manager instance</param>
     /// <returns></returns>
     public static bool TryGetTransferManagerFor<TTransferApi>(this IApizrEnumerableRegistry registry, out IApizrTransferManager<TTransferApi> manager)
         where TTransferApi : ITransferApi =>
@@ -376,6 +433,7 @@ public static class FileTransferOptionsBuilderExtensions
     /// <typeparam name="TTransferApi">The Transfer api interface to manage</typeparam>
     /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
     /// <param name="registry">The registry to get the manager from</param>
+    /// <param name="manager">The transfer manager instance</param>
     /// <returns></returns>
     public static bool TryGetTransferManagerFor<TTransferApi, TDownloadParams>(this IApizrEnumerableRegistry registry, out IApizrTransferManager<TTransferApi, TDownloadParams> manager)
         where TTransferApi : ITransferApi<TDownloadParams> =>
@@ -387,13 +445,13 @@ public static class FileTransferOptionsBuilderExtensions
     #region Contains
 
     /// <summary>
-    /// Check if registry contains a manager for the default <typeparamref name="IUploadApi"/> api type
+    /// Check if registry contains a manager for the default <see cref="IUploadApi"/> api type
     /// </summary>
     /// <param name="registry">The registry to get the manager from</param>
     /// <returns></returns>
     public static bool ContainsUploadManager(
         this IApizrEnumerableRegistry registry) =>
-        ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrUploadManager<IUploadApi>>();
+        ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrUploadManager>();
 
     /// <summary>
     /// Check if registry contains a manager for <typeparamref name="TUploadApi"/> api type
@@ -407,13 +465,13 @@ public static class FileTransferOptionsBuilderExtensions
         ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrUploadManager<TUploadApi>>();
 
     /// <summary>
-    /// Check if registry contains a manager for the default <typeparamref name="IDownloadApi"/> api type
+    /// Check if registry contains a manager for the default <see cref="IDownloadApi"/> api type
     /// </summary>
     /// <param name="registry">The registry to get the manager from</param>
     /// <returns></returns>
     public static bool ContainsDownloadManager(
         this IApizrEnumerableRegistry registry) =>
-        ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrDownloadManager<IDownloadApi>>();
+        ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrDownloadManager>();
 
     /// <summary>
     /// Check if registry contains a manager for <typeparamref name="TDownloadApi"/> api type
@@ -437,13 +495,13 @@ public static class FileTransferOptionsBuilderExtensions
         ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrDownloadManager<TDownloadApi, TDownloadParams>>();
 
     /// <summary>
-    /// Check if registry contains a manager for the default <typeparamref name="ITransferApi"/> api type
+    /// Check if registry contains a manager for the default <see cref="ITransferApi"/> api type
     /// </summary>
     /// <param name="registry">The registry to get the manager from</param>
     /// <returns></returns>
     public static bool ContainsTransferManager(
         this IApizrEnumerableRegistry registry) =>
-        ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrTransferManager<ITransferApi>>();
+        ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrTransferManager>();
 
     /// <summary>
     /// Check if registry contains a manager for <typeparamref name="TTransferApi"/> api type

@@ -11,6 +11,8 @@ public interface IApizrUploadRegistryBuilderBase<out TApizrUploadRegistryBuilder
     where TApizrProperOptionsBuilder : IApizrGlobalProperOptionsBuilderBase
     where TApizrCommonOptionsBuilder : IApizrGlobalCommonOptionsBuilderBase
 {
-    TApizrUploadRegistryBuilder AddFor<TUploadApi>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
+    TApizrUploadRegistryBuilder AddUploadManager(Action<TApizrProperOptionsBuilder> optionsBuilder = null);
+
+    TApizrUploadRegistryBuilder AddUploadManagerFor<TUploadApi>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
         where TUploadApi : IUploadApi;
 }

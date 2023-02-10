@@ -28,7 +28,11 @@ public abstract class ApizrDownloadRegistryBuilderBase<TApizrDownloadRegistryBui
     protected abstract TApizrDownloadRegistryBuilder Builder { get; }
 
     /// <inheritdoc />
-    public TApizrDownloadRegistryBuilder AddFor<TDownloadApi>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
+    public TApizrDownloadRegistryBuilder AddDownloadManager(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
+        => AddDownloadManagerFor<IDownloadApi>(optionsBuilder);
+
+    /// <inheritdoc />
+    public TApizrDownloadRegistryBuilder AddDownloadManagerFor<TDownloadApi>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
         where TDownloadApi : IDownloadApi
     {
         if (typeof(TDownloadApi) == typeof(IDownloadApi))
@@ -48,7 +52,7 @@ public abstract class ApizrDownloadRegistryBuilderBase<TApizrDownloadRegistryBui
     }
 
     /// <inheritdoc />
-    public TApizrDownloadRegistryBuilder AddFor<TDownloadApi, TDownloadParams>(
+    public TApizrDownloadRegistryBuilder AddDownloadFor<TDownloadApi, TDownloadParams>(
         Action<TApizrProperOptionsBuilder> optionsBuilder = null) where TDownloadApi : IDownloadApi<TDownloadParams>
     {
         _internalBuilder?.AddWrappingManagerFor<TDownloadApi, IApizrDownloadManager<TDownloadApi, TDownloadParams>>(

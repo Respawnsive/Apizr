@@ -15,6 +15,7 @@ using Apizr.Mediation.Extending;
 using Apizr.Mediation.Requesting.Sending;
 using Apizr.Optional.Requesting.Sending;
 using Apizr.Policing;
+using Apizr.Progressing;
 using Apizr.Requesting;
 using Apizr.Tests.Apis;
 using Apizr.Tests.Helpers;
@@ -441,11 +442,10 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Calling_WithFileTransfer_Should_Transfer()
+        public async Task Downloading_File_Should_Succeed()
         {
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddApizrTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr/files")); // Built-in
             services.AddApizrTransferManagerFor<ITransferSampleApi>(); // Custom
@@ -473,6 +473,30 @@ namespace Apizr.Tests
             var transferSampleApiManagerResult = await transferSampleApiManager.DownloadAsync(new FileInfo("test100k.db"));
             transferSampleApiManagerResult.Should().NotBeNull();
             transferSampleApiManagerResult.Length.Should().BePositive();
+        }
+
+        [Fact]
+        public async Task Downloading_File_With_Progress_Should_Report_Progress()
+        {
+            var percentage = 0;
+            var progress = new ApizrProgress();
+            progress.ProgressChanged += (sender, args) =>
+            {
+                percentage = args.ProgressPercentage;
+            };
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddApizrTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr/files").WithProgress(progress)); // Built-in
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            var apizrTransferManager = serviceProvider.GetService<IApizrTransferManager>(); // Built-in
+            apizrTransferManager.Should().NotBeNull(); // Built-in
+
+            var fileInfo = await apizrTransferManager.DownloadAsync(new FileInfo("test10Mb.db")).ConfigureAwait(false);
+
+            percentage.Should().Be(100);
+            fileInfo.Length.Should().BePositive();
         }
 
         [Fact]

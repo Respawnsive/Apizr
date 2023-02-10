@@ -11,10 +11,12 @@ namespace Apizr.Configuring.Registry
         where TApizrProperOptionsBuilder : IApizrGlobalProperOptionsBuilderBase
         where TApizrCommonOptionsBuilder : IApizrGlobalCommonOptionsBuilderBase
     {
-        TApizrTransferRegistryBuilder AddFor<TTransferApi>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
+        TApizrTransferRegistryBuilder AddTransferManager(Action<TApizrProperOptionsBuilder> optionsBuilder = null);
+
+        TApizrTransferRegistryBuilder AddTransferManagerFor<TTransferApi>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
             where TTransferApi : ITransferApi;
 
-        TApizrTransferRegistryBuilder AddFor<TTransferApi, TDownloadParams>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
+        TApizrTransferRegistryBuilder AddTransferManagerFor<TTransferApi, TDownloadParams>(Action<TApizrProperOptionsBuilder> optionsBuilder = null)
             where TTransferApi : ITransferApi<TDownloadParams>;
     }
 }

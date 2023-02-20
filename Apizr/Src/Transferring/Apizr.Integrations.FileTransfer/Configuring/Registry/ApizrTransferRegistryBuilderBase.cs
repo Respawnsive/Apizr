@@ -36,6 +36,21 @@ public abstract class ApizrTransferRegistryBuilderBase<TApizrTransferRegistryBui
     {
         if (typeof(TTransferApi) == typeof(ITransferApi))
         {
+            // Upload
+            _internalBuilder?.AddWrappingManagerFor<IUploadApi, IApizrUploadManager>(
+                apizrManager => new ApizrUploadManager(apizrManager),
+                optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody));
+
+            _internalBuilder?.AddAliasingManagerFor<IApizrUploadManager, IApizrUploadManager<IUploadApi>>();
+
+            // Download
+            _internalBuilder?.AddWrappingManagerFor<IDownloadApi, IApizrDownloadManager>(
+                apizrManager => new ApizrDownloadManager(apizrManager),
+                optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody));
+
+            _internalBuilder?.AddAliasingManagerFor<IApizrDownloadManager, IApizrDownloadManager<IDownloadApi>>();
+
+            // Transfer
             _internalBuilder?.AddWrappingManagerFor<ITransferApi, IApizrTransferManager>(
                 apizrManager => new ApizrTransferManager(
                     new ApizrDownloadManager<ITransferApi>(apizrManager),
@@ -45,11 +60,24 @@ public abstract class ApizrTransferRegistryBuilderBase<TApizrTransferRegistryBui
             _internalBuilder?.AddAliasingManagerFor<IApizrTransferManager, IApizrTransferManager<ITransferApi>>();
         }
         else
+        {
+            // Upload
+            _internalBuilder?.AddWrappingManagerFor<TTransferApi, IApizrUploadManager<TTransferApi>>(
+                apizrManager => new ApizrUploadManager<TTransferApi>(apizrManager),
+                optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody));
+
+            // Download
+            _internalBuilder?.AddWrappingManagerFor<TTransferApi, IApizrDownloadManager<TTransferApi>>(
+                apizrManager => new ApizrDownloadManager<TTransferApi>(apizrManager),
+                optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody));
+
+            // Transfer
             _internalBuilder?.AddWrappingManagerFor<TTransferApi, IApizrTransferManager<TTransferApi>>(
                 apizrManager => new ApizrTransferManager<TTransferApi>(
                     new ApizrDownloadManager<TTransferApi>(apizrManager),
                     new ApizrUploadManager<TTransferApi>(apizrManager)),
                 optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody | HttpMessageParts.ResponseBody));
+        }
 
         return Builder;
     }
@@ -58,6 +86,17 @@ public abstract class ApizrTransferRegistryBuilderBase<TApizrTransferRegistryBui
     public TApizrTransferRegistryBuilder AddTransferManagerFor<TTransferApi, TDownloadParams>(
         Action<TApizrProperOptionsBuilder> optionsBuilder = null) where TTransferApi : ITransferApi<TDownloadParams>
     {
+        // Upload
+        _internalBuilder?.AddWrappingManagerFor<TTransferApi, IApizrUploadManager<TTransferApi>>(
+            apizrManager => new ApizrUploadManager<TTransferApi>(apizrManager),
+            optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody));
+
+        // Download
+        _internalBuilder?.AddWrappingManagerFor<TTransferApi, IApizrDownloadManager<TTransferApi, TDownloadParams>>(
+            apizrManager => new ApizrDownloadManager<TTransferApi, TDownloadParams>(apizrManager),
+            optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody));
+
+        // Transfer
         _internalBuilder?.AddWrappingManagerFor<TTransferApi, IApizrTransferManager<TTransferApi, TDownloadParams>>(
             apizrManager => new ApizrTransferManager<TTransferApi, TDownloadParams>(
                 new ApizrDownloadManager<TTransferApi, TDownloadParams>(apizrManager),

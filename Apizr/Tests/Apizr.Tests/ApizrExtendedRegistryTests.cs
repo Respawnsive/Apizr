@@ -788,17 +788,6 @@ namespace Apizr.Tests
             apizrTransferTypedManager.Should().NotBeNull(); // Built-in
             transferSampleApiManager.Should().NotBeNull(); // Custom
 
-            // Get instances from the registry
-            var registry = serviceProvider.GetRequiredService<IApizrExtendedRegistry>();
-
-            registry.TryGetTransferManager(out var regTransferManager).Should().BeTrue(); // Built-in
-            registry.TryGetTransferManagerFor<ITransferApi>(out var regTransferTypedManager).Should().BeTrue(); // Built-in
-            registry.TryGetTransferManagerFor<ITransferSampleApi>(out var regTransferSampleApiManager).Should().BeTrue(); // Custom
-
-            regTransferManager.Should().NotBeNull(); // Built-in
-            regTransferTypedManager.Should().NotBeNull(); // Built-in
-            regTransferSampleApiManager.Should().NotBeNull(); // Custom
-
             // Built-in
             var apizrTransferManagerResult = await apizrTransferManager.DownloadAsync(new FileInfo("test100k.db"));
             apizrTransferManagerResult.Should().NotBeNull();
@@ -813,6 +802,37 @@ namespace Apizr.Tests
             var transferSampleApiManagerResult = await transferSampleApiManager.DownloadAsync(new FileInfo("test100k.db"));
             transferSampleApiManagerResult.Should().NotBeNull();
             transferSampleApiManagerResult.Length.Should().BePositive();
+
+            // Get instances from the registry
+            var registry = serviceProvider.GetRequiredService<IApizrExtendedRegistry>();
+
+            registry.TryGetTransferManager(out var regTransferManager).Should().BeTrue(); // Built-in
+            registry.TryGetTransferManagerFor<ITransferApi>(out var regTransferTypedManager).Should().BeTrue(); // Built-in
+            registry.TryGetTransferManagerFor<ITransferSampleApi>(out var regTransferSampleApiManager).Should().BeTrue(); // Custom
+
+            regTransferManager.Should().NotBeNull(); // Built-in
+            regTransferTypedManager.Should().NotBeNull(); // Built-in
+            regTransferSampleApiManager.Should().NotBeNull(); // Custom
+            
+            // Shortcut
+            var regShortcutResult = await registry.DownloadAsync(new FileInfo("test100k.db"));
+            regShortcutResult.Should().NotBeNull();
+            regShortcutResult.Length.Should().BePositive();
+
+            // Built-in
+            var regTransferManagerResult = await regTransferManager.DownloadAsync(new FileInfo("test100k.db"));
+            regTransferManagerResult.Should().NotBeNull();
+            regTransferManagerResult.Length.Should().BePositive();
+
+            // Built-in
+            var regTransferTypedManagerResult = await regTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            regTransferTypedManagerResult.Should().NotBeNull();
+            regTransferTypedManagerResult.Length.Should().BePositive();
+
+            // Custom
+            var regTransferSampleApiManagerResult = await regTransferSampleApiManager.DownloadAsync(new FileInfo("test100k.db"));
+            regTransferSampleApiManagerResult.Should().NotBeNull();
+            regTransferSampleApiManagerResult.Length.Should().BePositive();
         }
 
         [Fact]
@@ -864,7 +884,7 @@ namespace Apizr.Tests
             var apizrMediator = serviceProvider.GetRequiredService<IApizrMediator>();
 
             apizrMediator.Should().NotBeNull();
-            var result = await apizrMediator.SendDownloadQuery(new FileInfo("test10Mb.db"));
+            var result = await apizrMediator.SendDownloadQuery(new FileInfo("test100k.db"));
             result.Should().NotBeNull();
             result.Length.Should().BePositive();
         }

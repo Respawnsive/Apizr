@@ -515,7 +515,7 @@ namespace Apizr.Tests
             var apizrMediator = serviceProvider.GetRequiredService<IApizrMediator>();
 
             apizrMediator.Should().NotBeNull();
-            var result = await apizrMediator.SendDownloadQuery(new FileInfo("test10Mb.db"));
+            var result = await apizrMediator.SendDownloadQuery(new FileInfo("test100k.db"));
             result.Should().NotBeNull();
             result.Length.Should().BePositive();
         }

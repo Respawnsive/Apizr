@@ -346,7 +346,9 @@ namespace Apizr.Extending.Configuring.Registry
         /// <inheritdoc />
         public void AddWrappingManagerFor<TWebApi, TWrappingManager>(Func<IApizrManager<TWebApi>, TWrappingManager> wrappingManagerFactory, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) where TWrappingManager : IApizrManager
         {
-            AddManagerFor<TWebApi>(optionsBuilder);
+            if(!Registry.ContainsManagerFor<TWebApi>())
+                AddManagerFor<TWebApi>(optionsBuilder);
+
             Services.AddOrReplaceSingleton(typeof(TWrappingManager), serviceProvider => wrappingManagerFactory.Invoke(serviceProvider.GetRequiredService<IApizrManager<TWebApi>>()));
             Registry.AddOrUpdateManager(typeof(TWrappingManager));
         }

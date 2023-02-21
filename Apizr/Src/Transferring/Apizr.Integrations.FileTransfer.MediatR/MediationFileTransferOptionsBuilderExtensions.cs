@@ -54,7 +54,23 @@ namespace Apizr
             {
                 if (typeof(ITransferApiBase).IsAssignableFrom(webApiType))
                 {
-                    if (typeof(IDownloadApi) == webApiType)
+                    if (typeof(IUploadApi) == webApiType)
+                    {
+                        var shortRequestType = typeof(UploadCommand);
+                        var shortRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortRequestType, typeof(Unit));
+                        var shortRequestHandlerImplementationType = typeof(UploadCommandHandler<IUploadApi>);
+
+                        services.TryAddSingleton(shortRequestHandlerServiceType, shortRequestHandlerImplementationType);
+                    }
+                    else if (typeof(IUploadApi).IsAssignableFromGenericType(webApiType))
+                    {
+                        var requestType = typeof(UploadCommand<>).MakeGenericType(webApiType);
+                        var requestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(requestType, typeof(Unit));
+                        var requestHandlerImplementationType = typeof(UploadCommandHandler<>).MakeGenericType(webApiType);
+
+                        services.TryAddSingleton(requestHandlerServiceType, requestHandlerImplementationType);
+                    }
+                    else if (typeof(IDownloadApi) == webApiType)
                     {
                         var shortRequestType = typeof(DownloadQuery);
                         var shortRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortRequestType, typeof(FileInfo));
@@ -81,22 +97,6 @@ namespace Apizr
 
                         services.TryAddSingleton(requestHandlerServiceType, requestHandlerImplementationType);
 
-                    }
-                    else if (typeof(IUploadApi) == webApiType)
-                    {
-                        var shortRequestType = typeof(UploadCommand);
-                        var shortRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortRequestType, typeof(Unit));
-                        var shortRequestHandlerImplementationType = typeof(UploadCommandHandler<IUploadApi>);
-
-                        services.TryAddSingleton(shortRequestHandlerServiceType, shortRequestHandlerImplementationType);
-                    }
-                    else if (typeof(IUploadApi).IsAssignableFromGenericType(webApiType))
-                    {
-                        var requestType = typeof(UploadCommand<>).MakeGenericType(webApiType);
-                        var requestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(requestType, typeof(Unit));
-                        var requestHandlerImplementationType = typeof(UploadCommandHandler<>).MakeGenericType(webApiType);
-
-                        services.TryAddSingleton(requestHandlerServiceType, requestHandlerImplementationType);
                     }
                 }
             });

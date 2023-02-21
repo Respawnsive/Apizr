@@ -2,22 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
-using Apizr.Configuring.Proper;
-using Apizr.Configuring.Registry;
 using Apizr.Extending.Configuring.Common;
 using Apizr.Extending.Configuring.Proper;
 using Apizr.Mapping;
 using Apizr.Requesting;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Apizr.Extending.Configuring.Registry
 {
     /// <summary>
     /// Registry builder options available for extended registrations
     /// </summary>
-    public class ApizrExtendedRegistryBuilder : IApizrExtendedRegistryBuilder, IApizrInternalRegistryBuilderBase<IApizrExtendedProperOptionsBuilder>
+    public class ApizrExtendedRegistryBuilder : IApizrExtendedRegistryBuilder, IApizrInternalExtendedRegistryBuilder<IApizrExtendedProperOptionsBuilder>
     {
         protected readonly ApizrExtendedRegistry Registry;
         protected readonly IApizrExtendedCommonOptions CommonOptions;
@@ -343,19 +339,19 @@ namespace Apizr.Extending.Configuring.Registry
 
         #endregion
 
-        /// <inheritdoc />
-        public void AddWrappingManagerFor<TWebApi, TWrappingManager>(Func<IApizrManager<TWebApi>, TWrappingManager> wrappingManagerFactory, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) where TWrappingManager : IApizrManager
+        public void AddWrappingManagerFor<TWebApi, TWrappingManagerService, TWrappingManagerImplementation>(
+            Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) where TWrappingManagerService : IApizrManager
         {
-            if(!Registry.ContainsManagerFor<TWebApi>())
+            if (!Registry.ContainsManagerFor<TWebApi>())
                 AddManagerFor<TWebApi>(optionsBuilder);
 
-            Services.AddOrReplaceSingleton(typeof(TWrappingManager), serviceProvider => wrappingManagerFactory.Invoke(serviceProvider.GetRequiredService<IApizrManager<TWebApi>>()));
-            Registry.AddOrUpdateManager(typeof(TWrappingManager));
+            Services.AddOrReplaceSingleton(typeof(TWrappingManagerService), typeof(TWrappingManagerImplementation));
+            Registry.AddOrUpdateManager(typeof(TWrappingManagerService));
         }
 
-        public void AddAliasingManagerFor<TAliasedManager, TAliasingManager>()
+        public void AddAliasingManagerFor<TAliasingManager, TAliasedManager>()
         {
-            Services.TryAddSingleton<TAliasingManager>(serviceProvider => serviceProvider.GetRequiredService<TAliasedManager>());
+            Services.AddOrReplaceSingleton(typeof(TAliasingManager), serviceProvider => serviceProvider.GetRequiredService<TAliasedManager>());
             Registry.AddOrUpdateManager(typeof(TAliasingManager));
         }
     }

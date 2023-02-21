@@ -149,13 +149,13 @@ public static class FileTransferOptionsBuilderExtensions
     public static IApizrRegistryBuilder AddUploadManager(this IApizrRegistryBuilder builder,
         Action<IApizrProperOptionsBuilder> optionsBuilder)
     {
-        if (builder is IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder> internalBuilder)
+        if (builder is IApizrInternalRegistryBuilder<IApizrProperOptionsBuilder> internalBuilder)
         {
             internalBuilder.AddWrappingManagerFor<IUploadApi, IApizrUploadManager>(
                 apizrManager => new ApizrUploadManager(apizrManager),
                 optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody));
 
-            internalBuilder.AddAliasingManagerFor<IApizrUploadManager, IApizrUploadManager<IUploadApi>>();
+            internalBuilder.AddAliasingManagerFor<IApizrUploadManager<IUploadApi>, IApizrUploadManager>();
         }
 
         return builder;
@@ -192,13 +192,13 @@ public static class FileTransferOptionsBuilderExtensions
             this IApizrRegistryBuilder builder,
             Action<IApizrProperOptionsBuilder> optionsBuilder)
     {
-        if (builder is IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder> internalBuilder)
+        if (builder is IApizrInternalRegistryBuilder<IApizrProperOptionsBuilder> internalBuilder)
         {
             internalBuilder.AddWrappingManagerFor<IDownloadApi, IApizrDownloadManager>(
                 apizrManager => new ApizrDownloadManager(apizrManager),
                 optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody));
 
-            internalBuilder.AddAliasingManagerFor<IApizrDownloadManager, IApizrDownloadManager<IDownloadApi>>();
+            internalBuilder.AddAliasingManagerFor<IApizrDownloadManager<IDownloadApi>, IApizrDownloadManager>();
         }
 
         return builder;
@@ -235,14 +235,14 @@ public static class FileTransferOptionsBuilderExtensions
             this IApizrRegistryBuilder builder,
             Action<IApizrProperOptionsBuilder> optionsBuilder)
     {
-        if (builder is IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder> internalBuilder)
+        if (builder is IApizrInternalRegistryBuilder<IApizrProperOptionsBuilder> internalBuilder)
         {
             internalBuilder.AddWrappingManagerFor<ITransferApi, IApizrTransferManager>(apizrManager =>
                     new ApizrTransferManager(new ApizrDownloadManager<ITransferApi>(apizrManager),
                         new ApizrUploadManager<ITransferApi>(apizrManager)),
                 optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody | HttpMessageParts.ResponseBody));
 
-            internalBuilder.AddAliasingManagerFor<IApizrTransferManager, IApizrTransferManager<ITransferApi>>();
+            internalBuilder.AddAliasingManagerFor<IApizrTransferManager<ITransferApi>, IApizrTransferManager>();
         }
 
         return builder;

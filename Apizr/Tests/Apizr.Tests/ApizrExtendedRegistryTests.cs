@@ -766,7 +766,61 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Downloading_File_Should_Succeed()
+        public async Task Transferring_File_Should_Succeed()
+        {
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+
+            services.AddApizr(registry => registry
+                .AddTransferManager(options => options
+                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")));
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            // Get instances from the container
+            var apizrTransferManager = serviceProvider.GetService<IApizrTransferManager>(); // Built-in
+            var apizrTransferTypedManager = serviceProvider.GetService<IApizrTransferManager<ITransferApi>>(); // Built-in
+
+            apizrTransferManager.Should().NotBeNull(); // Built-in
+            apizrTransferTypedManager.Should().NotBeNull(); // Built-in
+
+            // Built-in
+            var apizrTransferManagerResult = await apizrTransferManager.DownloadAsync(new FileInfo("test100k.db"));
+            apizrTransferManagerResult.Should().NotBeNull();
+            apizrTransferManagerResult.Length.Should().BePositive();
+
+            // Built-in
+            var apizrTransferTypedManagerResult = await apizrTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            apizrTransferTypedManagerResult.Should().NotBeNull();
+            apizrTransferTypedManagerResult.Length.Should().BePositive();
+
+            // Get instances from the registry
+            var registry = serviceProvider.GetRequiredService<IApizrExtendedRegistry>();
+
+            registry.TryGetTransferManager(out var regTransferManager).Should().BeTrue(); // Built-in
+            registry.TryGetTransferManagerFor<ITransferApi>(out var regTransferTypedManager).Should().BeTrue(); // Built-in
+
+            regTransferManager.Should().NotBeNull(); // Built-in
+            regTransferTypedManager.Should().NotBeNull(); // Built-in
+
+            // Shortcut
+            var regShortcutResult = await registry.DownloadAsync(new FileInfo("test100k.db"));
+            regShortcutResult.Should().NotBeNull();
+            regShortcutResult.Length.Should().BePositive();
+
+            // Built-in
+            var regTransferManagerResult = await regTransferManager.DownloadAsync(new FileInfo("test100k.db"));
+            regTransferManagerResult.Should().NotBeNull();
+            regTransferManagerResult.Length.Should().BePositive();
+
+            // Built-in
+            var regTransferTypedManagerResult = await regTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            regTransferTypedManagerResult.Should().NotBeNull();
+            regTransferTypedManagerResult.Length.Should().BePositive();
+        }
+
+        [Fact]
+        public async Task Transferring_File_Grouped_Should_Succeed()
         {
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);

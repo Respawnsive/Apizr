@@ -14,7 +14,7 @@ namespace Apizr.Configuring.Registry
     /// <summary>
     /// Registry builder options available for static registrations
     /// </summary>
-    public class ApizrRegistryBuilder : IApizrRegistryBuilder, IApizrInternalRegistryBuilderBase<IApizrProperOptionsBuilder>
+    public class ApizrRegistryBuilder : IApizrRegistryBuilder, IApizrInternalRegistryBuilder<IApizrProperOptionsBuilder>
     {
         /// <summary>
         /// The registry
@@ -147,7 +147,7 @@ namespace Apizr.Configuring.Registry
         }
 
         /// <inheritdoc />
-        public void AddAliasingManagerFor<TAliasedManager, TAliasingManager>() =>
+        public void AddAliasingManagerFor<TAliasingManager, TAliasedManager>() =>
             Registry.AddOrUpdateManager(typeof(TAliasingManager),
                 () => Registry.ConcurrentRegistry[typeof(TAliasedManager)].Invoke());
 

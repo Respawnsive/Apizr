@@ -1,10 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Net.Http;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Policing;
 using Apizr.Progressing;

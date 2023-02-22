@@ -7,7 +7,6 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring;
-using Apizr.Configuring.Registry;
 using Apizr.Extending;
 using Apizr.Logging;
 using Apizr.Policing;
@@ -21,7 +20,6 @@ using AutoMapper;
 using FluentAssertions;
 using Fusillade;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using MonkeyCache.FileStore;
 using Polly;
 using Polly.Extensions.Http;
@@ -53,11 +51,11 @@ namespace Apizr.Tests
                 .AddManagerFor<IReqResUserService>()
                 .AddManagerFor<IHttpBinService>()
                 //.AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
-                .AddUploadGroup(uploadRegistry => uploadRegistry.AddUploadManagerFor<IUploadApi>())
+                .AddUploadManagerFor<IUploadApi>()
                 //.AddUploadManager(options => options.WithBaseAddress("https://test.com"))
-                .AddDownloadGroup(downloadRegistry => downloadRegistry.AddDownloadManagerFor<IDownloadApi>())
+                .AddDownloadManagerFor<IDownloadApi>()
                 //.AddDownloadManager(options => options.WithBaseAddress("https://test.com"))
-                .AddTransferGroup(downloadRegistry => downloadRegistry.AddTransferManagerFor<ITransferApi>()));
+                .AddTransferManagerFor<ITransferApi>());
                 //.AddTransferManager(options => options.WithBaseAddress("https://test.com"))
 
             apizrRegistry.Should().NotBeNull();
@@ -683,9 +681,25 @@ namespace Apizr.Tests
         public async Task Downloading_File_Should_Succeed()
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-            .AddTransferGroup(group => group
-                    .AddTransferManager(options => options
-                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))
+                .AddTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))
+                .AddTransferManagerFor<ITransferSampleApi>());
+
+            var apizrTransferManager = apizrRegistry.GetTransferManager(); // Built-in
+            var transferSampleApiManager = apizrRegistry.GetTransferManagerFor<ITransferSampleApi>(); // Custom
+
+            apizrTransferManager.Should().NotBeNull(); // Built-in
+            transferSampleApiManager.Should().NotBeNull(); // Custom
+
+            var fileInfo = await transferSampleApiManager.DownloadAsync(new FileInfo("test100k.db")).ConfigureAwait(false);
+            fileInfo.Length.Should().BePositive();
+        }
+
+        [Fact]
+        public async Task Downloading_File_Grouped_Should_Succeed()
+        {
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
+                .AddGroup(group => group
+                    .AddTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))
                     .AddTransferManagerFor<ITransferSampleApi>()));
 
             var apizrTransferManager = apizrRegistry.GetTransferManager(); // Built-in
@@ -709,7 +723,7 @@ namespace Apizr.Tests
             };
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddTransferGroup(group => group
+                .AddGroup(group => group
                     .AddTransferManager(options => options
                         .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))
                     .AddTransferManagerFor<ITransferSampleApi>()),

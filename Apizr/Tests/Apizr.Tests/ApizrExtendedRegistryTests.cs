@@ -7,14 +7,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Extending;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Logging;
 using Apizr.Mediation.Extending;
 using Apizr.Mediation.Requesting.Sending;
-using Apizr.Optional.Extending;
 using Apizr.Optional.Requesting.Sending;
 using Apizr.Policing;
 using Apizr.Progressing;
@@ -77,11 +75,11 @@ namespace Apizr.Tests
                 .AddManagerFor<IReqResUserService>()
                 .AddManagerFor<IHttpBinService>()
                 //.AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
-                .AddUploadGroup(uploadRegistry => uploadRegistry.AddUploadManagerFor<IUploadApi>())
+                .AddUploadManagerFor<IUploadApi>()
                 //.AddUploadManager(options => options.WithBaseAddress("https://test.com"))
-                .AddDownloadGroup(downloadRegistry => downloadRegistry.AddDownloadManagerFor<IDownloadApi>())
+                .AddDownloadManagerFor<IDownloadApi>()
                 //.AddDownloadManager(options => options.WithBaseAddress("https://test.com"))
-                .AddTransferGroup(downloadRegistry => downloadRegistry.AddTransferManagerFor<ITransferApi>()));
+                .AddTransferManagerFor<ITransferApi>());
             //.AddTransferManager(options => options.WithBaseAddress("https://test.com"))
 
             services.Should().Contain(x => x.ServiceType == typeof(IApizrExtendedRegistry));
@@ -826,7 +824,7 @@ namespace Apizr.Tests
             services.AddPolicyRegistry(_policyRegistry);
 
             services.AddApizr(registry => registry
-                .AddTransferGroup(transferRegistry => transferRegistry
+                .AddGroup(transferRegistry => transferRegistry
                     .AddTransferManagerFor<ITransferSampleApi>()
                     .AddTransferManagerFor<ITransferApi>(options => options
                         .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))));
@@ -901,7 +899,7 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
-                .AddTransferGroup(transferRegistry => transferRegistry
+                .AddGroup(transferRegistry => transferRegistry
                     .AddTransferManagerFor<ITransferSampleApi>()
                     .AddTransferManagerFor<ITransferApi>(options => options
                         .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))),
@@ -926,7 +924,7 @@ namespace Apizr.Tests
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddApizr(registry => registry
-                .AddTransferGroup(transferRegistry => transferRegistry
+                .AddGroup(transferRegistry => transferRegistry
                     .AddTransferManagerFor<ITransferSampleApi>()
                     .AddTransferManagerFor<ITransferApi>(options => options
                         .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))),

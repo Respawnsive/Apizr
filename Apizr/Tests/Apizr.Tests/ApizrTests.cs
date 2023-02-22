@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
@@ -16,9 +14,7 @@ using Apizr.Tests.Models;
 using Apizr.Tests.Models.Mappings;
 using AutoMapper;
 using FluentAssertions;
-using FluentAssertions.Common;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 using MonkeyCache.FileStore;
 using Polly;
 using Polly.Extensions.Http;

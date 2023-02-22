@@ -1,24 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
+﻿using System.Linq;
 using Apizr.Extending;
-using System.Threading.Tasks;
 using Apizr.Extending.Configuring.Common;
 using Apizr.Extending.Configuring.Manager;
-using Apizr.Mapping;
-using Apizr.Mediation.Configuring.Registry;
-using Apizr.Mediation.Cruding.Handling;
-using Apizr.Mediation.Cruding.Sending;
-using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Requesting.Handling;
-using Apizr.Mediation.Requesting.Sending;
 using Apizr.Mediation.Requesting;
 using Apizr.Transferring.Requesting;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Refit;
 using System.IO;
 
 namespace Apizr

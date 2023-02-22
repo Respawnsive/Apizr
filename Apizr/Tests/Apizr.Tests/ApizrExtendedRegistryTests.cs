@@ -926,7 +926,7 @@ namespace Apizr.Tests
             services.AddApizr(registry => registry
                 .AddGroup(transferRegistry => transferRegistry
                     .AddTransferManagerFor<ITransferSampleApi>()
-                    .AddTransferManagerFor<ITransferApi>(options => options
+                    .AddTransferManager(options => options
                         .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))),
                 config => config
                     .WithMediation()

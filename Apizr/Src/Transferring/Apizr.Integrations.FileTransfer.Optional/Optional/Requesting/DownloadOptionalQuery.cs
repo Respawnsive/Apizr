@@ -4,6 +4,7 @@ using System.IO;
 using Apizr.Configuring.Request;
 using Apizr.Mediation.Querying;
 using Apizr.Transferring.Requesting;
+using Optional;
 
 namespace Apizr.Optional.Requesting
 {
@@ -12,7 +13,7 @@ namespace Apizr.Optional.Requesting
     /// </summary>
     /// <typeparam name="TDownloadApi">The download api type to manage</typeparam>
     /// <typeparam name="TDownloadParams">The query parameters type</typeparam>
-    public class DownloadOptionalQuery<TDownloadApi, TDownloadParams> : MediationQueryBase<FileInfo, IApizrRequestOptions, IApizrRequestOptionsBuilder>
+    public class DownloadOptionalQuery<TDownloadApi, TDownloadParams> : MediationQueryBase<Option<FileInfo, ApizrException>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
         where TDownloadApi : IDownloadApi<TDownloadParams>
     {
         /// <summary>

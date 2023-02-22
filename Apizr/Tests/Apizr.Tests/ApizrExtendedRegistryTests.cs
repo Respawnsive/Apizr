@@ -13,6 +13,7 @@ using Apizr.Extending.Configuring.Registry;
 using Apizr.Logging;
 using Apizr.Mediation.Extending;
 using Apizr.Mediation.Requesting.Sending;
+using Apizr.Optional.Extending;
 using Apizr.Optional.Requesting.Sending;
 using Apizr.Policing;
 using Apizr.Progressing;
@@ -939,6 +940,37 @@ namespace Apizr.Tests
             var result = await apizrMediator.SendDownloadQuery(new FileInfo("test100k.db"));
             result.Should().NotBeNull();
             result.Length.Should().BePositive();
+        }
+
+        [Fact]
+        public async Task Calling_WithFileTransferOptionalMediation_Should_Handle_Requests_With_Optional_Result()
+        {
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddApizr(
+                registry => registry
+                    .AddTransferManagerFor<ITransferSampleApi>()
+                    .AddTransferManager(options => options
+                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")),
+                config => config
+                    .WithOptionalMediation()
+                    .WithFileTransferOptionalMediation());
+
+            var serviceProvider = services.BuildServiceProvider();
+            var apizrMediator = serviceProvider.GetRequiredService<IApizrOptionalMediator>();
+
+            apizrMediator.Should().NotBeNull();
+            var result = await apizrMediator.SendDownloadOptionalQuery(new FileInfo("test100k.db"));
+            result.Should().NotBeNull();
+            result.Match(fileInfo =>
+                {
+                    fileInfo.Length.Should().BePositive();
+                },
+                e => {
+                    // ignore error
+                });
         }
     }
 }

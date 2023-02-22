@@ -3,15 +3,16 @@ using Apizr.Configuring.Request;
 using Apizr.Mediation.Commanding;
 using Apizr.Transferring.Requesting;
 using MediatR;
+using Optional;
 using Refit;
 
 namespace Apizr.Optional.Requesting
 {
     /// <summary>
-    /// The mediation upload command
+    /// The mediation upload command returning an optional result
     /// </summary>
     /// <typeparam name="TUploadApi">The upload api type to manage</typeparam>
-    public class UploadOptionalCommand<TUploadApi> : MediationCommandBase<Unit, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder> where TUploadApi : IUploadApi
+    public class UploadOptionalCommand<TUploadApi> : MediationCommandBase<Unit, Option<Unit, ApizrException>, IApizrRequestOptions, IApizrRequestOptionsBuilder> where TUploadApi : IUploadApi
     {
         /// <summary>
         /// Upload a file from its bytes data

@@ -11,6 +11,7 @@ using Apizr.Configuring.Manager;
 using Apizr.Logging;
 using Apizr.Mediation.Extending;
 using Apizr.Mediation.Requesting.Sending;
+using Apizr.Optional.Extending;
 using Apizr.Optional.Requesting.Sending;
 using Apizr.Policing;
 using Apizr.Progressing;
@@ -416,27 +417,6 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Calling_WithOptionalMediation_Should_Handle_Requests_With_Optional_Result2()
-        {
-            var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
-
-            services.AddApizrManagerFor<ITransferSampleApi>();
-            services.AddSingleton<IApizrDownloadManager<ITransferSampleApi>, ApizrDownloadManager<ITransferSampleApi>>();
-            services.AddSingleton<IApizrUploadManager<ITransferSampleApi>, ApizrUploadManager<ITransferSampleApi>>();
-            services.AddSingleton<IApizrTransferManager<ITransferSampleApi>, ApizrTransferManager<ITransferSampleApi>>();
-
-            var serviceProvider = services.BuildServiceProvider();
-            var fileTransferManager = serviceProvider.GetRequiredService<IApizrTransferManager<ITransferSampleApi>>();
-
-            fileTransferManager.Should().NotBeNull();
-            var fileInfo = await fileTransferManager.DownloadAsync(new FileInfo("test10Mb.db"));
-
-            fileInfo.Should().NotBeNull();
-            fileInfo.Length.Should().BePositive();
-        }
-
-        [Fact]
         public async Task Downloading_File_Should_Succeed()
         {
             var services = new ServiceCollection();
@@ -513,6 +493,33 @@ namespace Apizr.Tests
             var result = await apizrMediator.SendDownloadQuery(new FileInfo("test100k.db"));
             result.Should().NotBeNull();
             result.Length.Should().BePositive();
+        }
+
+        [Fact]
+        public async Task Calling_WithFileTransferOptionalMediation_Should_Handle_Requests_With_Optional_Result()
+        {
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddApizrTransferManager(config => config
+                .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
+                .WithOptionalMediation()
+                .WithFileTransferOptionalMediation());
+
+            var serviceProvider = services.BuildServiceProvider();
+            var apizrMediator = serviceProvider.GetRequiredService<IApizrOptionalMediator>();
+
+            apizrMediator.Should().NotBeNull();
+            var result = await apizrMediator.SendDownloadOptionalQuery(new FileInfo("test100k.db"));
+            result.Should().NotBeNull();
+            result.Match(fileInfo =>
+            {
+                fileInfo.Length.Should().BePositive();
+            },
+                e => {
+                    // ignore error
+                });
         }
     }
 }

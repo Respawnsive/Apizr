@@ -11,4 +11,5 @@
            InternalsVisibleTo("Apizr.Integrations.FileTransfer"),
            InternalsVisibleTo("Apizr.Extensions.Microsoft.FileTransfer"),
            InternalsVisibleTo("Apizr.Integrations.FileTransfer.MediatR"),
+           InternalsVisibleTo("Apizr.Integrations.FileTransfer.Optional"),
            InternalsVisibleTo("Apizr.Tests")]

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring.Request;
 using Apizr.Mediation.Requesting.Sending;
@@ -11,7 +12,7 @@ namespace Apizr.Optional.Requesting.Sending
     /// <summary>
     /// Apizr mediator to send request using MediatR by calling expression and returning optional result
     /// </summary>
-    public class ApizrOptionalMediator : ApizrMediatorBase, IApizrOptionalMediator
+    public class ApizrOptionalMediator : ApizrMediatorBase, IApizrOptionalMediator, IApizrInternalMediator
     {
         private readonly IMediator _mediator;
 
@@ -142,6 +143,14 @@ namespace Apizr.Optional.Requesting.Sending
                 CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         #endregion
+
+        #endregion
+
+        #region Internal
+
+        /// <inheritdoc />
+        public Task<TResponse> Send<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default)
+            => _mediator.Send(request, cancellationToken); 
 
         #endregion
     }

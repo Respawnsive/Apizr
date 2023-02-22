@@ -2,7 +2,6 @@
 using Apizr.Configuring.Request;
 using Apizr.Mediation.Requesting.Base;
 using MediatR;
-using Polly;
 
 namespace Apizr.Mediation.Commanding
 {

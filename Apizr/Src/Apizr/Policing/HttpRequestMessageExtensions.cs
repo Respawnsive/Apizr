@@ -48,13 +48,15 @@ namespace Apizr.Policing
         /// </remarks>
         public static Context GetApizrPolicyExecutionContext(this HttpRequestMessage request)
         {
-            var context = request.GetPolicyExecutionContext();
-            if (context == null && request.Properties.TryGetValue(Constants.ApizrRequestOptionsKey, out var optionsProperty) && optionsProperty is IApizrRequestOptions optionsValue)
-            {
-                context = optionsValue.Context;
-            }
+            if (request.Properties.TryGetValue(Constants.PollyExecutionContextKey, out var contextProperty) &&
+                contextProperty is Context context)
+                return context;
 
-            return context;
+            if (request.Properties.TryGetValue(Constants.ApizrRequestOptionsKey, out var optionsProperty) &&
+                optionsProperty is IApizrRequestOptions optionsValue)
+                return optionsValue.Context;
+
+            return null;
         }
 
         /// <summary>
@@ -91,7 +93,12 @@ namespace Apizr.Policing
         /// to executing a <see cref="Policy"/>, if one does not already exist. The <see cref="Context"/> will be provided
         /// to the policy for use inside the <see cref="Policy"/> and in other message handlers.
         /// </remarks>
-        public static void SetApizrPolicyExecutionContext(this HttpRequestMessage request, Context context) =>
-            request.SetPolicyExecutionContext(context);
+        public static void SetApizrPolicyExecutionContext(this HttpRequestMessage request, Context context)
+        {
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+
+            request.Properties[Constants.PollyExecutionContextKey] = context;
+        }
     }
 }

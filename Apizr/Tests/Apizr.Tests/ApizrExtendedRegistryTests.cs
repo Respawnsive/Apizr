@@ -930,7 +930,6 @@ namespace Apizr.Tests
                     .AddTransferManager(options => options
                         .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))),
                 config => config
-                    .WithMediation()
                     .WithFileTransferMediation());
 
             var serviceProvider = services.BuildServiceProvider();
@@ -955,7 +954,6 @@ namespace Apizr.Tests
                     .AddTransferManager(options => options
                         .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")),
                 config => config
-                    .WithOptionalMediation()
                     .WithFileTransferOptionalMediation());
 
             var serviceProvider = services.BuildServiceProvider();

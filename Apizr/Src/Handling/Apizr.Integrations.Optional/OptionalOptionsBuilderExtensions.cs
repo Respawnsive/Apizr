@@ -466,7 +466,7 @@ namespace Apizr
                     var typedOptionalMediatorImplementationType = typeof(ApizrOptionalMediator<>).MakeGenericType(webApiType);
 
                     // Register typed optional mediator
-                    services.TryAddTransient(typedOptionalMediatorServiceType, typedOptionalMediatorImplementationType);
+                    services.TryAddSingleton(typedOptionalMediatorServiceType, typedOptionalMediatorImplementationType);
 
                     // Get or create and register an optional mediation registry
                     if (!apizrOptions.PostRegistries.TryGetValue(typeof(IApizrOptionalMediationConcurrentRegistry), out var registry))

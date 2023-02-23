@@ -8,6 +8,7 @@ using Apizr.Transferring.Requesting;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.IO;
+using Apizr.Mediation.Requesting.Sending;
 
 namespace Apizr
 {
@@ -42,6 +43,16 @@ namespace Apizr
             {
                 if (typeof(ITransferApiBase).IsAssignableFrom(webApiType))
                 {
+                    // Register mediator
+                    services.TryAddSingleton<IApizrMediator, ApizrMediator>();
+
+                    // Typed mediator
+                    var typedMediatorServiceType = typeof(IApizrMediator<>).MakeGenericType(webApiType);
+                    var typedMediatorImplementationType = typeof(ApizrMediator<>).MakeGenericType(webApiType);
+
+                    // Register typed mediator
+                    services.TryAddSingleton(typedMediatorServiceType, typedMediatorImplementationType);
+
                     // Upload
                     if (typeof(IUploadApi).IsAssignableFrom(webApiType))
                     {

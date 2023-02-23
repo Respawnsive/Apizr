@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Apizr.Optional.Requesting;
 using Apizr.Optional.Requesting.Handling;
 using Optional;
+using Apizr.Optional.Requesting.Sending;
 
 namespace Apizr
 {
@@ -43,6 +44,16 @@ namespace Apizr
             {
                 if (typeof(ITransferApiBase).IsAssignableFrom(webApiType))
                 {
+                    // Register optional mediator
+                    services.TryAddSingleton<IApizrOptionalMediator, ApizrOptionalMediator>();
+
+                    // Typed optional mediator
+                    var typedOptionalMediatorServiceType = typeof(IApizrOptionalMediator<>).MakeGenericType(webApiType);
+                    var typedOptionalMediatorImplementationType = typeof(ApizrOptionalMediator<>).MakeGenericType(webApiType);
+
+                    // Register typed optional mediator
+                    services.TryAddSingleton(typedOptionalMediatorServiceType, typedOptionalMediatorImplementationType);
+
                     // Upload
                     if (typeof(IUploadApi).IsAssignableFrom(webApiType))
                     {

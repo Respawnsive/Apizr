@@ -447,7 +447,7 @@ namespace Apizr
                     var typedMediatorImplementationType = typeof(ApizrMediator<>).MakeGenericType(webApiType);
 
                     // Register typed mediator
-                    services.TryAddTransient(typedMediatorServiceType, typedMediatorImplementationType);
+                    services.TryAddSingleton(typedMediatorServiceType, typedMediatorImplementationType);
 
                     // Get or create and register a mediation registry
                     if (!apizrOptions.PostRegistries.TryGetValue(typeof(IApizrMediationConcurrentRegistry), out var registry))

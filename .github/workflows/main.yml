@@ -1,0 +1,34 @@
+name: Deploy Dev Doc
+
+on:
+  push:
+    branches:
+      - dev
+  # Enables manually triggering of Workflow with file synchronization option
+  workflow_dispatch:
+    inputs:
+      sync:
+        description: "File synchronization"
+        required: true
+        default: "delta"
+
+jobs:
+  deploy-master:
+    name: "dev branch"
+    if: ${{ github.ref == 'refs/heads/dev' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: "Deploy"
+        uses: milanmk/actions-file-deployer@master
+        with:
+          local-path: "./docs/*"
+          remote-protocol: "sftp"
+          remote-host: "beta.apirz.net"
+          remote-path: "/beta.apizr.net"
+          remote-user: "apizr"
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}

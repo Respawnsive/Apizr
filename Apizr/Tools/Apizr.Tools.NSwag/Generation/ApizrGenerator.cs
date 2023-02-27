@@ -59,7 +59,7 @@ namespace Apizr.Tools.NSwag.Generation
         /// <returns>The code artifact collection.</returns>
         //protected override IEnumerable<CodeArtifact> GenerateAllClientTypes() => base.GenerateAllClientTypes().ToList();
 
-        public IEnumerable<CodeArtifact> GenerateServices() => GenerateAllClientTypes();
+        public IEnumerable<CodeArtifact> GenerateApis() => GenerateAllClientTypes();
 
         public IEnumerable<CodeArtifact> GenerateModels() => base.GenerateDtoTypes();
 
@@ -70,7 +70,7 @@ namespace Apizr.Tools.NSwag.Generation
             var models = GenerateModels();
             all.AddRange(models);
 
-            var services = GenerateServices().ToList();
+            var services = GenerateApis().ToList();
             all.AddRange(services);
 
             if (Settings.RegistrationType != ApizrRegistrationType.None)

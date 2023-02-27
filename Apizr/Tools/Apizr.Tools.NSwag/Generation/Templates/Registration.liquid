@@ -31,7 +31,7 @@
 ****************************************************************************************************************/
 
 using Apizr;
-{% if HasManyServices -%}
+{% if HasManyApis -%}
 using Apizr.Configuring.Registry;
 {% endif -%}
 {% if RegistrationType == 'Extended' or RegistrationType == 'Both' -%}
@@ -86,7 +86,7 @@ namespace {{ NameSpace }}
 {%      endif -%}
 {%      if RegistrationType == 'Static' or RegistrationType == 'Both' -%}
         // Static
-        public static {% if HasManyServices  -%}IApizrRegistry {% else -%}IApizrManager<I{{ LastService }}Service> {% endif -%} Build()
+        public static {% if HasManyApis  -%}IApizrRegistry {% else -%}IApizrManager<I{{ LastApi }}Api> {% endif -%} Build()
         {
 {%          if WithCacheProvider == 'MonkeyCache' -%}
             Barrel.ApplicationId = "{{Title}}";
@@ -109,11 +109,11 @@ namespace {{ NameSpace }}
             });
 
 {%          endif -%}
-{%          if HasManyServices -%}
+{%          if HasManyApis -%}
             var apizrRegisry = ApizrBuilder.Current.CreateRegistry(
                 registry => registry
-{%                  for service in Services -%}
-                    .AddManagerFor<I{{ service }}Service>(){% if service == LastService %},{% endif %}
+{%                  for api in Apis -%}
+                    .AddManagerFor<I{{ api }}Api>(){% if api == LastApi %},{% endif %}
 {%                  endfor -%}
                 options => options.WithBaseAddress("{{BaseUrl}}")
 {%                  if WithLogs -%}
@@ -145,7 +145,7 @@ namespace {{ NameSpace }}
 
             return apizrRegistry;
 {%          else -%}
-            var apizrManager = ApizrBuilder.Current.CreateManagerFor<I{{ LastService }}Service>(
+            var apizrManager = ApizrBuilder.Current.CreateManagerFor<I{{ LastApi }}Api>(
                 options => options.WithBaseAddress("{{BaseUrl}}")
 {%                  if WithLogs -%}
                     .WithLoggerFactory(() => LoggerFactory.Create(logging =>
@@ -208,11 +208,11 @@ namespace {{ NameSpace }}
             services.AddAutoMapper(Assembly.GetExecutingAssembly()); // Remove this line if already registered somewhere else
 
 {%          endif -%}
-{%          if HasManyServices -%}
+{%          if HasManyApis -%}
             services.AddApizr(
                 registry => registry
-{%                  for service in Services -%}
-                    .AddManagerFor<I{{ service }}Service>(){% if service == LastService %},{% endif %}
+{%                  for api in Apis -%}
+                    .AddManagerFor<I{{ api }}Api>(){% if api == LastApi %},{% endif %}
 {%                  endfor -%}
                 options => options.WithBaseAddress("{{BaseUrl}}")
 {%                  if WithPriority -%}
@@ -240,7 +240,7 @@ namespace {{ NameSpace }}
 {%                  endif -%}
             );
 {%          else -%}
-            services.AddApizrManagerFor<I{{ LastService }}Service>(
+            services.AddApizrManagerFor<I{{ LastApi }}Api>(
                 options => options.WithBaseAddress("{{BaseUrl}}")
 {%                  if WithPriority -%}
                     .WithPriorityManagement()

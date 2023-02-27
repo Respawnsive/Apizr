@@ -7,7 +7,7 @@ namespace Apizr.Tools.NSwag.Generation.Models
     {
         private readonly OpenApiDocument _document;
         private readonly ApizrGeneratorSettings _settings;
-        public ApizrRegistrationTemplateModel(string controllerName, IEnumerable<string> services, OpenApiDocument document, ApizrGeneratorSettings settings) : base(controllerName, settings)
+        public ApizrRegistrationTemplateModel(string controllerName, IEnumerable<string> apis, OpenApiDocument document, ApizrGeneratorSettings settings) : base(controllerName, settings)
         {
             _document = document;
             _settings = settings;
@@ -16,7 +16,7 @@ namespace Apizr.Tools.NSwag.Generation.Models
             Class = controllerName;
             BaseClass = _settings.ControllerBaseClass?.Replace("{controller}", controllerName);
             NameSpace = _settings.CSharpGeneratorSettings.Namespace;
-            Services = services;
+            Apis = apis;
             Title = document.Info.Title
                 .Replace(" ", "")
                 .Replace("Swagger", "");
@@ -38,11 +38,11 @@ namespace Apizr.Tools.NSwag.Generation.Models
         public string Title { get; }
 
         /// <summary>Gets or sets the operations.</summary>
-        public IEnumerable<string> Services { get; set; }
+        public IEnumerable<string> Apis { get; set; }
 
-        public bool HasManyServices => Services.Count() > 1;
+        public bool HasManyApis => Apis.Count() > 1;
 
-        public string LastService => Services.LastOrDefault();
+        public string LastApi => Apis.LastOrDefault() ?? string.Empty;
 
         public bool WithRetry => _settings.WithRetry;
 

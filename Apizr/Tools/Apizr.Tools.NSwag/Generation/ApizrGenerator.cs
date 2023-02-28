@@ -70,12 +70,12 @@ namespace Apizr.Tools.NSwag.Generation
             var models = GenerateModels();
             all.AddRange(models);
 
-            var services = GenerateApis().ToList();
-            all.AddRange(services);
+            var apis = GenerateApis().ToList();
+            all.AddRange(apis);
 
             if (Settings.RegistrationType != ApizrRegistrationType.None)
             {
-                var model = new ApizrRegistrationTemplateModel("ApizrRegistration", services.Select(a => a.TypeName), _document, Settings);
+                var model = new ApizrRegistrationTemplateModel("ApizrRegistration", apis.Select(a => a.TypeName), _document, Settings);
                 var template = Settings.CodeGeneratorSettings.TemplateFactory.CreateTemplate("CSharp", "Registration", model);
                 var registration = new CodeArtifact(model.Class, CodeArtifactType.Class, CodeArtifactLanguage.CSharp,
                     CodeArtifactCategory.Utility, template);

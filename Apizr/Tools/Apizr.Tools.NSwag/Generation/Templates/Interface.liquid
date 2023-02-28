@@ -88,7 +88,7 @@ namespace {{ NameSpace }}
 {%      if operation.ApizrHeaderParameters.size > 0 -%}
         [Headers({% for headerParameter in operation.ApizrHeaderParameters -%}"{{ headerParameter.Name }}"{% if operation.ApizrHeaderParameters.size > 1 and headerParameter.IsLast == false  -%}, {% endif -%}{%  endfor -%})] 
 {%      endif -%}
-        {{ operation.PascalizeResultType }} {{ operation.ActualOperationName }}Async({% for parameter in operation.NoHeaderParameters -%}{% assign kindName = parameter.KindName -%}{% case kindName -%}{% when 'Query' -%}[Query] {% when 'Body' -%}[Body] {% endcase -%}{{ parameter.TypeInControllerInterface }} {{ parameter.VariableName }}{% if GenerateOptionalParameters and parameter.IsOptional and parameter.HasDefault == false -%}= null{% endif %}{% endfor -%}, [RequestOptions] IApizrRequestOptions options = null{% if WithCancellationToken -%}, CancellationToken cancellationToken = default{% endif -%});
+        {{ operation.PascalizeResultType }} {{ operation.ActualOperationName }}Async({% for parameter in operation.NoHeaderParameters -%}{% assign kindName = parameter.KindName -%}{% case kindName -%}{% when 'Query' -%}[Query] {% when 'Body' -%}[Body] {% endcase -%}{{ parameter.TypeInControllerInterface }} {{ parameter.VariableName }}{% if GenerateOptionalParameters and parameter.IsOptional and parameter.HasDefault == false -%}= null{% endif %}, {% endfor -%} [RequestOptions] IApizrRequestOptions options = null{% if WithCancellationToken -%}, CancellationToken cancellationToken = default{% endif -%});
 
 {%  endfor -%}
     }

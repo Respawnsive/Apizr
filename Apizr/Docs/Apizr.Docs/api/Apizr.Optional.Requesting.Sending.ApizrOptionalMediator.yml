@@ -6,6 +6,7 @@ items:
   parent: Apizr.Optional.Requesting.Sending
   children:
   - Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.#ctor(MediatR.IMediator)
+  - Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.Send``1(MediatR.IRequest{``0},System.Threading.CancellationToken)
   - Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``1(System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``1(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,``0,System.Threading.Tasks.Task}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor``2(System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{``1}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -28,7 +29,7 @@ items:
   source:
     id: ApizrOptionalMediator
     path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 13
+    startLine: 14
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
@@ -80,6 +81,18 @@ items:
   - Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorExtensions.SendFor``5(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,{TWebApi},{TApiRequestData},System.Threading.Tasks.Task{{TApiResultData}}}},{TModelRequestData},System.Threading.CancellationToken,System.Boolean)
   - Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorExtensions.SendFor``5(System.Linq.Expressions.Expression{System.Func{Polly.Context,{TWebApi},{TApiRequestData},System.Threading.Tasks.Task{{TApiResultData}}}},{TModelRequestData},Polly.Context,System.Boolean)
   - Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorExtensions.SendFor``5(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,{TWebApi},{TApiRequestData},System.Threading.Tasks.Task{{TApiResultData}}}},{TModelRequestData},Polly.Context,System.Threading.CancellationToken,System.Boolean)
+  - Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(System.IO.FileInfo,{TDownloadParams},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``1(System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``1(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   modifiers.csharp:
   - public
   - class
@@ -100,7 +113,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 17
+    startLine: 18
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
@@ -129,7 +142,7 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 27
+    startLine: 28
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
@@ -175,7 +188,7 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 33
+    startLine: 34
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
@@ -221,7 +234,7 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 44
+    startLine: 45
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
@@ -274,7 +287,7 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 52
+    startLine: 53
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
@@ -327,7 +340,7 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 68
+    startLine: 69
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
@@ -375,7 +388,7 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 75
+    startLine: 76
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
@@ -423,7 +436,7 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 86
+    startLine: 87
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
@@ -473,7 +486,7 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 94
+    startLine: 95
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
@@ -523,7 +536,7 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 102
+    startLine: 103
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
@@ -576,7 +589,7 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 110
+    startLine: 111
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
@@ -629,7 +642,7 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 123
+    startLine: 124
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
@@ -686,7 +699,7 @@ items:
   source:
     id: SendFor
     path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
-    startLine: 133
+    startLine: 134
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Sending
@@ -729,6 +742,45 @@ items:
   - Public
   fullName.vb: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.SendFor(Of TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData)(System.Linq.Expressions.Expression(Of System.Func(Of Apizr.Configuring.Request.IApizrRequestOptions, TWebApi, TApiRequestData, System.Threading.Tasks.Task(Of TApiResultData))), TModelRequestData, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendFor(Of TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData)(Expression(Of Func(Of IApizrRequestOptions, TWebApi, TApiRequestData, Task(Of TApiResultData))), TModelRequestData, Action(Of IApizrRequestOptionsBuilder))
+- uid: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.Send``1(MediatR.IRequest{``0},System.Threading.CancellationToken)
+  commentId: M:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.Send``1(MediatR.IRequest{``0},System.Threading.CancellationToken)
+  id: Send``1(MediatR.IRequest{``0},System.Threading.CancellationToken)
+  parent: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator
+  langs:
+  - csharp
+  - vb
+  name: Send<TResponse>(IRequest<TResponse>, CancellationToken)
+  nameWithType: ApizrOptionalMediator.Send<TResponse>(IRequest<TResponse>, CancellationToken)
+  fullName: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.Send<TResponse>(MediatR.IRequest<TResponse>, System.Threading.CancellationToken)
+  type: Method
+  source:
+    id: Send
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\Optional\Requesting\Sending\ApizrOptionalMediator.cs
+    startLine: 151
+  assemblies:
+  - Apizr.Integrations.Optional
+  namespace: Apizr.Optional.Requesting.Sending
+  example: []
+  syntax:
+    content: public Task<TResponse> Send<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default(CancellationToken))
+    parameters:
+    - id: request
+      type: MediatR.IRequest{{TResponse}}
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+    typeParameters:
+    - id: TResponse
+    return:
+      type: System.Threading.Tasks.Task{{TResponse}}
+    content.vb: Public Function Send(Of TResponse)(request As IRequest(Of TResponse), cancellationToken As CancellationToken = Nothing) As Task(Of TResponse)
+  overload: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.Send*
+  nameWithType.vb: ApizrOptionalMediator.Send(Of TResponse)(IRequest(Of TResponse), CancellationToken)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.Send(Of TResponse)(MediatR.IRequest(Of TResponse), System.Threading.CancellationToken)
+  name.vb: Send(Of TResponse)(IRequest(Of TResponse), CancellationToken)
 references:
 - uid: Apizr.Optional.Requesting.Sending
   commentId: N:Apizr.Optional.Requesting.Sending
@@ -4961,6 +5013,1062 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(System.IO.FileInfo,{TDownloadParams},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  parent: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions
+  definition: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  name: SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>(FileInfo, TDownloadParams, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>(FileInfo, TDownloadParams, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>(System.IO.FileInfo, TDownloadParams, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)(FileInfo, TDownloadParams, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)(System.IO.FileInfo, TDownloadParams, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)(FileInfo, TDownloadParams, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(System.IO.FileInfo,``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TDownloadParams
+    nameWithType: TDownloadParams
+    fullName: TDownloadParams
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(System.IO.FileInfo,``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TDownloadParams
+    nameWithType: TDownloadParams
+    fullName: TDownloadParams
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  parent: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions
+  definition: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  name: SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>(FileInfo, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>(FileInfo, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>(System.IO.FileInfo, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)(FileInfo, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)(System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)(FileInfo, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``1(System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  parent: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions
+  definition: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  name: SendDownloadOptionalQueryFor<TDownloadApi>(FileInfo, IDictionary<String, Object>, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi>(FileInfo, IDictionary<String, Object>, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi>(System.IO.FileInfo, System.Collections.Generic.IDictionary<System.String, System.Object>, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi)(FileInfo, IDictionary(Of String, Object), Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi)(System.IO.FileInfo, System.Collections.Generic.IDictionary(Of System.String, System.Object), System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendDownloadOptionalQueryFor(Of TDownloadApi)(FileInfo, IDictionary(Of String, Object), Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``1(System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQueryFor<TDownloadApi>
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi>
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``1(System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQueryFor(Of TDownloadApi)
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi)
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``1(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  parent: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions
+  definition: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  name: SendDownloadOptionalQueryFor<TDownloadApi>(FileInfo, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi>(FileInfo, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi>(System.IO.FileInfo, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi)(FileInfo, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi)(System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendDownloadOptionalQueryFor(Of TDownloadApi)(FileInfo, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``1(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQueryFor<TDownloadApi>
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi>
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``1(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQueryFor(Of TDownloadApi)
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi)
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  parent: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions
+  definition: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  name: SendDownloadOptionalQuery(FileInfo, IDictionary<String, Object>, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(FileInfo, IDictionary<String, Object>, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(System.IO.FileInfo, System.Collections.Generic.IDictionary<System.String, System.Object>, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(FileInfo, IDictionary(Of String, Object), Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(System.IO.FileInfo, System.Collections.Generic.IDictionary(Of System.String, System.Object), System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendDownloadOptionalQuery(FileInfo, IDictionary(Of String, Object), Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQuery
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQuery
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  parent: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions
+  definition: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  name: SendDownloadOptionalQuery(FileInfo, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(FileInfo, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(System.IO.FileInfo, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(FileInfo, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendDownloadOptionalQuery(FileInfo, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQuery
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQuery
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  parent: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions
+  definition: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  name: SendUploadOptionalCommandFor<TUploadApi>(ByteArrayPart, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>(ByteArrayPart, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>(Refit.ByteArrayPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)(ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)(Refit.ByteArrayPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendUploadOptionalCommandFor(Of TUploadApi)(ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommandFor<TUploadApi>
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommandFor(Of TUploadApi)
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  parent: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions
+  definition: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  name: SendUploadOptionalCommandFor<TUploadApi>(StreamPart, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>(StreamPart, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>(Refit.StreamPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)(StreamPart, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)(Refit.StreamPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendUploadOptionalCommandFor(Of TUploadApi)(StreamPart, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommandFor<TUploadApi>
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommandFor(Of TUploadApi)
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  parent: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions
+  definition: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  name: SendUploadOptionalCommandFor<TUploadApi>(FileInfoPart, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>(FileInfoPart, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>(Refit.FileInfoPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)(FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)(Refit.FileInfoPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendUploadOptionalCommandFor(Of TUploadApi)(FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommandFor<TUploadApi>
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommandFor(Of TUploadApi)
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  parent: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions
+  definition: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  name: SendUploadOptionalCommand(ByteArrayPart, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(ByteArrayPart, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Refit.ByteArrayPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Refit.ByteArrayPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendUploadOptionalCommand(ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommand
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommand
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  parent: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions
+  definition: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  name: SendUploadOptionalCommand(StreamPart, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(StreamPart, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Refit.StreamPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(StreamPart, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Refit.StreamPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendUploadOptionalCommand(StreamPart, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommand
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommand
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  parent: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions
+  definition: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  name: SendUploadOptionalCommand(FileInfoPart, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(FileInfoPart, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Refit.FileInfoPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Refit.FileInfoPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendUploadOptionalCommand(FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommand
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommand
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
@@ -9128,6 +10236,1224 @@ references:
     nameWithType: Boolean
     fullName: System.Boolean
     isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  isExternal: true
+  name: SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>(IApizrOptionalMediator, FileInfo, TDownloadParams, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>(IApizrOptionalMediator, FileInfo, TDownloadParams, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, System.IO.FileInfo, TDownloadParams, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)(IApizrOptionalMediator, FileInfo, TDownloadParams, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, System.IO.FileInfo, TDownloadParams, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)(IApizrOptionalMediator, FileInfo, TDownloadParams, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TDownloadParams
+    nameWithType: TDownloadParams
+    fullName: TDownloadParams
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TDownloadParams
+    nameWithType: TDownloadParams
+    fullName: TDownloadParams
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions
+  commentId: T:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions
+  parent: Apizr.Optional.Extending
+  name: ApizrOptionalMediatorFileTransferExtensions
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions
+- uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  isExternal: true
+  name: SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>(IApizrOptionalMediator, FileInfo, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>(IApizrOptionalMediator, FileInfo, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, System.IO.FileInfo, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)(IApizrOptionalMediator, FileInfo, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)(IApizrOptionalMediator, FileInfo, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi, TDownloadParams>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi, TDownloadParams)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  isExternal: true
+  name: SendDownloadOptionalQueryFor<TDownloadApi>(IApizrOptionalMediator, FileInfo, IDictionary<String, Object>, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi>(IApizrOptionalMediator, FileInfo, IDictionary<String, Object>, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi>(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, System.IO.FileInfo, System.Collections.Generic.IDictionary<System.String, System.Object>, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi)(IApizrOptionalMediator, FileInfo, IDictionary(Of String, Object), Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi)(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, System.IO.FileInfo, System.Collections.Generic.IDictionary(Of System.String, System.Object), System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendDownloadOptionalQueryFor(Of TDownloadApi)(IApizrOptionalMediator, FileInfo, IDictionary(Of String, Object), Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQueryFor<TDownloadApi>
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi>
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQueryFor(Of TDownloadApi)
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi)
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  isExternal: true
+  name: SendDownloadOptionalQueryFor<TDownloadApi>(IApizrOptionalMediator, FileInfo, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi>(IApizrOptionalMediator, FileInfo, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi>(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, System.IO.FileInfo, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi)(IApizrOptionalMediator, FileInfo, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi)(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendDownloadOptionalQueryFor(Of TDownloadApi)(IApizrOptionalMediator, FileInfo, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQueryFor<TDownloadApi>
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi>
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor<TDownloadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQueryFor(Of TDownloadApi)
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi)
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor(Of TDownloadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  isExternal: true
+  name: SendDownloadOptionalQuery(IApizrOptionalMediator, FileInfo, IDictionary<String, Object>, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(IApizrOptionalMediator, FileInfo, IDictionary<String, Object>, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, System.IO.FileInfo, System.Collections.Generic.IDictionary<System.String, System.Object>, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(IApizrOptionalMediator, FileInfo, IDictionary(Of String, Object), Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, System.IO.FileInfo, System.Collections.Generic.IDictionary(Of System.String, System.Object), System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendDownloadOptionalQuery(IApizrOptionalMediator, FileInfo, IDictionary(Of String, Object), Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQuery
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQuery
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  isExternal: true
+  name: SendDownloadOptionalQuery(IApizrOptionalMediator, FileInfo, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(IApizrOptionalMediator, FileInfo, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, System.IO.FileInfo, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(IApizrOptionalMediator, FileInfo, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendDownloadOptionalQuery(IApizrOptionalMediator, FileInfo, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQuery
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendDownloadOptionalQuery
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQuery
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.IO.FileInfo
+    name: FileInfo
+    nameWithType: FileInfo
+    fullName: System.IO.FileInfo
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  isExternal: true
+  name: SendUploadOptionalCommandFor<TUploadApi>(IApizrOptionalMediator, ByteArrayPart, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>(IApizrOptionalMediator, ByteArrayPart, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, Refit.ByteArrayPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)(IApizrOptionalMediator, ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, Refit.ByteArrayPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendUploadOptionalCommandFor(Of TUploadApi)(IApizrOptionalMediator, ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommandFor<TUploadApi>
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommandFor(Of TUploadApi)
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  isExternal: true
+  name: SendUploadOptionalCommandFor<TUploadApi>(IApizrOptionalMediator, StreamPart, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>(IApizrOptionalMediator, StreamPart, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, Refit.StreamPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)(IApizrOptionalMediator, StreamPart, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, Refit.StreamPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendUploadOptionalCommandFor(Of TUploadApi)(IApizrOptionalMediator, StreamPart, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommandFor<TUploadApi>
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommandFor(Of TUploadApi)
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  isExternal: true
+  name: SendUploadOptionalCommandFor<TUploadApi>(IApizrOptionalMediator, FileInfoPart, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>(IApizrOptionalMediator, FileInfoPart, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, Refit.FileInfoPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)(IApizrOptionalMediator, FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, Refit.FileInfoPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendUploadOptionalCommandFor(Of TUploadApi)(IApizrOptionalMediator, FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommandFor<TUploadApi>
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor<TUploadApi>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor``1(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommandFor(Of TUploadApi)
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommandFor(Of TUploadApi)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  isExternal: true
+  name: SendUploadOptionalCommand(IApizrOptionalMediator, ByteArrayPart, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(IApizrOptionalMediator, ByteArrayPart, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, Refit.ByteArrayPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(IApizrOptionalMediator, ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, Refit.ByteArrayPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendUploadOptionalCommand(IApizrOptionalMediator, ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommand
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommand
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  isExternal: true
+  name: SendUploadOptionalCommand(IApizrOptionalMediator, StreamPart, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(IApizrOptionalMediator, StreamPart, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, Refit.StreamPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(IApizrOptionalMediator, StreamPart, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, Refit.StreamPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendUploadOptionalCommand(IApizrOptionalMediator, StreamPart, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommand
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommand
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  isExternal: true
+  name: SendUploadOptionalCommand(IApizrOptionalMediator, FileInfoPart, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(IApizrOptionalMediator, FileInfoPart, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, Refit.FileInfoPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(IApizrOptionalMediator, FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator, Refit.FileInfoPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: SendUploadOptionalCommand(IApizrOptionalMediator, FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommand
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+    name: SendUploadOptionalCommand
+    nameWithType: ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+    fullName: Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendUploadOptionalCommand
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+    name: IApizrOptionalMediator
+    nameWithType: IApizrOptionalMediator
+    fullName: Apizr.Optional.Requesting.Sending.IApizrOptionalMediator
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    nameWithType: IApizrRequestOptionsBuilder
+    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
   - name: )
     nameWithType: )
     fullName: )
@@ -14690,3 +17016,140 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.Send*
+  commentId: Overload:Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.Send
+  name: Send
+  nameWithType: ApizrOptionalMediator.Send
+  fullName: Apizr.Optional.Requesting.Sending.ApizrOptionalMediator.Send
+- uid: MediatR.IRequest{{TResponse}}
+  commentId: T:MediatR.IRequest{`0}
+  parent: MediatR
+  definition: MediatR.IRequest`1
+  name: IRequest<TResponse>
+  nameWithType: IRequest<TResponse>
+  fullName: MediatR.IRequest<TResponse>
+  nameWithType.vb: IRequest(Of TResponse)
+  fullName.vb: MediatR.IRequest(Of TResponse)
+  name.vb: IRequest(Of TResponse)
+  spec.csharp:
+  - uid: MediatR.IRequest`1
+    name: IRequest
+    nameWithType: IRequest
+    fullName: MediatR.IRequest
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResponse
+    nameWithType: TResponse
+    fullName: TResponse
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: MediatR.IRequest`1
+    name: IRequest
+    nameWithType: IRequest
+    fullName: MediatR.IRequest
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResponse
+    nameWithType: TResponse
+    fullName: TResponse
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Threading.CancellationToken
+  commentId: T:System.Threading.CancellationToken
+  parent: System.Threading
+  isExternal: true
+  name: CancellationToken
+  nameWithType: CancellationToken
+  fullName: System.Threading.CancellationToken
+- uid: System.Threading.Tasks.Task{{TResponse}}
+  commentId: T:System.Threading.Tasks.Task{``0}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  name: Task<TResponse>
+  nameWithType: Task<TResponse>
+  fullName: System.Threading.Tasks.Task<TResponse>
+  nameWithType.vb: Task(Of TResponse)
+  fullName.vb: System.Threading.Tasks.Task(Of TResponse)
+  name.vb: Task(Of TResponse)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResponse
+    nameWithType: TResponse
+    fullName: TResponse
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResponse
+    nameWithType: TResponse
+    fullName: TResponse
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: MediatR.IRequest`1
+  commentId: T:MediatR.IRequest`1
+  isExternal: true
+  name: IRequest<TResponse>
+  nameWithType: IRequest<TResponse>
+  fullName: MediatR.IRequest<TResponse>
+  nameWithType.vb: IRequest(Of TResponse)
+  fullName.vb: MediatR.IRequest(Of TResponse)
+  name.vb: IRequest(Of TResponse)
+  spec.csharp:
+  - uid: MediatR.IRequest`1
+    name: IRequest
+    nameWithType: IRequest
+    fullName: MediatR.IRequest
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResponse
+    nameWithType: TResponse
+    fullName: TResponse
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: MediatR.IRequest`1
+    name: IRequest
+    nameWithType: IRequest
+    fullName: MediatR.IRequest
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResponse
+    nameWithType: TResponse
+    fullName: TResponse
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Threading
+  commentId: N:System.Threading
+  isExternal: true
+  name: System.Threading
+  nameWithType: System.Threading
+  fullName: System.Threading

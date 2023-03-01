@@ -7,7 +7,7 @@ Of course, you can implement your own integration, but here we'll talk about the
 
 Please first install this integration package:
 
-|Project|Current|V-Next|
+|Project|Current|Upcoming|
 |-------|-----|-----|
 |Apizr.Integrations.AutoMapper|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.AutoMapper.svg)](https://www.nuget.org/packages/Apizr.Integrations.AutoMapper/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.AutoMapper.svg)](https://www.nuget.org/packages/Apizr.Integrations.AutoMapper/)|
 

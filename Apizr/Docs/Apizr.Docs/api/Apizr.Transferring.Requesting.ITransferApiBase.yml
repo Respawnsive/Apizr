@@ -20,8 +20,18 @@ items:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Requesting
   syntax:
-    content: public interface ITransferApiBase
-    content.vb: Public Interface ITransferApiBase
+    content: >-
+      [WebApi]
+
+      public interface ITransferApiBase
+    content.vb: >-
+      <WebApi>
+
+      Public Interface ITransferApiBase
+  attributes:
+  - type: Apizr.WebApiAttribute
+    ctor: Apizr.WebApiAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - interface

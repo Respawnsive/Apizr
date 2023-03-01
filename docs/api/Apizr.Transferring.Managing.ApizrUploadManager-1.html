@@ -90,6 +90,7 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><a class="xref" href="Apizr.Transferring.Managing.ApizrTransferManagerBase-1.html">ApizrTransferManagerBase</a>&lt;TUploadApi&gt;</div>
     <div class="level2"><span class="xref">ApizrUploadManager&lt;TUploadApi&gt;</span></div>
+      <div class="level3"><a class="xref" href="Apizr.Transferring.Managing.ApizrUploadManager.html">ApizrUploadManager</a></div>
   </div>
   <div class="implements">
     <h5>Implements</h5>
@@ -179,12 +180,13 @@
   
   
   <a id="Apizr_Transferring_Managing_ApizrUploadManager_1_UploadAsync_" data-uid="Apizr.Transferring.Managing.ApizrUploadManager`1.UploadAsync*"></a>
-  <h4 id="Apizr_Transferring_Managing_ApizrUploadManager_1_UploadAsync_System_IO_FileInfo_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Transferring.Managing.ApizrUploadManager`1.UploadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">UploadAsync(FileInfo, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_Transferring_Managing_ApizrUploadManager_1_UploadAsync_Refit_ByteArrayPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Transferring.Managing.ApizrUploadManager`1.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">UploadAsync(ByteArrayPart, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Upload a file from its bytes data</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;FileInfo&gt; UploadAsync(FileInfo fileInfo, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task UploadAsync(ByteArrayPart byteArrayPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -197,14 +199,16 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.IO.FileInfo</span></td>
-        <td><span class="parametername">fileInfo</span></td>
-        <td></td>
+        <td><span class="xref">Refit.ByteArrayPart</span></td>
+        <td><span class="parametername">byteArrayPart</span></td>
+        <td><p>The file bytes data</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
         <td><span class="parametername">optionsBuilder</span></td>
-        <td></td>
+        <td><p>Some request options</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -218,7 +222,107 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.IO.FileInfo</span>&gt;</td>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Transferring_Managing_ApizrUploadManager_1_UploadAsync_" data-uid="Apizr.Transferring.Managing.ApizrUploadManager`1.UploadAsync*"></a>
+  <h4 id="Apizr_Transferring_Managing_ApizrUploadManager_1_UploadAsync_Refit_FileInfoPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Transferring.Managing.ApizrUploadManager`1.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">UploadAsync(FileInfoPart, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Upload a file from its file info data</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task UploadAsync(FileInfoPart fileInfoPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Refit.FileInfoPart</span></td>
+        <td><span class="parametername">fileInfoPart</span></td>
+        <td><p>The file info data</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Some request options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Transferring_Managing_ApizrUploadManager_1_UploadAsync_" data-uid="Apizr.Transferring.Managing.ApizrUploadManager`1.UploadAsync*"></a>
+  <h4 id="Apizr_Transferring_Managing_ApizrUploadManager_1_UploadAsync_Refit_StreamPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Transferring.Managing.ApizrUploadManager`1.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">UploadAsync(StreamPart, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Upload a file from its stream data</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task UploadAsync(StreamPart streamPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Refit.StreamPart</span></td>
+        <td><span class="parametername">streamPart</span></td>
+        <td><p>The file stream data</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Some request options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
         <td></td>
       </tr>
     </tbody>

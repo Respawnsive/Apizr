@@ -11,7 +11,7 @@ Optional.Async offers a strongly typed alternative to null values that lets you:
 
 Please first install this integration package:
 
-|Project|Current|V-Next|
+|Project|Current|Upcoming|
 |-------|-----|-----|
 |Apizr.Integrations.Optional|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Optional.svg)](https://www.nuget.org/packages/Apizr.Integrations.Optional/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.Optional.svg)](https://www.nuget.org/packages/Apizr.Integrations.Optional/)|
 

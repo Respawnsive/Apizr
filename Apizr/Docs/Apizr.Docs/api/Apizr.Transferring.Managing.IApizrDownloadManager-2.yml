@@ -17,15 +17,19 @@ items:
   source:
     id: IApizrDownloadManager
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Managing\IApizrDownloadManager.cs
-    startLine: 9
+    startLine: 14
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
+  summary: "\nThe download manager with a custom query parameters type\n"
+  example: []
   syntax:
     content: 'public interface IApizrDownloadManager<TDownloadApi, in TDownloadParams> : IApizrTransferManagerBase<TDownloadApi>, IApizrManager where TDownloadApi : IDownloadApi<TDownloadParams>'
     typeParameters:
     - id: TDownloadApi
+      description: The download api type to manage
     - id: TDownloadParams
+      description: The query parameters type
     content.vb: >-
       Public Interface IApizrDownloadManager(Of TDownloadApi As IDownloadApi(Of TDownloadParams), In TDownloadParams)
           Inherits IApizrTransferManagerBase(Of TDownloadApi)
@@ -52,19 +56,24 @@ items:
   source:
     id: DownloadAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Managing\IApizrDownloadManager.cs
-    startLine: 11
+    startLine: 22
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
+  summary: "\nDownload a file\n"
+  example: []
   syntax:
     content: Task<FileInfo> DownloadAsync(FileInfo fileInfo, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: fileInfo
       type: System.IO.FileInfo
+      description: Some information about the file to download
     - id: optionsBuilder
       type: System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+      description: Some request options
     return:
       type: System.Threading.Tasks.Task{System.IO.FileInfo}
+      description: ''
     content.vb: Function DownloadAsync(fileInfo As FileInfo, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
   overload: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync*
   nameWithType.vb: IApizrDownloadManager(Of TDownloadApi, TDownloadParams).DownloadAsync(FileInfo, Action(Of IApizrRequestOptionsBuilder))
@@ -84,21 +93,27 @@ items:
   source:
     id: DownloadAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Managing\IApizrDownloadManager.cs
-    startLine: 13
+    startLine: 31
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
+  summary: "\nDownload a file with custom query parameters\n"
+  example: []
   syntax:
     content: Task<FileInfo> DownloadAsync(FileInfo fileInfo, TDownloadParams downloadParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: fileInfo
       type: System.IO.FileInfo
+      description: Some information about the file to download
     - id: downloadParams
       type: '{TDownloadParams}'
+      description: Some custom query parameters
     - id: optionsBuilder
       type: System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+      description: Some request options
     return:
       type: System.Threading.Tasks.Task{System.IO.FileInfo}
+      description: ''
     content.vb: Function DownloadAsync(fileInfo As FileInfo, downloadParams As TDownloadParams, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
   overload: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync*
   nameWithType.vb: IApizrDownloadManager(Of TDownloadApi, TDownloadParams).DownloadAsync(FileInfo, TDownloadParams, Action(Of IApizrRequestOptionsBuilder))

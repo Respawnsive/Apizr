@@ -19,7 +19,7 @@ items:
   source:
     id: IDownloadApi
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Requesting\IDownloadApi.cs
-    startLine: 8
+    startLine: 11
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Requesting
@@ -53,31 +53,49 @@ items:
   source:
     id: DownloadAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Requesting\IDownloadApi.cs
-    startLine: 10
+    startLine: 13
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Requesting
   syntax:
     content: >-
-      [Get("/{fileName}")]
+      [Get("/{filePathOrName}")]
 
-      Task<HttpResponseMessage> DownloadAsync(string fileName)
+      [QueryUriFormat(UriFormat.Unescaped)]
+
+      [Cache(CacheMode.None)]
+
+      Task<HttpResponseMessage> DownloadAsync(string filePathOrName)
     parameters:
-    - id: fileName
+    - id: filePathOrName
       type: System.String
     return:
       type: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
     content.vb: >-
-      <Get("/{fileName}")>
+      <Get("/{filePathOrName}")>
 
-      Function DownloadAsync(fileName As String) As Task(Of HttpResponseMessage)
+      <QueryUriFormat(UriFormat.Unescaped)>
+
+      <Cache(CacheMode.None)>
+
+      Function DownloadAsync(filePathOrName As String) As Task(Of HttpResponseMessage)
   overload: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync*
   attributes:
   - type: Refit.GetAttribute
     ctor: Refit.GetAttribute.#ctor(System.String)
     arguments:
     - type: System.String
-      value: /{fileName}
+      value: /{filePathOrName}
+  - type: Refit.QueryUriFormatAttribute
+    ctor: Refit.QueryUriFormatAttribute.#ctor(System.UriFormat)
+    arguments:
+    - type: System.UriFormat
+      value: 2
+  - type: Apizr.Caching.Attributes.CacheAttribute
+    ctor: Apizr.Caching.Attributes.CacheAttribute.#ctor(Apizr.Caching.CacheMode)
+    arguments:
+    - type: Apizr.Caching.CacheMode
+      value: 0
   nameWithType.vb: IDownloadApi(Of TDownloadParams).DownloadAsync(String)
   fullName.vb: Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams).DownloadAsync(System.String)
 - uid: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,Apizr.Configuring.Request.IApizrRequestOptions)
@@ -94,17 +112,21 @@ items:
   source:
     id: DownloadAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Requesting\IDownloadApi.cs
-    startLine: 13
+    startLine: 16
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Requesting
   syntax:
     content: >-
-      [Get("/{fileName}")]
+      [Get("/{filePathOrName}")]
 
-      Task<HttpResponseMessage> DownloadAsync(string fileName, [RequestOptions] IApizrRequestOptions options)
+      [QueryUriFormat(UriFormat.Unescaped)]
+
+      [Cache(CacheMode.None)]
+
+      Task<HttpResponseMessage> DownloadAsync(string filePathOrName, [RequestOptions] IApizrRequestOptions options)
     parameters:
-    - id: fileName
+    - id: filePathOrName
       type: System.String
     - id: options
       type: Apizr.Configuring.Request.IApizrRequestOptions
@@ -115,16 +137,30 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
     content.vb: >-
-      <Get("/{fileName}")>
+      <Get("/{filePathOrName}")>
 
-      Function DownloadAsync(fileName As String, options As IApizrRequestOptions) As Task(Of HttpResponseMessage)
+      <QueryUriFormat(UriFormat.Unescaped)>
+
+      <Cache(CacheMode.None)>
+
+      Function DownloadAsync(filePathOrName As String, options As IApizrRequestOptions) As Task(Of HttpResponseMessage)
   overload: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync*
   attributes:
   - type: Refit.GetAttribute
     ctor: Refit.GetAttribute.#ctor(System.String)
     arguments:
     - type: System.String
-      value: /{fileName}
+      value: /{filePathOrName}
+  - type: Refit.QueryUriFormatAttribute
+    ctor: Refit.QueryUriFormatAttribute.#ctor(System.UriFormat)
+    arguments:
+    - type: System.UriFormat
+      value: 2
+  - type: Apizr.Caching.Attributes.CacheAttribute
+    ctor: Apizr.Caching.Attributes.CacheAttribute.#ctor(Apizr.Caching.CacheMode)
+    arguments:
+    - type: Apizr.Caching.CacheMode
+      value: 0
   nameWithType.vb: IDownloadApi(Of TDownloadParams).DownloadAsync(String, IApizrRequestOptions)
   fullName.vb: Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams).DownloadAsync(System.String, Apizr.Configuring.Request.IApizrRequestOptions)
 - uid: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,`0)
@@ -141,33 +177,51 @@ items:
   source:
     id: DownloadAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Requesting\IDownloadApi.cs
-    startLine: 16
+    startLine: 19
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Requesting
   syntax:
     content: >-
-      [Get("/{fileName}")]
+      [Get("/{filePathOrName}")]
 
-      Task<HttpResponseMessage> DownloadAsync(string fileName, TDownloadParams downloadParams)
+      [QueryUriFormat(UriFormat.Unescaped)]
+
+      [Cache(CacheMode.None)]
+
+      Task<HttpResponseMessage> DownloadAsync(string filePathOrName, TDownloadParams downloadParams)
     parameters:
-    - id: fileName
+    - id: filePathOrName
       type: System.String
     - id: downloadParams
       type: '{TDownloadParams}'
     return:
       type: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
     content.vb: >-
-      <Get("/{fileName}")>
+      <Get("/{filePathOrName}")>
 
-      Function DownloadAsync(fileName As String, downloadParams As TDownloadParams) As Task(Of HttpResponseMessage)
+      <QueryUriFormat(UriFormat.Unescaped)>
+
+      <Cache(CacheMode.None)>
+
+      Function DownloadAsync(filePathOrName As String, downloadParams As TDownloadParams) As Task(Of HttpResponseMessage)
   overload: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync*
   attributes:
   - type: Refit.GetAttribute
     ctor: Refit.GetAttribute.#ctor(System.String)
     arguments:
     - type: System.String
-      value: /{fileName}
+      value: /{filePathOrName}
+  - type: Refit.QueryUriFormatAttribute
+    ctor: Refit.QueryUriFormatAttribute.#ctor(System.UriFormat)
+    arguments:
+    - type: System.UriFormat
+      value: 2
+  - type: Apizr.Caching.Attributes.CacheAttribute
+    ctor: Apizr.Caching.Attributes.CacheAttribute.#ctor(Apizr.Caching.CacheMode)
+    arguments:
+    - type: Apizr.Caching.CacheMode
+      value: 0
   nameWithType.vb: IDownloadApi(Of TDownloadParams).DownloadAsync(String, TDownloadParams)
   fullName.vb: Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams).DownloadAsync(System.String, TDownloadParams)
 - uid: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,`0,Apizr.Configuring.Request.IApizrRequestOptions)
@@ -184,17 +238,21 @@ items:
   source:
     id: DownloadAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Requesting\IDownloadApi.cs
-    startLine: 19
+    startLine: 22
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Requesting
   syntax:
     content: >-
-      [Get("/{fileName}")]
+      [Get("/{filePathOrName}")]
 
-      Task<HttpResponseMessage> DownloadAsync(string fileName, TDownloadParams downloadParams, [RequestOptions] IApizrRequestOptions options)
+      [QueryUriFormat(UriFormat.Unescaped)]
+
+      [Cache(CacheMode.None)]
+
+      Task<HttpResponseMessage> DownloadAsync(string filePathOrName, TDownloadParams downloadParams, [RequestOptions] IApizrRequestOptions options)
     parameters:
-    - id: fileName
+    - id: filePathOrName
       type: System.String
     - id: downloadParams
       type: '{TDownloadParams}'
@@ -207,16 +265,30 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
     content.vb: >-
-      <Get("/{fileName}")>
+      <Get("/{filePathOrName}")>
 
-      Function DownloadAsync(fileName As String, downloadParams As TDownloadParams, options As IApizrRequestOptions) As Task(Of HttpResponseMessage)
+      <QueryUriFormat(UriFormat.Unescaped)>
+
+      <Cache(CacheMode.None)>
+
+      Function DownloadAsync(filePathOrName As String, downloadParams As TDownloadParams, options As IApizrRequestOptions) As Task(Of HttpResponseMessage)
   overload: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync*
   attributes:
   - type: Refit.GetAttribute
     ctor: Refit.GetAttribute.#ctor(System.String)
     arguments:
     - type: System.String
-      value: /{fileName}
+      value: /{filePathOrName}
+  - type: Refit.QueryUriFormatAttribute
+    ctor: Refit.QueryUriFormatAttribute.#ctor(System.UriFormat)
+    arguments:
+    - type: System.UriFormat
+      value: 2
+  - type: Apizr.Caching.Attributes.CacheAttribute
+    ctor: Apizr.Caching.Attributes.CacheAttribute.#ctor(Apizr.Caching.CacheMode)
+    arguments:
+    - type: Apizr.Caching.CacheMode
+      value: 0
   nameWithType.vb: IDownloadApi(Of TDownloadParams).DownloadAsync(String, TDownloadParams, IApizrRequestOptions)
   fullName.vb: Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams).DownloadAsync(System.String, TDownloadParams, Apizr.Configuring.Request.IApizrRequestOptions)
 references:

@@ -15,14 +15,17 @@ items:
   source:
     id: IApizrDownloadManager
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Managing\IApizrDownloadManager.cs
-    startLine: 16
+    startLine: 38
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
+  summary: "\nThe download manager with a dictionary query parameters type\n"
+  example: []
   syntax:
     content: 'public interface IApizrDownloadManager<TDownloadApi> : IApizrDownloadManager<TDownloadApi, IDictionary<string, object>>, IApizrTransferManagerBase<TDownloadApi>, IApizrManager where TDownloadApi : IDownloadApi<IDictionary<string, object>>'
     typeParameters:
     - id: TDownloadApi
+      description: The download api type to manage
     content.vb: >-
       Public Interface IApizrDownloadManager(Of TDownloadApi As IDownloadApi(Of IDictionary(Of String, Object)))
           Inherits IApizrDownloadManager(Of TDownloadApi, IDictionary(Of String, Object))

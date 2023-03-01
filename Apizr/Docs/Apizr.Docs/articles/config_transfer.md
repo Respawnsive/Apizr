@@ -1,123 +1,278 @@
-﻿## Configuring data transfer
+﻿## Configuring file transfer
 
-Apizr could use [Fusillade](https://github.com/reactiveui/Fusillade) to offer some api priority management on calls.
+Apizr could extend its core features with file transfer management thanks to a dedicated integration package.
 
-To be short, Fusillade is about:
+Once installed, you'll be able to:
 
-- Auto-deduplication of relevant requests
-- Request Limiting
-- Request Prioritization
-- Speculative requests
-
-Please refer to its [official documentation](https://github.com/reactiveui/Fusillade) if you’d like to know more about it.
+- Register upload, download or transfer (both) managers
+- Upload files with dedicated methods
+- Download files with dedicated methods
+- Track transfer progress with a dedicated progress handler
 
 ### Installing
 
-Please first install this integration package:
+Please first install one of these integration packages, depending of your needs:
 
-|Project|Current|V-Next|
-|-------|-----|-----|
-|Apizr.Integrations.Fusillade|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Fusillade.svg)](https://www.nuget.org/packages/Apizr.Integrations.Fusillade/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.Fusillade.svg)](https://www.nuget.org/packages/Apizr.Integrations.Fusillade/)|
+|Project|Registration|Current|Upcoming|
+|-------|-----|-----|-----|
+|Apizr.Integrations.FileTransfer|Static|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/)|
+|Apizr.Extensions.Microsoft.FileTransfer|MS Extensions|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/)|
+|Apizr.Integrations.FileTransfer.MediatR|MS Extensions with MediatR|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/)|
+|Apizr.Integrations.FileTransfer.Optional|MS Extensions with MediatR & Optional|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/)|
 
-You can configure priority at:
-- Design time by attribute decoration
-- Register time by fluent configuration
-- Request time by fluent configuration
+### Designing
 
-### [Designing](#tab/tabid-designing)
+File Transfer package comes with some built-in apis son you don't have to create it yourself.
 
-The first thing to do while designing your api interfaces using Apizr to send a request, is to add an `IApizrRequestOptions` param decorated with the provided `RequestOptions` attribute to your methods like:
+Here is what the provided apis look like then:
+
+#### [Upload](#tab/tabid-upload)
 
 ```csharp
-[WebApi("https://reqres.in/api")]
-public interface IReqResService
+public interface IUploadApi : ITransferApiBase
 {
-    [Get("/users")]
-    Task<UserList> GetUsersAsync([RequestOptions] IApizrRequestOptions options);
+    #region ByteArrayPart
 
-    [Get("/users/{userId}")]
-    Task<UserDetails> GetUserAsync(int userId, [RequestOptions] IApizrRequestOptions options);
+    [Multipart]
+    [Post("/")]
+    Task UploadAsync(ByteArrayPart byteArrayPart);
+
+    [Multipart]
+    [Post("/{path}"), QueryUriFormat(UriFormat.Unescaped)]
+    Task UploadAsync(ByteArrayPart byteArrayPart, string path);
+
+    [Multipart]
+    [Post("/")]
+    Task UploadAsync(ByteArrayPart byteArrayPart, 
+        [RequestOptions] IApizrRequestOptions options);
+
+    [Multipart]
+    [Post("/{path}"), QueryUriFormat(UriFormat.Unescaped)]
+    Task UploadAsync(ByteArrayPart byteArrayPart, 
+        string path, 
+        [RequestOptions] IApizrRequestOptions options);
+
+    #endregion
+
+    #region StreamPart
+
+    [Multipart]
+    [Post("/")]
+    Task UploadAsync(StreamPart streamPart);
+
+    [Multipart]
+    [Post("/{path}"), QueryUriFormat(UriFormat.Unescaped)]
+    Task UploadAsync(StreamPart streamPart, string path);
+
+    [Multipart]
+    [Post("/")]
+    Task UploadAsync(StreamPart streamPart, 
+        [RequestOptions] IApizrRequestOptions options);
+
+    [Multipart]
+    [Post("/{path}"), QueryUriFormat(UriFormat.Unescaped)]
+    Task UploadAsync(StreamPart streamPart, 
+        string path, 
+        [RequestOptions] IApizrRequestOptions options);
+
+    #endregion
+
+    #region FileInfoPart
+
+    [Multipart]
+    [Post("/")]
+    Task UploadAsync(FileInfoPart fileInfoPart);
+
+    [Multipart]
+    [Post("/{filePath}"), QueryUriFormat(UriFormat.Unescaped)]
+    Task UploadAsync(FileInfoPart fileInfoPart, 
+        string filePath);
+
+    [Multipart]
+    [Post("/")]
+    Task UploadAsync(FileInfoPart fileInfoPart, 
+        [RequestOptions] IApizrRequestOptions options);
+
+    [Multipart]
+    [Post("/{filePath}"), QueryUriFormat(UriFormat.Unescaped)]
+    Task UploadAsync(FileInfoPart fileInfoPart, 
+        string filePath, 
+        [RequestOptions] IApizrRequestOptions options); 
+
+    #endregion
 }
 ```
 
-This way you'll make sure to pass your priority to the priority handler, defined thanks to request options builder at request time.
+The Upload api offers you the choice between ByteArray, Stream or FileInfo sources.
+`filePath` is an unesacped uri file path optionaly provided at request time, in case you want to use the same api for different uris.
 
-Another way to deal with priority at design time is to use the `PriorityAttribute`:
+#### [Download](#tab/tabid-download)
+
 ```csharp
-[assembly:Priority(Priority.UserInitiated)]
-namespace Your.Namespace
+public interface IDownloadApi<in TDownloadParams> : 
+    ITransferApiBase
 {
-    [WebApi("https://reqres.in/api"), Priority(Priority.Background)]
-    public interface IReqResService
-    {
-        [Get("/users"), Priority(Priority.Speculative)]
-        Task<UserList> GetUsersAsync([RequestOptions] IApizrRequestOptions options);
+    [Get("/{filePathOrName}"), 
+     QueryUriFormat(UriFormat.Unescaped), Cache(CacheMode.None)]
+    Task<HttpResponseMessage> DownloadAsync(string filePathOrName);
 
-        [Get("/users/{userId}")]
-        Task<UserDetails> GetUserAsync(int userId, [RequestOptions] IApizrRequestOptions options);
-    }
+    [Get("/{filePathOrName}"), 
+     QueryUriFormat(UriFormat.Unescaped), Cache(CacheMode.None)]
+    Task<HttpResponseMessage> DownloadAsync(string filePathOrName, 
+        [RequestOptions] IApizrRequestOptions options);
+
+    [Get("/{filePathOrName}"), 
+     QueryUriFormat(UriFormat.Unescaped), Cache(CacheMode.None)]
+    Task<HttpResponseMessage> DownloadAsync(string filePathOrName, 
+        TDownloadParams downloadParams);
+
+    [Get("/{filePathOrName}"), 
+     QueryUriFormat(UriFormat.Unescaped), Cache(CacheMode.None)]
+    Task<HttpResponseMessage> DownloadAsync(string filePathOrName, 
+        TDownloadParams downloadParams, 
+        [RequestOptions] IApizrRequestOptions options);
+}
+
+public interface IDownloadApi : 
+    IDownloadApi<IDictionary<string, object>>
+{
 }
 ```
-Here I'm saying:
-- Send all requests of all apis with a default `UserInitiated` priority (the assembly one)
-- Excepted for all the requests of the `IReqResService` with a `Background` priority instead (the interface one)
-- Excepted for any GetUsersAsync request with a `Speculative` priority instead (the method one)
 
-Of course, you could (should) mix it with the `RequestOptions` method parameter implementation, so you could change your mind at request time with the request options builder.
+The Download api could be used with `IDictionary<string, object>` parameter type by default thanks to `IDownloadApi` or any provided custom type thanks to `IDownloadApi<TDownloadParams>`. If you don't need it you'll definitly be able to ignore it.
+`filePathOrName` is an unesacped uri file path provided at request time, so you could use the same api for different uris.
 
-### [Registering](#tab/tabid-registering)
+#### [Transfer](#tab/tabid-transfer)
 
-Designing your apis using PriorityAttribute or not, you still have to activate priority management at register time.
-By activating it, you're free to provide a priority or not.
-
-Here is how to activate it, thanks to the `WithPriority` extension method:
 ```csharp
-// activation configuration only
-options => options.WithPriority()
-
-// activation with default priority configuration
-options => options.WithPriority(Priority.Background)
-
-// activation with default custom priority configuration
-options => options.WithPriority(70)
+public interface ITransferApi<in TDownloadParams> : 
+    IDownloadApi<TDownloadParams>, IUploadApi { }
+    
+public interface ITransferApi : 
+    ITransferApi<IDictionary<string, object>>, IDownloadApi { }
 ```
 
-All priority fluent options are available with and without using registry. 
-It means that you can share priority configuration, setting it at registry level and/or set some specific one at api level, something like:
+The Transfer api inherits from both the upload and the download one, in case you want to deal with the both of it from the same api.
+
+***
+
+- One may have only one transfer endpoint with no dynamic path to deal with, so there's nothing more to design here.
+- Other may have several transfer endpoints or some dynamic paths to deal with:
+  - feeling confortable with setting it at request time, so there's nothing more to design here.
+  - preferring getting a dedicated api with preconfigured base uri, so he should:
+    - create his own named and blank api interface
+    - make sure to inherit from one of the above apis
+    - define its base uri thanks to the `WebApi` attribute decoration
+
+### Registering
+
+Designing your custom transfer apis or using the built-in ones directly, you still have to register you apis.
+Where you could register it as we used to do it with any other apis, FileTransfer package comes with some wrapping managers helping you to get things short and simple.
+
+Note that following exemples use the `Transfer` manager but you definitly can use the `Upload` or the `Download` ones insteed.
+
+#### Registering a single manager
+
+#### [Static](#tab/tabid-static)
+
+```csharp
+// register the built-in transfer api
+var transferManager = ApizrBuilder.Current.CreateTransferManager(
+    options => options.WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE"));
+
+// OR register a custom transfer api
+var transferManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferSampleApi>();
+```
+
+Here you go with your `Transfer` manager instance.
+
+#### [Extended](#tab/tabid-extended)
+
+```csharp
+// register the built-in transfer api
+services.AddApizrTransferManager(
+    options => options.WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE"));
+
+// OR register a custom transfer api
+services.AddApizrTransferManagerFor<ITransferSampleApi>();
+```
+
+Then, get your `Transfer` manager instance by resolving/injecting `IApizrTransferManager` for the built-in one or `IApizrTransferManager<TCustomApi>` for the custom one.
+***
+
+#### Registering multiple managers
+
+#### [Static](#tab/tabid-static)
+
 ```csharp
 var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-        .AddGroup(group => group
-                .AddManagerFor<IReqResUserService>(options => options
-                    .WithPriority(Priority.UserInitiated))
-                .AddManagerFor<IReqResResourceService>(),
-            options => options.WithPriority(Priority.Background))
-        .AddManagerFor<IHttpBinService>()
-        .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(options => options
-            .WithBaseAddress("https://reqres.in/api/users")
-            .WithPriority(Priority.Speculative)),
-    options => options.WithPriority());
+    // Built-in api
+    .AddTransferManager(options => options
+        .WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE"))
+    // Custom api
+    .AddTransferManagerFor<ITransferSampleApi>());
 ```
 
-In this quite complexe example, we can see we defined some default priorities to apply at deferent levels.
+Then, get your `Transfer` manager instance by calling:
+```csharp
+// for the built-in transfer api
+var transferManager = apizrRegistry.GetTransferManager();
 
-### [Requesting](#tab/tabid-requesting)
+// OR for a custom transfer api
+var transferManager = apizrRegistry.GetTransferManagerFor<ITransferSampleApi>();
+```
 
-Just call your api with your priority thanks to the request options builder (extension method):
+#### [Extended](#tab/tabid-extended)
 
 ```csharp
-var result = await _reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), 
-    options => options.WithPriority(Priority.Background));
+services.AddApizr(registry => registry
+    // Built-in api
+    .AddTransferManager(options => options
+        .WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE"))
+    // Custom api
+    .AddTransferManagerFor<ITransferSampleApi>());
+```
+
+Then, get your `Transfer` manager instance directly by resolving/injecting `IApizrTransferManager` for the built-in one or `IApizrTransferManager<TCustomApi>` for the custom one.
+
+You otherwise can resolve/inject `IApizrExtendedRegistry` to get the regisrty instance itself and then get your `Transfer` manager instance by calling:
+```csharp
+// for the built-in transfer api
+var transferManager = apizrRegistry.GetTransferManager();
+
+// OR for a custom transfer api
+var transferManager = apizrRegistry.GetTransferManagerFor<ITransferSampleApi>();
 ```
 
 ***
 
-Note that you can mix design, register and request time priority configurations.
-In case of mixed configurations, the internal duplicate strategy will be to take the closest one to the request.
+You definitly can group registrations if needed like illustrated into the Getting started.
+Note that auto registration thanks to assembly scanning is not yet available for this package.
 
-Priority configuration duplicate strategy order:
-- take fluent request configuration first if defined (request options)
-- otherwise the request attribute decoration one (method)
-- otherwise the fluent proper resgistration one (api proper options)
-- otherwise the api attribute decoration one (interface)
-- otherwise the fluent common resgistration one (registry common options)
-- otherwise the global attribute decoration one (assembly)
+### Requesting
+
+No matter how you registered your managers neither how you got an instance of it, here is how to play with it:
+```csharp
+var transferResult = await transferManager.DownloadAsync(
+    new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
+```
+
+Note that if you're in that case where you need to set a custom path dynamically at request time, here is how to do that:
+```csharp
+var transferResult = await transferManager.DownloadAsync(new FileInfo("YOUR_FILE_FULL_NAME_HERE"), 
+    options => options.WithDynamicPath("YOUR_DYNAMIC_PATH_HERE"));
+```
+
+Finally, you should know that some registry shortcut methods let you write things without the need of the manager.
+You can call download or upload methods directly from the registry itself.
+```csharp
+// for the built-in transfer api
+var transferResult = await registry.DownloadAsync(
+    new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
+
+// OR for a custom transfer api
+var transferResult = await registry.DownloadAsync<ITransferSampleApi>(
+    new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
+```
+
+***

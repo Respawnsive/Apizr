@@ -1,0 +1,371 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Configuring file transfer | Apizr </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Configuring file transfer | Apizr ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../resources/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../resources/logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h2 id="configuring-file-transfer">Configuring file transfer</h2>
+
+<p>Apizr could extend its core features with file transfer management thanks to a dedicated integration package.</p>
+<p>Once installed, you&#39;ll be able to:</p>
+<ul>
+<li>Register upload, download or transfer (both) managers</li>
+<li>Upload files with dedicated methods</li>
+<li>Download files with dedicated methods</li>
+<li>Track transfer progress with a dedicated progress handler</li>
+</ul>
+<h3 id="installing">Installing</h3>
+<p>Please first install one of these integration packages, depending of your needs:</p>
+<p>|Project|Registration|Current|Upcoming|
+|-------|-----|-----|
+|Apizr.Integrations.FileTransfer|Static|<a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg" alt="NuGet"></a>|<a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg" alt="NuGet Pre Release"></a>|
+|Apizr.Extensions.Microsoft.FileTransfer|MS Extensions|<a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg" alt="NuGet"></a>|<a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg" alt="NuGet Pre Release"></a>|
+|Apizr.Integrations.FileTransfer.MediatR|MS Extensions with MediatR|<a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg" alt="NuGet"></a>|<a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg" alt="NuGet Pre Release"></a>|
+|Apizr.Integrations.FileTransfer.Optional|MS Extensions with MediatR &amp; Optional|<a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg" alt="NuGet"></a>|<a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg" alt="NuGet Pre Release"></a>|</p>
+<h3 id="designing">Designing</h3>
+<p>File Transfer package comes with some built-in apis son you don&#39;t have to create it yourself.</p>
+<p>Here is what the provided apis look like then:</p>
+<div class="tabGroup" id="tabgroup_c0GHexck6B">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_c0GHexck6B_tabid-upload" role="tab" aria-controls="tabpanel_c0GHexck6B_tabid-upload" data-tab="tabid-upload" tabindex="0" aria-selected="true">Upload</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_c0GHexck6B_tabid-download" role="tab" aria-controls="tabpanel_c0GHexck6B_tabid-download" data-tab="tabid-download" tabindex="-1">Download</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_c0GHexck6B_tabid-transfer" role="tab" aria-controls="tabpanel_c0GHexck6B_tabid-transfer" data-tab="tabid-transfer" tabindex="-1">Transfer</a>
+</li>
+</ul>
+<section id="tabpanel_c0GHexck6B_tabid-upload" role="tabpanel" data-tab="tabid-upload">
+<pre><code class="lang-csharp">public interface IUploadApi : ITransferApiBase
+{
+    #region ByteArrayPart
+
+    [Multipart]
+    [Post(&quot;/&quot;)]
+    Task UploadAsync(ByteArrayPart byteArrayPart);
+
+    [Multipart]
+    [Post(&quot;/{path}&quot;), QueryUriFormat(UriFormat.Unescaped)]
+    Task UploadAsync(ByteArrayPart byteArrayPart, string path);
+
+    [Multipart]
+    [Post(&quot;/&quot;)]
+    Task UploadAsync(ByteArrayPart byteArrayPart, 
+        [RequestOptions] IApizrRequestOptions options);
+
+    [Multipart]
+    [Post(&quot;/{path}&quot;), QueryUriFormat(UriFormat.Unescaped)]
+    Task UploadAsync(ByteArrayPart byteArrayPart, 
+        string path, 
+        [RequestOptions] IApizrRequestOptions options);
+
+    #endregion
+
+    #region StreamPart
+
+    [Multipart]
+    [Post(&quot;/&quot;)]
+    Task UploadAsync(StreamPart streamPart);
+
+    [Multipart]
+    [Post(&quot;/{path}&quot;), QueryUriFormat(UriFormat.Unescaped)]
+    Task UploadAsync(StreamPart streamPart, string path);
+
+    [Multipart]
+    [Post(&quot;/&quot;)]
+    Task UploadAsync(StreamPart streamPart, 
+        [RequestOptions] IApizrRequestOptions options);
+
+    [Multipart]
+    [Post(&quot;/{path}&quot;), QueryUriFormat(UriFormat.Unescaped)]
+    Task UploadAsync(StreamPart streamPart, 
+        string path, 
+        [RequestOptions] IApizrRequestOptions options);
+
+    #endregion
+
+    #region FileInfoPart
+
+    [Multipart]
+    [Post(&quot;/&quot;)]
+    Task UploadAsync(FileInfoPart fileInfoPart);
+
+    [Multipart]
+    [Post(&quot;/{filePath}&quot;), QueryUriFormat(UriFormat.Unescaped)]
+    Task UploadAsync(FileInfoPart fileInfoPart, 
+        string filePath);
+
+    [Multipart]
+    [Post(&quot;/&quot;)]
+    Task UploadAsync(FileInfoPart fileInfoPart, 
+        [RequestOptions] IApizrRequestOptions options);
+
+    [Multipart]
+    [Post(&quot;/{filePath}&quot;), QueryUriFormat(UriFormat.Unescaped)]
+    Task UploadAsync(FileInfoPart fileInfoPart, 
+        string filePath, 
+        [RequestOptions] IApizrRequestOptions options); 
+
+    #endregion
+}
+</code></pre><p>The Upload api offers you the choice between ByteArray, Stream or FileInfo sources.
+<code>filePath</code> is an unesacped uri file path optionaly provided at request time, in case you want to use the same api for different uris.</p>
+</section>
+<section id="tabpanel_c0GHexck6B_tabid-download" role="tabpanel" data-tab="tabid-download" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-csharp">public interface IDownloadApi&lt;in TDownloadParams&gt; : 
+    ITransferApiBase
+{
+    [Get(&quot;/{filePathOrName}&quot;), 
+     QueryUriFormat(UriFormat.Unescaped), Cache(CacheMode.None)]
+    Task&lt;HttpResponseMessage&gt; DownloadAsync(string filePathOrName);
+
+    [Get(&quot;/{filePathOrName}&quot;), 
+     QueryUriFormat(UriFormat.Unescaped), Cache(CacheMode.None)]
+    Task&lt;HttpResponseMessage&gt; DownloadAsync(string filePathOrName, 
+        [RequestOptions] IApizrRequestOptions options);
+
+    [Get(&quot;/{filePathOrName}&quot;), 
+     QueryUriFormat(UriFormat.Unescaped), Cache(CacheMode.None)]
+    Task&lt;HttpResponseMessage&gt; DownloadAsync(string filePathOrName, 
+        TDownloadParams downloadParams);
+
+    [Get(&quot;/{filePathOrName}&quot;), 
+     QueryUriFormat(UriFormat.Unescaped), Cache(CacheMode.None)]
+    Task&lt;HttpResponseMessage&gt; DownloadAsync(string filePathOrName, 
+        TDownloadParams downloadParams, 
+        [RequestOptions] IApizrRequestOptions options);
+}
+
+public interface IDownloadApi : 
+    IDownloadApi&lt;IDictionary&lt;string, object&gt;&gt;
+{
+}
+</code></pre><p>The Download api could be used with <code>IDictionary&lt;string, object&gt;</code> parameter type by default thanks to <code>IDownloadApi</code> or any provided custom type thanks to <code>IDownloadApi&lt;TDownloadParams&gt;</code>. If you don&#39;t need it you&#39;ll definitly be able to ignore it.
+<code>filePathOrName</code> is an unesacped uri file path provided at request time, so you could use the same api for different uris.</p>
+</section>
+<section id="tabpanel_c0GHexck6B_tabid-transfer" role="tabpanel" data-tab="tabid-transfer" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-csharp">public interface ITransferApi&lt;in TDownloadParams&gt; : 
+    IDownloadApi&lt;TDownloadParams&gt;, IUploadApi { }
+
+public interface ITransferApi : 
+    ITransferApi&lt;IDictionary&lt;string, object&gt;&gt;, IDownloadApi { }
+</code></pre><p>The Transfer api inherits from both the upload and the download one, in case you want to deal with the both of it from the same api.</p>
+</section>
+</div>
+<ul>
+<li>One may have only one transfer endpoint with no dynamic path to deal with, so there&#39;s nothing more to design here.</li>
+<li>Other may have several transfer endpoints or some dynamic paths to deal with:<ul>
+<li>feeling confortable with setting it at request time, so there&#39;s nothing more to design here.</li>
+<li>preferring getting a dedicated api with preconfigured base uri, so he should:<ul>
+<li>create his own named and blank api interface</li>
+<li>make sure to inherit from one of the above apis</li>
+<li>define its base uri thanks to the <code>WebApi</code> attribute decoration</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="registering">Registering</h3>
+<p>Designing your custom transfer apis or using the built-in ones directly, you still have to register you apis.
+Where you could register it as we used to do it with any other apis, FileTransfer package comes with some wrapping managers helping you to get things short and simple.</p>
+<p>Note that following exemples use the <code>Transfer</code> manager but you definitly can use the <code>Upload</code> or the <code>Download</code> ones insteed.</p>
+<h4 id="registering-a-single-manager">Registering a single manager</h4>
+<div class="tabGroup" id="tabgroup_c0GHexck6B-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_c0GHexck6B-1_tabid-static" role="tab" aria-controls="tabpanel_c0GHexck6B-1_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_c0GHexck6B-1_tabid-extended" role="tab" aria-controls="tabpanel_c0GHexck6B-1_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+</li>
+</ul>
+<section id="tabpanel_c0GHexck6B-1_tabid-static" role="tabpanel" data-tab="tabid-static">
+<pre><code class="lang-csharp">// register the built-in transfer api
+var transferManager = ApizrBuilder.Current.CreateTransferManager(
+    options =&gt; options.WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;));
+
+// OR register a custom transfer api
+var transferManager = ApizrBuilder.Current.CreateTransferManagerFor&lt;ITransferSampleApi&gt;();
+</code></pre><p>Here you go with your <code>Transfer</code> manager instance.</p>
+</section>
+<section id="tabpanel_c0GHexck6B-1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-csharp">// register the built-in transfer api
+services.AddApizrTransferManager(
+    options =&gt; options.WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;));
+
+// OR register a custom transfer api
+services.AddApizrTransferManagerFor&lt;ITransferSampleApi&gt;();
+</code></pre><p>Then, get your <code>Transfer</code> manager instance by resolving/injecting <code>IApizrTransferManager</code> for the built-in one or <code>IApizrTransferManager&lt;TCustomApi&gt;</code> for the custom one.</p>
+</section>
+</div>
+<h4 id="registering-multiple-managers">Registering multiple managers</h4>
+<div class="tabGroup" id="tabgroup_c0GHexck6B-2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_c0GHexck6B-2_tabid-static" role="tab" aria-controls="tabpanel_c0GHexck6B-2_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_c0GHexck6B-2_tabid-extended" role="tab" aria-controls="tabpanel_c0GHexck6B-2_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+</li>
+</ul>
+<section id="tabpanel_c0GHexck6B-2_tabid-static" role="tabpanel" data-tab="tabid-static">
+<pre><code class="lang-csharp">var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry =&gt; registry
+    // Built-in api
+    .AddTransferManager(options =&gt; options
+        .WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;))
+    // Custom api
+    .AddTransferManagerFor&lt;ITransferSampleApi&gt;());
+</code></pre><p>Then, get your <code>Transfer</code> manager instance by calling:</p>
+<pre><code class="lang-csharp">// for the built-in transfer api
+var transferManager = apizrRegistry.GetTransferManager();
+
+// OR for a custom transfer api
+var transferManager = apizrRegistry.GetTransferManagerFor&lt;ITransferSampleApi&gt;();
+</code></pre></section>
+<section id="tabpanel_c0GHexck6B-2_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-csharp">services.AddApizr(registry =&gt; registry
+    // Built-in api
+    .AddTransferManager(options =&gt; options
+        .WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;))
+    // Custom api
+    .AddTransferManagerFor&lt;ITransferSampleApi&gt;());
+</code></pre><p>Then, get your <code>Transfer</code> manager instance directly by resolving/injecting <code>IApizrTransferManager</code> for the built-in one or <code>IApizrTransferManager&lt;TCustomApi&gt;</code> for the custom one.</p>
+<p>You otherwise can resolve/inject <code>IApizrExtendedRegistry</code> to get the regisrty instance itself and then get your <code>Transfer</code> manager instance by calling:</p>
+<pre><code class="lang-csharp">// for the built-in transfer api
+var transferManager = apizrRegistry.GetTransferManager();
+
+// OR for a custom transfer api
+var transferManager = apizrRegistry.GetTransferManagerFor&lt;ITransferSampleApi&gt;();
+</code></pre></section>
+</div>
+<p>You definitly can group registrations if needed like illustrated into the Getting started.
+Note that auto registration thanks to assembly scanning is not yet available for this package.</p>
+<h3 id="requesting">Requesting</h3>
+<p>No matter how you registered your managers neither how you got an instance of it, here is how to play with it:</p>
+<pre><code class="lang-csharp">var transferResult = await transferManager.DownloadAsync(
+    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
+</code></pre><p>Note that if you&#39;re in that case where you need to set a custom path dynamically at request time, here is how to do that:</p>
+<pre><code class="lang-csharp">var transferResult = await transferManager.DownloadAsync(new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;), 
+    options =&gt; options.WithDynamicPath(&quot;YOUR_DYNAMIC_PATH_HERE&quot;));
+</code></pre><p>Finally, you should know that some registry shortcut methods let you write things without the need of the manager.
+You can call download or upload methods directly from the registry itself.</p>
+<pre><code class="lang-csharp">// for the built-in transfer api
+var transferResult = await registry.DownloadAsync(
+    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
+
+// OR for a custom transfer api
+var transferResult = await registry.DownloadAsync&lt;ITransferSampleApi&gt;(
+    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
+</code></pre><hr>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Supported by Respawnsive
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

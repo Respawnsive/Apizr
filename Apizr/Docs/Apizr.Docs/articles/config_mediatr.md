@@ -10,7 +10,7 @@ Simple and unified because instead of injecting/resolving each api interface you
 
 Please first install this integration package:
 
-|Project|Current|V-Next|
+|Project|Current|Upcoming|
 |-------|-----|-----|
 |Apizr.Integrations.MediatR|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.MediatR.svg)](https://www.nuget.org/packages/Apizr.Integrations.MediatR/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.MediatR.svg)](https://www.nuget.org/packages/Apizr.Integrations.MediatR/)|
 

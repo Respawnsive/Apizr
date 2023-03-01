@@ -15,7 +15,7 @@ Please refer to its [official documentation](https://github.com/reactiveui/Fusil
 
 Please first install this integration package:
 
-|Project|Current|V-Next|
+|Project|Current|Upcoming|
 |-------|-----|-----|
 |Apizr.Integrations.Fusillade|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Fusillade.svg)](https://www.nuget.org/packages/Apizr.Integrations.Fusillade/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.Fusillade.svg)](https://www.nuget.org/packages/Apizr.Integrations.Fusillade/)|
 

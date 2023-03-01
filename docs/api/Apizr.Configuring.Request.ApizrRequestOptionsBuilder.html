@@ -97,6 +97,7 @@
     <div><a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder-2.html">IApizrRequestOptionsBuilder</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
     <div><a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html">IApizrRequestOptionsBuilderBase</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
     <div><a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html">IApizrGlobalSharedOptionsBuilderBase</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
+    <div><a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase.html">IApizrRequestOptionsBuilderBase</a></div>
     <div><a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase.html">IApizrGlobalSharedOptionsBuilderBase</a></div>
   </div>
   <div class="inheritedMembers">
@@ -127,7 +128,7 @@
   <h6><strong>Assembly</strong>: Apizr.dll</h6>
   <h5 id="Apizr_Configuring_Request_ApizrRequestOptionsBuilder_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrRequestOptionsBuilder&lt;IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;, IApizrRequestOptionsBuilderBase&lt;IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;, IApizrGlobalSharedOptionsBuilderBase&lt;IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;, IApizrGlobalSharedOptionsBuilderBase</code></pre>
+    <pre><code class="lang-csharp hljs">public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrRequestOptionsBuilder&lt;IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;, IApizrRequestOptionsBuilderBase&lt;IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;, IApizrGlobalSharedOptionsBuilderBase&lt;IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;, IApizrRequestOptionsBuilderBase, IApizrGlobalSharedOptionsBuilderBase</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -602,23 +603,29 @@
       <a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html">IApizrGlobalSharedOptionsBuilderBase&lt;TApizrOptions, TApizrOptionsBuilder&gt;</a>
   </div>
   <div>
+      <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase.html">IApizrRequestOptionsBuilderBase</a>
+  </div>
+  <div>
       <a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase.html">IApizrGlobalSharedOptionsBuilderBase</a>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_">FileTransferOptionsBuilderExtensions.WithProgress&lt;T&gt;(T)</a>
-  </div>
-  <div>
-      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_System_Action_Apizr_Progressing_ApizrProgressEventArgs__">FileTransferOptionsBuilderExtensions.WithProgress&lt;T&gt;(T, Action&lt;ApizrProgressEventArgs&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_Apizr_Progressing_IApizrProgress_">FileTransferOptionsBuilderExtensions.WithProgress&lt;T&gt;(T, IApizrProgress)</a>
-  </div>
   <div>
       <a class="xref" href="Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_Fusillade_Priority_">FusilladeOptionsBuilderExtensions.WithPriority&lt;T&gt;(T, Priority)</a>
   </div>
   <div>
       <a class="xref" href="Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_System_Int32_">FusilladeOptionsBuilderExtensions.WithPriority&lt;T&gt;(T, Int32)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_">FileTransferOptionsBuilderExtensions.WithProgress&lt;TBuilder&gt;(TBuilder)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_System_Action_Apizr_Progressing_ApizrProgressEventArgs__">FileTransferOptionsBuilderExtensions.WithProgress&lt;TBuilder&gt;(TBuilder, Action&lt;ApizrProgressEventArgs&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_Apizr_Progressing_IApizrProgress_">FileTransferOptionsBuilderExtensions.WithProgress&lt;TBuilder&gt;(TBuilder, IApizrProgress)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithDynamicPath__1___0_System_String_">FileTransferOptionsBuilderExtensions.WithDynamicPath&lt;T&gt;(T, String)</a>
   </div>
 </article>
           </div>

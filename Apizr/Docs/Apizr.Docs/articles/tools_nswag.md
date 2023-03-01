@@ -7,7 +7,7 @@ It relies on the well known NSwag CLI, letting define all we need in a json conf
 
 The first time you plan to use the tool, start by installing it:
 
-|Project|Current|V-Next|
+|Project|Current|Upcoming|
 |-------|-----|-----|
 |Apizr.Tools.NSwag|[![NuGet](https://img.shields.io/nuget/v/Apizr.Tools.NSwag.svg)](https://www.nuget.org/packages/Apizr.Tools.NSwag/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Tools.NSwag.svg)](https://www.nuget.org/packages/Apizr.Tools.NSwag/)|
 

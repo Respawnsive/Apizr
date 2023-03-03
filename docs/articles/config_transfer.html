@@ -89,12 +89,42 @@
 </ul>
 <h3 id="installing">Installing</h3>
 <p>Please first install one of these integration packages, depending of your needs:</p>
-<p>|Project|Registration|Current|Upcoming|
-|-------|-----|-----|
-|Apizr.Integrations.FileTransfer|Static|<a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg" alt="NuGet"></a>|<a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg" alt="NuGet Pre Release"></a>|
-|Apizr.Extensions.Microsoft.FileTransfer|MS Extensions|<a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg" alt="NuGet"></a>|<a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg" alt="NuGet Pre Release"></a>|
-|Apizr.Integrations.FileTransfer.MediatR|MS Extensions with MediatR|<a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg" alt="NuGet"></a>|<a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg" alt="NuGet Pre Release"></a>|
-|Apizr.Integrations.FileTransfer.Optional|MS Extensions with MediatR &amp; Optional|<a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg" alt="NuGet"></a>|<a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg" alt="NuGet Pre Release"></a>|</p>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Registration</th>
+<th>Current</th>
+<th>Upcoming</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apizr.Integrations.FileTransfer</td>
+<td>Static</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg" alt="NuGet"></a></td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg" alt="NuGet Pre Release"></a></td>
+</tr>
+<tr>
+<td>Apizr.Extensions.Microsoft.FileTransfer</td>
+<td>MS Extensions</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg" alt="NuGet"></a></td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg" alt="NuGet Pre Release"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.FileTransfer.MediatR</td>
+<td>MS Extensions with MediatR</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg" alt="NuGet"></a></td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg" alt="NuGet Pre Release"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.FileTransfer.Optional</td>
+<td>MS Extensions with MediatR &amp; Optional</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg" alt="NuGet"></a></td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg" alt="NuGet Pre Release"></a></td>
+</tr>
+</tbody>
+</table>
 <h3 id="designing">Designing</h3>
 <p>File Transfer package comes with some built-in apis son you don&#39;t have to create it yourself.</p>
 <p>Here is what the provided apis look like then:</p>
@@ -243,7 +273,9 @@ public interface ITransferApi :
 <h3 id="registering">Registering</h3>
 <p>Designing your custom transfer apis or using the built-in ones directly, you still have to register you apis.
 Where you could register it as we used to do it with any other apis, FileTransfer package comes with some wrapping managers helping you to get things short and simple.</p>
-<p>Note that following exemples use the <code>Transfer</code> manager but you definitly can use the <code>Upload</code> or the <code>Download</code> ones insteed.</p>
+<div class="NOTE"><h5>Note</h5><p><strong>Upload/Download/Transfer</strong></p>
+<p>Following exemples use the <code>Transfer</code> manager but you definitly can use the <code>Upload</code> or the <code>Download</code> ones insteed. </p>
+</div>
 <h4 id="registering-a-single-manager">Registering a single manager</h4>
 <div class="tabGroup" id="tabgroup_c0GHexck6B-1">
 <ul role="tablist">
@@ -252,6 +284,12 @@ Where you could register it as we used to do it with any other apis, FileTransfe
 </li>
 <li role="presentation">
 <a href="#tabpanel_c0GHexck6B-1_tabid-extended" role="tab" aria-controls="tabpanel_c0GHexck6B-1_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_c0GHexck6B-1_tabid-mediatr" role="tab" aria-controls="tabpanel_c0GHexck6B-1_tabid-mediatr" data-tab="tabid-mediatr" tabindex="-1">MediatR</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_c0GHexck6B-1_tabid-optional" role="tab" aria-controls="tabpanel_c0GHexck6B-1_tabid-optional" data-tab="tabid-optional" tabindex="-1">Optional</a>
 </li>
 </ul>
 <section id="tabpanel_c0GHexck6B-1_tabid-static" role="tabpanel" data-tab="tabid-static">
@@ -272,6 +310,28 @@ services.AddApizrTransferManager(
 services.AddApizrTransferManagerFor&lt;ITransferSampleApi&gt;();
 </code></pre><p>Then, get your <code>Transfer</code> manager instance by resolving/injecting <code>IApizrTransferManager</code> for the built-in one or <code>IApizrTransferManager&lt;TCustomApi&gt;</code> for the custom one.</p>
 </section>
+<section id="tabpanel_c0GHexck6B-1_tabid-mediatr" role="tabpanel" data-tab="tabid-mediatr" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-csharp">// register the built-in transfer api
+services.AddApizrTransferManager(
+    options =&gt; options.WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;)
+                .WithFileTransferMediation());
+
+// OR register a custom transfer api
+services.AddApizrTransferManagerFor&lt;ITransferSampleApi&gt;(
+    options =&gt; options.WithFileTransferMediation());
+</code></pre><p>Then, get an Apizr mediator instance by resolving/injecting <code>IApizrMediator</code> to send some transfer requests.</p>
+</section>
+<section id="tabpanel_c0GHexck6B-1_tabid-optional" role="tabpanel" data-tab="tabid-optional" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-csharp">// register the built-in transfer api
+services.AddApizrTransferManager(
+    options =&gt; options.WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;)
+                .WithFileTransferOptionalMediation());
+
+// OR register a custom transfer api
+services.AddApizrTransferManagerFor&lt;ITransferSampleApi&gt;(
+    options =&gt; options.WithFileTransferOptionalMediation());
+</code></pre><p>Then, get an Apizr optional mediator instance by resolving/injecting <code>IApizrOptionalMediator</code> to send some transfer requests returning optional results.</p>
+</section>
 </div>
 <h4 id="registering-multiple-managers">Registering multiple managers</h4>
 <div class="tabGroup" id="tabgroup_c0GHexck6B-2">
@@ -281,6 +341,12 @@ services.AddApizrTransferManagerFor&lt;ITransferSampleApi&gt;();
 </li>
 <li role="presentation">
 <a href="#tabpanel_c0GHexck6B-2_tabid-extended" role="tab" aria-controls="tabpanel_c0GHexck6B-2_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_c0GHexck6B-2_tabid-mediatr" role="tab" aria-controls="tabpanel_c0GHexck6B-2_tabid-mediatr" data-tab="tabid-mediatr" tabindex="-1">MediatR</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_c0GHexck6B-2_tabid-optional" role="tab" aria-controls="tabpanel_c0GHexck6B-2_tabid-optional" data-tab="tabid-optional" tabindex="-1">Optional</a>
 </li>
 </ul>
 <section id="tabpanel_c0GHexck6B-2_tabid-static" role="tabpanel" data-tab="tabid-static">
@@ -312,17 +378,55 @@ var transferManager = apizrRegistry.GetTransferManager();
 // OR for a custom transfer api
 var transferManager = apizrRegistry.GetTransferManagerFor&lt;ITransferSampleApi&gt;();
 </code></pre></section>
+<section id="tabpanel_c0GHexck6B-2_tabid-mediatr" role="tabpanel" data-tab="tabid-mediatr" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-csharp">services.AddApizr(registry =&gt; registry
+        // Built-in api
+        .AddTransferManager(options =&gt; options
+            .WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;))
+        // Custom api
+        .AddTransferManagerFor&lt;ITransferSampleApi&gt;(),
+    config =&gt; config.WithFileTransferMediation());
+</code></pre><p>Then, get an Apizr mediator instance by resolving/injecting <code>IApizrMediator</code> to send some transfer requests.</p>
+<p>For more info about MediatR intergration, see <a href="config_mediatr.html">Configuring MediatR</a>.</p>
+</section>
+<section id="tabpanel_c0GHexck6B-2_tabid-optional" role="tabpanel" data-tab="tabid-optional" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-csharp">services.AddApizr(registry =&gt; registry
+        // Built-in api
+        .AddTransferManager(options =&gt; options
+            .WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;))
+        // Custom api
+        .AddTransferManagerFor&lt;ITransferSampleApi&gt;(),
+    config =&gt; config.WithFileTransferOptionalMediation());
+</code></pre><p>Then, get an Apizr optional mediator instance by resolving/injecting <code>IApizrOptionalMediator</code> to send some transfer requests returning optional results.</p>
+<p>For more info about Optional.Async intergration, see <a href="config_optional.html">Configuring Optional.Async</a>.</p>
+</section>
 </div>
-<p>You definitly can group registrations if needed like illustrated into the Getting started.
-Note that auto registration thanks to assembly scanning is not yet available for this package.</p>
+<p>You definitly can group registrations if needed like illustrated into the <a href="gettingstarted_classic.html">Getting started</a>.</p>
+<p>Note that auto registration thanks to assembly scanning is not yet available for this package.</p>
 <h3 id="requesting">Requesting</h3>
-<p>No matter how you registered your managers neither how you got an instance of it, here is how to play with it:</p>
+<div class="tabGroup" id="tabgroup_c0GHexck6B-3">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_c0GHexck6B-3_tabid-static" role="tab" aria-controls="tabpanel_c0GHexck6B-3_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_c0GHexck6B-3_tabid-extended" role="tab" aria-controls="tabpanel_c0GHexck6B-3_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_c0GHexck6B-3_tabid-mediatr" role="tab" aria-controls="tabpanel_c0GHexck6B-3_tabid-mediatr" data-tab="tabid-mediatr" tabindex="-1">MediatR</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_c0GHexck6B-3_tabid-optional" role="tab" aria-controls="tabpanel_c0GHexck6B-3_tabid-optional" data-tab="tabid-optional" tabindex="-1">Optional</a>
+</li>
+</ul>
+<section id="tabpanel_c0GHexck6B-3_tabid-static" role="tabpanel" data-tab="tabid-static">
+<p>Once you get an instance of your manager, here is how to play with it:</p>
 <pre><code class="lang-csharp">var transferResult = await transferManager.DownloadAsync(
     new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
 </code></pre><p>Note that if you&#39;re in that case where you need to set a custom path dynamically at request time, here is how to do that:</p>
 <pre><code class="lang-csharp">var transferResult = await transferManager.DownloadAsync(new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;), 
     options =&gt; options.WithDynamicPath(&quot;YOUR_DYNAMIC_PATH_HERE&quot;));
-</code></pre><p>Finally, you should know that some registry shortcut methods let you write things without the need of the manager.
+</code></pre><p>If you registered with the registry, some provided shortcut methods could help you to write things without the need of the manager.
 You can call download or upload methods directly from the registry itself.</p>
 <pre><code class="lang-csharp">// for the built-in transfer api
 var transferResult = await registry.DownloadAsync(
@@ -331,7 +435,47 @@ var transferResult = await registry.DownloadAsync(
 // OR for a custom transfer api
 var transferResult = await registry.DownloadAsync&lt;ITransferSampleApi&gt;(
     new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
-</code></pre><hr>
+</code></pre></section>
+<section id="tabpanel_c0GHexck6B-3_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<p>Once you get an instance of your manager by resolving/injecting <code>IApizrTransferManager</code> for the built-in one or <code>IApizrTransferManager&lt;TCustomApi&gt;</code> for the custom one, here is how to play with it:</p>
+<pre><code class="lang-csharp">var transferResult = await transferManager.DownloadAsync(
+    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
+</code></pre><p>Note that if you&#39;re in that case where you need to set a custom path dynamically at request time, here is how to do that:</p>
+<pre><code class="lang-csharp">var transferResult = await transferManager.DownloadAsync(new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;), 
+    options =&gt; options.WithDynamicPath(&quot;YOUR_DYNAMIC_PATH_HERE&quot;));
+</code></pre><p>If you registered with the registry, some provided shortcut methods could help you to write things without the need of the manager.
+You can call download or upload methods directly from the registry itself.</p>
+<pre><code class="lang-csharp">// for the built-in transfer api
+var transferResult = await registry.DownloadAsync(
+    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
+
+// OR for a custom transfer api
+var transferResult = await registry.DownloadAsync&lt;ITransferSampleApi&gt;(
+    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
+</code></pre></section>
+<section id="tabpanel_c0GHexck6B-3_tabid-mediatr" role="tabpanel" data-tab="tabid-mediatr" aria-hidden="true" hidden="hidden">
+<p>Once you get an Apizr mediator instance by resolving/injecting <code>IApizrMediator</code>, here is how to play with it:</p>
+<pre><code class="lang-csharp">// for the built-in transfer api
+var transferResult = await apizrMediator.SendDownloadQuery(
+    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
+
+// OR for a custom transfer api
+var transferResult = await apizrMediator.SendDownloadQuery&lt;ITransferSampleApi&gt;(
+    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
+</code></pre><p>For more info about MediatR intergration, see <a href="config_mediatr.html">Configuring MediatR</a>.</p>
+</section>
+<section id="tabpanel_c0GHexck6B-3_tabid-optional" role="tabpanel" data-tab="tabid-optional" aria-hidden="true" hidden="hidden">
+<p>Once you get an Apizr optional mediator instance by resolving/injecting <code>IApizrOptionalMediator</code>, here is how to play with it:</p>
+<pre><code class="lang-csharp">// for the built-in transfer api
+var transferOptionalResult = await apizrOptionalMediator.SendDownloadOptionalQuery(
+    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
+
+// OR for a custom transfer api
+var transferOptionalResult = await apizrOptionalMediator.SendDownloadOptionalQuery&lt;ITransferSampleApi&gt;(
+    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
+</code></pre><p>For more info about Optional.Async intergration, see <a href="config_optional.html">Configuring Optional.Async</a>.</p>
+</section>
+</div>
 </article>
           </div>
           

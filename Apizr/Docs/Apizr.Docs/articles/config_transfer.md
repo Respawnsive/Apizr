@@ -169,7 +169,12 @@ The Transfer api inherits from both the upload and the download one, in case you
 Designing your custom transfer apis or using the built-in ones directly, you still have to register you apis.
 Where you could register it as we used to do it with any other apis, FileTransfer package comes with some wrapping managers helping you to get things short and simple.
 
-Note that following exemples use the `Transfer` manager but you definitly can use the `Upload` or the `Download` ones insteed.
+>[!NOTE]
+>
+>**Upload/Download/Transfer**
+>
+> Following exemples use the `Transfer` manager but you definitly can use the `Upload` or the `Download` ones insteed. 
+>
 
 #### Registering a single manager
 
@@ -198,6 +203,38 @@ services.AddApizrTransferManagerFor<ITransferSampleApi>();
 ```
 
 Then, get your `Transfer` manager instance by resolving/injecting `IApizrTransferManager` for the built-in one or `IApizrTransferManager<TCustomApi>` for the custom one.
+
+#### [MediatR](#tab/tabid-mediatr)
+
+```csharp
+// register the built-in transfer api
+services.AddApizrTransferManager(
+    options => options.WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE")
+                .WithFileTransferMediation());
+
+// OR register a custom transfer api
+services.AddApizrTransferManagerFor<ITransferSampleApi>(
+    options => options.WithFileTransferMediation());
+```
+
+Then, get an Apizr mediator instance by resolving/injecting `IApizrMediator` to send some transfer requests.
+
+
+#### [Optional](#tab/tabid-optional)
+
+```csharp
+// register the built-in transfer api
+services.AddApizrTransferManager(
+    options => options.WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE")
+                .WithFileTransferOptionalMediation());
+
+// OR register a custom transfer api
+services.AddApizrTransferManagerFor<ITransferSampleApi>(
+    options => options.WithFileTransferOptionalMediation());
+```
+
+Then, get an Apizr optional mediator instance by resolving/injecting `IApizrOptionalMediator` to send some transfer requests returning optional results.
+
 ***
 
 #### Registering multiple managers
@@ -244,14 +281,49 @@ var transferManager = apizrRegistry.GetTransferManager();
 var transferManager = apizrRegistry.GetTransferManagerFor<ITransferSampleApi>();
 ```
 
+#### [MediatR](#tab/tabid-mediatr)
+
+```csharp
+services.AddApizr(registry => registry
+        // Built-in api
+        .AddTransferManager(options => options
+            .WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE"))
+        // Custom api
+        .AddTransferManagerFor<ITransferSampleApi>(),
+    config => config.WithFileTransferMediation());
+```
+
+Then, get an Apizr mediator instance by resolving/injecting `IApizrMediator` to send some transfer requests.
+
+For more info about MediatR intergration, see [Configuring MediatR](config_mediatr.md).
+
+#### [Optional](#tab/tabid-optional)
+
+```csharp
+services.AddApizr(registry => registry
+        // Built-in api
+        .AddTransferManager(options => options
+            .WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE"))
+        // Custom api
+        .AddTransferManagerFor<ITransferSampleApi>(),
+    config => config.WithFileTransferOptionalMediation());
+```
+
+Then, get an Apizr optional mediator instance by resolving/injecting `IApizrOptionalMediator` to send some transfer requests returning optional results.
+
+For more info about Optional.Async intergration, see [Configuring Optional.Async](config_optional.md).
+
 ***
 
-You definitly can group registrations if needed like illustrated into the Getting started.
+You definitly can group registrations if needed like illustrated into the [Getting started](gettingstarted_classic.md).
+
 Note that auto registration thanks to assembly scanning is not yet available for this package.
 
 ### Requesting
 
-No matter how you registered your managers neither how you got an instance of it, here is how to play with it:
+#### [Static](#tab/tabid-static)
+
+Once you get an instance of your manager, here is how to play with it:
 ```csharp
 var transferResult = await transferManager.DownloadAsync(
     new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
@@ -263,7 +335,7 @@ var transferResult = await transferManager.DownloadAsync(new FileInfo("YOUR_FILE
     options => options.WithDynamicPath("YOUR_DYNAMIC_PATH_HERE"));
 ```
 
-Finally, you should know that some registry shortcut methods let you write things without the need of the manager.
+If you registered with the registry, some provided shortcut methods could help you to write things without the need of the manager.
 You can call download or upload methods directly from the registry itself.
 ```csharp
 // for the built-in transfer api
@@ -274,5 +346,61 @@ var transferResult = await registry.DownloadAsync(
 var transferResult = await registry.DownloadAsync<ITransferSampleApi>(
     new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
 ```
+
+#### [Extended](#tab/tabid-extended)
+
+Once you get an instance of your manager by resolving/injecting `IApizrTransferManager` for the built-in one or `IApizrTransferManager<TCustomApi>` for the custom one, here is how to play with it:
+```csharp
+var transferResult = await transferManager.DownloadAsync(
+    new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
+```
+
+Note that if you're in that case where you need to set a custom path dynamically at request time, here is how to do that:
+```csharp
+var transferResult = await transferManager.DownloadAsync(new FileInfo("YOUR_FILE_FULL_NAME_HERE"), 
+    options => options.WithDynamicPath("YOUR_DYNAMIC_PATH_HERE"));
+```
+
+If you registered with the registry, some provided shortcut methods could help you to write things without the need of the manager.
+You can call download or upload methods directly from the registry itself.
+```csharp
+// for the built-in transfer api
+var transferResult = await registry.DownloadAsync(
+    new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
+
+// OR for a custom transfer api
+var transferResult = await registry.DownloadAsync<ITransferSampleApi>(
+    new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
+```
+
+#### [MediatR](#tab/tabid-mediatr)
+
+Once you get an Apizr mediator instance by resolving/injecting `IApizrMediator`, here is how to play with it:
+```csharp
+// for the built-in transfer api
+var transferResult = await apizrMediator.SendDownloadQuery(
+    new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
+
+// OR for a custom transfer api
+var transferResult = await apizrMediator.SendDownloadQuery<ITransferSampleApi>(
+    new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
+```
+
+For more info about MediatR intergration, see [Configuring MediatR](config_mediatr.md).
+
+#### [Optional](#tab/tabid-optional)
+
+Once you get an Apizr optional mediator instance by resolving/injecting `IApizrOptionalMediator`, here is how to play with it:
+```csharp
+// for the built-in transfer api
+var transferOptionalResult = await apizrOptionalMediator.SendDownloadOptionalQuery(
+    new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
+
+// OR for a custom transfer api
+var transferOptionalResult = await apizrOptionalMediator.SendDownloadOptionalQuery<ITransferSampleApi>(
+    new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
+```
+
+For more info about Optional.Async intergration, see [Configuring Optional.Async](config_optional.md).
 
 ***

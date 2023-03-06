@@ -74,7 +74,7 @@
 
 <p>Refit based web api client management, but resilient (retry, connectivity, cache, auth, log, priority, etc...)</p>
 <p><a href="articles/index.html" title="Go to project documentation"><img src="https://img.shields.io/badge/read-documentation-blue?style=for-the-badge" alt="Read - Documentation"></a> <a href="https://github.com/Respawnsive/Apizr" title="Go to project repository"><img src="https://img.shields.io/badge/browse-source_code-lightgrey?style=for-the-badge" alt="Browse - Source"></a></p>
-<h2 id="history">History</h2>
+<h2 id="what">What</h2>
 <p>The Apizr project was motivated by this <a href="https://github.com/RobGibbens/ResilientServices/blob/master/post/post.md">2015 famous blog post</a> about resilient networking.</p>
 <p>Its main focus was to address at least everything explained into this article, meanning:</p>
 <ul>
@@ -96,16 +96,61 @@
 <ul>
 <li>Choose cache, log and connectivity providers</li>
 <li>Register it as an MS DI extension</li>
-<li>Integrate with Shiny</li>
 <li>Map model with DTO</li>
 <li>Use Mediator pattern</li>
 <li>Use Optional pattern</li>
+<li>Manage file transfers</li>
 </ul>
 <p>The list is not exhaustive, there’s more, but what we wanted was playing with all of it with as less code as we could, not worrying about plumbing things and being sure everything is wired and handled by design or almost.</p>
 <p>Inspired by <a href="https://github.com/thefex/Refit.Insane.PowerPack">Refit.Insane.PowerPack</a>, we wanted to make it simple to use, mixing attribute decorations and fluent configuration.</p>
 <p>Also, we built this lib to make it work with any .Net Standard 2.0 compliant platform, so we could use it seamlessly from any kind of app, with or without DI goodness.</p>
-<h2 id="libraries">Libraries</h2>
+<h2 id="how">How</h2>
+<p>An api definition with some attributes:</p>
+<pre><code class="lang-csharp">[assembly:Policy(&quot;TransientHttpError&quot;)]
+namespace Apizr.Sample
+{
+    [WebApi(&quot;https://reqres.in/&quot;), Cache, Log]
+    public interface IReqResService
+    {
+        [Get(&quot;/api/users&quot;)]
+        Task&lt;UserList&gt; GetUsersAsync();
+
+        [Get(&quot;/api/users/{userId}&quot;)]
+        Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId);
+
+        [Post(&quot;/api/users&quot;)]
+        Task&lt;User&gt; CreateUser(User user);
+    }
+}
+</code></pre><p>An instance of this managed api:</p>
+<pre><code class="lang-csharp">// Define some policies
+var registry = new PolicyRegistry
+{
+    {
+        &quot;TransientHttpError&quot;, 
+        HttpPolicyExtensions
+            .HandleTransientHttpError()
+            .WaitAndRetryAsync(new[]
+        {
+            TimeSpan.FromSeconds(1),
+            TimeSpan.FromSeconds(5),
+            TimeSpan.FromSeconds(10)
+        })
+    }
+};
+
+// Get your manager instance
+var reqResManager = ApizrBuilder.Current.CreateManagerFor&lt;IReqResService&gt;(
+    options =&gt; options
+        .WithPolicyRegistry(registry)
+        .WithAkavacheCacheHandler());
+</code></pre><p>And then you&#39;re good to go:</p>
+<pre><code class="lang-csharp">var userList = await reqResManager.ExecuteAsync(api =&gt; api.GetUsersAsync());
+</code></pre><p>This request will be managed with the defined policies, data cached, http traces logged.</p>
+<p>Apizr has a lot more to offer, just <a href="articles/index.html">read the doc</a>!</p>
+<h2 id="where">Where</h2>
 <p><a href="changelog.html">Change Log</a></p>
+<h3 id="managing-core">Managing (Core)</h3>
 <table>
 <thead>
 <tr>
@@ -125,6 +170,18 @@
 <td><a href="https://www.nuget.org/packages/Apizr.Extensions.Microsoft.DependencyInjection/"><img src="https://img.shields.io/nuget/v/Apizr.Extensions.Microsoft.DependencyInjection.svg" alt="NuGet"></a></td>
 <td><a href="https://www.nuget.org/packages/Apizr.Extensions.Microsoft.DependencyInjection/"><img src="https://img.shields.io/nuget/vpre/Apizr.Extensions.Microsoft.DependencyInjection.svg" alt="NuGet Pre Release"></a></td>
 </tr>
+</tbody>
+</table>
+<h3 id="caching">Caching</h3>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Current</th>
+<th>Upcoming</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>Apizr.Extensions.Microsoft.Caching</td>
 <td><a href="https://www.nuget.org/packages/Apizr.Extensions.Microsoft.Caching/"><img src="https://img.shields.io/nuget/v/Apizr.Extensions.Microsoft.Caching.svg" alt="NuGet"></a></td>
@@ -140,6 +197,18 @@
 <td><a href="https://www.nuget.org/packages/Apizr.Integrations.MonkeyCache/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.MonkeyCache.svg" alt="NuGet"></a></td>
 <td><a href="https://www.nuget.org/packages/Apizr.Integrations.MonkeyCache/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.MonkeyCache.svg" alt="NuGet Pre Release"></a></td>
 </tr>
+</tbody>
+</table>
+<h3 id="handling">Handling</h3>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Current</th>
+<th>Upcoming</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>Apizr.Integrations.Fusillade</td>
 <td><a href="https://www.nuget.org/packages/Apizr.Integrations.Fusillade/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.Fusillade.svg" alt="NuGet"></a></td>
@@ -155,11 +224,67 @@
 <td><a href="https://www.nuget.org/packages/Apizr.Integrations.Optional/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.Optional.svg" alt="NuGet"></a></td>
 <td><a href="https://www.nuget.org/packages/Apizr.Integrations.Optional/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.Optional.svg" alt="NuGet Pre Release"></a></td>
 </tr>
+</tbody>
+</table>
+<h3 id="mapping">Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Current</th>
+<th>Upcoming</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>Apizr.Integrations.AutoMapper</td>
 <td><a href="https://www.nuget.org/packages/Apizr.Integrations.AutoMapper/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.AutoMapper.svg" alt="NuGet"></a></td>
 <td><a href="https://www.nuget.org/packages/Apizr.Integrations.AutoMapper/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.AutoMapper.svg" alt="NuGet Pre Release"></a></td>
 </tr>
+</tbody>
+</table>
+<h3 id="transferring">Transferring</h3>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Current</th>
+<th>Upcoming</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apizr.Integrations.FileTransfer</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg" alt="NuGet"></a></td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg" alt="NuGet Pre Release"></a></td>
+</tr>
+<tr>
+<td>Apizr.Extensions.Microsoft.FileTransfer</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg" alt="NuGet"></a></td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg" alt="NuGet Pre Release"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.FileTransfer.MediatR</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg" alt="NuGet"></a></td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg" alt="NuGet Pre Release"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.FileTransfer.Optional</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg" alt="NuGet"></a></td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg" alt="NuGet Pre Release"></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="generating">Generating</h3>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Current</th>
+<th>Upcoming</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>Apizr.Tools.NSwag</td>
 <td><a href="https://www.nuget.org/packages/Apizr.Tools.NSwag/"><img src="https://img.shields.io/nuget/v/Apizr.Tools.NSwag.svg" alt="NuGet"></a></td>
@@ -167,9 +292,9 @@
 </tr>
 </tbody>
 </table>
-<p>Install the NuGet package of your choice:</p>
+<p>Install the NuGet reference package of your choice:</p>
 <ul>
-<li><strong>Apizr</strong> package comes with the For and CrudFor static instantiation approach (which you can register in your DI container then)</li>
+<li><strong>Apizr</strong> package comes with the static builder instantiation approach (which you can register in your DI container then)</li>
 <li><strong>Apizr.Extensions.Microsoft.DependencyInjection</strong> package extends your IServiceCollection with AddApizr, AddApizrFor and AddApizrCrudFor registration methods</li>
 <li><strong>Apizr.Extensions.Microsoft.Caching</strong> package brings an ICacheHandler method mapping implementation for <a href="https://www.nuget.org/packages/Microsoft.Extensions.Caching.Abstractions">MS Extensions Caching</a></li>
 <li><strong>Apizr.Integrations.Akavache</strong> package brings an ICacheHandler method mapping implementation for <a href="https://github.com/reactiveui/Akavache">Akavache</a></li>
@@ -178,10 +303,14 @@
 <li><strong>Apizr.Integrations.MediatR</strong> package enables request auto handling with mediation using <a href="https://github.com/jbogard/MediatR">MediatR</a></li>
 <li><strong>Apizr.Integrations.Optional</strong> package enables Optional result from mediation requests (requires MediatR integration) using <a href="https://github.com/dnikolovv/optional-async">Optional.Async</a></li>
 <li><strong>Apizr.Integrations.AutoMapper</strong> package enables auto mapping for mediation requests (requires MediatR integration and could work with Optional integration) using <a href="https://github.com/AutoMapper/AutoMapper">AutoMapper</a></li>
+<li><strong>Apizr.Integrations.FileTransfer</strong> package enables file transfer management for static registration</li>
+<li><strong>Apizr.Extensions.Microsoft.FileTransfer</strong> package enables file transfer management for extended registration</li>
+<li><strong>Apizr.Integrations.FileTransfer.MediatR</strong> package enables file transfer management for mediation requests (requires MediatR integration and could work with Optional integration) using <a href="https://github.com/jbogard/MediatR">MediatR</a></li>
+<li><strong>Apizr.Integrations.FileTransfer.Optional</strong> package enables file transfer management for mediation requests with optional result (requires MediatR integration and could work with Optional integration) using <a href="https://github.com/dnikolovv/optional-async">Optional.Async</a></li>
 </ul>
-<p>Install the NuGet .NET Tool if needed:</p>
+<p>Install the NuGet .NET CLI Tool package if needed:</p>
 <ul>
-<li><strong>Apizr.Tools.NSwag</strong> package enables Apizr files generation by command line (Models, Services and Registration) from an OpenApi definition using <a href="https://github.com/RicoSuter/NSwag">NSwag</a></li>
+<li><strong>Apizr.Tools.NSwag</strong> package enables Apizr files generation by command lines (Models, Apis and Registrations) from an OpenApi/Swagger definition using <a href="https://github.com/RicoSuter/NSwag">NSwag</a></li>
 </ul>
 <p>Apizr core package make use of well known nuget packages to make the magic appear:</p>
 <table>

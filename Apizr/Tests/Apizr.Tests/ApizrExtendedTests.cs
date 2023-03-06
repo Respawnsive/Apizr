@@ -451,7 +451,31 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Downloading_File_With_Progress_Should_Report_Progress()
+        public async Task Downloading_File_With_Local_Progress_Should_Report_Progress()
+        {
+            var percentage = 0;
+            var progress = new ApizrProgress();
+            progress.ProgressChanged += (sender, args) =>
+            {
+                percentage = args.ProgressPercentage;
+            };
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddApizrTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr/files").WithProgress()); // Built-in
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            var apizrTransferManager = serviceProvider.GetService<IApizrTransferManager>(); // Built-in
+            apizrTransferManager.Should().NotBeNull(); // Built-in
+
+            var fileInfo = await apizrTransferManager.DownloadAsync(new FileInfo("test10Mb.db"), options => options.WithProgress(progress)).ConfigureAwait(false);
+
+            percentage.Should().Be(100);
+            fileInfo.Length.Should().BePositive();
+        }
+
+        [Fact]
+        public async Task Downloading_File_With_Global_Progress_Should_Report_Progress()
         {
             var percentage = 0;
             var progress = new ApizrProgress();

@@ -476,6 +476,39 @@ var transferOptionalResult = await apizrOptionalMediator.SendDownloadOptionalQue
 </code></pre><p>For more info about Optional.Async intergration, see <a href="config_optional.html">Configuring Optional.Async</a>.</p>
 </section>
 </div>
+<h3 id="tracking-progress">Tracking progress</h3>
+<p>This package can let you track any progress while downloading or uploading a file.</p>
+<p>First, create an <code>ApizrProgress</code> instance like so:</p>
+<pre><code class="lang-csharp">var progress = new ApizrProgress();
+progress.ProgressChanged += (sender, args) =&gt;
+{
+    // Do whatever you want when progress reported
+    var percentage = args.ProgressPercentage;
+};
+</code></pre><p>From here, you may want to track all transfer requests globally or some of it locally when ask for.</p>
+<div class="tabGroup" id="tabgroup_c0GHexck6B-4">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_c0GHexck6B-4_tabid-globally" role="tab" aria-controls="tabpanel_c0GHexck6B-4_tabid-globally" data-tab="tabid-globally" tabindex="0" aria-selected="true">Globally</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_c0GHexck6B-4_tabid-locally" role="tab" aria-controls="tabpanel_c0GHexck6B-4_tabid-locally" data-tab="tabid-locally" tabindex="-1">Locally</a>
+</li>
+</ul>
+<section id="tabpanel_c0GHexck6B-4_tabid-globally" role="tabpanel" data-tab="tabid-globally">
+<p>Just provide your <code>ApizrProgress</code> instance with options builder at registration time:</p>
+<pre><code class="lang-csharp">options =&gt; options.WithProgress(progress);
+</code></pre><p>And that&#39;s it, you&#39;ll be notified when any transfer progress of any transfer request occcured, like for:</p>
+<pre><code class="lang-csharp">var fileInfo = await transferManager.DownloadAsync(new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
+</code></pre></section>
+<section id="tabpanel_c0GHexck6B-4_tabid-locally" role="tabpanel" data-tab="tabid-locally" aria-hidden="true" hidden="hidden">
+<p>You have to tell Apizr that you want to track progress with options builder at registration time:</p>
+<pre><code class="lang-csharp">options =&gt; options.WithProgress()
+</code></pre><p>Then you can track progress of any transfer request of your choice, by providing your <code>ApizrProgress</code> instance with options builder at request time:</p>
+<pre><code class="lang-csharp">var fileInfo = await transferManager.DownloadAsync(new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;), 
+                    options =&gt; options.WithProgress(progress));
+</code></pre></section>
+</div>
 </article>
           </div>
           

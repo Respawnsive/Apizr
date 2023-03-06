@@ -25,7 +25,9 @@ using Refit;
 [assembly: Apizr.Preserve]
 namespace Apizr
 {
-    /// <inheritdoc/>
+    /// <summary>
+    /// The builder
+    /// </summary>
     public class ApizrBuilder : IApizrBuilder
     {
         private ApizrBuilder()

@@ -24,7 +24,12 @@ namespace Apizr.Optional.Requesting.Handling
             _uploadManager = uploadManager;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Handling the upload optional request
+        /// </summary>
+        /// <param name="request">The upload optional request</param>
+        /// <param name="cancellationToken">A cancellation token</param>
+        /// <returns></returns>
         public async Task<Option<Unit, ApizrException>> Handle(UploadOptionalCommand<TUploadApi> request, CancellationToken cancellationToken)
         {
             try
@@ -59,7 +64,12 @@ namespace Apizr.Optional.Requesting.Handling
             }
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Handling the upload optional request
+        /// </summary>
+        /// <param name="request">The upload optional request</param>
+        /// <param name="cancellationToken">A cancellation token</param>
+        /// <returns></returns>
         public async Task<Option<Unit, ApizrException>> Handle(UploadOptionalCommand request,
             CancellationToken cancellationToken)
         {

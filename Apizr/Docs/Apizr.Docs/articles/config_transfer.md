@@ -404,3 +404,46 @@ var transferOptionalResult = await apizrOptionalMediator.SendDownloadOptionalQue
 For more info about Optional.Async intergration, see [Configuring Optional.Async](config_optional.md).
 
 ***
+
+### Tracking progress
+
+This package can let you track any progress while downloading or uploading a file.
+
+First, create an `ApizrProgress` instance like so:
+```csharp
+var progress = new ApizrProgress();
+progress.ProgressChanged += (sender, args) =>
+{
+    // Do whatever you want when progress reported
+    var percentage = args.ProgressPercentage;
+};
+```
+
+From here, you may want to track all transfer requests globally or some of it locally when ask for.
+
+#### [Globally](#tab/tabid-globally)
+
+Just provide your `ApizrProgress` instance with options builder at registration time:
+```csharp
+options => options.WithProgress(progress);
+```
+
+And that's it, you'll be notified when any transfer progress of any transfer request occcured, like for:
+```csharp
+var fileInfo = await transferManager.DownloadAsync(new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
+```
+
+#### [Locally](#tab/tabid-locally)
+
+You have to tell Apizr that you want to track progress with options builder at registration time:
+```csharp
+options => options.WithProgress()
+```
+
+Then you can track progress of any transfer request of your choice, by providing your `ApizrProgress` instance with options builder at request time:
+```csharp
+var fileInfo = await transferManager.DownloadAsync(new FileInfo("YOUR_FILE_FULL_NAME_HERE"), 
+                    options => options.WithProgress(progress));
+```
+
+***

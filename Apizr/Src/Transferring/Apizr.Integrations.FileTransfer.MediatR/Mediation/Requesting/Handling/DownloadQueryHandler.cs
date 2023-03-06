@@ -26,7 +26,12 @@ namespace Apizr.Mediation.Requesting.Handling
             _downloadManager = downloadManager;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Handling the download request
+        /// </summary>
+        /// <param name="request">The download request</param>
+        /// <param name="cancellationToken">A cancellation token</param>
+        /// <returns></returns>
         public Task<FileInfo> Handle(DownloadQuery<TDownloadApi, TDownloadParams> request,
             CancellationToken cancellationToken) =>
             _downloadManager.DownloadAsync(request.FileInfo, request.DownloadParams, request.OptionsBuilder);
@@ -49,12 +54,22 @@ namespace Apizr.Mediation.Requesting.Handling
             _downloadManager = downloadManager;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Handling the download request
+        /// </summary>
+        /// <param name="request">The download request</param>
+        /// <param name="cancellationToken">A cancellation token</param>
+        /// <returns></returns>
         public Task<FileInfo> Handle(DownloadQuery<TDownloadApi> request,
             CancellationToken cancellationToken) =>
             _downloadManager.DownloadAsync(request.FileInfo, request.DownloadParams, request.OptionsBuilder);
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Handling the download request
+        /// </summary>
+        /// <param name="request">The download request</param>
+        /// <param name="cancellationToken">A cancellation token</param>
+        /// <returns></returns>
         public Task<FileInfo> Handle(DownloadQuery request, CancellationToken cancellationToken) =>
             _downloadManager.DownloadAsync(request.FileInfo, request.DownloadParams, request.OptionsBuilder);
     }

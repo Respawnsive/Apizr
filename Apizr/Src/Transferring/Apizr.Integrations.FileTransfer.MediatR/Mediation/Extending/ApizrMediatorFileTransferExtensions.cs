@@ -15,7 +15,7 @@ namespace Apizr.Mediation.Extending
         #region Download
 
         /// <summary>
-        /// Send a download query to Apizr using MediatR for <see cref="TDownloadApi"/> with a custom query parameters type
+        /// Send a download query to Apizr using MediatR for <typeparamref name="TDownloadApi"/> with a custom query parameters type
         /// </summary>
         /// <typeparam name="TDownloadApi">The download api type</typeparam>
         /// <typeparam name="TDownloadParams">The query parameters type</typeparam>
@@ -33,7 +33,7 @@ namespace Apizr.Mediation.Extending
                 ApizrManager.CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <summary>
-        /// Send a download query to Apizr using MediatR for <see cref="TDownloadApi"/>
+        /// Send a download query to Apizr using MediatR for <typeparamref name="TDownloadApi"/>
         /// </summary>
         /// <typeparam name="TDownloadApi">The download api type</typeparam>
         /// <typeparam name="TDownloadParams">The query parameters type</typeparam>
@@ -49,7 +49,7 @@ namespace Apizr.Mediation.Extending
                 ApizrManager.CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <summary>
-        /// Send a download query to Apizr using MediatR for <see cref="TDownloadApi"/> with a dictionary query parameters type
+        /// Send a download query to Apizr using MediatR for <typeparamref name="TDownloadApi"/> with a dictionary query parameters type
         /// </summary>
         /// <typeparam name="TDownloadApi">The download api type</typeparam>
         /// <param name="apizrMediator">The extended mediator</param>
@@ -65,7 +65,7 @@ namespace Apizr.Mediation.Extending
                 ApizrManager.CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <summary>
-        /// Send a download query to Apizr using MediatR for <see cref="TDownloadApi"/>
+        /// Send a download query to Apizr using MediatR for <typeparamref name="TDownloadApi"/>
         /// </summary>
         /// <typeparam name="TDownloadApi">The download api type</typeparam>
         /// <param name="apizrMediator">The extended mediator</param>
@@ -111,7 +111,7 @@ namespace Apizr.Mediation.Extending
         #region Upload
 
         /// <summary>
-        /// Send a upload command to Apizr using MediatR for <see cref="TUploadApi"/> from file bytes data
+        /// Send a upload command to Apizr using MediatR for <typeparamref name="TUploadApi"/> from file bytes data
         /// </summary>
         /// <typeparam name="TUploadApi">The upload api type</typeparam>
         /// <param name="apizrMediator">The extended mediator</param>
@@ -126,7 +126,7 @@ namespace Apizr.Mediation.Extending
                 ApizrManager.CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <summary>
-        /// Send a upload command to Apizr using MediatR for <see cref="TUploadApi"/> from file stream data
+        /// Send a upload command to Apizr using MediatR for <typeparamref name="TUploadApi"/> from file stream data
         /// </summary>
         /// <typeparam name="TUploadApi">The upload api type</typeparam>
         /// <param name="apizrMediator">The extended mediator</param>
@@ -141,7 +141,7 @@ namespace Apizr.Mediation.Extending
                 ApizrManager.CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         /// <summary>
-        /// Send a upload command to Apizr using MediatR for <see cref="TUploadApi"/> from file info data
+        /// Send a upload command to Apizr using MediatR for <typeparamref name="TUploadApi"/> from file info data
         /// </summary>
         /// <typeparam name="TUploadApi">The upload api type</typeparam>
         /// <param name="apizrMediator">The extended mediator</param>

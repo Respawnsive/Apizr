@@ -30,7 +30,12 @@ namespace Apizr.Optional.Requesting.Handling
             _downloadManager = downloadManager;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Handling the download optional request
+        /// </summary>
+        /// <param name="request">The download optional request</param>
+        /// <param name="cancellationToken">A cancellation token</param>
+        /// <returns></returns>
         public async Task<Option<FileInfo, ApizrException>> Handle(
             DownloadOptionalQuery<TDownloadApi, TDownloadParams> request, CancellationToken cancellationToken)
         {
@@ -66,8 +71,13 @@ namespace Apizr.Optional.Requesting.Handling
         {
             _downloadManager = downloadManager;
         }
-        
-        /// <inheritdoc />
+
+        /// <summary>
+        /// Handling the download optional request
+        /// </summary>
+        /// <param name="request">The download optional request</param>
+        /// <param name="cancellationToken">A cancellation token</param>
+        /// <returns></returns>
         public async Task<Option<FileInfo, ApizrException>> Handle(DownloadOptionalQuery<TDownloadApi> request, CancellationToken cancellationToken)
         {
             try
@@ -85,7 +95,12 @@ namespace Apizr.Optional.Requesting.Handling
             }
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Handling the download optional request
+        /// </summary>
+        /// <param name="request">The download optional request</param>
+        /// <param name="cancellationToken">A cancellation token</param>
+        /// <returns></returns>
         public async Task<Option<FileInfo, ApizrException>> Handle(DownloadOptionalQuery request,
             CancellationToken cancellationToken)
         {

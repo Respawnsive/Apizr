@@ -102,20 +102,24 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer.Optional\Optional\Requesting\Handling\DownloadOptionalQueryHandler.cs
-    startLine: 33
+    startLine: 38
   assemblies:
   - Apizr.Integrations.FileTransfer.Optional
   namespace: Apizr.Optional.Requesting.Handling
+  summary: "\nHandling the download optional request\n"
   example: []
   syntax:
     content: public async Task<Option<FileInfo, ApizrException>> Handle(DownloadOptionalQuery<TDownloadApi, TDownloadParams> request, CancellationToken cancellationToken)
     parameters:
     - id: request
       type: Apizr.Optional.Requesting.DownloadOptionalQuery{{TDownloadApi},{TDownloadParams}}
+      description: The download optional request
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: A cancellation token
     return:
       type: System.Threading.Tasks.Task{Optional.Option{System.IO.FileInfo,Apizr.ApizrException}}
+      description: ''
     content.vb: Public Function Handle(request As DownloadOptionalQuery(Of TDownloadApi, TDownloadParams), cancellationToken As CancellationToken) As Task(Of  Option(Of FileInfo, ApizrException)
   overload: Apizr.Optional.Requesting.Handling.DownloadOptionalQueryHandler`2.Handle*
   implements:

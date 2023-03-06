@@ -21,7 +21,12 @@ namespace Apizr.Mediation.Requesting.Handling
             _uploadManager = uploadManager;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Handling the upload request
+        /// </summary>
+        /// <param name="request">The upload request</param>
+        /// <param name="cancellationToken">A cancellation token</param>
+        /// <returns></returns>
         public Task<Unit> Handle(UploadCommand<TUploadApi> request, CancellationToken cancellationToken)
         {
             if(request.ByteArrayPart != null)
@@ -34,7 +39,12 @@ namespace Apizr.Mediation.Requesting.Handling
             throw new NullReferenceException("You must provide some data to upload");
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Handling the upload request
+        /// </summary>
+        /// <param name="request">The upload request</param>
+        /// <param name="cancellationToken">A cancellation token</param>
+        /// <returns></returns>
         public Task<Unit> Handle(UploadCommand request, CancellationToken cancellationToken)
         {
             if (request.ByteArrayPart != null)

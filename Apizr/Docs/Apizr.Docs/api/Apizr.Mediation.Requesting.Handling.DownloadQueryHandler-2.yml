@@ -102,20 +102,24 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer.MediatR\Mediation\Requesting\Handling\DownloadQueryHandler.cs
-    startLine: 29
+    startLine: 34
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Requesting.Handling
+  summary: "\nHandling the download request\n"
   example: []
   syntax:
     content: public Task<FileInfo> Handle(DownloadQuery<TDownloadApi, TDownloadParams> request, CancellationToken cancellationToken)
     parameters:
     - id: request
       type: Apizr.Mediation.Requesting.DownloadQuery{{TDownloadApi},{TDownloadParams}}
+      description: The download request
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: A cancellation token
     return:
       type: System.Threading.Tasks.Task{System.IO.FileInfo}
+      description: ''
     content.vb: Public Function Handle(request As DownloadQuery(Of TDownloadApi, TDownloadParams), cancellationToken As CancellationToken) As Task(Of FileInfo)
   overload: Apizr.Mediation.Requesting.Handling.DownloadQueryHandler`2.Handle*
   implements:

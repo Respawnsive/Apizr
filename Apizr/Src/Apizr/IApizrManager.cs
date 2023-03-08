@@ -41,7 +41,8 @@ namespace Apizr
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod,
+        Task ExecuteAsync(
+            Expression<Func<TWebApi, Task>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
@@ -50,7 +51,8 @@ namespace Apizr
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task ExecuteAsync(Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod,
+        Task ExecuteAsync(
+            Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
@@ -62,7 +64,8 @@ namespace Apizr
         /// <param name="modelData">The model data to map</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
+        Task ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
             TModelData modelData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
@@ -75,7 +78,8 @@ namespace Apizr
         /// <param name="modelData">The model data to map</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod,
+        Task ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod,
             TModelData modelData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
@@ -90,7 +94,71 @@ namespace Apizr
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        Task<TApiData> ExecuteAsync<TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
+        Task<TApiData> ExecuteAsync<TApiData>(
+            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task
+        /// </summary>
+        /// <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        Task<TApiData> ExecuteAsync<TApiData>(
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// </summary>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        Task<TModelData> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// </summary>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        Task<TModelData> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// </summary>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="modelData">The model data to map</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        Task<TModelData> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, 
+            TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// </summary>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="modelData">The model data to map</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        Task<TModelData> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
+            TModelData modelData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
@@ -112,41 +180,6 @@ namespace Apizr
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
         /// </summary>
-        /// <typeparam name="TModelData">The model data type</typeparam>
-        /// <typeparam name="TApiData">The api data type</typeparam>
-        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
-        /// <param name="modelData">The model data to map</param>
-        /// <param name="optionsBuilder">Options provided to the request</param>
-        /// <returns></returns>
-        Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
-
-        /// <summary>
-        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
-        /// </summary>
-        /// <typeparam name="TModelData">The model data type</typeparam>
-        /// <typeparam name="TApiData">The api data type</typeparam>
-        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
-        /// <param name="optionsBuilder">Options provided to the request</param>
-        /// <returns></returns>
-        Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
-
-        /// <summary>
-        /// Execute a managed <typeparamref name="TWebApi"/>'s task
-        /// </summary>
-        /// <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
-        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
-        /// <param name="optionsBuilder">Options provided to the request</param>
-        /// <returns></returns>
-        Task<TApiData> ExecuteAsync<TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
-
-        /// <summary>
-        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
-        /// </summary>
         /// <typeparam name="TModelResultData">The mapped model result type</typeparam>
         /// <typeparam name="TApiResultData">The api result type</typeparam>
         /// <typeparam name="TApiRequestData">The mapped api request data type</typeparam>
@@ -156,34 +189,8 @@ namespace Apizr
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
         Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>>
-                executeApiMethod, TModelRequestData modelRequestData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
-
-        /// <summary>
-        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
-        /// </summary>
-        /// <typeparam name="TModelData">The model data type</typeparam>
-        /// <typeparam name="TApiData">The api data type</typeparam>
-        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
-        /// <param name="modelData">The model data to map</param>
-        /// <param name="optionsBuilder">Options provided to the request</param>
-        /// <returns></returns>
-        Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
-            TModelData modelData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
-
-        /// <summary>
-        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
-        /// </summary>
-        /// <typeparam name="TModelData">The model data type</typeparam>
-        /// <typeparam name="TApiData">The api data type</typeparam>
-        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
-        /// <param name="optionsBuilder">Options provided to the request</param>
-        /// <returns></returns>
-        Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod, 
+            TModelRequestData modelRequestData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
         #endregion 

@@ -80,8 +80,14 @@
 <h2 id="breaking-changes">Breaking changes</h2>
 
 <p>Please find here some breaking changes while upgrading from previous versions</p>
-<h3 id="41">4.1</h3>
+<h3 id="50">5.0</h3>
 <h4 id="apizr">Apizr</h4>
+<ul>
+<li>Now <strong>ApizrBuilder static class offers only a Current property returning its own instance to get acces to its methods</strong>, so that it could be extended then by other packages</li>
+<li><strong>Some methods have been deprecated</strong>, moved to extension methods and point to the new core ones</li>
+</ul>
+<h3 id="41">4.1</h3>
+<h4 id="apizr-1">Apizr</h4>
 <ul>
 <li><strong>Apizr static class renamed to ApizrBuilder to match its purpose</strong> and doesn&#39;t conflict with its namespace anymore</li>
 <li><strong>ApizrBuilder&#39;s methods renamed to match their return type</strong> so that we know what we&#39;re about to build (e.g. CreateRegistry, AddManagerFor, CreateManagerFor)</li>
@@ -101,7 +107,7 @@
 <li><strong>ApizrOptionalMediationRegistry&#39;s methods renamed to match their return type</strong> so that we know what we&#39;re about to get (e.g. GetOptionalMediatorFor, GetCrudOptionalMediatorFor, ContainsOptionalMediatorFor)</li>
 </ul>
 <h3 id="40">4.0</h3>
-<h4 id="apizr-1">Apizr</h4>
+<h4 id="apizr-2">Apizr</h4>
 <ul>
 <li>TraceAttribute has been <strong>renamed back to LogAttribute</strong></li>
 <li>Now we can set a <strong>LogLevel value for each Low, Medium and High severity</strong> by attribute or fluent configuration</li>
@@ -122,12 +128,12 @@
 <p>This integration project has been dropped out as Shiny no longer provide built-in caching and logging feature anymore. Apizr now either relies on MS Caching extensions, Akavache or MonkeyCache for caching feature and MS Logging extensions for logging feature. You&#39;ll have to provide a connectivity handler if you want Apizr to check it.</p>
 </div>
 <h3 id="30">3.0</h3>
-<h4 id="apizr-2">Apizr</h4>
+<h4 id="apizr-3">Apizr</h4>
 <ul>
 <li><strong>Fusillade has been moved to an integration package</strong>. If you used to play with it, just install it from its brand new dedicated integration package and follow the new Readme instructions</li>
 </ul>
 <h3 id="20">2.0</h3>
-<h4 id="apizr-3">Apizr</h4>
+<h4 id="apizr-4">Apizr</h4>
 <ul>
 <li><strong>TraceAttribute renamed to LogItAttribute</strong> to suits its tracing and logging both features activation</li>
 <li><strong>CacheAttribute renamed to CacheItAttribute</strong> to keep things consistent</li>
@@ -143,7 +149,7 @@
 <li><code>WithCrudOptionalMediation</code> renamed to <code>WithOptionalMediation</code></li>
 </ul>
 <h3 id="120">1.2.0</h3>
-<h4 id="apizr-4">Apizr</h4>
+<h4 id="apizr-5">Apizr</h4>
 <ul>
 <li>Apizr instantiation/registration methods names standardized to Apizr.For and Apizr.CrudFor</li>
 </ul>

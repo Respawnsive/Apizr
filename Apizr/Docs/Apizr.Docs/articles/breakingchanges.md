@@ -2,6 +2,13 @@
 
 Please find here some breaking changes while upgrading from previous versions
 
+### 5.0
+
+#### Apizr
+
+- Now **ApizrBuilder static class offers only a Current property returning its own instance to get acces to its methods**, so that it could be extended then by other packages
+- **Some methods have been deprecated**, moved to extension methods and point to the new core ones
+
 ### 4.1
 
 #### Apizr

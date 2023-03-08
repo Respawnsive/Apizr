@@ -109,45 +109,46 @@ namespace Apizr
         #region Task
         
         /// <inheritdoc />
-        public Task ExecuteAsync(
+        public virtual Task ExecuteAsync(
             Expression<Func<TWebApi, Task>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ExecuteAsync(executeApiMethod, 
+            => ((IApizrManager<TWebApi>)this).ExecuteAsync(executeApiMethod, 
                 (_, webApi) => executeApiMethod.Compile()(webApi),
                 optionsBuilder);
 
         /// <inheritdoc />
-        public Task ExecuteAsync(
+        public virtual Task ExecuteAsync(
             Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ExecuteAsync(executeApiMethod, 
+            => ((IApizrManager<TWebApi>)this).ExecuteAsync(executeApiMethod, 
                 (options, webApi) => executeApiMethod.Compile()(options, webApi),
                 optionsBuilder);
 
         /// <inheritdoc />
-        public Task ExecuteAsync<TModelData, TApiData>(
+        public virtual Task ExecuteAsync<TModelData, TApiData>(
             Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
             TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ExecuteAsync<TModelData, TApiData>(executeApiMethod,
+            => ((IApizrManager<TWebApi>)this).ExecuteAsync<TModelData, TApiData>(executeApiMethod,
                 (_, webApi, apiData) => executeApiMethod.Compile()(webApi, apiData),
                 modelData,
                 optionsBuilder);
 
         /// <inheritdoc />
-        public Task ExecuteAsync<TModelData, TApiData>(
+        public virtual Task ExecuteAsync<TModelData, TApiData>(
             Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod,
             TModelData modelData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ExecuteAsync<TModelData, TApiData>(executeApiMethod,
+            => ((IApizrManager<TWebApi>)this).ExecuteAsync<TModelData, TApiData>(executeApiMethod,
                 (options, webApi, apiData) => executeApiMethod.Compile()(options, webApi, apiData), 
                 modelData,
                 optionsBuilder);
 
         #region Execution
 
-        protected virtual async Task ExecuteAsync(
-            Expression executeApiMethod, Func<IApizrRequestOptions, TWebApi, Task> executeApiFactory,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        async Task IApizrManager<TWebApi>.ExecuteAsync(
+            Expression executeApiMethod, 
+            Func<IApizrRequestOptions, TWebApi, Task> executeApiFactory,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
@@ -195,11 +196,11 @@ namespace Apizr
             }
         }
 
-        protected virtual async Task ExecuteAsync<TModelData, TApiData>(
+        async Task IApizrManager<TWebApi>.ExecuteAsync<TModelData, TApiData>(
             Expression executeApiMethod,
             Func<IApizrRequestOptions, TWebApi, TApiData, Task> executeApiFactory,
             TModelData modelData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            Action<IApizrRequestOptionsBuilder> optionsBuilder)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails(executeApiMethod);
@@ -263,74 +264,74 @@ namespace Apizr
         #region Task<T>
 
         /// <inheritdoc />
-        public Task<TApiData> ExecuteAsync<TApiData>(
+        public virtual Task<TApiData> ExecuteAsync<TApiData>(
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ExecuteAsync(executeApiMethod,
+            => ((IApizrManager<TWebApi>)this).ExecuteAsync(executeApiMethod,
                 (_, api) => executeApiMethod.Compile()(api), optionsBuilder);
 
         /// <inheritdoc />
-        public Task<TApiData> ExecuteAsync<TApiData>(
+        public virtual Task<TApiData> ExecuteAsync<TApiData>(
             Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ExecuteAsync(executeApiMethod,
+            => ((IApizrManager<TWebApi>)this).ExecuteAsync(executeApiMethod,
                 (options, api) => executeApiMethod.Compile()(options, api), optionsBuilder);
 
         /// <inheritdoc />
-        public Task<TModelData> ExecuteAsync<TModelData, TApiData>(
+        public virtual Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ExecuteAsync<TModelData, TApiData>(executeApiMethod,
+            => ((IApizrManager<TWebApi>)this).ExecuteAsync<TModelData, TApiData>(executeApiMethod,
                 (_, api) => executeApiMethod.Compile()(api), optionsBuilder);
 
         /// <inheritdoc />
-        public Task<TModelData> ExecuteAsync<TModelData, TApiData>(
+        public virtual Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ExecuteAsync<TModelData, TApiData>(executeApiMethod,
+            => ((IApizrManager<TWebApi>)this).ExecuteAsync<TModelData, TApiData>(executeApiMethod,
                 (options, api) => executeApiMethod.Compile()(options, api),
                 optionsBuilder);
 
         /// <inheritdoc />
-        public Task<TModelData> ExecuteAsync<TModelData, TApiData>(
+        public virtual Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ExecuteAsync<TModelData, TApiData>(executeApiMethod,
+            => ((IApizrManager<TWebApi>)this).ExecuteAsync<TModelData, TApiData>(executeApiMethod,
                 (_, api, apiData) => executeApiMethod.Compile()(api, apiData), modelData, optionsBuilder);
 
         /// <inheritdoc />
-        public Task<TModelData> ExecuteAsync<TModelData, TApiData>(
+        public virtual Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ExecuteAsync<TModelData, TApiData>(executeApiMethod,
+            => ((IApizrManager<TWebApi>)this).ExecuteAsync<TModelData, TApiData>(executeApiMethod,
                 (options, api, apiData) => executeApiMethod.Compile()(options, api, apiData),
                 modelData,
                 optionsBuilder);
 
         /// <inheritdoc />
-        public Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-                TModelRequestData modelRequestData,
-                Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(executeApiMethod,
+        public virtual Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
+            Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            TModelRequestData modelRequestData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => ((IApizrManager<TWebApi>)this).ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(executeApiMethod,
                 (_, api, apiData) => executeApiMethod.Compile()(api, apiData), modelRequestData, optionsBuilder);
 
         /// <inheritdoc />
-        public Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-                TModelRequestData modelRequestData,
-                Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(executeApiMethod,
+        public virtual Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            TModelRequestData modelRequestData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => ((IApizrManager<TWebApi>)this).ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(executeApiMethod,
                 (options, api, apiData) => executeApiMethod.Compile()(options, api, apiData), modelRequestData,
                 optionsBuilder);
 
         #region Execution
 
-        protected virtual async Task<TApiData> ExecuteAsync<TApiData>(
+        async Task<TApiData> IApizrManager<TWebApi>.ExecuteAsync<TApiData>(
             Expression executeApiMethod,
             Func<IApizrRequestOptions, TWebApi, Task<TApiData>> executeApiFactory,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            Action<IApizrRequestOptionsBuilder> optionsBuilder)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
@@ -449,10 +450,10 @@ namespace Apizr
             return result;
         }
 
-        protected virtual async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
+        async Task<TModelData> IApizrManager<TWebApi>.ExecuteAsync<TModelData, TApiData>(
             Expression executeApiMethod,
             Func<IApizrRequestOptions, TWebApi, Task<TApiData>> executeApiFactory,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            Action<IApizrRequestOptionsBuilder> optionsBuilder)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
@@ -573,11 +574,11 @@ namespace Apizr
             return Map<TApiData, TModelData>(result);
         }
 
-        protected virtual async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
+        async Task<TModelData> IApizrManager<TWebApi>.ExecuteAsync<TModelData, TApiData>(
             Expression executeApiMethod,
             Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>> executeApiFactory,
             TModelData modelData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            Action<IApizrRequestOptionsBuilder> optionsBuilder)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
@@ -702,11 +703,11 @@ namespace Apizr
             return Map<TApiData, TModelData>(result);
         }
 
-        protected virtual async Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                Expression executeApiMethod,
-                Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>> executeApiFactory,
-                TModelRequestData modelRequestData,
-                Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        async Task<TModelResultData> IApizrManager<TWebApi>.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
+            Expression executeApiMethod,
+            Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>> executeApiFactory,
+            TModelRequestData modelRequestData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder)
         {
             var webApi = _lazyWebApi.Value;
             var methodDetails = GetMethodDetails<TApiResultData>(executeApiMethod);

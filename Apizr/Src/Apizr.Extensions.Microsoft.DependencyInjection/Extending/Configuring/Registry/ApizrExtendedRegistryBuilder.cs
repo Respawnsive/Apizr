@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Apizr.Configuring.Registry;
 using Apizr.Extending.Configuring.Common;
 using Apizr.Extending.Configuring.Proper;
 using Apizr.Mapping;
@@ -339,8 +340,8 @@ namespace Apizr.Extending.Configuring.Registry
 
         #endregion
 
-        public void AddWrappingManagerFor<TWebApi, TWrappingManagerService, TWrappingManagerImplementation>(
-            Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) where TWrappingManagerService : IApizrManager
+        void IApizrInternalExtendedRegistryBuilder<IApizrExtendedProperOptionsBuilder>.AddWrappingManagerFor<TWebApi, TWrappingManagerService, TWrappingManagerImplementation>(
+            Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
         {
             if (!Registry.ContainsManagerFor<TWebApi>())
                 AddManagerFor<TWebApi>(optionsBuilder);
@@ -349,7 +350,7 @@ namespace Apizr.Extending.Configuring.Registry
             Registry.AddOrUpdateManager(typeof(TWrappingManagerService));
         }
 
-        public void AddAliasingManagerFor<TAliasingManager, TAliasedManager>()
+        void IApizrInternalGlobalRegistryBuilder.AddAliasingManagerFor<TAliasingManager, TAliasedManager>()
         {
             Services.AddOrReplaceSingleton(typeof(TAliasingManager), serviceProvider => serviceProvider.GetRequiredService<TAliasedManager>());
             Registry.AddOrUpdateManager(typeof(TAliasingManager));

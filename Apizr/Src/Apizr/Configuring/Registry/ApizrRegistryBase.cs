@@ -44,11 +44,10 @@ namespace Apizr.Configuring.Registry
 
         /// <inheritdoc />
         public IApizrManager<TWebApi> GetManagerFor<TWebApi>()
-            => GetManagerInternal<IApizrManager<TWebApi>>();
+            => ((IApizrInternalEnumerableRegistry) this).GetManagerInternal<IApizrManager<TWebApi>>();
 
         /// <inheritdoc />
-        public TApizrManager GetManagerInternal<TApizrManager>() where TApizrManager : IApizrManager
-            => (TApizrManager)ConcurrentRegistry[typeof(TApizrManager)].Invoke();
+        TApizrManager IApizrInternalEnumerableRegistry.GetManagerInternal<TApizrManager>() => (TApizrManager)ConcurrentRegistry[typeof(TApizrManager)].Invoke();
 
         #endregion
 
@@ -73,10 +72,10 @@ namespace Apizr.Configuring.Registry
 
         /// <inheritdoc />
         public bool TryGetManagerFor<TWebApi>(out IApizrManager<TWebApi> manager)
-            => TryGetManagerInternal(out manager);
+            => ((IApizrInternalEnumerableRegistry) this).TryGetManagerInternal(out manager);
 
         /// <inheritdoc />
-        public bool TryGetManagerInternal<TApizrManager>(out TApizrManager manager) where TApizrManager : IApizrManager
+        bool IApizrInternalEnumerableRegistry.TryGetManagerInternal<TApizrManager>(out TApizrManager manager)
         {
             if (!ConcurrentRegistry.TryGetValue(typeof(TApizrManager), out var managerFactory))
             {
@@ -113,11 +112,10 @@ namespace Apizr.Configuring.Registry
 
         /// <inheritdoc />
         public bool ContainsManagerFor<TWebApi>()
-            => ContainsManagerInternal<IApizrManager<TWebApi>>();
+            => ((IApizrInternalEnumerableRegistry) this).ContainsManagerInternal<IApizrManager<TWebApi>>();
 
         /// <inheritdoc />
-        public bool ContainsManagerInternal<TApizrManager>() where TApizrManager : IApizrManager
-            => ConcurrentRegistry.ContainsKey(typeof(TApizrManager)); 
+        bool IApizrInternalEnumerableRegistry.ContainsManagerInternal<TApizrManager>() => ConcurrentRegistry.ContainsKey(typeof(TApizrManager)); 
 
         #endregion
     }

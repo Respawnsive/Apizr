@@ -136,9 +136,9 @@ namespace Apizr.Configuring.Registry
         #region Internal
 
         /// <inheritdoc />
-        public void AddWrappingManagerFor<TWebApi, TWrappingManager>(
+        void IApizrInternalRegistryBuilder<IApizrProperOptionsBuilder>.AddWrappingManagerFor<TWebApi, TWrappingManager>(
             Func<IApizrManager<TWebApi>, TWrappingManager> wrappingManagerFactory,
-            Action<IApizrProperOptionsBuilder> optionsBuilder = null) where TWrappingManager : IApizrManager
+            Action<IApizrProperOptionsBuilder> optionsBuilder = null)
         {
             AddManagerFor<TWebApi>(optionsBuilder);
             var managerFactory = new Func<IApizrManager>(() => wrappingManagerFactory.Invoke(Registry.GetManagerFor<TWebApi>()));
@@ -147,7 +147,7 @@ namespace Apizr.Configuring.Registry
         }
 
         /// <inheritdoc />
-        public void AddAliasingManagerFor<TAliasingManager, TAliasedManager>() =>
+        void IApizrInternalGlobalRegistryBuilder.AddAliasingManagerFor<TAliasingManager, TAliasedManager>() =>
             Registry.AddOrUpdateManager(typeof(TAliasingManager),
                 () => Registry.ConcurrentRegistry[typeof(TAliasedManager)].Invoke());
 

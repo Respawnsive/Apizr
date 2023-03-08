@@ -425,7 +425,7 @@ namespace Apizr.Extending
         public static Task<TApiData> ExecuteAsync<TWebApi, TApiData>(this IApizrManager<TWebApi> manager,
             Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null,
             bool clearCache = false, Action<Exception> onException = null)
-            => manager.ExecuteAsync<TApiData>(
+            => manager.ExecuteAsync<TApiData>(executeApiMethod,
                 (options, api) => executeApiMethod.Compile()(options.Context, api),
                 options => options.WithContext(context).WithCacheClearing(clearCache)
                     .WithExCatching(onException));

@@ -149,7 +149,7 @@ namespace Apizr.Optional.Requesting.Sending
         #region Internal
 
         /// <inheritdoc />
-        public Task<TResponse> Send<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default)
+        Task<TResponse> IApizrInternalMediator.Send<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default)
             => _mediator.Send(request, cancellationToken); 
 
         #endregion

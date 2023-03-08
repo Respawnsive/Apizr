@@ -129,5 +129,5 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
         return this;
     }
     
-    public void SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);
+    void IApizrInternalOptionsBuilder.SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);
 }

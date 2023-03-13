@@ -212,7 +212,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Calling_WithAutoMapperMappingHandler_Should_Map_Data()
+        public async Task Calling_Classic_WithAutoMapperMappingHandler_Should_Map_Data()
         {
             var mapperConfig = new MapperConfiguration(config =>
             {
@@ -230,6 +230,31 @@ namespace Apizr.Tests
             var result =
                 await reqResManager.ExecuteAsync<MinUser, User>(
                     (api, user) => api.CreateUser(user, CancellationToken.None), minUser);
+
+            result.Should().NotBeNull();
+            result.Name.Should().Be(minUser.Name);
+            result.Id.Should().BeGreaterThanOrEqualTo(1);
+        }
+
+        [Fact]
+        public async Task Calling_Crud_WithAutoMapperMappingHandler_Should_Map_Data()
+        {
+            var mapperConfig = new MapperConfiguration(config =>
+            {
+                config.AddProfile<UserDetailsUserInfosProfile>();
+                config.AddProfile<UserMinUserProfile>();
+            });
+
+            var userManager = ApizrBuilder.Current.CreateCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(options => options
+                .WithRefitSettings(_refitSettings)
+                .WithAutoMapperMappingHandler(mapperConfig));
+
+            var minUser = new MinUser { Name = "John" };
+
+            // This one should succeed
+            var result =
+                await userManager.ExecuteAsync<MinUser, User>(
+                    (api, user) => api.Create(user), minUser);
 
             result.Should().NotBeNull();
             result.Name.Should().Be(minUser.Name);

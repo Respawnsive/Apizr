@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Apizr.Caching;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Manager;
@@ -52,7 +53,7 @@ namespace Apizr.Configuring.Registry
 
         /// <inheritdoc />
         public IApizrRegistryBuilder AddCrudManagerFor<T>(Action<IApizrProperOptionsBuilder> optionsBuilder = null) where T : class =>
-            AddManagerFor<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>,
+            AddCrudManagerFor<T, int, IEnumerable<T>, IDictionary<string, object>,
                 ApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>>(
                 (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>(lazyWebApi,
@@ -62,7 +63,7 @@ namespace Apizr.Configuring.Registry
         /// <inheritdoc />
         public IApizrRegistryBuilder AddCrudManagerFor<T, TKey>(
             Action<IApizrProperOptionsBuilder> properOptionsBuilder = null) where T : class =>
-            AddManagerFor<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>,
+            AddCrudManagerFor<T, TKey, IEnumerable<T>, IDictionary<string, object>,
                 ApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>>>(
                 (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>>(lazyWebApi,
@@ -74,7 +75,7 @@ namespace Apizr.Configuring.Registry
             TReadAllResult>(
             Action<IApizrProperOptionsBuilder> properOptionsBuilder = null)
             where T : class =>
-            AddManagerFor<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>,
+            AddCrudManagerFor<T, TKey, TReadAllResult, IDictionary<string, object>,
                 ApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>>>(
                 (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>>(lazyWebApi,
@@ -87,7 +88,7 @@ namespace Apizr.Configuring.Registry
             TReadAllParams>(
             Action<IApizrProperOptionsBuilder> properOptionsBuilder = null)
             where T : class =>
-            AddManagerFor<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>,
+            AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams,
                 ApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>>(
                 (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>(lazyWebApi,
@@ -98,13 +99,25 @@ namespace Apizr.Configuring.Registry
         /// <inheritdoc />
         public IApizrRegistryBuilder AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(
             Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler,
-                IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrManagerOptionsBase,
+                IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>,
                 TApizrManager> apizrManagerFactory,
             Action<IApizrProperOptionsBuilder> properOptionsBuilder = null)
             where T : class
-            where TReadAllParams : class
-            where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> =>
-            AddManagerFor(apizrManagerFactory, properOptionsBuilder);
+            where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>
+        {
+            var crudedType = typeof(T);
+
+            var crudAttribute = crudedType.GetCustomAttribute<CrudEntityAttribute>();
+            if (crudAttribute != null)
+            {
+                if (properOptionsBuilder == null)
+                    properOptionsBuilder = builder => builder.WithBaseAddress(crudAttribute.BaseUri);
+                else
+                    properOptionsBuilder += builder => builder.WithBaseAddress(crudAttribute.BaseUri);
+            }
+
+            return AddManagerFor(apizrManagerFactory, properOptionsBuilder);
+        }
 
         #endregion
 

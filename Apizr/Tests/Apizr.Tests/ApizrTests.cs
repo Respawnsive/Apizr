@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text.Json;
@@ -44,12 +45,12 @@ namespace Apizr.Tests
         {
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>();
             var httpBinManager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>();
-            //var userManager = ApizrBuilder.Current.CreateCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>();
+            var userManager = ApizrBuilder.Current.CreateCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>();
             var transferManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferSampleApi>();
 
             reqResManager.Should().NotBeNull();
             httpBinManager.Should().NotBeNull();
-            //userManager.Should().NotBeNull();
+            userManager.Should().NotBeNull();
             transferManager.Should().NotBeNull();
         }
 

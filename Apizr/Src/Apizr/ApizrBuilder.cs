@@ -51,59 +51,72 @@ namespace Apizr
         /// <inheritdoc/>
         public IApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>> CreateCrudManagerFor<T>(
             Action<IApizrManagerOptionsBuilder> optionsBuilder = null) where T : class =>
-            CreateManagerFor<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>,
+            CreateCrudManagerFor<T, int, IEnumerable<T>, IDictionary<string, object>,
                 ApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>>(
                 (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>(lazyWebApi,
                         connectivityHandler, cacheHandler, mappingHandler,
-                        policyRegistry, apizrOptions), CreateCommonOptions(), optionsBuilder);
+                        policyRegistry, apizrOptions), optionsBuilder);
 
         /// <inheritdoc/>
         public IApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>> CreateCrudManagerFor<T, TKey>(
             Action<IApizrManagerOptionsBuilder> optionsBuilder = null) where T : class =>
-            CreateManagerFor<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>,
+            CreateCrudManagerFor<T, TKey, IEnumerable<T>, IDictionary<string, object>,
                 ApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>>>(
                 (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>>(lazyWebApi,
                         connectivityHandler, cacheHandler, mappingHandler,
-                        policyRegistry, apizrOptions), CreateCommonOptions(), optionsBuilder);
+                        policyRegistry, apizrOptions), optionsBuilder);
 
         /// <inheritdoc/>
         public IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>> CreateCrudManagerFor<T, TKey,
             TReadAllResult>(
             Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
             where T : class =>
-            CreateManagerFor<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>,
+            CreateCrudManagerFor<T, TKey, TReadAllResult, IDictionary<string, object>,
                 ApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>>>(
                 (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>>(lazyWebApi,
                         connectivityHandler,
                         cacheHandler, mappingHandler,
-                        policyRegistry, apizrOptions), CreateCommonOptions(), optionsBuilder);
+                        policyRegistry, apizrOptions), optionsBuilder);
 
         /// <inheritdoc/>
         public IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> CreateCrudManagerFor<T, TKey, TReadAllResult,
             TReadAllParams>(
             Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
             where T : class where TReadAllParams : class =>
-            CreateManagerFor<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>,
+            CreateCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams,
                 ApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>>(
                 (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>(lazyWebApi,
                         connectivityHandler,
                         cacheHandler, mappingHandler,
-                        policyRegistry, apizrOptions), CreateCommonOptions(), optionsBuilder);
+                        policyRegistry, apizrOptions), optionsBuilder);
 
         /// <inheritdoc/>
         public TApizrManager CreateCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(
             Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler,
-                IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrManagerOptionsBase,
+                IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>,
                 TApizrManager> apizrManagerFactory,
             Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
             where T : class
             where TReadAllParams : class
-            where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> =>
-            CreateManagerFor(apizrManagerFactory, CreateCommonOptions(), optionsBuilder);
+            where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>
+        {
+            var crudedType = typeof(T);
+
+            var crudAttribute = crudedType.GetCustomAttribute<CrudEntityAttribute>();
+            if (crudAttribute != null)
+            {
+                if (optionsBuilder == null)
+                    optionsBuilder = builder => builder.WithBaseAddress(crudAttribute.BaseUri);
+                else
+                    optionsBuilder += builder => builder.WithBaseAddress(crudAttribute.BaseUri);
+            }
+
+            return CreateManagerFor(apizrManagerFactory, CreateCommonOptions(), optionsBuilder);
+        }
 
         #endregion
 

@@ -28,6 +28,8 @@ namespace Apizr.Configuring.Shared
         /// <returns></returns>
         TApizrOptionsBuilder WithBaseAddress(string baseAddress);
 
+        internal TApizrOptionsBuilder WithBaseAddress(string baseAddress, ApizrDuplicateStrategy strategy);
+
         /// <summary>
         /// Define your web api base address (could be defined with WebApiAttribute)
         /// </summary>

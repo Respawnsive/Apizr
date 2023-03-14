@@ -85,7 +85,7 @@ namespace Apizr
         public IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> CreateCrudManagerFor<T, TKey, TReadAllResult,
             TReadAllParams>(
             Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
-            where T : class where TReadAllParams : class =>
+            where T : class =>
             CreateCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams,
                 ApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>>(
                 (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, policyRegistry, apizrOptions) =>
@@ -101,7 +101,6 @@ namespace Apizr
                 TApizrManager> apizrManagerFactory,
             Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
             where T : class
-            where TReadAllParams : class
             where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>
         {
             var crudedType = typeof(T);
@@ -112,7 +111,7 @@ namespace Apizr
                 if (optionsBuilder == null)
                     optionsBuilder = builder => builder.WithBaseAddress(crudAttribute.BaseUri);
                 else
-                    optionsBuilder += builder => builder.WithBaseAddress(crudAttribute.BaseUri);
+                    optionsBuilder += builder => builder.WithBaseAddress(crudAttribute.BaseUri, ApizrDuplicateStrategy.Ignore);
             }
 
             return CreateManagerFor(apizrManagerFactory, CreateCommonOptions(), optionsBuilder);

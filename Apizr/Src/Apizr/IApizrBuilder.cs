@@ -86,7 +86,7 @@ public interface IApizrBuilder
     IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> CreateCrudManagerFor<T, TKey, TReadAllResult,
         TReadAllParams>(
         Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
-        where T : class where TReadAllParams : class;
+        where T : class;
 
     /// <summary>
     /// Create a <typeparamref name="TApizrManager"/> instance for a managed crud api for <typeparamref name="T"/> object (class), 
@@ -108,7 +108,6 @@ public interface IApizrBuilder
             TApizrManager> apizrManagerFactory,
         Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
         where T : class
-        where TReadAllParams : class
         where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>;
 
     #endregion

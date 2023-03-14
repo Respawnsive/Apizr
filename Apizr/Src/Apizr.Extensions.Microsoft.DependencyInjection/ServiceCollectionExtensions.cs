@@ -238,7 +238,7 @@ namespace Apizr
                 if (optionsBuilder == null)
                     optionsBuilder = builder => builder.WithBaseAddress(crudAttribute.BaseUri);
                 else
-                    optionsBuilder += builder => builder.WithBaseAddress(crudAttribute.BaseUri);
+                    optionsBuilder += builder => builder.WithBaseAddress(crudAttribute.BaseUri, ApizrDuplicateStrategy.Ignore);
             }
 
             Type modelEntityType = null;
@@ -418,7 +418,7 @@ namespace Apizr
                 if (optionsBuilder == null)
                     optionsBuilder = builder => builder.WithBaseAddress(crud.Value.BaseUri);
                 else
-                    optionsBuilder += builder => builder.WithBaseAddress(crud.Value.BaseUri);
+                    optionsBuilder += builder => builder.WithBaseAddress(crud.Value.BaseUri, ApizrDuplicateStrategy.Ignore);
 
                 var readAllResultType = crud.Value.ReadAllResultType.MakeGenericTypeIfNeeded(crud.Key);
 

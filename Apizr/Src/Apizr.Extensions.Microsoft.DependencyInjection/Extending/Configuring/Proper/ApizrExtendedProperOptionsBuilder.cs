@@ -34,6 +34,24 @@ namespace Apizr.Extending.Configuring.Proper
             => WithBaseAddress(_ => baseAddress);
 
         /// <inheritdoc />
+        IApizrExtendedProperOptionsBuilder
+            IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrExtendedProperOptions,
+                IApizrExtendedProperOptionsBuilder>.WithBaseAddress(string baseAddress, ApizrDuplicateStrategy strategy)
+        {
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.BaseAddressFactory ??= _ => baseAddress;
+                    break;
+                default:
+                    Options.BaseAddressFactory = _ => baseAddress;
+                    break;
+            }
+
+            return this;
+        }
+
+        /// <inheritdoc />
         public IApizrExtendedProperOptionsBuilder WithBaseAddress(Uri baseAddress)
             => WithBaseAddress(_ => baseAddress);
 

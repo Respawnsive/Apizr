@@ -113,7 +113,7 @@ namespace Apizr.Configuring.Registry
                 if (properOptionsBuilder == null)
                     properOptionsBuilder = builder => builder.WithBaseAddress(crudAttribute.BaseUri);
                 else
-                    properOptionsBuilder += builder => builder.WithBaseAddress(crudAttribute.BaseUri);
+                    properOptionsBuilder += builder => builder.WithBaseAddress(crudAttribute.BaseUri, ApizrDuplicateStrategy.Ignore);
             }
 
             return AddManagerFor(apizrManagerFactory, properOptionsBuilder);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Apizr.Configuring;
 using Apizr.Configuring.Registry;
 using Apizr.Extending.Configuring.Common;
 using Apizr.Extending.Configuring.Proper;
@@ -115,7 +116,7 @@ namespace Apizr.Extending.Configuring.Registry
                 if (optionsBuilder == null)
                     optionsBuilder = builder => builder.WithBaseAddress(crudAttribute.BaseUri);
                 else
-                    optionsBuilder += builder => builder.WithBaseAddress(crudAttribute.BaseUri);
+                    optionsBuilder += builder => builder.WithBaseAddress(crudAttribute.BaseUri, ApizrDuplicateStrategy.Ignore);
             }
 
             Type modelEntityType;
@@ -174,12 +175,12 @@ namespace Apizr.Extending.Configuring.Registry
                 assemblies);
 
         /// <inheritdoc />
-        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes) =>
+        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder, params Type[] assemblyMarkerTypes) =>
             AddCrudManagerFor(typeof(ApizrManager<>), optionsBuilder,
                 assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
 
         /// <inheritdoc />
-        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies) =>
+        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder, params Assembly[] assemblies) =>
             AddCrudManagerFor(typeof(ApizrManager<>), optionsBuilder,
                 assemblies);
 
@@ -244,7 +245,7 @@ namespace Apizr.Extending.Configuring.Registry
                 if (optionsBuilder == null)
                     optionsBuilder = builder => builder.WithBaseAddress(crud.Value.BaseUri);
                 else
-                    optionsBuilder += builder => builder.WithBaseAddress(crud.Value.BaseUri);
+                    optionsBuilder += builder => builder.WithBaseAddress(crud.Value.BaseUri, ApizrDuplicateStrategy.Ignore);
 
                 var readAllResultType = crud.Value.ReadAllResultType.MakeGenericTypeIfNeeded(crud.Key);
 

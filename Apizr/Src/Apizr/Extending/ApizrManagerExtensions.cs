@@ -22,7 +22,7 @@ namespace Apizr.Extending
         [Obsolete("Use the one with the request options builder parameter instead")]
         public static Task ExecuteAsync<TWebApi>(this IApizrManager<TWebApi> manager, Expression<Func<TWebApi, Task>> executeApiMethod,
             Action<Exception> onException)
-            => manager.ExecuteAsync(api => executeApiMethod.Compile()(api),
+            => manager.ExecuteAsync(executeApiMethod, (_, api) => executeApiMethod.Compile()(api),
                 options => options.WithExCatching(onException));
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Apizr.Extending
         public static Task ExecuteAsync<TWebApi, TModelData, TApiData>(this IApizrManager<TWebApi> manager, Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
             TModelData modelData, Action<Exception> onException)
             => manager.ExecuteAsync<TModelData, TApiData>(
-                (api, apiData) =>
+                executeApiMethod, (_, api, apiData) =>
                     executeApiMethod.Compile()(api, apiData), modelData,
                 options => options.WithExCatching(onException));
 
@@ -54,7 +54,7 @@ namespace Apizr.Extending
         [Obsolete("Use the one with the request options builder parameter instead")]
         public static Task ExecuteAsync<TWebApi>(this IApizrManager<TWebApi> manager, Expression<Func<CancellationToken, TWebApi, Task>> executeApiMethod,
             CancellationToken cancellationToken = default, Action<Exception> onException = null)
-            => manager.ExecuteAsync(
+            => manager.ExecuteAsync(executeApiMethod,
                 (options, api) =>
                     executeApiMethod.Compile()(options.CancellationToken, api),
                 options => options.WithCancellation(cancellationToken)
@@ -71,7 +71,7 @@ namespace Apizr.Extending
         [Obsolete("Use the one with the request options builder parameter instead")]
         public static Task ExecuteAsync<TWebApi>(this IApizrManager<TWebApi> manager, Expression<Func<Context, TWebApi, Task>> executeApiMethod,
             Context context = null, Action<Exception> onException = null)
-            => manager.ExecuteAsync(
+            => manager.ExecuteAsync(executeApiMethod,
                 (options, api) =>
                     executeApiMethod.Compile()(options.Context, api),
                 options => options.WithContext(context)
@@ -92,7 +92,7 @@ namespace Apizr.Extending
         public static Task ExecuteAsync<TWebApi, TModelData, TApiData>(this IApizrManager<TWebApi> manager,
             Expression<Func<CancellationToken, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData,
             CancellationToken cancellationToken = default, Action<Exception> onException = null)
-            => manager.ExecuteAsync<TModelData, TApiData>(
+            => manager.ExecuteAsync<TModelData, TApiData>(executeApiMethod,
                 (options, api, apiData) =>
                     executeApiMethod.Compile()(options.CancellationToken, api, apiData), modelData,
                 options => options.WithCancellation(cancellationToken)
@@ -113,7 +113,7 @@ namespace Apizr.Extending
         public static Task ExecuteAsync<TWebApi, TModelData, TApiData>(this IApizrManager<TWebApi> manager,
             Expression<Func<Context, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData,
             Context context = null, Action<Exception> onException = null)
-            => manager.ExecuteAsync<TModelData, TApiData>(
+            => manager.ExecuteAsync<TModelData, TApiData>(executeApiMethod,
                 (options, api, apiData) =>
                     executeApiMethod.Compile()(options.Context, api, apiData), modelData,
                 options => options.WithContext(context)
@@ -131,7 +131,7 @@ namespace Apizr.Extending
         [Obsolete("Use the one with the request options builder parameter instead")]
         public static Task ExecuteAsync<TWebApi>(this IApizrManager<TWebApi> manager, Expression<Func<Context, CancellationToken, TWebApi, Task>> executeApiMethod,
             Context context = null, CancellationToken cancellationToken = default, Action<Exception> onException = null)
-            => manager.ExecuteAsync(
+            => manager.ExecuteAsync(executeApiMethod,
                 (options, api) =>
                     executeApiMethod.Compile()(options.Context, options.CancellationToken, api),
                 options => options.WithContext(context)
@@ -155,7 +155,7 @@ namespace Apizr.Extending
             Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task>> executeApiMethod,
             TModelData modelData, Context context = null,
             CancellationToken cancellationToken = default, Action<Exception> onException = null)
-            => manager.ExecuteAsync<TModelData, TApiData>(
+            => manager.ExecuteAsync<TModelData, TApiData>(executeApiMethod,
                 (options, api, apiData) =>
                     executeApiMethod.Compile()(options.Context, options.CancellationToken, api, apiData), modelData,
                 options => options.WithContext(context)
@@ -178,7 +178,7 @@ namespace Apizr.Extending
         [Obsolete("Use the one with the request options builder parameter instead")]
         public static Task<TApiData> ExecuteAsync<TWebApi, TApiData>(this IApizrManager<TWebApi> manager,
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache)
-            => manager.ExecuteAsync<TApiData>(api => executeApiMethod.Compile()(api),
+            => manager.ExecuteAsync<TApiData>(executeApiMethod,(_, api) => executeApiMethod.Compile()(api),
                 options => options.WithCacheClearing(clearCache));
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace Apizr.Extending
         [Obsolete("Use the one with the request options builder parameter instead")]
         public static Task<TApiData> ExecuteAsync<TWebApi, TApiData>(this IApizrManager<TWebApi> manager, 
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<Exception> onException)
-            => manager.ExecuteAsync<TApiData>(api => executeApiMethod.Compile()(api),
+            => manager.ExecuteAsync<TApiData>(executeApiMethod, (_, api) => executeApiMethod.Compile()(api),
                 options => options.WithExCatching(onException));
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace Apizr.Extending
         public static Task<TApiData> ExecuteAsync<TWebApi, TApiData>(this IApizrManager<TWebApi> manager,
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
             bool clearCache, Action<Exception> onException)
-            => manager.ExecuteAsync<TApiData>(api => executeApiMethod.Compile()(api),
+            => manager.ExecuteAsync<TApiData>(executeApiMethod, (_, api) => executeApiMethod.Compile()(api),
                 options => options.WithCacheClearing(clearCache).WithExCatching(onException));
 
         /// <summary>
@@ -232,7 +232,7 @@ namespace Apizr.Extending
             Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
             TModelRequestData modelRequestData, bool clearCache)
             => manager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                (api, apiData) => executeApiMethod.Compile()(api, apiData), modelRequestData,
+                executeApiMethod, (_, api, apiData) => executeApiMethod.Compile()(api, apiData), modelRequestData,
                 options => options.WithCacheClearing(clearCache));
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace Apizr.Extending
             Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
             TModelRequestData modelRequestData, Action<Exception> onException)
             => manager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                (api, apiData) => executeApiMethod.Compile()(api, apiData), modelRequestData,
+                executeApiMethod, (_, api, apiData) => executeApiMethod.Compile()(api, apiData), modelRequestData,
                 options => options.WithExCatching(onException));
 
         /// <summary>
@@ -277,7 +277,7 @@ namespace Apizr.Extending
             Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
             TModelRequestData modelRequestData, bool clearCache, Action<Exception> onException)
             => manager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-                (api, apiData) => executeApiMethod.Compile()(api, apiData), modelRequestData,
+                executeApiMethod, (_, api, apiData) => executeApiMethod.Compile()(api, apiData), modelRequestData,
                 options => options.WithCacheClearing(clearCache).WithExCatching(onException));
 
         /// <summary>
@@ -295,7 +295,7 @@ namespace Apizr.Extending
         public static Task<TModelData> ExecuteAsync<TWebApi, TModelData, TApiData>(this IApizrManager<TWebApi> manager,
             Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, bool clearCache)
             => manager.ExecuteAsync<TModelData, TApiData>(
-                (api, apiData) => executeApiMethod.Compile()(api, apiData), modelData,
+                executeApiMethod, (_, api, apiData) => executeApiMethod.Compile()(api, apiData), modelData,
                 options => options.WithCacheClearing(clearCache));
 
         /// <summary>
@@ -313,7 +313,7 @@ namespace Apizr.Extending
         public static Task<TModelData> ExecuteAsync<TWebApi, TModelData, TApiData>(this IApizrManager<TWebApi> manager, 
             Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<Exception> onException)
             => manager.ExecuteAsync<TModelData, TApiData>(
-                (api, apiData) => executeApiMethod.Compile()(api, apiData), modelData,
+                executeApiMethod, (_, api, apiData) => executeApiMethod.Compile()(api, apiData), modelData,
                 options => options.WithExCatching(onException));
 
         /// <summary>
@@ -333,7 +333,7 @@ namespace Apizr.Extending
             Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
             bool clearCache, Action<Exception> onException)
             => manager.ExecuteAsync<TModelData, TApiData>(
-                (api, apiData) => executeApiMethod.Compile()(api, apiData), modelData,
+                executeApiMethod, (_, api, apiData) => executeApiMethod.Compile()(api, apiData), modelData,
                 options => options.WithCacheClearing(clearCache).WithExCatching(onException));
 
         /// <summary>
@@ -350,7 +350,7 @@ namespace Apizr.Extending
         public static Task<TModelData> ExecuteAsync<TWebApi, TModelData, TApiData>(this IApizrManager<TWebApi> manager,
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache)
             => manager.ExecuteAsync<TModelData, TApiData>(
-                api => executeApiMethod.Compile()(api),
+                executeApiMethod, (_, api) => executeApiMethod.Compile()(api),
                 options => options.WithCacheClearing(clearCache));
 
         /// <summary>
@@ -367,7 +367,7 @@ namespace Apizr.Extending
         public static Task<TModelData> ExecuteAsync<TWebApi, TModelData, TApiData>(this IApizrManager<TWebApi> manager,
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<Exception> onException)
             => manager.ExecuteAsync<TModelData, TApiData>(
-                api => executeApiMethod.Compile()(api),
+                executeApiMethod, (_, api) => executeApiMethod.Compile()(api),
                 options => options.WithExCatching(onException));
 
         /// <summary>
@@ -386,7 +386,7 @@ namespace Apizr.Extending
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, bool clearCache,
             Action<Exception> onException)
             => manager.ExecuteAsync<TModelData, TApiData>(
-                api => executeApiMethod.Compile()(api),
+                executeApiMethod, (_, api) => executeApiMethod.Compile()(api),
                 options => options.WithCacheClearing(clearCache).WithExCatching(onException));
 
         /// <summary>
@@ -405,7 +405,7 @@ namespace Apizr.Extending
             Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
             CancellationToken cancellationToken = default, bool clearCache = false,
             Action<Exception> onException = null)
-            => manager.ExecuteAsync<TApiData>(
+            => manager.ExecuteAsync<TApiData>(executeApiMethod,
                 (options, api) => executeApiMethod.Compile()(options.CancellationToken, api),
                 options => options.WithCancellation(cancellationToken).WithCacheClearing(clearCache)
                     .WithExCatching(onException));
@@ -452,7 +452,7 @@ namespace Apizr.Extending
             TModelRequestData modelRequestData, CancellationToken cancellationToken = default, bool clearCache = false,
             Action<Exception> onException = null)
             => manager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
-                TModelRequestData>(
+                TModelRequestData>(executeApiMethod,
                 (options, api, apiData) => executeApiMethod.Compile()(options.CancellationToken, api, apiData),
                 modelRequestData,
                 options => options.WithCancellation(cancellationToken).WithCacheClearing(clearCache)
@@ -477,7 +477,7 @@ namespace Apizr.Extending
             TModelData modelData,
             CancellationToken cancellationToken = default, bool clearCache = false,
             Action<Exception> onException = null)
-            => manager.ExecuteAsync<TModelData, TApiData>(
+            => manager.ExecuteAsync<TModelData, TApiData>(executeApiMethod,
                 (options, api, apiData) => executeApiMethod.Compile()(options.CancellationToken, api, apiData),
                 modelData,
                 options => options.WithCancellation(cancellationToken).WithCacheClearing(clearCache)
@@ -499,7 +499,7 @@ namespace Apizr.Extending
         public static Task<TModelData> ExecuteAsync<TWebApi, TModelData, TApiData>(this IApizrManager<TWebApi> manager,
             Expression<Func<CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
             CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null)
-            => manager.ExecuteAsync<TModelData, TApiData>(
+            => manager.ExecuteAsync<TModelData, TApiData>(executeApiMethod,
                 (options, api) => executeApiMethod.Compile()(options.CancellationToken, api),
                 options => options.WithCancellation(cancellationToken).WithCacheClearing(clearCache)
                     .WithExCatching(onException));
@@ -526,7 +526,7 @@ namespace Apizr.Extending
             TModelRequestData modelRequestData, Context context = null, bool clearCache = false,
             Action<Exception> onException = null)
             => manager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
-                TModelRequestData>(
+                TModelRequestData>(executeApiMethod,
                 (options, api, apiData) => executeApiMethod.Compile()(options.Context, api, apiData),
                 modelRequestData,
                 options => options.WithContext(context).WithCacheClearing(clearCache)
@@ -549,7 +549,7 @@ namespace Apizr.Extending
         public static Task<TModelData> ExecuteAsync<TWebApi, TModelData, TApiData>(this IApizrManager<TWebApi> manager,
             Expression<Func<Context, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
             Context context = null, bool clearCache = false, Action<Exception> onException = null)
-            => manager.ExecuteAsync<TModelData, TApiData>(
+            => manager.ExecuteAsync<TModelData, TApiData>(executeApiMethod,
                 (options, api, apiData) => executeApiMethod.Compile()(options.Context, api, apiData), modelData,
                 options => options.WithContext(context).WithCacheClearing(clearCache)
                     .WithExCatching(onException));
@@ -570,7 +570,7 @@ namespace Apizr.Extending
         public static Task<TModelData> ExecuteAsync<TWebApi, TModelData, TApiData>(this IApizrManager<TWebApi> manager,
             Expression<Func<Context, TWebApi, Task<TApiData>>> executeApiMethod, Context context = null,
             bool clearCache = false, Action<Exception> onException = null)
-            => manager.ExecuteAsync<TModelData, TApiData>(
+            => manager.ExecuteAsync<TModelData, TApiData>(executeApiMethod,
                 (options, api) => executeApiMethod.Compile()(options.Context, api),
                 options => options.WithContext(context).WithCacheClearing(clearCache)
                     .WithExCatching(onException));
@@ -592,7 +592,7 @@ namespace Apizr.Extending
             Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
             Context context = null, CancellationToken cancellationToken = default, bool clearCache = false,
             Action<Exception> onException = null)
-            => manager.ExecuteAsync<TApiData>(
+            => manager.ExecuteAsync<TApiData>(executeApiMethod,
                 (options, api) => executeApiMethod.Compile()(options.Context, options.CancellationToken, api),
                 options => options.WithContext(context).WithCancellation(cancellationToken)
                     .WithCacheClearing(clearCache)
@@ -623,7 +623,7 @@ namespace Apizr.Extending
             CancellationToken cancellationToken = default, bool clearCache = false,
             Action<Exception> onException = null)
             => manager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
-                TModelRequestData>(
+                TModelRequestData>(executeApiMethod,
                 (options, api, apiData) =>
                     executeApiMethod.Compile()(options.Context, options.CancellationToken, api, apiData),
                 modelRequestData,
@@ -651,7 +651,7 @@ namespace Apizr.Extending
             TModelData modelData, Context context = null,
             CancellationToken cancellationToken = default, bool clearCache = false,
             Action<Exception> onException = null)
-            => manager.ExecuteAsync<TModelData, TApiData>(
+            => manager.ExecuteAsync<TModelData, TApiData>(executeApiMethod,
                 (options, api, apiData) =>
                     executeApiMethod.Compile()(options.Context, options.CancellationToken, api, apiData), modelData,
                 options => options.WithContext(context).WithCacheClearing(clearCache)
@@ -675,7 +675,7 @@ namespace Apizr.Extending
             Expression<Func<Context, CancellationToken, TWebApi, Task<TApiData>>> executeApiMethod,
             Context context = null,
             CancellationToken cancellationToken = default, bool clearCache = false, Action<Exception> onException = null) =>
-            manager.ExecuteAsync<TModelData, TApiData>(
+            manager.ExecuteAsync<TModelData, TApiData>(executeApiMethod,
                 (options, api) => executeApiMethod.Compile()(options.Context, options.CancellationToken, api),
                 options => options.WithContext(context)
                     .WithCancellation(cancellationToken)

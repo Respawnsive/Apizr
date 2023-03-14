@@ -44,8 +44,7 @@ public interface ICrudApi<T, in TKey, TReadAllResult, in TReadAllParams> where T
 }
 ```
 
-We can see that it comes with many parameter combinations, but it won't do anything until you ask Apizr to. 
-Caching, Logging, Policing, Prioritizing... everything is activable fluently with the options builder.
+We can see that it comes with or without request options builder.
 
 About generic types:
 - T and TKey (optional - default: ```int```) meanings are obvious

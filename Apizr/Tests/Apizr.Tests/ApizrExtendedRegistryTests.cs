@@ -414,7 +414,7 @@ namespace Apizr.Tests
             var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
 
             // Defining a throwing request
-            Func<bool, Action<Exception>, Task<ApiResult<User>>> act = (clearCache, onException) => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.BadRequest), clearCache, onException);
+            Func<bool, Action<Exception>, Task<ApiResult<User>>> act = (clearCache, onException) => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.BadRequest), options => options.WithCacheClearing(clearCache).WithExCatching(onException));
 
             // Calling it at first execution should throw as expected without any cached result
             var ex = await act.Invoking(x => x.Invoke(false, null)).Should().ThrowAsync<ApizrException<ApiResult<User>>>();

@@ -40,7 +40,7 @@ namespace Apizr.Authenticating
             _refreshToken = refreshToken ?? throw new ArgumentNullException(nameof(refreshToken));
         }
 
-        public override string GetToken() => _settingsTokenProperty.Compile()(_settingsServiceFactory.Invoke());
+        public override string GetToken() => _settingsTokenProperty.Compile().Invoke(_settingsServiceFactory.Invoke());
 
         public override void SetToken(string token)
         {
@@ -73,7 +73,7 @@ namespace Apizr.Authenticating
             _refreshTokenMethod = refreshTokenMethod ?? throw new ArgumentNullException(nameof(refreshTokenMethod));
         }
 
-        public override string GetToken() => _settingsTokenProperty.Compile()(_settingsServiceFactory.Invoke());
+        public override string GetToken() => _settingsTokenProperty.Compile().Invoke(_settingsServiceFactory.Invoke());
 
         public override void SetToken(string token)
         {
@@ -86,6 +86,6 @@ namespace Apizr.Authenticating
             }
         }
 
-        public override Task<string> RefreshTokenAsync(HttpRequestMessage request) => _refreshTokenMethod.Compile()(_tokenServiceFactory.Invoke(), request);
+        public override Task<string> RefreshTokenAsync(HttpRequestMessage request) => _refreshTokenMethod.Compile().Invoke(_tokenServiceFactory.Invoke(), request);
     }
 }

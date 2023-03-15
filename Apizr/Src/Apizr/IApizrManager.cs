@@ -83,21 +83,6 @@ namespace Apizr
             TModelData modelData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
-        #region Execution
-
-        internal Task ExecuteAsync(
-            Expression executeApiMethod,
-            Func<IApizrRequestOptions, TWebApi, Task> executeApiFactory,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
-
-        internal Task ExecuteAsync<TModelData, TApiData>(
-            Expression executeApiMethod,
-            Func<IApizrRequestOptions, TWebApi, TApiData, Task> executeApiFactory,
-            TModelData modelData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
-
-        #endregion
-
         #endregion
 
         #region Task<T>
@@ -207,32 +192,6 @@ namespace Apizr
             Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod, 
             TModelRequestData modelRequestData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
-
-        #region Execution
-
-        internal Task<TApiData> ExecuteAsync<TApiData>(
-            Expression executeApiMethod,
-            Func<IApizrRequestOptions, TWebApi, Task<TApiData>> executeApiFactory,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
-
-        internal Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression executeApiMethod,
-            Func<IApizrRequestOptions, TWebApi, Task<TApiData>> executeApiFactory,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
-
-        internal Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression executeApiMethod,
-            Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>> executeApiFactory,
-            TModelData modelData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
-
-        internal Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-            Expression executeApiMethod,
-            Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>> executeApiFactory,
-            TModelRequestData modelRequestData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
-
-        #endregion
 
         #endregion
 

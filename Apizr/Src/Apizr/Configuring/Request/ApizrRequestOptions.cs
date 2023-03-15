@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
@@ -27,4 +28,7 @@ public class ApizrRequestOptions : ApizrRequestOptionsBase, IApizrRequestOptions
 
     /// <inheritdoc />
     public bool ClearCache { get; internal set; }
+
+    /// <inheritdoc />
+    Expression IApizrRequestOptions.OriginalExpression { get; set; }
 }

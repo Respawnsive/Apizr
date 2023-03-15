@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Linq.Expressions;
+using System.Threading;
 
 namespace Apizr.Configuring.Request
 {
@@ -14,5 +15,7 @@ namespace Apizr.Configuring.Request
         /// Clear request cache before executing (default: false)
         /// </summary>
         bool ClearCache { get; }
+
+        internal Expression OriginalExpression { get; set; }
     }
 }

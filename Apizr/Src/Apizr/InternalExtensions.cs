@@ -1,12 +1,29 @@
 ﻿using System;
+using System.Linq.Expressions;
 using Apizr.Caching;
 using Apizr.Configuring.Common;
+using Apizr.Configuring.Request;
 using Apizr.Mapping;
 
 namespace Apizr
 {
     internal static class InternalExtensions
     {
+        #region RequestOptionsBuilder
+
+        internal static Action<IApizrRequestOptionsBuilder> WithOriginalExpression(
+            this Action<IApizrRequestOptionsBuilder> optionsBuilder, Expression originalExpression)
+        {
+            if (optionsBuilder == null)
+                optionsBuilder = options => options.WithOriginalExpression(originalExpression);
+            else
+                optionsBuilder += options => options.WithOriginalExpression(originalExpression);
+
+            return optionsBuilder;
+        }
+
+        #endregion
+
         #region CacheHandler
 
         private static Func<ICacheHandler> _cacheHandlerFactory;

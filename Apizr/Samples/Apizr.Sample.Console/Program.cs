@@ -461,9 +461,9 @@ namespace Apizr.Sample.Console
                     //var userList = await _reqResMediator.SendFor(api => api.GetUsersAsync());
                     //pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>(), CancellationToken.None);parameters1, priority, cancellationToken
                     pagedUsers = await _userMediator.SendReadAllQuery(parameters1, priority);
-                    pagedUsers = await _userMediator.SendReadAllQuery();
+                    //pagedUsers = await _userMediator.SendReadAllQuery();
 
-                    var test = await _apizrMediator.SendFor<IReqResService, UserList>(api => api.GetUsersAsync(), onException: exception => {});
+                    //var test = await _apizrMediator.SendFor<IReqResService, UserList>(api => api.GetUsersAsync(), onException: exception => {});
                 }
                 else
                 {
@@ -562,10 +562,10 @@ namespace Apizr.Sample.Console
                     else
                     {
                         // Classic auto mapped request and result
-                        var minUser = new MinUser { Name = "John" };
-                        var createdMinUser = await _mediator.Send(
-                            new ExecuteUnitRequest<IReqResService, MinUser, User>((options, api, mappedUser) =>
-                                api.CreateUser(mappedUser, options.CancellationToken), minUser), CancellationToken.None);
+                        //var minUser = new MinUser { Name = "John" };
+                        //var createdMinUser = await _mediator.Send(
+                        //    new ExecuteUnitRequest<IReqResService, MinUser, User>((options, api, mappedUser) =>
+                        //        api.CreateUser(mappedUser, options.CancellationToken), minUser), CancellationToken.None);
 
                         // Classic Auto mapped result only
                         //userInfos = await _mediator.Send(new ExecuteRequest<IReqResService, UserInfos, UserDetails>((ct, api) => api.GetUserAsync(userChoice, ct)), CancellationToken.None);
@@ -574,7 +574,7 @@ namespace Apizr.Sample.Console
                         userInfos = await _reqResMediator.SendFor<IReqResService, UserInfos, UserDetails>((ct, api) => api.GetUserAsync(userChoice, 80, ct), CancellationToken.None);
 
                         // Auto mapped crud
-                        userInfos = await _mediator.Send(new ReadQuery<UserInfos>(userChoice), CancellationToken.None);
+                        //userInfos = await _mediator.Send(new ReadQuery<UserInfos>(userChoice), CancellationToken.None);
 
                         // Crud dedicated mediator with auto mapped optional result
                         var optionalUserInfos = await _userOptionalMediator.SendReadOptionalQuery<UserInfos>(userChoice);

@@ -58,6 +58,8 @@ namespace Apizr
     /// </summary>
     public class ApizrManager<TWebApi> : ApizrManager, IApizrManager<TWebApi>
     {
+        #region Fields
+
         private readonly ILazyFactory<TWebApi> _lazyWebApi;
         private readonly IConnectivityHandler _connectivityHandler;
         private readonly ICacheHandler _cacheHandler;
@@ -66,10 +68,14 @@ namespace Apizr
         private readonly string _webApiFriendlyName;
         private readonly IApizrManagerOptions<TWebApi> _apizrOptions;
 
-        private readonly Dictionary<MethodDetails, (CacheAttributeBase cacheAttribute, string cacheKey)> _cachingMethodsSet;
+        private readonly Dictionary<MethodDetails, (CacheAttributeBase cacheAttribute, string cacheKey)>
+            _cachingMethodsSet;
+
         private readonly Dictionary<MethodDetails, LogAttributeBase> _loggingMethodsSet;
         private readonly Dictionary<MethodDetails, IsPolicy> _policingMethodsSet;
         private readonly Dictionary<MethodDetails, IList<HandlerParameterAttribute>> _handlerParameterMethodsSet;
+
+        #endregion
 
         /// <summary>
         /// Apizr manager constructor
@@ -80,7 +86,9 @@ namespace Apizr
         /// <param name="mappingHandler">The mapping handler</param>
         /// <param name="policyRegistry">The policy registry</param>
         /// <param name="apizrOptions">The web api dedicated options</param>
-        public ApizrManager(ILazyFactory<TWebApi> lazyWebApi, IConnectivityHandler connectivityHandler, ICacheHandler cacheHandler, IMappingHandler mappingHandler, IReadOnlyPolicyRegistry<string> policyRegistry, IApizrManagerOptions<TWebApi> apizrOptions)
+        public ApizrManager(ILazyFactory<TWebApi> lazyWebApi, IConnectivityHandler connectivityHandler,
+            ICacheHandler cacheHandler, IMappingHandler mappingHandler, IReadOnlyPolicyRegistry<string> policyRegistry,
+            IApizrManagerOptions<TWebApi> apizrOptions)
         {
             _lazyWebApi = lazyWebApi;
             _connectivityHandler = connectivityHandler;
@@ -107,54 +115,30 @@ namespace Apizr
         #region ExecuteAsync
 
         #region Task
-        
+
         /// <inheritdoc />
         public virtual Task ExecuteAsync(
             Expression<Func<TWebApi, Task>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ((IApizrManager<TWebApi>)this).ExecuteAsync(executeApiMethod, 
-                (_, webApi) => executeApiMethod.Compile()(webApi),
-                optionsBuilder);
+            => ExecuteAsync((_, webApi) => executeApiMethod.Compile().Invoke(webApi),
+                optionsBuilder.WithOriginalExpression(executeApiMethod));
 
         /// <inheritdoc />
-        public virtual Task ExecuteAsync(
+        public virtual async Task ExecuteAsync(
             Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ((IApizrManager<TWebApi>)this).ExecuteAsync(executeApiMethod, 
-                (options, webApi) => executeApiMethod.Compile()(options, webApi),
-                optionsBuilder);
-
-        /// <inheritdoc />
-        public virtual Task ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
-            TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ((IApizrManager<TWebApi>)this).ExecuteAsync<TModelData, TApiData>(executeApiMethod,
-                (_, webApi, apiData) => executeApiMethod.Compile()(webApi, apiData),
-                modelData,
-                optionsBuilder);
-
-        /// <inheritdoc />
-        public virtual Task ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod,
-            TModelData modelData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ((IApizrManager<TWebApi>)this).ExecuteAsync<TModelData, TApiData>(executeApiMethod,
-                (options, webApi, apiData) => executeApiMethod.Compile()(options, webApi, apiData), 
-                modelData,
-                optionsBuilder);
-
-        #region Execution
-
-        async Task IApizrManager<TWebApi>.ExecuteAsync(
-            Expression executeApiMethod, 
-            Func<IApizrRequestOptions, TWebApi, Task> executeApiFactory,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder)
         {
             var webApi = _lazyWebApi.Value;
-            var methodDetails = GetMethodDetails(executeApiMethod);
+            var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
+            var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
+            var methodDetails = GetMethodDetails(originalExpression);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute);
-            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Calling method");
+            var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+                requestHandlerParameterAttributes);
+
+            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                $"{methodDetails.MethodInfo.Name}: Calling method");
 
             try
             {
@@ -173,10 +157,15 @@ namespace Apizr
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                         $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
 
-                var pollyContext = new Context(methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.Context ?? new Context());
-                pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels, requestOptionsBuilder.ApizrOptions.TrafficVerbosity, requestOptionsBuilder.ApizrOptions.HttpTracerMode);
+                var pollyContext = new Context(methodDetails.MethodInfo.Name,
+                    requestOptionsBuilder.ApizrOptions.Context ?? new Context());
+                pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
+                    requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
+                    requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                 requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
-                await policy.ExecuteAsync((_, _) => executeApiFactory.Invoke(requestOptionsBuilder.ApizrOptions, webApi), requestOptionsBuilder.ApizrOptions.Context,
+                await policy.ExecuteAsync(
+                    (_, _) => executeApiMethod.Compile().Invoke(requestOptionsBuilder.ApizrOptions, webApi),
+                    requestOptionsBuilder.ApizrOptions.Context,
                     requestOptionsBuilder.ApizrOptions.CancellationToken);
             }
             catch (Exception e)
@@ -196,18 +185,32 @@ namespace Apizr
             }
         }
 
-        async Task IApizrManager<TWebApi>.ExecuteAsync<TModelData, TApiData>(
-            Expression executeApiMethod,
-            Func<IApizrRequestOptions, TWebApi, TApiData, Task> executeApiFactory,
+        /// <inheritdoc />
+        public virtual Task ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<TWebApi, TApiData, Task>> executeApiMethod,
+            TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => ExecuteAsync<TModelData, TApiData>(
+                (_, webApi, apiData) => executeApiMethod.Compile().Invoke(webApi, apiData),
+                modelData,
+                optionsBuilder.WithOriginalExpression(executeApiMethod));
+
+        /// <inheritdoc />
+        public virtual async Task ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod,
             TModelData modelData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder)
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
             var webApi = _lazyWebApi.Value;
-            var methodDetails = GetMethodDetails(executeApiMethod);
+            var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
+            var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
+            var methodDetails = GetMethodDetails(originalExpression);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute, requestHandlerParameterAttributes);
-            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Calling method");
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+                requestHandlerParameterAttributes);
+
+            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                $"{methodDetails.MethodInfo.Name}: Calling method");
 
             try
             {
@@ -232,13 +235,17 @@ namespace Apizr
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: {typeof(TModelData).Name} mapped to {typeof(TApiData).Name}");
 
-                var pollyContext = new Context(methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.Context ?? new Context());
-                pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels, requestOptionsBuilder.ApizrOptions.TrafficVerbosity, requestOptionsBuilder.ApizrOptions.HttpTracerMode);
+                var pollyContext = new Context(methodDetails.MethodInfo.Name,
+                    requestOptionsBuilder.ApizrOptions.Context ?? new Context());
+                pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
+                    requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
+                    requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                 requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
 
                 requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
-                await policy.ExecuteAsync(options => executeApiFactory.Invoke(options, webApi, apiData), requestOptionsBuilder);
+                await policy.ExecuteAsync(options => executeApiMethod.Compile().Invoke(options, webApi, apiData),
+                    requestOptionsBuilder);
             }
             catch (Exception e)
             {
@@ -255,9 +262,7 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
                 requestOptionsBuilder.ApizrOptions.OnException(ex);
             }
-        } 
-
-        #endregion
+        }
 
         #endregion
 
@@ -267,82 +272,28 @@ namespace Apizr
         public virtual Task<TApiData> ExecuteAsync<TApiData>(
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ((IApizrManager<TWebApi>)this).ExecuteAsync(executeApiMethod,
-                (_, api) => executeApiMethod.Compile()(api), optionsBuilder);
+            => ExecuteAsync((_, api) => executeApiMethod.Compile().Invoke(api),
+                optionsBuilder.WithOriginalExpression(executeApiMethod));
 
         /// <inheritdoc />
-        public virtual Task<TApiData> ExecuteAsync<TApiData>(
+        public virtual async Task<TApiData> ExecuteAsync<TApiData>(
             Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ((IApizrManager<TWebApi>)this).ExecuteAsync(executeApiMethod,
-                (options, api) => executeApiMethod.Compile()(options, api), optionsBuilder);
-
-        /// <inheritdoc />
-        public virtual Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ((IApizrManager<TWebApi>)this).ExecuteAsync<TModelData, TApiData>(executeApiMethod,
-                (_, api) => executeApiMethod.Compile()(api), optionsBuilder);
-
-        /// <inheritdoc />
-        public virtual Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ((IApizrManager<TWebApi>)this).ExecuteAsync<TModelData, TApiData>(executeApiMethod,
-                (options, api) => executeApiMethod.Compile()(options, api),
-                optionsBuilder);
-
-        /// <inheritdoc />
-        public virtual Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ((IApizrManager<TWebApi>)this).ExecuteAsync<TModelData, TApiData>(executeApiMethod,
-                (_, api, apiData) => executeApiMethod.Compile()(api, apiData), modelData, optionsBuilder);
-
-        /// <inheritdoc />
-        public virtual Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
-            TModelData modelData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ((IApizrManager<TWebApi>)this).ExecuteAsync<TModelData, TApiData>(executeApiMethod,
-                (options, api, apiData) => executeApiMethod.Compile()(options, api, apiData),
-                modelData,
-                optionsBuilder);
-
-        /// <inheritdoc />
-        public virtual Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-            Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ((IApizrManager<TWebApi>)this).ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(executeApiMethod,
-                (_, api, apiData) => executeApiMethod.Compile()(api, apiData), modelRequestData, optionsBuilder);
-
-        /// <inheritdoc />
-        public virtual Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-            Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
-            TModelRequestData modelRequestData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => ((IApizrManager<TWebApi>)this).ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(executeApiMethod,
-                (options, api, apiData) => executeApiMethod.Compile()(options, api, apiData), modelRequestData,
-                optionsBuilder);
-
-        #region Execution
-
-        async Task<TApiData> IApizrManager<TWebApi>.ExecuteAsync<TApiData>(
-            Expression executeApiMethod,
-            Func<IApizrRequestOptions, TWebApi, Task<TApiData>> executeApiFactory,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder)
         {
             var webApi = _lazyWebApi.Value;
-            var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
+            var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
+            var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
+            var methodDetails = GetMethodDetails<TApiData>(originalExpression);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute, requestHandlerParameterAttributes);
-            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Calling method");
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+                requestHandlerParameterAttributes);
+            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                $"{methodDetails.MethodInfo.Name}: Calling method");
 
             TApiData result = default;
 
-            if (IsMethodCacheable<TApiData>(methodDetails, executeApiMethod, out var cacheAttribute, out var cacheKey))
+            if (IsMethodCacheable<TApiData>(methodDetails, originalExpression, out var cacheAttribute, out var cacheKey))
             {
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: Called method is cacheable");
@@ -354,7 +305,8 @@ namespace Apizr
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
 
-                result = await _cacheHandler.GetAsync<TApiData>(cacheKey, requestOptionsBuilder.ApizrOptions.CancellationToken);
+                result = await _cacheHandler.GetAsync<TApiData>(cacheKey,
+                    requestOptionsBuilder.ApizrOptions.CancellationToken);
                 if (!Equals(result, default))
                 {
                     if (requestOptionsBuilder.ApizrOptions.ClearCache)
@@ -389,18 +341,23 @@ namespace Apizr
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                    var policy = GetMethodPolicy<TApiData>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                    var policy = GetMethodPolicy<TApiData>(methodDetails,
+                        requestOptionsBuilder.ApizrOptions.LogLevels.Low());
                     if (!(policy is INoOpPolicy))
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
 
-                    var pollyContext = new Context(methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.Context ?? new Context());
-                    pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels, requestOptionsBuilder.ApizrOptions.TrafficVerbosity, requestOptionsBuilder.ApizrOptions.HttpTracerMode);
+                    var pollyContext = new Context(methodDetails.MethodInfo.Name,
+                        requestOptionsBuilder.ApizrOptions.Context ?? new Context());
+                    pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
+                        requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
+                        requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                     requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
-                    result = await policy.ExecuteAsync(options => executeApiFactory.Invoke(options, webApi), requestOptionsBuilder);
+                    result = await policy.ExecuteAsync(options => executeApiMethod.Compile().Invoke(options, webApi),
+                        requestOptionsBuilder);
                 }
                 catch (Exception e)
                 {
@@ -410,9 +367,10 @@ namespace Apizr
                     ex = new ApizrException<TApiData>(e, result);
                     if (requestOptionsBuilder.ApizrOptions.OnException == null)
                     {
-                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(), Equals(result, default(TApiData))
-                            ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TApiData>)} with InnerException but no cached result"
-                            : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TApiData>)} with InnerException and cached result");
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(),
+                            Equals(result, default(TApiData))
+                                ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TApiData>)} with InnerException but no cached result"
+                                : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TApiData>)} with InnerException and cached result");
 
                         throw ex;
                     }
@@ -439,33 +397,48 @@ namespace Apizr
                 if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
-                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Caching result");
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Caching result");
 
-                    await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan, requestOptionsBuilder.ApizrOptions.CancellationToken);
+                    await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan,
+                        requestOptionsBuilder.ApizrOptions.CancellationToken);
                 }
             }
 
-            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Returning result");
+            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                $"{methodDetails.MethodInfo.Name}: Returning result");
 
             return result;
         }
 
-        async Task<TModelData> IApizrManager<TWebApi>.ExecuteAsync<TModelData, TApiData>(
-            Expression executeApiMethod,
-            Func<IApizrRequestOptions, TWebApi, Task<TApiData>> executeApiFactory,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder)
+        /// <inheritdoc />
+        public virtual Task<TModelData> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => ExecuteAsync<TModelData, TApiData>(
+                (_, api) => executeApiMethod.Compile().Invoke(api),
+                optionsBuilder.WithOriginalExpression(executeApiMethod));
+
+        /// <inheritdoc />
+        public virtual async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
             var webApi = _lazyWebApi.Value;
-            var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
+            var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
+            var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
+            var methodDetails = GetMethodDetails<TApiData>(originalExpression);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute, requestHandlerParameterAttributes);
-            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Calling method");
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+                requestHandlerParameterAttributes);
+            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                $"{methodDetails.MethodInfo.Name}: Calling method");
 
             TApiData result = default;
 
-            if (IsMethodCacheable<TApiData>(methodDetails, executeApiMethod, out var cacheAttribute,
-                out var cacheKey))
+            if (IsMethodCacheable<TApiData>(methodDetails, originalExpression, out var cacheAttribute,
+                    out var cacheKey))
             {
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: Called method is cacheable");
@@ -477,7 +450,8 @@ namespace Apizr
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
 
-                result = await _cacheHandler.GetAsync<TApiData>(cacheKey, requestOptionsBuilder.ApizrOptions.CancellationToken);
+                result = await _cacheHandler.GetAsync<TApiData>(cacheKey,
+                    requestOptionsBuilder.ApizrOptions.CancellationToken);
                 if (!Equals(result, default))
                 {
                     if (requestOptionsBuilder.ApizrOptions.ClearCache)
@@ -512,18 +486,23 @@ namespace Apizr
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                    var policy = GetMethodPolicy<TApiData>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                    var policy = GetMethodPolicy<TApiData>(methodDetails,
+                        requestOptionsBuilder.ApizrOptions.LogLevels.Low());
                     if (!(policy is INoOpPolicy))
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
 
-                    var pollyContext = new Context(methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.Context ?? new Context());
-                    pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels, requestOptionsBuilder.ApizrOptions.TrafficVerbosity, requestOptionsBuilder.ApizrOptions.HttpTracerMode);
+                    var pollyContext = new Context(methodDetails.MethodInfo.Name,
+                        requestOptionsBuilder.ApizrOptions.Context ?? new Context());
+                    pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
+                        requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
+                        requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                     requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
-                    result = await policy.ExecuteAsync(options => executeApiFactory.Invoke(options, webApi), requestOptionsBuilder);
+                    result = await policy.ExecuteAsync(options => executeApiMethod.Compile().Invoke(options, webApi),
+                        requestOptionsBuilder);
                 }
                 catch (Exception e)
                 {
@@ -533,9 +512,10 @@ namespace Apizr
                     ex = new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
                     if (requestOptionsBuilder.ApizrOptions.OnException == null)
                     {
-                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(), Equals(result, default(TApiData))
-                            ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException but no cached result"
-                            : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and cached result");
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(),
+                            Equals(result, default(TApiData))
+                                ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException but no cached result"
+                                : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelData>)} with InnerException and cached result");
 
                         throw ex;
                     }
@@ -562,9 +542,11 @@ namespace Apizr
                 if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
-                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Caching result");
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Caching result");
 
-                    await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan, requestOptionsBuilder.ApizrOptions.CancellationToken);
+                    await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan,
+                        requestOptionsBuilder.ApizrOptions.CancellationToken);
                 }
             }
 
@@ -574,23 +556,35 @@ namespace Apizr
             return Map<TApiData, TModelData>(result);
         }
 
-        async Task<TModelData> IApizrManager<TWebApi>.ExecuteAsync<TModelData, TApiData>(
-            Expression executeApiMethod,
-            Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>> executeApiFactory,
+        /// <inheritdoc />
+        public virtual Task<TModelData> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => ExecuteAsync<TModelData, TApiData>(
+                (_, api, apiData) => executeApiMethod.Compile().Invoke(api, apiData), modelData,
+                optionsBuilder.WithOriginalExpression(executeApiMethod));
+
+        /// <inheritdoc />
+        public virtual async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
             TModelData modelData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder)
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
             var webApi = _lazyWebApi.Value;
-            var methodDetails = GetMethodDetails<TApiData>(executeApiMethod);
+            var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
+            var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
+            var methodDetails = GetMethodDetails<TApiData>(originalExpression);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute, requestHandlerParameterAttributes);
-            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Calling method");
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+                requestHandlerParameterAttributes);
+            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                $"{methodDetails.MethodInfo.Name}: Calling method");
 
             TApiData result = default;
 
-            if (IsMethodCacheable<TApiData>(methodDetails, executeApiMethod, out var cacheAttribute,
-                out var cacheKey))
+            if (IsMethodCacheable<TApiData>(methodDetails, originalExpression, out var cacheAttribute,
+                    out var cacheKey))
             {
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: Called method is cacheable");
@@ -602,7 +596,8 @@ namespace Apizr
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
 
-                result = await _cacheHandler.GetAsync<TApiData>(cacheKey, requestOptionsBuilder.ApizrOptions.CancellationToken);
+                result = await _cacheHandler.GetAsync<TApiData>(cacheKey,
+                    requestOptionsBuilder.ApizrOptions.CancellationToken);
                 if (!Equals(result, default))
                 {
                     if (requestOptionsBuilder.ApizrOptions.ClearCache)
@@ -637,7 +632,8 @@ namespace Apizr
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                    var policy = GetMethodPolicy<TApiData>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                    var policy = GetMethodPolicy<TApiData>(methodDetails,
+                        requestOptionsBuilder.ApizrOptions.LogLevels.Low());
                     if (!(policy is INoOpPolicy))
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
@@ -646,13 +642,17 @@ namespace Apizr
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                         $"{methodDetails.MethodInfo.Name}: {typeof(TModelData).Name} mapped to {typeof(TApiData).Name}");
 
-                    var pollyContext = new Context(methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.Context ?? new Context());
-                    pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels, requestOptionsBuilder.ApizrOptions.TrafficVerbosity, requestOptionsBuilder.ApizrOptions.HttpTracerMode);
+                    var pollyContext = new Context(methodDetails.MethodInfo.Name,
+                        requestOptionsBuilder.ApizrOptions.Context ?? new Context());
+                    pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
+                        requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
+                        requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                     requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
-                    result = await policy.ExecuteAsync(options => executeApiFactory.Invoke(options, webApi, apiData), requestOptionsBuilder);
+                    result = await policy.ExecuteAsync(
+                        options => executeApiMethod.Compile().Invoke(options, webApi, apiData), requestOptionsBuilder);
                 }
                 catch (Exception e)
                 {
@@ -662,9 +662,10 @@ namespace Apizr
                     ex = new ApizrException<TApiData>(e, result);
                     if (requestOptionsBuilder.ApizrOptions.OnException == null)
                     {
-                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(), Equals(result, default(TApiData))
-                            ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TApiData>)} with InnerException but no cached result"
-                            : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TApiData>)} with InnerException and cached result");
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(),
+                            Equals(result, default(TApiData))
+                                ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TApiData>)} with InnerException but no cached result"
+                                : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TApiData>)} with InnerException and cached result");
 
                         throw ex;
                     }
@@ -691,9 +692,11 @@ namespace Apizr
                 if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
-                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Caching result");
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Caching result");
 
-                    await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan, requestOptionsBuilder.ApizrOptions.CancellationToken);
+                    await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan,
+                        requestOptionsBuilder.ApizrOptions.CancellationToken);
                 }
             }
 
@@ -703,23 +706,38 @@ namespace Apizr
             return Map<TApiData, TModelData>(result);
         }
 
-        async Task<TModelResultData> IApizrManager<TWebApi>.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
-            Expression executeApiMethod,
-            Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>> executeApiFactory,
+        /// <inheritdoc />
+        public virtual Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
+            TModelRequestData>(
+            Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
             TModelRequestData modelRequestData,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder)
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
+                (_, api, apiData) => executeApiMethod.Compile().Invoke(api, apiData), modelRequestData,
+                optionsBuilder.WithOriginalExpression(executeApiMethod));
+
+        /// <inheritdoc />
+        public virtual async Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
+            TModelRequestData>(
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
+            TModelRequestData modelRequestData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
             var webApi = _lazyWebApi.Value;
-            var methodDetails = GetMethodDetails<TApiResultData>(executeApiMethod);
+            var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
+            var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
+            var methodDetails = GetMethodDetails<TApiResultData>(originalExpression);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute, requestHandlerParameterAttributes);
-            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Calling method");
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+                requestHandlerParameterAttributes);
+            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                $"{methodDetails.MethodInfo.Name}: Calling method");
 
             TApiResultData result = default;
 
-            if (IsMethodCacheable<TApiResultData>(methodDetails, executeApiMethod, out var cacheAttribute,
-                out var cacheKey))
+            if (IsMethodCacheable<TApiResultData>(methodDetails, originalExpression, out var cacheAttribute,
+                    out var cacheKey))
             {
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: Called method is cacheable");
@@ -731,7 +749,8 @@ namespace Apizr
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
 
-                result = await _cacheHandler.GetAsync<TApiResultData>(cacheKey, requestOptionsBuilder.ApizrOptions.CancellationToken);
+                result = await _cacheHandler.GetAsync<TApiResultData>(cacheKey,
+                    requestOptionsBuilder.ApizrOptions.CancellationToken);
                 if (!Equals(result, default))
                 {
                     if (requestOptionsBuilder.ApizrOptions.ClearCache)
@@ -766,7 +785,8 @@ namespace Apizr
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                    var policy = GetMethodPolicy<TApiResultData>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                    var policy = GetMethodPolicy<TApiResultData>(methodDetails,
+                        requestOptionsBuilder.ApizrOptions.LogLevels.Low());
                     if (!(policy is INoOpPolicy))
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
@@ -775,13 +795,18 @@ namespace Apizr
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                         $"{methodDetails.MethodInfo.Name}: {typeof(TModelRequestData).Name} mapped to {typeof(TApiRequestData).Name}");
 
-                    var pollyContext = new Context(methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.Context ?? new Context());
-                    pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels, requestOptionsBuilder.ApizrOptions.TrafficVerbosity, requestOptionsBuilder.ApizrOptions.HttpTracerMode);
+                    var pollyContext = new Context(methodDetails.MethodInfo.Name,
+                        requestOptionsBuilder.ApizrOptions.Context ?? new Context());
+                    pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
+                        requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
+                        requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                     requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
-                    result = await policy.ExecuteAsync(options => executeApiFactory.Invoke(options, webApi, apiRequestData), requestOptionsBuilder);
+                    result = await policy.ExecuteAsync(
+                        options => executeApiMethod.Compile().Invoke(options, webApi, apiRequestData),
+                        requestOptionsBuilder);
                 }
                 catch (Exception e)
                 {
@@ -791,9 +816,10 @@ namespace Apizr
                     ex = new ApizrException<TModelResultData>(e, Map<TApiResultData, TModelResultData>(result));
                     if (requestOptionsBuilder.ApizrOptions.OnException == null)
                     {
-                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(), Equals(result, default(TApiResultData))
-                            ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelResultData>)} with InnerException but no cached result"
-                            : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelResultData>)} with InnerException and cached result");
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(),
+                            Equals(result, default(TApiResultData))
+                                ? $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelResultData>)} with InnerException but no cached result"
+                                : $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException<TModelResultData>)} with InnerException and cached result");
 
                         throw ex;
                     }
@@ -820,9 +846,11 @@ namespace Apizr
                 if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
                     cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
                 {
-                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(), $"{methodDetails.MethodInfo.Name}: Caching result");
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Caching result");
 
-                    await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan, requestOptionsBuilder.ApizrOptions.CancellationToken);
+                    await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan,
+                        requestOptionsBuilder.ApizrOptions.CancellationToken);
                 }
             }
 
@@ -830,9 +858,7 @@ namespace Apizr
                 $"{methodDetails.MethodInfo.Name}: Returning mapped result from {typeof(TApiResultData).Name} to {typeof(TModelResultData).Name}");
 
             return Map<TApiResultData, TModelResultData>(result);
-        } 
-
-        #endregion
+        }
 
         #endregion
 
@@ -844,7 +870,8 @@ namespace Apizr
         public async Task<bool> ClearCacheAsync(CancellationToken cancellationToken = default)
         {
             if (_cacheHandler is VoidCacheHandler)
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevels.Medium(), $"Apizr: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevels.Medium(),
+                    $"Apizr: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
 
             try
             {
@@ -855,7 +882,8 @@ namespace Apizr
             }
             catch (Exception e)
             {
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevels.High(), $"Apizr: Clearing all cache throwed an exception with message: {e.Message}");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevels.High(),
+                    $"Apizr: Clearing all cache throwed an exception with message: {e.Message}");
 
                 return false;
             }
@@ -863,45 +891,55 @@ namespace Apizr
 
         /// <inheritdoc />
         public Task<bool> ClearCacheAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod)
-            => ClearCacheAsync((ct, api) => executeApiMethod.Compile()(api), CancellationToken.None);
+            => ClearCacheAsync((ct, api) => executeApiMethod.Compile().Invoke(api), CancellationToken.None);
 
         /// <inheritdoc />
-        public async Task<bool> ClearCacheAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken = default)
+        public async Task<bool> ClearCacheAsync<TResult>(
+            Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod,
+            CancellationToken cancellationToken = default)
         {
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
-            _apizrOptions.Logger.Log(_apizrOptions.LogLevels.Low(), $"Apizr: Calling cache clear for method {methodCallExpression.Method.Name}");
+            _apizrOptions.Logger.Log(_apizrOptions.LogLevels.Low(),
+                $"Apizr: Calling cache clear for method {methodCallExpression.Method.Name}");
 
             if (_cacheHandler is VoidCacheHandler)
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevels.Medium(), $"{methodCallExpression.Method.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevels.Medium(),
+                    $"{methodCallExpression.Method.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
 
             try
             {
                 var methodDetails = GetMethodDetails<TResult>(executeApiMethod);
                 if (IsMethodCacheable<TResult>(methodDetails, executeApiMethod, out _, out var cacheKey))
                 {
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevels.Low(), $"{methodCallExpression.Method.Name}: Method is cacheable");
-                    _apizrOptions.Logger.Log(_apizrOptions.LogLevels.Low(), $"{methodCallExpression.Method.Name}: Clearing cache for key {cacheKey}");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevels.Low(),
+                        $"{methodCallExpression.Method.Name}: Method is cacheable");
+                    _apizrOptions.Logger.Log(_apizrOptions.LogLevels.Low(),
+                        $"{methodCallExpression.Method.Name}: Clearing cache for key {cacheKey}");
 
                     var success = await _cacheHandler.RemoveAsync(cacheKey, cancellationToken);
-                    if(success)
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevels.Low(), $"{methodCallExpression.Method.Name}: Clearing cache for key {cacheKey} succeed");
+                    if (success)
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevels.Low(),
+                            $"{methodCallExpression.Method.Name}: Clearing cache for key {cacheKey} succeed");
                     else
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevels.High(), $"{methodCallExpression.Method.Name}: Clearing cache for key {cacheKey} failed");
+                        _apizrOptions.Logger.Log(_apizrOptions.LogLevels.High(),
+                            $"{methodCallExpression.Method.Name}: Clearing cache for key {cacheKey} failed");
 
                     return success;
                 }
 
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevels.Low(), $"{methodCallExpression.Method.Name}: Method isn't cacheable");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevels.Low(),
+                    $"{methodCallExpression.Method.Name}: Method isn't cacheable");
 
                 return true;
             }
             catch (Exception e)
             {
-                _apizrOptions.Logger.Log(_apizrOptions.LogLevels.High(), $"{methodCallExpression.Method.Name}: Clearing keyed cache throwed an exception with message: {e.Message}");
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevels.High(),
+                    $"{methodCallExpression.Method.Name}: Clearing keyed cache throwed an exception with message: {e.Message}");
 
                 return false;
             }
-        }  
+        }
 
         #endregion
 
@@ -913,9 +951,9 @@ namespace Apizr
         {
             if (_loggingMethodsSet.TryGetValue(methodDetails, out var logAttribute))
                 return logAttribute;
-            
+
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.ApiInterfaceType))
-            { 
+            {
                 // Crud api logging
                 var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
                 logAttribute = methodDetails.MethodInfo.Name switch // Request logging
@@ -943,7 +981,8 @@ namespace Apizr
 
         #region Caching
 
-        private bool IsMethodCacheable<TResult>(MethodDetails methodDetails, Expression restExpression, out CacheAttributeBase cacheAttribute, out string cacheKey)
+        private bool IsMethodCacheable<TResult>(MethodDetails methodDetails, Expression restExpression,
+            out CacheAttributeBase cacheAttribute, out string cacheKey)
         {
             lock (this)
             {
@@ -955,14 +994,15 @@ namespace Apizr
                     // Yes we did so get saved specific details
                     cacheAttribute = methodCacheDetails.cacheAttribute;
                     cacheKey = methodCacheDetails.cacheKey;
-                    
+
                     return cacheAttribute != null && !string.IsNullOrWhiteSpace(cacheKey);
                 }
 
                 cacheAttribute = null;
                 cacheKey = null;
 
-                if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.ApiInterfaceType)) // Crud api caching
+                if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails
+                        .ApiInterfaceType)) // Crud api caching
                 {
                     var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
                     var methodName = methodDetails.MethodInfo.Name;
@@ -976,14 +1016,15 @@ namespace Apizr
                             break;
                     }
 
-                    if(cacheAttribute == null) // Global model caching
+                    if (cacheAttribute == null) // Global model caching
                         cacheAttribute = modelType.GetTypeInfo().GetCustomAttribute<CacheAttribute>(true);
                 }
                 else // Classic api caching
                 {
                     cacheAttribute =
                         methodToCacheData.MethodInfo.GetCustomAttribute<CacheAttribute>() ?? // Specific method caching
-                        methodDetails.ApiInterfaceType.GetTypeInfo().GetCustomAttribute<CacheAttribute>(); // Global api interface caching
+                        methodDetails.ApiInterfaceType.GetTypeInfo()
+                            .GetCustomAttribute<CacheAttribute>(); // Global api interface caching
                 }
 
                 if (cacheAttribute == null) // Global assembly caching
@@ -1005,11 +1046,13 @@ namespace Apizr
                 var methodParameters = methodToCacheData.MethodInfo.GetParameters().ToList();
 
                 // Is there any parameters except potential CancellationToken and Refit properties ?
-                if (!methodParameters.Any(x => !typeof(CancellationToken).GetTypeInfo().IsAssignableFrom(x.ParameterType.GetTypeInfo()) &&
-                                               x.CustomAttributes.All(y => !typeof(PropertyAttribute).GetTypeInfo().IsAssignableFrom(y.AttributeType.GetTypeInfo()))))
+                if (!methodParameters.Any(x =>
+                        !typeof(CancellationToken).GetTypeInfo().IsAssignableFrom(x.ParameterType.GetTypeInfo()) &&
+                        x.CustomAttributes.All(y =>
+                            !typeof(PropertyAttribute).GetTypeInfo().IsAssignableFrom(y.AttributeType.GetTypeInfo()))))
                 {
                     // No there isn't!
-                    cacheKey += ")"; 
+                    cacheKey += ")";
 
                     // Save details for next calls and return False
                     _cachingMethodsSet.Add(methodToCacheData, (cacheAttribute, cacheKey));
@@ -1032,7 +1075,7 @@ namespace Apizr
                     }).FirstOrDefault();
 
                 var parameters = new List<string>();
-                for (var i = 0; i <= extractedArguments.Count-1; i++)
+                for (var i = 0; i <= extractedArguments.Count - 1; i++)
                 {
                     // If there's a specific cache key, ignore all other arguments
                     if (specificCacheKey != null)
@@ -1045,14 +1088,16 @@ namespace Apizr
 
                     // Ignore CancellationToken and Refit Property parameters
                     var parameterInfo = methodParameters[i];
-                    if(typeof(CancellationToken).GetTypeInfo().IsAssignableFrom(parameterInfo.ParameterType.GetTypeInfo()) 
-                       || parameterInfo.CustomAttributes.Any(x => typeof(PropertyAttribute).GetTypeInfo().IsAssignableFrom(x.AttributeType.GetTypeInfo())))
+                    if (typeof(CancellationToken).GetTypeInfo()
+                            .IsAssignableFrom(parameterInfo.ParameterType.GetTypeInfo())
+                        || parameterInfo.CustomAttributes.Any(x =>
+                            typeof(PropertyAttribute).GetTypeInfo().IsAssignableFrom(x.AttributeType.GetTypeInfo())))
                         continue;
 
                     var parameterName = parameterInfo.Name;
                     var extractedArgument = extractedArguments[i];
                     var extractedArgumentValue = extractedArgument.Value;
-                    if(extractedArgumentValue == null)
+                    if (extractedArgumentValue == null)
                         continue;
 
                     object parameterValue = null;
@@ -1068,7 +1113,8 @@ namespace Apizr
                     else
                     {
                         // Is there a specific cache key with a target field?
-                        var cacheKeyAttribute = specificCacheKey?.ParameterInfo.GetCustomAttribute<CacheKeyAttribute>(true);
+                        var cacheKeyAttribute =
+                            specificCacheKey?.ParameterInfo.GetCustomAttribute<CacheKeyAttribute>(true);
                         if (!string.IsNullOrWhiteSpace(cacheKeyAttribute?.PropertyName))
                         {
                             // There's a specific cache key with a target field!
@@ -1144,7 +1190,8 @@ namespace Apizr
                 {
                     if (_policyRegistry.TryGet<IsPolicy>(registryKey, out var registeredPolicy))
                     {
-                        _apizrOptions.Logger.Log(logLevel, $"{methodDetails.MethodInfo.Name}: Found a policy with key {registryKey}");
+                        _apizrOptions.Logger.Log(logLevel,
+                            $"{methodDetails.MethodInfo.Name}: Found a policy with key {registryKey}");
 
                         if (registeredPolicy is IAsyncPolicy<TResult> registeredPolicyWithResult)
                         {
@@ -1153,14 +1200,17 @@ namespace Apizr
                             else
                                 policy.WrapAsync(registeredPolicyWithResult);
 
-                            _apizrOptions.Logger.Log(logLevel, $"{methodDetails.MethodInfo.Name}: Policy with key {registryKey} will be applied");
+                            _apizrOptions.Logger.Log(logLevel,
+                                $"{methodDetails.MethodInfo.Name}: Policy with key {registryKey} will be applied");
                         }
                         else
-                            _apizrOptions.Logger.Log(logLevel, $"{methodDetails.MethodInfo.Name}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy<TResult>)} type and will be ignored");
+                            _apizrOptions.Logger.Log(logLevel,
+                                $"{methodDetails.MethodInfo.Name}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy<TResult>)} type and will be ignored");
                     }
                     else
-                        _apizrOptions.Logger.Log(logLevel, $"{methodDetails.MethodInfo.Name}: No policy found for key {registryKey}");
-                } 
+                        _apizrOptions.Logger.Log(logLevel,
+                            $"{methodDetails.MethodInfo.Name}: No policy found for key {registryKey}");
+                }
             }
 
             _policingMethodsSet.Add(methodDetails, policy);
@@ -1174,7 +1224,7 @@ namespace Apizr
                 return policy;
 
             policy = Policy.NoOpAsync();
-            
+
             if (_policyRegistry == null)
                 return policy;
 
@@ -1185,7 +1235,8 @@ namespace Apizr
                 {
                     if (_policyRegistry.TryGet<IsPolicy>(registryKey, out var registeredPolicy))
                     {
-                        _apizrOptions.Logger.Log(logLevel, $"{methodDetails.MethodInfo.Name}: Found a policy with key {registryKey}");
+                        _apizrOptions.Logger.Log(logLevel,
+                            $"{methodDetails.MethodInfo.Name}: Found a policy with key {registryKey}");
 
                         if (registeredPolicy is IAsyncPolicy registeredPolicyWithoutResult)
                         {
@@ -1194,14 +1245,17 @@ namespace Apizr
                             else
                                 policy.WrapAsync(registeredPolicyWithoutResult);
 
-                            _apizrOptions.Logger.Log(logLevel, $"{methodDetails.MethodInfo.Name}: Policy with key {registryKey} will be applied");
+                            _apizrOptions.Logger.Log(logLevel,
+                                $"{methodDetails.MethodInfo.Name}: Policy with key {registryKey} will be applied");
                         }
                         else
-                            _apizrOptions.Logger.Log(logLevel, $"{methodDetails.MethodInfo.Name}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy)} type and will be ignored");
+                            _apizrOptions.Logger.Log(logLevel,
+                                $"{methodDetails.MethodInfo.Name}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy)} type and will be ignored");
                     }
                     else
-                        _apizrOptions.Logger.Log(logLevel, $"{methodDetails.MethodInfo.Name}: No policy found for key {registryKey}");
-                } 
+                        _apizrOptions.Logger.Log(logLevel,
+                            $"{methodDetails.MethodInfo.Name}: No policy found for key {registryKey}");
+                }
             }
 
             _policingMethodsSet.Add(methodDetails, policy);
@@ -1228,7 +1282,7 @@ namespace Apizr
 
                 return policyAttribute;
             }
-            
+
             // Standard api method
             return methodDetails.MethodInfo.GetCustomAttribute<PolicyAttribute>();
         }
@@ -1248,15 +1302,19 @@ namespace Apizr
                 var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
                 handlerParameterAttributes = methodDetails.MethodInfo.Name switch // Request parameters
                 {
-                    "ReadAll" => modelType.GetTypeInfo().GetCustomAttributes<ReadAllHandlerParameterAttribute>(true).Cast<HandlerParameterAttribute>().ToList(),
-                    "Read" => modelType.GetTypeInfo().GetCustomAttributes<ReadHandlerParameterAttribute>(true).Cast<HandlerParameterAttribute>().ToList(),
+                    "ReadAll" => modelType.GetTypeInfo().GetCustomAttributes<ReadAllHandlerParameterAttribute>(true)
+                        .Cast<HandlerParameterAttribute>().ToList(),
+                    "Read" => modelType.GetTypeInfo().GetCustomAttributes<ReadHandlerParameterAttribute>(true)
+                        .Cast<HandlerParameterAttribute>().ToList(),
                     _ => null
                 };
             }
             else
             {
                 // Classic api parameters
-                handlerParameterAttributes = methodDetails.MethodInfo.GetCustomAttributes<HandlerParameterAttribute>().ToList(); // Request parameters
+                handlerParameterAttributes =
+                    methodDetails.MethodInfo.GetCustomAttributes<HandlerParameterAttribute>()
+                        .ToList(); // Request parameters
             }
 
             // Return log attribute
@@ -1274,15 +1332,14 @@ namespace Apizr
             try
             {
                 if (typeof(TSource) == typeof(TDestination))
-                    destination = (TDestination)Convert.ChangeType(source, typeof(TDestination));
+                    destination = (TDestination) Convert.ChangeType(source, typeof(TDestination));
                 else
                 {
                     if (_mappingHandler.GetType() == typeof(VoidMappingHandler))
                         throw new NotImplementedException(
                             $"You asked to map data but did not provide any data mapping handler. Please use ");
-                        
-                    destination = _mappingHandler.Map<TSource, TDestination>(source);
 
+                    destination = _mappingHandler.Map<TSource, TDestination>(source);
                 }
             }
             catch (Exception e)
@@ -1317,7 +1374,7 @@ namespace Apizr
                 yield break;
 
             if (expression is ConstantExpression constantsExpression)
-                yield return new ExtractedConstant { Value = constantsExpression.Value };
+                yield return new ExtractedConstant {Value = constantsExpression.Value};
 
             else if (expression is LambdaExpression lambdaExpression)
                 foreach (var constant in ExtractConstants(lambdaExpression.Body))
@@ -1330,8 +1387,8 @@ namespace Apizr
             else if (expression is MethodCallExpression methodCallExpression)
             {
                 foreach (var arg in methodCallExpression.Arguments)
-                    foreach (var constant in ExtractConstants(arg))
-                        yield return constant;
+                foreach (var constant in ExtractConstants(arg))
+                    yield return constant;
                 foreach (var constant in ExtractConstants(methodCallExpression.Object))
                     yield return constant;
             }
@@ -1350,7 +1407,7 @@ namespace Apizr
                             break;
                     }
 
-                    yield return new ExtractedConstant { Value = value };
+                    yield return new ExtractedConstant {Value = value};
                 }
             }
             else if (expression is InvocationExpression invocationExpression)
@@ -1361,7 +1418,7 @@ namespace Apizr
             else if (expression is ParameterExpression parameterExpression)
             {
                 if (parameterExpression.Type == typeof(CancellationToken))
-                    yield return new ExtractedConstant { Value = CancellationToken.None };
+                    yield return new ExtractedConstant {Value = CancellationToken.None};
                 else
                     yield return new ExtractedConstant();
             }
@@ -1389,14 +1446,13 @@ namespace Apizr
                             parameters.Add(key, value);
                     }
 
-                    yield return new ExtractedConstant { Value = $"[{parameters.ToString(":", ", ")}]" };
+                    yield return new ExtractedConstant {Value = $"[{parameters.ToString(":", ", ")}]"};
                 }
                 else
                     yield return new ExtractedConstant { };
             }
             else if (expression is MemberInitExpression memberInitExpression)
             {
-
                 if (memberInitExpression.Bindings.Any())
                 {
                     var parameters = new Dictionary<string, object>();
@@ -1427,7 +1483,8 @@ namespace Apizr
                             }
                         }
                     }
-                    yield return new ExtractedConstant { Value = parameters.ToString(":", ", ") };
+
+                    yield return new ExtractedConstant {Value = parameters.ToString(":", ", ")};
                 }
                 else
                     foreach (var constants in ExtractConstants(memberInitExpression.NewExpression))
@@ -1442,7 +1499,8 @@ namespace Apizr
                     if (newExpression.Arguments[i] is ConstantExpression constantExpression)
                         parameters.Add(constructorParameters[i].Name, constantExpression.Value);
                 }
-                yield return new ExtractedConstant { Value = parameters.ToString(":", ", ") };
+
+                yield return new ExtractedConstant {Value = parameters.ToString(":", ", ")};
             }
             else
                 throw new NotImplementedException();
@@ -1456,10 +1514,10 @@ namespace Apizr
                 case LambdaExpression lambdaExpression:
                     return GetMethodCallExpression(lambdaExpression.Body);
                 case InvocationExpression methodInvocationBody:
-                    {
-                        var methodCallExpression = (MethodCallExpression)methodInvocationBody.Expression;
-                        return methodCallExpression;
-                    }
+                {
+                    var methodCallExpression = (MethodCallExpression) methodInvocationBody.Expression;
+                    return methodCallExpression;
+                }
                 case MethodCallExpression methodCallExpression:
                     return methodCallExpression;
                 default:
@@ -1475,10 +1533,10 @@ namespace Apizr
                 case LambdaExpression lambdaExpression:
                     return GetMethodCallExpression<TResult>(lambdaExpression.Body);
                 case InvocationExpression methodInvocationBody:
-                    {
-                        var methodCallExpression = (MethodCallExpression)methodInvocationBody.Expression;
-                        return methodCallExpression;
-                    }
+                {
+                    var methodCallExpression = (MethodCallExpression) methodInvocationBody.Expression;
+                    return methodCallExpression;
+                }
                 case MethodCallExpression methodCallExpression:
                     return methodCallExpression;
                 default:
@@ -1503,7 +1561,8 @@ namespace Apizr
 
             public MethodInfo MethodInfo { get; }
 
-            public override int GetHashCode() => ApiInterfaceType.GetHashCode() * 23 * MethodInfo.GetHashCode() * 23 * 29;
+            public override int GetHashCode() =>
+                ApiInterfaceType.GetHashCode() * 23 * MethodInfo.GetHashCode() * 23 * 29;
 
             public override bool Equals(object obj)
             {
@@ -1511,7 +1570,7 @@ namespace Apizr
                        methodCacheDetails.ApiInterfaceType == ApiInterfaceType &&
                        methodCacheDetails.MethodInfo.Equals(MethodInfo);
             }
-        } 
+        }
 
         #endregion
     }

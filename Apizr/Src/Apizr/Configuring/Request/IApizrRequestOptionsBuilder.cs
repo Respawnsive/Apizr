@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Threading;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
@@ -36,6 +37,8 @@ namespace Apizr.Configuring.Request
         /// <param name="clearCache">Clear cache or not</param>
         /// <returns></returns>
         TApizrOptionsBuilder WithCacheClearing(bool clearCache);
+
+        internal TApizrOptionsBuilder WithOriginalExpression(Expression originalExpression);
     }
     
     /// <inheritdoc />

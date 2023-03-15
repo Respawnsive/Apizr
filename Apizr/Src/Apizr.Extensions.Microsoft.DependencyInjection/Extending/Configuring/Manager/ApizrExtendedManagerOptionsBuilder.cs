@@ -292,7 +292,7 @@ namespace Apizr.Extending.Configuring.Manager
         /// <inheritdoc />
         public IApizrExtendedManagerOptionsBuilder WithConnectivityHandler<TConnectivityHandler>(Expression<Func<TConnectivityHandler, bool>> factory)
         {
-            Options.ConnectivityHandlerFactory = serviceProvider => new DefaultConnectivityHandler(() => factory.Compile()(serviceProvider.GetRequiredService<TConnectivityHandler>()));
+            Options.ConnectivityHandlerFactory = serviceProvider => new DefaultConnectivityHandler(() => factory.Compile().Invoke(serviceProvider.GetRequiredService<TConnectivityHandler>()));
 
             return this;
         }

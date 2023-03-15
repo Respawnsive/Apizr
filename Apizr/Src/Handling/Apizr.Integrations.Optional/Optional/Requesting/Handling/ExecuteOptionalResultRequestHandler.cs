@@ -46,7 +46,7 @@ namespace Apizr.Optional.Requesting.Handling
                         return await request
                             .SomeNotNull(new ApizrException<TModelResultData>(
                                 new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelResultData, TApiResultData>((options, api) => executeApiMethod.Compile()(options, api), request.OptionsBuilder))
+                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelResultData, TApiResultData>((options, api) => executeApiMethod.Compile().Invoke(options, api), request.OptionsBuilder))
                             .ConfigureAwait(false);
 
                     case Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod:
@@ -60,7 +60,7 @@ namespace Apizr.Optional.Requesting.Handling
                         return await request
                             .SomeNotNull(new ApizrException<TModelResultData>(
                                 new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>((options, api, apiData) => executeApiMethod.Compile()(options, api, apiData), request.ModelRequestData, request.OptionsBuilder))
+                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>((options, api, apiData) => executeApiMethod.Compile().Invoke(options, api, apiData), request.ModelRequestData, request.OptionsBuilder))
                             .ConfigureAwait(false);
 
                     default:
@@ -108,7 +108,7 @@ namespace Apizr.Optional.Requesting.Handling
                         return await request
                             .SomeNotNull(new ApizrException<TModelData>(
                                 new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelData, TApiData>((options, api) => executeApiMethod.Compile()(options, api), request.OptionsBuilder))
+                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelData, TApiData>((options, api) => executeApiMethod.Compile().Invoke(options, api), request.OptionsBuilder))
                             .ConfigureAwait(false);
 
                     case Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod:
@@ -122,7 +122,7 @@ namespace Apizr.Optional.Requesting.Handling
                         return await request
                             .SomeNotNull(new ApizrException<TModelData>(
                                 new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
-                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelData, TApiData>((options, api, apiData) => executeApiMethod.Compile()(options, api, apiData), request.ModelRequestData, request.OptionsBuilder))
+                            .MapAsync(_ => WebApiManager.ExecuteAsync<TModelData, TApiData>((options, api, apiData) => executeApiMethod.Compile().Invoke(options, api, apiData), request.ModelRequestData, request.OptionsBuilder))
                             .ConfigureAwait(false);
 
                     default:
@@ -169,7 +169,7 @@ namespace Apizr.Optional.Requesting.Handling
                             .SomeNotNull(new ApizrException<TApiData>(
                                 new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
                             .MapAsync(_ =>
-                                WebApiManager.ExecuteAsync((options, api) => executeApiMethod.Compile()(options, api), request.OptionsBuilder))
+                                WebApiManager.ExecuteAsync((options, api) => executeApiMethod.Compile().Invoke(options, api), request.OptionsBuilder))
                             .ConfigureAwait(false);
 
                     default:

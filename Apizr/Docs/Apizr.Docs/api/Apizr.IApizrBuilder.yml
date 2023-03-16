@@ -9,7 +9,7 @@ items:
   - Apizr.IApizrBuilder.CreateCrudManagerFor``2(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})
   - Apizr.IApizrBuilder.CreateCrudManagerFor``3(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})
   - Apizr.IApizrBuilder.CreateCrudManagerFor``4(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})
-  - Apizr.IApizrBuilder.CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptionsBase,``4},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})
+  - Apizr.IApizrBuilder.CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})
   - Apizr.IApizrBuilder.CreateManagerFor``1(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})
   - Apizr.IApizrBuilder.CreateManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})
   - Apizr.IApizrBuilder.CreateRegistry(System.Action{Apizr.Configuring.Registry.IApizrRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
@@ -233,7 +233,7 @@ items:
   syntax:
     content: >-
       IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> CreateCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams>(Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
-          where T : class where TReadAllParams : class
+          where T : class
     parameters:
     - id: optionsBuilder
       type: System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}
@@ -253,21 +253,21 @@ items:
     return:
       type: Apizr.IApizrManager{Apizr.Requesting.ICrudApi{{T},{TKey},{TReadAllResult},{TReadAllParams}}}
       description: ''
-    content.vb: Function CreateCrudManagerFor(Of T As Class, TKey, TReadAllResult, TReadAllParams As Class)(optionsBuilder As Action(Of IApizrManagerOptionsBuilder) = Nothing) As IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams))
+    content.vb: Function CreateCrudManagerFor(Of T As Class, TKey, TReadAllResult, TReadAllParams)(optionsBuilder As Action(Of IApizrManagerOptionsBuilder) = Nothing) As IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams))
   overload: Apizr.IApizrBuilder.CreateCrudManagerFor*
   nameWithType.vb: IApizrBuilder.CreateCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams)(Action(Of IApizrManagerOptionsBuilder))
   fullName.vb: Apizr.IApizrBuilder.CreateCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams)(System.Action(Of Apizr.Configuring.Manager.IApizrManagerOptionsBuilder))
   name.vb: CreateCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams)(Action(Of IApizrManagerOptionsBuilder))
-- uid: Apizr.IApizrBuilder.CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptionsBase,``4},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})
-  commentId: M:Apizr.IApizrBuilder.CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptionsBase,``4},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})
-  id: CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptionsBase,``4},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})
+- uid: Apizr.IApizrBuilder.CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})
+  commentId: M:Apizr.IApizrBuilder.CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})
+  id: CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})
   parent: Apizr.IApizrBuilder
   langs:
   - csharp
   - vb
-  name: CreateCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<String>, IApizrManagerOptionsBase, TApizrManager>, Action<IApizrManagerOptionsBuilder>)
-  nameWithType: IApizrBuilder.CreateCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<String>, IApizrManagerOptionsBase, TApizrManager>, Action<IApizrManagerOptionsBuilder>)
-  fullName: Apizr.IApizrBuilder.CreateCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(System.Func<Apizr.ILazyFactory<Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Polly.Registry.IReadOnlyPolicyRegistry<System.String>, Apizr.Configuring.Manager.IApizrManagerOptionsBase, TApizrManager>, System.Action<Apizr.Configuring.Manager.IApizrManagerOptionsBuilder>)
+  name: CreateCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<String>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, TApizrManager>, Action<IApizrManagerOptionsBuilder>)
+  nameWithType: IApizrBuilder.CreateCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<String>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, TApizrManager>, Action<IApizrManagerOptionsBuilder>)
+  fullName: Apizr.IApizrBuilder.CreateCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(System.Func<Apizr.ILazyFactory<Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Polly.Registry.IReadOnlyPolicyRegistry<System.String>, Apizr.Configuring.Manager.IApizrManagerOptions<Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, TApizrManager>, System.Action<Apizr.Configuring.Manager.IApizrManagerOptionsBuilder>)
   type: Method
   source:
     id: CreateCrudManagerFor
@@ -280,11 +280,11 @@ items:
   example: []
   syntax:
     content: >-
-      TApizrManager CreateCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrManagerOptionsBase, TApizrManager> apizrManagerFactory, Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
-          where T : class where TReadAllParams : class where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>
+      TApizrManager CreateCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, TApizrManager> apizrManagerFactory, Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
+          where T : class where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>
     parameters:
     - id: apizrManagerFactory
-      type: System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{{T},{TKey},{TReadAllResult},{TReadAllParams}}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptionsBase,{TApizrManager}}
+      type: System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{{T},{TKey},{TReadAllResult},{TReadAllParams}}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{{T},{TKey},{TReadAllResult},{TReadAllParams}}},{TApizrManager}}
       description: The custom manager implementation instance factory
     - id: optionsBuilder
       type: System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}
@@ -306,11 +306,11 @@ items:
     return:
       type: '{TApizrManager}'
       description: ''
-    content.vb: Function CreateCrudManagerFor(Of T As Class, TKey, TReadAllResult, TReadAllParams As Class, TApizrManager As IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)))(apizrManagerFactory As Func(Of ILazyFactory(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry(Of String), IApizrManagerOptionsBase, TApizrManager), optionsBuilder As Action(Of IApizrManagerOptionsBuilder) = Nothing) As TApizrManager
+    content.vb: Function CreateCrudManagerFor(Of T As Class, TKey, TReadAllResult, TReadAllParams, TApizrManager As IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)))(apizrManagerFactory As Func(Of ILazyFactory(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry(Of String), IApizrManagerOptions(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), TApizrManager), optionsBuilder As Action(Of IApizrManagerOptionsBuilder) = Nothing) As TApizrManager
   overload: Apizr.IApizrBuilder.CreateCrudManagerFor*
-  nameWithType.vb: IApizrBuilder.CreateCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(Func(Of ILazyFactory(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry(Of String), IApizrManagerOptionsBase, TApizrManager), Action(Of IApizrManagerOptionsBuilder))
-  fullName.vb: Apizr.IApizrBuilder.CreateCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(System.Func(Of Apizr.ILazyFactory(Of Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Polly.Registry.IReadOnlyPolicyRegistry(Of System.String), Apizr.Configuring.Manager.IApizrManagerOptionsBase, TApizrManager), System.Action(Of Apizr.Configuring.Manager.IApizrManagerOptionsBuilder))
-  name.vb: CreateCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(Func(Of ILazyFactory(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry(Of String), IApizrManagerOptionsBase, TApizrManager), Action(Of IApizrManagerOptionsBuilder))
+  nameWithType.vb: IApizrBuilder.CreateCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(Func(Of ILazyFactory(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry(Of String), IApizrManagerOptions(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), TApizrManager), Action(Of IApizrManagerOptionsBuilder))
+  fullName.vb: Apizr.IApizrBuilder.CreateCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(System.Func(Of Apizr.ILazyFactory(Of Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Polly.Registry.IReadOnlyPolicyRegistry(Of System.String), Apizr.Configuring.Manager.IApizrManagerOptions(Of Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), TApizrManager), System.Action(Of Apizr.Configuring.Manager.IApizrManagerOptionsBuilder))
+  name.vb: CreateCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(Func(Of ILazyFactory(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry(Of String), IApizrManagerOptions(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), TApizrManager), Action(Of IApizrManagerOptionsBuilder))
 - uid: Apizr.IApizrBuilder.CreateManagerFor``1(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})
   commentId: M:Apizr.IApizrBuilder.CreateManagerFor``1(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})
   id: CreateManagerFor``1(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})
@@ -325,7 +325,7 @@ items:
   source:
     id: CreateManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\IApizrBuilder.cs
-    startLine: 123
+    startLine: 122
   assemblies:
   - Apizr
   namespace: Apizr
@@ -362,7 +362,7 @@ items:
   source:
     id: CreateManagerFor
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\IApizrBuilder.cs
-    startLine: 134
+    startLine: 133
   assemblies:
   - Apizr
   namespace: Apizr
@@ -2360,16 +2360,16 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{{T},{TKey},{TReadAllResult},{TReadAllParams}}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptionsBase,{TApizrManager}}
-  commentId: T:System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptionsBase,``4}
+- uid: System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{{T},{TKey},{TReadAllResult},{TReadAllParams}}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{{T},{TKey},{TReadAllResult},{TReadAllParams}}},{TApizrManager}}
+  commentId: T:System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4}
   parent: System
   definition: System.Func`7
-  name: Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<String>, IApizrManagerOptionsBase, TApizrManager>
-  nameWithType: Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<String>, IApizrManagerOptionsBase, TApizrManager>
-  fullName: System.Func<Apizr.ILazyFactory<Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Polly.Registry.IReadOnlyPolicyRegistry<System.String>, Apizr.Configuring.Manager.IApizrManagerOptionsBase, TApizrManager>
-  nameWithType.vb: Func(Of ILazyFactory(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry(Of String), IApizrManagerOptionsBase, TApizrManager)
-  fullName.vb: System.Func(Of Apizr.ILazyFactory(Of Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Polly.Registry.IReadOnlyPolicyRegistry(Of System.String), Apizr.Configuring.Manager.IApizrManagerOptionsBase, TApizrManager)
-  name.vb: Func(Of ILazyFactory(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry(Of String), IApizrManagerOptionsBase, TApizrManager)
+  name: Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<String>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, TApizrManager>
+  nameWithType: Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<String>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, TApizrManager>
+  fullName: System.Func<Apizr.ILazyFactory<Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Polly.Registry.IReadOnlyPolicyRegistry<System.String>, Apizr.Configuring.Manager.IApizrManagerOptions<Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, TApizrManager>
+  nameWithType.vb: Func(Of ILazyFactory(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry(Of String), IApizrManagerOptions(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), TApizrManager)
+  fullName.vb: System.Func(Of Apizr.ILazyFactory(Of Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Polly.Registry.IReadOnlyPolicyRegistry(Of System.String), Apizr.Configuring.Manager.IApizrManagerOptions(Of Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), TApizrManager)
+  name.vb: Func(Of ILazyFactory(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry(Of String), IApizrManagerOptions(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), TApizrManager)
   spec.csharp:
   - uid: System.Func`7
     name: Func
@@ -2463,10 +2463,47 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
-    name: IApizrManagerOptionsBase
-    nameWithType: IApizrManagerOptionsBase
-    fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptions`1
+    name: IApizrManagerOptions
+    nameWithType: IApizrManagerOptions
+    fullName: Apizr.Configuring.Manager.IApizrManagerOptions
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Requesting.ICrudApi`4
+    name: ICrudApi
+    nameWithType: ICrudApi
+    fullName: Apizr.Requesting.ICrudApi
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TReadAllResult
+    nameWithType: TReadAllResult
+    fullName: TReadAllResult
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TReadAllParams
+    nameWithType: TReadAllParams
+    fullName: TReadAllParams
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -2569,10 +2606,47 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
-    name: IApizrManagerOptionsBase
-    nameWithType: IApizrManagerOptionsBase
-    fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptions`1
+    name: IApizrManagerOptions
+    nameWithType: IApizrManagerOptions
+    fullName: Apizr.Configuring.Manager.IApizrManagerOptions
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Requesting.ICrudApi`4
+    name: ICrudApi
+    nameWithType: ICrudApi
+    fullName: Apizr.Requesting.ICrudApi
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TReadAllResult
+    nameWithType: TReadAllResult
+    fullName: TReadAllResult
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TReadAllParams
+    nameWithType: TReadAllParams
+    fullName: TReadAllParams
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
   - name: ', '
     nameWithType: ', '
     fullName: ', '

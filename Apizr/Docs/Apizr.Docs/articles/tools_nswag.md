@@ -35,8 +35,6 @@ From here, you'll get your apizr.json default configuration file into your curre
     "openApiToApizrClient": {
       "registrationType": "Both",
       "withPriority": false,
-      "withContext": false,
-      "withCancellationToken": false,
       "withRetry": false,
       "withLogs": false,
       "withCacheProvider": "None",
@@ -137,9 +135,7 @@ That said, let's focus on Apizr dedicated settings into the ```openApiToApizrCli
   - ```Static```: generate with the static builder method
   - ```Extended```: generate with the service collection extending method
   - ```Both```: generate both methods (could be interesting to read but not relevant for production)
-- ```withPriority``` (default: ```false```): include a priority parameter into GET api methods and add priority management into registration process
-- ```withContext``` (default: ```false```): include a context parameter into all api methods
-- ```withCancellationToken``` (default: ```false```): include a cancellation token parameter into all api methods
+- ```withPriority``` (default: ```false```): include priority management into registration process
 - ```withRetry``` (default: ```false```): add a Policy assembly attribute handling transient http error and a policy registry into registration process
 - ```withLogs``` (default: ```false```): add a Log assembly attribute and a logger factory into static only registration process
 - ```withCacheProvider``` (default: ```None```): 

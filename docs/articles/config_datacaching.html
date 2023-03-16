@@ -131,7 +131,7 @@ Of course, you can implement your own integration, but here we&#39;ll talk about
         Task&lt;UserList&gt; GetUsersAsync();
 
         [Get(&quot;/users/{userId}&quot;), Cache(CacheMode.GetOrFetch, &quot;1.00:00:00&quot;)]
-        Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId, CancellationToken cancellationToken);
+        Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId);
     }
 }
 </code></pre><p>You’ll find also cache attributes dedicated to CRUD apis like <code>CacheRead</code> and <code>CacheReadAll</code>, so you could define cache settings at any level (all Assembly apis, interface apis or specific CRUD method).</p>

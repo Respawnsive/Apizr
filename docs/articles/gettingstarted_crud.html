@@ -119,8 +119,7 @@
     [Delete(&quot;/{key}&quot;)]
     Task Delete(TKey key, [RequestOptions] IApizrRequestOptions options);
 }
-</code></pre><p>We can see that it comes with many parameter combinations, but it won&#39;t do anything until you ask Apizr to. 
-Caching, Logging, Policing, Prioritizing... everything is activable fluently with the options builder.</p>
+</code></pre><p>We can see that it comes with or without request options, allowing some option adjustments later at request time.</p>
 <p>About generic types:</p>
 <ul>
 <li>T and TKey (optional - default: <code>int</code>) meanings are obvious</li>
@@ -490,6 +489,11 @@ public class MyEntity
         try
         {
             var pagedUsers = await _userCrudManager.ExecuteAsync(api =&gt; api.ReadAll());
+
+            // OR with some option adjustments
+            // var userList = await _userCrudManager.ExecuteAsync((options, api) =&gt; api.ReadAll(options),
+            //                  options =&gt; options.WithPriority(Priority.Background)); 
+
             users = pagedUsers.Data?.ToList();
         }
         catch (ApizrException&lt;PagedResult&lt;User&gt;&gt; e)

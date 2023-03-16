@@ -111,8 +111,6 @@ It relies on the well known NSwag CLI, letting define all we need in a json conf
     &quot;openApiToApizrClient&quot;: {
       &quot;registrationType&quot;: &quot;Both&quot;,
       &quot;withPriority&quot;: false,
-      &quot;withContext&quot;: false,
-      &quot;withCancellationToken&quot;: false,
       &quot;withRetry&quot;: false,
       &quot;withLogs&quot;: false,
       &quot;withCacheProvider&quot;: &quot;None&quot;,
@@ -213,9 +211,7 @@ It means that you can adjust everything you used to with classic NSwag generatio
 <li><code>Both</code>: generate both methods (could be interesting to read but not relevant for production)</li>
 </ul>
 </li>
-<li><code>withPriority</code> (default: <code>false</code>): include a priority parameter into GET api methods and add priority management into registration process</li>
-<li><code>withContext</code> (default: <code>false</code>): include a context parameter into all api methods</li>
-<li><code>withCancellationToken</code> (default: <code>false</code>): include a cancellation token parameter into all api methods</li>
+<li><code>withPriority</code> (default: <code>false</code>): include priority management into registration process</li>
 <li><code>withRetry</code> (default: <code>false</code>): add a Policy assembly attribute handling transient http error and a policy registry into registration process</li>
 <li><code>withLogs</code> (default: <code>false</code>): add a Log assembly attribute and a logger factory into static only registration process</li>
 <li><code>withCacheProvider</code> (default: <code>None</code>): <ul>

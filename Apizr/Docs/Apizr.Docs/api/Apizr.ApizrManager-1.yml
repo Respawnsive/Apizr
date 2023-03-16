@@ -117,7 +117,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\ApizrManager.cs
-    startLine: 82
+    startLine: 88
   assemblies:
   - Apizr
   namespace: Apizr
@@ -167,7 +167,7 @@ items:
   source:
     id: Api
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\ApizrManager.cs
-    startLine: 101
+    startLine: 109
   assemblies:
   - Apizr
   namespace: Apizr
@@ -204,7 +204,7 @@ items:
   source:
     id: Options
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\ApizrManager.cs
-    startLine: 104
+    startLine: 112
   assemblies:
   - Apizr
   namespace: Apizr
@@ -241,7 +241,7 @@ items:
   source:
     id: ExecuteAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\ApizrManager.cs
-    startLine: 111
+    startLine: 119
   assemblies:
   - Apizr
   namespace: Apizr
@@ -286,14 +286,14 @@ items:
   source:
     id: ExecuteAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\ApizrManager.cs
-    startLine: 119
+    startLine: 126
   assemblies:
   - Apizr
   namespace: Apizr
   summary: "\nExecute a managed <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code>&apos;s task\n"
   example: []
   syntax:
-    content: public virtual Task ExecuteAsync(Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+    content: public virtual async Task ExecuteAsync(Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,{TWebApi},System.Threading.Tasks.Task}}
@@ -312,6 +312,7 @@ items:
   modifiers.csharp:
   - public
   - virtual
+  - async
   modifiers.vb:
   - Public
   - Overridable
@@ -331,7 +332,7 @@ items:
   source:
     id: ExecuteAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\ApizrManager.cs
-    startLine: 127
+    startLine: 188
   assemblies:
   - Apizr
   namespace: Apizr
@@ -384,14 +385,14 @@ items:
   source:
     id: ExecuteAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\ApizrManager.cs
-    startLine: 136
+    startLine: 197
   assemblies:
   - Apizr
   namespace: Apizr
   summary: "\nExecute a managed <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code>&apos;s task\n"
   example: []
   syntax:
-    content: public virtual Task ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+    content: public virtual async Task ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,{TWebApi},{TApiData},System.Threading.Tasks.Task}}
@@ -418,6 +419,7 @@ items:
   modifiers.csharp:
   - public
   - virtual
+  - async
   modifiers.vb:
   - Public
   - Overridable
@@ -437,7 +439,7 @@ items:
   source:
     id: ExecuteAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\ApizrManager.cs
-    startLine: 266
+    startLine: 271
   assemblies:
   - Apizr
   namespace: Apizr
@@ -485,14 +487,14 @@ items:
   source:
     id: ExecuteAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\ApizrManager.cs
-    startLine: 273
+    startLine: 278
   assemblies:
   - Apizr
   namespace: Apizr
   summary: "\nExecute a managed <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code>&apos;s task\n"
   example: []
   syntax:
-    content: public virtual Task<TApiData> ExecuteAsync<TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+    content: public virtual async Task<TApiData> ExecuteAsync<TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
@@ -514,6 +516,7 @@ items:
   modifiers.csharp:
   - public
   - virtual
+  - async
   modifiers.vb:
   - Public
   - Overridable
@@ -533,7 +536,7 @@ items:
   source:
     id: ExecuteAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\ApizrManager.cs
-    startLine: 280
+    startLine: 414
   assemblies:
   - Apizr
   namespace: Apizr
@@ -583,14 +586,14 @@ items:
   source:
     id: ExecuteAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\ApizrManager.cs
-    startLine: 287
+    startLine: 422
   assemblies:
   - Apizr
   namespace: Apizr
   summary: "\nExecute a managed <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code>&apos;s task returning a mapped result\n"
   example: []
   syntax:
-    content: public virtual Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+    content: public virtual async Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
@@ -614,6 +617,7 @@ items:
   modifiers.csharp:
   - public
   - virtual
+  - async
   modifiers.vb:
   - Public
   - Overridable
@@ -633,7 +637,7 @@ items:
   source:
     id: ExecuteAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\ApizrManager.cs
-    startLine: 295
+    startLine: 559
   assemblies:
   - Apizr
   namespace: Apizr
@@ -686,14 +690,14 @@ items:
   source:
     id: ExecuteAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\ApizrManager.cs
-    startLine: 302
+    startLine: 567
   assemblies:
   - Apizr
   namespace: Apizr
   summary: "\nExecute a managed <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code>&apos;s task returning a mapped result\n"
   example: []
   syntax:
-    content: public virtual Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+    content: public virtual async Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,{TWebApi},{TApiData},System.Threading.Tasks.Task{{TApiData}}}}
@@ -720,6 +724,7 @@ items:
   modifiers.csharp:
   - public
   - virtual
+  - async
   modifiers.vb:
   - Public
   - Overridable
@@ -739,7 +744,7 @@ items:
   source:
     id: ExecuteAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\ApizrManager.cs
-    startLine: 312
+    startLine: 709
   assemblies:
   - Apizr
   namespace: Apizr
@@ -796,14 +801,14 @@ items:
   source:
     id: ExecuteAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\ApizrManager.cs
-    startLine: 320
+    startLine: 719
   assemblies:
   - Apizr
   namespace: Apizr
   summary: "\nExecute a managed <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code>&apos;s task returning a mapped result\n"
   example: []
   syntax:
-    content: public virtual Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod, TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+    content: public virtual async Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod, TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,{TWebApi},{TApiRequestData},System.Threading.Tasks.Task{{TApiResultData}}}}
@@ -834,6 +839,7 @@ items:
   modifiers.csharp:
   - public
   - virtual
+  - async
   modifiers.vb:
   - Public
   - Overridable
@@ -853,7 +859,7 @@ items:
   source:
     id: ClearCacheAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\ApizrManager.cs
-    startLine: 843
+    startLine: 869
   assemblies:
   - Apizr
   namespace: Apizr
@@ -893,7 +899,7 @@ items:
   source:
     id: ClearCacheAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\ApizrManager.cs
-    startLine: 864
+    startLine: 892
   assemblies:
   - Apizr
   namespace: Apizr
@@ -936,7 +942,7 @@ items:
   source:
     id: ClearCacheAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\ApizrManager.cs
-    startLine: 868
+    startLine: 896
   assemblies:
   - Apizr
   namespace: Apizr

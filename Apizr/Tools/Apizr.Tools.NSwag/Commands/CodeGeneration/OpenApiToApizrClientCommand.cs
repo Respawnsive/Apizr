@@ -43,20 +43,6 @@ namespace Apizr.Tools.NSwag.Commands.CodeGeneration
             set => Settings.WithPriority = value;
         }
 
-        [Argument(Name = "WithContext", IsRequired = false, Description = "Add a Polly Context parameter into all methods")]
-        public bool WithContext
-        {
-            get => Settings.WithContext;
-            set => Settings.WithContext = value;
-        }
-
-        [Argument(Name = "WithCancellationToken", IsRequired = false, Description = "Add a CancellationToken parameter into all methods")]
-        public bool WithCancellationToken
-        {
-            get => Settings.WithCancellationToken;
-            set => Settings.WithCancellationToken = value;
-        }
-
         [Argument(Name = "WithRetry", IsRequired = false, Description = "Add retry management")]
         public bool WithRetry
         {

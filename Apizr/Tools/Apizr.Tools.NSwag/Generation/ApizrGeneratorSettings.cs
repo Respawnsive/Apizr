@@ -42,12 +42,6 @@ namespace Apizr.Tools.NSwag.Generation
         /// <summary>Gets or sets a value indicating whether to allow adding priority management </summary>
         public bool WithPriority { get; set; }
 
-        /// <summary>Gets or sets a value indicating whether to allow adding Polly context </summary>
-        public bool WithContext { get; set; }
-
-        /// <summary>Gets or sets a value indicating whether to allow adding cancellation token </summary>
-        public bool WithCancellationToken { get; set; }
-
         /// <summary>Gets or sets a value indicating whether to allow adding Polly retry management </summary>
         public bool WithRetry { get; set; }
 

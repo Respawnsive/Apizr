@@ -5,7 +5,9 @@
     </assembly>
     <members>
         <member name="T:Apizr.ApizrBuilder">
-            <inheritdoc/>
+            <summary>
+            The builder
+            </summary>
         </member>
         <member name="M:Apizr.ApizrBuilder.CreateRegistry(System.Action{Apizr.Configuring.Registry.IApizrRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})">
             <inheritdoc/>
@@ -22,7 +24,7 @@
         <member name="M:Apizr.ApizrBuilder.CreateCrudManagerFor``4(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
             <inheritdoc/>
         </member>
-        <member name="M:Apizr.ApizrBuilder.CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptionsBase,``4},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+        <member name="M:Apizr.ApizrBuilder.CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
             <inheritdoc/>
         </member>
         <member name="M:Apizr.ApizrBuilder.CreateManagerFor``1(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
@@ -81,25 +83,25 @@
         <member name="M:Apizr.ApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
-            <inheritdoc />
-        </member>
-        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task{``0}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``1}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task{``0}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task{``1}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task{``1}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.ApizrManager`1.ClearCacheAsync(System.Threading.CancellationToken)">
@@ -509,6 +511,9 @@
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithBaseAddress(System.String)">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.Apizr#Configuring#Shared#IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr#Configuring#Common#IApizrCommonOptions,Apizr#Configuring#Common#IApizrCommonOptionsBuilder}#WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithBaseAddress(System.Func{System.String})">
             <inheritdoc />
         </member>
@@ -620,7 +625,7 @@
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithMappingHandler(System.Func{Apizr.Mapping.IMappingHandler})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.Apizr#Configuring#Shared#IApizrInternalRegistrationOptionsBuilder#AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Common.IApizrCommonOptions">
@@ -968,6 +973,9 @@
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithBaseAddress(System.String)">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.Apizr#Configuring#Shared#IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr#Configuring#Manager#IApizrManagerOptions,Apizr#Configuring#Manager#IApizrManagerOptionsBuilder}#WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithBaseAddress(System.Func{System.String})">
             <inheritdoc />
         </member>
@@ -1079,7 +1087,7 @@
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithMappingHandler(System.Func{Apizr.Mapping.IMappingHandler})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.Apizr#Configuring#Shared#IApizrInternalRegistrationOptionsBuilder#AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Manager.IApizrExtendedManagerOptionsBuilderBase">
@@ -1218,6 +1226,9 @@
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithBaseAddress(System.String)">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.Apizr#Configuring#Shared#IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr#Configuring#Proper#IApizrProperOptions,Apizr#Configuring#Proper#IApizrProperOptionsBuilder}#WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithBaseAddress(System.Func{System.String})">
             <inheritdoc />
         </member>
@@ -1290,7 +1301,7 @@
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLogging(System.Func{System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.Apizr#Configuring#Shared#IApizrInternalRegistrationOptionsBuilder#AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Proper.IApizrExtendedProperOptionsBuilderBase">
@@ -1396,7 +1407,7 @@
         <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.GetManagerFor``1">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.GetManagerInternal``1">
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.Apizr#Configuring#Registry#IApizrInternalEnumerableRegistry#GetManagerInternal``1">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.TryGetCrudManagerFor``1(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}}@)">
@@ -1414,7 +1425,7 @@
         <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerFor``1(Apizr.IApizrManager{``0}@)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.TryGetManagerInternal``1(``0@)">
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.Apizr#Configuring#Registry#IApizrInternalEnumerableRegistry#TryGetManagerInternal``1(``0@)">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Registry.ApizrRegistryBase.Count">
@@ -1435,7 +1446,7 @@
         <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.ContainsManagerFor``1">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.ContainsManagerInternal``1">
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBase.Apizr#Configuring#Registry#IApizrInternalEnumerableRegistry#ContainsManagerInternal``1">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Registry.ApizrRegistryBuilder">
@@ -1471,7 +1482,7 @@
         <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddCrudManagerFor``4(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptionsBase,``4},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddManagerFor``1(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
@@ -1480,10 +1491,10 @@
         <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddWrappingManagerFor``2(System.Func{Apizr.IApizrManager{``0},``1},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.Apizr#Configuring#Registry#IApizrInternalRegistryBuilder{Apizr#Configuring#Proper#IApizrProperOptionsBuilder}#AddWrappingManagerFor``2(System.Func{Apizr.IApizrManager{``0},``1},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddAliasingManagerFor``2">
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.Apizr#Configuring#Registry#IApizrInternalGlobalRegistryBuilder#AddAliasingManagerFor``2">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Registry.IApizrEnumerableRegistry">
@@ -1636,7 +1647,7 @@
             Registry builder options available for static registrations
             </summary>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptionsBase,``4},System.Action{`2})">
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{`2})">
             <summary>
             Create a <typeparamref name="TApizrManager"/> instance for a managed crud api for <typeparamref name="T"/> object (class), 
             with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
@@ -1755,6 +1766,9 @@
         <member name="P:Apizr.Configuring.Request.ApizrRequestOptions.ClearCache">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Request.ApizrRequestOptions.Apizr#Configuring#Request#IApizrRequestOptions#OriginalExpression">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Configuring.Request.ApizrRequestOptionsBase">
             <inheritdoc cref="T:Apizr.Configuring.Request.IApizrRequestOptionsBase" />
         </member>
@@ -1789,6 +1803,9 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHandlerParameter(System.String,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.Apizr#Configuring#Request#IApizrRequestOptionsBuilder{Apizr#Configuring#Request#IApizrRequestOptions,Apizr#Configuring#Request#IApizrRequestOptionsBuilder}#WithOriginalExpression(System.Linq.Expressions.Expression)">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Request.IApizrRequestOptions">
@@ -2863,6 +2880,190 @@
             <param name="optionsBuilder">Options provided to the request</param>
             <returns></returns>
         </member>
+        <member name="M:Apizr.Extending.ApizrRegistryExtensions.CreateAsync``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Send a Create request
+            </summary>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <param name="registry">The registry</param>
+            <param name="entity">The entity to create</param>
+            <param name="optionsBuilder">Options provided to the request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.ApizrRegistryExtensions.CreateAsync``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Send a mapped Create request, returning a mapped result
+            </summary>
+            <typeparam name="TModelEntity">The model entity type to map from</typeparam>
+            <typeparam name="TApiEntity">The api entity type to map to</typeparam>
+            <param name="registry">The registry</param>
+            <param name="entity">The entity to create</param>
+            <param name="optionsBuilder">Options provided to the request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.ApizrRegistryExtensions.ReadAllAsync``3(Apizr.Configuring.Registry.IApizrEnumerableRegistry,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Send a ReadAll request
+            </summary>
+            <typeparam name="TApiEntity">The api entity type to map to</typeparam>
+            <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
+            <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
+            <param name="registry">The registry</param>
+            <param name="optionsBuilder">Options provided to the request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.ApizrRegistryExtensions.ReadAllAsync``4(Apizr.Configuring.Registry.IApizrEnumerableRegistry,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Send a ReadAll request, returning mapped result
+            </summary>
+            <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
+            <typeparam name="TApiEntity">The api entity type to map to</typeparam>
+            <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
+            <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
+            <param name="registry">The registry</param>
+            <param name="optionsBuilder">Options provided to the request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.ApizrRegistryExtensions.ReadAllAsync``4(Apizr.Configuring.Registry.IApizrEnumerableRegistry,``3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Send a ReadAll request with some parameters
+            </summary>
+            <typeparam name="TApiEntity">The api entity type to map to</typeparam>
+            <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
+            <typeparam name="TReadAllResult">The api result type</typeparam>
+            <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
+            <param name="registry">The registry</param>
+            <param name="readAllParams">The read all filters</param>
+            <param name="optionsBuilder">Options provided to the request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.ApizrRegistryExtensions.ReadAllAsync``5(Apizr.Configuring.Registry.IApizrEnumerableRegistry,``4,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Send a ReadAll request with some parameters, returning mapped result
+            </summary>
+            <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
+            <typeparam name="TApiEntity">The api entity type to map to</typeparam>
+            <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
+            <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
+            <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
+            <param name="registry">The registry</param>
+            <param name="readAllParams">The read all filters</param>
+            <param name="optionsBuilder">Options provided to the request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.ApizrRegistryExtensions.ReadAsync``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,System.Int32,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Send a Read request
+            </summary>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <param name="registry">The registry</param>
+            <param name="key">The entity key</param>
+            <param name="optionsBuilder">Options provided to the request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.ApizrRegistryExtensions.ReadAsync``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Send a Read request
+            </summary>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
+            <param name="registry">The registry</param>
+            <param name="key">The entity key</param>
+            <param name="optionsBuilder">Options provided to the request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.ApizrRegistryExtensions.ReadAsync``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,System.Int32,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Send a Read request, returning mapped result
+            </summary>
+            <typeparam name="TModelEntity">The model entity type to map from</typeparam>
+            <typeparam name="TApiEntity">The api entity type to map to</typeparam>
+            <param name="registry">The registry</param>
+            <param name="key">The entity key</param>
+            <param name="optionsBuilder">Options provided to the request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.ApizrRegistryExtensions.ReadAsync``3(Apizr.Configuring.Registry.IApizrEnumerableRegistry,``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Send a Read request, returning mapped result
+            </summary>
+            <typeparam name="TModelEntity">The model entity type to map from</typeparam>
+            <typeparam name="TApiEntity">The api entity type to map to</typeparam>
+            <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
+            <param name="registry">The registry</param>
+            <param name="key">The entity key</param>
+            <param name="optionsBuilder">Options provided to the request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.ApizrRegistryExtensions.UpdateAsync``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,System.Int32,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Send an Update request
+            </summary>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <param name="registry">The registry</param>
+            <param name="key">The entity key</param>
+            <param name="entity">The entity to update</param>
+            <param name="optionsBuilder">Options provided to the request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.ApizrRegistryExtensions.UpdateAsync``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,``1,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Send an Update request
+            </summary>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
+            <param name="registry">The registry</param>
+            <param name="key">The entity key</param>
+            <param name="entity">The entity to update</param>
+            <param name="optionsBuilder">Options provided to the request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.ApizrRegistryExtensions.UpdateAsync``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,System.Int32,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Send a mapped Update request, returning mapped result
+            </summary>
+            <typeparam name="TModelEntity">The model entity type to map from</typeparam>
+            <typeparam name="TApiEntity">The api entity type to map to</typeparam>
+            <param name="registry">The registry</param>
+            <param name="key">The entity key</param>
+            <param name="entity">The entity to update</param>
+            <param name="optionsBuilder">Options provided to the request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.ApizrRegistryExtensions.UpdateAsync``3(Apizr.Configuring.Registry.IApizrEnumerableRegistry,``2,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Send a mapped Update request, returning mapped result
+            </summary>
+            <typeparam name="TModelEntity">The model entity type to map from</typeparam>
+            <typeparam name="TApiEntity">The api entity type to map to</typeparam>
+            <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
+            <param name="registry">The registry</param>
+            <param name="key">The entity key</param>
+            <param name="entity">The entity to update</param>
+            <param name="optionsBuilder">Options provided to the request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.ApizrRegistryExtensions.DeleteAsync``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,System.Int32,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Send an Delete request
+            </summary>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <param name="registry">The registry</param>
+            <param name="key">The entity key</param>
+            <param name="optionsBuilder">Options provided to the request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.ApizrRegistryExtensions.DeleteAsync``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Send an Delete request
+            </summary>
+            <typeparam name="TApiEntity">The api entity type</typeparam>
+            <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
+            <param name="registry">The registry</param>
+            <param name="key">The entity key</param>
+            <param name="optionsBuilder">Options provided to the request</param>
+            <returns></returns>
+        </member>
         <member name="M:Apizr.Extending.ApizrRegistryExtensions.ClearCacheAsync``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,System.Threading.CancellationToken)">
             <summary>
             Clear all cache
@@ -3036,7 +3237,7 @@
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.IApizrBuilder.CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptionsBase,``4},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+        <member name="M:Apizr.IApizrBuilder.CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
             <summary>
             Create a <typeparamref name="TApizrManager"/> instance for a managed crud api for <typeparamref name="T"/> object (class), 
             with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
@@ -3138,16 +3339,32 @@
             <param name="optionsBuilder">Options provided to the request</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task{``0}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Execute a managed <typeparamref name="TWebApi"/>'s task
+            </summary>
+            <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+            <param name="optionsBuilder">Options provided to the request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``1}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <summary>
             Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
             </summary>
-            <typeparam name="TModelResultData">The mapped model result type</typeparam>
-            <typeparam name="TApiResultData">The api result type</typeparam>
-            <typeparam name="TApiRequestData">The mapped api request data type</typeparam>
-            <typeparam name="TModelRequestData">The model request data type</typeparam>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
             <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
-            <param name="modelRequestData">The model request data to map</param>
+            <param name="optionsBuilder">Options provided to the request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task{``1}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+            </summary>
+            <typeparam name="TModelData">The model data type</typeparam>
+            <typeparam name="TApiData">The api data type</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
             <param name="optionsBuilder">Options provided to the request</param>
             <returns></returns>
         </member>
@@ -3162,22 +3379,27 @@
             <param name="optionsBuilder">Options provided to the request</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``1}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <summary>
             Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
             </summary>
             <typeparam name="TModelData">The model data type</typeparam>
             <typeparam name="TApiData">The api data type</typeparam>
             <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+            <param name="modelData">The model data to map</param>
             <param name="optionsBuilder">Options provided to the request</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task{``0}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <summary>
-            Execute a managed <typeparamref name="TWebApi"/>'s task
+            Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
             </summary>
-            <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
-            <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+            <typeparam name="TModelResultData">The mapped model result type</typeparam>
+            <typeparam name="TApiResultData">The api result type</typeparam>
+            <typeparam name="TApiRequestData">The mapped api request data type</typeparam>
+            <typeparam name="TModelRequestData">The model request data type</typeparam>
+            <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+            <param name="modelRequestData">The model request data to map</param>
             <param name="optionsBuilder">Options provided to the request</param>
             <returns></returns>
         </member>
@@ -3191,27 +3413,6 @@
             <typeparam name="TModelRequestData">The model request data type</typeparam>
             <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
             <param name="modelRequestData">The model request data to map</param>
-            <param name="optionsBuilder">Options provided to the request</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
-            <summary>
-            Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
-            </summary>
-            <typeparam name="TModelData">The model data type</typeparam>
-            <typeparam name="TApiData">The api data type</typeparam>
-            <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
-            <param name="modelData">The model data to map</param>
-            <param name="optionsBuilder">Options provided to the request</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task{``1}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
-            <summary>
-            Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
-            </summary>
-            <typeparam name="TModelData">The model data type</typeparam>
-            <typeparam name="TApiData">The api data type</typeparam>
-            <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
             <param name="optionsBuilder">Options provided to the request</param>
             <returns></returns>
         </member>

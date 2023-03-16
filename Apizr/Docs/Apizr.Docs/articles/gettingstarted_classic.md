@@ -24,6 +24,28 @@ And that's all.
 
 Every attributes here will inform Apizr on how to manage each web api request. No more boilerplate.
 
+Actually, you should consider to add a special parameter called RequestOptions to each methods, allowing some option adjustments later at request time:
+```csharp
+[assembly:Policy("TransientHttpError")]
+namespace Apizr.Sample
+{
+    [WebApi("https://reqres.in/"), Cache, Log]
+    public interface IReqResService
+    {
+        [Get("/api/users")]
+        Task<UserList> GetUsersAsync([RequestOptions] IApizrRequestOptions options);
+
+        [Get("/api/users/{userId}")]
+        Task<UserDetails> GetUserAsync([CacheKey] int userId, 
+            [RequestOptions] IApizrRequestOptions options);
+
+        [Post("/api/users")]
+        Task<User> CreateUser(User user, 
+            [RequestOptions] IApizrRequestOptions options);
+    }
+}
+```
+
 ## Registering
 
 It's not required to register anything in a container for DI purpose (you can use the returned static instance directly), but we'll describe here how to use it with DI anyway.
@@ -449,8 +471,14 @@ public class YourViewModel
         try
         {
             var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync()); 
+
             // OR with dedicated registry shortcut extension
-            // var userList = await _apizrRegistry.ExecuteAsync<IReqResService>(api => api.GetUsersAsync()); 
+            // var userList = await _apizrRegistry.ExecuteAsync<IReqResService>(api => api.GetUsersAsync());
+ 
+            // OR with some option adjustments
+            // var userList = await _reqResManager.ExecuteAsync((options, api) => api.GetUsersAsync(options),
+            //                  options => options.WithPriority(Priority.Background)); 
+
             users = userList.Data;
         }
         catch (ApizrException<UserList> e)

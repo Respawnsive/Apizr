@@ -40,7 +40,7 @@ namespace Apizr.Sample
         Task<UserList> GetUsersAsync();
 
         [Get("/users/{userId}"), Cache(CacheMode.GetOrFetch, "1.00:00:00")]
-        Task<UserDetails> GetUserAsync([CacheKey] int userId, CancellationToken cancellationToken);
+        Task<UserDetails> GetUserAsync([CacheKey] int userId);
     }
 }
 ```

@@ -6,10 +6,11 @@ Much more options could be set by fluent configuration.
 All fluent configuration flavors offer a contextualized options builder, depending on what you're asking and where.
 
 The option types:
-- Proper: options available at api configuration level only and applied to it exclusively (e.g. BaseAddress obviously)
-- Common: options available at global configuration level only and applied to all registered apis (e.g. RefitSettings, PolicyRegistry)
+- Proper: options available at api configuration level only and applied to it exclusively (e.g. BaseAddress obviously, ...)
+- Common: options available at global configuration level only and applied to all registered apis (e.g. RefitSettings, PolicyRegistry, ...)
+- Request: options available at request time, when actually sending a request (e.g. Context, CancellationToken, ...)
 
-There're also some Shared options available at both api (proper) and global (common) configuration level (e.g. LogLevel)
+There're also some Shared options available at different configuration level (e.g. LogLevel)
 
 Here is what using it with a registry, the extended way, could look like:
 

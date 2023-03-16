@@ -44,7 +44,7 @@ public interface ICrudApi<T, in TKey, TReadAllResult, in TReadAllParams> where T
 }
 ```
 
-We can see that it comes with or without request options builder.
+We can see that it comes with or without request options, allowing some option adjustments later at request time.
 
 About generic types:
 - T and TKey (optional - default: ```int```) meanings are obvious
@@ -425,6 +425,11 @@ public class YourViewModel
         try
         {
             var pagedUsers = await _userCrudManager.ExecuteAsync(api => api.ReadAll());
+ 
+            // OR with some option adjustments
+            // var userList = await _userCrudManager.ExecuteAsync((options, api) => api.ReadAll(options),
+            //                  options => options.WithPriority(Priority.Background)); 
+
             users = pagedUsers.Data?.ToList();
         }
         catch (ApizrException<PagedResult<User>> e)

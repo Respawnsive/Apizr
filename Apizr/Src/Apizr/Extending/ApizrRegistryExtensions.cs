@@ -224,6 +224,8 @@ namespace Apizr.Extending
 
         #endregion
 
+        #endregion
+
         #region Crud
 
         #region Create
@@ -341,6 +343,20 @@ namespace Apizr.Extending
         /// Send a Read request
         /// </summary>
         /// <typeparam name="TApiEntity">The api entity type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="key">The entity key</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<TApiEntity> ReadAsync<TApiEntity>(this IApizrEnumerableRegistry registry,
+            int key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity>()
+                .ExecuteAsync((options, api) => api.Read(key, options), optionsBuilder);
+
+        /// <summary>
+        /// Send a Read request
+        /// </summary>
+        /// <typeparam name="TApiEntity">The api entity type</typeparam>
         /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
         /// <param name="registry">The registry</param>
         /// <param name="key">The entity key</param>
@@ -351,6 +367,22 @@ namespace Apizr.Extending
             where TApiEntity : class
             => registry.GetCrudManagerFor<TApiEntity, TApiEntityKey>()
                 .ExecuteAsync((options, api) => api.Read(key, options), optionsBuilder);
+
+        /// <summary>
+        /// Send a Read request, returning mapped result
+        /// </summary>
+        /// <typeparam name="TModelEntity">The model entity type to map from</typeparam>
+        /// <typeparam name="TApiEntity">The api entity type to map to</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="key">The entity key</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<TModelEntity> ReadAsync<TModelEntity, TApiEntity>(
+            this IApizrEnumerableRegistry registry, int key,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity>()
+                .ExecuteAsync<TModelEntity, TApiEntity>((options, api) => api.Read(key, options), optionsBuilder);
 
         /// <summary>
         /// Send a Read request, returning mapped result
@@ -377,6 +409,22 @@ namespace Apizr.Extending
         /// Send an Update request
         /// </summary>
         /// <typeparam name="TApiEntity">The api entity type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="key">The entity key</param>
+        /// <param name="entity">The entity to update</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task UpdateAsync<TApiEntity>(this IApizrEnumerableRegistry registry,
+            int key,
+            TApiEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity>()
+                .ExecuteAsync((options, api) => api.Update(key, entity, options), optionsBuilder);
+
+        /// <summary>
+        /// Send an Update request
+        /// </summary>
+        /// <typeparam name="TApiEntity">The api entity type</typeparam>
         /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
         /// <param name="registry">The registry</param>
         /// <param name="key">The entity key</param>
@@ -389,6 +437,24 @@ namespace Apizr.Extending
             where TApiEntity : class
             => registry.GetCrudManagerFor<TApiEntity, TApiEntityKey>()
                 .ExecuteAsync((options, api) => api.Update(key, entity, options), optionsBuilder);
+
+        /// <summary>
+        /// Send a mapped Update request, returning mapped result
+        /// </summary>
+        /// <typeparam name="TModelEntity">The model entity type to map from</typeparam>
+        /// <typeparam name="TApiEntity">The api entity type to map to</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="key">The entity key</param>
+        /// <param name="entity">The entity to update</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task UpdateAsync<TModelEntity, TApiEntity>(this IApizrEnumerableRegistry registry,
+            int key,
+            TModelEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity>()
+                .ExecuteAsync<TModelEntity, TApiEntity>(
+                    (options, api, apiEntity) => api.Update(key, apiEntity, options), entity, optionsBuilder);
 
         /// <summary>
         /// Send a mapped Update request, returning mapped result
@@ -417,6 +483,20 @@ namespace Apizr.Extending
         /// Send an Delete request
         /// </summary>
         /// <typeparam name="TApiEntity">The api entity type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="key">The entity key</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task DeleteAsync<TApiEntity>(this IApizrEnumerableRegistry registry,
+            int key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity>()
+                .ExecuteAsync((options, api) => api.Delete(key, options), optionsBuilder);
+
+        /// <summary>
+        /// Send an Delete request
+        /// </summary>
+        /// <typeparam name="TApiEntity">The api entity type</typeparam>
         /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
         /// <param name="registry">The registry</param>
         /// <param name="key">The entity key</param>
@@ -427,8 +507,6 @@ namespace Apizr.Extending
             where TApiEntity : class
             => registry.GetCrudManagerFor<TApiEntity, TApiEntityKey>()
                 .ExecuteAsync((options, api) => api.Delete(key, options), optionsBuilder);
-
-        #endregion
 
         #endregion
 

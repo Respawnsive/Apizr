@@ -1,4 +1,5 @@
-﻿using Apizr.Tools.NSwag.Generation.Models;
+﻿using Apizr.Tools.NSwag.Extensions;
+using Apizr.Tools.NSwag.Generation.Models;
 using DotLiquid;
 using NJsonSchema.CodeGeneration;
 using NJsonSchema.CodeGeneration.CSharp;

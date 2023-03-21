@@ -24,13 +24,10 @@ using System;
 {% endif -%}
 using Refit;
 using Apizr;
-{% if RegistrationType == 'None' -%}
+using Apizr.Configuring.Request;
 {% if WithRetry -%}
 using Polly;
 using Apizr.Policing;
-{% endif -%}
-using Polly.Extensions.Http;
-using Polly.Registry;
 {% endif -%}
 {% if WithLogs -%}
 using Apizr.Logging.Attributes;
@@ -39,20 +36,21 @@ using Apizr.Logging.Attributes;
 using Apizr.Caching.Attributes;
 {% endif -%}
 
-{% if WithRetry -%}
+{% if RegistrationType == 'None' -%}
+{%  if WithRetry -%}
 [assembly:Policy("TransientHttpError")]
-{% endif -%}
-{% if WithLogs -%}
+{%  endif -%}
+{%  if WithLogs -%}
 [assembly:Log]
-{% endif -%}
-{% if WithCacheProvider != 'None' -%}
+{%  endif -%}
+{%  if WithCacheProvider != 'None' -%}
 [assembly:Cache]
+{%  endif -%}
 {% endif -%}
-
 namespace {{ NameSpace }}
 {
     [WebApi]
-    public interface I{{ Class }}Api
+    public interface {{ Class }}
     {
 {%     for operation in Operations -%}
 {%         if operation.HasSummary -%}
@@ -85,7 +83,42 @@ namespace {{ NameSpace }}
 {%      if operation.ApizrHeaderParameters.size > 0 -%}
         [Headers({% for headerParameter in operation.ApizrHeaderParameters -%}"{{ headerParameter.Name }}"{% if operation.ApizrHeaderParameters.size > 1 and headerParameter.IsLast == false  -%}, {% endif -%}{%  endfor -%})] 
 {%      endif -%}
-        {{ operation.PascalizeResultType }} {{ operation.ActualOperationName }}Async({% for parameter in operation.NoHeaderParameters -%}{% assign kindName = parameter.KindName -%}{% case kindName -%}{% when 'Query' -%}[Query] {% when 'Body' -%}[Body] {% endcase -%}{{ parameter.TypeInControllerInterface }} {{ parameter.VariableName }}{% if GenerateOptionalParameters and parameter.IsOptional and parameter.HasDefault == false -%}= null{% endif %}, {% endfor -%} [RequestOptions] IApizrRequestOptions options = null);
+        {{ operation.PascalizeResultType }} {{ operation.ActualOperationName }}Async({% for parameter in operation.NoHeaderParameters -%}{% assign kindName = parameter.KindName -%}{% case kindName -%}{% when 'Query' -%}[Query] {% when 'Body' -%}[Body] {% endcase -%}{{ parameter.TypeInControllerInterface }} {{ parameter.VariableName }}{% if GenerateOptionalParameters and parameter.IsOptional and parameter.HasDefault == false -%}= null{% endif %}{% if parameter.IsSortLast == false -%}, {% endif -%}{% endfor -%});
+        
+{%      if WithRequestOptions -%}
+{%         if operation.HasSummary -%}
+        /// <summary>
+        /// {{ operation.Summary | csharpdocs }}
+        /// </summary>
+{%         endif -%}
+{%         for parameter in operation.NoHeaderParameters -%}
+{%             if parameter.HasDescription -%}
+        /// <param name="{{ parameter.VariableName }}">{{ parameter.Description | csharpdocs }}</param>
+{%             endif -%}
+{%         endfor -%}
+        /// <param name="options">The request options</param>
+{%         if operation.HasResultDescription -%}
+        /// <returns>{{ operation.ResultDescription | csharpdocs }}</returns>
+{%         endif -%}
+{%         if operation.IsDeprecated -%}
+        [Obsolete]
+{%         endif -%}
+{%  assign httpMethodLower = operation.HttpMethodLower -%}
+{%  case httpMethodLower -%}
+{%      when 'post' -%}
+        [Post("{{ operation.Path }}")]
+{%      when 'get' -%}
+        [Get("{{ operation.Path }}")]
+{%      when 'put' -%}
+        [Put("{{ operation.Path }}")]
+{%      when 'delete' -%}
+        [Delete("{{ operation.Path }}")]
+{%  endcase -%}  
+{%      if operation.ApizrHeaderParameters.size > 0 -%}
+        [Headers({% for headerParameter in operation.ApizrHeaderParameters -%}"{{ headerParameter.Name }}"{% if operation.ApizrHeaderParameters.size > 1 and headerParameter.IsLast == false  -%}, {% endif -%}{%  endfor -%})] 
+{%      endif -%}
+        {{ operation.PascalizeResultType }} {{ operation.ActualOperationName }}Async({% for parameter in operation.NoHeaderParameters -%}{% assign kindName = parameter.KindName -%}{% case kindName -%}{% when 'Query' -%}[Query] {% when 'Body' -%}[Body] {% endcase -%}{{ parameter.TypeInControllerInterface }} {{ parameter.VariableName }}{% if GenerateOptionalParameters and parameter.IsOptional and parameter.HasDefault == false -%}= null{% endif %}, {% endfor -%} [RequestOptions] IApizrRequestOptions options);
+{%      endif -%}
 
 {%  endfor -%}
     }

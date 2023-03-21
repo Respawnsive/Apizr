@@ -9,6 +9,8 @@
 using Apizr.Tools.NSwag.Extensions;
 using NSwag;
 using NSwag.CodeGeneration.CSharp.Models;
+using static System.Net.Mime.MediaTypeNames;
+using System.Text.RegularExpressions;
 
 namespace Apizr.Tools.NSwag.Generation.Models
 {
@@ -28,16 +30,8 @@ namespace Apizr.Tools.NSwag.Generation.Models
             IEnumerable<CSharpOperationModel> operations,
             OpenApiDocument document,
             ApizrGeneratorSettings settings)
-            : base(controllerName, settings)
+            : this(controllerName, operations, document, settings, null)
         {
-            _document = document;
-            _settings = settings;
-
-            Class = controllerName;
-            Operations = operations;
-
-            BaseClass = _settings.ControllerBaseClass?.Replace("{controller}", controllerName);
-            NameSpace = _settings.CSharpGeneratorSettings.Namespace;
         }
         
         /// <summary>Initializes a new instance of the <see cref="ApizrTemplateModel" /> class.</summary>
@@ -55,23 +49,8 @@ namespace Apizr.Tools.NSwag.Generation.Models
             _document = document;
             _settings = settings;
 
-            Class = controllerName;
-            if(string.IsNullOrWhiteSpace(Class))
-                if (!string.IsNullOrWhiteSpace(document.Info.Title))
-                    Class = StringExtensions.ToPascalCase(document.Info.Title)
-                        .Replace(" ", "")
-                        .Replace("Swagger", "");
-                else
-                    Class = "Api";
-
-            Class = !string.IsNullOrWhiteSpace(controllerName)
-                ? controllerName
-                : document.Info.Title
-                    .Replace(" ", "")
-                    .Replace("Swagger", "");
-
+            Class = !string.IsNullOrWhiteSpace(controllerName) ? controllerName : document.Info.Title.ToApiName();
             Operations = operations;
-
             BaseClass = _settings.ControllerBaseClass?.Replace("{controller}", controllerName);
             NameSpace = _settings.CSharpGeneratorSettings.Namespace;
             TagDescription = tag?.Description;
@@ -122,6 +101,8 @@ namespace Apizr.Tools.NSwag.Generation.Models
         public bool WithRetry => _settings.WithRetry;
 
         public bool WithLogs => _settings.WithLogs;
+
+        public bool WithRequestOptions => _settings.WithRequestOptions;
 
         public string WithCacheProvider => _settings.WithCacheProvider.ToString();
 

@@ -5,6 +5,6 @@ using Apizr.Tools.NSwag.Commands;
 using NConsole;
 using NSwag.Commands;
 
-Console.Write("Apizr dedicated version of NSwag command line tool for .NET 6+ " + RuntimeUtilities.CurrentRuntime + ", ");
+Console.Write("Apizr dedicated version of NSwag command line tool for " + RuntimeUtilities.CurrentRuntime + ", ");
 var processor = new ApizrCommandProcessor(new CoreConsoleHost());
 return await processor.ProcessAsync(args);

@@ -31,7 +31,8 @@ namespace Apizr.Tools.NSwag.Commands.Document
                 CodeGenerators =
                 {
                     OpenApiToApizrClientCommand = new OpenApiToApizrClientCommand()
-                }
+                },
+                Runtime = Runtime.Net70
             };
 
             await document.SaveAsync();

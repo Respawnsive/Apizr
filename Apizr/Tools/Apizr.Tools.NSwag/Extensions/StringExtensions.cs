@@ -3,22 +3,38 @@ using System.Text.RegularExpressions;
 
 namespace Apizr.Tools.NSwag.Extensions
 {
-    public static class StringExtensions
+    internal static class StringExtensions
     {
-        public static string ToPascalCase(this string s)
+        public static string ToFormattedCase(this string s)
         {
-            string withoutSymbols = Regex.Replace(s, "[^a-zA-Z0-9]", " ");
+            var withoutSymbols = Regex.Replace(s, "[^a-zA-Z]", " ");
 
-            string[] words = withoutSymbols.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var words = withoutSymbols.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            StringBuilder sb = new StringBuilder(words.Sum(x => x.Length));
+            var sb = new StringBuilder(words.Sum(x => x.Length));
 
-            foreach (string word in words)
+            foreach (var word in words)
             {
-                sb.Append(word[0].ToString().ToUpper() + word.Substring(1));
+                sb.Append(word[0].ToString().ToUpper() + word[1..].ToLower());
             }
 
             return sb.ToString();
+        }
+
+        public static string ToApiName(this string s)
+        {
+            var name = !string.IsNullOrWhiteSpace(s)
+                    ? s
+                    : "Rest";
+
+            var className = name
+                .Replace("swagger", "", StringComparison.InvariantCultureIgnoreCase)
+                .Replace("api", "", StringComparison.InvariantCultureIgnoreCase)
+                .ToFormattedCase();
+
+            var apiName = $"I{className}Api";
+
+            return apiName;
         }
     }
 }

@@ -37,6 +37,7 @@ From here, you'll get your apizr.json default configuration file into your curre
       "withPriority": false,
       "withRetry": false,
       "withLogs": false,
+      "withRequestOptions": false,
       "withCacheProvider": "None",
       "withMediation": false,
       "withOptionalMediation": false,
@@ -97,7 +98,7 @@ From here, you'll get your apizr.json default configuration file into your curre
       "newLineBehavior": "Auto"
     }
   },
-  "runtime": "Net60",
+  "runtime": "Net70",
   "defaultVariables": null,
   "documentGenerator": {
     "fromDocument": {

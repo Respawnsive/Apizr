@@ -48,6 +48,9 @@ namespace Apizr.Tools.NSwag.Generation
         /// <summary>Gets or sets a value indicating whether to allow adding Logs </summary>
         public bool WithLogs { get; set; }
 
+        /// <summary>Gets or sets a value indicating whether to allow adding Request Options </summary>
+        public bool WithRequestOptions { get; set; }
+
         /// <summary>Gets or sets a value indicating whether to allow adding Cache management </summary>
         public CacheProviderType WithCacheProvider { get; set; }
 

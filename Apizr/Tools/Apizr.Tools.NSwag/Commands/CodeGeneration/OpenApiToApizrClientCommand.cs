@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Apizr.Tools.NSwag.Extensions;
 using Apizr.Tools.NSwag.Generation;
 using Apizr.Tools.NSwag.Generation.Models;
 using NConsole;
@@ -6,6 +7,7 @@ using NJsonSchema.CodeGeneration;
 using NJsonSchema.CodeGeneration.CSharp;
 using NSwag.CodeGeneration.CSharp;
 using NSwag.Commands.CodeGeneration;
+using Parlot.Fluent;
 
 namespace Apizr.Tools.NSwag.Commands.CodeGeneration
 {
@@ -57,6 +59,13 @@ namespace Apizr.Tools.NSwag.Commands.CodeGeneration
             set => Settings.WithLogs = value;
         }
 
+        [Argument(Name = "WithRequestOptions", IsRequired = false, Description = "Add Request Options")]
+        public bool WithRequestOptions
+        {
+            get => Settings.WithRequestOptions;
+            set => Settings.WithRequestOptions = value;
+        }
+
         [Argument(Name = "WithCacheProvider", IsRequired = false, Description = "Add cache management (None, Akavache, MonkeyCache, InMemory, Distributed or Custom)")]
         public CacheProviderType WithCacheProvider
         {
@@ -103,7 +112,7 @@ namespace Apizr.Tools.NSwag.Commands.CodeGeneration
             var generator = new ApizrGenerator(document, Settings);
 
             var all = generator.GenerateAll().ToList();
-            var dir = Path.Combine(OutputFilePath, Settings.CSharpGeneratorSettings.Namespace);
+            var dir = OutputFilePath;
             var modelsPath = Path.Combine(dir, "Models");
             var apisPath = Path.Combine(dir, "Apis");
 
@@ -117,7 +126,8 @@ namespace Apizr.Tools.NSwag.Commands.CodeGeneration
             }
             foreach (var service in all.Where(a => a is {Category: CodeArtifactCategory.Client, Type: CodeArtifactType.Interface}))
             {
-                var serviceFile = Path.Combine(apisPath, $"I{service.TypeName ?? "Rest"}Api.cs");
+                var apiFile = $"{service.TypeName}.cs";
+                var serviceFile = Path.Combine(apisPath, apiFile);
                 result.Add(serviceFile, service.Code);
             }
             foreach (var other in all.Where(a => a.Category != CodeArtifactCategory.Contract && a.Category != CodeArtifactCategory.Client))

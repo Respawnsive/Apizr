@@ -1,4 +1,5 @@
-﻿using NSwag;
+﻿using Apizr.Tools.NSwag.Extensions;
+using NSwag;
 using NSwag.CodeGeneration.CSharp.Models;
 
 namespace Apizr.Tools.NSwag.Generation.Models
@@ -17,9 +18,7 @@ namespace Apizr.Tools.NSwag.Generation.Models
             BaseClass = _settings.ControllerBaseClass?.Replace("{controller}", controllerName);
             NameSpace = _settings.CSharpGeneratorSettings.Namespace;
             Apis = apis;
-            Title = document.Info.Title
-                .Replace(" ", "")
-                .Replace("Swagger", "");
+            Title = document.Info.Title;
         }
 
         public string BaseUrl { get; }

@@ -46,6 +46,7 @@ using Polly.Registry;
 {% endif -%}
 {% if WithLogs -%}
 using Apizr.Logging.Attributes;
+using Microsoft.Extensions.Logging;
 {% endif -%}
 {% if WithCacheProvider != 'None' -%}
 using Apizr.Caching.Attributes;
@@ -54,6 +55,15 @@ using Apizr.Caching.Attributes;
 using Akavache;
 {% elsif WithCacheProvider == 'MonkeyCache' -%}
 using MonkeyCache.FileStore;
+{% endif -%}
+{% if WithMapping -%}
+using AutoMapper;
+{% endif -%}
+{% if WithMediation or WithOptionalMediation -%}
+using MediatR;
+{% endif -%}
+{% if WithMediation or WithOptionalMediation or WithOptionalMediation -%}
+using System.Reflection;
 {% endif -%}
 
 {% if WithRetry -%}
@@ -86,7 +96,7 @@ namespace {{ NameSpace }}
 {%      endif -%}
 {%      if RegistrationType == 'Static' or RegistrationType == 'Both' -%}
         // Static
-        public static {% if HasManyApis  -%}IApizrRegistry {% else -%}IApizrManager<I{{ LastApi }}Api> {% endif -%} Build()
+        public static {% if HasManyApis  -%}IApizrRegistry {% else -%}IApizrManager<{{ LastApi }}> {% endif -%} Build()
         {
 {%          if WithCacheProvider == 'MonkeyCache' -%}
             Barrel.ApplicationId = "{{Title}}";
@@ -113,7 +123,7 @@ namespace {{ NameSpace }}
             var apizrRegisry = ApizrBuilder.Current.CreateRegistry(
                 registry => registry
 {%                  for api in Apis -%}
-                    .AddManagerFor<I{{ api }}Api>(){% if api == LastApi %},{% endif %}
+                    .AddManagerFor<{{ api }}>(){% if api == LastApi %},{% endif %}
 {%                  endfor -%}
                 options => options.WithBaseAddress("{{BaseUrl}}")
 {%                  if WithLogs -%}
@@ -123,13 +133,13 @@ namespace {{ NameSpace }}
                         //logging.AddConsole();
                         //logging.AddDebug();
                         //logging.SetMinimumLevel(LogLevel.Trace);
-                    })))
+                    }))
 {%                  endif -%}
 {%                  if WithRetry -%}
                     .WithPolicyRegistry(ApizrPolicyRegistry)
 {%                  endif -%}
 {%                  if WithPriority -%}
-                    .WithPriorityManagement()
+                    .WithPriority()
 {%                  endif -%}
 {%                  if WithCacheProvider == 'Akavache' -%}
                     .WithAkavacheCacheHandler()
@@ -145,7 +155,7 @@ namespace {{ NameSpace }}
 
             return apizrRegistry;
 {%          else -%}
-            var apizrManager = ApizrBuilder.Current.CreateManagerFor<I{{ LastApi }}Api>(
+            var apizrManager = ApizrBuilder.Current.CreateManagerFor<{{ LastApi }}>(
                 options => options.WithBaseAddress("{{BaseUrl}}")
 {%                  if WithLogs -%}
                     .WithLoggerFactory(() => LoggerFactory.Create(logging =>
@@ -154,13 +164,13 @@ namespace {{ NameSpace }}
                         //logging.AddConsole();
                         //logging.AddDebug();
                         //logging.SetMinimumLevel(LogLevel.Trace);
-                    })))
+                    }))
 {%                  endif -%}
 {%                  if WithRetry -%}
                     .WithPolicyRegistry(ApizrPolicyRegistry)
 {%                  endif -%}
 {%                  if WithPriority -%}
-                    .WithPriorityManagement()
+                    .WithPriority()
 {%                  endif -%}
 {%                  if WithCacheProvider == 'Akavache' -%}
                     .WithAkavacheCacheHandler()
@@ -212,11 +222,11 @@ namespace {{ NameSpace }}
             services.AddApizr(
                 registry => registry
 {%                  for api in Apis -%}
-                    .AddManagerFor<I{{ api }}Api>(){% if api == LastApi %},{% endif %}
+                    .AddManagerFor<{{ api }}>(){% if api == LastApi %},{% endif %}
 {%                  endfor -%}
                 options => options.WithBaseAddress("{{BaseUrl}}")
 {%                  if WithPriority -%}
-                    .WithPriorityManagement()
+                    .WithPriority()
 {%                  endif -%}
 {%                  if WithCacheProvider == 'Akavache' -%}
                     .WithAkavacheCacheHandler()
@@ -240,10 +250,10 @@ namespace {{ NameSpace }}
 {%                  endif -%}
             );
 {%          else -%}
-            services.AddApizrManagerFor<I{{ LastApi }}Api>(
+            services.AddApizrManagerFor<{{ LastApi }}>(
                 options => options.WithBaseAddress("{{BaseUrl}}")
 {%                  if WithPriority -%}
-                    .WithPriorityManagement()
+                    .WithPriority()
 {%                  endif -%}
 {%                  if WithCacheProvider == 'Akavache' -%}
                     .WithAkavacheCacheHandler()

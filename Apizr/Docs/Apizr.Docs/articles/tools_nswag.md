@@ -21,13 +21,13 @@ With Apizr.Tools.NSwag installed, navigate to the directory of your choice (the 
 
 #### Create a configuration file
 
-The first time you plan to use the tool for an api, you need to create a configuration file by running the ```new``` command:
+The first time you plan to use the tool for an api, you need to navigate to your target output folder and then run the ```new``` command:
 
 ```console
 > apizr new
 ```
 
-From here, you'll get your apizr.json default configuration file into your current directory, witch should look like:
+From here, you'll get your apizr.json default configuration file into your current directory, looking like:
 
 ```json
 {
@@ -139,6 +139,7 @@ That said, let's focus on Apizr dedicated settings into the ```openApiToApizrCli
 - ```withPriority``` (default: ```false```): include priority management into registration process
 - ```withRetry``` (default: ```false```): add a Policy assembly attribute handling transient http error and a policy registry into registration process
 - ```withLogs``` (default: ```false```): add a Log assembly attribute and a logger factory into static only registration process
+- ```withRequestOptions``` (default: ```false```): add a RequestOptions parameter to your api methods so that you can adjust configuration at request time
 - ```withCacheProvider``` (default: ```None```): 
   - ```None```: do not cache
   - ```Akavache```: use Akavache

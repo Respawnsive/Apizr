@@ -103,9 +103,9 @@ It relies on the well known NSwag CLI, letting define all we need in a json conf
 </code></pre><h3 id="configuring">Configuring</h3>
 <p>With Apizr.Tools.NSwag installed, navigate to the directory of your choice (the one where you want to generate files).</p>
 <h4 id="create-a-configuration-file">Create a configuration file</h4>
-<p>The first time you plan to use the tool for an api, you need to create a configuration file by running the <code>new</code> command:</p>
+<p>The first time you plan to use the tool for an api, you need to navigate to your target output folder and then run the <code>new</code> command:</p>
 <pre><code class="lang-console">&gt; apizr new
-</code></pre><p>From here, you&#39;ll get your apizr.json default configuration file into your current directory, witch should look like:</p>
+</code></pre><p>From here, you&#39;ll get your apizr.json default configuration file into your current directory, looking like:</p>
 <pre><code class="lang-json">{
   &quot;codeGenerators&quot;: {
     &quot;openApiToApizrClient&quot;: {
@@ -215,6 +215,7 @@ It means that you can adjust everything you used to with classic NSwag generatio
 <li><code>withPriority</code> (default: <code>false</code>): include priority management into registration process</li>
 <li><code>withRetry</code> (default: <code>false</code>): add a Policy assembly attribute handling transient http error and a policy registry into registration process</li>
 <li><code>withLogs</code> (default: <code>false</code>): add a Log assembly attribute and a logger factory into static only registration process</li>
+<li><code>withRequestOptions</code> (default: <code>false</code>): add a RequestOptions parameter to your api methods so that you can adjust configuration at request time</li>
 <li><code>withCacheProvider</code> (default: <code>None</code>): <ul>
 <li><code>None</code>: do not cache</li>
 <li><code>Akavache</code>: use Akavache</li>

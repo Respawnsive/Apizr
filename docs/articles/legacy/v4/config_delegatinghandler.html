@@ -5,19 +5,19 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Intro | Apizr </title>
+    <title>Configuring DelegatingHandlers | Apizr </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Intro | Apizr ">
+    <meta name="title" content="Configuring DelegatingHandlers | Apizr ">
     <meta name="generator" content="docfx 2.59.4.0">
     
-    <link rel="shortcut icon" href="../resources/favicon.ico">
-    <link rel="stylesheet" href="../styles/docfx.vendor.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
+    <link rel="shortcut icon" href="../../../resources/favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <meta property="docfx:navrel" content="../../../toc.html">
+    <meta property="docfx:tocrel" content="../../toc.html">
     
-    <meta property="docfx:rel" content="../">
+    <meta property="docfx:rel" content="../../../">
     
   </head>
   <body data-spy="scroll" data-target="#affix" data-offset="120">
@@ -34,8 +34,8 @@
                 <span class="icon-bar"></span>
               </button>
               
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../resources/logo.png" alt="">
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../../resources/logo.png" alt="">
               </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar">
@@ -77,14 +77,42 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="intro">Intro</h2>
+<h2 id="configuring-delegatinghandlers">Configuring DelegatingHandlers</h2>
 
-<div class="NOTE"><h5>Note</h5><p><strong>Versions</strong></p>
-<p>Following documentation is all about the latest packages version available on NuGet <a href="https://www.nuget.org/packages/Apizr/"><img src="https://img.shields.io/nuget/vpre/Apizr.svg" alt="NuGet Pre Release"></a>.
-You can find older versions and potential breaking changes under the <a href="legacy/breakingchanges.html">Legacy</a> section.</p>
+<p>You can add DelegatingHandlers thanks to this option:</p>
+<div class="tabGroup" id="tabgroup_WEn-Ls7TjJ">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_WEn-Ls7TjJ_tabid-static" role="tab" aria-controls="tabpanel_WEn-Ls7TjJ_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_WEn-Ls7TjJ_tabid-extended" role="tab" aria-controls="tabpanel_WEn-Ls7TjJ_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+</li>
+</ul>
+<section id="tabpanel_WEn-Ls7TjJ_tabid-static" role="tabpanel" data-tab="tabid-static">
+<pre><code class="lang-csharp">// direct configuration
+options =&gt; options.AddDelegatingHandler(YourDelegatingHandler)
+
+// OR factory configuration with the logger instance
+options =&gt; options.AddDelegatingHandler(logger =&gt; YourDelegatingHandler)
+
+// OR factory configuration with the logger and options instances
+options =&gt; options.AddDelegatingHandler((logger, options) =&gt; YourDelegatingHandler)
+</code></pre></section>
+<section id="tabpanel_WEn-Ls7TjJ_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-csharp">// direct configuration
+options =&gt; options.AddDelegatingHandler(YourDelegatingHandler)
+
+// OR factory configuration with the service provider instance
+options =&gt; options.AddDelegatingHandler(serviceProvider =&gt; YourDelegatingHandler)
+
+// OR factory configuration with the service provider and options instances
+options =&gt; options.AddDelegatingHandler((serviceProvider, options) =&gt; YourDelegatingHandler)
+</code></pre></section>
 </div>
-<p>Apizr aims to provide a resilient and feature-rich web API client for .NET applications based on Refit, with the more resiliency we can, but without the boilerplate. 
-It comes among other things with built-in support for retrying failed requests, handling network connectivity issues, caching responses, managing authentication, logging, and request prioritization, but there&#39;s more.</p>
+<div class="WARNING"><h5>Warning</h5><p><strong>Inner DelegatingHandler</strong></p>
+<p>Don&#39;t manage delegating handlers hierarchy by yourself, providing any inner handlers. Instead, just add your handlers thanks to the AddDelegatingHandler option the order you want and Apizr will do it for you.</p>
+</div>
 </article>
           </div>
           
@@ -117,8 +145,8 @@ It comes among other things with built-in support for retrying failed requests, 
       </footer>
     </div>
     
-    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
   </body>
 </html>

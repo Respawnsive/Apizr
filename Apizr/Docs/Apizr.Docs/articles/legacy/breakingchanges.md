@@ -6,8 +6,44 @@ Please find here some breaking changes while upgrading from previous versions
 
 #### Apizr
 
-- Now **ApizrBuilder static class offers only one public property named Current returning its own instance to get acces to its methods**, so that it could be extended then by other packages
-- **Some methods have been deprecated and moved as extension methods to a dedicated namespace**, but pointing to the new core ones
+- Now **ApizrBuilder static class exposes a single public property named Current and returning its own instance to get acces to its methods**, so that it could be extended then by other packages
+
+    Now write:
+    ```csharp 
+    ApizrBuilder.Current.WhatEver();
+    ``` 
+    
+    Don't write anymore:
+    ```csharp 
+    ApizrBuilder.WhatEver();
+    ``` 
+
+- **Some methods have been deprecated and moved as extension methods to a dedicated namespace**, pointing to the new core ones
+
+    Now write:
+    ```csharp 
+    // Designing
+    [Get("/")]
+    Task<MyResult> WhatEver([RequestOptions] IApizrRequestOptions options);
+    
+    // Requesting
+    myResult = await myManager.ExecuteAsync((opt, api) => api.WhatEver(opt), 
+        options => options.WithCacheClearing(true)
+            .WithCancellation(token)
+            .WithContext(context)
+            .WithPriority(Priority.Background)
+            .WithExCatcher(OnEx));
+    ``` 
+
+    Don't write anymore: 
+    ```csharp 
+    // Designing
+    [Get("/")]
+    Task<MyResult> WhatEver([Priority] int priority, [Context] Context context, CancellationToken cancellationToken);
+    
+    // Requesting
+    myManager.ExecuteAsync((ctx, ct, api) => api.WhatEver((int)Priority.Background, ct), context, token, true, OnEx)
+    ``` 
 
 ### 4.1
 

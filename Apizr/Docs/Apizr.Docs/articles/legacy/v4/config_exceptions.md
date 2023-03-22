@@ -127,7 +127,7 @@ Here we ask the api to get users and if it fails:
     - [AsyncErrorHandler](https://github.com/Fody/AsyncErrorHandler) will handle the exception like to inform the user that call just failed
     - Apizr will return the previous result from cache
 - There’s no cached data yet!
-    - letThrowOnExceptionWithEmptyCache is True? (witch is the case here)
+    - letThrowOnExceptionWithEmptyCache is True? (which is the case here)
         - Apizr will throw the inner exception that will be catched further by AsyncErrorHander (this is its normal behavior)
     - letThrowOnExceptionWithEmptyCache is False! (default)
         - Apizr will return the empty cache data (null) which has to be handled then

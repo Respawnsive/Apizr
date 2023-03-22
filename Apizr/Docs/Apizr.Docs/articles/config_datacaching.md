@@ -7,7 +7,7 @@ Of course, you can implement your own integration, but here we'll talk about the
 
 Please first install the integration package of your choice:
 
-|Project|Current|V-Next|
+|Project|Current|Upcoming|
 |-------|-----|-----|
 |Apizr.Extensions.Microsoft.Caching|[![NuGet](https://img.shields.io/nuget/v/Apizr.Extensions.Microsoft.Caching.svg)](https://www.nuget.org/packages/Apizr.Extensions.Microsoft.Caching/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Extensions.Microsoft.Caching.svg)](https://www.nuget.org/packages/Apizr.Extensions.Microsoft.Caching/)|
 |Apizr.Integrations.Akavache|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Akavache.svg)](https://www.nuget.org/packages/Apizr.Integrations.Akavache/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.Akavache.svg)](https://www.nuget.org/packages/Apizr.Integrations.Akavache/)|
@@ -40,7 +40,7 @@ namespace Apizr.Sample
         Task<UserList> GetUsersAsync();
 
         [Get("/users/{userId}"), Cache(CacheMode.GetOrFetch, "1.00:00:00")]
-        Task<UserDetails> GetUserAsync([CacheKey] int userId, CancellationToken cancellationToken);
+        Task<UserDetails> GetUserAsync([CacheKey] int userId);
     }
 }
 ```
@@ -277,7 +277,7 @@ Anyway, sometime we need to clear it explicitly, like in a Refresh scenario.
 Here are different ways to clear cache:
 ```csharp
 // Clear on call to force fetch and update cache
-var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(), true);
+var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(), options => options.WithCacheClearing(true));
 
 // Clear a specific request cache
 var succeed = await _reqResManager.ClearCacheAsync(api => api.GetUsersAsync());

@@ -27,21 +27,111 @@ if(users != null)
 We catch any ApizrException as it will contain the original inner exception, but also the previously cached result if some.
 If you provided an IConnectivityHandler implementation and there's no network connectivity before sending request, Apizr will throw an IO inner exception without sending the request.
 
-### Using `Action<Exception> onException`
+### Using `Action<Exception>`
 
-Instead of trycatching all the things, you may want to provide an exception handling action on call, thanks to `Action<Exception> onException` optional parameter.
+Instead of trycatching all the things, you may want to provide an exception handling action, thanks to `WithExCatching` builder option, available at both register and request time.
 
-Something like:
+You can set it thanks to this option:
+
 ```csharp
-reqResManager.ExecuteAsync(api => api.GetUsersAsync(), clearCache: false, onException: OnGetUsersException);
+// direct configuration
+options => options.WithExCatching(OnException)
+```
 
-...
+### [Registering](#tab/tabid-registering)
 
-private void OnGetUsersException(Exception ex)
+Configuring an exception handler at register time allows you to get some Global Exception Handling concepts right in place.
+
+`WithExCatching` builder option is available with or without using registry.
+It means that you can share your exception handler globally by setting it at registry level and/or set some specific one at api level.
+
+Here is a quite simple scenario:
+```csharp
+var reqResUserManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
+                    .WithExCatching(OnException));
+
+private void OnException(ApizrException ex)
 {
-    ...
+    // this is a global exception handler 
+    // called back in case of exception thrown 
+    // while requesting with IReqResUserService managed api
 }
 ```
+
+And here is a pretty complexe scenario:
+```csharp
+var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
+        .AddGroup(group => group
+                .AddManagerFor<IReqResUserService>(options => options
+                    .WithExCatching(OnReqResUserException, strategy: ApizrDuplicateStrategy.Add))
+                .AddManagerFor<IReqResResourceService>(),
+            options => options.WithExCatching(OnReqResException, strategy: ApizrDuplicateStrategy.Add))
+        .AddManagerFor<IHttpBinService>()
+        .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(),
+    options => options.WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add));
+
+private void OnException(ApizrException ex)
+{
+    // this is a global exception handler 
+    // called back in case of exception thrown 
+    // while requesting with any managed api from the registry
+}
+private void OnReqResException(ApizrException ex)
+{
+    // this is a group exception handler 
+    // called back in case of exception thrown 
+    // while requesting with any managed api from the group
+}
+private void OnReqResUserException(ApizrException ex)
+{
+    // this is a dedicated exception handler 
+    // called back in case of exception thrown 
+    // while requesting with a specific managed api
+}
+```
+
+Here I'm telling Apizr to:
+- Call back all exception handlers in case of any exception thrown while requesting with ```IReqResUserService``` api
+- Call back ```OnReqResException``` and ```OnException``` handlers in case of any exception thrown while requesting with ```IReqResResourceService``` api
+- Call back only ```OnException``` handler in case of any exception thrown while requesting with ```IHttpBinService``` api or ```User``` CRUD api
+
+Feel free to configure your exception handlers at the level of your choice, depending on your needs.
+You definitly can mix it all with request option exception handling.
+
+### [Requesting](#tab/tabid-requesting)
+
+Configuring an exception handler at request time allows you to set it at the very end, just before sending the request, like trycatching does.
+
+```csharp
+var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
+
+var users = await reqResManager.ExecuteAsync((options, api) => api.GetUsersAsync(options), options => 
+    options.WithExCatching(OnGetUsersException, strategy: ApizrDuplicateStrategy.Add));
+
+private void OnGetUsersException(ApizrException<ApiResult<User>> ex)
+{
+    // this is a dedicated exception handler 
+    // called back in case of exception thrown 
+    // while requesting with a specific managed api
+}
+```
+
+Here I'm telling Apizr in case of exception while resting to:
+- Call back any other registered exception handlers if any, thanks to ```Add``` duplicate strategy
+- Call back ```OnGetUsersException``` (e.g. to display a dedicated message or something)
+- Return result from cache to ```users``` if any
+
+You definitly can mix it with registration option exception handling.
+
+***
+
+You may notice that:
+- ```strategy``` parameter let you adjust the behavior in case of mixing (default: ```Replace```):
+  - ```Ignore```: if there's another handler yet configured, ignore this one
+  - ```Add```: add/queue this handler, no matter of yet configured ones
+  - ```Replace```: replace all yet configured handlers by this one
+  - ```Merge```: add/queue this handler, no matter of yet configured ones
+- ```letThrowOnExceptionWithEmptyCache``` parameter tells Apizr to throw the actual exception if there's no cached data to return
 
 ### Using `Optional.Async`
 
@@ -127,7 +217,7 @@ Here we ask the api to get users and if it fails:
     - [AsyncErrorHandler](https://github.com/Fody/AsyncErrorHandler) will handle the exception like to inform the user that call just failed
     - Apizr will return the previous result from cache
 - There’s no cached data yet!
-    - letThrowOnExceptionWithEmptyCache is True? (witch is the case here)
+    - letThrowOnExceptionWithEmptyCache is True? (which is the case here)
         - Apizr will throw the inner exception that will be catched further by AsyncErrorHander (this is its normal behavior)
     - letThrowOnExceptionWithEmptyCache is False! (default)
         - Apizr will return the empty cache data (null) which has to be handled then

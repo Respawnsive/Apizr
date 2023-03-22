@@ -19,7 +19,7 @@ items:
   type: Class
   source:
     id: VoidMappingHandler
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Mapping\VoidMappingHandler.cs
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Mapping\VoidMappingHandler.cs
     startLine: 7
   assemblies:
   - Apizr
@@ -43,8 +43,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
   modifiers.csharp:
   - public
   - class
@@ -64,20 +62,25 @@ items:
   type: Method
   source:
     id: Map
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Mapping\VoidMappingHandler.cs
-    startLine: 9
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Mapping\VoidMappingHandler.cs
+    startLine: 10
   assemblies:
   - Apizr
   namespace: Apizr.Mapping
+  summary: "\nExecute a mapping from the source object to a new destination object.\nThe source type is inferred from the source object.\n"
+  example: []
   syntax:
     content: public TDestination Map<TDestination>(object source)
     parameters:
     - id: source
       type: System.Object
+      description: Source object to map from
     typeParameters:
     - id: TDestination
+      description: Destination type to create
     return:
       type: '{TDestination}'
+      description: Mapped destination object
     content.vb: Public Function Map(Of TDestination)(source As Object) As TDestination
   overload: Apizr.Mapping.VoidMappingHandler.Map*
   implements:
@@ -102,21 +105,27 @@ items:
   type: Method
   source:
     id: Map
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Mapping\VoidMappingHandler.cs
-    startLine: 11
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Mapping\VoidMappingHandler.cs
+    startLine: 13
   assemblies:
   - Apizr
   namespace: Apizr.Mapping
+  summary: "\nExecute a mapping from the source object to a new destination object.\n"
+  example: []
   syntax:
     content: public TDestination Map<TSource, TDestination>(TSource source)
     parameters:
     - id: source
       type: '{TSource}'
+      description: Source object to map from
     typeParameters:
     - id: TSource
+      description: Source type to use, regardless of the runtime type
     - id: TDestination
+      description: Destination type to create
     return:
       type: '{TDestination}'
+      description: Mapped destination object
     content.vb: Public Function Map(Of TSource, TDestination)(source As TSource) As TDestination
   overload: Apizr.Mapping.VoidMappingHandler.Map*
   implements:
@@ -141,23 +150,30 @@ items:
   type: Method
   source:
     id: Map
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Mapping\VoidMappingHandler.cs
-    startLine: 13
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Mapping\VoidMappingHandler.cs
+    startLine: 16
   assemblies:
   - Apizr
   namespace: Apizr.Mapping
+  summary: "\nExecute a mapping from the source object to the existing destination object.\n"
+  example: []
   syntax:
     content: public TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
     parameters:
     - id: source
       type: '{TSource}'
+      description: Source object to map from
     - id: destination
       type: '{TDestination}'
+      description: Destination object to map into
     typeParameters:
     - id: TSource
+      description: Source type to use
     - id: TDestination
+      description: Destination type
     return:
       type: '{TDestination}'
+      description: The mapped destination object, same instance as the <code data-dev-comment-type="paramref" class="paramref">destination</code> object
     content.vb: Public Function Map(Of TSource, TDestination)(source As TSource, destination As TDestination) As TDestination
   overload: Apizr.Mapping.VoidMappingHandler.Map*
   implements:
@@ -182,22 +198,28 @@ items:
   type: Method
   source:
     id: Map
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Mapping\VoidMappingHandler.cs
-    startLine: 15
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Mapping\VoidMappingHandler.cs
+    startLine: 19
   assemblies:
   - Apizr
   namespace: Apizr.Mapping
+  summary: "\nExecute a mapping from the source object to a new destination object with explicit <xref href=\"System.Type\" data-throw-if-not-resolved=\"false\"></xref> objects\n"
+  example: []
   syntax:
     content: public object Map(object source, Type sourceType, Type destinationType)
     parameters:
     - id: source
       type: System.Object
+      description: Source object to map from
     - id: sourceType
       type: System.Type
+      description: Source type to use
     - id: destinationType
       type: System.Type
+      description: Destination type to create
     return:
       type: System.Object
+      description: Mapped destination object
     content.vb: Public Function Map(source As Object, sourceType As Type, destinationType As Type) As Object
   overload: Apizr.Mapping.VoidMappingHandler.Map*
   implements:
@@ -219,24 +241,31 @@ items:
   type: Method
   source:
     id: Map
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Mapping\VoidMappingHandler.cs
-    startLine: 17
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Mapping\VoidMappingHandler.cs
+    startLine: 22
   assemblies:
   - Apizr
   namespace: Apizr.Mapping
+  summary: "\nExecute a mapping from the source object to existing destination object with explicit <xref href=\"System.Type\" data-throw-if-not-resolved=\"false\"></xref> objects\n"
+  example: []
   syntax:
     content: public object Map(object source, object destination, Type sourceType, Type destinationType)
     parameters:
     - id: source
       type: System.Object
+      description: Source object to map from
     - id: destination
       type: System.Object
+      description: Destination object to map into
     - id: sourceType
       type: System.Type
+      description: Source type to use
     - id: destinationType
       type: System.Type
+      description: Destination type to use
     return:
       type: System.Object
+      description: Mapped destination object, same instance as the <code data-dev-comment-type="paramref" class="paramref">destination</code> object
     content.vb: Public Function Map(source As Object, destination As Object, sourceType As Type, destinationType As Type) As Object
   overload: Apizr.Mapping.VoidMappingHandler.Map*
   implements:
@@ -543,148 +572,12 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  parent: Apizr.Extending.ObjectExtensions
-  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  name: ToString(String, String)
-  nameWithType: ObjectExtensions.ToString(String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
   name: System
   nameWithType: System
   fullName: System
-- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  isExternal: true
-  name: ToString(Object, String, String)
-  nameWithType: ObjectExtensions.ToString(Object, String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.ObjectExtensions
-  commentId: T:Apizr.Extending.ObjectExtensions
-  parent: Apizr.Extending
-  name: ObjectExtensions
-  nameWithType: ObjectExtensions
-  fullName: Apizr.Extending.ObjectExtensions
-- uid: Apizr.Extending
-  commentId: N:Apizr.Extending
-  name: Apizr.Extending
-  nameWithType: Apizr.Extending
-  fullName: Apizr.Extending
 - uid: Apizr.Mapping.VoidMappingHandler.Map*
   commentId: Overload:Apizr.Mapping.VoidMappingHandler.Map
   name: Map

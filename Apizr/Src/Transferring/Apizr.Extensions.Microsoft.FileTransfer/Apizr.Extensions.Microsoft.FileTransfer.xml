@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Apizr.Extensions.Microsoft.FileTransfer</name>
+    </assembly>
+    <members>
+        <member name="T:Apizr.FileTransferExtendedOptionsBuilderExtensions">
+            <summary>
+            File transfer options builder extensions
+            </summary>
+        </member>
+        <member name="M:Apizr.FileTransferExtendedOptionsBuilderExtensions.AddApizrUploadManager(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
+            <summary>
+            Add an upload manager for IUploadApi (you must at least provide a base url thanks to the options builder)
+            </summary>
+            <param name="services">The service collection where to add the manager</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferExtendedOptionsBuilderExtensions.AddApizrUploadManagerFor``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
+            <summary>
+            Add an upload manager for the provided upload api derived from IUploadApi
+            </summary>
+            <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
+            <param name="services">The service collection where to add the manager</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferExtendedOptionsBuilderExtensions.AddApizrDownloadManager(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
+            <summary>
+            Add a download manager for IDownloadApi (you must at least provide a base url thanks to the options builder)
+            </summary>
+            <param name="services">The service collection where to add the manager</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferExtendedOptionsBuilderExtensions.AddApizrDownloadManagerFor``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
+            <summary>
+            Add a download manager for the provided download api derived from IDownloadApi
+            </summary>
+            <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
+            <param name="services">The service collection where to add the manager</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferExtendedOptionsBuilderExtensions.AddApizrDownloadManagerFor``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
+            <summary>
+            Add a download manager for the provided download api derived from IDownloadApi{TDownloadParams}
+            </summary>
+            <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
+            <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+            <param name="services">The service collection where to add the manager</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferExtendedOptionsBuilderExtensions.AddApizrTransferManager(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
+            <summary>
+            Add a transfer manager for ITransferApi (you must at least provide a base url thanks to the options builder)
+            </summary>
+            <param name="services">The service collection where to add the manager</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferExtendedOptionsBuilderExtensions.AddApizrTransferManagerFor``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
+            <summary>
+            Add a transfer manager for the provided transfer api derived from ITransferApi
+            </summary>
+            <typeparam name="TTransferApi">The transfer api interface to manage</typeparam>
+            <param name="services">The service collection where to add the manager</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferExtendedOptionsBuilderExtensions.AddApizrTransferManagerFor``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
+            <summary>
+            Add a transfer manager for the provided transfer api derived from ITransferApi{TDownloadParams}
+            </summary>
+            <typeparam name="TTransferApi">The transfer api interface to manage</typeparam>
+            <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+            <param name="services">The service collection where to add the manager</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferExtendedOptionsBuilderExtensions.AddUploadManager(Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder,System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder})">
+            <summary>
+            Add an upload manager for IUploadApi (you must at least provide a base url)
+            </summary>
+            <param name="builder">The builder to create the manager from</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferExtendedOptionsBuilderExtensions.AddUploadManagerFor``1(Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder,System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder})">
+            <summary>
+            Add an upload manager for the provided upload api derived from IUploadApi
+            </summary>
+            <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
+            <param name="builder">The builder to create the manager from</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferExtendedOptionsBuilderExtensions.AddDownloadManager(Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder,System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder})">
+            <summary>
+            Add a download manager for IDownloadApi (you must at least provide a base url)
+            </summary>
+            <param name="builder">The builder to create the manager from</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferExtendedOptionsBuilderExtensions.AddDownloadManagerFor``1(Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder,System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder})">
+            <summary>
+            Add a download manager for the provided download api derived from IDownloadApi
+            </summary>
+            <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
+            <param name="builder">The builder to create the manager from</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferExtendedOptionsBuilderExtensions.AddDownloadFor``2(Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder,System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder})">
+            <summary>
+            Add a download manager for the provided download api derived from IDownloadApi{TDownloadParams}
+            </summary>
+            <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
+            <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+            <param name="builder">The builder to create the manager from</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferExtendedOptionsBuilderExtensions.AddTransferManager(Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder,System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder})">
+            <summary>
+            Add a transfer manager for ITransferApi (you must at least provide a base url)
+            </summary>
+            <param name="builder">The builder to create the manager from</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferExtendedOptionsBuilderExtensions.AddTransferManagerFor``1(Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder,System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder})">
+            <summary>
+            Add a transfer manager for the provided transfer api derived from ITransferApi
+            </summary>
+            <typeparam name="TTransferApi">The transfer api interface to manage</typeparam>
+            <param name="builder">The builder to create the manager from</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferExtendedOptionsBuilderExtensions.AddTransferManagerFor``2(Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder,System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder})">
+            <summary>
+            Add a transfer manager for the provided transfer api derived from ITransferApi{TDownloadParams}
+            </summary>
+            <typeparam name="TTransferApi">The transfer api interface to manage</typeparam>
+            <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+            <param name="builder">The builder to create the manager from</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ApizrOptionalMediator&lt;TWebApi&gt;
    | Apizr ">
-    <meta name="generator" content="docfx 2.59.0.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -83,14 +83,15 @@
   
   <h1 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1" class="text-break">Class ApizrOptionalMediator&lt;TWebApi&gt;
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p><a class="xref" href="Apizr.Optional.Requesting.Sending.IApizrOptionalMediator.html">IApizrOptionalMediator</a> but dedicated to <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> with optional result, getting all shorter</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">ApizrOptionalMediator&lt;TWebApi&gt;</span></div>
   </div>
-  <div classs="implements">
+  <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Apizr.Optional.Requesting.Sending.IApizrOptionalMediator-1.html">IApizrOptionalMediator</a>&lt;TWebApi&gt;</div>
     <div><a class="xref" href="Apizr.Optional.Requesting.Sending.IApizrOptionalMediatorBase.html">IApizrOptionalMediatorBase</a></div>
@@ -175,12 +176,13 @@
   
   
   <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_System_Linq_Expressions_Expression_System_Func__0_System_Threading_Tasks_Task___" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}})">SendFor(Expression&lt;Func&lt;TWebApi, Task&gt;&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_System_Linq_Expressions_Expression_System_Func__0_System_Threading_Tasks_Task___System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendFor(Expression&lt;Func&lt;TWebApi, Task&gt;&gt;, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Send an api call to Apizr using MediatR and returning an optional result</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;Unit, ApizrException&gt;&gt; SendFor(Expression&lt;Func&lt;TWebApi, Task&gt;&gt; executeApiMethod)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;Unit, ApizrException&gt;&gt; SendFor(Expression&lt;Func&lt;TWebApi, Task&gt;&gt; executeApiMethod, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -195,6 +197,12 @@
       <tr>
         <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -217,12 +225,13 @@
   
   
   <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_System_Linq_Expressions_Expression_System_Func_Polly_Context__0_System_Threading_Tasks_Task___Polly_Context_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task}},Polly.Context)">SendFor(Expression&lt;Func&lt;Context, TWebApi, Task&gt;&gt;, Context)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_System_Linq_Expressions_Expression_System_Func_Apizr_Configuring_Request_IApizrRequestOptions__0_System_Threading_Tasks_Task___System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendFor(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, Task&gt;&gt;, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Send an api call to Apizr using MediatR and returning an optional result</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;Unit, ApizrException&gt;&gt; SendFor(Expression&lt;Func&lt;Context, TWebApi, Task&gt;&gt; executeApiMethod, Context context = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;Unit, ApizrException&gt;&gt; SendFor(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, Task&gt;&gt; executeApiMethod, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -235,13 +244,14 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -264,111 +274,13 @@
   
   
   <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken__0_System_Threading_Tasks_Task___Polly_Context_System_Threading_CancellationToken_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},Polly.Context,System.Threading.CancellationToken)">SendFor(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, Task&gt;&gt;, Context, CancellationToken)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__1_System_Linq_Expressions_Expression_System_Func__0_System_Threading_Tasks_Task___0____System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``1(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendFor&lt;TApiData&gt;(Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Send an api call to Apizr using MediatR and returning an optional result</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;Unit, ApizrException&gt;&gt; SendFor(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, Task&gt;&gt; executeApiMethod, Context context = null, CancellationToken token = default(CancellationToken))</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, <span class="xref">System.Threading.CancellationToken</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">token</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Optional.Option</span>&lt;<span class="xref">MediatR.Unit</span>, <a class="xref" href="Apizr.ApizrException.html">ApizrException</a>&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken__0_System_Threading_Tasks_Task___System_Threading_CancellationToken_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},System.Threading.CancellationToken)">SendFor(Expression&lt;Func&lt;CancellationToken, TWebApi, Task&gt;&gt;, CancellationToken)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;Unit, ApizrException&gt;&gt; SendFor(Expression&lt;Func&lt;CancellationToken, TWebApi, Task&gt;&gt; executeApiMethod, CancellationToken token = default(CancellationToken))</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">System.Threading.CancellationToken</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">token</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Optional.Option</span>&lt;<span class="xref">MediatR.Unit</span>, <a class="xref" href="Apizr.ApizrException.html">ApizrException</a>&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__1_System_Linq_Expressions_Expression_System_Func__0_System_Threading_Tasks_Task___0____System_Boolean_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``1(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}},System.Boolean)">SendFor&lt;TApiData&gt;(Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TApiData, ApizrException&lt;TApiData&gt;&gt;&gt; SendFor&lt;TApiData&gt;(Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, bool clearCache = false)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TApiData, ApizrException&lt;TApiData&gt;&gt;&gt; SendFor&lt;TApiData&gt;(Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -383,12 +295,14 @@
       <tr>
         <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -418,19 +332,21 @@
     <tbody>
       <tr>
         <td><span class="parametername">TApiData</span></td>
-        <td></td>
+        <td><p>The api result type</p>
+</td>
       </tr>
     </tbody>
   </table>
   
   
   <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__1_System_Linq_Expressions_Expression_System_Func_Polly_Context__0_System_Threading_Tasks_Task___0____Polly_Context_System_Boolean_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``1(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{``0}}},Polly.Context,System.Boolean)">SendFor&lt;TApiData&gt;(Expression&lt;Func&lt;Context, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Context, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__1_System_Linq_Expressions_Expression_System_Func_Apizr_Configuring_Request_IApizrRequestOptions__0_System_Threading_Tasks_Task___0____System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``1(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task{``0}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendFor&lt;TApiData&gt;(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Send an api call to Apizr using MediatR and returning an optional result</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TApiData, ApizrException&lt;TApiData&gt;&gt;&gt; SendFor&lt;TApiData&gt;(Expression&lt;Func&lt;Context, TWebApi, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, Context context = null, bool clearCache = false)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TApiData, ApizrException&lt;TApiData&gt;&gt;&gt; SendFor&lt;TApiData&gt;(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -443,19 +359,16 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -485,158 +398,21 @@
     <tbody>
       <tr>
         <td><span class="parametername">TApiData</span></td>
-        <td></td>
+        <td><p>The api result type</p>
+</td>
       </tr>
     </tbody>
   </table>
   
   
   <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__1_System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken__0_System_Threading_Tasks_Task___0____Polly_Context_System_Threading_CancellationToken_System_Boolean_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``1(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``0}}},Polly.Context,System.Threading.CancellationToken,System.Boolean)">SendFor&lt;TApiData&gt;(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Context, CancellationToken, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__2_System_Linq_Expressions_Expression_System_Func__0___1_System_Threading_Tasks_Task___1______0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Send an api call to Apizr using MediatR with a mapped request and returning an optional mapped result</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TApiData, ApizrException&lt;TApiData&gt;&gt;&gt; SendFor&lt;TApiData&gt;(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, Context context = null, CancellationToken token = default(CancellationToken), bool clearCache = false)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, <span class="xref">System.Threading.CancellationToken</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">token</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Optional.Option</span>&lt;TApiData, <a class="xref" href="Apizr.ApizrException-1.html">ApizrException</a>&lt;TApiData&gt;&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TApiData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__1_System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken__0_System_Threading_Tasks_Task___0____System_Threading_CancellationToken_System_Boolean_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``1(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``0}}},System.Threading.CancellationToken,System.Boolean)">SendFor&lt;TApiData&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, CancellationToken, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TApiData, ApizrException&lt;TApiData&gt;&gt;&gt; SendFor&lt;TApiData&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, CancellationToken token = default(CancellationToken), bool clearCache = false)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">System.Threading.CancellationToken</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">token</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Optional.Option</span>&lt;TApiData, <a class="xref" href="Apizr.ApizrException-1.html">ApizrException</a>&lt;TApiData&gt;&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TApiData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__2_System_Linq_Expressions_Expression_System_Func__0___1_System_Threading_Tasks_Task___1______0_System_Boolean_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Boolean)">SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TModelData, ApizrException&lt;TModelData&gt;&gt;&gt; SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, TModelData modelData, bool clearCache = false)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TModelData, ApizrException&lt;TModelData&gt;&gt;&gt; SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, TModelData modelData, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -651,17 +427,20 @@
       <tr>
         <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">TModelData</span></td>
         <td><span class="parametername">modelData</span></td>
-        <td></td>
+        <td><p>The model data to map</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -691,23 +470,26 @@
     <tbody>
       <tr>
         <td><span class="parametername">TModelData</span></td>
-        <td></td>
+        <td><p>The mapped model type to map request from and result to</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TApiData</span></td>
-        <td></td>
+        <td><p>The api result type to map request to and result from</p>
+</td>
       </tr>
     </tbody>
   </table>
   
   
   <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__2_System_Linq_Expressions_Expression_System_Func__0___1_System_Threading_Tasks_Task_____0_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task}},``0)">SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, TApiData, Task&gt;&gt;, TModelData)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__2_System_Linq_Expressions_Expression_System_Func__0___1_System_Threading_Tasks_Task_____0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task}},``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, TApiData, Task&gt;&gt;, TModelData, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Send an api call to Apizr using MediatR with mapped request and returning an optional result</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;Unit, ApizrException&gt;&gt; SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, TApiData, Task&gt;&gt; executeApiMethod, TModelData modelData)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;Unit, ApizrException&gt;&gt; SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, TApiData, Task&gt;&gt; executeApiMethod, TModelData modelData, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -722,11 +504,18 @@
       <tr>
         <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">TModelData</span></td>
         <td><span class="parametername">modelData</span></td>
+        <td><p>The model data to map</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -757,23 +546,26 @@
     <tbody>
       <tr>
         <td><span class="parametername">TModelData</span></td>
-        <td></td>
+        <td><p>The model request type to map from</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TApiData</span></td>
-        <td></td>
+        <td><p>The api request type to map to</p>
+</td>
       </tr>
     </tbody>
   </table>
   
   
   <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__2_System_Linq_Expressions_Expression_System_Func__0_System_Threading_Tasks_Task___1____System_Boolean_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``1}}},System.Boolean)">SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__2_System_Linq_Expressions_Expression_System_Func__0_System_Threading_Tasks_Task___1____System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``1}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Send an api call to Apizr using MediatR returning an optional mapped result</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TModelData, ApizrException&lt;TModelData&gt;&gt;&gt; SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, bool clearCache = false)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TModelData, ApizrException&lt;TModelData&gt;&gt;&gt; SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -788,88 +580,14 @@
       <tr>
         <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Optional.Option</span>&lt;TModelData, <a class="xref" href="Apizr.ApizrException-1.html">ApizrException</a>&lt;TModelData&gt;&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__2_System_Linq_Expressions_Expression_System_Func_Polly_Context__0___1_System_Threading_Tasks_Task___1______0_Polly_Context_System_Boolean_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,``1,System.Threading.Tasks.Task{``1}}},``0,Polly.Context,System.Boolean)">SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, Context, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TModelData, ApizrException&lt;TModelData&gt;&gt;&gt; SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, TModelData modelData, Context context = null, bool clearCache = false)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">TModelData</span></td>
-        <td><span class="parametername">modelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -899,23 +617,26 @@
     <tbody>
       <tr>
         <td><span class="parametername">TModelData</span></td>
-        <td></td>
+        <td><p>The mapped model type to map to</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TApiData</span></td>
-        <td></td>
+        <td><p>The api result type to map from</p>
+</td>
       </tr>
     </tbody>
   </table>
   
   
   <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__2_System_Linq_Expressions_Expression_System_Func_Polly_Context__0___1_System_Threading_Tasks_Task_____0_Polly_Context_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,``1,System.Threading.Tasks.Task}},``0,Polly.Context)">SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, TWebApi, TApiData, Task&gt;&gt;, TModelData, Context)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__2_System_Linq_Expressions_Expression_System_Func_Apizr_Configuring_Request_IApizrRequestOptions__0___1_System_Threading_Tasks_Task___1______0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Send an api call to Apizr using MediatR with a mapped request and returning an optional mapped result</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;Unit, ApizrException&gt;&gt; SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, TWebApi, TApiData, Task&gt;&gt; executeApiMethod, TModelData modelData, Context context = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TModelData, ApizrException&lt;TModelData&gt;&gt;&gt; SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, TModelData modelData, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -928,18 +649,97 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">TModelData</span></td>
         <td><span class="parametername">modelData</span></td>
-        <td></td>
+        <td><p>The model data to map</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Optional.Option</span>&lt;TModelData, <a class="xref" href="Apizr.ApizrException-1.html">ApizrException</a>&lt;TModelData&gt;&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TModelData</span></td>
+        <td><p>The mapped model type to map request from and result to</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TApiData</span></td>
+        <td><p>The api result type to map request to and result from</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
+  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__2_System_Linq_Expressions_Expression_System_Func_Apizr_Configuring_Request_IApizrRequestOptions__0___1_System_Threading_Tasks_Task_____0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,``1,System.Threading.Tasks.Task}},``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, TApiData, Task&gt;&gt;, TModelData, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Send an api call to Apizr using MediatR with mapped request and returning an optional result</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;Unit, ApizrException&gt;&gt; SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, TApiData, Task&gt;&gt; executeApiMethod, TModelData modelData, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
+        <td><span class="parametername">executeApiMethod</span></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">TModelData</span></td>
+        <td><span class="parametername">modelData</span></td>
+        <td><p>The model data to map</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -970,23 +770,26 @@
     <tbody>
       <tr>
         <td><span class="parametername">TModelData</span></td>
-        <td></td>
+        <td><p>The model request type to map from</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TApiData</span></td>
-        <td></td>
+        <td><p>The api request type to map to</p>
+</td>
       </tr>
     </tbody>
   </table>
   
   
   <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__2_System_Linq_Expressions_Expression_System_Func_Polly_Context__0_System_Threading_Tasks_Task___1____Polly_Context_System_Boolean_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{``1}}},Polly.Context,System.Boolean)">SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Context, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__2_System_Linq_Expressions_Expression_System_Func_Apizr_Configuring_Request_IApizrRequestOptions__0_System_Threading_Tasks_Task___1____System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task{``1}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Send an api call to Apizr using MediatR returning an optional mapped result</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TModelData, ApizrException&lt;TModelData&gt;&gt;&gt; SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, TWebApi, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, Context context = null, bool clearCache = false)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TModelData, ApizrException&lt;TModelData&gt;&gt;&gt; SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -999,19 +802,16 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1041,474 +841,26 @@
     <tbody>
       <tr>
         <td><span class="parametername">TModelData</span></td>
-        <td></td>
+        <td><p>The mapped model type to map to</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TApiData</span></td>
-        <td></td>
+        <td><p>The api result type to map from</p>
+</td>
       </tr>
     </tbody>
   </table>
   
   
   <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__2_System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken__0___1_System_Threading_Tasks_Task___1______0_Polly_Context_System_Threading_CancellationToken_System_Boolean_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task{``1}}},``0,Polly.Context,System.Threading.CancellationToken,System.Boolean)">SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, Context, CancellationToken, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__4_System_Linq_Expressions_Expression_System_Func__0___2_System_Threading_Tasks_Task___1______3_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``4(System.Linq.Expressions.Expression{System.Func{`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendFor&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Send an api call to Apizr using MediatR with a mapped request and returning an optional mapped result</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TModelData, ApizrException&lt;TModelData&gt;&gt;&gt; SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, TModelData modelData, Context context = null, CancellationToken token = default(CancellationToken), bool clearCache = false)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, <span class="xref">System.Threading.CancellationToken</span>, TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">TModelData</span></td>
-        <td><span class="parametername">modelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">token</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Optional.Option</span>&lt;TModelData, <a class="xref" href="Apizr.ApizrException-1.html">ApizrException</a>&lt;TModelData&gt;&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__2_System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken__0___1_System_Threading_Tasks_Task_____0_Polly_Context_System_Threading_CancellationToken_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task}},``0,Polly.Context,System.Threading.CancellationToken)">SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, TApiData, Task&gt;&gt;, TModelData, Context, CancellationToken)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;Unit, ApizrException&gt;&gt; SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, TApiData, Task&gt;&gt; executeApiMethod, TModelData modelData, Context context = null, CancellationToken token = default(CancellationToken))</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, <span class="xref">System.Threading.CancellationToken</span>, TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">TModelData</span></td>
-        <td><span class="parametername">modelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">token</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Optional.Option</span>&lt;<span class="xref">MediatR.Unit</span>, <a class="xref" href="Apizr.ApizrException.html">ApizrException</a>&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__2_System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken__0_System_Threading_Tasks_Task___1____Polly_Context_System_Threading_CancellationToken_System_Boolean_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``1}}},Polly.Context,System.Threading.CancellationToken,System.Boolean)">SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Context, CancellationToken, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TModelData, ApizrException&lt;TModelData&gt;&gt;&gt; SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, Context context = null, CancellationToken token = default(CancellationToken), bool clearCache = false)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, <span class="xref">System.Threading.CancellationToken</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">token</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Optional.Option</span>&lt;TModelData, <a class="xref" href="Apizr.ApizrException-1.html">ApizrException</a>&lt;TModelData&gt;&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__2_System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken__0___1_System_Threading_Tasks_Task___1______0_System_Threading_CancellationToken_System_Boolean_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Threading.CancellationToken,System.Boolean)">SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, CancellationToken, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TModelData, ApizrException&lt;TModelData&gt;&gt;&gt; SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, TModelData modelData, CancellationToken token = default(CancellationToken), bool clearCache = false)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">System.Threading.CancellationToken</span>, TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">TModelData</span></td>
-        <td><span class="parametername">modelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">token</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Optional.Option</span>&lt;TModelData, <a class="xref" href="Apizr.ApizrException-1.html">ApizrException</a>&lt;TModelData&gt;&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__2_System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken__0___1_System_Threading_Tasks_Task_____0_System_Threading_CancellationToken_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task}},``0,System.Threading.CancellationToken)">SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, TApiData, Task&gt;&gt;, TModelData, CancellationToken)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;Unit, ApizrException&gt;&gt; SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, TApiData, Task&gt;&gt; executeApiMethod, TModelData modelData, CancellationToken token = default(CancellationToken))</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">System.Threading.CancellationToken</span>, TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">TModelData</span></td>
-        <td><span class="parametername">modelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">token</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Optional.Option</span>&lt;<span class="xref">MediatR.Unit</span>, <a class="xref" href="Apizr.ApizrException.html">ApizrException</a>&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__2_System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken__0_System_Threading_Tasks_Task___1____System_Threading_CancellationToken_System_Boolean_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``2(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``1}}},System.Threading.CancellationToken,System.Boolean)">SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, CancellationToken, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TModelData, ApizrException&lt;TModelData&gt;&gt;&gt; SendFor&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, CancellationToken token = default(CancellationToken), bool clearCache = false)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">System.Threading.CancellationToken</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">token</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Optional.Option</span>&lt;TModelData, <a class="xref" href="Apizr.ApizrException-1.html">ApizrException</a>&lt;TModelData&gt;&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__4_System_Linq_Expressions_Expression_System_Func__0___2_System_Threading_Tasks_Task___1______3_System_Boolean_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``4(System.Linq.Expressions.Expression{System.Func{`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Boolean)">SendFor&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TModelResultData, ApizrException&lt;TModelResultData&gt;&gt;&gt; SendFor&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt; executeApiMethod, TModelRequestData modelRequestData, bool clearCache = false)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TModelResultData, ApizrException&lt;TModelResultData&gt;&gt;&gt; SendFor&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt; executeApiMethod, TModelRequestData modelRequestData, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1523,17 +875,20 @@
       <tr>
         <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TWebApi, TApiRequestData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiResultData&gt;&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">TModelRequestData</span></td>
         <td><span class="parametername">modelRequestData</span></td>
-        <td></td>
+        <td><p>The model request data</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1563,31 +918,36 @@
     <tbody>
       <tr>
         <td><span class="parametername">TModelResultData</span></td>
-        <td></td>
+        <td><p>The model result type to map to</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TApiResultData</span></td>
-        <td></td>
+        <td><p>The api request type to map to</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TApiRequestData</span></td>
-        <td></td>
+        <td><p>The api result type to map from</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TModelRequestData</span></td>
-        <td></td>
+        <td><p>The model request type to map from</p>
+</td>
       </tr>
     </tbody>
   </table>
   
   
   <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__4_System_Linq_Expressions_Expression_System_Func_Polly_Context__0___2_System_Threading_Tasks_Task___1______3_Polly_Context_System_Boolean_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``4(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,``2,System.Threading.Tasks.Task{``1}}},``3,Polly.Context,System.Boolean)">SendFor&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;Context, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, Context, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__4_System_Linq_Expressions_Expression_System_Func_Apizr_Configuring_Request_IApizrRequestOptions__0___2_System_Threading_Tasks_Task___1______3_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``4(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendFor&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Send an api call to Apizr using MediatR with a mapped request and returning an optional mapped result</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TModelResultData, ApizrException&lt;TModelResultData&gt;&gt;&gt; SendFor&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;Context, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt; executeApiMethod, TModelRequestData modelRequestData, Context context = null, bool clearCache = false)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TModelResultData, ApizrException&lt;TModelResultData&gt;&gt;&gt; SendFor&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt; executeApiMethod, TModelRequestData modelRequestData, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1600,24 +960,22 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, TWebApi, TApiRequestData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiResultData&gt;&gt;&gt;</td>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, TWebApi, TApiRequestData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiResultData&gt;&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">TModelRequestData</span></td>
         <td><span class="parametername">modelRequestData</span></td>
-        <td></td>
+        <td><p>The model request data</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1647,192 +1005,23 @@
     <tbody>
       <tr>
         <td><span class="parametername">TModelResultData</span></td>
-        <td></td>
+        <td><p>The model result type to map to</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TApiResultData</span></td>
-        <td></td>
+        <td><p>The api request type to map to</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TApiRequestData</span></td>
-        <td></td>
+        <td><p>The api result type to map from</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TModelRequestData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__4_System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken__0___2_System_Threading_Tasks_Task___1______3_Polly_Context_System_Threading_CancellationToken_System_Boolean_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``4(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,``2,System.Threading.Tasks.Task{``1}}},``3,Polly.Context,System.Threading.CancellationToken,System.Boolean)">SendFor&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, Context, CancellationToken, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TModelResultData, ApizrException&lt;TModelResultData&gt;&gt;&gt; SendFor&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt; executeApiMethod, TModelRequestData modelRequestData, Context context = null, CancellationToken token = default(CancellationToken), bool clearCache = false)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, <span class="xref">System.Threading.CancellationToken</span>, TWebApi, TApiRequestData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiResultData&gt;&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">TModelRequestData</span></td>
-        <td><span class="parametername">modelRequestData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">token</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Optional.Option</span>&lt;TModelResultData, <a class="xref" href="Apizr.ApizrException-1.html">ApizrException</a>&lt;TModelResultData&gt;&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelResultData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiResultData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiRequestData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TModelRequestData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor*"></a>
-  <h4 id="Apizr_Optional_Requesting_Sending_ApizrOptionalMediator_1_SendFor__4_System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken__0___2_System_Threading_Tasks_Task___1______3_System_Threading_CancellationToken_System_Boolean_" data-uid="Apizr.Optional.Requesting.Sending.ApizrOptionalMediator`1.SendFor``4(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Threading.CancellationToken,System.Boolean)">SendFor&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, CancellationToken, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Option&lt;TModelResultData, ApizrException&lt;TModelResultData&gt;&gt;&gt; SendFor&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt; executeApiMethod, TModelRequestData modelRequestData, CancellationToken token = default(CancellationToken), bool clearCache = false)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">System.Threading.CancellationToken</span>, TWebApi, TApiRequestData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiResultData&gt;&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">TModelRequestData</span></td>
-        <td><span class="parametername">modelRequestData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">token</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Optional.Option</span>&lt;TModelResultData, <a class="xref" href="Apizr.ApizrException-1.html">ApizrException</a>&lt;TModelResultData&gt;&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelResultData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiResultData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiRequestData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TModelRequestData</span></td>
-        <td></td>
+        <td><p>The model request type to map from</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1848,7 +1037,73 @@
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="Apizr.Extending.ObjectExtensions.html#Apizr_Extending_ObjectExtensions_ToString_System_Object_System_String_System_String_">ObjectExtensions.ToString(Object, String, String)</a>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__1_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func_Polly_Context___0_System_Threading_Tasks_Task___Polly_Context_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, TWebApi, Task&gt;&gt;, Context)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__1_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken___0_System_Threading_Tasks_Task___System_Threading_CancellationToken_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;CancellationToken, TWebApi, Task&gt;&gt;, CancellationToken)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__1_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken___0_System_Threading_Tasks_Task___Polly_Context_System_Threading_CancellationToken_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, CancellationToken, TWebApi, Task&gt;&gt;, Context, CancellationToken)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__3_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func___0___2_System_Threading_Tasks_Task_____1_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi, TModelData, TApiData&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;TWebApi, TApiData, Task&gt;&gt;, TModelData)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__3_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken___0___2_System_Threading_Tasks_Task_____1_System_Threading_CancellationToken_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi, TModelData, TApiData&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;CancellationToken, TWebApi, TApiData, Task&gt;&gt;, TModelData, CancellationToken)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__3_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func_Polly_Context___0___2_System_Threading_Tasks_Task_____1_Polly_Context_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi, TModelData, TApiData&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, TWebApi, TApiData, Task&gt;&gt;, TModelData, Context)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__3_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken___0___2_System_Threading_Tasks_Task_____1_Polly_Context_System_Threading_CancellationToken_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi, TModelData, TApiData&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, CancellationToken, TWebApi, TApiData, Task&gt;&gt;, TModelData, Context, CancellationToken)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__2_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task___1____System_Boolean_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi, TApiData&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__2_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func_Polly_Context___0_System_Threading_Tasks_Task___1____Polly_Context_System_Boolean_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi, TApiData&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Context, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__2_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken___0_System_Threading_Tasks_Task___1____System_Threading_CancellationToken_System_Boolean_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi, TApiData&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;CancellationToken, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, CancellationToken, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__2_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken___0_System_Threading_Tasks_Task___1____Polly_Context_System_Threading_CancellationToken_System_Boolean_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi, TApiData&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, CancellationToken, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Context, CancellationToken, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__3_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task___2____System_Boolean_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi, TModelData, TApiData&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__3_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func_Polly_Context___0_System_Threading_Tasks_Task___2____Polly_Context_System_Boolean_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi, TModelData, TApiData&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Context, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__3_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken___0_System_Threading_Tasks_Task___2____System_Threading_CancellationToken_System_Boolean_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi, TModelData, TApiData&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;CancellationToken, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, CancellationToken, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__3_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken___0_System_Threading_Tasks_Task___2____Polly_Context_System_Threading_CancellationToken_System_Boolean_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi, TModelData, TApiData&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, CancellationToken, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Context, CancellationToken, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__3_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func___0___2_System_Threading_Tasks_Task___2______1_System_Boolean_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi, TModelData, TApiData&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__3_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func_Polly_Context___0___2_System_Threading_Tasks_Task___2______1_Polly_Context_System_Boolean_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi, TModelData, TApiData&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, Context, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__3_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken___0___2_System_Threading_Tasks_Task___2______1_System_Threading_CancellationToken_System_Boolean_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi, TModelData, TApiData&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;CancellationToken, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, CancellationToken, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__3_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken___0___2_System_Threading_Tasks_Task___2______1_Polly_Context_System_Threading_CancellationToken_System_Boolean_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi, TModelData, TApiData&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, CancellationToken, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, Context, CancellationToken, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__5_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func___0___3_System_Threading_Tasks_Task___2______4_System_Boolean_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__5_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken___0___3_System_Threading_Tasks_Task___2______4_System_Threading_CancellationToken_System_Boolean_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;CancellationToken, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, CancellationToken, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__5_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func_Polly_Context___0___3_System_Threading_Tasks_Task___2______4_Polly_Context_System_Boolean_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, Context, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Optional.Extending.ApizrTypedOptionalMediatorExtensions.html#Apizr_Optional_Extending_ApizrTypedOptionalMediatorExtensions_SendFor__5_Apizr_Optional_Requesting_Sending_IApizrOptionalMediator___0__System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken___0___3_System_Threading_Tasks_Task___2______4_Polly_Context_System_Threading_CancellationToken_System_Boolean_">ApizrTypedOptionalMediatorExtensions.SendFor&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(IApizrOptionalMediator&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, CancellationToken, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, Context, CancellationToken, Boolean)</a>
   </div>
 </article>
           </div>

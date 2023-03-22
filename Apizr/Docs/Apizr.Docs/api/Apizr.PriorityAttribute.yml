@@ -6,6 +6,8 @@ items:
   parent: Apizr
   children:
   - Apizr.PriorityAttribute.#ctor
+  - Apizr.PriorityAttribute.#ctor(Fusillade.Priority)
+  - Apizr.PriorityAttribute.#ctor(System.Int32)
   langs:
   - csharp
   - vb
@@ -15,21 +17,31 @@ items:
   type: Class
   source:
     id: PriorityAttribute
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Fusillade\PriorityAttribute.cs
-    startLine: 4
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Fusillade\PriorityAttribute.cs
+    startLine: 16
   assemblies:
   - Apizr.Integrations.Fusillade
   namespace: Apizr
+  summary: "\nThe Fusillade priority attribute\n"
+  remarks: "\n<p>Info:</p>\n<p>. Decorating a request parameter with PriorityAttribute is obsolete. Please use the request options parameter instead.</p>\n<p>. Decorating anything else must come with the priority value.</p>\n<p>. Don&apos;t forget to activate priority management fluently at register time.</p>\n"
+  example: []
   syntax:
-    content: 'public class PriorityAttribute : PropertyAttribute'
+    content: >-
+      [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Interface | AttributeTargets.Parameter)]
+
+      public class PriorityAttribute : HandlerParameterAttribute
     content.vb: >-
+      <AttributeUsage(AttributeTargets.Assembly Or AttributeTargets.Class Or AttributeTargets.Method Or AttributeTargets.Interface Or AttributeTargets.Parameter)>
+
       Public Class PriorityAttribute
-          Inherits PropertyAttribute
+          Inherits HandlerParameterAttribute
   inheritance:
   - System.Object
   - System.Attribute
   - Refit.PropertyAttribute
+  - Apizr.Configuring.HandlerParameterAttribute
   inheritedMembers:
+  - Apizr.Configuring.HandlerParameterAttribute.Value
   - Refit.PropertyAttribute.Key
   - System.Attribute.Equals(System.Object)
   - System.Attribute.GetCustomAttribute(System.Reflection.Assembly,System.Type)
@@ -73,8 +85,12 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
+  attributes:
+  - type: System.AttributeUsageAttribute
+    ctor: System.AttributeUsageAttribute.#ctor(System.AttributeTargets)
+    arguments:
+    - type: System.AttributeTargets
+      value: 3141
   modifiers.csharp:
   - public
   - class
@@ -94,14 +110,93 @@ items:
   type: Constructor
   source:
     id: .ctor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Fusillade\PriorityAttribute.cs
-    startLine: 7
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Fusillade\PriorityAttribute.cs
+    startLine: 26
   assemblies:
   - Apizr.Integrations.Fusillade
   namespace: Apizr
+  summary: "\nDefine priority\n"
+  remarks: "\n<p>Warning: Decorating a request parameter with PriorityAttribute is obsolete. Please use the request options parameter instead.</p>\nError: Decorating anything else must come with the priority value.\n"
+  example: []
   syntax:
-    content: public PriorityAttribute()
-    content.vb: Public Sub New
+    content: >-
+      [Obsolete("Please use the request options parameter instead")]
+
+      public PriorityAttribute()
+    content.vb: >-
+      <Obsolete("Please use the request options parameter instead")>
+
+      Public Sub New
+  overload: Apizr.PriorityAttribute.#ctor*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Please use the request options parameter instead
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Apizr.PriorityAttribute.#ctor(Fusillade.Priority)
+  commentId: M:Apizr.PriorityAttribute.#ctor(Fusillade.Priority)
+  id: '#ctor(Fusillade.Priority)'
+  parent: Apizr.PriorityAttribute
+  langs:
+  - csharp
+  - vb
+  name: PriorityAttribute(Priority)
+  nameWithType: PriorityAttribute.PriorityAttribute(Priority)
+  fullName: Apizr.PriorityAttribute.PriorityAttribute(Fusillade.Priority)
+  type: Constructor
+  source:
+    id: .ctor
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Fusillade\PriorityAttribute.cs
+    startLine: 36
+  assemblies:
+  - Apizr.Integrations.Fusillade
+  namespace: Apizr
+  summary: "\nDefine priority\n"
+  example: []
+  syntax:
+    content: public PriorityAttribute(Priority priority)
+    parameters:
+    - id: priority
+      type: Fusillade.Priority
+      description: The priority
+    content.vb: Public Sub New(priority As Priority)
+  overload: Apizr.PriorityAttribute.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Apizr.PriorityAttribute.#ctor(System.Int32)
+  commentId: M:Apizr.PriorityAttribute.#ctor(System.Int32)
+  id: '#ctor(System.Int32)'
+  parent: Apizr.PriorityAttribute
+  langs:
+  - csharp
+  - vb
+  name: PriorityAttribute(Int32)
+  nameWithType: PriorityAttribute.PriorityAttribute(Int32)
+  fullName: Apizr.PriorityAttribute.PriorityAttribute(System.Int32)
+  type: Constructor
+  source:
+    id: .ctor
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Fusillade\PriorityAttribute.cs
+    startLine: 45
+  assemblies:
+  - Apizr.Integrations.Fusillade
+  namespace: Apizr
+  summary: "\nDefine priority\n"
+  example: []
+  syntax:
+    content: public PriorityAttribute(int priority)
+    parameters:
+    - id: priority
+      type: System.Int32
+      description: The priority
+    content.vb: Public Sub New(priority As Integer)
   overload: Apizr.PriorityAttribute.#ctor*
   modifiers.csharp:
   - public
@@ -134,6 +229,18 @@ references:
   name: PropertyAttribute
   nameWithType: PropertyAttribute
   fullName: Refit.PropertyAttribute
+- uid: Apizr.Configuring.HandlerParameterAttribute
+  commentId: T:Apizr.Configuring.HandlerParameterAttribute
+  parent: Apizr.Configuring
+  name: HandlerParameterAttribute
+  nameWithType: HandlerParameterAttribute
+  fullName: Apizr.Configuring.HandlerParameterAttribute
+- uid: Apizr.Configuring.HandlerParameterAttribute.Value
+  commentId: P:Apizr.Configuring.HandlerParameterAttribute.Value
+  parent: Apizr.Configuring.HandlerParameterAttribute
+  name: Value
+  nameWithType: HandlerParameterAttribute.Value
+  fullName: Apizr.Configuring.HandlerParameterAttribute.Value
 - uid: Refit.PropertyAttribute.Key
   commentId: P:Refit.PropertyAttribute.Key
   parent: Refit.PropertyAttribute
@@ -2451,61 +2558,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  parent: Apizr.Extending.ObjectExtensions
-  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  name: ToString(String, String)
-  nameWithType: ObjectExtensions.ToString(String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
@@ -2518,89 +2570,33 @@ references:
   name: Refit
   nameWithType: Refit
   fullName: Refit
-- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  isExternal: true
-  name: ToString(Object, String, String)
-  nameWithType: ObjectExtensions.ToString(Object, String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.ObjectExtensions
-  commentId: T:Apizr.Extending.ObjectExtensions
-  parent: Apizr.Extending
-  name: ObjectExtensions
-  nameWithType: ObjectExtensions
-  fullName: Apizr.Extending.ObjectExtensions
-- uid: Apizr.Extending
-  commentId: N:Apizr.Extending
-  name: Apizr.Extending
-  nameWithType: Apizr.Extending
-  fullName: Apizr.Extending
+- uid: Apizr.Configuring
+  commentId: N:Apizr.Configuring
+  name: Apizr.Configuring
+  nameWithType: Apizr.Configuring
+  fullName: Apizr.Configuring
 - uid: Apizr.PriorityAttribute.#ctor*
   commentId: Overload:Apizr.PriorityAttribute.#ctor
   name: PriorityAttribute
   nameWithType: PriorityAttribute.PriorityAttribute
   fullName: Apizr.PriorityAttribute.PriorityAttribute
+- uid: Fusillade.Priority
+  commentId: T:Fusillade.Priority
+  parent: Fusillade
+  isExternal: true
+  name: Priority
+  nameWithType: Priority
+  fullName: Fusillade.Priority
+- uid: Fusillade
+  commentId: N:Fusillade
+  isExternal: true
+  name: Fusillade
+  nameWithType: Fusillade
+  fullName: Fusillade
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32

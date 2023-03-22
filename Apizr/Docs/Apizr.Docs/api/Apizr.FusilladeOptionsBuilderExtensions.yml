@@ -5,6 +5,9 @@ items:
   id: FusilladeOptionsBuilderExtensions
   parent: Apizr
   children:
+  - Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+  - Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  - Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
   - Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)
   langs:
   - csharp
@@ -15,11 +18,13 @@ items:
   type: Class
   source:
     id: FusilladeOptionsBuilderExtensions
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Fusillade\FusilladeOptionsBuilderExtensions.cs
-    startLine: 4
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Fusillade\FusilladeOptionsBuilderExtensions.cs
+    startLine: 10
   assemblies:
   - Apizr.Integrations.Fusillade
   namespace: Apizr
+  summary: "\nFusillade options builder extensions\n"
+  example: []
   syntax:
     content: public static class FusilladeOptionsBuilderExtensions
     content.vb: Public Module FusilladeOptionsBuilderExtensions
@@ -54,13 +59,15 @@ items:
   type: Method
   source:
     id: WithPriorityManagement
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Fusillade\FusilladeOptionsBuilderExtensions.cs
-    startLine: 6
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Fusillade\FusilladeOptionsBuilderExtensions.cs
+    startLine: 12
   assemblies:
   - Apizr.Integrations.Fusillade
   namespace: Apizr
   syntax:
     content: >-
+      [Obsolete("Use WithPriority instead")]
+
       public static T WithPriorityManagement<T>(this T builder)
           where T : IApizrGlobalCommonOptionsBuilderBase
     parameters:
@@ -71,10 +78,18 @@ items:
     return:
       type: '{T}'
     content.vb: >-
+      <Obsolete("Use WithPriority instead")>
+
       <ExtensionAttribute>
 
       Public Shared Function WithPriorityManagement(Of T As IApizrGlobalCommonOptionsBuilderBase)(builder As T) As T
   overload: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Use WithPriority instead
   nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of T)(T)
   modifiers.csharp:
   - public
@@ -84,6 +99,159 @@ items:
   - Shared
   fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of T)(T)
   name.vb: WithPriorityManagement(Of T)(T)
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+  id: WithPriority``1(``0)
+  isExtensionMethod: true
+  parent: Apizr.FusilladeOptionsBuilderExtensions
+  langs:
+  - csharp
+  - vb
+  name: WithPriority<T>(T)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T)
+  type: Method
+  source:
+    id: WithPriority
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Fusillade\FusilladeOptionsBuilderExtensions.cs
+    startLine: 28
+  assemblies:
+  - Apizr.Integrations.Fusillade
+  namespace: Apizr
+  summary: "\nEnables priority management with Apizr\n"
+  example: []
+  syntax:
+    content: >-
+      public static T WithPriority<T>(this T builder)
+          where T : IApizrGlobalSharedRegistrationOptionsBuilderBase
+    parameters:
+    - id: builder
+      type: '{T}'
+      description: ''
+    typeParameters:
+    - id: T
+      description: ''
+    return:
+      type: '{T}'
+      description: ''
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function WithPriority(Of T As IApizrGlobalSharedRegistrationOptionsBuilderBase)(builder As T) As T
+  overload: Apizr.FusilladeOptionsBuilderExtensions.WithPriority*
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T)
+  name.vb: WithPriority(Of T)(T)
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  id: WithPriority``1(``0,Fusillade.Priority)
+  isExtensionMethod: true
+  parent: Apizr.FusilladeOptionsBuilderExtensions
+  langs:
+  - csharp
+  - vb
+  name: WithPriority<T>(T, Priority)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Priority)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Fusillade.Priority)
+  type: Method
+  source:
+    id: WithPriority
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Fusillade\FusilladeOptionsBuilderExtensions.cs
+    startLine: 45
+  assemblies:
+  - Apizr.Integrations.Fusillade
+  namespace: Apizr
+  summary: "\nTells Apizr to manage request with a priority\n"
+  example: []
+  syntax:
+    content: >-
+      public static T WithPriority<T>(this T builder, Priority priority)
+          where T : IApizrGlobalSharedOptionsBuilderBase
+    parameters:
+    - id: builder
+      type: '{T}'
+      description: ''
+    - id: priority
+      type: Fusillade.Priority
+      description: The priority to manage the request with
+    typeParameters:
+    - id: T
+      description: ''
+    return:
+      type: '{T}'
+      description: ''
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function WithPriority(Of T As IApizrGlobalSharedOptionsBuilderBase)(builder As T, priority As Priority) As T
+  overload: Apizr.FusilladeOptionsBuilderExtensions.WithPriority*
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Priority)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Fusillade.Priority)
+  name.vb: WithPriority(Of T)(T, Priority)
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  id: WithPriority``1(``0,System.Int32)
+  isExtensionMethod: true
+  parent: Apizr.FusilladeOptionsBuilderExtensions
+  langs:
+  - csharp
+  - vb
+  name: WithPriority<T>(T, Int32)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Int32)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T, System.Int32)
+  type: Method
+  source:
+    id: WithPriority
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Fusillade\FusilladeOptionsBuilderExtensions.cs
+    startLine: 56
+  assemblies:
+  - Apizr.Integrations.Fusillade
+  namespace: Apizr
+  summary: "\nTells Apizr to manage request with a priority\n"
+  example: []
+  syntax:
+    content: >-
+      public static T WithPriority<T>(this T builder, int priority)
+          where T : IApizrGlobalSharedOptionsBuilderBase
+    parameters:
+    - id: builder
+      type: '{T}'
+      description: ''
+    - id: priority
+      type: System.Int32
+      description: The priority to manage the request with
+    typeParameters:
+    - id: T
+      description: ''
+    return:
+      type: '{T}'
+      description: ''
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function WithPriority(Of T As IApizrGlobalSharedOptionsBuilderBase)(builder As T, priority As Integer) As T
+  overload: Apizr.FusilladeOptionsBuilderExtensions.WithPriority*
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Int32)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, System.Int32)
+  name.vb: WithPriority(Of T)(T, Int32)
 references:
 - uid: Apizr
   commentId: N:Apizr
@@ -397,3 +565,28 @@ references:
   name: T
   nameWithType: T
   fullName: T
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority*
+  commentId: Overload:Apizr.FusilladeOptionsBuilderExtensions.WithPriority
+  name: WithPriority
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority
+- uid: Fusillade.Priority
+  commentId: T:Fusillade.Priority
+  parent: Fusillade
+  isExternal: true
+  name: Priority
+  nameWithType: Priority
+  fullName: Fusillade.Priority
+- uid: Fusillade
+  commentId: N:Fusillade
+  isExternal: true
+  name: Fusillade
+  nameWithType: Fusillade
+  fullName: Fusillade
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32

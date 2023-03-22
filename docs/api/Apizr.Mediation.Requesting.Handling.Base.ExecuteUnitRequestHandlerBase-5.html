@@ -5,12 +5,12 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class ExecuteUnitRequestHandlerBase&lt;TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest&gt;
+    <title>Class ExecuteUnitRequestHandlerBase&lt;TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder&gt;
    | Apizr </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class ExecuteUnitRequestHandlerBase&lt;TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest&gt;
+    <meta name="title" content="Class ExecuteUnitRequestHandlerBase&lt;TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder&gt;
    | Apizr ">
-    <meta name="generator" content="docfx 2.59.0.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -81,17 +81,19 @@
             <article class="content wrap" id="_content" data-uid="Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5">
   
   
-  <h1 id="Apizr_Mediation_Requesting_Handling_Base_ExecuteUnitRequestHandlerBase_5" data-uid="Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5" class="text-break">Class ExecuteUnitRequestHandlerBase&lt;TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest&gt;
+  <h1 id="Apizr_Mediation_Requesting_Handling_Base_ExecuteUnitRequestHandlerBase_5" data-uid="Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5" class="text-break">Class ExecuteUnitRequestHandlerBase&lt;TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder&gt;
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>The top level base mediation execute unit request handler</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">ExecuteUnitRequestHandlerBase&lt;TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest&gt;</span></div>
-      <div class="level2"><a class="xref" href="Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase-4.html">ExecuteOptionalUnitRequestHandlerBase&lt;TWebApi, TModelData, TApiData, TRequest&gt;</a></div>
+    <div class="level1"><a class="xref" href="Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html">RequestHandlerBase</a>&lt;TApizrRequestOptions, TApizrRequestOptionsBuilder&gt;</div>
+    <div class="level2"><span class="xref">ExecuteUnitRequestHandlerBase&lt;TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder&gt;</span></div>
+      <div class="level3"><a class="xref" href="Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase-4.html">ExecuteOptionalUnitRequestHandlerBase&lt;TWebApi, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder&gt;</a></div>
   </div>
-  <div classs="implements">
+  <div class="implements">
     <h5>Implements</h5>
     <div><span class="xref">MediatR.IRequestHandler</span>&lt;TRequest, TFormattedModelResultData&gt;</div>
   </div>
@@ -123,7 +125,7 @@
   <h6><strong>Assembly</strong>: Apizr.Integrations.MediatR.dll</h6>
   <h5 id="Apizr_Mediation_Requesting_Handling_Base_ExecuteUnitRequestHandlerBase_5_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class ExecuteUnitRequestHandlerBase&lt;TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest&gt; : IRequestHandler&lt;TRequest, TFormattedModelResultData&gt; where TRequest : ExecuteUnitRequestBase&lt;TWebApi, TModelData, TApiData, TFormattedModelResultData&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract class ExecuteUnitRequestHandlerBase&lt;TWebApi, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder&gt; : RequestHandlerBase&lt;TApizrRequestOptions, TApizrRequestOptionsBuilder&gt;, IRequestHandler&lt;TRequest, TFormattedModelResultData&gt; where TRequest : ExecuteUnitRequestBase&lt;TWebApi, TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder&gt; where TApizrRequestOptions : IApizrRequestOptions where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder&lt;TApizrRequestOptions, TApizrRequestOptionsBuilder&gt;</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -136,23 +138,28 @@
     <tbody>
       <tr>
         <td><span class="parametername">TWebApi</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TModelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiData</span></td>
-        <td></td>
+        <td><p>The web api type</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TFormattedModelResultData</span></td>
-        <td></td>
+        <td><p>The formatted model result data type</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TRequest</span></td>
-        <td></td>
+        <td><p>The execute unit request to handle</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TApizrRequestOptions</span></td>
+        <td><p>Options provided to the request</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TApizrRequestOptionsBuilder</span></td>
+        <td><p>The request options builder</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -216,8 +223,9 @@
   
   
   <a id="Apizr_Mediation_Requesting_Handling_Base_ExecuteUnitRequestHandlerBase_5_Handle_" data-uid="Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.Handle*"></a>
-  <h4 id="Apizr_Mediation_Requesting_Handling_Base_ExecuteUnitRequestHandlerBase_5_Handle__4_System_Threading_CancellationToken_" data-uid="Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.Handle(`4,System.Threading.CancellationToken)">Handle(TRequest, CancellationToken)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_Mediation_Requesting_Handling_Base_ExecuteUnitRequestHandlerBase_5_Handle__2_System_Threading_CancellationToken_" data-uid="Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`5.Handle(`2,System.Threading.CancellationToken)">Handle(TRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Handling the execute unit request</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -236,12 +244,14 @@
       <tr>
         <td><span class="xref">TRequest</span></td>
         <td><span class="parametername">request</span></td>
-        <td></td>
+        <td><p>The execute result request</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Threading.CancellationToken</span></td>
         <td><span class="parametername">cancellationToken</span></td>
-        <td></td>
+        <td><p>A cancellation token</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -263,10 +273,6 @@
   <h3 id="implements">Implements</h3>
   <div>
       <span class="xref">MediatR.IRequestHandler&lt;TRequest, TResponse&gt;</span>
-  </div>
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="Apizr.Extending.ObjectExtensions.html#Apizr_Extending_ObjectExtensions_ToString_System_Object_System_String_System_String_">ObjectExtensions.ToString(Object, String, String)</a>
   </div>
 </article>
           </div>

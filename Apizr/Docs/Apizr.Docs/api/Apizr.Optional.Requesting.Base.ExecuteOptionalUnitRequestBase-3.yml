@@ -5,47 +5,47 @@ items:
   id: ExecuteOptionalUnitRequestBase`3
   parent: Apizr.Optional.Requesting.Base
   children:
-  - Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`2,System.Threading.Tasks.Task}},`1)
-  - Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,`2,System.Threading.Tasks.Task}},`1,Polly.Context)
-  - Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task}},`1,Polly.Context)
-  - Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task}},`1)
+  - Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}},System.Action{`2})
+  - Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{`1,`0,System.Threading.Tasks.Task}},System.Action{`2})
   langs:
   - csharp
   - vb
-  name: ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData>
-  nameWithType: ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData>
-  fullName: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData>
+  name: ExecuteOptionalUnitRequestBase<TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType: ExecuteOptionalUnitRequestBase<TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  fullName: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase<TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder>
   type: Class
   source:
     id: ExecuteOptionalUnitRequestBase
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Base\ExecuteOptionalUnitRequestBase.cs
-    startLine: 11
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\Optional\Requesting\Base\ExecuteOptionalUnitRequestBase.cs
+    startLine: 52
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Base
+  summary: "\nThe top level base mediation execute optional unit request (returning no result)\n"
+  example: []
   syntax:
-    content: 'public abstract class ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData> : ExecuteUnitRequestBase<TWebApi, TModelData, TApiData, Option<Unit, ApizrException>>, IRequest<Option<Unit, ApizrException>>, IBaseRequest'
+    content: 'public abstract class ExecuteOptionalUnitRequestBase<TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder> : ExecuteUnitRequestBase<TWebApi, Option<Unit, ApizrException>, TApizrRequestOptions, TApizrRequestOptionsBuilder>, IRequest<Option<Unit, ApizrException>>, IBaseRequest where TApizrRequestOptions : IApizrRequestOptions where TApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder<TApizrRequestOptions, TApizrRequestOptionsBuilder>'
     typeParameters:
     - id: TWebApi
-    - id: TModelData
-    - id: TApiData
-    content.vb: "Public MustInherit Class ExecuteOptionalUnitRequestBase(Of TWebApi, TModelData, TApiData)\n    Inherits ExecuteUnitRequestBase(Of TWebApi, TModelData, TApiData,  Option(Of Unit, ApizrException) ) \n    Implements IRequest(Of  Option(Of Unit, ApizrException) ), IBaseRequest"
+      description: The web api type
+    - id: TApizrRequestOptions
+      description: Options provided to the request
+    - id: TApizrRequestOptionsBuilder
+      description: The request options builder
+    content.vb: "Public MustInherit Class ExecuteOptionalUnitRequestBase(Of TWebApi, TApizrRequestOptions As IApizrRequestOptions, TApizrRequestOptionsBuilder As IApizrRequestOptionsBuilder(Of TApizrRequestOptions, TApizrRequestOptionsBuilder))\n    Inherits ExecuteUnitRequestBase(Of TWebApi,  Option(Of Unit, ApizrException) ,  TApizrRequestOptions, TApizrRequestOptionsBuilder) \n    Implements IRequest(Of  Option(Of Unit, ApizrException) ), IBaseRequest"
   inheritance:
   - System.Object
-  - Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
-  - Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
-  - Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},{TModelData}}
-  - Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase{{TWebApi},{TModelData},{TApiData},Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+  - Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}
+  - Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}
+  - Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase{{TWebApi},Optional.Option{MediatR.Unit,Apizr.ApizrException},{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}
   derivedClasses:
-  - Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3
+  - Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`1
   implements:
   - MediatR.IRequest{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
   - MediatR.IBaseRequest
   inheritedMembers:
-  - Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},{TModelData}}.ModelRequestData
-  - Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException}}.ExecuteApiMethod
-  - Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException}}.Context
-  - Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException}}.OnException
+  - Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}.ExecuteApiMethod
+  - Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}.OptionsBuilder
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -53,9 +53,7 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  nameWithType.vb: ExecuteOptionalUnitRequestBase(Of TWebApi, TModelData, TApiData)
+  nameWithType.vb: ExecuteOptionalUnitRequestBase(Of TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder)
   modifiers.csharp:
   - public
   - abstract
@@ -64,148 +62,84 @@ items:
   - Public
   - MustInherit
   - Class
-  fullName.vb: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase(Of TWebApi, TModelData, TApiData)
-  name.vb: ExecuteOptionalUnitRequestBase(Of TWebApi, TModelData, TApiData)
-- uid: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`2,System.Threading.Tasks.Task}},`1)
-  commentId: M:Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`2,System.Threading.Tasks.Task}},`1)
-  id: '#ctor(System.Linq.Expressions.Expression{System.Func{`0,`2,System.Threading.Tasks.Task}},`1)'
+  fullName.vb: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase(Of TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  name.vb: ExecuteOptionalUnitRequestBase(Of TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+- uid: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}},System.Action{`2})
+  commentId: M:Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}},System.Action{`2})
+  id: '#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}},System.Action{`2})'
   parent: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3
   langs:
   - csharp
   - vb
-  name: ExecuteOptionalUnitRequestBase(Expression<Func<TWebApi, TApiData, Task>>, TModelData)
-  nameWithType: ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData>.ExecuteOptionalUnitRequestBase(Expression<Func<TWebApi, TApiData, Task>>, TModelData)
-  fullName: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData>.ExecuteOptionalUnitRequestBase(System.Linq.Expressions.Expression<System.Func<TWebApi, TApiData, System.Threading.Tasks.Task>>, TModelData)
+  name: ExecuteOptionalUnitRequestBase(Expression<Func<TWebApi, Task>>, Action<TApizrRequestOptionsBuilder>)
+  nameWithType: ExecuteOptionalUnitRequestBase<TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder>.ExecuteOptionalUnitRequestBase(Expression<Func<TWebApi, Task>>, Action<TApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase<TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder>.ExecuteOptionalUnitRequestBase(System.Linq.Expressions.Expression<System.Func<TWebApi, System.Threading.Tasks.Task>>, System.Action<TApizrRequestOptionsBuilder>)
   type: Constructor
   source:
     id: .ctor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Base\ExecuteOptionalUnitRequestBase.cs
-    startLine: 13
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\Optional\Requesting\Base\ExecuteOptionalUnitRequestBase.cs
+    startLine: 61
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Base
+  summary: "\nThe top level base mediation execute optional unit request constructor\n"
+  example: []
   syntax:
-    content: protected ExecuteOptionalUnitRequestBase(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData)
+    content: protected ExecuteOptionalUnitRequestBase(Expression<Func<TWebApi, Task>> executeApiMethod, Action<TApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: executeApiMethod
-      type: System.Linq.Expressions.Expression{System.Func{{TWebApi},{TApiData},System.Threading.Tasks.Task}}
-    - id: modelData
-      type: '{TModelData}'
-    content.vb: Protected Sub New(executeApiMethod As Expression(Of Func(Of TWebApi, TApiData, Task)), modelData As TModelData)
+      type: System.Linq.Expressions.Expression{System.Func{{TWebApi},System.Threading.Tasks.Task}}
+      description: The request to execute
+    - id: optionsBuilder
+      type: System.Action{{TApizrRequestOptionsBuilder}}
+      description: Options provided to the request
+    content.vb: Protected Sub New(executeApiMethod As Expression(Of Func(Of TWebApi, Task)), optionsBuilder As Action(Of TApizrRequestOptionsBuilder) = Nothing)
   overload: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor*
-  nameWithType.vb: ExecuteOptionalUnitRequestBase(Of TWebApi, TModelData, TApiData).ExecuteOptionalUnitRequestBase(Expression(Of Func(Of TWebApi, TApiData, Task)), TModelData)
+  nameWithType.vb: ExecuteOptionalUnitRequestBase(Of TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder).ExecuteOptionalUnitRequestBase(Expression(Of Func(Of TWebApi, Task)), Action(Of TApizrRequestOptionsBuilder))
   modifiers.csharp:
   - protected
   modifiers.vb:
   - Protected
-  fullName.vb: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase(Of TWebApi, TModelData, TApiData).ExecuteOptionalUnitRequestBase(System.Linq.Expressions.Expression(Of System.Func(Of TWebApi, TApiData, System.Threading.Tasks.Task)), TModelData)
-  name.vb: ExecuteOptionalUnitRequestBase(Expression(Of Func(Of TWebApi, TApiData, Task)), TModelData)
-- uid: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task}},`1)
-  commentId: M:Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task}},`1)
-  id: '#ctor(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task}},`1)'
+  fullName.vb: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase(Of TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder).ExecuteOptionalUnitRequestBase(System.Linq.Expressions.Expression(Of System.Func(Of TWebApi, System.Threading.Tasks.Task)), System.Action(Of TApizrRequestOptionsBuilder))
+  name.vb: ExecuteOptionalUnitRequestBase(Expression(Of Func(Of TWebApi, Task)), Action(Of TApizrRequestOptionsBuilder))
+- uid: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{`1,`0,System.Threading.Tasks.Task}},System.Action{`2})
+  commentId: M:Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{`1,`0,System.Threading.Tasks.Task}},System.Action{`2})
+  id: '#ctor(System.Linq.Expressions.Expression{System.Func{`1,`0,System.Threading.Tasks.Task}},System.Action{`2})'
   parent: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3
   langs:
   - csharp
   - vb
-  name: ExecuteOptionalUnitRequestBase(Expression<Func<CancellationToken, TWebApi, TApiData, Task>>, TModelData)
-  nameWithType: ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData>.ExecuteOptionalUnitRequestBase(Expression<Func<CancellationToken, TWebApi, TApiData, Task>>, TModelData)
-  fullName: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData>.ExecuteOptionalUnitRequestBase(System.Linq.Expressions.Expression<System.Func<System.Threading.CancellationToken, TWebApi, TApiData, System.Threading.Tasks.Task>>, TModelData)
+  name: ExecuteOptionalUnitRequestBase(Expression<Func<TApizrRequestOptions, TWebApi, Task>>, Action<TApizrRequestOptionsBuilder>)
+  nameWithType: ExecuteOptionalUnitRequestBase<TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder>.ExecuteOptionalUnitRequestBase(Expression<Func<TApizrRequestOptions, TWebApi, Task>>, Action<TApizrRequestOptionsBuilder>)
+  fullName: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase<TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder>.ExecuteOptionalUnitRequestBase(System.Linq.Expressions.Expression<System.Func<TApizrRequestOptions, TWebApi, System.Threading.Tasks.Task>>, System.Action<TApizrRequestOptionsBuilder>)
   type: Constructor
   source:
     id: .ctor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Base\ExecuteOptionalUnitRequestBase.cs
-    startLine: 17
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\Optional\Requesting\Base\ExecuteOptionalUnitRequestBase.cs
+    startLine: 70
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Base
+  summary: "\nThe top level base mediation execute optional unit request constructor\n"
+  example: []
   syntax:
-    content: protected ExecuteOptionalUnitRequestBase(Expression<Func<CancellationToken, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData)
+    content: protected ExecuteOptionalUnitRequestBase(Expression<Func<TApizrRequestOptions, TWebApi, Task>> executeApiMethod, Action<TApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: executeApiMethod
-      type: System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,{TWebApi},{TApiData},System.Threading.Tasks.Task}}
-    - id: modelData
-      type: '{TModelData}'
-    content.vb: Protected Sub New(executeApiMethod As Expression(Of Func(Of CancellationToken, TWebApi, TApiData, Task)), modelData As TModelData)
+      type: System.Linq.Expressions.Expression{System.Func{{TApizrRequestOptions},{TWebApi},System.Threading.Tasks.Task}}
+      description: The request to execute
+    - id: optionsBuilder
+      type: System.Action{{TApizrRequestOptionsBuilder}}
+      description: Options provided to the request
+    content.vb: Protected Sub New(executeApiMethod As Expression(Of Func(Of TApizrRequestOptions, TWebApi, Task)), optionsBuilder As Action(Of TApizrRequestOptionsBuilder) = Nothing)
   overload: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor*
-  nameWithType.vb: ExecuteOptionalUnitRequestBase(Of TWebApi, TModelData, TApiData).ExecuteOptionalUnitRequestBase(Expression(Of Func(Of CancellationToken, TWebApi, TApiData, Task)), TModelData)
+  nameWithType.vb: ExecuteOptionalUnitRequestBase(Of TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder).ExecuteOptionalUnitRequestBase(Expression(Of Func(Of TApizrRequestOptions, TWebApi, Task)), Action(Of TApizrRequestOptionsBuilder))
   modifiers.csharp:
   - protected
   modifiers.vb:
   - Protected
-  fullName.vb: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase(Of TWebApi, TModelData, TApiData).ExecuteOptionalUnitRequestBase(System.Linq.Expressions.Expression(Of System.Func(Of System.Threading.CancellationToken, TWebApi, TApiData, System.Threading.Tasks.Task)), TModelData)
-  name.vb: ExecuteOptionalUnitRequestBase(Expression(Of Func(Of CancellationToken, TWebApi, TApiData, Task)), TModelData)
-- uid: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,`2,System.Threading.Tasks.Task}},`1,Polly.Context)
-  commentId: M:Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,`2,System.Threading.Tasks.Task}},`1,Polly.Context)
-  id: '#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,`2,System.Threading.Tasks.Task}},`1,Polly.Context)'
-  parent: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3
-  langs:
-  - csharp
-  - vb
-  name: ExecuteOptionalUnitRequestBase(Expression<Func<Context, TWebApi, TApiData, Task>>, TModelData, Context)
-  nameWithType: ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData>.ExecuteOptionalUnitRequestBase(Expression<Func<Context, TWebApi, TApiData, Task>>, TModelData, Context)
-  fullName: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData>.ExecuteOptionalUnitRequestBase(System.Linq.Expressions.Expression<System.Func<Polly.Context, TWebApi, TApiData, System.Threading.Tasks.Task>>, TModelData, Polly.Context)
-  type: Constructor
-  source:
-    id: .ctor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Base\ExecuteOptionalUnitRequestBase.cs
-    startLine: 21
-  assemblies:
-  - Apizr.Integrations.Optional
-  namespace: Apizr.Optional.Requesting.Base
-  syntax:
-    content: protected ExecuteOptionalUnitRequestBase(Expression<Func<Context, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Context context)
-    parameters:
-    - id: executeApiMethod
-      type: System.Linq.Expressions.Expression{System.Func{Polly.Context,{TWebApi},{TApiData},System.Threading.Tasks.Task}}
-    - id: modelData
-      type: '{TModelData}'
-    - id: context
-      type: Polly.Context
-    content.vb: Protected Sub New(executeApiMethod As Expression(Of Func(Of Context, TWebApi, TApiData, Task)), modelData As TModelData, context As Context)
-  overload: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor*
-  nameWithType.vb: ExecuteOptionalUnitRequestBase(Of TWebApi, TModelData, TApiData).ExecuteOptionalUnitRequestBase(Expression(Of Func(Of Context, TWebApi, TApiData, Task)), TModelData, Context)
-  modifiers.csharp:
-  - protected
-  modifiers.vb:
-  - Protected
-  fullName.vb: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase(Of TWebApi, TModelData, TApiData).ExecuteOptionalUnitRequestBase(System.Linq.Expressions.Expression(Of System.Func(Of Polly.Context, TWebApi, TApiData, System.Threading.Tasks.Task)), TModelData, Polly.Context)
-  name.vb: ExecuteOptionalUnitRequestBase(Expression(Of Func(Of Context, TWebApi, TApiData, Task)), TModelData, Context)
-- uid: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task}},`1,Polly.Context)
-  commentId: M:Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task}},`1,Polly.Context)
-  id: '#ctor(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,`2,System.Threading.Tasks.Task}},`1,Polly.Context)'
-  parent: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3
-  langs:
-  - csharp
-  - vb
-  name: ExecuteOptionalUnitRequestBase(Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task>>, TModelData, Context)
-  nameWithType: ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData>.ExecuteOptionalUnitRequestBase(Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task>>, TModelData, Context)
-  fullName: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData>.ExecuteOptionalUnitRequestBase(System.Linq.Expressions.Expression<System.Func<Polly.Context, System.Threading.CancellationToken, TWebApi, TApiData, System.Threading.Tasks.Task>>, TModelData, Polly.Context)
-  type: Constructor
-  source:
-    id: .ctor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Requesting\Base\ExecuteOptionalUnitRequestBase.cs
-    startLine: 25
-  assemblies:
-  - Apizr.Integrations.Optional
-  namespace: Apizr.Optional.Requesting.Base
-  syntax:
-    content: protected ExecuteOptionalUnitRequestBase(Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Context context)
-    parameters:
-    - id: executeApiMethod
-      type: System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,{TWebApi},{TApiData},System.Threading.Tasks.Task}}
-    - id: modelData
-      type: '{TModelData}'
-    - id: context
-      type: Polly.Context
-    content.vb: Protected Sub New(executeApiMethod As Expression(Of Func(Of Context, CancellationToken, TWebApi, TApiData, Task)), modelData As TModelData, context As Context)
-  overload: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor*
-  nameWithType.vb: ExecuteOptionalUnitRequestBase(Of TWebApi, TModelData, TApiData).ExecuteOptionalUnitRequestBase(Expression(Of Func(Of Context, CancellationToken, TWebApi, TApiData, Task)), TModelData, Context)
-  modifiers.csharp:
-  - protected
-  modifiers.vb:
-  - Protected
-  fullName.vb: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase(Of TWebApi, TModelData, TApiData).ExecuteOptionalUnitRequestBase(System.Linq.Expressions.Expression(Of System.Func(Of Polly.Context, System.Threading.CancellationToken, TWebApi, TApiData, System.Threading.Tasks.Task)), TModelData, Polly.Context)
-  name.vb: ExecuteOptionalUnitRequestBase(Expression(Of Func(Of Context, CancellationToken, TWebApi, TApiData, Task)), TModelData, Context)
+  fullName.vb: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase(Of TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder).ExecuteOptionalUnitRequestBase(System.Linq.Expressions.Expression(Of System.Func(Of TApizrRequestOptions, TWebApi, System.Threading.Tasks.Task)), System.Action(Of TApizrRequestOptionsBuilder))
+  name.vb: ExecuteOptionalUnitRequestBase(Expression(Of Func(Of TApizrRequestOptions, TWebApi, Task)), Action(Of TApizrRequestOptionsBuilder))
 references:
 - uid: Apizr.Optional.Requesting.Base
   commentId: N:Apizr.Optional.Requesting.Base
@@ -219,18 +153,18 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
-  commentId: T:Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+- uid: Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}
+  commentId: T:Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},`3,`4}
   parent: Apizr.Mediation.Requesting.Base
-  definition: Apizr.Mediation.Requesting.Base.RequestBase`1
-  name: RequestBase<Option<Unit, ApizrException>>
-  nameWithType: RequestBase<Option<Unit, ApizrException>>
-  fullName: Apizr.Mediation.Requesting.Base.RequestBase<Optional.Option<MediatR.Unit, Apizr.ApizrException>>
-  nameWithType.vb: RequestBase(Of Option(Of Unit, ApizrException))
-  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of Optional.Option(Of MediatR.Unit, Apizr.ApizrException))
-  name.vb: RequestBase(Of Option(Of Unit, ApizrException))
+  definition: Apizr.Mediation.Requesting.Base.RequestBase`3
+  name: RequestBase<Option<Unit, ApizrException>, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType: RequestBase<Option<Unit, ApizrException>, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Requesting.Base.RequestBase<Optional.Option<MediatR.Unit, Apizr.ApizrException>, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType.vb: RequestBase(Of Option(Of Unit, ApizrException), TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of Optional.Option(Of MediatR.Unit, Apizr.ApizrException), TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  name.vb: RequestBase(Of Option(Of Unit, ApizrException), TApizrRequestOptions, TApizrRequestOptionsBuilder)
   spec.csharp:
-  - uid: Apizr.Mediation.Requesting.Base.RequestBase`1
+  - uid: Apizr.Mediation.Requesting.Base.RequestBase`3
     name: RequestBase
     nameWithType: RequestBase
     fullName: Apizr.Mediation.Requesting.Base.RequestBase
@@ -260,11 +194,23 @@ references:
   - name: '>'
     nameWithType: '>'
     fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Mediation.Requesting.Base.RequestBase`1
+  - uid: Apizr.Mediation.Requesting.Base.RequestBase`3
     name: RequestBase
     nameWithType: RequestBase
     fullName: Apizr.Mediation.Requesting.Base.RequestBase
@@ -294,21 +240,33 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
-  commentId: T:Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+- uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}
+  commentId: T:Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},`3,`4}
   parent: Apizr.Mediation.Requesting.Base
-  definition: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`1
-  name: ExecuteRequestBase<Option<Unit, ApizrException>>
-  nameWithType: ExecuteRequestBase<Option<Unit, ApizrException>>
-  fullName: Apizr.Mediation.Requesting.Base.ExecuteRequestBase<Optional.Option<MediatR.Unit, Apizr.ApizrException>>
-  nameWithType.vb: ExecuteRequestBase(Of Option(Of Unit, ApizrException))
-  fullName.vb: Apizr.Mediation.Requesting.Base.ExecuteRequestBase(Of Optional.Option(Of MediatR.Unit, Apizr.ApizrException))
-  name.vb: ExecuteRequestBase(Of Option(Of Unit, ApizrException))
+  definition: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`3
+  name: ExecuteRequestBase<Option<Unit, ApizrException>, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType: ExecuteRequestBase<Option<Unit, ApizrException>, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Requesting.Base.ExecuteRequestBase<Optional.Option<MediatR.Unit, Apizr.ApizrException>, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType.vb: ExecuteRequestBase(Of Option(Of Unit, ApizrException), TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Requesting.Base.ExecuteRequestBase(Of Optional.Option(Of MediatR.Unit, Apizr.ApizrException), TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  name.vb: ExecuteRequestBase(Of Option(Of Unit, ApizrException), TApizrRequestOptions, TApizrRequestOptionsBuilder)
   spec.csharp:
-  - uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`1
+  - uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`3
     name: ExecuteRequestBase
     nameWithType: ExecuteRequestBase
     fullName: Apizr.Mediation.Requesting.Base.ExecuteRequestBase
@@ -338,95 +296,23 @@ references:
   - name: '>'
     nameWithType: '>'
     fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`1
-    name: ExecuteRequestBase
-    nameWithType: ExecuteRequestBase
-    fullName: Apizr.Mediation.Requesting.Base.ExecuteRequestBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Optional.Option`2
-    name: Option
-    nameWithType: Option
-    fullName: Optional.Option
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.ApizrException
-    name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},{TModelData}}
-  commentId: T:Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},`1}
-  parent: Apizr.Mediation.Requesting.Base
-  definition: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`2
-  name: ExecuteRequestBase<Option<Unit, ApizrException>, TModelData>
-  nameWithType: ExecuteRequestBase<Option<Unit, ApizrException>, TModelData>
-  fullName: Apizr.Mediation.Requesting.Base.ExecuteRequestBase<Optional.Option<MediatR.Unit, Apizr.ApizrException>, TModelData>
-  nameWithType.vb: ExecuteRequestBase(Of Option(Of Unit, ApizrException), TModelData)
-  fullName.vb: Apizr.Mediation.Requesting.Base.ExecuteRequestBase(Of Optional.Option(Of MediatR.Unit, Apizr.ApizrException), TModelData)
-  name.vb: ExecuteRequestBase(Of Option(Of Unit, ApizrException), TModelData)
-  spec.csharp:
-  - uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`2
-    name: ExecuteRequestBase
-    nameWithType: ExecuteRequestBase
-    fullName: Apizr.Mediation.Requesting.Base.ExecuteRequestBase
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Optional.Option`2
-    name: Option
-    nameWithType: Option
-    fullName: Optional.Option
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.ApizrException
-    name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`2
+  - uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`3
     name: ExecuteRequestBase
     nameWithType: ExecuteRequestBase
     fullName: Apizr.Mediation.Requesting.Base.ExecuteRequestBase
@@ -459,22 +345,28 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase{{TWebApi},{TModelData},{TApiData},Optional.Option{MediatR.Unit,Apizr.ApizrException}}
-  commentId: T:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase{`0,`1,`2,Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+- uid: Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase{{TWebApi},Optional.Option{MediatR.Unit,Apizr.ApizrException},{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}
+  commentId: T:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase{`0,Optional.Option{MediatR.Unit,Apizr.ApizrException},`1,`2}
   parent: Apizr.Mediation.Requesting.Base
   definition: Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`4
-  name: ExecuteUnitRequestBase<TWebApi, TModelData, TApiData, Option<Unit, ApizrException>>
-  nameWithType: ExecuteUnitRequestBase<TWebApi, TModelData, TApiData, Option<Unit, ApizrException>>
-  fullName: Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase<TWebApi, TModelData, TApiData, Optional.Option<MediatR.Unit, Apizr.ApizrException>>
-  nameWithType.vb: ExecuteUnitRequestBase(Of TWebApi, TModelData, TApiData, Option(Of Unit, ApizrException))
-  fullName.vb: Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase(Of TWebApi, TModelData, TApiData, Optional.Option(Of MediatR.Unit, Apizr.ApizrException))
-  name.vb: ExecuteUnitRequestBase(Of TWebApi, TModelData, TApiData, Option(Of Unit, ApizrException))
+  name: ExecuteUnitRequestBase<TWebApi, Option<Unit, ApizrException>, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType: ExecuteUnitRequestBase<TWebApi, Option<Unit, ApizrException>, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase<TWebApi, Optional.Option<MediatR.Unit, Apizr.ApizrException>, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType.vb: ExecuteUnitRequestBase(Of TWebApi, Option(Of Unit, ApizrException), TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase(Of TWebApi, Optional.Option(Of MediatR.Unit, Apizr.ApizrException), TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  name.vb: ExecuteUnitRequestBase(Of TWebApi, Option(Of Unit, ApizrException), TApizrRequestOptions, TApizrRequestOptionsBuilder)
   spec.csharp:
   - uid: Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`4
     name: ExecuteUnitRequestBase
@@ -486,18 +378,6 @@ references:
   - name: TWebApi
     nameWithType: TWebApi
     fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -524,6 +404,18 @@ references:
   - name: '>'
     nameWithType: '>'
     fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -538,18 +430,6 @@ references:
   - name: TWebApi
     nameWithType: TWebApi
     fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -576,6 +456,18 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: )
     nameWithType: )
     fullName: )
@@ -666,42 +558,24 @@ references:
   name: IBaseRequest
   nameWithType: IBaseRequest
   fullName: MediatR.IBaseRequest
-- uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},{TModelData}}.ModelRequestData
-  commentId: P:Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},`1}.ModelRequestData
-  parent: Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},{TModelData}}
-  definition: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`2.ModelRequestData
-  name: ModelRequestData
-  nameWithType: ExecuteRequestBase<Option<Unit, ApizrException>, TModelData>.ModelRequestData
-  fullName: Apizr.Mediation.Requesting.Base.ExecuteRequestBase<Optional.Option<MediatR.Unit, Apizr.ApizrException>, TModelData>.ModelRequestData
-  nameWithType.vb: ExecuteRequestBase(Of Option(Of Unit, ApizrException), TModelData).ModelRequestData
-  fullName.vb: Apizr.Mediation.Requesting.Base.ExecuteRequestBase(Of Optional.Option(Of MediatR.Unit, Apizr.ApizrException), TModelData).ModelRequestData
-- uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException}}.ExecuteApiMethod
-  commentId: P:Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException}}.ExecuteApiMethod
-  parent: Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
-  definition: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`1.ExecuteApiMethod
+- uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}.ExecuteApiMethod
+  commentId: P:Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},`3,`4}.ExecuteApiMethod
+  parent: Apizr.Mediation.Requesting.Base.ExecuteRequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}
+  definition: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`3.ExecuteApiMethod
   name: ExecuteApiMethod
-  nameWithType: ExecuteRequestBase<Option<Unit, ApizrException>>.ExecuteApiMethod
-  fullName: Apizr.Mediation.Requesting.Base.ExecuteRequestBase<Optional.Option<MediatR.Unit, Apizr.ApizrException>>.ExecuteApiMethod
-  nameWithType.vb: ExecuteRequestBase(Of Option(Of Unit, ApizrException)).ExecuteApiMethod
-  fullName.vb: Apizr.Mediation.Requesting.Base.ExecuteRequestBase(Of Optional.Option(Of MediatR.Unit, Apizr.ApizrException)).ExecuteApiMethod
-- uid: Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException}}.Context
-  commentId: P:Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException}}.Context
-  parent: Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
-  definition: Apizr.Mediation.Requesting.Base.RequestBase`1.Context
-  name: Context
-  nameWithType: RequestBase<Option<Unit, ApizrException>>.Context
-  fullName: Apizr.Mediation.Requesting.Base.RequestBase<Optional.Option<MediatR.Unit, Apizr.ApizrException>>.Context
-  nameWithType.vb: RequestBase(Of Option(Of Unit, ApizrException)).Context
-  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of Optional.Option(Of MediatR.Unit, Apizr.ApizrException)).Context
-- uid: Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException}}.OnException
-  commentId: P:Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException}}.OnException
-  parent: Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
-  definition: Apizr.Mediation.Requesting.Base.RequestBase`1.OnException
-  name: OnException
-  nameWithType: RequestBase<Option<Unit, ApizrException>>.OnException
-  fullName: Apizr.Mediation.Requesting.Base.RequestBase<Optional.Option<MediatR.Unit, Apizr.ApizrException>>.OnException
-  nameWithType.vb: RequestBase(Of Option(Of Unit, ApizrException)).OnException
-  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of Optional.Option(Of MediatR.Unit, Apizr.ApizrException)).OnException
+  nameWithType: ExecuteRequestBase<Option<Unit, ApizrException>, TApizrRequestOptions, TApizrRequestOptionsBuilder>.ExecuteApiMethod
+  fullName: Apizr.Mediation.Requesting.Base.ExecuteRequestBase<Optional.Option<MediatR.Unit, Apizr.ApizrException>, TApizrRequestOptions, TApizrRequestOptionsBuilder>.ExecuteApiMethod
+  nameWithType.vb: ExecuteRequestBase(Of Option(Of Unit, ApizrException), TApizrRequestOptions, TApizrRequestOptionsBuilder).ExecuteApiMethod
+  fullName.vb: Apizr.Mediation.Requesting.Base.ExecuteRequestBase(Of Optional.Option(Of MediatR.Unit, Apizr.ApizrException), TApizrRequestOptions, TApizrRequestOptionsBuilder).ExecuteApiMethod
+- uid: Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}.OptionsBuilder
+  commentId: P:Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},`3,`4}.OptionsBuilder
+  parent: Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},{TApizrRequestOptions},{TApizrRequestOptionsBuilder}}
+  definition: Apizr.Mediation.Requesting.Base.RequestBase`3.OptionsBuilder
+  name: OptionsBuilder
+  nameWithType: RequestBase<Option<Unit, ApizrException>, TApizrRequestOptions, TApizrRequestOptionsBuilder>.OptionsBuilder
+  fullName: Apizr.Mediation.Requesting.Base.RequestBase<Optional.Option<MediatR.Unit, Apizr.ApizrException>, TApizrRequestOptions, TApizrRequestOptionsBuilder>.OptionsBuilder
+  nameWithType.vb: RequestBase(Of Option(Of Unit, ApizrException), TApizrRequestOptions, TApizrRequestOptionsBuilder).OptionsBuilder
+  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of Optional.Option(Of MediatR.Unit, Apizr.ApizrException), TApizrRequestOptions, TApizrRequestOptionsBuilder).OptionsBuilder
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -981,77 +855,22 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  parent: Apizr.Extending.ObjectExtensions
-  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  name: ToString(String, String)
-  nameWithType: ObjectExtensions.ToString(String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
   name: System
   nameWithType: System
   fullName: System
-- uid: Apizr.Mediation.Requesting.Base.RequestBase`1
-  commentId: T:Apizr.Mediation.Requesting.Base.RequestBase`1
-  name: RequestBase<TFormattedModelResultData>
-  nameWithType: RequestBase<TFormattedModelResultData>
-  fullName: Apizr.Mediation.Requesting.Base.RequestBase<TFormattedModelResultData>
-  nameWithType.vb: RequestBase(Of TFormattedModelResultData)
-  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of TFormattedModelResultData)
-  name.vb: RequestBase(Of TFormattedModelResultData)
+- uid: Apizr.Mediation.Requesting.Base.RequestBase`3
+  commentId: T:Apizr.Mediation.Requesting.Base.RequestBase`3
+  name: RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType: RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Requesting.Base.RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType.vb: RequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  name.vb: RequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
   spec.csharp:
-  - uid: Apizr.Mediation.Requesting.Base.RequestBase`1
+  - uid: Apizr.Mediation.Requesting.Base.RequestBase`3
     name: RequestBase
     nameWithType: RequestBase
     fullName: Apizr.Mediation.Requesting.Base.RequestBase
@@ -1061,11 +880,23 @@ references:
   - name: TFormattedModelResultData
     nameWithType: TFormattedModelResultData
     fullName: TFormattedModelResultData
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Mediation.Requesting.Base.RequestBase`1
+  - uid: Apizr.Mediation.Requesting.Base.RequestBase`3
     name: RequestBase
     nameWithType: RequestBase
     fullName: Apizr.Mediation.Requesting.Base.RequestBase
@@ -1075,6 +906,18 @@ references:
   - name: TFormattedModelResultData
     nameWithType: TFormattedModelResultData
     fullName: TFormattedModelResultData
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: )
     nameWithType: )
     fullName: )
@@ -1083,52 +926,16 @@ references:
   name: Apizr.Mediation.Requesting.Base
   nameWithType: Apizr.Mediation.Requesting.Base
   fullName: Apizr.Mediation.Requesting.Base
-- uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`1
-  commentId: T:Apizr.Mediation.Requesting.Base.ExecuteRequestBase`1
-  name: ExecuteRequestBase<TFormattedModelResultData>
-  nameWithType: ExecuteRequestBase<TFormattedModelResultData>
-  fullName: Apizr.Mediation.Requesting.Base.ExecuteRequestBase<TFormattedModelResultData>
-  nameWithType.vb: ExecuteRequestBase(Of TFormattedModelResultData)
-  fullName.vb: Apizr.Mediation.Requesting.Base.ExecuteRequestBase(Of TFormattedModelResultData)
-  name.vb: ExecuteRequestBase(Of TFormattedModelResultData)
+- uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`3
+  commentId: T:Apizr.Mediation.Requesting.Base.ExecuteRequestBase`3
+  name: ExecuteRequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType: ExecuteRequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Requesting.Base.ExecuteRequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType.vb: ExecuteRequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Requesting.Base.ExecuteRequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  name.vb: ExecuteRequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
   spec.csharp:
-  - uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`1
-    name: ExecuteRequestBase
-    nameWithType: ExecuteRequestBase
-    fullName: Apizr.Mediation.Requesting.Base.ExecuteRequestBase
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TFormattedModelResultData
-    nameWithType: TFormattedModelResultData
-    fullName: TFormattedModelResultData
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`1
-    name: ExecuteRequestBase
-    nameWithType: ExecuteRequestBase
-    fullName: Apizr.Mediation.Requesting.Base.ExecuteRequestBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TFormattedModelResultData
-    nameWithType: TFormattedModelResultData
-    fullName: TFormattedModelResultData
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`2
-  commentId: T:Apizr.Mediation.Requesting.Base.ExecuteRequestBase`2
-  name: ExecuteRequestBase<TFormattedModelResultData, TModelRequestData>
-  nameWithType: ExecuteRequestBase<TFormattedModelResultData, TModelRequestData>
-  fullName: Apizr.Mediation.Requesting.Base.ExecuteRequestBase<TFormattedModelResultData, TModelRequestData>
-  nameWithType.vb: ExecuteRequestBase(Of TFormattedModelResultData, TModelRequestData)
-  fullName.vb: Apizr.Mediation.Requesting.Base.ExecuteRequestBase(Of TFormattedModelResultData, TModelRequestData)
-  name.vb: ExecuteRequestBase(Of TFormattedModelResultData, TModelRequestData)
-  spec.csharp:
-  - uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`2
+  - uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`3
     name: ExecuteRequestBase
     nameWithType: ExecuteRequestBase
     fullName: Apizr.Mediation.Requesting.Base.ExecuteRequestBase
@@ -1141,14 +948,20 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - name: TModelRequestData
-    nameWithType: TModelRequestData
-    fullName: TModelRequestData
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`2
+  - uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`3
     name: ExecuteRequestBase
     nameWithType: ExecuteRequestBase
     fullName: Apizr.Mediation.Requesting.Base.ExecuteRequestBase
@@ -1161,20 +974,26 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - name: TModelRequestData
-    nameWithType: TModelRequestData
-    fullName: TModelRequestData
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: )
     nameWithType: )
     fullName: )
 - uid: Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`4
   commentId: T:Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`4
-  name: ExecuteUnitRequestBase<TWebApi, TModelData, TApiData, TFormattedModelResultData>
-  nameWithType: ExecuteUnitRequestBase<TWebApi, TModelData, TApiData, TFormattedModelResultData>
-  fullName: Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase<TWebApi, TModelData, TApiData, TFormattedModelResultData>
-  nameWithType.vb: ExecuteUnitRequestBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData)
-  fullName.vb: Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData)
-  name.vb: ExecuteUnitRequestBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData)
+  name: ExecuteUnitRequestBase<TWebApi, TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType: ExecuteUnitRequestBase<TWebApi, TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase<TWebApi, TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
+  nameWithType.vb: ExecuteUnitRequestBase(Of TWebApi, TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase(Of TWebApi, TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
+  name.vb: ExecuteUnitRequestBase(Of TWebApi, TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder)
   spec.csharp:
   - uid: Apizr.Mediation.Requesting.Base.ExecuteUnitRequestBase`4
     name: ExecuteUnitRequestBase
@@ -1189,21 +1008,21 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
   - name: TFormattedModelResultData
     nameWithType: TFormattedModelResultData
     fullName: TFormattedModelResultData
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -1221,21 +1040,21 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
   - name: TFormattedModelResultData
     nameWithType: TFormattedModelResultData
     fullName: TFormattedModelResultData
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
   - name: )
     nameWithType: )
     fullName: )
@@ -1284,132 +1103,37 @@ references:
   name: MediatR
   nameWithType: MediatR
   fullName: MediatR
-- uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`2.ModelRequestData
-  commentId: P:Apizr.Mediation.Requesting.Base.ExecuteRequestBase`2.ModelRequestData
-  name: ModelRequestData
-  nameWithType: ExecuteRequestBase<TFormattedModelResultData, TModelRequestData>.ModelRequestData
-  fullName: Apizr.Mediation.Requesting.Base.ExecuteRequestBase<TFormattedModelResultData, TModelRequestData>.ModelRequestData
-  nameWithType.vb: ExecuteRequestBase(Of TFormattedModelResultData, TModelRequestData).ModelRequestData
-  fullName.vb: Apizr.Mediation.Requesting.Base.ExecuteRequestBase(Of TFormattedModelResultData, TModelRequestData).ModelRequestData
-- uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`1.ExecuteApiMethod
-  commentId: P:Apizr.Mediation.Requesting.Base.ExecuteRequestBase`1.ExecuteApiMethod
+- uid: Apizr.Mediation.Requesting.Base.ExecuteRequestBase`3.ExecuteApiMethod
+  commentId: P:Apizr.Mediation.Requesting.Base.ExecuteRequestBase`3.ExecuteApiMethod
   name: ExecuteApiMethod
-  nameWithType: ExecuteRequestBase<TFormattedModelResultData>.ExecuteApiMethod
-  fullName: Apizr.Mediation.Requesting.Base.ExecuteRequestBase<TFormattedModelResultData>.ExecuteApiMethod
-  nameWithType.vb: ExecuteRequestBase(Of TFormattedModelResultData).ExecuteApiMethod
-  fullName.vb: Apizr.Mediation.Requesting.Base.ExecuteRequestBase(Of TFormattedModelResultData).ExecuteApiMethod
-- uid: Apizr.Mediation.Requesting.Base.RequestBase`1.Context
-  commentId: P:Apizr.Mediation.Requesting.Base.RequestBase`1.Context
-  name: Context
-  nameWithType: RequestBase<TFormattedModelResultData>.Context
-  fullName: Apizr.Mediation.Requesting.Base.RequestBase<TFormattedModelResultData>.Context
-  nameWithType.vb: RequestBase(Of TFormattedModelResultData).Context
-  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of TFormattedModelResultData).Context
-- uid: Apizr.Mediation.Requesting.Base.RequestBase`1.OnException
-  commentId: P:Apizr.Mediation.Requesting.Base.RequestBase`1.OnException
-  name: OnException
-  nameWithType: RequestBase<TFormattedModelResultData>.OnException
-  fullName: Apizr.Mediation.Requesting.Base.RequestBase<TFormattedModelResultData>.OnException
-  nameWithType.vb: RequestBase(Of TFormattedModelResultData).OnException
-  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of TFormattedModelResultData).OnException
-- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  isExternal: true
-  name: ToString(Object, String, String)
-  nameWithType: ObjectExtensions.ToString(Object, String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.ObjectExtensions
-  commentId: T:Apizr.Extending.ObjectExtensions
-  parent: Apizr.Extending
-  name: ObjectExtensions
-  nameWithType: ObjectExtensions
-  fullName: Apizr.Extending.ObjectExtensions
-- uid: Apizr.Extending
-  commentId: N:Apizr.Extending
-  name: Apizr.Extending
-  nameWithType: Apizr.Extending
-  fullName: Apizr.Extending
+  nameWithType: ExecuteRequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>.ExecuteApiMethod
+  fullName: Apizr.Mediation.Requesting.Base.ExecuteRequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>.ExecuteApiMethod
+  nameWithType.vb: ExecuteRequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder).ExecuteApiMethod
+  fullName.vb: Apizr.Mediation.Requesting.Base.ExecuteRequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder).ExecuteApiMethod
+- uid: Apizr.Mediation.Requesting.Base.RequestBase`3.OptionsBuilder
+  commentId: P:Apizr.Mediation.Requesting.Base.RequestBase`3.OptionsBuilder
+  name: OptionsBuilder
+  nameWithType: RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>.OptionsBuilder
+  fullName: Apizr.Mediation.Requesting.Base.RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>.OptionsBuilder
+  nameWithType.vb: RequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder).OptionsBuilder
+  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder).OptionsBuilder
 - uid: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor*
   commentId: Overload:Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase`3.#ctor
   name: ExecuteOptionalUnitRequestBase
-  nameWithType: ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData>.ExecuteOptionalUnitRequestBase
-  fullName: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase<TWebApi, TModelData, TApiData>.ExecuteOptionalUnitRequestBase
-  nameWithType.vb: ExecuteOptionalUnitRequestBase(Of TWebApi, TModelData, TApiData).ExecuteOptionalUnitRequestBase
-  fullName.vb: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase(Of TWebApi, TModelData, TApiData).ExecuteOptionalUnitRequestBase
-- uid: System.Linq.Expressions.Expression{System.Func{{TWebApi},{TApiData},System.Threading.Tasks.Task}}
-  commentId: T:System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task}}
+  nameWithType: ExecuteOptionalUnitRequestBase<TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder>.ExecuteOptionalUnitRequestBase
+  fullName: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase<TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder>.ExecuteOptionalUnitRequestBase
+  nameWithType.vb: ExecuteOptionalUnitRequestBase(Of TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder).ExecuteOptionalUnitRequestBase
+  fullName.vb: Apizr.Optional.Requesting.Base.ExecuteOptionalUnitRequestBase(Of TWebApi, TApizrRequestOptions, TApizrRequestOptionsBuilder).ExecuteOptionalUnitRequestBase
+- uid: System.Linq.Expressions.Expression{System.Func{{TWebApi},System.Threading.Tasks.Task}}
+  commentId: T:System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}}
   parent: System.Linq.Expressions
   definition: System.Linq.Expressions.Expression`1
-  name: Expression<Func<TWebApi, TApiData, Task>>
-  nameWithType: Expression<Func<TWebApi, TApiData, Task>>
-  fullName: System.Linq.Expressions.Expression<System.Func<TWebApi, TApiData, System.Threading.Tasks.Task>>
-  nameWithType.vb: Expression(Of Func(Of TWebApi, TApiData, Task))
-  fullName.vb: System.Linq.Expressions.Expression(Of System.Func(Of TWebApi, TApiData, System.Threading.Tasks.Task))
-  name.vb: Expression(Of Func(Of TWebApi, TApiData, Task))
+  name: Expression<Func<TWebApi, Task>>
+  nameWithType: Expression<Func<TWebApi, Task>>
+  fullName: System.Linq.Expressions.Expression<System.Func<TWebApi, System.Threading.Tasks.Task>>
+  nameWithType.vb: Expression(Of Func(Of TWebApi, Task))
+  fullName.vb: System.Linq.Expressions.Expression(Of System.Func(Of TWebApi, System.Threading.Tasks.Task))
+  name.vb: Expression(Of Func(Of TWebApi, Task))
   spec.csharp:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
@@ -1419,7 +1143,7 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: System.Func`3
+  - uid: System.Func`2
     name: Func
     nameWithType: Func
     fullName: System.Func
@@ -1430,12 +1154,6 @@ references:
   - name: TWebApi
     nameWithType: TWebApi
     fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -1459,7 +1177,7 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: System.Func`3
+  - uid: System.Func`2
     name: Func
     nameWithType: Func
     fullName: System.Func
@@ -1470,12 +1188,6 @@ references:
   - name: TWebApi
     nameWithType: TWebApi
     fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -1490,12 +1202,46 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: '{TModelData}'
-  commentId: '!:TModelData'
-  definition: TModelData
-  name: TModelData
-  nameWithType: TModelData
-  fullName: TModelData
+- uid: System.Action{{TApizrRequestOptionsBuilder}}
+  commentId: T:System.Action{`5}
+  parent: System
+  definition: System.Action`1
+  name: Action<TApizrRequestOptionsBuilder>
+  nameWithType: Action<TApizrRequestOptionsBuilder>
+  fullName: System.Action<TApizrRequestOptionsBuilder>
+  nameWithType.vb: Action(Of TApizrRequestOptionsBuilder)
+  fullName.vb: System.Action(Of TApizrRequestOptionsBuilder)
+  name.vb: Action(Of TApizrRequestOptionsBuilder)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TApizrRequestOptionsBuilder
+    nameWithType: TApizrRequestOptionsBuilder
+    fullName: TApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Linq.Expressions.Expression`1
   commentId: T:System.Linq.Expressions.Expression`1
   isExternal: true
@@ -1541,245 +1287,55 @@ references:
   name: System.Linq.Expressions
   nameWithType: System.Linq.Expressions
   fullName: System.Linq.Expressions
-- uid: TModelData
-  name: TModelData
-  nameWithType: TModelData
-  fullName: TModelData
-- uid: System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,{TWebApi},{TApiData},System.Threading.Tasks.Task}}
-  commentId: T:System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task}}
-  parent: System.Linq.Expressions
-  definition: System.Linq.Expressions.Expression`1
-  name: Expression<Func<CancellationToken, TWebApi, TApiData, Task>>
-  nameWithType: Expression<Func<CancellationToken, TWebApi, TApiData, Task>>
-  fullName: System.Linq.Expressions.Expression<System.Func<System.Threading.CancellationToken, TWebApi, TApiData, System.Threading.Tasks.Task>>
-  nameWithType.vb: Expression(Of Func(Of CancellationToken, TWebApi, TApiData, Task))
-  fullName.vb: System.Linq.Expressions.Expression(Of System.Func(Of System.Threading.CancellationToken, TWebApi, TApiData, System.Threading.Tasks.Task))
-  name.vb: Expression(Of Func(Of CancellationToken, TWebApi, TApiData, Task))
-  spec.csharp:
-  - uid: System.Linq.Expressions.Expression`1
-    name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.Func`4
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.Tasks.Task
-    name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Linq.Expressions.Expression`1
-    name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.Func`4
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.Tasks.Task
-    name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Linq.Expressions.Expression{System.Func{Polly.Context,{TWebApi},{TApiData},System.Threading.Tasks.Task}}
-  commentId: T:System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,``1,System.Threading.Tasks.Task}}
-  parent: System.Linq.Expressions
-  definition: System.Linq.Expressions.Expression`1
-  name: Expression<Func<Context, TWebApi, TApiData, Task>>
-  nameWithType: Expression<Func<Context, TWebApi, TApiData, Task>>
-  fullName: System.Linq.Expressions.Expression<System.Func<Polly.Context, TWebApi, TApiData, System.Threading.Tasks.Task>>
-  nameWithType.vb: Expression(Of Func(Of Context, TWebApi, TApiData, Task))
-  fullName.vb: System.Linq.Expressions.Expression(Of System.Func(Of Polly.Context, TWebApi, TApiData, System.Threading.Tasks.Task))
-  name.vb: Expression(Of Func(Of Context, TWebApi, TApiData, Task))
-  spec.csharp:
-  - uid: System.Linq.Expressions.Expression`1
-    name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.Func`4
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Polly.Context
-    name: Context
-    nameWithType: Context
-    fullName: Polly.Context
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.Tasks.Task
-    name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Linq.Expressions.Expression`1
-    name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.Func`4
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Polly.Context
-    name: Context
-    nameWithType: Context
-    fullName: Polly.Context
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.Tasks.Task
-    name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Polly.Context
-  commentId: T:Polly.Context
-  parent: Polly
+- uid: System.Action`1
+  commentId: T:System.Action`1
   isExternal: true
-  name: Context
-  nameWithType: Context
-  fullName: Polly.Context
-- uid: Polly
-  commentId: N:Polly
-  isExternal: true
-  name: Polly
-  nameWithType: Polly
-  fullName: Polly
-- uid: System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,{TWebApi},{TApiData},System.Threading.Tasks.Task}}
-  commentId: T:System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task}}
+  name: Action<T>
+  nameWithType: Action<T>
+  fullName: System.Action<T>
+  nameWithType.vb: Action(Of T)
+  fullName.vb: System.Action(Of T)
+  name.vb: Action(Of T)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Linq.Expressions.Expression{System.Func{{TApizrRequestOptions},{TWebApi},System.Threading.Tasks.Task}}
+  commentId: T:System.Linq.Expressions.Expression{System.Func{`2,`0,System.Threading.Tasks.Task}}
   parent: System.Linq.Expressions
   definition: System.Linq.Expressions.Expression`1
-  name: Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task>>
-  nameWithType: Expression<Func<Context, CancellationToken, TWebApi, TApiData, Task>>
-  fullName: System.Linq.Expressions.Expression<System.Func<Polly.Context, System.Threading.CancellationToken, TWebApi, TApiData, System.Threading.Tasks.Task>>
-  nameWithType.vb: Expression(Of Func(Of Context, CancellationToken, TWebApi, TApiData, Task))
-  fullName.vb: System.Linq.Expressions.Expression(Of System.Func(Of Polly.Context, System.Threading.CancellationToken, TWebApi, TApiData, System.Threading.Tasks.Task))
-  name.vb: Expression(Of Func(Of Context, CancellationToken, TWebApi, TApiData, Task))
+  name: Expression<Func<TApizrRequestOptions, TWebApi, Task>>
+  nameWithType: Expression<Func<TApizrRequestOptions, TWebApi, Task>>
+  fullName: System.Linq.Expressions.Expression<System.Func<TApizrRequestOptions, TWebApi, System.Threading.Tasks.Task>>
+  nameWithType.vb: Expression(Of Func(Of TApizrRequestOptions, TWebApi, Task))
+  fullName.vb: System.Linq.Expressions.Expression(Of System.Func(Of TApizrRequestOptions, TWebApi, System.Threading.Tasks.Task))
+  name.vb: Expression(Of Func(Of TApizrRequestOptions, TWebApi, Task))
   spec.csharp:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
@@ -1789,7 +1345,7 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: System.Func`5
+  - uid: System.Func`3
     name: Func
     nameWithType: Func
     fullName: System.Func
@@ -1797,31 +1353,15 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Polly.Context
-    name: Context
-    nameWithType: Context
-    fullName: Polly.Context
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
   - name: ', '
     nameWithType: ', '
     fullName: ', '
   - name: TWebApi
     nameWithType: TWebApi
     fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -1845,7 +1385,7 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: System.Func`5
+  - uid: System.Func`3
     name: Func
     nameWithType: Func
     fullName: System.Func
@@ -1853,31 +1393,15 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Polly.Context
-    name: Context
-    nameWithType: Context
-    fullName: Polly.Context
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
+  - name: TApizrRequestOptions
+    nameWithType: TApizrRequestOptions
+    fullName: TApizrRequestOptions
   - name: ', '
     nameWithType: ', '
     fullName: ', '
   - name: TWebApi
     nameWithType: TWebApi
     fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: ', '
     nameWithType: ', '
     fullName: ', '

@@ -5,7 +5,7 @@ items:
   id: PriorityHttpMessageHandler
   parent: Apizr
   children:
-  - Apizr.PriorityHttpMessageHandler.#ctor(System.Net.Http.HttpMessageHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,System.Nullable{System.Int64},Punchclock.OperationQueue)
+  - Apizr.PriorityHttpMessageHandler.#ctor(System.Net.Http.HttpMessageHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Nullable{System.Int64},Punchclock.OperationQueue)
   - Apizr.PriorityHttpMessageHandler.ResetLimit(System.Nullable{System.Int64})
   - Apizr.PriorityHttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
   langs:
@@ -17,8 +17,8 @@ items:
   type: Class
   source:
     id: PriorityHttpMessageHandler
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Fusillade\PriorityHttpMessageHandler.cs
-    startLine: 16
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Fusillade\PriorityHttpMessageHandler.cs
+    startLine: 20
   assemblies:
   - Apizr.Integrations.Fusillade
   namespace: Apizr
@@ -46,54 +46,52 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
-- uid: Apizr.PriorityHttpMessageHandler.#ctor(System.Net.Http.HttpMessageHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,System.Nullable{System.Int64},Punchclock.OperationQueue)
-  commentId: M:Apizr.PriorityHttpMessageHandler.#ctor(System.Net.Http.HttpMessageHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,System.Nullable{System.Int64},Punchclock.OperationQueue)
-  id: '#ctor(System.Net.Http.HttpMessageHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase,System.Nullable{System.Int64},Punchclock.OperationQueue)'
+- uid: Apizr.PriorityHttpMessageHandler.#ctor(System.Net.Http.HttpMessageHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Nullable{System.Int64},Punchclock.OperationQueue)
+  commentId: M:Apizr.PriorityHttpMessageHandler.#ctor(System.Net.Http.HttpMessageHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Nullable{System.Int64},Punchclock.OperationQueue)
+  id: '#ctor(System.Net.Http.HttpMessageHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Nullable{System.Int64},Punchclock.OperationQueue)'
   parent: Apizr.PriorityHttpMessageHandler
   langs:
   - csharp
   - vb
-  name: PriorityHttpMessageHandler(HttpMessageHandler, ILogger, IApizrOptionsBase, Nullable<Int64>, OperationQueue)
-  nameWithType: PriorityHttpMessageHandler.PriorityHttpMessageHandler(HttpMessageHandler, ILogger, IApizrOptionsBase, Nullable<Int64>, OperationQueue)
-  fullName: Apizr.PriorityHttpMessageHandler.PriorityHttpMessageHandler(System.Net.Http.HttpMessageHandler, Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.IApizrOptionsBase, System.Nullable<System.Int64>, Punchclock.OperationQueue)
+  name: PriorityHttpMessageHandler(HttpMessageHandler, ILogger, IApizrManagerOptionsBase, Nullable<Int64>, OperationQueue)
+  nameWithType: PriorityHttpMessageHandler.PriorityHttpMessageHandler(HttpMessageHandler, ILogger, IApizrManagerOptionsBase, Nullable<Int64>, OperationQueue)
+  fullName: Apizr.PriorityHttpMessageHandler.PriorityHttpMessageHandler(System.Net.Http.HttpMessageHandler, Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Nullable<System.Int64>, Punchclock.OperationQueue)
   type: Constructor
   source:
     id: .ctor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Fusillade\PriorityHttpMessageHandler.cs
-    startLine: 24
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Fusillade\PriorityHttpMessageHandler.cs
+    startLine: 28
   assemblies:
   - Apizr.Integrations.Fusillade
   namespace: Apizr
   syntax:
-    content: public PriorityHttpMessageHandler(HttpMessageHandler innerHandler, ILogger logger, IApizrOptionsBase apizrOptions, long? maxBytesToRead = null, OperationQueue opQueue = null)
+    content: public PriorityHttpMessageHandler(HttpMessageHandler innerHandler, ILogger logger, IApizrManagerOptionsBase apizrOptions, long? maxBytesToRead = null, OperationQueue opQueue = null)
     parameters:
     - id: innerHandler
       type: System.Net.Http.HttpMessageHandler
     - id: logger
       type: Microsoft.Extensions.Logging.ILogger
     - id: apizrOptions
-      type: Apizr.Configuring.IApizrOptionsBase
+      type: Apizr.Configuring.Manager.IApizrManagerOptionsBase
     - id: maxBytesToRead
       type: System.Nullable{System.Int64}
     - id: opQueue
       type: Punchclock.OperationQueue
-    content.vb: Public Sub New(innerHandler As HttpMessageHandler, logger As ILogger, apizrOptions As IApizrOptionsBase, maxBytesToRead As Long? = Nothing, opQueue As OperationQueue = Nothing)
+    content.vb: Public Sub New(innerHandler As HttpMessageHandler, logger As ILogger, apizrOptions As IApizrManagerOptionsBase, maxBytesToRead As Long? = Nothing, opQueue As OperationQueue = Nothing)
   overload: Apizr.PriorityHttpMessageHandler.#ctor*
-  nameWithType.vb: PriorityHttpMessageHandler.PriorityHttpMessageHandler(HttpMessageHandler, ILogger, IApizrOptionsBase, Nullable(Of Int64), OperationQueue)
+  nameWithType.vb: PriorityHttpMessageHandler.PriorityHttpMessageHandler(HttpMessageHandler, ILogger, IApizrManagerOptionsBase, Nullable(Of Int64), OperationQueue)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Apizr.PriorityHttpMessageHandler.PriorityHttpMessageHandler(System.Net.Http.HttpMessageHandler, Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.IApizrOptionsBase, System.Nullable(Of System.Int64), Punchclock.OperationQueue)
-  name.vb: PriorityHttpMessageHandler(HttpMessageHandler, ILogger, IApizrOptionsBase, Nullable(Of Int64), OperationQueue)
+  fullName.vb: Apizr.PriorityHttpMessageHandler.PriorityHttpMessageHandler(System.Net.Http.HttpMessageHandler, Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Nullable(Of System.Int64), Punchclock.OperationQueue)
+  name.vb: PriorityHttpMessageHandler(HttpMessageHandler, ILogger, IApizrManagerOptionsBase, Nullable(Of Int64), OperationQueue)
 - uid: Apizr.PriorityHttpMessageHandler.ResetLimit(System.Nullable{System.Int64})
   commentId: M:Apizr.PriorityHttpMessageHandler.ResetLimit(System.Nullable{System.Int64})
   id: ResetLimit(System.Nullable{System.Int64})
@@ -107,8 +105,8 @@ items:
   type: Method
   source:
     id: ResetLimit
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Fusillade\PriorityHttpMessageHandler.cs
-    startLine: 32
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Fusillade\PriorityHttpMessageHandler.cs
+    startLine: 36
   assemblies:
   - Apizr.Integrations.Fusillade
   namespace: Apizr
@@ -142,8 +140,8 @@ items:
   type: Method
   source:
     id: SendAsync
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Fusillade\PriorityHttpMessageHandler.cs
-    startLine: 37
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Fusillade\PriorityHttpMessageHandler.cs
+    startLine: 41
   assemblies:
   - Apizr.Integrations.Fusillade
   namespace: Apizr
@@ -564,61 +562,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  parent: Apizr.Extending.ObjectExtensions
-  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  name: ToString(String, String)
-  nameWithType: ObjectExtensions.ToString(String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
@@ -637,87 +580,6 @@ references:
   name: Fusillade
   nameWithType: Fusillade
   fullName: Fusillade
-- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  isExternal: true
-  name: ToString(Object, String, String)
-  nameWithType: ObjectExtensions.ToString(Object, String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.ObjectExtensions
-  commentId: T:Apizr.Extending.ObjectExtensions
-  parent: Apizr.Extending
-  name: ObjectExtensions
-  nameWithType: ObjectExtensions
-  fullName: Apizr.Extending.ObjectExtensions
-- uid: Apizr.Extending
-  commentId: N:Apizr.Extending
-  name: Apizr.Extending
-  nameWithType: Apizr.Extending
-  fullName: Apizr.Extending
 - uid: Apizr.PriorityHttpMessageHandler.#ctor*
   commentId: Overload:Apizr.PriorityHttpMessageHandler.#ctor
   name: PriorityHttpMessageHandler
@@ -730,12 +592,12 @@ references:
   name: ILogger
   nameWithType: ILogger
   fullName: Microsoft.Extensions.Logging.ILogger
-- uid: Apizr.Configuring.IApizrOptionsBase
-  commentId: T:Apizr.Configuring.IApizrOptionsBase
-  parent: Apizr.Configuring
-  name: IApizrOptionsBase
-  nameWithType: IApizrOptionsBase
-  fullName: Apizr.Configuring.IApizrOptionsBase
+- uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  commentId: T:Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  parent: Apizr.Configuring.Manager
+  name: IApizrManagerOptionsBase
+  nameWithType: IApizrManagerOptionsBase
+  fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
 - uid: System.Nullable{System.Int64}
   commentId: T:System.Nullable{System.Int64}
   parent: System
@@ -793,11 +655,11 @@ references:
   name: Microsoft.Extensions.Logging
   nameWithType: Microsoft.Extensions.Logging
   fullName: Microsoft.Extensions.Logging
-- uid: Apizr.Configuring
-  commentId: N:Apizr.Configuring
-  name: Apizr.Configuring
-  nameWithType: Apizr.Configuring
-  fullName: Apizr.Configuring
+- uid: Apizr.Configuring.Manager
+  commentId: N:Apizr.Configuring.Manager
+  name: Apizr.Configuring.Manager
+  nameWithType: Apizr.Configuring.Manager
+  fullName: Apizr.Configuring.Manager
 - uid: System.Nullable`1
   commentId: T:System.Nullable`1
   isExternal: true

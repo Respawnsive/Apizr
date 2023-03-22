@@ -6,7 +6,7 @@ items:
   parent: Apizr
   children:
   - Apizr.OptionalOptionsBuilderExtensions.WithOptionalMediation(Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder)
-  - Apizr.OptionalOptionsBuilderExtensions.WithOptionalMediation(Apizr.Extending.Configuring.IApizrExtendedOptionsBuilder)
+  - Apizr.OptionalOptionsBuilderExtensions.WithOptionalMediation(Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder)
   langs:
   - csharp
   - vb
@@ -16,11 +16,13 @@ items:
   type: Class
   source:
     id: OptionalOptionsBuilderExtensions
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\OptionalOptionsBuilderExtensions.cs
-    startLine: 25
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\OptionalOptionsBuilderExtensions.cs
+    startLine: 29
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr
+  summary: "\nOptional with MediatR options builder extensions\n"
+  example: []
   syntax:
     content: public static class OptionalOptionsBuilderExtensions
     content.vb: Public Module OptionalOptionsBuilderExtensions
@@ -55,8 +57,8 @@ items:
   type: Method
   source:
     id: WithOptionalMediation
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\OptionalOptionsBuilderExtensions.cs
-    startLine: 32
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\OptionalOptionsBuilderExtensions.cs
+    startLine: 36
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr
@@ -82,40 +84,40 @@ items:
   modifiers.vb:
   - Public
   - Shared
-- uid: Apizr.OptionalOptionsBuilderExtensions.WithOptionalMediation(Apizr.Extending.Configuring.IApizrExtendedOptionsBuilder)
-  commentId: M:Apizr.OptionalOptionsBuilderExtensions.WithOptionalMediation(Apizr.Extending.Configuring.IApizrExtendedOptionsBuilder)
-  id: WithOptionalMediation(Apizr.Extending.Configuring.IApizrExtendedOptionsBuilder)
+- uid: Apizr.OptionalOptionsBuilderExtensions.WithOptionalMediation(Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder)
+  commentId: M:Apizr.OptionalOptionsBuilderExtensions.WithOptionalMediation(Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder)
+  id: WithOptionalMediation(Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder)
   isExtensionMethod: true
   parent: Apizr.OptionalOptionsBuilderExtensions
   langs:
   - csharp
   - vb
-  name: WithOptionalMediation(IApizrExtendedOptionsBuilder)
-  nameWithType: OptionalOptionsBuilderExtensions.WithOptionalMediation(IApizrExtendedOptionsBuilder)
-  fullName: Apizr.OptionalOptionsBuilderExtensions.WithOptionalMediation(Apizr.Extending.Configuring.IApizrExtendedOptionsBuilder)
+  name: WithOptionalMediation(IApizrExtendedManagerOptionsBuilder)
+  nameWithType: OptionalOptionsBuilderExtensions.WithOptionalMediation(IApizrExtendedManagerOptionsBuilder)
+  fullName: Apizr.OptionalOptionsBuilderExtensions.WithOptionalMediation(Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder)
   type: Method
   source:
     id: WithOptionalMediation
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\OptionalOptionsBuilderExtensions.cs
-    startLine: 44
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\OptionalOptionsBuilderExtensions.cs
+    startLine: 48
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr
   summary: "\nLet Apizr handle requests execution with some mediation and optional result\n"
   example: []
   syntax:
-    content: public static IApizrExtendedOptionsBuilder WithOptionalMediation(this IApizrExtendedOptionsBuilder optionsBuilder)
+    content: public static IApizrExtendedManagerOptionsBuilder WithOptionalMediation(this IApizrExtendedManagerOptionsBuilder optionsBuilder)
     parameters:
     - id: optionsBuilder
-      type: Apizr.Extending.Configuring.IApizrExtendedOptionsBuilder
+      type: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
       description: ''
     return:
-      type: Apizr.Extending.Configuring.IApizrExtendedOptionsBuilder
+      type: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
       description: ''
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function WithOptionalMediation(optionsBuilder As IApizrExtendedOptionsBuilder) As IApizrExtendedOptionsBuilder
+      Public Shared Function WithOptionalMediation(optionsBuilder As IApizrExtendedManagerOptionsBuilder) As IApizrExtendedManagerOptionsBuilder
   overload: Apizr.OptionalOptionsBuilderExtensions.WithOptionalMediation*
   modifiers.csharp:
   - public
@@ -437,14 +439,14 @@ references:
   name: Apizr.Extending.Configuring.Common
   nameWithType: Apizr.Extending.Configuring.Common
   fullName: Apizr.Extending.Configuring.Common
-- uid: Apizr.Extending.Configuring.IApizrExtendedOptionsBuilder
-  commentId: T:Apizr.Extending.Configuring.IApizrExtendedOptionsBuilder
-  parent: Apizr.Extending.Configuring
-  name: IApizrExtendedOptionsBuilder
-  nameWithType: IApizrExtendedOptionsBuilder
-  fullName: Apizr.Extending.Configuring.IApizrExtendedOptionsBuilder
-- uid: Apizr.Extending.Configuring
-  commentId: N:Apizr.Extending.Configuring
-  name: Apizr.Extending.Configuring
-  nameWithType: Apizr.Extending.Configuring
-  fullName: Apizr.Extending.Configuring
+- uid: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
+  commentId: T:Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
+  parent: Apizr.Extending.Configuring.Manager
+  name: IApizrExtendedManagerOptionsBuilder
+  nameWithType: IApizrExtendedManagerOptionsBuilder
+  fullName: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
+- uid: Apizr.Extending.Configuring.Manager
+  commentId: N:Apizr.Extending.Configuring.Manager
+  name: Apizr.Extending.Configuring.Manager
+  nameWithType: Apizr.Extending.Configuring.Manager
+  fullName: Apizr.Extending.Configuring.Manager

@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Configuring Optional.Async | Apizr </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Configuring Optional.Async | Apizr ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../../../resources/favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <meta property="docfx:navrel" content="../../../toc.html">
+    <meta property="docfx:tocrel" content="../../toc.html">
+    
+    <meta property="docfx:rel" content="../../../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../../resources/logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h2 id="configuring-optionalasync">Configuring Optional.Async</h2>
+
+<p>Apizr offers an integration with <a href="https://github.com/dnikolovv/optional-async">Optional.Async</a>, following the <a href="https://github.com/nlkl/Optional">Optional pattern</a>, available only with the extended approach with MediatR integration activated.
+Optional.Async offers a strongly typed alternative to null values that lets you:</p>
+<ul>
+<li>Avoid those pesky null-reference exceptions</li>
+<li>Signal intent and model your data more explicitly</li>
+<li>Cut down on manual null checks and focus on your domain</li>
+<li>It allows you to chain <code>Task&lt;Option&lt;T&gt;&gt;</code> and <code>Task&lt;Option&lt;T, TException&gt;&gt;</code> without having to use await</li>
+</ul>
+<h3 id="registering">Registering</h3>
+<p>Please first install this integration package:</p>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Current</th>
+<th>V-Next</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apizr.Integrations.Optional</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.Optional/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.Optional.svg" alt="NuGet"></a></td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.Optional/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.Optional.svg" alt="NuGet Pre Release"></a></td>
+</tr>
+</tbody>
+</table>
+<p>Then you&#39;ll be able to register with this option:</p>
+<pre><code class="lang-csharp">options =&gt; options.WithOptionalMediation()
+</code></pre><p>And don&#39;t forget to register MediatR itself as usual:</p>
+<pre><code class="lang-csharp">services.AddMediatR(YOUR_REQUESTHANDLER_ASSEMBLIES);
+</code></pre><p>Where <code>YOUR_REQUESTHANDLER_ASSEMBLIES</code> should be the assemblies containing your custom request handlers, if you get some (Apizr MediatR request handlers will be auto registered).</p>
+<h3 id="using">Using</h3>
+<div class="tabGroup" id="tabgroup_wNO68Es46s">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_wNO68Es46s_tabid-imediator" role="tab" aria-controls="tabpanel_wNO68Es46s_tabid-imediator" data-tab="tabid-imediator" tabindex="0" aria-selected="true"><code>IMediator</code></a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_wNO68Es46s_tabid-iapizroptionalmediator" role="tab" aria-controls="tabpanel_wNO68Es46s_tabid-iapizroptionalmediator" data-tab="tabid-iapizroptionalmediator" tabindex="-1"><code>IApizrOptionalMediator</code></a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_wNO68Es46s_tabid-iapizrptionalmediator-twebapi" role="tab" aria-controls="tabpanel_wNO68Es46s_tabid-iapizrptionalmediator-twebapi" data-tab="tabid-iapizrptionalmediator-twebapi" tabindex="-1"><code>IApizrOptionalMediator&lt;TWebApi&gt;</code></a>
+</li>
+</ul>
+<section id="tabpanel_wNO68Es46s_tabid-imediator" role="tabpanel" data-tab="tabid-imediator">
+<p>When registered, you don&#39;t have to inject/resolve anything else than <code>IMediator</code>, in order to play with your api services (both classic and crud). 
+Everything you need to do then, is sending your request by calling:</p>
+<pre><code class="lang-csharp">var optionalResult = await _mediator.Send(YOUR_REQUEST_HERE);
+</code></pre><p>Where <code>YOUR_REQUEST_HERE</code> could be:</p>
+<p>Classic API:</p>
+<ul>
+<li>With no result:<ul>
+<li><code>ExecuteOptionalUnitRequest&lt;TWebApi&gt;</code>: execute any method from <code>TWebApi</code></li>
+<li><code>ExecuteOptionalUnitRequest&lt;TWebApi, TModelData, TApiData&gt;</code>: execute any method from <code>TWebApi</code> with <code>TModelData</code> mapped with <code>TApiData</code></li>
+</ul>
+</li>
+<li>With result:<ul>
+<li><code>ExecuteOptionalResultRequest&lt;TWebApi, TApiData&gt;</code>: execute any method from <code>TWebApi</code> with a <code>TApiData</code> request/result data</li>
+<li><code>ExecuteOptionalResultRequest&lt;TWebApi, TModelData, TApiData&gt;</code>: execute any method from <code>TWebApi</code> with <code>TModelData</code> request/result data mapped with <code>TApiData</code></li>
+<li><code>ExecuteOptionalResultRequest&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;</code>: execute any method from <code>TWebApi</code>, sending <code>TApiRequestData</code> mapped from <code>TModelRequestData</code>, then returning <code>TModelResultData</code> mapped from <code>TApiResultData</code></li>
+</ul>
+</li>
+</ul>
+<p>CRUD API:</p>
+<ul>
+<li>Read:<ul>
+<li><code>ReadOptionalQuery&lt;TResultData&gt;</code>: get the <code>TResultData</code> entity matching an int key</li>
+<li><code>ReadOptionalQuery&lt;TResultData, TKey&gt;</code>: get the <code>TResultData</code> entity matching a <code>TKey</code> </li>
+</ul>
+</li>
+<li>ReadAll:<ul>
+<li><code>ReadAllOptionalQuery&lt;TReadAllResult&gt;</code>: get <code>TReadAllResult</code> with <code>IDictionary&lt;string, object&gt;</code> optional query parameters</li>
+<li><code>ReadAllOptionalQuery&lt;TReadAllParams, TReadAllResult&gt;</code>: get <code>TReadAllResult</code> with <code>TReadAllParams</code> optional query parameters</li>
+</ul>
+</li>
+<li>Create:<ul>
+<li><code>CreateOptionalCommand&lt;TModelData&gt;</code>: create a <code>TModelData</code> entity</li>
+</ul>
+</li>
+<li>Update:<ul>
+<li><code>UpdateOptionalCommand&lt;TRequestData&gt;</code>: update the <code>TRequestData</code> entity matching an int key</li>
+<li><code>UpdateOptionalCommand&lt;TKey, TRequestData&gt;</code>: update the <code>TRequestData</code> entity matching a <code>TKey</code></li>
+</ul>
+</li>
+<li>Delete:<ul>
+<li><code>DeleteOptionalCommand&lt;T&gt;</code>: delete the <code>T</code> entity matching an int key</li>
+<li><code>DeleteOptionalCommand&lt;T, TKey&gt;</code>: delete the <code>T</code> entity matching a <code>TKey</code></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="tabpanel_wNO68Es46s_tabid-iapizroptionalmediator" role="tabpanel" data-tab="tabid-iapizroptionalmediator" aria-hidden="true" hidden="hidden">
+<p>Writting things shorter, instead of injecting/resolving <code>IMediator</code>, you could do it with <code>IApizrMediator</code> or <code>IApizrCrudMediator</code>. 
+Everything you need to do then, is sending your request by calling something like:</p>
+<pre><code class="lang-csharp">// Classic
+var optionalResult = await _apizrOptionalMediator.SendFor&lt;TWebApi&gt;(YOUR_API_METHOD_HERE);
+
+// OR CRUD
+var optionalResult = await _apizrOptionalCrudMediator.SendReadAllQuery&lt;TReadAllResult&gt;();
+</code></pre><p>Classic Optional mediator methods:</p>
+<ul>
+<li>No result:<ul>
+<li><code>SendFor&lt;TWebApi&gt;</code>: execute any method from <code>TWebApi</code></li>
+<li><code>SendFor&lt;TWebApi, TModelData, TApiData&gt;</code>: execute any method from <code>TWebApi</code> with <code>TModelData</code> mapped with <code>TApiData</code></li>
+</ul>
+</li>
+<li>With result:<ul>
+<li><code>SendFor&lt;TWebApi, TApiData&gt;</code>: execute any method from <code>TWebApi</code> with a <code>TApiData</code> request/result data</li>
+<li><code>SendFor&lt;TWebApi, TModelData, TApiData&gt;</code>: execute any method from <code>TWebApi</code> with <code>TModelData</code> request/result data mapped with <code>TApiData</code></li>
+<li><code>SendFor&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;</code>: execute any method from <code>TWebApi</code>, sending <code>TApiRequestData</code> mapped from <code>TModelRequestData</code>, then returning <code>TModelResultData</code> mapped from <code>TApiResultData</code></li>
+</ul>
+</li>
+</ul>
+<p>CRUD Optional mediator methods:</p>
+<ul>
+<li>Read:<ul>
+<li><code>SendReadQuery&lt;TApiEntity, TApiEntityKey&gt;</code>: get the <code>TApiEntity</code> matching a <code>TApiEntityKey</code></li>
+<li><code>SendReadQuery&lt;TModelEntity, TApiEntity, TApiEntityKey&gt;</code>: get the <code>TModelEntity</code> mapped from <code>TApiEntity</code> and matching a <code>TApiEntityKey</code></li>
+</ul>
+</li>
+<li>ReadAll:<ul>
+<li><code>SendReadAllQuery&lt;TReadAllResult&gt;</code>: get <code>TReadAllResult</code> with <code>IDictionary&lt;string, object&gt;</code> optional query parameters</li>
+<li><code>SendReadAllQuery&lt;TModelReadAllResult, TApiReadAllResult&gt;</code>: get <code>TModelReadAllResult</code> mapped from <code>TApiReadAllResult</code></li>
+<li><code>SendReadAllQuery&lt;TReadAllResult, TReadAllParams&gt;</code>: get <code>TReadAllResult</code> with <code>TReadAllParams</code> optional query parameters</li>
+<li><code>SendReadAllQuery&lt;TModelReadAllResult, TApiReadAllResult, TReadAllParams&gt;</code>: get <code>TModelReadAllResult</code> mapped from <code>TApiReadAllResult</code> with <code>TReadAllParams</code> optional query parameters</li>
+</ul>
+</li>
+<li>Create:<ul>
+<li><code>SendCreateCommand&lt;TApiEntity&gt;</code>: create a <code>TApiEntity</code></li>
+<li><code>SendCreateCommand&lt;TModelEntity, TApiEntity&gt;</code>: create a <code>TApiEntity</code> mapped from <code>TModelEntity</code></li>
+</ul>
+</li>
+<li>Update:<ul>
+<li><code>SendUpdateCommand&lt;TApiEntity, TApiEntityKey&gt;</code>: update the <code>TApiEntity</code> entity matching a <code>TApiEntityKey</code></li>
+<li><code>SendUpdateCommand&lt;TModelEntity, TApiEntity, TApiEntityKey&gt;</code>: update the <code>TApiEntity</code> mapped from <code>TModelEntity</code> and matching a <code>TApiEntityKey</code></li>
+</ul>
+</li>
+<li>Delete:<ul>
+<li><code>SendDeleteCommand&lt;TApiEntity, TApiEntityKey&gt;</code>: delete the <code>TApiEntity</code> matching a <code>TApiEntityKey</code></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="tabpanel_wNO68Es46s_tabid-iapizrptionalmediator-twebapi" role="tabpanel" data-tab="tabid-iapizrptionalmediator-twebapi" aria-hidden="true" hidden="hidden">
+<p>Writting things shorter than ever, instead of injecting/resolving <code>IMediator</code>, <code>IApizrOptionalMediator</code> or <code>IApizrCrudOptionalMediator</code>, you could do it with <code>IApizrOptionalMediator&lt;TWebApi&gt;</code> or <code>IApizrCrudOptionalMediator&lt;TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams&gt;</code>. </p>
+<div class="TIP"><h5>Tip</h5><p><strong>Apizr Registry</strong></p>
+<p>Note that if you were using the registry feature while configuring, you&#39;ll be able to inject/resolve <code>IApizrOptionalMediationRegistry</code> instead and then just get an <code>IApizrOptionalMediator&lt;TWebApi&gt;</code> or <code>IApizrCrudOptionalMediator&lt;TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams&gt;</code> thanks to its <code>GetFor</code> and <code>GetCrudFor</code> methods.</p>
+</div>
+<p>Everything you need to do then, is sending your request by calling something like:</p>
+<pre><code class="lang-csharp">// Classic
+var optionalResult = await _apizrOptionalMediator.SendFor(YOUR_API_METHOD_HERE);
+
+// OR CRUD
+var optionalResult = await _apizrCrudOptionalMediator.SendReadAllQuery();
+</code></pre><p>Classic Optional typed mediator methods:</p>
+<ul>
+<li>No result:<ul>
+<li><code>SendFor</code>: execute any method from <code>TWebApi</code></li>
+<li><code>SendFor&lt;TModelData, TApiData&gt;</code>: execute any method from <code>TWebApi</code> with <code>TModelData</code> mapped with <code>TApiData</code></li>
+</ul>
+</li>
+<li>With result:<ul>
+<li><code>SendFor&lt;TApiData&gt;</code>: execute any method from <code>TWebApi</code> with a <code>TApiData</code> request/result data</li>
+<li><code>SendFor&lt;TModelData, TApiData&gt;</code>: execute any method from <code>TWebApi</code> with <code>TModelData</code> request/result data mapped with <code>TApiData</code></li>
+<li><code>SendFor&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;</code>: execute any method from <code>TWebApi</code>, sending <code>TApiRequestData</code> mapped from <code>TModelRequestData</code>, then returning <code>TModelResultData</code> mapped from <code>TApiResultData</code></li>
+</ul>
+</li>
+</ul>
+<p>CRUD typed mediator methods:</p>
+<ul>
+<li>Read:<ul>
+<li><code>SendReadQuery</code>: get the <code>TApiEntity</code> matching a <code>TApiEntityKey</code></li>
+<li><code>SendReadQuery&lt;TModelEntity&gt;</code>: get the <code>TModelEntity</code> mapped from <code>TApiEntity</code> and matching a <code>TApiEntityKey</code></li>
+</ul>
+</li>
+<li>ReadAll:<ul>
+<li><code>SendReadAllQuery</code>: get <code>TReadAllResult</code> with <code>TReadAllParams</code> optional query parameters</li>
+<li><code>SendReadAllQuery&lt;TModelReadAllResult&gt;</code>: get <code>TModelReadAllResult</code> mapped from <code>TApiReadAllResult</code> with <code>TReadAllParams</code> optional query parameters</li>
+</ul>
+</li>
+<li>Create:<ul>
+<li><code>SendCreateCommand</code>: create a <code>TApiEntity</code></li>
+<li><code>SendCreateCommand&lt;TModelEntity&gt;</code>: create a <code>TApiEntity</code> mapped from <code>TModelEntity</code></li>
+</ul>
+</li>
+<li>Update:<ul>
+<li><code>SendUpdateCommand</code>: update the <code>TApiEntity</code> entity matching a <code>TApiEntityKey</code></li>
+<li><code>SendUpdateCommand&lt;TModelEntity&gt;</code>: update the <code>TApiEntity</code> mapped from <code>TModelEntity</code> and matching a <code>TApiEntityKey</code></li>
+</ul>
+</li>
+<li>Delete:<ul>
+<li><code>SendDeleteCommand</code>: delete the <code>TApiEntity</code> matching a <code>TApiEntityKey</code></li>
+</ul>
+</li>
+</ul>
+</section>
+</div>
+<p>You should finaly end with something like:</p>
+<pre><code class="lang-csharp">optionalResult.Match(result =&gt;
+{
+    // Oh yeah, you get a result!
+}, e =&gt;
+{
+    // Oh no, something went wrong!
+});
+</code></pre></article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Supported by Respawnsive
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>

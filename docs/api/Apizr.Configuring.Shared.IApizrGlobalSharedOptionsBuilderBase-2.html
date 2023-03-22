@@ -5,12 +5,12 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Interface IApizrGlobalSharedOptionsBuilderBase&lt;TApizrSharedOptions, TApizrSharedOptionsBuilder&gt;
+    <title>Interface IApizrGlobalSharedOptionsBuilderBase&lt;TApizrOptions, TApizrOptionsBuilder&gt;
    | Apizr </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Interface IApizrGlobalSharedOptionsBuilderBase&lt;TApizrSharedOptions, TApizrSharedOptionsBuilder&gt;
+    <meta name="title" content="Interface IApizrGlobalSharedOptionsBuilderBase&lt;TApizrOptions, TApizrOptionsBuilder&gt;
    | Apizr ">
-    <meta name="generator" content="docfx 2.59.0.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -81,7 +81,7 @@
             <article class="content wrap" id="_content" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2">
   
   
-  <h1 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2" class="text-break">Interface IApizrGlobalSharedOptionsBuilderBase&lt;TApizrSharedOptions, TApizrSharedOptionsBuilder&gt;
+  <h1 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2" class="text-break">Interface IApizrGlobalSharedOptionsBuilderBase&lt;TApizrOptions, TApizrOptionsBuilder&gt;
   </h1>
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
@@ -89,7 +89,7 @@
   <h6><strong>Assembly</strong>: Apizr.dll</h6>
   <h5 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IApizrGlobalSharedOptionsBuilderBase&lt;out TApizrSharedOptions, out TApizrSharedOptionsBuilder&gt; : IApizrGlobalSharedOptionsBuilderBase where TApizrSharedOptions : IApizrSharedOptionsBase where TApizrSharedOptionsBuilder : IApizrGlobalSharedOptionsBuilderBase&lt;TApizrSharedOptions, TApizrSharedOptionsBuilder&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IApizrGlobalSharedOptionsBuilderBase&lt;out TApizrOptions, out TApizrOptionsBuilder&gt; : IApizrGlobalSharedOptionsBuilderBase where TApizrOptions : IApizrGlobalSharedOptionsBase where TApizrOptionsBuilder : IApizrGlobalSharedOptionsBuilderBase&lt;TApizrOptions, TApizrOptionsBuilder&gt;</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -101,39 +101,11 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">TApizrSharedOptions</span></td>
+        <td><span class="parametername">TApizrOptions</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="parametername">TApizrSharedOptionsBuilder</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="properties">Properties
-  </h3>
-  
-  
-  <a id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_ApizrOptions_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.ApizrOptions*"></a>
-  <h4 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_ApizrOptions" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.ApizrOptions">ApizrOptions</h4>
-  <div class="markdown level1 summary"><p>Apizr common options</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">TApizrSharedOptions ApizrOptions { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApizrSharedOptions</span></td>
+        <td><span class="parametername">TApizrOptionsBuilder</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -142,14 +114,14 @@
   </h3>
   
   
-  <a id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_AddDelegatingHandler_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.AddDelegatingHandler*"></a>
-  <h4 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_AddDelegatingHandler_System_Net_Http_DelegatingHandler_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.AddDelegatingHandler(System.Net.Http.DelegatingHandler)">AddDelegatingHandler(DelegatingHandler)</h4>
-  <div class="markdown level1 summary"><p>Add a custom delegating handler</p>
+  <a id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching*"></a>
+  <h4 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching_System_Action_Apizr_ApizrException__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">WithExCatching(Action&lt;ApizrException&gt;, Boolean, ApizrDuplicateStrategy)</h4>
+  <div class="markdown level1 summary"><p>Catch potential exceptions</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">TApizrSharedOptionsBuilder AddDelegatingHandler(DelegatingHandler delegatingHandler)</code></pre>
+    <pre><code class="lang-csharp hljs">TApizrOptionsBuilder WithExCatching(Action&lt;ApizrException&gt; onException, bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -162,9 +134,21 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Net.Http.DelegatingHandler</span></td>
-        <td><span class="parametername">delegatingHandler</span></td>
-        <td><p>A delegating handler</p>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.ApizrException.html">ApizrException</a>&gt;</td>
+        <td><span class="parametername">onException</span></td>
+        <td><p>The exception callback</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">letThrowOnExceptionWithEmptyCache</span></td>
+        <td><p>Let throw potential exception if there&apos;s no cached data to return (default: true)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.ApizrDuplicateStrategy.html">ApizrDuplicateStrategy</a></td>
+        <td><span class="parametername">strategy</span></td>
+        <td><p>The duplicate strategy if there&apos;s another callback already (default: Replace)</p>
 </td>
       </tr>
     </tbody>
@@ -179,21 +163,21 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TApizrSharedOptionsBuilder</span></td>
+        <td><span class="xref">TApizrOptionsBuilder</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   
   
-  <a id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithAuthenticationHandler*"></a>
-  <h4 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithAuthenticationHandler_System_Func_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String___" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">WithAuthenticationHandler(Func&lt;HttpRequestMessage, Task&lt;String&gt;&gt;)</h4>
-  <div class="markdown level1 summary"><p>Provide a method to refresh the authorization token when needed</p>
+  <a id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching*"></a>
+  <h4 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching__1_System_Action_Apizr_ApizrException___0___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">WithExCatching&lt;TResult&gt;(Action&lt;ApizrException&lt;TResult&gt;&gt;, Boolean, ApizrDuplicateStrategy)</h4>
+  <div class="markdown level1 summary"><p>Catch potential exceptions</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">TApizrSharedOptionsBuilder WithAuthenticationHandler(Func&lt;HttpRequestMessage, Task&lt;string&gt;&gt; refreshTokenFactory)</code></pre>
+    <pre><code class="lang-csharp hljs">TApizrOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrException&lt;TResult&gt;&gt; onException, bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -206,9 +190,21 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.Net.Http.HttpRequestMessage</span>, <span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.String</span>&gt;&gt;</td>
-        <td><span class="parametername">refreshTokenFactory</span></td>
-        <td><p>Refresh token method called when expired or empty</p>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.ApizrException-1.html">ApizrException</a>&lt;TResult&gt;&gt;</td>
+        <td><span class="parametername">onException</span></td>
+        <td><p>The exception callback</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">letThrowOnExceptionWithEmptyCache</span></td>
+        <td><p>Let throw potential exception if there&apos;s no cached data to return (default: true)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.ApizrDuplicateStrategy.html">ApizrDuplicateStrategy</a></td>
+        <td><span class="parametername">strategy</span></td>
+        <td><p>The duplicate strategy if there&apos;s another callback already (default: Replace)</p>
 </td>
       </tr>
     </tbody>
@@ -223,21 +219,36 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TApizrSharedOptionsBuilder</span></td>
+        <td><span class="xref">TApizrOptionsBuilder</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   
   
-  <a id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithBaseAddress_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBaseAddress*"></a>
-  <h4 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithBaseAddress_System_String_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBaseAddress(System.String)">WithBaseAddress(String)</h4>
-  <div class="markdown level1 summary"><p>Define your web api base address (could be defined with WebApiAttribute)</p>
+  <a id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHandlerParameter_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHandlerParameter*"></a>
+  <h4 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHandlerParameter_System_String_System_Object_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHandlerParameter(System.String,System.Object)">WithHandlerParameter(String, Object)</h4>
+  <div class="markdown level1 summary"><p>Set some parameters passed through all delegating handlers</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">TApizrSharedOptionsBuilder WithBaseAddress(string baseAddress)</code></pre>
+    <pre><code class="lang-csharp hljs">TApizrOptionsBuilder WithHandlerParameter(string key, object value)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -251,8 +262,14 @@
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">baseAddress</span></td>
-        <td><p>Your web api base address</p>
+        <td><span class="parametername">key</span></td>
+        <td><p>The parameter&apos;s key</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The parameter&apos;s value</p>
 </td>
       </tr>
     </tbody>
@@ -267,95 +284,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TApizrSharedOptionsBuilder</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithBaseAddress_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBaseAddress*"></a>
-  <h4 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithBaseAddress_System_Uri_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithBaseAddress(System.Uri)">WithBaseAddress(Uri)</h4>
-  <div class="markdown level1 summary"><p>Define your web api base address (could be defined with WebApiAttribute)</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">TApizrSharedOptionsBuilder WithBaseAddress(Uri baseAddress)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Uri</span></td>
-        <td><span class="parametername">baseAddress</span></td>
-        <td><p>Your web api base address</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApizrSharedOptionsBuilder</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHttpClientHandler_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHttpClientHandler*"></a>
-  <h4 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHttpClientHandler_System_Net_Http_HttpClientHandler_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHttpClientHandler(System.Net.Http.HttpClientHandler)">WithHttpClientHandler(HttpClientHandler)</h4>
-  <div class="markdown level1 summary"><p>Provide a custom HttpClientHandler</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">TApizrSharedOptionsBuilder WithHttpClientHandler(HttpClientHandler httpClientHandler)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Net.Http.HttpClientHandler</span></td>
-        <td><span class="parametername">httpClientHandler</span></td>
-        <td><p>An <span class="xref">System.Net.Http.HttpClientHandler</span> instance</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApizrSharedOptionsBuilder</span></td>
+        <td><span class="xref">TApizrOptionsBuilder</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -364,12 +293,12 @@
   
   <a id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLogging_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging*"></a>
   <h4 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLogging_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel___" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">WithLogging(HttpTracerMode, HttpMessageParts, LogLevel[])</h4>
-  <div class="markdown level1 summary"><p>Configure logging level for the api</p>
+  <div class="markdown level1 summary"><p>Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">TApizrSharedOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything, HttpMessageParts trafficVerbosity = HttpMessageParts.All, params LogLevel[] logLevels)</code></pre>
+    <pre><code class="lang-csharp hljs">TApizrOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything, HttpMessageParts trafficVerbosity = HttpMessageParts.All, params LogLevel[] logLevels)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -410,14 +339,26 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TApizrSharedOptionsBuilder</span></td>
+        <td><span class="xref">TApizrOptionsBuilder</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="Apizr.Extending.ObjectExtensions.html#Apizr_Extending_ObjectExtensions_ToString_System_Object_System_String_System_String_">ObjectExtensions.ToString(Object, String, String)</a>
+      <a class="xref" href="Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_Fusillade_Priority_">FusilladeOptionsBuilderExtensions.WithPriority&lt;T&gt;(T, Priority)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_System_Int32_">FusilladeOptionsBuilderExtensions.WithPriority&lt;T&gt;(T, Int32)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_">FileTransferOptionsBuilderExtensions.WithProgress&lt;TBuilder&gt;(TBuilder)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_System_Action_Apizr_Progressing_ApizrProgressEventArgs__">FileTransferOptionsBuilderExtensions.WithProgress&lt;TBuilder&gt;(TBuilder, Action&lt;ApizrProgressEventArgs&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_Apizr_Progressing_IApizrProgress_">FileTransferOptionsBuilderExtensions.WithProgress&lt;TBuilder&gt;(TBuilder, IApizrProgress)</a>
   </div>
 </article>
           </div>

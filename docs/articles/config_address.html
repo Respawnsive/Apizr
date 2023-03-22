@@ -8,7 +8,7 @@
     <title>Configuring base address | Apizr </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Configuring base address | Apizr ">
-    <meta name="generator" content="docfx 2.59.0.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -79,7 +79,8 @@
             <article class="content wrap" id="_content" data-uid="">
 <h2 id="configuring-base-address">Configuring base address</h2>
 
-<p>You can configure base address either by attribute decoration or by fluent configuration.</p>
+<p>You can configure base address either by attribute decoration or by fluent configuration.
+You can mix the configuration providing a base path by attribute and a base address/URI fluently.</p>
 <div class="tabGroup" id="tabgroup_3bJ--G1bR9">
 <ul role="tablist">
 <li role="presentation">
@@ -90,27 +91,29 @@
 </li>
 </ul>
 <section id="tabpanel_3bJ--G1bR9_tabid-attribute" role="tabpanel" data-tab="tabid-attribute">
-<p>Configuring the base address with attribute allows you to use assembly scanning auto registration feature.</p>
+<p>Configuring the base address by attribute allows you to use assembly scanning auto registration feature.</p>
 <h3 id="classic-api">Classic api</h3>
-<p>You can set api interface base address thanks to the WebApi attribute like so:</p>
-<pre><code class="lang-csharp">[WebApi(&quot;https://YOUR_API_INTERFACE_BASE_ADDRESS/&quot;)]
+<p>You can set api interface base address or path thanks to the WebApi attribute like so:</p>
+<pre><code class="lang-csharp">[WebApi(&quot;YOUR_API_INTERFACE_BASE_ADDRESS_OR_PATH/&quot;)]
 public interface IYourApiInterface
 {
     // Your api interface methods
 }
-</code></pre><p>Optional parameters:</p>
+</code></pre><p>If you provided only a path, you must set the base address/URI fluently so that Apizr could merge it all together.</p>
+<p>Optional parameters:</p>
 <ul>
-<li><code>isAutoRegistrable</code> (default: true) tells Apizr to ignore this specific interface while scanning assemblies for auto registration. 
+<li><code>isAutoRegistrable</code> (default: true) tells Apizr to include or not this specific interface while scanning assemblies for auto registration. 
 It could be usefull when you ask for auto registration but want to do it fluently some specific interfaces.</li>
 </ul>
 <h3 id="crud-api">CRUD api</h3>
 <p>You can set CRUD entity api base address thanks to the CrudEntity attribute like so:</p>
-<pre><code class="lang-csharp">[CrudEntity(&quot;https://YOUR_CRUD_ENTITY_API_BASE_ADDRESS&quot;)]
+<pre><code class="lang-csharp">[CrudEntity(&quot;YOUR_CRUD_ENTITY_API_BASE_ADDRESS_OR_PATH_&quot;)]
 public class YourCrudEntity
 {
     // Your CRUD entity properties
 }
-</code></pre><p>Optional parameters:</p>
+</code></pre><p>If you provided only a path, you must set the base address/URI fluently so that Apizr could merge it all together.</p>
+<p>Optional parameters:</p>
 <ul>
 <li><code>keyType</code>: entity key type (default: null = typeof(int))</li>
 <li><code>readAllResultType</code>: ReadAll query result type  (default: null = typeof(IEnumerable{}))</li>
@@ -120,12 +123,21 @@ public class YourCrudEntity
 </section>
 <section id="tabpanel_3bJ--G1bR9_tabid-fluent" role="tabpanel" data-tab="tabid-fluent" aria-hidden="true" hidden="hidden">
 <p>Configuring the base address fluently allows you to set it dynamically (e.g. based on settings)</p>
-<p>You can set the base address thanks to this option:</p>
-<pre><code class="lang-csharp">options =&gt; options.WithBaseAddress(YourStaticSettings.YourBaseAddress))
+<p>You can set the base address or a base path thanks to these options:</p>
+<pre><code class="lang-csharp">// Address
+options =&gt; options.WithBaseAddress(YourSettings.YourBaseAddress))
+
+// Path
+options =&gt; options.WithBasePath(YourSettings.YourBasePath))
 </code></pre><p>The extended world offers another option with a factory providing a service provider instance.
 It could help you to resolve the setting at runtime:</p>
-<pre><code class="lang-csharp">options =&gt; options.WithBaseAddress(serviceProvider =&gt; serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().YourBaseAddress))
-</code></pre><p>The <code>WithBaseAddress</code> option is available at both common and specific configuration level, meanning that you can share a base address with several api interfaces and/or set a specific one for some others.</p>
+<pre><code class="lang-csharp">// Address
+options =&gt; options.WithBaseAddress(serviceProvider =&gt; serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().YourBaseAddress))
+
+// Path
+options =&gt; options.WithBasePath(serviceProvider =&gt; serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().YourBasePath))
+</code></pre><p>In both cases, you can mix the configurations like providing a base path by attribute and a base address/URI fluently.</p>
+<p><code>WithBaseAddress</code> and <code>WithBasePath</code> options are available at both common and specific configuration level, meanning that you can share a base address with several api interfaces and/or set a specific one for some others.</p>
 </section>
 </div>
 </article>

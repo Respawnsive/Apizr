@@ -8,7 +8,7 @@
     <title>Defining | Apizr </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Defining | Apizr ">
-    <meta name="generator" content="docfx 2.59.0.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -83,130 +83,43 @@
 <p>Here is what the provided interface looks like then:</p>
 <pre><code class="lang-csharp">public interface ICrudApi&lt;T, in TKey, TReadAllResult, in TReadAllParams&gt; where T : class
 {
-    #region Create
-
     [Post(&quot;&quot;)]
     Task&lt;T&gt; Create([Body] T payload);
 
     [Post(&quot;&quot;)]
-    Task&lt;T&gt; Create([Body] T payload, [Context] Context context);
-
-    [Post(&quot;&quot;)]
-    Task&lt;T&gt; Create([Body] T payload, CancellationToken cancellationToken);
-
-    [Post(&quot;&quot;)]
-    Task&lt;T&gt; Create([Body] T payload, [Context] Context context, CancellationToken cancellationToken);
-
-    #endregion
-
-    #region ReadAll
+    Task&lt;T&gt; Create([Body] T payload, [RequestOptions] IApizrRequestOptions options);
 
     [Get(&quot;&quot;)]
     Task&lt;TReadAllResult&gt; ReadAll();
 
     [Get(&quot;&quot;)]
+    Task&lt;TReadAllResult&gt; ReadAll([RequestOptions] IApizrRequestOptions options);
+
+    [Get(&quot;&quot;)]
     Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams);
 
     [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([Property(Constants.PriorityKey)] int priority);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([Context] Context context);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll(CancellationToken cancellationToken);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams, [Property(Constants.PriorityKey)] int priority);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams, [Context] Context context);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams, CancellationToken cancellationToken);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([Property(Constants.PriorityKey)] int priority, [Context] Context context);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([Property(Constants.PriorityKey)] int priority, CancellationToken cancellationToken);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([Context] Context context, CancellationToken cancellationToken);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams, [Property(Constants.PriorityKey)] int priority, [Context] Context context);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams, [Property(Constants.PriorityKey)] int priority, CancellationToken cancellationToken);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams, [Context] Context context, CancellationToken cancellationToken);
-
-    [Get(&quot;&quot;)]
-    Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams, [Property(Constants.PriorityKey)] int priority, [Context] Context context, CancellationToken cancellationToken);
-
-    #endregion
-
-    #region Read
+    Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams, [RequestOptions] IApizrRequestOptions options);
 
     [Get(&quot;/{key}&quot;)]
     Task&lt;T&gt; Read([CacheKey] TKey key);
 
     [Get(&quot;/{key}&quot;)]
-    Task&lt;T&gt; Read([CacheKey] TKey key, [Property(Constants.PriorityKey)] int priority);
-
-    [Get(&quot;/{key}&quot;)]
-    Task&lt;T&gt; Read([CacheKey] TKey key, [Context] Context context);
-
-    [Get(&quot;/{key}&quot;)]
-    Task&lt;T&gt; Read([CacheKey] TKey key, CancellationToken cancellationToken);
-
-    [Get(&quot;/{key}&quot;)]
-    Task&lt;T&gt; Read([CacheKey] TKey key, [Property(Constants.PriorityKey)] int priority, [Context] Context context);
-
-    [Get(&quot;/{key}&quot;)]
-    Task&lt;T&gt; Read([CacheKey] TKey key, [Property(Constants.PriorityKey)] int priority, CancellationToken cancellationToken);
-
-    [Get(&quot;/{key}&quot;)]
-    Task&lt;T&gt; Read([CacheKey] TKey key, [Property(Constants.PriorityKey)] int priority, [Context] Context context, CancellationToken cancellationToken);
-
-    #endregion
-
-    #region Update
+    Task&lt;T&gt; Read([CacheKey] TKey key, [RequestOptions] IApizrRequestOptions options);
 
     [Put(&quot;/{key}&quot;)]
     Task Update(TKey key, [Body] T payload);
 
     [Put(&quot;/{key}&quot;)]
-    Task Update(TKey key, [Body] T payload, [Context] Context context);
-
-    [Put(&quot;/{key}&quot;)]
-    Task Update(TKey key, [Body] T payload, CancellationToken cancellationToken);
-
-    [Put(&quot;/{key}&quot;)]
-    Task Update(TKey key, [Body] T payload, [Context] Context context, CancellationToken cancellationToken);
-
-    #endregion
-
-    #region Delete
+    Task Update(TKey key, [Body] T payload, [RequestOptions] IApizrRequestOptions options);
 
     [Delete(&quot;/{key}&quot;)]
     Task Delete(TKey key);
 
     [Delete(&quot;/{key}&quot;)]
-    Task Delete(TKey key, [Context] Context context);
-
-    [Delete(&quot;/{key}&quot;)]
-    Task Delete(TKey key, CancellationToken cancellationToken);
-
-    [Delete(&quot;/{key}&quot;)]
-    Task Delete(TKey key, [Context] Context context, CancellationToken cancellationToken); 
-
-    #endregion
+    Task Delete(TKey key, [RequestOptions] IApizrRequestOptions options);
 }
-</code></pre><p>We can see that it comes with many parameter combinations, but it won&#39;t do anything until you ask Apizr to. 
-Caching, Logging, Policing, Prioritizing... everything is activable fluently with the options builder.</p>
+</code></pre><p>We can see that it comes with or without request options, allowing some option adjustments later at request time.</p>
 <p>About generic types:</p>
 <ul>
 <li>T and TKey (optional - default: <code>int</code>) meanings are obvious</li>
@@ -230,7 +143,7 @@ Caching, Logging, Policing, Prioritizing... everything is activable fluently wit
 <p>Here is an example of how to register a managed instance of the CRUD api interface:</p>
 <pre><code class="lang-csharp">// Apizr registration
 myContainer.RegistrationMethod(() =&gt;
-    ApizrBuilder.CreateCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(options =&gt; options
+    ApizrBuilder.Current.CreateCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(options =&gt; options
         .WithBaseAddress(&quot;your specific T entity crud base uri&quot;))
 );
 </code></pre><p>T must be a class.</p>
@@ -260,6 +173,11 @@ If you don&#39;t use a custom class holding your query parameters, just don&#39;
 </section>
 </div>
 <h3 id="registering-multiple-interfaces">Registering multiple interfaces</h3>
+<p>You may want to register multiple managed api interfaces within the same project.
+Also, you may want to share some common configuration between apis without repeating yourself, but at the same time, you may need to set some specific ones for some of it.
+This is where the ApizrRegistry comes on stage.</p>
+<h4 id="single-common-configuration">Single common configuration</h4>
+<p>Here is an example of how to register a managed instance of multiple api interfaces, sharing a single common configuration:</p>
 <div class="tabGroup" id="tabgroup_u8ofuDaOMe-1">
 <ul role="tablist">
 <li role="presentation">
@@ -270,19 +188,13 @@ If you don&#39;t use a custom class holding your query parameters, just don&#39;
 </li>
 </ul>
 <section id="tabpanel_u8ofuDaOMe-1_tabid-static" role="tabpanel" data-tab="tabid-static">
-<p>You may want to register multiple managed api interfaces within the same project.
-Also, you may want to share some common configuration between apis without repeating yourself, but at the same time, you may need to set some specific ones for some of it.
-This is where the ApizrRegistry comes on stage.</p>
-<p>Here is an example of how to register a managed instance of multiple api interfaces:</p>
 <pre><code class="lang-csharp">// Apizr registry
-var apizrRegistry = ApizrBuilder.CreateRegistry(
+var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
     registry =&gt; registry
         .AddCrudManagerFor&lt;T1&gt;(
-            options =&gt; options
-                .WithBaseAddress(&quot;your specific T1 entity crud base uri&quot;)
+            options =&gt; options.WithBaseAddress(&quot;your specific T1 entity crud base uri&quot;)
         .AddCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;(
-            options =&gt; options
-                .WithBaseAddress(&quot;your specific T2 entity crud base uri&quot;),
+            options =&gt; options.WithBaseAddress(&quot;your specific T2 entity crud base uri&quot;),
 
     config =&gt; config
         .WithAkavacheCacheHandler()
@@ -319,17 +231,16 @@ var t1Manager = apizrRegistry.GetCrudManagerFor&lt;T1&gt;();
 var t2Manager = apizrRegistry.GetCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;();
 </code></pre></section>
 <section id="tabpanel_u8ofuDaOMe-1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
-<p>You may want to register multiple managed CRUD api interfaces within the same project.
-Also, you may want to share some common configuration between apis without repeating yourself, but at the same time, you may need to set some specific ones for some of it.
-This is where the ApizrRegistry comes on stage.</p>
-<p>Here is an example of how to register multiple managed CRUD api interfaces manually:</p>
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {
     // Some policies
     var registry = new PolicyRegistry
     {
         {
-            &quot;TransientHttpError&quot;, HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            &quot;TransientHttpError&quot;, 
+            HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .WaitAndRetryAsync(new[]
             {
                 TimeSpan.FromSeconds(1),
                 TimeSpan.FromSeconds(5),
@@ -343,11 +254,9 @@ This is where the ApizrRegistry comes on stage.</p>
     services.AddApizr(
         registry =&gt; registry
             .AddCrudManagerFor&lt;T1&gt;(
-                options =&gt; options
-                    .WithBaseAddress(&quot;your specific T1 entity crud base uri&quot;)
+                options =&gt; options.WithBaseAddress(&quot;your specific T1 entity crud base uri&quot;)
             .AddCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;(
-                options =&gt; options
-                    .WithBaseAddress(&quot;your specific T2 entity crud base uri&quot;),
+                options =&gt; options.WithBaseAddress(&quot;your specific T2 entity crud base uri&quot;),
 
         config =&gt; config
             .WithAkavacheCacheHandler()
@@ -372,15 +281,17 @@ This is where the ApizrRegistry comes on stage.</p>
 And yes you can mix classic and CRUD manager registration into the same registry.</p>
 <p>Of course, each managers will be regitered into the container so that you can use it directly.</p>
 <p>Also, the registry itslef will be registered into the container, so you could use it to get its managers, instead of using each managers.</p>
+</section>
+</div>
 <p>Here&#39;s how to get a manager from the registry:</p>
 <pre><code class="lang-csharp">// T1 with default registered types
 var t1Manager = apizrRegistry.GetCrudManagerFor&lt;T1&gt;();
 
 // T2 with custom registered types
 var t2Manager = apizrRegistry.GetCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;();
-</code></pre></section>
-</div>
-<h3 id="registering-all-scanned-interfaces">Registering all scanned interfaces</h3>
+</code></pre><h4 id="multiple-common-configurations">Multiple common configurations</h4>
+<p>Here is an example of how to register a managed instance of multiple api interfaces, sharing multiple common configurations at different group level.
+It could be usefull when requesting mutliple apis (multiple base address) comming with multiple endpoints (multiple base path).</p>
 <div class="tabGroup" id="tabgroup_u8ofuDaOMe-2">
 <ul role="tablist">
 <li role="presentation">
@@ -391,9 +302,142 @@ var t2Manager = apizrRegistry.GetCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T
 </li>
 </ul>
 <section id="tabpanel_u8ofuDaOMe-2_tabid-static" role="tabpanel" data-tab="tabid-static">
-<p>Not available.</p>
+<pre><code class="lang-csharp">// Apizr registry
+var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
+    registry =&gt; registry
+        .AddGroup(
+            group =&gt; group
+                .AddCrudManagerFor&lt;T1&gt;(
+                    config =&gt; config.WithBasePath(&quot;t1&quot;)
+                .AddCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;(
+                    config =&gt; config.WithBasePath(&quot;t2&quot;),
+            config =&gt; config.WithBaseAddress(&quot;https://crud.io/api&quot;))
+
+        .AddCrudManagerFor&lt;T3&gt;(
+            config =&gt; config.WithBaseAddress(&quot;https://crud.com/api&quot;),
+
+    config =&gt; config.WithAkavacheCacheHandler()
+);
+
+// Container registration
+apizrRegistry.Populate((type, factory) =&gt; 
+    myContainer.RegistrationMethodFactory(type, factory)
+);
+</code></pre><p>Here is what we&#39;re saying in this example:</p>
+<ul>
+<li>Add a manager for T1 entity with CRUD api interface and default types into the registry<ul>
+<li>Set a common base address (<a href="https://crud.io/api">https://crud.io/api</a>) dedicated to T1&#39;s manager</li>
+<li>Set a specific base path (t1) dedicated to T1&#39;s manager</li>
+</ul>
+</li>
+<li>Add a manager for T2 entity with CRUD api interface and custom types into the registry<ul>
+<li>Set a common base address (<a href="https://crud.io/api">https://crud.io/api</a>) dedicated to T2&#39;s manager</li>
+<li>Set a specific base path (t1) dedicated to T2&#39;s manager</li>
+</ul>
+</li>
+<li>Add a manager for T3 entity with CRUD api interface and default types into the registry<ul>
+<li>Set a specific base address (<a href="https://crud.com/api">https://crud.com/api</a>) dedicated to T3&#39;s manager</li>
+</ul>
+</li>
+<li>Apply common configuration to all managers by:<ul>
+<li>Providing a cache handler</li>
+</ul>
+</li>
+</ul>
+<p>It&#39;s an example, meaning if you don&#39;t need common and/or specific configuration, just don&#39;t provide it.
+And yes you can mix classic and CRUD manager registration into the same registry/group.
+You can add mutliple group at the same level and go deeper with group into group itself.</p>
+<p>Also, you could register the registry itslef, instead of its populated managers and then use its managers directly.</p>
+<p>Or, you could use the managers directly from the registry instead of registering anything.</p>
 </section>
 <section id="tabpanel_u8ofuDaOMe-2_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
+{
+    // Some policies
+    var registry = new PolicyRegistry
+    {
+        {
+            &quot;TransientHttpError&quot;, 
+            HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(1),
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10)
+            })
+        }
+    };
+    services.AddPolicyRegistry(registry);
+
+    // Apizr registration
+    services.AddApizr(
+        registry =&gt; registry
+            .AddGroup(
+                group =&gt; group
+                    .AddCrudManagerFor&lt;T1&gt;(
+                        config =&gt; config.WithBasePath(&quot;t1&quot;)
+                    .AddCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;(
+                        config =&gt; config.WithBasePath(&quot;t2&quot;),
+                config =&gt; config.WithBaseAddress(&quot;https://crud.io/api&quot;))
+
+            .AddCrudManagerFor&lt;T3&gt;(
+                config =&gt; config.WithBaseAddress(&quot;https://crud.com/api&quot;),
+
+        config =&gt; config.WithAkavacheCacheHandler()
+    );
+}
+</code></pre><p>Here is what we&#39;re saying in this example:</p>
+<ul>
+<li>Add a manager for T1 entity with CRUD api interface and default types into the registry, to register it into the container<ul>
+<li>Set a common base address (<a href="https://crud.io/api">https://crud.io/api</a>) dedicated to T1&#39;s manager</li>
+<li>Set a specific base path (t1) dedicated to T1&#39;s manager</li>
+</ul>
+</li>
+<li>Add a manager for T2 entity with CRUD api interface and custom types into the registry, to register it into the container<ul>
+<li>Set a common base address (<a href="https://crud.io/api">https://crud.io/api</a>) dedicated to T2&#39;s manager</li>
+<li>Set a specific base path (t1) dedicated to T2&#39;s manager</li>
+</ul>
+</li>
+<li>Add a manager for T3 entity with CRUD api interface and default types into the registry, to register it into the container<ul>
+<li>Set a specific base address (<a href="https://crud.com/api">https://crud.com/api</a>) dedicated to T3&#39;s manager</li>
+</ul>
+</li>
+<li>Apply common configuration to all managers by:<ul>
+<li>Providing a cache handler</li>
+</ul>
+</li>
+</ul>
+<p>It&#39;s an example, meaning if you don&#39;t need common and/or specific configuration, just don&#39;t provide it.
+And yes you can mix classic and CRUD manager registration into the same registry/group.
+You can add mutliple group at the same level and go deeper with group into group itself.</p>
+<p>Of course, each managers will be regitered into the container so that you can use it directly.</p>
+<p>Also, the registry itslef will be registered into the container, so you could use it to get its managers, instead of using each managers.</p>
+</section>
+</div>
+<p>Here&#39;s how to get a manager from the registry:</p>
+<pre><code class="lang-csharp">// T1 with default registered types
+var t1Manager = apizrRegistry.GetCrudManagerFor&lt;T1&gt;();
+
+// T2 with custom registered types
+var t2Manager = apizrRegistry.GetCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;();
+
+// T3 with default registered types
+var t3Manager = apizrRegistry.GetCrudManagerFor&lt;T3&gt;();
+</code></pre><h3 id="registering-all-scanned-interfaces">Registering all scanned interfaces</h3>
+<div class="tabGroup" id="tabgroup_u8ofuDaOMe-3">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_u8ofuDaOMe-3_tabid-static" role="tab" aria-controls="tabpanel_u8ofuDaOMe-3_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_u8ofuDaOMe-3_tabid-extended" role="tab" aria-controls="tabpanel_u8ofuDaOMe-3_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+</li>
+</ul>
+<section id="tabpanel_u8ofuDaOMe-3_tabid-static" role="tabpanel" data-tab="tabid-static">
+<p>Not available.</p>
+</section>
+<section id="tabpanel_u8ofuDaOMe-3_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
 <p>You need to have access to your entity model classes for this option.</p>
 <p>Decorate your crud entities like so (but with your own settings):</p>
 <pre><code class="lang-csharp">[CrudEntity(&quot;https://mybaseuri.com/api/myentity&quot;, typeof(int), typeof(PagedResult&lt;&gt;), typeof(ReadAllUsersParams))]
@@ -445,6 +489,11 @@ public class MyEntity
         try
         {
             var pagedUsers = await _userCrudManager.ExecuteAsync(api =&gt; api.ReadAll());
+
+            // OR with some option adjustments
+            // var userList = await _userCrudManager.ExecuteAsync((options, api) =&gt; api.ReadAll(options),
+            //                  options =&gt; options.WithPriority(Priority.Background)); 
+
             users = pagedUsers.Data?.ToList();
         }
         catch (ApizrException&lt;PagedResult&lt;User&gt;&gt; e)

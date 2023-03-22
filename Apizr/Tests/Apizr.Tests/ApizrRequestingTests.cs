@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+using System.IO;
 using System.Reflection;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Apizr.Policing;
+using Apizr.Progressing;
 using Apizr.Tests.Apis;
-using Apizr.Tests.Helpers;
 using FluentAssertions;
-using Microsoft.Extensions.DependencyInjection;
 using MonkeyCache.FileStore;
 using Polly;
 using Polly.Extensions.Http;
@@ -50,6 +46,38 @@ namespace Apizr.Tests
             _assembly = Assembly.GetExecutingAssembly();
 
             Barrel.ApplicationId = nameof(ApizrExtendedRegistryTests);
+        }
+        
+        [Fact]
+        public async Task Downloading_File_With_Progress_Should_Report_Progress()
+        {
+            var percentage = 0;
+            var progress = new ApizrProgress();
+            progress.ProgressChanged += (sender, args) =>
+            {
+                percentage = args.ProgressPercentage;
+            };
+            var fileManager = ApizrBuilder.Current.CreateManagerFor<ITransferService>(options => options.WithProgress(progress));
+            using var response = await fileManager.ExecuteAsync((opt, api) => api.DownloadAsync("test10Mb.db", opt)).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var guid = Guid.NewGuid();
+            var fileInfo = new FileInfo($"{guid}.txt");
+            await using var ms = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            await using var fs = File.Create(fileInfo.FullName);
+            if (ms.CanSeek) ms.Seek(0, SeekOrigin.Begin);
+            await ms.CopyToAsync(fs);
+
+            percentage.Should().Be(100);
+            fileInfo.Length.Should().BePositive();
+        }
+
+        [Fact]
+        public async Task Downloading_File_With_Ending_Path_Should_Use_Path()
+        {
+            var fileManager = ApizrBuilder.Current.CreateTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr"));
+            var fileInfo = await fileManager.DownloadAsync(new FileInfo("test100k.db"), options => options.WithDynamicPath("files")).ConfigureAwait(false);
+            
+            fileInfo.Length.Should().BePositive();
         }
     }
 }

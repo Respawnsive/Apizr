@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ExecuteUnitRequestHandler&lt;TWebApi&gt;
    | Apizr ">
-    <meta name="generator" content="docfx 2.59.0.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -83,25 +83,27 @@
   
   <h1 id="Apizr_Mediation_Requesting_Handling_ExecuteUnitRequestHandler_1" data-uid="Apizr.Mediation.Requesting.Handling.ExecuteUnitRequestHandler`1" class="text-break">Class ExecuteUnitRequestHandler&lt;TWebApi&gt;
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>The mediation execute unit request handler</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><a class="xref" href="Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase-2.html">ExecuteUnitRequestHandlerBase</a>&lt;TWebApi, <a class="xref" href="Apizr.Mediation.Requesting.ExecuteUnitRequest-1.html">ExecuteUnitRequest</a>&lt;TWebApi&gt;&gt;</div>
-    <div class="level2"><span class="xref">ExecuteUnitRequestHandler&lt;TWebApi&gt;</span></div>
+    <div class="level1"><a class="xref" href="Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html">RequestHandlerBase</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
+    <div class="level2"><a class="xref" href="Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase-4.html">ExecuteUnitRequestHandlerBase</a>&lt;TWebApi, <a class="xref" href="Apizr.Mediation.Requesting.ExecuteUnitRequest-1.html">ExecuteUnitRequest</a>&lt;TWebApi&gt;, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, <a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</div>
+    <div class="level3"><span class="xref">ExecuteUnitRequestHandler&lt;TWebApi&gt;</span></div>
   </div>
-  <div classs="implements">
+  <div class="implements">
     <h5>Implements</h5>
     <div><span class="xref">MediatR.IRequestHandler</span>&lt;<a class="xref" href="Apizr.Mediation.Requesting.ExecuteUnitRequest-1.html">ExecuteUnitRequest</a>&lt;TWebApi&gt;, <span class="xref">MediatR.Unit</span>&gt;</div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase-2.html#Apizr_Mediation_Requesting_Handling_Base_ExecuteUnitRequestHandlerBase_2_WebApiManager">ExecuteUnitRequestHandlerBase&lt;TWebApi, ExecuteUnitRequest&lt;TWebApi&gt;&gt;.WebApiManager</a>
+      <a class="xref" href="Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase-4.html#Apizr_Mediation_Requesting_Handling_Base_ExecuteUnitRequestHandlerBase_4_WebApiManager">ExecuteUnitRequestHandlerBase&lt;TWebApi, ExecuteUnitRequest&lt;TWebApi&gt;, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;.WebApiManager</a>
     </div>
     <div>
-      <a class="xref" href="Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase-2.html#Apizr_Mediation_Requesting_Handling_Base_ExecuteUnitRequestHandlerBase_2_Handle__1_System_Threading_CancellationToken_">ExecuteUnitRequestHandlerBase&lt;TWebApi, ExecuteUnitRequest&lt;TWebApi&gt;&gt;.Handle(ExecuteUnitRequest&lt;TWebApi&gt;, CancellationToken)</a>
+      <a class="xref" href="Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase-4.html#Apizr_Mediation_Requesting_Handling_Base_ExecuteUnitRequestHandlerBase_4_Handle__1_System_Threading_CancellationToken_">ExecuteUnitRequestHandlerBase&lt;TWebApi, ExecuteUnitRequest&lt;TWebApi&gt;, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;.Handle(ExecuteUnitRequest&lt;TWebApi&gt;, CancellationToken)</a>
     </div>
     <div>
       <span class="xref">System.Object.Equals(System.Object)</span>
@@ -129,7 +131,7 @@
   <h6><strong>Assembly</strong>: Apizr.Integrations.MediatR.dll</h6>
   <h5 id="Apizr_Mediation_Requesting_Handling_ExecuteUnitRequestHandler_1_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ExecuteUnitRequestHandler&lt;TWebApi&gt; : ExecuteUnitRequestHandlerBase&lt;TWebApi, ExecuteUnitRequest&lt;TWebApi&gt;&gt;, IRequestHandler&lt;ExecuteUnitRequest&lt;TWebApi&gt;, Unit&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public class ExecuteUnitRequestHandler&lt;TWebApi&gt; : ExecuteUnitRequestHandlerBase&lt;TWebApi, ExecuteUnitRequest&lt;TWebApi&gt;, IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;, IRequestHandler&lt;ExecuteUnitRequest&lt;TWebApi&gt;, Unit&gt;</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -142,7 +144,8 @@
     <tbody>
       <tr>
         <td><span class="parametername">TWebApi</span></td>
-        <td></td>
+        <td><p>The web api type</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -181,11 +184,12 @@
   
   <a id="Apizr_Mediation_Requesting_Handling_ExecuteUnitRequestHandler_1_Handle_" data-uid="Apizr.Mediation.Requesting.Handling.ExecuteUnitRequestHandler`1.Handle*"></a>
   <h4 id="Apizr_Mediation_Requesting_Handling_ExecuteUnitRequestHandler_1_Handle_Apizr_Mediation_Requesting_ExecuteUnitRequest__0__System_Threading_CancellationToken_" data-uid="Apizr.Mediation.Requesting.Handling.ExecuteUnitRequestHandler`1.Handle(Apizr.Mediation.Requesting.ExecuteUnitRequest{`0},System.Threading.CancellationToken)">Handle(ExecuteUnitRequest&lt;TWebApi&gt;, CancellationToken)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Handling the execute unit request</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override async Task&lt;Unit&gt; Handle(ExecuteUnitRequest&lt;TWebApi&gt; request, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public override Task&lt;Unit&gt; Handle(ExecuteUnitRequest&lt;TWebApi&gt; request, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -205,7 +209,8 @@
       <tr>
         <td><span class="xref">System.Threading.CancellationToken</span></td>
         <td><span class="parametername">cancellationToken</span></td>
-        <td></td>
+        <td><p>A cancellation token</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -225,14 +230,10 @@
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase&lt;TWebApi, Apizr.Mediation.Requesting.ExecuteUnitRequest&lt;TWebApi&gt;&gt;.Handle(Apizr.Mediation.Requesting.ExecuteUnitRequest&lt;TWebApi&gt;, System.Threading.CancellationToken)</span></div>
+  <div><span class="xref">Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase&lt;TWebApi, Apizr.Mediation.Requesting.ExecuteUnitRequest&lt;TWebApi&gt;, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder&gt;.Handle(Apizr.Mediation.Requesting.ExecuteUnitRequest&lt;TWebApi&gt;, System.Threading.CancellationToken)</span></div>
   <h3 id="implements">Implements</h3>
   <div>
       <span class="xref">MediatR.IRequestHandler&lt;TRequest, TResponse&gt;</span>
-  </div>
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="Apizr.Extending.ObjectExtensions.html#Apizr_Extending_ObjectExtensions_ToString_System_Object_System_String_System_String_">ObjectExtensions.ToString(Object, String, String)</a>
   </div>
 </article>
           </div>

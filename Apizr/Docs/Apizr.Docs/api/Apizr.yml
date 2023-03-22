@@ -7,26 +7,32 @@ items:
   - Apizr.AkavacheCacheHandler
   - Apizr.AkavacheOptionsBuilderExtensions
   - Apizr.ApizrBuilder
-  - Apizr.ApizrDefaults
   - Apizr.ApizrException
   - Apizr.ApizrException`1
+  - Apizr.ApizrManager
   - Apizr.ApizrManager`1
   - Apizr.AutoMapperMappingHandler
   - Apizr.AutoMapperOptionsBuilderExtensions
-  - Apizr.Constants
   - Apizr.DistributedCacheHandler`1
+  - Apizr.FileTransferExtendedOptionsBuilderExtensions
+  - Apizr.FileTransferOptionsBuilderExtensions
   - Apizr.FusilladeOptionsBuilderExtensions
+  - Apizr.IApizrBuilder
   - Apizr.IApizrManager
   - Apizr.IApizrManager`1
   - Apizr.ILazyFactory`1
   - Apizr.InMemoryCacheHandler
   - Apizr.LazyFactory`1
+  - Apizr.MediationFileTransferOptionsBuilderExtensions
   - Apizr.MediationOptionsBuilderExtensions
   - Apizr.MicrosoftCachingOptionsBuilderExtensions
   - Apizr.MonkeyCacheHandler
+  - Apizr.OptionalFileTransferOptionsBuilderExtensions
   - Apizr.OptionalOptionsBuilderExtensions
   - Apizr.PriorityAttribute
   - Apizr.PriorityHttpMessageHandler
+  - Apizr.ReadAllPriorityAttribute
+  - Apizr.ReadPriorityAttribute
   - Apizr.ServiceCollectionExtensions
   - Apizr.WebApiAttribute
   langs:
@@ -44,11 +50,6 @@ references:
   name: ApizrBuilder
   nameWithType: ApizrBuilder
   fullName: Apizr.ApizrBuilder
-- uid: Apizr.ApizrDefaults
-  commentId: T:Apizr.ApizrDefaults
-  name: ApizrDefaults
-  nameWithType: ApizrDefaults
-  fullName: Apizr.ApizrDefaults
 - uid: Apizr.ApizrException
   commentId: T:Apizr.ApizrException
   parent: Apizr
@@ -91,6 +92,12 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.ApizrManager
+  commentId: T:Apizr.ApizrManager
+  parent: Apizr
+  name: ApizrManager
+  nameWithType: ApizrManager
+  fullName: Apizr.ApizrManager
 - uid: Apizr.ApizrManager`1
   commentId: T:Apizr.ApizrManager`1
   name: ApizrManager<TWebApi>
@@ -127,11 +134,12 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Constants
-  commentId: T:Apizr.Constants
-  name: Constants
-  nameWithType: Constants
-  fullName: Apizr.Constants
+- uid: Apizr.IApizrBuilder
+  commentId: T:Apizr.IApizrBuilder
+  parent: Apizr
+  name: IApizrBuilder
+  nameWithType: IApizrBuilder
+  fullName: Apizr.IApizrBuilder
 - uid: Apizr.IApizrManager
   commentId: T:Apizr.IApizrManager
   parent: Apizr
@@ -248,20 +256,15 @@ references:
     fullName: )
 - uid: Apizr.WebApiAttribute
   commentId: T:Apizr.WebApiAttribute
+  parent: Apizr
   name: WebApiAttribute
   nameWithType: WebApiAttribute
   fullName: Apizr.WebApiAttribute
-- uid: Apizr.AkavacheCacheHandler
-  commentId: T:Apizr.AkavacheCacheHandler
-  name: AkavacheCacheHandler
-  nameWithType: AkavacheCacheHandler
-  fullName: Apizr.AkavacheCacheHandler
-- uid: Apizr.AkavacheOptionsBuilderExtensions
-  commentId: T:Apizr.AkavacheOptionsBuilderExtensions
-  parent: Apizr
-  name: AkavacheOptionsBuilderExtensions
-  nameWithType: AkavacheOptionsBuilderExtensions
-  fullName: Apizr.AkavacheOptionsBuilderExtensions
+- uid: Apizr.MonkeyCacheHandler
+  commentId: T:Apizr.MonkeyCacheHandler
+  name: MonkeyCacheHandler
+  nameWithType: MonkeyCacheHandler
+  fullName: Apizr.MonkeyCacheHandler
 - uid: Apizr.ServiceCollectionExtensions
   commentId: T:Apizr.ServiceCollectionExtensions
   name: ServiceCollectionExtensions
@@ -320,22 +323,6 @@ references:
   name: MediationOptionsBuilderExtensions
   nameWithType: MediationOptionsBuilderExtensions
   fullName: Apizr.MediationOptionsBuilderExtensions
-- uid: Apizr.AutoMapperMappingHandler
-  commentId: T:Apizr.AutoMapperMappingHandler
-  name: AutoMapperMappingHandler
-  nameWithType: AutoMapperMappingHandler
-  fullName: Apizr.AutoMapperMappingHandler
-- uid: Apizr.AutoMapperOptionsBuilderExtensions
-  commentId: T:Apizr.AutoMapperOptionsBuilderExtensions
-  parent: Apizr
-  name: AutoMapperOptionsBuilderExtensions
-  nameWithType: AutoMapperOptionsBuilderExtensions
-  fullName: Apizr.AutoMapperOptionsBuilderExtensions
-- uid: Apizr.MonkeyCacheHandler
-  commentId: T:Apizr.MonkeyCacheHandler
-  name: MonkeyCacheHandler
-  nameWithType: MonkeyCacheHandler
-  fullName: Apizr.MonkeyCacheHandler
 - uid: Apizr.OptionalOptionsBuilderExtensions
   commentId: T:Apizr.OptionalOptionsBuilderExtensions
   parent: Apizr
@@ -353,11 +340,67 @@ references:
   name: PriorityAttribute
   nameWithType: PriorityAttribute
   fullName: Apizr.PriorityAttribute
+- uid: Apizr.ReadAllPriorityAttribute
+  commentId: T:Apizr.ReadAllPriorityAttribute
+  name: ReadAllPriorityAttribute
+  nameWithType: ReadAllPriorityAttribute
+  fullName: Apizr.ReadAllPriorityAttribute
+- uid: Apizr.ReadPriorityAttribute
+  commentId: T:Apizr.ReadPriorityAttribute
+  name: ReadPriorityAttribute
+  nameWithType: ReadPriorityAttribute
+  fullName: Apizr.ReadPriorityAttribute
 - uid: Apizr.PriorityHttpMessageHandler
   commentId: T:Apizr.PriorityHttpMessageHandler
   name: PriorityHttpMessageHandler
   nameWithType: PriorityHttpMessageHandler
   fullName: Apizr.PriorityHttpMessageHandler
+- uid: Apizr.FileTransferOptionsBuilderExtensions
+  commentId: T:Apizr.FileTransferOptionsBuilderExtensions
+  parent: Apizr
+  name: FileTransferOptionsBuilderExtensions
+  nameWithType: FileTransferOptionsBuilderExtensions
+  fullName: Apizr.FileTransferOptionsBuilderExtensions
+- uid: Apizr.FileTransferExtendedOptionsBuilderExtensions
+  commentId: T:Apizr.FileTransferExtendedOptionsBuilderExtensions
+  parent: Apizr
+  name: FileTransferExtendedOptionsBuilderExtensions
+  nameWithType: FileTransferExtendedOptionsBuilderExtensions
+  fullName: Apizr.FileTransferExtendedOptionsBuilderExtensions
+- uid: Apizr.MediationFileTransferOptionsBuilderExtensions
+  commentId: T:Apizr.MediationFileTransferOptionsBuilderExtensions
+  parent: Apizr
+  name: MediationFileTransferOptionsBuilderExtensions
+  nameWithType: MediationFileTransferOptionsBuilderExtensions
+  fullName: Apizr.MediationFileTransferOptionsBuilderExtensions
+- uid: Apizr.OptionalFileTransferOptionsBuilderExtensions
+  commentId: T:Apizr.OptionalFileTransferOptionsBuilderExtensions
+  parent: Apizr
+  name: OptionalFileTransferOptionsBuilderExtensions
+  nameWithType: OptionalFileTransferOptionsBuilderExtensions
+  fullName: Apizr.OptionalFileTransferOptionsBuilderExtensions
+- uid: Apizr.AutoMapperMappingHandler
+  commentId: T:Apizr.AutoMapperMappingHandler
+  name: AutoMapperMappingHandler
+  nameWithType: AutoMapperMappingHandler
+  fullName: Apizr.AutoMapperMappingHandler
+- uid: Apizr.AutoMapperOptionsBuilderExtensions
+  commentId: T:Apizr.AutoMapperOptionsBuilderExtensions
+  parent: Apizr
+  name: AutoMapperOptionsBuilderExtensions
+  nameWithType: AutoMapperOptionsBuilderExtensions
+  fullName: Apizr.AutoMapperOptionsBuilderExtensions
+- uid: Apizr.AkavacheCacheHandler
+  commentId: T:Apizr.AkavacheCacheHandler
+  name: AkavacheCacheHandler
+  nameWithType: AkavacheCacheHandler
+  fullName: Apizr.AkavacheCacheHandler
+- uid: Apizr.AkavacheOptionsBuilderExtensions
+  commentId: T:Apizr.AkavacheOptionsBuilderExtensions
+  parent: Apizr
+  name: AkavacheOptionsBuilderExtensions
+  nameWithType: AkavacheOptionsBuilderExtensions
+  fullName: Apizr.AkavacheOptionsBuilderExtensions
 - uid: Apizr
   commentId: N:Apizr
   name: Apizr

@@ -14,16 +14,22 @@ items:
   type: Interface
   source:
     id: IApizrGlobalSharedOptionsBuilderBase
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Configuring\Shared\IApizrGlobalSharedOptionsBuilderBase.cs
-    startLine: 8
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Shared\IApizrGlobalSharedOptionsBuilderBase.cs
+    startLine: 10
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
+  summary: "\nBuilder options available at all (common, proper and request) levels and for all (static and extended) registration types\n"
+  example: []
   syntax:
     content: public interface IApizrGlobalSharedOptionsBuilderBase
     content.vb: Public Interface IApizrGlobalSharedOptionsBuilderBase
   extensionMethods:
-  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Progressing.IApizrProgress)
   modifiers.csharp:
   - public
   - interface
@@ -36,139 +42,503 @@ references:
   name: Apizr.Configuring.Shared
   nameWithType: Apizr.Configuring.Shared
   fullName: Apizr.Configuring.Shared
-- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  parent: Apizr.Extending.ObjectExtensions
-  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  name: ToString(String, String)
-  nameWithType: ObjectExtensions.ToString(String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  parent: Apizr.FusilladeOptionsBuilderExtensions
+  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  name: WithPriority<IApizrGlobalSharedOptionsBuilderBase>(Priority)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<IApizrGlobalSharedOptionsBuilderBase>(Priority)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase>(Fusillade.Priority)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of IApizrGlobalSharedOptionsBuilderBase)(Priority)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase)(Fusillade.Priority)
+  name.vb: WithPriority(Of IApizrGlobalSharedOptionsBuilderBase)(Priority)
   spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
+    name: WithPriority<IApizrGlobalSharedOptionsBuilderBase>
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<IApizrGlobalSharedOptionsBuilderBase>
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase>
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+  - uid: Fusillade.Priority
+    name: Priority
+    nameWithType: Priority
+    fullName: Fusillade.Priority
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
+    name: WithPriority(Of IApizrGlobalSharedOptionsBuilderBase)
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of IApizrGlobalSharedOptionsBuilderBase)
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase)
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+  - uid: Fusillade.Priority
+    name: Priority
+    nameWithType: Priority
+    fullName: Fusillade.Priority
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  parent: Apizr.FusilladeOptionsBuilderExtensions
+  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  name: WithPriority<IApizrGlobalSharedOptionsBuilderBase>(Int32)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<IApizrGlobalSharedOptionsBuilderBase>(Int32)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase>(System.Int32)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of IApizrGlobalSharedOptionsBuilderBase)(Int32)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase)(System.Int32)
+  name.vb: WithPriority(Of IApizrGlobalSharedOptionsBuilderBase)(Int32)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
+    name: WithPriority<IApizrGlobalSharedOptionsBuilderBase>
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<IApizrGlobalSharedOptionsBuilderBase>
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
+    name: WithPriority(Of IApizrGlobalSharedOptionsBuilderBase)
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of IApizrGlobalSharedOptionsBuilderBase)
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
+  name: WithProgress<IApizrGlobalSharedOptionsBuilderBase>()
+  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrGlobalSharedOptionsBuilderBase>()
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase>()
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrGlobalSharedOptionsBuilderBase)()
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase)()
+  name.vb: WithProgress(Of IApizrGlobalSharedOptionsBuilderBase)()
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1
+    name: WithProgress<IApizrGlobalSharedOptionsBuilderBase>
+    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrGlobalSharedOptionsBuilderBase>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1
+    name: WithProgress(Of IApizrGlobalSharedOptionsBuilderBase)
+    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrGlobalSharedOptionsBuilderBase)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+  name: WithProgress<IApizrGlobalSharedOptionsBuilderBase>(Action<ApizrProgressEventArgs>)
+  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrGlobalSharedOptionsBuilderBase>(Action<ApizrProgressEventArgs>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase>(System.Action<Apizr.Progressing.ApizrProgressEventArgs>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrGlobalSharedOptionsBuilderBase)(Action(Of ApizrProgressEventArgs))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase)(System.Action(Of Apizr.Progressing.ApizrProgressEventArgs))
+  name.vb: WithProgress(Of IApizrGlobalSharedOptionsBuilderBase)(Action(Of ApizrProgressEventArgs))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+    name: WithProgress<IApizrGlobalSharedOptionsBuilderBase>
+    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrGlobalSharedOptionsBuilderBase>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Progressing.ApizrProgressEventArgs
+    name: ApizrProgressEventArgs
+    nameWithType: ApizrProgressEventArgs
+    fullName: Apizr.Progressing.ApizrProgressEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+    name: WithProgress(Of IApizrGlobalSharedOptionsBuilderBase)
+    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrGlobalSharedOptionsBuilderBase)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Progressing.ApizrProgressEventArgs
+    name: ApizrProgressEventArgs
+    nameWithType: ApizrProgressEventArgs
+    fullName: Apizr.Progressing.ApizrProgressEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Progressing.IApizrProgress)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,Apizr.Progressing.IApizrProgress)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,Apizr.Progressing.IApizrProgress)
+  name: WithProgress<IApizrGlobalSharedOptionsBuilderBase>(IApizrProgress)
+  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrGlobalSharedOptionsBuilderBase>(IApizrProgress)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase>(Apizr.Progressing.IApizrProgress)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrGlobalSharedOptionsBuilderBase)(IApizrProgress)
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase)(Apizr.Progressing.IApizrProgress)
+  name.vb: WithProgress(Of IApizrGlobalSharedOptionsBuilderBase)(IApizrProgress)
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Progressing.IApizrProgress)
+    name: WithProgress<IApizrGlobalSharedOptionsBuilderBase>
+    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrGlobalSharedOptionsBuilderBase>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Progressing.IApizrProgress
+    name: IApizrProgress
+    nameWithType: IApizrProgress
+    fullName: Apizr.Progressing.IApizrProgress
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Progressing.IApizrProgress)
+    name: WithProgress(Of IApizrGlobalSharedOptionsBuilderBase)
+    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrGlobalSharedOptionsBuilderBase)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Progressing.IApizrProgress
+    name: IApizrProgress
+    nameWithType: IApizrProgress
+    fullName: Apizr.Progressing.IApizrProgress
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
   isExternal: true
-  name: ToString(Object, String, String)
-  nameWithType: ObjectExtensions.ToString(Object, String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
+  name: WithPriority<T>(T, Priority)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Priority)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Fusillade.Priority)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Priority)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Fusillade.Priority)
+  name.vb: WithPriority(Of T)(T, Priority)
   spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+    name: WithPriority<T>
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
+  - name: T
+    nameWithType: T
+    fullName: T
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+  - uid: Fusillade.Priority
+    name: Priority
+    nameWithType: Priority
+    fullName: Fusillade.Priority
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+    name: WithPriority(Of T)
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of T)
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
+  - name: T
+    nameWithType: T
+    fullName: T
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+  - uid: Fusillade.Priority
+    name: Priority
+    nameWithType: Priority
+    fullName: Fusillade.Priority
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Extending.ObjectExtensions
-  commentId: T:Apizr.Extending.ObjectExtensions
-  parent: Apizr.Extending
-  name: ObjectExtensions
-  nameWithType: ObjectExtensions
-  fullName: Apizr.Extending.ObjectExtensions
-- uid: Apizr.Extending
-  commentId: N:Apizr.Extending
-  name: Apizr.Extending
-  nameWithType: Apizr.Extending
-  fullName: Apizr.Extending
+- uid: Apizr.FusilladeOptionsBuilderExtensions
+  commentId: T:Apizr.FusilladeOptionsBuilderExtensions
+  parent: Apizr
+  name: FusilladeOptionsBuilderExtensions
+  nameWithType: FusilladeOptionsBuilderExtensions
+  fullName: Apizr.FusilladeOptionsBuilderExtensions
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  isExternal: true
+  name: WithPriority<T>(T, Int32)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Int32)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T, System.Int32)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Int32)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, System.Int32)
+  name.vb: WithPriority(Of T)(T, Int32)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+    name: WithPriority<T>
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+    name: WithPriority(Of T)
+    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of T)
+    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
+  name: WithProgress<TBuilder>(TBuilder)
+  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)(TBuilder)
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)(TBuilder)
+  name.vb: WithProgress(Of TBuilder)(TBuilder)
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
+    name: WithProgress<TBuilder>
+    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TBuilder
+    nameWithType: TBuilder
+    fullName: TBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
+    name: WithProgress(Of TBuilder)
+    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TBuilder
+    nameWithType: TBuilder
+    fullName: TBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions
+  commentId: T:Apizr.FileTransferOptionsBuilderExtensions
+  parent: Apizr
+  name: FileTransferOptionsBuilderExtensions
+  nameWithType: FileTransferOptionsBuilderExtensions
+  fullName: Apizr.FileTransferOptionsBuilderExtensions
+- uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+  isExternal: true
+  name: WithProgress<TBuilder>(TBuilder, Action<ApizrProgressEventArgs>)
+  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder, Action<ApizrProgressEventArgs>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder, System.Action<Apizr.Progressing.ApizrProgressEventArgs>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)(TBuilder, Action(Of ApizrProgressEventArgs))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)(TBuilder, System.Action(Of Apizr.Progressing.ApizrProgressEventArgs))
+  name.vb: WithProgress(Of TBuilder)(TBuilder, Action(Of ApizrProgressEventArgs))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+    name: WithProgress<TBuilder>
+    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TBuilder
+    nameWithType: TBuilder
+    fullName: TBuilder
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Progressing.ApizrProgressEventArgs
+    name: ApizrProgressEventArgs
+    nameWithType: ApizrProgressEventArgs
+    fullName: Apizr.Progressing.ApizrProgressEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+    name: WithProgress(Of TBuilder)
+    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TBuilder
+    nameWithType: TBuilder
+    fullName: TBuilder
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Progressing.ApizrProgressEventArgs
+    name: ApizrProgressEventArgs
+    nameWithType: ApizrProgressEventArgs
+    fullName: Apizr.Progressing.ApizrProgressEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,Apizr.Progressing.IApizrProgress)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,Apizr.Progressing.IApizrProgress)
+  name: WithProgress<TBuilder>(TBuilder, IApizrProgress)
+  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder, IApizrProgress)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder, Apizr.Progressing.IApizrProgress)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)(TBuilder, IApizrProgress)
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)(TBuilder, Apizr.Progressing.IApizrProgress)
+  name.vb: WithProgress(Of TBuilder)(TBuilder, IApizrProgress)
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,Apizr.Progressing.IApizrProgress)
+    name: WithProgress<TBuilder>
+    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TBuilder
+    nameWithType: TBuilder
+    fullName: TBuilder
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Progressing.IApizrProgress
+    name: IApizrProgress
+    nameWithType: IApizrProgress
+    fullName: Apizr.Progressing.IApizrProgress
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,Apizr.Progressing.IApizrProgress)
+    name: WithProgress(Of TBuilder)
+    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)
+    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TBuilder
+    nameWithType: TBuilder
+    fullName: TBuilder
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Progressing.IApizrProgress
+    name: IApizrProgress
+    nameWithType: IApizrProgress
+    fullName: Apizr.Progressing.IApizrProgress
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr
+  commentId: N:Apizr
+  name: Apizr
+  nameWithType: Apizr
+  fullName: Apizr

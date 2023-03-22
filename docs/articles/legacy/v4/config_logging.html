@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Configuring logging | Apizr </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Configuring logging | Apizr ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../../../resources/favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <meta property="docfx:navrel" content="../../../toc.html">
+    <meta property="docfx:tocrel" content="../../toc.html">
+    
+    <meta property="docfx:rel" content="../../../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../../resources/logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h2 id="configuring-logging">Configuring logging</h2>
+
+<p>You can adjust logging configuration with:</p>
+<ul>
+<li><code>httpTracerMode</code> (default: <code>Everything</code>) Http traffic tracing mode:<ul>
+<li><code>ExceptionsOnly</code> logs only when an exception occurs</li>
+<li><code>ErrorsAndExceptionsOnly</code> logs only when an exception or any error occurs</li>
+<li><code>Everything</code> logs all, anytime</li>
+</ul>
+</li>
+<li><code>trafficVerbosity</code> (default: <code>All</code>) Http traffic tracing verbosity (see HttpTracer), with:<ul>
+<li><code>None</code></li>
+<li><code>RequestBody</code></li>
+<li><code>RequestHeaders</code></li>
+<li><code>RequestCookies</code></li>
+<li><code>RequestAll</code> = <code>RequestBody | RequestHeaders | RequestCookies</code></li>
+<li><code>ResponseBody</code></li>
+<li><code>ResponseHeaders</code></li>
+<li><code>ResponseAll</code> = <code>ResponseBody | ResponseHeaders</code></li>
+<li><code>All</code> = <code>ResponseAll | RequestAll</code></li>
+</ul>
+</li>
+<li><code>logLevels</code> (default: [Low] <code>Trace</code>, [Medium] <code>Information</code> and [High] <code>Critical</code>) Log levels to apply while writing logs (see Microsoft.Enxtension.Logging), with:<ul>
+<li><code>Trace</code></li>
+<li><code>Debug</code></li>
+<li><code>Information</code></li>
+<li><code>Warning</code></li>
+<li><code>Error</code></li>
+<li><code>Critical</code></li>
+<li><code>None</code></li>
+</ul>
+</li>
+</ul>
+<p>You can configure logging either by attribute decoration or by fluent configuration.</p>
+<p>In both cases, logLevels is a parameter array. It lets you provide from 0 to 3 different levels, as Apizr needs to get corresponding log level to each internal severity:</p>
+<ul>
+<li>Low: logs any internal and normal execution step</li>
+<li>Medium: logs all missconfigured things, like asking for cache without providing any cache provider</li>
+<li>High: logs errors and exceptions</li>
+</ul>
+<p>Obviously, providing more than 3 log levels would be pointlees.</p>
+<p>It means that:</p>
+<ul>
+<li>if you don&#39;t provide any log level at all, default levels will be applied ([Low] <code>Trace</code>, [Medium] <code>Information</code> and [High] <code>Critical</code>)</li>
+<li>if you provide only 1 log level like <code>Information</code>, it will be applied to all log entries ([Low] <code>Information</code>, [Medium] <code>Information</code> and [High] <code>Information</code>). Up to you to catch exceptions and to log it at any level of your choice.</li>
+<li>if you provide only 2 log levels like <code>Debug</code> and <code>Error</code>, the lowest will be applied to both Low and Medium ([Low] <code>Debug</code>, [Medium] <code>Debug</code> and [High] <code>Error</code>)</li>
+<li>if you provide 3 log levels like <code>Debug</code>, <code>Warning</code> and <code>Critical</code>, it will be applied like you said ([Low] <code>Debug</code>, [Medium] <code>Warning</code> and [High] <code>Critical</code>)</li>
+<li>if you provide more than 3 log levels, the lowest goes to Low, the highest to High and it will take the middle one for Medium</li>
+<li>if you provide a <code>None</code> at some point, it will disable logging for corresponding severity</li>
+</ul>
+<div class="tabGroup" id="tabgroup_Ro1J9Qfm6n">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_Ro1J9Qfm6n_tabid-attribute" role="tab" aria-controls="tabpanel_Ro1J9Qfm6n_tabid-attribute" data-tab="tabid-attribute" tabindex="0" aria-selected="true">Attribute</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_Ro1J9Qfm6n_tabid-fluent" role="tab" aria-controls="tabpanel_Ro1J9Qfm6n_tabid-fluent" data-tab="tabid-fluent" tabindex="-1">Fluent</a>
+</li>
+</ul>
+<section id="tabpanel_Ro1J9Qfm6n_tabid-attribute" role="tabpanel" data-tab="tabid-attribute">
+<p>You can set logging configuration thanks to <code>Log</code> attribute.
+Configuring logging with attribute allows you to use assembly scanning auto registration feature.</p>
+<p>The <code>Log</code> attribute could decorate:</p>
+<ul>
+<li>Assembly: to set logging configuration to all assembly api interfaces/entities</li>
+<li>Interface/Class: to set logging configuration to all request methods of the decorated api interface/entity</li>
+<li>Method: to set logging configuration to a specific request method of an api interface or entity (with dedicated attribtes)</li>
+</ul>
+<p>You also can mix decoration levels to set a common logging configuration to all assembly api interfaces, 
+and/or a specific to all api interface methods, 
+and/or a specific to an api interface method.</p>
+<pre><code class="lang-csharp">[assembly:Log]
+namespace Apizr.Sample
+{
+    [WebApi(&quot;https://reqres.in/&quot;)]
+    public interface IReqResService
+    {
+        [Get(&quot;/api/users&quot;)]
+        Task&lt;UserList&gt; GetUsersAsync();
+
+        [Get(&quot;/api/users/{userId}&quot;)]
+        Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId);
+
+        [Post(&quot;/api/users&quot;)]
+        Task&lt;User&gt; CreateUser(User user);
+    }
+}
+</code></pre><p>In this example, we decided to apply the default logging configuration ([Low] <code>Trace</code>, [Medium] <code>Information</code> and [High] <code>Critical</code>) to all assembly api interfaces/entities. 
+But you can adjust logging configuration thanks to attribute parameters.</p>
+</section>
+<section id="tabpanel_Ro1J9Qfm6n_tabid-fluent" role="tabpanel" data-tab="tabid-fluent" aria-hidden="true" hidden="hidden">
+<p>Configuring the logging fluently allows you to set it dynamically (e.g. based on settings)</p>
+<p>You can set it thanks to this option:</p>
+<pre><code class="lang-csharp">// direct configuration
+options =&gt; options.WithLogging(HttpTracerMode.Everything, HttpMessageParts.All, LogLevel.Information)
+
+// OR static factory configuration
+options =&gt; options.WithLogging(() =&gt; Settings.HttpTracerMode, () =&gt; Settings.TrafficVerbosity, () =&gt; Settings.LogLevels)
+
+// OR extended factory configuration
+options =&gt; options.WithLogging(
+    serviceProvider =&gt; serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().HttpTracerMode,
+    serviceProvider =&gt; serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().TrafficVerbosity
+    serviceProvider =&gt; serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().LogLevels)
+</code></pre><p>All logging fluent options are available with and without using registry. 
+It means that you can share logging configuration, setting it at registry level and/or set some specific one at api level.</p>
+</section>
+</div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Supported by Respawnsive
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>

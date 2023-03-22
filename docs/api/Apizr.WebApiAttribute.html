@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class WebApiAttribute
    | Apizr ">
-    <meta name="generator" content="docfx 2.59.0.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -234,7 +234,7 @@ public class WebApiAttribute : Attribute</code></pre>
   
   <a id="Apizr_WebApiAttribute__ctor_" data-uid="Apizr.WebApiAttribute.#ctor*"></a>
   <h4 id="Apizr_WebApiAttribute__ctor" data-uid="Apizr.WebApiAttribute.#ctor">WebApiAttribute()</h4>
-  <div class="markdown level1 summary"><p>Define web api with priority management and auto registration enabled, but without base uri (should be defined with options builder)</p>
+  <div class="markdown level1 summary"><p>Define a web api without any base absolute address or relative path (has to be defined fluently) but discoverable for auto registration</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -245,7 +245,7 @@ public class WebApiAttribute : Attribute</code></pre>
   
   <a id="Apizr_WebApiAttribute__ctor_" data-uid="Apizr.WebApiAttribute.#ctor*"></a>
   <h4 id="Apizr_WebApiAttribute__ctor_System_Boolean_" data-uid="Apizr.WebApiAttribute.#ctor(System.Boolean)">WebApiAttribute(Boolean)</h4>
-  <div class="markdown level1 summary"><p>Define web api enabling or not priority management and auto registration, but without base uri (should be defined with options builder)</p>
+  <div class="markdown level1 summary"><p>Define a web api without any base absolute address or relative path (has to be defined fluently) and make it discoverable for auto registration or not</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -274,12 +274,12 @@ public class WebApiAttribute : Attribute</code></pre>
   
   <a id="Apizr_WebApiAttribute__ctor_" data-uid="Apizr.WebApiAttribute.#ctor*"></a>
   <h4 id="Apizr_WebApiAttribute__ctor_System_String_" data-uid="Apizr.WebApiAttribute.#ctor(System.String)">WebApiAttribute(String)</h4>
-  <div class="markdown level1 summary"><p>Define web api with a base uri and with priority management and auto registration enabled</p>
+  <div class="markdown level1 summary"><p>Define a web api with a base absolute address or relative path (if path, base address has to be defined fluently) and discoverable for auto registration</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public WebApiAttribute(string baseUri)</code></pre>
+    <pre><code class="lang-csharp hljs">public WebApiAttribute(string baseAddressOrPath)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -293,8 +293,8 @@ public class WebApiAttribute : Attribute</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">baseUri</span></td>
-        <td><p>The web api base uri</p>
+        <td><span class="parametername">baseAddressOrPath</span></td>
+        <td><p>The web api base absolute address or relative path</p>
 </td>
       </tr>
     </tbody>
@@ -303,12 +303,12 @@ public class WebApiAttribute : Attribute</code></pre>
   
   <a id="Apizr_WebApiAttribute__ctor_" data-uid="Apizr.WebApiAttribute.#ctor*"></a>
   <h4 id="Apizr_WebApiAttribute__ctor_System_String_System_Boolean_" data-uid="Apizr.WebApiAttribute.#ctor(System.String,System.Boolean)">WebApiAttribute(String, Boolean)</h4>
-  <div class="markdown level1 summary"><p>Define web api with a base uri, enabling or not priority management and auto registration</p>
+  <div class="markdown level1 summary"><p>Define a web api with a base absolute address or relative path (if path, base address has to be defined fluently) and make it discoverable for auto registration or not</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public WebApiAttribute(string baseUri, bool isAutoRegistrable)</code></pre>
+    <pre><code class="lang-csharp hljs">public WebApiAttribute(string baseAddressOrPath, bool isAutoRegistrable)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -322,8 +322,8 @@ public class WebApiAttribute : Attribute</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">baseUri</span></td>
-        <td><p>The web api base uri</p>
+        <td><span class="parametername">baseAddressOrPath</span></td>
+        <td><p>The web api base absolute address or relative path</p>
 </td>
       </tr>
       <tr>
@@ -338,14 +338,14 @@ public class WebApiAttribute : Attribute</code></pre>
   </h3>
   
   
-  <a id="Apizr_WebApiAttribute_BaseUri_" data-uid="Apizr.WebApiAttribute.BaseUri*"></a>
-  <h4 id="Apizr_WebApiAttribute_BaseUri" data-uid="Apizr.WebApiAttribute.BaseUri">BaseUri</h4>
-  <div class="markdown level1 summary"><p>The web api base uri</p>
+  <a id="Apizr_WebApiAttribute_BaseAddressOrPath_" data-uid="Apizr.WebApiAttribute.BaseAddressOrPath*"></a>
+  <h4 id="Apizr_WebApiAttribute_BaseAddressOrPath" data-uid="Apizr.WebApiAttribute.BaseAddressOrPath">BaseAddressOrPath</h4>
+  <div class="markdown level1 summary"><p>The web api base absolute address or relative path</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string BaseUri { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string BaseAddressOrPath { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -388,10 +388,6 @@ public class WebApiAttribute : Attribute</code></pre>
       </tr>
     </tbody>
   </table>
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="Apizr.Extending.ObjectExtensions.html#Apizr_Extending_ObjectExtensions_ToString_System_Object_System_String_System_String_">ObjectExtensions.ToString(Object, String, String)</a>
-  </div>
 </article>
           </div>
           

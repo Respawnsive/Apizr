@@ -5,8 +5,8 @@ items:
   id: ExtendedHttpTracerHandler
   parent: Apizr.Logging
   children:
-  - Apizr.Logging.ExtendedHttpTracerHandler.#ctor(Apizr.Configuring.IApizrOptionsBase)
-  - Apizr.Logging.ExtendedHttpTracerHandler.#ctor(System.Net.Http.HttpMessageHandler,Apizr.Configuring.IApizrOptionsBase)
+  - Apizr.Logging.ExtendedHttpTracerHandler.#ctor(Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  - Apizr.Logging.ExtendedHttpTracerHandler.#ctor(System.Net.Http.HttpMessageHandler,Apizr.Configuring.Manager.IApizrManagerOptionsBase)
   - Apizr.Logging.ExtendedHttpTracerHandler.DefaultDurationFormat
   - Apizr.Logging.ExtendedHttpTracerHandler.GetRequestBody(System.Net.Http.HttpRequestMessage)
   - Apizr.Logging.ExtendedHttpTracerHandler.GetResponseBody(System.Net.Http.HttpResponseMessage)
@@ -25,11 +25,13 @@ items:
   type: Class
   source:
     id: ExtendedHttpTracerHandler
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\ExtendedHttpTracerHandler.cs
-    startLine: 17
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\ExtendedHttpTracerHandler.cs
+    startLine: 23
   assemblies:
   - Apizr
   namespace: Apizr.Logging
+  summary: "\nThe Http tracer delegating handler\n"
+  example: []
   syntax:
     content: 'public class ExtendedHttpTracerHandler : DelegatingHandler, IDisposable'
     content.vb: >-
@@ -53,8 +55,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
   modifiers.csharp:
   - public
   - class
@@ -74,8 +74,8 @@ items:
   type: Property
   source:
     id: DefaultDurationFormat
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\ExtendedHttpTracerHandler.cs
-    startLine: 32
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\ExtendedHttpTracerHandler.cs
+    startLine: 38
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -110,8 +110,8 @@ items:
   type: Field
   source:
     id: LogMessageIndicatorPrefix
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\ExtendedHttpTracerHandler.cs
-    startLine: 37
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\ExtendedHttpTracerHandler.cs
+    startLine: 43
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -139,8 +139,8 @@ items:
   type: Field
   source:
     id: LogMessageIndicatorSuffix
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\ExtendedHttpTracerHandler.cs
-    startLine: 38
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\ExtendedHttpTracerHandler.cs
+    startLine: 44
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -155,68 +155,68 @@ items:
   modifiers.vb:
   - Public
   - Shared
-- uid: Apizr.Logging.ExtendedHttpTracerHandler.#ctor(Apizr.Configuring.IApizrOptionsBase)
-  commentId: M:Apizr.Logging.ExtendedHttpTracerHandler.#ctor(Apizr.Configuring.IApizrOptionsBase)
-  id: '#ctor(Apizr.Configuring.IApizrOptionsBase)'
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.#ctor(Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  commentId: M:Apizr.Logging.ExtendedHttpTracerHandler.#ctor(Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  id: '#ctor(Apizr.Configuring.Manager.IApizrManagerOptionsBase)'
   parent: Apizr.Logging.ExtendedHttpTracerHandler
   langs:
   - csharp
   - vb
-  name: ExtendedHttpTracerHandler(IApizrOptionsBase)
-  nameWithType: ExtendedHttpTracerHandler.ExtendedHttpTracerHandler(IApizrOptionsBase)
-  fullName: Apizr.Logging.ExtendedHttpTracerHandler.ExtendedHttpTracerHandler(Apizr.Configuring.IApizrOptionsBase)
+  name: ExtendedHttpTracerHandler(IApizrManagerOptionsBase)
+  nameWithType: ExtendedHttpTracerHandler.ExtendedHttpTracerHandler(IApizrManagerOptionsBase)
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.ExtendedHttpTracerHandler(Apizr.Configuring.Manager.IApizrManagerOptionsBase)
   type: Constructor
   source:
     id: .ctor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\ExtendedHttpTracerHandler.cs
-    startLine: 43
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\ExtendedHttpTracerHandler.cs
+    startLine: 48
   assemblies:
   - Apizr
   namespace: Apizr.Logging
   summary: Constructs the <xref href="Apizr.Logging.ExtendedHttpTracerHandler" data-throw-if-not-resolved="false"></xref> with a custom <xref href="Microsoft.Extensions.Logging.ILogger" data-throw-if-not-resolved="false"></xref> and a custom <xref href="System.Net.Http.HttpMessageHandler" data-throw-if-not-resolved="false"></xref>
   example: []
   syntax:
-    content: public ExtendedHttpTracerHandler(IApizrOptionsBase apizrOptions)
+    content: public ExtendedHttpTracerHandler(IApizrManagerOptionsBase apizrOptions)
     parameters:
     - id: apizrOptions
-      type: Apizr.Configuring.IApizrOptionsBase
+      type: Apizr.Configuring.Manager.IApizrManagerOptionsBase
       description: Apizr options
-    content.vb: Public Sub New(apizrOptions As IApizrOptionsBase)
+    content.vb: Public Sub New(apizrOptions As IApizrManagerOptionsBase)
   overload: Apizr.Logging.ExtendedHttpTracerHandler.#ctor*
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Apizr.Logging.ExtendedHttpTracerHandler.#ctor(System.Net.Http.HttpMessageHandler,Apizr.Configuring.IApizrOptionsBase)
-  commentId: M:Apizr.Logging.ExtendedHttpTracerHandler.#ctor(System.Net.Http.HttpMessageHandler,Apizr.Configuring.IApizrOptionsBase)
-  id: '#ctor(System.Net.Http.HttpMessageHandler,Apizr.Configuring.IApizrOptionsBase)'
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.#ctor(System.Net.Http.HttpMessageHandler,Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  commentId: M:Apizr.Logging.ExtendedHttpTracerHandler.#ctor(System.Net.Http.HttpMessageHandler,Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  id: '#ctor(System.Net.Http.HttpMessageHandler,Apizr.Configuring.Manager.IApizrManagerOptionsBase)'
   parent: Apizr.Logging.ExtendedHttpTracerHandler
   langs:
   - csharp
   - vb
-  name: ExtendedHttpTracerHandler(HttpMessageHandler, IApizrOptionsBase)
-  nameWithType: ExtendedHttpTracerHandler.ExtendedHttpTracerHandler(HttpMessageHandler, IApizrOptionsBase)
-  fullName: Apizr.Logging.ExtendedHttpTracerHandler.ExtendedHttpTracerHandler(System.Net.Http.HttpMessageHandler, Apizr.Configuring.IApizrOptionsBase)
+  name: ExtendedHttpTracerHandler(HttpMessageHandler, IApizrManagerOptionsBase)
+  nameWithType: ExtendedHttpTracerHandler.ExtendedHttpTracerHandler(HttpMessageHandler, IApizrManagerOptionsBase)
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.ExtendedHttpTracerHandler(System.Net.Http.HttpMessageHandler, Apizr.Configuring.Manager.IApizrManagerOptionsBase)
   type: Constructor
   source:
     id: .ctor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\ExtendedHttpTracerHandler.cs
-    startLine: 49
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\ExtendedHttpTracerHandler.cs
+    startLine: 53
   assemblies:
   - Apizr
   namespace: Apizr.Logging
   summary: Constructs the <xref href="Apizr.Logging.ExtendedHttpTracerHandler" data-throw-if-not-resolved="false"></xref> with a custom <xref href="Microsoft.Extensions.Logging.ILogger" data-throw-if-not-resolved="false"></xref> and a custom <xref href="System.Net.Http.HttpMessageHandler" data-throw-if-not-resolved="false"></xref>
   example: []
   syntax:
-    content: public ExtendedHttpTracerHandler(HttpMessageHandler handler, IApizrOptionsBase apizrOptions)
+    content: public ExtendedHttpTracerHandler(HttpMessageHandler handler, IApizrManagerOptionsBase apizrOptions)
     parameters:
     - id: handler
       type: System.Net.Http.HttpMessageHandler
       description: User defined <xref href="System.Net.Http.HttpMessageHandler" data-throw-if-not-resolved="false"></xref>
     - id: apizrOptions
-      type: Apizr.Configuring.IApizrOptionsBase
+      type: Apizr.Configuring.Manager.IApizrManagerOptionsBase
       description: Apizr options
-    content.vb: Public Sub New(handler As HttpMessageHandler, apizrOptions As IApizrOptionsBase)
+    content.vb: Public Sub New(handler As HttpMessageHandler, apizrOptions As IApizrManagerOptionsBase)
   overload: Apizr.Logging.ExtendedHttpTracerHandler.#ctor*
   modifiers.csharp:
   - public
@@ -235,8 +235,8 @@ items:
   type: Method
   source:
     id: SendAsync
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\ExtendedHttpTracerHandler.cs
-    startLine: 58
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\ExtendedHttpTracerHandler.cs
+    startLine: 62
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -272,24 +272,31 @@ items:
   type: Method
   source:
     id: LogHttpRequest
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\ExtendedHttpTracerHandler.cs
-    startLine: 121
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\ExtendedHttpTracerHandler.cs
+    startLine: 158
   assemblies:
   - Apizr
   namespace: Apizr.Logging
+  summary: "\nLogs Http request\n"
+  example: []
   syntax:
     content: protected virtual async Task LogHttpRequest(HttpRequestMessage request, ILogger logger, LogLevel[] logLevels, HttpMessageParts verbosity)
     parameters:
     - id: request
       type: System.Net.Http.HttpRequestMessage
+      description: The request
     - id: logger
       type: Microsoft.Extensions.Logging.ILogger
+      description: The logger
     - id: logLevels
       type: Microsoft.Extensions.Logging.LogLevel[]
+      description: The log levels
     - id: verbosity
       type: Apizr.Logging.HttpMessageParts
+      description: The verbosity
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Protected Overridable Function LogHttpRequest(request As HttpRequestMessage, logger As ILogger, logLevels As LogLevel(), verbosity As HttpMessageParts) As Task
   overload: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest*
   nameWithType.vb: ExtendedHttpTracerHandler.LogHttpRequest(HttpRequestMessage, ILogger, LogLevel(), HttpMessageParts)
@@ -315,26 +322,34 @@ items:
   type: Method
   source:
     id: LogHttpResponse
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\ExtendedHttpTracerHandler.cs
-    startLine: 150
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\ExtendedHttpTracerHandler.cs
+    startLine: 196
   assemblies:
   - Apizr
   namespace: Apizr.Logging
+  summary: "\nLogs Http response\n"
+  example: []
   syntax:
     content: protected virtual async Task LogHttpResponse(HttpResponseMessage response, TimeSpan duration, ILogger logger, LogLevel[] logLevels, HttpMessageParts verbosity)
     parameters:
     - id: response
       type: System.Net.Http.HttpResponseMessage
+      description: The response
     - id: duration
       type: System.TimeSpan
+      description: The duration
     - id: logger
       type: Microsoft.Extensions.Logging.ILogger
+      description: The logger
     - id: logLevels
       type: Microsoft.Extensions.Logging.LogLevel[]
+      description: The log levels
     - id: verbosity
       type: Apizr.Logging.HttpMessageParts
+      description: The verbosity
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Protected Overridable Function LogHttpResponse(response As HttpResponseMessage, duration As TimeSpan, logger As ILogger, logLevels As LogLevel(), verbosity As HttpMessageParts) As Task
   overload: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse*
   nameWithType.vb: ExtendedHttpTracerHandler.LogHttpResponse(HttpResponseMessage, TimeSpan, ILogger, LogLevel(), HttpMessageParts)
@@ -360,22 +375,28 @@ items:
   type: Method
   source:
     id: LogHttpException
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\ExtendedHttpTracerHandler.cs
-    startLine: 202
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\ExtendedHttpTracerHandler.cs
+    startLine: 255
   assemblies:
   - Apizr
   namespace: Apizr.Logging
+  summary: "\nLogs Http exceptions\n"
+  example: []
   syntax:
     content: protected void LogHttpException(HttpRequestMessage request, Exception ex, ILogger logger, LogLevel[] logLevels)
     parameters:
     - id: request
       type: System.Net.Http.HttpRequestMessage
+      description: The request
     - id: ex
       type: System.Exception
+      description: The exception
     - id: logger
       type: Microsoft.Extensions.Logging.ILogger
+      description: The logger
     - id: logLevels
       type: Microsoft.Extensions.Logging.LogLevel[]
+      description: The log levels
     content.vb: Protected Sub LogHttpException(request As HttpRequestMessage, ex As Exception, logger As ILogger, logLevels As LogLevel())
   overload: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpException*
   nameWithType.vb: ExtendedHttpTracerHandler.LogHttpException(HttpRequestMessage, Exception, ILogger, LogLevel())
@@ -398,18 +419,22 @@ items:
   type: Method
   source:
     id: GetRequestBody
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\ExtendedHttpTracerHandler.cs
-    startLine: 233
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\ExtendedHttpTracerHandler.cs
+    startLine: 291
   assemblies:
   - Apizr
   namespace: Apizr.Logging
+  summary: "\nGet the request body\n"
+  example: []
   syntax:
     content: protected Task<string> GetRequestBody(HttpRequestMessage request)
     parameters:
     - id: request
       type: System.Net.Http.HttpRequestMessage
+      description: The request
     return:
       type: System.Threading.Tasks.Task{System.String}
+      description: ''
     content.vb: Protected Function GetRequestBody(request As HttpRequestMessage) As Task(Of String)
   overload: Apizr.Logging.ExtendedHttpTracerHandler.GetRequestBody*
   modifiers.csharp:
@@ -429,18 +454,22 @@ items:
   type: Method
   source:
     id: GetResponseBody
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\ExtendedHttpTracerHandler.cs
-    startLine: 235
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\ExtendedHttpTracerHandler.cs
+    startLine: 298
   assemblies:
   - Apizr
   namespace: Apizr.Logging
+  summary: "\nGet the response body\n"
+  example: []
   syntax:
     content: protected Task<string> GetResponseBody(HttpResponseMessage response)
     parameters:
     - id: response
       type: System.Net.Http.HttpResponseMessage
+      description: The response
     return:
       type: System.Threading.Tasks.Task{System.String}
+      description: ''
     content.vb: Protected Function GetResponseBody(response As HttpResponseMessage) As Task(Of String)
   overload: Apizr.Logging.ExtendedHttpTracerHandler.GetResponseBody*
   modifiers.csharp:
@@ -839,61 +868,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  parent: Apizr.Extending.ObjectExtensions
-  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  name: ToString(String, String)
-  nameWithType: ObjectExtensions.ToString(String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
@@ -906,87 +880,6 @@ references:
   name: System.Net.Http
   nameWithType: System.Net.Http
   fullName: System.Net.Http
-- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  isExternal: true
-  name: ToString(Object, String, String)
-  nameWithType: ObjectExtensions.ToString(Object, String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.ObjectExtensions
-  commentId: T:Apizr.Extending.ObjectExtensions
-  parent: Apizr.Extending
-  name: ObjectExtensions
-  nameWithType: ObjectExtensions
-  fullName: Apizr.Extending.ObjectExtensions
-- uid: Apizr.Extending
-  commentId: N:Apizr.Extending
-  name: Apizr.Extending
-  nameWithType: Apizr.Extending
-  fullName: Apizr.Extending
 - uid: Apizr.Logging.ExtendedHttpTracerHandler.DefaultDurationFormat*
   commentId: Overload:Apizr.Logging.ExtendedHttpTracerHandler.DefaultDurationFormat
   name: DefaultDurationFormat
@@ -1017,23 +910,23 @@ references:
   name: ExtendedHttpTracerHandler
   nameWithType: ExtendedHttpTracerHandler.ExtendedHttpTracerHandler
   fullName: Apizr.Logging.ExtendedHttpTracerHandler.ExtendedHttpTracerHandler
-- uid: Apizr.Configuring.IApizrOptionsBase
-  commentId: T:Apizr.Configuring.IApizrOptionsBase
-  parent: Apizr.Configuring
-  name: IApizrOptionsBase
-  nameWithType: IApizrOptionsBase
-  fullName: Apizr.Configuring.IApizrOptionsBase
+- uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  commentId: T:Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  parent: Apizr.Configuring.Manager
+  name: IApizrManagerOptionsBase
+  nameWithType: IApizrManagerOptionsBase
+  fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
 - uid: Microsoft.Extensions.Logging
   commentId: N:Microsoft.Extensions.Logging
   isExternal: true
   name: Microsoft.Extensions.Logging
   nameWithType: Microsoft.Extensions.Logging
   fullName: Microsoft.Extensions.Logging
-- uid: Apizr.Configuring
-  commentId: N:Apizr.Configuring
-  name: Apizr.Configuring
-  nameWithType: Apizr.Configuring
-  fullName: Apizr.Configuring
+- uid: Apizr.Configuring.Manager
+  commentId: N:Apizr.Configuring.Manager
+  name: Apizr.Configuring.Manager
+  nameWithType: Apizr.Configuring.Manager
+  fullName: Apizr.Configuring.Manager
 - uid: System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
   commentId: M:System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
   parent: System.Net.Http.DelegatingHandler

@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Configuring Context | Apizr </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Configuring Context | Apizr ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../resources/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../resources/logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h2 id="configuring-context">Configuring Context</h2>
+
+<p>You may want to provide a Polly Context, thanks to <code>WithContext</code> builder option, available at both register and request time.</p>
+<div class="tabGroup" id="tabgroup_DCh2MqYhH7">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_DCh2MqYhH7_tabid-registering" role="tab" aria-controls="tabpanel_DCh2MqYhH7_tabid-registering" data-tab="tabid-registering" tabindex="0" aria-selected="true">Registering</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_DCh2MqYhH7_tabid-requesting" role="tab" aria-controls="tabpanel_DCh2MqYhH7_tabid-requesting" data-tab="tabid-requesting" tabindex="-1">Requesting</a>
+</li>
+</ul>
+<section id="tabpanel_DCh2MqYhH7_tabid-registering" role="tabpanel" data-tab="tabid-registering">
+<p>Configuring a context at register time allows you to get a pre-defined one while requesting.</p>
+<p><code>WithContext</code> builder option is available with or without using registry.
+It means that you can share a context globally by setting it at registry level and/or set some specific one at api level.
+As it&#39;s not recomended to share the same context instance between requests, <code>WithContext</code> registration option comes with a factory style.</p>
+<p>Here is a quite simple scenario:</p>
+<pre><code class="lang-csharp">var reqResUserManager = ApizrBuilder.Current.CreateManagerFor&lt;IReqResUserService&gt;(options =&gt; options
+                    .WithContext(() =&gt; new Context { { testKey1, testValue1 } }));
+</code></pre><p>And here is a pretty complexe scenario:</p>
+<pre><code class="lang-csharp">private Context FirstContextFactory() =&gt; new() { { testKey1, testValue1 } };
+private Context SecondContextFactory() =&gt; new() { { testKey2, testValue2 } };
+private Context ThirdContextFactory() =&gt; new() { { testKey3, testValue3 } };
+
+var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry =&gt; registry
+        .AddGroup(group =&gt; group
+                .AddManagerFor&lt;IReqResUserService&gt;(options =&gt; options
+                    .WithContext(ThirdContextFactory))
+                .AddManagerFor&lt;IReqResResourceService&gt;(),
+            options =&gt; options.WithContext(SecondContextFactory))
+        .AddManagerFor&lt;IHttpBinService&gt;()
+        .AddCrudManagerFor&lt;User, int, PagedResult&lt;User&gt;, IDictionary&lt;string, object&gt;&gt;(),
+    options =&gt; options.WithContext(FirstContextFactory));
+</code></pre><p>Here I&#39;m telling Apizr to:</p>
+<ul>
+<li>Merge all 3 context together and pass it while requesting with <code>IReqResUserService</code> api</li>
+<li>Merge first and second context and pass it while requesting with <code>IReqResResourceService</code> api</li>
+<li>Pass the first context while requesting with <code>IHttpBinService</code> api or <code>User</code> CRUD api</li>
+</ul>
+<p>Feel free to configure your context at the level of your choice, depending on your needs.
+You definitly can mix it all with request option context providing.</p>
+</section>
+<section id="tabpanel_DCh2MqYhH7_tabid-requesting" role="tabpanel" data-tab="tabid-requesting" aria-hidden="true" hidden="hidden">
+<p>Configuring a context at request time allows you to set it at the very end, just before sending the request.</p>
+<pre><code class="lang-csharp">var reqResManager = apizrRegistry.GetManagerFor&lt;IReqResUserService&gt;();
+
+var users = await reqResManager.ExecuteAsync(api =&gt; api.GetUsersAsync(), options =&gt; 
+    options.WithContext(() =&gt; new Context { { testKey4, testValue4 } }));
+</code></pre><p>You definitly can mix it with registration option context.</p>
+</section>
+</div>
+<p>You may notice that:</p>
+<ul>
+<li><code>strategy</code> parameter let you adjust the behavior in case of mixing (default: <code>Merge</code>):<ul>
+<li><code>Ignore</code>: if there&#39;s another context yet configured, ignore this one</li>
+<li><code>Add</code>: add or merge this context with any yet configured ones</li>
+<li><code>Replace</code>: replace all yet configured context by this one</li>
+<li><code>Merge</code>: add or merge this context with any yet configured ones</li>
+</ul>
+</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Supported by Respawnsive
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

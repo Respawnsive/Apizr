@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ApizrManager&lt;TWebApi&gt;
    | Apizr ">
-    <meta name="generator" content="docfx 2.59.0.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -83,14 +83,16 @@
   
   <h1 id="Apizr_ApizrManager_1" data-uid="Apizr.ApizrManager`1" class="text-break">Class ApizrManager&lt;TWebApi&gt;
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>The manager</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">ApizrManager&lt;TWebApi&gt;</span></div>
+    <div class="level1"><a class="xref" href="Apizr.ApizrManager.html">ApizrManager</a></div>
+    <div class="level2"><span class="xref">ApizrManager&lt;TWebApi&gt;</span></div>
   </div>
-  <div classs="implements">
+  <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Apizr.IApizrManager-1.html">IApizrManager</a>&lt;TWebApi&gt;</div>
     <div><a class="xref" href="Apizr.IApizrManager.html">IApizrManager</a></div>
@@ -123,7 +125,7 @@
   <h6><strong>Assembly</strong>: Apizr.dll</h6>
   <h5 id="Apizr_ApizrManager_1_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ApizrManager&lt;TWebApi&gt; : IApizrManager&lt;TWebApi&gt;, IApizrManager</code></pre>
+    <pre><code class="lang-csharp hljs">public class ApizrManager&lt;TWebApi&gt; : ApizrManager, IApizrManager&lt;TWebApi&gt;, IApizrManager</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -145,12 +147,13 @@
   
   
   <a id="Apizr_ApizrManager_1__ctor_" data-uid="Apizr.ApizrManager`1.#ctor*"></a>
-  <h4 id="Apizr_ApizrManager_1__ctor_Apizr_ILazyFactory__0__Apizr_Connecting_IConnectivityHandler_Apizr_Caching_ICacheHandler_Apizr_Mapping_IMappingHandler_Polly_Registry_IReadOnlyPolicyRegistry_System_String__Apizr_Configuring_IApizrOptions__0__" data-uid="Apizr.ApizrManager`1.#ctor(Apizr.ILazyFactory{`0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.IApizrOptions{`0})">ApizrManager(ILazyFactory&lt;TWebApi&gt;, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry&lt;String&gt;, IApizrOptions&lt;TWebApi&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_ApizrManager_1__ctor_Apizr_ILazyFactory__0__Apizr_Connecting_IConnectivityHandler_Apizr_Caching_ICacheHandler_Apizr_Mapping_IMappingHandler_Polly_Registry_IReadOnlyPolicyRegistry_System_String__Apizr_Configuring_Manager_IApizrManagerOptions__0__" data-uid="Apizr.ApizrManager`1.#ctor(Apizr.ILazyFactory{`0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{`0})">ApizrManager(ILazyFactory&lt;TWebApi&gt;, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry&lt;String&gt;, IApizrManagerOptions&lt;TWebApi&gt;)</h4>
+  <div class="markdown level1 summary"><p>Apizr manager constructor</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ApizrManager(ILazyFactory&lt;TWebApi&gt; lazyWebApi, IConnectivityHandler connectivityHandler, ICacheHandler cacheHandler, IMappingHandler mappingHandler, IReadOnlyPolicyRegistry&lt;string&gt; policyRegistry, IApizrOptions&lt;TWebApi&gt; apizrOptions)</code></pre>
+    <pre><code class="lang-csharp hljs">public ApizrManager(ILazyFactory&lt;TWebApi&gt; lazyWebApi, IConnectivityHandler connectivityHandler, ICacheHandler cacheHandler, IMappingHandler mappingHandler, IReadOnlyPolicyRegistry&lt;string&gt; policyRegistry, IApizrManagerOptions&lt;TWebApi&gt; apizrOptions)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -165,32 +168,38 @@
       <tr>
         <td><a class="xref" href="Apizr.ILazyFactory-1.html">ILazyFactory</a>&lt;TWebApi&gt;</td>
         <td><span class="parametername">lazyWebApi</span></td>
-        <td></td>
+        <td><p>The managed web api</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="Apizr.Connecting.IConnectivityHandler.html">IConnectivityHandler</a></td>
         <td><span class="parametername">connectivityHandler</span></td>
-        <td></td>
+        <td><p>The connectivity handler</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="Apizr.Caching.ICacheHandler.html">ICacheHandler</a></td>
         <td><span class="parametername">cacheHandler</span></td>
-        <td></td>
+        <td><p>The cache handler</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="Apizr.Mapping.IMappingHandler.html">IMappingHandler</a></td>
         <td><span class="parametername">mappingHandler</span></td>
-        <td></td>
+        <td><p>The mapping handler</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Polly.Registry.IReadOnlyPolicyRegistry</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">policyRegistry</span></td>
-        <td></td>
+        <td><p>The policy registry</p>
+</td>
       </tr>
       <tr>
-        <td><a class="xref" href="Apizr.Configuring.IApizrOptions-1.html">IApizrOptions</a>&lt;TWebApi&gt;</td>
+        <td><a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptions-1.html">IApizrManagerOptions</a>&lt;TWebApi&gt;</td>
         <td><span class="parametername">apizrOptions</span></td>
-        <td></td>
+        <td><p>The web api dedicated options</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -200,7 +209,8 @@
   
   <a id="Apizr_ApizrManager_1_Api_" data-uid="Apizr.ApizrManager`1.Api*"></a>
   <h4 id="Apizr_ApizrManager_1_Api" data-uid="Apizr.ApizrManager`1.Api">Api</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Original Refit Api without any Apizr management. You should use ExecuteAsync instead to get all the Apizr goodness :)</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -225,11 +235,12 @@
   
   <a id="Apizr_ApizrManager_1_Options_" data-uid="Apizr.ApizrManager`1.Options*"></a>
   <h4 id="Apizr_ApizrManager_1_Options" data-uid="Apizr.ApizrManager`1.Options">Options</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Basic Apizr options</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrOptionsBase Options { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBase Options { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -241,7 +252,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Apizr.Configuring.IApizrOptionsBase.html">IApizrOptionsBase</a></td>
+        <td><a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -252,7 +263,8 @@
   
   <a id="Apizr_ApizrManager_1_ClearCacheAsync_" data-uid="Apizr.ApizrManager`1.ClearCacheAsync*"></a>
   <h4 id="Apizr_ApizrManager_1_ClearCacheAsync_System_Threading_CancellationToken_" data-uid="Apizr.ApizrManager`1.ClearCacheAsync(System.Threading.CancellationToken)">ClearCacheAsync(CancellationToken)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Clear all cache</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -271,7 +283,8 @@
       <tr>
         <td><span class="xref">System.Threading.CancellationToken</span></td>
         <td><span class="parametername">cancellationToken</span></td>
-        <td></td>
+        <td><p>A cancellation token</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -294,7 +307,8 @@
   
   <a id="Apizr_ApizrManager_1_ClearCacheAsync_" data-uid="Apizr.ApizrManager`1.ClearCacheAsync*"></a>
   <h4 id="Apizr_ApizrManager_1_ClearCacheAsync__1_System_Linq_Expressions_Expression_System_Func__0_System_Threading_Tasks_Task___0____" data-uid="Apizr.ApizrManager`1.ClearCacheAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}})">ClearCacheAsync&lt;TResult&gt;(Expression&lt;Func&lt;TWebApi, Task&lt;TResult&gt;&gt;&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Clear the cache of a specific request</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -313,7 +327,8 @@
       <tr>
         <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TResult&gt;&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The specific <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task to clear cache for</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -343,7 +358,8 @@
     <tbody>
       <tr>
         <td><span class="parametername">TResult</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task result</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -351,7 +367,8 @@
   
   <a id="Apizr_ApizrManager_1_ClearCacheAsync_" data-uid="Apizr.ApizrManager`1.ClearCacheAsync*"></a>
   <h4 id="Apizr_ApizrManager_1_ClearCacheAsync__1_System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken__0_System_Threading_Tasks_Task___0____System_Threading_CancellationToken_" data-uid="Apizr.ApizrManager`1.ClearCacheAsync``1(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``0}}},System.Threading.CancellationToken)">ClearCacheAsync&lt;TResult&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, Task&lt;TResult&gt;&gt;&gt;, CancellationToken)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Clear the cache of a specific request</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -370,12 +387,14 @@
       <tr>
         <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">System.Threading.CancellationToken</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TResult&gt;&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The specific <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task to clear cache for</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Threading.CancellationToken</span></td>
         <td><span class="parametername">cancellationToken</span></td>
-        <td></td>
+        <td><p>A cancellation token</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -405,19 +424,21 @@
     <tbody>
       <tr>
         <td><span class="parametername">TResult</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task result</p>
+</td>
       </tr>
     </tbody>
   </table>
   
   
   <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync_System_Linq_Expressions_Expression_System_Func__0_System_Threading_Tasks_Task___System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}},System.Action{System.Exception})">ExecuteAsync(Expression&lt;Func&lt;TWebApi, Task&gt;&gt;, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_ApizrManager_1_ExecuteAsync_System_Linq_Expressions_Expression_System_Func__0_System_Threading_Tasks_Task___System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.ApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">ExecuteAsync(Expression&lt;Func&lt;TWebApi, Task&gt;&gt;, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Execute a managed <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task ExecuteAsync(Expression&lt;Func&lt;TWebApi, Task&gt;&gt; executeApiMethod, Action&lt;Exception&gt; onException = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task ExecuteAsync(Expression&lt;Func&lt;TWebApi, Task&gt;&gt; executeApiMethod, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -432,64 +453,14 @@
       <tr>
         <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task to execute</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync_System_Linq_Expressions_Expression_System_Func_Polly_Context__0_System_Threading_Tasks_Task___Polly_Context_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task}},Polly.Context,System.Action{System.Exception})">ExecuteAsync(Expression&lt;Func&lt;Context, TWebApi, Task&gt;&gt;, Context, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task ExecuteAsync(Expression&lt;Func&lt;Context, TWebApi, Task&gt;&gt; executeApiMethod, Context context = null, Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -511,12 +482,13 @@
   
   
   <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync_System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken__0_System_Threading_Tasks_Task___Polly_Context_System_Threading_CancellationToken_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},Polly.Context,System.Threading.CancellationToken,System.Action{System.Exception})">ExecuteAsync(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, Task&gt;&gt;, Context, CancellationToken, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_ApizrManager_1_ExecuteAsync_System_Linq_Expressions_Expression_System_Func_Apizr_Configuring_Request_IApizrRequestOptions__0_System_Threading_Tasks_Task___System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.ApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">ExecuteAsync(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, Task&gt;&gt;, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Execute a managed <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task ExecuteAsync(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, Task&gt;&gt; executeApiMethod, Context context = null, CancellationToken cancellationToken = default(CancellationToken), Action&lt;Exception&gt; onException = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual async Task ExecuteAsync(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, Task&gt;&gt; executeApiMethod, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -529,24 +501,16 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, <span class="xref">System.Threading.CancellationToken</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task to execute</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -568,499 +532,13 @@
   
   
   <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync_System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken__0_System_Threading_Tasks_Task___System_Threading_CancellationToken_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task}},System.Threading.CancellationToken,System.Action{System.Exception})">ExecuteAsync(Expression&lt;Func&lt;CancellationToken, TWebApi, Task&gt;&gt;, CancellationToken, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__1_System_Linq_Expressions_Expression_System_Func__0_System_Threading_Tasks_Task___0____System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">ExecuteAsync&lt;TApiData&gt;(Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Execute a managed <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task ExecuteAsync(Expression&lt;Func&lt;CancellationToken, TWebApi, Task&gt;&gt; executeApiMethod, CancellationToken cancellationToken = default(CancellationToken), Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">System.Threading.CancellationToken</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__1_System_Linq_Expressions_Expression_System_Func__0_System_Threading_Tasks_Task___0____System_Boolean_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}},System.Boolean,System.Action{System.Exception})">ExecuteAsync&lt;TResult&gt;(Expression&lt;Func&lt;TWebApi, Task&lt;TResult&gt;&gt;&gt;, Boolean, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task&lt;TResult&gt; ExecuteAsync&lt;TResult&gt;(Expression&lt;Func&lt;TWebApi, Task&lt;TResult&gt;&gt;&gt; executeApiMethod, bool clearCache = false, Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TResult&gt;&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TResult&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TResult</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__1_System_Linq_Expressions_Expression_System_Func_Polly_Context__0_System_Threading_Tasks_Task___0____Polly_Context_System_Boolean_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{``0}}},Polly.Context,System.Boolean,System.Action{System.Exception})">ExecuteAsync&lt;TResult&gt;(Expression&lt;Func&lt;Context, TWebApi, Task&lt;TResult&gt;&gt;&gt;, Context, Boolean, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task&lt;TResult&gt; ExecuteAsync&lt;TResult&gt;(Expression&lt;Func&lt;Context, TWebApi, Task&lt;TResult&gt;&gt;&gt; executeApiMethod, Context context = null, bool clearCache = false, Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TResult&gt;&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TResult&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TResult</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__1_System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken__0_System_Threading_Tasks_Task___0____Polly_Context_System_Threading_CancellationToken_System_Boolean_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``0}}},Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">ExecuteAsync&lt;TResult&gt;(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, Task&lt;TResult&gt;&gt;&gt;, Context, CancellationToken, Boolean, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task&lt;TResult&gt; ExecuteAsync&lt;TResult&gt;(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, Task&lt;TResult&gt;&gt;&gt; executeApiMethod, Context context = null, CancellationToken cancellationToken = default(CancellationToken), bool clearCache = false, Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, <span class="xref">System.Threading.CancellationToken</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TResult&gt;&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TResult&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TResult</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__1_System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken__0_System_Threading_Tasks_Task___0____System_Threading_CancellationToken_System_Boolean_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``0}}},System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">ExecuteAsync&lt;TResult&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, Task&lt;TResult&gt;&gt;&gt;, CancellationToken, Boolean, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task&lt;TResult&gt; ExecuteAsync&lt;TResult&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, Task&lt;TResult&gt;&gt;&gt; executeApiMethod, CancellationToken cancellationToken = default(CancellationToken), bool clearCache = false, Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">System.Threading.CancellationToken</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TResult&gt;&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TResult&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TResult</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__2_System_Linq_Expressions_Expression_System_Func__0___1_System_Threading_Tasks_Task___1______0_System_Boolean_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Boolean,System.Action{System.Exception})">ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, Boolean, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task&lt;TModelData&gt; ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, TModelData modelData, bool clearCache = false, Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">TModelData</span></td>
-        <td><span class="parametername">modelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TModelData&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__2_System_Linq_Expressions_Expression_System_Func__0___1_System_Threading_Tasks_Task_____0_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task}},``0,System.Action{System.Exception})">ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, TApiData, Task&gt;&gt;, TModelData, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, TApiData, Task&gt;&gt; executeApiMethod, TModelData modelData, Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">TModelData</span></td>
-        <td><span class="parametername">modelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__2_System_Linq_Expressions_Expression_System_Func__0_System_Threading_Tasks_Task___1____System_Boolean_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``1}}},System.Boolean,System.Action{System.Exception})">ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Boolean, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task&lt;TModelData&gt; ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, bool clearCache = false, Action&lt;Exception&gt; onException = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;TApiData&gt; ExecuteAsync&lt;TApiData&gt;(Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1075,17 +553,152 @@
       <tr>
         <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task to execute</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;</td>
         <td></td>
       </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
       <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TApiData</span></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task result</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
+  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__1_System_Linq_Expressions_Expression_System_Func_Apizr_Configuring_Request_IApizrRequestOptions__0_System_Threading_Tasks_Task___0____System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task{``0}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">ExecuteAsync&lt;TApiData&gt;(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Execute a managed <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual async Task&lt;TApiData&gt; ExecuteAsync&lt;TApiData&gt;(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
+        <td><span class="parametername">executeApiMethod</span></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task to execute</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;</td>
         <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TApiData</span></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task result</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
+  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__2_System_Linq_Expressions_Expression_System_Func__0___1_System_Threading_Tasks_Task___1______0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Execute a managed <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task returning a mapped result</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;TModelData&gt; ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, TModelData modelData, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
+        <td><span class="parametername">executeApiMethod</span></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">TModelData</span></td>
+        <td><span class="parametername">modelData</span></td>
+        <td><p>The model data to map</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1115,23 +728,26 @@
     <tbody>
       <tr>
         <td><span class="parametername">TModelData</span></td>
-        <td></td>
+        <td><p>The model data type</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TApiData</span></td>
-        <td></td>
+        <td><p>The api data type</p>
+</td>
       </tr>
     </tbody>
   </table>
   
   
   <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__2_System_Linq_Expressions_Expression_System_Func_Polly_Context__0___1_System_Threading_Tasks_Task___1______0_Polly_Context_System_Boolean_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,``1,System.Threading.Tasks.Task{``1}}},``0,Polly.Context,System.Boolean,System.Action{System.Exception})">ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, Context, Boolean, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__2_System_Linq_Expressions_Expression_System_Func__0___1_System_Threading_Tasks_Task_____0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task}},``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, TApiData, Task&gt;&gt;, TModelData, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Execute a managed <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task&lt;TModelData&gt; ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, TModelData modelData, Context context = null, bool clearCache = false, Action&lt;Exception&gt; onException = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, TApiData, Task&gt;&gt; executeApiMethod, TModelData modelData, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1144,105 +760,22 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">TModelData</span></td>
         <td><span class="parametername">modelData</span></td>
-        <td></td>
+        <td><p>The model data to map</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TModelData&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__2_System_Linq_Expressions_Expression_System_Func_Polly_Context__0___1_System_Threading_Tasks_Task_____0_Polly_Context_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,``1,System.Threading.Tasks.Task}},``0,Polly.Context,System.Action{System.Exception})">ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, TWebApi, TApiData, Task&gt;&gt;, TModelData, Context, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, TWebApi, TApiData, Task&gt;&gt; executeApiMethod, TModelData modelData, Context context = null, Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">TModelData</span></td>
-        <td><span class="parametername">modelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1272,23 +805,26 @@
     <tbody>
       <tr>
         <td><span class="parametername">TModelData</span></td>
-        <td></td>
+        <td><p>The model data type</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TApiData</span></td>
-        <td></td>
+        <td><p>The api data type</p>
+</td>
       </tr>
     </tbody>
   </table>
   
   
   <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__2_System_Linq_Expressions_Expression_System_Func_Polly_Context__0_System_Threading_Tasks_Task___1____Polly_Context_System_Boolean_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,System.Threading.Tasks.Task{``1}}},Polly.Context,System.Boolean,System.Action{System.Exception})">ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Context, Boolean, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__2_System_Linq_Expressions_Expression_System_Func__0_System_Threading_Tasks_Task___1____System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``1}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Execute a managed <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task returning a mapped result</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task&lt;TModelData&gt; ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, TWebApi, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, Context context = null, bool clearCache = false, Action&lt;Exception&gt; onException = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;TModelData&gt; ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1301,24 +837,16 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1348,23 +876,26 @@
     <tbody>
       <tr>
         <td><span class="parametername">TModelData</span></td>
-        <td></td>
+        <td><p>The model data type</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TApiData</span></td>
-        <td></td>
+        <td><p>The api data type</p>
+</td>
       </tr>
     </tbody>
   </table>
   
   
   <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__2_System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken__0___1_System_Threading_Tasks_Task___1______0_Polly_Context_System_Threading_CancellationToken_System_Boolean_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task{``1}}},``0,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, Context, CancellationToken, Boolean, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__2_System_Linq_Expressions_Expression_System_Func_Apizr_Configuring_Request_IApizrRequestOptions__0___1_System_Threading_Tasks_Task___1______0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Execute a managed <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task returning a mapped result</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task&lt;TModelData&gt; ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, TModelData modelData, Context context = null, CancellationToken cancellationToken = default(CancellationToken), bool clearCache = false, Action&lt;Exception&gt; onException = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual async Task&lt;TModelData&gt; ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, TModelData modelData, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1377,34 +908,22 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, <span class="xref">System.Threading.CancellationToken</span>, TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">TModelData</span></td>
         <td><span class="parametername">modelData</span></td>
-        <td></td>
+        <td><p>The model data to map</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1434,23 +953,26 @@
     <tbody>
       <tr>
         <td><span class="parametername">TModelData</span></td>
-        <td></td>
+        <td><p>The model data type</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TApiData</span></td>
-        <td></td>
+        <td><p>The api data type</p>
+</td>
       </tr>
     </tbody>
   </table>
   
   
   <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__2_System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken__0___1_System_Threading_Tasks_Task_____0_Polly_Context_System_Threading_CancellationToken_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task}},``0,Polly.Context,System.Threading.CancellationToken,System.Action{System.Exception})">ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, TApiData, Task&gt;&gt;, TModelData, Context, CancellationToken, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__2_System_Linq_Expressions_Expression_System_Func_Apizr_Configuring_Request_IApizrRequestOptions__0___1_System_Threading_Tasks_Task_____0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,``1,System.Threading.Tasks.Task}},``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, TApiData, Task&gt;&gt;, TModelData, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Execute a managed <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, TApiData, Task&gt;&gt; executeApiMethod, TModelData modelData, Context context = null, CancellationToken cancellationToken = default(CancellationToken), Action&lt;Exception&gt; onException = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual async Task ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, TApiData, Task&gt;&gt; executeApiMethod, TModelData modelData, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1463,29 +985,22 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, <span class="xref">System.Threading.CancellationToken</span>, TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">TModelData</span></td>
         <td><span class="parametername">modelData</span></td>
-        <td></td>
+        <td><p>The model data to map</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1515,23 +1030,26 @@
     <tbody>
       <tr>
         <td><span class="parametername">TModelData</span></td>
-        <td></td>
+        <td><p>The model data type</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TApiData</span></td>
-        <td></td>
+        <td><p>The api data type</p>
+</td>
       </tr>
     </tbody>
   </table>
   
   
   <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__2_System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken__0_System_Threading_Tasks_Task___1____Polly_Context_System_Threading_CancellationToken_System_Boolean_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``1}}},Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Context, CancellationToken, Boolean, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__2_System_Linq_Expressions_Expression_System_Func_Apizr_Configuring_Request_IApizrRequestOptions__0_System_Threading_Tasks_Task___1____System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task{``1}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Execute a managed <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task returning a mapped result</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task&lt;TModelData&gt; ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, Context context = null, CancellationToken cancellationToken = default(CancellationToken), bool clearCache = false, Action&lt;Exception&gt; onException = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual async Task&lt;TModelData&gt; ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1544,29 +1062,16 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, <span class="xref">System.Threading.CancellationToken</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1596,256 +1101,26 @@
     <tbody>
       <tr>
         <td><span class="parametername">TModelData</span></td>
-        <td></td>
+        <td><p>The model data type</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TApiData</span></td>
-        <td></td>
+        <td><p>The api data type</p>
+</td>
       </tr>
     </tbody>
   </table>
   
   
   <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__2_System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken__0___1_System_Threading_Tasks_Task___1______0_System_Threading_CancellationToken_System_Boolean_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, CancellationToken, Boolean, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__4_System_Linq_Expressions_Expression_System_Func__0___2_System_Threading_Tasks_Task___1______3_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">ExecuteAsync&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Execute a managed <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task returning a mapped result</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task&lt;TModelData&gt; ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, TModelData modelData, CancellationToken cancellationToken = default(CancellationToken), bool clearCache = false, Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">System.Threading.CancellationToken</span>, TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">TModelData</span></td>
-        <td><span class="parametername">modelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TModelData&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__2_System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken__0___1_System_Threading_Tasks_Task_____0_System_Threading_CancellationToken_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,``1,System.Threading.Tasks.Task}},``0,System.Threading.CancellationToken,System.Action{System.Exception})">ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, TApiData, Task&gt;&gt;, TModelData, CancellationToken, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, TApiData, Task&gt;&gt; executeApiMethod, TModelData modelData, CancellationToken cancellationToken = default(CancellationToken), Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">System.Threading.CancellationToken</span>, TWebApi, TApiData, <span class="xref">System.Threading.Tasks.Task</span>&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">TModelData</span></td>
-        <td><span class="parametername">modelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__2_System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken__0_System_Threading_Tasks_Task___1____System_Threading_CancellationToken_System_Boolean_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``1}}},System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, CancellationToken, Boolean, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task&lt;TModelData&gt; ExecuteAsync&lt;TModelData, TApiData&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, Task&lt;TApiData&gt;&gt;&gt; executeApiMethod, CancellationToken cancellationToken = default(CancellationToken), bool clearCache = false, Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">System.Threading.CancellationToken</span>, TWebApi, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiData&gt;&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TModelData&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__4_System_Linq_Expressions_Expression_System_Func__0___2_System_Threading_Tasks_Task___1______3_System_Boolean_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Boolean,System.Action{System.Exception})">ExecuteAsync&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, Boolean, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task&lt;TModelResultData&gt; ExecuteAsync&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt; executeApiMethod, TModelRequestData modelRequestData, bool clearCache = false, Action&lt;Exception&gt; onException = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;TModelResultData&gt; ExecuteAsync&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt; executeApiMethod, TModelRequestData modelRequestData, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1860,22 +1135,20 @@
       <tr>
         <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TWebApi, TApiRequestData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiResultData&gt;&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">TModelRequestData</span></td>
         <td><span class="parametername">modelRequestData</span></td>
-        <td></td>
+        <td><p>The model request data to map</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1905,31 +1178,36 @@
     <tbody>
       <tr>
         <td><span class="parametername">TModelResultData</span></td>
-        <td></td>
+        <td><p>The mapped model result type</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TApiResultData</span></td>
-        <td></td>
+        <td><p>The api result type</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TApiRequestData</span></td>
-        <td></td>
+        <td><p>The mapped api request data type</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TModelRequestData</span></td>
-        <td></td>
+        <td><p>The model request data type</p>
+</td>
       </tr>
     </tbody>
   </table>
   
   
   <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__4_System_Linq_Expressions_Expression_System_Func_Polly_Context__0___2_System_Threading_Tasks_Task___1______3_Polly_Context_System_Boolean_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{Polly.Context,`0,``2,System.Threading.Tasks.Task{``1}}},``3,Polly.Context,System.Boolean,System.Action{System.Exception})">ExecuteAsync&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;Context, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, Context, Boolean, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__4_System_Linq_Expressions_Expression_System_Func_Apizr_Configuring_Request_IApizrRequestOptions__0___2_System_Threading_Tasks_Task___1______3_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">ExecuteAsync&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Execute a managed <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task returning a mapped result</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task&lt;TModelResultData&gt; ExecuteAsync&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;Context, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt; executeApiMethod, TModelRequestData modelRequestData, Context context = null, bool clearCache = false, Action&lt;Exception&gt; onException = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual async Task&lt;TModelResultData&gt; ExecuteAsync&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;IApizrRequestOptions, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt; executeApiMethod, TModelRequestData modelRequestData, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1942,29 +1220,22 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, TWebApi, TApiRequestData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiResultData&gt;&gt;&gt;</td>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptions.html">IApizrRequestOptions</a>, TWebApi, TApiRequestData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiResultData&gt;&gt;&gt;</td>
         <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
+        <td><p>The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">TModelRequestData</span></td>
         <td><span class="parametername">modelRequestData</span></td>
-        <td></td>
+        <td><p>The model request data to map</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Options provided to the request</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1994,202 +1265,23 @@
     <tbody>
       <tr>
         <td><span class="parametername">TModelResultData</span></td>
-        <td></td>
+        <td><p>The mapped model result type</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TApiResultData</span></td>
-        <td></td>
+        <td><p>The api result type</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TApiRequestData</span></td>
-        <td></td>
+        <td><p>The mapped api request data type</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TModelRequestData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__4_System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken__0___2_System_Threading_Tasks_Task___1______3_Polly_Context_System_Threading_CancellationToken_System_Boolean_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{Polly.Context,System.Threading.CancellationToken,`0,``2,System.Threading.Tasks.Task{``1}}},``3,Polly.Context,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">ExecuteAsync&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, Context, CancellationToken, Boolean, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task&lt;TModelResultData&gt; ExecuteAsync&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;Context, CancellationToken, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt; executeApiMethod, TModelRequestData modelRequestData, Context context = null, CancellationToken cancellationToken = default(CancellationToken), bool clearCache = false, Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">Polly.Context</span>, <span class="xref">System.Threading.CancellationToken</span>, TWebApi, TApiRequestData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiResultData&gt;&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">TModelRequestData</span></td>
-        <td><span class="parametername">modelRequestData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">Polly.Context</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TModelResultData&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelResultData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiResultData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiRequestData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TModelRequestData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Apizr_ApizrManager_1_ExecuteAsync_" data-uid="Apizr.ApizrManager`1.ExecuteAsync*"></a>
-  <h4 id="Apizr_ApizrManager_1_ExecuteAsync__4_System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken__0___2_System_Threading_Tasks_Task___1______3_System_Threading_CancellationToken_System_Boolean_System_Action_System_Exception__" data-uid="Apizr.ApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Threading.CancellationToken,System.Boolean,System.Action{System.Exception})">ExecuteAsync&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, CancellationToken, Boolean, Action&lt;Exception&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task&lt;TModelResultData&gt; ExecuteAsync&lt;TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(Expression&lt;Func&lt;CancellationToken, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt; executeApiMethod, TModelRequestData modelRequestData, CancellationToken cancellationToken = default(CancellationToken), bool clearCache = false, Action&lt;Exception&gt; onException = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">System.Threading.CancellationToken</span>, TWebApi, TApiRequestData, <span class="xref">System.Threading.Tasks.Task</span>&lt;TApiResultData&gt;&gt;&gt;</td>
-        <td><span class="parametername">executeApiMethod</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">TModelRequestData</span></td>
-        <td><span class="parametername">modelRequestData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">clearCache</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<span class="xref">System.Exception</span>&gt;</td>
-        <td><span class="parametername">onException</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TModelResultData&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelResultData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiResultData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiRequestData</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TModelRequestData</span></td>
-        <td></td>
+        <td><p>The model request data type</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2202,7 +1294,100 @@
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="Apizr.Extending.ObjectExtensions.html#Apizr_Extending_ObjectExtensions_ToString_System_Object_System_String_System_String_">ObjectExtensions.ToString(Object, String, String)</a>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__1_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task___System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;TWebApi, Task&gt;&gt;, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__3_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func___0___2_System_Threading_Tasks_Task_____1_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelData, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;TWebApi, TApiData, Task&gt;&gt;, TModelData, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__1_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken___0_System_Threading_Tasks_Task___System_Threading_CancellationToken_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;CancellationToken, TWebApi, Task&gt;&gt;, CancellationToken, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__1_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func_Polly_Context___0_System_Threading_Tasks_Task___Polly_Context_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, TWebApi, Task&gt;&gt;, Context, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__3_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken___0___2_System_Threading_Tasks_Task_____1_System_Threading_CancellationToken_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelData, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;CancellationToken, TWebApi, TApiData, Task&gt;&gt;, TModelData, CancellationToken, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__3_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func_Polly_Context___0___2_System_Threading_Tasks_Task_____1_Polly_Context_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelData, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, TWebApi, TApiData, Task&gt;&gt;, TModelData, Context, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__1_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken___0_System_Threading_Tasks_Task___Polly_Context_System_Threading_CancellationToken_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, CancellationToken, TWebApi, Task&gt;&gt;, Context, CancellationToken, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__3_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken___0___2_System_Threading_Tasks_Task_____1_Polly_Context_System_Threading_CancellationToken_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelData, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, CancellationToken, TWebApi, TApiData, Task&gt;&gt;, TModelData, Context, CancellationToken, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__2_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task___1____System_Boolean_">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__2_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task___1____System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__2_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task___1____System_Boolean_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Boolean, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__5_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func___0___3_System_Threading_Tasks_Task___2______4_System_Boolean_">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__5_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func___0___3_System_Threading_Tasks_Task___2______4_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__5_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func___0___3_System_Threading_Tasks_Task___2______4_System_Boolean_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, Boolean, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__3_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func___0___2_System_Threading_Tasks_Task___2______1_System_Boolean_">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelData, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__3_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func___0___2_System_Threading_Tasks_Task___2______1_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelData, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__3_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func___0___2_System_Threading_Tasks_Task___2______1_System_Boolean_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelData, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, Boolean, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__3_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task___2____System_Boolean_">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelData, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__3_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task___2____System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelData, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__3_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task___2____System_Boolean_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelData, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Boolean, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__2_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken___0_System_Threading_Tasks_Task___1____System_Threading_CancellationToken_System_Boolean_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;CancellationToken, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, CancellationToken, Boolean, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__2_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func_Polly_Context___0_System_Threading_Tasks_Task___1____Polly_Context_System_Boolean_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Context, Boolean, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__5_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken___0___3_System_Threading_Tasks_Task___2______4_System_Threading_CancellationToken_System_Boolean_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;CancellationToken, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, CancellationToken, Boolean, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__3_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken___0___2_System_Threading_Tasks_Task___2______1_System_Threading_CancellationToken_System_Boolean_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelData, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;CancellationToken, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, CancellationToken, Boolean, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__3_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func_System_Threading_CancellationToken___0_System_Threading_Tasks_Task___2____System_Threading_CancellationToken_System_Boolean_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelData, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;CancellationToken, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, CancellationToken, Boolean, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__5_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func_Polly_Context___0___3_System_Threading_Tasks_Task___2______4_Polly_Context_System_Boolean_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, Context, Boolean, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__3_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func_Polly_Context___0___2_System_Threading_Tasks_Task___2______1_Polly_Context_System_Boolean_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelData, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, Context, Boolean, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__3_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func_Polly_Context___0_System_Threading_Tasks_Task___2____Polly_Context_System_Boolean_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelData, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Context, Boolean, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__2_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken___0_System_Threading_Tasks_Task___1____Polly_Context_System_Threading_CancellationToken_System_Boolean_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, CancellationToken, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Context, CancellationToken, Boolean, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__5_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken___0___3_System_Threading_Tasks_Task___2______4_Polly_Context_System_Threading_CancellationToken_System_Boolean_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, CancellationToken, TWebApi, TApiRequestData, Task&lt;TApiResultData&gt;&gt;&gt;, TModelRequestData, Context, CancellationToken, Boolean, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__3_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken___0___2_System_Threading_Tasks_Task___2______1_Polly_Context_System_Threading_CancellationToken_System_Boolean_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelData, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, CancellationToken, TWebApi, TApiData, Task&lt;TApiData&gt;&gt;&gt;, TModelData, Context, CancellationToken, Boolean, Action&lt;Exception&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Apizr.Extending.ApizrManagerExtensions.html#Apizr_Extending_ApizrManagerExtensions_ExecuteAsync__3_Apizr_IApizrManager___0__System_Linq_Expressions_Expression_System_Func_Polly_Context_System_Threading_CancellationToken___0_System_Threading_Tasks_Task___2____Polly_Context_System_Threading_CancellationToken_System_Boolean_System_Action_System_Exception__">ApizrManagerExtensions.ExecuteAsync&lt;TWebApi, TModelData, TApiData&gt;(IApizrManager&lt;TWebApi&gt;, Expression&lt;Func&lt;Context, CancellationToken, TWebApi, Task&lt;TApiData&gt;&gt;&gt;, Context, CancellationToken, Boolean, Action&lt;Exception&gt;)</a>
   </div>
 </article>
           </div>

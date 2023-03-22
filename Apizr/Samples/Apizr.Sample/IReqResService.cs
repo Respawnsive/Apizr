@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Caching.Attributes;
+using Apizr.Configuring.Request;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Policing;
@@ -24,12 +25,15 @@ namespace Apizr.Sample
         Task<UserList> GetUsersAsync();
 
         [Get("/users")]
+        Task<UserList> GetUsersAsync([RequestOptions] IApizrRequestOptions options);
+
+        [Get("/users")]
         Task<UserList> GetUsersAsync([Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
 
         [Get("/users")]
         Task<UserList> GetUsersAsync([Priority] int priority);
 
-        [Get("/users"), Log(HttpMessageParts.RequestBody, HttpTracerMode.ErrorsAndExceptionsOnly, LogLevel.Information)]
+        [Get("/users")]//, Log(HttpMessageParts.RequestBody, HttpTracerMode.ErrorsAndExceptionsOnly, LogLevel.Information)]
         Task<UserList> GetUsersAsync([Priority] int priority, [Context] Context context);
 
         [Get("/users")]

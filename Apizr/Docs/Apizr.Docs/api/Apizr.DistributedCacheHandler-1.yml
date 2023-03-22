@@ -19,15 +19,18 @@ items:
   type: Class
   source:
     id: DistributedCacheHandler
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.Caching\DistributedCacheHandler.cs
-    startLine: 9
+    path: C:\Dev\Community\Apizr\Apizr\Src\Caching\Apizr.Extensions.Microsoft.Caching\DistributedCacheHandler.cs
+    startLine: 13
   assemblies:
   - Apizr.Extensions.Microsoft.Caching
   namespace: Apizr
+  summary: "\nDistributed cache handler implementation\n"
+  example: []
   syntax:
     content: 'public class DistributedCacheHandler<TCache> : ICacheHandler'
     typeParameters:
     - id: TCache
+      description: ''
     content.vb: >-
       Public Class DistributedCacheHandler(Of TCache)
           Implements ICacheHandler
@@ -43,8 +46,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
   nameWithType.vb: DistributedCacheHandler(Of TCache)
   modifiers.csharp:
   - public
@@ -67,8 +68,8 @@ items:
   type: Constructor
   source:
     id: .ctor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.Caching\DistributedCacheHandler.cs
-    startLine: 14
+    path: C:\Dev\Community\Apizr\Apizr\Src\Caching\Apizr.Extensions.Microsoft.Caching\DistributedCacheHandler.cs
+    startLine: 18
   assemblies:
   - Apizr.Extensions.Microsoft.Caching
   namespace: Apizr
@@ -100,24 +101,31 @@ items:
   type: Method
   source:
     id: SetAsync
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.Caching\DistributedCacheHandler.cs
-    startLine: 20
+    path: C:\Dev\Community\Apizr\Apizr\Src\Caching\Apizr.Extensions.Microsoft.Caching\DistributedCacheHandler.cs
+    startLine: 25
   assemblies:
   - Apizr.Extensions.Microsoft.Caching
   namespace: Apizr
+  summary: "\nMap Apizr cache saving method to your cache handler method\n"
+  example: []
   syntax:
     content: public async Task SetAsync(string key, object value, TimeSpan? lifeSpan = null, CancellationToken cancellationToken = default(CancellationToken))
     parameters:
     - id: key
       type: System.String
+      description: The key to cache at
     - id: value
       type: System.Object
+      description: The value to cache
     - id: lifeSpan
       type: System.Nullable{System.TimeSpan}
+      description: The optional life span
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: An optional cancellation token
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Public Function SetAsync(key As String, value As Object, lifeSpan As TimeSpan? = Nothing, cancellationToken As CancellationToken = Nothing) As Task
   overload: Apizr.DistributedCacheHandler`1.SetAsync*
   implements:
@@ -143,22 +151,27 @@ items:
   type: Method
   source:
     id: GetAsync
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.Caching\DistributedCacheHandler.cs
-    startLine: 40
+    path: C:\Dev\Community\Apizr\Apizr\Src\Caching\Apizr.Extensions.Microsoft.Caching\DistributedCacheHandler.cs
+    startLine: 46
   assemblies:
   - Apizr.Extensions.Microsoft.Caching
   namespace: Apizr
+  summary: "\nMap Apizr cache getting method to your cache handler method\n"
+  example: []
   syntax:
     content: public async Task<TData> GetAsync<TData>(string key, CancellationToken cancellationToken = default(CancellationToken))
     parameters:
     - id: key
       type: System.String
+      description: The key to get from
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: An optional cancellation token
     typeParameters:
     - id: TData
     return:
       type: System.Threading.Tasks.Task{{TData}}
+      description: ''
     content.vb: Public Function GetAsync(Of TData)(key As String, cancellationToken As CancellationToken = Nothing) As Task(Of TData)
   overload: Apizr.DistributedCacheHandler`1.GetAsync*
   implements:
@@ -184,20 +197,25 @@ items:
   type: Method
   source:
     id: RemoveAsync
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.Caching\DistributedCacheHandler.cs
-    startLine: 58
+    path: C:\Dev\Community\Apizr\Apizr\Src\Caching\Apizr.Extensions.Microsoft.Caching\DistributedCacheHandler.cs
+    startLine: 65
   assemblies:
   - Apizr.Extensions.Microsoft.Caching
   namespace: Apizr
+  summary: "\nMap Apizr cache removing method to your cache handler method\n"
+  example: []
   syntax:
     content: public async Task<bool> RemoveAsync(string key, CancellationToken cancellationToken = default(CancellationToken))
     parameters:
     - id: key
       type: System.String
+      description: The key to remove from
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: An optional cancellation token
     return:
       type: System.Threading.Tasks.Task{System.Boolean}
+      description: ''
     content.vb: Public Function RemoveAsync(key As String, cancellationToken As CancellationToken = Nothing) As Task(Of Boolean)
   overload: Apizr.DistributedCacheHandler`1.RemoveAsync*
   implements:
@@ -222,18 +240,22 @@ items:
   type: Method
   source:
     id: ClearAsync
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Extensions.Microsoft.Caching\DistributedCacheHandler.cs
-    startLine: 71
+    path: C:\Dev\Community\Apizr\Apizr\Src\Caching\Apizr.Extensions.Microsoft.Caching\DistributedCacheHandler.cs
+    startLine: 79
   assemblies:
   - Apizr.Extensions.Microsoft.Caching
   namespace: Apizr
+  summary: "\nMap Apizr cache clearing method to your cache handler method\n"
+  example: []
   syntax:
     content: public Task ClearAsync(CancellationToken cancellationToken = default(CancellationToken))
     parameters:
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: An optional cancellation token
     return:
       type: System.Threading.Tasks.Task
+      description: ''
     content.vb: Public Function ClearAsync(cancellationToken As CancellationToken = Nothing) As Task
   overload: Apizr.DistributedCacheHandler`1.ClearAsync*
   implements:
@@ -542,61 +564,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  parent: Apizr.Extending.ObjectExtensions
-  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  name: ToString(String, String)
-  nameWithType: ObjectExtensions.ToString(String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
@@ -608,87 +575,6 @@ references:
   name: Apizr.Caching
   nameWithType: Apizr.Caching
   fullName: Apizr.Caching
-- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  isExternal: true
-  name: ToString(Object, String, String)
-  nameWithType: ObjectExtensions.ToString(Object, String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.ObjectExtensions
-  commentId: T:Apizr.Extending.ObjectExtensions
-  parent: Apizr.Extending
-  name: ObjectExtensions
-  nameWithType: ObjectExtensions
-  fullName: Apizr.Extending.ObjectExtensions
-- uid: Apizr.Extending
-  commentId: N:Apizr.Extending
-  name: Apizr.Extending
-  nameWithType: Apizr.Extending
-  fullName: Apizr.Extending
 - uid: Apizr.DistributedCacheHandler`1.#ctor*
   commentId: Overload:Apizr.DistributedCacheHandler`1.#ctor
   name: DistributedCacheHandler

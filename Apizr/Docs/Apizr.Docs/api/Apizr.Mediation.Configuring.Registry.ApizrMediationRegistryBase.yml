@@ -34,11 +34,13 @@ items:
   type: Class
   source:
     id: ApizrMediationRegistryBase
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 9
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 12
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nRegistry options available for extended registrations with mediation\n"
+  example: []
   syntax:
     content: 'public abstract class ApizrMediationRegistryBase : IApizrMediationEnumerableRegistry, IEnumerable<KeyValuePair<Type, Func<IApizrMediatorBase>>>, IEnumerable'
     content.vb: >-
@@ -60,8 +62,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
   modifiers.csharp:
   - public
   - abstract
@@ -83,8 +83,8 @@ items:
   type: Field
   source:
     id: ConcurrentRegistry
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 11
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 14
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
@@ -112,8 +112,8 @@ items:
   type: Constructor
   source:
     id: .ctor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 13
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 16
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
@@ -138,15 +138,18 @@ items:
   type: Method
   source:
     id: GetEnumerator
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 18
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 25
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nGet factory enumerator\n"
+  example: []
   syntax:
     content: public IEnumerator<KeyValuePair<Type, Func<IApizrMediatorBase>>> GetEnumerator()
     return:
       type: System.Collections.Generic.IEnumerator{System.Collections.Generic.KeyValuePair{System.Type,System.Func{Apizr.Mediation.Requesting.Sending.IApizrMediatorBase}}}
+      description: ''
     content.vb: Public Function GetEnumerator As IEnumerator(Of KeyValuePair(Of Type, Func(Of IApizrMediatorBase)))
   overload: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetEnumerator*
   implements:
@@ -169,15 +172,18 @@ items:
   type: Method
   source:
     id: System.Collections.IEnumerable.GetEnumerator
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 20
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 31
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nGet factory enumerator\n"
+  example: []
   syntax:
     content: IEnumerator IEnumerable.GetEnumerator()
     return:
       type: System.Collections.IEnumerator
+      description: ''
     content.vb: Function System.Collections.IEnumerable.GetEnumerator As IEnumerator Implements IEnumerable.GetEnumerator
   overload: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.System#Collections#IEnumerable#GetEnumerator*
   implements:
@@ -197,19 +203,23 @@ items:
   type: Method
   source:
     id: GetCrudMediatorFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 22
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 36
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nGet a Crud mediator instance for an entity type\n"
+  example: []
   syntax:
     content: >-
       public IApizrCrudMediator<T, int, IEnumerable<T>, IDictionary<string, object>> GetCrudMediatorFor<T>()
           where T : class
     typeParameters:
     - id: T
+      description: The managed entity type
     return:
       type: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{{T},System.Int32,System.Collections.Generic.IEnumerable{{T}},System.Collections.Generic.IDictionary{System.String,System.Object}}
+      description: ''
     content.vb: Public Function GetCrudMediatorFor(Of T As Class) As IApizrCrudMediator(Of T, Integer, IEnumerable(Of T), IDictionary(Of String, Object))
   overload: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor*
   implements:
@@ -234,20 +244,25 @@ items:
   type: Method
   source:
     id: GetCrudMediatorFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 25
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 40
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nGet a Crud mediator instance for an entity type with a specific key type\n"
+  example: []
   syntax:
     content: >-
       public IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> GetCrudMediatorFor<T, TKey>()
           where T : class
     typeParameters:
     - id: T
+      description: The managed entity type
     - id: TKey
+      description: The entity&apos;s key type
     return:
       type: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{{T},{TKey},System.Collections.Generic.IEnumerable{{T}},System.Collections.Generic.IDictionary{System.String,System.Object}}
+      description: ''
     content.vb: Public Function GetCrudMediatorFor(Of T As Class, TKey) As IApizrCrudMediator(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object))
   overload: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor*
   implements:
@@ -272,21 +287,27 @@ items:
   type: Method
   source:
     id: GetCrudMediatorFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 28
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 44
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nGet a Crud mediator instance for an entity type with a specific key type and ReadAll result type\n"
+  example: []
   syntax:
     content: >-
       public IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<string, object>> GetCrudMediatorFor<T, TKey, TReadAllResult>()
           where T : class
     typeParameters:
     - id: T
+      description: The managed entity type
     - id: TKey
+      description: The entity&apos;s key type
     - id: TReadAllResult
+      description: The ReadAll request result type
     return:
       type: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{{T},{TKey},{TReadAllResult},System.Collections.Generic.IDictionary{System.String,System.Object}}
+      description: ''
     content.vb: Public Function GetCrudMediatorFor(Of T As Class, TKey, TReadAllResult) As IApizrCrudMediator(Of T, TKey, TReadAllResult, IDictionary(Of String, Object))
   overload: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor*
   implements:
@@ -311,22 +332,29 @@ items:
   type: Method
   source:
     id: GetCrudMediatorFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 31
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 48
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nGet a Crud mediator instance for an entity type with a specific key type, ReadAll result type and ReadAll params type\n"
+  example: []
   syntax:
     content: >-
       public IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams> GetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>()
           where T : class
     typeParameters:
     - id: T
+      description: The managed entity type
     - id: TKey
+      description: The entity&apos;s key type
     - id: TReadAllResult
+      description: The ReadAll request result type
     - id: TReadAllParams
+      description: The ReadAll request params type
     return:
       type: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{{T},{TKey},{TReadAllResult},{TReadAllParams}}
+      description: ''
     content.vb: Public Function GetCrudMediatorFor(Of T As Class, TKey, TReadAllResult, TReadAllParams) As IApizrCrudMediator(Of T, TKey, TReadAllResult, TReadAllParams)
   overload: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor*
   implements:
@@ -351,17 +379,21 @@ items:
   type: Method
   source:
     id: GetMediatorFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 36
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 54
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nGet an api mediator instance\n"
+  example: []
   syntax:
     content: public IApizrMediator<TWebApi> GetMediatorFor<TWebApi>()
     typeParameters:
     - id: TWebApi
+      description: The managed api type
     return:
       type: Apizr.Mediation.Requesting.Sending.IApizrMediator{{TWebApi}}
+      description: ''
     content.vb: Public Function GetMediatorFor(Of TWebApi) As IApizrMediator(Of TWebApi)
   overload: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetMediatorFor*
   implements:
@@ -386,11 +418,13 @@ items:
   type: Method
   source:
     id: TryGetCrudMediatorFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 39
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 60
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nTry to get a Crud mediator instance for an entity type\n"
+  example: []
   syntax:
     content: >-
       public bool TryGetCrudMediatorFor<T>(out IApizrCrudMediator<T, int, IEnumerable<T>, IDictionary<string, object>> mediator)
@@ -400,8 +434,10 @@ items:
       type: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{{T},System.Int32,System.Collections.Generic.IEnumerable{{T}},System.Collections.Generic.IDictionary{System.String,System.Object}}
     typeParameters:
     - id: T
+      description: The managed entity type
     return:
       type: System.Boolean
+      description: ''
     content.vb: Public Function TryGetCrudMediatorFor(Of T As Class)(ByRef mediator As IApizrCrudMediator(Of T, Integer, IEnumerable(Of T), IDictionary(Of String, Object))) As Boolean
   overload: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor*
   implements:
@@ -426,11 +462,13 @@ items:
   type: Method
   source:
     id: TryGetCrudMediatorFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 42
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 64
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nTry to get a Crud mediator instance for an entity type with a specific key type\n"
+  example: []
   syntax:
     content: >-
       public bool TryGetCrudMediatorFor<T, TKey>(out IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>> mediator)
@@ -440,9 +478,12 @@ items:
       type: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{{T},{TKey},System.Collections.Generic.IEnumerable{{T}},System.Collections.Generic.IDictionary{System.String,System.Object}}
     typeParameters:
     - id: T
+      description: The managed entity type
     - id: TKey
+      description: The entity&apos;s key type
     return:
       type: System.Boolean
+      description: ''
     content.vb: Public Function TryGetCrudMediatorFor(Of T As Class, TKey)(ByRef mediator As IApizrCrudMediator(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object))) As Boolean
   overload: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor*
   implements:
@@ -467,11 +508,13 @@ items:
   type: Method
   source:
     id: TryGetCrudMediatorFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 45
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 68
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nTry to get a Crud mediator instance for an entity type with a specific key type and ReadAll result type\n"
+  example: []
   syntax:
     content: >-
       public bool TryGetCrudMediatorFor<T, TKey, TReadAllResult>(out IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<string, object>> mediator)
@@ -481,10 +524,14 @@ items:
       type: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{{T},{TKey},{TReadAllResult},System.Collections.Generic.IDictionary{System.String,System.Object}}
     typeParameters:
     - id: T
+      description: The managed entity type
     - id: TKey
+      description: The entity&apos;s key type
     - id: TReadAllResult
+      description: The ReadAll request result type
     return:
       type: System.Boolean
+      description: ''
     content.vb: Public Function TryGetCrudMediatorFor(Of T As Class, TKey, TReadAllResult)(ByRef mediator As IApizrCrudMediator(Of T, TKey, TReadAllResult, IDictionary(Of String, Object))) As Boolean
   overload: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor*
   implements:
@@ -509,11 +556,13 @@ items:
   type: Method
   source:
     id: TryGetCrudMediatorFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 49
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 73
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nTry to get a Crud mediator instance for an entity type with a specific key type, ReadAll result type and ReadAll params type\n"
+  example: []
   syntax:
     content: >-
       public bool TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams> mediator)
@@ -523,11 +572,16 @@ items:
       type: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{{T},{TKey},{TReadAllResult},{TReadAllParams}}
     typeParameters:
     - id: T
+      description: The managed entity type
     - id: TKey
+      description: The entity&apos;s key type
     - id: TReadAllResult
+      description: The ReadAll request result type
     - id: TReadAllParams
+      description: The ReadAll request params type
     return:
       type: System.Boolean
+      description: ''
     content.vb: Public Function TryGetCrudMediatorFor(Of T As Class, TKey, TReadAllResult, TReadAllParams)(ByRef mediator As IApizrCrudMediator(Of T, TKey, TReadAllResult, TReadAllParams)) As Boolean
   overload: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor*
   implements:
@@ -552,11 +606,13 @@ items:
   type: Method
   source:
     id: TryGetMediatorFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 62
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 87
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nTry to get an api mediator instance\n"
+  example: []
   syntax:
     content: public bool TryGetMediatorFor<TWebApi>(out IApizrMediator<TWebApi> mediator)
     parameters:
@@ -564,8 +620,10 @@ items:
       type: Apizr.Mediation.Requesting.Sending.IApizrMediator{{TWebApi}}
     typeParameters:
     - id: TWebApi
+      description: The managed api type
     return:
       type: System.Boolean
+      description: ''
     content.vb: Public Function TryGetMediatorFor(Of TWebApi)(ByRef mediator As IApizrMediator(Of TWebApi)) As Boolean
   overload: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor*
   implements:
@@ -590,11 +648,13 @@ items:
   type: Property
   source:
     id: Count
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 74
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 100
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nMediators count\n"
+  example: []
   syntax:
     content: public int Count { get; }
     parameters: []
@@ -623,19 +683,23 @@ items:
   type: Method
   source:
     id: ContainsCrudMediatorFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 76
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 103
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nCheck if registry contains a mediator for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> entity type\n"
+  example: []
   syntax:
     content: >-
       public bool ContainsCrudMediatorFor<T>()
           where T : class
     typeParameters:
     - id: T
+      description: The entity type to manage
     return:
       type: System.Boolean
+      description: ''
     content.vb: Public Function ContainsCrudMediatorFor(Of T As Class) As Boolean
   overload: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor*
   implements:
@@ -660,20 +724,25 @@ items:
   type: Method
   source:
     id: ContainsCrudMediatorFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 79
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 107
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nCheck if registry contains a mediator for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> entity type with <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> key type\n"
+  example: []
   syntax:
     content: >-
       public bool ContainsCrudMediatorFor<T, TKey>()
           where T : class
     typeParameters:
     - id: T
+      description: The entity type to manage
     - id: TKey
+      description: The entity key type
     return:
       type: System.Boolean
+      description: ''
     content.vb: Public Function ContainsCrudMediatorFor(Of T As Class, TKey) As Boolean
   overload: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor*
   implements:
@@ -698,21 +767,27 @@ items:
   type: Method
   source:
     id: ContainsCrudMediatorFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 82
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 111
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nCheck if registry contains a mediator for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> entity type with <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> key type and <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TReadAllResult</code> ReadAll result type\n"
+  example: []
   syntax:
     content: >-
       public bool ContainsCrudMediatorFor<T, TKey, TReadAllResult>()
           where T : class
     typeParameters:
     - id: T
+      description: The entity type to manage
     - id: TKey
+      description: The entity key type
     - id: TReadAllResult
+      description: The ReadAll result type
     return:
       type: System.Boolean
+      description: ''
     content.vb: Public Function ContainsCrudMediatorFor(Of T As Class, TKey, TReadAllResult) As Boolean
   overload: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor*
   implements:
@@ -737,22 +812,29 @@ items:
   type: Method
   source:
     id: ContainsCrudMediatorFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 85
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 115
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nCheck if registry contains a mediator for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> entity type with <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> key type,\n<code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TReadAllResult</code> ReadAll result type and <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TReadAllParams</code> ReadAll params type\n"
+  example: []
   syntax:
     content: >-
       public bool ContainsCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>()
           where T : class
     typeParameters:
     - id: T
+      description: The entity type to manage
     - id: TKey
+      description: The entity key type
     - id: TReadAllResult
+      description: The ReadAll result type
     - id: TReadAllParams
+      description: The ReadAll params type
     return:
       type: System.Boolean
+      description: ''
     content.vb: Public Function ContainsCrudMediatorFor(Of T As Class, TKey, TReadAllResult, TReadAllParams) As Boolean
   overload: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor*
   implements:
@@ -777,17 +859,21 @@ items:
   type: Method
   source:
     id: ContainsMediatorFor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
-    startLine: 88
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.MediatR\Mediation\Configuring\Registry\ApizrMediationRegistryBase.cs
+    startLine: 119
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
+  summary: "\nCheck if registry contains a mediator for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code> api type\n"
+  example: []
   syntax:
     content: public bool ContainsMediatorFor<TWebApi>()
     typeParameters:
     - id: TWebApi
+      description: The api type
     return:
       type: System.Boolean
+      description: ''
     content.vb: Public Function ContainsMediatorFor(Of TWebApi) As Boolean
   overload: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsMediatorFor*
   implements:
@@ -1206,61 +1292,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  parent: Apizr.Extending.ObjectExtensions
-  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  name: ToString(String, String)
-  nameWithType: ObjectExtensions.ToString(String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
@@ -1318,87 +1349,6 @@ references:
   name: System.Collections
   nameWithType: System.Collections
   fullName: System.Collections
-- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  isExternal: true
-  name: ToString(Object, String, String)
-  nameWithType: ObjectExtensions.ToString(Object, String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.ObjectExtensions
-  commentId: T:Apizr.Extending.ObjectExtensions
-  parent: Apizr.Extending
-  name: ObjectExtensions
-  nameWithType: ObjectExtensions
-  fullName: Apizr.Extending.ObjectExtensions
-- uid: Apizr.Extending
-  commentId: N:Apizr.Extending
-  name: Apizr.Extending
-  nameWithType: Apizr.Extending
-  fullName: Apizr.Extending
 - uid: System.Collections.Generic.IDictionary{System.Type,System.Func{Apizr.Mediation.Requesting.Sending.IApizrMediatorBase}}
   commentId: T:System.Collections.Generic.IDictionary{System.Type,System.Func{Apizr.Mediation.Requesting.Sending.IApizrMediatorBase}}
   parent: System.Collections.Generic

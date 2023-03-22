@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ApizrOptions
    | Apizr ">
-    <meta name="generator" content="docfx 2.59.0.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -83,7 +83,8 @@
   
   <h1 id="Apizr_Configuring_ApizrOptions" data-uid="Apizr.Configuring.ApizrOptions" class="text-break">Class ApizrOptions
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Options available for static registrations</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
@@ -92,7 +93,7 @@
     <div class="level2"><a class="xref" href="Apizr.Configuring.ApizrOptionsBase.html">ApizrOptionsBase</a></div>
     <div class="level3"><span class="xref">ApizrOptions</span></div>
   </div>
-  <div classs="implements">
+  <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Apizr.Configuring.IApizrOptions.html">IApizrOptions</a></div>
     <div><a class="xref" href="Apizr.Configuring.IApizrOptionsBase.html">IApizrOptionsBase</a></div>
@@ -118,7 +119,13 @@
       <a class="xref" href="Apizr.Configuring.ApizrOptionsBase.html#Apizr_Configuring_ApizrOptionsBase_RefitSettings">ApizrOptionsBase.RefitSettings</a>
     </div>
     <div>
+      <a class="xref" href="Apizr.Configuring.Shared.ApizrSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrSharedOptionsBase_BaseUri">ApizrSharedOptionsBase.BaseUri</a>
+    </div>
+    <div>
       <a class="xref" href="Apizr.Configuring.Shared.ApizrSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrSharedOptionsBase_BaseAddress">ApizrSharedOptionsBase.BaseAddress</a>
+    </div>
+    <div>
+      <a class="xref" href="Apizr.Configuring.Shared.ApizrSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrSharedOptionsBase_BasePath">ApizrSharedOptionsBase.BasePath</a>
     </div>
     <div>
       <a class="xref" href="Apizr.Configuring.Shared.ApizrSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrSharedOptionsBase_HttpTracerMode">ApizrSharedOptionsBase.HttpTracerMode</a>
@@ -163,7 +170,8 @@
   
   <a id="Apizr_Configuring_ApizrOptions__ctor_" data-uid="Apizr.Configuring.ApizrOptions.#ctor*"></a>
   <h4 id="Apizr_Configuring_ApizrOptions__ctor_Apizr_Configuring_Common_IApizrCommonOptions_Apizr_Configuring_Proper_IApizrProperOptions_" data-uid="Apizr.Configuring.ApizrOptions.#ctor(Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Proper.IApizrProperOptions)">ApizrOptions(IApizrCommonOptions, IApizrProperOptions)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The options constructor</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -182,12 +190,14 @@
       <tr>
         <td><a class="xref" href="Apizr.Configuring.Common.IApizrCommonOptions.html">IApizrCommonOptions</a></td>
         <td><span class="parametername">commonOptions</span></td>
-        <td></td>
+        <td><p>The common options</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="Apizr.Configuring.Proper.IApizrProperOptions.html">IApizrProperOptions</a></td>
         <td><span class="parametername">properOptions</span></td>
-        <td></td>
+        <td><p>The proper options</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -197,11 +207,64 @@
   
   <a id="Apizr_Configuring_ApizrOptions_BaseAddressFactory_" data-uid="Apizr.Configuring.ApizrOptions.BaseAddressFactory*"></a>
   <h4 id="Apizr_Configuring_ApizrOptions_BaseAddressFactory" data-uid="Apizr.Configuring.ApizrOptions.BaseAddressFactory">BaseAddressFactory</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Base address factory</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Func&lt;Uri&gt; BaseAddressFactory { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Func&lt;string&gt; BaseAddressFactory { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Configuring_ApizrOptions_BasePathFactory_" data-uid="Apizr.Configuring.ApizrOptions.BasePathFactory*"></a>
+  <h4 id="Apizr_Configuring_ApizrOptions_BasePathFactory" data-uid="Apizr.Configuring.ApizrOptions.BasePathFactory">BasePathFactory</h4>
+  <div class="markdown level1 summary"><p>Base path factory</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Func&lt;string&gt; BasePathFactory { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Configuring_ApizrOptions_BaseUriFactory_" data-uid="Apizr.Configuring.ApizrOptions.BaseUriFactory*"></a>
+  <h4 id="Apizr_Configuring_ApizrOptions_BaseUriFactory" data-uid="Apizr.Configuring.ApizrOptions.BaseUriFactory">BaseUriFactory</h4>
+  <div class="markdown level1 summary"><p>Base uri factory</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Func&lt;Uri&gt; BaseUriFactory { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -222,7 +285,8 @@
   
   <a id="Apizr_Configuring_ApizrOptions_CacheHandlerFactory_" data-uid="Apizr.Configuring.ApizrOptions.CacheHandlerFactory*"></a>
   <h4 id="Apizr_Configuring_ApizrOptions_CacheHandlerFactory" data-uid="Apizr.Configuring.ApizrOptions.CacheHandlerFactory">CacheHandlerFactory</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Cache handler factory</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -247,7 +311,8 @@
   
   <a id="Apizr_Configuring_ApizrOptions_ConnectivityHandlerFactory_" data-uid="Apizr.Configuring.ApizrOptions.ConnectivityHandlerFactory*"></a>
   <h4 id="Apizr_Configuring_ApizrOptions_ConnectivityHandlerFactory" data-uid="Apizr.Configuring.ApizrOptions.ConnectivityHandlerFactory">ConnectivityHandlerFactory</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Connectivity handler factory</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -272,7 +337,8 @@
   
   <a id="Apizr_Configuring_ApizrOptions_DelegatingHandlersFactories_" data-uid="Apizr.Configuring.ApizrOptions.DelegatingHandlersFactories*"></a>
   <h4 id="Apizr_Configuring_ApizrOptions_DelegatingHandlersFactories" data-uid="Apizr.Configuring.ApizrOptions.DelegatingHandlersFactories">DelegatingHandlersFactories</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Delegating handlers factories</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -295,9 +361,36 @@
   </table>
   
   
+  <a id="Apizr_Configuring_ApizrOptions_HttpClientFactory_" data-uid="Apizr.Configuring.ApizrOptions.HttpClientFactory*"></a>
+  <h4 id="Apizr_Configuring_ApizrOptions_HttpClientFactory" data-uid="Apizr.Configuring.ApizrOptions.HttpClientFactory">HttpClientFactory</h4>
+  <div class="markdown level1 summary"><p>HttpClient factory</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Func&lt;HttpMessageHandler, Uri, HttpClient&gt; HttpClientFactory { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.Net.Http.HttpMessageHandler</span>, <span class="xref">System.Uri</span>, <span class="xref">System.Net.Http.HttpClient</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="Apizr_Configuring_ApizrOptions_HttpClientHandlerFactory_" data-uid="Apizr.Configuring.ApizrOptions.HttpClientHandlerFactory*"></a>
   <h4 id="Apizr_Configuring_ApizrOptions_HttpClientHandlerFactory" data-uid="Apizr.Configuring.ApizrOptions.HttpClientHandlerFactory">HttpClientHandlerFactory</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>HttpClientHandler factory</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -322,7 +415,8 @@
   
   <a id="Apizr_Configuring_ApizrOptions_HttpTracerModeFactory_" data-uid="Apizr.Configuring.ApizrOptions.HttpTracerModeFactory*"></a>
   <h4 id="Apizr_Configuring_ApizrOptions_HttpTracerModeFactory" data-uid="Apizr.Configuring.ApizrOptions.HttpTracerModeFactory">HttpTracerModeFactory</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Http traffic tracing mode factory</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -347,7 +441,8 @@
   
   <a id="Apizr_Configuring_ApizrOptions_LoggerFactory_" data-uid="Apizr.Configuring.ApizrOptions.LoggerFactory*"></a>
   <h4 id="Apizr_Configuring_ApizrOptions_LoggerFactory" data-uid="Apizr.Configuring.ApizrOptions.LoggerFactory">LoggerFactory</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The Logger factory</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -372,7 +467,8 @@
   
   <a id="Apizr_Configuring_ApizrOptions_LoggerFactoryFactory_" data-uid="Apizr.Configuring.ApizrOptions.LoggerFactoryFactory*"></a>
   <h4 id="Apizr_Configuring_ApizrOptions_LoggerFactoryFactory" data-uid="Apizr.Configuring.ApizrOptions.LoggerFactoryFactory">LoggerFactoryFactory</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The LoggerFactory factory (I know, I know...)</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -397,7 +493,8 @@
   
   <a id="Apizr_Configuring_ApizrOptions_LogLevelsFactory_" data-uid="Apizr.Configuring.ApizrOptions.LogLevelsFactory*"></a>
   <h4 id="Apizr_Configuring_ApizrOptions_LogLevelsFactory" data-uid="Apizr.Configuring.ApizrOptions.LogLevelsFactory">LogLevelsFactory</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Log levels factory</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -422,7 +519,8 @@
   
   <a id="Apizr_Configuring_ApizrOptions_MappingHandlerFactory_" data-uid="Apizr.Configuring.ApizrOptions.MappingHandlerFactory*"></a>
   <h4 id="Apizr_Configuring_ApizrOptions_MappingHandlerFactory" data-uid="Apizr.Configuring.ApizrOptions.MappingHandlerFactory">MappingHandlerFactory</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Mapping handler factory</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -447,7 +545,8 @@
   
   <a id="Apizr_Configuring_ApizrOptions_PolicyRegistryFactory_" data-uid="Apizr.Configuring.ApizrOptions.PolicyRegistryFactory*"></a>
   <h4 id="Apizr_Configuring_ApizrOptions_PolicyRegistryFactory" data-uid="Apizr.Configuring.ApizrOptions.PolicyRegistryFactory">PolicyRegistryFactory</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Policy registry factory</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -472,7 +571,8 @@
   
   <a id="Apizr_Configuring_ApizrOptions_RefitSettingsFactory_" data-uid="Apizr.Configuring.ApizrOptions.RefitSettingsFactory*"></a>
   <h4 id="Apizr_Configuring_ApizrOptions_RefitSettingsFactory" data-uid="Apizr.Configuring.ApizrOptions.RefitSettingsFactory">RefitSettingsFactory</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Refit settings factory</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -497,7 +597,8 @@
   
   <a id="Apizr_Configuring_ApizrOptions_TrafficVerbosityFactory_" data-uid="Apizr.Configuring.ApizrOptions.TrafficVerbosityFactory*"></a>
   <h4 id="Apizr_Configuring_ApizrOptions_TrafficVerbosityFactory" data-uid="Apizr.Configuring.ApizrOptions.TrafficVerbosityFactory">TrafficVerbosityFactory</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Http traffic tracing verbosity factory</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -542,10 +643,6 @@
   </div>
   <div>
       <a class="xref" href="Apizr.Configuring.Shared.IApizrSharedOptionsBase.html">IApizrSharedOptionsBase</a>
-  </div>
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="Apizr.Extending.ObjectExtensions.html#Apizr_Extending_ObjectExtensions_ToString_System_Object_System_String_System_String_">ObjectExtensions.ToString(Object, String, String)</a>
   </div>
 </article>
           </div>

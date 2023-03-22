@@ -8,7 +8,7 @@
     <title>Configuring logging | Apizr </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Configuring logging | Apizr ">
-    <meta name="generator" content="docfx 2.59.0.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -110,8 +110,7 @@
 </ul>
 </li>
 </ul>
-<p>You can configure logging either by attribute decoration or by fluent configuration.</p>
-<p>In both cases, logLevels is a parameter array. It lets you provide from 0 to 3 different levels, as Apizr needs to get corresponding log level to each internal severity:</p>
+<p>Note that parameter logLevels is an array. It lets you provide from 0 to 3 different levels, as Apizr needs to get corresponding log level to each internal severity:</p>
 <ul>
 <li>Low: logs any internal and normal execution step</li>
 <li>Medium: logs all missconfigured things, like asking for cache without providing any cache provider</li>
@@ -127,17 +126,26 @@
 <li>if you provide more than 3 log levels, the lowest goes to Low, the highest to High and it will take the middle one for Medium</li>
 <li>if you provide a <code>None</code> at some point, it will disable logging for corresponding severity</li>
 </ul>
+<p>You can configure logging at:</p>
+<ul>
+<li>Design time by attribute decoration</li>
+<li>Register time by fluent configuration</li>
+<li>Request time by fluent configuration.</li>
+</ul>
 <div class="tabGroup" id="tabgroup_FITRDUMniV">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_FITRDUMniV_tabid-attribute" role="tab" aria-controls="tabpanel_FITRDUMniV_tabid-attribute" data-tab="tabid-attribute" tabindex="0" aria-selected="true">Attribute</a>
+<a href="#tabpanel_FITRDUMniV_tabid-designing" role="tab" aria-controls="tabpanel_FITRDUMniV_tabid-designing" data-tab="tabid-designing" tabindex="0" aria-selected="true">Designing</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_FITRDUMniV_tabid-fluent" role="tab" aria-controls="tabpanel_FITRDUMniV_tabid-fluent" data-tab="tabid-fluent" tabindex="-1">Fluent</a>
+<a href="#tabpanel_FITRDUMniV_tabid-registering" role="tab" aria-controls="tabpanel_FITRDUMniV_tabid-registering" data-tab="tabid-registering" tabindex="-1">Registering</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_FITRDUMniV_tabid-requesting" role="tab" aria-controls="tabpanel_FITRDUMniV_tabid-requesting" data-tab="tabid-requesting" tabindex="-1">Requesting</a>
 </li>
 </ul>
-<section id="tabpanel_FITRDUMniV_tabid-attribute" role="tabpanel" data-tab="tabid-attribute">
-<p>You can set logging configuration thanks to <code>Log</code> attribute.
+<section id="tabpanel_FITRDUMniV_tabid-designing" role="tabpanel" data-tab="tabid-designing">
+<p>You can set logging configuration at design time, decorating with the provided <code>Log</code> attribute.
 Configuring logging with attribute allows you to use assembly scanning auto registration feature.</p>
 <p>The <code>Log</code> attribute could decorate:</p>
 <ul>
@@ -151,10 +159,14 @@ and/or a specific to an api interface method.</p>
 <pre><code class="lang-csharp">[assembly:Log]
 namespace Apizr.Sample
 {
-    [WebApi(&quot;https://reqres.in/&quot;)]
+    [WebApi(&quot;https://reqres.in/&quot;), Log(HttpMessageParts.RequestAll, 
+        HttpTracerMode.ErrorsAndExceptionsOnly, 
+        LogLevel.Information)]
     public interface IReqResService
     {
-        [Get(&quot;/api/users&quot;)]
+        [Get(&quot;/api/users&quot;), Log(HttpMessageParts.RequestBody, 
+            HttpTracerMode.ExceptionsOnly, 
+            LogLevel.Warning)]
         Task&lt;UserList&gt; GetUsersAsync();
 
         [Get(&quot;/api/users/{userId}&quot;)]
@@ -167,24 +179,51 @@ namespace Apizr.Sample
 </code></pre><p>In this example, we decided to apply the default logging configuration ([Low] <code>Trace</code>, [Medium] <code>Information</code> and [High] <code>Critical</code>) to all assembly api interfaces/entities. 
 But you can adjust logging configuration thanks to attribute parameters.</p>
 </section>
-<section id="tabpanel_FITRDUMniV_tabid-fluent" role="tabpanel" data-tab="tabid-fluent" aria-hidden="true" hidden="hidden">
-<p>Configuring the logging fluently allows you to set it dynamically (e.g. based on settings)</p>
+<section id="tabpanel_FITRDUMniV_tabid-registering" role="tabpanel" data-tab="tabid-registering" aria-hidden="true" hidden="hidden">
+<p>Configuring the logging fluently at register time allows you to set it dynamically (e.g. based on settings)</p>
 <p>You can set it thanks to this option:</p>
 <pre><code class="lang-csharp">// direct configuration
 options =&gt; options.WithLogging(HttpTracerMode.Everything, HttpMessageParts.All, LogLevel.Information)
 
-// OR static factory configuration
+// OR static individual factory configuration
 options =&gt; options.WithLogging(() =&gt; Settings.HttpTracerMode, () =&gt; Settings.TrafficVerbosity, () =&gt; Settings.LogLevels)
 
-// OR extended factory configuration
+// OR static single factory configuration
+options =&gt; options.WithLogging(() =&gt; (Settings.HttpTracerMode, Settings.TrafficVerbosity, Settings.LogLevels))
+
+// OR extended individual factory configuration
 options =&gt; options.WithLogging(
     serviceProvider =&gt; serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().HttpTracerMode,
     serviceProvider =&gt; serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().TrafficVerbosity
     serviceProvider =&gt; serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().LogLevels)
+
+// OR extended single factory configuration
+options =&gt; options.WithLogging(servieProvider =&gt;
+    {
+        var settings = servieProvider.GetRequiredService&lt;IYourSettingsService&gt;();
+        return (settings.HttpTracerMode, settings.TrafficVerbosity, settings.LogLevels);
+    });
 </code></pre><p>All logging fluent options are available with and without using registry. 
 It means that you can share logging configuration, setting it at registry level and/or set some specific one at api level.</p>
 </section>
+<section id="tabpanel_FITRDUMniV_tabid-requesting" role="tabpanel" data-tab="tabid-requesting" aria-hidden="true" hidden="hidden">
+<p>Configuring the logging fluently at request time allows you to set it at the very end, just before sending the request.</p>
+<p>You can set it thanks to this option:</p>
+<pre><code class="lang-csharp">// direct configuration
+options =&gt; options.WithLogging(HttpTracerMode.Everything, HttpMessageParts.All, LogLevel.Information)
+</code></pre></section>
 </div>
+<p>Note that you can mix design, register and request time logging configurations.
+In case of mixed configurations, the internal duplicate strategy will be to take the closest one to the request.</p>
+<p>Logging configuration duplicate strategy order:</p>
+<ul>
+<li>take fluent request configuration first if defined (request options)</li>
+<li>otherwise the request attribute decoration one (method)</li>
+<li>otherwise the fluent proper resgistration one (api proper options)</li>
+<li>otherwise the api attribute decoration one (interface)</li>
+<li>otherwise the fluent common resgistration one (registry common options)</li>
+<li>otherwise the global attribute decoration one (assembly)</li>
+</ul>
 </article>
           </div>
           

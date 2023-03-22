@@ -1,15 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Akavache;
+using Apizr.Configuring.Registry;
 using Apizr.Extending;
+using Apizr.Extending.Configuring.Registry;
 using Apizr.Logging;
 using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Cruding.Sending;
+using Apizr.Mediation.Extending;
 using Apizr.Mediation.Requesting;
 using Apizr.Mediation.Requesting.Sending;
 using Apizr.Optional.Cruding;
@@ -18,11 +24,14 @@ using Apizr.Optional.Extending;
 using Apizr.Optional.Requesting;
 using Apizr.Optional.Requesting.Sending;
 using Apizr.Policing;
+using Apizr.Progressing;
 using Apizr.Requesting;
 using Apizr.Sample.Console.Models;
 using Apizr.Sample.Models;
+using Apizr.Transferring.Requesting;
 using AutoMapper;
 using Fusillade;
+using HttpTracer;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -47,6 +56,9 @@ namespace Apizr.Sample.Console
         /*
          * Next are all the ways to play with Apizr
          */
+        
+        private static IHttpBinService _httpBinService;
+        private static IApizrManager<IHttpBinService> _httpBinManager;
 
         // With an api interface
         private static IApizrManager<IReqResService> _reqResManager;
@@ -56,6 +68,9 @@ namespace Apizr.Sample.Console
 
         // With MediatR
         private static IMediator _mediator;
+
+        // With apizr mediator
+        private static IApizrMediator _apizrMediator;
 
         // With a mediator dedicated to an api interface (getting things shorter)
         private static IApizrMediator<IReqResService> _reqResMediator;
@@ -86,6 +101,7 @@ namespace Apizr.Sample.Console
             System.Console.WriteLine("########################################################################");
             System.Console.WriteLine("");
             System.Console.WriteLine("Choose one of available configurations:");
+            System.Console.WriteLine("0 - Static instance with file transfer");
             System.Console.WriteLine("1 - Static instance with cache (MonkeyCache)");
             System.Console.WriteLine("2 - Microsoft extensions with cache (Akavache)");
             System.Console.WriteLine("3 - Microsoft extensions with cache and crud mediation (Akavache + MediatR)");
@@ -108,8 +124,88 @@ namespace Apizr.Sample.Console
                     }, LoggedPolicies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
                 }
             };
+            if (configChoice == 0)
+            {
+                var stopwatch = new Stopwatch();
+                stopwatch.Start();
+                try
+                {
+                    var fileSuffix = "small";
+                    var fileExtension = "pdf";
+                    var fileType = "application/pdf";
 
-            if (configChoice == 1)
+                    //_httpBinService = RestService.For<IHttpBinService>("https://httpbin.org");
+                    //await using var stream = GetTestFileStream("Files/Test_large.pdf");
+                    //var result =
+                    //    await _httpBinService.UploadStreamPart(new StreamPart(stream, "test_small-streampart.pdf", "application/pdf"));
+                    //var test = await result.Content.ReadAsStringAsync();
+
+                    var lazyLoggerFactory = new Lazy<ILoggerFactory>(() => LoggerFactory.Create(logging =>
+                    {
+                        logging.AddConsole();
+                        logging.AddDebug();
+                        logging.SetMinimumLevel(LogLevel.Trace);
+                    }));
+
+                    //_httpBinManager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
+
+                    //var fileManager = ApizrBuilder.Current.CreateTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr").WithLoggerFactory(() => lazyLoggerFactory.Value));
+                    //var fileInfo = await fileManager.DownloadAsync(new FileInfo("test10Mb.db"), new Dictionary<string, object> { { "key1", "value1" } }, options => options.WithDynamicPath("files")).ConfigureAwait(false);
+                    var fileManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferSampleApi>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
+                    var fileInfo = await fileManager.DownloadAsync(new FileInfo("test10Mb.db")).ConfigureAwait(false);
+
+
+
+                    //var host = Host.CreateDefaultBuilder()
+                    //    .ConfigureLogging(logging =>
+                    //    {
+                    //        logging.AddConsole();
+                    //        logging.AddConsole();
+                    //        logging.SetMinimumLevel(LogLevel.Trace);
+                    //    })
+                    //    .ConfigureServices(services =>
+                    //    {
+                    //        services.AddPolicyRegistry(policyRegistry);
+                    //        services.AddApizr(registry => registry
+                    //            .AddManagerFor<IReqResService>()
+                    //            .AddManagerFor<IHttpBinService>()//);
+                    //        //.AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>());
+                    //        .AddUploadManager(uploadRegistry => uploadRegistry.AddFor<IUploadApi>()));
+
+                    //        // This is just to let you know what's registered from/for Apizr and ready to use
+                    //        foreach (var service in services.Where(d =>
+                    //                     (d.ServiceType != null) ||
+                    //                     (d.ImplementationType != null)))
+                    //        {
+                    //            System.Console.WriteLine(
+                    //                $"Registered {service.Lifetime} service: {service.ServiceType?.GetFriendlyName()} - {service.ImplementationType?.GetFriendlyName()}");
+                    //        }
+                    //    }).Build();
+
+
+                    //var scope = host.Services.CreateScope();
+
+                    //_httpBinManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IHttpBinService>>();
+                    //var testRegistry = scope.ServiceProvider.GetRequiredService<IApizrExtendedRegistry>();
+
+                    //await using var stream = GetTestFileStream($"Files/Test_{fileSuffix}.{fileExtension}");
+                    //var streamPart = new StreamPart(stream, $"test_{fileSuffix}-streampart.{fileExtension}", $"{fileType}");
+
+                    //var result =
+                    //    await _httpBinManager.ExecuteAsync(api => api.UploadStreamPart(streamPart));
+                    //var test = await result.Content.ReadAsStringAsync();
+                }
+                catch (Exception e)
+                {
+                }
+                finally
+                {
+                    System.Console.WriteLine(stopwatch.Elapsed);
+                    stopwatch.Stop();
+                }
+
+            }
+            else if (configChoice == 1)
             {
                 Barrel.ApplicationId = nameof(Program);
 
@@ -132,13 +228,13 @@ namespace Apizr.Sample.Console
                 //    .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current)));
                 ////.WithLogging());
 
-                var apizrRegistry = ApizrBuilder.CreateRegistry(
+                var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
                     registry => registry
                         .AddManagerFor<IReqResService>()//options => options.WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.ResponseAll, LogLevel.Trace, LogLevel.Information, LogLevel.Critical))
                         .AddCrudManagerFor<User, int, PagedResult<User>>(options => options.WithBaseAddress("https://reqres.in/api/users")),
 
                     config => config//.WithConnectivityHandler(() => false)
-                        .WithPriorityManagement()
+                        .WithPriority()
                         .WithPolicyRegistry(policyRegistry)
                         .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
                         .WithLoggerFactory(() => lazyLoggerFactory.Value));
@@ -179,7 +275,7 @@ namespace Apizr.Sample.Console
                                         .WithLogging(), typeof(User)),
 
                                 config => config
-                                    .WithPriorityManagement()
+                                    .WithPriority()
                                     //.WithInMemoryCacheHandler()
                                     //.WithCacheHandler<AkavacheCacheHandler>()
                                     .WithAkavacheCacheHandler()
@@ -313,6 +409,7 @@ namespace Apizr.Sample.Console
                 else
                 {
                     _mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
+                    _apizrMediator = scope.ServiceProvider.GetRequiredService<IApizrMediator>();
                     _reqResMediator = scope.ServiceProvider.GetRequiredService<IApizrMediator<IReqResService>>();
                     _userMediator = scope.ServiceProvider.GetRequiredService<IApizrCrudMediator<User, int, PagedResult<User>, IDictionary<string, object>>>();
 
@@ -340,10 +437,11 @@ namespace Apizr.Sample.Console
                 {
                     //var test = new ReadAllUsersParams("value1", 2);
 
-                    var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
+                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
                     //var userList = await _reqResManager.ExecuteAsync((ctx, api) => api.GetUsersAsync((int)Priority.UserInitiated, ctx), new Context{{"key1", "value1"}});
+                    //var userList = await _reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync((int)Priority.UserInitiated, opt.Context), options => options.WithContext(new Context { { "key1", "value1" } }));
                     //var userList = await _reqResManager.ExecuteAsync((ct, api) => api.GetUsersAsync(ct), CancellationToken.None);
-                    //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(true));
+                    var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(parameters1));
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(parameters2));
                     //var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync(true, parameters1));
@@ -361,9 +459,11 @@ namespace Apizr.Sample.Console
                 {
                     //var userList = await _mediator.Send(new ExecuteRequest<IReqResService, UserList>(api => api.GetUsersAsync()));
                     //var userList = await _reqResMediator.SendFor(api => api.GetUsersAsync());
-                    //pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>(), CancellationToken.None);
-                    //pagedUsers = await _userMediator.SendReadAllQuery(parameters1, priority, cancellationToken);
-                    pagedUsers = await _userMediator.SendReadAllQuery();
+                    //pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>(), CancellationToken.None);parameters1, priority, cancellationToken
+                    pagedUsers = await _userMediator.SendReadAllQuery(parameters1, priority);
+                    //pagedUsers = await _userMediator.SendReadAllQuery();
+
+                    //var test = await _apizrMediator.SendFor<IReqResService, UserList>(api => api.GetUsersAsync(), onException: exception => {});
                 }
                 else
                 {
@@ -439,6 +539,13 @@ namespace Apizr.Sample.Console
                             ? await _reqResManager.ExecuteAsync((ct, api) => api.GetUserAsync(userChoice, (int)Priority.UserInitiated, ct),
                                 CancellationToken.None)
                             : await _mediator.Send(new ReadQuery<UserDetails>(userChoice), CancellationToken.None);
+                        
+                        //var test = await _reqResManager.ExecuteAsync<MinUser, User>(
+                        //    (options, api) => api.CreateUser(users.First(), options.CancellationToken),
+                        //    options => options.WithCacheCleared(true).WithContext(new Context()).WithCancellationToken(CancellationToken.None));
+
+                        //var test = await _reqResManager.ExecuteAsync<MinUser, User>(
+                        //    (ctx, ct, api) => api.CreateUser(users.First(), ct), new Context(), CancellationToken.None, true);
 
                         userInfos = new UserInfos
                         {
@@ -455,19 +562,19 @@ namespace Apizr.Sample.Console
                     else
                     {
                         // Classic auto mapped request and result
-                        var minUser = new MinUser { Name = "John" };
-                        var createdMinUser = await _mediator.Send(
-                            new ExecuteUnitRequest<IReqResService, MinUser, User>((ct, api, mappedUser) =>
-                                api.CreateUser(mappedUser, ct), minUser), CancellationToken.None);
+                        //var minUser = new MinUser { Name = "John" };
+                        //var createdMinUser = await _mediator.Send(
+                        //    new ExecuteUnitRequest<IReqResService, MinUser, User>((options, api, mappedUser) =>
+                        //        api.CreateUser(mappedUser, options.CancellationToken), minUser), CancellationToken.None);
 
                         // Classic Auto mapped result only
                         //userInfos = await _mediator.Send(new ExecuteRequest<IReqResService, UserInfos, UserDetails>((ct, api) => api.GetUserAsync(userChoice, ct)), CancellationToken.None);
 
                         // Classic dedicated mediator with auto mapped result
-                        //userInfos = await _reqResMediator.SendFor<UserInfos, UserDetails>((ct, api) => api.GetUserAsync(userChoice, ct), CancellationToken.None);
+                        userInfos = await _reqResMediator.SendFor<IReqResService, UserInfos, UserDetails>((ct, api) => api.GetUserAsync(userChoice, 80, ct), CancellationToken.None);
 
                         // Auto mapped crud
-                        userInfos = await _mediator.Send(new ReadQuery<UserInfos>(userChoice), CancellationToken.None);
+                        //userInfos = await _mediator.Send(new ReadQuery<UserInfos>(userChoice), CancellationToken.None);
 
                         // Crud dedicated mediator with auto mapped optional result
                         var optionalUserInfos = await _userOptionalMediator.SendReadOptionalQuery<UserInfos>(userChoice);
@@ -526,6 +633,37 @@ namespace Apizr.Sample.Console
                     System.Console.WriteLine($"{nameof(userInfos.Text)}: {userInfos.Text}");
                 }
             }
+        }
+
+        internal static Stream GetTestFileStream(string relativeFilePath)
+        {
+            const char namespaceSeparator = '.';
+
+            // get calling assembly
+            var assembly = Assembly.GetCallingAssembly();
+
+            // compute resource name suffix
+            var relativeName = "." + relativeFilePath
+                .Replace('\\', namespaceSeparator)
+                .Replace('/', namespaceSeparator)
+                .Replace(' ', '_');
+
+            // get resource stream
+            var fullName = assembly
+                .GetManifestResourceNames()
+                .FirstOrDefault(name => name.EndsWith(relativeName, StringComparison.InvariantCulture));
+            if (fullName == null)
+            {
+                throw new Exception($"Unable to find resource for path \"{relativeFilePath}\". Resource with name ending on \"{relativeName}\" was not found in assembly.");
+            }
+
+            var stream = assembly.GetManifestResourceStream(fullName);
+            if (stream == null)
+            {
+                throw new Exception($"Unable to find resource for path \"{relativeFilePath}\". Resource named \"{fullName}\" was not found in assembly.");
+            }
+
+            return stream;
         }
     }
 }

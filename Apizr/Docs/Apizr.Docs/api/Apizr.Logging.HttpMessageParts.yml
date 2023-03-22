@@ -24,11 +24,13 @@ items:
   type: Enum
   source:
     id: HttpMessageParts
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\HttpMessageParts.cs
-    startLine: 6
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\HttpMessageParts.cs
+    startLine: 9
   assemblies:
   - Apizr
   namespace: Apizr.Logging
+  summary: "\nHttp message parts to log\n"
+  example: []
   syntax:
     content: >-
       [Flags]
@@ -39,7 +41,8 @@ items:
 
       Public Enum HttpMessageParts
   extensionMethods:
-  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
+  - Apizr.Logging.HttpMessageParts.Apizr.Logging.HttpMessagePartsExtensions.HasRequestFlags
+  - Apizr.Logging.HttpMessageParts.Apizr.Logging.HttpMessagePartsExtensions.HasResponseFlags
   attributes:
   - type: System.FlagsAttribute
     ctor: System.FlagsAttribute.#ctor
@@ -63,11 +66,13 @@ items:
   type: Field
   source:
     id: Unspecified
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\HttpMessageParts.cs
-    startLine: 9
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\HttpMessageParts.cs
+    startLine: 16
   assemblies:
   - Apizr
   namespace: Apizr.Logging
+  summary: "\nUnspecified\n"
+  example: []
   syntax:
     content: Unspecified = 0
     return:
@@ -91,11 +96,13 @@ items:
   type: Field
   source:
     id: None
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\HttpMessageParts.cs
-    startLine: 10
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\HttpMessageParts.cs
+    startLine: 21
   assemblies:
   - Apizr
   namespace: Apizr.Logging
+  summary: "\nLogs no parts\n"
+  example: []
   syntax:
     content: None = 1
     return:
@@ -119,11 +126,13 @@ items:
   type: Field
   source:
     id: RequestBody
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\HttpMessageParts.cs
-    startLine: 12
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\HttpMessageParts.cs
+    startLine: 26
   assemblies:
   - Apizr
   namespace: Apizr.Logging
+  summary: "\nLogs request body only\n"
+  example: []
   syntax:
     content: RequestBody = 2
     return:
@@ -147,11 +156,13 @@ items:
   type: Field
   source:
     id: RequestHeaders
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\HttpMessageParts.cs
-    startLine: 13
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\HttpMessageParts.cs
+    startLine: 31
   assemblies:
   - Apizr
   namespace: Apizr.Logging
+  summary: "\nLogs request headers only\n"
+  example: []
   syntax:
     content: RequestHeaders = 4
     return:
@@ -175,11 +186,13 @@ items:
   type: Field
   source:
     id: RequestCookies
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\HttpMessageParts.cs
-    startLine: 14
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\HttpMessageParts.cs
+    startLine: 36
   assemblies:
   - Apizr
   namespace: Apizr.Logging
+  summary: "\nLogs request cookies only\n"
+  example: []
   syntax:
     content: RequestCookies = 32
     return:
@@ -203,11 +216,13 @@ items:
   type: Field
   source:
     id: RequestAll
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\HttpMessageParts.cs
-    startLine: 16
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\HttpMessageParts.cs
+    startLine: 41
   assemblies:
   - Apizr
   namespace: Apizr.Logging
+  summary: "\nLogs request body, headers and cookies only\n"
+  example: []
   syntax:
     content: RequestAll = 38
     return:
@@ -231,11 +246,13 @@ items:
   type: Field
   source:
     id: ResponseBody
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\HttpMessageParts.cs
-    startLine: 18
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\HttpMessageParts.cs
+    startLine: 46
   assemblies:
   - Apizr
   namespace: Apizr.Logging
+  summary: "\nLogs response body only\n"
+  example: []
   syntax:
     content: ResponseBody = 8
     return:
@@ -259,11 +276,13 @@ items:
   type: Field
   source:
     id: ResponseHeaders
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\HttpMessageParts.cs
-    startLine: 19
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\HttpMessageParts.cs
+    startLine: 51
   assemblies:
   - Apizr
   namespace: Apizr.Logging
+  summary: "\nLogs response headers only\n"
+  example: []
   syntax:
     content: ResponseHeaders = 16
     return:
@@ -287,11 +306,13 @@ items:
   type: Field
   source:
     id: ResponseAll
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\HttpMessageParts.cs
-    startLine: 21
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\HttpMessageParts.cs
+    startLine: 56
   assemblies:
   - Apizr
   namespace: Apizr.Logging
+  summary: "\nLogs response body and headers only\n"
+  example: []
   syntax:
     content: ResponseAll = 24
     return:
@@ -315,11 +336,13 @@ items:
   type: Field
   source:
     id: All
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Logging\HttpMessageParts.cs
-    startLine: 23
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Logging\HttpMessageParts.cs
+    startLine: 61
   assemblies:
   - Apizr
   namespace: Apizr.Logging
+  summary: "\nLogs all parts\n"
+  example: []
   syntax:
     content: All = 62
     return:
@@ -336,142 +359,140 @@ references:
   name: Apizr.Logging
   nameWithType: Apizr.Logging
   fullName: Apizr.Logging
-- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  parent: Apizr.Extending.ObjectExtensions
-  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  name: ToString(String, String)
-  nameWithType: ObjectExtensions.ToString(String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
+- uid: Apizr.Logging.HttpMessageParts.Apizr.Logging.HttpMessagePartsExtensions.HasRequestFlags
+  commentId: M:Apizr.Logging.HttpMessagePartsExtensions.HasRequestFlags(Apizr.Logging.HttpMessageParts)
+  parent: Apizr.Logging.HttpMessagePartsExtensions
+  definition: Apizr.Logging.HttpMessagePartsExtensions.HasRequestFlags(Apizr.Logging.HttpMessageParts)
+  name: HasRequestFlags()
+  nameWithType: HttpMessagePartsExtensions.HasRequestFlags()
+  fullName: Apizr.Logging.HttpMessagePartsExtensions.HasRequestFlags()
   spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
+  - uid: Apizr.Logging.HttpMessagePartsExtensions.HasRequestFlags
+    name: HasRequestFlags
+    nameWithType: HttpMessagePartsExtensions.HasRequestFlags
+    fullName: Apizr.Logging.HttpMessagePartsExtensions.HasRequestFlags
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
+  - uid: Apizr.Logging.HttpMessagePartsExtensions.HasRequestFlags
+    name: HasRequestFlags
+    nameWithType: HttpMessagePartsExtensions.HasRequestFlags
+    fullName: Apizr.Logging.HttpMessagePartsExtensions.HasRequestFlags
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  isExternal: true
-  name: ToString(Object, String, String)
-  nameWithType: ObjectExtensions.ToString(Object, String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
+- uid: Apizr.Logging.HttpMessageParts.Apizr.Logging.HttpMessagePartsExtensions.HasResponseFlags
+  commentId: M:Apizr.Logging.HttpMessagePartsExtensions.HasResponseFlags(Apizr.Logging.HttpMessageParts)
+  parent: Apizr.Logging.HttpMessagePartsExtensions
+  definition: Apizr.Logging.HttpMessagePartsExtensions.HasResponseFlags(Apizr.Logging.HttpMessageParts)
+  name: HasResponseFlags()
+  nameWithType: HttpMessagePartsExtensions.HasResponseFlags()
+  fullName: Apizr.Logging.HttpMessagePartsExtensions.HasResponseFlags()
   spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
+  - uid: Apizr.Logging.HttpMessagePartsExtensions.HasResponseFlags
+    name: HasResponseFlags
+    nameWithType: HttpMessagePartsExtensions.HasResponseFlags
+    fullName: Apizr.Logging.HttpMessagePartsExtensions.HasResponseFlags
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
+  - uid: Apizr.Logging.HttpMessagePartsExtensions.HasResponseFlags
+    name: HasResponseFlags
+    nameWithType: HttpMessagePartsExtensions.HasResponseFlags
+    fullName: Apizr.Logging.HttpMessagePartsExtensions.HasResponseFlags
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Extending.ObjectExtensions
-  commentId: T:Apizr.Extending.ObjectExtensions
-  parent: Apizr.Extending
-  name: ObjectExtensions
-  nameWithType: ObjectExtensions
-  fullName: Apizr.Extending.ObjectExtensions
-- uid: Apizr.Extending
-  commentId: N:Apizr.Extending
-  name: Apizr.Extending
-  nameWithType: Apizr.Extending
-  fullName: Apizr.Extending
+- uid: Apizr.Logging.HttpMessagePartsExtensions.HasRequestFlags(Apizr.Logging.HttpMessageParts)
+  commentId: M:Apizr.Logging.HttpMessagePartsExtensions.HasRequestFlags(Apizr.Logging.HttpMessageParts)
+  name: HasRequestFlags(HttpMessageParts)
+  nameWithType: HttpMessagePartsExtensions.HasRequestFlags(HttpMessageParts)
+  fullName: Apizr.Logging.HttpMessagePartsExtensions.HasRequestFlags(Apizr.Logging.HttpMessageParts)
+  spec.csharp:
+  - uid: Apizr.Logging.HttpMessagePartsExtensions.HasRequestFlags(Apizr.Logging.HttpMessageParts)
+    name: HasRequestFlags
+    nameWithType: HttpMessagePartsExtensions.HasRequestFlags
+    fullName: Apizr.Logging.HttpMessagePartsExtensions.HasRequestFlags
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    nameWithType: HttpMessageParts
+    fullName: Apizr.Logging.HttpMessageParts
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Logging.HttpMessagePartsExtensions.HasRequestFlags(Apizr.Logging.HttpMessageParts)
+    name: HasRequestFlags
+    nameWithType: HttpMessagePartsExtensions.HasRequestFlags
+    fullName: Apizr.Logging.HttpMessagePartsExtensions.HasRequestFlags
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    nameWithType: HttpMessageParts
+    fullName: Apizr.Logging.HttpMessageParts
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Logging.HttpMessagePartsExtensions
+  commentId: T:Apizr.Logging.HttpMessagePartsExtensions
+  parent: Apizr.Logging
+  name: HttpMessagePartsExtensions
+  nameWithType: HttpMessagePartsExtensions
+  fullName: Apizr.Logging.HttpMessagePartsExtensions
+- uid: Apizr.Logging.HttpMessagePartsExtensions.HasResponseFlags(Apizr.Logging.HttpMessageParts)
+  commentId: M:Apizr.Logging.HttpMessagePartsExtensions.HasResponseFlags(Apizr.Logging.HttpMessageParts)
+  name: HasResponseFlags(HttpMessageParts)
+  nameWithType: HttpMessagePartsExtensions.HasResponseFlags(HttpMessageParts)
+  fullName: Apizr.Logging.HttpMessagePartsExtensions.HasResponseFlags(Apizr.Logging.HttpMessageParts)
+  spec.csharp:
+  - uid: Apizr.Logging.HttpMessagePartsExtensions.HasResponseFlags(Apizr.Logging.HttpMessageParts)
+    name: HasResponseFlags
+    nameWithType: HttpMessagePartsExtensions.HasResponseFlags
+    fullName: Apizr.Logging.HttpMessagePartsExtensions.HasResponseFlags
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    nameWithType: HttpMessageParts
+    fullName: Apizr.Logging.HttpMessageParts
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Logging.HttpMessagePartsExtensions.HasResponseFlags(Apizr.Logging.HttpMessageParts)
+    name: HasResponseFlags
+    nameWithType: HttpMessagePartsExtensions.HasResponseFlags
+    fullName: Apizr.Logging.HttpMessagePartsExtensions.HasResponseFlags
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    nameWithType: HttpMessageParts
+    fullName: Apizr.Logging.HttpMessageParts
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Logging.HttpMessageParts
   commentId: T:Apizr.Logging.HttpMessageParts
   parent: Apizr.Logging

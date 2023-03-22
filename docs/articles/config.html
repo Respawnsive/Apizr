@@ -8,7 +8,7 @@
     <title>Configuring | Apizr </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Configuring | Apizr ">
-    <meta name="generator" content="docfx 2.59.0.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -84,10 +84,11 @@
 All fluent configuration flavors offer a contextualized options builder, depending on what you&#39;re asking and where.</p>
 <p>The option types:</p>
 <ul>
-<li>Proper: options available at api configuration level only and applied to it exclusively (e.g. BaseAddress obviously)</li>
-<li>Common: options available at global configuration level only and applied to all registered apis (e.g. RefitSettings, PolicyRegistry)</li>
+<li>Proper: options available at api configuration level only and applied to it exclusively (e.g. BaseAddress obviously, ...)</li>
+<li>Common: options available at global configuration level only and applied to all registered apis (e.g. RefitSettings, PolicyRegistry, ...)</li>
+<li>Request: options available at request time, when actually sending a request (e.g. Context, CancellationToken, ...)</li>
 </ul>
-<p>There&#39;re also some Shared options available at both api (proper) and global (common) configuration level (e.g. LogLevel)</p>
+<p>There&#39;re also some Shared options available at different configuration level (e.g. LogLevel)</p>
 <p>Here is what using it with a registry, the extended way, could look like:</p>
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {

@@ -8,7 +8,7 @@
     <title>Configuring data caching | Apizr </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Configuring data caching | Apizr ">
-    <meta name="generator" content="docfx 2.59.0.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -89,7 +89,7 @@ Of course, you can implement your own integration, but here we&#39;ll talk about
 <tr>
 <th>Project</th>
 <th>Current</th>
-<th>V-Next</th>
+<th>Upcoming</th>
 </tr>
 </thead>
 <tbody>
@@ -131,7 +131,7 @@ Of course, you can implement your own integration, but here we&#39;ll talk about
         Task&lt;UserList&gt; GetUsersAsync();
 
         [Get(&quot;/users/{userId}&quot;), Cache(CacheMode.GetOrFetch, &quot;1.00:00:00&quot;)]
-        Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId, CancellationToken cancellationToken);
+        Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId);
     }
 }
 </code></pre><p>You’ll find also cache attributes dedicated to CRUD apis like <code>CacheRead</code> and <code>CacheReadAll</code>, so you could define cache settings at any level (all Assembly apis, interface apis or specific CRUD method).</p>
@@ -345,7 +345,7 @@ Remeber that cache will be cleared when it will expire, thanks to what you set w
 Anyway, sometime we need to clear it explicitly, like in a Refresh scenario.</p>
 <p>Here are different ways to clear cache:</p>
 <pre><code class="lang-csharp">// Clear on call to force fetch and update cache
-var userList = await _reqResManager.ExecuteAsync(api =&gt; api.GetUsersAsync(), true);
+var userList = await _reqResManager.ExecuteAsync(api =&gt; api.GetUsersAsync(), options =&gt; options.WithCacheClearing(true));
 
 // Clear a specific request cache
 var succeed = await _reqResManager.ClearCacheAsync(api =&gt; api.GetUsersAsync());

@@ -5,7 +5,7 @@ items:
   id: ApizrOptionalMediationRegistry
   parent: Apizr.Optional.Configuring.Registry
   children:
-  - Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistry.AddOrUpdate(System.Type,System.Type)
+  - Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistry.AddOrUpdateManager(System.Type)
   langs:
   - csharp
   - vb
@@ -15,11 +15,13 @@ items:
   type: Class
   source:
     id: ApizrOptionalMediationRegistry
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Configuring\Registry\ApizrOptionalMediationRegistry.cs
-    startLine: 7
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\Optional\Configuring\Registry\ApizrOptionalMediationRegistry.cs
+    startLine: 10
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Configuring.Registry
+  summary: "\nRegistry options available for extended registrations with optional mediation\n"
+  example: []
   syntax:
     content: 'public class ApizrOptionalMediationRegistry : ApizrOptionalMediationRegistryBase, IApizrOptionalMediationConcurrentRegistry, IApizrOptionalMediationRegistry, IApizrOptionalMediationEnumerableRegistry, IEnumerable<KeyValuePair<Type, Func<IApizrOptionalMediatorBase>>>, IEnumerable, IApizrExtendedConcurrentRegistryBase'
     content.vb: >-
@@ -63,43 +65,40 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
-- uid: Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistry.AddOrUpdate(System.Type,System.Type)
-  commentId: M:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistry.AddOrUpdate(System.Type,System.Type)
-  id: AddOrUpdate(System.Type,System.Type)
+- uid: Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistry.AddOrUpdateManager(System.Type)
+  commentId: M:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistry.AddOrUpdateManager(System.Type)
+  id: AddOrUpdateManager(System.Type)
   parent: Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistry
   langs:
   - csharp
   - vb
-  name: AddOrUpdate(Type, Type)
-  nameWithType: ApizrOptionalMediationRegistry.AddOrUpdate(Type, Type)
-  fullName: Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistry.AddOrUpdate(System.Type, System.Type)
+  name: AddOrUpdateManager(Type)
+  nameWithType: ApizrOptionalMediationRegistry.AddOrUpdateManager(Type)
+  fullName: Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistry.AddOrUpdateManager(System.Type)
   type: Method
   source:
-    id: AddOrUpdate
-    path: C:\Dev\Community\Apizr\Apizr\Apizr.Integrations.Optional\Optional\Configuring\Registry\ApizrOptionalMediationRegistry.cs
-    startLine: 28
+    id: AddOrUpdateManager
+    path: C:\Dev\Community\Apizr\Apizr\Src\Handling\Apizr.Integrations.Optional\Optional\Configuring\Registry\ApizrOptionalMediationRegistry.cs
+    startLine: 32
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Configuring.Registry
+  example: []
   syntax:
-    content: public void AddOrUpdate(Type webApiType, Type serviceType)
+    content: public void AddOrUpdateManager(Type managerType)
     parameters:
-    - id: webApiType
+    - id: managerType
       type: System.Type
-    - id: serviceType
-      type: System.Type
-    content.vb: Public Sub AddOrUpdate(webApiType As Type, serviceType As Type)
-  overload: Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistry.AddOrUpdate*
+    content.vb: Public Sub AddOrUpdateManager(managerType As Type)
+  overload: Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistry.AddOrUpdateManager*
   implements:
-  - Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdate(System.Type,System.Type)
+  - Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager(System.Type)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1523,61 +1522,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  parent: Apizr.Extending.ObjectExtensions
-  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  name: ToString(String, String)
-  nameWithType: ObjectExtensions.ToString(String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
@@ -2241,115 +2185,26 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  isExternal: true
-  name: ToString(Object, String, String)
-  nameWithType: ObjectExtensions.ToString(Object, String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.ObjectExtensions
-  commentId: T:Apizr.Extending.ObjectExtensions
-  parent: Apizr.Extending
-  name: ObjectExtensions
-  nameWithType: ObjectExtensions
-  fullName: Apizr.Extending.ObjectExtensions
-- uid: Apizr.Extending
-  commentId: N:Apizr.Extending
-  name: Apizr.Extending
-  nameWithType: Apizr.Extending
-  fullName: Apizr.Extending
-- uid: Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistry.AddOrUpdate*
-  commentId: Overload:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistry.AddOrUpdate
-  name: AddOrUpdate
-  nameWithType: ApizrOptionalMediationRegistry.AddOrUpdate
-  fullName: Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistry.AddOrUpdate
-- uid: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdate(System.Type,System.Type)
-  commentId: M:Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdate(System.Type,System.Type)
+- uid: Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistry.AddOrUpdateManager*
+  commentId: Overload:Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistry.AddOrUpdateManager
+  name: AddOrUpdateManager
+  nameWithType: ApizrOptionalMediationRegistry.AddOrUpdateManager
+  fullName: Apizr.Optional.Configuring.Registry.ApizrOptionalMediationRegistry.AddOrUpdateManager
+- uid: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager(System.Type)
+  commentId: M:Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager(System.Type)
   parent: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase
   isExternal: true
-  name: AddOrUpdate(Type, Type)
-  nameWithType: IApizrExtendedConcurrentRegistryBase.AddOrUpdate(Type, Type)
-  fullName: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdate(System.Type, System.Type)
+  name: AddOrUpdateManager(Type)
+  nameWithType: IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager(Type)
+  fullName: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager(System.Type)
   spec.csharp:
-  - uid: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdate(System.Type,System.Type)
-    name: AddOrUpdate
-    nameWithType: IApizrExtendedConcurrentRegistryBase.AddOrUpdate
-    fullName: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdate
+  - uid: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager(System.Type)
+    name: AddOrUpdateManager
+    nameWithType: IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager
+    fullName: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
   - uid: System.Type
     name: Type
     nameWithType: Type
@@ -2359,21 +2214,13 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdate(System.Type,System.Type)
-    name: AddOrUpdate
-    nameWithType: IApizrExtendedConcurrentRegistryBase.AddOrUpdate
-    fullName: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdate
+  - uid: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager(System.Type)
+    name: AddOrUpdateManager
+    nameWithType: IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager
+    fullName: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
   - uid: System.Type
     name: Type
     nameWithType: Type

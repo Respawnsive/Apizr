@@ -5,7 +5,7 @@ items:
   id: AuthenticationHandlerBase
   parent: Apizr.Authenticating
   children:
-  - Apizr.Authenticating.AuthenticationHandlerBase.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase)
+  - Apizr.Authenticating.AuthenticationHandlerBase.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase)
   - Apizr.Authenticating.AuthenticationHandlerBase.CloneHttpRequestMessageAsync(System.Net.Http.HttpRequestMessage)
   - Apizr.Authenticating.AuthenticationHandlerBase.GetToken
   - Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
@@ -20,11 +20,13 @@ items:
   type: Class
   source:
     id: AuthenticationHandlerBase
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Authenticating\AuthenticationHandlerBase.cs
-    startLine: 13
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Authenticating\AuthenticationHandlerBase.cs
+    startLine: 17
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
+  summary: "\nThe authentication handler base implementation\n"
+  example: []
   syntax:
     content: 'public abstract class AuthenticationHandlerBase : DelegatingHandler, IDisposable, IAuthenticationHandler'
     content.vb: >-
@@ -53,8 +55,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
   modifiers.csharp:
   - public
   - abstract
@@ -63,32 +63,36 @@ items:
   - Public
   - MustInherit
   - Class
-- uid: Apizr.Authenticating.AuthenticationHandlerBase.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase)
-  commentId: M:Apizr.Authenticating.AuthenticationHandlerBase.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase)
-  id: '#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.IApizrOptionsBase)'
+- uid: Apizr.Authenticating.AuthenticationHandlerBase.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  commentId: M:Apizr.Authenticating.AuthenticationHandlerBase.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  id: '#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase)'
   parent: Apizr.Authenticating.AuthenticationHandlerBase
   langs:
   - csharp
   - vb
-  name: AuthenticationHandlerBase(ILogger, IApizrOptionsBase)
-  nameWithType: AuthenticationHandlerBase.AuthenticationHandlerBase(ILogger, IApizrOptionsBase)
-  fullName: Apizr.Authenticating.AuthenticationHandlerBase.AuthenticationHandlerBase(Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.IApizrOptionsBase)
+  name: AuthenticationHandlerBase(ILogger, IApizrManagerOptionsBase)
+  nameWithType: AuthenticationHandlerBase.AuthenticationHandlerBase(ILogger, IApizrManagerOptionsBase)
+  fullName: Apizr.Authenticating.AuthenticationHandlerBase.AuthenticationHandlerBase(Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase)
   type: Constructor
   source:
     id: .ctor
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Authenticating\AuthenticationHandlerBase.cs
-    startLine: 18
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Authenticating\AuthenticationHandlerBase.cs
+    startLine: 27
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
+  summary: "\nThe authentication handler constructor\n"
+  example: []
   syntax:
-    content: protected AuthenticationHandlerBase(ILogger logger, IApizrOptionsBase apizrOptions)
+    content: protected AuthenticationHandlerBase(ILogger logger, IApizrManagerOptionsBase apizrOptions)
     parameters:
     - id: logger
       type: Microsoft.Extensions.Logging.ILogger
+      description: The logger
     - id: apizrOptions
-      type: Apizr.Configuring.IApizrOptionsBase
-    content.vb: Protected Sub New(logger As ILogger, apizrOptions As IApizrOptionsBase)
+      type: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+      description: The Apizr options
+    content.vb: Protected Sub New(logger As ILogger, apizrOptions As IApizrManagerOptionsBase)
   overload: Apizr.Authenticating.AuthenticationHandlerBase.#ctor*
   modifiers.csharp:
   - protected
@@ -107,8 +111,8 @@ items:
   type: Method
   source:
     id: SendAsync
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Authenticating\AuthenticationHandlerBase.cs
-    startLine: 24
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Authenticating\AuthenticationHandlerBase.cs
+    startLine: 33
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
@@ -144,15 +148,18 @@ items:
   type: Method
   source:
     id: GetToken
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Authenticating\AuthenticationHandlerBase.cs
-    startLine: 97
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Authenticating\AuthenticationHandlerBase.cs
+    startLine: 107
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
+  summary: "\nThe method called to get token from settings\n"
+  example: []
   syntax:
     content: public abstract string GetToken()
     return:
       type: System.String
+      description: ''
     content.vb: Public MustOverride Function GetToken As String
   overload: Apizr.Authenticating.AuthenticationHandlerBase.GetToken*
   implements:
@@ -176,16 +183,19 @@ items:
   type: Method
   source:
     id: SetToken
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Authenticating\AuthenticationHandlerBase.cs
-    startLine: 99
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Authenticating\AuthenticationHandlerBase.cs
+    startLine: 110
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
+  summary: "\nThe method called to save token into settings\n"
+  example: []
   syntax:
     content: public abstract void SetToken(string token)
     parameters:
     - id: token
       type: System.String
+      description: The token to save
     content.vb: Public MustOverride Sub SetToken(token As String)
   overload: Apizr.Authenticating.AuthenticationHandlerBase.SetToken*
   implements:
@@ -209,18 +219,22 @@ items:
   type: Method
   source:
     id: RefreshTokenAsync
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Authenticating\AuthenticationHandlerBase.cs
-    startLine: 101
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Authenticating\AuthenticationHandlerBase.cs
+    startLine: 113
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
+  summary: "\nThe method called to refresh token when rejected or empty\n"
+  example: []
   syntax:
     content: public abstract Task<string> RefreshTokenAsync(HttpRequestMessage request)
     parameters:
     - id: request
       type: System.Net.Http.HttpRequestMessage
+      description: The request to authenticate
     return:
       type: System.Threading.Tasks.Task{System.String}
+      description: ''
     content.vb: Public MustOverride Function RefreshTokenAsync(request As HttpRequestMessage) As Task(Of String)
   overload: Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync*
   implements:
@@ -244,8 +258,8 @@ items:
   type: Method
   source:
     id: CloneHttpRequestMessageAsync
-    path: C:\Dev\Community\Apizr\Apizr\Apizr\Authenticating\AuthenticationHandlerBase.cs
-    startLine: 109
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Authenticating\AuthenticationHandlerBase.cs
+    startLine: 121
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
@@ -665,61 +679,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  parent: Apizr.Extending.ObjectExtensions
-  definition: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  name: ToString(String, String)
-  nameWithType: ObjectExtensions.ToString(String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
@@ -732,87 +691,6 @@ references:
   name: System.Net.Http
   nameWithType: System.Net.Http
   fullName: System.Net.Http
-- uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  commentId: M:Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-  isExternal: true
-  name: ToString(Object, String, String)
-  nameWithType: ObjectExtensions.ToString(Object, String, String)
-  fullName: Apizr.Extending.ObjectExtensions.ToString(System.Object, System.String, System.String)
-  spec.csharp:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Extending.ObjectExtensions.ToString(System.Object,System.String,System.String)
-    name: ToString
-    nameWithType: ObjectExtensions.ToString
-    fullName: Apizr.Extending.ObjectExtensions.ToString
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.ObjectExtensions
-  commentId: T:Apizr.Extending.ObjectExtensions
-  parent: Apizr.Extending
-  name: ObjectExtensions
-  nameWithType: ObjectExtensions
-  fullName: Apizr.Extending.ObjectExtensions
-- uid: Apizr.Extending
-  commentId: N:Apizr.Extending
-  name: Apizr.Extending
-  nameWithType: Apizr.Extending
-  fullName: Apizr.Extending
 - uid: Apizr.Authenticating.AuthenticationHandlerBase.#ctor*
   commentId: Overload:Apizr.Authenticating.AuthenticationHandlerBase.#ctor
   name: AuthenticationHandlerBase
@@ -825,23 +703,23 @@ references:
   name: ILogger
   nameWithType: ILogger
   fullName: Microsoft.Extensions.Logging.ILogger
-- uid: Apizr.Configuring.IApizrOptionsBase
-  commentId: T:Apizr.Configuring.IApizrOptionsBase
-  parent: Apizr.Configuring
-  name: IApizrOptionsBase
-  nameWithType: IApizrOptionsBase
-  fullName: Apizr.Configuring.IApizrOptionsBase
+- uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  commentId: T:Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  parent: Apizr.Configuring.Manager
+  name: IApizrManagerOptionsBase
+  nameWithType: IApizrManagerOptionsBase
+  fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
 - uid: Microsoft.Extensions.Logging
   commentId: N:Microsoft.Extensions.Logging
   isExternal: true
   name: Microsoft.Extensions.Logging
   nameWithType: Microsoft.Extensions.Logging
   fullName: Microsoft.Extensions.Logging
-- uid: Apizr.Configuring
-  commentId: N:Apizr.Configuring
-  name: Apizr.Configuring
-  nameWithType: Apizr.Configuring
-  fullName: Apizr.Configuring
+- uid: Apizr.Configuring.Manager
+  commentId: N:Apizr.Configuring.Manager
+  name: Apizr.Configuring.Manager
+  nameWithType: Apizr.Configuring.Manager
+  fullName: Apizr.Configuring.Manager
 - uid: System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
   commentId: M:System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
   parent: System.Net.Http.DelegatingHandler

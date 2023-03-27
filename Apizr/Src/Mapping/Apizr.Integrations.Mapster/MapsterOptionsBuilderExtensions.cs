@@ -1,54 +1,55 @@
 ﻿using Apizr.Configuring.Common;
-using AutoMapper;
+using Mapster;
+using MapsterMapper;
 
 namespace Apizr
 {
     /// <summary>
-    /// AutoMapper options builder extensions
+    /// Mapster options builder extensions
     /// </summary>
-    public static class AutoMapperOptionsBuilderExtensions
+    public static class MapsterOptionsBuilderExtensions
     {
         /// <summary>
-        /// Set AutoMapper as MappingHandler
+        /// Set Mapster as MappingHandler
         /// </summary>
         /// <typeparam name="TBuilder"></typeparam>
         /// <param name="builder"></param>
         /// <param name="mapper"></param>
         /// <returns></returns>
-        public static TBuilder WithAutoMapperMappingHandler<TBuilder>(this TBuilder builder, IMapper mapper)
+        public static TBuilder WithMapsterMappingHandler<TBuilder>(this TBuilder builder, IMapper mapper)
             where TBuilder : IApizrCommonOptionsBuilderBase
         {
-            builder.SetMappingHandlerFactory(() => new AutoMapperMappingHandler(mapper));
+            builder.SetMappingHandlerFactory(() => new MapsterMappingHandler(mapper));
 
             return builder;
         }
 
         /// <summary>
-        /// Set AutoMapper as MappingHandler
+        /// Set Mapster as MappingHandler
         /// </summary>
         /// <typeparam name="TBuilder"></typeparam>
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static TBuilder WithAutoMapperMappingHandler<TBuilder>(this TBuilder builder, IConfigurationProvider configuration)
+        public static TBuilder WithMapsterMappingHandler<TBuilder>(this TBuilder builder, TypeAdapterConfig configuration)
             where TBuilder : IApizrCommonOptionsBuilderBase
         {
-            builder.SetMappingHandlerFactory(() => new AutoMapperMappingHandler(configuration.CreateMapper()));
+            builder.SetMappingHandlerFactory(() => new MapsterMappingHandler(new Mapper(configuration)));
 
             return builder;
         }
 
 
         /// <summary>
-        /// Set AutoMapper as MappingHandler
+        /// Set Mapster as MappingHandler
         /// </summary>
         /// <typeparam name="TBuilder"></typeparam>
         /// <param name="builder"></param>
         /// <returns></returns>
-        public static TBuilder WithAutoMapperMappingHandler<TBuilder>(this TBuilder builder)
+        public static TBuilder WithMapsterMappingHandler<TBuilder>(this TBuilder builder)
             where TBuilder : IApizrExtendedCommonOptionsBuilderBase
         {
-            builder.SetMappingHandlerType<AutoMapperMappingHandler>();
+            builder.SetMappingHandlerType<MapsterMappingHandler>();
 
             return builder;
         }

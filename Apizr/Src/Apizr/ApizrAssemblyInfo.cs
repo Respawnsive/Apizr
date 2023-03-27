@@ -8,6 +8,7 @@
            InternalsVisibleTo("Apizr.Integrations.MediatR"),
            InternalsVisibleTo("Apizr.Integrations.Optional"),
            InternalsVisibleTo("Apizr.Integrations.AutoMapper"),
+           InternalsVisibleTo("Apizr.Integrations.Mapster"),
            InternalsVisibleTo("Apizr.Integrations.FileTransfer"),
            InternalsVisibleTo("Apizr.Extensions.Microsoft.FileTransfer"),
            InternalsVisibleTo("Apizr.Integrations.FileTransfer.MediatR"),

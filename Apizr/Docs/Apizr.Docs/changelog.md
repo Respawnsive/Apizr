@@ -15,6 +15,10 @@
 - [Breaking] [Naming] Now **ApizrBuilder static class offers only a Current property returning its own instance to get acces to its methods**, so that it could be extended then by other packages
 - [Fix] Some bugs and performance issues fixed
 
+### Apizr.Integrations.Mapster
+
+- [New] Brand new integration with Mapster
+
 ### Apizr.Integrations.FileTransfer
 
 - [New] Brand new integration package to **manage file transfers** like a breeze with static registration/instanciation

@@ -24,21 +24,6 @@ namespace Apizr
             return builder;
         }
 
-        /// <summary>
-        /// Set Mapster as MappingHandler
-        /// </summary>
-        /// <typeparam name="TBuilder"></typeparam>
-        /// <param name="builder"></param>
-        /// <param name="configuration"></param>
-        /// <returns></returns>
-        public static TBuilder WithMapsterMappingHandler<TBuilder>(this TBuilder builder, TypeAdapterConfig configuration)
-            where TBuilder : IApizrCommonOptionsBuilderBase
-        {
-            builder.SetMappingHandlerFactory(() => new MapsterMappingHandler(new Mapper(configuration)));
-
-            return builder;
-        }
-
 
         /// <summary>
         /// Set Mapster as MappingHandler

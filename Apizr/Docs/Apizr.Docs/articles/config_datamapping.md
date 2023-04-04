@@ -2,17 +2,23 @@
 
 You may need to map data between some API types and Model types, known as DTO design pattern.
 Apizr could handle it for you by providing an `IMappingHandler` interface implementation to it.
-Fortunately, there's an integration Nuget package called Apizr.Integration.AutoMapper to integrate... AutoMapper obviously.
-Of course, you can implement your own integration, but here we'll talk about the provided AutoMapper one.
+Fortunately, there are some integration Nuget packages to do so.
+Of course, you can implement your own integration, but here we'll talk about the provided ones.
 
-Please first install this integration package:
+Please first install this integration package of your choice:
 
 |Project|Current|Upcoming|
 |-------|-----|-----|
 |Apizr.Integrations.AutoMapper|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.AutoMapper.svg)](https://www.nuget.org/packages/Apizr.Integrations.AutoMapper/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.AutoMapper.svg)](https://www.nuget.org/packages/Apizr.Integrations.AutoMapper/)|
+|Apizr.Integrations.Mapster|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Mapster.svg)](https://www.nuget.org/packages/Apizr.Integrations.Mapster/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.Mapster.svg)](https://www.nuget.org/packages/Apizr.Integrations.Mapster/)|
 
+Where:
+   - **Apizr.Integrations.AutoMapper** package brings an `IMappingHandler` implementation for [AutoMapper](https://github.com/AutoMapper/AutoMapper)
+   - **Apizr.Integrations.Mapster** package brings an `IMappingHandler` implementation for [Mapster](https://github.com/MapsterMapper/Mapster)
 
 ### Defining
+
+#### AutoMapper
 
 As usually with AutoMapper, define your mapping profiles, like for example:
 ```csharp
@@ -28,11 +34,46 @@ public class UserMinUserProfile : Profile
 }
 ```
 
+#### Mapster
+
+No need to write your own DTO classes. Mapster provides Mapster.Tool to help you generating models. And if you would like to have explicit mapping, Mapster also generates mapper class for you.
+
+````csharp
+[AdaptTo("[name]Dto"), GenerateMapper]
+public class Student {
+    ...
+}
+````
+
+Then Mapster will generate:
+
+````csharp
+public class StudentDto {
+    ...
+}
+public static class StudentMapper {
+    public static StudentDto AdaptToDto(this Student poco) { ... }
+    public static StudentDto AdaptTo(this Student poco, StudentDto dto) { ... }
+    public static Expression<Func<Student, StudentDto>> ProjectToDto => ...
+}
+````
+
+But you can also write your own mapping configuration, like for example:
+```csharp
+TypeAdapterConfig<TSource, TDestination>
+    .NewConfig()
+    .Ignore(dest => dest.Age)
+    .Map(dest => dest.FullName,
+        src => string.Format("{0} {1}", src.FirstName, src.LastName));
+```
+
+#### Advanced
+
 >[!WARNING]
 >
 >**Data Mapping with MediatR and/or Optional**
 >
->If you plan to use MediatR and/or Optional integrations, one more defining step need to be done.
+>If you plan to use MediatR and/or Optional integrations, one more defining step has to be done.
 
 Only for those of you planning to use data mapping with **MediatR** and/or **Optional**, Apizr provide a `MappedWith` attribute telling it to map api object with model object.
 You’ll find another `MappedCrudEntity` attribute dedicated to CRUD apis, coming with auto-registration capabilities, in case of access restricted to only local client model.
@@ -49,7 +90,9 @@ public class MinUser
 
 ### Registering
 
-#### [Static](#tab/tabid-static)
+#### AutoMapper
+
+##### [Static](#tab/tabid-static)
 
 First create a `MapperConfiguration` with your profiles:
 
@@ -74,7 +117,7 @@ options => options.WithMappingHandler(new AutoMapperMappingHandler(mapperConfig.
 options => options.WithMappingHandler(() => new AutoMapperMappingHandler(mapperConfig.CreateMapper()))
 ```
 
-#### [Extended](#tab/tabid-extended)
+##### [Extended](#tab/tabid-extended)
 
 First register AutoMapper as you used to do:
 ```csharp
@@ -101,6 +144,49 @@ options => options.WithMappingHandler<AutoMapperMappingHandler>()
 
 // OR parameter type configuration
 options => options.WithMappingHandler(typeof(AutoMapperMappingHandler))
+```
+
+***
+
+#### Mapster
+
+##### [Static](#tab/tabid-static)
+
+Register with one of the following options:
+
+```csharp
+// direct short configuration
+options => options.WithMapsterMappingHandler(new Mapper())
+
+// OR direct configuration
+options => options.WithMappingHandler(new AutoMapperMappingHandler(new Mapper()))
+
+// OR factory configuration
+options => options.WithMappingHandler(() => new AutoMapperMappingHandler(new Mapper()))
+```
+
+##### [Extended](#tab/tabid-extended)
+
+First register Mapster as you used to do:
+```csharp
+var config = new TypeAdapterConfig();
+// Or
+// var config = TypeAdapterConfig.GlobalSettings;
+services.AddSingleton(config);
+services.AddScoped<IMapper, ServiceMapper>();
+```
+
+Then you'll be able to register with this option:
+
+```csharp
+// direct short configuration
+options => options.WithMapsterMappingHandler()
+
+// OR closed type configuration
+options => options.WithMappingHandler<MapsterMappingHandler>()
+
+// OR parameter type configuration
+options => options.WithMappingHandler(typeof(MapsterMappingHandler))
 ```
 
 ***

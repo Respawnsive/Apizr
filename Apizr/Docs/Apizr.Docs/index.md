@@ -126,6 +126,7 @@ Apizr has a lot more to offer, just [read the doc](articles/index.md)!
 |Project|Current|Upcoming|
 |-------|-----|-----|
 |Apizr.Integrations.AutoMapper|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.AutoMapper.svg)](https://www.nuget.org/packages/Apizr.Integrations.AutoMapper/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.AutoMapper.svg)](https://www.nuget.org/packages/Apizr.Integrations.AutoMapper/)|
+|Apizr.Integrations.Mapster|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Mapster.svg)](https://www.nuget.org/packages/Apizr.Integrations.Mapster/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.Mapster.svg)](https://www.nuget.org/packages/Apizr.Integrations.Mapster/)|
 
 ### Transferring
 
@@ -153,7 +154,8 @@ Install the NuGet reference package of your choice:
   - **Apizr.Integrations.Fusillade** package enables request priority management using [Fusillade](https://github.com/reactiveui/Fusillade)
   - **Apizr.Integrations.MediatR** package enables request auto handling with mediation using [MediatR](https://github.com/jbogard/MediatR)
   - **Apizr.Integrations.Optional** package enables Optional result from mediation requests (requires MediatR integration) using [Optional.Async](https://github.com/dnikolovv/optional-async)
-  - **Apizr.Integrations.AutoMapper** package enables auto mapping for mediation requests (requires MediatR integration and could work with Optional integration) using [AutoMapper](https://github.com/AutoMapper/AutoMapper)
+  - **Apizr.Integrations.AutoMapper** package enables data mapping using [AutoMapper](https://github.com/AutoMapper/AutoMapper)
+  - **Apizr.Integrations.Mapster** package enables data mapping using [Mapster](https://github.com/MapsterMapper/Mapster)
   - **Apizr.Integrations.FileTransfer** package enables file transfer management for static registration
   - **Apizr.Extensions.Microsoft.FileTransfer** package enables file transfer management for extended registration
   - **Apizr.Integrations.FileTransfer.MediatR** package enables file transfer management for mediation requests (requires MediatR integration and could work with Optional integration) using [MediatR](https://github.com/jbogard/MediatR)
@@ -180,3 +182,4 @@ It also comes with some handling interfaces to let you provide your own services
 - **Connectivity** with IConnectivityHandler, which comes with its default VoidConnectivityHandler (no connectivity check)
 - **Mapping** with IMappingHandler, which comes with its default VoidMappingHandler (no mapping conversion), but also with:
   - AutoMapperMappingHandler: [AutoMapper](https://github.com/AutoMapper/AutoMapper) mapping methods mapping interface (Integration package referenced above)
+  - MapsterMappingHandler: [Mapster](https://github.com/MapsterMapper/Mapster) mapping methods mapping interface (Integration package referenced above)

@@ -15,6 +15,8 @@ using Apizr.Tests.Models;
 using Apizr.Tests.Models.Mappings;
 using AutoMapper;
 using FluentAssertions;
+using Mapster;
+using MapsterMapper;
 using Microsoft.Extensions.Logging;
 using MonkeyCache.FileStore;
 using Polly;
@@ -262,7 +264,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Calling_WithMappingHandler_Should_Map_Data()
+        public async Task Calling_WithMappingHandler_With_AutoMapper_Should_Map_Data()
         {
             var mapperConfig = new MapperConfiguration(config =>
             {
@@ -273,6 +275,78 @@ namespace Apizr.Tests
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
                     .WithRefitSettings(_refitSettings)
                     .WithMappingHandler(new AutoMapperMappingHandler(mapperConfig.CreateMapper())));
+
+            var minUser = new MinUser { Name = "John" };
+
+            // This one should succeed
+            var result =
+                await reqResManager.ExecuteAsync<MinUser, User>(
+                    (api, user) => api.CreateUser(user, CancellationToken.None), minUser);
+
+            result.Should().NotBeNull();
+            result.Name.Should().Be(minUser.Name);
+            result.Id.Should().BeGreaterThanOrEqualTo(1);
+        }
+
+        [Fact]
+        public async Task Calling_Classic_WithMapsterMappingHandler_Should_Map_Data()
+        {
+            TypeAdapterConfig<User, MinUser>
+                .NewConfig()
+                .TwoWays()
+                .Map(minUser => minUser.Name, user => user.FirstName);
+
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
+                .WithRefitSettings(_refitSettings)
+                .WithMapsterMappingHandler(new MapsterMapper.Mapper()));
+
+            var minUser = new MinUser { Name = "John" };
+
+            // This one should succeed
+            var result =
+                await reqResManager.ExecuteAsync<MinUser, User>(
+                    (api, user) => api.CreateUser(user, CancellationToken.None), minUser);
+
+            result.Should().NotBeNull();
+            result.Name.Should().Be(minUser.Name);
+            result.Id.Should().BeGreaterThanOrEqualTo(1);
+        }
+
+        [Fact]
+        public async Task Calling_Crud_WithMapsterMappingHandler_Should_Map_Data()
+        {
+            TypeAdapterConfig<User, MinUser>
+                .NewConfig()
+                .TwoWays()
+                .Map(minUser => minUser.Name, user => user.FirstName);
+
+            var userManager = ApizrBuilder.Current.CreateCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(options => options
+                .WithRefitSettings(_refitSettings)
+                .WithMapsterMappingHandler(new MapsterMapper.Mapper()));
+
+            var minUser = new MinUser { Name = "John" };
+
+            // This one should succeed
+            var result =
+                await userManager.ExecuteAsync<MinUser, User>(
+                    (api, user) => api.Create(user), minUser);
+
+            result.Should().NotBeNull();
+            result.Name.Should().Be(minUser.Name);
+            result.Id.Should().BeGreaterThanOrEqualTo(1);
+        }
+
+        [Fact]
+        public async Task Calling_WithMappingHandler_With_Mapster_Should_Map_Data()
+        {
+            TypeAdapterConfig<User, MinUser>
+                .NewConfig()
+                .TwoWays()
+                .Map(minUser => minUser.Name, user => user.FirstName);
+
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
+                    .WithRefitSettings(_refitSettings)
+                    .WithMappingHandler(new MapsterMappingHandler(new MapsterMapper.Mapper())));
 
             var minUser = new MinUser { Name = "John" };
 

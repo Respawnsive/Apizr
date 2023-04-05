@@ -22,6 +22,8 @@ using Apizr.Tests.Models;
 using Apizr.Transferring.Managing;
 using Apizr.Transferring.Requesting;
 using FluentAssertions;
+using Mapster;
+using MapsterMapper;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -347,7 +349,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Calling_WithMappingHandler_Should_Map_Data()
+        public async Task Calling_WithMappingHandler_With_AutoMapper_Should_Map_Data()
         {
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
@@ -355,6 +357,68 @@ namespace Apizr.Tests
             services.AddApizrManagerFor<IReqResUserService>(config => config
                     .WithRefitSettings(_refitSettings)
                     .WithMappingHandler<AutoMapperMappingHandler>());
+
+            var serviceProvider = services.BuildServiceProvider();
+            var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
+
+            var minUser = new MinUser { Name = "John" };
+
+            // This one should succeed
+            var result = await reqResManager.ExecuteAsync<MinUser, User>((api, user) => api.CreateUser(user, CancellationToken.None), minUser);
+
+            result.Should().NotBeNull();
+            result.Name.Should().Be(minUser.Name);
+            result.Id.Should().BeGreaterThanOrEqualTo(1);
+        }
+
+        [Fact]
+        public async Task Calling_WithMapsterMappingHandler_Should_Map_Data()
+        {
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+
+            var mapsterConfig = new TypeAdapterConfig();
+            mapsterConfig.NewConfig<User, MinUser>()
+                .TwoWays()
+                .Map(minUser => minUser.Name, user => user.FirstName);
+
+            services.AddSingleton(mapsterConfig);
+            services.AddScoped<IMapper, ServiceMapper>();
+
+            services.AddApizrManagerFor<IReqResUserService>(config => config
+                    .WithRefitSettings(_refitSettings)
+                    .WithMapsterMappingHandler());
+
+            var serviceProvider = services.BuildServiceProvider();
+            var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
+
+            var minUser = new MinUser { Name = "John" };
+
+            // This one should succeed
+            var result = await reqResManager.ExecuteAsync<MinUser, User>((api, user) => api.CreateUser(user, CancellationToken.None), minUser);
+
+            result.Should().NotBeNull();
+            result.Name.Should().Be(minUser.Name);
+            result.Id.Should().BeGreaterThanOrEqualTo(1);
+        }
+
+        [Fact]
+        public async Task Calling_WithMappingHandler_With_Mapster_Should_Map_Data()
+        {
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            
+            var mapsterConfig = new TypeAdapterConfig();
+            mapsterConfig.NewConfig<User, MinUser>()
+                .TwoWays()
+                .Map(minUser => minUser.Name, user => user.FirstName);
+
+            services.AddSingleton(mapsterConfig);
+            services.AddScoped<IMapper, ServiceMapper>();
+
+            services.AddApizrManagerFor<IReqResUserService>(config => config
+                    .WithRefitSettings(_refitSettings)
+                    .WithMappingHandler<MapsterMappingHandler>());
 
             var serviceProvider = services.BuildServiceProvider();
             var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();

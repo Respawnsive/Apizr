@@ -48,6 +48,7 @@ using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
 using Refit;
+using HttpMessageParts = Apizr.Logging.HttpMessageParts;
 
 namespace Apizr.Sample.Console
 {
@@ -134,10 +135,11 @@ namespace Apizr.Sample.Console
                     var fileExtension = "pdf";
                     var fileType = "application/pdf";
 
+                    await using var stream = GetTestFileStream($"Files/Test_{fileSuffix}.{fileExtension}");
+                    var streamPart = new StreamPart(stream, $"test_{fileSuffix}-streampart.{fileExtension}", $"{fileType}");
+
                     //_httpBinService = RestService.For<IHttpBinService>("https://httpbin.org");
-                    //await using var stream = GetTestFileStream("Files/Test_large.pdf");
-                    //var result =
-                    //    await _httpBinService.UploadStreamPart(new StreamPart(stream, "test_small-streampart.pdf", "application/pdf"));
+                    //var result = await _httpBinService.UploadStreamPart(streamPart);
                     //var test = await result.Content.ReadAsStringAsync();
 
                     var lazyLoggerFactory = new Lazy<ILoggerFactory>(() => LoggerFactory.Create(logging =>
@@ -147,12 +149,14 @@ namespace Apizr.Sample.Console
                         logging.SetMinimumLevel(LogLevel.Trace);
                     }));
 
-                    //_httpBinManager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
+                    _httpBinManager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
 
+                    var fileManager = ApizrBuilder.Current.CreateUploadManager(options => options.WithBaseAddress("https://httpbin.org/post").WithLoggerFactory(() => lazyLoggerFactory.Value));
+                    await fileManager.UploadAsync(streamPart);
                     //var fileManager = ApizrBuilder.Current.CreateTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr").WithLoggerFactory(() => lazyLoggerFactory.Value));
                     //var fileInfo = await fileManager.DownloadAsync(new FileInfo("test10Mb.db"), new Dictionary<string, object> { { "key1", "value1" } }, options => options.WithDynamicPath("files")).ConfigureAwait(false);
-                    var fileManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferSampleApi>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
-                    var fileInfo = await fileManager.DownloadAsync(new FileInfo("test10Mb.db")).ConfigureAwait(false);
+                    //var fileManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferSampleApi>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
+                    //var fileInfo = await fileManager.DownloadAsync(new FileInfo("test10Mb.db")).ConfigureAwait(false);
 
 
 
@@ -188,11 +192,7 @@ namespace Apizr.Sample.Console
                     //_httpBinManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IHttpBinService>>();
                     //var testRegistry = scope.ServiceProvider.GetRequiredService<IApizrExtendedRegistry>();
 
-                    //await using var stream = GetTestFileStream($"Files/Test_{fileSuffix}.{fileExtension}");
-                    //var streamPart = new StreamPart(stream, $"test_{fileSuffix}-streampart.{fileExtension}", $"{fileType}");
-
-                    //var result =
-                    //    await _httpBinManager.ExecuteAsync(api => api.UploadStreamPart(streamPart));
+                    //var result = await _httpBinManager.ExecuteAsync(api => api.UploadStreamPart(streamPart));
                     //var test = await result.Content.ReadAsStringAsync();
                 }
                 catch (Exception e)

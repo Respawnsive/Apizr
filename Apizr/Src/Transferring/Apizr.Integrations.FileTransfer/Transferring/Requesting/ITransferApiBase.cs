@@ -1,6 +1,9 @@
-﻿namespace Apizr.Transferring.Requesting;
+﻿using Apizr.Caching.Attributes;
+using Apizr.Caching;
 
-[WebApi]
+namespace Apizr.Transferring.Requesting;
+
+[WebApi, Cache(CacheMode.None)]
 public interface ITransferApiBase
 {
 }

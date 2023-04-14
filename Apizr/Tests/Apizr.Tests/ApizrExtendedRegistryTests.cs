@@ -841,17 +841,21 @@ namespace Apizr.Tests
             services.AddPolicyRegistry(_policyRegistry);
 
             services.AddApizr(registry => registry
-                .AddTransferManager(options => options
-                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")));
+                .AddTransferManager(options => options.WithBasePath("/files"))
+                .AddTransferManagerFor<ITransferUndefinedApi>(),
+                options => options
+                        .WithBaseAddress("http://speedtest.ftp.otenet.gr"));
 
             var serviceProvider = services.BuildServiceProvider();
 
             // Get instances from the container
             var apizrTransferManager = serviceProvider.GetService<IApizrTransferManager>(); // Built-in
             var apizrTransferTypedManager = serviceProvider.GetService<IApizrTransferManager<ITransferApi>>(); // Built-in
+            var apizrCustomTransferManager = serviceProvider.GetService<IApizrTransferManager<ITransferUndefinedApi>>(); // Custom
 
             apizrTransferManager.Should().NotBeNull(); // Built-in
             apizrTransferTypedManager.Should().NotBeNull(); // Built-in
+            apizrCustomTransferManager.Should().NotBeNull(); // Custom
 
             // Built-in
             var apizrTransferManagerResult = await apizrTransferManager.DownloadAsync(new FileInfo("test100k.db"));

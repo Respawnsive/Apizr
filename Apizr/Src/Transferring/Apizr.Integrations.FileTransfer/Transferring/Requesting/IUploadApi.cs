@@ -10,7 +10,7 @@ public interface IUploadApi : ITransferApiBase
     #region ByteArrayPart
 
     [Multipart]
-    [Post("/")]
+    [Post("")]
     Task UploadAsync(ByteArrayPart byteArrayPart);
 
     [Multipart]
@@ -18,7 +18,7 @@ public interface IUploadApi : ITransferApiBase
     Task UploadAsync(ByteArrayPart byteArrayPart, string path);
 
     [Multipart]
-    [Post("/")]
+    [Post("")]
     Task UploadAsync(ByteArrayPart byteArrayPart, [RequestOptions] IApizrRequestOptions options);
 
     [Multipart]
@@ -30,7 +30,7 @@ public interface IUploadApi : ITransferApiBase
     #region StreamPart
 
     [Multipart]
-    [Post("/")]
+    [Post("")]
     Task UploadAsync(StreamPart streamPart);
 
     [Multipart]
@@ -38,7 +38,7 @@ public interface IUploadApi : ITransferApiBase
     Task UploadAsync(StreamPart streamPart, string path);
 
     [Multipart]
-    [Post("/")]
+    [Post("")]
     Task UploadAsync(StreamPart streamPart, [RequestOptions] IApizrRequestOptions options);
 
     [Multipart]
@@ -50,7 +50,7 @@ public interface IUploadApi : ITransferApiBase
     #region FileInfoPart
 
     [Multipart]
-    [Post("/")]
+    [Post("")]
     Task UploadAsync(FileInfoPart fileInfoPart);
 
     [Multipart]
@@ -58,7 +58,7 @@ public interface IUploadApi : ITransferApiBase
     Task UploadAsync(FileInfoPart fileInfoPart, string filePath);
 
     [Multipart]
-    [Post("/")]
+    [Post("")]
     Task UploadAsync(FileInfoPart fileInfoPart, [RequestOptions] IApizrRequestOptions options);
 
     [Multipart]

@@ -159,13 +159,13 @@ public static class FileTransferExtendedOptionsBuilderExtensions
     #region Multiple
 
     /// <summary>
-    /// Add an upload manager for IUploadApi (you must at least provide a base url)
+    /// Add an upload manager for IUploadApi
     /// </summary>
     /// <param name="builder">The builder to create the manager from</param>
     /// <param name="optionsBuilder">The builder defining some options</param>
     /// <returns></returns>
     public static IApizrExtendedRegistryBuilder AddUploadManager(this IApizrExtendedRegistryBuilder builder,
-        Action<IApizrExtendedProperOptionsBuilder> optionsBuilder)
+        Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
         => builder.AddUploadManagerFor<IUploadApi>(optionsBuilder);
 
     /// <summary>
@@ -198,7 +198,7 @@ public static class FileTransferExtendedOptionsBuilderExtensions
     }
 
     /// <summary>
-    /// Add a download manager for IDownloadApi (you must at least provide a base url)
+    /// Add a download manager for IDownloadApi
     /// </summary>
     /// <param name="builder">The builder to create the manager from</param>
     /// <param name="optionsBuilder">The builder defining some options</param>
@@ -206,7 +206,7 @@ public static class FileTransferExtendedOptionsBuilderExtensions
     public static IApizrExtendedRegistryBuilder
         AddDownloadManager(
             this IApizrExtendedRegistryBuilder builder,
-            Action<IApizrExtendedProperOptionsBuilder> optionsBuilder)
+            Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
         => builder.AddDownloadManagerFor<IDownloadApi>(optionsBuilder);
 
     /// <summary>
@@ -263,7 +263,7 @@ public static class FileTransferExtendedOptionsBuilderExtensions
     }
 
     /// <summary>
-    /// Add a transfer manager for ITransferApi (you must at least provide a base url)
+    /// Add a transfer manager for ITransferApi
     /// </summary>
     /// <param name="builder">The builder to create the manager from</param>
     /// <param name="optionsBuilder">The builder defining some options</param>
@@ -271,7 +271,7 @@ public static class FileTransferExtendedOptionsBuilderExtensions
     public static IApizrExtendedRegistryBuilder
         AddTransferManager(
             this IApizrExtendedRegistryBuilder builder,
-            Action<IApizrExtendedProperOptionsBuilder> optionsBuilder)
+            Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
     {
         if (builder is IApizrInternalExtendedRegistryBuilder<IApizrExtendedProperOptionsBuilder> internalBuilder)
         {

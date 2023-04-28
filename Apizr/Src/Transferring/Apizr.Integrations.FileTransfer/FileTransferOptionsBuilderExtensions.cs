@@ -141,13 +141,13 @@ public static class FileTransferOptionsBuilderExtensions
     #region Multiple
 
     /// <summary>
-    /// Add an upload manager for IUploadApi (you must at least provide a base url)
+    /// Add an upload manager for IUploadApi
     /// </summary>
     /// <param name="builder">The builder to create the manager from</param>
     /// <param name="optionsBuilder">The builder defining some options</param>
     /// <returns></returns>
     public static IApizrRegistryBuilder AddUploadManager(this IApizrRegistryBuilder builder,
-        Action<IApizrProperOptionsBuilder> optionsBuilder)
+        Action<IApizrProperOptionsBuilder> optionsBuilder = null)
         => builder.AddUploadManagerFor<IUploadApi>(optionsBuilder);
 
     /// <summary>
@@ -180,7 +180,7 @@ public static class FileTransferOptionsBuilderExtensions
     }
 
     /// <summary>
-    /// Add a download manager for IDownloadApi (you must at least provide a base url)
+    /// Add a download manager for IDownloadApi
     /// </summary>
     /// <param name="builder">The builder to create the manager from</param>
     /// <param name="optionsBuilder">The builder defining some options</param>
@@ -188,7 +188,7 @@ public static class FileTransferOptionsBuilderExtensions
     public static IApizrRegistryBuilder
         AddDownloadManager(
             this IApizrRegistryBuilder builder,
-            Action<IApizrProperOptionsBuilder> optionsBuilder)
+            Action<IApizrProperOptionsBuilder> optionsBuilder = null)
         => builder.AddDownloadManagerFor<IDownloadApi>(optionsBuilder);
 
     /// <summary>
@@ -248,7 +248,7 @@ public static class FileTransferOptionsBuilderExtensions
     }
 
     /// <summary>
-    /// Add a transfer manager for ITransferApi (you must at least provide a base url)
+    /// Add a transfer manager for ITransferApi
     /// </summary>
     /// <param name="builder">The builder to create the manager from</param>
     /// <param name="optionsBuilder">The builder defining some options</param>
@@ -256,7 +256,7 @@ public static class FileTransferOptionsBuilderExtensions
     public static IApizrRegistryBuilder
         AddTransferManager(
             this IApizrRegistryBuilder builder,
-            Action<IApizrProperOptionsBuilder> optionsBuilder) =>
+            Action<IApizrProperOptionsBuilder> optionsBuilder = null) =>
         builder.AddTransferManagerFor<ITransferApi>(optionsBuilder);
 
     /// <summary>

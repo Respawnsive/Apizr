@@ -81,7 +81,7 @@ namespace Apizr.Extending
         /// <param name="registry">The registry to get the manager from</param>
         /// <returns></returns>
         public static IApizrTransferManager<TTransferApi> GetTransferManagerFor<TTransferApi>(this IApizrEnumerableRegistry registry)
-            where TTransferApi : ITransferApi<IDictionary<string, object>> =>
+            where TTransferApi : ITransferApi =>
             ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrTransferManager<TTransferApi>>();
 
         /// <summary>
@@ -304,6 +304,20 @@ namespace Apizr.Extending
             => registry.GetUploadManagerFor<TUploadApi>().UploadAsync(byteArrayPart, optionsBuilder);
 
         /// <summary>
+        /// Upload a file from its bytes data
+        /// </summary>
+        /// <typeparam name="TUploadApi">The upload api type to manage</typeparam>
+        /// <typeparam name="TApiResultData">The upload api result data type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="byteArrayPart">The file bytes data</param>
+        /// <param name="optionsBuilder">Some request options</param>
+        /// <returns></returns>
+        public static Task<TApiResultData> UploadAsync<TUploadApi, TApiResultData>(
+            this IApizrEnumerableRegistry registry, ByteArrayPart byteArrayPart,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi
+            => registry.GetUploadManagerFor<TUploadApi>().UploadAsync<TApiResultData>(byteArrayPart, optionsBuilder);
+
+        /// <summary>
         /// Upload a file from its stream data
         /// </summary>
         /// <param name="registry">The registry</param>
@@ -329,6 +343,20 @@ namespace Apizr.Extending
             => registry.GetUploadManagerFor<TUploadApi>().UploadAsync(streamPart, optionsBuilder);
 
         /// <summary>
+        /// Upload a file from its stream data
+        /// </summary>
+        /// <typeparam name="TUploadApi">The upload api type to manage</typeparam>
+        /// <typeparam name="TApiResultData">The upload api result data type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="streamPart">The file stream data</param>
+        /// <param name="optionsBuilder">Some request options</param>
+        /// <returns></returns>
+        public static Task<TApiResultData> UploadAsync<TUploadApi, TApiResultData>(this IApizrEnumerableRegistry registry, StreamPart streamPart,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi
+            => registry.GetUploadManagerFor<TUploadApi>().UploadAsync<TApiResultData>(streamPart, optionsBuilder);
+
+
+        /// <summary>
         /// Upload a file from its file info data
         /// </summary>
         /// <param name="registry">The registry</param>
@@ -352,6 +380,19 @@ namespace Apizr.Extending
         public static Task UploadAsync<TUploadApi>(this IApizrEnumerableRegistry registry, FileInfoPart fileInfoPart,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi
             => registry.GetUploadManagerFor<TUploadApi>().UploadAsync(fileInfoPart, optionsBuilder);
+
+        /// <summary>
+        /// Upload a file from its file info data
+        /// </summary>
+        /// <typeparam name="TUploadApi">The upload api type to manage</typeparam>
+        /// <typeparam name="TApiResultData">The upload api result data type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="fileInfoPart">The file info data</param>
+        /// <param name="optionsBuilder">Some request options</param>
+        /// <returns></returns>
+        public static Task<TApiResultData> UploadAsync<TUploadApi, TApiResultData>(this IApizrEnumerableRegistry registry, FileInfoPart fileInfoPart,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi
+            => registry.GetUploadManagerFor<TUploadApi>().UploadAsync<TApiResultData>(fileInfoPart, optionsBuilder);
 
         #endregion
 

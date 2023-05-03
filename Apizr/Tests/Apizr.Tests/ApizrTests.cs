@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
@@ -13,6 +14,7 @@ using Apizr.Tests.Apis;
 using Apizr.Tests.Helpers;
 using Apizr.Tests.Models;
 using Apizr.Tests.Models.Mappings;
+using Apizr.Transferring.Requesting;
 using AutoMapper;
 using FluentAssertions;
 using Mapster;
@@ -434,18 +436,18 @@ namespace Apizr.Tests
         [Fact]
         public async Task Downloading_File_Should_Succeed()
         {
-            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr/files")); // Built-in
-            var transferSampleApiManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferSampleApi>(); // Custom
-            
-            apizrTransferManager.Should().NotBeNull(); // Built-in
-            transferSampleApiManager.Should().NotBeNull(); // Custom
+            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options => options
+                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"));
 
-            var fileInfo = await transferSampleApiManager.DownloadAsync(new FileInfo("test100k.db")).ConfigureAwait(false);
-            fileInfo.Length.Should().BePositive();
+            apizrTransferManager.Should().NotBeNull(); // Built-in
+            
+            var result = await apizrTransferManager.DownloadAsync(new FileInfo("test100k.db"));
+            result.Should().NotBeNull();
+            result.Length.Should().BePositive();
         }
 
         [Fact]
-        public async Task Downloading_File_With_Progress_Should_Report_Progress()
+        public async Task Downloading_File_With_Local_Progress_Should_Report_Progress()
         {
             var percentage = 0;
             var progress = new ApizrProgress();
@@ -453,11 +455,95 @@ namespace Apizr.Tests
             {
                 percentage = args.ProgressPercentage;
             };
-            var transferManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferSampleApi>(options => options.WithProgress(progress));
-            var fileInfo = await transferManager.DownloadAsync(new FileInfo("test10Mb.db")).ConfigureAwait(false);
+            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options => options
+                    .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
+                    .WithProgress());
+            
+            apizrTransferManager.Should().NotBeNull(); // Built-in
+
+            var fileInfo = await apizrTransferManager.DownloadAsync(new FileInfo("test10Mb.db"), options => options.WithProgress(progress)).ConfigureAwait(false);
 
             percentage.Should().Be(100);
             fileInfo.Length.Should().BePositive();
+        }
+
+        [Fact]
+        public async Task Downloading_File_With_Global_Progress_Should_Report_Progress()
+        {
+            var percentage = 0;
+            var progress = new ApizrProgress();
+            progress.ProgressChanged += (sender, args) =>
+            {
+                percentage = args.ProgressPercentage;
+            };
+            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options => options
+                    .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
+                    .WithProgress(progress));
+            
+            apizrTransferManager.Should().NotBeNull(); // Built-in
+
+            var fileInfo = await apizrTransferManager.DownloadAsync(new FileInfo("test10Mb.db")).ConfigureAwait(false);
+
+            percentage.Should().Be(100);
+            fileInfo.Length.Should().BePositive();
+        }
+
+        [Fact]
+        public async Task Uploading_File_Should_Succeed()
+        {
+            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options => options
+                        .WithBaseAddress("https://httpbin.org/post"));
+
+            apizrTransferManager.Should().NotBeNull(); // Built-in
+
+            // Shortcut
+            var regShortcutResult = await apizrTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            regShortcutResult.Should().NotBeNull();
+            regShortcutResult.StatusCode.Should().Be(HttpStatusCode.OK);
+        }
+
+        [Fact]
+        public async Task Uploading_File_With_Local_Progress_Should_Report_Progress()
+        {
+            var percentage = 0;
+            var progress = new ApizrProgress();
+            progress.ProgressChanged += (sender, args) =>
+            {
+                percentage = args.ProgressPercentage;
+            };
+            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options => options
+                    .WithBaseAddress("https://httpbin.org/post")
+                    .WithProgress());
+            
+            apizrTransferManager.Should().NotBeNull(); // Built-in
+
+            var apizrTransferManagerResult = await apizrTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"), options => options.WithProgress(progress));
+
+            apizrTransferManagerResult.Should().NotBeNull();
+            apizrTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
+            percentage.Should().Be(100);
+        }
+
+        [Fact]
+        public async Task Uploading_File_With_Global_Progress_Should_Report_Progress()
+        {
+            var percentage = 0;
+            var progress = new ApizrProgress();
+            progress.ProgressChanged += (sender, args) =>
+            {
+                percentage = args.ProgressPercentage;
+            };
+            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options => options
+                        .WithBaseAddress("https://httpbin.org/post")
+                        .WithProgress(progress));
+            
+            apizrTransferManager.Should().NotBeNull(); // Built-in
+
+            var apizrTransferManagerResult = await apizrTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+
+            apizrTransferManagerResult.Should().NotBeNull();
+            apizrTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
+            percentage.Should().Be(100);
         }
     }
 }

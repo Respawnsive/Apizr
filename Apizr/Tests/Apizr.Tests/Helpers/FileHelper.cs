@@ -2,13 +2,19 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Microsoft.VisualBasic.FileIO;
+using Refit;
 
 namespace Apizr.Tests.Helpers
 {
     internal static class FileHelper
     {
-        internal static Stream GetTestFileStream(string relativeFilePath)
+        internal static StreamPart GetTestFileStreamPart(string fileName)
         {
+            var fileExtension = "pdf";
+            var fileType = "application/pdf";
+            var relativeFilePath = $"Files/Test_{fileName}.{fileExtension}";
+
             const char namespaceSeparator = '.';
 
             // get calling assembly
@@ -35,7 +41,7 @@ namespace Apizr.Tests.Helpers
                 throw new Exception($"Unable to find resource for path \"{relativeFilePath}\". Resource named \"{fullName}\" was not found in assembly.");
             }
 
-            return stream;
+            return new StreamPart(stream, $"test_{fileName}-streampart.{fileExtension}", $"{fileType}");
         }
     }
 }

@@ -1073,7 +1073,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Downloading_File_With_Progress_Should_Report_Progress()
+        public async Task Downloading_File_With_Local_Progress_Should_Report_Progress()
         {
             var percentage = 0;
             var progress = new ApizrProgress();
@@ -1084,11 +1084,36 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
-                .AddGroup(transferRegistry => transferRegistry
-                    .AddTransferManagerFor<ITransferSampleApi>()
-                    .AddTransferManagerFor<ITransferApi>(options => options
-                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))),
-                options => options.WithProgress(progress));
+                .AddTransferManager(options => options
+                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
+                        .WithProgress()));
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            var apizrTransferManager = serviceProvider.GetService<IApizrTransferManager>(); // Built-in
+            apizrTransferManager.Should().NotBeNull(); // Built-in
+
+            var fileInfo = await apizrTransferManager.DownloadAsync(new FileInfo("test10Mb.db"), options => options.WithProgress(progress)).ConfigureAwait(false);
+
+            percentage.Should().Be(100);
+            fileInfo.Length.Should().BePositive();
+        }
+
+        [Fact]
+        public async Task Downloading_File_With_Global_Progress_Should_Report_Progress()
+        {
+            var percentage = 0;
+            var progress = new ApizrProgress();
+            progress.ProgressChanged += (sender, args) =>
+            {
+                percentage = args.ProgressPercentage;
+            };
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddApizr(registry => registry
+                .AddTransferManager(options => options
+                    .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
+                    .WithProgress(progress)));
 
             var serviceProvider = services.BuildServiceProvider();
 
@@ -1131,43 +1156,36 @@ namespace Apizr.Tests
             apizrUploadManager.Should().NotBeNull(); // Built-in
             apizrUploadTypedManager.Should().NotBeNull(); // Built-in
             apizrCustomUploadManager.Should().NotBeNull(); // Custom
-
-            var fileSuffix = "small";
-            var fileExtension = "pdf";
-            var fileType = "application/pdf";
-
-            await using var stream = FileHelper.GetTestFileStream($"Files/Test_{fileSuffix}.{fileExtension}");
-            var streamPart = new StreamPart(stream, $"test_{fileSuffix}-streampart.{fileExtension}", $"{fileType}");
-
+            
             // Transfer
             // Built-in
-            var apizrTransferManagerResult = await apizrTransferManager.UploadAsync<HttpResponseMessage>(streamPart);
+            var apizrTransferManagerResult = await apizrTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
             apizrTransferManagerResult.Should().NotBeNull();
             apizrTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Built-in
-            var apizrTransferTypedManagerResult = await apizrTransferTypedManager.UploadAsync<HttpResponseMessage>(streamPart);
+            var apizrTransferTypedManagerResult = await apizrTransferTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
             apizrTransferTypedManagerResult.Should().NotBeNull();
             apizrTransferTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Custom
-            var apizrCustomTransferManagerResult = await apizrCustomTransferManager.UploadAsync<HttpResponseMessage>(streamPart);
+            var apizrCustomTransferManagerResult = await apizrCustomTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
             apizrCustomTransferManagerResult.Should().NotBeNull();
             apizrCustomTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Download
             // Built-in
-            var apizrUploadManagerResult = await apizrUploadManager.UploadAsync<HttpResponseMessage>(streamPart);
+            var apizrUploadManagerResult = await apizrUploadManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
             apizrUploadManagerResult.Should().NotBeNull();
             apizrUploadManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Built-in
-            var apizrUploadTypedManagerResult = await apizrUploadTypedManager.UploadAsync<HttpResponseMessage>(streamPart);
+            var apizrUploadTypedManagerResult = await apizrUploadTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
             apizrUploadTypedManagerResult.Should().NotBeNull();
             apizrUploadTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Custom
-            var apizrCustomUploadManagerResult = await apizrCustomUploadManager.UploadAsync<HttpResponseMessage>(streamPart);
+            var apizrCustomUploadManagerResult = await apizrCustomUploadManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
             apizrCustomUploadManagerResult.Should().NotBeNull();
             apizrCustomUploadManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
@@ -1189,39 +1207,39 @@ namespace Apizr.Tests
             regCustomUploadTypedManager.Should().NotBeNull(); // Custom
 
             // Shortcut
-            var regShortcutResult = await registry.UploadAsync<IUploadApi, HttpResponseMessage>(streamPart);
+            var regShortcutResult = await registry.UploadAsync<IUploadApi, HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
             regShortcutResult.Should().NotBeNull();
             regShortcutResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Transfer
             // Built-in
-            var regTransferManagerResult = await regTransferManager.UploadAsync<HttpResponseMessage>(streamPart);
+            var regTransferManagerResult = await regTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
             regTransferManagerResult.Should().NotBeNull();
             regTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Built-in
-            var regTransferTypedManagerResult = await regTransferTypedManager.UploadAsync<HttpResponseMessage>(streamPart);
+            var regTransferTypedManagerResult = await regTransferTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
             regTransferTypedManagerResult.Should().NotBeNull();
             regTransferTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Custom
-            var regCustomTransferTypedManagerResult = await regCustomTransferTypedManager.UploadAsync<HttpResponseMessage>(streamPart);
+            var regCustomTransferTypedManagerResult = await regCustomTransferTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
             regCustomTransferTypedManagerResult.Should().NotBeNull();
             regCustomTransferTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Upload
             // Built-in
-            var regUploadManagerResult = await regUploadManager.UploadAsync<HttpResponseMessage>(streamPart);
+            var regUploadManagerResult = await regUploadManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
             regUploadManagerResult.Should().NotBeNull();
             regUploadManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Built-in
-            var regUploadTypedManagerResult = await regUploadTypedManager.UploadAsync<HttpResponseMessage>(streamPart);
+            var regUploadTypedManagerResult = await regUploadTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
             regUploadTypedManagerResult.Should().NotBeNull();
             regUploadTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Custom
-            var regCustomUploadTypedManagerResult = await regCustomUploadTypedManager.UploadAsync<HttpResponseMessage>(streamPart);
+            var regCustomUploadTypedManagerResult = await regCustomUploadTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
             regCustomUploadTypedManagerResult.Should().NotBeNull();
             regCustomUploadTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
         }
@@ -1233,12 +1251,13 @@ namespace Apizr.Tests
             services.AddPolicyRegistry(_policyRegistry);
 
             services.AddApizr(registry => registry
-                .AddGroup(group => group
-                        .AddTransferManager(options => options.WithBasePath("/files"))
+                    .AddGroup(group => group
+                        .AddTransferManager()
                         .AddTransferManagerFor<ITransferUndefinedApi>()
-                        .AddDownloadManager(options => options.WithBasePath("/files"))
-                        .AddDownloadManagerFor<ITransferUndefinedApi>(),
-                    options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr")));
+                        .AddUploadManager()
+                        .AddUploadManagerFor<ITransferUndefinedApi>()),
+                options => options
+                    .WithBaseAddress("https://httpbin.org/post"));
 
             var serviceProvider = services.BuildServiceProvider();
 
@@ -1246,48 +1265,48 @@ namespace Apizr.Tests
             var apizrTransferManager = serviceProvider.GetService<IApizrTransferManager>(); // Built-in
             var apizrTransferTypedManager = serviceProvider.GetService<IApizrTransferManager<ITransferApi>>(); // Built-in
             var apizrCustomTransferManager = serviceProvider.GetService<IApizrTransferManager<ITransferUndefinedApi>>(); // Custom
-            var apizrDownloadManager = serviceProvider.GetService<IApizrDownloadManager>(); // Built-in
-            var apizrDownloadTypedManager = serviceProvider.GetService<IApizrDownloadManager<IDownloadApi>>(); // Built-in
-            var apizrCustomDownloadManager = serviceProvider.GetService<IApizrDownloadManager<ITransferUndefinedApi>>(); // Custom
+            var apizrUploadManager = serviceProvider.GetService<IApizrUploadManager>(); // Built-in
+            var apizrUploadTypedManager = serviceProvider.GetService<IApizrUploadManager<IUploadApi>>(); // Built-in
+            var apizrCustomUploadManager = serviceProvider.GetService<IApizrUploadManager<ITransferUndefinedApi>>(); // Custom
 
             apizrTransferManager.Should().NotBeNull(); // Built-in
             apizrTransferTypedManager.Should().NotBeNull(); // Built-in
             apizrCustomTransferManager.Should().NotBeNull(); // Custom
-            apizrDownloadManager.Should().NotBeNull(); // Built-in
-            apizrDownloadTypedManager.Should().NotBeNull(); // Built-in
-            apizrCustomDownloadManager.Should().NotBeNull(); // Custom
+            apizrUploadManager.Should().NotBeNull(); // Built-in
+            apizrUploadTypedManager.Should().NotBeNull(); // Built-in
+            apizrCustomUploadManager.Should().NotBeNull(); // Custom
 
             // Transfer
             // Built-in
-            var apizrTransferManagerResult = await apizrTransferManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrTransferManagerResult = await apizrTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
             apizrTransferManagerResult.Should().NotBeNull();
-            apizrTransferManagerResult.Length.Should().BePositive();
+            apizrTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Built-in
-            var apizrTransferTypedManagerResult = await apizrTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrTransferTypedManagerResult = await apizrTransferTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
             apizrTransferTypedManagerResult.Should().NotBeNull();
-            apizrTransferTypedManagerResult.Length.Should().BePositive();
+            apizrTransferTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Custom
-            var apizrCustomTransferManagerResult = await apizrCustomTransferManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrCustomTransferManagerResult = await apizrCustomTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
             apizrCustomTransferManagerResult.Should().NotBeNull();
-            apizrCustomTransferManagerResult.Length.Should().BePositive();
+            apizrCustomTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Download
             // Built-in
-            var apizrDownloadManagerResult = await apizrDownloadManager.DownloadAsync(new FileInfo("test100k.db"));
-            apizrDownloadManagerResult.Should().NotBeNull();
-            apizrDownloadManagerResult.Length.Should().BePositive();
+            var apizrUploadManagerResult = await apizrUploadManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            apizrUploadManagerResult.Should().NotBeNull();
+            apizrUploadManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Built-in
-            var apizrDownloadTypedManagerResult = await apizrDownloadTypedManager.DownloadAsync(new FileInfo("test100k.db"));
-            apizrDownloadTypedManagerResult.Should().NotBeNull();
-            apizrDownloadTypedManagerResult.Length.Should().BePositive();
+            var apizrUploadTypedManagerResult = await apizrUploadTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            apizrUploadTypedManagerResult.Should().NotBeNull();
+            apizrUploadTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Custom
-            var apizrCustomDownloadManagerResult = await apizrCustomDownloadManager.DownloadAsync(new FileInfo("test100k.db"));
-            apizrCustomDownloadManagerResult.Should().NotBeNull();
-            apizrCustomDownloadManagerResult.Length.Should().BePositive();
+            var apizrCustomUploadManagerResult = await apizrCustomUploadManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            apizrCustomUploadManagerResult.Should().NotBeNull();
+            apizrCustomUploadManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Get instances from the registry
             var registry = serviceProvider.GetRequiredService<IApizrExtendedRegistry>();
@@ -1295,57 +1314,57 @@ namespace Apizr.Tests
             registry.TryGetTransferManager(out var regTransferManager).Should().BeTrue(); // Built-in
             registry.TryGetTransferManagerFor<ITransferApi>(out var regTransferTypedManager).Should().BeTrue(); // Built-in
             registry.TryGetTransferManagerFor<ITransferUndefinedApi>(out var regCustomTransferTypedManager).Should().BeTrue(); // Custom
-            registry.TryGetDownloadManager(out var regDownloadManager).Should().BeTrue(); // Built-in
-            registry.TryGetDownloadManagerFor<IDownloadApi>(out var regDownloadTypedManager).Should().BeTrue(); // Built-in
-            registry.TryGetDownloadManagerFor<ITransferUndefinedApi>(out var regCustomDownloadTypedManager).Should().BeTrue(); // Custom
+            registry.TryGetUploadManager(out var regUploadManager).Should().BeTrue(); // Built-in
+            registry.TryGetUploadManagerFor<IUploadApi>(out var regUploadTypedManager).Should().BeTrue(); // Built-in
+            registry.TryGetUploadManagerFor<ITransferUndefinedApi>(out var regCustomUploadTypedManager).Should().BeTrue(); // Custom
 
             regTransferManager.Should().NotBeNull(); // Built-in
             regTransferTypedManager.Should().NotBeNull(); // Built-in
             regCustomTransferTypedManager.Should().NotBeNull(); // Custom
-            regDownloadManager.Should().NotBeNull(); // Built-in
-            regDownloadTypedManager.Should().NotBeNull(); // Built-in
-            regCustomDownloadTypedManager.Should().NotBeNull(); // Custom
+            regUploadManager.Should().NotBeNull(); // Built-in
+            regUploadTypedManager.Should().NotBeNull(); // Built-in
+            regCustomUploadTypedManager.Should().NotBeNull(); // Custom
 
             // Shortcut
-            var regShortcutResult = await registry.DownloadAsync(new FileInfo("test100k.db"));
+            var regShortcutResult = await registry.UploadAsync<IUploadApi, HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
             regShortcutResult.Should().NotBeNull();
-            regShortcutResult.Length.Should().BePositive();
+            regShortcutResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Transfer
             // Built-in
-            var regTransferManagerResult = await regTransferManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regTransferManagerResult = await regTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
             regTransferManagerResult.Should().NotBeNull();
-            regTransferManagerResult.Length.Should().BePositive();
+            regTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Built-in
-            var regTransferTypedManagerResult = await regTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regTransferTypedManagerResult = await regTransferTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
             regTransferTypedManagerResult.Should().NotBeNull();
-            regTransferTypedManagerResult.Length.Should().BePositive();
+            regTransferTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Custom
-            var regCustomTransferTypedManagerResult = await regCustomTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regCustomTransferTypedManagerResult = await regCustomTransferTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
             regCustomTransferTypedManagerResult.Should().NotBeNull();
-            regCustomTransferTypedManagerResult.Length.Should().BePositive();
+            regCustomTransferTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
-            // Download
+            // Upload
             // Built-in
-            var regDownloadManagerResult = await regDownloadManager.DownloadAsync(new FileInfo("test100k.db"));
-            regDownloadManagerResult.Should().NotBeNull();
-            regDownloadManagerResult.Length.Should().BePositive();
+            var regUploadManagerResult = await regUploadManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            regUploadManagerResult.Should().NotBeNull();
+            regUploadManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Built-in
-            var regDownloadTypedManagerResult = await regDownloadTypedManager.DownloadAsync(new FileInfo("test100k.db"));
-            regDownloadTypedManagerResult.Should().NotBeNull();
-            regDownloadTypedManagerResult.Length.Should().BePositive();
+            var regUploadTypedManagerResult = await regUploadTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            regUploadTypedManagerResult.Should().NotBeNull();
+            regUploadTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Custom
-            var regCustomDownloadTypedManagerResult = await regCustomDownloadTypedManager.DownloadAsync(new FileInfo("test100k.db"));
-            regCustomDownloadTypedManagerResult.Should().NotBeNull();
-            regCustomDownloadTypedManagerResult.Length.Should().BePositive();
+            var regCustomUploadTypedManagerResult = await regCustomUploadTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            regCustomUploadTypedManagerResult.Should().NotBeNull();
+            regCustomUploadTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
         }
 
         [Fact]
-        public async Task Uploading_File_With_Progress_Should_Report_Progress()
+        public async Task Uploading_File_With_Local_Progress_Should_Report_Progress()
         {
             var percentage = 0;
             var progress = new ApizrProgress();
@@ -1356,21 +1375,48 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
-                .AddGroup(transferRegistry => transferRegistry
-                    .AddTransferManagerFor<ITransferSampleApi>()
-                    .AddTransferManagerFor<ITransferApi>(options => options
-                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))),
-                options => options.WithProgress(progress));
+                .AddTransferManager(options => options
+                    .WithBaseAddress("https://httpbin.org/post")
+                    .WithProgress()));
 
             var serviceProvider = services.BuildServiceProvider();
 
             var apizrTransferManager = serviceProvider.GetService<IApizrTransferManager>(); // Built-in
             apizrTransferManager.Should().NotBeNull(); // Built-in
 
-            var fileInfo = await apizrTransferManager.DownloadAsync(new FileInfo("test10Mb.db")).ConfigureAwait(false);
+            var apizrTransferManagerResult = await apizrTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"), options => options.WithProgress(progress));
 
+            apizrTransferManagerResult.Should().NotBeNull();
+            apizrTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
             percentage.Should().Be(100);
-            fileInfo.Length.Should().BePositive();
+        }
+
+        [Fact]
+        public async Task Uploading_File_With_Global_Progress_Should_Report_Progress()
+        {
+            var percentage = 0;
+            var progress = new ApizrProgress();
+            progress.ProgressChanged += (sender, args) =>
+            {
+                percentage = args.ProgressPercentage;
+            };
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddApizr(registry => registry
+                    .AddTransferManager(options => options
+                        .WithBaseAddress("https://httpbin.org/post")
+                        .WithProgress(progress)));
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            var apizrTransferManager = serviceProvider.GetService<IApizrTransferManager>(); // Built-in
+            apizrTransferManager.Should().NotBeNull(); // Built-in
+
+            var apizrTransferManagerResult = await apizrTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+
+            apizrTransferManagerResult.Should().NotBeNull();
+            apizrTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
+            percentage.Should().Be(100);
         }
 
         [Fact]

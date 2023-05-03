@@ -27,6 +27,7 @@ using Apizr.Policing;
 using Apizr.Progressing;
 using Apizr.Requesting;
 using Apizr.Sample.Console.Models;
+using Apizr.Sample.Console.Models.Uploads;
 using Apizr.Sample.Models;
 using Apizr.Transferring.Requesting;
 using AutoMapper;
@@ -149,10 +150,10 @@ namespace Apizr.Sample.Console
                         logging.SetMinimumLevel(LogLevel.Trace);
                     }));
 
-                    _httpBinManager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
+                    //_httpBinManager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
 
                     var fileManager = ApizrBuilder.Current.CreateUploadManager(options => options.WithBaseAddress("https://httpbin.org/post").WithLoggerFactory(() => lazyLoggerFactory.Value));
-                    await fileManager.UploadAsync(streamPart);
+                    var result = await fileManager.UploadAsync<UploadResult>(streamPart);
                     //var fileManager = ApizrBuilder.Current.CreateTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr").WithLoggerFactory(() => lazyLoggerFactory.Value));
                     //var fileInfo = await fileManager.DownloadAsync(new FileInfo("test10Mb.db"), new Dictionary<string, object> { { "key1", "value1" } }, options => options.WithDynamicPath("files")).ConfigureAwait(false);
                     //var fileManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferSampleApi>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));

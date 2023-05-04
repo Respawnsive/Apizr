@@ -6,41 +6,25 @@ using System.Threading.Tasks;
 
 namespace Apizr.Transferring.Requesting;
 
-public interface IUploadApi : ITransferApiBase
+public interface IUploadApi<TApiResultData> : ITransferApiBase
 {
     #region ByteArrayPart
 
     [Multipart]
     [Post("")]
-    Task UploadAsync(ByteArrayPart byteArrayPart);
+    Task<TApiResultData> UploadAsync(ByteArrayPart byteArrayPart);
 
     [Multipart]
     [Post("/{path}"), QueryUriFormat(UriFormat.Unescaped)]
-    Task UploadAsync(ByteArrayPart byteArrayPart, string path);
+    Task<TApiResultData> UploadAsync(ByteArrayPart byteArrayPart, string path);
 
     [Multipart]
     [Post("")]
-    Task UploadAsync(ByteArrayPart byteArrayPart, [RequestOptions] IApizrRequestOptions options);
+    Task<TApiResultData> UploadAsync(ByteArrayPart byteArrayPart, [RequestOptions] IApizrRequestOptions options);
 
     [Multipart]
     [Post("/{path}"), QueryUriFormat(UriFormat.Unescaped)]
-    Task UploadAsync(ByteArrayPart byteArrayPart, string path, [RequestOptions] IApizrRequestOptions options);
-
-    [Multipart]
-    [Post("")]
-    Task<TApiResultData> UploadAsync<TApiResultData>(ByteArrayPart byteArrayPart);
-
-    [Multipart]
-    [Post("/{path}"), QueryUriFormat(UriFormat.Unescaped)]
-    Task<TApiResultData> UploadAsync<TApiResultData>(ByteArrayPart byteArrayPart, string path);
-
-    [Multipart]
-    [Post("")]
-    Task<TApiResultData> UploadAsync<TApiResultData>(ByteArrayPart byteArrayPart, [RequestOptions] IApizrRequestOptions options);
-
-    [Multipart]
-    [Post("/{path}"), QueryUriFormat(UriFormat.Unescaped)]
-    Task<TApiResultData> UploadAsync<TApiResultData>(ByteArrayPart byteArrayPart, string path, [RequestOptions] IApizrRequestOptions options);
+    Task<TApiResultData> UploadAsync(ByteArrayPart byteArrayPart, string path, [RequestOptions] IApizrRequestOptions options);
 
     #endregion
 
@@ -48,35 +32,19 @@ public interface IUploadApi : ITransferApiBase
 
     [Multipart]
     [Post("")]
-    Task UploadAsync(StreamPart streamPart);
+    Task<TApiResultData> UploadAsync(StreamPart streamPart);
 
     [Multipart]
     [Post("/{path}"), QueryUriFormat(UriFormat.Unescaped)]
-    Task UploadAsync(StreamPart streamPart, string path);
+    Task<TApiResultData> UploadAsync(StreamPart streamPart, string path);
 
     [Multipart]
     [Post("")]
-    Task UploadAsync(StreamPart streamPart, [RequestOptions] IApizrRequestOptions options);
+    Task<TApiResultData> UploadAsync(StreamPart streamPart, [RequestOptions] IApizrRequestOptions options);
 
     [Multipart]
     [Post("/{path}"), QueryUriFormat(UriFormat.Unescaped)]
-    Task UploadAsync(StreamPart streamPart, string path, [RequestOptions] IApizrRequestOptions options);
-
-    [Multipart]
-    [Post("")]
-    Task<TApiResultData> UploadAsync<TApiResultData>(StreamPart streamPart);
-
-    [Multipart]
-    [Post("/{path}"), QueryUriFormat(UriFormat.Unescaped)]
-    Task<TApiResultData> UploadAsync<TApiResultData>(StreamPart streamPart, string path);
-
-    [Multipart]
-    [Post("")]
-    Task<TApiResultData> UploadAsync<TApiResultData>(StreamPart streamPart, [RequestOptions] IApizrRequestOptions options);
-
-    [Multipart]
-    [Post("/{path}"), QueryUriFormat(UriFormat.Unescaped)]
-    Task<TApiResultData> UploadAsync<TApiResultData>(StreamPart streamPart, string path, [RequestOptions] IApizrRequestOptions options);
+    Task<TApiResultData> UploadAsync(StreamPart streamPart, string path, [RequestOptions] IApizrRequestOptions options);
 
     #endregion
 
@@ -84,35 +52,23 @@ public interface IUploadApi : ITransferApiBase
 
     [Multipart]
     [Post("")]
-    Task UploadAsync(FileInfoPart fileInfoPart);
+    Task<TApiResultData> UploadAsync(FileInfoPart fileInfoPart);
 
     [Multipart]
     [Post("/{filePath}"), QueryUriFormat(UriFormat.Unescaped)]
-    Task UploadAsync(FileInfoPart fileInfoPart, string filePath);
+    Task<TApiResultData> UploadAsync(FileInfoPart fileInfoPart, string filePath);
 
     [Multipart]
     [Post("")]
-    Task UploadAsync(FileInfoPart fileInfoPart, [RequestOptions] IApizrRequestOptions options);
+    Task<TApiResultData> UploadAsync(FileInfoPart fileInfoPart, [RequestOptions] IApizrRequestOptions options);
 
     [Multipart]
     [Post("/{filePath}"), QueryUriFormat(UriFormat.Unescaped)]
-    Task UploadAsync(FileInfoPart fileInfoPart, string filePath, [RequestOptions] IApizrRequestOptions options);
-
-    [Multipart]
-    [Post("")]
-    Task<TApiResultData> UploadAsync<TApiResultData>(FileInfoPart fileInfoPart);
-
-    [Multipart]
-    [Post("/{filePath}"), QueryUriFormat(UriFormat.Unescaped)]
-    Task<TApiResultData> UploadAsync<TApiResultData>(FileInfoPart fileInfoPart, string filePath);
-
-    [Multipart]
-    [Post("")]
-    Task<TApiResultData> UploadAsync<TApiResultData>(FileInfoPart fileInfoPart, [RequestOptions] IApizrRequestOptions options);
-
-    [Multipart]
-    [Post("/{filePath}"), QueryUriFormat(UriFormat.Unescaped)]
-    Task<TApiResultData> UploadAsync<TApiResultData>(FileInfoPart fileInfoPart, string filePath, [RequestOptions] IApizrRequestOptions options); 
+    Task<TApiResultData> UploadAsync(FileInfoPart fileInfoPart, string filePath, [RequestOptions] IApizrRequestOptions options);
 
     #endregion
+}
+
+public interface IUploadApi : IUploadApi<HttpResponseMessage>
+{
 }

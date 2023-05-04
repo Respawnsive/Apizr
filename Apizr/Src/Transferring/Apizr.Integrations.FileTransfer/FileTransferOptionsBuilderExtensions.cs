@@ -50,6 +50,20 @@ public static class FileTransferOptionsBuilderExtensions
             builder.CreateManagerFor<TUploadApi>(optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody)));
 
     /// <summary>
+    /// Create an upload manager for the provided upload api derived from IUploadApi
+    /// </summary>
+    /// <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
+    /// <typeparam name="TUploadApiResultData">The upload api result type</typeparam>
+    /// <param name="builder">The builder to create the manager from</param>
+    /// <param name="optionsBuilder">The builder defining some options</param>
+    /// <returns></returns>
+    public static IApizrUploadManager<TUploadApi, TUploadApiResultData> CreateUploadManagerFor<TUploadApi, TUploadApiResultData>(this IApizrBuilder builder,
+        Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
+        where TUploadApi : IUploadApi<TUploadApiResultData> =>
+        new ApizrUploadManager<TUploadApi, TUploadApiResultData>(
+            builder.CreateManagerFor<TUploadApi>(optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody)));
+
+    /// <summary>
     /// Create a download manager for IDownloadApi (you must at least provide a base url thanks to the options builder)
     /// </summary>
     /// <param name="builder">The builder to create the manager from</param>
@@ -136,6 +150,25 @@ public static class FileTransferOptionsBuilderExtensions
             builder.CreateUploadManagerFor<TTransferApi>(IgnoreMessageParts(optionsBuilder,
                 HttpMessageParts.RequestBody)));
 
+    /// <summary>
+    /// Create a transfer manager for the provided transfer api derived from ITransferApi{TDownloadParams}
+    /// </summary>
+    /// <typeparam name="TTransferApi">The transfer api interface to manage</typeparam>
+    /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+    /// <typeparam name="TUploadApiResultData">The upload api result type</typeparam>
+    /// <param name="builder">The builder to create the manager from</param>
+    /// <param name="optionsBuilder">The builder defining some options</param>
+    /// <returns></returns>
+    public static IApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData> CreateTransferManagerFor<TTransferApi,
+        TDownloadParams, TUploadApiResultData>(this IApizrBuilder builder,
+        Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
+        where TTransferApi : ITransferApi<TDownloadParams, TUploadApiResultData> =>
+        new ApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData>(
+            builder.CreateDownloadManagerFor<TTransferApi, TDownloadParams>(IgnoreMessageParts(optionsBuilder,
+                HttpMessageParts.ResponseBody)),
+            builder.CreateUploadManagerFor<TTransferApi, TUploadApiResultData>(IgnoreMessageParts(optionsBuilder,
+                HttpMessageParts.RequestBody)));
+
     #endregion
 
     #region Multiple
@@ -174,6 +207,27 @@ public static class FileTransferOptionsBuilderExtensions
                 internalBuilder.AddWrappingManagerFor<TUploadApi, IApizrUploadManager<TUploadApi>>(
                     apizrManager => new ApizrUploadManager<TUploadApi>(apizrManager),
                     optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody));
+        }
+
+        return builder;
+    }
+
+    /// <summary>
+    /// Add an upload manager for the provided upload api derived from IUploadApi
+    /// </summary>
+    /// <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
+    /// <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+    /// <param name="builder">The builder to create the manager from</param>
+    /// <param name="optionsBuilder">The builder defining some options</param>
+    /// <returns></returns>
+    public static IApizrRegistryBuilder AddUploadManagerFor<TUploadApi, TUploadApiResultData>(this IApizrRegistryBuilder builder, Action<IApizrProperOptionsBuilder> optionsBuilder = null)
+        where TUploadApi : IUploadApi<TUploadApiResultData>
+    {
+        if (builder is IApizrInternalRegistryBuilder<IApizrProperOptionsBuilder> internalBuilder)
+        {
+            internalBuilder.AddWrappingManagerFor<TUploadApi, IApizrUploadManager<TUploadApi, TUploadApiResultData>>(
+                apizrManager => new ApizrUploadManager<TUploadApi, TUploadApiResultData>(apizrManager),
+                optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody));
         }
 
         return builder;
@@ -353,6 +407,43 @@ public static class FileTransferOptionsBuilderExtensions
                 apizrManager => new ApizrTransferManager<TTransferApi, TDownloadParams>(
                     new ApizrDownloadManager<TTransferApi, TDownloadParams>(apizrManager),
                     new ApizrUploadManager<TTransferApi>(apizrManager)),
+                optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody | HttpMessageParts.ResponseBody));
+        }
+
+        return builder;
+    }
+
+    /// <summary>
+    /// Add a transfer manager for the provided transfer api derived from ITransferApi{TDownloadParams}
+    /// </summary>
+    /// <typeparam name="TTransferApi">The transfer api interface to manage</typeparam>
+    /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+    /// <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+    /// <param name="builder">The builder to create the manager from</param>
+    /// <param name="optionsBuilder">The builder defining some options</param>
+    /// <returns></returns>
+    public static IApizrRegistryBuilder AddTransferManagerFor<TTransferApi, TDownloadParams, TUploadApiResultData>(
+        this IApizrRegistryBuilder builder,
+        Action<IApizrProperOptionsBuilder> optionsBuilder = null)
+        where TTransferApi : ITransferApi<TDownloadParams, TUploadApiResultData>
+    {
+        if (builder is IApizrInternalRegistryBuilder<IApizrProperOptionsBuilder> internalBuilder)
+        {
+            // Upload
+            internalBuilder.AddWrappingManagerFor<TTransferApi, IApizrUploadManager<TTransferApi, TUploadApiResultData>>(
+                apizrManager => new ApizrUploadManager<TTransferApi, TUploadApiResultData>(apizrManager),
+                optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody));
+
+            // Download
+            internalBuilder.AddWrappingManagerFor<TTransferApi, IApizrDownloadManager<TTransferApi, TDownloadParams>>(
+                apizrManager => new ApizrDownloadManager<TTransferApi, TDownloadParams>(apizrManager),
+                optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody));
+
+            // Transfer
+            internalBuilder.AddWrappingManagerFor<TTransferApi, IApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData>>(
+                apizrManager => new ApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData>(
+                    new ApizrDownloadManager<TTransferApi, TDownloadParams>(apizrManager),
+                    new ApizrUploadManager<TTransferApi, TUploadApiResultData>(apizrManager)),
                 optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody | HttpMessageParts.ResponseBody));
         }
 

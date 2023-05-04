@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using Apizr.Configuring.Request;
 using Apizr.Mediation.Commanding;
 using Apizr.Transferring.Requesting;
@@ -11,7 +12,8 @@ namespace Apizr.Mediation.Requesting
     /// The mediation upload command
     /// </summary>
     /// <typeparam name="TUploadApi">The upload api type to manage</typeparam>
-    public class UploadCommand<TUploadApi> : MediationCommandBase<Unit, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder> where TUploadApi : IUploadApi
+    /// <typeparam name="TUploadApiResultData">The upload api result data type</typeparam>
+    public class UploadCommand<TUploadApi, TUploadApiResultData> : MediationCommandBase<Unit, TUploadApiResultData, IApizrRequestOptions, IApizrRequestOptionsBuilder> where TUploadApi : IUploadApi<TUploadApiResultData>
     {
         /// <summary>
         /// Upload a file from its bytes data
@@ -60,6 +62,27 @@ namespace Apizr.Mediation.Requesting
         /// The file bytes data
         /// </summary>
         public ByteArrayPart ByteArrayPart { get; }
+    }
+
+    /// <summary>
+    /// The mediation upload command
+    /// </summary>
+    public class UploadCommand<TUploadApi> : UploadCommand<TUploadApi, HttpResponseMessage> where TUploadApi : IUploadApi
+    {
+        /// <inheritdoc />
+        public UploadCommand(ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(byteArrayPart, optionsBuilder)
+        {
+        }
+
+        /// <inheritdoc />
+        public UploadCommand(StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(streamPart, optionsBuilder)
+        {
+        }
+
+        /// <inheritdoc />
+        public UploadCommand(FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(fileInfoPart, optionsBuilder)
+        {
+        }
     }
 
     /// <summary>

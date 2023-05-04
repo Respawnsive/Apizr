@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Configuring.Request;
 using Apizr.Transferring.Requesting;
@@ -10,7 +11,8 @@ namespace Apizr.Transferring.Managing;
 /// The upload manager
 /// </summary>
 /// <typeparam name="TUploadApi">The upload api type to manage</typeparam>
-public interface IApizrUploadManager<TUploadApi> : IApizrTransferManagerBase<TUploadApi> where TUploadApi : IUploadApi
+/// <typeparam name="TUploadApiResultData">The upload api result type</typeparam>
+public interface IApizrUploadManager<TUploadApi, TUploadApiResultData> : IApizrTransferManagerBase<TUploadApi> where TUploadApi : IUploadApi<TUploadApiResultData>
 {
     /// <summary>
     /// Upload a file from its bytes data
@@ -18,7 +20,7 @@ public interface IApizrUploadManager<TUploadApi> : IApizrTransferManagerBase<TUp
     /// <param name="byteArrayPart">The file bytes data</param>
     /// <param name="optionsBuilder">Some request options</param>
     /// <returns></returns>
-    Task UploadAsync(ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+    Task<TUploadApiResultData> UploadAsync(ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
     /// <summary>
     /// Upload a file from its stream data
@@ -26,7 +28,7 @@ public interface IApizrUploadManager<TUploadApi> : IApizrTransferManagerBase<TUp
     /// <param name="streamPart">The file stream data</param>
     /// <param name="optionsBuilder">Some request options</param>
     /// <returns></returns>
-    Task UploadAsync(StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+    Task<TUploadApiResultData> UploadAsync(StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
     /// <summary>
     /// Upload a file from its file info data
@@ -34,32 +36,15 @@ public interface IApizrUploadManager<TUploadApi> : IApizrTransferManagerBase<TUp
     /// <param name="fileInfoPart">The file info data</param>
     /// <param name="optionsBuilder">Some request options</param>
     /// <returns></returns>
-    Task UploadAsync(FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
-
-    /// <summary>
-    /// Upload a file from its bytes data
-    /// </summary>
-    /// <param name="byteArrayPart">The file bytes data</param>
-    /// <param name="optionsBuilder">Some request options</param>
-    /// <returns></returns>
-    Task<TApiResultData> UploadAsync<TApiResultData>(ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
-
-    /// <summary>
-    /// Upload a file from its stream data
-    /// </summary>
-    /// <param name="streamPart">The file stream data</param>
-    /// <param name="optionsBuilder">Some request options</param>
-    /// <returns></returns>
-    Task<TApiResultData> UploadAsync<TApiResultData>(StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
-
-    /// <summary>
-    /// Upload a file from its file info data
-    /// </summary>
-    /// <param name="fileInfoPart">The file info data</param>
-    /// <param name="optionsBuilder">Some request options</param>
-    /// <returns></returns>
-    Task<TApiResultData> UploadAsync<TApiResultData>(FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+    Task<TUploadApiResultData> UploadAsync(FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 }
+
+/// <summary>
+/// The upload manager
+/// </summary>
+/// <typeparam name="TUploadApi">The upload api type to manage</typeparam>
+public interface IApizrUploadManager<TUploadApi> : IApizrUploadManager<TUploadApi, HttpResponseMessage> where TUploadApi : IUploadApi
+{}
 
 /// <summary>
 /// The upload manager

@@ -54,7 +54,7 @@ namespace Apizr
                     services.TryAddSingleton(typedMediatorServiceType, typedMediatorImplementationType);
 
                     // Upload
-                    if (typeof(IUploadApi).IsAssignableFrom(webApiType))
+                    if (typeof(IUploadApi).IsAssignableFrom(webApiType))azertyuiop
                     {
                         var requestType = typeof(UploadCommand<>).MakeGenericType(webApiType);
                         var requestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(requestType, typeof(Unit));

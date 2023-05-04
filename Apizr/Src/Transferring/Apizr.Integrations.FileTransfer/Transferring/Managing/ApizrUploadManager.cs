@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Configuring.Request;
 using Apizr.Extending;
@@ -7,28 +8,32 @@ using Refit;
 
 namespace Apizr.Transferring.Managing;
 
-public class ApizrUploadManager<TUploadApi> : ApizrTransferManagerBase<TUploadApi>, IApizrUploadManager<TUploadApi> where TUploadApi : IUploadApi
+public class ApizrUploadManager<TUploadApi, TUploadApiResultData> : ApizrTransferManagerBase<TUploadApi>, IApizrUploadManager<TUploadApi, TUploadApiResultData> where TUploadApi : IUploadApi<TUploadApiResultData>
 {
     public ApizrUploadManager(IApizrManager<TUploadApi> fileTransferApiManager) : base(fileTransferApiManager)
     {
     }
-
+    
     /// <inheritdoc />
-    public Task UploadAsync(ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+    public Task<TUploadApiResultData> UploadAsync(ByteArrayPart byteArrayPart,
+        Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         => TransferApiManager.ExecuteAsync(
             (opt, api) => UploadAsync(api, byteArrayPart, opt.GetDynamicPathOrDefault(), opt), optionsBuilder);
 
     /// <inheritdoc />
-    public Task UploadAsync(StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+    public Task<TUploadApiResultData> UploadAsync(StreamPart streamPart,
+        Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         => TransferApiManager.ExecuteAsync(
             (opt, api) => UploadAsync(api, streamPart, opt.GetDynamicPathOrDefault(), opt), optionsBuilder);
 
     /// <inheritdoc />
-    public Task UploadAsync(FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+    public Task<TUploadApiResultData> UploadAsync(FileInfoPart fileInfoPart,
+        Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         => TransferApiManager.ExecuteAsync(
             (opt, api) => UploadAsync(api, fileInfoPart, opt.GetDynamicPathOrDefault(), opt), optionsBuilder);
 
-    private static Task UploadAsync<TDataType>(TUploadApi api, TDataType data, string path, IApizrRequestOptions options)
+    private static Task<TUploadApiResultData> UploadAsync<TDataType>(TUploadApi api, TDataType data, string path,
+        IApizrRequestOptions options)
     {
         return string.IsNullOrWhiteSpace(path)
             ? data switch
@@ -46,43 +51,13 @@ public class ApizrUploadManager<TUploadApi> : ApizrTransferManagerBase<TUploadAp
                 _ => throw new NotSupportedException($"Data type {data.GetType().Name} is not supported")
             };
     }
+}
 
+public class ApizrUploadManager<TUploadApi> : ApizrUploadManager<TUploadApi, HttpResponseMessage>, IApizrUploadManager<TUploadApi> where TUploadApi : IUploadApi
+{
     /// <inheritdoc />
-    public Task<TApiResultData> UploadAsync<TApiResultData>(ByteArrayPart byteArrayPart,
-        Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-        => TransferApiManager.ExecuteAsync(
-            (opt, api) => UploadAsync<TApiResultData, ByteArrayPart>(api, byteArrayPart, opt.GetDynamicPathOrDefault(), opt), optionsBuilder);
-
-    /// <inheritdoc />
-    public Task<TApiResultData> UploadAsync<TApiResultData>(StreamPart streamPart,
-        Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-        => TransferApiManager.ExecuteAsync(
-            (opt, api) => UploadAsync<TApiResultData, StreamPart>(api, streamPart, opt.GetDynamicPathOrDefault(), opt), optionsBuilder);
-
-    /// <inheritdoc />
-    public Task<TApiResultData> UploadAsync<TApiResultData>(FileInfoPart fileInfoPart,
-        Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-        => TransferApiManager.ExecuteAsync(
-            (opt, api) => UploadAsync<TApiResultData, FileInfoPart>(api, fileInfoPart, opt.GetDynamicPathOrDefault(), opt), optionsBuilder);
-
-    private static Task<TApiResultData> UploadAsync<TApiResultData, TDataType>(TUploadApi api, TDataType data, string path,
-        IApizrRequestOptions options)
+    public ApizrUploadManager(IApizrManager<TUploadApi> fileTransferApiManager) : base(fileTransferApiManager)
     {
-        return string.IsNullOrWhiteSpace(path)
-            ? data switch
-            {
-                ByteArrayPart byteArrayPart => api.UploadAsync<TApiResultData>(byteArrayPart, options),
-                StreamPart streamPart => api.UploadAsync<TApiResultData>(streamPart, options),
-                FileInfoPart fileInfoPart => api.UploadAsync<TApiResultData>(fileInfoPart, options),
-                _ => throw new NotSupportedException($"Data type {data.GetType().Name} is not supported")
-            }
-            : data switch
-            {
-                ByteArrayPart byteArrayPart => api.UploadAsync<TApiResultData>(byteArrayPart, options.GetDynamicPathOrDefault(), options),
-                StreamPart streamPart => api.UploadAsync<TApiResultData>(streamPart, options.GetDynamicPathOrDefault(), options),
-                FileInfoPart fileInfoPart => api.UploadAsync<TApiResultData>(fileInfoPart, options.GetDynamicPathOrDefault(), options),
-                _ => throw new NotSupportedException($"Data type {data.GetType().Name} is not supported")
-            };
     }
 }
 

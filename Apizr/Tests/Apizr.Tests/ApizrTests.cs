@@ -497,7 +497,7 @@ namespace Apizr.Tests
             apizrTransferManager.Should().NotBeNull(); // Built-in
 
             // Shortcut
-            var regShortcutResult = await apizrTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var regShortcutResult = await apizrTransferManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             regShortcutResult.Should().NotBeNull();
             regShortcutResult.StatusCode.Should().Be(HttpStatusCode.OK);
         }
@@ -517,7 +517,7 @@ namespace Apizr.Tests
             
             apizrTransferManager.Should().NotBeNull(); // Built-in
 
-            var apizrTransferManagerResult = await apizrTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"), options => options.WithProgress(progress));
+            var apizrTransferManagerResult = await apizrTransferManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"), options => options.WithProgress(progress));
 
             apizrTransferManagerResult.Should().NotBeNull();
             apizrTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -539,7 +539,7 @@ namespace Apizr.Tests
             
             apizrTransferManager.Should().NotBeNull(); // Built-in
 
-            var apizrTransferManagerResult = await apizrTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var apizrTransferManagerResult = await apizrTransferManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
 
             apizrTransferManagerResult.Should().NotBeNull();
             apizrTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);

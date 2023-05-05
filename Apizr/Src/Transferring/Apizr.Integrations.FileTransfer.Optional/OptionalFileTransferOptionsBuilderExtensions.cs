@@ -11,6 +11,7 @@ using Apizr.Optional.Requesting.Handling;
 using Optional;
 using Apizr.Optional.Requesting.Sending;
 
+[assembly: Apizr.Preserve]
 namespace Apizr
 {
     public static class OptionalFileTransferOptionsBuilderExtensions
@@ -73,6 +74,16 @@ namespace Apizr
                             services.TryAddSingleton(shortRequestHandlerServiceType, shortRequestHandlerImplementationType);
                         }
                     }
+                    else if (typeof(IUploadApi<>).IsAssignableFromGenericType(webApiType))
+                    {
+                        var uploadReturnType = webApiType.GetInterfaces().FirstOrDefault(type => type.IsGenericType)?.GetGenericArguments().First();
+                        var resultType = typeof(Option<,>).MakeGenericType(uploadReturnType, typeof(ApizrException));
+                        var requestType = typeof(UploadOptionalCommand<,>).MakeGenericType(webApiType, uploadReturnType);
+                        var requestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(requestType, resultType);
+                        var requestHandlerImplementationType = typeof(UploadOptionalCommandHandler<,>).MakeGenericType(webApiType, uploadReturnType);
+
+                        services.TryAddSingleton(requestHandlerServiceType, requestHandlerImplementationType);
+                    }
 
                     // Download
                     if (typeof(IDownloadApi).IsAssignableFrom(webApiType))
@@ -101,7 +112,6 @@ namespace Apizr
                         var requestHandlerImplementationType = typeof(DownloadOptionalQueryHandler<,>).MakeGenericType(webApiType, downloadParamsType);
 
                         services.TryAddSingleton(requestHandlerServiceType, requestHandlerImplementationType);
-
                     }
                 }
             });

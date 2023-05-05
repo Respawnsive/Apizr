@@ -14,6 +14,7 @@ using Apizr.Transferring.Managing;
 using Apizr.Transferring.Requesting;
 using Refit;
 
+[assembly: Apizr.Preserve]
 namespace Apizr;
 
 /// <summary>

@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.IO;
 using Apizr.Mediation.Requesting.Sending;
 
+[assembly: Apizr.Preserve]
 namespace Apizr
 {
     public static class MediationFileTransferOptionsBuilderExtensions
@@ -54,7 +55,7 @@ namespace Apizr
                     services.TryAddSingleton(typedMediatorServiceType, typedMediatorImplementationType);
 
                     // Upload
-                    if (typeof(IUploadApi).IsAssignableFrom(webApiType))azertyuiop
+                    if (typeof(IUploadApi).IsAssignableFrom(webApiType))
                     {
                         var requestType = typeof(UploadCommand<>).MakeGenericType(webApiType);
                         var requestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(requestType, typeof(Unit));
@@ -72,7 +73,17 @@ namespace Apizr
                             services.TryAddSingleton(shortRequestHandlerServiceType, shortRequestHandlerImplementationType);
                         }
                     }
-                    
+                    else if (typeof(IUploadApi<>).IsAssignableFromGenericType(webApiType))
+                    {
+                        var uploadReturnType = webApiType.GetInterfaces().FirstOrDefault(type => type.IsGenericType)?.GetGenericArguments().First();
+                        var requestType = typeof(UploadCommand<,>).MakeGenericType(webApiType, uploadReturnType);
+                        var requestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(requestType, uploadReturnType);
+                        var requestHandlerImplementationType = typeof(UploadCommandHandler<,>).MakeGenericType(webApiType, uploadReturnType);
+
+                        services.TryAddSingleton(requestHandlerServiceType, requestHandlerImplementationType);
+
+                    }
+
                     // Download
                     if (typeof(IDownloadApi).IsAssignableFrom(webApiType))
                     {

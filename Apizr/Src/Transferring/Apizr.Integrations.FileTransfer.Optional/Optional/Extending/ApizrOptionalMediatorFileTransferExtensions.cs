@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Configuring.Request;
 using Apizr.Mediation.Requesting.Sending;
 using Apizr.Optional.Requesting;
 using Apizr.Optional.Requesting.Sending;
 using Apizr.Transferring.Requesting;
-using MediatR;
 using Optional;
 using Refit;
 
@@ -117,11 +117,59 @@ namespace Apizr.Optional.Extending
         /// Send a upload command to Apizr using MediatR for <typeparamref name="TUploadApi"/> from file bytes data with optional result
         /// </summary>
         /// <typeparam name="TUploadApi">The upload api type</typeparam>
+        /// <typeparam name="TUploadApiResultData">The upload api result data type</typeparam>
         /// <param name="apizrMediator">The extended mediator</param>
         /// <param name="byteArrayPart">The file bytes data</param>
         /// <param name="optionsBuilder">Some request options</param>
         /// <returns></returns>
-        public static Task<Option<Unit, ApizrException>> SendUploadOptionalCommandFor<TUploadApi>(this IApizrOptionalMediator apizrMediator,
+        public static Task<Option<TUploadApiResultData, ApizrException>> SendUploadOptionalCommandFor<TUploadApi, TUploadApiResultData>(this IApizrOptionalMediator apizrMediator,
+            ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TUploadApi : IUploadApi<TUploadApiResultData> =>
+            ((IApizrInternalMediator)apizrMediator).Send(
+                new UploadOptionalCommand<TUploadApi, TUploadApiResultData>(byteArrayPart, optionsBuilder),
+                ApizrManager.CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+
+        /// <summary>
+        /// Send a upload command to Apizr using MediatR for <typeparamref name="TUploadApi"/> from file stream data with optional result
+        /// </summary>
+        /// <typeparam name="TUploadApi">The upload api type</typeparam>
+        /// <typeparam name="TUploadApiResultData">The upload api result data type</typeparam>
+        /// <param name="apizrMediator">The extended mediator</param>
+        /// <param name="streamPart">The file stream data</param>
+        /// <param name="optionsBuilder">Some request options</param>
+        /// <returns></returns>
+        public static Task<Option<TUploadApiResultData, ApizrException>> SendUploadOptionalCommandFor<TUploadApi, TUploadApiResultData>(this IApizrOptionalMediator apizrMediator,
+            StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TUploadApi : IUploadApi<TUploadApiResultData> =>
+            ((IApizrInternalMediator)apizrMediator).Send(
+                new UploadOptionalCommand<TUploadApi, TUploadApiResultData>(streamPart, optionsBuilder),
+                ApizrManager.CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+
+        /// <summary>
+        /// Send a upload command to Apizr using MediatR for <typeparamref name="TUploadApi"/> from file info data with optional result
+        /// </summary>
+        /// <typeparam name="TUploadApi">The upload api type</typeparam>
+        /// <typeparam name="TUploadApiResultData">The upload api result data type</typeparam>
+        /// <param name="apizrMediator">The extended mediator</param>
+        /// <param name="fileInfoPart">The file info data</param>
+        /// <param name="optionsBuilder">Some request options</param>
+        /// <returns></returns>
+        public static Task<Option<TUploadApiResultData, ApizrException>> SendUploadOptionalCommandFor<TUploadApi, TUploadApiResultData>(this IApizrOptionalMediator apizrMediator,
+            FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TUploadApi : IUploadApi<TUploadApiResultData> =>
+            ((IApizrInternalMediator)apizrMediator).Send(
+                new UploadOptionalCommand<TUploadApi, TUploadApiResultData>(fileInfoPart, optionsBuilder),
+                ApizrManager.CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+
+        /// <summary>
+        /// Send a upload command to Apizr using MediatR for <typeparamref name="TUploadApi"/> from file bytes data with optional result
+        /// </summary>
+        /// <typeparam name="TUploadApi">The upload api type</typeparam>
+        /// <param name="apizrMediator">The extended mediator</param>
+        /// <param name="byteArrayPart">The file bytes data</param>
+        /// <param name="optionsBuilder">Some request options</param>
+        /// <returns></returns>
+        public static Task<Option<HttpResponseMessage, ApizrException>> SendUploadOptionalCommandFor<TUploadApi>(this IApizrOptionalMediator apizrMediator,
             ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             where TUploadApi : IUploadApi =>
             ((IApizrInternalMediator)apizrMediator).Send(
@@ -136,7 +184,7 @@ namespace Apizr.Optional.Extending
         /// <param name="streamPart">The file stream data</param>
         /// <param name="optionsBuilder">Some request options</param>
         /// <returns></returns>
-        public static Task<Option<Unit, ApizrException>> SendUploadOptionalCommandFor<TUploadApi>(this IApizrOptionalMediator apizrMediator,
+        public static Task<Option<HttpResponseMessage, ApizrException>> SendUploadOptionalCommandFor<TUploadApi>(this IApizrOptionalMediator apizrMediator,
             StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             where TUploadApi : IUploadApi =>
             ((IApizrInternalMediator)apizrMediator).Send(
@@ -151,7 +199,7 @@ namespace Apizr.Optional.Extending
         /// <param name="fileInfoPart">The file info data</param>
         /// <param name="optionsBuilder">Some request options</param>
         /// <returns></returns>
-        public static Task<Option<Unit, ApizrException>> SendUploadOptionalCommandFor<TUploadApi>(this IApizrOptionalMediator apizrMediator,
+        public static Task<Option<HttpResponseMessage, ApizrException>> SendUploadOptionalCommandFor<TUploadApi>(this IApizrOptionalMediator apizrMediator,
             FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             where TUploadApi : IUploadApi =>
             ((IApizrInternalMediator)apizrMediator).Send(
@@ -165,7 +213,7 @@ namespace Apizr.Optional.Extending
         /// <param name="byteArrayPart">The file bytes data</param>
         /// <param name="optionsBuilder">Some request options</param>
         /// <returns></returns>
-        public static Task<Option<Unit, ApizrException>> SendUploadOptionalCommand(this IApizrOptionalMediator apizrMediator,
+        public static Task<Option<HttpResponseMessage, ApizrException>> SendUploadOptionalCommand(this IApizrOptionalMediator apizrMediator,
             ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             ((IApizrInternalMediator)apizrMediator).Send(
                 new UploadOptionalCommand(byteArrayPart, optionsBuilder),
@@ -178,7 +226,7 @@ namespace Apizr.Optional.Extending
         /// <param name="streamPart">The file stream data</param>
         /// <param name="optionsBuilder">Some request options</param>
         /// <returns></returns>
-        public static Task<Option<Unit, ApizrException>> SendUploadOptionalCommand(this IApizrOptionalMediator apizrMediator,
+        public static Task<Option<HttpResponseMessage, ApizrException>> SendUploadOptionalCommand(this IApizrOptionalMediator apizrMediator,
             StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             ((IApizrInternalMediator)apizrMediator).Send(
                 new UploadOptionalCommand(streamPart, optionsBuilder),
@@ -191,7 +239,7 @@ namespace Apizr.Optional.Extending
         /// <param name="fileInfoPart">The file info data</param>
         /// <param name="optionsBuilder">Some request options</param>
         /// <returns></returns>
-        public static Task<Option<Unit, ApizrException>> SendUploadOptionalCommand(this IApizrOptionalMediator apizrMediator,
+        public static Task<Option<HttpResponseMessage, ApizrException>> SendUploadOptionalCommand(this IApizrOptionalMediator apizrMediator,
             FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             ((IApizrInternalMediator)apizrMediator).Send(
                 new UploadOptionalCommand(fileInfoPart, optionsBuilder),

@@ -1159,33 +1159,33 @@ namespace Apizr.Tests
             
             // Transfer
             // Built-in
-            var apizrTransferManagerResult = await apizrTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var apizrTransferManagerResult = await apizrTransferManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             apizrTransferManagerResult.Should().NotBeNull();
             apizrTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Built-in
-            var apizrTransferTypedManagerResult = await apizrTransferTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var apizrTransferTypedManagerResult = await apizrTransferTypedManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             apizrTransferTypedManagerResult.Should().NotBeNull();
             apizrTransferTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Custom
-            var apizrCustomTransferManagerResult = await apizrCustomTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var apizrCustomTransferManagerResult = await apizrCustomTransferManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             apizrCustomTransferManagerResult.Should().NotBeNull();
             apizrCustomTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Download
             // Built-in
-            var apizrUploadManagerResult = await apizrUploadManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var apizrUploadManagerResult = await apizrUploadManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             apizrUploadManagerResult.Should().NotBeNull();
             apizrUploadManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Built-in
-            var apizrUploadTypedManagerResult = await apizrUploadTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var apizrUploadTypedManagerResult = await apizrUploadTypedManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             apizrUploadTypedManagerResult.Should().NotBeNull();
             apizrUploadTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Custom
-            var apizrCustomUploadManagerResult = await apizrCustomUploadManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var apizrCustomUploadManagerResult = await apizrCustomUploadManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             apizrCustomUploadManagerResult.Should().NotBeNull();
             apizrCustomUploadManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
@@ -1213,33 +1213,33 @@ namespace Apizr.Tests
 
             // Transfer
             // Built-in
-            var regTransferManagerResult = await regTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var regTransferManagerResult = await regTransferManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             regTransferManagerResult.Should().NotBeNull();
             regTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Built-in
-            var regTransferTypedManagerResult = await regTransferTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var regTransferTypedManagerResult = await regTransferTypedManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             regTransferTypedManagerResult.Should().NotBeNull();
             regTransferTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Custom
-            var regCustomTransferTypedManagerResult = await regCustomTransferTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var regCustomTransferTypedManagerResult = await regCustomTransferTypedManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             regCustomTransferTypedManagerResult.Should().NotBeNull();
             regCustomTransferTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Upload
             // Built-in
-            var regUploadManagerResult = await regUploadManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var regUploadManagerResult = await regUploadManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             regUploadManagerResult.Should().NotBeNull();
             regUploadManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Built-in
-            var regUploadTypedManagerResult = await regUploadTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var regUploadTypedManagerResult = await regUploadTypedManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             regUploadTypedManagerResult.Should().NotBeNull();
             regUploadTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Custom
-            var regCustomUploadTypedManagerResult = await regCustomUploadTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var regCustomUploadTypedManagerResult = await regCustomUploadTypedManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             regCustomUploadTypedManagerResult.Should().NotBeNull();
             regCustomUploadTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
         }
@@ -1278,33 +1278,33 @@ namespace Apizr.Tests
 
             // Transfer
             // Built-in
-            var apizrTransferManagerResult = await apizrTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var apizrTransferManagerResult = await apizrTransferManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             apizrTransferManagerResult.Should().NotBeNull();
             apizrTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Built-in
-            var apizrTransferTypedManagerResult = await apizrTransferTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var apizrTransferTypedManagerResult = await apizrTransferTypedManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             apizrTransferTypedManagerResult.Should().NotBeNull();
             apizrTransferTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Custom
-            var apizrCustomTransferManagerResult = await apizrCustomTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var apizrCustomTransferManagerResult = await apizrCustomTransferManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             apizrCustomTransferManagerResult.Should().NotBeNull();
             apizrCustomTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Download
             // Built-in
-            var apizrUploadManagerResult = await apizrUploadManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var apizrUploadManagerResult = await apizrUploadManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             apizrUploadManagerResult.Should().NotBeNull();
             apizrUploadManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Built-in
-            var apizrUploadTypedManagerResult = await apizrUploadTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var apizrUploadTypedManagerResult = await apizrUploadTypedManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             apizrUploadTypedManagerResult.Should().NotBeNull();
             apizrUploadTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Custom
-            var apizrCustomUploadManagerResult = await apizrCustomUploadManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var apizrCustomUploadManagerResult = await apizrCustomUploadManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             apizrCustomUploadManagerResult.Should().NotBeNull();
             apizrCustomUploadManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
@@ -1332,33 +1332,33 @@ namespace Apizr.Tests
 
             // Transfer
             // Built-in
-            var regTransferManagerResult = await regTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var regTransferManagerResult = await regTransferManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             regTransferManagerResult.Should().NotBeNull();
             regTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Built-in
-            var regTransferTypedManagerResult = await regTransferTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var regTransferTypedManagerResult = await regTransferTypedManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             regTransferTypedManagerResult.Should().NotBeNull();
             regTransferTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Custom
-            var regCustomTransferTypedManagerResult = await regCustomTransferTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var regCustomTransferTypedManagerResult = await regCustomTransferTypedManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             regCustomTransferTypedManagerResult.Should().NotBeNull();
             regCustomTransferTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Upload
             // Built-in
-            var regUploadManagerResult = await regUploadManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var regUploadManagerResult = await regUploadManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             regUploadManagerResult.Should().NotBeNull();
             regUploadManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Built-in
-            var regUploadTypedManagerResult = await regUploadTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var regUploadTypedManagerResult = await regUploadTypedManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             regUploadTypedManagerResult.Should().NotBeNull();
             regUploadTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
             // Custom
-            var regCustomUploadTypedManagerResult = await regCustomUploadTypedManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var regCustomUploadTypedManagerResult = await regCustomUploadTypedManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             regCustomUploadTypedManagerResult.Should().NotBeNull();
             regCustomUploadTypedManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
         }
@@ -1384,7 +1384,7 @@ namespace Apizr.Tests
             var apizrTransferManager = serviceProvider.GetService<IApizrTransferManager>(); // Built-in
             apizrTransferManager.Should().NotBeNull(); // Built-in
 
-            var apizrTransferManagerResult = await apizrTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"), options => options.WithProgress(progress));
+            var apizrTransferManagerResult = await apizrTransferManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"), options => options.WithProgress(progress));
 
             apizrTransferManagerResult.Should().NotBeNull();
             apizrTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -1412,7 +1412,7 @@ namespace Apizr.Tests
             var apizrTransferManager = serviceProvider.GetService<IApizrTransferManager>(); // Built-in
             apizrTransferManager.Should().NotBeNull(); // Built-in
 
-            var apizrTransferManagerResult = await apizrTransferManager.UploadAsync<HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var apizrTransferManagerResult = await apizrTransferManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
 
             apizrTransferManagerResult.Should().NotBeNull();
             apizrTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);

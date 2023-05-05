@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Net.Http;
 using Apizr.Configuring.Request;
 using Apizr.Mediation.Commanding;
+using Apizr.Mediation.Requesting;
 using Apizr.Transferring.Requesting;
 using MediatR;
 using Optional;
@@ -12,7 +14,8 @@ namespace Apizr.Optional.Requesting
     /// The mediation upload command returning an optional result
     /// </summary>
     /// <typeparam name="TUploadApi">The upload api type to manage</typeparam>
-    public class UploadOptionalCommand<TUploadApi> : MediationCommandBase<Unit, Option<Unit, ApizrException>, IApizrRequestOptions, IApizrRequestOptionsBuilder> where TUploadApi : IUploadApi
+    /// <typeparam name="TUploadApiResultData">The upload api result data type</typeparam>
+    public class UploadOptionalCommand<TUploadApi, TUploadApiResultData> : MediationCommandBase<Unit, Option<TUploadApiResultData, ApizrException>, IApizrRequestOptions, IApizrRequestOptionsBuilder> where TUploadApi : IUploadApi<TUploadApiResultData>
     {
         /// <summary>
         /// Upload a file from its bytes data
@@ -61,6 +64,28 @@ namespace Apizr.Optional.Requesting
         /// The file bytes data
         /// </summary>
         public ByteArrayPart ByteArrayPart { get; }
+    }
+
+    /// <summary>
+    /// The mediation upload command returning an optional result
+    /// </summary>
+    /// <typeparam name="TUploadApi">The upload api type to manage</typeparam>
+    public class UploadOptionalCommand<TUploadApi> : UploadOptionalCommand<TUploadApi, HttpResponseMessage> where TUploadApi : IUploadApi
+    {
+        /// <inheritdoc />
+        public UploadOptionalCommand(ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(byteArrayPart, optionsBuilder)
+        {
+        }
+
+        /// <inheritdoc />
+        public UploadOptionalCommand(StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(streamPart, optionsBuilder)
+        {
+        }
+
+        /// <inheritdoc />
+        public UploadOptionalCommand(FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(fileInfoPart, optionsBuilder)
+        {
+        }
     }
 
     /// <summary>

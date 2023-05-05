@@ -7,6 +7,7 @@ using Apizr.Transferring.Managing;
 using Apizr.Transferring.Requesting;
 using Microsoft.Extensions.DependencyInjection;
 
+[assembly: Apizr.Preserve]
 namespace Apizr;
 
 /// <summary>

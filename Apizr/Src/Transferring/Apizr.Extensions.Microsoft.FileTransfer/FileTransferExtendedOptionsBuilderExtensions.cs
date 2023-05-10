@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using Apizr.Extending.Configuring.Manager;
 using Apizr.Extending.Configuring.Proper;
 using Apizr.Extending.Configuring.Registry;
@@ -165,7 +166,7 @@ public static class FileTransferExtendedOptionsBuilderExtensions
     public static IServiceCollection AddApizrTransferManagerFor<TTransferApi, TDownloadParams>(
         this IServiceCollection services,
         Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
-        where TTransferApi : ITransferApi<TDownloadParams> =>
+        where TTransferApi : ITransferApi<TDownloadParams, HttpResponseMessage>, IUploadApi =>
         services.AddApizrManagerFor<TTransferApi>(
                 optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody | HttpMessageParts.ResponseBody))
             .AddApizrDownloadManagerFor<TTransferApi, TDownloadParams>()
@@ -415,7 +416,7 @@ public static class FileTransferExtendedOptionsBuilderExtensions
     /// <returns></returns>
     public static IApizrExtendedRegistryBuilder
         AddTransferManagerFor<TTransferApi, TDownloadParams>(this IApizrExtendedRegistryBuilder builder,
-            Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) where TTransferApi : ITransferApi<TDownloadParams>
+            Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) where TTransferApi : ITransferApi<TDownloadParams, HttpResponseMessage>, IUploadApi
     {
         if (builder is IApizrInternalExtendedRegistryBuilder<IApizrExtendedProperOptionsBuilder> internalBuilder)
         {

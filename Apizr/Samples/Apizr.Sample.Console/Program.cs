@@ -152,7 +152,8 @@ namespace Apizr.Sample.Console
 
                     //_httpBinManager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
 
-                    var fileManager = ApizrBuilder.Current.CreateUploadManagerFor<IUploadApi<UploadResult>, UploadResult>(options => options.WithBaseAddress("https://httpbin.org/post").WithLoggerFactory(() => lazyLoggerFactory.Value));
+                    var fileManager = ApizrBuilder.Current.CreateUploadManager(options => options.WithBaseAddress("https://httpbin.org/post").WithLoggerFactory(() => lazyLoggerFactory.Value));
+                    //var fileManager = ApizrBuilder.Current.CreateUploadManagerFor<IUploadApi<UploadResult>, UploadResult>(options => options.WithBaseAddress("https://httpbin.org/post").WithLoggerFactory(() => lazyLoggerFactory.Value)); 
                     var result = await fileManager.UploadAsync(streamPart);
                     //var fileManager = ApizrBuilder.Current.CreateTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr").WithLoggerFactory(() => lazyLoggerFactory.Value));
                     //var fileInfo = await fileManager.DownloadAsync(new FileInfo("test10Mb.db"), new Dictionary<string, object> { { "key1", "value1" } }, options => options.WithDynamicPath("files")).ConfigureAwait(false);

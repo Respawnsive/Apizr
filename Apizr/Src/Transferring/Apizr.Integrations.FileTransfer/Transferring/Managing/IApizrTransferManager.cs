@@ -26,7 +26,7 @@ public interface IApizrTransferManager<TTransferApi, in TDownloadParams, TUpload
 public interface IApizrTransferManager<TTransferApi, in TDownloadParams> :
     IApizrDownloadManager<TTransferApi, TDownloadParams>,
     IApizrUploadManager<TTransferApi> 
-    where TTransferApi : ITransferApi<TDownloadParams>
+    where TTransferApi : ITransferApi<TDownloadParams, HttpResponseMessage>, IUploadApi
 {
 
 }

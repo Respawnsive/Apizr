@@ -42,7 +42,7 @@ public class ApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResul
         => _uploadManager.UploadAsync(fileInfoPart, optionsBuilder);
 }
 
-public class ApizrTransferManager<TTransferApi, TDownloadParams> : IApizrTransferManager<TTransferApi, TDownloadParams> where TTransferApi : ITransferApi<TDownloadParams>
+public class ApizrTransferManager<TTransferApi, TDownloadParams> : IApizrTransferManager<TTransferApi, TDownloadParams> where TTransferApi : ITransferApi<TDownloadParams, HttpResponseMessage>, IUploadApi
 {
     private readonly IApizrDownloadManager<TTransferApi, TDownloadParams> _downloadManager;
     private readonly IApizrUploadManager<TTransferApi> _uploadManager;

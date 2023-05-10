@@ -105,7 +105,7 @@ namespace Apizr.Extending
         /// <param name="registry">The registry to get the manager from</param>
         /// <returns></returns>
         public static IApizrTransferManager<TTransferApi, TDownloadParams> GetTransferManagerFor<TTransferApi, TDownloadParams>(this IApizrEnumerableRegistry registry)
-            where TTransferApi : ITransferApi<TDownloadParams> =>
+            where TTransferApi : ITransferApi<TDownloadParams, HttpResponseMessage>, IUploadApi =>
             ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrTransferManager<TTransferApi, TDownloadParams>>();
 
         /// <summary>
@@ -221,7 +221,7 @@ namespace Apizr.Extending
         /// <param name="manager">The transfer manager instance</param>
         /// <returns></returns>
         public static bool TryGetTransferManagerFor<TTransferApi, TDownloadParams>(this IApizrEnumerableRegistry registry, out IApizrTransferManager<TTransferApi, TDownloadParams> manager)
-            where TTransferApi : ITransferApi<TDownloadParams> =>
+            where TTransferApi : ITransferApi<TDownloadParams, HttpResponseMessage>, IUploadApi =>
             ((IApizrInternalEnumerableRegistry)registry).TryGetManagerInternal<IApizrTransferManager<TTransferApi, TDownloadParams>>(out manager);
 
         /// <summary>
@@ -331,7 +331,7 @@ namespace Apizr.Extending
         /// <param name="registry">The registry to get the manager from</param>
         /// <returns></returns>
         public static bool ContainsTransferManagerFor<TTransferApi, TDownloadParams>(this IApizrEnumerableRegistry registry)
-            where TTransferApi : ITransferApi<TDownloadParams> =>
+            where TTransferApi : ITransferApi<TDownloadParams, HttpResponseMessage>, IUploadApi =>
             ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrTransferManager<TTransferApi, TDownloadParams>>();
 
         /// <summary>

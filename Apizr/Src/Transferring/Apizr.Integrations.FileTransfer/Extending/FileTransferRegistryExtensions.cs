@@ -51,6 +51,16 @@ namespace Apizr.Extending
             ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrUploadManager<TUploadApi, TUploadApiResultData>>();
 
         /// <summary>
+        /// Get an upload manager instance
+        /// </summary>
+        /// <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+        /// <param name="registry">The registry to get the manager from</param>
+        /// <returns></returns>
+        public static IApizrUploadManager<IUploadApi<TUploadApiResultData>, TUploadApiResultData> GetUploadManagerWith<TUploadApiResultData>(
+            this IApizrEnumerableRegistry registry) =>
+            ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrUploadManager<IUploadApi<TUploadApiResultData>, TUploadApiResultData>>();
+
+        /// <summary>
         /// Get a download manager instance
         /// </summary>
         /// <param name="registry">The registry to get the manager from</param>
@@ -78,6 +88,15 @@ namespace Apizr.Extending
         public static IApizrDownloadManager<TDownloadApi, TDownloadParams> GetDownloadManagerFor<TDownloadApi, TDownloadParams>(this IApizrEnumerableRegistry registry)
             where TDownloadApi : IDownloadApi<TDownloadParams> =>
             ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrDownloadManager<TDownloadApi, TDownloadParams>>();
+
+        /// <summary>
+        /// Get a download manager instance
+        /// </summary>
+        /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+        /// <param name="registry">The registry to get the manager from</param>
+        /// <returns></returns>
+        public static IApizrDownloadManager<IDownloadApi<TDownloadParams>, TDownloadParams> GetDownloadManagerWith<TDownloadParams>(this IApizrEnumerableRegistry registry) =>
+            ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrDownloadManager<IDownloadApi<TDownloadParams>, TDownloadParams>>();
 
         /// <summary>
         /// Get a transfer manager instance
@@ -120,7 +139,16 @@ namespace Apizr.Extending
             where TTransferApi : ITransferApi<TDownloadParams, TUploadApiResultData> =>
             ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData>>();
 
-
+        /// <summary>
+        /// Get a transfer manager instance
+        /// </summary>
+        /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+        /// <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+        /// <param name="registry">The registry to get the manager from</param>
+        /// <returns></returns>
+        public static IApizrTransferManager<ITransferApi<TDownloadParams, TUploadApiResultData>, TDownloadParams, TUploadApiResultData> GetTransferManagerWith<TDownloadParams, TUploadApiResultData>(this IApizrEnumerableRegistry registry) =>
+            ((IApizrInternalEnumerableRegistry)registry).GetManagerInternal<IApizrTransferManager<ITransferApi<TDownloadParams, TUploadApiResultData>, TDownloadParams, TUploadApiResultData>>();
+        
         #endregion
 
         #region TryGet
@@ -161,6 +189,17 @@ namespace Apizr.Extending
             ((IApizrInternalEnumerableRegistry)registry).TryGetManagerInternal<IApizrUploadManager<TUploadApi, TUploadApiResultData>>(out manager);
 
         /// <summary>
+        /// Get an upload manager instance
+        /// </summary>
+        /// <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+        /// <param name="registry">The registry to get the manager from</param>
+        /// <param name="manager">The upload manager instance</param>
+        /// <returns></returns>
+        public static bool TryGetUploadManagerWith<TUploadApiResultData>(
+            this IApizrEnumerableRegistry registry, out IApizrUploadManager<IUploadApi<TUploadApiResultData>, TUploadApiResultData> manager) =>
+            ((IApizrInternalEnumerableRegistry)registry).TryGetManagerInternal<IApizrUploadManager<IUploadApi<TUploadApiResultData>, TUploadApiResultData>>(out manager);
+
+        /// <summary>
         /// Get a download manager instance
         /// </summary>
         /// <param name="registry">The registry to get the manager from</param>
@@ -191,6 +230,16 @@ namespace Apizr.Extending
         public static bool TryGetDownloadManagerFor<TDownloadApi, TDownloadParams>(this IApizrEnumerableRegistry registry, out IApizrDownloadManager<TDownloadApi, TDownloadParams> manager)
             where TDownloadApi : IDownloadApi<TDownloadParams> =>
             ((IApizrInternalEnumerableRegistry)registry).TryGetManagerInternal<IApizrDownloadManager<TDownloadApi, TDownloadParams>>(out manager);
+
+        /// <summary>
+        /// Get a download manager instance
+        /// </summary>
+        /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+        /// <param name="registry">The registry to get the manager from</param>
+        /// <param name="manager">The download manager instance</param>
+        /// <returns></returns>
+        public static bool TryGetDownloadManagerWith<TDownloadParams>(this IApizrEnumerableRegistry registry, out IApizrDownloadManager<IDownloadApi<TDownloadParams>, TDownloadParams> manager) =>
+            ((IApizrInternalEnumerableRegistry)registry).TryGetManagerInternal<IApizrDownloadManager<IDownloadApi<TDownloadParams>, TDownloadParams>>(out manager);
 
         /// <summary>
         /// Get a transfer manager instance
@@ -238,6 +287,17 @@ namespace Apizr.Extending
             ((IApizrInternalEnumerableRegistry)registry).TryGetManagerInternal<IApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData>>(out manager);
 
 
+        /// <summary>
+        /// Get a transfer manager instance
+        /// </summary>
+        /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+        /// <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+        /// <param name="registry">The registry to get the manager from</param>
+        /// <param name="manager">The transfer manager instance</param>
+        /// <returns></returns>
+        public static bool TryGetTransferManagerWith<TDownloadParams, TUploadApiResultData>(this IApizrEnumerableRegistry registry, out IApizrTransferManager<ITransferApi<TDownloadParams, TUploadApiResultData>, TDownloadParams, TUploadApiResultData> manager) =>
+            ((IApizrInternalEnumerableRegistry)registry).TryGetManagerInternal<IApizrTransferManager<ITransferApi<TDownloadParams, TUploadApiResultData>, TDownloadParams, TUploadApiResultData>>(out manager);
+
         #endregion
 
         #region Contains
@@ -275,6 +335,16 @@ namespace Apizr.Extending
             ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrUploadManager<TUploadApi, TUploadApiResultData>>();
 
         /// <summary>
+        /// Check if registry contains a manager for <see cref="IUploadApi{TUploadApiResultData}"/> api type
+        /// </summary>
+        /// <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+        /// <param name="registry">The registry to get the manager from</param>
+        /// <returns></returns>
+        public static bool ContainsUploadManagerWith<TUploadApiResultData>(
+            this IApizrEnumerableRegistry registry) =>
+            ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrUploadManager<IUploadApi<TUploadApiResultData>, TUploadApiResultData>>();
+
+        /// <summary>
         /// Check if registry contains a manager for the default <see cref="IDownloadApi"/> api type
         /// </summary>
         /// <param name="registry">The registry to get the manager from</param>
@@ -303,6 +373,15 @@ namespace Apizr.Extending
         public static bool ContainsDownloadManagerFor<TDownloadApi, TDownloadParams>(this IApizrEnumerableRegistry registry)
             where TDownloadApi : IDownloadApi<TDownloadParams> =>
             ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrDownloadManager<TDownloadApi, TDownloadParams>>();
+
+        /// <summary>
+        /// Check if registry contains a manager for <see cref="IDownloadApi{TDownloadParams}"/> api type
+        /// </summary>
+        /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+        /// <param name="registry">The registry to get the manager from</param>
+        /// <returns></returns>
+        public static bool ContainsDownloadManagerWith<TDownloadParams>(this IApizrEnumerableRegistry registry) =>
+            ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrDownloadManager<IDownloadApi<TDownloadParams>, TDownloadParams>>();
 
         /// <summary>
         /// Check if registry contains a manager for the default <see cref="ITransferApi"/> api type
@@ -345,6 +424,16 @@ namespace Apizr.Extending
         public static bool ContainsTransferManagerFor<TTransferApi, TDownloadParams, TUploadApiResultData>(this IApizrEnumerableRegistry registry)
             where TTransferApi : ITransferApi<TDownloadParams, TUploadApiResultData> =>
             ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData>>();
+
+        /// <summary>
+        /// Check if registry contains a manager for <see cref="ITransferApi{TDownloadParams, TUploadApiResultData}"/> api type
+        /// </summary>
+        /// <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+        /// <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+        /// <param name="registry">The registry to get the manager from</param>
+        /// <returns></returns>
+        public static bool ContainsTransferManagerWith<TDownloadParams, TUploadApiResultData>(this IApizrEnumerableRegistry registry) =>
+            ((IApizrInternalEnumerableRegistry)registry).ContainsManagerInternal<IApizrTransferManager<ITransferApi<TDownloadParams, TUploadApiResultData>, TDownloadParams, TUploadApiResultData>>();
 
 
         #endregion
@@ -429,7 +518,7 @@ namespace Apizr.Extending
         public static Task<TUploadApiResultData> UploadAsync<TUploadApi, TUploadApiResultData>(this IApizrEnumerableRegistry registry, StreamPart streamPart,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi<TUploadApiResultData>
             => registry.GetUploadManagerFor<TUploadApi, TUploadApiResultData>().UploadAsync(streamPart, optionsBuilder);
-        
+
         /// <summary>
         /// Upload a file from its file info data
         /// </summary>
@@ -467,6 +556,43 @@ namespace Apizr.Extending
         public static Task<TUploadApiResultData> UploadAsync<TUploadApi, TUploadApiResultData>(this IApizrEnumerableRegistry registry, FileInfoPart fileInfoPart,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi<TUploadApiResultData>
             => registry.GetUploadManagerFor<TUploadApi, TUploadApiResultData>().UploadAsync(fileInfoPart, optionsBuilder);
+
+        /// <summary>
+        /// Upload a file from its bytes data
+        /// </summary>
+        /// <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="byteArrayPart">The file bytes data</param>
+        /// <param name="optionsBuilder">Some request options</param>
+        /// <returns></returns>
+        public static Task<TUploadApiResultData> UploadWithAsync<TUploadApiResultData>(
+            this IApizrEnumerableRegistry registry, ByteArrayPart byteArrayPart,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetUploadManagerFor<IUploadApi<TUploadApiResultData>, TUploadApiResultData>().UploadAsync(byteArrayPart, optionsBuilder);
+
+        /// <summary>
+        /// Upload a file from its stream data
+        /// </summary>
+        /// <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="streamPart">The file stream data</param>
+        /// <param name="optionsBuilder">Some request options</param>
+        /// <returns></returns>
+        public static Task<TUploadApiResultData> UploadWithAsync<TUploadApiResultData>(this IApizrEnumerableRegistry registry, StreamPart streamPart,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetUploadManagerFor<IUploadApi<TUploadApiResultData>, TUploadApiResultData>().UploadAsync(streamPart, optionsBuilder);
+
+        /// <summary>
+        /// Upload a file from its file info data
+        /// </summary>
+        /// <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="fileInfoPart">The file info data</param>
+        /// <param name="optionsBuilder">Some request options</param>
+        /// <returns></returns>
+        public static Task<TUploadApiResultData> UploadWithAsync<TUploadApiResultData>(this IApizrEnumerableRegistry registry, FileInfoPart fileInfoPart,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetUploadManagerFor<IUploadApi<TUploadApiResultData>, TUploadApiResultData>().UploadAsync(fileInfoPart, optionsBuilder);
 
         #endregion
 
@@ -554,6 +680,32 @@ namespace Apizr.Extending
             FileInfo fileInfo, TDownloadParams downloadParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             where TDownloadApi : IDownloadApi<TDownloadParams>
             => registry.GetDownloadManagerFor<TDownloadApi, TDownloadParams>()
+                .DownloadAsync(fileInfo, downloadParams, optionsBuilder);
+
+        /// <summary>
+        /// Download a file
+        /// </summary>
+        /// <typeparam name="TDownloadParams">The query parameters type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="fileInfo">Some information about the file to download</param>
+        /// <param name="optionsBuilder">Some request options</param>
+        /// <returns></returns>
+        public static Task<FileInfo> DownloadWithAsync<TDownloadParams>(this IApizrEnumerableRegistry registry,
+            FileInfo fileInfo, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetDownloadManagerFor<IDownloadApi<TDownloadParams>, TDownloadParams>().DownloadAsync(fileInfo, optionsBuilder);
+
+        /// <summary>
+        /// Download a file with custom query parameters
+        /// </summary>
+        /// <typeparam name="TDownloadParams">The query parameters type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="fileInfo">Some information about the file to download</param>
+        /// <param name="downloadParams">Some custom query parameters</param>
+        /// <param name="optionsBuilder">Some request options</param>
+        /// <returns></returns>
+        public static Task<FileInfo> DownloadWithAsync<TDownloadParams>(this IApizrEnumerableRegistry registry,
+            FileInfo fileInfo, TDownloadParams downloadParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetDownloadManagerFor<IDownloadApi<TDownloadParams>, TDownloadParams>()
                 .DownloadAsync(fileInfo, downloadParams, optionsBuilder);
 
 

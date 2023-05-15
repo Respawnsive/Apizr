@@ -16,28 +16,37 @@ items:
   source:
     id: ApizrTransferManager
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Managing\ApizrTransferManager.cs
-    startLine: 51
+    startLine: 85
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
   syntax:
-    content: 'public class ApizrTransferManager : ApizrTransferManager<ITransferApi>, IApizrTransferManager, IApizrTransferManager<ITransferApi>, IApizrTransferManager<ITransferApi, IDictionary<string, object>>, IApizrUploadManager<ITransferApi>, IApizrDownloadManager<ITransferApi>, IApizrDownloadManager<ITransferApi, IDictionary<string, object>>, IApizrTransferManagerBase<ITransferApi>, IApizrManager'
+    content: 'public class ApizrTransferManager : ApizrTransferManager<ITransferApi>, IApizrTransferManager<ITransferApi, IDictionary<string, object>>, IApizrTransferManager<ITransferApi>, IApizrDownloadManager<ITransferApi>, IApizrDownloadManager<ITransferApi, IDictionary<string, object>>, IApizrUploadManager<ITransferApi>, IApizrUploadManager<ITransferApi, HttpResponseMessage>, IApizrTransferManagerBase<ITransferApi>, IApizrTransferManager, IApizrDownloadManager, IApizrDownloadManager<IDownloadApi>, IApizrDownloadManager<IDownloadApi, IDictionary<string, object>>, IApizrTransferManagerBase<IDownloadApi>, IApizrUploadManager, IApizrUploadManager<IUploadApi>, IApizrUploadManager<IUploadApi, HttpResponseMessage>, IApizrTransferManagerBase<IUploadApi>, IApizrManager'
     content.vb: >-
       Public Class ApizrTransferManager
           Inherits ApizrTransferManager(Of ITransferApi)
-          Implements IApizrTransferManager, IApizrTransferManager(Of ITransferApi), IApizrTransferManager(Of ITransferApi, IDictionary(Of String, Object)), IApizrUploadManager(Of ITransferApi), IApizrDownloadManager(Of ITransferApi), IApizrDownloadManager(Of ITransferApi, IDictionary(Of String, Object)), IApizrTransferManagerBase(Of ITransferApi), IApizrManager
+          Implements IApizrTransferManager(Of ITransferApi, IDictionary(Of String, Object)), IApizrTransferManager(Of ITransferApi), IApizrDownloadManager(Of ITransferApi), IApizrDownloadManager(Of ITransferApi, IDictionary(Of String, Object)), IApizrUploadManager(Of ITransferApi), IApizrUploadManager(Of ITransferApi, HttpResponseMessage), IApizrTransferManagerBase(Of ITransferApi), IApizrTransferManager, IApizrDownloadManager, IApizrDownloadManager(Of IDownloadApi), IApizrDownloadManager(Of IDownloadApi, IDictionary(Of String, Object)), IApizrTransferManagerBase(Of IDownloadApi), IApizrUploadManager, IApizrUploadManager(Of IUploadApi), IApizrUploadManager(Of IUploadApi, HttpResponseMessage), IApizrTransferManagerBase(Of IUploadApi), IApizrManager
   inheritance:
   - System.Object
   - Apizr.Transferring.Managing.ApizrTransferManager{Apizr.Transferring.Requesting.ITransferApi,System.Collections.Generic.IDictionary{System.String,System.Object}}
   - Apizr.Transferring.Managing.ApizrTransferManager{Apizr.Transferring.Requesting.ITransferApi}
   implements:
-  - Apizr.Transferring.Managing.IApizrTransferManager
-  - Apizr.Transferring.Managing.IApizrTransferManager{Apizr.Transferring.Requesting.ITransferApi}
   - Apizr.Transferring.Managing.IApizrTransferManager{Apizr.Transferring.Requesting.ITransferApi,System.Collections.Generic.IDictionary{System.String,System.Object}}
-  - Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.ITransferApi}
+  - Apizr.Transferring.Managing.IApizrTransferManager{Apizr.Transferring.Requesting.ITransferApi}
   - Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.ITransferApi}
   - Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.ITransferApi,System.Collections.Generic.IDictionary{System.String,System.Object}}
+  - Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.ITransferApi}
+  - Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.ITransferApi,System.Net.Http.HttpResponseMessage}
   - Apizr.Transferring.Managing.IApizrTransferManagerBase{Apizr.Transferring.Requesting.ITransferApi}
+  - Apizr.Transferring.Managing.IApizrTransferManager
+  - Apizr.Transferring.Managing.IApizrDownloadManager
+  - Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.IDownloadApi}
+  - Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.IDownloadApi,System.Collections.Generic.IDictionary{System.String,System.Object}}
+  - Apizr.Transferring.Managing.IApizrTransferManagerBase{Apizr.Transferring.Requesting.IDownloadApi}
+  - Apizr.Transferring.Managing.IApizrUploadManager
+  - Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi}
+  - Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}
+  - Apizr.Transferring.Managing.IApizrTransferManagerBase{Apizr.Transferring.Requesting.IUploadApi}
   - Apizr.IApizrManager
   inheritedMembers:
   - Apizr.Transferring.Managing.ApizrTransferManager{Apizr.Transferring.Requesting.ITransferApi,System.Collections.Generic.IDictionary{System.String,System.Object}}.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -72,7 +81,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Managing\ApizrTransferManager.cs
-    startLine: 54
+    startLine: 88
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
@@ -240,52 +249,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Transferring.Managing.IApizrTransferManager
-  commentId: T:Apizr.Transferring.Managing.IApizrTransferManager
-  parent: Apizr.Transferring.Managing
-  name: IApizrTransferManager
-  nameWithType: IApizrTransferManager
-  fullName: Apizr.Transferring.Managing.IApizrTransferManager
-- uid: Apizr.Transferring.Managing.IApizrTransferManager{Apizr.Transferring.Requesting.ITransferApi}
-  commentId: T:Apizr.Transferring.Managing.IApizrTransferManager{Apizr.Transferring.Requesting.ITransferApi}
-  parent: Apizr.Transferring.Managing
-  definition: Apizr.Transferring.Managing.IApizrTransferManager`1
-  name: IApizrTransferManager<ITransferApi>
-  nameWithType: IApizrTransferManager<ITransferApi>
-  fullName: Apizr.Transferring.Managing.IApizrTransferManager<Apizr.Transferring.Requesting.ITransferApi>
-  nameWithType.vb: IApizrTransferManager(Of ITransferApi)
-  fullName.vb: Apizr.Transferring.Managing.IApizrTransferManager(Of Apizr.Transferring.Requesting.ITransferApi)
-  name.vb: IApizrTransferManager(Of ITransferApi)
-  spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrTransferManager`1
-    name: IApizrTransferManager
-    nameWithType: IApizrTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrTransferManager
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Apizr.Transferring.Requesting.ITransferApi
-    name: ITransferApi
-    nameWithType: ITransferApi
-    fullName: Apizr.Transferring.Requesting.ITransferApi
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrTransferManager`1
-    name: IApizrTransferManager
-    nameWithType: IApizrTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrTransferManager
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Apizr.Transferring.Requesting.ITransferApi
-    name: ITransferApi
-    nameWithType: ITransferApi
-    fullName: Apizr.Transferring.Requesting.ITransferApi
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Transferring.Managing.IApizrTransferManager{Apizr.Transferring.Requesting.ITransferApi,System.Collections.Generic.IDictionary{System.String,System.Object}}
   commentId: T:Apizr.Transferring.Managing.IApizrTransferManager{Apizr.Transferring.Requesting.ITransferApi,System.Collections.Generic.IDictionary{System.String,System.Object}}
   parent: Apizr.Transferring.Managing
@@ -380,21 +343,21 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.ITransferApi}
-  commentId: T:Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.ITransferApi}
+- uid: Apizr.Transferring.Managing.IApizrTransferManager{Apizr.Transferring.Requesting.ITransferApi}
+  commentId: T:Apizr.Transferring.Managing.IApizrTransferManager{Apizr.Transferring.Requesting.ITransferApi}
   parent: Apizr.Transferring.Managing
-  definition: Apizr.Transferring.Managing.IApizrUploadManager`1
-  name: IApizrUploadManager<ITransferApi>
-  nameWithType: IApizrUploadManager<ITransferApi>
-  fullName: Apizr.Transferring.Managing.IApizrUploadManager<Apizr.Transferring.Requesting.ITransferApi>
-  nameWithType.vb: IApizrUploadManager(Of ITransferApi)
-  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of Apizr.Transferring.Requesting.ITransferApi)
-  name.vb: IApizrUploadManager(Of ITransferApi)
+  definition: Apizr.Transferring.Managing.IApizrTransferManager`1
+  name: IApizrTransferManager<ITransferApi>
+  nameWithType: IApizrTransferManager<ITransferApi>
+  fullName: Apizr.Transferring.Managing.IApizrTransferManager<Apizr.Transferring.Requesting.ITransferApi>
+  nameWithType.vb: IApizrTransferManager(Of ITransferApi)
+  fullName.vb: Apizr.Transferring.Managing.IApizrTransferManager(Of Apizr.Transferring.Requesting.ITransferApi)
+  name.vb: IApizrTransferManager(Of ITransferApi)
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1
-    name: IApizrUploadManager
-    nameWithType: IApizrUploadManager
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - uid: Apizr.Transferring.Managing.IApizrTransferManager`1
+    name: IApizrTransferManager
+    nameWithType: IApizrTransferManager
+    fullName: Apizr.Transferring.Managing.IApizrTransferManager
   - name: <
     nameWithType: <
     fullName: <
@@ -406,10 +369,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1
-    name: IApizrUploadManager
-    nameWithType: IApizrUploadManager
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - uid: Apizr.Transferring.Managing.IApizrTransferManager`1
+    name: IApizrTransferManager
+    nameWithType: IApizrTransferManager
+    fullName: Apizr.Transferring.Managing.IApizrTransferManager
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
@@ -554,6 +517,102 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.ITransferApi}
+  commentId: T:Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.ITransferApi}
+  parent: Apizr.Transferring.Managing
+  definition: Apizr.Transferring.Managing.IApizrUploadManager`1
+  name: IApizrUploadManager<ITransferApi>
+  nameWithType: IApizrUploadManager<ITransferApi>
+  fullName: Apizr.Transferring.Managing.IApizrUploadManager<Apizr.Transferring.Requesting.ITransferApi>
+  nameWithType.vb: IApizrUploadManager(Of ITransferApi)
+  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of Apizr.Transferring.Requesting.ITransferApi)
+  name.vb: IApizrUploadManager(Of ITransferApi)
+  spec.csharp:
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1
+    name: IApizrUploadManager
+    nameWithType: IApizrUploadManager
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Transferring.Requesting.ITransferApi
+    name: ITransferApi
+    nameWithType: ITransferApi
+    fullName: Apizr.Transferring.Requesting.ITransferApi
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1
+    name: IApizrUploadManager
+    nameWithType: IApizrUploadManager
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Transferring.Requesting.ITransferApi
+    name: ITransferApi
+    nameWithType: ITransferApi
+    fullName: Apizr.Transferring.Requesting.ITransferApi
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.ITransferApi,System.Net.Http.HttpResponseMessage}
+  commentId: T:Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.ITransferApi,System.Net.Http.HttpResponseMessage}
+  parent: Apizr.Transferring.Managing
+  definition: Apizr.Transferring.Managing.IApizrUploadManager`2
+  name: IApizrUploadManager<ITransferApi, HttpResponseMessage>
+  nameWithType: IApizrUploadManager<ITransferApi, HttpResponseMessage>
+  fullName: Apizr.Transferring.Managing.IApizrUploadManager<Apizr.Transferring.Requesting.ITransferApi, System.Net.Http.HttpResponseMessage>
+  nameWithType.vb: IApizrUploadManager(Of ITransferApi, HttpResponseMessage)
+  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of Apizr.Transferring.Requesting.ITransferApi, System.Net.Http.HttpResponseMessage)
+  name.vb: IApizrUploadManager(Of ITransferApi, HttpResponseMessage)
+  spec.csharp:
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2
+    name: IApizrUploadManager
+    nameWithType: IApizrUploadManager
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Transferring.Requesting.ITransferApi
+    name: ITransferApi
+    nameWithType: ITransferApi
+    fullName: Apizr.Transferring.Requesting.ITransferApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2
+    name: IApizrUploadManager
+    nameWithType: IApizrUploadManager
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Transferring.Requesting.ITransferApi
+    name: ITransferApi
+    nameWithType: ITransferApi
+    fullName: Apizr.Transferring.Requesting.ITransferApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Transferring.Managing.IApizrTransferManagerBase{Apizr.Transferring.Requesting.ITransferApi}
   commentId: T:Apizr.Transferring.Managing.IApizrTransferManagerBase{Apizr.Transferring.Requesting.ITransferApi}
   parent: Apizr.Transferring.Managing
@@ -591,6 +650,334 @@ references:
     name: ITransferApi
     nameWithType: ITransferApi
     fullName: Apizr.Transferring.Requesting.ITransferApi
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Managing.IApizrTransferManager
+  commentId: T:Apizr.Transferring.Managing.IApizrTransferManager
+  parent: Apizr.Transferring.Managing
+  name: IApizrTransferManager
+  nameWithType: IApizrTransferManager
+  fullName: Apizr.Transferring.Managing.IApizrTransferManager
+- uid: Apizr.Transferring.Managing.IApizrDownloadManager
+  commentId: T:Apizr.Transferring.Managing.IApizrDownloadManager
+  parent: Apizr.Transferring.Managing
+  name: IApizrDownloadManager
+  nameWithType: IApizrDownloadManager
+  fullName: Apizr.Transferring.Managing.IApizrDownloadManager
+- uid: Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.IDownloadApi}
+  commentId: T:Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.IDownloadApi}
+  parent: Apizr.Transferring.Managing
+  definition: Apizr.Transferring.Managing.IApizrDownloadManager`1
+  name: IApizrDownloadManager<IDownloadApi>
+  nameWithType: IApizrDownloadManager<IDownloadApi>
+  fullName: Apizr.Transferring.Managing.IApizrDownloadManager<Apizr.Transferring.Requesting.IDownloadApi>
+  nameWithType.vb: IApizrDownloadManager(Of IDownloadApi)
+  fullName.vb: Apizr.Transferring.Managing.IApizrDownloadManager(Of Apizr.Transferring.Requesting.IDownloadApi)
+  name.vb: IApizrDownloadManager(Of IDownloadApi)
+  spec.csharp:
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`1
+    name: IApizrDownloadManager
+    nameWithType: IApizrDownloadManager
+    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Transferring.Requesting.IDownloadApi
+    name: IDownloadApi
+    nameWithType: IDownloadApi
+    fullName: Apizr.Transferring.Requesting.IDownloadApi
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`1
+    name: IApizrDownloadManager
+    nameWithType: IApizrDownloadManager
+    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Transferring.Requesting.IDownloadApi
+    name: IDownloadApi
+    nameWithType: IDownloadApi
+    fullName: Apizr.Transferring.Requesting.IDownloadApi
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.IDownloadApi,System.Collections.Generic.IDictionary{System.String,System.Object}}
+  commentId: T:Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.IDownloadApi,System.Collections.Generic.IDictionary{System.String,System.Object}}
+  parent: Apizr.Transferring.Managing
+  definition: Apizr.Transferring.Managing.IApizrDownloadManager`2
+  name: IApizrDownloadManager<IDownloadApi, IDictionary<String, Object>>
+  nameWithType: IApizrDownloadManager<IDownloadApi, IDictionary<String, Object>>
+  fullName: Apizr.Transferring.Managing.IApizrDownloadManager<Apizr.Transferring.Requesting.IDownloadApi, System.Collections.Generic.IDictionary<System.String, System.Object>>
+  nameWithType.vb: IApizrDownloadManager(Of IDownloadApi, IDictionary(Of String, Object))
+  fullName.vb: Apizr.Transferring.Managing.IApizrDownloadManager(Of Apizr.Transferring.Requesting.IDownloadApi, System.Collections.Generic.IDictionary(Of System.String, System.Object))
+  name.vb: IApizrDownloadManager(Of IDownloadApi, IDictionary(Of String, Object))
+  spec.csharp:
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
+    name: IApizrDownloadManager
+    nameWithType: IApizrDownloadManager
+    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Transferring.Requesting.IDownloadApi
+    name: IDownloadApi
+    nameWithType: IDownloadApi
+    fullName: Apizr.Transferring.Requesting.IDownloadApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
+    name: IApizrDownloadManager
+    nameWithType: IApizrDownloadManager
+    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Transferring.Requesting.IDownloadApi
+    name: IDownloadApi
+    nameWithType: IDownloadApi
+    fullName: Apizr.Transferring.Requesting.IDownloadApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Managing.IApizrTransferManagerBase{Apizr.Transferring.Requesting.IDownloadApi}
+  commentId: T:Apizr.Transferring.Managing.IApizrTransferManagerBase{Apizr.Transferring.Requesting.IDownloadApi}
+  parent: Apizr.Transferring.Managing
+  definition: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+  name: IApizrTransferManagerBase<IDownloadApi>
+  nameWithType: IApizrTransferManagerBase<IDownloadApi>
+  fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase<Apizr.Transferring.Requesting.IDownloadApi>
+  nameWithType.vb: IApizrTransferManagerBase(Of IDownloadApi)
+  fullName.vb: Apizr.Transferring.Managing.IApizrTransferManagerBase(Of Apizr.Transferring.Requesting.IDownloadApi)
+  name.vb: IApizrTransferManagerBase(Of IDownloadApi)
+  spec.csharp:
+  - uid: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+    name: IApizrTransferManagerBase
+    nameWithType: IApizrTransferManagerBase
+    fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Transferring.Requesting.IDownloadApi
+    name: IDownloadApi
+    nameWithType: IDownloadApi
+    fullName: Apizr.Transferring.Requesting.IDownloadApi
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+    name: IApizrTransferManagerBase
+    nameWithType: IApizrTransferManagerBase
+    fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Transferring.Requesting.IDownloadApi
+    name: IDownloadApi
+    nameWithType: IDownloadApi
+    fullName: Apizr.Transferring.Requesting.IDownloadApi
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Managing.IApizrUploadManager
+  commentId: T:Apizr.Transferring.Managing.IApizrUploadManager
+  parent: Apizr.Transferring.Managing
+  name: IApizrUploadManager
+  nameWithType: IApizrUploadManager
+  fullName: Apizr.Transferring.Managing.IApizrUploadManager
+- uid: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi}
+  commentId: T:Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi}
+  parent: Apizr.Transferring.Managing
+  definition: Apizr.Transferring.Managing.IApizrUploadManager`1
+  name: IApizrUploadManager<IUploadApi>
+  nameWithType: IApizrUploadManager<IUploadApi>
+  fullName: Apizr.Transferring.Managing.IApizrUploadManager<Apizr.Transferring.Requesting.IUploadApi>
+  nameWithType.vb: IApizrUploadManager(Of IUploadApi)
+  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of Apizr.Transferring.Requesting.IUploadApi)
+  name.vb: IApizrUploadManager(Of IUploadApi)
+  spec.csharp:
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1
+    name: IApizrUploadManager
+    nameWithType: IApizrUploadManager
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Transferring.Requesting.IUploadApi
+    name: IUploadApi
+    nameWithType: IUploadApi
+    fullName: Apizr.Transferring.Requesting.IUploadApi
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1
+    name: IApizrUploadManager
+    nameWithType: IApizrUploadManager
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Transferring.Requesting.IUploadApi
+    name: IUploadApi
+    nameWithType: IUploadApi
+    fullName: Apizr.Transferring.Requesting.IUploadApi
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}
+  commentId: T:Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}
+  parent: Apizr.Transferring.Managing
+  definition: Apizr.Transferring.Managing.IApizrUploadManager`2
+  name: IApizrUploadManager<IUploadApi, HttpResponseMessage>
+  nameWithType: IApizrUploadManager<IUploadApi, HttpResponseMessage>
+  fullName: Apizr.Transferring.Managing.IApizrUploadManager<Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage>
+  nameWithType.vb: IApizrUploadManager(Of IUploadApi, HttpResponseMessage)
+  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage)
+  name.vb: IApizrUploadManager(Of IUploadApi, HttpResponseMessage)
+  spec.csharp:
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2
+    name: IApizrUploadManager
+    nameWithType: IApizrUploadManager
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Transferring.Requesting.IUploadApi
+    name: IUploadApi
+    nameWithType: IUploadApi
+    fullName: Apizr.Transferring.Requesting.IUploadApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2
+    name: IApizrUploadManager
+    nameWithType: IApizrUploadManager
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Transferring.Requesting.IUploadApi
+    name: IUploadApi
+    nameWithType: IUploadApi
+    fullName: Apizr.Transferring.Requesting.IUploadApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Managing.IApizrTransferManagerBase{Apizr.Transferring.Requesting.IUploadApi}
+  commentId: T:Apizr.Transferring.Managing.IApizrTransferManagerBase{Apizr.Transferring.Requesting.IUploadApi}
+  parent: Apizr.Transferring.Managing
+  definition: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+  name: IApizrTransferManagerBase<IUploadApi>
+  nameWithType: IApizrTransferManagerBase<IUploadApi>
+  fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase<Apizr.Transferring.Requesting.IUploadApi>
+  nameWithType.vb: IApizrTransferManagerBase(Of IUploadApi)
+  fullName.vb: Apizr.Transferring.Managing.IApizrTransferManagerBase(Of Apizr.Transferring.Requesting.IUploadApi)
+  name.vb: IApizrTransferManagerBase(Of IUploadApi)
+  spec.csharp:
+  - uid: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+    name: IApizrTransferManagerBase
+    nameWithType: IApizrTransferManagerBase
+    fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Transferring.Requesting.IUploadApi
+    name: IUploadApi
+    nameWithType: IUploadApi
+    fullName: Apizr.Transferring.Requesting.IUploadApi
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+    name: IApizrTransferManagerBase
+    nameWithType: IApizrTransferManagerBase
+    fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Transferring.Requesting.IUploadApi
+    name: IUploadApi
+    nameWithType: IUploadApi
+    fullName: Apizr.Transferring.Requesting.IUploadApi
   - name: )
     nameWithType: )
     fullName: )
@@ -1413,42 +1800,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Transferring.Managing.IApizrTransferManager`1
-  commentId: T:Apizr.Transferring.Managing.IApizrTransferManager`1
-  name: IApizrTransferManager<TTransferApi>
-  nameWithType: IApizrTransferManager<TTransferApi>
-  fullName: Apizr.Transferring.Managing.IApizrTransferManager<TTransferApi>
-  nameWithType.vb: IApizrTransferManager(Of TTransferApi)
-  fullName.vb: Apizr.Transferring.Managing.IApizrTransferManager(Of TTransferApi)
-  name.vb: IApizrTransferManager(Of TTransferApi)
-  spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrTransferManager`1
-    name: IApizrTransferManager
-    nameWithType: IApizrTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrTransferManager
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TTransferApi
-    nameWithType: TTransferApi
-    fullName: TTransferApi
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrTransferManager`1
-    name: IApizrTransferManager
-    nameWithType: IApizrTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrTransferManager
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TTransferApi
-    nameWithType: TTransferApi
-    fullName: TTransferApi
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Transferring.Managing.IApizrTransferManager`2
   commentId: T:Apizr.Transferring.Managing.IApizrTransferManager`2
   name: IApizrTransferManager<TTransferApi, TDownloadParams>
@@ -1497,39 +1848,39 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Transferring.Managing.IApizrUploadManager`1
-  commentId: T:Apizr.Transferring.Managing.IApizrUploadManager`1
-  name: IApizrUploadManager<TUploadApi>
-  nameWithType: IApizrUploadManager<TUploadApi>
-  fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi>
-  nameWithType.vb: IApizrUploadManager(Of TUploadApi)
-  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi)
-  name.vb: IApizrUploadManager(Of TUploadApi)
+- uid: Apizr.Transferring.Managing.IApizrTransferManager`1
+  commentId: T:Apizr.Transferring.Managing.IApizrTransferManager`1
+  name: IApizrTransferManager<TTransferApi>
+  nameWithType: IApizrTransferManager<TTransferApi>
+  fullName: Apizr.Transferring.Managing.IApizrTransferManager<TTransferApi>
+  nameWithType.vb: IApizrTransferManager(Of TTransferApi)
+  fullName.vb: Apizr.Transferring.Managing.IApizrTransferManager(Of TTransferApi)
+  name.vb: IApizrTransferManager(Of TTransferApi)
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1
-    name: IApizrUploadManager
-    nameWithType: IApizrUploadManager
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - uid: Apizr.Transferring.Managing.IApizrTransferManager`1
+    name: IApizrTransferManager
+    nameWithType: IApizrTransferManager
+    fullName: Apizr.Transferring.Managing.IApizrTransferManager
   - name: <
     nameWithType: <
     fullName: <
-  - name: TUploadApi
-    nameWithType: TUploadApi
-    fullName: TUploadApi
+  - name: TTransferApi
+    nameWithType: TTransferApi
+    fullName: TTransferApi
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1
-    name: IApizrUploadManager
-    nameWithType: IApizrUploadManager
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - uid: Apizr.Transferring.Managing.IApizrTransferManager`1
+    name: IApizrTransferManager
+    nameWithType: IApizrTransferManager
+    fullName: Apizr.Transferring.Managing.IApizrTransferManager
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TUploadApi
-    nameWithType: TUploadApi
-    fullName: TUploadApi
+  - name: TTransferApi
+    nameWithType: TTransferApi
+    fullName: TTransferApi
   - name: )
     nameWithType: )
     fullName: )
@@ -1614,6 +1965,90 @@ references:
   - name: TDownloadParams
     nameWithType: TDownloadParams
     fullName: TDownloadParams
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Managing.IApizrUploadManager`1
+  commentId: T:Apizr.Transferring.Managing.IApizrUploadManager`1
+  name: IApizrUploadManager<TUploadApi>
+  nameWithType: IApizrUploadManager<TUploadApi>
+  fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi>
+  nameWithType.vb: IApizrUploadManager(Of TUploadApi)
+  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi)
+  name.vb: IApizrUploadManager(Of TUploadApi)
+  spec.csharp:
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1
+    name: IApizrUploadManager
+    nameWithType: IApizrUploadManager
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TUploadApi
+    nameWithType: TUploadApi
+    fullName: TUploadApi
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1
+    name: IApizrUploadManager
+    nameWithType: IApizrUploadManager
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TUploadApi
+    nameWithType: TUploadApi
+    fullName: TUploadApi
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Managing.IApizrUploadManager`2
+  commentId: T:Apizr.Transferring.Managing.IApizrUploadManager`2
+  name: IApizrUploadManager<TUploadApi, TUploadApiResultData>
+  nameWithType: IApizrUploadManager<TUploadApi, TUploadApiResultData>
+  fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi, TUploadApiResultData>
+  nameWithType.vb: IApizrUploadManager(Of TUploadApi, TUploadApiResultData)
+  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi, TUploadApiResultData)
+  name.vb: IApizrUploadManager(Of TUploadApi, TUploadApiResultData)
+  spec.csharp:
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2
+    name: IApizrUploadManager
+    nameWithType: IApizrUploadManager
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TUploadApi
+    nameWithType: TUploadApi
+    fullName: TUploadApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TUploadApiResultData
+    nameWithType: TUploadApiResultData
+    fullName: TUploadApiResultData
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2
+    name: IApizrUploadManager
+    nameWithType: IApizrUploadManager
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TUploadApi
+    nameWithType: TUploadApi
+    fullName: TUploadApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TUploadApiResultData
+    nameWithType: TUploadApiResultData
+    fullName: TUploadApiResultData
   - name: )
     nameWithType: )
     fullName: )

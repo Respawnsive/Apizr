@@ -109,6 +109,36 @@ namespace Apizr.Optional.Extending
                 new DownloadOptionalQuery(fileInfo, optionsBuilder),
                 ApizrManager.CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
+        /// <summary>
+        /// Send a download query to Apizr using MediatR with <typeparamref name="TDownloadParams"/> and optional result
+        /// </summary>
+        /// <typeparam name="TDownloadParams">The query parameters type</typeparam>
+        /// <param name="apizrMediator">The extended mediator</param>
+        /// <param name="fileInfo">Some information about the file to download</param>
+        /// <param name="downloadParams">Some custom query parameters</param>
+        /// <param name="optionsBuilder">Some request options</param>
+        /// <returns></returns>
+        public static Task<Option<FileInfo, ApizrException>> SendDownloadWithOptionalQuery<TDownloadParams>(this IApizrOptionalMediator apizrMediator,
+            FileInfo fileInfo,
+            TDownloadParams downloadParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
+            ((IApizrInternalMediator)apizrMediator).Send(
+                new DownloadOptionalQuery<IDownloadApi<TDownloadParams>, TDownloadParams>(fileInfo, downloadParams, optionsBuilder),
+                ApizrManager.CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+
+        /// <summary>
+        /// Send a download query to Apizr using MediatR with <typeparamref name="TDownloadParams"/> and optional result
+        /// </summary>
+        /// <typeparam name="TDownloadParams">The query parameters type</typeparam>
+        /// <param name="apizrMediator">The extended mediator</param>
+        /// <param name="fileInfo">Some information about the file to download</param>
+        /// <param name="optionsBuilder">Some request options</param>
+        /// <returns></returns>
+        public static Task<Option<FileInfo, ApizrException>> SendDownloadWithOptionalQueryWith<TDownloadParams>(this IApizrOptionalMediator apizrMediator,
+            FileInfo fileInfo, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
+            ((IApizrInternalMediator)apizrMediator).Send(
+                new DownloadOptionalQuery<IDownloadApi<TDownloadParams>, TDownloadParams>(fileInfo, default, optionsBuilder),
+                ApizrManager.CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+
         #endregion
 
         #region Upload
@@ -243,6 +273,48 @@ namespace Apizr.Optional.Extending
             FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
             ((IApizrInternalMediator)apizrMediator).Send(
                 new UploadOptionalCommand(fileInfoPart, optionsBuilder),
+                ApizrManager.CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+
+        /// <summary>
+        /// Send a upload command to Apizr using MediatR with <typeparamref name="TUploadApiResultData"/> from file bytes data with optional result
+        /// </summary>
+        /// <typeparam name="TUploadApiResultData">The upload api result data type</typeparam>
+        /// <param name="apizrMediator">The extended mediator</param>
+        /// <param name="byteArrayPart">The file bytes data</param>
+        /// <param name="optionsBuilder">Some request options</param>
+        /// <returns></returns>
+        public static Task<Option<TUploadApiResultData, ApizrException>> SendUploadWithOptionalCommand<TUploadApiResultData>(this IApizrOptionalMediator apizrMediator,
+            ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
+            ((IApizrInternalMediator)apizrMediator).Send(
+                new UploadOptionalCommand<IUploadApi<TUploadApiResultData>, TUploadApiResultData>(byteArrayPart, optionsBuilder),
+                ApizrManager.CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+
+        /// <summary>
+        /// Send a upload command to Apizr using MediatR with <typeparamref name="TUploadApiResultData"/> from file stream data with optional result
+        /// </summary>
+        /// <typeparam name="TUploadApiResultData">The upload api result data type</typeparam>
+        /// <param name="apizrMediator">The extended mediator</param>
+        /// <param name="streamPart">The file stream data</param>
+        /// <param name="optionsBuilder">Some request options</param>
+        /// <returns></returns>
+        public static Task<Option<TUploadApiResultData, ApizrException>> SendUploadWithOptionalCommand<TUploadApiResultData>(this IApizrOptionalMediator apizrMediator,
+            StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
+            ((IApizrInternalMediator)apizrMediator).Send(
+                new UploadOptionalCommand<IUploadApi<TUploadApiResultData>, TUploadApiResultData>(streamPart, optionsBuilder),
+                ApizrManager.CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
+
+        /// <summary>
+        /// Send a upload command to Apizr using MediatR with <typeparamref name="TUploadApiResultData"/> from file info data with optional result
+        /// </summary>
+        /// <typeparam name="TUploadApiResultData">The upload api result data type</typeparam>
+        /// <param name="apizrMediator">The extended mediator</param>
+        /// <param name="fileInfoPart">The file info data</param>
+        /// <param name="optionsBuilder">Some request options</param>
+        /// <returns></returns>
+        public static Task<Option<TUploadApiResultData, ApizrException>> SendUploadWithOptionalCommand<TUploadApiResultData>(this IApizrOptionalMediator apizrMediator,
+            FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) =>
+            ((IApizrInternalMediator)apizrMediator).Send(
+                new UploadOptionalCommand<IUploadApi<TUploadApiResultData>, TUploadApiResultData>(fileInfoPart, optionsBuilder),
                 ApizrManager.CreateRequestOptionsBuilder(optionsBuilder).ApizrOptions.CancellationToken);
 
         #endregion

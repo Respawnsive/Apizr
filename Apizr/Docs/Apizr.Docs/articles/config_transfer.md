@@ -29,81 +29,76 @@ Here is what the provided apis look like then:
 #### [Upload](#tab/tabid-upload)
 
 ```csharp
-public interface IUploadApi : ITransferApiBase
+public interface IUploadApi<TApiResultData> : ITransferApiBase
 {
     #region ByteArrayPart
 
     [Multipart]
-    [Post("/")]
-    Task UploadAsync(ByteArrayPart byteArrayPart);
+    [Post("")]
+    Task<TApiResultData> UploadAsync(ByteArrayPart byteArrayPart);
 
     [Multipart]
     [Post("/{path}"), QueryUriFormat(UriFormat.Unescaped)]
-    Task UploadAsync(ByteArrayPart byteArrayPart, string path);
+    Task<TApiResultData> UploadAsync(ByteArrayPart byteArrayPart, string path);
 
     [Multipart]
-    [Post("/")]
-    Task UploadAsync(ByteArrayPart byteArrayPart, 
-        [RequestOptions] IApizrRequestOptions options);
+    [Post("")]
+    Task<TApiResultData> UploadAsync(ByteArrayPart byteArrayPart, [RequestOptions] IApizrRequestOptions options);
 
     [Multipart]
     [Post("/{path}"), QueryUriFormat(UriFormat.Unescaped)]
-    Task UploadAsync(ByteArrayPart byteArrayPart, 
-        string path, 
-        [RequestOptions] IApizrRequestOptions options);
+    Task<TApiResultData> UploadAsync(ByteArrayPart byteArrayPart, string path, [RequestOptions] IApizrRequestOptions options);
 
     #endregion
 
     #region StreamPart
 
     [Multipart]
-    [Post("/")]
-    Task UploadAsync(StreamPart streamPart);
+    [Post("")]
+    Task<TApiResultData> UploadAsync(StreamPart streamPart);
 
     [Multipart]
     [Post("/{path}"), QueryUriFormat(UriFormat.Unescaped)]
-    Task UploadAsync(StreamPart streamPart, string path);
+    Task<TApiResultData> UploadAsync(StreamPart streamPart, string path);
 
     [Multipart]
-    [Post("/")]
-    Task UploadAsync(StreamPart streamPart, 
-        [RequestOptions] IApizrRequestOptions options);
+    [Post("")]
+    Task<TApiResultData> UploadAsync(StreamPart streamPart, [RequestOptions] IApizrRequestOptions options);
 
     [Multipart]
     [Post("/{path}"), QueryUriFormat(UriFormat.Unescaped)]
-    Task UploadAsync(StreamPart streamPart, 
-        string path, 
-        [RequestOptions] IApizrRequestOptions options);
+    Task<TApiResultData> UploadAsync(StreamPart streamPart, string path, [RequestOptions] IApizrRequestOptions options);
 
     #endregion
 
     #region FileInfoPart
 
     [Multipart]
-    [Post("/")]
-    Task UploadAsync(FileInfoPart fileInfoPart);
+    [Post("")]
+    Task<TApiResultData> UploadAsync(FileInfoPart fileInfoPart);
 
     [Multipart]
     [Post("/{filePath}"), QueryUriFormat(UriFormat.Unescaped)]
-    Task UploadAsync(FileInfoPart fileInfoPart, 
-        string filePath);
+    Task<TApiResultData> UploadAsync(FileInfoPart fileInfoPart, string filePath);
 
     [Multipart]
-    [Post("/")]
-    Task UploadAsync(FileInfoPart fileInfoPart, 
-        [RequestOptions] IApizrRequestOptions options);
+    [Post("")]
+    Task<TApiResultData> UploadAsync(FileInfoPart fileInfoPart, [RequestOptions] IApizrRequestOptions options);
 
     [Multipart]
     [Post("/{filePath}"), QueryUriFormat(UriFormat.Unescaped)]
-    Task UploadAsync(FileInfoPart fileInfoPart, 
-        string filePath, 
-        [RequestOptions] IApizrRequestOptions options); 
+    Task<TApiResultData> UploadAsync(FileInfoPart fileInfoPart, string filePath, [RequestOptions] IApizrRequestOptions options);
 
     #endregion
 }
+
+public interface IUploadApi : IUploadApi<HttpResponseMessage>
+{
+}
 ```
 
-The Upload api offers you the choice between ByteArray, Stream or FileInfo sources.
+The Upload api offers you the choice between ByteArray, Stream or FileInfo sources. 
+You can set your own return type or use the default HttpResponseMessage one.
 `filePath` is an unesacped uri file path optionaly provided at request time, in case you want to use the same api for different uris.
 
 #### [Download](#tab/tabid-download)
@@ -145,11 +140,11 @@ The Download api could be used with `IDictionary<string, object>` parameter type
 #### [Transfer](#tab/tabid-transfer)
 
 ```csharp
-public interface ITransferApi<in TDownloadParams> : 
-    IDownloadApi<TDownloadParams>, IUploadApi { }
-    
-public interface ITransferApi : 
-    ITransferApi<IDictionary<string, object>>, IDownloadApi { }
+    public interface ITransferApi<in TDownloadParams, TUploadApiResultData> : 
+        IDownloadApi<TDownloadParams>, IUploadApi<TUploadApiResultData> { }
+
+    public interface ITransferApi : 
+        ITransferApi<IDictionary<string, object>, HttpResponseMessage>, IDownloadApi, IUploadApi { }
 ```
 
 The Transfer api inherits from both the upload and the download one, in case you want to deal with the both of it from the same api.
@@ -185,6 +180,10 @@ Where you could register it as we used to do it with any other apis, FileTransfe
 var transferManager = ApizrBuilder.Current.CreateTransferManager(
     options => options.WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE"));
 
+// Or register the built-in transfer api with custom types
+var transferManager = ApizrBuilder.Current.CreateTransferManagerWith<MyDownloadParamType, MyUploadResultType>(
+    options => options.WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE"));
+
 // OR register a custom transfer api
 var transferManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferSampleApi>();
 ```
@@ -196,6 +195,10 @@ Here you go with your `Transfer` manager instance.
 ```csharp
 // register the built-in transfer api
 services.AddApizrTransferManager(
+    options => options.WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE"));
+
+// OR register the built-in transfer api with custom types
+services.AddApizrTransferManagerWith<MyDownloadParamType, MyUploadResultType>(
     options => options.WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE"));
 
 // OR register a custom transfer api
@@ -212,6 +215,11 @@ services.AddApizrTransferManager(
     options => options.WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE")
                 .WithFileTransferMediation());
 
+// OR register the built-in transfer api with custom types
+services.AddApizrTransferManagerWith<MyDownloadParamType, MyUploadResultType>(
+    options => options.WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE")
+                .WithFileTransferMediation());
+
 // OR register a custom transfer api
 services.AddApizrTransferManagerFor<ITransferSampleApi>(
     options => options.WithFileTransferMediation());
@@ -225,6 +233,11 @@ Then, get an Apizr mediator instance by resolving/injecting `IApizrMediator` to 
 ```csharp
 // register the built-in transfer api
 services.AddApizrTransferManager(
+    options => options.WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE")
+                .WithFileTransferOptionalMediation());
+
+// OR register the built-in transfer api with custom types
+services.AddApizrTransferManagerWith<MyDownloadParamType, MyUploadResultType>(
     options => options.WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE")
                 .WithFileTransferOptionalMediation());
 
@@ -246,6 +259,9 @@ var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
     // Built-in api
     .AddTransferManager(options => options
         .WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE"))
+    // Built-in api with custom types
+    .AddTransferManagerWith<MyDownloadParamType, MyUploadResultType>(options => options
+        .WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE"))
     // Custom api
     .AddTransferManagerFor<ITransferSampleApi>());
 ```
@@ -266,6 +282,9 @@ services.AddApizr(registry => registry
     // Built-in api
     .AddTransferManager(options => options
         .WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE"))
+    // Built-in api with custom types
+    .AddTransferManagerWith<MyDownloadParamType, MyUploadResultType>(options => options
+        .WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE"))
     // Custom api
     .AddTransferManagerFor<ITransferSampleApi>());
 ```
@@ -277,6 +296,9 @@ You otherwise can resolve/inject `IApizrExtendedRegistry` to get the regisrty in
 // for the built-in transfer api
 var transferManager = apizrRegistry.GetTransferManager();
 
+// OR for the built-in transfer api with custom types
+var transferManager = apizrRegistry.GetTransferManagerWith<MyDownloadParamType, MyUploadResultType>();
+
 // OR for a custom transfer api
 var transferManager = apizrRegistry.GetTransferManagerFor<ITransferSampleApi>();
 ```
@@ -287,6 +309,9 @@ var transferManager = apizrRegistry.GetTransferManagerFor<ITransferSampleApi>();
 services.AddApizr(registry => registry
         // Built-in api
         .AddTransferManager(options => options
+            .WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE"))
+        // Built-in api with custom types
+        .AddTransferManagerWith<MyDownloadParamType, MyUploadResultType>(options => options
             .WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE"))
         // Custom api
         .AddTransferManagerFor<ITransferSampleApi>(),
@@ -303,6 +328,9 @@ For more info about MediatR intergration, see [Configuring MediatR](config_media
 services.AddApizr(registry => registry
         // Built-in api
         .AddTransferManager(options => options
+            .WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE"))
+        // Built-in api with custom types
+        .AddTransferManagerWith<MyDownloadParamType, MyUploadResultType>(options => options
             .WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE"))
         // Custom api
         .AddTransferManagerFor<ITransferSampleApi>(),
@@ -342,6 +370,10 @@ You can call download or upload methods directly from the registry itself.
 var transferResult = await registry.DownloadAsync(
     new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
 
+// OR for the built-in transfer api with custom param type
+var transferResult = await registry.DownloadWithAsync<MyDownloadParamType>(
+    new FileInfo("YOUR_FILE_FULL_NAME_HERE"), myDownloadParams);
+
 // OR for a custom transfer api
 var transferResult = await registry.DownloadAsync<ITransferSampleApi>(
     new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
@@ -368,6 +400,10 @@ You can call download or upload methods directly from the registry itself.
 var transferResult = await registry.DownloadAsync(
     new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
 
+// OR for the built-in transfer api with custom param type
+var transferResult = await registry.DownloadWithAsync<MyDownloadParamType>(
+    new FileInfo("YOUR_FILE_FULL_NAME_HERE"), myDownloadParams);
+
 // OR for a custom transfer api
 var transferResult = await registry.DownloadAsync<ITransferSampleApi>(
     new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
@@ -380,6 +416,10 @@ Once you get an Apizr mediator instance by resolving/injecting `IApizrMediator`,
 // for the built-in transfer api
 var transferResult = await apizrMediator.SendDownloadQuery(
     new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
+
+// OR for the built-in transfer api with custom param type
+var transferResult = await apizrMediator.SendDownloadWithQuery<MyDownloadParamType>(
+    new FileInfo("YOUR_FILE_FULL_NAME_HERE"), myDownloadParams);
 
 // OR for a custom transfer api
 var transferResult = await apizrMediator.SendDownloadQuery<ITransferSampleApi>(
@@ -395,6 +435,10 @@ Once you get an Apizr optional mediator instance by resolving/injecting `IApizrO
 // for the built-in transfer api
 var transferOptionalResult = await apizrOptionalMediator.SendDownloadOptionalQuery(
     new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
+
+// OR for the built-in transfer api with custom param type
+var transferResult = await apizrMediator.SendDownloadWithOptionalQuery<MyDownloadParamType>(
+    new FileInfo("YOUR_FILE_FULL_NAME_HERE"), myDownloadParams);
 
 // OR for a custom transfer api
 var transferOptionalResult = await apizrOptionalMediator.SendDownloadOptionalQuery<ITransferSampleApi>(

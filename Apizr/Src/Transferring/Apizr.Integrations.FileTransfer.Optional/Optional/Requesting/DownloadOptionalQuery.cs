@@ -42,6 +42,7 @@ namespace Apizr.Optional.Requesting
     /// <summary>
     /// The mediation download query with a dictionary query parameters type
     /// </summary>
+    /// <typeparam name="TDownloadApi">The download api type to manage</typeparam>
     public class DownloadOptionalQuery<TDownloadApi> : DownloadOptionalQuery<TDownloadApi, IDictionary<string, object>>
         where TDownloadApi : IDownloadApi
     {
@@ -86,6 +87,32 @@ namespace Apizr.Optional.Requesting
         /// <param name="downloadParams">Some query parameters</param>
         /// <param name="optionsBuilder">Some request options</param>
         public DownloadOptionalQuery(FileInfo fileInfo, IDictionary<string, object> downloadParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(fileInfo, downloadParams, optionsBuilder)
+        {
+        }
+    }
+
+    /// <summary>
+    /// The mediation download query with a dictionary query parameters type
+    /// </summary>
+    /// <typeparam name="TDownloadParams">The query parameters type</typeparam>
+    public class DownloadWithOptionalQuery<TDownloadParams> : DownloadOptionalQuery<IDownloadApi<TDownloadParams>, TDownloadParams>
+    {
+        /// <summary>
+        /// The mediation Read query constructor
+        /// </summary>
+        /// <param name="fileInfo">Some information about the file to download</param>
+        /// <param name="optionsBuilder">Some request options</param>
+        public DownloadWithOptionalQuery(FileInfo fileInfo, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(fileInfo, default, optionsBuilder)
+        {
+        }
+
+        /// <summary>
+        /// The mediation Read query constructor
+        /// </summary>
+        /// <param name="fileInfo">Some information about the file to download</param>
+        /// <param name="downloadParams">Some query parameters</param>
+        /// <param name="optionsBuilder">Some request options</param>
+        public DownloadWithOptionalQuery(FileInfo fileInfo, TDownloadParams downloadParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(fileInfo, downloadParams, optionsBuilder)
         {
         }
     }

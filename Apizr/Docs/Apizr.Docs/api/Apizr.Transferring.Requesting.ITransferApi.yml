@@ -15,32 +15,32 @@ items:
   source:
     id: ITransferApi
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Requesting\ITransferApi.cs
-    startLine: 6
+    startLine: 10
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Requesting
   syntax:
-    content: 'public interface ITransferApi : ITransferApi<IDictionary<string, object>>, IUploadApi, IDownloadApi, IDownloadApi<IDictionary<string, object>>, ITransferApiBase'
+    content: 'public interface ITransferApi : ITransferApi<IDictionary<string, object>, HttpResponseMessage>, IDownloadApi, IDownloadApi<IDictionary<string, object>>, IUploadApi, IUploadApi<HttpResponseMessage>, ITransferApiBase'
     content.vb: >-
       Public Interface ITransferApi
-          Inherits ITransferApi(Of IDictionary(Of String, Object)), IDownloadApi
+          Inherits ITransferApi(Of IDictionary(Of String, Object), HttpResponseMessage), IDownloadApi, IUploadApi
   inheritedMembers:
-  - Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart)
-  - Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart,System.String)
-  - Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)
-  - Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
-  - Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart)
-  - Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart,System.String)
-  - Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)
-  - Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
-  - Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart)
-  - Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart,System.String)
-  - Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)
-  - Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
   - Apizr.Transferring.Requesting.IDownloadApi{System.Collections.Generic.IDictionary{System.String,System.Object}}.DownloadAsync(System.String)
   - Apizr.Transferring.Requesting.IDownloadApi{System.Collections.Generic.IDictionary{System.String,System.Object}}.DownloadAsync(System.String,Apizr.Configuring.Request.IApizrRequestOptions)
   - Apizr.Transferring.Requesting.IDownloadApi{System.Collections.Generic.IDictionary{System.String,System.Object}}.DownloadAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})
   - Apizr.Transferring.Requesting.IDownloadApi{System.Collections.Generic.IDictionary{System.String,System.Object}}.DownloadAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object},Apizr.Configuring.Request.IApizrRequestOptions)
+  - Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.ByteArrayPart)
+  - Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.ByteArrayPart,System.String)
+  - Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)
+  - Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  - Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.StreamPart)
+  - Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.StreamPart,System.String)
+  - Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)
+  - Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  - Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.FileInfoPart)
+  - Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.FileInfoPart,System.String)
+  - Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)
+  - Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
   modifiers.csharp:
   - public
   - interface
@@ -53,654 +53,6 @@ references:
   name: Apizr.Transferring.Requesting
   nameWithType: Apizr.Transferring.Requesting
   fullName: Apizr.Transferring.Requesting
-- uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart)
-  commentId: M:Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart)
-  parent: Apizr.Transferring.Requesting.IUploadApi
-  isExternal: true
-  name: UploadAsync(ByteArrayPart)
-  nameWithType: IUploadApi.UploadAsync(ByteArrayPart)
-  fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart)
-  spec.csharp:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.ByteArrayPart
-    name: ByteArrayPart
-    nameWithType: ByteArrayPart
-    fullName: Refit.ByteArrayPart
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.ByteArrayPart
-    name: ByteArrayPart
-    nameWithType: ByteArrayPart
-    fullName: Refit.ByteArrayPart
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart,System.String)
-  commentId: M:Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart,System.String)
-  parent: Apizr.Transferring.Requesting.IUploadApi
-  isExternal: true
-  name: UploadAsync(ByteArrayPart, String)
-  nameWithType: IUploadApi.UploadAsync(ByteArrayPart, String)
-  fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart, System.String)
-  spec.csharp:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart,System.String)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.ByteArrayPart
-    name: ByteArrayPart
-    nameWithType: ByteArrayPart
-    fullName: Refit.ByteArrayPart
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart,System.String)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.ByteArrayPart
-    name: ByteArrayPart
-    nameWithType: ByteArrayPart
-    fullName: Refit.ByteArrayPart
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)
-  commentId: M:Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)
-  parent: Apizr.Transferring.Requesting.IUploadApi
-  isExternal: true
-  name: UploadAsync(ByteArrayPart, IApizrRequestOptions)
-  nameWithType: IUploadApi.UploadAsync(ByteArrayPart, IApizrRequestOptions)
-  fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart, Apizr.Configuring.Request.IApizrRequestOptions)
-  spec.csharp:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.ByteArrayPart
-    name: ByteArrayPart
-    nameWithType: ByteArrayPart
-    fullName: Refit.ByteArrayPart
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.Request.IApizrRequestOptions
-    name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.ByteArrayPart
-    name: ByteArrayPart
-    nameWithType: ByteArrayPart
-    fullName: Refit.ByteArrayPart
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.Request.IApizrRequestOptions
-    name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
-  commentId: M:Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
-  parent: Apizr.Transferring.Requesting.IUploadApi
-  isExternal: true
-  name: UploadAsync(ByteArrayPart, String, IApizrRequestOptions)
-  nameWithType: IUploadApi.UploadAsync(ByteArrayPart, String, IApizrRequestOptions)
-  fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
-  spec.csharp:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.ByteArrayPart
-    name: ByteArrayPart
-    nameWithType: ByteArrayPart
-    fullName: Refit.ByteArrayPart
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.Request.IApizrRequestOptions
-    name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.ByteArrayPart
-    name: ByteArrayPart
-    nameWithType: ByteArrayPart
-    fullName: Refit.ByteArrayPart
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.Request.IApizrRequestOptions
-    name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart)
-  commentId: M:Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart)
-  parent: Apizr.Transferring.Requesting.IUploadApi
-  isExternal: true
-  name: UploadAsync(StreamPart)
-  nameWithType: IUploadApi.UploadAsync(StreamPart)
-  fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart)
-  spec.csharp:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.StreamPart
-    name: StreamPart
-    nameWithType: StreamPart
-    fullName: Refit.StreamPart
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.StreamPart
-    name: StreamPart
-    nameWithType: StreamPart
-    fullName: Refit.StreamPart
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart,System.String)
-  commentId: M:Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart,System.String)
-  parent: Apizr.Transferring.Requesting.IUploadApi
-  isExternal: true
-  name: UploadAsync(StreamPart, String)
-  nameWithType: IUploadApi.UploadAsync(StreamPart, String)
-  fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart, System.String)
-  spec.csharp:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart,System.String)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.StreamPart
-    name: StreamPart
-    nameWithType: StreamPart
-    fullName: Refit.StreamPart
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart,System.String)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.StreamPart
-    name: StreamPart
-    nameWithType: StreamPart
-    fullName: Refit.StreamPart
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)
-  commentId: M:Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)
-  parent: Apizr.Transferring.Requesting.IUploadApi
-  isExternal: true
-  name: UploadAsync(StreamPart, IApizrRequestOptions)
-  nameWithType: IUploadApi.UploadAsync(StreamPart, IApizrRequestOptions)
-  fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart, Apizr.Configuring.Request.IApizrRequestOptions)
-  spec.csharp:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.StreamPart
-    name: StreamPart
-    nameWithType: StreamPart
-    fullName: Refit.StreamPart
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.Request.IApizrRequestOptions
-    name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.StreamPart
-    name: StreamPart
-    nameWithType: StreamPart
-    fullName: Refit.StreamPart
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.Request.IApizrRequestOptions
-    name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
-  commentId: M:Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
-  parent: Apizr.Transferring.Requesting.IUploadApi
-  isExternal: true
-  name: UploadAsync(StreamPart, String, IApizrRequestOptions)
-  nameWithType: IUploadApi.UploadAsync(StreamPart, String, IApizrRequestOptions)
-  fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
-  spec.csharp:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.StreamPart
-    name: StreamPart
-    nameWithType: StreamPart
-    fullName: Refit.StreamPart
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.Request.IApizrRequestOptions
-    name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.StreamPart
-    name: StreamPart
-    nameWithType: StreamPart
-    fullName: Refit.StreamPart
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.Request.IApizrRequestOptions
-    name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart)
-  commentId: M:Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart)
-  parent: Apizr.Transferring.Requesting.IUploadApi
-  isExternal: true
-  name: UploadAsync(FileInfoPart)
-  nameWithType: IUploadApi.UploadAsync(FileInfoPart)
-  fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart)
-  spec.csharp:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.FileInfoPart
-    name: FileInfoPart
-    nameWithType: FileInfoPart
-    fullName: Refit.FileInfoPart
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.FileInfoPart
-    name: FileInfoPart
-    nameWithType: FileInfoPart
-    fullName: Refit.FileInfoPart
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart,System.String)
-  commentId: M:Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart,System.String)
-  parent: Apizr.Transferring.Requesting.IUploadApi
-  isExternal: true
-  name: UploadAsync(FileInfoPart, String)
-  nameWithType: IUploadApi.UploadAsync(FileInfoPart, String)
-  fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart, System.String)
-  spec.csharp:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart,System.String)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.FileInfoPart
-    name: FileInfoPart
-    nameWithType: FileInfoPart
-    fullName: Refit.FileInfoPart
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart,System.String)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.FileInfoPart
-    name: FileInfoPart
-    nameWithType: FileInfoPart
-    fullName: Refit.FileInfoPart
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)
-  commentId: M:Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)
-  parent: Apizr.Transferring.Requesting.IUploadApi
-  isExternal: true
-  name: UploadAsync(FileInfoPart, IApizrRequestOptions)
-  nameWithType: IUploadApi.UploadAsync(FileInfoPart, IApizrRequestOptions)
-  fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart, Apizr.Configuring.Request.IApizrRequestOptions)
-  spec.csharp:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.FileInfoPart
-    name: FileInfoPart
-    nameWithType: FileInfoPart
-    fullName: Refit.FileInfoPart
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.Request.IApizrRequestOptions
-    name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.FileInfoPart
-    name: FileInfoPart
-    nameWithType: FileInfoPart
-    fullName: Refit.FileInfoPart
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.Request.IApizrRequestOptions
-    name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
-  commentId: M:Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
-  parent: Apizr.Transferring.Requesting.IUploadApi
-  isExternal: true
-  name: UploadAsync(FileInfoPart, String, IApizrRequestOptions)
-  nameWithType: IUploadApi.UploadAsync(FileInfoPart, String, IApizrRequestOptions)
-  fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
-  spec.csharp:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.FileInfoPart
-    name: FileInfoPart
-    nameWithType: FileInfoPart
-    fullName: Refit.FileInfoPart
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.Request.IApizrRequestOptions
-    name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Transferring.Requesting.IUploadApi.UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
-    name: UploadAsync
-    nameWithType: IUploadApi.UploadAsync
-    fullName: Apizr.Transferring.Requesting.IUploadApi.UploadAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Refit.FileInfoPart
-    name: FileInfoPart
-    nameWithType: FileInfoPart
-    fullName: Refit.FileInfoPart
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.Request.IApizrRequestOptions
-    name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Transferring.Requesting.IDownloadApi{System.Collections.Generic.IDictionary{System.String,System.Object}}.DownloadAsync(System.String)
   commentId: M:Apizr.Transferring.Requesting.IDownloadApi{System.Collections.Generic.IDictionary{System.String,System.Object}}.DownloadAsync(System.String)
   parent: Apizr.Transferring.Requesting.IDownloadApi{System.Collections.Generic.IDictionary{System.String,System.Object}}
@@ -1003,12 +355,678 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Transferring.Requesting.IUploadApi
-  commentId: T:Apizr.Transferring.Requesting.IUploadApi
-  parent: Apizr.Transferring.Requesting
-  name: IUploadApi
-  nameWithType: IUploadApi
-  fullName: Apizr.Transferring.Requesting.IUploadApi
+- uid: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.ByteArrayPart)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.ByteArrayPart)
+  parent: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}
+  definition: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart)
+  name: UploadAsync(ByteArrayPart)
+  nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync(ByteArrayPart)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync(Refit.ByteArrayPart)
+  nameWithType.vb: IUploadApi(Of HttpResponseMessage).UploadAsync(ByteArrayPart)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync(Refit.ByteArrayPart)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart)
+    name: UploadAsync
+    nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of HttpResponseMessage).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.ByteArrayPart,System.String)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.ByteArrayPart,System.String)
+  parent: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}
+  definition: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,System.String)
+  name: UploadAsync(ByteArrayPart, String)
+  nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync(ByteArrayPart, String)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync(Refit.ByteArrayPart, System.String)
+  nameWithType.vb: IUploadApi(Of HttpResponseMessage).UploadAsync(ByteArrayPart, String)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync(Refit.ByteArrayPart, System.String)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,System.String)
+    name: UploadAsync
+    nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,System.String)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of HttpResponseMessage).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)
+  parent: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}
+  definition: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)
+  name: UploadAsync(ByteArrayPart, IApizrRequestOptions)
+  nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync(ByteArrayPart, IApizrRequestOptions)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync(Refit.ByteArrayPart, Apizr.Configuring.Request.IApizrRequestOptions)
+  nameWithType.vb: IUploadApi(Of HttpResponseMessage).UploadAsync(ByteArrayPart, IApizrRequestOptions)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync(Refit.ByteArrayPart, Apizr.Configuring.Request.IApizrRequestOptions)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of HttpResponseMessage).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  parent: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}
+  definition: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  name: UploadAsync(ByteArrayPart, String, IApizrRequestOptions)
+  nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync(ByteArrayPart, String, IApizrRequestOptions)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync(Refit.ByteArrayPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  nameWithType.vb: IUploadApi(Of HttpResponseMessage).UploadAsync(ByteArrayPart, String, IApizrRequestOptions)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync(Refit.ByteArrayPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of HttpResponseMessage).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.StreamPart)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.StreamPart)
+  parent: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}
+  definition: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart)
+  name: UploadAsync(StreamPart)
+  nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync(StreamPart)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync(Refit.StreamPart)
+  nameWithType.vb: IUploadApi(Of HttpResponseMessage).UploadAsync(StreamPart)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync(Refit.StreamPart)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart)
+    name: UploadAsync
+    nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of HttpResponseMessage).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.StreamPart,System.String)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.StreamPart,System.String)
+  parent: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}
+  definition: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,System.String)
+  name: UploadAsync(StreamPart, String)
+  nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync(StreamPart, String)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync(Refit.StreamPart, System.String)
+  nameWithType.vb: IUploadApi(Of HttpResponseMessage).UploadAsync(StreamPart, String)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync(Refit.StreamPart, System.String)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,System.String)
+    name: UploadAsync
+    nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,System.String)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of HttpResponseMessage).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)
+  parent: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}
+  definition: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)
+  name: UploadAsync(StreamPart, IApizrRequestOptions)
+  nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync(StreamPart, IApizrRequestOptions)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync(Refit.StreamPart, Apizr.Configuring.Request.IApizrRequestOptions)
+  nameWithType.vb: IUploadApi(Of HttpResponseMessage).UploadAsync(StreamPart, IApizrRequestOptions)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync(Refit.StreamPart, Apizr.Configuring.Request.IApizrRequestOptions)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of HttpResponseMessage).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  parent: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}
+  definition: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  name: UploadAsync(StreamPart, String, IApizrRequestOptions)
+  nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync(StreamPart, String, IApizrRequestOptions)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync(Refit.StreamPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  nameWithType.vb: IUploadApi(Of HttpResponseMessage).UploadAsync(StreamPart, String, IApizrRequestOptions)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync(Refit.StreamPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of HttpResponseMessage).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.FileInfoPart)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.FileInfoPart)
+  parent: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}
+  definition: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart)
+  name: UploadAsync(FileInfoPart)
+  nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync(FileInfoPart)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync(Refit.FileInfoPart)
+  nameWithType.vb: IUploadApi(Of HttpResponseMessage).UploadAsync(FileInfoPart)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync(Refit.FileInfoPart)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart)
+    name: UploadAsync
+    nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of HttpResponseMessage).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.FileInfoPart,System.String)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.FileInfoPart,System.String)
+  parent: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}
+  definition: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,System.String)
+  name: UploadAsync(FileInfoPart, String)
+  nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync(FileInfoPart, String)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync(Refit.FileInfoPart, System.String)
+  nameWithType.vb: IUploadApi(Of HttpResponseMessage).UploadAsync(FileInfoPart, String)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync(Refit.FileInfoPart, System.String)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,System.String)
+    name: UploadAsync
+    nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,System.String)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of HttpResponseMessage).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)
+  parent: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}
+  definition: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)
+  name: UploadAsync(FileInfoPart, IApizrRequestOptions)
+  nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync(FileInfoPart, IApizrRequestOptions)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync(Refit.FileInfoPart, Apizr.Configuring.Request.IApizrRequestOptions)
+  nameWithType.vb: IUploadApi(Of HttpResponseMessage).UploadAsync(FileInfoPart, IApizrRequestOptions)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync(Refit.FileInfoPart, Apizr.Configuring.Request.IApizrRequestOptions)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of HttpResponseMessage).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  parent: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}
+  definition: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  name: UploadAsync(FileInfoPart, String, IApizrRequestOptions)
+  nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync(FileInfoPart, String, IApizrRequestOptions)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync(Refit.FileInfoPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  nameWithType.vb: IUploadApi(Of HttpResponseMessage).UploadAsync(FileInfoPart, String, IApizrRequestOptions)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync(Refit.FileInfoPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi<HttpResponseMessage>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of HttpResponseMessage).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String)
   commentId: M:Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String)
   isExternal: true
@@ -1301,6 +1319,708 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart)
+  isExternal: true
+  name: UploadAsync(ByteArrayPart)
+  nameWithType: IUploadApi<TApiResultData>.UploadAsync(ByteArrayPart)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.ByteArrayPart)
+  nameWithType.vb: IUploadApi(Of TApiResultData).UploadAsync(ByteArrayPart)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.ByteArrayPart)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart)
+    name: UploadAsync
+    nameWithType: IUploadApi<TApiResultData>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of TApiResultData).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}
+  commentId: T:Apizr.Transferring.Requesting.IUploadApi{System.Net.Http.HttpResponseMessage}
+  parent: Apizr.Transferring.Requesting
+  definition: Apizr.Transferring.Requesting.IUploadApi`1
+  name: IUploadApi<HttpResponseMessage>
+  nameWithType: IUploadApi<HttpResponseMessage>
+  fullName: Apizr.Transferring.Requesting.IUploadApi<System.Net.Http.HttpResponseMessage>
+  nameWithType.vb: IUploadApi(Of HttpResponseMessage)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of System.Net.Http.HttpResponseMessage)
+  name.vb: IUploadApi(Of HttpResponseMessage)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1
+    name: IUploadApi
+    nameWithType: IUploadApi
+    fullName: Apizr.Transferring.Requesting.IUploadApi
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1
+    name: IUploadApi
+    nameWithType: IUploadApi
+    fullName: Apizr.Transferring.Requesting.IUploadApi
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,System.String)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,System.String)
+  isExternal: true
+  name: UploadAsync(ByteArrayPart, String)
+  nameWithType: IUploadApi<TApiResultData>.UploadAsync(ByteArrayPart, String)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.ByteArrayPart, System.String)
+  nameWithType.vb: IUploadApi(Of TApiResultData).UploadAsync(ByteArrayPart, String)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.ByteArrayPart, System.String)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,System.String)
+    name: UploadAsync
+    nameWithType: IUploadApi<TApiResultData>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,System.String)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of TApiResultData).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)
+  isExternal: true
+  name: UploadAsync(ByteArrayPart, IApizrRequestOptions)
+  nameWithType: IUploadApi<TApiResultData>.UploadAsync(ByteArrayPart, IApizrRequestOptions)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.ByteArrayPart, Apizr.Configuring.Request.IApizrRequestOptions)
+  nameWithType.vb: IUploadApi(Of TApiResultData).UploadAsync(ByteArrayPart, IApizrRequestOptions)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.ByteArrayPart, Apizr.Configuring.Request.IApizrRequestOptions)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi<TApiResultData>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of TApiResultData).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  isExternal: true
+  name: UploadAsync(ByteArrayPart, String, IApizrRequestOptions)
+  nameWithType: IUploadApi<TApiResultData>.UploadAsync(ByteArrayPart, String, IApizrRequestOptions)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.ByteArrayPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  nameWithType.vb: IUploadApi(Of TApiResultData).UploadAsync(ByteArrayPart, String, IApizrRequestOptions)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.ByteArrayPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi<TApiResultData>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of TApiResultData).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.ByteArrayPart
+    name: ByteArrayPart
+    nameWithType: ByteArrayPart
+    fullName: Refit.ByteArrayPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart)
+  isExternal: true
+  name: UploadAsync(StreamPart)
+  nameWithType: IUploadApi<TApiResultData>.UploadAsync(StreamPart)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.StreamPart)
+  nameWithType.vb: IUploadApi(Of TApiResultData).UploadAsync(StreamPart)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.StreamPart)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart)
+    name: UploadAsync
+    nameWithType: IUploadApi<TApiResultData>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of TApiResultData).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,System.String)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,System.String)
+  isExternal: true
+  name: UploadAsync(StreamPart, String)
+  nameWithType: IUploadApi<TApiResultData>.UploadAsync(StreamPart, String)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.StreamPart, System.String)
+  nameWithType.vb: IUploadApi(Of TApiResultData).UploadAsync(StreamPart, String)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.StreamPart, System.String)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,System.String)
+    name: UploadAsync
+    nameWithType: IUploadApi<TApiResultData>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,System.String)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of TApiResultData).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)
+  isExternal: true
+  name: UploadAsync(StreamPart, IApizrRequestOptions)
+  nameWithType: IUploadApi<TApiResultData>.UploadAsync(StreamPart, IApizrRequestOptions)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.StreamPart, Apizr.Configuring.Request.IApizrRequestOptions)
+  nameWithType.vb: IUploadApi(Of TApiResultData).UploadAsync(StreamPart, IApizrRequestOptions)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.StreamPart, Apizr.Configuring.Request.IApizrRequestOptions)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi<TApiResultData>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of TApiResultData).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  isExternal: true
+  name: UploadAsync(StreamPart, String, IApizrRequestOptions)
+  nameWithType: IUploadApi<TApiResultData>.UploadAsync(StreamPart, String, IApizrRequestOptions)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.StreamPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  nameWithType.vb: IUploadApi(Of TApiResultData).UploadAsync(StreamPart, String, IApizrRequestOptions)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.StreamPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi<TApiResultData>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of TApiResultData).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.StreamPart
+    name: StreamPart
+    nameWithType: StreamPart
+    fullName: Refit.StreamPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart)
+  isExternal: true
+  name: UploadAsync(FileInfoPart)
+  nameWithType: IUploadApi<TApiResultData>.UploadAsync(FileInfoPart)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.FileInfoPart)
+  nameWithType.vb: IUploadApi(Of TApiResultData).UploadAsync(FileInfoPart)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.FileInfoPart)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart)
+    name: UploadAsync
+    nameWithType: IUploadApi<TApiResultData>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of TApiResultData).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,System.String)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,System.String)
+  isExternal: true
+  name: UploadAsync(FileInfoPart, String)
+  nameWithType: IUploadApi<TApiResultData>.UploadAsync(FileInfoPart, String)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.FileInfoPart, System.String)
+  nameWithType.vb: IUploadApi(Of TApiResultData).UploadAsync(FileInfoPart, String)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.FileInfoPart, System.String)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,System.String)
+    name: UploadAsync
+    nameWithType: IUploadApi<TApiResultData>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,System.String)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of TApiResultData).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)
+  isExternal: true
+  name: UploadAsync(FileInfoPart, IApizrRequestOptions)
+  nameWithType: IUploadApi<TApiResultData>.UploadAsync(FileInfoPart, IApizrRequestOptions)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.FileInfoPart, Apizr.Configuring.Request.IApizrRequestOptions)
+  nameWithType.vb: IUploadApi(Of TApiResultData).UploadAsync(FileInfoPart, IApizrRequestOptions)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.FileInfoPart, Apizr.Configuring.Request.IApizrRequestOptions)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi<TApiResultData>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of TApiResultData).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  commentId: M:Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+  isExternal: true
+  name: UploadAsync(FileInfoPart, String, IApizrRequestOptions)
+  nameWithType: IUploadApi<TApiResultData>.UploadAsync(FileInfoPart, String, IApizrRequestOptions)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.FileInfoPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  nameWithType.vb: IUploadApi(Of TApiResultData).UploadAsync(FileInfoPart, String, IApizrRequestOptions)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.FileInfoPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi<TApiResultData>.UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)
+    name: UploadAsync
+    nameWithType: IUploadApi(Of TApiResultData).UploadAsync
+    fullName: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Refit.FileInfoPart
+    name: FileInfoPart
+    nameWithType: FileInfoPart
+    fullName: Refit.FileInfoPart
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.Request.IApizrRequestOptions
+    name: IApizrRequestOptions
+    nameWithType: IApizrRequestOptions
+    fullName: Apizr.Configuring.Request.IApizrRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Transferring.Requesting.IDownloadApi`1
   commentId: T:Apizr.Transferring.Requesting.IDownloadApi`1
   name: IDownloadApi<TDownloadParams>
@@ -1334,6 +2054,42 @@ references:
   - name: TDownloadParams
     nameWithType: TDownloadParams
     fullName: TDownloadParams
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Transferring.Requesting.IUploadApi`1
+  commentId: T:Apizr.Transferring.Requesting.IUploadApi`1
+  name: IUploadApi<TApiResultData>
+  nameWithType: IUploadApi<TApiResultData>
+  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>
+  nameWithType.vb: IUploadApi(Of TApiResultData)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData)
+  name.vb: IUploadApi(Of TApiResultData)
+  spec.csharp:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1
+    name: IUploadApi
+    nameWithType: IUploadApi
+    fullName: Apizr.Transferring.Requesting.IUploadApi
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TApiResultData
+    nameWithType: TApiResultData
+    fullName: TApiResultData
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Transferring.Requesting.IUploadApi`1
+    name: IUploadApi
+    nameWithType: IUploadApi
+    fullName: Apizr.Transferring.Requesting.IUploadApi
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TApiResultData
+    nameWithType: TApiResultData
+    fullName: TApiResultData
   - name: )
     nameWithType: )
     fullName: )

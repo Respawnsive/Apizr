@@ -18,24 +18,24 @@ items:
   source:
     id: UploadCommandHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer.MediatR\Mediation\Requesting\Handling\UploadCommandHandler.cs
-    startLine: 11
+    startLine: 42
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Requesting.Handling
   syntax:
-    content: 'public class UploadCommandHandler<TUploadApi> : RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>, IRequestHandler<UploadCommand<TUploadApi>, Unit>, IRequestHandler<UploadCommand, Unit> where TUploadApi : IUploadApi'
+    content: 'public class UploadCommandHandler<TUploadApi> : RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>, IRequestHandler<UploadCommand<TUploadApi>, HttpResponseMessage>, IRequestHandler<UploadCommand, HttpResponseMessage> where TUploadApi : IUploadApi'
     typeParameters:
     - id: TUploadApi
     content.vb: >-
       Public Class UploadCommandHandler(Of TUploadApi As IUploadApi)
           Inherits RequestHandlerBase(Of IApizrRequestOptions, IApizrRequestOptionsBuilder)
-          Implements IRequestHandler(Of UploadCommand(Of TUploadApi), Unit), IRequestHandler(Of UploadCommand, Unit)
+          Implements IRequestHandler(Of UploadCommand(Of TUploadApi), HttpResponseMessage), IRequestHandler(Of UploadCommand, HttpResponseMessage)
   inheritance:
   - System.Object
   - Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   implements:
-  - MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand{{TUploadApi}},MediatR.Unit}
-  - MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand,MediatR.Unit}
+  - MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand{{TUploadApi}},System.Net.Http.HttpResponseMessage}
+  - MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand,System.Net.Http.HttpResponseMessage}
   inheritedMembers:
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -67,7 +67,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer.MediatR\Mediation\Requesting\Handling\UploadCommandHandler.cs
-    startLine: 18
+    startLine: 49
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Requesting.Handling
@@ -99,14 +99,14 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer.MediatR\Mediation\Requesting\Handling\UploadCommandHandler.cs
-    startLine: 29
+    startLine: 60
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Requesting.Handling
   summary: "\nHandling the upload request\n"
   example: []
   syntax:
-    content: public Task<Unit> Handle(UploadCommand<TUploadApi> request, CancellationToken cancellationToken)
+    content: public Task<HttpResponseMessage> Handle(UploadCommand<TUploadApi> request, CancellationToken cancellationToken)
     parameters:
     - id: request
       type: Apizr.Mediation.Requesting.UploadCommand{{TUploadApi}}
@@ -115,12 +115,12 @@ items:
       type: System.Threading.CancellationToken
       description: A cancellation token
     return:
-      type: System.Threading.Tasks.Task{MediatR.Unit}
+      type: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
       description: ''
-    content.vb: Public Function Handle(request As UploadCommand(Of TUploadApi), cancellationToken As CancellationToken) As Task(Of Unit)
+    content.vb: Public Function Handle(request As UploadCommand(Of TUploadApi), cancellationToken As CancellationToken) As Task(Of HttpResponseMessage)
   overload: Apizr.Mediation.Requesting.Handling.UploadCommandHandler`1.Handle*
   implements:
-  - MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand{{TUploadApi}},MediatR.Unit}.Handle(Apizr.Mediation.Requesting.UploadCommand{{TUploadApi}},System.Threading.CancellationToken)
+  - MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand{{TUploadApi}},System.Net.Http.HttpResponseMessage}.Handle(Apizr.Mediation.Requesting.UploadCommand{{TUploadApi}},System.Threading.CancellationToken)
   nameWithType.vb: UploadCommandHandler(Of TUploadApi).Handle(UploadCommand(Of TUploadApi), CancellationToken)
   modifiers.csharp:
   - public
@@ -142,14 +142,14 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer.MediatR\Mediation\Requesting\Handling\UploadCommandHandler.cs
-    startLine: 47
+    startLine: 78
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Requesting.Handling
   summary: "\nHandling the upload request\n"
   example: []
   syntax:
-    content: public Task<Unit> Handle(UploadCommand request, CancellationToken cancellationToken)
+    content: public Task<HttpResponseMessage> Handle(UploadCommand request, CancellationToken cancellationToken)
     parameters:
     - id: request
       type: Apizr.Mediation.Requesting.UploadCommand
@@ -158,12 +158,12 @@ items:
       type: System.Threading.CancellationToken
       description: A cancellation token
     return:
-      type: System.Threading.Tasks.Task{MediatR.Unit}
+      type: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
       description: ''
-    content.vb: Public Function Handle(request As UploadCommand, cancellationToken As CancellationToken) As Task(Of Unit)
+    content.vb: Public Function Handle(request As UploadCommand, cancellationToken As CancellationToken) As Task(Of HttpResponseMessage)
   overload: Apizr.Mediation.Requesting.Handling.UploadCommandHandler`1.Handle*
   implements:
-  - MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand,MediatR.Unit}.Handle(Apizr.Mediation.Requesting.UploadCommand,System.Threading.CancellationToken)
+  - MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand,System.Net.Http.HttpResponseMessage}.Handle(Apizr.Mediation.Requesting.UploadCommand,System.Threading.CancellationToken)
   nameWithType.vb: UploadCommandHandler(Of TUploadApi).Handle(UploadCommand, CancellationToken)
   modifiers.csharp:
   - public
@@ -237,16 +237,16 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand{{TUploadApi}},MediatR.Unit}
-  commentId: T:MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand{`0},MediatR.Unit}
+- uid: MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand{{TUploadApi}},System.Net.Http.HttpResponseMessage}
+  commentId: T:MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand{`0},System.Net.Http.HttpResponseMessage}
   parent: MediatR
   definition: MediatR.IRequestHandler`2
-  name: IRequestHandler<UploadCommand<TUploadApi>, Unit>
-  nameWithType: IRequestHandler<UploadCommand<TUploadApi>, Unit>
-  fullName: MediatR.IRequestHandler<Apizr.Mediation.Requesting.UploadCommand<TUploadApi>, MediatR.Unit>
-  nameWithType.vb: IRequestHandler(Of UploadCommand(Of TUploadApi), Unit)
-  fullName.vb: MediatR.IRequestHandler(Of Apizr.Mediation.Requesting.UploadCommand(Of TUploadApi), MediatR.Unit)
-  name.vb: IRequestHandler(Of UploadCommand(Of TUploadApi), Unit)
+  name: IRequestHandler<UploadCommand<TUploadApi>, HttpResponseMessage>
+  nameWithType: IRequestHandler<UploadCommand<TUploadApi>, HttpResponseMessage>
+  fullName: MediatR.IRequestHandler<Apizr.Mediation.Requesting.UploadCommand<TUploadApi>, System.Net.Http.HttpResponseMessage>
+  nameWithType.vb: IRequestHandler(Of UploadCommand(Of TUploadApi), HttpResponseMessage)
+  fullName.vb: MediatR.IRequestHandler(Of Apizr.Mediation.Requesting.UploadCommand(Of TUploadApi), System.Net.Http.HttpResponseMessage)
+  name.vb: IRequestHandler(Of UploadCommand(Of TUploadApi), HttpResponseMessage)
   spec.csharp:
   - uid: MediatR.IRequestHandler`2
     name: IRequestHandler
@@ -272,10 +272,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
   - name: '>'
     nameWithType: '>'
@@ -305,24 +305,24 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand,MediatR.Unit}
-  commentId: T:MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand,MediatR.Unit}
+- uid: MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand,System.Net.Http.HttpResponseMessage}
+  commentId: T:MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand,System.Net.Http.HttpResponseMessage}
   parent: MediatR
   definition: MediatR.IRequestHandler`2
-  name: IRequestHandler<UploadCommand, Unit>
-  nameWithType: IRequestHandler<UploadCommand, Unit>
-  fullName: MediatR.IRequestHandler<Apizr.Mediation.Requesting.UploadCommand, MediatR.Unit>
-  nameWithType.vb: IRequestHandler(Of UploadCommand, Unit)
-  fullName.vb: MediatR.IRequestHandler(Of Apizr.Mediation.Requesting.UploadCommand, MediatR.Unit)
-  name.vb: IRequestHandler(Of UploadCommand, Unit)
+  name: IRequestHandler<UploadCommand, HttpResponseMessage>
+  nameWithType: IRequestHandler<UploadCommand, HttpResponseMessage>
+  fullName: MediatR.IRequestHandler<Apizr.Mediation.Requesting.UploadCommand, System.Net.Http.HttpResponseMessage>
+  nameWithType.vb: IRequestHandler(Of UploadCommand, HttpResponseMessage)
+  fullName.vb: MediatR.IRequestHandler(Of Apizr.Mediation.Requesting.UploadCommand, System.Net.Http.HttpResponseMessage)
+  name.vb: IRequestHandler(Of UploadCommand, HttpResponseMessage)
   spec.csharp:
   - uid: MediatR.IRequestHandler`2
     name: IRequestHandler
@@ -339,10 +339,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
   - name: '>'
     nameWithType: '>'
@@ -363,10 +363,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
   - name: )
     nameWithType: )
@@ -859,21 +859,21 @@ references:
   fullName: Apizr.Mediation.Requesting.Handling.UploadCommandHandler<TUploadApi>.Handle
   nameWithType.vb: UploadCommandHandler(Of TUploadApi).Handle
   fullName.vb: Apizr.Mediation.Requesting.Handling.UploadCommandHandler(Of TUploadApi).Handle
-- uid: MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand{{TUploadApi}},MediatR.Unit}.Handle(Apizr.Mediation.Requesting.UploadCommand{{TUploadApi}},System.Threading.CancellationToken)
-  commentId: M:MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand{`0},MediatR.Unit}.Handle(Apizr.Mediation.Requesting.UploadCommand{`0},System.Threading.CancellationToken)
-  parent: MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand{{TUploadApi}},MediatR.Unit}
+- uid: MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand{{TUploadApi}},System.Net.Http.HttpResponseMessage}.Handle(Apizr.Mediation.Requesting.UploadCommand{{TUploadApi}},System.Threading.CancellationToken)
+  commentId: M:MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand{`0},System.Net.Http.HttpResponseMessage}.Handle(Apizr.Mediation.Requesting.UploadCommand{`0},System.Threading.CancellationToken)
+  parent: MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand{{TUploadApi}},System.Net.Http.HttpResponseMessage}
   definition: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
   name: Handle(UploadCommand<TUploadApi>, CancellationToken)
-  nameWithType: IRequestHandler<UploadCommand<TUploadApi>, Unit>.Handle(UploadCommand<TUploadApi>, CancellationToken)
-  fullName: MediatR.IRequestHandler<Apizr.Mediation.Requesting.UploadCommand<TUploadApi>, MediatR.Unit>.Handle(Apizr.Mediation.Requesting.UploadCommand<TUploadApi>, System.Threading.CancellationToken)
-  nameWithType.vb: IRequestHandler(Of UploadCommand(Of TUploadApi), Unit).Handle(UploadCommand(Of TUploadApi), CancellationToken)
-  fullName.vb: MediatR.IRequestHandler(Of Apizr.Mediation.Requesting.UploadCommand(Of TUploadApi), MediatR.Unit).Handle(Apizr.Mediation.Requesting.UploadCommand(Of TUploadApi), System.Threading.CancellationToken)
+  nameWithType: IRequestHandler<UploadCommand<TUploadApi>, HttpResponseMessage>.Handle(UploadCommand<TUploadApi>, CancellationToken)
+  fullName: MediatR.IRequestHandler<Apizr.Mediation.Requesting.UploadCommand<TUploadApi>, System.Net.Http.HttpResponseMessage>.Handle(Apizr.Mediation.Requesting.UploadCommand<TUploadApi>, System.Threading.CancellationToken)
+  nameWithType.vb: IRequestHandler(Of UploadCommand(Of TUploadApi), HttpResponseMessage).Handle(UploadCommand(Of TUploadApi), CancellationToken)
+  fullName.vb: MediatR.IRequestHandler(Of Apizr.Mediation.Requesting.UploadCommand(Of TUploadApi), System.Net.Http.HttpResponseMessage).Handle(Apizr.Mediation.Requesting.UploadCommand(Of TUploadApi), System.Threading.CancellationToken)
   name.vb: Handle(UploadCommand(Of TUploadApi), CancellationToken)
   spec.csharp:
   - uid: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
     name: Handle
-    nameWithType: IRequestHandler<UploadCommand<TUploadApi>, Unit>.Handle
-    fullName: MediatR.IRequestHandler<Apizr.Mediation.Requesting.UploadCommand<TUploadApi>, MediatR.Unit>.Handle
+    nameWithType: IRequestHandler<UploadCommand<TUploadApi>, HttpResponseMessage>.Handle
+    fullName: MediatR.IRequestHandler<Apizr.Mediation.Requesting.UploadCommand<TUploadApi>, System.Net.Http.HttpResponseMessage>.Handle
     isExternal: true
   - name: (
     nameWithType: (
@@ -905,8 +905,8 @@ references:
   spec.vb:
   - uid: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
     name: Handle
-    nameWithType: IRequestHandler(Of UploadCommand(Of TUploadApi), Unit).Handle
-    fullName: MediatR.IRequestHandler(Of Apizr.Mediation.Requesting.UploadCommand(Of TUploadApi), MediatR.Unit).Handle
+    nameWithType: IRequestHandler(Of UploadCommand(Of TUploadApi), HttpResponseMessage).Handle
+    fullName: MediatR.IRequestHandler(Of Apizr.Mediation.Requesting.UploadCommand(Of TUploadApi), System.Net.Http.HttpResponseMessage).Handle
     isExternal: true
   - name: (
     nameWithType: (
@@ -980,16 +980,16 @@ references:
   name: CancellationToken
   nameWithType: CancellationToken
   fullName: System.Threading.CancellationToken
-- uid: System.Threading.Tasks.Task{MediatR.Unit}
-  commentId: T:System.Threading.Tasks.Task{MediatR.Unit}
+- uid: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
+  commentId: T:System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
-  name: Task<Unit>
-  nameWithType: Task<Unit>
-  fullName: System.Threading.Tasks.Task<MediatR.Unit>
-  nameWithType.vb: Task(Of Unit)
-  fullName.vb: System.Threading.Tasks.Task(Of MediatR.Unit)
-  name.vb: Task(Of Unit)
+  name: Task<HttpResponseMessage>
+  nameWithType: Task<HttpResponseMessage>
+  fullName: System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>
+  nameWithType.vb: Task(Of HttpResponseMessage)
+  fullName.vb: System.Threading.Tasks.Task(Of System.Net.Http.HttpResponseMessage)
+  name.vb: Task(Of HttpResponseMessage)
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
@@ -999,10 +999,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
   - name: '>'
     nameWithType: '>'
@@ -1016,10 +1016,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
   - name: )
     nameWithType: )
@@ -1170,20 +1170,20 @@ references:
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
-- uid: MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand,MediatR.Unit}.Handle(Apizr.Mediation.Requesting.UploadCommand,System.Threading.CancellationToken)
-  commentId: M:MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand,MediatR.Unit}.Handle(Apizr.Mediation.Requesting.UploadCommand,System.Threading.CancellationToken)
-  parent: MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand,MediatR.Unit}
+- uid: MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand,System.Net.Http.HttpResponseMessage}.Handle(Apizr.Mediation.Requesting.UploadCommand,System.Threading.CancellationToken)
+  commentId: M:MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand,System.Net.Http.HttpResponseMessage}.Handle(Apizr.Mediation.Requesting.UploadCommand,System.Threading.CancellationToken)
+  parent: MediatR.IRequestHandler{Apizr.Mediation.Requesting.UploadCommand,System.Net.Http.HttpResponseMessage}
   definition: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
   name: Handle(UploadCommand, CancellationToken)
-  nameWithType: IRequestHandler<UploadCommand, Unit>.Handle(UploadCommand, CancellationToken)
-  fullName: MediatR.IRequestHandler<Apizr.Mediation.Requesting.UploadCommand, MediatR.Unit>.Handle(Apizr.Mediation.Requesting.UploadCommand, System.Threading.CancellationToken)
-  nameWithType.vb: IRequestHandler(Of UploadCommand, Unit).Handle(UploadCommand, CancellationToken)
-  fullName.vb: MediatR.IRequestHandler(Of Apizr.Mediation.Requesting.UploadCommand, MediatR.Unit).Handle(Apizr.Mediation.Requesting.UploadCommand, System.Threading.CancellationToken)
+  nameWithType: IRequestHandler<UploadCommand, HttpResponseMessage>.Handle(UploadCommand, CancellationToken)
+  fullName: MediatR.IRequestHandler<Apizr.Mediation.Requesting.UploadCommand, System.Net.Http.HttpResponseMessage>.Handle(Apizr.Mediation.Requesting.UploadCommand, System.Threading.CancellationToken)
+  nameWithType.vb: IRequestHandler(Of UploadCommand, HttpResponseMessage).Handle(UploadCommand, CancellationToken)
+  fullName.vb: MediatR.IRequestHandler(Of Apizr.Mediation.Requesting.UploadCommand, System.Net.Http.HttpResponseMessage).Handle(Apizr.Mediation.Requesting.UploadCommand, System.Threading.CancellationToken)
   spec.csharp:
   - uid: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
     name: Handle
-    nameWithType: IRequestHandler<UploadCommand, Unit>.Handle
-    fullName: MediatR.IRequestHandler<Apizr.Mediation.Requesting.UploadCommand, MediatR.Unit>.Handle
+    nameWithType: IRequestHandler<UploadCommand, HttpResponseMessage>.Handle
+    fullName: MediatR.IRequestHandler<Apizr.Mediation.Requesting.UploadCommand, System.Net.Http.HttpResponseMessage>.Handle
     isExternal: true
   - name: (
     nameWithType: (
@@ -1206,8 +1206,8 @@ references:
   spec.vb:
   - uid: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
     name: Handle
-    nameWithType: IRequestHandler(Of UploadCommand, Unit).Handle
-    fullName: MediatR.IRequestHandler(Of Apizr.Mediation.Requesting.UploadCommand, MediatR.Unit).Handle
+    nameWithType: IRequestHandler(Of UploadCommand, HttpResponseMessage).Handle
+    fullName: MediatR.IRequestHandler(Of Apizr.Mediation.Requesting.UploadCommand, System.Net.Http.HttpResponseMessage).Handle
     isExternal: true
   - name: (
     nameWithType: (

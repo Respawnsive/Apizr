@@ -108,4 +108,26 @@ namespace Apizr.Optional.Requesting
         {
         }
     }
+
+    /// <summary>
+    /// The mediation upload command returning an optional result
+    /// </summary>
+    /// <typeparam name="TUploadApiResultData">The upload api result data type</typeparam>
+    public class UploadWithOptionalCommand<TUploadApiResultData> : UploadOptionalCommand<IUploadApi<TUploadApiResultData>, TUploadApiResultData>
+    {
+        /// <inheritdoc />
+        public UploadWithOptionalCommand(ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(byteArrayPart, optionsBuilder)
+        {
+        }
+
+        /// <inheritdoc />
+        public UploadWithOptionalCommand(StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(streamPart, optionsBuilder)
+        {
+        }
+
+        /// <inheritdoc />
+        public UploadWithOptionalCommand(FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(fileInfoPart, optionsBuilder)
+        {
+        }
+    }
 }

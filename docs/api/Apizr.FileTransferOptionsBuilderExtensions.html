@@ -127,12 +127,12 @@
   
   <a id="Apizr_FileTransferOptionsBuilderExtensions_AddDownloadManager_" data-uid="Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager*"></a>
   <h4 id="Apizr_FileTransferOptionsBuilderExtensions_AddDownloadManager_Apizr_Configuring_Registry_IApizrRegistryBuilder_System_Action_Apizr_Configuring_Proper_IApizrProperOptionsBuilder__" data-uid="Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">AddDownloadManager(IApizrRegistryBuilder, Action&lt;IApizrProperOptionsBuilder&gt;)</h4>
-  <div class="markdown level1 summary"><p>Add a download manager for IDownloadApi (you must at least provide a base url)</p>
+  <div class="markdown level1 summary"><p>Add a download manager for IDownloadApi</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IApizrRegistryBuilder AddDownloadManager(this IApizrRegistryBuilder builder, Action&lt;IApizrProperOptionsBuilder&gt; optionsBuilder)</code></pre>
+    <pre><code class="lang-csharp hljs">public static IApizrRegistryBuilder AddDownloadManager(this IApizrRegistryBuilder builder, Action&lt;IApizrProperOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -314,14 +314,80 @@
   </table>
   
   
-  <a id="Apizr_FileTransferOptionsBuilderExtensions_AddTransferManager_" data-uid="Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager*"></a>
-  <h4 id="Apizr_FileTransferOptionsBuilderExtensions_AddTransferManager_Apizr_Configuring_Registry_IApizrRegistryBuilder_System_Action_Apizr_Configuring_Proper_IApizrProperOptionsBuilder__" data-uid="Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">AddTransferManager(IApizrRegistryBuilder, Action&lt;IApizrProperOptionsBuilder&gt;)</h4>
-  <div class="markdown level1 summary"><p>Add a transfer manager for ITransferApi (you must at least provide a base url)</p>
+  <a id="Apizr_FileTransferOptionsBuilderExtensions_AddDownloadManagerWith_" data-uid="Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManagerWith*"></a>
+  <h4 id="Apizr_FileTransferOptionsBuilderExtensions_AddDownloadManagerWith__1_Apizr_Configuring_Registry_IApizrRegistryBuilder_System_Action_Apizr_Configuring_Proper_IApizrProperOptionsBuilder__" data-uid="Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManagerWith``1(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">AddDownloadManagerWith&lt;TDownloadParams&gt;(IApizrRegistryBuilder, Action&lt;IApizrProperOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Add a download manager for the built-in download api with <code data-dev-comment-type="typeparamref" class="typeparamref">TDownloadParams</code></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IApizrRegistryBuilder AddTransferManager(this IApizrRegistryBuilder builder, Action&lt;IApizrProperOptionsBuilder&gt; optionsBuilder)</code></pre>
+    <pre><code class="lang-csharp hljs">public static IApizrRegistryBuilder AddDownloadManagerWith&lt;TDownloadParams&gt;(this IApizrRegistryBuilder builder, Action&lt;IApizrProperOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrRegistryBuilder.html">IApizrRegistryBuilder</a></td>
+        <td><span class="parametername">builder</span></td>
+        <td><p>The builder to create the manager from</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Proper.IApizrProperOptionsBuilder.html">IApizrProperOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>The builder defining some options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrRegistryBuilder.html">IApizrRegistryBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TDownloadParams</span></td>
+        <td><p>The download query parameters type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_FileTransferOptionsBuilderExtensions_AddTransferManager_" data-uid="Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager*"></a>
+  <h4 id="Apizr_FileTransferOptionsBuilderExtensions_AddTransferManager_Apizr_Configuring_Registry_IApizrRegistryBuilder_System_Action_Apizr_Configuring_Proper_IApizrProperOptionsBuilder__" data-uid="Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">AddTransferManager(IApizrRegistryBuilder, Action&lt;IApizrProperOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Add a transfer manager for ITransferApi</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IApizrRegistryBuilder AddTransferManager(this IApizrRegistryBuilder builder, Action&lt;IApizrProperOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -439,7 +505,7 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static IApizrRegistryBuilder AddTransferManagerFor&lt;TTransferApi, TDownloadParams&gt;(this IApizrRegistryBuilder builder, Action&lt;IApizrProperOptionsBuilder&gt; optionsBuilder = null)
-    where TTransferApi : ITransferApi&lt;TDownloadParams&gt;</code></pre>
+    where TTransferApi : ITransferApi&lt;TDownloadParams, HttpResponseMessage&gt;, IUploadApi</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -503,14 +569,162 @@
   </table>
   
   
-  <a id="Apizr_FileTransferOptionsBuilderExtensions_AddUploadManager_" data-uid="Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager*"></a>
-  <h4 id="Apizr_FileTransferOptionsBuilderExtensions_AddUploadManager_Apizr_Configuring_Registry_IApizrRegistryBuilder_System_Action_Apizr_Configuring_Proper_IApizrProperOptionsBuilder__" data-uid="Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">AddUploadManager(IApizrRegistryBuilder, Action&lt;IApizrProperOptionsBuilder&gt;)</h4>
-  <div class="markdown level1 summary"><p>Add an upload manager for IUploadApi (you must at least provide a base url)</p>
+  <a id="Apizr_FileTransferOptionsBuilderExtensions_AddTransferManagerFor_" data-uid="Apizr.FileTransferOptionsBuilderExtensions.AddTransferManagerFor*"></a>
+  <h4 id="Apizr_FileTransferOptionsBuilderExtensions_AddTransferManagerFor__3_Apizr_Configuring_Registry_IApizrRegistryBuilder_System_Action_Apizr_Configuring_Proper_IApizrProperOptionsBuilder__" data-uid="Apizr.FileTransferOptionsBuilderExtensions.AddTransferManagerFor``3(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">AddTransferManagerFor&lt;TTransferApi, TDownloadParams, TUploadApiResultData&gt;(IApizrRegistryBuilder, Action&lt;IApizrProperOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Add a transfer manager for the provided transfer api derived from ITransferApi{TDownloadParams}</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IApizrRegistryBuilder AddUploadManager(this IApizrRegistryBuilder builder, Action&lt;IApizrProperOptionsBuilder&gt; optionsBuilder)</code></pre>
+    <pre><code class="lang-csharp hljs">public static IApizrRegistryBuilder AddTransferManagerFor&lt;TTransferApi, TDownloadParams, TUploadApiResultData&gt;(this IApizrRegistryBuilder builder, Action&lt;IApizrProperOptionsBuilder&gt; optionsBuilder = null)
+    where TTransferApi : ITransferApi&lt;TDownloadParams, TUploadApiResultData&gt;</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrRegistryBuilder.html">IApizrRegistryBuilder</a></td>
+        <td><span class="parametername">builder</span></td>
+        <td><p>The builder to create the manager from</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Proper.IApizrProperOptionsBuilder.html">IApizrProperOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>The builder defining some options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrRegistryBuilder.html">IApizrRegistryBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TTransferApi</span></td>
+        <td><p>The transfer api interface to manage</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TDownloadParams</span></td>
+        <td><p>The download query parameters type</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_FileTransferOptionsBuilderExtensions_AddTransferManagerWith_" data-uid="Apizr.FileTransferOptionsBuilderExtensions.AddTransferManagerWith*"></a>
+  <h4 id="Apizr_FileTransferOptionsBuilderExtensions_AddTransferManagerWith__2_Apizr_Configuring_Registry_IApizrRegistryBuilder_System_Action_Apizr_Configuring_Proper_IApizrProperOptionsBuilder__" data-uid="Apizr.FileTransferOptionsBuilderExtensions.AddTransferManagerWith``2(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">AddTransferManagerWith&lt;TDownloadParams, TUploadApiResultData&gt;(IApizrRegistryBuilder, Action&lt;IApizrProperOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Add a transfer manager for the built-in transfer api with <code data-dev-comment-type="typeparamref" class="typeparamref">TDownloadParams</code> and <code data-dev-comment-type="typeparamref" class="typeparamref">TUploadApiResultData</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IApizrRegistryBuilder AddTransferManagerWith&lt;TDownloadParams, TUploadApiResultData&gt;(this IApizrRegistryBuilder builder, Action&lt;IApizrProperOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrRegistryBuilder.html">IApizrRegistryBuilder</a></td>
+        <td><span class="parametername">builder</span></td>
+        <td><p>The builder to create the manager from</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Proper.IApizrProperOptionsBuilder.html">IApizrProperOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>The builder defining some options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrRegistryBuilder.html">IApizrRegistryBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TDownloadParams</span></td>
+        <td><p>The download query parameters type</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_FileTransferOptionsBuilderExtensions_AddUploadManager_" data-uid="Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager*"></a>
+  <h4 id="Apizr_FileTransferOptionsBuilderExtensions_AddUploadManager_Apizr_Configuring_Registry_IApizrRegistryBuilder_System_Action_Apizr_Configuring_Proper_IApizrProperOptionsBuilder__" data-uid="Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">AddUploadManager(IApizrRegistryBuilder, Action&lt;IApizrProperOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Add an upload manager for IUploadApi</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IApizrRegistryBuilder AddUploadManager(this IApizrRegistryBuilder builder, Action&lt;IApizrProperOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -614,6 +828,144 @@
       <tr>
         <td><span class="parametername">TUploadApi</span></td>
         <td><p>The upload api interface to manage</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_FileTransferOptionsBuilderExtensions_AddUploadManagerFor_" data-uid="Apizr.FileTransferOptionsBuilderExtensions.AddUploadManagerFor*"></a>
+  <h4 id="Apizr_FileTransferOptionsBuilderExtensions_AddUploadManagerFor__2_Apizr_Configuring_Registry_IApizrRegistryBuilder_System_Action_Apizr_Configuring_Proper_IApizrProperOptionsBuilder__" data-uid="Apizr.FileTransferOptionsBuilderExtensions.AddUploadManagerFor``2(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">AddUploadManagerFor&lt;TUploadApi, TUploadApiResultData&gt;(IApizrRegistryBuilder, Action&lt;IApizrProperOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Add an upload manager for the provided upload api derived from IUploadApi</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IApizrRegistryBuilder AddUploadManagerFor&lt;TUploadApi, TUploadApiResultData&gt;(this IApizrRegistryBuilder builder, Action&lt;IApizrProperOptionsBuilder&gt; optionsBuilder = null)
+    where TUploadApi : IUploadApi&lt;TUploadApiResultData&gt;</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrRegistryBuilder.html">IApizrRegistryBuilder</a></td>
+        <td><span class="parametername">builder</span></td>
+        <td><p>The builder to create the manager from</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Proper.IApizrProperOptionsBuilder.html">IApizrProperOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>The builder defining some options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrRegistryBuilder.html">IApizrRegistryBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TUploadApi</span></td>
+        <td><p>The upload api interface to manage</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_FileTransferOptionsBuilderExtensions_AddUploadManagerWith_" data-uid="Apizr.FileTransferOptionsBuilderExtensions.AddUploadManagerWith*"></a>
+  <h4 id="Apizr_FileTransferOptionsBuilderExtensions_AddUploadManagerWith__1_Apizr_Configuring_Registry_IApizrRegistryBuilder_System_Action_Apizr_Configuring_Proper_IApizrProperOptionsBuilder__" data-uid="Apizr.FileTransferOptionsBuilderExtensions.AddUploadManagerWith``1(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">AddUploadManagerWith&lt;TUploadApiResultData&gt;(IApizrRegistryBuilder, Action&lt;IApizrProperOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Add an upload manager for the built-in upload api with <code data-dev-comment-type="typeparamref" class="typeparamref">TUploadApiResultData</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IApizrRegistryBuilder AddUploadManagerWith&lt;TUploadApiResultData&gt;(this IApizrRegistryBuilder builder, Action&lt;IApizrProperOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrRegistryBuilder.html">IApizrRegistryBuilder</a></td>
+        <td><span class="parametername">builder</span></td>
+        <td><p>The builder to create the manager from</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Proper.IApizrProperOptionsBuilder.html">IApizrProperOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>The builder defining some options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrRegistryBuilder.html">IApizrRegistryBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
 </td>
       </tr>
     </tbody>
@@ -809,6 +1161,72 @@
   </table>
   
   
+  <a id="Apizr_FileTransferOptionsBuilderExtensions_CreateDownloadManagerWith_" data-uid="Apizr.FileTransferOptionsBuilderExtensions.CreateDownloadManagerWith*"></a>
+  <h4 id="Apizr_FileTransferOptionsBuilderExtensions_CreateDownloadManagerWith__1_Apizr_IApizrBuilder_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__" data-uid="Apizr.FileTransferOptionsBuilderExtensions.CreateDownloadManagerWith``1(Apizr.IApizrBuilder,System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">CreateDownloadManagerWith&lt;TDownloadParams&gt;(IApizrBuilder, Action&lt;IApizrManagerOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Create a download manager for the built-in download api with <code data-dev-comment-type="typeparamref" class="typeparamref">TDownloadParams</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IApizrDownloadManager&lt;IDownloadApi&lt;TDownloadParams&gt;, TDownloadParams&gt; CreateDownloadManagerWith&lt;TDownloadParams&gt;(this IApizrBuilder builder, Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.IApizrBuilder.html">IApizrBuilder</a></td>
+        <td><span class="parametername">builder</span></td>
+        <td><p>The builder to create the manager from</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>The builder defining some options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Transferring.Managing.IApizrDownloadManager-2.html">IApizrDownloadManager</a>&lt;<a class="xref" href="Apizr.Transferring.Requesting.IDownloadApi-1.html">IDownloadApi</a>&lt;TDownloadParams&gt;, TDownloadParams&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TDownloadParams</span></td>
+        <td><p>The download query parameters type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="Apizr_FileTransferOptionsBuilderExtensions_CreateTransferManager_" data-uid="Apizr.FileTransferOptionsBuilderExtensions.CreateTransferManager*"></a>
   <h4 id="Apizr_FileTransferOptionsBuilderExtensions_CreateTransferManager_Apizr_IApizrBuilder_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__" data-uid="Apizr.FileTransferOptionsBuilderExtensions.CreateTransferManager(Apizr.IApizrBuilder,System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">CreateTransferManager(IApizrBuilder, Action&lt;IApizrManagerOptionsBuilder&gt;)</h4>
   <div class="markdown level1 summary"><p>Create a transfer manager for ITransferApi (you must at least provide a base url thanks to the options builder)</p>
@@ -934,7 +1352,7 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static IApizrTransferManager&lt;TTransferApi, TDownloadParams&gt; CreateTransferManagerFor&lt;TTransferApi, TDownloadParams&gt;(this IApizrBuilder builder, Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)
-    where TTransferApi : ITransferApi&lt;TDownloadParams&gt;</code></pre>
+    where TTransferApi : ITransferApi&lt;TDownloadParams, HttpResponseMessage&gt;, IUploadApi</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -992,6 +1410,154 @@
       <tr>
         <td><span class="parametername">TDownloadParams</span></td>
         <td><p>The download query parameters type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_FileTransferOptionsBuilderExtensions_CreateTransferManagerFor_" data-uid="Apizr.FileTransferOptionsBuilderExtensions.CreateTransferManagerFor*"></a>
+  <h4 id="Apizr_FileTransferOptionsBuilderExtensions_CreateTransferManagerFor__3_Apizr_IApizrBuilder_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__" data-uid="Apizr.FileTransferOptionsBuilderExtensions.CreateTransferManagerFor``3(Apizr.IApizrBuilder,System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">CreateTransferManagerFor&lt;TTransferApi, TDownloadParams, TUploadApiResultData&gt;(IApizrBuilder, Action&lt;IApizrManagerOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Create a transfer manager for the provided transfer api derived from ITransferApi{TDownloadParams}</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IApizrTransferManager&lt;TTransferApi, TDownloadParams, TUploadApiResultData&gt; CreateTransferManagerFor&lt;TTransferApi, TDownloadParams, TUploadApiResultData&gt;(this IApizrBuilder builder, Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)
+    where TTransferApi : ITransferApi&lt;TDownloadParams, TUploadApiResultData&gt;</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.IApizrBuilder.html">IApizrBuilder</a></td>
+        <td><span class="parametername">builder</span></td>
+        <td><p>The builder to create the manager from</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>The builder defining some options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Transferring.Managing.IApizrTransferManager-3.html">IApizrTransferManager</a>&lt;TTransferApi, TDownloadParams, TUploadApiResultData&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TTransferApi</span></td>
+        <td><p>The transfer api interface to manage</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TDownloadParams</span></td>
+        <td><p>The download query parameters type</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api result type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_FileTransferOptionsBuilderExtensions_CreateTransferManagerWith_" data-uid="Apizr.FileTransferOptionsBuilderExtensions.CreateTransferManagerWith*"></a>
+  <h4 id="Apizr_FileTransferOptionsBuilderExtensions_CreateTransferManagerWith__2_Apizr_IApizrBuilder_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__" data-uid="Apizr.FileTransferOptionsBuilderExtensions.CreateTransferManagerWith``2(Apizr.IApizrBuilder,System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">CreateTransferManagerWith&lt;TDownloadParams, TUploadApiResultData&gt;(IApizrBuilder, Action&lt;IApizrManagerOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Create a transfer manager for the built-in transfer api with <code data-dev-comment-type="typeparamref" class="typeparamref">TDownloadParams</code> and <code data-dev-comment-type="typeparamref" class="typeparamref">TUploadApiResultData</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IApizrTransferManager&lt;ITransferApi&lt;TDownloadParams, TUploadApiResultData&gt;, TDownloadParams, TUploadApiResultData&gt; CreateTransferManagerWith&lt;TDownloadParams, TUploadApiResultData&gt;(this IApizrBuilder builder, Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.IApizrBuilder.html">IApizrBuilder</a></td>
+        <td><span class="parametername">builder</span></td>
+        <td><p>The builder to create the manager from</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>The builder defining some options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Transferring.Managing.IApizrTransferManager-3.html">IApizrTransferManager</a>&lt;<a class="xref" href="Apizr.Transferring.Requesting.ITransferApi-2.html">ITransferApi</a>&lt;TDownloadParams, TUploadApiResultData&gt;, TDownloadParams, TUploadApiResultData&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TDownloadParams</span></td>
+        <td><p>The download query parameters type</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api result type</p>
 </td>
       </tr>
     </tbody>
@@ -1109,6 +1675,144 @@
       <tr>
         <td><span class="parametername">TUploadApi</span></td>
         <td><p>The upload api interface to manage</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_FileTransferOptionsBuilderExtensions_CreateUploadManagerFor_" data-uid="Apizr.FileTransferOptionsBuilderExtensions.CreateUploadManagerFor*"></a>
+  <h4 id="Apizr_FileTransferOptionsBuilderExtensions_CreateUploadManagerFor__2_Apizr_IApizrBuilder_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__" data-uid="Apizr.FileTransferOptionsBuilderExtensions.CreateUploadManagerFor``2(Apizr.IApizrBuilder,System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">CreateUploadManagerFor&lt;TUploadApi, TUploadApiResultData&gt;(IApizrBuilder, Action&lt;IApizrManagerOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Create an upload manager for the provided upload api derived from IUploadApi</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IApizrUploadManager&lt;TUploadApi, TUploadApiResultData&gt; CreateUploadManagerFor&lt;TUploadApi, TUploadApiResultData&gt;(this IApizrBuilder builder, Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)
+    where TUploadApi : IUploadApi&lt;TUploadApiResultData&gt;</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.IApizrBuilder.html">IApizrBuilder</a></td>
+        <td><span class="parametername">builder</span></td>
+        <td><p>The builder to create the manager from</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>The builder defining some options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Transferring.Managing.IApizrUploadManager-2.html">IApizrUploadManager</a>&lt;TUploadApi, TUploadApiResultData&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TUploadApi</span></td>
+        <td><p>The upload api interface to manage</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api result type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_FileTransferOptionsBuilderExtensions_CreateUploadManagerWith_" data-uid="Apizr.FileTransferOptionsBuilderExtensions.CreateUploadManagerWith*"></a>
+  <h4 id="Apizr_FileTransferOptionsBuilderExtensions_CreateUploadManagerWith__1_Apizr_IApizrBuilder_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__" data-uid="Apizr.FileTransferOptionsBuilderExtensions.CreateUploadManagerWith``1(Apizr.IApizrBuilder,System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">CreateUploadManagerWith&lt;TUploadApiResultData&gt;(IApizrBuilder, Action&lt;IApizrManagerOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Create an upload manager for the built-in upload api with <code data-dev-comment-type="typeparamref" class="typeparamref">TUploadApiResultData</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IApizrUploadManager&lt;IUploadApi&lt;TUploadApiResultData&gt;, TUploadApiResultData&gt; CreateUploadManagerWith&lt;TUploadApiResultData&gt;(this IApizrBuilder builder, Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.IApizrBuilder.html">IApizrBuilder</a></td>
+        <td><span class="parametername">builder</span></td>
+        <td><p>The builder to create the manager from</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>The builder defining some options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Transferring.Managing.IApizrUploadManager-2.html">IApizrUploadManager</a>&lt;<a class="xref" href="Apizr.Transferring.Requesting.IUploadApi-1.html">IUploadApi</a>&lt;TUploadApiResultData&gt;, TUploadApiResultData&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api result type</p>
 </td>
       </tr>
     </tbody>

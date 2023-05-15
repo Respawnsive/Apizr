@@ -15,21 +15,21 @@ items:
   source:
     id: IApizrUploadManager
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Managing\IApizrUploadManager.cs
-    startLine: 42
+    startLine: 51
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
   summary: "\nThe upload manager\n"
   example: []
   syntax:
-    content: 'public interface IApizrUploadManager : IApizrUploadManager<IUploadApi>, IApizrTransferManagerBase<IUploadApi>, IApizrManager'
+    content: 'public interface IApizrUploadManager : IApizrUploadManager<IUploadApi>, IApizrUploadManager<IUploadApi, HttpResponseMessage>, IApizrTransferManagerBase<IUploadApi>, IApizrManager'
     content.vb: >-
       Public Interface IApizrUploadManager
           Inherits IApizrUploadManager(Of IUploadApi)
   inheritedMembers:
-  - Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi}.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  - Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi}.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  - Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi}.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   modifiers.csharp:
   - public
   - interface
@@ -42,21 +42,21 @@ references:
   name: Apizr.Transferring.Managing
   nameWithType: Apizr.Transferring.Managing
   fullName: Apizr.Transferring.Managing
-- uid: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi}.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  commentId: M:Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi}.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  parent: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi}
-  definition: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+- uid: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  parent: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}
+  definition: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   name: UploadAsync(ByteArrayPart, Action<IApizrRequestOptionsBuilder>)
-  nameWithType: IApizrUploadManager<IUploadApi>.UploadAsync(ByteArrayPart, Action<IApizrRequestOptionsBuilder>)
-  fullName: Apizr.Transferring.Managing.IApizrUploadManager<Apizr.Transferring.Requesting.IUploadApi>.UploadAsync(Refit.ByteArrayPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
-  nameWithType.vb: IApizrUploadManager(Of IUploadApi).UploadAsync(ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
-  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of Apizr.Transferring.Requesting.IUploadApi).UploadAsync(Refit.ByteArrayPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  nameWithType: IApizrUploadManager<IUploadApi, HttpResponseMessage>.UploadAsync(ByteArrayPart, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Transferring.Managing.IApizrUploadManager<Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage>.UploadAsync(Refit.ByteArrayPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: IApizrUploadManager(Of IUploadApi, HttpResponseMessage).UploadAsync(ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage).UploadAsync(Refit.ByteArrayPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: UploadAsync(ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager<IUploadApi>.UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager<Apizr.Transferring.Requesting.IUploadApi>.UploadAsync
+    nameWithType: IApizrUploadManager<IUploadApi, HttpResponseMessage>.UploadAsync
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager<Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage>.UploadAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -87,10 +87,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager(Of IUploadApi).UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager(Of Apizr.Transferring.Requesting.IUploadApi).UploadAsync
+    nameWithType: IApizrUploadManager(Of IUploadApi, HttpResponseMessage).UploadAsync
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager(Of Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage).UploadAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -120,21 +120,21 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi}.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  commentId: M:Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi}.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  parent: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi}
-  definition: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+- uid: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  parent: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}
+  definition: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   name: UploadAsync(StreamPart, Action<IApizrRequestOptionsBuilder>)
-  nameWithType: IApizrUploadManager<IUploadApi>.UploadAsync(StreamPart, Action<IApizrRequestOptionsBuilder>)
-  fullName: Apizr.Transferring.Managing.IApizrUploadManager<Apizr.Transferring.Requesting.IUploadApi>.UploadAsync(Refit.StreamPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
-  nameWithType.vb: IApizrUploadManager(Of IUploadApi).UploadAsync(StreamPart, Action(Of IApizrRequestOptionsBuilder))
-  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of Apizr.Transferring.Requesting.IUploadApi).UploadAsync(Refit.StreamPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  nameWithType: IApizrUploadManager<IUploadApi, HttpResponseMessage>.UploadAsync(StreamPart, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Transferring.Managing.IApizrUploadManager<Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage>.UploadAsync(Refit.StreamPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: IApizrUploadManager(Of IUploadApi, HttpResponseMessage).UploadAsync(StreamPart, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage).UploadAsync(Refit.StreamPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: UploadAsync(StreamPart, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager<IUploadApi>.UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager<Apizr.Transferring.Requesting.IUploadApi>.UploadAsync
+    nameWithType: IApizrUploadManager<IUploadApi, HttpResponseMessage>.UploadAsync
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager<Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage>.UploadAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -165,10 +165,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager(Of IUploadApi).UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager(Of Apizr.Transferring.Requesting.IUploadApi).UploadAsync
+    nameWithType: IApizrUploadManager(Of IUploadApi, HttpResponseMessage).UploadAsync
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager(Of Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage).UploadAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -198,21 +198,21 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi}.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  commentId: M:Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi}.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  parent: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi}
-  definition: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+- uid: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  parent: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}
+  definition: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   name: UploadAsync(FileInfoPart, Action<IApizrRequestOptionsBuilder>)
-  nameWithType: IApizrUploadManager<IUploadApi>.UploadAsync(FileInfoPart, Action<IApizrRequestOptionsBuilder>)
-  fullName: Apizr.Transferring.Managing.IApizrUploadManager<Apizr.Transferring.Requesting.IUploadApi>.UploadAsync(Refit.FileInfoPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
-  nameWithType.vb: IApizrUploadManager(Of IUploadApi).UploadAsync(FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
-  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of Apizr.Transferring.Requesting.IUploadApi).UploadAsync(Refit.FileInfoPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  nameWithType: IApizrUploadManager<IUploadApi, HttpResponseMessage>.UploadAsync(FileInfoPart, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Transferring.Managing.IApizrUploadManager<Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage>.UploadAsync(Refit.FileInfoPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: IApizrUploadManager(Of IUploadApi, HttpResponseMessage).UploadAsync(FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage).UploadAsync(Refit.FileInfoPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: UploadAsync(FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager<IUploadApi>.UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager<Apizr.Transferring.Requesting.IUploadApi>.UploadAsync
+    nameWithType: IApizrUploadManager<IUploadApi, HttpResponseMessage>.UploadAsync
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager<Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage>.UploadAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -243,10 +243,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager(Of IUploadApi).UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager(Of Apizr.Transferring.Requesting.IUploadApi).UploadAsync
+    nameWithType: IApizrUploadManager(Of IUploadApi, HttpResponseMessage).UploadAsync
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager(Of Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage).UploadAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -276,20 +276,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  commentId: M:Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+- uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   isExternal: true
   name: UploadAsync(ByteArrayPart, Action<IApizrRequestOptionsBuilder>)
-  nameWithType: IApizrUploadManager<TUploadApi>.UploadAsync(ByteArrayPart, Action<IApizrRequestOptionsBuilder>)
-  fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi>.UploadAsync(Refit.ByteArrayPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
-  nameWithType.vb: IApizrUploadManager(Of TUploadApi).UploadAsync(ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
-  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi).UploadAsync(Refit.ByteArrayPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  nameWithType: IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync(ByteArrayPart, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync(Refit.ByteArrayPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: IApizrUploadManager(Of TUploadApi, TUploadApiResultData).UploadAsync(ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi, TUploadApiResultData).UploadAsync(Refit.ByteArrayPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: UploadAsync(ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager<TUploadApi>.UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi>.UploadAsync
+    nameWithType: IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -320,10 +320,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager(Of TUploadApi).UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi).UploadAsync
+    nameWithType: IApizrUploadManager(Of TUploadApi, TUploadApiResultData).UploadAsync
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi, TUploadApiResultData).UploadAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -353,18 +353,18 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi}
-  commentId: T:Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi}
+- uid: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}
+  commentId: T:Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}
   parent: Apizr.Transferring.Managing
-  definition: Apizr.Transferring.Managing.IApizrUploadManager`1
-  name: IApizrUploadManager<IUploadApi>
-  nameWithType: IApizrUploadManager<IUploadApi>
-  fullName: Apizr.Transferring.Managing.IApizrUploadManager<Apizr.Transferring.Requesting.IUploadApi>
-  nameWithType.vb: IApizrUploadManager(Of IUploadApi)
-  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of Apizr.Transferring.Requesting.IUploadApi)
-  name.vb: IApizrUploadManager(Of IUploadApi)
+  definition: Apizr.Transferring.Managing.IApizrUploadManager`2
+  name: IApizrUploadManager<IUploadApi, HttpResponseMessage>
+  nameWithType: IApizrUploadManager<IUploadApi, HttpResponseMessage>
+  fullName: Apizr.Transferring.Managing.IApizrUploadManager<Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage>
+  nameWithType.vb: IApizrUploadManager(Of IUploadApi, HttpResponseMessage)
+  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage)
+  name.vb: IApizrUploadManager(Of IUploadApi, HttpResponseMessage)
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2
     name: IApizrUploadManager
     nameWithType: IApizrUploadManager
     fullName: Apizr.Transferring.Managing.IApizrUploadManager
@@ -375,11 +375,19 @@ references:
     name: IUploadApi
     nameWithType: IUploadApi
     fullName: Apizr.Transferring.Requesting.IUploadApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
+    isExternal: true
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2
     name: IApizrUploadManager
     nameWithType: IApizrUploadManager
     fullName: Apizr.Transferring.Managing.IApizrUploadManager
@@ -390,23 +398,31 @@ references:
     name: IUploadApi
     nameWithType: IUploadApi
     fullName: Apizr.Transferring.Requesting.IUploadApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  commentId: M:Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+- uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   isExternal: true
   name: UploadAsync(StreamPart, Action<IApizrRequestOptionsBuilder>)
-  nameWithType: IApizrUploadManager<TUploadApi>.UploadAsync(StreamPart, Action<IApizrRequestOptionsBuilder>)
-  fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi>.UploadAsync(Refit.StreamPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
-  nameWithType.vb: IApizrUploadManager(Of TUploadApi).UploadAsync(StreamPart, Action(Of IApizrRequestOptionsBuilder))
-  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi).UploadAsync(Refit.StreamPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  nameWithType: IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync(StreamPart, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync(Refit.StreamPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: IApizrUploadManager(Of TUploadApi, TUploadApiResultData).UploadAsync(StreamPart, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi, TUploadApiResultData).UploadAsync(Refit.StreamPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: UploadAsync(StreamPart, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager<TUploadApi>.UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi>.UploadAsync
+    nameWithType: IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -437,10 +453,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager(Of TUploadApi).UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi).UploadAsync
+    nameWithType: IApizrUploadManager(Of TUploadApi, TUploadApiResultData).UploadAsync
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi, TUploadApiResultData).UploadAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -470,20 +486,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  commentId: M:Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+- uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  commentId: M:Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   isExternal: true
   name: UploadAsync(FileInfoPart, Action<IApizrRequestOptionsBuilder>)
-  nameWithType: IApizrUploadManager<TUploadApi>.UploadAsync(FileInfoPart, Action<IApizrRequestOptionsBuilder>)
-  fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi>.UploadAsync(Refit.FileInfoPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
-  nameWithType.vb: IApizrUploadManager(Of TUploadApi).UploadAsync(FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
-  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi).UploadAsync(Refit.FileInfoPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  nameWithType: IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync(FileInfoPart, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync(Refit.FileInfoPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType.vb: IApizrUploadManager(Of TUploadApi, TUploadApiResultData).UploadAsync(FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi, TUploadApiResultData).UploadAsync(Refit.FileInfoPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: UploadAsync(FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager<TUploadApi>.UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi>.UploadAsync
+    nameWithType: IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -514,10 +530,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager(Of TUploadApi).UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi).UploadAsync
+    nameWithType: IApizrUploadManager(Of TUploadApi, TUploadApiResultData).UploadAsync
+    fullName: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi, TUploadApiResultData).UploadAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -547,16 +563,16 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Transferring.Managing.IApizrUploadManager`1
-  commentId: T:Apizr.Transferring.Managing.IApizrUploadManager`1
-  name: IApizrUploadManager<TUploadApi>
-  nameWithType: IApizrUploadManager<TUploadApi>
-  fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi>
-  nameWithType.vb: IApizrUploadManager(Of TUploadApi)
-  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi)
-  name.vb: IApizrUploadManager(Of TUploadApi)
+- uid: Apizr.Transferring.Managing.IApizrUploadManager`2
+  commentId: T:Apizr.Transferring.Managing.IApizrUploadManager`2
+  name: IApizrUploadManager<TUploadApi, TUploadApiResultData>
+  nameWithType: IApizrUploadManager<TUploadApi, TUploadApiResultData>
+  fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi, TUploadApiResultData>
+  nameWithType.vb: IApizrUploadManager(Of TUploadApi, TUploadApiResultData)
+  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi, TUploadApiResultData)
+  name.vb: IApizrUploadManager(Of TUploadApi, TUploadApiResultData)
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2
     name: IApizrUploadManager
     nameWithType: IApizrUploadManager
     fullName: Apizr.Transferring.Managing.IApizrUploadManager
@@ -566,11 +582,17 @@ references:
   - name: TUploadApi
     nameWithType: TUploadApi
     fullName: TUploadApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TUploadApiResultData
+    nameWithType: TUploadApiResultData
+    fullName: TUploadApiResultData
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`1
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2
     name: IApizrUploadManager
     nameWithType: IApizrUploadManager
     fullName: Apizr.Transferring.Managing.IApizrUploadManager
@@ -580,6 +602,12 @@ references:
   - name: TUploadApi
     nameWithType: TUploadApi
     fullName: TUploadApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TUploadApiResultData
+    nameWithType: TUploadApiResultData
+    fullName: TUploadApiResultData
   - name: )
     nameWithType: )
     fullName: )

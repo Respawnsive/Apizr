@@ -36,18 +36,21 @@ using Polly.Extensions.Http;
 using Polly.Registry;
 using Refit;
 using Xunit;
+using Xunit.Abstractions;
 using IHttpBinService = Apizr.Tests.Apis.IHttpBinService;
 
 namespace Apizr.Tests
 {
     public class ApizrExtendedRegistryTests
     {
+        private readonly ITestOutputHelper _outputHelper;
         private readonly IPolicyRegistry<string> _policyRegistry;
         private readonly RefitSettings _refitSettings;
         private readonly Assembly _assembly;
 
-        public ApizrExtendedRegistryTests()
+        public ApizrExtendedRegistryTests(ITestOutputHelper outputHelper)
         {
+            _outputHelper = outputHelper;
             _policyRegistry = new PolicyRegistry
             {
                 {
@@ -1130,7 +1133,8 @@ namespace Apizr.Tests
         public async Task Uploading_File_Should_Succeed()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddLogging(builder => builder.AddXUnit(_outputHelper))
+                .AddPolicyRegistry(_policyRegistry);
 
             services.AddApizr(registry => registry
                 .AddTransferManager()
@@ -1207,7 +1211,7 @@ namespace Apizr.Tests
             regCustomUploadTypedManager.Should().NotBeNull(); // Custom
 
             // Shortcut
-            var regShortcutResult = await registry.UploadAsync<IUploadApi, HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var regShortcutResult = await registry.UploadAsync<IUploadApi>(FileHelper.GetTestFileStreamPart("small"));
             regShortcutResult.Should().NotBeNull();
             regShortcutResult.StatusCode.Should().Be(HttpStatusCode.OK);
 

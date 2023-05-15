@@ -18,32 +18,33 @@ items:
   source:
     id: UploadCommand
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer.MediatR\Mediation\Requesting\UploadCommand.cs
-    startLine: 67
+    startLine: 90
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Requesting
   summary: "\nThe mediation upload command\n"
   example: []
   syntax:
-    content: 'public class UploadCommand : UploadCommand<IUploadApi>, IMediationCommand<Unit, Unit>, IRequest<Unit>, IBaseRequest'
+    content: 'public class UploadCommand : UploadCommand<IUploadApi>, IMediationCommand<Unit, HttpResponseMessage>, IRequest<HttpResponseMessage>, IBaseRequest'
     content.vb: >-
       Public Class UploadCommand
           Inherits UploadCommand(Of IUploadApi)
-          Implements IMediationCommand(Of Unit, Unit), IRequest(Of Unit), IBaseRequest
+          Implements IMediationCommand(Of Unit, HttpResponseMessage), IRequest(Of HttpResponseMessage), IBaseRequest
   inheritance:
   - System.Object
-  - Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
-  - Apizr.Mediation.Commanding.MediationCommandBase{MediatR.Unit,MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  - Apizr.Mediation.Requesting.Base.RequestBase{System.Net.Http.HttpResponseMessage,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  - Apizr.Mediation.Commanding.MediationCommandBase{MediatR.Unit,System.Net.Http.HttpResponseMessage,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  - Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}
   - Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi}
   implements:
-  - Apizr.Mediation.Commanding.IMediationCommand{MediatR.Unit,MediatR.Unit}
-  - MediatR.IRequest{MediatR.Unit}
+  - Apizr.Mediation.Commanding.IMediationCommand{MediatR.Unit,System.Net.Http.HttpResponseMessage}
+  - MediatR.IRequest{System.Net.Http.HttpResponseMessage}
   - MediatR.IBaseRequest
   inheritedMembers:
-  - Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi}.FileInfoPart
-  - Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi}.StreamPart
-  - Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi}.ByteArrayPart
-  - Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.OptionsBuilder
+  - Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}.FileInfoPart
+  - Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}.StreamPart
+  - Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}.ByteArrayPart
+  - Apizr.Mediation.Requesting.Base.RequestBase{System.Net.Http.HttpResponseMessage,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.OptionsBuilder
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -71,7 +72,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer.MediatR\Mediation\Requesting\UploadCommand.cs
-    startLine: 70
+    startLine: 93
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Requesting
@@ -106,7 +107,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer.MediatR\Mediation\Requesting\UploadCommand.cs
-    startLine: 75
+    startLine: 98
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Requesting
@@ -141,7 +142,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer.MediatR\Mediation\Requesting\UploadCommand.cs
-    startLine: 80
+    startLine: 103
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Requesting
@@ -175,16 +176,16 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
-  commentId: T:Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+- uid: Apizr.Mediation.Requesting.Base.RequestBase{System.Net.Http.HttpResponseMessage,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  commentId: T:Apizr.Mediation.Requesting.Base.RequestBase{System.Net.Http.HttpResponseMessage,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: Apizr.Mediation.Requesting.Base
   definition: Apizr.Mediation.Requesting.Base.RequestBase`3
-  name: RequestBase<Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder>
-  nameWithType: RequestBase<Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder>
-  fullName: Apizr.Mediation.Requesting.Base.RequestBase<MediatR.Unit, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
-  nameWithType.vb: RequestBase(Of Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder)
-  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of MediatR.Unit, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder)
-  name.vb: RequestBase(Of Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder)
+  name: RequestBase<HttpResponseMessage, IApizrRequestOptions, IApizrRequestOptionsBuilder>
+  nameWithType: RequestBase<HttpResponseMessage, IApizrRequestOptions, IApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Requesting.Base.RequestBase<System.Net.Http.HttpResponseMessage, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
+  nameWithType.vb: RequestBase(Of HttpResponseMessage, IApizrRequestOptions, IApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of System.Net.Http.HttpResponseMessage, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder)
+  name.vb: RequestBase(Of HttpResponseMessage, IApizrRequestOptions, IApizrRequestOptionsBuilder)
   spec.csharp:
   - uid: Apizr.Mediation.Requesting.Base.RequestBase`3
     name: RequestBase
@@ -193,10 +194,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -223,10 +224,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -245,16 +246,16 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Mediation.Commanding.MediationCommandBase{MediatR.Unit,MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
-  commentId: T:Apizr.Mediation.Commanding.MediationCommandBase{MediatR.Unit,MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+- uid: Apizr.Mediation.Commanding.MediationCommandBase{MediatR.Unit,System.Net.Http.HttpResponseMessage,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  commentId: T:Apizr.Mediation.Commanding.MediationCommandBase{MediatR.Unit,System.Net.Http.HttpResponseMessage,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: Apizr.Mediation.Commanding
   definition: Apizr.Mediation.Commanding.MediationCommandBase`4
-  name: MediationCommandBase<Unit, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder>
-  nameWithType: MediationCommandBase<Unit, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder>
-  fullName: Apizr.Mediation.Commanding.MediationCommandBase<MediatR.Unit, MediatR.Unit, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
-  nameWithType.vb: MediationCommandBase(Of Unit, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder)
-  fullName.vb: Apizr.Mediation.Commanding.MediationCommandBase(Of MediatR.Unit, MediatR.Unit, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder)
-  name.vb: MediationCommandBase(Of Unit, Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder)
+  name: MediationCommandBase<Unit, HttpResponseMessage, IApizrRequestOptions, IApizrRequestOptionsBuilder>
+  nameWithType: MediationCommandBase<Unit, HttpResponseMessage, IApizrRequestOptions, IApizrRequestOptionsBuilder>
+  fullName: Apizr.Mediation.Commanding.MediationCommandBase<MediatR.Unit, System.Net.Http.HttpResponseMessage, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
+  nameWithType.vb: MediationCommandBase(Of Unit, HttpResponseMessage, IApizrRequestOptions, IApizrRequestOptionsBuilder)
+  fullName.vb: Apizr.Mediation.Commanding.MediationCommandBase(Of MediatR.Unit, System.Net.Http.HttpResponseMessage, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder)
+  name.vb: MediationCommandBase(Of Unit, HttpResponseMessage, IApizrRequestOptions, IApizrRequestOptionsBuilder)
   spec.csharp:
   - uid: Apizr.Mediation.Commanding.MediationCommandBase`4
     name: MediationCommandBase
@@ -271,10 +272,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -309,10 +310,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -328,6 +329,62 @@ references:
     name: IApizrRequestOptionsBuilder
     nameWithType: IApizrRequestOptionsBuilder
     fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}
+  commentId: T:Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}
+  parent: Apizr.Mediation.Requesting
+  definition: Apizr.Mediation.Requesting.UploadCommand`2
+  name: UploadCommand<IUploadApi, HttpResponseMessage>
+  nameWithType: UploadCommand<IUploadApi, HttpResponseMessage>
+  fullName: Apizr.Mediation.Requesting.UploadCommand<Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage>
+  nameWithType.vb: UploadCommand(Of IUploadApi, HttpResponseMessage)
+  fullName.vb: Apizr.Mediation.Requesting.UploadCommand(Of Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage)
+  name.vb: UploadCommand(Of IUploadApi, HttpResponseMessage)
+  spec.csharp:
+  - uid: Apizr.Mediation.Requesting.UploadCommand`2
+    name: UploadCommand
+    nameWithType: UploadCommand
+    fullName: Apizr.Mediation.Requesting.UploadCommand
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Transferring.Requesting.IUploadApi
+    name: IUploadApi
+    nameWithType: IUploadApi
+    fullName: Apizr.Transferring.Requesting.IUploadApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Mediation.Requesting.UploadCommand`2
+    name: UploadCommand
+    nameWithType: UploadCommand
+    fullName: Apizr.Mediation.Requesting.UploadCommand
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Transferring.Requesting.IUploadApi
+    name: IUploadApi
+    nameWithType: IUploadApi
+    fullName: Apizr.Transferring.Requesting.IUploadApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -371,16 +428,16 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Mediation.Commanding.IMediationCommand{MediatR.Unit,MediatR.Unit}
-  commentId: T:Apizr.Mediation.Commanding.IMediationCommand{MediatR.Unit,MediatR.Unit}
+- uid: Apizr.Mediation.Commanding.IMediationCommand{MediatR.Unit,System.Net.Http.HttpResponseMessage}
+  commentId: T:Apizr.Mediation.Commanding.IMediationCommand{MediatR.Unit,System.Net.Http.HttpResponseMessage}
   parent: Apizr.Mediation.Commanding
   definition: Apizr.Mediation.Commanding.IMediationCommand`2
-  name: IMediationCommand<Unit, Unit>
-  nameWithType: IMediationCommand<Unit, Unit>
-  fullName: Apizr.Mediation.Commanding.IMediationCommand<MediatR.Unit, MediatR.Unit>
-  nameWithType.vb: IMediationCommand(Of Unit, Unit)
-  fullName.vb: Apizr.Mediation.Commanding.IMediationCommand(Of MediatR.Unit, MediatR.Unit)
-  name.vb: IMediationCommand(Of Unit, Unit)
+  name: IMediationCommand<Unit, HttpResponseMessage>
+  nameWithType: IMediationCommand<Unit, HttpResponseMessage>
+  fullName: Apizr.Mediation.Commanding.IMediationCommand<MediatR.Unit, System.Net.Http.HttpResponseMessage>
+  nameWithType.vb: IMediationCommand(Of Unit, HttpResponseMessage)
+  fullName.vb: Apizr.Mediation.Commanding.IMediationCommand(Of MediatR.Unit, System.Net.Http.HttpResponseMessage)
+  name.vb: IMediationCommand(Of Unit, HttpResponseMessage)
   spec.csharp:
   - uid: Apizr.Mediation.Commanding.IMediationCommand`2
     name: IMediationCommand
@@ -397,10 +454,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
   - name: '>'
     nameWithType: '>'
@@ -421,24 +478,24 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: MediatR.IRequest{MediatR.Unit}
-  commentId: T:MediatR.IRequest{MediatR.Unit}
+- uid: MediatR.IRequest{System.Net.Http.HttpResponseMessage}
+  commentId: T:MediatR.IRequest{System.Net.Http.HttpResponseMessage}
   parent: MediatR
   definition: MediatR.IRequest`1
-  name: IRequest<Unit>
-  nameWithType: IRequest<Unit>
-  fullName: MediatR.IRequest<MediatR.Unit>
-  nameWithType.vb: IRequest(Of Unit)
-  fullName.vb: MediatR.IRequest(Of MediatR.Unit)
-  name.vb: IRequest(Of Unit)
+  name: IRequest<HttpResponseMessage>
+  nameWithType: IRequest<HttpResponseMessage>
+  fullName: MediatR.IRequest<System.Net.Http.HttpResponseMessage>
+  nameWithType.vb: IRequest(Of HttpResponseMessage)
+  fullName.vb: MediatR.IRequest(Of System.Net.Http.HttpResponseMessage)
+  name.vb: IRequest(Of HttpResponseMessage)
   spec.csharp:
   - uid: MediatR.IRequest`1
     name: IRequest
@@ -448,10 +505,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
   - name: '>'
     nameWithType: '>'
@@ -465,10 +522,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
   - name: )
     nameWithType: )
@@ -480,42 +537,42 @@ references:
   name: IBaseRequest
   nameWithType: IBaseRequest
   fullName: MediatR.IBaseRequest
-- uid: Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi}.FileInfoPart
-  commentId: P:Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi}.FileInfoPart
-  parent: Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi}
-  definition: Apizr.Mediation.Requesting.UploadCommand`1.FileInfoPart
+- uid: Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}.FileInfoPart
+  commentId: P:Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}.FileInfoPart
+  parent: Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}
+  definition: Apizr.Mediation.Requesting.UploadCommand`2.FileInfoPart
   name: FileInfoPart
-  nameWithType: UploadCommand<IUploadApi>.FileInfoPart
-  fullName: Apizr.Mediation.Requesting.UploadCommand<Apizr.Transferring.Requesting.IUploadApi>.FileInfoPart
-  nameWithType.vb: UploadCommand(Of IUploadApi).FileInfoPart
-  fullName.vb: Apizr.Mediation.Requesting.UploadCommand(Of Apizr.Transferring.Requesting.IUploadApi).FileInfoPart
-- uid: Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi}.StreamPart
-  commentId: P:Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi}.StreamPart
-  parent: Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi}
-  definition: Apizr.Mediation.Requesting.UploadCommand`1.StreamPart
+  nameWithType: UploadCommand<IUploadApi, HttpResponseMessage>.FileInfoPart
+  fullName: Apizr.Mediation.Requesting.UploadCommand<Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage>.FileInfoPart
+  nameWithType.vb: UploadCommand(Of IUploadApi, HttpResponseMessage).FileInfoPart
+  fullName.vb: Apizr.Mediation.Requesting.UploadCommand(Of Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage).FileInfoPart
+- uid: Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}.StreamPart
+  commentId: P:Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}.StreamPart
+  parent: Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}
+  definition: Apizr.Mediation.Requesting.UploadCommand`2.StreamPart
   name: StreamPart
-  nameWithType: UploadCommand<IUploadApi>.StreamPart
-  fullName: Apizr.Mediation.Requesting.UploadCommand<Apizr.Transferring.Requesting.IUploadApi>.StreamPart
-  nameWithType.vb: UploadCommand(Of IUploadApi).StreamPart
-  fullName.vb: Apizr.Mediation.Requesting.UploadCommand(Of Apizr.Transferring.Requesting.IUploadApi).StreamPart
-- uid: Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi}.ByteArrayPart
-  commentId: P:Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi}.ByteArrayPart
-  parent: Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi}
-  definition: Apizr.Mediation.Requesting.UploadCommand`1.ByteArrayPart
+  nameWithType: UploadCommand<IUploadApi, HttpResponseMessage>.StreamPart
+  fullName: Apizr.Mediation.Requesting.UploadCommand<Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage>.StreamPart
+  nameWithType.vb: UploadCommand(Of IUploadApi, HttpResponseMessage).StreamPart
+  fullName.vb: Apizr.Mediation.Requesting.UploadCommand(Of Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage).StreamPart
+- uid: Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}.ByteArrayPart
+  commentId: P:Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}.ByteArrayPart
+  parent: Apizr.Mediation.Requesting.UploadCommand{Apizr.Transferring.Requesting.IUploadApi,System.Net.Http.HttpResponseMessage}
+  definition: Apizr.Mediation.Requesting.UploadCommand`2.ByteArrayPart
   name: ByteArrayPart
-  nameWithType: UploadCommand<IUploadApi>.ByteArrayPart
-  fullName: Apizr.Mediation.Requesting.UploadCommand<Apizr.Transferring.Requesting.IUploadApi>.ByteArrayPart
-  nameWithType.vb: UploadCommand(Of IUploadApi).ByteArrayPart
-  fullName.vb: Apizr.Mediation.Requesting.UploadCommand(Of Apizr.Transferring.Requesting.IUploadApi).ByteArrayPart
-- uid: Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.OptionsBuilder
-  commentId: P:Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.OptionsBuilder
-  parent: Apizr.Mediation.Requesting.Base.RequestBase{MediatR.Unit,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  nameWithType: UploadCommand<IUploadApi, HttpResponseMessage>.ByteArrayPart
+  fullName: Apizr.Mediation.Requesting.UploadCommand<Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage>.ByteArrayPart
+  nameWithType.vb: UploadCommand(Of IUploadApi, HttpResponseMessage).ByteArrayPart
+  fullName.vb: Apizr.Mediation.Requesting.UploadCommand(Of Apizr.Transferring.Requesting.IUploadApi, System.Net.Http.HttpResponseMessage).ByteArrayPart
+- uid: Apizr.Mediation.Requesting.Base.RequestBase{System.Net.Http.HttpResponseMessage,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.OptionsBuilder
+  commentId: P:Apizr.Mediation.Requesting.Base.RequestBase{System.Net.Http.HttpResponseMessage,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.OptionsBuilder
+  parent: Apizr.Mediation.Requesting.Base.RequestBase{System.Net.Http.HttpResponseMessage,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   definition: Apizr.Mediation.Requesting.Base.RequestBase`3.OptionsBuilder
   name: OptionsBuilder
-  nameWithType: RequestBase<Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder>.OptionsBuilder
-  fullName: Apizr.Mediation.Requesting.Base.RequestBase<MediatR.Unit, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.OptionsBuilder
-  nameWithType.vb: RequestBase(Of Unit, IApizrRequestOptions, IApizrRequestOptionsBuilder).OptionsBuilder
-  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of MediatR.Unit, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder).OptionsBuilder
+  nameWithType: RequestBase<HttpResponseMessage, IApizrRequestOptions, IApizrRequestOptionsBuilder>.OptionsBuilder
+  fullName: Apizr.Mediation.Requesting.Base.RequestBase<System.Net.Http.HttpResponseMessage, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.OptionsBuilder
+  nameWithType.vb: RequestBase(Of HttpResponseMessage, IApizrRequestOptions, IApizrRequestOptionsBuilder).OptionsBuilder
+  fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of System.Net.Http.HttpResponseMessage, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder).OptionsBuilder
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -943,6 +1000,54 @@ references:
   name: Apizr.Mediation.Commanding
   nameWithType: Apizr.Mediation.Commanding
   fullName: Apizr.Mediation.Commanding
+- uid: Apizr.Mediation.Requesting.UploadCommand`2
+  commentId: T:Apizr.Mediation.Requesting.UploadCommand`2
+  name: UploadCommand<TUploadApi, TUploadApiResultData>
+  nameWithType: UploadCommand<TUploadApi, TUploadApiResultData>
+  fullName: Apizr.Mediation.Requesting.UploadCommand<TUploadApi, TUploadApiResultData>
+  nameWithType.vb: UploadCommand(Of TUploadApi, TUploadApiResultData)
+  fullName.vb: Apizr.Mediation.Requesting.UploadCommand(Of TUploadApi, TUploadApiResultData)
+  name.vb: UploadCommand(Of TUploadApi, TUploadApiResultData)
+  spec.csharp:
+  - uid: Apizr.Mediation.Requesting.UploadCommand`2
+    name: UploadCommand
+    nameWithType: UploadCommand
+    fullName: Apizr.Mediation.Requesting.UploadCommand
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TUploadApi
+    nameWithType: TUploadApi
+    fullName: TUploadApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TUploadApiResultData
+    nameWithType: TUploadApiResultData
+    fullName: TUploadApiResultData
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Mediation.Requesting.UploadCommand`2
+    name: UploadCommand
+    nameWithType: UploadCommand
+    fullName: Apizr.Mediation.Requesting.UploadCommand
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TUploadApi
+    nameWithType: TUploadApi
+    fullName: TUploadApi
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TUploadApiResultData
+    nameWithType: TUploadApiResultData
+    fullName: TUploadApiResultData
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Mediation.Requesting.UploadCommand`1
   commentId: T:Apizr.Mediation.Requesting.UploadCommand`1
   name: UploadCommand<TUploadApi>
@@ -1072,27 +1177,27 @@ references:
   name: MediatR
   nameWithType: MediatR
   fullName: MediatR
-- uid: Apizr.Mediation.Requesting.UploadCommand`1.FileInfoPart
-  commentId: P:Apizr.Mediation.Requesting.UploadCommand`1.FileInfoPart
+- uid: Apizr.Mediation.Requesting.UploadCommand`2.FileInfoPart
+  commentId: P:Apizr.Mediation.Requesting.UploadCommand`2.FileInfoPart
   name: FileInfoPart
-  nameWithType: UploadCommand<TUploadApi>.FileInfoPart
-  fullName: Apizr.Mediation.Requesting.UploadCommand<TUploadApi>.FileInfoPart
-  nameWithType.vb: UploadCommand(Of TUploadApi).FileInfoPart
-  fullName.vb: Apizr.Mediation.Requesting.UploadCommand(Of TUploadApi).FileInfoPart
-- uid: Apizr.Mediation.Requesting.UploadCommand`1.StreamPart
-  commentId: P:Apizr.Mediation.Requesting.UploadCommand`1.StreamPart
+  nameWithType: UploadCommand<TUploadApi, TUploadApiResultData>.FileInfoPart
+  fullName: Apizr.Mediation.Requesting.UploadCommand<TUploadApi, TUploadApiResultData>.FileInfoPart
+  nameWithType.vb: UploadCommand(Of TUploadApi, TUploadApiResultData).FileInfoPart
+  fullName.vb: Apizr.Mediation.Requesting.UploadCommand(Of TUploadApi, TUploadApiResultData).FileInfoPart
+- uid: Apizr.Mediation.Requesting.UploadCommand`2.StreamPart
+  commentId: P:Apizr.Mediation.Requesting.UploadCommand`2.StreamPart
   name: StreamPart
-  nameWithType: UploadCommand<TUploadApi>.StreamPart
-  fullName: Apizr.Mediation.Requesting.UploadCommand<TUploadApi>.StreamPart
-  nameWithType.vb: UploadCommand(Of TUploadApi).StreamPart
-  fullName.vb: Apizr.Mediation.Requesting.UploadCommand(Of TUploadApi).StreamPart
-- uid: Apizr.Mediation.Requesting.UploadCommand`1.ByteArrayPart
-  commentId: P:Apizr.Mediation.Requesting.UploadCommand`1.ByteArrayPart
+  nameWithType: UploadCommand<TUploadApi, TUploadApiResultData>.StreamPart
+  fullName: Apizr.Mediation.Requesting.UploadCommand<TUploadApi, TUploadApiResultData>.StreamPart
+  nameWithType.vb: UploadCommand(Of TUploadApi, TUploadApiResultData).StreamPart
+  fullName.vb: Apizr.Mediation.Requesting.UploadCommand(Of TUploadApi, TUploadApiResultData).StreamPart
+- uid: Apizr.Mediation.Requesting.UploadCommand`2.ByteArrayPart
+  commentId: P:Apizr.Mediation.Requesting.UploadCommand`2.ByteArrayPart
   name: ByteArrayPart
-  nameWithType: UploadCommand<TUploadApi>.ByteArrayPart
-  fullName: Apizr.Mediation.Requesting.UploadCommand<TUploadApi>.ByteArrayPart
-  nameWithType.vb: UploadCommand(Of TUploadApi).ByteArrayPart
-  fullName.vb: Apizr.Mediation.Requesting.UploadCommand(Of TUploadApi).ByteArrayPart
+  nameWithType: UploadCommand<TUploadApi, TUploadApiResultData>.ByteArrayPart
+  fullName: Apizr.Mediation.Requesting.UploadCommand<TUploadApi, TUploadApiResultData>.ByteArrayPart
+  nameWithType.vb: UploadCommand(Of TUploadApi, TUploadApiResultData).ByteArrayPart
+  fullName.vb: Apizr.Mediation.Requesting.UploadCommand(Of TUploadApi, TUploadApiResultData).ByteArrayPart
 - uid: Apizr.Mediation.Requesting.Base.RequestBase`3.OptionsBuilder
   commentId: P:Apizr.Mediation.Requesting.Base.RequestBase`3.OptionsBuilder
   name: OptionsBuilder

@@ -88,4 +88,29 @@ namespace Apizr.Mediation.Requesting
         {
         }
     }
+
+    /// <summary>
+    /// The mediation download query with a dictionary query parameters type
+    /// </summary>
+    public class DownloadWithQuery<TDownloadParams> : DownloadQuery<IDownloadApi<TDownloadParams>, TDownloadParams>
+    {
+        /// <summary>
+        /// The mediation Read query constructor
+        /// </summary>
+        /// <param name="fileInfo">Some information about the file to download</param>
+        /// <param name="optionsBuilder">Some request options</param>
+        public DownloadWithQuery(FileInfo fileInfo, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(fileInfo, default, optionsBuilder)
+        {
+        }
+
+        /// <summary>
+        /// The mediation Read query constructor
+        /// </summary>
+        /// <param name="fileInfo">Some information about the file to download</param>
+        /// <param name="downloadParams">Some query parameters</param>
+        /// <param name="optionsBuilder">Some request options</param>
+        public DownloadWithQuery(FileInfo fileInfo, TDownloadParams downloadParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(fileInfo, downloadParams, optionsBuilder)
+        {
+        }
+    }
 }

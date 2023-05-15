@@ -73,4 +73,31 @@ namespace Apizr.Mediation.Requesting.Handling
         public Task<FileInfo> Handle(DownloadQuery request, CancellationToken cancellationToken) =>
             _downloadManager.DownloadAsync(request.FileInfo, request.DownloadParams, request.OptionsBuilder);
     }
+
+    /// <summary>
+    /// The mediation handler for <see cref="DownloadQuery{TDownloadApi, TDownloadParams}"/>
+    /// </summary>
+    /// <typeparam name="TDownloadParams">The query parameters type</typeparam>
+    public class DownloadWithQueryHandler<TDownloadParams> :
+        RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>,
+        IRequestHandler<DownloadWithQuery<TDownloadParams>, FileInfo>
+    {
+        private readonly IApizrDownloadManager<IDownloadApi<TDownloadParams>, TDownloadParams> _downloadManager;
+
+        public DownloadWithQueryHandler(IApizrDownloadManager<IDownloadApi<TDownloadParams>, TDownloadParams> downloadManager)
+        {
+            _downloadManager = downloadManager;
+        }
+
+        /// <summary>
+        /// Handling the download request
+        /// </summary>
+        /// <param name="request">The download request</param>
+        /// <param name="cancellationToken">A cancellation token</param>
+        /// <returns></returns>
+        public Task<FileInfo> Handle(DownloadWithQuery<TDownloadParams> request, CancellationToken cancellationToken)
+        {
+            return _downloadManager.DownloadAsync(request.FileInfo, request.DownloadParams, request.OptionsBuilder);
+        }
+    }
 }

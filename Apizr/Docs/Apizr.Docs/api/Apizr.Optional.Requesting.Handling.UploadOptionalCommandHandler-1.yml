@@ -18,24 +18,24 @@ items:
   source:
     id: UploadOptionalCommandHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer.Optional\Optional\Requesting\Handling\UploadOptionalCommandHandler.cs
-    startLine: 14
+    startLine: 67
   assemblies:
   - Apizr.Integrations.FileTransfer.Optional
   namespace: Apizr.Optional.Requesting.Handling
   syntax:
-    content: 'public class UploadOptionalCommandHandler<TUploadApi> : RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>, IRequestHandler<UploadOptionalCommand<TUploadApi>, Option<Unit, ApizrException>>, IRequestHandler<UploadOptionalCommand, Option<Unit, ApizrException>> where TUploadApi : IUploadApi'
+    content: 'public class UploadOptionalCommandHandler<TUploadApi> : RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>, IRequestHandler<UploadOptionalCommand<TUploadApi>, Option<HttpResponseMessage, ApizrException>>, IRequestHandler<UploadOptionalCommand, Option<HttpResponseMessage, ApizrException>> where TUploadApi : IUploadApi'
     typeParameters:
     - id: TUploadApi
     content.vb: >-
       Public Class UploadOptionalCommandHandler(Of TUploadApi As IUploadApi)
           Inherits RequestHandlerBase(Of IApizrRequestOptions, IApizrRequestOptionsBuilder)
-          Implements IRequestHandler(Of UploadOptionalCommand(Of TUploadApi),  Option(Of Unit, ApizrException) ), IRequestHandler(Of UploadOptionalCommand,  Option(Of Unit, ApizrException) )
+          Implements IRequestHandler(Of UploadOptionalCommand(Of TUploadApi),  Option(Of HttpResponseMessage, ApizrException) ), IRequestHandler(Of UploadOptionalCommand,  Option(Of HttpResponseMessage, ApizrException) )
   inheritance:
   - System.Object
   - Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   implements:
-  - MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand{{TUploadApi}},Optional.Option{MediatR.Unit,Apizr.ApizrException}}
-  - MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand,Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+  - MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand{{TUploadApi}},Optional.Option{System.Net.Http.HttpResponseMessage,Apizr.ApizrException}}
+  - MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand,Optional.Option{System.Net.Http.HttpResponseMessage,Apizr.ApizrException}}
   inheritedMembers:
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -67,7 +67,7 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer.Optional\Optional\Requesting\Handling\UploadOptionalCommandHandler.cs
-    startLine: 21
+    startLine: 74
   assemblies:
   - Apizr.Integrations.FileTransfer.Optional
   namespace: Apizr.Optional.Requesting.Handling
@@ -99,14 +99,14 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer.Optional\Optional\Requesting\Handling\UploadOptionalCommandHandler.cs
-    startLine: 32
+    startLine: 85
   assemblies:
   - Apizr.Integrations.FileTransfer.Optional
   namespace: Apizr.Optional.Requesting.Handling
   summary: "\nHandling the upload optional request\n"
   example: []
   syntax:
-    content: public async Task<Option<Unit, ApizrException>> Handle(UploadOptionalCommand<TUploadApi> request, CancellationToken cancellationToken)
+    content: public async Task<Option<HttpResponseMessage, ApizrException>> Handle(UploadOptionalCommand<TUploadApi> request, CancellationToken cancellationToken)
     parameters:
     - id: request
       type: Apizr.Optional.Requesting.UploadOptionalCommand{{TUploadApi}}
@@ -115,12 +115,12 @@ items:
       type: System.Threading.CancellationToken
       description: A cancellation token
     return:
-      type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      type: System.Threading.Tasks.Task{Optional.Option{System.Net.Http.HttpResponseMessage,Apizr.ApizrException}}
       description: ''
-    content.vb: Public Function Handle(request As UploadOptionalCommand(Of TUploadApi), cancellationToken As CancellationToken) As Task(Of  Option(Of Unit, ApizrException)
+    content.vb: Public Function Handle(request As UploadOptionalCommand(Of TUploadApi), cancellationToken As CancellationToken) As Task(Of  Option(Of HttpResponseMessage, ApizrException)
   overload: Apizr.Optional.Requesting.Handling.UploadOptionalCommandHandler`1.Handle*
   implements:
-  - MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand{{TUploadApi}},Optional.Option{MediatR.Unit,Apizr.ApizrException}}.Handle(Apizr.Optional.Requesting.UploadOptionalCommand{{TUploadApi}},System.Threading.CancellationToken)
+  - MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand{{TUploadApi}},Optional.Option{System.Net.Http.HttpResponseMessage,Apizr.ApizrException}}.Handle(Apizr.Optional.Requesting.UploadOptionalCommand{{TUploadApi}},System.Threading.CancellationToken)
   nameWithType.vb: UploadOptionalCommandHandler(Of TUploadApi).Handle(UploadOptionalCommand(Of TUploadApi), CancellationToken)
   modifiers.csharp:
   - public
@@ -143,14 +143,14 @@ items:
   source:
     id: Handle
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer.Optional\Optional\Requesting\Handling\UploadOptionalCommandHandler.cs
-    startLine: 72
+    startLine: 125
   assemblies:
   - Apizr.Integrations.FileTransfer.Optional
   namespace: Apizr.Optional.Requesting.Handling
   summary: "\nHandling the upload optional request\n"
   example: []
   syntax:
-    content: public async Task<Option<Unit, ApizrException>> Handle(UploadOptionalCommand request, CancellationToken cancellationToken)
+    content: public async Task<Option<HttpResponseMessage, ApizrException>> Handle(UploadOptionalCommand request, CancellationToken cancellationToken)
     parameters:
     - id: request
       type: Apizr.Optional.Requesting.UploadOptionalCommand
@@ -159,12 +159,12 @@ items:
       type: System.Threading.CancellationToken
       description: A cancellation token
     return:
-      type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+      type: System.Threading.Tasks.Task{Optional.Option{System.Net.Http.HttpResponseMessage,Apizr.ApizrException}}
       description: ''
-    content.vb: Public Function Handle(request As UploadOptionalCommand, cancellationToken As CancellationToken) As Task(Of  Option(Of Unit, ApizrException)
+    content.vb: Public Function Handle(request As UploadOptionalCommand, cancellationToken As CancellationToken) As Task(Of  Option(Of HttpResponseMessage, ApizrException)
   overload: Apizr.Optional.Requesting.Handling.UploadOptionalCommandHandler`1.Handle*
   implements:
-  - MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand,Optional.Option{MediatR.Unit,Apizr.ApizrException}}.Handle(Apizr.Optional.Requesting.UploadOptionalCommand,System.Threading.CancellationToken)
+  - MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand,Optional.Option{System.Net.Http.HttpResponseMessage,Apizr.ApizrException}}.Handle(Apizr.Optional.Requesting.UploadOptionalCommand,System.Threading.CancellationToken)
   nameWithType.vb: UploadOptionalCommandHandler(Of TUploadApi).Handle(UploadOptionalCommand, CancellationToken)
   modifiers.csharp:
   - public
@@ -239,16 +239,16 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand{{TUploadApi}},Optional.Option{MediatR.Unit,Apizr.ApizrException}}
-  commentId: T:MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand{`0},Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+- uid: MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand{{TUploadApi}},Optional.Option{System.Net.Http.HttpResponseMessage,Apizr.ApizrException}}
+  commentId: T:MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand{`0},Optional.Option{System.Net.Http.HttpResponseMessage,Apizr.ApizrException}}
   parent: MediatR
   definition: MediatR.IRequestHandler`2
-  name: IRequestHandler<UploadOptionalCommand<TUploadApi>, Option<Unit, ApizrException>>
-  nameWithType: IRequestHandler<UploadOptionalCommand<TUploadApi>, Option<Unit, ApizrException>>
-  fullName: MediatR.IRequestHandler<Apizr.Optional.Requesting.UploadOptionalCommand<TUploadApi>, Optional.Option<MediatR.Unit, Apizr.ApizrException>>
-  nameWithType.vb: IRequestHandler(Of UploadOptionalCommand(Of TUploadApi), Option(Of Unit, ApizrException))
-  fullName.vb: MediatR.IRequestHandler(Of Apizr.Optional.Requesting.UploadOptionalCommand(Of TUploadApi), Optional.Option(Of MediatR.Unit, Apizr.ApizrException))
-  name.vb: IRequestHandler(Of UploadOptionalCommand(Of TUploadApi), Option(Of Unit, ApizrException))
+  name: IRequestHandler<UploadOptionalCommand<TUploadApi>, Option<HttpResponseMessage, ApizrException>>
+  nameWithType: IRequestHandler<UploadOptionalCommand<TUploadApi>, Option<HttpResponseMessage, ApizrException>>
+  fullName: MediatR.IRequestHandler<Apizr.Optional.Requesting.UploadOptionalCommand<TUploadApi>, Optional.Option<System.Net.Http.HttpResponseMessage, Apizr.ApizrException>>
+  nameWithType.vb: IRequestHandler(Of UploadOptionalCommand(Of TUploadApi), Option(Of HttpResponseMessage, ApizrException))
+  fullName.vb: MediatR.IRequestHandler(Of Apizr.Optional.Requesting.UploadOptionalCommand(Of TUploadApi), Optional.Option(Of System.Net.Http.HttpResponseMessage, Apizr.ApizrException))
+  name.vb: IRequestHandler(Of UploadOptionalCommand(Of TUploadApi), Option(Of HttpResponseMessage, ApizrException))
   spec.csharp:
   - uid: MediatR.IRequestHandler`2
     name: IRequestHandler
@@ -282,10 +282,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -333,10 +333,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -351,16 +351,16 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand,Optional.Option{MediatR.Unit,Apizr.ApizrException}}
-  commentId: T:MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand,Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+- uid: MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand,Optional.Option{System.Net.Http.HttpResponseMessage,Apizr.ApizrException}}
+  commentId: T:MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand,Optional.Option{System.Net.Http.HttpResponseMessage,Apizr.ApizrException}}
   parent: MediatR
   definition: MediatR.IRequestHandler`2
-  name: IRequestHandler<UploadOptionalCommand, Option<Unit, ApizrException>>
-  nameWithType: IRequestHandler<UploadOptionalCommand, Option<Unit, ApizrException>>
-  fullName: MediatR.IRequestHandler<Apizr.Optional.Requesting.UploadOptionalCommand, Optional.Option<MediatR.Unit, Apizr.ApizrException>>
-  nameWithType.vb: IRequestHandler(Of UploadOptionalCommand, Option(Of Unit, ApizrException))
-  fullName.vb: MediatR.IRequestHandler(Of Apizr.Optional.Requesting.UploadOptionalCommand, Optional.Option(Of MediatR.Unit, Apizr.ApizrException))
-  name.vb: IRequestHandler(Of UploadOptionalCommand, Option(Of Unit, ApizrException))
+  name: IRequestHandler<UploadOptionalCommand, Option<HttpResponseMessage, ApizrException>>
+  nameWithType: IRequestHandler<UploadOptionalCommand, Option<HttpResponseMessage, ApizrException>>
+  fullName: MediatR.IRequestHandler<Apizr.Optional.Requesting.UploadOptionalCommand, Optional.Option<System.Net.Http.HttpResponseMessage, Apizr.ApizrException>>
+  nameWithType.vb: IRequestHandler(Of UploadOptionalCommand, Option(Of HttpResponseMessage, ApizrException))
+  fullName.vb: MediatR.IRequestHandler(Of Apizr.Optional.Requesting.UploadOptionalCommand, Optional.Option(Of System.Net.Http.HttpResponseMessage, Apizr.ApizrException))
+  name.vb: IRequestHandler(Of UploadOptionalCommand, Option(Of HttpResponseMessage, ApizrException))
   spec.csharp:
   - uid: MediatR.IRequestHandler`2
     name: IRequestHandler
@@ -385,10 +385,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -427,10 +427,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -933,21 +933,21 @@ references:
   fullName: Apizr.Optional.Requesting.Handling.UploadOptionalCommandHandler<TUploadApi>.Handle
   nameWithType.vb: UploadOptionalCommandHandler(Of TUploadApi).Handle
   fullName.vb: Apizr.Optional.Requesting.Handling.UploadOptionalCommandHandler(Of TUploadApi).Handle
-- uid: MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand{{TUploadApi}},Optional.Option{MediatR.Unit,Apizr.ApizrException}}.Handle(Apizr.Optional.Requesting.UploadOptionalCommand{{TUploadApi}},System.Threading.CancellationToken)
-  commentId: M:MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand{`0},Optional.Option{MediatR.Unit,Apizr.ApizrException}}.Handle(Apizr.Optional.Requesting.UploadOptionalCommand{`0},System.Threading.CancellationToken)
-  parent: MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand{{TUploadApi}},Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+- uid: MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand{{TUploadApi}},Optional.Option{System.Net.Http.HttpResponseMessage,Apizr.ApizrException}}.Handle(Apizr.Optional.Requesting.UploadOptionalCommand{{TUploadApi}},System.Threading.CancellationToken)
+  commentId: M:MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand{`0},Optional.Option{System.Net.Http.HttpResponseMessage,Apizr.ApizrException}}.Handle(Apizr.Optional.Requesting.UploadOptionalCommand{`0},System.Threading.CancellationToken)
+  parent: MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand{{TUploadApi}},Optional.Option{System.Net.Http.HttpResponseMessage,Apizr.ApizrException}}
   definition: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
   name: Handle(UploadOptionalCommand<TUploadApi>, CancellationToken)
-  nameWithType: IRequestHandler<UploadOptionalCommand<TUploadApi>, Option<Unit, ApizrException>>.Handle(UploadOptionalCommand<TUploadApi>, CancellationToken)
-  fullName: MediatR.IRequestHandler<Apizr.Optional.Requesting.UploadOptionalCommand<TUploadApi>, Optional.Option<MediatR.Unit, Apizr.ApizrException>>.Handle(Apizr.Optional.Requesting.UploadOptionalCommand<TUploadApi>, System.Threading.CancellationToken)
-  nameWithType.vb: IRequestHandler(Of UploadOptionalCommand(Of TUploadApi), Option(Of Unit, ApizrException)).Handle(UploadOptionalCommand(Of TUploadApi), CancellationToken)
-  fullName.vb: MediatR.IRequestHandler(Of Apizr.Optional.Requesting.UploadOptionalCommand(Of TUploadApi), Optional.Option(Of MediatR.Unit, Apizr.ApizrException)).Handle(Apizr.Optional.Requesting.UploadOptionalCommand(Of TUploadApi), System.Threading.CancellationToken)
+  nameWithType: IRequestHandler<UploadOptionalCommand<TUploadApi>, Option<HttpResponseMessage, ApizrException>>.Handle(UploadOptionalCommand<TUploadApi>, CancellationToken)
+  fullName: MediatR.IRequestHandler<Apizr.Optional.Requesting.UploadOptionalCommand<TUploadApi>, Optional.Option<System.Net.Http.HttpResponseMessage, Apizr.ApizrException>>.Handle(Apizr.Optional.Requesting.UploadOptionalCommand<TUploadApi>, System.Threading.CancellationToken)
+  nameWithType.vb: IRequestHandler(Of UploadOptionalCommand(Of TUploadApi), Option(Of HttpResponseMessage, ApizrException)).Handle(UploadOptionalCommand(Of TUploadApi), CancellationToken)
+  fullName.vb: MediatR.IRequestHandler(Of Apizr.Optional.Requesting.UploadOptionalCommand(Of TUploadApi), Optional.Option(Of System.Net.Http.HttpResponseMessage, Apizr.ApizrException)).Handle(Apizr.Optional.Requesting.UploadOptionalCommand(Of TUploadApi), System.Threading.CancellationToken)
   name.vb: Handle(UploadOptionalCommand(Of TUploadApi), CancellationToken)
   spec.csharp:
   - uid: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
     name: Handle
-    nameWithType: IRequestHandler<UploadOptionalCommand<TUploadApi>, Option<Unit, ApizrException>>.Handle
-    fullName: MediatR.IRequestHandler<Apizr.Optional.Requesting.UploadOptionalCommand<TUploadApi>, Optional.Option<MediatR.Unit, Apizr.ApizrException>>.Handle
+    nameWithType: IRequestHandler<UploadOptionalCommand<TUploadApi>, Option<HttpResponseMessage, ApizrException>>.Handle
+    fullName: MediatR.IRequestHandler<Apizr.Optional.Requesting.UploadOptionalCommand<TUploadApi>, Optional.Option<System.Net.Http.HttpResponseMessage, Apizr.ApizrException>>.Handle
     isExternal: true
   - name: (
     nameWithType: (
@@ -979,8 +979,8 @@ references:
   spec.vb:
   - uid: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
     name: Handle
-    nameWithType: IRequestHandler(Of UploadOptionalCommand(Of TUploadApi), Option(Of Unit, ApizrException)).Handle
-    fullName: MediatR.IRequestHandler(Of Apizr.Optional.Requesting.UploadOptionalCommand(Of TUploadApi), Optional.Option(Of MediatR.Unit, Apizr.ApizrException)).Handle
+    nameWithType: IRequestHandler(Of UploadOptionalCommand(Of TUploadApi), Option(Of HttpResponseMessage, ApizrException)).Handle
+    fullName: MediatR.IRequestHandler(Of Apizr.Optional.Requesting.UploadOptionalCommand(Of TUploadApi), Optional.Option(Of System.Net.Http.HttpResponseMessage, Apizr.ApizrException)).Handle
     isExternal: true
   - name: (
     nameWithType: (
@@ -1054,16 +1054,16 @@ references:
   name: CancellationToken
   nameWithType: CancellationToken
   fullName: System.Threading.CancellationToken
-- uid: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
-  commentId: T:System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+- uid: System.Threading.Tasks.Task{Optional.Option{System.Net.Http.HttpResponseMessage,Apizr.ApizrException}}
+  commentId: T:System.Threading.Tasks.Task{Optional.Option{System.Net.Http.HttpResponseMessage,Apizr.ApizrException}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
-  name: Task<Option<Unit, ApizrException>>
-  nameWithType: Task<Option<Unit, ApizrException>>
-  fullName: System.Threading.Tasks.Task<Optional.Option<MediatR.Unit, Apizr.ApizrException>>
-  nameWithType.vb: Task(Of Option(Of Unit, ApizrException))
-  fullName.vb: System.Threading.Tasks.Task(Of Optional.Option(Of MediatR.Unit, Apizr.ApizrException))
-  name.vb: Task(Of Option(Of Unit, ApizrException))
+  name: Task<Option<HttpResponseMessage, ApizrException>>
+  nameWithType: Task<Option<HttpResponseMessage, ApizrException>>
+  fullName: System.Threading.Tasks.Task<Optional.Option<System.Net.Http.HttpResponseMessage, Apizr.ApizrException>>
+  nameWithType.vb: Task(Of Option(Of HttpResponseMessage, ApizrException))
+  fullName.vb: System.Threading.Tasks.Task(Of Optional.Option(Of System.Net.Http.HttpResponseMessage, Apizr.ApizrException))
+  name.vb: Task(Of Option(Of HttpResponseMessage, ApizrException))
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
@@ -1081,10 +1081,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -1116,10 +1116,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: MediatR.Unit
-    name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -1280,20 +1280,20 @@ references:
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
-- uid: MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand,Optional.Option{MediatR.Unit,Apizr.ApizrException}}.Handle(Apizr.Optional.Requesting.UploadOptionalCommand,System.Threading.CancellationToken)
-  commentId: M:MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand,Optional.Option{MediatR.Unit,Apizr.ApizrException}}.Handle(Apizr.Optional.Requesting.UploadOptionalCommand,System.Threading.CancellationToken)
-  parent: MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand,Optional.Option{MediatR.Unit,Apizr.ApizrException}}
+- uid: MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand,Optional.Option{System.Net.Http.HttpResponseMessage,Apizr.ApizrException}}.Handle(Apizr.Optional.Requesting.UploadOptionalCommand,System.Threading.CancellationToken)
+  commentId: M:MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand,Optional.Option{System.Net.Http.HttpResponseMessage,Apizr.ApizrException}}.Handle(Apizr.Optional.Requesting.UploadOptionalCommand,System.Threading.CancellationToken)
+  parent: MediatR.IRequestHandler{Apizr.Optional.Requesting.UploadOptionalCommand,Optional.Option{System.Net.Http.HttpResponseMessage,Apizr.ApizrException}}
   definition: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
   name: Handle(UploadOptionalCommand, CancellationToken)
-  nameWithType: IRequestHandler<UploadOptionalCommand, Option<Unit, ApizrException>>.Handle(UploadOptionalCommand, CancellationToken)
-  fullName: MediatR.IRequestHandler<Apizr.Optional.Requesting.UploadOptionalCommand, Optional.Option<MediatR.Unit, Apizr.ApizrException>>.Handle(Apizr.Optional.Requesting.UploadOptionalCommand, System.Threading.CancellationToken)
-  nameWithType.vb: IRequestHandler(Of UploadOptionalCommand, Option(Of Unit, ApizrException)).Handle(UploadOptionalCommand, CancellationToken)
-  fullName.vb: MediatR.IRequestHandler(Of Apizr.Optional.Requesting.UploadOptionalCommand, Optional.Option(Of MediatR.Unit, Apizr.ApizrException)).Handle(Apizr.Optional.Requesting.UploadOptionalCommand, System.Threading.CancellationToken)
+  nameWithType: IRequestHandler<UploadOptionalCommand, Option<HttpResponseMessage, ApizrException>>.Handle(UploadOptionalCommand, CancellationToken)
+  fullName: MediatR.IRequestHandler<Apizr.Optional.Requesting.UploadOptionalCommand, Optional.Option<System.Net.Http.HttpResponseMessage, Apizr.ApizrException>>.Handle(Apizr.Optional.Requesting.UploadOptionalCommand, System.Threading.CancellationToken)
+  nameWithType.vb: IRequestHandler(Of UploadOptionalCommand, Option(Of HttpResponseMessage, ApizrException)).Handle(UploadOptionalCommand, CancellationToken)
+  fullName.vb: MediatR.IRequestHandler(Of Apizr.Optional.Requesting.UploadOptionalCommand, Optional.Option(Of System.Net.Http.HttpResponseMessage, Apizr.ApizrException)).Handle(Apizr.Optional.Requesting.UploadOptionalCommand, System.Threading.CancellationToken)
   spec.csharp:
   - uid: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
     name: Handle
-    nameWithType: IRequestHandler<UploadOptionalCommand, Option<Unit, ApizrException>>.Handle
-    fullName: MediatR.IRequestHandler<Apizr.Optional.Requesting.UploadOptionalCommand, Optional.Option<MediatR.Unit, Apizr.ApizrException>>.Handle
+    nameWithType: IRequestHandler<UploadOptionalCommand, Option<HttpResponseMessage, ApizrException>>.Handle
+    fullName: MediatR.IRequestHandler<Apizr.Optional.Requesting.UploadOptionalCommand, Optional.Option<System.Net.Http.HttpResponseMessage, Apizr.ApizrException>>.Handle
     isExternal: true
   - name: (
     nameWithType: (
@@ -1316,8 +1316,8 @@ references:
   spec.vb:
   - uid: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
     name: Handle
-    nameWithType: IRequestHandler(Of UploadOptionalCommand, Option(Of Unit, ApizrException)).Handle
-    fullName: MediatR.IRequestHandler(Of Apizr.Optional.Requesting.UploadOptionalCommand, Optional.Option(Of MediatR.Unit, Apizr.ApizrException)).Handle
+    nameWithType: IRequestHandler(Of UploadOptionalCommand, Option(Of HttpResponseMessage, ApizrException)).Handle
+    fullName: MediatR.IRequestHandler(Of Apizr.Optional.Requesting.UploadOptionalCommand, Optional.Option(Of System.Net.Http.HttpResponseMessage, Apizr.ApizrException)).Handle
     isExternal: true
   - name: (
     nameWithType: (

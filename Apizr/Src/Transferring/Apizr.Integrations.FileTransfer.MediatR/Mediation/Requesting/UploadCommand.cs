@@ -105,4 +105,25 @@ namespace Apizr.Mediation.Requesting
         {
         }
     }
+
+    /// <summary>
+    /// The mediation upload command
+    /// </summary>
+    public class UploadWithCommand<TUploadApiResultData> : UploadCommand<IUploadApi<TUploadApiResultData>, TUploadApiResultData>
+    {
+        /// <inheritdoc />
+        public UploadWithCommand(ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(byteArrayPart, optionsBuilder)
+        {
+        }
+
+        /// <inheritdoc />
+        public UploadWithCommand(StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(streamPart, optionsBuilder)
+        {
+        }
+
+        /// <inheritdoc />
+        public UploadWithCommand(FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) : base(fileInfoPart, optionsBuilder)
+        {
+        }
+    }
 }

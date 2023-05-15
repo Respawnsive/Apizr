@@ -93,8 +93,8 @@
   </div>
   <div class="implements">
     <h5>Implements</h5>
-    <div><span class="xref">MediatR.IRequestHandler</span>&lt;<a class="xref" href="Apizr.Mediation.Requesting.UploadCommand-1.html">UploadCommand</a>&lt;TUploadApi&gt;, <span class="xref">MediatR.Unit</span>&gt;</div>
-    <div><span class="xref">MediatR.IRequestHandler</span>&lt;<a class="xref" href="Apizr.Mediation.Requesting.UploadCommand.html">UploadCommand</a>, <span class="xref">MediatR.Unit</span>&gt;</div>
+    <div><span class="xref">MediatR.IRequestHandler</span>&lt;<a class="xref" href="Apizr.Mediation.Requesting.UploadCommand-1.html">UploadCommand</a>&lt;TUploadApi&gt;, <span class="xref">System.Net.Http.HttpResponseMessage</span>&gt;</div>
+    <div><span class="xref">MediatR.IRequestHandler</span>&lt;<a class="xref" href="Apizr.Mediation.Requesting.UploadCommand.html">UploadCommand</a>, <span class="xref">System.Net.Http.HttpResponseMessage</span>&gt;</div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -124,7 +124,7 @@
   <h6><strong>Assembly</strong>: Apizr.Integrations.FileTransfer.MediatR.dll</h6>
   <h5 id="Apizr_Mediation_Requesting_Handling_UploadCommandHandler_1_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class UploadCommandHandler&lt;TUploadApi&gt; : RequestHandlerBase&lt;IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;, IRequestHandler&lt;UploadCommand&lt;TUploadApi&gt;, Unit&gt;, IRequestHandler&lt;UploadCommand, Unit&gt; where TUploadApi : IUploadApi</code></pre>
+    <pre><code class="lang-csharp hljs">public class UploadCommandHandler&lt;TUploadApi&gt; : RequestHandlerBase&lt;IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;, IRequestHandler&lt;UploadCommand&lt;TUploadApi&gt;, HttpResponseMessage&gt;, IRequestHandler&lt;UploadCommand, HttpResponseMessage&gt; where TUploadApi : IUploadApi</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -181,7 +181,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Unit&gt; Handle(UploadCommand request, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;HttpResponseMessage&gt; Handle(UploadCommand request, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -217,7 +217,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">MediatR.Unit</span>&gt;</td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.Net.Http.HttpResponseMessage</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -231,7 +231,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Unit&gt; Handle(UploadCommand&lt;TUploadApi&gt; request, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;HttpResponseMessage&gt; Handle(UploadCommand&lt;TUploadApi&gt; request, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -267,7 +267,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">MediatR.Unit</span>&gt;</td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.Net.Http.HttpResponseMessage</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>

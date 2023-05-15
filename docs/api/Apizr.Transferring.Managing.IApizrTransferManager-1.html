@@ -83,32 +83,32 @@
   
   <h1 id="Apizr_Transferring_Managing_IApizrTransferManager_1" data-uid="Apizr.Transferring.Managing.IApizrTransferManager`1" class="text-break">Interface IApizrTransferManager&lt;TTransferApi&gt;
   </h1>
-  <div class="markdown level0 summary"><p>The transfer manager to work with both downloads and uploads and with a dictionary query parameters type</p>
+  <div class="markdown level0 summary"><p>The transfer manager to work with both downloads and uploads and with a dictionary query parameters type and no result</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="Apizr.Transferring.Managing.IApizrUploadManager-1.html#Apizr_Transferring_Managing_IApizrUploadManager_1_UploadAsync_Refit_ByteArrayPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__">IApizrUploadManager&lt;TTransferApi&gt;.UploadAsync(ByteArrayPart, Action&lt;IApizrRequestOptionsBuilder&gt;)</a>
-    </div>
-    <div>
-      <a class="xref" href="Apizr.Transferring.Managing.IApizrUploadManager-1.html#Apizr_Transferring_Managing_IApizrUploadManager_1_UploadAsync_Refit_StreamPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__">IApizrUploadManager&lt;TTransferApi&gt;.UploadAsync(StreamPart, Action&lt;IApizrRequestOptionsBuilder&gt;)</a>
-    </div>
-    <div>
-      <a class="xref" href="Apizr.Transferring.Managing.IApizrUploadManager-1.html#Apizr_Transferring_Managing_IApizrUploadManager_1_UploadAsync_Refit_FileInfoPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__">IApizrUploadManager&lt;TTransferApi&gt;.UploadAsync(FileInfoPart, Action&lt;IApizrRequestOptionsBuilder&gt;)</a>
-    </div>
     <div>
       <a class="xref" href="Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__">IApizrDownloadManager&lt;TTransferApi, IDictionary&lt;String, Object&gt;&gt;.DownloadAsync(FileInfo, Action&lt;IApizrRequestOptionsBuilder&gt;)</a>
     </div>
     <div>
       <a class="xref" href="Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__">IApizrDownloadManager&lt;TTransferApi, IDictionary&lt;String, Object&gt;&gt;.DownloadAsync(FileInfo, IDictionary&lt;String, Object&gt;, Action&lt;IApizrRequestOptionsBuilder&gt;)</a>
     </div>
+    <div>
+      <a class="xref" href="Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_ByteArrayPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__">IApizrUploadManager&lt;TTransferApi, HttpResponseMessage&gt;.UploadAsync(ByteArrayPart, Action&lt;IApizrRequestOptionsBuilder&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_StreamPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__">IApizrUploadManager&lt;TTransferApi, HttpResponseMessage&gt;.UploadAsync(StreamPart, Action&lt;IApizrRequestOptionsBuilder&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_FileInfoPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__">IApizrUploadManager&lt;TTransferApi, HttpResponseMessage&gt;.UploadAsync(FileInfoPart, Action&lt;IApizrRequestOptionsBuilder&gt;)</a>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Apizr.Transferring.Managing.html">Apizr.Transferring.Managing</a></h6>
   <h6><strong>Assembly</strong>: Apizr.Integrations.FileTransfer.dll</h6>
   <h5 id="Apizr_Transferring_Managing_IApizrTransferManager_1_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IApizrTransferManager&lt;TTransferApi&gt; : IApizrTransferManager&lt;TTransferApi, IDictionary&lt;string, object&gt;&gt;, IApizrUploadManager&lt;TTransferApi&gt;, IApizrDownloadManager&lt;TTransferApi&gt;, IApizrDownloadManager&lt;TTransferApi, IDictionary&lt;string, object&gt;&gt;, IApizrTransferManagerBase&lt;TTransferApi&gt;, IApizrManager where TTransferApi : ITransferApi&lt;IDictionary&lt;string, object&gt;&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IApizrTransferManager&lt;TTransferApi&gt; : IApizrDownloadManager&lt;TTransferApi&gt;, IApizrDownloadManager&lt;TTransferApi, IDictionary&lt;string, object&gt;&gt;, IApizrUploadManager&lt;TTransferApi&gt;, IApizrUploadManager&lt;TTransferApi, HttpResponseMessage&gt;, IApizrTransferManagerBase&lt;TTransferApi&gt;, IApizrManager where TTransferApi : ITransferApi</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">

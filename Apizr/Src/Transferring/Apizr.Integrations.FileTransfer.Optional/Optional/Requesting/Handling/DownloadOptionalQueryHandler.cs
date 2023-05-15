@@ -119,4 +119,44 @@ namespace Apizr.Optional.Requesting.Handling
             }
         }
     }
+
+    /// <summary>
+    /// The mediation handler for <see cref="DownloadWithOptionalQuery{TDownloadParams}"/>
+    /// </summary>
+    /// <typeparam name="TDownloadParams">The query parameters type</typeparam>
+    public class DownloadWithOptionalQueryHandler<TDownloadParams> :
+        RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>,
+        IRequestHandler<DownloadWithOptionalQuery<TDownloadParams>, Option<FileInfo, ApizrException>>
+    {
+        private readonly IApizrDownloadManager<IDownloadApi<TDownloadParams>, TDownloadParams> _downloadManager;
+
+        public DownloadWithOptionalQueryHandler(IApizrDownloadManager<IDownloadApi<TDownloadParams>, TDownloadParams> downloadManager)
+        {
+            _downloadManager = downloadManager;
+        }
+
+        /// <summary>
+        /// Handling the download optional request
+        /// </summary>
+        /// <param name="request">The download optional request</param>
+        /// <param name="cancellationToken">A cancellation token</param>
+        /// <returns></returns>
+        public async Task<Option<FileInfo, ApizrException>> Handle(
+            DownloadWithOptionalQuery<TDownloadParams> request, CancellationToken cancellationToken)
+        {
+            try
+            {
+                return await request
+                    .SomeNotNull(new ApizrException(
+                        new NullReferenceException($"Request {request.GetType().GetFriendlyName()} can not be null")))
+                    .MapAsync(_ =>
+                        _downloadManager.DownloadAsync(request.FileInfo, request.DownloadParams, request.OptionsBuilder))
+                    .ConfigureAwait(false);
+            }
+            catch (ApizrException e)
+            {
+                return Option.None<FileInfo, ApizrException>(e);
+            }
+        }
+    }
 }

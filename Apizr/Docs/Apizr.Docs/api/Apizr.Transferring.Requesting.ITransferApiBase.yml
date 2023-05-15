@@ -15,7 +15,7 @@ items:
   source:
     id: ITransferApiBase
     path: C:\Dev\Community\Apizr\Apizr\Src\Transferring\Apizr.Integrations.FileTransfer\Transferring\Requesting\ITransferApiBase.cs
-    startLine: 2
+    startLine: 5
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Requesting
@@ -23,15 +23,24 @@ items:
     content: >-
       [WebApi]
 
+      [Cache(CacheMode.None)]
+
       public interface ITransferApiBase
     content.vb: >-
       <WebApi>
+
+      <Cache(CacheMode.None)>
 
       Public Interface ITransferApiBase
   attributes:
   - type: Apizr.WebApiAttribute
     ctor: Apizr.WebApiAttribute.#ctor
     arguments: []
+  - type: Apizr.Caching.Attributes.CacheAttribute
+    ctor: Apizr.Caching.Attributes.CacheAttribute.#ctor(Apizr.Caching.CacheMode)
+    arguments:
+    - type: Apizr.Caching.CacheMode
+      value: 0
   modifiers.csharp:
   - public
   - interface

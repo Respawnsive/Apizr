@@ -295,6 +295,66 @@
   </table>
   
   
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_ContainsDownloadManagerWith_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.ContainsDownloadManagerWith*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_ContainsDownloadManagerWith__1_Apizr_Configuring_Registry_IApizrEnumerableRegistry_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.ContainsDownloadManagerWith``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">ContainsDownloadManagerWith&lt;TDownloadParams&gt;(IApizrEnumerableRegistry)</h4>
+  <div class="markdown level1 summary"><p>Check if registry contains a manager for <a class="xref" href="Apizr.Transferring.Requesting.IDownloadApi-1.html">IDownloadApi&lt;TDownloadParams&gt;</a> api type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool ContainsDownloadManagerWith&lt;TDownloadParams&gt;(this IApizrEnumerableRegistry registry)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry to get the manager from</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TDownloadParams</span></td>
+        <td><p>The download query parameters type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="Apizr_Extending_FileTransferRegistryExtensions_ContainsTransferManager_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.ContainsTransferManager*"></a>
   <h4 id="Apizr_Extending_FileTransferRegistryExtensions_ContainsTransferManager_Apizr_Configuring_Registry_IApizrEnumerableRegistry_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.ContainsTransferManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">ContainsTransferManager(IApizrEnumerableRegistry)</h4>
   <div class="markdown level1 summary"><p>Check if registry contains a manager for the default <a class="xref" href="Apizr.Transferring.Requesting.ITransferApi.html">ITransferApi</a> api type</p>
@@ -408,7 +468,7 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static bool ContainsTransferManagerFor&lt;TTransferApi, TDownloadParams&gt;(this IApizrEnumerableRegistry registry)
-    where TTransferApi : ITransferApi&lt;TDownloadParams&gt;</code></pre>
+    where TTransferApi : ITransferApi&lt;TDownloadParams, HttpResponseMessage&gt;, IUploadApi</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -460,6 +520,142 @@
       <tr>
         <td><span class="parametername">TDownloadParams</span></td>
         <td><p>The download query parameters type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_ContainsTransferManagerFor_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.ContainsTransferManagerFor*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_ContainsTransferManagerFor__3_Apizr_Configuring_Registry_IApizrEnumerableRegistry_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.ContainsTransferManagerFor``3(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">ContainsTransferManagerFor&lt;TTransferApi, TDownloadParams, TUploadApiResultData&gt;(IApizrEnumerableRegistry)</h4>
+  <div class="markdown level1 summary"><p>Check if registry contains a manager for <code data-dev-comment-type="typeparamref" class="typeparamref">TTransferApi</code> api type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool ContainsTransferManagerFor&lt;TTransferApi, TDownloadParams, TUploadApiResultData&gt;(this IApizrEnumerableRegistry registry)
+    where TTransferApi : ITransferApi&lt;TDownloadParams, TUploadApiResultData&gt;</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry to get the manager from</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TTransferApi</span></td>
+        <td><p>The Transfer api interface to manage</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TDownloadParams</span></td>
+        <td><p>The download query parameters type</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_ContainsTransferManagerWith_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.ContainsTransferManagerWith*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_ContainsTransferManagerWith__2_Apizr_Configuring_Registry_IApizrEnumerableRegistry_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.ContainsTransferManagerWith``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">ContainsTransferManagerWith&lt;TDownloadParams, TUploadApiResultData&gt;(IApizrEnumerableRegistry)</h4>
+  <div class="markdown level1 summary"><p>Check if registry contains a manager for <a class="xref" href="Apizr.Transferring.Requesting.ITransferApi-2.html">ITransferApi&lt;TDownloadParams, TUploadApiResultData&gt;</a> api type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool ContainsTransferManagerWith&lt;TDownloadParams, TUploadApiResultData&gt;(this IApizrEnumerableRegistry registry)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry to get the manager from</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TDownloadParams</span></td>
+        <td><p>The download query parameters type</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
 </td>
       </tr>
     </tbody>
@@ -565,6 +761,132 @@
       <tr>
         <td><span class="parametername">TUploadApi</span></td>
         <td><p>The upload api interface to manage</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_ContainsUploadManagerFor_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.ContainsUploadManagerFor*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_ContainsUploadManagerFor__2_Apizr_Configuring_Registry_IApizrEnumerableRegistry_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.ContainsUploadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">ContainsUploadManagerFor&lt;TUploadApi, TUploadApiResultData&gt;(IApizrEnumerableRegistry)</h4>
+  <div class="markdown level1 summary"><p>Check if registry contains a manager for <code data-dev-comment-type="typeparamref" class="typeparamref">TUploadApi</code> api type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool ContainsUploadManagerFor&lt;TUploadApi, TUploadApiResultData&gt;(this IApizrEnumerableRegistry registry)
+    where TUploadApi : IUploadApi&lt;TUploadApiResultData&gt;</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry to get the manager from</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TUploadApi</span></td>
+        <td><p>The upload api interface to manage</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_ContainsUploadManagerWith_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.ContainsUploadManagerWith*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_ContainsUploadManagerWith__1_Apizr_Configuring_Registry_IApizrEnumerableRegistry_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.ContainsUploadManagerWith``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">ContainsUploadManagerWith&lt;TUploadApiResultData&gt;(IApizrEnumerableRegistry)</h4>
+  <div class="markdown level1 summary"><p>Check if registry contains a manager for <a class="xref" href="Apizr.Transferring.Requesting.IUploadApi-1.html">IUploadApi&lt;TApiResultData&gt;</a> api type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool ContainsUploadManagerWith&lt;TUploadApiResultData&gt;(this IApizrEnumerableRegistry registry)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry to get the manager from</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
 </td>
       </tr>
     </tbody>
@@ -1003,6 +1325,156 @@
   </table>
   
   
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_DownloadWithAsync_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.DownloadWithAsync*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_DownloadWithAsync__1_Apizr_Configuring_Registry_IApizrEnumerableRegistry_System_IO_FileInfo___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Extending.FileTransferRegistryExtensions.DownloadWithAsync``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,System.IO.FileInfo,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">DownloadWithAsync&lt;TDownloadParams&gt;(IApizrEnumerableRegistry, FileInfo, TDownloadParams, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Download a file with custom query parameters</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;FileInfo&gt; DownloadWithAsync&lt;TDownloadParams&gt;(this IApizrEnumerableRegistry registry, FileInfo fileInfo, TDownloadParams downloadParams, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.IO.FileInfo</span></td>
+        <td><span class="parametername">fileInfo</span></td>
+        <td><p>Some information about the file to download</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">TDownloadParams</span></td>
+        <td><span class="parametername">downloadParams</span></td>
+        <td><p>Some custom query parameters</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Some request options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.IO.FileInfo</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TDownloadParams</span></td>
+        <td><p>The query parameters type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_DownloadWithAsync_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.DownloadWithAsync*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_DownloadWithAsync__1_Apizr_Configuring_Registry_IApizrEnumerableRegistry_System_IO_FileInfo_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Extending.FileTransferRegistryExtensions.DownloadWithAsync``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">DownloadWithAsync&lt;TDownloadParams&gt;(IApizrEnumerableRegistry, FileInfo, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Download a file</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;FileInfo&gt; DownloadWithAsync&lt;TDownloadParams&gt;(this IApizrEnumerableRegistry registry, FileInfo fileInfo, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.IO.FileInfo</span></td>
+        <td><span class="parametername">fileInfo</span></td>
+        <td><p>Some information about the file to download</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Some request options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.IO.FileInfo</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TDownloadParams</span></td>
+        <td><p>The query parameters type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="Apizr_Extending_FileTransferRegistryExtensions_GetDownloadManager_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.GetDownloadManager*"></a>
   <h4 id="Apizr_Extending_FileTransferRegistryExtensions_GetDownloadManager_Apizr_Configuring_Registry_IApizrEnumerableRegistry_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.GetDownloadManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">GetDownloadManager(IApizrEnumerableRegistry)</h4>
   <div class="markdown level1 summary"><p>Get a download manager instance</p>
@@ -1174,6 +1646,66 @@
   </table>
   
   
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_GetDownloadManagerWith_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.GetDownloadManagerWith*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_GetDownloadManagerWith__1_Apizr_Configuring_Registry_IApizrEnumerableRegistry_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.GetDownloadManagerWith``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">GetDownloadManagerWith&lt;TDownloadParams&gt;(IApizrEnumerableRegistry)</h4>
+  <div class="markdown level1 summary"><p>Get a download manager instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IApizrDownloadManager&lt;IDownloadApi&lt;TDownloadParams&gt;, TDownloadParams&gt; GetDownloadManagerWith&lt;TDownloadParams&gt;(this IApizrEnumerableRegistry registry)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry to get the manager from</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Transferring.Managing.IApizrDownloadManager-2.html">IApizrDownloadManager</a>&lt;<a class="xref" href="Apizr.Transferring.Requesting.IDownloadApi-1.html">IDownloadApi</a>&lt;TDownloadParams&gt;, TDownloadParams&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TDownloadParams</span></td>
+        <td><p>The download query parameters type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="Apizr_Extending_FileTransferRegistryExtensions_GetTransferManager_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.GetTransferManager*"></a>
   <h4 id="Apizr_Extending_FileTransferRegistryExtensions_GetTransferManager_Apizr_Configuring_Registry_IApizrEnumerableRegistry_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.GetTransferManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">GetTransferManager(IApizrEnumerableRegistry)</h4>
   <div class="markdown level1 summary"><p>Get a transfer manager instance</p>
@@ -1226,7 +1758,7 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static IApizrTransferManager&lt;TTransferApi&gt; GetTransferManagerFor&lt;TTransferApi&gt;(this IApizrEnumerableRegistry registry)
-    where TTransferApi : ITransferApi&lt;IDictionary&lt;string, object&gt;&gt;</code></pre>
+    where TTransferApi : ITransferApi</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1287,7 +1819,7 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static IApizrTransferManager&lt;TTransferApi, TDownloadParams&gt; GetTransferManagerFor&lt;TTransferApi, TDownloadParams&gt;(this IApizrEnumerableRegistry registry)
-    where TTransferApi : ITransferApi&lt;TDownloadParams&gt;</code></pre>
+    where TTransferApi : ITransferApi&lt;TDownloadParams, HttpResponseMessage&gt;, IUploadApi</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1339,6 +1871,142 @@
       <tr>
         <td><span class="parametername">TDownloadParams</span></td>
         <td><p>The download query parameters type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_GetTransferManagerFor_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.GetTransferManagerFor*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_GetTransferManagerFor__3_Apizr_Configuring_Registry_IApizrEnumerableRegistry_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.GetTransferManagerFor``3(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">GetTransferManagerFor&lt;TTransferApi, TDownloadParams, TUploadApiResultData&gt;(IApizrEnumerableRegistry)</h4>
+  <div class="markdown level1 summary"><p>Get a transfer manager instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IApizrTransferManager&lt;TTransferApi, TDownloadParams, TUploadApiResultData&gt; GetTransferManagerFor&lt;TTransferApi, TDownloadParams, TUploadApiResultData&gt;(this IApizrEnumerableRegistry registry)
+    where TTransferApi : ITransferApi&lt;TDownloadParams, TUploadApiResultData&gt;</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry to get the manager from</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Transferring.Managing.IApizrTransferManager-3.html">IApizrTransferManager</a>&lt;TTransferApi, TDownloadParams, TUploadApiResultData&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TTransferApi</span></td>
+        <td><p>The Transfer api interface to manage</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TDownloadParams</span></td>
+        <td><p>The download query parameters type</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_GetTransferManagerWith_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.GetTransferManagerWith*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_GetTransferManagerWith__2_Apizr_Configuring_Registry_IApizrEnumerableRegistry_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.GetTransferManagerWith``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">GetTransferManagerWith&lt;TDownloadParams, TUploadApiResultData&gt;(IApizrEnumerableRegistry)</h4>
+  <div class="markdown level1 summary"><p>Get a transfer manager instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IApizrTransferManager&lt;ITransferApi&lt;TDownloadParams, TUploadApiResultData&gt;, TDownloadParams, TUploadApiResultData&gt; GetTransferManagerWith&lt;TDownloadParams, TUploadApiResultData&gt;(this IApizrEnumerableRegistry registry)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry to get the manager from</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Transferring.Managing.IApizrTransferManager-3.html">IApizrTransferManager</a>&lt;<a class="xref" href="Apizr.Transferring.Requesting.ITransferApi-2.html">ITransferApi</a>&lt;TDownloadParams, TUploadApiResultData&gt;, TDownloadParams, TUploadApiResultData&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TDownloadParams</span></td>
+        <td><p>The download query parameters type</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
 </td>
       </tr>
     </tbody>
@@ -1444,6 +2112,132 @@
       <tr>
         <td><span class="parametername">TUploadApi</span></td>
         <td><p>The upload api interface to manage</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_GetUploadManagerFor_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.GetUploadManagerFor*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_GetUploadManagerFor__2_Apizr_Configuring_Registry_IApizrEnumerableRegistry_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.GetUploadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">GetUploadManagerFor&lt;TUploadApi, TUploadApiResultData&gt;(IApizrEnumerableRegistry)</h4>
+  <div class="markdown level1 summary"><p>Get an upload manager instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IApizrUploadManager&lt;TUploadApi, TUploadApiResultData&gt; GetUploadManagerFor&lt;TUploadApi, TUploadApiResultData&gt;(this IApizrEnumerableRegistry registry)
+    where TUploadApi : IUploadApi&lt;TUploadApiResultData&gt;</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry to get the manager from</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Transferring.Managing.IApizrUploadManager-2.html">IApizrUploadManager</a>&lt;TUploadApi, TUploadApiResultData&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TUploadApi</span></td>
+        <td><p>The upload api interface to manage</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_GetUploadManagerWith_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.GetUploadManagerWith*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_GetUploadManagerWith__1_Apizr_Configuring_Registry_IApizrEnumerableRegistry_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.GetUploadManagerWith``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">GetUploadManagerWith&lt;TUploadApiResultData&gt;(IApizrEnumerableRegistry)</h4>
+  <div class="markdown level1 summary"><p>Get an upload manager instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IApizrUploadManager&lt;IUploadApi&lt;TUploadApiResultData&gt;, TUploadApiResultData&gt; GetUploadManagerWith&lt;TUploadApiResultData&gt;(this IApizrEnumerableRegistry registry)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry to get the manager from</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Transferring.Managing.IApizrUploadManager-2.html">IApizrUploadManager</a>&lt;<a class="xref" href="Apizr.Transferring.Requesting.IUploadApi-1.html">IUploadApi</a>&lt;TUploadApiResultData&gt;, TUploadApiResultData&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
 </td>
       </tr>
     </tbody>
@@ -1639,6 +2433,72 @@
   </table>
   
   
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_TryGetDownloadManagerWith_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.TryGetDownloadManagerWith*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_TryGetDownloadManagerWith__1_Apizr_Configuring_Registry_IApizrEnumerableRegistry_Apizr_Transferring_Managing_IApizrDownloadManager_Apizr_Transferring_Requesting_IDownloadApi___0____0___" data-uid="Apizr.Extending.FileTransferRegistryExtensions.TryGetDownloadManagerWith``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.IDownloadApi{``0},``0}@)">TryGetDownloadManagerWith&lt;TDownloadParams&gt;(IApizrEnumerableRegistry, out IApizrDownloadManager&lt;IDownloadApi&lt;TDownloadParams&gt;, TDownloadParams&gt;)</h4>
+  <div class="markdown level1 summary"><p>Get a download manager instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryGetDownloadManagerWith&lt;TDownloadParams&gt;(this IApizrEnumerableRegistry registry, out IApizrDownloadManager&lt;IDownloadApi&lt;TDownloadParams&gt;, TDownloadParams&gt; manager)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry to get the manager from</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Apizr.Transferring.Managing.IApizrDownloadManager-2.html">IApizrDownloadManager</a>&lt;<a class="xref" href="Apizr.Transferring.Requesting.IDownloadApi-1.html">IDownloadApi</a>&lt;TDownloadParams&gt;, TDownloadParams&gt;</td>
+        <td><span class="parametername">manager</span></td>
+        <td><p>The download manager instance</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TDownloadParams</span></td>
+        <td><p>The download query parameters type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="Apizr_Extending_FileTransferRegistryExtensions_TryGetTransferManager_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.TryGetTransferManager*"></a>
   <h4 id="Apizr_Extending_FileTransferRegistryExtensions_TryGetTransferManager_Apizr_Configuring_Registry_IApizrEnumerableRegistry_Apizr_Transferring_Managing_IApizrTransferManager__" data-uid="Apizr.Extending.FileTransferRegistryExtensions.TryGetTransferManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrTransferManager@)">TryGetTransferManager(IApizrEnumerableRegistry, out IApizrTransferManager)</h4>
   <div class="markdown level1 summary"><p>Get a transfer manager instance</p>
@@ -1764,7 +2624,7 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static bool TryGetTransferManagerFor&lt;TTransferApi, TDownloadParams&gt;(this IApizrEnumerableRegistry registry, out IApizrTransferManager&lt;TTransferApi, TDownloadParams&gt; manager)
-    where TTransferApi : ITransferApi&lt;TDownloadParams&gt;</code></pre>
+    where TTransferApi : ITransferApi&lt;TDownloadParams, HttpResponseMessage&gt;, IUploadApi</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1822,6 +2682,154 @@
       <tr>
         <td><span class="parametername">TDownloadParams</span></td>
         <td><p>The download query parameters type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_TryGetTransferManagerFor_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.TryGetTransferManagerFor*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_TryGetTransferManagerFor__3_Apizr_Configuring_Registry_IApizrEnumerableRegistry_Apizr_Transferring_Managing_IApizrTransferManager___0___1___2___" data-uid="Apizr.Extending.FileTransferRegistryExtensions.TryGetTransferManagerFor``3(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrTransferManager{``0,``1,``2}@)">TryGetTransferManagerFor&lt;TTransferApi, TDownloadParams, TUploadApiResultData&gt;(IApizrEnumerableRegistry, out IApizrTransferManager&lt;TTransferApi, TDownloadParams, TUploadApiResultData&gt;)</h4>
+  <div class="markdown level1 summary"><p>Get a transfer manager instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryGetTransferManagerFor&lt;TTransferApi, TDownloadParams, TUploadApiResultData&gt;(this IApizrEnumerableRegistry registry, out IApizrTransferManager&lt;TTransferApi, TDownloadParams, TUploadApiResultData&gt; manager)
+    where TTransferApi : ITransferApi&lt;TDownloadParams, TUploadApiResultData&gt;</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry to get the manager from</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Apizr.Transferring.Managing.IApizrTransferManager-3.html">IApizrTransferManager</a>&lt;TTransferApi, TDownloadParams, TUploadApiResultData&gt;</td>
+        <td><span class="parametername">manager</span></td>
+        <td><p>The transfer manager instance</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TTransferApi</span></td>
+        <td><p>The Transfer api interface to manage</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TDownloadParams</span></td>
+        <td><p>The download query parameters type</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_TryGetTransferManagerWith_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.TryGetTransferManagerWith*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_TryGetTransferManagerWith__2_Apizr_Configuring_Registry_IApizrEnumerableRegistry_Apizr_Transferring_Managing_IApizrTransferManager_Apizr_Transferring_Requesting_ITransferApi___0___1____0___1___" data-uid="Apizr.Extending.FileTransferRegistryExtensions.TryGetTransferManagerWith``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrTransferManager{Apizr.Transferring.Requesting.ITransferApi{``0,``1},``0,``1}@)">TryGetTransferManagerWith&lt;TDownloadParams, TUploadApiResultData&gt;(IApizrEnumerableRegistry, out IApizrTransferManager&lt;ITransferApi&lt;TDownloadParams, TUploadApiResultData&gt;, TDownloadParams, TUploadApiResultData&gt;)</h4>
+  <div class="markdown level1 summary"><p>Get a transfer manager instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryGetTransferManagerWith&lt;TDownloadParams, TUploadApiResultData&gt;(this IApizrEnumerableRegistry registry, out IApizrTransferManager&lt;ITransferApi&lt;TDownloadParams, TUploadApiResultData&gt;, TDownloadParams, TUploadApiResultData&gt; manager)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry to get the manager from</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Apizr.Transferring.Managing.IApizrTransferManager-3.html">IApizrTransferManager</a>&lt;<a class="xref" href="Apizr.Transferring.Requesting.ITransferApi-2.html">ITransferApi</a>&lt;TDownloadParams, TUploadApiResultData&gt;, TDownloadParams, TUploadApiResultData&gt;</td>
+        <td><span class="parametername">manager</span></td>
+        <td><p>The transfer manager instance</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TDownloadParams</span></td>
+        <td><p>The download query parameters type</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
 </td>
       </tr>
     </tbody>
@@ -1945,6 +2953,144 @@
   </table>
   
   
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_TryGetUploadManagerFor_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.TryGetUploadManagerFor*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_TryGetUploadManagerFor__2_Apizr_Configuring_Registry_IApizrEnumerableRegistry_Apizr_Transferring_Managing_IApizrUploadManager___0___1___" data-uid="Apizr.Extending.FileTransferRegistryExtensions.TryGetUploadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrUploadManager{``0,``1}@)">TryGetUploadManagerFor&lt;TUploadApi, TUploadApiResultData&gt;(IApizrEnumerableRegistry, out IApizrUploadManager&lt;TUploadApi, TUploadApiResultData&gt;)</h4>
+  <div class="markdown level1 summary"><p>Get an upload manager instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryGetUploadManagerFor&lt;TUploadApi, TUploadApiResultData&gt;(this IApizrEnumerableRegistry registry, out IApizrUploadManager&lt;TUploadApi, TUploadApiResultData&gt; manager)
+    where TUploadApi : IUploadApi&lt;TUploadApiResultData&gt;</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry to get the manager from</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Apizr.Transferring.Managing.IApizrUploadManager-2.html">IApizrUploadManager</a>&lt;TUploadApi, TUploadApiResultData&gt;</td>
+        <td><span class="parametername">manager</span></td>
+        <td><p>The upload manager instance</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TUploadApi</span></td>
+        <td><p>The upload api interface to manage</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_TryGetUploadManagerWith_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.TryGetUploadManagerWith*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_TryGetUploadManagerWith__1_Apizr_Configuring_Registry_IApizrEnumerableRegistry_Apizr_Transferring_Managing_IApizrUploadManager_Apizr_Transferring_Requesting_IUploadApi___0____0___" data-uid="Apizr.Extending.FileTransferRegistryExtensions.TryGetUploadManagerWith``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi{``0},``0}@)">TryGetUploadManagerWith&lt;TUploadApiResultData&gt;(IApizrEnumerableRegistry, out IApizrUploadManager&lt;IUploadApi&lt;TUploadApiResultData&gt;, TUploadApiResultData&gt;)</h4>
+  <div class="markdown level1 summary"><p>Get an upload manager instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryGetUploadManagerWith&lt;TUploadApiResultData&gt;(this IApizrEnumerableRegistry registry, out IApizrUploadManager&lt;IUploadApi&lt;TUploadApiResultData&gt;, TUploadApiResultData&gt; manager)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry to get the manager from</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Apizr.Transferring.Managing.IApizrUploadManager-2.html">IApizrUploadManager</a>&lt;<a class="xref" href="Apizr.Transferring.Requesting.IUploadApi-1.html">IUploadApi</a>&lt;TUploadApiResultData&gt;, TUploadApiResultData&gt;</td>
+        <td><span class="parametername">manager</span></td>
+        <td><p>The upload manager instance</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="Apizr_Extending_FileTransferRegistryExtensions_UploadAsync_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.UploadAsync*"></a>
   <h4 id="Apizr_Extending_FileTransferRegistryExtensions_UploadAsync_Apizr_Configuring_Registry_IApizrEnumerableRegistry_Refit_ByteArrayPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Extending.FileTransferRegistryExtensions.UploadAsync(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">UploadAsync(IApizrEnumerableRegistry, ByteArrayPart, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
   <div class="markdown level1 summary"><p>Upload a file from its bytes data</p>
@@ -1952,7 +3098,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Task UploadAsync(this IApizrEnumerableRegistry registry, ByteArrayPart byteArrayPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Task&lt;HttpResponseMessage&gt; UploadAsync(this IApizrEnumerableRegistry registry, ByteArrayPart byteArrayPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1994,7 +3140,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.Net.Http.HttpResponseMessage</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -2008,7 +3154,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Task UploadAsync(this IApizrEnumerableRegistry registry, FileInfoPart fileInfoPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Task&lt;HttpResponseMessage&gt; UploadAsync(this IApizrEnumerableRegistry registry, FileInfoPart fileInfoPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2050,7 +3196,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.Net.Http.HttpResponseMessage</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -2064,7 +3210,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Task UploadAsync(this IApizrEnumerableRegistry registry, StreamPart streamPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Task&lt;HttpResponseMessage&gt; UploadAsync(this IApizrEnumerableRegistry registry, StreamPart streamPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2106,7 +3252,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.Net.Http.HttpResponseMessage</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -2120,7 +3266,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Task UploadAsync&lt;TUploadApi&gt;(this IApizrEnumerableRegistry registry, ByteArrayPart byteArrayPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)
+    <pre><code class="lang-csharp hljs">public static Task&lt;HttpResponseMessage&gt; UploadAsync&lt;TUploadApi&gt;(this IApizrEnumerableRegistry registry, ByteArrayPart byteArrayPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)
     where TUploadApi : IUploadApi</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -2163,7 +3309,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.Net.Http.HttpResponseMessage</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -2193,7 +3339,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Task UploadAsync&lt;TUploadApi&gt;(this IApizrEnumerableRegistry registry, FileInfoPart fileInfoPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)
+    <pre><code class="lang-csharp hljs">public static Task&lt;HttpResponseMessage&gt; UploadAsync&lt;TUploadApi&gt;(this IApizrEnumerableRegistry registry, FileInfoPart fileInfoPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)
     where TUploadApi : IUploadApi</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -2236,7 +3382,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.Net.Http.HttpResponseMessage</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -2266,7 +3412,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Task UploadAsync&lt;TUploadApi&gt;(this IApizrEnumerableRegistry registry, StreamPart streamPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)
+    <pre><code class="lang-csharp hljs">public static Task&lt;HttpResponseMessage&gt; UploadAsync&lt;TUploadApi&gt;(this IApizrEnumerableRegistry registry, StreamPart streamPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)
     where TUploadApi : IUploadApi</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -2309,7 +3455,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.Net.Http.HttpResponseMessage</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -2326,6 +3472,456 @@
       <tr>
         <td><span class="parametername">TUploadApi</span></td>
         <td><p>The upload api type to manage</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_UploadAsync_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.UploadAsync*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_UploadAsync__2_Apizr_Configuring_Registry_IApizrEnumerableRegistry_Refit_ByteArrayPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Extending.FileTransferRegistryExtensions.UploadAsync``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">UploadAsync&lt;TUploadApi, TUploadApiResultData&gt;(IApizrEnumerableRegistry, ByteArrayPart, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Upload a file from its bytes data</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;TUploadApiResultData&gt; UploadAsync&lt;TUploadApi, TUploadApiResultData&gt;(this IApizrEnumerableRegistry registry, ByteArrayPart byteArrayPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)
+    where TUploadApi : IUploadApi&lt;TUploadApiResultData&gt;</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Refit.ByteArrayPart</span></td>
+        <td><span class="parametername">byteArrayPart</span></td>
+        <td><p>The file bytes data</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Some request options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TUploadApiResultData&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TUploadApi</span></td>
+        <td><p>The upload api type to manage</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_UploadAsync_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.UploadAsync*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_UploadAsync__2_Apizr_Configuring_Registry_IApizrEnumerableRegistry_Refit_FileInfoPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Extending.FileTransferRegistryExtensions.UploadAsync``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">UploadAsync&lt;TUploadApi, TUploadApiResultData&gt;(IApizrEnumerableRegistry, FileInfoPart, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Upload a file from its file info data</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;TUploadApiResultData&gt; UploadAsync&lt;TUploadApi, TUploadApiResultData&gt;(this IApizrEnumerableRegistry registry, FileInfoPart fileInfoPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)
+    where TUploadApi : IUploadApi&lt;TUploadApiResultData&gt;</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Refit.FileInfoPart</span></td>
+        <td><span class="parametername">fileInfoPart</span></td>
+        <td><p>The file info data</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Some request options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TUploadApiResultData&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TUploadApi</span></td>
+        <td><p>The upload api type to manage</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_UploadAsync_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.UploadAsync*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_UploadAsync__2_Apizr_Configuring_Registry_IApizrEnumerableRegistry_Refit_StreamPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Extending.FileTransferRegistryExtensions.UploadAsync``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">UploadAsync&lt;TUploadApi, TUploadApiResultData&gt;(IApizrEnumerableRegistry, StreamPart, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Upload a file from its stream data</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;TUploadApiResultData&gt; UploadAsync&lt;TUploadApi, TUploadApiResultData&gt;(this IApizrEnumerableRegistry registry, StreamPart streamPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)
+    where TUploadApi : IUploadApi&lt;TUploadApiResultData&gt;</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Refit.StreamPart</span></td>
+        <td><span class="parametername">streamPart</span></td>
+        <td><p>The file stream data</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Some request options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TUploadApiResultData&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TUploadApi</span></td>
+        <td><p>The upload api type to manage</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_UploadWithAsync_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.UploadWithAsync*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_UploadWithAsync__1_Apizr_Configuring_Registry_IApizrEnumerableRegistry_Refit_ByteArrayPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Extending.FileTransferRegistryExtensions.UploadWithAsync``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">UploadWithAsync&lt;TUploadApiResultData&gt;(IApizrEnumerableRegistry, ByteArrayPart, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Upload a file from its bytes data</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;TUploadApiResultData&gt; UploadWithAsync&lt;TUploadApiResultData&gt;(this IApizrEnumerableRegistry registry, ByteArrayPart byteArrayPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Refit.ByteArrayPart</span></td>
+        <td><span class="parametername">byteArrayPart</span></td>
+        <td><p>The file bytes data</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Some request options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TUploadApiResultData&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_UploadWithAsync_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.UploadWithAsync*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_UploadWithAsync__1_Apizr_Configuring_Registry_IApizrEnumerableRegistry_Refit_FileInfoPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Extending.FileTransferRegistryExtensions.UploadWithAsync``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">UploadWithAsync&lt;TUploadApiResultData&gt;(IApizrEnumerableRegistry, FileInfoPart, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Upload a file from its file info data</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;TUploadApiResultData&gt; UploadWithAsync&lt;TUploadApiResultData&gt;(this IApizrEnumerableRegistry registry, FileInfoPart fileInfoPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Refit.FileInfoPart</span></td>
+        <td><span class="parametername">fileInfoPart</span></td>
+        <td><p>The file info data</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Some request options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TUploadApiResultData&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Apizr_Extending_FileTransferRegistryExtensions_UploadWithAsync_" data-uid="Apizr.Extending.FileTransferRegistryExtensions.UploadWithAsync*"></a>
+  <h4 id="Apizr_Extending_FileTransferRegistryExtensions_UploadWithAsync__1_Apizr_Configuring_Registry_IApizrEnumerableRegistry_Refit_StreamPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Extending.FileTransferRegistryExtensions.UploadWithAsync``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">UploadWithAsync&lt;TUploadApiResultData&gt;(IApizrEnumerableRegistry, StreamPart, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+  <div class="markdown level1 summary"><p>Upload a file from its stream data</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;TUploadApiResultData&gt; UploadWithAsync&lt;TUploadApiResultData&gt;(this IApizrEnumerableRegistry registry, StreamPart streamPart, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrEnumerableRegistry.html">IApizrEnumerableRegistry</a></td>
+        <td><span class="parametername">registry</span></td>
+        <td><p>The registry</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Refit.StreamPart</span></td>
+        <td><span class="parametername">streamPart</span></td>
+        <td><p>The file stream data</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
+        <td><span class="parametername">optionsBuilder</span></td>
+        <td><p>Some request options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TUploadApiResultData&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TUploadApiResultData</span></td>
+        <td><p>The upload api return type</p>
 </td>
       </tr>
     </tbody>

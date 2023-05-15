@@ -93,8 +93,8 @@
   </div>
   <div class="implements">
     <h5>Implements</h5>
-    <div><span class="xref">MediatR.IRequestHandler</span>&lt;<a class="xref" href="Apizr.Optional.Requesting.UploadOptionalCommand-1.html">UploadOptionalCommand</a>&lt;TUploadApi&gt;, <span class="xref">Optional.Option</span>&lt;<span class="xref">MediatR.Unit</span>, <a class="xref" href="Apizr.ApizrException.html">ApizrException</a>&gt;&gt;</div>
-    <div><span class="xref">MediatR.IRequestHandler</span>&lt;<a class="xref" href="Apizr.Optional.Requesting.UploadOptionalCommand.html">UploadOptionalCommand</a>, <span class="xref">Optional.Option</span>&lt;<span class="xref">MediatR.Unit</span>, <a class="xref" href="Apizr.ApizrException.html">ApizrException</a>&gt;&gt;</div>
+    <div><span class="xref">MediatR.IRequestHandler</span>&lt;<a class="xref" href="Apizr.Optional.Requesting.UploadOptionalCommand-1.html">UploadOptionalCommand</a>&lt;TUploadApi&gt;, <span class="xref">Optional.Option</span>&lt;<span class="xref">System.Net.Http.HttpResponseMessage</span>, <a class="xref" href="Apizr.ApizrException.html">ApizrException</a>&gt;&gt;</div>
+    <div><span class="xref">MediatR.IRequestHandler</span>&lt;<a class="xref" href="Apizr.Optional.Requesting.UploadOptionalCommand.html">UploadOptionalCommand</a>, <span class="xref">Optional.Option</span>&lt;<span class="xref">System.Net.Http.HttpResponseMessage</span>, <a class="xref" href="Apizr.ApizrException.html">ApizrException</a>&gt;&gt;</div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -124,7 +124,7 @@
   <h6><strong>Assembly</strong>: Apizr.Integrations.FileTransfer.Optional.dll</h6>
   <h5 id="Apizr_Optional_Requesting_Handling_UploadOptionalCommandHandler_1_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class UploadOptionalCommandHandler&lt;TUploadApi&gt; : RequestHandlerBase&lt;IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;, IRequestHandler&lt;UploadOptionalCommand&lt;TUploadApi&gt;, Option&lt;Unit, ApizrException&gt;&gt;, IRequestHandler&lt;UploadOptionalCommand, Option&lt;Unit, ApizrException&gt;&gt; where TUploadApi : IUploadApi</code></pre>
+    <pre><code class="lang-csharp hljs">public class UploadOptionalCommandHandler&lt;TUploadApi&gt; : RequestHandlerBase&lt;IApizrRequestOptions, IApizrRequestOptionsBuilder&gt;, IRequestHandler&lt;UploadOptionalCommand&lt;TUploadApi&gt;, Option&lt;HttpResponseMessage, ApizrException&gt;&gt;, IRequestHandler&lt;UploadOptionalCommand, Option&lt;HttpResponseMessage, ApizrException&gt;&gt; where TUploadApi : IUploadApi</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -181,7 +181,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task&lt;Option&lt;Unit, ApizrException&gt;&gt; Handle(UploadOptionalCommand request, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public async Task&lt;Option&lt;HttpResponseMessage, ApizrException&gt;&gt; Handle(UploadOptionalCommand request, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -217,7 +217,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Optional.Option</span>&lt;<span class="xref">MediatR.Unit</span>, <a class="xref" href="Apizr.ApizrException.html">ApizrException</a>&gt;&gt;</td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Optional.Option</span>&lt;<span class="xref">System.Net.Http.HttpResponseMessage</span>, <a class="xref" href="Apizr.ApizrException.html">ApizrException</a>&gt;&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -231,7 +231,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task&lt;Option&lt;Unit, ApizrException&gt;&gt; Handle(UploadOptionalCommand&lt;TUploadApi&gt; request, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public async Task&lt;Option&lt;HttpResponseMessage, ApizrException&gt;&gt; Handle(UploadOptionalCommand&lt;TUploadApi&gt; request, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -267,7 +267,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Optional.Option</span>&lt;<span class="xref">MediatR.Unit</span>, <a class="xref" href="Apizr.ApizrException.html">ApizrException</a>&gt;&gt;</td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Optional.Option</span>&lt;<span class="xref">System.Net.Http.HttpResponseMessage</span>, <a class="xref" href="Apizr.ApizrException.html">ApizrException</a>&gt;&gt;</td>
         <td></td>
       </tr>
     </tbody>

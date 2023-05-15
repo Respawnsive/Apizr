@@ -19,6 +19,23 @@
             <param name="registry">The registry to get the manager from</param>
             <returns></returns>
         </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.GetUploadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">
+            <summary>
+            Get an upload manager instance
+            </summary>
+            <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+            <param name="registry">The registry to get the manager from</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.GetUploadManagerWith``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">
+            <summary>
+            Get an upload manager instance
+            </summary>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+            <param name="registry">The registry to get the manager from</param>
+            <returns></returns>
+        </member>
         <member name="M:Apizr.Extending.FileTransferRegistryExtensions.GetDownloadManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">
             <summary>
             Get a download manager instance
@@ -39,6 +56,14 @@
             Get a download manager instance
             </summary>
             <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
+            <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+            <param name="registry">The registry to get the manager from</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.GetDownloadManagerWith``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">
+            <summary>
+            Get a download manager instance
+            </summary>
             <typeparam name="TDownloadParams">The download query parameters type</typeparam>
             <param name="registry">The registry to get the manager from</param>
             <returns></returns>
@@ -67,6 +92,25 @@
             <param name="registry">The registry to get the manager from</param>
             <returns></returns>
         </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.GetTransferManagerFor``3(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">
+            <summary>
+            Get a transfer manager instance
+            </summary>
+            <typeparam name="TTransferApi">The Transfer api interface to manage</typeparam>
+            <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+            <param name="registry">The registry to get the manager from</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.GetTransferManagerWith``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">
+            <summary>
+            Get a transfer manager instance
+            </summary>
+            <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+            <param name="registry">The registry to get the manager from</param>
+            <returns></returns>
+        </member>
         <member name="M:Apizr.Extending.FileTransferRegistryExtensions.TryGetUploadManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrUploadManager@)">
             <summary>
             Get an upload manager instance
@@ -80,6 +124,25 @@
             Get an upload manager instance
             </summary>
             <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
+            <param name="registry">The registry to get the manager from</param>
+            <param name="manager">The upload manager instance</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.TryGetUploadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrUploadManager{``0,``1}@)">
+            <summary>
+            Get an upload manager instance
+            </summary>
+            <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+            <param name="registry">The registry to get the manager from</param>
+            <param name="manager">The upload manager instance</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.TryGetUploadManagerWith``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi{``0},``0}@)">
+            <summary>
+            Get an upload manager instance
+            </summary>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
             <param name="registry">The registry to get the manager from</param>
             <param name="manager">The upload manager instance</param>
             <returns></returns>
@@ -106,6 +169,15 @@
             Get a download manager instance
             </summary>
             <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
+            <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+            <param name="registry">The registry to get the manager from</param>
+            <param name="manager">The download manager instance</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.TryGetDownloadManagerWith``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.IDownloadApi{``0},``0}@)">
+            <summary>
+            Get a download manager instance
+            </summary>
             <typeparam name="TDownloadParams">The download query parameters type</typeparam>
             <param name="registry">The registry to get the manager from</param>
             <param name="manager">The download manager instance</param>
@@ -138,6 +210,27 @@
             <param name="manager">The transfer manager instance</param>
             <returns></returns>
         </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.TryGetTransferManagerFor``3(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrTransferManager{``0,``1,``2}@)">
+            <summary>
+            Get a transfer manager instance
+            </summary>
+            <typeparam name="TTransferApi">The Transfer api interface to manage</typeparam>
+            <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+            <param name="registry">The registry to get the manager from</param>
+            <param name="manager">The transfer manager instance</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.TryGetTransferManagerWith``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Apizr.Transferring.Managing.IApizrTransferManager{Apizr.Transferring.Requesting.ITransferApi{``0,``1},``0,``1}@)">
+            <summary>
+            Get a transfer manager instance
+            </summary>
+            <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+            <param name="registry">The registry to get the manager from</param>
+            <param name="manager">The transfer manager instance</param>
+            <returns></returns>
+        </member>
         <member name="M:Apizr.Extending.FileTransferRegistryExtensions.ContainsUploadManager(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">
             <summary>
             Check if registry contains a manager for the default <see cref="T:Apizr.Transferring.Requesting.IUploadApi"/> api type
@@ -150,6 +243,23 @@
             Check if registry contains a manager for <typeparamref name="TUploadApi"/> api type
             </summary>
             <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
+            <param name="registry">The registry to get the manager from</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.ContainsUploadManagerFor``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">
+            <summary>
+            Check if registry contains a manager for <typeparamref name="TUploadApi"/> api type
+            </summary>
+            <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+            <param name="registry">The registry to get the manager from</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.ContainsUploadManagerWith``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">
+            <summary>
+            Check if registry contains a manager for <see cref="T:Apizr.Transferring.Requesting.IUploadApi`1"/> api type
+            </summary>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
             <param name="registry">The registry to get the manager from</param>
             <returns></returns>
         </member>
@@ -173,6 +283,14 @@
             Check if registry contains a manager for <typeparamref name="TDownloadApi"/> api type
             </summary>
             <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
+            <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+            <param name="registry">The registry to get the manager from</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.ContainsDownloadManagerWith``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">
+            <summary>
+            Check if registry contains a manager for <see cref="T:Apizr.Transferring.Requesting.IDownloadApi`1"/> api type
+            </summary>
             <typeparam name="TDownloadParams">The download query parameters type</typeparam>
             <param name="registry">The registry to get the manager from</param>
             <returns></returns>
@@ -201,6 +319,25 @@
             <param name="registry">The registry to get the manager from</param>
             <returns></returns>
         </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.ContainsTransferManagerFor``3(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">
+            <summary>
+            Check if registry contains a manager for <typeparamref name="TTransferApi"/> api type
+            </summary>
+            <typeparam name="TTransferApi">The Transfer api interface to manage</typeparam>
+            <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+            <param name="registry">The registry to get the manager from</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.ContainsTransferManagerWith``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry)">
+            <summary>
+            Check if registry contains a manager for <see cref="T:Apizr.Transferring.Requesting.ITransferApi`2"/> api type
+            </summary>
+            <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+            <param name="registry">The registry to get the manager from</param>
+            <returns></returns>
+        </member>
         <member name="M:Apizr.Extending.FileTransferRegistryExtensions.UploadAsync(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <summary>
             Upload a file from its bytes data
@@ -215,6 +352,17 @@
             Upload a file from its bytes data
             </summary>
             <typeparam name="TUploadApi">The upload api type to manage</typeparam>
+            <param name="registry">The registry</param>
+            <param name="byteArrayPart">The file bytes data</param>
+            <param name="optionsBuilder">Some request options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.UploadAsync``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Upload a file from its bytes data
+            </summary>
+            <typeparam name="TUploadApi">The upload api type to manage</typeparam>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
             <param name="registry">The registry</param>
             <param name="byteArrayPart">The file bytes data</param>
             <param name="optionsBuilder">Some request options</param>
@@ -239,6 +387,17 @@
             <param name="optionsBuilder">Some request options</param>
             <returns></returns>
         </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.UploadAsync``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Upload a file from its stream data
+            </summary>
+            <typeparam name="TUploadApi">The upload api type to manage</typeparam>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+            <param name="registry">The registry</param>
+            <param name="streamPart">The file stream data</param>
+            <param name="optionsBuilder">Some request options</param>
+            <returns></returns>
+        </member>
         <member name="M:Apizr.Extending.FileTransferRegistryExtensions.UploadAsync(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <summary>
             Upload a file from its file info data
@@ -253,6 +412,47 @@
             Upload a file from its file info data
             </summary>
             <typeparam name="TUploadApi">The upload api type to manage</typeparam>
+            <param name="registry">The registry</param>
+            <param name="fileInfoPart">The file info data</param>
+            <param name="optionsBuilder">Some request options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.UploadAsync``2(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Upload a file from its file info data
+            </summary>
+            <typeparam name="TUploadApi">The upload api type to manage</typeparam>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+            <param name="registry">The registry</param>
+            <param name="fileInfoPart">The file info data</param>
+            <param name="optionsBuilder">Some request options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.UploadWithAsync``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Upload a file from its bytes data
+            </summary>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+            <param name="registry">The registry</param>
+            <param name="byteArrayPart">The file bytes data</param>
+            <param name="optionsBuilder">Some request options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.UploadWithAsync``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Upload a file from its stream data
+            </summary>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+            <param name="registry">The registry</param>
+            <param name="streamPart">The file stream data</param>
+            <param name="optionsBuilder">Some request options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.UploadWithAsync``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Upload a file from its file info data
+            </summary>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
             <param name="registry">The registry</param>
             <param name="fileInfoPart">The file info data</param>
             <param name="optionsBuilder">Some request options</param>
@@ -321,6 +521,27 @@
             <param name="optionsBuilder">Some request options</param>
             <returns></returns>
         </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.DownloadWithAsync``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Download a file
+            </summary>
+            <typeparam name="TDownloadParams">The query parameters type</typeparam>
+            <param name="registry">The registry</param>
+            <param name="fileInfo">Some information about the file to download</param>
+            <param name="optionsBuilder">Some request options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.FileTransferRegistryExtensions.DownloadWithAsync``1(Apizr.Configuring.Registry.IApizrEnumerableRegistry,System.IO.FileInfo,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <summary>
+            Download a file with custom query parameters
+            </summary>
+            <typeparam name="TDownloadParams">The query parameters type</typeparam>
+            <param name="registry">The registry</param>
+            <param name="fileInfo">Some information about the file to download</param>
+            <param name="downloadParams">Some custom query parameters</param>
+            <param name="optionsBuilder">Some request options</param>
+            <returns></returns>
+        </member>
         <member name="T:Apizr.FileTransferOptionsBuilderExtensions">
             <summary>
             File transfer builder extensions
@@ -339,6 +560,25 @@
             Create an upload manager for the provided upload api derived from IUploadApi
             </summary>
             <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
+            <param name="builder">The builder to create the manager from</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferOptionsBuilderExtensions.CreateUploadManagerFor``2(Apizr.IApizrBuilder,System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+            <summary>
+            Create an upload manager for the provided upload api derived from IUploadApi
+            </summary>
+            <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
+            <typeparam name="TUploadApiResultData">The upload api result type</typeparam>
+            <param name="builder">The builder to create the manager from</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferOptionsBuilderExtensions.CreateUploadManagerWith``1(Apizr.IApizrBuilder,System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+            <summary>
+            Create an upload manager for the built-in upload api with <typeparamref name="TUploadApiResultData"/>
+            </summary>
+            <typeparam name="TUploadApiResultData">The upload api result type</typeparam>
             <param name="builder">The builder to create the manager from</param>
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
@@ -365,6 +605,15 @@
             Create a download manager for the provided download api derived from IDownloadApi{TDownloadParams}
             </summary>
             <typeparam name="TDownloadApi">The download api interface to manage</typeparam>
+            <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+            <param name="builder">The builder to create the manager from</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferOptionsBuilderExtensions.CreateDownloadManagerWith``1(Apizr.IApizrBuilder,System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+            <summary>
+            Create a download manager for the built-in download api with <typeparamref name="TDownloadParams"/>
+            </summary>
             <typeparam name="TDownloadParams">The download query parameters type</typeparam>
             <param name="builder">The builder to create the manager from</param>
             <param name="optionsBuilder">The builder defining some options</param>
@@ -397,9 +646,30 @@
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
         </member>
+        <member name="M:Apizr.FileTransferOptionsBuilderExtensions.CreateTransferManagerFor``3(Apizr.IApizrBuilder,System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+            <summary>
+            Create a transfer manager for the provided transfer api derived from ITransferApi{TDownloadParams}
+            </summary>
+            <typeparam name="TTransferApi">The transfer api interface to manage</typeparam>
+            <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+            <typeparam name="TUploadApiResultData">The upload api result type</typeparam>
+            <param name="builder">The builder to create the manager from</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferOptionsBuilderExtensions.CreateTransferManagerWith``2(Apizr.IApizrBuilder,System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+            <summary>
+            Create a transfer manager for the built-in transfer api with <typeparamref name="TDownloadParams"/> and <typeparamref name="TUploadApiResultData"/>
+            </summary>
+            <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+            <typeparam name="TUploadApiResultData">The upload api result type</typeparam>
+            <param name="builder">The builder to create the manager from</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
         <member name="M:Apizr.FileTransferOptionsBuilderExtensions.AddUploadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
             <summary>
-            Add an upload manager for IUploadApi (you must at least provide a base url)
+            Add an upload manager for IUploadApi
             </summary>
             <param name="builder">The builder to create the manager from</param>
             <param name="optionsBuilder">The builder defining some options</param>
@@ -414,9 +684,28 @@
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
         </member>
+        <member name="M:Apizr.FileTransferOptionsBuilderExtensions.AddUploadManagerFor``2(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
+            <summary>
+            Add an upload manager for the provided upload api derived from IUploadApi
+            </summary>
+            <typeparam name="TUploadApi">The upload api interface to manage</typeparam>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+            <param name="builder">The builder to create the manager from</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferOptionsBuilderExtensions.AddUploadManagerWith``1(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
+            <summary>
+            Add an upload manager for the built-in upload api with <typeparamref name="TUploadApiResultData"/>
+            </summary>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+            <param name="builder">The builder to create the manager from</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
         <member name="M:Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
             <summary>
-            Add a download manager for IDownloadApi (you must at least provide a base url)
+            Add a download manager for IDownloadApi
             </summary>
             <param name="builder">The builder to create the manager from</param>
             <param name="optionsBuilder">The builder defining some options</param>
@@ -441,9 +730,18 @@
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
         </member>
+        <member name="M:Apizr.FileTransferOptionsBuilderExtensions.AddDownloadManagerWith``1(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
+            <summary>
+            Add a download manager for the built-in download api with <typeparamref name="TDownloadParams"/>
+            </summary>
+            <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+            <param name="builder">The builder to create the manager from</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
         <member name="M:Apizr.FileTransferOptionsBuilderExtensions.AddTransferManager(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
             <summary>
-            Add a transfer manager for ITransferApi (you must at least provide a base url)
+            Add a transfer manager for ITransferApi
             </summary>
             <param name="builder">The builder to create the manager from</param>
             <param name="optionsBuilder">The builder defining some options</param>
@@ -464,6 +762,27 @@
             </summary>
             <typeparam name="TTransferApi">The transfer api interface to manage</typeparam>
             <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+            <param name="builder">The builder to create the manager from</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferOptionsBuilderExtensions.AddTransferManagerFor``3(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
+            <summary>
+            Add a transfer manager for the provided transfer api derived from ITransferApi{TDownloadParams}
+            </summary>
+            <typeparam name="TTransferApi">The transfer api interface to manage</typeparam>
+            <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
+            <param name="builder">The builder to create the manager from</param>
+            <param name="optionsBuilder">The builder defining some options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.FileTransferOptionsBuilderExtensions.AddTransferManagerWith``2(Apizr.Configuring.Registry.IApizrRegistryBuilder,System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
+            <summary>
+            Add a transfer manager for the built-in transfer api with <typeparamref name="TDownloadParams"/> and <typeparamref name="TUploadApiResultData"/>
+            </summary>
+            <typeparam name="TDownloadParams">The download query parameters type</typeparam>
+            <typeparam name="TUploadApiResultData">The upload api return type</typeparam>
             <param name="builder">The builder to create the manager from</param>
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
@@ -622,6 +941,21 @@
         <member name="M:Apizr.Transferring.Managing.ApizrDownloadManager.#ctor(Apizr.IApizrManager{Apizr.Transferring.Requesting.IDownloadApi})">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Transferring.Managing.ApizrTransferManager`3.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Transferring.Managing.ApizrTransferManager`3.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Transferring.Managing.ApizrTransferManager`3.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Transferring.Managing.ApizrTransferManager`3.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Transferring.Managing.ApizrTransferManager`3.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Transferring.Managing.ApizrTransferManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <inheritdoc />
         </member>
@@ -643,13 +977,16 @@
         <member name="M:Apizr.Transferring.Managing.ApizrTransferManager.#ctor(Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.ITransferApi},Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.ITransferApi})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Transferring.Managing.ApizrUploadManager`1.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+        <member name="M:Apizr.Transferring.Managing.ApizrUploadManager`2.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Transferring.Managing.ApizrUploadManager`1.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+        <member name="M:Apizr.Transferring.Managing.ApizrUploadManager`2.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Transferring.Managing.ApizrUploadManager`1.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+        <member name="M:Apizr.Transferring.Managing.ApizrUploadManager`2.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Transferring.Managing.ApizrUploadManager`1.#ctor(Apizr.IApizrManager{`0})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Transferring.Managing.ApizrUploadManager.#ctor(Apizr.IApizrManager{Apizr.Transferring.Requesting.IUploadApi})">
@@ -690,26 +1027,40 @@
             The download manager with a dictionary query parameters type
             </summary>
         </member>
+        <member name="T:Apizr.Transferring.Managing.IApizrTransferManager`3">
+            <summary>
+            The transfer manager to work with both downloads and uploads and with a custom download query parameters type and no result
+            </summary>
+            <typeparam name="TTransferApi">The transfer api type to manage</typeparam>
+            <typeparam name="TDownloadParams">The custom query parameters type</typeparam>
+            <typeparam name="TUploadApiResultData">The transfer api result type</typeparam>
+        </member>
         <member name="T:Apizr.Transferring.Managing.IApizrTransferManager`2">
             <summary>
-            The transfer manager to work with both downloads and uploads and with a custom query parameters type
+            The transfer manager to work with both downloads and uploads and with a custom download query parameters type and no result
             </summary>
             <typeparam name="TTransferApi">The transfer api type to manage</typeparam>
             <typeparam name="TDownloadParams">The custom query parameters type</typeparam>
         </member>
         <member name="T:Apizr.Transferring.Managing.IApizrTransferManager`1">
             <summary>
-            The transfer manager to work with both downloads and uploads and with a dictionary query parameters type
+            The transfer manager to work with both downloads and uploads and with a dictionary query parameters type and no result
             </summary>
             <typeparam name="TTransferApi">The transfer api type to manage</typeparam>
         </member>
-        <member name="T:Apizr.Transferring.Managing.IApizrUploadManager`1">
+        <member name="T:Apizr.Transferring.Managing.IApizrTransferManager">
+            <summary>
+            The transfer manager to work with both downloads and uploads and with a dictionary query parameters type and no result
+            </summary>
+        </member>
+        <member name="T:Apizr.Transferring.Managing.IApizrUploadManager`2">
             <summary>
             The upload manager
             </summary>
             <typeparam name="TUploadApi">The upload api type to manage</typeparam>
+            <typeparam name="TUploadApiResultData">The upload api result type</typeparam>
         </member>
-        <member name="M:Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+        <member name="M:Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <summary>
             Upload a file from its bytes data
             </summary>
@@ -717,7 +1068,7 @@
             <param name="optionsBuilder">Some request options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+        <member name="M:Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <summary>
             Upload a file from its stream data
             </summary>
@@ -725,13 +1076,19 @@
             <param name="optionsBuilder">Some request options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Transferring.Managing.IApizrUploadManager`1.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+        <member name="M:Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <summary>
             Upload a file from its file info data
             </summary>
             <param name="fileInfoPart">The file info data</param>
             <param name="optionsBuilder">Some request options</param>
             <returns></returns>
+        </member>
+        <member name="T:Apizr.Transferring.Managing.IApizrUploadManager`1">
+            <summary>
+            The upload manager
+            </summary>
+            <typeparam name="TUploadApi">The upload api type to manage</typeparam>
         </member>
         <member name="T:Apizr.Transferring.Managing.IApizrUploadManager">
             <summary>
@@ -774,85 +1131,85 @@
         <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIDownloadApi`1.Apizr#Transferring#Requesting#IDownloadApi{TDownloadParams}#DownloadAsync(System.String,`0,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="T:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi">
+        <member name="T:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1">
             <inheritdoc />
         </member>
-        <member name="P:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Client">
+        <member name="P:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.Client">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.#ctor(System.Net.Http.HttpClient,Refit.IRequestBuilder)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.#ctor(System.Net.Http.HttpClient,Refit.IRequestBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.UploadAsync(Refit.ByteArrayPart)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.UploadAsync(Refit.ByteArrayPart)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.UploadAsync(Refit.ByteArrayPart,System.String)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.UploadAsync(Refit.ByteArrayPart,System.String)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.UploadAsync(Refit.StreamPart)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.UploadAsync(Refit.StreamPart)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.UploadAsync(Refit.StreamPart,System.String)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.UploadAsync(Refit.StreamPart,System.String)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.UploadAsync(Refit.FileInfoPart)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.UploadAsync(Refit.FileInfoPart)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.UploadAsync(Refit.FileInfoPart,System.String)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.UploadAsync(Refit.FileInfoPart,System.String)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.ByteArrayPart)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.Apizr#Transferring#Requesting#IUploadApi{TApiResultData}#UploadAsync(Refit.ByteArrayPart)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.ByteArrayPart,System.String)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.Apizr#Transferring#Requesting#IUploadApi{TApiResultData}#UploadAsync(Refit.ByteArrayPart,System.String)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.Apizr#Transferring#Requesting#IUploadApi{TApiResultData}#UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.Apizr#Transferring#Requesting#IUploadApi{TApiResultData}#UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.StreamPart)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.Apizr#Transferring#Requesting#IUploadApi{TApiResultData}#UploadAsync(Refit.StreamPart)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.StreamPart,System.String)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.Apizr#Transferring#Requesting#IUploadApi{TApiResultData}#UploadAsync(Refit.StreamPart,System.String)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.Apizr#Transferring#Requesting#IUploadApi{TApiResultData}#UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.Apizr#Transferring#Requesting#IUploadApi{TApiResultData}#UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.FileInfoPart)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.Apizr#Transferring#Requesting#IUploadApi{TApiResultData}#UploadAsync(Refit.FileInfoPart)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.FileInfoPart,System.String)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.Apizr#Transferring#Requesting#IUploadApi{TApiResultData}#UploadAsync(Refit.FileInfoPart,System.String)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.Apizr#Transferring#Requesting#IUploadApi{TApiResultData}#UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi`1.Apizr#Transferring#Requesting#IUploadApi{TApiResultData}#UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
         <member name="T:Refit.Implementation.Generated.ApizrTransferringRequestingIDownloadApi">
@@ -876,61 +1233,61 @@
         <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIDownloadApi.Apizr#Transferring#Requesting#IDownloadApi{System#Collections#Generic#IDictionary{System#String,System#Object}}#DownloadAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object},Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="T:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`1">
+        <member name="T:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`2">
             <inheritdoc />
         </member>
-        <member name="P:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`1.Client">
+        <member name="P:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`2.Client">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`1.#ctor(System.Net.Http.HttpClient,Refit.IRequestBuilder)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`2.#ctor(System.Net.Http.HttpClient,Refit.IRequestBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`1.Apizr#Transferring#Requesting#IDownloadApi{TDownloadParams}#DownloadAsync(System.String)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`2.Apizr#Transferring#Requesting#IDownloadApi{TDownloadParams}#DownloadAsync(System.String)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`1.Apizr#Transferring#Requesting#IDownloadApi{TDownloadParams}#DownloadAsync(System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`2.Apizr#Transferring#Requesting#IDownloadApi{TDownloadParams}#DownloadAsync(System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`1.Apizr#Transferring#Requesting#IDownloadApi{TDownloadParams}#DownloadAsync(System.String,`0)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`2.Apizr#Transferring#Requesting#IDownloadApi{TDownloadParams}#DownloadAsync(System.String,`0)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`1.Apizr#Transferring#Requesting#IDownloadApi{TDownloadParams}#DownloadAsync(System.String,`0,Apizr.Configuring.Request.IApizrRequestOptions)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`2.Apizr#Transferring#Requesting#IDownloadApi{TDownloadParams}#DownloadAsync(System.String,`0,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`1.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.ByteArrayPart)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`2.Apizr#Transferring#Requesting#IUploadApi{TUploadApiResultData}#UploadAsync(Refit.ByteArrayPart)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`1.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.ByteArrayPart,System.String)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`2.Apizr#Transferring#Requesting#IUploadApi{TUploadApiResultData}#UploadAsync(Refit.ByteArrayPart,System.String)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`1.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`2.Apizr#Transferring#Requesting#IUploadApi{TUploadApiResultData}#UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`1.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`2.Apizr#Transferring#Requesting#IUploadApi{TUploadApiResultData}#UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`1.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.StreamPart)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`2.Apizr#Transferring#Requesting#IUploadApi{TUploadApiResultData}#UploadAsync(Refit.StreamPart)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`1.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.StreamPart,System.String)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`2.Apizr#Transferring#Requesting#IUploadApi{TUploadApiResultData}#UploadAsync(Refit.StreamPart,System.String)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`1.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`2.Apizr#Transferring#Requesting#IUploadApi{TUploadApiResultData}#UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`1.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`2.Apizr#Transferring#Requesting#IUploadApi{TUploadApiResultData}#UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`1.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.FileInfoPart)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`2.Apizr#Transferring#Requesting#IUploadApi{TUploadApiResultData}#UploadAsync(Refit.FileInfoPart)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`1.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.FileInfoPart,System.String)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`2.Apizr#Transferring#Requesting#IUploadApi{TUploadApiResultData}#UploadAsync(Refit.FileInfoPart,System.String)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`1.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`2.Apizr#Transferring#Requesting#IUploadApi{TUploadApiResultData}#UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`1.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi`2.Apizr#Transferring#Requesting#IUploadApi{TUploadApiResultData}#UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
         <member name="T:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi">
@@ -940,42 +1297,6 @@
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.#ctor(System.Net.Http.HttpClient,Refit.IRequestBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.ByteArrayPart)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.ByteArrayPart,System.String)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.StreamPart)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.StreamPart,System.String)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.FileInfoPart)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.FileInfoPart,System.String)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi#UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IDownloadApi{System#Collections#Generic#IDictionary{System#String,System#Object}}#DownloadAsync(System.String)">
@@ -988,6 +1309,87 @@
             <inheritdoc />
         </member>
         <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IDownloadApi{System#Collections#Generic#IDictionary{System#String,System#Object}}#DownloadAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object},Apizr.Configuring.Request.IApizrRequestOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.ByteArrayPart)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.ByteArrayPart,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.StreamPart)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.StreamPart,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.FileInfoPart)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.FileInfoPart,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingITransferApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
+            <inheritdoc />
+        </member>
+        <member name="T:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi">
+            <inheritdoc />
+        </member>
+        <member name="P:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Client">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.#ctor(System.Net.Http.HttpClient,Refit.IRequestBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.ByteArrayPart)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.ByteArrayPart,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.ByteArrayPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.StreamPart)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.StreamPart,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.StreamPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.FileInfoPart)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.FileInfoPart,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.ApizrTransferringRequestingIUploadApi.Apizr#Transferring#Requesting#IUploadApi{System#Net#Http#HttpResponseMessage}#UploadAsync(Refit.FileInfoPart,System.String,Apizr.Configuring.Request.IApizrRequestOptions)">
             <inheritdoc />
         </member>
     </members>

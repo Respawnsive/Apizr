@@ -83,6 +83,13 @@ namespace Apizr
                         var requestHandlerImplementationType = typeof(UploadOptionalCommandHandler<,>).MakeGenericType(webApiType, uploadReturnType);
 
                         services.TryAddSingleton(requestHandlerServiceType, requestHandlerImplementationType);
+                        
+                        var resultWithType = typeof(Option<,>).MakeGenericType(uploadReturnType, typeof(ApizrException));
+                        var requestWithType = typeof(UploadWithOptionalCommand<>).MakeGenericType(uploadReturnType);
+                        var requestWithHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(requestWithType, resultWithType);
+                        var requestWithHandlerImplementationType = typeof(UploadWithOptionalCommandHandler<>).MakeGenericType(uploadReturnType);
+
+                        services.TryAddSingleton(requestWithHandlerServiceType, requestWithHandlerImplementationType);
                     }
 
                     // Download
@@ -112,6 +119,12 @@ namespace Apizr
                         var requestHandlerImplementationType = typeof(DownloadOptionalQueryHandler<,>).MakeGenericType(webApiType, downloadParamsType);
 
                         services.TryAddSingleton(requestHandlerServiceType, requestHandlerImplementationType);
+                        
+                        var requestWithType = typeof(DownloadWithOptionalQuery<>).MakeGenericType(downloadParamsType);
+                        var requestWithHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(requestWithType, typeof(Option<FileInfo, ApizrException>));
+                        var requestWithHandlerImplementationType = typeof(DownloadWithOptionalQueryHandler<>).MakeGenericType(downloadParamsType);
+
+                        services.TryAddSingleton(requestWithHandlerServiceType, requestWithHandlerImplementationType);
                     }
                 }
             });

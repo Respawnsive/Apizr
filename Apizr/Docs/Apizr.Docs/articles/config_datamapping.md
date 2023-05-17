@@ -159,10 +159,10 @@ Register with one of the following options:
 options => options.WithMapsterMappingHandler(new Mapper())
 
 // OR direct configuration
-options => options.WithMappingHandler(new AutoMapperMappingHandler(new Mapper()))
+options => options.WithMappingHandler(new MapsterMappingHandler(new Mapper()))
 
 // OR factory configuration
-options => options.WithMappingHandler(() => new AutoMapperMappingHandler(new Mapper()))
+options => options.WithMappingHandler(() => new MapsterMappingHandler(new Mapper()))
 ```
 
 ##### [Extended](#tab/tabid-extended)

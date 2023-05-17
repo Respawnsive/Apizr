@@ -12,7 +12,7 @@ The first time you plan to use the tool, start by installing it:
 |Apizr.Tools.NSwag|[![NuGet](https://img.shields.io/nuget/v/Apizr.Tools.NSwag.svg)](https://www.nuget.org/packages/Apizr.Tools.NSwag/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Tools.NSwag.svg)](https://www.nuget.org/packages/Apizr.Tools.NSwag/)|
 
 ```console
-> dotnet tool install --global Apizr.Tools.NSwag --version 5.0.0-preview.1
+> dotnet tool install --global Apizr.Tools.NSwag --version 5.0.0-preview.2
 ```
 
 ### Configuring

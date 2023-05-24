@@ -40,5 +40,10 @@ namespace Apizr.Configuring.Shared
         /// Parameters passed through delegating handlers
         /// </summary>
         IDictionary<string, object> HandlersParameters { get; }
+
+        /// <summary>
+        /// Headers to add to the request
+        /// </summary>
+        string[] Headers { get; }
     }
 }

@@ -127,6 +127,14 @@ namespace Apizr.Configuring.Manager
         /// <inheritdoc />
         public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
 
+        private Func<string[]> _headersFactory;
+        /// <inheritdoc />
+        public Func<string[]> HeadersFactory
+        {
+            get => _headersFactory;
+            set => _headersFactory = () => Headers = value.Invoke();
+        }
+
         /// <inheritdoc />
         public Func<Context> ContextFactory { get; set; }
     }
@@ -184,6 +192,9 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public IDictionary<string, object> HandlersParameters => Options.HandlersParameters;
+
+        /// <inheritdoc />
+        public string[] Headers => Options.Headers;
 
         /// <inheritdoc />
         public ILogger Logger => Options.Logger;

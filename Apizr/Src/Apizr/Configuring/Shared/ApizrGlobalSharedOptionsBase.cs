@@ -21,6 +21,7 @@ namespace Apizr.Configuring.Shared
             LetThrowOnExceptionWithEmptyCache = sharedOptions?.LetThrowOnExceptionWithEmptyCache ?? true;
             HandlersParameters = sharedOptions?.HandlersParameters?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
                                  new Dictionary<string, object>();
+            Headers = sharedOptions?.Headers ?? new string[] { };
         }
 
         /// <inheritdoc />
@@ -52,5 +53,8 @@ namespace Apizr.Configuring.Shared
 
         /// <inheritdoc />
         public IDictionary<string, object> HandlersParameters { get; protected set; }
+
+        /// <inheritdoc />
+        public string[] Headers { get; protected set; }
     }
 }

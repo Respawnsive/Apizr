@@ -545,5 +545,21 @@ namespace Apizr.Tests
             apizrTransferManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
             percentage.Should().Be(100);
         }
+
+        [Fact]
+        public async Task Requesting_With_Headers_Should_Set_Headers()
+        {
+            var watcher = new WatchingRequestHandler();
+
+            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferUndefinedApi>(options => options
+                .WithBaseAddress("https://httpbin.org/post")
+                .AddDelegatingHandler(watcher));
+
+
+            // Shortcut
+            await apizrTransferManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
+            watcher.Headers.Should().NotBeNull();
+            watcher.Headers.Should().ContainKey("testKey");
+        }
     }
 }

@@ -57,5 +57,10 @@ namespace Apizr.Configuring.Shared
         /// Delegating handlers factories
         /// </summary>
         IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
+
+        /// <summary>
+        /// Headers factory
+        /// </summary>
+        Func<string[]> HeadersFactory { get; }
     }
 }

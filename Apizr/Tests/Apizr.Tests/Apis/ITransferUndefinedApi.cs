@@ -1,8 +1,9 @@
 ﻿using Apizr.Transferring.Requesting;
+using Refit;
 
 namespace Apizr.Tests.Apis
 {
-    [WebApi]
+    [WebApi, Headers("testKey: testValue")]
     public interface ITransferUndefinedApi : ITransferApi
     { }
 }

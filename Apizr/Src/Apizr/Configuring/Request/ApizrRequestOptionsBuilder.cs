@@ -34,6 +34,16 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
     }
 
     /// <inheritdoc />
+    public IApizrRequestOptionsBuilder WithHeaders(params string[] headers)
+    {
+        Options.Headers = Options.Headers == null ? 
+            headers : 
+            Options.Headers.Concat(headers).ToArray();
+
+        return this;
+    }
+
+    /// <inheritdoc />
     public IApizrRequestOptionsBuilder WithContext(Context context, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
     {
         switch (strategy)

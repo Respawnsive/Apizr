@@ -40,6 +40,7 @@ namespace Apizr.Extending.Configuring.Proper
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
             LoggerFactory = (serviceProvider, webApiFriendlyName) => serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName);
             DelegatingHandlersExtendedFactories = sharedOptions.DelegatingHandlersExtendedFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            HeadersFactory = sharedOptions.HeadersFactory;
         }
 
         /// <inheritdoc />
@@ -106,6 +107,14 @@ namespace Apizr.Extending.Configuring.Proper
 
         /// <inheritdoc />
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
+
+        private Func<IServiceProvider, string[]> _headersFactory;
+        /// <inheritdoc />
+        public Func<IServiceProvider, string[]> HeadersFactory
+        {
+            get => _headersFactory;
+            protected set => _headersFactory = serviceProvider => Headers = value.Invoke(serviceProvider);
+        }
 
         /// <inheritdoc />
         public IDictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }

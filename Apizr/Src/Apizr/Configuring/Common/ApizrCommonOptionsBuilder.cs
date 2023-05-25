@@ -290,6 +290,20 @@ namespace Apizr.Configuring.Common
                 () => loggingConfigurationFactory.Invoke().Item3);
 
         /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithHeaders(params string[] headers)
+            => WithHeaders(() => headers);
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithHeaders(Func<string[]> headersFactory)
+        {
+            Options.HeadersFactory = Options.HeadersFactory == null
+                ? headersFactory
+                : () => Options.HeadersFactory.Invoke().Concat(headersFactory.Invoke()).ToArray();
+
+            return this;
+        }
+
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithContext(Func<Context> contextFactory,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
         {

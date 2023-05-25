@@ -52,5 +52,12 @@ namespace Apizr.Configuring.Shared
         /// <returns></returns>
         TApizrOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
             HttpMessageParts trafficVerbosity = HttpMessageParts.All, params LogLevel[] logLevels);
+
+        /// <summary>
+        /// Add some headers to the request
+        /// </summary>
+        /// <param name="headers">Headers to add to the request</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithHeaders(params string[] headers);
     }
 }

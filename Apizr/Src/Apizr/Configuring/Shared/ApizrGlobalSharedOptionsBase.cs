@@ -55,6 +55,6 @@ namespace Apizr.Configuring.Shared
         public IDictionary<string, object> HandlersParameters { get; protected set; }
 
         /// <inheritdoc />
-        public string[] Headers { get; protected set; }
+        public string[] Headers { get; internal set; }
     }
 }

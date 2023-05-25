@@ -141,5 +141,12 @@ namespace Apizr.Configuring.Shared
         /// <param name="loggingConfigurationFactory">Logging configuration factory</param>
         /// <returns></returns>
         TApizrOptionsBuilder WithLogging(Func<(HttpTracerMode, HttpMessageParts, LogLevel[])> loggingConfigurationFactory);
+
+        /// <summary>
+        /// Add some headers to the request
+        /// </summary>
+        /// <param name="headersFactory">Headers factory</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithHeaders(Func<string[]> headersFactory);
     }
 }

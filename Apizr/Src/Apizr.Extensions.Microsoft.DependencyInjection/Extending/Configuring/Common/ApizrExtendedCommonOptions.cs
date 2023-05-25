@@ -117,6 +117,14 @@ namespace Apizr.Extending.Configuring.Common
         /// <inheritdoc />
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
 
+        private Func<IServiceProvider, string[]> _headersFactory;
+        /// <inheritdoc />
+        public Func<IServiceProvider, string[]> HeadersFactory
+        {
+            get => _headersFactory;
+            protected set => _headersFactory = serviceProvider => Headers = value.Invoke(serviceProvider);
+        }
+
         /// <inheritdoc />
         public IDictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
 

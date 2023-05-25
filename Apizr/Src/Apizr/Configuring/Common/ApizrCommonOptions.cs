@@ -91,8 +91,13 @@ namespace Apizr.Configuring.Common
         /// <inheritdoc />
         public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
 
+        private Func<string[]> _headersFactory;
         /// <inheritdoc />
-        public Func<string[]> HeadersFactory { get; }
+        public Func<string[]> HeadersFactory
+        {
+            get => _headersFactory;
+            set => _headersFactory = () => Headers = value.Invoke();
+        }
 
 
         private Func<HttpTracerMode> _httpTracerModeFactory;

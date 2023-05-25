@@ -140,6 +140,16 @@ namespace Apizr.Extending.Configuring.Proper
                     serviceProvider.GetRequiredService<TSettingsService>, tokenProperty, refreshTokenFactory));
 
         /// <inheritdoc />
+        public IApizrExtendedProperOptionsBuilder WithHeaders(params string[] headers)
+            => WithHeaders(_ => headers);
+
+        /// <inheritdoc />
+        public IApizrExtendedProperOptionsBuilder WithHeaders(Func<IServiceProvider, string[]> headers)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public IApizrExtendedProperOptionsBuilder AddDelegatingHandler<THandler>(THandler delegatingHandler) where THandler : DelegatingHandler
             => AddDelegatingHandler((_, _) => delegatingHandler);
 

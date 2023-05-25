@@ -50,5 +50,10 @@ namespace Apizr.Extending.Configuring.Shared
         /// HttpClient builder
         /// </summary>
         Action<IHttpClientBuilder> HttpClientBuilder { get; }
+
+        /// <summary>
+        /// Headers factory
+        /// </summary>
+        Func<IServiceProvider, string[]> HeadersFactory { get; }
     }
 }

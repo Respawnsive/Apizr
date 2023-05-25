@@ -326,6 +326,20 @@ namespace Apizr.Configuring.Manager
                 () => loggingConfigurationFactory.Invoke().Item3);
 
         /// <inheritdoc />
+        public IApizrManagerOptionsBuilder WithHeaders(params string[] headers)
+            => WithHeaders(() => headers);
+
+        /// <inheritdoc />
+        public IApizrManagerOptionsBuilder WithHeaders(Func<string[]> headersFactory)
+        {
+            Options.HeadersFactory = Options.HeadersFactory == null
+                ? headersFactory
+                : () => Options.HeadersFactory.Invoke().Concat(headersFactory.Invoke()).ToArray();
+
+            return this;
+        }
+
+        /// <inheritdoc />
         public IApizrManagerOptionsBuilder WithLoggerFactory(ILoggerFactory loggerFactory)
             => WithLoggerFactory(() => loggerFactory);
 

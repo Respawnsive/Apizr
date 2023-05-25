@@ -264,6 +264,20 @@ namespace Apizr.Configuring.Proper
                 () => loggingConfigurationFactory.Invoke().Item2,
                 () => loggingConfigurationFactory.Invoke().Item3);
 
+        /// <inheritdoc />
+        public IApizrProperOptionsBuilder WithHeaders(params string[] headers)
+            => WithHeaders(() => headers);
+
+        /// <inheritdoc />
+        public IApizrProperOptionsBuilder WithHeaders(Func<string[]> headersFactory)
+        {
+            Options.HeadersFactory = Options.HeadersFactory == null
+                ? headersFactory
+                : () => Options.HeadersFactory.Invoke().Concat(headersFactory.Invoke()).ToArray();
+
+            return this;
+        }
+
         #region Internal
 
         void IApizrInternalOptionsBuilder.SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);

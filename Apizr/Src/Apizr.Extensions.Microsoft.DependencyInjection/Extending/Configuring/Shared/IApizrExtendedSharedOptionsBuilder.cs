@@ -113,5 +113,12 @@ namespace Apizr.Extending.Configuring.Shared
         /// <returns></returns>
         TApizrExtendedSharedOptionsBuilder WithAuthenticationHandler<TSettingsService>(Expression<Func<TSettingsService, string>> tokenProperty, Func<HttpRequestMessage, Task<string>> refreshTokenFactory);
 
+        /// <summary>
+        /// Add some headers to the request
+        /// </summary>
+        /// <param name="headers">Headers to add to the request</param>
+        /// <returns></returns>
+        TApizrExtendedSharedOptionsBuilder WithHeaders(Func<IServiceProvider, string[]> headers);
+
     }
 }

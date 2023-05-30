@@ -139,7 +139,11 @@ namespace Apizr.Extending.Configuring.Common
         /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithHeaders(Func<IServiceProvider, string[]> headers)
         {
-            throw new NotImplementedException();
+            Options.HeadersFactory = Options.HeadersFactory == null
+                ? headers
+                : serviceProvider => Options.HeadersFactory.Invoke(serviceProvider).Concat(headers.Invoke(serviceProvider)).ToArray();
+
+            return this;
         }
 
         /// <inheritdoc />

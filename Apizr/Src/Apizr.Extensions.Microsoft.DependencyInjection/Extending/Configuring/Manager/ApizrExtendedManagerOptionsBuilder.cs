@@ -148,7 +148,11 @@ namespace Apizr.Extending.Configuring.Manager
         /// <inheritdoc />
         public IApizrExtendedManagerOptionsBuilder WithHeaders(Func<IServiceProvider, string[]> headers)
         {
-            throw new NotImplementedException();
+            Options.HeadersFactory = Options.HeadersFactory == null
+                ? headers
+                : serviceProvider => Options.HeadersFactory.Invoke(serviceProvider).Concat(headers.Invoke(serviceProvider)).ToArray();
+
+            return this;
         }
 
         /// <inheritdoc />

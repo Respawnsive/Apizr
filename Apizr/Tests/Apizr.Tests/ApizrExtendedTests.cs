@@ -755,5 +755,28 @@ namespace Apizr.Tests
                     // ignore error
                 });
         }
+
+        [Fact]
+        public async Task Requesting_With_Headers_Should_Set_Headers()
+        {
+            var watcher = new WatchingRequestHandler();
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+
+            services.AddApizrTransferManagerFor<ITransferUndefinedApi>(options => options
+                .WithBaseAddress("https://httpbin.org/post")
+                .WithHeaders("testKey2: testValue2")
+                .AddDelegatingHandler(watcher));
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            // Get instances from the container
+            var apizrCustomTransferManager = serviceProvider.GetService<IApizrTransferManager<ITransferUndefinedApi>>(); // Custom
+            
+            // Shortcut
+            await apizrCustomTransferManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
+            watcher.Headers.Should().NotBeNull();
+            watcher.Headers.Should().ContainKey("testKey2");
+        }
     }
 }

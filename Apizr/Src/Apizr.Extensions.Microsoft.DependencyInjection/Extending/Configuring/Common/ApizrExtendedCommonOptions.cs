@@ -122,7 +122,7 @@ namespace Apizr.Extending.Configuring.Common
         public Func<IServiceProvider, string[]> HeadersFactory
         {
             get => _headersFactory;
-            protected set => _headersFactory = serviceProvider => Headers = value.Invoke(serviceProvider);
+            internal set => _headersFactory = serviceProvider => Headers = value.Invoke(serviceProvider);
         }
 
         /// <inheritdoc />

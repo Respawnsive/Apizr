@@ -553,13 +553,14 @@ namespace Apizr.Tests
 
             var apizrTransferManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferUndefinedApi>(options => options
                 .WithBaseAddress("https://httpbin.org/post")
+                .WithHeaders("testKey2: testValue2")
                 .AddDelegatingHandler(watcher));
 
 
             // Shortcut
             await apizrTransferManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             watcher.Headers.Should().NotBeNull();
-            watcher.Headers.Should().ContainKey("testKey");
+            watcher.Headers.Should().ContainKey("testKey2");
         }
     }
 }

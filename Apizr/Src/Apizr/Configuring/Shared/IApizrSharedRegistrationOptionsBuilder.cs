@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -147,6 +148,6 @@ namespace Apizr.Configuring.Shared
         /// </summary>
         /// <param name="headersFactory">Headers factory</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithHeaders(Func<string[]> headersFactory);
+        TApizrOptionsBuilder WithHeaders(Func<IList<string>> headersFactory);
     }
 }

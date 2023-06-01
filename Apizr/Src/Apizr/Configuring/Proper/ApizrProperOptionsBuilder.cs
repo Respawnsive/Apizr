@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
@@ -266,14 +267,15 @@ namespace Apizr.Configuring.Proper
 
         /// <inheritdoc />
         public IApizrProperOptionsBuilder WithHeaders(params string[] headers)
-            => WithHeaders(() => headers);
+            => WithHeaders(() => headers?.ToList());
 
         /// <inheritdoc />
-        public IApizrProperOptionsBuilder WithHeaders(Func<string[]> headersFactory)
+        public IApizrProperOptionsBuilder WithHeaders(Func<IList<string>> headersFactory)
         {
-            Options.HeadersFactory = Options.HeadersFactory == null
-                ? headersFactory
-                : () => Options.HeadersFactory.Invoke().Concat(headersFactory.Invoke()).ToArray();
+            if (Options.HeadersFactory == null)
+                Options.HeadersFactory = headersFactory;
+            else
+                Options.HeadersFactory += headersFactory;
 
             return this;
         }

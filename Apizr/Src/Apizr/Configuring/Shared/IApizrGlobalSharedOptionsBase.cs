@@ -44,6 +44,6 @@ namespace Apizr.Configuring.Shared
         /// <summary>
         /// Headers to add to the request
         /// </summary>
-        string[] Headers { get; }
+        IList<string> Headers { get; }
     }
 }

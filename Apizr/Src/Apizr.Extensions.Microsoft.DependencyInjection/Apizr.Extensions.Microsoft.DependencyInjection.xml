@@ -52,6 +52,9 @@
         <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.HttpClientBuilder">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.HeadersFactory">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.DelegatingHandlersExtendedFactories">
             <inheritdoc />
         </member>
@@ -115,6 +118,12 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHeaders(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHeaders(System.Func{System.IServiceProvider,System.Collections.Generic.IList{System.String}})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.AddDelegatingHandler``1(``0)">
@@ -422,6 +431,9 @@
         <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.HttpClientBuilder">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.HeadersFactory">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudEntities">
             <inheritdoc />
         </member>
@@ -503,6 +515,12 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHeaders(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHeaders(System.Func{System.IServiceProvider,System.Collections.Generic.IList{System.String}})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.AddDelegatingHandler``1(``0)">
@@ -654,6 +672,9 @@
         <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.HttpClientBuilder">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.HeadersFactory">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.DelegatingHandlersExtendedFactories">
             <inheritdoc />
         </member>
@@ -705,6 +726,12 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithHeaders(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithHeaders(System.Func{System.IServiceProvider,System.Collections.Generic.IList{System.String}})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.AddDelegatingHandler``1(``0)">
@@ -1142,6 +1169,11 @@
             HttpClient builder
             </summary>
         </member>
+        <member name="P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersFactory">
+            <summary>
+            Headers factory
+            </summary>
+        </member>
         <member name="T:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase">
             <summary>
             Options available at both common and proper level for extended registrations
@@ -1247,6 +1279,13 @@
             <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
             <param name="tokenProperty">The token property used for saving</param>
             <param name="refreshTokenFactory">The method factory called to refresh the token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithHeaders(System.Func{System.IServiceProvider,System.Collections.Generic.IList{System.String}})">
+            <summary>
+            Add some headers to the request
+            </summary>
+            <param name="headersFactory">Headers to add to the request</param>
             <returns></returns>
         </member>
         <member name="T:Apizr.ServiceCollectionExtensions">

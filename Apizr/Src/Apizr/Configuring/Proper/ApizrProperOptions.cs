@@ -50,6 +50,7 @@ namespace Apizr.Configuring.Proper
             HttpClientFactory = sharedOptions.HttpClientFactory;
             DelegatingHandlersFactories = sharedOptions.DelegatingHandlersFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             ContextFactory = sharedOptions.ContextFactory;
+            HeadersFactory = sharedOptions.HeadersFactory;
         }
 
         private Func<Uri> _baseUriFactory;
@@ -112,12 +113,17 @@ namespace Apizr.Configuring.Proper
         /// <inheritdoc />
         public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
 
-        private Func<string[]> _headersFactory;
+        private Func<IList<string>> _headersFactory;
         /// <inheritdoc />
-        public Func<string[]> HeadersFactory
+        public Func<IList<string>> HeadersFactory
         {
             get => _headersFactory;
-            set => _headersFactory = () => Headers = value.Invoke();
+            internal set => _headersFactory = value != null ? () =>
+                {
+                    value.Invoke().ToList().ForEach(header => Headers.Add(header));
+                    return Headers;
+                }
+                : null;
         }
     }
 }

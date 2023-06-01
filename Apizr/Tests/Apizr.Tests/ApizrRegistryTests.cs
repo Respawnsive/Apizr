@@ -1094,14 +1094,19 @@ namespace Apizr.Tests
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddTransferManagerFor<ITransferUndefinedApi>(options => options
                     .WithBaseAddress("https://httpbin.org/post")
-                    .WithHeaders("testKey2: testValue2")
-                    .AddDelegatingHandler(watcher)));
+                    .WithHeaders(() => new []{"testKey2: testValue2.2"})
+                    .AddDelegatingHandler(watcher)),
+                options => options
+                    .WithHeaders("testKey2: testValue2.1", "testKey3: testValue3.1"));
 
             // Shortcut
             apizrRegistry.TryGetTransferManagerFor<ITransferUndefinedApi>(out var regCustomTransferTypedManager).Should().BeTrue(); // Custom
-            await regCustomTransferTypedManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
+            await regCustomTransferTypedManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"), options => options.WithHeaders("testKey3: testValue3.2", "testKey4: testValue4"));
             watcher.Headers.Should().NotBeNull();
-            watcher.Headers.Should().ContainKey("testKey2");
+            watcher.Headers.Should().ContainKeys("testKey2", "testKey3", "testKey4");
+            watcher.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.2");
+            watcher.Headers.GetValues("testKey3").Should().HaveCount(1).And.Contain("testValue3.2");
+            watcher.Headers.GetValues("testKey4").Should().HaveCount(1).And.Contain("testValue4");
         }
     }
 }

@@ -13,6 +13,7 @@ items:
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHandlerParameter(System.String,System.Object)
+  - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(System.String[])
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
   langs:
   - csharp
@@ -169,6 +170,46 @@ items:
   - Public
   fullName.vb: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel())
   name.vb: WithLogging(HttpTracerMode, HttpMessageParts, LogLevel())
+- uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(System.String[])
+  commentId: M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(System.String[])
+  id: WithHeaders(System.String[])
+  parent: Apizr.Configuring.Request.ApizrRequestOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithHeaders(String[])
+  nameWithType: ApizrRequestOptionsBuilder.WithHeaders(String[])
+  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(System.String[])
+  type: Method
+  source:
+    id: WithHeaders
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Request\ApizrRequestOptionsBuilder.cs
+    startLine: 36
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Request
+  summary: "\nAdd some headers to the request\n"
+  example: []
+  syntax:
+    content: public IApizrRequestOptionsBuilder WithHeaders(params string[] headers)
+    parameters:
+    - id: headers
+      type: System.String[]
+      description: Headers to add to the request
+    return:
+      type: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+      description: ''
+    content.vb: Public Function WithHeaders(ParamArray headers As String()) As IApizrRequestOptionsBuilder
+  overload: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders*
+  implements:
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithHeaders(System.String[])
+  nameWithType.vb: ApizrRequestOptionsBuilder.WithHeaders(String())
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(System.String())
+  name.vb: WithHeaders(String())
 - uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithContext(Polly.Context,Apizr.Configuring.ApizrDuplicateStrategy)
   commentId: M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithContext(Polly.Context,Apizr.Configuring.ApizrDuplicateStrategy)
   id: WithContext(Polly.Context,Apizr.Configuring.ApizrDuplicateStrategy)
@@ -183,7 +224,7 @@ items:
   source:
     id: WithContext
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Request\ApizrRequestOptionsBuilder.cs
-    startLine: 36
+    startLine: 44
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -223,7 +264,7 @@ items:
   source:
     id: WithCancellation
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Request\ApizrRequestOptionsBuilder.cs
-    startLine: 70
+    startLine: 78
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -260,7 +301,7 @@ items:
   source:
     id: WithCacheClearing
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Request\ApizrRequestOptionsBuilder.cs
-    startLine: 78
+    startLine: 86
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -297,7 +338,7 @@ items:
   source:
     id: WithExCatching
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Request\ApizrRequestOptionsBuilder.cs
-    startLine: 86
+    startLine: 94
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -343,7 +384,7 @@ items:
   source:
     id: WithExCatching
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Request\ApizrRequestOptionsBuilder.cs
-    startLine: 118
+    startLine: 126
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -391,7 +432,7 @@ items:
   source:
     id: WithHandlerParameter
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Request\ApizrRequestOptionsBuilder.cs
-    startLine: 125
+    startLine: 133
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -1849,6 +1890,132 @@ references:
   name: Apizr.Logging
   nameWithType: Apizr.Logging
   fullName: Apizr.Logging
+- uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders*
+  commentId: Overload:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders
+  name: WithHeaders
+  nameWithType: ApizrRequestOptionsBuilder.WithHeaders
+  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithHeaders(System.String[])
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithHeaders(System.String[])
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
+  name: WithHeaders(String[])
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithHeaders(String[])
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.WithHeaders(System.String[])
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of IApizrRequestOptions, IApizrRequestOptionsBuilder).WithHeaders(String())
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder).WithHeaders(System.String())
+  name.vb: WithHeaders(String())
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
+    name: WithHeaders
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithHeaders
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.WithHeaders
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
+    name: WithHeaders
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of IApizrRequestOptions, IApizrRequestOptionsBuilder).WithHeaders
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder).WithHeaders
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.String[]
+  isExternal: true
+  name: String[]
+  nameWithType: String[]
+  fullName: System.String[]
+  nameWithType.vb: String()
+  fullName.vb: System.String()
+  name.vb: String()
+  spec.csharp:
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
+  isExternal: true
+  name: WithHeaders(String[])
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHeaders(String[])
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHeaders(System.String[])
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(String())
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(System.String())
+  name.vb: WithHeaders(String())
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
+    name: WithHeaders
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHeaders
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHeaders
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
+    name: WithHeaders
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithContext*
   commentId: Overload:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithContext
   name: WithContext

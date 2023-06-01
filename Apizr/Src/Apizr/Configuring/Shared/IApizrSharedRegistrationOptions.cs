@@ -61,6 +61,6 @@ namespace Apizr.Configuring.Shared
         /// <summary>
         /// Headers factory
         /// </summary>
-        Func<string[]> HeadersFactory { get; }
+        Func<IList<string>> HeadersFactory { get; }
     }
 }

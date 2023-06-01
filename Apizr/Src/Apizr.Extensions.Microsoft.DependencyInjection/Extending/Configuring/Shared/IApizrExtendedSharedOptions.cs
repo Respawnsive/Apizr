@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using Apizr.Logging;
 using Microsoft.Extensions.DependencyInjection;
@@ -54,6 +55,6 @@ namespace Apizr.Extending.Configuring.Shared
         /// <summary>
         /// Headers factory
         /// </summary>
-        Func<IServiceProvider, string[]> HeadersFactory { get; }
+        Func<IServiceProvider, IList<string>> HeadersFactory { get; }
     }
 }

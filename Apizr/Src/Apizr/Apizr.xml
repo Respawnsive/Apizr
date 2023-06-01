@@ -477,6 +477,9 @@
         <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.DelegatingHandlersFactories">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.HeadersFactory">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.HttpTracerModeFactory">
             <inheritdoc />
         </member>
@@ -608,6 +611,12 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLogging(System.Func{System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)">
@@ -873,6 +882,9 @@
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions.DelegatingHandlersFactories">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions.HeadersFactory">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions.ContextFactory">
             <inheritdoc />
         </member>
@@ -924,6 +936,9 @@
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.HandlersParameters">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.Headers">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.Logger">
@@ -1075,6 +1090,12 @@
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLogging(System.Func{System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggerFactory(Microsoft.Extensions.Logging.ILoggerFactory)">
             <inheritdoc />
         </member>
@@ -1189,6 +1210,9 @@
         <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.DelegatingHandlersFactories">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.HeadersFactory">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Configuring.Proper.ApizrProperOptionsBase">
             <inheritdoc cref="T:Apizr.Configuring.Proper.IApizrProperOptionsBase" />
         </member>
@@ -1299,6 +1323,12 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLogging(System.Func{System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHeaders(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.Apizr#Configuring#Shared#IApizrInternalRegistrationOptionsBuilder#AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
@@ -1787,6 +1817,9 @@
         <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(System.String[])">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithContext(Polly.Context,Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
@@ -1899,6 +1932,9 @@
         <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase">
             <summary>
             Options available at both common and proper level for both static and extended registrations
@@ -1959,6 +1995,11 @@
             Parameters passed through delegating handlers
             </summary>
         </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers">
+            <summary>
+            Headers to add to the request
+            </summary>
+        </member>
         <member name="T:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase">
             <summary>
             Builder options available at all (common, proper and request) levels and for all (static and extended) registration types
@@ -2000,6 +2041,13 @@
             <param name="httpTracerMode"></param>
             <param name="trafficVerbosity">Http traffic tracing verbosity (default: All)</param>
             <param name="logLevels">Log levels to apply while writing (default: Information)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])">
+            <summary>
+            Add some headers to the request
+            </summary>
+            <param name="headers">Headers to add to the request</param>
             <returns></returns>
         </member>
         <member name="T:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase">
@@ -2140,6 +2188,11 @@
             Delegating handlers factories
             </summary>
         </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory">
+            <summary>
+            Headers factory
+            </summary>
+        </member>
         <member name="T:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBase">
             <summary>
             Options available at both common and proper level for both static and extended registrations
@@ -2268,6 +2321,13 @@
             Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)
             </summary>
             <param name="loggingConfigurationFactory">Logging configuration factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})">
+            <summary>
+            Add some headers to the request
+            </summary>
+            <param name="headersFactory">Headers factory</param>
             <returns></returns>
         </member>
         <member name="T:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilderBase">
@@ -3154,6 +3214,11 @@
             </summary>
             <param name="type">The type to get friendly name of</param>
             <returns></returns>
+        </member>
+        <member name="M:Apizr.Helping.RequestHelper.SetHeader(System.Net.Http.HttpRequestMessage,System.String,System.String)">
+            <summary>
+            Cloned from Refit repository
+            </summary>
         </member>
         <member name="T:Apizr.Helping.UrlHelper">
             <summary>

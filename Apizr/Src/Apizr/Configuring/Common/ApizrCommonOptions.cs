@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using Apizr.Caching;
 using Apizr.Configuring.Manager;
@@ -91,12 +92,17 @@ namespace Apizr.Configuring.Common
         /// <inheritdoc />
         public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
 
-        private Func<string[]> _headersFactory;
+        private Func<IList<string>> _headersFactory;
         /// <inheritdoc />
-        public Func<string[]> HeadersFactory
+        public Func<IList<string>> HeadersFactory
         {
             get => _headersFactory;
-            set => _headersFactory = () => Headers = value.Invoke();
+            internal set => _headersFactory = value != null ? () =>
+                {
+                    value.Invoke().ToList().ForEach(header => Headers.Add(header));
+                    return Headers;
+                }
+                : null;
         }
 
 

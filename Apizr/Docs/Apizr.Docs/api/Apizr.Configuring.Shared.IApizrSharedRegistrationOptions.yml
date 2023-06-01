@@ -9,6 +9,7 @@ items:
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.BasePathFactory
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.BaseUriFactory
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.DelegatingHandlersFactories
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientFactory
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientHandlerFactory
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpTracerModeFactory
@@ -47,6 +48,7 @@ items:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
   modifiers.csharp:
   - public
   - interface
@@ -332,6 +334,37 @@ items:
   - get
   modifiers.vb:
   - ReadOnly
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory
+  id: HeadersFactory
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  langs:
+  - csharp
+  - vb
+  name: HeadersFactory
+  nameWithType: IApizrSharedRegistrationOptions.HeadersFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory
+  type: Property
+  source:
+    id: HeadersFactory
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Shared\IApizrSharedRegistrationOptions.cs
+    startLine: 63
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  summary: "\nHeaders factory\n"
+  example: []
+  syntax:
+    content: Func<IList<string>> HeadersFactory { get; }
+    parameters: []
+    return:
+      type: System.Func{System.Collections.Generic.IList{System.String}}
+    content.vb: ReadOnly Property HeadersFactory As Func(Of IList(Of String))
+  overload: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory*
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
 references:
 - uid: Apizr.Configuring.Shared
   commentId: N:Apizr.Configuring.Shared
@@ -404,6 +437,12 @@ references:
   name: HandlersParameters
   nameWithType: IApizrGlobalSharedOptionsBase.HandlersParameters
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  name: Headers
+  nameWithType: IApizrGlobalSharedOptionsBase.Headers
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   parent: Apizr.Configuring.Shared
@@ -1080,3 +1119,74 @@ references:
   name: System.Collections.Generic
   nameWithType: System.Collections.Generic
   fullName: System.Collections.Generic
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory
+  name: HeadersFactory
+  nameWithType: IApizrSharedRegistrationOptions.HeadersFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory
+- uid: System.Func{System.Collections.Generic.IList{System.String}}
+  commentId: T:System.Func{System.Collections.Generic.IList{System.String}}
+  parent: System
+  definition: System.Func`1
+  name: Func<IList<String>>
+  nameWithType: Func<IList<String>>
+  fullName: System.Func<System.Collections.Generic.IList<System.String>>
+  nameWithType.vb: Func(Of IList(Of String))
+  fullName.vb: System.Func(Of System.Collections.Generic.IList(Of System.String))
+  name.vb: Func(Of IList(Of String))
+  spec.csharp:
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )

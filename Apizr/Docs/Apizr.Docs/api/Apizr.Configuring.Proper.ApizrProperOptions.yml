@@ -10,6 +10,7 @@ items:
   - Apizr.Configuring.Proper.ApizrProperOptions.BasePathFactory
   - Apizr.Configuring.Proper.ApizrProperOptions.BaseUriFactory
   - Apizr.Configuring.Proper.ApizrProperOptions.DelegatingHandlersFactories
+  - Apizr.Configuring.Proper.ApizrProperOptions.HeadersFactory
   - Apizr.Configuring.Proper.ApizrProperOptions.HttpClientFactory
   - Apizr.Configuring.Proper.ApizrProperOptions.HttpClientHandlerFactory
   - Apizr.Configuring.Proper.ApizrProperOptions.HttpTracerModeFactory
@@ -65,6 +66,7 @@ items:
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -154,7 +156,7 @@ items:
   source:
     id: BaseUriFactory
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 56
+    startLine: 57
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -189,7 +191,7 @@ items:
   source:
     id: BaseAddressFactory
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 64
+    startLine: 65
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -224,7 +226,7 @@ items:
   source:
     id: BasePathFactory
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 72
+    startLine: 73
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -259,7 +261,7 @@ items:
   source:
     id: HttpTracerModeFactory
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 80
+    startLine: 81
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -294,7 +296,7 @@ items:
   source:
     id: TrafficVerbosityFactory
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 88
+    startLine: 89
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -329,7 +331,7 @@ items:
   source:
     id: LogLevelsFactory
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 96
+    startLine: 97
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -364,7 +366,7 @@ items:
   source:
     id: LoggerFactory
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 103
+    startLine: 104
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -399,7 +401,7 @@ items:
   source:
     id: HttpClientHandlerFactory
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 106
+    startLine: 107
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -434,7 +436,7 @@ items:
   source:
     id: HttpClientFactory
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 109
+    startLine: 110
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -469,7 +471,7 @@ items:
   source:
     id: DelegatingHandlersFactories
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptions.cs
-    startLine: 112
+    startLine: 113
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -484,6 +486,41 @@ items:
   overload: Apizr.Configuring.Proper.ApizrProperOptions.DelegatingHandlersFactories*
   implements:
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.DelegatingHandlersFactories
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Apizr.Configuring.Proper.ApizrProperOptions.HeadersFactory
+  commentId: P:Apizr.Configuring.Proper.ApizrProperOptions.HeadersFactory
+  id: HeadersFactory
+  parent: Apizr.Configuring.Proper.ApizrProperOptions
+  langs:
+  - csharp
+  - vb
+  name: HeadersFactory
+  nameWithType: ApizrProperOptions.HeadersFactory
+  fullName: Apizr.Configuring.Proper.ApizrProperOptions.HeadersFactory
+  type: Property
+  source:
+    id: HeadersFactory
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptions.cs
+    startLine: 117
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Proper
+  summary: "\nHeaders factory\n"
+  example: []
+  syntax:
+    content: public Func<IList<string>> HeadersFactory { get; }
+    parameters: []
+    return:
+      type: System.Func{System.Collections.Generic.IList{System.String}}
+    content.vb: Public ReadOnly Property HeadersFactory As Func(Of IList(Of String))
+  overload: Apizr.Configuring.Proper.ApizrProperOptions.HeadersFactory*
+  implements:
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory
   modifiers.csharp:
   - public
   - get
@@ -641,6 +678,12 @@ references:
   name: HandlersParameters
   nameWithType: ApizrGlobalSharedOptionsBase.HandlersParameters
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  name: Headers
+  nameWithType: ApizrGlobalSharedOptionsBase.Headers
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -1977,6 +2020,83 @@ references:
     name: DelegatingHandler
     nameWithType: DelegatingHandler
     fullName: System.Net.Http.DelegatingHandler
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Proper.ApizrProperOptions.HeadersFactory*
+  commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptions.HeadersFactory
+  name: HeadersFactory
+  nameWithType: ApizrProperOptions.HeadersFactory
+  fullName: Apizr.Configuring.Proper.ApizrProperOptions.HeadersFactory
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  name: HeadersFactory
+  nameWithType: IApizrSharedRegistrationOptions.HeadersFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory
+- uid: System.Func{System.Collections.Generic.IList{System.String}}
+  commentId: T:System.Func{System.Collections.Generic.IList{System.String}}
+  parent: System
+  definition: System.Func`1
+  name: Func<IList<String>>
+  nameWithType: Func<IList<String>>
+  fullName: System.Func<System.Collections.Generic.IList<System.String>>
+  nameWithType.vb: Func(Of IList(Of String))
+  fullName.vb: System.Func(Of System.Collections.Generic.IList(Of System.String))
+  name.vb: Func(Of IList(Of String))
+  spec.csharp:
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
     isExternal: true
   - name: )
     nameWithType: )

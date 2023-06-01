@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
@@ -327,14 +328,15 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public IApizrManagerOptionsBuilder WithHeaders(params string[] headers)
-            => WithHeaders(() => headers);
+            => WithHeaders(() => headers?.ToList());
 
         /// <inheritdoc />
-        public IApizrManagerOptionsBuilder WithHeaders(Func<string[]> headersFactory)
+        public IApizrManagerOptionsBuilder WithHeaders(Func<IList<string>> headersFactory)
         {
-            Options.HeadersFactory = Options.HeadersFactory == null
-                ? headersFactory
-                : () => Options.HeadersFactory.Invoke().Concat(headersFactory.Invoke()).ToArray();
+            if (Options.HeadersFactory == null)
+                Options.HeadersFactory = headersFactory;
+            else
+                Options.HeadersFactory += headersFactory;
 
             return this;
         }

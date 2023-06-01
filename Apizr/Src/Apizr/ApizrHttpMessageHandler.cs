@@ -30,7 +30,7 @@ namespace Apizr
             {
                 cancellationToken = options.CancellationToken;
 
-                if (options.Headers.Length > 0)
+                if (options.Headers?.Count > 0)
                 {
                     // Cloned and adjusted from Refit
                     // We could have content headers, so we need to make

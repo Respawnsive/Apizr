@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -116,9 +117,9 @@ namespace Apizr.Extending.Configuring.Shared
         /// <summary>
         /// Add some headers to the request
         /// </summary>
-        /// <param name="headers">Headers to add to the request</param>
+        /// <param name="headersFactory">Headers to add to the request</param>
         /// <returns></returns>
-        TApizrExtendedSharedOptionsBuilder WithHeaders(Func<IServiceProvider, string[]> headers);
+        TApizrExtendedSharedOptionsBuilder WithHeaders(Func<IServiceProvider, IList<string>> headersFactory);
 
     }
 }

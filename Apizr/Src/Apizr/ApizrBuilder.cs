@@ -316,7 +316,6 @@ namespace Apizr
             builder.ApizrOptions.LogLevelsFactory.Invoke();
             builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();
-            builder.ApizrOptions.HeadersFactory?.Invoke();
 
             return builder.ApizrOptions;
         }

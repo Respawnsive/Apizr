@@ -49,7 +49,7 @@ namespace Apizr.Extending.Configuring.Manager
             ObjectMappings = commonOptions.ObjectMappings.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             PostRegistries = commonOptions.PostRegistries.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             PostRegistrationActions = commonOptions.PostRegistrationActions.ToList();
-            HeadersFactory = commonOptions.HeadersFactory;
+            HeadersFactory = properOptions.HeadersFactory;
         }
 
         /// <inheritdoc />
@@ -151,12 +151,17 @@ namespace Apizr.Extending.Configuring.Manager
         /// <inheritdoc />
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
 
-        private Func<IServiceProvider, string[]> _headersFactory;
+        private Func<IServiceProvider, IList<string>> _headersFactory;
         /// <inheritdoc />
-        public Func<IServiceProvider, string[]> HeadersFactory
+        public Func<IServiceProvider, IList<string>> HeadersFactory
         {
             get => _headersFactory;
-            internal set => _headersFactory = serviceProvider => Headers = value.Invoke(serviceProvider);
+            internal set => _headersFactory = value != null ? serviceProvider =>
+                {
+                    value.Invoke(serviceProvider).ToList().ForEach(header => Headers.Add(header));
+                    return Headers;
+                }
+                : null;
         }
 
         /// <inheritdoc />

@@ -36,9 +36,7 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
     /// <inheritdoc />
     public IApizrRequestOptionsBuilder WithHeaders(params string[] headers)
     {
-        Options.Headers = Options.Headers?.Length > 0 ?
-            Options.Headers.Concat(headers).ToArray() :
-            headers;
+        headers?.ToList().ForEach(header => Options.Headers.Add(header));
 
         return this;
     }

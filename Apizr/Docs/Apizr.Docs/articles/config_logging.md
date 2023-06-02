@@ -114,7 +114,7 @@ options => options.WithLogging(servieProvider =>
     });
 ```
 
-All logging fluent options are available with and without using registry. 
+All logging fluent options are available with or without using registry. 
 It means that you can share logging configuration, setting it at registry level and/or set some specific one at api level.
 
 ### [Requesting](#tab/tabid-requesting)

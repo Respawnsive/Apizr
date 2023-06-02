@@ -7,6 +7,7 @@
 - [New] Now we can **set a base path** with the brand new WithBasePath fluent option or using attribute
 - [New] Now we can **set options at request time** with the brand new fluent request options builder
 - [New] Now we can **execute api requests directly from the registry** containing the managed api
+- [New] Now we can **set headers** with the brand new WithHeaders fluent option
 
 ### Apizr
 

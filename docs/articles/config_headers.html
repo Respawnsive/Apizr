@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Configuring DelegatingHandlers | Apizr </title>
+    <title>Configuring Headers | Apizr </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Configuring DelegatingHandlers | Apizr ">
+    <meta name="title" content="Configuring Headers | Apizr ">
     <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../resources/favicon.ico">
@@ -77,41 +77,57 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="configuring-delegatinghandlers">Configuring DelegatingHandlers</h2>
+<h2 id="configuring-headers">Configuring Headers</h2>
 
-<p>You can add DelegatingHandlers thanks to this option:</p>
-<div class="tabGroup" id="tabgroup_883qP+JZ4N">
+<p>You can configure headers at:</p>
+<ul>
+<li>Design time by attribute decoration</li>
+<li>Register time by fluent configuration</li>
+<li>Request time by fluent configuration</li>
+</ul>
+<div class="tabGroup" id="tabgroup_oHeVXnGDhc">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_883qP+JZ4N_tabid-static" role="tab" aria-controls="tabpanel_883qP+JZ4N_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_oHeVXnGDhc_tabid-designing" role="tab" aria-controls="tabpanel_oHeVXnGDhc_tabid-designing" data-tab="tabid-designing" tabindex="0" aria-selected="true">Designing</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_883qP+JZ4N_tabid-extended" role="tab" aria-controls="tabpanel_883qP+JZ4N_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_oHeVXnGDhc_tabid-registering" role="tab" aria-controls="tabpanel_oHeVXnGDhc_tabid-registering" data-tab="tabid-registering" tabindex="-1">Registering</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_oHeVXnGDhc_tabid-requesting" role="tab" aria-controls="tabpanel_oHeVXnGDhc_tabid-requesting" data-tab="tabid-requesting" tabindex="-1">Requesting</a>
 </li>
 </ul>
-<section id="tabpanel_883qP+JZ4N_tabid-static" role="tabpanel" data-tab="tabid-static">
+<section id="tabpanel_oHeVXnGDhc_tabid-designing" role="tabpanel" data-tab="tabid-designing">
+<p>You can set headers at design time, decorating interfaces or methods with the <code>Headers</code> attribute provided by Refit.</p>
+<p>But for now, this attribute approach won&#39;t let you:</p>
+<ul>
+<li>set global/shared headers (other than repeating yourself decorating each interfaces or inheriting from a decorated one)</li>
+<li>set computed/calculated headers (other than intercepting it on the handler side and changing its value before sending or providing it as a request parameter)</li>
+</ul>
+</section>
+<section id="tabpanel_oHeVXnGDhc_tabid-registering" role="tabpanel" data-tab="tabid-registering" aria-hidden="true" hidden="hidden">
+<p>Configuring the headers fluently at register time allows you to set it dynamically (e.g. based on settings).</p>
+<p>First, please add the request options parameter to your api methods: <code>[RequestOptions] IApizrRequestOptions options</code></p>
+<p>You can now set headers thanks to this option:</p>
 <pre><code class="lang-csharp">// direct configuration
-options =&gt; options.AddDelegatingHandler(YourDelegatingHandler)
+options =&gt; options.AddHeaders(&quot;HeaderKey1: HeaderValue1&quot;, &quot;HeaderKey2: HeaderValue2&quot;)
 
-// OR factory configuration with the logger instance
-options =&gt; options.AddDelegatingHandler(logger =&gt; YourDelegatingHandler)
+// OR factory configuration
+options =&gt; options.AddHeaders(() =&gt; $&quot;HeaderKey3: {YourHeaderValue3}&quot;)
 
-// OR factory configuration with the logger and options instances
-options =&gt; options.AddDelegatingHandler((logger, options) =&gt; YourDelegatingHandler)
-</code></pre></section>
-<section id="tabpanel_883qP+JZ4N_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+// OR extended factory configuration with the service provider instance
+options =&gt; options.AddHeaders(serviceProvider =&gt; $&quot;HeaderKey3: {serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().YourHeaderValue3}&quot;)
+</code></pre><p>All headers fluent options are available with or without using registry. 
+It means that you can share headers configuration, setting it at registry level and/or set some specific one at api level.</p>
+</section>
+<section id="tabpanel_oHeVXnGDhc_tabid-requesting" role="tabpanel" data-tab="tabid-requesting" aria-hidden="true" hidden="hidden">
+<p>Configuring the headers fluently at request time allows you to set it at the very end, just before sending the request.</p>
+<p>First, please add the request options parameter to your api methods: <code>[RequestOptions] IApizrRequestOptions options</code></p>
+<p>You can now set headers thanks to this option:</p>
 <pre><code class="lang-csharp">// direct configuration
-options =&gt; options.AddDelegatingHandler(YourDelegatingHandler)
-
-// OR factory configuration with the service provider instance
-options =&gt; options.AddDelegatingHandler(serviceProvider =&gt; YourDelegatingHandler)
-
-// OR factory configuration with the service provider and options instances
-options =&gt; options.AddDelegatingHandler((serviceProvider, options) =&gt; YourDelegatingHandler)
-</code></pre></section>
-</div>
-<div class="WARNING"><h5>Warning</h5><p><strong>Inner DelegatingHandler</strong></p>
-<p>Do not try to manage delegating handlers hierarchy by yourself, providing any inner handlers. Instead, just add your handlers thanks to the AddDelegatingHandler option the order you want and Apizr will do it for you.</p>
+options =&gt; options.AddHeaders(&quot;HeaderKey1: HeaderValue1&quot;, &quot;HeaderKey2: HeaderValue2&quot;)
+</code></pre><p>You can do the same thing with the Refit&#39;s Header parameter attribute, but you&#39;ll have to design your api with this special parameter.</p>
+</section>
 </div>
 </article>
           </div>

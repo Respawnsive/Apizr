@@ -41,7 +41,7 @@ From here, you'll get your apizr.json default configuration file into your curre
       "withCacheProvider": "None",
       "withMediation": false,
       "withOptionalMediation": false,
-      "withMapping": false,
+      "withMapping": "None",
       "className": "{controller}",
       "operationGenerationMode": "MultipleClientsFromOperationId",
       "additionalNamespaceUsages": [],
@@ -149,7 +149,10 @@ That said, let's focus on Apizr dedicated settings into the ```openApiToApizrCli
   - ```Custom```: use your own ICachingHandler implementation
 - ```withMediation``` (default: ```false```): add mediation into extended registration process (extended registration only)
 - ```withOptionalMediation``` (default: ```false```): add optional mediation into extended registration process (extended registration only)
-- ```withMapping``` (default: ```false```): add AutoMapper into registration process
+- ```withMapping``` (default: ```None```): 
+  - ```None```: do not map data
+  - ```AutoMapper```: use AutoMapper
+  - ```Mapster```: use Mapster
 
 ### Generating
 

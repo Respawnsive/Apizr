@@ -87,8 +87,8 @@ namespace Apizr.Tools.NSwag.Commands.CodeGeneration
             set => Settings.WithOptionalMediation = value;
         }
 
-        [Argument(Name = "WithMapping", IsRequired = false, Description = "Add data mapping")]
-        public bool WithMapping
+        [Argument(Name = "WithMapping", IsRequired = false, Description = "Add data mapping (None, AutoMapper, Mapster or Custom")]
+        public DataMapperType WithMapping
         {
             get => Settings.WithMapping;
             set => Settings.WithMapping = value;

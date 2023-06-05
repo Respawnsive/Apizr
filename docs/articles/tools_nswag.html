@@ -117,7 +117,7 @@ It relies on the well known NSwag CLI, letting define all we need in a json conf
       &quot;withCacheProvider&quot;: &quot;None&quot;,
       &quot;withMediation&quot;: false,
       &quot;withOptionalMediation&quot;: false,
-      &quot;withMapping&quot;: false,
+      &quot;withMapping&quot;: &quot;None&quot;,
       &quot;className&quot;: &quot;{controller}&quot;,
       &quot;operationGenerationMode&quot;: &quot;MultipleClientsFromOperationId&quot;,
       &quot;additionalNamespaceUsages&quot;: [],
@@ -227,7 +227,12 @@ It means that you can adjust everything you used to with classic NSwag generatio
 </li>
 <li><code>withMediation</code> (default: <code>false</code>): add mediation into extended registration process (extended registration only)</li>
 <li><code>withOptionalMediation</code> (default: <code>false</code>): add optional mediation into extended registration process (extended registration only)</li>
-<li><code>withMapping</code> (default: <code>false</code>): add AutoMapper into registration process</li>
+<li><code>withMapping</code> (default: <code>None</code>): <ul>
+<li><code>None</code>: do not map data</li>
+<li><code>AutoMapper</code>: use AutoMapper</li>
+<li><code>Mapster</code>: use Mapster</li>
+</ul>
+</li>
 </ul>
 <h3 id="generating">Generating</h3>
 <p>Once configuration file has been adjusted to your needs, execute the <code>run</code> command from the same directory where your apizr.json stands:</p>

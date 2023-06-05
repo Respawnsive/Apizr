@@ -61,7 +61,7 @@ namespace Apizr.Tools.NSwag.Generation
         public bool WithOptionalMediation { get; set; }
 
         /// <summary>Gets or sets a value indicating whether to allow adding date mapping </summary>
-        public bool WithMapping { get; set; }
+        public DataMapperType WithMapping { get; set; }
 
         /// <summary>Gets or sets the strategy for naming routes (default: CSharpRouteNamingStrategy.None).</summary>
         public ApizrRouteNamingStrategy RouteNamingStrategy { get; set; }

@@ -57,7 +57,7 @@ namespace Apizr.Tools.NSwag.Generation.Models
 
         public bool WithOptionalMediation => _settings.WithOptionalMediation;
 
-        public bool WithMapping => _settings.WithMapping;
+        public string WithMapping => _settings.WithMapping.ToString();
 
     }
 }

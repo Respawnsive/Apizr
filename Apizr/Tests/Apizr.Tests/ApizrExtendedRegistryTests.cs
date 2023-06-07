@@ -666,7 +666,7 @@ namespace Apizr.Tests
         {
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             services.AddApizr(
                 registry => registry
@@ -692,7 +692,7 @@ namespace Apizr.Tests
         {
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             services.AddApizr(
                 registry => registry
@@ -1428,7 +1428,7 @@ namespace Apizr.Tests
         {
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             services.AddApizr(registry => registry
                 .AddGroup(transferRegistry => transferRegistry
@@ -1452,7 +1452,7 @@ namespace Apizr.Tests
         {
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             services.AddApizr(
                 registry => registry

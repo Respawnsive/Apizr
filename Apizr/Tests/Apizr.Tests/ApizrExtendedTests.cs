@@ -440,7 +440,7 @@ namespace Apizr.Tests
         {
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             services.AddApizrManagerFor<IReqResUserService>(config => config
                     .WithMediation());
@@ -460,7 +460,7 @@ namespace Apizr.Tests
         {
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             services.AddApizrManagerFor<IReqResUserService>(config => config
                     .WithOptionalMediation());
@@ -715,7 +715,7 @@ namespace Apizr.Tests
         {
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             services.AddApizrTransferManager(config => config
                 .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
@@ -735,7 +735,7 @@ namespace Apizr.Tests
         {
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             services.AddApizrTransferManager(config => config
                 .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")

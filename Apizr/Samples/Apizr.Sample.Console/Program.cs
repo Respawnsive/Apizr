@@ -387,7 +387,7 @@ namespace Apizr.Sample.Console
                                 }
                             }
 
-                            services.AddMediatR(typeof(Program));
+                            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
                         }
                         
                         services.AddAutoMapper(typeof(Program));

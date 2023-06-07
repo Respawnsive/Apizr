@@ -733,7 +733,7 @@ namespace Apizr
                 apizrOptions.RefitSettingsFactory.Invoke(serviceProvider);
                 apizrOptions.HttpClientHandlerFactory.Invoke(serviceProvider);
                 apizrOptions.LoggerFactory.Invoke(serviceProvider, webApiFriendlyName);
-                apizrOptions.HeadersFactory.Invoke(serviceProvider);
+                apizrOptions.HeadersFactory?.Invoke(serviceProvider);
 
                 return Activator.CreateInstance(typeof(ApizrExtendedManagerOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions);
             });

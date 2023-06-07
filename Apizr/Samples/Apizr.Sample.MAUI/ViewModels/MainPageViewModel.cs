@@ -1,17 +1,17 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Optional.Cruding.Sending;
 using Apizr.Requesting;
 using Apizr.Sample.Models;
-using CommunityToolkit.Maui.Alerts;
 using Fusillade;
 using MediatR;
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 
 namespace Apizr.Sample.MAUI.ViewModels
 {
 
-    public class MainPageViewModel : ViewModelBase
+    public class MainPageViewModel : ViewModel
     {
         private readonly IApizrManager<IReqResService> _reqResManager;
         private readonly IApizrManager<IHttpBinService> _httpBinManager;
@@ -19,10 +19,8 @@ namespace Apizr.Sample.MAUI.ViewModels
         private readonly IApizrManager<ICrudApi<UserDetails, int, IEnumerable<UserDetails>, IDictionary<string, object>>> _userDetailsCrudManager;
         private readonly IMediator _mediator;
         private readonly IApizrCrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> _userOptionalMediator;
-        private bool _isRefreshing;
-        private ObservableCollection<User> _users;
 
-        public MainPageViewModel(IApizrExtendedRegistry apizrRegistry)
+        public MainPageViewModel(BaseServices services, IApizrExtendedRegistry apizrRegistry) : base(services)
         //IApizrManager<IReqResService> reqResManager),
         //IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> userCrudManager,
         //IApizrManager<IHttpBinService> httpBinManager,
@@ -36,41 +34,19 @@ namespace Apizr.Sample.MAUI.ViewModels
             //_userDetailsCrudManager = userDetailsCrudManager;
             //_mediator = mediator;
             //_userOptionalMediator = userOptionalMediator;
-            GetUsersCommand = new Command(async () => await GetUsersAsync());
-            GetUserDetailsCommand = new Command<User>(async user => await GetUserDetailsAsync(user));
-            AuthCommand = new Command(async () => await AuthAsync());
-            Users = new ObservableCollection<User>();
+            GetUsersCommand = ReactiveCommand.CreateFromTask(GetUsersAsync);
+            GetUserDetailsCommand = ReactiveCommand.CreateFromTask<User>(GetUserDetailsAsync);
+            AuthCommand = ReactiveCommand.CreateFromTask(AuthAsync);
+            Users = new ObservableList<User>();
 
-            GetUsersCommand.Execute(null);
+            Title = "Main Page";
         }
 
         #region Properties
 
-        public ObservableCollection<User> Users
-        {
-            get => _users;
-            private set
-            {
-                if (_users != value)
-                {
-                    _users = value; 
-                    RaisePropertyChanged(nameof(_users));
-                }
-            }
-        }
+        [Reactive] public ObservableList<User> Users { get; set; }
 
-        public bool IsRefreshing
-        {
-            get => _isRefreshing;
-            set
-            {
-                if (_isRefreshing != value)
-                {
-                    _isRefreshing = value;
-                    RaisePropertyChanged(nameof(IsRefreshing));
-                }
-            }
-        }
+        [Reactive] public bool IsRefreshing { get; set; }
 
         public ICommand GetUsersCommand { get; }
 
@@ -95,7 +71,7 @@ namespace Apizr.Sample.MAUI.ViewModels
 
             IsRefreshing = true;
 
-            IList<User> users = null;
+            IList<User>? users = null;
             try
             {
                 // This is a manually defined web api call into IReqResService (classic actually)
@@ -117,21 +93,21 @@ namespace Apizr.Sample.MAUI.ViewModels
             catch (ApizrException<UserList> e)
             {
                 var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
-                Toast.Make(message);
+                await Dialogs.Snackbar(message);
 
                 users = e.CachedResult?.Data;
             }
             catch (ApizrException<PagedResult<User>> e)
             {
                 var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
-                Toast.Make(message);
+                await Dialogs.Snackbar(message);
 
                 users = e.CachedResult?.Data?.ToList();
             }
             finally
             {
                 if (users != null && users.Any())
-                    Users = new ObservableCollection<User>(users);
+                    Users.ReplaceAll(users);
 
                 IsRefreshing = false;
             }
@@ -145,7 +121,7 @@ namespace Apizr.Sample.MAUI.ViewModels
             //}, e =>
             //{
             //    var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
-            //    Toast.Make(message);
+            //    await Dialogs.Snackbar(message);
 
             //    if (e.CachedResult?.Data != null && e.CachedResult.Data.Any())
             //        Users = new ObservableCollection<User>(e.CachedResult.Data);
@@ -177,12 +153,12 @@ namespace Apizr.Sample.MAUI.ViewModels
         private async Task GetUserDetailsAsync(User user)
         {
 
-            User fetchedUser = null;
+            User? fetchedUser = null;
 
             try
             {
                 // This is a manually defined web api call into IReqResService (classic actually)
-                var userDetails = await _reqResManager.ExecuteAsync((ct, api) => api.GetUserAsync(user.Id, (int)Priority.UserInitiated, ct), CancellationToken.None);
+                var userDetails = await _reqResManager.ExecuteAsync((opt, api) => api.GetUserAsync(user.Id, opt), options => options.WithPriority(Priority.UserInitiated));
                 fetchedUser = userDetails?.User;
 
                 // This is the Crud way, with or without Crud attribute auto registration, but without mediation
@@ -196,7 +172,7 @@ namespace Apizr.Sample.MAUI.ViewModels
             catch (ApizrException<UserDetails> e)
             {
                 var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
-                Toast.Make(message);
+                await Dialogs.Snackbar(message);
 
                 fetchedUser = e.CachedResult?.User;
             }
@@ -209,13 +185,14 @@ namespace Apizr.Sample.MAUI.ViewModels
             //}, e =>
             //{
             //    var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
-            //    Toast.Make(message);
+            //    await Dialogs.Snackbar(message);
 
             //    fetchedUser = e.CachedResult?.User;
             //});
 
             if (fetchedUser != null)
-                Toast.Make($"{fetchedUser.FirstName} {fetchedUser.LastName}\n {fetchedUser.Email}");
+                await Dialogs.Alert(
+                    $"{fetchedUser.FirstName} {fetchedUser.LastName}\n {fetchedUser.Email}", fetchedUser.FirstName);
         }
 
         private async Task AuthAsync()
@@ -234,7 +211,18 @@ namespace Apizr.Sample.MAUI.ViewModels
             }
 
             if (!string.IsNullOrWhiteSpace(result))
-                Toast.Make(result);
+                await Dialogs.Snackbar(result);
+        }
+
+        #endregion
+
+        #region Lifecycle
+
+        public override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            GetUsersCommand.Execute(null);
         }
 
         #endregion

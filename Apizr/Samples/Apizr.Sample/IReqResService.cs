@@ -73,6 +73,9 @@ namespace Apizr.Sample
         Task<UserDetails> GetUserAsync(int userId, [Priority] int priority, CancellationToken cancellationToken);
 
         [Get("/users/{userId}")]
+        Task<UserDetails> GetUserAsync(int userId, [RequestOptions] IApizrRequestOptions options);
+
+        [Get("/users/{userId}")]
         Task<UserDetails> GetUserAsync(int userId, IDictionary<string, object> parameters, [Priority] int priority, CancellationToken cancellationToken);
 
         [Post("/users")]

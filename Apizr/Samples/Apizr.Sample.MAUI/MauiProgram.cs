@@ -1,13 +1,13 @@
 ﻿using Apizr.Policing;
-using Apizr.Sample.MAUI.Services;
 using Apizr.Sample.MAUI.Views;
 using Apizr.Sample.MAUI.ViewModels;
 using Apizr.Sample.Models;
 using CommunityToolkit.Maui;
-using MediatR;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
+using Prism.DryIoc;
+using System.Reflection;
 
 namespace Apizr.Sample.MAUI
 {
@@ -16,20 +16,23 @@ namespace Apizr.Sample.MAUI
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+                .UseShinyFramework(
+                    new DryIocContainerExtension(),
+                    prism => prism.OnAppStart("NavigationPage/MainPage")
+                )
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSansRegular.ttf", "OpenSansRegular");
                 });
 
-            var services = builder.Services;
+            var services = builder.Services; 
 
-            // Mvvm
-            services.AddTransient<MainPage>();
-            services.AddTransient<MainPageViewModel>(); 
-            services.AddSingleton<INavigationService, NavigationService>();
+            // Navigation
+            services.RegisterForNavigation<MainPage, MainPageViewModel>();
 
             // Apizr
             var registry = new PolicyRegistry
@@ -59,7 +62,7 @@ namespace Apizr.Sample.MAUI
                     .WithMediation()
                     .WithOptionalMediation());
 
-            services.AddMediatR(typeof(App));
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             return builder.Build();
         }

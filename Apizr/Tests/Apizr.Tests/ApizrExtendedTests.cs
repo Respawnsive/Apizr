@@ -778,5 +778,27 @@ namespace Apizr.Tests
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKey("testKey2");
         }
+
+        [Fact]
+        public async Task Requesting_With_Both_Attribute_And_Fluent_Headers_Should_Set_Merged_Headers()
+        {
+            var watcher = new WatchingRequestHandler();
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+
+            services.AddApizrManagerFor<IReqResSimpleService>(options => options
+                .WithHeaders("testKey2: testValue2")
+                .AddDelegatingHandler(watcher));
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            // Get instances from the container
+            var reqResManager = serviceProvider.GetService<IApizrManager<IReqResSimpleService>>(); // Custom
+
+            await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
+                options => options.WithHeaders("testKey3: testValue3", "testKey4: testValue4"));
+            watcher.Headers.Should().NotBeNull();
+            watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4");
+        }
     }
 }

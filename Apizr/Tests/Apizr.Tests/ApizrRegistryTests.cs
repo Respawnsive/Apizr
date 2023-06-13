@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring;
+using Apizr.Configuring.Registry;
 using Apizr.Extending;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Logging;
@@ -1107,6 +1108,25 @@ namespace Apizr.Tests
             watcher.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.2");
             watcher.Headers.GetValues("testKey3").Should().HaveCount(1).And.Contain("testValue3.2");
             watcher.Headers.GetValues("testKey4").Should().HaveCount(1).And.Contain("testValue4");
+        }
+
+        [Fact]
+        public async Task Requesting_With_Both_Attribute_And_Fluent_Headers_Should_Set_Merged_Headers()
+        {
+            var watcher = new WatchingRequestHandler();
+
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
+                .AddManagerFor<IReqResSimpleService>(options => options
+                .WithHeaders("testKey2: testValue2")
+                .AddDelegatingHandler(watcher)),
+                options => options.WithHeaders("testKey3: testValue3"));
+
+            apizrRegistry.TryGetManagerFor<IReqResSimpleService>(out var reqResManager).Should().BeTrue(); // Custom
+            
+            await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
+                options => options.WithHeaders("testKey4: testValue4"));
+            watcher.Headers.Should().NotBeNull();
+            watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4");
         }
     }
 }

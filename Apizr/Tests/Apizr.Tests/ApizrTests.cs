@@ -20,6 +20,7 @@ using FluentAssertions;
 using Mapster;
 using MapsterMapper;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using MonkeyCache.FileStore;
 using Polly;
 using Polly.Extensions.Http;
@@ -556,11 +557,25 @@ namespace Apizr.Tests
                 .WithHeaders("testKey2: testValue2")
                 .AddDelegatingHandler(watcher));
 
-
             // Shortcut
             await apizrTransferManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKey("testKey2");
+        }
+
+        [Fact]
+        public async Task Requesting_With_Both_Attribute_And_Fluent_Headers_Should_Set_Merged_Headers()
+        {
+            var watcher = new WatchingRequestHandler();
+
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResSimpleService>(options => options
+                .WithHeaders("testKey2: testValue2")
+                .AddDelegatingHandler(watcher));
+
+            await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
+                options => options.WithHeaders("testKey3: testValue3", "testKey4: testValue4"));
+            watcher.Headers.Should().NotBeNull();
+            watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4");
         }
     }
 }

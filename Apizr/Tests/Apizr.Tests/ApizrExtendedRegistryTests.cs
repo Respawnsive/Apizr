@@ -22,6 +22,7 @@ using Apizr.Requesting;
 using Apizr.Tests.Apis;
 using Apizr.Tests.Helpers;
 using Apizr.Tests.Models;
+using Apizr.Tests.Settings;
 using Apizr.Transferring.Managing;
 using Apizr.Transferring.Requesting;
 using FluentAssertions;
@@ -30,6 +31,7 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using MonkeyCache.FileStore;
 using Polly;
 using Polly.Extensions.Http;
@@ -1512,12 +1514,17 @@ namespace Apizr.Tests
             var watcher = new WatchingRequestHandler();
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
+            services.AddSettings();
 
             services.AddApizr(registry => registry
                     .AddManagerFor<IReqResSimpleService>(options => options
                         .WithHeaders("testKey2: testValue2")
                         .AddDelegatingHandler(watcher)),
-                options => options.WithHeaders("testKey3: testValue3"));
+                options => options.WithHeaders(serviceProvider => new[]
+                {
+                    $"TestJsonString: {serviceProvider.GetRequiredService<IOptions<TestSettings>>().Value.TestJsonString}",
+                    "testKey3: testValue3"
+                }));
 
             var serviceProvider = services.BuildServiceProvider();
 
@@ -1527,7 +1534,8 @@ namespace Apizr.Tests
             await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
                 options => options.WithHeaders("testKey4: testValue4"));
             watcher.Headers.Should().NotBeNull();
-            watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4");
+            watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "TestJsonString", "testKey3", "testKey4");
+            watcher.Headers.GetValues("TestJsonString").Should().HaveCount(1).And.Contain("TestJsonString");
         }
     }
 }

@@ -19,6 +19,13 @@ namespace Apizr.Sample
 }
 ```
 
+>[!TIP]
+>
+>**Fluent Headers**
+>
+>Note that you can either define headers at registration time with some fluent options.
+
+
 ### Configuring
 
 To activate this feature, you have to configure it thanks to the options builder:
@@ -29,6 +36,11 @@ To activate this feature, you have to configure it thanks to the options builder
 options => options.WithAuthenticationHandler<YourSettingsService, YourSignInService>(
     YourSettingsServiceInstance, settingsService => settingsService.Token, 
     YourSignInServiceInstance, signInService => signInService.SignInAsync)
+
+// OR with service factory
+options => options.WithAuthenticationHandler<YourSettingsService, YourSignInService>(
+    () => YourSettingsServiceInstance, settingsService => settingsService.Token, 
+    () => YourSignInServiceInstance, signInService => signInService.SignInAsync)
 ```
 
 - `YourSettingsServiceInstance` should be replaced by whatever settings manager instance of your choice
@@ -61,7 +73,18 @@ Here are all other authentication options:
 
 ##### [Static](#tab/tabid-static)
 
-- When you don't want Apizr to save the token into settings and want to deal with the refresh token call with a method:
+- When you don't want Apizr to save the token anywhere neither refresh it, but just want to load it when needed:
+```csharp
+options => options.WithAuthenticationHandler<YourSettingsService>(
+    YourSettingsServiceInstance, settingsService => settingsService.Token)
+
+// OR with service factory
+options => options.WithAuthenticationHandler<YourSettingsService>(
+    () => YourSettingsServiceInstance, settingsService => settingsService.Token)
+```
+`settingsService.Token` should be here a public string property with a private setter, containing the token.
+
+- When you don't want Apizr to save the token anywhere but want to deal with the refresh token call with a method:
 ```csharp
 options => options.WithAuthenticationHandler(OnRefreshToken)
 ...
@@ -76,15 +99,8 @@ private string OnRefreshTokden(HttpRequestMessage message)
 options => options.WithAuthenticationHandler<YourSettingsService>(
     YourSettingsServiceInstance, settingsService => settingsService.Token,
     OnRefreshToken)
-...
-private string OnRefreshTokden(HttpRequestMessage message)
-{
-    // whatever returning a refreshed string token
-}
-```
 
-- When you want to provide the settings service by a factory and deal with the refresh token call with a method:
-```csharp
+// Or with service factory
 options => options.WithAuthenticationHandler<YourSettingsService>(
     () => YourSettingsServiceInstance, settingsService => settingsService.Token,
     OnRefreshToken)
@@ -95,13 +111,6 @@ private string OnRefreshTokden(HttpRequestMessage message)
 }
 ```
 
-- When you want to provide both settings service and sign in service by a factory:
-```csharp
-options => options.WithAuthenticationHandler<YourSettingsService, YourSignInService>(
-    () => YourSettingsServiceInstance, settingsService => settingsService.Token, 
-    () => YourSignInServiceInstance, signInService => signInService.SignInAsync)
-```
-
 - When you want to provide your own AuthenticationHandlerBase implementation:
 ```csharp
 options => options.WithAuthenticationHandler<YourAuthenticationHandler>(
@@ -110,7 +119,14 @@ options => options.WithAuthenticationHandler<YourAuthenticationHandler>(
 
 ##### [Extended](#tab/tabid-extended)
 
-- When you don't want Apizr to save the token into settings and want to deal with the refresh token call with a method:
+- When you don't want Apizr to save the token anywhere neither refresh it, but just want to load it when needed:
+```csharp
+options => options.WithAuthenticationHandler<ISettingsService>(
+    settingsService => settingsService.Token)
+```
+`settingsService.Token` should be here a public string property with a private setter, containing the token.
+
+- When you don't want Apizr to save the token anywhere but want to deal with the refresh token call with a method:
 ```csharp
 options => options.WithAuthenticationHandler(OnRefreshToken)
 ...

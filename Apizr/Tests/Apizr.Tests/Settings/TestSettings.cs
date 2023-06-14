@@ -2,6 +2,13 @@
 {
     public class TestSettings
     {
+        public TestSettings() { }
+
+        public TestSettings(string testJsonString)
+        {
+            TestJsonString = testJsonString;
+        }
+
         /// <summary>
         /// Bound from appsettings.json
         /// </summary>

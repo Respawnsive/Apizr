@@ -10,7 +10,9 @@ items:
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.Options
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
+  - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
+  - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})
@@ -664,6 +666,52 @@ items:
   - Public
   fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler(Of TSettingsService, TTokenService)(System.Func(Of TSettingsService), System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, System.String)), System.Func(Of TTokenService), System.Linq.Expressions.Expression(Of System.Func(Of TTokenService, System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task(Of System.String))))
   name.vb: WithAuthenticationHandler(Of TSettingsService, TTokenService)(Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String)), Func(Of TTokenService), Expression(Of Func(Of TTokenService, HttpRequestMessage, Task(Of String))))
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  id: WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  parent: Apizr.Configuring.Proper.ApizrProperOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithAuthenticationHandler<TSettingsService>(TSettingsService, Expression<Func<TSettingsService, String>>)
+  nameWithType: ApizrProperOptionsBuilder.WithAuthenticationHandler<TSettingsService>(TSettingsService, Expression<Func<TSettingsService, String>>)
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler<TSettingsService>(TSettingsService, System.Linq.Expressions.Expression<System.Func<TSettingsService, System.String>>)
+  type: Method
+  source:
+    id: WithAuthenticationHandler
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
+    startLine: 136
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Proper
+  summary: "\nProvide your own settings management service with its token source\n"
+  example: []
+  syntax:
+    content: public IApizrProperOptionsBuilder WithAuthenticationHandler<TSettingsService>(TSettingsService settingsService, Expression<Func<TSettingsService, string>> tokenProperty)
+    parameters:
+    - id: settingsService
+      type: '{TSettingsService}'
+      description: A <code data-dev-comment-type="typeparamref" class="typeparamref">TSettingsService</code> instance
+    - id: tokenProperty
+      type: System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}}
+      description: The token property to get from
+    typeParameters:
+    - id: TSettingsService
+      description: Your settings management service (getting token)
+    return:
+      type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
+    content.vb: Public Function WithAuthenticationHandler(Of TSettingsService)(settingsService As TSettingsService, tokenProperty As Expression(Of Func(Of TSettingsService, String))) As IApizrProperOptionsBuilder
+  overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler*
+  implements:
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithAuthenticationHandler``1({TSettingsService},System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}})
+  nameWithType.vb: ApizrProperOptionsBuilder.WithAuthenticationHandler(Of TSettingsService)(TSettingsService, Expression(Of Func(Of TSettingsService, String)))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler(Of TSettingsService)(TSettingsService, System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, System.String)))
+  name.vb: WithAuthenticationHandler(Of TSettingsService)(TSettingsService, Expression(Of Func(Of TSettingsService, String)))
 - uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   id: WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
@@ -678,7 +726,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 136
+    startLine: 142
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -713,6 +761,52 @@ items:
   - Public
   fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler(Of TSettingsService)(TSettingsService, System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, System.String)), System.Func(Of System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task(Of System.String)))
   name.vb: WithAuthenticationHandler(Of TSettingsService)(TSettingsService, Expression(Of Func(Of TSettingsService, String)), Func(Of HttpRequestMessage, Task(Of String)))
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  id: WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  parent: Apizr.Configuring.Proper.ApizrProperOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithAuthenticationHandler<TSettingsService>(Func<TSettingsService>, Expression<Func<TSettingsService, String>>)
+  nameWithType: ApizrProperOptionsBuilder.WithAuthenticationHandler<TSettingsService>(Func<TSettingsService>, Expression<Func<TSettingsService, String>>)
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler<TSettingsService>(System.Func<TSettingsService>, System.Linq.Expressions.Expression<System.Func<TSettingsService, System.String>>)
+  type: Method
+  source:
+    id: WithAuthenticationHandler
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
+    startLine: 147
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Proper
+  summary: "\nProvide your own settings management service with its token property\n"
+  example: []
+  syntax:
+    content: public IApizrProperOptionsBuilder WithAuthenticationHandler<TSettingsService>(Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> tokenProperty)
+    parameters:
+    - id: settingsServiceFactory
+      type: System.Func{{TSettingsService}}
+      description: A <code data-dev-comment-type="typeparamref" class="typeparamref">TSettingsService</code> instance factory
+    - id: tokenProperty
+      type: System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}}
+      description: The token property to get from
+    typeParameters:
+    - id: TSettingsService
+      description: Your settings management service (getting token)
+    return:
+      type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
+    content.vb: Public Function WithAuthenticationHandler(Of TSettingsService)(settingsServiceFactory As Func(Of TSettingsService), tokenProperty As Expression(Of Func(Of TSettingsService, String))) As IApizrProperOptionsBuilder
+  overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler*
+  implements:
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithAuthenticationHandler``1(System.Func{{TSettingsService}},System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}})
+  nameWithType.vb: ApizrProperOptionsBuilder.WithAuthenticationHandler(Of TSettingsService)(Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String)))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler(Of TSettingsService)(System.Func(Of TSettingsService), System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, System.String)))
+  name.vb: WithAuthenticationHandler(Of TSettingsService)(Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String)))
 - uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   id: WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
@@ -727,7 +821,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 141
+    startLine: 153
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -776,7 +870,7 @@ items:
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 150
+    startLine: 162
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -820,7 +914,7 @@ items:
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 154
+    startLine: 166
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -864,7 +958,7 @@ items:
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 158
+    startLine: 170
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -908,7 +1002,7 @@ items:
   source:
     id: WithContext
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 166
+    startLine: 178
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -951,7 +1045,7 @@ items:
   source:
     id: WithExCatching
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 198
+    startLine: 210
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -997,7 +1091,7 @@ items:
   source:
     id: WithExCatching
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 230
+    startLine: 242
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1045,7 +1139,7 @@ items:
   source:
     id: WithHandlerParameter
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 237
+    startLine: 249
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1085,7 +1179,7 @@ items:
   source:
     id: WithLogging
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 245
+    startLine: 257
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1131,7 +1225,7 @@ items:
   source:
     id: WithLogging
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 250
+    startLine: 262
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1177,7 +1271,7 @@ items:
   source:
     id: WithLogging
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 261
+    startLine: 273
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1217,7 +1311,7 @@ items:
   source:
     id: WithHeaders
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 268
+    startLine: 280
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1257,7 +1351,7 @@ items:
   source:
     id: WithHeaders
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Configuring\Proper\ApizrProperOptionsBuilder.cs
-    startLine: 272
+    startLine: 284
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -6239,6 +6333,225 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithAuthenticationHandler``1({TSettingsService},System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}})
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  name: WithAuthenticationHandler<TSettingsService>(TSettingsService, Expression<Func<TSettingsService, String>>)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrProperOptions, IApizrProperOptionsBuilder>.WithAuthenticationHandler<TSettingsService>(TSettingsService, Expression<Func<TSettingsService, String>>)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder>.WithAuthenticationHandler<TSettingsService>(TSettingsService, System.Linq.Expressions.Expression<System.Func<TSettingsService, System.String>>)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of IApizrProperOptions, IApizrProperOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)(TSettingsService, Expression(Of Func(Of TSettingsService, String)))
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)(TSettingsService, System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, System.String)))
+  name.vb: WithAuthenticationHandler(Of TSettingsService)(TSettingsService, Expression(Of Func(Of TSettingsService, String)))
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+    name: WithAuthenticationHandler<TSettingsService>
+    nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrProperOptions, IApizrProperOptionsBuilder>.WithAuthenticationHandler<TSettingsService>
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder>.WithAuthenticationHandler<TSettingsService>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TSettingsService
+    nameWithType: TSettingsService
+    fullName: TSettingsService
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TSettingsService
+    nameWithType: TSettingsService
+    fullName: TSettingsService
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+    name: WithAuthenticationHandler(Of TSettingsService)
+    nameWithType: IApizrSharedRegistrationOptionsBuilder(Of IApizrProperOptions, IApizrProperOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TSettingsService
+    nameWithType: TSettingsService
+    fullName: TSettingsService
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TSettingsService
+    nameWithType: TSettingsService
+    fullName: TSettingsService
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  isExternal: true
+  name: WithAuthenticationHandler<TSettingsService>(TSettingsService, Expression<Func<TSettingsService, String>>)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler<TSettingsService>(TSettingsService, Expression<Func<TSettingsService, String>>)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler<TSettingsService>(TSettingsService, System.Linq.Expressions.Expression<System.Func<TSettingsService, System.String>>)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)(TSettingsService, Expression(Of Func(Of TSettingsService, String)))
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)(TSettingsService, System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, System.String)))
+  name.vb: WithAuthenticationHandler(Of TSettingsService)(TSettingsService, Expression(Of Func(Of TSettingsService, String)))
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+    name: WithAuthenticationHandler<TSettingsService>
+    nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler<TSettingsService>
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler<TSettingsService>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TSettingsService
+    nameWithType: TSettingsService
+    fullName: TSettingsService
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TSettingsService
+    nameWithType: TSettingsService
+    fullName: TSettingsService
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+    name: WithAuthenticationHandler(Of TSettingsService)
+    nameWithType: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TSettingsService
+    nameWithType: TSettingsService
+    fullName: TSettingsService
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TSettingsService
+    nameWithType: TSettingsService
+    fullName: TSettingsService
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithAuthenticationHandler``1({TSettingsService},System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}
@@ -6596,6 +6909,269 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithAuthenticationHandler``1(System.Func{{TSettingsService}},System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}})
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  name: WithAuthenticationHandler<TSettingsService>(Func<TSettingsService>, Expression<Func<TSettingsService, String>>)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrProperOptions, IApizrProperOptionsBuilder>.WithAuthenticationHandler<TSettingsService>(Func<TSettingsService>, Expression<Func<TSettingsService, String>>)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder>.WithAuthenticationHandler<TSettingsService>(System.Func<TSettingsService>, System.Linq.Expressions.Expression<System.Func<TSettingsService, System.String>>)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of IApizrProperOptions, IApizrProperOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)(Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String)))
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)(System.Func(Of TSettingsService), System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, System.String)))
+  name.vb: WithAuthenticationHandler(Of TSettingsService)(Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String)))
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+    name: WithAuthenticationHandler<TSettingsService>
+    nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrProperOptions, IApizrProperOptionsBuilder>.WithAuthenticationHandler<TSettingsService>
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder>.WithAuthenticationHandler<TSettingsService>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TSettingsService
+    nameWithType: TSettingsService
+    fullName: TSettingsService
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TSettingsService
+    nameWithType: TSettingsService
+    fullName: TSettingsService
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+    name: WithAuthenticationHandler(Of TSettingsService)
+    nameWithType: IApizrSharedRegistrationOptionsBuilder(Of IApizrProperOptions, IApizrProperOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TSettingsService
+    nameWithType: TSettingsService
+    fullName: TSettingsService
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TSettingsService
+    nameWithType: TSettingsService
+    fullName: TSettingsService
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  isExternal: true
+  name: WithAuthenticationHandler<TSettingsService>(Func<TSettingsService>, Expression<Func<TSettingsService, String>>)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler<TSettingsService>(Func<TSettingsService>, Expression<Func<TSettingsService, String>>)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler<TSettingsService>(System.Func<TSettingsService>, System.Linq.Expressions.Expression<System.Func<TSettingsService, System.String>>)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)(Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String)))
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)(System.Func(Of TSettingsService), System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, System.String)))
+  name.vb: WithAuthenticationHandler(Of TSettingsService)(Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String)))
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+    name: WithAuthenticationHandler<TSettingsService>
+    nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler<TSettingsService>
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler<TSettingsService>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TSettingsService
+    nameWithType: TSettingsService
+    fullName: TSettingsService
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TSettingsService
+    nameWithType: TSettingsService
+    fullName: TSettingsService
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+    name: WithAuthenticationHandler(Of TSettingsService)
+    nameWithType: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TSettingsService
+    nameWithType: TSettingsService
+    fullName: TSettingsService
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TSettingsService
+    nameWithType: TSettingsService
+    fullName: TSettingsService
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
   - uid: System.String
     name: String
     nameWithType: String

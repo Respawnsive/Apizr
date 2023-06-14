@@ -104,6 +104,14 @@ namespace Apizr.Extending.Configuring.Shared
         /// <param name="refreshTokenMethod">The method called to refresh the token</param>
         /// <returns></returns>
         TApizrExtendedSharedOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(Expression<Func<TSettingsService, string>> tokenProperty, Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod);
+        
+        /// <summary>
+        /// Provide your own settings management service with its token property
+        /// </summary>
+        /// <typeparam name="TSettingsService">Your settings management service (getting token)</typeparam>
+        /// <param name="tokenProperty">The token property to get from</param>
+        /// <returns></returns>
+        TApizrExtendedSharedOptionsBuilder WithAuthenticationHandler<TSettingsService>(Expression<Func<TSettingsService, string>> tokenProperty);
 
         /// <summary>
         /// Provide your own settings management service and a method to refresh the token

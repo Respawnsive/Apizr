@@ -113,6 +113,83 @@
         <member name="M:Apizr.ApizrManager`1.ClearCacheAsync``1(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``0}}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="T:Apizr.Authenticating.AuthenticationHandler">
+            <summary>
+            The authentication handler implementation refreshing token
+            </summary>
+        </member>
+        <member name="M:Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <summary>
+            The authentication handler constructor
+            </summary>
+            <param name="logger">The logger</param>
+            <param name="apizrOptions">The Apizr options</param>
+            <param name="refreshTokenFactory">The refresh token factory</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Apizr.Authenticating.AuthenticationHandler.GetToken">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Authenticating.AuthenticationHandler.SetToken(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Authenticating.AuthenticationHandler.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Authenticating.AuthenticationHandler`1">
+            <summary>
+            The authentication handler implementation refreshing and saving token
+            </summary>
+            <typeparam name="TSettingsService">The settings service type</typeparam>
+        </member>
+        <member name="M:Apizr.Authenticating.AuthenticationHandler`1.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{`0},System.Linq.Expressions.Expression{System.Func{`0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <summary>
+            The authentication handler constructor
+            </summary>
+            <param name="logger">The logger</param>
+            <param name="apizrOptions">The Apizr options</param>
+            <param name="settingsServiceFactory">The settings service factory</param>
+            <param name="settingsTokenProperty">The settings service's token property expression</param>
+            <param name="refreshTokenFactory">The refresh token factory</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Apizr.Authenticating.AuthenticationHandler`1.GetToken">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Authenticating.AuthenticationHandler`1.SetToken(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Authenticating.AuthenticationHandler`1.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Authenticating.AuthenticationHandler`2">
+            <summary>
+            The authentication handler implementation refreshing and saving token
+            </summary>
+            <typeparam name="TSettingsService">The settings service type</typeparam>
+            <typeparam name="TTokenService">The refresh token service type</typeparam>
+        </member>
+        <member name="M:Apizr.Authenticating.AuthenticationHandler`2.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{`0},System.Linq.Expressions.Expression{System.Func{`0,System.String}},System.Func{`1},System.Linq.Expressions.Expression{System.Func{`1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+            <summary>
+            The authentication handler constructor
+            </summary>
+            <param name="logger">The logger</param>
+            <param name="apizrOptions">The Apizr options</param>
+            <param name="settingsServiceFactory">The settings service factory</param>
+            <param name="settingsTokenProperty">The settings service's token property expression</param>
+            <param name="tokenServiceFactory">The refresh token service factory</param>
+            <param name="refreshTokenMethod">The refresh token method to be called</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Apizr.Authenticating.AuthenticationHandler`2.GetToken">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Authenticating.AuthenticationHandler`2.SetToken(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Authenticating.AuthenticationHandler`2.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Authenticating.AuthenticationHandlerBase">
             <summary>
             The authentication handler base implementation
@@ -124,6 +201,9 @@
             </summary>
             <param name="logger">The logger</param>
             <param name="apizrOptions">The Apizr options</param>
+        </member>
+        <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <inheritdoc />
         </member>
         <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.GetToken">
             <inheritdoc />
@@ -553,7 +633,13 @@
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
@@ -1021,7 +1107,13 @@
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
@@ -1289,7 +1381,13 @@
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
@@ -2273,6 +2371,15 @@
             <param name="refreshTokenMethod">The method called to refresh the token</param>
             <returns></returns>
         </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})">
+            <summary>
+            Provide your own settings management service with its token source
+            </summary>
+            <typeparam name="TSettingsService">Your settings management service (getting token)</typeparam>
+            <param name="settingsService">A <typeparamref name="TSettingsService"/> instance</param>
+            <param name="tokenProperty">The token property to get from</param>
+            <returns></returns>
+        </member>
         <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
             <summary>
             Provide your own settings management service and a method to refresh the token
@@ -2281,6 +2388,15 @@
             <param name="settingsService">A <typeparamref name="TSettingsService"/> instance</param>
             <param name="tokenProperty">The token property used for saving</param>
             <param name="refreshTokenFactory">The method factory called to refresh the token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})">
+            <summary>
+            Provide your own settings management service with its token property
+            </summary>
+            <typeparam name="TSettingsService">Your settings management service (getting token)</typeparam>
+            <param name="settingsServiceFactory">A <typeparamref name="TSettingsService"/> instance factory</param>
+            <param name="tokenProperty">The token property to get from</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">

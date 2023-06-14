@@ -134,6 +134,17 @@ namespace Apizr.Extending.Configuring.Manager
 
         /// <inheritdoc />
         public IApizrExtendedManagerOptionsBuilder WithAuthenticationHandler<TSettingsService>(
+            Expression<Func<TSettingsService, string>> tokenProperty)
+            => AddDelegatingHandler((serviceProvider, options) =>
+                new AuthenticationHandler<TSettingsService>(
+                    serviceProvider.GetService<ILogger>(),
+                    options,
+                    serviceProvider.GetRequiredService<TSettingsService>, tokenProperty,
+                    _ => Task.FromResult(
+                        tokenProperty.Compile()(serviceProvider.GetRequiredService<TSettingsService>()))));
+
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithAuthenticationHandler<TSettingsService>(
             Expression<Func<TSettingsService, string>> tokenProperty,
             Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
             => AddDelegatingHandler((serviceProvider, options) =>

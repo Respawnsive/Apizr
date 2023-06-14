@@ -19,10 +19,12 @@ items:
   source:
     id: AuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Authenticating\AuthenticationHandler.cs
-    startLine: 11
+    startLine: 13
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
+  summary: "\nThe authentication handler implementation refreshing token\n"
+  example: []
   syntax:
     content: 'public class AuthenticationHandler : AuthenticationHandlerBase, IDisposable, IAuthenticationHandler'
     content.vb: >-
@@ -70,21 +72,29 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Authenticating\AuthenticationHandler.cs
-    startLine: 15
+    startLine: 24
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
+  summary: "\nThe authentication handler constructor\n"
+  example: []
   syntax:
-    content: public AuthenticationHandler(ILogger logger, IApizrManagerOptionsBase apizrOptions, Func<HttpRequestMessage, Task<string>> refreshToken)
+    content: public AuthenticationHandler(ILogger logger, IApizrManagerOptionsBase apizrOptions, Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
     parameters:
     - id: logger
       type: Microsoft.Extensions.Logging.ILogger
+      description: The logger
     - id: apizrOptions
       type: Apizr.Configuring.Manager.IApizrManagerOptionsBase
-    - id: refreshToken
+      description: The Apizr options
+    - id: refreshTokenFactory
       type: System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}
-    content.vb: Public Sub New(logger As ILogger, apizrOptions As IApizrManagerOptionsBase, refreshToken As Func(Of HttpRequestMessage, Task(Of String)))
+      description: The refresh token factory
+    content.vb: Public Sub New(logger As ILogger, apizrOptions As IApizrManagerOptionsBase, refreshTokenFactory As Func(Of HttpRequestMessage, Task(Of String)))
   overload: Apizr.Authenticating.AuthenticationHandler.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
   nameWithType.vb: AuthenticationHandler.AuthenticationHandler(ILogger, IApizrManagerOptionsBase, Func(Of HttpRequestMessage, Task(Of String)))
   modifiers.csharp:
   - public
@@ -106,14 +116,17 @@ items:
   source:
     id: GetToken
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Authenticating\AuthenticationHandler.cs
-    startLine: 20
+    startLine: 30
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
+  summary: "\nThe method called to get token from settings\n"
+  example: []
   syntax:
     content: public override string GetToken()
     return:
       type: System.String
+      description: ''
     content.vb: Public Overrides Function GetToken As String
   overridden: Apizr.Authenticating.AuthenticationHandlerBase.GetToken
   overload: Apizr.Authenticating.AuthenticationHandler.GetToken*
@@ -137,15 +150,18 @@ items:
   source:
     id: SetToken
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Authenticating\AuthenticationHandler.cs
-    startLine: 22
+    startLine: 33
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
+  summary: "\nThe method called to save token into settings\n"
+  example: []
   syntax:
     content: public override void SetToken(string token)
     parameters:
     - id: token
       type: System.String
+      description: The token to save
     content.vb: Public Overrides Sub SetToken(token As String)
   overridden: Apizr.Authenticating.AuthenticationHandlerBase.SetToken(System.String)
   overload: Apizr.Authenticating.AuthenticationHandler.SetToken*
@@ -169,17 +185,21 @@ items:
   source:
     id: RefreshTokenAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Authenticating\AuthenticationHandler.cs
-    startLine: 24
+    startLine: 36
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
+  summary: "\nThe method called to refresh token when rejected or empty\n"
+  example: []
   syntax:
     content: public override Task<string> RefreshTokenAsync(HttpRequestMessage request)
     parameters:
     - id: request
       type: System.Net.Http.HttpRequestMessage
+      description: The request to authenticate
     return:
       type: System.Threading.Tasks.Task{System.String}
+      description: ''
     content.vb: Public Overrides Function RefreshTokenAsync(request As HttpRequestMessage) As Task(Of String)
   overridden: Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
   overload: Apizr.Authenticating.AuthenticationHandler.RefreshTokenAsync*
@@ -699,6 +719,9 @@ references:
   name: System.Net.Http
   nameWithType: System.Net.Http
   fullName: System.Net.Http
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
 - uid: Apizr.Authenticating.AuthenticationHandler.#ctor*
   commentId: Overload:Apizr.Authenticating.AuthenticationHandler.#ctor
   name: AuthenticationHandler

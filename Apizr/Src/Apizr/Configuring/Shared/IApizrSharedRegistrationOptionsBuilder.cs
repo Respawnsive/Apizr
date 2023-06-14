@@ -93,6 +93,15 @@ namespace Apizr.Configuring.Shared
         TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> tokenProperty, Func<TTokenService> tokenServiceFactory, Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod);
 
         /// <summary>
+        /// Provide your own settings management service with its token source
+        /// </summary>
+        /// <typeparam name="TSettingsService">Your settings management service (getting token)</typeparam>
+        /// <param name="settingsService">A <typeparamref name="TSettingsService"/> instance</param>
+        /// <param name="tokenProperty">The token property to get from</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService>(TSettingsService settingsService, Expression<Func<TSettingsService, string>> tokenProperty);
+
+        /// <summary>
         /// Provide your own settings management service and a method to refresh the token
         /// </summary>
         /// <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
@@ -101,6 +110,15 @@ namespace Apizr.Configuring.Shared
         /// <param name="refreshTokenFactory">The method factory called to refresh the token</param>
         /// <returns></returns>
         TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService>(TSettingsService settingsService, Expression<Func<TSettingsService, string>> tokenProperty, Func<HttpRequestMessage, Task<string>> refreshTokenFactory);
+
+        /// <summary>
+        /// Provide your own settings management service with its token property
+        /// </summary>
+        /// <typeparam name="TSettingsService">Your settings management service (getting token)</typeparam>
+        /// <param name="settingsServiceFactory">A <typeparamref name="TSettingsService"/> instance factory</param>
+        /// <param name="tokenProperty">The token property to get from</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService>(Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> tokenProperty);
 
         /// <summary>
         /// Provide your own settings management service and a method to refresh the token

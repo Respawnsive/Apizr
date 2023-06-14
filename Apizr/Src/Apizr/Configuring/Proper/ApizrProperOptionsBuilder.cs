@@ -135,8 +135,20 @@ namespace Apizr.Configuring.Proper
 
         /// <inheritdoc />
         public IApizrProperOptionsBuilder WithAuthenticationHandler<TSettingsService>(TSettingsService settingsService,
+            Expression<Func<TSettingsService, string>> tokenProperty)
+            => WithAuthenticationHandler(() => settingsService, tokenProperty,
+                _ => Task.FromResult(tokenProperty.Compile()(settingsService)));
+
+        /// <inheritdoc />
+        public IApizrProperOptionsBuilder WithAuthenticationHandler<TSettingsService>(TSettingsService settingsService,
             Expression<Func<TSettingsService, string>> tokenProperty, Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
             => WithAuthenticationHandler(() => settingsService, tokenProperty, refreshTokenFactory);
+
+        /// <inheritdoc />
+        public IApizrProperOptionsBuilder WithAuthenticationHandler<TSettingsService>(Func<TSettingsService> settingsServiceFactory,
+            Expression<Func<TSettingsService, string>> tokenProperty)
+            => WithAuthenticationHandler(settingsServiceFactory, tokenProperty,
+                _ => Task.FromResult(tokenProperty.Compile()(settingsServiceFactory.Invoke())));
 
         /// <inheritdoc />
         public IApizrProperOptionsBuilder WithAuthenticationHandler<TSettingsService>(

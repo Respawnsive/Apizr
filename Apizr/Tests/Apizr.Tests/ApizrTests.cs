@@ -14,6 +14,7 @@ using Apizr.Tests.Apis;
 using Apizr.Tests.Helpers;
 using Apizr.Tests.Models;
 using Apizr.Tests.Models.Mappings;
+using Apizr.Tests.Settings;
 using Apizr.Transferring.Requesting;
 using AutoMapper;
 using FluentAssertions;
@@ -99,6 +100,19 @@ namespace Apizr.Tests
 
             result.IsSuccessStatusCode.Should().BeTrue();
             token.Should().Be("token");
+        }
+
+        [Fact]
+        public async Task Calling_WithAuthenticationHandler_With_Default_Token_Should_Authenticate_Request()
+        {
+            var testSettings = new TestSettings("token");
+
+            var httpBinManager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options =>
+                options.WithAuthenticationHandler(testSettings, settings => settings.TestJsonString));
+
+            var result = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
+
+            result.IsSuccessStatusCode.Should().BeTrue();
         }
 
         [Fact]

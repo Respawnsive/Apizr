@@ -13,6 +13,7 @@ items:
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Options
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}})
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler``2(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
@@ -663,6 +664,49 @@ items:
   - Public
   fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler(Of TSettingsService, TTokenService)(System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, System.String)), System.Linq.Expressions.Expression(Of System.Func(Of TTokenService, System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task(Of System.String))))
   name.vb: WithAuthenticationHandler(Of TSettingsService, TTokenService)(Expression(Of Func(Of TSettingsService, String)), Expression(Of Func(Of TTokenService, HttpRequestMessage, Task(Of String))))
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  id: WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  parent: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithAuthenticationHandler<TSettingsService>(Expression<Func<TSettingsService, String>>)
+  nameWithType: ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler<TSettingsService>(Expression<Func<TSettingsService, String>>)
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler<TSettingsService>(System.Linq.Expressions.Expression<System.Func<TSettingsService, System.String>>)
+  type: Method
+  source:
+    id: WithAuthenticationHandler
+    path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
+    startLine: 135
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Manager
+  summary: "\nProvide your own settings management service with its token property\n"
+  example: []
+  syntax:
+    content: public IApizrExtendedManagerOptionsBuilder WithAuthenticationHandler<TSettingsService>(Expression<Func<TSettingsService, string>> tokenProperty)
+    parameters:
+    - id: tokenProperty
+      type: System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}}
+      description: The token property to get from
+    typeParameters:
+    - id: TSettingsService
+      description: Your settings management service (getting token)
+    return:
+      type: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
+      description: ''
+    content.vb: Public Function WithAuthenticationHandler(Of TSettingsService)(tokenProperty As Expression(Of Func(Of TSettingsService, String))) As IApizrExtendedManagerOptionsBuilder
+  overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler*
+  implements:
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}})
+  nameWithType.vb: ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler(Of TSettingsService)(Expression(Of Func(Of TSettingsService, String)))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler(Of TSettingsService)(System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, System.String)))
+  name.vb: WithAuthenticationHandler(Of TSettingsService)(Expression(Of Func(Of TSettingsService, String)))
 - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   id: WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
@@ -677,7 +721,7 @@ items:
   source:
     id: WithAuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 135
+    startLine: 146
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -723,7 +767,7 @@ items:
   source:
     id: WithHeaders
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 145
+    startLine: 156
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -763,7 +807,7 @@ items:
   source:
     id: WithHeaders
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 149
+    startLine: 160
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -803,7 +847,7 @@ items:
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 160
+    startLine: 171
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -847,7 +891,7 @@ items:
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 164
+    startLine: 175
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -891,7 +935,7 @@ items:
   source:
     id: AddDelegatingHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 169
+    startLine: 180
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -935,7 +979,7 @@ items:
   source:
     id: WithContext
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 177
+    startLine: 188
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -978,7 +1022,7 @@ items:
   source:
     id: WithExCatching
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 209
+    startLine: 220
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1024,7 +1068,7 @@ items:
   source:
     id: WithExCatching
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 241
+    startLine: 252
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1072,7 +1116,7 @@ items:
   source:
     id: WithHandlerParameter
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 248
+    startLine: 259
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1112,7 +1156,7 @@ items:
   source:
     id: WithLogging
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 256
+    startLine: 267
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1158,7 +1202,7 @@ items:
   source:
     id: WithLogging
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 262
+    startLine: 273
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1198,7 +1242,7 @@ items:
   source:
     id: WithLogging
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 269
+    startLine: 280
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1243,7 +1287,7 @@ items:
   source:
     id: WithRefitSettings
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 281
+    startLine: 292
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1280,7 +1324,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 285
+    startLine: 296
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1317,7 +1361,7 @@ items:
   source:
     id: WithRefitSettings
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 291
+    startLine: 302
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1357,7 +1401,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 300
+    startLine: 311
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1397,7 +1441,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 308
+    startLine: 319
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1439,7 +1483,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 316
+    startLine: 327
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1479,7 +1523,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 324
+    startLine: 335
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1520,7 +1564,7 @@ items:
   source:
     id: WithConnectivityHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 329
+    startLine: 340
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1557,7 +1601,7 @@ items:
   source:
     id: WithCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 341
+    startLine: 352
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1594,7 +1638,7 @@ items:
   source:
     id: WithCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 345
+    startLine: 356
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1634,7 +1678,7 @@ items:
   source:
     id: WithCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 353
+    startLine: 364
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1675,7 +1719,7 @@ items:
   source:
     id: WithCacheHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 358
+    startLine: 369
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1712,7 +1756,7 @@ items:
   source:
     id: WithMappingHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 370
+    startLine: 381
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1749,7 +1793,7 @@ items:
   source:
     id: WithMappingHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 374
+    startLine: 385
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1789,7 +1833,7 @@ items:
   source:
     id: WithMappingHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 382
+    startLine: 393
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1830,7 +1874,7 @@ items:
   source:
     id: WithMappingHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr.Extensions.Microsoft.DependencyInjection\Extending\Configuring\Manager\ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 387
+    startLine: 398
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -7524,6 +7568,201 @@ references:
   name: System.Linq.Expressions
   nameWithType: System.Linq.Expressions
   fullName: System.Linq.Expressions
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}})
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}
+  definition: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  name: WithAuthenticationHandler<TSettingsService>(Expression<Func<TSettingsService, String>>)
+  nameWithType: IApizrExtendedSharedOptionsBuilder<IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder>.WithAuthenticationHandler<TSettingsService>(Expression<Func<TSettingsService, String>>)
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>.WithAuthenticationHandler<TSettingsService>(System.Linq.Expressions.Expression<System.Func<TSettingsService, System.String>>)
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)(Expression(Of Func(Of TSettingsService, String)))
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)(System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, System.String)))
+  name.vb: WithAuthenticationHandler(Of TSettingsService)(Expression(Of Func(Of TSettingsService, String)))
+  spec.csharp:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+    name: WithAuthenticationHandler<TSettingsService>
+    nameWithType: IApizrExtendedSharedOptionsBuilder<IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder>.WithAuthenticationHandler<TSettingsService>
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>.WithAuthenticationHandler<TSettingsService>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TSettingsService
+    nameWithType: TSettingsService
+    fullName: TSettingsService
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+    name: WithAuthenticationHandler(Of TSettingsService)
+    nameWithType: IApizrExtendedSharedOptionsBuilder(Of IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TSettingsService
+    nameWithType: TSettingsService
+    fullName: TSettingsService
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+  isExternal: true
+  name: WithAuthenticationHandler<TSettingsService>(Expression<Func<TSettingsService, String>>)
+  nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithAuthenticationHandler<TSettingsService>(Expression<Func<TSettingsService, String>>)
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithAuthenticationHandler<TSettingsService>(System.Linq.Expressions.Expression<System.Func<TSettingsService, System.String>>)
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)(Expression(Of Func(Of TSettingsService, String)))
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)(System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, System.String)))
+  name.vb: WithAuthenticationHandler(Of TSettingsService)(Expression(Of Func(Of TSettingsService, String)))
+  spec.csharp:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+    name: WithAuthenticationHandler<TSettingsService>
+    nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithAuthenticationHandler<TSettingsService>
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithAuthenticationHandler<TSettingsService>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TSettingsService
+    nameWithType: TSettingsService
+    fullName: TSettingsService
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}})
+    name: WithAuthenticationHandler(Of TSettingsService)
+    nameWithType: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithAuthenticationHandler(Of TSettingsService)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TSettingsService
+    nameWithType: TSettingsService
+    fullName: TSettingsService
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}

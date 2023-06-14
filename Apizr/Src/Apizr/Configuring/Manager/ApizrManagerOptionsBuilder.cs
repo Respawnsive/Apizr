@@ -124,9 +124,21 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public IApizrManagerOptionsBuilder WithAuthenticationHandler<TSettingsService>(TSettingsService settingsService,
+            Expression<Func<TSettingsService, string>> tokenProperty)
+            => WithAuthenticationHandler(() => settingsService, tokenProperty,
+                _ => Task.FromResult(tokenProperty.Compile()(settingsService)));
+
+        /// <inheritdoc />
+        public IApizrManagerOptionsBuilder WithAuthenticationHandler<TSettingsService>(TSettingsService settingsService,
             Expression<Func<TSettingsService, string>> tokenProperty,
             Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
             => WithAuthenticationHandler(() => settingsService, tokenProperty, refreshTokenFactory);
+
+        /// <inheritdoc />
+        public IApizrManagerOptionsBuilder WithAuthenticationHandler<TSettingsService>(Func<TSettingsService> settingsServiceFactory,
+            Expression<Func<TSettingsService, string>> tokenProperty)
+            => WithAuthenticationHandler(settingsServiceFactory, tokenProperty,
+                _ => Task.FromResult(tokenProperty.Compile()(settingsServiceFactory.Invoke())));
 
         /// <inheritdoc />
         public IApizrManagerOptionsBuilder WithAuthenticationHandler<TSettingsService>(

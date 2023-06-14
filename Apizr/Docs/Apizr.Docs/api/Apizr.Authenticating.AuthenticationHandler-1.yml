@@ -19,14 +19,17 @@ items:
   source:
     id: AuthenticationHandler
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Authenticating\AuthenticationHandler.cs
-    startLine: 27
+    startLine: 43
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
+  summary: "\nThe authentication handler implementation refreshing and saving token\n"
+  example: []
   syntax:
     content: 'public class AuthenticationHandler<TSettingsService> : AuthenticationHandlerBase, IDisposable, IAuthenticationHandler'
     typeParameters:
     - id: TSettingsService
+      description: The settings service type
     content.vb: >-
       Public Class AuthenticationHandler(Of TSettingsService)
           Inherits AuthenticationHandlerBase
@@ -75,25 +78,35 @@ items:
   source:
     id: .ctor
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Authenticating\AuthenticationHandler.cs
-    startLine: 33
+    startLine: 58
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
+  summary: "\nThe authentication handler constructor\n"
+  example: []
   syntax:
-    content: public AuthenticationHandler(ILogger logger, IApizrManagerOptionsBase apizrOptions, Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> settingsTokenProperty, Func<HttpRequestMessage, Task<string>> refreshToken)
+    content: public AuthenticationHandler(ILogger logger, IApizrManagerOptionsBase apizrOptions, Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> settingsTokenProperty, Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
     parameters:
     - id: logger
       type: Microsoft.Extensions.Logging.ILogger
+      description: The logger
     - id: apizrOptions
       type: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+      description: The Apizr options
     - id: settingsServiceFactory
       type: System.Func{{TSettingsService}}
+      description: The settings service factory
     - id: settingsTokenProperty
       type: System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}}
-    - id: refreshToken
+      description: The settings service&apos;s token property expression
+    - id: refreshTokenFactory
       type: System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}
-    content.vb: Public Sub New(logger As ILogger, apizrOptions As IApizrManagerOptionsBase, settingsServiceFactory As Func(Of TSettingsService), settingsTokenProperty As Expression(Of Func(Of TSettingsService, String)), refreshToken As Func(Of HttpRequestMessage, Task(Of String)))
+      description: The refresh token factory
+    content.vb: Public Sub New(logger As ILogger, apizrOptions As IApizrManagerOptionsBase, settingsServiceFactory As Func(Of TSettingsService), settingsTokenProperty As Expression(Of Func(Of TSettingsService, String)), refreshTokenFactory As Func(Of HttpRequestMessage, Task(Of String)))
   overload: Apizr.Authenticating.AuthenticationHandler`1.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
   nameWithType.vb: AuthenticationHandler(Of TSettingsService).AuthenticationHandler(ILogger, IApizrManagerOptionsBase, Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String)), Func(Of HttpRequestMessage, Task(Of String)))
   modifiers.csharp:
   - public
@@ -115,14 +128,17 @@ items:
   source:
     id: GetToken
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Authenticating\AuthenticationHandler.cs
-    startLine: 42
+    startLine: 68
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
+  summary: "\nThe method called to get token from settings\n"
+  example: []
   syntax:
     content: public override string GetToken()
     return:
       type: System.String
+      description: ''
     content.vb: Public Overrides Function GetToken As String
   overridden: Apizr.Authenticating.AuthenticationHandlerBase.GetToken
   overload: Apizr.Authenticating.AuthenticationHandler`1.GetToken*
@@ -148,15 +164,18 @@ items:
   source:
     id: SetToken
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Authenticating\AuthenticationHandler.cs
-    startLine: 44
+    startLine: 71
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
+  summary: "\nThe method called to save token into settings\n"
+  example: []
   syntax:
     content: public override void SetToken(string token)
     parameters:
     - id: token
       type: System.String
+      description: The token to save
     content.vb: Public Overrides Sub SetToken(token As String)
   overridden: Apizr.Authenticating.AuthenticationHandlerBase.SetToken(System.String)
   overload: Apizr.Authenticating.AuthenticationHandler`1.SetToken*
@@ -182,17 +201,21 @@ items:
   source:
     id: RefreshTokenAsync
     path: C:\Dev\Community\Apizr\Apizr\Src\Apizr\Authenticating\AuthenticationHandler.cs
-    startLine: 55
+    startLine: 78
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
+  summary: "\nThe method called to refresh token when rejected or empty\n"
+  example: []
   syntax:
     content: public override Task<string> RefreshTokenAsync(HttpRequestMessage request)
     parameters:
     - id: request
       type: System.Net.Http.HttpRequestMessage
+      description: The request to authenticate
     return:
       type: System.Threading.Tasks.Task{System.String}
+      description: ''
     content.vb: Public Overrides Function RefreshTokenAsync(request As HttpRequestMessage) As Task(Of String)
   overridden: Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
   overload: Apizr.Authenticating.AuthenticationHandler`1.RefreshTokenAsync*
@@ -714,6 +737,9 @@ references:
   name: System.Net.Http
   nameWithType: System.Net.Http
   fullName: System.Net.Http
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
 - uid: Apizr.Authenticating.AuthenticationHandler`1.#ctor*
   commentId: Overload:Apizr.Authenticating.AuthenticationHandler`1.#ctor
   name: AuthenticationHandler

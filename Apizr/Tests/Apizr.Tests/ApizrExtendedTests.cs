@@ -21,6 +21,7 @@ using Apizr.Requesting;
 using Apizr.Tests.Apis;
 using Apizr.Tests.Helpers;
 using Apizr.Tests.Models;
+using Apizr.Tests.Settings;
 using Apizr.Transferring.Managing;
 using Apizr.Transferring.Requesting;
 using FluentAssertions;
@@ -176,6 +177,26 @@ namespace Apizr.Tests
 
             result.IsSuccessStatusCode.Should().BeTrue();
             token.Should().Be("token");
+        }
+
+        [Fact]
+        public async Task Calling_WithAuthenticationHandler_With_Default_Token_Should_Authenticate_Request()
+        {
+            var testSettings = new TestSettings("token");
+
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddSingleton(testSettings);
+
+            services.AddApizrManagerFor<IHttpBinService>(options => options
+                .WithAuthenticationHandler<TestSettings>(settings => settings.TestJsonString));
+
+            var serviceProvider = services.BuildServiceProvider();
+            var httpBinManager = serviceProvider.GetRequiredService<IApizrManager<IHttpBinService>>();
+
+            var result = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
+
+            result.IsSuccessStatusCode.Should().BeTrue();
         }
 
         [Fact]

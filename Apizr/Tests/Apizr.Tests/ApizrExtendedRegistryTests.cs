@@ -306,6 +306,27 @@ namespace Apizr.Tests
         }
 
         [Fact]
+        public async Task Calling_WithAuthenticationHandler_With_Default_Token_Should_Authenticate_Request()
+        {
+            var testSettings = new TestSettings("token");
+
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+            services.AddSingleton(testSettings);
+
+            services.AddApizr(registry => registry
+                .AddManagerFor<IHttpBinService>(options => options
+                    .WithAuthenticationHandler<TestSettings>(settings => settings.TestJsonString)));
+
+            var serviceProvider = services.BuildServiceProvider();
+            var httpBinManager = serviceProvider.GetRequiredService<IApizrManager<IHttpBinService>>();
+
+            var result = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
+
+            result.IsSuccessStatusCode.Should().BeTrue();
+        }
+
+        [Fact]
         public void Calling_WithLogging_Should_Set_LoggingSettings()
         {
             var services = new ServiceCollection();

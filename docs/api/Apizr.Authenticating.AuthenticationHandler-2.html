@@ -83,7 +83,8 @@
   
   <h1 id="Apizr_Authenticating_AuthenticationHandler_2" data-uid="Apizr.Authenticating.AuthenticationHandler`2" class="text-break">Class AuthenticationHandler&lt;TSettingsService, TTokenService&gt;
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>The authentication handler implementation refreshing and saving token</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
@@ -154,11 +155,13 @@
     <tbody>
       <tr>
         <td><span class="parametername">TSettingsService</span></td>
-        <td></td>
+        <td><p>The settings service type</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TTokenService</span></td>
-        <td></td>
+        <td><p>The refresh token service type</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -168,7 +171,8 @@
   
   <a id="Apizr_Authenticating_AuthenticationHandler_2__ctor_" data-uid="Apizr.Authenticating.AuthenticationHandler`2.#ctor*"></a>
   <h4 id="Apizr_Authenticating_AuthenticationHandler_2__ctor_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase_System_Func__0__System_Linq_Expressions_Expression_System_Func__0_System_String___System_Func__1__System_Linq_Expressions_Expression_System_Func__1_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Authenticating.AuthenticationHandler`2.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{`0},System.Linq.Expressions.Expression{System.Func{`0,System.String}},System.Func{`1},System.Linq.Expressions.Expression{System.Func{`1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">AuthenticationHandler(ILogger, IApizrManagerOptionsBase, Func&lt;TSettingsService&gt;, Expression&lt;Func&lt;TSettingsService, String&gt;&gt;, Func&lt;TTokenService&gt;, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;String&gt;&gt;&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The authentication handler constructor</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -187,31 +191,52 @@
       <tr>
         <td><span class="xref">Microsoft.Extensions.Logging.ILogger</span></td>
         <td><span class="parametername">logger</span></td>
-        <td></td>
+        <td><p>The logger</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a></td>
         <td><span class="parametername">apizrOptions</span></td>
-        <td></td>
+        <td><p>The Apizr options</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Func</span>&lt;TSettingsService&gt;</td>
         <td><span class="parametername">settingsServiceFactory</span></td>
-        <td></td>
+        <td><p>The settings service factory</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TSettingsService, <span class="xref">System.String</span>&gt;&gt;</td>
         <td><span class="parametername">settingsTokenProperty</span></td>
-        <td></td>
+        <td><p>The settings service&apos;s token property expression</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Func</span>&lt;TTokenService&gt;</td>
         <td><span class="parametername">tokenServiceFactory</span></td>
-        <td></td>
+        <td><p>The refresh token service factory</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TTokenService, <span class="xref">System.Net.Http.HttpRequestMessage</span>, <span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.String</span>&gt;&gt;&gt;</td>
         <td><span class="parametername">refreshTokenMethod</span></td>
+        <td><p>The refresh token method to be called</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -222,7 +247,8 @@
   
   <a id="Apizr_Authenticating_AuthenticationHandler_2_GetToken_" data-uid="Apizr.Authenticating.AuthenticationHandler`2.GetToken*"></a>
   <h4 id="Apizr_Authenticating_AuthenticationHandler_2_GetToken" data-uid="Apizr.Authenticating.AuthenticationHandler`2.GetToken">GetToken()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The method called to get token from settings</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -249,7 +275,8 @@
   
   <a id="Apizr_Authenticating_AuthenticationHandler_2_RefreshTokenAsync_" data-uid="Apizr.Authenticating.AuthenticationHandler`2.RefreshTokenAsync*"></a>
   <h4 id="Apizr_Authenticating_AuthenticationHandler_2_RefreshTokenAsync_System_Net_Http_HttpRequestMessage_" data-uid="Apizr.Authenticating.AuthenticationHandler`2.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)">RefreshTokenAsync(HttpRequestMessage)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The method called to refresh token when rejected or empty</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -268,7 +295,8 @@
       <tr>
         <td><span class="xref">System.Net.Http.HttpRequestMessage</span></td>
         <td><span class="parametername">request</span></td>
-        <td></td>
+        <td><p>The request to authenticate</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -293,7 +321,8 @@
   
   <a id="Apizr_Authenticating_AuthenticationHandler_2_SetToken_" data-uid="Apizr.Authenticating.AuthenticationHandler`2.SetToken*"></a>
   <h4 id="Apizr_Authenticating_AuthenticationHandler_2_SetToken_System_String_" data-uid="Apizr.Authenticating.AuthenticationHandler`2.SetToken(System.String)">SetToken(String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The method called to save token into settings</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -312,7 +341,8 @@
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">token</span></td>
-        <td></td>
+        <td><p>The token to save</p>
+</td>
       </tr>
     </tbody>
   </table>

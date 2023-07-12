@@ -171,7 +171,7 @@ namespace Apizr
             catch (Exception e)
             {
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(),
-                    $"{methodDetails.MethodInfo.Name}: Request throwed an exception with message {e.Message}");
+                    $"{methodDetails.MethodInfo.Name}: Request threw an exception with message {e.Message}");
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(),
                     $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException)} with InnerException");
 
@@ -250,7 +250,7 @@ namespace Apizr
             catch (Exception e)
             {
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(),
-                    $"{methodDetails.MethodInfo.Name}: Request throwed an exception with message {e.Message}");
+                    $"{methodDetails.MethodInfo.Name}: Request threw an exception with message {e.Message}");
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(),
                     $"{methodDetails.MethodInfo.Name}: Throwing an {nameof(ApizrException)} with InnerException");
 
@@ -362,7 +362,7 @@ namespace Apizr
                 catch (Exception e)
                 {
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(),
-                        $"{methodDetails.MethodInfo.Name}: Request throwed an exception with message {e.Message}");
+                        $"{methodDetails.MethodInfo.Name}: Request threw an exception with message {e.Message}");
 
                     ex = new ApizrException<TApiData>(e, result);
                     if (requestOptionsBuilder.ApizrOptions.OnException == null)
@@ -507,7 +507,7 @@ namespace Apizr
                 catch (Exception e)
                 {
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(),
-                        $"{methodDetails.MethodInfo.Name}: Request throwed an exception with message {e.Message}");
+                        $"{methodDetails.MethodInfo.Name}: Request threw an exception with message {e.Message}");
 
                     ex = new ApizrException<TModelData>(e, Map<TApiData, TModelData>(result));
                     if (requestOptionsBuilder.ApizrOptions.OnException == null)
@@ -657,7 +657,7 @@ namespace Apizr
                 catch (Exception e)
                 {
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(),
-                        $"{methodDetails.MethodInfo.Name}: Request throwed an exception with message {e.Message}");
+                        $"{methodDetails.MethodInfo.Name}: Request threw an exception with message {e.Message}");
 
                     ex = new ApizrException<TApiData>(e, result);
                     if (requestOptionsBuilder.ApizrOptions.OnException == null)
@@ -811,7 +811,7 @@ namespace Apizr
                 catch (Exception e)
                 {
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(),
-                        $"{methodDetails.MethodInfo.Name}: Request throwed an exception with message {e.Message}");
+                        $"{methodDetails.MethodInfo.Name}: Request threw an exception with message {e.Message}");
 
                     ex = new ApizrException<TModelResultData>(e, Map<TApiResultData, TModelResultData>(result));
                     if (requestOptionsBuilder.ApizrOptions.OnException == null)
@@ -883,7 +883,7 @@ namespace Apizr
             catch (Exception e)
             {
                 _apizrOptions.Logger.Log(_apizrOptions.LogLevels.High(),
-                    $"Apizr: Clearing all cache throwed an exception with message: {e.Message}");
+                    $"Apizr: Clearing all cache threw an exception with message: {e.Message}");
 
                 return false;
             }
@@ -935,7 +935,7 @@ namespace Apizr
             catch (Exception e)
             {
                 _apizrOptions.Logger.Log(_apizrOptions.LogLevels.High(),
-                    $"{methodCallExpression.Method.Name}: Clearing keyed cache throwed an exception with message: {e.Message}");
+                    $"{methodCallExpression.Method.Name}: Clearing keyed cache threw an exception with message: {e.Message}");
 
                 return false;
             }

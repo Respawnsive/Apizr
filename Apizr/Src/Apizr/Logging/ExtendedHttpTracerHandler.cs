@@ -275,7 +275,7 @@ namespace Apizr.Logging
                 && InnerHandler is HttpClientHandler httpClientHandler)
             {
                 if (!httpClientHandler.UseCookies) return httpRequestHeaders;
-                var cookieHeader = httpClientHandler.CookieContainer.GetCookieHeader(request.RequestUri);
+                var cookieHeader = httpClientHandler.CookieContainer?.GetCookieHeader(request.RequestUri);
                 if (!string.IsNullOrWhiteSpace(cookieHeader))
                 {
                     httpRequestHeaders += $"{Environment.NewLine}Cookie: {cookieHeader}";

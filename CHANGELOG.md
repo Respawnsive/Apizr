@@ -1,3 +1,11 @@
+5.0.1
+---
+
+### All
+
+- [Fix] No more NullRefEx when getting cookies from CookieContainer
+- [Fix] Typo fix
+
 5.0
 ---
 

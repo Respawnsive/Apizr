@@ -39,7 +39,7 @@ namespace Apizr.Configuring.Registry
         /// <returns></returns>
         TApizrRegistryBuilder AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(
             Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler,
-                IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>,
+                IMappingHandler, ILazyFactory<IReadOnlyPolicyRegistry<string>>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>,
                 TApizrManager> apizrManagerFactory,
             Action<TApizrProperOptionsBuilder> properOptionsBuilder = null)
             where T : class
@@ -59,7 +59,7 @@ namespace Apizr.Configuring.Registry
         /// <returns></returns>
         TApizrRegistryBuilder AddManagerFor<TWebApi, TApizrManager>(
             Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler,
-                IReadOnlyPolicyRegistry<string>, IApizrManagerOptions<TWebApi>, TApizrManager> apizrManagerFactory,
+                ILazyFactory<IReadOnlyPolicyRegistry<string>>, IApizrManagerOptions<TWebApi>, TApizrManager> apizrManagerFactory,
             Action<TApizrProperOptionsBuilder> properOptionsBuilder = null)
             where TApizrManager : IApizrManager<TWebApi>; 
 

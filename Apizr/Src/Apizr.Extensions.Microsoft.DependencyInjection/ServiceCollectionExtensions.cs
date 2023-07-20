@@ -23,6 +23,7 @@ using Apizr.Requesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Polly;
 using Polly.Registry;
 using Refit;
@@ -605,56 +606,48 @@ namespace Apizr
 
                     if (options.PolicyRegistryKeys != null && options.PolicyRegistryKeys.Any())
                     {
-                        IReadOnlyPolicyRegistry<string> policyRegistry = null;
-                        try
-                        {
-                            policyRegistry = serviceProvider.GetRequiredService<IReadOnlyPolicyRegistry<string>>();
-                        }
-                        catch (Exception)
+                        var policyRegistry = serviceProvider.GetService<IReadOnlyPolicyRegistry<string>>();
+                        if(policyRegistry == null)
                         {
                             options.Logger.Log(options.LogLevels.Low(),
-                                $"Global policies: You get some global policies but didn't register a {nameof(PolicyRegistry)} instance. Global policies will be ignored for  for {webApiFriendlyName} instance");
+                                $"Global policies: You defined some global policies but didn't register a {nameof(PolicyRegistry)} instance. Global policies will be ignored for {webApiFriendlyName} instance");
                         }
-
-                        if (policyRegistry != null)
+                        else
                         {
                             foreach (var policyRegistryKey in options.PolicyRegistryKeys)
                             {
-                                if (policyRegistry.TryGet<IsPolicy>(policyRegistryKey, out var registeredPolicy))
+                                if (policyRegistry.TryGet<IsPolicy>(policyRegistryKey, out var registeredPolicy) && 
+                                    registeredPolicy is IAsyncPolicy<HttpResponseMessage> registeredPolicyForHttpResponseMessage)
                                 {
-                                    if (registeredPolicy is IAsyncPolicy<HttpResponseMessage> registeredPolicyForHttpResponseMessage)
-                                    {
-                                        var policySelector =
-                                            new Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>>(
-                                                request =>
+                                    var policySelector = new Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>>(
+                                            request =>
+                                            {
+                                                var context = request.GetOrBuildApizrPolicyExecutionContext();
+                                                if (!context.TryGetLogger(out var contextLogger, out var logLevels, out var verbosity, out var tracerMode))
                                                 {
-                                                    var context = request.GetOrBuildApizrPolicyExecutionContext();
-                                                    if (!context.TryGetLogger(out var contextLogger, out var logLevels, out var verbosity, out var tracerMode))
+                                                    if (request.Properties.TryGetValue(Constants.ApizrRequestOptionsKey, out var optionsObject) && optionsObject is IApizrRequestOptions requestOptions)
                                                     {
-                                                        if (request.Properties.TryGetValue(Constants.ApizrRequestOptionsKey, out var optionsObject) && optionsObject is IApizrRequestOptions requestOptions)
-                                                        {
-                                                            logLevels = requestOptions.LogLevels;
-                                                            verbosity = requestOptions.TrafficVerbosity;
-                                                            tracerMode = requestOptions.HttpTracerMode;
-                                                        }
-                                                        else
-                                                        {
-                                                            logLevels = options.LogLevels;
-                                                            verbosity = options.TrafficVerbosity;
-                                                            tracerMode = options.HttpTracerMode;
-                                                        }
-                                                        contextLogger = options.Logger;
-
-                                                        context.WithLogger(contextLogger, logLevels, verbosity, tracerMode);
-                                                        HttpRequestMessageApizrExtensions.SetApizrPolicyExecutionContext(request, context);
+                                                        logLevels = requestOptions.LogLevels;
+                                                        verbosity = requestOptions.TrafficVerbosity;
+                                                        tracerMode = requestOptions.HttpTracerMode;
                                                     }
+                                                    else
+                                                    {
+                                                        logLevels = options.LogLevels;
+                                                        verbosity = options.TrafficVerbosity;
+                                                        tracerMode = options.HttpTracerMode;
+                                                    }
+                                                    contextLogger = options.Logger;
 
-                                                    contextLogger.Log(logLevels.Low(), $"{context.OperationKey}: Policy with key {policyRegistryKey} will be applied");
+                                                    context.WithLogger(contextLogger, logLevels, verbosity, tracerMode);
+                                                    HttpRequestMessageApizrExtensions.SetApizrPolicyExecutionContext(request, context);
+                                                }
 
-                                                    return registeredPolicyForHttpResponseMessage;
-                                                });
-                                        handlerBuilder.AddHandler(new PolicyHttpMessageHandler(policySelector));
-                                    }
+                                                contextLogger.Log(logLevels.Low(), $"{context.OperationKey}: Policy with key {policyRegistryKey} will be applied");
+
+                                                return registeredPolicyForHttpResponseMessage;
+                                            });
+                                    handlerBuilder.AddHandler(new PolicyHttpMessageHandler(policySelector));
                                 }
                             }
                         }
@@ -689,6 +682,10 @@ namespace Apizr
                     });
 
             apizrOptions.HttpClientBuilder?.Invoke(builder);
+
+            services.TryAddSingleton(typeof(ILazyFactory<IReadOnlyPolicyRegistry<string>>), serviceProvider =>
+                new LazyFactory<IReadOnlyPolicyRegistry<string>>(
+                    () => serviceProvider.GetService<IReadOnlyPolicyRegistry<string>>() ?? new PolicyRegistry()));
 
             if (apizrOptions.ConnectivityHandlerFactory != null)
                 services.AddOrReplaceSingleton(typeof(IConnectivityHandler), apizrOptions.ConnectivityHandlerFactory);

@@ -88,7 +88,6 @@ namespace Apizr.Tests
         public void ServiceProvider_Should_Resolve_Managers()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
             services.AddApizrManagerFor<IReqResUserService>();
             services.AddApizrManagerFor<IHttpBinService>();
             services.AddApizrCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>();
@@ -107,7 +106,6 @@ namespace Apizr.Tests
         public void ServiceProvider_Should_Resolve_Scanned_Managers()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
             services.AddApizrCrudManagerFor(_assembly);
 
             var serviceProvider = services.BuildServiceProvider();
@@ -124,7 +122,6 @@ namespace Apizr.Tests
 
             // By attribute
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
             services.AddApizrManagerFor<IReqResUserService>();
 
             var serviceProvider = services.BuildServiceProvider();
@@ -151,7 +148,6 @@ namespace Apizr.Tests
             var baseUri = $"{baseAddress}/{basePath}";
 
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
             services.AddApizrManagerFor<IReqResUserService>(options => options.WithBaseAddress(baseAddress).WithBasePath(basePath));
 
             var serviceProvider = services.BuildServiceProvider();
@@ -203,7 +199,6 @@ namespace Apizr.Tests
         public void Calling_WithLogging_Should_Set_LoggingSettings()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
             services.AddApizrManagerFor<IReqResUserService>(options => options.WithLogging((HttpTracerMode) HttpTracerMode.ExceptionsOnly, (HttpMessageParts) HttpMessageParts.RequestCookies, LogLevel.Warning));
 
             var serviceProvider = services.BuildServiceProvider();
@@ -337,7 +332,6 @@ namespace Apizr.Tests
         public void Calling_WithRefitSettings_Should_Set_Settings()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
             services.AddAutoMapper(_assembly);
             services.AddApizrManagerFor<IReqResUserService>(config => config
                     .WithRefitSettings(_refitSettings));

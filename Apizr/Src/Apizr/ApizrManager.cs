@@ -64,7 +64,7 @@ namespace Apizr
         private readonly IConnectivityHandler _connectivityHandler;
         private readonly ICacheHandler _cacheHandler;
         private readonly IMappingHandler _mappingHandler;
-        private readonly IReadOnlyPolicyRegistry<string> _policyRegistry;
+        private readonly ILazyFactory<IReadOnlyPolicyRegistry<string>> _lazyPolicyRegistry;
         private readonly string _webApiFriendlyName;
         private readonly IApizrManagerOptions<TWebApi> _apizrOptions;
 
@@ -84,16 +84,16 @@ namespace Apizr
         /// <param name="connectivityHandler">The connectivity handler</param>
         /// <param name="cacheHandler">The cache handler</param>
         /// <param name="mappingHandler">The mapping handler</param>
-        /// <param name="policyRegistry">The policy registry</param>
+        /// <param name="lazyPolicyRegistry">The policy registry</param>
         /// <param name="apizrOptions">The web api dedicated options</param>
         public ApizrManager(ILazyFactory<TWebApi> lazyWebApi, IConnectivityHandler connectivityHandler,
-            ICacheHandler cacheHandler, IMappingHandler mappingHandler, IReadOnlyPolicyRegistry<string> policyRegistry,
+            ICacheHandler cacheHandler, IMappingHandler mappingHandler, ILazyFactory<IReadOnlyPolicyRegistry<string>> lazyPolicyRegistry,
             IApizrManagerOptions<TWebApi> apizrOptions)
         {
             _lazyWebApi = lazyWebApi;
             _connectivityHandler = connectivityHandler;
             _cacheHandler = cacheHandler;
-            _policyRegistry = policyRegistry;
+            _lazyPolicyRegistry = lazyPolicyRegistry;
             _mappingHandler = mappingHandler;
             _webApiFriendlyName = typeof(TWebApi).GetFriendlyName();
             _apizrOptions = apizrOptions;
@@ -1180,7 +1180,7 @@ namespace Apizr
 
             policy = Policy.NoOpAsync<TResult>();
 
-            if (_policyRegistry == null)
+            if (_lazyPolicyRegistry == null)
                 return policy;
 
             var policyAttribute = GetMethodPolicyAttribute(methodDetails);
@@ -1188,7 +1188,7 @@ namespace Apizr
             {
                 foreach (var registryKey in policyAttribute.RegistryKeys)
                 {
-                    if (_policyRegistry.TryGet<IsPolicy>(registryKey, out var registeredPolicy))
+                    if (_lazyPolicyRegistry.Value.TryGet<IsPolicy>(registryKey, out var registeredPolicy))
                     {
                         _apizrOptions.Logger.Log(logLevel,
                             $"{methodDetails.MethodInfo.Name}: Found a policy with key {registryKey}");
@@ -1225,7 +1225,7 @@ namespace Apizr
 
             policy = Policy.NoOpAsync();
 
-            if (_policyRegistry == null)
+            if (_lazyPolicyRegistry == null)
                 return policy;
 
             var policyAttribute = GetMethodPolicyAttribute(methodDetails);
@@ -1233,7 +1233,7 @@ namespace Apizr
             {
                 foreach (var registryKey in policyAttribute.RegistryKeys)
                 {
-                    if (_policyRegistry.TryGet<IsPolicy>(registryKey, out var registeredPolicy))
+                    if (_lazyPolicyRegistry.Value.TryGet<IsPolicy>(registryKey, out var registeredPolicy))
                     {
                         _apizrOptions.Logger.Log(logLevel,
                             $"{methodDetails.MethodInfo.Name}: Found a policy with key {registryKey}");

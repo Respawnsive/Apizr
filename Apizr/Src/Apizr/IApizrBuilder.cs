@@ -104,7 +104,7 @@ public interface IApizrBuilder
     /// <returns></returns>
     TApizrManager CreateCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(
         Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler,
-            IMappingHandler, IReadOnlyPolicyRegistry<string>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>,
+            IMappingHandler, ILazyFactory<IReadOnlyPolicyRegistry<string>>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>,
             TApizrManager> apizrManagerFactory,
         Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
         where T : class
@@ -133,7 +133,7 @@ public interface IApizrBuilder
     /// <returns></returns>
     TApizrManager CreateManagerFor<TWebApi, TApizrManager>(
         Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler,
-            IReadOnlyPolicyRegistry<string>, IApizrManagerOptions<TWebApi>, TApizrManager> apizrManagerFactory,
+            ILazyFactory<IReadOnlyPolicyRegistry<string>>, IApizrManagerOptions<TWebApi>, TApizrManager> apizrManagerFactory,
         Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
         where TApizrManager : IApizrManager<TWebApi>;
 

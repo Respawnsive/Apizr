@@ -107,7 +107,6 @@ namespace Apizr.Tests
         public void ServiceProvider_Should_Resolve_Registry_And_Managers()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
                 .AddManagerFor<IReqResUserService>()
                 .AddManagerFor<IHttpBinService>()
@@ -129,7 +128,6 @@ namespace Apizr.Tests
         public void ServiceProvider_Should_Resolve_Registry_And_Scanned_Managers()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
                 .AddCrudManagerFor(_assembly));
 
@@ -145,7 +143,6 @@ namespace Apizr.Tests
         public void Registry_Should_Resolve_Managers()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
                 .AddManagerFor<IReqResUserService>()
                 .AddManagerFor<IHttpBinService>()
@@ -172,7 +169,6 @@ namespace Apizr.Tests
 
             // By attribute
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
                 .AddManagerFor<IReqResUserService>());
 
@@ -232,7 +228,6 @@ namespace Apizr.Tests
             var fullResUri = $"{attributeUri}/{resPath}";
 
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
 
             // By attribute option overriding common options
             services.AddApizr(registry => registry
@@ -330,7 +325,6 @@ namespace Apizr.Tests
         public void Calling_WithLogging_Should_Set_LoggingSettings()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
                 .AddManagerFor<IReqResUserService>(options => options.WithLogging((HttpTracerMode) HttpTracerMode.ExceptionsOnly, (HttpMessageParts) HttpMessageParts.RequestCookies, LogLevel.Warning)));
 
@@ -550,7 +544,6 @@ namespace Apizr.Tests
         public void Calling_WithRefitSettings_Should_Set_Settings()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
             services.AddAutoMapper(_assembly);
             services.AddApizr(
                 registry => registry
@@ -765,7 +758,6 @@ namespace Apizr.Tests
         public void ServiceProvider_Should_Resolve_Grouped_Registry_And_Managers()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
                 .AddGroup(group => group
                     .AddManagerFor<IReqResUserService>()
@@ -791,7 +783,6 @@ namespace Apizr.Tests
         public void Grouped_Registry_Should_Resolve_Managers()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
                 .AddGroup(group => group
                     .AddManagerFor<IReqResUserService>()
@@ -824,7 +815,6 @@ namespace Apizr.Tests
 
             // Test 1
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
             services.AddApizr(registry => registry
                     .AddGroup(group => group
                         .AddManagerFor<IReqResUserService>()

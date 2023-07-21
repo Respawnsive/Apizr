@@ -80,7 +80,7 @@ namespace Apizr.Sample.Forms
                     .WithMediation()
                     .WithOptionalMediation());
 
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(config => config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
         }
 
         private static Task<string> OnRefreshToken(HttpRequestMessage request) => Task.FromResult("tokenValue");

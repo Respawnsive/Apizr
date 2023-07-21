@@ -1,9 +1,20 @@
-5.0.1
+5.1.0
 ---
 
 ### All
 
-- [Fix] No more NullRefEx when getting cookies from CookieContainer
+- [Bump] **NuGet reference packages updated**
+
+### Apizr
+
+- [New][Polly] Now providing a **PolicyRegistry is not mandatory anymore** so that Polly could be turned off by default
+
+5.0.1
+---
+
+### Apizr
+
+- [Fix] **No more NullRefEx** when getting cookies from CookieContainer
 - [Fix] Typo fix
 
 5.0

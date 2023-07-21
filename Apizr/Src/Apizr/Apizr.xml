@@ -24,13 +24,13 @@
         <member name="M:Apizr.ApizrBuilder.CreateCrudManagerFor``4(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
             <inheritdoc/>
         </member>
-        <member name="M:Apizr.ApizrBuilder.CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+        <member name="M:Apizr.ApizrBuilder.CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
             <inheritdoc/>
         </member>
         <member name="M:Apizr.ApizrBuilder.CreateManagerFor``1(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
             <inheritdoc/>
         </member>
-        <member name="M:Apizr.ApizrBuilder.CreateManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+        <member name="M:Apizr.ApizrBuilder.CreateManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
             <inheritdoc/>
         </member>
         <member name="T:Apizr.ApizrException">
@@ -51,7 +51,7 @@
             The manager
             </summary>
         </member>
-        <member name="M:Apizr.ApizrManager`1.#ctor(Apizr.ILazyFactory{`0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{`0})">
+        <member name="M:Apizr.ApizrManager`1.#ctor(Apizr.ILazyFactory{`0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{`0})">
             <summary>
             Apizr manager constructor
             </summary>
@@ -59,7 +59,7 @@
             <param name="connectivityHandler">The connectivity handler</param>
             <param name="cacheHandler">The cache handler</param>
             <param name="mappingHandler">The mapping handler</param>
-            <param name="policyRegistry">The policy registry</param>
+            <param name="lazyPolicyRegistry">The policy registry</param>
             <param name="apizrOptions">The web api dedicated options</param>
         </member>
         <member name="P:Apizr.ApizrManager`1.Api">
@@ -1610,13 +1610,13 @@
         <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddCrudManagerFor``4(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddManagerFor``1(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
+        <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Registry.ApizrRegistryBuilder.Apizr#Configuring#Registry#IApizrInternalRegistryBuilder{Apizr#Configuring#Proper#IApizrProperOptionsBuilder}#AddWrappingManagerFor``2(System.Func{Apizr.IApizrManager{``0},``1},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})">
@@ -1775,7 +1775,7 @@
             Registry builder options available for static registrations
             </summary>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{`2})">
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{`2})">
             <summary>
             Create a <typeparamref name="TApizrManager"/> instance for a managed crud api for <typeparamref name="T"/> object (class), 
             with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
@@ -1791,7 +1791,7 @@
             <param name="properOptionsBuilder">The builder defining some api proper options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{`2})">
+        <member name="M:Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{`2})">
             <summary>
             Create a <typeparamref name="TApizrManager"/> instance for a managed <typeparamref name="TWebApi"/>
             </summary>
@@ -3418,7 +3418,7 @@
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.IApizrBuilder.CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+        <member name="M:Apizr.IApizrBuilder.CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
             <summary>
             Create a <typeparamref name="TApizrManager"/> instance for a managed crud api for <typeparamref name="T"/> object (class), 
             with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
@@ -3442,7 +3442,7 @@
             <param name="optionsBuilder">The builder defining some options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.IApizrBuilder.CreateManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+        <member name="M:Apizr.IApizrBuilder.CreateManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
             <summary>
             Create a <typeparamref name="TApizrManager"/> instance for a managed <typeparamref name="TWebApi"/>
             </summary>

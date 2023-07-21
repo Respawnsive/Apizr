@@ -5,7 +5,7 @@ items:
   id: ApizrManager`1
   parent: Apizr
   children:
-  - Apizr.ApizrManager`1.#ctor(Apizr.ILazyFactory{`0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{`0})
+  - Apizr.ApizrManager`1.#ctor(Apizr.ILazyFactory{`0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{`0})
   - Apizr.ApizrManager`1.Api
   - Apizr.ApizrManager`1.ClearCacheAsync(System.Threading.CancellationToken)
   - Apizr.ApizrManager`1.ClearCacheAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}})
@@ -33,7 +33,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrManager.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrManager
     path: ../../Src/Apizr/ApizrManager.cs
@@ -107,21 +107,21 @@ items:
   - Class
   fullName.vb: Apizr.ApizrManager(Of TWebApi)
   name.vb: ApizrManager(Of TWebApi)
-- uid: Apizr.ApizrManager`1.#ctor(Apizr.ILazyFactory{`0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{`0})
-  commentId: M:Apizr.ApizrManager`1.#ctor(Apizr.ILazyFactory{`0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{`0})
-  id: '#ctor(Apizr.ILazyFactory{`0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Polly.Registry.IReadOnlyPolicyRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptions{`0})'
+- uid: Apizr.ApizrManager`1.#ctor(Apizr.ILazyFactory{`0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{`0})
+  commentId: M:Apizr.ApizrManager`1.#ctor(Apizr.ILazyFactory{`0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{`0})
+  id: '#ctor(Apizr.ILazyFactory{`0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{`0})'
   parent: Apizr.ApizrManager`1
   langs:
   - csharp
   - vb
-  name: ApizrManager(ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<String>, IApizrManagerOptions<TWebApi>)
-  nameWithType: ApizrManager<TWebApi>.ApizrManager(ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry<String>, IApizrManagerOptions<TWebApi>)
-  fullName: Apizr.ApizrManager<TWebApi>.ApizrManager(Apizr.ILazyFactory<TWebApi>, Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Polly.Registry.IReadOnlyPolicyRegistry<System.String>, Apizr.Configuring.Manager.IApizrManagerOptions<TWebApi>)
+  name: ApizrManager(ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory<IReadOnlyPolicyRegistry<String>>, IApizrManagerOptions<TWebApi>)
+  nameWithType: ApizrManager<TWebApi>.ApizrManager(ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory<IReadOnlyPolicyRegistry<String>>, IApizrManagerOptions<TWebApi>)
+  fullName: Apizr.ApizrManager<TWebApi>.ApizrManager(Apizr.ILazyFactory<TWebApi>, Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Apizr.ILazyFactory<Polly.Registry.IReadOnlyPolicyRegistry<System.String>>, Apizr.Configuring.Manager.IApizrManagerOptions<TWebApi>)
   type: Constructor
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrManager.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/ApizrManager.cs
@@ -132,7 +132,7 @@ items:
   summary: "\nApizr manager constructor\n"
   example: []
   syntax:
-    content: public ApizrManager(ILazyFactory<TWebApi> lazyWebApi, IConnectivityHandler connectivityHandler, ICacheHandler cacheHandler, IMappingHandler mappingHandler, IReadOnlyPolicyRegistry<string> policyRegistry, IApizrManagerOptions<TWebApi> apizrOptions)
+    content: public ApizrManager(ILazyFactory<TWebApi> lazyWebApi, IConnectivityHandler connectivityHandler, ICacheHandler cacheHandler, IMappingHandler mappingHandler, ILazyFactory<IReadOnlyPolicyRegistry<string>> lazyPolicyRegistry, IApizrManagerOptions<TWebApi> apizrOptions)
     parameters:
     - id: lazyWebApi
       type: Apizr.ILazyFactory{{TWebApi}}
@@ -146,21 +146,21 @@ items:
     - id: mappingHandler
       type: Apizr.Mapping.IMappingHandler
       description: The mapping handler
-    - id: policyRegistry
-      type: Polly.Registry.IReadOnlyPolicyRegistry{System.String}
+    - id: lazyPolicyRegistry
+      type: Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}}
       description: The policy registry
     - id: apizrOptions
       type: Apizr.Configuring.Manager.IApizrManagerOptions{{TWebApi}}
       description: The web api dedicated options
-    content.vb: Public Sub New(lazyWebApi As ILazyFactory(Of TWebApi), connectivityHandler As IConnectivityHandler, cacheHandler As ICacheHandler, mappingHandler As IMappingHandler, policyRegistry As IReadOnlyPolicyRegistry(Of String), apizrOptions As IApizrManagerOptions(Of TWebApi))
+    content.vb: Public Sub New(lazyWebApi As ILazyFactory(Of TWebApi), connectivityHandler As IConnectivityHandler, cacheHandler As ICacheHandler, mappingHandler As IMappingHandler, lazyPolicyRegistry As ILazyFactory(Of IReadOnlyPolicyRegistry(Of String)), apizrOptions As IApizrManagerOptions(Of TWebApi))
   overload: Apizr.ApizrManager`1.#ctor*
-  nameWithType.vb: ApizrManager(Of TWebApi).ApizrManager(ILazyFactory(Of TWebApi), IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry(Of String), IApizrManagerOptions(Of TWebApi))
+  nameWithType.vb: ApizrManager(Of TWebApi).ApizrManager(ILazyFactory(Of TWebApi), IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory(Of IReadOnlyPolicyRegistry(Of String)), IApizrManagerOptions(Of TWebApi))
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Apizr.ApizrManager(Of TWebApi).ApizrManager(Apizr.ILazyFactory(Of TWebApi), Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Polly.Registry.IReadOnlyPolicyRegistry(Of System.String), Apizr.Configuring.Manager.IApizrManagerOptions(Of TWebApi))
-  name.vb: ApizrManager(ILazyFactory(Of TWebApi), IConnectivityHandler, ICacheHandler, IMappingHandler, IReadOnlyPolicyRegistry(Of String), IApizrManagerOptions(Of TWebApi))
+  fullName.vb: Apizr.ApizrManager(Of TWebApi).ApizrManager(Apizr.ILazyFactory(Of TWebApi), Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Apizr.ILazyFactory(Of Polly.Registry.IReadOnlyPolicyRegistry(Of System.String)), Apizr.Configuring.Manager.IApizrManagerOptions(Of TWebApi))
+  name.vb: ApizrManager(ILazyFactory(Of TWebApi), IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory(Of IReadOnlyPolicyRegistry(Of String)), IApizrManagerOptions(Of TWebApi))
 - uid: Apizr.ApizrManager`1.Api
   commentId: P:Apizr.ApizrManager`1.Api
   id: Api
@@ -175,7 +175,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrManager.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Api
     path: ../../Src/Apizr/ApizrManager.cs
@@ -216,7 +216,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrManager.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Options
     path: ../../Src/Apizr/ApizrManager.cs
@@ -257,7 +257,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrManager.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/ApizrManager.cs
@@ -306,7 +306,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrManager.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/ApizrManager.cs
@@ -356,7 +356,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrManager.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/ApizrManager.cs
@@ -413,7 +413,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrManager.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/ApizrManager.cs
@@ -471,7 +471,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrManager.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/ApizrManager.cs
@@ -523,7 +523,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrManager.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/ApizrManager.cs
@@ -576,7 +576,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrManager.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/ApizrManager.cs
@@ -630,7 +630,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrManager.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/ApizrManager.cs
@@ -685,7 +685,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrManager.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/ApizrManager.cs
@@ -742,7 +742,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrManager.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/ApizrManager.cs
@@ -800,7 +800,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrManager.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/ApizrManager.cs
@@ -861,7 +861,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrManager.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/ApizrManager.cs
@@ -923,7 +923,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrManager.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ClearCacheAsync
     path: ../../Src/Apizr/ApizrManager.cs
@@ -967,7 +967,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrManager.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ClearCacheAsync
     path: ../../Src/Apizr/ApizrManager.cs
@@ -1014,7 +1014,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrManager.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ClearCacheAsync
     path: ../../Src/Apizr/ApizrManager.cs
@@ -14709,17 +14709,24 @@ references:
   name: IMappingHandler
   nameWithType: IMappingHandler
   fullName: Apizr.Mapping.IMappingHandler
-- uid: Polly.Registry.IReadOnlyPolicyRegistry{System.String}
-  commentId: T:Polly.Registry.IReadOnlyPolicyRegistry{System.String}
-  parent: Polly.Registry
-  definition: Polly.Registry.IReadOnlyPolicyRegistry`1
-  name: IReadOnlyPolicyRegistry<String>
-  nameWithType: IReadOnlyPolicyRegistry<String>
-  fullName: Polly.Registry.IReadOnlyPolicyRegistry<System.String>
-  nameWithType.vb: IReadOnlyPolicyRegistry(Of String)
-  fullName.vb: Polly.Registry.IReadOnlyPolicyRegistry(Of System.String)
-  name.vb: IReadOnlyPolicyRegistry(Of String)
+- uid: Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}}
+  commentId: T:Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}}
+  parent: Apizr
+  definition: Apizr.ILazyFactory`1
+  name: ILazyFactory<IReadOnlyPolicyRegistry<String>>
+  nameWithType: ILazyFactory<IReadOnlyPolicyRegistry<String>>
+  fullName: Apizr.ILazyFactory<Polly.Registry.IReadOnlyPolicyRegistry<System.String>>
+  nameWithType.vb: ILazyFactory(Of IReadOnlyPolicyRegistry(Of String))
+  fullName.vb: Apizr.ILazyFactory(Of Polly.Registry.IReadOnlyPolicyRegistry(Of System.String))
+  name.vb: ILazyFactory(Of IReadOnlyPolicyRegistry(Of String))
   spec.csharp:
+  - uid: Apizr.ILazyFactory`1
+    name: ILazyFactory
+    nameWithType: ILazyFactory
+    fullName: Apizr.ILazyFactory
+  - name: <
+    nameWithType: <
+    fullName: <
   - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
     name: IReadOnlyPolicyRegistry
     nameWithType: IReadOnlyPolicyRegistry
@@ -14736,7 +14743,17 @@ references:
   - name: '>'
     nameWithType: '>'
     fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
   spec.vb:
+  - uid: Apizr.ILazyFactory`1
+    name: ILazyFactory
+    nameWithType: ILazyFactory
+    fullName: Apizr.ILazyFactory
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
   - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
     name: IReadOnlyPolicyRegistry
     nameWithType: IReadOnlyPolicyRegistry
@@ -14750,6 +14767,9 @@ references:
     nameWithType: String
     fullName: System.String
     isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
   - name: )
     nameWithType: )
     fullName: )
@@ -14842,51 +14862,6 @@ references:
   name: Apizr.Mapping
   nameWithType: Apizr.Mapping
   fullName: Apizr.Mapping
-- uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-  commentId: T:Polly.Registry.IReadOnlyPolicyRegistry`1
-  isExternal: true
-  name: IReadOnlyPolicyRegistry<TKey>
-  nameWithType: IReadOnlyPolicyRegistry<TKey>
-  fullName: Polly.Registry.IReadOnlyPolicyRegistry<TKey>
-  nameWithType.vb: IReadOnlyPolicyRegistry(Of TKey)
-  fullName.vb: Polly.Registry.IReadOnlyPolicyRegistry(Of TKey)
-  name.vb: IReadOnlyPolicyRegistry(Of TKey)
-  spec.csharp:
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Polly.Registry
-  commentId: N:Polly.Registry
-  isExternal: true
-  name: Polly.Registry
-  nameWithType: Polly.Registry
-  fullName: Polly.Registry
 - uid: Apizr.Configuring.Manager.IApizrManagerOptions`1
   commentId: T:Apizr.Configuring.Manager.IApizrManagerOptions`1
   name: IApizrManagerOptions<TWebApi>

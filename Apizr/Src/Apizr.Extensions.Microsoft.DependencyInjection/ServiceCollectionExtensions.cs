@@ -934,6 +934,8 @@ namespace Apizr
         }
 
         internal static IServiceCollection TryAddSingleton<TService, TImplementation>(this IServiceCollection service)
+            where TService : class
+            where TImplementation : class, TService
         {
             service.TryAddSingleton(typeof(TService), typeof(TImplementation));
 
@@ -941,6 +943,7 @@ namespace Apizr
         }
 
         internal static IServiceCollection TryAddSingleton<TService>(this IServiceCollection service, Func<IServiceProvider, object> factory)
+            where TService : class
         {
             service.TryAddSingleton(typeof(TService), factory);
 

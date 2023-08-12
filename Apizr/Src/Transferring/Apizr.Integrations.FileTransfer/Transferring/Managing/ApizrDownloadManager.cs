@@ -65,3 +65,11 @@ public class ApizrDownloadManager : ApizrDownloadManager<IDownloadApi>, IApizrDo
     {
     }
 }
+
+public class ApizrDownloadManagerWith<TDownloadParams> : ApizrDownloadManager<IDownloadApi<TDownloadParams>, TDownloadParams>, IApizrDownloadManagerWith<TDownloadParams>
+{
+    /// <inheritdoc />
+    public ApizrDownloadManagerWith(IApizrManager<IDownloadApi<TDownloadParams>> fileTransferApiManager) : base(fileTransferApiManager)
+    {
+    }
+}

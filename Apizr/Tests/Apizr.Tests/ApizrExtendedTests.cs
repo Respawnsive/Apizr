@@ -815,5 +815,27 @@ namespace Apizr.Tests
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4");
         }
+
+        [Fact]
+        public async Task Concurrent_Requests_Should_Not_Throw()
+        {
+            var services = new ServiceCollection();
+
+            services.AddApizrManagerFor<IReqResSimpleService>();
+
+            var serviceProvider = services.BuildServiceProvider();
+            var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResSimpleService>>();
+
+            var tasks = new List<Task>();
+            for (var i = 0; i < 10; ++i)
+            {
+                tasks.Add(Task.Run(async () =>
+                {
+                    Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+                    await act.Should().NotThrowAsync();
+                }));
+            }
+            await Task.WhenAll(tasks);
+        }
     }
 }

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -68,12 +69,12 @@ namespace Apizr
         private readonly string _webApiFriendlyName;
         private readonly IApizrManagerOptions<TWebApi> _apizrOptions;
 
-        private readonly Dictionary<MethodDetails, (CacheAttributeBase cacheAttribute, string cacheKey)>
+        private readonly ConcurrentDictionary<MethodDetails, (CacheAttributeBase cacheAttribute, string cacheKey)>
             _cachingMethodsSet;
 
-        private readonly Dictionary<MethodDetails, LogAttributeBase> _loggingMethodsSet;
-        private readonly Dictionary<MethodDetails, IsPolicy> _policingMethodsSet;
-        private readonly Dictionary<MethodDetails, IList<HandlerParameterAttribute>> _handlerParameterMethodsSet;
+        private readonly ConcurrentDictionary<MethodDetails, LogAttributeBase> _loggingMethodsSet;
+        private readonly ConcurrentDictionary<MethodDetails, IsPolicy> _policingMethodsSet;
+        private readonly ConcurrentDictionary<MethodDetails, IList<HandlerParameterAttribute>> _handlerParameterMethodsSet;
 
         #endregion
 
@@ -98,10 +99,10 @@ namespace Apizr
             _webApiFriendlyName = typeof(TWebApi).GetFriendlyName();
             _apizrOptions = apizrOptions;
 
-            _cachingMethodsSet = new Dictionary<MethodDetails, (CacheAttributeBase cacheAttribute, string cacheKey)>();
-            _loggingMethodsSet = new Dictionary<MethodDetails, LogAttributeBase>();
-            _policingMethodsSet = new Dictionary<MethodDetails, IsPolicy>();
-            _handlerParameterMethodsSet = new Dictionary<MethodDetails, IList<HandlerParameterAttribute>>();
+            _cachingMethodsSet = new ConcurrentDictionary<MethodDetails, (CacheAttributeBase cacheAttribute, string cacheKey)>();
+            _loggingMethodsSet = new ConcurrentDictionary<MethodDetails, LogAttributeBase>();
+            _policingMethodsSet = new ConcurrentDictionary<MethodDetails, IsPolicy>();
+            _handlerParameterMethodsSet = new ConcurrentDictionary<MethodDetails, IList<HandlerParameterAttribute>>();
         }
 
         #region Implementation
@@ -973,7 +974,7 @@ namespace Apizr
             }
 
             // Return log attribute
-            _loggingMethodsSet.Add(methodDetails, logAttribute);
+            _loggingMethodsSet.TryAdd(methodDetails, logAttribute);
             return logAttribute;
         }
 
@@ -1034,7 +1035,7 @@ namespace Apizr
                 if (cacheAttribute == null || cacheAttribute.Mode == CacheMode.None)
                 {
                     // No we're not! Save details for next calls and return False
-                    _cachingMethodsSet.Add(methodToCacheData, (cacheAttribute, cacheKey));
+                    _cachingMethodsSet.TryAdd(methodToCacheData, (cacheAttribute, cacheKey));
                     return false;
                 }
 
@@ -1055,7 +1056,7 @@ namespace Apizr
                     cacheKey += ")";
 
                     // Save details for next calls and return False
-                    _cachingMethodsSet.Add(methodToCacheData, (cacheAttribute, cacheKey));
+                    _cachingMethodsSet.TryAdd(methodToCacheData, (cacheAttribute, cacheKey));
                     return true;
                 }
 
@@ -1142,7 +1143,7 @@ namespace Apizr
                 cacheKey += $"{string.Join(", ", parameters)})";
 
                 // Save details for next calls and return False
-                _cachingMethodsSet.Add(methodToCacheData, (cacheAttribute, cacheKey));
+                _cachingMethodsSet.TryAdd(methodToCacheData, (cacheAttribute, cacheKey));
                 return true;
             }
         }
@@ -1213,7 +1214,7 @@ namespace Apizr
                 }
             }
 
-            _policingMethodsSet.Add(methodDetails, policy);
+            _policingMethodsSet.TryAdd(methodDetails, policy);
             return policy;
         }
 
@@ -1258,7 +1259,7 @@ namespace Apizr
                 }
             }
 
-            _policingMethodsSet.Add(methodDetails, policy);
+            _policingMethodsSet.TryAdd(methodDetails, policy);
             return policy;
         }
 
@@ -1318,7 +1319,7 @@ namespace Apizr
             }
 
             // Return log attribute
-            _handlerParameterMethodsSet.Add(methodDetails, handlerParameterAttributes);
+            _handlerParameterMethodsSet.TryAdd(methodDetails, handlerParameterAttributes);
             return handlerParameterAttributes;
         }
 

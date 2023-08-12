@@ -51,3 +51,10 @@ public interface IApizrUploadManager<TUploadApi> : IApizrUploadManager<TUploadAp
 /// </summary>
 public interface IApizrUploadManager : IApizrUploadManager<IUploadApi>
 {}
+
+/// <summary>
+/// The upload manager with type shortcut
+/// </summary>
+/// <typeparam name="TUploadApiResultData">The upload api result type</typeparam>
+public interface IApizrUploadManagerWith<TUploadApiResultData> : IApizrUploadManager<IUploadApi<TUploadApiResultData>, TUploadApiResultData>
+{}

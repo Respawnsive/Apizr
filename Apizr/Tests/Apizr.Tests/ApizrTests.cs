@@ -20,6 +20,7 @@ using AutoMapper;
 using FluentAssertions;
 using Mapster;
 using MapsterMapper;
+using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MonkeyCache.FileStore;
@@ -590,6 +591,23 @@ namespace Apizr.Tests
                 options => options.WithHeaders("testKey3: testValue3", "testKey4: testValue4"));
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4");
+        }
+
+        [Fact]
+        public async Task Concurrent_Requests_Should_Not_Throw()
+        {
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResSimpleService>();
+
+            var tasks = new List<Task>();
+            for (var i = 0; i < 10; ++i)
+            {
+                tasks.Add(Task.Run(async () =>
+                {
+                    Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+                    await act.Should().NotThrowAsync();
+                }));
+            }
+            await Task.WhenAll(tasks);
         }
     }
 }

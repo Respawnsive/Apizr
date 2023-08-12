@@ -50,3 +50,11 @@ public interface IApizrTransferManager :
     IApizrDownloadManager, 
     IApizrUploadManager
 { }
+
+/// <summary>
+/// The transfer manager to work with both downloads and uploads and with a dictionary query parameters type and no result
+/// </summary>
+public interface IApizrTransferManagerWith<TDownloadParams, TUploadApiResultData> :
+    IApizrDownloadManager<IDownloadApi<TDownloadParams>, TDownloadParams>,
+    IApizrUploadManager<IUploadApi<TUploadApiResultData>, TUploadApiResultData>
+{ }

@@ -9,12 +9,15 @@ using Refit;
 
 namespace Apizr.Transferring.Managing;
 
-public class ApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData> : IApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData> where TTransferApi : ITransferApi<TDownloadParams, TUploadApiResultData>
+public class
+    ApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData> : IApizrTransferManager<TTransferApi,
+        TDownloadParams, TUploadApiResultData> where TTransferApi : ITransferApi<TDownloadParams, TUploadApiResultData>
 {
     private readonly IApizrDownloadManager<TTransferApi, TDownloadParams> _downloadManager;
     private readonly IApizrUploadManager<TTransferApi, TUploadApiResultData> _uploadManager;
 
-    public ApizrTransferManager(IApizrDownloadManager<TTransferApi, TDownloadParams> downloadManager, IApizrUploadManager<TTransferApi, TUploadApiResultData> uploadManager)
+    public ApizrTransferManager(IApizrDownloadManager<TTransferApi, TDownloadParams> downloadManager,
+        IApizrUploadManager<TTransferApi, TUploadApiResultData> uploadManager)
     {
         _downloadManager = downloadManager;
         _uploadManager = uploadManager;
@@ -30,15 +33,18 @@ public class ApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResul
         => _downloadManager.DownloadAsync(fileInfo, downloadParams, optionsBuilder);
 
     /// <inheritdoc />
-    public Task<TUploadApiResultData> UploadAsync(ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+    public Task<TUploadApiResultData> UploadAsync(ByteArrayPart byteArrayPart,
+        Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         => _uploadManager.UploadAsync(byteArrayPart, optionsBuilder);
 
     /// <inheritdoc />
-    public Task<TUploadApiResultData> UploadAsync(StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+    public Task<TUploadApiResultData> UploadAsync(StreamPart streamPart,
+        Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         => _uploadManager.UploadAsync(streamPart, optionsBuilder);
 
     /// <inheritdoc />
-    public Task<TUploadApiResultData> UploadAsync(FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+    public Task<TUploadApiResultData> UploadAsync(FileInfoPart fileInfoPart,
+        Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         => _uploadManager.UploadAsync(fileInfoPart, optionsBuilder);
 }
 
@@ -87,6 +93,19 @@ public class ApizrTransferManager : ApizrTransferManager<ITransferApi>, IApizrTr
 {
     /// <inheritdoc />
     public ApizrTransferManager(IApizrDownloadManager<ITransferApi> downloadManager, IApizrUploadManager<ITransferApi> uploadManager) : base(downloadManager, uploadManager)
+    {
+    }
+}
+
+public class ApizrTransferManagerWith<TDownloadParams, TUploadApiResultData> :
+    ApizrTransferManager<ITransferApi<TDownloadParams, TUploadApiResultData>, TDownloadParams, TUploadApiResultData>,
+    IApizrTransferManagerWith<TDownloadParams, TUploadApiResultData>
+{
+    /// <inheritdoc />
+    public ApizrTransferManagerWith(
+        IApizrDownloadManager<ITransferApi<TDownloadParams, TUploadApiResultData>, TDownloadParams> downloadManager,
+        IApizrUploadManager<ITransferApi<TDownloadParams, TUploadApiResultData>, TUploadApiResultData> uploadManager) :
+        base(downloadManager, uploadManager)
     {
     }
 }

@@ -46,3 +46,11 @@ public interface IApizrDownloadManager<TDownloadApi> : IApizrDownloadManager<TDo
 public interface IApizrDownloadManager : IApizrDownloadManager<IDownloadApi>
 {
 }
+
+/// <summary>
+/// The download manager with parameter shortcut
+/// </summary>
+/// <typeparam name="TDownloadParams">The query parameters type</typeparam>
+public interface IApizrDownloadManagerWith<TDownloadParams> : IApizrDownloadManager<IDownloadApi<TDownloadParams>, TDownloadParams>
+{
+}

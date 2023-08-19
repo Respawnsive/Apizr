@@ -50,15 +50,41 @@ namespace Apizr.Tests
         [Fact]
         public void Apizr_Should_Create_Manager()
         {
-            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>();
-            var httpBinManager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>();
-            var userManager = ApizrBuilder.Current.CreateCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>();
-            var transferManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferSampleApi>();
+            Func<IApizrManager> reqResManagerFactory = () => ApizrBuilder.Current.CreateManagerFor<IReqResUserService>();
+            reqResManagerFactory.Should().NotThrow().Which.Should().NotBeNull();
 
-            reqResManager.Should().NotBeNull();
-            httpBinManager.Should().NotBeNull();
-            userManager.Should().NotBeNull();
-            transferManager.Should().NotBeNull();
+            Func<IApizrManager> httpBinManagerFactory = () => ApizrBuilder.Current.CreateManagerFor<IHttpBinService>();
+            httpBinManagerFactory.Should().NotThrow().Which.Should().NotBeNull();
+
+            Func<IApizrManager> userManagerFactory = () => ApizrBuilder.Current.CreateCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>();
+            userManagerFactory.Should().NotThrow().Which.Should().NotBeNull();
+
+            Func<IApizrManager> uploadManagerFactory = () => ApizrBuilder.Current.CreateUploadManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr/files"));
+            uploadManagerFactory.Should().NotThrow().Which.Should().NotBeNull();
+
+            Func<IApizrManager> uploadManagerForFactory = () => ApizrBuilder.Current.CreateUploadManagerFor<ITransferSampleApi>();
+            uploadManagerForFactory.Should().NotThrow().Which.Should().NotBeNull();
+
+            Func<IApizrManager> uploadManagerWithFactory = () => ApizrBuilder.Current.CreateUploadManagerWith<string>(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr/files"));
+            uploadManagerWithFactory.Should().NotThrow().Which.Should().NotBeNull();
+
+            Func<IApizrManager> downloadManagerFactory = () => ApizrBuilder.Current.CreateDownloadManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr/files"));
+            downloadManagerFactory.Should().NotThrow().Which.Should().NotBeNull();
+
+            Func<IApizrManager> downloadManagerForFactory = () => ApizrBuilder.Current.CreateDownloadManagerFor<ITransferSampleApi>();
+            downloadManagerForFactory.Should().NotThrow().Which.Should().NotBeNull();
+
+            Func<IApizrManager> downloadManagerWithFactory = () => ApizrBuilder.Current.CreateDownloadManagerWith<User>(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr/files"));
+            downloadManagerWithFactory.Should().NotThrow().Which.Should().NotBeNull();
+
+            Func<IApizrManager> transferManagerFactory = () => ApizrBuilder.Current.CreateTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr/files"));
+            transferManagerFactory.Should().NotThrow().Which.Should().NotBeNull();
+
+            Func<IApizrManager> transferManagerForFactory = () => ApizrBuilder.Current.CreateTransferManagerFor<ITransferSampleApi>();
+            transferManagerForFactory.Should().NotThrow().Which.Should().NotBeNull();
+
+            Func<IApizrManager> transferManagerWithFactory = () => ApizrBuilder.Current.CreateTransferManagerWith<User, string>(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr/files"));
+            transferManagerWithFactory.Should().NotThrow().Which.Should().NotBeNull();
         }
 
         [Fact]

@@ -54,48 +54,81 @@ namespace Apizr.Tests
         [Fact]
         public void ApizrRegistry_Should_Contain_Managers()
         {
-            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
+            Func<IApizrRegistry> registryFactory = () => ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddManagerFor<IReqResUserService>()
                 .AddManagerFor<IHttpBinService>()
-                //.AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
-                .AddUploadManagerFor<IUploadApi>()
-                //.AddUploadManager(options => options.WithBaseAddress("https://test.com"))
-                .AddDownloadManagerFor<IDownloadApi>()
-                //.AddDownloadManager(options => options.WithBaseAddress("https://test.com"))
-                .AddTransferManagerFor<ITransferApi>());
-                //.AddTransferManager(options => options.WithBaseAddress("https://test.com"))
 
-            apizrRegistry.Should().NotBeNull();
-            apizrRegistry.ContainsManagerFor<IReqResUserService>().Should().BeTrue();
-            apizrRegistry.ContainsManagerFor<IHttpBinService>().Should().BeTrue();
-            //apizrRegistry.ContainsCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>().Should().BeTrue();
-            apizrRegistry.ContainsManagerFor<IUploadApi>().Should().BeTrue();
-            apizrRegistry.ContainsUploadManagerFor<IUploadApi>().Should().BeTrue();
-            apizrRegistry.ContainsUploadManager().Should().BeTrue();
-            apizrRegistry.ContainsManagerFor<IDownloadApi>().Should().BeTrue();
-            apizrRegistry.ContainsDownloadManagerFor<IDownloadApi>().Should().BeTrue();
-            apizrRegistry.ContainsDownloadManager().Should().BeTrue();
-            apizrRegistry.ContainsManagerFor<ITransferApi>().Should().BeTrue();
-            apizrRegistry.ContainsTransferManagerFor<ITransferApi>().Should().BeTrue();
-            apizrRegistry.ContainsTransferManager().Should().BeTrue();
+                .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
+
+                .AddUploadManager(options => options.WithBaseAddress("https://test.com"))
+                .AddUploadManagerFor<ITransferSampleApi>()
+                .AddUploadManagerWith<string>(options => options.WithBaseAddress("https://test.com"))
+
+                .AddDownloadManager(options => options.WithBaseAddress("https://test.com"))
+                .AddDownloadManagerFor<ITransferSampleApi>()
+                .AddDownloadManagerWith<User>(options => options.WithBaseAddress("https://test.com"))
+
+                .AddTransferManager(options => options.WithBaseAddress("https://test.com"))
+                .AddTransferManagerFor<ITransferSampleApi>()
+                .AddTransferManagerWith<User, string>(options => options.WithBaseAddress("https://test.com")));
+
+            var registry = registryFactory.Should().NotThrow().Which.Should().BeOfType<ApizrRegistry>().Which;
+
+            registry.ContainsManagerFor<IReqResUserService>().Should().BeTrue();
+            registry.ContainsManagerFor<IHttpBinService>().Should().BeTrue();
+
+            registry.ContainsCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>().Should().BeTrue();
+            
+            registry.ContainsUploadManager().Should().BeTrue();
+            registry.ContainsUploadManagerFor<ITransferSampleApi>().Should().BeTrue();
+            registry.ContainsUploadManagerWith<string>().Should().BeTrue();
+            
+            registry.ContainsDownloadManager().Should().BeTrue();
+            registry.ContainsDownloadManagerFor<ITransferSampleApi>().Should().BeTrue();
+            registry.ContainsDownloadManagerWith<User>().Should().BeTrue();
+            
+            registry.ContainsTransferManager().Should().BeTrue();
+            registry.ContainsTransferManagerFor<ITransferSampleApi>().Should().BeTrue();
+            registry.ContainsTransferManagerWith<User, string>().Should().BeTrue();
         }
 
         [Fact]
         public void ApizrRegistry_Should_Get_Managers()
         {
-            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
+            var registry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddManagerFor<IReqResUserService>()
                 .AddManagerFor<IHttpBinService>()
-                .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>());
 
-            apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
-            apizrRegistry.TryGetManagerFor<IHttpBinService>(out var httpBinManager).Should().BeTrue();
-            apizrRegistry.TryGetCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(out var userManager)
-                .Should().BeTrue();
+                .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
 
-            reqResManager.Should().NotBeNull();
-            httpBinManager.Should().NotBeNull();
-            userManager.Should().NotBeNull();
+                .AddUploadManager(options => options.WithBaseAddress("https://test.com"))
+                .AddUploadManagerFor<ITransferSampleApi>()
+                .AddUploadManagerWith<string>(options => options.WithBaseAddress("https://test.com"))
+
+                .AddDownloadManager(options => options.WithBaseAddress("https://test.com"))
+                .AddDownloadManagerFor<ITransferSampleApi>()
+                .AddDownloadManagerWith<User>(options => options.WithBaseAddress("https://test.com"))
+
+                .AddTransferManager(options => options.WithBaseAddress("https://test.com"))
+                .AddTransferManagerFor<ITransferSampleApi>()
+                .AddTransferManagerWith<User, string>(options => options.WithBaseAddress("https://test.com")));
+
+            registry.TryGetManagerFor<IReqResUserService>(out _).Should().BeTrue();
+            registry.TryGetManagerFor<IHttpBinService>(out _).Should().BeTrue();
+
+            registry.TryGetCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(out _).Should().BeTrue();
+
+            registry.TryGetUploadManager(out _).Should().BeTrue();
+            registry.TryGetUploadManagerFor<ITransferSampleApi>(out _).Should().BeTrue();
+            registry.TryGetUploadManagerWith<string>(out _).Should().BeTrue();
+
+            registry.TryGetDownloadManager(out _).Should().BeTrue();
+            registry.TryGetDownloadManagerFor<ITransferSampleApi>(out _).Should().BeTrue();
+            registry.TryGetDownloadManagerWith<User>(out _).Should().BeTrue();
+
+            registry.TryGetTransferManager(out _).Should().BeTrue();
+            registry.TryGetTransferManagerFor<ITransferSampleApi>(out _).Should().BeTrue();
+            registry.TryGetTransferManagerWith<User, string>(out _).Should().BeTrue();
         }
 
         [Fact]

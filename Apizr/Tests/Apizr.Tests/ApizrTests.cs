@@ -531,6 +531,19 @@ namespace Apizr.Tests
         }
 
         [Fact]
+        public async Task Uploading_File_Locally_Should_Succeed()
+        {
+            var apizrUploadManager = ApizrBuilder.Current.CreateUploadManagerWith<string>(options => options
+                .WithBaseAddress("https://localhost:7015/upload"));
+
+            apizrUploadManager.Should().NotBeNull(); // Built-in
+
+            // Shortcut
+            var result = await apizrUploadManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
+            result.Should().NotBeNullOrWhiteSpace();
+        }
+
+        [Fact]
         public async Task Uploading_File_Should_Succeed()
         {
             var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options => options

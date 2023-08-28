@@ -1,3 +1,23 @@
+5.2.0
+---
+
+### Apizr.Integrations.FileTransfer
+
+- [New] Now **Upload api uses the "file" alias**
+- [New] Now we can **create transfer managers with shortcuts**
+
+### Apizr.Extensions.Microsoft.FileTransfer
+
+- [New] Now we can **get transfer managers with shortcuts**
+
+### Apizr.Integrations.FileTransfer.MediatR
+
+- [New] Now we can **send requests with shortcuts**
+
+### Apizr.Integrations.FileTransfer.Optional
+
+- [New] Now we can **send optional requests with shortcuts**
+
 5.1.0
 ---
 

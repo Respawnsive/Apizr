@@ -79,10 +79,16 @@ items:
 
       [Post("")]
 
-      Task<TApiResultData> UploadAsync(ByteArrayPart byteArrayPart)
+      Task<TApiResultData> UploadAsync([AliasAs("file")] ByteArrayPart byteArrayPart)
     parameters:
     - id: byteArrayPart
       type: Refit.ByteArrayPart
+      attributes:
+      - type: Refit.AliasAsAttribute
+        ctor: Refit.AliasAsAttribute.#ctor(System.String)
+        arguments:
+        - type: System.String
+          value: file
     return:
       type: System.Threading.Tasks.Task{{TApiResultData}}
     content.vb: >-
@@ -135,10 +141,16 @@ items:
 
       [QueryUriFormat(UriFormat.Unescaped)]
 
-      Task<TApiResultData> UploadAsync(ByteArrayPart byteArrayPart, string path)
+      Task<TApiResultData> UploadAsync([AliasAs("file")] ByteArrayPart byteArrayPart, string path)
     parameters:
     - id: byteArrayPart
       type: Refit.ByteArrayPart
+      attributes:
+      - type: Refit.AliasAsAttribute
+        ctor: Refit.AliasAsAttribute.#ctor(System.String)
+        arguments:
+        - type: System.String
+          value: file
     - id: path
       type: System.String
     return:
@@ -198,10 +210,16 @@ items:
 
       [Post("")]
 
-      Task<TApiResultData> UploadAsync(ByteArrayPart byteArrayPart, [RequestOptions] IApizrRequestOptions options)
+      Task<TApiResultData> UploadAsync([AliasAs("file")] ByteArrayPart byteArrayPart, [RequestOptions] IApizrRequestOptions options)
     parameters:
     - id: byteArrayPart
       type: Refit.ByteArrayPart
+      attributes:
+      - type: Refit.AliasAsAttribute
+        ctor: Refit.AliasAsAttribute.#ctor(System.String)
+        arguments:
+        - type: System.String
+          value: file
     - id: options
       type: Apizr.Configuring.Request.IApizrRequestOptions
       attributes:
@@ -260,10 +278,16 @@ items:
 
       [QueryUriFormat(UriFormat.Unescaped)]
 
-      Task<TApiResultData> UploadAsync(ByteArrayPart byteArrayPart, string path, [RequestOptions] IApizrRequestOptions options)
+      Task<TApiResultData> UploadAsync([AliasAs("file")] ByteArrayPart byteArrayPart, string path, [RequestOptions] IApizrRequestOptions options)
     parameters:
     - id: byteArrayPart
       type: Refit.ByteArrayPart
+      attributes:
+      - type: Refit.AliasAsAttribute
+        ctor: Refit.AliasAsAttribute.#ctor(System.String)
+        arguments:
+        - type: System.String
+          value: file
     - id: path
       type: System.String
     - id: options
@@ -329,10 +353,16 @@ items:
 
       [Post("")]
 
-      Task<TApiResultData> UploadAsync(StreamPart streamPart)
+      Task<TApiResultData> UploadAsync([AliasAs("file")] StreamPart streamPart)
     parameters:
     - id: streamPart
       type: Refit.StreamPart
+      attributes:
+      - type: Refit.AliasAsAttribute
+        ctor: Refit.AliasAsAttribute.#ctor(System.String)
+        arguments:
+        - type: System.String
+          value: file
     return:
       type: System.Threading.Tasks.Task{{TApiResultData}}
     content.vb: >-
@@ -385,10 +415,16 @@ items:
 
       [QueryUriFormat(UriFormat.Unescaped)]
 
-      Task<TApiResultData> UploadAsync(StreamPart streamPart, string path)
+      Task<TApiResultData> UploadAsync([AliasAs("file")] StreamPart streamPart, string path)
     parameters:
     - id: streamPart
       type: Refit.StreamPart
+      attributes:
+      - type: Refit.AliasAsAttribute
+        ctor: Refit.AliasAsAttribute.#ctor(System.String)
+        arguments:
+        - type: System.String
+          value: file
     - id: path
       type: System.String
     return:
@@ -448,10 +484,16 @@ items:
 
       [Post("")]
 
-      Task<TApiResultData> UploadAsync(StreamPart streamPart, [RequestOptions] IApizrRequestOptions options)
+      Task<TApiResultData> UploadAsync([AliasAs("file")] StreamPart streamPart, [RequestOptions] IApizrRequestOptions options)
     parameters:
     - id: streamPart
       type: Refit.StreamPart
+      attributes:
+      - type: Refit.AliasAsAttribute
+        ctor: Refit.AliasAsAttribute.#ctor(System.String)
+        arguments:
+        - type: System.String
+          value: file
     - id: options
       type: Apizr.Configuring.Request.IApizrRequestOptions
       attributes:
@@ -510,10 +552,16 @@ items:
 
       [QueryUriFormat(UriFormat.Unescaped)]
 
-      Task<TApiResultData> UploadAsync(StreamPart streamPart, string path, [RequestOptions] IApizrRequestOptions options)
+      Task<TApiResultData> UploadAsync([AliasAs("file")] StreamPart streamPart, string path, [RequestOptions] IApizrRequestOptions options)
     parameters:
     - id: streamPart
       type: Refit.StreamPart
+      attributes:
+      - type: Refit.AliasAsAttribute
+        ctor: Refit.AliasAsAttribute.#ctor(System.String)
+        arguments:
+        - type: System.String
+          value: file
     - id: path
       type: System.String
     - id: options
@@ -579,10 +627,16 @@ items:
 
       [Post("")]
 
-      Task<TApiResultData> UploadAsync(FileInfoPart fileInfoPart)
+      Task<TApiResultData> UploadAsync([AliasAs("file")] FileInfoPart fileInfoPart)
     parameters:
     - id: fileInfoPart
       type: Refit.FileInfoPart
+      attributes:
+      - type: Refit.AliasAsAttribute
+        ctor: Refit.AliasAsAttribute.#ctor(System.String)
+        arguments:
+        - type: System.String
+          value: file
     return:
       type: System.Threading.Tasks.Task{{TApiResultData}}
     content.vb: >-
@@ -635,10 +689,16 @@ items:
 
       [QueryUriFormat(UriFormat.Unescaped)]
 
-      Task<TApiResultData> UploadAsync(FileInfoPart fileInfoPart, string filePath)
+      Task<TApiResultData> UploadAsync([AliasAs("file")] FileInfoPart fileInfoPart, string filePath)
     parameters:
     - id: fileInfoPart
       type: Refit.FileInfoPart
+      attributes:
+      - type: Refit.AliasAsAttribute
+        ctor: Refit.AliasAsAttribute.#ctor(System.String)
+        arguments:
+        - type: System.String
+          value: file
     - id: filePath
       type: System.String
     return:
@@ -698,10 +758,16 @@ items:
 
       [Post("")]
 
-      Task<TApiResultData> UploadAsync(FileInfoPart fileInfoPart, [RequestOptions] IApizrRequestOptions options)
+      Task<TApiResultData> UploadAsync([AliasAs("file")] FileInfoPart fileInfoPart, [RequestOptions] IApizrRequestOptions options)
     parameters:
     - id: fileInfoPart
       type: Refit.FileInfoPart
+      attributes:
+      - type: Refit.AliasAsAttribute
+        ctor: Refit.AliasAsAttribute.#ctor(System.String)
+        arguments:
+        - type: System.String
+          value: file
     - id: options
       type: Apizr.Configuring.Request.IApizrRequestOptions
       attributes:
@@ -760,10 +826,16 @@ items:
 
       [QueryUriFormat(UriFormat.Unescaped)]
 
-      Task<TApiResultData> UploadAsync(FileInfoPart fileInfoPart, string filePath, [RequestOptions] IApizrRequestOptions options)
+      Task<TApiResultData> UploadAsync([AliasAs("file")] FileInfoPart fileInfoPart, string filePath, [RequestOptions] IApizrRequestOptions options)
     parameters:
     - id: fileInfoPart
       type: Refit.FileInfoPart
+      attributes:
+      - type: Refit.AliasAsAttribute
+        ctor: Refit.AliasAsAttribute.#ctor(System.String)
+        arguments:
+        - type: System.String
+          value: file
     - id: filePath
       type: System.String
     - id: options

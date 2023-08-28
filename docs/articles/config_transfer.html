@@ -147,19 +147,22 @@
 
     [Multipart]
     [Post(&quot;&quot;)]
-    Task&lt;TApiResultData&gt; UploadAsync(ByteArrayPart byteArrayPart);
+    Task&lt;TApiResultData&gt; UploadAsync([AliasAs(&quot;file&quot;)] ByteArrayPart byteArrayPart);
 
     [Multipart]
     [Post(&quot;/{path}&quot;), QueryUriFormat(UriFormat.Unescaped)]
-    Task&lt;TApiResultData&gt; UploadAsync(ByteArrayPart byteArrayPart, string path);
+    Task&lt;TApiResultData&gt; UploadAsync([AliasAs(&quot;file&quot;)] ByteArrayPart byteArrayPart, 
+        string path);
 
     [Multipart]
     [Post(&quot;&quot;)]
-    Task&lt;TApiResultData&gt; UploadAsync(ByteArrayPart byteArrayPart, [RequestOptions] IApizrRequestOptions options);
+    Task&lt;TApiResultData&gt; UploadAsync([AliasAs(&quot;file&quot;)] ByteArrayPart byteArrayPart, 
+        [RequestOptions] IApizrRequestOptions options);
 
     [Multipart]
     [Post(&quot;/{path}&quot;), QueryUriFormat(UriFormat.Unescaped)]
-    Task&lt;TApiResultData&gt; UploadAsync(ByteArrayPart byteArrayPart, string path, [RequestOptions] IApizrRequestOptions options);
+    Task&lt;TApiResultData&gt; UploadAsync([AliasAs(&quot;file&quot;)] ByteArrayPart byteArrayPart, 
+        string path, [RequestOptions] IApizrRequestOptions options);
 
     #endregion
 
@@ -167,19 +170,22 @@
 
     [Multipart]
     [Post(&quot;&quot;)]
-    Task&lt;TApiResultData&gt; UploadAsync(StreamPart streamPart);
+    Task&lt;TApiResultData&gt; UploadAsync([AliasAs(&quot;file&quot;)] StreamPart streamPart);
 
     [Multipart]
     [Post(&quot;/{path}&quot;), QueryUriFormat(UriFormat.Unescaped)]
-    Task&lt;TApiResultData&gt; UploadAsync(StreamPart streamPart, string path);
+    Task&lt;TApiResultData&gt; UploadAsync([AliasAs(&quot;file&quot;)] StreamPart streamPart, 
+        string path);
 
     [Multipart]
     [Post(&quot;&quot;)]
-    Task&lt;TApiResultData&gt; UploadAsync(StreamPart streamPart, [RequestOptions] IApizrRequestOptions options);
+    Task&lt;TApiResultData&gt; UploadAsync([AliasAs(&quot;file&quot;)] StreamPart streamPart, 
+        [RequestOptions] IApizrRequestOptions options);
 
     [Multipart]
     [Post(&quot;/{path}&quot;), QueryUriFormat(UriFormat.Unescaped)]
-    Task&lt;TApiResultData&gt; UploadAsync(StreamPart streamPart, string path, [RequestOptions] IApizrRequestOptions options);
+    Task&lt;TApiResultData&gt; UploadAsync([AliasAs(&quot;file&quot;)] StreamPart streamPart, string path, 
+        [RequestOptions] IApizrRequestOptions options);
 
     #endregion
 
@@ -187,19 +193,22 @@
 
     [Multipart]
     [Post(&quot;&quot;)]
-    Task&lt;TApiResultData&gt; UploadAsync(FileInfoPart fileInfoPart);
+    Task&lt;TApiResultData&gt; UploadAsync([AliasAs(&quot;file&quot;)] FileInfoPart fileInfoPart);
 
     [Multipart]
     [Post(&quot;/{filePath}&quot;), QueryUriFormat(UriFormat.Unescaped)]
-    Task&lt;TApiResultData&gt; UploadAsync(FileInfoPart fileInfoPart, string filePath);
+    Task&lt;TApiResultData&gt; UploadAsync([AliasAs(&quot;file&quot;)] FileInfoPart fileInfoPart, 
+        string filePath);
 
     [Multipart]
     [Post(&quot;&quot;)]
-    Task&lt;TApiResultData&gt; UploadAsync(FileInfoPart fileInfoPart, [RequestOptions] IApizrRequestOptions options);
+    Task&lt;TApiResultData&gt; UploadAsync([AliasAs(&quot;file&quot;)] FileInfoPart fileInfoPart, 
+        [RequestOptions] IApizrRequestOptions options);
 
     [Multipart]
     [Post(&quot;/{filePath}&quot;), QueryUriFormat(UriFormat.Unescaped)]
-    Task&lt;TApiResultData&gt; UploadAsync(FileInfoPart fileInfoPart, string filePath, [RequestOptions] IApizrRequestOptions options);
+    Task&lt;TApiResultData&gt; UploadAsync([AliasAs(&quot;file&quot;)] FileInfoPart fileInfoPart, 
+        string filePath, [RequestOptions] IApizrRequestOptions options);
 
     #endregion
 }

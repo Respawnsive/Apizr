@@ -266,7 +266,7 @@ items:
   summary: "\nCreate an upload manager for the built-in upload api with <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TUploadApiResultData</code>\n"
   example: []
   syntax:
-    content: public static IApizrUploadManager<IUploadApi<TUploadApiResultData>, TUploadApiResultData> CreateUploadManagerWith<TUploadApiResultData>(this IApizrBuilder builder, Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
+    content: public static IApizrUploadManagerWith<TUploadApiResultData> CreateUploadManagerWith<TUploadApiResultData>(this IApizrBuilder builder, Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: builder
       type: Apizr.IApizrBuilder
@@ -278,12 +278,12 @@ items:
     - id: TUploadApiResultData
       description: The upload api result type
     return:
-      type: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi{{TUploadApiResultData}},{TUploadApiResultData}}
+      type: Apizr.Transferring.Managing.IApizrUploadManagerWith{{TUploadApiResultData}}
       description: ''
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function CreateUploadManagerWith(Of TUploadApiResultData)(builder As IApizrBuilder, optionsBuilder As Action(Of IApizrManagerOptionsBuilder) = Nothing) As IApizrUploadManager(Of IUploadApi(Of TUploadApiResultData), TUploadApiResultData)
+      Public Shared Function CreateUploadManagerWith(Of TUploadApiResultData)(builder As IApizrBuilder, optionsBuilder As Action(Of IApizrManagerOptionsBuilder) = Nothing) As IApizrUploadManagerWith(Of TUploadApiResultData)
   overload: Apizr.FileTransferOptionsBuilderExtensions.CreateUploadManagerWith*
   nameWithType.vb: FileTransferOptionsBuilderExtensions.CreateUploadManagerWith(Of TUploadApiResultData)(IApizrBuilder, Action(Of IApizrManagerOptionsBuilder))
   modifiers.csharp:
@@ -485,7 +485,7 @@ items:
   summary: "\nCreate a download manager for the built-in download api with <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TDownloadParams</code>\n"
   example: []
   syntax:
-    content: public static IApizrDownloadManager<IDownloadApi<TDownloadParams>, TDownloadParams> CreateDownloadManagerWith<TDownloadParams>(this IApizrBuilder builder, Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
+    content: public static IApizrDownloadManagerWith<TDownloadParams> CreateDownloadManagerWith<TDownloadParams>(this IApizrBuilder builder, Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: builder
       type: Apizr.IApizrBuilder
@@ -497,12 +497,12 @@ items:
     - id: TDownloadParams
       description: The download query parameters type
     return:
-      type: Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.IDownloadApi{{TDownloadParams}},{TDownloadParams}}
+      type: Apizr.Transferring.Managing.IApizrDownloadManagerWith{{TDownloadParams}}
       description: ''
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function CreateDownloadManagerWith(Of TDownloadParams)(builder As IApizrBuilder, optionsBuilder As Action(Of IApizrManagerOptionsBuilder) = Nothing) As IApizrDownloadManager(Of IDownloadApi(Of TDownloadParams), TDownloadParams)
+      Public Shared Function CreateDownloadManagerWith(Of TDownloadParams)(builder As IApizrBuilder, optionsBuilder As Action(Of IApizrManagerOptionsBuilder) = Nothing) As IApizrDownloadManagerWith(Of TDownloadParams)
   overload: Apizr.FileTransferOptionsBuilderExtensions.CreateDownloadManagerWith*
   nameWithType.vb: FileTransferOptionsBuilderExtensions.CreateDownloadManagerWith(Of TDownloadParams)(IApizrBuilder, Action(Of IApizrManagerOptionsBuilder))
   modifiers.csharp:
@@ -764,7 +764,7 @@ items:
   summary: "\nCreate a transfer manager for the built-in transfer api with <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TDownloadParams</code> and <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TUploadApiResultData</code>\n"
   example: []
   syntax:
-    content: public static IApizrTransferManager<ITransferApi<TDownloadParams, TUploadApiResultData>, TDownloadParams, TUploadApiResultData> CreateTransferManagerWith<TDownloadParams, TUploadApiResultData>(this IApizrBuilder builder, Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
+    content: public static IApizrTransferManagerWith<TDownloadParams, TUploadApiResultData> CreateTransferManagerWith<TDownloadParams, TUploadApiResultData>(this IApizrBuilder builder, Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: builder
       type: Apizr.IApizrBuilder
@@ -778,12 +778,12 @@ items:
     - id: TUploadApiResultData
       description: The upload api result type
     return:
-      type: Apizr.Transferring.Managing.IApizrTransferManager{Apizr.Transferring.Requesting.ITransferApi{{TDownloadParams},{TUploadApiResultData}},{TDownloadParams},{TUploadApiResultData}}
+      type: Apizr.Transferring.Managing.IApizrTransferManagerWith{{TDownloadParams},{TUploadApiResultData}}
       description: ''
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function CreateTransferManagerWith(Of TDownloadParams, TUploadApiResultData)(builder As IApizrBuilder, optionsBuilder As Action(Of IApizrManagerOptionsBuilder) = Nothing) As IApizrTransferManager(Of ITransferApi(Of TDownloadParams, TUploadApiResultData), TDownloadParams, TUploadApiResultData)
+      Public Shared Function CreateTransferManagerWith(Of TDownloadParams, TUploadApiResultData)(builder As IApizrBuilder, optionsBuilder As Action(Of IApizrManagerOptionsBuilder) = Nothing) As IApizrTransferManagerWith(Of TDownloadParams, TUploadApiResultData)
   overload: Apizr.FileTransferOptionsBuilderExtensions.CreateTransferManagerWith*
   nameWithType.vb: FileTransferOptionsBuilderExtensions.CreateTransferManagerWith(Of TDownloadParams, TUploadApiResultData)(IApizrBuilder, Action(Of IApizrManagerOptionsBuilder))
   modifiers.csharp:
@@ -1032,7 +1032,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddDownloadManager
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/FileTransferOptionsBuilderExtensions.cs
-    startLine: 302
+    startLine: 304
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr
@@ -1083,7 +1083,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddDownloadManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/FileTransferOptionsBuilderExtensions.cs
-    startLine: 315
+    startLine: 317
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr
@@ -1139,7 +1139,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddDownloadManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/FileTransferOptionsBuilderExtensions.cs
-    startLine: 348
+    startLine: 350
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr
@@ -1197,7 +1197,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddDownloadManagerWith
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/FileTransferOptionsBuilderExtensions.cs
-    startLine: 371
+    startLine: 373
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr
@@ -1251,7 +1251,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddTransferManager
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/FileTransferOptionsBuilderExtensions.cs
-    startLine: 392
+    startLine: 396
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr
@@ -1302,7 +1302,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddTransferManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/FileTransferOptionsBuilderExtensions.cs
-    startLine: 405
+    startLine: 409
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr
@@ -1358,7 +1358,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddTransferManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/FileTransferOptionsBuilderExtensions.cs
-    startLine: 470
+    startLine: 474
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr
@@ -1416,7 +1416,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddTransferManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/FileTransferOptionsBuilderExtensions.cs
-    startLine: 507
+    startLine: 511
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr
@@ -1476,7 +1476,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddTransferManagerWith
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/FileTransferOptionsBuilderExtensions.cs
-    startLine: 543
+    startLine: 547
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr
@@ -1532,7 +1532,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithProgress
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/FileTransferOptionsBuilderExtensions.cs
-    startLine: 583
+    startLine: 593
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr
@@ -1585,7 +1585,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithProgress
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/FileTransferOptionsBuilderExtensions.cs
-    startLine: 600
+    startLine: 610
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr
@@ -1641,7 +1641,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithProgress
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/FileTransferOptionsBuilderExtensions.cs
-    startLine: 611
+    startLine: 621
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr
@@ -1697,7 +1697,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithDynamicPath
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/FileTransferOptionsBuilderExtensions.cs
-    startLine: 635
+    startLine: 645
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr
@@ -2317,40 +2317,24 @@ references:
   name: CreateUploadManagerWith
   nameWithType: FileTransferOptionsBuilderExtensions.CreateUploadManagerWith
   fullName: Apizr.FileTransferOptionsBuilderExtensions.CreateUploadManagerWith
-- uid: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi{{TUploadApiResultData}},{TUploadApiResultData}}
-  commentId: T:Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi{``0},``0}
+- uid: Apizr.Transferring.Managing.IApizrUploadManagerWith{{TUploadApiResultData}}
+  commentId: T:Apizr.Transferring.Managing.IApizrUploadManagerWith{``0}
   parent: Apizr.Transferring.Managing
-  definition: Apizr.Transferring.Managing.IApizrUploadManager`2
-  name: IApizrUploadManager<IUploadApi<TUploadApiResultData>, TUploadApiResultData>
-  nameWithType: IApizrUploadManager<IUploadApi<TUploadApiResultData>, TUploadApiResultData>
-  fullName: Apizr.Transferring.Managing.IApizrUploadManager<Apizr.Transferring.Requesting.IUploadApi<TUploadApiResultData>, TUploadApiResultData>
-  nameWithType.vb: IApizrUploadManager(Of IUploadApi(Of TUploadApiResultData), TUploadApiResultData)
-  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of Apizr.Transferring.Requesting.IUploadApi(Of TUploadApiResultData), TUploadApiResultData)
-  name.vb: IApizrUploadManager(Of IUploadApi(Of TUploadApiResultData), TUploadApiResultData)
+  definition: Apizr.Transferring.Managing.IApizrUploadManagerWith`1
+  name: IApizrUploadManagerWith<TUploadApiResultData>
+  nameWithType: IApizrUploadManagerWith<TUploadApiResultData>
+  fullName: Apizr.Transferring.Managing.IApizrUploadManagerWith<TUploadApiResultData>
+  nameWithType.vb: IApizrUploadManagerWith(Of TUploadApiResultData)
+  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManagerWith(Of TUploadApiResultData)
+  name.vb: IApizrUploadManagerWith(Of TUploadApiResultData)
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2
-    name: IApizrUploadManager
-    nameWithType: IApizrUploadManager
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+  - uid: Apizr.Transferring.Managing.IApizrUploadManagerWith`1
+    name: IApizrUploadManagerWith
+    nameWithType: IApizrUploadManagerWith
+    fullName: Apizr.Transferring.Managing.IApizrUploadManagerWith
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Apizr.Transferring.Requesting.IUploadApi`1
-    name: IUploadApi
-    nameWithType: IUploadApi
-    fullName: Apizr.Transferring.Requesting.IUploadApi
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TUploadApiResultData
-    nameWithType: TUploadApiResultData
-    fullName: TUploadApiResultData
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
   - name: TUploadApiResultData
     nameWithType: TUploadApiResultData
     fullName: TUploadApiResultData
@@ -2358,17 +2342,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2
-    name: IApizrUploadManager
-    nameWithType: IApizrUploadManager
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Apizr.Transferring.Requesting.IUploadApi`1
-    name: IUploadApi
-    nameWithType: IUploadApi
-    fullName: Apizr.Transferring.Requesting.IUploadApi
+  - uid: Apizr.Transferring.Managing.IApizrUploadManagerWith`1
+    name: IApizrUploadManagerWith
+    nameWithType: IApizrUploadManagerWith
+    fullName: Apizr.Transferring.Managing.IApizrUploadManagerWith
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
@@ -2378,9 +2355,36 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+- uid: Apizr.Transferring.Managing.IApizrUploadManagerWith`1
+  commentId: T:Apizr.Transferring.Managing.IApizrUploadManagerWith`1
+  name: IApizrUploadManagerWith<TUploadApiResultData>
+  nameWithType: IApizrUploadManagerWith<TUploadApiResultData>
+  fullName: Apizr.Transferring.Managing.IApizrUploadManagerWith<TUploadApiResultData>
+  nameWithType.vb: IApizrUploadManagerWith(Of TUploadApiResultData)
+  fullName.vb: Apizr.Transferring.Managing.IApizrUploadManagerWith(Of TUploadApiResultData)
+  name.vb: IApizrUploadManagerWith(Of TUploadApiResultData)
+  spec.csharp:
+  - uid: Apizr.Transferring.Managing.IApizrUploadManagerWith`1
+    name: IApizrUploadManagerWith
+    nameWithType: IApizrUploadManagerWith
+    fullName: Apizr.Transferring.Managing.IApizrUploadManagerWith
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TUploadApiResultData
+    nameWithType: TUploadApiResultData
+    fullName: TUploadApiResultData
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Transferring.Managing.IApizrUploadManagerWith`1
+    name: IApizrUploadManagerWith
+    nameWithType: IApizrUploadManagerWith
+    fullName: Apizr.Transferring.Managing.IApizrUploadManagerWith
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
   - name: TUploadApiResultData
     nameWithType: TUploadApiResultData
     fullName: TUploadApiResultData
@@ -2580,40 +2584,24 @@ references:
   name: CreateDownloadManagerWith
   nameWithType: FileTransferOptionsBuilderExtensions.CreateDownloadManagerWith
   fullName: Apizr.FileTransferOptionsBuilderExtensions.CreateDownloadManagerWith
-- uid: Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.IDownloadApi{{TDownloadParams}},{TDownloadParams}}
-  commentId: T:Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.IDownloadApi{``0},``0}
+- uid: Apizr.Transferring.Managing.IApizrDownloadManagerWith{{TDownloadParams}}
+  commentId: T:Apizr.Transferring.Managing.IApizrDownloadManagerWith{``0}
   parent: Apizr.Transferring.Managing
-  definition: Apizr.Transferring.Managing.IApizrDownloadManager`2
-  name: IApizrDownloadManager<IDownloadApi<TDownloadParams>, TDownloadParams>
-  nameWithType: IApizrDownloadManager<IDownloadApi<TDownloadParams>, TDownloadParams>
-  fullName: Apizr.Transferring.Managing.IApizrDownloadManager<Apizr.Transferring.Requesting.IDownloadApi<TDownloadParams>, TDownloadParams>
-  nameWithType.vb: IApizrDownloadManager(Of IDownloadApi(Of TDownloadParams), TDownloadParams)
-  fullName.vb: Apizr.Transferring.Managing.IApizrDownloadManager(Of Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams), TDownloadParams)
-  name.vb: IApizrDownloadManager(Of IDownloadApi(Of TDownloadParams), TDownloadParams)
+  definition: Apizr.Transferring.Managing.IApizrDownloadManagerWith`1
+  name: IApizrDownloadManagerWith<TDownloadParams>
+  nameWithType: IApizrDownloadManagerWith<TDownloadParams>
+  fullName: Apizr.Transferring.Managing.IApizrDownloadManagerWith<TDownloadParams>
+  nameWithType.vb: IApizrDownloadManagerWith(Of TDownloadParams)
+  fullName.vb: Apizr.Transferring.Managing.IApizrDownloadManagerWith(Of TDownloadParams)
+  name.vb: IApizrDownloadManagerWith(Of TDownloadParams)
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
-    name: IApizrDownloadManager
-    nameWithType: IApizrDownloadManager
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManagerWith`1
+    name: IApizrDownloadManagerWith
+    nameWithType: IApizrDownloadManagerWith
+    fullName: Apizr.Transferring.Managing.IApizrDownloadManagerWith
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Apizr.Transferring.Requesting.IDownloadApi`1
-    name: IDownloadApi
-    nameWithType: IDownloadApi
-    fullName: Apizr.Transferring.Requesting.IDownloadApi
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
   - name: TDownloadParams
     nameWithType: TDownloadParams
     fullName: TDownloadParams
@@ -2621,17 +2609,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
-    name: IApizrDownloadManager
-    nameWithType: IApizrDownloadManager
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Apizr.Transferring.Requesting.IDownloadApi`1
-    name: IDownloadApi
-    nameWithType: IDownloadApi
-    fullName: Apizr.Transferring.Requesting.IDownloadApi
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManagerWith`1
+    name: IApizrDownloadManagerWith
+    nameWithType: IApizrDownloadManagerWith
+    fullName: Apizr.Transferring.Managing.IApizrDownloadManagerWith
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
@@ -2641,9 +2622,36 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+- uid: Apizr.Transferring.Managing.IApizrDownloadManagerWith`1
+  commentId: T:Apizr.Transferring.Managing.IApizrDownloadManagerWith`1
+  name: IApizrDownloadManagerWith<TDownloadParams>
+  nameWithType: IApizrDownloadManagerWith<TDownloadParams>
+  fullName: Apizr.Transferring.Managing.IApizrDownloadManagerWith<TDownloadParams>
+  nameWithType.vb: IApizrDownloadManagerWith(Of TDownloadParams)
+  fullName.vb: Apizr.Transferring.Managing.IApizrDownloadManagerWith(Of TDownloadParams)
+  name.vb: IApizrDownloadManagerWith(Of TDownloadParams)
+  spec.csharp:
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManagerWith`1
+    name: IApizrDownloadManagerWith
+    nameWithType: IApizrDownloadManagerWith
+    fullName: Apizr.Transferring.Managing.IApizrDownloadManagerWith
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TDownloadParams
+    nameWithType: TDownloadParams
+    fullName: TDownloadParams
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManagerWith`1
+    name: IApizrDownloadManagerWith
+    nameWithType: IApizrDownloadManagerWith
+    fullName: Apizr.Transferring.Managing.IApizrDownloadManagerWith
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
   - name: TDownloadParams
     nameWithType: TDownloadParams
     fullName: TDownloadParams
@@ -2965,46 +2973,24 @@ references:
   name: CreateTransferManagerWith
   nameWithType: FileTransferOptionsBuilderExtensions.CreateTransferManagerWith
   fullName: Apizr.FileTransferOptionsBuilderExtensions.CreateTransferManagerWith
-- uid: Apizr.Transferring.Managing.IApizrTransferManager{Apizr.Transferring.Requesting.ITransferApi{{TDownloadParams},{TUploadApiResultData}},{TDownloadParams},{TUploadApiResultData}}
-  commentId: T:Apizr.Transferring.Managing.IApizrTransferManager{Apizr.Transferring.Requesting.ITransferApi{``0,``1},``0,``1}
+- uid: Apizr.Transferring.Managing.IApizrTransferManagerWith{{TDownloadParams},{TUploadApiResultData}}
+  commentId: T:Apizr.Transferring.Managing.IApizrTransferManagerWith{``0,``1}
   parent: Apizr.Transferring.Managing
-  definition: Apizr.Transferring.Managing.IApizrTransferManager`3
-  name: IApizrTransferManager<ITransferApi<TDownloadParams, TUploadApiResultData>, TDownloadParams, TUploadApiResultData>
-  nameWithType: IApizrTransferManager<ITransferApi<TDownloadParams, TUploadApiResultData>, TDownloadParams, TUploadApiResultData>
-  fullName: Apizr.Transferring.Managing.IApizrTransferManager<Apizr.Transferring.Requesting.ITransferApi<TDownloadParams, TUploadApiResultData>, TDownloadParams, TUploadApiResultData>
-  nameWithType.vb: IApizrTransferManager(Of ITransferApi(Of TDownloadParams, TUploadApiResultData), TDownloadParams, TUploadApiResultData)
-  fullName.vb: Apizr.Transferring.Managing.IApizrTransferManager(Of Apizr.Transferring.Requesting.ITransferApi(Of TDownloadParams, TUploadApiResultData), TDownloadParams, TUploadApiResultData)
-  name.vb: IApizrTransferManager(Of ITransferApi(Of TDownloadParams, TUploadApiResultData), TDownloadParams, TUploadApiResultData)
+  definition: Apizr.Transferring.Managing.IApizrTransferManagerWith`2
+  name: IApizrTransferManagerWith<TDownloadParams, TUploadApiResultData>
+  nameWithType: IApizrTransferManagerWith<TDownloadParams, TUploadApiResultData>
+  fullName: Apizr.Transferring.Managing.IApizrTransferManagerWith<TDownloadParams, TUploadApiResultData>
+  nameWithType.vb: IApizrTransferManagerWith(Of TDownloadParams, TUploadApiResultData)
+  fullName.vb: Apizr.Transferring.Managing.IApizrTransferManagerWith(Of TDownloadParams, TUploadApiResultData)
+  name.vb: IApizrTransferManagerWith(Of TDownloadParams, TUploadApiResultData)
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrTransferManager`3
-    name: IApizrTransferManager
-    nameWithType: IApizrTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrTransferManager
+  - uid: Apizr.Transferring.Managing.IApizrTransferManagerWith`2
+    name: IApizrTransferManagerWith
+    nameWithType: IApizrTransferManagerWith
+    fullName: Apizr.Transferring.Managing.IApizrTransferManagerWith
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Apizr.Transferring.Requesting.ITransferApi`2
-    name: ITransferApi
-    nameWithType: ITransferApi
-    fullName: Apizr.Transferring.Requesting.ITransferApi
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TUploadApiResultData
-    nameWithType: TUploadApiResultData
-    fullName: TUploadApiResultData
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
   - name: TDownloadParams
     nameWithType: TDownloadParams
     fullName: TDownloadParams
@@ -3018,17 +3004,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrTransferManager`3
-    name: IApizrTransferManager
-    nameWithType: IApizrTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrTransferManager
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Apizr.Transferring.Requesting.ITransferApi`2
-    name: ITransferApi
-    nameWithType: ITransferApi
-    fullName: Apizr.Transferring.Requesting.ITransferApi
+  - uid: Apizr.Transferring.Managing.IApizrTransferManagerWith`2
+    name: IApizrTransferManagerWith
+    nameWithType: IApizrTransferManagerWith
+    fullName: Apizr.Transferring.Managing.IApizrTransferManagerWith
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
@@ -3044,9 +3023,42 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Transferring.Managing.IApizrTransferManagerWith`2
+  commentId: T:Apizr.Transferring.Managing.IApizrTransferManagerWith`2
+  name: IApizrTransferManagerWith<TDownloadParams, TUploadApiResultData>
+  nameWithType: IApizrTransferManagerWith<TDownloadParams, TUploadApiResultData>
+  fullName: Apizr.Transferring.Managing.IApizrTransferManagerWith<TDownloadParams, TUploadApiResultData>
+  nameWithType.vb: IApizrTransferManagerWith(Of TDownloadParams, TUploadApiResultData)
+  fullName.vb: Apizr.Transferring.Managing.IApizrTransferManagerWith(Of TDownloadParams, TUploadApiResultData)
+  name.vb: IApizrTransferManagerWith(Of TDownloadParams, TUploadApiResultData)
+  spec.csharp:
+  - uid: Apizr.Transferring.Managing.IApizrTransferManagerWith`2
+    name: IApizrTransferManagerWith
+    nameWithType: IApizrTransferManagerWith
+    fullName: Apizr.Transferring.Managing.IApizrTransferManagerWith
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TDownloadParams
+    nameWithType: TDownloadParams
+    fullName: TDownloadParams
   - name: ', '
     nameWithType: ', '
     fullName: ', '
+  - name: TUploadApiResultData
+    nameWithType: TUploadApiResultData
+    fullName: TUploadApiResultData
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Apizr.Transferring.Managing.IApizrTransferManagerWith`2
+    name: IApizrTransferManagerWith
+    nameWithType: IApizrTransferManagerWith
+    fullName: Apizr.Transferring.Managing.IApizrTransferManagerWith
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
   - name: TDownloadParams
     nameWithType: TDownloadParams
     fullName: TDownloadParams

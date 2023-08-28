@@ -941,6 +941,9 @@
         <member name="M:Apizr.Transferring.Managing.ApizrDownloadManager.#ctor(Apizr.IApizrManager{Apizr.Transferring.Requesting.IDownloadApi})">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Transferring.Managing.ApizrDownloadManagerWith`1.#ctor(Apizr.IApizrManager{Apizr.Transferring.Requesting.IDownloadApi{`0}})">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Transferring.Managing.ApizrTransferManager`3.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <inheritdoc />
         </member>
@@ -977,6 +980,9 @@
         <member name="M:Apizr.Transferring.Managing.ApizrTransferManager.#ctor(Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.ITransferApi},Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.ITransferApi})">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Transferring.Managing.ApizrTransferManagerWith`2.#ctor(Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.ITransferApi{`0,`1},`0},Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.ITransferApi{`0,`1},`1})">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Transferring.Managing.ApizrUploadManager`2.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <inheritdoc />
         </member>
@@ -990,6 +996,9 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Transferring.Managing.ApizrUploadManager.#ctor(Apizr.IApizrManager{Apizr.Transferring.Requesting.IUploadApi})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Transferring.Managing.ApizrUploadManagerWith`1.#ctor(Apizr.IApizrManager{Apizr.Transferring.Requesting.IUploadApi{`0}})">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Transferring.Managing.IApizrDownloadManager`2">
@@ -1027,6 +1036,12 @@
             The download manager with a dictionary query parameters type
             </summary>
         </member>
+        <member name="T:Apizr.Transferring.Managing.IApizrDownloadManagerWith`1">
+            <summary>
+            The download manager with parameter shortcut
+            </summary>
+            <typeparam name="TDownloadParams">The query parameters type</typeparam>
+        </member>
         <member name="T:Apizr.Transferring.Managing.IApizrTransferManager`3">
             <summary>
             The transfer manager to work with both downloads and uploads and with a custom download query parameters type and no result
@@ -1049,6 +1064,11 @@
             <typeparam name="TTransferApi">The transfer api type to manage</typeparam>
         </member>
         <member name="T:Apizr.Transferring.Managing.IApizrTransferManager">
+            <summary>
+            The transfer manager to work with both downloads and uploads and with a dictionary query parameters type and no result
+            </summary>
+        </member>
+        <member name="T:Apizr.Transferring.Managing.IApizrTransferManagerWith`2">
             <summary>
             The transfer manager to work with both downloads and uploads and with a dictionary query parameters type and no result
             </summary>
@@ -1094,6 +1114,12 @@
             <summary>
             The upload manager
             </summary>
+        </member>
+        <member name="T:Apizr.Transferring.Managing.IApizrUploadManagerWith`1">
+            <summary>
+            The upload manager with type shortcut
+            </summary>
+            <typeparam name="TUploadApiResultData">The upload api result type</typeparam>
         </member>
         <member name="T:Refit.Implementation.Generated">
             <inheritdoc />

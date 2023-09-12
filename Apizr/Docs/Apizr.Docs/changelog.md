@@ -1,3 +1,10 @@
+5.3.0
+---
+
+### Apizr
+
+- [Change] Now we can access to a **dedicated logger instance while inheriting from AuthenticationHadlerBase**
+ 
 5.2.0
 ---
 

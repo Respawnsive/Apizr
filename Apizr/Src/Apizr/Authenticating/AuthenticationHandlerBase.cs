@@ -17,8 +17,8 @@ namespace Apizr.Authenticating
     /// </summary>
     public abstract class AuthenticationHandlerBase : DelegatingHandler, IAuthenticationHandler
     {
-        private readonly ILogger _logger;
-        private readonly IApizrManagerOptionsBase _apizrOptions;
+        protected readonly ILogger Logger;
+        protected readonly IApizrManagerOptionsBase ApizrOptions;
 
         /// <summary>
         /// The authentication handler constructor
@@ -27,8 +27,8 @@ namespace Apizr.Authenticating
         /// <param name="apizrOptions">The Apizr options</param>
         protected AuthenticationHandlerBase(ILogger logger, IApizrManagerOptionsBase apizrOptions)
         {
-            _logger = logger;
-            _apizrOptions = apizrOptions;
+            Logger = logger;
+            ApizrOptions = apizrOptions;
         }
 
         /// <inheritdoc />
@@ -40,8 +40,8 @@ namespace Apizr.Authenticating
             var context = request.GetOrBuildApizrPolicyExecutionContext();
             if (!context.TryGetLogger(out var logger, out var logLevels, out _, out _))
             {
-                logger = _logger;
-                logLevels = _apizrOptions.LogLevels;
+                logger = Logger;
+                logLevels = ApizrOptions.LogLevels;
             }
 
             // See if the request has an authorize header
@@ -70,7 +70,7 @@ namespace Apizr.Authenticating
             }
 
             // Send the request
-            logger?.Log(logLevels.Low(), $"{context.OperationKey}: Sending request with authorization header...");
+            logger?.Log(logLevels.Low(), $"{context.OperationKey}: Sending request...");
             var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
             // Check if we get an Unauthorized response with token from settings

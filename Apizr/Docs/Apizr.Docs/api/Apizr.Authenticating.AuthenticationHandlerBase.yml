@@ -6,8 +6,10 @@ items:
   parent: Apizr.Authenticating
   children:
   - Apizr.Authenticating.AuthenticationHandlerBase.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  - Apizr.Authenticating.AuthenticationHandlerBase.ApizrOptions
   - Apizr.Authenticating.AuthenticationHandlerBase.CloneHttpRequestMessageAsync(System.Net.Http.HttpRequestMessage)
   - Apizr.Authenticating.AuthenticationHandlerBase.GetToken
+  - Apizr.Authenticating.AuthenticationHandlerBase.Logger
   - Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
   - Apizr.Authenticating.AuthenticationHandlerBase.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
   - Apizr.Authenticating.AuthenticationHandlerBase.SetToken(System.String)
@@ -67,6 +69,72 @@ items:
   - Public
   - MustInherit
   - Class
+- uid: Apizr.Authenticating.AuthenticationHandlerBase.Logger
+  commentId: F:Apizr.Authenticating.AuthenticationHandlerBase.Logger
+  id: Logger
+  parent: Apizr.Authenticating.AuthenticationHandlerBase
+  langs:
+  - csharp
+  - vb
+  name: Logger
+  nameWithType: AuthenticationHandlerBase.Logger
+  fullName: Apizr.Authenticating.AuthenticationHandlerBase.Logger
+  type: Field
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: Logger
+    path: ../../Src/Apizr/Authenticating/AuthenticationHandlerBase.cs
+    startLine: 19
+  assemblies:
+  - Apizr
+  namespace: Apizr.Authenticating
+  syntax:
+    content: protected readonly ILogger Logger
+    return:
+      type: Microsoft.Extensions.Logging.ILogger
+    content.vb: Protected ReadOnly Logger As ILogger
+  modifiers.csharp:
+  - protected
+  - readonly
+  modifiers.vb:
+  - Protected
+  - ReadOnly
+- uid: Apizr.Authenticating.AuthenticationHandlerBase.ApizrOptions
+  commentId: F:Apizr.Authenticating.AuthenticationHandlerBase.ApizrOptions
+  id: ApizrOptions
+  parent: Apizr.Authenticating.AuthenticationHandlerBase
+  langs:
+  - csharp
+  - vb
+  name: ApizrOptions
+  nameWithType: AuthenticationHandlerBase.ApizrOptions
+  fullName: Apizr.Authenticating.AuthenticationHandlerBase.ApizrOptions
+  type: Field
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: ApizrOptions
+    path: ../../Src/Apizr/Authenticating/AuthenticationHandlerBase.cs
+    startLine: 20
+  assemblies:
+  - Apizr
+  namespace: Apizr.Authenticating
+  syntax:
+    content: protected readonly IApizrManagerOptionsBase ApizrOptions
+    return:
+      type: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    content.vb: Protected ReadOnly ApizrOptions As IApizrManagerOptionsBase
+  modifiers.csharp:
+  - protected
+  - readonly
+  modifiers.vb:
+  - Protected
+  - ReadOnly
 - uid: Apizr.Authenticating.AuthenticationHandlerBase.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase)
   commentId: M:Apizr.Authenticating.AuthenticationHandlerBase.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase)
   id: '#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase)'
@@ -720,11 +788,6 @@ references:
   name: System.Net.Http
   nameWithType: System.Net.Http
   fullName: System.Net.Http
-- uid: Apizr.Authenticating.AuthenticationHandlerBase.#ctor*
-  commentId: Overload:Apizr.Authenticating.AuthenticationHandlerBase.#ctor
-  name: AuthenticationHandlerBase
-  nameWithType: AuthenticationHandlerBase.AuthenticationHandlerBase
-  fullName: Apizr.Authenticating.AuthenticationHandlerBase.AuthenticationHandlerBase
 - uid: Microsoft.Extensions.Logging.ILogger
   commentId: T:Microsoft.Extensions.Logging.ILogger
   parent: Microsoft.Extensions.Logging
@@ -732,23 +795,28 @@ references:
   name: ILogger
   nameWithType: ILogger
   fullName: Microsoft.Extensions.Logging.ILogger
-- uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
-  commentId: T:Apizr.Configuring.Manager.IApizrManagerOptionsBase
-  parent: Apizr.Configuring.Manager
-  name: IApizrManagerOptionsBase
-  nameWithType: IApizrManagerOptionsBase
-  fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
 - uid: Microsoft.Extensions.Logging
   commentId: N:Microsoft.Extensions.Logging
   isExternal: true
   name: Microsoft.Extensions.Logging
   nameWithType: Microsoft.Extensions.Logging
   fullName: Microsoft.Extensions.Logging
+- uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  commentId: T:Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  parent: Apizr.Configuring.Manager
+  name: IApizrManagerOptionsBase
+  nameWithType: IApizrManagerOptionsBase
+  fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
 - uid: Apizr.Configuring.Manager
   commentId: N:Apizr.Configuring.Manager
   name: Apizr.Configuring.Manager
   nameWithType: Apizr.Configuring.Manager
   fullName: Apizr.Configuring.Manager
+- uid: Apizr.Authenticating.AuthenticationHandlerBase.#ctor*
+  commentId: Overload:Apizr.Authenticating.AuthenticationHandlerBase.#ctor
+  name: AuthenticationHandlerBase
+  nameWithType: AuthenticationHandlerBase.AuthenticationHandlerBase
+  fullName: Apizr.Authenticating.AuthenticationHandlerBase.AuthenticationHandlerBase
 - uid: System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
   commentId: M:System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
   parent: System.Net.Http.DelegatingHandler

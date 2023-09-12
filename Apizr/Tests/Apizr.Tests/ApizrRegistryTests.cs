@@ -335,7 +335,7 @@ namespace Apizr.Tests
                     .AddManagerFor<IReqResUserService>(),
                 config => config
                     .WithAkavacheCacheHandler()
-                    .AddDelegatingHandler(new FailingRequestHandler()));
+                    .AddDelegatingHandler(new TestRequestHandler()));
 
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
 
@@ -384,7 +384,7 @@ namespace Apizr.Tests
                     .AddManagerFor<IReqResUserService>(),
                 config => config
                     .WithPolicyRegistry(policyRegistry)
-                    .AddDelegatingHandler(new FailingRequestHandler()));
+                    .AddDelegatingHandler(new TestRequestHandler()));
 
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
 
@@ -698,7 +698,7 @@ namespace Apizr.Tests
                     .AddGroup(group => group
                             .AddManagerFor<IReqResUserService>(options => options
                                 .WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add)
-                                .AddDelegatingHandler(new FailingRequestHandler()))
+                                .AddDelegatingHandler(new TestRequestHandler()))
                             .AddManagerFor<IReqResResourceService>(),
                         options => options.WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add))
                     .AddManagerFor<IHttpBinService>()
@@ -1198,6 +1198,26 @@ namespace Apizr.Tests
                 }));
             }
             await Task.WhenAll(tasks);
+        }
+
+        [Fact]
+        public async Task Cancelling_A_Request_Should_Throw_A_TaskCanceledException()
+        {
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
+                .AddManagerFor<IReqResUserService>(options => options
+                .AddDelegatingHandler(new TestRequestHandler())));
+
+            apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
+
+            var ct = new CancellationTokenSource();
+            ct.CancelAfter(TimeSpan.FromSeconds(3));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(TimeSpan.FromSeconds(5), opt),
+                    options => options.WithCancellation(ct.Token));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TaskCanceledException>();
         }
     }
 }

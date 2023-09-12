@@ -169,7 +169,7 @@ namespace Apizr.Tests
         {
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
                     .WithAkavacheCacheHandler()
-                    .AddDelegatingHandler(new FailingRequestHandler()));
+                    .AddDelegatingHandler(new TestRequestHandler()));
 
             // Clearing cache
             await reqResManager.ClearCacheAsync();
@@ -214,7 +214,7 @@ namespace Apizr.Tests
 
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
                     .WithPolicyRegistry(policyRegistry)
-                    .AddDelegatingHandler(new FailingRequestHandler()));
+                    .AddDelegatingHandler(new TestRequestHandler()));
 
             // Defining a transient throwing request
             Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.RequestTimeout));
@@ -483,7 +483,7 @@ namespace Apizr.Tests
 
             apizrTransferManager.Should().NotBeNull(); // Built-in
             
-            var result = await apizrTransferManager.DownloadAsync(new FileInfo("test100k.db"));
+            var result = await apizrTransferManager.DownloadAsync(new FileInfo("test10Mb.db"));
             result.Should().NotBeNull();
             result.Length.Should().BePositive();
         }
@@ -647,6 +647,40 @@ namespace Apizr.Tests
                 }));
             }
             await Task.WhenAll(tasks);
+        }
+
+        [Fact]
+        public async Task Cancelling_A_Request_Should_Throw_A_TaskCanceledException()
+        {
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
+                .AddDelegatingHandler(new TestRequestHandler()));
+
+            var ct = new CancellationTokenSource();
+            ct.CancelAfter(TimeSpan.FromSeconds(3));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(TimeSpan.FromSeconds(5), opt),
+                    options => options.WithCancellation(ct.Token));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TaskCanceledException>();
+        }
+
+        [Fact]
+        public async Task Cancelling_A_Download_Should_Throw_A_TaskCanceledException()
+        {
+            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options => options
+                .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"));
+
+            var ct = new CancellationTokenSource();
+            ct.CancelAfter(TimeSpan.FromSeconds(2));
+
+            Func<Task> act = () =>
+                apizrTransferManager.DownloadAsync(new FileInfo("test10Mb.db"),
+                    options => options.WithCancellation(ct.Token));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TaskCanceledException>();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,6 +31,9 @@ namespace Apizr.Tests.Apis
 
         [Get("/users")]
         Task<ApiResult<User>> GetUsersAsync([Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
+
+        [Get("/users")]
+        Task<ApiResult<User>> GetUsersAsync([Property(nameof(Task.Delay))] TimeSpan delay, [RequestOptions] IApizrRequestOptions options);
 
         [Get("/users"), 
          Log(HttpMessageParts.RequestBody, HttpTracerMode.ExceptionsOnly, LogLevel.Warning),

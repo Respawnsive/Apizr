@@ -454,7 +454,7 @@ namespace Apizr.Tests
                     .AddManagerFor<IReqResUserService>(),
                 config => config
                     .WithAkavacheCacheHandler()
-                    .AddDelegatingHandler(new FailingRequestHandler()));
+                    .AddDelegatingHandler(new TestRequestHandler()));
 
             var serviceProvider = services.BuildServiceProvider();
             var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
@@ -493,7 +493,7 @@ namespace Apizr.Tests
                     .AddManagerFor<IReqResUserService>(),
                 config => config
                     .WithInMemoryCacheHandler()
-                    .AddDelegatingHandler(new FailingRequestHandler()));
+                    .AddDelegatingHandler(new TestRequestHandler()));
 
             var serviceProvider = services.BuildServiceProvider();
             var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
@@ -557,7 +557,7 @@ namespace Apizr.Tests
                 registry => registry
                     .AddManagerFor<IReqResUserService>(),
                 config => config
-                    .AddDelegatingHandler(new FailingRequestHandler()));
+                    .AddDelegatingHandler(new TestRequestHandler()));
 
             var serviceProvider = services.BuildServiceProvider();
             var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
@@ -1609,6 +1609,29 @@ namespace Apizr.Tests
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "TestJsonString", "testKey3", "testKey4");
             watcher.Headers.GetValues("TestJsonString").Should().HaveCount(1).And.Contain("TestJsonString");
+        }
+
+        [Fact]
+        public async Task Cancelling_A_Request_Should_Throw_A_TaskCanceledException()
+        {
+            var services = new ServiceCollection();
+
+            services.AddApizr(registry => registry
+                .AddManagerFor<IReqResUserService>(options => options
+                .AddDelegatingHandler(new TestRequestHandler())));
+
+            var serviceProvider = services.BuildServiceProvider();
+            var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
+
+            var ct = new CancellationTokenSource();
+            ct.CancelAfter(TimeSpan.FromSeconds(3));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(TimeSpan.FromSeconds(5), opt),
+                    options => options.WithCancellation(ct.Token));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TaskCanceledException>();
         }
     }
 }

@@ -291,7 +291,7 @@ namespace Apizr.Tests
 
             services.AddApizrManagerFor<IReqResUserService>(config => config
                     .WithAkavacheCacheHandler()
-                    .AddDelegatingHandler(new FailingRequestHandler()));
+                    .AddDelegatingHandler(new TestRequestHandler()));
 
             var serviceProvider = services.BuildServiceProvider();
             var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
@@ -341,7 +341,7 @@ namespace Apizr.Tests
             services.AddMemoryCache();
 
             services.AddApizrManagerFor<IReqResUserService>(config => config
-                    .AddDelegatingHandler(new FailingRequestHandler()));
+                    .AddDelegatingHandler(new TestRequestHandler()));
 
             var serviceProvider = services.BuildServiceProvider();
             var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
@@ -891,6 +891,28 @@ namespace Apizr.Tests
                 }));
             }
             await Task.WhenAll(tasks);
+        }
+
+        [Fact]
+        public async Task Cancelling_A_Request_Should_Throw_A_TaskCanceledException()
+        {
+            var services = new ServiceCollection();
+
+            services.AddApizrManagerFor<IReqResUserService>(options => options
+                .AddDelegatingHandler(new TestRequestHandler()));
+
+            var serviceProvider = services.BuildServiceProvider();
+            var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
+
+            var ct = new CancellationTokenSource();
+            ct.CancelAfter(TimeSpan.FromSeconds(3));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(TimeSpan.FromSeconds(5), opt),
+                    options => options.WithCancellation(ct.Token));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TaskCanceledException>();
         }
     }
 }

@@ -1219,5 +1219,25 @@ namespace Apizr.Tests
             var ex = await act.Should().ThrowAsync<ApizrException>();
             ex.WithInnerException<TaskCanceledException>();
         }
+
+        [Fact]
+        public async Task Cancelling_An_Upload_Should_Throw_A_TaskCanceledException()
+        {
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
+                .AddManagerFor<IHttpBinService>(options =>
+                    options.WithHttpClient((handler, uri) => new ApizrHttpClient(handler) { BaseAddress = uri })));
+
+            apizrRegistry.TryGetManagerFor<IHttpBinService>(out var manager).Should().BeTrue();
+
+            var streamPart = FileHelper.GetTestFileStreamPart("medium");
+            var ct = new CancellationTokenSource();
+            ct.CancelAfter(TimeSpan.FromSeconds(2));
+
+            Func<Task> act = () => manager.ExecuteAsync((opt, api) => api.UploadAsync(streamPart, opt),
+                options => options.WithCancellation(ct.Token));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TaskCanceledException>();
+        }
     }
 }

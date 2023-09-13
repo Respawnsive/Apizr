@@ -1,4 +1,5 @@
 ﻿using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring.Request;
 using Apizr.Logging;
@@ -13,6 +14,9 @@ namespace Apizr.Tests.Apis
     {
         [Get("/{fileName}")]
         Task<HttpResponseMessage> DownloadAsync(string fileName, [RequestOptions] IApizrRequestOptions options);
+
+        [Get("/{fileName}")]
+        Task<HttpResponseMessage> DownloadAsync(string fileName, CancellationToken token);
 
         [Get("/{fileName}")]
         Task<HttpResponseMessage> DownloadAsync(string fileName);

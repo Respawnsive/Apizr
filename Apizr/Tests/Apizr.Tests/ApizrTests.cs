@@ -667,17 +667,17 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Cancelling_A_Download_Should_Throw_A_TaskCanceledException()
+        public async Task Cancelling_An_Upload_Should_Throw_A_TaskCanceledException()
         {
-            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options => options
-                .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"));
+            var manager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options =>
+                options.WithHttpClient((handler, uri) => new ApizrHttpClient(handler) {BaseAddress = uri}));
 
+            var streamPart = FileHelper.GetTestFileStreamPart("medium");
             var ct = new CancellationTokenSource();
-            ct.CancelAfter(TimeSpan.FromSeconds(2));
+            ct.CancelAfter(TimeSpan.FromSeconds(3));
 
-            Func<Task> act = () =>
-                apizrTransferManager.DownloadAsync(new FileInfo("test10Mb.db"),
-                    options => options.WithCancellation(ct.Token));
+            Func<Task> act = () => manager.ExecuteAsync((opt, api) => api.UploadAsync(streamPart, opt),
+                options => options.WithCancellation(ct.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
             ex.WithInnerException<TaskCanceledException>();

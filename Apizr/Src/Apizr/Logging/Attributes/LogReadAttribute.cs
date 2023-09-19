@@ -6,7 +6,7 @@ namespace Apizr.Logging.Attributes
     /// <summary>
     /// Tells Apizr to trace and log HTTP(s) traffic on Read method
     /// </summary>
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Method)]
+    [AttributeUsage(AttributeTargets.Class)]
     public class LogReadAttribute : LogAttributeBase
     {
         /// <inheritdoc />

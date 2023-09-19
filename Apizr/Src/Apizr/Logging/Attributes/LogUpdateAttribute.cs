@@ -6,7 +6,7 @@ namespace Apizr.Logging.Attributes
     /// <summary>
     /// Tells Apizr to trace and log HTTP(s) traffic on Update method
     /// </summary>
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Method)]
+    [AttributeUsage(AttributeTargets.Class)]
     public class LogUpdateAttribute : LogAttributeBase
     {
         /// <inheritdoc />

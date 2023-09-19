@@ -211,7 +211,13 @@ namespace Apizr
                 return primaryMessageHandler;
             });
             
-            var webApiFactory = new Func<object>(() => RestService.For<TWebApi>(apizrOptions.HttpClientFactory.Invoke(httpHandlerFactory.Invoke(), apizrOptions.BaseUri), apizrOptions.RefitSettings));
+            var webApiFactory = new Func<object>(() =>
+            {
+                var httpClient = new ApizrHttpClient(httpHandlerFactory.Invoke(), false) {BaseAddress = apizrOptions.BaseUri};
+                apizrOptions.HttpClientConfigurationBuilder.Invoke(httpClient);
+
+                return RestService.For<TWebApi>(httpClient, apizrOptions.RefitSettings);
+            });
             var lazyWebApi = new LazyFactory<TWebApi>(webApiFactory);
             var lazyPolicyRegistry = new LazyFactory<IReadOnlyPolicyRegistry<string>>(apizrOptions.PolicyRegistryFactory);
             var apizrManager = apizrManagerFactory(lazyWebApi, apizrOptions.ConnectivityHandlerFactory.Invoke(),

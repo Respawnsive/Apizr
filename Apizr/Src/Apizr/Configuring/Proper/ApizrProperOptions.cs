@@ -47,6 +47,7 @@ namespace Apizr.Configuring.Proper
             LogLevelsFactory = logLevels?.Any() == true ? () => logLevels : sharedOptions.LogLevelsFactory;
             LoggerFactory = (loggerFactory, webApiFriendlyName) => Logger = loggerFactory.CreateLogger(webApiFriendlyName);
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
+            HttpClientConfigurationBuilder = sharedOptions.HttpClientConfigurationBuilder;
             HttpClientFactory = sharedOptions.HttpClientFactory;
             DelegatingHandlersFactories = sharedOptions.DelegatingHandlersFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             ContextFactory = sharedOptions.ContextFactory;
@@ -109,6 +110,9 @@ namespace Apizr.Configuring.Proper
 
         /// <inheritdoc />
         public Func<HttpMessageHandler, Uri, HttpClient> HttpClientFactory { get; set; }
+
+        /// <inheritdoc />
+        public Action<HttpClient> HttpClientConfigurationBuilder { get; set;  }
 
         /// <inheritdoc />
         public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }

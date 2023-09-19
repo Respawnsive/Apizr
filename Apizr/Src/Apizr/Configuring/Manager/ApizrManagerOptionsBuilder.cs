@@ -103,6 +103,36 @@ namespace Apizr.Configuring.Manager
         }
 
         /// <inheritdoc />
+        public IApizrManagerOptionsBuilder ConfigureHttpClient(Action<HttpClient> configureHttpClient,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
+        {
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.HttpClientConfigurationBuilder ??= configureHttpClient;
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.HttpClientConfigurationBuilder = configureHttpClient;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.HttpClientConfigurationBuilder == null)
+                    {
+                        Options.HttpClientConfigurationBuilder = configureHttpClient;
+                    }
+                    else
+                    {
+                        Options.HttpClientConfigurationBuilder += configureHttpClient.Invoke;
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
+
+            return this;
+        }
+
+        /// <inheritdoc />
         public IApizrManagerOptionsBuilder WithHttpClient(Func<HttpMessageHandler, Uri, HttpClient> httpClientFactory)
         {
             Options.HttpClientFactory = httpClientFactory;

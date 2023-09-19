@@ -8,6 +8,7 @@ items:
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler``1(``0)
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+  - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.Options
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})
@@ -473,6 +474,53 @@ items:
   - Public
   fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpClientHandler(System.Func(Of System.Net.Http.HttpClientHandler))
   name.vb: WithHttpClientHandler(Func(Of HttpClientHandler))
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)
+  id: ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Proper.ApizrProperOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: ConfigureHttpClient(Action<HttpClient>, ApizrDuplicateStrategy)
+  nameWithType: ApizrProperOptionsBuilder.ConfigureHttpClient(Action<HttpClient>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.ConfigureHttpClient(System.Action<System.Net.Http.HttpClient>, Apizr.Configuring.ApizrDuplicateStrategy)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: ConfigureHttpClient
+    path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
+    startLine: 100
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Proper
+  summary: "\nConfigure HttpClient\n"
+  example: []
+  syntax:
+    content: public IApizrProperOptionsBuilder ConfigureHttpClient(Action<HttpClient> configureHttpClient, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
+    parameters:
+    - id: configureHttpClient
+      type: System.Action{System.Net.Http.HttpClient}
+      description: The configuration builder
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: 'The duplicate strategy if there&apos;s another one already (default: Merge)'
+    return:
+      type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
+    content.vb: Public Function ConfigureHttpClient(configureHttpClient As Action(Of HttpClient), strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Merge) As IApizrProperOptionsBuilder
+  overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.ConfigureHttpClient*
+  implements:
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: ApizrProperOptionsBuilder.ConfigureHttpClient(Action(Of HttpClient), ApizrDuplicateStrategy)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.ConfigureHttpClient(System.Action(Of System.Net.Http.HttpClient), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: ConfigureHttpClient(Action(Of HttpClient), ApizrDuplicateStrategy)
 - uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})
   commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})
   id: WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})
@@ -491,7 +539,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHttpClient
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 100
+    startLine: 130
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -535,7 +583,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 108
+    startLine: 138
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -579,7 +627,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 114
+    startLine: 144
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -628,7 +676,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 120
+    startLine: 150
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -686,7 +734,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 125
+    startLine: 155
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -744,7 +792,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 136
+    startLine: 166
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -794,7 +842,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 142
+    startLine: 172
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -847,7 +895,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 147
+    startLine: 177
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -897,7 +945,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 153
+    startLine: 183
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -950,7 +998,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddDelegatingHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 162
+    startLine: 192
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -998,7 +1046,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddDelegatingHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 166
+    startLine: 196
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1046,7 +1094,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddDelegatingHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 170
+    startLine: 200
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1094,7 +1142,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithContext
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 178
+    startLine: 208
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1141,7 +1189,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithExCatching
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 210
+    startLine: 240
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1191,7 +1239,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithExCatching
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 242
+    startLine: 272
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1243,7 +1291,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHandlerParameter
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 249
+    startLine: 279
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1287,7 +1335,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 257
+    startLine: 287
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1337,7 +1385,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 262
+    startLine: 292
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1387,7 +1435,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 273
+    startLine: 303
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1431,7 +1479,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 280
+    startLine: 310
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1475,7 +1523,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 284
+    startLine: 314
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -4179,6 +4227,260 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.ConfigureHttpClient*
+  commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.ConfigureHttpClient
+  name: ConfigureHttpClient
+  nameWithType: ApizrProperOptionsBuilder.ConfigureHttpClient
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.ConfigureHttpClient
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)
+  name: ConfigureHttpClient(Action<HttpClient>, ApizrDuplicateStrategy)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrProperOptions, IApizrProperOptionsBuilder>.ConfigureHttpClient(Action<HttpClient>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder>.ConfigureHttpClient(System.Action<System.Net.Http.HttpClient>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of IApizrProperOptions, IApizrProperOptionsBuilder).ConfigureHttpClient(Action(Of HttpClient), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder).ConfigureHttpClient(System.Action(Of System.Net.Http.HttpClient), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: ConfigureHttpClient(Action(Of HttpClient), ApizrDuplicateStrategy)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: ConfigureHttpClient
+    nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrProperOptions, IApizrProperOptionsBuilder>.ConfigureHttpClient
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder>.ConfigureHttpClient
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    nameWithType: ApizrDuplicateStrategy
+    fullName: Apizr.Configuring.ApizrDuplicateStrategy
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: ConfigureHttpClient
+    nameWithType: IApizrSharedRegistrationOptionsBuilder(Of IApizrProperOptions, IApizrProperOptionsBuilder).ConfigureHttpClient
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder).ConfigureHttpClient
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    nameWithType: ApizrDuplicateStrategy
+    fullName: Apizr.Configuring.ApizrDuplicateStrategy
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Action{System.Net.Http.HttpClient}
+  commentId: T:System.Action{System.Net.Http.HttpClient}
+  parent: System
+  definition: System.Action`1
+  name: Action<HttpClient>
+  nameWithType: Action<HttpClient>
+  fullName: System.Action<System.Net.Http.HttpClient>
+  nameWithType.vb: Action(Of HttpClient)
+  fullName.vb: System.Action(Of System.Net.Http.HttpClient)
+  name.vb: Action(Of HttpClient)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.ApizrDuplicateStrategy
+  commentId: T:Apizr.Configuring.ApizrDuplicateStrategy
+  parent: Apizr.Configuring
+  name: ApizrDuplicateStrategy
+  nameWithType: ApizrDuplicateStrategy
+  fullName: Apizr.Configuring.ApizrDuplicateStrategy
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)
+  isExternal: true
+  name: ConfigureHttpClient(Action<HttpClient>, ApizrDuplicateStrategy)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.ConfigureHttpClient(Action<HttpClient>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.ConfigureHttpClient(System.Action<System.Net.Http.HttpClient>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).ConfigureHttpClient(Action(Of HttpClient), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).ConfigureHttpClient(System.Action(Of System.Net.Http.HttpClient), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: ConfigureHttpClient(Action(Of HttpClient), ApizrDuplicateStrategy)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: ConfigureHttpClient
+    nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.ConfigureHttpClient
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.ConfigureHttpClient
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    nameWithType: ApizrDuplicateStrategy
+    fullName: Apizr.Configuring.ApizrDuplicateStrategy
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: ConfigureHttpClient
+    nameWithType: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).ConfigureHttpClient
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).ConfigureHttpClient
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    nameWithType: ApizrDuplicateStrategy
+    fullName: Apizr.Configuring.ApizrDuplicateStrategy
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Action`1
+  commentId: T:System.Action`1
+  isExternal: true
+  name: Action<T>
+  nameWithType: Action<T>
+  fullName: System.Action<T>
+  nameWithType.vb: Action(Of T)
+  fullName.vb: System.Action(Of T)
+  name.vb: Action(Of T)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring
+  commentId: N:Apizr.Configuring
+  name: Apizr.Configuring
+  nameWithType: Apizr.Configuring
+  fullName: Apizr.Configuring
 - uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpClient*
   commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpClient
   name: WithHttpClient
@@ -8397,12 +8699,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.ApizrDuplicateStrategy
-  commentId: T:Apizr.Configuring.ApizrDuplicateStrategy
-  parent: Apizr.Configuring
-  name: ApizrDuplicateStrategy
-  nameWithType: ApizrDuplicateStrategy
-  fullName: Apizr.Configuring.ApizrDuplicateStrategy
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
   isExternal: true
@@ -8480,11 +8776,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring
-  commentId: N:Apizr.Configuring
-  name: Apizr.Configuring
-  nameWithType: Apizr.Configuring
-  fullName: Apizr.Configuring
 - uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithExCatching*
   commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithExCatching
   name: WithExCatching
@@ -8719,45 +9010,6 @@ references:
     name: ApizrDuplicateStrategy
     nameWithType: ApizrDuplicateStrategy
     fullName: Apizr.Configuring.ApizrDuplicateStrategy
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Action`1
-  commentId: T:System.Action`1
-  isExternal: true
-  name: Action<T>
-  nameWithType: Action<T>
-  fullName: System.Action<T>
-  nameWithType.vb: Action(Of T)
-  fullName.vb: System.Action(Of T)
-  name.vb: Action(Of T)
-  spec.csharp:
-  - uid: System.Action`1
-    name: Action
-    nameWithType: Action
-    fullName: System.Action
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Action`1
-    name: Action
-    nameWithType: Action
-    fullName: System.Action
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
   - name: )
     nameWithType: )
     fullName: )

@@ -1,16 +1,14 @@
 ﻿## Configuring HttpClient
 
+You can configure HttpClient by its Builder thanks to this option:
+
 ### [Static](#tab/tabid-static)
 
-You can provide your own HttpClient thanks to this option:
-
 ```csharp
-options => options.WithHttpClient((httpMessageHandler, baseUri) => new YourOwnHttpClient(httpMessageHandler, false){BaseAddress = baseUri});
+options => options.ConfigureHttpClient(httpClient => httpClient.WhateverOption = whateverValue)
 ```
 
 ### [Extended](#tab/tabid-extended)
-
-You can configure HttpClient by its Builder thanks to this option:
 
 ```csharp
 options => options.ConfigureHttpClientBuilder(httpClientBuilder => httpClientBuilder.WhateverOption())
@@ -22,4 +20,4 @@ options => options.ConfigureHttpClientBuilder(httpClientBuilder => httpClientBui
 >
 >**HttpClient**
 >
->Apizr makes use of HttpClient so keep in mind that you may override some of its features depending of what you're trying to do with it. Use with caution.
+>Apizr makes use of its own HttpClient with its own primary handler, so keep in mind that you may override some of its features depending of what you're trying to do with it. Use with caution.

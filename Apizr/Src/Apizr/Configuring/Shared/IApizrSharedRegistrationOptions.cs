@@ -54,6 +54,11 @@ namespace Apizr.Configuring.Shared
         Func<HttpMessageHandler, Uri, HttpClient> HttpClientFactory { get; }
 
         /// <summary>
+        /// HttpClient configuration builder
+        /// </summary>
+        Action<HttpClient> HttpClientConfigurationBuilder { get; }
+
+        /// <summary>
         /// Delegating handlers factories
         /// </summary>
         IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }

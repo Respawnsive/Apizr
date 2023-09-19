@@ -1612,30 +1612,30 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Cancelling_A_Request_Should_Throw_A_TaskCanceledException()
+        public async Task Cancelling_A_Get_Request_Should_Throw_An_OperationCanceledException()
         {
             var services = new ServiceCollection();
 
             services.AddApizr(registry => registry
                 .AddManagerFor<IReqResUserService>(options => options
-                .AddDelegatingHandler(new TestRequestHandler())));
+                    .AddDelegatingHandler(new TestRequestHandler())));
 
             var serviceProvider = services.BuildServiceProvider();
             var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
 
             var ct = new CancellationTokenSource();
-            ct.CancelAfter(TimeSpan.FromSeconds(3));
+            ct.CancelAfter(TimeSpan.FromSeconds(2));
 
             Func<Task> act = () =>
-                reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(TimeSpan.FromSeconds(5), opt),
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(5, opt),
                     options => options.WithCancellation(ct.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
-            ex.WithInnerException<TaskCanceledException>();
+            ex.WithInnerException<OperationCanceledException>();
         }
 
         [Fact]
-        public async Task Cancelling_An_Upload_Should_Throw_A_TaskCanceledException()
+        public async Task Cancelling_A_Post_Request_Should_Throw_An_OperationCanceledException()
         {
             var services = new ServiceCollection();
 
@@ -1653,7 +1653,7 @@ namespace Apizr.Tests
                 options => options.WithCancellation(ct.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
-            ex.WithInnerException<TaskCanceledException>();
+            ex.WithInnerException<OperationCanceledException>();
         }
     }
 }

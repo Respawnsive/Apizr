@@ -87,5 +87,11 @@ namespace Apizr.Tests.Apis
 
         [Post("/users")]
         Task<User> CreateUser(User user, CancellationToken cancellationToken);
+
+        [Get("/users")]
+        Task<ApiResult<User>> GetDelayedUsersAsync([Query] int delay, [RequestOptions] IApizrRequestOptions options);
+
+        [Get("/users")]
+        Task<ApiResult<User>> GetDelayedUsersAsync([Query] int delay, CancellationToken cancellationToken);
     }
 }

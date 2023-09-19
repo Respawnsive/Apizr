@@ -54,6 +54,15 @@ namespace Apizr.Configuring.Shared
         TApizrOptionsBuilder WithHttpClientHandler(Func<HttpClientHandler> httpClientHandlerFactory);
 
         /// <summary>
+        /// Configure HttpClient
+        /// </summary>
+        /// <param name="configureHttpClient">The configuration builder</param>
+        /// <param name="strategy">The duplicate strategy if there's another one already (default: Merge)</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder ConfigureHttpClient(Action<HttpClient> configureHttpClient,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge);
+
+        /// <summary>
         /// Provide a custom HttpClient
         /// </summary>
         /// <param name="httpClientFactory">An <see cref="HttpClient"/> instance factory</param>

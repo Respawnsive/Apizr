@@ -177,7 +177,7 @@ Where you could register it as we used to do it with any other apis, FileTransfe
 >
 >**Upload/Download/Transfer**
 >
-> Following exemples use the `Transfer` manager but you definitly can use the `Upload` or the `Download` ones insteed. 
+> Following exemples use the `Transfer` manager but you definitly can use the `Upload` or the `Download` ones instead. 
 >
 
 #### Registering a single manager

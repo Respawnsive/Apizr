@@ -7,6 +7,7 @@ items:
   children:
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})
@@ -230,6 +231,47 @@ items:
   nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithHttpClientHandler(Func(Of HttpClientHandler))
   fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithHttpClientHandler(System.Func(Of System.Net.Http.HttpClientHandler))
   name.vb: WithHttpClientHandler(Func(Of HttpClientHandler))
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)
+  id: ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2
+  langs:
+  - csharp
+  - vb
+  name: ConfigureHttpClient(Action<HttpClient>, ApizrDuplicateStrategy)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.ConfigureHttpClient(Action<HttpClient>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.ConfigureHttpClient(System.Action<System.Net.Http.HttpClient>, Apizr.Configuring.ApizrDuplicateStrategy)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: ConfigureHttpClient
+    path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs
+    startLine: 61
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  summary: "\nConfigure HttpClient\n"
+  example: []
+  syntax:
+    content: TApizrOptionsBuilder ConfigureHttpClient(Action<HttpClient> configureHttpClient, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
+    parameters:
+    - id: configureHttpClient
+      type: System.Action{System.Net.Http.HttpClient}
+      description: The configuration builder
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: 'The duplicate strategy if there&apos;s another one already (default: Merge)'
+    return:
+      type: '{TApizrOptionsBuilder}'
+      description: ''
+    content.vb: Function ConfigureHttpClient(configureHttpClient As Action(Of HttpClient), strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Merge) As TApizrOptionsBuilder
+  overload: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.ConfigureHttpClient*
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).ConfigureHttpClient(Action(Of HttpClient), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).ConfigureHttpClient(System.Action(Of System.Net.Http.HttpClient), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: ConfigureHttpClient(Action(Of HttpClient), ApizrDuplicateStrategy)
 - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})
   commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})
   id: WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})
@@ -248,7 +290,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHttpClient
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs
-    startLine: 60
+    startLine: 69
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -286,7 +328,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs
-    startLine: 68
+    startLine: 77
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -329,7 +371,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs
-    startLine: 80
+    startLine: 89
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -381,7 +423,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs
-    startLine: 92
+    startLine: 101
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -433,7 +475,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs
-    startLine: 101
+    startLine: 110
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -477,7 +519,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs
-    startLine: 111
+    startLine: 120
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -524,7 +566,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs
-    startLine: 120
+    startLine: 129
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -568,7 +610,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs
-    startLine: 130
+    startLine: 139
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -615,7 +657,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddDelegatingHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs
-    startLine: 137
+    startLine: 146
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -657,7 +699,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddDelegatingHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs
-    startLine: 144
+    startLine: 153
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -699,7 +741,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs
-    startLine: 153
+    startLine: 162
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -743,7 +785,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs
-    startLine: 161
+    startLine: 170
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -781,7 +823,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs
-    startLine: 168
+    startLine: 177
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -3315,9 +3357,114 @@ references:
   name: System.Net.Http
   nameWithType: System.Net.Http
   fullName: System.Net.Http
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.ConfigureHttpClient*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.ConfigureHttpClient
+  name: ConfigureHttpClient
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.ConfigureHttpClient
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.ConfigureHttpClient
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).ConfigureHttpClient
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).ConfigureHttpClient
+- uid: System.Action{System.Net.Http.HttpClient}
+  commentId: T:System.Action{System.Net.Http.HttpClient}
+  parent: System
+  definition: System.Action`1
+  name: Action<HttpClient>
+  nameWithType: Action<HttpClient>
+  fullName: System.Action<System.Net.Http.HttpClient>
+  nameWithType.vb: Action(Of HttpClient)
+  fullName.vb: System.Action(Of System.Net.Http.HttpClient)
+  name.vb: Action(Of HttpClient)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.ApizrDuplicateStrategy
+  commentId: T:Apizr.Configuring.ApizrDuplicateStrategy
+  parent: Apizr.Configuring
+  name: ApizrDuplicateStrategy
+  nameWithType: ApizrDuplicateStrategy
+  fullName: Apizr.Configuring.ApizrDuplicateStrategy
+- uid: System.Action`1
+  commentId: T:System.Action`1
+  isExternal: true
+  name: Action<T>
+  nameWithType: Action<T>
+  fullName: System.Action<T>
+  nameWithType.vb: Action(Of T)
+  fullName.vb: System.Action(Of T)
+  name.vb: Action(Of T)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring
+  commentId: N:Apizr.Configuring
+  name: Apizr.Configuring
+  nameWithType: Apizr.Configuring
+  fullName: Apizr.Configuring
 - uid: System.Net.Http.HttpClient
   commentId: T:System.Net.Http.HttpClient
+  parent: System.Net.Http
   isExternal: true
+  name: HttpClient
+  nameWithType: HttpClient
+  fullName: System.Net.Http.HttpClient
 - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpClient*
   commentId: Overload:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpClient
   name: WithHttpClient

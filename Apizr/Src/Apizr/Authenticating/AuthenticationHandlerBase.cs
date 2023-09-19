@@ -31,7 +31,6 @@ namespace Apizr.Authenticating
             ApizrOptions = apizrOptions;
         }
 
-        /// <inheritdoc />
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             HttpRequestMessage clonedRequest = null;

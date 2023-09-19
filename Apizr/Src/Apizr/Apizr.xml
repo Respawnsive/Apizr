@@ -202,9 +202,6 @@
             <param name="logger">The logger</param>
             <param name="apizrOptions">The Apizr options</param>
         </member>
-        <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.GetToken">
             <inheritdoc />
         </member>
@@ -542,6 +539,9 @@
         <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.HttpClientFactory">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.HttpClientConfigurationBuilder">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.RefitSettingsFactory">
             <inheritdoc />
         </member>
@@ -616,6 +616,9 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHttpClientHandler(System.Func{System.Net.Http.HttpClientHandler})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})">
@@ -950,6 +953,9 @@
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions.HttpClientFactory">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions.HttpClientConfigurationBuilder">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions.PolicyRegistryFactory">
             <inheritdoc />
         </member>
@@ -1096,6 +1102,9 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHttpClientHandler(System.Func{System.Net.Http.HttpClientHandler})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})">
@@ -1299,6 +1308,9 @@
         <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.HttpClientFactory">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.HttpClientConfigurationBuilder">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.DelegatingHandlersFactories">
             <inheritdoc />
         </member>
@@ -1364,6 +1376,9 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpClientHandler(System.Func{System.Net.Http.HttpClientHandler})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})">
@@ -2281,6 +2296,11 @@
             HttpClient factory
             </summary>
         </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder">
+            <summary>
+            HttpClient configuration builder
+            </summary>
+        </member>
         <member name="P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.DelegatingHandlersFactories">
             <summary>
             Delegating handlers factories
@@ -2330,6 +2350,14 @@
             Provide a custom HttpClientHandler
             </summary>
             <param name="httpClientHandlerFactory">An <see cref="T:System.Net.Http.HttpClientHandler"/> instance factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <summary>
+            Configure HttpClient
+            </summary>
+            <param name="configureHttpClient">The configuration builder</param>
+            <param name="strategy">The duplicate strategy if there's another one already (default: Merge)</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpClient(System.Func{System.Net.Http.HttpMessageHandler,System.Uri,System.Net.Http.HttpClient})">

@@ -650,37 +650,49 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Cancelling_A_Request_Should_Throw_A_TaskCanceledException()
+        public async Task Cancelling_A_Get_Request_Should_Throw_An_OperationCanceledException()
         {
-            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
-                .AddDelegatingHandler(new TestRequestHandler()));
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>();
 
             var ct = new CancellationTokenSource();
-            ct.CancelAfter(TimeSpan.FromSeconds(3));
+            ct.CancelAfter(TimeSpan.FromSeconds(2));
 
             Func<Task> act = () =>
-                reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(TimeSpan.FromSeconds(5), opt),
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(5, opt),
                     options => options.WithCancellation(ct.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
-            ex.WithInnerException<TaskCanceledException>();
+            ex.WithInnerException<OperationCanceledException>();
         }
 
         [Fact]
-        public async Task Cancelling_An_Upload_Should_Throw_A_TaskCanceledException()
+        public async Task Cancelling_A_Post_Request_Should_Throw_An_OperationCanceledException()
         {
-            var manager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options =>
-                options.WithHttpClient((handler, uri) => new ApizrHttpClient(handler) {BaseAddress = uri}));
+            var manager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>();
 
             var streamPart = FileHelper.GetTestFileStreamPart("medium");
             var ct = new CancellationTokenSource();
-            ct.CancelAfter(TimeSpan.FromSeconds(3));
+            ct.CancelAfter(TimeSpan.FromSeconds(2));
 
             Func<Task> act = () => manager.ExecuteAsync((opt, api) => api.UploadAsync(streamPart, opt),
                 options => options.WithCancellation(ct.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
-            ex.WithInnerException<TaskCanceledException>();
+            ex.WithInnerException<OperationCanceledException>();
+        }
+
+        [Fact]
+        public async Task Calling_ConfigureClient_Should_Configure_HttpClient()
+        {
+            var watcher = new WatchingRequestHandler();
+
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResSimpleService>(options =>
+                options.ConfigureHttpClient(client => client.DefaultRequestHeaders.Add("HttpClientHeaderKey", "HttpClientHeaderValue"))
+                    .AddDelegatingHandler(watcher));
+
+            await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt));
+            watcher.Headers.Should().NotBeNull();
+            watcher.Headers.Should().ContainKey("HttpClientHeaderKey");
         }
     }
 }

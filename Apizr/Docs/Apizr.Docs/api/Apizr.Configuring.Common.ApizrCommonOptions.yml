@@ -13,6 +13,7 @@ items:
   - Apizr.Configuring.Common.ApizrCommonOptions.ConnectivityHandlerFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.DelegatingHandlersFactories
   - Apizr.Configuring.Common.ApizrCommonOptions.HeadersFactory
+  - Apizr.Configuring.Common.ApizrCommonOptions.HttpClientConfigurationBuilder
   - Apizr.Configuring.Common.ApizrCommonOptions.HttpClientFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.HttpClientHandlerFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.HttpTracerModeFactory
@@ -137,7 +138,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseUriFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 40
+    startLine: 41
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -176,7 +177,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseAddressFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 48
+    startLine: 49
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -215,7 +216,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BasePathFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 56
+    startLine: 57
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -254,7 +255,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LoggerFactoryFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 63
+    startLine: 64
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -293,7 +294,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: PolicyRegistryFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 66
+    startLine: 67
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -332,7 +333,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientHandlerFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 69
+    startLine: 70
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -371,7 +372,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 72
+    startLine: 73
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -386,6 +387,45 @@ items:
   overload: Apizr.Configuring.Common.ApizrCommonOptions.HttpClientFactory*
   implements:
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientFactory
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Apizr.Configuring.Common.ApizrCommonOptions.HttpClientConfigurationBuilder
+  commentId: P:Apizr.Configuring.Common.ApizrCommonOptions.HttpClientConfigurationBuilder
+  id: HttpClientConfigurationBuilder
+  parent: Apizr.Configuring.Common.ApizrCommonOptions
+  langs:
+  - csharp
+  - vb
+  name: HttpClientConfigurationBuilder
+  nameWithType: ApizrCommonOptions.HttpClientConfigurationBuilder
+  fullName: Apizr.Configuring.Common.ApizrCommonOptions.HttpClientConfigurationBuilder
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: HttpClientConfigurationBuilder
+    path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
+    startLine: 76
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Common
+  summary: "\nHttpClient configuration builder\n"
+  example: []
+  syntax:
+    content: public Action<HttpClient> HttpClientConfigurationBuilder { get; set; }
+    parameters: []
+    return:
+      type: System.Action{System.Net.Http.HttpClient}
+    content.vb: Public Property HttpClientConfigurationBuilder As Action(Of HttpClient)
+  overload: Apizr.Configuring.Common.ApizrCommonOptions.HttpClientConfigurationBuilder*
+  implements:
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder
   modifiers.csharp:
   - public
   - get
@@ -410,7 +450,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: RefitSettingsFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 76
+    startLine: 80
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -449,7 +489,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ConnectivityHandlerFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 83
+    startLine: 87
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -488,7 +528,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: CacheHandlerFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 86
+    startLine: 90
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -527,7 +567,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: MappingHandlerFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 89
+    startLine: 93
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -566,7 +606,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: DelegatingHandlersFactories
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 92
+    startLine: 96
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -605,7 +645,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HeadersFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 96
+    startLine: 100
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -644,7 +684,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerModeFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 110
+    startLine: 114
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -683,7 +723,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TrafficVerbosityFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 118
+    startLine: 122
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -722,7 +762,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogLevelsFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 126
+    startLine: 130
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1677,6 +1717,100 @@ references:
   - name: TResult
     nameWithType: TResult
     fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Common.ApizrCommonOptions.HttpClientConfigurationBuilder*
+  commentId: Overload:Apizr.Configuring.Common.ApizrCommonOptions.HttpClientConfigurationBuilder
+  name: HttpClientConfigurationBuilder
+  nameWithType: ApizrCommonOptions.HttpClientConfigurationBuilder
+  fullName: Apizr.Configuring.Common.ApizrCommonOptions.HttpClientConfigurationBuilder
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  name: HttpClientConfigurationBuilder
+  nameWithType: IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder
+- uid: System.Action{System.Net.Http.HttpClient}
+  commentId: T:System.Action{System.Net.Http.HttpClient}
+  parent: System
+  definition: System.Action`1
+  name: Action<HttpClient>
+  nameWithType: Action<HttpClient>
+  fullName: System.Action<System.Net.Http.HttpClient>
+  nameWithType.vb: Action(Of HttpClient)
+  fullName.vb: System.Action(Of System.Net.Http.HttpClient)
+  name.vb: Action(Of HttpClient)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Action`1
+  commentId: T:System.Action`1
+  isExternal: true
+  name: Action<T>
+  nameWithType: Action<T>
+  fullName: System.Action<T>
+  nameWithType.vb: Action(Of T)
+  fullName.vb: System.Action(Of T)
+  name.vb: Action(Of T)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
   - name: )
     nameWithType: )
     fullName: )

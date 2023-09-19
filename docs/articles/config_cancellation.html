@@ -87,9 +87,9 @@ var reqResManager = ApizrBuilder.Current.CreateManagerFor&lt;IReqResUserService&
 var cts = new CancellationTokenSource();
 
 // Send the request with your token into options
-var users = await reqResManager.ExecuteAsync((options, api) =&gt; api.GetUsersAsync(options), options =&gt; 
+var users = await reqResManager.ExecuteAsync((opt, api) =&gt; api.GetUsersAsync(opt), options =&gt; 
     options.WithCancellation(cts.Token));
-</code></pre><p>You may notice that you don&#39;t have to pass the token itself directly to the request anymore. Just pass the resulting options insteed and everything will be wired for you.
+</code></pre><p>You may notice that you don&#39;t have to pass the token itself directly to the request anymore. Just pass the resulting options instead and everything will be wired for you.
 Don&#39;t forget to handle the exception.</p>
 </article>
           </div>

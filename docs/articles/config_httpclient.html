@@ -79,6 +79,7 @@
             <article class="content wrap" id="_content" data-uid="">
 <h2 id="configuring-httpclient">Configuring HttpClient</h2>
 
+<p>You can configure HttpClient by its Builder thanks to this option:</p>
 <div class="tabGroup" id="tabgroup_DBp3-zRVOR">
 <ul role="tablist">
 <li role="presentation">
@@ -89,16 +90,14 @@
 </li>
 </ul>
 <section id="tabpanel_DBp3-zRVOR_tabid-static" role="tabpanel" data-tab="tabid-static">
-<p>You can provide your own HttpClient thanks to this option:</p>
-<pre><code class="lang-csharp">options =&gt; options.WithHttpClient((httpMessageHandler, baseUri) =&gt; new YourOwnHttpClient(httpMessageHandler, false){BaseAddress = baseUri});
+<pre><code class="lang-csharp">options =&gt; options.ConfigureHttpClient(httpClient =&gt; httpClient.WhateverOption = whateverValue)
 </code></pre></section>
 <section id="tabpanel_DBp3-zRVOR_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
-<p>You can configure HttpClient by its Builder thanks to this option:</p>
 <pre><code class="lang-csharp">options =&gt; options.ConfigureHttpClientBuilder(httpClientBuilder =&gt; httpClientBuilder.WhateverOption())
 </code></pre></section>
 </div>
 <div class="WARNING"><h5>Warning</h5><p><strong>HttpClient</strong></p>
-<p>Apizr makes use of HttpClient so keep in mind that you may override some of its features depending of what you&#39;re trying to do with it. Use with caution.</p>
+<p>Apizr makes use of its own HttpClient with its own primary handler, so keep in mind that you may override some of its features depending of what you&#39;re trying to do with it. Use with caution.</p>
 </div>
 </article>
           </div>

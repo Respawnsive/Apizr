@@ -9,7 +9,6 @@ using Apizr.Configuring.Manager;
 using Apizr.Configuring.Request;
 using Apizr.Connecting;
 using Apizr.Extending;
-using Apizr.Extending.Configuring;
 using Apizr.Extending.Configuring.Common;
 using Apizr.Extending.Configuring.Manager;
 using Apizr.Extending.Configuring.Proper;
@@ -23,10 +22,10 @@ using Apizr.Requesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Polly;
 using Polly.Registry;
 using Refit;
+using PolicyHttpMessageHandler = Apizr.Policing.PolicyHttpMessageHandler;
 
 [assembly: Apizr.Preserve]
 namespace Apizr
@@ -597,7 +596,7 @@ namespace Apizr
             var apizrOptionsBuilder = CreateOptions(commonOptions, properOptions, optionsBuilder);
             var apizrOptions = apizrOptionsBuilder.ApizrOptions;
             var apizrOptionsRegistrationType = typeof(IApizrManagerOptions<>).MakeGenericType(apizrOptions.WebApiType);
-
+            
             var builder = services.AddHttpClient(ForType(apizrOptions.WebApiType))
                 .ConfigurePrimaryHttpMessageHandler(serviceProvider =>
                 {

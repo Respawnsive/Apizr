@@ -34,6 +34,7 @@ namespace Apizr.Configuring.Manager
             LoggerFactoryFactory = commonOptions.LoggerFactoryFactory;
             LoggerFactory = (loggerFactory, webApiFriendlyName) => Logger = properOptions.LoggerFactory.Invoke(loggerFactory, webApiFriendlyName);
             HttpClientHandlerFactory = properOptions.HttpClientHandlerFactory;
+            HttpClientConfigurationBuilder = properOptions.HttpClientConfigurationBuilder;
             HttpClientFactory = properOptions.HttpClientFactory;
             PolicyRegistryFactory = commonOptions.PolicyRegistryFactory;
             RefitSettingsFactory = commonOptions.RefitSettingsFactory;
@@ -104,6 +105,9 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public Func<HttpMessageHandler, Uri, HttpClient> HttpClientFactory { get; set; }
+
+        /// <inheritdoc />
+        public Action<HttpClient> HttpClientConfigurationBuilder { get; set; }
 
         /// <inheritdoc />
         public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set;  }

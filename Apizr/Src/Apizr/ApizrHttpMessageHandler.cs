@@ -26,39 +26,37 @@ namespace Apizr
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var options = request.GetApizrRequestOptions();
-            //CancellationTokenSource cts = null;
-            if(options != null)
+            if(options is {Headers.Count: > 0})
             {
-                //cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, options.CancellationToken);
-
-                if (options.Headers?.Count > 0)
-                {
-                    // Cloned and adjusted from Refit
-                    // We could have content headers, so we need to make
-                    // sure we have an HttpContent object to add them to,
-                    // provided the HttpClient will allow it for the method
-                    if (request.Content == null && !BodylessMethods.Contains(request.Method))
-                        request.Content = new ByteArrayContent(Array.Empty<byte>());
+                // Cloned and adjusted from Refit
+                // We could have content headers, so we need to make
+                // sure we have an HttpContent object to add them to,
+                // provided the HttpClient will allow it for the method
+                if (request.Content == null && !BodylessMethods.Contains(request.Method))
+                    request.Content = new ByteArrayContent(Array.Empty<byte>());
                     
-                    foreach (var header in options.Headers)
-                    {
-                        if (string.IsNullOrWhiteSpace(header)) continue;
+                foreach (var header in options.Headers)
+                {
+                    if (string.IsNullOrWhiteSpace(header)) continue;
 
-                        // NB: Silverlight doesn't have an overload for String.Split()
-                        // with a count parameter, but header values can contain
-                        // ':' so we have to re-join all but the first part to get the
-                        // value.
-                        var parts = header.Split(':');
-                        var headerKey = parts[0].Trim();
-                        var headerValue = parts.Length > 1 ?
-                            string.Join(":", parts.Skip(1)).Trim() : null;
+                    // NB: Silverlight doesn't have an overload for String.Split()
+                    // with a count parameter, but header values can contain
+                    // ':' so we have to re-join all but the first part to get the
+                    // value.
+                    var parts = header.Split(':');
+                    var headerKey = parts[0].Trim();
+                    var headerValue = parts.Length > 1 ?
+                        string.Join(":", parts.Skip(1)).Trim() : null;
 
-                        request.SetHeader(headerKey, headerValue);
-                    }
+                    request.SetHeader(headerKey, headerValue);
                 }
             }
 
-            return base.SendAsync(request, cancellationToken);
+            CancellationTokenSource cts = null;
+            if (options?.CancellationToken != null)
+                cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, options.CancellationToken);
+
+            return base.SendAsync(request, cts?.Token ?? cancellationToken);
         }
     }
 }

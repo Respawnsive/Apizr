@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Http;
+using Microsoft.Extensions.Options;
 
 namespace Apizr.Extending
 {
@@ -20,8 +22,18 @@ namespace Apizr.Extending
 
             builder.Services.AddTransient(type, s =>
             {
-                var httpClientFactory = s.GetRequiredService<IHttpClientFactory>();
-                var httpClient = httpClientFactory.CreateClient(builder.Name);
+                var httpMessageHandlerFactory = s.GetRequiredService<IHttpMessageHandlerFactory>();
+
+                var handler = httpMessageHandlerFactory.CreateHandler(builder.Name);
+                var httpClient = new ApizrHttpClient(handler, disposeHandler: false);
+
+                var httpClientFactoryOptions = s.GetRequiredService<IOptionsMonitor<HttpClientFactoryOptions>>();
+
+                var options = httpClientFactoryOptions.Get(builder.Name);
+                foreach (var httpClientActions in options.HttpClientActions)
+                {
+                    httpClientActions(httpClient);
+                }
 
                 return factory(httpClient, s);
             });

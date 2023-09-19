@@ -1201,31 +1201,29 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Cancelling_A_Request_Should_Throw_A_TaskCanceledException()
+        public async Task Cancelling_A_Get_Request_Should_Throw_An_OperationCanceledException()
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddManagerFor<IReqResUserService>(options => options
-                .AddDelegatingHandler(new TestRequestHandler())));
+                .AddManagerFor<IReqResUserService>());
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
             var ct = new CancellationTokenSource();
-            ct.CancelAfter(TimeSpan.FromSeconds(3));
+            ct.CancelAfter(TimeSpan.FromSeconds(2));
 
             Func<Task> act = () =>
-                reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(TimeSpan.FromSeconds(5), opt),
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(5, opt),
                     options => options.WithCancellation(ct.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
-            ex.WithInnerException<TaskCanceledException>();
+            ex.WithInnerException<OperationCanceledException>();
         }
 
         [Fact]
-        public async Task Cancelling_An_Upload_Should_Throw_A_TaskCanceledException()
+        public async Task Cancelling_A_Post_Request_Should_Throw_An_OperationCanceledException()
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddManagerFor<IHttpBinService>(options =>
-                    options.WithHttpClient((handler, uri) => new ApizrHttpClient(handler) { BaseAddress = uri })));
+                .AddManagerFor<IHttpBinService>());
 
             apizrRegistry.TryGetManagerFor<IHttpBinService>(out var manager).Should().BeTrue();
 
@@ -1237,7 +1235,7 @@ namespace Apizr.Tests
                 options => options.WithCancellation(ct.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
-            ex.WithInnerException<TaskCanceledException>();
+            ex.WithInnerException<OperationCanceledException>();
         }
     }
 }

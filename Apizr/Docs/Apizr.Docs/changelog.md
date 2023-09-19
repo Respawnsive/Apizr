@@ -1,9 +1,14 @@
 5.3.0
 ---
 
+### All
+
+- [Cancellation] Now we really can ***cancel a request by providing a token trough the options***
+
 ### Apizr
 
 - [Change] Now we can access to a **dedicated logger instance while inheriting from AuthenticationHadlerBase**
+- [Breaking][HttpClient] Now we can **configure the HttpClient instead of providing one** (same as extended experience) with the brand new ConfigureHttpClient fluent option
  
 5.2.0
 ---

@@ -10,6 +10,7 @@ items:
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.BaseUriFactory
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.DelegatingHandlersFactories
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientFactory
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientHandlerFactory
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpTracerModeFactory
@@ -339,6 +340,41 @@ items:
   - get
   modifiers.vb:
   - ReadOnly
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder
+  id: HttpClientConfigurationBuilder
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  langs:
+  - csharp
+  - vb
+  name: HttpClientConfigurationBuilder
+  nameWithType: IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptions.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: HttpClientConfigurationBuilder
+    path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptions.cs
+    startLine: 58
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  summary: "\nHttpClient configuration builder\n"
+  example: []
+  syntax:
+    content: Action<HttpClient> HttpClientConfigurationBuilder { get; }
+    parameters: []
+    return:
+      type: System.Action{System.Net.Http.HttpClient}
+    content.vb: ReadOnly Property HttpClientConfigurationBuilder As Action(Of HttpClient)
+  overload: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder*
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
 - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.DelegatingHandlersFactories
   commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.DelegatingHandlersFactories
   id: DelegatingHandlersFactories
@@ -357,7 +393,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: DelegatingHandlersFactories
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptions.cs
-    startLine: 58
+    startLine: 63
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -392,7 +428,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HeadersFactory
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptions.cs
-    startLine: 63
+    startLine: 68
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -986,6 +1022,94 @@ references:
   - name: TResult
     nameWithType: TResult
     fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder
+  name: HttpClientConfigurationBuilder
+  nameWithType: IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder
+- uid: System.Action{System.Net.Http.HttpClient}
+  commentId: T:System.Action{System.Net.Http.HttpClient}
+  parent: System
+  definition: System.Action`1
+  name: Action<HttpClient>
+  nameWithType: Action<HttpClient>
+  fullName: System.Action<System.Net.Http.HttpClient>
+  nameWithType.vb: Action(Of HttpClient)
+  fullName.vb: System.Action(Of System.Net.Http.HttpClient)
+  name.vb: Action(Of HttpClient)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.Http.HttpClient
+    name: HttpClient
+    nameWithType: HttpClient
+    fullName: System.Net.Http.HttpClient
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Action`1
+  commentId: T:System.Action`1
+  isExternal: true
+  name: Action<T>
+  nameWithType: Action<T>
+  fullName: System.Action<T>
+  nameWithType.vb: Action(Of T)
+  fullName.vb: System.Action(Of T)
+  name.vb: Action(Of T)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
   - name: )
     nameWithType: )
     fullName: )

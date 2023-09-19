@@ -1398,14 +1398,17 @@ namespace Apizr
                 foreach (var constants in ExtractConstants(memberExpression.Expression))
                 {
                     object value = null;
-                    switch (memberExpression.Member)
+                    if (constants.Value != null)
                     {
-                        case FieldInfo fieldInfo:
-                            value = fieldInfo.GetValue(constants.Value);
-                            break;
-                        case PropertyInfo propertyInfo:
-                            value = propertyInfo.GetValue(constants.Value);
-                            break;
+                        switch (memberExpression.Member)
+                        {
+                            case FieldInfo fieldInfo:
+                                value = fieldInfo.GetValue(constants.Value);
+                                break;
+                            case PropertyInfo propertyInfo:
+                                value = propertyInfo.GetValue(constants.Value);
+                                break;
+                        } 
                     }
 
                     yield return new ExtractedConstant {Value = value};

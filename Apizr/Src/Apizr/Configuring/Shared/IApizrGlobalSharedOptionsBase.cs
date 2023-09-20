@@ -45,5 +45,10 @@ namespace Apizr.Configuring.Shared
         /// Headers to add to the request
         /// </summary>
         IList<string> Headers { get; }
+
+        /// <summary>
+        /// Request timeout
+        /// </summary>
+        TimeSpan? Timeout { get; }
     }
 }

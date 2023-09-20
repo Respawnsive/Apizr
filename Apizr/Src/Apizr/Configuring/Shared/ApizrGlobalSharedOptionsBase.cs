@@ -56,5 +56,8 @@ namespace Apizr.Configuring.Shared
 
         /// <inheritdoc />
         public IList<string> Headers { get; internal set; }
+
+        /// <inheritdoc />
+        public TimeSpan? Timeout { get; internal set; }
     }
 }

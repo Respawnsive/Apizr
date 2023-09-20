@@ -654,12 +654,12 @@ namespace Apizr.Tests
         {
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>();
 
-            var ct = new CancellationTokenSource();
-            ct.CancelAfter(TimeSpan.FromSeconds(2));
+            var cts = new CancellationTokenSource();
+            cts.CancelAfter(TimeSpan.FromSeconds(2));
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(5, opt),
-                    options => options.WithCancellation(ct.Token));
+                    options => options.WithCancellation(cts.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
             ex.WithInnerException<OperationCanceledException>();
@@ -693,6 +693,53 @@ namespace Apizr.Tests
             await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt));
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKey("HttpClientHeaderKey");
+        }
+
+        [Fact]
+        public async Task Calling_WithTimeout_Should_Throw_A_TimeoutException()
+        {
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>();
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(5, opt),
+                    options => options.WithTimeout(TimeSpan.FromSeconds(2)));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TimeoutException>();
+        }
+
+        [Fact]
+        public async Task Calling_Both_WithTimeout_And_WithCancellation_Should_Throw_A_TimeoutException()
+        {
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>();
+
+            var cts = new CancellationTokenSource();
+            cts.CancelAfter(TimeSpan.FromSeconds(3));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(5, opt),
+                    options => options.WithTimeout(TimeSpan.FromSeconds(2))
+                        .WithCancellation(cts.Token));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TimeoutException>();
+        }
+
+        [Fact]
+        public async Task Calling_Both_WithTimeout_And_WithCancellation_Should_Throw_An_OperationCanceledException()
+        {
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>();
+
+            var cts = new CancellationTokenSource();
+            cts.CancelAfter(TimeSpan.FromSeconds(2));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(5, opt),
+                    options => options.WithTimeout(TimeSpan.FromSeconds(3))
+                        .WithCancellation(cts.Token));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<OperationCanceledException>();
         }
     }
 }

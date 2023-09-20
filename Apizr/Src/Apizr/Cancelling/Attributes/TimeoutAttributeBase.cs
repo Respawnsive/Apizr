@@ -5,14 +5,14 @@ using System.Text;
 namespace Apizr.Cancelling.Attributes
 {
     /// <summary>
-    /// Tells Apizr to set a specific timeout value
+    /// Tells Apizr to set a timeout to the request
     /// </summary>
     public abstract class TimeoutAttributeBase : Attribute
     {
         /// <summary>
-        /// This specific request timeout
+        /// This request timeout
         /// </summary>
-        public TimeSpan? Timeout { get; }
+        public TimeSpan Timeout { get; }
 
         /// <summary>
         /// Request times out after a specific duration

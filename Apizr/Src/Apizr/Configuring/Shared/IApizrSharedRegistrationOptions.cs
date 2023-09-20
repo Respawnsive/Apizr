@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using Apizr.Configuring.Manager;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;
@@ -67,5 +68,10 @@ namespace Apizr.Configuring.Shared
         /// Headers factory
         /// </summary>
         Func<IList<string>> HeadersFactory { get; }
+
+        /// <summary>
+        /// Request timeout factory
+        /// </summary>
+        Func<TimeSpan> TimeoutFactory { get; }
     }
 }

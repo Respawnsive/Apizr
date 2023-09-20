@@ -349,6 +349,18 @@ namespace Apizr.Configuring.Common
         }
 
         /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithTimeout(TimeSpan timeout)
+            => WithTimeout(() => timeout);
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithTimeout(Func<TimeSpan> timeoutFactory)
+        {
+            Options.TimeoutFactory = timeoutFactory;
+
+            return this;
+        }
+
+        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithContext(Func<Context> contextFactory,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
         {

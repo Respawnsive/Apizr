@@ -25,6 +25,7 @@ namespace Apizr.Configuring.Proper
         /// <param name="handlersParameters">Some handlers parameters</param>
         /// <param name="httpTracerMode">The http tracer mode</param>
         /// <param name="trafficVerbosity">The traffic verbosity</param>
+        /// <param name="timeout">The request timeout</param>
         /// <param name="logLevels">The log levels</param>
         public ApizrProperOptions(IApizrSharedRegistrationOptions sharedOptions,
             Type webApiType,
@@ -35,6 +36,7 @@ namespace Apizr.Configuring.Proper
             IDictionary<string, object> handlersParameters,
             HttpTracerMode? httpTracerMode,
             HttpMessageParts? trafficVerbosity,
+            TimeSpan? timeout,
             params LogLevel[] logLevels) : base(sharedOptions, webApiType, assemblyPolicyRegistryKeys,
             webApiPolicyRegistryKeys)
         {
@@ -52,6 +54,7 @@ namespace Apizr.Configuring.Proper
             DelegatingHandlersFactories = sharedOptions.DelegatingHandlersFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             ContextFactory = sharedOptions.ContextFactory;
             HeadersFactory = sharedOptions.HeadersFactory;
+            TimeoutFactory = timeout.HasValue ? () => timeout!.Value : sharedOptions.TimeoutFactory;
         }
 
         private Func<Uri> _baseUriFactory;
@@ -128,6 +131,14 @@ namespace Apizr.Configuring.Proper
                     return Headers;
                 }
                 : null;
+        }
+
+        private Func<TimeSpan> _timeoutFactory;
+        /// <inheritdoc />
+        public Func<TimeSpan> TimeoutFactory
+        {
+            get => _timeoutFactory;
+            set => _timeoutFactory = value != null ? () => (TimeSpan) (Timeout = value.Invoke()) : null;
         }
     }
 }

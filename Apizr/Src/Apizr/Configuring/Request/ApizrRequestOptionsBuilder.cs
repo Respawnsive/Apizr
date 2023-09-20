@@ -42,6 +42,14 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
     }
 
     /// <inheritdoc />
+    public IApizrRequestOptionsBuilder WithTimeout(TimeSpan timeout)
+    {
+        Options.Timeout = timeout;
+
+        return this;
+    }
+
+    /// <inheritdoc />
     public IApizrRequestOptionsBuilder WithContext(Context context, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
     {
         switch (strategy)

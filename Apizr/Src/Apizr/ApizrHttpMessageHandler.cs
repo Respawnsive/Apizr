@@ -1,62 +1,37 @@
-﻿using Apizr.Policing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Apizr.Helping;
+using Apizr.Configuring.Manager;
+using Apizr.Extending;
 
 namespace Apizr
 {
     internal sealed class ApizrHttpMessageHandler : DelegatingHandler
     {
-        static readonly ISet<HttpMethod> BodylessMethods = new HashSet<HttpMethod>
-        {
-            HttpMethod.Get,
-            HttpMethod.Head
-        };
+        private readonly IApizrManagerOptionsBase _apizrOptions;
 
-        public ApizrHttpMessageHandler(HttpMessageHandler innerHandler):base(innerHandler)
+        public ApizrHttpMessageHandler(HttpMessageHandler innerHandler, IApizrManagerOptionsBase apizrOptions) :base(innerHandler)
         {
-            
+            _apizrOptions = apizrOptions;
         }
 
         /// <inheritdoc />
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            var options = request.GetApizrRequestOptions();
-            if(options is {Headers.Count: > 0})
+            using (var cts = request.ProcessApizrOptions(cancellationToken, _apizrOptions, out var optionsCancellationToken))
             {
-                // Cloned and adjusted from Refit
-                // We could have content headers, so we need to make
-                // sure we have an HttpContent object to add them to,
-                // provided the HttpClient will allow it for the method
-                if (request.Content == null && !BodylessMethods.Contains(request.Method))
-                    request.Content = new ByteArrayContent(Array.Empty<byte>());
-                    
-                foreach (var header in options.Headers)
+                try
                 {
-                    if (string.IsNullOrWhiteSpace(header)) continue;
-
-                    // NB: Silverlight doesn't have an overload for String.Split()
-                    // with a count parameter, but header values can contain
-                    // ':' so we have to re-join all but the first part to get the
-                    // value.
-                    var parts = header.Split(':');
-                    var headerKey = parts[0].Trim();
-                    var headerValue = parts.Length > 1 ?
-                        string.Join(":", parts.Skip(1)).Trim() : null;
-
-                    request.SetHeader(headerKey, headerValue);
+                    return await base.SendAsync(request, cts?.Token ?? cancellationToken).ConfigureAwait(false);
+                }
+                catch (OperationCanceledException)
+                    when (!cancellationToken.IsCancellationRequested && // Not a Refit cancellation
+                          !optionsCancellationToken.IsCancellationRequested) // Neither a user one
+                {
+                    throw new TimeoutException("Request timed out");
                 }
             }
-
-            CancellationTokenSource cts = null;
-            if (options?.CancellationToken != null)
-                cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, options.CancellationToken);
-
-            return base.SendAsync(request, cts?.Token ?? cancellationToken);
         }
     }
 }

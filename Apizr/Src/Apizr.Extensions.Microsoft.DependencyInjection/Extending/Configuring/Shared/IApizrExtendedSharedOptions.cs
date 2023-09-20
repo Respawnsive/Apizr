@@ -56,5 +56,10 @@ namespace Apizr.Extending.Configuring.Shared
         /// Headers factory
         /// </summary>
         Func<IServiceProvider, IList<string>> HeadersFactory { get; }
+
+        /// <summary>
+        /// Timeout factory
+        /// </summary>
+        Func<IServiceProvider, TimeSpan> TimeoutFactory { get; }
     }
 }

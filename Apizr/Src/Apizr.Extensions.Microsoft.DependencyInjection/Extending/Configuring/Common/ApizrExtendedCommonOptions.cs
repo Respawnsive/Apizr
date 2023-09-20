@@ -131,6 +131,14 @@ namespace Apizr.Extending.Configuring.Common
                 : null;
         }
 
+        private Func<IServiceProvider, TimeSpan> _timeoutFactory;
+        /// <inheritdoc />
+        public Func<IServiceProvider, TimeSpan> TimeoutFactory
+        {
+            get => _timeoutFactory;
+            set => _timeoutFactory = value != null ? serviceProvider => (TimeSpan) (Timeout = value.Invoke(serviceProvider)) : null;
+        }
+
         /// <inheritdoc />
         public IDictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
 

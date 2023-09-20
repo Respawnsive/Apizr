@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using Apizr.Caching;
+using Apizr.Cancelling.Attributes;
 using Apizr.Configuring;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Manager;
@@ -206,14 +207,32 @@ namespace Apizr
 
                 var innerHandler = handlerBuilder.Build();
                 var primaryHandler = apizrOptions.PrimaryHandlerFactory?.Invoke(innerHandler, apizrOptions.Logger, apizrOptions) ?? innerHandler;
-                var primaryMessageHandler = new ApizrHttpMessageHandler(primaryHandler);
+                var primaryMessageHandler = new ApizrHttpMessageHandler(primaryHandler, apizrOptions);
 
                 return primaryMessageHandler;
             });
             
             var webApiFactory = new Func<object>(() =>
             {
-                var httpClient = new ApizrHttpClient(httpHandlerFactory.Invoke(), false) {BaseAddress = apizrOptions.BaseUri};
+                var httpClient = new ApizrHttpClient(httpHandlerFactory.Invoke(), false, apizrOptions) {BaseAddress = apizrOptions.BaseUri};
+                
+                if (apizrOptions.Timeout.HasValue)
+                {
+                    if (apizrOptions.Timeout.Value > TimeSpan.Zero)
+                    {
+                        httpClient.Timeout = apizrOptions.Timeout.Value;
+                        apizrOptions.Logger?.Log(apizrOptions.LogLevels?.Low() ?? LogLevel.Trace,
+                            "{0}: HttpClient's Timeout has been set with your provided {1} value.",
+                            apizrOptions.WebApiType.GetFriendlyName(), httpClient.Timeout);
+                    }
+                    else
+                    {
+                        apizrOptions.Logger?.Log(apizrOptions.LogLevels?.Low() ?? LogLevel.Trace,
+                            "{0}: You provided a timeout value which is not a positive TimeSpan (or Timeout.InfiniteTimeSpan to indicate no timeout). Default value {1} will be applied.",
+                            apizrOptions.WebApiType.GetFriendlyName(), httpClient.Timeout);
+                    }
+                }
+
                 apizrOptions.HttpClientConfigurationBuilder.Invoke(httpClient);
 
                 return RestService.For<TWebApi>(httpClient, apizrOptions.RefitSettings);
@@ -248,6 +267,7 @@ namespace Apizr
             builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();
             builder.ApizrOptions.RefitSettingsFactory.Invoke();
+            builder.ApizrOptions.TimeoutFactory?.Invoke();
 
             return builder.ApizrOptions;
         }
@@ -273,6 +293,7 @@ namespace Apizr
 
             IList<HandlerParameterAttribute> properParameterAttributes, commonParameterAttributes;
             LogAttribute properLogAttribute, commonLogAttribute;
+            TimeoutAttribute properTimeoutAttribute, commonTimeoutAttribute;
             PolicyAttribute webApiPolicyAttribute;
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
             {
@@ -284,6 +305,8 @@ namespace Apizr
                 commonParameterAttributes = modelType.Assembly.GetCustomAttributes<HandlerParameterAttribute>().ToList();
                 properLogAttribute = modelTypeInfo.GetCustomAttribute<LogAttribute>(true);
                 commonLogAttribute = modelType.Assembly.GetCustomAttribute<LogAttribute>();
+                properTimeoutAttribute = modelTypeInfo.GetCustomAttribute<TimeoutAttribute>(true);
+                commonTimeoutAttribute = modelType.Assembly.GetCustomAttribute<TimeoutAttribute>();
                 webApiPolicyAttribute = modelTypeInfo.GetCustomAttribute<PolicyAttribute>(true);
             }
             else
@@ -293,6 +316,8 @@ namespace Apizr
                 commonParameterAttributes = webApiType.Assembly.GetCustomAttributes<HandlerParameterAttribute>().ToList();
                 properLogAttribute = webApiTypeInfo.GetCustomAttribute<LogAttribute>(true);
                 commonLogAttribute = webApiType.Assembly.GetCustomAttribute<LogAttribute>();
+                properTimeoutAttribute = webApiTypeInfo.GetCustomAttribute<TimeoutAttribute>(true);
+                commonTimeoutAttribute = webApiType.Assembly.GetCustomAttribute<TimeoutAttribute>();
                 webApiPolicyAttribute = webApiTypeInfo.GetCustomAttribute<PolicyAttribute>(true);
             }
 
@@ -312,7 +337,8 @@ namespace Apizr
                 basePath,
                 handlersParameters,
                 properLogAttribute?.HttpTracerMode ?? (commonOptions.HttpTracerMode != HttpTracerMode.Unspecified ? commonOptions.HttpTracerMode : commonLogAttribute?.HttpTracerMode),
-                properLogAttribute?.TrafficVerbosity ?? (commonOptions.TrafficVerbosity != HttpMessageParts.Unspecified ? commonOptions.TrafficVerbosity : commonLogAttribute?.TrafficVerbosity), 
+                properLogAttribute?.TrafficVerbosity ?? (commonOptions.TrafficVerbosity != HttpMessageParts.Unspecified ? commonOptions.TrafficVerbosity : commonLogAttribute?.TrafficVerbosity),
+                properTimeoutAttribute?.Timeout ?? commonTimeoutAttribute?.Timeout, 
                 properLogAttribute?.LogLevels ?? (commonOptions.LogLevels?.Any() == true ? commonOptions.LogLevels : commonLogAttribute?.LogLevels))) as IApizrProperOptionsBuilder;
 
             properOptionsBuilder?.Invoke(builder);
@@ -323,6 +349,7 @@ namespace Apizr
             builder.ApizrOptions.LogLevelsFactory.Invoke();
             builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();
+            builder.ApizrOptions.TimeoutFactory?.Invoke();
 
             return builder.ApizrOptions;
         }

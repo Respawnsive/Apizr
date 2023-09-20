@@ -1,33 +1,37 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Apizr.Policing;
+using Apizr.Configuring.Manager;
+using Apizr.Extending;
 
 namespace Apizr
 {
     public class ApizrHttpClient : HttpClient
     {
-        public ApizrHttpClient()
-        {
-        }
+        private readonly IApizrManagerOptionsBase _apizrOptions;
 
-        public ApizrHttpClient(HttpMessageHandler handler)
-            : this(handler, true)
-        {
-        }
-
-        public ApizrHttpClient(HttpMessageHandler handler, bool disposeHandler)
+        public ApizrHttpClient(HttpMessageHandler handler, bool disposeHandler, IApizrManagerOptionsBase apizrOptions)
             : base(handler, disposeHandler)
-        {}
-
-        public override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            var options = request.GetApizrRequestOptions();
-            CancellationTokenSource cts = null;
-            if (options?.CancellationToken != null)
-                cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, options.CancellationToken);
+            _apizrOptions = apizrOptions;
+        }
 
-            return base.SendAsync(request, cts?.Token ?? cancellationToken);
+        public override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            using (var cts = request.ProcessApizrOptions(cancellationToken, _apizrOptions, out var optionsCancellationToken))
+            {
+                try
+                {
+                    return await base.SendAsync(request, cts?.Token ?? cancellationToken).ConfigureAwait(false);
+                }
+                catch (OperationCanceledException)
+                    when (!cancellationToken.IsCancellationRequested && // Not a Refit cancellation
+                          !optionsCancellationToken.IsCancellationRequested) // Neither a user one
+                {
+                    throw new TimeoutException("Request timed out");
+                }
+            }
         }
     }
 }

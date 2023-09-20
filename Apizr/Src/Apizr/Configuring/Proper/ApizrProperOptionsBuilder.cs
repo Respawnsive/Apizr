@@ -322,6 +322,18 @@ namespace Apizr.Configuring.Proper
             return this;
         }
 
+        /// <inheritdoc />
+        public IApizrProperOptionsBuilder WithTimeout(TimeSpan timeout)
+            => WithTimeout(() => timeout);
+
+        /// <inheritdoc />
+        public IApizrProperOptionsBuilder WithTimeout(Func<TimeSpan> timeoutFactory)
+        {
+            Options.TimeoutFactory = timeoutFactory;
+
+            return this;
+        }
+
         #region Internal
 
         void IApizrInternalOptionsBuilder.SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);

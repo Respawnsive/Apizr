@@ -44,6 +44,7 @@ namespace Apizr.Configuring.Manager
             DelegatingHandlersFactories = properOptions.DelegatingHandlersFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             ContextFactory = properOptions.ContextFactory;
             HeadersFactory = properOptions.HeadersFactory;
+            TimeoutFactory = properOptions.TimeoutFactory;
         }
 
         private Func<Uri> _baseUriFactory;
@@ -145,8 +146,13 @@ namespace Apizr.Configuring.Manager
                 : null;
         }
 
+        private Func<TimeSpan> _timeoutFactory;
         /// <inheritdoc />
-        public Func<Context> ContextFactory { get; set; }
+        public Func<TimeSpan> TimeoutFactory
+        {
+            get => _timeoutFactory;
+            set => _timeoutFactory = value != null ? () => (TimeSpan)(Timeout = value.Invoke()) : null;
+        }
     }
     
     /// <inheritdoc cref="IApizrManagerOptions{TWebApi}"/>
@@ -205,6 +211,9 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public IList<string> Headers => Options.Headers;
+
+        /// <inheritdoc />
+        public TimeSpan? Timeout => Options.Timeout;
 
         /// <inheritdoc />
         public ILogger Logger => Options.Logger;

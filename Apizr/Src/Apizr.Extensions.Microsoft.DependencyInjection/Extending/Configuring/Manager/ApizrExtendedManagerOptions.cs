@@ -50,6 +50,7 @@ namespace Apizr.Extending.Configuring.Manager
             PostRegistries = commonOptions.PostRegistries.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             PostRegistrationActions = commonOptions.PostRegistrationActions.ToList();
             HeadersFactory = properOptions.HeadersFactory;
+            TimeoutFactory = properOptions.TimeoutFactory;
         }
 
         /// <inheritdoc />
@@ -162,6 +163,14 @@ namespace Apizr.Extending.Configuring.Manager
                     return Headers;
                 }
                 : null;
+        }
+
+        private Func<IServiceProvider, TimeSpan> _timeoutFactory;
+        /// <inheritdoc />
+        public Func<IServiceProvider, TimeSpan> TimeoutFactory
+        {
+            get => _timeoutFactory;
+            set => _timeoutFactory = value != null ? serviceProvider => (TimeSpan)(Timeout = value.Invoke(serviceProvider)) : null;
         }
 
         /// <inheritdoc />

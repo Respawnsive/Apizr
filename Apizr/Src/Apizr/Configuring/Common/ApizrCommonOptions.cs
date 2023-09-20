@@ -109,6 +109,13 @@ namespace Apizr.Configuring.Common
                 : null;
         }
 
+        private Func<TimeSpan> _timeoutFactory;
+        /// <inheritdoc />
+        public Func<TimeSpan> TimeoutFactory
+        {
+            get => _timeoutFactory;
+            set => _timeoutFactory = value != null ? () => (TimeSpan)(Timeout = value.Invoke()) : null;
+        }
 
         private Func<HttpTracerMode> _httpTracerModeFactory;
         /// <inheritdoc />

@@ -160,6 +160,18 @@ namespace Apizr.Extending.Configuring.Common
         }
 
         /// <inheritdoc />
+        public IApizrExtendedCommonOptionsBuilder WithTimeout(TimeSpan timeout)
+        => WithTimeout(_ => timeout);
+
+        /// <inheritdoc />
+        public IApizrExtendedCommonOptionsBuilder WithTimeout(Func<IServiceProvider, TimeSpan> timeoutFactory)
+        {
+            Options.TimeoutFactory = timeoutFactory;
+
+            return this;
+        }
+
+        /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder AddDelegatingHandler<THandler>(THandler delegatingHandler) where THandler : DelegatingHandler
             => AddDelegatingHandler((_, _) => delegatingHandler);
 

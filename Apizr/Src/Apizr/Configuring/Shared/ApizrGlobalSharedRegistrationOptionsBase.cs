@@ -20,6 +20,7 @@ namespace Apizr.Configuring.Shared
             BasePath = sharedOptions?.BasePath;
             ContextFactory = sharedOptions?.ContextFactory;
             PrimaryHandlerFactory = sharedOptions?.PrimaryHandlerFactory;
+            Timeout = sharedOptions?.Timeout; // The HttpClient one, not the request one
         }
 
         /// <inheritdoc />

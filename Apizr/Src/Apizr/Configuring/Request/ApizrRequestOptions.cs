@@ -16,8 +16,9 @@ public class ApizrRequestOptions : ApizrRequestOptionsBase, IApizrRequestOptions
         IDictionary<string, object> handlersParameters,
         HttpTracerMode? httpTracerMode,
         HttpMessageParts? trafficVerbosity,
+        TimeSpan? timeout,
         params LogLevel[] logLevels) : 
-        base(sharedOptions, httpTracerMode, trafficVerbosity, logLevels)
+        base(sharedOptions, httpTracerMode, trafficVerbosity, timeout, logLevels)
     {
         foreach (var handlersParameter in handlersParameters)
             HandlersParameters[handlersParameter.Key] = handlersParameter.Value;

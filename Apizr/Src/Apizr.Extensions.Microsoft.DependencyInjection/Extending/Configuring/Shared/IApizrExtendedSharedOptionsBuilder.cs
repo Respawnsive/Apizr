@@ -129,5 +129,11 @@ namespace Apizr.Extending.Configuring.Shared
         /// <returns></returns>
         TApizrExtendedSharedOptionsBuilder WithHeaders(Func<IServiceProvider, IList<string>> headersFactory);
 
+        /// <summary>
+        /// Set a timeout to the request
+        /// </summary>
+        /// <param name="timeoutFactory">The request timeout factory</param>
+        /// <returns></returns>
+        TApizrExtendedSharedOptionsBuilder WithTimeout(Func<IServiceProvider, TimeSpan> timeoutFactory);
     }
 }

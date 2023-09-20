@@ -167,6 +167,18 @@ namespace Apizr.Extending.Configuring.Proper
         }
 
         /// <inheritdoc />
+        public IApizrExtendedProperOptionsBuilder WithTimeout(TimeSpan timeout)
+            => WithTimeout(_ => timeout);
+
+        /// <inheritdoc />
+        public IApizrExtendedProperOptionsBuilder WithTimeout(Func<IServiceProvider, TimeSpan> timeoutFactory)
+        {
+            Options.TimeoutFactory = timeoutFactory;
+
+            return this;
+        }
+
+        /// <inheritdoc />
         public IApizrExtendedProperOptionsBuilder AddDelegatingHandler<THandler>(THandler delegatingHandler) where THandler : DelegatingHandler
             => AddDelegatingHandler((_, _) => delegatingHandler);
 

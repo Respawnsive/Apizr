@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;
@@ -13,6 +14,7 @@ namespace Apizr.Configuring.Request
         protected ApizrRequestOptionsBase(IApizrGlobalSharedRegistrationOptionsBase sharedOptions,
             HttpTracerMode? httpTracerMode,
             HttpMessageParts? trafficVerbosity,
+            TimeSpan? timeout,
             params LogLevel[] logLevels) : base(sharedOptions)
         {
             Context = sharedOptions?.ContextFactory?.Invoke();
@@ -22,6 +24,8 @@ namespace Apizr.Configuring.Request
                 TrafficVerbosity = trafficVerbosity.Value;
             if(logLevels?.Any() == true)
                 LogLevels = logLevels;
+            if(timeout.HasValue)
+                Timeout = timeout.Value; // The request one, not the HttpClient one
         }
 
         /// <inheritdoc />

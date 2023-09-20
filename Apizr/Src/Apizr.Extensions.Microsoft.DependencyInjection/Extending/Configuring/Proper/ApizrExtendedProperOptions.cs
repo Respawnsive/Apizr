@@ -24,6 +24,7 @@ namespace Apizr.Extending.Configuring.Proper
             IDictionary<string, object> handlersParameters,
             HttpTracerMode? httpTracerMode,
             HttpMessageParts? trafficVerbosity,
+            TimeSpan? timeout,
             params LogLevel[] logLevels) : base(sharedOptions, 
             webApiType, 
             assemblyPolicyRegistryKeys, 
@@ -41,6 +42,7 @@ namespace Apizr.Extending.Configuring.Proper
             LoggerFactory = (serviceProvider, webApiFriendlyName) => serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName);
             DelegatingHandlersExtendedFactories = sharedOptions.DelegatingHandlersExtendedFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             HeadersFactory = sharedOptions.HeadersFactory;
+            TimeoutFactory = timeout.HasValue ? _ => timeout!.Value : sharedOptions.TimeoutFactory;
         }
 
         /// <inheritdoc />
@@ -119,6 +121,14 @@ namespace Apizr.Extending.Configuring.Proper
                     return Headers;
                 }
                 : null;
+        }
+
+        private Func<IServiceProvider, TimeSpan> _timeoutFactory;
+        /// <inheritdoc />
+        public Func<IServiceProvider, TimeSpan> TimeoutFactory
+        {
+            get => _timeoutFactory;
+            set => _timeoutFactory = value != null ? serviceProvider => (TimeSpan)(Timeout = value.Invoke(serviceProvider)) : null;
         }
 
         /// <inheritdoc />

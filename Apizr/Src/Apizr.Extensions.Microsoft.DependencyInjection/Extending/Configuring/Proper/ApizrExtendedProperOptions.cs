@@ -39,6 +39,7 @@ namespace Apizr.Extending.Configuring.Proper
             TrafficVerbosityFactory = trafficVerbosity.HasValue ? _ => trafficVerbosity.Value : sharedOptions.TrafficVerbosityFactory;
             LogLevelsFactory = logLevels?.Any() == true ? _ => logLevels : sharedOptions.LogLevelsFactory;
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
+            HttpClientBuilder = sharedOptions.HttpClientBuilder;
             LoggerFactory = (serviceProvider, webApiFriendlyName) => serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName);
             DelegatingHandlersExtendedFactories = sharedOptions.DelegatingHandlersExtendedFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             HeadersFactory = sharedOptions.HeadersFactory;

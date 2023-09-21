@@ -70,8 +70,10 @@ namespace Apizr.Extending.Configuring.Shared
         /// Adjust some HttpClient settings
         /// </summary>
         /// <param name="httpClientBuilder">The HttpClient builder</param>
+        /// <param name="strategy">The duplicate strategy if there's another one already (default: Merge)</param>
         /// <returns></returns>
-        TApizrExtendedSharedOptionsBuilder ConfigureHttpClientBuilder(Action<IHttpClientBuilder> httpClientBuilder);
+        TApizrExtendedSharedOptionsBuilder ConfigureHttpClientBuilder(Action<IHttpClientBuilder> httpClientBuilder,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge);
 
         /// <summary>
         /// Add a custom delegating handler

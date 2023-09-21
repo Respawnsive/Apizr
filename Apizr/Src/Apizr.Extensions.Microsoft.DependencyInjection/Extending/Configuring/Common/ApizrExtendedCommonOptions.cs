@@ -26,6 +26,7 @@ namespace Apizr.Extending.Configuring.Common
             TrafficVerbosityFactory = _ => HttpMessageParts.All;
             LogLevelsFactory = _ => new []{ Constants.LowLogLevel, Constants.MediumLogLevel, Constants.HighLogLevel };
             HttpClientHandlerFactory = _ => new HttpClientHandler();
+            HttpClientBuilder = _ => { };
             RefitSettingsFactory = _ => new RefitSettings();
             ConnectivityHandlerType = typeof(DefaultConnectivityHandler);
             CacheHandlerType = typeof(VoidCacheHandler);

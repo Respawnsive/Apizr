@@ -36,6 +36,7 @@ namespace Apizr.Extending.Configuring.Manager
             LogLevelsFactory = properOptions.LogLevelsFactory;
             LoggerFactory = properOptions.LoggerFactory;
             HttpClientHandlerFactory = properOptions.HttpClientHandlerFactory;
+            HttpClientBuilder = properOptions.HttpClientBuilder;
             RefitSettingsFactory = commonOptions.RefitSettingsFactory;
             ConnectivityHandlerType = commonOptions.ConnectivityHandlerType;
             ConnectivityHandlerFactory = commonOptions.ConnectivityHandlerFactory;

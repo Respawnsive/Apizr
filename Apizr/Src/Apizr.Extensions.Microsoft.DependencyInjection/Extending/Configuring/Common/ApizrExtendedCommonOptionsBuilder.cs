@@ -189,9 +189,31 @@ namespace Apizr.Extending.Configuring.Common
         }
 
         /// <inheritdoc />
-        public IApizrExtendedCommonOptionsBuilder ConfigureHttpClientBuilder(Action<IHttpClientBuilder> httpClientBuilder)
+        public IApizrExtendedCommonOptionsBuilder ConfigureHttpClientBuilder(
+            Action<IHttpClientBuilder> httpClientBuilder, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
         {
-            Options.HttpClientBuilder = httpClientBuilder;
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.HttpClientBuilder ??= httpClientBuilder;
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.HttpClientBuilder = httpClientBuilder;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.HttpClientBuilder == null)
+                    {
+                        Options.HttpClientBuilder = httpClientBuilder;
+                    }
+                    else
+                    {
+                        Options.HttpClientBuilder += httpClientBuilder.Invoke;
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
 
             return this;
         }

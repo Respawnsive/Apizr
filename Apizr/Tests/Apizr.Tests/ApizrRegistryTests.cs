@@ -1186,7 +1186,7 @@ namespace Apizr.Tests
             var watcher = new WatchingRequestHandler();
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddManagerFor<IReqResSimpleService>(options =>
+                .AddManagerFor<IReqResUserService>(options =>
                 options.ConfigureHttpClient(client => client.DefaultRequestHeaders.Add("HttpClientHeaderKey", "HttpClientHeaderValue"))
                     .AddDelegatingHandler(watcher)));
 

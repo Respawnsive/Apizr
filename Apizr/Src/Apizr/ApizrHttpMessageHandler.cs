@@ -26,8 +26,7 @@ namespace Apizr
                     return await base.SendAsync(request, cts?.Token ?? cancellationToken).ConfigureAwait(false);
                 }
                 catch (OperationCanceledException)
-                    when (!cancellationToken.IsCancellationRequested && // Not a Refit cancellation
-                          !optionsCancellationToken.IsCancellationRequested) // Neither a user one
+                    when (!optionsCancellationToken.IsCancellationRequested) // Not a user cancellation
                 {
                     throw new TimeoutException("Request timed out");
                 }

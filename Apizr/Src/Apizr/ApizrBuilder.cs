@@ -411,6 +411,7 @@ namespace Apizr
             builder.ApizrOptions.RefitSettingsFactory.Invoke();
             builder.ApizrOptions.LoggerFactory.Invoke(builder.ApizrOptions.LoggerFactoryFactory.Invoke(), builder.ApizrOptions.WebApiType.GetFriendlyName());
             builder.ApizrOptions.HeadersFactory?.Invoke();
+            builder.ApizrOptions.TimeoutFactory?.Invoke();
 
             return builder.ApizrOptions;
         }

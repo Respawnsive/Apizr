@@ -1181,6 +1181,23 @@ namespace Apizr.Tests
         }
 
         [Fact]
+        public async Task Calling_ConfigureClient_Should_Configure_HttpClient()
+        {
+            var watcher = new WatchingRequestHandler();
+
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
+                .AddManagerFor<IReqResSimpleService>(options =>
+                options.ConfigureHttpClient(client => client.DefaultRequestHeaders.Add("HttpClientHeaderKey", "HttpClientHeaderValue"))
+                    .AddDelegatingHandler(watcher)));
+
+            apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
+
+            await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt));
+            watcher.Headers.Should().NotBeNull();
+            watcher.Headers.Should().ContainKey("HttpClientHeaderKey");
+        }
+
+        [Fact]
         public async Task Concurrent_Requests_Should_Not_Throw()
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
@@ -1233,6 +1250,103 @@ namespace Apizr.Tests
 
             Func<Task> act = () => manager.ExecuteAsync((opt, api) => api.UploadAsync(streamPart, opt),
                 options => options.WithCancellation(ct.Token));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<OperationCanceledException>();
+        }
+
+        [Fact]
+        public async Task Calling_WithTimeout_Should_Throw_A_Request_TimeoutException()
+        {
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
+                .AddManagerFor<IReqResUserService>(
+                    options => options.WithTimeout(TimeSpan.FromSeconds(4))));
+
+            apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
+                    options => options.WithTimeout(TimeSpan.FromSeconds(2)));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TimeoutException>();
+        }
+
+        [Fact]
+        public async Task Calling_WithTimeout_Should_Throw_A_Client_TimeoutException()
+        {
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
+                .AddManagerFor<IReqResUserService>(options =>
+                    options.WithTimeout(TimeSpan.FromSeconds(2))));
+
+            apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
+                    options => options.WithTimeout(TimeSpan.FromSeconds(4)));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TimeoutException>();
+        }
+
+        [Fact]
+        public async Task Calling_Both_WithTimeout_And_WithCancellation_Should_Throw_A_Request_TimeoutException()
+        {
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
+                .AddManagerFor<IReqResUserService>(options =>
+                    options.WithTimeout(TimeSpan.FromSeconds(4))));
+
+            apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
+
+            var cts = new CancellationTokenSource();
+            cts.CancelAfter(TimeSpan.FromSeconds(6));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(8, opt),
+                    options => options.WithTimeout(TimeSpan.FromSeconds(2))
+                        .WithCancellation(cts.Token));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TimeoutException>();
+        }
+
+        [Fact]
+        public async Task Calling_Both_WithTimeout_And_WithCancellation_Should_Throw_A_Client_TimeoutException()
+        {
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
+                .AddManagerFor<IReqResUserService>(options =>
+                    options.WithTimeout(TimeSpan.FromSeconds(2))));
+
+            apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
+
+            var cts = new CancellationTokenSource();
+            cts.CancelAfter(TimeSpan.FromSeconds(6));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(8, opt),
+                    options => options.WithTimeout(TimeSpan.FromSeconds(4))
+                        .WithCancellation(cts.Token));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TimeoutException>();
+        }
+
+        [Fact]
+        public async Task Calling_Both_WithTimeout_And_WithCancellation_Should_Throw_An_OperationCanceledException()
+        {
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
+                .AddManagerFor<IReqResUserService>(options =>
+                    options.WithTimeout(TimeSpan.FromSeconds(4))));
+
+            apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
+
+            var cts = new CancellationTokenSource();
+            cts.CancelAfter(TimeSpan.FromSeconds(2));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(8, opt),
+                    options => options.WithTimeout(TimeSpan.FromSeconds(6))
+                        .WithCancellation(cts.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
             ex.WithInnerException<OperationCanceledException>();

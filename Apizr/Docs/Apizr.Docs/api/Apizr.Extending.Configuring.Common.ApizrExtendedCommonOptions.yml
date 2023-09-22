@@ -26,6 +26,7 @@ items:
   - Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.PostRegistrationActions
   - Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.PostRegistries
   - Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.RefitSettingsFactory
+  - Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.TimeoutFactory
   - Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.TrafficVerbosityFactory
   - Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.WebApis
   langs:
@@ -82,6 +83,7 @@ items:
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -143,7 +145,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ConnectivityHandlerType
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 41
+    startLine: 42
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -182,7 +184,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: CacheHandlerType
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 44
+    startLine: 45
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -221,7 +223,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: MappingHandlerType
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 47
+    startLine: 48
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -260,7 +262,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseUriFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 51
+    startLine: 52
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -299,7 +301,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseAddressFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 59
+    startLine: 60
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -338,7 +340,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BasePathFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 67
+    startLine: 68
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -377,7 +379,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerModeFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 75
+    startLine: 76
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -416,7 +418,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TrafficVerbosityFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 83
+    startLine: 84
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -455,7 +457,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogLevelsFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 91
+    startLine: 92
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -494,7 +496,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientHandlerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 98
+    startLine: 99
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -533,7 +535,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: RefitSettingsFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 102
+    startLine: 103
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -572,7 +574,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ConnectivityHandlerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 109
+    startLine: 110
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -611,7 +613,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: CacheHandlerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 112
+    startLine: 113
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -650,7 +652,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: MappingHandlerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 115
+    startLine: 116
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -689,7 +691,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientBuilder
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 118
+    startLine: 119
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -728,7 +730,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HeadersFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 122
+    startLine: 123
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -749,6 +751,45 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
+- uid: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.TimeoutFactory
+  commentId: P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.TimeoutFactory
+  id: TimeoutFactory
+  parent: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions
+  langs:
+  - csharp
+  - vb
+  name: TimeoutFactory
+  nameWithType: ApizrExtendedCommonOptions.TimeoutFactory
+  fullName: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.TimeoutFactory
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: TimeoutFactory
+    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
+    startLine: 136
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Common
+  summary: "\nTimeout factory\n"
+  example: []
+  syntax:
+    content: public Func<IServiceProvider, TimeSpan> TimeoutFactory { get; set; }
+    parameters: []
+    return:
+      type: System.Func{System.IServiceProvider,System.TimeSpan}
+    content.vb: Public Property TimeoutFactory As Func(Of IServiceProvider, TimeSpan)
+  overload: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.TimeoutFactory*
+  implements:
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
 - uid: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.DelegatingHandlersExtendedFactories
   commentId: P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.DelegatingHandlersExtendedFactories
   id: DelegatingHandlersExtendedFactories
@@ -767,7 +808,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: DelegatingHandlersExtendedFactories
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 134
+    startLine: 143
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -806,7 +847,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: CrudEntities
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 137
+    startLine: 146
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -845,7 +886,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WebApis
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 140
+    startLine: 149
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -884,7 +925,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ObjectMappings
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 143
+    startLine: 152
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -923,7 +964,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: PostRegistries
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 146
+    startLine: 155
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -962,7 +1003,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: PostRegistrationActions
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs
-    startLine: 149
+    startLine: 158
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1140,6 +1181,12 @@ references:
   name: Headers
   nameWithType: ApizrGlobalSharedOptionsBase.Headers
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  name: Timeout
+  nameWithType: ApizrGlobalSharedOptionsBase.Timeout
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -2437,6 +2484,77 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.TimeoutFactory*
+  commentId: Overload:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.TimeoutFactory
+  name: TimeoutFactory
+  nameWithType: ApizrExtendedCommonOptions.TimeoutFactory
+  fullName: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.TimeoutFactory
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory
+  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  name: TimeoutFactory
+  nameWithType: IApizrExtendedSharedOptions.TimeoutFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory
+- uid: System.Func{System.IServiceProvider,System.TimeSpan}
+  commentId: T:System.Func{System.IServiceProvider,System.TimeSpan}
+  parent: System
+  definition: System.Func`2
+  name: Func<IServiceProvider, TimeSpan>
+  nameWithType: Func<IServiceProvider, TimeSpan>
+  fullName: System.Func<System.IServiceProvider, System.TimeSpan>
+  nameWithType.vb: Func(Of IServiceProvider, TimeSpan)
+  fullName.vb: System.Func(Of System.IServiceProvider, System.TimeSpan)
+  name.vb: Func(Of IServiceProvider, TimeSpan)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )

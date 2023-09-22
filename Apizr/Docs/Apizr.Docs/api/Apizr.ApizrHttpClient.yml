@@ -5,9 +5,7 @@ items:
   id: ApizrHttpClient
   parent: Apizr
   children:
-  - Apizr.ApizrHttpClient.#ctor
-  - Apizr.ApizrHttpClient.#ctor(System.Net.Http.HttpMessageHandler)
-  - Apizr.ApizrHttpClient.#ctor(System.Net.Http.HttpMessageHandler,System.Boolean)
+  - Apizr.ApizrHttpClient.#ctor(System.Net.Http.HttpMessageHandler,System.Boolean,Apizr.Configuring.Manager.IApizrManagerOptionsBase)
   - Apizr.ApizrHttpClient.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
   langs:
   - csharp
@@ -23,7 +21,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrHttpClient
     path: ../../Src/Apizr/ApizrHttpClient.cs
-    startLine: 7
+    startLine: 9
   assemblies:
   - Apizr
   namespace: Apizr
@@ -89,46 +87,16 @@ items:
   modifiers.vb:
   - Public
   - Class
-- uid: Apizr.ApizrHttpClient.#ctor
-  commentId: M:Apizr.ApizrHttpClient.#ctor
-  id: '#ctor'
+- uid: Apizr.ApizrHttpClient.#ctor(System.Net.Http.HttpMessageHandler,System.Boolean,Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  commentId: M:Apizr.ApizrHttpClient.#ctor(System.Net.Http.HttpMessageHandler,System.Boolean,Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  id: '#ctor(System.Net.Http.HttpMessageHandler,System.Boolean,Apizr.Configuring.Manager.IApizrManagerOptionsBase)'
   parent: Apizr.ApizrHttpClient
   langs:
   - csharp
   - vb
-  name: ApizrHttpClient()
-  nameWithType: ApizrHttpClient.ApizrHttpClient()
-  fullName: Apizr.ApizrHttpClient.ApizrHttpClient()
-  type: Constructor
-  source:
-    remote:
-      path: Apizr/Src/Apizr/ApizrHttpClient.cs
-      branch: dev
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: .ctor
-    path: ../../Src/Apizr/ApizrHttpClient.cs
-    startLine: 9
-  assemblies:
-  - Apizr
-  namespace: Apizr
-  syntax:
-    content: public ApizrHttpClient()
-    content.vb: Public Sub New
-  overload: Apizr.ApizrHttpClient.#ctor*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: Apizr.ApizrHttpClient.#ctor(System.Net.Http.HttpMessageHandler)
-  commentId: M:Apizr.ApizrHttpClient.#ctor(System.Net.Http.HttpMessageHandler)
-  id: '#ctor(System.Net.Http.HttpMessageHandler)'
-  parent: Apizr.ApizrHttpClient
-  langs:
-  - csharp
-  - vb
-  name: ApizrHttpClient(HttpMessageHandler)
-  nameWithType: ApizrHttpClient.ApizrHttpClient(HttpMessageHandler)
-  fullName: Apizr.ApizrHttpClient.ApizrHttpClient(System.Net.Http.HttpMessageHandler)
+  name: ApizrHttpClient(HttpMessageHandler, Boolean, IApizrManagerOptionsBase)
+  nameWithType: ApizrHttpClient.ApizrHttpClient(HttpMessageHandler, Boolean, IApizrManagerOptionsBase)
+  fullName: Apizr.ApizrHttpClient.ApizrHttpClient(System.Net.Http.HttpMessageHandler, System.Boolean, Apizr.Configuring.Manager.IApizrManagerOptionsBase)
   type: Constructor
   source:
     remote:
@@ -142,46 +110,15 @@ items:
   - Apizr
   namespace: Apizr
   syntax:
-    content: public ApizrHttpClient(HttpMessageHandler handler)
-    parameters:
-    - id: handler
-      type: System.Net.Http.HttpMessageHandler
-    content.vb: Public Sub New(handler As HttpMessageHandler)
-  overload: Apizr.ApizrHttpClient.#ctor*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: Apizr.ApizrHttpClient.#ctor(System.Net.Http.HttpMessageHandler,System.Boolean)
-  commentId: M:Apizr.ApizrHttpClient.#ctor(System.Net.Http.HttpMessageHandler,System.Boolean)
-  id: '#ctor(System.Net.Http.HttpMessageHandler,System.Boolean)'
-  parent: Apizr.ApizrHttpClient
-  langs:
-  - csharp
-  - vb
-  name: ApizrHttpClient(HttpMessageHandler, Boolean)
-  nameWithType: ApizrHttpClient.ApizrHttpClient(HttpMessageHandler, Boolean)
-  fullName: Apizr.ApizrHttpClient.ApizrHttpClient(System.Net.Http.HttpMessageHandler, System.Boolean)
-  type: Constructor
-  source:
-    remote:
-      path: Apizr/Src/Apizr/ApizrHttpClient.cs
-      branch: dev
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: .ctor
-    path: ../../Src/Apizr/ApizrHttpClient.cs
-    startLine: 18
-  assemblies:
-  - Apizr
-  namespace: Apizr
-  syntax:
-    content: public ApizrHttpClient(HttpMessageHandler handler, bool disposeHandler)
+    content: public ApizrHttpClient(HttpMessageHandler handler, bool disposeHandler, IApizrManagerOptionsBase apizrOptions)
     parameters:
     - id: handler
       type: System.Net.Http.HttpMessageHandler
     - id: disposeHandler
       type: System.Boolean
-    content.vb: Public Sub New(handler As HttpMessageHandler, disposeHandler As Boolean)
+    - id: apizrOptions
+      type: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    content.vb: Public Sub New(handler As HttpMessageHandler, disposeHandler As Boolean, apizrOptions As IApizrManagerOptionsBase)
   overload: Apizr.ApizrHttpClient.#ctor*
   modifiers.csharp:
   - public
@@ -205,12 +142,12 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendAsync
     path: ../../Src/Apizr/ApizrHttpClient.cs
-    startLine: 22
+    startLine: 19
   assemblies:
   - Apizr
   namespace: Apizr
   syntax:
-    content: public override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    content: public override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     parameters:
     - id: request
       type: System.Net.Http.HttpRequestMessage
@@ -224,6 +161,7 @@ items:
   modifiers.csharp:
   - public
   - override
+  - async
   modifiers.vb:
   - Public
   - Overrides
@@ -2291,6 +2229,17 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
+- uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  commentId: T:Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  parent: Apizr.Configuring.Manager
+  name: IApizrManagerOptionsBase
+  nameWithType: IApizrManagerOptionsBase
+  fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+- uid: Apizr.Configuring.Manager
+  commentId: N:Apizr.Configuring.Manager
+  name: Apizr.Configuring.Manager
+  nameWithType: Apizr.Configuring.Manager
+  fullName: Apizr.Configuring.Manager
 - uid: System.Net.Http.HttpClient.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
   commentId: M:System.Net.Http.HttpClient.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
   parent: System.Net.Http.HttpClient

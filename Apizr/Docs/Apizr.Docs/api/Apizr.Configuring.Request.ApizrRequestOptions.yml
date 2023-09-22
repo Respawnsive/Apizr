@@ -5,7 +5,7 @@ items:
   id: ApizrRequestOptions
   parent: Apizr.Configuring.Request
   children:
-  - Apizr.Configuring.Request.ApizrRequestOptions.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])
+  - Apizr.Configuring.Request.ApizrRequestOptions.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.LogLevel[])
   - Apizr.Configuring.Request.ApizrRequestOptions.CancellationToken
   - Apizr.Configuring.Request.ApizrRequestOptions.ClearCache
   langs:
@@ -51,6 +51,7 @@ items:
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -64,16 +65,16 @@ items:
   modifiers.vb:
   - Public
   - Class
-- uid: Apizr.Configuring.Request.ApizrRequestOptions.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])
-  commentId: M:Apizr.Configuring.Request.ApizrRequestOptions.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])
-  id: '#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])'
+- uid: Apizr.Configuring.Request.ApizrRequestOptions.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.LogLevel[])
+  commentId: M:Apizr.Configuring.Request.ApizrRequestOptions.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.LogLevel[])
+  id: '#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.LogLevel[])'
   parent: Apizr.Configuring.Request.ApizrRequestOptions
   langs:
   - csharp
   - vb
-  name: ApizrRequestOptions(IApizrGlobalSharedRegistrationOptionsBase, IDictionary<String, Object>, Nullable<HttpTracerMode>, Nullable<HttpMessageParts>, LogLevel[])
-  nameWithType: ApizrRequestOptions.ApizrRequestOptions(IApizrGlobalSharedRegistrationOptionsBase, IDictionary<String, Object>, Nullable<HttpTracerMode>, Nullable<HttpMessageParts>, LogLevel[])
-  fullName: Apizr.Configuring.Request.ApizrRequestOptions.ApizrRequestOptions(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase, System.Collections.Generic.IDictionary<System.String, System.Object>, System.Nullable<Apizr.Logging.HttpTracerMode>, System.Nullable<Apizr.Logging.HttpMessageParts>, Microsoft.Extensions.Logging.LogLevel[])
+  name: ApizrRequestOptions(IApizrGlobalSharedRegistrationOptionsBase, IDictionary<String, Object>, Nullable<HttpTracerMode>, Nullable<HttpMessageParts>, Nullable<TimeSpan>, LogLevel[])
+  nameWithType: ApizrRequestOptions.ApizrRequestOptions(IApizrGlobalSharedRegistrationOptionsBase, IDictionary<String, Object>, Nullable<HttpTracerMode>, Nullable<HttpMessageParts>, Nullable<TimeSpan>, LogLevel[])
+  fullName: Apizr.Configuring.Request.ApizrRequestOptions.ApizrRequestOptions(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase, System.Collections.Generic.IDictionary<System.String, System.Object>, System.Nullable<Apizr.Logging.HttpTracerMode>, System.Nullable<Apizr.Logging.HttpMessageParts>, System.Nullable<System.TimeSpan>, Microsoft.Extensions.Logging.LogLevel[])
   type: Constructor
   source:
     remote:
@@ -87,7 +88,7 @@ items:
   - Apizr
   namespace: Apizr.Configuring.Request
   syntax:
-    content: public ApizrRequestOptions(IApizrGlobalSharedRegistrationOptionsBase sharedOptions, IDictionary<string, object> handlersParameters, HttpTracerMode? httpTracerMode, HttpMessageParts? trafficVerbosity, params LogLevel[] logLevels)
+    content: public ApizrRequestOptions(IApizrGlobalSharedRegistrationOptionsBase sharedOptions, IDictionary<string, object> handlersParameters, HttpTracerMode? httpTracerMode, HttpMessageParts? trafficVerbosity, TimeSpan? timeout, params LogLevel[] logLevels)
     parameters:
     - id: sharedOptions
       type: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
@@ -97,17 +98,19 @@ items:
       type: System.Nullable{Apizr.Logging.HttpTracerMode}
     - id: trafficVerbosity
       type: System.Nullable{Apizr.Logging.HttpMessageParts}
+    - id: timeout
+      type: System.Nullable{System.TimeSpan}
     - id: logLevels
       type: Microsoft.Extensions.Logging.LogLevel[]
-    content.vb: Public Sub New(sharedOptions As IApizrGlobalSharedRegistrationOptionsBase, handlersParameters As IDictionary(Of String, Object), httpTracerMode As HttpTracerMode?, trafficVerbosity As HttpMessageParts?, ParamArray logLevels As LogLevel())
+    content.vb: Public Sub New(sharedOptions As IApizrGlobalSharedRegistrationOptionsBase, handlersParameters As IDictionary(Of String, Object), httpTracerMode As HttpTracerMode?, trafficVerbosity As HttpMessageParts?, timeout As TimeSpan?, ParamArray logLevels As LogLevel())
   overload: Apizr.Configuring.Request.ApizrRequestOptions.#ctor*
-  nameWithType.vb: ApizrRequestOptions.ApizrRequestOptions(IApizrGlobalSharedRegistrationOptionsBase, IDictionary(Of String, Object), Nullable(Of HttpTracerMode), Nullable(Of HttpMessageParts), LogLevel())
+  nameWithType.vb: ApizrRequestOptions.ApizrRequestOptions(IApizrGlobalSharedRegistrationOptionsBase, IDictionary(Of String, Object), Nullable(Of HttpTracerMode), Nullable(Of HttpMessageParts), Nullable(Of TimeSpan), LogLevel())
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Apizr.Configuring.Request.ApizrRequestOptions.ApizrRequestOptions(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase, System.Collections.Generic.IDictionary(Of System.String, System.Object), System.Nullable(Of Apizr.Logging.HttpTracerMode), System.Nullable(Of Apizr.Logging.HttpMessageParts), Microsoft.Extensions.Logging.LogLevel())
-  name.vb: ApizrRequestOptions(IApizrGlobalSharedRegistrationOptionsBase, IDictionary(Of String, Object), Nullable(Of HttpTracerMode), Nullable(Of HttpMessageParts), LogLevel())
+  fullName.vb: Apizr.Configuring.Request.ApizrRequestOptions.ApizrRequestOptions(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase, System.Collections.Generic.IDictionary(Of System.String, System.Object), System.Nullable(Of Apizr.Logging.HttpTracerMode), System.Nullable(Of Apizr.Logging.HttpMessageParts), System.Nullable(Of System.TimeSpan), Microsoft.Extensions.Logging.LogLevel())
+  name.vb: ApizrRequestOptions(IApizrGlobalSharedRegistrationOptionsBase, IDictionary(Of String, Object), Nullable(Of HttpTracerMode), Nullable(Of HttpMessageParts), Nullable(Of TimeSpan), LogLevel())
 - uid: Apizr.Configuring.Request.ApizrRequestOptions.CancellationToken
   commentId: P:Apizr.Configuring.Request.ApizrRequestOptions.CancellationToken
   id: CancellationToken
@@ -126,7 +129,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: CancellationToken
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptions.cs
-    startLine: 26
+    startLine: 27
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -165,7 +168,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ClearCache
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptions.cs
-    startLine: 29
+    startLine: 30
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -277,6 +280,12 @@ references:
   name: Headers
   nameWithType: ApizrGlobalSharedOptionsBase.Headers
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  name: Timeout
+  nameWithType: ApizrGlobalSharedOptionsBase.Timeout
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -719,6 +728,50 @@ references:
     name: HttpMessageParts
     nameWithType: HttpMessageParts
     fullName: Apizr.Logging.HttpMessageParts
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Nullable{System.TimeSpan}
+  commentId: T:System.Nullable{System.TimeSpan}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<TimeSpan>
+  nameWithType: Nullable<TimeSpan>
+  fullName: System.Nullable<System.TimeSpan>
+  nameWithType.vb: Nullable(Of TimeSpan)
+  fullName.vb: System.Nullable(Of System.TimeSpan)
+  name.vb: Nullable(Of TimeSpan)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )

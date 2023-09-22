@@ -11,6 +11,7 @@ items:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
   langs:
   - csharp
@@ -282,6 +283,41 @@ items:
       type: System.Collections.Generic.IList{System.String}
     content.vb: ReadOnly Property Headers As IList(Of String)
   overload: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers*
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
+  id: Timeout
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  langs:
+  - csharp
+  - vb
+  name: Timeout
+  nameWithType: IApizrGlobalSharedOptionsBase.Timeout
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: Timeout
+    path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBase.cs
+    startLine: 51
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  summary: "\nRequest timeout\n"
+  example: []
+  syntax:
+    content: TimeSpan? Timeout { get; }
+    parameters: []
+    return:
+      type: System.Nullable{System.TimeSpan}
+    content.vb: ReadOnly Property Timeout As TimeSpan?
+  overload: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout*
   modifiers.csharp:
   - get
   modifiers.vb:
@@ -654,6 +690,94 @@ references:
     name: IList
     nameWithType: IList
     fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
+  name: Timeout
+  nameWithType: IApizrGlobalSharedOptionsBase.Timeout
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
+- uid: System.Nullable{System.TimeSpan}
+  commentId: T:System.Nullable{System.TimeSpan}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<TimeSpan>
+  nameWithType: Nullable<TimeSpan>
+  fullName: System.Nullable<System.TimeSpan>
+  nameWithType.vb: Nullable(Of TimeSpan)
+  fullName.vb: System.Nullable(Of System.TimeSpan)
+  name.vb: Nullable(Of TimeSpan)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '

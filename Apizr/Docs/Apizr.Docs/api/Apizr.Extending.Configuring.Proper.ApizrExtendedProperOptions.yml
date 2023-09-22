@@ -5,7 +5,7 @@ items:
   id: ApizrExtendedProperOptions
   parent: Apizr.Extending.Configuring.Proper
   children:
-  - Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.#ctor(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions,System.Type,System.Type,System.String[],System.String[],System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])
+  - Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.#ctor(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions,System.Type,System.Type,System.String[],System.String[],System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.LogLevel[])
   - Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.ApizrManagerType
   - Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BaseAddressFactory
   - Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BasePathFactory
@@ -17,6 +17,7 @@ items:
   - Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.HttpTracerModeFactory
   - Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.LoggerFactory
   - Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.LogLevelsFactory
+  - Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.TimeoutFactory
   - Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.TrafficVerbosityFactory
   langs:
   - csharp
@@ -74,6 +75,7 @@ items:
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -87,16 +89,16 @@ items:
   modifiers.vb:
   - Public
   - Class
-- uid: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.#ctor(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions,System.Type,System.Type,System.String[],System.String[],System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])
-  commentId: M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.#ctor(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions,System.Type,System.Type,System.String[],System.String[],System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])
-  id: '#ctor(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions,System.Type,System.Type,System.String[],System.String[],System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])'
+- uid: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.#ctor(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions,System.Type,System.Type,System.String[],System.String[],System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.LogLevel[])
+  commentId: M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.#ctor(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions,System.Type,System.Type,System.String[],System.String[],System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.LogLevel[])
+  id: '#ctor(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions,System.Type,System.Type,System.String[],System.String[],System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.LogLevel[])'
   parent: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions
   langs:
   - csharp
   - vb
-  name: ApizrExtendedProperOptions(IApizrExtendedSharedOptions, Type, Type, String[], String[], String, String, IDictionary<String, Object>, Nullable<HttpTracerMode>, Nullable<HttpMessageParts>, LogLevel[])
-  nameWithType: ApizrExtendedProperOptions.ApizrExtendedProperOptions(IApizrExtendedSharedOptions, Type, Type, String[], String[], String, String, IDictionary<String, Object>, Nullable<HttpTracerMode>, Nullable<HttpMessageParts>, LogLevel[])
-  fullName: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.ApizrExtendedProperOptions(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions, System.Type, System.Type, System.String[], System.String[], System.String, System.String, System.Collections.Generic.IDictionary<System.String, System.Object>, System.Nullable<Apizr.Logging.HttpTracerMode>, System.Nullable<Apizr.Logging.HttpMessageParts>, Microsoft.Extensions.Logging.LogLevel[])
+  name: ApizrExtendedProperOptions(IApizrExtendedSharedOptions, Type, Type, String[], String[], String, String, IDictionary<String, Object>, Nullable<HttpTracerMode>, Nullable<HttpMessageParts>, Nullable<TimeSpan>, LogLevel[])
+  nameWithType: ApizrExtendedProperOptions.ApizrExtendedProperOptions(IApizrExtendedSharedOptions, Type, Type, String[], String[], String, String, IDictionary<String, Object>, Nullable<HttpTracerMode>, Nullable<HttpMessageParts>, Nullable<TimeSpan>, LogLevel[])
+  fullName: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.ApizrExtendedProperOptions(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions, System.Type, System.Type, System.String[], System.String[], System.String, System.String, System.Collections.Generic.IDictionary<System.String, System.Object>, System.Nullable<Apizr.Logging.HttpTracerMode>, System.Nullable<Apizr.Logging.HttpMessageParts>, System.Nullable<System.TimeSpan>, Microsoft.Extensions.Logging.LogLevel[])
   type: Constructor
   source:
     remote:
@@ -110,7 +112,7 @@ items:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
   syntax:
-    content: public ApizrExtendedProperOptions(IApizrExtendedSharedOptions sharedOptions, Type webApiType, Type apizrManagerType, string[] assemblyPolicyRegistryKeys, string[] webApiPolicyRegistryKeys, string baseAddress, string basePath, IDictionary<string, object> handlersParameters, HttpTracerMode? httpTracerMode, HttpMessageParts? trafficVerbosity, params LogLevel[] logLevels)
+    content: public ApizrExtendedProperOptions(IApizrExtendedSharedOptions sharedOptions, Type webApiType, Type apizrManagerType, string[] assemblyPolicyRegistryKeys, string[] webApiPolicyRegistryKeys, string baseAddress, string basePath, IDictionary<string, object> handlersParameters, HttpTracerMode? httpTracerMode, HttpMessageParts? trafficVerbosity, TimeSpan? timeout, params LogLevel[] logLevels)
     parameters:
     - id: sharedOptions
       type: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
@@ -132,17 +134,19 @@ items:
       type: System.Nullable{Apizr.Logging.HttpTracerMode}
     - id: trafficVerbosity
       type: System.Nullable{Apizr.Logging.HttpMessageParts}
+    - id: timeout
+      type: System.Nullable{System.TimeSpan}
     - id: logLevels
       type: Microsoft.Extensions.Logging.LogLevel[]
-    content.vb: Public Sub New(sharedOptions As IApizrExtendedSharedOptions, webApiType As Type, apizrManagerType As Type, assemblyPolicyRegistryKeys As String(), webApiPolicyRegistryKeys As String(), baseAddress As String, basePath As String, handlersParameters As IDictionary(Of String, Object), httpTracerMode As HttpTracerMode?, trafficVerbosity As HttpMessageParts?, ParamArray logLevels As LogLevel())
+    content.vb: Public Sub New(sharedOptions As IApizrExtendedSharedOptions, webApiType As Type, apizrManagerType As Type, assemblyPolicyRegistryKeys As String(), webApiPolicyRegistryKeys As String(), baseAddress As String, basePath As String, handlersParameters As IDictionary(Of String, Object), httpTracerMode As HttpTracerMode?, trafficVerbosity As HttpMessageParts?, timeout As TimeSpan?, ParamArray logLevels As LogLevel())
   overload: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.#ctor*
-  nameWithType.vb: ApizrExtendedProperOptions.ApizrExtendedProperOptions(IApizrExtendedSharedOptions, Type, Type, String(), String(), String, String, IDictionary(Of String, Object), Nullable(Of HttpTracerMode), Nullable(Of HttpMessageParts), LogLevel())
+  nameWithType.vb: ApizrExtendedProperOptions.ApizrExtendedProperOptions(IApizrExtendedSharedOptions, Type, Type, String(), String(), String, String, IDictionary(Of String, Object), Nullable(Of HttpTracerMode), Nullable(Of HttpMessageParts), Nullable(Of TimeSpan), LogLevel())
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.ApizrExtendedProperOptions(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions, System.Type, System.Type, System.String(), System.String(), System.String, System.String, System.Collections.Generic.IDictionary(Of System.String, System.Object), System.Nullable(Of Apizr.Logging.HttpTracerMode), System.Nullable(Of Apizr.Logging.HttpMessageParts), Microsoft.Extensions.Logging.LogLevel())
-  name.vb: ApizrExtendedProperOptions(IApizrExtendedSharedOptions, Type, Type, String(), String(), String, String, IDictionary(Of String, Object), Nullable(Of HttpTracerMode), Nullable(Of HttpMessageParts), LogLevel())
+  fullName.vb: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.ApizrExtendedProperOptions(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions, System.Type, System.Type, System.String(), System.String(), System.String, System.String, System.Collections.Generic.IDictionary(Of System.String, System.Object), System.Nullable(Of Apizr.Logging.HttpTracerMode), System.Nullable(Of Apizr.Logging.HttpMessageParts), System.Nullable(Of System.TimeSpan), Microsoft.Extensions.Logging.LogLevel())
+  name.vb: ApizrExtendedProperOptions(IApizrExtendedSharedOptions, Type, Type, String(), String(), String, String, IDictionary(Of String, Object), Nullable(Of HttpTracerMode), Nullable(Of HttpMessageParts), Nullable(Of TimeSpan), LogLevel())
 - uid: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.ApizrManagerType
   commentId: P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.ApizrManagerType
   id: ApizrManagerType
@@ -161,7 +165,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrManagerType
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/ApizrExtendedProperOptions.cs
-    startLine: 46
+    startLine: 49
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -200,7 +204,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseUriFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/ApizrExtendedProperOptions.cs
-    startLine: 50
+    startLine: 53
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -239,7 +243,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseAddressFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/ApizrExtendedProperOptions.cs
-    startLine: 58
+    startLine: 61
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -278,7 +282,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BasePathFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/ApizrExtendedProperOptions.cs
-    startLine: 66
+    startLine: 69
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -317,7 +321,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerModeFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/ApizrExtendedProperOptions.cs
-    startLine: 74
+    startLine: 77
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -356,7 +360,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TrafficVerbosityFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/ApizrExtendedProperOptions.cs
-    startLine: 82
+    startLine: 85
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -395,7 +399,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogLevelsFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/ApizrExtendedProperOptions.cs
-    startLine: 90
+    startLine: 93
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -434,7 +438,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LoggerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/ApizrExtendedProperOptions.cs
-    startLine: 98
+    startLine: 101
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -475,7 +479,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientHandlerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/ApizrExtendedProperOptions.cs
-    startLine: 105
+    startLine: 108
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -514,7 +518,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientBuilder
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/ApizrExtendedProperOptions.cs
-    startLine: 108
+    startLine: 111
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -553,7 +557,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HeadersFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/ApizrExtendedProperOptions.cs
-    startLine: 112
+    startLine: 115
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -574,6 +578,45 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
+- uid: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.TimeoutFactory
+  commentId: P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.TimeoutFactory
+  id: TimeoutFactory
+  parent: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions
+  langs:
+  - csharp
+  - vb
+  name: TimeoutFactory
+  nameWithType: ApizrExtendedProperOptions.TimeoutFactory
+  fullName: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.TimeoutFactory
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/ApizrExtendedProperOptions.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: TimeoutFactory
+    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/ApizrExtendedProperOptions.cs
+    startLine: 128
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Proper
+  summary: "\nTimeout factory\n"
+  example: []
+  syntax:
+    content: public Func<IServiceProvider, TimeSpan> TimeoutFactory { get; set; }
+    parameters: []
+    return:
+      type: System.Func{System.IServiceProvider,System.TimeSpan}
+    content.vb: Public Property TimeoutFactory As Func(Of IServiceProvider, TimeSpan)
+  overload: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.TimeoutFactory*
+  implements:
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
 - uid: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.DelegatingHandlersExtendedFactories
   commentId: P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.DelegatingHandlersExtendedFactories
   id: DelegatingHandlersExtendedFactories
@@ -592,7 +635,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: DelegatingHandlersExtendedFactories
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/ApizrExtendedProperOptions.cs
-    startLine: 124
+    startLine: 135
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -782,6 +825,12 @@ references:
   name: Headers
   nameWithType: ApizrGlobalSharedOptionsBase.Headers
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  name: Timeout
+  nameWithType: ApizrGlobalSharedOptionsBase.Timeout
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -1268,6 +1317,50 @@ references:
     name: HttpMessageParts
     nameWithType: HttpMessageParts
     fullName: Apizr.Logging.HttpMessageParts
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Nullable{System.TimeSpan}
+  commentId: T:System.Nullable{System.TimeSpan}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<TimeSpan>
+  nameWithType: Nullable<TimeSpan>
+  fullName: System.Nullable<System.TimeSpan>
+  nameWithType.vb: Nullable(Of TimeSpan)
+  fullName.vb: System.Nullable(Of System.TimeSpan)
+  name.vb: Nullable(Of TimeSpan)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -2228,6 +2321,77 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.TimeoutFactory*
+  commentId: Overload:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.TimeoutFactory
+  name: TimeoutFactory
+  nameWithType: ApizrExtendedProperOptions.TimeoutFactory
+  fullName: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.TimeoutFactory
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory
+  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  name: TimeoutFactory
+  nameWithType: IApizrExtendedSharedOptions.TimeoutFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory
+- uid: System.Func{System.IServiceProvider,System.TimeSpan}
+  commentId: T:System.Func{System.IServiceProvider,System.TimeSpan}
+  parent: System
+  definition: System.Func`2
+  name: Func<IServiceProvider, TimeSpan>
+  nameWithType: Func<IServiceProvider, TimeSpan>
+  fullName: System.Func<System.IServiceProvider, System.TimeSpan>
+  nameWithType.vb: Func(Of IServiceProvider, TimeSpan)
+  fullName.vb: System.Func(Of System.IServiceProvider, System.TimeSpan)
+  name.vb: Func(Of IServiceProvider, TimeSpan)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )

@@ -15,6 +15,7 @@ items:
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientHandlerFactory
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpTracerModeFactory
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.LogLevelsFactory
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TrafficVerbosityFactory
   langs:
   - csharp
@@ -30,7 +31,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrSharedRegistrationOptions
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptions.cs
-    startLine: 13
+    startLine: 14
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -54,6 +55,7 @@ items:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
   modifiers.csharp:
   - public
   - interface
@@ -78,7 +80,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseUriFactory
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptions.cs
-    startLine: 18
+    startLine: 19
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -113,7 +115,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseAddressFactory
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptions.cs
-    startLine: 23
+    startLine: 24
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -148,7 +150,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BasePathFactory
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptions.cs
-    startLine: 28
+    startLine: 29
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -183,7 +185,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerModeFactory
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptions.cs
-    startLine: 33
+    startLine: 34
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -218,7 +220,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TrafficVerbosityFactory
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptions.cs
-    startLine: 38
+    startLine: 39
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -253,7 +255,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogLevelsFactory
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptions.cs
-    startLine: 43
+    startLine: 44
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -288,7 +290,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientHandlerFactory
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptions.cs
-    startLine: 48
+    startLine: 49
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -323,7 +325,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientFactory
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptions.cs
-    startLine: 53
+    startLine: 54
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -358,7 +360,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientConfigurationBuilder
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptions.cs
-    startLine: 58
+    startLine: 59
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -393,7 +395,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: DelegatingHandlersFactories
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptions.cs
-    startLine: 63
+    startLine: 64
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -428,7 +430,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HeadersFactory
     path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptions.cs
-    startLine: 68
+    startLine: 69
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -441,6 +443,41 @@ items:
       type: System.Func{System.Collections.Generic.IList{System.String}}
     content.vb: ReadOnly Property HeadersFactory As Func(Of IList(Of String))
   overload: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory*
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
+  id: TimeoutFactory
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  langs:
+  - csharp
+  - vb
+  name: TimeoutFactory
+  nameWithType: IApizrSharedRegistrationOptions.TimeoutFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptions.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: TimeoutFactory
+    path: ../../Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptions.cs
+    startLine: 74
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  summary: "\nRequest timeout factory\n"
+  example: []
+  syntax:
+    content: Func<TimeSpan> TimeoutFactory { get; }
+    parameters: []
+    return:
+      type: System.Func{System.TimeSpan}
+    content.vb: ReadOnly Property TimeoutFactory As Func(Of TimeSpan)
+  overload: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory*
   modifiers.csharp:
   - get
   modifiers.vb:
@@ -523,6 +560,12 @@ references:
   name: Headers
   nameWithType: IApizrGlobalSharedOptionsBase.Headers
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  name: Timeout
+  nameWithType: IApizrGlobalSharedOptionsBase.Timeout
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   parent: Apizr.Configuring.Shared
@@ -1355,6 +1398,55 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
+  name: TimeoutFactory
+  nameWithType: IApizrSharedRegistrationOptions.TimeoutFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
+- uid: System.Func{System.TimeSpan}
+  commentId: T:System.Func{System.TimeSpan}
+  parent: System
+  definition: System.Func`1
+  name: Func<TimeSpan>
+  nameWithType: Func<TimeSpan>
+  fullName: System.Func<System.TimeSpan>
+  nameWithType.vb: Func(Of TimeSpan)
+  fullName.vb: System.Func(Of System.TimeSpan)
+  name.vb: Func(Of TimeSpan)
+  spec.csharp:
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )

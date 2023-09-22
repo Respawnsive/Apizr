@@ -22,6 +22,7 @@ items:
   - Apizr.Configuring.Common.ApizrCommonOptions.MappingHandlerFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.PolicyRegistryFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.RefitSettingsFactory
+  - Apizr.Configuring.Common.ApizrCommonOptions.TimeoutFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.TrafficVerbosityFactory
   langs:
   - csharp
@@ -75,6 +76,7 @@ items:
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -666,6 +668,45 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
+- uid: Apizr.Configuring.Common.ApizrCommonOptions.TimeoutFactory
+  commentId: P:Apizr.Configuring.Common.ApizrCommonOptions.TimeoutFactory
+  id: TimeoutFactory
+  parent: Apizr.Configuring.Common.ApizrCommonOptions
+  langs:
+  - csharp
+  - vb
+  name: TimeoutFactory
+  nameWithType: ApizrCommonOptions.TimeoutFactory
+  fullName: Apizr.Configuring.Common.ApizrCommonOptions.TimeoutFactory
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: TimeoutFactory
+    path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
+    startLine: 113
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Common
+  summary: "\nRequest timeout factory\n"
+  example: []
+  syntax:
+    content: public Func<TimeSpan> TimeoutFactory { get; set; }
+    parameters: []
+    return:
+      type: System.Func{System.TimeSpan}
+    content.vb: Public Property TimeoutFactory As Func(Of TimeSpan)
+  overload: Apizr.Configuring.Common.ApizrCommonOptions.TimeoutFactory*
+  implements:
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
 - uid: Apizr.Configuring.Common.ApizrCommonOptions.HttpTracerModeFactory
   commentId: P:Apizr.Configuring.Common.ApizrCommonOptions.HttpTracerModeFactory
   id: HttpTracerModeFactory
@@ -684,7 +725,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerModeFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 114
+    startLine: 121
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -723,7 +764,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TrafficVerbosityFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 122
+    startLine: 129
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -762,7 +803,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogLevelsFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 130
+    startLine: 137
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -928,6 +969,12 @@ references:
   name: Headers
   nameWithType: ApizrGlobalSharedOptionsBase.Headers
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  name: Timeout
+  nameWithType: ApizrGlobalSharedOptionsBase.Timeout
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -2282,6 +2329,61 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Common.ApizrCommonOptions.TimeoutFactory*
+  commentId: Overload:Apizr.Configuring.Common.ApizrCommonOptions.TimeoutFactory
+  name: TimeoutFactory
+  nameWithType: ApizrCommonOptions.TimeoutFactory
+  fullName: Apizr.Configuring.Common.ApizrCommonOptions.TimeoutFactory
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  name: TimeoutFactory
+  nameWithType: IApizrSharedRegistrationOptions.TimeoutFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
+- uid: System.Func{System.TimeSpan}
+  commentId: T:System.Func{System.TimeSpan}
+  parent: System
+  definition: System.Func`1
+  name: Func<TimeSpan>
+  nameWithType: Func<TimeSpan>
+  fullName: System.Func<System.TimeSpan>
+  nameWithType.vb: Func(Of TimeSpan)
+  fullName.vb: System.Func(Of System.TimeSpan)
+  name.vb: Func(Of TimeSpan)
+  spec.csharp:
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )

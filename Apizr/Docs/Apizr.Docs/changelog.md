@@ -3,14 +3,19 @@
 
 ### All
 
-- [New] Now we can access to a **dedicated logger instance while inheriting from AuthenticationHadlerBase**
-- [Cancellation] Now we really can **cancel a request by providing a token trough the options**
-- [Fix] **CRUD log attributes now target Class only**
+- [New][Timeout] Now we can **set a request timeout thanks to both dedicated attributes or fluent option**
+- [New][Auth] Now we can access to a **dedicated logger instance while inheriting from AuthenticationHadlerBase**
+- [Fix][Cancellation] Now we really can **cancel a request by providing a token trough the options**
+- [Fix][Log] **CRUD's log attributes now target Class only**
 
 ### Apizr
 
 - [Breaking][HttpClient] Now we can **configure the HttpClient instead of providing one** (same as extended experience) with the brand new ConfigureHttpClient fluent option
  
+### Apizr.Extensions.Microsoft.DependencyInjection
+
+- [Fix][HttpClient] Now **HttpClientBuilder really apply composite configurations**
+
 5.2.0
 ---
 

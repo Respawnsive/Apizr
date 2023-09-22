@@ -74,12 +74,18 @@
 
 <h3 id="all">All</h3>
 <ul>
-<li>[Cancellation] Now we really can <strong><em>cancel a request by providing a token trough the options</em></strong></li>
+<li>[New][Timeout] Now we can <strong>set a request timeout thanks to both dedicated attributes or fluent option</strong></li>
+<li>[New][Auth] Now we can access to a <strong>dedicated logger instance while inheriting from AuthenticationHadlerBase</strong></li>
+<li>[Fix][Cancellation] Now we really can <strong>cancel a request by providing a token trough the options</strong></li>
+<li>[Fix][Log] <strong>CRUD&#39;s log attributes now target Class only</strong></li>
 </ul>
 <h3 id="apizr">Apizr</h3>
 <ul>
-<li>[Change] Now we can access to a <strong>dedicated logger instance while inheriting from AuthenticationHadlerBase</strong></li>
 <li>[Breaking][HttpClient] Now we can <strong>configure the HttpClient instead of providing one</strong> (same as extended experience) with the brand new ConfigureHttpClient fluent option</li>
+</ul>
+<h3 id="apizrextensionsmicrosoftdependencyinjection">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<ul>
+<li>[Fix][HttpClient] Now <strong>HttpClientBuilder really apply composite configurations</strong></li>
 </ul>
 <h2 id="520">5.2.0</h2>
 <h3 id="apizrintegrationsfiletransfer">Apizr.Integrations.FileTransfer</h3>
@@ -165,7 +171,7 @@
 <li>[Fix] [Connectivity] <strong>No more exception</strong> while using Apizr the extended way but <strong>without providing any IConnectivityHandler implementation</strong> with Fusillade priority management enabled</li>
 <li>[Improvement] [Address] Now we can <strong>set base address at both common and proper levels</strong> so we can define a base address shared by all apis, but also a specific one if needed</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-1">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[Breaking] [Naming] <strong>Extension methods renamed to match their return type</strong> so that we know what we&#39;re about to build (e.g. AddManagerFor, AddCrudManagerFor)</li>
 <li>[Breaking] [Naming] <strong>ApizrExtendedRegistry&#39;s methods renamed to match their return type</strong> so that we know what we&#39;re about to get (e.g. GetManagerFor, GetCrudManagerFor, ContainsManagerFor)</li>
@@ -197,7 +203,7 @@
 <li>[New] [Caching] Now we can ask for <strong>clearing request cache before executing</strong></li>
 <li>[New] [Exceptions] Brand new <strong>onException Action parameter to handle it globally</strong> (e.g. user dialog/toast) and let potential cached data return to caller as expected (e.g. refreshing UI)</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-1">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-2">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[New] We can now <strong>auto register crud managers for all scanned classes</strong> decorated by crud attributes</li>
 </ul>
@@ -293,7 +299,7 @@
 <li>[New] Now we can toggle Fusillade priority management activation</li>
 <li>[New] Now we can provide a base uri factory (e.g. depending on config)</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-2">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-3">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[New] Now we can toggle Fusillade priority management activation</li>
 <li>[New] Now we can provide a base uri factory (e.g. depending on DI resovled settings)</li>
@@ -306,7 +312,7 @@
 <ul>
 <li>[New] Now we can provide a custom HttpClientHandler instance</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-3">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-4">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[New] Now we can provide a custom HttpClientHandler instance</li>
 </ul>
@@ -336,7 +342,7 @@
 <li>[Fix] Now nuget package as library both reference MediatR.Extensions.Microsoft.DependencyInjection nuget package for assembly version compatibility</li>
 </ul>
 <h2 id="141">1.4.1</h2>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-4">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-5">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[Fix] Now Apizr works with DryIoc and Unity containers, returning a single UserInitiated instance, while waiting for external issues beeing fixed</li>
 </ul>
@@ -346,7 +352,7 @@
 <li>[Fix] No more <code>WithCrudMediation</code> method available but only <code>WithMediation</code></li>
 </ul>
 <h2 id="140">1.4.0</h2>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-5">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-6">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[New] We can now auto register both crud and classic api interfaces</li>
 </ul>
@@ -375,7 +381,7 @@
 <ul>
 <li>[New] We can now define mapped model entity type from the <code>CrudEntityAttribute</code> above api entities for automatic crud registration</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-6">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-7">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[New] We can now provide an IMappingHandler implementation to the options builder for auto mapping</li>
 <li>[New] We can now decorate model entities with <code>MappedCrudEntityAttribute</code> to define mapped crud settings for automatic crud registration</li>
@@ -400,7 +406,7 @@
 <li>[BreakingChange] Apizr instantiation/registration methods names standardized to Apizr.For and Apizr.CrudFor</li>
 <li>[New] Introducing ICrudApi service to manage standard CRUD api calls built-in</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-7">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-8">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[BreakingChange] Apizr instantiation/registration methods names standardized to services.AddApizrFor and services.AddApizrCrudFor</li>
 <li>[New] Enabling ICrudApi auto registration feature with CrudEntityAttribute and assembly scanning</li>
@@ -423,7 +429,7 @@
 <ul>
 <li>[New] Aibility to manage generic web apis by setting base address with the options builder</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-8">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-9">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[New] Same as Apizr</li>
 </ul>

@@ -667,9 +667,11 @@ namespace Apizr
                     {
                         var options = (IApizrExtendedManagerOptionsBase)serviceProvider.GetRequiredService(apizrOptionsRegistrationType);
 
+                        // HttpClient
                         if (httpClient.BaseAddress == null) 
                             httpClient.BaseAddress = options.BaseUri;
 
+                        // Global timeout
                         if (options.Timeout.HasValue)
                         {
                             if (options.Timeout.Value > TimeSpan.Zero)
@@ -687,6 +689,24 @@ namespace Apizr
                             }
                         }
 
+                        // Global headers
+                        if (options.Headers?.Count > 0)
+                        {
+                            foreach (var header in options.Headers)
+                            {
+                                if (string.IsNullOrWhiteSpace(header)) continue;
+
+                                var parts = header.Split(':');
+                                var headerKey = parts[0].Trim();
+                                var headerValue = parts.Length > 1 ?
+                                    string.Join(":", parts.Skip(1)).Trim() : null;
+
+                                httpClient.DefaultRequestHeaders.TryAddWithoutValidation(headerKey, headerValue);
+                                options.Logger?.Log(options.LogLevels?.Low() ?? LogLevel.Trace, "{0}: Header {1} has been set with your provided {2} value.", options.WebApiType.GetFriendlyName(), headerKey, headerValue);
+                            }
+                        }
+
+                        // Refit rest service
                         return typeof(LazyFactory<>).MakeGenericType(options.WebApiType)
                             .GetConstructor(new[] { typeof(Func<object>) })
                             ?.Invoke(new object[]
@@ -696,6 +716,7 @@ namespace Apizr
                             });
                     });
 
+            // Custom client config
             apizrOptions.HttpClientBuilder?.Invoke(builder);
 
             services.TryAddSingleton(typeof(ILazyFactory<IReadOnlyPolicyRegistry<string>>), serviceProvider =>
@@ -747,6 +768,7 @@ namespace Apizr
                 apizrOptions.LoggerFactory.Invoke(serviceProvider, webApiFriendlyName);
                 apizrOptions.HeadersFactory?.Invoke(serviceProvider);
                 apizrOptions.TimeoutFactory?.Invoke(serviceProvider);
+                apizrOptions.HeadersFactory?.Invoke(serviceProvider);
 
                 return Activator.CreateInstance(typeof(ApizrExtendedManagerOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions);
             });

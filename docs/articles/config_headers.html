@@ -107,8 +107,8 @@
 </section>
 <section id="tabpanel_oHeVXnGDhc_tabid-registering" role="tabpanel" data-tab="tabid-registering" aria-hidden="true" hidden="hidden">
 <p>Configuring the headers fluently at register time allows you to set it dynamically (e.g. based on settings).</p>
-<p>First, please add the request options parameter to your api methods: <code>[RequestOptions] IApizrRequestOptions options</code></p>
-<p>You can now set headers thanks to this option:</p>
+<p>Note that setting headers at register time actually set the headers to the HttpClient itslef, where setting it at request time it will be added on sending.</p>
+<p>You can set headers thanks to this option:</p>
 <pre><code class="lang-csharp">// direct configuration
 options =&gt; options.AddHeaders(&quot;HeaderKey1: HeaderValue1&quot;, &quot;HeaderKey2: HeaderValue2&quot;)
 

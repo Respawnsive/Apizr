@@ -214,8 +214,10 @@ namespace Apizr
             
             var webApiFactory = new Func<object>(() =>
             {
+                // HttpClient
                 var httpClient = new ApizrHttpClient(httpHandlerFactory.Invoke(), false, apizrOptions) {BaseAddress = apizrOptions.BaseUri};
                 
+                // Global timeout
                 if (apizrOptions.Timeout.HasValue)
                 {
                     if (apizrOptions.Timeout.Value > TimeSpan.Zero)
@@ -233,8 +235,27 @@ namespace Apizr
                     }
                 }
 
+                // Global headers
+                if (apizrOptions.Headers?.Count > 0)
+                {
+                    foreach (var header in apizrOptions.Headers)
+                    {
+                        if (string.IsNullOrWhiteSpace(header)) continue;
+
+                        var parts = header.Split(':');
+                        var headerKey = parts[0].Trim();
+                        var headerValue = parts.Length > 1 ?
+                            string.Join(":", parts.Skip(1)).Trim() : null;
+
+                        httpClient.DefaultRequestHeaders.TryAddWithoutValidation(headerKey, headerValue);
+                        apizrOptions.Logger?.Log(apizrOptions.LogLevels?.Low() ?? LogLevel.Trace, "{0}: Header {1} has been set with your provided {2} value.", apizrOptions.WebApiType.GetFriendlyName(), headerKey, headerValue);
+                    } 
+                }
+
+                // Custom client config
                 apizrOptions.HttpClientConfigurationBuilder.Invoke(httpClient);
 
+                // Refit rest service
                 return RestService.For<TWebApi>(httpClient, apizrOptions.RefitSettings);
             });
             var lazyWebApi = new LazyFactory<TWebApi>(webApiFactory);
@@ -268,6 +289,7 @@ namespace Apizr
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();
             builder.ApizrOptions.RefitSettingsFactory.Invoke();
             builder.ApizrOptions.TimeoutFactory?.Invoke();
+            builder.ApizrOptions.HeadersFactory?.Invoke();
 
             return builder.ApizrOptions;
         }
@@ -350,6 +372,7 @@ namespace Apizr
             builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();
             builder.ApizrOptions.TimeoutFactory?.Invoke();
+            builder.ApizrOptions.HeadersFactory?.Invoke();
 
             return builder.ApizrOptions;
         }
@@ -412,6 +435,7 @@ namespace Apizr
             builder.ApizrOptions.LoggerFactory.Invoke(builder.ApizrOptions.LoggerFactoryFactory.Invoke(), builder.ApizrOptions.WebApiType.GetFriendlyName());
             builder.ApizrOptions.HeadersFactory?.Invoke();
             builder.ApizrOptions.TimeoutFactory?.Invoke();
+            builder.ApizrOptions.HeadersFactory?.Invoke();
 
             return builder.ApizrOptions;
         }

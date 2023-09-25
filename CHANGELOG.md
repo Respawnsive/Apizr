@@ -4,6 +4,7 @@
 ### All
 
 - [New][Timeout] Now we can **set a request timeout thanks to both dedicated attributes or fluent option**
+- [New][Headers] Now we can **set global headers without passing any options request parameter** (HttpClient's DefaultRequestHeaders)
 - [New][Auth] Now we can access to a **dedicated logger instance while inheriting from AuthenticationHadlerBase**
 - [Fix][Cancellation] Now we really can **cancel a request by providing a token trough the options**
 - [Fix][Log] **CRUD's log attributes now target Class only**

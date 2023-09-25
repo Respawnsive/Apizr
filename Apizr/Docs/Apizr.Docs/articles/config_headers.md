@@ -17,9 +17,9 @@ But for now, this attribute approach won't let you:
 
 Configuring the headers fluently at register time allows you to set it dynamically (e.g. based on settings).
 
-First, please add the request options parameter to your api methods: ```[RequestOptions] IApizrRequestOptions options```
+Note that setting headers at register time actually set the headers to the HttpClient itslef, where setting it at request time it will be added on sending.
 
-You can now set headers thanks to this option:
+You can set headers thanks to this option:
 
 ```csharp
 // direct configuration

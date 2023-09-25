@@ -75,7 +75,7 @@ Configuring a timeout fluently at register time allows you to set it dynamically
 
 Note that setting a timeout at register time actually set the timeout to the HttpClient itslef, where setting it at request time it will be managed by an auto cancelling token.
 
-You can now set a timeout thanks to this option:
+You can set a timeout thanks to this option:
 
 ```csharp
 // direct configuration

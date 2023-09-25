@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
@@ -26,6 +27,8 @@ namespace Apizr.Configuring.Request
                 LogLevels = logLevels;
             if(timeout.HasValue)
                 Timeout = timeout.Value; // The request one, not the HttpClient one
+
+            Headers = new List<string>(); // The request ones, not the HttpClient ones
         }
 
         /// <inheritdoc />

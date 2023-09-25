@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Apizr.Configuring.Manager;
 using Microsoft.Extensions.Logging;
 using System.Net.Http;
@@ -21,6 +22,7 @@ namespace Apizr.Configuring.Shared
             ContextFactory = sharedOptions?.ContextFactory;
             PrimaryHandlerFactory = sharedOptions?.PrimaryHandlerFactory;
             Timeout = sharedOptions?.Timeout; // The HttpClient one, not the request one
+            Headers = sharedOptions?.Headers ?? new List<string>(); // The HttpClient ones, not the request ones
         }
 
         /// <inheritdoc />

@@ -9,6 +9,7 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.IO;
 using Apizr.Mediation.Requesting.Sending;
+using System.Net.Http;
 
 [assembly: Apizr.Preserve]
 namespace Apizr
@@ -58,7 +59,7 @@ namespace Apizr
                     if (typeof(IUploadApi).IsAssignableFrom(webApiType))
                     {
                         var requestType = typeof(UploadCommand<>).MakeGenericType(webApiType);
-                        var requestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(requestType, typeof(Unit));
+                        var requestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(requestType, typeof(HttpResponseMessage));
                         var requestHandlerImplementationType = typeof(UploadCommandHandler<>).MakeGenericType(webApiType);
 
                         services.TryAddSingleton(requestHandlerServiceType, requestHandlerImplementationType);
@@ -67,7 +68,7 @@ namespace Apizr
                         if (typeof(IUploadApi) == webApiType || typeof(ITransferApi) == webApiType)
                         {
                             var shortRequestType = typeof(UploadCommand);
-                            var shortRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortRequestType, typeof(Unit));
+                            var shortRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortRequestType, typeof(HttpResponseMessage));
                             var shortRequestHandlerImplementationType = typeof(UploadCommandHandler<>).MakeGenericType(webApiType);
 
                             services.TryAddSingleton(shortRequestHandlerServiceType, shortRequestHandlerImplementationType);

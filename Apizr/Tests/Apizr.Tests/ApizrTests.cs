@@ -618,7 +618,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Requesting_With_Both_Attribute_And_Fluent_Headers_Should_Set_Merged_Headers()
+        public async Task Sending_A_Get_Request_With_Both_Attribute_And_Fluent_Headers_Should_Set_Merged_Headers()
         {
             var watcher = new WatchingRequestHandler();
 
@@ -627,6 +627,23 @@ namespace Apizr.Tests
                 .AddDelegatingHandler(watcher));
 
             await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
+                options => options.WithHeaders("testKey3: testValue3", "testKey4: testValue4"));
+            watcher.Headers.Should().NotBeNull();
+            watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4");
+        }
+
+        [Fact]
+        public async Task Sending_A_Post_Request_With_Both_Attribute_And_Fluent_Headers_Should_Set_Merged_Headers()
+        {
+            var watcher = new WatchingRequestHandler();
+
+            var manager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options => options
+                .WithHeaders("testKey2: testValue2")
+                .AddDelegatingHandler(watcher));
+
+            var streamPart = FileHelper.GetTestFileStreamPart("medium");
+
+            await manager.ExecuteAsync((opt, api) => api.UploadAsync(streamPart, opt),
                 options => options.WithHeaders("testKey3: testValue3", "testKey4: testValue4"));
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4");

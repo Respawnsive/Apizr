@@ -2,6 +2,7 @@
 using Apizr.Helping;
 using Apizr.Policing;
 using Microsoft.Extensions.Logging;
+using Polly;
 using System;
 using System.Linq;
 using System.Net.Http;
@@ -16,12 +17,8 @@ namespace Apizr.Extending
             CancellationTokenSource cts = null;
 
             var options = request.GetApizrRequestOptions();
-            if (options != null && (!options.HandlersParameters.TryGetValue(Constants.ApizrOptionsProcessedKey,
-                    out var optionsProcessedValue) || optionsProcessedValue is false))
+            if (options != null)
             {
-                // Set options as processed yet
-                options.HandlersParameters[Constants.ApizrOptionsProcessedKey] = true;
-
                 // Get a configured logger instance
                 var context = request.GetOrBuildApizrPolicyExecutionContext();
                 if (!context.TryGetLogger(out var logger, out var logLevels, out _, out _))
@@ -30,26 +27,37 @@ namespace Apizr.Extending
                     logLevels = apizrOptions.LogLevels;
                 }
 
-                // Set optionCancellationToken out param
-                optionsCancellationToken = options.CancellationToken;
-
-                // Merge cancellation tokens
-                cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, optionsCancellationToken);
-
-                // Set a timeout if provided
-                if (options.Timeout.HasValue)
+                if (!options.HandlersParameters.TryGetValue(Constants.ApizrOptionsProcessedKey,
+                        out var optionsProcessedValue) || optionsProcessedValue is false)
                 {
-                    if (options.Timeout.Value > TimeSpan.Zero)
+                    // Set options as processed yet
+                    options.HandlersParameters[Constants.ApizrOptionsProcessedKey] = true;
+
+                    // Set optionCancellationToken out param
+                    optionsCancellationToken = options.CancellationToken;
+
+                    // Merge cancellation tokens
+                    cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, optionsCancellationToken);
+
+                    // Set a timeout if provided
+                    if (options.Timeout.HasValue)
                     {
-                        cts.CancelAfter(options.Timeout.Value);
-                        logger.Log(logLevels.Low(), "{0}: Timeout has been set with your provided {1} value.", context.OperationKey, options.Timeout);
+                        if (options.Timeout.Value > TimeSpan.Zero)
+                        {
+                            cts.CancelAfter(options.Timeout.Value);
+                            logger.Log(logLevels.Low(), "{0}: Timeout has been set with your provided {1} value.", context.OperationKey, options.Timeout);
+                        }
+                        else
+                        {
+                            logger.Log(logLevels.Low(),
+                                "{0}: You provided a timeout value which is not a positive TimeSpan (or Timeout.InfiniteTimeSpan to indicate no timeout). Default value will be applied.",
+                                context.OperationKey);
+                        }
                     }
-                    else
-                    {
-                        logger.Log(logLevels.Low(),
-                            "{0}: You provided a timeout value which is not a positive TimeSpan (or Timeout.InfiniteTimeSpan to indicate no timeout). Default value will be applied.",
-                            context.OperationKey);
-                    }
+                }
+                else
+                {
+                    optionsCancellationToken = cancellationToken;
                 }
 
                 if (options.Headers?.Count > 0)

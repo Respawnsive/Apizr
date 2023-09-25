@@ -2,6 +2,23 @@
 
 Please find here some breaking changes while upgrading from previous versions
 
+### 5.3
+
+#### Apizr
+
+- [HttpClient] Now we can **configure the HttpClient instead of providing one** (same as extended experience) with the brand new ConfigureHttpClient fluent option
+ 
+    Now write:
+    ```csharp 
+    options => options.ConfigureHttpClient(httpClient => httpClient.WhateverOption = whateverValue)
+    ``` 
+    
+    Don't write anymore:
+    ```csharp 
+    options => options.WithHttpClient((httpMessageHandler, baseUri) => 
+        new YourOwnHttpClient(httpMessageHandler, false){BaseAddress = baseUri, WhateverOption = whateverValue});
+    ``` 
+
 ### 5.0
 
 #### Apizr

@@ -12,7 +12,7 @@ using Refit;
 
 namespace Apizr.Tests.Apis
 {
-    [WebApi("https://httpbin.org", false), Log(HttpMessageParts.None)]
+    [WebApi("https://httpbin.org", false), Log(HttpMessageParts.None), Headers("testKey1: testValue1")]
     public interface IHttpBinService
     {
         [Get("/bearer")]

@@ -17,6 +17,14 @@
 
 - [Fix][HttpClient] Now **HttpClientBuilder really apply composite configurations**
 
+### Apizr.Integrations.FileTransfer.MediatR
+
+- [Fix] Now **default upload command returns HttpResponseMessage**
+
+### Apizr.Integrations.FileTransfer.Optional
+
+- [Fix] Now **default upload optional command returns Option<HttpResponseMessage, ApizrException>**
+
 5.2.0
 ---
 

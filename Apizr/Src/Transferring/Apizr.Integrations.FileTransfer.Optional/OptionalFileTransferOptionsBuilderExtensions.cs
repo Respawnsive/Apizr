@@ -10,6 +10,7 @@ using Apizr.Optional.Requesting;
 using Apizr.Optional.Requesting.Handling;
 using Optional;
 using Apizr.Optional.Requesting.Sending;
+using System.Net.Http;
 
 [assembly: Apizr.Preserve]
 namespace Apizr
@@ -59,7 +60,7 @@ namespace Apizr
                     if (typeof(IUploadApi).IsAssignableFrom(webApiType))
                     {
                         var requestType = typeof(UploadOptionalCommand<>).MakeGenericType(webApiType);
-                        var requestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(requestType, typeof(Option<Unit, ApizrException>));
+                        var requestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(requestType, typeof(Option<HttpResponseMessage, ApizrException>));
                         var requestHandlerImplementationType = typeof(UploadOptionalCommandHandler<>).MakeGenericType(webApiType);
 
                         services.TryAddSingleton(requestHandlerServiceType, requestHandlerImplementationType);
@@ -68,7 +69,7 @@ namespace Apizr
                         if (typeof(IUploadApi) == webApiType || typeof(ITransferApi) == webApiType)
                         {
                             var shortRequestType = typeof(UploadOptionalCommand);
-                            var shortRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortRequestType, typeof(Option<Unit, ApizrException>));
+                            var shortRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortRequestType, typeof(Option<HttpResponseMessage, ApizrException>));
                             var shortRequestHandlerImplementationType = typeof(UploadOptionalCommandHandler<>).MakeGenericType(webApiType);
 
                             services.TryAddSingleton(shortRequestHandlerServiceType, shortRequestHandlerImplementationType);
